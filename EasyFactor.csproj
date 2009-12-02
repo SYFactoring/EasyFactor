@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3876B9CE-93F3-42D1-B12B-6BD0F39D4CCA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CMBC.EasyFactor</RootNamespace>
+    <AssemblyName>EasyFactor</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <StartupObject>CMBC.EasyFactor.Program</StartupObject>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Enterprise.Framework, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Enterprise.InfoStore, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="DevComponents.DotNetBar2, Version=8.2.0.2, Culture=neutral, PublicKeyToken=5fd520d36328f741, processorArchitecture=MSIL">
+      <HintPath>Properties\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="DB.dbml\DB.cs">
+      <DependentUpon>DB.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DB.dbml\DB.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DB.dbml\ObjectClone.cs" />
+    <Compile Include="DB.dbml\ObjectExtend.cs" />
+    <Compile Include="Help\About\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Help\About\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoMgr\ClientMgr\ClientDetailUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\ClientMgr\ClientDetailUI.Designer.cs">
+      <DependentUpon>ClientDetailUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoMgr\ClientMgr\ClientMgrUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\ClientMgr\ClientMgrUI.Designer.cs">
+      <DependentUpon>ClientMgrUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoMgr\ContractMgr\ContractDetailUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\ContractMgr\ContractDetailUI.Designer.cs">
+      <DependentUpon>ContractDetailUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoMgr\ContractMgr\ContractMgrUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\ContractMgr\ContractMgrUI.Designer.cs">
+      <DependentUpon>ContractMgrUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoMgr\FactorMgr\FactorDetailUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\FactorMgr\FactorDetailUI.Designer.cs">
+      <DependentUpon>FactorDetailUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoMgr\FactorMgr\FactorMgrUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\FactorMgr\FactorMgrUI.Designer.cs">
+      <DependentUpon>FactorMgrUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoMgr\UserMgr\UserDetailUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\UserMgr\UserDetailUI.Designer.cs">
+      <DependentUpon>UserDetailUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoMgr\UserMgr\UserMgrUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\UserMgr\UserMgrUI.Designer.cs">
+      <DependentUpon>UserMgrUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceMgr\ContractInfo\ContractBasicInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InvoiceMgr\ContractInfo\ContractBasicInfo.Designer.cs">
+      <DependentUpon>ContractBasicInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceMgr\ContractInfo\ContractOtherInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InvoiceMgr\ContractInfo\ContractOtherInfo.Designer.cs">
+      <DependentUpon>ContractOtherInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceMgr\InvoiceAssign\InvoiceAssignBatchNewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InvoiceMgr\InvoiceAssign\InvoiceAssignBatchNewForm.Designer.cs">
+      <DependentUpon>InvoiceAssignBatchNewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceMgr\InvoiceAssign\InvoiceAssignUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InvoiceMgr\InvoiceAssign\InvoiceAssignUI.Designer.cs">
+      <DependentUpon>InvoiceAssignUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginWindow.designer.cs">
+      <DependentUpon>LoginWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="DB.dbml\DB.dbml.layout">
+      <DependentUpon>DB.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Help\About\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\ClientMgr\ClientDetailUI.resx">
+      <DependentUpon>ClientDetailUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\ClientMgr\ClientMgrUI.resx">
+      <DependentUpon>ClientMgrUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\ContractMgr\ContractDetailUI.resx">
+      <DependentUpon>ContractDetailUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\ContractMgr\ContractMgrUI.resx">
+      <DependentUpon>ContractMgrUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\FactorMgr\FactorDetailUI.resx">
+      <DependentUpon>FactorDetailUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\FactorMgr\FactorMgrUI.resx">
+      <DependentUpon>FactorMgrUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\UserMgr\UserDetailUI.resx">
+      <DependentUpon>UserDetailUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\UserMgr\UserMgrUI.resx">
+      <DependentUpon>UserMgrUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InvoiceMgr\ContractInfo\ContractBasicInfo.resx">
+      <DependentUpon>ContractBasicInfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InvoiceMgr\ContractInfo\ContractOtherInfo.resx">
+      <DependentUpon>ContractOtherInfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InvoiceMgr\InvoiceAssign\InvoiceAssignBatchNewForm.resx">
+      <DependentUpon>InvoiceAssignBatchNewForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InvoiceMgr\InvoiceAssign\InvoiceAssignUI.resx">
+      <DependentUpon>InvoiceAssignUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginWindow.resx">
+      <DependentUpon>LoginWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\Images\Menu-Down-icon-32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\Images\Menu-Up-icon-32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\Images\UserMgr-icon-32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\Images\Menu-Title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\Images\FOMSLOGO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\Images\User-Add-32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\Images\User-Edit-32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="DB.dbml\DB.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DB.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Resources\Images\User-Remove-32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\Resources\Images\army-officer-icon-48.png" />
+    <Content Include="Properties\Resources\Images\banknote-icon-48.png" />
+    <Content Include="Properties\Resources\Images\bar-chart-icon-48.png" />
+    <Content Include="Properties\Resources\Images\boss-icon-48.png" />
+    <Content Include="Properties\Resources\Images\Briefcase-icon-48.png" />
+    <Content Include="Properties\Resources\Images\calculator-icon-48.png" />
+    <Content Include="Properties\Resources\Images\cash-register-icon-48.png" />
+    <Content Include="Properties\Resources\Images\check-user-icon-48.png" />
+    <Content Include="Properties\Resources\Images\coins-icon-48.png" />
+    <Content Include="Properties\Resources\Images\Column-Chart-icon-48.png" />
+    <Content Include="Properties\Resources\Images\credit-card-icon-48.png" />
+    <Content Include="Properties\Resources\Images\Disk-icon-48.png" />
+    <Content Include="Properties\Resources\Images\engineer-icon-48.png" />
+    <Content Include="Properties\Resources\Images\footballer-icon-48.png" />
+    <Content Include="Properties\Resources\Images\gold-bullion-icon-48.png" />
+    <Content Include="Properties\Resources\Images\green-dollar-icon-48.png" />
+    <Content Include="Properties\Resources\Images\invoice-icon-48.png" />
+    <Content Include="Properties\Resources\Images\line-chart-icon-48.png" />
+    <Content Include="Properties\Resources\Images\Man-Black-icon-48.png" />
+    <Content Include="Properties\Resources\Images\Man-Brown-icon-48.png" />
+    <Content Include="Properties\Resources\Images\Man-DBrown-icon-48.png" />
+    <Content Include="Properties\Resources\Images\Man-Grey-icon-48.png" />
+    <Content Include="Properties\Resources\Images\Man-Red-icon-48.png" />
+    <Content Include="Properties\Resources\Images\payment-icon-48.png" />
+    <Content Include="Properties\Resources\Images\people-icon-48.png" />
+    <Content Include="Properties\Resources\Images\pie-chart-icon-48.png" />
+    <Content Include="Properties\Resources\Images\Printer-icon-48.png" />
+    <Content Include="Properties\Resources\Images\safe-icon-48.png" />
+    <Content Include="Properties\Resources\Images\shopping-cart-icon-48.png" />
+    <Content Include="Properties\Resources\Images\Toolbox-icon-48.png" />
+    <Content Include="Properties\Resources\Images\user-group-icon-48.png" />
+    <Content Include="Properties\Resources\Images\User-icon-48.png" />
+    <Content Include="Properties\Resources\Images\user-info-icon-48.png" />
+    <Content Include="Properties\Resources\Images\users-icon-48.png" />
+    <Content Include="Properties\Resources\Images\yen-coin-icon-48.png" />
+    <Content Include="Properties\Resources\Images\yen-coins-icon-48.png" />
+    <Content Include="Properties\Resources\Images\yen-icon-48.png" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.AssignBatch.datasource" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.Branch.datasource" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.Client.datasource" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.ClientAccount.datasource" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.ClientCreditLine.datasource" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.Contract.datasource" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.Country.datasource" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.Currency.datasource" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.Factor.datasource" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.FactorAccount.datasource" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.FactorCreditLine.datasource" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.FinanceBatch.datasource" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.Invoice.datasource" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.PaymentBatch.datasource" />
+    <None Include="Properties\DataSources\CMBC.FOMS.DB.dbml.User.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Help\CheckForUpdates\" />
+    <Folder Include="Help\Content\" />
+    <Folder Include="InvoiceMgr\InvoiceFinance\" />
+    <Folder Include="Query\" />
+    <Folder Include="Report\" />
+    <Folder Include="Risk\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
