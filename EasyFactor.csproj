@@ -115,16 +115,16 @@
     <Compile Include="InfoMgr\ClientMgr\ClientMgrUI.Designer.cs">
       <DependentUpon>ClientMgrUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="InfoMgr\ContractMgr\ContractDetailUI.cs">
+    <Compile Include="CaseMgr\ContractMgr\ContractDetailUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InfoMgr\ContractMgr\ContractDetailUI.Designer.cs">
+    <Compile Include="CaseMgr\ContractMgr\ContractDetailUI.Designer.cs">
       <DependentUpon>ContractDetailUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="InfoMgr\ContractMgr\ContractMgrUI.cs">
+    <Compile Include="CaseMgr\ContractMgr\ContractMgrUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InfoMgr\ContractMgr\ContractMgrUI.Designer.cs">
+    <Compile Include="CaseMgr\ContractMgr\ContractMgrUI.Designer.cs">
       <DependentUpon>ContractMgrUI.cs</DependentUpon>
     </Compile>
     <Compile Include="InfoMgr\FactorMgr\FactorDetailUI.cs">
@@ -204,11 +204,11 @@
       <DependentUpon>ClientMgrUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="InfoMgr\ContractMgr\ContractDetailUI.resx">
+    <EmbeddedResource Include="CaseMgr\ContractMgr\ContractDetailUI.resx">
       <DependentUpon>ContractDetailUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="InfoMgr\ContractMgr\ContractMgrUI.resx">
+    <EmbeddedResource Include="CaseMgr\ContractMgr\ContractMgrUI.resx">
       <DependentUpon>ContractMgrUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -386,9 +386,7 @@
     <Folder Include="Help\CheckForUpdates\" />
     <Folder Include="Help\Content\" />
     <Folder Include="InvoiceMgr\InvoiceFinance\" />
-    <Folder Include="Query\" />
     <Folder Include="Report\" />
-    <Folder Include="Risk\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -12,6 +12,7 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
+    using CMBC.EasyFactor.DB.dbml;
 
     /// <summary>
     /// Main Window Form
@@ -84,6 +85,12 @@ namespace CMBC.EasyFactor
             setDetailPanel(clientMgrUI);
         }
 
+        private void ClientNew(object sender, EventArgs e)
+        {
+            ClientDetailUI clientDetailUI = new ClientDetailUI((Client)null, true);
+            clientDetailUI.ShowDialog(this);
+        }
+
         private void UserMgr(object sender, EventArgs e)
         {
             UserMgrUI userMgrUI = new UserMgrUI(true);
@@ -95,5 +102,12 @@ namespace CMBC.EasyFactor
             FactorMgrUI factorMgrUI = new FactorMgrUI(true);
             setDetailPanel(factorMgrUI);
         }
+
+        private void FactorNew(object sender, EventArgs e)
+        {
+            FactorDetailUI factorDetailUI = new FactorDetailUI((Factor)null, true);
+            factorDetailUI.ShowDialog(this);
+        }
+
     }
 }

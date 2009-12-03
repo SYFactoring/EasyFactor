@@ -10,7 +10,7 @@ namespace CMBC.EasyFactor.InvoiceMgr.ContractInfo
     using System.Drawing;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.InfoMgr.ContractMgr;
+    using CMBC.EasyFactor.CaseMgr.ContractMgr;
 
     /// <summary>
     /// 
