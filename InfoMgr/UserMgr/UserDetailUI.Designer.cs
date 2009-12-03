@@ -16,13 +16,13 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.BindingSource userBindingSource;
-        private System.Windows.Forms.TextBox emailTextBox;
-        private System.Windows.Forms.DateTimePicker loginDateDateTimePicker;
-        private System.Windows.Forms.TextBox msnTextBox;
+        private System.Windows.Forms.MaskedTextBox emailTextBox;
+        private System.Windows.Forms.MaskedTextBox loginDate;
+        private System.Windows.Forms.MaskedTextBox msnTextBox;
         private System.Windows.Forms.TextBox passwordTextBox;
-        private System.Windows.Forms.TextBox phoneTextBox;
+        private System.Windows.Forms.MaskedTextBox phoneTextBox;
         private System.Windows.Forms.ComboBox roleCombBox;
-        private System.Windows.Forms.TextBox telphoneTextBox;
+        private System.Windows.Forms.MaskedTextBox telphoneTextBox;
         private System.Windows.Forms.TextBox userIDTextBox;
         private System.Windows.Forms.TextBox userNameTextBox;
         private System.Windows.Forms.ToolStrip tsUserDetail;
@@ -62,13 +62,13 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             System.Windows.Forms.Label userIDLabel;
             System.Windows.Forms.Label userNameLabel;
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.emailTextBox = new System.Windows.Forms.TextBox();
-            this.loginDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.msnTextBox = new System.Windows.Forms.TextBox();
+            this.emailTextBox = new System.Windows.Forms.MaskedTextBox();
+            this.loginDate = new System.Windows.Forms.MaskedTextBox();
+            this.msnTextBox = new System.Windows.Forms.MaskedTextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
-            this.phoneTextBox = new System.Windows.Forms.TextBox();
+            this.phoneTextBox = new System.Windows.Forms.MaskedTextBox();
             this.roleCombBox = new System.Windows.Forms.ComboBox();
-            this.telphoneTextBox = new System.Windows.Forms.TextBox();
+            this.telphoneTextBox = new System.Windows.Forms.MaskedTextBox();
             this.userIDTextBox = new System.Windows.Forms.TextBox();
             this.userNameTextBox = new System.Windows.Forms.TextBox();
             this.tsUserDetail = new System.Windows.Forms.ToolStrip();
@@ -177,26 +177,27 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Email", true));
             this.emailTextBox.Location = new System.Drawing.Point(82, 129);
             this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(125, 20);
+            this.emailTextBox.Size = new System.Drawing.Size(154, 20);
             this.emailTextBox.TabIndex = 4;
             // 
-            // loginDateDateTimePicker
+            // loginDate
             // 
-            this.loginDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.userBindingSource, "LoginDate", true));
-            this.loginDateDateTimePicker.Enabled = false;
-            this.loginDateDateTimePicker.Location = new System.Drawing.Point(82, 229);
-            this.loginDateDateTimePicker.MaxDate = new System.DateTime(2100, 1, 1, 0, 0, 0, 0);
-            this.loginDateDateTimePicker.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.loginDateDateTimePicker.Name = "loginDateDateTimePicker";
-            this.loginDateDateTimePicker.Size = new System.Drawing.Size(125, 20);
-            this.loginDateDateTimePicker.TabIndex = 8;
+            this.loginDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "LoginDate", true));
+            this.loginDate.Location = new System.Drawing.Point(82, 229);
+            this.loginDate.Mask = "0000/90/90/ 90:00";
+            this.loginDate.Name = "loginDate";
+            this.loginDate.PromptChar = ' ';
+            this.loginDate.ReadOnly = true;
+            this.loginDate.Size = new System.Drawing.Size(154, 20);
+            this.loginDate.TabIndex = 8;
+            this.loginDate.ValidatingType = typeof(System.DateTime);
             // 
-            // mSNTextBox
+            // msnTextBox
             // 
             this.msnTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "MSN", true));
             this.msnTextBox.Location = new System.Drawing.Point(82, 204);
-            this.msnTextBox.Name = "mSNTextBox";
-            this.msnTextBox.Size = new System.Drawing.Size(125, 20);
+            this.msnTextBox.Name = "msnTextBox";
+            this.msnTextBox.Size = new System.Drawing.Size(154, 20);
             this.msnTextBox.TabIndex = 7;
             // 
             // passwordTextBox
@@ -205,15 +206,18 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.passwordTextBox.Location = new System.Drawing.Point(82, 79);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
-            this.passwordTextBox.Size = new System.Drawing.Size(125, 20);
+            this.passwordTextBox.Size = new System.Drawing.Size(154, 20);
             this.passwordTextBox.TabIndex = 2;
             // 
             // phoneTextBox
             // 
             this.phoneTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Phone", true));
             this.phoneTextBox.Location = new System.Drawing.Point(82, 154);
+            this.phoneTextBox.Mask = "999-00000000";
             this.phoneTextBox.Name = "phoneTextBox";
-            this.phoneTextBox.Size = new System.Drawing.Size(125, 20);
+            this.phoneTextBox.PromptChar = ' ';
+            this.phoneTextBox.RejectInputOnFirstFailure = true;
+            this.phoneTextBox.Size = new System.Drawing.Size(154, 20);
             this.phoneTextBox.TabIndex = 5;
             // 
             // roleCombBox
@@ -225,15 +229,17 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             "管理员"});
             this.roleCombBox.Location = new System.Drawing.Point(82, 104);
             this.roleCombBox.Name = "roleCombBox";
-            this.roleCombBox.Size = new System.Drawing.Size(125, 21);
+            this.roleCombBox.Size = new System.Drawing.Size(154, 21);
             this.roleCombBox.TabIndex = 3;
             // 
             // telphoneTextBox
             // 
             this.telphoneTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Telphone", true));
             this.telphoneTextBox.Location = new System.Drawing.Point(82, 179);
+            this.telphoneTextBox.Mask = "00000000000";
             this.telphoneTextBox.Name = "telphoneTextBox";
-            this.telphoneTextBox.Size = new System.Drawing.Size(125, 20);
+            this.telphoneTextBox.PromptChar = ' ';
+            this.telphoneTextBox.Size = new System.Drawing.Size(154, 20);
             this.telphoneTextBox.TabIndex = 6;
             // 
             // userIDTextBox
@@ -241,7 +247,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.userIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "UserID", true));
             this.userIDTextBox.Location = new System.Drawing.Point(82, 29);
             this.userIDTextBox.Name = "userIDTextBox";
-            this.userIDTextBox.Size = new System.Drawing.Size(125, 20);
+            this.userIDTextBox.Size = new System.Drawing.Size(154, 20);
             this.userIDTextBox.TabIndex = 0;
             // 
             // userNameTextBox
@@ -250,7 +256,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.userNameTextBox.ImeMode = System.Windows.Forms.ImeMode.On;
             this.userNameTextBox.Location = new System.Drawing.Point(82, 54);
             this.userNameTextBox.Name = "userNameTextBox";
-            this.userNameTextBox.Size = new System.Drawing.Size(125, 20);
+            this.userNameTextBox.Size = new System.Drawing.Size(154, 20);
             this.userNameTextBox.TabIndex = 1;
             // 
             // tsUserDetail
@@ -260,7 +266,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnCancel});
             this.tsUserDetail.Location = new System.Drawing.Point(0, 0);
             this.tsUserDetail.Name = "tsUserDetail";
-            this.tsUserDetail.Size = new System.Drawing.Size(222, 25);
+            this.tsUserDetail.Size = new System.Drawing.Size(268, 25);
             this.tsUserDetail.TabIndex = 18;
             // 
             // btnSave
@@ -286,12 +292,12 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(222, 261);
+            this.ClientSize = new System.Drawing.Size(268, 264);
             this.Controls.Add(this.tsUserDetail);
             this.Controls.Add(emailLabel);
             this.Controls.Add(this.emailTextBox);
             this.Controls.Add(loginDateLabel);
-            this.Controls.Add(this.loginDateDateTimePicker);
+            this.Controls.Add(this.loginDate);
             this.Controls.Add(mSNLabel);
             this.Controls.Add(this.msnTextBox);
             this.Controls.Add(passwordLabel);
@@ -318,5 +324,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         }
 
         #endregion
+
+
     }
 }

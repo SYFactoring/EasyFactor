@@ -13,7 +13,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     /// <summary>
     /// User Detail User Interface
     /// </summary>
-    public partial class UserDetailUI : Form
+    public partial class UserDetailUI : DevComponents.DotNetBar.Office2007Form
     {
         /// <summary>
         /// flag indicates if add
