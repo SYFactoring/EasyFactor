@@ -34,6 +34,25 @@ namespace CMBC.EasyFactor
             App.Current.CurUser = curUser;
         }
 
+        public bool PreLogin()
+        {
+            DBDataContext context = App.Current.DbContext;
+            try
+            {
+                if (context.DatabaseExists())
+                {
+                    return true;
+                }
+                MessageBox.Show("数据库连接失败", "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("数据库连接失败: "+e.ToString(), "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Event handler when login button clicked
         /// </summary>

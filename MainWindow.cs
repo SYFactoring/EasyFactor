@@ -10,6 +10,8 @@ namespace CMBC.EasyFactor
     using System.Windows.Forms;
     using CMBC.EasyFactor.InvoiceMgr.InvoiceAssign;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
+    using CMBC.EasyFactor.InfoMgr.UserMgr;
+    using CMBC.EasyFactor.InfoMgr.FactorMgr;
 
     /// <summary>
     /// Main Window Form
@@ -80,6 +82,18 @@ namespace CMBC.EasyFactor
         {
             ClientMgrUI clientMgrUI = new ClientMgrUI(true);
             setDetailPanel(clientMgrUI);
+        }
+
+        private void UserMgr(object sender, EventArgs e)
+        {
+            UserMgrUI userMgrUI = new UserMgrUI(true);
+            setDetailPanel(userMgrUI);
+        }
+
+        private void FactorMgr(object sender, EventArgs e)
+        {
+            FactorMgrUI factorMgrUI = new FactorMgrUI(true);
+            setDetailPanel(factorMgrUI);
         }
     }
 }

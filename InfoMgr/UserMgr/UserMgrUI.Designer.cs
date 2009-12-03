@@ -20,7 +20,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private System.Windows.Forms.ToolStripLabel lblKeyword;
         private System.Windows.Forms.ToolStripTextBox tbKeyword;
         private System.Windows.Forms.ToolStripButton queryBtn;
-        private System.Windows.Forms.DataGridView dgvUser;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvUser;
         private System.Windows.Forms.DataGridViewTextBoxColumn userIDColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn userNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn passwordColumn;
@@ -68,7 +68,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.lblKeyword = new System.Windows.Forms.ToolStripLabel();
             this.tbKeyword = new System.Windows.Forms.ToolStripTextBox();
             this.queryBtn = new System.Windows.Forms.ToolStripButton();
-            this.dgvUser = new System.Windows.Forms.DataGridView();
+            this.dgvUser = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.userIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.passwordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
