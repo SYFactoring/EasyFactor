@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace CMBC.EasyFactor.InfoMgr.ContractMgr
+namespace CMBC.EasyFactor.CaseMgr.ContractMgr
 {
     using System;
     using System.Windows.Forms;

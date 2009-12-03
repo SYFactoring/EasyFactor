@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace CMBC.EasyFactor.InfoMgr.ContractMgr
+namespace CMBC.EasyFactor.CaseMgr.ContractMgr
 {
     /// <summary>
     /// Contract Management User Interface Designer
