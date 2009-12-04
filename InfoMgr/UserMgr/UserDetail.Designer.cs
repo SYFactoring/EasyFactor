@@ -9,7 +9,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     /// <summary>
     /// User Detail User Interface Design
     /// </summary>
-    public partial class UserDetailUI
+    public partial class UserDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -21,13 +21,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private System.Windows.Forms.MaskedTextBox msnTextBox;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.MaskedTextBox phoneTextBox;
-        private System.Windows.Forms.ComboBox roleCombBox;
         private System.Windows.Forms.MaskedTextBox telphoneTextBox;
         private System.Windows.Forms.TextBox userIDTextBox;
         private System.Windows.Forms.TextBox userNameTextBox;
-        private System.Windows.Forms.ToolStrip tsUserDetail;
-        private System.Windows.Forms.ToolStripButton btnSave;
-        private System.Windows.Forms.ToolStripButton btnCancel;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -57,40 +53,41 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             System.Windows.Forms.Label mSNLabel;
             System.Windows.Forms.Label passwordLabel;
             System.Windows.Forms.Label phoneLabel;
-            System.Windows.Forms.Label roleLabel;
             System.Windows.Forms.Label telphoneLabel;
             System.Windows.Forms.Label userIDLabel;
             System.Windows.Forms.Label userNameLabel;
+            System.Windows.Forms.Label eDIAccountLabel;
+            System.Windows.Forms.Label roleLabel;
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.emailTextBox = new System.Windows.Forms.MaskedTextBox();
             this.loginDate = new System.Windows.Forms.MaskedTextBox();
             this.msnTextBox = new System.Windows.Forms.MaskedTextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.phoneTextBox = new System.Windows.Forms.MaskedTextBox();
-            this.roleCombBox = new System.Windows.Forms.ComboBox();
             this.telphoneTextBox = new System.Windows.Forms.MaskedTextBox();
             this.userIDTextBox = new System.Windows.Forms.TextBox();
             this.userNameTextBox = new System.Windows.Forms.TextBox();
-            this.tsUserDetail = new System.Windows.Forms.ToolStrip();
-            this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.btnCancel = new System.Windows.Forms.ToolStripButton();
+            this.btnSave = new DevComponents.DotNetBar.ButtonX();
+            this.btnCancel = new DevComponents.DotNetBar.ButtonX();
+            this.eDIAccountTextBox = new System.Windows.Forms.TextBox();
+            this.roleComboBox = new System.Windows.Forms.ComboBox();
             emailLabel = new System.Windows.Forms.Label();
             loginDateLabel = new System.Windows.Forms.Label();
             mSNLabel = new System.Windows.Forms.Label();
             passwordLabel = new System.Windows.Forms.Label();
             phoneLabel = new System.Windows.Forms.Label();
-            roleLabel = new System.Windows.Forms.Label();
             telphoneLabel = new System.Windows.Forms.Label();
             userIDLabel = new System.Windows.Forms.Label();
             userNameLabel = new System.Windows.Forms.Label();
+            eDIAccountLabel = new System.Windows.Forms.Label();
+            roleLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
-            this.tsUserDetail.SuspendLayout();
             this.SuspendLayout();
             // 
             // emailLabel
             // 
             emailLabel.AutoSize = true;
-            emailLabel.Location = new System.Drawing.Point(13, 134);
+            emailLabel.Location = new System.Drawing.Point(13, 151);
             emailLabel.Name = "emailLabel";
             emailLabel.Size = new System.Drawing.Size(32, 13);
             emailLabel.TabIndex = 1;
@@ -99,7 +96,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // loginDateLabel
             // 
             loginDateLabel.AutoSize = true;
-            loginDateLabel.Location = new System.Drawing.Point(13, 234);
+            loginDateLabel.Location = new System.Drawing.Point(13, 251);
             loginDateLabel.Name = "loginDateLabel";
             loginDateLabel.Size = new System.Drawing.Size(55, 13);
             loginDateLabel.TabIndex = 3;
@@ -108,7 +105,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // mSNLabel
             // 
             mSNLabel.AutoSize = true;
-            mSNLabel.Location = new System.Drawing.Point(13, 209);
+            mSNLabel.Location = new System.Drawing.Point(13, 226);
             mSNLabel.Name = "mSNLabel";
             mSNLabel.Size = new System.Drawing.Size(34, 13);
             mSNLabel.TabIndex = 5;
@@ -117,7 +114,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // passwordLabel
             // 
             passwordLabel.AutoSize = true;
-            passwordLabel.Location = new System.Drawing.Point(13, 84);
+            passwordLabel.Location = new System.Drawing.Point(13, 101);
             passwordLabel.Name = "passwordLabel";
             passwordLabel.Size = new System.Drawing.Size(31, 13);
             passwordLabel.TabIndex = 7;
@@ -126,25 +123,16 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // phoneLabel
             // 
             phoneLabel.AutoSize = true;
-            phoneLabel.Location = new System.Drawing.Point(13, 159);
+            phoneLabel.Location = new System.Drawing.Point(13, 176);
             phoneLabel.Name = "phoneLabel";
             phoneLabel.Size = new System.Drawing.Size(31, 13);
             phoneLabel.TabIndex = 9;
             phoneLabel.Text = "电话";
             // 
-            // roleLabel
-            // 
-            roleLabel.AutoSize = true;
-            roleLabel.Location = new System.Drawing.Point(13, 109);
-            roleLabel.Name = "roleLabel";
-            roleLabel.Size = new System.Drawing.Size(31, 13);
-            roleLabel.TabIndex = 11;
-            roleLabel.Text = "角色";
-            // 
             // telphoneLabel
             // 
             telphoneLabel.AutoSize = true;
-            telphoneLabel.Location = new System.Drawing.Point(13, 184);
+            telphoneLabel.Location = new System.Drawing.Point(13, 201);
             telphoneLabel.Name = "telphoneLabel";
             telphoneLabel.Size = new System.Drawing.Size(31, 13);
             telphoneLabel.TabIndex = 13;
@@ -153,7 +141,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // userIDLabel
             // 
             userIDLabel.AutoSize = true;
-            userIDLabel.Location = new System.Drawing.Point(13, 35);
+            userIDLabel.Location = new System.Drawing.Point(13, 12);
             userIDLabel.Name = "userIDLabel";
             userIDLabel.Size = new System.Drawing.Size(42, 13);
             userIDLabel.TabIndex = 15;
@@ -162,7 +150,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // userNameLabel
             // 
             userNameLabel.AutoSize = true;
-            userNameLabel.Location = new System.Drawing.Point(13, 59);
+            userNameLabel.Location = new System.Drawing.Point(13, 36);
             userNameLabel.Name = "userNameLabel";
             userNameLabel.Size = new System.Drawing.Size(43, 13);
             userNameLabel.TabIndex = 17;
@@ -175,7 +163,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // emailTextBox
             // 
             this.emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Email", true));
-            this.emailTextBox.Location = new System.Drawing.Point(82, 129);
+            this.emailTextBox.Location = new System.Drawing.Point(82, 146);
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(154, 20);
             this.emailTextBox.TabIndex = 4;
@@ -183,7 +171,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // loginDate
             // 
             this.loginDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "LoginDate", true));
-            this.loginDate.Location = new System.Drawing.Point(82, 229);
+            this.loginDate.Location = new System.Drawing.Point(82, 246);
             this.loginDate.Mask = "0000/90/90/ 90:00";
             this.loginDate.Name = "loginDate";
             this.loginDate.PromptChar = ' ';
@@ -195,7 +183,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // msnTextBox
             // 
             this.msnTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "MSN", true));
-            this.msnTextBox.Location = new System.Drawing.Point(82, 204);
+            this.msnTextBox.Location = new System.Drawing.Point(82, 221);
             this.msnTextBox.Name = "msnTextBox";
             this.msnTextBox.Size = new System.Drawing.Size(154, 20);
             this.msnTextBox.TabIndex = 7;
@@ -203,7 +191,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // passwordTextBox
             // 
             this.passwordTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Password", true));
-            this.passwordTextBox.Location = new System.Drawing.Point(82, 79);
+            this.passwordTextBox.Location = new System.Drawing.Point(82, 96);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(154, 20);
@@ -212,7 +200,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // phoneTextBox
             // 
             this.phoneTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Phone", true));
-            this.phoneTextBox.Location = new System.Drawing.Point(82, 154);
+            this.phoneTextBox.Location = new System.Drawing.Point(82, 171);
             this.phoneTextBox.Mask = "999-00000000";
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.PromptChar = ' ';
@@ -220,22 +208,10 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.phoneTextBox.Size = new System.Drawing.Size(154, 20);
             this.phoneTextBox.TabIndex = 5;
             // 
-            // roleCombBox
-            // 
-            this.roleCombBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Role", true));
-            this.roleCombBox.Items.AddRange(new object[] {
-            "操作员",
-            "审核员",
-            "管理员"});
-            this.roleCombBox.Location = new System.Drawing.Point(82, 104);
-            this.roleCombBox.Name = "roleCombBox";
-            this.roleCombBox.Size = new System.Drawing.Size(154, 21);
-            this.roleCombBox.TabIndex = 3;
-            // 
             // telphoneTextBox
             // 
             this.telphoneTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Telphone", true));
-            this.telphoneTextBox.Location = new System.Drawing.Point(82, 179);
+            this.telphoneTextBox.Location = new System.Drawing.Point(82, 196);
             this.telphoneTextBox.Mask = "00000000000";
             this.telphoneTextBox.Name = "telphoneTextBox";
             this.telphoneTextBox.PromptChar = ' ';
@@ -245,7 +221,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // userIDTextBox
             // 
             this.userIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "UserID", true));
-            this.userIDTextBox.Location = new System.Drawing.Point(82, 29);
+            this.userIDTextBox.Location = new System.Drawing.Point(82, 6);
             this.userIDTextBox.Name = "userIDTextBox";
             this.userIDTextBox.Size = new System.Drawing.Size(154, 20);
             this.userIDTextBox.TabIndex = 0;
@@ -254,46 +230,86 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.userNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "UserName", true));
             this.userNameTextBox.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.userNameTextBox.Location = new System.Drawing.Point(82, 54);
+            this.userNameTextBox.Location = new System.Drawing.Point(82, 31);
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(154, 20);
             this.userNameTextBox.TabIndex = 1;
             // 
-            // tsUserDetail
-            // 
-            this.tsUserDetail.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSave,
-            this.btnCancel});
-            this.tsUserDetail.Location = new System.Drawing.Point(0, 0);
-            this.tsUserDetail.Name = "tsUserDetail";
-            this.tsUserDetail.Size = new System.Drawing.Size(268, 25);
-            this.tsUserDetail.TabIndex = 18;
-            // 
             // btnSave
             // 
-            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnSave.Location = new System.Drawing.Point(83, 279);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(35, 22);
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSave.TabIndex = 18;
             this.btnSave.Text = "保存";
             this.btnSave.Click += new System.EventHandler(this.Save);
             // 
             // btnCancel
             // 
-            this.btnCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCancel.Location = new System.Drawing.Point(165, 279);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(35, 22);
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCancel.TabIndex = 19;
             this.btnCancel.Text = "取消";
             this.btnCancel.Click += new System.EventHandler(this.Cancel);
             // 
-            // UserDetailUI
+            // eDIAccountLabel
+            // 
+            eDIAccountLabel.AutoSize = true;
+            eDIAccountLabel.Location = new System.Drawing.Point(13, 65);
+            eDIAccountLabel.Name = "eDIAccountLabel";
+            eDIAccountLabel.Size = new System.Drawing.Size(49, 13);
+            eDIAccountLabel.TabIndex = 20;
+            eDIAccountLabel.Text = "EDI帐号";
+            // 
+            // eDIAccountTextBox
+            // 
+            this.eDIAccountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "EDIAccount", true));
+            this.eDIAccountTextBox.Location = new System.Drawing.Point(87, 62);
+            this.eDIAccountTextBox.Name = "eDIAccountTextBox";
+            this.eDIAccountTextBox.Size = new System.Drawing.Size(149, 20);
+            this.eDIAccountTextBox.TabIndex = 21;
+            // 
+            // roleLabel
+            // 
+            roleLabel.AutoSize = true;
+            roleLabel.Location = new System.Drawing.Point(15, 125);
+            roleLabel.Name = "roleLabel";
+            roleLabel.Size = new System.Drawing.Size(31, 13);
+            roleLabel.TabIndex = 21;
+            roleLabel.Text = "角色";
+            // 
+            // roleComboBox
+            // 
+            this.roleComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Role", true));
+            this.roleComboBox.FormattingEnabled = true;
+            this.roleComboBox.Items.AddRange(new object[] {
+            "操作员",
+            "审核员",
+            "管理员"});
+            this.roleComboBox.Location = new System.Drawing.Point(82, 122);
+            this.roleComboBox.Name = "roleComboBox";
+            this.roleComboBox.Size = new System.Drawing.Size(121, 21);
+            this.roleComboBox.TabIndex = 22;
+            // 
+            // UserDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(268, 264);
-            this.Controls.Add(this.tsUserDetail);
+            this.ClientSize = new System.Drawing.Size(262, 322);
+            this.Controls.Add(roleLabel);
+            this.Controls.Add(this.roleComboBox);
+            this.Controls.Add(eDIAccountLabel);
+            this.Controls.Add(this.eDIAccountTextBox);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(emailLabel);
             this.Controls.Add(this.emailTextBox);
             this.Controls.Add(loginDateLabel);
@@ -304,26 +320,27 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(phoneLabel);
             this.Controls.Add(this.phoneTextBox);
-            this.Controls.Add(roleLabel);
-            this.Controls.Add(this.roleCombBox);
             this.Controls.Add(telphoneLabel);
             this.Controls.Add(this.telphoneTextBox);
             this.Controls.Add(userIDLabel);
             this.Controls.Add(this.userIDTextBox);
             this.Controls.Add(userNameLabel);
             this.Controls.Add(this.userNameTextBox);
-            this.Name = "UserDetailUI";
+            this.Name = "UserDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "用户详细信息";
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
-            this.tsUserDetail.ResumeLayout(false);
-            this.tsUserDetail.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.ButtonX btnSave;
+        private DevComponents.DotNetBar.ButtonX btnCancel;
+        private System.Windows.Forms.TextBox eDIAccountTextBox;
+        private System.Windows.Forms.ComboBox roleComboBox;
 
 
     }

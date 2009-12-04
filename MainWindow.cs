@@ -87,8 +87,8 @@ namespace CMBC.EasyFactor
 
         private void ClientNew(object sender, EventArgs e)
         {
-            ClientDetailUI clientDetailUI = new ClientDetailUI((Client)null, true);
-            clientDetailUI.ShowDialog(this);
+            ClientDetail clientDetail = new ClientDetail(null, true);
+            clientDetail.ShowDialog(this);
         }
 
         private void UserMgr(object sender, EventArgs e)

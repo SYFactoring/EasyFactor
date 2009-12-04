@@ -109,7 +109,7 @@ namespace CMBC.EasyFactor.InvoiceMgr.InvoiceAssign
             // 
             // assignBatchBindingSource
             // 
-            this.assignBatchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.AssignBatch);
+            this.assignBatchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceAssignBatch);
             // 
             // tbContractNo
             // 

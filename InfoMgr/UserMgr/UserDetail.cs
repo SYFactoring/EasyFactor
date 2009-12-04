@@ -13,7 +13,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     /// <summary>
     /// User Detail User Interface
     /// </summary>
-    public partial class UserDetailUI : DevComponents.DotNetBar.Office2007Form
+    public partial class UserDetail : DevComponents.DotNetBar.Office2007Form
     {
         /// <summary>
         /// flag indicates if add
@@ -30,7 +30,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="user">selected user</param>
         /// <param name="isEditable">true if editable</param>
-        public UserDetailUI(User user, bool isEditable)
+        public UserDetail(User user, bool isEditable)
         {
             this.InitializeComponent();
             User updateUser = new User();
@@ -69,7 +69,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 msnTextBox.ReadOnly = true;
                 passwordTextBox.ReadOnly = true;
                 phoneTextBox.ReadOnly = true;
-                roleCombBox.Enabled = false;
                 telphoneTextBox.ReadOnly = true;
                 userNameTextBox.ReadOnly = true;
                 btnSave.Enabled = false;

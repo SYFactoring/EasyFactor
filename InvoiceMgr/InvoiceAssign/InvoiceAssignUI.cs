@@ -51,11 +51,11 @@ namespace CMBC.EasyFactor.InvoiceMgr.InvoiceAssign
         /// 
         /// </summary>
         /// <param name="batch"></param>
-        private void SetAssignBatch(AssignBatch batch)
+        private void SetAssignBatch(InvoiceAssignBatch batch)
         {
-            this.tbBatchNo.Text = batch.ContractNo + "-" + batch.AssignBatchNo.ToString();
-            this.tbDate.Text = batch.BatchDate.Value.ToLongDateString();
-            this.tbCurrency.Text = batch.BatchCurrency;
+            //this.tbBatchNo.Text = batch.ContractNo + "-" + batch.AssignBatchNo.ToString();
+            //this.tbDate.Text = batch.BatchDate.Value.ToLongDateString();
+            //this.tbCurrency.Text = batch.BatchCurrency;
         }
     }
 }

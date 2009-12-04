@@ -146,7 +146,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                         factor.VisitingAddress_2 = values.GetValue(i, j++).ToString();
                         factor.PostalCodeVisiting = values.GetValue(i, j++).ToString();
                         factor.CityVisiting = values.GetValue(i, j++).ToString();
-                        factor.Email_1 = values.GetValue(i, j++).ToString();
+                        factor.Email = values.GetValue(i, j++).ToString();
                         factor.WebSite = values.GetValue(i, j++).ToString();
                         factor.Telephone_1 = values.GetValue(i, j++).ToString();
                         factor.Telephone_2 = values.GetValue(i, j++).ToString();
@@ -184,7 +184,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                                 fa.CountryName = factor.CountryName;
                                 fa.DateOfLatestRevision = factor.DateOfLatestRevision;
                                 fa.Department = factor.Department;
-                                fa.Email_1 = factor.Email_1;
+                                fa.Email = factor.Email;
                                 fa.FactorCode = factor.FactorCode;
                                 fa.FactorType = factor.FactorType;
                                 fa.GeneralCorrespondence_1 = factor.GeneralCorrespondence_1;
@@ -274,7 +274,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             var queryResult = App.Current.DbContext.Factors.Where(f =>
                                                    (tbFactorCode.Text == string.Empty || f.FactorCode.Contains(tbFactorCode.Text)) &&
                                                    (tbFactorName.Text == string.Empty || f.CompanyName.Contains(tbFactorName.Text)) &&
-                                                   (tbFactorType.Text == string.Empty || f.FactorType.Contains(tbFactorType.Text)));
+                                                   (cbFactorType.SelectedValue.ToString() == string.Empty || f.FactorType.Equals(cbFactorType.SelectedValue.ToString())));
 
             factorMgrBindingSource.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());

@@ -99,7 +99,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void ItemNew(object sender, System.EventArgs e)
         {
-            new UserDetailUI(null, true).ShowDialog(this);
+            new UserDetail(null, true).ShowDialog(this);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 User selectedUser = App.Current.DbContext.Users.FirstOrDefault(u => u.UserID == uid);
                 if (selectedUser != null)
                 {
-                    new UserDetailUI(selectedUser, true).ShowDialog(this);
+                    new UserDetail(selectedUser, true).ShowDialog(this);
                 }
             }
         }
@@ -199,7 +199,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 User selectedUser = App.Current.DbContext.Users.FirstOrDefault(u => u.UserID == uid);
                 if (selectedUser != null)
                 {
-                    new UserDetailUI(selectedUser, false).ShowDialog(this);
+                    new UserDetail(selectedUser, false).ShowDialog(this);
                 }
             }
         }

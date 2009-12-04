@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
     public partial class Country
     {
+
         public string CountryFormatEN
         {
             get

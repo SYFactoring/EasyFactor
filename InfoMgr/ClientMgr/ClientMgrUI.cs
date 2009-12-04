@@ -79,20 +79,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
             
             // TODO Need fix this
-            var queryResult = App.Current.DbContext.Clients.Where(c => (tbClientName.Text == string.Empty ||
-                                                                                 c.ClientNameCN.Contains(
-                                                                                     tbClientName.Text)) &&
-                                                                                (tbClientName.Text == string.Empty ||
-                                                                                 c.ClientNameEN_1.Contains(
-                                                                                     tbClientName.Text)) &&
-                                                                                (tbClientName.Text == string.Empty ||
-                                                                                 c.ClientNameEN_2.Contains(
-                                                                                     tbClientName.Text)) &&
-                                                                                (tbCompany.Text == string.Empty ||
-                                                                                 c.CompanyCode.Contains(
-                                                                                     tbCompany.Text)) &&
-                                                                                (tbFactorCode.Text == string.Empty ||
-                                                                                 c.EDINo.Contains(tbFactorCode.Text)));
+            var queryResult = App.Current.DbContext.Clients.Where(c =>
+                 (tbDepartment.Text == string.Empty || c.Department.DepartmentName.Contains(tbDepartment.Text))
+              && (tbPM.Text == string.Empty || c.PMName.Contains(tbPM.Text))
+              && (tbRM.Text == string.Empty || c.RMName.Contains(tbRM.Text))
+              && (tbClientName.Text == string.Empty || c.ClientNameCN.Contains(tbClientName.Text))
+              && (tbClientName.Text == string.Empty || c.ClientNameEN_1.Contains(tbClientName.Text))
+              && (tbClientName.Text == string.Empty || c.ClientNameEN_2.Contains(tbClientName.Text))
+              && (tbClientNo.Text == string.Empty || c.ClientNo.Contains(tbClientNo.Text))
+              && (cbClientType.SelectedText == string.Empty || c.ClientType.Equals(cbClientType.SelectedText)));
 
             clientMgrBindingSource.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
@@ -105,8 +100,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void ItemNew(object sender, System.EventArgs e)
         {
-            ClientDetailUI clientDetailUI = new ClientDetailUI((Client)null, true);
-            clientDetailUI.ShowDialog(this);
+            ClientDetail clientDetail = new ClientDetail((Client)null, true);
+            clientDetail.ShowDialog(this);
         }
 
         /// <summary>
@@ -121,14 +116,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            string cid = (string)dgvClient["ediNoColumn", dgvClient.SelectedRows[0].Index].Value;
+            string cid = (string)dgvClient["clientNoColumn", dgvClient.SelectedRows[0].Index].Value;
             if (cid != null)
             {
-                Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.EDINo == cid);
+                Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.ClientNo == cid);
                 if (selectedClient != null)
                 {
-                    ClientDetailUI clientDetailUI = new ClientDetailUI(selectedClient, true);
-                    clientDetailUI.ShowDialog(this);
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, true);
+                    clientDetail.ShowDialog(this);
                 }
             }
         }
@@ -145,10 +140,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            string cid = (string)dgvClient["ediNoColumn", dgvClient.SelectedRows[0].Index].Value;
+            string cid = (string)dgvClient["clientNoColumn", dgvClient.SelectedRows[0].Index].Value;
             if (cid != null)
             {
-                Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.EDINo == cid);
+                Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.ClientNo == cid);
                 if (selectedClient != null)
                 {
                     if (MessageBox.Show("是否打算删除客户: " + selectedClient.ClientNameCN, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
@@ -173,10 +168,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            string cid = (string)dgvClient["ediNoColumn", dgvClient.SelectedRows[0].Index].Value;
+            string cid = (string)dgvClient["clientNoColumn", dgvClient.SelectedRows[0].Index].Value;
             if (cid != null)
             {
-                Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.EDINo == cid);
+                Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.ClientNo == cid);
                 if (selectedClient != null)
                 {
                     this.Selected = selectedClient;
@@ -201,13 +196,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            string cid = (string)dgvClient["ediNoColumn", dgvClient.SelectedRows[0].Index].Value;
+            string cid = (string)dgvClient["clientNoColumn", dgvClient.SelectedRows[0].Index].Value;
             if (cid != null)
             {
-                Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.EDINo == cid);
+                Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.ClientNo == cid);
                 if (selectedClient != null)
                 {
-                    new ClientDetailUI(selectedClient, false).ShowDialog(this);
+                    new ClientDetail(selectedClient, false).ShowDialog(this);
                 }
             }
         }
@@ -229,13 +224,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            string cid = (string)dgvClient["ediNoColumn", dgvClient.SelectedRows[0].Index].Value;
+            string cid = (string)dgvClient["clientNoColumn", dgvClient.SelectedRows[0].Index].Value;
             if (cid != null)
             {
-                Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.EDINo == cid);
+                Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.ClientNo == cid);
                 if (selectedClient != null)
                 {
-                    new ClientDetailUI(selectedClient, false).ShowDialog(this);
+                    new ClientDetail(selectedClient, false).ShowDialog(this);
                 }
             }
         }

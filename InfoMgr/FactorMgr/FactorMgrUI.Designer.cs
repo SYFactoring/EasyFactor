@@ -25,16 +25,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemUpdate;
         private System.Windows.Forms.ToolStripMenuItem menuItemDelete;
         private System.Windows.Forms.ToolStripMenuItem menuItemImport;
-        private System.Windows.Forms.ToolStrip tsFactorMgr;
-        private System.Windows.Forms.ToolStripLabel lblFactorCode;
-        private System.Windows.Forms.ToolStripTextBox tbFactorCode;
-        private System.Windows.Forms.ToolStripLabel lblFactorType;
-        private System.Windows.Forms.ToolStripTextBox tbFactorType;
-        private System.Windows.Forms.ToolStripLabel lblFactorName;
-        private System.Windows.Forms.ToolStripTextBox tbFactorName;
-        private System.Windows.Forms.ToolStripButton btnQuery;
-        private System.Windows.Forms.ToolStripLabel lblCount;
-        private System.Windows.Forms.DataGridView dgvFactor;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -59,6 +49,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.factorMgrBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.contextMenuFactorMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,16 +60,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.menuItemUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemImport = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsFactorMgr = new System.Windows.Forms.ToolStrip();
-            this.lblFactorCode = new System.Windows.Forms.ToolStripLabel();
-            this.tbFactorCode = new System.Windows.Forms.ToolStripTextBox();
-            this.lblFactorType = new System.Windows.Forms.ToolStripLabel();
-            this.tbFactorType = new System.Windows.Forms.ToolStripTextBox();
-            this.lblFactorName = new System.Windows.Forms.ToolStripLabel();
-            this.tbFactorName = new System.Windows.Forms.ToolStripTextBox();
-            this.btnQuery = new System.Windows.Forms.ToolStripButton();
-            this.lblCount = new System.Windows.Forms.ToolStripLabel();
-            this.dgvFactor = new System.Windows.Forms.DataGridView();
+            this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.lblFactorType = new DevComponents.DotNetBar.LabelX();
+            this.lblFactorCode = new DevComponents.DotNetBar.LabelX();
+            this.tbFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblFactorName = new DevComponents.DotNetBar.LabelX();
+            this.tbFactorName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.btnQuery = new DevComponents.DotNetBar.ButtonX();
+            this.dgvFactor = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.factorCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -113,9 +102,15 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblCount = new DevComponents.DotNetBar.LabelX();
+            this.cbFactorType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.comboItem1 = new DevComponents.Editors.ComboItem();
+            this.comboItem2 = new DevComponents.Editors.ComboItem();
+            this.comboItem3 = new DevComponents.Editors.ComboItem();
+            this.comboItem4 = new DevComponents.Editors.ComboItem();
             ((System.ComponentModel.ISupportInitialize)(this.factorMgrBindingSource)).BeginInit();
             this.contextMenuFactorMgr.SuspendLayout();
-            this.tsFactorMgr.SuspendLayout();
+            this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactor)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,26 +126,26 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.toolStripSeparator,
             this.menuItemEdit});
             this.contextMenuFactorMgr.Name = "contextMenuFactorMgr";
-            this.contextMenuFactorMgr.Size = new System.Drawing.Size(101, 76);
+            this.contextMenuFactorMgr.Size = new System.Drawing.Size(99, 76);
             // 
             // menuItemSelect
             // 
             this.menuItemSelect.Name = "menuItemSelect";
-            this.menuItemSelect.Size = new System.Drawing.Size(100, 22);
+            this.menuItemSelect.Size = new System.Drawing.Size(98, 22);
             this.menuItemSelect.Text = "选定";
             this.menuItemSelect.Click += new System.EventHandler(this.ItemSelect);
             // 
             // menuItemDetail
             // 
             this.menuItemDetail.Name = "menuItemDetail";
-            this.menuItemDetail.Size = new System.Drawing.Size(100, 22);
+            this.menuItemDetail.Size = new System.Drawing.Size(98, 22);
             this.menuItemDetail.Text = "详细";
             this.menuItemDetail.Click += new System.EventHandler(this.ItemDetail);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(97, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(95, 6);
             // 
             // menuItemEdit
             // 
@@ -160,100 +155,131 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.menuItemDelete,
             this.menuItemImport});
             this.menuItemEdit.Name = "menuItemEdit";
-            this.menuItemEdit.Size = new System.Drawing.Size(100, 22);
+            this.menuItemEdit.Size = new System.Drawing.Size(98, 22);
             this.menuItemEdit.Text = "维护";
             // 
             // menuItemNew
             // 
             this.menuItemNew.Name = "menuItemNew";
-            this.menuItemNew.Size = new System.Drawing.Size(100, 22);
+            this.menuItemNew.Size = new System.Drawing.Size(98, 22);
             this.menuItemNew.Text = "新建";
             this.menuItemNew.Click += new System.EventHandler(this.ItemNew);
             // 
             // menuItemUpdate
             // 
             this.menuItemUpdate.Name = "menuItemUpdate";
-            this.menuItemUpdate.Size = new System.Drawing.Size(100, 22);
+            this.menuItemUpdate.Size = new System.Drawing.Size(98, 22);
             this.menuItemUpdate.Text = "更新";
             this.menuItemUpdate.Click += new System.EventHandler(this.ItemUpdate);
             // 
             // menuItemDelete
             // 
             this.menuItemDelete.Name = "menuItemDelete";
-            this.menuItemDelete.Size = new System.Drawing.Size(100, 22);
+            this.menuItemDelete.Size = new System.Drawing.Size(98, 22);
             this.menuItemDelete.Text = "删除";
             this.menuItemDelete.Click += new System.EventHandler(this.ItemDelete);
             // 
             // menuItemImport
             // 
             this.menuItemImport.Name = "menuItemImport";
-            this.menuItemImport.Size = new System.Drawing.Size(100, 22);
+            this.menuItemImport.Size = new System.Drawing.Size(98, 22);
             this.menuItemImport.Text = "导入";
             this.menuItemImport.Click += new System.EventHandler(this.ItemImport);
             // 
-            // tsFactorMgr
+            // panelQuery
             // 
-            this.tsFactorMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblFactorCode,
-            this.tbFactorCode,
-            this.lblFactorType,
-            this.tbFactorType,
-            this.lblFactorName,
-            this.tbFactorName,
-            this.btnQuery,
-            this.lblCount});
-            this.tsFactorMgr.Location = new System.Drawing.Point(0, 0);
-            this.tsFactorMgr.Name = "tsFactorMgr";
-            this.tsFactorMgr.Size = new System.Drawing.Size(911, 25);
-            this.tsFactorMgr.TabIndex = 3;
-            this.tsFactorMgr.Text = "toolStrip1";
+            this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.cbFactorType);
+            this.panelQuery.Controls.Add(this.lblCount);
+            this.panelQuery.Controls.Add(this.btnQuery);
+            this.panelQuery.Controls.Add(this.tbFactorName);
+            this.panelQuery.Controls.Add(this.lblFactorName);
+            this.panelQuery.Controls.Add(this.tbFactorCode);
+            this.panelQuery.Controls.Add(this.lblFactorCode);
+            this.panelQuery.Controls.Add(this.lblFactorType);
+            this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelQuery.Location = new System.Drawing.Point(0, 0);
+            this.panelQuery.Name = "panelQuery";
+            this.panelQuery.Size = new System.Drawing.Size(911, 34);
+            this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelQuery.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelQuery.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelQuery.Style.GradientAngle = 90;
+            this.panelQuery.TabIndex = 5;
+            // 
+            // lblFactorType
+            // 
+            // 
+            // 
+            // 
+            this.lblFactorType.BackgroundStyle.Class = "";
+            this.lblFactorType.Location = new System.Drawing.Point(4, 9);
+            this.lblFactorType.Name = "lblFactorType";
+            this.lblFactorType.Size = new System.Drawing.Size(75, 23);
+            this.lblFactorType.TabIndex = 0;
+            this.lblFactorType.Text = "机构类型";
             // 
             // lblFactorCode
             // 
+            // 
+            // 
+            // 
+            this.lblFactorCode.BackgroundStyle.Class = "";
+            this.lblFactorCode.Location = new System.Drawing.Point(169, 9);
             this.lblFactorCode.Name = "lblFactorCode";
-            this.lblFactorCode.Size = new System.Drawing.Size(56, 22);
+            this.lblFactorCode.Size = new System.Drawing.Size(75, 23);
+            this.lblFactorCode.TabIndex = 2;
             this.lblFactorCode.Text = "机构编号";
             // 
             // tbFactorCode
             // 
+            // 
+            // 
+            // 
+            this.tbFactorCode.Border.Class = "TextBoxBorder";
+            this.tbFactorCode.Location = new System.Drawing.Point(224, 5);
             this.tbFactorCode.Name = "tbFactorCode";
-            this.tbFactorCode.Size = new System.Drawing.Size(100, 25);
-            // 
-            // lblFactorType
-            // 
-            this.lblFactorType.Name = "lblFactorType";
-            this.lblFactorType.Size = new System.Drawing.Size(56, 22);
-            this.lblFactorType.Text = "机构类型";
-            // 
-            // tbFactorType
-            // 
-            this.tbFactorType.Name = "tbFactorType";
-            this.tbFactorType.Size = new System.Drawing.Size(100, 25);
+            this.tbFactorCode.Size = new System.Drawing.Size(100, 20);
+            this.tbFactorCode.TabIndex = 3;
             // 
             // lblFactorName
             // 
+            // 
+            // 
+            // 
+            this.lblFactorName.BackgroundStyle.Class = "";
+            this.lblFactorName.Location = new System.Drawing.Point(330, 8);
             this.lblFactorName.Name = "lblFactorName";
-            this.lblFactorName.Size = new System.Drawing.Size(56, 22);
+            this.lblFactorName.Size = new System.Drawing.Size(75, 23);
+            this.lblFactorName.TabIndex = 4;
             this.lblFactorName.Text = "机构名称";
             // 
             // tbFactorName
             // 
+            // 
+            // 
+            // 
+            this.tbFactorName.Border.Class = "TextBoxBorder";
+            this.tbFactorName.Location = new System.Drawing.Point(384, 5);
             this.tbFactorName.Name = "tbFactorName";
-            this.tbFactorName.Size = new System.Drawing.Size(100, 25);
+            this.tbFactorName.Size = new System.Drawing.Size(100, 20);
+            this.tbFactorName.TabIndex = 5;
             // 
             // btnQuery
             // 
-            this.btnQuery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnQuery.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQuery.Location = new System.Drawing.Point(491, 4);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(36, 22);
+            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.TabIndex = 6;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.Query);
-            // 
-            // lblCount
-            // 
-            this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 22);
             // 
             // dgvFactor
             // 
@@ -300,17 +326,24 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactor.ContextMenuStrip = this.contextMenuFactorMgr;
             this.dgvFactor.Cursor = System.Windows.Forms.Cursors.Default;
             this.dgvFactor.DataSource = this.factorMgrBindingSource;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactor.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvFactor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvFactor.GridColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.dgvFactor.Location = new System.Drawing.Point(0, 25);
+            this.dgvFactor.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvFactor.Location = new System.Drawing.Point(0, 34);
             this.dgvFactor.Name = "dgvFactor";
             this.dgvFactor.ReadOnly = true;
             this.dgvFactor.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvFactor.RowTemplate.Height = 23;
             this.dgvFactor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFactor.Size = new System.Drawing.Size(911, 296);
-            this.dgvFactor.TabIndex = 4;
-            this.dgvFactor.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
+            this.dgvFactor.Size = new System.Drawing.Size(911, 314);
+            this.dgvFactor.TabIndex = 6;
             // 
             // factorCodeColumn
             // 
@@ -318,7 +351,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.factorCodeColumn.HeaderText = "保理商代码";
             this.factorCodeColumn.Name = "factorCodeColumn";
             this.factorCodeColumn.ReadOnly = true;
-            this.factorCodeColumn.Width = 90;
+            this.factorCodeColumn.Width = 92;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -326,7 +359,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn2.HeaderText = "机构类型";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 78;
+            this.dataGridViewTextBoxColumn2.Width = 80;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -334,7 +367,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn3.HeaderText = "机构名称";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 78;
+            this.dataGridViewTextBoxColumn3.Width = 80;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -342,7 +375,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn4.HeaderText = "简称";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 54;
+            this.dataGridViewTextBoxColumn4.Width = 56;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -350,7 +383,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn5.HeaderText = "分行名称";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 78;
+            this.dataGridViewTextBoxColumn5.Width = 80;
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -358,7 +391,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn7.HeaderText = "Department";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.Width = 90;
+            this.dataGridViewTextBoxColumn7.Width = 87;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -366,7 +399,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn8.HeaderText = "地址1";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.Width = 60;
+            this.dataGridViewTextBoxColumn8.Width = 62;
             // 
             // dataGridViewTextBoxColumn9
             // 
@@ -374,7 +407,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn9.HeaderText = "地址2";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.Width = 60;
+            this.dataGridViewTextBoxColumn9.Width = 62;
             // 
             // dataGridViewTextBoxColumn10
             // 
@@ -382,7 +415,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn10.HeaderText = "邮政编码";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            this.dataGridViewTextBoxColumn10.Width = 78;
+            this.dataGridViewTextBoxColumn10.Width = 80;
             // 
             // dataGridViewTextBoxColumn11
             // 
@@ -390,7 +423,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn11.HeaderText = "城市";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            this.dataGridViewTextBoxColumn11.Width = 54;
+            this.dataGridViewTextBoxColumn11.Width = 56;
             // 
             // dataGridViewTextBoxColumn12
             // 
@@ -398,7 +431,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn12.HeaderText = "访问地址1";
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            this.dataGridViewTextBoxColumn12.Width = 84;
+            this.dataGridViewTextBoxColumn12.Width = 86;
             // 
             // dataGridViewTextBoxColumn13
             // 
@@ -406,7 +439,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn13.HeaderText = "访问地址2";
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            this.dataGridViewTextBoxColumn13.Width = 84;
+            this.dataGridViewTextBoxColumn13.Width = 86;
             // 
             // dataGridViewTextBoxColumn14
             // 
@@ -414,7 +447,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn14.HeaderText = "访问邮政编码";
             this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
             this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            this.dataGridViewTextBoxColumn14.Width = 102;
+            this.dataGridViewTextBoxColumn14.Width = 104;
             // 
             // dataGridViewTextBoxColumn15
             // 
@@ -422,7 +455,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn15.HeaderText = "访问城市";
             this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
             this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            this.dataGridViewTextBoxColumn15.Width = 78;
+            this.dataGridViewTextBoxColumn15.Width = 80;
             // 
             // dataGridViewTextBoxColumn17
             // 
@@ -430,7 +463,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn17.HeaderText = "公司网址";
             this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            this.dataGridViewTextBoxColumn17.Width = 78;
+            this.dataGridViewTextBoxColumn17.Width = 80;
             // 
             // dataGridViewTextBoxColumn18
             // 
@@ -438,7 +471,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn18.HeaderText = "联系电话1";
             this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
             this.dataGridViewTextBoxColumn18.ReadOnly = true;
-            this.dataGridViewTextBoxColumn18.Width = 84;
+            this.dataGridViewTextBoxColumn18.Width = 86;
             // 
             // dataGridViewTextBoxColumn19
             // 
@@ -446,7 +479,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn19.HeaderText = "联系电话2";
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             this.dataGridViewTextBoxColumn19.ReadOnly = true;
-            this.dataGridViewTextBoxColumn19.Width = 84;
+            this.dataGridViewTextBoxColumn19.Width = 86;
             // 
             // dataGridViewTextBoxColumn20
             // 
@@ -454,7 +487,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn20.HeaderText = "传真号码1";
             this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
             this.dataGridViewTextBoxColumn20.ReadOnly = true;
-            this.dataGridViewTextBoxColumn20.Width = 84;
+            this.dataGridViewTextBoxColumn20.Width = 86;
             // 
             // dataGridViewTextBoxColumn21
             // 
@@ -462,7 +495,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn21.HeaderText = "传真号码2";
             this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
             this.dataGridViewTextBoxColumn21.ReadOnly = true;
-            this.dataGridViewTextBoxColumn21.Width = 84;
+            this.dataGridViewTextBoxColumn21.Width = 86;
             // 
             // dataGridViewTextBoxColumn22
             // 
@@ -470,7 +503,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn22.HeaderText = "工作事件";
             this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
             this.dataGridViewTextBoxColumn22.ReadOnly = true;
-            this.dataGridViewTextBoxColumn22.Width = 78;
+            this.dataGridViewTextBoxColumn22.Width = 80;
             // 
             // dataGridViewTextBoxColumn23
             // 
@@ -478,7 +511,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn23.HeaderText = "联系人1";
             this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
             this.dataGridViewTextBoxColumn23.ReadOnly = true;
-            this.dataGridViewTextBoxColumn23.Width = 72;
+            this.dataGridViewTextBoxColumn23.Width = 74;
             // 
             // dataGridViewTextBoxColumn24
             // 
@@ -486,7 +519,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn24.HeaderText = "联系人2";
             this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
             this.dataGridViewTextBoxColumn24.ReadOnly = true;
-            this.dataGridViewTextBoxColumn24.Width = 72;
+            this.dataGridViewTextBoxColumn24.Width = 74;
             // 
             // dataGridViewTextBoxColumn25
             // 
@@ -494,7 +527,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn25.HeaderText = "合同1";
             this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
             this.dataGridViewTextBoxColumn25.ReadOnly = true;
-            this.dataGridViewTextBoxColumn25.Width = 60;
+            this.dataGridViewTextBoxColumn25.Width = 62;
             // 
             // dataGridViewTextBoxColumn26
             // 
@@ -502,7 +535,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn26.HeaderText = "合同2";
             this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
             this.dataGridViewTextBoxColumn26.ReadOnly = true;
-            this.dataGridViewTextBoxColumn26.Width = 60;
+            this.dataGridViewTextBoxColumn26.Width = 62;
             // 
             // dataGridViewTextBoxColumn27
             // 
@@ -510,7 +543,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn27.HeaderText = "合同3";
             this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
             this.dataGridViewTextBoxColumn27.ReadOnly = true;
-            this.dataGridViewTextBoxColumn27.Width = 60;
+            this.dataGridViewTextBoxColumn27.Width = 62;
             // 
             // dataGridViewTextBoxColumn28
             // 
@@ -518,7 +551,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn28.HeaderText = "合同4";
             this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
             this.dataGridViewTextBoxColumn28.ReadOnly = true;
-            this.dataGridViewTextBoxColumn28.Width = 60;
+            this.dataGridViewTextBoxColumn28.Width = 62;
             // 
             // dataGridViewTextBoxColumn29
             // 
@@ -526,7 +559,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn29.HeaderText = "Management_1";
             this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
             this.dataGridViewTextBoxColumn29.ReadOnly = true;
-            this.dataGridViewTextBoxColumn29.Width = 102;
+            this.dataGridViewTextBoxColumn29.Width = 106;
             // 
             // dataGridViewTextBoxColumn30
             // 
@@ -534,7 +567,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn30.HeaderText = "Management_2";
             this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
             this.dataGridViewTextBoxColumn30.ReadOnly = true;
-            this.dataGridViewTextBoxColumn30.Width = 102;
+            this.dataGridViewTextBoxColumn30.Width = 106;
             // 
             // dataGridViewTextBoxColumn31
             // 
@@ -542,7 +575,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn31.HeaderText = "Shareholders";
             this.dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
             this.dataGridViewTextBoxColumn31.ReadOnly = true;
-            this.dataGridViewTextBoxColumn31.Width = 102;
+            this.dataGridViewTextBoxColumn31.Width = 94;
             // 
             // dataGridViewTextBoxColumn32
             // 
@@ -550,7 +583,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn32.HeaderText = "IFISAvailableOnPrivateForum";
             this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
             this.dataGridViewTextBoxColumn32.ReadOnly = true;
-            this.dataGridViewTextBoxColumn32.Width = 192;
+            this.dataGridViewTextBoxColumn32.Width = 170;
             // 
             // dataGridViewTextBoxColumn33
             // 
@@ -558,7 +591,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn33.HeaderText = "MembershipStatus";
             this.dataGridViewTextBoxColumn33.Name = "dataGridViewTextBoxColumn33";
             this.dataGridViewTextBoxColumn33.ReadOnly = true;
-            this.dataGridViewTextBoxColumn33.Width = 126;
+            this.dataGridViewTextBoxColumn33.Width = 119;
             // 
             // dataGridViewTextBoxColumn34
             // 
@@ -566,7 +599,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn34.HeaderText = "MembershipDate";
             this.dataGridViewTextBoxColumn34.Name = "dataGridViewTextBoxColumn34";
             this.dataGridViewTextBoxColumn34.ReadOnly = true;
-            this.dataGridViewTextBoxColumn34.Width = 114;
+            this.dataGridViewTextBoxColumn34.Width = 112;
             // 
             // dataGridViewTextBoxColumn35
             // 
@@ -574,7 +607,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn35.HeaderText = "DateOfLatestRevision";
             this.dataGridViewTextBoxColumn35.Name = "dataGridViewTextBoxColumn35";
             this.dataGridViewTextBoxColumn35.ReadOnly = true;
-            this.dataGridViewTextBoxColumn35.Width = 150;
+            this.dataGridViewTextBoxColumn35.Width = 136;
             // 
             // dataGridViewTextBoxColumn36
             // 
@@ -582,29 +615,79 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn36.HeaderText = "备注";
             this.dataGridViewTextBoxColumn36.Name = "dataGridViewTextBoxColumn36";
             this.dataGridViewTextBoxColumn36.ReadOnly = true;
-            this.dataGridViewTextBoxColumn36.Width = 54;
+            this.dataGridViewTextBoxColumn36.Width = 56;
+            // 
+            // lblCount
+            // 
+            // 
+            // 
+            // 
+            this.lblCount.BackgroundStyle.Class = "";
+            this.lblCount.Location = new System.Drawing.Point(572, 8);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(75, 23);
+            this.lblCount.TabIndex = 7;
+            // 
+            // cbFactorType
+            // 
+            this.cbFactorType.DisplayMember = "Text";
+            this.cbFactorType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbFactorType.FormattingEnabled = true;
+            this.cbFactorType.ItemHeight = 14;
+            this.cbFactorType.Items.AddRange(new object[] {
+            this.comboItem1,
+            this.comboItem2,
+            this.comboItem3,
+            this.comboItem4});
+            this.cbFactorType.Location = new System.Drawing.Point(61, 6);
+            this.cbFactorType.Name = "cbFactorType";
+            this.cbFactorType.Size = new System.Drawing.Size(102, 20);
+            this.cbFactorType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbFactorType.TabIndex = 8;
+            // 
+            // comboItem1
+            // 
+            this.comboItem1.Text = "保理商";
+            // 
+            // comboItem2
+            // 
+            this.comboItem2.Text = "保险公司";
+            // 
+            // comboItem3
+            // 
+            this.comboItem3.Text = "监管机构";
+            // 
+            // comboItem4
+            // 
+            this.comboItem4.Text = "代付行";
             // 
             // FactorMgrUI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.dgvFactor);
-            this.Controls.Add(this.tsFactorMgr);
+            this.Controls.Add(this.panelQuery);
             this.Name = "FactorMgrUI";
-            this.Size = new System.Drawing.Size(911, 321);
+            this.Size = new System.Drawing.Size(911, 348);
             ((System.ComponentModel.ISupportInitialize)(this.factorMgrBindingSource)).EndInit();
             this.contextMenuFactorMgr.ResumeLayout(false);
-            this.tsFactorMgr.ResumeLayout(false);
-            this.tsFactorMgr.PerformLayout();
+            this.panelQuery.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactor)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
+        private DevComponents.DotNetBar.PanelEx panelQuery;
+        private DevComponents.DotNetBar.LabelX lblFactorName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorCode;
+        private DevComponents.DotNetBar.LabelX lblFactorCode;
+        private DevComponents.DotNetBar.LabelX lblFactorType;
+        private DevComponents.DotNetBar.ButtonX btnQuery;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvFactor;
         private System.Windows.Forms.DataGridViewTextBoxColumn factorCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -639,5 +722,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn34;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn35;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn36;
+        private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbFactorType;
+        private DevComponents.Editors.ComboItem comboItem1;
+        private DevComponents.Editors.ComboItem comboItem2;
+        private DevComponents.Editors.ComboItem comboItem3;
+        private DevComponents.Editors.ComboItem comboItem4;
     }
 }
