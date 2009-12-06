@@ -14,7 +14,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     /// <summary>
     /// User Management User Interface
     /// </summary>
-    public partial class UserMgrUI : UserControl
+    public partial class UserMgr : UserControl
     {
         /// <summary>
         /// flag indicates if editable
@@ -30,7 +30,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// Initializes a new instance of the UserMgrUI class
         /// </summary>
         /// <param name="isEditable">true if editable</param>
-        public UserMgrUI(bool isEditable)
+        public UserMgr(bool isEditable)
         {
             InitializeComponent();
             this.isEditable = isEditable;
@@ -42,7 +42,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="isEditable">true if editable</param>
         /// <param name="owner">form owner</param>
-        public UserMgrUI(bool isEditable, Form owner)
+        public UserMgr(bool isEditable, Form owner)
             : this(isEditable)
         {
             this.owner = owner;
@@ -84,6 +84,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             App.Current.DbContext.Users.Where(
                 u => u.UserName.Contains(keyword)
                   || u.UserID.Contains(keyword)
+                  || u.EDIAccount.Contains(keyword)
                   || u.MSN.Contains(keyword)
                   || u.Phone.Contains(keyword)
                   || u.Telphone.Contains(keyword)

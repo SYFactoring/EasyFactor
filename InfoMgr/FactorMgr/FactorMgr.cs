@@ -17,23 +17,23 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// <summary>
     /// Factor Management User Interface 
     /// </summary>
-    public partial class FactorMgrUI : UserControl
+    public partial class FactorMgr : UserControl
     {
         /// <summary>
         /// flag indicates if is editable
         /// </summary>
         private readonly bool isEditable;
 
-        /// <summary>
-        /// variable indicates current owner form
-        /// </summary>
-        private readonly Form owner;
-
+        public Form owner
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// Initializes a new instance of the FactorMgrUI class
         /// </summary>
         /// <param name="isEditable">true if editable</param>
-        public FactorMgrUI(bool isEditable)
+        public FactorMgr(bool isEditable)
         {
             this.isEditable = isEditable;
             InitializeComponent();
@@ -45,7 +45,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="isEditable">true if editable</param>
         /// <param name="owner">form owner</param>
-        public FactorMgrUI(bool isEditable, Form owner)
+        public FactorMgr(bool isEditable, Form owner)
             : this(isEditable)
         {
             this.owner = owner;
@@ -272,10 +272,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private void Query(object sender, EventArgs e)
         {
             var queryResult = App.Current.DbContext.Factors.Where(f =>
-                                                   (tbFactorCode.Text == string.Empty || f.FactorCode.Contains(tbFactorCode.Text)) &&
-                                                   (tbFactorName.Text == string.Empty || f.CompanyName.Contains(tbFactorName.Text)) &&
-                                                   (cbFactorType.SelectedValue.ToString() == string.Empty || f.FactorType.Equals(cbFactorType.SelectedValue.ToString())));
-
+                                                   (tbFactorCode.Text == string.Empty || f.FactorCode.Contains(tbFactorCode.Text))
+                                                && (tbFactorName.Text == string.Empty || f.CompanyName.Contains(tbFactorName.Text))
+                                                && (cbFactorType.Text == string.Empty || f.FactorType.Equals(cbFactorType.Text)));
             factorMgrBindingSource.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
@@ -360,6 +359,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 if (selectedFactor != null)
                 {
                     this.Selected = selectedFactor;
+                    if (this.owner == null)
+                    {
+                        this.owner = (Form)this.Parent.Parent;
+                    }
                     if (this.owner != null)
                     {
                         this.owner.DialogResult = DialogResult.Yes;

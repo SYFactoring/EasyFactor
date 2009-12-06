@@ -121,8 +121,8 @@
             // 
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
-            this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanelCaseQuery);
+            this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanelReport);
             this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
@@ -171,6 +171,7 @@
             // 
             this.ribbonPanelInfoMgr.StyleMouseOver.Class = "";
             this.ribbonPanelInfoMgr.TabIndex = 2;
+            this.ribbonPanelInfoMgr.Visible = false;
             // 
             // ribbonBarUserMgr
             // 
@@ -244,6 +245,7 @@
             this.btnDepartMgr.Name = "btnDepartMgr";
             this.btnDepartMgr.SubItemsExpandWidth = 14;
             this.btnDepartMgr.Text = "分部信息";
+            this.btnDepartMgr.Click += new System.EventHandler(this.DepartmentMgr);
             // 
             // ribbonBarFactor
             // 
@@ -360,7 +362,6 @@
             // 
             this.ribbonPanelCaseQuery.StyleMouseOver.Class = "";
             this.ribbonPanelCaseQuery.TabIndex = 4;
-            this.ribbonPanelCaseQuery.Visible = false;
             // 
             // ribbonBarQuery
             // 
@@ -443,6 +444,7 @@
             this.btnCaseApplication.Name = "btnCaseApplication";
             this.btnCaseApplication.SubItemsExpandWidth = 14;
             this.btnCaseApplication.Text = "案件申请";
+            this.btnCaseApplication.Click += new System.EventHandler(this.CaseApplication);
             // 
             // btnCreditCoverNego
             // 
@@ -802,13 +804,13 @@
             // 
             // itemInfoMgr
             // 
-            this.itemInfoMgr.Checked = true;
             this.itemInfoMgr.Name = "itemInfoMgr";
             this.itemInfoMgr.Panel = this.ribbonPanelInfoMgr;
             this.itemInfoMgr.Text = "信息管理";
             // 
             // itemCaseInfo
             // 
+            this.itemCaseInfo.Checked = true;
             this.itemCaseInfo.Name = "itemCaseInfo";
             this.itemCaseInfo.Panel = this.ribbonPanelCaseQuery;
             this.itemCaseInfo.Text = "案件管理";

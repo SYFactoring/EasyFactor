@@ -255,7 +255,6 @@
       <Column Name="FactorType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="CompanyName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="ShortName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="BranchName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="CountryName" Type="System.String" DbType="Char(20)" CanBeNull="true" />
       <Column Name="Department" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="PostalAddress_1" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />

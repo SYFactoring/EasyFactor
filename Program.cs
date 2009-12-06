@@ -24,10 +24,10 @@ namespace CMBC.EasyFactor
             Application.SetCompatibleTextRenderingDefault(false);
             LoginWindow loginWindow = new LoginWindow();
             //loginWindow.ShowDialog();
-            if (!loginWindow.PreLogin())
-            {
-                return;
-            }
+            //if (!loginWindow.PreLogin())
+            //{
+            //    return;
+            //}
             loginWindow.AutoLogin();
 
             if (App.Current.CurUser != null)

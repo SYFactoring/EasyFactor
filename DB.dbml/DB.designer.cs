@@ -5804,8 +5804,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _ShortName;
 		
-		private string _BranchName;
-		
 		private string _CountryName;
 		
 		private string _Department;
@@ -5898,8 +5896,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCompanyNameChanged();
     partial void OnShortNameChanging(string value);
     partial void OnShortNameChanged();
-    partial void OnBranchNameChanging(string value);
-    partial void OnBranchNameChanged();
     partial void OnCountryNameChanging(string value);
     partial void OnCountryNameChanged();
     partial void OnDepartmentChanging(string value);
@@ -6058,26 +6054,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._ShortName = value;
 					this.SendPropertyChanged("ShortName");
 					this.OnShortNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_BranchName", DbType="VarChar(200)")]
-		public string BranchName
-		{
-			get
-			{
-				return this._BranchName;
-			}
-			set
-			{
-				if ((this._BranchName != value))
-				{
-					this.OnBranchNameChanging(value);
-					this.SendPropertyChanging();
-					this._BranchName = value;
-					this.SendPropertyChanged("BranchName");
-					this.OnBranchNameChanged();
 				}
 			}
 		}

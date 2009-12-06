@@ -7,7 +7,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return _CurrencyCode + "    " + _CurrencyName;
+                return _CurrencyCode + " " + _CurrencyName;
             }
         }
     }

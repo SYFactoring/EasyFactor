@@ -14,7 +14,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// <summary>
     /// Client Management User Interface
     /// </summary>
-    public partial class ClientMgrUI : UserControl
+    public partial class ClientMgr : UserControl
     {
         /// <summary>
         /// flag indicates if editable
@@ -24,13 +24,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <summary>
         /// form owner
         /// </summary>
-        private readonly Form owner;
+        private Form owner;
 
         /// <summary>
         /// Initializes a new instance of the ClientMgrUI class
         /// </summary>
         /// <param name="isEditable">true if editable</param>
-        public ClientMgrUI(bool isEditable)
+        public ClientMgr(bool isEditable)
         {
             InitializeComponent();
             this.isEditable = isEditable;
@@ -42,7 +42,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="isEditable">true if editable</param>
         /// <param name="owner">form owner</param>
-        public ClientMgrUI(bool isEditable, Form owner)
+        public ClientMgr(bool isEditable, Form owner)
             : this(isEditable)
         {
             this.owner = owner;
@@ -87,7 +87,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
               && (tbClientName.Text == string.Empty || c.ClientNameEN_1.Contains(tbClientName.Text))
               && (tbClientName.Text == string.Empty || c.ClientNameEN_2.Contains(tbClientName.Text))
               && (tbClientNo.Text == string.Empty || c.ClientNo.Contains(tbClientNo.Text))
-              && (cbClientType.SelectedText == string.Empty || c.ClientType.Equals(cbClientType.SelectedText)));
+              && (cbClientType.Text == string.Empty || c.ClientType.Equals(cbClientType.Text)));
 
             clientMgrBindingSource.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
@@ -123,6 +123,25 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (selectedClient != null)
                 {
                     ClientDetail clientDetail = new ClientDetail(selectedClient, true);
+                    clientDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        private void ItemUpdateCreditLine(object sender, System.EventArgs e)
+        {
+            if (this.dgvClient.SelectedRows.Count == 0 || clientMgrBindingSource == null)
+            {
+                return;
+            }
+
+            string cid = (string)dgvClient["clientNoColumn", dgvClient.SelectedRows[0].Index].Value;
+            if (cid != null)
+            {
+                Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.ClientNo == cid);
+                if (selectedClient != null)
+                {
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, true, true);
                     clientDetail.ShowDialog(this);
                 }
             }
@@ -175,6 +194,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (selectedClient != null)
                 {
                     this.Selected = selectedClient;
+                    if (this.owner == null)
+                    {
+                        this.owner = (Form)this.Parent.Parent;
+                    }
                     if (this.owner != null)
                     {
                         this.owner.DialogResult = DialogResult.Yes;

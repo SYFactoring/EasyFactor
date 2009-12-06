@@ -13,6 +13,8 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.InfoMgr.DepartmentMgr;
+    using CMBC.EasyFactor.CaseMgr.CaseApp;
 
     /// <summary>
     /// Main Window Form
@@ -81,7 +83,7 @@ namespace CMBC.EasyFactor
         /// <param name="e">event args</param>
         private void ClientMgr(object sender, EventArgs e)
         {
-            ClientMgrUI clientMgrUI = new ClientMgrUI(true);
+            ClientMgr clientMgrUI = new ClientMgr(true);
             setDetailPanel(clientMgrUI);
         }
 
@@ -93,20 +95,32 @@ namespace CMBC.EasyFactor
 
         private void UserMgr(object sender, EventArgs e)
         {
-            UserMgrUI userMgrUI = new UserMgrUI(true);
+            UserMgr userMgrUI = new UserMgr(true);
             setDetailPanel(userMgrUI);
         }
 
         private void FactorMgr(object sender, EventArgs e)
         {
-            FactorMgrUI factorMgrUI = new FactorMgrUI(true);
+            FactorMgr factorMgrUI = new FactorMgr(true);
             setDetailPanel(factorMgrUI);
         }
 
         private void FactorNew(object sender, EventArgs e)
         {
-            FactorDetailUI factorDetailUI = new FactorDetailUI((Factor)null, true);
-            factorDetailUI.ShowDialog(this);
+            FactorDetail factorDetail = new FactorDetail((Factor)null, true);
+            factorDetail.ShowDialog(this);
+        }
+
+        private void DepartmentMgr(object sender, EventArgs e)
+        {
+            DepartmentMgr departmentMgrUI = new DepartmentMgr(true);
+            setDetailPanel(departmentMgrUI);
+        }
+
+        private void CaseApplication(object sender, EventArgs e)
+        {
+            CaseAppUI caseAppUI = new CaseAppUI();
+            caseAppUI.ShowDialog(this);
         }
 
     }

@@ -29,417 +29,755 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label cityCNLabel;
-            System.Windows.Forms.Label cityENLabel;
-            System.Windows.Forms.Label clientNameCNLabel;
-            System.Windows.Forms.Label contactLabel;
-            System.Windows.Forms.Label countryCodeLabel;
-            System.Windows.Forms.Label emailLabel;
-            System.Windows.Forms.Label faxNumberLabel;
-            System.Windows.Forms.Label groupNoLabel;
-            System.Windows.Forms.Label isGroupLabel;
-            System.Windows.Forms.Label pMNameLabel;
-            System.Windows.Forms.Label addressENLabel;
-            System.Windows.Forms.Label addressCNLabel;
-            System.Windows.Forms.Label clientNoLabel;
-            System.Windows.Forms.Label clientNameEN_1Label;
-            System.Windows.Forms.Label clientNameEN_2Label;
-            System.Windows.Forms.Label provinceCNLabel;
-            System.Windows.Forms.Label provinceENLabel;
-            System.Windows.Forms.Label postCodeLabel;
-            System.Windows.Forms.Label branchCodeLabel;
-            System.Windows.Forms.Label cellPhoneLabel;
-            System.Windows.Forms.Label clientLevelLabel;
-            System.Windows.Forms.Label clientTypeLabel;
-            System.Windows.Forms.Label commentLabel;
-            System.Windows.Forms.Label companyCodeLabel;
-            System.Windows.Forms.Label productCNLabel;
-            System.Windows.Forms.Label productENLabel;
-            System.Windows.Forms.Label registrationNumberLabel;
-            System.Windows.Forms.Label representativeLabel;
-            System.Windows.Forms.Label rMNameLabel;
-            System.Windows.Forms.Label telephoneLabel;
-            System.Windows.Forms.Label wetsiteLabel;
+            DevComponents.DotNetBar.LabelX clientNameCNLabel;
+            DevComponents.DotNetBar.LabelX addressCNLabel;
+            DevComponents.DotNetBar.LabelX cityCNLabel;
+            DevComponents.DotNetBar.LabelX provinceCNLabel;
+            DevComponents.DotNetBar.LabelX productCNLabel;
+            DevComponents.DotNetBar.LabelX postCodeLabel;
+            DevComponents.DotNetBar.LabelX countryCodeLabel;
+            DevComponents.DotNetBar.LabelX representativeLabel;
+            DevComponents.DotNetBar.LabelX wetsiteLabel1;
+            DevComponents.DotNetBar.LabelX contactLabel;
+            DevComponents.DotNetBar.LabelX telephoneLabel1;
+            DevComponents.DotNetBar.LabelX emailLabel;
+            DevComponents.DotNetBar.LabelX faxNumberLabel;
+            DevComponents.DotNetBar.LabelX cellPhoneLabel;
+            DevComponents.DotNetBar.LabelX isGroupLabel;
+            DevComponents.DotNetBar.LabelX groupNoLabel;
+            DevComponents.DotNetBar.LabelX registrationNumberLabel;
+            DevComponents.DotNetBar.LabelX companyCodeLabel;
+            DevComponents.DotNetBar.LabelX clientTypeLabel;
+            DevComponents.DotNetBar.LabelX clientLevelLabel;
+            DevComponents.DotNetBar.LabelX branchCodeLabel;
+            DevComponents.DotNetBar.LabelX pMNameLabel;
+            DevComponents.DotNetBar.LabelX rMNameLabel;
+            DevComponents.DotNetBar.LabelX clientNoLabel;
+            DevComponents.DotNetBar.LabelX creditLineCurrencyLabel;
+            DevComponents.DotNetBar.LabelX creditLineTypeLabel;
+            DevComponents.DotNetBar.LabelX creditLineLabel;
+            DevComponents.DotNetBar.LabelX periodBeginLabel;
+            DevComponents.DotNetBar.LabelX approveNoLabel;
+            DevComponents.DotNetBar.LabelX approveTypeLabel;
+            DevComponents.DotNetBar.LabelX creditLineStatusLabel;
+            DevComponents.DotNetBar.LabelX freezeReasonLabel;
+            DevComponents.DotNetBar.LabelX freezerLabel;
+            DevComponents.DotNetBar.LabelX freezeDateLabel;
+            DevComponents.DotNetBar.LabelX unfreezeReasonLabel;
+            DevComponents.DotNetBar.LabelX unfreezerLabel;
+            DevComponents.DotNetBar.LabelX unfreezeDateLabel;
+            DevComponents.DotNetBar.LabelX commentLabel;
+            DevComponents.DotNetBar.LabelX commentLabel1;
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
+            this.tabPanelClientCreditLine = new DevComponents.DotNetBar.TabControlPanel();
+            this.groupPanel2 = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.clientCreditLineDataGridView = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clientCreditLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.creditLineCommentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.unfreezeDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.buttonX5 = new DevComponents.DotNetBar.ButtonX();
+            this.unfreezerTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.freezeDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.buttonX4 = new DevComponents.DotNetBar.ButtonX();
+            this.unfreezeReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.freezeReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
+            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
+            this.freezerTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
+            this.creditLineStatusTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.approveTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.approveNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.periodEndDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.periodBeginDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.creditLineTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.creditLineTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.creditLineCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.tabItemClientCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClient = new DevComponents.DotNetBar.TabControlPanel();
+            this.groupPanelClientContact = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.companyCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.registrationNumberTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cellPhoneTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.faxNumberTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.emailTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.telephoneTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.contactTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.wetsiteTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.representativeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.groupPanelClientGroup = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.tbGroupNameEN = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbGroupNameCN = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblGroupNameCN = new DevComponents.DotNetBar.LabelX();
+            this.groupNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.isGroupComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.comboItem7 = new DevComponents.Editors.ComboItem();
+            this.comboItem8 = new DevComponents.Editors.ComboItem();
             this.btnCancel = new DevComponents.DotNetBar.ButtonX();
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelClientStat = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.pMNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.departmentComboTree = new DevComponents.DotNetBar.Controls.ComboTree();
             this.rMNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.groupPanelClientBasic = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.productCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.productENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.registrationNumberTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.representativeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.telephoneTextBox = new DevComponents.DotNetBar.Controls.MaskedTextBoxAdv();
-            this.wetsiteTextBox = new DevComponents.DotNetBar.Controls.MaskedTextBoxAdv();
-            this.contactTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.countryCodeTextBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.cellPhoneTextBox = new DevComponents.DotNetBar.Controls.MaskedTextBoxAdv();
-            this.emailTextBox = new DevComponents.DotNetBar.Controls.MaskedTextBoxAdv();
-            this.clientLevelTextBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem5 = new DevComponents.Editors.ComboItem();
-            this.comboItem6 = new DevComponents.Editors.ComboItem();
-            this.faxNumberTextBox = new DevComponents.DotNetBar.Controls.MaskedTextBoxAdv();
-            this.clientTypeTextBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.pMNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.clientLevelComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.comboItem1 = new DevComponents.Editors.ComboItem();
             this.comboItem2 = new DevComponents.Editors.ComboItem();
+            this.clientTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.comboItem3 = new DevComponents.Editors.ComboItem();
             this.comboItem4 = new DevComponents.Editors.ComboItem();
-            this.groupNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.isGroupTextBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.companyCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.comboItem5 = new DevComponents.Editors.ComboItem();
+            this.comboItem6 = new DevComponents.Editors.ComboItem();
+            this.groupPanelClientBasic = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.clientCommentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.clientNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.countryCodeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.postCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.provinceCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.productENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.productCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.provinceENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.clientNameEN_1TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.addressCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.provinceCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cityENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cityCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.addressENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.cityENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.addressCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientNameEN_2TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.clientNoTextBox = new DevComponents.DotNetBar.Controls.MaskedTextBoxAdv();
+            this.clientNameEN_1TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabItemClient = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelClientCreditLine = new DevComponents.DotNetBar.TabControlPanel();
-            this.tabItemClientCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClientAccount = new DevComponents.DotNetBar.TabControlPanel();
             this.tabItemClientAccount = new DevComponents.DotNetBar.TabItem(this.components);
-            this.departmentComboTree = new DevComponents.DotNetBar.Controls.ComboTree();
-            cityCNLabel = new System.Windows.Forms.Label();
-            cityENLabel = new System.Windows.Forms.Label();
-            clientNameCNLabel = new System.Windows.Forms.Label();
-            contactLabel = new System.Windows.Forms.Label();
-            countryCodeLabel = new System.Windows.Forms.Label();
-            emailLabel = new System.Windows.Forms.Label();
-            faxNumberLabel = new System.Windows.Forms.Label();
-            groupNoLabel = new System.Windows.Forms.Label();
-            isGroupLabel = new System.Windows.Forms.Label();
-            pMNameLabel = new System.Windows.Forms.Label();
-            addressENLabel = new System.Windows.Forms.Label();
-            addressCNLabel = new System.Windows.Forms.Label();
-            clientNoLabel = new System.Windows.Forms.Label();
-            clientNameEN_1Label = new System.Windows.Forms.Label();
-            clientNameEN_2Label = new System.Windows.Forms.Label();
-            provinceCNLabel = new System.Windows.Forms.Label();
-            provinceENLabel = new System.Windows.Forms.Label();
-            postCodeLabel = new System.Windows.Forms.Label();
-            branchCodeLabel = new System.Windows.Forms.Label();
-            cellPhoneLabel = new System.Windows.Forms.Label();
-            clientLevelLabel = new System.Windows.Forms.Label();
-            clientTypeLabel = new System.Windows.Forms.Label();
-            commentLabel = new System.Windows.Forms.Label();
-            companyCodeLabel = new System.Windows.Forms.Label();
-            productCNLabel = new System.Windows.Forms.Label();
-            productENLabel = new System.Windows.Forms.Label();
-            registrationNumberLabel = new System.Windows.Forms.Label();
-            representativeLabel = new System.Windows.Forms.Label();
-            rMNameLabel = new System.Windows.Forms.Label();
-            telephoneLabel = new System.Windows.Forms.Label();
-            wetsiteLabel = new System.Windows.Forms.Label();
+            clientNameCNLabel = new DevComponents.DotNetBar.LabelX();
+            addressCNLabel = new DevComponents.DotNetBar.LabelX();
+            cityCNLabel = new DevComponents.DotNetBar.LabelX();
+            provinceCNLabel = new DevComponents.DotNetBar.LabelX();
+            productCNLabel = new DevComponents.DotNetBar.LabelX();
+            postCodeLabel = new DevComponents.DotNetBar.LabelX();
+            countryCodeLabel = new DevComponents.DotNetBar.LabelX();
+            representativeLabel = new DevComponents.DotNetBar.LabelX();
+            wetsiteLabel1 = new DevComponents.DotNetBar.LabelX();
+            contactLabel = new DevComponents.DotNetBar.LabelX();
+            telephoneLabel1 = new DevComponents.DotNetBar.LabelX();
+            emailLabel = new DevComponents.DotNetBar.LabelX();
+            faxNumberLabel = new DevComponents.DotNetBar.LabelX();
+            cellPhoneLabel = new DevComponents.DotNetBar.LabelX();
+            isGroupLabel = new DevComponents.DotNetBar.LabelX();
+            groupNoLabel = new DevComponents.DotNetBar.LabelX();
+            registrationNumberLabel = new DevComponents.DotNetBar.LabelX();
+            companyCodeLabel = new DevComponents.DotNetBar.LabelX();
+            clientTypeLabel = new DevComponents.DotNetBar.LabelX();
+            clientLevelLabel = new DevComponents.DotNetBar.LabelX();
+            branchCodeLabel = new DevComponents.DotNetBar.LabelX();
+            pMNameLabel = new DevComponents.DotNetBar.LabelX();
+            rMNameLabel = new DevComponents.DotNetBar.LabelX();
+            clientNoLabel = new DevComponents.DotNetBar.LabelX();
+            creditLineCurrencyLabel = new DevComponents.DotNetBar.LabelX();
+            creditLineTypeLabel = new DevComponents.DotNetBar.LabelX();
+            creditLineLabel = new DevComponents.DotNetBar.LabelX();
+            periodBeginLabel = new DevComponents.DotNetBar.LabelX();
+            approveNoLabel = new DevComponents.DotNetBar.LabelX();
+            approveTypeLabel = new DevComponents.DotNetBar.LabelX();
+            creditLineStatusLabel = new DevComponents.DotNetBar.LabelX();
+            freezeReasonLabel = new DevComponents.DotNetBar.LabelX();
+            freezerLabel = new DevComponents.DotNetBar.LabelX();
+            freezeDateLabel = new DevComponents.DotNetBar.LabelX();
+            unfreezeReasonLabel = new DevComponents.DotNetBar.LabelX();
+            unfreezerLabel = new DevComponents.DotNetBar.LabelX();
+            unfreezeDateLabel = new DevComponents.DotNetBar.LabelX();
+            commentLabel = new DevComponents.DotNetBar.LabelX();
+            commentLabel1 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
+            this.tabPanelClientCreditLine.SuspendLayout();
+            this.groupPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineBindingSource)).BeginInit();
+            this.groupPanel1.SuspendLayout();
             this.tabPanelClient.SuspendLayout();
-            this.groupPanelClientStat.SuspendLayout();
+            this.groupPanelClientContact.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).BeginInit();
+            this.groupPanelClientGroup.SuspendLayout();
+            this.groupPanelClientStat.SuspendLayout();
             this.groupPanelClientBasic.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // cityCNLabel
-            // 
-            cityCNLabel.AutoSize = true;
-            cityCNLabel.Location = new System.Drawing.Point(-2, 159);
-            cityCNLabel.Name = "cityCNLabel";
-            cityCNLabel.Size = new System.Drawing.Size(45, 13);
-            cityCNLabel.TabIndex = 8;
-            cityCNLabel.Text = "City CN:";
-            // 
-            // cityENLabel
-            // 
-            cityENLabel.AutoSize = true;
-            cityENLabel.Location = new System.Drawing.Point(-2, 185);
-            cityENLabel.Name = "cityENLabel";
-            cityENLabel.Size = new System.Drawing.Size(45, 13);
-            cityENLabel.TabIndex = 10;
-            cityENLabel.Text = "City EN:";
             // 
             // clientNameCNLabel
             // 
             clientNameCNLabel.AutoSize = true;
-            clientNameCNLabel.Location = new System.Drawing.Point(-2, 31);
+            clientNameCNLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            clientNameCNLabel.BackgroundStyle.Class = "";
+            clientNameCNLabel.Location = new System.Drawing.Point(52, 28);
             clientNameCNLabel.Name = "clientNameCNLabel";
-            clientNameCNLabel.Size = new System.Drawing.Size(85, 13);
-            clientNameCNLabel.TabIndex = 14;
-            clientNameCNLabel.Text = "Client Name CN:";
+            clientNameCNLabel.Size = new System.Drawing.Size(34, 16);
+            clientNameCNLabel.TabIndex = 84;
+            clientNameCNLabel.Text = "客户:";
             // 
-            // contactLabel
+            // addressCNLabel
             // 
-            contactLabel.AutoSize = true;
-            contactLabel.Location = new System.Drawing.Point(271, 163);
-            contactLabel.Name = "contactLabel";
-            contactLabel.Size = new System.Drawing.Size(47, 13);
-            contactLabel.TabIndex = 28;
-            contactLabel.Text = "Contact:";
+            addressCNLabel.AutoSize = true;
+            addressCNLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            addressCNLabel.BackgroundStyle.Class = "";
+            addressCNLabel.Location = new System.Drawing.Point(51, 87);
+            addressCNLabel.Name = "addressCNLabel";
+            addressCNLabel.Size = new System.Drawing.Size(34, 16);
+            addressCNLabel.TabIndex = 87;
+            addressCNLabel.Text = "地址:";
+            // 
+            // cityCNLabel
+            // 
+            cityCNLabel.AutoSize = true;
+            cityCNLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            cityCNLabel.BackgroundStyle.Class = "";
+            cityCNLabel.Location = new System.Drawing.Point(50, 127);
+            cityCNLabel.Name = "cityCNLabel";
+            cityCNLabel.Size = new System.Drawing.Size(34, 16);
+            cityCNLabel.TabIndex = 89;
+            cityCNLabel.Text = "城市:";
+            // 
+            // provinceCNLabel
+            // 
+            provinceCNLabel.AutoSize = true;
+            provinceCNLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            provinceCNLabel.BackgroundStyle.Class = "";
+            provinceCNLabel.Location = new System.Drawing.Point(48, 147);
+            provinceCNLabel.Name = "provinceCNLabel";
+            provinceCNLabel.Size = new System.Drawing.Size(37, 16);
+            provinceCNLabel.TabIndex = 91;
+            provinceCNLabel.Text = "省/州:";
+            // 
+            // productCNLabel
+            // 
+            productCNLabel.AutoSize = true;
+            productCNLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            productCNLabel.BackgroundStyle.Class = "";
+            productCNLabel.Location = new System.Drawing.Point(398, 4);
+            productCNLabel.Name = "productCNLabel";
+            productCNLabel.Size = new System.Drawing.Size(59, 16);
+            productCNLabel.TabIndex = 93;
+            productCNLabel.Text = "经营范围:";
+            // 
+            // postCodeLabel
+            // 
+            postCodeLabel.AutoSize = true;
+            postCodeLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            postCodeLabel.BackgroundStyle.Class = "";
+            postCodeLabel.Location = new System.Drawing.Point(51, 192);
+            postCodeLabel.Name = "postCodeLabel";
+            postCodeLabel.Size = new System.Drawing.Size(34, 16);
+            postCodeLabel.TabIndex = 95;
+            postCodeLabel.Text = "邮编:";
             // 
             // countryCodeLabel
             // 
             countryCodeLabel.AutoSize = true;
-            countryCodeLabel.Location = new System.Drawing.Point(271, 189);
+            countryCodeLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            countryCodeLabel.BackgroundStyle.Class = "";
+            countryCodeLabel.Location = new System.Drawing.Point(50, 170);
             countryCodeLabel.Name = "countryCodeLabel";
-            countryCodeLabel.Size = new System.Drawing.Size(74, 13);
-            countryCodeLabel.TabIndex = 30;
-            countryCodeLabel.Text = "Country Code:";
+            countryCodeLabel.Size = new System.Drawing.Size(34, 16);
+            countryCodeLabel.TabIndex = 96;
+            countryCodeLabel.Text = "国家:";
+            // 
+            // representativeLabel
+            // 
+            representativeLabel.AutoSize = true;
+            representativeLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            representativeLabel.BackgroundStyle.Class = "";
+            representativeLabel.Location = new System.Drawing.Point(29, 10);
+            representativeLabel.Name = "representativeLabel";
+            representativeLabel.Size = new System.Drawing.Size(59, 16);
+            representativeLabel.TabIndex = 0;
+            representativeLabel.Text = "公司法人:";
+            // 
+            // wetsiteLabel1
+            // 
+            wetsiteLabel1.AutoSize = true;
+            wetsiteLabel1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            wetsiteLabel1.BackgroundStyle.Class = "";
+            wetsiteLabel1.Location = new System.Drawing.Point(202, 10);
+            wetsiteLabel1.Name = "wetsiteLabel1";
+            wetsiteLabel1.Size = new System.Drawing.Size(59, 16);
+            wetsiteLabel1.TabIndex = 2;
+            wetsiteLabel1.Text = "公司网址:";
+            // 
+            // contactLabel
+            // 
+            contactLabel.AutoSize = true;
+            contactLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            contactLabel.BackgroundStyle.Class = "";
+            contactLabel.Location = new System.Drawing.Point(39, 30);
+            contactLabel.Name = "contactLabel";
+            contactLabel.Size = new System.Drawing.Size(47, 16);
+            contactLabel.TabIndex = 4;
+            contactLabel.Text = "联系人:";
+            // 
+            // telephoneLabel1
+            // 
+            telephoneLabel1.AutoSize = true;
+            telephoneLabel1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            telephoneLabel1.BackgroundStyle.Class = "";
+            telephoneLabel1.Location = new System.Drawing.Point(202, 30);
+            telephoneLabel1.Name = "telephoneLabel1";
+            telephoneLabel1.Size = new System.Drawing.Size(59, 16);
+            telephoneLabel1.TabIndex = 6;
+            telephoneLabel1.Text = "联系电话:";
             // 
             // emailLabel
             // 
             emailLabel.AutoSize = true;
-            emailLabel.Location = new System.Drawing.Point(271, 215);
+            emailLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            emailLabel.BackgroundStyle.Class = "";
+            emailLabel.Location = new System.Drawing.Point(48, 50);
             emailLabel.Name = "emailLabel";
-            emailLabel.Size = new System.Drawing.Size(35, 13);
-            emailLabel.TabIndex = 32;
+            emailLabel.Size = new System.Drawing.Size(38, 16);
+            emailLabel.TabIndex = 8;
             emailLabel.Text = "Email:";
             // 
             // faxNumberLabel
             // 
             faxNumberLabel.AutoSize = true;
-            faxNumberLabel.Location = new System.Drawing.Point(271, 241);
+            faxNumberLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            faxNumberLabel.BackgroundStyle.Class = "";
+            faxNumberLabel.Location = new System.Drawing.Point(201, 49);
             faxNumberLabel.Name = "faxNumberLabel";
-            faxNumberLabel.Size = new System.Drawing.Size(67, 13);
-            faxNumberLabel.TabIndex = 34;
-            faxNumberLabel.Text = "Fax Number:";
-            // 
-            // groupNoLabel
-            // 
-            groupNoLabel.AutoSize = true;
-            groupNoLabel.Location = new System.Drawing.Point(271, 267);
-            groupNoLabel.Name = "groupNoLabel";
-            groupNoLabel.Size = new System.Drawing.Size(56, 13);
-            groupNoLabel.TabIndex = 36;
-            groupNoLabel.Text = "Group No:";
-            // 
-            // isGroupLabel
-            // 
-            isGroupLabel.AutoSize = true;
-            isGroupLabel.Location = new System.Drawing.Point(271, 293);
-            isGroupLabel.Name = "isGroupLabel";
-            isGroupLabel.Size = new System.Drawing.Size(50, 13);
-            isGroupLabel.TabIndex = 38;
-            isGroupLabel.Text = "Is Group:";
-            // 
-            // pMNameLabel
-            // 
-            pMNameLabel.AutoSize = true;
-            pMNameLabel.Location = new System.Drawing.Point(5, 32);
-            pMNameLabel.Name = "pMNameLabel";
-            pMNameLabel.Size = new System.Drawing.Size(54, 13);
-            pMNameLabel.TabIndex = 40;
-            pMNameLabel.Text = "PMName:";
-            // 
-            // addressENLabel
-            // 
-            addressENLabel.AutoSize = true;
-            addressENLabel.Location = new System.Drawing.Point(-2, 133);
-            addressENLabel.Name = "addressENLabel";
-            addressENLabel.Size = new System.Drawing.Size(66, 13);
-            addressENLabel.TabIndex = 2;
-            addressENLabel.Text = "Address EN:";
-            // 
-            // addressCNLabel
-            // 
-            addressCNLabel.AutoSize = true;
-            addressCNLabel.Location = new System.Drawing.Point(-2, 107);
-            addressCNLabel.Name = "addressCNLabel";
-            addressCNLabel.Size = new System.Drawing.Size(66, 13);
-            addressCNLabel.TabIndex = 0;
-            addressCNLabel.Text = "Address CN:";
-            // 
-            // clientNoLabel
-            // 
-            clientNoLabel.AutoSize = true;
-            clientNoLabel.Location = new System.Drawing.Point(-2, 9);
-            clientNoLabel.Name = "clientNoLabel";
-            clientNoLabel.Size = new System.Drawing.Size(53, 13);
-            clientNoLabel.TabIndex = 22;
-            clientNoLabel.Text = "Client No:";
-            // 
-            // clientNameEN_1Label
-            // 
-            clientNameEN_1Label.AutoSize = true;
-            clientNameEN_1Label.Location = new System.Drawing.Point(-2, 56);
-            clientNameEN_1Label.Name = "clientNameEN_1Label";
-            clientNameEN_1Label.Size = new System.Drawing.Size(94, 13);
-            clientNameEN_1Label.TabIndex = 24;
-            clientNameEN_1Label.Text = "Client Name EN 1:";
-            // 
-            // clientNameEN_2Label
-            // 
-            clientNameEN_2Label.AutoSize = true;
-            clientNameEN_2Label.Location = new System.Drawing.Point(-2, 82);
-            clientNameEN_2Label.Name = "clientNameEN_2Label";
-            clientNameEN_2Label.Size = new System.Drawing.Size(94, 13);
-            clientNameEN_2Label.TabIndex = 26;
-            clientNameEN_2Label.Text = "Client Name EN 2:";
-            // 
-            // provinceCNLabel
-            // 
-            provinceCNLabel.AutoSize = true;
-            provinceCNLabel.Location = new System.Drawing.Point(-2, 209);
-            provinceCNLabel.Name = "provinceCNLabel";
-            provinceCNLabel.Size = new System.Drawing.Size(70, 13);
-            provinceCNLabel.TabIndex = 52;
-            provinceCNLabel.Text = "Province CN:";
-            // 
-            // provinceENLabel
-            // 
-            provinceENLabel.AutoSize = true;
-            provinceENLabel.Location = new System.Drawing.Point(-2, 235);
-            provinceENLabel.Name = "provinceENLabel";
-            provinceENLabel.Size = new System.Drawing.Size(70, 13);
-            provinceENLabel.TabIndex = 54;
-            provinceENLabel.Text = "Province EN:";
-            // 
-            // postCodeLabel
-            // 
-            postCodeLabel.AutoSize = true;
-            postCodeLabel.Location = new System.Drawing.Point(-2, 264);
-            postCodeLabel.Name = "postCodeLabel";
-            postCodeLabel.Size = new System.Drawing.Size(59, 13);
-            postCodeLabel.TabIndex = 56;
-            postCodeLabel.Text = "Post Code:";
-            // 
-            // branchCodeLabel
-            // 
-            branchCodeLabel.AutoSize = true;
-            branchCodeLabel.Location = new System.Drawing.Point(7, 9);
-            branchCodeLabel.Name = "branchCodeLabel";
-            branchCodeLabel.Size = new System.Drawing.Size(72, 13);
-            branchCodeLabel.TabIndex = 58;
-            branchCodeLabel.Text = "Branch Code:";
+            faxNumberLabel.Size = new System.Drawing.Size(59, 16);
+            faxNumberLabel.TabIndex = 10;
+            faxNumberLabel.Text = "传真号码:";
             // 
             // cellPhoneLabel
             // 
             cellPhoneLabel.AutoSize = true;
-            cellPhoneLabel.Location = new System.Drawing.Point(271, 35);
+            cellPhoneLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            cellPhoneLabel.BackgroundStyle.Class = "";
+            cellPhoneLabel.Location = new System.Drawing.Point(26, 69);
             cellPhoneLabel.Name = "cellPhoneLabel";
-            cellPhoneLabel.Size = new System.Drawing.Size(61, 13);
-            cellPhoneLabel.TabIndex = 60;
-            cellPhoneLabel.Text = "Cell Phone:";
+            cellPhoneLabel.Size = new System.Drawing.Size(59, 16);
+            cellPhoneLabel.TabIndex = 12;
+            cellPhoneLabel.Text = "手机号码:";
             // 
-            // clientLevelLabel
+            // isGroupLabel
             // 
-            clientLevelLabel.AutoSize = true;
-            clientLevelLabel.Location = new System.Drawing.Point(271, 60);
-            clientLevelLabel.Name = "clientLevelLabel";
-            clientLevelLabel.Size = new System.Drawing.Size(65, 13);
-            clientLevelLabel.TabIndex = 62;
-            clientLevelLabel.Text = "Client Level:";
+            isGroupLabel.AutoSize = true;
+            isGroupLabel.BackColor = System.Drawing.Color.Transparent;
             // 
-            // clientTypeLabel
             // 
-            clientTypeLabel.AutoSize = true;
-            clientTypeLabel.Location = new System.Drawing.Point(273, 86);
-            clientTypeLabel.Name = "clientTypeLabel";
-            clientTypeLabel.Size = new System.Drawing.Size(63, 13);
-            clientTypeLabel.TabIndex = 64;
-            clientTypeLabel.Text = "Client Type:";
             // 
-            // commentLabel
+            isGroupLabel.BackgroundStyle.Class = "";
+            isGroupLabel.Location = new System.Drawing.Point(3, 9);
+            isGroupLabel.Name = "isGroupLabel";
+            isGroupLabel.Size = new System.Drawing.Size(84, 16);
+            isGroupLabel.TabIndex = 1;
+            isGroupLabel.Text = "是否集团客户:";
             // 
-            commentLabel.AutoSize = true;
-            commentLabel.Location = new System.Drawing.Point(273, 112);
-            commentLabel.Name = "commentLabel";
-            commentLabel.Size = new System.Drawing.Size(54, 13);
-            commentLabel.TabIndex = 66;
-            commentLabel.Text = "Comment:";
+            // groupNoLabel
             // 
-            // companyCodeLabel
+            groupNoLabel.AutoSize = true;
+            groupNoLabel.BackColor = System.Drawing.Color.Transparent;
             // 
-            companyCodeLabel.AutoSize = true;
-            companyCodeLabel.Location = new System.Drawing.Point(273, 138);
-            companyCodeLabel.Name = "companyCodeLabel";
-            companyCodeLabel.Size = new System.Drawing.Size(82, 13);
-            companyCodeLabel.TabIndex = 68;
-            companyCodeLabel.Text = "Company Code:";
             // 
-            // productCNLabel
             // 
-            productCNLabel.AutoSize = true;
-            productCNLabel.Location = new System.Drawing.Point(-2, 290);
-            productCNLabel.Name = "productCNLabel";
-            productCNLabel.Size = new System.Drawing.Size(65, 13);
-            productCNLabel.TabIndex = 70;
-            productCNLabel.Text = "Product CN:";
-            // 
-            // productENLabel
-            // 
-            productENLabel.AutoSize = true;
-            productENLabel.Location = new System.Drawing.Point(-2, 316);
-            productENLabel.Name = "productENLabel";
-            productENLabel.Size = new System.Drawing.Size(65, 13);
-            productENLabel.TabIndex = 72;
-            productENLabel.Text = "Product EN:";
+            groupNoLabel.BackgroundStyle.Class = "";
+            groupNoLabel.Location = new System.Drawing.Point(203, 6);
+            groupNoLabel.Name = "groupNoLabel";
+            groupNoLabel.Size = new System.Drawing.Size(97, 16);
+            groupNoLabel.TabIndex = 2;
+            groupNoLabel.Text = "所属集团客户号:";
             // 
             // registrationNumberLabel
             // 
             registrationNumberLabel.AutoSize = true;
-            registrationNumberLabel.Location = new System.Drawing.Point(-2, 340);
+            registrationNumberLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            registrationNumberLabel.BackgroundStyle.Class = "";
+            registrationNumberLabel.Location = new System.Drawing.Point(375, 10);
             registrationNumberLabel.Name = "registrationNumberLabel";
-            registrationNumberLabel.Size = new System.Drawing.Size(106, 13);
-            registrationNumberLabel.TabIndex = 74;
-            registrationNumberLabel.Text = "Registration Number:";
+            registrationNumberLabel.Size = new System.Drawing.Size(84, 16);
+            registrationNumberLabel.TabIndex = 14;
+            registrationNumberLabel.Text = "营业执照号码:";
             // 
-            // representativeLabel
+            // companyCodeLabel
             // 
-            representativeLabel.AutoSize = true;
-            representativeLabel.Location = new System.Drawing.Point(-2, 366);
-            representativeLabel.Name = "representativeLabel";
-            representativeLabel.Size = new System.Drawing.Size(82, 13);
-            representativeLabel.TabIndex = 76;
-            representativeLabel.Text = "Representative:";
+            companyCodeLabel.AutoSize = true;
+            companyCodeLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            companyCodeLabel.BackgroundStyle.Class = "";
+            companyCodeLabel.Location = new System.Drawing.Point(375, 30);
+            companyCodeLabel.Name = "companyCodeLabel";
+            companyCodeLabel.Size = new System.Drawing.Size(84, 16);
+            companyCodeLabel.TabIndex = 16;
+            companyCodeLabel.Text = "组织机构代码:";
+            // 
+            // clientTypeLabel
+            // 
+            clientTypeLabel.AutoSize = true;
+            clientTypeLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            clientTypeLabel.BackgroundStyle.Class = "";
+            clientTypeLabel.Location = new System.Drawing.Point(26, 9);
+            clientTypeLabel.Name = "clientTypeLabel";
+            clientTypeLabel.Size = new System.Drawing.Size(59, 16);
+            clientTypeLabel.TabIndex = 0;
+            clientTypeLabel.Text = "客户类型:";
+            // 
+            // clientLevelLabel
+            // 
+            clientLevelLabel.AutoSize = true;
+            clientLevelLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            clientLevelLabel.BackgroundStyle.Class = "";
+            clientLevelLabel.Location = new System.Drawing.Point(203, 9);
+            clientLevelLabel.Name = "clientLevelLabel";
+            clientLevelLabel.Size = new System.Drawing.Size(59, 16);
+            clientLevelLabel.TabIndex = 2;
+            clientLevelLabel.Text = "客户级别:";
+            // 
+            // branchCodeLabel
+            // 
+            branchCodeLabel.AutoSize = true;
+            branchCodeLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            branchCodeLabel.BackgroundStyle.Class = "";
+            branchCodeLabel.Location = new System.Drawing.Point(25, 32);
+            branchCodeLabel.Name = "branchCodeLabel";
+            branchCodeLabel.Size = new System.Drawing.Size(59, 16);
+            branchCodeLabel.TabIndex = 4;
+            branchCodeLabel.Text = "所属机构:";
+            // 
+            // pMNameLabel
+            // 
+            pMNameLabel.AutoSize = true;
+            pMNameLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            pMNameLabel.BackgroundStyle.Class = "";
+            pMNameLabel.Location = new System.Drawing.Point(25, 54);
+            pMNameLabel.Name = "pMNameLabel";
+            pMNameLabel.Size = new System.Drawing.Size(59, 16);
+            pMNameLabel.TabIndex = 6;
+            pMNameLabel.Text = "产品经理:";
             // 
             // rMNameLabel
             // 
             rMNameLabel.AutoSize = true;
-            rMNameLabel.Location = new System.Drawing.Point(280, 38);
+            rMNameLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            rMNameLabel.BackgroundStyle.Class = "";
+            rMNameLabel.Location = new System.Drawing.Point(203, 55);
             rMNameLabel.Name = "rMNameLabel";
-            rMNameLabel.Size = new System.Drawing.Size(55, 13);
-            rMNameLabel.TabIndex = 78;
-            rMNameLabel.Text = "RMName:";
+            rMNameLabel.Size = new System.Drawing.Size(59, 16);
+            rMNameLabel.TabIndex = 8;
+            rMNameLabel.Text = "客户经理:";
             // 
-            // telephoneLabel
+            // clientNoLabel
             // 
-            telephoneLabel.AutoSize = true;
-            telephoneLabel.Location = new System.Drawing.Point(-2, 472);
-            telephoneLabel.Name = "telephoneLabel";
-            telephoneLabel.Size = new System.Drawing.Size(61, 13);
-            telephoneLabel.TabIndex = 80;
-            telephoneLabel.Text = "Telephone:";
+            clientNoLabel.AutoSize = true;
+            clientNoLabel.BackColor = System.Drawing.Color.Transparent;
             // 
-            // wetsiteLabel
             // 
-            wetsiteLabel.AutoSize = true;
-            wetsiteLabel.Location = new System.Drawing.Point(-2, 498);
-            wetsiteLabel.Name = "wetsiteLabel";
-            wetsiteLabel.Size = new System.Drawing.Size(46, 13);
-            wetsiteLabel.TabIndex = 82;
-            wetsiteLabel.Text = "Wetsite:";
+            // 
+            clientNoLabel.BackgroundStyle.Class = "";
+            clientNoLabel.Location = new System.Drawing.Point(3, 7);
+            clientNoLabel.Name = "clientNoLabel";
+            clientNoLabel.Size = new System.Drawing.Size(84, 16);
+            clientNoLabel.TabIndex = 97;
+            clientNoLabel.Text = "客户保理代码:";
+            // 
+            // creditLineCurrencyLabel
+            // 
+            creditLineCurrencyLabel.AutoSize = true;
+            creditLineCurrencyLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            creditLineCurrencyLabel.BackgroundStyle.Class = "";
+            creditLineCurrencyLabel.Location = new System.Drawing.Point(26, 32);
+            creditLineCurrencyLabel.Name = "creditLineCurrencyLabel";
+            creditLineCurrencyLabel.Size = new System.Drawing.Size(59, 16);
+            creditLineCurrencyLabel.TabIndex = 2;
+            creditLineCurrencyLabel.Text = "额度币别:";
+            // 
+            // creditLineTypeLabel
+            // 
+            creditLineTypeLabel.AutoSize = true;
+            creditLineTypeLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            creditLineTypeLabel.BackgroundStyle.Class = "";
+            creditLineTypeLabel.Location = new System.Drawing.Point(26, 11);
+            creditLineTypeLabel.Name = "creditLineTypeLabel";
+            creditLineTypeLabel.Size = new System.Drawing.Size(59, 16);
+            creditLineTypeLabel.TabIndex = 3;
+            creditLineTypeLabel.Text = "额度种类:";
+            // 
+            // creditLineLabel
+            // 
+            creditLineLabel.AutoSize = true;
+            creditLineLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            creditLineLabel.BackgroundStyle.Class = "";
+            creditLineLabel.Location = new System.Drawing.Point(26, 54);
+            creditLineLabel.Name = "creditLineLabel";
+            creditLineLabel.Size = new System.Drawing.Size(59, 16);
+            creditLineLabel.TabIndex = 4;
+            creditLineLabel.Text = "额度上限:";
+            // 
+            // periodBeginLabel
+            // 
+            periodBeginLabel.AutoSize = true;
+            periodBeginLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            periodBeginLabel.BackgroundStyle.Class = "";
+            periodBeginLabel.Location = new System.Drawing.Point(227, 10);
+            periodBeginLabel.Name = "periodBeginLabel";
+            periodBeginLabel.Size = new System.Drawing.Size(59, 16);
+            periodBeginLabel.TabIndex = 6;
+            periodBeginLabel.Text = "有效期限:";
+            // 
+            // approveNoLabel
+            // 
+            approveNoLabel.AutoSize = true;
+            approveNoLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            approveNoLabel.BackgroundStyle.Class = "";
+            approveNoLabel.Location = new System.Drawing.Point(227, 32);
+            approveNoLabel.Name = "approveNoLabel";
+            approveNoLabel.Size = new System.Drawing.Size(59, 16);
+            approveNoLabel.TabIndex = 10;
+            approveNoLabel.Text = "授信编号:";
+            // 
+            // approveTypeLabel
+            // 
+            approveTypeLabel.AutoSize = true;
+            approveTypeLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            approveTypeLabel.BackgroundStyle.Class = "";
+            approveTypeLabel.Location = new System.Drawing.Point(228, 54);
+            approveTypeLabel.Name = "approveTypeLabel";
+            approveTypeLabel.Size = new System.Drawing.Size(59, 16);
+            approveTypeLabel.TabIndex = 12;
+            approveTypeLabel.Text = "授信类型:";
+            // 
+            // creditLineStatusLabel
+            // 
+            creditLineStatusLabel.AutoSize = true;
+            creditLineStatusLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            creditLineStatusLabel.BackgroundStyle.Class = "";
+            creditLineStatusLabel.Location = new System.Drawing.Point(26, 75);
+            creditLineStatusLabel.Name = "creditLineStatusLabel";
+            creditLineStatusLabel.Size = new System.Drawing.Size(59, 16);
+            creditLineStatusLabel.TabIndex = 14;
+            creditLineStatusLabel.Text = "额度状态:";
+            // 
+            // freezeReasonLabel
+            // 
+            freezeReasonLabel.AutoSize = true;
+            freezeReasonLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            freezeReasonLabel.BackgroundStyle.Class = "";
+            freezeReasonLabel.Location = new System.Drawing.Point(26, 144);
+            freezeReasonLabel.Name = "freezeReasonLabel";
+            freezeReasonLabel.Size = new System.Drawing.Size(59, 16);
+            freezeReasonLabel.TabIndex = 0;
+            freezeReasonLabel.Text = "冻结原因:";
+            // 
+            // freezerLabel
+            // 
+            freezerLabel.AutoSize = true;
+            freezerLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            freezerLabel.BackgroundStyle.Class = "";
+            freezerLabel.Location = new System.Drawing.Point(39, 186);
+            freezerLabel.Name = "freezerLabel";
+            freezerLabel.Size = new System.Drawing.Size(47, 16);
+            freezerLabel.TabIndex = 2;
+            freezerLabel.Text = "经办人:";
+            // 
+            // freezeDateLabel
+            // 
+            freezeDateLabel.AutoSize = true;
+            freezeDateLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            freezeDateLabel.BackgroundStyle.Class = "";
+            freezeDateLabel.Location = new System.Drawing.Point(233, 186);
+            freezeDateLabel.Name = "freezeDateLabel";
+            freezeDateLabel.Size = new System.Drawing.Size(59, 16);
+            freezeDateLabel.TabIndex = 4;
+            freezeDateLabel.Text = "冻结日期:";
+            // 
+            // unfreezeReasonLabel
+            // 
+            unfreezeReasonLabel.AutoSize = true;
+            unfreezeReasonLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            unfreezeReasonLabel.BackgroundStyle.Class = "";
+            unfreezeReasonLabel.Location = new System.Drawing.Point(32, 216);
+            unfreezeReasonLabel.Name = "unfreezeReasonLabel";
+            unfreezeReasonLabel.Size = new System.Drawing.Size(59, 16);
+            unfreezeReasonLabel.TabIndex = 1;
+            unfreezeReasonLabel.Text = "解冻原因:";
+            // 
+            // unfreezerLabel
+            // 
+            unfreezerLabel.AutoSize = true;
+            unfreezerLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            unfreezerLabel.BackgroundStyle.Class = "";
+            unfreezerLabel.Location = new System.Drawing.Point(39, 256);
+            unfreezerLabel.Name = "unfreezerLabel";
+            unfreezerLabel.Size = new System.Drawing.Size(47, 16);
+            unfreezerLabel.TabIndex = 3;
+            unfreezerLabel.Text = "经办人:";
+            // 
+            // unfreezeDateLabel
+            // 
+            unfreezeDateLabel.AutoSize = true;
+            unfreezeDateLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            unfreezeDateLabel.BackgroundStyle.Class = "";
+            unfreezeDateLabel.Location = new System.Drawing.Point(233, 256);
+            unfreezeDateLabel.Name = "unfreezeDateLabel";
+            unfreezeDateLabel.Size = new System.Drawing.Size(59, 16);
+            unfreezeDateLabel.TabIndex = 5;
+            unfreezeDateLabel.Text = "解冻日期:";
+            // 
+            // commentLabel
+            // 
+            commentLabel.AutoSize = true;
+            commentLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            commentLabel.BackgroundStyle.Class = "";
+            commentLabel.Location = new System.Drawing.Point(395, 128);
+            commentLabel.Name = "commentLabel";
+            commentLabel.Size = new System.Drawing.Size(34, 16);
+            commentLabel.TabIndex = 97;
+            commentLabel.Text = "备注:";
+            // 
+            // commentLabel1
+            // 
+            commentLabel1.AutoSize = true;
+            commentLabel1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            commentLabel1.BackgroundStyle.Class = "";
+            commentLabel1.Location = new System.Drawing.Point(50, 97);
+            commentLabel1.Name = "commentLabel1";
+            commentLabel1.Size = new System.Drawing.Size(34, 16);
+            commentLabel1.TabIndex = 32;
+            commentLabel1.Text = "备注:";
             // 
             // tabControl
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelClient);
             this.tabControl.Controls.Add(this.tabPanelClientCreditLine);
             this.tabControl.Controls.Add(this.tabPanelClientAccount);
+            this.tabControl.Controls.Add(this.tabPanelClient);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl.SelectedTabIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(690, 632);
+            this.tabControl.Size = new System.Drawing.Size(595, 562);
             this.tabControl.TabIndex = 0;
             this.tabControl.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl.Tabs.Add(this.tabItemClient);
@@ -447,10 +785,543 @@
             this.tabControl.Tabs.Add(this.tabItemClientAccount);
             this.tabControl.Text = "tabControl1";
             // 
+            // tabPanelClientCreditLine
+            // 
+            this.tabPanelClientCreditLine.AutoScroll = true;
+            this.tabPanelClientCreditLine.Controls.Add(this.groupPanel2);
+            this.tabPanelClientCreditLine.Controls.Add(this.groupPanel1);
+            this.tabPanelClientCreditLine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelClientCreditLine.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelClientCreditLine.Name = "tabPanelClientCreditLine";
+            this.tabPanelClientCreditLine.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelClientCreditLine.Size = new System.Drawing.Size(595, 536);
+            this.tabPanelClientCreditLine.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelClientCreditLine.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelClientCreditLine.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelClientCreditLine.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelClientCreditLine.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelClientCreditLine.Style.GradientAngle = 90;
+            this.tabPanelClientCreditLine.TabIndex = 2;
+            this.tabPanelClientCreditLine.TabItem = this.tabItemClientCreditLine;
+            // 
+            // groupPanel2
+            // 
+            this.groupPanel2.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanel2.Controls.Add(this.clientCreditLineDataGridView);
+            this.groupPanel2.Location = new System.Drawing.Point(0, 326);
+            this.groupPanel2.Name = "groupPanel2";
+            this.groupPanel2.Size = new System.Drawing.Size(591, 198);
+            // 
+            // 
+            // 
+            this.groupPanel2.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanel2.Style.BackColorGradientAngle = 90;
+            this.groupPanel2.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanel2.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel2.Style.BorderBottomWidth = 1;
+            this.groupPanel2.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanel2.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel2.Style.BorderLeftWidth = 1;
+            this.groupPanel2.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel2.Style.BorderRightWidth = 1;
+            this.groupPanel2.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel2.Style.BorderTopWidth = 1;
+            this.groupPanel2.Style.Class = "";
+            this.groupPanel2.Style.CornerDiameter = 4;
+            this.groupPanel2.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanel2.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanel2.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanel2.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanel2.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanel2.StyleMouseOver.Class = "";
+            this.groupPanel2.TabIndex = 1;
+            // 
+            // clientCreditLineDataGridView
+            // 
+            this.clientCreditLineDataGridView.AllowUserToAddRows = false;
+            this.clientCreditLineDataGridView.AllowUserToDeleteRows = false;
+            this.clientCreditLineDataGridView.AllowUserToOrderColumns = true;
+            this.clientCreditLineDataGridView.AutoGenerateColumns = false;
+            this.clientCreditLineDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.clientCreditLineDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10,
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn14,
+            this.dataGridViewTextBoxColumn15,
+            this.dataGridViewTextBoxColumn16,
+            this.dataGridViewTextBoxColumn17});
+            this.clientCreditLineDataGridView.DataSource = this.clientCreditLineBindingSource;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.clientCreditLineDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            this.clientCreditLineDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clientCreditLineDataGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.clientCreditLineDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.clientCreditLineDataGridView.Name = "clientCreditLineDataGridView";
+            this.clientCreditLineDataGridView.ReadOnly = true;
+            this.clientCreditLineDataGridView.Size = new System.Drawing.Size(585, 192);
+            this.clientCreditLineDataGridView.TabIndex = 0;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "CreditLineID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "CreditLineID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "CreditLineType";
+            this.dataGridViewTextBoxColumn3.HeaderText = "额度种类";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "CreditLineCurrency";
+            this.dataGridViewTextBoxColumn4.HeaderText = "额度币种";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "CreditLine";
+            this.dataGridViewTextBoxColumn5.HeaderText = "额度上限";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "PeriodBegin";
+            this.dataGridViewTextBoxColumn6.HeaderText = "有效期(始)";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "PeriodEnd";
+            this.dataGridViewTextBoxColumn7.HeaderText = "有效期(终)";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "ApproveNo";
+            this.dataGridViewTextBoxColumn8.HeaderText = "授信编号";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "ApproveType";
+            this.dataGridViewTextBoxColumn9.HeaderText = "授信类型";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "CreditLineStatus";
+            this.dataGridViewTextBoxColumn10.HeaderText = "额度状态";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "FreezeReason";
+            this.dataGridViewTextBoxColumn11.HeaderText = "冻结原因";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "Freezer";
+            this.dataGridViewTextBoxColumn12.HeaderText = "冻结人";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "FreezeDate";
+            this.dataGridViewTextBoxColumn13.HeaderText = "冻结日期";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "UnfreezeReason";
+            this.dataGridViewTextBoxColumn14.HeaderText = "解冻原因";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "Unfreezer";
+            this.dataGridViewTextBoxColumn15.HeaderText = "解冻人";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "UnfreezeDate";
+            this.dataGridViewTextBoxColumn16.HeaderText = "解冻日期";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.DataPropertyName = "Comment";
+            this.dataGridViewTextBoxColumn17.HeaderText = "备注";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
+            // 
+            // clientCreditLineBindingSource
+            // 
+            this.clientCreditLineBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.ClientCreditLine);
+            // 
+            // groupPanel1
+            // 
+            this.groupPanel1.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanel1.Controls.Add(commentLabel1);
+            this.groupPanel1.Controls.Add(this.creditLineCommentTextBox);
+            this.groupPanel1.Controls.Add(unfreezeDateLabel);
+            this.groupPanel1.Controls.Add(freezeDateLabel);
+            this.groupPanel1.Controls.Add(this.unfreezeDateDateTimePicker);
+            this.groupPanel1.Controls.Add(this.buttonX5);
+            this.groupPanel1.Controls.Add(unfreezerLabel);
+            this.groupPanel1.Controls.Add(freezeReasonLabel);
+            this.groupPanel1.Controls.Add(this.unfreezerTextBox);
+            this.groupPanel1.Controls.Add(this.freezeDateDateTimePicker);
+            this.groupPanel1.Controls.Add(unfreezeReasonLabel);
+            this.groupPanel1.Controls.Add(this.buttonX4);
+            this.groupPanel1.Controls.Add(this.unfreezeReasonTextBox);
+            this.groupPanel1.Controls.Add(this.freezeReasonTextBox);
+            this.groupPanel1.Controls.Add(this.buttonX3);
+            this.groupPanel1.Controls.Add(freezerLabel);
+            this.groupPanel1.Controls.Add(this.buttonX2);
+            this.groupPanel1.Controls.Add(this.freezerTextBox);
+            this.groupPanel1.Controls.Add(this.buttonX1);
+            this.groupPanel1.Controls.Add(creditLineStatusLabel);
+            this.groupPanel1.Controls.Add(this.creditLineStatusTextBox);
+            this.groupPanel1.Controls.Add(approveTypeLabel);
+            this.groupPanel1.Controls.Add(this.approveTypeComboBox);
+            this.groupPanel1.Controls.Add(approveNoLabel);
+            this.groupPanel1.Controls.Add(this.approveNoTextBox);
+            this.groupPanel1.Controls.Add(this.periodEndDateTimePicker);
+            this.groupPanel1.Controls.Add(periodBeginLabel);
+            this.groupPanel1.Controls.Add(this.periodBeginDateTimePicker);
+            this.groupPanel1.Controls.Add(creditLineLabel);
+            this.groupPanel1.Controls.Add(this.creditLineTextBox);
+            this.groupPanel1.Controls.Add(creditLineTypeLabel);
+            this.groupPanel1.Controls.Add(this.creditLineTypeComboBox);
+            this.groupPanel1.Controls.Add(creditLineCurrencyLabel);
+            this.groupPanel1.Controls.Add(this.creditLineCurrencyComboBox);
+            this.groupPanel1.Location = new System.Drawing.Point(0, 4);
+            this.groupPanel1.Name = "groupPanel1";
+            this.groupPanel1.Size = new System.Drawing.Size(592, 316);
+            // 
+            // 
+            // 
+            this.groupPanel1.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanel1.Style.BackColorGradientAngle = 90;
+            this.groupPanel1.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanel1.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel1.Style.BorderBottomWidth = 1;
+            this.groupPanel1.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanel1.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel1.Style.BorderLeftWidth = 1;
+            this.groupPanel1.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel1.Style.BorderRightWidth = 1;
+            this.groupPanel1.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanel1.Style.BorderTopWidth = 1;
+            this.groupPanel1.Style.Class = "";
+            this.groupPanel1.Style.CornerDiameter = 4;
+            this.groupPanel1.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanel1.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanel1.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanel1.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanel1.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanel1.StyleMouseOver.Class = "";
+            this.groupPanel1.TabIndex = 0;
+            // 
+            // creditLineCommentTextBox
+            // 
+            // 
+            // 
+            // 
+            this.creditLineCommentTextBox.Border.Class = "";
+            this.creditLineCommentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "Comment", true));
+            this.creditLineCommentTextBox.Location = new System.Drawing.Point(90, 94);
+            this.creditLineCommentTextBox.Multiline = true;
+            this.creditLineCommentTextBox.Name = "creditLineCommentTextBox";
+            this.creditLineCommentTextBox.Size = new System.Drawing.Size(451, 42);
+            this.creditLineCommentTextBox.TabIndex = 33;
+            // 
+            // unfreezeDateDateTimePicker
+            // 
+            this.unfreezeDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.clientCreditLineBindingSource, "UnfreezeDate", true));
+            this.unfreezeDateDateTimePicker.Enabled = false;
+            this.unfreezeDateDateTimePicker.Location = new System.Drawing.Point(297, 253);
+            this.unfreezeDateDateTimePicker.Name = "unfreezeDateDateTimePicker";
+            this.unfreezeDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.unfreezeDateDateTimePicker.TabIndex = 6;
+            // 
+            // buttonX5
+            // 
+            this.buttonX5.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX5.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX5.Location = new System.Drawing.Point(454, 279);
+            this.buttonX5.Name = "buttonX5";
+            this.buttonX5.Size = new System.Drawing.Size(75, 23);
+            this.buttonX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX5.TabIndex = 20;
+            this.buttonX5.Text = "解冻";
+            // 
+            // unfreezerTextBox
+            // 
+            // 
+            // 
+            // 
+            this.unfreezerTextBox.Border.Class = "";
+            this.unfreezerTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "Unfreezer", true));
+            this.unfreezerTextBox.Location = new System.Drawing.Point(90, 253);
+            this.unfreezerTextBox.Name = "unfreezerTextBox";
+            this.unfreezerTextBox.ReadOnly = true;
+            this.unfreezerTextBox.Size = new System.Drawing.Size(100, 20);
+            this.unfreezerTextBox.TabIndex = 4;
+            // 
+            // freezeDateDateTimePicker
+            // 
+            this.freezeDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.clientCreditLineBindingSource, "FreezeDate", true));
+            this.freezeDateDateTimePicker.Enabled = false;
+            this.freezeDateDateTimePicker.Location = new System.Drawing.Point(297, 183);
+            this.freezeDateDateTimePicker.Name = "freezeDateDateTimePicker";
+            this.freezeDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.freezeDateDateTimePicker.TabIndex = 5;
+            // 
+            // buttonX4
+            // 
+            this.buttonX4.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX4.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX4.Location = new System.Drawing.Point(373, 279);
+            this.buttonX4.Name = "buttonX4";
+            this.buttonX4.Size = new System.Drawing.Size(75, 23);
+            this.buttonX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX4.TabIndex = 19;
+            this.buttonX4.Text = "冻结";
+            // 
+            // unfreezeReasonTextBox
+            // 
+            // 
+            // 
+            // 
+            this.unfreezeReasonTextBox.Border.Class = "";
+            this.unfreezeReasonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "UnfreezeReason", true));
+            this.unfreezeReasonTextBox.Location = new System.Drawing.Point(90, 209);
+            this.unfreezeReasonTextBox.Multiline = true;
+            this.unfreezeReasonTextBox.Name = "unfreezeReasonTextBox";
+            this.unfreezeReasonTextBox.ReadOnly = true;
+            this.unfreezeReasonTextBox.Size = new System.Drawing.Size(451, 38);
+            this.unfreezeReasonTextBox.TabIndex = 2;
+            // 
+            // freezeReasonTextBox
+            // 
+            // 
+            // 
+            // 
+            this.freezeReasonTextBox.Border.Class = "";
+            this.freezeReasonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "FreezeReason", true));
+            this.freezeReasonTextBox.Location = new System.Drawing.Point(90, 141);
+            this.freezeReasonTextBox.Multiline = true;
+            this.freezeReasonTextBox.Name = "freezeReasonTextBox";
+            this.freezeReasonTextBox.ReadOnly = true;
+            this.freezeReasonTextBox.Size = new System.Drawing.Size(451, 36);
+            this.freezeReasonTextBox.TabIndex = 1;
+            // 
+            // buttonX3
+            // 
+            this.buttonX3.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX3.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX3.Location = new System.Drawing.Point(292, 279);
+            this.buttonX3.Name = "buttonX3";
+            this.buttonX3.Size = new System.Drawing.Size(75, 23);
+            this.buttonX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX3.TabIndex = 18;
+            this.buttonX3.Text = "取消";
+            // 
+            // buttonX2
+            // 
+            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX2.Location = new System.Drawing.Point(211, 279);
+            this.buttonX2.Name = "buttonX2";
+            this.buttonX2.Size = new System.Drawing.Size(75, 23);
+            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX2.TabIndex = 17;
+            this.buttonX2.Text = "保存";
+            // 
+            // freezerTextBox
+            // 
+            // 
+            // 
+            // 
+            this.freezerTextBox.Border.Class = "";
+            this.freezerTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "Freezer", true));
+            this.freezerTextBox.Location = new System.Drawing.Point(90, 183);
+            this.freezerTextBox.Name = "freezerTextBox";
+            this.freezerTextBox.ReadOnly = true;
+            this.freezerTextBox.Size = new System.Drawing.Size(100, 20);
+            this.freezerTextBox.TabIndex = 3;
+            // 
+            // buttonX1
+            // 
+            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX1.Location = new System.Drawing.Point(130, 279);
+            this.buttonX1.Name = "buttonX1";
+            this.buttonX1.Size = new System.Drawing.Size(75, 23);
+            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX1.TabIndex = 16;
+            this.buttonX1.Text = "新建";
+            // 
+            // creditLineStatusTextBox
+            // 
+            // 
+            // 
+            // 
+            this.creditLineStatusTextBox.Border.Class = "";
+            this.creditLineStatusTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "CreditLineStatus", true));
+            this.creditLineStatusTextBox.Location = new System.Drawing.Point(90, 72);
+            this.creditLineStatusTextBox.Name = "creditLineStatusTextBox";
+            this.creditLineStatusTextBox.ReadOnly = true;
+            this.creditLineStatusTextBox.Size = new System.Drawing.Size(121, 20);
+            this.creditLineStatusTextBox.TabIndex = 15;
+            // 
+            // approveTypeComboBox
+            // 
+            this.approveTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "ApproveType", true));
+            this.approveTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.approveTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.approveTypeComboBox.FormattingEnabled = true;
+            this.approveTypeComboBox.Items.AddRange(new object[] {
+            "综合授信",
+            "国际双保理",
+            "进口保理",
+            "有追索权保理",
+            "无追索权保理"});
+            this.approveTypeComboBox.Location = new System.Drawing.Point(292, 51);
+            this.approveTypeComboBox.Name = "approveTypeComboBox";
+            this.approveTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.approveTypeComboBox.TabIndex = 13;
+            // 
+            // approveNoTextBox
+            // 
+            // 
+            // 
+            // 
+            this.approveNoTextBox.Border.Class = "";
+            this.approveNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "ApproveNo", true));
+            this.approveNoTextBox.Location = new System.Drawing.Point(291, 29);
+            this.approveNoTextBox.Name = "approveNoTextBox";
+            this.approveNoTextBox.Size = new System.Drawing.Size(122, 20);
+            this.approveNoTextBox.TabIndex = 11;
+            // 
+            // periodEndDateTimePicker
+            // 
+            this.periodEndDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.clientCreditLineBindingSource, "PeriodEnd", true));
+            this.periodEndDateTimePicker.Location = new System.Drawing.Point(419, 5);
+            this.periodEndDateTimePicker.Name = "periodEndDateTimePicker";
+            this.periodEndDateTimePicker.Size = new System.Drawing.Size(122, 20);
+            this.periodEndDateTimePicker.TabIndex = 9;
+            // 
+            // periodBeginDateTimePicker
+            // 
+            this.periodBeginDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.clientCreditLineBindingSource, "PeriodBegin", true));
+            this.periodBeginDateTimePicker.Location = new System.Drawing.Point(291, 5);
+            this.periodBeginDateTimePicker.Name = "periodBeginDateTimePicker";
+            this.periodBeginDateTimePicker.Size = new System.Drawing.Size(122, 20);
+            this.periodBeginDateTimePicker.TabIndex = 7;
+            // 
+            // creditLineTextBox
+            // 
+            // 
+            // 
+            // 
+            this.creditLineTextBox.Border.Class = "";
+            this.creditLineTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "CreditLine", true));
+            this.creditLineTextBox.Location = new System.Drawing.Point(90, 51);
+            this.creditLineTextBox.Name = "creditLineTextBox";
+            this.creditLineTextBox.Size = new System.Drawing.Size(121, 20);
+            this.creditLineTextBox.TabIndex = 5;
+            // 
+            // creditLineTypeComboBox
+            // 
+            this.creditLineTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "CreditLineType", true));
+            this.creditLineTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.creditLineTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.creditLineTypeComboBox.FormattingEnabled = true;
+            this.creditLineTypeComboBox.Items.AddRange(new object[] {
+            "保理预付款融资额度",
+            "买方信用风险担保额度"});
+            this.creditLineTypeComboBox.Location = new System.Drawing.Point(90, 7);
+            this.creditLineTypeComboBox.Name = "creditLineTypeComboBox";
+            this.creditLineTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.creditLineTypeComboBox.TabIndex = 4;
+            // 
+            // creditLineCurrencyComboBox
+            // 
+            this.creditLineCurrencyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "CreditLineCurrency", true));
+            this.creditLineCurrencyComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.creditLineCurrencyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.creditLineCurrencyComboBox.FormattingEnabled = true;
+            this.creditLineCurrencyComboBox.Location = new System.Drawing.Point(90, 29);
+            this.creditLineCurrencyComboBox.Name = "creditLineCurrencyComboBox";
+            this.creditLineCurrencyComboBox.Size = new System.Drawing.Size(121, 21);
+            this.creditLineCurrencyComboBox.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.creditLineCurrencyComboBox.TabIndex = 3;
+            // 
+            // tabItemClientCreditLine
+            // 
+            this.tabItemClientCreditLine.AttachedControl = this.tabPanelClientCreditLine;
+            this.tabItemClientCreditLine.Name = "tabItemClientCreditLine";
+            this.tabItemClientCreditLine.Text = "额度信息";
+            // 
             // tabPanelClient
             // 
             this.tabPanelClient.AutoScroll = true;
             this.tabPanelClient.AutoSize = true;
+            this.tabPanelClient.Controls.Add(this.groupPanelClientContact);
+            this.tabPanelClient.Controls.Add(this.groupPanelClientGroup);
             this.tabPanelClient.Controls.Add(this.btnCancel);
             this.tabPanelClient.Controls.Add(this.btnSave);
             this.tabPanelClient.Controls.Add(this.groupPanelClientStat);
@@ -459,7 +1330,7 @@
             this.tabPanelClient.Location = new System.Drawing.Point(0, 26);
             this.tabPanelClient.Name = "tabPanelClient";
             this.tabPanelClient.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelClient.Size = new System.Drawing.Size(690, 606);
+            this.tabPanelClient.Size = new System.Drawing.Size(595, 536);
             this.tabPanelClient.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelClient.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelClient.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -470,15 +1341,298 @@
             this.tabPanelClient.TabIndex = 1;
             this.tabPanelClient.TabItem = this.tabItemClient;
             // 
+            // groupPanelClientContact
+            // 
+            this.groupPanelClientContact.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelClientContact.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelClientContact.Controls.Add(companyCodeLabel);
+            this.groupPanelClientContact.Controls.Add(this.companyCodeTextBox);
+            this.groupPanelClientContact.Controls.Add(registrationNumberLabel);
+            this.groupPanelClientContact.Controls.Add(this.registrationNumberTextBox);
+            this.groupPanelClientContact.Controls.Add(cellPhoneLabel);
+            this.groupPanelClientContact.Controls.Add(this.cellPhoneTextBox);
+            this.groupPanelClientContact.Controls.Add(faxNumberLabel);
+            this.groupPanelClientContact.Controls.Add(this.faxNumberTextBox);
+            this.groupPanelClientContact.Controls.Add(emailLabel);
+            this.groupPanelClientContact.Controls.Add(this.emailTextBox);
+            this.groupPanelClientContact.Controls.Add(telephoneLabel1);
+            this.groupPanelClientContact.Controls.Add(this.telephoneTextBox);
+            this.groupPanelClientContact.Controls.Add(contactLabel);
+            this.groupPanelClientContact.Controls.Add(this.contactTextBox);
+            this.groupPanelClientContact.Controls.Add(wetsiteLabel1);
+            this.groupPanelClientContact.Controls.Add(this.wetsiteTextBox);
+            this.groupPanelClientContact.Controls.Add(representativeLabel);
+            this.groupPanelClientContact.Controls.Add(this.representativeTextBox);
+            this.groupPanelClientContact.Location = new System.Drawing.Point(0, 224);
+            this.groupPanelClientContact.Name = "groupPanelClientContact";
+            this.groupPanelClientContact.Size = new System.Drawing.Size(593, 96);
+            // 
+            // 
+            // 
+            this.groupPanelClientContact.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelClientContact.Style.BackColorGradientAngle = 90;
+            this.groupPanelClientContact.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelClientContact.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientContact.Style.BorderBottomWidth = 1;
+            this.groupPanelClientContact.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelClientContact.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientContact.Style.BorderLeftWidth = 1;
+            this.groupPanelClientContact.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientContact.Style.BorderRightWidth = 1;
+            this.groupPanelClientContact.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientContact.Style.BorderTopWidth = 1;
+            this.groupPanelClientContact.Style.Class = "";
+            this.groupPanelClientContact.Style.CornerDiameter = 4;
+            this.groupPanelClientContact.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelClientContact.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelClientContact.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelClientContact.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelClientContact.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelClientContact.StyleMouseOver.Class = "";
+            this.groupPanelClientContact.TabIndex = 1;
+            // 
+            // companyCodeTextBox
+            // 
+            // 
+            // 
+            // 
+            this.companyCodeTextBox.Border.Class = "TextBoxBorder";
+            this.companyCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "CompanyCode", true));
+            this.companyCodeTextBox.Location = new System.Drawing.Point(463, 27);
+            this.companyCodeTextBox.Name = "companyCodeTextBox";
+            this.companyCodeTextBox.Size = new System.Drawing.Size(100, 20);
+            this.companyCodeTextBox.TabIndex = 5;
+            // 
+            // clientBindingSource
+            // 
+            this.clientBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Client);
+            // 
+            // registrationNumberTextBox
+            // 
+            // 
+            // 
+            // 
+            this.registrationNumberTextBox.Border.Class = "TextBoxBorder";
+            this.registrationNumberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "RegistrationNumber", true));
+            this.registrationNumberTextBox.Location = new System.Drawing.Point(463, 7);
+            this.registrationNumberTextBox.Name = "registrationNumberTextBox";
+            this.registrationNumberTextBox.Size = new System.Drawing.Size(100, 20);
+            this.registrationNumberTextBox.TabIndex = 2;
+            // 
+            // cellPhoneTextBox
+            // 
+            // 
+            // 
+            // 
+            this.cellPhoneTextBox.Border.Class = "TextBoxBorder";
+            this.cellPhoneTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "CellPhone", true));
+            this.cellPhoneTextBox.Location = new System.Drawing.Point(90, 67);
+            this.cellPhoneTextBox.Name = "cellPhoneTextBox";
+            this.cellPhoneTextBox.Size = new System.Drawing.Size(100, 20);
+            this.cellPhoneTextBox.TabIndex = 8;
+            // 
+            // faxNumberTextBox
+            // 
+            // 
+            // 
+            // 
+            this.faxNumberTextBox.Border.Class = "TextBoxBorder";
+            this.faxNumberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "FaxNumber", true));
+            this.faxNumberTextBox.Location = new System.Drawing.Point(265, 47);
+            this.faxNumberTextBox.Name = "faxNumberTextBox";
+            this.faxNumberTextBox.Size = new System.Drawing.Size(100, 20);
+            this.faxNumberTextBox.TabIndex = 7;
+            // 
+            // emailTextBox
+            // 
+            // 
+            // 
+            // 
+            this.emailTextBox.Border.Class = "TextBoxBorder";
+            this.emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Email", true));
+            this.emailTextBox.Location = new System.Drawing.Point(90, 47);
+            this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.Size = new System.Drawing.Size(100, 20);
+            this.emailTextBox.TabIndex = 6;
+            // 
+            // telephoneTextBox
+            // 
+            // 
+            // 
+            // 
+            this.telephoneTextBox.Border.Class = "TextBoxBorder";
+            this.telephoneTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Telephone", true));
+            this.telephoneTextBox.Location = new System.Drawing.Point(265, 27);
+            this.telephoneTextBox.Name = "telephoneTextBox";
+            this.telephoneTextBox.Size = new System.Drawing.Size(100, 20);
+            this.telephoneTextBox.TabIndex = 4;
+            // 
+            // contactTextBox
+            // 
+            // 
+            // 
+            // 
+            this.contactTextBox.Border.Class = "TextBoxBorder";
+            this.contactTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Contact", true));
+            this.contactTextBox.Location = new System.Drawing.Point(90, 27);
+            this.contactTextBox.Name = "contactTextBox";
+            this.contactTextBox.Size = new System.Drawing.Size(100, 20);
+            this.contactTextBox.TabIndex = 3;
+            // 
+            // wetsiteTextBox
+            // 
+            // 
+            // 
+            // 
+            this.wetsiteTextBox.Border.Class = "TextBoxBorder";
+            this.wetsiteTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Wetsite", true));
+            this.wetsiteTextBox.Location = new System.Drawing.Point(265, 7);
+            this.wetsiteTextBox.Name = "wetsiteTextBox";
+            this.wetsiteTextBox.Size = new System.Drawing.Size(100, 20);
+            this.wetsiteTextBox.TabIndex = 1;
+            // 
+            // representativeTextBox
+            // 
+            // 
+            // 
+            // 
+            this.representativeTextBox.Border.Class = "TextBoxBorder";
+            this.representativeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Representative", true));
+            this.representativeTextBox.Location = new System.Drawing.Point(90, 7);
+            this.representativeTextBox.Name = "representativeTextBox";
+            this.representativeTextBox.Size = new System.Drawing.Size(100, 20);
+            this.representativeTextBox.TabIndex = 0;
+            // 
+            // groupPanelClientGroup
+            // 
+            this.groupPanelClientGroup.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelClientGroup.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelClientGroup.Controls.Add(this.tbGroupNameEN);
+            this.groupPanelClientGroup.Controls.Add(this.tbGroupNameCN);
+            this.groupPanelClientGroup.Controls.Add(this.lblGroupNameCN);
+            this.groupPanelClientGroup.Controls.Add(groupNoLabel);
+            this.groupPanelClientGroup.Controls.Add(this.groupNoTextBox);
+            this.groupPanelClientGroup.Controls.Add(isGroupLabel);
+            this.groupPanelClientGroup.Controls.Add(this.isGroupComboBox);
+            this.groupPanelClientGroup.Location = new System.Drawing.Point(0, 423);
+            this.groupPanelClientGroup.Name = "groupPanelClientGroup";
+            this.groupPanelClientGroup.Size = new System.Drawing.Size(593, 80);
+            // 
+            // 
+            // 
+            this.groupPanelClientGroup.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelClientGroup.Style.BackColorGradientAngle = 90;
+            this.groupPanelClientGroup.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelClientGroup.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientGroup.Style.BorderBottomWidth = 1;
+            this.groupPanelClientGroup.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelClientGroup.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientGroup.Style.BorderLeftWidth = 1;
+            this.groupPanelClientGroup.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientGroup.Style.BorderRightWidth = 1;
+            this.groupPanelClientGroup.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientGroup.Style.BorderTopWidth = 1;
+            this.groupPanelClientGroup.Style.Class = "";
+            this.groupPanelClientGroup.Style.CornerDiameter = 4;
+            this.groupPanelClientGroup.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelClientGroup.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelClientGroup.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelClientGroup.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelClientGroup.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelClientGroup.StyleMouseOver.Class = "";
+            this.groupPanelClientGroup.TabIndex = 3;
+            // 
+            // tbGroupNameEN
+            // 
+            // 
+            // 
+            // 
+            this.tbGroupNameEN.Border.Class = "TextBoxBorder";
+            this.tbGroupNameEN.Location = new System.Drawing.Point(90, 49);
+            this.tbGroupNameEN.Name = "tbGroupNameEN";
+            this.tbGroupNameEN.Size = new System.Drawing.Size(295, 20);
+            this.tbGroupNameEN.TabIndex = 3;
+            this.tbGroupNameEN.WatermarkText = "英文名";
+            // 
+            // tbGroupNameCN
+            // 
+            // 
+            // 
+            // 
+            this.tbGroupNameCN.Border.Class = "TextBoxBorder";
+            this.tbGroupNameCN.Location = new System.Drawing.Point(90, 29);
+            this.tbGroupNameCN.Name = "tbGroupNameCN";
+            this.tbGroupNameCN.Size = new System.Drawing.Size(295, 20);
+            this.tbGroupNameCN.TabIndex = 2;
+            this.tbGroupNameCN.WatermarkText = "中文名";
+            // 
+            // lblGroupNameCN
+            // 
+            this.lblGroupNameCN.AutoSize = true;
+            this.lblGroupNameCN.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.lblGroupNameCN.BackgroundStyle.Class = "";
+            this.lblGroupNameCN.Location = new System.Drawing.Point(2, 31);
+            this.lblGroupNameCN.Name = "lblGroupNameCN";
+            this.lblGroupNameCN.Size = new System.Drawing.Size(84, 16);
+            this.lblGroupNameCN.TabIndex = 4;
+            this.lblGroupNameCN.Text = "所属集团客户:";
+            // 
+            // groupNoTextBox
+            // 
+            // 
+            // 
+            // 
+            this.groupNoTextBox.Border.Class = "TextBoxBorder";
+            this.groupNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "GroupNo", true));
+            this.groupNoTextBox.Location = new System.Drawing.Point(303, 7);
+            this.groupNoTextBox.Name = "groupNoTextBox";
+            this.groupNoTextBox.Size = new System.Drawing.Size(100, 20);
+            this.groupNoTextBox.TabIndex = 1;
+            // 
+            // isGroupComboBox
+            // 
+            this.isGroupComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "IsGroup", true));
+            this.isGroupComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.isGroupComboBox.Items.AddRange(new object[] {
+            this.comboItem7,
+            this.comboItem8});
+            this.isGroupComboBox.Location = new System.Drawing.Point(90, 7);
+            this.isGroupComboBox.Name = "isGroupComboBox";
+            this.isGroupComboBox.Size = new System.Drawing.Size(99, 21);
+            this.isGroupComboBox.TabIndex = 0;
+            // 
+            // comboItem7
+            // 
+            this.comboItem7.Text = "否";
+            // 
+            // comboItem8
+            // 
+            this.comboItem8.Text = "是";
+            // 
             // btnCancel
             // 
             this.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCancel.Location = new System.Drawing.Point(400, 571);
+            this.btnCancel.Location = new System.Drawing.Point(284, 508);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCancel.TabIndex = 65;
+            this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "取消";
             this.btnCancel.Click += new System.EventHandler(this.Cancel);
             // 
@@ -486,27 +1640,31 @@
             // 
             this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSave.Location = new System.Drawing.Point(284, 571);
+            this.btnSave.Location = new System.Drawing.Point(203, 508);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSave.TabIndex = 64;
+            this.btnSave.TabIndex = 0;
             this.btnSave.Text = "保存";
             this.btnSave.Click += new System.EventHandler(this.Save);
             // 
             // groupPanelClientStat
             // 
             this.groupPanelClientStat.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelClientStat.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelClientStat.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.groupPanelClientStat.Controls.Add(this.departmentComboTree);
-            this.groupPanelClientStat.Controls.Add(branchCodeLabel);
+            this.groupPanelClientStat.Controls.Add(rMNameLabel);
+            this.groupPanelClientStat.Controls.Add(this.rMNameTextBox);
             this.groupPanelClientStat.Controls.Add(pMNameLabel);
             this.groupPanelClientStat.Controls.Add(this.pMNameTextBox);
-            this.groupPanelClientStat.Controls.Add(this.rMNameTextBox);
-            this.groupPanelClientStat.Controls.Add(rMNameLabel);
-            this.groupPanelClientStat.Location = new System.Drawing.Point(12, 446);
+            this.groupPanelClientStat.Controls.Add(branchCodeLabel);
+            this.groupPanelClientStat.Controls.Add(clientLevelLabel);
+            this.groupPanelClientStat.Controls.Add(this.clientLevelComboBox);
+            this.groupPanelClientStat.Controls.Add(clientTypeLabel);
+            this.groupPanelClientStat.Controls.Add(this.clientTypeComboBox);
+            this.groupPanelClientStat.Location = new System.Drawing.Point(0, 322);
             this.groupPanelClientStat.Name = "groupPanelClientStat";
-            this.groupPanelClientStat.Size = new System.Drawing.Size(567, 88);
+            this.groupPanelClientStat.Size = new System.Drawing.Size(593, 98);
             // 
             // 
             // 
@@ -536,100 +1694,128 @@
             // 
             // 
             this.groupPanelClientStat.StyleMouseOver.Class = "";
-            this.groupPanelClientStat.TabIndex = 63;
-            this.groupPanelClientStat.Text = "统计信息";
+            this.groupPanelClientStat.TabIndex = 2;
             // 
-            // clientBindingSource
+            // departmentComboTree
             // 
-            this.clientBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Client);
-            // 
-            // pMNameTextBox
+            this.departmentComboTree.BackColor = System.Drawing.SystemColors.Window;
             // 
             // 
             // 
-            // 
-            this.pMNameTextBox.Border.Class = "";
-            this.pMNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "PMName", true));
-            this.pMNameTextBox.Location = new System.Drawing.Point(110, 29);
-            this.pMNameTextBox.Name = "pMNameTextBox";
-            this.pMNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.pMNameTextBox.TabIndex = 41;
+            this.departmentComboTree.BackgroundStyle.Class = "TextBoxBorder";
+            this.departmentComboTree.ButtonDropDown.Visible = true;
+            this.departmentComboTree.Location = new System.Drawing.Point(90, 29);
+            this.departmentComboTree.Name = "departmentComboTree";
+            this.departmentComboTree.Size = new System.Drawing.Size(275, 23);
+            this.departmentComboTree.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.departmentComboTree.TabIndex = 2;
             // 
             // rMNameTextBox
             // 
             // 
             // 
             // 
-            this.rMNameTextBox.Border.Class = "";
+            this.rMNameTextBox.Border.Class = "TextBoxBorder";
             this.rMNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "RMName", true));
-            this.rMNameTextBox.Location = new System.Drawing.Point(392, 35);
+            this.rMNameTextBox.Location = new System.Drawing.Point(268, 52);
             this.rMNameTextBox.Name = "rMNameTextBox";
             this.rMNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.rMNameTextBox.TabIndex = 79;
+            this.rMNameTextBox.TabIndex = 4;
+            // 
+            // pMNameTextBox
+            // 
+            // 
+            // 
+            // 
+            this.pMNameTextBox.Border.Class = "TextBoxBorder";
+            this.pMNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "PMName", true));
+            this.pMNameTextBox.Location = new System.Drawing.Point(90, 52);
+            this.pMNameTextBox.Name = "pMNameTextBox";
+            this.pMNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.pMNameTextBox.TabIndex = 3;
+            // 
+            // clientLevelComboBox
+            // 
+            this.clientLevelComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientLevel", true));
+            this.clientLevelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.clientLevelComboBox.Items.AddRange(new object[] {
+            this.comboItem1,
+            this.comboItem2});
+            this.clientLevelComboBox.Location = new System.Drawing.Point(268, 7);
+            this.clientLevelComboBox.Name = "clientLevelComboBox";
+            this.clientLevelComboBox.Size = new System.Drawing.Size(100, 21);
+            this.clientLevelComboBox.TabIndex = 1;
+            // 
+            // comboItem1
+            // 
+            this.comboItem1.Text = "NORMAL";
+            // 
+            // comboItem2
+            // 
+            this.comboItem2.Text = "VIP";
+            // 
+            // clientTypeComboBox
+            // 
+            this.clientTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientType", true));
+            this.clientTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.clientTypeComboBox.Items.AddRange(new object[] {
+            this.comboItem3,
+            this.comboItem4,
+            this.comboItem5,
+            this.comboItem6});
+            this.clientTypeComboBox.Location = new System.Drawing.Point(90, 7);
+            this.clientTypeComboBox.Name = "clientTypeComboBox";
+            this.clientTypeComboBox.Size = new System.Drawing.Size(100, 21);
+            this.clientTypeComboBox.TabIndex = 0;
+            // 
+            // comboItem3
+            // 
+            this.comboItem3.Text = "国有";
+            // 
+            // comboItem4
+            // 
+            this.comboItem4.Text = "集体";
+            // 
+            // comboItem5
+            // 
+            this.comboItem5.Text = "民营";
+            // 
+            // comboItem6
+            // 
+            this.comboItem6.Text = "三资";
             // 
             // groupPanelClientBasic
             // 
+            this.groupPanelClientBasic.BackColor = System.Drawing.Color.Transparent;
             this.groupPanelClientBasic.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelClientBasic.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelClientBasic.Controls.Add(productCNLabel);
-            this.groupPanelClientBasic.Controls.Add(this.productCNTextBox);
-            this.groupPanelClientBasic.Controls.Add(productENLabel);
-            this.groupPanelClientBasic.Controls.Add(this.productENTextBox);
-            this.groupPanelClientBasic.Controls.Add(registrationNumberLabel);
-            this.groupPanelClientBasic.Controls.Add(this.registrationNumberTextBox);
-            this.groupPanelClientBasic.Controls.Add(representativeLabel);
-            this.groupPanelClientBasic.Controls.Add(this.representativeTextBox);
-            this.groupPanelClientBasic.Controls.Add(telephoneLabel);
-            this.groupPanelClientBasic.Controls.Add(this.telephoneTextBox);
-            this.groupPanelClientBasic.Controls.Add(wetsiteLabel);
-            this.groupPanelClientBasic.Controls.Add(this.wetsiteTextBox);
-            this.groupPanelClientBasic.Controls.Add(contactLabel);
-            this.groupPanelClientBasic.Controls.Add(this.contactTextBox);
-            this.groupPanelClientBasic.Controls.Add(countryCodeLabel);
-            this.groupPanelClientBasic.Controls.Add(cellPhoneLabel);
-            this.groupPanelClientBasic.Controls.Add(this.countryCodeTextBox);
-            this.groupPanelClientBasic.Controls.Add(this.cellPhoneTextBox);
-            this.groupPanelClientBasic.Controls.Add(emailLabel);
-            this.groupPanelClientBasic.Controls.Add(clientLevelLabel);
-            this.groupPanelClientBasic.Controls.Add(this.emailTextBox);
-            this.groupPanelClientBasic.Controls.Add(this.clientLevelTextBox);
-            this.groupPanelClientBasic.Controls.Add(faxNumberLabel);
-            this.groupPanelClientBasic.Controls.Add(clientTypeLabel);
-            this.groupPanelClientBasic.Controls.Add(this.faxNumberTextBox);
-            this.groupPanelClientBasic.Controls.Add(this.clientTypeTextBox);
-            this.groupPanelClientBasic.Controls.Add(groupNoLabel);
+            this.groupPanelClientBasic.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.groupPanelClientBasic.Controls.Add(commentLabel);
-            this.groupPanelClientBasic.Controls.Add(this.groupNoTextBox);
-            this.groupPanelClientBasic.Controls.Add(this.commentTextBox);
-            this.groupPanelClientBasic.Controls.Add(isGroupLabel);
-            this.groupPanelClientBasic.Controls.Add(companyCodeLabel);
-            this.groupPanelClientBasic.Controls.Add(this.isGroupTextBox);
-            this.groupPanelClientBasic.Controls.Add(this.companyCodeTextBox);
-            this.groupPanelClientBasic.Controls.Add(postCodeLabel);
-            this.groupPanelClientBasic.Controls.Add(this.postCodeTextBox);
-            this.groupPanelClientBasic.Controls.Add(provinceCNLabel);
-            this.groupPanelClientBasic.Controls.Add(this.provinceCNTextBox);
-            this.groupPanelClientBasic.Controls.Add(provinceENLabel);
-            this.groupPanelClientBasic.Controls.Add(this.provinceENTextBox);
-            this.groupPanelClientBasic.Controls.Add(clientNameEN_1Label);
-            this.groupPanelClientBasic.Controls.Add(addressCNLabel);
-            this.groupPanelClientBasic.Controls.Add(this.clientNameEN_1TextBox);
-            this.groupPanelClientBasic.Controls.Add(this.addressCNTextBox);
-            this.groupPanelClientBasic.Controls.Add(addressENLabel);
-            this.groupPanelClientBasic.Controls.Add(cityCNLabel);
-            this.groupPanelClientBasic.Controls.Add(clientNameEN_2Label);
-            this.groupPanelClientBasic.Controls.Add(this.cityCNTextBox);
-            this.groupPanelClientBasic.Controls.Add(cityENLabel);
-            this.groupPanelClientBasic.Controls.Add(this.addressENTextBox);
-            this.groupPanelClientBasic.Controls.Add(this.cityENTextBox);
-            this.groupPanelClientBasic.Controls.Add(this.clientNameEN_2TextBox);
+            this.groupPanelClientBasic.Controls.Add(this.clientCommentTextBox);
             this.groupPanelClientBasic.Controls.Add(clientNoLabel);
             this.groupPanelClientBasic.Controls.Add(this.clientNoTextBox);
-            this.groupPanelClientBasic.Controls.Add(this.clientNameCNTextBox);
+            this.groupPanelClientBasic.Controls.Add(countryCodeLabel);
+            this.groupPanelClientBasic.Controls.Add(this.countryCodeComboBox);
+            this.groupPanelClientBasic.Controls.Add(postCodeLabel);
+            this.groupPanelClientBasic.Controls.Add(this.postCodeTextBox);
+            this.groupPanelClientBasic.Controls.Add(this.productENTextBox);
+            this.groupPanelClientBasic.Controls.Add(productCNLabel);
+            this.groupPanelClientBasic.Controls.Add(this.productCNTextBox);
+            this.groupPanelClientBasic.Controls.Add(this.provinceENTextBox);
+            this.groupPanelClientBasic.Controls.Add(provinceCNLabel);
+            this.groupPanelClientBasic.Controls.Add(this.provinceCNTextBox);
+            this.groupPanelClientBasic.Controls.Add(this.cityENTextBox);
+            this.groupPanelClientBasic.Controls.Add(cityCNLabel);
+            this.groupPanelClientBasic.Controls.Add(this.cityCNTextBox);
+            this.groupPanelClientBasic.Controls.Add(this.addressENTextBox);
+            this.groupPanelClientBasic.Controls.Add(addressCNLabel);
+            this.groupPanelClientBasic.Controls.Add(this.addressCNTextBox);
+            this.groupPanelClientBasic.Controls.Add(this.clientNameEN_2TextBox);
+            this.groupPanelClientBasic.Controls.Add(this.clientNameEN_1TextBox);
             this.groupPanelClientBasic.Controls.Add(clientNameCNLabel);
-            this.groupPanelClientBasic.Location = new System.Drawing.Point(12, 4);
+            this.groupPanelClientBasic.Controls.Add(this.clientNameCNTextBox);
+            this.groupPanelClientBasic.Location = new System.Drawing.Point(0, 0);
             this.groupPanelClientBasic.Name = "groupPanelClientBasic";
-            this.groupPanelClientBasic.Size = new System.Drawing.Size(571, 436);
+            this.groupPanelClientBasic.Size = new System.Drawing.Size(593, 218);
             // 
             // 
             // 
@@ -659,396 +1845,199 @@
             // 
             // 
             this.groupPanelClientBasic.StyleMouseOver.Class = "";
-            this.groupPanelClientBasic.TabIndex = 62;
-            this.groupPanelClientBasic.Text = "基本信息";
+            this.groupPanelClientBasic.TabIndex = 0;
             // 
-            // productCNTextBox
+            // clientCommentTextBox
             // 
             // 
             // 
             // 
-            this.productCNTextBox.Border.Class = "";
-            this.productCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ProductCN", true));
-            this.productCNTextBox.Location = new System.Drawing.Point(110, 287);
-            this.productCNTextBox.Name = "productCNTextBox";
-            this.productCNTextBox.Size = new System.Drawing.Size(100, 20);
-            this.productCNTextBox.TabIndex = 71;
-            // 
-            // productENTextBox
-            // 
-            // 
-            // 
-            // 
-            this.productENTextBox.Border.Class = "";
-            this.productENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ProductEN", true));
-            this.productENTextBox.Location = new System.Drawing.Point(110, 313);
-            this.productENTextBox.Name = "productENTextBox";
-            this.productENTextBox.Size = new System.Drawing.Size(100, 20);
-            this.productENTextBox.TabIndex = 73;
-            // 
-            // registrationNumberTextBox
-            // 
-            // 
-            // 
-            // 
-            this.registrationNumberTextBox.Border.Class = "";
-            this.registrationNumberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "RegistrationNumber", true));
-            this.registrationNumberTextBox.Location = new System.Drawing.Point(110, 337);
-            this.registrationNumberTextBox.Name = "registrationNumberTextBox";
-            this.registrationNumberTextBox.Size = new System.Drawing.Size(100, 20);
-            this.registrationNumberTextBox.TabIndex = 75;
-            // 
-            // representativeTextBox
-            // 
-            // 
-            // 
-            // 
-            this.representativeTextBox.Border.Class = "";
-            this.representativeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Representative", true));
-            this.representativeTextBox.Location = new System.Drawing.Point(110, 363);
-            this.representativeTextBox.Name = "representativeTextBox";
-            this.representativeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.representativeTextBox.TabIndex = 77;
-            // 
-            // telephoneTextBox
-            // 
-            // 
-            // 
-            // 
-            this.telephoneTextBox.BackgroundStyle.Class = "";
-            this.telephoneTextBox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            this.telephoneTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Telephone", true));
-            this.telephoneTextBox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
-            this.telephoneTextBox.Location = new System.Drawing.Point(110, 469);
-            this.telephoneTextBox.Name = "telephoneTextBox";
-            this.telephoneTextBox.Size = new System.Drawing.Size(100, 20);
-            this.telephoneTextBox.TabIndex = 81;
-            this.telephoneTextBox.Text = "";
-            this.telephoneTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.telephoneTextBox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            // 
-            // wetsiteTextBox
-            // 
-            // 
-            // 
-            // 
-            this.wetsiteTextBox.BackgroundStyle.Class = "";
-            this.wetsiteTextBox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            this.wetsiteTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Wetsite", true));
-            this.wetsiteTextBox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
-            this.wetsiteTextBox.Location = new System.Drawing.Point(110, 495);
-            this.wetsiteTextBox.Name = "wetsiteTextBox";
-            this.wetsiteTextBox.Size = new System.Drawing.Size(100, 20);
-            this.wetsiteTextBox.TabIndex = 83;
-            this.wetsiteTextBox.Text = "";
-            this.wetsiteTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.wetsiteTextBox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            // 
-            // contactTextBox
-            // 
-            // 
-            // 
-            // 
-            this.contactTextBox.Border.Class = "";
-            this.contactTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Contact", true));
-            this.contactTextBox.Location = new System.Drawing.Point(383, 160);
-            this.contactTextBox.Name = "contactTextBox";
-            this.contactTextBox.Size = new System.Drawing.Size(100, 20);
-            this.contactTextBox.TabIndex = 29;
-            // 
-            // countryCodeTextBox
-            // 
-            this.countryCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "CountryCode", true));
-            this.countryCodeTextBox.Location = new System.Drawing.Point(383, 186);
-            this.countryCodeTextBox.Name = "countryCodeTextBox";
-            this.countryCodeTextBox.Size = new System.Drawing.Size(100, 21);
-            this.countryCodeTextBox.TabIndex = 31;
-            // 
-            // cellPhoneTextBox
-            // 
-            // 
-            // 
-            // 
-            this.cellPhoneTextBox.BackgroundStyle.Class = "";
-            this.cellPhoneTextBox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            this.cellPhoneTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "CellPhone", true));
-            this.cellPhoneTextBox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
-            this.cellPhoneTextBox.Location = new System.Drawing.Point(383, 32);
-            this.cellPhoneTextBox.Name = "cellPhoneTextBox";
-            this.cellPhoneTextBox.Size = new System.Drawing.Size(100, 20);
-            this.cellPhoneTextBox.TabIndex = 61;
-            this.cellPhoneTextBox.Text = "";
-            this.cellPhoneTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.cellPhoneTextBox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            // 
-            // emailTextBox
-            // 
-            // 
-            // 
-            // 
-            this.emailTextBox.BackgroundStyle.Class = "";
-            this.emailTextBox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            this.emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Email", true));
-            this.emailTextBox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
-            this.emailTextBox.Location = new System.Drawing.Point(383, 212);
-            this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(100, 20);
-            this.emailTextBox.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.emailTextBox.TabIndex = 33;
-            this.emailTextBox.Text = "";
-            this.emailTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.emailTextBox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            // 
-            // clientLevelTextBox
-            // 
-            this.clientLevelTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientLevel", true));
-            this.clientLevelTextBox.Items.AddRange(new object[] {
-            this.comboItem5,
-            this.comboItem6});
-            this.clientLevelTextBox.Location = new System.Drawing.Point(383, 57);
-            this.clientLevelTextBox.Name = "clientLevelTextBox";
-            this.clientLevelTextBox.Size = new System.Drawing.Size(100, 21);
-            this.clientLevelTextBox.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.clientLevelTextBox.TabIndex = 63;
-            // 
-            // comboItem5
-            // 
-            this.comboItem5.Text = "NORMAL";
-            // 
-            // comboItem6
-            // 
-            this.comboItem6.Text = "VIP";
-            // 
-            // faxNumberTextBox
-            // 
-            // 
-            // 
-            // 
-            this.faxNumberTextBox.BackgroundStyle.Class = "";
-            this.faxNumberTextBox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            this.faxNumberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "FaxNumber", true));
-            this.faxNumberTextBox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
-            this.faxNumberTextBox.Location = new System.Drawing.Point(383, 238);
-            this.faxNumberTextBox.Name = "faxNumberTextBox";
-            this.faxNumberTextBox.Size = new System.Drawing.Size(100, 20);
-            this.faxNumberTextBox.TabIndex = 35;
-            this.faxNumberTextBox.Text = "";
-            this.faxNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.faxNumberTextBox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            // 
-            // clientTypeTextBox
-            // 
-            this.clientTypeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientType", true));
-            this.clientTypeTextBox.Items.AddRange(new object[] {
-            this.comboItem1,
-            this.comboItem2,
-            this.comboItem3,
-            this.comboItem4});
-            this.clientTypeTextBox.Location = new System.Drawing.Point(385, 83);
-            this.clientTypeTextBox.Name = "clientTypeTextBox";
-            this.clientTypeTextBox.Size = new System.Drawing.Size(100, 21);
-            this.clientTypeTextBox.TabIndex = 65;
-            // 
-            // comboItem1
-            // 
-            this.comboItem1.Text = "国有";
-            // 
-            // comboItem2
-            // 
-            this.comboItem2.Text = "集体";
-            // 
-            // comboItem3
-            // 
-            this.comboItem3.Text = "民营";
-            // 
-            // comboItem4
-            // 
-            this.comboItem4.Text = "三资";
-            // 
-            // groupNoTextBox
-            // 
-            // 
-            // 
-            // 
-            this.groupNoTextBox.Border.Class = "";
-            this.groupNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "GroupNo", true));
-            this.groupNoTextBox.Location = new System.Drawing.Point(383, 264);
-            this.groupNoTextBox.Name = "groupNoTextBox";
-            this.groupNoTextBox.Size = new System.Drawing.Size(100, 20);
-            this.groupNoTextBox.TabIndex = 37;
-            // 
-            // commentTextBox
-            // 
-            // 
-            // 
-            // 
-            this.commentTextBox.Border.Class = "";
-            this.commentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Comment", true));
-            this.commentTextBox.Location = new System.Drawing.Point(385, 109);
-            this.commentTextBox.Name = "commentTextBox";
-            this.commentTextBox.Size = new System.Drawing.Size(100, 20);
-            this.commentTextBox.TabIndex = 67;
-            // 
-            // isGroupTextBox
-            // 
-            // 
-            // 
-            // 
-            this.isGroupTextBox.BackgroundStyle.Class = "";
-            this.isGroupTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "IsGroup", true));
-            this.isGroupTextBox.Location = new System.Drawing.Point(383, 290);
-            this.isGroupTextBox.Name = "isGroupTextBox";
-            this.isGroupTextBox.Size = new System.Drawing.Size(100, 20);
-            this.isGroupTextBox.TabIndex = 39;
-            // 
-            // companyCodeTextBox
-            // 
-            // 
-            // 
-            // 
-            this.companyCodeTextBox.Border.Class = "";
-            this.companyCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "CompanyCode", true));
-            this.companyCodeTextBox.Location = new System.Drawing.Point(385, 135);
-            this.companyCodeTextBox.Name = "companyCodeTextBox";
-            this.companyCodeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.companyCodeTextBox.TabIndex = 69;
-            // 
-            // postCodeTextBox
-            // 
-            // 
-            // 
-            // 
-            this.postCodeTextBox.Border.Class = "";
-            this.postCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "PostCode", true));
-            this.postCodeTextBox.Location = new System.Drawing.Point(110, 261);
-            this.postCodeTextBox.Name = "postCodeTextBox";
-            this.postCodeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.postCodeTextBox.TabIndex = 57;
-            // 
-            // provinceCNTextBox
-            // 
-            // 
-            // 
-            // 
-            this.provinceCNTextBox.Border.Class = "";
-            this.provinceCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ProvinceCN", true));
-            this.provinceCNTextBox.Location = new System.Drawing.Point(110, 206);
-            this.provinceCNTextBox.Name = "provinceCNTextBox";
-            this.provinceCNTextBox.Size = new System.Drawing.Size(100, 20);
-            this.provinceCNTextBox.TabIndex = 53;
-            // 
-            // provinceENTextBox
-            // 
-            // 
-            // 
-            // 
-            this.provinceENTextBox.Border.Class = "";
-            this.provinceENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ProvinceEN", true));
-            this.provinceENTextBox.Location = new System.Drawing.Point(110, 232);
-            this.provinceENTextBox.Name = "provinceENTextBox";
-            this.provinceENTextBox.Size = new System.Drawing.Size(100, 20);
-            this.provinceENTextBox.TabIndex = 55;
-            // 
-            // clientNameEN_1TextBox
-            // 
-            // 
-            // 
-            // 
-            this.clientNameEN_1TextBox.Border.Class = "";
-            this.clientNameEN_1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientNameEN_1", true));
-            this.clientNameEN_1TextBox.Location = new System.Drawing.Point(110, 53);
-            this.clientNameEN_1TextBox.Name = "clientNameEN_1TextBox";
-            this.clientNameEN_1TextBox.Size = new System.Drawing.Size(100, 20);
-            this.clientNameEN_1TextBox.TabIndex = 25;
-            // 
-            // addressCNTextBox
-            // 
-            // 
-            // 
-            // 
-            this.addressCNTextBox.Border.Class = "";
-            this.addressCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "AddressCN", true));
-            this.addressCNTextBox.Location = new System.Drawing.Point(110, 104);
-            this.addressCNTextBox.Name = "addressCNTextBox";
-            this.addressCNTextBox.Size = new System.Drawing.Size(100, 20);
-            this.addressCNTextBox.TabIndex = 1;
-            // 
-            // cityCNTextBox
-            // 
-            // 
-            // 
-            // 
-            this.cityCNTextBox.Border.Class = "";
-            this.cityCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "CityCN", true));
-            this.cityCNTextBox.Location = new System.Drawing.Point(110, 156);
-            this.cityCNTextBox.Name = "cityCNTextBox";
-            this.cityCNTextBox.Size = new System.Drawing.Size(100, 20);
-            this.cityCNTextBox.TabIndex = 9;
-            // 
-            // addressENTextBox
-            // 
-            // 
-            // 
-            // 
-            this.addressENTextBox.Border.Class = "";
-            this.addressENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "AddressEN", true));
-            this.addressENTextBox.Location = new System.Drawing.Point(110, 130);
-            this.addressENTextBox.Name = "addressENTextBox";
-            this.addressENTextBox.Size = new System.Drawing.Size(100, 20);
-            this.addressENTextBox.TabIndex = 3;
-            // 
-            // cityENTextBox
-            // 
-            // 
-            // 
-            // 
-            this.cityENTextBox.Border.Class = "";
-            this.cityENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "CityEN", true));
-            this.cityENTextBox.Location = new System.Drawing.Point(110, 182);
-            this.cityENTextBox.Name = "cityENTextBox";
-            this.cityENTextBox.Size = new System.Drawing.Size(100, 20);
-            this.cityENTextBox.TabIndex = 11;
-            // 
-            // clientNameEN_2TextBox
-            // 
-            // 
-            // 
-            // 
-            this.clientNameEN_2TextBox.Border.Class = "";
-            this.clientNameEN_2TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientNameEN_2", true));
-            this.clientNameEN_2TextBox.Location = new System.Drawing.Point(110, 79);
-            this.clientNameEN_2TextBox.Name = "clientNameEN_2TextBox";
-            this.clientNameEN_2TextBox.Size = new System.Drawing.Size(100, 20);
-            this.clientNameEN_2TextBox.TabIndex = 27;
+            this.clientCommentTextBox.Border.Class = "";
+            this.clientCommentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Comment", true));
+            this.clientCommentTextBox.Location = new System.Drawing.Point(397, 145);
+            this.clientCommentTextBox.Multiline = true;
+            this.clientCommentTextBox.Name = "clientCommentTextBox";
+            this.clientCommentTextBox.Size = new System.Drawing.Size(179, 63);
+            this.clientCommentTextBox.TabIndex = 98;
             // 
             // clientNoTextBox
             // 
             // 
             // 
             // 
-            this.clientNoTextBox.BackgroundStyle.Class = "";
-            this.clientNoTextBox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
+            this.clientNoTextBox.Border.Class = "TextBoxBorder";
             this.clientNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientNo", true));
-            this.clientNoTextBox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
-            this.clientNoTextBox.Location = new System.Drawing.Point(110, 6);
+            this.clientNoTextBox.Location = new System.Drawing.Point(90, 7);
             this.clientNoTextBox.Name = "clientNoTextBox";
-            this.clientNoTextBox.Size = new System.Drawing.Size(100, 20);
-            this.clientNoTextBox.TabIndex = 23;
-            this.clientNoTextBox.Text = "";
-            this.clientNoTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.clientNoTextBox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
+            this.clientNoTextBox.Size = new System.Drawing.Size(109, 20);
+            this.clientNoTextBox.TabIndex = 0;
+            // 
+            // countryCodeComboBox
+            // 
+            this.countryCodeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "CountryCode", true));
+            this.countryCodeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.countryCodeComboBox.FormattingEnabled = true;
+            this.countryCodeComboBox.Location = new System.Drawing.Point(90, 167);
+            this.countryCodeComboBox.Name = "countryCodeComboBox";
+            this.countryCodeComboBox.Size = new System.Drawing.Size(134, 21);
+            this.countryCodeComboBox.TabIndex = 10;
+            // 
+            // postCodeTextBox
+            // 
+            // 
+            // 
+            // 
+            this.postCodeTextBox.Border.Class = "TextBoxBorder";
+            this.postCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "PostCode", true));
+            this.postCodeTextBox.Location = new System.Drawing.Point(90, 189);
+            this.postCodeTextBox.Name = "postCodeTextBox";
+            this.postCodeTextBox.Size = new System.Drawing.Size(134, 20);
+            this.postCodeTextBox.TabIndex = 11;
+            // 
+            // productENTextBox
+            // 
+            // 
+            // 
+            // 
+            this.productENTextBox.Border.Class = "TextBoxBorder";
+            this.productENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ProductEN", true));
+            this.productENTextBox.Location = new System.Drawing.Point(398, 73);
+            this.productENTextBox.Multiline = true;
+            this.productENTextBox.Name = "productENTextBox";
+            this.productENTextBox.Size = new System.Drawing.Size(178, 42);
+            this.productENTextBox.TabIndex = 13;
+            this.productENTextBox.WatermarkText = "英文";
+            // 
+            // productCNTextBox
+            // 
+            // 
+            // 
+            // 
+            this.productCNTextBox.Border.Class = "TextBoxBorder";
+            this.productCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ProductCN", true));
+            this.productCNTextBox.Location = new System.Drawing.Point(398, 26);
+            this.productCNTextBox.Multiline = true;
+            this.productCNTextBox.Name = "productCNTextBox";
+            this.productCNTextBox.Size = new System.Drawing.Size(178, 41);
+            this.productCNTextBox.TabIndex = 12;
+            this.productCNTextBox.WatermarkText = "中文";
+            // 
+            // provinceENTextBox
+            // 
+            // 
+            // 
+            // 
+            this.provinceENTextBox.Border.Class = "TextBoxBorder";
+            this.provinceENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ProvinceEN", true));
+            this.provinceENTextBox.Location = new System.Drawing.Point(249, 147);
+            this.provinceENTextBox.Name = "provinceENTextBox";
+            this.provinceENTextBox.Size = new System.Drawing.Size(135, 20);
+            this.provinceENTextBox.TabIndex = 9;
+            this.provinceENTextBox.WatermarkText = "英文";
+            // 
+            // provinceCNTextBox
+            // 
+            // 
+            // 
+            // 
+            this.provinceCNTextBox.Border.Class = "TextBoxBorder";
+            this.provinceCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ProvinceCN", true));
+            this.provinceCNTextBox.Location = new System.Drawing.Point(90, 147);
+            this.provinceCNTextBox.Name = "provinceCNTextBox";
+            this.provinceCNTextBox.Size = new System.Drawing.Size(134, 20);
+            this.provinceCNTextBox.TabIndex = 8;
+            this.provinceCNTextBox.WatermarkText = "中文";
+            // 
+            // cityENTextBox
+            // 
+            // 
+            // 
+            // 
+            this.cityENTextBox.Border.Class = "TextBoxBorder";
+            this.cityENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "CityEN", true));
+            this.cityENTextBox.Location = new System.Drawing.Point(249, 127);
+            this.cityENTextBox.Name = "cityENTextBox";
+            this.cityENTextBox.Size = new System.Drawing.Size(135, 20);
+            this.cityENTextBox.TabIndex = 7;
+            this.cityENTextBox.WatermarkText = "英文";
+            // 
+            // cityCNTextBox
+            // 
+            // 
+            // 
+            // 
+            this.cityCNTextBox.Border.Class = "TextBoxBorder";
+            this.cityCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "CityCN", true));
+            this.cityCNTextBox.Location = new System.Drawing.Point(90, 127);
+            this.cityCNTextBox.Name = "cityCNTextBox";
+            this.cityCNTextBox.Size = new System.Drawing.Size(134, 20);
+            this.cityCNTextBox.TabIndex = 6;
+            this.cityCNTextBox.WatermarkText = "中文";
+            // 
+            // addressENTextBox
+            // 
+            // 
+            // 
+            // 
+            this.addressENTextBox.Border.Class = "TextBoxBorder";
+            this.addressENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "AddressEN", true));
+            this.addressENTextBox.Location = new System.Drawing.Point(90, 107);
+            this.addressENTextBox.Name = "addressENTextBox";
+            this.addressENTextBox.Size = new System.Drawing.Size(295, 20);
+            this.addressENTextBox.TabIndex = 5;
+            this.addressENTextBox.WatermarkText = "英文地址";
+            // 
+            // addressCNTextBox
+            // 
+            // 
+            // 
+            // 
+            this.addressCNTextBox.Border.Class = "TextBoxBorder";
+            this.addressCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "AddressCN", true));
+            this.addressCNTextBox.Location = new System.Drawing.Point(90, 87);
+            this.addressCNTextBox.Name = "addressCNTextBox";
+            this.addressCNTextBox.Size = new System.Drawing.Size(295, 20);
+            this.addressCNTextBox.TabIndex = 4;
+            this.addressCNTextBox.WatermarkText = "中文地址";
+            // 
+            // clientNameEN_2TextBox
+            // 
+            // 
+            // 
+            // 
+            this.clientNameEN_2TextBox.Border.Class = "TextBoxBorder";
+            this.clientNameEN_2TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientNameEN_2", true));
+            this.clientNameEN_2TextBox.Location = new System.Drawing.Point(90, 67);
+            this.clientNameEN_2TextBox.Name = "clientNameEN_2TextBox";
+            this.clientNameEN_2TextBox.Size = new System.Drawing.Size(295, 20);
+            this.clientNameEN_2TextBox.TabIndex = 3;
+            this.clientNameEN_2TextBox.WatermarkText = "英文名第二行";
+            // 
+            // clientNameEN_1TextBox
+            // 
+            // 
+            // 
+            // 
+            this.clientNameEN_1TextBox.Border.Class = "TextBoxBorder";
+            this.clientNameEN_1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientNameEN_1", true));
+            this.clientNameEN_1TextBox.Location = new System.Drawing.Point(90, 47);
+            this.clientNameEN_1TextBox.Name = "clientNameEN_1TextBox";
+            this.clientNameEN_1TextBox.Size = new System.Drawing.Size(295, 20);
+            this.clientNameEN_1TextBox.TabIndex = 2;
+            this.clientNameEN_1TextBox.WatermarkText = "英文名第一行";
             // 
             // clientNameCNTextBox
             // 
             // 
             // 
             // 
-            this.clientNameCNTextBox.Border.Class = "";
+            this.clientNameCNTextBox.Border.Class = "TextBoxBorder";
             this.clientNameCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientNameCN", true));
-            this.clientNameCNTextBox.Location = new System.Drawing.Point(110, 28);
+            this.clientNameCNTextBox.Location = new System.Drawing.Point(90, 27);
             this.clientNameCNTextBox.Name = "clientNameCNTextBox";
-            this.clientNameCNTextBox.Size = new System.Drawing.Size(100, 20);
-            this.clientNameCNTextBox.TabIndex = 15;
+            this.clientNameCNTextBox.Size = new System.Drawing.Size(295, 20);
+            this.clientNameCNTextBox.TabIndex = 1;
+            this.clientNameCNTextBox.WatermarkText = "中文名";
             // 
             // tabItemClient
             // 
@@ -1056,36 +2045,13 @@
             this.tabItemClient.Name = "tabItemClient";
             this.tabItemClient.Text = "基本信息";
             // 
-            // tabPanelClientCreditLine
-            // 
-            this.tabPanelClientCreditLine.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelClientCreditLine.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelClientCreditLine.Name = "tabPanelClientCreditLine";
-            this.tabPanelClientCreditLine.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelClientCreditLine.Size = new System.Drawing.Size(690, 606);
-            this.tabPanelClientCreditLine.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelClientCreditLine.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelClientCreditLine.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelClientCreditLine.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelClientCreditLine.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelClientCreditLine.Style.GradientAngle = 90;
-            this.tabPanelClientCreditLine.TabIndex = 2;
-            this.tabPanelClientCreditLine.TabItem = this.tabItemClientCreditLine;
-            // 
-            // tabItemClientCreditLine
-            // 
-            this.tabItemClientCreditLine.AttachedControl = this.tabPanelClientCreditLine;
-            this.tabItemClientCreditLine.Name = "tabItemClientCreditLine";
-            this.tabItemClientCreditLine.Text = "额度信息";
-            // 
             // tabPanelClientAccount
             // 
             this.tabPanelClientAccount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPanelClientAccount.Location = new System.Drawing.Point(0, 26);
             this.tabPanelClientAccount.Name = "tabPanelClientAccount";
             this.tabPanelClientAccount.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelClientAccount.Size = new System.Drawing.Size(690, 606);
+            this.tabPanelClientAccount.Size = new System.Drawing.Size(595, 536);
             this.tabPanelClientAccount.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelClientAccount.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelClientAccount.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -1102,26 +2068,13 @@
             this.tabItemClientAccount.Name = "tabItemClientAccount";
             this.tabItemClientAccount.Text = "账户信息";
             // 
-            // departmentComboTree
-            // 
-            this.departmentComboTree.BackColor = System.Drawing.SystemColors.Window;
-            // 
-            // 
-            // 
-            this.departmentComboTree.BackgroundStyle.Class = "TextBoxBorder";
-            this.departmentComboTree.ButtonDropDown.Visible = true;
-            this.departmentComboTree.Location = new System.Drawing.Point(110, 3);
-            this.departmentComboTree.Name = "departmentComboTree";
-            this.departmentComboTree.Size = new System.Drawing.Size(100, 23);
-            this.departmentComboTree.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.departmentComboTree.TabIndex = 80;
-            // 
             // ClientDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(690, 632);
+            this.ClientSize = new System.Drawing.Size(595, 562);
             this.Controls.Add(this.tabControl);
+            this.DoubleBuffered = true;
             this.Name = "ClientDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "客户详细信息";
@@ -1129,10 +2082,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabControl.PerformLayout();
+            this.tabPanelClientCreditLine.ResumeLayout(false);
+            this.groupPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineBindingSource)).EndInit();
+            this.groupPanel1.ResumeLayout(false);
+            this.groupPanel1.PerformLayout();
             this.tabPanelClient.ResumeLayout(false);
+            this.groupPanelClientContact.ResumeLayout(false);
+            this.groupPanelClientContact.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).EndInit();
+            this.groupPanelClientGroup.ResumeLayout(false);
+            this.groupPanelClientGroup.PerformLayout();
             this.groupPanelClientStat.ResumeLayout(false);
             this.groupPanelClientStat.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).EndInit();
             this.groupPanelClientBasic.ResumeLayout(false);
             this.groupPanelClientBasic.PerformLayout();
             this.ResumeLayout(false);
@@ -1149,46 +2112,93 @@
         private DevComponents.DotNetBar.TabControlPanel tabPanelClientAccount;
         private DevComponents.DotNetBar.TabItem tabItemClientAccount;
         private System.Windows.Forms.BindingSource clientBindingSource;
-        private DevComponents.DotNetBar.Controls.TextBoxX cityCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX cityENTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX clientNameCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX contactTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx countryCodeTextBox;
-        private DevComponents.DotNetBar.Controls.MaskedTextBoxAdv emailTextBox;
-        private DevComponents.DotNetBar.Controls.MaskedTextBoxAdv faxNumberTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX groupNoTextBox;
-        private DevComponents.DotNetBar.Controls.CheckBoxX isGroupTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX pMNameTextBox;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelClientBasic;
-        private DevComponents.DotNetBar.Controls.TextBoxX addressCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX addressENTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX clientNameEN_1TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX clientNameEN_2TextBox;
-        private DevComponents.DotNetBar.Controls.MaskedTextBoxAdv clientNoTextBox;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelClientStat;
-        private DevComponents.DotNetBar.Controls.TextBoxX productCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX productENTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX registrationNumberTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX representativeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX rMNameTextBox;
-        private DevComponents.DotNetBar.Controls.MaskedTextBoxAdv telephoneTextBox;
-        private DevComponents.DotNetBar.Controls.MaskedTextBoxAdv wetsiteTextBox;
-        private DevComponents.DotNetBar.Controls.MaskedTextBoxAdv cellPhoneTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx clientLevelTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx clientTypeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX companyCodeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX postCodeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX provinceCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX provinceENTextBox;
         private DevComponents.DotNetBar.ButtonX btnCancel;
         private DevComponents.DotNetBar.ButtonX btnSave;
-        private DevComponents.Editors.ComboItem comboItem5;
-        private DevComponents.Editors.ComboItem comboItem6;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelClientGroup;
+        private DevComponents.DotNetBar.Controls.TextBoxX clientNameEN_2TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX clientNameEN_1TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX clientNameCNTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX addressCNTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX productENTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX productCNTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX provinceENTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX provinceCNTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX cityENTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX cityCNTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX addressENTextBox;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelClientContact;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx countryCodeComboBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX postCodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX contactTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX wetsiteTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX representativeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX cellPhoneTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX faxNumberTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX telephoneTextBox;
+        private DevComponents.DotNetBar.LabelX lblGroupNameCN;
+        private DevComponents.DotNetBar.Controls.TextBoxX groupNoTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx isGroupComboBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX companyCodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX registrationNumberTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbGroupNameEN;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbGroupNameCN;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx clientLevelComboBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx clientTypeComboBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX rMNameTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX pMNameTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX clientNoTextBox;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelClientBasic;
+        private DevComponents.Editors.ComboItem comboItem7;
+        private DevComponents.Editors.ComboItem comboItem8;
         private DevComponents.Editors.ComboItem comboItem1;
         private DevComponents.Editors.ComboItem comboItem2;
         private DevComponents.Editors.ComboItem comboItem3;
         private DevComponents.Editors.ComboItem comboItem4;
+        private DevComponents.Editors.ComboItem comboItem5;
+        private DevComponents.Editors.ComboItem comboItem6;
         private DevComponents.DotNetBar.Controls.ComboTree departmentComboTree;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanel1;
+        private DevComponents.DotNetBar.Controls.TextBoxX creditLineStatusTextBox;
+        private System.Windows.Forms.BindingSource clientCreditLineBindingSource;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx approveTypeComboBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX approveNoTextBox;
+        private System.Windows.Forms.DateTimePicker periodEndDateTimePicker;
+        private System.Windows.Forms.DateTimePicker periodBeginDateTimePicker;
+        private DevComponents.DotNetBar.Controls.TextBoxX creditLineTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx creditLineTypeComboBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx creditLineCurrencyComboBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX freezerTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX freezeReasonTextBox;
+        private DevComponents.DotNetBar.ButtonX buttonX5;
+        private DevComponents.DotNetBar.ButtonX buttonX4;
+        private DevComponents.DotNetBar.ButtonX buttonX3;
+        private DevComponents.DotNetBar.ButtonX buttonX2;
+        private DevComponents.DotNetBar.ButtonX buttonX1;
+        private System.Windows.Forms.DateTimePicker freezeDateDateTimePicker;
+        private System.Windows.Forms.DateTimePicker unfreezeDateDateTimePicker;
+        private DevComponents.DotNetBar.Controls.TextBoxX unfreezerTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX unfreezeReasonTextBox;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanel2;
+        private DevComponents.DotNetBar.Controls.DataGridViewX clientCreditLineDataGridView;
+        private DevComponents.DotNetBar.Controls.TextBoxX clientCommentTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX creditLineCommentTextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
     }
 }

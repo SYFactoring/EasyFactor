@@ -20,7 +20,11 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <TargetFrameworkProfile />
     <StartupObject>CMBC.EasyFactor.Program</StartupObject>
-    <PublishUrl>publish\</PublishUrl>
+    <ManifestCertificateThumbprint>39C659FC473C3F4A98E2A9A80A4966A1A8E399B5</ManifestCertificateThumbprint>
+    <ManifestKeyFile>EasyFactor_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <PublishUrl>C:\Users\Yiming\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -30,7 +34,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -87,6 +91,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="CaseMgr\CaseApp\CaseAppUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CaseMgr\CaseApp\CaseAppUI.Designer.cs">
+      <DependentUpon>CaseAppUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB.dbml\DB.cs">
       <DependentUpon>DB.dbml</DependentUpon>
     </Compile>
@@ -109,11 +119,11 @@
     <Compile Include="InfoMgr\ClientMgr\ClientDetail.Designer.cs">
       <DependentUpon>ClientDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="InfoMgr\ClientMgr\ClientMgrUI.cs">
+    <Compile Include="InfoMgr\ClientMgr\ClientMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InfoMgr\ClientMgr\ClientMgrUI.Designer.cs">
-      <DependentUpon>ClientMgrUI.cs</DependentUpon>
+    <Compile Include="InfoMgr\ClientMgr\ClientMgr.Designer.cs">
+      <DependentUpon>ClientMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="CaseMgr\ContractMgr\ContractDetailUI.cs">
       <SubType>Form</SubType>
@@ -127,6 +137,12 @@
     <Compile Include="CaseMgr\ContractMgr\ContractMgrUI.Designer.cs">
       <DependentUpon>ContractMgrUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="InfoMgr\DepartmentMgr\DepartmentMgr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\DepartmentMgr\DepartmentMgr.Designer.cs">
+      <DependentUpon>DepartmentMgr.cs</DependentUpon>
+    </Compile>
     <Compile Include="InfoMgr\FactorMgr\FactorDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,11 +155,17 @@
     <Compile Include="InfoMgr\FactorMgr\FactorDetailUI.Designer.cs">
       <DependentUpon>FactorDetailUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="InfoMgr\FactorMgr\FactorMgrUI.cs">
+    <Compile Include="InfoMgr\FactorMgr\FactorMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InfoMgr\FactorMgr\FactorMgrUI.Designer.cs">
-      <DependentUpon>FactorMgrUI.cs</DependentUpon>
+    <Compile Include="InfoMgr\FactorMgr\FactorMgr.Designer.cs">
+      <DependentUpon>FactorMgr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoMgr\QueryUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\QueryUI.Designer.cs">
+      <DependentUpon>QueryUI.cs</DependentUpon>
     </Compile>
     <Compile Include="InfoMgr\UserMgr\UserDetail.cs">
       <SubType>Form</SubType>
@@ -151,11 +173,11 @@
     <Compile Include="InfoMgr\UserMgr\UserDetail.Designer.cs">
       <DependentUpon>UserDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="InfoMgr\UserMgr\UserMgrUI.cs">
+    <Compile Include="InfoMgr\UserMgr\UserMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InfoMgr\UserMgr\UserMgrUI.Designer.cs">
-      <DependentUpon>UserMgrUI.cs</DependentUpon>
+    <Compile Include="InfoMgr\UserMgr\UserMgr.Designer.cs">
+      <DependentUpon>UserMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="InvoiceMgr\ContractInfo\ContractBasicInfo.cs">
       <SubType>UserControl</SubType>
@@ -198,6 +220,10 @@
     <None Include="DB.dbml\DB.dbml.layout">
       <DependentUpon>DB.dbml</DependentUpon>
     </None>
+    <EmbeddedResource Include="CaseMgr\CaseApp\CaseAppUI.resx">
+      <DependentUpon>CaseAppUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Help\About\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -206,8 +232,8 @@
       <DependentUpon>ClientDetail.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="InfoMgr\ClientMgr\ClientMgrUI.resx">
-      <DependentUpon>ClientMgrUI.cs</DependentUpon>
+    <EmbeddedResource Include="InfoMgr\ClientMgr\ClientMgr.resx">
+      <DependentUpon>ClientMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CaseMgr\ContractMgr\ContractDetailUI.resx">
@@ -218,6 +244,10 @@
       <DependentUpon>ContractMgrUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\DepartmentMgr\DepartmentMgr.resx">
+      <DependentUpon>DepartmentMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\FactorMgr\FactorDetail.resx">
       <DependentUpon>FactorDetail.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -226,16 +256,20 @@
       <DependentUpon>FactorDetailUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="InfoMgr\FactorMgr\FactorMgrUI.resx">
-      <DependentUpon>FactorMgrUI.cs</DependentUpon>
+    <EmbeddedResource Include="InfoMgr\FactorMgr\FactorMgr.resx">
+      <DependentUpon>FactorMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\QueryUI.resx">
+      <DependentUpon>QueryUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\UserMgr\UserDetail.resx">
       <DependentUpon>UserDetail.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="InfoMgr\UserMgr\UserMgrUI.resx">
-      <DependentUpon>UserMgrUI.cs</DependentUpon>
+    <EmbeddedResource Include="InfoMgr\UserMgr\UserMgr.resx">
+      <DependentUpon>UserMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="InvoiceMgr\ContractInfo\ContractBasicInfo.resx">
@@ -399,6 +433,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CaseMgr\CDA\" />
+    <Folder Include="CaseMgr\CreditCoverNeg\" />
     <Folder Include="Help\CheckForUpdates\" />
     <Folder Include="Help\Content\" />
     <Folder Include="InvoiceMgr\InvoiceFinance\" />

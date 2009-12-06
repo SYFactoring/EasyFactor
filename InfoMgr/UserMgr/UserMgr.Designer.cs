@@ -9,7 +9,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     /// <summary>
     /// User Management User Interface Designer
     /// </summary>
-    public partial class UserMgrUI
+    public partial class UserMgr
     {
         /// <summary> 
         /// Required designer variable.

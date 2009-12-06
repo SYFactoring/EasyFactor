@@ -23,6 +23,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private readonly CMBC.EasyFactor.DB.dbml.Client originalClient;
 
+        public enum OpType { ADD_CLIENT_CREIDT_COVER };
+
         /// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
@@ -48,6 +50,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // this.clientAccountMgrBindingSource.DataSource = updateClient.ClientAccounts;
         }
 
+        public ClientDetail(Client client, bool isEditable, bool opType)
+            : this(client, isEditable)
+        {
+            this.tabControl.SelectedTab = this.tabItemClientCreditLine;
+        }
         /// <summary>
         /// update editable status
         /// </summary>
@@ -179,14 +186,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         private void FormLoad(object sender, EventArgs e)
         {
-            this.countryCodeTextBox.DataSource = App.Current.DbContext.Countries;
-            this.countryCodeTextBox.DisplayMember = "CountryFormatCN";
-            this.countryCodeTextBox.ValueMember = "CountryCode";
+            this.countryCodeComboBox.DataSource = App.Current.DbContext.Countries;
+            this.countryCodeComboBox.DisplayMember = "CountryFormatCN";
+            this.countryCodeComboBox.ValueMember = "CountryCode";
 
             this.departmentComboTree.DataSource = App.Current.DbContext.Departments;
             this.departmentComboTree.DisplayMembers = "DepartmentName";
             this.departmentComboTree.ValueMember = "DepartmentCode";
             this.departmentComboTree.GroupingMembers = "Domain";
+
+            this.creditLineCurrencyComboBox.DataSource = App.Current.DbContext.Currencies;
+            this.creditLineCurrencyComboBox.DisplayMember = "CurrencyFormat";
+            this.creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
         }
     }
 }

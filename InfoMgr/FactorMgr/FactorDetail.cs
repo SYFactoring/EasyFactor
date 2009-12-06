@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using CMBC.EasyFactor.DB.dbml;
 
 namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
@@ -15,5 +8,22 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         {
             InitializeComponent();
         }
+
+        public FactorDetail(Factor factor, bool isEditable)
+        {
+            InitializeComponent();
+        }
+
+        private void FactorDetail_Load(object sender, System.EventArgs e)
+        {
+            this.countryNameComboBox.DataSource = App.Current.DbContext.Countries;
+            this.countryNameComboBox.DisplayMember = "CountryNameEN";
+            this.countryNameComboBox.ValueMember = "CountryNameEN";
+
+            this.creditLineCurrencyComboBox.DataSource = App.Current.DbContext.Currencies;
+            this.creditLineCurrencyComboBox.DisplayMember = "CurrencyFormat";
+            this.creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
+        }
+
     }
 }
