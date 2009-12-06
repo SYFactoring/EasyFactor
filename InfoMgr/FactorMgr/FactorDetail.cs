@@ -4,11 +4,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
     public partial class FactorDetail : DevComponents.DotNetBar.Office2007Form
     {
-        public FactorDetail()
-        {
-            InitializeComponent();
-        }
-
+ 
         public FactorDetail(Factor factor, bool isEditable)
         {
             InitializeComponent();

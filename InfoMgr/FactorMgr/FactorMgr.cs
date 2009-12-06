@@ -286,7 +286,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e">Event Args</param>
         private void ItemNew(object sender, EventArgs e)
         {
-            new FactorDetailUI(null, true).ShowDialog(this);
+            new FactorDetail(null, true).ShowDialog(this);
         }
 
         /// <summary>
@@ -307,7 +307,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 Factor selectedFactor = App.Current.DbContext.Factors.FirstOrDefault(f => f.FactorCode == factorCode);
                 if (selectedFactor != null)
                 {
-                    new FactorDetailUI(selectedFactor, true).ShowDialog(this);
+                    new FactorDetail(selectedFactor, true).ShowDialog(this);
                 }
             }
         }
@@ -390,7 +390,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 Factor selectedFactor = App.Current.DbContext.Factors.FirstOrDefault(f => f.FactorCode == factorCode);
                 if (selectedFactor != null)
                 {
-                    new FactorDetailUI(selectedFactor, false).ShowDialog(this);
+                    new FactorDetail(selectedFactor, false).ShowDialog(this);
                 }
             }
         }

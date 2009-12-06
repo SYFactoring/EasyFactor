@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
-            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
+            this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbDepartmentName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDeparmentName = new DevComponents.DotNetBar.LabelX();
             this.tbDepartmentCode = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -64,7 +64,7 @@
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.panelQuery.Controls.Add(this.lblCount);
-            this.panelQuery.Controls.Add(this.buttonX1);
+            this.panelQuery.Controls.Add(this.btnQuery);
             this.panelQuery.Controls.Add(this.tbDepartmentName);
             this.panelQuery.Controls.Add(this.lblDeparmentName);
             this.panelQuery.Controls.Add(this.tbDepartmentCode);
@@ -95,17 +95,17 @@
             this.lblCount.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.lblCount.TabIndex = 5;
             // 
-            // buttonX1
+            // btnQuery
             // 
-            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX1.Location = new System.Drawing.Point(330, 2);
-            this.buttonX1.Name = "buttonX1";
-            this.buttonX1.Size = new System.Drawing.Size(75, 23);
-            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX1.TabIndex = 4;
-            this.buttonX1.Text = "查询";
-            this.buttonX1.Click += new System.EventHandler(this.Query);
+            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQuery.Location = new System.Drawing.Point(330, 2);
+            this.btnQuery.Name = "btnQuery";
+            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.TabIndex = 4;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.Click += new System.EventHandler(this.Query);
             // 
             // tbDepartmentName
             // 
@@ -321,13 +321,13 @@
             this.dataGridViewTextBoxColumn16.ReadOnly = true;
             this.dataGridViewTextBoxColumn16.Width = 65;
             // 
-            // DepartmentMgrUI
+            // DepartmentMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvDepartments);
             this.Controls.Add(this.panelQuery);
-            this.Name = "DepartmentMgrUI";
+            this.Name = "DepartmentMgr";
             this.Size = new System.Drawing.Size(605, 460);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
@@ -342,7 +342,7 @@
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private System.Windows.Forms.BindingSource departmentMgrBindingSource;
         private System.Windows.Forms.DataGridView dgvDepartments;
-        private DevComponents.DotNetBar.ButtonX buttonX1;
+        private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbDepartmentName;
         private DevComponents.DotNetBar.LabelX lblDeparmentName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbDepartmentCode;

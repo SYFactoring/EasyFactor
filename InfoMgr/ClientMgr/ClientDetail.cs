@@ -63,10 +63,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
             if (!isEditable)
             {
-                this.btnCancel.Enabled = false;
-                this.btnSave.Enabled = false;
-                this.btnCancel.Visible = false;
-                this.btnSave.Visible = false;
+                this.btnClientCancel.Enabled = false;
+                this.btnClientSave.Enabled = false;
+                this.btnClientCancel.Visible = false;
+                this.btnClientSave.Visible = false;
 
                 //this.tbAddressCN.ReadOnly = true;
                 //this.tbAddressEN.ReadOnly = true;
