@@ -73,7 +73,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblFactorCode = new DevComponents.DotNetBar.LabelX();
             this.lblFactorType = new DevComponents.DotNetBar.LabelX();
             this.dgvFactor = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.factorMgrBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.factorCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -109,6 +108,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.factorMgrBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.contextMenuFactorMgr.SuspendLayout();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactor)).BeginInit();
@@ -329,6 +329,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactor.AllowUserToOrderColumns = true;
             this.dgvFactor.AutoGenerateColumns = false;
             this.dgvFactor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvFactor.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvFactor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn6,
@@ -379,17 +380,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFactor.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvFactor.Location = new System.Drawing.Point(0, 34);
+            this.dgvFactor.MultiSelect = false;
             this.dgvFactor.Name = "dgvFactor";
             this.dgvFactor.ReadOnly = true;
-            this.dgvFactor.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvFactor.RowTemplate.Height = 23;
             this.dgvFactor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvFactor.Size = new System.Drawing.Size(911, 314);
             this.dgvFactor.TabIndex = 2;
-            // 
-            // factorMgrBindingSource
-            // 
-            this.factorMgrBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Factor);
+            this.dgvFactor.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -670,14 +668,18 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn36.ReadOnly = true;
             this.dataGridViewTextBoxColumn36.Width = 56;
             // 
-            // FactorMgrUI
+            // factorMgrBindingSource
+            // 
+            this.factorMgrBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Factor);
+            // 
+            // FactorMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.dgvFactor);
             this.Controls.Add(this.panelQuery);
-            this.Name = "FactorMgrUI";
+            this.Name = "FactorMgr";
             this.Size = new System.Drawing.Size(911, 348);
             this.contextMenuFactorMgr.ResumeLayout(false);
             this.panelQuery.ResumeLayout(false);

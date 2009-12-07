@@ -7270,8 +7270,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _FactorCode;
 		
-		private string _CreditLineType;
-		
 		private string _CreditLineCurrency;
 		
 		private System.Nullable<double> _CreditLine;
@@ -7310,8 +7308,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreditLineIDChanged();
     partial void OnFactorCodeChanging(string value);
     partial void OnFactorCodeChanged();
-    partial void OnCreditLineTypeChanging(string value);
-    partial void OnCreditLineTypeChanged();
     partial void OnCreditLineCurrencyChanging(string value);
     partial void OnCreditLineCurrencyChanged();
     partial void OnCreditLineChanging(System.Nullable<double> value);
@@ -7388,26 +7384,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._FactorCode = value;
 					this.SendPropertyChanged("FactorCode");
 					this.OnFactorCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreditLineType", DbType="NVarChar(50)")]
-		public string CreditLineType
-		{
-			get
-			{
-				return this._CreditLineType;
-			}
-			set
-			{
-				if ((this._CreditLineType != value))
-				{
-					this.OnCreditLineTypeChanging(value);
-					this.SendPropertyChanging();
-					this._CreditLineType = value;
-					this.SendPropertyChanged("CreditLineType");
-					this.OnCreditLineTypeChanged();
 				}
 			}
 		}

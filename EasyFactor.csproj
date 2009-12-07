@@ -23,7 +23,7 @@
     <ManifestCertificateThumbprint>39C659FC473C3F4A98E2A9A80A4966A1A8E399B5</ManifestCertificateThumbprint>
     <ManifestKeyFile>EasyFactor_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <PublishUrl>C:\Users\Yiming\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -149,12 +149,6 @@
     <Compile Include="InfoMgr\FactorMgr\FactorDetail.Designer.cs">
       <DependentUpon>FactorDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="InfoMgr\FactorMgr\FactorDetailUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InfoMgr\FactorMgr\FactorDetailUI.Designer.cs">
-      <DependentUpon>FactorDetailUI.cs</DependentUpon>
-    </Compile>
     <Compile Include="InfoMgr\FactorMgr\FactorMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -250,10 +244,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\FactorMgr\FactorDetail.resx">
       <DependentUpon>FactorDetail.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InfoMgr\FactorMgr\FactorDetailUI.resx">
-      <DependentUpon>FactorDetailUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\FactorMgr\FactorMgr.resx">

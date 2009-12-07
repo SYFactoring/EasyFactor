@@ -35,8 +35,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="isEditable">true if editable</param>
         public FactorMgr(bool isEditable)
         {
-            this.isEditable = isEditable;
             InitializeComponent();
+            this.isEditable = isEditable;
             this.UpdateEditableStatus();
         }
 
@@ -70,7 +70,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             ApplicationClass app = new ApplicationClass { Visible = false };
             WorkbookClass w = (WorkbookClass)app.Workbooks.Open(
-               @fileName, 
+               @fileName,
                Missing.Value,
                Missing.Value,
                Missing.Value,
@@ -88,11 +88,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             Sheets sheets = w.Worksheets;
             Worksheet datasheet = null;
-            
-            // TODO 选择第一个Sheet，而不是根据Sheet名
+
             foreach (Worksheet sheet in sheets)
             {
-                if (sheet.Name == "qryMemberExportExcel")
+                if (datasheet == null)
                 {
                     datasheet = sheet;
                     break;
@@ -101,114 +100,73 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             if (datasheet == null)
             {
-                MessageBox.Show("未找到指定的Sheet！");
+                MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 app.Quit();
-                app = null;
                 return;
             }
 
-            Range range = datasheet.get_Range("A2", "AG500");
-
+            Range range = datasheet.get_Range("A2", "AG300");
+            bool hasError = false;
             //App.Current.MainWindow.SetProgressBarVisibility(true);
-            string msg = string.Empty;
 
             Array values = (Array)range.Formula;
             if (values != null)
             {
-                IQueryable<Factor> factorList = from factor in App.Current.DbContext.Factors select factor;
+                var factorList = App.Current.DbContext.Factors;
 
-                int len1 = values.GetLength(0);
-                int len2 = values.GetLength(1);
+                int length = values.GetLength(0);
 
                 //App.Current.MainWindow.SetProgressBarLength(300);
 
-                for (int i = 1; i <= len1; i++)
+                for (int row = 1; row <= length; row++)
                 {
-                    if (!values.GetValue(i, 1).Equals(string.Empty))
+                    if (!values.GetValue(row, 1).Equals(string.Empty))
                     {
                         bool find = false;
 
-                        Factor factor = new Factor();
-                        int j = 1;
-                        factor.FactorType = "保理商";
-                        factor.CountryName = values.GetValue(i, j++).ToString();
-                        factor.FactorCode = values.GetValue(i, j++).ToString();
+                        Factor newFactor = new Factor();
+                        int column = 1;
+                        newFactor.FactorType = "保理商";
+                        newFactor.CountryName = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.FactorCode = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.CompanyName = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.ShortName = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.Department = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.PostalAddress_1 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.PostalAddress_2 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.PostalCodePost = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.CityPost = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.VisitingAddress_1 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.VisitingAddress_2 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.PostalCodeVisiting = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.CityVisiting = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.Email = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.WebSite = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.Telephone_1 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.Telephone_2 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.Telefax_1 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.Telefax_2 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.WorkingHours = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.GeneralCorrespondence_1 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.GeneralCorrespondence_2 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.Contacts_1 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.Contacts_2 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.Contacts_3 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.Contacts_4 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.Management_1 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.Management_2 = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.Shareholders = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.IFISAvailableOnPrivateForum = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.MembershipStatus = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.MembershipDate = values.GetValue(row, column++).ToString().Trim();
+                        newFactor.DateOfLatestRevision = values.GetValue(row, column).ToString().Trim();
+                        newFactor.Comment = string.Empty;
 
-                        factor.CompanyName
-                            = values.GetValue(i, j++).ToString();
-                        factor.ShortName = values.GetValue(i, j++).ToString();
-                        factor.Department = values.GetValue(i, j++).ToString();
-                        factor.PostalAddress_1 = values.GetValue(i, j++).ToString();
-                        factor.PostalAddress_2 = values.GetValue(i, j++).ToString();
-                        factor.PostalCodePost = values.GetValue(i, j++).ToString();
-                        factor.CityPost = values.GetValue(i, j++).ToString();
-                        factor.VisitingAddress_1 = values.GetValue(i, j++).ToString();
-                        factor.VisitingAddress_2 = values.GetValue(i, j++).ToString();
-                        factor.PostalCodeVisiting = values.GetValue(i, j++).ToString();
-                        factor.CityVisiting = values.GetValue(i, j++).ToString();
-                        factor.Email = values.GetValue(i, j++).ToString();
-                        factor.WebSite = values.GetValue(i, j++).ToString();
-                        factor.Telephone_1 = values.GetValue(i, j++).ToString();
-                        factor.Telephone_2 = values.GetValue(i, j++).ToString();
-                        factor.Telefax_1 = values.GetValue(i, j++).ToString();
-                        factor.Telefax_2 = values.GetValue(i, j++).ToString();
-                        factor.WorkingHours = values.GetValue(i, j++).ToString();
-                        factor.GeneralCorrespondence_1 = values.GetValue(i, j++).ToString();
-                        factor.GeneralCorrespondence_2 = values.GetValue(i, j++).ToString();
-                        factor.Contacts_1 = values.GetValue(i, j++).ToString();
-                        factor.Contacts_2 = values.GetValue(i, j++).ToString();
-                        factor.Contacts_3 = values.GetValue(i, j++).ToString();
-                        factor.Contacts_4 = values.GetValue(i, j++).ToString();
-                        factor.Management_1 = values.GetValue(i, j++).ToString();
-                        factor.Management_2 = values.GetValue(i, j++).ToString();
-                        factor.Shareholders = values.GetValue(i, j++).ToString();
-                        factor.IFISAvailableOnPrivateForum = values.GetValue(i, j++).ToString();
-                        factor.MembershipStatus = values.GetValue(i, j++).ToString();
-                        factor.MembershipDate = values.GetValue(i, j++).ToString();
-                        factor.DateOfLatestRevision = values.GetValue(i, j).ToString();
-                        factor.Comment = string.Empty;
-                        foreach (Factor fa in factorList)
+                        foreach (Factor oldFactor in factorList)
                         {
-                            if (fa.FactorCode.Equals(factor.FactorCode))
+                            if (oldFactor.FactorCode.Equals(newFactor.FactorCode))
                             {
-                                
-                                //this factor exists in the database
-                                fa.CityPost = factor.CityPost;
-                                fa.CityVisiting = factor.CityVisiting;
-                                fa.Comment = factor.Comment;
-                                fa.CompanyName = factor.CompanyName;
-                                fa.Contacts_1 = factor.Contacts_1;
-                                fa.Contacts_2 = factor.Contacts_2;
-                                fa.Contacts_3 = factor.Contacts_3;
-                                fa.Contacts_4 = factor.Contacts_4;
-                                fa.CountryName = factor.CountryName;
-                                fa.DateOfLatestRevision = factor.DateOfLatestRevision;
-                                fa.Department = factor.Department;
-                                fa.Email = factor.Email;
-                                fa.FactorCode = factor.FactorCode;
-                                fa.FactorType = factor.FactorType;
-                                fa.GeneralCorrespondence_1 = factor.GeneralCorrespondence_1;
-                                fa.GeneralCorrespondence_2 = factor.GeneralCorrespondence_2;
-                                fa.IFISAvailableOnPrivateForum = factor.IFISAvailableOnPrivateForum;
-                                fa.Management_1 = factor.Management_1;
-                                fa.Management_2 = factor.Management_2;
-                                fa.MembershipDate = factor.MembershipDate;
-                                fa.MembershipStatus = factor.MembershipStatus;
-                                fa.PostalAddress_1 = factor.PostalAddress_1;
-                                fa.PostalAddress_2 = factor.PostalAddress_2;
-                                fa.PostalCodePost = factor.PostalCodePost;
-                                fa.PostalCodeVisiting = factor.PostalCodeVisiting;
-                                fa.Shareholders = factor.Shareholders;
-                                fa.ShortName = factor.ShortName;
-                                fa.Telefax_1 = factor.Telefax_1;
-                                fa.Telefax_2 = factor.Telefax_2;
-                                fa.Telephone_1 = factor.Telephone_1;
-                                fa.Telephone_2 = factor.Telephone_2;
-                                fa.VisitingAddress_1 = factor.VisitingAddress_1;
-                                fa.VisitingAddress_2 = factor.VisitingAddress_2;
-                                fa.WebSite = factor.WebSite;
-                                fa.WorkingHours = factor.WorkingHours;
-
+                                oldFactor.Copy(newFactor);
                                 find = true;
                                 break;
                             }
@@ -218,23 +176,31 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                         {
                             try
                             {
-                                App.Current.DbContext.Factors.InsertOnSubmit(factor);
+                                App.Current.DbContext.Factors.InsertOnSubmit(newFactor);
                             }
                             catch (Exception)
                             {
-                                msg += "保理商" + factor.FactorCode + "导入失败！" + "\n";
+                                hasError = true;
+                                MessageBox.Show(newFactor.FactorCode + "导入失败！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                         }
 
                         //App.Current.MainWindow.SetProgressBarIncrease(1);
                     }
                 }
+                if (hasError)
+                {
+                    MessageBox.Show("本次导入失败", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    App.Current.DbContext.SubmitChanges();
+                    MessageBox.Show("本次导入成功", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
 
             //App.Current.MainWindow.SetProgressBarLength(300);
-            Thread.Sleep(100);
 
-            MessageBox.Show(!msg.Equals(string.Empty) ? msg : "Import Successful");
             app.Quit();
 
             //App.Current.MainWindow.SetProgressBarVisibility(false);
