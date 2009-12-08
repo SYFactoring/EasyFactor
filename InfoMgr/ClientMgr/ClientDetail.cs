@@ -10,106 +10,127 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using System.Windows.Forms;
     using System.Linq;
     using CMBC.EasyFactor.DB.dbml;
+    using DevComponents.DotNetBar.Controls;
+    using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils;
 
     public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
     {
         /// <summary>
-        /// flag indicates if add
-        /// </summary>
-        private readonly bool isAdd;
-
-        /// <summary>
         /// original client
         /// </summary>
-        private readonly CMBC.EasyFactor.DB.dbml.Client originalClient;
+        private readonly Client originalClient;
 
-        public enum OpType { ADD_CLIENT_CREIDT_COVER };
+        public enum OpType { NEW_CLIENT, UPDATE_CLIENT, DETAIL_CLIENT, UPDATE_CLIENT_CREDIT_COVER };
+
+        private readonly OpType opType;
 
         /// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client">selected client</param>
         /// <param name="isEditable">true if editable</param>
-        public ClientDetail(Client client, bool isEditable)
+        public ClientDetail(Client client, OpType opType)
         {
             this.InitializeComponent();
             Client updateClient = new Client();
-            if (client == null)
-            {
-                this.isAdd = true;
-            }
-            else
+            this.opType = opType;
+            if (opType == OpType.UPDATE_CLIENT)
             {
                 this.originalClient = client;
+            }
+            if (client != null)
+            {
                 updateClient.Copy(client);
             }
-
             this.clientBindingSource.DataSource = updateClient;
-            this.UpdateEditableStatus(isEditable);
+            this.UpdateEditableStatus();
+            this.fillOtherField(updateClient);
             // this.creditLineMgrBindingSource.DataSource = updateClient.ClientCreditLines;
             // this.clientAccountMgrBindingSource.DataSource = updateClient.ClientAccounts;
         }
 
-        public ClientDetail(Client client, bool isEditable, bool opType)
-            : this(client, isEditable)
+        private void fillOtherField(Client client)
         {
-            this.tabControl.SelectedTab = this.tabItemClientCreditLine;
+
         }
+
         /// <summary>
-        /// update editable status
+        /// udpate editable status
         /// </summary>
-        /// <param name="isEditable">true if editable</param>
-        private void UpdateEditableStatus(bool isEditable)
+        private void UpdateEditableStatus()
         {
-            if (!isEditable)
+            if (opType == OpType.DETAIL_CLIENT)
             {
-                this.btnClientCancel.Enabled = false;
-                this.btnClientSave.Enabled = false;
-                this.btnClientCancel.Visible = false;
-                this.btnClientSave.Visible = false;
+                foreach (Control comp in this.groupPanelClientBasic.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelClientContact.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelClientGroup.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelClientStat.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, false);
+                }
+                ControlUtil.setComponetEditable(this.btnClientCancel, false);
+                ControlUtil.setComponetEditable(this.btnClientSave, false);
+            }
+            else if (opType == OpType.NEW_CLIENT)
+            {
+                foreach (Control comp in this.groupPanelClientBasic.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelClientContact.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelClientGroup.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelClientStat.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, true);
+                }
+                ControlUtil.setComponetEditable(this.btnClientCancel, true);
+                ControlUtil.setComponetEditable(this.btnClientSave, true);
+            }
+            else if (opType == OpType.UPDATE_CLIENT)
+            {
+                foreach (Control comp in this.groupPanelClientBasic.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelClientContact.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelClientGroup.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelClientStat.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, true);
+                }
+                ControlUtil.setComponetEditable(this.btnClientCancel, true);
+                ControlUtil.setComponetEditable(this.btnClientSave, true);
+                this.clientNoTextBox.ReadOnly = true;
+            }
+            else if (opType == OpType.UPDATE_CLIENT_CREDIT_COVER)
+            {
 
-                //this.tbAddressCN.ReadOnly = true;
-                //this.tbAddressEN.ReadOnly = true;
-                //this.tbBranchID.ReadOnly = true;
-                //this.tbCellPhone.ReadOnly = true;
-                //this.tbCityCN.ReadOnly = true;
-                //this.tbCityEN.ReadOnly = true;
-                //this.tbClientNameCN.ReadOnly = true;
-                //this.tbClientNameEN1.ReadOnly = true;
-                //this.tbClientNameEN2.ReadOnly = true;
-                //this.tbComment.ReadOnly = true;
-                //this.tbCompanyCode.ReadOnly = true;
-                //this.tbCompanyRegistrationNumber.ReadOnly = true;
-                //this.tbContactName.ReadOnly = true;
-                //this.tbCountryCode.Enabled = false;
-                ////  this.tbCountryEN.ReadOnly = true;
-                //this.tbClientNo.ReadOnly = true;
-                //this.tbEmail.ReadOnly = true;
-                //this.tbFaxNumber.ReadOnly = true;
-                //this.tbPMName.ReadOnly = true;
-                //this.tbPostCode.ReadOnly = true;
-                //this.tbProvinceCN.ReadOnly = true;
-                //this.tbProvinceEN.ReadOnly = true;
-                //this.tbResponsibleAgency.ReadOnly = true;
-                //this.tbTelephone.ReadOnly = true;
-                //this.tbWetsite.ReadOnly = true;
-
-                //this.tbAccountComment.ReadOnly = true;
-                //this.tbAccountCurrency.ReadOnly = true;
-                //this.tbAccountNo.ReadOnly = true;
-                //this.tbAccountType.ReadOnly = true;
-                //this.tbBank.ReadOnly = true;
-                //this.tbBranch.ReadOnly = true;
-
-                //this.tbCreditComment.ReadOnly = true;
-                //this.tbCreditLineCurrency.ReadOnly = true;
-                //this.tbCreditLineLimit.ReadOnly = true;
-                //this.tbCreditLineType.ReadOnly = true;
-                //this.tbAuthorizationNo.ReadOnly = true;
-                //this.tpPeriodBeginDate.Enabled = false;
-                //this.tpPeriodEndDate.Enabled = false;
             }
         }
+
+
 
         /// <summary>
         /// Save current editing
@@ -129,7 +150,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             //cCreditLines.Add(cCreditLine);
             //updateClient.ClientAccounts = cAccounts;
             //updateClient.ClientCreditLines = cCreditLines;
-            if (this.isAdd)
+            if (opType == OpType.NEW_CLIENT)
             {
                 bool isAddOK = true;
                 try

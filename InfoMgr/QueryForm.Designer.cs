@@ -1,6 +1,6 @@
 ﻿namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
-    partial class QueryUI
+    partial class QueryForm
     {
         /// <summary>
         /// Required designer variable.

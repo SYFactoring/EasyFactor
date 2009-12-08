@@ -17,7 +17,8 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
         private void SellerFactorSelect(object sender, EventArgs e)
         {
             FactorMgr factorMgr = new FactorMgr(false);
-            QueryUI queryUI = new QueryUI(factorMgr, "选择卖方保理商");
+            QueryForm queryUI = new QueryForm(factorMgr, "选择卖方保理商");
+            factorMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             Factor sellerFactor = factorMgr.Selected;
             if (sellerFactor != null)
@@ -30,7 +31,8 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
         private void BuyerFactorSelect(object sender, EventArgs e)
         {
             FactorMgr factorMgr = new FactorMgr(false);
-            QueryUI queryUI = new QueryUI(factorMgr, "选择买方保理商");
+            QueryForm queryUI = new QueryForm(factorMgr, "选择买方保理商");
+            factorMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             Factor buyerFactor = factorMgr.Selected;
             if (buyerFactor != null)
@@ -43,7 +45,8 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
         private void SellerSelect(object sender, EventArgs e)
         {
             ClientMgr clientMgr = new ClientMgr(false);
-            QueryUI queryUI = new QueryUI(clientMgr, "选择卖方");
+            QueryForm queryUI = new QueryForm(clientMgr, "选择卖方");
+            clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             Client seller = clientMgr.Selected;
             if (seller != null)
@@ -56,7 +59,8 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
         private void BuyerSelect(object sender, EventArgs e)
         {
             ClientMgr clientMgr = new ClientMgr(false);
-            QueryUI queryUI = new QueryUI(clientMgr, "选择买方");
+            QueryForm queryUI = new QueryForm(clientMgr, "选择买方");
+            clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             Client buyer = clientMgr.Selected;
             if (buyer != null)

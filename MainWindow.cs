@@ -89,7 +89,7 @@ namespace CMBC.EasyFactor
 
         private void ClientNew(object sender, EventArgs e)
         {
-            ClientDetail clientDetail = new ClientDetail(null, true);
+            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpType.NEW_CLIENT);
             clientDetail.ShowDialog(this);
         }
 

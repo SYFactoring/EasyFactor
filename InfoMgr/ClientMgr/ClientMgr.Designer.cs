@@ -129,14 +129,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemSelect.Name = "menuItemSelect";
             this.menuItemSelect.Size = new System.Drawing.Size(98, 22);
             this.menuItemSelect.Text = "选定";
-            this.menuItemSelect.Click += new System.EventHandler(this.ItemSelect);
+            this.menuItemSelect.Click += new System.EventHandler(this.SelectClient);
             // 
             // menuItemDetail
             // 
             this.menuItemDetail.Name = "menuItemDetail";
             this.menuItemDetail.Size = new System.Drawing.Size(98, 22);
             this.menuItemDetail.Text = "详细";
-            this.menuItemDetail.Click += new System.EventHandler(this.ItemDetail);
+            this.menuItemDetail.Click += new System.EventHandler(this.DetailClient);
             // 
             // toolStripSeparator
             // 
@@ -159,28 +159,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemNewClient.Name = "menuItemNewClient";
             this.menuItemNewClient.Size = new System.Drawing.Size(146, 22);
             this.menuItemNewClient.Text = "新建客户";
-            this.menuItemNewClient.Click += new System.EventHandler(this.ItemNew);
+            this.menuItemNewClient.Click += new System.EventHandler(this.NewClient);
             // 
             // menuItemNewClientCreditCover
             // 
             this.menuItemNewClientCreditCover.Name = "menuItemNewClientCreditCover";
             this.menuItemNewClientCreditCover.Size = new System.Drawing.Size(146, 22);
             this.menuItemNewClientCreditCover.Text = "新建额度信息";
-            this.menuItemNewClientCreditCover.Click += new System.EventHandler(this.ItemUpdateCreditLine);
+            this.menuItemNewClientCreditCover.Click += new System.EventHandler(this.UpdateClientCreditLine);
             // 
             // menuItemUpdateClient
             // 
             this.menuItemUpdateClient.Name = "menuItemUpdateClient";
             this.menuItemUpdateClient.Size = new System.Drawing.Size(146, 22);
             this.menuItemUpdateClient.Text = "更新客户";
-            this.menuItemUpdateClient.Click += new System.EventHandler(this.ItemUpdate);
+            this.menuItemUpdateClient.Click += new System.EventHandler(this.UpdateClient);
             // 
             // menuItemDeleteClient
             // 
             this.menuItemDeleteClient.Name = "menuItemDeleteClient";
             this.menuItemDeleteClient.Size = new System.Drawing.Size(146, 22);
             this.menuItemDeleteClient.Text = "删除客户";
-            this.menuItemDeleteClient.Click += new System.EventHandler(this.ItemDelete);
+            this.menuItemDeleteClient.Click += new System.EventHandler(this.DeleteClient);
             // 
             // clientMgrBindingSource
             // 
@@ -238,7 +238,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 6;
             this.btnQuery.Text = "查询";
-            this.btnQuery.Click += new System.EventHandler(this.Query);
+            this.btnQuery.Click += new System.EventHandler(this.QueryClients);
             // 
             // cbClientType
             // 
@@ -459,6 +459,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvClient.Size = new System.Drawing.Size(800, 539);
             this.dgvClient.TabIndex = 2;
+            this.dgvClient.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClient_CellDoubleClick);
             // 
             // clientNoColumn
             // 
@@ -731,14 +732,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.commentDataGridViewTextBoxColumn.ReadOnly = true;
             this.commentDataGridViewTextBoxColumn.Width = 56;
             // 
-            // ClientMgrUI
+            // ClientMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.dgvClient);
             this.Controls.Add(this.pnlQuery);
-            this.Name = "ClientMgrUI";
+            this.Name = "ClientMgr";
             this.Size = new System.Drawing.Size(800, 600);
             this.contextMenuClientMgr.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.clientMgrBindingSource)).EndInit();

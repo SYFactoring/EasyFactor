@@ -24,7 +24,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <summary>
         /// form owner
         /// </summary>
-        private Form owner;
+        public Form OwnerForm
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Initializes a new instance of the ClientMgrUI class
@@ -34,7 +38,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
             InitializeComponent();
             this.isEditable = isEditable;
-            this.UpdateEditableStatus();
+            this.UpdateEditableStatus(isEditable);
         }
 
         /// <summary>
@@ -45,7 +49,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientMgr(bool isEditable, Form owner)
             : this(isEditable)
         {
-            this.owner = owner;
+            this.OwnerForm = owner;
         }
 
         /// <summary>
@@ -60,14 +64,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <summary>
         /// Update editable status
         /// </summary>
-        private void UpdateEditableStatus()
+        private void UpdateEditableStatus(bool isEditable)
         {
-            if (this.isEditable)
+            if (!this.isEditable)
             {
-                return;
+                this.toolStripSeparator.Visible = false;
+                this.menuItemEdit.Visible = false;
             }
-            this.toolStripSeparator.Visible = false;
-            this.menuItemEdit.Visible = false;
         }
 
         /// <summary>
@@ -75,11 +78,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void Query(object sender, System.EventArgs e)
+        private void QueryClients(object sender, System.EventArgs e)
         {
-            
-            // TODO Need fix this
-            var queryResult = App.Current.DbContext.Clients.Where(c =>
+              var queryResult = App.Current.DbContext.Clients.Where(c =>
                  (tbDepartment.Text == string.Empty || c.Department.DepartmentName.Contains(tbDepartment.Text))
               && (tbPM.Text == string.Empty || c.PMName.Contains(tbPM.Text))
               && (tbRM.Text == string.Empty || c.RMName.Contains(tbRM.Text))
@@ -98,9 +99,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemNew(object sender, System.EventArgs e)
+        private void NewClient(object sender, System.EventArgs e)
         {
-            ClientDetail clientDetail = new ClientDetail((Client)null, true);
+            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpType.NEW_CLIENT);
             clientDetail.ShowDialog(this);
         }
 
@@ -109,7 +110,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemUpdate(object sender, System.EventArgs e)
+        private void UpdateClient(object sender, System.EventArgs e)
         {
             if (this.dgvClient.SelectedRows.Count == 0 || clientMgrBindingSource == null)
             {
@@ -122,13 +123,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.ClientNo == cid);
                 if (selectedClient != null)
                 {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, true);
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpType.UPDATE_CLIENT);
                     clientDetail.ShowDialog(this);
                 }
             }
         }
 
-        private void ItemUpdateCreditLine(object sender, System.EventArgs e)
+        private void UpdateClientCreditLine(object sender, System.EventArgs e)
         {
             if (this.dgvClient.SelectedRows.Count == 0 || clientMgrBindingSource == null)
             {
@@ -141,7 +142,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.ClientNo == cid);
                 if (selectedClient != null)
                 {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, true, true);
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpType.UPDATE_CLIENT_CREDIT_COVER);
                     clientDetail.ShowDialog(this);
                 }
             }
@@ -152,7 +153,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemDelete(object sender, System.EventArgs e)
+        private void DeleteClient(object sender, System.EventArgs e)
         {
             if (this.dgvClient.SelectedRows.Count == 0 || this.clientMgrBindingSource == null)
             {
@@ -176,11 +177,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
-        /// Select client
+        /// Select client and close the query form
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemSelect(object sender, System.EventArgs e)
+        private void SelectClient(object sender, System.EventArgs e)
         {
             if (this.dgvClient.SelectedRows.Count == 0 || this.clientMgrBindingSource == null)
             {
@@ -194,14 +195,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (selectedClient != null)
                 {
                     this.Selected = selectedClient;
-                    if (this.owner == null)
+                    if (this.OwnerForm != null)
                     {
-                        this.owner = (Form)this.Parent.Parent;
-                    }
-                    if (this.owner != null)
-                    {
-                        this.owner.DialogResult = DialogResult.Yes;
-                        this.owner.Close();
+                        this.OwnerForm.DialogResult = DialogResult.Yes;
+                        this.OwnerForm.Close();
                     }
                 }
             }
@@ -212,20 +209,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemDetail(object sender, System.EventArgs e)
+        private void DetailClient(object sender, System.EventArgs e)
         {
             if (this.dgvClient.SelectedRows.Count == 0 || this.clientMgrBindingSource == null)
             {
                 return;
             }
-
             string cid = (string)dgvClient["clientNoColumn", dgvClient.SelectedRows[0].Index].Value;
             if (cid != null)
             {
                 Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.ClientNo == cid);
                 if (selectedClient != null)
                 {
-                    new ClientDetail(selectedClient, false).ShowDialog(this);
+                    new ClientDetail(selectedClient, ClientDetail.OpType.DETAIL_CLIENT).ShowDialog(this);
                 }
             }
         }
@@ -235,27 +231,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        //private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    this.ItemDetail(sender, e);
-        //}
-
         private void dgvClient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvClient.SelectedRows.Count == 0 || this.clientMgrBindingSource == null)
-            {
-                return;
-            }
-
-            string cid = (string)dgvClient["clientNoColumn", dgvClient.SelectedRows[0].Index].Value;
-            if (cid != null)
-            {
-                Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.ClientNo == cid);
-                if (selectedClient != null)
-                {
-                    new ClientDetail(selectedClient, false).ShowDialog(this);
-                }
-            }
+            this.DetailClient(sender, e);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private readonly bool isEditable;
 
-        public Form owner
+        public Form OwnerForm
         {
             get;
             set;
@@ -48,7 +48,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         public FactorMgr(bool isEditable, Form owner)
             : this(isEditable)
         {
-            this.owner = owner;
+            this.OwnerForm = owner;
         }
 
         /// <summary>
@@ -325,14 +325,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 if (selectedFactor != null)
                 {
                     this.Selected = selectedFactor;
-                    if (this.owner == null)
+                    if (this.OwnerForm != null)
                     {
-                        this.owner = (Form)this.Parent.Parent;
-                    }
-                    if (this.owner != null)
-                    {
-                        this.owner.DialogResult = DialogResult.Yes;
-                        this.owner.Close();
+                        this.OwnerForm.DialogResult = DialogResult.Yes;
+                        this.OwnerForm.Close();
                     }
                 }
             }

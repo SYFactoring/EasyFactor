@@ -19,6 +19,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private readonly Factor originalFactor;
 
+        public Form OwnerForm
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Initializes a new instance of the FactorDetail class
         /// </summary>
