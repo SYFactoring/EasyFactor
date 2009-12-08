@@ -51,7 +51,7 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
             Client seller = clientMgr.Selected;
             if (seller != null)
             {
-                this.tbSellerNo.Text = seller.ClientNo;
+                this.tbSellerNo.Text = seller.ClientEDICode;
                 this.tbSellerName.Text = seller.ClientNameCN;
             }
         }
@@ -65,7 +65,7 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
             Client buyer = clientMgr.Selected;
             if (buyer != null)
             {
-                this.tbBuyerNo.Text = buyer.ClientNo;
+                this.tbBuyerNo.Text = buyer.ClientEDICode;
                 this.tbBuyerName.Text = buyer.ClientNameCN;
             }
         }

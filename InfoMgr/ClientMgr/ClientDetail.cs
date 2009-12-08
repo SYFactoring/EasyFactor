@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using DevComponents.DotNetBar.Controls;
     using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils;
+    using DevComponents.Editors;
 
     public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
     {
@@ -45,16 +46,40 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
             this.clientBindingSource.DataSource = updateClient;
             this.UpdateEditableStatus();
-            this.fillOtherField(updateClient);
+            InitComboBox(updateClient);
             // this.creditLineMgrBindingSource.DataSource = updateClient.ClientCreditLines;
             // this.clientAccountMgrBindingSource.DataSource = updateClient.ClientAccounts;
         }
 
-        private void fillOtherField(Client client)
+        private void InitComboBox(Client client)
         {
+            this.countryCodeComboBox.DataSource = App.Current.DbContext.Countries;
+            this.countryCodeComboBox.DisplayMember = "CountryFormatCN";
+            this.countryCodeComboBox.ValueMember = "CountryCode";
+            this.countryCodeComboBox.SelectedIndex = -1;
 
+            this.departmentComboTree.DataSource = App.Current.DbContext.Departments;
+            this.departmentComboTree.DisplayMembers = "DepartmentName";
+            this.departmentComboTree.ValueMember = "DepartmentCode";
+            this.departmentComboTree.GroupingMembers = "Domain";
+            this.departmentComboTree.SelectedIndex = -1;
+
+            this.creditLineCurrencyComboBox.DataSource = App.Current.DbContext.Currencies;
+            this.creditLineCurrencyComboBox.DisplayMember = "CurrencyFormat";
+            this.creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
+            this.creditLineCurrencyComboBox.SelectedIndex = -1;
+
+            
+
+            foreach ( Country country in this.countryCodeComboBox.Items)
+            {
+                if (country.CountryCode.Equals(client.CountryCode))
+                {
+                    this.countryCodeComboBox.SelectedItem = country;
+                    break;
+                }
+            }
         }
-
         /// <summary>
         /// udpate editable status
         /// </summary>
@@ -205,20 +230,5 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Close();
         }
 
-        private void FormLoad(object sender, EventArgs e)
-        {
-            this.countryCodeComboBox.DataSource = App.Current.DbContext.Countries;
-            this.countryCodeComboBox.DisplayMember = "CountryFormatCN";
-            this.countryCodeComboBox.ValueMember = "CountryCode";
-
-            this.departmentComboTree.DataSource = App.Current.DbContext.Departments;
-            this.departmentComboTree.DisplayMembers = "DepartmentName";
-            this.departmentComboTree.ValueMember = "DepartmentCode";
-            this.departmentComboTree.GroupingMembers = "Domain";
-
-            this.creditLineCurrencyComboBox.DataSource = App.Current.DbContext.Currencies;
-            this.creditLineCurrencyComboBox.DisplayMember = "CurrencyFormat";
-            this.creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
-        }
     }
 }

@@ -32,6 +32,10 @@ namespace CMBC.EasyFactor.Utils
             {
                 (comp as ComboBoxEx).Enabled = isEditable;
             }
+            else if (comp is ComboTree)
+            {
+                (comp as ComboTree).Enabled = isEditable;
+            }
             else if (comp is ComboBox)
             {
                 (comp as ComboBox).Enabled = isEditable;

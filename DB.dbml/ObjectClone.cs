@@ -22,6 +22,7 @@ namespace CMBC.EasyFactor.DB.dbml
             PropertyInfo[] props = this.GetType().GetProperties();
             foreach (PropertyInfo p in props)
             {
+       
                 p.SetValue(this, p.GetValue(old, null), null);
             }
         }
