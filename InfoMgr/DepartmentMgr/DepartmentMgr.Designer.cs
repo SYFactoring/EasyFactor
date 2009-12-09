@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
@@ -37,8 +38,10 @@
             this.tbDepartmentCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDepartmentCode = new DevComponents.DotNetBar.LabelX();
             this.departmentMgrBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dgvDepartments = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvDepartments = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.departmentCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,6 +60,7 @@
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.departmentMgrBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartments)).BeginInit();
+            this.cmuDeptMgr.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelQuery
@@ -164,10 +168,10 @@
             this.dgvDepartments.AllowUserToAddRows = false;
             this.dgvDepartments.AllowUserToDeleteRows = false;
             this.dgvDepartments.AutoGenerateColumns = false;
-            this.dgvDepartments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvDepartments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvDepartments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDepartments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
+            this.departmentCodeColumn,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
@@ -183,8 +187,18 @@
             this.dataGridViewTextBoxColumn14,
             this.dataGridViewTextBoxColumn15,
             this.dataGridViewTextBoxColumn16});
+            this.dgvDepartments.ContextMenuStrip = this.cmuDeptMgr;
             this.dgvDepartments.DataSource = this.departmentMgrBindingSource;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDepartments.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDepartments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDepartments.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvDepartments.Location = new System.Drawing.Point(0, 31);
             this.dgvDepartments.MultiSelect = false;
             this.dgvDepartments.Name = "dgvDepartments";
@@ -193,13 +207,27 @@
             this.dgvDepartments.Size = new System.Drawing.Size(605, 429);
             this.dgvDepartments.TabIndex = 1;
             // 
-            // dataGridViewTextBoxColumn1
+            // cmuDeptMgr
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "DepartmentCode";
-            this.dataGridViewTextBoxColumn1.HeaderText = "分部编号";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 80;
+            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemSelect});
+            this.cmuDeptMgr.Name = "cmuDeptMgr";
+            this.cmuDeptMgr.Size = new System.Drawing.Size(99, 26);
+            // 
+            // menuItemSelect
+            // 
+            this.menuItemSelect.Name = "menuItemSelect";
+            this.menuItemSelect.Size = new System.Drawing.Size(98, 22);
+            this.menuItemSelect.Text = "选定";
+            this.menuItemSelect.Click += new System.EventHandler(this.SelectDepartment);
+            // 
+            // departmentCodeColumn
+            // 
+            this.departmentCodeColumn.DataPropertyName = "DepartmentCode";
+            this.departmentCodeColumn.HeaderText = "分部编号";
+            this.departmentCodeColumn.Name = "departmentCodeColumn";
+            this.departmentCodeColumn.ReadOnly = true;
+            this.departmentCodeColumn.Width = 80;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -333,6 +361,7 @@
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.departmentMgrBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartments)).EndInit();
+            this.cmuDeptMgr.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -341,13 +370,16 @@
 
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private System.Windows.Forms.BindingSource departmentMgrBindingSource;
-        private System.Windows.Forms.DataGridView dgvDepartments;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvDepartments;
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbDepartmentName;
         private DevComponents.DotNetBar.LabelX lblDeparmentName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbDepartmentCode;
         private DevComponents.DotNetBar.LabelX lblDepartmentCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DevComponents.DotNetBar.LabelX lblCount;
+        private System.Windows.Forms.ContextMenuStrip cmuDeptMgr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemSelect;
+        private System.Windows.Forms.DataGridViewTextBoxColumn departmentCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
@@ -363,6 +395,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
-        private DevComponents.DotNetBar.LabelX lblCount;
     }
 }
