@@ -123,5 +123,9 @@ namespace CMBC.EasyFactor
             caseAppUI.ShowDialog(this);
         }
 
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+        }
+
     }
 }

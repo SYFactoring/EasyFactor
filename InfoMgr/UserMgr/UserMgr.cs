@@ -89,7 +89,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                   || u.Phone.Contains(keyword)
                   || u.Telphone.Contains(keyword)
                   || u.Email.Contains(keyword));
-            userMgrBindingSource.DataSource = queryResult;
+            dgvUsers.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
@@ -110,12 +110,12 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void ItemUpdate(object sender, System.EventArgs e)
         {
-            if (dgvUser.SelectedRows.Count == 0 || userMgrBindingSource == null)
+            if (dgvUsers.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            string uid = (string)dgvUser["userIdColumn", dgvUser.SelectedRows[0].Index].Value;
+            string uid = (string)dgvUsers["userIdColumn", dgvUsers.SelectedRows[0].Index].Value;
             if (uid != null)
             {
                 User selectedUser = App.Current.DbContext.Users.FirstOrDefault(u => u.UserID == uid);
@@ -133,12 +133,12 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void ItemDelete(object sender, System.EventArgs e)
         {
-            if (dgvUser.SelectedRows.Count == 0 || userMgrBindingSource.DataSource == null)
+            if (dgvUsers.SelectedRows.Count == 0 )
             {
                 return;
             }
 
-            string uid = (string)dgvUser["userIdColumn", dgvUser.SelectedRows[0].Index].Value;
+            string uid = (string)dgvUsers["userIdColumn", dgvUsers.SelectedRows[0].Index].Value;
             if (uid != null)
             {
                 User selectedUser = App.Current.DbContext.Users.FirstOrDefault(u => u.UserID == uid);
@@ -146,7 +146,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 {
                     if (MessageBox.Show("是否确定删除帐号: " + selectedUser.UserID, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        userMgrBindingSource.Remove(selectedUser);
+                        dgvUsers.Rows.Remove(dgvUsers.CurrentRow);
                         App.Current.DbContext.Users.DeleteOnSubmit(selectedUser);
                         App.Current.DbContext.SubmitChanges();
                     }
@@ -161,12 +161,12 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void ItemSelect(object sender, EventArgs e)
         {
-            if (dgvUser.SelectedRows.Count == 0 || userMgrBindingSource == null)
+            if (dgvUsers.SelectedRows.Count == 0 )
             {
                 return;
             }
 
-            string uid = (string)dgvUser["userIdColumn", dgvUser.SelectedRows[0].Index].Value;
+            string uid = (string)dgvUsers["userIdColumn", dgvUsers.SelectedRows[0].Index].Value;
             if (uid != null)
             {
                 User selectedUser = App.Current.DbContext.Users.FirstOrDefault(u => u.UserID == uid);
@@ -189,12 +189,12 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void ItemDetail(object sender, System.EventArgs e)
         {
-            if (dgvUser.SelectedRows.Count == 0 || userMgrBindingSource == null)
+            if (dgvUsers.SelectedRows.Count == 0 )
             {
                 return;
             }
 
-            string uid = (string)dgvUser["userIdColumn", dgvUser.SelectedRows[0].Index].Value;
+            string uid = (string)dgvUsers["userIdColumn", dgvUsers.SelectedRows[0].Index].Value;
             if (uid != null)
             {
                 User selectedUser = App.Current.DbContext.Users.FirstOrDefault(u => u.UserID == uid);
