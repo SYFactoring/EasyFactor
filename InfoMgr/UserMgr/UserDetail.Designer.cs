@@ -16,14 +16,14 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.BindingSource userBindingSource;
-        private System.Windows.Forms.MaskedTextBox emailTextBox;
-        private System.Windows.Forms.MaskedTextBox loginDate;
-        private System.Windows.Forms.MaskedTextBox msnTextBox;
-        private System.Windows.Forms.TextBox passwordTextBox;
-        private System.Windows.Forms.MaskedTextBox phoneTextBox;
-        private System.Windows.Forms.MaskedTextBox telphoneTextBox;
-        private System.Windows.Forms.TextBox userIDTextBox;
-        private System.Windows.Forms.TextBox userNameTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX loginDate;
+        private DevComponents.DotNetBar.Controls.TextBoxX msnTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX passwordTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX phoneTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX telphoneTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX userIDTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX userNameTextBox;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -48,113 +48,183 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label emailLabel;
-            System.Windows.Forms.Label loginDateLabel;
-            System.Windows.Forms.Label mSNLabel;
-            System.Windows.Forms.Label passwordLabel;
-            System.Windows.Forms.Label phoneLabel;
-            System.Windows.Forms.Label telphoneLabel;
-            System.Windows.Forms.Label userIDLabel;
-            System.Windows.Forms.Label userNameLabel;
-            System.Windows.Forms.Label eDIAccountLabel;
-            System.Windows.Forms.Label roleLabel;
+            DevComponents.DotNetBar.LabelX emailLabel;
+            DevComponents.DotNetBar.LabelX loginDateLabel;
+            DevComponents.DotNetBar.LabelX mSNLabel;
+            DevComponents.DotNetBar.LabelX passwordLabel;
+            DevComponents.DotNetBar.LabelX phoneLabel;
+            DevComponents.DotNetBar.LabelX telphoneLabel;
+            DevComponents.DotNetBar.LabelX userIDLabel;
+            DevComponents.DotNetBar.LabelX userNameLabel;
+            DevComponents.DotNetBar.LabelX eDIAccountLabel;
+            DevComponents.DotNetBar.LabelX roleLabel;
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.emailTextBox = new System.Windows.Forms.MaskedTextBox();
-            this.loginDate = new System.Windows.Forms.MaskedTextBox();
-            this.msnTextBox = new System.Windows.Forms.MaskedTextBox();
-            this.passwordTextBox = new System.Windows.Forms.TextBox();
-            this.phoneTextBox = new System.Windows.Forms.MaskedTextBox();
-            this.telphoneTextBox = new System.Windows.Forms.MaskedTextBox();
-            this.userIDTextBox = new System.Windows.Forms.TextBox();
-            this.userNameTextBox = new System.Windows.Forms.TextBox();
+            this.emailTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.loginDate = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.msnTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.passwordTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.phoneTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.telphoneTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.userIDTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.userNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.btnCancel = new DevComponents.DotNetBar.ButtonX();
-            this.eDIAccountTextBox = new System.Windows.Forms.TextBox();
-            this.roleComboBox = new System.Windows.Forms.ComboBox();
-            emailLabel = new System.Windows.Forms.Label();
-            loginDateLabel = new System.Windows.Forms.Label();
-            mSNLabel = new System.Windows.Forms.Label();
-            passwordLabel = new System.Windows.Forms.Label();
-            phoneLabel = new System.Windows.Forms.Label();
-            telphoneLabel = new System.Windows.Forms.Label();
-            userIDLabel = new System.Windows.Forms.Label();
-            userNameLabel = new System.Windows.Forms.Label();
-            eDIAccountLabel = new System.Windows.Forms.Label();
-            roleLabel = new System.Windows.Forms.Label();
+            this.eDIAccountTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.roleComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.groupPanelUser = new DevComponents.DotNetBar.Controls.GroupPanel();
+            emailLabel = new DevComponents.DotNetBar.LabelX();
+            loginDateLabel = new DevComponents.DotNetBar.LabelX();
+            mSNLabel = new DevComponents.DotNetBar.LabelX();
+            passwordLabel = new DevComponents.DotNetBar.LabelX();
+            phoneLabel = new DevComponents.DotNetBar.LabelX();
+            telphoneLabel = new DevComponents.DotNetBar.LabelX();
+            userIDLabel = new DevComponents.DotNetBar.LabelX();
+            userNameLabel = new DevComponents.DotNetBar.LabelX();
+            eDIAccountLabel = new DevComponents.DotNetBar.LabelX();
+            roleLabel = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            this.groupPanelUser.SuspendLayout();
             this.SuspendLayout();
             // 
             // emailLabel
             // 
             emailLabel.AutoSize = true;
-            emailLabel.Location = new System.Drawing.Point(13, 151);
+            emailLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            emailLabel.BackgroundStyle.Class = "";
+            emailLabel.Location = new System.Drawing.Point(44, 147);
             emailLabel.Name = "emailLabel";
-            emailLabel.Size = new System.Drawing.Size(32, 13);
+            emailLabel.Size = new System.Drawing.Size(35, 16);
             emailLabel.TabIndex = 1;
             emailLabel.Text = "Email";
             // 
             // loginDateLabel
             // 
             loginDateLabel.AutoSize = true;
-            loginDateLabel.Location = new System.Drawing.Point(13, 251);
+            loginDateLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            loginDateLabel.BackgroundStyle.Class = "";
+            loginDateLabel.Location = new System.Drawing.Point(23, 247);
             loginDateLabel.Name = "loginDateLabel";
-            loginDateLabel.Size = new System.Drawing.Size(55, 13);
+            loginDateLabel.Size = new System.Drawing.Size(56, 16);
             loginDateLabel.TabIndex = 3;
             loginDateLabel.Text = "登录时间";
             // 
             // mSNLabel
             // 
             mSNLabel.AutoSize = true;
-            mSNLabel.Location = new System.Drawing.Point(13, 226);
+            mSNLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            mSNLabel.BackgroundStyle.Class = "";
+            mSNLabel.Location = new System.Drawing.Point(45, 222);
             mSNLabel.Name = "mSNLabel";
-            mSNLabel.Size = new System.Drawing.Size(34, 13);
+            mSNLabel.Size = new System.Drawing.Size(34, 16);
             mSNLabel.TabIndex = 5;
             mSNLabel.Text = "MSN:";
             // 
             // passwordLabel
             // 
             passwordLabel.AutoSize = true;
-            passwordLabel.Location = new System.Drawing.Point(13, 101);
+            passwordLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            passwordLabel.BackgroundStyle.Class = "";
+            passwordLabel.Location = new System.Drawing.Point(48, 97);
             passwordLabel.Name = "passwordLabel";
-            passwordLabel.Size = new System.Drawing.Size(31, 13);
+            passwordLabel.Size = new System.Drawing.Size(31, 16);
             passwordLabel.TabIndex = 7;
             passwordLabel.Text = "密码";
             // 
             // phoneLabel
             // 
             phoneLabel.AutoSize = true;
-            phoneLabel.Location = new System.Drawing.Point(13, 176);
+            phoneLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            phoneLabel.BackgroundStyle.Class = "";
+            phoneLabel.Location = new System.Drawing.Point(48, 172);
             phoneLabel.Name = "phoneLabel";
-            phoneLabel.Size = new System.Drawing.Size(31, 13);
+            phoneLabel.Size = new System.Drawing.Size(31, 16);
             phoneLabel.TabIndex = 9;
             phoneLabel.Text = "电话";
             // 
             // telphoneLabel
             // 
             telphoneLabel.AutoSize = true;
-            telphoneLabel.Location = new System.Drawing.Point(13, 201);
+            telphoneLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            telphoneLabel.BackgroundStyle.Class = "";
+            telphoneLabel.Location = new System.Drawing.Point(48, 197);
             telphoneLabel.Name = "telphoneLabel";
-            telphoneLabel.Size = new System.Drawing.Size(31, 13);
+            telphoneLabel.Size = new System.Drawing.Size(31, 16);
             telphoneLabel.TabIndex = 13;
             telphoneLabel.Text = "手机";
             // 
             // userIDLabel
             // 
             userIDLabel.AutoSize = true;
-            userIDLabel.Location = new System.Drawing.Point(13, 12);
+            userIDLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            userIDLabel.BackgroundStyle.Class = "";
+            userIDLabel.Location = new System.Drawing.Point(37, 7);
             userIDLabel.Name = "userIDLabel";
-            userIDLabel.Size = new System.Drawing.Size(42, 13);
+            userIDLabel.Size = new System.Drawing.Size(42, 16);
             userIDLabel.TabIndex = 15;
             userIDLabel.Text = "登录ID";
             // 
             // userNameLabel
             // 
             userNameLabel.AutoSize = true;
-            userNameLabel.Location = new System.Drawing.Point(13, 36);
+            userNameLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            userNameLabel.BackgroundStyle.Class = "";
+            userNameLabel.Location = new System.Drawing.Point(35, 32);
             userNameLabel.Name = "userNameLabel";
-            userNameLabel.Size = new System.Drawing.Size(43, 13);
+            userNameLabel.Size = new System.Drawing.Size(44, 16);
             userNameLabel.TabIndex = 17;
             userNameLabel.Text = "用户名";
+            // 
+            // eDIAccountLabel
+            // 
+            eDIAccountLabel.AutoSize = true;
+            eDIAccountLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            eDIAccountLabel.BackgroundStyle.Class = "";
+            eDIAccountLabel.Location = new System.Drawing.Point(29, 63);
+            eDIAccountLabel.Name = "eDIAccountLabel";
+            eDIAccountLabel.Size = new System.Drawing.Size(50, 16);
+            eDIAccountLabel.TabIndex = 20;
+            eDIAccountLabel.Text = "EDI帐号";
+            // 
+            // roleLabel
+            // 
+            roleLabel.AutoSize = true;
+            roleLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            roleLabel.BackgroundStyle.Class = "";
+            roleLabel.Location = new System.Drawing.Point(48, 122);
+            roleLabel.Name = "roleLabel";
+            roleLabel.Size = new System.Drawing.Size(31, 16);
+            roleLabel.TabIndex = 21;
+            roleLabel.Text = "角色";
             // 
             // userBindingSource
             // 
@@ -162,36 +232,49 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             // emailTextBox
             // 
+            // 
+            // 
+            // 
+            this.emailTextBox.Border.Class = "TextBoxBorder";
             this.emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Email", true));
-            this.emailTextBox.Location = new System.Drawing.Point(82, 146);
+            this.emailTextBox.Location = new System.Drawing.Point(92, 146);
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(154, 20);
             this.emailTextBox.TabIndex = 4;
             // 
             // loginDate
             // 
+            // 
+            // 
+            // 
+            this.loginDate.Border.Class = "TextBoxBorder";
             this.loginDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "LoginDate", true));
-            this.loginDate.Location = new System.Drawing.Point(82, 246);
-            this.loginDate.Mask = "0000/90/90/ 90:00";
+            this.loginDate.Location = new System.Drawing.Point(92, 246);
             this.loginDate.Name = "loginDate";
-            this.loginDate.PromptChar = ' ';
             this.loginDate.ReadOnly = true;
             this.loginDate.Size = new System.Drawing.Size(154, 20);
             this.loginDate.TabIndex = 8;
-            this.loginDate.ValidatingType = typeof(System.DateTime);
             // 
             // msnTextBox
             // 
+            // 
+            // 
+            // 
+            this.msnTextBox.Border.Class = "TextBoxBorder";
             this.msnTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "MSN", true));
-            this.msnTextBox.Location = new System.Drawing.Point(82, 221);
+            this.msnTextBox.Location = new System.Drawing.Point(92, 221);
             this.msnTextBox.Name = "msnTextBox";
             this.msnTextBox.Size = new System.Drawing.Size(154, 20);
             this.msnTextBox.TabIndex = 7;
             // 
             // passwordTextBox
             // 
+            // 
+            // 
+            // 
+            this.passwordTextBox.Border.Class = "TextBoxBorder";
             this.passwordTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Password", true));
-            this.passwordTextBox.Location = new System.Drawing.Point(82, 96);
+            this.passwordTextBox.Location = new System.Drawing.Point(92, 96);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(154, 20);
@@ -199,38 +282,49 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             // phoneTextBox
             // 
+            // 
+            // 
+            // 
+            this.phoneTextBox.Border.Class = "TextBoxBorder";
             this.phoneTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Phone", true));
-            this.phoneTextBox.Location = new System.Drawing.Point(82, 171);
-            this.phoneTextBox.Mask = "999-00000000";
+            this.phoneTextBox.Location = new System.Drawing.Point(92, 171);
             this.phoneTextBox.Name = "phoneTextBox";
-            this.phoneTextBox.PromptChar = ' ';
-            this.phoneTextBox.RejectInputOnFirstFailure = true;
             this.phoneTextBox.Size = new System.Drawing.Size(154, 20);
             this.phoneTextBox.TabIndex = 5;
             // 
             // telphoneTextBox
             // 
+            // 
+            // 
+            // 
+            this.telphoneTextBox.Border.Class = "TextBoxBorder";
             this.telphoneTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Telphone", true));
-            this.telphoneTextBox.Location = new System.Drawing.Point(82, 196);
-            this.telphoneTextBox.Mask = "00000000000";
+            this.telphoneTextBox.Location = new System.Drawing.Point(92, 196);
             this.telphoneTextBox.Name = "telphoneTextBox";
-            this.telphoneTextBox.PromptChar = ' ';
             this.telphoneTextBox.Size = new System.Drawing.Size(154, 20);
             this.telphoneTextBox.TabIndex = 6;
             // 
             // userIDTextBox
             // 
+            // 
+            // 
+            // 
+            this.userIDTextBox.Border.Class = "TextBoxBorder";
             this.userIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "UserID", true));
-            this.userIDTextBox.Location = new System.Drawing.Point(82, 6);
+            this.userIDTextBox.Location = new System.Drawing.Point(92, 6);
             this.userIDTextBox.Name = "userIDTextBox";
             this.userIDTextBox.Size = new System.Drawing.Size(154, 20);
             this.userIDTextBox.TabIndex = 0;
             // 
             // userNameTextBox
             // 
+            // 
+            // 
+            // 
+            this.userNameTextBox.Border.Class = "TextBoxBorder";
             this.userNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "UserName", true));
             this.userNameTextBox.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.userNameTextBox.Location = new System.Drawing.Point(82, 31);
+            this.userNameTextBox.Location = new System.Drawing.Point(92, 31);
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(154, 20);
             this.userNameTextBox.TabIndex = 1;
@@ -239,7 +333,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSave.Location = new System.Drawing.Point(83, 279);
+            this.btnSave.Location = new System.Drawing.Point(58, 287);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -251,7 +345,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCancel.Location = new System.Drawing.Point(165, 279);
+            this.btnCancel.Location = new System.Drawing.Point(140, 287);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -259,79 +353,108 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnCancel.Text = "取消";
             this.btnCancel.Click += new System.EventHandler(this.Cancel);
             // 
-            // eDIAccountLabel
-            // 
-            eDIAccountLabel.AutoSize = true;
-            eDIAccountLabel.Location = new System.Drawing.Point(13, 65);
-            eDIAccountLabel.Name = "eDIAccountLabel";
-            eDIAccountLabel.Size = new System.Drawing.Size(49, 13);
-            eDIAccountLabel.TabIndex = 20;
-            eDIAccountLabel.Text = "EDI帐号";
-            // 
             // eDIAccountTextBox
             // 
+            // 
+            // 
+            // 
+            this.eDIAccountTextBox.Border.Class = "TextBoxBorder";
             this.eDIAccountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "EDIAccount", true));
-            this.eDIAccountTextBox.Location = new System.Drawing.Point(87, 62);
+            this.eDIAccountTextBox.Location = new System.Drawing.Point(94, 62);
             this.eDIAccountTextBox.Name = "eDIAccountTextBox";
-            this.eDIAccountTextBox.Size = new System.Drawing.Size(149, 20);
+            this.eDIAccountTextBox.Size = new System.Drawing.Size(152, 20);
             this.eDIAccountTextBox.TabIndex = 21;
-            // 
-            // roleLabel
-            // 
-            roleLabel.AutoSize = true;
-            roleLabel.Location = new System.Drawing.Point(15, 125);
-            roleLabel.Name = "roleLabel";
-            roleLabel.Size = new System.Drawing.Size(31, 13);
-            roleLabel.TabIndex = 21;
-            roleLabel.Text = "角色";
             // 
             // roleComboBox
             // 
             this.roleComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Role", true));
+            this.roleComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.roleComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.roleComboBox.FormattingEnabled = true;
             this.roleComboBox.Items.AddRange(new object[] {
             "操作员",
             "审核员",
             "管理员"});
-            this.roleComboBox.Location = new System.Drawing.Point(82, 122);
+            this.roleComboBox.Location = new System.Drawing.Point(92, 122);
             this.roleComboBox.Name = "roleComboBox";
-            this.roleComboBox.Size = new System.Drawing.Size(121, 21);
+            this.roleComboBox.Size = new System.Drawing.Size(154, 21);
             this.roleComboBox.TabIndex = 22;
+            // 
+            // groupPanelUser
+            // 
+            this.groupPanelUser.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelUser.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelUser.Controls.Add(userIDLabel);
+            this.groupPanelUser.Controls.Add(roleLabel);
+            this.groupPanelUser.Controls.Add(this.userNameTextBox);
+            this.groupPanelUser.Controls.Add(this.roleComboBox);
+            this.groupPanelUser.Controls.Add(userNameLabel);
+            this.groupPanelUser.Controls.Add(eDIAccountLabel);
+            this.groupPanelUser.Controls.Add(this.userIDTextBox);
+            this.groupPanelUser.Controls.Add(this.eDIAccountTextBox);
+            this.groupPanelUser.Controls.Add(this.telphoneTextBox);
+            this.groupPanelUser.Controls.Add(telphoneLabel);
+            this.groupPanelUser.Controls.Add(this.phoneTextBox);
+            this.groupPanelUser.Controls.Add(emailLabel);
+            this.groupPanelUser.Controls.Add(phoneLabel);
+            this.groupPanelUser.Controls.Add(this.emailTextBox);
+            this.groupPanelUser.Controls.Add(this.passwordTextBox);
+            this.groupPanelUser.Controls.Add(loginDateLabel);
+            this.groupPanelUser.Controls.Add(passwordLabel);
+            this.groupPanelUser.Controls.Add(this.loginDate);
+            this.groupPanelUser.Controls.Add(this.msnTextBox);
+            this.groupPanelUser.Controls.Add(mSNLabel);
+            this.groupPanelUser.Location = new System.Drawing.Point(4, 3);
+            this.groupPanelUser.Name = "groupPanelUser";
+            this.groupPanelUser.Size = new System.Drawing.Size(270, 279);
+            // 
+            // 
+            // 
+            this.groupPanelUser.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelUser.Style.BackColorGradientAngle = 90;
+            this.groupPanelUser.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelUser.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelUser.Style.BorderBottomWidth = 1;
+            this.groupPanelUser.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelUser.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelUser.Style.BorderLeftWidth = 1;
+            this.groupPanelUser.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelUser.Style.BorderRightWidth = 1;
+            this.groupPanelUser.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelUser.Style.BorderTopWidth = 1;
+            this.groupPanelUser.Style.Class = "";
+            this.groupPanelUser.Style.CornerDiameter = 4;
+            this.groupPanelUser.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelUser.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelUser.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelUser.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelUser.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelUser.StyleMouseOver.Class = "";
+            this.groupPanelUser.TabIndex = 23;
             // 
             // UserDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(262, 322);
-            this.Controls.Add(roleLabel);
-            this.Controls.Add(this.roleComboBox);
-            this.Controls.Add(eDIAccountLabel);
-            this.Controls.Add(this.eDIAccountTextBox);
+            this.ClientSize = new System.Drawing.Size(277, 316);
+            this.Controls.Add(this.groupPanelUser);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(emailLabel);
-            this.Controls.Add(this.emailTextBox);
-            this.Controls.Add(loginDateLabel);
-            this.Controls.Add(this.loginDate);
-            this.Controls.Add(mSNLabel);
-            this.Controls.Add(this.msnTextBox);
-            this.Controls.Add(passwordLabel);
-            this.Controls.Add(this.passwordTextBox);
-            this.Controls.Add(phoneLabel);
-            this.Controls.Add(this.phoneTextBox);
-            this.Controls.Add(telphoneLabel);
-            this.Controls.Add(this.telphoneTextBox);
-            this.Controls.Add(userIDLabel);
-            this.Controls.Add(this.userIDTextBox);
-            this.Controls.Add(userNameLabel);
-            this.Controls.Add(this.userNameTextBox);
+            this.DoubleBuffered = true;
             this.Name = "UserDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "用户详细信息";
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            this.groupPanelUser.ResumeLayout(false);
+            this.groupPanelUser.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -339,8 +462,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
         private DevComponents.DotNetBar.ButtonX btnSave;
         private DevComponents.DotNetBar.ButtonX btnCancel;
-        private System.Windows.Forms.TextBox eDIAccountTextBox;
-        private System.Windows.Forms.ComboBox roleComboBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX eDIAccountTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx roleComboBox;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelUser;
 
 
     }

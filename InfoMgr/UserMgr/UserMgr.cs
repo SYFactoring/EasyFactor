@@ -100,7 +100,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void ItemNew(object sender, System.EventArgs e)
         {
-            new UserDetail(null, true).ShowDialog(this);
+            new UserDetail(null, UserDetail.OpType.NEW_USER).ShowDialog(this);
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 User selectedUser = App.Current.DbContext.Users.FirstOrDefault(u => u.UserID == uid);
                 if (selectedUser != null)
                 {
-                    new UserDetail(selectedUser, true).ShowDialog(this);
+                    new UserDetail(selectedUser, UserDetail.OpType.UPDATE_USER).ShowDialog(this);
                 }
             }
         }
@@ -162,8 +162,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private void ItemSelect(object sender, EventArgs e)
         {
             if (dgvUser.SelectedRows.Count == 0 || userMgrBindingSource == null)
-            { 
-                return; 
+            {
+                return;
             }
 
             string uid = (string)dgvUser["userIdColumn", dgvUser.SelectedRows[0].Index].Value;
@@ -200,7 +200,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 User selectedUser = App.Current.DbContext.Users.FirstOrDefault(u => u.UserID == uid);
                 if (selectedUser != null)
                 {
-                    new UserDetail(selectedUser, false).ShowDialog(this);
+                    new UserDetail(selectedUser, UserDetail.OpType.DETAIL_USER).ShowDialog(this);
                 }
             }
         }

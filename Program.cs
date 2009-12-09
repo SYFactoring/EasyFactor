@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor
 {
     using System;
     using System.Windows.Forms;
+    using CMBC.EasyFactor.DB.dbml;
 
     /// <summary>
     /// Applicatoin entry class
@@ -23,11 +24,11 @@ namespace CMBC.EasyFactor
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             LoginWindow loginWindow = new LoginWindow();
+            if (!loginWindow.PreLogin())
+            {
+                return;
+            }
             //loginWindow.ShowDialog();
-            //if (!loginWindow.PreLogin())
-            //{
-            //    return;
-            //}
             loginWindow.AutoLogin();
 
             if (App.Current.CurUser != null)

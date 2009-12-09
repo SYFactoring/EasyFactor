@@ -99,25 +99,26 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     clientType = string.Empty;
                 }
             }
+
             string department = string.Empty;
             if (comboTreeDepartment.SelectedIndex >= 0)
             {
-                department = comboTreeDepartment.Text;
-                if (department == "全部")
+                department = comboTreeDepartment.SelectedValue.ToString();
+                if (department == "CN01300")
                 {
                     department = string.Empty;
                 }
             }
 
             //var queryResult = App.Current.DbContext.Clients.Where(c =>
-            //   (c.Department.DepartmentName.Contains(department))
+            //   (c.BranchCode == null || c.BranchCode.Contains(department))
             //&& (c.PMName.Contains(tbPM.Text))
             //&& (c.RMName.Contains(tbRM.Text))
             //&& (c.ClientNameCN.Contains(tbClientName.Text) || c.ClientNameEN_1.Contains(tbClientName.Text) || c.ClientNameEN_2.Contains(tbClientName.Text))
             //&& (c.ClientEDICode.Contains(tbClientEDICode.Text))
             //&& (c.ClientType.Contains(clientType)));
+            var queryResult = App.Current.DbContext.Clients;
 
-            var queryResult = App.Current.DbContext.Clients.Where(c => c.Department.DepartmentName.Contains(department));
             clientMgrBindingSource.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
@@ -148,7 +149,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             string cid = (string)dgvClient["clientEDICodeColumn", dgvClient.SelectedRows[0].Index].Value;
             if (cid != null)
             {
-                Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.ClientEDICode == cid);
+                Client selectedClient = (from c in App.Current.DbContext.Clients where (c.ClientEDICode == cid) select c).FirstOrDefault();
                 if (selectedClient != null)
                 {
                     ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpType.UPDATE_CLIENT);
@@ -167,7 +168,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             string cid = (string)dgvClient["clientEDICodeColumn", dgvClient.SelectedRows[0].Index].Value;
             if (cid != null)
             {
-                Client selectedClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.ClientEDICode == cid);
+                Client selectedClient = (from c in App.Current.DbContext.Clients where (c.ClientEDICode == cid) select c).FirstOrDefault();
                 if (selectedClient != null)
                 {
                     ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpType.UPDATE_CLIENT_CREDIT_COVER);
@@ -374,19 +375,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             Client oldClient = App.Current.DbContext.Clients.FirstOrDefault(c => c.ClientEDICode.Equals(newClient.ClientEDICode));
                             if (oldClient != null)
                             {
-                                //oldClient.Copy(newClient);
-                                App.Current.DbContext.Clients.Attach(newClient);
+                                // App.Current.DbContext.Clients.Attach(newClient, true);
+                                // oldClient.Copy(newClient);
                             }
                             else
                             {
                                 App.Current.DbContext.Clients.InsertOnSubmit(newClient);
                             }
 
-                            App.Current.DbContext.SubmitChanges();
-                        }
-                        catch (ChangeConflictException)
-                        {
-                            App.Current.DbContext.ChangeConflicts.ResolveAll(RefreshMode.OverwriteCurrentValues);
                             App.Current.DbContext.SubmitChanges();
                         }
                         catch (Exception e)

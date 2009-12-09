@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=Yiming-PC\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=10.171.5.99\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[Case]" Member="Cases">
     <Type Name="Case">
       <Column Name="CaseCode" Type="System.String" DbType="NChar(13) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -21,8 +21,8 @@
       <Association Name="Department_Case1" Member="SellerDepartment" Storage="_Department1" ThisKey="SellerDepartmentCode" Type="Department" IsForeignKey="true" />
       <Association Name="Factor_Case" Member="BuyerFactor" Storage="_Factor" ThisKey="BuyerFactorCode" Type="Factor" IsForeignKey="true" />
       <Association Name="Factor_Case1" Member="SellerFactor" Storage="_Factor1" ThisKey="SellerFactorCode" Type="Factor" IsForeignKey="true" />
-      <Association Name="Client_Case" Member="Client" ThisKey="BuyerCode" Type="Client" IsForeignKey="true" />
-      <Association Name="Client_Case1" Member="Client1" ThisKey="SellerCode" Type="Client" IsForeignKey="true" />
+      <Association Name="Client_Case" Member="BuyerClient" Storage="_Client" ThisKey="BuyerCode" Type="Client" IsForeignKey="true" />
+      <Association Name="Client_Case1" Member="SellerClient" Storage="_Client1" ThisKey="SellerCode" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.[User]" Member="Users">
@@ -354,10 +354,65 @@
       <Association Name="CDA_InvoicePaymentBatch" Member="CDA" ThisKey="CDACode" Type="CDA" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Contract" Member="Contracts">
+    <Type Name="Contract">
+      <Column Name="ContractCode" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
+      <Column Name="ContractValueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ContractDueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ContractStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Client_Contract" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Client" Member="Clients">
+    <Type Name="Client">
+      <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ClientCoreNo" Type="System.String" DbType="NChar(10)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ClientNameCN" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ClientNameEN_1" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ClientNameEN_2" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AddressCN" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AddressEN" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CityCN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CityEN" Type="System.String" DbType="NVarChar(35)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ProvinceCN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ProvinceEN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PostCode" Type="System.String" DbType="NVarChar(9)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CountryCode" Type="System.String" DbType="NChar(2)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Representative" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Wetsite" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Contact" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Telephone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FaxNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CellPhone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ClientType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Industry" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ProductCN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ProductEN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ClientLevel" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsGroup" Type="System.String" DbType="NChar(2)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="GroupNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RegistrationNumber" Type="System.String" DbType="VarChar(35)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CompanyCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="BranchCode" Type="System.String" DbType="VarChar(14)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PMName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RMName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Client_Case" Member="BuyerCases" Storage="_Cases" OtherKey="BuyerCode" Type="Case" />
+      <Association Name="Client_Case1" Member="SellerCases" Storage="_Cases1" OtherKey="SellerCode" Type="Case" />
+      <Association Name="Client_Contract" Member="Contracts" OtherKey="ClientEDICode" Type="Contract" />
+      <Association Name="Client_ClientAccount" Member="ClientAccounts" OtherKey="ClientNo" Type="ClientAccount" />
+      <Association Name="Client_ClientCreditLine" Member="ClientCreditLines" OtherKey="ClientNo" Type="ClientCreditLine" />
+      <Association Name="Department_Client" Member="Department" ThisKey="BranchCode" Type="Department" IsForeignKey="true" />
+      <Association Name="ClientGroup_Client" Member="ClientGroup" ThisKey="GroupNo" Type="ClientGroup" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.ClientAccount" Member="ClientAccounts">
     <Type Name="ClientAccount">
       <Column Name="AccountID" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
+      <Column Name="ClientNo" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
       <Column Name="AccountNumber" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="AccountCurrency" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
       <Column Name="AccountType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
@@ -365,13 +420,13 @@
       <Column Name="Branch" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="IsDefault" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Association Name="Client_ClientAccount" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
+      <Association Name="Client_ClientAccount" Member="Client" ThisKey="ClientNo" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ClientCreditLine" Member="ClientCreditLines">
     <Type Name="ClientCreditLine">
       <Column Name="CreditLineID" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
+      <Column Name="ClientNo" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
       <Column Name="CreditLineType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="CreditLineCurrency" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
       <Column Name="CreditLine" Type="System.Double" DbType="Float" CanBeNull="true" />
@@ -387,62 +442,7 @@
       <Column Name="Unfreezer" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="UnfreezeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Association Name="Client_ClientCreditLine" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Contract" Member="Contracts">
-    <Type Name="Contract">
-      <Column Name="ContractCode" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
-      <Column Name="ContractValueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ContractDueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ContractStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="Client_Contract" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Client" Member="Clients">
-    <Type Name="Client">
-      <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ClientCoreNo" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="ClientNameCN" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="ClientNameEN_1" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="ClientNameEN_2" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="AddressCN" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="AddressEN" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="CityCN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CityEN" Type="System.String" DbType="NVarChar(35)" CanBeNull="true" />
-      <Column Name="ProvinceCN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ProvinceEN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="PostCode" Type="System.String" DbType="NVarChar(9)" CanBeNull="true" />
-      <Column Name="CountryCode" Type="System.String" DbType="NChar(2)" CanBeNull="true" />
-      <Column Name="Representative" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Wetsite" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="Contact" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="Telephone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="FaxNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="CellPhone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="ClientType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Industry" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ProductCN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="ProductEN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="ClientLevel" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IsGroup" Type="System.String" DbType="NChar(2)" CanBeNull="true" />
-      <Column Name="GroupNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="RegistrationNumber" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
-      <Column Name="CompanyCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="BranchCode" Type="System.String" DbType="VarChar(14)" CanBeNull="true" />
-      <Column Name="PMName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="RMName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Association Name="Client_Case" Member="Cases" OtherKey="BuyerCode" Type="Case" />
-      <Association Name="Client_Case1" Member="Cases1" OtherKey="SellerCode" Type="Case" />
-      <Association Name="Client_ClientAccount" Member="ClientAccounts" OtherKey="ClientEDICode" Type="ClientAccount" />
-      <Association Name="Client_ClientCreditLine" Member="ClientCreditLines" OtherKey="ClientEDICode" Type="ClientCreditLine" />
-      <Association Name="Client_Contract" Member="Contracts" OtherKey="ClientEDICode" Type="Contract" />
-      <Association Name="Department_Client" Member="Department" ThisKey="BranchCode" Type="Department" IsForeignKey="true" />
-      <Association Name="ClientGroup_Client" Member="ClientGroup" ThisKey="GroupNo" Type="ClientGroup" IsForeignKey="true" />
+      <Association Name="Client_ClientCreditLine" Member="Client" ThisKey="ClientNo" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -65,13 +65,59 @@
             DevComponents.DotNetBar.LabelX unfreezerLabel;
             DevComponents.DotNetBar.LabelX unfreezeDateLabel;
             DevComponents.DotNetBar.LabelX commentLabel;
-            DevComponents.DotNetBar.LabelX commentLabel1;
+            DevComponents.DotNetBar.LabelX creditLineCommentLabel;
             DevComponents.DotNetBar.LabelX clientCoreNoLabel;
             DevComponents.DotNetBar.LabelX industryLabel;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.wetsiteLabel = new DevComponents.DotNetBar.LabelX();
             this.telephoneLabel = new DevComponents.DotNetBar.LabelX();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
+            this.tabPanelClientCreditLine = new DevComponents.DotNetBar.TabControlPanel();
+            this.groupPanelClientCreditCoverMgr = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.dgvClientCreditLine = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clientCreditLineMgrBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.groupPanelClientCreditCover = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.creditLineCommentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.clientCreditLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.unfreezeDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.btnClientCreditCoverUnfreeze = new DevComponents.DotNetBar.ButtonX();
+            this.unfreezerTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.freezeDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.btnClientCreditCoverFreeze = new DevComponents.DotNetBar.ButtonX();
+            this.unfreezeReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.freezeReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.btnClientCreditCoverCancel = new DevComponents.DotNetBar.ButtonX();
+            this.btnClientCreditCoverSave = new DevComponents.DotNetBar.ButtonX();
+            this.freezerTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.btnClientCreditCoverAdd = new DevComponents.DotNetBar.ButtonX();
+            this.creditLineStatusTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.approveTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.approveNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.periodEndDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.periodBeginDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.creditLineTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.creditLineTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.creditLineCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.tabItemClientCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabPanelClientAccount = new DevComponents.DotNetBar.TabControlPanel();
+            this.tabItemClientAccount = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClient = new DevComponents.DotNetBar.TabControlPanel();
             this.groupPanelClientContact = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.companyCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -135,50 +181,6 @@
             this.clientNameEN_1TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabItemClient = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelClientCreditLine = new DevComponents.DotNetBar.TabControlPanel();
-            this.groupPanelClientCreditCoverMgr = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.clientCreditLineDataGridView = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clientCreditLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.groupPanelClientCreditCover = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.creditLineCommentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.unfreezeDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.btnClientCreditCoverUnfreeze = new DevComponents.DotNetBar.ButtonX();
-            this.unfreezerTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.freezeDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.btnClientCreditCoverFreeze = new DevComponents.DotNetBar.ButtonX();
-            this.unfreezeReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.freezeReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btnClientCreditCoverCancel = new DevComponents.DotNetBar.ButtonX();
-            this.btnClientCreditCoverSave = new DevComponents.DotNetBar.ButtonX();
-            this.freezerTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btnClientCreditCoverAdd = new DevComponents.DotNetBar.ButtonX();
-            this.creditLineStatusTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.approveTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.approveNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.periodEndDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.periodBeginDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.creditLineTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.creditLineTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.creditLineCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.tabItemClientCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelClientAccount = new DevComponents.DotNetBar.TabControlPanel();
-            this.tabItemClientAccount = new DevComponents.DotNetBar.TabItem(this.components);
             clientNameCNLabel = new DevComponents.DotNetBar.LabelX();
             addressCNLabel = new DevComponents.DotNetBar.LabelX();
             cityCNLabel = new DevComponents.DotNetBar.LabelX();
@@ -215,22 +217,23 @@
             unfreezerLabel = new DevComponents.DotNetBar.LabelX();
             unfreezeDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
-            commentLabel1 = new DevComponents.DotNetBar.LabelX();
+            creditLineCommentLabel = new DevComponents.DotNetBar.LabelX();
             clientCoreNoLabel = new DevComponents.DotNetBar.LabelX();
             industryLabel = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
+            this.tabPanelClientCreditLine.SuspendLayout();
+            this.groupPanelClientCreditCoverMgr.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLine)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineMgrBindingSource)).BeginInit();
+            this.groupPanelClientCreditCover.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineBindingSource)).BeginInit();
             this.tabPanelClient.SuspendLayout();
             this.groupPanelClientContact.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).BeginInit();
             this.groupPanelClientGroup.SuspendLayout();
             this.groupPanelClientStat.SuspendLayout();
             this.groupPanelClientBasic.SuspendLayout();
-            this.tabPanelClientCreditLine.SuspendLayout();
-            this.groupPanelClientCreditCoverMgr.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineBindingSource)).BeginInit();
-            this.groupPanelClientCreditCover.SuspendLayout();
             this.SuspendLayout();
             // 
             // clientNameCNLabel
@@ -738,19 +741,19 @@
             commentLabel.TabIndex = 0;
             commentLabel.Text = "备注:";
             // 
-            // commentLabel1
+            // creditLineCommentLabel
             // 
-            commentLabel1.AutoSize = true;
-            commentLabel1.BackColor = System.Drawing.Color.Transparent;
+            creditLineCommentLabel.AutoSize = true;
+            creditLineCommentLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            commentLabel1.BackgroundStyle.Class = "";
-            commentLabel1.Location = new System.Drawing.Point(50, 97);
-            commentLabel1.Name = "commentLabel1";
-            commentLabel1.Size = new System.Drawing.Size(34, 16);
-            commentLabel1.TabIndex = 32;
-            commentLabel1.Text = "备注:";
+            creditLineCommentLabel.BackgroundStyle.Class = "";
+            creditLineCommentLabel.Location = new System.Drawing.Point(50, 97);
+            creditLineCommentLabel.Name = "creditLineCommentLabel";
+            creditLineCommentLabel.Size = new System.Drawing.Size(34, 16);
+            creditLineCommentLabel.TabIndex = 32;
+            creditLineCommentLabel.Text = "备注:";
             // 
             // clientCoreNoLabel
             // 
@@ -811,8 +814,8 @@
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelClient);
             this.tabControl.Controls.Add(this.tabPanelClientCreditLine);
+            this.tabControl.Controls.Add(this.tabPanelClient);
             this.tabControl.Controls.Add(this.tabPanelClientAccount);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -826,6 +829,551 @@
             this.tabControl.Tabs.Add(this.tabItemClientCreditLine);
             this.tabControl.Tabs.Add(this.tabItemClientAccount);
             this.tabControl.Text = "tabControl1";
+            // 
+            // tabPanelClientCreditLine
+            // 
+            this.tabPanelClientCreditLine.AutoScroll = true;
+            this.tabPanelClientCreditLine.Controls.Add(this.groupPanelClientCreditCoverMgr);
+            this.tabPanelClientCreditLine.Controls.Add(this.groupPanelClientCreditCover);
+            this.tabPanelClientCreditLine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelClientCreditLine.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelClientCreditLine.Name = "tabPanelClientCreditLine";
+            this.tabPanelClientCreditLine.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelClientCreditLine.Size = new System.Drawing.Size(599, 536);
+            this.tabPanelClientCreditLine.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelClientCreditLine.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelClientCreditLine.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelClientCreditLine.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelClientCreditLine.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelClientCreditLine.Style.GradientAngle = 90;
+            this.tabPanelClientCreditLine.TabIndex = 2;
+            this.tabPanelClientCreditLine.TabItem = this.tabItemClientCreditLine;
+            // 
+            // groupPanelClientCreditCoverMgr
+            // 
+            this.groupPanelClientCreditCoverMgr.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelClientCreditCoverMgr.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelClientCreditCoverMgr.Controls.Add(this.dgvClientCreditLine);
+            this.groupPanelClientCreditCoverMgr.Location = new System.Drawing.Point(0, 326);
+            this.groupPanelClientCreditCoverMgr.Name = "groupPanelClientCreditCoverMgr";
+            this.groupPanelClientCreditCoverMgr.Size = new System.Drawing.Size(591, 293);
+            // 
+            // 
+            // 
+            this.groupPanelClientCreditCoverMgr.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelClientCreditCoverMgr.Style.BackColorGradientAngle = 90;
+            this.groupPanelClientCreditCoverMgr.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelClientCreditCoverMgr.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditCoverMgr.Style.BorderBottomWidth = 1;
+            this.groupPanelClientCreditCoverMgr.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelClientCreditCoverMgr.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditCoverMgr.Style.BorderLeftWidth = 1;
+            this.groupPanelClientCreditCoverMgr.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditCoverMgr.Style.BorderRightWidth = 1;
+            this.groupPanelClientCreditCoverMgr.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditCoverMgr.Style.BorderTopWidth = 1;
+            this.groupPanelClientCreditCoverMgr.Style.Class = "";
+            this.groupPanelClientCreditCoverMgr.Style.CornerDiameter = 4;
+            this.groupPanelClientCreditCoverMgr.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelClientCreditCoverMgr.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelClientCreditCoverMgr.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelClientCreditCoverMgr.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelClientCreditCoverMgr.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelClientCreditCoverMgr.StyleMouseOver.Class = "";
+            this.groupPanelClientCreditCoverMgr.TabIndex = 1;
+            // 
+            // dgvClientCreditLine
+            // 
+            this.dgvClientCreditLine.AutoGenerateColumns = false;
+            this.dgvClientCreditLine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClientCreditLine.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn18,
+            this.dataGridViewTextBoxColumn19,
+            this.dataGridViewTextBoxColumn20,
+            this.dataGridViewTextBoxColumn21,
+            this.dataGridViewTextBoxColumn22,
+            this.dataGridViewTextBoxColumn23,
+            this.dataGridViewTextBoxColumn24,
+            this.dataGridViewTextBoxColumn25,
+            this.dataGridViewTextBoxColumn26,
+            this.dataGridViewTextBoxColumn27,
+            this.dataGridViewTextBoxColumn28,
+            this.dataGridViewTextBoxColumn29,
+            this.dataGridViewTextBoxColumn30,
+            this.dataGridViewTextBoxColumn31,
+            this.dataGridViewTextBoxColumn32,
+            this.dataGridViewTextBoxColumn33});
+            this.dgvClientCreditLine.DataSource = this.clientCreditLineMgrBindingSource;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientCreditLine.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvClientCreditLine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvClientCreditLine.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvClientCreditLine.Location = new System.Drawing.Point(0, 0);
+            this.dgvClientCreditLine.Name = "dgvClientCreditLine";
+            this.dgvClientCreditLine.Size = new System.Drawing.Size(585, 287);
+            this.dgvClientCreditLine.TabIndex = 0;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "CreditLineID";
+            this.dataGridViewTextBoxColumn2.HeaderText = "CreditLineID";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.DataPropertyName = "ClientNo";
+            this.dataGridViewTextBoxColumn18.HeaderText = "ClientNo";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.DataPropertyName = "CreditLineType";
+            this.dataGridViewTextBoxColumn19.HeaderText = "CreditLineType";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.DataPropertyName = "CreditLineCurrency";
+            this.dataGridViewTextBoxColumn20.HeaderText = "CreditLineCurrency";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            this.dataGridViewTextBoxColumn21.DataPropertyName = "CreditLine";
+            this.dataGridViewTextBoxColumn21.HeaderText = "CreditLine";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            this.dataGridViewTextBoxColumn22.DataPropertyName = "PeriodBegin";
+            this.dataGridViewTextBoxColumn22.HeaderText = "PeriodBegin";
+            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            // 
+            // dataGridViewTextBoxColumn23
+            // 
+            this.dataGridViewTextBoxColumn23.DataPropertyName = "PeriodEnd";
+            this.dataGridViewTextBoxColumn23.HeaderText = "PeriodEnd";
+            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
+            // 
+            // dataGridViewTextBoxColumn24
+            // 
+            this.dataGridViewTextBoxColumn24.DataPropertyName = "ApproveNo";
+            this.dataGridViewTextBoxColumn24.HeaderText = "ApproveNo";
+            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+            // 
+            // dataGridViewTextBoxColumn25
+            // 
+            this.dataGridViewTextBoxColumn25.DataPropertyName = "ApproveType";
+            this.dataGridViewTextBoxColumn25.HeaderText = "ApproveType";
+            this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
+            // 
+            // dataGridViewTextBoxColumn26
+            // 
+            this.dataGridViewTextBoxColumn26.DataPropertyName = "CreditLineStatus";
+            this.dataGridViewTextBoxColumn26.HeaderText = "CreditLineStatus";
+            this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
+            // 
+            // dataGridViewTextBoxColumn27
+            // 
+            this.dataGridViewTextBoxColumn27.DataPropertyName = "FreezeReason";
+            this.dataGridViewTextBoxColumn27.HeaderText = "FreezeReason";
+            this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
+            // 
+            // dataGridViewTextBoxColumn28
+            // 
+            this.dataGridViewTextBoxColumn28.DataPropertyName = "Freezer";
+            this.dataGridViewTextBoxColumn28.HeaderText = "Freezer";
+            this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
+            // 
+            // dataGridViewTextBoxColumn29
+            // 
+            this.dataGridViewTextBoxColumn29.DataPropertyName = "FreezeDate";
+            this.dataGridViewTextBoxColumn29.HeaderText = "FreezeDate";
+            this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
+            // 
+            // dataGridViewTextBoxColumn30
+            // 
+            this.dataGridViewTextBoxColumn30.DataPropertyName = "UnfreezeReason";
+            this.dataGridViewTextBoxColumn30.HeaderText = "UnfreezeReason";
+            this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
+            // 
+            // dataGridViewTextBoxColumn31
+            // 
+            this.dataGridViewTextBoxColumn31.DataPropertyName = "Unfreezer";
+            this.dataGridViewTextBoxColumn31.HeaderText = "Unfreezer";
+            this.dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
+            // 
+            // dataGridViewTextBoxColumn32
+            // 
+            this.dataGridViewTextBoxColumn32.DataPropertyName = "UnfreezeDate";
+            this.dataGridViewTextBoxColumn32.HeaderText = "UnfreezeDate";
+            this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
+            // 
+            // dataGridViewTextBoxColumn33
+            // 
+            this.dataGridViewTextBoxColumn33.DataPropertyName = "Comment";
+            this.dataGridViewTextBoxColumn33.HeaderText = "Comment";
+            this.dataGridViewTextBoxColumn33.Name = "dataGridViewTextBoxColumn33";
+            // 
+            // clientCreditLineMgrBindingSource
+            // 
+            this.clientCreditLineMgrBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.ClientCreditLine);
+            //
+            // clientCreditLineBindingSource
+            //
+            this.clientCreditLineBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.ClientCreditLine);
+
+            // 
+            // groupPanelClientCreditCover
+            // 
+            this.groupPanelClientCreditCover.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelClientCreditCover.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelClientCreditCover.Controls.Add(creditLineCommentLabel);
+            this.groupPanelClientCreditCover.Controls.Add(this.creditLineCommentTextBox);
+            this.groupPanelClientCreditCover.Controls.Add(unfreezeDateLabel);
+            this.groupPanelClientCreditCover.Controls.Add(freezeDateLabel);
+            this.groupPanelClientCreditCover.Controls.Add(this.unfreezeDateDateTimePicker);
+            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverUnfreeze);
+            this.groupPanelClientCreditCover.Controls.Add(unfreezerLabel);
+            this.groupPanelClientCreditCover.Controls.Add(freezeReasonLabel);
+            this.groupPanelClientCreditCover.Controls.Add(this.unfreezerTextBox);
+            this.groupPanelClientCreditCover.Controls.Add(this.freezeDateDateTimePicker);
+            this.groupPanelClientCreditCover.Controls.Add(unfreezeReasonLabel);
+            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverFreeze);
+            this.groupPanelClientCreditCover.Controls.Add(this.unfreezeReasonTextBox);
+            this.groupPanelClientCreditCover.Controls.Add(this.freezeReasonTextBox);
+            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverCancel);
+            this.groupPanelClientCreditCover.Controls.Add(freezerLabel);
+            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverSave);
+            this.groupPanelClientCreditCover.Controls.Add(this.freezerTextBox);
+            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverAdd);
+            this.groupPanelClientCreditCover.Controls.Add(creditLineStatusLabel);
+            this.groupPanelClientCreditCover.Controls.Add(this.creditLineStatusTextBox);
+            this.groupPanelClientCreditCover.Controls.Add(approveTypeLabel);
+            this.groupPanelClientCreditCover.Controls.Add(this.approveTypeComboBox);
+            this.groupPanelClientCreditCover.Controls.Add(approveNoLabel);
+            this.groupPanelClientCreditCover.Controls.Add(this.approveNoTextBox);
+            this.groupPanelClientCreditCover.Controls.Add(this.periodEndDateTimePicker);
+            this.groupPanelClientCreditCover.Controls.Add(periodBeginLabel);
+            this.groupPanelClientCreditCover.Controls.Add(this.periodBeginDateTimePicker);
+            this.groupPanelClientCreditCover.Controls.Add(creditLineLabel);
+            this.groupPanelClientCreditCover.Controls.Add(this.creditLineTextBox);
+            this.groupPanelClientCreditCover.Controls.Add(creditLineTypeLabel);
+            this.groupPanelClientCreditCover.Controls.Add(this.creditLineTypeComboBox);
+            this.groupPanelClientCreditCover.Controls.Add(creditLineCurrencyLabel);
+            this.groupPanelClientCreditCover.Controls.Add(this.creditLineCurrencyComboBox);
+            this.groupPanelClientCreditCover.Location = new System.Drawing.Point(0, 4);
+            this.groupPanelClientCreditCover.Name = "groupPanelClientCreditCover";
+            this.groupPanelClientCreditCover.Size = new System.Drawing.Size(592, 316);
+            // 
+            // 
+            // 
+            this.groupPanelClientCreditCover.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelClientCreditCover.Style.BackColorGradientAngle = 90;
+            this.groupPanelClientCreditCover.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelClientCreditCover.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditCover.Style.BorderBottomWidth = 1;
+            this.groupPanelClientCreditCover.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelClientCreditCover.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditCover.Style.BorderLeftWidth = 1;
+            this.groupPanelClientCreditCover.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditCover.Style.BorderRightWidth = 1;
+            this.groupPanelClientCreditCover.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditCover.Style.BorderTopWidth = 1;
+            this.groupPanelClientCreditCover.Style.Class = "";
+            this.groupPanelClientCreditCover.Style.CornerDiameter = 4;
+            this.groupPanelClientCreditCover.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelClientCreditCover.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelClientCreditCover.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelClientCreditCover.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelClientCreditCover.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelClientCreditCover.StyleMouseOver.Class = "";
+            this.groupPanelClientCreditCover.TabIndex = 0;
+            // 
+            // creditLineCommentTextBox
+            // 
+            // 
+            // 
+            // 
+            this.creditLineCommentTextBox.Border.Class = "TextBoxBorder";
+            this.creditLineCommentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "Comment", true));
+            this.creditLineCommentTextBox.Location = new System.Drawing.Point(90, 94);
+            this.creditLineCommentTextBox.Multiline = true;
+            this.creditLineCommentTextBox.Name = "creditLineCommentTextBox";
+            this.creditLineCommentTextBox.Size = new System.Drawing.Size(451, 42);
+            this.creditLineCommentTextBox.TabIndex = 33;
+            // 
+            // unfreezeDateDateTimePicker
+            // 
+            this.unfreezeDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.clientCreditLineBindingSource, "UnfreezeDate", true));
+            this.unfreezeDateDateTimePicker.Enabled = false;
+            this.unfreezeDateDateTimePicker.Location = new System.Drawing.Point(297, 253);
+            this.unfreezeDateDateTimePicker.Name = "unfreezeDateDateTimePicker";
+            this.unfreezeDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.unfreezeDateDateTimePicker.TabIndex = 6;
+            // 
+            // btnClientCreditCoverUnfreeze
+            // 
+            this.btnClientCreditCoverUnfreeze.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClientCreditCoverUnfreeze.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnClientCreditCoverUnfreeze.Location = new System.Drawing.Point(454, 279);
+            this.btnClientCreditCoverUnfreeze.Name = "btnClientCreditCoverUnfreeze";
+            this.btnClientCreditCoverUnfreeze.Size = new System.Drawing.Size(75, 23);
+            this.btnClientCreditCoverUnfreeze.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClientCreditCoverUnfreeze.TabIndex = 20;
+            this.btnClientCreditCoverUnfreeze.Text = "解冻";
+            // 
+            // unfreezerTextBox
+            // 
+            // 
+            // 
+            // 
+            this.unfreezerTextBox.Border.Class = "TextBoxBorder";
+            this.unfreezerTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "Unfreezer", true));
+            this.unfreezerTextBox.Location = new System.Drawing.Point(90, 253);
+            this.unfreezerTextBox.Name = "unfreezerTextBox";
+            this.unfreezerTextBox.ReadOnly = true;
+            this.unfreezerTextBox.Size = new System.Drawing.Size(100, 20);
+            this.unfreezerTextBox.TabIndex = 4;
+            // 
+            // freezeDateDateTimePicker
+            // 
+            this.freezeDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.clientCreditLineBindingSource, "FreezeDate", true));
+            this.freezeDateDateTimePicker.Enabled = false;
+            this.freezeDateDateTimePicker.Location = new System.Drawing.Point(297, 183);
+            this.freezeDateDateTimePicker.Name = "freezeDateDateTimePicker";
+            this.freezeDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.freezeDateDateTimePicker.TabIndex = 5;
+            // 
+            // btnClientCreditCoverFreeze
+            // 
+            this.btnClientCreditCoverFreeze.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClientCreditCoverFreeze.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnClientCreditCoverFreeze.Location = new System.Drawing.Point(373, 279);
+            this.btnClientCreditCoverFreeze.Name = "btnClientCreditCoverFreeze";
+            this.btnClientCreditCoverFreeze.Size = new System.Drawing.Size(75, 23);
+            this.btnClientCreditCoverFreeze.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClientCreditCoverFreeze.TabIndex = 19;
+            this.btnClientCreditCoverFreeze.Text = "冻结";
+            // 
+            // unfreezeReasonTextBox
+            // 
+            // 
+            // 
+            // 
+            this.unfreezeReasonTextBox.Border.Class = "TextBoxBorder";
+            this.unfreezeReasonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "UnfreezeReason", true));
+            this.unfreezeReasonTextBox.Location = new System.Drawing.Point(90, 209);
+            this.unfreezeReasonTextBox.Multiline = true;
+            this.unfreezeReasonTextBox.Name = "unfreezeReasonTextBox";
+            this.unfreezeReasonTextBox.ReadOnly = true;
+            this.unfreezeReasonTextBox.Size = new System.Drawing.Size(451, 38);
+            this.unfreezeReasonTextBox.TabIndex = 2;
+            // 
+            // freezeReasonTextBox
+            // 
+            // 
+            // 
+            // 
+            this.freezeReasonTextBox.Border.Class = "TextBoxBorder";
+            this.freezeReasonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "FreezeReason", true));
+            this.freezeReasonTextBox.Location = new System.Drawing.Point(90, 141);
+            this.freezeReasonTextBox.Multiline = true;
+            this.freezeReasonTextBox.Name = "freezeReasonTextBox";
+            this.freezeReasonTextBox.ReadOnly = true;
+            this.freezeReasonTextBox.Size = new System.Drawing.Size(451, 36);
+            this.freezeReasonTextBox.TabIndex = 1;
+            // 
+            // btnClientCreditCoverCancel
+            // 
+            this.btnClientCreditCoverCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClientCreditCoverCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnClientCreditCoverCancel.Location = new System.Drawing.Point(292, 279);
+            this.btnClientCreditCoverCancel.Name = "btnClientCreditCoverCancel";
+            this.btnClientCreditCoverCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnClientCreditCoverCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClientCreditCoverCancel.TabIndex = 18;
+            this.btnClientCreditCoverCancel.Text = "取消";
+            // 
+            // btnClientCreditCoverSave
+            // 
+            this.btnClientCreditCoverSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClientCreditCoverSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnClientCreditCoverSave.Location = new System.Drawing.Point(211, 279);
+            this.btnClientCreditCoverSave.Name = "btnClientCreditCoverSave";
+            this.btnClientCreditCoverSave.Size = new System.Drawing.Size(75, 23);
+            this.btnClientCreditCoverSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClientCreditCoverSave.TabIndex = 17;
+            this.btnClientCreditCoverSave.Text = "保存";
+            // 
+            // freezerTextBox
+            // 
+            // 
+            // 
+            // 
+            this.freezerTextBox.Border.Class = "TextBoxBorder";
+            this.freezerTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "Freezer", true));
+            this.freezerTextBox.Location = new System.Drawing.Point(90, 183);
+            this.freezerTextBox.Name = "freezerTextBox";
+            this.freezerTextBox.ReadOnly = true;
+            this.freezerTextBox.Size = new System.Drawing.Size(100, 20);
+            this.freezerTextBox.TabIndex = 3;
+            // 
+            // btnClientCreditCoverAdd
+            // 
+            this.btnClientCreditCoverAdd.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClientCreditCoverAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnClientCreditCoverAdd.Location = new System.Drawing.Point(130, 279);
+            this.btnClientCreditCoverAdd.Name = "btnClientCreditCoverAdd";
+            this.btnClientCreditCoverAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnClientCreditCoverAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClientCreditCoverAdd.TabIndex = 16;
+            this.btnClientCreditCoverAdd.Text = "新建";
+            // 
+            // creditLineStatusTextBox
+            // 
+            // 
+            // 
+            // 
+            this.creditLineStatusTextBox.Border.Class = "TextBoxBorder";
+            this.creditLineStatusTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "CreditLineStatus", true));
+            this.creditLineStatusTextBox.Location = new System.Drawing.Point(90, 72);
+            this.creditLineStatusTextBox.Name = "creditLineStatusTextBox";
+            this.creditLineStatusTextBox.ReadOnly = true;
+            this.creditLineStatusTextBox.Size = new System.Drawing.Size(121, 20);
+            this.creditLineStatusTextBox.TabIndex = 15;
+            // 
+            // approveTypeComboBox
+            // 
+            this.approveTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "ApproveType", true));
+            this.approveTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.approveTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.approveTypeComboBox.FormattingEnabled = true;
+            this.approveTypeComboBox.Items.AddRange(new object[] {
+            "综合授信",
+            "国际双保理",
+            "进口保理",
+            "有追索权保理",
+            "无追索权保理"});
+            this.approveTypeComboBox.Location = new System.Drawing.Point(292, 51);
+            this.approveTypeComboBox.Name = "approveTypeComboBox";
+            this.approveTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.approveTypeComboBox.TabIndex = 13;
+            // 
+            // approveNoTextBox
+            // 
+            // 
+            // 
+            // 
+            this.approveNoTextBox.Border.Class = "TextBoxBorder";
+            this.approveNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "ApproveNo", true));
+            this.approveNoTextBox.Location = new System.Drawing.Point(291, 29);
+            this.approveNoTextBox.Name = "approveNoTextBox";
+            this.approveNoTextBox.Size = new System.Drawing.Size(122, 20);
+            this.approveNoTextBox.TabIndex = 11;
+            // 
+            // periodEndDateTimePicker
+            // 
+            this.periodEndDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.clientCreditLineBindingSource, "PeriodEnd", true));
+            this.periodEndDateTimePicker.Location = new System.Drawing.Point(419, 5);
+            this.periodEndDateTimePicker.Name = "periodEndDateTimePicker";
+            this.periodEndDateTimePicker.Size = new System.Drawing.Size(122, 20);
+            this.periodEndDateTimePicker.TabIndex = 9;
+            // 
+            // periodBeginDateTimePicker
+            // 
+            this.periodBeginDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.clientCreditLineBindingSource, "PeriodBegin", true));
+            this.periodBeginDateTimePicker.Location = new System.Drawing.Point(291, 5);
+            this.periodBeginDateTimePicker.Name = "periodBeginDateTimePicker";
+            this.periodBeginDateTimePicker.Size = new System.Drawing.Size(122, 20);
+            this.periodBeginDateTimePicker.TabIndex = 7;
+            // 
+            // creditLineTextBox
+            // 
+            // 
+            // 
+            // 
+            this.creditLineTextBox.Border.Class = "TextBoxBorder";
+            this.creditLineTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "CreditLine", true));
+            this.creditLineTextBox.Location = new System.Drawing.Point(90, 51);
+            this.creditLineTextBox.Name = "creditLineTextBox";
+            this.creditLineTextBox.Size = new System.Drawing.Size(121, 20);
+            this.creditLineTextBox.TabIndex = 5;
+            // 
+            // creditLineTypeComboBox
+            // 
+            this.creditLineTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "CreditLineType", true));
+            this.creditLineTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.creditLineTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.creditLineTypeComboBox.FormattingEnabled = true;
+            this.creditLineTypeComboBox.Items.AddRange(new object[] {
+            "保理预付款融资额度",
+            "买方信用风险担保额度"});
+            this.creditLineTypeComboBox.Location = new System.Drawing.Point(90, 7);
+            this.creditLineTypeComboBox.Name = "creditLineTypeComboBox";
+            this.creditLineTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.creditLineTypeComboBox.TabIndex = 4;
+            // 
+            // creditLineCurrencyComboBox
+            // 
+            this.creditLineCurrencyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "CreditLineCurrency", true));
+            this.creditLineCurrencyComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.creditLineCurrencyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.creditLineCurrencyComboBox.FormattingEnabled = true;
+            this.creditLineCurrencyComboBox.Location = new System.Drawing.Point(90, 29);
+            this.creditLineCurrencyComboBox.Name = "creditLineCurrencyComboBox";
+            this.creditLineCurrencyComboBox.Size = new System.Drawing.Size(121, 21);
+            this.creditLineCurrencyComboBox.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.creditLineCurrencyComboBox.TabIndex = 3;
+            // 
+            // tabItemClientCreditLine
+            // 
+            this.tabItemClientCreditLine.AttachedControl = this.tabPanelClientCreditLine;
+            this.tabItemClientCreditLine.Name = "tabItemClientCreditLine";
+            this.tabItemClientCreditLine.Text = "额度信息";
+            // 
+            // tabPanelClientAccount
+            // 
+            this.tabPanelClientAccount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelClientAccount.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelClientAccount.Name = "tabPanelClientAccount";
+            this.tabPanelClientAccount.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelClientAccount.Size = new System.Drawing.Size(599, 536);
+            this.tabPanelClientAccount.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelClientAccount.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelClientAccount.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelClientAccount.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelClientAccount.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelClientAccount.Style.GradientAngle = 90;
+            this.tabPanelClientAccount.TabIndex = 3;
+            this.tabPanelClientAccount.TabItem = this.tabItemClientAccount;
+            // 
+            // tabItemClientAccount
+            // 
+            this.tabItemClientAccount.AttachedControl = this.tabPanelClientAccount;
+            this.tabItemClientAccount.Name = "tabItemClientAccount";
+            this.tabItemClientAccount.Text = "账户信息";
             // 
             // tabPanelClient
             // 
@@ -1639,560 +2187,6 @@
             this.tabItemClient.Name = "tabItemClient";
             this.tabItemClient.Text = "基本信息";
             // 
-            // tabPanelClientCreditLine
-            // 
-            this.tabPanelClientCreditLine.AutoScroll = true;
-            this.tabPanelClientCreditLine.Controls.Add(this.groupPanelClientCreditCoverMgr);
-            this.tabPanelClientCreditLine.Controls.Add(this.groupPanelClientCreditCover);
-            this.tabPanelClientCreditLine.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelClientCreditLine.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelClientCreditLine.Name = "tabPanelClientCreditLine";
-            this.tabPanelClientCreditLine.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelClientCreditLine.Size = new System.Drawing.Size(599, 536);
-            this.tabPanelClientCreditLine.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelClientCreditLine.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelClientCreditLine.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelClientCreditLine.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelClientCreditLine.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelClientCreditLine.Style.GradientAngle = 90;
-            this.tabPanelClientCreditLine.TabIndex = 2;
-            this.tabPanelClientCreditLine.TabItem = this.tabItemClientCreditLine;
-            // 
-            // groupPanelClientCreditCoverMgr
-            // 
-            this.groupPanelClientCreditCoverMgr.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelClientCreditCoverMgr.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.groupPanelClientCreditCoverMgr.Controls.Add(this.clientCreditLineDataGridView);
-            this.groupPanelClientCreditCoverMgr.Location = new System.Drawing.Point(0, 326);
-            this.groupPanelClientCreditCoverMgr.Name = "groupPanelClientCreditCoverMgr";
-            this.groupPanelClientCreditCoverMgr.Size = new System.Drawing.Size(591, 198);
-            // 
-            // 
-            // 
-            this.groupPanelClientCreditCoverMgr.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelClientCreditCoverMgr.Style.BackColorGradientAngle = 90;
-            this.groupPanelClientCreditCoverMgr.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelClientCreditCoverMgr.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCoverMgr.Style.BorderBottomWidth = 1;
-            this.groupPanelClientCreditCoverMgr.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelClientCreditCoverMgr.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCoverMgr.Style.BorderLeftWidth = 1;
-            this.groupPanelClientCreditCoverMgr.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCoverMgr.Style.BorderRightWidth = 1;
-            this.groupPanelClientCreditCoverMgr.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCoverMgr.Style.BorderTopWidth = 1;
-            this.groupPanelClientCreditCoverMgr.Style.Class = "";
-            this.groupPanelClientCreditCoverMgr.Style.CornerDiameter = 4;
-            this.groupPanelClientCreditCoverMgr.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelClientCreditCoverMgr.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelClientCreditCoverMgr.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelClientCreditCoverMgr.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelClientCreditCoverMgr.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelClientCreditCoverMgr.StyleMouseOver.Class = "";
-            this.groupPanelClientCreditCoverMgr.TabIndex = 1;
-            // 
-            // clientCreditLineDataGridView
-            // 
-            this.clientCreditLineDataGridView.AllowUserToAddRows = false;
-            this.clientCreditLineDataGridView.AllowUserToDeleteRows = false;
-            this.clientCreditLineDataGridView.AllowUserToOrderColumns = true;
-            this.clientCreditLineDataGridView.AutoGenerateColumns = false;
-            this.clientCreditLineDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.clientCreditLineDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12,
-            this.dataGridViewTextBoxColumn13,
-            this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15,
-            this.dataGridViewTextBoxColumn16,
-            this.dataGridViewTextBoxColumn17});
-            this.clientCreditLineDataGridView.DataSource = this.clientCreditLineBindingSource;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.clientCreditLineDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
-            this.clientCreditLineDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clientCreditLineDataGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.clientCreditLineDataGridView.Location = new System.Drawing.Point(0, 0);
-            this.clientCreditLineDataGridView.Name = "clientCreditLineDataGridView";
-            this.clientCreditLineDataGridView.ReadOnly = true;
-            this.clientCreditLineDataGridView.Size = new System.Drawing.Size(585, 192);
-            this.clientCreditLineDataGridView.TabIndex = 0;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "CreditLineID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "CreditLineID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "CreditLineType";
-            this.dataGridViewTextBoxColumn3.HeaderText = "额度种类";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "CreditLineCurrency";
-            this.dataGridViewTextBoxColumn4.HeaderText = "额度币种";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "CreditLine";
-            this.dataGridViewTextBoxColumn5.HeaderText = "额度上限";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "PeriodBegin";
-            this.dataGridViewTextBoxColumn6.HeaderText = "有效期(始)";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "PeriodEnd";
-            this.dataGridViewTextBoxColumn7.HeaderText = "有效期(终)";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "ApproveNo";
-            this.dataGridViewTextBoxColumn8.HeaderText = "授信编号";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "ApproveType";
-            this.dataGridViewTextBoxColumn9.HeaderText = "授信类型";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "CreditLineStatus";
-            this.dataGridViewTextBoxColumn10.HeaderText = "额度状态";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "FreezeReason";
-            this.dataGridViewTextBoxColumn11.HeaderText = "冻结原因";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "Freezer";
-            this.dataGridViewTextBoxColumn12.HeaderText = "冻结人";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "FreezeDate";
-            this.dataGridViewTextBoxColumn13.HeaderText = "冻结日期";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "UnfreezeReason";
-            this.dataGridViewTextBoxColumn14.HeaderText = "解冻原因";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "Unfreezer";
-            this.dataGridViewTextBoxColumn15.HeaderText = "解冻人";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.DataPropertyName = "UnfreezeDate";
-            this.dataGridViewTextBoxColumn16.HeaderText = "解冻日期";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.DataPropertyName = "Comment";
-            this.dataGridViewTextBoxColumn17.HeaderText = "备注";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            // 
-            // clientCreditLineBindingSource
-            // 
-            this.clientCreditLineBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.ClientCreditLine);
-            // 
-            // groupPanelClientCreditCover
-            // 
-            this.groupPanelClientCreditCover.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelClientCreditCover.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.groupPanelClientCreditCover.Controls.Add(commentLabel1);
-            this.groupPanelClientCreditCover.Controls.Add(this.creditLineCommentTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(unfreezeDateLabel);
-            this.groupPanelClientCreditCover.Controls.Add(freezeDateLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.unfreezeDateDateTimePicker);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverUnfreeze);
-            this.groupPanelClientCreditCover.Controls.Add(unfreezerLabel);
-            this.groupPanelClientCreditCover.Controls.Add(freezeReasonLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.unfreezerTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(this.freezeDateDateTimePicker);
-            this.groupPanelClientCreditCover.Controls.Add(unfreezeReasonLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverFreeze);
-            this.groupPanelClientCreditCover.Controls.Add(this.unfreezeReasonTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(this.freezeReasonTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverCancel);
-            this.groupPanelClientCreditCover.Controls.Add(freezerLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverSave);
-            this.groupPanelClientCreditCover.Controls.Add(this.freezerTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverAdd);
-            this.groupPanelClientCreditCover.Controls.Add(creditLineStatusLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.creditLineStatusTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(approveTypeLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.approveTypeComboBox);
-            this.groupPanelClientCreditCover.Controls.Add(approveNoLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.approveNoTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(this.periodEndDateTimePicker);
-            this.groupPanelClientCreditCover.Controls.Add(periodBeginLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.periodBeginDateTimePicker);
-            this.groupPanelClientCreditCover.Controls.Add(creditLineLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.creditLineTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(creditLineTypeLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.creditLineTypeComboBox);
-            this.groupPanelClientCreditCover.Controls.Add(creditLineCurrencyLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.creditLineCurrencyComboBox);
-            this.groupPanelClientCreditCover.Location = new System.Drawing.Point(0, 4);
-            this.groupPanelClientCreditCover.Name = "groupPanelClientCreditCover";
-            this.groupPanelClientCreditCover.Size = new System.Drawing.Size(592, 316);
-            // 
-            // 
-            // 
-            this.groupPanelClientCreditCover.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelClientCreditCover.Style.BackColorGradientAngle = 90;
-            this.groupPanelClientCreditCover.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelClientCreditCover.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCover.Style.BorderBottomWidth = 1;
-            this.groupPanelClientCreditCover.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelClientCreditCover.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCover.Style.BorderLeftWidth = 1;
-            this.groupPanelClientCreditCover.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCover.Style.BorderRightWidth = 1;
-            this.groupPanelClientCreditCover.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCover.Style.BorderTopWidth = 1;
-            this.groupPanelClientCreditCover.Style.Class = "";
-            this.groupPanelClientCreditCover.Style.CornerDiameter = 4;
-            this.groupPanelClientCreditCover.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelClientCreditCover.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelClientCreditCover.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelClientCreditCover.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelClientCreditCover.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelClientCreditCover.StyleMouseOver.Class = "";
-            this.groupPanelClientCreditCover.TabIndex = 0;
-            // 
-            // creditLineCommentTextBox
-            // 
-            // 
-            // 
-            // 
-            this.creditLineCommentTextBox.Border.Class = "";
-            this.creditLineCommentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "Comment", true));
-            this.creditLineCommentTextBox.Location = new System.Drawing.Point(90, 94);
-            this.creditLineCommentTextBox.Multiline = true;
-            this.creditLineCommentTextBox.Name = "creditLineCommentTextBox";
-            this.creditLineCommentTextBox.Size = new System.Drawing.Size(451, 42);
-            this.creditLineCommentTextBox.TabIndex = 33;
-            // 
-            // unfreezeDateDateTimePicker
-            // 
-            this.unfreezeDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.clientCreditLineBindingSource, "UnfreezeDate", true));
-            this.unfreezeDateDateTimePicker.Enabled = false;
-            this.unfreezeDateDateTimePicker.Location = new System.Drawing.Point(297, 253);
-            this.unfreezeDateDateTimePicker.Name = "unfreezeDateDateTimePicker";
-            this.unfreezeDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
-            this.unfreezeDateDateTimePicker.TabIndex = 6;
-            // 
-            // btnClientCreditCoverUnfreeze
-            // 
-            this.btnClientCreditCoverUnfreeze.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClientCreditCoverUnfreeze.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditCoverUnfreeze.Location = new System.Drawing.Point(454, 279);
-            this.btnClientCreditCoverUnfreeze.Name = "btnClientCreditCoverUnfreeze";
-            this.btnClientCreditCoverUnfreeze.Size = new System.Drawing.Size(75, 23);
-            this.btnClientCreditCoverUnfreeze.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClientCreditCoverUnfreeze.TabIndex = 20;
-            this.btnClientCreditCoverUnfreeze.Text = "解冻";
-            // 
-            // unfreezerTextBox
-            // 
-            // 
-            // 
-            // 
-            this.unfreezerTextBox.Border.Class = "";
-            this.unfreezerTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "Unfreezer", true));
-            this.unfreezerTextBox.Location = new System.Drawing.Point(90, 253);
-            this.unfreezerTextBox.Name = "unfreezerTextBox";
-            this.unfreezerTextBox.ReadOnly = true;
-            this.unfreezerTextBox.Size = new System.Drawing.Size(100, 20);
-            this.unfreezerTextBox.TabIndex = 4;
-            // 
-            // freezeDateDateTimePicker
-            // 
-            this.freezeDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.clientCreditLineBindingSource, "FreezeDate", true));
-            this.freezeDateDateTimePicker.Enabled = false;
-            this.freezeDateDateTimePicker.Location = new System.Drawing.Point(297, 183);
-            this.freezeDateDateTimePicker.Name = "freezeDateDateTimePicker";
-            this.freezeDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
-            this.freezeDateDateTimePicker.TabIndex = 5;
-            // 
-            // btnClientCreditCoverFreeze
-            // 
-            this.btnClientCreditCoverFreeze.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClientCreditCoverFreeze.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditCoverFreeze.Location = new System.Drawing.Point(373, 279);
-            this.btnClientCreditCoverFreeze.Name = "btnClientCreditCoverFreeze";
-            this.btnClientCreditCoverFreeze.Size = new System.Drawing.Size(75, 23);
-            this.btnClientCreditCoverFreeze.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClientCreditCoverFreeze.TabIndex = 19;
-            this.btnClientCreditCoverFreeze.Text = "冻结";
-            // 
-            // unfreezeReasonTextBox
-            // 
-            // 
-            // 
-            // 
-            this.unfreezeReasonTextBox.Border.Class = "";
-            this.unfreezeReasonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "UnfreezeReason", true));
-            this.unfreezeReasonTextBox.Location = new System.Drawing.Point(90, 209);
-            this.unfreezeReasonTextBox.Multiline = true;
-            this.unfreezeReasonTextBox.Name = "unfreezeReasonTextBox";
-            this.unfreezeReasonTextBox.ReadOnly = true;
-            this.unfreezeReasonTextBox.Size = new System.Drawing.Size(451, 38);
-            this.unfreezeReasonTextBox.TabIndex = 2;
-            // 
-            // freezeReasonTextBox
-            // 
-            // 
-            // 
-            // 
-            this.freezeReasonTextBox.Border.Class = "";
-            this.freezeReasonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "FreezeReason", true));
-            this.freezeReasonTextBox.Location = new System.Drawing.Point(90, 141);
-            this.freezeReasonTextBox.Multiline = true;
-            this.freezeReasonTextBox.Name = "freezeReasonTextBox";
-            this.freezeReasonTextBox.ReadOnly = true;
-            this.freezeReasonTextBox.Size = new System.Drawing.Size(451, 36);
-            this.freezeReasonTextBox.TabIndex = 1;
-            // 
-            // btnClientCreditCoverCancel
-            // 
-            this.btnClientCreditCoverCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClientCreditCoverCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditCoverCancel.Location = new System.Drawing.Point(292, 279);
-            this.btnClientCreditCoverCancel.Name = "btnClientCreditCoverCancel";
-            this.btnClientCreditCoverCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnClientCreditCoverCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClientCreditCoverCancel.TabIndex = 18;
-            this.btnClientCreditCoverCancel.Text = "取消";
-            // 
-            // btnClientCreditCoverSave
-            // 
-            this.btnClientCreditCoverSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClientCreditCoverSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditCoverSave.Location = new System.Drawing.Point(211, 279);
-            this.btnClientCreditCoverSave.Name = "btnClientCreditCoverSave";
-            this.btnClientCreditCoverSave.Size = new System.Drawing.Size(75, 23);
-            this.btnClientCreditCoverSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClientCreditCoverSave.TabIndex = 17;
-            this.btnClientCreditCoverSave.Text = "保存";
-            // 
-            // freezerTextBox
-            // 
-            // 
-            // 
-            // 
-            this.freezerTextBox.Border.Class = "";
-            this.freezerTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "Freezer", true));
-            this.freezerTextBox.Location = new System.Drawing.Point(90, 183);
-            this.freezerTextBox.Name = "freezerTextBox";
-            this.freezerTextBox.ReadOnly = true;
-            this.freezerTextBox.Size = new System.Drawing.Size(100, 20);
-            this.freezerTextBox.TabIndex = 3;
-            // 
-            // btnClientCreditCoverAdd
-            // 
-            this.btnClientCreditCoverAdd.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClientCreditCoverAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditCoverAdd.Location = new System.Drawing.Point(130, 279);
-            this.btnClientCreditCoverAdd.Name = "btnClientCreditCoverAdd";
-            this.btnClientCreditCoverAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnClientCreditCoverAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClientCreditCoverAdd.TabIndex = 16;
-            this.btnClientCreditCoverAdd.Text = "新建";
-            // 
-            // creditLineStatusTextBox
-            // 
-            // 
-            // 
-            // 
-            this.creditLineStatusTextBox.Border.Class = "";
-            this.creditLineStatusTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "CreditLineStatus", true));
-            this.creditLineStatusTextBox.Location = new System.Drawing.Point(90, 72);
-            this.creditLineStatusTextBox.Name = "creditLineStatusTextBox";
-            this.creditLineStatusTextBox.ReadOnly = true;
-            this.creditLineStatusTextBox.Size = new System.Drawing.Size(121, 20);
-            this.creditLineStatusTextBox.TabIndex = 15;
-            // 
-            // approveTypeComboBox
-            // 
-            this.approveTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "ApproveType", true));
-            this.approveTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.approveTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.approveTypeComboBox.FormattingEnabled = true;
-            this.approveTypeComboBox.Items.AddRange(new object[] {
-            "综合授信",
-            "国际双保理",
-            "进口保理",
-            "有追索权保理",
-            "无追索权保理"});
-            this.approveTypeComboBox.Location = new System.Drawing.Point(292, 51);
-            this.approveTypeComboBox.Name = "approveTypeComboBox";
-            this.approveTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.approveTypeComboBox.TabIndex = 13;
-            // 
-            // approveNoTextBox
-            // 
-            // 
-            // 
-            // 
-            this.approveNoTextBox.Border.Class = "";
-            this.approveNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "ApproveNo", true));
-            this.approveNoTextBox.Location = new System.Drawing.Point(291, 29);
-            this.approveNoTextBox.Name = "approveNoTextBox";
-            this.approveNoTextBox.Size = new System.Drawing.Size(122, 20);
-            this.approveNoTextBox.TabIndex = 11;
-            // 
-            // periodEndDateTimePicker
-            // 
-            this.periodEndDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.clientCreditLineBindingSource, "PeriodEnd", true));
-            this.periodEndDateTimePicker.Location = new System.Drawing.Point(419, 5);
-            this.periodEndDateTimePicker.Name = "periodEndDateTimePicker";
-            this.periodEndDateTimePicker.Size = new System.Drawing.Size(122, 20);
-            this.periodEndDateTimePicker.TabIndex = 9;
-            // 
-            // periodBeginDateTimePicker
-            // 
-            this.periodBeginDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.clientCreditLineBindingSource, "PeriodBegin", true));
-            this.periodBeginDateTimePicker.Location = new System.Drawing.Point(291, 5);
-            this.periodBeginDateTimePicker.Name = "periodBeginDateTimePicker";
-            this.periodBeginDateTimePicker.Size = new System.Drawing.Size(122, 20);
-            this.periodBeginDateTimePicker.TabIndex = 7;
-            // 
-            // creditLineTextBox
-            // 
-            // 
-            // 
-            // 
-            this.creditLineTextBox.Border.Class = "";
-            this.creditLineTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "CreditLine", true));
-            this.creditLineTextBox.Location = new System.Drawing.Point(90, 51);
-            this.creditLineTextBox.Name = "creditLineTextBox";
-            this.creditLineTextBox.Size = new System.Drawing.Size(121, 20);
-            this.creditLineTextBox.TabIndex = 5;
-            // 
-            // creditLineTypeComboBox
-            // 
-            this.creditLineTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "CreditLineType", true));
-            this.creditLineTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.creditLineTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.creditLineTypeComboBox.FormattingEnabled = true;
-            this.creditLineTypeComboBox.Items.AddRange(new object[] {
-            "保理预付款融资额度",
-            "买方信用风险担保额度"});
-            this.creditLineTypeComboBox.Location = new System.Drawing.Point(90, 7);
-            this.creditLineTypeComboBox.Name = "creditLineTypeComboBox";
-            this.creditLineTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.creditLineTypeComboBox.TabIndex = 4;
-            // 
-            // creditLineCurrencyComboBox
-            // 
-            this.creditLineCurrencyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "CreditLineCurrency", true));
-            this.creditLineCurrencyComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.creditLineCurrencyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.creditLineCurrencyComboBox.FormattingEnabled = true;
-            this.creditLineCurrencyComboBox.Location = new System.Drawing.Point(90, 29);
-            this.creditLineCurrencyComboBox.Name = "creditLineCurrencyComboBox";
-            this.creditLineCurrencyComboBox.Size = new System.Drawing.Size(121, 21);
-            this.creditLineCurrencyComboBox.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.creditLineCurrencyComboBox.TabIndex = 3;
-            // 
-            // tabItemClientCreditLine
-            // 
-            this.tabItemClientCreditLine.AttachedControl = this.tabPanelClientCreditLine;
-            this.tabItemClientCreditLine.Name = "tabItemClientCreditLine";
-            this.tabItemClientCreditLine.Text = "额度信息";
-            // 
-            // tabPanelClientAccount
-            // 
-            this.tabPanelClientAccount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelClientAccount.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelClientAccount.Name = "tabPanelClientAccount";
-            this.tabPanelClientAccount.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelClientAccount.Size = new System.Drawing.Size(599, 536);
-            this.tabPanelClientAccount.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelClientAccount.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelClientAccount.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelClientAccount.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelClientAccount.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelClientAccount.Style.GradientAngle = 90;
-            this.tabPanelClientAccount.TabIndex = 3;
-            this.tabPanelClientAccount.TabItem = this.tabItemClientAccount;
-            // 
-            // tabItemClientAccount
-            // 
-            this.tabItemClientAccount.AttachedControl = this.tabPanelClientAccount;
-            this.tabItemClientAccount.Name = "tabItemClientAccount";
-            this.tabItemClientAccount.Text = "账户信息";
-            // 
             // ClientDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2206,6 +2200,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabControl.PerformLayout();
+            this.tabPanelClientCreditLine.ResumeLayout(false);
+            this.groupPanelClientCreditCoverMgr.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLine)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineMgrBindingSource)).EndInit();
+            this.groupPanelClientCreditCover.ResumeLayout(false);
+            this.groupPanelClientCreditCover.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineBindingSource)).EndInit();
             this.tabPanelClient.ResumeLayout(false);
             this.groupPanelClientContact.ResumeLayout(false);
             this.groupPanelClientContact.PerformLayout();
@@ -2216,12 +2217,6 @@
             this.groupPanelClientStat.PerformLayout();
             this.groupPanelClientBasic.ResumeLayout(false);
             this.groupPanelClientBasic.PerformLayout();
-            this.tabPanelClientCreditLine.ResumeLayout(false);
-            this.groupPanelClientCreditCoverMgr.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineBindingSource)).EndInit();
-            this.groupPanelClientCreditCover.ResumeLayout(false);
-            this.groupPanelClientCreditCover.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2305,26 +2300,9 @@
         private DevComponents.DotNetBar.Controls.TextBoxX unfreezerTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX unfreezeReasonTextBox;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelClientCreditCoverMgr;
-        private DevComponents.DotNetBar.Controls.DataGridViewX clientCreditLineDataGridView;
         private DevComponents.DotNetBar.Controls.TextBoxX clientCommentTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX creditLineCommentTextBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private DevComponents.DotNetBar.LabelX wetsiteLabel;
+         private DevComponents.DotNetBar.LabelX wetsiteLabel;
         private DevComponents.DotNetBar.LabelX telephoneLabel;
         private DevComponents.DotNetBar.Controls.ComboBoxEx industryComboBox;
         private DevComponents.Editors.ComboItem comboItem9;
@@ -2338,5 +2316,24 @@
         private DevComponents.Editors.ComboItem comboItem16;
         private DevComponents.Editors.ComboItem comboItem17;
         private DevComponents.Editors.ComboItem comboItem18;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvClientCreditLine;
+        private System.Windows.Forms.BindingSource clientCreditLineMgrBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn29;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
     }
 }

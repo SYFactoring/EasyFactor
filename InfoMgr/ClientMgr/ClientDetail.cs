@@ -44,7 +44,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 updateClient.Copy(client);
             }
-            this.clientBindingSource.DataSource = updateClient;
+            if (opType == OpType.DETAIL_CLIENT)
+            {
+                this.clientBindingSource.DataSource = client;
+            }
+            else
+            {
+                this.clientBindingSource.DataSource = updateClient;
+            }
             this.UpdateEditableStatus();
             InitComboBox(updateClient);
             // this.creditLineMgrBindingSource.DataSource = updateClient.ClientCreditLines;
@@ -69,9 +76,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
             this.creditLineCurrencyComboBox.SelectedIndex = -1;
 
-            
 
-            foreach ( Country country in this.countryCodeComboBox.Items)
+
+            foreach (Country country in this.countryCodeComboBox.Items)
             {
                 if (country.CountryCode.Equals(client.CountryCode))
                 {
@@ -195,7 +202,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     Close();
                 }
             }
-            else
+            else if (opType == OpType.UPDATE_CLIENT)
             {
                 bool isUpdateOK = true;
                 Client tempClient = new Client();

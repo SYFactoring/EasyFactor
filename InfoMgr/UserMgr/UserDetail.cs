@@ -9,70 +9,78 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     using System;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
-    
+    using CMBC.EasyFactor.Utils;
+
     /// <summary>
     /// User Detail User Interface
     /// </summary>
     public partial class UserDetail : DevComponents.DotNetBar.Office2007Form
     {
-        /// <summary>
-        /// flag indicates if add
-        /// </summary>
-        private readonly bool isAdd;
 
         /// <summary>
         /// original user
         /// </summary>
         private readonly User originalUser;
 
+        public enum OpType { NEW_USER, UPDATE_USER, DETAIL_USER };
+
+        private readonly OpType opType;
+
         /// <summary>
         /// Initializes a new instance of the UserDetailUI class
         /// </summary>
         /// <param name="user">selected user</param>
-        /// <param name="isEditable">true if editable</param>
-        public UserDetail(User user, bool isEditable)
+        /// <param name="opType">operation type</param>
+        public UserDetail(User user, OpType opType)
         {
             this.InitializeComponent();
             User updateUser = new User();
-            if (user == null)
-            {
-                this.isAdd = true;
-            }
-            else
+            this.opType = opType;
+            if (opType == OpType.UPDATE_USER)
             {
                 this.originalUser = user;
+            }
+            if (user != null)
+            {
                 updateUser.Copy(user);
             }
 
             userBindingSource.DataSource = updateUser;
-            this.UpdateEditableStatus(isEditable);
+            this.UpdateEditableStatus();
         }
 
         /// <summary>
         /// Update Editable Status
         /// </summary>
-        /// <param name="isEditable">true is editable</param>
-        private void UpdateEditableStatus(bool isEditable)
+        private void UpdateEditableStatus()
         {
-            if (this.isAdd)
+            if (opType == OpType.DETAIL_USER)
             {
-                userIDTextBox.Enabled = true;
+                foreach (Control comp in this.groupPanelUser.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, false);
+                }
+                ControlUtil.setComponetEditable(this.btnSave, false);
+                ControlUtil.setComponetEditable(this.btnCancel, false);
             }
-            else
+            else if (opType == OpType.NEW_USER)
             {
+                foreach (Control comp in this.groupPanelUser.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, true);
+                }
+                ControlUtil.setComponetEditable(this.btnSave, true);
+                ControlUtil.setComponetEditable(this.btnCancel, true);
+            }
+            else if (opType == OpType.UPDATE_USER)
+            {
+                foreach (Control comp in this.groupPanelUser.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, true);
+                }
+                ControlUtil.setComponetEditable(this.btnSave, true);
+                ControlUtil.setComponetEditable(this.btnCancel, true);
                 userIDTextBox.ReadOnly = true;
-            }
-
-            if (!isEditable)
-            {
-                emailTextBox.ReadOnly = true;
-                msnTextBox.ReadOnly = true;
-                passwordTextBox.ReadOnly = true;
-                phoneTextBox.ReadOnly = true;
-                telphoneTextBox.ReadOnly = true;
-                userNameTextBox.ReadOnly = true;
-                btnSave.Enabled = false;
-                btnCancel.Enabled = false;
             }
         }
 
@@ -85,7 +93,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         {
             userBindingSource.EndEdit();
             User updateUser = (User)userBindingSource.DataSource;
-            if (this.isAdd)
+            if (opType==OpType.NEW_USER)
             {
                 bool isAddOK = true;
                 try
@@ -97,7 +105,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 {
                     isAddOK = false;
                     MessageBox.Show(e1.Message);
-                } 
+                }
 
                 if (isAddOK)
                 {
@@ -120,7 +128,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                     isUpdateOK = false;
                     this.originalUser.Copy(tempUser);
                     MessageBox.Show(e2.Message);
-                } 
+                }
 
                 if (isUpdateOK)
                 {

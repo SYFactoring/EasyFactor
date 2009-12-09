@@ -81,18 +81,18 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertInvoicePaymentBatch(InvoicePaymentBatch instance);
     partial void UpdateInvoicePaymentBatch(InvoicePaymentBatch instance);
     partial void DeleteInvoicePaymentBatch(InvoicePaymentBatch instance);
-    partial void InsertClientAccount(ClientAccount instance);
-    partial void UpdateClientAccount(ClientAccount instance);
-    partial void DeleteClientAccount(ClientAccount instance);
-    partial void InsertClientCreditLine(ClientCreditLine instance);
-    partial void UpdateClientCreditLine(ClientCreditLine instance);
-    partial void DeleteClientCreditLine(ClientCreditLine instance);
     partial void InsertContract(Contract instance);
     partial void UpdateContract(Contract instance);
     partial void DeleteContract(Contract instance);
     partial void InsertClient(Client instance);
     partial void UpdateClient(Client instance);
     partial void DeleteClient(Client instance);
+    partial void InsertClientAccount(ClientAccount instance);
+    partial void UpdateClientAccount(ClientAccount instance);
+    partial void DeleteClientAccount(ClientAccount instance);
+    partial void InsertClientCreditLine(ClientCreditLine instance);
+    partial void UpdateClientCreditLine(ClientCreditLine instance);
+    partial void DeleteClientCreditLine(ClientCreditLine instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -261,22 +261,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		public System.Data.Linq.Table<ClientAccount> ClientAccounts
-		{
-			get
-			{
-				return this.GetTable<ClientAccount>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ClientCreditLine> ClientCreditLines
-		{
-			get
-			{
-				return this.GetTable<ClientCreditLine>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Contract> Contracts
 		{
 			get
@@ -290,6 +274,22 @@ namespace CMBC.EasyFactor.DB.dbml
 			get
 			{
 				return this.GetTable<Client>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ClientAccount> ClientAccounts
+		{
+			get
+			{
+				return this.GetTable<ClientAccount>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ClientCreditLine> ClientCreditLines
+		{
+			get
+			{
+				return this.GetTable<ClientCreditLine>();
 			}
 		}
 	}
@@ -810,7 +810,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Association(Name="Client_Case", Storage="_Client", ThisKey="BuyerCode", IsForeignKey=true)]
-		public Client Client
+		public Client BuyerClient
 		{
 			get
 			{
@@ -826,25 +826,25 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((previousValue != null))
 					{
 						this._Client.Entity = null;
-						previousValue.Cases.Remove(this);
+						previousValue.BuyerCases.Remove(this);
 					}
 					this._Client.Entity = value;
 					if ((value != null))
 					{
-						value.Cases.Add(this);
+						value.BuyerCases.Add(this);
 						this._BuyerCode = value.ClientEDICode;
 					}
 					else
 					{
 						this._BuyerCode = default(string);
 					}
-					this.SendPropertyChanged("Client");
+					this.SendPropertyChanged("BuyerClient");
 				}
 			}
 		}
 		
 		[Association(Name="Client_Case1", Storage="_Client1", ThisKey="SellerCode", IsForeignKey=true)]
-		public Client Client1
+		public Client SellerClient
 		{
 			get
 			{
@@ -860,19 +860,19 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((previousValue != null))
 					{
 						this._Client1.Entity = null;
-						previousValue.Cases1.Remove(this);
+						previousValue.SellerCases.Remove(this);
 					}
 					this._Client1.Entity = value;
 					if ((value != null))
 					{
-						value.Cases1.Add(this);
+						value.SellerCases.Add(this);
 						this._SellerCode = value.ClientEDICode;
 					}
 					else
 					{
 						this._SellerCode = default(string);
 					}
-					this.SendPropertyChanged("Client1");
+					this.SendPropertyChanged("SellerClient");
 				}
 			}
 		}
@@ -8158,6 +8158,1281 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 	}
 	
+	[Table(Name="dbo.Contract")]
+	public partial class Contract : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _ContractCode;
+		
+		private string _ClientEDICode;
+		
+		private System.Nullable<System.DateTime> _ContractValueDate;
+		
+		private System.Nullable<System.DateTime> _ContractDueDate;
+		
+		private string _ContractStatus;
+		
+		private string _CreateUserName;
+		
+		private EntityRef<Client> _Client;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnContractCodeChanging(string value);
+    partial void OnContractCodeChanged();
+    partial void OnClientEDICodeChanging(string value);
+    partial void OnClientEDICodeChanged();
+    partial void OnContractValueDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnContractValueDateChanged();
+    partial void OnContractDueDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnContractDueDateChanged();
+    partial void OnContractStatusChanging(string value);
+    partial void OnContractStatusChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
+    #endregion
+		
+		public Contract()
+		{
+			this._Client = default(EntityRef<Client>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_ContractCode", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ContractCode
+		{
+			get
+			{
+				return this._ContractCode;
+			}
+			set
+			{
+				if ((this._ContractCode != value))
+				{
+					this.OnContractCodeChanging(value);
+					this.SendPropertyChanging();
+					this._ContractCode = value;
+					this.SendPropertyChanged("ContractCode");
+					this.OnContractCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35)")]
+		public string ClientEDICode
+		{
+			get
+			{
+				return this._ClientEDICode;
+			}
+			set
+			{
+				if ((this._ClientEDICode != value))
+				{
+					if (this._Client.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnClientEDICodeChanging(value);
+					this.SendPropertyChanging();
+					this._ClientEDICode = value;
+					this.SendPropertyChanged("ClientEDICode");
+					this.OnClientEDICodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ContractValueDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ContractValueDate
+		{
+			get
+			{
+				return this._ContractValueDate;
+			}
+			set
+			{
+				if ((this._ContractValueDate != value))
+				{
+					this.OnContractValueDateChanging(value);
+					this.SendPropertyChanging();
+					this._ContractValueDate = value;
+					this.SendPropertyChanged("ContractValueDate");
+					this.OnContractValueDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ContractDueDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ContractDueDate
+		{
+			get
+			{
+				return this._ContractDueDate;
+			}
+			set
+			{
+				if ((this._ContractDueDate != value))
+				{
+					this.OnContractDueDateChanging(value);
+					this.SendPropertyChanging();
+					this._ContractDueDate = value;
+					this.SendPropertyChanged("ContractDueDate");
+					this.OnContractDueDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ContractStatus", DbType="NVarChar(50)")]
+		public string ContractStatus
+		{
+			get
+			{
+				return this._ContractStatus;
+			}
+			set
+			{
+				if ((this._ContractStatus != value))
+				{
+					this.OnContractStatusChanging(value);
+					this.SendPropertyChanging();
+					this._ContractStatus = value;
+					this.SendPropertyChanged("ContractStatus");
+					this.OnContractStatusChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50)")]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Client_Contract", Storage="_Client", ThisKey="ClientEDICode", IsForeignKey=true)]
+		public Client Client
+		{
+			get
+			{
+				return this._Client.Entity;
+			}
+			set
+			{
+				Client previousValue = this._Client.Entity;
+				if (((previousValue != value) 
+							|| (this._Client.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Client.Entity = null;
+						previousValue.Contracts.Remove(this);
+					}
+					this._Client.Entity = value;
+					if ((value != null))
+					{
+						value.Contracts.Add(this);
+						this._ClientEDICode = value.ClientEDICode;
+					}
+					else
+					{
+						this._ClientEDICode = default(string);
+					}
+					this.SendPropertyChanged("Client");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.Client")]
+	public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _ClientEDICode;
+		
+		private string _ClientCoreNo;
+		
+		private string _ClientNameCN;
+		
+		private string _ClientNameEN_1;
+		
+		private string _ClientNameEN_2;
+		
+		private string _AddressCN;
+		
+		private string _AddressEN;
+		
+		private string _CityCN;
+		
+		private string _CityEN;
+		
+		private string _ProvinceCN;
+		
+		private string _ProvinceEN;
+		
+		private string _PostCode;
+		
+		private string _CountryCode;
+		
+		private string _Representative;
+		
+		private string _Wetsite;
+		
+		private string _Contact;
+		
+		private string _Telephone;
+		
+		private string _Email;
+		
+		private string _FaxNumber;
+		
+		private string _CellPhone;
+		
+		private string _ClientType;
+		
+		private string _Industry;
+		
+		private string _ProductCN;
+		
+		private string _ProductEN;
+		
+		private string _ClientLevel;
+		
+		private string _IsGroup;
+		
+		private string _GroupNo;
+		
+		private string _RegistrationNumber;
+		
+		private string _CompanyCode;
+		
+		private string _BranchCode;
+		
+		private string _PMName;
+		
+		private string _RMName;
+		
+		private string _Comment;
+		
+		private EntitySet<Case> _Cases;
+		
+		private EntitySet<Case> _Cases1;
+		
+		private EntitySet<Contract> _Contracts;
+		
+		private EntitySet<ClientAccount> _ClientAccounts;
+		
+		private EntitySet<ClientCreditLine> _ClientCreditLines;
+		
+		private EntityRef<Department> _Department;
+		
+		private EntityRef<ClientGroup> _ClientGroup;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnClientEDICodeChanging(string value);
+    partial void OnClientEDICodeChanged();
+    partial void OnClientCoreNoChanging(string value);
+    partial void OnClientCoreNoChanged();
+    partial void OnClientNameCNChanging(string value);
+    partial void OnClientNameCNChanged();
+    partial void OnClientNameEN_1Changing(string value);
+    partial void OnClientNameEN_1Changed();
+    partial void OnClientNameEN_2Changing(string value);
+    partial void OnClientNameEN_2Changed();
+    partial void OnAddressCNChanging(string value);
+    partial void OnAddressCNChanged();
+    partial void OnAddressENChanging(string value);
+    partial void OnAddressENChanged();
+    partial void OnCityCNChanging(string value);
+    partial void OnCityCNChanged();
+    partial void OnCityENChanging(string value);
+    partial void OnCityENChanged();
+    partial void OnProvinceCNChanging(string value);
+    partial void OnProvinceCNChanged();
+    partial void OnProvinceENChanging(string value);
+    partial void OnProvinceENChanged();
+    partial void OnPostCodeChanging(string value);
+    partial void OnPostCodeChanged();
+    partial void OnCountryCodeChanging(string value);
+    partial void OnCountryCodeChanged();
+    partial void OnRepresentativeChanging(string value);
+    partial void OnRepresentativeChanged();
+    partial void OnWetsiteChanging(string value);
+    partial void OnWetsiteChanged();
+    partial void OnContactChanging(string value);
+    partial void OnContactChanged();
+    partial void OnTelephoneChanging(string value);
+    partial void OnTelephoneChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnFaxNumberChanging(string value);
+    partial void OnFaxNumberChanged();
+    partial void OnCellPhoneChanging(string value);
+    partial void OnCellPhoneChanged();
+    partial void OnClientTypeChanging(string value);
+    partial void OnClientTypeChanged();
+    partial void OnIndustryChanging(string value);
+    partial void OnIndustryChanged();
+    partial void OnProductCNChanging(string value);
+    partial void OnProductCNChanged();
+    partial void OnProductENChanging(string value);
+    partial void OnProductENChanged();
+    partial void OnClientLevelChanging(string value);
+    partial void OnClientLevelChanged();
+    partial void OnIsGroupChanging(string value);
+    partial void OnIsGroupChanged();
+    partial void OnGroupNoChanging(string value);
+    partial void OnGroupNoChanged();
+    partial void OnRegistrationNumberChanging(string value);
+    partial void OnRegistrationNumberChanged();
+    partial void OnCompanyCodeChanging(string value);
+    partial void OnCompanyCodeChanged();
+    partial void OnBranchCodeChanging(string value);
+    partial void OnBranchCodeChanged();
+    partial void OnPMNameChanging(string value);
+    partial void OnPMNameChanged();
+    partial void OnRMNameChanging(string value);
+    partial void OnRMNameChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    #endregion
+		
+		public Client()
+		{
+			this._Cases = new EntitySet<Case>(new Action<Case>(this.attach_Cases), new Action<Case>(this.detach_Cases));
+			this._Cases1 = new EntitySet<Case>(new Action<Case>(this.attach_Cases1), new Action<Case>(this.detach_Cases1));
+			this._Contracts = new EntitySet<Contract>(new Action<Contract>(this.attach_Contracts), new Action<Contract>(this.detach_Contracts));
+			this._ClientAccounts = new EntitySet<ClientAccount>(new Action<ClientAccount>(this.attach_ClientAccounts), new Action<ClientAccount>(this.detach_ClientAccounts));
+			this._ClientCreditLines = new EntitySet<ClientCreditLine>(new Action<ClientCreditLine>(this.attach_ClientCreditLines), new Action<ClientCreditLine>(this.detach_ClientCreditLines));
+			this._Department = default(EntityRef<Department>);
+			this._ClientGroup = default(EntityRef<ClientGroup>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
+		public string ClientEDICode
+		{
+			get
+			{
+				return this._ClientEDICode;
+			}
+			set
+			{
+				if ((this._ClientEDICode != value))
+				{
+					this.OnClientEDICodeChanging(value);
+					this.SendPropertyChanging();
+					this._ClientEDICode = value;
+					this.SendPropertyChanged("ClientEDICode");
+					this.OnClientEDICodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ClientCoreNo", DbType="NChar(10)", UpdateCheck=UpdateCheck.Never)]
+		public string ClientCoreNo
+		{
+			get
+			{
+				return this._ClientCoreNo;
+			}
+			set
+			{
+				if ((this._ClientCoreNo != value))
+				{
+					this.OnClientCoreNoChanging(value);
+					this.SendPropertyChanging();
+					this._ClientCoreNo = value;
+					this.SendPropertyChanged("ClientCoreNo");
+					this.OnClientCoreNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ClientNameCN", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+		public string ClientNameCN
+		{
+			get
+			{
+				return this._ClientNameCN;
+			}
+			set
+			{
+				if ((this._ClientNameCN != value))
+				{
+					this.OnClientNameCNChanging(value);
+					this.SendPropertyChanging();
+					this._ClientNameCN = value;
+					this.SendPropertyChanged("ClientNameCN");
+					this.OnClientNameCNChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ClientNameEN_1", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+		public string ClientNameEN_1
+		{
+			get
+			{
+				return this._ClientNameEN_1;
+			}
+			set
+			{
+				if ((this._ClientNameEN_1 != value))
+				{
+					this.OnClientNameEN_1Changing(value);
+					this.SendPropertyChanging();
+					this._ClientNameEN_1 = value;
+					this.SendPropertyChanged("ClientNameEN_1");
+					this.OnClientNameEN_1Changed();
+				}
+			}
+		}
+		
+		[Column(Storage="_ClientNameEN_2", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+		public string ClientNameEN_2
+		{
+			get
+			{
+				return this._ClientNameEN_2;
+			}
+			set
+			{
+				if ((this._ClientNameEN_2 != value))
+				{
+					this.OnClientNameEN_2Changing(value);
+					this.SendPropertyChanging();
+					this._ClientNameEN_2 = value;
+					this.SendPropertyChanged("ClientNameEN_2");
+					this.OnClientNameEN_2Changed();
+				}
+			}
+		}
+		
+		[Column(Storage="_AddressCN", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+		public string AddressCN
+		{
+			get
+			{
+				return this._AddressCN;
+			}
+			set
+			{
+				if ((this._AddressCN != value))
+				{
+					this.OnAddressCNChanging(value);
+					this.SendPropertyChanging();
+					this._AddressCN = value;
+					this.SendPropertyChanged("AddressCN");
+					this.OnAddressCNChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_AddressEN", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+		public string AddressEN
+		{
+			get
+			{
+				return this._AddressEN;
+			}
+			set
+			{
+				if ((this._AddressEN != value))
+				{
+					this.OnAddressENChanging(value);
+					this.SendPropertyChanging();
+					this._AddressEN = value;
+					this.SendPropertyChanged("AddressEN");
+					this.OnAddressENChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CityCN", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string CityCN
+		{
+			get
+			{
+				return this._CityCN;
+			}
+			set
+			{
+				if ((this._CityCN != value))
+				{
+					this.OnCityCNChanging(value);
+					this.SendPropertyChanging();
+					this._CityCN = value;
+					this.SendPropertyChanged("CityCN");
+					this.OnCityCNChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CityEN", DbType="NVarChar(35)", UpdateCheck=UpdateCheck.Never)]
+		public string CityEN
+		{
+			get
+			{
+				return this._CityEN;
+			}
+			set
+			{
+				if ((this._CityEN != value))
+				{
+					this.OnCityENChanging(value);
+					this.SendPropertyChanging();
+					this._CityEN = value;
+					this.SendPropertyChanged("CityEN");
+					this.OnCityENChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ProvinceCN", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string ProvinceCN
+		{
+			get
+			{
+				return this._ProvinceCN;
+			}
+			set
+			{
+				if ((this._ProvinceCN != value))
+				{
+					this.OnProvinceCNChanging(value);
+					this.SendPropertyChanging();
+					this._ProvinceCN = value;
+					this.SendPropertyChanged("ProvinceCN");
+					this.OnProvinceCNChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ProvinceEN", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string ProvinceEN
+		{
+			get
+			{
+				return this._ProvinceEN;
+			}
+			set
+			{
+				if ((this._ProvinceEN != value))
+				{
+					this.OnProvinceENChanging(value);
+					this.SendPropertyChanging();
+					this._ProvinceEN = value;
+					this.SendPropertyChanged("ProvinceEN");
+					this.OnProvinceENChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PostCode", DbType="NVarChar(9)", UpdateCheck=UpdateCheck.Never)]
+		public string PostCode
+		{
+			get
+			{
+				return this._PostCode;
+			}
+			set
+			{
+				if ((this._PostCode != value))
+				{
+					this.OnPostCodeChanging(value);
+					this.SendPropertyChanging();
+					this._PostCode = value;
+					this.SendPropertyChanged("PostCode");
+					this.OnPostCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CountryCode", DbType="NChar(2)", UpdateCheck=UpdateCheck.Never)]
+		public string CountryCode
+		{
+			get
+			{
+				return this._CountryCode;
+			}
+			set
+			{
+				if ((this._CountryCode != value))
+				{
+					this.OnCountryCodeChanging(value);
+					this.SendPropertyChanging();
+					this._CountryCode = value;
+					this.SendPropertyChanged("CountryCode");
+					this.OnCountryCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Representative", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string Representative
+		{
+			get
+			{
+				return this._Representative;
+			}
+			set
+			{
+				if ((this._Representative != value))
+				{
+					this.OnRepresentativeChanging(value);
+					this.SendPropertyChanging();
+					this._Representative = value;
+					this.SendPropertyChanged("Representative");
+					this.OnRepresentativeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Wetsite", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+		public string Wetsite
+		{
+			get
+			{
+				return this._Wetsite;
+			}
+			set
+			{
+				if ((this._Wetsite != value))
+				{
+					this.OnWetsiteChanging(value);
+					this.SendPropertyChanging();
+					this._Wetsite = value;
+					this.SendPropertyChanged("Wetsite");
+					this.OnWetsiteChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Contact", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+		public string Contact
+		{
+			get
+			{
+				return this._Contact;
+			}
+			set
+			{
+				if ((this._Contact != value))
+				{
+					this.OnContactChanging(value);
+					this.SendPropertyChanging();
+					this._Contact = value;
+					this.SendPropertyChanged("Contact");
+					this.OnContactChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Telephone", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string Telephone
+		{
+			get
+			{
+				return this._Telephone;
+			}
+			set
+			{
+				if ((this._Telephone != value))
+				{
+					this.OnTelephoneChanging(value);
+					this.SendPropertyChanging();
+					this._Telephone = value;
+					this.SendPropertyChanged("Telephone");
+					this.OnTelephoneChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Email", DbType="VarChar(100)", UpdateCheck=UpdateCheck.Never)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FaxNumber", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string FaxNumber
+		{
+			get
+			{
+				return this._FaxNumber;
+			}
+			set
+			{
+				if ((this._FaxNumber != value))
+				{
+					this.OnFaxNumberChanging(value);
+					this.SendPropertyChanging();
+					this._FaxNumber = value;
+					this.SendPropertyChanged("FaxNumber");
+					this.OnFaxNumberChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CellPhone", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string CellPhone
+		{
+			get
+			{
+				return this._CellPhone;
+			}
+			set
+			{
+				if ((this._CellPhone != value))
+				{
+					this.OnCellPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._CellPhone = value;
+					this.SendPropertyChanged("CellPhone");
+					this.OnCellPhoneChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ClientType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string ClientType
+		{
+			get
+			{
+				return this._ClientType;
+			}
+			set
+			{
+				if ((this._ClientType != value))
+				{
+					this.OnClientTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ClientType = value;
+					this.SendPropertyChanged("ClientType");
+					this.OnClientTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Industry", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string Industry
+		{
+			get
+			{
+				return this._Industry;
+			}
+			set
+			{
+				if ((this._Industry != value))
+				{
+					this.OnIndustryChanging(value);
+					this.SendPropertyChanging();
+					this._Industry = value;
+					this.SendPropertyChanged("Industry");
+					this.OnIndustryChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ProductCN", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.Never)]
+		public string ProductCN
+		{
+			get
+			{
+				return this._ProductCN;
+			}
+			set
+			{
+				if ((this._ProductCN != value))
+				{
+					this.OnProductCNChanging(value);
+					this.SendPropertyChanging();
+					this._ProductCN = value;
+					this.SendPropertyChanged("ProductCN");
+					this.OnProductCNChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ProductEN", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.Never)]
+		public string ProductEN
+		{
+			get
+			{
+				return this._ProductEN;
+			}
+			set
+			{
+				if ((this._ProductEN != value))
+				{
+					this.OnProductENChanging(value);
+					this.SendPropertyChanging();
+					this._ProductEN = value;
+					this.SendPropertyChanged("ProductEN");
+					this.OnProductENChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ClientLevel", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string ClientLevel
+		{
+			get
+			{
+				return this._ClientLevel;
+			}
+			set
+			{
+				if ((this._ClientLevel != value))
+				{
+					this.OnClientLevelChanging(value);
+					this.SendPropertyChanging();
+					this._ClientLevel = value;
+					this.SendPropertyChanged("ClientLevel");
+					this.OnClientLevelChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsGroup", DbType="NChar(2)", UpdateCheck=UpdateCheck.Never)]
+		public string IsGroup
+		{
+			get
+			{
+				return this._IsGroup;
+			}
+			set
+			{
+				if ((this._IsGroup != value))
+				{
+					this.OnIsGroupChanging(value);
+					this.SendPropertyChanging();
+					this._IsGroup = value;
+					this.SendPropertyChanged("IsGroup");
+					this.OnIsGroupChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_GroupNo", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string GroupNo
+		{
+			get
+			{
+				return this._GroupNo;
+			}
+			set
+			{
+				if ((this._GroupNo != value))
+				{
+					if (this._ClientGroup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGroupNoChanging(value);
+					this.SendPropertyChanging();
+					this._GroupNo = value;
+					this.SendPropertyChanged("GroupNo");
+					this.OnGroupNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RegistrationNumber", DbType="VarChar(35)", UpdateCheck=UpdateCheck.Never)]
+		public string RegistrationNumber
+		{
+			get
+			{
+				return this._RegistrationNumber;
+			}
+			set
+			{
+				if ((this._RegistrationNumber != value))
+				{
+					this.OnRegistrationNumberChanging(value);
+					this.SendPropertyChanging();
+					this._RegistrationNumber = value;
+					this.SendPropertyChanged("RegistrationNumber");
+					this.OnRegistrationNumberChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CompanyCode", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string CompanyCode
+		{
+			get
+			{
+				return this._CompanyCode;
+			}
+			set
+			{
+				if ((this._CompanyCode != value))
+				{
+					this.OnCompanyCodeChanging(value);
+					this.SendPropertyChanging();
+					this._CompanyCode = value;
+					this.SendPropertyChanged("CompanyCode");
+					this.OnCompanyCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_BranchCode", DbType="VarChar(14)", UpdateCheck=UpdateCheck.Never)]
+		public string BranchCode
+		{
+			get
+			{
+				return this._BranchCode;
+			}
+			set
+			{
+				if ((this._BranchCode != value))
+				{
+					if (this._Department.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnBranchCodeChanging(value);
+					this.SendPropertyChanging();
+					this._BranchCode = value;
+					this.SendPropertyChanged("BranchCode");
+					this.OnBranchCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PMName", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+		public string PMName
+		{
+			get
+			{
+				return this._PMName;
+			}
+			set
+			{
+				if ((this._PMName != value))
+				{
+					this.OnPMNameChanging(value);
+					this.SendPropertyChanging();
+					this._PMName = value;
+					this.SendPropertyChanged("PMName");
+					this.OnPMNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RMName", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+		public string RMName
+		{
+			get
+			{
+				return this._RMName;
+			}
+			set
+			{
+				if ((this._RMName != value))
+				{
+					this.OnRMNameChanging(value);
+					this.SendPropertyChanging();
+					this._RMName = value;
+					this.SendPropertyChanged("RMName");
+					this.OnRMNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.Never)]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Client_Case", Storage="_Cases", OtherKey="BuyerCode")]
+		public EntitySet<Case> BuyerCases
+		{
+			get
+			{
+				return this._Cases;
+			}
+			set
+			{
+				this._Cases.Assign(value);
+			}
+		}
+		
+		[Association(Name="Client_Case1", Storage="_Cases1", OtherKey="SellerCode")]
+		public EntitySet<Case> SellerCases
+		{
+			get
+			{
+				return this._Cases1;
+			}
+			set
+			{
+				this._Cases1.Assign(value);
+			}
+		}
+		
+		[Association(Name="Client_Contract", Storage="_Contracts", OtherKey="ClientEDICode")]
+		public EntitySet<Contract> Contracts
+		{
+			get
+			{
+				return this._Contracts;
+			}
+			set
+			{
+				this._Contracts.Assign(value);
+			}
+		}
+		
+		[Association(Name="Client_ClientAccount", Storage="_ClientAccounts", OtherKey="ClientNo")]
+		public EntitySet<ClientAccount> ClientAccounts
+		{
+			get
+			{
+				return this._ClientAccounts;
+			}
+			set
+			{
+				this._ClientAccounts.Assign(value);
+			}
+		}
+		
+		[Association(Name="Client_ClientCreditLine", Storage="_ClientCreditLines", OtherKey="ClientNo")]
+		public EntitySet<ClientCreditLine> ClientCreditLines
+		{
+			get
+			{
+				return this._ClientCreditLines;
+			}
+			set
+			{
+				this._ClientCreditLines.Assign(value);
+			}
+		}
+		
+		[Association(Name="Department_Client", Storage="_Department", ThisKey="BranchCode", IsForeignKey=true)]
+		public Department Department
+		{
+			get
+			{
+				return this._Department.Entity;
+			}
+			set
+			{
+				Department previousValue = this._Department.Entity;
+				if (((previousValue != value) 
+							|| (this._Department.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Department.Entity = null;
+						previousValue.Clients.Remove(this);
+					}
+					this._Department.Entity = value;
+					if ((value != null))
+					{
+						value.Clients.Add(this);
+						this._BranchCode = value.DepartmentCode;
+					}
+					else
+					{
+						this._BranchCode = default(string);
+					}
+					this.SendPropertyChanged("Department");
+				}
+			}
+		}
+		
+		[Association(Name="ClientGroup_Client", Storage="_ClientGroup", ThisKey="GroupNo", IsForeignKey=true)]
+		public ClientGroup ClientGroup
+		{
+			get
+			{
+				return this._ClientGroup.Entity;
+			}
+			set
+			{
+				ClientGroup previousValue = this._ClientGroup.Entity;
+				if (((previousValue != value) 
+							|| (this._ClientGroup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ClientGroup.Entity = null;
+						previousValue.Clients.Remove(this);
+					}
+					this._ClientGroup.Entity = value;
+					if ((value != null))
+					{
+						value.Clients.Add(this);
+						this._GroupNo = value.GroupNo;
+					}
+					else
+					{
+						this._GroupNo = default(string);
+					}
+					this.SendPropertyChanged("ClientGroup");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Cases(Case entity)
+		{
+			this.SendPropertyChanging();
+			entity.BuyerClient = this;
+		}
+		
+		private void detach_Cases(Case entity)
+		{
+			this.SendPropertyChanging();
+			entity.BuyerClient = null;
+		}
+		
+		private void attach_Cases1(Case entity)
+		{
+			this.SendPropertyChanging();
+			entity.SellerClient = this;
+		}
+		
+		private void detach_Cases1(Case entity)
+		{
+			this.SendPropertyChanging();
+			entity.SellerClient = null;
+		}
+		
+		private void attach_Contracts(Contract entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = this;
+		}
+		
+		private void detach_Contracts(Contract entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = null;
+		}
+		
+		private void attach_ClientAccounts(ClientAccount entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = this;
+		}
+		
+		private void detach_ClientAccounts(ClientAccount entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = null;
+		}
+		
+		private void attach_ClientCreditLines(ClientCreditLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = this;
+		}
+		
+		private void detach_ClientCreditLines(ClientCreditLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = null;
+		}
+	}
+	
 	[Table(Name="dbo.ClientAccount")]
 	public partial class ClientAccount : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -8166,7 +9441,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _AccountID;
 		
-		private string _ClientEDICode;
+		private string _ClientNo;
 		
 		private string _AccountNumber;
 		
@@ -8190,8 +9465,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnAccountIDChanging(string value);
     partial void OnAccountIDChanged();
-    partial void OnClientEDICodeChanging(string value);
-    partial void OnClientEDICodeChanged();
+    partial void OnClientNoChanging(string value);
+    partial void OnClientNoChanged();
     partial void OnAccountNumberChanging(string value);
     partial void OnAccountNumberChanged();
     partial void OnAccountCurrencyChanging(string value);
@@ -8234,26 +9509,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientEDICode", DbType="VarChar(35)")]
-		public string ClientEDICode
+		[Column(Storage="_ClientNo", DbType="VarChar(35)")]
+		public string ClientNo
 		{
 			get
 			{
-				return this._ClientEDICode;
+				return this._ClientNo;
 			}
 			set
 			{
-				if ((this._ClientEDICode != value))
+				if ((this._ClientNo != value))
 				{
 					if (this._Client.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnClientEDICodeChanging(value);
+					this.OnClientNoChanging(value);
 					this.SendPropertyChanging();
-					this._ClientEDICode = value;
-					this.SendPropertyChanged("ClientEDICode");
-					this.OnClientEDICodeChanged();
+					this._ClientNo = value;
+					this.SendPropertyChanged("ClientNo");
+					this.OnClientNoChanged();
 				}
 			}
 		}
@@ -8398,7 +9673,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Client_ClientAccount", Storage="_Client", ThisKey="ClientEDICode", IsForeignKey=true)]
+		[Association(Name="Client_ClientAccount", Storage="_Client", ThisKey="ClientNo", IsForeignKey=true)]
 		public Client Client
 		{
 			get
@@ -8421,11 +9696,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((value != null))
 					{
 						value.ClientAccounts.Add(this);
-						this._ClientEDICode = value.ClientEDICode;
+						this._ClientNo = value.ClientEDICode;
 					}
 					else
 					{
-						this._ClientEDICode = default(string);
+						this._ClientNo = default(string);
 					}
 					this.SendPropertyChanged("Client");
 				}
@@ -8461,7 +9736,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreditLineID;
 		
-		private string _ClientEDICode;
+		private string _ClientNo;
 		
 		private string _CreditLineType;
 		
@@ -8501,8 +9776,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnCreditLineIDChanging(string value);
     partial void OnCreditLineIDChanged();
-    partial void OnClientEDICodeChanging(string value);
-    partial void OnClientEDICodeChanged();
+    partial void OnClientNoChanging(string value);
+    partial void OnClientNoChanged();
     partial void OnCreditLineTypeChanging(string value);
     partial void OnCreditLineTypeChanged();
     partial void OnCreditLineCurrencyChanging(string value);
@@ -8561,26 +9836,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientEDICode", DbType="VarChar(35)")]
-		public string ClientEDICode
+		[Column(Storage="_ClientNo", DbType="VarChar(35)")]
+		public string ClientNo
 		{
 			get
 			{
-				return this._ClientEDICode;
+				return this._ClientNo;
 			}
 			set
 			{
-				if ((this._ClientEDICode != value))
+				if ((this._ClientNo != value))
 				{
 					if (this._Client.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnClientEDICodeChanging(value);
+					this.OnClientNoChanging(value);
 					this.SendPropertyChanging();
-					this._ClientEDICode = value;
-					this.SendPropertyChanged("ClientEDICode");
-					this.OnClientEDICodeChanged();
+					this._ClientNo = value;
+					this.SendPropertyChanged("ClientNo");
+					this.OnClientNoChanged();
 				}
 			}
 		}
@@ -8885,7 +10160,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Client_ClientCreditLine", Storage="_Client", ThisKey="ClientEDICode", IsForeignKey=true)]
+		[Association(Name="Client_ClientCreditLine", Storage="_Client", ThisKey="ClientNo", IsForeignKey=true)]
 		public Client Client
 		{
 			get
@@ -8908,11 +10183,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((value != null))
 					{
 						value.ClientCreditLines.Add(this);
-						this._ClientEDICode = value.ClientEDICode;
+						this._ClientNo = value.ClientEDICode;
 					}
 					else
 					{
-						this._ClientEDICode = default(string);
+						this._ClientNo = default(string);
 					}
 					this.SendPropertyChanged("Client");
 				}
@@ -8937,1281 +10212,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[Table(Name="dbo.Contract")]
-	public partial class Contract : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _ContractCode;
-		
-		private string _ClientEDICode;
-		
-		private System.Nullable<System.DateTime> _ContractValueDate;
-		
-		private System.Nullable<System.DateTime> _ContractDueDate;
-		
-		private string _ContractStatus;
-		
-		private string _CreateUserName;
-		
-		private EntityRef<Client> _Client;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnContractCodeChanging(string value);
-    partial void OnContractCodeChanged();
-    partial void OnClientEDICodeChanging(string value);
-    partial void OnClientEDICodeChanged();
-    partial void OnContractValueDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnContractValueDateChanged();
-    partial void OnContractDueDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnContractDueDateChanged();
-    partial void OnContractStatusChanging(string value);
-    partial void OnContractStatusChanged();
-    partial void OnCreateUserNameChanging(string value);
-    partial void OnCreateUserNameChanged();
-    #endregion
-		
-		public Contract()
-		{
-			this._Client = default(EntityRef<Client>);
-			OnCreated();
-		}
-		
-		[Column(Storage="_ContractCode", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string ContractCode
-		{
-			get
-			{
-				return this._ContractCode;
-			}
-			set
-			{
-				if ((this._ContractCode != value))
-				{
-					this.OnContractCodeChanging(value);
-					this.SendPropertyChanging();
-					this._ContractCode = value;
-					this.SendPropertyChanged("ContractCode");
-					this.OnContractCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ClientEDICode", DbType="VarChar(35)")]
-		public string ClientEDICode
-		{
-			get
-			{
-				return this._ClientEDICode;
-			}
-			set
-			{
-				if ((this._ClientEDICode != value))
-				{
-					if (this._Client.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnClientEDICodeChanging(value);
-					this.SendPropertyChanging();
-					this._ClientEDICode = value;
-					this.SendPropertyChanged("ClientEDICode");
-					this.OnClientEDICodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ContractValueDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ContractValueDate
-		{
-			get
-			{
-				return this._ContractValueDate;
-			}
-			set
-			{
-				if ((this._ContractValueDate != value))
-				{
-					this.OnContractValueDateChanging(value);
-					this.SendPropertyChanging();
-					this._ContractValueDate = value;
-					this.SendPropertyChanged("ContractValueDate");
-					this.OnContractValueDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ContractDueDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ContractDueDate
-		{
-			get
-			{
-				return this._ContractDueDate;
-			}
-			set
-			{
-				if ((this._ContractDueDate != value))
-				{
-					this.OnContractDueDateChanging(value);
-					this.SendPropertyChanging();
-					this._ContractDueDate = value;
-					this.SendPropertyChanged("ContractDueDate");
-					this.OnContractDueDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ContractStatus", DbType="NVarChar(50)")]
-		public string ContractStatus
-		{
-			get
-			{
-				return this._ContractStatus;
-			}
-			set
-			{
-				if ((this._ContractStatus != value))
-				{
-					this.OnContractStatusChanging(value);
-					this.SendPropertyChanging();
-					this._ContractStatus = value;
-					this.SendPropertyChanged("ContractStatus");
-					this.OnContractStatusChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50)")]
-		public string CreateUserName
-		{
-			get
-			{
-				return this._CreateUserName;
-			}
-			set
-			{
-				if ((this._CreateUserName != value))
-				{
-					this.OnCreateUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._CreateUserName = value;
-					this.SendPropertyChanged("CreateUserName");
-					this.OnCreateUserNameChanged();
-				}
-			}
-		}
-		
-		[Association(Name="Client_Contract", Storage="_Client", ThisKey="ClientEDICode", IsForeignKey=true)]
-		public Client Client
-		{
-			get
-			{
-				return this._Client.Entity;
-			}
-			set
-			{
-				Client previousValue = this._Client.Entity;
-				if (((previousValue != value) 
-							|| (this._Client.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Client.Entity = null;
-						previousValue.Contracts.Remove(this);
-					}
-					this._Client.Entity = value;
-					if ((value != null))
-					{
-						value.Contracts.Add(this);
-						this._ClientEDICode = value.ClientEDICode;
-					}
-					else
-					{
-						this._ClientEDICode = default(string);
-					}
-					this.SendPropertyChanged("Client");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[Table(Name="dbo.Client")]
-	public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _ClientEDICode;
-		
-		private string _ClientCoreNo;
-		
-		private string _ClientNameCN;
-		
-		private string _ClientNameEN_1;
-		
-		private string _ClientNameEN_2;
-		
-		private string _AddressCN;
-		
-		private string _AddressEN;
-		
-		private string _CityCN;
-		
-		private string _CityEN;
-		
-		private string _ProvinceCN;
-		
-		private string _ProvinceEN;
-		
-		private string _PostCode;
-		
-		private string _CountryCode;
-		
-		private string _Representative;
-		
-		private string _Wetsite;
-		
-		private string _Contact;
-		
-		private string _Telephone;
-		
-		private string _Email;
-		
-		private string _FaxNumber;
-		
-		private string _CellPhone;
-		
-		private string _ClientType;
-		
-		private string _Industry;
-		
-		private string _ProductCN;
-		
-		private string _ProductEN;
-		
-		private string _ClientLevel;
-		
-		private string _IsGroup;
-		
-		private string _GroupNo;
-		
-		private string _RegistrationNumber;
-		
-		private string _CompanyCode;
-		
-		private string _BranchCode;
-		
-		private string _PMName;
-		
-		private string _RMName;
-		
-		private string _Comment;
-		
-		private EntitySet<Case> _Cases;
-		
-		private EntitySet<Case> _Cases1;
-		
-		private EntitySet<ClientAccount> _ClientAccounts;
-		
-		private EntitySet<ClientCreditLine> _ClientCreditLines;
-		
-		private EntitySet<Contract> _Contracts;
-		
-		private EntityRef<Department> _Department;
-		
-		private EntityRef<ClientGroup> _ClientGroup;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnClientEDICodeChanging(string value);
-    partial void OnClientEDICodeChanged();
-    partial void OnClientCoreNoChanging(string value);
-    partial void OnClientCoreNoChanged();
-    partial void OnClientNameCNChanging(string value);
-    partial void OnClientNameCNChanged();
-    partial void OnClientNameEN_1Changing(string value);
-    partial void OnClientNameEN_1Changed();
-    partial void OnClientNameEN_2Changing(string value);
-    partial void OnClientNameEN_2Changed();
-    partial void OnAddressCNChanging(string value);
-    partial void OnAddressCNChanged();
-    partial void OnAddressENChanging(string value);
-    partial void OnAddressENChanged();
-    partial void OnCityCNChanging(string value);
-    partial void OnCityCNChanged();
-    partial void OnCityENChanging(string value);
-    partial void OnCityENChanged();
-    partial void OnProvinceCNChanging(string value);
-    partial void OnProvinceCNChanged();
-    partial void OnProvinceENChanging(string value);
-    partial void OnProvinceENChanged();
-    partial void OnPostCodeChanging(string value);
-    partial void OnPostCodeChanged();
-    partial void OnCountryCodeChanging(string value);
-    partial void OnCountryCodeChanged();
-    partial void OnRepresentativeChanging(string value);
-    partial void OnRepresentativeChanged();
-    partial void OnWetsiteChanging(string value);
-    partial void OnWetsiteChanged();
-    partial void OnContactChanging(string value);
-    partial void OnContactChanged();
-    partial void OnTelephoneChanging(string value);
-    partial void OnTelephoneChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnFaxNumberChanging(string value);
-    partial void OnFaxNumberChanged();
-    partial void OnCellPhoneChanging(string value);
-    partial void OnCellPhoneChanged();
-    partial void OnClientTypeChanging(string value);
-    partial void OnClientTypeChanged();
-    partial void OnIndustryChanging(string value);
-    partial void OnIndustryChanged();
-    partial void OnProductCNChanging(string value);
-    partial void OnProductCNChanged();
-    partial void OnProductENChanging(string value);
-    partial void OnProductENChanged();
-    partial void OnClientLevelChanging(string value);
-    partial void OnClientLevelChanged();
-    partial void OnIsGroupChanging(string value);
-    partial void OnIsGroupChanged();
-    partial void OnGroupNoChanging(string value);
-    partial void OnGroupNoChanged();
-    partial void OnRegistrationNumberChanging(string value);
-    partial void OnRegistrationNumberChanged();
-    partial void OnCompanyCodeChanging(string value);
-    partial void OnCompanyCodeChanged();
-    partial void OnBranchCodeChanging(string value);
-    partial void OnBranchCodeChanged();
-    partial void OnPMNameChanging(string value);
-    partial void OnPMNameChanged();
-    partial void OnRMNameChanging(string value);
-    partial void OnRMNameChanged();
-    partial void OnCommentChanging(string value);
-    partial void OnCommentChanged();
-    #endregion
-		
-		public Client()
-		{
-			this._Cases = new EntitySet<Case>(new Action<Case>(this.attach_Cases), new Action<Case>(this.detach_Cases));
-			this._Cases1 = new EntitySet<Case>(new Action<Case>(this.attach_Cases1), new Action<Case>(this.detach_Cases1));
-			this._ClientAccounts = new EntitySet<ClientAccount>(new Action<ClientAccount>(this.attach_ClientAccounts), new Action<ClientAccount>(this.detach_ClientAccounts));
-			this._ClientCreditLines = new EntitySet<ClientCreditLine>(new Action<ClientCreditLine>(this.attach_ClientCreditLines), new Action<ClientCreditLine>(this.detach_ClientCreditLines));
-			this._Contracts = new EntitySet<Contract>(new Action<Contract>(this.attach_Contracts), new Action<Contract>(this.detach_Contracts));
-			this._Department = default(EntityRef<Department>);
-			this._ClientGroup = default(EntityRef<ClientGroup>);
-			OnCreated();
-		}
-		
-		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string ClientEDICode
-		{
-			get
-			{
-				return this._ClientEDICode;
-			}
-			set
-			{
-				if ((this._ClientEDICode != value))
-				{
-					this.OnClientEDICodeChanging(value);
-					this.SendPropertyChanging();
-					this._ClientEDICode = value;
-					this.SendPropertyChanged("ClientEDICode");
-					this.OnClientEDICodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ClientCoreNo", DbType="NChar(10)")]
-		public string ClientCoreNo
-		{
-			get
-			{
-				return this._ClientCoreNo;
-			}
-			set
-			{
-				if ((this._ClientCoreNo != value))
-				{
-					this.OnClientCoreNoChanging(value);
-					this.SendPropertyChanging();
-					this._ClientCoreNo = value;
-					this.SendPropertyChanged("ClientCoreNo");
-					this.OnClientCoreNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ClientNameCN", DbType="NVarChar(100)")]
-		public string ClientNameCN
-		{
-			get
-			{
-				return this._ClientNameCN;
-			}
-			set
-			{
-				if ((this._ClientNameCN != value))
-				{
-					this.OnClientNameCNChanging(value);
-					this.SendPropertyChanging();
-					this._ClientNameCN = value;
-					this.SendPropertyChanged("ClientNameCN");
-					this.OnClientNameCNChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ClientNameEN_1", DbType="NVarChar(100)")]
-		public string ClientNameEN_1
-		{
-			get
-			{
-				return this._ClientNameEN_1;
-			}
-			set
-			{
-				if ((this._ClientNameEN_1 != value))
-				{
-					this.OnClientNameEN_1Changing(value);
-					this.SendPropertyChanging();
-					this._ClientNameEN_1 = value;
-					this.SendPropertyChanged("ClientNameEN_1");
-					this.OnClientNameEN_1Changed();
-				}
-			}
-		}
-		
-		[Column(Storage="_ClientNameEN_2", DbType="NVarChar(100)")]
-		public string ClientNameEN_2
-		{
-			get
-			{
-				return this._ClientNameEN_2;
-			}
-			set
-			{
-				if ((this._ClientNameEN_2 != value))
-				{
-					this.OnClientNameEN_2Changing(value);
-					this.SendPropertyChanging();
-					this._ClientNameEN_2 = value;
-					this.SendPropertyChanged("ClientNameEN_2");
-					this.OnClientNameEN_2Changed();
-				}
-			}
-		}
-		
-		[Column(Storage="_AddressCN", DbType="NVarChar(200)")]
-		public string AddressCN
-		{
-			get
-			{
-				return this._AddressCN;
-			}
-			set
-			{
-				if ((this._AddressCN != value))
-				{
-					this.OnAddressCNChanging(value);
-					this.SendPropertyChanging();
-					this._AddressCN = value;
-					this.SendPropertyChanged("AddressCN");
-					this.OnAddressCNChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_AddressEN", DbType="NVarChar(200)")]
-		public string AddressEN
-		{
-			get
-			{
-				return this._AddressEN;
-			}
-			set
-			{
-				if ((this._AddressEN != value))
-				{
-					this.OnAddressENChanging(value);
-					this.SendPropertyChanging();
-					this._AddressEN = value;
-					this.SendPropertyChanged("AddressEN");
-					this.OnAddressENChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CityCN", DbType="NVarChar(50)")]
-		public string CityCN
-		{
-			get
-			{
-				return this._CityCN;
-			}
-			set
-			{
-				if ((this._CityCN != value))
-				{
-					this.OnCityCNChanging(value);
-					this.SendPropertyChanging();
-					this._CityCN = value;
-					this.SendPropertyChanged("CityCN");
-					this.OnCityCNChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CityEN", DbType="NVarChar(35)")]
-		public string CityEN
-		{
-			get
-			{
-				return this._CityEN;
-			}
-			set
-			{
-				if ((this._CityEN != value))
-				{
-					this.OnCityENChanging(value);
-					this.SendPropertyChanging();
-					this._CityEN = value;
-					this.SendPropertyChanged("CityEN");
-					this.OnCityENChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ProvinceCN", DbType="NVarChar(50)")]
-		public string ProvinceCN
-		{
-			get
-			{
-				return this._ProvinceCN;
-			}
-			set
-			{
-				if ((this._ProvinceCN != value))
-				{
-					this.OnProvinceCNChanging(value);
-					this.SendPropertyChanging();
-					this._ProvinceCN = value;
-					this.SendPropertyChanged("ProvinceCN");
-					this.OnProvinceCNChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ProvinceEN", DbType="NVarChar(50)")]
-		public string ProvinceEN
-		{
-			get
-			{
-				return this._ProvinceEN;
-			}
-			set
-			{
-				if ((this._ProvinceEN != value))
-				{
-					this.OnProvinceENChanging(value);
-					this.SendPropertyChanging();
-					this._ProvinceEN = value;
-					this.SendPropertyChanged("ProvinceEN");
-					this.OnProvinceENChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PostCode", DbType="NVarChar(9)")]
-		public string PostCode
-		{
-			get
-			{
-				return this._PostCode;
-			}
-			set
-			{
-				if ((this._PostCode != value))
-				{
-					this.OnPostCodeChanging(value);
-					this.SendPropertyChanging();
-					this._PostCode = value;
-					this.SendPropertyChanged("PostCode");
-					this.OnPostCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CountryCode", DbType="NChar(2)")]
-		public string CountryCode
-		{
-			get
-			{
-				return this._CountryCode;
-			}
-			set
-			{
-				if ((this._CountryCode != value))
-				{
-					this.OnCountryCodeChanging(value);
-					this.SendPropertyChanging();
-					this._CountryCode = value;
-					this.SendPropertyChanged("CountryCode");
-					this.OnCountryCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Representative", DbType="NVarChar(50)")]
-		public string Representative
-		{
-			get
-			{
-				return this._Representative;
-			}
-			set
-			{
-				if ((this._Representative != value))
-				{
-					this.OnRepresentativeChanging(value);
-					this.SendPropertyChanging();
-					this._Representative = value;
-					this.SendPropertyChanged("Representative");
-					this.OnRepresentativeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Wetsite", DbType="NVarChar(200)")]
-		public string Wetsite
-		{
-			get
-			{
-				return this._Wetsite;
-			}
-			set
-			{
-				if ((this._Wetsite != value))
-				{
-					this.OnWetsiteChanging(value);
-					this.SendPropertyChanging();
-					this._Wetsite = value;
-					this.SendPropertyChanged("Wetsite");
-					this.OnWetsiteChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Contact", DbType="NVarChar(200)")]
-		public string Contact
-		{
-			get
-			{
-				return this._Contact;
-			}
-			set
-			{
-				if ((this._Contact != value))
-				{
-					this.OnContactChanging(value);
-					this.SendPropertyChanging();
-					this._Contact = value;
-					this.SendPropertyChanged("Contact");
-					this.OnContactChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Telephone", DbType="VarChar(50)")]
-		public string Telephone
-		{
-			get
-			{
-				return this._Telephone;
-			}
-			set
-			{
-				if ((this._Telephone != value))
-				{
-					this.OnTelephoneChanging(value);
-					this.SendPropertyChanging();
-					this._Telephone = value;
-					this.SendPropertyChanged("Telephone");
-					this.OnTelephoneChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Email", DbType="VarChar(100)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FaxNumber", DbType="VarChar(50)")]
-		public string FaxNumber
-		{
-			get
-			{
-				return this._FaxNumber;
-			}
-			set
-			{
-				if ((this._FaxNumber != value))
-				{
-					this.OnFaxNumberChanging(value);
-					this.SendPropertyChanging();
-					this._FaxNumber = value;
-					this.SendPropertyChanged("FaxNumber");
-					this.OnFaxNumberChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CellPhone", DbType="VarChar(50)")]
-		public string CellPhone
-		{
-			get
-			{
-				return this._CellPhone;
-			}
-			set
-			{
-				if ((this._CellPhone != value))
-				{
-					this.OnCellPhoneChanging(value);
-					this.SendPropertyChanging();
-					this._CellPhone = value;
-					this.SendPropertyChanged("CellPhone");
-					this.OnCellPhoneChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ClientType", DbType="NVarChar(50)")]
-		public string ClientType
-		{
-			get
-			{
-				return this._ClientType;
-			}
-			set
-			{
-				if ((this._ClientType != value))
-				{
-					this.OnClientTypeChanging(value);
-					this.SendPropertyChanging();
-					this._ClientType = value;
-					this.SendPropertyChanged("ClientType");
-					this.OnClientTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Industry", DbType="NVarChar(50)")]
-		public string Industry
-		{
-			get
-			{
-				return this._Industry;
-			}
-			set
-			{
-				if ((this._Industry != value))
-				{
-					this.OnIndustryChanging(value);
-					this.SendPropertyChanging();
-					this._Industry = value;
-					this.SendPropertyChanged("Industry");
-					this.OnIndustryChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ProductCN", DbType="NVarChar(500)")]
-		public string ProductCN
-		{
-			get
-			{
-				return this._ProductCN;
-			}
-			set
-			{
-				if ((this._ProductCN != value))
-				{
-					this.OnProductCNChanging(value);
-					this.SendPropertyChanging();
-					this._ProductCN = value;
-					this.SendPropertyChanged("ProductCN");
-					this.OnProductCNChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ProductEN", DbType="NVarChar(500)")]
-		public string ProductEN
-		{
-			get
-			{
-				return this._ProductEN;
-			}
-			set
-			{
-				if ((this._ProductEN != value))
-				{
-					this.OnProductENChanging(value);
-					this.SendPropertyChanging();
-					this._ProductEN = value;
-					this.SendPropertyChanged("ProductEN");
-					this.OnProductENChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ClientLevel", DbType="NVarChar(50)")]
-		public string ClientLevel
-		{
-			get
-			{
-				return this._ClientLevel;
-			}
-			set
-			{
-				if ((this._ClientLevel != value))
-				{
-					this.OnClientLevelChanging(value);
-					this.SendPropertyChanging();
-					this._ClientLevel = value;
-					this.SendPropertyChanged("ClientLevel");
-					this.OnClientLevelChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_IsGroup", DbType="NChar(2)")]
-		public string IsGroup
-		{
-			get
-			{
-				return this._IsGroup;
-			}
-			set
-			{
-				if ((this._IsGroup != value))
-				{
-					this.OnIsGroupChanging(value);
-					this.SendPropertyChanging();
-					this._IsGroup = value;
-					this.SendPropertyChanged("IsGroup");
-					this.OnIsGroupChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_GroupNo", DbType="VarChar(50)")]
-		public string GroupNo
-		{
-			get
-			{
-				return this._GroupNo;
-			}
-			set
-			{
-				if ((this._GroupNo != value))
-				{
-					if (this._ClientGroup.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnGroupNoChanging(value);
-					this.SendPropertyChanging();
-					this._GroupNo = value;
-					this.SendPropertyChanged("GroupNo");
-					this.OnGroupNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_RegistrationNumber", DbType="VarChar(35)")]
-		public string RegistrationNumber
-		{
-			get
-			{
-				return this._RegistrationNumber;
-			}
-			set
-			{
-				if ((this._RegistrationNumber != value))
-				{
-					this.OnRegistrationNumberChanging(value);
-					this.SendPropertyChanging();
-					this._RegistrationNumber = value;
-					this.SendPropertyChanged("RegistrationNumber");
-					this.OnRegistrationNumberChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CompanyCode", DbType="VarChar(50)")]
-		public string CompanyCode
-		{
-			get
-			{
-				return this._CompanyCode;
-			}
-			set
-			{
-				if ((this._CompanyCode != value))
-				{
-					this.OnCompanyCodeChanging(value);
-					this.SendPropertyChanging();
-					this._CompanyCode = value;
-					this.SendPropertyChanged("CompanyCode");
-					this.OnCompanyCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_BranchCode", DbType="VarChar(14)")]
-		public string BranchCode
-		{
-			get
-			{
-				return this._BranchCode;
-			}
-			set
-			{
-				if ((this._BranchCode != value))
-				{
-					if (this._Department.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnBranchCodeChanging(value);
-					this.SendPropertyChanging();
-					this._BranchCode = value;
-					this.SendPropertyChanged("BranchCode");
-					this.OnBranchCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PMName", DbType="NVarChar(200)")]
-		public string PMName
-		{
-			get
-			{
-				return this._PMName;
-			}
-			set
-			{
-				if ((this._PMName != value))
-				{
-					this.OnPMNameChanging(value);
-					this.SendPropertyChanging();
-					this._PMName = value;
-					this.SendPropertyChanged("PMName");
-					this.OnPMNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_RMName", DbType="NVarChar(200)")]
-		public string RMName
-		{
-			get
-			{
-				return this._RMName;
-			}
-			set
-			{
-				if ((this._RMName != value))
-				{
-					this.OnRMNameChanging(value);
-					this.SendPropertyChanging();
-					this._RMName = value;
-					this.SendPropertyChanged("RMName");
-					this.OnRMNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
-		public string Comment
-		{
-			get
-			{
-				return this._Comment;
-			}
-			set
-			{
-				if ((this._Comment != value))
-				{
-					this.OnCommentChanging(value);
-					this.SendPropertyChanging();
-					this._Comment = value;
-					this.SendPropertyChanged("Comment");
-					this.OnCommentChanged();
-				}
-			}
-		}
-		
-		[Association(Name="Client_Case", Storage="_Cases", OtherKey="BuyerCode")]
-		public EntitySet<Case> Cases
-		{
-			get
-			{
-				return this._Cases;
-			}
-			set
-			{
-				this._Cases.Assign(value);
-			}
-		}
-		
-		[Association(Name="Client_Case1", Storage="_Cases1", OtherKey="SellerCode")]
-		public EntitySet<Case> Cases1
-		{
-			get
-			{
-				return this._Cases1;
-			}
-			set
-			{
-				this._Cases1.Assign(value);
-			}
-		}
-		
-		[Association(Name="Client_ClientAccount", Storage="_ClientAccounts", OtherKey="ClientEDICode")]
-		public EntitySet<ClientAccount> ClientAccounts
-		{
-			get
-			{
-				return this._ClientAccounts;
-			}
-			set
-			{
-				this._ClientAccounts.Assign(value);
-			}
-		}
-		
-		[Association(Name="Client_ClientCreditLine", Storage="_ClientCreditLines", OtherKey="ClientEDICode")]
-		public EntitySet<ClientCreditLine> ClientCreditLines
-		{
-			get
-			{
-				return this._ClientCreditLines;
-			}
-			set
-			{
-				this._ClientCreditLines.Assign(value);
-			}
-		}
-		
-		[Association(Name="Client_Contract", Storage="_Contracts", OtherKey="ClientEDICode")]
-		public EntitySet<Contract> Contracts
-		{
-			get
-			{
-				return this._Contracts;
-			}
-			set
-			{
-				this._Contracts.Assign(value);
-			}
-		}
-		
-		[Association(Name="Department_Client", Storage="_Department", ThisKey="BranchCode", IsForeignKey=true)]
-		public Department Department
-		{
-			get
-			{
-				return this._Department.Entity;
-			}
-			set
-			{
-				Department previousValue = this._Department.Entity;
-				if (((previousValue != value) 
-							|| (this._Department.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Department.Entity = null;
-						previousValue.Clients.Remove(this);
-					}
-					this._Department.Entity = value;
-					if ((value != null))
-					{
-						value.Clients.Add(this);
-						this._BranchCode = value.DepartmentCode;
-					}
-					else
-					{
-						this._BranchCode = default(string);
-					}
-					this.SendPropertyChanged("Department");
-				}
-			}
-		}
-		
-		[Association(Name="ClientGroup_Client", Storage="_ClientGroup", ThisKey="GroupNo", IsForeignKey=true)]
-		public ClientGroup ClientGroup
-		{
-			get
-			{
-				return this._ClientGroup.Entity;
-			}
-			set
-			{
-				ClientGroup previousValue = this._ClientGroup.Entity;
-				if (((previousValue != value) 
-							|| (this._ClientGroup.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ClientGroup.Entity = null;
-						previousValue.Clients.Remove(this);
-					}
-					this._ClientGroup.Entity = value;
-					if ((value != null))
-					{
-						value.Clients.Add(this);
-						this._GroupNo = value.GroupNo;
-					}
-					else
-					{
-						this._GroupNo = default(string);
-					}
-					this.SendPropertyChanged("ClientGroup");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Cases(Case entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = this;
-		}
-		
-		private void detach_Cases(Case entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = null;
-		}
-		
-		private void attach_Cases1(Case entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client1 = this;
-		}
-		
-		private void detach_Cases1(Case entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client1 = null;
-		}
-		
-		private void attach_ClientAccounts(ClientAccount entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = this;
-		}
-		
-		private void detach_ClientAccounts(ClientAccount entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = null;
-		}
-		
-		private void attach_ClientCreditLines(ClientCreditLine entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = this;
-		}
-		
-		private void detach_ClientCreditLines(ClientCreditLine entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = null;
-		}
-		
-		private void attach_Contracts(Contract entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = this;
-		}
-		
-		private void detach_Contracts(Contract entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = null;
 		}
 	}
 }
