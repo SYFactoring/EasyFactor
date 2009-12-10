@@ -175,7 +175,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                             //client.PostCode = values.GetValue(row, column++).ToString().Trim();
                             //client.CountryCode = values.GetValue(row, column++).ToString().Trim();
                             //client.Representative = values.GetValue(row, column++).ToString().Trim();
-                            //client.Wetsite = values.GetValue(row, column++).ToString().Trim();
+                            //client.Website = values.GetValue(row, column++).ToString().Trim();
                             //client.Contact = values.GetValue(row, column++).ToString().Trim();
                             //client.Telephone = values.GetValue(row, column++).ToString().Trim();
                             //client.Email = values.GetValue(row, column++).ToString().Trim();

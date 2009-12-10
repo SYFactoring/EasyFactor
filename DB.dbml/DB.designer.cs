@@ -2405,7 +2405,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Representative;
 		
-		private string _Wetsite;
+		private string _Website;
 		
 		private string _Contact;
 		
@@ -2821,20 +2821,20 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Wetsite", DbType="NVarChar(200)")]
+		[Column(Storage="_Website", DbType="NVarChar(200)")]
 		public string Website
 		{
 			get
 			{
-				return this._Wetsite;
+				return this._Website;
 			}
 			set
 			{
-				if ((this._Wetsite != value))
+				if ((this._Website != value))
 				{
 					this.OnWebsiteChanging(value);
 					this.SendPropertyChanging();
-					this._Wetsite = value;
+					this._Website = value;
 					this.SendPropertyChanged("Website");
 					this.OnWebsiteChanged();
 				}

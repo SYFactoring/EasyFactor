@@ -78,7 +78,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DevComponents.DotNetBar.LabelX clientCoreNoLabel;
             DevComponents.DotNetBar.LabelX industryLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.wetsiteLabel = new DevComponents.DotNetBar.LabelX();
+            this.websiteLabel = new DevComponents.DotNetBar.LabelX();
             this.telephoneLabel = new DevComponents.DotNetBar.LabelX();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelClientCreditLine = new DevComponents.DotNetBar.TabControlPanel();
@@ -118,7 +118,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.emailTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.telephoneTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.contactTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.wetsiteTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.websiteTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.representativeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelClientGroup = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.tbGroupNameEN = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -790,19 +790,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             industryLabel.TabIndex = 10;
             industryLabel.Text = "所属行业:";
             // 
-            // wetsiteLabel
+            // websiteLabel
             // 
-            this.wetsiteLabel.AutoSize = true;
-            this.wetsiteLabel.BackColor = System.Drawing.Color.Transparent;
+            this.websiteLabel.AutoSize = true;
+            this.websiteLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.wetsiteLabel.BackgroundStyle.Class = "";
-            this.wetsiteLabel.Location = new System.Drawing.Point(201, 10);
-            this.wetsiteLabel.Name = "wetsiteLabel";
-            this.wetsiteLabel.Size = new System.Drawing.Size(59, 16);
-            this.wetsiteLabel.TabIndex = 8;
-            this.wetsiteLabel.Text = "公司网址:";
+            this.websiteLabel.BackgroundStyle.Class = "";
+            this.websiteLabel.Location = new System.Drawing.Point(201, 10);
+            this.websiteLabel.Name = "websiteLabel";
+            this.websiteLabel.Size = new System.Drawing.Size(59, 16);
+            this.websiteLabel.TabIndex = 8;
+            this.websiteLabel.Text = "公司网址:";
             // 
             // telephoneLabel
             // 
@@ -1318,8 +1318,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientContact.Controls.Add(this.telephoneTextBox);
             this.groupPanelClientContact.Controls.Add(contactLabel);
             this.groupPanelClientContact.Controls.Add(this.contactTextBox);
-            this.groupPanelClientContact.Controls.Add(this.wetsiteLabel);
-            this.groupPanelClientContact.Controls.Add(this.wetsiteTextBox);
+            this.groupPanelClientContact.Controls.Add(this.websiteLabel);
+            this.groupPanelClientContact.Controls.Add(this.websiteTextBox);
             this.groupPanelClientContact.Controls.Add(representativeLabel);
             this.groupPanelClientContact.Controls.Add(this.representativeTextBox);
             this.groupPanelClientContact.Location = new System.Drawing.Point(0, 224);
@@ -1444,17 +1444,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.contactTextBox.Size = new System.Drawing.Size(100, 20);
             this.contactTextBox.TabIndex = 3;
             // 
-            // wetsiteTextBox
+            // websiteTextBox
             // 
             // 
             // 
             // 
-            this.wetsiteTextBox.Border.Class = "TextBoxBorder";
-            this.wetsiteTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Wetsite", true));
-            this.wetsiteTextBox.Location = new System.Drawing.Point(265, 7);
-            this.wetsiteTextBox.Name = "wetsiteTextBox";
-            this.wetsiteTextBox.Size = new System.Drawing.Size(100, 20);
-            this.wetsiteTextBox.TabIndex = 9;
+            this.websiteTextBox.Border.Class = "TextBoxBorder";
+            this.websiteTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Website", true));
+            this.websiteTextBox.Location = new System.Drawing.Point(265, 7);
+            this.websiteTextBox.Name = "websiteTextBox";
+            this.websiteTextBox.Size = new System.Drawing.Size(100, 20);
+            this.websiteTextBox.TabIndex = 9;
             // 
             // representativeTextBox
             // 
@@ -2294,7 +2294,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.ComboBoxEx countryCodeComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX postCodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX contactTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX wetsiteTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX websiteTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX representativeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX cellPhoneTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX faxNumberTextBox;
@@ -2346,7 +2346,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelClientCreditCoverMgr;
         private DevComponents.DotNetBar.Controls.TextBoxX clientCommentTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX creditLineCommentTextBox;
-         private DevComponents.DotNetBar.LabelX wetsiteLabel;
+         private DevComponents.DotNetBar.LabelX websiteLabel;
         private DevComponents.DotNetBar.LabelX telephoneLabel;
         private DevComponents.DotNetBar.Controls.ComboBoxEx industryComboBox;
         private DevComponents.Editors.ComboItem comboItem9;

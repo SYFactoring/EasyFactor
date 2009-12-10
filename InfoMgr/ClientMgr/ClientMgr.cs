@@ -121,6 +121,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                   && (c.ClientType.Contains(clientType)));
             }
             dgvClients.DataSource = queryResult.ToList();
+            //dgvClients.DataSource = App.Current.DbContext.Clients.ToList();
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
@@ -409,6 +410,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             app.Quit();
+        }
+
+        private void dgvClients_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewRow currentRow = this.dgvClients.Rows[e.RowIndex];
+            currentRow.HeaderCell.Value = Convert.ToString(e.RowIndex + 1);
         }
     }
 }
