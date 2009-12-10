@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
     using System;
     using System.Windows.Forms;
+    using System.Linq;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
 
@@ -106,6 +107,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     break;
                 }
             }
+
+            this.dgvClientCreditLines.DataSource = client.ClientCreditLines;
         }
 
         /// <summary>
@@ -190,10 +193,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.clientNoTextBox.ReadOnly = true;
             }
 
-            else if (this.opType == OpType.UPDATE_CLIENT_CREDIT_COVER)
+            foreach (Control comp in this.groupPanelClientCreditCover.Controls)
             {
-
+                ControlUtil.setComponetEditable(comp, false);
             }
+
+            ControlUtil.setComponetEditable(this.btnClientCreditLineAdd, true);
+            ControlUtil.setComponetEditable(this.btnClientCreditLineRefresh, true);
         }
 
         /// <summary>
@@ -266,7 +272,83 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void NewClientCreditCover(object sender, EventArgs e)
+        private void NewClientCreditLine(object sender, EventArgs e)
+        {
+            this.creditLineCommentTextBox.ReadOnly = false;
+            this.creditLineCurrencyComboBox.Enabled = true;
+            this.creditLineTextBox.ReadOnly = false;
+            this.creditLineTypeComboBox.Enabled = true;
+            this.approveNoTextBox.ReadOnly = false;
+            this.approveTypeComboBox.Enabled = true;
+            this.btnClientCreditLineSave.Enabled = true;
+            this.btnClientCreditLineCancel.Enabled = true;
+            this.periodBeginDateTimePicker.Enabled = true;
+            this.periodEndDateTimePicker.Enabled = true;
+            ClientCreditLine newClientCreditLine = new ClientCreditLine();
+            newClientCreditLine.Client = (Client)this.clientBindingSource.DataSource;
+            this.clientCreditLineBindingSource.DataSource = newClientCreditLine;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveClientCreditLine(object sender, EventArgs e)
+        {
+            Client client = (Client)this.clientBindingSource.DataSource;
+            ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
+            creditLine.CreditLineCurrency = (string)this.creditLineCurrencyComboBox.SelectedValue;
+
+            if (creditLine.CreditLineID == null)
+            {
+                creditLine.CreditLineID = "ABCDEFG";
+                creditLine.Client = client;
+
+                bool isAddOK = true;
+                try
+                {
+                    App.Current.DbContext.ClientCreditLines.InsertOnSubmit(creditLine);
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    isAddOK = false;
+                    MessageBox.Show(e1.Message);
+                }
+
+                if (isAddOK)
+                {
+                    MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+
+                bool isUpdateOK = true;
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (System.Data.Linq.ChangeConflictException e2)
+                {
+                    isUpdateOK = false;
+                    MessageBox.Show(e2.GetType().ToString() + " " + e2.Message);
+                }
+
+                if (isUpdateOK)
+                {
+                    MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CancelClientCreditLine(object sender, EventArgs e)
         {
 
         }
@@ -276,7 +358,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SaveClientCreditCover(object sender, EventArgs e)
+        private void FreezeClientCreditLine(object sender, EventArgs e)
         {
 
         }
@@ -286,29 +368,35 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CancelClientCreditCover(object sender, EventArgs e)
+        private void UnfreezeClientCreditLine(object sender, EventArgs e)
         {
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FreezeClientCreditCover(object sender, EventArgs e)
+        private void RefreshClientCreditLine(object sender, EventArgs e)
         {
-
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client != null)
+            {
+                this.dgvClientCreditLines.DataSource = App.Current.DbContext.ClientCreditLines.Where(c => c.Client.ClientEDICode == client.ClientEDICode).ToList();
+            }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UnfreezeClientCreditCover(object sender, EventArgs e)
+        private void SelectClientCreditLine(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (this.dgvClientCreditLines.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            string cid = (string)dgvClientCreditLines["creditLineIDColumn", dgvClientCreditLines.SelectedRows[0].Index].Value;
+            if (cid != null)
+            {
+                ClientCreditLine selectedClientCreditLine = App.Current.DbContext.ClientCreditLines.SingleOrDefault(c => c.CreditLineID == cid);
+                if (selectedClientCreditLine != null)
+                {
+                    this.clientCreditLineBindingSource.DataSource = selectedClientCreditLine;
+                }
+            }
         }
     }
 }

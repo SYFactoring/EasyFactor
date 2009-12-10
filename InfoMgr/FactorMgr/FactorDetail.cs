@@ -10,9 +10,33 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
     public partial class FactorDetail : DevComponents.DotNetBar.Office2007Form
     {
-        public enum OpType { NEW_FACTOR, UPDATE_FACTOR, DETAIL_FACTOR, UPDATE_FACTOR_CREDIT_COVER };
-
         private readonly OpType opType;
+
+        /// <summary>
+        /// Operation Type
+        /// </summary>
+        public enum OpType 
+        {
+            /// <summary>
+            /// New Factor
+            /// </summary>
+            NEW_FACTOR, 
+            
+            /// <summary>
+            /// Update Factor
+            /// </summary>
+            UPDATE_FACTOR, 
+            
+            /// <summary>
+            /// Detail Factor
+            /// </summary>
+            DETAIL_FACTOR, 
+            
+            /// <summary>
+            /// Update Factor Credit Cover
+            /// </summary>
+            UPDATE_FACTOR_CREDIT_COVER 
+        }
 
         /// <summary>
         /// Initializes a new instance of the FactorDetail class
@@ -36,6 +60,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.UpdateEditableStatus();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitComboBox()
         {
             this.countryNameComboBox.DataSource = App.Current.DbContext.Countries;
@@ -50,11 +77,16 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.factorTypeComboBox.DataSource = factorTypes;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="factor"></param>
         private void FillForms(Factor factor)
         {
             this.factorTypeComboBox.SelectedItem = factor.FactorType;
             this.countryNameComboBox.SelectedItem = App.Current.DbContext.Countries.SingleOrDefault(c => c.CountryNameEN == factor.CountryName);
         }
+
         /// <summary>
         /// udpate editable status
         /// </summary>
@@ -66,18 +98,22 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
+
                 foreach (Control comp in this.groupPanelContacts.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
+
                 foreach (Control comp in this.groupPanelMembership.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
+
                 foreach (Control comp in this.groupPanelCreditLineDetail.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
+
                 ControlUtil.setComponetEditable(this.btnFactorSave, true);
                 ControlUtil.setComponetEditable(this.btnFactorCancel, true);
             }
@@ -87,18 +123,22 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 {
                     ControlUtil.setComponetEditable(comp, false);
                 }
+
                 foreach (Control comp in this.groupPanelContacts.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, false);
                 }
+
                 foreach (Control comp in this.groupPanelMembership.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, false);
                 }
+
                 foreach (Control comp in this.groupPanelCreditLineDetail.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, false);
                 }
+
                 ControlUtil.setComponetEditable(this.btnFactorSave, false);
                 ControlUtil.setComponetEditable(this.btnFactorCancel, true);
             }

@@ -15,6 +15,7 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.InvoiceMgr.InvoiceAssign;
+    using CMBC.EasyFactor.Help.About;
 
     /// <summary>
     /// Main Window Form
@@ -150,6 +151,41 @@ namespace CMBC.EasyFactor
         {
             CaseAppUI caseAppUI = new CaseAppUI();
             caseAppUI.ShowDialog(this);
+        }
+
+        private void About(object sender, EventArgs e)
+        {
+            AboutBox aboutBox = new AboutBox();
+            aboutBox.ShowDialog(this);
+        }
+
+        private void ChangeStyle(object sender, EventArgs e)
+        {
+            string style = cbStyleManager.SelectedItem.ToString();
+            if ("Office2007Blue".Equals(style))
+            {
+                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue;
+            }
+            else if ("Office2007Silver".Equals(style))
+            {
+                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Silver;
+            }
+            else if ("Office2007Black".Equals(style))
+            {
+                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Black;
+            }
+            else if ("Office2007VistaGlass".Equals(style))
+            {
+                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007VistaGlass;
+            }
+            else if ("Office2010Silver".Equals(style))
+            {
+                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Silver;
+            }
+            else if ("Windows7Blue".Equals(style))
+            {
+                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Windows7Blue;
+            }
         }
     }
 }

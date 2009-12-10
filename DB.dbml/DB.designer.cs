@@ -81,6 +81,9 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertContract(Contract instance);
     partial void UpdateContract(Contract instance);
     partial void DeleteContract(Contract instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
     partial void InsertClient(Client instance);
     partial void UpdateClient(Client instance);
     partial void DeleteClient(Client instance);
@@ -90,9 +93,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertClientCreditLine(ClientCreditLine instance);
     partial void UpdateClientCreditLine(ClientCreditLine instance);
     partial void DeleteClientCreditLine(ClientCreditLine instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -261,6 +261,14 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		public System.Data.Linq.Table<User> Users
+		{
+			get
+			{
+				return this.GetTable<User>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Client> Clients
 		{
 			get
@@ -282,14 +290,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			get
 			{
 				return this.GetTable<ClientCreditLine>();
-			}
-		}
-		
-		public System.Data.Linq.Table<User> Users
-		{
-			get
-			{
-				return this.GetTable<User>();
 			}
 		}
 	}
@@ -336,9 +336,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntityRef<Factor> _Factor1;
 		
-		private EntityRef<Client> _Client;
+		private EntityRef<Client> _BuyerClient;
 		
-		private EntityRef<Client> _Client1;
+		private EntityRef<Client> _SellerClient;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -378,8 +378,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			this._Department1 = default(EntityRef<Department>);
 			this._Factor = default(EntityRef<Factor>);
 			this._Factor1 = default(EntityRef<Factor>);
-			this._Client = default(EntityRef<Client>);
-			this._Client1 = default(EntityRef<Client>);
+			this._BuyerClient = default(EntityRef<Client>);
+			this._SellerClient = default(EntityRef<Client>);
 			OnCreated();
 		}
 		
@@ -414,7 +414,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._SellerCode != value))
 				{
-					if (this._Client1.HasLoadedOrAssignedValue)
+					if (this._SellerClient.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -486,7 +486,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._BuyerCode != value))
 				{
-					if (this._Client.HasLoadedOrAssignedValue)
+					if (this._BuyerClient.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -809,29 +809,29 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Client_Case", Storage="_Client", ThisKey="BuyerCode", IsForeignKey=true)]
+		[Association(Name="Client_Case", Storage="_BuyerClient", ThisKey="BuyerCode", IsForeignKey=true)]
 		public Client BuyerClient
 		{
 			get
 			{
-				return this._Client.Entity;
+				return this._BuyerClient.Entity;
 			}
 			set
 			{
-				Client previousValue = this._Client.Entity;
+				Client previousValue = this._BuyerClient.Entity;
 				if (((previousValue != value) 
-							|| (this._Client.HasLoadedOrAssignedValue == false)))
+							|| (this._BuyerClient.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Client.Entity = null;
-						previousValue.BuyerCases.Remove(this);
+						this._BuyerClient.Entity = null;
+						previousValue.BuyerCase.Remove(this);
 					}
-					this._Client.Entity = value;
+					this._BuyerClient.Entity = value;
 					if ((value != null))
 					{
-						value.BuyerCases.Add(this);
+						value.BuyerCase.Add(this);
 						this._BuyerCode = value.ClientEDICode;
 					}
 					else
@@ -843,26 +843,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Client_Case1", Storage="_Client1", ThisKey="SellerCode", IsForeignKey=true)]
+		[Association(Name="Client_Case1", Storage="_SellerClient", ThisKey="SellerCode", IsForeignKey=true)]
 		public Client SellerClient
 		{
 			get
 			{
-				return this._Client1.Entity;
+				return this._SellerClient.Entity;
 			}
 			set
 			{
-				Client previousValue = this._Client1.Entity;
+				Client previousValue = this._SellerClient.Entity;
 				if (((previousValue != value) 
-							|| (this._Client1.HasLoadedOrAssignedValue == false)))
+							|| (this._SellerClient.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Client1.Entity = null;
+						this._SellerClient.Entity = null;
 						previousValue.SellerCases.Remove(this);
 					}
-					this._Client1.Entity = value;
+					this._SellerClient.Entity = value;
 					if ((value != null))
 					{
 						value.SellerCases.Add(this);
@@ -8103,6 +8103,284 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 	}
 	
+	[Table(Name="dbo.[User]")]
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _UserID;
+		
+		private string _Name;
+		
+		private string _Password;
+		
+		private string _EDIAccount;
+		
+		private string _Role;
+		
+		private string _Phone;
+		
+		private string _Telphone;
+		
+		private string _Email;
+		
+		private string _MSN;
+		
+		private System.Nullable<System.DateTime> _LoginDate;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserIDChanging(string value);
+    partial void OnUserIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnEDIAccountChanging(string value);
+    partial void OnEDIAccountChanged();
+    partial void OnRoleChanging(string value);
+    partial void OnRoleChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnTelphoneChanging(string value);
+    partial void OnTelphoneChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnMSNChanging(string value);
+    partial void OnMSNChanged();
+    partial void OnLoginDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnLoginDateChanged();
+    #endregion
+		
+		public User()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_UserID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Name", DbType="NVarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Password", DbType="VarChar(50)")]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_EDIAccount", DbType="VarChar(35)")]
+		public string EDIAccount
+		{
+			get
+			{
+				return this._EDIAccount;
+			}
+			set
+			{
+				if ((this._EDIAccount != value))
+				{
+					this.OnEDIAccountChanging(value);
+					this.SendPropertyChanging();
+					this._EDIAccount = value;
+					this.SendPropertyChanged("EDIAccount");
+					this.OnEDIAccountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Role", DbType="NVarChar(50)")]
+		public string Role
+		{
+			get
+			{
+				return this._Role;
+			}
+			set
+			{
+				if ((this._Role != value))
+				{
+					this.OnRoleChanging(value);
+					this.SendPropertyChanging();
+					this._Role = value;
+					this.SendPropertyChanged("Role");
+					this.OnRoleChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Phone", DbType="VarChar(50)")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Telphone", DbType="VarChar(50)")]
+		public string Telphone
+		{
+			get
+			{
+				return this._Telphone;
+			}
+			set
+			{
+				if ((this._Telphone != value))
+				{
+					this.OnTelphoneChanging(value);
+					this.SendPropertyChanging();
+					this._Telphone = value;
+					this.SendPropertyChanged("Telphone");
+					this.OnTelphoneChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Email", DbType="VarChar(50)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_MSN", DbType="VarChar(50)")]
+		public string MSN
+		{
+			get
+			{
+				return this._MSN;
+			}
+			set
+			{
+				if ((this._MSN != value))
+				{
+					this.OnMSNChanging(value);
+					this.SendPropertyChanging();
+					this._MSN = value;
+					this.SendPropertyChanged("MSN");
+					this.OnMSNChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_LoginDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> LoginDate
+		{
+			get
+			{
+				return this._LoginDate;
+			}
+			set
+			{
+				if ((this._LoginDate != value))
+				{
+					this.OnLoginDateChanging(value);
+					this.SendPropertyChanging();
+					this._LoginDate = value;
+					this.SendPropertyChanged("LoginDate");
+					this.OnLoginDateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[Table(Name="dbo.Client")]
 	public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -8175,9 +8453,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
-		private EntitySet<Case> _Cases;
+		private EntitySet<Case> _BuyerCase;
 		
-		private EntitySet<Case> _Cases1;
+		private EntitySet<Case> _SellerCases;
 		
 		private EntitySet<Contract> _Contracts;
 		
@@ -8263,8 +8541,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		public Client()
 		{
-			this._Cases = new EntitySet<Case>(new Action<Case>(this.attach_Cases), new Action<Case>(this.detach_Cases));
-			this._Cases1 = new EntitySet<Case>(new Action<Case>(this.attach_Cases1), new Action<Case>(this.detach_Cases1));
+			this._BuyerCase = new EntitySet<Case>(new Action<Case>(this.attach_BuyerCase), new Action<Case>(this.detach_BuyerCase));
+			this._SellerCases = new EntitySet<Case>(new Action<Case>(this.attach_SellerCases), new Action<Case>(this.detach_SellerCases));
 			this._Contracts = new EntitySet<Contract>(new Action<Contract>(this.attach_Contracts), new Action<Contract>(this.detach_Contracts));
 			this._ClientAccounts = new EntitySet<ClientAccount>(new Action<ClientAccount>(this.attach_ClientAccounts), new Action<ClientAccount>(this.detach_ClientAccounts));
 			this._ClientCreditLines = new EntitySet<ClientCreditLine>(new Action<ClientCreditLine>(this.attach_ClientCreditLines), new Action<ClientCreditLine>(this.detach_ClientCreditLines));
@@ -8273,7 +8551,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string ClientEDICode
 		{
 			get
@@ -8293,7 +8571,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientCoreNo", DbType="NChar(10)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_ClientCoreNo", DbType="NVarChar(10)")]
 		public string ClientCoreNo
 		{
 			get
@@ -8313,7 +8591,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientNameCN", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_ClientNameCN", DbType="NVarChar(100)")]
 		public string ClientNameCN
 		{
 			get
@@ -8333,7 +8611,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientNameEN_1", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_ClientNameEN_1", DbType="NVarChar(100)")]
 		public string ClientNameEN_1
 		{
 			get
@@ -8353,7 +8631,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientNameEN_2", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_ClientNameEN_2", DbType="NVarChar(100)")]
 		public string ClientNameEN_2
 		{
 			get
@@ -8373,7 +8651,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AddressCN", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_AddressCN", DbType="NVarChar(200)")]
 		public string AddressCN
 		{
 			get
@@ -8393,7 +8671,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AddressEN", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_AddressEN", DbType="NVarChar(200)")]
 		public string AddressEN
 		{
 			get
@@ -8413,7 +8691,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CityCN", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_CityCN", DbType="NVarChar(50)")]
 		public string CityCN
 		{
 			get
@@ -8433,7 +8711,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CityEN", DbType="NVarChar(35)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_CityEN", DbType="NVarChar(35)")]
 		public string CityEN
 		{
 			get
@@ -8453,7 +8731,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ProvinceCN", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_ProvinceCN", DbType="NVarChar(50)")]
 		public string ProvinceCN
 		{
 			get
@@ -8473,7 +8751,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ProvinceEN", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_ProvinceEN", DbType="NVarChar(50)")]
 		public string ProvinceEN
 		{
 			get
@@ -8493,7 +8771,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PostCode", DbType="NVarChar(9)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_PostCode", DbType="NVarChar(9)")]
 		public string PostCode
 		{
 			get
@@ -8513,7 +8791,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CountryCode", DbType="NChar(2)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_CountryCode", DbType="NChar(2)")]
 		public string CountryCode
 		{
 			get
@@ -8533,7 +8811,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Representative", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_Representative", DbType="NVarChar(50)")]
 		public string Representative
 		{
 			get
@@ -8553,7 +8831,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Wetsite", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_Wetsite", DbType="NVarChar(200)")]
 		public string Wetsite
 		{
 			get
@@ -8573,7 +8851,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Contact", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_Contact", DbType="NVarChar(200)")]
 		public string Contact
 		{
 			get
@@ -8593,7 +8871,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Telephone", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_Telephone", DbType="VarChar(50)")]
 		public string Telephone
 		{
 			get
@@ -8613,7 +8891,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Email", DbType="VarChar(100)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_Email", DbType="VarChar(100)")]
 		public string Email
 		{
 			get
@@ -8633,7 +8911,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FaxNumber", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_FaxNumber", DbType="VarChar(50)")]
 		public string FaxNumber
 		{
 			get
@@ -8653,7 +8931,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CellPhone", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_CellPhone", DbType="VarChar(50)")]
 		public string CellPhone
 		{
 			get
@@ -8673,7 +8951,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_ClientType", DbType="NVarChar(50)")]
 		public string ClientType
 		{
 			get
@@ -8693,7 +8971,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Industry", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_Industry", DbType="NVarChar(50)")]
 		public string Industry
 		{
 			get
@@ -8713,7 +8991,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ProductCN", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_ProductCN", DbType="NVarChar(500)")]
 		public string ProductCN
 		{
 			get
@@ -8733,7 +9011,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ProductEN", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_ProductEN", DbType="NVarChar(500)")]
 		public string ProductEN
 		{
 			get
@@ -8753,7 +9031,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientLevel", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_ClientLevel", DbType="NVarChar(50)")]
 		public string ClientLevel
 		{
 			get
@@ -8773,7 +9051,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsGroup", DbType="NChar(2)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_IsGroup", DbType="NVarChar(2)")]
 		public string IsGroup
 		{
 			get
@@ -8793,7 +9071,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_GroupNo", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_GroupNo", DbType="VarChar(50)")]
 		public string GroupNo
 		{
 			get
@@ -8817,7 +9095,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RegistrationNumber", DbType="VarChar(35)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_RegistrationNumber", DbType="VarChar(35)")]
 		public string RegistrationNumber
 		{
 			get
@@ -8837,7 +9115,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CompanyCode", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_CompanyCode", DbType="VarChar(50)")]
 		public string CompanyCode
 		{
 			get
@@ -8857,7 +9135,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_BranchCode", DbType="VarChar(14)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_BranchCode", DbType="VarChar(14)")]
 		public string BranchCode
 		{
 			get
@@ -8881,7 +9159,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PMName", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_PMName", DbType="NVarChar(200)")]
 		public string PMName
 		{
 			get
@@ -8901,7 +9179,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RMName", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_RMName", DbType="NVarChar(200)")]
 		public string RMName
 		{
 			get
@@ -8921,7 +9199,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
 		public string Comment
 		{
 			get
@@ -8941,29 +9219,29 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Client_Case", Storage="_Cases", OtherKey="BuyerCode")]
-		public EntitySet<Case> BuyerCases
+		[Association(Name="Client_Case", Storage="_BuyerCase", OtherKey="BuyerCode")]
+		public EntitySet<Case> BuyerCase
 		{
 			get
 			{
-				return this._Cases;
+				return this._BuyerCase;
 			}
 			set
 			{
-				this._Cases.Assign(value);
+				this._BuyerCase.Assign(value);
 			}
 		}
 		
-		[Association(Name="Client_Case1", Storage="_Cases1", OtherKey="SellerCode")]
+		[Association(Name="Client_Case1", Storage="_SellerCases", OtherKey="SellerCode")]
 		public EntitySet<Case> SellerCases
 		{
 			get
 			{
-				return this._Cases1;
+				return this._SellerCases;
 			}
 			set
 			{
-				this._Cases1.Assign(value);
+				this._SellerCases.Assign(value);
 			}
 		}
 		
@@ -8980,7 +9258,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Client_ClientAccount", Storage="_ClientAccounts", OtherKey="ClientNo")]
+		[Association(Name="Client_ClientAccount", Storage="_ClientAccounts", OtherKey="ClientEDICode")]
 		public EntitySet<ClientAccount> ClientAccounts
 		{
 			get
@@ -8993,7 +9271,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Client_ClientCreditLine", Storage="_ClientCreditLines", OtherKey="ClientNo")]
+		[Association(Name="Client_ClientCreditLine", Storage="_ClientCreditLines", OtherKey="ClientEDICode")]
 		public EntitySet<ClientCreditLine> ClientCreditLines
 		{
 			get
@@ -9094,25 +9372,25 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		private void attach_Cases(Case entity)
+		private void attach_BuyerCase(Case entity)
 		{
 			this.SendPropertyChanging();
 			entity.BuyerClient = this;
 		}
 		
-		private void detach_Cases(Case entity)
+		private void detach_BuyerCase(Case entity)
 		{
 			this.SendPropertyChanging();
 			entity.BuyerClient = null;
 		}
 		
-		private void attach_Cases1(Case entity)
+		private void attach_SellerCases(Case entity)
 		{
 			this.SendPropertyChanging();
 			entity.SellerClient = this;
 		}
 		
-		private void detach_Cases1(Case entity)
+		private void detach_SellerCases(Case entity)
 		{
 			this.SendPropertyChanging();
 			entity.SellerClient = null;
@@ -9163,7 +9441,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _AccountID;
 		
-		private string _ClientNo;
+		private string _ClientEDICode;
 		
 		private string _AccountNumber;
 		
@@ -9187,8 +9465,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnAccountIDChanging(string value);
     partial void OnAccountIDChanged();
-    partial void OnClientNoChanging(string value);
-    partial void OnClientNoChanged();
+    partial void OnClientEDICodeChanging(string value);
+    partial void OnClientEDICodeChanged();
     partial void OnAccountNumberChanging(string value);
     partial void OnAccountNumberChanged();
     partial void OnAccountCurrencyChanging(string value);
@@ -9231,26 +9509,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientNo", DbType="VarChar(35)")]
-		public string ClientNo
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35)")]
+		public string ClientEDICode
 		{
 			get
 			{
-				return this._ClientNo;
+				return this._ClientEDICode;
 			}
 			set
 			{
-				if ((this._ClientNo != value))
+				if ((this._ClientEDICode != value))
 				{
 					if (this._Client.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnClientNoChanging(value);
+					this.OnClientEDICodeChanging(value);
 					this.SendPropertyChanging();
-					this._ClientNo = value;
-					this.SendPropertyChanged("ClientNo");
-					this.OnClientNoChanged();
+					this._ClientEDICode = value;
+					this.SendPropertyChanged("ClientEDICode");
+					this.OnClientEDICodeChanged();
 				}
 			}
 		}
@@ -9395,7 +9673,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Client_ClientAccount", Storage="_Client", ThisKey="ClientNo", IsForeignKey=true)]
+		[Association(Name="Client_ClientAccount", Storage="_Client", ThisKey="ClientEDICode", IsForeignKey=true)]
 		public Client Client
 		{
 			get
@@ -9418,11 +9696,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((value != null))
 					{
 						value.ClientAccounts.Add(this);
-						this._ClientNo = value.ClientEDICode;
+						this._ClientEDICode = value.ClientEDICode;
 					}
 					else
 					{
-						this._ClientNo = default(string);
+						this._ClientEDICode = default(string);
 					}
 					this.SendPropertyChanged("Client");
 				}
@@ -9458,7 +9736,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreditLineID;
 		
-		private string _ClientNo;
+		private string _ClientEDICode;
 		
 		private string _CreditLineType;
 		
@@ -9498,8 +9776,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnCreditLineIDChanging(string value);
     partial void OnCreditLineIDChanged();
-    partial void OnClientNoChanging(string value);
-    partial void OnClientNoChanged();
+    partial void OnClientEDICodeChanging(string value);
+    partial void OnClientEDICodeChanged();
     partial void OnCreditLineTypeChanging(string value);
     partial void OnCreditLineTypeChanged();
     partial void OnCreditLineCurrencyChanging(string value);
@@ -9558,26 +9836,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientNo", DbType="VarChar(35)")]
-		public string ClientNo
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35)")]
+		public string ClientEDICode
 		{
 			get
 			{
-				return this._ClientNo;
+				return this._ClientEDICode;
 			}
 			set
 			{
-				if ((this._ClientNo != value))
+				if ((this._ClientEDICode != value))
 				{
 					if (this._Client.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnClientNoChanging(value);
+					this.OnClientEDICodeChanging(value);
 					this.SendPropertyChanging();
-					this._ClientNo = value;
-					this.SendPropertyChanged("ClientNo");
-					this.OnClientNoChanged();
+					this._ClientEDICode = value;
+					this.SendPropertyChanged("ClientEDICode");
+					this.OnClientEDICodeChanged();
 				}
 			}
 		}
@@ -9882,7 +10160,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Client_ClientCreditLine", Storage="_Client", ThisKey="ClientNo", IsForeignKey=true)]
+		[Association(Name="Client_ClientCreditLine", Storage="_Client", ThisKey="ClientEDICode", IsForeignKey=true)]
 		public Client Client
 		{
 			get
@@ -9905,291 +10183,13 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((value != null))
 					{
 						value.ClientCreditLines.Add(this);
-						this._ClientNo = value.ClientEDICode;
+						this._ClientEDICode = value.ClientEDICode;
 					}
 					else
 					{
-						this._ClientNo = default(string);
+						this._ClientEDICode = default(string);
 					}
 					this.SendPropertyChanged("Client");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[Table(Name="dbo.[User]")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _UserID;
-		
-		private string _Name;
-		
-		private string _Password;
-		
-		private string _EDIAccount;
-		
-		private string _Role;
-		
-		private string _Phone;
-		
-		private string _Telphone;
-		
-		private string _Email;
-		
-		private string _MSN;
-		
-		private System.Nullable<System.DateTime> _LoginDate;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserIDChanging(string value);
-    partial void OnUserIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnEDIAccountChanging(string value);
-    partial void OnEDIAccountChanged();
-    partial void OnRoleChanging(string value);
-    partial void OnRoleChanged();
-    partial void OnPhoneChanging(string value);
-    partial void OnPhoneChanged();
-    partial void OnTelphoneChanging(string value);
-    partial void OnTelphoneChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnMSNChanging(string value);
-    partial void OnMSNChanged();
-    partial void OnLoginDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnLoginDateChanged();
-    #endregion
-		
-		public User()
-		{
-			OnCreated();
-		}
-		
-		[Column(Storage="_UserID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string UserID
-		{
-			get
-			{
-				return this._UserID;
-			}
-			set
-			{
-				if ((this._UserID != value))
-				{
-					this.OnUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Name", DbType="NVarChar(50)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Password", DbType="VarChar(50)")]
-		public string Password
-		{
-			get
-			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_EDIAccount", DbType="VarChar(35)")]
-		public string EDIAccount
-		{
-			get
-			{
-				return this._EDIAccount;
-			}
-			set
-			{
-				if ((this._EDIAccount != value))
-				{
-					this.OnEDIAccountChanging(value);
-					this.SendPropertyChanging();
-					this._EDIAccount = value;
-					this.SendPropertyChanged("EDIAccount");
-					this.OnEDIAccountChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Role", DbType="NVarChar(50)")]
-		public string Role
-		{
-			get
-			{
-				return this._Role;
-			}
-			set
-			{
-				if ((this._Role != value))
-				{
-					this.OnRoleChanging(value);
-					this.SendPropertyChanging();
-					this._Role = value;
-					this.SendPropertyChanged("Role");
-					this.OnRoleChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Phone", DbType="VarChar(50)")]
-		public string Phone
-		{
-			get
-			{
-				return this._Phone;
-			}
-			set
-			{
-				if ((this._Phone != value))
-				{
-					this.OnPhoneChanging(value);
-					this.SendPropertyChanging();
-					this._Phone = value;
-					this.SendPropertyChanged("Phone");
-					this.OnPhoneChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Telphone", DbType="VarChar(50)")]
-		public string Telphone
-		{
-			get
-			{
-				return this._Telphone;
-			}
-			set
-			{
-				if ((this._Telphone != value))
-				{
-					this.OnTelphoneChanging(value);
-					this.SendPropertyChanging();
-					this._Telphone = value;
-					this.SendPropertyChanged("Telphone");
-					this.OnTelphoneChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Email", DbType="VarChar(50)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_MSN", DbType="VarChar(50)")]
-		public string MSN
-		{
-			get
-			{
-				return this._MSN;
-			}
-			set
-			{
-				if ((this._MSN != value))
-				{
-					this.OnMSNChanging(value);
-					this.SendPropertyChanging();
-					this._MSN = value;
-					this.SendPropertyChanged("MSN");
-					this.OnMSNChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_LoginDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> LoginDate
-		{
-			get
-			{
-				return this._LoginDate;
-			}
-			set
-			{
-				if ((this._LoginDate != value))
-				{
-					this.OnLoginDateChanging(value);
-					this.SendPropertyChanging();
-					this._LoginDate = value;
-					this.SendPropertyChanged("LoginDate");
-					this.OnLoginDateChanged();
 				}
 			}
 		}

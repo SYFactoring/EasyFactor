@@ -77,32 +77,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DevComponents.DotNetBar.LabelX creditLineCommentLabel;
             DevComponents.DotNetBar.LabelX clientCoreNoLabel;
             DevComponents.DotNetBar.LabelX industryLabel;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.wetsiteLabel = new DevComponents.DotNetBar.LabelX();
             this.telephoneLabel = new DevComponents.DotNetBar.LabelX();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelClientCreditLine = new DevComponents.DotNetBar.TabControlPanel();
             this.groupPanelClientCreditCoverMgr = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.dgvClientCreditLine = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clientCreditLineMgrBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dgvClientCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.groupPanelClientCreditCover = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.btnClientCreditLineRefresh = new DevComponents.DotNetBar.ButtonX();
             this.creditLineCommentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientCreditLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.unfreezeDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -112,10 +95,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientCreditCoverFreeze = new DevComponents.DotNetBar.ButtonX();
             this.unfreezeReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.freezeReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btnClientCreditCoverCancel = new DevComponents.DotNetBar.ButtonX();
-            this.btnClientCreditCoverSave = new DevComponents.DotNetBar.ButtonX();
+            this.btnClientCreditLineCancel = new DevComponents.DotNetBar.ButtonX();
+            this.btnClientCreditLineSave = new DevComponents.DotNetBar.ButtonX();
             this.freezerTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btnClientCreditCoverAdd = new DevComponents.DotNetBar.ButtonX();
+            this.btnClientCreditLineAdd = new DevComponents.DotNetBar.ButtonX();
             this.creditLineStatusTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.approveTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.approveNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -190,6 +173,23 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabItemClient = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClientAccount = new DevComponents.DotNetBar.TabControlPanel();
             this.tabItemClientAccount = new DevComponents.DotNetBar.TabItem(this.components);
+            this.creditLineIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreditLineTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreditLineCurrencyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreditLineColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PeriodBeginColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PeriodEndColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ApproveNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ApproveTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreditLineStatusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FreezeReasonColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FreezerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FreezeDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnfreezeReasonColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnfreezerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnfreezeDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CommentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             clientNameCNLabel = new DevComponents.DotNetBar.LabelX();
             addressCNLabel = new DevComponents.DotNetBar.LabelX();
             cityCNLabel = new DevComponents.DotNetBar.LabelX();
@@ -233,8 +233,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabControl.SuspendLayout();
             this.tabPanelClientCreditLine.SuspendLayout();
             this.groupPanelClientCreditCoverMgr.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLine)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineMgrBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLines)).BeginInit();
             this.groupPanelClientCreditCover.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineBindingSource)).BeginInit();
             this.tabPanelClient.SuspendLayout();
@@ -823,8 +822,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelClient);
             this.tabControl.Controls.Add(this.tabPanelClientCreditLine);
+            this.tabControl.Controls.Add(this.tabPanelClient);
             this.tabControl.Controls.Add(this.tabPanelClientAccount);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -863,7 +862,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.groupPanelClientCreditCoverMgr.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelClientCreditCoverMgr.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.groupPanelClientCreditCoverMgr.Controls.Add(this.dgvClientCreditLine);
+            this.groupPanelClientCreditCoverMgr.Controls.Add(this.dgvClientCreditLines);
             this.groupPanelClientCreditCoverMgr.Location = new System.Drawing.Point(0, 326);
             this.groupPanelClientCreditCoverMgr.Name = "groupPanelClientCreditCoverMgr";
             this.groupPanelClientCreditCoverMgr.Size = new System.Drawing.Size(591, 203);
@@ -898,154 +897,54 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientCreditCoverMgr.StyleMouseOver.Class = "";
             this.groupPanelClientCreditCoverMgr.TabIndex = 1;
             // 
-            // dgvClientCreditLine
+            // dgvClientCreditLines
             // 
-            this.dgvClientCreditLine.AutoGenerateColumns = false;
-            this.dgvClientCreditLine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientCreditLine.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn18,
-            this.dataGridViewTextBoxColumn19,
-            this.dataGridViewTextBoxColumn20,
-            this.dataGridViewTextBoxColumn21,
-            this.dataGridViewTextBoxColumn22,
-            this.dataGridViewTextBoxColumn23,
-            this.dataGridViewTextBoxColumn24,
-            this.dataGridViewTextBoxColumn25,
-            this.dataGridViewTextBoxColumn26,
-            this.dataGridViewTextBoxColumn27,
-            this.dataGridViewTextBoxColumn28,
-            this.dataGridViewTextBoxColumn29,
-            this.dataGridViewTextBoxColumn30,
-            this.dataGridViewTextBoxColumn31,
-            this.dataGridViewTextBoxColumn32,
-            this.dataGridViewTextBoxColumn33});
-            this.dgvClientCreditLine.DataSource = this.clientCreditLineMgrBindingSource;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientCreditLine.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvClientCreditLine.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvClientCreditLine.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvClientCreditLine.Location = new System.Drawing.Point(0, 0);
-            this.dgvClientCreditLine.Name = "dgvClientCreditLine";
-            this.dgvClientCreditLine.Size = new System.Drawing.Size(585, 197);
-            this.dgvClientCreditLine.TabIndex = 0;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "CreditLineID";
-            this.dataGridViewTextBoxColumn2.HeaderText = "CreditLineID";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            this.dataGridViewTextBoxColumn18.DataPropertyName = "ClientNo";
-            this.dataGridViewTextBoxColumn18.HeaderText = "ClientNo";
-            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            this.dataGridViewTextBoxColumn19.DataPropertyName = "CreditLineType";
-            this.dataGridViewTextBoxColumn19.HeaderText = "CreditLineType";
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.DataPropertyName = "CreditLineCurrency";
-            this.dataGridViewTextBoxColumn20.HeaderText = "CreditLineCurrency";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            this.dataGridViewTextBoxColumn21.DataPropertyName = "CreditLine";
-            this.dataGridViewTextBoxColumn21.HeaderText = "CreditLine";
-            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            this.dataGridViewTextBoxColumn22.DataPropertyName = "PeriodBegin";
-            this.dataGridViewTextBoxColumn22.HeaderText = "PeriodBegin";
-            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            // 
-            // dataGridViewTextBoxColumn23
-            // 
-            this.dataGridViewTextBoxColumn23.DataPropertyName = "PeriodEnd";
-            this.dataGridViewTextBoxColumn23.HeaderText = "PeriodEnd";
-            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
-            // 
-            // dataGridViewTextBoxColumn24
-            // 
-            this.dataGridViewTextBoxColumn24.DataPropertyName = "ApproveNo";
-            this.dataGridViewTextBoxColumn24.HeaderText = "ApproveNo";
-            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
-            // 
-            // dataGridViewTextBoxColumn25
-            // 
-            this.dataGridViewTextBoxColumn25.DataPropertyName = "ApproveType";
-            this.dataGridViewTextBoxColumn25.HeaderText = "ApproveType";
-            this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
-            // 
-            // dataGridViewTextBoxColumn26
-            // 
-            this.dataGridViewTextBoxColumn26.DataPropertyName = "CreditLineStatus";
-            this.dataGridViewTextBoxColumn26.HeaderText = "CreditLineStatus";
-            this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
-            // 
-            // dataGridViewTextBoxColumn27
-            // 
-            this.dataGridViewTextBoxColumn27.DataPropertyName = "FreezeReason";
-            this.dataGridViewTextBoxColumn27.HeaderText = "FreezeReason";
-            this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
-            // 
-            // dataGridViewTextBoxColumn28
-            // 
-            this.dataGridViewTextBoxColumn28.DataPropertyName = "Freezer";
-            this.dataGridViewTextBoxColumn28.HeaderText = "Freezer";
-            this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
-            // 
-            // dataGridViewTextBoxColumn29
-            // 
-            this.dataGridViewTextBoxColumn29.DataPropertyName = "FreezeDate";
-            this.dataGridViewTextBoxColumn29.HeaderText = "FreezeDate";
-            this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
-            // 
-            // dataGridViewTextBoxColumn30
-            // 
-            this.dataGridViewTextBoxColumn30.DataPropertyName = "UnfreezeReason";
-            this.dataGridViewTextBoxColumn30.HeaderText = "UnfreezeReason";
-            this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
-            // 
-            // dataGridViewTextBoxColumn31
-            // 
-            this.dataGridViewTextBoxColumn31.DataPropertyName = "Unfreezer";
-            this.dataGridViewTextBoxColumn31.HeaderText = "Unfreezer";
-            this.dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
-            // 
-            // dataGridViewTextBoxColumn32
-            // 
-            this.dataGridViewTextBoxColumn32.DataPropertyName = "UnfreezeDate";
-            this.dataGridViewTextBoxColumn32.HeaderText = "UnfreezeDate";
-            this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
-            // 
-            // dataGridViewTextBoxColumn33
-            // 
-            this.dataGridViewTextBoxColumn33.DataPropertyName = "Comment";
-            this.dataGridViewTextBoxColumn33.HeaderText = "Comment";
-            this.dataGridViewTextBoxColumn33.Name = "dataGridViewTextBoxColumn33";
-            // 
-            // clientCreditLineMgrBindingSource
-            // 
-            this.clientCreditLineMgrBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.ClientCreditLine);
+            this.dgvClientCreditLines.AllowUserToAddRows = false;
+            this.dgvClientCreditLines.AllowUserToDeleteRows = false;
+            this.dgvClientCreditLines.AllowUserToOrderColumns = true;
+            this.dgvClientCreditLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClientCreditLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.creditLineIDColumn,
+            this.ClientEDICodeColumn,
+            this.CreditLineTypeColumn,
+            this.CreditLineCurrencyColumn,
+            this.CreditLineColumn,
+            this.PeriodBeginColumn,
+            this.PeriodEndColumn,
+            this.ApproveNoColumn,
+            this.ApproveTypeColumn,
+            this.CreditLineStatusColumn,
+            this.FreezeReasonColumn,
+            this.FreezerColumn,
+            this.FreezeDateColumn,
+            this.UnfreezeReasonColumn,
+            this.UnfreezerColumn,
+            this.UnfreezeDateColumn,
+            this.CommentColumn});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvClientCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvClientCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvClientCreditLines.Location = new System.Drawing.Point(0, 0);
+            this.dgvClientCreditLines.MultiSelect = false;
+            this.dgvClientCreditLines.Name = "dgvClientCreditLines";
+            this.dgvClientCreditLines.ReadOnly = true;
+            this.dgvClientCreditLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvClientCreditLines.Size = new System.Drawing.Size(585, 197);
+            this.dgvClientCreditLines.TabIndex = 0;
+            this.dgvClientCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectClientCreditLine);
             // 
             // groupPanelClientCreditCover
             // 
             this.groupPanelClientCreditCover.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelClientCreditCover.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditLineRefresh);
             this.groupPanelClientCreditCover.Controls.Add(creditLineCommentLabel);
             this.groupPanelClientCreditCover.Controls.Add(this.creditLineCommentTextBox);
             this.groupPanelClientCreditCover.Controls.Add(unfreezeDateLabel);
@@ -1060,11 +959,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverFreeze);
             this.groupPanelClientCreditCover.Controls.Add(this.unfreezeReasonTextBox);
             this.groupPanelClientCreditCover.Controls.Add(this.freezeReasonTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverCancel);
+            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditLineCancel);
             this.groupPanelClientCreditCover.Controls.Add(freezerLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverSave);
+            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditLineSave);
             this.groupPanelClientCreditCover.Controls.Add(this.freezerTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverAdd);
+            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditLineAdd);
             this.groupPanelClientCreditCover.Controls.Add(creditLineStatusLabel);
             this.groupPanelClientCreditCover.Controls.Add(this.creditLineStatusTextBox);
             this.groupPanelClientCreditCover.Controls.Add(approveTypeLabel);
@@ -1114,6 +1013,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientCreditCover.StyleMouseOver.Class = "";
             this.groupPanelClientCreditCover.TabIndex = 0;
             // 
+            // btnClientCreditLineRefresh
+            // 
+            this.btnClientCreditLineRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClientCreditLineRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnClientCreditLineRefresh.Location = new System.Drawing.Point(49, 279);
+            this.btnClientCreditLineRefresh.Name = "btnClientCreditLineRefresh";
+            this.btnClientCreditLineRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnClientCreditLineRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClientCreditLineRefresh.TabIndex = 34;
+            this.btnClientCreditLineRefresh.Text = "刷新";
+            this.btnClientCreditLineRefresh.Click += new System.EventHandler(this.RefreshClientCreditLine);
+            // 
             // creditLineCommentTextBox
             // 
             // 
@@ -1150,7 +1061,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientCreditCoverUnfreeze.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditCoverUnfreeze.TabIndex = 20;
             this.btnClientCreditCoverUnfreeze.Text = "解冻";
-            this.btnClientCreditCoverUnfreeze.Click += new System.EventHandler(this.UnfreezeClientCreditCover);
+            this.btnClientCreditCoverUnfreeze.Click += new System.EventHandler(this.UnfreezeClientCreditLine);
             // 
             // unfreezerTextBox
             // 
@@ -1184,7 +1095,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientCreditCoverFreeze.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditCoverFreeze.TabIndex = 19;
             this.btnClientCreditCoverFreeze.Text = "冻结";
-            this.btnClientCreditCoverFreeze.Click += new System.EventHandler(this.FreezeClientCreditCover);
+            this.btnClientCreditCoverFreeze.Click += new System.EventHandler(this.FreezeClientCreditLine);
             // 
             // unfreezeReasonTextBox
             // 
@@ -1214,29 +1125,29 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.freezeReasonTextBox.Size = new System.Drawing.Size(451, 36);
             this.freezeReasonTextBox.TabIndex = 1;
             // 
-            // btnClientCreditCoverCancel
+            // btnClientCreditLineCancel
             // 
-            this.btnClientCreditCoverCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClientCreditCoverCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditCoverCancel.Location = new System.Drawing.Point(292, 279);
-            this.btnClientCreditCoverCancel.Name = "btnClientCreditCoverCancel";
-            this.btnClientCreditCoverCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnClientCreditCoverCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClientCreditCoverCancel.TabIndex = 18;
-            this.btnClientCreditCoverCancel.Text = "取消";
-            this.btnClientCreditCoverCancel.Click += new System.EventHandler(this.CancelClientCreditCover);
+            this.btnClientCreditLineCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClientCreditLineCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnClientCreditLineCancel.Location = new System.Drawing.Point(292, 279);
+            this.btnClientCreditLineCancel.Name = "btnClientCreditLineCancel";
+            this.btnClientCreditLineCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnClientCreditLineCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClientCreditLineCancel.TabIndex = 18;
+            this.btnClientCreditLineCancel.Text = "取消";
+            this.btnClientCreditLineCancel.Click += new System.EventHandler(this.CancelClientCreditLine);
             // 
-            // btnClientCreditCoverSave
+            // btnClientCreditLineSave
             // 
-            this.btnClientCreditCoverSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClientCreditCoverSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditCoverSave.Location = new System.Drawing.Point(211, 279);
-            this.btnClientCreditCoverSave.Name = "btnClientCreditCoverSave";
-            this.btnClientCreditCoverSave.Size = new System.Drawing.Size(75, 23);
-            this.btnClientCreditCoverSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClientCreditCoverSave.TabIndex = 17;
-            this.btnClientCreditCoverSave.Text = "保存";
-            this.btnClientCreditCoverSave.Click += new System.EventHandler(this.SaveClientCreditCover);
+            this.btnClientCreditLineSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClientCreditLineSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnClientCreditLineSave.Location = new System.Drawing.Point(211, 279);
+            this.btnClientCreditLineSave.Name = "btnClientCreditLineSave";
+            this.btnClientCreditLineSave.Size = new System.Drawing.Size(75, 23);
+            this.btnClientCreditLineSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClientCreditLineSave.TabIndex = 17;
+            this.btnClientCreditLineSave.Text = "保存";
+            this.btnClientCreditLineSave.Click += new System.EventHandler(this.SaveClientCreditLine);
             // 
             // freezerTextBox
             // 
@@ -1251,17 +1162,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.freezerTextBox.Size = new System.Drawing.Size(100, 20);
             this.freezerTextBox.TabIndex = 3;
             // 
-            // btnClientCreditCoverAdd
+            // btnClientCreditLineAdd
             // 
-            this.btnClientCreditCoverAdd.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClientCreditCoverAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditCoverAdd.Location = new System.Drawing.Point(130, 279);
-            this.btnClientCreditCoverAdd.Name = "btnClientCreditCoverAdd";
-            this.btnClientCreditCoverAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnClientCreditCoverAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClientCreditCoverAdd.TabIndex = 16;
-            this.btnClientCreditCoverAdd.Text = "新建";
-            this.btnClientCreditCoverAdd.Click += new System.EventHandler(this.NewClientCreditCover);
+            this.btnClientCreditLineAdd.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClientCreditLineAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnClientCreditLineAdd.Location = new System.Drawing.Point(130, 279);
+            this.btnClientCreditLineAdd.Name = "btnClientCreditLineAdd";
+            this.btnClientCreditLineAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnClientCreditLineAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClientCreditLineAdd.TabIndex = 16;
+            this.btnClientCreditLineAdd.Text = "新建";
+            this.btnClientCreditLineAdd.Click += new System.EventHandler(this.NewClientCreditLine);
             // 
             // creditLineStatusTextBox
             // 
@@ -1352,7 +1263,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.creditLineCurrencyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "CreditLineCurrency", true));
             this.creditLineCurrencyComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.creditLineCurrencyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.creditLineCurrencyComboBox.FormattingEnabled = true;
             this.creditLineCurrencyComboBox.Location = new System.Drawing.Point(90, 29);
             this.creditLineCurrencyComboBox.Name = "creditLineCurrencyComboBox";
             this.creditLineCurrencyComboBox.Size = new System.Drawing.Size(121, 21);
@@ -2201,6 +2111,127 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabItemClientAccount.Name = "tabItemClientAccount";
             this.tabItemClientAccount.Text = "账户信息";
             // 
+            // creditLineIDColumn
+            // 
+            this.creditLineIDColumn.DataPropertyName = "CreditLineID";
+            this.creditLineIDColumn.HeaderText = "额度编号";
+            this.creditLineIDColumn.Name = "creditLineIDColumn";
+            this.creditLineIDColumn.ReadOnly = true;
+            this.creditLineIDColumn.Visible = false;
+            // 
+            // ClientEDICodeColumn
+            // 
+            this.ClientEDICodeColumn.DataPropertyName = "ClientEDICode";
+            this.ClientEDICodeColumn.HeaderText = "客户保理代码";
+            this.ClientEDICodeColumn.Name = "ClientEDICodeColumn";
+            this.ClientEDICodeColumn.ReadOnly = true;
+            this.ClientEDICodeColumn.Visible = false;
+            // 
+            // CreditLineTypeColumn
+            // 
+            this.CreditLineTypeColumn.DataPropertyName = "CreditLineType";
+            this.CreditLineTypeColumn.HeaderText = "额度类型";
+            this.CreditLineTypeColumn.Name = "CreditLineTypeColumn";
+            this.CreditLineTypeColumn.ReadOnly = true;
+            // 
+            // CreditLineCurrencyColumn
+            // 
+            this.CreditLineCurrencyColumn.DataPropertyName = "CreditLineCurrency";
+            this.CreditLineCurrencyColumn.HeaderText = "额度币种";
+            this.CreditLineCurrencyColumn.Name = "CreditLineCurrencyColumn";
+            this.CreditLineCurrencyColumn.ReadOnly = true;
+            // 
+            // CreditLineColumn
+            // 
+            this.CreditLineColumn.DataPropertyName = "CreditLine";
+            this.CreditLineColumn.HeaderText = "额度上限";
+            this.CreditLineColumn.Name = "CreditLineColumn";
+            this.CreditLineColumn.ReadOnly = true;
+            // 
+            // PeriodBeginColumn
+            // 
+            this.PeriodBeginColumn.DataPropertyName = "PeriodBegin";
+            this.PeriodBeginColumn.HeaderText = "有效期(始)";
+            this.PeriodBeginColumn.Name = "PeriodBeginColumn";
+            this.PeriodBeginColumn.ReadOnly = true;
+            // 
+            // PeriodEndColumn
+            // 
+            this.PeriodEndColumn.DataPropertyName = "PeriodEnd";
+            this.PeriodEndColumn.HeaderText = "有效期(终)";
+            this.PeriodEndColumn.Name = "PeriodEndColumn";
+            this.PeriodEndColumn.ReadOnly = true;
+            // 
+            // ApproveNoColumn
+            // 
+            this.ApproveNoColumn.DataPropertyName = "ApproveNo";
+            this.ApproveNoColumn.HeaderText = "授信编号";
+            this.ApproveNoColumn.Name = "ApproveNoColumn";
+            this.ApproveNoColumn.ReadOnly = true;
+            // 
+            // ApproveTypeColumn
+            // 
+            this.ApproveTypeColumn.DataPropertyName = "ApproveType";
+            this.ApproveTypeColumn.HeaderText = "授信类型";
+            this.ApproveTypeColumn.Name = "ApproveTypeColumn";
+            this.ApproveTypeColumn.ReadOnly = true;
+            // 
+            // CreditLineStatusColumn
+            // 
+            this.CreditLineStatusColumn.DataPropertyName = "CreditLineStatus";
+            this.CreditLineStatusColumn.HeaderText = "额度状态";
+            this.CreditLineStatusColumn.Name = "CreditLineStatusColumn";
+            this.CreditLineStatusColumn.ReadOnly = true;
+            // 
+            // FreezeReasonColumn
+            // 
+            this.FreezeReasonColumn.DataPropertyName = "FreezeReason";
+            this.FreezeReasonColumn.HeaderText = "冻结原因";
+            this.FreezeReasonColumn.Name = "FreezeReasonColumn";
+            this.FreezeReasonColumn.ReadOnly = true;
+            // 
+            // FreezerColumn
+            // 
+            this.FreezerColumn.DataPropertyName = "Freezer";
+            this.FreezerColumn.HeaderText = "冻结人";
+            this.FreezerColumn.Name = "FreezerColumn";
+            this.FreezerColumn.ReadOnly = true;
+            // 
+            // FreezeDateColumn
+            // 
+            this.FreezeDateColumn.DataPropertyName = "FreezeDate";
+            this.FreezeDateColumn.HeaderText = "冻结日期";
+            this.FreezeDateColumn.Name = "FreezeDateColumn";
+            this.FreezeDateColumn.ReadOnly = true;
+            // 
+            // UnfreezeReasonColumn
+            // 
+            this.UnfreezeReasonColumn.DataPropertyName = "UnfreezeReason";
+            this.UnfreezeReasonColumn.HeaderText = "解冻原因";
+            this.UnfreezeReasonColumn.Name = "UnfreezeReasonColumn";
+            this.UnfreezeReasonColumn.ReadOnly = true;
+            // 
+            // UnfreezerColumn
+            // 
+            this.UnfreezerColumn.DataPropertyName = "Unfreezer";
+            this.UnfreezerColumn.HeaderText = "解冻人";
+            this.UnfreezerColumn.Name = "UnfreezerColumn";
+            this.UnfreezerColumn.ReadOnly = true;
+            // 
+            // UnfreezeDateColumn
+            // 
+            this.UnfreezeDateColumn.DataPropertyName = "UnfreezeDate";
+            this.UnfreezeDateColumn.HeaderText = "解冻日期";
+            this.UnfreezeDateColumn.Name = "UnfreezeDateColumn";
+            this.UnfreezeDateColumn.ReadOnly = true;
+            // 
+            // CommentColumn
+            // 
+            this.CommentColumn.DataPropertyName = "Comment";
+            this.CommentColumn.HeaderText = "备注";
+            this.CommentColumn.Name = "CommentColumn";
+            this.CommentColumn.ReadOnly = true;
+            // 
             // ClientDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2216,8 +2247,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabControl.PerformLayout();
             this.tabPanelClientCreditLine.ResumeLayout(false);
             this.groupPanelClientCreditCoverMgr.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLine)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineMgrBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLines)).EndInit();
             this.groupPanelClientCreditCover.ResumeLayout(false);
             this.groupPanelClientCreditCover.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineBindingSource)).EndInit();
@@ -2306,9 +2336,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX freezeReasonTextBox;
         private DevComponents.DotNetBar.ButtonX btnClientCreditCoverUnfreeze;
         private DevComponents.DotNetBar.ButtonX btnClientCreditCoverFreeze;
-        private DevComponents.DotNetBar.ButtonX btnClientCreditCoverCancel;
-        private DevComponents.DotNetBar.ButtonX btnClientCreditCoverSave;
-        private DevComponents.DotNetBar.ButtonX btnClientCreditCoverAdd;
+        private DevComponents.DotNetBar.ButtonX btnClientCreditLineCancel;
+        private DevComponents.DotNetBar.ButtonX btnClientCreditLineSave;
+        private DevComponents.DotNetBar.ButtonX btnClientCreditLineAdd;
         private System.Windows.Forms.DateTimePicker freezeDateDateTimePicker;
         private System.Windows.Forms.DateTimePicker unfreezeDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX unfreezerTextBox;
@@ -2330,24 +2360,24 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.Editors.ComboItem comboItem16;
         private DevComponents.Editors.ComboItem comboItem17;
         private DevComponents.Editors.ComboItem comboItem18;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvClientCreditLine;
-        private System.Windows.Forms.BindingSource clientCreditLineMgrBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn29;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvClientCreditLines;
+        private DevComponents.DotNetBar.ButtonX btnClientCreditLineRefresh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn creditLineIDColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientEDICodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreditLineTypeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreditLineCurrencyColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreditLineColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PeriodBeginColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PeriodEndColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ApproveNoColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ApproveTypeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreditLineStatusColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FreezeReasonColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FreezerColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FreezeDateColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UnfreezeReasonColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UnfreezerColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UnfreezeDateColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
     }
 }

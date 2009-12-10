@@ -17,9 +17,31 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     public partial class UserDetail : DevComponents.DotNetBar.Office2007Form
     {
 
-        public enum OpType { NEW_USER, UPDATE_USER, DETAIL_USER };
-
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly OpType opType;
+
+        /// <summary>
+        /// Operation Type
+        /// </summary>
+        public enum OpType
+        {
+            /// <summary>
+            /// New User
+            /// </summary>
+            NEW_USER,
+
+            /// <summary>
+            /// Update User
+            /// </summary>
+            UPDATE_USER,
+
+            /// <summary>
+            /// Detail User
+            /// </summary>
+            DETAIL_USER
+        }
 
         /// <summary>
         /// Initializes a new instance of the UserDetailUI class
@@ -52,6 +74,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 {
                     ControlUtil.setComponetEditable(comp, false);
                 }
+
                 ControlUtil.setComponetEditable(this.btnSave, false);
                 ControlUtil.setComponetEditable(this.btnCancel, false);
             }
@@ -61,6 +84,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
+
                 ControlUtil.setComponetEditable(this.btnSave, true);
                 ControlUtil.setComponetEditable(this.btnCancel, true);
             }
@@ -70,6 +94,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
+
                 ControlUtil.setComponetEditable(this.btnSave, true);
                 ControlUtil.setComponetEditable(this.btnCancel, true);
                 userIDTextBox.ReadOnly = true;

@@ -93,7 +93,7 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnCaseQuery;
         private DevComponents.DotNetBar.ButtonItem btnOverDueQuery;
         private DevComponents.DotNetBar.RibbonBar ribbonBarHelp;
-        private DevComponents.DotNetBar.ButtonItem btnTest;
+        private DevComponents.DotNetBar.ButtonItem btnHelp;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -120,7 +120,7 @@ namespace CMBC.EasyFactor
             this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
             this.ribbonPanelHelp = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarHelp = new DevComponents.DotNetBar.RibbonBar();
-            this.btnTest = new DevComponents.DotNetBar.ButtonItem();
+            this.btnHelp = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanelInfoMgr = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarUserMgr = new DevComponents.DotNetBar.RibbonBar();
             this.btnUserMgr = new DevComponents.DotNetBar.ButtonItem();
@@ -196,13 +196,19 @@ namespace CMBC.EasyFactor
             this.statusbar = new DevComponents.DotNetBar.Bar();
             this.lblCommandStatus = new DevComponents.DotNetBar.LabelItem();
             this.lblCurrentUser = new DevComponents.DotNetBar.LabelItem();
+            this.cbStyleManager = new DevComponents.DotNetBar.ComboBoxItem();
+            this.comboItem1 = new DevComponents.Editors.ComboItem();
+            this.comboItem2 = new DevComponents.Editors.ComboItem();
+            this.comboItem3 = new DevComponents.Editors.ComboItem();
+            this.comboItem4 = new DevComponents.Editors.ComboItem();
+            this.comboItem5 = new DevComponents.Editors.ComboItem();
+            this.comboItem6 = new DevComponents.Editors.ComboItem();
             this.ribbonControl.SuspendLayout();
             this.ribbonPanelHelp.SuspendLayout();
             this.ribbonPanelInfoMgr.SuspendLayout();
             this.ribbonPanelCaseQuery.SuspendLayout();
             this.ribbonPanelReport.SuspendLayout();
             this.ribbonPanelInvoiceMgr.SuspendLayout();
-            this.ribbonDetailPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusbar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -211,12 +217,13 @@ namespace CMBC.EasyFactor
             // 
             // 
             // 
+            this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
-            this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
-            this.ribbonControl.Controls.Add(this.ribbonPanelCaseQuery);
+            this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanelReport);
             this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
+            this.ribbonControl.Controls.Add(this.ribbonPanelCaseQuery);
             this.ribbonControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.ribbonControl.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemInfoMgr,
@@ -231,6 +238,7 @@ namespace CMBC.EasyFactor
             this.ribbonControl.QuickToolbarItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.office2007StartButton,
             this.btnShort1,
+            this.cbStyleManager,
             this.qatCustomizeItem});
             this.ribbonControl.Size = new System.Drawing.Size(1000, 154);
             this.ribbonControl.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -259,7 +267,6 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelHelp.StyleMouseOver.Class = "";
             this.ribbonPanelHelp.TabIndex = 6;
-            this.ribbonPanelHelp.Visible = false;
             // 
             // ribbonBarHelp
             // 
@@ -275,13 +282,13 @@ namespace CMBC.EasyFactor
             this.ribbonBarHelp.ContainerControlProcessDialogKey = true;
             this.ribbonBarHelp.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarHelp.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnTest});
+            this.btnHelp});
             this.ribbonBarHelp.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarHelp.Name = "ribbonBarHelp";
-            this.ribbonBarHelp.Size = new System.Drawing.Size(100, 93);
+            this.ribbonBarHelp.Size = new System.Drawing.Size(167, 93);
             this.ribbonBarHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarHelp.TabIndex = 0;
-            this.ribbonBarHelp.Text = "ribbonBar1";
+            this.ribbonBarHelp.Text = "帮助";
             // 
             // 
             // 
@@ -291,11 +298,12 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonBarHelp.TitleStyleMouseOver.Class = "";
             // 
-            // btnTest
+            // btnHelp
             // 
-            this.btnTest.Name = "btnTest";
-            this.btnTest.SubItemsExpandWidth = 14;
-            this.btnTest.Text = "测试";
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.SubItemsExpandWidth = 14;
+            this.btnHelp.Text = "关于";
+            this.btnHelp.Click += new System.EventHandler(this.About);
             // 
             // ribbonPanelInfoMgr
             // 
@@ -322,6 +330,7 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelInfoMgr.StyleMouseOver.Class = "";
             this.ribbonPanelInfoMgr.TabIndex = 2;
+            this.ribbonPanelInfoMgr.Visible = false;
             // 
             // ribbonBarUserMgr
             // 
@@ -932,7 +941,6 @@ namespace CMBC.EasyFactor
             // 
             // itemInfoMgr
             // 
-            this.itemInfoMgr.Checked = true;
             this.itemInfoMgr.Name = "itemInfoMgr";
             this.itemInfoMgr.Panel = this.ribbonPanelInfoMgr;
             this.itemInfoMgr.Text = "信息管理";
@@ -957,6 +965,7 @@ namespace CMBC.EasyFactor
             // 
             // itemHelp
             // 
+            this.itemHelp.Checked = true;
             this.itemHelp.Name = "itemHelp";
             this.itemHelp.Panel = this.ribbonPanelHelp;
             this.itemHelp.Text = "帮助";
@@ -1156,14 +1165,12 @@ namespace CMBC.EasyFactor
             // 
             // statusbar
             // 
-            this.Controls.Add(this.statusbar);
             this.statusbar.BarType = DevComponents.DotNetBar.eBarType.StatusBar;
             this.statusbar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.statusbar.DockSide = DevComponents.DotNetBar.eDockSide.Document;
             this.statusbar.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.lblCommandStatus,
             this.lblCurrentUser});
-            this.statusbar.Location = new System.Drawing.Point(0, 552);
+            this.statusbar.Location = new System.Drawing.Point(4, 707);
             this.statusbar.Name = "statusbar";
             this.statusbar.Size = new System.Drawing.Size(1000, 21);
             this.statusbar.Stretch = true;
@@ -1180,11 +1187,50 @@ namespace CMBC.EasyFactor
             // 
             this.lblCurrentUser.Name = "lblCurrentUser";
             // 
+            // cbStyleManager
+            // 
+            this.cbStyleManager.ComboWidth = 100;
+            this.cbStyleManager.DropDownHeight = 106;
+            this.cbStyleManager.Items.AddRange(new object[] {
+            this.comboItem1,
+            this.comboItem2,
+            this.comboItem3,
+            this.comboItem4,
+            this.comboItem5,
+            this.comboItem6});
+            this.cbStyleManager.Name = "cbStyleManager";
+            this.cbStyleManager.SelectedIndexChanged += new System.EventHandler(this.ChangeStyle);
+            // 
+            // comboItem1
+            // 
+            this.comboItem1.Text = "Office2007Blue";
+            // 
+            // comboItem2
+            // 
+            this.comboItem2.Text = "Office2007Silver";
+            // 
+            // comboItem3
+            // 
+            this.comboItem3.Text = "Office2007Black";
+            // 
+            // comboItem4
+            // 
+            this.comboItem4.Text = "Office2007VistaGlass";
+            // 
+            // comboItem5
+            // 
+            this.comboItem5.Text = "Office2010Silver";
+            // 
+            // comboItem6
+            // 
+            this.comboItem6.Text = "Windows7Blue";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 730);
+            this.Controls.Add(this.statusbar);
             this.Controls.Add(this.ribbonDetailPanel);
             this.Controls.Add(this.ribbonControl);
             this.Name = "MainWindow";
@@ -1197,12 +1243,19 @@ namespace CMBC.EasyFactor
             this.ribbonPanelCaseQuery.ResumeLayout(false);
             this.ribbonPanelReport.ResumeLayout(false);
             this.ribbonPanelInvoiceMgr.ResumeLayout(false);
-            this.ribbonDetailPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.statusbar)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.ComboBoxItem cbStyleManager;
+        private DevComponents.Editors.ComboItem comboItem1;
+        private DevComponents.Editors.ComboItem comboItem2;
+        private DevComponents.Editors.ComboItem comboItem3;
+        private DevComponents.Editors.ComboItem comboItem4;
+        private DevComponents.Editors.ComboItem comboItem5;
+        private DevComponents.Editors.ComboItem comboItem6;
     }
 }
