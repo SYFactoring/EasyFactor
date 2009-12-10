@@ -98,7 +98,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientCreditLineCancel = new DevComponents.DotNetBar.ButtonX();
             this.btnClientCreditLineSave = new DevComponents.DotNetBar.ButtonX();
             this.freezerTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btnClientCreditLineAdd = new DevComponents.DotNetBar.ButtonX();
+            this.btnClientCreditLineNew = new DevComponents.DotNetBar.ButtonX();
             this.creditLineStatusTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.approveTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.approveNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -963,7 +963,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientCreditCover.Controls.Add(freezerLabel);
             this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditLineSave);
             this.groupPanelClientCreditCover.Controls.Add(this.freezerTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditLineAdd);
+            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditLineNew);
             this.groupPanelClientCreditCover.Controls.Add(creditLineStatusLabel);
             this.groupPanelClientCreditCover.Controls.Add(this.creditLineStatusTextBox);
             this.groupPanelClientCreditCover.Controls.Add(approveTypeLabel);
@@ -1164,15 +1164,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // btnClientCreditLineAdd
             // 
-            this.btnClientCreditLineAdd.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClientCreditLineAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditLineAdd.Location = new System.Drawing.Point(130, 279);
-            this.btnClientCreditLineAdd.Name = "btnClientCreditLineAdd";
-            this.btnClientCreditLineAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnClientCreditLineAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClientCreditLineAdd.TabIndex = 16;
-            this.btnClientCreditLineAdd.Text = "新建";
-            this.btnClientCreditLineAdd.Click += new System.EventHandler(this.NewClientCreditLine);
+            this.btnClientCreditLineNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClientCreditLineNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnClientCreditLineNew.Location = new System.Drawing.Point(130, 279);
+            this.btnClientCreditLineNew.Name = "btnClientCreditLineAdd";
+            this.btnClientCreditLineNew.Size = new System.Drawing.Size(75, 23);
+            this.btnClientCreditLineNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClientCreditLineNew.TabIndex = 16;
+            this.btnClientCreditLineNew.Text = "新建";
+            this.btnClientCreditLineNew.Click += new System.EventHandler(this.NewClientCreditLine);
             // 
             // creditLineStatusTextBox
             // 
@@ -2338,7 +2338,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.ButtonX btnClientCreditCoverFreeze;
         private DevComponents.DotNetBar.ButtonX btnClientCreditLineCancel;
         private DevComponents.DotNetBar.ButtonX btnClientCreditLineSave;
-        private DevComponents.DotNetBar.ButtonX btnClientCreditLineAdd;
+        private DevComponents.DotNetBar.ButtonX btnClientCreditLineNew;
         private System.Windows.Forms.DateTimePicker freezeDateDateTimePicker;
         private System.Windows.Forms.DateTimePicker unfreezeDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX unfreezerTextBox;

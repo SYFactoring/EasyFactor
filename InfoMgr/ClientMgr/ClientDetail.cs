@@ -198,7 +198,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 ControlUtil.setComponetEditable(comp, false);
             }
 
-            ControlUtil.setComponetEditable(this.btnClientCreditLineAdd, true);
+            ControlUtil.setComponetEditable(this.btnClientCreditLineNew, true);
             ControlUtil.setComponetEditable(this.btnClientCreditLineRefresh, true);
         }
 
@@ -299,10 +299,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
             creditLine.CreditLineCurrency = (string)this.creditLineCurrencyComboBox.SelectedValue;
+            creditLine.PeriodBegin = this.periodBeginDateTimePicker.Value;
+            creditLine.PeriodEnd = this.periodEndDateTimePicker.Value;
 
-            if (creditLine.CreditLineID == null)
+            if (creditLine.CreditLineID == 0)
             {
-                creditLine.CreditLineID = "ABCDEFG";
                 creditLine.Client = client;
 
                 bool isAddOK = true;
@@ -360,7 +361,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void FreezeClientCreditLine(object sender, EventArgs e)
         {
-
+            this.freezeReasonTextBox.ReadOnly = false;
+            this.freezerTextBox.Text = App.Current.CurUser.Name;
+            this.freezeDateDateTimePicker.Value = System.DateTime.Now;
         }
 
         /// <summary>
@@ -370,7 +373,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UnfreezeClientCreditLine(object sender, EventArgs e)
         {
-
+            this.unfreezeReasonTextBox.ReadOnly = false;
+            this.unfreezerTextBox.Text = App.Current.CurUser.Name;
+            this.unfreezeDateDateTimePicker.Value = System.DateTime.Now;
         }
 
         private void RefreshClientCreditLine(object sender, EventArgs e)
@@ -388,13 +393,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 return;
             }
-            string cid = (string)dgvClientCreditLines["creditLineIDColumn", dgvClientCreditLines.SelectedRows[0].Index].Value;
-            if (cid != null)
+            int cid = (int)dgvClientCreditLines["creditLineIDColumn", dgvClientCreditLines.SelectedRows[0].Index].Value;
+            if (cid != 0)
             {
                 ClientCreditLine selectedClientCreditLine = App.Current.DbContext.ClientCreditLines.SingleOrDefault(c => c.CreditLineID == cid);
                 if (selectedClientCreditLine != null)
                 {
                     this.clientCreditLineBindingSource.DataSource = selectedClientCreditLine;
+                    this.btnClientCreditCoverFreeze.Enabled = true;
+                    this.btnClientCreditCoverUnfreeze.Enabled = true;
+                    this.btnClientCreditLineNew.Enabled = true;
+                    this.btnClientCreditLineCancel.Enabled = true;
+                    this.btnClientCreditLineSave.Enabled = true;
                 }
             }
         }
