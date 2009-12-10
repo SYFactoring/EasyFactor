@@ -17,10 +17,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
     public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
     {
-        /// <summary>
-        /// original client
-        /// </summary>
-        private readonly Client originalClient;
 
         public enum OpType { NEW_CLIENT, UPDATE_CLIENT, DETAIL_CLIENT, UPDATE_CLIENT_CREDIT_COVER };
 
@@ -34,31 +30,23 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientDetail(Client client, OpType opType)
         {
             this.InitializeComponent();
-            Client updateClient = new Client();
             this.opType = opType;
-            if (opType == OpType.UPDATE_CLIENT)
+            if (opType == OpType.NEW_CLIENT)
             {
-                this.originalClient = client;
-            }
-            if (client != null)
-            {
-                updateClient.Copy(client);
-            }
-            if (opType == OpType.DETAIL_CLIENT)
-            {
-                this.clientBindingSource.DataSource = client;
+                 this.clientBindingSource.DataSource = new Client();
             }
             else
             {
-                this.clientBindingSource.DataSource = updateClient;
+                 this.clientBindingSource.DataSource = client;
             }
+
             this.UpdateEditableStatus();
-            InitComboBox(updateClient);
+            InitComboBox(client);
             // this.creditLineMgrBindingSource.DataSource = updateClient.ClientCreditLines;
             // this.clientAccountMgrBindingSource.DataSource = updateClient.ClientAccounts;
         }
 
-        private void InitComboBox(Client client)
+        private void InitComboBox(Client updateClient)
         {
             this.countryCodeComboBox.DataSource = App.Current.DbContext.Countries;
             this.countryCodeComboBox.DisplayMember = "CountryFormatCN";
@@ -80,7 +68,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             foreach (Country country in this.countryCodeComboBox.Items)
             {
-                if (country.CountryCode.Equals(client.CountryCode))
+                if (country.CountryCode.Equals(updateClient.CountryCode))
                 {
                     this.countryCodeComboBox.SelectedItem = country;
                     break;
@@ -110,7 +98,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     ControlUtil.setComponetEditable(comp, false);
                 }
-                ControlUtil.setComponetEditable(this.btnClientCancel, false);
+                ControlUtil.setComponetEditable(this.btnClientCancel, true);
                 ControlUtil.setComponetEditable(this.btnClientSave, false);
             }
             else if (opType == OpType.NEW_CLIENT)
@@ -172,7 +160,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void Save(object sender, EventArgs e)
         {
             this.clientBindingSource.EndEdit();
-            Client updateClient = (Client)this.clientBindingSource.DataSource;
+            Client client = (Client)this.clientBindingSource.DataSource;
+            client.ClientType = this.clientTypeComboBox.Text;
+            client.ClientLevel = this.clientLevelComboBox.Text;
+            client.IsGroup = this.isGroupComboBox.Text;
+            client.BranchCode = (string)this.departmentComboTree.SelectedValue;
+            client.CountryCode = (string)this.countryCodeComboBox.SelectedValue;
+            client.Industry = this.industryComboBox.Text;
 
             //System.Data.Linq.EntitySet<ClientAccount> cAccounts = (System.Data.Linq.EntitySet<ClientAccount>)this.clientAccountMgrBindingSource.DataSource;
             //ClientAccount cAccount = (ClientAccount)this.clientAccountBindingSource.DataSource;
@@ -187,7 +181,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 bool isAddOK = true;
                 try
                 {
-                    App.Current.DbContext.Clients.InsertOnSubmit(updateClient);
+                    App.Current.DbContext.Clients.InsertOnSubmit(client);
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e1)
@@ -199,15 +193,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Close();
                 }
             }
             else if (opType == OpType.UPDATE_CLIENT)
             {
                 bool isUpdateOK = true;
-                Client tempClient = new Client();
-                tempClient.Copy(this.originalClient);
-                this.originalClient.Copy(updateClient);
                 try
                 {
                     App.Current.DbContext.SubmitChanges();
@@ -215,14 +205,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 catch (System.Data.Linq.ChangeConflictException e2)
                 {
                     isUpdateOK = false;
-                    this.originalClient.Copy(tempClient);
                     MessageBox.Show(e2.GetType().ToString() + " " + e2.Message);
                 }
 
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Close();
                 }
             }
         }
@@ -235,6 +223,31 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void Cancel(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void NewClientCreditCover(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SaveClientCreditCover(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CancelClientCreditCover(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FreezeClientCreditCover(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UnfreezeClientCreditCover(object sender, EventArgs e)
+        {
+
         }
 
     }

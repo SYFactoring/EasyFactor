@@ -13,6 +13,9 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
         public CaseAppUI()
         {
             InitializeComponent();
+            this.cbInvoiceCurrency.DataSource = App.Current.DbContext.Currencies;
+            this.cbInvoiceCurrency.DisplayMember = "CurrencyFormat";
+            this.cbInvoiceCurrency.ValueMember = "CurrencyCode";
         }
 
         private void SellerFactorSelect(object sender, EventArgs e)

@@ -59,7 +59,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemUpdateClient = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDeleteClient = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemImportClients = new System.Windows.Forms.ToolStripMenuItem();
-            this.clientMgrBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pnlQuery = new DevComponents.DotNetBar.PanelEx();
             this.comboTreeDepartment = new DevComponents.DotNetBar.Controls.ComboTree();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
@@ -81,7 +80,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbPM = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblPM = new DevComponents.DotNetBar.LabelX();
             this.lblDepartment = new DevComponents.DotNetBar.LabelX();
-            this.dgvClient = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.dgvClients = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.ClientCoreNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clientNameCNDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -115,11 +114,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.pMNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnRMName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.elementStyle1 = new DevComponents.DotNetBar.ElementStyle();
             this.contextMenuClientMgr.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.clientMgrBindingSource)).BeginInit();
             this.pnlQuery.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuClientMgr
@@ -197,10 +194,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemImportClients.Size = new System.Drawing.Size(146, 22);
             this.menuItemImportClients.Text = "导入客户";
             this.menuItemImportClients.Click += new System.EventHandler(this.ImportClients);
-            // 
-            // clientMgrBindingSource
-            // 
-            this.clientMgrBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Client);
             // 
             // pnlQuery
             // 
@@ -434,11 +427,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // dgvClient
             // 
-            this.dgvClient.AllowUserToAddRows = false;
-            this.dgvClient.AllowUserToDeleteRows = false;
-            this.dgvClient.AllowUserToOrderColumns = true;
-            this.dgvClient.AutoGenerateColumns = false;
-            this.dgvClient.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvClients.AllowUserToAddRows = false;
+            this.dgvClients.AllowUserToDeleteRows = false;
+            this.dgvClients.AllowUserToOrderColumns = true;
+            this.dgvClients.AutoGenerateColumns = false;
+            this.dgvClients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -446,9 +439,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClient.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvClients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ClientCoreNoColumn,
             this.clientEDICodeColumn,
             this.clientNameCNDataGridViewTextBoxColumn,
@@ -482,8 +475,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.pMNameDataGridViewTextBoxColumn,
             this.ColumnRMName,
             this.commentDataGridViewTextBoxColumn});
-            this.dgvClient.ContextMenuStrip = this.contextMenuClientMgr;
-            this.dgvClient.DataSource = this.clientMgrBindingSource;
+            this.dgvClients.ContextMenuStrip = this.contextMenuClientMgr;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -491,18 +483,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClient.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvClient.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvClient.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvClient.Location = new System.Drawing.Point(0, 61);
-            this.dgvClient.MultiSelect = false;
-            this.dgvClient.Name = "dgvClient";
-            this.dgvClient.ReadOnly = true;
-            this.dgvClient.RowTemplate.Height = 23;
-            this.dgvClient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClient.Size = new System.Drawing.Size(800, 539);
-            this.dgvClient.TabIndex = 2;
-            this.dgvClient.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClient_CellDoubleClick);
+            this.dgvClients.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvClients.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvClients.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvClients.Location = new System.Drawing.Point(0, 61);
+            this.dgvClients.MultiSelect = false;
+            this.dgvClients.Name = "dgvClient";
+            this.dgvClients.ReadOnly = true;
+            this.dgvClients.RowTemplate.Height = 23;
+            this.dgvClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvClients.Size = new System.Drawing.Size(800, 539);
+            this.dgvClients.TabIndex = 2;
+            this.dgvClients.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
             // ClientCoreNoColumn
             // 
@@ -646,7 +638,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // CountryCode
             // 
-            this.CountryCode.DataPropertyName = "CountryCode";
+            this.CountryCode.DataPropertyName = "CountryNameCN";
             this.CountryCode.HeaderText = "国家";
             this.CountryCode.Name = "CountryCode";
             this.CountryCode.ReadOnly = true;
@@ -789,32 +781,25 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.commentDataGridViewTextBoxColumn.ReadOnly = true;
             this.commentDataGridViewTextBoxColumn.Width = 56;
             // 
-            // elementStyle1
-            // 
-            this.elementStyle1.Class = "";
-            this.elementStyle1.Name = "elementStyle1";
-            // 
             // ClientMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.dgvClient);
+            this.Controls.Add(this.dgvClients);
             this.Controls.Add(this.pnlQuery);
             this.Name = "ClientMgr";
             this.Size = new System.Drawing.Size(800, 600);
             this.contextMenuClientMgr.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.clientMgrBindingSource)).EndInit();
             this.pnlQuery.ResumeLayout(false);
             this.pnlQuery.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.BindingSource clientMgrBindingSource;
         private DevComponents.DotNetBar.PanelEx pnlQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
         private DevComponents.DotNetBar.LabelX lblClientName;
@@ -826,7 +811,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.LabelX lblClientType;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
         private DevComponents.DotNetBar.LabelX lblClientNo;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvClient;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvClients;
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientType;
         private DevComponents.DotNetBar.LabelX lblCount;
@@ -866,7 +851,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnRMName;
         private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
         private DevComponents.DotNetBar.Controls.ComboTree comboTreeDepartment;
-        private DevComponents.DotNetBar.ElementStyle elementStyle1;
         private DevComponents.Editors.ComboItem comboItem1;
         private DevComponents.Editors.ComboItem comboItem2;
         private DevComponents.Editors.ComboItem comboItem3;

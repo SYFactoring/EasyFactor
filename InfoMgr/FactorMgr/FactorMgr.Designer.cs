@@ -15,7 +15,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.BindingSource factorMgrBindingSource;
         private System.Windows.Forms.ContextMenuStrip contextMenuFactorMgr;
         private System.Windows.Forms.ToolStripMenuItem menuItemSelect;
         private System.Windows.Forms.ToolStripMenuItem menuItemDetail;
@@ -72,7 +71,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.tbFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFactorCode = new DevComponents.DotNetBar.LabelX();
             this.lblFactorType = new DevComponents.DotNetBar.LabelX();
-            this.dgvFactor = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.dgvFactors = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.factorCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -108,11 +107,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.factorMgrBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.contextMenuFactorMgr.SuspendLayout();
             this.panelQuery.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFactor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.factorMgrBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFactors)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuFactorMgr
@@ -130,14 +127,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.menuItemSelect.Name = "menuItemSelect";
             this.menuItemSelect.Size = new System.Drawing.Size(98, 22);
             this.menuItemSelect.Text = "选定";
-            this.menuItemSelect.Click += new System.EventHandler(this.ItemSelect);
+            this.menuItemSelect.Click += new System.EventHandler(this.SelectFactor);
             // 
             // menuItemDetail
             // 
             this.menuItemDetail.Name = "menuItemDetail";
             this.menuItemDetail.Size = new System.Drawing.Size(98, 22);
             this.menuItemDetail.Text = "详细";
-            this.menuItemDetail.Click += new System.EventHandler(this.ItemDetail);
+            this.menuItemDetail.Click += new System.EventHandler(this.DetailFactor);
             // 
             // toolStripSeparator
             // 
@@ -160,28 +157,28 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.menuItemNew.Name = "menuItemNew";
             this.menuItemNew.Size = new System.Drawing.Size(98, 22);
             this.menuItemNew.Text = "新建";
-            this.menuItemNew.Click += new System.EventHandler(this.ItemNew);
+            this.menuItemNew.Click += new System.EventHandler(this.NewFactor);
             // 
             // menuItemUpdate
             // 
             this.menuItemUpdate.Name = "menuItemUpdate";
             this.menuItemUpdate.Size = new System.Drawing.Size(98, 22);
             this.menuItemUpdate.Text = "更新";
-            this.menuItemUpdate.Click += new System.EventHandler(this.ItemUpdate);
+            this.menuItemUpdate.Click += new System.EventHandler(this.UpdateFactor);
             // 
             // menuItemDelete
             // 
             this.menuItemDelete.Name = "menuItemDelete";
             this.menuItemDelete.Size = new System.Drawing.Size(98, 22);
             this.menuItemDelete.Text = "删除";
-            this.menuItemDelete.Click += new System.EventHandler(this.ItemDelete);
+            this.menuItemDelete.Click += new System.EventHandler(this.DeleteFactor);
             // 
             // menuItemImport
             // 
             this.menuItemImport.Name = "menuItemImport";
             this.menuItemImport.Size = new System.Drawing.Size(98, 22);
             this.menuItemImport.Text = "导入";
-            this.menuItemImport.Click += new System.EventHandler(this.ItemImport);
+            this.menuItemImport.Click += new System.EventHandler(this.ImportFactosImpl);
             // 
             // panelQuery
             // 
@@ -262,7 +259,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 6;
             this.btnQuery.Text = "查询";
-            this.btnQuery.Click += new System.EventHandler(this.Query);
+            this.btnQuery.Click += new System.EventHandler(this.QueryFactors);
             // 
             // tbFactorName
             // 
@@ -324,13 +321,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // dgvFactor
             // 
-            this.dgvFactor.AllowUserToAddRows = false;
-            this.dgvFactor.AllowUserToDeleteRows = false;
-            this.dgvFactor.AllowUserToOrderColumns = true;
-            this.dgvFactor.AutoGenerateColumns = false;
-            this.dgvFactor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgvFactor.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dgvFactor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvFactors.AllowUserToAddRows = false;
+            this.dgvFactors.AllowUserToDeleteRows = false;
+            this.dgvFactors.AllowUserToOrderColumns = true;
+            this.dgvFactors.AutoGenerateColumns = false;
+            this.dgvFactors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvFactors.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgvFactors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn6,
             this.factorCodeColumn,
@@ -366,9 +363,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn34,
             this.dataGridViewTextBoxColumn35,
             this.dataGridViewTextBoxColumn36});
-            this.dgvFactor.ContextMenuStrip = this.contextMenuFactorMgr;
-            this.dgvFactor.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dgvFactor.DataSource = this.factorMgrBindingSource;
+            this.dgvFactors.ContextMenuStrip = this.contextMenuFactorMgr;
+            this.dgvFactors.Cursor = System.Windows.Forms.Cursors.Default;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -376,18 +372,18 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactor.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvFactor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvFactor.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvFactor.Location = new System.Drawing.Point(0, 34);
-            this.dgvFactor.MultiSelect = false;
-            this.dgvFactor.Name = "dgvFactor";
-            this.dgvFactor.ReadOnly = true;
-            this.dgvFactor.RowTemplate.Height = 23;
-            this.dgvFactor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFactor.Size = new System.Drawing.Size(911, 314);
-            this.dgvFactor.TabIndex = 2;
-            this.dgvFactor.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
+            this.dgvFactors.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvFactors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvFactors.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvFactors.Location = new System.Drawing.Point(0, 34);
+            this.dgvFactors.MultiSelect = false;
+            this.dgvFactors.Name = "dgvFactor";
+            this.dgvFactors.ReadOnly = true;
+            this.dgvFactors.RowTemplate.Height = 23;
+            this.dgvFactors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvFactors.Size = new System.Drawing.Size(911, 314);
+            this.dgvFactors.TabIndex = 2;
+            this.dgvFactors.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -668,23 +664,18 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dataGridViewTextBoxColumn36.ReadOnly = true;
             this.dataGridViewTextBoxColumn36.Width = 56;
             // 
-            // factorMgrBindingSource
-            // 
-            this.factorMgrBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Factor);
-            // 
             // FactorMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.Controls.Add(this.dgvFactor);
+            this.Controls.Add(this.dgvFactors);
             this.Controls.Add(this.panelQuery);
             this.Name = "FactorMgr";
             this.Size = new System.Drawing.Size(911, 348);
             this.contextMenuFactorMgr.ResumeLayout(false);
             this.panelQuery.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFactor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.factorMgrBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFactors)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -698,7 +689,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private DevComponents.DotNetBar.LabelX lblFactorType;
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvFactor;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvFactors;
         private DevComponents.DotNetBar.LabelX lblCount;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbFactorType;
         private DevComponents.Editors.ComboItem comboItem1;

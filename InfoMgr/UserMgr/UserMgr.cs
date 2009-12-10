@@ -118,7 +118,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             string uid = (string)dgvUsers["userIdColumn", dgvUsers.SelectedRows[0].Index].Value;
             if (uid != null)
             {
-                User selectedUser = App.Current.DbContext.Users.FirstOrDefault(u => u.UserID == uid);
+                User selectedUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid);
                 if (selectedUser != null)
                 {
                     new UserDetail(selectedUser, UserDetail.OpType.UPDATE_USER).ShowDialog(this);
@@ -141,12 +141,12 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             string uid = (string)dgvUsers["userIdColumn", dgvUsers.SelectedRows[0].Index].Value;
             if (uid != null)
             {
-                User selectedUser = App.Current.DbContext.Users.FirstOrDefault(u => u.UserID == uid);
+                User selectedUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid);
                 if (selectedUser != null)
                 {
                     if (MessageBox.Show("是否确定删除帐号: " + selectedUser.UserID, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        dgvUsers.Rows.Remove(dgvUsers.CurrentRow);
+                        dgvUsers.Rows.Remove(dgvUsers.SelectedRows[0]);
                         App.Current.DbContext.Users.DeleteOnSubmit(selectedUser);
                         App.Current.DbContext.SubmitChanges();
                     }
@@ -169,7 +169,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             string uid = (string)dgvUsers["userIdColumn", dgvUsers.SelectedRows[0].Index].Value;
             if (uid != null)
             {
-                User selectedUser = App.Current.DbContext.Users.FirstOrDefault(u => u.UserID == uid);
+                User selectedUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid);
                 if (selectedUser != null)
                 {
                     this.Selected = selectedUser;
@@ -197,7 +197,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             string uid = (string)dgvUsers["userIdColumn", dgvUsers.SelectedRows[0].Index].Value;
             if (uid != null)
             {
-                User selectedUser = App.Current.DbContext.Users.FirstOrDefault(u => u.UserID == uid);
+                User selectedUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid);
                 if (selectedUser != null)
                 {
                     new UserDetail(selectedUser, UserDetail.OpType.DETAIL_USER).ShowDialog(this);

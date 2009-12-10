@@ -37,29 +37,27 @@
             this.lblDeparmentName = new DevComponents.DotNetBar.LabelX();
             this.tbDepartmentCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDepartmentCode = new DevComponents.DotNetBar.LabelX();
-            this.departmentMgrBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dgvDepartments = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.dgvDepts = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.departmentCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DepartmentCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DepartmentNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LocationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DomainColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddressCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddressENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PostCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ManagerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Contract_1Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email_1Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Phone_1Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fax_1Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Contract_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Phone_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fax_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.departmentMgrBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDepartments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDepts)).BeginInit();
             this.cmuDeptMgr.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -159,36 +157,31 @@
             this.lblDepartmentCode.TabIndex = 0;
             this.lblDepartmentCode.Text = "分部编号";
             // 
-            // departmentMgrBindingSource
+            // dgvDepts
             // 
-            this.departmentMgrBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Department);
-            // 
-            // dgvDepartments
-            // 
-            this.dgvDepartments.AllowUserToAddRows = false;
-            this.dgvDepartments.AllowUserToDeleteRows = false;
-            this.dgvDepartments.AutoGenerateColumns = false;
-            this.dgvDepartments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgvDepartments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDepartments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.departmentCodeColumn,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12,
-            this.dataGridViewTextBoxColumn13,
-            this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15,
-            this.dataGridViewTextBoxColumn16});
-            this.dgvDepartments.ContextMenuStrip = this.cmuDeptMgr;
-            this.dgvDepartments.DataSource = this.departmentMgrBindingSource;
+            this.dgvDepts.AllowUserToAddRows = false;
+            this.dgvDepts.AllowUserToDeleteRows = false;
+            this.dgvDepts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvDepts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgvDepts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDepts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DepartmentCodeColumn,
+            this.DepartmentNameColumn,
+            this.LocationColumn,
+            this.DomainColumn,
+            this.AddressCNColumn,
+            this.AddressENColumn,
+            this.PostCodeColumn,
+            this.ManagerColumn,
+            this.Contract_1Column,
+            this.Email_1Column,
+            this.Phone_1Column,
+            this.Fax_1Column,
+            this.Contract_2Column,
+            this.Email_2Column,
+            this.Phone_2Column,
+            this.Fax_2Column});
+            this.dgvDepts.ContextMenuStrip = this.cmuDeptMgr;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -196,16 +189,17 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDepartments.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvDepartments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDepartments.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvDepartments.Location = new System.Drawing.Point(0, 31);
-            this.dgvDepartments.MultiSelect = false;
-            this.dgvDepartments.Name = "dgvDepartments";
-            this.dgvDepartments.ReadOnly = true;
-            this.dgvDepartments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDepartments.Size = new System.Drawing.Size(605, 429);
-            this.dgvDepartments.TabIndex = 1;
+            this.dgvDepts.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvDepts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDepts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvDepts.Location = new System.Drawing.Point(0, 31);
+            this.dgvDepts.MultiSelect = false;
+            this.dgvDepts.Name = "dgvDepts";
+            this.dgvDepts.ReadOnly = true;
+            this.dgvDepts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDepts.Size = new System.Drawing.Size(605, 429);
+            this.dgvDepts.TabIndex = 1;
+            this.dgvDepts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
             // cmuDeptMgr
             // 
@@ -221,146 +215,145 @@
             this.menuItemSelect.Text = "选定";
             this.menuItemSelect.Click += new System.EventHandler(this.SelectDepartment);
             // 
-            // departmentCodeColumn
+            // DepartmentCodeColumn
             // 
-            this.departmentCodeColumn.DataPropertyName = "DepartmentCode";
-            this.departmentCodeColumn.HeaderText = "分部编号";
-            this.departmentCodeColumn.Name = "departmentCodeColumn";
-            this.departmentCodeColumn.ReadOnly = true;
-            this.departmentCodeColumn.Width = 80;
+            this.DepartmentCodeColumn.DataPropertyName = "DepartmentCode";
+            this.DepartmentCodeColumn.HeaderText = "部门代码";
+            this.DepartmentCodeColumn.Name = "DepartmentCodeColumn";
+            this.DepartmentCodeColumn.ReadOnly = true;
+            this.DepartmentCodeColumn.Width = 80;
             // 
-            // dataGridViewTextBoxColumn2
+            // DepartmentNameColumn
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "DepartmentName";
-            this.dataGridViewTextBoxColumn2.HeaderText = "分部名称";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 80;
+            this.DepartmentNameColumn.DataPropertyName = "DepartmentName";
+            this.DepartmentNameColumn.HeaderText = "部门名称";
+            this.DepartmentNameColumn.Name = "DepartmentNameColumn";
+            this.DepartmentNameColumn.ReadOnly = true;
+            this.DepartmentNameColumn.Width = 80;
             // 
-            // dataGridViewTextBoxColumn3
+            // LocationColumn
             // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Location";
-            this.dataGridViewTextBoxColumn3.HeaderText = "城市";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 56;
+            this.LocationColumn.DataPropertyName = "Location";
+            this.LocationColumn.HeaderText = "城市";
+            this.LocationColumn.Name = "LocationColumn";
+            this.LocationColumn.ReadOnly = true;
+            this.LocationColumn.Width = 56;
             // 
-            // dataGridViewTextBoxColumn4
+            // DomainColumn
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Domain";
-            this.dataGridViewTextBoxColumn4.HeaderText = "事业部";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 68;
+            this.DomainColumn.DataPropertyName = "Domain";
+            this.DomainColumn.HeaderText = "事业部";
+            this.DomainColumn.Name = "DomainColumn";
+            this.DomainColumn.ReadOnly = true;
+            this.DomainColumn.Width = 68;
             // 
-            // dataGridViewTextBoxColumn5
+            // AddressCNColumn
             // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "AddressCN";
-            this.dataGridViewTextBoxColumn5.HeaderText = "中文地址";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 80;
+            this.AddressCNColumn.DataPropertyName = "AddressCN";
+            this.AddressCNColumn.HeaderText = "中文地址";
+            this.AddressCNColumn.Name = "AddressCNColumn";
+            this.AddressCNColumn.ReadOnly = true;
+            this.AddressCNColumn.Width = 80;
             // 
-            // dataGridViewTextBoxColumn6
+            // AddressENColumn
             // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "AddressEN";
-            this.dataGridViewTextBoxColumn6.HeaderText = "英文地址";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.Width = 80;
+            this.AddressENColumn.DataPropertyName = "AddressEN";
+            this.AddressENColumn.HeaderText = "英文地址";
+            this.AddressENColumn.Name = "AddressENColumn";
+            this.AddressENColumn.ReadOnly = true;
+            this.AddressENColumn.Width = 80;
             // 
-            // dataGridViewTextBoxColumn7
+            // PostCodeColumn
             // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "PostCode";
-            this.dataGridViewTextBoxColumn7.HeaderText = "邮编";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.Width = 56;
+            this.PostCodeColumn.DataPropertyName = "PostCode";
+            this.PostCodeColumn.HeaderText = "邮编";
+            this.PostCodeColumn.Name = "PostCodeColumn";
+            this.PostCodeColumn.ReadOnly = true;
+            this.PostCodeColumn.Width = 56;
             // 
-            // dataGridViewTextBoxColumn8
+            // ManagerColumn
             // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "Manager";
-            this.dataGridViewTextBoxColumn8.HeaderText = "负责人";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.Width = 68;
+            this.ManagerColumn.DataPropertyName = "Manager";
+            this.ManagerColumn.HeaderText = "负责人";
+            this.ManagerColumn.Name = "ManagerColumn";
+            this.ManagerColumn.ReadOnly = true;
+            this.ManagerColumn.Width = 68;
             // 
-            // dataGridViewTextBoxColumn9
+            // Contract_1Column
             // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "Contract_1";
-            this.dataGridViewTextBoxColumn9.HeaderText = "联系人 1";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.Width = 77;
+            this.Contract_1Column.DataPropertyName = "Contract_1";
+            this.Contract_1Column.HeaderText = "联系人1";
+            this.Contract_1Column.Name = "Contract_1Column";
+            this.Contract_1Column.ReadOnly = true;
+            this.Contract_1Column.Width = 74;
             // 
-            // dataGridViewTextBoxColumn10
+            // Email_1Column
             // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "Email_1";
-            this.dataGridViewTextBoxColumn10.HeaderText = "Email 1";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            this.dataGridViewTextBoxColumn10.Width = 66;
+            this.Email_1Column.DataPropertyName = "Email_1";
+            this.Email_1Column.HeaderText = "Email";
+            this.Email_1Column.Name = "Email_1Column";
+            this.Email_1Column.ReadOnly = true;
+            this.Email_1Column.Width = 57;
             // 
-            // dataGridViewTextBoxColumn11
+            // Phone_1Column
             // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "Phone_1";
-            this.dataGridViewTextBoxColumn11.HeaderText = "联系电话 1";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            this.dataGridViewTextBoxColumn11.Width = 89;
+            this.Phone_1Column.DataPropertyName = "Phone_1";
+            this.Phone_1Column.HeaderText = "联系电话";
+            this.Phone_1Column.Name = "Phone_1Column";
+            this.Phone_1Column.ReadOnly = true;
+            this.Phone_1Column.Width = 80;
             // 
-            // dataGridViewTextBoxColumn12
+            // Fax_1Column
             // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "Fax_1";
-            this.dataGridViewTextBoxColumn12.HeaderText = "传真 1";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            this.dataGridViewTextBoxColumn12.Width = 65;
+            this.Fax_1Column.DataPropertyName = "Fax_1";
+            this.Fax_1Column.HeaderText = "传真";
+            this.Fax_1Column.Name = "Fax_1Column";
+            this.Fax_1Column.ReadOnly = true;
+            this.Fax_1Column.Width = 56;
             // 
-            // dataGridViewTextBoxColumn13
+            // Contract_2Column
             // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "Contract_2";
-            this.dataGridViewTextBoxColumn13.HeaderText = "联系人 2";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            this.dataGridViewTextBoxColumn13.Width = 77;
+            this.Contract_2Column.DataPropertyName = "Contract_2";
+            this.Contract_2Column.HeaderText = "联系人2";
+            this.Contract_2Column.Name = "Contract_2Column";
+            this.Contract_2Column.ReadOnly = true;
+            this.Contract_2Column.Width = 74;
             // 
-            // dataGridViewTextBoxColumn14
+            // Email_2Column
             // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "Email_2";
-            this.dataGridViewTextBoxColumn14.HeaderText = "Email 2";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            this.dataGridViewTextBoxColumn14.Width = 66;
+            this.Email_2Column.DataPropertyName = "Email_2";
+            this.Email_2Column.HeaderText = "Email";
+            this.Email_2Column.Name = "Email_2Column";
+            this.Email_2Column.ReadOnly = true;
+            this.Email_2Column.Width = 57;
             // 
-            // dataGridViewTextBoxColumn15
+            // Phone_2Column
             // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "Phone_2";
-            this.dataGridViewTextBoxColumn15.HeaderText = "联系电话 2";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            this.dataGridViewTextBoxColumn15.Width = 89;
+            this.Phone_2Column.DataPropertyName = "Phone_2";
+            this.Phone_2Column.HeaderText = "联系电话";
+            this.Phone_2Column.Name = "Phone_2Column";
+            this.Phone_2Column.ReadOnly = true;
+            this.Phone_2Column.Width = 80;
             // 
-            // dataGridViewTextBoxColumn16
+            // Fax_2Column
             // 
-            this.dataGridViewTextBoxColumn16.DataPropertyName = "Fax_2";
-            this.dataGridViewTextBoxColumn16.HeaderText = "传真 2";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            this.dataGridViewTextBoxColumn16.Width = 65;
+            this.Fax_2Column.DataPropertyName = "Fax_2";
+            this.Fax_2Column.HeaderText = "传真";
+            this.Fax_2Column.Name = "Fax_2Column";
+            this.Fax_2Column.ReadOnly = true;
+            this.Fax_2Column.Width = 56;
             // 
             // DepartmentMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dgvDepartments);
+            this.Controls.Add(this.dgvDepts);
             this.Controls.Add(this.panelQuery);
             this.Name = "DepartmentMgr";
             this.Size = new System.Drawing.Size(605, 460);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.departmentMgrBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDepartments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDepts)).EndInit();
             this.cmuDeptMgr.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -369,8 +362,7 @@
         #endregion
 
         private DevComponents.DotNetBar.PanelEx panelQuery;
-        private System.Windows.Forms.BindingSource departmentMgrBindingSource;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvDepartments;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvDepts;
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbDepartmentName;
         private DevComponents.DotNetBar.LabelX lblDeparmentName;
@@ -379,21 +371,21 @@
         private DevComponents.DotNetBar.LabelX lblCount;
         private System.Windows.Forms.ContextMenuStrip cmuDeptMgr;
         private System.Windows.Forms.ToolStripMenuItem menuItemSelect;
-        private System.Windows.Forms.DataGridViewTextBoxColumn departmentCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LocationColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DomainColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PostCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ManagerColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Contract_1Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Email_1Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Phone_1Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fax_1Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Contract_2Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Email_2Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Phone_2Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fax_2Column;
     }
 }

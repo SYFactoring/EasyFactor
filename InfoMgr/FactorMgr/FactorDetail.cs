@@ -58,7 +58,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.factorTypeComboBox.DataSource = factorTypes;
 
             this.factorTypeComboBox.SelectedItem = updateFactor.FactorType;
-            this.countryNameComboBox.SelectedItem = App.Current.DbContext.Countries.FirstOrDefault(c => c.CountryNameEN == updateFactor.CountryName);
+            this.countryNameComboBox.SelectedItem = App.Current.DbContext.Countries.SingleOrDefault(c => c.CountryNameEN == updateFactor.CountryName);
             this.UpdateEditableStatus(isEditable);
         }
 

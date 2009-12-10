@@ -68,7 +68,7 @@ namespace CMBC.EasyFactor
             }
             else
             {
-                User curUser = App.Current.DbContext.Users.FirstOrDefault(u => u.UserID == uid && u.Password == pass);
+                User curUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid && u.Password == pass);
 
                 if (curUser != null)
                 {

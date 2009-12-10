@@ -64,7 +64,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// Import factor list from selected file
         /// </summary>
         /// <param name="obj">selected file</param>
-        private static void ImportFactor(object obj)
+        private static void ImportFactors(object obj)
         {
             string fileName = obj as string;
 
@@ -106,8 +106,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
 
             Range range = datasheet.get_Range("A2", "AG300");
-            bool hasError = false;
-            //App.Current.MainWindow.SetProgressBarVisibility(true);
 
             Array values = (Array)range.Formula;
             if (values != null)
@@ -116,94 +114,77 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
                 int length = values.GetLength(0);
 
-                //App.Current.MainWindow.SetProgressBarLength(300);
-
                 for (int row = 1; row <= length; row++)
                 {
-                    if (!values.GetValue(row, 1).Equals(string.Empty))
+                    if (!values.GetValue(row, 2).Equals(string.Empty))
                     {
-                        bool find = false;
-
-                        Factor newFactor = new Factor();
-                        int column = 1;
-                        newFactor.FactorType = "保理商";
-                        newFactor.CountryName = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.FactorCode = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.CompanyName = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.ShortName = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.Department = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.PostalAddress_1 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.PostalAddress_2 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.PostalCodePost = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.CityPost = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.VisitingAddress_1 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.VisitingAddress_2 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.PostalCodeVisiting = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.CityVisiting = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.Email = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.WebSite = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.Telephone_1 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.Telephone_2 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.Telefax_1 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.Telefax_2 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.WorkingHours = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.GeneralCorrespondence_1 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.GeneralCorrespondence_2 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.Contacts_1 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.Contacts_2 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.Contacts_3 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.Contacts_4 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.Management_1 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.Management_2 = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.Shareholders = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.IFISAvailableOnPrivateForum = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.MembershipStatus = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.MembershipDate = values.GetValue(row, column++).ToString().Trim();
-                        newFactor.DateOfLatestRevision = values.GetValue(row, column).ToString().Trim();
-                        newFactor.Comment = string.Empty;
-
-                        foreach (Factor oldFactor in factorList)
+                        Factor factor = null;
+                        try
                         {
-                            if (oldFactor.FactorCode.Equals(newFactor.FactorCode))
+                            int column = 1;
+                            bool isNew = false;
+                            string factorCode = values.GetValue(row, 2).ToString().Trim();
+                            factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                            if (factor == null)
                             {
-                                oldFactor.Copy(newFactor);
-                                find = true;
+                                isNew = true;
+                                factor = new Factor();
+                                factor.FactorType = "保理商";
+                            }
+                            factor.CountryName = values.GetValue(row, column++).ToString().Trim();
+                            factor.FactorCode = values.GetValue(row, column++).ToString().Trim();
+                            factor.CompanyName = values.GetValue(row, column++).ToString().Trim();
+                            factor.ShortName = values.GetValue(row, column++).ToString().Trim();
+                            factor.Department = values.GetValue(row, column++).ToString().Trim();
+                            factor.PostalAddress_1 = values.GetValue(row, column++).ToString().Trim();
+                            factor.PostalAddress_2 = values.GetValue(row, column++).ToString().Trim();
+                            factor.PostalCodePost = values.GetValue(row, column++).ToString().Trim();
+                            factor.CityPost = values.GetValue(row, column++).ToString().Trim();
+                            factor.VisitingAddress_1 = values.GetValue(row, column++).ToString().Trim();
+                            factor.VisitingAddress_2 = values.GetValue(row, column++).ToString().Trim();
+                            factor.PostalCodeVisiting = values.GetValue(row, column++).ToString().Trim();
+                            factor.CityVisiting = values.GetValue(row, column++).ToString().Trim();
+                            factor.Email = values.GetValue(row, column++).ToString().Trim();
+                            factor.WebSite = values.GetValue(row, column++).ToString().Trim();
+                            factor.Telephone_1 = values.GetValue(row, column++).ToString().Trim();
+                            factor.Telephone_2 = values.GetValue(row, column++).ToString().Trim();
+                            factor.Telefax_1 = values.GetValue(row, column++).ToString().Trim();
+                            factor.Telefax_2 = values.GetValue(row, column++).ToString().Trim();
+                            factor.WorkingHours = values.GetValue(row, column++).ToString().Trim();
+                            factor.GeneralCorrespondence_1 = values.GetValue(row, column++).ToString().Trim();
+                            factor.GeneralCorrespondence_2 = values.GetValue(row, column++).ToString().Trim();
+                            factor.Contacts_1 = values.GetValue(row, column++).ToString().Trim();
+                            factor.Contacts_2 = values.GetValue(row, column++).ToString().Trim();
+                            factor.Contacts_3 = values.GetValue(row, column++).ToString().Trim();
+                            factor.Contacts_4 = values.GetValue(row, column++).ToString().Trim();
+                            factor.Management_1 = values.GetValue(row, column++).ToString().Trim();
+                            factor.Management_2 = values.GetValue(row, column++).ToString().Trim();
+                            factor.Shareholders = values.GetValue(row, column++).ToString().Trim();
+                            factor.IFISAvailableOnPrivateForum = values.GetValue(row, column++).ToString().Trim();
+                            factor.MembershipStatus = values.GetValue(row, column++).ToString().Trim();
+                            factor.MembershipDate = values.GetValue(row, column++).ToString().Trim();
+                            factor.DateOfLatestRevision = values.GetValue(row, column).ToString().Trim();
+
+                            if (isNew)
+                            {
+                                App.Current.DbContext.Factors.InsertOnSubmit(factor);
+                            }
+
+                            App.Current.DbContext.SubmitChanges();
+                        }
+                        catch (Exception e)
+                        {
+                            DialogResult dr = MessageBox.Show("导入失败: " + e.Message + "\t" + factor.FactorCode + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            if (dr == DialogResult.No)
+                            {
                                 break;
                             }
                         }
-
-                        if (!find)
-                        {
-                            try
-                            {
-                                App.Current.DbContext.Factors.InsertOnSubmit(newFactor);
-                            }
-                            catch (Exception)
-                            {
-                                hasError = true;
-                                MessageBox.Show(newFactor.FactorCode + "导入失败！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
-                        }
-
-                        //App.Current.MainWindow.SetProgressBarIncrease(1);
                     }
                 }
-                if (hasError)
-                {
-                    MessageBox.Show("本次导入失败", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    App.Current.DbContext.SubmitChanges();
-                    MessageBox.Show("本次导入成功", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            //App.Current.MainWindow.SetProgressBarLength(300);
-
             app.Quit();
-
-            //App.Current.MainWindow.SetProgressBarVisibility(false);
         }
 
         /// <summary>
@@ -227,7 +208,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e">Event Args</param>
         private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.ItemDetail(sender, e);
+            if (this.OwnerForm == null)
+            {
+                //this.DetailClient(sender, e);
+            }
+            else
+            {
+                this.SelectFactor(sender, e);
+            }
         }
 
         /// <summary>
@@ -235,13 +223,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void Query(object sender, EventArgs e)
+        private void QueryFactors(object sender, EventArgs e)
         {
             var queryResult = App.Current.DbContext.Factors.Where(f =>
                                                    (tbFactorCode.Text == string.Empty || f.FactorCode.Contains(tbFactorCode.Text))
                                                 && (tbFactorName.Text == string.Empty || f.CompanyName.Contains(tbFactorName.Text))
                                                 && (cbFactorType.Text == string.Empty || f.FactorType.Equals(cbFactorType.Text)));
-            factorMgrBindingSource.DataSource = queryResult;
+            dgvFactors.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
@@ -250,7 +238,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemNew(object sender, EventArgs e)
+        private void NewFactor(object sender, EventArgs e)
         {
             new FactorDetail(null, true).ShowDialog(this);
         }
@@ -260,17 +248,17 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemUpdate(object sender, EventArgs e)
+        private void UpdateFactor(object sender, EventArgs e)
         {
-            if (this.dgvFactor.SelectedRows.Count == 0 || factorMgrBindingSource == null)
+            if (this.dgvFactors.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            string factorCode = (string)this.dgvFactor["factorCodeColumn", dgvFactor.SelectedRows[0].Index].Value;
+            string factorCode = (string)this.dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
             if (factorCode != null)
             {
-                Factor selectedFactor = App.Current.DbContext.Factors.FirstOrDefault(f => f.FactorCode == factorCode);
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                 if (selectedFactor != null)
                 {
                     new FactorDetail(selectedFactor, true).ShowDialog(this);
@@ -283,22 +271,22 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemDelete(object sender, EventArgs e)
+        private void DeleteFactor(object sender, EventArgs e)
         {
-            if (this.dgvFactor.SelectedRows.Count == 0 || factorMgrBindingSource == null)
+            if (this.dgvFactors.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            string factorCode = (string)dgvFactor["factorCodeColumn", dgvFactor.SelectedRows[0].Index].Value;
+            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
             if (factorCode != null)
             {
-                Factor selectedFactor = App.Current.DbContext.Factors.FirstOrDefault(f => f.FactorCode == factorCode);
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                 if (selectedFactor != null)
                 {
                     if (MessageBox.Show("是否确定删除保理商: " + selectedFactor.FactorCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        factorMgrBindingSource.Remove(selectedFactor);
+                        dgvFactors.Rows.Remove(dgvFactors.SelectedRows[0]);
                         App.Current.DbContext.Factors.DeleteOnSubmit(selectedFactor);
                         App.Current.DbContext.SubmitChanges();
                     }
@@ -311,17 +299,17 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemSelect(object sender, EventArgs e)
+        private void SelectFactor(object sender, EventArgs e)
         {
-            if (this.dgvFactor.SelectedRows.Count == 0 || factorMgrBindingSource == null)
+            if (this.dgvFactors.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            string factorCode = (string)dgvFactor["factorCodeColumn", dgvFactor.SelectedRows[0].Index].Value;
+            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
             if (factorCode != null)
             {
-                Factor selectedFactor = App.Current.DbContext.Factors.FirstOrDefault(f => f.FactorCode == factorCode);
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                 if (selectedFactor != null)
                 {
                     this.Selected = selectedFactor;
@@ -339,17 +327,17 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemDetail(object sender, EventArgs e)
+        private void DetailFactor(object sender, EventArgs e)
         {
-            if (this.dgvFactor.SelectedRows.Count == 0 || factorMgrBindingSource == null)
+            if (this.dgvFactors.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            string factorCode = (string)dgvFactor["factorCodeColumn", dgvFactor.SelectedRows[0].Index].Value;
+            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
             if (factorCode != null)
             {
-                Factor selectedFactor = App.Current.DbContext.Factors.FirstOrDefault(f => f.FactorCode == factorCode);
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                 if (selectedFactor != null)
                 {
                     new FactorDetail(selectedFactor, false).ShowDialog(this);
@@ -362,14 +350,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemImport(object sender, EventArgs e)
+        private void ImportFactosImpl(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
 
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 string fileName = fileDialog.FileName;
-                Thread t = new Thread(ImportFactor);
+                Thread t = new Thread(ImportFactors);
 
                 t.Start(fileName);
             }

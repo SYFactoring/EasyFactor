@@ -68,7 +68,7 @@
             DevComponents.DotNetBar.LabelX creditLineCommentLabel;
             DevComponents.DotNetBar.LabelX clientCoreNoLabel;
             DevComponents.DotNetBar.LabelX industryLabel;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.wetsiteLabel = new DevComponents.DotNetBar.LabelX();
             this.telephoneLabel = new DevComponents.DotNetBar.LabelX();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
@@ -116,8 +116,6 @@
             this.creditLineTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.creditLineCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tabItemClientCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelClientAccount = new DevComponents.DotNetBar.TabControlPanel();
-            this.tabItemClientAccount = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClient = new DevComponents.DotNetBar.TabControlPanel();
             this.groupPanelClientContact = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.companyCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -181,6 +179,8 @@
             this.clientNameEN_1TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabItemClient = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabPanelClientAccount = new DevComponents.DotNetBar.TabControlPanel();
+            this.tabItemClientAccount = new DevComponents.DotNetBar.TabItem(this.components);
             clientNameCNLabel = new DevComponents.DotNetBar.LabelX();
             addressCNLabel = new DevComponents.DotNetBar.LabelX();
             cityCNLabel = new DevComponents.DotNetBar.LabelX();
@@ -814,15 +814,15 @@
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelClientCreditLine);
             this.tabControl.Controls.Add(this.tabPanelClient);
+            this.tabControl.Controls.Add(this.tabPanelClientCreditLine);
             this.tabControl.Controls.Add(this.tabPanelClientAccount);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl.SelectedTabIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(599, 562);
+            this.tabControl.Size = new System.Drawing.Size(597, 562);
             this.tabControl.TabIndex = 0;
             this.tabControl.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl.Tabs.Add(this.tabItemClient);
@@ -839,7 +839,7 @@
             this.tabPanelClientCreditLine.Location = new System.Drawing.Point(0, 26);
             this.tabPanelClientCreditLine.Name = "tabPanelClientCreditLine";
             this.tabPanelClientCreditLine.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelClientCreditLine.Size = new System.Drawing.Size(599, 536);
+            this.tabPanelClientCreditLine.Size = new System.Drawing.Size(597, 536);
             this.tabPanelClientCreditLine.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelClientCreditLine.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelClientCreditLine.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -857,7 +857,7 @@
             this.groupPanelClientCreditCoverMgr.Controls.Add(this.dgvClientCreditLine);
             this.groupPanelClientCreditCoverMgr.Location = new System.Drawing.Point(0, 326);
             this.groupPanelClientCreditCoverMgr.Name = "groupPanelClientCreditCoverMgr";
-            this.groupPanelClientCreditCoverMgr.Size = new System.Drawing.Size(591, 293);
+            this.groupPanelClientCreditCoverMgr.Size = new System.Drawing.Size(591, 203);
             // 
             // 
             // 
@@ -912,19 +912,19 @@
             this.dataGridViewTextBoxColumn32,
             this.dataGridViewTextBoxColumn33});
             this.dgvClientCreditLine.DataSource = this.clientCreditLineMgrBindingSource;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientCreditLine.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientCreditLine.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvClientCreditLine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClientCreditLine.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvClientCreditLine.Location = new System.Drawing.Point(0, 0);
             this.dgvClientCreditLine.Name = "dgvClientCreditLine";
-            this.dgvClientCreditLine.Size = new System.Drawing.Size(585, 287);
+            this.dgvClientCreditLine.Size = new System.Drawing.Size(585, 197);
             this.dgvClientCreditLine.TabIndex = 0;
             // 
             // dataGridViewTextBoxColumn2
@@ -1032,11 +1032,6 @@
             // clientCreditLineMgrBindingSource
             // 
             this.clientCreditLineMgrBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.ClientCreditLine);
-            //
-            // clientCreditLineBindingSource
-            //
-            this.clientCreditLineBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.ClientCreditLine);
-
             // 
             // groupPanelClientCreditCover
             // 
@@ -1078,7 +1073,7 @@
             this.groupPanelClientCreditCover.Controls.Add(this.creditLineCurrencyComboBox);
             this.groupPanelClientCreditCover.Location = new System.Drawing.Point(0, 4);
             this.groupPanelClientCreditCover.Name = "groupPanelClientCreditCover";
-            this.groupPanelClientCreditCover.Size = new System.Drawing.Size(592, 316);
+            this.groupPanelClientCreditCover.Size = new System.Drawing.Size(588, 316);
             // 
             // 
             // 
@@ -1123,6 +1118,10 @@
             this.creditLineCommentTextBox.Size = new System.Drawing.Size(451, 42);
             this.creditLineCommentTextBox.TabIndex = 33;
             // 
+            // clientCreditLineBindingSource
+            // 
+            this.clientCreditLineBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.ClientCreditLine);
+            // 
             // unfreezeDateDateTimePicker
             // 
             this.unfreezeDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.clientCreditLineBindingSource, "UnfreezeDate", true));
@@ -1142,6 +1141,7 @@
             this.btnClientCreditCoverUnfreeze.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditCoverUnfreeze.TabIndex = 20;
             this.btnClientCreditCoverUnfreeze.Text = "解冻";
+            this.btnClientCreditCoverUnfreeze.Click += new System.EventHandler(this.UnfreezeClientCreditCover);
             // 
             // unfreezerTextBox
             // 
@@ -1175,6 +1175,7 @@
             this.btnClientCreditCoverFreeze.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditCoverFreeze.TabIndex = 19;
             this.btnClientCreditCoverFreeze.Text = "冻结";
+            this.btnClientCreditCoverFreeze.Click += new System.EventHandler(this.FreezeClientCreditCover);
             // 
             // unfreezeReasonTextBox
             // 
@@ -1214,6 +1215,7 @@
             this.btnClientCreditCoverCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditCoverCancel.TabIndex = 18;
             this.btnClientCreditCoverCancel.Text = "取消";
+            this.btnClientCreditCoverCancel.Click += new System.EventHandler(this.CancelClientCreditCover);
             // 
             // btnClientCreditCoverSave
             // 
@@ -1225,6 +1227,7 @@
             this.btnClientCreditCoverSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditCoverSave.TabIndex = 17;
             this.btnClientCreditCoverSave.Text = "保存";
+            this.btnClientCreditCoverSave.Click += new System.EventHandler(this.SaveClientCreditCover);
             // 
             // freezerTextBox
             // 
@@ -1249,6 +1252,7 @@
             this.btnClientCreditCoverAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditCoverAdd.TabIndex = 16;
             this.btnClientCreditCoverAdd.Text = "新建";
+            this.btnClientCreditCoverAdd.Click += new System.EventHandler(this.NewClientCreditCover);
             // 
             // creditLineStatusTextBox
             // 
@@ -1352,29 +1356,6 @@
             this.tabItemClientCreditLine.Name = "tabItemClientCreditLine";
             this.tabItemClientCreditLine.Text = "额度信息";
             // 
-            // tabPanelClientAccount
-            // 
-            this.tabPanelClientAccount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelClientAccount.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelClientAccount.Name = "tabPanelClientAccount";
-            this.tabPanelClientAccount.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelClientAccount.Size = new System.Drawing.Size(599, 536);
-            this.tabPanelClientAccount.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelClientAccount.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelClientAccount.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelClientAccount.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelClientAccount.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelClientAccount.Style.GradientAngle = 90;
-            this.tabPanelClientAccount.TabIndex = 3;
-            this.tabPanelClientAccount.TabItem = this.tabItemClientAccount;
-            // 
-            // tabItemClientAccount
-            // 
-            this.tabItemClientAccount.AttachedControl = this.tabPanelClientAccount;
-            this.tabItemClientAccount.Name = "tabItemClientAccount";
-            this.tabItemClientAccount.Text = "账户信息";
-            // 
             // tabPanelClient
             // 
             this.tabPanelClient.AutoScroll = true;
@@ -1389,7 +1370,7 @@
             this.tabPanelClient.Location = new System.Drawing.Point(0, 26);
             this.tabPanelClient.Name = "tabPanelClient";
             this.tabPanelClient.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelClient.Size = new System.Drawing.Size(599, 536);
+            this.tabPanelClient.Size = new System.Drawing.Size(597, 536);
             this.tabPanelClient.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelClient.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelClient.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -1674,6 +1655,7 @@
             this.isGroupComboBox.Location = new System.Drawing.Point(90, 7);
             this.isGroupComboBox.Name = "isGroupComboBox";
             this.isGroupComboBox.Size = new System.Drawing.Size(99, 21);
+            this.isGroupComboBox.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.isGroupComboBox.TabIndex = 1;
             // 
             // comboItem7
@@ -2187,11 +2169,34 @@
             this.tabItemClient.Name = "tabItemClient";
             this.tabItemClient.Text = "基本信息";
             // 
+            // tabPanelClientAccount
+            // 
+            this.tabPanelClientAccount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelClientAccount.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelClientAccount.Name = "tabPanelClientAccount";
+            this.tabPanelClientAccount.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelClientAccount.Size = new System.Drawing.Size(597, 536);
+            this.tabPanelClientAccount.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelClientAccount.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelClientAccount.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelClientAccount.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelClientAccount.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelClientAccount.Style.GradientAngle = 90;
+            this.tabPanelClientAccount.TabIndex = 3;
+            this.tabPanelClientAccount.TabItem = this.tabItemClientAccount;
+            // 
+            // tabItemClientAccount
+            // 
+            this.tabItemClientAccount.AttachedControl = this.tabPanelClientAccount;
+            this.tabItemClientAccount.Name = "tabItemClientAccount";
+            this.tabItemClientAccount.Text = "账户信息";
+            // 
             // ClientDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(599, 562);
+            this.ClientSize = new System.Drawing.Size(597, 562);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.Name = "ClientDetail";
