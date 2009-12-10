@@ -33,9 +33,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertCase(Case instance);
     partial void UpdateCase(Case instance);
     partial void DeleteCase(Case instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
     partial void InsertCDA(CDA instance);
     partial void UpdateCDA(CDA instance);
     partial void DeleteCDA(CDA instance);
@@ -93,6 +90,9 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertClientCreditLine(ClientCreditLine instance);
     partial void UpdateClientCreditLine(ClientCreditLine instance);
     partial void DeleteClientCreditLine(ClientCreditLine instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -130,14 +130,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			get
 			{
 				return this.GetTable<Case>();
-			}
-		}
-		
-		public System.Data.Linq.Table<User> Users
-		{
-			get
-			{
-				return this.GetTable<User>();
 			}
 		}
 		
@@ -290,6 +282,14 @@ namespace CMBC.EasyFactor.DB.dbml
 			get
 			{
 				return this.GetTable<ClientCreditLine>();
+			}
+		}
+		
+		public System.Data.Linq.Table<User> Users
+		{
+			get
+			{
+				return this.GetTable<User>();
 			}
 		}
 	}
@@ -919,284 +919,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		{
 			this.SendPropertyChanging();
 			entity.Case = null;
-		}
-	}
-	
-	[Table(Name="dbo.[User]")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _UserID;
-		
-		private string _EDIAccount;
-		
-		private string _UserName;
-		
-		private string _Password;
-		
-		private string _Role;
-		
-		private string _Phone;
-		
-		private string _Telphone;
-		
-		private string _Email;
-		
-		private string _MSN;
-		
-		private System.Nullable<System.DateTime> _LoginDate;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserIDChanging(string value);
-    partial void OnUserIDChanged();
-    partial void OnEDIAccountChanging(string value);
-    partial void OnEDIAccountChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnRoleChanging(string value);
-    partial void OnRoleChanged();
-    partial void OnPhoneChanging(string value);
-    partial void OnPhoneChanged();
-    partial void OnTelphoneChanging(string value);
-    partial void OnTelphoneChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnMSNChanging(string value);
-    partial void OnMSNChanged();
-    partial void OnLoginDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnLoginDateChanged();
-    #endregion
-		
-		public User()
-		{
-			OnCreated();
-		}
-		
-		[Column(Storage="_UserID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string UserID
-		{
-			get
-			{
-				return this._UserID;
-			}
-			set
-			{
-				if ((this._UserID != value))
-				{
-					this.OnUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_EDIAccount", DbType="VarChar(35)")]
-		public string EDIAccount
-		{
-			get
-			{
-				return this._EDIAccount;
-			}
-			set
-			{
-				if ((this._EDIAccount != value))
-				{
-					this.OnEDIAccountChanging(value);
-					this.SendPropertyChanging();
-					this._EDIAccount = value;
-					this.SendPropertyChanged("EDIAccount");
-					this.OnEDIAccountChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UserName", DbType="NVarChar(50)")]
-		public string UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Password", DbType="VarChar(50)")]
-		public string Password
-		{
-			get
-			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Role", DbType="NVarChar(50)")]
-		public string Role
-		{
-			get
-			{
-				return this._Role;
-			}
-			set
-			{
-				if ((this._Role != value))
-				{
-					this.OnRoleChanging(value);
-					this.SendPropertyChanging();
-					this._Role = value;
-					this.SendPropertyChanged("Role");
-					this.OnRoleChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Phone", DbType="VarChar(50)")]
-		public string Phone
-		{
-			get
-			{
-				return this._Phone;
-			}
-			set
-			{
-				if ((this._Phone != value))
-				{
-					this.OnPhoneChanging(value);
-					this.SendPropertyChanging();
-					this._Phone = value;
-					this.SendPropertyChanged("Phone");
-					this.OnPhoneChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Telphone", DbType="VarChar(50)")]
-		public string Telphone
-		{
-			get
-			{
-				return this._Telphone;
-			}
-			set
-			{
-				if ((this._Telphone != value))
-				{
-					this.OnTelphoneChanging(value);
-					this.SendPropertyChanging();
-					this._Telphone = value;
-					this.SendPropertyChanged("Telphone");
-					this.OnTelphoneChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Email", DbType="VarChar(50)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_MSN", DbType="VarChar(50)")]
-		public string MSN
-		{
-			get
-			{
-				return this._MSN;
-			}
-			set
-			{
-				if ((this._MSN != value))
-				{
-					this.OnMSNChanging(value);
-					this.SendPropertyChanging();
-					this._MSN = value;
-					this.SendPropertyChanged("MSN");
-					this.OnMSNChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_LoginDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> LoginDate
-		{
-			get
-			{
-				return this._LoginDate;
-			}
-			set
-			{
-				if ((this._LoginDate != value))
-				{
-					this.OnLoginDateChanging(value);
-					this.SendPropertyChanging();
-					this._LoginDate = value;
-					this.SendPropertyChanged("LoginDate");
-					this.OnLoginDateChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -10190,6 +9912,284 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._ClientNo = default(string);
 					}
 					this.SendPropertyChanged("Client");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[User]")]
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _UserID;
+		
+		private string _Name;
+		
+		private string _Password;
+		
+		private string _EDIAccount;
+		
+		private string _Role;
+		
+		private string _Phone;
+		
+		private string _Telphone;
+		
+		private string _Email;
+		
+		private string _MSN;
+		
+		private System.Nullable<System.DateTime> _LoginDate;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserIDChanging(string value);
+    partial void OnUserIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnEDIAccountChanging(string value);
+    partial void OnEDIAccountChanged();
+    partial void OnRoleChanging(string value);
+    partial void OnRoleChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnTelphoneChanging(string value);
+    partial void OnTelphoneChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnMSNChanging(string value);
+    partial void OnMSNChanged();
+    partial void OnLoginDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnLoginDateChanged();
+    #endregion
+		
+		public User()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_UserID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Name", DbType="NVarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Password", DbType="VarChar(50)")]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_EDIAccount", DbType="VarChar(35)")]
+		public string EDIAccount
+		{
+			get
+			{
+				return this._EDIAccount;
+			}
+			set
+			{
+				if ((this._EDIAccount != value))
+				{
+					this.OnEDIAccountChanging(value);
+					this.SendPropertyChanging();
+					this._EDIAccount = value;
+					this.SendPropertyChanged("EDIAccount");
+					this.OnEDIAccountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Role", DbType="NVarChar(50)")]
+		public string Role
+		{
+			get
+			{
+				return this._Role;
+			}
+			set
+			{
+				if ((this._Role != value))
+				{
+					this.OnRoleChanging(value);
+					this.SendPropertyChanging();
+					this._Role = value;
+					this.SendPropertyChanged("Role");
+					this.OnRoleChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Phone", DbType="VarChar(50)")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Telphone", DbType="VarChar(50)")]
+		public string Telphone
+		{
+			get
+			{
+				return this._Telphone;
+			}
+			set
+			{
+				if ((this._Telphone != value))
+				{
+					this.OnTelphoneChanging(value);
+					this.SendPropertyChanging();
+					this._Telphone = value;
+					this.SendPropertyChanged("Telphone");
+					this.OnTelphoneChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Email", DbType="VarChar(50)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_MSN", DbType="VarChar(50)")]
+		public string MSN
+		{
+			get
+			{
+				return this._MSN;
+			}
+			set
+			{
+				if ((this._MSN != value))
+				{
+					this.OnMSNChanging(value);
+					this.SendPropertyChanging();
+					this._MSN = value;
+					this.SendPropertyChanged("MSN");
+					this.OnMSNChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_LoginDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> LoginDate
+		{
+			get
+			{
+				return this._LoginDate;
+			}
+			set
+			{
+				if ((this._LoginDate != value))
+				{
+					this.OnLoginDateChanging(value);
+					this.SendPropertyChanging();
+					this._LoginDate = value;
+					this.SendPropertyChanged("LoginDate");
+					this.OnLoginDateChanged();
 				}
 			}
 		}

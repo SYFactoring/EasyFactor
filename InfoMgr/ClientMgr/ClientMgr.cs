@@ -272,12 +272,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 string fileName = fileDialog.FileName;
-                Thread t = new Thread(ImportClientsImp);
+                Thread t = new Thread(ImportClientsImpl);
                 t.Start(fileName);
             }
         }
 
-        private static void ImportClientsImp(object obj)
+        private static void ImportClientsImpl(object obj)
         {
             string fileName = obj as string;
             ApplicationClass app = new ApplicationClass { Visible = false };

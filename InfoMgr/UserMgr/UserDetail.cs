@@ -17,11 +17,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     public partial class UserDetail : DevComponents.DotNetBar.Office2007Form
     {
 
-        /// <summary>
-        /// original user
-        /// </summary>
-        private readonly User originalUser;
-
         public enum OpType { NEW_USER, UPDATE_USER, DETAIL_USER };
 
         private readonly OpType opType;
@@ -34,18 +29,15 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         public UserDetail(User user, OpType opType)
         {
             this.InitializeComponent();
-            User updateUser = new User();
             this.opType = opType;
-            if (opType == OpType.UPDATE_USER)
+            if (opType == OpType.NEW_USER)
             {
-                this.originalUser = user;
+                userBindingSource.DataSource = new User();
             }
-            if (user != null)
+            else
             {
-                updateUser.Copy(user);
+                userBindingSource.DataSource = user;
             }
-
-            userBindingSource.DataSource = updateUser;
             this.UpdateEditableStatus();
         }
 
@@ -82,6 +74,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 ControlUtil.setComponetEditable(this.btnCancel, true);
                 userIDTextBox.ReadOnly = true;
             }
+
+            this.loginDate.ReadOnly = true;
         }
 
         /// <summary>
@@ -93,7 +87,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         {
             userBindingSource.EndEdit();
             User updateUser = (User)userBindingSource.DataSource;
-            if (opType==OpType.NEW_USER)
+            if (opType == OpType.NEW_USER)
             {
                 bool isAddOK = true;
                 try
@@ -110,15 +104,11 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Close();
                 }
             }
             else
             {
                 bool isUpdateOK = true;
-                User tempUser = new User();
-                tempUser.Copy(this.originalUser);
-                this.originalUser.Copy(updateUser);
                 try
                 {
                     App.Current.DbContext.SubmitChanges();
@@ -126,14 +116,12 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    this.originalUser.Copy(tempUser);
                     MessageBox.Show(e2.Message);
                 }
 
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Close();
                 }
             }
         }

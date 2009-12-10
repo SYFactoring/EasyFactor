@@ -23,7 +23,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private DevComponents.DotNetBar.Controls.TextBoxX phoneTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX telphoneTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX userIDTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX userNameTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX nameTextBox;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -66,7 +66,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.phoneTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.telphoneTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.userIDTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.userNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.nameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.btnCancel = new DevComponents.DotNetBar.ButtonX();
             this.eDIAccountTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -321,13 +321,13 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             // 
             // 
-            this.userNameTextBox.Border.Class = "TextBoxBorder";
-            this.userNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "UserName", true));
-            this.userNameTextBox.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.userNameTextBox.Location = new System.Drawing.Point(92, 31);
-            this.userNameTextBox.Name = "userNameTextBox";
-            this.userNameTextBox.Size = new System.Drawing.Size(154, 20);
-            this.userNameTextBox.TabIndex = 1;
+            this.nameTextBox.Border.Class = "TextBoxBorder";
+            this.nameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Name", true));
+            this.nameTextBox.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.nameTextBox.Location = new System.Drawing.Point(92, 31);
+            this.nameTextBox.Name = "userNameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(154, 20);
+            this.nameTextBox.TabIndex = 1;
             // 
             // btnSave
             // 
@@ -386,7 +386,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.groupPanelUser.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.groupPanelUser.Controls.Add(userIDLabel);
             this.groupPanelUser.Controls.Add(roleLabel);
-            this.groupPanelUser.Controls.Add(this.userNameTextBox);
+            this.groupPanelUser.Controls.Add(this.nameTextBox);
             this.groupPanelUser.Controls.Add(this.roleComboBox);
             this.groupPanelUser.Controls.Add(userNameLabel);
             this.groupPanelUser.Controls.Add(eDIAccountLabel);

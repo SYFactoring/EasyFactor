@@ -30,7 +30,7 @@ namespace CMBC.EasyFactor
         /// </summary>
         public void AutoLogin()
         {
-            User curUser = new User { UserName = "系统管理员", UserID = "admin", Role = "管理员", LoginDate = DateTime.Now };
+            User curUser = new User { Name = "系统管理员", UserID = "admin", Role = "管理员", LoginDate = DateTime.Now };
             App.Current.CurUser = curUser;
         }
 

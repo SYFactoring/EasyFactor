@@ -10,6 +10,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
+    using System.Threading;
+    using Microsoft.Office.Interop.Excel;
+    using System.Reflection;
 
     /// <summary>
     /// User Management User Interface
@@ -20,11 +23,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// flag indicates if editable
         /// </summary>
         private readonly bool isEditable;
-
-        /// <summary>
-        /// Form owner
-        /// </summary>
-        private readonly Form owner;
 
         /// <summary>
         /// Initializes a new instance of the UserMgrUI class
@@ -38,20 +36,15 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         }
 
         /// <summary>
-        /// Initializes a new instance of the UserMgrUI class
-        /// </summary>
-        /// <param name="isEditable">true if editable</param>
-        /// <param name="owner">form owner</param>
-        public UserMgr(bool isEditable, Form owner)
-            : this(isEditable)
-        {
-            this.owner = owner;
-        }
-
-        /// <summary>
         /// Gets or sets selected user
         /// </summary>
         public User Selected
+        {
+            get;
+            set;
+        }
+
+        public Form OwnerForm
         {
             get;
             set;
@@ -62,13 +55,20 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         private void UpdateEditableStatus()
         {
+            this.menuItemSelect.Enabled = true;
+            this.menuItemDetail.Enabled = true;
             if (this.isEditable)
             {
-                return;
+                this.menuItemDelete.Enabled = true;
+                this.menuItemNew.Enabled = true;
+                this.menuItemUpdate.Enabled = true;
             }
-
-            toolStripSeparator.Visible = false;
-            menuItemEdit.Visible = false;
+            else
+            {
+                this.menuItemDelete.Enabled = false;
+                this.menuItemNew.Enabled = false;
+                this.menuItemUpdate.Enabled = false;
+            }
         }
 
         /// <summary>
@@ -76,20 +76,20 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void Query(object sender, System.EventArgs e)
+        private void QueryUsers(object sender, System.EventArgs e)
         {
             string keyword = tbKeyword.Text.Trim();
 
             var queryResult =
             App.Current.DbContext.Users.Where(
-                u => u.UserName.Contains(keyword)
+                u => u.Name.Contains(keyword)
                   || u.UserID.Contains(keyword)
                   || u.EDIAccount.Contains(keyword)
                   || u.MSN.Contains(keyword)
                   || u.Phone.Contains(keyword)
                   || u.Telphone.Contains(keyword)
                   || u.Email.Contains(keyword));
-            dgvUsers.DataSource = queryResult;
+            dgvUsers.DataSource = queryResult.ToList();
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
@@ -98,7 +98,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemNew(object sender, System.EventArgs e)
+        private void NewUser(object sender, System.EventArgs e)
         {
             new UserDetail(null, UserDetail.OpType.NEW_USER).ShowDialog(this);
         }
@@ -108,7 +108,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemUpdate(object sender, System.EventArgs e)
+        private void UpdateUser(object sender, System.EventArgs e)
         {
             if (dgvUsers.SelectedRows.Count == 0)
             {
@@ -131,9 +131,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemDelete(object sender, System.EventArgs e)
+        private void DeleteUser(object sender, System.EventArgs e)
         {
-            if (dgvUsers.SelectedRows.Count == 0 )
+            if (dgvUsers.SelectedRows.Count == 0)
             {
                 return;
             }
@@ -159,9 +159,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemSelect(object sender, EventArgs e)
+        private void SelectUser(object sender, EventArgs e)
         {
-            if (dgvUsers.SelectedRows.Count == 0 )
+            if (dgvUsers.SelectedRows.Count == 0)
             {
                 return;
             }
@@ -173,10 +173,10 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 if (selectedUser != null)
                 {
                     this.Selected = selectedUser;
-                    if (this.owner != null)
+                    if (this.OwnerForm != null)
                     {
-                        this.owner.DialogResult = DialogResult.Yes;
-                        this.owner.Close();
+                        this.OwnerForm.DialogResult = DialogResult.Yes;
+                        this.OwnerForm.Close();
                     }
                 }
             }
@@ -187,9 +187,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ItemDetail(object sender, System.EventArgs e)
+        private void DetailUser(object sender, System.EventArgs e)
         {
-            if (dgvUsers.SelectedRows.Count == 0 )
+            if (dgvUsers.SelectedRows.Count == 0)
             {
                 return;
             }
@@ -212,7 +212,122 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.ItemDetail(sender, e);
+            if (this.OwnerForm == null)
+            {
+                this.DetailUser(sender, e);
+            }
+            else
+            {
+                this.SelectUser(sender, e);
+            }
         }
+
+        private void ImportUsers(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = fileDialog.FileName;
+                Thread t = new Thread(ImportUsersImpl);
+                t.Start(fileName);
+            }
+        }
+
+        private static void ImportUsersImpl(object obj)
+        {
+            string fileName = obj as string;
+            ApplicationClass app = new ApplicationClass { Visible = false };
+            WorkbookClass w = (WorkbookClass)app.Workbooks.Open(
+               @fileName,
+               Missing.Value,
+               Missing.Value,
+               Missing.Value,
+               Missing.Value,
+               Missing.Value,
+               Missing.Value,
+               Missing.Value,
+               Missing.Value,
+               Missing.Value,
+               Missing.Value,
+               Missing.Value,
+               Missing.Value,
+               Missing.Value,
+               Missing.Value);
+
+            Sheets sheets = w.Worksheets;
+            Worksheet datasheet = null;
+
+            foreach (Worksheet sheet in sheets)
+            {
+                if (datasheet == null)
+                {
+                    datasheet = sheet;
+                    break;
+                }
+            }
+
+            if (datasheet == null)
+            {
+                MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                app.Quit();
+                return;
+            }
+
+            Range range = datasheet.get_Range("A2", "AJ1000");
+            Array values = (Array)range.Formula;
+            if (values != null)
+            {
+                int length = values.GetLength(0);
+
+                for (int row = 1; row <= length; row++)
+                {
+                    if (!values.GetValue(row, 1).Equals(string.Empty))
+                    {
+                        User user = null;
+                        try
+                        {
+                            int column = 1;
+                            string userId = values.GetValue(row, 1).ToString().Trim();
+                            bool isNew = false;
+                            user = App.Current.DbContext.Users.SingleOrDefault(c => c.UserID == userId);
+                            if (user == null)
+                            {
+                                isNew = true;
+                                user = new User();
+                            }
+                            user.UserID = values.GetValue(row, column++).ToString().Trim();
+                            user.EDIAccount = values.GetValue(row, column++).ToString().Trim();
+                            user.Password = values.GetValue(row, column++).ToString().Trim();
+                            user.Role = values.GetValue(row, column++).ToString().Trim();
+                            user.Name = values.GetValue(row, column++).ToString().Trim();
+                            user.Phone = values.GetValue(row, column++).ToString().Trim();
+                            user.Telphone = values.GetValue(row, column++).ToString().Trim();
+                            user.Email = values.GetValue(row, column++).ToString().Trim();
+                            user.MSN = values.GetValue(row, column++).ToString().Trim();
+
+                            if (isNew)
+                            {
+                                App.Current.DbContext.Users.InsertOnSubmit(user);
+                            }
+
+                            App.Current.DbContext.SubmitChanges();
+                        }
+                        catch (Exception e)
+                        {
+                            DialogResult dr = MessageBox.Show("导入失败: " + e.Message + "\t" + user.Name + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            if (dr == DialogResult.No)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+                MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            app.Quit();
+        }
+
     }
 }
