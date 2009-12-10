@@ -36,13 +36,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             else
             {
                 this.clientBindingSource.DataSource = client;
+                this.dgvClientCreditLines.DataSource = client.ClientAccounts;
                 this.FillForms(client);
             }
 
             this.UpdateEditableStatus();
-
-            // this.creditLineMgrBindingSource.DataSource = updateClient.ClientCreditLines;
-            // this.clientAccountMgrBindingSource.DataSource = updateClient.ClientAccounts;
+            if (opType == OpType.NEW_CLIENT_CREDIT_COVER)
+            {
+                this.tabControl.SelectedTab = this.tabItemClientCreditLine;
+            }
         }
 
         /// <summary>
@@ -68,7 +70,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// <summary>
             /// Update Client Credit Cover
             /// </summary>
-            UPDATE_CLIENT_CREDIT_COVER
+            NEW_CLIENT_CREDIT_COVER
         }
 
         /// <summary>
@@ -107,8 +109,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     break;
                 }
             }
-
-            this.dgvClientCreditLines.DataSource = client.ClientCreditLines;
         }
 
         /// <summary>
@@ -198,7 +198,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 ControlUtil.setComponetEditable(comp, false);
             }
 
-            ControlUtil.setComponetEditable(this.btnClientCreditLineNew, true);
+            if (opType == OpType.NEW_CLIENT_CREDIT_COVER)
+            {
+                ControlUtil.setComponetEditable(this.btnClientCreditLineNew, true);
+                ControlUtil.setComponetEditable(this.btnClientCreditLineSave, true);
+                ControlUtil.setComponetEditable(this.btnClientCreditLineCancel, true);
+            }
+
             ControlUtil.setComponetEditable(this.btnClientCreditLineRefresh, true);
         }
 

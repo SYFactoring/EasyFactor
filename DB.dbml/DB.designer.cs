@@ -2489,8 +2489,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCountryCodeChanged();
     partial void OnRepresentativeChanging(string value);
     partial void OnRepresentativeChanged();
-    partial void OnWetsiteChanging(string value);
-    partial void OnWetsiteChanged();
+    partial void OnWebsiteChanging(string value);
+    partial void OnWebsiteChanged();
     partial void OnContactChanging(string value);
     partial void OnContactChanged();
     partial void OnTelephoneChanging(string value);
@@ -2822,7 +2822,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_Wetsite", DbType="NVarChar(200)")]
-		public string Wetsite
+		public string Website
 		{
 			get
 			{
@@ -2832,11 +2832,11 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._Wetsite != value))
 				{
-					this.OnWetsiteChanging(value);
+					this.OnWebsiteChanging(value);
 					this.SendPropertyChanging();
 					this._Wetsite = value;
-					this.SendPropertyChanged("Wetsite");
-					this.OnWetsiteChanged();
+					this.SendPropertyChanged("Website");
+					this.OnWebsiteChanged();
 				}
 			}
 		}

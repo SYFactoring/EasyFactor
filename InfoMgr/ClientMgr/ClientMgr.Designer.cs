@@ -16,13 +16,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private System.ComponentModel.IContainer components;
         private System.Windows.Forms.ContextMenuStrip contextMenuClientMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemSelectClient;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDetailClient;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemEdit;
         private System.Windows.Forms.ToolStripMenuItem menuItemNewClient;
         private System.Windows.Forms.ToolStripMenuItem menuItemUpdateClient;
         private System.Windows.Forms.ToolStripMenuItem menuItemDeleteClient;
+        private System.Windows.Forms.ToolStripMenuItem menuItemNewClientCreditLine;
+        private System.Windows.Forms.ToolStripMenuItem menuItemImportClients;
         private DevComponents.DotNetBar.PanelEx pnlQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
         private DevComponents.DotNetBar.LabelX lblClientName;
@@ -38,8 +39,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientType;
         private DevComponents.DotNetBar.LabelX lblCount;
-        private System.Windows.Forms.ToolStripMenuItem menuItemNewClientCreditCover;
-        private System.Windows.Forms.ToolStripMenuItem menuItemImportClients;
         private DevComponents.DotNetBar.Controls.ComboTree comboTreeDepartment;
         private DevComponents.Editors.ComboItem comboItem1;
         private DevComponents.Editors.ComboItem comboItem2;
@@ -71,15 +70,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuClientMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSelectClient = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDetailClient = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemNewClient = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemNewClientCreditCover = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemNewClientCreditLine = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemUpdateClient = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDeleteClient = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemImportClients = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,14 +103,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblPM = new DevComponents.DotNetBar.LabelX();
             this.lblDepartment = new DevComponents.DotNetBar.LabelX();
             this.dgvClients = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.ClientCoreNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientCoreNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientNameCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DepartmentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientLevelColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientNameEN_1Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientNameEN_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddressCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -121,8 +116,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.CityENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProvinceCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProvinceENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CountryNameCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PostCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CountryCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RepresentativeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.WebsiteColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContactColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -130,14 +125,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.EmailColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FaxNumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CellPhoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IndustryColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsGroupColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GroupNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RegistrationNumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CompanyCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsGroupColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GroupNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientLevelColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IndustryColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DepartmentCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DepartmentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PMNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RMNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CommentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CountryCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientGroupColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuClientMgr.SuspendLayout();
             this.pnlQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
@@ -146,43 +147,34 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // contextMenuClientMgr
             // 
             this.contextMenuClientMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemSelect,
-            this.menuItemDetail,
+            this.menuItemSelectClient,
+            this.menuItemDetailClient,
             this.toolStripSeparator,
-            this.menuItemEdit});
+            this.menuItemNewClient,
+            this.menuItemNewClientCreditLine,
+            this.menuItemUpdateClient,
+            this.menuItemDeleteClient});
             this.contextMenuClientMgr.Name = "contextMenuClientMgr";
-            this.contextMenuClientMgr.Size = new System.Drawing.Size(99, 76);
+            this.contextMenuClientMgr.Size = new System.Drawing.Size(147, 142);
             // 
-            // menuItemSelect
+            // menuItemSelectClient
             // 
-            this.menuItemSelect.Name = "menuItemSelect";
-            this.menuItemSelect.Size = new System.Drawing.Size(98, 22);
-            this.menuItemSelect.Text = "选定";
-            this.menuItemSelect.Click += new System.EventHandler(this.SelectClient);
+            this.menuItemSelectClient.Name = "menuItemSelectClient";
+            this.menuItemSelectClient.Size = new System.Drawing.Size(146, 22);
+            this.menuItemSelectClient.Text = "选定";
+            this.menuItemSelectClient.Click += new System.EventHandler(this.SelectClient);
             // 
-            // menuItemDetail
+            // menuItemDetailClient
             // 
-            this.menuItemDetail.Name = "menuItemDetail";
-            this.menuItemDetail.Size = new System.Drawing.Size(98, 22);
-            this.menuItemDetail.Text = "详细";
-            this.menuItemDetail.Click += new System.EventHandler(this.DetailClient);
+            this.menuItemDetailClient.Name = "menuItemDetailClient";
+            this.menuItemDetailClient.Size = new System.Drawing.Size(146, 22);
+            this.menuItemDetailClient.Text = "详细";
+            this.menuItemDetailClient.Click += new System.EventHandler(this.DetailClient);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(95, 6);
-            // 
-            // menuItemEdit
-            // 
-            this.menuItemEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemNewClient,
-            this.menuItemNewClientCreditCover,
-            this.menuItemUpdateClient,
-            this.menuItemDeleteClient,
-            this.menuItemImportClients});
-            this.menuItemEdit.Name = "menuItemEdit";
-            this.menuItemEdit.Size = new System.Drawing.Size(98, 22);
-            this.menuItemEdit.Text = "维护";
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
             // 
             // menuItemNewClient
             // 
@@ -191,12 +183,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemNewClient.Text = "新建客户";
             this.menuItemNewClient.Click += new System.EventHandler(this.NewClient);
             // 
-            // menuItemNewClientCreditCover
+            // menuItemNewClientCreditLine
             // 
-            this.menuItemNewClientCreditCover.Name = "menuItemNewClientCreditCover";
-            this.menuItemNewClientCreditCover.Size = new System.Drawing.Size(146, 22);
-            this.menuItemNewClientCreditCover.Text = "新建额度信息";
-            this.menuItemNewClientCreditCover.Click += new System.EventHandler(this.UpdateClientCreditLine);
+            this.menuItemNewClientCreditLine.Name = "menuItemNewClientCreditLine";
+            this.menuItemNewClientCreditLine.Size = new System.Drawing.Size(146, 22);
+            this.menuItemNewClientCreditLine.Text = "新建额度信息";
+            this.menuItemNewClientCreditLine.Click += new System.EventHandler(this.NewClientCreditLine);
             // 
             // menuItemUpdateClient
             // 
@@ -264,7 +256,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.comboTreeDepartment.Name = "comboTreeDepartment";
             this.comboTreeDepartment.Size = new System.Drawing.Size(100, 23);
             this.comboTreeDepartment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboTreeDepartment.TabIndex = 7;
+            this.comboTreeDepartment.TabIndex = 3;
             // 
             // lblCount
             // 
@@ -286,7 +278,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 49);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 12;
+            this.btnQuery.TabIndex = 6;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.QueryClients);
             // 
@@ -306,7 +298,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbClientType.Name = "cbClientType";
             this.cbClientType.Size = new System.Drawing.Size(100, 20);
             this.cbClientType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbClientType.TabIndex = 5;
+            this.cbClientType.TabIndex = 2;
             // 
             // comboItem6
             // 
@@ -353,7 +345,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbClientEDICode.Location = new System.Drawing.Point(60, 6);
             this.tbClientEDICode.Name = "tbClientEDICode";
             this.tbClientEDICode.Size = new System.Drawing.Size(100, 20);
-            this.tbClientEDICode.TabIndex = 1;
+            this.tbClientEDICode.TabIndex = 0;
             // 
             // lblClientNo
             // 
@@ -377,7 +369,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbClientName.Location = new System.Drawing.Point(227, 6);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.Size = new System.Drawing.Size(100, 20);
-            this.tbClientName.TabIndex = 3;
+            this.tbClientName.TabIndex = 1;
             // 
             // lblClientName
             // 
@@ -400,7 +392,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbRM.Location = new System.Drawing.Point(399, 32);
             this.tbRM.Name = "tbRM";
             this.tbRM.Size = new System.Drawing.Size(100, 20);
-            this.tbRM.TabIndex = 11;
+            this.tbRM.TabIndex = 5;
             // 
             // lblRM
             // 
@@ -423,7 +415,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbPM.Location = new System.Drawing.Point(227, 32);
             this.tbPM.Name = "tbPM";
             this.tbPM.Size = new System.Drawing.Size(100, 20);
-            this.tbPM.TabIndex = 9;
+            this.tbPM.TabIndex = 4;
             // 
             // lblPM
             // 
@@ -454,25 +446,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.AllowUserToAddRows = false;
             this.dgvClients.AllowUserToDeleteRows = false;
             this.dgvClients.AllowUserToOrderColumns = true;
-            this.dgvClients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ClientCoreNoColumn,
             this.clientEDICodeColumn,
+            this.ClientCoreNoColumn,
             this.ClientNameCNColumn,
-            this.DepartmentColumn,
-            this.ClientLevelColumn,
             this.ClientNameEN_1Column,
             this.ClientNameEN_2Column,
-            this.ClientTypeColumn,
             this.ProductCNColumn,
             this.ProductENColumn,
             this.AddressCNColumn,
@@ -481,8 +469,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.CityENColumn,
             this.ProvinceCNColumn,
             this.ProvinceENColumn,
+            this.CountryNameCNColumn,
             this.PostCodeColumn,
-            this.CountryCodeColumn,
             this.RepresentativeColumn,
             this.WebsiteColumn,
             this.ContactColumn,
@@ -490,23 +478,29 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.EmailColumn,
             this.FaxNumberColumn,
             this.CellPhoneColumn,
-            this.IndustryColumn,
-            this.IsGroupColumn,
-            this.GroupNoColumn,
             this.RegistrationNumberColumn,
             this.CompanyCodeColumn,
+            this.IsGroupColumn,
+            this.GroupNoColumn,
+            this.ClientTypeColumn,
+            this.ClientLevelColumn,
+            this.IndustryColumn,
+            this.DepartmentCodeColumn,
+            this.DepartmentColumn,
             this.PMNameColumn,
             this.RMNameColumn,
-            this.CommentColumn});
+            this.CommentColumn,
+            this.CountryCodeColumn,
+            this.ClientGroupColumn});
             this.dgvClients.ContextMenuStrip = this.contextMenuClientMgr;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClients.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClients.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvClients.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClients.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvClients.Location = new System.Drawing.Point(0, 61);
@@ -519,14 +513,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.TabIndex = 2;
             this.dgvClients.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
-            // ClientCoreNoColumn
-            // 
-            this.ClientCoreNoColumn.DataPropertyName = "ClientCoreNo";
-            this.ClientCoreNoColumn.HeaderText = "客户号";
-            this.ClientCoreNoColumn.Name = "ClientCoreNoColumn";
-            this.ClientCoreNoColumn.ReadOnly = true;
-            this.ClientCoreNoColumn.Width = 68;
-            // 
             // clientEDICodeColumn
             // 
             this.clientEDICodeColumn.DataPropertyName = "ClientEDICode";
@@ -534,6 +520,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientEDICodeColumn.Name = "clientEDICodeColumn";
             this.clientEDICodeColumn.ReadOnly = true;
             this.clientEDICodeColumn.Width = 80;
+            // 
+            // ClientCoreNoColumn
+            // 
+            this.ClientCoreNoColumn.DataPropertyName = "ClientCoreNo";
+            this.ClientCoreNoColumn.HeaderText = "客户号";
+            this.ClientCoreNoColumn.Name = "ClientCoreNoColumn";
+            this.ClientCoreNoColumn.ReadOnly = true;
+            this.ClientCoreNoColumn.Width = 68;
             // 
             // ClientNameCNColumn
             // 
@@ -543,26 +537,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ClientNameCNColumn.ReadOnly = true;
             this.ClientNameCNColumn.Width = 98;
             // 
-            // DepartmentColumn
-            // 
-            this.DepartmentColumn.DataPropertyName = "BranchCode";
-            this.DepartmentColumn.HeaderText = "所属机构";
-            this.DepartmentColumn.Name = "DepartmentColumn";
-            this.DepartmentColumn.ReadOnly = true;
-            this.DepartmentColumn.Width = 80;
-            // 
-            // ClientLevelColumn
-            // 
-            this.ClientLevelColumn.DataPropertyName = "ClientLevel";
-            this.ClientLevelColumn.HeaderText = "客户级别";
-            this.ClientLevelColumn.Name = "ClientLevelColumn";
-            this.ClientLevelColumn.ReadOnly = true;
-            this.ClientLevelColumn.Width = 80;
-            // 
             // ClientNameEN_1Column
             // 
             this.ClientNameEN_1Column.DataPropertyName = "ClientNameEN_1";
-            this.ClientNameEN_1Column.HeaderText = "客户名称(英)";
+            this.ClientNameEN_1Column.HeaderText = "客户名称(英1)";
             this.ClientNameEN_1Column.Name = "ClientNameEN_1Column";
             this.ClientNameEN_1Column.ReadOnly = true;
             this.ClientNameEN_1Column.Width = 98;
@@ -570,18 +548,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // ClientNameEN_2Column
             // 
             this.ClientNameEN_2Column.DataPropertyName = "ClientNameEN_2";
-            this.ClientNameEN_2Column.HeaderText = "客户名称(英)";
+            this.ClientNameEN_2Column.HeaderText = "客户名称(英2)";
             this.ClientNameEN_2Column.Name = "ClientNameEN_2Column";
             this.ClientNameEN_2Column.ReadOnly = true;
             this.ClientNameEN_2Column.Width = 98;
-            // 
-            // ClientTypeColumn
-            // 
-            this.ClientTypeColumn.DataPropertyName = "ClientType";
-            this.ClientTypeColumn.HeaderText = "客户类别";
-            this.ClientTypeColumn.Name = "ClientTypeColumn";
-            this.ClientTypeColumn.ReadOnly = true;
-            this.ClientTypeColumn.Width = 80;
             // 
             // ProductCNColumn
             // 
@@ -634,7 +604,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // ProvinceCNColumn
             // 
             this.ProvinceCNColumn.DataPropertyName = "ProvinceCN";
-            this.ProvinceCNColumn.HeaderText = "省/州";
+            this.ProvinceCNColumn.HeaderText = "省/州(中)";
             this.ProvinceCNColumn.Name = "ProvinceCNColumn";
             this.ProvinceCNColumn.ReadOnly = true;
             this.ProvinceCNColumn.Width = 61;
@@ -647,6 +617,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ProvinceENColumn.ReadOnly = true;
             this.ProvinceENColumn.Width = 79;
             // 
+            // CountryNameCNColumn
+            // 
+            this.CountryNameCNColumn.DataPropertyName = "CountryNameCN";
+            this.CountryNameCNColumn.HeaderText = "国家";
+            this.CountryNameCNColumn.Name = "CountryNameCNColumn";
+            this.CountryNameCNColumn.ReadOnly = true;
+            this.CountryNameCNColumn.Width = 56;
+            // 
             // PostCodeColumn
             // 
             this.PostCodeColumn.DataPropertyName = "PostCode";
@@ -654,14 +632,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.PostCodeColumn.Name = "PostCodeColumn";
             this.PostCodeColumn.ReadOnly = true;
             this.PostCodeColumn.Width = 56;
-            // 
-            // CountryCodeColumn
-            // 
-            this.CountryCodeColumn.DataPropertyName = "CountryNameCN";
-            this.CountryCodeColumn.HeaderText = "国家";
-            this.CountryCodeColumn.Name = "CountryCodeColumn";
-            this.CountryCodeColumn.ReadOnly = true;
-            this.CountryCodeColumn.Width = 56;
             // 
             // RepresentativeColumn
             // 
@@ -719,13 +689,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.CellPhoneColumn.ReadOnly = true;
             this.CellPhoneColumn.Width = 56;
             // 
-            // IndustryColumn
+            // RegistrationNumberColumn
             // 
-            this.IndustryColumn.DataPropertyName = "Industry";
-            this.IndustryColumn.HeaderText = "行业";
-            this.IndustryColumn.Name = "IndustryColumn";
-            this.IndustryColumn.ReadOnly = true;
-            this.IndustryColumn.Width = 56;
+            this.RegistrationNumberColumn.DataPropertyName = "RegistrationNumber";
+            this.RegistrationNumberColumn.HeaderText = "营业执照号码";
+            this.RegistrationNumberColumn.Name = "RegistrationNumberColumn";
+            this.RegistrationNumberColumn.ReadOnly = true;
+            this.RegistrationNumberColumn.Width = 104;
+            // 
+            // CompanyCodeColumn
+            // 
+            this.CompanyCodeColumn.DataPropertyName = "CompanyCode";
+            this.CompanyCodeColumn.HeaderText = "组织机构代码";
+            this.CompanyCodeColumn.Name = "CompanyCodeColumn";
+            this.CompanyCodeColumn.ReadOnly = true;
+            this.CompanyCodeColumn.Width = 80;
             // 
             // IsGroupColumn
             // 
@@ -743,21 +721,45 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.GroupNoColumn.ReadOnly = true;
             this.GroupNoColumn.Width = 116;
             // 
-            // RegistrationNumberColumn
+            // ClientTypeColumn
             // 
-            this.RegistrationNumberColumn.DataPropertyName = "RegistrationNumber";
-            this.RegistrationNumberColumn.HeaderText = "营业执照号码";
-            this.RegistrationNumberColumn.Name = "RegistrationNumberColumn";
-            this.RegistrationNumberColumn.ReadOnly = true;
-            this.RegistrationNumberColumn.Width = 104;
+            this.ClientTypeColumn.DataPropertyName = "ClientType";
+            this.ClientTypeColumn.HeaderText = "客户类别";
+            this.ClientTypeColumn.Name = "ClientTypeColumn";
+            this.ClientTypeColumn.ReadOnly = true;
+            this.ClientTypeColumn.Width = 80;
             // 
-            // CompanyCodeColumn
+            // ClientLevelColumn
             // 
-            this.CompanyCodeColumn.DataPropertyName = "CompanyCode";
-            this.CompanyCodeColumn.HeaderText = "机构代码";
-            this.CompanyCodeColumn.Name = "CompanyCodeColumn";
-            this.CompanyCodeColumn.ReadOnly = true;
-            this.CompanyCodeColumn.Width = 80;
+            this.ClientLevelColumn.DataPropertyName = "ClientLevel";
+            this.ClientLevelColumn.HeaderText = "客户级别";
+            this.ClientLevelColumn.Name = "ClientLevelColumn";
+            this.ClientLevelColumn.ReadOnly = true;
+            this.ClientLevelColumn.Width = 80;
+            // 
+            // IndustryColumn
+            // 
+            this.IndustryColumn.DataPropertyName = "Industry";
+            this.IndustryColumn.HeaderText = "所属行业";
+            this.IndustryColumn.Name = "IndustryColumn";
+            this.IndustryColumn.ReadOnly = true;
+            this.IndustryColumn.Width = 56;
+            // 
+            // DepartmentCodeColumn
+            // 
+            this.DepartmentCodeColumn.DataPropertyName = "BranchCode";
+            this.DepartmentCodeColumn.HeaderText = "所属机构代码";
+            this.DepartmentCodeColumn.Name = "DepartmentCodeColumn";
+            this.DepartmentCodeColumn.ReadOnly = true;
+            this.DepartmentCodeColumn.Visible = false;
+            this.DepartmentCodeColumn.Width = 80;
+            // 
+            // DepartmentColumn
+            // 
+            this.DepartmentColumn.DataPropertyName = "Department";
+            this.DepartmentColumn.HeaderText = "所属机构";
+            this.DepartmentColumn.Name = "DepartmentColumn";
+            this.DepartmentColumn.ReadOnly = true;
             // 
             // PMNameColumn
             // 
@@ -783,6 +785,22 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.CommentColumn.ReadOnly = true;
             this.CommentColumn.Width = 56;
             // 
+            // CountryCodeColumn
+            // 
+            this.CountryCodeColumn.DataPropertyName = "CountryCode";
+            this.CountryCodeColumn.HeaderText = "CountryCode";
+            this.CountryCodeColumn.Name = "CountryCodeColumn";
+            this.CountryCodeColumn.ReadOnly = true;
+            this.CountryCodeColumn.Visible = false;
+            // 
+            // ClientGroupColumn
+            // 
+            this.ClientGroupColumn.DataPropertyName = "ClientGroup";
+            this.ClientGroupColumn.HeaderText = "ClientGroup";
+            this.ClientGroupColumn.Name = "ClientGroupColumn";
+            this.ClientGroupColumn.ReadOnly = true;
+            this.ClientGroupColumn.Visible = false;
+            // 
             // ClientMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -802,14 +820,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientCoreNoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn clientEDICodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientCoreNoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientLevelColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameEN_1Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameEN_2Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientTypeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductCNColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductENColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn AddressCNColumn;
@@ -818,8 +833,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn CityENColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProvinceCNColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProvinceENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameCNColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn PostCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CountryCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn RepresentativeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn WebsiteColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ContactColumn;
@@ -827,14 +842,26 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn EmailColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn FaxNumberColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CellPhoneColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IndustryColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsGroupColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn RegistrationNumberColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CompanyCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsGroupColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientTypeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientLevelColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IndustryColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn PMNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn RMNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountryCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientGroupColumn;
+
+
+
+
+
+
 
 
 

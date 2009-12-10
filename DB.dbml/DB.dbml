@@ -105,7 +105,7 @@
       <Column Name="PostCode" Type="System.String" DbType="NVarChar(9)" CanBeNull="true" />
       <Column Name="CountryCode" Type="System.String" DbType="NChar(2)" CanBeNull="true" />
       <Column Name="Representative" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Wetsite" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Website" Storage="_Wetsite" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="Contact" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="Telephone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />

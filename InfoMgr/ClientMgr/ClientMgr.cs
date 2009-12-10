@@ -66,8 +66,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
             if (!this.isEditable)
             {
-                this.toolStripSeparator.Visible = false;
-                this.menuItemEdit.Visible = false;
+                this.menuItemNewClient.Enabled = false;
+                this.menuItemNewClientCreditLine.Enabled = false;
+                this.menuItemUpdateClient.Enabled = false;
+                this.menuItemDeleteClient.Enabled = false;
             }
         }
 
@@ -98,17 +100,27 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 }
             }
 
-            var queryResult = App.Current.DbContext.Clients.Where(c =>
-               (c.BranchCode != null ? c.BranchCode.Contains(department) : true)
-            && (c.PMName.Contains(tbPM.Text))
-            && (c.RMName.Contains(tbRM.Text))
-            && (c.ClientNameCN.Contains(tbClientName.Text) || c.ClientNameEN_1.Contains(tbClientName.Text) || c.ClientNameEN_2.Contains(tbClientName.Text))
-            && (c.ClientEDICode.Contains(tbClientEDICode.Text))
-            && (c.ClientType.Contains(clientType)));
-
-            List<Client> clientList = queryResult.ToList();
-
-            dgvClients.DataSource = clientList;
+            IQueryable<Client> queryResult = null;
+            if (department == string.Empty)
+            {
+                queryResult = App.Current.DbContext.Clients.Where(c =>
+                    (c.PMName.Contains(tbPM.Text))
+                 && (c.RMName.Contains(tbRM.Text))
+                 && (c.ClientNameCN.Contains(tbClientName.Text) || c.ClientNameEN_1.Contains(tbClientName.Text) || c.ClientNameEN_2.Contains(tbClientName.Text))
+                 && (c.ClientEDICode.Contains(tbClientEDICode.Text))
+                 && (c.ClientType.Contains(clientType)));
+            }
+            else
+            {
+                queryResult = App.Current.DbContext.Clients.Where(c =>
+                    (c.BranchCode != null && c.BranchCode.Contains(department))
+                  && (c.PMName.Contains(tbPM.Text))
+                  && (c.RMName.Contains(tbRM.Text))
+                  && (c.ClientNameCN.Contains(tbClientName.Text) || c.ClientNameEN_1.Contains(tbClientName.Text) || c.ClientNameEN_2.Contains(tbClientName.Text))
+                  && (c.ClientEDICode.Contains(tbClientEDICode.Text))
+                  && (c.ClientType.Contains(clientType)));
+            }
+            dgvClients.DataSource = queryResult.ToList();
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
@@ -147,7 +159,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-        private void UpdateClientCreditLine(object sender, System.EventArgs e)
+        private void NewClientCreditLine(object sender, System.EventArgs e)
         {
             if (this.dgvClients.SelectedRows.Count == 0)
             {
@@ -160,7 +172,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
                 if (selectedClient != null)
                 {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpType.UPDATE_CLIENT_CREDIT_COVER);
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpType.NEW_CLIENT_CREDIT_COVER);
                     clientDetail.ShowDialog(this);
                 }
             }
@@ -349,7 +361,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             client.PostCode = values.GetValue(row, column++).ToString().Trim();
                             client.CountryCode = values.GetValue(row, column++).ToString().Trim();
                             client.Representative = values.GetValue(row, column++).ToString().Trim();
-                            client.Wetsite = values.GetValue(row, column++).ToString().Trim();
+                            client.Website = values.GetValue(row, column++).ToString().Trim();
                             client.Contact = values.GetValue(row, column++).ToString().Trim();
                             client.Telephone = values.GetValue(row, column++).ToString().Trim();
                             client.Email = values.GetValue(row, column++).ToString().Trim();

@@ -4,6 +4,14 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Linq;
     using System.Collections.Generic;
 
+    public partial class Department
+    {
+        public override string ToString()
+        {
+            return this._DepartmentName;
+        }
+    }
+
     public partial class Client
     {
         public string CountryNameCN
@@ -67,7 +75,7 @@ namespace CMBC.EasyFactor.DB.dbml
             if (_allCountries == null)
             {
                 _allCountries = new Dictionary<string, Country>();
-               _allCountries =  App.Current.DbContext.Countries.ToDictionary(c=>c._CountryCode);
+                _allCountries = App.Current.DbContext.Countries.ToDictionary(c => c._CountryCode);
             }
             return _allCountries[countryCode];
         }
