@@ -11,7 +11,6 @@ namespace CMBC.EasyFactor
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
 
-
     /// <summary>
     /// Login Window
     /// </summary>
@@ -43,6 +42,7 @@ namespace CMBC.EasyFactor
                 {
                     return true;
                 }
+
                 MessageBox.Show("数据库连接失败", "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception e)

@@ -9,7 +9,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// <summary>
     /// Client Management User Interface Designer
     /// </summary>
-    partial class ClientMgr
+    public partial class ClientMgr
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -23,6 +23,30 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemNewClient;
         private System.Windows.Forms.ToolStripMenuItem menuItemUpdateClient;
         private System.Windows.Forms.ToolStripMenuItem menuItemDeleteClient;
+        private DevComponents.DotNetBar.PanelEx pnlQuery;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
+        private DevComponents.DotNetBar.LabelX lblClientName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbRM;
+        private DevComponents.DotNetBar.LabelX lblRM;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPM;
+        private DevComponents.DotNetBar.LabelX lblPM;
+        private DevComponents.DotNetBar.LabelX lblDepartment;
+        private DevComponents.DotNetBar.LabelX lblClientType;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
+        private DevComponents.DotNetBar.LabelX lblClientNo;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvClients;
+        private DevComponents.DotNetBar.ButtonX btnQuery;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientType;
+        private DevComponents.DotNetBar.LabelX lblCount;
+        private System.Windows.Forms.ToolStripMenuItem menuItemNewClientCreditCover;
+        private System.Windows.Forms.ToolStripMenuItem menuItemImportClients;
+        private DevComponents.DotNetBar.Controls.ComboTree comboTreeDepartment;
+        private DevComponents.Editors.ComboItem comboItem1;
+        private DevComponents.Editors.ComboItem comboItem2;
+        private DevComponents.Editors.ComboItem comboItem3;
+        private DevComponents.Editors.ComboItem comboItem4;
+        private DevComponents.Editors.ComboItem comboItem5;
+        private DevComponents.Editors.ComboItem comboItem6;
 
         /// <summary> 
         /// 清理所有正在使用的资源。
@@ -83,37 +107,37 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.ClientCoreNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clientNameCNDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clientNameEN1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientNameCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DepartmentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientLevelColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientNameEN_1Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientNameEN_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clientTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Industry = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productCNDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productENDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressCNDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressENDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cityCNDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cityENDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.provinceCNDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.provinceENDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.postCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CountryCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Representative = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.wetsiteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telephoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.faxNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cellPhoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clientLevelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GroupNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RegistrationNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.companyCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BranchCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pMNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnRMName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddressCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddressENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CityCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CityENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProvinceCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProvinceENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PostCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CountryCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RepresentativeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WebsiteColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContactColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TelephoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmailColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FaxNumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CellPhoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IndustryColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsGroupColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GroupNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RegistrationNumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CompanyCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PMNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RMNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CommentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuClientMgr.SuspendLayout();
             this.pnlQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
@@ -251,7 +275,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblCount.BackgroundStyle.Class = "";
             this.lblCount.Location = new System.Drawing.Point(598, 30);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(75, 23);
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 13;
             // 
             // btnQuery
@@ -425,12 +449,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblDepartment.TabIndex = 6;
             this.lblDepartment.Text = "所属机构";
             // 
-            // dgvClient
+            // dgvClients
             // 
             this.dgvClients.AllowUserToAddRows = false;
             this.dgvClients.AllowUserToDeleteRows = false;
             this.dgvClients.AllowUserToOrderColumns = true;
-            this.dgvClients.AutoGenerateColumns = false;
             this.dgvClients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -444,37 +467,37 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ClientCoreNoColumn,
             this.clientEDICodeColumn,
-            this.clientNameCNDataGridViewTextBoxColumn,
-            this.clientNameEN1DataGridViewTextBoxColumn,
+            this.ClientNameCNColumn,
+            this.DepartmentColumn,
+            this.ClientLevelColumn,
+            this.ClientNameEN_1Column,
             this.ClientNameEN_2Column,
-            this.clientTypeDataGridViewTextBoxColumn,
-            this.Industry,
-            this.productCNDataGridViewTextBoxColumn,
-            this.productENDataGridViewTextBoxColumn,
-            this.addressCNDataGridViewTextBoxColumn,
-            this.addressENDataGridViewTextBoxColumn,
-            this.cityCNDataGridViewTextBoxColumn,
-            this.cityENDataGridViewTextBoxColumn,
-            this.provinceCNDataGridViewTextBoxColumn,
-            this.provinceENDataGridViewTextBoxColumn,
-            this.postCodeDataGridViewTextBoxColumn,
-            this.CountryCode,
-            this.Representative,
-            this.wetsiteDataGridViewTextBoxColumn,
-            this.Contact,
-            this.telephoneDataGridViewTextBoxColumn,
-            this.emailDataGridViewTextBoxColumn,
-            this.faxNumberDataGridViewTextBoxColumn,
-            this.cellPhoneDataGridViewTextBoxColumn,
-            this.clientLevelDataGridViewTextBoxColumn,
-            this.IsGroup,
-            this.GroupNo,
-            this.RegistrationNumber,
-            this.companyCodeDataGridViewTextBoxColumn,
-            this.BranchCode,
-            this.pMNameDataGridViewTextBoxColumn,
-            this.ColumnRMName,
-            this.commentDataGridViewTextBoxColumn});
+            this.ClientTypeColumn,
+            this.ProductCNColumn,
+            this.ProductENColumn,
+            this.AddressCNColumn,
+            this.AddressENColumn,
+            this.CityCNColumn,
+            this.CityENColumn,
+            this.ProvinceCNColumn,
+            this.ProvinceENColumn,
+            this.PostCodeColumn,
+            this.CountryCodeColumn,
+            this.RepresentativeColumn,
+            this.WebsiteColumn,
+            this.ContactColumn,
+            this.TelephoneColumn,
+            this.EmailColumn,
+            this.FaxNumberColumn,
+            this.CellPhoneColumn,
+            this.IndustryColumn,
+            this.IsGroupColumn,
+            this.GroupNoColumn,
+            this.RegistrationNumberColumn,
+            this.CompanyCodeColumn,
+            this.PMNameColumn,
+            this.RMNameColumn,
+            this.CommentColumn});
             this.dgvClients.ContextMenuStrip = this.contextMenuClientMgr;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -488,7 +511,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvClients.Location = new System.Drawing.Point(0, 61);
             this.dgvClients.MultiSelect = false;
-            this.dgvClients.Name = "dgvClient";
+            this.dgvClients.Name = "dgvClients";
             this.dgvClients.ReadOnly = true;
             this.dgvClients.RowTemplate.Height = 23;
             this.dgvClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -512,23 +535,37 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientEDICodeColumn.ReadOnly = true;
             this.clientEDICodeColumn.Width = 80;
             // 
-            // clientNameCNDataGridViewTextBoxColumn
+            // ClientNameCNColumn
             // 
-            this.clientNameCNDataGridViewTextBoxColumn.DataPropertyName = "ClientNameCN";
-            this.clientNameCNDataGridViewTextBoxColumn.FillWeight = 247.7837F;
-            this.clientNameCNDataGridViewTextBoxColumn.HeaderText = "客户名称(中)";
-            this.clientNameCNDataGridViewTextBoxColumn.Name = "clientNameCNDataGridViewTextBoxColumn";
-            this.clientNameCNDataGridViewTextBoxColumn.ReadOnly = true;
-            this.clientNameCNDataGridViewTextBoxColumn.Width = 98;
+            this.ClientNameCNColumn.DataPropertyName = "ClientNameCN";
+            this.ClientNameCNColumn.HeaderText = "客户名称(中)";
+            this.ClientNameCNColumn.Name = "ClientNameCNColumn";
+            this.ClientNameCNColumn.ReadOnly = true;
+            this.ClientNameCNColumn.Width = 98;
             // 
-            // clientNameEN1DataGridViewTextBoxColumn
+            // DepartmentColumn
             // 
-            this.clientNameEN1DataGridViewTextBoxColumn.DataPropertyName = "ClientNameEN_1";
-            this.clientNameEN1DataGridViewTextBoxColumn.FillWeight = 223.7242F;
-            this.clientNameEN1DataGridViewTextBoxColumn.HeaderText = "客户名称(英)";
-            this.clientNameEN1DataGridViewTextBoxColumn.Name = "clientNameEN1DataGridViewTextBoxColumn";
-            this.clientNameEN1DataGridViewTextBoxColumn.ReadOnly = true;
-            this.clientNameEN1DataGridViewTextBoxColumn.Width = 98;
+            this.DepartmentColumn.DataPropertyName = "BranchCode";
+            this.DepartmentColumn.HeaderText = "所属机构";
+            this.DepartmentColumn.Name = "DepartmentColumn";
+            this.DepartmentColumn.ReadOnly = true;
+            this.DepartmentColumn.Width = 80;
+            // 
+            // ClientLevelColumn
+            // 
+            this.ClientLevelColumn.DataPropertyName = "ClientLevel";
+            this.ClientLevelColumn.HeaderText = "客户级别";
+            this.ClientLevelColumn.Name = "ClientLevelColumn";
+            this.ClientLevelColumn.ReadOnly = true;
+            this.ClientLevelColumn.Width = 80;
+            // 
+            // ClientNameEN_1Column
+            // 
+            this.ClientNameEN_1Column.DataPropertyName = "ClientNameEN_1";
+            this.ClientNameEN_1Column.HeaderText = "客户名称(英)";
+            this.ClientNameEN_1Column.Name = "ClientNameEN_1Column";
+            this.ClientNameEN_1Column.ReadOnly = true;
+            this.ClientNameEN_1Column.Width = 98;
             // 
             // ClientNameEN_2Column
             // 
@@ -538,248 +575,213 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ClientNameEN_2Column.ReadOnly = true;
             this.ClientNameEN_2Column.Width = 98;
             // 
-            // clientTypeDataGridViewTextBoxColumn
+            // ClientTypeColumn
             // 
-            this.clientTypeDataGridViewTextBoxColumn.DataPropertyName = "ClientType";
-            this.clientTypeDataGridViewTextBoxColumn.FillWeight = 50.02522F;
-            this.clientTypeDataGridViewTextBoxColumn.HeaderText = "客户类型";
-            this.clientTypeDataGridViewTextBoxColumn.Name = "clientTypeDataGridViewTextBoxColumn";
-            this.clientTypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.clientTypeDataGridViewTextBoxColumn.Width = 80;
+            this.ClientTypeColumn.DataPropertyName = "ClientType";
+            this.ClientTypeColumn.HeaderText = "客户类别";
+            this.ClientTypeColumn.Name = "ClientTypeColumn";
+            this.ClientTypeColumn.ReadOnly = true;
+            this.ClientTypeColumn.Width = 80;
             // 
-            // Industry
+            // ProductCNColumn
             // 
-            this.Industry.DataPropertyName = "Industry";
-            this.Industry.HeaderText = "行业类别";
-            this.Industry.Name = "Industry";
-            this.Industry.ReadOnly = true;
-            this.Industry.Width = 80;
+            this.ProductCNColumn.DataPropertyName = "ProductCN";
+            this.ProductCNColumn.HeaderText = "营业范围(中)";
+            this.ProductCNColumn.Name = "ProductCNColumn";
+            this.ProductCNColumn.ReadOnly = true;
+            this.ProductCNColumn.Width = 98;
             // 
-            // productCNDataGridViewTextBoxColumn
+            // ProductENColumn
             // 
-            this.productCNDataGridViewTextBoxColumn.DataPropertyName = "ProductCN";
-            this.productCNDataGridViewTextBoxColumn.FillWeight = 60.28388F;
-            this.productCNDataGridViewTextBoxColumn.HeaderText = "经营范围(中)";
-            this.productCNDataGridViewTextBoxColumn.Name = "productCNDataGridViewTextBoxColumn";
-            this.productCNDataGridViewTextBoxColumn.ReadOnly = true;
-            this.productCNDataGridViewTextBoxColumn.Width = 98;
+            this.ProductENColumn.DataPropertyName = "ProductEN";
+            this.ProductENColumn.HeaderText = "营业范围(英)";
+            this.ProductENColumn.Name = "ProductENColumn";
+            this.ProductENColumn.ReadOnly = true;
+            this.ProductENColumn.Width = 98;
             // 
-            // productENDataGridViewTextBoxColumn
+            // AddressCNColumn
             // 
-            this.productENDataGridViewTextBoxColumn.DataPropertyName = "ProductEN";
-            this.productENDataGridViewTextBoxColumn.FillWeight = 55.54407F;
-            this.productENDataGridViewTextBoxColumn.HeaderText = "经营范围(英)";
-            this.productENDataGridViewTextBoxColumn.Name = "productENDataGridViewTextBoxColumn";
-            this.productENDataGridViewTextBoxColumn.ReadOnly = true;
-            this.productENDataGridViewTextBoxColumn.Width = 98;
+            this.AddressCNColumn.DataPropertyName = "AddressCN";
+            this.AddressCNColumn.HeaderText = "地址(中)";
+            this.AddressCNColumn.Name = "AddressCNColumn";
+            this.AddressCNColumn.ReadOnly = true;
+            this.AddressCNColumn.Width = 74;
             // 
-            // addressCNDataGridViewTextBoxColumn
+            // AddressENColumn
             // 
-            this.addressCNDataGridViewTextBoxColumn.DataPropertyName = "AddressCN";
-            this.addressCNDataGridViewTextBoxColumn.FillWeight = 157.0093F;
-            this.addressCNDataGridViewTextBoxColumn.HeaderText = "地址(中)";
-            this.addressCNDataGridViewTextBoxColumn.Name = "addressCNDataGridViewTextBoxColumn";
-            this.addressCNDataGridViewTextBoxColumn.ReadOnly = true;
-            this.addressCNDataGridViewTextBoxColumn.Width = 74;
+            this.AddressENColumn.DataPropertyName = "AddressEN";
+            this.AddressENColumn.HeaderText = "地址(英)";
+            this.AddressENColumn.Name = "AddressENColumn";
+            this.AddressENColumn.ReadOnly = true;
+            this.AddressENColumn.Width = 74;
             // 
-            // addressENDataGridViewTextBoxColumn
+            // CityCNColumn
             // 
-            this.addressENDataGridViewTextBoxColumn.DataPropertyName = "AddressEN";
-            this.addressENDataGridViewTextBoxColumn.FillWeight = 144.377F;
-            this.addressENDataGridViewTextBoxColumn.HeaderText = "地址(英)";
-            this.addressENDataGridViewTextBoxColumn.Name = "addressENDataGridViewTextBoxColumn";
-            this.addressENDataGridViewTextBoxColumn.ReadOnly = true;
-            this.addressENDataGridViewTextBoxColumn.Width = 74;
+            this.CityCNColumn.DataPropertyName = "CityCN";
+            this.CityCNColumn.HeaderText = "城市(中)";
+            this.CityCNColumn.Name = "CityCNColumn";
+            this.CityCNColumn.ReadOnly = true;
+            this.CityCNColumn.Width = 74;
             // 
-            // cityCNDataGridViewTextBoxColumn
+            // CityENColumn
             // 
-            this.cityCNDataGridViewTextBoxColumn.DataPropertyName = "CityCN";
-            this.cityCNDataGridViewTextBoxColumn.FillWeight = 132.8628F;
-            this.cityCNDataGridViewTextBoxColumn.HeaderText = "城市(中)";
-            this.cityCNDataGridViewTextBoxColumn.Name = "cityCNDataGridViewTextBoxColumn";
-            this.cityCNDataGridViewTextBoxColumn.ReadOnly = true;
-            this.cityCNDataGridViewTextBoxColumn.Width = 74;
+            this.CityENColumn.DataPropertyName = "CityEN";
+            this.CityENColumn.HeaderText = "城市(英)";
+            this.CityENColumn.Name = "CityENColumn";
+            this.CityENColumn.ReadOnly = true;
+            this.CityENColumn.Width = 74;
             // 
-            // cityENDataGridViewTextBoxColumn
+            // ProvinceCNColumn
             // 
-            this.cityENDataGridViewTextBoxColumn.DataPropertyName = "CityEN";
-            this.cityENDataGridViewTextBoxColumn.FillWeight = 122.3677F;
-            this.cityENDataGridViewTextBoxColumn.HeaderText = "城市(英)";
-            this.cityENDataGridViewTextBoxColumn.Name = "cityENDataGridViewTextBoxColumn";
-            this.cityENDataGridViewTextBoxColumn.ReadOnly = true;
-            this.cityENDataGridViewTextBoxColumn.Width = 74;
+            this.ProvinceCNColumn.DataPropertyName = "ProvinceCN";
+            this.ProvinceCNColumn.HeaderText = "省/州";
+            this.ProvinceCNColumn.Name = "ProvinceCNColumn";
+            this.ProvinceCNColumn.ReadOnly = true;
+            this.ProvinceCNColumn.Width = 61;
             // 
-            // provinceCNDataGridViewTextBoxColumn
+            // ProvinceENColumn
             // 
-            this.provinceCNDataGridViewTextBoxColumn.DataPropertyName = "ProvinceCN";
-            this.provinceCNDataGridViewTextBoxColumn.FillWeight = 121.2194F;
-            this.provinceCNDataGridViewTextBoxColumn.HeaderText = "省/州(中)";
-            this.provinceCNDataGridViewTextBoxColumn.Name = "provinceCNDataGridViewTextBoxColumn";
-            this.provinceCNDataGridViewTextBoxColumn.ReadOnly = true;
-            this.provinceCNDataGridViewTextBoxColumn.Width = 79;
+            this.ProvinceENColumn.DataPropertyName = "ProvinceEN";
+            this.ProvinceENColumn.HeaderText = "省/州(英)";
+            this.ProvinceENColumn.Name = "ProvinceENColumn";
+            this.ProvinceENColumn.ReadOnly = true;
+            this.ProvinceENColumn.Width = 79;
             // 
-            // provinceENDataGridViewTextBoxColumn
+            // PostCodeColumn
             // 
-            this.provinceENDataGridViewTextBoxColumn.DataPropertyName = "ProvinceEN";
-            this.provinceENDataGridViewTextBoxColumn.FillWeight = 111.0485F;
-            this.provinceENDataGridViewTextBoxColumn.HeaderText = "省/州(英)";
-            this.provinceENDataGridViewTextBoxColumn.Name = "provinceENDataGridViewTextBoxColumn";
-            this.provinceENDataGridViewTextBoxColumn.ReadOnly = true;
-            this.provinceENDataGridViewTextBoxColumn.Width = 79;
+            this.PostCodeColumn.DataPropertyName = "PostCode";
+            this.PostCodeColumn.HeaderText = "邮编";
+            this.PostCodeColumn.Name = "PostCodeColumn";
+            this.PostCodeColumn.ReadOnly = true;
+            this.PostCodeColumn.Width = 56;
             // 
-            // postCodeDataGridViewTextBoxColumn
+            // CountryCodeColumn
             // 
-            this.postCodeDataGridViewTextBoxColumn.DataPropertyName = "PostCode";
-            this.postCodeDataGridViewTextBoxColumn.FillWeight = 86.2853F;
-            this.postCodeDataGridViewTextBoxColumn.HeaderText = "邮编";
-            this.postCodeDataGridViewTextBoxColumn.Name = "postCodeDataGridViewTextBoxColumn";
-            this.postCodeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.postCodeDataGridViewTextBoxColumn.Width = 56;
+            this.CountryCodeColumn.DataPropertyName = "CountryNameCN";
+            this.CountryCodeColumn.HeaderText = "国家";
+            this.CountryCodeColumn.Name = "CountryCodeColumn";
+            this.CountryCodeColumn.ReadOnly = true;
+            this.CountryCodeColumn.Width = 56;
             // 
-            // CountryCode
+            // RepresentativeColumn
             // 
-            this.CountryCode.DataPropertyName = "CountryNameCN";
-            this.CountryCode.HeaderText = "国家";
-            this.CountryCode.Name = "CountryCode";
-            this.CountryCode.ReadOnly = true;
-            this.CountryCode.Width = 56;
+            this.RepresentativeColumn.DataPropertyName = "Representative";
+            this.RepresentativeColumn.HeaderText = "公司法人/负责人";
+            this.RepresentativeColumn.Name = "RepresentativeColumn";
+            this.RepresentativeColumn.ReadOnly = true;
+            this.RepresentativeColumn.Width = 121;
             // 
-            // Representative
+            // WebsiteColumn
             // 
-            this.Representative.DataPropertyName = "Representative";
-            this.Representative.HeaderText = "公司法人/负责人";
-            this.Representative.Name = "Representative";
-            this.Representative.ReadOnly = true;
-            this.Representative.Width = 121;
+            this.WebsiteColumn.DataPropertyName = "Website";
+            this.WebsiteColumn.HeaderText = "网址";
+            this.WebsiteColumn.Name = "WebsiteColumn";
+            this.WebsiteColumn.ReadOnly = true;
+            this.WebsiteColumn.Width = 56;
             // 
-            // wetsiteDataGridViewTextBoxColumn
+            // ContactColumn
             // 
-            this.wetsiteDataGridViewTextBoxColumn.DataPropertyName = "Wetsite";
-            this.wetsiteDataGridViewTextBoxColumn.FillWeight = 73.34142F;
-            this.wetsiteDataGridViewTextBoxColumn.HeaderText = "公司网址";
-            this.wetsiteDataGridViewTextBoxColumn.Name = "wetsiteDataGridViewTextBoxColumn";
-            this.wetsiteDataGridViewTextBoxColumn.ReadOnly = true;
-            this.wetsiteDataGridViewTextBoxColumn.Width = 80;
+            this.ContactColumn.DataPropertyName = "Contact";
+            this.ContactColumn.HeaderText = "联系人";
+            this.ContactColumn.Name = "ContactColumn";
+            this.ContactColumn.ReadOnly = true;
+            this.ContactColumn.Width = 68;
             // 
-            // Contact
+            // TelephoneColumn
             // 
-            this.Contact.DataPropertyName = "Contact";
-            this.Contact.HeaderText = "联系人";
-            this.Contact.Name = "Contact";
-            this.Contact.ReadOnly = true;
-            this.Contact.Width = 68;
+            this.TelephoneColumn.DataPropertyName = "Telephone";
+            this.TelephoneColumn.HeaderText = "联系电话";
+            this.TelephoneColumn.Name = "TelephoneColumn";
+            this.TelephoneColumn.ReadOnly = true;
+            this.TelephoneColumn.Width = 80;
             // 
-            // telephoneDataGridViewTextBoxColumn
+            // EmailColumn
             // 
-            this.telephoneDataGridViewTextBoxColumn.DataPropertyName = "Telephone";
-            this.telephoneDataGridViewTextBoxColumn.FillWeight = 64.20696F;
-            this.telephoneDataGridViewTextBoxColumn.HeaderText = "联系电话";
-            this.telephoneDataGridViewTextBoxColumn.Name = "telephoneDataGridViewTextBoxColumn";
-            this.telephoneDataGridViewTextBoxColumn.ReadOnly = true;
-            this.telephoneDataGridViewTextBoxColumn.Width = 80;
+            this.EmailColumn.DataPropertyName = "Email";
+            this.EmailColumn.HeaderText = "Email";
+            this.EmailColumn.Name = "EmailColumn";
+            this.EmailColumn.ReadOnly = true;
+            this.EmailColumn.Width = 57;
             // 
-            // emailDataGridViewTextBoxColumn
+            // FaxNumberColumn
             // 
-            this.emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
-            this.emailDataGridViewTextBoxColumn.FillWeight = 59.19745F;
-            this.emailDataGridViewTextBoxColumn.HeaderText = "Email";
-            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
-            this.emailDataGridViewTextBoxColumn.ReadOnly = true;
-            this.emailDataGridViewTextBoxColumn.Width = 57;
+            this.FaxNumberColumn.DataPropertyName = "FaxNumber";
+            this.FaxNumberColumn.HeaderText = "传真";
+            this.FaxNumberColumn.Name = "FaxNumberColumn";
+            this.FaxNumberColumn.ReadOnly = true;
+            this.FaxNumberColumn.Width = 56;
             // 
-            // faxNumberDataGridViewTextBoxColumn
+            // CellPhoneColumn
             // 
-            this.faxNumberDataGridViewTextBoxColumn.DataPropertyName = "FaxNumber";
-            this.faxNumberDataGridViewTextBoxColumn.FillWeight = 56.56484F;
-            this.faxNumberDataGridViewTextBoxColumn.HeaderText = "传真号码";
-            this.faxNumberDataGridViewTextBoxColumn.Name = "faxNumberDataGridViewTextBoxColumn";
-            this.faxNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.faxNumberDataGridViewTextBoxColumn.Width = 80;
+            this.CellPhoneColumn.DataPropertyName = "CellPhone";
+            this.CellPhoneColumn.HeaderText = "手机";
+            this.CellPhoneColumn.Name = "CellPhoneColumn";
+            this.CellPhoneColumn.ReadOnly = true;
+            this.CellPhoneColumn.Width = 56;
             // 
-            // cellPhoneDataGridViewTextBoxColumn
+            // IndustryColumn
             // 
-            this.cellPhoneDataGridViewTextBoxColumn.DataPropertyName = "CellPhone";
-            this.cellPhoneDataGridViewTextBoxColumn.FillWeight = 53.15775F;
-            this.cellPhoneDataGridViewTextBoxColumn.HeaderText = "手机号码";
-            this.cellPhoneDataGridViewTextBoxColumn.Name = "cellPhoneDataGridViewTextBoxColumn";
-            this.cellPhoneDataGridViewTextBoxColumn.ReadOnly = true;
-            this.cellPhoneDataGridViewTextBoxColumn.Width = 80;
+            this.IndustryColumn.DataPropertyName = "Industry";
+            this.IndustryColumn.HeaderText = "行业";
+            this.IndustryColumn.Name = "IndustryColumn";
+            this.IndustryColumn.ReadOnly = true;
+            this.IndustryColumn.Width = 56;
             // 
-            // clientLevelDataGridViewTextBoxColumn
+            // IsGroupColumn
             // 
-            this.clientLevelDataGridViewTextBoxColumn.DataPropertyName = "ClientLevel";
-            this.clientLevelDataGridViewTextBoxColumn.FillWeight = 40.11348F;
-            this.clientLevelDataGridViewTextBoxColumn.HeaderText = "客户级别";
-            this.clientLevelDataGridViewTextBoxColumn.Name = "clientLevelDataGridViewTextBoxColumn";
-            this.clientLevelDataGridViewTextBoxColumn.ReadOnly = true;
-            this.clientLevelDataGridViewTextBoxColumn.Width = 80;
+            this.IsGroupColumn.DataPropertyName = "IsGroup";
+            this.IsGroupColumn.HeaderText = "是否集团客户";
+            this.IsGroupColumn.Name = "IsGroupColumn";
+            this.IsGroupColumn.ReadOnly = true;
+            this.IsGroupColumn.Width = 104;
             // 
-            // IsGroup
+            // GroupNoColumn
             // 
-            this.IsGroup.DataPropertyName = "IsGroup";
-            this.IsGroup.HeaderText = "是否集团客户";
-            this.IsGroup.Name = "IsGroup";
-            this.IsGroup.ReadOnly = true;
-            this.IsGroup.Width = 104;
+            this.GroupNoColumn.DataPropertyName = "GroupNo";
+            this.GroupNoColumn.HeaderText = "所属集团客户号";
+            this.GroupNoColumn.Name = "GroupNoColumn";
+            this.GroupNoColumn.ReadOnly = true;
+            this.GroupNoColumn.Width = 116;
             // 
-            // GroupNo
+            // RegistrationNumberColumn
             // 
-            this.GroupNo.DataPropertyName = "GroupNo";
-            this.GroupNo.HeaderText = "所属集团客户号";
-            this.GroupNo.Name = "GroupNo";
-            this.GroupNo.ReadOnly = true;
-            this.GroupNo.Width = 116;
+            this.RegistrationNumberColumn.DataPropertyName = "RegistrationNumber";
+            this.RegistrationNumberColumn.HeaderText = "营业执照号码";
+            this.RegistrationNumberColumn.Name = "RegistrationNumberColumn";
+            this.RegistrationNumberColumn.ReadOnly = true;
+            this.RegistrationNumberColumn.Width = 104;
             // 
-            // RegistrationNumber
+            // CompanyCodeColumn
             // 
-            this.RegistrationNumber.DataPropertyName = "RegistrationNumber";
-            this.RegistrationNumber.HeaderText = "营业执照号码";
-            this.RegistrationNumber.Name = "RegistrationNumber";
-            this.RegistrationNumber.ReadOnly = true;
-            this.RegistrationNumber.Width = 104;
+            this.CompanyCodeColumn.DataPropertyName = "CompanyCode";
+            this.CompanyCodeColumn.HeaderText = "机构代码";
+            this.CompanyCodeColumn.Name = "CompanyCodeColumn";
+            this.CompanyCodeColumn.ReadOnly = true;
+            this.CompanyCodeColumn.Width = 80;
             // 
-            // companyCodeDataGridViewTextBoxColumn
+            // PMNameColumn
             // 
-            this.companyCodeDataGridViewTextBoxColumn.DataPropertyName = "CompanyCode";
-            this.companyCodeDataGridViewTextBoxColumn.FillWeight = 41.97921F;
-            this.companyCodeDataGridViewTextBoxColumn.HeaderText = "组织机构代码";
-            this.companyCodeDataGridViewTextBoxColumn.Name = "companyCodeDataGridViewTextBoxColumn";
-            this.companyCodeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.companyCodeDataGridViewTextBoxColumn.Width = 104;
+            this.PMNameColumn.DataPropertyName = "PMName";
+            this.PMNameColumn.HeaderText = "产品经理";
+            this.PMNameColumn.Name = "PMNameColumn";
+            this.PMNameColumn.ReadOnly = true;
+            this.PMNameColumn.Width = 80;
             // 
-            // BranchCode
+            // RMNameColumn
             // 
-            this.BranchCode.DataPropertyName = "BranchCode";
-            this.BranchCode.HeaderText = "所属机构";
-            this.BranchCode.Name = "BranchCode";
-            this.BranchCode.ReadOnly = true;
-            this.BranchCode.Width = 80;
+            this.RMNameColumn.DataPropertyName = "RMName";
+            this.RMNameColumn.HeaderText = "客户经理";
+            this.RMNameColumn.Name = "RMNameColumn";
+            this.RMNameColumn.ReadOnly = true;
+            this.RMNameColumn.Width = 80;
             // 
-            // pMNameDataGridViewTextBoxColumn
+            // CommentColumn
             // 
-            this.pMNameDataGridViewTextBoxColumn.DataPropertyName = "PMName";
-            this.pMNameDataGridViewTextBoxColumn.FillWeight = 33.33396F;
-            this.pMNameDataGridViewTextBoxColumn.HeaderText = "产品经理";
-            this.pMNameDataGridViewTextBoxColumn.Name = "pMNameDataGridViewTextBoxColumn";
-            this.pMNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.pMNameDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // ColumnRMName
-            // 
-            this.ColumnRMName.DataPropertyName = "RMName";
-            this.ColumnRMName.HeaderText = "客户经理";
-            this.ColumnRMName.Name = "ColumnRMName";
-            this.ColumnRMName.ReadOnly = true;
-            this.ColumnRMName.Width = 80;
-            // 
-            // commentDataGridViewTextBoxColumn
-            // 
-            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
-            this.commentDataGridViewTextBoxColumn.FillWeight = 37.53305F;
-            this.commentDataGridViewTextBoxColumn.HeaderText = "备注";
-            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
-            this.commentDataGridViewTextBoxColumn.ReadOnly = true;
-            this.commentDataGridViewTextBoxColumn.Width = 56;
+            this.CommentColumn.DataPropertyName = "Comment";
+            this.CommentColumn.HeaderText = "备注";
+            this.CommentColumn.Name = "CommentColumn";
+            this.CommentColumn.ReadOnly = true;
+            this.CommentColumn.Width = 56;
             // 
             // ClientMgr
             // 
@@ -800,63 +802,41 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion
 
-        private DevComponents.DotNetBar.PanelEx pnlQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
-        private DevComponents.DotNetBar.LabelX lblClientName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbRM;
-        private DevComponents.DotNetBar.LabelX lblRM;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbPM;
-        private DevComponents.DotNetBar.LabelX lblPM;
-        private DevComponents.DotNetBar.LabelX lblDepartment;
-        private DevComponents.DotNetBar.LabelX lblClientType;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
-        private DevComponents.DotNetBar.LabelX lblClientNo;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvClients;
-        private DevComponents.DotNetBar.ButtonX btnQuery;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientType;
-        private DevComponents.DotNetBar.LabelX lblCount;
-        private System.Windows.Forms.ToolStripMenuItem menuItemNewClientCreditCover;
-        private System.Windows.Forms.ToolStripMenuItem menuItemImportClients;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientCoreNoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn clientEDICodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clientNameCNDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clientNameEN1DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientLevelColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameEN_1Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameEN_2Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clientTypeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Industry;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productCNDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productENDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn addressCNDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn addressENDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cityCNDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cityENDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn provinceCNDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn provinceENDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn postCodeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CountryCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Representative;
-        private System.Windows.Forms.DataGridViewTextBoxColumn wetsiteDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Contact;
-        private System.Windows.Forms.DataGridViewTextBoxColumn telephoneDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn faxNumberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cellPhoneDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clientLevelDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsGroup;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RegistrationNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn companyCodeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BranchCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pMNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnRMName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
-        private DevComponents.DotNetBar.Controls.ComboTree comboTreeDepartment;
-        private DevComponents.Editors.ComboItem comboItem1;
-        private DevComponents.Editors.ComboItem comboItem2;
-        private DevComponents.Editors.ComboItem comboItem3;
-        private DevComponents.Editors.ComboItem comboItem4;
-        private DevComponents.Editors.ComboItem comboItem5;
-        private DevComponents.Editors.ComboItem comboItem6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientTypeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CityCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CityENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProvinceCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProvinceENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PostCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountryCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RepresentativeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WebsiteColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContactColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TelephoneColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EmailColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FaxNumberColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CellPhoneColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IndustryColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsGroupColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RegistrationNumberColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PMNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RMNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
+
+
 
     }
 }

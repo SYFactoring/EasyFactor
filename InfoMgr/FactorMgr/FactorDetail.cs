@@ -4,48 +4,40 @@ using System.Linq;
 using DevComponents.DotNetBar.Controls;
 using DevComponents.DotNetBar;
 using System;
+using CMBC.EasyFactor.Utils;
 
 namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
     public partial class FactorDetail : DevComponents.DotNetBar.Office2007Form
     {
-        /// <summary>
-        /// flag indicates if add 
-        /// </summary>
-        private readonly bool isAdd;
+        public enum OpType { NEW_FACTOR, UPDATE_FACTOR, DETAIL_FACTOR, UPDATE_FACTOR_CREDIT_COVER };
 
-        /// <summary>
-        /// variable save original factor
-        /// </summary>
-        private readonly Factor originalFactor;
-
-        public Form OwnerForm
-        {
-            get;
-            set;
-        }
+        private readonly OpType opType;
 
         /// <summary>
         /// Initializes a new instance of the FactorDetail class
         /// </summary>
         /// <param name="factor">selected factor</param>
-        /// <param name="isEditable">true if editable</param>
-        public FactorDetail(Factor factor, bool isEditable)
+        /// <param name="opType"></param>
+        public FactorDetail(Factor factor, OpType opType)
         {
             InitializeComponent();
-            Factor updateFactor = new Factor();
-            if (factor == null)
+            InitComboBox();
+            this.opType = opType;
+            if (opType == OpType.NEW_FACTOR)
             {
-                this.isAdd = true;
+                factorBindingSource.DataSource = new Factor();
             }
             else
             {
-                this.originalFactor = factor;
-                updateFactor.Copy(factor);
+                factorBindingSource.DataSource = factor;
+                this.FillForms(factor);
             }
+            this.UpdateEditableStatus();
+        }
 
-            factorBindingSource.DataSource = updateFactor;
-
+        private void InitComboBox()
+        {
             this.countryNameComboBox.DataSource = App.Current.DbContext.Countries;
             this.countryNameComboBox.DisplayMember = "CountryNameEN";
             this.countryNameComboBox.ValueMember = "CountryNameEN";
@@ -56,61 +48,62 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             string[] factorTypes = { "保理商", "保险公司", "监管机构", "代付行" };
             this.factorTypeComboBox.DataSource = factorTypes;
-
-            this.factorTypeComboBox.SelectedItem = updateFactor.FactorType;
-            this.countryNameComboBox.SelectedItem = App.Current.DbContext.Countries.SingleOrDefault(c => c.CountryNameEN == updateFactor.CountryName);
-            this.UpdateEditableStatus(isEditable);
         }
 
+        private void FillForms(Factor factor)
+        {
+            this.factorTypeComboBox.SelectedItem = factor.FactorType;
+            this.countryNameComboBox.SelectedItem = App.Current.DbContext.Countries.SingleOrDefault(c => c.CountryNameEN == factor.CountryName);
+        }
         /// <summary>
         /// udpate editable status
         /// </summary>
-        /// <param name="isEditable">true if editable</param>
-        private void UpdateEditableStatus(bool isEditable)
+        private void UpdateEditableStatus()
         {
-            if (!isEditable)
+            if (opType == OpType.NEW_FACTOR || opType == OpType.UPDATE_FACTOR)
             {
                 foreach (Control comp in this.groupPanelBasic.Controls)
                 {
-                    setComponetEditable(comp, isEditable);
+                    ControlUtil.setComponetEditable(comp, true);
                 }
                 foreach (Control comp in this.groupPanelContacts.Controls)
                 {
-                    setComponetEditable(comp, isEditable);
+                    ControlUtil.setComponetEditable(comp, true);
                 }
                 foreach (Control comp in this.groupPanelMembership.Controls)
                 {
-                    setComponetEditable(comp, isEditable);
+                    ControlUtil.setComponetEditable(comp, true);
                 }
                 foreach (Control comp in this.groupPanelCreditLineDetail.Controls)
                 {
-                    setComponetEditable(comp, isEditable);
+                    ControlUtil.setComponetEditable(comp, true);
                 }
-                setComponetEditable(this.btnFactorSave, isEditable);
-                setComponetEditable(this.btnFactorCancel, isEditable);
+                ControlUtil.setComponetEditable(this.btnFactorSave, true);
+                ControlUtil.setComponetEditable(this.btnFactorCancel, true);
             }
-        }
+            else if (opType == OpType.DETAIL_FACTOR)
+            {
+                foreach (Control comp in this.groupPanelBasic.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelContacts.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelMembership.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelCreditLineDetail.Controls)
+                {
+                    ControlUtil.setComponetEditable(comp, false);
+                }
+                ControlUtil.setComponetEditable(this.btnFactorSave, false);
+                ControlUtil.setComponetEditable(this.btnFactorCancel, true);
+            }
 
-        private void setComponetEditable(Control comp, bool isEditable)
-        {
-            if (comp is TextBoxX)
-            {
-                (comp as TextBoxX).ReadOnly = !isEditable;
-            }
-            else if (comp is ButtonX)
-            {
-                (comp as ButtonX).Enabled = isEditable;
-            }
-            else if (comp is ComboBoxEx)
-            {
-                (comp as ComboBoxEx).Enabled = isEditable;
-            }
-            else if (comp is DateTimePicker)
-            {
-                (comp as DateTimePicker).Enabled = isEditable;
-            }
         }
-
 
         /// <summary>
         /// Cancel current editing
@@ -130,13 +123,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private void FactorSave(object sender, System.EventArgs e)
         {
             factorBindingSource.EndEdit();
-            Factor updateFactor = (Factor)factorBindingSource.DataSource;
-            if (this.isAdd)
+            Factor factor = (Factor)factorBindingSource.DataSource;
+            if (opType == OpType.NEW_FACTOR)
             {
                 bool isAddOK = true;
                 try
                 {
-                    App.Current.DbContext.Factors.InsertOnSubmit(updateFactor);
+                    App.Current.DbContext.Factors.InsertOnSubmit(factor);
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e1)
@@ -148,15 +141,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Close();
                 }
             }
             else
             {
                 bool isUpdateOK = true;
-                Factor tempFactor = new Factor();
-                tempFactor.Copy(this.originalFactor);
-                this.originalFactor.Copy(updateFactor);
                 try
                 {
                     App.Current.DbContext.SubmitChanges();
@@ -164,17 +153,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    this.originalFactor.Copy(tempFactor);
                     MessageBox.Show(e2.Message);
                 }
 
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Close();
                 }
             }
         }
-
     }
 }

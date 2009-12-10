@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MainWindowII.cs" company="CISL@Fudan">
+// <copyright file="MainWindow.cs" company="CISL@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -8,22 +8,21 @@ namespace CMBC.EasyFactor
 {
     using System;
     using System.Windows.Forms;
-    using CMBC.EasyFactor.InvoiceMgr.InvoiceAssign;
-    using CMBC.EasyFactor.InfoMgr.ClientMgr;
-    using CMBC.EasyFactor.InfoMgr.UserMgr;
-    using CMBC.EasyFactor.InfoMgr.FactorMgr;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.InfoMgr.DepartmentMgr;
     using CMBC.EasyFactor.CaseMgr.CaseApp;
+    using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.InfoMgr.ClientMgr;
+    using CMBC.EasyFactor.InfoMgr.DepartmentMgr;
+    using CMBC.EasyFactor.InfoMgr.FactorMgr;
+    using CMBC.EasyFactor.InfoMgr.UserMgr;
+    using CMBC.EasyFactor.InvoiceMgr.InvoiceAssign;
 
     /// <summary>
     /// Main Window Form
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-
         /// <summary>
-        /// Initializes a new instance of the MainWindowII class
+        /// Initializes a new instance of the MainWindow class
         /// </summary>
         public MainWindow()
         {
@@ -58,7 +57,7 @@ namespace CMBC.EasyFactor
         /// Fill detail panel with user control
         /// </summary>
         /// <param name="uc">user control</param>
-        private void setDetailPanel(UserControl uc)
+        private void SetDetailPanel(UserControl uc)
         {
             uc.Dock = DockStyle.Fill;
             this.ribbonDetailPanel.Controls.Clear();
@@ -73,7 +72,7 @@ namespace CMBC.EasyFactor
         private void InvoiceAssign(object sender, EventArgs e)
         {
             InvoiceAssignUI invoiceAssignUI = new InvoiceAssignUI();
-            setDetailPanel(invoiceAssignUI);
+            this.SetDetailPanel(invoiceAssignUI);
         }
 
         /// <summary>
@@ -84,48 +83,73 @@ namespace CMBC.EasyFactor
         private void ClientMgr(object sender, EventArgs e)
         {
             ClientMgr clientMgrUI = new ClientMgr(true);
-            setDetailPanel(clientMgrUI);
+            this.SetDetailPanel(clientMgrUI);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClientNew(object sender, EventArgs e)
         {
             ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpType.NEW_CLIENT);
             clientDetail.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UserMgr(object sender, EventArgs e)
         {
             UserMgr userMgrUI = new UserMgr(true);
-            setDetailPanel(userMgrUI);
+            this.SetDetailPanel(userMgrUI);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FactorMgr(object sender, EventArgs e)
         {
             FactorMgr factorMgrUI = new FactorMgr(true);
-            setDetailPanel(factorMgrUI);
+            this.SetDetailPanel(factorMgrUI);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FactorNew(object sender, EventArgs e)
         {
-            FactorDetail factorDetail = new FactorDetail((Factor)null, true);
+            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpType.NEW_FACTOR);
             factorDetail.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DepartmentMgr(object sender, EventArgs e)
         {
             DepartmentMgr departmentMgrUI = new DepartmentMgr(true);
-            setDetailPanel(departmentMgrUI);
+            this.SetDetailPanel(departmentMgrUI);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CaseApplication(object sender, EventArgs e)
         {
             CaseAppUI caseAppUI = new CaseAppUI();
             caseAppUI.ShowDialog(this);
         }
-
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-        }
-
     }
 }

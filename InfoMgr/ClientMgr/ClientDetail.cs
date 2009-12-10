@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ClientDetailUI.cs" company="CISL@Fudan">
+// <copyright file="ClientDetail.cs" company="CISL@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -8,45 +8,72 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
     using System;
     using System.Windows.Forms;
-    using System.Linq;
     using CMBC.EasyFactor.DB.dbml;
-    using DevComponents.DotNetBar.Controls;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.Editors;
 
+    /// <summary>
+    /// Client Detail
+    /// </summary>
     public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
     {
-
-        public enum OpType { NEW_CLIENT, UPDATE_CLIENT, DETAIL_CLIENT, UPDATE_CLIENT_CREDIT_COVER };
-
         private readonly OpType opType;
 
         /// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client">selected client</param>
-        /// <param name="isEditable">true if editable</param>
+        /// <param name="opType">operation type</param>
         public ClientDetail(Client client, OpType opType)
         {
             this.InitializeComponent();
+            this.InitComboBox();
             this.opType = opType;
             if (opType == OpType.NEW_CLIENT)
             {
-                 this.clientBindingSource.DataSource = new Client();
+                this.clientBindingSource.DataSource = new Client();
             }
             else
             {
-                 this.clientBindingSource.DataSource = client;
+                this.clientBindingSource.DataSource = client;
+                this.FillForms(client);
             }
 
             this.UpdateEditableStatus();
-            InitComboBox(client);
+
             // this.creditLineMgrBindingSource.DataSource = updateClient.ClientCreditLines;
             // this.clientAccountMgrBindingSource.DataSource = updateClient.ClientAccounts;
         }
 
-        private void InitComboBox(Client updateClient)
+        /// <summary>
+        /// Operation Type 
+        /// </summary>
+        public enum OpType
+        {
+            /// <summary>
+            /// New Client
+            /// </summary>
+            NEW_CLIENT,
+
+            /// <summary>
+            /// Update Client
+            /// </summary>
+            UPDATE_CLIENT,
+
+            /// <summary>
+            /// Detail Client
+            /// </summary>
+            DETAIL_CLIENT,
+
+            /// <summary>
+            /// Update Client Credit Cover
+            /// </summary>
+            UPDATE_CLIENT_CREDIT_COVER
+        }
+
+        /// <summary>
+        /// Initial ComboBox
+        /// </summary>
+        private void InitComboBox()
         {
             this.countryCodeComboBox.DataSource = App.Current.DbContext.Countries;
             this.countryCodeComboBox.DisplayMember = "CountryFormatCN";
@@ -63,94 +90,111 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.creditLineCurrencyComboBox.DisplayMember = "CurrencyFormat";
             this.creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
             this.creditLineCurrencyComboBox.SelectedIndex = -1;
+        }
 
-
-
+        /// <summary>
+        /// Fill Forms
+        /// </summary>
+        /// <param name="client">Selected Client</param>
+        private void FillForms(Client client)
+        {
             foreach (Country country in this.countryCodeComboBox.Items)
             {
-                if (country.CountryCode.Equals(updateClient.CountryCode))
+                if (country.CountryCode.Equals(client.CountryCode))
                 {
                     this.countryCodeComboBox.SelectedItem = country;
                     break;
                 }
             }
         }
+
         /// <summary>
         /// udpate editable status
         /// </summary>
         private void UpdateEditableStatus()
         {
-            if (opType == OpType.DETAIL_CLIENT)
+            if (this.opType == OpType.DETAIL_CLIENT)
             {
                 foreach (Control comp in this.groupPanelClientBasic.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, false);
                 }
+
                 foreach (Control comp in this.groupPanelClientContact.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, false);
                 }
+
                 foreach (Control comp in this.groupPanelClientGroup.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, false);
                 }
+
                 foreach (Control comp in this.groupPanelClientStat.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, false);
                 }
+
                 ControlUtil.setComponetEditable(this.btnClientCancel, true);
                 ControlUtil.setComponetEditable(this.btnClientSave, false);
             }
-            else if (opType == OpType.NEW_CLIENT)
+            else if (this.opType == OpType.NEW_CLIENT)
             {
                 foreach (Control comp in this.groupPanelClientBasic.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
+
                 foreach (Control comp in this.groupPanelClientContact.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
+
                 foreach (Control comp in this.groupPanelClientGroup.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
+
                 foreach (Control comp in this.groupPanelClientStat.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
+
                 ControlUtil.setComponetEditable(this.btnClientCancel, true);
                 ControlUtil.setComponetEditable(this.btnClientSave, true);
             }
-            else if (opType == OpType.UPDATE_CLIENT)
+            else if (this.opType == OpType.UPDATE_CLIENT)
             {
                 foreach (Control comp in this.groupPanelClientBasic.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
+
                 foreach (Control comp in this.groupPanelClientContact.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
+
                 foreach (Control comp in this.groupPanelClientGroup.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
+
                 foreach (Control comp in this.groupPanelClientStat.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
+
                 ControlUtil.setComponetEditable(this.btnClientCancel, true);
                 ControlUtil.setComponetEditable(this.btnClientSave, true);
                 this.clientNoTextBox.ReadOnly = true;
             }
-            else if (opType == OpType.UPDATE_CLIENT_CREDIT_COVER)
+
+            else if (this.opType == OpType.UPDATE_CLIENT_CREDIT_COVER)
             {
 
             }
         }
-
-
 
         /// <summary>
         /// Save current editing
@@ -168,15 +212,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             client.CountryCode = (string)this.countryCodeComboBox.SelectedValue;
             client.Industry = this.industryComboBox.Text;
 
-            //System.Data.Linq.EntitySet<ClientAccount> cAccounts = (System.Data.Linq.EntitySet<ClientAccount>)this.clientAccountMgrBindingSource.DataSource;
-            //ClientAccount cAccount = (ClientAccount)this.clientAccountBindingSource.DataSource;
-            //cAccounts.Add(cAccount);
-            //System.Data.Linq.EntitySet<ClientCreditLine> cCreditLines = (System.Data.Linq.EntitySet<ClientCreditLine>)this.creditLineMgrBindingSource.DataSource;
-            //ClientCreditLine cCreditLine = (ClientCreditLine)this.creditLineBindingSource.DataSource;
-            //cCreditLines.Add(cCreditLine);
-            //updateClient.ClientAccounts = cAccounts;
-            //updateClient.ClientCreditLines = cCreditLines;
-            if (opType == OpType.NEW_CLIENT)
+            if (this.opType == OpType.NEW_CLIENT)
             {
                 bool isAddOK = true;
                 try
@@ -195,7 +231,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            else if (opType == OpType.UPDATE_CLIENT)
+            else if (this.opType == OpType.UPDATE_CLIENT)
             {
                 bool isUpdateOK = true;
                 try
@@ -225,30 +261,54 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Close();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewClientCreditCover(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveClientCreditCover(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelClientCreditCover(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FreezeClientCreditCover(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UnfreezeClientCreditCover(object sender, EventArgs e)
         {
 
         }
-
     }
 }

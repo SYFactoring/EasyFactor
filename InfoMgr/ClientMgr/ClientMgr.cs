@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ClientMgrUI.cs" company="CISL@Fudan">
+// <copyright file="ClientMgr.cs" company="CISL@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -7,13 +7,13 @@
 namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using System.Threading;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using Microsoft.Office.Interop.Excel;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Client Management User Interface
@@ -26,7 +26,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private readonly bool isEditable;
 
         /// <summary>
-        /// form owner
+        /// Gets or sets owner form
         /// </summary>
         public Form OwnerForm
         {
@@ -57,7 +57,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.comboTreeDepartment.DisplayMembers = "DepartmentName";
             this.comboTreeDepartment.ValueMember = "DepartmentCode";
             this.comboTreeDepartment.GroupingMembers = "Domain";
-
         }
 
         /// <summary>
@@ -108,9 +107,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             && (c.ClientType.Contains(clientType)));
 
             List<Client> clientList = queryResult.ToList();
-            //foreach (Client client in clientList)
-            //{
-            //}
 
             dgvClients.DataSource = clientList;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
@@ -398,10 +394,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     }
                 }
                 MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
+
             app.Quit();
         }
-
     }
 }

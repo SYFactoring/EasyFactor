@@ -210,7 +210,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         {
             if (this.OwnerForm == null)
             {
-                //this.DetailClient(sender, e);
+                this.DetailFactor(sender, e);
             }
             else
             {
@@ -240,7 +240,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e">Event Args</param>
         private void NewFactor(object sender, EventArgs e)
         {
-            new FactorDetail(null, true).ShowDialog(this);
+            new FactorDetail(null, FactorDetail.OpType.NEW_FACTOR).ShowDialog(this);
         }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                 if (selectedFactor != null)
                 {
-                    new FactorDetail(selectedFactor, true).ShowDialog(this);
+                    new FactorDetail(selectedFactor, FactorDetail.OpType.UPDATE_FACTOR).ShowDialog(this);
                 }
             }
         }
@@ -340,7 +340,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                 if (selectedFactor != null)
                 {
-                    new FactorDetail(selectedFactor, false).ShowDialog(this);
+                    new FactorDetail(selectedFactor, FactorDetail.OpType.DETAIL_FACTOR).ShowDialog(this);
                 }
             }
         }

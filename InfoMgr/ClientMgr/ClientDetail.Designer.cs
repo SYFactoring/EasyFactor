@@ -1,5 +1,14 @@
-﻿namespace CMBC.EasyFactor.InfoMgr.ClientMgr
+﻿//-----------------------------------------------------------------------
+// <copyright file="ClientDetail.Designer.cs" company="CISL@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
+    /// <summary>
+    /// Client Detail Designer
+    /// </summary>
     partial class ClientDetail
     {
         /// <summary>
