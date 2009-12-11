@@ -25,6 +25,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private readonly bool isEditable;
 
+        private BindingSource bs = new BindingSource();
+
         /// <summary>
         /// Gets or sets owner form
         /// </summary>
@@ -108,7 +110,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                   && ((c.ClientEDICode == null ? "" : c.ClientEDICode).Contains(tbClientEDICode.Text))
                   && (c.ClientType.Contains(clientType)));
 
-            dgvClients.DataSource = queryResult.ToList();
+            bs.DataSource = queryResult.ToList();
+            dgvClients.DataSource = bs;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
@@ -186,7 +189,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     if (MessageBox.Show("是否打算删除客户: " + selectedClient.ClientNameCN, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        dgvClients.Rows.Remove(dgvClients.SelectedRows[0]);
+                        dgvClients.Rows.RemoveAt(dgvClients.SelectedRows[0].Index);
                         App.Current.DbContext.Clients.DeleteOnSubmit(selectedClient);
                         App.Current.DbContext.SubmitChanges();
                     }

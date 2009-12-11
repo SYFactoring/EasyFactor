@@ -24,6 +24,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         private readonly bool isEditable;
 
+        private BindingSource bs = new BindingSource();
+
         /// <summary>
         /// Initializes a new instance of the UserMgrUI class
         /// </summary>
@@ -55,19 +57,19 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         private void UpdateEditableStatus()
         {
-            this.menuItemSelect.Enabled = true;
-            this.menuItemDetail.Enabled = true;
+            this.menuItemSelectUser.Enabled = true;
+            this.menuItemDetailUser.Enabled = true;
             if (this.isEditable)
             {
-                this.menuItemDelete.Enabled = true;
-                this.menuItemNew.Enabled = true;
-                this.menuItemUpdate.Enabled = true;
+                this.menuItemDeleteUser.Enabled = true;
+                this.menuItemNewUser.Enabled = true;
+                this.menuItemUpdateUser.Enabled = true;
             }
             else
             {
-                this.menuItemDelete.Enabled = false;
-                this.menuItemNew.Enabled = false;
-                this.menuItemUpdate.Enabled = false;
+                this.menuItemDeleteUser.Enabled = false;
+                this.menuItemNewUser.Enabled = false;
+                this.menuItemUpdateUser.Enabled = false;
             }
         }
 
@@ -89,7 +91,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                   || u.Phone.Contains(keyword)
                   || u.Telphone.Contains(keyword)
                   || u.Email.Contains(keyword));
-            dgvUsers.DataSource = queryResult.ToList();
+            bs.DataSource = queryResult.ToList();
+            dgvUsers.DataSource = bs;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
@@ -146,7 +149,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 {
                     if (MessageBox.Show("是否确定删除帐号: " + selectedUser.UserID, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        dgvUsers.Rows.Remove(dgvUsers.SelectedRows[0]);
+                        dgvUsers.Rows.RemoveAt(dgvUsers.SelectedRows[0].Index);
                         App.Current.DbContext.Users.DeleteOnSubmit(selectedUser);
                         App.Current.DbContext.SubmitChanges();
                     }

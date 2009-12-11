@@ -15,7 +15,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// 必需的设计器变量。
         /// </summary>
         private System.ComponentModel.IContainer components;
-        private System.Windows.Forms.ContextMenuStrip contextMenuClientMgr;
+        private System.Windows.Forms.ContextMenuStrip cmuClientMgr;
         private System.Windows.Forms.ToolStripMenuItem menuItemSelectClient;
         private System.Windows.Forms.ToolStripMenuItem menuItemDetailClient;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
@@ -72,7 +72,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.contextMenuClientMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.cmuClientMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemSelectClient = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDetailClient = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -139,75 +140,76 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.CommentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CountryCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientGroupColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuClientMgr.SuspendLayout();
+            this.cmuClientMgr.SuspendLayout();
             this.pnlQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
             this.SuspendLayout();
             // 
-            // contextMenuClientMgr
+            // cmuClientMgr
             // 
-            this.contextMenuClientMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmuClientMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemSelectClient,
             this.menuItemDetailClient,
             this.toolStripSeparator,
             this.menuItemNewClient,
             this.menuItemNewClientCreditLine,
             this.menuItemUpdateClient,
-            this.menuItemDeleteClient});
-            this.contextMenuClientMgr.Name = "contextMenuClientMgr";
-            this.contextMenuClientMgr.Size = new System.Drawing.Size(147, 142);
+            this.menuItemDeleteClient,
+            this.menuItemImportClients});
+            this.cmuClientMgr.Name = "contextMenuClientMgr";
+            this.cmuClientMgr.Size = new System.Drawing.Size(153, 186);
             // 
             // menuItemSelectClient
             // 
             this.menuItemSelectClient.Name = "menuItemSelectClient";
-            this.menuItemSelectClient.Size = new System.Drawing.Size(146, 22);
-            this.menuItemSelectClient.Text = "选定";
+            this.menuItemSelectClient.Size = new System.Drawing.Size(152, 22);
+            this.menuItemSelectClient.Text = "选定客户";
             this.menuItemSelectClient.Click += new System.EventHandler(this.SelectClient);
             // 
             // menuItemDetailClient
             // 
             this.menuItemDetailClient.Name = "menuItemDetailClient";
-            this.menuItemDetailClient.Size = new System.Drawing.Size(146, 22);
-            this.menuItemDetailClient.Text = "详细";
+            this.menuItemDetailClient.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDetailClient.Text = "详细信息";
             this.menuItemDetailClient.Click += new System.EventHandler(this.DetailClient);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
             // menuItemNewClient
             // 
             this.menuItemNewClient.Name = "menuItemNewClient";
-            this.menuItemNewClient.Size = new System.Drawing.Size(146, 22);
+            this.menuItemNewClient.Size = new System.Drawing.Size(152, 22);
             this.menuItemNewClient.Text = "新建客户";
             this.menuItemNewClient.Click += new System.EventHandler(this.NewClient);
             // 
             // menuItemNewClientCreditLine
             // 
             this.menuItemNewClientCreditLine.Name = "menuItemNewClientCreditLine";
-            this.menuItemNewClientCreditLine.Size = new System.Drawing.Size(146, 22);
+            this.menuItemNewClientCreditLine.Size = new System.Drawing.Size(152, 22);
             this.menuItemNewClientCreditLine.Text = "新建额度信息";
             this.menuItemNewClientCreditLine.Click += new System.EventHandler(this.NewClientCreditLine);
             // 
             // menuItemUpdateClient
             // 
             this.menuItemUpdateClient.Name = "menuItemUpdateClient";
-            this.menuItemUpdateClient.Size = new System.Drawing.Size(146, 22);
+            this.menuItemUpdateClient.Size = new System.Drawing.Size(152, 22);
             this.menuItemUpdateClient.Text = "更新客户";
             this.menuItemUpdateClient.Click += new System.EventHandler(this.UpdateClient);
             // 
             // menuItemDeleteClient
             // 
             this.menuItemDeleteClient.Name = "menuItemDeleteClient";
-            this.menuItemDeleteClient.Size = new System.Drawing.Size(146, 22);
+            this.menuItemDeleteClient.Size = new System.Drawing.Size(152, 22);
             this.menuItemDeleteClient.Text = "删除客户";
             this.menuItemDeleteClient.Click += new System.EventHandler(this.DeleteClient);
             // 
             // menuItemImportClients
             // 
             this.menuItemImportClients.Name = "menuItemImportClients";
-            this.menuItemImportClients.Size = new System.Drawing.Size(146, 22);
+            this.menuItemImportClients.Size = new System.Drawing.Size(152, 22);
             this.menuItemImportClients.Text = "导入客户";
             this.menuItemImportClients.Click += new System.EventHandler(this.ImportClients);
             // 
@@ -492,7 +494,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.CommentColumn,
             this.CountryCodeColumn,
             this.ClientGroupColumn});
-            this.dgvClients.ContextMenuStrip = this.contextMenuClientMgr;
+            this.dgvClients.ContextMenuStrip = this.cmuClientMgr;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -507,6 +509,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.MultiSelect = false;
             this.dgvClients.Name = "dgvClients";
             this.dgvClients.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvClients.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvClients.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvClients.RowTemplate.Height = 23;
             this.dgvClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -811,7 +821,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.Controls.Add(this.pnlQuery);
             this.Name = "ClientMgr";
             this.Size = new System.Drawing.Size(800, 600);
-            this.contextMenuClientMgr.ResumeLayout(false);
+            this.cmuClientMgr.ResumeLayout(false);
             this.pnlQuery.ResumeLayout(false);
             this.pnlQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).EndInit();
@@ -857,14 +867,5 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CountryCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientGroupColumn;
-
-
-
-
-
-
-
-
-
     }
 }

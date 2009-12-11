@@ -86,6 +86,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.departmentComboTree.DataSource = App.Current.DbContext.Departments;
             this.departmentComboTree.DisplayMembers = "DepartmentName";
             this.departmentComboTree.GroupingMembers = "Domain";
+            this.departmentComboTree.ValueMember = "DepartmentCode";
             this.departmentComboTree.SelectedIndex = -1;
 
             this.creditLineCurrencyComboBox.DataSource = App.Current.DbContext.Currencies;
@@ -108,12 +109,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     break;
                 }
             }
-            //this.pMNameTextBox.Text=string.Empty;
-            //this.rMNameTextBox.Text=string.Empty;
-            //this.clientNameCNTextBox.Text=string.Empty;
-            //this.clientNameEN_1TextBox.Text=string.Empty;
-            //this.clientNameEN_2TextBox.Text=string.Empty;
-            //this.clientEDICodeTextBox.Text = string.Empty;
+            int deptIndex = -1;
+            foreach (Department dept in (IQueryable<Department>)this.departmentComboTree.DataSource)
+            {
+                deptIndex++;
+                if (dept.DepartmentCode.Equals(client.BranchCode))
+                {
+                    this.departmentComboTree.SelectedIndex = deptIndex;
+                    break;
+                }
+            }
         }
 
         /// <summary>
@@ -143,7 +148,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     ControlUtil.setComponetEditable(comp, false);
                 }
 
-                ControlUtil.setComponetEditable(this.btnClientCancel, true);
+                ControlUtil.setComponetEditable(this.btnClientClose, true);
                 ControlUtil.setComponetEditable(this.btnClientSave, false);
             }
             else if (this.opType == OpType.NEW_CLIENT)
@@ -168,7 +173,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     ControlUtil.setComponetEditable(comp, true);
                 }
 
-                ControlUtil.setComponetEditable(this.btnClientCancel, true);
+                ControlUtil.setComponetEditable(this.btnClientClose, true);
                 ControlUtil.setComponetEditable(this.btnClientSave, true);
             }
             else if (this.opType == OpType.UPDATE_CLIENT)
@@ -193,7 +198,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     ControlUtil.setComponetEditable(comp, true);
                 }
 
-                ControlUtil.setComponetEditable(this.btnClientCancel, true);
+                ControlUtil.setComponetEditable(this.btnClientClose, true);
                 ControlUtil.setComponetEditable(this.btnClientSave, true);
                 this.clientEDICodeTextBox.ReadOnly = true;
             }
@@ -225,7 +230,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             client.ClientType = this.clientTypeComboBox.Text;
             client.ClientLevel = this.clientLevelComboBox.Text;
             client.IsGroup = this.isGroupComboBox.Text;
-            client.Department = (Department)this.departmentComboTree.SelectedValue;
+            client.BranchCode = (string)this.departmentComboTree.SelectedValue;
             client.CountryCode = (string)this.countryCodeComboBox.SelectedValue;
             client.Industry = this.industryComboBox.Text;
 

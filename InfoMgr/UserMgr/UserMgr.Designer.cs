@@ -16,12 +16,12 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.ContextMenuStrip cmuUserMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemSelectUser;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDetailUser;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemNew;
-        private System.Windows.Forms.ToolStripMenuItem menuItemUpdate;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemNewUser;
+        private System.Windows.Forms.ToolStripMenuItem menuItemUpdateUser;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDeleteUser;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -48,13 +48,13 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmuUserMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSelectUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDetailUser = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemUpdate = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemImport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemNewUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemUpdateUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDeleteUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemImportUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
@@ -79,62 +79,62 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // cmuUserMgr
             // 
             this.cmuUserMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemSelect,
-            this.menuItemDetail,
+            this.menuItemSelectUser,
+            this.menuItemDetailUser,
             this.toolStripSeparator,
-            this.menuItemNew,
-            this.menuItemUpdate,
-            this.menuItemDelete,
-            this.menuItemImport});
+            this.menuItemNewUser,
+            this.menuItemUpdateUser,
+            this.menuItemDeleteUser,
+            this.menuItemImportUsers});
             this.cmuUserMgr.Name = "contextMenuUserMgr";
-            this.cmuUserMgr.Size = new System.Drawing.Size(99, 142);
+            this.cmuUserMgr.Size = new System.Drawing.Size(153, 164);
             // 
-            // menuItemSelect
+            // menuItemSelectUser
             // 
-            this.menuItemSelect.Name = "menuItemSelect";
-            this.menuItemSelect.Size = new System.Drawing.Size(98, 22);
-            this.menuItemSelect.Text = "选定";
-            this.menuItemSelect.Click += new System.EventHandler(this.SelectUser);
+            this.menuItemSelectUser.Name = "menuItemSelectUser";
+            this.menuItemSelectUser.Size = new System.Drawing.Size(152, 22);
+            this.menuItemSelectUser.Text = "选定用户";
+            this.menuItemSelectUser.Click += new System.EventHandler(this.SelectUser);
             // 
-            // menuItemDetail
+            // menuItemDetailUser
             // 
-            this.menuItemDetail.Name = "menuItemDetail";
-            this.menuItemDetail.Size = new System.Drawing.Size(98, 22);
-            this.menuItemDetail.Text = "详细";
-            this.menuItemDetail.Click += new System.EventHandler(this.DetailUser);
+            this.menuItemDetailUser.Name = "menuItemDetailUser";
+            this.menuItemDetailUser.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDetailUser.Text = "详细信息";
+            this.menuItemDetailUser.Click += new System.EventHandler(this.DetailUser);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(95, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
-            // menuItemNew
+            // menuItemNewUser
             // 
-            this.menuItemNew.Name = "menuItemNew";
-            this.menuItemNew.Size = new System.Drawing.Size(98, 22);
-            this.menuItemNew.Text = "新建";
-            this.menuItemNew.Click += new System.EventHandler(this.NewUser);
+            this.menuItemNewUser.Name = "menuItemNewUser";
+            this.menuItemNewUser.Size = new System.Drawing.Size(152, 22);
+            this.menuItemNewUser.Text = "新建用户";
+            this.menuItemNewUser.Click += new System.EventHandler(this.NewUser);
             // 
-            // menuItemUpdate
+            // menuItemUpdateUser
             // 
-            this.menuItemUpdate.Name = "menuItemUpdate";
-            this.menuItemUpdate.Size = new System.Drawing.Size(98, 22);
-            this.menuItemUpdate.Text = "更新";
-            this.menuItemUpdate.Click += new System.EventHandler(this.UpdateUser);
+            this.menuItemUpdateUser.Name = "menuItemUpdateUser";
+            this.menuItemUpdateUser.Size = new System.Drawing.Size(152, 22);
+            this.menuItemUpdateUser.Text = "更新用户";
+            this.menuItemUpdateUser.Click += new System.EventHandler(this.UpdateUser);
             // 
-            // menuItemDelete
+            // menuItemDeleteUser
             // 
-            this.menuItemDelete.Name = "menuItemDelete";
-            this.menuItemDelete.Size = new System.Drawing.Size(98, 22);
-            this.menuItemDelete.Text = "删除";
-            this.menuItemDelete.Click += new System.EventHandler(this.DeleteUser);
+            this.menuItemDeleteUser.Name = "menuItemDeleteUser";
+            this.menuItemDeleteUser.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDeleteUser.Text = "删除用户";
+            this.menuItemDeleteUser.Click += new System.EventHandler(this.DeleteUser);
             // 
-            // menuItemImport
+            // menuItemImportUsers
             // 
-            this.menuItemImport.Name = "menuItemImport";
-            this.menuItemImport.Size = new System.Drawing.Size(98, 22);
-            this.menuItemImport.Text = "导入";
-            this.menuItemImport.Click += new System.EventHandler(this.ImportUsers);
+            this.menuItemImportUsers.Name = "menuItemImportUsers";
+            this.menuItemImportUsers.Size = new System.Drawing.Size(152, 22);
+            this.menuItemImportUsers.Text = "导入用户";
+            this.menuItemImportUsers.Click += new System.EventHandler(this.ImportUsers);
             // 
             // panelQuery
             // 
@@ -208,7 +208,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.dgvUsers.AllowUserToAddRows = false;
             this.dgvUsers.AllowUserToDeleteRows = false;
             this.dgvUsers.AllowUserToOrderColumns = true;
-            this.dgvUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.UserIDColumn,
@@ -248,6 +247,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.UserIDColumn.HeaderText = "用户ID";
             this.UserIDColumn.Name = "UserIDColumn";
             this.UserIDColumn.ReadOnly = true;
+            this.UserIDColumn.Width = 86;
             // 
             // NameColumn
             // 
@@ -255,6 +255,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.NameColumn.HeaderText = "姓名";
             this.NameColumn.Name = "NameColumn";
             this.NameColumn.ReadOnly = true;
+            this.NameColumn.Width = 87;
             // 
             // EDIAccountColumn
             // 
@@ -262,6 +263,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.EDIAccountColumn.HeaderText = "EDI帐号";
             this.EDIAccountColumn.Name = "EDIAccountColumn";
             this.EDIAccountColumn.ReadOnly = true;
+            this.EDIAccountColumn.Width = 86;
             // 
             // RoleColumn
             // 
@@ -269,6 +271,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.RoleColumn.HeaderText = "角色";
             this.RoleColumn.Name = "RoleColumn";
             this.RoleColumn.ReadOnly = true;
+            this.RoleColumn.Width = 86;
             // 
             // PhoneColumn
             // 
@@ -276,6 +279,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.PhoneColumn.HeaderText = "电话";
             this.PhoneColumn.Name = "PhoneColumn";
             this.PhoneColumn.ReadOnly = true;
+            this.PhoneColumn.Width = 87;
             // 
             // TelphoneColumn
             // 
@@ -283,6 +287,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.TelphoneColumn.HeaderText = "手机";
             this.TelphoneColumn.Name = "TelphoneColumn";
             this.TelphoneColumn.ReadOnly = true;
+            this.TelphoneColumn.Width = 86;
             // 
             // EmailColumn
             // 
@@ -290,6 +295,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.EmailColumn.HeaderText = "Email";
             this.EmailColumn.Name = "EmailColumn";
             this.EmailColumn.ReadOnly = true;
+            this.EmailColumn.Width = 86;
             // 
             // MSNColumn
             // 
@@ -297,6 +303,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.MSNColumn.HeaderText = "MSN";
             this.MSNColumn.Name = "MSNColumn";
             this.MSNColumn.ReadOnly = true;
+            this.MSNColumn.Width = 87;
             // 
             // LoginDateColumn
             // 
@@ -304,6 +311,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.LoginDateColumn.HeaderText = "最后登录日期";
             this.LoginDateColumn.Name = "LoginDateColumn";
             this.LoginDateColumn.ReadOnly = true;
+            this.LoginDateColumn.Width = 86;
             // 
             // PasswordColumn
             // 
@@ -338,7 +346,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbKeyword;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvUsers;
-        private System.Windows.Forms.ToolStripMenuItem menuItemImport;
+        private System.Windows.Forms.ToolStripMenuItem menuItemImportUsers;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserIDColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn EDIAccountColumn;

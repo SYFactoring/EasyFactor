@@ -24,6 +24,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private readonly bool isEditable;
 
+        private BindingSource bs = new BindingSource();
+
         public Form OwnerForm
         {
             get;
@@ -198,7 +200,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
 
             toolStripSeparator.Visible = false;
-            menuItemEdit.Visible = false;
         }
 
         /// <summary>
@@ -226,10 +227,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private void QueryFactors(object sender, EventArgs e)
         {
             var queryResult = App.Current.DbContext.Factors.Where(f =>
-                                                   (tbFactorCode.Text == string.Empty || f.FactorCode.Contains(tbFactorCode.Text))
-                                                && (tbFactorName.Text == string.Empty || f.CompanyName.Contains(tbFactorName.Text))
-                                                && (cbFactorType.Text == string.Empty || f.FactorType.Equals(cbFactorType.Text)));
-            dgvFactors.DataSource = queryResult;
+                                                   ((f.FactorCode == null ? "" : f.FactorCode).Contains(tbFactorCode.Text))
+                                                && ((f.CompanyName == null ? "" : f.CompanyName).Contains(tbFactorName.Text))
+                                                && (f.FactorType.Contains(cbFactorType.Text)));
+            bs.DataSource = queryResult.ToList();
+            dgvFactors.DataSource = bs;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
@@ -286,7 +288,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 {
                     if (MessageBox.Show("是否确定删除保理商: " + selectedFactor.FactorCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        dgvFactors.Rows.Remove(dgvFactors.SelectedRows[0]);
+                        dgvFactors.Rows.RemoveAt(dgvFactors.SelectedRows[0].Index);
                         App.Current.DbContext.Factors.DeleteOnSubmit(selectedFactor);
                         App.Current.DbContext.SubmitChanges();
                     }
