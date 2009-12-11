@@ -100,28 +100,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 }
             }
 
-            IQueryable<Client> queryResult = null;
-            if (department == string.Empty)
-            {
-                queryResult = App.Current.DbContext.Clients.Where(c =>
-                    (c.PMName.Contains(tbPM.Text))
-                 && (c.RMName.Contains(tbRM.Text))
-                 && (c.ClientNameCN.Contains(tbClientName.Text) || c.ClientNameEN_1.Contains(tbClientName.Text) || c.ClientNameEN_2.Contains(tbClientName.Text))
-                 && (c.ClientEDICode.Contains(tbClientEDICode.Text))
-                 && (c.ClientType.Contains(clientType)));
-            }
-            else
-            {
-                queryResult = App.Current.DbContext.Clients.Where(c =>
-                    (c.BranchCode != null && c.BranchCode.Contains(department))
-                  && (c.PMName.Contains(tbPM.Text))
-                  && (c.RMName.Contains(tbRM.Text))
-                  && (c.ClientNameCN.Contains(tbClientName.Text) || c.ClientNameEN_1.Contains(tbClientName.Text) || c.ClientNameEN_2.Contains(tbClientName.Text))
-                  && (c.ClientEDICode.Contains(tbClientEDICode.Text))
+            var queryResult = App.Current.DbContext.Clients.Where(c =>
+                    ((c.BranchCode == null ? "" : c.BranchCode).Contains(department))
+                  && ((c.PMName == null ? "" : c.PMName).Contains(tbPM.Text))
+                  && ((c.RMName == null ? "" : c.RMName).Contains(tbRM.Text))
+                  && (((c.ClientNameCN == null ? "" : c.ClientNameCN).Contains(tbClientName.Text)) || ((c.ClientNameEN_1 == null ? "" : c.ClientNameEN_1).Contains(tbClientName.Text)) || ((c.ClientNameEN_2 == null ? "" : c.ClientNameEN_2).Contains(tbClientName.Text)))
+                  && ((c.ClientEDICode == null ? "" : c.ClientEDICode).Contains(tbClientEDICode.Text))
                   && (c.ClientType.Contains(clientType)));
-            }
+
             dgvClients.DataSource = queryResult.ToList();
-            //dgvClients.DataSource = App.Current.DbContext.Clients.ToList();
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
@@ -412,10 +399,5 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             app.Quit();
         }
 
-        private void dgvClients_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            DataGridViewRow currentRow = this.dgvClients.Rows[e.RowIndex];
-            currentRow.HeaderCell.Value = Convert.ToString(e.RowIndex + 1);
-        }
     }
 }

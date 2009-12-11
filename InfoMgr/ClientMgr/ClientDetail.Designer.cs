@@ -84,6 +84,23 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabPanelClientCreditLine = new DevComponents.DotNetBar.TabControlPanel();
             this.groupPanelClientCreditCoverMgr = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.dgvClientCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.creditLineIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreditLineTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreditLineCurrencyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreditLineColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PeriodBeginColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PeriodEndColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ApproveNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ApproveTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreditLineStatusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FreezeReasonColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FreezerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FreezeDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnfreezeReasonColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnfreezerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnfreezeDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CommentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupPanelClientCreditCover = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.btnClientCreditLineRefresh = new DevComponents.DotNetBar.ButtonX();
             this.creditLineCommentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -156,7 +173,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientBasic = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.clientCoreNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientCommentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.clientNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.clientEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.countryCodeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.postCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.productENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -173,23 +190,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabItemClient = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClientAccount = new DevComponents.DotNetBar.TabControlPanel();
             this.tabItemClientAccount = new DevComponents.DotNetBar.TabItem(this.components);
-            this.creditLineIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreditLineTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreditLineCurrencyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreditLineColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PeriodBeginColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PeriodEndColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ApproveNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ApproveTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreditLineStatusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FreezeReasonColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FreezerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FreezeDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnfreezeReasonColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnfreezerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnfreezeDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CommentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             clientNameCNLabel = new DevComponents.DotNetBar.LabelX();
             addressCNLabel = new DevComponents.DotNetBar.LabelX();
             cityCNLabel = new DevComponents.DotNetBar.LabelX();
@@ -822,8 +822,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelClientCreditLine);
             this.tabControl.Controls.Add(this.tabPanelClient);
+            this.tabControl.Controls.Add(this.tabPanelClientCreditLine);
             this.tabControl.Controls.Add(this.tabPanelClientAccount);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -939,6 +939,127 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientCreditLines.Size = new System.Drawing.Size(585, 197);
             this.dgvClientCreditLines.TabIndex = 0;
             this.dgvClientCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectClientCreditLine);
+            // 
+            // creditLineIDColumn
+            // 
+            this.creditLineIDColumn.DataPropertyName = "CreditLineID";
+            this.creditLineIDColumn.HeaderText = "额度编号";
+            this.creditLineIDColumn.Name = "creditLineIDColumn";
+            this.creditLineIDColumn.ReadOnly = true;
+            this.creditLineIDColumn.Visible = false;
+            // 
+            // ClientEDICodeColumn
+            // 
+            this.ClientEDICodeColumn.DataPropertyName = "ClientEDICode";
+            this.ClientEDICodeColumn.HeaderText = "客户保理代码";
+            this.ClientEDICodeColumn.Name = "ClientEDICodeColumn";
+            this.ClientEDICodeColumn.ReadOnly = true;
+            this.ClientEDICodeColumn.Visible = false;
+            // 
+            // CreditLineTypeColumn
+            // 
+            this.CreditLineTypeColumn.DataPropertyName = "CreditLineType";
+            this.CreditLineTypeColumn.HeaderText = "额度类型";
+            this.CreditLineTypeColumn.Name = "CreditLineTypeColumn";
+            this.CreditLineTypeColumn.ReadOnly = true;
+            // 
+            // CreditLineCurrencyColumn
+            // 
+            this.CreditLineCurrencyColumn.DataPropertyName = "CreditLineCurrency";
+            this.CreditLineCurrencyColumn.HeaderText = "额度币种";
+            this.CreditLineCurrencyColumn.Name = "CreditLineCurrencyColumn";
+            this.CreditLineCurrencyColumn.ReadOnly = true;
+            // 
+            // CreditLineColumn
+            // 
+            this.CreditLineColumn.DataPropertyName = "CreditLine";
+            this.CreditLineColumn.HeaderText = "额度上限";
+            this.CreditLineColumn.Name = "CreditLineColumn";
+            this.CreditLineColumn.ReadOnly = true;
+            // 
+            // PeriodBeginColumn
+            // 
+            this.PeriodBeginColumn.DataPropertyName = "PeriodBegin";
+            this.PeriodBeginColumn.HeaderText = "有效期(始)";
+            this.PeriodBeginColumn.Name = "PeriodBeginColumn";
+            this.PeriodBeginColumn.ReadOnly = true;
+            // 
+            // PeriodEndColumn
+            // 
+            this.PeriodEndColumn.DataPropertyName = "PeriodEnd";
+            this.PeriodEndColumn.HeaderText = "有效期(终)";
+            this.PeriodEndColumn.Name = "PeriodEndColumn";
+            this.PeriodEndColumn.ReadOnly = true;
+            // 
+            // ApproveNoColumn
+            // 
+            this.ApproveNoColumn.DataPropertyName = "ApproveNo";
+            this.ApproveNoColumn.HeaderText = "授信编号";
+            this.ApproveNoColumn.Name = "ApproveNoColumn";
+            this.ApproveNoColumn.ReadOnly = true;
+            // 
+            // ApproveTypeColumn
+            // 
+            this.ApproveTypeColumn.DataPropertyName = "ApproveType";
+            this.ApproveTypeColumn.HeaderText = "授信类型";
+            this.ApproveTypeColumn.Name = "ApproveTypeColumn";
+            this.ApproveTypeColumn.ReadOnly = true;
+            // 
+            // CreditLineStatusColumn
+            // 
+            this.CreditLineStatusColumn.DataPropertyName = "CreditLineStatus";
+            this.CreditLineStatusColumn.HeaderText = "额度状态";
+            this.CreditLineStatusColumn.Name = "CreditLineStatusColumn";
+            this.CreditLineStatusColumn.ReadOnly = true;
+            // 
+            // FreezeReasonColumn
+            // 
+            this.FreezeReasonColumn.DataPropertyName = "FreezeReason";
+            this.FreezeReasonColumn.HeaderText = "冻结原因";
+            this.FreezeReasonColumn.Name = "FreezeReasonColumn";
+            this.FreezeReasonColumn.ReadOnly = true;
+            // 
+            // FreezerColumn
+            // 
+            this.FreezerColumn.DataPropertyName = "Freezer";
+            this.FreezerColumn.HeaderText = "冻结人";
+            this.FreezerColumn.Name = "FreezerColumn";
+            this.FreezerColumn.ReadOnly = true;
+            // 
+            // FreezeDateColumn
+            // 
+            this.FreezeDateColumn.DataPropertyName = "FreezeDate";
+            this.FreezeDateColumn.HeaderText = "冻结日期";
+            this.FreezeDateColumn.Name = "FreezeDateColumn";
+            this.FreezeDateColumn.ReadOnly = true;
+            // 
+            // UnfreezeReasonColumn
+            // 
+            this.UnfreezeReasonColumn.DataPropertyName = "UnfreezeReason";
+            this.UnfreezeReasonColumn.HeaderText = "解冻原因";
+            this.UnfreezeReasonColumn.Name = "UnfreezeReasonColumn";
+            this.UnfreezeReasonColumn.ReadOnly = true;
+            // 
+            // UnfreezerColumn
+            // 
+            this.UnfreezerColumn.DataPropertyName = "Unfreezer";
+            this.UnfreezerColumn.HeaderText = "解冻人";
+            this.UnfreezerColumn.Name = "UnfreezerColumn";
+            this.UnfreezerColumn.ReadOnly = true;
+            // 
+            // UnfreezeDateColumn
+            // 
+            this.UnfreezeDateColumn.DataPropertyName = "UnfreezeDate";
+            this.UnfreezeDateColumn.HeaderText = "解冻日期";
+            this.UnfreezeDateColumn.Name = "UnfreezeDateColumn";
+            this.UnfreezeDateColumn.ReadOnly = true;
+            // 
+            // CommentColumn
+            // 
+            this.CommentColumn.DataPropertyName = "Comment";
+            this.CommentColumn.HeaderText = "备注";
+            this.CommentColumn.Name = "CommentColumn";
+            this.CommentColumn.ReadOnly = true;
             // 
             // groupPanelClientCreditCover
             // 
@@ -1162,12 +1283,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.freezerTextBox.Size = new System.Drawing.Size(100, 20);
             this.freezerTextBox.TabIndex = 3;
             // 
-            // btnClientCreditLineAdd
+            // btnClientCreditLineNew
             // 
             this.btnClientCreditLineNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnClientCreditLineNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnClientCreditLineNew.Location = new System.Drawing.Point(130, 279);
-            this.btnClientCreditLineNew.Name = "btnClientCreditLineAdd";
+            this.btnClientCreditLineNew.Name = "btnClientCreditLineNew";
             this.btnClientCreditLineNew.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditLineNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditLineNew.TabIndex = 16;
@@ -1823,7 +1944,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientBasic.Controls.Add(commentLabel);
             this.groupPanelClientBasic.Controls.Add(this.clientCommentTextBox);
             this.groupPanelClientBasic.Controls.Add(clientNoLabel);
-            this.groupPanelClientBasic.Controls.Add(this.clientNoTextBox);
+            this.groupPanelClientBasic.Controls.Add(this.clientEDICodeTextBox);
             this.groupPanelClientBasic.Controls.Add(countryCodeLabel);
             this.groupPanelClientBasic.Controls.Add(this.countryCodeComboBox);
             this.groupPanelClientBasic.Controls.Add(postCodeLabel);
@@ -1903,17 +2024,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientCommentTextBox.Size = new System.Drawing.Size(179, 63);
             this.clientCommentTextBox.TabIndex = 1;
             // 
-            // clientNoTextBox
+            // clientEDINoTextBox
             // 
             // 
             // 
             // 
-            this.clientNoTextBox.Border.Class = "TextBoxBorder";
-            this.clientNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientEDICode", true));
-            this.clientNoTextBox.Location = new System.Drawing.Point(90, 7);
-            this.clientNoTextBox.Name = "clientNoTextBox";
-            this.clientNoTextBox.Size = new System.Drawing.Size(109, 20);
-            this.clientNoTextBox.TabIndex = 1;
+            this.clientEDICodeTextBox.Border.Class = "TextBoxBorder";
+            this.clientEDICodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientEDICode", true));
+            this.clientEDICodeTextBox.Location = new System.Drawing.Point(90, 7);
+            this.clientEDICodeTextBox.Name = "clientEDINoTextBox";
+            this.clientEDICodeTextBox.Size = new System.Drawing.Size(109, 20);
+            this.clientEDICodeTextBox.TabIndex = 1;
             // 
             // countryCodeComboBox
             // 
@@ -2111,127 +2232,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabItemClientAccount.Name = "tabItemClientAccount";
             this.tabItemClientAccount.Text = "账户信息";
             // 
-            // creditLineIDColumn
-            // 
-            this.creditLineIDColumn.DataPropertyName = "CreditLineID";
-            this.creditLineIDColumn.HeaderText = "额度编号";
-            this.creditLineIDColumn.Name = "creditLineIDColumn";
-            this.creditLineIDColumn.ReadOnly = true;
-            this.creditLineIDColumn.Visible = false;
-            // 
-            // ClientEDICodeColumn
-            // 
-            this.ClientEDICodeColumn.DataPropertyName = "ClientEDICode";
-            this.ClientEDICodeColumn.HeaderText = "客户保理代码";
-            this.ClientEDICodeColumn.Name = "ClientEDICodeColumn";
-            this.ClientEDICodeColumn.ReadOnly = true;
-            this.ClientEDICodeColumn.Visible = false;
-            // 
-            // CreditLineTypeColumn
-            // 
-            this.CreditLineTypeColumn.DataPropertyName = "CreditLineType";
-            this.CreditLineTypeColumn.HeaderText = "额度类型";
-            this.CreditLineTypeColumn.Name = "CreditLineTypeColumn";
-            this.CreditLineTypeColumn.ReadOnly = true;
-            // 
-            // CreditLineCurrencyColumn
-            // 
-            this.CreditLineCurrencyColumn.DataPropertyName = "CreditLineCurrency";
-            this.CreditLineCurrencyColumn.HeaderText = "额度币种";
-            this.CreditLineCurrencyColumn.Name = "CreditLineCurrencyColumn";
-            this.CreditLineCurrencyColumn.ReadOnly = true;
-            // 
-            // CreditLineColumn
-            // 
-            this.CreditLineColumn.DataPropertyName = "CreditLine";
-            this.CreditLineColumn.HeaderText = "额度上限";
-            this.CreditLineColumn.Name = "CreditLineColumn";
-            this.CreditLineColumn.ReadOnly = true;
-            // 
-            // PeriodBeginColumn
-            // 
-            this.PeriodBeginColumn.DataPropertyName = "PeriodBegin";
-            this.PeriodBeginColumn.HeaderText = "有效期(始)";
-            this.PeriodBeginColumn.Name = "PeriodBeginColumn";
-            this.PeriodBeginColumn.ReadOnly = true;
-            // 
-            // PeriodEndColumn
-            // 
-            this.PeriodEndColumn.DataPropertyName = "PeriodEnd";
-            this.PeriodEndColumn.HeaderText = "有效期(终)";
-            this.PeriodEndColumn.Name = "PeriodEndColumn";
-            this.PeriodEndColumn.ReadOnly = true;
-            // 
-            // ApproveNoColumn
-            // 
-            this.ApproveNoColumn.DataPropertyName = "ApproveNo";
-            this.ApproveNoColumn.HeaderText = "授信编号";
-            this.ApproveNoColumn.Name = "ApproveNoColumn";
-            this.ApproveNoColumn.ReadOnly = true;
-            // 
-            // ApproveTypeColumn
-            // 
-            this.ApproveTypeColumn.DataPropertyName = "ApproveType";
-            this.ApproveTypeColumn.HeaderText = "授信类型";
-            this.ApproveTypeColumn.Name = "ApproveTypeColumn";
-            this.ApproveTypeColumn.ReadOnly = true;
-            // 
-            // CreditLineStatusColumn
-            // 
-            this.CreditLineStatusColumn.DataPropertyName = "CreditLineStatus";
-            this.CreditLineStatusColumn.HeaderText = "额度状态";
-            this.CreditLineStatusColumn.Name = "CreditLineStatusColumn";
-            this.CreditLineStatusColumn.ReadOnly = true;
-            // 
-            // FreezeReasonColumn
-            // 
-            this.FreezeReasonColumn.DataPropertyName = "FreezeReason";
-            this.FreezeReasonColumn.HeaderText = "冻结原因";
-            this.FreezeReasonColumn.Name = "FreezeReasonColumn";
-            this.FreezeReasonColumn.ReadOnly = true;
-            // 
-            // FreezerColumn
-            // 
-            this.FreezerColumn.DataPropertyName = "Freezer";
-            this.FreezerColumn.HeaderText = "冻结人";
-            this.FreezerColumn.Name = "FreezerColumn";
-            this.FreezerColumn.ReadOnly = true;
-            // 
-            // FreezeDateColumn
-            // 
-            this.FreezeDateColumn.DataPropertyName = "FreezeDate";
-            this.FreezeDateColumn.HeaderText = "冻结日期";
-            this.FreezeDateColumn.Name = "FreezeDateColumn";
-            this.FreezeDateColumn.ReadOnly = true;
-            // 
-            // UnfreezeReasonColumn
-            // 
-            this.UnfreezeReasonColumn.DataPropertyName = "UnfreezeReason";
-            this.UnfreezeReasonColumn.HeaderText = "解冻原因";
-            this.UnfreezeReasonColumn.Name = "UnfreezeReasonColumn";
-            this.UnfreezeReasonColumn.ReadOnly = true;
-            // 
-            // UnfreezerColumn
-            // 
-            this.UnfreezerColumn.DataPropertyName = "Unfreezer";
-            this.UnfreezerColumn.HeaderText = "解冻人";
-            this.UnfreezerColumn.Name = "UnfreezerColumn";
-            this.UnfreezerColumn.ReadOnly = true;
-            // 
-            // UnfreezeDateColumn
-            // 
-            this.UnfreezeDateColumn.DataPropertyName = "UnfreezeDate";
-            this.UnfreezeDateColumn.HeaderText = "解冻日期";
-            this.UnfreezeDateColumn.Name = "UnfreezeDateColumn";
-            this.UnfreezeDateColumn.ReadOnly = true;
-            // 
-            // CommentColumn
-            // 
-            this.CommentColumn.DataPropertyName = "Comment";
-            this.CommentColumn.HeaderText = "备注";
-            this.CommentColumn.Name = "CommentColumn";
-            this.CommentColumn.ReadOnly = true;
-            // 
             // ClientDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2311,7 +2311,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.ComboBoxEx clientTypeComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX rMNameTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX pMNameTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX clientNoTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX clientEDICodeTextBox;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelClientBasic;
         private DevComponents.Editors.ComboItem comboItem7;
         private DevComponents.Editors.ComboItem comboItem8;

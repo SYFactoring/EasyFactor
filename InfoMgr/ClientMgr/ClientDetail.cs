@@ -108,6 +108,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     break;
                 }
             }
+            //this.pMNameTextBox.Text=string.Empty;
+            //this.rMNameTextBox.Text=string.Empty;
+            //this.clientNameCNTextBox.Text=string.Empty;
+            //this.clientNameEN_1TextBox.Text=string.Empty;
+            //this.clientNameEN_2TextBox.Text=string.Empty;
+            //this.clientEDICodeTextBox.Text = string.Empty;
         }
 
         /// <summary>
@@ -189,7 +195,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 ControlUtil.setComponetEditable(this.btnClientCancel, true);
                 ControlUtil.setComponetEditable(this.btnClientSave, true);
-                this.clientNoTextBox.ReadOnly = true;
+                this.clientEDICodeTextBox.ReadOnly = true;
             }
 
             foreach (Control comp in this.groupPanelClientCreditCover.Controls)
