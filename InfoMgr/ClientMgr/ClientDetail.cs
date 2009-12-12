@@ -86,7 +86,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.departmentComboTree.DataSource = App.Current.DbContext.Departments;
             this.departmentComboTree.DisplayMembers = "DepartmentName";
             this.departmentComboTree.GroupingMembers = "Domain";
-            this.departmentComboTree.ValueMember = "DepartmentCode";
+         //   this.departmentComboTree.ValueMember = "DepartmentCode";
             this.departmentComboTree.SelectedIndex = -1;
 
             this.creditLineCurrencyComboBox.DataSource = App.Current.DbContext.Currencies;
@@ -230,7 +230,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             client.ClientType = this.clientTypeComboBox.Text;
             client.ClientLevel = this.clientLevelComboBox.Text;
             client.IsGroup = this.isGroupComboBox.Text;
-            client.BranchCode = (string)this.departmentComboTree.SelectedValue;
+            client.Department = (Department)this.departmentComboTree.SelectedValue;
             client.CountryCode = (string)this.countryCodeComboBox.SelectedValue;
             client.Industry = this.industryComboBox.Text;
 
