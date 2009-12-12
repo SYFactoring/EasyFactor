@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
     {
-        private readonly OpType opType;
+        private OpType opType;
 
         /// <summary>
         /// Initializes a new instance of the ClientDetail class
@@ -86,7 +86,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.departmentComboTree.DataSource = App.Current.DbContext.Departments;
             this.departmentComboTree.DisplayMembers = "DepartmentName";
             this.departmentComboTree.GroupingMembers = "Domain";
-         //   this.departmentComboTree.ValueMember = "DepartmentCode";
+            //   this.departmentComboTree.ValueMember = "DepartmentCode";
             this.departmentComboTree.SelectedIndex = -1;
 
             this.creditLineCurrencyComboBox.DataSource = App.Current.DbContext.Currencies;
@@ -210,11 +210,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             if (opType == OpType.NEW_CLIENT_CREDIT_COVER)
             {
-                ControlUtil.setComponetEditable(this.btnClientCreditLineNew, true);
                 ControlUtil.setComponetEditable(this.btnClientCreditLineSave, true);
-                ControlUtil.setComponetEditable(this.btnClientCreditLineCancel, true);
+                ControlUtil.setComponetEditable(this.btnClientCreditLineDelete, true);
             }
-
+            ControlUtil.setComponetEditable(this.btnClientCreditLineNew, true);
             ControlUtil.setComponetEditable(this.btnClientCreditLineRefresh, true);
         }
 
@@ -297,7 +296,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.approveNoTextBox.ReadOnly = false;
             this.approveTypeComboBox.Enabled = true;
             this.btnClientCreditLineSave.Enabled = true;
-            this.btnClientCreditLineCancel.Enabled = true;
+            this.btnClientCreditLineDelete.Enabled = true;
             this.periodBeginDateTimePicker.Enabled = true;
             this.periodEndDateTimePicker.Enabled = true;
             ClientCreditLine newClientCreditLine = new ClientCreditLine();
@@ -337,11 +336,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.dgvClientCreditLines.DataSource = client.ClientCreditLines;
                 }
             }
             else
             {
-
                 bool isUpdateOK = true;
                 try
                 {
@@ -365,9 +364,27 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CancelClientCreditLine(object sender, EventArgs e)
+        private void DeleteClientCreditLine(object sender, EventArgs e)
         {
+            ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
+            Client client = (Client)this.clientBindingSource.DataSource;
+            bool isDeleteOK = true;
+            try
+            {
+                App.Current.DbContext.ClientCreditLines.DeleteOnSubmit(creditLine);
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                isDeleteOK = false;
+                MessageBox.Show(e1.Message);
+            }
 
+            if (isDeleteOK)
+            {
+                MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.dgvClientCreditLines.DataSource = client.ClientCreditLines;
+            }
         }
 
         /// <summary>
@@ -419,10 +436,22 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     this.btnClientCreditCoverFreeze.Enabled = true;
                     this.btnClientCreditCoverUnfreeze.Enabled = true;
                     this.btnClientCreditLineNew.Enabled = true;
-                    this.btnClientCreditLineCancel.Enabled = true;
+                    this.btnClientCreditLineDelete.Enabled = true;
                     this.btnClientCreditLineSave.Enabled = true;
                 }
             }
         }
+
+        private void ClientUpdate(object sender, EventArgs e)
+        {
+            this.opType = OpType.UPDATE_CLIENT;
+            this.UpdateEditableStatus();
+        }
+
+        private void creditLineTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ControlUtil.CheckIntegerInput(sender, e);
+        }
+
     }
 }

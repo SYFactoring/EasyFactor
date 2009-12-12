@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using DevComponents.DotNetBar.Controls;
 using DevComponents.DotNetBar;
 
@@ -45,5 +41,22 @@ namespace CMBC.EasyFactor.Utils
                 (comp as DateTimePicker).Enabled = isEditable;
             }
         }
+
+        public static void CheckIntegerInput(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        public static void CheckDoubleInput(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && !'.'.Equals(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
     }
 }

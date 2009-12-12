@@ -127,8 +127,8 @@
       <Association Name="Client_Case" Member="BuyerCases" OtherKey="BuyerCode" Type="Case" />
       <Association Name="Client_Case1" Member="SellerCases" OtherKey="SellerCode" Type="Case" />
       <Association Name="Client_ClientAccount" Member="ClientAccounts" OtherKey="ClientEDICode" Type="ClientAccount" />
-      <Association Name="Client_ClientCreditLine" Member="ClientCreditLines" OtherKey="ClientEDICode" Type="ClientCreditLine" />
       <Association Name="Client_Contract" Member="Contracts" OtherKey="ClientEDICode" Type="Contract" />
+      <Association Name="Client_ClientCreditLine" Member="ClientCreditLines" OtherKey="ClientEDICode" Type="ClientCreditLine" />
       <Association Name="ClientGroup_Client" Member="ClientGroup" ThisKey="GroupNo" Type="ClientGroup" IsForeignKey="true" />
       <Association Name="Department_Client" Member="Department" ThisKey="BranchCode" Type="Department" IsForeignKey="true" />
     </Type>
@@ -145,28 +145,6 @@
       <Column Name="IsDefault" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Association Name="Client_ClientAccount" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.ClientCreditLine" Member="ClientCreditLines">
-    <Type Name="ClientCreditLine">
-      <Column Name="CreditLineID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
-      <Column Name="CreditLineType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CreditLineCurrency" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
-      <Column Name="CreditLine" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="PeriodBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="PeriodEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ApproveNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ApproveType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CreditLineStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="FreezeReason" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Freezer" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="FreezeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="UnfreezeReason" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Unfreezer" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="UnfreezeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Association Name="Client_ClientCreditLine" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ClientGroup" Member="ClientGroups">
@@ -444,6 +422,28 @@
       <Association Name="Department_Case1" Member="SellerCases" OtherKey="SellerDepartmentCode" Type="Case" />
       <Association Name="Department_Client" Member="Clients" OtherKey="BranchCode" Type="Client" />
       <Association Name="Department_DepartmentAccount" Member="DepartmentAccounts" OtherKey="DepartmentCode" Type="DepartmentAccount" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ClientCreditLine" Member="ClientCreditLines">
+    <Type Name="ClientCreditLine">
+      <Column Name="CreditLineID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
+      <Column Name="CreditLineType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreditLineCurrency" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
+      <Column Name="CreditLine" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PeriodBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PeriodEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ApproveNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ApproveType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreditLineStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FreezeReason" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Freezer" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FreezeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UnfreezeReason" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Unfreezer" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UnfreezeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="Client_ClientCreditLine" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
