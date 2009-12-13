@@ -1752,7 +1752,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientClose.TabIndex = 6;
             this.btnClientClose.Text = "关闭";
-            this.btnClientClose.Click += new System.EventHandler(this.Cancel);
+            this.btnClientClose.Click += new System.EventHandler(this.ClientCancel);
             // 
             // btnClientSave
             // 
@@ -1764,7 +1764,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientSave.TabIndex = 5;
             this.btnClientSave.Text = "保存";
-            this.btnClientSave.Click += new System.EventHandler(this.Save);
+            this.btnClientSave.Click += new System.EventHandler(this.ClientSave);
             // 
             // groupPanelClientStat
             // 

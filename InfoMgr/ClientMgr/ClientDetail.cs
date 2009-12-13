@@ -19,6 +19,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     {
         private OpType opType;
 
+        //private Client oldClient;
+
         /// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
@@ -36,8 +38,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             else
             {
                 this.clientBindingSource.DataSource = client;
-                this.dgvClientCreditLines.DataSource = client.ClientAccounts;
-                this.FillForms(client);
+                client.Backup();
+                this.FillClientForms(client);
             }
 
             this.UpdateEditableStatus();
@@ -86,7 +88,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.departmentComboTree.DataSource = App.Current.DbContext.Departments;
             this.departmentComboTree.DisplayMembers = "DepartmentName";
             this.departmentComboTree.GroupingMembers = "Domain";
-            //   this.departmentComboTree.ValueMember = "DepartmentCode";
             this.departmentComboTree.SelectedIndex = -1;
 
             this.creditLineCurrencyComboBox.DataSource = App.Current.DbContext.Currencies;
@@ -99,7 +100,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// Fill Forms
         /// </summary>
         /// <param name="client">Selected Client</param>
-        private void FillForms(Client client)
+        private void FillClientForms(Client client)
         {
             foreach (Country country in this.countryCodeComboBox.Items)
             {
@@ -119,6 +120,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     break;
                 }
             }
+            this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
+
         }
 
         /// <summary>
@@ -222,7 +225,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void Save(object sender, EventArgs e)
+        private void ClientSave(object sender, EventArgs e)
         {
             this.clientBindingSource.EndEdit();
             Client client = (Client)this.clientBindingSource.DataSource;
@@ -267,6 +270,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isUpdateOK)
                 {
+                    client.Backup();
                     MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -277,9 +281,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void Cancel(object sender, EventArgs e)
+        private void ClientCancel(object sender, EventArgs e)
         {
-            Close();
+            Client client = (Client)this.clientBindingSource.DataSource;
+            client.Restore();
+            //client.Copy(oldClient);
+           // Close();
         }
 
         /// <summary>
@@ -302,6 +309,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             ClientCreditLine newClientCreditLine = new ClientCreditLine();
             newClientCreditLine.Client = (Client)this.clientBindingSource.DataSource;
             this.clientCreditLineBindingSource.DataSource = newClientCreditLine;
+            this.creditLineCurrencyComboBox.SelectedIndex = -1;
+            this.creditLineTypeComboBox.SelectedIndex = -1;
+            this.periodBeginDateTimePicker.Value = DateTime.Now;
+            this.periodEndDateTimePicker.Value = DateTime.Now;
+            this.approveTypeComboBox.SelectedIndex = -1;
+            this.freezeReasonTextBox.Text = string.Empty;
+            this.freezeReasonTextBox.ReadOnly = true;
+            this.freezerTextBox.Text = string.Empty;
+            this.unfreezeReasonTextBox.Text = string.Empty;
+            this.unfreezeReasonTextBox.ReadOnly = true;
+            this.unfreezerTextBox.Text = string.Empty;
         }
 
         /// <summary>
@@ -316,6 +334,23 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             creditLine.CreditLineCurrency = (string)this.creditLineCurrencyComboBox.SelectedValue;
             creditLine.PeriodBegin = this.periodBeginDateTimePicker.Value;
             creditLine.PeriodEnd = this.periodEndDateTimePicker.Value;
+            if (!this.freezerTextBox.Text.Equals(string.Empty) && creditLine.Freezer == null)
+            {
+                creditLine.Freezer = this.freezerTextBox.Text;
+                creditLine.FreezeReason = this.freezeReasonTextBox.Text;
+                creditLine.FreezeDate = this.freezeDateDateTimePicker.Value;
+            }
+            if (!this.unfreezerTextBox.Text.Equals(string.Empty) && creditLine.Unfreezer == null)
+            {
+                creditLine.Unfreezer = this.unfreezerTextBox.Text;
+                creditLine.UnfreezeReason = this.unfreezeReasonTextBox.Text;
+                creditLine.UnfreezeDate = this.unfreezeDateDateTimePicker.Value;
+            }
+            if (client == null)
+            {
+                MessageBox.Show("请首先选定一个客户", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             if (creditLine.CreditLineID == 0)
             {
@@ -336,7 +371,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.dgvClientCreditLines.DataSource = client.ClientCreditLines;
+                    this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
                 }
             }
             else
@@ -394,9 +429,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void FreezeClientCreditLine(object sender, EventArgs e)
         {
+            ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
             this.freezeReasonTextBox.ReadOnly = false;
-            this.freezerTextBox.Text = App.Current.CurUser.Name;
-            this.freezeDateDateTimePicker.Value = System.DateTime.Now;
+            if (creditLine.Freezer == null)
+            {
+                creditLine.Freezer =  App.Current.CurUser.Name;
+                creditLine.FreezeDate = System.DateTime.Now;
+            }
         }
 
         /// <summary>
@@ -406,9 +445,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UnfreezeClientCreditLine(object sender, EventArgs e)
         {
+            ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
             this.unfreezeReasonTextBox.ReadOnly = false;
-            this.unfreezerTextBox.Text = App.Current.CurUser.Name;
-            this.unfreezeDateDateTimePicker.Value = System.DateTime.Now;
+            if (creditLine.Unfreezer == null)
+            {
+                creditLine.Unfreezer = App.Current.CurUser.Name;
+                creditLine.UnfreezeDate = System.DateTime.Now;
+            }
         }
 
         private void RefreshClientCreditLine(object sender, EventArgs e)
@@ -429,7 +472,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             int cid = (int)dgvClientCreditLines["creditLineIDColumn", dgvClientCreditLines.SelectedRows[0].Index].Value;
             if (cid != 0)
             {
-                ClientCreditLine selectedClientCreditLine = App.Current.DbContext.ClientCreditLines.SingleOrDefault(c => c.CreditLineID == cid);
+                Client clinet = (Client)this.clientBindingSource.DataSource;
+                ClientCreditLine selectedClientCreditLine = clinet.ClientCreditLines.SingleOrDefault(c => c.CreditLineID == cid);
                 if (selectedClientCreditLine != null)
                 {
                     this.clientCreditLineBindingSource.DataSource = selectedClientCreditLine;
@@ -438,6 +482,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     this.btnClientCreditLineNew.Enabled = true;
                     this.btnClientCreditLineDelete.Enabled = true;
                     this.btnClientCreditLineSave.Enabled = true;
+                    foreach (Currency currency in this.creditLineCurrencyComboBox.Items)
+                    {
+                        if (currency.CurrencyCode.Equals(selectedClientCreditLine.CreditLineCurrency))
+                        {
+                            this.creditLineCurrencyComboBox.SelectedItem = currency;
+                            break;
+                        }
+                    }
                 }
             }
         }

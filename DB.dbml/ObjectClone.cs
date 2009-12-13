@@ -2,6 +2,7 @@
 namespace CMBC.EasyFactor.DB.dbml
 {
     using System.Reflection;
+    using System.Collections.Generic;
 
     public partial class User
     {
@@ -17,6 +18,38 @@ namespace CMBC.EasyFactor.DB.dbml
 
     public partial class Client
     {
+
+        private List<object> _status;
+
+        public void Backup()
+        {
+            _status = new List<object>();
+            PropertyInfo[] props = this.GetType().GetProperties();
+            foreach (PropertyInfo p in props)
+            {
+                if (p.CanWrite)
+                {
+                    var value = p.GetValue(this, null);
+                    _status.Add(value);
+                }
+            }
+        }
+        public void Restore()
+        {
+            if (_status != null)
+            {
+                PropertyInfo[] props = this.GetType().GetProperties();
+                int i = 0;
+                foreach (PropertyInfo p in props)
+                {
+                    if (p.CanWrite)
+                    {
+                        var value = _status[i++];
+                        p.SetValue(this, value, null);
+                    }
+                }
+            }
+        }
         public void Copy(Client fromClient)
         {
             PropertyInfo[] props = this.GetType().GetProperties();
@@ -24,7 +57,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 var oldValue = p.GetValue(fromClient, null);
                 var newValue = p.GetValue(this, null);
-                
+
                 if ((oldValue != null && oldValue.Equals(newValue)) || oldValue == newValue)
                 {
                     continue;

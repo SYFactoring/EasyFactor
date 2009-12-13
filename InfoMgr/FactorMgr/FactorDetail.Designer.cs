@@ -146,7 +146,7 @@
             this.creditLineStatusTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.periodEndDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.periodBeginDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.creditLineTextBox = new DevComponents.Editors.DoubleInput();
+            this.creditLineTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditLineCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tabItemCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelAccount = new DevComponents.DotNetBar.TabControlPanel();
@@ -1862,7 +1862,7 @@
             // 
             // 
             // 
-            //this.creditLineTextBox.Border.Class = "TextBoxBorder";
+            this.creditLineTextBox.Border.Class = "TextBoxBorder";
             this.creditLineTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorCreditLineMgrBindingSource, "CreditLine", true));
             this.creditLineTextBox.Location = new System.Drawing.Point(90, 29);
             this.creditLineTextBox.Name = "creditLineTextBox";
@@ -1993,7 +1993,7 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbGeneralCorrespondence1;
         private DevComponents.DotNetBar.Controls.TextBoxX tbWorkingHours;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCreditLineDetail;
-        private DevComponents.Editors.DoubleInput creditLineTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX creditLineTextBox;
         private System.Windows.Forms.BindingSource factorCreditLineMgrBindingSource;
         private DevComponents.DotNetBar.Controls.ComboBoxEx creditLineCurrencyComboBox;
         private System.Windows.Forms.DateTimePicker periodEndDateTimePicker;
