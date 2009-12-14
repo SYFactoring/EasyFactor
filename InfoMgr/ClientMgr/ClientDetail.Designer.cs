@@ -77,10 +77,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DevComponents.DotNetBar.LabelX creditLineCommentLabel;
             DevComponents.DotNetBar.LabelX clientCoreNoLabel;
             DevComponents.DotNetBar.LabelX industryLabel;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.websiteLabel = new DevComponents.DotNetBar.LabelX();
             this.telephoneLabel = new DevComponents.DotNetBar.LabelX();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
@@ -195,6 +195,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabItemClient = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClientAccount = new DevComponents.DotNetBar.TabControlPanel();
             this.tabItemClientAccount = new DevComponents.DotNetBar.TabItem(this.components);
+            this.btnUpdateCreditLine = new DevComponents.DotNetBar.ButtonX();
             clientNameCNLabel = new DevComponents.DotNetBar.LabelX();
             addressCNLabel = new DevComponents.DotNetBar.LabelX();
             cityCNLabel = new DevComponents.DotNetBar.LabelX();
@@ -927,14 +928,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UnfreezeDateColumn,
             this.CommentColumn,
             this.ClientColumn});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvClientCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClientCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvClientCreditLines.Location = new System.Drawing.Point(0, 0);
@@ -978,9 +979,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // CreditLineColumn
             // 
             this.CreditLineColumn.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.CreditLineColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.CreditLineColumn.DefaultCellStyle = dataGridViewCellStyle5;
             this.CreditLineColumn.HeaderText = "额度上限";
             this.CreditLineColumn.Name = "CreditLineColumn";
             this.CreditLineColumn.ReadOnly = true;
@@ -988,9 +989,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // PeriodBeginColumn
             // 
             this.PeriodBeginColumn.DataPropertyName = "PeriodBegin";
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.PeriodBeginColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "d";
+            dataGridViewCellStyle6.NullValue = null;
+            this.PeriodBeginColumn.DefaultCellStyle = dataGridViewCellStyle6;
             this.PeriodBeginColumn.HeaderText = "有效期(始)";
             this.PeriodBeginColumn.Name = "PeriodBeginColumn";
             this.PeriodBeginColumn.ReadOnly = true;
@@ -998,9 +999,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // PeriodEndColumn
             // 
             this.PeriodEndColumn.DataPropertyName = "PeriodEnd";
-            dataGridViewCellStyle3.Format = "d";
-            dataGridViewCellStyle3.NullValue = null;
-            this.PeriodEndColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Format = "d";
+            dataGridViewCellStyle7.NullValue = null;
+            this.PeriodEndColumn.DefaultCellStyle = dataGridViewCellStyle7;
             this.PeriodEndColumn.HeaderText = "有效期(终)";
             this.PeriodEndColumn.Name = "PeriodEndColumn";
             this.PeriodEndColumn.ReadOnly = true;
@@ -1087,6 +1088,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.groupPanelClientCreditCover.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelClientCreditCover.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelClientCreditCover.Controls.Add(this.btnUpdateCreditLine);
             this.groupPanelClientCreditCover.Controls.Add(this.creditLineTextBox);
             this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditLineRefresh);
             this.groupPanelClientCreditCover.Controls.Add(creditLineCommentLabel);
@@ -1177,7 +1179,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.btnClientCreditLineRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnClientCreditLineRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditLineRefresh.Location = new System.Drawing.Point(49, 279);
+            this.btnClientCreditLineRefresh.Location = new System.Drawing.Point(11, 279);
             this.btnClientCreditLineRefresh.Name = "btnClientCreditLineRefresh";
             this.btnClientCreditLineRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditLineRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1211,7 +1213,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.btnClientCreditCoverUnfreeze.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnClientCreditCoverUnfreeze.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditCoverUnfreeze.Location = new System.Drawing.Point(454, 279);
+            this.btnClientCreditCoverUnfreeze.Location = new System.Drawing.Point(495, 279);
             this.btnClientCreditCoverUnfreeze.Name = "btnClientCreditCoverUnfreeze";
             this.btnClientCreditCoverUnfreeze.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditCoverUnfreeze.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1245,7 +1247,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.btnClientCreditCoverFreeze.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnClientCreditCoverFreeze.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditCoverFreeze.Location = new System.Drawing.Point(373, 279);
+            this.btnClientCreditCoverFreeze.Location = new System.Drawing.Point(414, 279);
             this.btnClientCreditCoverFreeze.Name = "btnClientCreditCoverFreeze";
             this.btnClientCreditCoverFreeze.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditCoverFreeze.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1285,7 +1287,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.btnClientCreditLineDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnClientCreditLineDelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditLineDelete.Location = new System.Drawing.Point(292, 279);
+            this.btnClientCreditLineDelete.Location = new System.Drawing.Point(333, 279);
             this.btnClientCreditLineDelete.Name = "btnClientCreditLineDelete";
             this.btnClientCreditLineDelete.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditLineDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1297,7 +1299,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.btnClientCreditLineSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnClientCreditLineSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditLineSave.Location = new System.Drawing.Point(211, 279);
+            this.btnClientCreditLineSave.Location = new System.Drawing.Point(252, 279);
             this.btnClientCreditLineSave.Name = "btnClientCreditLineSave";
             this.btnClientCreditLineSave.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditLineSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1322,7 +1324,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.btnClientCreditLineNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnClientCreditLineNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientCreditLineNew.Location = new System.Drawing.Point(130, 279);
+            this.btnClientCreditLineNew.Location = new System.Drawing.Point(90, 279);
             this.btnClientCreditLineNew.Name = "btnClientCreditLineNew";
             this.btnClientCreditLineNew.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditLineNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -2268,6 +2270,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabItemClientAccount.Name = "tabItemClientAccount";
             this.tabItemClientAccount.Text = "账户信息";
             // 
+            // btnUpdateCreditLine
+            // 
+            this.btnUpdateCreditLine.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnUpdateCreditLine.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnUpdateCreditLine.Location = new System.Drawing.Point(171, 279);
+            this.btnUpdateCreditLine.Name = "btnUpdateCreditLine";
+            this.btnUpdateCreditLine.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdateCreditLine.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnUpdateCreditLine.TabIndex = 36;
+            this.btnUpdateCreditLine.Text = "更新";
+            this.btnUpdateCreditLine.Click += new System.EventHandler(this.btnUpdateCreditLine_Click);
+            // 
             // ClientDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2281,6 +2295,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.Name = "ClientDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "客户详细信息";
+            this.Leave += new System.EventHandler(this.ClientDetail_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabControl.PerformLayout();
@@ -2420,5 +2435,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientColumn;
         private DevComponents.DotNetBar.Controls.TextBoxX creditLineTextBox;
         private DevComponents.DotNetBar.ButtonX btnClientUpdate;
+        private DevComponents.DotNetBar.ButtonX btnUpdateCreditLine;
     }
 }

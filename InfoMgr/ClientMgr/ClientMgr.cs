@@ -163,7 +163,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
                 if (selectedClient != null)
                 {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpType.NEW_CLIENT_CREDIT_COVER);
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpType.NEW_CLIENT_CREDIT_LINE);
                     clientDetail.ShowDialog(this);
                 }
             }
