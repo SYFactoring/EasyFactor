@@ -77,35 +77,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DevComponents.DotNetBar.LabelX creditLineCommentLabel;
             DevComponents.DotNetBar.LabelX clientCoreNoLabel;
             DevComponents.DotNetBar.LabelX industryLabel;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientDetail));
             this.websiteLabel = new DevComponents.DotNetBar.LabelX();
             this.telephoneLabel = new DevComponents.DotNetBar.LabelX();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelClientCreditLine = new DevComponents.DotNetBar.TabControlPanel();
             this.groupPanelClientCreditCoverMgr = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.dgvClientCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.creditLineIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreditLineTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreditLineCurrencyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreditLineColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PeriodBeginColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PeriodEndColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ApproveNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ApproveTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreditLineStatusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FreezeReasonColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FreezerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FreezeDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnfreezeReasonColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnfreezerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnfreezeDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CommentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupPanelClientCreditCover = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.groupPanelClientCreditLine = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.btnUpdateCreditLine = new DevComponents.DotNetBar.ButtonX();
             this.creditLineTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientCreditLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnClientCreditLineRefresh = new DevComponents.DotNetBar.ButtonX();
@@ -195,7 +181,29 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabItemClient = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClientAccount = new DevComponents.DotNetBar.TabControlPanel();
             this.tabItemClientAccount = new DevComponents.DotNetBar.TabItem(this.components);
-            this.btnUpdateCreditLine = new DevComponents.DotNetBar.ButtonX();
+            this.creditLineIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreditLineTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreditLineCurrencyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreditLineColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PeriodBeginColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PeriodEndColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ApproveNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ApproveTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreditLineStatusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FreezeReasonColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FreezerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FreezeDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnfreezeReasonColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnfreezerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnfreezeDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CommentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             clientNameCNLabel = new DevComponents.DotNetBar.LabelX();
             addressCNLabel = new DevComponents.DotNetBar.LabelX();
             cityCNLabel = new DevComponents.DotNetBar.LabelX();
@@ -240,7 +248,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabPanelClientCreditLine.SuspendLayout();
             this.groupPanelClientCreditCoverMgr.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLines)).BeginInit();
-            this.groupPanelClientCreditCover.SuspendLayout();
+            this.groupPanelClientCreditLine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineBindingSource)).BeginInit();
             this.tabPanelClient.SuspendLayout();
             this.groupPanelClientContact.SuspendLayout();
@@ -248,6 +256,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientGroup.SuspendLayout();
             this.groupPanelClientStat.SuspendLayout();
             this.groupPanelClientBasic.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // clientNameCNLabel
@@ -828,8 +837,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelClientCreditLine);
             this.tabControl.Controls.Add(this.tabPanelClient);
+            this.tabControl.Controls.Add(this.tabPanelClientCreditLine);
             this.tabControl.Controls.Add(this.tabPanelClientAccount);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -848,7 +857,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.tabPanelClientCreditLine.AutoScroll = true;
             this.tabPanelClientCreditLine.Controls.Add(this.groupPanelClientCreditCoverMgr);
-            this.tabPanelClientCreditLine.Controls.Add(this.groupPanelClientCreditCover);
+            this.tabPanelClientCreditLine.Controls.Add(this.groupPanelClientCreditLine);
             this.tabPanelClientCreditLine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPanelClientCreditLine.Location = new System.Drawing.Point(0, 26);
             this.tabPanelClientCreditLine.Name = "tabPanelClientCreditLine";
@@ -928,14 +937,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UnfreezeDateColumn,
             this.CommentColumn,
             this.ClientColumn});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvClientCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClientCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvClientCreditLines.Location = new System.Drawing.Point(0, 0);
@@ -947,216 +956,91 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientCreditLines.TabIndex = 0;
             this.dgvClientCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectClientCreditLine);
             // 
-            // creditLineIDColumn
+            // groupPanelClientCreditLine
             // 
-            this.creditLineIDColumn.DataPropertyName = "CreditLineID";
-            this.creditLineIDColumn.HeaderText = "额度编号";
-            this.creditLineIDColumn.Name = "creditLineIDColumn";
-            this.creditLineIDColumn.ReadOnly = true;
-            this.creditLineIDColumn.Visible = false;
-            // 
-            // ClientEDICodeColumn
-            // 
-            this.ClientEDICodeColumn.DataPropertyName = "ClientEDICode";
-            this.ClientEDICodeColumn.HeaderText = "客户保理代码";
-            this.ClientEDICodeColumn.Name = "ClientEDICodeColumn";
-            this.ClientEDICodeColumn.ReadOnly = true;
-            // 
-            // CreditLineTypeColumn
-            // 
-            this.CreditLineTypeColumn.DataPropertyName = "CreditLineType";
-            this.CreditLineTypeColumn.HeaderText = "额度类型";
-            this.CreditLineTypeColumn.Name = "CreditLineTypeColumn";
-            this.CreditLineTypeColumn.ReadOnly = true;
-            // 
-            // CreditLineCurrencyColumn
-            // 
-            this.CreditLineCurrencyColumn.DataPropertyName = "CreditLineCurrency";
-            this.CreditLineCurrencyColumn.HeaderText = "额度币种";
-            this.CreditLineCurrencyColumn.Name = "CreditLineCurrencyColumn";
-            this.CreditLineCurrencyColumn.ReadOnly = true;
-            // 
-            // CreditLineColumn
-            // 
-            this.CreditLineColumn.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.CreditLineColumn.DefaultCellStyle = dataGridViewCellStyle5;
-            this.CreditLineColumn.HeaderText = "额度上限";
-            this.CreditLineColumn.Name = "CreditLineColumn";
-            this.CreditLineColumn.ReadOnly = true;
-            // 
-            // PeriodBeginColumn
-            // 
-            this.PeriodBeginColumn.DataPropertyName = "PeriodBegin";
-            dataGridViewCellStyle6.Format = "d";
-            dataGridViewCellStyle6.NullValue = null;
-            this.PeriodBeginColumn.DefaultCellStyle = dataGridViewCellStyle6;
-            this.PeriodBeginColumn.HeaderText = "有效期(始)";
-            this.PeriodBeginColumn.Name = "PeriodBeginColumn";
-            this.PeriodBeginColumn.ReadOnly = true;
-            // 
-            // PeriodEndColumn
-            // 
-            this.PeriodEndColumn.DataPropertyName = "PeriodEnd";
-            dataGridViewCellStyle7.Format = "d";
-            dataGridViewCellStyle7.NullValue = null;
-            this.PeriodEndColumn.DefaultCellStyle = dataGridViewCellStyle7;
-            this.PeriodEndColumn.HeaderText = "有效期(终)";
-            this.PeriodEndColumn.Name = "PeriodEndColumn";
-            this.PeriodEndColumn.ReadOnly = true;
-            // 
-            // ApproveNoColumn
-            // 
-            this.ApproveNoColumn.DataPropertyName = "ApproveNo";
-            this.ApproveNoColumn.HeaderText = "授信编号";
-            this.ApproveNoColumn.Name = "ApproveNoColumn";
-            this.ApproveNoColumn.ReadOnly = true;
-            // 
-            // ApproveTypeColumn
-            // 
-            this.ApproveTypeColumn.DataPropertyName = "ApproveType";
-            this.ApproveTypeColumn.HeaderText = "授信类型";
-            this.ApproveTypeColumn.Name = "ApproveTypeColumn";
-            this.ApproveTypeColumn.ReadOnly = true;
-            // 
-            // CreditLineStatusColumn
-            // 
-            this.CreditLineStatusColumn.DataPropertyName = "CreditLineStatus";
-            this.CreditLineStatusColumn.HeaderText = "额度状态";
-            this.CreditLineStatusColumn.Name = "CreditLineStatusColumn";
-            this.CreditLineStatusColumn.ReadOnly = true;
-            // 
-            // FreezeReasonColumn
-            // 
-            this.FreezeReasonColumn.DataPropertyName = "FreezeReason";
-            this.FreezeReasonColumn.HeaderText = "冻结原因";
-            this.FreezeReasonColumn.Name = "FreezeReasonColumn";
-            this.FreezeReasonColumn.ReadOnly = true;
-            // 
-            // FreezerColumn
-            // 
-            this.FreezerColumn.DataPropertyName = "Freezer";
-            this.FreezerColumn.HeaderText = "冻结人";
-            this.FreezerColumn.Name = "FreezerColumn";
-            this.FreezerColumn.ReadOnly = true;
-            // 
-            // FreezeDateColumn
-            // 
-            this.FreezeDateColumn.DataPropertyName = "FreezeDate";
-            this.FreezeDateColumn.HeaderText = "冻结日期";
-            this.FreezeDateColumn.Name = "FreezeDateColumn";
-            this.FreezeDateColumn.ReadOnly = true;
-            // 
-            // UnfreezeReasonColumn
-            // 
-            this.UnfreezeReasonColumn.DataPropertyName = "UnfreezeReason";
-            this.UnfreezeReasonColumn.HeaderText = "解冻原因";
-            this.UnfreezeReasonColumn.Name = "UnfreezeReasonColumn";
-            this.UnfreezeReasonColumn.ReadOnly = true;
-            // 
-            // UnfreezerColumn
-            // 
-            this.UnfreezerColumn.DataPropertyName = "Unfreezer";
-            this.UnfreezerColumn.HeaderText = "解冻人";
-            this.UnfreezerColumn.Name = "UnfreezerColumn";
-            this.UnfreezerColumn.ReadOnly = true;
-            // 
-            // UnfreezeDateColumn
-            // 
-            this.UnfreezeDateColumn.DataPropertyName = "UnfreezeDate";
-            this.UnfreezeDateColumn.HeaderText = "解冻日期";
-            this.UnfreezeDateColumn.Name = "UnfreezeDateColumn";
-            this.UnfreezeDateColumn.ReadOnly = true;
-            // 
-            // CommentColumn
-            // 
-            this.CommentColumn.DataPropertyName = "Comment";
-            this.CommentColumn.HeaderText = "备注";
-            this.CommentColumn.Name = "CommentColumn";
-            this.CommentColumn.ReadOnly = true;
-            // 
-            // ClientColumn
-            // 
-            this.ClientColumn.DataPropertyName = "Client";
-            this.ClientColumn.HeaderText = "Client";
-            this.ClientColumn.Name = "ClientColumn";
-            this.ClientColumn.ReadOnly = true;
-            this.ClientColumn.Visible = false;
-            // 
-            // groupPanelClientCreditCover
-            // 
-            this.groupPanelClientCreditCover.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelClientCreditCover.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.groupPanelClientCreditCover.Controls.Add(this.btnUpdateCreditLine);
-            this.groupPanelClientCreditCover.Controls.Add(this.creditLineTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditLineRefresh);
-            this.groupPanelClientCreditCover.Controls.Add(creditLineCommentLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.creditLineCommentTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(unfreezeDateLabel);
-            this.groupPanelClientCreditCover.Controls.Add(freezeDateLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.unfreezeDateDateTimePicker);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverUnfreeze);
-            this.groupPanelClientCreditCover.Controls.Add(unfreezerLabel);
-            this.groupPanelClientCreditCover.Controls.Add(freezeReasonLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.unfreezerTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(this.freezeDateDateTimePicker);
-            this.groupPanelClientCreditCover.Controls.Add(unfreezeReasonLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditCoverFreeze);
-            this.groupPanelClientCreditCover.Controls.Add(this.unfreezeReasonTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(this.freezeReasonTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditLineDelete);
-            this.groupPanelClientCreditCover.Controls.Add(freezerLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditLineSave);
-            this.groupPanelClientCreditCover.Controls.Add(this.freezerTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(this.btnClientCreditLineNew);
-            this.groupPanelClientCreditCover.Controls.Add(creditLineStatusLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.creditLineStatusTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(approveTypeLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.approveTypeComboBox);
-            this.groupPanelClientCreditCover.Controls.Add(approveNoLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.approveNoTextBox);
-            this.groupPanelClientCreditCover.Controls.Add(this.periodEndDateTimePicker);
-            this.groupPanelClientCreditCover.Controls.Add(periodBeginLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.periodBeginDateTimePicker);
-            this.groupPanelClientCreditCover.Controls.Add(creditLineLabel);
-            this.groupPanelClientCreditCover.Controls.Add(creditLineTypeLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.creditLineTypeComboBox);
-            this.groupPanelClientCreditCover.Controls.Add(creditLineCurrencyLabel);
-            this.groupPanelClientCreditCover.Controls.Add(this.creditLineCurrencyComboBox);
-            this.groupPanelClientCreditCover.Location = new System.Drawing.Point(0, 4);
-            this.groupPanelClientCreditCover.Name = "groupPanelClientCreditCover";
-            this.groupPanelClientCreditCover.Size = new System.Drawing.Size(588, 316);
+            this.groupPanelClientCreditLine.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelClientCreditLine.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelClientCreditLine.Controls.Add(this.btnUpdateCreditLine);
+            this.groupPanelClientCreditLine.Controls.Add(this.creditLineTextBox);
+            this.groupPanelClientCreditLine.Controls.Add(this.btnClientCreditLineRefresh);
+            this.groupPanelClientCreditLine.Controls.Add(creditLineCommentLabel);
+            this.groupPanelClientCreditLine.Controls.Add(this.creditLineCommentTextBox);
+            this.groupPanelClientCreditLine.Controls.Add(unfreezeDateLabel);
+            this.groupPanelClientCreditLine.Controls.Add(freezeDateLabel);
+            this.groupPanelClientCreditLine.Controls.Add(this.unfreezeDateDateTimePicker);
+            this.groupPanelClientCreditLine.Controls.Add(this.btnClientCreditCoverUnfreeze);
+            this.groupPanelClientCreditLine.Controls.Add(unfreezerLabel);
+            this.groupPanelClientCreditLine.Controls.Add(freezeReasonLabel);
+            this.groupPanelClientCreditLine.Controls.Add(this.unfreezerTextBox);
+            this.groupPanelClientCreditLine.Controls.Add(this.freezeDateDateTimePicker);
+            this.groupPanelClientCreditLine.Controls.Add(unfreezeReasonLabel);
+            this.groupPanelClientCreditLine.Controls.Add(this.btnClientCreditCoverFreeze);
+            this.groupPanelClientCreditLine.Controls.Add(this.unfreezeReasonTextBox);
+            this.groupPanelClientCreditLine.Controls.Add(this.freezeReasonTextBox);
+            this.groupPanelClientCreditLine.Controls.Add(this.btnClientCreditLineDelete);
+            this.groupPanelClientCreditLine.Controls.Add(freezerLabel);
+            this.groupPanelClientCreditLine.Controls.Add(this.btnClientCreditLineSave);
+            this.groupPanelClientCreditLine.Controls.Add(this.freezerTextBox);
+            this.groupPanelClientCreditLine.Controls.Add(this.btnClientCreditLineNew);
+            this.groupPanelClientCreditLine.Controls.Add(creditLineStatusLabel);
+            this.groupPanelClientCreditLine.Controls.Add(this.creditLineStatusTextBox);
+            this.groupPanelClientCreditLine.Controls.Add(approveTypeLabel);
+            this.groupPanelClientCreditLine.Controls.Add(this.approveTypeComboBox);
+            this.groupPanelClientCreditLine.Controls.Add(approveNoLabel);
+            this.groupPanelClientCreditLine.Controls.Add(this.approveNoTextBox);
+            this.groupPanelClientCreditLine.Controls.Add(this.periodEndDateTimePicker);
+            this.groupPanelClientCreditLine.Controls.Add(periodBeginLabel);
+            this.groupPanelClientCreditLine.Controls.Add(this.periodBeginDateTimePicker);
+            this.groupPanelClientCreditLine.Controls.Add(creditLineLabel);
+            this.groupPanelClientCreditLine.Controls.Add(creditLineTypeLabel);
+            this.groupPanelClientCreditLine.Controls.Add(this.creditLineTypeComboBox);
+            this.groupPanelClientCreditLine.Controls.Add(creditLineCurrencyLabel);
+            this.groupPanelClientCreditLine.Controls.Add(this.creditLineCurrencyComboBox);
+            this.groupPanelClientCreditLine.Location = new System.Drawing.Point(0, 4);
+            this.groupPanelClientCreditLine.Name = "groupPanelClientCreditLine";
+            this.groupPanelClientCreditLine.Size = new System.Drawing.Size(588, 316);
             // 
             // 
             // 
-            this.groupPanelClientCreditCover.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelClientCreditCover.Style.BackColorGradientAngle = 90;
-            this.groupPanelClientCreditCover.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelClientCreditCover.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCover.Style.BorderBottomWidth = 1;
-            this.groupPanelClientCreditCover.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelClientCreditCover.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCover.Style.BorderLeftWidth = 1;
-            this.groupPanelClientCreditCover.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCover.Style.BorderRightWidth = 1;
-            this.groupPanelClientCreditCover.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCover.Style.BorderTopWidth = 1;
-            this.groupPanelClientCreditCover.Style.Class = "";
-            this.groupPanelClientCreditCover.Style.CornerDiameter = 4;
-            this.groupPanelClientCreditCover.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelClientCreditCover.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelClientCreditCover.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelClientCreditCover.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            this.groupPanelClientCreditLine.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelClientCreditLine.Style.BackColorGradientAngle = 90;
+            this.groupPanelClientCreditLine.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelClientCreditLine.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditLine.Style.BorderBottomWidth = 1;
+            this.groupPanelClientCreditLine.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelClientCreditLine.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditLine.Style.BorderLeftWidth = 1;
+            this.groupPanelClientCreditLine.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditLine.Style.BorderRightWidth = 1;
+            this.groupPanelClientCreditLine.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditLine.Style.BorderTopWidth = 1;
+            this.groupPanelClientCreditLine.Style.Class = "";
+            this.groupPanelClientCreditLine.Style.CornerDiameter = 4;
+            this.groupPanelClientCreditLine.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelClientCreditLine.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelClientCreditLine.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelClientCreditLine.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
             // 
             // 
             // 
-            this.groupPanelClientCreditCover.StyleMouseDown.Class = "";
+            this.groupPanelClientCreditLine.StyleMouseDown.Class = "";
             // 
             // 
             // 
-            this.groupPanelClientCreditCover.StyleMouseOver.Class = "";
-            this.groupPanelClientCreditCover.TabIndex = 0;
+            this.groupPanelClientCreditLine.StyleMouseOver.Class = "";
+            this.groupPanelClientCreditLine.TabIndex = 0;
+            // 
+            // btnUpdateCreditLine
+            // 
+            this.btnUpdateCreditLine.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnUpdateCreditLine.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnUpdateCreditLine.Location = new System.Drawing.Point(171, 279);
+            this.btnUpdateCreditLine.Name = "btnUpdateCreditLine";
+            this.btnUpdateCreditLine.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdateCreditLine.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnUpdateCreditLine.TabIndex = 36;
+            this.btnUpdateCreditLine.Text = "更新";
+            this.btnUpdateCreditLine.Click += new System.EventHandler(this.btnUpdateCreditLine_Click);
             // 
             // creditLineTextBox
             // 
@@ -1754,7 +1638,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientClose.TabIndex = 6;
             this.btnClientClose.Text = "关闭";
-            this.btnClientClose.Click += new System.EventHandler(this.ClientCancel);
+            this.btnClientClose.Click += new System.EventHandler(this.ClientClose);
             // 
             // btnClientSave
             // 
@@ -2073,6 +1957,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientEDICodeTextBox.Name = "clientEDICodeTextBox";
             this.clientEDICodeTextBox.Size = new System.Drawing.Size(109, 20);
             this.clientEDICodeTextBox.TabIndex = 1;
+            this.superValidator.SetValidator1(this.clientEDICodeTextBox, this.regularExpressionValidator1);
+            this.superValidator.SetValidator2(this.clientEDICodeTextBox, this.customValidator1);
             // 
             // countryCodeComboBox
             // 
@@ -2270,17 +2156,176 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabItemClientAccount.Name = "tabItemClientAccount";
             this.tabItemClientAccount.Text = "账户信息";
             // 
-            // btnUpdateCreditLine
+            // creditLineIDColumn
             // 
-            this.btnUpdateCreditLine.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnUpdateCreditLine.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUpdateCreditLine.Location = new System.Drawing.Point(171, 279);
-            this.btnUpdateCreditLine.Name = "btnUpdateCreditLine";
-            this.btnUpdateCreditLine.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdateCreditLine.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnUpdateCreditLine.TabIndex = 36;
-            this.btnUpdateCreditLine.Text = "更新";
-            this.btnUpdateCreditLine.Click += new System.EventHandler(this.btnUpdateCreditLine_Click);
+            this.creditLineIDColumn.DataPropertyName = "CreditLineID";
+            this.creditLineIDColumn.HeaderText = "额度编号";
+            this.creditLineIDColumn.Name = "creditLineIDColumn";
+            this.creditLineIDColumn.ReadOnly = true;
+            this.creditLineIDColumn.Visible = false;
+            // 
+            // ClientEDICodeColumn
+            // 
+            this.ClientEDICodeColumn.DataPropertyName = "ClientEDICode";
+            this.ClientEDICodeColumn.HeaderText = "客户保理代码";
+            this.ClientEDICodeColumn.Name = "ClientEDICodeColumn";
+            this.ClientEDICodeColumn.ReadOnly = true;
+            // 
+            // CreditLineTypeColumn
+            // 
+            this.CreditLineTypeColumn.DataPropertyName = "CreditLineType";
+            this.CreditLineTypeColumn.HeaderText = "额度类型";
+            this.CreditLineTypeColumn.Name = "CreditLineTypeColumn";
+            this.CreditLineTypeColumn.ReadOnly = true;
+            // 
+            // CreditLineCurrencyColumn
+            // 
+            this.CreditLineCurrencyColumn.DataPropertyName = "CreditLineCurrency";
+            this.CreditLineCurrencyColumn.HeaderText = "额度币种";
+            this.CreditLineCurrencyColumn.Name = "CreditLineCurrencyColumn";
+            this.CreditLineCurrencyColumn.ReadOnly = true;
+            // 
+            // CreditLineColumn
+            // 
+            this.CreditLineColumn.DataPropertyName = "CreditLine";
+            dataGridViewCellStyle7.Format = "C2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.CreditLineColumn.DefaultCellStyle = dataGridViewCellStyle7;
+            this.CreditLineColumn.HeaderText = "额度上限";
+            this.CreditLineColumn.Name = "CreditLineColumn";
+            this.CreditLineColumn.ReadOnly = true;
+            // 
+            // PeriodBeginColumn
+            // 
+            this.PeriodBeginColumn.DataPropertyName = "PeriodBegin";
+            dataGridViewCellStyle8.Format = "d";
+            dataGridViewCellStyle8.NullValue = null;
+            this.PeriodBeginColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            this.PeriodBeginColumn.HeaderText = "有效期(始)";
+            this.PeriodBeginColumn.Name = "PeriodBeginColumn";
+            this.PeriodBeginColumn.ReadOnly = true;
+            // 
+            // PeriodEndColumn
+            // 
+            this.PeriodEndColumn.DataPropertyName = "PeriodEnd";
+            dataGridViewCellStyle9.Format = "d";
+            dataGridViewCellStyle9.NullValue = null;
+            this.PeriodEndColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            this.PeriodEndColumn.HeaderText = "有效期(终)";
+            this.PeriodEndColumn.Name = "PeriodEndColumn";
+            this.PeriodEndColumn.ReadOnly = true;
+            // 
+            // ApproveNoColumn
+            // 
+            this.ApproveNoColumn.DataPropertyName = "ApproveNo";
+            this.ApproveNoColumn.HeaderText = "授信编号";
+            this.ApproveNoColumn.Name = "ApproveNoColumn";
+            this.ApproveNoColumn.ReadOnly = true;
+            // 
+            // ApproveTypeColumn
+            // 
+            this.ApproveTypeColumn.DataPropertyName = "ApproveType";
+            this.ApproveTypeColumn.HeaderText = "授信类型";
+            this.ApproveTypeColumn.Name = "ApproveTypeColumn";
+            this.ApproveTypeColumn.ReadOnly = true;
+            // 
+            // CreditLineStatusColumn
+            // 
+            this.CreditLineStatusColumn.DataPropertyName = "CreditLineStatus";
+            this.CreditLineStatusColumn.HeaderText = "额度状态";
+            this.CreditLineStatusColumn.Name = "CreditLineStatusColumn";
+            this.CreditLineStatusColumn.ReadOnly = true;
+            // 
+            // FreezeReasonColumn
+            // 
+            this.FreezeReasonColumn.DataPropertyName = "FreezeReason";
+            this.FreezeReasonColumn.HeaderText = "冻结原因";
+            this.FreezeReasonColumn.Name = "FreezeReasonColumn";
+            this.FreezeReasonColumn.ReadOnly = true;
+            // 
+            // FreezerColumn
+            // 
+            this.FreezerColumn.DataPropertyName = "Freezer";
+            this.FreezerColumn.HeaderText = "冻结人";
+            this.FreezerColumn.Name = "FreezerColumn";
+            this.FreezerColumn.ReadOnly = true;
+            // 
+            // FreezeDateColumn
+            // 
+            this.FreezeDateColumn.DataPropertyName = "FreezeDate";
+            dataGridViewCellStyle10.Format = "d";
+            dataGridViewCellStyle10.NullValue = null;
+            this.FreezeDateColumn.DefaultCellStyle = dataGridViewCellStyle10;
+            this.FreezeDateColumn.HeaderText = "冻结日期";
+            this.FreezeDateColumn.Name = "FreezeDateColumn";
+            this.FreezeDateColumn.ReadOnly = true;
+            // 
+            // UnfreezeReasonColumn
+            // 
+            this.UnfreezeReasonColumn.DataPropertyName = "UnfreezeReason";
+            this.UnfreezeReasonColumn.HeaderText = "解冻原因";
+            this.UnfreezeReasonColumn.Name = "UnfreezeReasonColumn";
+            this.UnfreezeReasonColumn.ReadOnly = true;
+            // 
+            // UnfreezerColumn
+            // 
+            this.UnfreezerColumn.DataPropertyName = "Unfreezer";
+            this.UnfreezerColumn.HeaderText = "解冻人";
+            this.UnfreezerColumn.Name = "UnfreezerColumn";
+            this.UnfreezerColumn.ReadOnly = true;
+            // 
+            // UnfreezeDateColumn
+            // 
+            this.UnfreezeDateColumn.DataPropertyName = "UnfreezeDate";
+            dataGridViewCellStyle11.Format = "d";
+            dataGridViewCellStyle11.NullValue = null;
+            this.UnfreezeDateColumn.DefaultCellStyle = dataGridViewCellStyle11;
+            this.UnfreezeDateColumn.HeaderText = "解冻日期";
+            this.UnfreezeDateColumn.Name = "UnfreezeDateColumn";
+            this.UnfreezeDateColumn.ReadOnly = true;
+            // 
+            // CommentColumn
+            // 
+            this.CommentColumn.DataPropertyName = "Comment";
+            this.CommentColumn.HeaderText = "备注";
+            this.CommentColumn.Name = "CommentColumn";
+            this.CommentColumn.ReadOnly = true;
+            // 
+            // ClientColumn
+            // 
+            this.ClientColumn.DataPropertyName = "Client";
+            this.ClientColumn.HeaderText = "Client";
+            this.ClientColumn.Name = "ClientColumn";
+            this.ClientColumn.ReadOnly = true;
+            this.ClientColumn.Visible = false;
+            // 
+            // superValidator
+            // 
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
+            this.superValidator.ValidationType = DevComponents.DotNetBar.Validator.eValidationType.ValidatingEventPerControl;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkRate = 0;
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
+            // 
+            // regularExpressionValidator1
+            // 
+            this.regularExpressionValidator1.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // customValidator1
+            // 
+            this.customValidator1.ErrorMessage = "Your error message here.";
+            this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // ClientDetail
             // 
@@ -2302,8 +2347,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabPanelClientCreditLine.ResumeLayout(false);
             this.groupPanelClientCreditCoverMgr.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLines)).EndInit();
-            this.groupPanelClientCreditCover.ResumeLayout(false);
-            this.groupPanelClientCreditCover.PerformLayout();
+            this.groupPanelClientCreditLine.ResumeLayout(false);
+            this.groupPanelClientCreditLine.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineBindingSource)).EndInit();
             this.tabPanelClient.ResumeLayout(false);
             this.groupPanelClientContact.ResumeLayout(false);
@@ -2315,6 +2360,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientStat.PerformLayout();
             this.groupPanelClientBasic.ResumeLayout(false);
             this.groupPanelClientBasic.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2376,7 +2422,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.Editors.ComboItem comboItem5;
         private DevComponents.Editors.ComboItem comboItem6;
         private DevComponents.DotNetBar.Controls.ComboTree departmentComboTree;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelClientCreditCover;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelClientCreditLine;
         private DevComponents.DotNetBar.Controls.TextBoxX creditLineStatusTextBox;
         private System.Windows.Forms.BindingSource clientCreditLineBindingSource;
         private DevComponents.DotNetBar.Controls.ComboBoxEx approveTypeComboBox;
@@ -2415,6 +2461,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.Editors.ComboItem comboItem18;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvClientCreditLines;
         private DevComponents.DotNetBar.ButtonX btnClientCreditLineRefresh;
+        private DevComponents.DotNetBar.Controls.TextBoxX creditLineTextBox;
+        private DevComponents.DotNetBar.ButtonX btnClientUpdate;
+        private DevComponents.DotNetBar.ButtonX btnUpdateCreditLine;
         private System.Windows.Forms.DataGridViewTextBoxColumn creditLineIDColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientEDICodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreditLineTypeColumn;
@@ -2433,8 +2482,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn UnfreezeDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientColumn;
-        private DevComponents.DotNetBar.Controls.TextBoxX creditLineTextBox;
-        private DevComponents.DotNetBar.ButtonX btnClientUpdate;
-        private DevComponents.DotNetBar.ButtonX btnUpdateCreditLine;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator1;
     }
 }

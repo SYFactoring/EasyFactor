@@ -94,7 +94,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ClientNew(object sender, EventArgs e)
         {
-            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpType.NEW_CLIENT);
+            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE);
             clientDetail.ShowDialog(this);
         }
 

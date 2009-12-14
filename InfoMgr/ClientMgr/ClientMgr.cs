@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using Microsoft.Office.Interop.Excel;
+    using System.Data.SqlClient;
 
     /// <summary>
     /// Client Management User Interface
@@ -122,7 +123,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void NewClient(object sender, System.EventArgs e)
         {
-            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpType.NEW_CLIENT);
+            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE);
             clientDetail.ShowDialog(this);
         }
 
@@ -144,7 +145,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
                 if (selectedClient != null)
                 {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpType.UPDATE_CLIENT);
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.UPDATE_CLIENT, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE);
                     clientDetail.ShowDialog(this);
                 }
             }
@@ -163,7 +164,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
                 if (selectedClient != null)
                 {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpType.NEW_CLIENT_CREDIT_LINE);
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.DETAIL_CLIENT, ClientDetail.OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE);
                     clientDetail.ShowDialog(this);
                 }
             }
@@ -189,9 +190,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     if (MessageBox.Show("是否打算删除客户: " + selectedClient.ClientNameCN, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        dgvClients.Rows.RemoveAt(dgvClients.SelectedRows[0].Index);
                         App.Current.DbContext.Clients.DeleteOnSubmit(selectedClient);
-                        App.Current.DbContext.SubmitChanges();
+                        try
+                        {
+                            App.Current.DbContext.SubmitChanges();
+                        }
+                        catch (SqlException)
+                        {
+                            MessageBox.Show("不能删除此客户,已存在相关额度.", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        dgvClients.Rows.RemoveAt(dgvClients.SelectedRows[0].Index);
                     }
                 }
             }
@@ -242,7 +251,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
                 if (selectedClient != null)
                 {
-                    new ClientDetail(selectedClient, ClientDetail.OpType.DETAIL_CLIENT).ShowDialog(this);
+                    new ClientDetail(selectedClient, ClientDetail.OpClientType.DETAIL_CLIENT, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE).ShowDialog(this);
                 }
             }
         }

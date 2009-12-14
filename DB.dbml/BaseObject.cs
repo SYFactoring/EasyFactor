@@ -1,24 +1,11 @@
 ﻿
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System.Reflection;
     using System.Collections.Generic;
+    using System.Reflection;
 
-    public partial class User
+    public class BaseObject
     {
-        public void Copy(User old)
-        {
-            PropertyInfo[] props = this.GetType().GetProperties();
-            foreach (PropertyInfo p in props)
-            {
-                p.SetValue(this, p.GetValue(old, null), null);
-            }
-        }
-    }
-
-    public partial class Client
-    {
-
         private List<object> _status;
 
         public void Backup()
@@ -34,6 +21,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
+
         public void Restore()
         {
             if (_status != null)
@@ -52,27 +40,11 @@ namespace CMBC.EasyFactor.DB.dbml
         }
     }
 
-    public partial class Contract
+    public partial class Client : BaseObject
     {
-        public void Copy(Contract old)
-        {
-            PropertyInfo[] props = this.GetType().GetProperties();
-            foreach (PropertyInfo p in props)
-            {
-                p.SetValue(this, p.GetValue(old, null), null);
-            }
-        }
     }
 
-    public partial class Factor
+    public partial class ClientCreditLine : BaseObject
     {
-        public void Copy(Factor old)
-        {
-            PropertyInfo[] props = this.GetType().GetProperties();
-            foreach (PropertyInfo p in props)
-            {
-                p.SetValue(this, p.GetValue(old, null), null);
-            }
-        }
     }
 }

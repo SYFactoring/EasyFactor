@@ -97,6 +97,7 @@
     <Compile Include="CaseMgr\CaseApp\CaseAppUI.Designer.cs">
       <DependentUpon>CaseAppUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="DB.dbml\BaseObject.cs" />
     <Compile Include="DB.dbml\DB.cs">
       <DependentUpon>DB.dbml</DependentUpon>
     </Compile>
@@ -105,7 +106,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB.dbml</DependentUpon>
     </Compile>
-    <Compile Include="DB.dbml\ObjectClone.cs" />
     <Compile Include="DB.dbml\ObjectExtend.cs" />
     <Compile Include="Help\About\AboutBox.cs">
       <SubType>Form</SubType>

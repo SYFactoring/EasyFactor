@@ -41,7 +41,7 @@ namespace CMBC.EasyFactor.CaseMgr.ContractMgr
             else
             {
                 this.originalContract = contract;
-                updateContract.Copy(contract);
+               // updateContract.Copy(contract);
             }
 
             this.contractBindingSource.DataSource = updateContract;
@@ -96,8 +96,8 @@ namespace CMBC.EasyFactor.CaseMgr.ContractMgr
             {
                 bool isUpdateOK = true;
                 Contract tempContract = new Contract();
-                tempContract.Copy(this.originalContract);
-                this.originalContract.Copy(updateContract);
+                //tempContract.Copy(this.originalContract);
+                //this.originalContract.Copy(updateContract);
                 try
                 {
                     App.Current.DbContext.SubmitChanges();
@@ -105,7 +105,7 @@ namespace CMBC.EasyFactor.CaseMgr.ContractMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    this.originalContract.Copy(tempContract);
+                   // this.originalContract.Copy(tempContract);
                     MessageBox.Show(e2.Message);
                 }
 
