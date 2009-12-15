@@ -1,10 +1,19 @@
 ﻿
-using System.Windows.Forms;
 namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
+    using System.Windows.Forms;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class QueryForm : DevComponents.DotNetBar.Office2007Form
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userControl"></param>
+        /// <param name="title"></param>
         public QueryForm(UserControl userControl,string title)
         {
             InitializeComponent();

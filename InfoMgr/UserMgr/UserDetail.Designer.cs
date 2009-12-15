@@ -58,6 +58,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             DevComponents.DotNetBar.LabelX userNameLabel;
             DevComponents.DotNetBar.LabelX eDIAccountLabel;
             DevComponents.DotNetBar.LabelX roleLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserDetail));
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.emailTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.loginDate = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -73,6 +74,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.roleComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.groupPanelUser = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.btnUserUpdate = new DevComponents.DotNetBar.ButtonX();
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             emailLabel = new DevComponents.DotNetBar.LabelX();
             loginDateLabel = new DevComponents.DotNetBar.LabelX();
             mSNLabel = new DevComponents.DotNetBar.LabelX();
@@ -85,6 +89,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             roleLabel = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             this.groupPanelUser.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // emailLabel
@@ -451,6 +456,21 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnUserUpdate.Text = "更新";
             this.btnUserUpdate.Click += new System.EventHandler(this.UserUpdate);
             // 
+            // superValidator
+            // 
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
+            // 
             // UserDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -469,6 +489,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.groupPanelUser.ResumeLayout(false);
             this.groupPanelUser.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -481,6 +502,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private DevComponents.DotNetBar.Controls.ComboBoxEx roleComboBox;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelUser;
         private DevComponents.DotNetBar.ButtonX btnUserUpdate;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
 
 
     }
