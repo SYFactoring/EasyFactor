@@ -66,6 +66,15 @@ namespace CMBC.EasyFactor
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        
+        private void ClearDetailPanel()
+        {
+            this.ribbonDetailPanel.Controls.Clear();
+        }
+
+        /// <summary>
         /// Invoice Assign
         /// </summary>
         /// <param name="sender">event sender</param>
@@ -149,8 +158,15 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CaseApplication(object sender, EventArgs e)
         {
+            this.ClearDetailPanel();
             CaseAppUI caseAppUI = new CaseAppUI();
             caseAppUI.ShowDialog(this);
+        }
+
+        private void CaseQuery(object sender, EventArgs e)
+        {
+            CaseQuery caseQuery = new CaseQuery();
+            this.SetDetailPanel(caseQuery);
         }
 
         private void About(object sender, EventArgs e)
@@ -187,5 +203,6 @@ namespace CMBC.EasyFactor
                 this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Windows7Blue;
             }
         }
+
     }
 }

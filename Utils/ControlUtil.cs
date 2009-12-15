@@ -1,13 +1,22 @@
-﻿using System.Windows.Forms;
-using DevComponents.DotNetBar.Controls;
-using DevComponents.DotNetBar;
-using System;
-
+﻿
 namespace CMBC.EasyFactor.Utils
 {
-    class ControlUtil
+    using System.Windows.Forms;
+    using DevComponents.DotNetBar.Controls;
+    using DevComponents.DotNetBar;
+    using System;
+    using System.Reflection;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ControlUtil
     {
-        public static void setComponetDefault(Control comp)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="comp"></param>
+        public static void SetComponetDefault(Control comp)
         {
             if (comp is TextBoxX)
             {
@@ -35,7 +44,12 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
-        public static void setComponetEditable(Control comp, bool isEditable)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="comp"></param>
+        /// <param name="isEditable"></param>
+        public static void SetComponetEditable(Control comp, bool isEditable)
         {
             if (comp is TextBoxX)
             {
@@ -70,5 +84,17 @@ namespace CMBC.EasyFactor.Utils
                 (comp as DateTimePicker).Enabled = isEditable;
             }
         }
+
+        /// <summary>
+        /// set instance non-public property with name "DoubleBuffered" to true
+        /// </summary>
+        /// <param name="control"></param>
+        public static void SetDoubleBuffered(Control control)
+        {
+            typeof(Control).InvokeMember("DoubleBuffered",
+                BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+                null, control, new object[] { true });
+        }
+
     }
 }

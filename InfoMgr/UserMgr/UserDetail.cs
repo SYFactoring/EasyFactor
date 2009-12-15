@@ -73,21 +73,21 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             {
                 foreach (Control comp in this.groupPanelUser.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, false);
+                    ControlUtil.SetComponetEditable(comp, false);
                 }
             }
             else if (opUserType == OpUserType.NEW_USER)
             {
                 foreach (Control comp in this.groupPanelUser.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, true);
                 }
             }
             else if (opUserType == OpUserType.UPDATE_USER)
             {
                 foreach (Control comp in this.groupPanelUser.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, true);
                 }
                  userIDTextBox.ReadOnly = true;
             }

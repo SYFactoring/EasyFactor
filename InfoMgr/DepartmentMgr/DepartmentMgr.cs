@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     using System.Threading;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// 
@@ -27,6 +28,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         public DepartmentMgr(bool isEditable)
         {
             InitializeComponent();
+            ControlUtil.SetDoubleBuffered(this.dgvDepts);
         }
 
         /// <summary>

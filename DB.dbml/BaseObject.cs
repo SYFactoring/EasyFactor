@@ -59,4 +59,8 @@ namespace CMBC.EasyFactor.DB.dbml
     public partial class User : BaseObject
     {
     }
+
+    public partial class Case : BaseObject
+    {
+    }
 }

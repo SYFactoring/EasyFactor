@@ -75,7 +75,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactors = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.factorCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactorTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CompanyNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CompanyNameCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CompanyNameENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ShortNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CountryNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DepartmentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -115,6 +116,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.IsAgreementSignColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CommentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactorGroupColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblCountry = new DevComponents.DotNetBar.LabelX();
+            this.cbCountry = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.comboItem5 = new DevComponents.Editors.ComboItem();
+            this.comboItem6 = new DevComponents.Editors.ComboItem();
+            this.comboItem7 = new DevComponents.Editors.ComboItem();
+            this.comboItem8 = new DevComponents.Editors.ComboItem();
+            this.comboItem9 = new DevComponents.Editors.ComboItem();
             this.contextMenuFactorMgr.SuspendLayout();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactors)).BeginInit();
@@ -192,6 +200,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.cbCountry);
+            this.panelQuery.Controls.Add(this.lblCountry);
             this.panelQuery.Controls.Add(this.cbFactorType);
             this.panelQuery.Controls.Add(this.lblCount);
             this.panelQuery.Controls.Add(this.btnQuery);
@@ -225,7 +235,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.comboItem2,
             this.comboItem3,
             this.comboItem4});
-            this.cbFactorType.Location = new System.Drawing.Point(82, 10);
+            this.cbFactorType.Location = new System.Drawing.Point(70, 10);
             this.cbFactorType.Name = "cbFactorType";
             this.cbFactorType.Size = new System.Drawing.Size(99, 21);
             this.cbFactorType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -258,7 +268,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(596, 5);
+            this.lblCount.Location = new System.Drawing.Point(728, 21);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 7;
@@ -267,7 +277,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(515, 4);
+            this.btnQuery.Location = new System.Drawing.Point(644, 8);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -281,7 +291,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.tbFactorName.Border.Class = "TextBoxBorder";
-            this.tbFactorName.Location = new System.Drawing.Point(409, 8);
+            this.tbFactorName.Location = new System.Drawing.Point(540, 8);
             this.tbFactorName.Name = "tbFactorName";
             this.tbFactorName.Size = new System.Drawing.Size(100, 20);
             this.tbFactorName.TabIndex = 5;
@@ -292,7 +302,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.lblFactorName.BackgroundStyle.Class = "";
-            this.lblFactorName.Location = new System.Drawing.Point(354, 10);
+            this.lblFactorName.Location = new System.Drawing.Point(485, 10);
             this.lblFactorName.Name = "lblFactorName";
             this.lblFactorName.Size = new System.Drawing.Size(75, 23);
             this.lblFactorName.TabIndex = 4;
@@ -304,7 +314,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.tbFactorCode.Border.Class = "TextBoxBorder";
-            this.tbFactorCode.Location = new System.Drawing.Point(248, 7);
+            this.tbFactorCode.Location = new System.Drawing.Point(379, 7);
             this.tbFactorCode.Name = "tbFactorCode";
             this.tbFactorCode.Size = new System.Drawing.Size(100, 20);
             this.tbFactorCode.TabIndex = 3;
@@ -315,7 +325,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.lblFactorCode.BackgroundStyle.Class = "";
-            this.lblFactorCode.Location = new System.Drawing.Point(190, 9);
+            this.lblFactorCode.Location = new System.Drawing.Point(321, 9);
             this.lblFactorCode.Name = "lblFactorCode";
             this.lblFactorCode.Size = new System.Drawing.Size(61, 23);
             this.lblFactorCode.TabIndex = 2;
@@ -350,7 +360,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.factorCodeColumn,
             this.FactorTypeColumn,
-            this.CompanyNameColumn,
+            this.CompanyNameCNColumn,
+            this.CompanyNameENColumn,
             this.ShortNameColumn,
             this.CountryNameColumn,
             this.DepartmentColumn,
@@ -426,12 +437,19 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.FactorTypeColumn.Name = "FactorTypeColumn";
             this.FactorTypeColumn.ReadOnly = true;
             // 
-            // CompanyNameColumn
+            // CompanyNameCNColumn
             // 
-            this.CompanyNameColumn.DataPropertyName = "CompanyName";
-            this.CompanyNameColumn.HeaderText = "公司名称";
-            this.CompanyNameColumn.Name = "CompanyNameColumn";
-            this.CompanyNameColumn.ReadOnly = true;
+            this.CompanyNameCNColumn.DataPropertyName = "CompanyNameCN";
+            this.CompanyNameCNColumn.HeaderText = "公司名称(中)";
+            this.CompanyNameCNColumn.Name = "CompanyNameCNColumn";
+            this.CompanyNameCNColumn.ReadOnly = true;
+            // 
+            // CompanyNameENColumn
+            // 
+            this.CompanyNameENColumn.DataPropertyName = "CompanyNameEN";
+            this.CompanyNameENColumn.HeaderText = "公司名称(英)";
+            this.CompanyNameENColumn.Name = "CompanyNameENColumn";
+            this.CompanyNameENColumn.ReadOnly = true;
             // 
             // ShortNameColumn
             // 
@@ -707,6 +725,56 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.FactorGroupColumn.ReadOnly = true;
             this.FactorGroupColumn.Visible = false;
             // 
+            // lblCountry
+            // 
+            // 
+            // 
+            // 
+            this.lblCountry.BackgroundStyle.Class = "";
+            this.lblCountry.Location = new System.Drawing.Point(175, 9);
+            this.lblCountry.Name = "lblCountry";
+            this.lblCountry.Size = new System.Drawing.Size(64, 23);
+            this.lblCountry.TabIndex = 8;
+            this.lblCountry.Text = "所在国";
+            // 
+            // cbCountry
+            // 
+            this.cbCountry.DisplayMember = "Text";
+            this.cbCountry.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCountry.FormattingEnabled = true;
+            this.cbCountry.Items.AddRange(new object[] {
+            this.comboItem5,
+            this.comboItem6,
+            this.comboItem7,
+            this.comboItem8,
+            this.comboItem9});
+            this.cbCountry.Location = new System.Drawing.Point(216, 10);
+            this.cbCountry.Name = "cbCountry";
+            this.cbCountry.Size = new System.Drawing.Size(99, 21);
+            this.cbCountry.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCountry.TabIndex = 9;
+            // 
+            // comboItem5
+            // 
+            this.comboItem5.Text = "全部";
+            // 
+            // comboItem6
+            // 
+            this.comboItem6.Text = "保理商";
+            // 
+            // comboItem7
+            // 
+            this.comboItem7.Text = "保险公司";
+            // 
+            // comboItem8
+            // 
+            this.comboItem8.Text = "监管机构";
+            // 
+            // comboItem9
+            // 
+            this.comboItem9.Text = "代付行";
+            // 
             // FactorMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -744,7 +812,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private DevComponents.Editors.ComboItem comboItem0;
         private System.Windows.Forms.DataGridViewTextBoxColumn factorCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactorTypeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNameCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNameENColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ShortNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
@@ -784,5 +853,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn IsAgreementSignColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactorGroupColumn;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCountry;
+        private DevComponents.Editors.ComboItem comboItem5;
+        private DevComponents.Editors.ComboItem comboItem6;
+        private DevComponents.Editors.ComboItem comboItem7;
+        private DevComponents.Editors.ComboItem comboItem8;
+        private DevComponents.Editors.ComboItem comboItem9;
+        private DevComponents.DotNetBar.LabelX lblCountry;
     }
 }

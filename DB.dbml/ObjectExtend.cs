@@ -90,6 +90,13 @@ namespace CMBC.EasyFactor.DB.dbml
 
     public partial class Factor
     {
+        public static readonly string CMBC_CODE = "CN01300";
+
+        public static Factor FindFactorByCode(string code)
+        {
+            return App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == code);
+        }
+
         public string GroupNameEN
         {
             get

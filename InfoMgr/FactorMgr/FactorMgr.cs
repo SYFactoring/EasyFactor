@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     using CMBC.EasyFactor.DB.dbml;
     using Microsoft.Office.Interop.Excel;
     using System.Data.SqlClient;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// Factor Management User Interface 
@@ -33,9 +34,18 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="isEditable">true if editable</param>
         public FactorMgr(bool isEditable)
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.InitComboBox();
             this.isEditable = isEditable;
             this.UpdateEditableStatus();
+            ControlUtil.SetDoubleBuffered(this.dgvFactors);
+        }
+
+        private void InitComboBox()
+        {
+            this.cbCountry.DataSource = App.Current.DbContext.Countries.ToList();
+            this.cbCountry.DisplayMember = "CountryFormatEN";
+            this.cbCountry.ValueMember = "CountryNameEN";
         }
 
         /// <summary>
@@ -95,11 +105,21 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     factorType = string.Empty;
                 }
             }
+            string country = string.Empty;
+            if (cbCountry.SelectedIndex >= 0)
+            {
+                country = (string)cbCountry.SelectedValue;
+                if ("All".Equals(country))
+                {
+                    country = string.Empty;
+                }
+            }
 
             var queryResult = App.Current.DbContext.Factors.Where(f =>
-                                                   ((f.FactorCode == null ? "" : f.FactorCode).Contains(tbFactorCode.Text))
-                                                && ((f.CompanyName == null ? "" : f.CompanyName).Contains(tbFactorName.Text))
-                                                && (f.FactorType.Contains(cbFactorType.Text)));
+                                                   ((f.FactorCode == null ? string.Empty : f.FactorCode).Contains(tbFactorCode.Text))
+                                                && ((f.CompanyNameCN == null ? string.Empty : f.CompanyNameCN).Contains(tbFactorName.Text) || (f.CompanyNameEN == null ? string.Empty : f.CompanyNameEN).Contains(tbFactorName.Text))
+                                                && (f.FactorType.Contains(cbFactorType.Text))
+                                                && ((f.CountryName == null ? string.Empty : f.CountryName).Contains(country)));
 
             bs.DataSource = queryResult.ToList();
             dgvFactors.DataSource = bs;
@@ -356,7 +376,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                             }
                             factor.CountryName = values.GetValue(row, column++).ToString().Trim();
                             factor.FactorCode = values.GetValue(row, column++).ToString().Trim();
-                            factor.CompanyName = values.GetValue(row, column++).ToString().Trim();
+                            factor.CompanyNameEN = values.GetValue(row, column++).ToString().Trim();
                             factor.ShortName = values.GetValue(row, column++).ToString().Trim();
                             factor.Department = values.GetValue(row, column++).ToString().Trim();
                             factor.PostalAddress_1 = values.GetValue(row, column++).ToString().Trim();

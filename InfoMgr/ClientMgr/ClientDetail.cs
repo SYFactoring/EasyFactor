@@ -129,66 +129,66 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 foreach (Control comp in this.groupPanelClientBasic.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, false);
+                    ControlUtil.SetComponetEditable(comp, false);
                 }
 
                 foreach (Control comp in this.groupPanelClientContact.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, false);
+                    ControlUtil.SetComponetEditable(comp, false);
                 }
 
                 foreach (Control comp in this.groupPanelClientGroup.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, false);
+                    ControlUtil.SetComponetEditable(comp, false);
                 }
 
                 foreach (Control comp in this.groupPanelClientStat.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, false);
+                    ControlUtil.SetComponetEditable(comp, false);
                 }
             }
             else if (this.opClientType == OpClientType.NEW_CLIENT)
             {
                 foreach (Control comp in this.groupPanelClientBasic.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, true);
                 }
 
                 foreach (Control comp in this.groupPanelClientContact.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, true);
                 }
 
                 foreach (Control comp in this.groupPanelClientGroup.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, true);
                 }
 
                 foreach (Control comp in this.groupPanelClientStat.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, true);
                 }
             }
             else if (this.opClientType == OpClientType.UPDATE_CLIENT)
             {
                 foreach (Control comp in this.groupPanelClientBasic.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, true);
                 }
 
                 foreach (Control comp in this.groupPanelClientContact.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, true);
                 }
 
                 foreach (Control comp in this.groupPanelClientGroup.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, true);
                 }
 
                 foreach (Control comp in this.groupPanelClientStat.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, true);
                 }
 
                 this.clientEDICodeTextBox.ReadOnly = true;
@@ -230,14 +230,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 foreach (Control comp in this.groupPanelClientCreditLine.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, false);
+                    ControlUtil.SetComponetEditable(comp, false);
                 }
             }
             else if (this.opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
                 foreach (Control comp in this.groupPanelClientCreditLine.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, true);
                 }
 
                 this.freezeReasonTextBox.ReadOnly = true;
@@ -251,7 +251,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 foreach (Control comp in this.groupPanelClientCreditLine.Controls)
                 {
-                    ControlUtil.setComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, true);
                 }
 
                 this.freezeReasonTextBox.ReadOnly = true;
@@ -589,7 +589,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
             foreach (Control comp in this.groupPanelClientCreditLine.Controls)
             {
-                ControlUtil.setComponetDefault(comp);
+                ControlUtil.SetComponetDefault(comp);
             }
         }
     }

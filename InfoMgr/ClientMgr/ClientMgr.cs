@@ -15,6 +15,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using System.Threading;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// Client Management User Interface
@@ -40,6 +41,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             InitializeComponent();
             this.isEditable = isEditable;
             this.UpdateEditableStatus();
+            ControlUtil.SetDoubleBuffered(this.dgvClients);
 
             this.comboTreeDepartment.DataSource = App.Current.DbContext.Departments;
             this.comboTreeDepartment.DisplayMembers = "DepartmentName";
@@ -116,12 +118,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             var queryResult = App.Current.DbContext.Clients.Where(c =>
-                    (c.BranchCode == null ? string.Empty : c.BranchCode).Contains(department)
-                  && (c.PMName == null ? string.Empty : c.PMName).Contains(tbPM.Text)
-                  && (c.RMName == null ? string.Empty : c.RMName).Contains(tbRM.Text)
-                  && (c.ClientNameCN == null ? string.Empty : c.ClientNameCN).Contains(tbClientName.Text) || (c.ClientNameEN_1 == null ? "" : c.ClientNameEN_1).Contains(tbClientName.Text) || (c.ClientNameEN_2 == null ? "" : c.ClientNameEN_2).Contains(tbClientName.Text)
-                  && (c.ClientEDICode == null ? string.Empty : c.ClientEDICode).Contains(tbClientEDICode.Text)
-                  && c.ClientType.Contains(clientType));
+                    ((c.BranchCode == null ? string.Empty : c.BranchCode).Contains(department))
+                  && ((c.PMName == null ? string.Empty : c.PMName).Contains(tbPM.Text))
+                  && ((c.RMName == null ? string.Empty : c.RMName).Contains(tbRM.Text))
+                  && (((c.ClientNameCN == null ? string.Empty : c.ClientNameCN).Contains(tbClientName.Text)) || ((c.ClientNameEN_1 == null ? string.Empty : c.ClientNameEN_1).Contains(tbClientName.Text)) || ((c.ClientNameEN_2 == null ? string.Empty : c.ClientNameEN_2).Contains(tbClientName.Text)))
+                  && ((c.ClientEDICode == null ? string.Empty : c.ClientEDICode).Contains(tbClientEDICode.Text))
+                  && (c.ClientType.Contains(clientType)));
 
             this.bs.DataSource = queryResult.ToList();
             this.dgvClients.DataSource = bs;
