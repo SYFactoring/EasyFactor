@@ -77,7 +77,14 @@ namespace CMBC.EasyFactor.DB.dbml
                 _allCountries = new Dictionary<string, Country>();
                 _allCountries = App.Current.DbContext.Countries.ToDictionary(c => c._CountryCode);
             }
-            return _allCountries[countryCode];
+            if (_allCountries != null&&_allCountries.ContainsKey(countryCode))
+            {
+                return _allCountries[countryCode];
+            }
+            else
+            {
+                return new Country() { CountryCode = "", CountryNameCN = "", CountryNameEN = "" };
+            }
         }
     }
 }
