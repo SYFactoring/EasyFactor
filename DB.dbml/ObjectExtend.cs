@@ -18,7 +18,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (_CountryCode != null && _CountryCode.Trim() != string.Empty)
+                if (_CountryCode != null && !_CountryCode.Trim().Equals(string.Empty))
                 {
                     return Country.FindCountryByCode(_CountryCode).CountryNameCN;
                 }
@@ -77,13 +77,46 @@ namespace CMBC.EasyFactor.DB.dbml
                 _allCountries = new Dictionary<string, Country>();
                 _allCountries = App.Current.DbContext.Countries.ToDictionary(c => c._CountryCode);
             }
-            if (_allCountries != null&&_allCountries.ContainsKey(countryCode))
+            if (_allCountries != null && _allCountries.ContainsKey(countryCode))
             {
                 return _allCountries[countryCode];
             }
             else
             {
                 return new Country() { CountryCode = "", CountryNameCN = "", CountryNameEN = "" };
+            }
+        }
+    }
+
+    public partial class Factor
+    {
+        public string GroupNameEN
+        {
+            get
+            {
+                if (_GroupNo != null && !_GroupNo.Trim().Equals(string.Empty))
+                {
+                    return FactorGroup.GroupNameEN;
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        public string GroupNameCN
+        {
+            get
+            {
+                if (_GroupNo != null && !_GroupNo.Trim().Equals(string.Empty))
+                {
+                    return FactorGroup.GroupNameCN;
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
     }

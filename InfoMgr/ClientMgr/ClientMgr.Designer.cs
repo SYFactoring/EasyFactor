@@ -157,59 +157,59 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemDeleteClient,
             this.menuItemImportClients});
             this.cmuClientMgr.Name = "contextMenuClientMgr";
-            this.cmuClientMgr.Size = new System.Drawing.Size(153, 186);
+            this.cmuClientMgr.Size = new System.Drawing.Size(147, 164);
             // 
             // menuItemSelectClient
             // 
             this.menuItemSelectClient.Name = "menuItemSelectClient";
-            this.menuItemSelectClient.Size = new System.Drawing.Size(152, 22);
+            this.menuItemSelectClient.Size = new System.Drawing.Size(146, 22);
             this.menuItemSelectClient.Text = "选定客户";
             this.menuItemSelectClient.Click += new System.EventHandler(this.SelectClient);
             // 
             // menuItemDetailClient
             // 
             this.menuItemDetailClient.Name = "menuItemDetailClient";
-            this.menuItemDetailClient.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDetailClient.Size = new System.Drawing.Size(146, 22);
             this.menuItemDetailClient.Text = "详细信息";
             this.menuItemDetailClient.Click += new System.EventHandler(this.DetailClient);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
             // 
             // menuItemNewClient
             // 
             this.menuItemNewClient.Name = "menuItemNewClient";
-            this.menuItemNewClient.Size = new System.Drawing.Size(152, 22);
+            this.menuItemNewClient.Size = new System.Drawing.Size(146, 22);
             this.menuItemNewClient.Text = "新建客户";
             this.menuItemNewClient.Click += new System.EventHandler(this.NewClient);
             // 
             // menuItemNewClientCreditLine
             // 
             this.menuItemNewClientCreditLine.Name = "menuItemNewClientCreditLine";
-            this.menuItemNewClientCreditLine.Size = new System.Drawing.Size(152, 22);
+            this.menuItemNewClientCreditLine.Size = new System.Drawing.Size(146, 22);
             this.menuItemNewClientCreditLine.Text = "新建额度信息";
             this.menuItemNewClientCreditLine.Click += new System.EventHandler(this.NewClientCreditLine);
             // 
             // menuItemUpdateClient
             // 
             this.menuItemUpdateClient.Name = "menuItemUpdateClient";
-            this.menuItemUpdateClient.Size = new System.Drawing.Size(152, 22);
+            this.menuItemUpdateClient.Size = new System.Drawing.Size(146, 22);
             this.menuItemUpdateClient.Text = "更新客户";
             this.menuItemUpdateClient.Click += new System.EventHandler(this.UpdateClient);
             // 
             // menuItemDeleteClient
             // 
             this.menuItemDeleteClient.Name = "menuItemDeleteClient";
-            this.menuItemDeleteClient.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDeleteClient.Size = new System.Drawing.Size(146, 22);
             this.menuItemDeleteClient.Text = "删除客户";
             this.menuItemDeleteClient.Click += new System.EventHandler(this.DeleteClient);
             // 
             // menuItemImportClients
             // 
             this.menuItemImportClients.Name = "menuItemImportClients";
-            this.menuItemImportClients.Size = new System.Drawing.Size(152, 22);
+            this.menuItemImportClients.Size = new System.Drawing.Size(146, 22);
             this.menuItemImportClients.Text = "导入客户";
             this.menuItemImportClients.Click += new System.EventHandler(this.ImportClients);
             // 
@@ -448,6 +448,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.AllowUserToAddRows = false;
             this.dgvClients.AllowUserToDeleteRows = false;
             this.dgvClients.AllowUserToOrderColumns = true;
+            this.dgvClients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -554,7 +555,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ClientNameEN_1Column.HeaderText = "客户名称(英1)";
             this.ClientNameEN_1Column.Name = "ClientNameEN_1Column";
             this.ClientNameEN_1Column.ReadOnly = true;
-            this.ClientNameEN_1Column.Width = 98;
+            this.ClientNameEN_1Column.Width = 104;
             // 
             // ClientNameEN_2Column
             // 
@@ -562,7 +563,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ClientNameEN_2Column.HeaderText = "客户名称(英2)";
             this.ClientNameEN_2Column.Name = "ClientNameEN_2Column";
             this.ClientNameEN_2Column.ReadOnly = true;
-            this.ClientNameEN_2Column.Width = 98;
+            this.ClientNameEN_2Column.Width = 104;
             // 
             // ProductCNColumn
             // 
@@ -618,7 +619,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ProvinceCNColumn.HeaderText = "省/州(中)";
             this.ProvinceCNColumn.Name = "ProvinceCNColumn";
             this.ProvinceCNColumn.ReadOnly = true;
-            this.ProvinceCNColumn.Width = 61;
+            this.ProvinceCNColumn.Width = 79;
             // 
             // ProvinceENColumn
             // 
@@ -714,7 +715,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.CompanyCodeColumn.HeaderText = "组织机构代码";
             this.CompanyCodeColumn.Name = "CompanyCodeColumn";
             this.CompanyCodeColumn.ReadOnly = true;
-            this.CompanyCodeColumn.Width = 80;
+            this.CompanyCodeColumn.Width = 104;
             // 
             // IsGroupColumn
             // 
@@ -754,7 +755,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.IndustryColumn.HeaderText = "所属行业";
             this.IndustryColumn.Name = "IndustryColumn";
             this.IndustryColumn.ReadOnly = true;
-            this.IndustryColumn.Width = 56;
+            this.IndustryColumn.Width = 80;
             // 
             // DepartmentCodeColumn
             // 
@@ -771,6 +772,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.DepartmentColumn.HeaderText = "所属机构";
             this.DepartmentColumn.Name = "DepartmentColumn";
             this.DepartmentColumn.ReadOnly = true;
+            this.DepartmentColumn.Width = 80;
             // 
             // PMNameColumn
             // 
