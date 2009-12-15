@@ -127,7 +127,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void FactorNew(object sender, EventArgs e)
         {
-            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpType.NEW_FACTOR);
+            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR,FactorDetail.OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE);
             factorDetail.ShowDialog(this);
         }
 

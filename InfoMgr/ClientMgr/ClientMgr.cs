@@ -54,7 +54,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
             InitializeComponent();
             this.isEditable = isEditable;
-            this.UpdateEditableStatus(isEditable);
+            this.UpdateEditableStatus();
 
             this.comboTreeDepartment.DataSource = App.Current.DbContext.Departments;
             this.comboTreeDepartment.DisplayMembers = "DepartmentName";
@@ -65,7 +65,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <summary>
         /// Update editable status
         /// </summary>
-        private void UpdateEditableStatus(bool isEditable)
+        private void UpdateEditableStatus()
         {
             if (!this.isEditable)
             {
@@ -87,7 +87,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (cbClientType.SelectedIndex >= 0)
             {
                 clientType = cbClientType.Items[cbClientType.SelectedIndex].ToString();
-                if (clientType == "全部")
+                if ("全部".Equals(clientType))
                 {
                     clientType = string.Empty;
                 }
@@ -251,7 +251,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
                 if (selectedClient != null)
                 {
-                    new ClientDetail(selectedClient, ClientDetail.OpClientType.DETAIL_CLIENT, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE).ShowDialog(this);
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.DETAIL_CLIENT, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE);
+					clientDetail.ShowDialog(this);
                 }
             }
         }

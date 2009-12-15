@@ -103,7 +103,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void NewUser(object sender, System.EventArgs e)
         {
-            new UserDetail(null, UserDetail.OpType.NEW_USER).ShowDialog(this);
+            new UserDetail(null, UserDetail.OpUserType.NEW_USER).ShowDialog(this);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 User selectedUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid);
                 if (selectedUser != null)
                 {
-                    new UserDetail(selectedUser, UserDetail.OpType.UPDATE_USER).ShowDialog(this);
+                    new UserDetail(selectedUser, UserDetail.OpUserType.UPDATE_USER).ShowDialog(this);
                 }
             }
         }
@@ -203,7 +203,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 User selectedUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid);
                 if (selectedUser != null)
                 {
-                    new UserDetail(selectedUser, UserDetail.OpType.DETAIL_USER).ShowDialog(this);
+                    new UserDetail(selectedUser, UserDetail.OpUserType.DETAIL_USER).ShowDialog(this);
                 }
             }
         }

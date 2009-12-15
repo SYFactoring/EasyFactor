@@ -47,4 +47,16 @@ namespace CMBC.EasyFactor.DB.dbml
     public partial class ClientCreditLine : BaseObject
     {
     }
+
+    public partial class Factor : BaseObject
+    {
+    }
+
+    public partial class FactorCreditLine : BaseObject
+    {
+    }
+
+    public partial class User : BaseObject
+    {
+    }
 }

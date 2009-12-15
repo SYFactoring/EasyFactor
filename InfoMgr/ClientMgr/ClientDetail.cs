@@ -21,7 +21,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         private OpClientCreditLineType opClientCreditLineType;
 
-
         /// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
@@ -42,8 +41,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.clientBindingSource.DataSource = client;
                 client.Backup();
             }
-            this.UpdateClientFormStatus();
-            this.UpdateClientCreditLineFormStatus();
+            this.UpdateClientControlStatus();
+            this.UpdateClientCreditLineControlStatus();
             if (opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
                 this.tabControl.SelectedTab = this.tabItemClientCreditLine;
@@ -108,7 +107,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <summary>
         /// udpate editable status
         /// </summary>
-        private void UpdateClientFormStatus()
+        private void UpdateClientControlStatus()
         {
             if (this.opClientType == OpClientType.DETAIL_CLIENT)
             {
@@ -203,7 +202,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-        private void UpdateClientCreditLineFormStatus()
+        private void UpdateClientCreditLineControlStatus()
         {
             if (opClientCreditLineType == OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE)
             {
@@ -243,7 +242,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void ClientUpdate(object sender, EventArgs e)
         {
             this.opClientType = OpClientType.UPDATE_CLIENT;
-            this.UpdateClientFormStatus();
+            this.UpdateClientControlStatus();
         }
 
         /// <summary>
@@ -262,7 +261,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             client.CountryCode = (string)this.countryCodeComboBox.SelectedValue;
             client.Industry = this.industryComboBox.Text;
 
-            if (opClientType==OpClientType.NEW_CLIENT)
+            if (opClientType == OpClientType.NEW_CLIENT)
             {
                 bool isAddOK = true;
                 try
@@ -290,10 +289,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     App.Current.DbContext.SubmitChanges();
                 }
-                catch (System.Data.Linq.ChangeConflictException e2)
+                catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBox.Show(e2.GetType().ToString() + " " + e2.Message);
+                    MessageBox.Show(e2.Message);
                 }
 
                 if (isUpdateOK)
@@ -312,16 +311,37 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void ClientClose(object sender, EventArgs e)
         {
             Client client = (Client)this.clientBindingSource.DataSource;
-            client.Restore();
-            if (this.clientCreditLineBindingSource.DataSource is ClientCreditLine)
+            if (opClientType == OpClientType.NEW_CLIENT || opClientType == OpClientType.UPDATE_CLIENT)
             {
-                ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
-                if (creditLine.CreditLineID != 0)
+                client.Restore();
+            }
+            if (opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE || opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
+            {
+                if (this.clientCreditLineBindingSource.DataSource is ClientCreditLine)
                 {
-                    creditLine.Restore();
+                    ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
+                    if (creditLine.CreditLineID != 0)
+                    {
+                        creditLine.Restore();
+                    }
                 }
             }
             Close();
+        }
+
+        private void RefreshClientCreditLine(object sender, EventArgs e)
+        {
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client != null)
+            {
+                this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
+            }
+        }
+
+        private void UpdateCreditLine(object sender, EventArgs e)
+        {
+            opClientCreditLineType = OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE;
+            UpdateClientCreditLineControlStatus();
         }
 
         /// <summary>
@@ -334,7 +354,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             ResetClientCreditLine();
             this.clientCreditLineBindingSource.DataSource = new ClientCreditLine();
             opClientCreditLineType = OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE;
-            UpdateClientCreditLineFormStatus();
+            UpdateClientCreditLineControlStatus();
         }
 
         /// <summary>
@@ -437,7 +457,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isDeleteOK)
                 {
                     MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.dgvClientCreditLines.DataSource = client.ClientCreditLines;
+                    this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
                 }
             }
         }
@@ -474,15 +494,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-        private void RefreshClientCreditLine(object sender, EventArgs e)
-        {
-            Client client = (Client)this.clientBindingSource.DataSource;
-            if (client != null)
-            {
-                this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
-            }
-        }
-
         private void SelectClientCreditLine(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dgvClientCreditLines.SelectedRows.Count == 0)
@@ -498,8 +509,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     ResetClientCreditLine();
                     this.clientCreditLineBindingSource.DataSource = selectedClientCreditLine;
-                    this.btnClientCreditCoverFreeze.Enabled = true;
-                    this.btnClientCreditCoverUnfreeze.Enabled = true;
+                    this.btnClientCreditLineFreeze.Enabled = true;
+                    this.btnClientCreditLineUnfreeze.Enabled = true;
                     foreach (Currency currency in this.creditLineCurrencyComboBox.Items)
                     {
                         if (currency.CurrencyCode.Equals(selectedClientCreditLine.CreditLineCurrency))
@@ -516,17 +527,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void ClientDetail_Leave(object sender, EventArgs e)
         {
             this.ClientClose(sender, e);
-        }
-
-        private void btnUpdateCreditLine_Click(object sender, EventArgs e)
-        {
-            opClientCreditLineType = OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE;
-            UpdateClientCreditLineFormStatus();
-        }
-
-        private void creditLineTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ControlUtil.CheckIntegerInput(sender, e);
         }
 
         private void ResetClientCreditLine()

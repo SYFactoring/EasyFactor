@@ -20,12 +20,12 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <summary>
         /// 
         /// </summary>
-        private readonly OpType opType;
+        private OpUserType opUserType;
 
         /// <summary>
         /// Operation Type
         /// </summary>
-        public enum OpType
+        public enum OpUserType
         {
             /// <summary>
             /// New User
@@ -47,59 +47,50 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// Initializes a new instance of the UserDetailUI class
         /// </summary>
         /// <param name="user">selected user</param>
-        /// <param name="opType">operation type</param>
-        public UserDetail(User user, OpType opType)
+        /// <param name="OpUserType">operation type</param>
+        public UserDetail(User user, OpUserType opType)
         {
             this.InitializeComponent();
-            this.opType = opType;
-            if (opType == OpType.NEW_USER)
+            this.opUserType = opType;
+            if (opType == OpUserType.NEW_USER)
             {
                 userBindingSource.DataSource = new User();
             }
             else
             {
                 userBindingSource.DataSource = user;
+                user.Backup();
             }
-            this.UpdateEditableStatus();
+            this.UpdateUserControlStatus();
         }
 
         /// <summary>
         /// Update Editable Status
         /// </summary>
-        private void UpdateEditableStatus()
+        private void UpdateUserControlStatus()
         {
-            if (opType == OpType.DETAIL_USER)
+            if (opUserType == OpUserType.DETAIL_USER)
             {
                 foreach (Control comp in this.groupPanelUser.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, false);
                 }
-
-                ControlUtil.setComponetEditable(this.btnSave, false);
-                ControlUtil.setComponetEditable(this.btnCancel, false);
             }
-            else if (opType == OpType.NEW_USER)
+            else if (opUserType == OpUserType.NEW_USER)
             {
                 foreach (Control comp in this.groupPanelUser.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
-
-                ControlUtil.setComponetEditable(this.btnSave, true);
-                ControlUtil.setComponetEditable(this.btnCancel, true);
             }
-            else if (opType == OpType.UPDATE_USER)
+            else if (opUserType == OpUserType.UPDATE_USER)
             {
                 foreach (Control comp in this.groupPanelUser.Controls)
                 {
                     ControlUtil.setComponetEditable(comp, true);
                 }
-
-                ControlUtil.setComponetEditable(this.btnSave, true);
-                ControlUtil.setComponetEditable(this.btnCancel, true);
-                userIDTextBox.ReadOnly = true;
+                 userIDTextBox.ReadOnly = true;
             }
-
             this.loginDate.ReadOnly = true;
         }
 
@@ -108,16 +99,16 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void Save(object sender, EventArgs e)
+        private void UserSave(object sender, EventArgs e)
         {
             userBindingSource.EndEdit();
-            User updateUser = (User)userBindingSource.DataSource;
-            if (opType == OpType.NEW_USER)
+            User user = (User)userBindingSource.DataSource;
+            if (opUserType == OpUserType.NEW_USER)
             {
                 bool isAddOK = true;
                 try
                 {
-                    App.Current.DbContext.Users.InsertOnSubmit(updateUser);
+                    App.Current.DbContext.Users.InsertOnSubmit(user);
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e1)
@@ -129,6 +120,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    user.Backup();
+                    opUserType = OpUserType.UPDATE_USER;
                 }
             }
             else
@@ -147,6 +140,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    user.Backup();
                 }
             }
         }
@@ -156,9 +150,25 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void Cancel(object sender, EventArgs e)
+        private void UserClose(object sender, EventArgs e)
         {
+            User user = (User)this.userBindingSource.DataSource;
+            if (opUserType == OpUserType.NEW_USER || opUserType == OpUserType.UPDATE_USER)
+            {
+                user.Restore();
+            }
             Close();
+        }
+
+        private void UserUpdate(object sender, EventArgs e)
+        {
+            opUserType = OpUserType.UPDATE_USER;
+            UpdateUserControlStatus();
+        }
+
+        private void UserDetail_Leave(object sender, EventArgs e)
+        {
+            this.UserClose(sender, e);
         }
     }
 }

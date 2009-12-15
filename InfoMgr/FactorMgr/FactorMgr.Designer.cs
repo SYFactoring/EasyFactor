@@ -53,11 +53,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.menuItemDetailFactor = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemNewFactor = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemNewFactorCreditLine = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemUpdateFactor = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDeleteFactor = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemImportFactors = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbFactorType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.comboItem0 = new DevComponents.Editors.ComboItem();
             this.comboItem1 = new DevComponents.Editors.ComboItem();
             this.comboItem2 = new DevComponents.Editors.ComboItem();
             this.comboItem3 = new DevComponents.Editors.ComboItem();
@@ -83,58 +85,66 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.menuItemDetailFactor,
             this.toolStripSeparator,
             this.menuItemNewFactor,
+            this.menuItemNewFactorCreditLine,
             this.menuItemUpdateFactor,
             this.menuItemDeleteFactor,
             this.menuItemImportFactors});
             this.contextMenuFactorMgr.Name = "contextMenuFactorMgr";
-            this.contextMenuFactorMgr.Size = new System.Drawing.Size(153, 164);
+            this.contextMenuFactorMgr.Size = new System.Drawing.Size(171, 186);
             // 
             // menuItemSelectFactor
             // 
             this.menuItemSelectFactor.Name = "menuItemSelectFactor";
-            this.menuItemSelectFactor.Size = new System.Drawing.Size(152, 22);
+            this.menuItemSelectFactor.Size = new System.Drawing.Size(170, 22);
             this.menuItemSelectFactor.Text = "选定机构";
             this.menuItemSelectFactor.Click += new System.EventHandler(this.SelectFactor);
             // 
             // menuItemDetailFactor
             // 
             this.menuItemDetailFactor.Name = "menuItemDetailFactor";
-            this.menuItemDetailFactor.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDetailFactor.Size = new System.Drawing.Size(170, 22);
             this.menuItemDetailFactor.Text = "详细信息";
             this.menuItemDetailFactor.Click += new System.EventHandler(this.DetailFactor);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(167, 6);
             // 
             // menuItemNewFactor
             // 
             this.menuItemNewFactor.Name = "menuItemNewFactor";
-            this.menuItemNewFactor.Size = new System.Drawing.Size(152, 22);
+            this.menuItemNewFactor.Size = new System.Drawing.Size(170, 22);
             this.menuItemNewFactor.Text = "新建机构";
             this.menuItemNewFactor.Click += new System.EventHandler(this.NewFactor);
+            // 
+            // menuItemNewFactorCreditLine
+            // 
+            this.menuItemNewFactorCreditLine.Name = "menuItemNewFactorCreditLine";
+            this.menuItemNewFactorCreditLine.Size = new System.Drawing.Size(170, 22);
+            this.menuItemNewFactorCreditLine.Text = "新建机构额度信息";
+            this.menuItemNewFactorCreditLine.Click += new System.EventHandler(this.NewFactorCreditLine);
             // 
             // menuItemUpdateFactor
             // 
             this.menuItemUpdateFactor.Name = "menuItemUpdateFactor";
-            this.menuItemUpdateFactor.Size = new System.Drawing.Size(152, 22);
+            this.menuItemUpdateFactor.Size = new System.Drawing.Size(170, 22);
             this.menuItemUpdateFactor.Text = "更新机构";
             this.menuItemUpdateFactor.Click += new System.EventHandler(this.UpdateFactor);
             // 
             // menuItemDeleteFactor
             // 
             this.menuItemDeleteFactor.Name = "menuItemDeleteFactor";
-            this.menuItemDeleteFactor.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDeleteFactor.Size = new System.Drawing.Size(170, 22);
             this.menuItemDeleteFactor.Text = "删除机构";
             this.menuItemDeleteFactor.Click += new System.EventHandler(this.DeleteFactor);
             // 
             // menuItemImportFactors
             // 
             this.menuItemImportFactors.Name = "menuItemImportFactors";
-            this.menuItemImportFactors.Size = new System.Drawing.Size(152, 22);
+            this.menuItemImportFactors.Size = new System.Drawing.Size(170, 22);
             this.menuItemImportFactors.Text = "导入机构";
-            this.menuItemImportFactors.Click += new System.EventHandler(this.ImportFactosImpl);
+            this.menuItemImportFactors.Click += new System.EventHandler(this.ImportFactos);
             // 
             // panelQuery
             // 
@@ -168,6 +178,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.cbFactorType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFactorType.FormattingEnabled = true;
             this.cbFactorType.Items.AddRange(new object[] {
+            this.comboItem0,
             this.comboItem1,
             this.comboItem2,
             this.comboItem3,
@@ -177,6 +188,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.cbFactorType.Size = new System.Drawing.Size(99, 21);
             this.cbFactorType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbFactorType.TabIndex = 1;
+            // 
+            // comboItem0
+            // 
+            this.comboItem0.Text = "全部";
             // 
             // comboItem1
             // 
@@ -347,5 +362,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private DevComponents.Editors.ComboItem comboItem3;
         private DevComponents.Editors.ComboItem comboItem4;
         private System.Windows.Forms.DataGridViewTextBoxColumn factorCodeColumn;
+        private System.Windows.Forms.ToolStripMenuItem menuItemNewFactorCreditLine;
+        private DevComponents.Editors.ComboItem comboItem0;
     }
 }

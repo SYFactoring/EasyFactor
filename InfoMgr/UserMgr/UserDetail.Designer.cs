@@ -67,11 +67,12 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.telphoneTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.userIDTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.nameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btnSave = new DevComponents.DotNetBar.ButtonX();
-            this.btnCancel = new DevComponents.DotNetBar.ButtonX();
+            this.btnUserSave = new DevComponents.DotNetBar.ButtonX();
+            this.btnUserClose = new DevComponents.DotNetBar.ButtonX();
             this.eDIAccountTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.roleComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.groupPanelUser = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.btnUserUpdate = new DevComponents.DotNetBar.ButtonX();
             emailLabel = new DevComponents.DotNetBar.LabelX();
             loginDateLabel = new DevComponents.DotNetBar.LabelX();
             mSNLabel = new DevComponents.DotNetBar.LabelX();
@@ -316,7 +317,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.userIDTextBox.Size = new System.Drawing.Size(154, 20);
             this.userIDTextBox.TabIndex = 0;
             // 
-            // userNameTextBox
+            // nameTextBox
             // 
             // 
             // 
@@ -325,33 +326,33 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.nameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Name", true));
             this.nameTextBox.ImeMode = System.Windows.Forms.ImeMode.On;
             this.nameTextBox.Location = new System.Drawing.Point(92, 31);
-            this.nameTextBox.Name = "userNameTextBox";
+            this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(154, 20);
             this.nameTextBox.TabIndex = 1;
             // 
-            // btnSave
+            // btnUserSave
             // 
-            this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSave.Location = new System.Drawing.Point(58, 287);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSave.TabIndex = 18;
-            this.btnSave.Text = "保存";
-            this.btnSave.Click += new System.EventHandler(this.Save);
+            this.btnUserSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnUserSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnUserSave.Location = new System.Drawing.Point(117, 288);
+            this.btnUserSave.Name = "btnUserSave";
+            this.btnUserSave.Size = new System.Drawing.Size(75, 23);
+            this.btnUserSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnUserSave.TabIndex = 18;
+            this.btnUserSave.Text = "保存";
+            this.btnUserSave.Click += new System.EventHandler(this.UserSave);
             // 
-            // btnCancel
+            // btnUserClose
             // 
-            this.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCancel.Location = new System.Drawing.Point(140, 287);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCancel.TabIndex = 19;
-            this.btnCancel.Text = "取消";
-            this.btnCancel.Click += new System.EventHandler(this.Cancel);
+            this.btnUserClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnUserClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnUserClose.Location = new System.Drawing.Point(199, 288);
+            this.btnUserClose.Name = "btnUserClose";
+            this.btnUserClose.Size = new System.Drawing.Size(75, 23);
+            this.btnUserClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnUserClose.TabIndex = 19;
+            this.btnUserClose.Text = "关闭";
+            this.btnUserClose.Click += new System.EventHandler(this.UserClose);
             // 
             // eDIAccountTextBox
             // 
@@ -438,19 +439,33 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.groupPanelUser.StyleMouseOver.Class = "";
             this.groupPanelUser.TabIndex = 23;
             // 
+            // btnUserUpdate
+            // 
+            this.btnUserUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnUserUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnUserUpdate.Location = new System.Drawing.Point(36, 288);
+            this.btnUserUpdate.Name = "btnUserUpdate";
+            this.btnUserUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUserUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnUserUpdate.TabIndex = 24;
+            this.btnUserUpdate.Text = "更新";
+            this.btnUserUpdate.Click += new System.EventHandler(this.UserUpdate);
+            // 
             // UserDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(277, 316);
+            this.Controls.Add(this.btnUserUpdate);
             this.Controls.Add(this.groupPanelUser);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnUserClose);
+            this.Controls.Add(this.btnUserSave);
             this.DoubleBuffered = true;
             this.Name = "UserDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "用户详细信息";
+            this.Leave += new System.EventHandler(this.UserDetail_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.groupPanelUser.ResumeLayout(false);
             this.groupPanelUser.PerformLayout();
@@ -460,11 +475,12 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
         #endregion
 
-        private DevComponents.DotNetBar.ButtonX btnSave;
-        private DevComponents.DotNetBar.ButtonX btnCancel;
+        private DevComponents.DotNetBar.ButtonX btnUserSave;
+        private DevComponents.DotNetBar.ButtonX btnUserClose;
         private DevComponents.DotNetBar.Controls.TextBoxX eDIAccountTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx roleComboBox;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelUser;
+        private DevComponents.DotNetBar.ButtonX btnUserUpdate;
 
 
     }

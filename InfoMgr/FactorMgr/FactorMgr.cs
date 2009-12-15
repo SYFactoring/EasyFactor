@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using Microsoft.Office.Interop.Excel;
+    using System.Data.SqlClient;
 
     /// <summary>
     /// Factor Management User Interface 
@@ -26,11 +27,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
         private BindingSource bs = new BindingSource();
 
-        public Form OwnerForm
-        {
-            get;
-            set;
-        }
         /// <summary>
         /// Initializes a new instance of the FactorMgrUI class
         /// </summary>
@@ -43,14 +39,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         }
 
         /// <summary>
-        /// Initializes a new instance of the FactorMgrUI class
+        /// Gets or sets onwer form
         /// </summary>
-        /// <param name="isEditable">true if editable</param>
-        /// <param name="owner">form owner</param>
-        public FactorMgr(bool isEditable, Form owner)
-            : this(isEditable)
+        public Form OwnerForm
         {
-            this.OwnerForm = owner;
+            get;
+            set;
         }
 
         /// <summary>
@@ -63,10 +57,228 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         }
 
         /// <summary>
+        /// update editable status
+        /// </summary>
+        private void UpdateEditableStatus()
+        {
+            if (!isEditable)
+            {
+                this.menuItemNewFactor.Enabled = false;
+                this.menuItemNewFactorCreditLine.Enabled = false;
+                this.menuItemUpdateFactor.Enabled = false;
+                this.menuItemDeleteFactor.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Query according the condition
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void QueryFactors(object sender, EventArgs e)
+        {
+            string factorType = string.Empty;
+            if (cbFactorType.SelectedIndex >= 0)
+            {
+                factorType = cbFactorType.Items[cbFactorType.SelectedIndex].ToString();
+                if ("全部".Equals(factorType))
+                {
+                    factorType = string.Empty;
+                }
+            }
+
+            var queryResult = App.Current.DbContext.Factors.Where(f =>
+                                                   ((f.FactorCode == null ? "" : f.FactorCode).Contains(tbFactorCode.Text))
+                                                && ((f.CompanyName == null ? "" : f.CompanyName).Contains(tbFactorName.Text))
+                                                && (f.FactorType.Contains(cbFactorType.Text)));
+
+            bs.DataSource = queryResult.ToList();
+            dgvFactors.DataSource = bs;
+            lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+        }
+
+        /// <summary>
+        /// Create a new factor
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void NewFactor(object sender, EventArgs e)
+        {
+            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR, FactorDetail.OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE);
+            factorDetail.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// Update current selected factor
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void UpdateFactor(object sender, EventArgs e)
+        {
+            if (this.dgvFactors.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string factorCode = (string)this.dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
+            if (factorCode != null)
+            {
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                if (selectedFactor != null)
+                {
+                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorType.UPDATE_FACTOR, FactorDetail.OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE);
+                    factorDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        private void NewFactorCreditLine(object sender, System.EventArgs e)
+        {
+            if (this.dgvFactors.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string factorCode = (string)this.dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
+            if (factorCode != null)
+            {
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                if (selectedFactor != null)
+                {
+                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorType.DETAIL_FACTOR, FactorDetail.OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE);
+                    factorDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Delete current selected factor
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void DeleteFactor(object sender, EventArgs e)
+        {
+            if (this.dgvFactors.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
+            if (factorCode != null)
+            {
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                if (selectedFactor != null)
+                {
+                    if (MessageBox.Show("是否确定删除保理商: " + selectedFactor.FactorCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    {
+                        App.Current.DbContext.Factors.DeleteOnSubmit(selectedFactor);
+                        try
+                        {
+                            App.Current.DbContext.SubmitChanges();
+                        }
+                        catch (SqlException)
+                        {
+                            MessageBox.Show("不能删除此机构,已存在相关额度.", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        dgvFactors.Rows.RemoveAt(dgvFactors.SelectedRows[0].Index);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Set current selected factor to be selected
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void SelectFactor(object sender, EventArgs e)
+        {
+            if (this.dgvFactors.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
+            if (factorCode != null)
+            {
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                if (selectedFactor != null)
+                {
+                    this.Selected = selectedFactor;
+                    if (this.OwnerForm != null)
+                    {
+                        this.OwnerForm.DialogResult = DialogResult.Yes;
+                        this.OwnerForm.Close();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Show detail info about current selected factor
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void DetailFactor(object sender, EventArgs e)
+        {
+            if (this.dgvFactors.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
+            if (factorCode != null)
+            {
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                if (selectedFactor != null)
+                {
+                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorType.DETAIL_FACTOR, FactorDetail.OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE);
+                    factorDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Event handler when cell double clicked
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.OwnerForm == null)
+            {
+                this.DetailFactor(sender, e);
+            }
+            else
+            {
+                this.SelectFactor(sender, e);
+            }
+        }
+
+        /// <summary>
+        /// Popup a openfile dialog and select the import factor file.
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void ImportFactos(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = fileDialog.FileName;
+                Thread t = new Thread(ImportFactorsImpl);
+
+                t.Start(fileName);
+            }
+        }
+
+        /// <summary>
         /// Import factor list from selected file
         /// </summary>
         /// <param name="obj">selected file</param>
-        private static void ImportFactors(object obj)
+        private static void ImportFactorsImpl(object obj)
         {
             string fileName = obj as string;
 
@@ -187,182 +399,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             app.Quit();
-        }
-
-        /// <summary>
-        /// update editable status
-        /// </summary>
-        private void UpdateEditableStatus()
-        {
-            if (this.isEditable)
-            {
-                return;
-            }
-
-            toolStripSeparator.Visible = false;
-        }
-
-        /// <summary>
-        /// Event handler when cell double clicked
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (this.OwnerForm == null)
-            {
-                this.DetailFactor(sender, e);
-            }
-            else
-            {
-                this.SelectFactor(sender, e);
-            }
-        }
-
-        /// <summary>
-        /// Query according the condition
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void QueryFactors(object sender, EventArgs e)
-        {
-            var queryResult = App.Current.DbContext.Factors.Where(f =>
-                                                   ((f.FactorCode == null ? "" : f.FactorCode).Contains(tbFactorCode.Text))
-                                                && ((f.CompanyName == null ? "" : f.CompanyName).Contains(tbFactorName.Text))
-                                                && (f.FactorType.Contains(cbFactorType.Text)));
-            bs.DataSource = queryResult.ToList();
-            dgvFactors.DataSource = bs;
-            lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-        }
-
-        /// <summary>
-        /// Create a new factor
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void NewFactor(object sender, EventArgs e)
-        {
-            new FactorDetail(null, FactorDetail.OpType.NEW_FACTOR).ShowDialog(this);
-        }
-
-        /// <summary>
-        /// Update current selected factor
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void UpdateFactor(object sender, EventArgs e)
-        {
-            if (this.dgvFactors.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string factorCode = (string)this.dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
-            if (factorCode != null)
-            {
-                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                if (selectedFactor != null)
-                {
-                    new FactorDetail(selectedFactor, FactorDetail.OpType.UPDATE_FACTOR).ShowDialog(this);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Delete current selected factor
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void DeleteFactor(object sender, EventArgs e)
-        {
-            if (this.dgvFactors.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
-            if (factorCode != null)
-            {
-                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                if (selectedFactor != null)
-                {
-                    if (MessageBox.Show("是否确定删除保理商: " + selectedFactor.FactorCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-                    {
-                        dgvFactors.Rows.RemoveAt(dgvFactors.SelectedRows[0].Index);
-                        App.Current.DbContext.Factors.DeleteOnSubmit(selectedFactor);
-                        App.Current.DbContext.SubmitChanges();
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Set current selected factor to be selected
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void SelectFactor(object sender, EventArgs e)
-        {
-            if (this.dgvFactors.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
-            if (factorCode != null)
-            {
-                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                if (selectedFactor != null)
-                {
-                    this.Selected = selectedFactor;
-                    if (this.OwnerForm != null)
-                    {
-                        this.OwnerForm.DialogResult = DialogResult.Yes;
-                        this.OwnerForm.Close();
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Show detail info about current selected factor
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void DetailFactor(object sender, EventArgs e)
-        {
-            if (this.dgvFactors.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
-            if (factorCode != null)
-            {
-                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                if (selectedFactor != null)
-                {
-                    new FactorDetail(selectedFactor, FactorDetail.OpType.DETAIL_FACTOR).ShowDialog(this);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Popup a openfile dialog and select the import factor file.
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void ImportFactosImpl(object sender, EventArgs e)
-        {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string fileName = fileDialog.FileName;
-                Thread t = new Thread(ImportFactors);
-
-                t.Start(fileName);
-            }
         }
     }
 }

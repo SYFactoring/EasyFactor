@@ -69,9 +69,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertFactorAccount(FactorAccount instance);
     partial void UpdateFactorAccount(FactorAccount instance);
     partial void DeleteFactorAccount(FactorAccount instance);
-    partial void InsertFactorCreditLine(FactorCreditLine instance);
-    partial void UpdateFactorCreditLine(FactorCreditLine instance);
-    partial void DeleteFactorCreditLine(FactorCreditLine instance);
     partial void InsertFactorGroup(FactorGroup instance);
     partial void UpdateFactorGroup(FactorGroup instance);
     partial void DeleteFactorGroup(FactorGroup instance);
@@ -93,6 +90,9 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertClientCreditLine(ClientCreditLine instance);
     partial void UpdateClientCreditLine(ClientCreditLine instance);
     partial void DeleteClientCreditLine(ClientCreditLine instance);
+    partial void InsertFactorCreditLine(FactorCreditLine instance);
+    partial void UpdateFactorCreditLine(FactorCreditLine instance);
+    partial void DeleteFactorCreditLine(FactorCreditLine instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -229,14 +229,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		public System.Data.Linq.Table<FactorCreditLine> FactorCreditLines
-		{
-			get
-			{
-				return this.GetTable<FactorCreditLine>();
-			}
-		}
-		
 		public System.Data.Linq.Table<FactorGroup> FactorGroups
 		{
 			get
@@ -290,6 +282,14 @@ namespace CMBC.EasyFactor.DB.dbml
 			get
 			{
 				return this.GetTable<ClientCreditLine>();
+			}
+		}
+		
+		public System.Data.Linq.Table<FactorCreditLine> FactorCreditLines
+		{
+			get
+			{
+				return this.GetTable<FactorCreditLine>();
 			}
 		}
 	}
@@ -6287,493 +6287,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 	}
 	
-	[Table(Name="dbo.FactorCreditLine")]
-	public partial class FactorCreditLine : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _CreditLineID;
-		
-		private string _FactorCode;
-		
-		private string _CreditLineType;
-		
-		private string _CreditLineCurrency;
-		
-		private System.Nullable<double> _CreditLine;
-		
-		private System.Nullable<System.DateTime> _PeriodBegin;
-		
-		private System.Nullable<System.DateTime> _PeriodEnd;
-		
-		private string _ApproveNo;
-		
-		private string _ApproveType;
-		
-		private string _CreditLineStatus;
-		
-		private string _FreezeReason;
-		
-		private string _Freezer;
-		
-		private System.Nullable<System.DateTime> _FreezeDate;
-		
-		private string _UnfreezeReason;
-		
-		private string _Unfreezer;
-		
-		private System.Nullable<System.DateTime> _UnfreezeDate;
-		
-		private string _Comment;
-		
-		private EntityRef<Factor> _Factor;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnCreditLineIDChanging(string value);
-    partial void OnCreditLineIDChanged();
-    partial void OnFactorCodeChanging(string value);
-    partial void OnFactorCodeChanged();
-    partial void OnCreditLineTypeChanging(string value);
-    partial void OnCreditLineTypeChanged();
-    partial void OnCreditLineCurrencyChanging(string value);
-    partial void OnCreditLineCurrencyChanged();
-    partial void OnCreditLineChanging(System.Nullable<double> value);
-    partial void OnCreditLineChanged();
-    partial void OnPeriodBeginChanging(System.Nullable<System.DateTime> value);
-    partial void OnPeriodBeginChanged();
-    partial void OnPeriodEndChanging(System.Nullable<System.DateTime> value);
-    partial void OnPeriodEndChanged();
-    partial void OnApproveNoChanging(string value);
-    partial void OnApproveNoChanged();
-    partial void OnApproveTypeChanging(string value);
-    partial void OnApproveTypeChanged();
-    partial void OnCreditLineStatusChanging(string value);
-    partial void OnCreditLineStatusChanged();
-    partial void OnFreezeReasonChanging(string value);
-    partial void OnFreezeReasonChanged();
-    partial void OnFreezerChanging(string value);
-    partial void OnFreezerChanged();
-    partial void OnFreezeDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnFreezeDateChanged();
-    partial void OnUnfreezeReasonChanging(string value);
-    partial void OnUnfreezeReasonChanged();
-    partial void OnUnfreezerChanging(string value);
-    partial void OnUnfreezerChanged();
-    partial void OnUnfreezeDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnUnfreezeDateChanged();
-    partial void OnCommentChanging(string value);
-    partial void OnCommentChanged();
-    #endregion
-		
-		public FactorCreditLine()
-		{
-			this._Factor = default(EntityRef<Factor>);
-			OnCreated();
-		}
-		
-		[Column(Storage="_CreditLineID", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string CreditLineID
-		{
-			get
-			{
-				return this._CreditLineID;
-			}
-			set
-			{
-				if ((this._CreditLineID != value))
-				{
-					this.OnCreditLineIDChanging(value);
-					this.SendPropertyChanging();
-					this._CreditLineID = value;
-					this.SendPropertyChanged("CreditLineID");
-					this.OnCreditLineIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FactorCode", DbType="Char(7)")]
-		public string FactorCode
-		{
-			get
-			{
-				return this._FactorCode;
-			}
-			set
-			{
-				if ((this._FactorCode != value))
-				{
-					if (this._Factor.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFactorCodeChanging(value);
-					this.SendPropertyChanging();
-					this._FactorCode = value;
-					this.SendPropertyChanged("FactorCode");
-					this.OnFactorCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreditLineType", DbType="NVarChar(50)")]
-		public string CreditLineType
-		{
-			get
-			{
-				return this._CreditLineType;
-			}
-			set
-			{
-				if ((this._CreditLineType != value))
-				{
-					this.OnCreditLineTypeChanging(value);
-					this.SendPropertyChanging();
-					this._CreditLineType = value;
-					this.SendPropertyChanged("CreditLineType");
-					this.OnCreditLineTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreditLineCurrency", DbType="NChar(3)")]
-		public string CreditLineCurrency
-		{
-			get
-			{
-				return this._CreditLineCurrency;
-			}
-			set
-			{
-				if ((this._CreditLineCurrency != value))
-				{
-					this.OnCreditLineCurrencyChanging(value);
-					this.SendPropertyChanging();
-					this._CreditLineCurrency = value;
-					this.SendPropertyChanged("CreditLineCurrency");
-					this.OnCreditLineCurrencyChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreditLine", DbType="Float")]
-		public System.Nullable<double> CreditLine
-		{
-			get
-			{
-				return this._CreditLine;
-			}
-			set
-			{
-				if ((this._CreditLine != value))
-				{
-					this.OnCreditLineChanging(value);
-					this.SendPropertyChanging();
-					this._CreditLine = value;
-					this.SendPropertyChanged("CreditLine");
-					this.OnCreditLineChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PeriodBegin", DbType="DateTime")]
-		public System.Nullable<System.DateTime> PeriodBegin
-		{
-			get
-			{
-				return this._PeriodBegin;
-			}
-			set
-			{
-				if ((this._PeriodBegin != value))
-				{
-					this.OnPeriodBeginChanging(value);
-					this.SendPropertyChanging();
-					this._PeriodBegin = value;
-					this.SendPropertyChanged("PeriodBegin");
-					this.OnPeriodBeginChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PeriodEnd", DbType="DateTime")]
-		public System.Nullable<System.DateTime> PeriodEnd
-		{
-			get
-			{
-				return this._PeriodEnd;
-			}
-			set
-			{
-				if ((this._PeriodEnd != value))
-				{
-					this.OnPeriodEndChanging(value);
-					this.SendPropertyChanging();
-					this._PeriodEnd = value;
-					this.SendPropertyChanged("PeriodEnd");
-					this.OnPeriodEndChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ApproveNo", DbType="NVarChar(50)")]
-		public string ApproveNo
-		{
-			get
-			{
-				return this._ApproveNo;
-			}
-			set
-			{
-				if ((this._ApproveNo != value))
-				{
-					this.OnApproveNoChanging(value);
-					this.SendPropertyChanging();
-					this._ApproveNo = value;
-					this.SendPropertyChanged("ApproveNo");
-					this.OnApproveNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ApproveType", DbType="NVarChar(50)")]
-		public string ApproveType
-		{
-			get
-			{
-				return this._ApproveType;
-			}
-			set
-			{
-				if ((this._ApproveType != value))
-				{
-					this.OnApproveTypeChanging(value);
-					this.SendPropertyChanging();
-					this._ApproveType = value;
-					this.SendPropertyChanged("ApproveType");
-					this.OnApproveTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreditLineStatus", DbType="NVarChar(50)")]
-		public string CreditLineStatus
-		{
-			get
-			{
-				return this._CreditLineStatus;
-			}
-			set
-			{
-				if ((this._CreditLineStatus != value))
-				{
-					this.OnCreditLineStatusChanging(value);
-					this.SendPropertyChanging();
-					this._CreditLineStatus = value;
-					this.SendPropertyChanged("CreditLineStatus");
-					this.OnCreditLineStatusChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FreezeReason", DbType="NVarChar(50)")]
-		public string FreezeReason
-		{
-			get
-			{
-				return this._FreezeReason;
-			}
-			set
-			{
-				if ((this._FreezeReason != value))
-				{
-					this.OnFreezeReasonChanging(value);
-					this.SendPropertyChanging();
-					this._FreezeReason = value;
-					this.SendPropertyChanged("FreezeReason");
-					this.OnFreezeReasonChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Freezer", DbType="NVarChar(50)")]
-		public string Freezer
-		{
-			get
-			{
-				return this._Freezer;
-			}
-			set
-			{
-				if ((this._Freezer != value))
-				{
-					this.OnFreezerChanging(value);
-					this.SendPropertyChanging();
-					this._Freezer = value;
-					this.SendPropertyChanged("Freezer");
-					this.OnFreezerChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FreezeDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FreezeDate
-		{
-			get
-			{
-				return this._FreezeDate;
-			}
-			set
-			{
-				if ((this._FreezeDate != value))
-				{
-					this.OnFreezeDateChanging(value);
-					this.SendPropertyChanging();
-					this._FreezeDate = value;
-					this.SendPropertyChanged("FreezeDate");
-					this.OnFreezeDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UnfreezeReason", DbType="NVarChar(50)")]
-		public string UnfreezeReason
-		{
-			get
-			{
-				return this._UnfreezeReason;
-			}
-			set
-			{
-				if ((this._UnfreezeReason != value))
-				{
-					this.OnUnfreezeReasonChanging(value);
-					this.SendPropertyChanging();
-					this._UnfreezeReason = value;
-					this.SendPropertyChanged("UnfreezeReason");
-					this.OnUnfreezeReasonChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Unfreezer", DbType="NVarChar(50)")]
-		public string Unfreezer
-		{
-			get
-			{
-				return this._Unfreezer;
-			}
-			set
-			{
-				if ((this._Unfreezer != value))
-				{
-					this.OnUnfreezerChanging(value);
-					this.SendPropertyChanging();
-					this._Unfreezer = value;
-					this.SendPropertyChanged("Unfreezer");
-					this.OnUnfreezerChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UnfreezeDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> UnfreezeDate
-		{
-			get
-			{
-				return this._UnfreezeDate;
-			}
-			set
-			{
-				if ((this._UnfreezeDate != value))
-				{
-					this.OnUnfreezeDateChanging(value);
-					this.SendPropertyChanging();
-					this._UnfreezeDate = value;
-					this.SendPropertyChanged("UnfreezeDate");
-					this.OnUnfreezeDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
-		public string Comment
-		{
-			get
-			{
-				return this._Comment;
-			}
-			set
-			{
-				if ((this._Comment != value))
-				{
-					this.OnCommentChanging(value);
-					this.SendPropertyChanging();
-					this._Comment = value;
-					this.SendPropertyChanged("Comment");
-					this.OnCommentChanged();
-				}
-			}
-		}
-		
-		[Association(Name="Factor_FactorCreditLine", Storage="_Factor", ThisKey="FactorCode", IsForeignKey=true)]
-		public Factor Factor
-		{
-			get
-			{
-				return this._Factor.Entity;
-			}
-			set
-			{
-				Factor previousValue = this._Factor.Entity;
-				if (((previousValue != value) 
-							|| (this._Factor.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Factor.Entity = null;
-						previousValue.FactorCreditLines.Remove(this);
-					}
-					this._Factor.Entity = value;
-					if ((value != null))
-					{
-						value.FactorCreditLines.Add(this);
-						this._FactorCode = value.FactorCode;
-					}
-					else
-					{
-						this._FactorCode = default(string);
-					}
-					this.SendPropertyChanged("Factor");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[Table(Name="dbo.FactorGroup")]
 	public partial class FactorGroup : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -10214,6 +9727,493 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._ClientEDICode = default(string);
 					}
 					this.SendPropertyChanged("Client");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.FactorCreditLine")]
+	public partial class FactorCreditLine : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CreditLineID;
+		
+		private string _FactorCode;
+		
+		private string _CreditLineType;
+		
+		private string _CreditLineCurrency;
+		
+		private System.Nullable<double> _CreditLine;
+		
+		private System.Nullable<System.DateTime> _PeriodBegin;
+		
+		private System.Nullable<System.DateTime> _PeriodEnd;
+		
+		private string _ApproveNo;
+		
+		private string _ApproveType;
+		
+		private string _CreditLineStatus;
+		
+		private string _FreezeReason;
+		
+		private string _Freezer;
+		
+		private System.Nullable<System.DateTime> _FreezeDate;
+		
+		private string _UnfreezeReason;
+		
+		private string _Unfreezer;
+		
+		private System.Nullable<System.DateTime> _UnfreezeDate;
+		
+		private string _Comment;
+		
+		private EntityRef<Factor> _Factor;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCreditLineIDChanging(int value);
+    partial void OnCreditLineIDChanged();
+    partial void OnFactorCodeChanging(string value);
+    partial void OnFactorCodeChanged();
+    partial void OnCreditLineTypeChanging(string value);
+    partial void OnCreditLineTypeChanged();
+    partial void OnCreditLineCurrencyChanging(string value);
+    partial void OnCreditLineCurrencyChanged();
+    partial void OnCreditLineChanging(System.Nullable<double> value);
+    partial void OnCreditLineChanged();
+    partial void OnPeriodBeginChanging(System.Nullable<System.DateTime> value);
+    partial void OnPeriodBeginChanged();
+    partial void OnPeriodEndChanging(System.Nullable<System.DateTime> value);
+    partial void OnPeriodEndChanged();
+    partial void OnApproveNoChanging(string value);
+    partial void OnApproveNoChanged();
+    partial void OnApproveTypeChanging(string value);
+    partial void OnApproveTypeChanged();
+    partial void OnCreditLineStatusChanging(string value);
+    partial void OnCreditLineStatusChanged();
+    partial void OnFreezeReasonChanging(string value);
+    partial void OnFreezeReasonChanged();
+    partial void OnFreezerChanging(string value);
+    partial void OnFreezerChanged();
+    partial void OnFreezeDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnFreezeDateChanged();
+    partial void OnUnfreezeReasonChanging(string value);
+    partial void OnUnfreezeReasonChanged();
+    partial void OnUnfreezerChanging(string value);
+    partial void OnUnfreezerChanged();
+    partial void OnUnfreezeDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnUnfreezeDateChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    #endregion
+		
+		public FactorCreditLine()
+		{
+			this._Factor = default(EntityRef<Factor>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_CreditLineID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CreditLineID
+		{
+			get
+			{
+				return this._CreditLineID;
+			}
+			set
+			{
+				if ((this._CreditLineID != value))
+				{
+					this.OnCreditLineIDChanging(value);
+					this.SendPropertyChanging();
+					this._CreditLineID = value;
+					this.SendPropertyChanged("CreditLineID");
+					this.OnCreditLineIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FactorCode", DbType="Char(7)")]
+		public string FactorCode
+		{
+			get
+			{
+				return this._FactorCode;
+			}
+			set
+			{
+				if ((this._FactorCode != value))
+				{
+					if (this._Factor.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFactorCodeChanging(value);
+					this.SendPropertyChanging();
+					this._FactorCode = value;
+					this.SendPropertyChanged("FactorCode");
+					this.OnFactorCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditLineType", DbType="NVarChar(50)")]
+		public string CreditLineType
+		{
+			get
+			{
+				return this._CreditLineType;
+			}
+			set
+			{
+				if ((this._CreditLineType != value))
+				{
+					this.OnCreditLineTypeChanging(value);
+					this.SendPropertyChanging();
+					this._CreditLineType = value;
+					this.SendPropertyChanged("CreditLineType");
+					this.OnCreditLineTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditLineCurrency", DbType="NChar(3)")]
+		public string CreditLineCurrency
+		{
+			get
+			{
+				return this._CreditLineCurrency;
+			}
+			set
+			{
+				if ((this._CreditLineCurrency != value))
+				{
+					this.OnCreditLineCurrencyChanging(value);
+					this.SendPropertyChanging();
+					this._CreditLineCurrency = value;
+					this.SendPropertyChanged("CreditLineCurrency");
+					this.OnCreditLineCurrencyChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditLine", DbType="Float")]
+		public System.Nullable<double> CreditLine
+		{
+			get
+			{
+				return this._CreditLine;
+			}
+			set
+			{
+				if ((this._CreditLine != value))
+				{
+					this.OnCreditLineChanging(value);
+					this.SendPropertyChanging();
+					this._CreditLine = value;
+					this.SendPropertyChanged("CreditLine");
+					this.OnCreditLineChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PeriodBegin", DbType="DateTime")]
+		public System.Nullable<System.DateTime> PeriodBegin
+		{
+			get
+			{
+				return this._PeriodBegin;
+			}
+			set
+			{
+				if ((this._PeriodBegin != value))
+				{
+					this.OnPeriodBeginChanging(value);
+					this.SendPropertyChanging();
+					this._PeriodBegin = value;
+					this.SendPropertyChanged("PeriodBegin");
+					this.OnPeriodBeginChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PeriodEnd", DbType="DateTime")]
+		public System.Nullable<System.DateTime> PeriodEnd
+		{
+			get
+			{
+				return this._PeriodEnd;
+			}
+			set
+			{
+				if ((this._PeriodEnd != value))
+				{
+					this.OnPeriodEndChanging(value);
+					this.SendPropertyChanging();
+					this._PeriodEnd = value;
+					this.SendPropertyChanged("PeriodEnd");
+					this.OnPeriodEndChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ApproveNo", DbType="NVarChar(50)")]
+		public string ApproveNo
+		{
+			get
+			{
+				return this._ApproveNo;
+			}
+			set
+			{
+				if ((this._ApproveNo != value))
+				{
+					this.OnApproveNoChanging(value);
+					this.SendPropertyChanging();
+					this._ApproveNo = value;
+					this.SendPropertyChanged("ApproveNo");
+					this.OnApproveNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ApproveType", DbType="NVarChar(50)")]
+		public string ApproveType
+		{
+			get
+			{
+				return this._ApproveType;
+			}
+			set
+			{
+				if ((this._ApproveType != value))
+				{
+					this.OnApproveTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ApproveType = value;
+					this.SendPropertyChanged("ApproveType");
+					this.OnApproveTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditLineStatus", DbType="NVarChar(50)")]
+		public string CreditLineStatus
+		{
+			get
+			{
+				return this._CreditLineStatus;
+			}
+			set
+			{
+				if ((this._CreditLineStatus != value))
+				{
+					this.OnCreditLineStatusChanging(value);
+					this.SendPropertyChanging();
+					this._CreditLineStatus = value;
+					this.SendPropertyChanged("CreditLineStatus");
+					this.OnCreditLineStatusChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FreezeReason", DbType="NVarChar(50)")]
+		public string FreezeReason
+		{
+			get
+			{
+				return this._FreezeReason;
+			}
+			set
+			{
+				if ((this._FreezeReason != value))
+				{
+					this.OnFreezeReasonChanging(value);
+					this.SendPropertyChanging();
+					this._FreezeReason = value;
+					this.SendPropertyChanged("FreezeReason");
+					this.OnFreezeReasonChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Freezer", DbType="NVarChar(50)")]
+		public string Freezer
+		{
+			get
+			{
+				return this._Freezer;
+			}
+			set
+			{
+				if ((this._Freezer != value))
+				{
+					this.OnFreezerChanging(value);
+					this.SendPropertyChanging();
+					this._Freezer = value;
+					this.SendPropertyChanged("Freezer");
+					this.OnFreezerChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FreezeDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FreezeDate
+		{
+			get
+			{
+				return this._FreezeDate;
+			}
+			set
+			{
+				if ((this._FreezeDate != value))
+				{
+					this.OnFreezeDateChanging(value);
+					this.SendPropertyChanging();
+					this._FreezeDate = value;
+					this.SendPropertyChanged("FreezeDate");
+					this.OnFreezeDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UnfreezeReason", DbType="NVarChar(50)")]
+		public string UnfreezeReason
+		{
+			get
+			{
+				return this._UnfreezeReason;
+			}
+			set
+			{
+				if ((this._UnfreezeReason != value))
+				{
+					this.OnUnfreezeReasonChanging(value);
+					this.SendPropertyChanging();
+					this._UnfreezeReason = value;
+					this.SendPropertyChanged("UnfreezeReason");
+					this.OnUnfreezeReasonChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Unfreezer", DbType="NVarChar(50)")]
+		public string Unfreezer
+		{
+			get
+			{
+				return this._Unfreezer;
+			}
+			set
+			{
+				if ((this._Unfreezer != value))
+				{
+					this.OnUnfreezerChanging(value);
+					this.SendPropertyChanging();
+					this._Unfreezer = value;
+					this.SendPropertyChanged("Unfreezer");
+					this.OnUnfreezerChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UnfreezeDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UnfreezeDate
+		{
+			get
+			{
+				return this._UnfreezeDate;
+			}
+			set
+			{
+				if ((this._UnfreezeDate != value))
+				{
+					this.OnUnfreezeDateChanging(value);
+					this.SendPropertyChanging();
+					this._UnfreezeDate = value;
+					this.SendPropertyChanged("UnfreezeDate");
+					this.OnUnfreezeDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Factor_FactorCreditLine", Storage="_Factor", ThisKey="FactorCode", IsForeignKey=true)]
+		public Factor Factor
+		{
+			get
+			{
+				return this._Factor.Entity;
+			}
+			set
+			{
+				Factor previousValue = this._Factor.Entity;
+				if (((previousValue != value) 
+							|| (this._Factor.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Factor.Entity = null;
+						previousValue.FactorCreditLines.Remove(this);
+					}
+					this._Factor.Entity = value;
+					if ((value != null))
+					{
+						value.FactorCreditLines.Add(this);
+						this._FactorCode = value.FactorCode;
+					}
+					else
+					{
+						this._FactorCode = default(string);
+					}
+					this.SendPropertyChanged("Factor");
 				}
 			}
 		}
