@@ -9,7 +9,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// <summary>
     /// Client Detail Designer
     /// </summary>
-    partial class ClientDetail
+    public partial class ClientDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -22,9 +22,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -152,7 +152,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabItemClient = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClientCreditLine = new DevComponents.DotNetBar.TabControlPanel();
-            this.groupPanelClientCreditCoverMgr = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.groupPanelClientCreditLineMgr = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.dgvClientCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.creditLineIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -252,7 +252,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientStat.SuspendLayout();
             this.groupPanelClientBasic.SuspendLayout();
             this.tabPanelClientCreditLine.SuspendLayout();
-            this.groupPanelClientCreditCoverMgr.SuspendLayout();
+            this.groupPanelClientCreditLineMgr.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLines)).BeginInit();
             this.groupPanelClientCreditLine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientCreditLineBindingSource)).BeginInit();
@@ -1684,7 +1684,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // tabPanelClientCreditLine
             // 
             this.tabPanelClientCreditLine.AutoScroll = true;
-            this.tabPanelClientCreditLine.Controls.Add(this.groupPanelClientCreditCoverMgr);
+            this.tabPanelClientCreditLine.Controls.Add(this.groupPanelClientCreditLineMgr);
             this.tabPanelClientCreditLine.Controls.Add(this.groupPanelClientCreditLine);
             this.tabPanelClientCreditLine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPanelClientCreditLine.Location = new System.Drawing.Point(0, 26);
@@ -1701,44 +1701,44 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabPanelClientCreditLine.TabIndex = 2;
             this.tabPanelClientCreditLine.TabItem = this.tabItemClientCreditLine;
             // 
-            // groupPanelClientCreditCoverMgr
+            // groupPanelClientCreditLineMgr
             // 
-            this.groupPanelClientCreditCoverMgr.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelClientCreditCoverMgr.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.groupPanelClientCreditCoverMgr.Controls.Add(this.dgvClientCreditLines);
-            this.groupPanelClientCreditCoverMgr.Location = new System.Drawing.Point(0, 326);
-            this.groupPanelClientCreditCoverMgr.Name = "groupPanelClientCreditCoverMgr";
-            this.groupPanelClientCreditCoverMgr.Size = new System.Drawing.Size(591, 203);
-            // 
-            // 
-            // 
-            this.groupPanelClientCreditCoverMgr.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelClientCreditCoverMgr.Style.BackColorGradientAngle = 90;
-            this.groupPanelClientCreditCoverMgr.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelClientCreditCoverMgr.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCoverMgr.Style.BorderBottomWidth = 1;
-            this.groupPanelClientCreditCoverMgr.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelClientCreditCoverMgr.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCoverMgr.Style.BorderLeftWidth = 1;
-            this.groupPanelClientCreditCoverMgr.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCoverMgr.Style.BorderRightWidth = 1;
-            this.groupPanelClientCreditCoverMgr.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelClientCreditCoverMgr.Style.BorderTopWidth = 1;
-            this.groupPanelClientCreditCoverMgr.Style.Class = "";
-            this.groupPanelClientCreditCoverMgr.Style.CornerDiameter = 4;
-            this.groupPanelClientCreditCoverMgr.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelClientCreditCoverMgr.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelClientCreditCoverMgr.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelClientCreditCoverMgr.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            this.groupPanelClientCreditLineMgr.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelClientCreditLineMgr.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelClientCreditLineMgr.Controls.Add(this.dgvClientCreditLines);
+            this.groupPanelClientCreditLineMgr.Location = new System.Drawing.Point(0, 326);
+            this.groupPanelClientCreditLineMgr.Name = "groupPanelClientCreditLineMgr";
+            this.groupPanelClientCreditLineMgr.Size = new System.Drawing.Size(591, 203);
             // 
             // 
             // 
-            this.groupPanelClientCreditCoverMgr.StyleMouseDown.Class = "";
+            this.groupPanelClientCreditLineMgr.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelClientCreditLineMgr.Style.BackColorGradientAngle = 90;
+            this.groupPanelClientCreditLineMgr.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelClientCreditLineMgr.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditLineMgr.Style.BorderBottomWidth = 1;
+            this.groupPanelClientCreditLineMgr.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelClientCreditLineMgr.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditLineMgr.Style.BorderLeftWidth = 1;
+            this.groupPanelClientCreditLineMgr.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditLineMgr.Style.BorderRightWidth = 1;
+            this.groupPanelClientCreditLineMgr.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelClientCreditLineMgr.Style.BorderTopWidth = 1;
+            this.groupPanelClientCreditLineMgr.Style.Class = "";
+            this.groupPanelClientCreditLineMgr.Style.CornerDiameter = 4;
+            this.groupPanelClientCreditLineMgr.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelClientCreditLineMgr.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelClientCreditLineMgr.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelClientCreditLineMgr.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
             // 
             // 
             // 
-            this.groupPanelClientCreditCoverMgr.StyleMouseOver.Class = "";
-            this.groupPanelClientCreditCoverMgr.TabIndex = 1;
+            this.groupPanelClientCreditLineMgr.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelClientCreditLineMgr.StyleMouseOver.Class = "";
+            this.groupPanelClientCreditLineMgr.TabIndex = 1;
             // 
             // dgvClientCreditLines
             // 
@@ -2354,7 +2354,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientBasic.ResumeLayout(false);
             this.groupPanelClientBasic.PerformLayout();
             this.tabPanelClientCreditLine.ResumeLayout(false);
-            this.groupPanelClientCreditCoverMgr.ResumeLayout(false);
+            this.groupPanelClientCreditLineMgr.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLines)).EndInit();
             this.groupPanelClientCreditLine.ResumeLayout(false);
             this.groupPanelClientCreditLine.PerformLayout();
@@ -2441,7 +2441,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DateTimePicker unfreezeDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX unfreezerTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX unfreezeReasonTextBox;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelClientCreditCoverMgr;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelClientCreditLineMgr;
         private DevComponents.DotNetBar.Controls.TextBoxX clientCommentTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX creditLineCommentTextBox;
         private DevComponents.DotNetBar.LabelX websiteLabel;

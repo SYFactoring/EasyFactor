@@ -314,7 +314,7 @@
             this.lblTransactionType.Size = new System.Drawing.Size(99, 23);
             this.lblTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.lblTransactionType.TabIndex = 26;
-            this.lblTransactionType.Text = "发票币别:";
+            this.lblTransactionType.Text = "业务类别:";
             // 
             // cbInvoiceCurrency
             // 

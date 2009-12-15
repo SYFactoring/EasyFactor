@@ -61,12 +61,21 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private void UpdateEditableStatus()
         {
-            if (!isEditable)
+            if (isEditable)
+            {
+                this.menuItemNewFactor.Enabled = true;
+                this.menuItemNewFactorCreditLine.Enabled = true;
+                this.menuItemUpdateFactor.Enabled = true;
+                this.menuItemDeleteFactor.Enabled = true;
+                this.menuItemImportFactors.Enabled = true;
+            }
+            else
             {
                 this.menuItemNewFactor.Enabled = false;
                 this.menuItemNewFactorCreditLine.Enabled = false;
                 this.menuItemUpdateFactor.Enabled = false;
                 this.menuItemDeleteFactor.Enabled = false;
+                this.menuItemImportFactors.Enabled = false;
             }
         }
 

@@ -1,38 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using CMBC.EasyFactor.DB.dbml;
-using System.Threading;
-using Microsoft.Office.Interop.Excel;
-using System.Reflection;
+﻿//-----------------------------------------------------------------------
+// <copyright file="DepartmentMgr.cs" company="CISL@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 {
+    using Microsoft.Office.Interop.Excel;
+    using System;
+    using System.Linq;
+    using System.Reflection;
+    using System.Threading;
+    using System.Windows.Forms;
+    using CMBC.EasyFactor.DB.dbml;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class DepartmentMgr : UserControl
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="isEditable"></param>
+        public DepartmentMgr(bool isEditable)
+        {
+            InitializeComponent();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Form OwnerForm
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Department Selected
         {
             get;
             set;
         }
 
-        public DepartmentMgr(bool isEditable)
-        {
-            InitializeComponent();
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QueryDepartments(object sender, EventArgs e)
         {
             var queryResult = App.Current.DbContext.Departments.Where( d =>
@@ -87,6 +106,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportDepartments(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -94,12 +118,16 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 string fileName = fileDialog.FileName;
-                Thread t = new Thread(ImportDepartmentsImpl);
+                Thread t = new Thread(this.ImportDepartmentsImpl);
                 t.Start(fileName);
             }
         }
 
-        private static void ImportDepartmentsImpl(object obj)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        private void ImportDepartmentsImpl(object obj)
         {
             string fileName = obj as string;
             ApplicationClass app = new ApplicationClass { Visible = false };
@@ -163,45 +191,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                             }
                             dept.DepartmentCode = values.GetValue(row, column++).ToString().Trim();
                             //client.ClientEDICode = values.GetValue(row, column++).ToString().Trim();
-                            //client.ClientNameCN = values.GetValue(row, column++).ToString().Trim();
-                            //client.ClientNameEN_1 = values.GetValue(row, column++).ToString().Trim();
-                            //client.ClientNameEN_2 = values.GetValue(row, column++).ToString().Trim();
-                            //client.AddressCN = values.GetValue(row, column++).ToString().Trim();
-                            //client.AddressEN = values.GetValue(row, column++).ToString().Trim();
-                            //client.CityCN = values.GetValue(row, column++).ToString().Trim();
-                            //client.CityEN = values.GetValue(row, column++).ToString().Trim();
-                            //client.ProductCN = values.GetValue(row, column++).ToString().Trim();
-                            //client.ProductEN = values.GetValue(row, column++).ToString().Trim();
-                            //client.PostCode = values.GetValue(row, column++).ToString().Trim();
-                            //client.CountryCode = values.GetValue(row, column++).ToString().Trim();
-                            //client.Representative = values.GetValue(row, column++).ToString().Trim();
-                            //client.Website = values.GetValue(row, column++).ToString().Trim();
-                            //client.Contact = values.GetValue(row, column++).ToString().Trim();
-                            //client.Telephone = values.GetValue(row, column++).ToString().Trim();
-                            //client.Email = values.GetValue(row, column++).ToString().Trim();
-                            //client.FaxNumber = values.GetValue(row, column++).ToString().Trim();
-                            //client.CellPhone = values.GetValue(row, column++).ToString().Trim();
-                            //client.ClientType = values.GetValue(row, column++).ToString().Trim();
-                            //client.Industry = values.GetValue(row, column++).ToString().Trim();
-                            //client.ProductCN = values.GetValue(row, column++).ToString().Trim();
-                            //client.ProductEN = values.GetValue(row, column++).ToString().Trim();
-                            //client.ClientLevel = values.GetValue(row, column++).ToString().Trim();
-                            //client.IsGroup = values.GetValue(row, column++).ToString().Trim();
-                            //string groupNo = values.GetValue(row, column++).ToString().Trim();
-                            //string groupNameCN = values.GetValue(row, column++).ToString().Trim();
-                            //string groupNameEN = values.GetValue(row, column++).ToString().Trim();
-                            //client.RegistrationNumber = values.GetValue(row, column++).ToString().Trim();
-                            //client.CompanyCode = values.GetValue(row, column++).ToString().Trim();
-                            //string departmentName = values.GetValue(row, column++).ToString().Trim();
-                            //Department dep = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName.Equals(departmentName));
-                            //if (dep != null)
-                            //{
-                            //    client.Department = dep;
-                            //}
-                            //client.PMName = values.GetValue(row, column++).ToString().Trim();
-                            //client.RMName = values.GetValue(row, column++).ToString().Trim();
-                            //client.Comment = values.GetValue(row, column++).ToString().Trim();
-
+ 
                             if (isNew)
                             {
                                 App.Current.DbContext.Departments.InsertOnSubmit(dept);

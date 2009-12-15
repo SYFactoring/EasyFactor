@@ -47,6 +47,10 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
                     this.tbSellerFactor.Text = sellerDept.DepartmentName;
                 }
             }
+            else
+            {
+                MessageBox.Show("请先选择业务类别", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void BuyerFactorSelect(object sender, EventArgs e)
@@ -77,6 +81,10 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
                     this.tbBuyerFactorCode.Text = buyerDept.DepartmentCode;
                     this.tbBuyerFactor.Text = buyerDept.DepartmentName;
                 }
+            }
+            else
+            {
+                MessageBox.Show("请先选择业务类别", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

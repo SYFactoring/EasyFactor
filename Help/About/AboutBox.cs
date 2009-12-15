@@ -13,7 +13,7 @@ namespace CMBC.EasyFactor.Help.About
     /// <summary>
     /// About Box Dialog
     /// </summary>
-    public partial class AboutBox : Form
+    public partial class AboutBox : DevComponents.DotNetBar.Office2007Form
     {
         /// <summary>
         /// Initializes a new instance of the AboutBox class

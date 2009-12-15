@@ -6,15 +6,15 @@
 
 namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
+    using Microsoft.Office.Interop.Excel;
     using System;
     using System.Collections.Generic;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Reflection;
     using System.Threading;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
-    using Microsoft.Office.Interop.Excel;
-    using System.Data.SqlClient;
 
     /// <summary>
     /// Client Management User Interface
@@ -24,9 +24,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <summary>
         /// flag indicates if editable
         /// </summary>
-        private readonly bool isEditable;
+        private bool isEditable;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private BindingSource bs = new BindingSource();
+
+        /// <summary>
+        /// Initializes a new instance of the ClientMgr class
+        /// </summary>
+        /// <param name="isEditable">true if editable</param>
+        public ClientMgr(bool isEditable)
+        {
+            InitializeComponent();
+            this.isEditable = isEditable;
+            this.UpdateEditableStatus();
+
+            this.comboTreeDepartment.DataSource = App.Current.DbContext.Departments;
+            this.comboTreeDepartment.DisplayMembers = "DepartmentName";
+            this.comboTreeDepartment.ValueMember = "DepartmentCode";
+            this.comboTreeDepartment.GroupingMembers = "Domain";
+        }
 
         /// <summary>
         /// Gets or sets owner form
@@ -47,32 +66,25 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
-        /// Initializes a new instance of the ClientMgrUI class
-        /// </summary>
-        /// <param name="isEditable">true if editable</param>
-        public ClientMgr(bool isEditable)
-        {
-            InitializeComponent();
-            this.isEditable = isEditable;
-            this.UpdateEditableStatus();
-
-            this.comboTreeDepartment.DataSource = App.Current.DbContext.Departments;
-            this.comboTreeDepartment.DisplayMembers = "DepartmentName";
-            this.comboTreeDepartment.ValueMember = "DepartmentCode";
-            this.comboTreeDepartment.GroupingMembers = "Domain";
-        }
-
-        /// <summary>
         /// Update editable status
         /// </summary>
         private void UpdateEditableStatus()
         {
-            if (!this.isEditable)
+            if (this.isEditable)
+            {
+                this.menuItemNewClient.Enabled = true;
+                this.menuItemNewClientCreditLine.Enabled = true;
+                this.menuItemUpdateClient.Enabled = true;
+                this.menuItemDeleteClient.Enabled = true;
+                this.menuItemImportClients.Enabled = true;
+            }
+            else
             {
                 this.menuItemNewClient.Enabled = false;
                 this.menuItemNewClientCreditLine.Enabled = false;
                 this.menuItemUpdateClient.Enabled = false;
                 this.menuItemDeleteClient.Enabled = false;
+                this.menuItemImportClients.Enabled = false;
             }
         }
 
@@ -104,16 +116,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             var queryResult = App.Current.DbContext.Clients.Where(c =>
-                    ((c.BranchCode == null ? "" : c.BranchCode).Contains(department))
-                  && ((c.PMName == null ? "" : c.PMName).Contains(tbPM.Text))
-                  && ((c.RMName == null ? "" : c.RMName).Contains(tbRM.Text))
-                  && (((c.ClientNameCN == null ? "" : c.ClientNameCN).Contains(tbClientName.Text)) || ((c.ClientNameEN_1 == null ? "" : c.ClientNameEN_1).Contains(tbClientName.Text)) || ((c.ClientNameEN_2 == null ? "" : c.ClientNameEN_2).Contains(tbClientName.Text)))
-                  && ((c.ClientEDICode == null ? "" : c.ClientEDICode).Contains(tbClientEDICode.Text))
-                  && (c.ClientType.Contains(clientType)));
+                    (c.BranchCode == null ? string.Empty : c.BranchCode).Contains(department)
+                  && (c.PMName == null ? string.Empty : c.PMName).Contains(tbPM.Text)
+                  && (c.RMName == null ? string.Empty : c.RMName).Contains(tbRM.Text)
+                  && (c.ClientNameCN == null ? string.Empty : c.ClientNameCN).Contains(tbClientName.Text) || (c.ClientNameEN_1 == null ? "" : c.ClientNameEN_1).Contains(tbClientName.Text) || (c.ClientNameEN_2 == null ? "" : c.ClientNameEN_2).Contains(tbClientName.Text)
+                  && (c.ClientEDICode == null ? string.Empty : c.ClientEDICode).Contains(tbClientEDICode.Text)
+                  && c.ClientType.Contains(clientType));
 
-            bs.DataSource = queryResult.ToList();
-            dgvClients.DataSource = bs;
-            lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            this.bs.DataSource = queryResult.ToList();
+            this.dgvClients.DataSource = bs;
+            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
         /// <summary>
@@ -151,6 +163,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewClientCreditLine(object sender, System.EventArgs e)
         {
             if (this.dgvClients.SelectedRows.Count == 0)
@@ -200,6 +217,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             MessageBox.Show("不能删除此客户,已存在相关额度.", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
+
                         dgvClients.Rows.RemoveAt(dgvClients.SelectedRows[0].Index);
                     }
                 }
@@ -245,6 +263,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 return;
             }
+
             string cid = (string)dgvClients["clientEDICodeColumn", dgvClients.SelectedRows[0].Index].Value;
             if (cid != null)
             {
@@ -252,7 +271,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (selectedClient != null)
                 {
                     ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.DETAIL_CLIENT, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE);
-					clientDetail.ShowDialog(this);
+                    clientDetail.ShowDialog(this);
                 }
             }
         }
@@ -274,6 +293,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportClients(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -281,12 +305,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 string fileName = fileDialog.FileName;
-                Thread t = new Thread(ImportClientsImpl);
+                Thread t = new Thread(this.ImportClientsImpl);
                 t.Start(fileName);
             }
         }
 
-        private static void ImportClientsImpl(object obj)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        private void ImportClientsImpl(object obj)
         {
             string fileName = obj as string;
             ApplicationClass app = new ApplicationClass { Visible = false };
@@ -348,6 +376,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                                 isNew = true;
                                 client = new Client();
                             }
+
                             client.ClientCoreNo = values.GetValue(row, column++).ToString().Trim();
                             client.ClientEDICode = values.GetValue(row, column++).ToString().Trim();
                             client.ClientNameCN = values.GetValue(row, column++).ToString().Trim();
@@ -385,6 +414,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             {
                                 client.Department = dep;
                             }
+
                             client.PMName = values.GetValue(row, column++).ToString().Trim();
                             client.RMName = values.GetValue(row, column++).ToString().Trim();
                             client.Comment = values.GetValue(row, column++).ToString().Trim();
@@ -406,11 +436,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                     }
                 }
+
                 MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             app.Quit();
         }
-
     }
 }
