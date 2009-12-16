@@ -67,4 +67,8 @@ namespace CMBC.EasyFactor.DB.dbml
     public partial class Contract : BaseObject
     {
     }
+
+    public partial class CDA : BaseObject
+    {
+    }
 }

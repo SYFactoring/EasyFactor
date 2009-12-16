@@ -37,7 +37,8 @@
             DevComponents.DotNetBar.LabelX approveTypeLabel;
             DevComponents.DotNetBar.LabelX commentLabel;
             DevComponents.DotNetBar.LabelX createUserNameLabel;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaseDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelCreditCoverNeg = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvCreditCoverNegs = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -51,6 +52,8 @@
             this.creditCoverNegotiationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.approveTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.comboItem8 = new DevComponents.Editors.ComboItem();
+            this.comboItem9 = new DevComponents.Editors.ComboItem();
             this.requestDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.replyDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.iFPriceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -107,8 +110,9 @@
             this.tabItemCase = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelCDA = new DevComponents.DotNetBar.TabControlPanel();
             this.tabItemCDA = new DevComponents.DotNetBar.TabItem(this.components);
-            this.comboItem8 = new DevComponents.Editors.ComboItem();
-            this.comboItem9 = new DevComponents.Editors.ComboItem();
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             requestAmountLabel = new DevComponents.DotNetBar.LabelX();
             approveAmountLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
@@ -127,6 +131,7 @@
             this.groupPanelCase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.caseBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diCaseAppDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // requestAmountLabel
@@ -245,9 +250,9 @@
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelCreditCoverNeg);
             this.tabControl.Controls.Add(this.tabPanelCase);
             this.tabControl.Controls.Add(this.tabPanelCDA);
+            this.tabControl.Controls.Add(this.tabPanelCreditCoverNeg);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -286,14 +291,14 @@
             this.dgvCreditCoverNegs.AllowUserToDeleteRows = false;
             this.dgvCreditCoverNegs.AllowUserToOrderColumns = true;
             this.dgvCreditCoverNegs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCreditCoverNegs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCreditCoverNegs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCreditCoverNegs.Location = new System.Drawing.Point(1, 166);
@@ -460,6 +465,14 @@
             this.approveTypeComboBox.Name = "approveTypeComboBox";
             this.approveTypeComboBox.Size = new System.Drawing.Size(100, 21);
             this.approveTypeComboBox.TabIndex = 11;
+            // 
+            // comboItem8
+            // 
+            this.comboItem8.Text = "P-预额度";
+            // 
+            // comboItem9
+            // 
+            this.comboItem9.Text = "C-正式额度";
             // 
             // requestDateDateTimePicker
             // 
@@ -657,7 +670,7 @@
             // 
             this.cbCaseCoDepts.BackgroundStyle.Class = "TextBoxBorder";
             this.cbCaseCoDepts.ButtonDropDown.Visible = true;
-            this.cbCaseCoDepts.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "CoDepartmentCode", true));
+            this.cbCaseCoDepts.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.caseBindingSource, "CoDepartmentCode", true));
             this.cbCaseCoDepts.Location = new System.Drawing.Point(271, 208);
             this.cbCaseCoDepts.Name = "cbCaseCoDepts";
             this.cbCaseCoDepts.Size = new System.Drawing.Size(176, 23);
@@ -690,7 +703,7 @@
             // 
             this.cbCaseOwnerDepts.BackgroundStyle.Class = "TextBoxBorder";
             this.cbCaseOwnerDepts.ButtonDropDown.Visible = true;
-            this.cbCaseOwnerDepts.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "OwnerDepartmentCode", true));
+            this.cbCaseOwnerDepts.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.caseBindingSource, "OwnerDepartmentCode", true));
             this.cbCaseOwnerDepts.Location = new System.Drawing.Point(100, 237);
             this.cbCaseOwnerDepts.Name = "cbCaseOwnerDepts";
             this.cbCaseOwnerDepts.Size = new System.Drawing.Size(278, 23);
@@ -945,7 +958,7 @@
             // 
             // cbCaseInvoiceCurrency
             // 
-            this.cbCaseInvoiceCurrency.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "InvoiceCurrency", true));
+            this.cbCaseInvoiceCurrency.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.caseBindingSource, "InvoiceCurrency", true));
             this.cbCaseInvoiceCurrency.DisplayMember = "Text";
             this.cbCaseInvoiceCurrency.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbCaseInvoiceCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1203,13 +1216,20 @@
             this.tabItemCDA.Name = "tabItemCDA";
             this.tabItemCDA.Text = "额度通知书";
             // 
-            // comboItem8
+            // superValidator
             // 
-            this.comboItem8.Text = "P-预额度";
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
             // 
-            // comboItem9
+            // errorProvider
             // 
-            this.comboItem9.Text = "C-正式额度";
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
             // 
             // CaseDetail
             // 
@@ -1220,7 +1240,7 @@
             this.DoubleBuffered = true;
             this.Name = "CaseDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "CaseDetail";
+            this.Text = "案件信息";
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabPanelCreditCoverNeg.ResumeLayout(false);
@@ -1232,6 +1252,7 @@
             this.groupPanelCase.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.caseBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diCaseAppDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1309,5 +1330,8 @@
         private DevComponents.DotNetBar.ButtonX btnCreditCoverNegRefresh;
         private DevComponents.Editors.ComboItem comboItem8;
         private DevComponents.Editors.ComboItem comboItem9;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
     }
 }

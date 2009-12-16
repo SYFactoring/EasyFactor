@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using CMBC.EasyFactor.DB.dbml;
-using CMBC.EasyFactor.InfoMgr.FactorMgr;
-using CMBC.EasyFactor.InfoMgr.ClientMgr;
-using DevComponents.Editors;
-using CMBC.EasyFactor.Utils;
-
+﻿
 namespace CMBC.EasyFactor.CaseMgr
 {
+    using System;
+    using System.Linq;
+    using System.Windows.Forms;
+    using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.InfoMgr;
+    using CMBC.EasyFactor.InfoMgr.ClientMgr;
+    using CMBC.EasyFactor.Utils;
+    using DevComponents.Editors;
+    using CMBC.EasyFactor.InfoMgr.FactorMgr;
+
     public partial class CaseDetail : DevComponents.DotNetBar.Office2007Form
     {
         private OpCaseType opCaseType;
@@ -23,6 +20,7 @@ namespace CMBC.EasyFactor.CaseMgr
         public CaseDetail(Case curCase, OpCaseType opCaseType, OpCreditCoverNegType opCreditCoverNegType)
         {
             this.InitializeComponent();
+            this.InitComboBox();
             this.opCaseType = opCaseType;
             this.opCreditCoverNegType = opCreditCoverNegType;
 

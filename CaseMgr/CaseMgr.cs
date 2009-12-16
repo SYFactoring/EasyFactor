@@ -83,17 +83,18 @@ namespace CMBC.EasyFactor.CaseMgr
                 endDate = this.diEnd.Value;
             }
 
-            var queryResult = App.Current.DbContext.Cases.Where(c =>
-                                c.OwnerDepartmentCode.Equals(ownerDept)
-                              && c.TransactionType.Equals(this.cbTransactionType.Text)
-                              && c.InvoiceCurrency.Equals((string)this.cbCurrency.SelectedValue)
-                              && (beginDate == this.diBegin.MinDate ? true : c.CaseAppDate > beginDate.AddDays(-1))
-                              && (endDate == this.diEnd.MaxDate ? true : c.CaseAppDate < endDate.AddDays(1))
-                              && c.CaseCode.Contains(this.tbCaseCode.Text)
-                              && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text)||c.BuyerClient.ClientNameEN_1.Contains(this.tbClientName.Text)||c.BuyerClient.ClientNameEN_2.Contains(this.tbClientName.Text)
-                                ||c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text)||c.SellerClient.ClientNameEN_1.Contains(this.tbClientName.Text)||c.SellerClient.ClientNameEN_2.Contains(this.tbClientName.Text))
-                              );
+            //var queryResult = App.Current.DbContext.Cases.Where(c =>
+            //                    c.OwnerDepartmentCode.Equals(ownerDept)
+            //                  && c.TransactionType.Equals(this.cbTransactionType.Text)
+            //                  && c.InvoiceCurrency.Equals((string)this.cbCurrency.SelectedValue)
+            //                  && (beginDate == this.diBegin.MinDate ? true : c.CaseAppDate > beginDate.AddDays(-1))
+            //                  && (endDate == this.diEnd.MaxDate ? true : c.CaseAppDate < endDate.AddDays(1))
+            //                  && c.CaseCode.Contains(this.tbCaseCode.Text)
+            //                  && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text)||c.BuyerClient.ClientNameEN_1.Contains(this.tbClientName.Text)||c.BuyerClient.ClientNameEN_2.Contains(this.tbClientName.Text)
+            //                    ||c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text)||c.SellerClient.ClientNameEN_1.Contains(this.tbClientName.Text)||c.SellerClient.ClientNameEN_2.Contains(this.tbClientName.Text))
+            //                  );
 
+            var queryResult = App.Current.DbContext.Cases.ToList();
             this.bs.DataSource = queryResult;
             this.dgvCases.DataSource = this.bs;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());

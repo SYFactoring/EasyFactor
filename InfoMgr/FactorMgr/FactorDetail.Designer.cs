@@ -117,7 +117,6 @@
             this.comboItem4 = new DevComponents.Editors.ComboItem();
             this.tabItemFactor = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelCreditLine = new DevComponents.DotNetBar.TabControlPanel();
-            this.groupPanelCreditLineList = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.dgvFactorCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.creditLineIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.creditLineCurrencyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -208,7 +207,6 @@
             this.groupPanelContacts.SuspendLayout();
             this.groupPanelBasic.SuspendLayout();
             this.tabPanelCreditLine.SuspendLayout();
-            this.groupPanelCreditLineList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactorCreditLines)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.factorCreditLineBindingSource)).BeginInit();
             this.groupPanelCreditLineDetail.SuspendLayout();
@@ -1475,7 +1473,7 @@
             // tabPanelCreditLine
             // 
             this.tabPanelCreditLine.AutoScroll = true;
-            this.tabPanelCreditLine.Controls.Add(this.groupPanelCreditLineList);
+            this.tabPanelCreditLine.Controls.Add(this.dgvFactorCreditLines);
             this.tabPanelCreditLine.Controls.Add(this.groupPanelCreditLineDetail);
             this.tabPanelCreditLine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPanelCreditLine.Location = new System.Drawing.Point(0, 26);
@@ -1491,46 +1489,6 @@
             this.tabPanelCreditLine.Style.GradientAngle = 90;
             this.tabPanelCreditLine.TabIndex = 2;
             this.tabPanelCreditLine.TabItem = this.tabItemFactorCreditLine;
-            // 
-            // groupPanelCreditLineList
-            // 
-            this.groupPanelCreditLineList.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelCreditLineList.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.groupPanelCreditLineList.Controls.Add(this.dgvFactorCreditLines);
-            this.groupPanelCreditLineList.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupPanelCreditLineList.Location = new System.Drawing.Point(1, 306);
-            this.groupPanelCreditLineList.Name = "groupPanelCreditLineList";
-            this.groupPanelCreditLineList.Size = new System.Drawing.Size(593, 270);
-            // 
-            // 
-            // 
-            this.groupPanelCreditLineList.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelCreditLineList.Style.BackColorGradientAngle = 90;
-            this.groupPanelCreditLineList.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelCreditLineList.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCreditLineList.Style.BorderBottomWidth = 1;
-            this.groupPanelCreditLineList.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelCreditLineList.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCreditLineList.Style.BorderLeftWidth = 1;
-            this.groupPanelCreditLineList.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCreditLineList.Style.BorderRightWidth = 1;
-            this.groupPanelCreditLineList.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCreditLineList.Style.BorderTopWidth = 1;
-            this.groupPanelCreditLineList.Style.Class = "";
-            this.groupPanelCreditLineList.Style.CornerDiameter = 4;
-            this.groupPanelCreditLineList.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelCreditLineList.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelCreditLineList.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelCreditLineList.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelCreditLineList.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelCreditLineList.StyleMouseOver.Class = "";
-            this.groupPanelCreditLineList.TabIndex = 1;
             // 
             // dgvFactorCreditLines
             // 
@@ -2045,7 +2003,6 @@
             this.groupPanelBasic.ResumeLayout(false);
             this.groupPanelBasic.PerformLayout();
             this.tabPanelCreditLine.ResumeLayout(false);
-            this.groupPanelCreditLineList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactorCreditLines)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.factorCreditLineBindingSource)).EndInit();
             this.groupPanelCreditLineDetail.ResumeLayout(false);
@@ -2119,7 +2076,6 @@
         private System.Windows.Forms.DateTimePicker freezeDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX freezerTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX freezeReasonTextBox;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCreditLineList;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvFactorCreditLines;
         private DevComponents.DotNetBar.ButtonX btnFactorCreditLineUnfreeze;
         private DevComponents.DotNetBar.ButtonX btnFactorCreditLineFreeze;

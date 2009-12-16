@@ -371,6 +371,7 @@ namespace CMBC.EasyFactor
             this.btnCDA.Name = "btnCDA";
             this.btnCDA.SubItemsExpandWidth = 14;
             this.btnCDA.Text = "额度通知书";
+            this.btnCDA.Click += new System.EventHandler(this.CDANew);
             // 
             // ribbonPanelInvoiceMgr
             // 

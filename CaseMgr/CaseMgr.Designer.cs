@@ -32,6 +32,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCaseQuery = new DevComponents.DotNetBar.PanelEx();
+            this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblClientName = new DevComponents.DotNetBar.LabelX();
+            this.tbCaseCode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblCaseCode = new DevComponents.DotNetBar.LabelX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.lblDate = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
@@ -52,6 +56,14 @@
             this.cbOwnerDepts = new DevComponents.DotNetBar.Controls.ComboTree();
             this.lblOnwerDept = new DevComponents.DotNetBar.LabelX();
             this.dgvCases = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuContractMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCaseSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCaseNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
             this.CaseCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SellerCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SellerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,18 +83,8 @@
             this.AppDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CaseMarkColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CreateUserColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblCaseCode = new DevComponents.DotNetBar.LabelX();
-            this.tbCaseCode = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblClientName = new DevComponents.DotNetBar.LabelX();
-            this.cmuContractMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCaseSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCaseNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseUpdate = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.BuyerClientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SellerClientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelCaseQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -121,6 +123,52 @@
             this.panelCaseQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelCaseQuery.Style.GradientAngle = 90;
             this.panelCaseQuery.TabIndex = 0;
+            // 
+            // tbClientName
+            // 
+            // 
+            // 
+            // 
+            this.tbClientName.Border.Class = "TextBoxBorder";
+            this.tbClientName.Location = new System.Drawing.Point(254, 50);
+            this.tbClientName.Name = "tbClientName";
+            this.tbClientName.Size = new System.Drawing.Size(133, 20);
+            this.tbClientName.TabIndex = 14;
+            // 
+            // lblClientName
+            // 
+            // 
+            // 
+            // 
+            this.lblClientName.BackgroundStyle.Class = "";
+            this.lblClientName.Location = new System.Drawing.Point(198, 51);
+            this.lblClientName.Name = "lblClientName";
+            this.lblClientName.Size = new System.Drawing.Size(59, 23);
+            this.lblClientName.TabIndex = 13;
+            this.lblClientName.Text = "客户名称";
+            // 
+            // tbCaseCode
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseCode.Border.Class = "TextBoxBorder";
+            this.tbCaseCode.Location = new System.Drawing.Point(59, 50);
+            this.tbCaseCode.Name = "tbCaseCode";
+            this.tbCaseCode.Size = new System.Drawing.Size(133, 20);
+            this.tbCaseCode.TabIndex = 12;
+            // 
+            // lblCaseCode
+            // 
+            // 
+            // 
+            // 
+            this.lblCaseCode.BackgroundStyle.Class = "";
+            this.lblCaseCode.Location = new System.Drawing.Point(3, 51);
+            this.lblCaseCode.Name = "lblCaseCode";
+            this.lblCaseCode.Size = new System.Drawing.Size(59, 23);
+            this.lblCaseCode.TabIndex = 11;
+            this.lblCaseCode.Text = "案件编号";
             // 
             // lblCount
             // 
@@ -404,7 +452,9 @@
             this.CoDeptCodeColumn,
             this.AppDateColumn,
             this.CaseMarkColumn,
-            this.CreateUserColumn});
+            this.CreateUserColumn,
+            this.BuyerClientColumn,
+            this.SellerClientColumn});
             this.dgvCases.ContextMenuStrip = this.cmuContractMgr;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -419,206 +469,10 @@
             this.dgvCases.Location = new System.Drawing.Point(0, 77);
             this.dgvCases.Name = "dgvCases";
             this.dgvCases.ReadOnly = true;
+            this.dgvCases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCases.Size = new System.Drawing.Size(588, 308);
             this.dgvCases.TabIndex = 2;
-            // 
-            // CaseCodeColumn
-            // 
-            this.CaseCodeColumn.DataPropertyName = "CaseCode";
-            this.CaseCodeColumn.HeaderText = "案件编号";
-            this.CaseCodeColumn.Name = "CaseCodeColumn";
-            this.CaseCodeColumn.ReadOnly = true;
-            this.CaseCodeColumn.Width = 80;
-            // 
-            // SellerCodeColumn
-            // 
-            this.SellerCodeColumn.DataPropertyName = "SellerCode";
-            this.SellerCodeColumn.HeaderText = "卖方保理代码";
-            this.SellerCodeColumn.Name = "SellerCodeColumn";
-            this.SellerCodeColumn.ReadOnly = true;
-            this.SellerCodeColumn.Width = 104;
-            // 
-            // SellerColumn
-            // 
-            this.SellerColumn.DataPropertyName = "Seller";
-            this.SellerColumn.HeaderText = "卖方名称";
-            this.SellerColumn.Name = "SellerColumn";
-            this.SellerColumn.ReadOnly = true;
-            this.SellerColumn.Width = 80;
-            // 
-            // SellerFactorCodeColumn
-            // 
-            this.SellerFactorCodeColumn.DataPropertyName = "SellerFactorCode";
-            this.SellerFactorCodeColumn.HeaderText = "卖方保理商代码";
-            this.SellerFactorCodeColumn.Name = "SellerFactorCodeColumn";
-            this.SellerFactorCodeColumn.ReadOnly = true;
-            this.SellerFactorCodeColumn.Width = 116;
-            // 
-            // SellerFactorColumn
-            // 
-            this.SellerFactorColumn.DataPropertyName = "SellerFactor";
-            this.SellerFactorColumn.HeaderText = "卖方保理商";
-            this.SellerFactorColumn.Name = "SellerFactorColumn";
-            this.SellerFactorColumn.ReadOnly = true;
-            this.SellerFactorColumn.Width = 92;
-            // 
-            // BuyerCodeColumn
-            // 
-            this.BuyerCodeColumn.DataPropertyName = "BuyerCode";
-            this.BuyerCodeColumn.HeaderText = "买方保理代码";
-            this.BuyerCodeColumn.Name = "BuyerCodeColumn";
-            this.BuyerCodeColumn.ReadOnly = true;
-            this.BuyerCodeColumn.Width = 104;
-            // 
-            // BuyerColumn
-            // 
-            this.BuyerColumn.DataPropertyName = "Buyer";
-            this.BuyerColumn.HeaderText = "买方名称";
-            this.BuyerColumn.Name = "BuyerColumn";
-            this.BuyerColumn.ReadOnly = true;
-            this.BuyerColumn.Width = 80;
-            // 
-            // BuyerFactorCodeColumn
-            // 
-            this.BuyerFactorCodeColumn.DataPropertyName = "BuyerFactorCode";
-            this.BuyerFactorCodeColumn.HeaderText = "买方保理商代码";
-            this.BuyerFactorCodeColumn.Name = "BuyerFactorCodeColumn";
-            this.BuyerFactorCodeColumn.ReadOnly = true;
-            this.BuyerFactorCodeColumn.Width = 116;
-            // 
-            // BuyerFactorColumn
-            // 
-            this.BuyerFactorColumn.DataPropertyName = "BuyerFactor";
-            this.BuyerFactorColumn.HeaderText = "买方保理商";
-            this.BuyerFactorColumn.Name = "BuyerFactorColumn";
-            this.BuyerFactorColumn.ReadOnly = true;
-            this.BuyerFactorColumn.Width = 92;
-            // 
-            // InvoiceCurrencyColumn
-            // 
-            this.InvoiceCurrencyColumn.DataPropertyName = "InvoiceCurrency";
-            this.InvoiceCurrencyColumn.HeaderText = "发票币别";
-            this.InvoiceCurrencyColumn.Name = "InvoiceCurrencyColumn";
-            this.InvoiceCurrencyColumn.ReadOnly = true;
-            this.InvoiceCurrencyColumn.Width = 80;
-            // 
-            // TransactionTypeColumn
-            // 
-            this.TransactionTypeColumn.DataPropertyName = "TransactionType";
-            this.TransactionTypeColumn.HeaderText = "业务类别";
-            this.TransactionTypeColumn.Name = "TransactionTypeColumn";
-            this.TransactionTypeColumn.ReadOnly = true;
-            this.TransactionTypeColumn.Width = 80;
-            // 
-            // OperationTypeColumn
-            // 
-            this.OperationTypeColumn.DataPropertyName = "OperationType";
-            this.OperationTypeColumn.HeaderText = "操作类型";
-            this.OperationTypeColumn.Name = "OperationTypeColumn";
-            this.OperationTypeColumn.ReadOnly = true;
-            this.OperationTypeColumn.Width = 80;
-            // 
-            // OwnerDeptColumn
-            // 
-            this.OwnerDeptColumn.DataPropertyName = "OwnerDeptarment";
-            this.OwnerDeptColumn.HeaderText = "业务归属机构";
-            this.OwnerDeptColumn.Name = "OwnerDeptColumn";
-            this.OwnerDeptColumn.ReadOnly = true;
-            this.OwnerDeptColumn.Width = 104;
-            // 
-            // OwnerDeptCodeColumn
-            // 
-            this.OwnerDeptCodeColumn.DataPropertyName = "OwnerDepartmentCode";
-            this.OwnerDeptCodeColumn.HeaderText = "Onwer Dept Code";
-            this.OwnerDeptCodeColumn.Name = "OwnerDeptCodeColumn";
-            this.OwnerDeptCodeColumn.ReadOnly = true;
-            this.OwnerDeptCodeColumn.Visible = false;
-            // 
-            // CoDeptColumn
-            // 
-            this.CoDeptColumn.DataPropertyName = "CoDepartment";
-            this.CoDeptColumn.HeaderText = "业务协作机构";
-            this.CoDeptColumn.Name = "CoDeptColumn";
-            this.CoDeptColumn.ReadOnly = true;
-            this.CoDeptColumn.Width = 104;
-            // 
-            // CoDeptCodeColumn
-            // 
-            this.CoDeptCodeColumn.DataPropertyName = "CoDepartmentCode";
-            this.CoDeptCodeColumn.HeaderText = "Co Dept Code ";
-            this.CoDeptCodeColumn.Name = "CoDeptCodeColumn";
-            this.CoDeptCodeColumn.ReadOnly = true;
-            this.CoDeptCodeColumn.Visible = false;
-            // 
-            // AppDateColumn
-            // 
-            this.AppDateColumn.DataPropertyName = "CaseAppDate";
-            this.AppDateColumn.HeaderText = "申请日期";
-            this.AppDateColumn.Name = "AppDateColumn";
-            this.AppDateColumn.ReadOnly = true;
-            this.AppDateColumn.Width = 80;
-            // 
-            // CaseMarkColumn
-            // 
-            this.CaseMarkColumn.DataPropertyName = "CaseMark";
-            this.CaseMarkColumn.HeaderText = "案件状态";
-            this.CaseMarkColumn.Name = "CaseMarkColumn";
-            this.CaseMarkColumn.ReadOnly = true;
-            this.CaseMarkColumn.Width = 80;
-            // 
-            // CreateUserColumn
-            // 
-            this.CreateUserColumn.DataPropertyName = "CreateUserName";
-            this.CreateUserColumn.HeaderText = "经办人";
-            this.CreateUserColumn.Name = "CreateUserColumn";
-            this.CreateUserColumn.ReadOnly = true;
-            this.CreateUserColumn.Width = 68;
-            // 
-            // lblCaseCode
-            // 
-            // 
-            // 
-            // 
-            this.lblCaseCode.BackgroundStyle.Class = "";
-            this.lblCaseCode.Location = new System.Drawing.Point(3, 51);
-            this.lblCaseCode.Name = "lblCaseCode";
-            this.lblCaseCode.Size = new System.Drawing.Size(59, 23);
-            this.lblCaseCode.TabIndex = 11;
-            this.lblCaseCode.Text = "案件编号";
-            // 
-            // tbCaseCode
-            // 
-            // 
-            // 
-            // 
-            this.tbCaseCode.Border.Class = "TextBoxBorder";
-            this.tbCaseCode.Location = new System.Drawing.Point(59, 50);
-            this.tbCaseCode.Name = "tbCaseCode";
-            this.tbCaseCode.Size = new System.Drawing.Size(133, 20);
-            this.tbCaseCode.TabIndex = 12;
-            // 
-            // tbClientName
-            // 
-            // 
-            // 
-            // 
-            this.tbClientName.Border.Class = "TextBoxBorder";
-            this.tbClientName.Location = new System.Drawing.Point(254, 50);
-            this.tbClientName.Name = "tbClientName";
-            this.tbClientName.Size = new System.Drawing.Size(133, 20);
-            this.tbClientName.TabIndex = 14;
-            // 
-            // lblClientName
-            // 
-            // 
-            // 
-            // 
-            this.lblClientName.BackgroundStyle.Class = "";
-            this.lblClientName.Location = new System.Drawing.Point(198, 51);
-            this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(59, 23);
-            this.lblClientName.TabIndex = 13;
-            this.lblClientName.Text = "客户名称";
+            this.dgvCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
             // cmuContractMgr
             // 
@@ -679,6 +533,178 @@
             this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
             this.menuItemCreditCoverNegNew.Text = "新建额度申请";
             // 
+            // CaseCodeColumn
+            // 
+            this.CaseCodeColumn.DataPropertyName = "CaseCode";
+            this.CaseCodeColumn.HeaderText = "案件编号";
+            this.CaseCodeColumn.Name = "CaseCodeColumn";
+            this.CaseCodeColumn.ReadOnly = true;
+            this.CaseCodeColumn.Width = 80;
+            // 
+            // SellerCodeColumn
+            // 
+            this.SellerCodeColumn.DataPropertyName = "SellerCode";
+            this.SellerCodeColumn.HeaderText = "卖方保理代码";
+            this.SellerCodeColumn.Name = "SellerCodeColumn";
+            this.SellerCodeColumn.ReadOnly = true;
+            this.SellerCodeColumn.Width = 104;
+            // 
+            // SellerColumn
+            // 
+            this.SellerColumn.DataPropertyName = "SellerClient";
+            this.SellerColumn.HeaderText = "卖方名称";
+            this.SellerColumn.Name = "SellerColumn";
+            this.SellerColumn.ReadOnly = true;
+            this.SellerColumn.Width = 80;
+            // 
+            // SellerFactorCodeColumn
+            // 
+            this.SellerFactorCodeColumn.DataPropertyName = "SellerFactorCode";
+            this.SellerFactorCodeColumn.HeaderText = "卖方保理商代码";
+            this.SellerFactorCodeColumn.Name = "SellerFactorCodeColumn";
+            this.SellerFactorCodeColumn.ReadOnly = true;
+            this.SellerFactorCodeColumn.Width = 116;
+            // 
+            // SellerFactorColumn
+            // 
+            this.SellerFactorColumn.DataPropertyName = "SellerFactor";
+            this.SellerFactorColumn.HeaderText = "卖方保理商";
+            this.SellerFactorColumn.Name = "SellerFactorColumn";
+            this.SellerFactorColumn.ReadOnly = true;
+            this.SellerFactorColumn.Width = 92;
+            // 
+            // BuyerCodeColumn
+            // 
+            this.BuyerCodeColumn.DataPropertyName = "BuyerCode";
+            this.BuyerCodeColumn.HeaderText = "买方保理代码";
+            this.BuyerCodeColumn.Name = "BuyerCodeColumn";
+            this.BuyerCodeColumn.ReadOnly = true;
+            this.BuyerCodeColumn.Width = 104;
+            // 
+            // BuyerColumn
+            // 
+            this.BuyerColumn.DataPropertyName = "BuyerClient";
+            this.BuyerColumn.HeaderText = "买方名称";
+            this.BuyerColumn.Name = "BuyerColumn";
+            this.BuyerColumn.ReadOnly = true;
+            this.BuyerColumn.Width = 80;
+            // 
+            // BuyerFactorCodeColumn
+            // 
+            this.BuyerFactorCodeColumn.DataPropertyName = "BuyerFactorCode";
+            this.BuyerFactorCodeColumn.HeaderText = "买方保理商代码";
+            this.BuyerFactorCodeColumn.Name = "BuyerFactorCodeColumn";
+            this.BuyerFactorCodeColumn.ReadOnly = true;
+            this.BuyerFactorCodeColumn.Width = 116;
+            // 
+            // BuyerFactorColumn
+            // 
+            this.BuyerFactorColumn.DataPropertyName = "BuyerFactor";
+            this.BuyerFactorColumn.HeaderText = "买方保理商";
+            this.BuyerFactorColumn.Name = "BuyerFactorColumn";
+            this.BuyerFactorColumn.ReadOnly = true;
+            this.BuyerFactorColumn.Width = 92;
+            // 
+            // InvoiceCurrencyColumn
+            // 
+            this.InvoiceCurrencyColumn.DataPropertyName = "InvoiceCurrency";
+            this.InvoiceCurrencyColumn.HeaderText = "发票币别";
+            this.InvoiceCurrencyColumn.Name = "InvoiceCurrencyColumn";
+            this.InvoiceCurrencyColumn.ReadOnly = true;
+            this.InvoiceCurrencyColumn.Width = 80;
+            // 
+            // TransactionTypeColumn
+            // 
+            this.TransactionTypeColumn.DataPropertyName = "TransactionType";
+            this.TransactionTypeColumn.HeaderText = "业务类别";
+            this.TransactionTypeColumn.Name = "TransactionTypeColumn";
+            this.TransactionTypeColumn.ReadOnly = true;
+            this.TransactionTypeColumn.Width = 80;
+            // 
+            // OperationTypeColumn
+            // 
+            this.OperationTypeColumn.DataPropertyName = "OperationType";
+            this.OperationTypeColumn.HeaderText = "操作类型";
+            this.OperationTypeColumn.Name = "OperationTypeColumn";
+            this.OperationTypeColumn.ReadOnly = true;
+            this.OperationTypeColumn.Width = 80;
+            // 
+            // OwnerDeptColumn
+            // 
+            this.OwnerDeptColumn.DataPropertyName = "OwnerDepartment";
+            this.OwnerDeptColumn.HeaderText = "业务归属机构";
+            this.OwnerDeptColumn.Name = "OwnerDeptColumn";
+            this.OwnerDeptColumn.ReadOnly = true;
+            this.OwnerDeptColumn.Width = 104;
+            // 
+            // OwnerDeptCodeColumn
+            // 
+            this.OwnerDeptCodeColumn.DataPropertyName = "OwnerDepartmentCode";
+            this.OwnerDeptCodeColumn.HeaderText = "Onwer Dept Code";
+            this.OwnerDeptCodeColumn.Name = "OwnerDeptCodeColumn";
+            this.OwnerDeptCodeColumn.ReadOnly = true;
+            this.OwnerDeptCodeColumn.Visible = false;
+            this.OwnerDeptCodeColumn.Width = 117;
+            // 
+            // CoDeptColumn
+            // 
+            this.CoDeptColumn.DataPropertyName = "CoDepartment";
+            this.CoDeptColumn.HeaderText = "业务协作机构";
+            this.CoDeptColumn.Name = "CoDeptColumn";
+            this.CoDeptColumn.ReadOnly = true;
+            this.CoDeptColumn.Width = 104;
+            // 
+            // CoDeptCodeColumn
+            // 
+            this.CoDeptCodeColumn.DataPropertyName = "CoDepartmentCode";
+            this.CoDeptCodeColumn.HeaderText = "Co Dept Code ";
+            this.CoDeptCodeColumn.Name = "CoDeptCodeColumn";
+            this.CoDeptCodeColumn.ReadOnly = true;
+            this.CoDeptCodeColumn.Visible = false;
+            this.CoDeptCodeColumn.Width = 102;
+            // 
+            // AppDateColumn
+            // 
+            this.AppDateColumn.DataPropertyName = "CaseAppDate";
+            this.AppDateColumn.HeaderText = "申请日期";
+            this.AppDateColumn.Name = "AppDateColumn";
+            this.AppDateColumn.ReadOnly = true;
+            this.AppDateColumn.Width = 80;
+            // 
+            // CaseMarkColumn
+            // 
+            this.CaseMarkColumn.DataPropertyName = "CaseMark";
+            this.CaseMarkColumn.HeaderText = "案件状态";
+            this.CaseMarkColumn.Name = "CaseMarkColumn";
+            this.CaseMarkColumn.ReadOnly = true;
+            this.CaseMarkColumn.Width = 80;
+            // 
+            // CreateUserColumn
+            // 
+            this.CreateUserColumn.DataPropertyName = "CreateUserName";
+            this.CreateUserColumn.HeaderText = "经办人";
+            this.CreateUserColumn.Name = "CreateUserColumn";
+            this.CreateUserColumn.ReadOnly = true;
+            this.CreateUserColumn.Width = 68;
+            // 
+            // BuyerClientColumn
+            // 
+            this.BuyerClientColumn.DataPropertyName = "BuyerClient";
+            this.BuyerClientColumn.HeaderText = "BuyerClient";
+            this.BuyerClientColumn.Name = "BuyerClientColumn";
+            this.BuyerClientColumn.ReadOnly = true;
+            this.BuyerClientColumn.Visible = false;
+            this.BuyerClientColumn.Width = 85;
+            // 
+            // SellerClientColumn
+            // 
+            this.SellerClientColumn.DataPropertyName = "SellerClient";
+            this.SellerClientColumn.HeaderText = "SellerClient";
+            this.SellerClientColumn.Name = "SellerClientColumn";
+            this.SellerClientColumn.ReadOnly = true;
+            this.SellerClientColumn.Visible = false;
+            this.SellerClientColumn.Width = 84;
+            // 
             // CaseMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -720,6 +746,18 @@
         private DevComponents.DotNetBar.LabelX lblCurrency;
         private DevComponents.DotNetBar.LabelX lblCount;
         private DevComponents.DotNetBar.LabelX lblDate;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
+        private DevComponents.DotNetBar.LabelX lblClientName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
+        private DevComponents.DotNetBar.LabelX lblCaseCode;
+        private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseNew;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseUpdate;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverNegNew;
         private System.Windows.Forms.DataGridViewTextBoxColumn CaseCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SellerCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SellerColumn;
@@ -739,17 +777,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AppDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CaseMarkColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreateUserColumn;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
-        private DevComponents.DotNetBar.LabelX lblClientName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
-        private DevComponents.DotNetBar.LabelX lblCaseCode;
-        private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseNew;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseUpdate;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDelete;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverNegNew;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BuyerClientColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SellerClientColumn;
     }
 }

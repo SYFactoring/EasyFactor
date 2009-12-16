@@ -1,5 +1,5 @@
 ﻿
-namespace CMBC.EasyFactor.InfoMgr.FactorMgr
+namespace CMBC.EasyFactor.InfoMgr
 {
     using System.Windows.Forms;
 

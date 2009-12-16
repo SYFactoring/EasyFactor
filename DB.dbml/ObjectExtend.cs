@@ -25,6 +25,18 @@ namespace CMBC.EasyFactor.DB.dbml
                 return string.Empty;
             }
         }
+
+        public override string ToString()
+        {
+            if (_ClientNameCN != null)
+            {
+                return _ClientNameCN;
+            }
+            else
+            {
+                return _ClientNameEN_1;
+            }
+        }
     }
     public partial class Currency
     {
@@ -90,6 +102,18 @@ namespace CMBC.EasyFactor.DB.dbml
 
     public partial class Factor
     {
+        public override string ToString()
+        {
+            if (_CompanyNameCN != null)
+            {
+                return _CompanyNameCN;
+            }
+            else
+            {
+                return _CompanyNameEN;
+            }
+        }
+
         public static readonly string CMBC_CODE = "CN01300";
 
         public static Factor FindFactorByCode(string code)

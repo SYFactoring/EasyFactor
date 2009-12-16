@@ -74,10 +74,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             this.UpdateClientControlStatus();
             this.UpdateClientCreditLineControlStatus();
+            this.UpdateContractControlStatus();
             if (opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
                 this.tabControl.SelectedTab = this.tabItemClientCreditLine;
                 this.clientCreditLineBindingSource.DataSource = new ClientCreditLine();
+            }
+            if (opContractType == OpContractType.NEW_CONTRACT)
+            {
+                this.tabControl.SelectedTab = this.tabItemContract;
+                this.contractBindingSource.DataSource = new Contract();
             }
         }
 

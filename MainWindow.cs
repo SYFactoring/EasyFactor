@@ -216,5 +216,11 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(creditCoverNegMgr);
         }
 
+        private void CDANew(object sender, EventArgs e)
+        {
+            CDADetail cdaDetail = new CDADetail(null, CDADetail.OpCDAType.NEW_CDA);
+            cdaDetail.ShowDialog(this);
+        }
+
     }
 }
