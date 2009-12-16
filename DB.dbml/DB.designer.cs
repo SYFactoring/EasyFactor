@@ -96,7 +96,7 @@ namespace CMBC.EasyFactor.DB.dbml
     #endregion
 		
 		public DBDataContext() : 
-				base(global::CMBC.EasyFactor.Properties.Settings.Default.FOSConnectionString1, mappingSource)
+				base(global::CMBC.EasyFactor.Properties.Settings.Default.FOSConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -7415,7 +7415,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Department_Case1", Storage="_CoCases", OtherKey="CoDepartmentCode")]
+		[Association(Name="Department_Case", Storage="_CoCases", OtherKey="CoDepartmentCode")]
 		public EntitySet<Case> CoCases
 		{
 			get
@@ -7428,7 +7428,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Department_Case2", Storage="_OwnerCases", OtherKey="OwnerDepartmentCode")]
+		[Association(Name="Department_Case1", Storage="_OwnerCases", OtherKey="OwnerDepartmentCode")]
 		public EntitySet<Case> OwnerCases
 		{
 			get
@@ -8548,8 +8548,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnBuyerFactorCodeChanged();
     partial void OnInvoiceCurrencyChanging(string value);
     partial void OnInvoiceCurrencyChanged();
-    partial void OnTransationTypeChanging(string value);
-    partial void OnTransationTypeChanged();
+    partial void OnTransactionTypeChanging(string value);
+    partial void OnTransactionTypeChanged();
     partial void OnOperationTypeChanging(string value);
     partial void OnOperationTypeChanged();
     partial void OnOwnerDepartmentCodeChanging(string value);
@@ -8714,7 +8714,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_TransationType", DbType="NVarChar(50)")]
-		public string TransationType
+		public string TransactionType
 		{
 			get
 			{
@@ -8724,11 +8724,11 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._TransationType != value))
 				{
-					this.OnTransationTypeChanging(value);
+					this.OnTransactionTypeChanging(value);
 					this.SendPropertyChanging();
 					this._TransationType = value;
-					this.SendPropertyChanged("TransationType");
-					this.OnTransationTypeChanged();
+					this.SendPropertyChanged("TransactionType");
+					this.OnTransactionTypeChanged();
 				}
 			}
 		}
@@ -8921,7 +8921,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Department_Case1", Storage="_CoDepartment", ThisKey="CoDepartmentCode", IsForeignKey=true)]
+		[Association(Name="Department_Case", Storage="_CoDepartment", ThisKey="CoDepartmentCode", IsForeignKey=true)]
 		public Department CoDepartment
 		{
 			get
@@ -8955,7 +8955,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Department_Case2", Storage="_OwnerDepartment", ThisKey="OwnerDepartmentCode", IsForeignKey=true)]
+		[Association(Name="Department_Case1", Storage="_OwnerDepartment", ThisKey="OwnerDepartmentCode", IsForeignKey=true)]
 		public Department OwnerDepartment
 		{
 			get

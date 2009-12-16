@@ -1,4 +1,4 @@
-﻿namespace CMBC.EasyFactor.CaseMgr.CaseApp
+﻿namespace CMBC.EasyFactor.CaseMgr
 {
     partial class CaseQuery
     {
@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCaseQuery = new DevComponents.DotNetBar.PanelEx();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.lblDate = new DevComponents.DotNetBar.LabelX();
@@ -60,6 +60,7 @@
             this.BuyerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BuyerFactorCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BuyerFactorColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InvoiceCurrencyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TransactionTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OperationTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OwnerDeptColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,7 +94,7 @@
             this.panelCaseQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelCaseQuery.Location = new System.Drawing.Point(0, 0);
             this.panelCaseQuery.Name = "panelCaseQuery";
-            this.panelCaseQuery.Size = new System.Drawing.Size(588, 66);
+            this.panelCaseQuery.Size = new System.Drawing.Size(588, 52);
             this.panelCaseQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelCaseQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelCaseQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -110,7 +111,7 @@
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(498, 21);
+            this.lblCount.Location = new System.Drawing.Point(524, 21);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 10;
@@ -121,7 +122,7 @@
             // 
             // 
             this.lblDate.BackgroundStyle.Class = "";
-            this.lblDate.Location = new System.Drawing.Point(172, 3);
+            this.lblDate.Location = new System.Drawing.Point(198, 3);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(59, 23);
             this.lblDate.TabIndex = 9;
@@ -131,9 +132,9 @@
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(417, 3);
+            this.btnQuery.Location = new System.Drawing.Point(443, 3);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(75, 51);
+            this.btnQuery.Size = new System.Drawing.Size(75, 43);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 8;
             this.btnQuery.Text = "查询";
@@ -150,7 +151,7 @@
             this.comboItem6,
             this.comboItem7,
             this.comboItem8});
-            this.cbCurrency.Location = new System.Drawing.Point(228, 34);
+            this.cbCurrency.Location = new System.Drawing.Point(254, 26);
             this.cbCurrency.Name = "cbCurrency";
             this.cbCurrency.Size = new System.Drawing.Size(93, 20);
             this.cbCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -178,7 +179,7 @@
             // 
             // 
             this.lblCurrency.BackgroundStyle.Class = "";
-            this.lblCurrency.Location = new System.Drawing.Point(172, 32);
+            this.lblCurrency.Location = new System.Drawing.Point(198, 24);
             this.lblCurrency.Name = "lblCurrency";
             this.lblCurrency.Size = new System.Drawing.Size(59, 23);
             this.lblCurrency.TabIndex = 6;
@@ -195,9 +196,9 @@
             this.comboItem2,
             this.comboItem3,
             this.comboItem4});
-            this.cbTransactionType.Location = new System.Drawing.Point(59, 35);
+            this.cbTransactionType.Location = new System.Drawing.Point(59, 27);
             this.cbTransactionType.Name = "cbTransactionType";
-            this.cbTransactionType.Size = new System.Drawing.Size(93, 20);
+            this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
             this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbTransactionType.TabIndex = 5;
             // 
@@ -223,7 +224,7 @@
             // 
             // 
             this.lblTransactionType.BackgroundStyle.Class = "";
-            this.lblTransactionType.Location = new System.Drawing.Point(3, 32);
+            this.lblTransactionType.Location = new System.Drawing.Point(3, 24);
             this.lblTransactionType.Name = "lblTransactionType";
             this.lblTransactionType.Size = new System.Drawing.Size(59, 23);
             this.lblTransactionType.TabIndex = 4;
@@ -237,7 +238,9 @@
             this.diEnd.BackgroundStyle.Class = "DateTimeInputBackground";
             this.diEnd.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.diEnd.ButtonDropDown.Visible = true;
-            this.diEnd.Location = new System.Drawing.Point(313, 6);
+            this.diEnd.Location = new System.Drawing.Point(339, 3);
+            this.diEnd.MaxDate = new System.DateTime(2050, 12, 31, 0, 0, 0, 0);
+            this.diEnd.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             // 
             // 
             // 
@@ -283,7 +286,9 @@
             this.diBegin.BackgroundStyle.Class = "DateTimeInputBackground";
             this.diBegin.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.diBegin.ButtonDropDown.Visible = true;
-            this.diBegin.Location = new System.Drawing.Point(228, 6);
+            this.diBegin.Location = new System.Drawing.Point(254, 3);
+            this.diBegin.MaxDate = new System.DateTime(2050, 12, 31, 0, 0, 0, 0);
+            this.diBegin.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             // 
             // 
             // 
@@ -331,7 +336,7 @@
             this.cbOwnerDepts.ButtonDropDown.Visible = true;
             this.cbOwnerDepts.Location = new System.Drawing.Point(59, 3);
             this.cbOwnerDepts.Name = "cbOwnerDepts";
-            this.cbOwnerDepts.Size = new System.Drawing.Size(93, 23);
+            this.cbOwnerDepts.Size = new System.Drawing.Size(133, 23);
             this.cbOwnerDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbOwnerDepts.TabIndex = 1;
             // 
@@ -352,15 +357,15 @@
             this.dgvCases.AllowUserToAddRows = false;
             this.dgvCases.AllowUserToDeleteRows = false;
             this.dgvCases.AllowUserToOrderColumns = true;
-            this.dgvCases.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCases.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvCases.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCases.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCases.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CaseCodeColumn,
@@ -372,6 +377,7 @@
             this.BuyerColumn,
             this.BuyerFactorCodeColumn,
             this.BuyerFactorColumn,
+            this.InvoiceCurrencyColumn,
             this.TransactionTypeColumn,
             this.OperationTypeColumn,
             this.OwnerDeptColumn,
@@ -381,20 +387,20 @@
             this.AppDateColumn,
             this.CaseMarkColumn,
             this.CreateUserColumn});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCases.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCases.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCases.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvCases.Location = new System.Drawing.Point(0, 66);
+            this.dgvCases.Location = new System.Drawing.Point(0, 52);
             this.dgvCases.Name = "dgvCases";
             this.dgvCases.ReadOnly = true;
-            this.dgvCases.Size = new System.Drawing.Size(588, 319);
+            this.dgvCases.Size = new System.Drawing.Size(588, 333);
             this.dgvCases.TabIndex = 2;
             // 
             // CaseCodeColumn
@@ -403,6 +409,7 @@
             this.CaseCodeColumn.HeaderText = "案件编号";
             this.CaseCodeColumn.Name = "CaseCodeColumn";
             this.CaseCodeColumn.ReadOnly = true;
+            this.CaseCodeColumn.Width = 80;
             // 
             // SellerCodeColumn
             // 
@@ -410,6 +417,7 @@
             this.SellerCodeColumn.HeaderText = "卖方保理代码";
             this.SellerCodeColumn.Name = "SellerCodeColumn";
             this.SellerCodeColumn.ReadOnly = true;
+            this.SellerCodeColumn.Width = 104;
             // 
             // SellerColumn
             // 
@@ -417,6 +425,7 @@
             this.SellerColumn.HeaderText = "卖方名称";
             this.SellerColumn.Name = "SellerColumn";
             this.SellerColumn.ReadOnly = true;
+            this.SellerColumn.Width = 80;
             // 
             // SellerFactorCodeColumn
             // 
@@ -424,6 +433,7 @@
             this.SellerFactorCodeColumn.HeaderText = "卖方保理商代码";
             this.SellerFactorCodeColumn.Name = "SellerFactorCodeColumn";
             this.SellerFactorCodeColumn.ReadOnly = true;
+            this.SellerFactorCodeColumn.Width = 116;
             // 
             // SellerFactorColumn
             // 
@@ -431,6 +441,7 @@
             this.SellerFactorColumn.HeaderText = "卖方保理商";
             this.SellerFactorColumn.Name = "SellerFactorColumn";
             this.SellerFactorColumn.ReadOnly = true;
+            this.SellerFactorColumn.Width = 92;
             // 
             // BuyerCodeColumn
             // 
@@ -438,6 +449,7 @@
             this.BuyerCodeColumn.HeaderText = "买方保理代码";
             this.BuyerCodeColumn.Name = "BuyerCodeColumn";
             this.BuyerCodeColumn.ReadOnly = true;
+            this.BuyerCodeColumn.Width = 104;
             // 
             // BuyerColumn
             // 
@@ -445,6 +457,7 @@
             this.BuyerColumn.HeaderText = "买方名称";
             this.BuyerColumn.Name = "BuyerColumn";
             this.BuyerColumn.ReadOnly = true;
+            this.BuyerColumn.Width = 80;
             // 
             // BuyerFactorCodeColumn
             // 
@@ -452,6 +465,7 @@
             this.BuyerFactorCodeColumn.HeaderText = "买方保理商代码";
             this.BuyerFactorCodeColumn.Name = "BuyerFactorCodeColumn";
             this.BuyerFactorCodeColumn.ReadOnly = true;
+            this.BuyerFactorCodeColumn.Width = 116;
             // 
             // BuyerFactorColumn
             // 
@@ -459,6 +473,15 @@
             this.BuyerFactorColumn.HeaderText = "买方保理商";
             this.BuyerFactorColumn.Name = "BuyerFactorColumn";
             this.BuyerFactorColumn.ReadOnly = true;
+            this.BuyerFactorColumn.Width = 92;
+            // 
+            // InvoiceCurrencyColumn
+            // 
+            this.InvoiceCurrencyColumn.DataPropertyName = "InvoiceCurrency";
+            this.InvoiceCurrencyColumn.HeaderText = "发票币别";
+            this.InvoiceCurrencyColumn.Name = "InvoiceCurrencyColumn";
+            this.InvoiceCurrencyColumn.ReadOnly = true;
+            this.InvoiceCurrencyColumn.Width = 80;
             // 
             // TransactionTypeColumn
             // 
@@ -466,6 +489,7 @@
             this.TransactionTypeColumn.HeaderText = "业务类别";
             this.TransactionTypeColumn.Name = "TransactionTypeColumn";
             this.TransactionTypeColumn.ReadOnly = true;
+            this.TransactionTypeColumn.Width = 80;
             // 
             // OperationTypeColumn
             // 
@@ -473,6 +497,7 @@
             this.OperationTypeColumn.HeaderText = "操作类型";
             this.OperationTypeColumn.Name = "OperationTypeColumn";
             this.OperationTypeColumn.ReadOnly = true;
+            this.OperationTypeColumn.Width = 80;
             // 
             // OwnerDeptColumn
             // 
@@ -480,6 +505,7 @@
             this.OwnerDeptColumn.HeaderText = "业务归属机构";
             this.OwnerDeptColumn.Name = "OwnerDeptColumn";
             this.OwnerDeptColumn.ReadOnly = true;
+            this.OwnerDeptColumn.Width = 104;
             // 
             // OwnerDeptCodeColumn
             // 
@@ -495,6 +521,7 @@
             this.CoDeptColumn.HeaderText = "业务协作机构";
             this.CoDeptColumn.Name = "CoDeptColumn";
             this.CoDeptColumn.ReadOnly = true;
+            this.CoDeptColumn.Width = 104;
             // 
             // CoDeptCodeColumn
             // 
@@ -510,6 +537,7 @@
             this.AppDateColumn.HeaderText = "申请日期";
             this.AppDateColumn.Name = "AppDateColumn";
             this.AppDateColumn.ReadOnly = true;
+            this.AppDateColumn.Width = 80;
             // 
             // CaseMarkColumn
             // 
@@ -517,6 +545,7 @@
             this.CaseMarkColumn.HeaderText = "案件状态";
             this.CaseMarkColumn.Name = "CaseMarkColumn";
             this.CaseMarkColumn.ReadOnly = true;
+            this.CaseMarkColumn.Width = 80;
             // 
             // CreateUserColumn
             // 
@@ -524,6 +553,7 @@
             this.CreateUserColumn.HeaderText = "经办人";
             this.CreateUserColumn.Name = "CreateUserColumn";
             this.CreateUserColumn.ReadOnly = true;
+            this.CreateUserColumn.Width = 68;
             // 
             // CaseQuery
             // 
@@ -574,6 +604,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn BuyerColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn BuyerFactorCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn BuyerFactorColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceCurrencyColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TransactionTypeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn OperationTypeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn OwnerDeptColumn;

@@ -111,7 +111,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientClose = new DevComponents.DotNetBar.ButtonX();
             this.btnClientSave = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelClientStat = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.industryComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cbIndustry = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.comboItem10 = new DevComponents.Editors.ComboItem();
             this.comboItem11 = new DevComponents.Editors.ComboItem();
             this.comboItem12 = new DevComponents.Editors.ComboItem();
@@ -121,7 +121,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.comboItem16 = new DevComponents.Editors.ComboItem();
             this.comboItem17 = new DevComponents.Editors.ComboItem();
             this.comboItem18 = new DevComponents.Editors.ComboItem();
-            this.departmentComboTree = new DevComponents.DotNetBar.Controls.ComboTree();
+            this.cbDepartments = new DevComponents.DotNetBar.Controls.ComboTree();
             this.rMNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.pMNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientLevelComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -137,7 +137,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientCoreNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientCommentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.countryCodeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cbCountryCode = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.postCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.productENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.productCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -1205,8 +1205,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientStat.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelClientStat.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.groupPanelClientStat.Controls.Add(industryLabel);
-            this.groupPanelClientStat.Controls.Add(this.industryComboBox);
-            this.groupPanelClientStat.Controls.Add(this.departmentComboTree);
+            this.groupPanelClientStat.Controls.Add(this.cbIndustry);
+            this.groupPanelClientStat.Controls.Add(this.cbDepartments);
             this.groupPanelClientStat.Controls.Add(rMNameLabel);
             this.groupPanelClientStat.Controls.Add(this.rMNameTextBox);
             this.groupPanelClientStat.Controls.Add(pMNameLabel);
@@ -1252,10 +1252,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // industryComboBox
             // 
-            this.industryComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Industry", true));
-            this.industryComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.industryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.industryComboBox.Items.AddRange(new object[] {
+            this.cbIndustry.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "Industry", true));
+            this.cbIndustry.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbIndustry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbIndustry.Items.AddRange(new object[] {
             this.comboItem10,
             this.comboItem11,
             this.comboItem12,
@@ -1265,11 +1265,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.comboItem16,
             this.comboItem17,
             this.comboItem18});
-            this.industryComboBox.Location = new System.Drawing.Point(435, 7);
-            this.industryComboBox.Name = "industryComboBox";
-            this.industryComboBox.Size = new System.Drawing.Size(121, 21);
-            this.industryComboBox.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.industryComboBox.TabIndex = 11;
+            this.cbIndustry.Location = new System.Drawing.Point(435, 7);
+            this.cbIndustry.Name = "industryComboBox";
+            this.cbIndustry.Size = new System.Drawing.Size(121, 21);
+            this.cbIndustry.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIndustry.TabIndex = 11;
             // 
             // comboItem10
             // 
@@ -1309,17 +1309,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // departmentComboTree
             // 
-            this.departmentComboTree.BackColor = System.Drawing.SystemColors.Window;
+            this.cbDepartments.BackColor = System.Drawing.SystemColors.Window;
             // 
             // 
             // 
-            this.departmentComboTree.BackgroundStyle.Class = "TextBoxBorder";
-            this.departmentComboTree.ButtonDropDown.Visible = true;
-            this.departmentComboTree.Location = new System.Drawing.Point(90, 29);
-            this.departmentComboTree.Name = "departmentComboTree";
-            this.departmentComboTree.Size = new System.Drawing.Size(278, 23);
-            this.departmentComboTree.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.departmentComboTree.TabIndex = 5;
+            this.cbDepartments.BackgroundStyle.Class = "TextBoxBorder";
+            this.cbDepartments.ButtonDropDown.Visible = true;
+            this.cbDepartments.Location = new System.Drawing.Point(90, 29);
+            this.cbDepartments.Name = "departmentComboTree";
+            this.cbDepartments.Size = new System.Drawing.Size(278, 23);
+            this.cbDepartments.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbDepartments.TabIndex = 5;
             // 
             // rMNameTextBox
             // 
@@ -1416,7 +1416,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientBasic.Controls.Add(clientNoLabel);
             this.groupPanelClientBasic.Controls.Add(this.clientEDICodeTextBox);
             this.groupPanelClientBasic.Controls.Add(countryCodeLabel);
-            this.groupPanelClientBasic.Controls.Add(this.countryCodeComboBox);
+            this.groupPanelClientBasic.Controls.Add(this.cbCountryCode);
             this.groupPanelClientBasic.Controls.Add(postCodeLabel);
             this.groupPanelClientBasic.Controls.Add(this.postCodeTextBox);
             this.groupPanelClientBasic.Controls.Add(this.productENTextBox);
@@ -1510,13 +1510,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // countryCodeComboBox
             // 
-            this.countryCodeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "CountryCode", true));
-            this.countryCodeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.countryCodeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.countryCodeComboBox.Location = new System.Drawing.Point(90, 167);
-            this.countryCodeComboBox.Name = "countryCodeComboBox";
-            this.countryCodeComboBox.Size = new System.Drawing.Size(134, 21);
-            this.countryCodeComboBox.TabIndex = 21;
+            this.cbCountryCode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "CountryCode", true));
+            this.cbCountryCode.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCountryCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCountryCode.Location = new System.Drawing.Point(90, 167);
+            this.cbCountryCode.Name = "countryCodeComboBox";
+            this.cbCountryCode.Size = new System.Drawing.Size(134, 21);
+            this.cbCountryCode.TabIndex = 21;
             // 
             // postCodeTextBox
             // 
@@ -2390,7 +2390,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX cityCNTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX addressENTextBox;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelClientContact;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx countryCodeComboBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCountryCode;
         private DevComponents.DotNetBar.Controls.TextBoxX postCodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX contactTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX websiteTextBox;
@@ -2420,7 +2420,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.Editors.ComboItem comboItem4;
         private DevComponents.Editors.ComboItem comboItem5;
         private DevComponents.Editors.ComboItem comboItem6;
-        private DevComponents.DotNetBar.Controls.ComboTree departmentComboTree;
+        private DevComponents.DotNetBar.Controls.ComboTree cbDepartments;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelClientCreditLine;
         private DevComponents.DotNetBar.Controls.TextBoxX creditLineStatusTextBox;
         private System.Windows.Forms.BindingSource clientCreditLineBindingSource;
@@ -2446,7 +2446,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX creditLineCommentTextBox;
         private DevComponents.DotNetBar.LabelX websiteLabel;
         private DevComponents.DotNetBar.LabelX telephoneLabel;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx industryComboBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbIndustry;
         private DevComponents.Editors.ComboItem comboItem9;
         private DevComponents.DotNetBar.Controls.TextBoxX clientCoreNoTextBox;
         private DevComponents.Editors.ComboItem comboItem10;

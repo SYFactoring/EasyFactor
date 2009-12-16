@@ -26,22 +26,11 @@ namespace CMBC.EasyFactor.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.100;Initial Catalog=FOS;Persist Security Info=True;User ID=" +
-            "Factoring;Password=gnirotcaF")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=YIMING\\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User" +
+            " ID=Factoring;Password=gnirotcaF")]
         public string FOSConnectionString {
             get {
                 return ((string)(this["FOSConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=YIMING-PC\\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;U" +
-            "ser ID=Factoring;Password=gnirotcaF")]
-        public string FOSConnectionString1 {
-            get {
-                return ((string)(this["FOSConnectionString1"]));
             }
         }
     }

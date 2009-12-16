@@ -1,5 +1,5 @@
 ﻿
-namespace CMBC.EasyFactor.CaseMgr.CaseApp
+namespace CMBC.EasyFactor.CaseMgr
 {
     using System;
     using System.Linq;
@@ -12,19 +12,31 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
     using DevComponents.DotNetBar.Controls;
     using DevComponents.Editors;
 
-    public partial class CaseAppUI : DevComponents.DotNetBar.Office2007Form
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class CaseApp : DevComponents.DotNetBar.Office2007Form
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private Case appCase;
 
-        public CaseAppUI()
+        /// <summary>
+        /// Initializes a new instance of the CaseApp class.
+        /// </summary>
+        public CaseApp()
         {
             this.InitializeComponent();
             this.InitComboBox();
 
-            appCase = new Case();
+            this.appCase = new Case();
             this.diCaseAppDate.Value = DateTime.Now;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitComboBox()
         {
             this.cbInvoiceCurrency.DataSource = App.Current.DbContext.Currencies.ToList();
@@ -32,6 +44,11 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
             this.cbInvoiceCurrency.ValueMember = "CurrencyCode";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SellerFactorSelect(object sender, EventArgs e)
         {
             string transactionType = cbTransactionType.Text;
@@ -51,6 +68,7 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
                 {
                     this.tbSellerFactor.Text = sellerFactor.CompanyNameCN;
                 }
+
                 this.appCase.SellerFactor = sellerFactor;
                 this.appCase.SellerFactorCode = sellerFactor.FactorCode;
             }
@@ -60,6 +78,11 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BuyerFactorSelect(object sender, EventArgs e)
         {
             string transactionType = cbTransactionType.Text;
@@ -79,6 +102,7 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
                 {
                     this.tbBuyerFactor.Text = buyerFactor.CompanyNameCN;
                 }
+
                 this.appCase.BuyerFactor = buyerFactor;
                 this.appCase.BuyerFactorCode = buyerFactor.FactorCode;
             }
@@ -88,6 +112,11 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SellerSelect(object sender, EventArgs e)
         {
             ClientMgr clientMgr = new ClientMgr(false);
@@ -105,6 +134,11 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BuyerSelect(object sender, EventArgs e)
         {
             ClientMgr clientMgr = new ClientMgr(false);
@@ -122,11 +156,21 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CaseClose(object sender, EventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CaseSave(object sender, EventArgs e)
         {
             this.appCase.InvoiceCurrency = (string)this.cbInvoiceCurrency.SelectedValue;
@@ -138,11 +182,11 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
 
             if (this.appCase.CaseCode == null)
             {
-                this.appCase.CaseCode = GenerateCaseCode();
+                this.appCase.CaseCode = this.GenerateCaseCode();
                 bool isAddOK = true;
                 try
                 {
-                    App.Current.DbContext.Cases.InsertOnSubmit(appCase);
+                    App.Current.DbContext.Cases.InsertOnSubmit(this.appCase);
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e1)
@@ -178,14 +222,18 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private string GenerateCaseCode()
         {
             string caseCode = null;
-            string yearMonth= String.Format("{0:yyyy}{0:MM}", DateTime.Today);
-            switch (this.appCase.TransationType)
-            { 
+            string yearMonth = String.Format("{0:yyyy}{0:MM}", DateTime.Today);
+            switch (this.appCase.TransactionType)
+            {
                 case "国内保理":
-                    caseCode = "LF"+yearMonth + "-" + String.Format("{0:D4}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("LF" + yearMonth)) + 1);
+                    caseCode = "LF" + yearMonth + "-" + String.Format("{0:D4}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("LF" + yearMonth)) + 1);
                     break;
                 case "出口保理":
                     caseCode = "EF" + yearMonth + "-" + String.Format("{0:D4}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("LF" + yearMonth)) + 1);
@@ -200,9 +248,15 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
                     caseCode = string.Empty;
                     break;
             }
+
             return caseCode;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbTransactionType_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboItem selectedItem = (ComboItem)this.cbTransactionType.SelectedItem;
@@ -210,7 +264,8 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
             {
                 return;
             }
-            this.appCase.TransationType = selectedItem.Text;
+
+            this.appCase.TransactionType = selectedItem.Text;
 
             if ("国内保理".Equals(selectedItem.Text))
             {
@@ -228,8 +283,9 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
             }
             else
             {
-                ResetCaseApp();
+                this.ResetCaseApp();
             }
+
             if ("出口保理".Equals(selectedItem.Text))
             {
                 Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
@@ -258,6 +314,11 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbOpType_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboItem selectedItem = (ComboItem)this.cbOpType.SelectedItem;
@@ -265,6 +326,7 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
             {
                 return;
             }
+
             this.appCase.OperationType = selectedItem.Text;
 
             if ("自营".Equals(selectedItem.Text))
@@ -290,6 +352,9 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void ResetCaseApp()
         {
             foreach (Control comp in this.groupPanelCaseApp.Controls)
@@ -298,6 +363,7 @@ namespace CMBC.EasyFactor.CaseMgr.CaseApp
                 {
                     continue;
                 }
+
                 ControlUtil.SetComponetDefault(comp);
             }
         }

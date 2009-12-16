@@ -10,7 +10,7 @@ namespace CMBC.EasyFactor.InvoiceMgr.ContractInfo
     using System.Drawing;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.CaseMgr.ContractMgr;
+    using CMBC.EasyFactor.CaseMgr.CDAMgr;
 
     /// <summary>
     /// 
@@ -102,7 +102,7 @@ namespace CMBC.EasyFactor.InvoiceMgr.ContractInfo
         private void SelectContract(object sender, EventArgs e)
         {
             Form selectForm = new Form();
-            ContractMgrUI contractPanel = new ContractMgrUI(false, selectForm);
+            CDAMgr contractPanel = new CDAMgr(false, selectForm);
             contractPanel.Dock = DockStyle.Fill;
             selectForm.Size = new Size(800, 600);
             selectForm.StartPosition = FormStartPosition.CenterParent;

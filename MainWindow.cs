@@ -8,14 +8,15 @@ namespace CMBC.EasyFactor
 {
     using System;
     using System.Windows.Forms;
-    using CMBC.EasyFactor.CaseMgr.CaseApp;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.DepartmentMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.InvoiceMgr.InvoiceAssign;
+    using CMBC.EasyFactor.CaseMgr.ContractMgr;
     using CMBC.EasyFactor.Help.About;
+    using CMBC.EasyFactor.CaseMgr;
 
     /// <summary>
     /// Main Window Form
@@ -159,7 +160,7 @@ namespace CMBC.EasyFactor
         private void CaseApplication(object sender, EventArgs e)
         {
             this.ClearDetailPanel();
-            CaseAppUI caseAppUI = new CaseAppUI();
+            CaseApp caseAppUI = new CaseApp();
             caseAppUI.ShowDialog(this);
         }
 
@@ -202,6 +203,12 @@ namespace CMBC.EasyFactor
             {
                 this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Windows7Blue;
             }
+        }
+
+        private void ContractMgr(object sender, EventArgs e)
+        {
+            ContractMgr contractMgr = new ContractMgr(true);
+            this.SetDetailPanel(contractMgr);
         }
 
     }

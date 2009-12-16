@@ -91,17 +91,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="CaseMgr\CaseApp\CaseAppUI.cs">
+    <Compile Include="CaseMgr\CaseApp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CaseMgr\CaseApp\CaseAppUI.Designer.cs">
-      <DependentUpon>CaseAppUI.cs</DependentUpon>
+    <Compile Include="CaseMgr\CaseApp.Designer.cs">
+      <DependentUpon>CaseApp.cs</DependentUpon>
     </Compile>
-    <Compile Include="CaseMgr\CaseApp\CaseQuery.cs">
+    <Compile Include="CaseMgr\CaseQuery.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CaseMgr\CaseApp\CaseQuery.Designer.cs">
+    <Compile Include="CaseMgr\CaseQuery.Designer.cs">
       <DependentUpon>CaseQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CaseMgr\ContractMgr\ContractDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CaseMgr\ContractMgr\ContractDetail.Designer.cs">
+      <DependentUpon>ContractDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CaseMgr\ContractMgr\ContractMgr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CaseMgr\ContractMgr\ContractMgr.Designer.cs">
+      <DependentUpon>ContractMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="DB.dbml\BaseObject.cs" />
     <Compile Include="DB.dbml\DB.cs">
@@ -131,17 +143,17 @@
     <Compile Include="InfoMgr\ClientMgr\ClientMgr.Designer.cs">
       <DependentUpon>ClientMgr.cs</DependentUpon>
     </Compile>
-    <Compile Include="CaseMgr\ContractMgr\ContractDetailUI.cs">
+    <Compile Include="CaseMgr\CDAMgr\CDADetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CaseMgr\ContractMgr\ContractDetailUI.Designer.cs">
-      <DependentUpon>ContractDetailUI.cs</DependentUpon>
+    <Compile Include="CaseMgr\CDAMgr\CDADetail.Designer.cs">
+      <DependentUpon>CDADetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="CaseMgr\ContractMgr\ContractMgrUI.cs">
+    <Compile Include="CaseMgr\CDAMgr\CDAMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CaseMgr\ContractMgr\ContractMgrUI.Designer.cs">
-      <DependentUpon>ContractMgrUI.cs</DependentUpon>
+    <Compile Include="CaseMgr\CDAMgr\CDAMgr.Designer.cs">
+      <DependentUpon>CDAMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="InfoMgr\DepartmentMgr\DepartmentMgr.cs">
       <SubType>UserControl</SubType>
@@ -220,13 +232,19 @@
     <None Include="DB.dbml\DB.dbml.layout">
       <DependentUpon>DB.dbml</DependentUpon>
     </None>
-    <EmbeddedResource Include="CaseMgr\CaseApp\CaseAppUI.resx">
-      <DependentUpon>CaseAppUI.cs</DependentUpon>
+    <EmbeddedResource Include="CaseMgr\CaseApp.resx">
+      <DependentUpon>CaseApp.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CaseMgr\CaseApp\CaseQuery.resx">
+    <EmbeddedResource Include="CaseMgr\CaseQuery.resx">
       <DependentUpon>CaseQuery.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CaseMgr\ContractMgr\ContractDetail.resx">
+      <DependentUpon>ContractDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CaseMgr\ContractMgr\ContractMgr.resx">
+      <DependentUpon>ContractMgr.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Help\About\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
@@ -240,12 +258,12 @@
       <DependentUpon>ClientMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CaseMgr\ContractMgr\ContractDetailUI.resx">
-      <DependentUpon>ContractDetailUI.cs</DependentUpon>
+    <EmbeddedResource Include="CaseMgr\CDAMgr\CDADetail.resx">
+      <DependentUpon>CDADetail.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CaseMgr\ContractMgr\ContractMgrUI.resx">
-      <DependentUpon>ContractMgrUI.cs</DependentUpon>
+    <EmbeddedResource Include="CaseMgr\CDAMgr\CDAMgr.resx">
+      <DependentUpon>CDAMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\DepartmentMgr\DepartmentMgr.resx">
@@ -434,7 +452,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CaseMgr\CDA\" />
     <Folder Include="CaseMgr\CreditCoverNeg\" />
     <Folder Include="Help\CheckForUpdates\" />
     <Folder Include="Help\Content\" />

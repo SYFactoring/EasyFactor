@@ -38,7 +38,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="isEditable">true if editable</param>
         public ClientMgr(bool isEditable)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.isEditable = isEditable;
             this.UpdateEditableStatus();
             ControlUtil.SetDoubleBuffered(this.dgvClients);

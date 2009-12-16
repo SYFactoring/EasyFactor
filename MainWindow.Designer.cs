@@ -117,6 +117,15 @@ namespace CMBC.EasyFactor
         private void InitializeComponent()
         {
             this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
+            this.ribbonPanelCaseQuery = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBarQuery = new DevComponents.DotNetBar.RibbonBar();
+            this.btnCaseQuery = new DevComponents.DotNetBar.ButtonItem();
+            this.btnOverDueQuery = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarCaseMgr = new DevComponents.DotNetBar.RibbonBar();
+            this.btnCaseApplication = new DevComponents.DotNetBar.ButtonItem();
+            this.btnCreditCoverNego = new DevComponents.DotNetBar.ButtonItem();
+            this.btnContract = new DevComponents.DotNetBar.ButtonItem();
+            this.btnCDA = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanelInfoMgr = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarUserMgr = new DevComponents.DotNetBar.RibbonBar();
             this.btnUserMgr = new DevComponents.DotNetBar.ButtonItem();
@@ -158,15 +167,6 @@ namespace CMBC.EasyFactor
             this.btnGuaranteePayment = new DevComponents.DotNetBar.ButtonItem();
             this.btnReassignment = new DevComponents.DotNetBar.ButtonItem();
             this.btnDispute = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonPanelCaseQuery = new DevComponents.DotNetBar.RibbonPanel();
-            this.ribbonBarQuery = new DevComponents.DotNetBar.RibbonBar();
-            this.btnCaseQuery = new DevComponents.DotNetBar.ButtonItem();
-            this.btnOverDueQuery = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonBarCaseMgr = new DevComponents.DotNetBar.RibbonBar();
-            this.btnCaseApplication = new DevComponents.DotNetBar.ButtonItem();
-            this.btnCreditCoverNego = new DevComponents.DotNetBar.ButtonItem();
-            this.btnContract = new DevComponents.DotNetBar.ButtonItem();
-            this.btnCDA = new DevComponents.DotNetBar.ButtonItem();
             this.itemInfoMgr = new DevComponents.DotNetBar.RibbonTabItem();
             this.itemCaseInfo = new DevComponents.DotNetBar.RibbonTabItem();
             this.itemAccountsReceivableMgr = new DevComponents.DotNetBar.RibbonTabItem();
@@ -203,11 +203,11 @@ namespace CMBC.EasyFactor
             this.lblCurrentUser = new DevComponents.DotNetBar.LabelItem();
             this.ribbonDetailPanel = new DevComponents.DotNetBar.Ribbon.RibbonClientPanel();
             this.ribbonControl.SuspendLayout();
+            this.ribbonPanelCaseQuery.SuspendLayout();
             this.ribbonPanelInfoMgr.SuspendLayout();
             this.ribbonPanelHelp.SuspendLayout();
             this.ribbonPanelReport.SuspendLayout();
             this.ribbonPanelInvoiceMgr.SuspendLayout();
-            this.ribbonPanelCaseQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusbar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -243,6 +243,133 @@ namespace CMBC.EasyFactor
             this.ribbonControl.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonControl.TabGroupHeight = 14;
             this.ribbonControl.TabIndex = 0;
+            // 
+            // ribbonPanelCaseQuery
+            // 
+            this.ribbonPanelCaseQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanelCaseQuery.Controls.Add(this.ribbonBarQuery);
+            this.ribbonPanelCaseQuery.Controls.Add(this.ribbonBarCaseMgr);
+            this.ribbonPanelCaseQuery.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ribbonPanelCaseQuery.Location = new System.Drawing.Point(0, 56);
+            this.ribbonPanelCaseQuery.Name = "ribbonPanelCaseQuery";
+            this.ribbonPanelCaseQuery.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.ribbonPanelCaseQuery.Size = new System.Drawing.Size(1000, 96);
+            // 
+            // 
+            // 
+            this.ribbonPanelCaseQuery.Style.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonPanelCaseQuery.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonPanelCaseQuery.StyleMouseOver.Class = "";
+            this.ribbonPanelCaseQuery.TabIndex = 4;
+            // 
+            // ribbonBarQuery
+            // 
+            this.ribbonBarQuery.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarQuery.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarQuery.BackgroundStyle.Class = "";
+            this.ribbonBarQuery.ContainerControlProcessDialogKey = true;
+            this.ribbonBarQuery.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnCaseQuery,
+            this.btnOverDueQuery});
+            this.ribbonBarQuery.Location = new System.Drawing.Point(264, 0);
+            this.ribbonBarQuery.Name = "ribbonBarQuery";
+            this.ribbonBarQuery.Size = new System.Drawing.Size(179, 93);
+            this.ribbonBarQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarQuery.TabIndex = 1;
+            this.ribbonBarQuery.Text = "查询";
+            // 
+            // 
+            // 
+            this.ribbonBarQuery.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarQuery.TitleStyleMouseOver.Class = "";
+            // 
+            // btnCaseQuery
+            // 
+            this.btnCaseQuery.Name = "btnCaseQuery";
+            this.btnCaseQuery.SubItemsExpandWidth = 14;
+            this.btnCaseQuery.Text = "案件查询";
+            this.btnCaseQuery.Click += new System.EventHandler(this.CaseQuery);
+            // 
+            // btnOverDueQuery
+            // 
+            this.btnOverDueQuery.Name = "btnOverDueQuery";
+            this.btnOverDueQuery.SubItemsExpandWidth = 14;
+            this.btnOverDueQuery.Text = "逾期查询";
+            // 
+            // ribbonBarCaseMgr
+            // 
+            this.ribbonBarCaseMgr.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarCaseMgr.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarCaseMgr.BackgroundStyle.Class = "";
+            this.ribbonBarCaseMgr.ContainerControlProcessDialogKey = true;
+            this.ribbonBarCaseMgr.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarCaseMgr.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnCaseApplication,
+            this.btnCreditCoverNego,
+            this.btnContract,
+            this.btnCDA});
+            this.ribbonBarCaseMgr.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarCaseMgr.Name = "ribbonBarCaseMgr";
+            this.ribbonBarCaseMgr.Size = new System.Drawing.Size(261, 93);
+            this.ribbonBarCaseMgr.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarCaseMgr.TabIndex = 0;
+            this.ribbonBarCaseMgr.Text = "案件信息管理";
+            // 
+            // 
+            // 
+            this.ribbonBarCaseMgr.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarCaseMgr.TitleStyleMouseOver.Class = "";
+            // 
+            // btnCaseApplication
+            // 
+            this.btnCaseApplication.Name = "btnCaseApplication";
+            this.btnCaseApplication.SubItemsExpandWidth = 14;
+            this.btnCaseApplication.Text = "案件申请";
+            this.btnCaseApplication.Click += new System.EventHandler(this.CaseApplication);
+            // 
+            // btnCreditCoverNego
+            // 
+            this.btnCreditCoverNego.Name = "btnCreditCoverNego";
+            this.btnCreditCoverNego.SubItemsExpandWidth = 14;
+            this.btnCreditCoverNego.Text = "额度申请";
+            // 
+            // btnContract
+            // 
+            this.btnContract.Name = "btnContract";
+            this.btnContract.SubItemsExpandWidth = 14;
+            this.btnContract.Text = "主合同";
+            this.btnContract.Click += new System.EventHandler(this.ContractMgr);
+            // 
+            // btnCDA
+            // 
+            this.btnCDA.Name = "btnCDA";
+            this.btnCDA.SubItemsExpandWidth = 14;
+            this.btnCDA.Text = "额度通知书";
             // 
             // ribbonPanelInfoMgr
             // 
@@ -813,132 +940,6 @@ namespace CMBC.EasyFactor
             this.btnDispute.SubItemsExpandWidth = 14;
             this.btnDispute.Text = "商纠处理";
             // 
-            // ribbonPanelCaseQuery
-            // 
-            this.ribbonPanelCaseQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanelCaseQuery.Controls.Add(this.ribbonBarQuery);
-            this.ribbonPanelCaseQuery.Controls.Add(this.ribbonBarCaseMgr);
-            this.ribbonPanelCaseQuery.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanelCaseQuery.Location = new System.Drawing.Point(0, 56);
-            this.ribbonPanelCaseQuery.Name = "ribbonPanelCaseQuery";
-            this.ribbonPanelCaseQuery.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanelCaseQuery.Size = new System.Drawing.Size(1000, 96);
-            // 
-            // 
-            // 
-            this.ribbonPanelCaseQuery.Style.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonPanelCaseQuery.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonPanelCaseQuery.StyleMouseOver.Class = "";
-            this.ribbonPanelCaseQuery.TabIndex = 4;
-            // 
-            // ribbonBarQuery
-            // 
-            this.ribbonBarQuery.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarQuery.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarQuery.BackgroundStyle.Class = "";
-            this.ribbonBarQuery.ContainerControlProcessDialogKey = true;
-            this.ribbonBarQuery.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnCaseQuery,
-            this.btnOverDueQuery});
-            this.ribbonBarQuery.Location = new System.Drawing.Point(264, 0);
-            this.ribbonBarQuery.Name = "ribbonBarQuery";
-            this.ribbonBarQuery.Size = new System.Drawing.Size(179, 93);
-            this.ribbonBarQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarQuery.TabIndex = 1;
-            this.ribbonBarQuery.Text = "查询";
-            // 
-            // 
-            // 
-            this.ribbonBarQuery.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarQuery.TitleStyleMouseOver.Class = "";
-            // 
-            // btnCaseQuery
-            // 
-            this.btnCaseQuery.Name = "btnCaseQuery";
-            this.btnCaseQuery.SubItemsExpandWidth = 14;
-            this.btnCaseQuery.Text = "案件查询";
-            this.btnCaseQuery.Click += new System.EventHandler(this.CaseQuery);
-            // 
-            // btnOverDueQuery
-            // 
-            this.btnOverDueQuery.Name = "btnOverDueQuery";
-            this.btnOverDueQuery.SubItemsExpandWidth = 14;
-            this.btnOverDueQuery.Text = "逾期查询";
-            // 
-            // ribbonBarCaseMgr
-            // 
-            this.ribbonBarCaseMgr.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarCaseMgr.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarCaseMgr.BackgroundStyle.Class = "";
-            this.ribbonBarCaseMgr.ContainerControlProcessDialogKey = true;
-            this.ribbonBarCaseMgr.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarCaseMgr.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnCaseApplication,
-            this.btnCreditCoverNego,
-            this.btnContract,
-            this.btnCDA});
-            this.ribbonBarCaseMgr.Location = new System.Drawing.Point(3, 0);
-            this.ribbonBarCaseMgr.Name = "ribbonBarCaseMgr";
-            this.ribbonBarCaseMgr.Size = new System.Drawing.Size(261, 93);
-            this.ribbonBarCaseMgr.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarCaseMgr.TabIndex = 0;
-            this.ribbonBarCaseMgr.Text = "案件信息管理";
-            // 
-            // 
-            // 
-            this.ribbonBarCaseMgr.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarCaseMgr.TitleStyleMouseOver.Class = "";
-            // 
-            // btnCaseApplication
-            // 
-            this.btnCaseApplication.Name = "btnCaseApplication";
-            this.btnCaseApplication.SubItemsExpandWidth = 14;
-            this.btnCaseApplication.Text = "案件申请";
-            this.btnCaseApplication.Click += new System.EventHandler(this.CaseApplication);
-            // 
-            // btnCreditCoverNego
-            // 
-            this.btnCreditCoverNego.Name = "btnCreditCoverNego";
-            this.btnCreditCoverNego.SubItemsExpandWidth = 14;
-            this.btnCreditCoverNego.Text = "额度申请";
-            // 
-            // btnContract
-            // 
-            this.btnContract.Name = "btnContract";
-            this.btnContract.SubItemsExpandWidth = 14;
-            this.btnContract.Text = "主合同";
-            // 
-            // btnCDA
-            // 
-            this.btnCDA.Name = "btnCDA";
-            this.btnCDA.SubItemsExpandWidth = 14;
-            this.btnCDA.Text = "额度通知书";
-            // 
             // itemInfoMgr
             // 
             this.itemInfoMgr.Name = "itemInfoMgr";
@@ -1238,11 +1239,11 @@ namespace CMBC.EasyFactor
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ribbonControl.ResumeLayout(false);
             this.ribbonControl.PerformLayout();
+            this.ribbonPanelCaseQuery.ResumeLayout(false);
             this.ribbonPanelInfoMgr.ResumeLayout(false);
             this.ribbonPanelHelp.ResumeLayout(false);
             this.ribbonPanelReport.ResumeLayout(false);
             this.ribbonPanelInvoiceMgr.ResumeLayout(false);
-            this.ribbonPanelCaseQuery.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.statusbar)).EndInit();
             this.ResumeLayout(false);
 

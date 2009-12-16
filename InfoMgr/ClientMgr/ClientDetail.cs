@@ -104,15 +104,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private void InitComboBox()
         {
-            this.countryCodeComboBox.DataSource = App.Current.DbContext.Countries;
-            this.countryCodeComboBox.DisplayMember = "CountryFormatCN";
-            this.countryCodeComboBox.ValueMember = "CountryCode";
-            this.countryCodeComboBox.SelectedIndex = -1;
+            this.cbCountryCode.DataSource = App.Current.DbContext.Countries;
+            this.cbCountryCode.DisplayMember = "CountryFormatCN";
+            this.cbCountryCode.ValueMember = "CountryCode";
+            this.cbCountryCode.SelectedIndex = -1;
 
-            this.departmentComboTree.DataSource = App.Current.DbContext.Departments;
-            this.departmentComboTree.DisplayMembers = "DepartmentName";
-            this.departmentComboTree.GroupingMembers = "Domain";
-            this.departmentComboTree.SelectedIndex = -1;
+            this.cbDepartments.DataSource = App.Current.DbContext.Departments;
+            this.cbDepartments.DisplayMembers = "DepartmentName";
+            this.cbDepartments.GroupingMembers = "Domain";
+            this.cbDepartments.SelectedIndex = -1;
 
             this.creditLineCurrencyComboBox.DataSource = App.Current.DbContext.Currencies;
             this.creditLineCurrencyComboBox.DisplayMember = "CurrencyFormat";
@@ -197,22 +197,22 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client.ClientEDICode != null)
             {
-                foreach (Country country in this.countryCodeComboBox.Items)
+                foreach (Country country in this.cbCountryCode.Items)
                 {
                     if (country.CountryCode.Equals(client.CountryCode))
                     {
-                        this.countryCodeComboBox.SelectedItem = country;
+                        this.cbCountryCode.SelectedItem = country;
                         break;
                     }
                 }
 
                 int deptIndex = -1;
-                foreach (Department dept in (IQueryable<Department>)this.departmentComboTree.DataSource)
+                foreach (Department dept in (IQueryable<Department>)this.cbDepartments.DataSource)
                 {
                     deptIndex++;
                     if (dept.DepartmentCode.Equals(client.BranchCode))
                     {
-                        this.departmentComboTree.SelectedIndex = deptIndex;
+                        this.cbDepartments.SelectedIndex = deptIndex;
                         break;
                     }
                 }
@@ -286,9 +286,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             client.ClientType = this.clientTypeComboBox.Text;
             client.ClientLevel = this.clientLevelComboBox.Text;
             client.IsGroup = this.isGroupComboBox.Text;
-            client.Department = (Department)this.departmentComboTree.SelectedValue;
-            client.CountryCode = (string)this.countryCodeComboBox.SelectedValue;
-            client.Industry = this.industryComboBox.Text;
+            client.Department = (Department)this.cbDepartments.SelectedValue;
+            client.CountryCode = (string)this.cbCountryCode.SelectedValue;
+            client.Industry = this.cbIndustry.Text;
 
             if (this.opClientType == OpClientType.NEW_CLIENT)
             {

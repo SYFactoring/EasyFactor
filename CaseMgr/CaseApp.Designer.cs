@@ -1,6 +1,6 @@
-﻿namespace CMBC.EasyFactor.CaseMgr.CaseApp
+﻿namespace CMBC.EasyFactor.CaseMgr
 {
-    partial class CaseAppUI
+    partial class CaseApp
     {
         /// <summary>
         /// Required designer variable.

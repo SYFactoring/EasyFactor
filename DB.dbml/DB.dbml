@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=YIMING-PC\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=YIMING\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[User]" Member="Users">
     <Type Name="User">
       <Column Name="UserID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -326,8 +326,8 @@
       <Column Name="Fax_2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Department_Client" Member="Clients" OtherKey="BranchCode" Type="Client" />
       <Association Name="Department_DepartmentAccount" Member="DepartmentAccounts" OtherKey="DepartmentCode" Type="DepartmentAccount" />
-      <Association Name="Department_Case1" Member="CoCases" OtherKey="CoDepartmentCode" Type="Case" />
-      <Association Name="Department_Case2" Member="OwnerCases" OtherKey="OwnerDepartmentCode" Type="Case" />
+      <Association Name="Department_Case" Member="CoCases" OtherKey="CoDepartmentCode" Type="Case" />
+      <Association Name="Department_Case1" Member="OwnerCases" OtherKey="OwnerDepartmentCode" Type="Case" />
     </Type>
   </Table>
   <Table Name="dbo.ClientCreditLine" Member="ClientCreditLines">
@@ -382,7 +382,7 @@
       <Column Name="BuyerCode" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
       <Column Name="BuyerFactorCode" Type="System.String" DbType="Char(7)" CanBeNull="true" />
       <Column Name="InvoiceCurrency" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
-      <Column Name="TransationType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TransactionType" Storage="_TransationType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="OperationType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="OwnerDepartmentCode" Type="System.String" DbType="VarChar(14)" CanBeNull="true" />
       <Column Name="CoDepartmentCode" Type="System.String" DbType="VarChar(14)" CanBeNull="true" />
@@ -392,8 +392,8 @@
       <Association Name="Case_CDA" Member="CDAs" OtherKey="CaseCode" Type="CDA" />
       <Association Name="Case_CreditCoverNegotiation" Member="CreditCoverNegotiations" OtherKey="CaseCode" Type="CreditCoverNegotiation" />
       <Association Name="Client_Case" Member="BuyerClient" ThisKey="BuyerCode" Type="Client" IsForeignKey="true" />
-      <Association Name="Department_Case1" Member="CoDepartment" ThisKey="CoDepartmentCode" Type="Department" IsForeignKey="true" />
-      <Association Name="Department_Case2" Member="OwnerDepartment" ThisKey="OwnerDepartmentCode" Type="Department" IsForeignKey="true" />
+      <Association Name="Department_Case" Member="CoDepartment" ThisKey="CoDepartmentCode" Type="Department" IsForeignKey="true" />
+      <Association Name="Department_Case1" Member="OwnerDepartment" ThisKey="OwnerDepartmentCode" Type="Department" IsForeignKey="true" />
       <Association Name="Client_Case1" Member="SellerClient" ThisKey="SellerCode" Type="Client" IsForeignKey="true" />
       <Association Name="Factor_Case" Member="BuyerFactor" ThisKey="BuyerFactorCode" Type="Factor" IsForeignKey="true" />
       <Association Name="Factor_Case1" Member="SellerFactor" ThisKey="SellerFactorCode" Type="Factor" IsForeignKey="true" />
