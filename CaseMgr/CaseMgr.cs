@@ -5,6 +5,8 @@ namespace CMBC.EasyFactor.CaseMgr
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.DB.dbml;
+    using System.Data.SqlClient;
 
     /// <summary>
     /// 
@@ -32,6 +34,24 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCurrency.DataSource = App.Current.DbContext.Currencies;
             this.cbCurrency.DisplayMember = "CurrencyName";
             this.cbCurrency.ValueMember = "CurrencyCode";
+        }
+
+        /// <summary>
+        /// Gets or sets owner form
+        /// </summary>
+        public Form OwnerForm
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets selected Case
+        /// </summary>
+        public Case Selected
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -77,6 +97,147 @@ namespace CMBC.EasyFactor.CaseMgr
             this.bs.DataSource = queryResult;
             this.dgvCases.DataSource = this.bs;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+        }
+
+        /// <summary>
+        /// Create a new case
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void NewCase(object sender, System.EventArgs e)
+        {
+            CaseDetail caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.NEW_CASE,CaseDetail.OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG);
+            caseDetail.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// Update selected case
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void UpdateCase(object sender, System.EventArgs e)
+        {
+            if (this.dgvCases.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string cid = (string)dgvCases["CaseCodeColumn", dgvCases.SelectedRows[0].Index].Value;
+            if (cid != null)
+            {
+                Case selectedCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == cid);
+                if (selectedCase != null)
+                {
+                    CaseDetail caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.UPDATE_CASE, CaseDetail.OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG);
+                    caseDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Delete selected case
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void DeleteCase(object sender, System.EventArgs e)
+        {
+            if (this.dgvCases.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string cid = (string)dgvCases["CaseCodeColumn", dgvCases.SelectedRows[0].Index].Value;
+            if (cid != null)
+            {
+                Case selectedCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == cid);
+                if (selectedCase != null)
+                {
+                    if (MessageBox.Show("是否打算删除案件: " + selectedCase.CaseCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    {
+                        App.Current.DbContext.Cases.DeleteOnSubmit(selectedCase);
+                        try
+                        {
+                            App.Current.DbContext.SubmitChanges();
+                        }
+                        catch (SqlException)
+                        {
+                            MessageBox.Show("不能删除此案件", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        dgvCases.Rows.RemoveAt(dgvCases.SelectedRows[0].Index);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Select case and close the query form
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void SelectCase(object sender, System.EventArgs e)
+        {
+            if (this.dgvCases.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string cid = (string)dgvCases["CaseCodeColumn", dgvCases.SelectedRows[0].Index].Value;
+            if (cid != null)
+            {
+                Case selectedCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == cid);
+                if (selectedCase != null)
+                {
+                    this.Selected = selectedCase;
+                    if (this.OwnerForm != null)
+                    {
+                        this.OwnerForm.DialogResult = DialogResult.Yes;
+                        this.OwnerForm.Close();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Show detail info of selected case
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void DetailCase(object sender, System.EventArgs e)
+        {
+            if (this.dgvCases.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string cid = (string)dgvCases["CaseCodeColumn", dgvCases.SelectedRows[0].Index].Value;
+            if (cid != null)
+            {
+                Case selectedCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == cid);
+                if (selectedCase != null)
+                {
+                    CaseDetail caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.DETAIL_CASE,CaseDetail.OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG);
+                    caseDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Event handler when cell double clicked
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.OwnerForm == null)
+            {
+                this.DetailCase(sender, e);
+            }
+            else
+            {
+                this.SelectCase(sender, e);
+            }
         }
     }
 }

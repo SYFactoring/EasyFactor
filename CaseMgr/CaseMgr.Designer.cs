@@ -169,7 +169,7 @@
             this.comboItem6,
             this.comboItem7,
             this.comboItem8});
-            this.cbCurrency.Location = new System.Drawing.Point(254, 26);
+            this.cbCurrency.Location = new System.Drawing.Point(254, 28);
             this.cbCurrency.Name = "cbCurrency";
             this.cbCurrency.Size = new System.Drawing.Size(93, 20);
             this.cbCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -197,7 +197,7 @@
             // 
             // 
             this.lblCurrency.BackgroundStyle.Class = "";
-            this.lblCurrency.Location = new System.Drawing.Point(198, 24);
+            this.lblCurrency.Location = new System.Drawing.Point(198, 29);
             this.lblCurrency.Name = "lblCurrency";
             this.lblCurrency.Size = new System.Drawing.Size(59, 23);
             this.lblCurrency.TabIndex = 6;
@@ -214,7 +214,7 @@
             this.comboItem2,
             this.comboItem3,
             this.comboItem4});
-            this.cbTransactionType.Location = new System.Drawing.Point(59, 27);
+            this.cbTransactionType.Location = new System.Drawing.Point(59, 29);
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
             this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -242,7 +242,7 @@
             // 
             // 
             this.lblTransactionType.BackgroundStyle.Class = "";
-            this.lblTransactionType.Location = new System.Drawing.Point(3, 24);
+            this.lblTransactionType.Location = new System.Drawing.Point(3, 26);
             this.lblTransactionType.Name = "lblTransactionType";
             this.lblTransactionType.Size = new System.Drawing.Size(59, 23);
             this.lblTransactionType.TabIndex = 4;
@@ -580,7 +580,7 @@
             // 
             // 
             this.lblCaseCode.BackgroundStyle.Class = "";
-            this.lblCaseCode.Location = new System.Drawing.Point(3, 48);
+            this.lblCaseCode.Location = new System.Drawing.Point(3, 51);
             this.lblCaseCode.Name = "lblCaseCode";
             this.lblCaseCode.Size = new System.Drawing.Size(59, 23);
             this.lblCaseCode.TabIndex = 11;
@@ -614,7 +614,7 @@
             // 
             // 
             this.lblClientName.BackgroundStyle.Class = "";
-            this.lblClientName.Location = new System.Drawing.Point(198, 48);
+            this.lblClientName.Location = new System.Drawing.Point(198, 51);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(59, 23);
             this.lblClientName.TabIndex = 13;
@@ -638,12 +638,14 @@
             this.menuItemCaseSelect.Name = "menuItemCaseSelect";
             this.menuItemCaseSelect.Size = new System.Drawing.Size(146, 22);
             this.menuItemCaseSelect.Text = "选定案件";
+            this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
             // 
             // menuItemCaseDetail
             // 
             this.menuItemCaseDetail.Name = "menuItemCaseDetail";
             this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
             this.menuItemCaseDetail.Text = "详细信息";
+            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
             // 
             // toolStripSeparator
             // 
@@ -655,18 +657,21 @@
             this.menuItemCaseNew.Name = "menuItemCaseNew";
             this.menuItemCaseNew.Size = new System.Drawing.Size(146, 22);
             this.menuItemCaseNew.Text = "新建案件";
+            this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
             // 
             // menuItemCaseUpdate
             // 
             this.menuItemCaseUpdate.Name = "menuItemCaseUpdate";
             this.menuItemCaseUpdate.Size = new System.Drawing.Size(146, 22);
             this.menuItemCaseUpdate.Text = "更新案件";
+            this.menuItemCaseUpdate.Click += new System.EventHandler(this.UpdateCase);
             // 
             // menuItemCaseDelete
             // 
             this.menuItemCaseDelete.Name = "menuItemCaseDelete";
             this.menuItemCaseDelete.Size = new System.Drawing.Size(146, 22);
             this.menuItemCaseDelete.Text = "删除案件";
+            this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
             // 
             // menuItemCreditCoverNegNew
             // 
