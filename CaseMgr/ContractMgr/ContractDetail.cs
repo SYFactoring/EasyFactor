@@ -5,6 +5,8 @@ namespace CMBC.EasyFactor.CaseMgr.ContractMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.InfoMgr.ClientMgr;
+    using CMBC.EasyFactor.InfoMgr.FactorMgr;
 
     /// <summary>
     /// 
@@ -21,7 +23,7 @@ namespace CMBC.EasyFactor.CaseMgr.ContractMgr
         /// </summary>
         /// <param name="contract"></param>
         /// <param name="opContractType"></param>
-        public ContractDetail(Contract contract,OpContractType opContractType)
+        public ContractDetail(Contract contract, OpContractType opContractType)
         {
             this.InitializeComponent();
             this.opContractType = opContractType;
@@ -66,7 +68,7 @@ namespace CMBC.EasyFactor.CaseMgr.ContractMgr
         {
             if (this.opContractType == OpContractType.DETAIL_CONTRACT)
             {
-                foreach(Control comp in this.groupPanelContract.Controls)
+                foreach (Control comp in this.groupPanelContract.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
@@ -90,7 +92,7 @@ namespace CMBC.EasyFactor.CaseMgr.ContractMgr
             Contract contract = (Contract)this.contractBindingSource.DataSource;
             if (contract.ClientEDICode != null)
             {
-                this.tbClientName.Text = contract.Client.CityCN;
+                this.tbClientName.Text = contract.Client.ClientNameCN;
             }
         }
 
@@ -117,6 +119,7 @@ namespace CMBC.EasyFactor.CaseMgr.ContractMgr
 
             if (this.opContractType == OpContractType.NEW_CONTRACT)
             {
+                contract.ContractCode = GenerateContractCode();
                 bool isAddOK = true;
                 try
                 {
@@ -180,6 +183,35 @@ namespace CMBC.EasyFactor.CaseMgr.ContractMgr
         private void ContractDetail_Leave(object sender, EventArgs e)
         {
             this.ContractClose(sender, e);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectClient(object sender, EventArgs e)
+        {
+            ClientMgr clientMgr = new ClientMgr(false);
+            QueryForm queryUI = new QueryForm(clientMgr, "选择客户");
+            clientMgr.OwnerForm = queryUI;
+            queryUI.ShowDialog(this);
+            Client client = clientMgr.Selected;
+            if (client != null)
+            {
+                Contract contract = (Contract)this.contractBindingSource.DataSource;
+                contract.Client = client;
+                this.tbClientName.Text = client.ClientNameCN;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private string GenerateContractCode()
+        {
+            return string.Empty;
         }
     }
 }

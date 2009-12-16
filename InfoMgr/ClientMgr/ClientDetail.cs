@@ -32,13 +32,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="client">selected client</param>
         /// <param name="opType">operation type</param>
-        public ClientDetail(Client client, OpClientType opType, OpClientCreditLineType opClientCreditLineType)
+        public ClientDetail(Client client, OpClientType opClientType, OpClientCreditLineType opClientCreditLineType)
         {
             this.InitializeComponent();
             this.InitComboBox();
-            this.opClientType = opType;
+            this.opClientType = opClientType;
             this.opClientCreditLineType = opClientCreditLineType;
-            if (opType == OpClientType.NEW_CLIENT)
+            if (opClientType == OpClientType.NEW_CLIENT)
             {
                 this.clientBindingSource.DataSource = new Client();
             }
@@ -340,12 +340,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void ClientClose(object sender, EventArgs e)
         {
             Client client = (Client)this.clientBindingSource.DataSource;
-            if (this.opClientType == OpClientType.NEW_CLIENT || this.opClientType == OpClientType.UPDATE_CLIENT)
+            if (this.opClientType == OpClientType.UPDATE_CLIENT)
             {
                 client.Restore();
             }
 
-            if (this.opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE || this.opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
+            if (this.opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
             {
                 if (this.clientCreditLineBindingSource.DataSource is ClientCreditLine)
                 {

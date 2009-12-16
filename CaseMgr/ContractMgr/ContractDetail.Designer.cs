@@ -176,7 +176,6 @@
             // 
             // 
             this.tbClientName.Border.Class = "TextBoxBorder";
-            this.tbClientName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.contractBindingSource, "ClientEDICode", true));
             this.tbClientName.Location = new System.Drawing.Point(205, 41);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.Size = new System.Drawing.Size(217, 20);
@@ -284,6 +283,7 @@
             this.btnClientQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientQuery.TabIndex = 15;
             this.btnClientQuery.Text = "Q";
+            this.btnClientQuery.Click += new System.EventHandler(this.SelectClient);
             // 
             // btnContractUpdate
             // 
@@ -332,7 +332,8 @@
             this.Controls.Add(this.groupPanelContract);
             this.DoubleBuffered = true;
             this.Name = "ContractDetail";
-            this.Text = "合同详细信息";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "主合同详细信息";
             this.Leave += new System.EventHandler(this.ContractDetail_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.contractBindingSource)).EndInit();
             this.groupPanelContract.ResumeLayout(false);

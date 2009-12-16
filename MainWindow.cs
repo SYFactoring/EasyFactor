@@ -14,9 +14,9 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.InvoiceMgr.InvoiceAssign;
+    using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.CaseMgr.ContractMgr;
     using CMBC.EasyFactor.Help.About;
-    using CMBC.EasyFactor.CaseMgr;
 
     /// <summary>
     /// Main Window Form
@@ -69,7 +69,7 @@ namespace CMBC.EasyFactor
         /// <summary>
         /// 
         /// </summary>
-        
+
         private void ClearDetailPanel()
         {
             this.ribbonDetailPanel.Controls.Clear();
@@ -137,7 +137,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void FactorNew(object sender, EventArgs e)
         {
-            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR,FactorDetail.OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE);
+            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR, FactorDetail.OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE);
             factorDetail.ShowDialog(this);
         }
 
@@ -160,13 +160,13 @@ namespace CMBC.EasyFactor
         private void CaseApplication(object sender, EventArgs e)
         {
             this.ClearDetailPanel();
-            CaseApp caseAppUI = new CaseApp();
-            caseAppUI.ShowDialog(this);
+            CaseDetail caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.NEW_CASE, CaseDetail.OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG);
+            caseDetail.ShowDialog(this);
         }
 
         private void CaseQuery(object sender, EventArgs e)
         {
-            CaseQuery caseQuery = new CaseQuery();
+            CaseMgr.CaseMgr caseQuery = new CaseMgr.CaseMgr(true);
             this.SetDetailPanel(caseQuery);
         }
 
@@ -209,6 +209,13 @@ namespace CMBC.EasyFactor
         {
             ContractMgr contractMgr = new ContractMgr(true);
             this.SetDetailPanel(contractMgr);
+        }
+
+        private void CreditCoverNegNew(object sender, EventArgs e)
+        {
+            this.ClearDetailPanel();
+            CaseDetail caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.DETAIL_CASE, CaseDetail.OpCreditCoverNegType.NEW_CREDIT_COVER_NEG);
+            caseDetail.ShowDialog(this);
         }
 
     }

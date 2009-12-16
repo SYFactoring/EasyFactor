@@ -1,6 +1,6 @@
 ﻿namespace CMBC.EasyFactor.CaseMgr
 {
-    partial class CaseQuery
+    partial class CaseMgr
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCaseQuery = new DevComponents.DotNetBar.PanelEx();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.lblDate = new DevComponents.DotNetBar.LabelX();
@@ -70,16 +71,33 @@
             this.AppDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CaseMarkColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CreateUserColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblCaseCode = new DevComponents.DotNetBar.LabelX();
+            this.tbCaseCode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblClientName = new DevComponents.DotNetBar.LabelX();
+            this.cmuContractMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCaseSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCaseNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
             this.panelCaseQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCases)).BeginInit();
+            this.cmuContractMgr.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelCaseQuery
             // 
             this.panelCaseQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelCaseQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelCaseQuery.Controls.Add(this.tbClientName);
+            this.panelCaseQuery.Controls.Add(this.lblClientName);
+            this.panelCaseQuery.Controls.Add(this.tbCaseCode);
+            this.panelCaseQuery.Controls.Add(this.lblCaseCode);
             this.panelCaseQuery.Controls.Add(this.lblCount);
             this.panelCaseQuery.Controls.Add(this.lblDate);
             this.panelCaseQuery.Controls.Add(this.btnQuery);
@@ -94,7 +112,7 @@
             this.panelCaseQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelCaseQuery.Location = new System.Drawing.Point(0, 0);
             this.panelCaseQuery.Name = "panelCaseQuery";
-            this.panelCaseQuery.Size = new System.Drawing.Size(588, 52);
+            this.panelCaseQuery.Size = new System.Drawing.Size(588, 77);
             this.panelCaseQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelCaseQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelCaseQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -132,7 +150,7 @@
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(443, 3);
+            this.btnQuery.Location = new System.Drawing.Point(443, 21);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 43);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -358,14 +376,14 @@
             this.dgvCases.AllowUserToDeleteRows = false;
             this.dgvCases.AllowUserToOrderColumns = true;
             this.dgvCases.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCases.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCases.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCases.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CaseCodeColumn,
@@ -387,20 +405,21 @@
             this.AppDateColumn,
             this.CaseMarkColumn,
             this.CreateUserColumn});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCases.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvCases.ContextMenuStrip = this.cmuContractMgr;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCases.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCases.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvCases.Location = new System.Drawing.Point(0, 52);
+            this.dgvCases.Location = new System.Drawing.Point(0, 77);
             this.dgvCases.Name = "dgvCases";
             this.dgvCases.ReadOnly = true;
-            this.dgvCases.Size = new System.Drawing.Size(588, 333);
+            this.dgvCases.Size = new System.Drawing.Size(588, 308);
             this.dgvCases.TabIndex = 2;
             // 
             // CaseCodeColumn
@@ -555,19 +574,120 @@
             this.CreateUserColumn.ReadOnly = true;
             this.CreateUserColumn.Width = 68;
             // 
-            // CaseQuery
+            // lblCaseCode
+            // 
+            // 
+            // 
+            // 
+            this.lblCaseCode.BackgroundStyle.Class = "";
+            this.lblCaseCode.Location = new System.Drawing.Point(3, 48);
+            this.lblCaseCode.Name = "lblCaseCode";
+            this.lblCaseCode.Size = new System.Drawing.Size(59, 23);
+            this.lblCaseCode.TabIndex = 11;
+            this.lblCaseCode.Text = "案件编号";
+            // 
+            // tbCaseCode
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseCode.Border.Class = "TextBoxBorder";
+            this.tbCaseCode.Location = new System.Drawing.Point(59, 50);
+            this.tbCaseCode.Name = "tbCaseCode";
+            this.tbCaseCode.Size = new System.Drawing.Size(133, 20);
+            this.tbCaseCode.TabIndex = 12;
+            // 
+            // tbClientName
+            // 
+            // 
+            // 
+            // 
+            this.tbClientName.Border.Class = "TextBoxBorder";
+            this.tbClientName.Location = new System.Drawing.Point(254, 50);
+            this.tbClientName.Name = "tbClientName";
+            this.tbClientName.Size = new System.Drawing.Size(133, 20);
+            this.tbClientName.TabIndex = 14;
+            // 
+            // lblClientName
+            // 
+            // 
+            // 
+            // 
+            this.lblClientName.BackgroundStyle.Class = "";
+            this.lblClientName.Location = new System.Drawing.Point(198, 48);
+            this.lblClientName.Name = "lblClientName";
+            this.lblClientName.Size = new System.Drawing.Size(59, 23);
+            this.lblClientName.TabIndex = 13;
+            this.lblClientName.Text = "客户名称";
+            // 
+            // cmuContractMgr
+            // 
+            this.cmuContractMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCaseSelect,
+            this.menuItemCaseDetail,
+            this.toolStripSeparator,
+            this.menuItemCaseNew,
+            this.menuItemCaseUpdate,
+            this.menuItemCaseDelete,
+            this.menuItemCreditCoverNegNew});
+            this.cmuContractMgr.Name = "cmuContractMgr";
+            this.cmuContractMgr.Size = new System.Drawing.Size(147, 142);
+            // 
+            // menuItemCaseSelect
+            // 
+            this.menuItemCaseSelect.Name = "menuItemCaseSelect";
+            this.menuItemCaseSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseSelect.Text = "选定案件";
+            // 
+            // menuItemCaseDetail
+            // 
+            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDetail.Text = "详细信息";
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            // 
+            // menuItemCaseNew
+            // 
+            this.menuItemCaseNew.Name = "menuItemCaseNew";
+            this.menuItemCaseNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseNew.Text = "新建案件";
+            // 
+            // menuItemCaseUpdate
+            // 
+            this.menuItemCaseUpdate.Name = "menuItemCaseUpdate";
+            this.menuItemCaseUpdate.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseUpdate.Text = "更新案件";
+            // 
+            // menuItemCaseDelete
+            // 
+            this.menuItemCaseDelete.Name = "menuItemCaseDelete";
+            this.menuItemCaseDelete.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDelete.Text = "删除案件";
+            // 
+            // menuItemCreditCoverNegNew
+            // 
+            this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
+            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverNegNew.Text = "新建额度申请";
+            // 
+            // CaseMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvCases);
             this.Controls.Add(this.panelCaseQuery);
-            this.Name = "CaseQuery";
+            this.Name = "CaseMgr";
             this.Size = new System.Drawing.Size(588, 385);
             this.panelCaseQuery.ResumeLayout(false);
             this.panelCaseQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCases)).EndInit();
+            this.cmuContractMgr.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -614,5 +734,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AppDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CaseMarkColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreateUserColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
+        private DevComponents.DotNetBar.LabelX lblClientName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
+        private DevComponents.DotNetBar.LabelX lblCaseCode;
+        private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseNew;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseUpdate;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverNegNew;
     }
 }

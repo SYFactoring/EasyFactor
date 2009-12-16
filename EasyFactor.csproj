@@ -91,17 +91,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="CaseMgr\CaseApp.cs">
+    <Compile Include="CaseMgr\CaseDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CaseMgr\CaseApp.Designer.cs">
-      <DependentUpon>CaseApp.cs</DependentUpon>
+    <Compile Include="CaseMgr\CaseDetail.Designer.cs">
+      <DependentUpon>CaseDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="CaseMgr\CaseQuery.cs">
+    <Compile Include="CaseMgr\CaseMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CaseMgr\CaseQuery.Designer.cs">
-      <DependentUpon>CaseQuery.cs</DependentUpon>
+    <Compile Include="CaseMgr\CaseMgr.Designer.cs">
+      <DependentUpon>CaseMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="CaseMgr\ContractMgr\ContractDetail.cs">
       <SubType>Form</SubType>
@@ -114,6 +114,12 @@
     </Compile>
     <Compile Include="CaseMgr\ContractMgr\ContractMgr.Designer.cs">
       <DependentUpon>ContractMgr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CaseMgr\CreditCoverNegMgr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CaseMgr\CreditCoverNegMgr.Designer.cs">
+      <DependentUpon>CreditCoverNegMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="DB.dbml\BaseObject.cs" />
     <Compile Include="DB.dbml\DB.cs">
@@ -232,12 +238,11 @@
     <None Include="DB.dbml\DB.dbml.layout">
       <DependentUpon>DB.dbml</DependentUpon>
     </None>
-    <EmbeddedResource Include="CaseMgr\CaseApp.resx">
-      <DependentUpon>CaseApp.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="CaseMgr\CaseDetail.resx">
+      <DependentUpon>CaseDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CaseMgr\CaseQuery.resx">
-      <DependentUpon>CaseQuery.cs</DependentUpon>
+    <EmbeddedResource Include="CaseMgr\CaseMgr.resx">
+      <DependentUpon>CaseMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CaseMgr\ContractMgr\ContractDetail.resx">
@@ -245,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CaseMgr\ContractMgr\ContractMgr.resx">
       <DependentUpon>ContractMgr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CaseMgr\CreditCoverNegMgr.resx">
+      <DependentUpon>CreditCoverNegMgr.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Help\About\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
@@ -452,7 +460,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CaseMgr\CreditCoverNeg\" />
     <Folder Include="Help\CheckForUpdates\" />
     <Folder Include="Help\Content\" />
     <Folder Include="InvoiceMgr\InvoiceFinance\" />

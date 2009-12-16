@@ -1314,6 +1314,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.cbDepartments.BackgroundStyle.Class = "TextBoxBorder";
+            this.cbDepartments.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "BranchCode", true));
             this.cbDepartments.ButtonDropDown.Visible = true;
             this.cbDepartments.Location = new System.Drawing.Point(90, 29);
             this.cbDepartments.Name = "departmentComboTree";

@@ -9,7 +9,7 @@ namespace CMBC.EasyFactor.CaseMgr
     /// <summary>
     /// 
     /// </summary>
-    public partial class CaseQuery : UserControl
+    public partial class CaseMgr : UserControl
     {
         /// <summary>
         /// 
@@ -19,7 +19,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <summary>
         /// Initializes a new instance of the CaseQuery class.
         /// </summary>
-        public CaseQuery()
+        public CaseMgr(bool isEditable)
         {
             InitializeComponent();
             ControlUtil.SetDoubleBuffered(this.dgvCases);
@@ -68,7 +68,11 @@ namespace CMBC.EasyFactor.CaseMgr
                               && c.TransactionType.Equals(this.cbTransactionType.Text)
                               && c.InvoiceCurrency.Equals((string)this.cbCurrency.SelectedValue)
                               && (beginDate == this.diBegin.MinDate ? true : c.CaseAppDate > beginDate.AddDays(-1))
-                              && (endDate == this.diEnd.MaxDate ? true : c.CaseAppDate < endDate.AddDays(1)));
+                              && (endDate == this.diEnd.MaxDate ? true : c.CaseAppDate < endDate.AddDays(1))
+                              && c.CaseCode.Contains(this.tbCaseCode.Text)
+                              && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text)||c.BuyerClient.ClientNameEN_1.Contains(this.tbClientName.Text)||c.BuyerClient.ClientNameEN_2.Contains(this.tbClientName.Text)
+                                ||c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text)||c.SellerClient.ClientNameEN_1.Contains(this.tbClientName.Text)||c.SellerClient.ClientNameEN_2.Contains(this.tbClientName.Text))
+                              );
 
             this.bs.DataSource = queryResult;
             this.dgvCases.DataSource = this.bs;
