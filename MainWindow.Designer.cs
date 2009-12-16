@@ -64,7 +64,6 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnFactorNew;
         private DevComponents.DotNetBar.RibbonBar ribbonBarCaseMgr;
         private DevComponents.DotNetBar.ButtonItem btnCaseApplication;
-        private DevComponents.DotNetBar.ButtonItem btnCreditCoverNeg;
         private DevComponents.DotNetBar.ButtonItem btnContract;
         private DevComponents.DotNetBar.ButtonItem btnCDA;
         private DevComponents.DotNetBar.ButtonItem btnBuyerPayment;
@@ -123,7 +122,6 @@ namespace CMBC.EasyFactor
             this.btnOverDueQuery = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarCaseMgr = new DevComponents.DotNetBar.RibbonBar();
             this.btnCaseApplication = new DevComponents.DotNetBar.ButtonItem();
-            this.btnCreditCoverNeg = new DevComponents.DotNetBar.ButtonItem();
             this.btnContract = new DevComponents.DotNetBar.ButtonItem();
             this.btnCDA = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanelInvoiceMgr = new DevComponents.DotNetBar.RibbonPanel();
@@ -202,6 +200,7 @@ namespace CMBC.EasyFactor
             this.lblCommandStatus = new DevComponents.DotNetBar.LabelItem();
             this.lblCurrentUser = new DevComponents.DotNetBar.LabelItem();
             this.ribbonDetailPanel = new DevComponents.DotNetBar.Ribbon.RibbonClientPanel();
+            this.btnCreditCoverNeg = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonControl.SuspendLayout();
             this.ribbonPanelCaseQuery.SuspendLayout();
             this.ribbonPanelInvoiceMgr.SuspendLayout();
@@ -283,10 +282,11 @@ namespace CMBC.EasyFactor
             this.ribbonBarQuery.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnCaseQuery,
+            this.btnCreditCoverNeg,
             this.btnOverDueQuery});
             this.ribbonBarQuery.Location = new System.Drawing.Point(264, 0);
             this.ribbonBarQuery.Name = "ribbonBarQuery";
-            this.ribbonBarQuery.Size = new System.Drawing.Size(179, 93);
+            this.ribbonBarQuery.Size = new System.Drawing.Size(209, 93);
             this.ribbonBarQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarQuery.TabIndex = 1;
             this.ribbonBarQuery.Text = "查询";
@@ -327,7 +327,6 @@ namespace CMBC.EasyFactor
             this.ribbonBarCaseMgr.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarCaseMgr.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnCaseApplication,
-            this.btnCreditCoverNeg,
             this.btnContract,
             this.btnCDA});
             this.ribbonBarCaseMgr.Location = new System.Drawing.Point(3, 0);
@@ -351,13 +350,6 @@ namespace CMBC.EasyFactor
             this.btnCaseApplication.SubItemsExpandWidth = 14;
             this.btnCaseApplication.Text = "案件申请";
             this.btnCaseApplication.Click += new System.EventHandler(this.CaseApplication);
-            // 
-            // btnCreditCoverNeg
-            // 
-            this.btnCreditCoverNeg.Name = "btnCreditCoverNeg";
-            this.btnCreditCoverNeg.SubItemsExpandWidth = 14;
-            this.btnCreditCoverNeg.Text = "额度申请";
-            this.btnCreditCoverNeg.Click += new System.EventHandler(this.CreditCoverNegNew);
             // 
             // btnContract
             // 
@@ -1228,6 +1220,13 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.TabIndex = 2;
             this.ribbonDetailPanel.Text = "ribbonClientPanel1";
             // 
+            // btnCreditCoverNeg
+            // 
+            this.btnCreditCoverNeg.Name = "btnCreditCoverNeg";
+            this.btnCreditCoverNeg.SubItemsExpandWidth = 14;
+            this.btnCreditCoverNeg.Text = "申请案查询";
+            this.btnCreditCoverNeg.Click += new System.EventHandler(this.CreditCoverNegMgr);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1261,5 +1260,6 @@ namespace CMBC.EasyFactor
         private DevComponents.Editors.ComboItem comboItem5;
         private DevComponents.Editors.ComboItem comboItem6;
         private DevComponents.DotNetBar.Ribbon.RibbonClientPanel ribbonDetailPanel;
+        private DevComponents.DotNetBar.ButtonItem btnCreditCoverNeg;
     }
 }

@@ -341,12 +341,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 }
                 this.tbContractCode.ReadOnly = true;
             }
-
-            Contract contract = (Contract)this.contractBindingSource.DataSource;
-            if (contract.ClientEDICode != null)
-            {
-                this.tbClientName.Text = contract.Client.ClientNameCN;
-            }
         }
 
         /// <summary>

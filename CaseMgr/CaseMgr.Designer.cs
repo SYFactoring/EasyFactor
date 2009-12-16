@@ -543,7 +543,7 @@
             // 
             // SellerCodeColumn
             // 
-            this.SellerCodeColumn.DataPropertyName = "SellerCode";
+            this.SellerCodeColumn.DataPropertyName = "SellerClient.ClientEDICode";
             this.SellerCodeColumn.HeaderText = "卖方保理代码";
             this.SellerCodeColumn.Name = "SellerCodeColumn";
             this.SellerCodeColumn.ReadOnly = true;

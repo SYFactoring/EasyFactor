@@ -78,6 +78,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+                this.btnCaseBuyerFactorSelect.Visible = true;
+                this.btnCaseBuyerSelect.Visible = true;
+                this.btnCaseSellerFactorSelect.Visible = true;
+                this.btnCaseSellerSelect.Visible = true;
             }
             else if (this.opCaseType == OpCaseType.UPDATE_CASE)
             {
@@ -85,6 +89,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+                this.btnCaseBuyerFactorSelect.Visible = true;
+                this.btnCaseBuyerSelect.Visible = true;
+                this.btnCaseSellerFactorSelect.Visible = true;
+                this.btnCaseSellerSelect.Visible = true;
             }
             else if (this.opCaseType == OpCaseType.DETAIL_CASE)
             {
@@ -92,6 +100,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+                this.btnCaseBuyerFactorSelect.Visible = false;
+                this.btnCaseBuyerSelect.Visible = false;
+                this.btnCaseSellerFactorSelect.Visible = false;
+                this.btnCaseSellerSelect.Visible = false;
             }
             this.tbCaseCreateUser.ReadOnly = true;
             this.tbCaseMark.ReadOnly = true;
@@ -123,11 +135,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.tbCaseSellerFactorCode.Text = sellerFactor.FactorCode;
                 if (sellerFactor.CompanyNameCN == null || string.Empty.Equals(sellerFactor.CompanyNameCN))
                 {
-                    this.tbCaseSellerFactor.Text = sellerFactor.CompanyNameEN;
+                    this.tbCaseSellerFactorNameCN.Text = sellerFactor.CompanyNameEN;
                 }
                 else
                 {
-                    this.tbCaseSellerFactor.Text = sellerFactor.CompanyNameCN;
+                    this.tbCaseSellerFactorNameCN.Text = sellerFactor.CompanyNameCN;
                 }
 
                 curCase.SellerFactor = sellerFactor;
@@ -154,11 +166,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.tbCaseBuyerFactorCode.Text = buyerFactor.FactorCode;
                 if (buyerFactor.CompanyNameCN == null || string.Empty.Equals(buyerFactor.CompanyNameCN))
                 {
-                    this.tbCaseBuyerFactor.Text = buyerFactor.CompanyNameEN;
+                    this.tbCaseBuyerFactorNameCN.Text = buyerFactor.CompanyNameEN;
                 }
                 else
                 {
-                    this.tbCaseBuyerFactor.Text = buyerFactor.CompanyNameCN;
+                    this.tbCaseBuyerFactorNameCN.Text = buyerFactor.CompanyNameCN;
                 }
 
                 curCase.BuyerFactor = buyerFactor;
@@ -337,10 +349,10 @@ namespace CMBC.EasyFactor.CaseMgr
             if ("国内保理".Equals(selectedItem.Text))
             {
                 Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
-                this.tbCaseBuyerFactor.Text = selectedFactor.CompanyNameCN;
+                this.tbCaseBuyerFactorNameCN.Text = selectedFactor.CompanyNameCN;
                 curCase.BuyerFactor = selectedFactor;
 
-                this.tbCaseSellerFactor.Text = selectedFactor.CompanyNameCN;
+                this.tbCaseSellerFactorNameCN.Text = selectedFactor.CompanyNameCN;
                 curCase.SellerFactor = selectedFactor;
             }
             else
@@ -351,19 +363,19 @@ namespace CMBC.EasyFactor.CaseMgr
             if ("出口保理".Equals(selectedItem.Text))
             {
                 Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
-                this.tbCaseSellerFactor.Text = selectedFactor.CompanyNameCN;
+                this.tbCaseSellerFactorNameCN.Text = selectedFactor.CompanyNameCN;
                 curCase.SellerFactor = selectedFactor;
             }
             else if ("进口保理".Equals(selectedItem.Text))
             {
                 Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
-                this.tbCaseBuyerFactor.Text = selectedFactor.CompanyNameCN;
+                this.tbCaseBuyerFactorNameCN.Text = selectedFactor.CompanyNameCN;
                 curCase.BuyerFactor = selectedFactor;
             }
             else if ("信保保理".Equals(selectedItem.Text))
             {
                 Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
-                this.tbCaseSellerFactor.Text = selectedFactor.CompanyNameCN;
+                this.tbCaseSellerFactorNameCN.Text = selectedFactor.CompanyNameCN;
                 curCase.SellerFactor = selectedFactor;
             }
         }
@@ -421,5 +433,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 ControlUtil.SetComponetDefault(comp);
             }
         }
+
     }
 }

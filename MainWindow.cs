@@ -210,7 +210,7 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(contractMgr);
         }
 
-        private void CreditCoverNegNew(object sender, EventArgs e)
+        private void CreditCoverNegMgr(object sender, EventArgs e)
         {
             CreditCoverNegMgr creditCoverNegMgr = new CreditCoverNegMgr(true);
             this.SetDetailPanel(creditCoverNegMgr);
