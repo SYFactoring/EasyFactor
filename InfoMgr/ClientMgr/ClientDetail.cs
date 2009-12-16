@@ -28,16 +28,40 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private OpClientCreditLineType opClientCreditLineType;
 
         /// <summary>
+        /// 
+        /// </summary>
+        private OpContractType opContractType;
+
+        public ClientDetail(Client client, OpClientType opClientType)
+            : this(client, opClientType, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, OpContractType.DETAIL_CONTRACT)
+        {
+
+        }
+
+        public ClientDetail(Client client, OpClientCreditLineType opClientCreditLineType)
+            : this(client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT)
+        {
+        }
+
+        public ClientDetail(Client client, OpContractType opContractType)
+            : this(client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, opContractType)
+        {
+        }
+
+        /// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client">selected client</param>
-        /// <param name="opType">operation type</param>
-        public ClientDetail(Client client, OpClientType opClientType, OpClientCreditLineType opClientCreditLineType)
+        /// <param name="opClientType">client operation type</param>
+        /// <param name="opClientCreditLineType">client credit line operation type</param>
+        /// <param name="opContractType">client contract opertion type</param>
+        public ClientDetail(Client client, OpClientType opClientType, OpClientCreditLineType opClientCreditLineType, OpContractType opContractType)
         {
             this.InitializeComponent();
             this.InitComboBox();
             this.opClientType = opClientType;
             this.opClientCreditLineType = opClientCreditLineType;
+            this.opContractType = opContractType;
             if (opClientType == OpClientType.NEW_CLIENT)
             {
                 this.clientBindingSource.DataSource = new Client();
@@ -97,6 +121,27 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// 
             /// </summary>
             DETAIL_CLIENT_CREDIT_LINE
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum OpContractType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            NEW_CONTRACT,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            UPDATE_CONTRACT,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            DETAIL_CONTRACT
         }
 
         /// <summary>
@@ -266,9 +311,65 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <summary>
         /// 
         /// </summary>
+        private void UpdateContractControlStatus()
+        {
+            if (this.opContractType == OpContractType.DETAIL_CONTRACT)
+            {
+                foreach (Control comp in this.groupPanelContract.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+            }
+            else if (this.opContractType == OpContractType.NEW_CONTRACT)
+            {
+                foreach (Control comp in this.groupPanelContract.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+            }
+            else if (this.opContractType == OpContractType.UPDATE_CONTRACT)
+            {
+                foreach (Control comp in this.groupPanelContract.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                this.tbContractCode.ReadOnly = true;
+            }
+
+            Contract contract = (Contract)this.contractBindingSource.DataSource;
+            if (contract.ClientEDICode != null)
+            {
+                this.tbClientName.Text = contract.Client.ClientNameCN;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClientUpdate(object sender, EventArgs e)
+        private void ClientDetail_Leave(object sender, EventArgs e)
+        {
+            this.CloseClient(sender, e);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ResetClientCreditLine()
+        {
+            foreach (Control comp in this.groupPanelClientCreditLine.Controls)
+            {
+                ControlUtil.SetComponetDefault(comp);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateClient(object sender, EventArgs e)
         {
             this.opClientType = OpClientType.UPDATE_CLIENT;
             this.UpdateClientControlStatus();
@@ -279,7 +380,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ClientSave(object sender, EventArgs e)
+        private void SaveClient(object sender, EventArgs e)
         {
             this.clientBindingSource.EndEdit();
             Client client = (Client)this.clientBindingSource.DataSource;
@@ -337,7 +438,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ClientClose(object sender, EventArgs e)
+        private void CloseClient(object sender, EventArgs e)
         {
             Client client = (Client)this.clientBindingSource.DataSource;
             if (this.opClientType == OpClientType.UPDATE_CLIENT)
@@ -353,6 +454,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     if (creditLine.CreditLineID != 0)
                     {
                         creditLine.Restore();
+                    }
+                }
+            }
+
+            if (this.opContractType == OpContractType.UPDATE_CONTRACT)
+            {
+                if (this.contractBindingSource.DataSource is Contract)
+                {
+                    Contract contract = (Contract)this.contractBindingSource.DataSource;
+                    if (contract.ContractCode != null)
+                    {
+                        contract.Restore();
                     }
                 }
             }
@@ -577,20 +690,68 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClientDetail_Leave(object sender, EventArgs e)
+        private void UpdateContract(object sender, EventArgs e)
         {
-            this.ClientClose(sender, e);
+            this.opContractType = OpContractType.UPDATE_CONTRACT;
+            this.UpdateContractControlStatus();
         }
 
         /// <summary>
-        /// 
+        /// Save current editing
         /// </summary>
-        private void ResetClientCreditLine()
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void SaveContract(object sender, EventArgs e)
         {
-            foreach (Control comp in this.groupPanelClientCreditLine.Controls)
+            this.contractBindingSource.EndEdit();
+            Contract contract = (Contract)this.contractBindingSource.DataSource;
+
+            if (this.opContractType == OpContractType.NEW_CONTRACT)
             {
-                ControlUtil.SetComponetDefault(comp);
+                contract.ContractCode = GenerateContractCode();
+                bool isAddOK = true;
+                try
+                {
+                    App.Current.DbContext.Contracts.InsertOnSubmit(contract);
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    isAddOK = false;
+                    MessageBox.Show(e1.Message);
+                }
+
+                if (isAddOK)
+                {
+                    MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    contract.Backup();
+                    this.opContractType = OpContractType.UPDATE_CONTRACT;
+                }
             }
+            else
+            {
+                bool isUpdateOK = true;
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e2)
+                {
+                    isUpdateOK = false;
+                    MessageBox.Show(e2.Message);
+                }
+
+                if (isUpdateOK)
+                {
+                    MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    contract.Backup();
+                }
+            }
+        }
+
+        private string GenerateContractCode()
+        {
+            return string.Empty;
         }
     }
 }

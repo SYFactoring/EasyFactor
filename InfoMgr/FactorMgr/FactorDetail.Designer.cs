@@ -91,6 +91,7 @@
             this.tbGeneralCorrespondence1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbWorkingHours = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelBasic = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.companyNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.telefax_2TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.telefax_1TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.telephone_2TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -162,7 +163,6 @@
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.companyNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             factorTypeLabel = new DevComponents.DotNetBar.LabelX();
             countryNameLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -765,8 +765,8 @@
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelFactor);
             this.tabControl.Controls.Add(this.tabPanelCreditLine);
+            this.tabControl.Controls.Add(this.tabPanelFactor);
             this.tabControl.Controls.Add(this.tabPanelAccount);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -853,9 +853,10 @@
             this.groupPanelMembership.Controls.Add(this.membershipStatusTextBox);
             this.groupPanelMembership.Controls.Add(iFISAvailableOnPrivateForumLabel);
             this.groupPanelMembership.Controls.Add(this.iFISAvailableOnPrivateForumTextBox);
-            this.groupPanelMembership.Location = new System.Drawing.Point(1, 478);
+            this.groupPanelMembership.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelMembership.Location = new System.Drawing.Point(1, 464);
             this.groupPanelMembership.Name = "groupPanelMembership";
-            this.groupPanelMembership.Size = new System.Drawing.Size(591, 63);
+            this.groupPanelMembership.Size = new System.Drawing.Size(593, 63);
             // 
             // 
             // 
@@ -958,9 +959,10 @@
             this.groupPanelContacts.Controls.Add(this.tbGeneralCorrespondence1);
             this.groupPanelContacts.Controls.Add(lblWorkingHours);
             this.groupPanelContacts.Controls.Add(this.tbWorkingHours);
-            this.groupPanelContacts.Location = new System.Drawing.Point(0, 222);
+            this.groupPanelContacts.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelContacts.Location = new System.Drawing.Point(1, 214);
             this.groupPanelContacts.Name = "groupPanelContacts";
-            this.groupPanelContacts.Size = new System.Drawing.Size(591, 250);
+            this.groupPanelContacts.Size = new System.Drawing.Size(593, 250);
             // 
             // 
             // 
@@ -1159,9 +1161,10 @@
             this.groupPanelBasic.Controls.Add(this.countryNameComboBox);
             this.groupPanelBasic.Controls.Add(factorTypeLabel);
             this.groupPanelBasic.Controls.Add(this.factorTypeComboBox);
-            this.groupPanelBasic.Location = new System.Drawing.Point(0, 4);
+            this.groupPanelBasic.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelBasic.Location = new System.Drawing.Point(1, 1);
             this.groupPanelBasic.Name = "groupPanelBasic";
-            this.groupPanelBasic.Size = new System.Drawing.Size(591, 213);
+            this.groupPanelBasic.Size = new System.Drawing.Size(593, 213);
             // 
             // 
             // 
@@ -1192,6 +1195,19 @@
             // 
             this.groupPanelBasic.StyleMouseOver.Class = "";
             this.groupPanelBasic.TabIndex = 0;
+            // 
+            // companyNameCNTextBox
+            // 
+            // 
+            // 
+            // 
+            this.companyNameCNTextBox.Border.Class = "TextBoxBorder";
+            this.companyNameCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "CompanyNameCN", true));
+            this.companyNameCNTextBox.Location = new System.Drawing.Point(82, 29);
+            this.companyNameCNTextBox.Name = "companyNameCNTextBox";
+            this.companyNameCNTextBox.Size = new System.Drawing.Size(150, 20);
+            this.companyNameCNTextBox.TabIndex = 36;
+            this.companyNameCNTextBox.WatermarkText = "中文";
             // 
             // telefax_2TextBox
             // 
@@ -1686,9 +1702,10 @@
             this.groupPanelCreditLineDetail.Controls.Add(this.creditLineTextBox);
             this.groupPanelCreditLineDetail.Controls.Add(creditLineCurrencyLabel);
             this.groupPanelCreditLineDetail.Controls.Add(this.creditLineCurrencyComboBox);
-            this.groupPanelCreditLineDetail.Location = new System.Drawing.Point(0, 3);
+            this.groupPanelCreditLineDetail.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelCreditLineDetail.Location = new System.Drawing.Point(1, 1);
             this.groupPanelCreditLineDetail.Name = "groupPanelCreditLineDetail";
-            this.groupPanelCreditLineDetail.Size = new System.Drawing.Size(590, 296);
+            this.groupPanelCreditLineDetail.Size = new System.Drawing.Size(593, 296);
             // 
             // 
             // 
@@ -2005,19 +2022,6 @@
             // highlighter
             // 
             this.highlighter.ContainerControl = this;
-            // 
-            // companyNameCNTextBox
-            // 
-            // 
-            // 
-            // 
-            this.companyNameCNTextBox.Border.Class = "TextBoxBorder";
-            this.companyNameCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "CompanyNameCN", true));
-            this.companyNameCNTextBox.Location = new System.Drawing.Point(82, 29);
-            this.companyNameCNTextBox.Name = "companyNameCNTextBox";
-            this.companyNameCNTextBox.Size = new System.Drawing.Size(150, 20);
-            this.companyNameCNTextBox.TabIndex = 36;
-            this.companyNameCNTextBox.WatermarkText = "中文";
             // 
             // FactorDetail
             // 

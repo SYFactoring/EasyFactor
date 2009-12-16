@@ -137,7 +137,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void NewClient(object sender, System.EventArgs e)
         {
-            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE);
+            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT);
             clientDetail.ShowDialog(this);
         }
 
@@ -159,7 +159,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
                 if (selectedClient != null)
                 {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.UPDATE_CLIENT, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE);
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.UPDATE_CLIENT);
                     clientDetail.ShowDialog(this);
                 }
             }
@@ -183,7 +183,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
                 if (selectedClient != null)
                 {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.DETAIL_CLIENT, ClientDetail.OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE);
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE);
                     clientDetail.ShowDialog(this);
                 }
             }
@@ -272,7 +272,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
                 if (selectedClient != null)
                 {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.DETAIL_CLIENT, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE);
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.DETAIL_CLIENT);
                     clientDetail.ShowDialog(this);
                 }
             }

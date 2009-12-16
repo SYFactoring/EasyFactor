@@ -15,7 +15,6 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.InvoiceMgr.InvoiceAssign;
     using CMBC.EasyFactor.CaseMgr;
-    using CMBC.EasyFactor.CaseMgr.ContractMgr;
     using CMBC.EasyFactor.Help.About;
 
     /// <summary>
@@ -104,7 +103,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ClientNew(object sender, EventArgs e)
         {
-            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE);
+            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT);
             clientDetail.ShowDialog(this);
         }
 
@@ -213,9 +212,8 @@ namespace CMBC.EasyFactor
 
         private void CreditCoverNegNew(object sender, EventArgs e)
         {
-            this.ClearDetailPanel();
-            CaseDetail caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.DETAIL_CASE, CaseDetail.OpCreditCoverNegType.NEW_CREDIT_COVER_NEG);
-            caseDetail.ShowDialog(this);
+            CreditCoverNegMgr creditCoverNegMgr = new CreditCoverNegMgr(true);
+            this.SetDetailPanel(creditCoverNegMgr);
         }
 
     }

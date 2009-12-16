@@ -1,4 +1,4 @@
-﻿namespace CMBC.EasyFactor.CaseMgr.ContractMgr
+﻿namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
     partial class ContractMgr
     {

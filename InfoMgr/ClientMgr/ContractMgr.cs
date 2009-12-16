@@ -1,5 +1,5 @@
 ﻿
-namespace CMBC.EasyFactor.CaseMgr.ContractMgr
+namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
     using System;
     using System.Linq;
@@ -96,8 +96,21 @@ namespace CMBC.EasyFactor.CaseMgr.ContractMgr
         /// <param name="e">Event Args</param>
         private void NewContract(object sender, System.EventArgs e)
         {
-            ContractDetail contractDetail = new ContractDetail(null, ContractDetail.OpContractType.NEW_CONTRACT);
-            contractDetail.ShowDialog(this);
+             if (this.dgvContracts.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string cid = (string)dgvContracts["ContractCodeColumn", dgvContracts.SelectedRows[0].Index].Value;
+            if (cid != null)
+            {
+                Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
+                if (selectedContract != null)
+                {
+                    ClientDetail clientDetail = new ClientDetail(selectedContract.Client, ClientDetail.OpContractType.NEW_CONTRACT);
+                    clientDetail.ShowDialog(this);
+                }
+            }
         }
 
         /// <summary>
@@ -118,8 +131,8 @@ namespace CMBC.EasyFactor.CaseMgr.ContractMgr
                 Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
                 if (selectedContract != null)
                 {
-                    ContractDetail contractDetail = new ContractDetail(selectedContract, ContractDetail.OpContractType.UPDATE_CONTRACT);
-                    contractDetail.ShowDialog(this);
+                    ClientDetail clientDetail = new ClientDetail(selectedContract.Client, ClientDetail.OpContractType.UPDATE_CONTRACT);
+                    clientDetail.ShowDialog(this);
                 }
             }
         }
@@ -207,8 +220,8 @@ namespace CMBC.EasyFactor.CaseMgr.ContractMgr
                 Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
                 if (selectedContract != null)
                 {
-                    ContractDetail contractDetail = new ContractDetail(selectedContract, ContractDetail.OpContractType.DETAIL_CONTRACT);
-                    contractDetail.ShowDialog(this);
+                    ClientDetail clientDetail = new ClientDetail(selectedContract.Client, ClientDetail.OpContractType.DETAIL_CONTRACT);
+                    clientDetail.ShowDialog(this);
                 }
             }
         }

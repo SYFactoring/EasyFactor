@@ -103,16 +103,10 @@
     <Compile Include="CaseMgr\CaseMgr.Designer.cs">
       <DependentUpon>CaseMgr.cs</DependentUpon>
     </Compile>
-    <Compile Include="CaseMgr\ContractMgr\ContractDetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CaseMgr\ContractMgr\ContractDetail.Designer.cs">
-      <DependentUpon>ContractDetail.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CaseMgr\ContractMgr\ContractMgr.cs">
+    <Compile Include="InfoMgr\ClientMgr\ContractMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CaseMgr\ContractMgr\ContractMgr.Designer.cs">
+    <Compile Include="InfoMgr\ClientMgr\ContractMgr.Designer.cs">
       <DependentUpon>ContractMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="CaseMgr\CreditCoverNegMgr.cs">
@@ -148,18 +142,6 @@
     </Compile>
     <Compile Include="InfoMgr\ClientMgr\ClientMgr.Designer.cs">
       <DependentUpon>ClientMgr.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CaseMgr\CDAMgr\CDADetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CaseMgr\CDAMgr\CDADetail.Designer.cs">
-      <DependentUpon>CDADetail.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CaseMgr\CDAMgr\CDAMgr.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CaseMgr\CDAMgr\CDAMgr.Designer.cs">
-      <DependentUpon>CDAMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="InfoMgr\DepartmentMgr\DepartmentMgr.cs">
       <SubType>UserControl</SubType>
@@ -240,19 +222,19 @@
     </None>
     <EmbeddedResource Include="CaseMgr\CaseDetail.resx">
       <DependentUpon>CaseDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CaseMgr\CaseMgr.resx">
       <DependentUpon>CaseMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CaseMgr\ContractMgr\ContractDetail.resx">
-      <DependentUpon>ContractDetail.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CaseMgr\ContractMgr\ContractMgr.resx">
+    <EmbeddedResource Include="InfoMgr\ClientMgr\ContractMgr.resx">
       <DependentUpon>ContractMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CaseMgr\CreditCoverNegMgr.resx">
       <DependentUpon>CreditCoverNegMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Help\About\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
@@ -264,14 +246,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\ClientMgr\ClientMgr.resx">
       <DependentUpon>ClientMgr.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CaseMgr\CDAMgr\CDADetail.resx">
-      <DependentUpon>CDADetail.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CaseMgr\CDAMgr\CDAMgr.resx">
-      <DependentUpon>CDAMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\DepartmentMgr\DepartmentMgr.resx">

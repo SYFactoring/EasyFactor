@@ -410,9 +410,10 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.groupPanelUser.Controls.Add(this.loginDate);
             this.groupPanelUser.Controls.Add(this.msnTextBox);
             this.groupPanelUser.Controls.Add(mSNLabel);
-            this.groupPanelUser.Location = new System.Drawing.Point(4, 3);
+            this.groupPanelUser.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelUser.Location = new System.Drawing.Point(0, 0);
             this.groupPanelUser.Name = "groupPanelUser";
-            this.groupPanelUser.Size = new System.Drawing.Size(270, 279);
+            this.groupPanelUser.Size = new System.Drawing.Size(277, 279);
             // 
             // 
             // 

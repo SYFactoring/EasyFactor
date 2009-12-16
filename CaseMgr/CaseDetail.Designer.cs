@@ -29,9 +29,34 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevComponents.DotNetBar.LabelX requestAmountLabel;
+            DevComponents.DotNetBar.LabelX approveAmountLabel;
+            DevComponents.DotNetBar.LabelX iFPriceLabel;
+            DevComponents.DotNetBar.LabelX replyDateLabel;
+            DevComponents.DotNetBar.LabelX requestDateLabel;
+            DevComponents.DotNetBar.LabelX approveTypeLabel;
+            DevComponents.DotNetBar.LabelX commentLabel;
+            DevComponents.DotNetBar.LabelX createUserNameLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.Label caseCodeLabel;
             this.tabControl = new DevComponents.DotNetBar.TabControl();
+            this.tabPanelCreditCoverNeg = new DevComponents.DotNetBar.TabControlPanel();
+            this.dgvCreditCoverNegs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.groupPanelCreditCoverNeg = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.btnCreditCoverNegDelete = new DevComponents.DotNetBar.ButtonX();
+            this.btnCreditCoverNegSave = new DevComponents.DotNetBar.ButtonX();
+            this.btnCreditCoverNegUpdate = new DevComponents.DotNetBar.ButtonX();
+            this.btnCreditCoverNegNew = new DevComponents.DotNetBar.ButtonX();
+            this.btnCreditCoverNegRefresh = new DevComponents.DotNetBar.ButtonX();
+            this.createUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.creditCoverNegotiationBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.approveTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.requestDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.replyDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.iFPriceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.approveAmountTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.requestAmountTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tabItemCreditCoverNeg = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelCase = new DevComponents.DotNetBar.TabControlPanel();
             this.btnCaseUpdate = new DevComponents.DotNetBar.ButtonX();
             this.btnCaseClose = new DevComponents.DotNetBar.ButtonX();
@@ -80,26 +105,141 @@
             this.lblCaseSellerNo = new DevComponents.DotNetBar.LabelX();
             this.lblCaseSellerFactor = new DevComponents.DotNetBar.LabelX();
             this.tabItemCase = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelCreditCoverNeg = new DevComponents.DotNetBar.TabControlPanel();
-            this.tabItemCreditCoverNeg = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelCDA = new DevComponents.DotNetBar.TabControlPanel();
             this.tabItemCDA = new DevComponents.DotNetBar.TabItem(this.components);
-            this.groupPanelCreditCoverNeg = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.dgvCreditCoverNegs = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.creditCoverNegotiationBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.caseCodeTextBox = new System.Windows.Forms.TextBox();
-            caseCodeLabel = new System.Windows.Forms.Label();
+            this.comboItem8 = new DevComponents.Editors.ComboItem();
+            this.comboItem9 = new DevComponents.Editors.ComboItem();
+            requestAmountLabel = new DevComponents.DotNetBar.LabelX();
+            approveAmountLabel = new DevComponents.DotNetBar.LabelX();
+            iFPriceLabel = new DevComponents.DotNetBar.LabelX();
+            replyDateLabel = new DevComponents.DotNetBar.LabelX();
+            requestDateLabel = new DevComponents.DotNetBar.LabelX();
+            approveTypeLabel = new DevComponents.DotNetBar.LabelX();
+            commentLabel = new DevComponents.DotNetBar.LabelX();
+            createUserNameLabel = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
+            this.tabPanelCreditCoverNeg.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCreditCoverNegs)).BeginInit();
+            this.groupPanelCreditCoverNeg.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.creditCoverNegotiationBindingSource)).BeginInit();
             this.tabPanelCase.SuspendLayout();
             this.groupPanelCase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.caseBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diCaseAppDate)).BeginInit();
-            this.tabPanelCreditCoverNeg.SuspendLayout();
-            this.groupPanelCreditCoverNeg.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCreditCoverNegs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.creditCoverNegotiationBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // requestAmountLabel
+            // 
+            requestAmountLabel.AutoSize = true;
+            requestAmountLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            requestAmountLabel.BackgroundStyle.Class = "";
+            requestAmountLabel.Location = new System.Drawing.Point(8, 14);
+            requestAmountLabel.Name = "requestAmountLabel";
+            requestAmountLabel.Size = new System.Drawing.Size(59, 16);
+            requestAmountLabel.TabIndex = 0;
+            requestAmountLabel.Text = "申请额度:";
+            // 
+            // approveAmountLabel
+            // 
+            approveAmountLabel.AutoSize = true;
+            approveAmountLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            approveAmountLabel.BackgroundStyle.Class = "";
+            approveAmountLabel.Location = new System.Drawing.Point(8, 38);
+            approveAmountLabel.Name = "approveAmountLabel";
+            approveAmountLabel.Size = new System.Drawing.Size(59, 16);
+            approveAmountLabel.TabIndex = 2;
+            approveAmountLabel.Text = "回复额度:";
+            // 
+            // iFPriceLabel
+            // 
+            iFPriceLabel.AutoSize = true;
+            iFPriceLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            iFPriceLabel.BackgroundStyle.Class = "";
+            iFPriceLabel.Location = new System.Drawing.Point(180, 38);
+            iFPriceLabel.Name = "iFPriceLabel";
+            iFPriceLabel.Size = new System.Drawing.Size(44, 16);
+            iFPriceLabel.TabIndex = 4;
+            iFPriceLabel.Text = "IF报价:";
+            // 
+            // replyDateLabel
+            // 
+            replyDateLabel.AutoSize = true;
+            replyDateLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            replyDateLabel.BackgroundStyle.Class = "";
+            replyDateLabel.Location = new System.Drawing.Point(336, 38);
+            replyDateLabel.Name = "replyDateLabel";
+            replyDateLabel.Size = new System.Drawing.Size(59, 16);
+            replyDateLabel.TabIndex = 6;
+            replyDateLabel.Text = "回复日期:";
+            // 
+            // requestDateLabel
+            // 
+            requestDateLabel.AutoSize = true;
+            requestDateLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            requestDateLabel.BackgroundStyle.Class = "";
+            requestDateLabel.Location = new System.Drawing.Point(336, 13);
+            requestDateLabel.Name = "requestDateLabel";
+            requestDateLabel.Size = new System.Drawing.Size(59, 16);
+            requestDateLabel.TabIndex = 8;
+            requestDateLabel.Text = "申请日期:";
+            // 
+            // approveTypeLabel
+            // 
+            approveTypeLabel.AutoSize = true;
+            approveTypeLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            approveTypeLabel.BackgroundStyle.Class = "";
+            approveTypeLabel.Location = new System.Drawing.Point(177, 14);
+            approveTypeLabel.Name = "approveTypeLabel";
+            approveTypeLabel.Size = new System.Drawing.Size(53, 16);
+            approveTypeLabel.TabIndex = 10;
+            approveTypeLabel.Text = "P/C标识:";
+            // 
+            // commentLabel
+            // 
+            commentLabel.AutoSize = true;
+            commentLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            commentLabel.BackgroundStyle.Class = "";
+            commentLabel.Location = new System.Drawing.Point(33, 62);
+            commentLabel.Name = "commentLabel";
+            commentLabel.Size = new System.Drawing.Size(34, 16);
+            commentLabel.TabIndex = 12;
+            commentLabel.Text = "备注:";
+            // 
+            // createUserNameLabel
+            // 
+            createUserNameLabel.AutoSize = true;
+            createUserNameLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            createUserNameLabel.BackgroundStyle.Class = "";
+            createUserNameLabel.Location = new System.Drawing.Point(20, 107);
+            createUserNameLabel.Name = "createUserNameLabel";
+            createUserNameLabel.Size = new System.Drawing.Size(47, 16);
+            createUserNameLabel.TabIndex = 14;
+            createUserNameLabel.Text = "经办人:";
             // 
             // tabControl
             // 
@@ -113,13 +253,271 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl.SelectedTabIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(466, 409);
+            this.tabControl.Size = new System.Drawing.Size(521, 409);
             this.tabControl.TabIndex = 0;
             this.tabControl.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl.Tabs.Add(this.tabItemCase);
             this.tabControl.Tabs.Add(this.tabItemCreditCoverNeg);
             this.tabControl.Tabs.Add(this.tabItemCDA);
             this.tabControl.Text = "tabControl1";
+            // 
+            // tabPanelCreditCoverNeg
+            // 
+            this.tabPanelCreditCoverNeg.Controls.Add(this.dgvCreditCoverNegs);
+            this.tabPanelCreditCoverNeg.Controls.Add(this.groupPanelCreditCoverNeg);
+            this.tabPanelCreditCoverNeg.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelCreditCoverNeg.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelCreditCoverNeg.Name = "tabPanelCreditCoverNeg";
+            this.tabPanelCreditCoverNeg.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelCreditCoverNeg.Size = new System.Drawing.Size(521, 383);
+            this.tabPanelCreditCoverNeg.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelCreditCoverNeg.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelCreditCoverNeg.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelCreditCoverNeg.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelCreditCoverNeg.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelCreditCoverNeg.Style.GradientAngle = 90;
+            this.tabPanelCreditCoverNeg.TabIndex = 2;
+            this.tabPanelCreditCoverNeg.TabItem = this.tabItemCreditCoverNeg;
+            // 
+            // dgvCreditCoverNegs
+            // 
+            this.dgvCreditCoverNegs.AllowUserToAddRows = false;
+            this.dgvCreditCoverNegs.AllowUserToDeleteRows = false;
+            this.dgvCreditCoverNegs.AllowUserToOrderColumns = true;
+            this.dgvCreditCoverNegs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvCreditCoverNegs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCreditCoverNegs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvCreditCoverNegs.Location = new System.Drawing.Point(1, 166);
+            this.dgvCreditCoverNegs.Name = "dgvCreditCoverNegs";
+            this.dgvCreditCoverNegs.ReadOnly = true;
+            this.dgvCreditCoverNegs.Size = new System.Drawing.Size(519, 216);
+            this.dgvCreditCoverNegs.TabIndex = 1;
+            // 
+            // groupPanelCreditCoverNeg
+            // 
+            this.groupPanelCreditCoverNeg.AutoScroll = true;
+            this.groupPanelCreditCoverNeg.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelCreditCoverNeg.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelCreditCoverNeg.Controls.Add(this.btnCreditCoverNegDelete);
+            this.groupPanelCreditCoverNeg.Controls.Add(this.btnCreditCoverNegSave);
+            this.groupPanelCreditCoverNeg.Controls.Add(this.btnCreditCoverNegUpdate);
+            this.groupPanelCreditCoverNeg.Controls.Add(this.btnCreditCoverNegNew);
+            this.groupPanelCreditCoverNeg.Controls.Add(this.btnCreditCoverNegRefresh);
+            this.groupPanelCreditCoverNeg.Controls.Add(createUserNameLabel);
+            this.groupPanelCreditCoverNeg.Controls.Add(this.createUserNameTextBox);
+            this.groupPanelCreditCoverNeg.Controls.Add(commentLabel);
+            this.groupPanelCreditCoverNeg.Controls.Add(this.commentTextBox);
+            this.groupPanelCreditCoverNeg.Controls.Add(approveTypeLabel);
+            this.groupPanelCreditCoverNeg.Controls.Add(this.approveTypeComboBox);
+            this.groupPanelCreditCoverNeg.Controls.Add(requestDateLabel);
+            this.groupPanelCreditCoverNeg.Controls.Add(this.requestDateDateTimePicker);
+            this.groupPanelCreditCoverNeg.Controls.Add(replyDateLabel);
+            this.groupPanelCreditCoverNeg.Controls.Add(this.replyDateDateTimePicker);
+            this.groupPanelCreditCoverNeg.Controls.Add(iFPriceLabel);
+            this.groupPanelCreditCoverNeg.Controls.Add(this.iFPriceTextBox);
+            this.groupPanelCreditCoverNeg.Controls.Add(approveAmountLabel);
+            this.groupPanelCreditCoverNeg.Controls.Add(this.approveAmountTextBox);
+            this.groupPanelCreditCoverNeg.Controls.Add(requestAmountLabel);
+            this.groupPanelCreditCoverNeg.Controls.Add(this.requestAmountTextBox);
+            this.groupPanelCreditCoverNeg.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelCreditCoverNeg.Location = new System.Drawing.Point(1, 1);
+            this.groupPanelCreditCoverNeg.Name = "groupPanelCreditCoverNeg";
+            this.groupPanelCreditCoverNeg.Size = new System.Drawing.Size(519, 165);
+            // 
+            // 
+            // 
+            this.groupPanelCreditCoverNeg.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelCreditCoverNeg.Style.BackColorGradientAngle = 90;
+            this.groupPanelCreditCoverNeg.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelCreditCoverNeg.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelCreditCoverNeg.Style.BorderBottomWidth = 1;
+            this.groupPanelCreditCoverNeg.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelCreditCoverNeg.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelCreditCoverNeg.Style.BorderLeftWidth = 1;
+            this.groupPanelCreditCoverNeg.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelCreditCoverNeg.Style.BorderRightWidth = 1;
+            this.groupPanelCreditCoverNeg.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelCreditCoverNeg.Style.BorderTopWidth = 1;
+            this.groupPanelCreditCoverNeg.Style.Class = "";
+            this.groupPanelCreditCoverNeg.Style.CornerDiameter = 4;
+            this.groupPanelCreditCoverNeg.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelCreditCoverNeg.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelCreditCoverNeg.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelCreditCoverNeg.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelCreditCoverNeg.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelCreditCoverNeg.StyleMouseOver.Class = "";
+            this.groupPanelCreditCoverNeg.TabIndex = 0;
+            // 
+            // btnCreditCoverNegDelete
+            // 
+            this.btnCreditCoverNegDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCreditCoverNegDelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCreditCoverNegDelete.Location = new System.Drawing.Point(398, 132);
+            this.btnCreditCoverNegDelete.Name = "btnCreditCoverNegDelete";
+            this.btnCreditCoverNegDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnCreditCoverNegDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCreditCoverNegDelete.TabIndex = 20;
+            this.btnCreditCoverNegDelete.Text = "删除";
+            // 
+            // btnCreditCoverNegSave
+            // 
+            this.btnCreditCoverNegSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCreditCoverNegSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCreditCoverNegSave.Location = new System.Drawing.Point(317, 132);
+            this.btnCreditCoverNegSave.Name = "btnCreditCoverNegSave";
+            this.btnCreditCoverNegSave.Size = new System.Drawing.Size(75, 23);
+            this.btnCreditCoverNegSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCreditCoverNegSave.TabIndex = 19;
+            this.btnCreditCoverNegSave.Text = "保存";
+            // 
+            // btnCreditCoverNegUpdate
+            // 
+            this.btnCreditCoverNegUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCreditCoverNegUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCreditCoverNegUpdate.Location = new System.Drawing.Point(236, 132);
+            this.btnCreditCoverNegUpdate.Name = "btnCreditCoverNegUpdate";
+            this.btnCreditCoverNegUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnCreditCoverNegUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCreditCoverNegUpdate.TabIndex = 18;
+            this.btnCreditCoverNegUpdate.Text = "更新";
+            // 
+            // btnCreditCoverNegNew
+            // 
+            this.btnCreditCoverNegNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCreditCoverNegNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCreditCoverNegNew.Location = new System.Drawing.Point(155, 132);
+            this.btnCreditCoverNegNew.Name = "btnCreditCoverNegNew";
+            this.btnCreditCoverNegNew.Size = new System.Drawing.Size(75, 23);
+            this.btnCreditCoverNegNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCreditCoverNegNew.TabIndex = 17;
+            this.btnCreditCoverNegNew.Text = "新建";
+            // 
+            // btnCreditCoverNegRefresh
+            // 
+            this.btnCreditCoverNegRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCreditCoverNegRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCreditCoverNegRefresh.Location = new System.Drawing.Point(74, 132);
+            this.btnCreditCoverNegRefresh.Name = "btnCreditCoverNegRefresh";
+            this.btnCreditCoverNegRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnCreditCoverNegRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCreditCoverNegRefresh.TabIndex = 16;
+            this.btnCreditCoverNegRefresh.Text = "刷新";
+            // 
+            // createUserNameTextBox
+            // 
+            // 
+            // 
+            // 
+            this.createUserNameTextBox.Border.Class = "TextBoxBorder";
+            this.createUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.creditCoverNegotiationBindingSource, "CreateUserName", true));
+            this.createUserNameTextBox.Location = new System.Drawing.Point(74, 106);
+            this.createUserNameTextBox.Name = "createUserNameTextBox";
+            this.createUserNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.createUserNameTextBox.TabIndex = 15;
+            // 
+            // creditCoverNegotiationBindingSource
+            // 
+            this.creditCoverNegotiationBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CreditCoverNegotiation);
+            // 
+            // commentTextBox
+            // 
+            // 
+            // 
+            // 
+            this.commentTextBox.Border.Class = "TextBoxBorder";
+            this.commentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.creditCoverNegotiationBindingSource, "Comment", true));
+            this.commentTextBox.Location = new System.Drawing.Point(74, 61);
+            this.commentTextBox.Multiline = true;
+            this.commentTextBox.Name = "commentTextBox";
+            this.commentTextBox.Size = new System.Drawing.Size(433, 42);
+            this.commentTextBox.TabIndex = 13;
+            // 
+            // approveTypeComboBox
+            // 
+            this.approveTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.creditCoverNegotiationBindingSource, "ApproveType", true));
+            this.approveTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.approveTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.approveTypeComboBox.FormattingEnabled = true;
+            this.approveTypeComboBox.Items.AddRange(new object[] {
+            this.comboItem8,
+            this.comboItem9});
+            this.approveTypeComboBox.Location = new System.Drawing.Point(230, 8);
+            this.approveTypeComboBox.Name = "approveTypeComboBox";
+            this.approveTypeComboBox.Size = new System.Drawing.Size(100, 21);
+            this.approveTypeComboBox.TabIndex = 11;
+            // 
+            // requestDateDateTimePicker
+            // 
+            this.requestDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.creditCoverNegotiationBindingSource, "RequestDate", true));
+            this.requestDateDateTimePicker.Location = new System.Drawing.Point(404, 9);
+            this.requestDateDateTimePicker.Name = "requestDateDateTimePicker";
+            this.requestDateDateTimePicker.Size = new System.Drawing.Size(103, 20);
+            this.requestDateDateTimePicker.TabIndex = 9;
+            // 
+            // replyDateDateTimePicker
+            // 
+            this.replyDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.creditCoverNegotiationBindingSource, "ReplyDate", true));
+            this.replyDateDateTimePicker.Location = new System.Drawing.Point(404, 33);
+            this.replyDateDateTimePicker.Name = "replyDateDateTimePicker";
+            this.replyDateDateTimePicker.Size = new System.Drawing.Size(103, 20);
+            this.replyDateDateTimePicker.TabIndex = 7;
+            // 
+            // iFPriceTextBox
+            // 
+            // 
+            // 
+            // 
+            this.iFPriceTextBox.Border.Class = "TextBoxBorder";
+            this.iFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.creditCoverNegotiationBindingSource, "IFPrice", true));
+            this.iFPriceTextBox.Location = new System.Drawing.Point(230, 34);
+            this.iFPriceTextBox.Name = "iFPriceTextBox";
+            this.iFPriceTextBox.Size = new System.Drawing.Size(100, 20);
+            this.iFPriceTextBox.TabIndex = 5;
+            // 
+            // approveAmountTextBox
+            // 
+            // 
+            // 
+            // 
+            this.approveAmountTextBox.Border.Class = "TextBoxBorder";
+            this.approveAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.creditCoverNegotiationBindingSource, "ApproveAmount", true));
+            this.approveAmountTextBox.Location = new System.Drawing.Point(74, 34);
+            this.approveAmountTextBox.Name = "approveAmountTextBox";
+            this.approveAmountTextBox.Size = new System.Drawing.Size(100, 20);
+            this.approveAmountTextBox.TabIndex = 3;
+            // 
+            // requestAmountTextBox
+            // 
+            // 
+            // 
+            // 
+            this.requestAmountTextBox.Border.Class = "TextBoxBorder";
+            this.requestAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.creditCoverNegotiationBindingSource, "RequestAmount", true));
+            this.requestAmountTextBox.Location = new System.Drawing.Point(74, 9);
+            this.requestAmountTextBox.Name = "requestAmountTextBox";
+            this.requestAmountTextBox.Size = new System.Drawing.Size(100, 20);
+            this.requestAmountTextBox.TabIndex = 1;
+            // 
+            // tabItemCreditCoverNeg
+            // 
+            this.tabItemCreditCoverNeg.AttachedControl = this.tabPanelCreditCoverNeg;
+            this.tabItemCreditCoverNeg.Name = "tabItemCreditCoverNeg";
+            this.tabItemCreditCoverNeg.Text = "关联额度";
             // 
             // tabPanelCase
             // 
@@ -131,7 +529,7 @@
             this.tabPanelCase.Location = new System.Drawing.Point(0, 26);
             this.tabPanelCase.Name = "tabPanelCase";
             this.tabPanelCase.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelCase.Size = new System.Drawing.Size(466, 383);
+            this.tabPanelCase.Size = new System.Drawing.Size(521, 383);
             this.tabPanelCase.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelCase.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelCase.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -216,9 +614,10 @@
             this.groupPanelCase.Controls.Add(this.tbCaseSellerNo);
             this.groupPanelCase.Controls.Add(this.lblCaseSellerNo);
             this.groupPanelCase.Controls.Add(this.lblCaseSellerFactor);
-            this.groupPanelCase.Location = new System.Drawing.Point(4, 0);
+            this.groupPanelCase.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelCase.Location = new System.Drawing.Point(1, 1);
             this.groupPanelCase.Name = "groupPanelCase";
-            this.groupPanelCase.Size = new System.Drawing.Size(456, 345);
+            this.groupPanelCase.Size = new System.Drawing.Size(519, 345);
             // 
             // 
             // 
@@ -781,38 +1180,13 @@
             this.tabItemCase.Name = "tabItemCase";
             this.tabItemCase.Text = "案件";
             // 
-            // tabPanelCreditCoverNeg
-            // 
-            this.tabPanelCreditCoverNeg.Controls.Add(this.dgvCreditCoverNegs);
-            this.tabPanelCreditCoverNeg.Controls.Add(this.groupPanelCreditCoverNeg);
-            this.tabPanelCreditCoverNeg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelCreditCoverNeg.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelCreditCoverNeg.Name = "tabPanelCreditCoverNeg";
-            this.tabPanelCreditCoverNeg.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelCreditCoverNeg.Size = new System.Drawing.Size(466, 383);
-            this.tabPanelCreditCoverNeg.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelCreditCoverNeg.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelCreditCoverNeg.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelCreditCoverNeg.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelCreditCoverNeg.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelCreditCoverNeg.Style.GradientAngle = 90;
-            this.tabPanelCreditCoverNeg.TabIndex = 2;
-            this.tabPanelCreditCoverNeg.TabItem = this.tabItemCreditCoverNeg;
-            // 
-            // tabItemCreditCoverNeg
-            // 
-            this.tabItemCreditCoverNeg.AttachedControl = this.tabPanelCreditCoverNeg;
-            this.tabItemCreditCoverNeg.Name = "tabItemCreditCoverNeg";
-            this.tabItemCreditCoverNeg.Text = "关联额度";
-            // 
             // tabPanelCDA
             // 
             this.tabPanelCDA.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPanelCDA.Location = new System.Drawing.Point(0, 26);
             this.tabPanelCDA.Name = "tabPanelCDA";
             this.tabPanelCDA.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelCDA.Size = new System.Drawing.Size(466, 383);
+            this.tabPanelCDA.Size = new System.Drawing.Size(521, 383);
             this.tabPanelCDA.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelCDA.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelCDA.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -829,95 +1203,19 @@
             this.tabItemCDA.Name = "tabItemCDA";
             this.tabItemCDA.Text = "额度通知书";
             // 
-            // groupPanelCreditCoverNeg
+            // comboItem8
             // 
-            this.groupPanelCreditCoverNeg.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelCreditCoverNeg.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelCreditCoverNeg.Controls.Add(caseCodeLabel);
-            this.groupPanelCreditCoverNeg.Controls.Add(this.caseCodeTextBox);
-            this.groupPanelCreditCoverNeg.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelCreditCoverNeg.Location = new System.Drawing.Point(1, 1);
-            this.groupPanelCreditCoverNeg.Name = "groupPanelCreditCoverNeg";
-            this.groupPanelCreditCoverNeg.Size = new System.Drawing.Size(464, 224);
+            this.comboItem8.Text = "P-预额度";
             // 
+            // comboItem9
             // 
-            // 
-            this.groupPanelCreditCoverNeg.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelCreditCoverNeg.Style.BackColorGradientAngle = 90;
-            this.groupPanelCreditCoverNeg.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelCreditCoverNeg.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCreditCoverNeg.Style.BorderBottomWidth = 1;
-            this.groupPanelCreditCoverNeg.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelCreditCoverNeg.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCreditCoverNeg.Style.BorderLeftWidth = 1;
-            this.groupPanelCreditCoverNeg.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCreditCoverNeg.Style.BorderRightWidth = 1;
-            this.groupPanelCreditCoverNeg.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCreditCoverNeg.Style.BorderTopWidth = 1;
-            this.groupPanelCreditCoverNeg.Style.Class = "";
-            this.groupPanelCreditCoverNeg.Style.CornerDiameter = 4;
-            this.groupPanelCreditCoverNeg.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelCreditCoverNeg.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelCreditCoverNeg.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelCreditCoverNeg.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelCreditCoverNeg.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelCreditCoverNeg.StyleMouseOver.Class = "";
-            this.groupPanelCreditCoverNeg.TabIndex = 0;
-            // 
-            // dgvCreditCoverNegs
-            // 
-            this.dgvCreditCoverNegs.AllowUserToAddRows = false;
-            this.dgvCreditCoverNegs.AllowUserToDeleteRows = false;
-            this.dgvCreditCoverNegs.AllowUserToOrderColumns = true;
-            this.dgvCreditCoverNegs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvCreditCoverNegs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCreditCoverNegs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvCreditCoverNegs.Location = new System.Drawing.Point(1, 225);
-            this.dgvCreditCoverNegs.Name = "dgvCreditCoverNegs";
-            this.dgvCreditCoverNegs.ReadOnly = true;
-            this.dgvCreditCoverNegs.Size = new System.Drawing.Size(464, 157);
-            this.dgvCreditCoverNegs.TabIndex = 1;
-            // 
-            // creditCoverNegotiationBindingSource
-            // 
-            this.creditCoverNegotiationBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CreditCoverNegotiation);
-            // 
-            // caseCodeLabel
-            // 
-            caseCodeLabel.AutoSize = true;
-            caseCodeLabel.Location = new System.Drawing.Point(17, 11);
-            caseCodeLabel.Name = "caseCodeLabel";
-            caseCodeLabel.Size = new System.Drawing.Size(62, 13);
-            caseCodeLabel.TabIndex = 0;
-            caseCodeLabel.Text = "Case Code:";
-            // 
-            // caseCodeTextBox
-            // 
-            this.caseCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.creditCoverNegotiationBindingSource, "CaseCode", true));
-            this.caseCodeTextBox.Location = new System.Drawing.Point(85, 8);
-            this.caseCodeTextBox.Name = "caseCodeTextBox";
-            this.caseCodeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.caseCodeTextBox.TabIndex = 1;
+            this.comboItem9.Text = "C-正式额度";
             // 
             // CaseDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 409);
+            this.ClientSize = new System.Drawing.Size(521, 409);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.Name = "CaseDetail";
@@ -925,15 +1223,15 @@
             this.Text = "CaseDetail";
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
+            this.tabPanelCreditCoverNeg.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCreditCoverNegs)).EndInit();
+            this.groupPanelCreditCoverNeg.ResumeLayout(false);
+            this.groupPanelCreditCoverNeg.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.creditCoverNegotiationBindingSource)).EndInit();
             this.tabPanelCase.ResumeLayout(false);
             this.groupPanelCase.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.caseBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diCaseAppDate)).EndInit();
-            this.tabPanelCreditCoverNeg.ResumeLayout(false);
-            this.groupPanelCreditCoverNeg.ResumeLayout(false);
-            this.groupPanelCreditCoverNeg.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCreditCoverNegs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.creditCoverNegotiationBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -995,7 +1293,21 @@
         private System.Windows.Forms.BindingSource caseBindingSource;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvCreditCoverNegs;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCreditCoverNeg;
-        private System.Windows.Forms.TextBox caseCodeTextBox;
         private System.Windows.Forms.BindingSource creditCoverNegotiationBindingSource;
+        private System.Windows.Forms.DateTimePicker requestDateDateTimePicker;
+        private System.Windows.Forms.DateTimePicker replyDateDateTimePicker;
+        private DevComponents.DotNetBar.Controls.TextBoxX iFPriceTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX approveAmountTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX requestAmountTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX createUserNameTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx approveTypeComboBox;
+        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegDelete;
+        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegSave;
+        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegUpdate;
+        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegNew;
+        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegRefresh;
+        private DevComponents.Editors.ComboItem comboItem8;
+        private DevComponents.Editors.ComboItem comboItem9;
     }
 }
