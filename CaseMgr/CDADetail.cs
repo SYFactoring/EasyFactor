@@ -76,11 +76,5 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        private string GenerateCDACode()
-        {
-            string date = String.Format("{0:yyyy}{0:MM}{0:DD}", DateTime.Today);
-            string CDACode = "CDA"+date + "-" + String.Format("{0:D2}", App.Current.DbContext.CDAs.Count(c => c.CaseCode.StartsWith("CDA" + date)) + 1);
-            return CDACode;
-        }
     }
 }

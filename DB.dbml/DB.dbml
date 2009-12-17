@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=192.168.1.100;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=YIMING-PC\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[User]" Member="Users">
     <Type Name="User">
       <Column Name="UserID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -13,56 +13,6 @@
       <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="MSN" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="LoginDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.CDA" Member="CDAs">
-    <Type Name="CDA">
-      <Column Name="CDACode" Type="System.String" DbType="NChar(14) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CaseCode" Type="System.String" DbType="NChar(13)" CanBeNull="true" />
-      <Column Name="IsRecoarse" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
-      <Column Name="IsFinance" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
-      <Column Name="FinanceType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IsNotice" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
-      <Column Name="AssignType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CreditCoverCurr" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
-      <Column Name="CreditCover" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="IsCreditCoverRevolving" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
-      <Column Name="ApproveNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="PUGProportion" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="CreditCoverPeriodBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CreditCoverPeriodEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="PUGPeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ReassignGracePeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="FinanceLineCurr" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
-      <Column Name="FinanceLine" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="FinanceLinePeriodBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="FinanceLinePeriodEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="FinanceProportion" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="PaymentTerms" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="FinanceGracePeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Deductibles" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="LossThreshold" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Price" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="EFPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="IFPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="CommissonType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CommissionTypeComment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="HandFeeCurr" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
-      <Column Name="HandFee" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="CDAValueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CDADueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CDAStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="NoticeMethod" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="NoticePerson" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Fax" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="CDA_InvoiceAssignBatch" Member="InvoiceAssignBatches" OtherKey="CDACode" Type="InvoiceAssignBatch" />
-      <Association Name="CDA_InvoiceFinanceBatch" Member="InvoiceFinanceBatches" OtherKey="CDACode" Type="InvoiceFinanceBatch" />
-      <Association Name="CDA_InvoicePaymentBatch" Member="InvoicePaymentBatches" OtherKey="CDACode" Type="InvoicePaymentBatch" />
-      <Association Name="Case_CDA" Member="Case" ThisKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Client" Member="Clients">
@@ -258,54 +208,6 @@
       <Association Name="InvoicePaymentBatch_Invoice" Member="InvoicePaymentBatch" ThisKey="PaymentBatchNo" Type="InvoicePaymentBatch" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.InvoiceAssignBatch" Member="InvoiceAssignBatches">
-    <Type Name="InvoiceAssignBatch">
-      <Column Name="AssignBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CDACode" Type="System.String" DbType="NChar(14)" CanBeNull="true" />
-      <Column Name="BatchCurrency" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
-      <Column Name="BatchDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CheckResult" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="RejectReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="CheckUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="IsCreateMsg" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Association Name="InvoiceAssignBatch_Invoice" Member="Invoices" OtherKey="AssignBatchNo" Type="Invoice" />
-      <Association Name="CDA_InvoiceAssignBatch" Member="CDA" ThisKey="CDACode" Type="CDA" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.InvoiceFinanceBatch" Member="InvoiceFinanceBatches">
-    <Type Name="InvoiceFinanceBatch">
-      <Column Name="FinanceBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CDACode" Type="System.String" DbType="NChar(14)" CanBeNull="true" />
-      <Column Name="BatchConrrency" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
-      <Column Name="FinanceAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="FinancePeriodBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="FinnacePeriodEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="FinanceRate" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="InterestType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="HaveCorrencepodentBank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="FactorCode" Type="System.String" DbType="NChar(7)" CanBeNull="true" />
-      <Column Name="CostRate" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Association Name="InvoiceFinanceBatch_Invoice" Member="Invoices" OtherKey="FinanceBatchNo" Type="Invoice" />
-      <Association Name="CDA_InvoiceFinanceBatch" Member="CDA" ThisKey="CDACode" Type="CDA" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.InvoicePaymentBatch" Member="InvoicePaymentBatches">
-    <Type Name="InvoicePaymentBatch">
-      <Column Name="PaymentBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CDACode" Type="System.String" DbType="NChar(14)" CanBeNull="true" />
-      <Column Name="PaymentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IsCreateMsg" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Association Name="InvoicePaymentBatch_Invoice" Member="Invoices" OtherKey="PaymentBatchNo" Type="Invoice" />
-      <Association Name="CDA_InvoicePaymentBatch" Member="CDA" ThisKey="CDACode" Type="CDA" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Department" Member="Departments">
     <Type Name="Department">
       <Column Name="DepartmentCode" Type="System.String" DbType="VarChar(14) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -389,8 +291,8 @@
       <Column Name="CaseAppDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CaseMark" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="Case_CDA" Member="CDAs" OtherKey="CaseCode" Type="CDA" />
       <Association Name="Case_CreditCoverNegotiation" Member="CreditCoverNegotiations" OtherKey="CaseCode" Type="CreditCoverNegotiation" />
+      <Association Name="Case_CDA" Member="CDAs" OtherKey="CaseCode" Type="CDA" />
       <Association Name="Client_Case" Member="BuyerClient" ThisKey="BuyerCode" Type="Client" IsForeignKey="true" />
       <Association Name="Department_Case" Member="CoDepartment" ThisKey="CoDepartmentCode" Type="Department" IsForeignKey="true" />
       <Association Name="Department_Case1" Member="OwnerDepartment" ThisKey="OwnerDepartmentCode" Type="Department" IsForeignKey="true" />
@@ -446,6 +348,103 @@
       <Association Name="Factor_Case" Member="BuyerCases" OtherKey="BuyerFactorCode" Type="Case" />
       <Association Name="Factor_Case1" Member="SellerCases" OtherKey="SellerFactorCode" Type="Case" />
       <Association Name="FactorGroup_Factor" Member="FactorGroup" ThisKey="GroupNo" Type="FactorGroup" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CDA" Member="CDAs">
+    <Type Name="CDA">
+      <Column Name="CDAID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CaseCode" Type="System.String" DbType="NChar(13)" CanBeNull="true" />
+      <Column Name="IsRecoarse" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="FinanceType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsNotice" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="AssignType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreditCoverCurr" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
+      <Column Name="CreditCover" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="IsCreditCoverRevolving" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="ApproveNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PUGProportion" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CreditCoverPeriodBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreditCoverPeriodEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PUGPeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReassignGracePeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FinanceLineCurr" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
+      <Column Name="FinanceLine" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FinanceLinePeriodBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FinanceLinePeriodEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FinanceProportion" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PaymentTerms" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="FinanceGracePeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Deductibles" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="LossThreshold" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="EFPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="IFPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CommissonType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CommissionTypeComment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="HandFeeCurr" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
+      <Column Name="HandFee" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CDAValueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CDADueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CDAStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NoticeMethod" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NoticePerson" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="CDA_InvoiceAssignBatch" Member="InvoiceAssignBatches" OtherKey="CDAID" Type="InvoiceAssignBatch" />
+      <Association Name="CDA_InvoiceFinanceBatch" Member="InvoiceFinanceBatches" OtherKey="CDAID" Type="InvoiceFinanceBatch" />
+      <Association Name="CDA_InvoicePaymentBatch" Member="InvoicePaymentBatches" OtherKey="CDAID" Type="InvoicePaymentBatch" />
+      <Association Name="Case_CDA" Member="Case" ThisKey="CaseCode" Type="Case" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoiceAssignBatch" Member="InvoiceAssignBatches">
+    <Type Name="InvoiceAssignBatch">
+      <Column Name="AssignBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CDAID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BatchCurrency" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
+      <Column Name="BatchDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CheckResult" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="RejectReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="CheckUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsCreateMsg" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="InvoiceAssignBatch_Invoice" Member="Invoices" OtherKey="AssignBatchNo" Type="Invoice" />
+      <Association Name="CDA_InvoiceAssignBatch" Member="CDA" ThisKey="CDAID" Type="CDA" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoiceFinanceBatch" Member="InvoiceFinanceBatches">
+    <Type Name="InvoiceFinanceBatch">
+      <Column Name="FinanceBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CDAID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BatchConrrency" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
+      <Column Name="FinanceAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FinancePeriodBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FinnacePeriodEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FinanceRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="InterestType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="HaveCorrencepodentBank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FactorCode" Type="System.String" DbType="NChar(7)" CanBeNull="true" />
+      <Column Name="CostRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="InvoiceFinanceBatch_Invoice" Member="Invoices" OtherKey="FinanceBatchNo" Type="Invoice" />
+      <Association Name="CDA_InvoiceFinanceBatch" Member="CDA" ThisKey="CDAID" Type="CDA" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoicePaymentBatch" Member="InvoicePaymentBatches">
+    <Type Name="InvoicePaymentBatch">
+      <Column Name="PaymentBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CDAID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PaymentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsCreateMsg" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="InvoicePaymentBatch_Invoice" Member="Invoices" OtherKey="PaymentBatchNo" Type="Invoice" />
+      <Association Name="CDA_InvoicePaymentBatch" Member="CDA" ThisKey="CDAID" Type="CDA" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
