@@ -80,18 +80,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void QueryUsers(object sender, System.EventArgs e)
         {
-            string keyword = tbKeyword.Text.Trim();
-
-            var queryResult =
-            App.Current.DbContext.Users.Where(
-                u => u.Name.Contains(keyword)
-                  || u.UserID.Contains(keyword)
-                  || u.EDIAccount.Contains(keyword)
-                  || u.MSN.Contains(keyword)
-                  || u.Phone.Contains(keyword)
-                  || u.Telphone.Contains(keyword)
-                  || u.Email.Contains(keyword));
-            bs.DataSource = queryResult.ToList();
+            var queryResult = App.Current.DbContext.Users.Where(u => u.UserID.Contains(tbUserID.Text));
+            bs.DataSource = queryResult;
             dgvUsers.DataSource = bs;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }

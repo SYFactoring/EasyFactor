@@ -42,7 +42,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                              (d.DepartmentCode==null?string.Empty:d.DepartmentCode).Contains(this.tbDepartmentCode.Text)
                           && (d.DepartmentName==null?string.Empty:d.DepartmentName).Contains(this.tbDepartmentName.Text));
            
-            this.dgvDepts.DataSource = queryResult.ToList();
+            this.dgvDepts.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 

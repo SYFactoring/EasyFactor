@@ -47,8 +47,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuFactorMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemSelectFactor = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDetailFactor = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +59,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.menuItemDeleteFactor = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemImportFactors = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.cbCountry = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.comboItem5 = new DevComponents.Editors.ComboItem();
+            this.comboItem6 = new DevComponents.Editors.ComboItem();
+            this.comboItem7 = new DevComponents.Editors.ComboItem();
+            this.comboItem8 = new DevComponents.Editors.ComboItem();
+            this.comboItem9 = new DevComponents.Editors.ComboItem();
+            this.lblCountry = new DevComponents.DotNetBar.LabelX();
             this.cbFactorType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.comboItem0 = new DevComponents.Editors.ComboItem();
             this.comboItem1 = new DevComponents.Editors.ComboItem();
@@ -116,13 +123,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.IsAgreementSignColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CommentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FactorGroupColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblCountry = new DevComponents.DotNetBar.LabelX();
-            this.cbCountry = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem5 = new DevComponents.Editors.ComboItem();
-            this.comboItem6 = new DevComponents.Editors.ComboItem();
-            this.comboItem7 = new DevComponents.Editors.ComboItem();
-            this.comboItem8 = new DevComponents.Editors.ComboItem();
-            this.comboItem9 = new DevComponents.Editors.ComboItem();
             this.contextMenuFactorMgr.SuspendLayout();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactors)).BeginInit();
@@ -213,7 +213,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(911, 34);
+            this.panelQuery.Size = new System.Drawing.Size(911, 42);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -222,6 +222,56 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 1;
+            // 
+            // cbCountry
+            // 
+            this.cbCountry.DisplayMember = "Text";
+            this.cbCountry.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCountry.FormattingEnabled = true;
+            this.cbCountry.Items.AddRange(new object[] {
+            this.comboItem5,
+            this.comboItem6,
+            this.comboItem7,
+            this.comboItem8,
+            this.comboItem9});
+            this.cbCountry.Location = new System.Drawing.Point(216, 10);
+            this.cbCountry.Name = "cbCountry";
+            this.cbCountry.Size = new System.Drawing.Size(99, 21);
+            this.cbCountry.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCountry.TabIndex = 9;
+            // 
+            // comboItem5
+            // 
+            this.comboItem5.Text = "全部";
+            // 
+            // comboItem6
+            // 
+            this.comboItem6.Text = "保理商";
+            // 
+            // comboItem7
+            // 
+            this.comboItem7.Text = "保险公司";
+            // 
+            // comboItem8
+            // 
+            this.comboItem8.Text = "监管机构";
+            // 
+            // comboItem9
+            // 
+            this.comboItem9.Text = "代付行";
+            // 
+            // lblCountry
+            // 
+            // 
+            // 
+            // 
+            this.lblCountry.BackgroundStyle.Class = "";
+            this.lblCountry.Location = new System.Drawing.Point(175, 9);
+            this.lblCountry.Name = "lblCountry";
+            this.lblCountry.Size = new System.Drawing.Size(64, 23);
+            this.lblCountry.TabIndex = 8;
+            this.lblCountry.Text = "所在国";
             // 
             // cbFactorType
             // 
@@ -268,9 +318,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(728, 21);
+            this.lblCount.Location = new System.Drawing.Point(725, 13);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.Size = new System.Drawing.Size(75, 16);
             this.lblCount.TabIndex = 7;
             // 
             // btnQuery
@@ -348,14 +398,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactors.AllowUserToAddRows = false;
             this.dgvFactors.AllowUserToDeleteRows = false;
             this.dgvFactors.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactors.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactors.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvFactors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFactors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.factorCodeColumn,
@@ -403,23 +453,23 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.FactorGroupColumn});
             this.dgvFactors.ContextMenuStrip = this.contextMenuFactorMgr;
             this.dgvFactors.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactors.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvFactors.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFactors.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvFactors.Location = new System.Drawing.Point(0, 34);
+            this.dgvFactors.Location = new System.Drawing.Point(0, 42);
             this.dgvFactors.MultiSelect = false;
             this.dgvFactors.Name = "dgvFactors";
             this.dgvFactors.ReadOnly = true;
             this.dgvFactors.RowTemplate.Height = 23;
             this.dgvFactors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFactors.Size = new System.Drawing.Size(911, 314);
+            this.dgvFactors.Size = new System.Drawing.Size(911, 306);
             this.dgvFactors.TabIndex = 2;
             this.dgvFactors.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
@@ -724,56 +774,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.FactorGroupColumn.Name = "FactorGroupColumn";
             this.FactorGroupColumn.ReadOnly = true;
             this.FactorGroupColumn.Visible = false;
-            // 
-            // lblCountry
-            // 
-            // 
-            // 
-            // 
-            this.lblCountry.BackgroundStyle.Class = "";
-            this.lblCountry.Location = new System.Drawing.Point(175, 9);
-            this.lblCountry.Name = "lblCountry";
-            this.lblCountry.Size = new System.Drawing.Size(64, 23);
-            this.lblCountry.TabIndex = 8;
-            this.lblCountry.Text = "所在国";
-            // 
-            // cbCountry
-            // 
-            this.cbCountry.DisplayMember = "Text";
-            this.cbCountry.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCountry.FormattingEnabled = true;
-            this.cbCountry.Items.AddRange(new object[] {
-            this.comboItem5,
-            this.comboItem6,
-            this.comboItem7,
-            this.comboItem8,
-            this.comboItem9});
-            this.cbCountry.Location = new System.Drawing.Point(216, 10);
-            this.cbCountry.Name = "cbCountry";
-            this.cbCountry.Size = new System.Drawing.Size(99, 21);
-            this.cbCountry.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCountry.TabIndex = 9;
-            // 
-            // comboItem5
-            // 
-            this.comboItem5.Text = "全部";
-            // 
-            // comboItem6
-            // 
-            this.comboItem6.Text = "保理商";
-            // 
-            // comboItem7
-            // 
-            this.comboItem7.Text = "保险公司";
-            // 
-            // comboItem8
-            // 
-            this.comboItem8.Text = "监管机构";
-            // 
-            // comboItem9
-            // 
-            this.comboItem9.Text = "代付行";
             // 
             // FactorMgr
             // 

@@ -1,5 +1,5 @@
 ﻿
-namespace CMBC.EasyFactor.InfoMgr.ClientMgr
+namespace CMBC.EasyFactor.CaseMgr
 {
     using System;
     using System.Linq;
@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using CMBC.EasyFactor.DB.dbml;
     using System.Data.SqlClient;
     using System.Threading;
+    using CMBC.EasyFactor.InfoMgr.ClientMgr;
 
     /// <summary>
     /// 

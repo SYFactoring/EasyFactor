@@ -11,12 +11,47 @@ namespace CMBC.EasyFactor.CaseMgr
     using DevComponents.Editors;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class CaseDetail : DevComponents.DotNetBar.Office2007Form
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private OpCaseType opCaseType;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private OpCreditCoverNegType opCreditCoverNegType;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="curCase"></param>
+        /// <param name="opCaseType"></param>
+        public CaseDetail(Case curCase, OpCaseType opCaseType)
+            : this(curCase, opCaseType, OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG)
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="curCase"></param>
+        /// <param name="opCreditCoverNegType"></param>
+        public CaseDetail(Case curCase, OpCreditCoverNegType opCreditCoverNegType)
+            : this(curCase, OpCaseType.DETAIL_CASE, opCreditCoverNegType)
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="curCase"></param>
+        /// <param name="opCaseType"></param>
+        /// <param name="opCreditCoverNegType"></param>
         public CaseDetail(Case curCase, OpCaseType opCaseType, OpCreditCoverNegType opCreditCoverNegType)
         {
             this.InitializeComponent();
@@ -42,21 +77,45 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public enum OpCaseType
         {
+            /// <summary>
+            /// 
+            /// </summary>
             NEW_CASE,
 
+            /// <summary>
+            /// 
+            /// </summary>
             UPDATE_CASE,
 
+            /// <summary>
+            /// 
+            /// </summary>
             DETAIL_CASE,
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public enum OpCreditCoverNegType
         {
+            /// <summary>
+            /// 
+            /// </summary>
             NEW_CREDIT_COVER_NEG,
 
+            /// <summary>
+            /// 
+            /// </summary>
             UPDATE_CREDIT_COVER_NEG,
 
+            /// <summary>
+            /// 
+            /// </summary>
             DETAIL_CREDIT_COVER_NEG
         }
 
@@ -70,6 +129,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCaseInvoiceCurrency.ValueMember = "CurrencyCode";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void UpdateCaseControlStatus()
         {
             if (this.opCaseType == OpCaseType.NEW_CASE)
@@ -223,6 +285,11 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CaseUpdate(object sender, EventArgs e)
         {
             this.opCaseType = OpCaseType.UPDATE_CASE;

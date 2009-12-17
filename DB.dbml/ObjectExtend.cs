@@ -10,6 +10,11 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             return this._DepartmentName;
         }
+
+        public static Department DefaultDepartment()
+        {
+            return new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" };
+        }
     }
 
     public partial class Client
@@ -56,8 +61,20 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return _CurrencyCode + " " + _CurrencyName;
+                if ("AA".Equals(_CurrencyCode))
+                {
+                    return "All";
+                }
+                else
+                {
+                    return _CurrencyCode + " " + _CurrencyName;
+                }
             }
+        }
+
+        public static Currency DefaultCurrency()
+        {
+            return new Currency() { CurrencyCode = "AA", CurrencyName = "All" };
         }
     }
 
@@ -68,7 +85,14 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return _CountryCode + " " + _CountryNameEN;
+                if ("AA".Equals(_CountryCode))
+                {
+                    return "All";
+                }
+                else
+                {
+                    return _CountryCode + " " + _CountryNameEN;
+                }
             }
         }
 
@@ -76,7 +100,14 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return _CountryCode + " " + _CountryNameCN;
+                if ("AA".Equals(_CountryCode))
+                {
+                    return "全部";
+                }
+                else
+                {
+                    return _CountryCode + " " + _CountryNameCN;
+                }
             }
         }
 
@@ -97,6 +128,11 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 return new Country() { CountryCode = "", CountryNameCN = "", CountryNameEN = "" };
             }
+        }
+
+        public static Country DefaultCountry()
+        {
+            return new Country() { CountryCode = "AA", CountryNameCN = "全部", CountryNameEN = "All" };
         }
     }
 

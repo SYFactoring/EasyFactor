@@ -198,7 +198,7 @@
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(443, 21);
+            this.btnQuery.Location = new System.Drawing.Point(416, 28);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 43);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -210,6 +210,7 @@
             // 
             this.cbCurrency.DisplayMember = "Text";
             this.cbCurrency.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCurrency.FormattingEnabled = true;
             this.cbCurrency.ItemHeight = 14;
             this.cbCurrency.Items.AddRange(new object[] {
@@ -219,7 +220,7 @@
             this.comboItem8});
             this.cbCurrency.Location = new System.Drawing.Point(254, 28);
             this.cbCurrency.Name = "cbCurrency";
-            this.cbCurrency.Size = new System.Drawing.Size(93, 20);
+            this.cbCurrency.Size = new System.Drawing.Size(133, 20);
             this.cbCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbCurrency.TabIndex = 7;
             // 
@@ -304,7 +305,7 @@
             this.diEnd.BackgroundStyle.Class = "DateTimeInputBackground";
             this.diEnd.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.diEnd.ButtonDropDown.Visible = true;
-            this.diEnd.Location = new System.Drawing.Point(339, 3);
+            this.diEnd.Location = new System.Drawing.Point(397, 3);
             this.diEnd.MaxDate = new System.DateTime(2050, 12, 31, 0, 0, 0, 0);
             this.diEnd.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             // 
@@ -340,7 +341,7 @@
             this.diEnd.MonthCalendar.TodayButtonVisible = true;
             this.diEnd.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.diEnd.Name = "diEnd";
-            this.diEnd.Size = new System.Drawing.Size(79, 20);
+            this.diEnd.Size = new System.Drawing.Size(121, 20);
             this.diEnd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.diEnd.TabIndex = 3;
             // 
@@ -388,7 +389,7 @@
             this.diBegin.MonthCalendar.TodayButtonVisible = true;
             this.diBegin.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.diBegin.Name = "diBegin";
-            this.diBegin.Size = new System.Drawing.Size(79, 20);
+            this.diBegin.Size = new System.Drawing.Size(133, 20);
             this.diBegin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.diBegin.TabIndex = 2;
             // 

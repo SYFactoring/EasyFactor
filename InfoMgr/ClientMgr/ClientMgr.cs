@@ -43,7 +43,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UpdateEditableStatus();
             ControlUtil.SetDoubleBuffered(this.dgvClients);
 
-            this.comboTreeDepartment.DataSource = App.Current.DbContext.Departments;
+            List<Department> departmentList = App.Current.DbContext.Departments.ToList();
+            departmentList.Insert(0, Department.DefaultDepartment());
+            this.comboTreeDepartment.DataSource = departmentList;
             this.comboTreeDepartment.DisplayMembers = "DepartmentName";
             this.comboTreeDepartment.ValueMember = "DepartmentCode";
             this.comboTreeDepartment.GroupingMembers = "Domain";
@@ -125,7 +127,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                   && ((c.ClientEDICode == null ? string.Empty : c.ClientEDICode).Contains(tbClientEDICode.Text))
                   && (c.ClientType.Contains(clientType)));
 
-            this.bs.DataSource = queryResult.ToList();
+            this.bs.DataSource = queryResult;
             this.dgvClients.DataSource = bs;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }

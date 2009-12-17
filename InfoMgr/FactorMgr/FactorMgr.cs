@@ -15,6 +15,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     using Microsoft.Office.Interop.Excel;
     using System.Data.SqlClient;
     using CMBC.EasyFactor.Utils;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Factor Management User Interface 
@@ -43,7 +44,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
         private void InitComboBox()
         {
-            this.cbCountry.DataSource = App.Current.DbContext.Countries.ToList();
+            List<Country> countryList = App.Current.DbContext.Countries.ToList();
+            countryList.Insert(0, Country.DefaultCountry());
+            this.cbCountry.DataSource = countryList;
             this.cbCountry.DisplayMember = "CountryFormatEN";
             this.cbCountry.ValueMember = "CountryNameEN";
         }
@@ -121,7 +124,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                                                 && (f.FactorType.Contains(cbFactorType.Text))
                                                 && ((f.CountryName == null ? string.Empty : f.CountryName).Contains(country)));
 
-            bs.DataSource = queryResult.ToList();
+            bs.DataSource = queryResult;
             dgvFactors.DataSource = bs;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }

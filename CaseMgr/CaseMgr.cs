@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.DB.dbml;
     using System.Data.SqlClient;
     using DevComponents.DotNetBar.Controls;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -27,13 +28,17 @@ namespace CMBC.EasyFactor.CaseMgr
             InitializeComponent();
             ControlUtil.SetDoubleBuffered(this.dgvCases);
 
-            this.cbOwnerDepts.DataSource = App.Current.DbContext.Departments;
+            List<Department> departmentList = App.Current.DbContext.Departments.ToList();
+            departmentList.Insert(0, Department.DefaultDepartment());
+            this.cbOwnerDepts.DataSource = departmentList;
             this.cbOwnerDepts.DisplayMembers = "DepartmentName";
             this.cbOwnerDepts.ValueMember = "DepartmentCode";
             this.cbOwnerDepts.GroupingMembers = "Domain";
 
-            this.cbCurrency.DataSource = App.Current.DbContext.Currencies;
-            this.cbCurrency.DisplayMember = "CurrencyName";
+            List<Currency> currencyList = App.Current.DbContext.Currencies.ToList();
+            currencyList.Insert(0, Currency.DefaultCurrency());
+            this.cbCurrency.DataSource = currencyList;
+            this.cbCurrency.DisplayMember = "CurrencyFormat";
             this.cbCurrency.ValueMember = "CurrencyCode";
         }
 
@@ -95,7 +100,7 @@ namespace CMBC.EasyFactor.CaseMgr
             //                    ||c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text)||c.SellerClient.ClientNameEN_1.Contains(this.tbClientName.Text)||c.SellerClient.ClientNameEN_2.Contains(this.tbClientName.Text))
             //                  );
 
-            var queryResult = App.Current.DbContext.Cases.ToList();
+            var queryResult = App.Current.DbContext.Cases;
             this.bs.DataSource = queryResult;
             this.dgvCases.DataSource = this.bs;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
@@ -108,7 +113,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void NewCase(object sender, System.EventArgs e)
         {
-            CaseDetail caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.NEW_CASE,CaseDetail.OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG);
+            CaseDetail caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.NEW_CASE);
             caseDetail.ShowDialog(this);
         }
 
@@ -130,7 +135,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 Case selectedCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == cid);
                 if (selectedCase != null)
                 {
-                    CaseDetail caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.UPDATE_CASE, CaseDetail.OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG);
+                    CaseDetail caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.UPDATE_CASE);
                     caseDetail.ShowDialog(this);
                 }
             }
@@ -219,7 +224,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 Case selectedCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == cid);
                 if (selectedCase != null)
                 {
-                    CaseDetail caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.DETAIL_CASE,CaseDetail.OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG);
+                    CaseDetail caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.DETAIL_CASE);
                     caseDetail.ShowDialog(this);
                 }
             }

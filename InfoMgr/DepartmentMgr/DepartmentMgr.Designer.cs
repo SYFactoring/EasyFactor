@@ -39,6 +39,9 @@
             this.tbDepartmentCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDepartmentCode = new DevComponents.DotNetBar.LabelX();
             this.dgvDepts = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemSelectDept = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemImportDepts = new System.Windows.Forms.ToolStripMenuItem();
             this.DepartmentCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DepartmentNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LocationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,9 +58,6 @@
             this.Email_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Phone_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fax_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemSelectDept = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemImportDepts = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepts)).BeginInit();
             this.cmuDeptMgr.SuspendLayout();
@@ -163,7 +163,7 @@
             // 
             this.dgvDepts.AllowUserToAddRows = false;
             this.dgvDepts.AllowUserToDeleteRows = false;
-            this.dgvDepts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvDepts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -210,134 +210,6 @@
             this.dgvDepts.TabIndex = 1;
             this.dgvDepts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
-            // DepartmentCodeColumn
-            // 
-            this.DepartmentCodeColumn.DataPropertyName = "DepartmentCode";
-            this.DepartmentCodeColumn.HeaderText = "部门代码";
-            this.DepartmentCodeColumn.Name = "DepartmentCodeColumn";
-            this.DepartmentCodeColumn.ReadOnly = true;
-            this.DepartmentCodeColumn.Width = 80;
-            // 
-            // DepartmentNameColumn
-            // 
-            this.DepartmentNameColumn.DataPropertyName = "DepartmentName";
-            this.DepartmentNameColumn.HeaderText = "部门名称";
-            this.DepartmentNameColumn.Name = "DepartmentNameColumn";
-            this.DepartmentNameColumn.ReadOnly = true;
-            this.DepartmentNameColumn.Width = 80;
-            // 
-            // LocationColumn
-            // 
-            this.LocationColumn.DataPropertyName = "Location";
-            this.LocationColumn.HeaderText = "城市";
-            this.LocationColumn.Name = "LocationColumn";
-            this.LocationColumn.ReadOnly = true;
-            this.LocationColumn.Width = 56;
-            // 
-            // DomainColumn
-            // 
-            this.DomainColumn.DataPropertyName = "Domain";
-            this.DomainColumn.HeaderText = "事业部";
-            this.DomainColumn.Name = "DomainColumn";
-            this.DomainColumn.ReadOnly = true;
-            this.DomainColumn.Width = 68;
-            // 
-            // AddressCNColumn
-            // 
-            this.AddressCNColumn.DataPropertyName = "AddressCN";
-            this.AddressCNColumn.HeaderText = "中文地址";
-            this.AddressCNColumn.Name = "AddressCNColumn";
-            this.AddressCNColumn.ReadOnly = true;
-            this.AddressCNColumn.Width = 80;
-            // 
-            // AddressENColumn
-            // 
-            this.AddressENColumn.DataPropertyName = "AddressEN";
-            this.AddressENColumn.HeaderText = "英文地址";
-            this.AddressENColumn.Name = "AddressENColumn";
-            this.AddressENColumn.ReadOnly = true;
-            this.AddressENColumn.Width = 80;
-            // 
-            // PostCodeColumn
-            // 
-            this.PostCodeColumn.DataPropertyName = "PostCode";
-            this.PostCodeColumn.HeaderText = "邮编";
-            this.PostCodeColumn.Name = "PostCodeColumn";
-            this.PostCodeColumn.ReadOnly = true;
-            this.PostCodeColumn.Width = 56;
-            // 
-            // ManagerColumn
-            // 
-            this.ManagerColumn.DataPropertyName = "Manager";
-            this.ManagerColumn.HeaderText = "负责人";
-            this.ManagerColumn.Name = "ManagerColumn";
-            this.ManagerColumn.ReadOnly = true;
-            this.ManagerColumn.Width = 68;
-            // 
-            // Contact_1Column
-            // 
-            this.Contact_1Column.DataPropertyName = "Contact_1";
-            this.Contact_1Column.HeaderText = "联系人1";
-            this.Contact_1Column.Name = "Contact_1Column";
-            this.Contact_1Column.ReadOnly = true;
-            this.Contact_1Column.Width = 74;
-            // 
-            // Email_1Column
-            // 
-            this.Email_1Column.DataPropertyName = "Email_1";
-            this.Email_1Column.HeaderText = "Email";
-            this.Email_1Column.Name = "Email_1Column";
-            this.Email_1Column.ReadOnly = true;
-            this.Email_1Column.Width = 57;
-            // 
-            // Phone_1Column
-            // 
-            this.Phone_1Column.DataPropertyName = "Phone_1";
-            this.Phone_1Column.HeaderText = "联系电话";
-            this.Phone_1Column.Name = "Phone_1Column";
-            this.Phone_1Column.ReadOnly = true;
-            this.Phone_1Column.Width = 80;
-            // 
-            // Fax_1Column
-            // 
-            this.Fax_1Column.DataPropertyName = "Fax_1";
-            this.Fax_1Column.HeaderText = "传真";
-            this.Fax_1Column.Name = "Fax_1Column";
-            this.Fax_1Column.ReadOnly = true;
-            this.Fax_1Column.Width = 56;
-            // 
-            // Contact_2Column
-            // 
-            this.Contact_2Column.DataPropertyName = "Contact_2";
-            this.Contact_2Column.HeaderText = "联系人2";
-            this.Contact_2Column.Name = "Contact_2Column";
-            this.Contact_2Column.ReadOnly = true;
-            this.Contact_2Column.Width = 74;
-            // 
-            // Email_2Column
-            // 
-            this.Email_2Column.DataPropertyName = "Email_2";
-            this.Email_2Column.HeaderText = "Email";
-            this.Email_2Column.Name = "Email_2Column";
-            this.Email_2Column.ReadOnly = true;
-            this.Email_2Column.Width = 57;
-            // 
-            // Phone_2Column
-            // 
-            this.Phone_2Column.DataPropertyName = "Phone_2";
-            this.Phone_2Column.HeaderText = "联系电话";
-            this.Phone_2Column.Name = "Phone_2Column";
-            this.Phone_2Column.ReadOnly = true;
-            this.Phone_2Column.Width = 80;
-            // 
-            // Fax_2Column
-            // 
-            this.Fax_2Column.DataPropertyName = "Fax_2";
-            this.Fax_2Column.HeaderText = "传真";
-            this.Fax_2Column.Name = "Fax_2Column";
-            this.Fax_2Column.ReadOnly = true;
-            this.Fax_2Column.Width = 56;
-            // 
             // cmuDeptMgr
             // 
             this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -359,6 +231,136 @@
             this.menuItemImportDepts.Size = new System.Drawing.Size(122, 22);
             this.menuItemImportDepts.Text = "导入分部";
             this.menuItemImportDepts.Click += new System.EventHandler(this.ImportDepartments);
+            // 
+            // DepartmentCodeColumn
+            // 
+            this.DepartmentCodeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DepartmentCodeColumn.DataPropertyName = "DepartmentCode";
+            this.DepartmentCodeColumn.FillWeight = 77.31959F;
+            this.DepartmentCodeColumn.HeaderText = "部门代码";
+            this.DepartmentCodeColumn.Name = "DepartmentCodeColumn";
+            this.DepartmentCodeColumn.ReadOnly = true;
+            // 
+            // DepartmentNameColumn
+            // 
+            this.DepartmentNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DepartmentNameColumn.DataPropertyName = "DepartmentName";
+            this.DepartmentNameColumn.HeaderText = "部门名称";
+            this.DepartmentNameColumn.Name = "DepartmentNameColumn";
+            this.DepartmentNameColumn.ReadOnly = true;
+            // 
+            // LocationColumn
+            // 
+            this.LocationColumn.DataPropertyName = "Location";
+            this.LocationColumn.FillWeight = 77.31959F;
+            this.LocationColumn.HeaderText = "城市";
+            this.LocationColumn.Name = "LocationColumn";
+            this.LocationColumn.ReadOnly = true;
+            // 
+            // DomainColumn
+            // 
+            this.DomainColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DomainColumn.DataPropertyName = "Domain";
+            this.DomainColumn.FillWeight = 417.5258F;
+            this.DomainColumn.HeaderText = "事业部";
+            this.DomainColumn.Name = "DomainColumn";
+            this.DomainColumn.ReadOnly = true;
+            // 
+            // AddressCNColumn
+            // 
+            this.AddressCNColumn.DataPropertyName = "AddressCN";
+            this.AddressCNColumn.FillWeight = 77.31959F;
+            this.AddressCNColumn.HeaderText = "中文地址";
+            this.AddressCNColumn.Name = "AddressCNColumn";
+            this.AddressCNColumn.ReadOnly = true;
+            // 
+            // AddressENColumn
+            // 
+            this.AddressENColumn.DataPropertyName = "AddressEN";
+            this.AddressENColumn.FillWeight = 77.31959F;
+            this.AddressENColumn.HeaderText = "英文地址";
+            this.AddressENColumn.Name = "AddressENColumn";
+            this.AddressENColumn.ReadOnly = true;
+            // 
+            // PostCodeColumn
+            // 
+            this.PostCodeColumn.DataPropertyName = "PostCode";
+            this.PostCodeColumn.FillWeight = 77.31959F;
+            this.PostCodeColumn.HeaderText = "邮编";
+            this.PostCodeColumn.Name = "PostCodeColumn";
+            this.PostCodeColumn.ReadOnly = true;
+            // 
+            // ManagerColumn
+            // 
+            this.ManagerColumn.DataPropertyName = "Manager";
+            this.ManagerColumn.FillWeight = 77.31959F;
+            this.ManagerColumn.HeaderText = "负责人";
+            this.ManagerColumn.Name = "ManagerColumn";
+            this.ManagerColumn.ReadOnly = true;
+            // 
+            // Contact_1Column
+            // 
+            this.Contact_1Column.DataPropertyName = "Contact_1";
+            this.Contact_1Column.FillWeight = 77.31959F;
+            this.Contact_1Column.HeaderText = "联系人1";
+            this.Contact_1Column.Name = "Contact_1Column";
+            this.Contact_1Column.ReadOnly = true;
+            // 
+            // Email_1Column
+            // 
+            this.Email_1Column.DataPropertyName = "Email_1";
+            this.Email_1Column.FillWeight = 77.31959F;
+            this.Email_1Column.HeaderText = "Email";
+            this.Email_1Column.Name = "Email_1Column";
+            this.Email_1Column.ReadOnly = true;
+            // 
+            // Phone_1Column
+            // 
+            this.Phone_1Column.DataPropertyName = "Phone_1";
+            this.Phone_1Column.FillWeight = 77.31959F;
+            this.Phone_1Column.HeaderText = "联系电话";
+            this.Phone_1Column.Name = "Phone_1Column";
+            this.Phone_1Column.ReadOnly = true;
+            // 
+            // Fax_1Column
+            // 
+            this.Fax_1Column.DataPropertyName = "Fax_1";
+            this.Fax_1Column.FillWeight = 77.31959F;
+            this.Fax_1Column.HeaderText = "传真";
+            this.Fax_1Column.Name = "Fax_1Column";
+            this.Fax_1Column.ReadOnly = true;
+            // 
+            // Contact_2Column
+            // 
+            this.Contact_2Column.DataPropertyName = "Contact_2";
+            this.Contact_2Column.FillWeight = 77.31959F;
+            this.Contact_2Column.HeaderText = "联系人2";
+            this.Contact_2Column.Name = "Contact_2Column";
+            this.Contact_2Column.ReadOnly = true;
+            // 
+            // Email_2Column
+            // 
+            this.Email_2Column.DataPropertyName = "Email_2";
+            this.Email_2Column.FillWeight = 77.31959F;
+            this.Email_2Column.HeaderText = "Email";
+            this.Email_2Column.Name = "Email_2Column";
+            this.Email_2Column.ReadOnly = true;
+            // 
+            // Phone_2Column
+            // 
+            this.Phone_2Column.DataPropertyName = "Phone_2";
+            this.Phone_2Column.FillWeight = 77.31959F;
+            this.Phone_2Column.HeaderText = "联系电话";
+            this.Phone_2Column.Name = "Phone_2Column";
+            this.Phone_2Column.ReadOnly = true;
+            // 
+            // Fax_2Column
+            // 
+            this.Fax_2Column.DataPropertyName = "Fax_2";
+            this.Fax_2Column.FillWeight = 77.31959F;
+            this.Fax_2Column.HeaderText = "传真";
+            this.Fax_2Column.Name = "Fax_2Column";
+            this.Fax_2Column.ReadOnly = true;
             // 
             // DepartmentMgr
             // 

@@ -46,8 +46,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmuUserMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemSelectUser = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDetailUser = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,8 +59,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
-            this.tbKeyword = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblKeyword = new DevComponents.DotNetBar.LabelX();
+            this.tbUserID = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblUserID = new DevComponents.DotNetBar.LabelX();
             this.dgvUsers = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.UserIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -143,8 +143,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.panelQuery.Controls.Add(this.lblCount);
             this.panelQuery.Controls.Add(this.btnQuery);
-            this.panelQuery.Controls.Add(this.tbKeyword);
-            this.panelQuery.Controls.Add(this.lblKeyword);
+            this.panelQuery.Controls.Add(this.tbUserID);
+            this.panelQuery.Controls.Add(this.lblUserID);
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
@@ -164,9 +164,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(243, 6);
+            this.lblCount.Location = new System.Drawing.Point(242, 4);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(320, 23);
+            this.lblCount.Size = new System.Drawing.Size(497, 23);
             this.lblCount.TabIndex = 3;
             // 
             // btnQuery
@@ -181,28 +181,28 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.QueryUsers);
             // 
-            // tbKeyword
+            // tbUserID
             // 
             // 
             // 
             // 
-            this.tbKeyword.Border.Class = "TextBoxBorder";
-            this.tbKeyword.Location = new System.Drawing.Point(55, 7);
-            this.tbKeyword.Name = "tbKeyword";
-            this.tbKeyword.Size = new System.Drawing.Size(100, 20);
-            this.tbKeyword.TabIndex = 1;
+            this.tbUserID.Border.Class = "TextBoxBorder";
+            this.tbUserID.Location = new System.Drawing.Point(55, 7);
+            this.tbUserID.Name = "tbUserID";
+            this.tbUserID.Size = new System.Drawing.Size(100, 20);
+            this.tbUserID.TabIndex = 1;
             // 
-            // lblKeyword
-            // 
-            // 
+            // lblUserID
             // 
             // 
-            this.lblKeyword.BackgroundStyle.Class = "";
-            this.lblKeyword.Location = new System.Drawing.Point(4, 7);
-            this.lblKeyword.Name = "lblKeyword";
-            this.lblKeyword.Size = new System.Drawing.Size(44, 23);
-            this.lblKeyword.TabIndex = 0;
-            this.lblKeyword.Text = "关键词";
+            // 
+            // 
+            this.lblUserID.BackgroundStyle.Class = "";
+            this.lblUserID.Location = new System.Drawing.Point(4, 7);
+            this.lblUserID.Name = "lblUserID";
+            this.lblUserID.Size = new System.Drawing.Size(44, 23);
+            this.lblUserID.TabIndex = 0;
+            this.lblUserID.Text = "用户ID";
             // 
             // dgvUsers
             // 
@@ -210,14 +210,14 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.dgvUsers.AllowUserToDeleteRows = false;
             this.dgvUsers.AllowUserToOrderColumns = true;
             this.dgvUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.UserIDColumn,
@@ -231,14 +231,14 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.LoginDateColumn,
             this.PasswordColumn});
             this.dgvUsers.ContextMenuStrip = this.cmuUserMgr;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUsers.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUsers.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvUsers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUsers.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvUsers.Location = new System.Drawing.Point(0, 33);
@@ -342,10 +342,10 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         #endregion
 
         private DevComponents.DotNetBar.PanelEx panelQuery;
-        private DevComponents.DotNetBar.LabelX lblKeyword;
+        private DevComponents.DotNetBar.LabelX lblUserID;
         private DevComponents.DotNetBar.LabelX lblCount;
         private DevComponents.DotNetBar.ButtonX btnQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbKeyword;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbUserID;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvUsers;
         private System.Windows.Forms.ToolStripMenuItem menuItemImportUsers;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserIDColumn;

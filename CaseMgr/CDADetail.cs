@@ -58,10 +58,18 @@ namespace CMBC.EasyFactor.CaseMgr
             DETAIL_CDA
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void UpdateCDAControlStatus()
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectCase(object sender, EventArgs e)
         {
             CaseMgr caseMgr = new CaseMgr(false);

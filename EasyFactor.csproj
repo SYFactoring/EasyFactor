@@ -109,10 +109,16 @@
     <Compile Include="CaseMgr\CDADetail.Designer.cs">
       <DependentUpon>CDADetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="InfoMgr\ClientMgr\ContractMgr.cs">
+    <Compile Include="CaseMgr\CDAMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InfoMgr\ClientMgr\ContractMgr.Designer.cs">
+    <Compile Include="CaseMgr\CDAMgr.Designer.cs">
+      <DependentUpon>CDAMgr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CaseMgr\ContractMgr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CaseMgr\ContractMgr.Designer.cs">
       <DependentUpon>ContractMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="CaseMgr\CreditCoverNegMgr.cs">
@@ -238,7 +244,11 @@
       <DependentUpon>CDADetail.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="InfoMgr\ClientMgr\ContractMgr.resx">
+    <EmbeddedResource Include="CaseMgr\CDAMgr.resx">
+      <DependentUpon>CDAMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CaseMgr\ContractMgr.resx">
       <DependentUpon>ContractMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

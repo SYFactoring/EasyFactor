@@ -75,6 +75,40 @@ namespace CMBC.EasyFactor
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChangeStyle(object sender, EventArgs e)
+        {
+            string style = cbStyleManager.SelectedItem.ToString();
+            if ("Office2007Blue".Equals(style))
+            {
+                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue;
+            }
+            else if ("Office2007Silver".Equals(style))
+            {
+                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Silver;
+            }
+            else if ("Office2007Black".Equals(style))
+            {
+                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Black;
+            }
+            else if ("Office2007VistaGlass".Equals(style))
+            {
+                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007VistaGlass;
+            }
+            else if ("Office2010Silver".Equals(style))
+            {
+                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Silver;
+            }
+            else if ("Windows7Blue".Equals(style))
+            {
+                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Windows7Blue;
+            }
+        }
+
+        /// <summary>
         /// Invoice Assign
         /// </summary>
         /// <param name="sender">event sender</param>
@@ -136,7 +170,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void FactorNew(object sender, EventArgs e)
         {
-            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR, FactorDetail.OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE);
+            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
             factorDetail.ShowDialog(this);
         }
 
@@ -159,7 +193,7 @@ namespace CMBC.EasyFactor
         private void CaseApplication(object sender, EventArgs e)
         {
             this.ClearDetailPanel();
-            CaseDetail caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.NEW_CASE, CaseDetail.OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG);
+            CaseDetail caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.NEW_CASE);
             caseDetail.ShowDialog(this);
         }
 
@@ -173,35 +207,6 @@ namespace CMBC.EasyFactor
         {
             AboutBox aboutBox = new AboutBox();
             aboutBox.ShowDialog(this);
-        }
-
-        private void ChangeStyle(object sender, EventArgs e)
-        {
-            string style = cbStyleManager.SelectedItem.ToString();
-            if ("Office2007Blue".Equals(style))
-            {
-                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue;
-            }
-            else if ("Office2007Silver".Equals(style))
-            {
-                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Silver;
-            }
-            else if ("Office2007Black".Equals(style))
-            {
-                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Black;
-            }
-            else if ("Office2007VistaGlass".Equals(style))
-            {
-                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007VistaGlass;
-            }
-            else if ("Office2010Silver".Equals(style))
-            {
-                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Silver;
-            }
-            else if ("Windows7Blue".Equals(style))
-            {
-                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Windows7Blue;
-            }
         }
 
         private void ContractMgr(object sender, EventArgs e)
@@ -220,6 +225,12 @@ namespace CMBC.EasyFactor
         {
             CDADetail cdaDetail = new CDADetail(null, CDADetail.OpCDAType.NEW_CDA);
             cdaDetail.ShowDialog(this);
+        }
+
+        private void CDAMgr(object sender, EventArgs e)
+        {
+            CDAMgr CDAMgr = new CDAMgr(true);
+            this.SetDetailPanel(CDAMgr);
         }
 
     }

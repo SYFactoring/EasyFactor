@@ -27,6 +27,15 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private OpFactorCreditLineType opFactorCreditLineType;
 
+        public FactorDetail(Factor factor, OpFactorType opFactorType)
+            : this(factor, opFactorType, OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE)
+        {
+        }
+
+        public FactorDetail(Factor factor, OpFactorCreditLineType opFactorCreditLineType)
+            : this(factor, OpFactorType.DETAIL_FACTOR, opFactorCreditLineType)
+        {
+        }
         /// <summary>
         /// Initializes a new instance of the FactorDetail class
         /// </summary>
