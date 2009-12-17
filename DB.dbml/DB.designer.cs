@@ -3567,7 +3567,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _NegoID;
+		private int _NegoID;
 		
 		private string _CaseCode;
 		
@@ -3593,7 +3593,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnNegoIDChanging(string value);
+    partial void OnNegoIDChanging(int value);
     partial void OnNegoIDChanged();
     partial void OnCaseCodeChanging(string value);
     partial void OnCaseCodeChanged();
@@ -3621,8 +3621,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_NegoID", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string NegoID
+		[Column(Storage="_NegoID", DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true)]
+		public int NegoID
 		{
 			get
 			{
