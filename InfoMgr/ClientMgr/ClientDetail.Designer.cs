@@ -109,8 +109,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbClientEDICode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbContractStatus = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tpContractDueDate = new System.Windows.Forms.DateTimePicker();
-            this.tpContractValueDate = new System.Windows.Forms.DateTimePicker();
+            this.tpContractDueDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.tpContractValueDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.tabItemContract = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClientCreditLine = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvClientCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -138,10 +138,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientCreditLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnClientCreditLineRefresh = new DevComponents.DotNetBar.ButtonX();
             this.creditLineCommentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.unfreezeDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.unfreezeDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.btnClientCreditLineUnfreeze = new DevComponents.DotNetBar.ButtonX();
             this.unfreezerTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.freezeDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.freezeDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.btnClientCreditLineFreeze = new DevComponents.DotNetBar.ButtonX();
             this.unfreezeReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.freezeReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -152,8 +152,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.creditLineStatusTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.approveTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.approveNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.periodEndDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.periodBeginDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.periodEndDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.periodBeginDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.creditLineTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.creditLineCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tabItemClientCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
@@ -2763,8 +2763,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.BindingSource clientCreditLineBindingSource;
         private DevComponents.DotNetBar.Controls.ComboBoxEx approveTypeComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX approveNoTextBox;
-        private System.Windows.Forms.DateTimePicker periodEndDateTimePicker;
-        private System.Windows.Forms.DateTimePicker periodBeginDateTimePicker;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput periodEndDateTimePicker;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput periodBeginDateTimePicker;
         private DevComponents.DotNetBar.Controls.ComboBoxEx creditLineTypeComboBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx creditLineCurrencyComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX freezerTextBox;
@@ -2774,8 +2774,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.ButtonX btnClientCreditLineDelete;
         private DevComponents.DotNetBar.ButtonX btnClientCreditLineSave;
         private DevComponents.DotNetBar.ButtonX btnClientCreditLineNew;
-        private System.Windows.Forms.DateTimePicker freezeDateDateTimePicker;
-        private System.Windows.Forms.DateTimePicker unfreezeDateDateTimePicker;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput freezeDateDateTimePicker;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput unfreezeDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX unfreezerTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX unfreezeReasonTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX clientCommentTextBox;
@@ -2831,8 +2831,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbContractStatus;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
-        private System.Windows.Forms.DateTimePicker tpContractDueDate;
-        private System.Windows.Forms.DateTimePicker tpContractValueDate;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput tpContractDueDate;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput tpContractValueDate;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvContracts;
         private System.Windows.Forms.BindingSource contractBindingSource;
         private DevComponents.DotNetBar.ButtonX btnContractUpdate;

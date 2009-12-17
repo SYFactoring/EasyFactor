@@ -7,6 +7,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.Utils;
     using CMBC.EasyFactor.DB.dbml;
     using System.Data.SqlClient;
+    using DevComponents.DotNetBar.Controls;
 
     /// <summary>
     /// 

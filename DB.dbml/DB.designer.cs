@@ -3599,8 +3599,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCaseCodeChanged();
     partial void OnRequestDateChanging(System.Nullable<System.DateTime> value);
     partial void OnRequestDateChanged();
-    partial void OnReplyDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnReplyDateChanged();
+    partial void OnApproveDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnApproveDateChanged();
     partial void OnApproveTypeChanging(string value);
     partial void OnApproveTypeChanged();
     partial void OnRequestAmountChanging(System.Nullable<double> value);
@@ -3686,7 +3686,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_ReplyDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ReplyDate
+		public System.Nullable<System.DateTime> ApproveDate
 		{
 			get
 			{
@@ -3696,11 +3696,11 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._ReplyDate != value))
 				{
-					this.OnReplyDateChanging(value);
+					this.OnApproveDateChanging(value);
 					this.SendPropertyChanging();
 					this._ReplyDate = value;
-					this.SendPropertyChanged("ReplyDate");
-					this.OnReplyDateChanged();
+					this.SendPropertyChanged("ApproveDate");
+					this.OnApproveDateChanged();
 				}
 			}
 		}
