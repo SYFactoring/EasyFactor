@@ -68,13 +68,14 @@
             DevComponents.DotNetBar.LabelX cDADueDateLabel;
             DevComponents.DotNetBar.LabelX cDAStatusLabel;
             DevComponents.DotNetBar.LabelX noticeMethodLabel;
-            System.Windows.Forms.Label contractCodeLabel;
+            DevComponents.DotNetBar.LabelX contractCodeLabel;
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.checkBoxX2 = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.checkBoxX1 = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.cbIsNotice = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cbIsRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.textBoxX2 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.contractCodeTextBox = new System.Windows.Forms.TextBox();
+            this.contractCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.contractsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.assignTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.comboItem9 = new DevComponents.Editors.ComboItem();
@@ -100,12 +101,22 @@
             this.sellerClientEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.caseCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelCreditCover = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.checkBoxX3 = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.handFeeCurrComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cbIsCreditCoverRevolving = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.handFeeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lossThresholdTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.commissionTypeCommentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.deductiblesTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.commissonTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.comboItem13 = new DevComponents.Editors.ComboItem();
+            this.comboItem14 = new DevComponents.Editors.ComboItem();
+            this.comboItem15 = new DevComponents.Editors.ComboItem();
             this.financeGracePeriodTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.eFPriceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.paymentTermsTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.iFPriceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.orderNumberTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.priceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.financeProportionTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.textBox1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.financeLinePeriodEndDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -120,16 +131,6 @@
             this.approveNumberTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditCoverTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditCoverCurrComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.handFeeCurrComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.handFeeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.commissionTypeCommentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.commissonTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem13 = new DevComponents.Editors.ComboItem();
-            this.comboItem14 = new DevComponents.Editors.ComboItem();
-            this.comboItem15 = new DevComponents.Editors.ComboItem();
-            this.eFPriceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.iFPriceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.priceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelOther = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.cbNoticeMethodFax = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cbNoticeMethodEmail = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -147,7 +148,6 @@
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
-            this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             sellerFactorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -187,8 +187,9 @@
             cDADueDateLabel = new DevComponents.DotNetBar.LabelX();
             cDAStatusLabel = new DevComponents.DotNetBar.LabelX();
             noticeMethodLabel = new DevComponents.DotNetBar.LabelX();
-            contractCodeLabel = new System.Windows.Forms.Label();
+            contractCodeLabel = new DevComponents.DotNetBar.LabelX();
             this.groupPanelCase.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contractsBindingSource)).BeginInit();
             this.groupPanelCreditCover.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodEndDateTimePicker)).BeginInit();
@@ -198,7 +199,6 @@
             this.groupPanelOther.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cDADueDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cDAValueDateDateTimePicker)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // caseCodeLabel
@@ -750,9 +750,14 @@
             // contractCodeLabel
             // 
             contractCodeLabel.AutoSize = true;
+            contractCodeLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            contractCodeLabel.BackgroundStyle.Class = "";
             contractCodeLabel.Location = new System.Drawing.Point(529, 4);
             contractCodeLabel.Name = "contractCodeLabel";
-            contractCodeLabel.Size = new System.Drawing.Size(70, 13);
+            contractCodeLabel.Size = new System.Drawing.Size(72, 16);
             contractCodeLabel.TabIndex = 28;
             contractCodeLabel.Text = "主合同编号:";
             // 
@@ -760,8 +765,8 @@
             // 
             this.groupPanelCase.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCase.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelCase.Controls.Add(this.checkBoxX2);
-            this.groupPanelCase.Controls.Add(this.checkBoxX1);
+            this.groupPanelCase.Controls.Add(this.cbIsNotice);
+            this.groupPanelCase.Controls.Add(this.cbIsRecoarse);
             this.groupPanelCase.Controls.Add(this.textBoxX2);
             this.groupPanelCase.Controls.Add(this.textBoxX1);
             this.groupPanelCase.Controls.Add(contractCodeLabel);
@@ -826,31 +831,39 @@
             this.groupPanelCase.StyleMouseOver.Class = "";
             this.groupPanelCase.TabIndex = 0;
             // 
-            // checkBoxX2
+            // cbIsNotice
+            // 
+            this.cbIsNotice.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
+            this.cbIsNotice.BackgroundStyle.Class = "";
+            this.cbIsNotice.DataBindings.Add(new System.Windows.Forms.Binding("CheckValue", this.CDABindingSource, "IsNotice", true));
+            this.cbIsNotice.Location = new System.Drawing.Point(127, 112);
+            this.cbIsNotice.Name = "cbIsNotice";
+            this.cbIsNotice.Size = new System.Drawing.Size(100, 23);
+            this.cbIsNotice.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsNotice.TabIndex = 33;
+            this.cbIsNotice.Text = "是否暗保理";
             // 
-            this.checkBoxX2.BackgroundStyle.Class = "";
-            this.checkBoxX2.Location = new System.Drawing.Point(127, 112);
-            this.checkBoxX2.Name = "checkBoxX2";
-            this.checkBoxX2.Size = new System.Drawing.Size(100, 23);
-            this.checkBoxX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.checkBoxX2.TabIndex = 33;
-            this.checkBoxX2.Text = "是否暗保理";
+            // CDABindingSource
             // 
-            // checkBoxX1
+            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
+            // 
+            // cbIsRecoarse
+            // 
+            this.cbIsRecoarse.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            // 
-            this.checkBoxX1.BackgroundStyle.Class = "";
-            this.checkBoxX1.Location = new System.Drawing.Point(19, 112);
-            this.checkBoxX1.Name = "checkBoxX1";
-            this.checkBoxX1.Size = new System.Drawing.Size(100, 23);
-            this.checkBoxX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.checkBoxX1.TabIndex = 32;
-            this.checkBoxX1.Text = "是否有追索权";
+            this.cbIsRecoarse.BackgroundStyle.Class = "";
+            this.cbIsRecoarse.DataBindings.Add(new System.Windows.Forms.Binding("CheckValue", this.CDABindingSource, "IsRecoarse", true));
+            this.cbIsRecoarse.Location = new System.Drawing.Point(19, 112);
+            this.cbIsRecoarse.Name = "cbIsRecoarse";
+            this.cbIsRecoarse.Size = new System.Drawing.Size(100, 23);
+            this.cbIsRecoarse.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsRecoarse.TabIndex = 32;
+            this.cbIsRecoarse.Text = "是否有追索权";
             // 
             // textBoxX2
             // 
@@ -878,6 +891,10 @@
             // 
             // contractCodeTextBox
             // 
+            // 
+            // 
+            // 
+            this.contractCodeTextBox.Border.Class = "TextBoxBorder";
             this.contractCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.contractsBindingSource, "ContractCode", true));
             this.contractCodeTextBox.Location = new System.Drawing.Point(613, 1);
             this.contractCodeTextBox.Name = "contractCodeTextBox";
@@ -1118,7 +1135,7 @@
             this.groupPanelCreditCover.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCreditCover.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.groupPanelCreditCover.Controls.Add(this.handFeeCurrComboBox);
-            this.groupPanelCreditCover.Controls.Add(this.checkBoxX3);
+            this.groupPanelCreditCover.Controls.Add(this.cbIsCreditCoverRevolving);
             this.groupPanelCreditCover.Controls.Add(handFeeLabel);
             this.groupPanelCreditCover.Controls.Add(lossThresholdLabel);
             this.groupPanelCreditCover.Controls.Add(this.handFeeTextBox);
@@ -1200,18 +1217,44 @@
             this.groupPanelCreditCover.StyleMouseOver.Class = "";
             this.groupPanelCreditCover.TabIndex = 2;
             // 
-            // checkBoxX3
+            // handFeeCurrComboBox
+            // 
+            this.handFeeCurrComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HandFeeCurr", true));
+            this.handFeeCurrComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.handFeeCurrComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.handFeeCurrComboBox.FormattingEnabled = true;
+            this.handFeeCurrComboBox.Location = new System.Drawing.Point(615, 174);
+            this.handFeeCurrComboBox.Name = "handFeeCurrComboBox";
+            this.handFeeCurrComboBox.Size = new System.Drawing.Size(77, 21);
+            this.handFeeCurrComboBox.TabIndex = 13;
+            this.handFeeCurrComboBox.WatermarkText = "币别";
+            // 
+            // cbIsCreditCoverRevolving
+            // 
+            this.cbIsCreditCoverRevolving.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.cbIsCreditCoverRevolving.BackgroundStyle.Class = "";
+            this.cbIsCreditCoverRevolving.DataBindings.Add(new System.Windows.Forms.Binding("CheckValue", this.CDABindingSource, "IsCreditCoverRevolving", true));
+            this.cbIsCreditCoverRevolving.Location = new System.Drawing.Point(547, 0);
+            this.cbIsCreditCoverRevolving.Name = "cbIsCreditCoverRevolving";
+            this.cbIsCreditCoverRevolving.Size = new System.Drawing.Size(100, 23);
+            this.cbIsCreditCoverRevolving.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsCreditCoverRevolving.TabIndex = 38;
+            this.cbIsCreditCoverRevolving.Text = "是否循环额度";
+            // 
+            // handFeeTextBox
             // 
             // 
             // 
             // 
-            this.checkBoxX3.BackgroundStyle.Class = "";
-            this.checkBoxX3.Location = new System.Drawing.Point(547, 0);
-            this.checkBoxX3.Name = "checkBoxX3";
-            this.checkBoxX3.Size = new System.Drawing.Size(100, 23);
-            this.checkBoxX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.checkBoxX3.TabIndex = 38;
-            this.checkBoxX3.Text = "是否循环额度";
+            this.handFeeTextBox.Border.Class = "TextBoxBorder";
+            this.handFeeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HandFee", true));
+            this.handFeeTextBox.Location = new System.Drawing.Point(698, 175);
+            this.handFeeTextBox.Name = "handFeeTextBox";
+            this.handFeeTextBox.Size = new System.Drawing.Size(57, 20);
+            this.handFeeTextBox.TabIndex = 11;
             // 
             // lossThresholdTextBox
             // 
@@ -1225,6 +1268,18 @@
             this.lossThresholdTextBox.Size = new System.Drawing.Size(100, 20);
             this.lossThresholdTextBox.TabIndex = 37;
             // 
+            // commissionTypeCommentTextBox
+            // 
+            // 
+            // 
+            // 
+            this.commissionTypeCommentTextBox.Border.Class = "TextBoxBorder";
+            this.commissionTypeCommentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CommissionTypeComment", true));
+            this.commissionTypeCommentTextBox.Location = new System.Drawing.Point(282, 199);
+            this.commissionTypeCommentTextBox.Name = "commissionTypeCommentTextBox";
+            this.commissionTypeCommentTextBox.Size = new System.Drawing.Size(415, 20);
+            this.commissionTypeCommentTextBox.TabIndex = 9;
+            // 
             // deductiblesTextBox
             // 
             // 
@@ -1237,6 +1292,33 @@
             this.deductiblesTextBox.Size = new System.Drawing.Size(100, 20);
             this.deductiblesTextBox.TabIndex = 35;
             // 
+            // commissonTypeComboBox
+            // 
+            this.commissonTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CommissonType", true));
+            this.commissonTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.commissonTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.commissonTypeComboBox.FormattingEnabled = true;
+            this.commissonTypeComboBox.Items.AddRange(new object[] {
+            this.comboItem13,
+            this.comboItem14,
+            this.comboItem15});
+            this.commissonTypeComboBox.Location = new System.Drawing.Point(101, 201);
+            this.commissonTypeComboBox.Name = "commissonTypeComboBox";
+            this.commissonTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.commissonTypeComboBox.TabIndex = 7;
+            // 
+            // comboItem13
+            // 
+            this.comboItem13.Text = "01";
+            // 
+            // comboItem14
+            // 
+            this.comboItem14.Text = "02";
+            // 
+            // comboItem15
+            // 
+            this.comboItem15.Text = "其他";
+            // 
             // financeGracePeriodTextBox
             // 
             // 
@@ -1248,6 +1330,18 @@
             this.financeGracePeriodTextBox.Name = "financeGracePeriodTextBox";
             this.financeGracePeriodTextBox.Size = new System.Drawing.Size(100, 20);
             this.financeGracePeriodTextBox.TabIndex = 33;
+            // 
+            // eFPriceTextBox
+            // 
+            // 
+            // 
+            // 
+            this.eFPriceTextBox.Border.Class = "TextBoxBorder";
+            this.eFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "EFPrice", true));
+            this.eFPriceTextBox.Location = new System.Drawing.Point(433, 176);
+            this.eFPriceTextBox.Name = "eFPriceTextBox";
+            this.eFPriceTextBox.Size = new System.Drawing.Size(66, 20);
+            this.eFPriceTextBox.TabIndex = 5;
             // 
             // paymentTermsTextBox
             // 
@@ -1262,6 +1356,18 @@
             this.paymentTermsTextBox.Size = new System.Drawing.Size(594, 43);
             this.paymentTermsTextBox.TabIndex = 31;
             // 
+            // iFPriceTextBox
+            // 
+            // 
+            // 
+            // 
+            this.iFPriceTextBox.Border.Class = "TextBoxBorder";
+            this.iFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "IFPrice", true));
+            this.iFPriceTextBox.Location = new System.Drawing.Point(264, 176);
+            this.iFPriceTextBox.Name = "iFPriceTextBox";
+            this.iFPriceTextBox.Size = new System.Drawing.Size(72, 20);
+            this.iFPriceTextBox.TabIndex = 3;
+            // 
             // orderNumberTextBox
             // 
             // 
@@ -1273,6 +1379,18 @@
             this.orderNumberTextBox.Name = "orderNumberTextBox";
             this.orderNumberTextBox.Size = new System.Drawing.Size(100, 20);
             this.orderNumberTextBox.TabIndex = 29;
+            // 
+            // priceTextBox
+            // 
+            // 
+            // 
+            // 
+            this.priceTextBox.Border.Class = "TextBoxBorder";
+            this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Price", true));
+            this.priceTextBox.Location = new System.Drawing.Point(101, 176);
+            this.priceTextBox.Name = "priceTextBox";
+            this.priceTextBox.Size = new System.Drawing.Size(58, 20);
+            this.priceTextBox.TabIndex = 1;
             // 
             // financeProportionTextBox
             // 
@@ -1532,105 +1650,6 @@
             this.creditCoverCurrComboBox.TabIndex = 1;
             this.creditCoverCurrComboBox.WatermarkText = "币别";
             // 
-            // handFeeCurrComboBox
-            // 
-            this.handFeeCurrComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HandFeeCurr", true));
-            this.handFeeCurrComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.handFeeCurrComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.handFeeCurrComboBox.FormattingEnabled = true;
-            this.handFeeCurrComboBox.Location = new System.Drawing.Point(615, 174);
-            this.handFeeCurrComboBox.Name = "handFeeCurrComboBox";
-            this.handFeeCurrComboBox.Size = new System.Drawing.Size(77, 21);
-            this.handFeeCurrComboBox.TabIndex = 13;
-            this.handFeeCurrComboBox.WatermarkText = "币别";
-            // 
-            // handFeeTextBox
-            // 
-            // 
-            // 
-            // 
-            this.handFeeTextBox.Border.Class = "TextBoxBorder";
-            this.handFeeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HandFee", true));
-            this.handFeeTextBox.Location = new System.Drawing.Point(698, 175);
-            this.handFeeTextBox.Name = "handFeeTextBox";
-            this.handFeeTextBox.Size = new System.Drawing.Size(57, 20);
-            this.handFeeTextBox.TabIndex = 11;
-            // 
-            // commissionTypeCommentTextBox
-            // 
-            // 
-            // 
-            // 
-            this.commissionTypeCommentTextBox.Border.Class = "TextBoxBorder";
-            this.commissionTypeCommentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CommissionTypeComment", true));
-            this.commissionTypeCommentTextBox.Location = new System.Drawing.Point(282, 199);
-            this.commissionTypeCommentTextBox.Name = "commissionTypeCommentTextBox";
-            this.commissionTypeCommentTextBox.Size = new System.Drawing.Size(415, 20);
-            this.commissionTypeCommentTextBox.TabIndex = 9;
-            // 
-            // commissonTypeComboBox
-            // 
-            this.commissonTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CommissonType", true));
-            this.commissonTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.commissonTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.commissonTypeComboBox.FormattingEnabled = true;
-            this.commissonTypeComboBox.Items.AddRange(new object[] {
-            this.comboItem13,
-            this.comboItem14,
-            this.comboItem15});
-            this.commissonTypeComboBox.Location = new System.Drawing.Point(101, 201);
-            this.commissonTypeComboBox.Name = "commissonTypeComboBox";
-            this.commissonTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.commissonTypeComboBox.TabIndex = 7;
-            // 
-            // comboItem13
-            // 
-            this.comboItem13.Text = "01";
-            // 
-            // comboItem14
-            // 
-            this.comboItem14.Text = "02";
-            // 
-            // comboItem15
-            // 
-            this.comboItem15.Text = "其他";
-            // 
-            // eFPriceTextBox
-            // 
-            // 
-            // 
-            // 
-            this.eFPriceTextBox.Border.Class = "TextBoxBorder";
-            this.eFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "EFPrice", true));
-            this.eFPriceTextBox.Location = new System.Drawing.Point(433, 176);
-            this.eFPriceTextBox.Name = "eFPriceTextBox";
-            this.eFPriceTextBox.Size = new System.Drawing.Size(66, 20);
-            this.eFPriceTextBox.TabIndex = 5;
-            // 
-            // iFPriceTextBox
-            // 
-            // 
-            // 
-            // 
-            this.iFPriceTextBox.Border.Class = "TextBoxBorder";
-            this.iFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "IFPrice", true));
-            this.iFPriceTextBox.Location = new System.Drawing.Point(264, 176);
-            this.iFPriceTextBox.Name = "iFPriceTextBox";
-            this.iFPriceTextBox.Size = new System.Drawing.Size(72, 20);
-            this.iFPriceTextBox.TabIndex = 3;
-            // 
-            // priceTextBox
-            // 
-            // 
-            // 
-            // 
-            this.priceTextBox.Border.Class = "TextBoxBorder";
-            this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Price", true));
-            this.priceTextBox.Location = new System.Drawing.Point(101, 176);
-            this.priceTextBox.Name = "priceTextBox";
-            this.priceTextBox.Size = new System.Drawing.Size(58, 20);
-            this.priceTextBox.TabIndex = 1;
-            // 
             // groupPanelOther
             // 
             this.groupPanelOther.CanvasColor = System.Drawing.SystemColors.Control;
@@ -1885,6 +1904,7 @@
             this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX1.TabIndex = 5;
             this.buttonX1.Text = "更新";
+            this.buttonX1.Click += new System.EventHandler(this.UpdateCDA);
             // 
             // buttonX2
             // 
@@ -1896,6 +1916,7 @@
             this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX2.TabIndex = 6;
             this.buttonX2.Text = "保存";
+            this.buttonX2.Click += new System.EventHandler(this.SaveCDA);
             // 
             // buttonX3
             // 
@@ -1907,10 +1928,7 @@
             this.buttonX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX3.TabIndex = 7;
             this.buttonX3.Text = "关闭";
-            // 
-            // CDABindingSource
-            // 
-            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
+            this.buttonX3.Click += new System.EventHandler(this.CloseCDA);
             // 
             // CDADetail
             // 
@@ -1927,8 +1945,10 @@
             this.Name = "CDADetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "额度通知书";
+            this.Leave += new System.EventHandler(this.CDADetail_Leave);
             this.groupPanelCase.ResumeLayout(false);
             this.groupPanelCase.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contractsBindingSource)).EndInit();
             this.groupPanelCreditCover.ResumeLayout(false);
             this.groupPanelCreditCover.PerformLayout();
@@ -1940,7 +1960,6 @@
             this.groupPanelOther.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cDADueDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cDAValueDateDateTimePicker)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2016,15 +2035,15 @@
         private DevComponents.Editors.ComboItem comboItem18;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbNoticeMethodFax;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbNoticeMethodEmail;
-        private System.Windows.Forms.TextBox contractCodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX contractCodeTextBox;
         private System.Windows.Forms.BindingSource contractsBindingSource;
         private DevComponents.DotNetBar.Controls.TextBoxX textBoxX2;
         private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
         private DevComponents.Editors.ComboItem comboItem2;
         private DevComponents.Editors.ComboItem comboItem3;
         private DevComponents.Editors.ComboItem comboItem1;
-        private DevComponents.DotNetBar.Controls.CheckBoxX checkBoxX2;
-        private DevComponents.DotNetBar.Controls.CheckBoxX checkBoxX1;
-        private DevComponents.DotNetBar.Controls.CheckBoxX checkBoxX3;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsRecoarse;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCreditCoverRevolving;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsNotice;
     }
 }

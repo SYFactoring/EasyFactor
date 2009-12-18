@@ -12,6 +12,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.InfoMgr;
+    using CMBC.EasyFactor.Utils;
 
     public partial class CDADetail : DevComponents.DotNetBar.Office2007Form
     {
@@ -20,7 +21,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCDAType opCDAType;
 
-        public CDADetail(CDA cda,OpCDAType opCDAType)
+        public CDADetail(CDA cda, OpCDAType opCDAType)
         {
             InitializeComponent();
             this.opCDAType = opCDAType;
@@ -63,6 +64,51 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private void UpdateCDAControlStatus()
         {
+            if (this.opCDAType == OpCDAType.DETAIL_CDA)
+            {
+                foreach (Control comp in this.groupPanelCase.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelCreditCover.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelOther.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+            }
+            else if (this.opCDAType == OpCDAType.NEW_CDA)
+            {
+                foreach (Control comp in this.groupPanelCase.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelCreditCover.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelOther.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+            }
+            else if (this.opCDAType == OpCDAType.UPDATE_CDA)
+            {
+                foreach (Control comp in this.groupPanelCase.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelCreditCover.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelOther.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+            }
         }
 
         /// <summary>
@@ -73,7 +119,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private void SelectCase(object sender, EventArgs e)
         {
             CaseMgr caseMgr = new CaseMgr(false);
-            QueryForm queryForm = new QueryForm(caseMgr,"选择案件");
+            QueryForm queryForm = new QueryForm(caseMgr, "选择案件");
             caseMgr.OwnerForm = queryForm;
             queryForm.ShowDialog(this);
             Case curCase = caseMgr.Selected;
@@ -84,5 +130,104 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CDADetail_Leave(object sender, EventArgs e)
+        {
+            this.CloseCDA(sender, e);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateCDA(object sender, EventArgs e)
+        {
+            CDA cda = (CDA)this.CDABindingSource.DataSource;
+            if (cda == null || cda.CDAID == 0)
+            {
+                MessageBox.Show("请首先选择一个额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            this.opCDAType = OpCDAType.UPDATE_CDA;
+            this.UpdateCDAControlStatus();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveCDA(object sender, EventArgs e)
+        {
+            CDA cda = (CDA)this.CDABindingSource.DataSource;
+
+            if (cda.CDAID == 0)
+            {
+                bool isAddOK = true;
+                try
+                {
+                    App.Current.DbContext.CDAs.InsertOnSubmit(cda);
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    isAddOK = false;
+                    MessageBox.Show(e1.Message);
+                }
+
+                if (isAddOK)
+                {
+                    MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cda.Backup();
+                    this.opCDAType = OpCDAType.UPDATE_CDA;
+                }
+            }
+            else
+            {
+                bool isUpdateOK = true;
+                if (cda.CDAID == 0)
+                {
+                    return;
+                }
+
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e2)
+                {
+                    isUpdateOK = false;
+                    MessageBox.Show(e2.Message);
+                }
+
+                if (isUpdateOK)
+                {
+                    MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cda.Backup();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CloseCDA(object sender, EventArgs e)
+        {
+            CDA cda = (CDA)this.CDABindingSource.DataSource;
+            if (this.opCDAType == OpCDAType.UPDATE_CDA)
+            {
+                cda.Restore();
+            }
+
+            Close();
+        }
     }
 }
