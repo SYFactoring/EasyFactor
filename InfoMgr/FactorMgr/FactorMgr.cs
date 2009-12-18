@@ -27,6 +27,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private readonly bool isEditable;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private BindingSource bs = new BindingSource();
 
         /// <summary>
@@ -36,17 +39,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         public FactorMgr(bool isEditable)
         {
             this.InitializeComponent();
-            this.InitComboBox();
             this.isEditable = isEditable;
             this.UpdateEditableStatus();
             ControlUtil.SetDoubleBuffered(this.dgvFactors);
-        }
 
-        private void InitComboBox()
-        {
-            List<Country> countryList = App.Current.DbContext.Countries.ToList();
-            countryList.Insert(0, Country.DefaultCountry());
-            this.cbCountry.DataSource = countryList;
+            this.cbCountry.DataSource = Country.AllCountries();
             this.cbCountry.DisplayMember = "CountryFormatEN";
             this.cbCountry.ValueMember = "CountryNameEN";
         }
@@ -76,19 +73,19 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         {
             if (isEditable)
             {
-                this.menuItemNewFactor.Enabled = true;
-                this.menuItemNewFactorCreditLine.Enabled = true;
-                this.menuItemUpdateFactor.Enabled = true;
-                this.menuItemDeleteFactor.Enabled = true;
-                this.menuItemImportFactors.Enabled = true;
+                this.menuItemFactorNew.Enabled = true;
+                this.menuItemFactorCreditLineNew.Enabled = true;
+                this.menuItemFactorUpdate.Enabled = true;
+                this.menuItemFactorDelete.Enabled = true;
+                this.menuItemFactorImport.Enabled = true;
             }
             else
             {
-                this.menuItemNewFactor.Enabled = false;
-                this.menuItemNewFactorCreditLine.Enabled = false;
-                this.menuItemUpdateFactor.Enabled = false;
-                this.menuItemDeleteFactor.Enabled = false;
-                this.menuItemImportFactors.Enabled = false;
+                this.menuItemFactorNew.Enabled = false;
+                this.menuItemFactorCreditLineNew.Enabled = false;
+                this.menuItemFactorUpdate.Enabled = false;
+                this.menuItemFactorDelete.Enabled = false;
+                this.menuItemFactorImport.Enabled = false;
             }
         }
 
@@ -127,96 +124,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             bs.DataSource = queryResult;
             dgvFactors.DataSource = bs;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-        }
-
-        /// <summary>
-        /// Create a new factor
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void NewFactor(object sender, EventArgs e)
-        {
-            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR, FactorDetail.OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE);
-            factorDetail.ShowDialog(this);
-        }
-
-        /// <summary>
-        /// Update current selected factor
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void UpdateFactor(object sender, EventArgs e)
-        {
-            if (this.dgvFactors.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string factorCode = (string)this.dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
-            if (factorCode != null)
-            {
-                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                if (selectedFactor != null)
-                {
-                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorType.UPDATE_FACTOR, FactorDetail.OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE);
-                    factorDetail.ShowDialog(this);
-                }
-            }
-        }
-
-        private void NewFactorCreditLine(object sender, System.EventArgs e)
-        {
-            if (this.dgvFactors.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string factorCode = (string)this.dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
-            if (factorCode != null)
-            {
-                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                if (selectedFactor != null)
-                {
-                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorType.DETAIL_FACTOR, FactorDetail.OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE);
-                    factorDetail.ShowDialog(this);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Delete current selected factor
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void DeleteFactor(object sender, EventArgs e)
-        {
-            if (this.dgvFactors.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
-            if (factorCode != null)
-            {
-                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                if (selectedFactor != null)
-                {
-                    if (MessageBox.Show("是否确定删除保理商: " + selectedFactor.FactorCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-                    {
-                        App.Current.DbContext.Factors.DeleteOnSubmit(selectedFactor);
-                        try
-                        {
-                            App.Current.DbContext.SubmitChanges();
-                        }
-                        catch (SqlException)
-                        {
-                            MessageBox.Show("不能删除此机构,已存在相关额度.", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        dgvFactors.Rows.RemoveAt(dgvFactors.SelectedRows[0].Index);
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -265,8 +172,98 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                 if (selectedFactor != null)
                 {
-                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorType.DETAIL_FACTOR, FactorDetail.OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE);
+                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorType.DETAIL_FACTOR);
                     factorDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Create a new factor
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void NewFactor(object sender, EventArgs e)
+        {
+            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
+            factorDetail.ShowDialog(this);
+        }
+
+        private void NewFactorCreditLine(object sender, System.EventArgs e)
+        {
+            if (this.dgvFactors.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string factorCode = (string)this.dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
+            if (factorCode != null)
+            {
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                if (selectedFactor != null)
+                {
+                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE);
+                    factorDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Update current selected factor
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void UpdateFactor(object sender, EventArgs e)
+        {
+            if (this.dgvFactors.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string factorCode = (string)this.dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
+            if (factorCode != null)
+            {
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                if (selectedFactor != null)
+                {
+                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorType.UPDATE_FACTOR);
+                    factorDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Delete current selected factor
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void DeleteFactor(object sender, EventArgs e)
+        {
+            if (this.dgvFactors.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
+            if (factorCode != null)
+            {
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                if (selectedFactor != null)
+                {
+                    if (MessageBox.Show("是否确定删除保理商: " + selectedFactor.FactorCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    {
+                        App.Current.DbContext.Factors.DeleteOnSubmit(selectedFactor);
+                        try
+                        {
+                            App.Current.DbContext.SubmitChanges();
+                        }
+                        catch (SqlException)
+                        {
+                            MessageBox.Show("不能删除此机构,已存在相关额度.", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        dgvFactors.Rows.RemoveAt(dgvFactors.SelectedRows[0].Index);
+                    }
                 }
             }
         }

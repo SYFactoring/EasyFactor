@@ -32,17 +32,32 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpContractType opContractType;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="opClientType"></param>
         public ClientDetail(Client client, OpClientType opClientType)
             : this(client, opClientType, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, OpContractType.DETAIL_CONTRACT)
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="opClientCreditLineType"></param>
         public ClientDetail(Client client, OpClientCreditLineType opClientCreditLineType)
             : this(client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="opContractType"></param>
         public ClientDetail(Client client, OpContractType opContractType)
             : this(client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, opContractType)
         {
@@ -55,7 +70,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="opClientType">client operation type</param>
         /// <param name="opClientCreditLineType">client credit line operation type</param>
         /// <param name="opContractType">client contract opertion type</param>
-        public ClientDetail(Client client, OpClientType opClientType, OpClientCreditLineType opClientCreditLineType, OpContractType opContractType)
+        private ClientDetail(Client client, OpClientType opClientType, OpClientCreditLineType opClientCreditLineType, OpContractType opContractType)
         {
             this.InitializeComponent();
             this.InitComboBox();
@@ -75,11 +90,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UpdateClientControlStatus();
             this.UpdateClientCreditLineControlStatus();
             this.UpdateContractControlStatus();
+
             if (opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
                 this.tabControl.SelectedTab = this.tabItemClientCreditLine;
                 this.clientCreditLineBindingSource.DataSource = new ClientCreditLine();
             }
+
             if (opContractType == OpContractType.NEW_CONTRACT)
             {
                 this.tabControl.SelectedTab = this.tabItemContract;
@@ -155,20 +172,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private void InitComboBox()
         {
-            this.cbCountryCode.DataSource = App.Current.DbContext.Countries;
+            this.cbCountryCode.DataSource = Country.AllCountries();
             this.cbCountryCode.DisplayMember = "CountryFormatCN";
             this.cbCountryCode.ValueMember = "CountryCode";
-            this.cbCountryCode.SelectedIndex = -1;
 
-            this.cbDepartments.DataSource = App.Current.DbContext.Departments;
+            this.cbDepartments.DataSource = Department.AllDepartments();
             this.cbDepartments.DisplayMembers = "DepartmentName";
             this.cbDepartments.GroupingMembers = "Domain";
-            this.cbDepartments.SelectedIndex = -1;
+            this.cbDepartments.ValueMember = "DepartmentCode";
 
-            this.creditLineCurrencyComboBox.DataSource = App.Current.DbContext.Currencies;
+            this.creditLineCurrencyComboBox.DataSource = Currency.AllCurrencies();
             this.creditLineCurrencyComboBox.DisplayMember = "CurrencyFormat";
             this.creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
-            this.creditLineCurrencyComboBox.SelectedIndex = -1;
         }
 
         /// <summary>
@@ -248,27 +263,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client.ClientEDICode != null)
             {
-                foreach (Country country in this.cbCountryCode.Items)
-                {
-                    if (country.CountryCode.Equals(client.CountryCode))
-                    {
-                        this.cbCountryCode.SelectedItem = country;
-                        break;
-                    }
-                }
-
-                int deptIndex = -1;
-                foreach (Department dept in (IQueryable<Department>)this.cbDepartments.DataSource)
-                {
-                    deptIndex++;
-                    if (dept.DepartmentCode.Equals(client.BranchCode))
-                    {
-                        this.cbDepartments.SelectedIndex = deptIndex;
-                        break;
-                    }
-                }
-
                 this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
+                this.dgvContracts.DataSource = client.Contracts.ToList();
             }
         }
 
@@ -291,6 +287,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
+                this.creditLineStatusTextBox.ReadOnly = true;
                 this.freezeReasonTextBox.ReadOnly = true;
                 this.freezerTextBox.ReadOnly = true;
                 this.freezeDateDateTimePicker.Enabled = false;
@@ -305,6 +302,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
+                this.creditLineStatusTextBox.ReadOnly = true;
                 this.freezeReasonTextBox.ReadOnly = true;
                 this.freezerTextBox.ReadOnly = true;
                 this.freezeDateDateTimePicker.Enabled = false;
@@ -371,6 +369,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UpdateClient(object sender, EventArgs e)
         {
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBox.Show("请首先选定一个客户", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             this.opClientType = OpClientType.UPDATE_CLIENT;
             this.UpdateClientControlStatus();
         }
@@ -382,14 +387,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void SaveClient(object sender, EventArgs e)
         {
-            this.clientBindingSource.EndEdit();
             Client client = (Client)this.clientBindingSource.DataSource;
-            client.ClientType = this.clientTypeComboBox.Text;
-            client.ClientLevel = this.clientLevelComboBox.Text;
-            client.IsGroup = this.isGroupComboBox.Text;
-            client.Department = (Department)this.cbDepartments.SelectedValue;
-            client.CountryCode = (string)this.cbCountryCode.SelectedValue;
-            client.Industry = this.cbIndustry.Text;
 
             if (this.opClientType == OpClientType.NEW_CLIENT)
             {
@@ -415,6 +413,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             else
             {
                 bool isUpdateOK = true;
+                if (client.ClientEDICode == null)
+                {
+                    return;
+                }
+
                 try
                 {
                     App.Current.DbContext.SubmitChanges();
@@ -481,21 +484,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void RefreshClientCreditLine(object sender, EventArgs e)
         {
             Client client = (Client)this.clientBindingSource.DataSource;
-            if (client != null)
+            if (client == null || client.ClientEDICode == null)
             {
-                this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
+                MessageBox.Show("请首先选定一个客户", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UpdateCreditLine(object sender, EventArgs e)
-        {
-            this.opClientCreditLineType = OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE;
-            this.UpdateClientCreditLineControlStatus();
+            this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
         }
 
         /// <summary>
@@ -505,12 +500,42 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void NewClientCreditLine(object sender, EventArgs e)
         {
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBox.Show("请首先选定一个客户", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             this.ResetClientCreditLine();
             this.clientCreditLineBindingSource.DataSource = new ClientCreditLine();
             this.opClientCreditLineType = OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE;
             this.UpdateClientCreditLineControlStatus();
         }
 
+		/// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateCreditLine(object sender, EventArgs e)
+        {
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBox.Show("请首先选定一个客户", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.clientCreditLineBindingSource.DataSource is ClientCreditLine))
+            {
+                return;
+            }
+
+            this.opClientCreditLineType = OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE;
+            this.UpdateClientCreditLineControlStatus();
+        }
+		
         /// <summary>
         /// 
         /// </summary>
@@ -519,28 +544,27 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void SaveClientCreditLine(object sender, EventArgs e)
         {
             Client client = (Client)this.clientBindingSource.DataSource;
-            if (client == null)
+            if (client == null || client.ClientEDICode == null)
             {
-                MessageBox.Show("请首先选定一个客户", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("请首先选定一个客户", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.clientCreditLineBindingSource.DataSource is ClientCreditLine))
+            {
                 return;
             }
 
             ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
-            creditLine.CreditLineCurrency = (string)this.creditLineCurrencyComboBox.SelectedValue;
-            creditLine.PeriodBegin = this.periodBeginDateTimePicker.Value;
-            creditLine.PeriodEnd = this.periodEndDateTimePicker.Value;
-            if (!this.freezerTextBox.Text.Equals(string.Empty) && creditLine.Freezer == null)
+
+            if (creditLine.Freezer == null && this.freezeDateDateTimePicker.Enabled)
             {
-                creditLine.Freezer = this.freezerTextBox.Text;
-                creditLine.FreezeReason = this.freezeReasonTextBox.Text;
-                creditLine.FreezeDate = this.freezeDateDateTimePicker.Value;
+                creditLine.Freezer = App.Current.CurUser.Name;
             }
 
-            if (!this.unfreezerTextBox.Text.Equals(string.Empty) && creditLine.Unfreezer == null)
+            if (creditLine.Unfreezer == null && this.unfreezeDateDateTimePicker.Enabled)
             {
-                creditLine.Unfreezer = this.unfreezerTextBox.Text;
-                creditLine.UnfreezeReason = this.unfreezeReasonTextBox.Text;
-                creditLine.UnfreezeDate = this.unfreezeDateDateTimePicker.Value;
+                creditLine.Unfreezer = App.Current.CurUser.Name;
             }
 
             if (creditLine.CreditLineID == 0)
@@ -573,10 +597,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     App.Current.DbContext.SubmitChanges();
                 }
-                catch (System.Data.Linq.ChangeConflictException e2)
+                catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBox.Show(e2.GetType().ToString() + " " + e2.Message);
+                    MessageBox.Show(e2.Message);
                 }
 
                 if (isUpdateOK)
@@ -594,28 +618,43 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void DeleteClientCreditLine(object sender, EventArgs e)
         {
-            if (this.clientCreditLineBindingSource.DataSource is ClientCreditLine)
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
             {
-                ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
-                Client client = (Client)this.clientBindingSource.DataSource;
-                bool isDeleteOK = true;
-                try
-                {
-                    App.Current.DbContext.ClientCreditLines.DeleteOnSubmit(creditLine);
-                    App.Current.DbContext.SubmitChanges();
-                }
-                catch (Exception e1)
-                {
-                    isDeleteOK = false;
-                    MessageBox.Show(e1.Message);
-                }
-
-                if (isDeleteOK)
-                {
-                    MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
-                }
+                MessageBox.Show("请首先选定一个客户", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
+
+            if (!(this.clientCreditLineBindingSource.DataSource is ClientCreditLine))
+            {
+                return;
+            }
+
+            ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
+            if (creditLine.CreditLineID == 0)
+            {
+                return;
+            }
+
+            bool isDeleteOK = true;
+            try
+            {
+                App.Current.DbContext.ClientCreditLines.DeleteOnSubmit(creditLine);
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                isDeleteOK = false;
+                MessageBox.Show(e1.Message);
+            }
+
+            if (isDeleteOK)
+            {
+                MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
+                this.ResetClientCreditLine();
+            }
+
         }
 
         /// <summary>
@@ -625,11 +664,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void FreezeClientCreditLine(object sender, EventArgs e)
         {
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBox.Show("请首先选定一个客户", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.clientCreditLineBindingSource.DataSource is ClientCreditLine))
+            {
+                return;
+            }
+
             ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
+            if (creditLine.CreditLineID == 0)
+            {
+                return;
+            }
+
             this.freezeReasonTextBox.ReadOnly = false;
+            this.freezeDateDateTimePicker.Enabled = true;
             if (creditLine.Freezer == null)
             {
-                creditLine.Freezer = App.Current.CurUser.Name;
                 creditLine.FreezeDate = System.DateTime.Now;
             }
         }
@@ -641,11 +697,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UnfreezeClientCreditLine(object sender, EventArgs e)
         {
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBox.Show("请首先选定一个客户", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.clientCreditLineBindingSource.DataSource is ClientCreditLine))
+            {
+                return;
+            }
+
             ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
+            if (creditLine.CreditLineID == 0)
+            {
+                return;
+            }
+
             this.unfreezeReasonTextBox.ReadOnly = false;
+            this.unfreezeDateDateTimePicker.Enabled = true;
             if (creditLine.Unfreezer == null)
             {
-                creditLine.Unfreezer = App.Current.CurUser.Name;
                 creditLine.UnfreezeDate = System.DateTime.Now;
             }
         }
@@ -673,14 +746,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     this.clientCreditLineBindingSource.DataSource = selectedClientCreditLine;
                     this.btnClientCreditLineFreeze.Enabled = true;
                     this.btnClientCreditLineUnfreeze.Enabled = true;
-                    foreach (Currency currency in this.creditLineCurrencyComboBox.Items)
-                    {
-                        if (currency.CurrencyCode.Equals(selectedClientCreditLine.CreditLineCurrency))
-                        {
-                            this.creditLineCurrencyComboBox.SelectedItem = currency;
-                            break;
-                        }
-                    }
                 }
             }
         }
@@ -703,7 +768,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void SaveContract(object sender, EventArgs e)
         {
-            this.contractBindingSource.EndEdit();
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null)
+            {
+                MessageBox.Show("请首先选定一个客户", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.contractBindingSource.DataSource is Contract))
+            {
+                return;
+            }
+
             Contract contract = (Contract)this.contractBindingSource.DataSource;
 
             if (this.opContractType == OpContractType.NEW_CONTRACT)

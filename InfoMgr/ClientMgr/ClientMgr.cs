@@ -43,9 +43,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UpdateEditableStatus();
             ControlUtil.SetDoubleBuffered(this.dgvClients);
 
-            List<Department> departmentList = App.Current.DbContext.Departments.ToList();
-            departmentList.Insert(0, Department.DefaultDepartment());
-            this.comboTreeDepartment.DataSource = departmentList;
+            this.comboTreeDepartment.DataSource = Department.AllDepartments();
             this.comboTreeDepartment.DisplayMembers = "DepartmentName";
             this.comboTreeDepartment.ValueMember = "DepartmentCode";
             this.comboTreeDepartment.GroupingMembers = "Domain";
@@ -76,19 +74,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
             if (this.isEditable)
             {
-                this.menuItemNewClient.Enabled = true;
-                this.menuItemNewClientCreditLine.Enabled = true;
-                this.menuItemUpdateClient.Enabled = true;
-                this.menuItemDeleteClient.Enabled = true;
-                this.menuItemImportClients.Enabled = true;
+                this.menuItemClientNew.Enabled = true;
+                this.menuItemClientCreditLineNew.Enabled = true;
+                this.menuItemContractNew.Enabled = true;
+                this.menuItemClientUpdate.Enabled = true;
+                this.menuItemClientDelete.Enabled = true;
+                this.menuItemClientImport.Enabled = true;
             }
             else
             {
-                this.menuItemNewClient.Enabled = false;
-                this.menuItemNewClientCreditLine.Enabled = false;
-                this.menuItemUpdateClient.Enabled = false;
-                this.menuItemDeleteClient.Enabled = false;
-                this.menuItemImportClients.Enabled = false;
+                this.menuItemClientNew.Enabled = false;
+                this.menuItemClientCreditLineNew.Enabled = false;
+                this.menuItemContractNew.Enabled = false;
+                this.menuItemClientUpdate.Enabled = false;
+                this.menuItemClientDelete.Enabled = false;
+                this.menuItemClientImport.Enabled = false;
             }
         }
 
@@ -130,102 +130,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.bs.DataSource = queryResult;
             this.dgvClients.DataSource = bs;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-        }
-
-        /// <summary>
-        /// Create a new client
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void NewClient(object sender, System.EventArgs e)
-        {
-            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT);
-            clientDetail.ShowDialog(this);
-        }
-
-        /// <summary>
-        /// Update selected client
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void UpdateClient(object sender, System.EventArgs e)
-        {
-            if (this.dgvClients.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string cid = (string)dgvClients["clientEDICodeColumn", dgvClients.SelectedRows[0].Index].Value;
-            if (cid != null)
-            {
-                Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
-                if (selectedClient != null)
-                {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.UPDATE_CLIENT);
-                    clientDetail.ShowDialog(this);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NewClientCreditLine(object sender, System.EventArgs e)
-        {
-            if (this.dgvClients.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string cid = (string)dgvClients["clientEDICodeColumn", dgvClients.SelectedRows[0].Index].Value;
-            if (cid != null)
-            {
-                Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
-                if (selectedClient != null)
-                {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE);
-                    clientDetail.ShowDialog(this);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Delete selected Client
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void DeleteClient(object sender, System.EventArgs e)
-        {
-            if (this.dgvClients.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string cid = (string)dgvClients["clientEDICodeColumn", dgvClients.SelectedRows[0].Index].Value;
-            if (cid != null)
-            {
-                Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
-                if (selectedClient != null)
-                {
-                    if (MessageBox.Show("是否打算删除客户: " + selectedClient.ClientNameCN, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-                    {
-                        App.Current.DbContext.Clients.DeleteOnSubmit(selectedClient);
-                        try
-                        {
-                            App.Current.DbContext.SubmitChanges();
-                        }
-                        catch (SqlException)
-                        {
-                            MessageBox.Show("不能删除此客户,已存在相关额度.", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        dgvClients.Rows.RemoveAt(dgvClients.SelectedRows[0].Index);
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -279,6 +183,129 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 }
             }
         }
+
+        /// <summary>
+        /// Create a new client
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void NewClient(object sender, System.EventArgs e)
+        {
+            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT);
+            clientDetail.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewClientCreditLine(object sender, System.EventArgs e)
+        {
+            if (this.dgvClients.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string cid = (string)dgvClients["clientEDICodeColumn", dgvClients.SelectedRows[0].Index].Value;
+            if (cid != null)
+            {
+                Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
+                if (selectedClient != null)
+                {
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE);
+                    clientDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewContract(object sender, EventArgs e)
+        {
+            if (this.dgvClients.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string cid = (string)dgvClients["clientEDICodeColumn", dgvClients.SelectedRows[0].Index].Value;
+            if (cid != null)
+            {
+                Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
+                if (selectedClient != null)
+                {
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpContractType.NEW_CONTRACT);
+                    clientDetail.ShowDialog(this);
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Update selected client
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void UpdateClient(object sender, System.EventArgs e)
+        {
+            if (this.dgvClients.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string cid = (string)dgvClients["clientEDICodeColumn", dgvClients.SelectedRows[0].Index].Value;
+            if (cid != null)
+            {
+                Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
+                if (selectedClient != null)
+                {
+                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.UPDATE_CLIENT);
+                    clientDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Delete selected Client
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void DeleteClient(object sender, System.EventArgs e)
+        {
+            if (this.dgvClients.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string cid = (string)dgvClients["clientEDICodeColumn", dgvClients.SelectedRows[0].Index].Value;
+            if (cid != null)
+            {
+                Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
+                if (selectedClient != null)
+                {
+                    if (MessageBox.Show("是否打算删除客户: " + selectedClient.ClientNameCN, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    {
+                        App.Current.DbContext.Clients.DeleteOnSubmit(selectedClient);
+                        try
+                        {
+                            App.Current.DbContext.SubmitChanges();
+                        }
+                        catch (SqlException)
+                        {
+                            MessageBox.Show("不能删除此客户,已存在相关额度.", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        dgvClients.Rows.RemoveAt(dgvClients.SelectedRows[0].Index);
+                    }
+                }
+            }
+        }
+
+
 
         /// <summary>
         /// Event handler when cell double clicked

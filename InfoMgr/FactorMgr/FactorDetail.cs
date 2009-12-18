@@ -27,26 +27,38 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private OpFactorCreditLineType opFactorCreditLineType;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="factor"></param>
+        /// <param name="opFactorType"></param>
         public FactorDetail(Factor factor, OpFactorType opFactorType)
             : this(factor, opFactorType, OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="factor"></param>
+        /// <param name="opFactorCreditLineType"></param>
         public FactorDetail(Factor factor, OpFactorCreditLineType opFactorCreditLineType)
             : this(factor, OpFactorType.DETAIL_FACTOR, opFactorCreditLineType)
         {
         }
+
         /// <summary>
         /// Initializes a new instance of the FactorDetail class
         /// </summary>
         /// <param name="factor">selected factor</param>
         /// <param name="opType"></param>
-        public FactorDetail(Factor factor, OpFactorType opFactorType, OpFactorCreditLineType opFactorCreditLineType)
+        private FactorDetail(Factor factor, OpFactorType opFactorType, OpFactorCreditLineType opFactorCreditLineType)
         {
             this.InitializeComponent();
             this.InitComboBox();
             this.opFactorType = opFactorType;
             this.opFactorCreditLineType = opFactorCreditLineType;
+
             if (opFactorType == OpFactorType.NEW_FACTOR)
             {
                 factorBindingSource.DataSource = new Factor();
@@ -56,8 +68,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 factorBindingSource.DataSource = factor;
                 factor.Backup();
             }
+
             this.UpdateFactorControlStatus();
             this.UpdateFactorCreditLineControlStatus();
+
             if (opFactorCreditLineType == OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE)
             {
                 this.tabControl.SelectedTab = this.tabItemFactorCreditLine;
@@ -112,15 +126,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private void InitComboBox()
         {
-            this.countryNameComboBox.DataSource = App.Current.DbContext.Countries;
+            this.countryNameComboBox.DataSource = Country.AllCountries();
             this.countryNameComboBox.DisplayMember = "CountryNameEN";
             this.countryNameComboBox.ValueMember = "CountryNameEN";
-            this.countryNameComboBox.SelectedIndex = -1;
 
-            this.creditLineCurrencyComboBox.DataSource = App.Current.DbContext.Currencies;
+            this.creditLineCurrencyComboBox.DataSource = Currency.AllCurrencies();
             this.creditLineCurrencyComboBox.DisplayMember = "CurrencyFormat";
             this.creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
-            this.creditLineCurrencyComboBox.SelectedIndex = -1;
         }
 
         /// <summary>
@@ -200,15 +212,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)factorBindingSource.DataSource;
             if (factor.FactorCode != null)
             {
-                foreach (Country country in this.countryNameComboBox.Items)
-                {
-                    if (country.CountryNameEN.Equals(factor.CountryName))
-                    {
-                        this.countryNameComboBox.SelectedItem = country;
-                        break;
-                    }
-                }
-
                 this.dgvFactorCreditLines.DataSource = factor.FactorCreditLines.ToList();
             }
         }
@@ -232,6 +235,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
+                this.creditLineStatusTextBox.ReadOnly = true;
                 this.freezeReasonTextBox.ReadOnly = true;
                 this.freezerTextBox.ReadOnly = true;
                 this.freezeDateDateTimePicker.Enabled = false;
@@ -246,6 +250,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
+                this.creditLineStatusTextBox.ReadOnly = true;
                 this.freezeReasonTextBox.ReadOnly = true;
                 this.freezerTextBox.ReadOnly = true;
                 this.freezeDateDateTimePicker.Enabled = false;
@@ -260,8 +265,36 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FactorUpdate(object sender, EventArgs e)
+        private void FactorDetail_Leave(object sender, EventArgs e)
         {
+            this.CloseFactor(sender, e);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ResetFactorCreditLine()
+        {
+            foreach (Control comp in this.groupPanelCreditLineDetail.Controls)
+            {
+                ControlUtil.SetComponetDefault(comp);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateFactor(object sender, EventArgs e)
+        {
+            Factor factor = (Factor)this.factorBindingSource.DataSource;
+            if (factor == null || factor.FactorCode == null)
+            {
+                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             this.opFactorType = OpFactorType.UPDATE_FACTOR;
             this.UpdateFactorControlStatus();
         }
@@ -271,9 +304,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void FactorSave(object sender, System.EventArgs e)
+        private void SaveFactor(object sender, System.EventArgs e)
         {
-            factorBindingSource.EndEdit();
+
             Factor factor = (Factor)factorBindingSource.DataSource;
 
             if (this.opFactorType == OpFactorType.NEW_FACTOR)
@@ -300,6 +333,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             else
             {
                 bool isUpdateOK = true;
+                if (factor.FactorCode == null)
+                {
+                    return;
+                }
+
                 try
                 {
                     App.Current.DbContext.SubmitChanges();
@@ -323,15 +361,15 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void FactorClose(object sender, System.EventArgs e)
+        private void CloseFactor(object sender, System.EventArgs e)
         {
             Factor factor = (Factor)this.factorBindingSource.DataSource;
-            if (this.opFactorType == OpFactorType.NEW_FACTOR || opFactorType == OpFactorType.UPDATE_FACTOR)
+            if (opFactorType == OpFactorType.UPDATE_FACTOR)
             {
                 factor.Restore();
             }
 
-            if (this.opFactorCreditLineType == OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE || opFactorCreditLineType == OpFactorCreditLineType.UPDATE_FACTOR_CREDIT_LINE)
+            if (this.opFactorCreditLineType == OpFactorCreditLineType.UPDATE_FACTOR_CREDIT_LINE)
             {
                 if (this.factorCreditLineBindingSource.DataSource is FactorCreditLine)
                 {
@@ -354,21 +392,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private void RefreshFactorCreditLine(object sender, EventArgs e)
         {
             Factor factor = (Factor)this.factorBindingSource.DataSource;
-            if (factor != null)
+            if (factor == null || factor.FactorCode == null)
             {
-                this.dgvFactorCreditLines.DataSource = factor.FactorCreditLines.ToList();
+                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UpdateCreditLine(object sender, EventArgs e)
-        {
-            this.opFactorCreditLineType = OpFactorCreditLineType.UPDATE_FACTOR_CREDIT_LINE;
-            this.UpdateFactorCreditLineControlStatus();
+            this.dgvFactorCreditLines.DataSource = factor.FactorCreditLines.ToList();
         }
 
         /// <summary>
@@ -378,9 +408,39 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void NewFactorCreditLine(object sender, EventArgs e)
         {
+            Factor factor = (Factor)this.factorBindingSource.DataSource;
+            if (factor == null || factor.FactorCode == null)
+            {
+                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             this.ResetFactorCreditLine();
             this.factorCreditLineBindingSource.DataSource = new FactorCreditLine();
             this.opFactorCreditLineType = OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE;
+            this.UpdateFactorCreditLineControlStatus();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateCreditLine(object sender, EventArgs e)
+        {
+            Factor factor = (Factor)this.factorBindingSource.DataSource;
+            if (factor == null || factor.FactorCode == null)
+            {
+                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.factorCreditLineBindingSource.DataSource is FactorCreditLine))
+            {
+                return;
+            }
+
+            this.opFactorCreditLineType = OpFactorCreditLineType.UPDATE_FACTOR_CREDIT_LINE;
             this.UpdateFactorCreditLineControlStatus();
         }
 
@@ -394,24 +454,25 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null)
             {
-                MessageBox.Show("请首先选定一个机构", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.factorCreditLineBindingSource.DataSource is FactorCreditLine))
+            {
                 return;
             }
 
             FactorCreditLine creditLine = (FactorCreditLine)this.factorCreditLineBindingSource.DataSource;
 
-            if (!this.freezerTextBox.Text.Equals(string.Empty) && creditLine.Freezer == null)
+            if (creditLine.Freezer == null && this.freezeDateDateTimePicker.Enabled)
             {
-                creditLine.Freezer = this.freezerTextBox.Text;
-                creditLine.FreezeReason = this.freezeReasonTextBox.Text;
-                creditLine.FreezeDate = this.freezeDateDateTimePicker.Value;
+                creditLine.Freezer = App.Current.CurUser.Name;
             }
 
-            if (!this.unfreezerTextBox.Text.Equals(string.Empty) && creditLine.Unfreezer == null)
+            if (creditLine.Unfreezer == null && this.unfreezeDateDateTimePicker.Enabled)
             {
-                creditLine.Unfreezer = this.unfreezerTextBox.Text;
-                creditLine.UnfreezeReason = this.unfreezeReasonTextBox.Text;
-                creditLine.UnfreezeDate = this.unfreezeDateDateTimePicker.Value;
+                creditLine.Unfreezer = App.Current.CurUser.Name;
             }
 
             if (creditLine.CreditLineID == 0)
@@ -465,28 +526,43 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void DeleteFactorCreditLine(object sender, EventArgs e)
         {
-            if (this.factorCreditLineBindingSource.DataSource is FactorCreditLine)
+            Factor factor = (Factor)this.factorBindingSource.DataSource;
+            if (factor == null || factor.FactorCode == null)
             {
-                FactorCreditLine creditLine = (FactorCreditLine)this.factorCreditLineBindingSource.DataSource;
-                Factor factor = (Factor)this.factorCreditLineBindingSource.DataSource;
-                bool isDeleteOK = true;
-                try
-                {
-                    App.Current.DbContext.FactorCreditLines.DeleteOnSubmit(creditLine);
-                    App.Current.DbContext.SubmitChanges();
-                }
-                catch (Exception e1)
-                {
-                    isDeleteOK = false;
-                    MessageBox.Show(e1.Message);
-                }
-
-                if (isDeleteOK)
-                {
-                    MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.dgvFactorCreditLines.DataSource = factor.FactorCreditLines.ToList();
-                }
+                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
+
+            if (!(this.factorCreditLineBindingSource.DataSource is FactorCreditLine))
+            {
+                return;
+            }
+
+            FactorCreditLine creditLine = (FactorCreditLine)this.factorCreditLineBindingSource.DataSource;
+            if (creditLine.CreditLineID == 0)
+            {
+                return;
+            }
+
+            bool isDeleteOK = true;
+            try
+            {
+                App.Current.DbContext.FactorCreditLines.DeleteOnSubmit(creditLine);
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                isDeleteOK = false;
+                MessageBox.Show(e1.Message);
+            }
+
+            if (isDeleteOK)
+            {
+                MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.dgvFactorCreditLines.DataSource = factor.FactorCreditLines.ToList();
+                this.ResetFactorCreditLine();
+            }
+
         }
 
         /// <summary>
@@ -496,11 +572,28 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void FreezeFactorCreditLine(object sender, EventArgs e)
         {
+            Factor factor = (Factor)this.factorBindingSource.DataSource;
+            if (factor == null || factor.FactorCode == null)
+            {
+                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.factorCreditLineBindingSource.DataSource is FactorCreditLine))
+            {
+                return;
+            }
+
             FactorCreditLine creditLine = (FactorCreditLine)this.factorCreditLineBindingSource.DataSource;
+            if (creditLine.CreditLineID == 0)
+            {
+                return;
+            }
+ 
             this.freezeReasonTextBox.ReadOnly = false;
+            this.freezeDateDateTimePicker.Enabled = true;
             if (creditLine.Freezer == null)
             {
-                creditLine.Freezer = App.Current.CurUser.Name;
                 creditLine.FreezeDate = System.DateTime.Now;
             }
         }
@@ -512,11 +605,28 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void UnfreezeFactorCreditLine(object sender, EventArgs e)
         {
+            Factor factor = (Factor)this.factorBindingSource.DataSource;
+            if (factor == null || factor.FactorCode == null)
+            {
+                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.factorCreditLineBindingSource.DataSource is FactorCreditLine))
+            {
+                return;
+            }
+
             FactorCreditLine creditLine = (FactorCreditLine)this.factorCreditLineBindingSource.DataSource;
+            if (creditLine.CreditLineID == 0)
+            {
+                return;
+            }
+
             this.unfreezeReasonTextBox.ReadOnly = false;
+            this.unfreezeDateDateTimePicker.Enabled = true;
             if (creditLine.Unfreezer == null)
             {
-                creditLine.Unfreezer = App.Current.CurUser.Name;
                 creditLine.UnfreezeDate = System.DateTime.Now;
             }
         }
@@ -544,38 +654,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     this.factorCreditLineBindingSource.DataSource = selectedFactorCreditLine;
                     this.btnFactorCreditLineFreeze.Enabled = true;
                     this.btnFactorCreditLineUnfreeze.Enabled = true;
-                    foreach (Country country in this.countryNameComboBox.Items)
-                    {
-                        if (country.CountryNameEN.Equals(factor.CountryName))
-                        {
-                            this.countryNameComboBox.SelectedItem = country;
-                            break;
-                        }
-                    }
                 }
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FactorDetail_Leave(object sender, EventArgs e)
-        {
-            this.FactorClose(sender, e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void ResetFactorCreditLine()
-        {
-            foreach (Control comp in this.groupPanelCreditLineDetail.Controls)
-            {
-                ControlUtil.SetComponetDefault(comp);
-            }
-        }
-
     }
 }

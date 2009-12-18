@@ -16,13 +16,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.ContextMenuStrip contextMenuFactorMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemSelectFactor;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDetailFactor;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFactorSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFactorDetail;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemNewFactor;
-        private System.Windows.Forms.ToolStripMenuItem menuItemUpdateFactor;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDeleteFactor;
-        private System.Windows.Forms.ToolStripMenuItem menuItemImportFactors;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFactorNew;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFactorUpdate;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFactorDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFactorImport;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -47,17 +47,17 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuFactorMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemSelectFactor = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDetailFactor = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFactorSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFactorDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemNewFactor = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemNewFactorCreditLine = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemUpdateFactor = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDeleteFactor = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemImportFactors = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFactorNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFactorCreditLineNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFactorUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFactorDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFactorImport = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbCountry = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.comboItem5 = new DevComponents.Editors.ComboItem();
@@ -131,70 +131,70 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // contextMenuFactorMgr
             // 
             this.contextMenuFactorMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemSelectFactor,
-            this.menuItemDetailFactor,
+            this.menuItemFactorSelect,
+            this.menuItemFactorDetail,
             this.toolStripSeparator,
-            this.menuItemNewFactor,
-            this.menuItemNewFactorCreditLine,
-            this.menuItemUpdateFactor,
-            this.menuItemDeleteFactor,
-            this.menuItemImportFactors});
+            this.menuItemFactorNew,
+            this.menuItemFactorCreditLineNew,
+            this.menuItemFactorUpdate,
+            this.menuItemFactorDelete,
+            this.menuItemFactorImport});
             this.contextMenuFactorMgr.Name = "contextMenuFactorMgr";
-            this.contextMenuFactorMgr.Size = new System.Drawing.Size(171, 164);
+            this.contextMenuFactorMgr.Size = new System.Drawing.Size(153, 186);
             // 
-            // menuItemSelectFactor
+            // menuItemFactorSelect
             // 
-            this.menuItemSelectFactor.Name = "menuItemSelectFactor";
-            this.menuItemSelectFactor.Size = new System.Drawing.Size(170, 22);
-            this.menuItemSelectFactor.Text = "选定机构";
-            this.menuItemSelectFactor.Click += new System.EventHandler(this.SelectFactor);
+            this.menuItemFactorSelect.Name = "menuItemFactorSelect";
+            this.menuItemFactorSelect.Size = new System.Drawing.Size(152, 22);
+            this.menuItemFactorSelect.Text = "选定机构";
+            this.menuItemFactorSelect.Click += new System.EventHandler(this.SelectFactor);
             // 
-            // menuItemDetailFactor
+            // menuItemFactorDetail
             // 
-            this.menuItemDetailFactor.Name = "menuItemDetailFactor";
-            this.menuItemDetailFactor.Size = new System.Drawing.Size(170, 22);
-            this.menuItemDetailFactor.Text = "详细信息";
-            this.menuItemDetailFactor.Click += new System.EventHandler(this.DetailFactor);
+            this.menuItemFactorDetail.Name = "menuItemFactorDetail";
+            this.menuItemFactorDetail.Size = new System.Drawing.Size(152, 22);
+            this.menuItemFactorDetail.Text = "详细信息";
+            this.menuItemFactorDetail.Click += new System.EventHandler(this.DetailFactor);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(167, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
-            // menuItemNewFactor
+            // menuItemFactorNew
             // 
-            this.menuItemNewFactor.Name = "menuItemNewFactor";
-            this.menuItemNewFactor.Size = new System.Drawing.Size(170, 22);
-            this.menuItemNewFactor.Text = "新建机构";
-            this.menuItemNewFactor.Click += new System.EventHandler(this.NewFactor);
+            this.menuItemFactorNew.Name = "menuItemFactorNew";
+            this.menuItemFactorNew.Size = new System.Drawing.Size(152, 22);
+            this.menuItemFactorNew.Text = "新建机构";
+            this.menuItemFactorNew.Click += new System.EventHandler(this.NewFactor);
             // 
-            // menuItemNewFactorCreditLine
+            // menuItemFactorCreditLineNew
             // 
-            this.menuItemNewFactorCreditLine.Name = "menuItemNewFactorCreditLine";
-            this.menuItemNewFactorCreditLine.Size = new System.Drawing.Size(170, 22);
-            this.menuItemNewFactorCreditLine.Text = "新建机构额度信息";
-            this.menuItemNewFactorCreditLine.Click += new System.EventHandler(this.NewFactorCreditLine);
+            this.menuItemFactorCreditLineNew.Name = "menuItemFactorCreditLineNew";
+            this.menuItemFactorCreditLineNew.Size = new System.Drawing.Size(152, 22);
+            this.menuItemFactorCreditLineNew.Text = "新建额度信息";
+            this.menuItemFactorCreditLineNew.Click += new System.EventHandler(this.NewFactorCreditLine);
             // 
-            // menuItemUpdateFactor
+            // menuItemFactorUpdate
             // 
-            this.menuItemUpdateFactor.Name = "menuItemUpdateFactor";
-            this.menuItemUpdateFactor.Size = new System.Drawing.Size(170, 22);
-            this.menuItemUpdateFactor.Text = "更新机构";
-            this.menuItemUpdateFactor.Click += new System.EventHandler(this.UpdateFactor);
+            this.menuItemFactorUpdate.Name = "menuItemFactorUpdate";
+            this.menuItemFactorUpdate.Size = new System.Drawing.Size(152, 22);
+            this.menuItemFactorUpdate.Text = "更新机构";
+            this.menuItemFactorUpdate.Click += new System.EventHandler(this.UpdateFactor);
             // 
-            // menuItemDeleteFactor
+            // menuItemFactorDelete
             // 
-            this.menuItemDeleteFactor.Name = "menuItemDeleteFactor";
-            this.menuItemDeleteFactor.Size = new System.Drawing.Size(170, 22);
-            this.menuItemDeleteFactor.Text = "删除机构";
-            this.menuItemDeleteFactor.Click += new System.EventHandler(this.DeleteFactor);
+            this.menuItemFactorDelete.Name = "menuItemFactorDelete";
+            this.menuItemFactorDelete.Size = new System.Drawing.Size(152, 22);
+            this.menuItemFactorDelete.Text = "删除机构";
+            this.menuItemFactorDelete.Click += new System.EventHandler(this.DeleteFactor);
             // 
-            // menuItemImportFactors
+            // menuItemFactorImport
             // 
-            this.menuItemImportFactors.Name = "menuItemImportFactors";
-            this.menuItemImportFactors.Size = new System.Drawing.Size(170, 22);
-            this.menuItemImportFactors.Text = "导入机构";
-            this.menuItemImportFactors.Click += new System.EventHandler(this.ImportFactos);
+            this.menuItemFactorImport.Name = "menuItemFactorImport";
+            this.menuItemFactorImport.Size = new System.Drawing.Size(152, 22);
+            this.menuItemFactorImport.Text = "导入机构";
+            this.menuItemFactorImport.Click += new System.EventHandler(this.ImportFactos);
             // 
             // panelQuery
             // 
@@ -320,7 +320,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblCount.BackgroundStyle.Class = "";
             this.lblCount.Location = new System.Drawing.Point(725, 13);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(75, 16);
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 7;
             // 
             // btnQuery
@@ -398,14 +398,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactors.AllowUserToAddRows = false;
             this.dgvFactors.AllowUserToDeleteRows = false;
             this.dgvFactors.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactors.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactors.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvFactors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFactors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.factorCodeColumn,
@@ -453,14 +453,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.FactorGroupColumn});
             this.dgvFactors.ContextMenuStrip = this.contextMenuFactorMgr;
             this.dgvFactors.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactors.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvFactors.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFactors.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvFactors.Location = new System.Drawing.Point(0, 42);
@@ -808,7 +808,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private DevComponents.Editors.ComboItem comboItem2;
         private DevComponents.Editors.ComboItem comboItem3;
         private DevComponents.Editors.ComboItem comboItem4;
-        private System.Windows.Forms.ToolStripMenuItem menuItemNewFactorCreditLine;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFactorCreditLineNew;
         private DevComponents.Editors.ComboItem comboItem0;
         private System.Windows.Forms.DataGridViewTextBoxColumn factorCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactorTypeColumn;

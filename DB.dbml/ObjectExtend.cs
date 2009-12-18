@@ -4,33 +4,64 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Linq;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class Department
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        private static List<Department> _allDepartment;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        static Department()
+        {
+            _allDepartment = App.Current.DbContext.Departments.ToList();
+            _allDepartment.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
+        }
+
+        public static List<Department> AllDepartments()
+        {
+            return _allDepartment;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return this._DepartmentName;
         }
-
-        public static Department DefaultDepartment()
-        {
-            return new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" };
-        }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class Client
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string CountryNameCN
         {
             get
             {
                 if (_CountryCode != null && !_CountryCode.Trim().Equals(string.Empty))
                 {
-                    return Country.FindCountryByCode(_CountryCode).CountryNameCN;
+                    return App.Current.DbContext.Countries.Where(c => c.CountryCode == _CountryCode).SingleOrDefault().CountryNameCN;
                 }
                 return string.Empty;
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             if (_ClientNameCN != null)
@@ -43,25 +74,43 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class Currency
     {
-        private static Dictionary<string, Currency> _allCurrencies;
+        /// <summary>
+        /// 
+        /// </summary>
+        private static List<Currency> _currencyList;
 
-        public static Currency FindCurrencyByCode(string currencyCode)
+        /// <summary>
+        /// 
+        /// </summary>
+        static Currency()
         {
-            if (_allCurrencies == null)
-            {
-                _allCurrencies = new Dictionary<string, Currency>();
-                _allCurrencies = App.Current.DbContext.Currencies.ToDictionary(c => c._CurrencyCode);
-            }
-            return _allCurrencies[currencyCode];
+            _currencyList = App.Current.DbContext.Currencies.ToList();
+            _currencyList.Insert(0, new Currency() { CurrencyCode = "AAA", CurrencyName = "All" });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static List<Currency> AllCurrencies()
+        {
+            return _currencyList;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string CurrencyFormat
         {
             get
             {
-                if ("AA".Equals(_CurrencyCode))
+                if ("AAA".Equals(_CurrencyCode))
                 {
                     return "All";
                 }
@@ -71,16 +120,40 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
-
-        public static Currency DefaultCurrency()
-        {
-            return new Currency() { CurrencyCode = "AA", CurrencyName = "All" };
-        }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class Country
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private static List<Country> _countryList;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        static Country()
+        {
+            _countryList = App.Current.DbContext.Countries.ToList();
+            _countryList.Insert(0, new Country() { CountryCode = "AA", CountryNameCN = "全部", CountryNameEN = "All" });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static List<Country> AllCountries()
+        {
+            return _countryList;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string CountryFormatEN
         {
             get
@@ -96,6 +169,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string CountryFormatCN
         {
             get
@@ -110,53 +186,31 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
-
-        private static Dictionary<string, Country> _allCountries;
-
-        public static Country FindCountryByCode(string countryCode)
-        {
-            if (_allCountries == null)
-            {
-                _allCountries = new Dictionary<string, Country>();
-                _allCountries = App.Current.DbContext.Countries.ToDictionary(c => c._CountryCode);
-            }
-            if (_allCountries != null && _allCountries.ContainsKey(countryCode))
-            {
-                return _allCountries[countryCode];
-            }
-            else
-            {
-                return new Country() { CountryCode = "", CountryNameCN = "", CountryNameEN = "" };
-            }
-        }
-
-        public static Country DefaultCountry()
-        {
-            return new Country() { CountryCode = "AA", CountryNameCN = "全部", CountryNameEN = "All" };
-        }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class Factor
     {
-        public override string ToString()
-        {
-            if (_CompanyNameCN != null)
-            {
-                return _CompanyNameCN;
-            }
-            else
-            {
-                return _CompanyNameEN;
-            }
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public static readonly string CMBC_CODE = "CN01300";
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public static Factor FindFactorByCode(string code)
         {
             return App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == code);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string GroupNameEN
         {
             get
@@ -172,6 +226,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string GroupNameCN
         {
             get
@@ -184,6 +241,22 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     return string.Empty;
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            if (_CompanyNameCN != null)
+            {
+                return _CompanyNameCN;
+            }
+            else
+            {
+                return _CompanyNameEN;
             }
         }
     }

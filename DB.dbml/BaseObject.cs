@@ -47,6 +47,10 @@ namespace CMBC.EasyFactor.DB.dbml
     public partial class ClientCreditLine : BaseObject
     {
     }
+    
+    public partial class Contract : BaseObject
+    {
+    }
 
     public partial class Factor : BaseObject
     {
@@ -64,7 +68,7 @@ namespace CMBC.EasyFactor.DB.dbml
     {
     }
 
-    public partial class Contract : BaseObject
+    public partial class CreditCoverNegotiation : BaseObject
     {
     }
 

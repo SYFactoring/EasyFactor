@@ -153,7 +153,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private void UserClose(object sender, EventArgs e)
         {
             User user = (User)this.userBindingSource.DataSource;
-            if (opUserType == OpUserType.NEW_USER || opUserType == OpUserType.UPDATE_USER)
+            if (opUserType == OpUserType.UPDATE_USER)
             {
                 user.Restore();
             }

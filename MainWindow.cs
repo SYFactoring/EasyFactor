@@ -233,5 +233,11 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(CDAMgr);
         }
 
+        private void MainPage(object sender, EventArgs e)
+        {
+            this.ClearDetailPanel();
+            ribbonDetailPanel.Controls.Add(logoLabel);
+        }
+
     }
 }

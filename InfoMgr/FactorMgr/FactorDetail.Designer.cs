@@ -110,6 +110,8 @@
             this.creditLineTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditLineCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tabItemFactorCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabPanelAccount = new DevComponents.DotNetBar.TabControlPanel();
+            this.tabItemFactorAccount = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelFactor = new DevComponents.DotNetBar.TabControlPanel();
             this.btnFactorUpdate = new DevComponents.DotNetBar.ButtonX();
             this.btnFactorClose = new DevComponents.DotNetBar.ButtonX();
@@ -157,8 +159,6 @@
             this.comboItem3 = new DevComponents.Editors.ComboItem();
             this.comboItem4 = new DevComponents.Editors.ComboItem();
             this.tabItemFactor = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelAccount = new DevComponents.DotNetBar.TabControlPanel();
-            this.tabItemFactorAccount = new DevComponents.DotNetBar.TabItem(this.components);
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
@@ -768,8 +768,8 @@
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
             this.tabControl.Controls.Add(this.tabPanelCreditLine);
-            this.tabControl.Controls.Add(this.tabPanelAccount);
             this.tabControl.Controls.Add(this.tabPanelFactor);
+            this.tabControl.Controls.Add(this.tabPanelAccount);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -1345,7 +1345,7 @@
             // 
             // creditLineCurrencyComboBox
             // 
-            this.creditLineCurrencyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorCreditLineBindingSource, "CreditLineCurrency", true));
+            this.creditLineCurrencyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.factorCreditLineBindingSource, "CreditLineCurrency", true));
             this.creditLineCurrencyComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.creditLineCurrencyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.creditLineCurrencyComboBox.FormattingEnabled = true;
@@ -1359,6 +1359,29 @@
             this.tabItemFactorCreditLine.AttachedControl = this.tabPanelCreditLine;
             this.tabItemFactorCreditLine.Name = "tabItemFactorCreditLine";
             this.tabItemFactorCreditLine.Text = "额度信息";
+            // 
+            // tabPanelAccount
+            // 
+            this.tabPanelAccount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelAccount.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelAccount.Name = "tabPanelAccount";
+            this.tabPanelAccount.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelAccount.Size = new System.Drawing.Size(595, 577);
+            this.tabPanelAccount.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelAccount.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelAccount.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelAccount.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelAccount.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelAccount.Style.GradientAngle = 90;
+            this.tabPanelAccount.TabIndex = 3;
+            this.tabPanelAccount.TabItem = this.tabItemFactorAccount;
+            // 
+            // tabItemFactorAccount
+            // 
+            this.tabItemFactorAccount.AttachedControl = this.tabPanelAccount;
+            this.tabItemFactorAccount.Name = "tabItemFactorAccount";
+            this.tabItemFactorAccount.Text = "账户信息";
             // 
             // tabPanelFactor
             // 
@@ -1394,7 +1417,7 @@
             this.btnFactorUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFactorUpdate.TabIndex = 5;
             this.btnFactorUpdate.Text = "更新";
-            this.btnFactorUpdate.Click += new System.EventHandler(this.FactorUpdate);
+            this.btnFactorUpdate.Click += new System.EventHandler(this.UpdateFactor);
             // 
             // btnFactorClose
             // 
@@ -1406,7 +1429,7 @@
             this.btnFactorClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFactorClose.TabIndex = 4;
             this.btnFactorClose.Text = "关闭";
-            this.btnFactorClose.Click += new System.EventHandler(this.FactorClose);
+            this.btnFactorClose.Click += new System.EventHandler(this.CloseFactor);
             // 
             // btnFactorSave
             // 
@@ -1418,7 +1441,7 @@
             this.btnFactorSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFactorSave.TabIndex = 3;
             this.btnFactorSave.Text = "保存";
-            this.btnFactorSave.Click += new System.EventHandler(this.FactorSave);
+            this.btnFactorSave.Click += new System.EventHandler(this.SaveFactor);
             // 
             // groupPanelMembership
             // 
@@ -2003,7 +2026,7 @@
             // 
             // countryNameComboBox
             // 
-            this.countryNameComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "CountryName", true));
+            this.countryNameComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.factorBindingSource, "CountryName", true));
             this.countryNameComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.countryNameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.countryNameComboBox.FormattingEnabled = true;
@@ -2050,29 +2073,6 @@
             this.tabItemFactor.AttachedControl = this.tabPanelFactor;
             this.tabItemFactor.Name = "tabItemFactor";
             this.tabItemFactor.Text = "基本信息";
-            // 
-            // tabPanelAccount
-            // 
-            this.tabPanelAccount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelAccount.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelAccount.Name = "tabPanelAccount";
-            this.tabPanelAccount.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelAccount.Size = new System.Drawing.Size(595, 577);
-            this.tabPanelAccount.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelAccount.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelAccount.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelAccount.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelAccount.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelAccount.Style.GradientAngle = 90;
-            this.tabPanelAccount.TabIndex = 3;
-            this.tabPanelAccount.TabItem = this.tabItemFactorAccount;
-            // 
-            // tabItemFactorAccount
-            // 
-            this.tabItemFactorAccount.AttachedControl = this.tabPanelAccount;
-            this.tabItemFactorAccount.Name = "tabItemFactorAccount";
-            this.tabItemFactorAccount.Text = "账户信息";
             // 
             // superValidator
             // 

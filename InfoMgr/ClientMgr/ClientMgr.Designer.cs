@@ -16,14 +16,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private System.ComponentModel.IContainer components;
         private System.Windows.Forms.ContextMenuStrip cmuClientMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemSelectClient;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDetailClient;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientDetail;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemNewClient;
-        private System.Windows.Forms.ToolStripMenuItem menuItemUpdateClient;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDeleteClient;
-        private System.Windows.Forms.ToolStripMenuItem menuItemNewClientCreditLine;
-        private System.Windows.Forms.ToolStripMenuItem menuItemImportClients;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientNew;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientUpdate;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientCreditLineNew;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientImport;
         private DevComponents.DotNetBar.PanelEx pnlQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
         private DevComponents.DotNetBar.LabelX lblClientName;
@@ -74,14 +74,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmuClientMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemSelectClient = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDetailClient = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemClientSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemClientDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemNewClient = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemNewClientCreditLine = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemUpdateClient = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDeleteClient = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemImportClients = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemClientNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemClientCreditLineNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemContractNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemClientUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemClientDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemClientImport = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlQuery = new DevComponents.DotNetBar.PanelEx();
             this.comboTreeDepartment = new DevComponents.DotNetBar.Controls.ComboTree();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
@@ -148,70 +149,78 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // cmuClientMgr
             // 
             this.cmuClientMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemSelectClient,
-            this.menuItemDetailClient,
+            this.menuItemClientSelect,
+            this.menuItemClientDetail,
             this.toolStripSeparator,
-            this.menuItemNewClient,
-            this.menuItemNewClientCreditLine,
-            this.menuItemUpdateClient,
-            this.menuItemDeleteClient,
-            this.menuItemImportClients});
+            this.menuItemClientNew,
+            this.menuItemClientCreditLineNew,
+            this.menuItemContractNew,
+            this.menuItemClientUpdate,
+            this.menuItemClientDelete,
+            this.menuItemClientImport});
             this.cmuClientMgr.Name = "contextMenuClientMgr";
-            this.cmuClientMgr.Size = new System.Drawing.Size(147, 164);
+            this.cmuClientMgr.Size = new System.Drawing.Size(153, 208);
             // 
-            // menuItemSelectClient
+            // menuItemClientSelect
             // 
-            this.menuItemSelectClient.Name = "menuItemSelectClient";
-            this.menuItemSelectClient.Size = new System.Drawing.Size(146, 22);
-            this.menuItemSelectClient.Text = "选定客户";
-            this.menuItemSelectClient.Click += new System.EventHandler(this.SelectClient);
+            this.menuItemClientSelect.Name = "menuItemClientSelect";
+            this.menuItemClientSelect.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientSelect.Text = "选定客户";
+            this.menuItemClientSelect.Click += new System.EventHandler(this.SelectClient);
             // 
-            // menuItemDetailClient
+            // menuItemClientDetail
             // 
-            this.menuItemDetailClient.Name = "menuItemDetailClient";
-            this.menuItemDetailClient.Size = new System.Drawing.Size(146, 22);
-            this.menuItemDetailClient.Text = "详细信息";
-            this.menuItemDetailClient.Click += new System.EventHandler(this.DetailClient);
+            this.menuItemClientDetail.Name = "menuItemClientDetail";
+            this.menuItemClientDetail.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientDetail.Text = "详细信息";
+            this.menuItemClientDetail.Click += new System.EventHandler(this.DetailClient);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
-            // menuItemNewClient
+            // menuItemClientNew
             // 
-            this.menuItemNewClient.Name = "menuItemNewClient";
-            this.menuItemNewClient.Size = new System.Drawing.Size(146, 22);
-            this.menuItemNewClient.Text = "新建客户";
-            this.menuItemNewClient.Click += new System.EventHandler(this.NewClient);
+            this.menuItemClientNew.Name = "menuItemClientNew";
+            this.menuItemClientNew.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientNew.Text = "新建客户";
+            this.menuItemClientNew.Click += new System.EventHandler(this.NewClient);
             // 
-            // menuItemNewClientCreditLine
+            // menuItemClientCreditLineNew
             // 
-            this.menuItemNewClientCreditLine.Name = "menuItemNewClientCreditLine";
-            this.menuItemNewClientCreditLine.Size = new System.Drawing.Size(146, 22);
-            this.menuItemNewClientCreditLine.Text = "新建额度信息";
-            this.menuItemNewClientCreditLine.Click += new System.EventHandler(this.NewClientCreditLine);
+            this.menuItemClientCreditLineNew.Name = "menuItemClientCreditLineNew";
+            this.menuItemClientCreditLineNew.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientCreditLineNew.Text = "新建额度信息";
+            this.menuItemClientCreditLineNew.Click += new System.EventHandler(this.NewClientCreditLine);
             // 
-            // menuItemUpdateClient
+            // menuItemContractNew
             // 
-            this.menuItemUpdateClient.Name = "menuItemUpdateClient";
-            this.menuItemUpdateClient.Size = new System.Drawing.Size(146, 22);
-            this.menuItemUpdateClient.Text = "更新客户";
-            this.menuItemUpdateClient.Click += new System.EventHandler(this.UpdateClient);
+            this.menuItemContractNew.Name = "menuItemContractNew";
+            this.menuItemContractNew.Size = new System.Drawing.Size(152, 22);
+            this.menuItemContractNew.Text = "新建主合同";
+            this.menuItemContractNew.Click += new System.EventHandler(this.NewContract);
             // 
-            // menuItemDeleteClient
+            // menuItemClientUpdate
             // 
-            this.menuItemDeleteClient.Name = "menuItemDeleteClient";
-            this.menuItemDeleteClient.Size = new System.Drawing.Size(146, 22);
-            this.menuItemDeleteClient.Text = "删除客户";
-            this.menuItemDeleteClient.Click += new System.EventHandler(this.DeleteClient);
+            this.menuItemClientUpdate.Name = "menuItemClientUpdate";
+            this.menuItemClientUpdate.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientUpdate.Text = "更新客户";
+            this.menuItemClientUpdate.Click += new System.EventHandler(this.UpdateClient);
             // 
-            // menuItemImportClients
+            // menuItemClientDelete
             // 
-            this.menuItemImportClients.Name = "menuItemImportClients";
-            this.menuItemImportClients.Size = new System.Drawing.Size(146, 22);
-            this.menuItemImportClients.Text = "导入客户";
-            this.menuItemImportClients.Click += new System.EventHandler(this.ImportClients);
+            this.menuItemClientDelete.Name = "menuItemClientDelete";
+            this.menuItemClientDelete.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientDelete.Text = "删除客户";
+            this.menuItemClientDelete.Click += new System.EventHandler(this.DeleteClient);
+            // 
+            // menuItemClientImport
+            // 
+            this.menuItemClientImport.Name = "menuItemClientImport";
+            this.menuItemClientImport.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientImport.Text = "导入客户";
+            this.menuItemClientImport.Click += new System.EventHandler(this.ImportClients);
             // 
             // pnlQuery
             // 
@@ -869,5 +878,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CountryCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientGroupColumn;
+        private System.Windows.Forms.ToolStripMenuItem menuItemContractNew;
     }
 }
