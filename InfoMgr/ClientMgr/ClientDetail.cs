@@ -77,6 +77,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.opClientType = opClientType;
             this.opClientCreditLineType = opClientCreditLineType;
             this.opContractType = opContractType;
+
             if (opClientType == OpClientType.NEW_CLIENT)
             {
                 this.clientBindingSource.DataSource = new Client();
@@ -513,7 +514,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UpdateClientCreditLineControlStatus();
         }
 
-		/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
@@ -535,7 +536,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.opClientCreditLineType = OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE;
             this.UpdateClientCreditLineControlStatus();
         }
-		
+
         /// <summary>
         /// 
         /// </summary>

@@ -91,6 +91,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="ARMgr\ARCaseBasic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ARMgr\ARCaseBasic.Designer.cs">
+      <DependentUpon>ARCaseBasic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ARMgr\AssignBatchMgr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ARMgr\AssignBatchMgr.Designer.cs">
+      <DependentUpon>AssignBatchMgr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ARMgr\InvoiceAssign.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ARMgr\InvoiceAssign.Designer.cs">
+      <DependentUpon>InvoiceAssign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ARMgr\InvoiceDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ARMgr\InvoiceDetail.Designer.cs">
+      <DependentUpon>InvoiceDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="CaseMgr\CaseDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,30 +215,6 @@
     <Compile Include="InfoMgr\UserMgr\UserMgr.Designer.cs">
       <DependentUpon>UserMgr.cs</DependentUpon>
     </Compile>
-    <Compile Include="InvoiceMgr\ContractInfo\ContractBasicInfo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="InvoiceMgr\ContractInfo\ContractBasicInfo.Designer.cs">
-      <DependentUpon>ContractBasicInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InvoiceMgr\ContractInfo\ContractOtherInfo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="InvoiceMgr\ContractInfo\ContractOtherInfo.Designer.cs">
-      <DependentUpon>ContractOtherInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InvoiceMgr\InvoiceAssign\InvoiceAssignBatchNewForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InvoiceMgr\InvoiceAssign\InvoiceAssignBatchNewForm.Designer.cs">
-      <DependentUpon>InvoiceAssignBatchNewForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InvoiceMgr\InvoiceAssign\InvoiceAssignUI.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="InvoiceMgr\InvoiceAssign\InvoiceAssignUI.Designer.cs">
-      <DependentUpon>InvoiceAssignUI.cs</DependentUpon>
-    </Compile>
     <Compile Include="LoginWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,6 +232,22 @@
     <None Include="DB.dbml\DB.dbml.layout">
       <DependentUpon>DB.dbml</DependentUpon>
     </None>
+    <EmbeddedResource Include="ARMgr\ARCaseBasic.resx">
+      <DependentUpon>ARCaseBasic.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\AssignBatchMgr.resx">
+      <DependentUpon>AssignBatchMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\InvoiceAssign.resx">
+      <DependentUpon>InvoiceAssign.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\InvoiceDetail.resx">
+      <DependentUpon>InvoiceDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="CaseMgr\CaseDetail.resx">
       <DependentUpon>CaseDetail.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -290,22 +306,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\UserMgr\UserMgr.resx">
       <DependentUpon>UserMgr.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InvoiceMgr\ContractInfo\ContractBasicInfo.resx">
-      <DependentUpon>ContractBasicInfo.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InvoiceMgr\ContractInfo\ContractOtherInfo.resx">
-      <DependentUpon>ContractOtherInfo.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InvoiceMgr\InvoiceAssign\InvoiceAssignBatchNewForm.resx">
-      <DependentUpon>InvoiceAssignBatchNewForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InvoiceMgr\InvoiceAssign\InvoiceAssignUI.resx">
-      <DependentUpon>InvoiceAssignUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginWindow.resx">
@@ -456,7 +456,6 @@
   <ItemGroup>
     <Folder Include="Help\CheckForUpdates\" />
     <Folder Include="Help\Content\" />
-    <Folder Include="InvoiceMgr\InvoiceFinance\" />
     <Folder Include="Report\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

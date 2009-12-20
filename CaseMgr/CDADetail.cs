@@ -23,11 +23,17 @@ namespace CMBC.EasyFactor.CaseMgr
 
         public CDADetail(CDA cda, OpCDAType opCDAType)
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.InitComboBox();
+
             this.opCDAType = opCDAType;
             if (opCDAType == OpCDAType.NEW_CDA)
             {
-                this.CDABindingSource.DataSource = new CDA();
+                cda = new CDA();
+                cda.PUGProportion = 1;
+                cda.PUGPeriod = 90;
+                cda.ReassignGracePeriod = 60;
+                this.CDABindingSource.DataSource = cda;
             }
             else
             {
@@ -83,7 +89,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 foreach (Control comp in this.groupPanelCase.Controls)
                 {
-                    ControlUtil.SetComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, false);
                 }
                 foreach (Control comp in this.groupPanelCreditCover.Controls)
                 {
@@ -93,12 +99,16 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+                this.cbIsNotice.Enabled = true;
+                this.cbIsRecoarse.Enabled = true;
+                this.financeTypeComboBox.Enabled = true;
+                this.assignTypeComboBox.Enabled = true;
             }
             else if (this.opCDAType == OpCDAType.UPDATE_CDA)
             {
                 foreach (Control comp in this.groupPanelCase.Controls)
                 {
-                    ControlUtil.SetComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, false);
                 }
                 foreach (Control comp in this.groupPanelCreditCover.Controls)
                 {
@@ -108,7 +118,26 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+                this.cbIsNotice.Enabled = true;
+                this.cbIsRecoarse.Enabled = true;
+                this.financeTypeComboBox.Enabled = true;
+                this.assignTypeComboBox.Enabled = true;
             }
+        }
+
+        private void InitComboBox()
+        {
+            this.creditCoverCurrComboBox.DataSource = Currency.AllCurrencies();
+            this.creditCoverCurrComboBox.DisplayMember = "CurrencyCode";
+            this.creditCoverCurrComboBox.ValueMember = "CurrencyCode";
+
+            this.financeLineCurrComboBox.DataSource = Currency.AllCurrencies();
+            this.financeLineCurrComboBox.DisplayMember = "CurrencyCode";
+            this.financeLineCurrComboBox.ValueMember = "CurrencyCode";
+
+            this.handFeeCurrComboBox.DataSource = Currency.AllCurrencies();
+            this.handFeeCurrComboBox.DisplayMember = "CurrencyCode";
+            this.handFeeCurrComboBox.ValueMember = "CurrencyCode";
         }
 
         /// <summary>

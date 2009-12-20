@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     using System.Threading;
     using Microsoft.Office.Interop.Excel;
     using System.Reflection;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// User Management User Interface
@@ -32,7 +33,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="isEditable">true if editable</param>
         public UserMgr(bool isEditable)
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            ControlUtil.SetDoubleBuffered(this.dgvUsers);
             this.isEditable = isEditable;
             this.UpdateEditableStatus();
         }

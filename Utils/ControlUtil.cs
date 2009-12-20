@@ -79,6 +79,10 @@ namespace CMBC.EasyFactor.Utils
             {
                 (comp as ComboBox).Enabled = isEditable;
             }
+            else if (comp is CheckBoxX)
+            {
+                (comp as CheckBoxX).Enabled = isEditable;
+            }
             else if (comp is DateTimePicker)
             {
                 (comp as DateTimePicker).Enabled = isEditable;

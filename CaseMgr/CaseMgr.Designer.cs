@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCaseQuery = new DevComponents.DotNetBar.PanelEx();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblClientName = new DevComponents.DotNetBar.LabelX();
@@ -56,14 +56,6 @@
             this.cbOwnerDepts = new DevComponents.DotNetBar.Controls.ComboTree();
             this.lblOnwerDept = new DevComponents.DotNetBar.LabelX();
             this.dgvCases = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuContractMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCaseSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCaseNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseUpdate = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
             this.CaseCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SellerCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SellerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -83,6 +75,16 @@
             this.AppDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CaseMarkColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CreateUserColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuContractMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCaseSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCaseNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.comboItem9 = new DevComponents.Editors.ComboItem();
+            this.comboItem10 = new DevComponents.Editors.ComboItem();
             this.panelCaseQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -258,9 +260,11 @@
             this.cbTransactionType.ItemHeight = 14;
             this.cbTransactionType.Items.AddRange(new object[] {
             this.comboItem1,
+            this.comboItem9,
             this.comboItem2,
             this.comboItem3,
-            this.comboItem4});
+            this.comboItem4,
+            this.comboItem10});
             this.cbTransactionType.Location = new System.Drawing.Point(59, 29);
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
@@ -269,7 +273,7 @@
             // 
             // comboItem1
             // 
-            this.comboItem1.Text = "国内保理";
+            this.comboItem1.Text = "国内卖方保理";
             // 
             // comboItem2
             // 
@@ -281,7 +285,7 @@
             // 
             // comboItem4
             // 
-            this.comboItem4.Text = "信保保理";
+            this.comboItem4.Text = "国际信保保理";
             // 
             // lblTransactionType
             // 
@@ -423,14 +427,14 @@
             this.dgvCases.AllowUserToDeleteRows = false;
             this.dgvCases.AllowUserToOrderColumns = true;
             this.dgvCases.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCases.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCases.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCases.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CaseCodeColumn,
@@ -453,14 +457,14 @@
             this.CaseMarkColumn,
             this.CreateUserColumn});
             this.dgvCases.ContextMenuStrip = this.cmuContractMgr;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCases.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCases.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCases.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCases.Location = new System.Drawing.Point(0, 77);
@@ -470,65 +474,6 @@
             this.dgvCases.Size = new System.Drawing.Size(588, 308);
             this.dgvCases.TabIndex = 2;
             this.dgvCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
-            // 
-            // cmuContractMgr
-            // 
-            this.cmuContractMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemCaseSelect,
-            this.menuItemCaseDetail,
-            this.toolStripSeparator,
-            this.menuItemCaseNew,
-            this.menuItemCaseUpdate,
-            this.menuItemCaseDelete,
-            this.menuItemCreditCoverNegNew});
-            this.cmuContractMgr.Name = "cmuContractMgr";
-            this.cmuContractMgr.Size = new System.Drawing.Size(147, 142);
-            // 
-            // menuItemCaseSelect
-            // 
-            this.menuItemCaseSelect.Name = "menuItemCaseSelect";
-            this.menuItemCaseSelect.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseSelect.Text = "选定案件";
-            this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
-            // 
-            // menuItemCaseDetail
-            // 
-            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseDetail.Text = "详细信息";
-            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
-            // 
-            // menuItemCaseNew
-            // 
-            this.menuItemCaseNew.Name = "menuItemCaseNew";
-            this.menuItemCaseNew.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseNew.Text = "新建案件";
-            this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
-            // 
-            // menuItemCaseUpdate
-            // 
-            this.menuItemCaseUpdate.Name = "menuItemCaseUpdate";
-            this.menuItemCaseUpdate.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseUpdate.Text = "更新案件";
-            this.menuItemCaseUpdate.Click += new System.EventHandler(this.UpdateCase);
-            // 
-            // menuItemCaseDelete
-            // 
-            this.menuItemCaseDelete.Name = "menuItemCaseDelete";
-            this.menuItemCaseDelete.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseDelete.Text = "删除案件";
-            this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
-            // 
-            // menuItemCreditCoverNegNew
-            // 
-            this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
-            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverNegNew.Text = "新建额度申请";
             // 
             // CaseCodeColumn
             // 
@@ -684,6 +629,73 @@
             this.CreateUserColumn.ReadOnly = true;
             this.CreateUserColumn.Width = 68;
             // 
+            // cmuContractMgr
+            // 
+            this.cmuContractMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCaseSelect,
+            this.menuItemCaseDetail,
+            this.toolStripSeparator,
+            this.menuItemCaseNew,
+            this.menuItemCaseUpdate,
+            this.menuItemCaseDelete,
+            this.menuItemCreditCoverNegNew});
+            this.cmuContractMgr.Name = "cmuContractMgr";
+            this.cmuContractMgr.Size = new System.Drawing.Size(147, 142);
+            // 
+            // menuItemCaseSelect
+            // 
+            this.menuItemCaseSelect.Name = "menuItemCaseSelect";
+            this.menuItemCaseSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseSelect.Text = "选定案件";
+            this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
+            // 
+            // menuItemCaseDetail
+            // 
+            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDetail.Text = "详细信息";
+            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            // 
+            // menuItemCaseNew
+            // 
+            this.menuItemCaseNew.Name = "menuItemCaseNew";
+            this.menuItemCaseNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseNew.Text = "新建案件";
+            this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
+            // 
+            // menuItemCaseUpdate
+            // 
+            this.menuItemCaseUpdate.Name = "menuItemCaseUpdate";
+            this.menuItemCaseUpdate.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseUpdate.Text = "更新案件";
+            this.menuItemCaseUpdate.Click += new System.EventHandler(this.UpdateCase);
+            // 
+            // menuItemCaseDelete
+            // 
+            this.menuItemCaseDelete.Name = "menuItemCaseDelete";
+            this.menuItemCaseDelete.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDelete.Text = "删除案件";
+            this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
+            // 
+            // menuItemCreditCoverNegNew
+            // 
+            this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
+            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverNegNew.Text = "新建额度申请";
+            // 
+            // comboItem9
+            // 
+            this.comboItem9.Text = "国内买方保理";
+            // 
+            // comboItem10
+            // 
+            this.comboItem10.Text = "国内信保保理";
+            // 
             // CaseMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -756,5 +768,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AppDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CaseMarkColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreateUserColumn;
+        private DevComponents.Editors.ComboItem comboItem9;
+        private DevComponents.Editors.ComboItem comboItem10;
     }
 }

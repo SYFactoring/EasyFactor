@@ -8,7 +8,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
     using Microsoft.Office.Interop.Excel;
     using System;
-    using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Linq;
     using System.Reflection;
@@ -433,7 +432,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             client.ProductCN = values.GetValue(row, column++).ToString().Trim();
                             client.ProductEN = values.GetValue(row, column++).ToString().Trim();
                             client.ClientLevel = values.GetValue(row, column++).ToString().Trim();
-                            client.IsGroup = values.GetValue(row, column++).ToString().Trim();
+                            client.IsGroup = Convert.ToBoolean(values.GetValue(row, column++).ToString().Trim());
                             string groupNo = values.GetValue(row, column++).ToString().Trim();
                             string groupNameCN = values.GetValue(row, column++).ToString().Trim();
                             string groupNameEN = values.GetValue(row, column++).ToString().Trim();

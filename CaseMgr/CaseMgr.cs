@@ -231,5 +231,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.SelectCase(sender, e);
             }
         }
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=YIMING-PC\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=192.168.1.100;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[User]" Member="Users">
     <Type Name="User">
       <Column Name="UserID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -42,7 +42,7 @@
       <Column Name="ProductCN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="ProductEN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="ClientLevel" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IsGroup" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="IsGroup" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="GroupNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="RegistrationNumber" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
       <Column Name="CompanyCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -68,7 +68,7 @@
       <Column Name="AccountType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="CorrespondentBank" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="Branch" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="IsDefault" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="IsDefault" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Association Name="Client_ClientAccount" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
     </Type>
@@ -142,7 +142,7 @@
       <Column Name="HaveInterAccount" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="IntermediaryBank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="InterBankSWIFT" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IsDefault" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDefault" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Commment" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Association Name="Factor_FactorAccount" Member="Factor" ThisKey="FactorCode" Type="Factor" IsForeignKey="true" />
     </Type>
@@ -174,7 +174,7 @@
       <Column Name="PaymentConditions" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="OrderNumberReference" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="InvoiceReferenceNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IsFlaw" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsFlaw" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="FlawReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="FlawResolveReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="FlawResolveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -194,7 +194,7 @@
       <Column Name="CommissionDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Interest" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="InterestDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="IsDispute" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDispute" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="DisputeType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="DisputeAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="DisputeReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
@@ -338,10 +338,10 @@
       <Column Name="MembershipStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="MembershipDate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="DateOfLatestRevision" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="IsGroup" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsGroup" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="GroupNo" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="IsCorrespondentBank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IsAgreementSigned" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsCorrespondentBank" Type="System.Boolean" DbType="bit" CanBeNull="true" />
+      <Column Name="IsAgreementSigned" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="Factor_FactorAccount" Member="FactorAccounts" OtherKey="FactorCode" Type="FactorAccount" />
       <Association Name="Factor_FactorCreditLine" Member="FactorCreditLines" OtherKey="FactorCode" Type="FactorCreditLine" />
@@ -354,13 +354,13 @@
     <Type Name="CDA">
       <Column Name="CDAID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CaseCode" Type="System.String" DbType="NChar(13)" CanBeNull="true" />
-      <Column Name="IsRecoarse" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="IsRecoarse" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="FinanceType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IsNotice" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="IsNotice" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="AssignType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="CreditCoverCurr" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
       <Column Name="CreditCover" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="IsCreditCoverRevolving" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="IsCreditCoverRevolving" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="ApproveNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="PUGProportion" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="CreditCoverPeriodBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -410,7 +410,7 @@
       <Column Name="RejectReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="CheckUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="IsCreateMsg" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsCreateMsg" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="Invoices" OtherKey="AssignBatchNo" Type="Invoice" />
       <Association Name="CDA_InvoiceAssignBatch" Member="CDA" ThisKey="CDAID" Type="CDA" IsForeignKey="true" />
@@ -441,7 +441,7 @@
       <Column Name="CDAID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PaymentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IsCreateMsg" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsCreateMsg" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="InvoicePaymentBatch_Invoice" Member="Invoices" OtherKey="PaymentBatchNo" Type="Invoice" />
       <Association Name="CDA_InvoicePaymentBatch" Member="CDA" ThisKey="CDAID" Type="CDA" IsForeignKey="true" />

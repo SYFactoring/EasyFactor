@@ -129,7 +129,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.CellPhoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RegistrationNumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CompanyCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsGroupColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsGroupColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.GroupNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientLevelColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -159,66 +159,66 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemClientDelete,
             this.menuItemClientImport});
             this.cmuClientMgr.Name = "contextMenuClientMgr";
-            this.cmuClientMgr.Size = new System.Drawing.Size(153, 208);
+            this.cmuClientMgr.Size = new System.Drawing.Size(147, 186);
             // 
             // menuItemClientSelect
             // 
             this.menuItemClientSelect.Name = "menuItemClientSelect";
-            this.menuItemClientSelect.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientSelect.Size = new System.Drawing.Size(146, 22);
             this.menuItemClientSelect.Text = "选定客户";
             this.menuItemClientSelect.Click += new System.EventHandler(this.SelectClient);
             // 
             // menuItemClientDetail
             // 
             this.menuItemClientDetail.Name = "menuItemClientDetail";
-            this.menuItemClientDetail.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientDetail.Size = new System.Drawing.Size(146, 22);
             this.menuItemClientDetail.Text = "详细信息";
             this.menuItemClientDetail.Click += new System.EventHandler(this.DetailClient);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
             // 
             // menuItemClientNew
             // 
             this.menuItemClientNew.Name = "menuItemClientNew";
-            this.menuItemClientNew.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientNew.Size = new System.Drawing.Size(146, 22);
             this.menuItemClientNew.Text = "新建客户";
             this.menuItemClientNew.Click += new System.EventHandler(this.NewClient);
             // 
             // menuItemClientCreditLineNew
             // 
             this.menuItemClientCreditLineNew.Name = "menuItemClientCreditLineNew";
-            this.menuItemClientCreditLineNew.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientCreditLineNew.Size = new System.Drawing.Size(146, 22);
             this.menuItemClientCreditLineNew.Text = "新建额度信息";
             this.menuItemClientCreditLineNew.Click += new System.EventHandler(this.NewClientCreditLine);
             // 
             // menuItemContractNew
             // 
             this.menuItemContractNew.Name = "menuItemContractNew";
-            this.menuItemContractNew.Size = new System.Drawing.Size(152, 22);
+            this.menuItemContractNew.Size = new System.Drawing.Size(146, 22);
             this.menuItemContractNew.Text = "新建主合同";
             this.menuItemContractNew.Click += new System.EventHandler(this.NewContract);
             // 
             // menuItemClientUpdate
             // 
             this.menuItemClientUpdate.Name = "menuItemClientUpdate";
-            this.menuItemClientUpdate.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientUpdate.Size = new System.Drawing.Size(146, 22);
             this.menuItemClientUpdate.Text = "更新客户";
             this.menuItemClientUpdate.Click += new System.EventHandler(this.UpdateClient);
             // 
             // menuItemClientDelete
             // 
             this.menuItemClientDelete.Name = "menuItemClientDelete";
-            this.menuItemClientDelete.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientDelete.Size = new System.Drawing.Size(146, 22);
             this.menuItemClientDelete.Text = "删除客户";
             this.menuItemClientDelete.Click += new System.EventHandler(this.DeleteClient);
             // 
             // menuItemClientImport
             // 
             this.menuItemClientImport.Name = "menuItemClientImport";
-            this.menuItemClientImport.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientImport.Size = new System.Drawing.Size(146, 22);
             this.menuItemClientImport.Text = "导入客户";
             this.menuItemClientImport.Click += new System.EventHandler(this.ImportClients);
             // 
@@ -732,6 +732,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.IsGroupColumn.HeaderText = "是否集团客户";
             this.IsGroupColumn.Name = "IsGroupColumn";
             this.IsGroupColumn.ReadOnly = true;
+            this.IsGroupColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IsGroupColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.IsGroupColumn.Width = 104;
             // 
             // GroupNoColumn
@@ -773,7 +775,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.DepartmentCodeColumn.Name = "DepartmentCodeColumn";
             this.DepartmentCodeColumn.ReadOnly = true;
             this.DepartmentCodeColumn.Visible = false;
-            this.DepartmentCodeColumn.Width = 80;
+            this.DepartmentCodeColumn.Width = 104;
             // 
             // DepartmentColumn
             // 
@@ -814,6 +816,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.CountryCodeColumn.Name = "CountryCodeColumn";
             this.CountryCodeColumn.ReadOnly = true;
             this.CountryCodeColumn.Visible = false;
+            this.CountryCodeColumn.Width = 93;
             // 
             // ClientGroupColumn
             // 
@@ -822,6 +825,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ClientGroupColumn.Name = "ClientGroupColumn";
             this.ClientGroupColumn.ReadOnly = true;
             this.ClientGroupColumn.Visible = false;
+            this.ClientGroupColumn.Width = 87;
             // 
             // ClientMgr
             // 
@@ -842,6 +846,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion
 
+        private System.Windows.Forms.ToolStripMenuItem menuItemContractNew;
         private System.Windows.Forms.DataGridViewTextBoxColumn clientEDICodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientCoreNoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameCNColumn;
@@ -866,7 +871,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn CellPhoneColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn RegistrationNumberColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CompanyCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsGroupColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsGroupColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientTypeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientLevelColumn;
@@ -878,6 +883,5 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CountryCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientGroupColumn;
-        private System.Windows.Forms.ToolStripMenuItem menuItemContractNew;
     }
 }

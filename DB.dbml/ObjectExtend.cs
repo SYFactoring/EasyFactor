@@ -43,6 +43,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Client
     {
+
         /// <summary>
         /// 
         /// </summary>
@@ -64,7 +65,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public override string ToString()
         {
-            if (_ClientNameCN != null)
+            if (_ClientNameCN != null&&!_ClientNameCN.Equals(string.Empty))
             {
                 return _ClientNameCN;
             }
@@ -100,7 +101,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static List<Currency> AllCurrencies()
         {
-            return _currencyList;
+            return _currencyList.ToList();
         }
 
         /// <summary>
@@ -250,7 +251,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public override string ToString()
         {
-            if (_CompanyNameCN != null)
+            if (_CompanyNameCN != null&&!_CompanyNameCN.Equals(string.Empty))
             {
                 return _CompanyNameCN;
             }

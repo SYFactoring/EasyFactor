@@ -628,7 +628,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _ClientLevel;
 		
-		private string _IsGroup;
+		private System.Nullable<bool> _IsGroup;
 		
 		private string _GroupNo;
 		
@@ -712,7 +712,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnProductENChanged();
     partial void OnClientLevelChanging(string value);
     partial void OnClientLevelChanged();
-    partial void OnIsGroupChanging(string value);
+    partial void OnIsGroupChanging(System.Nullable<bool> value);
     partial void OnIsGroupChanged();
     partial void OnGroupNoChanging(string value);
     partial void OnGroupNoChanged();
@@ -1242,8 +1242,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsGroup", DbType="NVarChar(2)")]
-		public string IsGroup
+		[Column(Storage="_IsGroup", DbType="bit")]
+		public System.Nullable<bool> IsGroup
 		{
 			get
 			{
@@ -1644,7 +1644,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Branch;
 		
-		private string _IsDefault;
+		private System.Nullable<bool> _IsDefault;
 		
 		private string _Comment;
 		
@@ -1668,7 +1668,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCorrespondentBankChanged();
     partial void OnBranchChanging(string value);
     partial void OnBranchChanged();
-    partial void OnIsDefaultChanging(string value);
+    partial void OnIsDefaultChanging(System.Nullable<bool> value);
     partial void OnIsDefaultChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
@@ -1824,8 +1824,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsDefault", DbType="NVarChar(10)")]
-		public string IsDefault
+		[Column(Storage="_IsDefault", DbType="bit")]
+		public System.Nullable<bool> IsDefault
 		{
 			get
 			{
@@ -3042,7 +3042,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _InterBankSWIFT;
 		
-		private string _IsDefault;
+		private System.Nullable<bool> _IsDefault;
 		
 		private string _Commment;
 		
@@ -3070,7 +3070,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnIntermediaryBankChanged();
     partial void OnInterBankSWIFTChanging(string value);
     partial void OnInterBankSWIFTChanged();
-    partial void OnIsDefaultChanging(string value);
+    partial void OnIsDefaultChanging(System.Nullable<bool> value);
     partial void OnIsDefaultChanged();
     partial void OnCommmentChanging(string value);
     partial void OnCommmentChanged();
@@ -3266,8 +3266,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsDefault", DbType="NVarChar(50)")]
-		public string IsDefault
+		[Column(Storage="_IsDefault", DbType="bit")]
+		public System.Nullable<bool> IsDefault
 		{
 			get
 			{
@@ -3539,7 +3539,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _InvoiceReferenceNumber;
 		
-		private string _IsFlaw;
+		private System.Nullable<bool> _IsFlaw;
 		
 		private string _FlawReason;
 		
@@ -3579,7 +3579,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _InterestDate;
 		
-		private string _IsDispute;
+		private System.Nullable<bool> _IsDispute;
 		
 		private string _DisputeType;
 		
@@ -3641,7 +3641,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnOrderNumberReferenceChanged();
     partial void OnInvoiceReferenceNumberChanging(string value);
     partial void OnInvoiceReferenceNumberChanged();
-    partial void OnIsFlawChanging(string value);
+    partial void OnIsFlawChanging(System.Nullable<bool> value);
     partial void OnIsFlawChanged();
     partial void OnFlawReasonChanging(string value);
     partial void OnFlawReasonChanged();
@@ -3681,7 +3681,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnInterestChanged();
     partial void OnInterestDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInterestDateChanged();
-    partial void OnIsDisputeChanging(string value);
+    partial void OnIsDisputeChanging(System.Nullable<bool> value);
     partial void OnIsDisputeChanged();
     partial void OnDisputeTypeChanging(string value);
     partial void OnDisputeTypeChanged();
@@ -4053,8 +4053,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsFlaw", DbType="NVarChar(50)")]
-		public string IsFlaw
+		[Column(Storage="_IsFlaw", DbType="bit")]
+		public System.Nullable<bool> IsFlaw
 		{
 			get
 			{
@@ -4461,8 +4461,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsDispute", DbType="NVarChar(50)")]
-		public string IsDispute
+		[Column(Storage="_IsDispute", DbType="bit")]
+		public System.Nullable<bool> IsDispute
 		{
 			get
 			{
@@ -7000,13 +7000,13 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _DateOfLatestRevision;
 		
-		private string _IsGroup;
+		private System.Nullable<bool> _IsGroup;
 		
 		private string _GroupNo;
 		
-		private string _IsCorrespondentBank;
+		private System.Nullable<bool> _IsCorrespondentBank;
 		
-		private string _IsAgreementSigned;
+		private System.Nullable<bool> _IsAgreementSigned;
 		
 		private string _Comment;
 		
@@ -7094,13 +7094,13 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnMembershipDateChanged();
     partial void OnDateOfLatestRevisionChanging(string value);
     partial void OnDateOfLatestRevisionChanged();
-    partial void OnIsGroupChanging(string value);
+    partial void OnIsGroupChanging(System.Nullable<bool> value);
     partial void OnIsGroupChanged();
     partial void OnGroupNoChanging(string value);
     partial void OnGroupNoChanged();
-    partial void OnIsCorrespondentBankChanging(string value);
+    partial void OnIsCorrespondentBankChanging(System.Nullable<bool> value);
     partial void OnIsCorrespondentBankChanged();
-    partial void OnIsAgreementSignedChanging(string value);
+    partial void OnIsAgreementSignedChanging(System.Nullable<bool> value);
     partial void OnIsAgreementSignedChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
@@ -7816,8 +7816,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsGroup", DbType="NVarChar(50)")]
-		public string IsGroup
+		[Column(Storage="_IsGroup", DbType="Bit")]
+		public System.Nullable<bool> IsGroup
 		{
 			get
 			{
@@ -7860,8 +7860,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsCorrespondentBank", DbType="NVarChar(50)")]
-		public string IsCorrespondentBank
+		[Column(Storage="_IsCorrespondentBank", DbType="bit")]
+		public System.Nullable<bool> IsCorrespondentBank
 		{
 			get
 			{
@@ -7880,8 +7880,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsAgreementSigned", DbType="NVarChar(50)")]
-		public string IsAgreementSigned
+		[Column(Storage="_IsAgreementSigned", DbType="bit")]
+		public System.Nullable<bool> IsAgreementSigned
 		{
 			get
 			{
@@ -8085,11 +8085,11 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CaseCode;
 		
-		private string _IsRecoarse;
+		private System.Nullable<bool> _IsRecoarse;
 		
 		private string _FinanceType;
 		
-		private string _IsNotice;
+		private System.Nullable<bool> _IsNotice;
 		
 		private string _AssignType;
 		
@@ -8097,7 +8097,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<double> _CreditCover;
 		
-		private string _IsCreditCoverRevolving;
+		private System.Nullable<bool> _IsCreditCoverRevolving;
 		
 		private string _ApproveNumber;
 		
@@ -8179,11 +8179,11 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCDAIDChanged();
     partial void OnCaseCodeChanging(string value);
     partial void OnCaseCodeChanged();
-    partial void OnIsRecoarseChanging(string value);
+    partial void OnIsRecoarseChanging(System.Nullable<bool> value);
     partial void OnIsRecoarseChanged();
     partial void OnFinanceTypeChanging(string value);
     partial void OnFinanceTypeChanged();
-    partial void OnIsNoticeChanging(string value);
+    partial void OnIsNoticeChanging(System.Nullable<bool> value);
     partial void OnIsNoticeChanged();
     partial void OnAssignTypeChanging(string value);
     partial void OnAssignTypeChanged();
@@ -8191,7 +8191,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreditCoverCurrChanged();
     partial void OnCreditCoverChanging(System.Nullable<double> value);
     partial void OnCreditCoverChanged();
-    partial void OnIsCreditCoverRevolvingChanging(string value);
+    partial void OnIsCreditCoverRevolvingChanging(System.Nullable<bool> value);
     partial void OnIsCreditCoverRevolvingChanged();
     partial void OnApproveNumberChanging(string value);
     partial void OnApproveNumberChanged();
@@ -8312,8 +8312,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsRecoarse", DbType="NVarChar(2)")]
-		public string IsRecoarse
+		[Column(Storage="_IsRecoarse", DbType="bit")]
+		public System.Nullable<bool> IsRecoarse
 		{
 			get
 			{
@@ -8352,8 +8352,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsNotice", DbType="NVarChar(2)")]
-		public string IsNotice
+		[Column(Storage="_IsNotice", DbType="bit")]
+		public System.Nullable<bool> IsNotice
 		{
 			get
 			{
@@ -8432,8 +8432,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsCreditCoverRevolving", DbType="NVarChar(2)")]
-		public string IsCreditCoverRevolving
+		[Column(Storage="_IsCreditCoverRevolving", DbType="bit")]
+		public System.Nullable<bool> IsCreditCoverRevolving
 		{
 			get
 			{
@@ -9246,7 +9246,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _CheckDate;
 		
-		private string _IsCreateMsg;
+		private System.Nullable<bool> _IsCreateMsg;
 		
 		private string _Comment;
 		
@@ -9276,7 +9276,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckUserNameChanged();
     partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCheckDateChanged();
-    partial void OnIsCreateMsgChanging(string value);
+    partial void OnIsCreateMsgChanging(System.Nullable<bool> value);
     partial void OnIsCreateMsgChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
@@ -9473,8 +9473,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsCreateMsg", DbType="NVarChar(50)")]
-		public string IsCreateMsg
+		[Column(Storage="_IsCreateMsg", DbType="bit")]
+		public System.Nullable<bool> IsCreateMsg
 		{
 			get
 			{
@@ -10026,7 +10026,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
-		private string _IsCreateMsg;
+		private System.Nullable<bool> _IsCreateMsg;
 		
 		private string _Comment;
 		
@@ -10046,7 +10046,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnPaymentDateChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
-    partial void OnIsCreateMsgChanging(string value);
+    partial void OnIsCreateMsgChanging(System.Nullable<bool> value);
     partial void OnIsCreateMsgChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
@@ -10143,8 +10143,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsCreateMsg", DbType="NVarChar(50)")]
-		public string IsCreateMsg
+		[Column(Storage="_IsCreateMsg", DbType="bit")]
+		public System.Nullable<bool> IsCreateMsg
 		{
 			get
 			{

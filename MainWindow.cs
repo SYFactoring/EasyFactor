@@ -13,9 +13,9 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.DepartmentMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.InfoMgr.UserMgr;
-    using CMBC.EasyFactor.InvoiceMgr.InvoiceAssign;
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.Help.About;
+    using CMBC.EasyFactor.ARMgr;
 
     /// <summary>
     /// Main Window Form
@@ -115,8 +115,8 @@ namespace CMBC.EasyFactor
         /// <param name="e">event args</param>
         private void InvoiceAssign(object sender, EventArgs e)
         {
-            InvoiceAssignUI invoiceAssignUI = new InvoiceAssignUI();
-            this.SetDetailPanel(invoiceAssignUI);
+            ARCaseBasic invoiceAssign = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceAssign);
+            this.SetDetailPanel(invoiceAssign);
         }
 
         /// <summary>

@@ -101,7 +101,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void UserSave(object sender, EventArgs e)
         {
-            userBindingSource.EndEdit();
             User user = (User)userBindingSource.DataSource;
             if (opUserType == OpUserType.NEW_USER)
             {
