@@ -22,6 +22,8 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
+        #region Constructors (1)
+
         /// <summary>
         /// Initializes a new instance of the MainWindow class
         /// </summary>
@@ -32,16 +34,9 @@ namespace CMBC.EasyFactor
             this.CommandStatus = "欢迎使用中国民生银行保理运行系统";
         }
 
-        /// <summary>
-        /// Sets user status
-        /// </summary>
-        public string UserStatus
-        {
-            set
-            {
-                this.lblCurrentUser.Text = value;
-            }
-        }
+        #endregion Constructors
+
+        #region Properties (2)
 
         /// <summary>
         /// Sets command status
@@ -55,23 +50,26 @@ namespace CMBC.EasyFactor
         }
 
         /// <summary>
-        /// Fill detail panel with user control
+        /// Sets user status
         /// </summary>
-        /// <param name="uc">user control</param>
-        private void SetDetailPanel(UserControl uc)
+        public string UserStatus
         {
-            uc.Dock = DockStyle.Fill;
-            this.ribbonDetailPanel.Controls.Clear();
-            this.ribbonDetailPanel.Controls.Add(uc);
+            set
+            {
+                this.lblCurrentUser.Text = value;
+            }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        #endregion Properties
 
-        private void ClearDetailPanel()
+        #region Methods (20)
+
+        // Private Methods (20) 
+
+        private void About(object sender, EventArgs e)
         {
-            this.ribbonDetailPanel.Controls.Clear();
+            AboutBox aboutBox = new AboutBox();
+            aboutBox.ShowDialog(this);
         }
 
         /// <summary>
@@ -109,6 +107,14 @@ namespace CMBC.EasyFactor
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        private void ClearDetailPanel()
+        {
+            this.ribbonDetailPanel.Controls.Clear();
+        }
+
+        /// <summary>
         /// Invoice Assign
         /// </summary>
         /// <param name="sender">event sender</param>
@@ -119,26 +125,57 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(invoiceAssign);
         }
 
+        private void InvoiceFinance(object sender, EventArgs e)
+        {
+            ARCaseBasic invoiceFinance = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceFinance);
+            this.SetDetailPanel(invoiceFinance);
+        }
+
+        private void InvoicePayment(object sender, EventArgs e)
+        {
+            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoicePayment);
+            this.SetDetailPanel(invoicePayment);
+        }
+
+        private void MainPage(object sender, EventArgs e)
+        {
+            this.ClearDetailPanel();
+            ribbonDetailPanel.Controls.Add(logoLabel);
+        }
+
+        private void MgrCases(object sender, EventArgs e)
+        {
+            CaseMgr.CaseMgr caseQuery = new CaseMgr.CaseMgr(true);
+            this.SetDetailPanel(caseQuery);
+        }
+
+        private void MgrCDAs(object sender, EventArgs e)
+        {
+            CDAMgr CDAMgr = new CDAMgr(true);
+            this.SetDetailPanel(CDAMgr);
+        }
+
         /// <summary>
         /// Client Management
         /// </summary>
         /// <param name="sender">event sender</param>
         /// <param name="e">event args</param>
-        private void ClientMgr(object sender, EventArgs e)
+        private void MgrClients(object sender, EventArgs e)
         {
             ClientMgr clientMgrUI = new ClientMgr(true);
             this.SetDetailPanel(clientMgrUI);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ClientNew(object sender, EventArgs e)
+        private void MgrContracts(object sender, EventArgs e)
         {
-            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT);
-            clientDetail.ShowDialog(this);
+            ContractMgr contractMgr = new ContractMgr(true);
+            this.SetDetailPanel(contractMgr);
+        }
+
+        private void MgrCreditCoverNegs(object sender, EventArgs e)
+        {
+            CreditCoverNegMgr creditCoverNegMgr = new CreditCoverNegMgr(true);
+            this.SetDetailPanel(creditCoverNegMgr);
         }
 
         /// <summary>
@@ -146,40 +183,7 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UserMgr(object sender, EventArgs e)
-        {
-            UserMgr userMgrUI = new UserMgr(true);
-            this.SetDetailPanel(userMgrUI);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FactorMgr(object sender, EventArgs e)
-        {
-            FactorMgr factorMgrUI = new FactorMgr(true);
-            this.SetDetailPanel(factorMgrUI);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FactorNew(object sender, EventArgs e)
-        {
-            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
-            factorDetail.ShowDialog(this);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DepartmentMgr(object sender, EventArgs e)
+        private void MgrDepartments(object sender, EventArgs e)
         {
             DepartmentMgr departmentMgrUI = new DepartmentMgr(true);
             this.SetDetailPanel(departmentMgrUI);
@@ -190,54 +194,74 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CaseApplication(object sender, EventArgs e)
+        private void MgrFactors(object sender, EventArgs e)
+        {
+            FactorMgr factorMgrUI = new FactorMgr(true);
+            this.SetDetailPanel(factorMgrUI);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MgrUsers(object sender, EventArgs e)
+        {
+            UserMgr userMgrUI = new UserMgr(true);
+            this.SetDetailPanel(userMgrUI);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewCase(object sender, EventArgs e)
         {
             this.ClearDetailPanel();
             CaseDetail caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.NEW_CASE);
             caseDetail.ShowDialog(this);
         }
 
-        private void CaseQuery(object sender, EventArgs e)
-        {
-            CaseMgr.CaseMgr caseQuery = new CaseMgr.CaseMgr(true);
-            this.SetDetailPanel(caseQuery);
-        }
-
-        private void About(object sender, EventArgs e)
-        {
-            AboutBox aboutBox = new AboutBox();
-            aboutBox.ShowDialog(this);
-        }
-
-        private void ContractMgr(object sender, EventArgs e)
-        {
-            ContractMgr contractMgr = new ContractMgr(true);
-            this.SetDetailPanel(contractMgr);
-        }
-
-        private void CreditCoverNegMgr(object sender, EventArgs e)
-        {
-            CreditCoverNegMgr creditCoverNegMgr = new CreditCoverNegMgr(true);
-            this.SetDetailPanel(creditCoverNegMgr);
-        }
-
-        private void CDANew(object sender, EventArgs e)
+        private void NewCDA(object sender, EventArgs e)
         {
             CDADetail cdaDetail = new CDADetail(null, CDADetail.OpCDAType.NEW_CDA);
             cdaDetail.ShowDialog(this);
         }
 
-        private void CDAMgr(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewClient(object sender, EventArgs e)
         {
-            CDAMgr CDAMgr = new CDAMgr(true);
-            this.SetDetailPanel(CDAMgr);
+            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT);
+            clientDetail.ShowDialog(this);
         }
 
-        private void MainPage(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewFactor(object sender, EventArgs e)
         {
-            this.ClearDetailPanel();
-            ribbonDetailPanel.Controls.Add(logoLabel);
+            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
+            factorDetail.ShowDialog(this);
         }
 
+        /// <summary>
+        /// Fill detail panel with user control
+        /// </summary>
+        /// <param name="uc">user control</param>
+        private void SetDetailPanel(UserControl uc)
+        {
+            uc.Dock = DockStyle.Fill;
+            this.ribbonDetailPanel.Controls.Clear();
+            this.ribbonDetailPanel.Controls.Add(uc);
+        }
+
+        #endregion Methods
     }
 }

@@ -251,7 +251,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 this.cbIsNotice.Enabled = true;
                 this.cbIsRecoarse.Enabled = true;
-                this.financeTypeComboBox.Enabled = true;
                 this.assignTypeComboBox.Enabled = true;
             }
             else if (this.opCDAType == OpCDAType.UPDATE_CDA)
@@ -270,7 +269,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 this.cbIsNotice.Enabled = true;
                 this.cbIsRecoarse.Enabled = true;
-                this.financeTypeComboBox.Enabled = true;
                 this.assignTypeComboBox.Enabled = true;
             }
         }

@@ -59,21 +59,13 @@ namespace CMBC.EasyFactor.Utils
             {
                 (comp as TextBox).ReadOnly = !isEditable;
             }
-            //else if (comp is ButtonX)
-            //{
-            //    (comp as ButtonX).Enabled = isEditable;
-            //}
-            //else if (comp is Button)
-            //{
-            //    (comp as Button).Enabled = isEditable;
-            //}
             else if (comp is ComboBoxEx)
             {
                 (comp as ComboBoxEx).Enabled = isEditable;
             }
             else if (comp is ComboTree)
             {
-                (comp as ComboTree).Enabled = isEditable;
+                (comp as ComboTree).Enabled= isEditable;
             }
             else if (comp is ComboBox)
             {

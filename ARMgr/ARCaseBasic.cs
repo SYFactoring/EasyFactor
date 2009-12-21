@@ -21,7 +21,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         public enum OpARType
         {
-            InvoiceAssign
+            InvoiceAssign,
+            InvoiceFinance,
+            InvoicePayment
         }
 
         #endregion Enums
@@ -36,6 +38,18 @@ namespace CMBC.EasyFactor.ARMgr
                 UserControl invoiceAssign = new InvoiceAssign();
                 invoiceAssign.Dock = DockStyle.Fill;
                 this.panelInvoiceMgr.Controls.Add(invoiceAssign);
+            }
+            else if (opARType == OpARType.InvoiceFinance)
+            {
+                UserControl invoiceFinance = new InvoiceFinance();
+                invoiceFinance.Dock = DockStyle.Fill;
+                this.panelInvoiceMgr.Controls.Add(invoiceFinance);
+            }
+            else if (opARType == OpARType.InvoicePayment)
+            {
+                UserControl invoicePayment = new InvoicePayment();
+                invoicePayment.Dock = DockStyle.Fill;
+                this.panelInvoiceMgr.Controls.Add(invoicePayment);
             }
         }
 
@@ -68,7 +82,7 @@ namespace CMBC.EasyFactor.ARMgr
                 this.PMTextBox.Text = curCase.BuyerClient.PMName;
                 this.RMTextBox.Text = curCase.BuyerClient.RMName;
             }
-
+   
             CDA cda = curCase.CDAs.SingleOrDefault(c => c.CDAStatus == "已生效");
             if (cda != null)
             {

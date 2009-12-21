@@ -134,9 +134,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Constructors
 
-        #region Methods (23)
+        #region Methods (21)
 
-        // Private Methods (23) 
+        // Private Methods (21) 
 
         /// <summary>
         /// 
@@ -229,32 +229,33 @@ namespace CMBC.EasyFactor.CaseMgr
         private void CaseTransactionTypeChanged(object sender, EventArgs e)
         {
             Case curCase = (Case)this.caseBindingSource.DataSource;
-            curCase.TransactionType = this.cbCaseTransactionType.Text;
+            string transationType = this.cbCaseTransactionType.Text;
 
-            if ("国内保理".Equals(curCase.TransactionType))
+            if ("国内保理".Equals(transationType))
             {
                 Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
                 curCase.SellerFactor = selectedFactor;
                 curCase.BuyerFactor = selectedFactor;
             }
-            else if ("出口保理".Equals(curCase.TransactionType))
+            else if ("出口保理".Equals(transationType))
             {
                 Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
                 curCase.SellerFactor = selectedFactor;
                 curCase.BuyerFactor = null;
             }
-            else if ("进口保理".Equals(curCase.TransactionType))
+            else if ("进口保理".Equals(transationType))
             {
                 Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
                 curCase.SellerFactor = null;
                 curCase.BuyerFactor = selectedFactor;
             }
-            else if ("信保保理".Equals(curCase.TransactionType))
+            else if ("信保保理".Equals(transationType))
             {
                 Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
                 curCase.SellerFactor = selectedFactor;
                 curCase.BuyerFactor = null;
             }
+
         }
 
         /// <summary>
@@ -693,6 +694,5 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion Methods
-
     }
 }

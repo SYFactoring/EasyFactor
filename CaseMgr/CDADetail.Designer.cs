@@ -13,9 +13,6 @@
         private DevComponents.DotNetBar.Controls.TextBoxX buyerClientEDICodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX buyerClientNameCNTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX buyerClientNameEN_1TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX buyerCompanyNameCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX buyerCompanyNameENTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX buyerFactorCodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX caseCodeTextBox;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCreditCoverRevolving;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsNotice;
@@ -26,17 +23,12 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput cDADueDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cDAStatusComboBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput cDAValueDateDateTimePicker;
-        private DevComponents.Editors.ComboItem comboItem1;
         private DevComponents.Editors.ComboItem comboItem10;
         private DevComponents.Editors.ComboItem comboItem13;
         private DevComponents.Editors.ComboItem comboItem14;
         private DevComponents.Editors.ComboItem comboItem15;
         private DevComponents.Editors.ComboItem comboItem16;
-        private DevComponents.Editors.ComboItem comboItem2;
-        private DevComponents.Editors.ComboItem comboItem3;
         private DevComponents.Editors.ComboItem comboItem4;
-        private DevComponents.Editors.ComboItem comboItem5;
-        private DevComponents.Editors.ComboItem comboItem6;
         private DevComponents.Editors.ComboItem comboItem7;
         private DevComponents.Editors.ComboItem comboItem9;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
@@ -62,7 +54,6 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput financeLinePeriodEndDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX financeLineTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX financeProportionTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx financeTypeComboBox;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCase;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCreditCover;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelOther;
@@ -82,9 +73,9 @@
         private DevComponents.DotNetBar.Controls.TextBoxX sellerClientEDICodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameCNTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameEN_1TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX sellerCompanyNameCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX sellerCompanyNameENTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX sellerFactorCodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX companyNameCNTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX companyNameENTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
 
         #endregion Fields
@@ -121,12 +112,10 @@
             this.components = new System.ComponentModel.Container();
             DevComponents.DotNetBar.LabelX caseCodeLabel;
             DevComponents.DotNetBar.LabelX sellerClientLabel;
-            DevComponents.DotNetBar.LabelX sellerFactorCodeLabel;
+            DevComponents.DotNetBar.LabelX factorCodeLabel;
             DevComponents.DotNetBar.LabelX buyerClientEDICodeLabel;
-            DevComponents.DotNetBar.LabelX buyerFactorCodeLabel;
             DevComponents.DotNetBar.LabelX transactionTypeLabel;
             DevComponents.DotNetBar.LabelX invoiceCurrencyLabel;
-            DevComponents.DotNetBar.LabelX financeTypeLabel;
             DevComponents.DotNetBar.LabelX assignTypeLabel;
             DevComponents.DotNetBar.LabelX creditCoverCurrLabel;
             DevComponents.DotNetBar.LabelX approveNumberLabel;
@@ -165,27 +154,18 @@
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cbIsNotice = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cbIsRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.buyerCompanyNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.sellerCompanyNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.companyNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.contractCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.assignTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.comboItem9 = new DevComponents.Editors.ComboItem();
             this.comboItem10 = new DevComponents.Editors.ComboItem();
-            this.financeTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem5 = new DevComponents.Editors.ComboItem();
-            this.comboItem2 = new DevComponents.Editors.ComboItem();
-            this.comboItem3 = new DevComponents.Editors.ComboItem();
-            this.comboItem6 = new DevComponents.Editors.ComboItem();
-            this.comboItem1 = new DevComponents.Editors.ComboItem();
             this.btnCaseSelect = new DevComponents.DotNetBar.ButtonX();
-            this.buyerCompanyNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.buyerFactorCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.buyerClientNameEN_1TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.buyerClientNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.buyerClientEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.sellerClientNameEN_1TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.sellerCompanyNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.sellerFactorCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.companyNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.factorCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.sellerClientNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.sellerClientEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.caseCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -239,12 +219,10 @@
             this.rangeValidator1 = new DevComponents.DotNetBar.Validator.RangeValidator();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
-            sellerFactorCodeLabel = new DevComponents.DotNetBar.LabelX();
+            factorCodeLabel = new DevComponents.DotNetBar.LabelX();
             buyerClientEDICodeLabel = new DevComponents.DotNetBar.LabelX();
-            buyerFactorCodeLabel = new DevComponents.DotNetBar.LabelX();
             transactionTypeLabel = new DevComponents.DotNetBar.LabelX();
             invoiceCurrencyLabel = new DevComponents.DotNetBar.LabelX();
-            financeTypeLabel = new DevComponents.DotNetBar.LabelX();
             assignTypeLabel = new DevComponents.DotNetBar.LabelX();
             creditCoverCurrLabel = new DevComponents.DotNetBar.LabelX();
             approveNumberLabel = new DevComponents.DotNetBar.LabelX();
@@ -317,19 +295,19 @@
             sellerClientLabel.TabIndex = 2;
             sellerClientLabel.Text = "卖方:";
             // 
-            // sellerFactorCodeLabel
+            // factorCodeLabel
             // 
-            sellerFactorCodeLabel.AutoSize = true;
-            sellerFactorCodeLabel.BackColor = System.Drawing.Color.Transparent;
+            factorCodeLabel.AutoSize = true;
+            factorCodeLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            sellerFactorCodeLabel.BackgroundStyle.Class = "";
-            sellerFactorCodeLabel.Location = new System.Drawing.Point(355, 26);
-            sellerFactorCodeLabel.Name = "sellerFactorCodeLabel";
-            sellerFactorCodeLabel.Size = new System.Drawing.Size(72, 16);
-            sellerFactorCodeLabel.TabIndex = 6;
-            sellerFactorCodeLabel.Text = "卖方保理商:";
+            factorCodeLabel.BackgroundStyle.Class = "";
+            factorCodeLabel.Location = new System.Drawing.Point(355, 26);
+            factorCodeLabel.Name = "factorCodeLabel";
+            factorCodeLabel.Size = new System.Drawing.Size(47, 16);
+            factorCodeLabel.TabIndex = 6;
+            factorCodeLabel.Text = "保理商:";
             // 
             // buyerClientEDICodeLabel
             // 
@@ -344,20 +322,6 @@
             buyerClientEDICodeLabel.Size = new System.Drawing.Size(34, 16);
             buyerClientEDICodeLabel.TabIndex = 12;
             buyerClientEDICodeLabel.Text = "买方:";
-            // 
-            // buyerFactorCodeLabel
-            // 
-            buyerFactorCodeLabel.AutoSize = true;
-            buyerFactorCodeLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            buyerFactorCodeLabel.BackgroundStyle.Class = "";
-            buyerFactorCodeLabel.Location = new System.Drawing.Point(355, 69);
-            buyerFactorCodeLabel.Name = "buyerFactorCodeLabel";
-            buyerFactorCodeLabel.Size = new System.Drawing.Size(72, 16);
-            buyerFactorCodeLabel.TabIndex = 18;
-            buyerFactorCodeLabel.Text = "买方保理商:";
             // 
             // transactionTypeLabel
             // 
@@ -387,20 +351,6 @@
             invoiceCurrencyLabel.TabIndex = 24;
             invoiceCurrencyLabel.Text = "发票币别:";
             // 
-            // financeTypeLabel
-            // 
-            financeTypeLabel.AutoSize = true;
-            financeTypeLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            financeTypeLabel.BackgroundStyle.Class = "";
-            financeTypeLabel.Location = new System.Drawing.Point(241, 128);
-            financeTypeLabel.Name = "financeTypeLabel";
-            financeTypeLabel.Size = new System.Drawing.Size(59, 16);
-            financeTypeLabel.TabIndex = 4;
-            financeTypeLabel.Text = "融资方式:";
-            // 
             // assignTypeLabel
             // 
             assignTypeLabel.AutoSize = true;
@@ -409,7 +359,7 @@
             // 
             // 
             assignTypeLabel.BackgroundStyle.Class = "";
-            assignTypeLabel.Location = new System.Drawing.Point(442, 127);
+            assignTypeLabel.Location = new System.Drawing.Point(219, 131);
             assignTypeLabel.Name = "assignTypeLabel";
             assignTypeLabel.Size = new System.Drawing.Size(59, 16);
             assignTypeLabel.TabIndex = 8;
@@ -857,28 +807,22 @@
             this.groupPanelCase.Controls.Add(this.transactionTypeTextBox);
             this.groupPanelCase.Controls.Add(this.cbIsNotice);
             this.groupPanelCase.Controls.Add(this.cbIsRecoarse);
-            this.groupPanelCase.Controls.Add(this.buyerCompanyNameENTextBox);
-            this.groupPanelCase.Controls.Add(this.sellerCompanyNameENTextBox);
+            this.groupPanelCase.Controls.Add(this.companyNameENTextBox);
             this.groupPanelCase.Controls.Add(contractCodeLabel);
             this.groupPanelCase.Controls.Add(assignTypeLabel);
             this.groupPanelCase.Controls.Add(this.contractCodeTextBox);
             this.groupPanelCase.Controls.Add(this.assignTypeComboBox);
-            this.groupPanelCase.Controls.Add(financeTypeLabel);
-            this.groupPanelCase.Controls.Add(this.financeTypeComboBox);
             this.groupPanelCase.Controls.Add(this.btnCaseSelect);
             this.groupPanelCase.Controls.Add(invoiceCurrencyLabel);
             this.groupPanelCase.Controls.Add(transactionTypeLabel);
-            this.groupPanelCase.Controls.Add(this.buyerCompanyNameCNTextBox);
-            this.groupPanelCase.Controls.Add(buyerFactorCodeLabel);
-            this.groupPanelCase.Controls.Add(this.buyerFactorCodeTextBox);
             this.groupPanelCase.Controls.Add(this.buyerClientNameEN_1TextBox);
             this.groupPanelCase.Controls.Add(this.buyerClientNameCNTextBox);
             this.groupPanelCase.Controls.Add(buyerClientEDICodeLabel);
             this.groupPanelCase.Controls.Add(this.buyerClientEDICodeTextBox);
             this.groupPanelCase.Controls.Add(this.sellerClientNameEN_1TextBox);
-            this.groupPanelCase.Controls.Add(this.sellerCompanyNameCNTextBox);
-            this.groupPanelCase.Controls.Add(sellerFactorCodeLabel);
-            this.groupPanelCase.Controls.Add(this.sellerFactorCodeTextBox);
+            this.groupPanelCase.Controls.Add(this.companyNameCNTextBox);
+            this.groupPanelCase.Controls.Add(factorCodeLabel);
+            this.groupPanelCase.Controls.Add(this.factorCodeTextBox);
             this.groupPanelCase.Controls.Add(this.sellerClientNameCNTextBox);
             this.groupPanelCase.Controls.Add(sellerClientLabel);
             this.groupPanelCase.Controls.Add(this.sellerClientEDICodeTextBox);
@@ -977,29 +921,16 @@
             this.cbIsRecoarse.TabIndex = 32;
             this.cbIsRecoarse.Text = "是否有追索权";
             // 
-            // buyerCompanyNameENTextBox
+            // companyNameENTextBox
             // 
             // 
             // 
             // 
-            this.buyerCompanyNameENTextBox.Border.Class = "TextBoxBorder";
-            this.buyerCompanyNameENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.BuyerFactor.CompanyNameCN", true));
-            this.buyerCompanyNameENTextBox.Location = new System.Drawing.Point(520, 85);
-            this.buyerCompanyNameENTextBox.Name = "buyerCompanyNameENTextBox";
-            this.buyerCompanyNameENTextBox.Size = new System.Drawing.Size(170, 20);
-            this.buyerCompanyNameENTextBox.TabIndex = 31;
-            // 
-            // sellerCompanyNameENTextBox
-            // 
-            // 
-            // 
-            // 
-            this.sellerCompanyNameENTextBox.Border.Class = "TextBoxBorder";
-            this.sellerCompanyNameENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.SellerFactor.CompanyNameCN", true));
-            this.sellerCompanyNameENTextBox.Location = new System.Drawing.Point(520, 44);
-            this.sellerCompanyNameENTextBox.Name = "sellerCompanyNameENTextBox";
-            this.sellerCompanyNameENTextBox.Size = new System.Drawing.Size(170, 20);
-            this.sellerCompanyNameENTextBox.TabIndex = 30;
+            this.companyNameENTextBox.Border.Class = "TextBoxBorder";
+            this.companyNameENTextBox.Location = new System.Drawing.Point(520, 44);
+            this.companyNameENTextBox.Name = "companyNameENTextBox";
+            this.companyNameENTextBox.Size = new System.Drawing.Size(170, 20);
+            this.companyNameENTextBox.TabIndex = 30;
             // 
             // contractCodeTextBox
             // 
@@ -1021,7 +952,7 @@
             this.assignTypeComboBox.Items.AddRange(new object[] {
             this.comboItem9,
             this.comboItem10});
-            this.assignTypeComboBox.Location = new System.Drawing.Point(507, 124);
+            this.assignTypeComboBox.Location = new System.Drawing.Point(284, 128);
             this.assignTypeComboBox.Name = "assignTypeComboBox";
             this.assignTypeComboBox.Size = new System.Drawing.Size(121, 21);
             this.assignTypeComboBox.TabIndex = 9;
@@ -1034,43 +965,6 @@
             // 
             this.comboItem10.Text = "部分";
             // 
-            // financeTypeComboBox
-            // 
-            this.financeTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceType", true));
-            this.financeTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.financeTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.financeTypeComboBox.FormattingEnabled = true;
-            this.financeTypeComboBox.Items.AddRange(new object[] {
-            this.comboItem5,
-            this.comboItem2,
-            this.comboItem3,
-            this.comboItem6,
-            this.comboItem1});
-            this.financeTypeComboBox.Location = new System.Drawing.Point(306, 125);
-            this.financeTypeComboBox.Name = "financeTypeComboBox";
-            this.financeTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.financeTypeComboBox.TabIndex = 5;
-            // 
-            // comboItem5
-            // 
-            this.comboItem5.Text = "保理预付款";
-            // 
-            // comboItem2
-            // 
-            this.comboItem2.Text = "卖方代付";
-            // 
-            // comboItem3
-            // 
-            this.comboItem3.Text = "买方代付";
-            // 
-            // comboItem6
-            // 
-            this.comboItem6.Text = "保理账款池";
-            // 
-            // comboItem1
-            // 
-            this.comboItem1.Text = "无融资";
-            // 
             // btnCaseSelect
             // 
             this.btnCaseSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -1082,30 +976,6 @@
             this.btnCaseSelect.TabIndex = 26;
             this.btnCaseSelect.Text = "Q";
             this.btnCaseSelect.Click += new System.EventHandler(this.SelectCase);
-            // 
-            // buyerCompanyNameCNTextBox
-            // 
-            // 
-            // 
-            // 
-            this.buyerCompanyNameCNTextBox.Border.Class = "TextBoxBorder";
-            this.buyerCompanyNameCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.BuyerFactor.CompanyNameCN", true));
-            this.buyerCompanyNameCNTextBox.Location = new System.Drawing.Point(520, 64);
-            this.buyerCompanyNameCNTextBox.Name = "buyerCompanyNameCNTextBox";
-            this.buyerCompanyNameCNTextBox.Size = new System.Drawing.Size(170, 20);
-            this.buyerCompanyNameCNTextBox.TabIndex = 21;
-            // 
-            // buyerFactorCodeTextBox
-            // 
-            // 
-            // 
-            // 
-            this.buyerFactorCodeTextBox.Border.Class = "TextBoxBorder";
-            this.buyerFactorCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.BuyerFactor.FactorCode", true));
-            this.buyerFactorCodeTextBox.Location = new System.Drawing.Point(433, 65);
-            this.buyerFactorCodeTextBox.Name = "buyerFactorCodeTextBox";
-            this.buyerFactorCodeTextBox.Size = new System.Drawing.Size(85, 20);
-            this.buyerFactorCodeTextBox.TabIndex = 19;
             // 
             // buyerClientNameEN_1TextBox
             // 
@@ -1155,29 +1025,27 @@
             this.sellerClientNameEN_1TextBox.Size = new System.Drawing.Size(216, 20);
             this.sellerClientNameEN_1TextBox.TabIndex = 11;
             // 
-            // sellerCompanyNameCNTextBox
+            // companyNameCNTextBox
             // 
             // 
             // 
             // 
-            this.sellerCompanyNameCNTextBox.Border.Class = "TextBoxBorder";
-            this.sellerCompanyNameCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.SellerFactor.CompanyNameCN", true));
-            this.sellerCompanyNameCNTextBox.Location = new System.Drawing.Point(520, 23);
-            this.sellerCompanyNameCNTextBox.Name = "sellerCompanyNameCNTextBox";
-            this.sellerCompanyNameCNTextBox.Size = new System.Drawing.Size(170, 20);
-            this.sellerCompanyNameCNTextBox.TabIndex = 9;
+            this.companyNameCNTextBox.Border.Class = "TextBoxBorder";
+            this.companyNameCNTextBox.Location = new System.Drawing.Point(520, 23);
+            this.companyNameCNTextBox.Name = "companyNameCNTextBox";
+            this.companyNameCNTextBox.Size = new System.Drawing.Size(170, 20);
+            this.companyNameCNTextBox.TabIndex = 9;
             // 
-            // sellerFactorCodeTextBox
-            // 
+            // factorCodeTextBox
             // 
             // 
             // 
-            this.sellerFactorCodeTextBox.Border.Class = "TextBoxBorder";
-            this.sellerFactorCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.SellerFactor.FactorCode", true));
-            this.sellerFactorCodeTextBox.Location = new System.Drawing.Point(429, 23);
-            this.sellerFactorCodeTextBox.Name = "sellerFactorCodeTextBox";
-            this.sellerFactorCodeTextBox.Size = new System.Drawing.Size(85, 20);
-            this.sellerFactorCodeTextBox.TabIndex = 7;
+            // 
+            this.factorCodeTextBox.Border.Class = "TextBoxBorder";
+            this.factorCodeTextBox.Location = new System.Drawing.Point(429, 23);
+            this.factorCodeTextBox.Name = "factorCodeTextBox";
+            this.factorCodeTextBox.Size = new System.Drawing.Size(85, 20);
+            this.factorCodeTextBox.TabIndex = 7;
             // 
             // sellerClientNameCNTextBox
             // 

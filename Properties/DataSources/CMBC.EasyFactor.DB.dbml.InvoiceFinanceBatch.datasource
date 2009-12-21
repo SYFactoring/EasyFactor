@@ -7,4 +7,15 @@
 -->
 <GenericObjectDataSource DisplayName="InvoiceFinanceBatch" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
    <TypeInfo>CMBC.EasyFactor.DB.dbml.InvoiceFinanceBatch, DB.dbml.DB.designer.cs, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
+   <TypeUISetting>
+      <PropertyUISettings>
+         <PropertyUISetting Name="FinanceType">
+            <ControlSettings>
+               <ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form">
+                  <BindableControlInfo Name="ComboBoxEx" Type="DevComponents.DotNetBar.Controls.ComboBoxEx" AssemblyName="DevComponents.DotNetBar2, Version=8.2.0.2, Culture=neutral, PublicKeyToken=5fd520d36328f741" AssemblyCodeBase="file:///D:/CMBC/FOMS/bin/Debug/DevComponents.DotNetBar2.dll" />
+               </ControlSetting>
+            </ControlSettings>
+         </PropertyUISetting>
+      </PropertyUISettings>
+   </TypeUISetting>
 </GenericObjectDataSource>
