@@ -50,7 +50,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DevComponents.DotNetBar.LabelX emailLabel;
             DevComponents.DotNetBar.LabelX faxNumberLabel;
             DevComponents.DotNetBar.LabelX cellPhoneLabel;
-            DevComponents.DotNetBar.LabelX isGroupLabel;
             DevComponents.DotNetBar.LabelX groupNoLabel;
             DevComponents.DotNetBar.LabelX registrationNumberLabel;
             DevComponents.DotNetBar.LabelX companyCodeLabel;
@@ -83,15 +82,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DevComponents.DotNetBar.LabelX lblClient;
             DevComponents.DotNetBar.LabelX lblContractValueDate;
             DevComponents.DotNetBar.LabelX lblContractDueDate;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.websiteLabel = new DevComponents.DotNetBar.LabelX();
-            this.telephoneLabel = new DevComponents.DotNetBar.LabelX();
+            DevComponents.DotNetBar.LabelX lblGroupNameCN;
+            DevComponents.DotNetBar.LabelX websiteLabel;
+            DevComponents.DotNetBar.LabelX telephoneLabel;
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            websiteLabel = new DevComponents.DotNetBar.LabelX();
+            telephoneLabel = new DevComponents.DotNetBar.LabelX();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelClient = new DevComponents.DotNetBar.TabControlPanel();
             this.btnClientUpdate = new DevComponents.DotNetBar.ButtonX();
@@ -109,9 +111,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientGroup = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.tbGroupNameEN = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbGroupNameCN = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblGroupNameCN = new DevComponents.DotNetBar.LabelX();
+            lblGroupNameCN = new DevComponents.DotNetBar.LabelX();
             this.groupNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.isGroupComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.isGroupComboBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.btnClientClose = new DevComponents.DotNetBar.ButtonX();
             this.btnClientSave = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelClientStat = new DevComponents.DotNetBar.Controls.GroupPanel();
@@ -218,7 +220,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             emailLabel = new DevComponents.DotNetBar.LabelX();
             faxNumberLabel = new DevComponents.DotNetBar.LabelX();
             cellPhoneLabel = new DevComponents.DotNetBar.LabelX();
-            isGroupLabel = new DevComponents.DotNetBar.LabelX();
             groupNoLabel = new DevComponents.DotNetBar.LabelX();
             registrationNumberLabel = new DevComponents.DotNetBar.LabelX();
             companyCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -442,20 +443,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             cellPhoneLabel.Size = new System.Drawing.Size(59, 16);
             cellPhoneLabel.TabIndex = 6;
             cellPhoneLabel.Text = "手机号码:";
-            // 
-            // isGroupLabel
-            // 
-            isGroupLabel.AutoSize = true;
-            isGroupLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            isGroupLabel.BackgroundStyle.Class = "";
-            isGroupLabel.Location = new System.Drawing.Point(3, 9);
-            isGroupLabel.Name = "isGroupLabel";
-            isGroupLabel.Size = new System.Drawing.Size(84, 16);
-            isGroupLabel.TabIndex = 0;
-            isGroupLabel.Text = "是否集团客户:";
             // 
             // groupNoLabel
             // 
@@ -907,31 +894,31 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // websiteLabel
             // 
-            this.websiteLabel.AutoSize = true;
-            this.websiteLabel.BackColor = System.Drawing.Color.Transparent;
+            websiteLabel.AutoSize = true;
+            websiteLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.websiteLabel.BackgroundStyle.Class = "";
-            this.websiteLabel.Location = new System.Drawing.Point(201, 10);
-            this.websiteLabel.Name = "websiteLabel";
-            this.websiteLabel.Size = new System.Drawing.Size(59, 16);
-            this.websiteLabel.TabIndex = 8;
-            this.websiteLabel.Text = "公司网址:";
+            websiteLabel.BackgroundStyle.Class = "";
+            websiteLabel.Location = new System.Drawing.Point(201, 10);
+            websiteLabel.Name = "websiteLabel";
+            websiteLabel.Size = new System.Drawing.Size(59, 16);
+            websiteLabel.TabIndex = 8;
+            websiteLabel.Text = "公司网址:";
             // 
             // telephoneLabel
             // 
-            this.telephoneLabel.AutoSize = true;
-            this.telephoneLabel.BackColor = System.Drawing.Color.Transparent;
+            telephoneLabel.AutoSize = true;
+            telephoneLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.telephoneLabel.BackgroundStyle.Class = "";
-            this.telephoneLabel.Location = new System.Drawing.Point(202, 30);
-            this.telephoneLabel.Name = "telephoneLabel";
-            this.telephoneLabel.Size = new System.Drawing.Size(59, 16);
-            this.telephoneLabel.TabIndex = 10;
-            this.telephoneLabel.Text = "联系电话:";
+            telephoneLabel.BackgroundStyle.Class = "";
+            telephoneLabel.Location = new System.Drawing.Point(202, 30);
+            telephoneLabel.Name = "telephoneLabel";
+            telephoneLabel.Size = new System.Drawing.Size(59, 16);
+            telephoneLabel.TabIndex = 10;
+            telephoneLabel.Text = "联系电话:";
             // 
             // tabControl
             // 
@@ -1007,11 +994,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientContact.Controls.Add(this.faxNumberTextBox);
             this.groupPanelClientContact.Controls.Add(emailLabel);
             this.groupPanelClientContact.Controls.Add(this.emailTextBox);
-            this.groupPanelClientContact.Controls.Add(this.telephoneLabel);
+            this.groupPanelClientContact.Controls.Add(telephoneLabel);
             this.groupPanelClientContact.Controls.Add(this.telephoneTextBox);
             this.groupPanelClientContact.Controls.Add(contactLabel);
             this.groupPanelClientContact.Controls.Add(this.contactTextBox);
-            this.groupPanelClientContact.Controls.Add(this.websiteLabel);
+            this.groupPanelClientContact.Controls.Add(websiteLabel);
             this.groupPanelClientContact.Controls.Add(this.websiteTextBox);
             this.groupPanelClientContact.Controls.Add(representativeLabel);
             this.groupPanelClientContact.Controls.Add(this.representativeTextBox);
@@ -1168,10 +1155,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientGroup.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.groupPanelClientGroup.Controls.Add(this.tbGroupNameEN);
             this.groupPanelClientGroup.Controls.Add(this.tbGroupNameCN);
-            this.groupPanelClientGroup.Controls.Add(this.lblGroupNameCN);
+            this.groupPanelClientGroup.Controls.Add(lblGroupNameCN);
             this.groupPanelClientGroup.Controls.Add(groupNoLabel);
             this.groupPanelClientGroup.Controls.Add(this.groupNoTextBox);
-            this.groupPanelClientGroup.Controls.Add(isGroupLabel);
             this.groupPanelClientGroup.Controls.Add(this.isGroupComboBox);
             this.groupPanelClientGroup.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelClientGroup.Location = new System.Drawing.Point(1, 317);
@@ -1234,17 +1220,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // lblGroupNameCN
             // 
-            this.lblGroupNameCN.AutoSize = true;
-            this.lblGroupNameCN.BackColor = System.Drawing.Color.Transparent;
+            lblGroupNameCN.AutoSize = true;
+            lblGroupNameCN.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.lblGroupNameCN.BackgroundStyle.Class = "";
-            this.lblGroupNameCN.Location = new System.Drawing.Point(2, 31);
-            this.lblGroupNameCN.Name = "lblGroupNameCN";
-            this.lblGroupNameCN.Size = new System.Drawing.Size(84, 16);
-            this.lblGroupNameCN.TabIndex = 4;
-            this.lblGroupNameCN.Text = "所属集团客户:";
+            lblGroupNameCN.BackgroundStyle.Class = "";
+            lblGroupNameCN.Location = new System.Drawing.Point(2, 31);
+            lblGroupNameCN.Name = "lblGroupNameCN";
+            lblGroupNameCN.Size = new System.Drawing.Size(84, 16);
+            lblGroupNameCN.TabIndex = 4;
+            lblGroupNameCN.Text = "所属集团客户:";
             // 
             // groupNoTextBox
             // 
@@ -1260,18 +1246,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // isGroupComboBox
             // 
-            this.isGroupComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "IsGroup", true));
-            this.isGroupComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.isGroupComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.isGroupComboBox.FormattingEnabled = true;
-            this.isGroupComboBox.Items.AddRange(new object[] {
-            "否",
-            "是"});
+            this.isGroupComboBox.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.isGroupComboBox.BackgroundStyle.Class = "";
+            this.isGroupComboBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckValue", this.clientBindingSource, "IsGroup", true));
             this.isGroupComboBox.Location = new System.Drawing.Point(90, 7);
             this.isGroupComboBox.Name = "isGroupComboBox";
             this.isGroupComboBox.Size = new System.Drawing.Size(99, 21);
             this.isGroupComboBox.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.isGroupComboBox.TabIndex = 1;
+            this.isGroupComboBox.Text = "是否集团客户";
             // 
             // btnClientClose
             // 
@@ -1762,14 +1748,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UnfreezeDateColumn,
             this.CommentColumn,
             this.ClientColumn});
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle34.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle13;
             this.dgvClientCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClientCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvClientCreditLines.Location = new System.Drawing.Point(1, 317);
@@ -1813,9 +1799,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // CreditLineColumn
             // 
             this.CreditLineColumn.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle29.Format = "C2";
-            dataGridViewCellStyle29.NullValue = null;
-            this.CreditLineColumn.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle8.Format = "C2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.CreditLineColumn.DefaultCellStyle = dataGridViewCellStyle8;
             this.CreditLineColumn.HeaderText = "额度上限";
             this.CreditLineColumn.Name = "CreditLineColumn";
             this.CreditLineColumn.ReadOnly = true;
@@ -1823,9 +1809,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // PeriodBeginColumn
             // 
             this.PeriodBeginColumn.DataPropertyName = "PeriodBegin";
-            dataGridViewCellStyle30.Format = "d";
-            dataGridViewCellStyle30.NullValue = null;
-            this.PeriodBeginColumn.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle9.Format = "d";
+            dataGridViewCellStyle9.NullValue = null;
+            this.PeriodBeginColumn.DefaultCellStyle = dataGridViewCellStyle9;
             this.PeriodBeginColumn.HeaderText = "有效期(始)";
             this.PeriodBeginColumn.Name = "PeriodBeginColumn";
             this.PeriodBeginColumn.ReadOnly = true;
@@ -1833,9 +1819,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // PeriodEndColumn
             // 
             this.PeriodEndColumn.DataPropertyName = "PeriodEnd";
-            dataGridViewCellStyle31.Format = "d";
-            dataGridViewCellStyle31.NullValue = null;
-            this.PeriodEndColumn.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle10.Format = "d";
+            dataGridViewCellStyle10.NullValue = null;
+            this.PeriodEndColumn.DefaultCellStyle = dataGridViewCellStyle10;
             this.PeriodEndColumn.HeaderText = "有效期(终)";
             this.PeriodEndColumn.Name = "PeriodEndColumn";
             this.PeriodEndColumn.ReadOnly = true;
@@ -1878,9 +1864,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // FreezeDateColumn
             // 
             this.FreezeDateColumn.DataPropertyName = "FreezeDate";
-            dataGridViewCellStyle32.Format = "d";
-            dataGridViewCellStyle32.NullValue = null;
-            this.FreezeDateColumn.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle11.Format = "d";
+            dataGridViewCellStyle11.NullValue = null;
+            this.FreezeDateColumn.DefaultCellStyle = dataGridViewCellStyle11;
             this.FreezeDateColumn.HeaderText = "冻结日期";
             this.FreezeDateColumn.Name = "FreezeDateColumn";
             this.FreezeDateColumn.ReadOnly = true;
@@ -1902,9 +1888,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // UnfreezeDateColumn
             // 
             this.UnfreezeDateColumn.DataPropertyName = "UnfreezeDate";
-            dataGridViewCellStyle33.Format = "d";
-            dataGridViewCellStyle33.NullValue = null;
-            this.UnfreezeDateColumn.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle12.Format = "d";
+            dataGridViewCellStyle12.NullValue = null;
+            this.UnfreezeDateColumn.DefaultCellStyle = dataGridViewCellStyle12;
             this.UnfreezeDateColumn.HeaderText = "解冻日期";
             this.UnfreezeDateColumn.Name = "UnfreezeDateColumn";
             this.UnfreezeDateColumn.ReadOnly = true;
@@ -2402,14 +2388,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvContracts.AllowUserToDeleteRows = false;
             this.dgvContracts.AllowUserToOrderColumns = true;
             this.dgvContracts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle35.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvContracts.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvContracts.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvContracts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvContracts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvContracts.Location = new System.Drawing.Point(1, 204);
@@ -2791,9 +2777,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX faxNumberTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX telephoneTextBox;
-        private DevComponents.DotNetBar.LabelX lblGroupNameCN;
         private DevComponents.DotNetBar.Controls.TextBoxX groupNoTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx isGroupComboBox;
+        private DevComponents.DotNetBar.Controls.CheckBoxX isGroupComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX companyCodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX registrationNumberTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX tbGroupNameEN;
@@ -2827,8 +2812,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX unfreezeReasonTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX clientCommentTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX creditLineCommentTextBox;
-        private DevComponents.DotNetBar.LabelX websiteLabel;
-        private DevComponents.DotNetBar.LabelX telephoneLabel;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbIndustry;
         private DevComponents.DotNetBar.Controls.TextBoxX clientCoreNoTextBox;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvClientCreditLines;
