@@ -2,10 +2,36 @@
 {
     partial class CDAMgr
     {
+		#region Fields (19) 
+
+        private DevComponents.DotNetBar.ButtonX btnCDAQuery;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CDAIDColumn;
+        private System.Windows.Forms.ContextMenuStrip cmuCDAMgr;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCDAs;
+        private DevComponents.DotNetBar.LabelX lblBuyerName;
+        private DevComponents.DotNetBar.LabelX lblContractCode;
+        private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.LabelX lblSellerName;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDADelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDANew;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDASelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDAUpdate;
+        private DevComponents.DotNetBar.PanelEx panelCDAQuery;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbBuyerName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbContractCode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbSellerName;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+
+		#endregion Fields 
+
+		#region Methods (1) 
+
+		// Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -19,6 +45,10 @@
             }
             base.Dispose(disposing);
         }
+
+		#endregion Methods 
+
+
 
         #region Component Designer generated code
 
@@ -278,24 +308,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.PanelEx panelCDAQuery;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCDAs;
-        private DevComponents.DotNetBar.ButtonX btnCDAQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbContractCode;
-        private DevComponents.DotNetBar.LabelX lblContractCode;
-        private DevComponents.DotNetBar.LabelX lblCount;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbBuyerName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbSellerName;
-        private DevComponents.DotNetBar.LabelX lblBuyerName;
-        private DevComponents.DotNetBar.LabelX lblSellerName;
-        private System.Windows.Forms.ContextMenuStrip cmuCDAMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCDASelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCDANew;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCDAUpdate;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCDADelete;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CDAIDColumn;
     }
 }

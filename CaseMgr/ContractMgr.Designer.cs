@@ -2,10 +2,45 @@
 {
     partial class ContractMgr
     {
+		#region Fields (28) 
+
+        private DevComponents.DotNetBar.ButtonX btnContractQuery;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbContractStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientEDICodeColumn;
+        private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
+        private DevComponents.Editors.ComboItem comboItem1;
+        private DevComponents.Editors.ComboItem comboItem2;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContractCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContractDueDateColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContractStatusColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContractValueDateColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreateUserNameColumn;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvContracts;
+        private DevComponents.DotNetBar.LabelX lblClientName;
+        private DevComponents.DotNetBar.LabelX lblContractCode;
+        private DevComponents.DotNetBar.LabelX lblContractStatus;
+        private DevComponents.DotNetBar.LabelX lblCount;
+        private System.Windows.Forms.ToolStripMenuItem menuItemContractDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemContractDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemContractImport;
+        private System.Windows.Forms.ToolStripMenuItem menuItemContractNew;
+        private System.Windows.Forms.ToolStripMenuItem menuItemContractSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemContractUpdate;
+        private DevComponents.DotNetBar.PanelEx panelContractQuery;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbContractCode;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+
+		#endregion Fields 
+
+		#region Methods (1) 
+
+		// Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -19,6 +54,10 @@
             }
             base.Dispose(disposing);
         }
+
+		#endregion Methods 
+
+
 
         #region Component Designer generated code
 
@@ -362,33 +401,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.PanelEx panelContractQuery;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvContracts;
-        private DevComponents.DotNetBar.LabelX lblCount;
-        private DevComponents.DotNetBar.ButtonX btnContractQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbContractCode;
-        private DevComponents.DotNetBar.LabelX lblContractCode;
-        private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemContractSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemContractDetail;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemContractNew;
-        private System.Windows.Forms.ToolStripMenuItem menuItemContractUpdate;
-        private System.Windows.Forms.ToolStripMenuItem menuItemContractDelete;
-        private System.Windows.Forms.ToolStripMenuItem menuItemContractImport;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbContractStatus;
-        private DevComponents.Editors.ComboItem comboItem1;
-        private DevComponents.Editors.ComboItem comboItem2;
-        private DevComponents.DotNetBar.LabelX lblContractStatus;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
-        private DevComponents.DotNetBar.LabelX lblClientName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ContractCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientEDICodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ContractValueDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ContractDueDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ContractStatusColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CreateUserNameColumn;
     }
 }

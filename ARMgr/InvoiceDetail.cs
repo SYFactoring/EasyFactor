@@ -6,15 +6,23 @@ namespace CMBC.EasyFactor.ARMgr
 
     public partial class InvoiceDetail : DevComponents.DotNetBar.Office2007Form
     {
-        public InvoiceDetail(Invoice invoice, OpInvoiceType opInvoiceType)
-        {
-            InitializeComponent();
-        }
+		#region Enums (1) 
 
         public enum OpInvoiceType
         {
             DETAIL_INVOICE,
             FLAW,
         }
+
+		#endregion Enums 
+
+		#region Constructors (1) 
+
+        public InvoiceDetail(Invoice invoice, OpInvoiceType opInvoiceType)
+        {
+            InitializeComponent();
+        }
+
+		#endregion Constructors 
     }
 }

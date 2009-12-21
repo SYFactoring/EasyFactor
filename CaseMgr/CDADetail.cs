@@ -16,10 +16,41 @@ namespace CMBC.EasyFactor.CaseMgr
 
     public partial class CDADetail : DevComponents.DotNetBar.Office2007Form
     {
+        #region Fields (1)
+
         /// <summary>
         /// 
         /// </summary>
         private OpCDAType opCDAType;
+
+        #endregion Fields
+
+        #region Enums (1)
+
+        /// <summary>
+        /// Operation Type 
+        /// </summary>
+        public enum OpCDAType
+        {
+            /// <summary>
+            /// New CDA
+            /// </summary>
+            NEW_CDA,
+
+            /// <summary>
+            /// Update CDA
+            /// </summary>
+            UPDATE_CDA,
+
+            /// <summary>
+            /// Detail CDA
+            /// </summary>
+            DETAIL_CDA
+        }
+
+        #endregion Enums
+
+        #region Constructors (1)
 
         public CDADetail(CDA cda, OpCDAType opCDAType)
         {
@@ -44,120 +75,11 @@ namespace CMBC.EasyFactor.CaseMgr
             this.UpdateCDAControlStatus();
         }
 
-        /// <summary>
-        /// Operation Type 
-        /// </summary>
-        public enum OpCDAType
-        {
-            /// <summary>
-            /// New CDA
-            /// </summary>
-            NEW_CDA,
+        #endregion Constructors
 
-            /// <summary>
-            /// Update CDA
-            /// </summary>
-            UPDATE_CDA,
+        #region Methods (7)
 
-            /// <summary>
-            /// Detail CDA
-            /// </summary>
-            DETAIL_CDA
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void UpdateCDAControlStatus()
-        {
-            if (this.opCDAType == OpCDAType.DETAIL_CDA)
-            {
-                foreach (Control comp in this.groupPanelCase.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, false);
-                }
-                foreach (Control comp in this.groupPanelCreditCover.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, false);
-                }
-                foreach (Control comp in this.groupPanelOther.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, false);
-                }
-            }
-            else if (this.opCDAType == OpCDAType.NEW_CDA)
-            {
-                foreach (Control comp in this.groupPanelCase.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, false);
-                }
-                foreach (Control comp in this.groupPanelCreditCover.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, true);
-                }
-                foreach (Control comp in this.groupPanelOther.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, true);
-                }
-                this.cbIsNotice.Enabled = true;
-                this.cbIsRecoarse.Enabled = true;
-                this.financeTypeComboBox.Enabled = true;
-                this.assignTypeComboBox.Enabled = true;
-            }
-            else if (this.opCDAType == OpCDAType.UPDATE_CDA)
-            {
-                foreach (Control comp in this.groupPanelCase.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, false);
-                }
-                foreach (Control comp in this.groupPanelCreditCover.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, true);
-                }
-                foreach (Control comp in this.groupPanelOther.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, true);
-                }
-                this.cbIsNotice.Enabled = true;
-                this.cbIsRecoarse.Enabled = true;
-                this.financeTypeComboBox.Enabled = true;
-                this.assignTypeComboBox.Enabled = true;
-            }
-        }
-
-        private void InitComboBox()
-        {
-            this.creditCoverCurrComboBox.DataSource = Currency.AllCurrencies();
-            this.creditCoverCurrComboBox.DisplayMember = "CurrencyCode";
-            this.creditCoverCurrComboBox.ValueMember = "CurrencyCode";
-
-            this.financeLineCurrComboBox.DataSource = Currency.AllCurrencies();
-            this.financeLineCurrComboBox.DisplayMember = "CurrencyCode";
-            this.financeLineCurrComboBox.ValueMember = "CurrencyCode";
-
-            this.handFeeCurrComboBox.DataSource = Currency.AllCurrencies();
-            this.handFeeCurrComboBox.DisplayMember = "CurrencyCode";
-            this.handFeeCurrComboBox.ValueMember = "CurrencyCode";
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SelectCase(object sender, EventArgs e)
-        {
-            CaseMgr caseMgr = new CaseMgr(false);
-            QueryForm queryForm = new QueryForm(caseMgr, "选择案件");
-            caseMgr.OwnerForm = queryForm;
-            queryForm.ShowDialog(this);
-            Case curCase = caseMgr.Selected;
-            if (curCase != null)
-            {
-                CDA cda = (CDA)this.CDABindingSource.DataSource;
-                cda.Case = curCase;
-            }
-        }
+        // Private Methods (7) 
 
         /// <summary>
         /// 
@@ -174,17 +96,30 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UpdateCDA(object sender, EventArgs e)
+        private void CloseCDA(object sender, EventArgs e)
         {
             CDA cda = (CDA)this.CDABindingSource.DataSource;
-            if (cda == null || cda.CDAID == 0)
+            if (this.opCDAType == OpCDAType.UPDATE_CDA)
             {
-                MessageBox.Show("请首先选择一个额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                cda.Restore();
             }
 
-            this.opCDAType = OpCDAType.UPDATE_CDA;
-            this.UpdateCDAControlStatus();
+            Close();
+        }
+
+        private void InitComboBox()
+        {
+            this.creditCoverCurrComboBox.DataSource = Currency.AllCurrencies();
+            this.creditCoverCurrComboBox.DisplayMember = "CurrencyCode";
+            this.creditCoverCurrComboBox.ValueMember = "CurrencyCode";
+
+            this.financeLineCurrComboBox.DataSource = Currency.AllCurrencies();
+            this.financeLineCurrComboBox.DisplayMember = "CurrencyCode";
+            this.financeLineCurrComboBox.ValueMember = "CurrencyCode";
+
+            this.handFeeCurrComboBox.DataSource = Currency.AllCurrencies();
+            this.handFeeCurrComboBox.DisplayMember = "CurrencyCode";
+            this.handFeeCurrComboBox.ValueMember = "CurrencyCode";
         }
 
         /// <summary>
@@ -248,15 +183,98 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CloseCDA(object sender, EventArgs e)
+        private void SelectCase(object sender, EventArgs e)
+        {
+            CaseMgr caseMgr = new CaseMgr(false);
+            QueryForm queryForm = new QueryForm(caseMgr, "选择案件");
+            caseMgr.OwnerForm = queryForm;
+            queryForm.ShowDialog(this);
+            Case curCase = caseMgr.Selected;
+            if (curCase != null)
+            {
+                CDA cda = (CDA)this.CDABindingSource.DataSource;
+                cda.Case = curCase;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateCDA(object sender, EventArgs e)
         {
             CDA cda = (CDA)this.CDABindingSource.DataSource;
-            if (this.opCDAType == OpCDAType.UPDATE_CDA)
+            if (cda == null || cda.CDAID == 0)
             {
-                cda.Restore();
+                MessageBox.Show("请首先选择一个额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
 
-            Close();
+            this.opCDAType = OpCDAType.UPDATE_CDA;
+            this.UpdateCDAControlStatus();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateCDAControlStatus()
+        {
+            if (this.opCDAType == OpCDAType.DETAIL_CDA)
+            {
+                foreach (Control comp in this.groupPanelCase.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelCreditCover.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelOther.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+            }
+            else if (this.opCDAType == OpCDAType.NEW_CDA)
+            {
+                foreach (Control comp in this.groupPanelCase.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelCreditCover.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelOther.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                this.cbIsNotice.Enabled = true;
+                this.cbIsRecoarse.Enabled = true;
+                this.financeTypeComboBox.Enabled = true;
+                this.assignTypeComboBox.Enabled = true;
+            }
+            else if (this.opCDAType == OpCDAType.UPDATE_CDA)
+            {
+                foreach (Control comp in this.groupPanelCase.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelCreditCover.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelOther.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                this.cbIsNotice.Enabled = true;
+                this.cbIsRecoarse.Enabled = true;
+                this.financeTypeComboBox.Enabled = true;
+                this.assignTypeComboBox.Enabled = true;
+            }
+        }
+
+        #endregion Methods
     }
 }

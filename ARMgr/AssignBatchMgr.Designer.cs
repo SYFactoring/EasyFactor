@@ -2,10 +2,24 @@
 {
     partial class AssignBatchMgr
     {
+        #region Fields (7)
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn AssignBatchNoColumn;
+        private DevComponents.DotNetBar.ButtonX btnAssignBatchQuery;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvAssignBatch;
+        private DevComponents.DotNetBar.LabelX lblAssignBatchNo;
+        private DevComponents.DotNetBar.PanelEx panelQuery;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbAssignBatchNo;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -19,6 +33,10 @@
             }
             base.Dispose(disposing);
         }
+
+        #endregion Methods
+
+
 
         #region Component Designer generated code
 
@@ -145,12 +163,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.PanelEx panelQuery;
-        private DevComponents.DotNetBar.LabelX lblAssignBatchNo;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbAssignBatchNo;
-        private DevComponents.DotNetBar.ButtonX btnAssignBatchQuery;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvAssignBatch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AssignBatchNoColumn;
     }
 }

@@ -2,10 +2,72 @@
 {
     partial class CaseMgr
     {
+        #region Fields (55)
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn AppDateColumn;
+        private DevComponents.DotNetBar.ButtonX btnQuery;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BuyerCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BuyerColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BuyerFactorCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BuyerFactorColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CaseCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CaseMarkColumn;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCurrency;
+        private DevComponents.DotNetBar.Controls.ComboTree cbOwnerDepts;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbTransactionType;
+        private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CoDeptCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CoDeptColumn;
+        private DevComponents.Editors.ComboItem comboItem1;
+        private DevComponents.Editors.ComboItem comboItem10;
+        private DevComponents.Editors.ComboItem comboItem2;
+        private DevComponents.Editors.ComboItem comboItem3;
+        private DevComponents.Editors.ComboItem comboItem4;
+        private DevComponents.Editors.ComboItem comboItem5;
+        private DevComponents.Editors.ComboItem comboItem6;
+        private DevComponents.Editors.ComboItem comboItem7;
+        private DevComponents.Editors.ComboItem comboItem8;
+        private DevComponents.Editors.ComboItem comboItem9;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreateUserColumn;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCases;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceCurrencyColumn;
+        private DevComponents.DotNetBar.LabelX lblCaseCode;
+        private DevComponents.DotNetBar.LabelX lblClientName;
+        private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.LabelX lblCurrency;
+        private DevComponents.DotNetBar.LabelX lblDate;
+        private DevComponents.DotNetBar.LabelX lblOnwerDept;
+        private DevComponents.DotNetBar.LabelX lblTransactionType;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseNew;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseUpdate;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverNegNew;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OperationTypeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OwnerDeptCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OwnerDeptColumn;
+        private DevComponents.DotNetBar.PanelEx panelCaseQuery;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SellerCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SellerColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SellerFactorCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SellerFactorColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TransactionTypeColumn;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -19,6 +81,10 @@
             }
             base.Dispose(disposing);
         }
+
+        #endregion Methods
+
+
 
         #region Component Designer generated code
 
@@ -715,60 +781,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.PanelEx panelCaseQuery;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCases;
-        private DevComponents.DotNetBar.LabelX lblOnwerDept;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbTransactionType;
-        private DevComponents.Editors.ComboItem comboItem1;
-        private DevComponents.Editors.ComboItem comboItem2;
-        private DevComponents.Editors.ComboItem comboItem3;
-        private DevComponents.Editors.ComboItem comboItem4;
-        private DevComponents.DotNetBar.LabelX lblTransactionType;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
-        private DevComponents.DotNetBar.Controls.ComboTree cbOwnerDepts;
-        private DevComponents.DotNetBar.ButtonX btnQuery;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCurrency;
-        private DevComponents.Editors.ComboItem comboItem5;
-        private DevComponents.Editors.ComboItem comboItem6;
-        private DevComponents.Editors.ComboItem comboItem7;
-        private DevComponents.Editors.ComboItem comboItem8;
-        private DevComponents.DotNetBar.LabelX lblCurrency;
-        private DevComponents.DotNetBar.LabelX lblCount;
-        private DevComponents.DotNetBar.LabelX lblDate;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
-        private DevComponents.DotNetBar.LabelX lblClientName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
-        private DevComponents.DotNetBar.LabelX lblCaseCode;
-        private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseNew;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseUpdate;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDelete;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverNegNew;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CaseCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SellerCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SellerColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SellerFactorCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SellerFactorColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BuyerCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BuyerColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BuyerFactorCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BuyerFactorColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceCurrencyColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TransactionTypeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OperationTypeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OwnerDeptColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OwnerDeptCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CoDeptColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CoDeptCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AppDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CaseMarkColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CreateUserColumn;
-        private DevComponents.Editors.ComboItem comboItem9;
-        private DevComponents.Editors.ComboItem comboItem10;
     }
 }

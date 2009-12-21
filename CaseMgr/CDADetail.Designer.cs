@@ -2,10 +2,96 @@
 {
     partial class CDADetail
     {
+        #region Fields (79)
+
+        private DevComponents.DotNetBar.Controls.TextBoxX approveNumberTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
+        private DevComponents.DotNetBar.ButtonX btnCaseSelect;
+        private DevComponents.DotNetBar.ButtonX btnCDAClose;
+        private DevComponents.DotNetBar.ButtonX btnCDASave;
+        private DevComponents.DotNetBar.ButtonX btnCDAUpdate;
+        private DevComponents.DotNetBar.Controls.TextBoxX buyerClientEDICodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX buyerClientNameCNTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX buyerClientNameEN_1TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX buyerCompanyNameCNTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX buyerCompanyNameENTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX buyerFactorCodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX caseCodeTextBox;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCreditCoverRevolving;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsNotice;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsRecoarse;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbNoticeMethodEmail;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbNoticeMethodFax;
+        private System.Windows.Forms.BindingSource CDABindingSource;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput cDADueDateDateTimePicker;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cDAStatusComboBox;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput cDAValueDateDateTimePicker;
+        private DevComponents.Editors.ComboItem comboItem1;
+        private DevComponents.Editors.ComboItem comboItem10;
+        private DevComponents.Editors.ComboItem comboItem13;
+        private DevComponents.Editors.ComboItem comboItem14;
+        private DevComponents.Editors.ComboItem comboItem15;
+        private DevComponents.Editors.ComboItem comboItem16;
+        private DevComponents.Editors.ComboItem comboItem2;
+        private DevComponents.Editors.ComboItem comboItem3;
+        private DevComponents.Editors.ComboItem comboItem4;
+        private DevComponents.Editors.ComboItem comboItem5;
+        private DevComponents.Editors.ComboItem comboItem6;
+        private DevComponents.Editors.ComboItem comboItem7;
+        private DevComponents.Editors.ComboItem comboItem9;
+        private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX commissionTypeCommentTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx commissonTypeComboBox;
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.Controls.TextBoxX contractCodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX createUserNameTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx creditCoverCurrComboBox;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput creditCoverPeriodBeginDateTimePicker;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput creditCoverPeriodEndDateTimePicker;
+        private DevComponents.DotNetBar.Controls.TextBoxX creditCoverTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX deductiblesTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX eFPriceTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX faxTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX financeGracePeriodTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx financeLineCurrComboBox;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput financeLinePeriodBeginDateTimePicker;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput financeLinePeriodEndDateTimePicker;
+        private DevComponents.DotNetBar.Controls.TextBoxX financeLineTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX financeProportionTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx financeTypeComboBox;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCase;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCreditCover;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelOther;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx handFeeCurrComboBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX handFeeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX iFPriceTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX invoiceCurrencyTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX lossThresholdTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX noticePersonTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX orderNumberTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX paymentTermsTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX priceTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX pUGPeriodTextBox;
+        private DevComponents.DotNetBar.Controls.MaskedTextBoxAdv pUGProportionTextBox;
+        private DevComponents.DotNetBar.Validator.RangeValidator rangeValidator1;
+        private DevComponents.DotNetBar.Controls.TextBoxX reassignGracePeriodTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX sellerClientEDICodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameCNTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameEN_1TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX sellerCompanyNameCNTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX sellerCompanyNameENTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX sellerFactorCodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -19,6 +105,10 @@
             }
             base.Dispose(disposing);
         }
+
+        #endregion Methods
+
+
 
         #region Windows Form Designer generated code
 
@@ -1956,84 +2046,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCase;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCreditCover;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelOther;
-        private DevComponents.DotNetBar.Controls.TextBoxX caseCodeTextBox;
-        private System.Windows.Forms.BindingSource CDABindingSource;
-        private DevComponents.DotNetBar.Controls.TextBoxX sellerCompanyNameCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX sellerFactorCodeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX sellerClientEDICodeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX buyerCompanyNameCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX buyerFactorCodeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX buyerClientNameEN_1TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX buyerClientNameCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX buyerClientEDICodeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameEN_1TextBox;
-        private DevComponents.DotNetBar.ButtonX btnCaseSelect;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx financeTypeComboBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput financeLinePeriodEndDateTimePicker;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput financeLinePeriodBeginDateTimePicker;
-        private DevComponents.DotNetBar.Controls.TextBoxX financeLineTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx financeLineCurrComboBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX reassignGracePeriodTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX pUGPeriodTextBox;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput creditCoverPeriodEndDateTimePicker;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput creditCoverPeriodBeginDateTimePicker;
-        private DevComponents.DotNetBar.Controls.MaskedTextBoxAdv pUGProportionTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX approveNumberTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX creditCoverTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx creditCoverCurrComboBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX lossThresholdTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX deductiblesTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX financeGracePeriodTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX paymentTermsTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX orderNumberTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX financeProportionTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx handFeeCurrComboBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX handFeeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX commissionTypeCommentTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx commissonTypeComboBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX eFPriceTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX iFPriceTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX priceTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX createUserNameTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX faxTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX noticePersonTextBox;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput cDAValueDateDateTimePicker;
-        private DevComponents.DotNetBar.ButtonX btnCDAUpdate;
-        private DevComponents.DotNetBar.ButtonX btnCDASave;
-        private DevComponents.DotNetBar.ButtonX btnCDAClose;
-        private DevComponents.Editors.ComboItem comboItem9;
-        private DevComponents.Editors.ComboItem comboItem10;
-        private DevComponents.Editors.ComboItem comboItem5;
-        private DevComponents.Editors.ComboItem comboItem6;
-        private DevComponents.Editors.ComboItem comboItem13;
-        private DevComponents.Editors.ComboItem comboItem14;
-        private DevComponents.Editors.ComboItem comboItem15;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cDAStatusComboBox;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput cDADueDateDateTimePicker;
-        private DevComponents.Editors.ComboItem comboItem16;
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbNoticeMethodFax;
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbNoticeMethodEmail;
-        private DevComponents.DotNetBar.Controls.TextBoxX contractCodeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX buyerCompanyNameENTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX sellerCompanyNameENTextBox;
-        private DevComponents.Editors.ComboItem comboItem2;
-        private DevComponents.Editors.ComboItem comboItem3;
-        private DevComponents.Editors.ComboItem comboItem1;
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsRecoarse;
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCreditCoverRevolving;
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsNotice;
-        private DevComponents.DotNetBar.Controls.TextBoxX invoiceCurrencyTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
-        private DevComponents.DotNetBar.Validator.RangeValidator rangeValidator1;
-        private DevComponents.Editors.ComboItem comboItem4;
-        private DevComponents.Editors.ComboItem comboItem7;
     }
 }

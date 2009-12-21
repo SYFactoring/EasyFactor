@@ -12,23 +12,36 @@ namespace CMBC.EasyFactor.ARMgr
 {
     public partial class AssignBatchMgr : UserControl
     {
-        private BindingSource bs = new BindingSource();
+        #region Fields (2)
 
+        private BindingSource bs = new BindingSource();
         private CDA cda;
+
+        #endregion Fields
+
+        #region Constructors (2)
+
+        public AssignBatchMgr(CDA selectedCDA)
+        {
+            InitializeComponent();
+            if (selectedCDA != null)
+            {
+                this.cda = selectedCDA;
+                this.panelQuery.Visible = false;
+                this.bs.DataSource = cda.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
+                this.dgvAssignBatch.DataSource = bs;
+            }
+        }
 
         public AssignBatchMgr()
         {
             InitializeComponent();
         }
 
-        public AssignBatchMgr(CDA selectedCDA)
-        {
-            InitializeComponent();
-            this.cda = selectedCDA;
-            this.panelQuery.Visible = false;
-            this.bs.DataSource = cda.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
-            this.dgvAssignBatch.DataSource = bs;
-        }
+        #endregion Constructors
+
+        #region Properties (2)
+
         /// <summary>
         /// Gets or sets owner form
         /// </summary>
@@ -46,6 +59,12 @@ namespace CMBC.EasyFactor.ARMgr
             get;
             set;
         }
+
+        #endregion Properties
+
+        #region Methods (2)
+
+        // Private Methods (2) 
 
         private void QueryAssignBatch(object sender, EventArgs e)
         {
@@ -81,5 +100,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
         }
+
+        #endregion Methods
     }
 }

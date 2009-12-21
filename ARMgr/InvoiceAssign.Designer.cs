@@ -1,11 +1,84 @@
-﻿namespace CMBC.EasyFactor.ARMgr
+﻿using CMBC.EasyFactor.Utils;
+namespace CMBC.EasyFactor.ARMgr
 {
     partial class InvoiceAssign
     {
+        #region Fields (65)
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn AssignAmountColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX assignBatchNoTextBox;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput batchDateDateTimePicker;
+        private DevComponents.DotNetBar.ButtonX btnAssignBatchSave;
+        private DevComponents.DotNetBar.ButtonX btnAssignBatchSelect;
+        private DevComponents.DotNetBar.ButtonX btnAssignNoGenerate;
+        private System.Windows.Forms.ContextMenuStrip cmuInvoiceAssign;
+        private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CommissionColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CommissionDateColumn;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn29;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn36;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn37;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn38;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn39;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn40;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn41;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn42;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn43;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn44;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn45;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn46;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn47;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn48;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoices;
+        private CalendarColumn DueDateColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceAmountColumn;
+        private System.Windows.Forms.BindingSource invoiceAssignBatchBindingSource;
+        private System.Windows.Forms.BindingSource invoiceBindingSource;
+        private CalendarColumn InvoiceDateColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceNoColumn;
+        private DevComponents.DotNetBar.Controls.CheckBoxX isCreateMsgCheckBox;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsFlawColumn;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFlaw;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
+        private DevComponents.DotNetBar.PanelEx panelAssignBatch;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private CalendarColumn ValueDateColumn;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -19,6 +92,10 @@
             }
             base.Dispose(disposing);
         }
+
+        #endregion Methods
+
+
 
         #region Component Designer generated code
 
@@ -50,14 +127,14 @@
             this.assignBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.InvoiceNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InvoiceDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InvoiceDateColumn = new CalendarColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InvoiceAmountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AssignAmountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DueDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ValueDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DueDateColumn = new CMBC.EasyFactor.Utils.CalendarColumn();
+            this.ValueDateColumn = new CalendarColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -98,11 +175,11 @@
             this.dataGridViewTextBoxColumn47 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn48 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cmuInvoiceAssign = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemFlaw = new System.Windows.Forms.ToolStripMenuItem();
+            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             batchDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
@@ -110,8 +187,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.invoiceAssignBatchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
             this.cmuInvoiceAssign.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // assignBatchNoLabel
@@ -725,10 +802,6 @@
             this.dataGridViewTextBoxColumn49.Name = "dataGridViewTextBoxColumn49";
             this.dataGridViewTextBoxColumn49.Visible = false;
             // 
-            // invoiceBindingSource
-            // 
-            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
-            // 
             // cmuInvoiceAssign
             // 
             this.cmuInvoiceAssign.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -757,6 +830,10 @@
             this.menuItemFlaw.Text = "瑕疵处理";
             this.menuItemFlaw.Click += new System.EventHandler(this.Flaw);
             // 
+            // invoiceBindingSource
+            // 
+            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
+            // 
             // InvoiceAssign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -770,78 +847,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.invoiceAssignBatchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
             this.cmuInvoiceAssign.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.BindingSource invoiceBindingSource;
-        private DevComponents.DotNetBar.PanelEx panelAssignBatch;
-        private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
-        private System.Windows.Forms.BindingSource invoiceAssignBatchBindingSource;
-        private DevComponents.DotNetBar.Controls.CheckBoxX isCreateMsgCheckBox;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput batchDateDateTimePicker;
-        private DevComponents.DotNetBar.Controls.TextBoxX assignBatchNoTextBox;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoices;
-        private DevComponents.DotNetBar.ButtonX btnAssignBatchSave;
-        private DevComponents.DotNetBar.ButtonX btnAssignNoGenerate;
-        private System.Windows.Forms.ContextMenuStrip cmuInvoiceAssign;
-        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemFlaw;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceNoColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceAmountColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AssignAmountColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DueDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ValueDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn IsFlawColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn29;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CommissionColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CommissionDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn36;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn37;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn38;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn39;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn40;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn41;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn42;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn43;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn44;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn45;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn46;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn47;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn48;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
-        private DevComponents.DotNetBar.ButtonX btnAssignBatchSelect;
-
     }
 }

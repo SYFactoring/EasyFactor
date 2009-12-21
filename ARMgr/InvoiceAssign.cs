@@ -9,15 +9,22 @@ using System.Windows.Forms;
 using CMBC.EasyFactor.DB.dbml;
 using CMBC.EasyFactor.Utils;
 using CMBC.EasyFactor.InfoMgr;
+using System.Data.Linq;
 
 namespace CMBC.EasyFactor.ARMgr
 {
     public partial class InvoiceAssign : UserControl
     {
+        #region Constructors (1)
+
         public InvoiceAssign()
         {
             this.InitializeComponent();
         }
+
+        #endregion Constructors
+
+        #region Properties (1)
 
         public CDA CDA
         {
@@ -25,22 +32,22 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-        private void GenerateAssignNo(object sender, EventArgs e)
-        {
+        #endregion Properties
 
-        }
+        #region Methods (6)
 
-        private void SaveAssignBatch(object sender, EventArgs e)
+        // Public Methods (1) 
+
+        public void ResetControlsStatus()
         {
-            try
+            foreach (Control comp in this.panelAssignBatch.Controls)
             {
-                App.Current.DbContext.SubmitChanges();
+                ControlUtil.SetComponetDefault(comp);
             }
-            catch (Exception e1)
-            {
-                MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            this.invoiceBindingSource.DataSource = typeof(Invoice);
+            this.invoiceAssignBatchBindingSource.DataSource = typeof(InvoiceAssignBatch);
         }
+        // Private Methods (5) 
 
         /// <summary>
         /// Show detail info of selected inovice
@@ -90,6 +97,23 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        private void GenerateAssignNo(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SaveAssignBatch(object sender, EventArgs e)
+        {
+            try
+            {
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
         private void SelectAssignBatch(object sender, EventArgs e)
         {
             AssignBatchMgr assignBatchMgr = new AssignBatchMgr(this.CDA);
@@ -104,14 +128,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        public void ResetControlsStatus()
-        {
-            foreach (Control comp in this.panelAssignBatch.Controls)
-            {
-                ControlUtil.SetComponetDefault(comp);
-            }
-            this.invoiceBindingSource.DataSource = typeof(Invoice);
-            this.invoiceAssignBatchBindingSource.DataSource = typeof(InvoiceAssignBatch);
-        }
+        #endregion Methods
     }
 }

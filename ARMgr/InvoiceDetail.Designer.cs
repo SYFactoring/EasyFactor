@@ -2,10 +2,18 @@
 {
     partial class InvoiceDetail
     {
+		#region Fields (1) 
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+
+		#endregion Fields 
+
+		#region Methods (1) 
+
+		// Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -19,6 +27,10 @@
             }
             base.Dispose(disposing);
         }
+
+		#endregion Methods 
+
+
 
         #region Windows Form Designer generated code
 

@@ -2,10 +2,108 @@
 {
     partial class CaseDetail
     {
+		#region Fields (91) 
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn ApproveAmountColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX approveAmountTextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ApproveDateColumn;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput approveDateDateTimePicker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ApproveTypeColumn;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx approveTypeComboBox;
+        private DevComponents.DotNetBar.ButtonX btnCaseBuyerFactorSelect;
+        private DevComponents.DotNetBar.ButtonX btnCaseBuyerSelect;
+        private DevComponents.DotNetBar.ButtonX btnCaseClose;
+        private DevComponents.DotNetBar.ButtonX btnCaseSave;
+        private DevComponents.DotNetBar.ButtonX btnCaseSellerFactorSelect;
+        private DevComponents.DotNetBar.ButtonX btnCaseSellerSelect;
+        private DevComponents.DotNetBar.ButtonX btnCaseUpdate;
+        private DevComponents.DotNetBar.ButtonX btnCDANew;
+        private DevComponents.DotNetBar.ButtonX btnCDARefresh;
+        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegDelete;
+        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegNew;
+        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegRefresh;
+        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegSave;
+        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegUpdate;
+        private System.Windows.Forms.BindingSource caseBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CaseCodeColumn;
+        private DevComponents.DotNetBar.Controls.ComboTree cbCaseCoDepts;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseInvoiceCurrency;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseOpType;
+        private DevComponents.DotNetBar.Controls.ComboTree cbCaseOwnerDepts;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseTransactionType;
+        private DevComponents.Editors.ComboItem comboItem1;
+        private DevComponents.Editors.ComboItem comboItem2;
+        private DevComponents.Editors.ComboItem comboItem3;
+        private DevComponents.Editors.ComboItem comboItem4;
+        private DevComponents.Editors.ComboItem comboItem5;
+        private DevComponents.Editors.ComboItem comboItem6;
+        private DevComponents.Editors.ComboItem comboItem7;
+        private DevComponents.Editors.ComboItem comboItem8;
+        private DevComponents.Editors.ComboItem comboItem9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreateUserNameColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX createUserNameTextBox;
+        private System.Windows.Forms.BindingSource creditCoverNegBindingSource;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCDAs;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCreditCoverNegs;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diCaseAppDate;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCase;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCDA;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCreditCoverNeg;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IFPriceColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX iFPriceTextBox;
+        private DevComponents.DotNetBar.LabelX lblCaseAppDate;
+        private DevComponents.DotNetBar.LabelX lblCaseBuyerFactor;
+        private DevComponents.DotNetBar.LabelX lblCaseBuyerNo;
+        private DevComponents.DotNetBar.LabelX lblCaseCoDept;
+        private DevComponents.DotNetBar.LabelX lblCaseCreateUser;
+        private DevComponents.DotNetBar.LabelX lblCaseInvoiceCurrency;
+        private DevComponents.DotNetBar.LabelX lblCaseMark;
+        private DevComponents.DotNetBar.LabelX lblCaseOpType;
+        private DevComponents.DotNetBar.LabelX lblCaseOwnerDept;
+        private DevComponents.DotNetBar.LabelX lblCaseSellerFactor;
+        private DevComponents.DotNetBar.LabelX lblCaseSellerNo;
+        private DevComponents.DotNetBar.LabelX lblCaseTransactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NegoIDColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RequestAmountColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX requestAmountTextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RequestDateColumn;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput requestDateDateTimePicker;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private DevComponents.DotNetBar.TabControl tabControl;
+        private DevComponents.DotNetBar.TabItem tabItemCase;
+        private DevComponents.DotNetBar.TabItem tabItemCDA;
+        private DevComponents.DotNetBar.TabItem tabItemCreditCoverNeg;
+        private DevComponents.DotNetBar.TabControlPanel tabPanelCase;
+        private DevComponents.DotNetBar.TabControlPanel tabPanelCDA;
+        private DevComponents.DotNetBar.TabControlPanel tabPanelCreditCoverNeg;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerFactorCode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerFactorNameCN;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerFactorNameEN;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerNameCN;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerNameEN;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerNo;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCreateUser;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseMark;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerFactorCode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerFactorNameCN;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerFactorNameEN;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerNameCN;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerNameEN;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerNo;
+
+		#endregion Fields 
+
+		#region Methods (1) 
+
+		// Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -19,6 +117,10 @@
             }
             base.Dispose(disposing);
         }
+
+		#endregion Methods 
+
+
 
         #region Windows Form Designer generated code
 
@@ -1558,96 +1660,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.TabControl tabControl;
-        private DevComponents.DotNetBar.TabControlPanel tabPanelCase;
-        private DevComponents.DotNetBar.TabItem tabItemCase;
-        private DevComponents.DotNetBar.TabControlPanel tabPanelCreditCoverNeg;
-        private DevComponents.DotNetBar.TabItem tabItemCreditCoverNeg;
-        private DevComponents.DotNetBar.TabControlPanel tabPanelCDA;
-        private DevComponents.DotNetBar.TabItem tabItemCDA;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCase;
-        private DevComponents.DotNetBar.Controls.ComboTree cbCaseCoDepts;
-        private DevComponents.DotNetBar.LabelX lblCaseCoDept;
-        private DevComponents.DotNetBar.Controls.ComboTree cbCaseOwnerDepts;
-        private DevComponents.DotNetBar.LabelX lblCaseOwnerDept;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseOpType;
-        private DevComponents.Editors.ComboItem comboItem5;
-        private DevComponents.Editors.ComboItem comboItem6;
-        private DevComponents.Editors.ComboItem comboItem7;
-        private DevComponents.DotNetBar.LabelX lblCaseOpType;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerNameEN;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerNameEN;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCreateUser;
-        private DevComponents.DotNetBar.LabelX lblCaseCreateUser;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseMark;
-        private DevComponents.DotNetBar.LabelX lblCaseMark;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diCaseAppDate;
-        private DevComponents.DotNetBar.LabelX lblCaseAppDate;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseTransactionType;
-        private DevComponents.Editors.ComboItem comboItem1;
-        private DevComponents.Editors.ComboItem comboItem2;
-        private DevComponents.Editors.ComboItem comboItem3;
-        private DevComponents.Editors.ComboItem comboItem4;
-        private DevComponents.DotNetBar.LabelX lblCaseTransactionType;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseInvoiceCurrency;
-        private DevComponents.DotNetBar.LabelX lblCaseInvoiceCurrency;
-        private DevComponents.DotNetBar.ButtonX btnCaseBuyerFactorSelect;
-        private DevComponents.DotNetBar.ButtonX btnCaseBuyerSelect;
-        private DevComponents.DotNetBar.ButtonX btnCaseSellerSelect;
-        private DevComponents.DotNetBar.ButtonX btnCaseSellerFactorSelect;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerFactorNameCN;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerFactorCode;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerNameCN;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerNo;
-        private DevComponents.DotNetBar.LabelX lblCaseBuyerNo;
-        private DevComponents.DotNetBar.LabelX lblCaseBuyerFactor;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerFactorNameCN;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerFactorCode;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerNameCN;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerNo;
-        private DevComponents.DotNetBar.LabelX lblCaseSellerNo;
-        private DevComponents.DotNetBar.LabelX lblCaseSellerFactor;
-        private DevComponents.DotNetBar.ButtonX btnCaseUpdate;
-        private DevComponents.DotNetBar.ButtonX btnCaseClose;
-        private DevComponents.DotNetBar.ButtonX btnCaseSave;
-        private System.Windows.Forms.BindingSource caseBindingSource;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCreditCoverNegs;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCreditCoverNeg;
-        private System.Windows.Forms.BindingSource creditCoverNegBindingSource;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput requestDateDateTimePicker;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput approveDateDateTimePicker;
-        private DevComponents.DotNetBar.Controls.TextBoxX iFPriceTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX approveAmountTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX requestAmountTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX createUserNameTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx approveTypeComboBox;
-        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegDelete;
-        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegSave;
-        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegUpdate;
-        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegNew;
-        private DevComponents.DotNetBar.ButtonX btnCreditCoverNegRefresh;
-        private DevComponents.Editors.ComboItem comboItem8;
-        private DevComponents.Editors.ComboItem comboItem9;
-        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
-        private System.Windows.Forms.ErrorProvider errorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerFactorNameEN;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerFactorNameEN;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCDAs;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCDA;
-        private DevComponents.DotNetBar.ButtonX btnCDANew;
-        private DevComponents.DotNetBar.ButtonX btnCDARefresh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NegoIDColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CaseCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ApproveTypeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RequestAmountColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RequestDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ApproveAmountColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ApproveDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IFPriceColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CreateUserNameColumn;
     }
 }

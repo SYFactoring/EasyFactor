@@ -13,17 +13,21 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.Utils;
 
     public partial class CreditCoverNegMgr : UserControl
-    {   
-    
-        /// <summary>
-        /// flag indicates if editable
-        /// </summary>
-        private bool isEditable;
+    {
+		#region Fields (2) 
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs = new BindingSource();
+           /// <summary>
+        /// flag indicates if editable
+        /// </summary>
+        private bool isEditable;
+
+		#endregion Fields 
+
+		#region Constructors (1) 
 
         /// <summary>
         /// 
@@ -35,6 +39,10 @@ namespace CMBC.EasyFactor.CaseMgr
             this.UpdateEditableStatus();
             ControlUtil.SetDoubleBuffered(this.dgvCreditCovers);
         }
+
+		#endregion Constructors 
+
+		#region Properties (2) 
 
         /// <summary>
         /// Gets or sets owner form
@@ -54,6 +62,12 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
+		#endregion Properties 
+
+		#region Methods (1) 
+
+		// Private Methods (1) 
+
         /// <summary>
         /// Update editable status
         /// </summary>
@@ -72,5 +86,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.menuItemCreditCoverDelete.Enabled = false;
             }
         }
+
+		#endregion Methods 
     }
 }

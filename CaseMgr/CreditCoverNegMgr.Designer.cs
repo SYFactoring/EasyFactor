@@ -2,10 +2,33 @@
 {
     partial class CreditCoverNegMgr
     {
+		#region Fields (16) 
+
+        private DevComponents.DotNetBar.ButtonX btnCreditCoverQuery;
+        private System.Windows.Forms.ContextMenuStrip cmuCreditCoverMgr;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCreditCovers;
+        private DevComponents.DotNetBar.LabelX lblBuyerFactorCode;
+        private DevComponents.DotNetBar.LabelX lblSellerFactorCode;
+        private DevComponents.DotNetBar.LabelX llbCount;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverNew;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverUpdate;
+        private DevComponents.DotNetBar.PanelEx panelCreditCoverQuery;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbBuyerFactorCode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbSellerFactorCode;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+
+		#endregion Fields 
+
+		#region Methods (1) 
+
+		// Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -19,6 +42,10 @@
             }
             base.Dispose(disposing);
         }
+
+		#endregion Methods 
+
+
 
         #region Component Designer generated code
 
@@ -229,21 +256,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.PanelEx panelCreditCoverQuery;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCreditCovers;
-        private DevComponents.DotNetBar.LabelX llbCount;
-        private DevComponents.DotNetBar.ButtonX btnCreditCoverQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbBuyerFactorCode;
-        private DevComponents.DotNetBar.LabelX lblBuyerFactorCode;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbSellerFactorCode;
-        private DevComponents.DotNetBar.LabelX lblSellerFactorCode;
-        private System.Windows.Forms.ContextMenuStrip cmuCreditCoverMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverDetail;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverNew;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverUpdate;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverDelete;
     }
 }

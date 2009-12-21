@@ -11,8 +11,22 @@ namespace CMBC.EasyFactor.ARMgr
 
     public partial class ARCaseBasic : UserControl
     {
+        #region Fields (1)
 
         private Case curCase;
+
+        #endregion Fields
+
+        #region Enums (1)
+
+        public enum OpARType
+        {
+            InvoiceAssign
+        }
+
+        #endregion Enums
+
+        #region Constructors (1)
 
         public ARCaseBasic(OpARType opARType)
         {
@@ -25,24 +39,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        public enum OpARType
-        {
-            InvoiceAssign
-        }
+        #endregion Constructors
 
-        private void SelectCase(object sender, EventArgs e)
-        {
-            CaseMgr caseMgr = new CaseMgr(false);
-            QueryForm queryForm = new QueryForm(caseMgr, "选择案件");
-            caseMgr.OwnerForm = queryForm;
-            queryForm.ShowDialog(this);
-            Case curCase = caseMgr.Selected;
-            if (curCase != null)
-            {
-                this.curCase = curCase;
-                FillCaseBasic();
-            }
-        }
+        #region Methods (3)
+
+        // Private Methods (3) 
 
         private void FillCaseBasic()
         {
@@ -97,5 +98,21 @@ namespace CMBC.EasyFactor.ARMgr
                 (control as InvoiceAssign).ResetControlsStatus();
             }
         }
+
+        private void SelectCase(object sender, EventArgs e)
+        {
+            CaseMgr caseMgr = new CaseMgr(false);
+            QueryForm queryForm = new QueryForm(caseMgr, "选择案件");
+            caseMgr.OwnerForm = queryForm;
+            queryForm.ShowDialog(this);
+            Case curCase = caseMgr.Selected;
+            if (curCase != null)
+            {
+                this.curCase = curCase;
+                FillCaseBasic();
+            }
+        }
+
+        #endregion Methods
     }
 }

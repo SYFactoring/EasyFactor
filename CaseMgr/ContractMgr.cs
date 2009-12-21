@@ -15,15 +15,20 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class ContractMgr : UserControl
     {
-        /// <summary>
-        /// flag indicates if editable
-        /// </summary>
-        private bool isEditable;
+		#region Fields (2) 
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs = new BindingSource();
+        /// <summary>
+        /// flag indicates if editable
+        /// </summary>
+        private bool isEditable;
+
+		#endregion Fields 
+
+		#region Constructors (1) 
 
         /// <summary>
         /// 
@@ -35,6 +40,10 @@ namespace CMBC.EasyFactor.CaseMgr
             this.UpdateEditableStatus();
             ControlUtil.SetDoubleBuffered(this.dgvContracts);
         }
+
+		#endregion Constructors 
+
+		#region Properties (2) 
 
         /// <summary>
         /// Gets or sets owner form
@@ -54,87 +63,26 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
+		#endregion Properties 
+
+		#region Methods (10) 
+
+		// Private Methods (10) 
+
         /// <summary>
-        /// Update editable status
+        /// Event handler when cell double clicked
         /// </summary>
-        private void UpdateEditableStatus()
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.isEditable)
+            if (this.OwnerForm == null)
             {
-                this.menuItemContractNew.Enabled = true;
-                this.menuItemContractUpdate.Enabled = true;
-                this.menuItemContractDelete.Enabled = true;
-                this.menuItemContractImport.Enabled = true;
+                this.DetailContract(sender, e);
             }
             else
             {
-                this.menuItemContractNew.Enabled = false;
-                this.menuItemContractUpdate.Enabled = false;
-                this.menuItemContractDelete.Enabled = false;
-                this.menuItemContractImport.Enabled = false;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryContracts(object sender, EventArgs e)
-        {
-            var queryResult = App.Current.DbContext.Contracts.Where(c =>
-                c.ContractCode.Contains(this.tbContractCode.Text));
-
-            this.bs.DataSource = queryResult;
-            this.dgvContracts.DataSource = this.bs;
-            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-        }
-
-        /// <summary>
-        /// Create a new Contract
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void NewContract(object sender, System.EventArgs e)
-        {
-             if (this.dgvContracts.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string cid = (string)dgvContracts["ContractCodeColumn", dgvContracts.SelectedRows[0].Index].Value;
-            if (cid != null)
-            {
-                Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
-                if (selectedContract != null)
-                {
-                    ClientDetail clientDetail = new ClientDetail(selectedContract.Client, ClientDetail.OpContractType.NEW_CONTRACT);
-                    clientDetail.ShowDialog(this);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Update selected contract
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void UpdateContract(object sender, System.EventArgs e)
-        {
-            if (this.dgvContracts.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string cid = (string)dgvContracts["ContractCodeColumn", dgvContracts.SelectedRows[0].Index].Value;
-            if (cid != null)
-            {
-                Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
-                if (selectedContract != null)
-                {
-                    ClientDetail clientDetail = new ClientDetail(selectedContract.Client, ClientDetail.OpContractType.UPDATE_CONTRACT);
-                    clientDetail.ShowDialog(this);
-                }
+                this.SelectContract(sender, e);
             }
         }
 
@@ -176,6 +124,95 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
+        /// Show detail info of selected contract
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void DetailContract(object sender, System.EventArgs e)
+        {
+            if (this.dgvContracts.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string cid = (string)dgvContracts["ContractCodeColumn", dgvContracts.SelectedRows[0].Index].Value;
+            if (cid != null)
+            {
+                Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
+                if (selectedContract != null)
+                {
+                    ClientDetail clientDetail = new ClientDetail(selectedContract.Client, ClientDetail.OpContractType.DETAIL_CONTRACT);
+                    clientDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportContracts(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = fileDialog.FileName;
+                Thread t = new Thread(this.ImportContractsImpl);
+                t.Start(fileName);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        private void ImportContractsImpl(object obj)
+        {
+
+        }
+
+        /// <summary>
+        /// Create a new Contract
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void NewContract(object sender, System.EventArgs e)
+        {
+             if (this.dgvContracts.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string cid = (string)dgvContracts["ContractCodeColumn", dgvContracts.SelectedRows[0].Index].Value;
+            if (cid != null)
+            {
+                Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
+                if (selectedContract != null)
+                {
+                    ClientDetail clientDetail = new ClientDetail(selectedContract.Client, ClientDetail.OpContractType.NEW_CONTRACT);
+                    clientDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryContracts(object sender, EventArgs e)
+        {
+            var queryResult = App.Current.DbContext.Contracts.Where(c =>
+                c.ContractCode.Contains(this.tbContractCode.Text));
+
+            this.bs.DataSource = queryResult;
+            this.dgvContracts.DataSource = this.bs;
+            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+        }
+
+        /// <summary>
         /// Select contract and close the query form
         /// </summary>
         /// <param name="sender">Event Sender</param>
@@ -204,11 +241,11 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// Show detail info of selected contract
+        /// Update selected contract
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void DetailContract(object sender, System.EventArgs e)
+        private void UpdateContract(object sender, System.EventArgs e)
         {
             if (this.dgvContracts.SelectedRows.Count == 0)
             {
@@ -221,53 +258,33 @@ namespace CMBC.EasyFactor.CaseMgr
                 Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
                 if (selectedContract != null)
                 {
-                    ClientDetail clientDetail = new ClientDetail(selectedContract.Client, ClientDetail.OpContractType.DETAIL_CONTRACT);
+                    ClientDetail clientDetail = new ClientDetail(selectedContract.Client, ClientDetail.OpContractType.UPDATE_CONTRACT);
                     clientDetail.ShowDialog(this);
                 }
             }
         }
 
         /// <summary>
-        /// Event handler when cell double clicked
+        /// Update editable status
         /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void UpdateEditableStatus()
         {
-            if (this.OwnerForm == null)
+            if (this.isEditable)
             {
-                this.DetailContract(sender, e);
+                this.menuItemContractNew.Enabled = true;
+                this.menuItemContractUpdate.Enabled = true;
+                this.menuItemContractDelete.Enabled = true;
+                this.menuItemContractImport.Enabled = true;
             }
             else
             {
-                this.SelectContract(sender, e);
+                this.menuItemContractNew.Enabled = false;
+                this.menuItemContractUpdate.Enabled = false;
+                this.menuItemContractDelete.Enabled = false;
+                this.menuItemContractImport.Enabled = false;
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ImportContracts(object sender, EventArgs e)
-        {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string fileName = fileDialog.FileName;
-                Thread t = new Thread(this.ImportContractsImpl);
-                t.Start(fileName);
-            }
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        private void ImportContractsImpl(object obj)
-        {
-
-        }
+		#endregion Methods 
     }
 }
