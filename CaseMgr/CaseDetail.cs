@@ -85,7 +85,10 @@ namespace CMBC.EasyFactor.CaseMgr
         public CaseDetail(Case curCase, OpCaseType opCaseType, OpCreditCoverNegType opCreditCoverNegType)
         {
             this.InitializeComponent();
-            this.InitComboBox();
+
+            this.cbCaseInvoiceCurrency.DataSource = Currency.AllCurrencies();
+            this.cbCaseInvoiceCurrency.DisplayMember = "CurrencyFormat";
+            this.cbCaseInvoiceCurrency.ValueMember = "CurrencyCode";
 
             this.opCaseType = opCaseType;
             this.opCreditCoverNegType = opCreditCoverNegType;
@@ -177,30 +180,29 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void CaseOpTypeChanged(object sender, EventArgs e)
         {
-            ComboItem selectedItem = (ComboItem)this.cbCaseOpType.SelectedItem;
-            if (selectedItem == null)
-            {
-                return;
-            }
+            string operationType = this.cbCaseOpType.Text;
+
             Case curCase = (Case)this.caseBindingSource.DataSource;
 
-            if ("自营".Equals(selectedItem.Text))
+            if ("自营".Equals(operationType))
             {
                 this.cbCaseCoDepts.Enabled = false;
                 this.cbCaseOwnerDepts.DataSource = App.Current.DbContext.Departments.Where(d => d.Domain == "贸易金融事业部").ToList();
                 this.cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
                 this.cbCaseOwnerDepts.GroupingMembers = "Domain";
+                this.cbCaseOwnerDepts.ValueMember = "DepartmentCode";
             }
             else
             {
                 this.cbCaseCoDepts.Enabled = true;
                 this.cbCaseCoDepts.DataSource = App.Current.DbContext.Departments.Where(d => d.Domain == "贸易金融事业部").ToList();
-                this.cbCaseCoDepts.DisplayMembers = "DepartmentName";
-                this.cbCaseCoDepts.GroupingMembers = "Domain";
+                this.cbCaseCoDepts.ValueMember = "DepartmentCode";
+                this.cbCaseCoDepts.DisplayMember = "DepartmentName";
 
                 this.cbCaseOwnerDepts.DataSource = App.Current.DbContext.Departments.Where(d => d.Domain != "贸易金融事业部").ToList();
                 this.cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
                 this.cbCaseOwnerDepts.GroupingMembers = "Domain";
+                this.cbCaseOwnerDepts.ValueMember = "DepartmentCode";
             }
         }
 
@@ -226,33 +228,28 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void CaseTransactionTypeChanged(object sender, EventArgs e)
         {
-            ComboItem selectedItem = (ComboItem)this.cbCaseTransactionType.SelectedItem;
-            if (selectedItem == null)
-            {
-                return;
-            }
-
             Case curCase = (Case)this.caseBindingSource.DataSource;
+            curCase.TransactionType = this.cbCaseTransactionType.Text;
 
-            if ("国内保理".Equals(selectedItem.Text))
+            if ("国内保理".Equals(curCase.TransactionType))
             {
                 Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
                 curCase.SellerFactor = selectedFactor;
                 curCase.BuyerFactor = selectedFactor;
             }
-            else if ("出口保理".Equals(selectedItem.Text))
+            else if ("出口保理".Equals(curCase.TransactionType))
             {
                 Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
                 curCase.SellerFactor = selectedFactor;
                 curCase.BuyerFactor = null;
             }
-            else if ("进口保理".Equals(selectedItem.Text))
+            else if ("进口保理".Equals(curCase.TransactionType))
             {
                 Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
                 curCase.SellerFactor = null;
                 curCase.BuyerFactor = selectedFactor;
             }
-            else if ("信保保理".Equals(selectedItem.Text))
+            else if ("信保保理".Equals(curCase.TransactionType))
             {
                 Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
                 curCase.SellerFactor = selectedFactor;
@@ -365,16 +362,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <summary>
         /// 
         /// </summary>
-        private void InitComboBox()
-        {
-            this.cbCaseInvoiceCurrency.DataSource = Currency.AllCurrencies();
-            this.cbCaseInvoiceCurrency.DisplayMember = "CurrencyFormat";
-            this.cbCaseInvoiceCurrency.ValueMember = "CurrencyCode";
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void NewCDA(object sender, EventArgs e)
@@ -435,22 +422,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void ResetCaseApp()
-        {
-            foreach (Control comp in this.groupPanelCase.Controls)
-            {
-                if (comp == cbCaseTransactionType)
-                {
-                    continue;
-                }
-
-                ControlUtil.SetComponetDefault(comp);
-            }
         }
 
         /// <summary>
@@ -660,7 +631,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             this.tbCaseCreateUser.ReadOnly = true;
-            this.tbCaseMark.ReadOnly = true;
+            this.cbCaseMark.Enabled = false;
 
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase.CaseCode != null)
@@ -722,5 +693,6 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion Methods
+
     }
 }
