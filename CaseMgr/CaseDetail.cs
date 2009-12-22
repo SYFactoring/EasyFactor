@@ -10,6 +10,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.Utils;
     using DevComponents.Editors;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -90,6 +91,18 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCaseInvoiceCurrency.DisplayMember = "CurrencyFormat";
             this.cbCaseInvoiceCurrency.ValueMember = "CurrencyCode";
 
+            string[] transactionList = new string[] { "国内保理", "出口保理", "进口保理", "信保保理" };
+            this.cbCaseTransactionType.DataSource = transactionList;
+
+            this.cbCaseCoDepts.DataSource = App.Current.DbContext.Departments.ToList();
+            this.cbCaseCoDepts.ValueMember = "DepartmentCode";
+            this.cbCaseCoDepts.DisplayMember = "DepartmentName";
+
+            this.cbCaseOwnerDepts.DataSource = App.Current.DbContext.Departments.ToList();
+            this.cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
+            this.cbCaseOwnerDepts.GroupingMembers = "Domain";
+            this.cbCaseOwnerDepts.ValueMember = "DepartmentCode";
+
             this.opCaseType = opCaseType;
             this.opCreditCoverNegType = opCreditCoverNegType;
 
@@ -100,6 +113,9 @@ namespace CMBC.EasyFactor.CaseMgr
             else
             {
                 this.caseBindingSource.DataSource = curCase;
+
+                List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
+                this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
                 curCase.Backup();
             }
 
@@ -184,25 +200,17 @@ namespace CMBC.EasyFactor.CaseMgr
 
             Case curCase = (Case)this.caseBindingSource.DataSource;
 
-            if ("自营".Equals(operationType))
+            if (operationType != curCase.OperationType)
             {
-                this.cbCaseCoDepts.Enabled = false;
-                this.cbCaseOwnerDepts.DataSource = App.Current.DbContext.Departments.Where(d => d.Domain == "贸易金融事业部").ToList();
-                this.cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
-                this.cbCaseOwnerDepts.GroupingMembers = "Domain";
-                this.cbCaseOwnerDepts.ValueMember = "DepartmentCode";
-            }
-            else
-            {
-                this.cbCaseCoDepts.Enabled = true;
-                this.cbCaseCoDepts.DataSource = App.Current.DbContext.Departments.Where(d => d.Domain == "贸易金融事业部").ToList();
-                this.cbCaseCoDepts.ValueMember = "DepartmentCode";
-                this.cbCaseCoDepts.DisplayMember = "DepartmentName";
-
-                this.cbCaseOwnerDepts.DataSource = App.Current.DbContext.Departments.Where(d => d.Domain != "贸易金融事业部").ToList();
-                this.cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
-                this.cbCaseOwnerDepts.GroupingMembers = "Domain";
-                this.cbCaseOwnerDepts.ValueMember = "DepartmentCode";
+                if ("自营".Equals(operationType))
+                {
+                    this.cbCaseCoDepts.Enabled = false;
+                    curCase.CoDepartment = null;
+                }
+                else
+                {
+                    this.cbCaseCoDepts.Enabled = true;
+                }
             }
         }
 
@@ -228,9 +236,14 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void CaseTransactionTypeChanged(object sender, EventArgs e)
         {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            string transationType = this.cbCaseTransactionType.Text;
 
+            string transationType = this.cbCaseTransactionType.SelectedItem.ToString();
+            if (transationType == null || string.Empty.Equals(transationType))
+            {
+                return;
+            }
+
+            Case curCase = (Case)this.caseBindingSource.DataSource;
             if ("国内保理".Equals(transationType))
             {
                 Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
@@ -449,6 +462,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 curCase.CaseCode = this.GenerateCaseCode(curCase);
                 curCase.CaseMark = "申请案";
+                curCase.CreateUserName = App.Current.CurUser.Name;
 
                 bool isAddOK = true;
                 try
@@ -597,6 +611,8 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private void UpdateCaseControlStatus()
         {
+            Case curCase = (Case)this.caseBindingSource.DataSource;
+
             if (this.opCaseType == OpCaseType.NEW_CASE)
             {
                 foreach (Control comp in this.groupPanelCase.Controls)
@@ -618,6 +634,15 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.btnCaseBuyerSelect.Visible = true;
                 this.btnCaseSellerFactorSelect.Visible = true;
                 this.btnCaseSellerSelect.Visible = true;
+
+                if ("自营".Equals(curCase.OperationType))
+                {
+                    this.cbCaseCoDepts.Enabled = false;
+                }
+                else
+                {
+                    this.cbCaseCoDepts.Enabled = true;
+                }
             }
             else if (this.opCaseType == OpCaseType.DETAIL_CASE)
             {
@@ -634,7 +659,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbCaseCreateUser.ReadOnly = true;
             this.cbCaseMark.Enabled = false;
 
-            Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase.CaseCode != null)
             {
                 this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
@@ -694,5 +718,14 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion Methods
+
+        private void cbCaseOwnerDepts_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
+        {
+            if (this.caseBindingSource.DataSource is Case)
+            {
+                Case curCase = (Case)this.caseBindingSource.DataSource;
+                curCase.OwnerDepartment = (Department)this.cbCaseOwnerDepts.SelectedNode.DataKey;
+            }
+        }
     }
 }

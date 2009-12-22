@@ -42,6 +42,13 @@
                </ControlSetting>
             </ControlSettings>
          </PropertyUISetting>
+         <PropertyUISetting Name="Case.OwnerDepartment">
+            <ControlSettings>
+               <ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form">
+                  <BindableControlInfo Name="ComboTree" Type="DevComponents.DotNetBar.Controls.ComboTree" AssemblyName="DevComponents.DotNetBar2, Version=8.2.0.2, Culture=neutral, PublicKeyToken=5fd520d36328f741" AssemblyCodeBase="file:///D:/CMBC/FOMS/bin/Debug/DevComponents.DotNetBar2.dll" />
+               </ControlSetting>
+            </ControlSettings>
+         </PropertyUISetting>
       </PropertyUISettings>
    </TypeUISetting>
 </GenericObjectDataSource>

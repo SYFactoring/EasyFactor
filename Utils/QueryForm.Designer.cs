@@ -1,5 +1,5 @@
 ﻿
-namespace CMBC.EasyFactor.InfoMgr
+namespace CMBC.EasyFactor.Utils
 {
     /// <summary>
     /// 

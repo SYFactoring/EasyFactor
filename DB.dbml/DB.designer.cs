@@ -6502,7 +6502,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_TransationType", DbType="NVarChar(50)")]
-		public string TransactionType
+        public string TransactionType
 		{
 			get
 			{

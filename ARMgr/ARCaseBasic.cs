@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.InfoMgr;
     using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils;
 
     public partial class ARCaseBasic : UserControl
     {
