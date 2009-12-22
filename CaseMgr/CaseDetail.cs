@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CaseDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (2)
+		#region Fields (2) 
 
         /// <summary>
         /// 
@@ -28,9 +28,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCreditCoverNegType opCreditCoverNegType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (2)
+		#region Enums (2) 
 
         /// <summary>
         /// 
@@ -52,7 +52,7 @@ namespace CMBC.EasyFactor.CaseMgr
             /// </summary>
             DETAIL_CREDIT_COVER_NEG
         }
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         public enum OpCaseType
@@ -73,11 +73,11 @@ namespace CMBC.EasyFactor.CaseMgr
             DETAIL_CASE,
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (3)
+		#region Constructors (3) 
 
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         /// <param name="curCase"></param>
@@ -113,6 +113,8 @@ namespace CMBC.EasyFactor.CaseMgr
             else
             {
                 this.caseBindingSource.DataSource = curCase;
+                this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
+                this.dgvCDAs.DataSource = curCase.CDAs.ToList();
 
                 List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
                 this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
@@ -148,41 +150,11 @@ namespace CMBC.EasyFactor.CaseMgr
         {
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (21)
+		#region Methods (22) 
 
-        // Private Methods (21) 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CaseBuyerFactorSelect(object sender, EventArgs e)
-        {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            FactorMgr factorMgr = new FactorMgr(false);
-            QueryForm queryUI = new QueryForm(factorMgr, "选择买方保理商");
-            factorMgr.OwnerForm = queryUI;
-            queryUI.ShowDialog(this);
-            curCase.BuyerFactor = factorMgr.Selected;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CaseBuyerSelect(object sender, EventArgs e)
-        {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            ClientMgr clientMgr = new ClientMgr(false);
-            QueryForm queryUI = new QueryForm(clientMgr, "选择买方");
-            clientMgr.OwnerForm = queryUI;
-            queryUI.ShowDialog(this);
-            curCase.BuyerClient = clientMgr.Selected;
-        }
+		// Private Methods (22) 
 
         private void CaseDetail_Leave(object sender, EventArgs e)
         {
@@ -212,21 +184,6 @@ namespace CMBC.EasyFactor.CaseMgr
                     this.cbCaseCoDepts.Enabled = true;
                 }
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CaseSellerSelect(object sender, EventArgs e)
-        {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            ClientMgr clientMgr = new ClientMgr(false);
-            QueryForm queryUI = new QueryForm(clientMgr, "选择卖方");
-            clientMgr.OwnerForm = queryUI;
-            queryUI.ShowDialog(this);
-            curCase.SellerClient = clientMgr.Selected;
         }
 
         /// <summary>
@@ -269,6 +226,18 @@ namespace CMBC.EasyFactor.CaseMgr
                 curCase.BuyerFactor = null;
             }
 
+        }
+
+        private void cbCaseOwnerDepts_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
+        {
+            if (this.caseBindingSource.DataSource is Case)
+            {
+                Case curCase = (Case)this.caseBindingSource.DataSource;
+                if (this.cbCaseOwnerDepts.SelectedNode != null)
+                {
+                    curCase.OwnerDepartment = (Department)this.cbCaseOwnerDepts.SelectedNode.DataKey;
+                }
+            }
         }
 
         /// <summary>
@@ -548,7 +517,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
                     this.NewCreditCoverNeg(null, null);
                 }
             }
@@ -571,6 +539,52 @@ namespace CMBC.EasyFactor.CaseMgr
                     creditCoverNeg.Backup();
                 }
             }
+            this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectCaseBuyer(object sender, EventArgs e)
+        {
+            Case curCase = (Case)this.caseBindingSource.DataSource;
+            ClientMgr clientMgr = new ClientMgr(false);
+            QueryForm queryUI = new QueryForm(clientMgr, "选择买方");
+            clientMgr.OwnerForm = queryUI;
+            queryUI.ShowDialog(this);
+            curCase.BuyerClient = clientMgr.Selected;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectCaseBuyerFactor(object sender, EventArgs e)
+        {
+            Case curCase = (Case)this.caseBindingSource.DataSource;
+            FactorMgr factorMgr = new FactorMgr(false);
+            QueryForm queryUI = new QueryForm(factorMgr, "选择买方保理商");
+            factorMgr.OwnerForm = queryUI;
+            queryUI.ShowDialog(this);
+            curCase.BuyerFactor = factorMgr.Selected;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectCaseSeller(object sender, EventArgs e)
+        {
+            Case curCase = (Case)this.caseBindingSource.DataSource;
+            ClientMgr clientMgr = new ClientMgr(false);
+            QueryForm queryUI = new QueryForm(clientMgr, "选择卖方");
+            clientMgr.OwnerForm = queryUI;
+            queryUI.ShowDialog(this);
+            curCase.SellerClient = clientMgr.Selected;
         }
 
         /// <summary>
@@ -659,11 +673,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbCaseCreateUser.ReadOnly = true;
             this.cbCaseMark.Enabled = false;
 
-            if (curCase.CaseCode != null)
-            {
-                this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
-                this.dgvCDAs.DataSource = curCase.CDAs.ToList();
-            }
         }
 
         /// <summary>
@@ -717,18 +726,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        #endregion Methods
-
-        private void cbCaseOwnerDepts_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
-        {
-            if (this.caseBindingSource.DataSource is Case)
-            {
-                Case curCase = (Case)this.caseBindingSource.DataSource;
-                if (this.cbCaseOwnerDepts.SelectedNode != null)
-                {
-                    curCase.OwnerDepartment = (Department)this.cbCaseOwnerDepts.SelectedNode.DataKey;
-                }
-            }
-        }
+		#endregion Methods 
     }
 }

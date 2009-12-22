@@ -536,9 +536,9 @@
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelCase);
             this.tabControl.Controls.Add(this.tabPanelCreditCoverNeg);
             this.tabControl.Controls.Add(this.tabPanelCDA);
+            this.tabControl.Controls.Add(this.tabPanelCase);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -896,7 +896,7 @@
             this.btnCaseBuyerFactorSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCaseBuyerFactorSelect.TabIndex = 19;
             this.btnCaseBuyerFactorSelect.Text = "Q";
-            this.btnCaseBuyerFactorSelect.Click += new System.EventHandler(this.CaseBuyerFactorSelect);
+            this.btnCaseBuyerFactorSelect.Click += new System.EventHandler(this.SelectCaseBuyerFactor);
             // 
             // btnCaseBuyerSelect
             // 
@@ -908,7 +908,7 @@
             this.btnCaseBuyerSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCaseBuyerSelect.TabIndex = 18;
             this.btnCaseBuyerSelect.Text = "Q";
-            this.btnCaseBuyerSelect.Click += new System.EventHandler(this.CaseBuyerSelect);
+            this.btnCaseBuyerSelect.Click += new System.EventHandler(this.SelectCaseBuyer);
             // 
             // btnCaseSellerSelect
             // 
@@ -920,7 +920,7 @@
             this.btnCaseSellerSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCaseSellerSelect.TabIndex = 17;
             this.btnCaseSellerSelect.Text = "Q";
-            this.btnCaseSellerSelect.Click += new System.EventHandler(this.CaseSellerSelect);
+            this.btnCaseSellerSelect.Click += new System.EventHandler(this.SelectCaseSeller);
             // 
             // btnCaseSellerFactorSelect
             // 
@@ -1336,6 +1336,7 @@
             // 
             // 
             this.diRequestDate.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diRequestDate.ButtonDropDown.Visible = true;
             this.diRequestDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.creditCoverNegBindingSource, "RequestDate", true));
             this.diRequestDate.Location = new System.Drawing.Point(404, 9);
             // 
@@ -1369,6 +1370,7 @@
             // 
             // 
             this.diApproveDate.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diApproveDate.ButtonDropDown.Visible = true;
             this.diApproveDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.creditCoverNegBindingSource, "ApproveDate", true));
             this.diApproveDate.Location = new System.Drawing.Point(404, 33);
             // 

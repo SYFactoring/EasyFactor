@@ -359,7 +359,7 @@
             // 
             // 
             assignTypeLabel.BackgroundStyle.Class = "";
-            assignTypeLabel.Location = new System.Drawing.Point(219, 131);
+            assignTypeLabel.Location = new System.Drawing.Point(227, 128);
             assignTypeLabel.Name = "assignTypeLabel";
             assignTypeLabel.Size = new System.Drawing.Size(59, 16);
             assignTypeLabel.TabIndex = 8;
@@ -952,7 +952,7 @@
             this.assignTypeComboBox.Items.AddRange(new object[] {
             this.comboItem9,
             this.comboItem10});
-            this.assignTypeComboBox.Location = new System.Drawing.Point(284, 128);
+            this.assignTypeComboBox.Location = new System.Drawing.Point(292, 128);
             this.assignTypeComboBox.Name = "assignTypeComboBox";
             this.assignTypeComboBox.Size = new System.Drawing.Size(121, 21);
             this.assignTypeComboBox.TabIndex = 9;

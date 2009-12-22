@@ -110,8 +110,6 @@
             this.creditLineTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditLineCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tabItemFactorCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelAccount = new DevComponents.DotNetBar.TabControlPanel();
-            this.tabItemFactorAccount = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelFactor = new DevComponents.DotNetBar.TabControlPanel();
             this.btnFactorUpdate = new DevComponents.DotNetBar.ButtonX();
             this.btnFactorClose = new DevComponents.DotNetBar.ButtonX();
@@ -159,9 +157,12 @@
             this.comboItem3 = new DevComponents.Editors.ComboItem();
             this.comboItem4 = new DevComponents.Editors.ComboItem();
             this.tabItemFactor = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabPanelAccount = new DevComponents.DotNetBar.TabControlPanel();
+            this.tabItemFactorAccount = new DevComponents.DotNetBar.TabItem(this.components);
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
             factorTypeLabel = new DevComponents.DotNetBar.LabelX();
             countryNameLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -768,8 +769,8 @@
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
             this.tabControl.Controls.Add(this.tabPanelCreditLine);
-            this.tabControl.Controls.Add(this.tabPanelFactor);
             this.tabControl.Controls.Add(this.tabPanelAccount);
+            this.tabControl.Controls.Add(this.tabPanelFactor);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -1296,6 +1297,7 @@
             this.periodEndDateTimePicker.Name = "periodEndDateTimePicker";
             this.periodEndDateTimePicker.Size = new System.Drawing.Size(121, 20);
             this.periodEndDateTimePicker.TabIndex = 7;
+            this.superValidator.SetValidator1(this.periodEndDateTimePicker, this.compareValidator1);
             // 
             // periodBeginDateTimePicker
             // 
@@ -1359,29 +1361,6 @@
             this.tabItemFactorCreditLine.AttachedControl = this.tabPanelCreditLine;
             this.tabItemFactorCreditLine.Name = "tabItemFactorCreditLine";
             this.tabItemFactorCreditLine.Text = "额度信息";
-            // 
-            // tabPanelAccount
-            // 
-            this.tabPanelAccount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelAccount.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelAccount.Name = "tabPanelAccount";
-            this.tabPanelAccount.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelAccount.Size = new System.Drawing.Size(595, 577);
-            this.tabPanelAccount.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelAccount.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelAccount.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelAccount.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelAccount.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelAccount.Style.GradientAngle = 90;
-            this.tabPanelAccount.TabIndex = 3;
-            this.tabPanelAccount.TabItem = this.tabItemFactorAccount;
-            // 
-            // tabItemFactorAccount
-            // 
-            this.tabItemFactorAccount.AttachedControl = this.tabPanelAccount;
-            this.tabItemFactorAccount.Name = "tabItemFactorAccount";
-            this.tabItemFactorAccount.Text = "账户信息";
             // 
             // tabPanelFactor
             // 
@@ -2074,6 +2053,29 @@
             this.tabItemFactor.Name = "tabItemFactor";
             this.tabItemFactor.Text = "基本信息";
             // 
+            // tabPanelAccount
+            // 
+            this.tabPanelAccount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelAccount.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelAccount.Name = "tabPanelAccount";
+            this.tabPanelAccount.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelAccount.Size = new System.Drawing.Size(595, 577);
+            this.tabPanelAccount.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelAccount.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelAccount.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelAccount.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelAccount.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelAccount.Style.GradientAngle = 90;
+            this.tabPanelAccount.TabIndex = 3;
+            this.tabPanelAccount.TabItem = this.tabItemFactorAccount;
+            // 
+            // tabItemFactorAccount
+            // 
+            this.tabItemFactorAccount.AttachedControl = this.tabPanelAccount;
+            this.tabItemFactorAccount.Name = "tabItemFactorAccount";
+            this.tabItemFactorAccount.Text = "账户信息";
+            // 
             // superValidator
             // 
             this.superValidator.ContainerControl = this;
@@ -2088,6 +2090,14 @@
             // highlighter
             // 
             this.highlighter.ContainerControl = this;
+            // 
+            // compareValidator1
+            // 
+            this.compareValidator1.ControlToCompare = this.periodBeginDateTimePicker;
+            this.compareValidator1.ErrorMessage = "到期日应该大于起始日";
+            this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
+            this.compareValidator1.ValuePropertyName = "Value";
             // 
             // FactorDetail
             // 
@@ -2220,5 +2230,6 @@
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private DevComponents.DotNetBar.Controls.TextBoxX companyNameCNTextBox;
+        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
     }
 }
