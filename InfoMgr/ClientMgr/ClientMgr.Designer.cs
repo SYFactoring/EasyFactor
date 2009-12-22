@@ -729,11 +729,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // IsGroupColumn
             // 
             this.IsGroupColumn.DataPropertyName = "IsGroup";
+            this.IsGroupColumn.FalseValue = "false";
             this.IsGroupColumn.HeaderText = "是否集团客户";
             this.IsGroupColumn.Name = "IsGroupColumn";
             this.IsGroupColumn.ReadOnly = true;
             this.IsGroupColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.IsGroupColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.IsGroupColumn.TrueValue = "true";
             this.IsGroupColumn.Width = 104;
             // 
             // GroupNoColumn

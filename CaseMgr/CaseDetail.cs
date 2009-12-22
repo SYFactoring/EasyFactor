@@ -724,7 +724,10 @@ namespace CMBC.EasyFactor.CaseMgr
             if (this.caseBindingSource.DataSource is Case)
             {
                 Case curCase = (Case)this.caseBindingSource.DataSource;
-                curCase.OwnerDepartment = (Department)this.cbCaseOwnerDepts.SelectedNode.DataKey;
+                if (this.cbCaseOwnerDepts.SelectedNode != null)
+                {
+                    curCase.OwnerDepartment = (Department)this.cbCaseOwnerDepts.SelectedNode.DataKey;
+                }
             }
         }
     }

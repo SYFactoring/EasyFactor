@@ -6,6 +6,7 @@ namespace CMBC.EasyFactor.Utils
     using DevComponents.DotNetBar;
     using System;
     using System.Reflection;
+    using DevComponents.Editors.DateTimeAdv;
 
     /// <summary>
     /// 
@@ -40,7 +41,11 @@ namespace CMBC.EasyFactor.Utils
             }
             else if (comp is DateTimePicker)
             {
-                (comp as DateTimePicker).Value = DateTime.Now;
+                (comp as DateTimePicker).Value = default(DateTime);
+            }
+            else if (comp is DateTimeInput)
+            {
+                (comp as DateTimeInput).Value = default(DateTime);
             }
         }
 
@@ -65,7 +70,7 @@ namespace CMBC.EasyFactor.Utils
             }
             else if (comp is ComboTree)
             {
-                (comp as ComboTree).Enabled= isEditable;
+                (comp as ComboTree).Enabled = isEditable;
             }
             else if (comp is ComboBox)
             {
@@ -78,6 +83,10 @@ namespace CMBC.EasyFactor.Utils
             else if (comp is DateTimePicker)
             {
                 (comp as DateTimePicker).Enabled = isEditable;
+            }
+            else if (comp is DateTimeInput)
+            {
+                (comp as DateTimeInput).Enabled = isEditable;
             }
         }
 
