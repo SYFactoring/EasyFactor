@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MainWindow.Designer.cs" company="CISL@Fudan">
+// <copyright file="MainWindow.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -11,85 +11,100 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow
     {
+		#region Fields (83) 
+
+        private DevComponents.DotNetBar.ButtonItem btnAssignCheck;
+        private DevComponents.DotNetBar.ButtonItem btnAssignReport;
+        private DevComponents.DotNetBar.ButtonItem btnBuyerPayment;
+        private DevComponents.DotNetBar.ButtonItem btnCaseNew;
+        private DevComponents.DotNetBar.ButtonItem btnCaseQuery;
+        private DevComponents.DotNetBar.ButtonItem btnCDACheck;
+        private DevComponents.DotNetBar.ButtonItem btnCDANew;
+        private DevComponents.DotNetBar.ButtonItem btnCDAQuery;
+        private DevComponents.DotNetBar.ButtonItem btnCDAReport;
+        private DevComponents.DotNetBar.ButtonItem btnClientMgr;
+        private DevComponents.DotNetBar.ButtonItem btnClientNew;
+        private DevComponents.DotNetBar.ButtonItem btnContractQuery;
+        private DevComponents.DotNetBar.ButtonItem btnCreditCoverNegQuery;
+        private DevComponents.DotNetBar.ButtonItem btnDepartMgr;
+        private DevComponents.DotNetBar.ButtonItem btnDispute;
+        private DevComponents.DotNetBar.ButtonItem btnExample1;
+        private DevComponents.DotNetBar.ButtonItem btnFactorFeeReport;
+        private DevComponents.DotNetBar.ButtonItem btnFactorMgr;
+        private DevComponents.DotNetBar.ButtonItem btnFactorNew;
+        private DevComponents.DotNetBar.ButtonItem btnFeeReport;
+        private DevComponents.DotNetBar.ButtonItem btnFinanceCheck;
+        private DevComponents.DotNetBar.ButtonItem btnFinancePaymentReport;
+        private DevComponents.DotNetBar.ButtonItem btnFinanceReport;
+        private DevComponents.DotNetBar.ButtonItem btnFlawReport;
+        private DevComponents.DotNetBar.ButtonItem btnFlawResolve;
+        private DevComponents.DotNetBar.ButtonItem btnGuaranteePayment;
+        private DevComponents.DotNetBar.ButtonItem btnHelp;
+        private DevComponents.DotNetBar.ButtonItem btnIndirectPayment;
+        private DevComponents.DotNetBar.ButtonItem btnInvoiceAssign;
+        private DevComponents.DotNetBar.ButtonItem btnInvoiceFinance;
+        private DevComponents.DotNetBar.ButtonItem btnMainPage;
+        private DevComponents.DotNetBar.ButtonItem btnOverDueQuery;
+        private DevComponents.DotNetBar.ButtonItem btnPaymentCheck;
+        private DevComponents.DotNetBar.ButtonItem btnReassignment;
+        private DevComponents.DotNetBar.ButtonItem btnReceivableAccountPaymentReport;
+        private DevComponents.DotNetBar.ButtonItem btnSellerPayment;
+        private DevComponents.DotNetBar.ButtonItem btnStartClose;
+        private DevComponents.DotNetBar.ButtonItem btnStartExit;
+        private DevComponents.DotNetBar.ButtonItem btnStartNew;
+        private DevComponents.DotNetBar.ButtonItem btnStartOpen;
+        private DevComponents.DotNetBar.ButtonItem btnStartOptions;
+        private DevComponents.DotNetBar.ButtonItem btnStartPrint;
+        private DevComponents.DotNetBar.ButtonItem btnStartSave;
+        private DevComponents.DotNetBar.ButtonItem btnStartShare;
+        private DevComponents.DotNetBar.ButtonItem btnUserMgr;
+        private DevComponents.DotNetBar.ComboBoxItem cbStyleManager;
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private DevComponents.DotNetBar.RibbonControl ribbonControl;
-        private DevComponents.DotNetBar.RibbonPanel ribbonPanelInvoiceMgr;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarInvoiceMgr;
-        private DevComponents.DotNetBar.RibbonPanel ribbonPanelInfoMgr;
-        private DevComponents.DotNetBar.RibbonTabItem itemAccountsReceivableMgr;
-        private DevComponents.DotNetBar.RibbonTabItem itemInfoMgr;
-        private DevComponents.DotNetBar.Office2007StartButton office2007StartButton;
-        private DevComponents.DotNetBar.ItemContainer itemContainerStartOuter;
-        private DevComponents.DotNetBar.ItemContainer itemContainerInner;
-        private DevComponents.DotNetBar.ItemContainer itemContainerStartLeft;
-        private DevComponents.DotNetBar.ButtonItem btnStartNew;
-        private DevComponents.DotNetBar.ButtonItem btnStartOpen;
-        private DevComponents.DotNetBar.ButtonItem btnStartSave;
-        private DevComponents.DotNetBar.ButtonItem btnStartShare;
-        private DevComponents.DotNetBar.ButtonItem btnStartPrint;
-        private DevComponents.DotNetBar.ButtonItem btnStartClose;
         private DevComponents.DotNetBar.GalleryContainer galleryContainer;
-        private DevComponents.DotNetBar.LabelItem lblRecentDocs;
-        private DevComponents.DotNetBar.ButtonItem btnExample1;
-        private DevComponents.DotNetBar.ItemContainer itemContainerStartBottom;
-        private DevComponents.DotNetBar.ButtonItem btnStartOptions;
-        private DevComponents.DotNetBar.ButtonItem btnStartExit;
-        private DevComponents.DotNetBar.QatCustomizeItem qatCustomizeItem;
-        private DevComponents.DotNetBar.StyleManager styleManager;
-        private DevComponents.DotNetBar.RibbonPanel ribbonPanelReport;
-        private DevComponents.DotNetBar.RibbonTabItem itemReport;
-        private DevComponents.DotNetBar.RibbonPanel ribbonPanelCaseQuery;
+        private DevComponents.DotNetBar.RibbonTabItem itemAccountsReceivableMgr;
         private DevComponents.DotNetBar.RibbonTabItem itemCaseInfo;
-        private DevComponents.DotNetBar.RibbonPanel ribbonPanelHelp;
+        private DevComponents.DotNetBar.ItemContainer itemContainerInner;
+        private DevComponents.DotNetBar.ItemContainer itemContainerStartBottom;
+        private DevComponents.DotNetBar.ItemContainer itemContainerStartLeft;
+        private DevComponents.DotNetBar.ItemContainer itemContainerStartOuter;
         private DevComponents.DotNetBar.RibbonTabItem itemHelp;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarInvoiceCheck;
-        private DevComponents.DotNetBar.ButtonItem btnInvoiceAssign;
-        private DevComponents.DotNetBar.ButtonItem btnFlawResolve;
-        private DevComponents.DotNetBar.ButtonItem btnInvoiceFinance;
-        private DevComponents.DotNetBar.ButtonItem btnCDACheck;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarClient;
-        private DevComponents.DotNetBar.ButtonItem btnClientMgr;
-        private DevComponents.DotNetBar.ButtonItem btnClientNew;
-        private DevComponents.DotNetBar.Bar statusbar;
+        private DevComponents.DotNetBar.RibbonTabItem itemInfoMgr;
+        private DevComponents.DotNetBar.RibbonTabItem itemReport;
         private DevComponents.DotNetBar.LabelItem lblCommandStatus;
         private DevComponents.DotNetBar.LabelItem lblCurrentUser;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarDepartment;
-        private DevComponents.DotNetBar.ButtonItem btnDepartMgr;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarFactor;
-        private DevComponents.DotNetBar.ButtonItem btnFactorMgr;
-        private DevComponents.DotNetBar.ButtonItem btnFactorNew;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarCaseRequest;
-        private DevComponents.DotNetBar.ButtonItem btnCaseNew;
-        private DevComponents.DotNetBar.ButtonItem btnCDANew;
-        private DevComponents.DotNetBar.ButtonItem btnBuyerPayment;
-        private DevComponents.DotNetBar.ButtonItem btnIndirectPayment;
-        private DevComponents.DotNetBar.ButtonItem btnAssignCheck;
-        private DevComponents.DotNetBar.ButtonItem btnFinanceCheck;
-        private DevComponents.DotNetBar.ButtonItem btnPaymentCheck;
-        private DevComponents.DotNetBar.ButtonItem btnSellerPayment;
-        private DevComponents.DotNetBar.ButtonItem btnGuaranteePayment;
-        private DevComponents.DotNetBar.ButtonItem btnReassignment;
-        private DevComponents.DotNetBar.ButtonItem btnDispute;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarTransactionReport;
-        private DevComponents.DotNetBar.ButtonItem btnCDAReport;
-        private DevComponents.DotNetBar.ButtonItem btnFlawReport;
-        private DevComponents.DotNetBar.ButtonItem btnAssignReport;
-        private DevComponents.DotNetBar.ButtonItem btnFinanceReport;
-        private DevComponents.DotNetBar.ButtonItem btnFeeReport;
-        private DevComponents.DotNetBar.ButtonItem btnReceivableAccountPaymentReport;
-        private DevComponents.DotNetBar.ButtonItem btnFinancePaymentReport;
-        private DevComponents.DotNetBar.ButtonItem btnFactorFeeReport;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarCaseQuery;
+        private DevComponents.DotNetBar.LabelItem lblRecentDocs;
+        private DevComponents.DotNetBar.Controls.ReflectionLabel logoLabel;
+        private DevComponents.DotNetBar.Office2007StartButton office2007StartButton;
+        private DevComponents.DotNetBar.QatCustomizeItem qatCustomizeItem;
         private DevComponents.DotNetBar.RibbonBar ribbonBarAnalysisReport;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarUserMgr;
-        private DevComponents.DotNetBar.ButtonItem btnUserMgr;
-        private DevComponents.DotNetBar.ButtonItem btnCaseQuery;
-        private DevComponents.DotNetBar.ButtonItem btnOverDueQuery;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarCaseQuery;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarCaseRequest;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarClient;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarDepartment;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarFactor;
         private DevComponents.DotNetBar.RibbonBar ribbonBarHelp;
-        private DevComponents.DotNetBar.ButtonItem btnHelp;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarInvoiceCheck;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarInvoiceMgr;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarTransactionReport;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarUserMgr;
+        private DevComponents.DotNetBar.RibbonControl ribbonControl;
+         private DevComponents.DotNetBar.Ribbon.RibbonClientPanel ribbonDetailPanel;
+        private DevComponents.DotNetBar.RibbonPanel ribbonPanelCaseQuery;
+        private DevComponents.DotNetBar.RibbonPanel ribbonPanelHelp;
+        private DevComponents.DotNetBar.RibbonPanel ribbonPanelInfoMgr;
+        private DevComponents.DotNetBar.RibbonPanel ribbonPanelInvoiceMgr;
+        private DevComponents.DotNetBar.RibbonPanel ribbonPanelReport;
+        private DevComponents.DotNetBar.Bar statusbar;
+        private DevComponents.DotNetBar.StyleManager styleManager;
+
+		#endregion Fields 
+
+		#region Methods (1) 
+
+		// Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -104,6 +119,10 @@ namespace CMBC.EasyFactor
 
             base.Dispose(disposing);
         }
+
+		#endregion Methods 
+
+
 
         #region Windows Form Designer generated code
 
@@ -187,12 +206,6 @@ namespace CMBC.EasyFactor
             this.btnStartOptions = new DevComponents.DotNetBar.ButtonItem();
             this.btnStartExit = new DevComponents.DotNetBar.ButtonItem();
             this.cbStyleManager = new DevComponents.DotNetBar.ComboBoxItem();
-            this.comboItem1 = new DevComponents.Editors.ComboItem();
-            this.comboItem2 = new DevComponents.Editors.ComboItem();
-            this.comboItem3 = new DevComponents.Editors.ComboItem();
-            this.comboItem4 = new DevComponents.Editors.ComboItem();
-            this.comboItem5 = new DevComponents.Editors.ComboItem();
-            this.comboItem6 = new DevComponents.Editors.ComboItem();
             this.btnMainPage = new DevComponents.DotNetBar.ButtonItem();
             this.qatCustomizeItem = new DevComponents.DotNetBar.QatCustomizeItem();
             this.styleManager = new DevComponents.DotNetBar.StyleManager();
@@ -1146,41 +1159,11 @@ namespace CMBC.EasyFactor
             // 
             this.cbStyleManager.ComboWidth = 100;
             this.cbStyleManager.DropDownHeight = 106;
-            this.cbStyleManager.Items.AddRange(new object[] {
-            this.comboItem1,
-            this.comboItem2,
-            this.comboItem3,
-            this.comboItem4,
-            this.comboItem5,
-            this.comboItem6});
+            this.cbStyleManager.Items.AddRange(new object[] { "Office2007Blue", "Office2007Silver", "Office2007Black", "Office2007VistaGlass", "Office2010Silver", "Windows7Blue" });
             this.cbStyleManager.Name = "cbStyleManager";
             this.cbStyleManager.WatermarkText = "界面风格";
             this.cbStyleManager.SelectedIndexChanged += new System.EventHandler(this.ChangeStyle);
-            // 
-            // comboItem1
-            // 
-            this.comboItem1.Text = "Office2007Blue";
-            // 
-            // comboItem2
-            // 
-            this.comboItem2.Text = "Office2007Silver";
-            // 
-            // comboItem3
-            // 
-            this.comboItem3.Text = "Office2007Black";
-            // 
-            // comboItem4
-            // 
-            this.comboItem4.Text = "Office2007VistaGlass";
-            // 
-            // comboItem5
-            // 
-            this.comboItem5.Text = "Office2010Silver";
-            // 
-            // comboItem6
-            // 
-            this.comboItem6.Text = "Windows7Blue";
-            // 
+             // 
             // btnMainPage
             // 
             this.btnMainPage.Name = "btnMainPage";
@@ -1279,19 +1262,5 @@ namespace CMBC.EasyFactor
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.ComboBoxItem cbStyleManager;
-        private DevComponents.Editors.ComboItem comboItem1;
-        private DevComponents.Editors.ComboItem comboItem2;
-        private DevComponents.Editors.ComboItem comboItem3;
-        private DevComponents.Editors.ComboItem comboItem4;
-        private DevComponents.Editors.ComboItem comboItem5;
-        private DevComponents.Editors.ComboItem comboItem6;
-        private DevComponents.DotNetBar.Ribbon.RibbonClientPanel ribbonDetailPanel;
-        private DevComponents.DotNetBar.ButtonItem btnCreditCoverNegQuery;
-        private DevComponents.DotNetBar.ButtonItem btnContractQuery;
-        private DevComponents.DotNetBar.ButtonItem btnCDAQuery;
-        private DevComponents.DotNetBar.Controls.ReflectionLabel logoLabel;
-        private DevComponents.DotNetBar.ButtonItem btnMainPage;
     }
 }

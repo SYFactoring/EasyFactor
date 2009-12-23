@@ -101,7 +101,7 @@
   </Table>
   <Table Name="dbo.CreditCoverNegotiation" Member="CreditCoverNegotiations">
     <Type Name="CreditCoverNegotiation">
-      <Column Name="NegoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NegoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CaseCode" Type="System.String" DbType="NChar(13)" CanBeNull="true" />
       <Column Name="RequestDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="ApproveDate" Storage="_ReplyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />

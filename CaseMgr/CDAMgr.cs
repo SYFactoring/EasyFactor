@@ -162,7 +162,12 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void QueryCDAs(object sender, EventArgs e)
         {
-            var queryResult = App.Current.DbContext.CDAs;
+            var queryResult = App.Current.DbContext.CDAs.Where(c =>
+                (c.Case.SellerClient.Contracts.Where(contract => contract.ContractStatus == "已生效").SingleOrDefault().ContractCode.Contains(this.tbContractCode.Text))
+                && (c.Case.SellerClient.ClientNameCN.Contains(this.tbSellerName.Text) || c.Case.SellerClient.ClientNameEN_1.Contains(this.tbSellerName.Text) || c.Case.SellerClient.ClientNameEN_2.Contains(this.tbSellerName.Text))
+                && (c.Case.BuyerClient.ClientNameCN.Contains(this.tbSellerName.Text) || c.Case.BuyerClient.ClientNameEN_1.Contains(this.tbSellerName.Text) || c.Case.BuyerClient.ClientNameEN_2.Contains(this.tbSellerName.Text))
+                );
+
             this.bs.DataSource = queryResult;
             this.dgvCDAs.DataSource = bs;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());

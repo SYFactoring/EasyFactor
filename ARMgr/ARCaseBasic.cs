@@ -10,27 +10,49 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
 
+    ///
     public partial class ARCaseBasic : UserControl
     {
-        #region Fields (1)
+		#region Fields (1) 
 
+        /// <summary>
+        /// 
+        /// </summary>
         private Case curCase;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
+        /// <summary>
+        /// 
+        /// </summary>
         public enum OpARType
         {
+            /// <summary>
+            /// 
+            /// </summary>
             InvoiceAssign,
+
+            /// <summary>
+            /// 
+            /// </summary>
             InvoiceFinance,
+
+            /// <summary>
+            /// 
+            /// </summary>
             InvoicePayment
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (1)
+		#region Constructors (1) 
 
+/// <summary>
+        /// 
+        /// </summary>
+        /// <param name="opARType"></param>
         public ARCaseBasic(OpARType opARType)
         {
             InitializeComponent();
@@ -54,36 +76,51 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (3)
+		#region Methods (3) 
 
-        // Private Methods (3) 
+		// Private Methods (3) 
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void FillCaseBasic()
         {
-            this.ownerDepartmentCodeTextBox.Text = curCase.OwnerDepartment.ToString();
+            this.ownerDepartmentCodeTextBox.Text = curCase.OwnerDepartment == null ? string.Empty : curCase.OwnerDepartment.ToString();
             this.transactionTypeTextBox.Text = curCase.TransactionType;
             this.invoiceCurrencyTextBox.Text = curCase.InvoiceCurrency;
             this.sellerEDICodeTextBox.Text = curCase.SellerCode;
-            this.sellerNameTextBox.Text = curCase.SellerClient.ToString();
+            this.sellerNameTextBox.Text = curCase.SellerClient == null ? string.Empty : curCase.SellerClient.ToString();
             this.buyerEDICodeTextBox.Text = curCase.BuyerCode;
-            this.buyerNameTextBox.Text = curCase.BuyerClient.ToString();
+            this.buyerNameTextBox.Text = curCase.BuyerClient == null ? string.Empty : curCase.BuyerClient.ToString();
             if ("国内卖方保理".Equals(curCase.TransactionType) || "出口保理".Equals(curCase.TransactionType) || "国际信保保理".Equals(curCase.TransactionType) || "国内信保保理".Equals(curCase.TransactionType))
             {
-                this.factorCodeTextBox.Text = curCase.SellerFactor.FactorCode;
-                this.factorNameTextBox.Text = curCase.SellerFactor.ToString();
-                this.PMTextBox.Text = curCase.SellerClient.PMName;
-                this.RMTextBox.Text = curCase.SellerClient.RMName;
+                if (curCase.SellerFactor != null)
+                {
+                    this.factorCodeTextBox.Text = curCase.SellerFactor.FactorCode;
+                    this.factorNameTextBox.Text = curCase.SellerFactor.ToString();
+                }
+                if (curCase.SellerClient != null)
+                {
+                    this.PMTextBox.Text = curCase.SellerClient.PMName;
+                    this.RMTextBox.Text = curCase.SellerClient.RMName;
+                }
             }
             else
             {
-                this.factorCodeTextBox.Text = curCase.BuyerFactor.FactorCode;
-                this.factorNameTextBox.Text = curCase.BuyerFactor.ToString();
-                this.PMTextBox.Text = curCase.BuyerClient.PMName;
-                this.RMTextBox.Text = curCase.BuyerClient.RMName;
+                if (curCase.BuyerFactor != null)
+                {
+                    this.factorCodeTextBox.Text = curCase.BuyerFactor.FactorCode;
+                    this.factorNameTextBox.Text = curCase.BuyerFactor.ToString();
+                }
+                if (curCase.BuyerClient != null)
+                {
+                    this.PMTextBox.Text = curCase.BuyerClient.PMName;
+                    this.RMTextBox.Text = curCase.BuyerClient.RMName;
+                }
             }
-   
+
             CDA cda = curCase.CDAs.SingleOrDefault(c => c.CDAStatus == "已生效");
             if (cda != null)
             {
@@ -102,6 +139,9 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void ResetInvoiceControlStatus()
         {
             this.isNoticeCheckBox.Checked = false;
@@ -114,6 +154,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectCase(object sender, EventArgs e)
         {
             CaseMgr caseMgr = new CaseMgr(false);
@@ -128,6 +173,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

@@ -2,10 +2,109 @@
 {
     partial class FactorDetail
     {
+		#region Fields (96) 
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn approveNoDataGridViewTextBoxColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX approveNoTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx approveTypeComboBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn approveTypeDataGridViewTextBoxColumn;
+        private DevComponents.DotNetBar.ButtonX btnFactorClose;
+        private DevComponents.DotNetBar.ButtonX btnFactorCreditLineDelete;
+        private DevComponents.DotNetBar.ButtonX btnFactorCreditLineFreeze;
+        private DevComponents.DotNetBar.ButtonX btnFactorCreditLineNew;
+        private DevComponents.DotNetBar.ButtonX btnFactorCreditLineRefresh;
+        private DevComponents.DotNetBar.ButtonX btnFactorCreditLineSave;
+        private DevComponents.DotNetBar.ButtonX btnFactorCreditLineUnfreeze;
+        private DevComponents.DotNetBar.ButtonX btnFactorCreditLineUpdate;
+        private DevComponents.DotNetBar.ButtonX btnFactorSave;
+        private DevComponents.DotNetBar.ButtonX btnFactorUpdate;
+        private DevComponents.DotNetBar.Controls.TextBoxX cityPostTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX cityVisitingTextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX companyNameCNTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX companyNameENTextBox;
+        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx countryNameComboBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx creditLineCurrencyComboBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn creditLineCurrencyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn creditLineDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn creditLineIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn creditLineStatusDataGridViewTextBoxColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX creditLineStatusTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX creditLineTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX dateOfLatestRevisionTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX departmentTextBox;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvFactorCreditLines;
+        private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.BindingSource factorBindingSource;
+        private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
+        private System.Windows.Forms.BindingSource factorCreditLineBindingSource;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx factorTypeComboBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn freezeDateDataGridViewTextBoxColumn;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput freezeDateDateTimePicker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn freezerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn freezeReasonDataGridViewTextBoxColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX freezeReasonTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX freezerTextBox;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelBasic;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelContacts;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCreditLineDetail;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelMembership;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
+        private DevComponents.DotNetBar.Controls.TextBoxX iFISAvailableOnPrivateForumTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX membershipDateTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX membershipStatusTextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn periodBeginDataGridViewTextBoxColumn;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput periodBeginDateTimePicker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn periodEndDataGridViewTextBoxColumn;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput periodEndDateTimePicker;
+        private DevComponents.DotNetBar.Controls.TextBoxX postalAddress_1TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX postalAddress_2TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX postalCodePostTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX postalCodeVisitingTextBox;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private DevComponents.DotNetBar.TabControl tabControl;
+        private DevComponents.DotNetBar.TabItem tabItemFactor;
+        private DevComponents.DotNetBar.TabItem tabItemFactorAccount;
+        private DevComponents.DotNetBar.TabItem tabItemFactorCreditLine;
+        private DevComponents.DotNetBar.TabControlPanel tabPanelAccount;
+        private DevComponents.DotNetBar.TabControlPanel tabPanelCreditLine;
+        private DevComponents.DotNetBar.TabControlPanel tabPanelFactor;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbContacts1;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbContacts2;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbContacts3;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbContacts4;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbGeneralCorrespondence1;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbGeneralCorrespondence2;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbManagement1;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbManagement2;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbShareholders;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbWorkingHours;
+        private DevComponents.DotNetBar.Controls.TextBoxX telefax_1TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX telefax_2TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX telephone_1TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX telephone_2TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unfreezeDateDataGridViewTextBoxColumn;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput unfreezeDateDateTimePicker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unfreezerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unfreezeReasonDataGridViewTextBoxColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX unfreezeReasonTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX unfreezerTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX visitingAddress_1TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX visitingAddress_2TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX webSiteTextBox;
+
+		#endregion Fields 
+
+		#region Methods (1) 
+
+		// Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -19,6 +118,10 @@
             }
             base.Dispose(disposing);
         }
+
+		#endregion Methods 
+
+
 
         #region Component Designer generated code
 
@@ -67,6 +170,7 @@
             DevComponents.DotNetBar.LabelX unfreezerLabel;
             DevComponents.DotNetBar.LabelX unfreezeDateLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FactorDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelCreditLine = new DevComponents.DotNetBar.TabControlPanel();
@@ -110,6 +214,8 @@
             this.creditLineTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditLineCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tabItemFactorCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabPanelAccount = new DevComponents.DotNetBar.TabControlPanel();
+            this.tabItemFactorAccount = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelFactor = new DevComponents.DotNetBar.TabControlPanel();
             this.btnFactorUpdate = new DevComponents.DotNetBar.ButtonX();
             this.btnFactorClose = new DevComponents.DotNetBar.ButtonX();
@@ -152,17 +258,11 @@
             this.factorCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.countryNameComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.factorTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem1 = new DevComponents.Editors.ComboItem();
-            this.comboItem2 = new DevComponents.Editors.ComboItem();
-            this.comboItem3 = new DevComponents.Editors.ComboItem();
-            this.comboItem4 = new DevComponents.Editors.ComboItem();
             this.tabItemFactor = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelAccount = new DevComponents.DotNetBar.TabControlPanel();
-            this.tabItemFactorAccount = new DevComponents.DotNetBar.TabItem(this.components);
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
             factorTypeLabel = new DevComponents.DotNetBar.LabelX();
             countryNameLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -769,8 +869,8 @@
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
             this.tabControl.Controls.Add(this.tabPanelCreditLine);
-            this.tabControl.Controls.Add(this.tabPanelAccount);
             this.tabControl.Controls.Add(this.tabPanelFactor);
+            this.tabControl.Controls.Add(this.tabPanelAccount);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -806,7 +906,19 @@
             // 
             // dgvFactorCreditLines
             // 
+            this.dgvFactorCreditLines.AllowUserToAddRows = false;
+            this.dgvFactorCreditLines.AllowUserToDeleteRows = false;
+            this.dgvFactorCreditLines.AllowUserToOrderColumns = true;
             this.dgvFactorCreditLines.AutoGenerateColumns = false;
+            this.dgvFactorCreditLines.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactorCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvFactorCreditLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFactorCreditLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.creditLineIDDataGridViewTextBoxColumn,
@@ -825,18 +937,19 @@
             this.unfreezeDateDataGridViewTextBoxColumn,
             this.commentDataGridViewTextBoxColumn});
             this.dgvFactorCreditLines.DataSource = this.factorCreditLineBindingSource;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactorCreditLines.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactorCreditLines.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvFactorCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFactorCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvFactorCreditLines.Location = new System.Drawing.Point(1, 297);
             this.dgvFactorCreditLines.Name = "dgvFactorCreditLines";
+            this.dgvFactorCreditLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvFactorCreditLines.Size = new System.Drawing.Size(593, 279);
             this.dgvFactorCreditLines.TabIndex = 0;
             this.dgvFactorCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectFactorCreditLine);
@@ -1361,6 +1474,29 @@
             this.tabItemFactorCreditLine.AttachedControl = this.tabPanelCreditLine;
             this.tabItemFactorCreditLine.Name = "tabItemFactorCreditLine";
             this.tabItemFactorCreditLine.Text = "额度信息";
+            // 
+            // tabPanelAccount
+            // 
+            this.tabPanelAccount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelAccount.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelAccount.Name = "tabPanelAccount";
+            this.tabPanelAccount.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelAccount.Size = new System.Drawing.Size(595, 577);
+            this.tabPanelAccount.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelAccount.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelAccount.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelAccount.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelAccount.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelAccount.Style.GradientAngle = 90;
+            this.tabPanelAccount.TabIndex = 3;
+            this.tabPanelAccount.TabItem = this.tabItemFactorAccount;
+            // 
+            // tabItemFactorAccount
+            // 
+            this.tabItemFactorAccount.AttachedControl = this.tabPanelAccount;
+            this.tabItemFactorAccount.Name = "tabItemFactorAccount";
+            this.tabItemFactorAccount.Text = "账户信息";
             // 
             // tabPanelFactor
             // 
@@ -2020,10 +2156,10 @@
             this.factorTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.factorTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.factorTypeComboBox.Items.AddRange(new object[] {
-            this.comboItem1,
-            this.comboItem2,
-            this.comboItem3,
-            this.comboItem4});
+            "保理商",
+            "保险公司",
+            "监管机构",
+            "代付行"});
             this.factorTypeComboBox.Location = new System.Drawing.Point(82, 7);
             this.factorTypeComboBox.MaxDropDownItems = 4;
             this.factorTypeComboBox.Name = "factorTypeComboBox";
@@ -2031,56 +2167,25 @@
             this.factorTypeComboBox.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.factorTypeComboBox.TabIndex = 1;
             // 
-            // comboItem1
-            // 
-            this.comboItem1.Text = "保理商";
-            // 
-            // comboItem2
-            // 
-            this.comboItem2.Text = "保险公司";
-            // 
-            // comboItem3
-            // 
-            this.comboItem3.Text = "监管机构";
-            // 
-            // comboItem4
-            // 
-            this.comboItem4.Text = "代付行";
-            // 
             // tabItemFactor
             // 
             this.tabItemFactor.AttachedControl = this.tabPanelFactor;
             this.tabItemFactor.Name = "tabItemFactor";
             this.tabItemFactor.Text = "基本信息";
             // 
-            // tabPanelAccount
-            // 
-            this.tabPanelAccount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelAccount.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelAccount.Name = "tabPanelAccount";
-            this.tabPanelAccount.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelAccount.Size = new System.Drawing.Size(595, 577);
-            this.tabPanelAccount.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelAccount.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelAccount.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelAccount.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelAccount.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelAccount.Style.GradientAngle = 90;
-            this.tabPanelAccount.TabIndex = 3;
-            this.tabPanelAccount.TabItem = this.tabItemFactorAccount;
-            // 
-            // tabItemFactorAccount
-            // 
-            this.tabItemFactorAccount.AttachedControl = this.tabPanelAccount;
-            this.tabItemFactorAccount.Name = "tabItemFactorAccount";
-            this.tabItemFactorAccount.Text = "账户信息";
-            // 
             // superValidator
             // 
             this.superValidator.ContainerControl = this;
             this.superValidator.ErrorProvider = this.errorProvider;
             this.superValidator.Highlighter = this.highlighter;
+            // 
+            // compareValidator1
+            // 
+            this.compareValidator1.ControlToCompare = this.periodBeginDateTimePicker;
+            this.compareValidator1.ErrorMessage = "到期日应该大于起始日";
+            this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
+            this.compareValidator1.ValuePropertyName = "Value";
             // 
             // errorProvider
             // 
@@ -2090,14 +2195,6 @@
             // highlighter
             // 
             this.highlighter.ContainerControl = this;
-            // 
-            // compareValidator1
-            // 
-            this.compareValidator1.ControlToCompare = this.periodBeginDateTimePicker;
-            this.compareValidator1.ErrorMessage = "到期日应该大于起始日";
-            this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
-            this.compareValidator1.ValuePropertyName = "Value";
             // 
             // FactorDetail
             // 
@@ -2135,101 +2232,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.TabControl tabControl;
-        private DevComponents.DotNetBar.TabControlPanel tabPanelFactor;
-        private DevComponents.DotNetBar.TabItem tabItemFactor;
-        private DevComponents.DotNetBar.TabControlPanel tabPanelCreditLine;
-        private DevComponents.DotNetBar.TabItem tabItemFactorCreditLine;
-        private DevComponents.DotNetBar.TabControlPanel tabPanelAccount;
-        private DevComponents.DotNetBar.TabItem tabItemFactorAccount;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelMembership;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelBasic;
-        private DevComponents.DotNetBar.Controls.TextBoxX cityVisitingTextBox;
-        private System.Windows.Forms.BindingSource factorBindingSource;
-        private DevComponents.DotNetBar.Controls.TextBoxX postalCodeVisitingTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX visitingAddress_2TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX visitingAddress_1TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX cityPostTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX postalCodePostTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX postalAddress_2TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX postalAddress_1TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX departmentTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX companyNameENTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx countryNameComboBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx factorTypeComboBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX telefax_2TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX telefax_1TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX telephone_2TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX telephone_1TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX webSiteTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX dateOfLatestRevisionTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX membershipDateTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX membershipStatusTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX iFISAvailableOnPrivateForumTextBox;
-        private DevComponents.DotNetBar.ButtonX btnFactorClose;
-        private DevComponents.DotNetBar.ButtonX btnFactorSave;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelContacts;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbShareholders;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbManagement2;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbManagement1;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbContacts4;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbContacts3;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbContacts2;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbContacts1;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbGeneralCorrespondence2;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbGeneralCorrespondence1;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbWorkingHours;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCreditLineDetail;
-        private DevComponents.DotNetBar.Controls.TextBoxX creditLineTextBox;
-        private System.Windows.Forms.BindingSource factorCreditLineBindingSource;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx creditLineCurrencyComboBox;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput periodEndDateTimePicker;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput periodBeginDateTimePicker;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx approveTypeComboBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX approveNoTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX creditLineStatusTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput unfreezeDateDateTimePicker;
-        private DevComponents.DotNetBar.Controls.TextBoxX unfreezerTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX unfreezeReasonTextBox;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput freezeDateDateTimePicker;
-        private DevComponents.DotNetBar.Controls.TextBoxX freezerTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX freezeReasonTextBox;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvFactorCreditLines;
-        private DevComponents.DotNetBar.ButtonX btnFactorCreditLineUnfreeze;
-        private DevComponents.DotNetBar.ButtonX btnFactorCreditLineFreeze;
-        private DevComponents.DotNetBar.ButtonX btnFactorCreditLineDelete;
-        private DevComponents.DotNetBar.ButtonX btnFactorCreditLineSave;
-        private DevComponents.DotNetBar.ButtonX btnFactorCreditLineNew;
-        private System.Windows.Forms.DataGridViewTextBoxColumn creditLineIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn creditLineCurrencyDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn creditLineDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn periodBeginDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn periodEndDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn approveNoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn approveTypeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn creditLineStatusDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn freezeReasonDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn freezerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn freezeDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unfreezeReasonDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unfreezerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unfreezeDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
-        private DevComponents.Editors.ComboItem comboItem1;
-        private DevComponents.Editors.ComboItem comboItem2;
-        private DevComponents.Editors.ComboItem comboItem3;
-        private DevComponents.Editors.ComboItem comboItem4;
-        private DevComponents.DotNetBar.ButtonX btnFactorCreditLineUpdate;
-        private DevComponents.DotNetBar.ButtonX btnFactorCreditLineRefresh;
-        private DevComponents.DotNetBar.ButtonX btnFactorUpdate;
-        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
-        private System.Windows.Forms.ErrorProvider errorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private DevComponents.DotNetBar.Controls.TextBoxX companyNameCNTextBox;
-        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
     }
 }

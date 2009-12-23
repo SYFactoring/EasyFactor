@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="UserDetailUI.cs" company="CISL@Fudan">
+// <copyright file="UserDetailUI.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -16,11 +16,16 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     /// </summary>
     public partial class UserDetail : DevComponents.DotNetBar.Office2007Form
     {
+        #region Fields (1)
 
         /// <summary>
         /// 
         /// </summary>
         private OpUserType opUserType;
+
+        #endregion Fields
+
+        #region Enums (1)
 
         /// <summary>
         /// Operation Type
@@ -43,6 +48,10 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             DETAIL_USER
         }
 
+        #endregion Enums
+
+        #region Constructors (1)
+
         /// <summary>
         /// Initializes a new instance of the UserDetailUI class
         /// </summary>
@@ -63,6 +72,12 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             }
             this.UpdateUserControlStatus();
         }
+
+        #endregion Constructors
+
+        #region Methods (5)
+
+        // Private Methods (5) 
 
         /// <summary>
         /// Update Editable Status
@@ -89,9 +104,29 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
-                 userIDTextBox.ReadOnly = true;
+                userIDTextBox.ReadOnly = true;
             }
             this.loginDate.ReadOnly = true;
+        }
+
+        /// <summary>
+        /// Cancel current editing and close the form
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void UserClose(object sender, EventArgs e)
+        {
+            User user = (User)this.userBindingSource.DataSource;
+            if (opUserType == OpUserType.UPDATE_USER)
+            {
+                user.Restore();
+            }
+            Close();
+        }
+
+        private void UserDetail_Leave(object sender, EventArgs e)
+        {
+            this.UserClose(sender, e);
         }
 
         /// <summary>
@@ -144,30 +179,12 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             }
         }
 
-        /// <summary>
-        /// Cancel current editing and close the form
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void UserClose(object sender, EventArgs e)
-        {
-            User user = (User)this.userBindingSource.DataSource;
-            if (opUserType == OpUserType.UPDATE_USER)
-            {
-                user.Restore();
-            }
-            Close();
-        }
-
         private void UserUpdate(object sender, EventArgs e)
         {
             opUserType = OpUserType.UPDATE_USER;
             UpdateUserControlStatus();
         }
 
-        private void UserDetail_Leave(object sender, EventArgs e)
-        {
-            this.UserClose(sender, e);
-        }
+        #endregion Methods
     }
 }

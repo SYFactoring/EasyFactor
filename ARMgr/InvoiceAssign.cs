@@ -129,5 +129,6 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
+
     }
 }

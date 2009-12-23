@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="AboutBox.cs" company="CISL@Fudan">
+// <copyright file="AboutBox.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -15,6 +15,8 @@ namespace CMBC.EasyFactor.Help.About
     /// </summary>
     public partial class AboutBox : DevComponents.DotNetBar.Office2007Form
     {
+        #region Constructors (1)
+
         /// <summary>
         /// Initializes a new instance of the AboutBox class
         /// </summary>
@@ -28,6 +30,26 @@ namespace CMBC.EasyFactor.Help.About
             this.labelCompanyName.Text = this.AssemblyCompany;
             this.textBoxDescription.Text = this.AssemblyDescription;
         }
+
+        #endregion Constructors
+
+        #region Methods (1)
+
+        // Private Methods (1) 
+
+        /// <summary>
+        /// Close the dialog
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void ButtonClick(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        #endregion Methods
+
+
 
         #region 程序集属性访问器
 
@@ -131,15 +153,5 @@ namespace CMBC.EasyFactor.Help.About
             }
         }
         #endregion
-
-        /// <summary>
-        /// Close the dialog
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void ButtonClick(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }

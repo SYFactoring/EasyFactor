@@ -18,16 +18,6 @@
         private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
         private System.Windows.Forms.DataGridViewTextBoxColumn CoDeptCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CoDeptColumn;
-        private DevComponents.Editors.ComboItem comboItem1;
-        private DevComponents.Editors.ComboItem comboItem10;
-        private DevComponents.Editors.ComboItem comboItem2;
-        private DevComponents.Editors.ComboItem comboItem3;
-        private DevComponents.Editors.ComboItem comboItem4;
-        private DevComponents.Editors.ComboItem comboItem5;
-        private DevComponents.Editors.ComboItem comboItem6;
-        private DevComponents.Editors.ComboItem comboItem7;
-        private DevComponents.Editors.ComboItem comboItem8;
-        private DevComponents.Editors.ComboItem comboItem9;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -106,16 +96,8 @@
             this.lblDate = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.cbCurrency = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem5 = new DevComponents.Editors.ComboItem();
-            this.comboItem6 = new DevComponents.Editors.ComboItem();
-            this.comboItem7 = new DevComponents.Editors.ComboItem();
-            this.comboItem8 = new DevComponents.Editors.ComboItem();
             this.lblCurrency = new DevComponents.DotNetBar.LabelX();
             this.cbTransactionType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem1 = new DevComponents.Editors.ComboItem();
-            this.comboItem2 = new DevComponents.Editors.ComboItem();
-            this.comboItem3 = new DevComponents.Editors.ComboItem();
-            this.comboItem4 = new DevComponents.Editors.ComboItem();
             this.lblTransactionType = new DevComponents.DotNetBar.LabelX();
             this.diEnd = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.diBegin = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -149,8 +131,6 @@
             this.menuItemCaseUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.comboItem9 = new DevComponents.Editors.ComboItem();
-            this.comboItem10 = new DevComponents.Editors.ComboItem();
             this.panelCaseQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -280,31 +260,12 @@
             this.cbCurrency.FormattingEnabled = true;
             this.cbCurrency.ItemHeight = 14;
             this.cbCurrency.Items.AddRange(new object[] {
-            this.comboItem5,
-            this.comboItem6,
-            this.comboItem7,
-            this.comboItem8});
+            "国内保理","出口保理","进口","信保保理"});
             this.cbCurrency.Location = new System.Drawing.Point(254, 28);
             this.cbCurrency.Name = "cbCurrency";
             this.cbCurrency.Size = new System.Drawing.Size(133, 20);
             this.cbCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbCurrency.TabIndex = 7;
-            // 
-            // comboItem5
-            // 
-            this.comboItem5.Text = "国内保理";
-            // 
-            // comboItem6
-            // 
-            this.comboItem6.Text = "出口保理";
-            // 
-            // comboItem7
-            // 
-            this.comboItem7.Text = "进口保理";
-            // 
-            // comboItem8
-            // 
-            this.comboItem8.Text = "信保保理";
             // 
             // lblCurrency
             // 
@@ -325,33 +286,12 @@
             this.cbTransactionType.FormattingEnabled = true;
             this.cbTransactionType.ItemHeight = 14;
             this.cbTransactionType.Items.AddRange(new object[] {
-            this.comboItem1,
-            this.comboItem9,
-            this.comboItem2,
-            this.comboItem3,
-            this.comboItem4,
-            this.comboItem10});
+            "国内卖方保理","出口保理","进口保理","国际信保保理"});
             this.cbTransactionType.Location = new System.Drawing.Point(59, 29);
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
             this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbTransactionType.TabIndex = 5;
-            // 
-            // comboItem1
-            // 
-            this.comboItem1.Text = "国内卖方保理";
-            // 
-            // comboItem2
-            // 
-            this.comboItem2.Text = "出口保理";
-            // 
-            // comboItem3
-            // 
-            this.comboItem3.Text = "进口保理";
-            // 
-            // comboItem4
-            // 
-            this.comboItem4.Text = "国际信保保理";
             // 
             // lblTransactionType
             // 
@@ -753,14 +693,6 @@
             this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
             this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
             this.menuItemCreditCoverNegNew.Text = "新建额度申请";
-            // 
-            // comboItem9
-            // 
-            this.comboItem9.Text = "国内买方保理";
-            // 
-            // comboItem10
-            // 
-            this.comboItem10.Text = "国内信保保理";
             // 
             // CaseMgr
             // 

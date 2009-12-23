@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="FactorMgrUI.cs" company="CISL@Fudan">
+// <copyright file="FactorMgrUI.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -22,15 +22,20 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// </summary>
     public partial class FactorMgr : UserControl
     {
-        /// <summary>
-        /// flag indicates if is editable
-        /// </summary>
-        private readonly bool isEditable;
+		#region Fields (2) 
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs = new BindingSource();
+        /// <summary>
+        /// flag indicates if is editable
+        /// </summary>
+        private readonly bool isEditable;
+
+		#endregion Fields 
+
+		#region Constructors (1) 
 
         /// <summary>
         /// Initializes a new instance of the FactorMgrUI class
@@ -47,6 +52,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.cbCountry.DisplayMember = "CountryFormatEN";
             this.cbCountry.ValueMember = "CountryNameEN";
         }
+
+		#endregion Constructors 
+
+		#region Properties (2) 
 
         /// <summary>
         /// Gets or sets onwer form
@@ -66,169 +75,26 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             set;
         }
 
+		#endregion Properties 
+
+		#region Methods (11) 
+
+		// Private Methods (11) 
+
         /// <summary>
-        /// update editable status
+        /// Event handler when cell double clicked
         /// </summary>
-        private void UpdateEditableStatus()
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (isEditable)
+            if (this.OwnerForm == null)
             {
-                this.menuItemFactorNew.Enabled = true;
-                this.menuItemFactorCreditLineNew.Enabled = true;
-                this.menuItemFactorUpdate.Enabled = true;
-                this.menuItemFactorDelete.Enabled = true;
-                this.menuItemFactorImport.Enabled = true;
+                this.DetailFactor(sender, e);
             }
             else
             {
-                this.menuItemFactorNew.Enabled = false;
-                this.menuItemFactorCreditLineNew.Enabled = false;
-                this.menuItemFactorUpdate.Enabled = false;
-                this.menuItemFactorDelete.Enabled = false;
-                this.menuItemFactorImport.Enabled = false;
-            }
-        }
-
-        /// <summary>
-        /// Query according the condition
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void QueryFactors(object sender, EventArgs e)
-        {
-            string factorType = string.Empty;
-            if (cbFactorType.SelectedIndex >= 0)
-            {
-                factorType = cbFactorType.Items[cbFactorType.SelectedIndex].ToString();
-                if ("全部".Equals(factorType))
-                {
-                    factorType = string.Empty;
-                }
-            }
-            string country = string.Empty;
-            if (cbCountry.SelectedIndex >= 0)
-            {
-                country = (string)cbCountry.SelectedValue;
-                if ("All".Equals(country))
-                {
-                    country = string.Empty;
-                }
-            }
-
-            var queryResult = App.Current.DbContext.Factors.Where(f =>
-                                                   ((f.FactorCode == null ? string.Empty : f.FactorCode).Contains(tbFactorCode.Text))
-                                                && ((f.CompanyNameCN == null ? string.Empty : f.CompanyNameCN).Contains(tbFactorName.Text) || (f.CompanyNameEN == null ? string.Empty : f.CompanyNameEN).Contains(tbFactorName.Text))
-                                                && (f.FactorType.Contains(cbFactorType.Text))
-                                                && ((f.CountryName == null ? string.Empty : f.CountryName).Contains(country)));
-
-            bs.DataSource = queryResult;
-            dgvFactors.DataSource = bs;
-            lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-        }
-
-        /// <summary>
-        /// Set current selected factor to be selected
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void SelectFactor(object sender, EventArgs e)
-        {
-            if (this.dgvFactors.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
-            if (factorCode != null)
-            {
-                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                if (selectedFactor != null)
-                {
-                    this.Selected = selectedFactor;
-                    if (this.OwnerForm != null)
-                    {
-                        this.OwnerForm.DialogResult = DialogResult.Yes;
-                        this.OwnerForm.Close();
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Show detail info about current selected factor
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void DetailFactor(object sender, EventArgs e)
-        {
-            if (this.dgvFactors.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
-            if (factorCode != null)
-            {
-                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                if (selectedFactor != null)
-                {
-                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorType.DETAIL_FACTOR);
-                    factorDetail.ShowDialog(this);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Create a new factor
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void NewFactor(object sender, EventArgs e)
-        {
-            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
-            factorDetail.ShowDialog(this);
-        }
-
-        private void NewFactorCreditLine(object sender, System.EventArgs e)
-        {
-            if (this.dgvFactors.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string factorCode = (string)this.dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
-            if (factorCode != null)
-            {
-                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                if (selectedFactor != null)
-                {
-                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE);
-                    factorDetail.ShowDialog(this);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Update current selected factor
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void UpdateFactor(object sender, EventArgs e)
-        {
-            if (this.dgvFactors.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string factorCode = (string)this.dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
-            if (factorCode != null)
-            {
-                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                if (selectedFactor != null)
-                {
-                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorType.UPDATE_FACTOR);
-                    factorDetail.ShowDialog(this);
-                }
+                this.SelectFactor(sender, e);
             }
         }
 
@@ -269,37 +135,26 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         }
 
         /// <summary>
-        /// Event handler when cell double clicked
+        /// Show detail info about current selected factor
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DetailFactor(object sender, EventArgs e)
         {
-            if (this.OwnerForm == null)
+            if (this.dgvFactors.SelectedRows.Count == 0)
             {
-                this.DetailFactor(sender, e);
+                return;
             }
-            else
+
+            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
+            if (factorCode != null)
             {
-                this.SelectFactor(sender, e);
-            }
-        }
-
-        /// <summary>
-        /// Popup a openfile dialog and select the import factor file.
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void ImportFactos(object sender, EventArgs e)
-        {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string fileName = fileDialog.FileName;
-                Thread t = new Thread(ImportFactorsImpl);
-
-                t.Start(fileName);
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                if (selectedFactor != null)
+                {
+                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorType.DETAIL_FACTOR);
+                    factorDetail.ShowDialog(this);
+                }
             }
         }
 
@@ -429,5 +284,167 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
             app.Quit();
         }
+
+        /// <summary>
+        /// Popup a openfile dialog and select the import factor file.
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void ImportFactos(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = fileDialog.FileName;
+                Thread t = new Thread(ImportFactorsImpl);
+
+                t.Start(fileName);
+            }
+        }
+
+        /// <summary>
+        /// Create a new factor
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void NewFactor(object sender, EventArgs e)
+        {
+            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
+            factorDetail.ShowDialog(this);
+        }
+
+        private void NewFactorCreditLine(object sender, System.EventArgs e)
+        {
+            if (this.dgvFactors.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string factorCode = (string)this.dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
+            if (factorCode != null)
+            {
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                if (selectedFactor != null)
+                {
+                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE);
+                    factorDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Query according the condition
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void QueryFactors(object sender, EventArgs e)
+        {
+            string factorType = string.Empty;
+            if (cbFactorType.SelectedIndex >= 0)
+            {
+                factorType = cbFactorType.Items[cbFactorType.SelectedIndex].ToString();
+                if ("全部".Equals(factorType))
+                {
+                    factorType = string.Empty;
+                }
+            }
+            string country = string.Empty;
+            if (cbCountry.SelectedIndex >= 0)
+            {
+                country = (string)cbCountry.SelectedValue;
+                if ("All".Equals(country))
+                {
+                    country = string.Empty;
+                }
+            }
+
+            var queryResult = App.Current.DbContext.Factors.Where(f =>
+                                                   ((f.FactorCode == null ? string.Empty : f.FactorCode).Contains(tbFactorCode.Text))
+                                                && ((f.CompanyNameCN == null ? string.Empty : f.CompanyNameCN).Contains(tbFactorName.Text) || (f.CompanyNameEN == null ? string.Empty : f.CompanyNameEN).Contains(tbFactorName.Text))
+                                                && (f.FactorType.Contains(cbFactorType.Text))
+                                                && ((f.CountryName == null ? string.Empty : f.CountryName).Contains(country)));
+
+            bs.DataSource = queryResult;
+            dgvFactors.DataSource = bs;
+            lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+        }
+
+        /// <summary>
+        /// Set current selected factor to be selected
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void SelectFactor(object sender, EventArgs e)
+        {
+            if (this.dgvFactors.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string factorCode = (string)dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
+            if (factorCode != null)
+            {
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                if (selectedFactor != null)
+                {
+                    this.Selected = selectedFactor;
+                    if (this.OwnerForm != null)
+                    {
+                        this.OwnerForm.DialogResult = DialogResult.Yes;
+                        this.OwnerForm.Close();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// update editable status
+        /// </summary>
+        private void UpdateEditableStatus()
+        {
+            if (isEditable)
+            {
+                this.menuItemFactorNew.Enabled = true;
+                this.menuItemFactorCreditLineNew.Enabled = true;
+                this.menuItemFactorUpdate.Enabled = true;
+                this.menuItemFactorDelete.Enabled = true;
+                this.menuItemFactorImport.Enabled = true;
+            }
+            else
+            {
+                this.menuItemFactorNew.Enabled = false;
+                this.menuItemFactorCreditLineNew.Enabled = false;
+                this.menuItemFactorUpdate.Enabled = false;
+                this.menuItemFactorDelete.Enabled = false;
+                this.menuItemFactorImport.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Update current selected factor
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void UpdateFactor(object sender, EventArgs e)
+        {
+            if (this.dgvFactors.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string factorCode = (string)this.dgvFactors["factorCodeColumn", dgvFactors.SelectedRows[0].Index].Value;
+            if (factorCode != null)
+            {
+                Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                if (selectedFactor != null)
+                {
+                    FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorType.UPDATE_FACTOR);
+                    factorDetail.ShowDialog(this);
+                }
+            }
+        }
+
+		#endregion Methods 
     }
 }

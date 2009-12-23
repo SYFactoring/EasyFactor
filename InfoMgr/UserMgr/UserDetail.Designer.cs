@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="UserDetailUI.Designer.cs" company="CISL@Fudan">
+// <copyright file="UserDetailUI.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -11,19 +11,36 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     /// </summary>
     public partial class UserDetail
     {
+        #region Fields (19)
+
+        private DevComponents.DotNetBar.ButtonX btnUserClose;
+        private DevComponents.DotNetBar.ButtonX btnUserSave;
+        private DevComponents.DotNetBar.ButtonX btnUserUpdate;
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.BindingSource userBindingSource;
+        private DevComponents.DotNetBar.Controls.TextBoxX eDIAccountTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelUser;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private DevComponents.DotNetBar.Controls.TextBoxX loginDate;
         private DevComponents.DotNetBar.Controls.TextBoxX msnTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX nameTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX passwordTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX phoneTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx roleComboBox;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
         private DevComponents.DotNetBar.Controls.TextBoxX telphoneTextBox;
+        private System.Windows.Forms.BindingSource userBindingSource;
         private DevComponents.DotNetBar.Controls.TextBoxX userIDTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX nameTextBox;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -34,10 +51,14 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             if (disposing && (this.components != null))
             {
                 this.components.Dispose();
-            } 
+            }
 
             base.Dispose(disposing);
         }
+
+        #endregion Methods
+
+
 
         #region Windows Form Designer generated code
 
@@ -496,17 +517,5 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.ButtonX btnUserSave;
-        private DevComponents.DotNetBar.ButtonX btnUserClose;
-        private DevComponents.DotNetBar.Controls.TextBoxX eDIAccountTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx roleComboBox;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelUser;
-        private DevComponents.DotNetBar.ButtonX btnUserUpdate;
-        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
-        private System.Windows.Forms.ErrorProvider errorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-
-
     }
 }

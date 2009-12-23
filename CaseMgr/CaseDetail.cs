@@ -94,11 +94,11 @@ namespace CMBC.EasyFactor.CaseMgr
             string[] transactionList = new string[] { "国内保理", "出口保理", "进口保理", "信保保理" };
             this.cbCaseTransactionType.DataSource = transactionList;
 
-            this.cbCaseCoDepts.DataSource = App.Current.DbContext.Departments.ToList();
+            this.cbCaseCoDepts.DataSource = Department.AllDepartments();
             this.cbCaseCoDepts.ValueMember = "DepartmentCode";
             this.cbCaseCoDepts.DisplayMember = "DepartmentName";
 
-            this.cbCaseOwnerDepts.DataSource = App.Current.DbContext.Departments.ToList();
+            this.cbCaseOwnerDepts.DataSource = Department.AllDepartments();
             this.cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
             this.cbCaseOwnerDepts.GroupingMembers = "Domain";
             this.cbCaseOwnerDepts.ValueMember = "DepartmentCode";
@@ -108,13 +108,15 @@ namespace CMBC.EasyFactor.CaseMgr
 
             if (opCaseType == OpCaseType.NEW_CASE)
             {
-                this.caseBindingSource.DataSource = new Case();
+                curCase = new Case();
+                curCase.CreateUserName = App.Current.CurUser.Name;
+                this.caseBindingSource.DataSource = curCase;
             }
             else
             {
                 this.caseBindingSource.DataSource = curCase;
-                this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
-                this.dgvCDAs.DataSource = curCase.CDAs.ToList();
+                this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations;
+                this.dgvCDAs.DataSource = curCase.CDAs;
 
                 List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
                 this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
@@ -138,7 +140,7 @@ namespace CMBC.EasyFactor.CaseMgr
         public CaseDetail(Case curCase, OpCaseType opCaseType)
             : this(curCase, opCaseType, OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG)
         {
-            this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
+            this.tabControl.SelectedTab = this.tabItemCase;
         }
 
         /// <summary>
@@ -149,13 +151,14 @@ namespace CMBC.EasyFactor.CaseMgr
         public CaseDetail(Case curCase, OpCreditCoverNegType opCreditCoverNegType)
             : this(curCase, OpCaseType.DETAIL_CASE, opCreditCoverNegType)
         {
+            this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
         }
 
         #endregion Constructors
 
-        #region Methods (22)
+        #region Methods (23)
 
-        // Private Methods (22) 
+        // Private Methods (23) 
 
         private void CaseDetail_Leave(object sender, EventArgs e)
         {
@@ -183,6 +186,18 @@ namespace CMBC.EasyFactor.CaseMgr
                 else
                 {
                     this.cbCaseCoDepts.Enabled = true;
+                }
+            }
+        }
+
+        private void CaseOwnerDeptsChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
+        {
+            if (this.caseBindingSource.DataSource is Case)
+            {
+                Case curCase = (Case)this.caseBindingSource.DataSource;
+                if (this.cbCaseOwnerDepts.SelectedNode != null)
+                {
+                    curCase.OwnerDepartment = (Department)this.cbCaseOwnerDepts.SelectedNode.DataKey;
                 }
             }
         }
@@ -227,18 +242,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 curCase.BuyerFactor = null;
             }
 
-        }
-
-        private void cbCaseOwnerDepts_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
-        {
-            if (this.caseBindingSource.DataSource is Case)
-            {
-                Case curCase = (Case)this.caseBindingSource.DataSource;
-                if (this.cbCaseOwnerDepts.SelectedNode != null)
-                {
-                    curCase.OwnerDepartment = (Department)this.cbCaseOwnerDepts.SelectedNode.DataKey;
-                }
-            }
         }
 
         /// <summary>
@@ -309,7 +312,26 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
-                this.ResetCreditCoverNeg();
+                this.creditCoverNegBindingSource.DataSource = new CreditCoverNegotiation();
+            }
+        }
+
+        private void DetailCDA(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvCDAs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            int cid = (int)dgvCDAs["colCDAID", dgvCDAs.SelectedRows[0].Index].Value;
+            if (cid != 0)
+            {
+                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDAID == cid);
+                if (selectedCDA != null)
+                {
+                    CDADetail cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.DETAIL_CDA);
+                    cdaDetail.ShowDialog(this);
+                }
             }
         }
 
@@ -368,8 +390,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            this.ResetCreditCoverNeg();
-            this.creditCoverNegBindingSource.DataSource = new CreditCoverNegotiation();
+            CreditCoverNegotiation creditCoverNeg = new CreditCoverNegotiation();
+            creditCoverNeg.CreateUserName = App.Current.CurUser.Name;
+            this.creditCoverNegBindingSource.DataSource = creditCoverNeg;
             this.opCreditCoverNegType = OpCreditCoverNegType.NEW_CREDIT_COVER_NEG;
             this.UpdateCreditCoverNegControlStatus();
         }
@@ -396,7 +419,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RefreshCreditCoverNeg(object sender, EventArgs e)
+        private void RefreshCreditCoverNegList(object sender, EventArgs e)
         {
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
@@ -406,17 +429,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void ResetCreditCoverNeg()
-        {
-            foreach (Control comp in this.groupPanelCreditCoverNeg.Controls)
-            {
-                ControlUtil.SetComponetDefault(comp);
-            }
         }
 
         /// <summary>
@@ -432,7 +444,6 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 curCase.CaseCode = this.GenerateCaseCode(curCase);
                 curCase.CaseMark = "申请案";
-                curCase.CreateUserName = App.Current.CurUser.Name;
 
                 bool isAddOK = true;
                 try
@@ -518,6 +529,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
                     this.NewCreditCoverNeg(null, null);
                 }
             }
@@ -537,10 +549,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.dgvCreditCoverNegs.Refresh();
                     creditCoverNeg.Backup();
                 }
             }
-            this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
         }
 
         /// <summary>
@@ -586,6 +598,24 @@ namespace CMBC.EasyFactor.CaseMgr
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             curCase.SellerClient = clientMgr.Selected;
+        }
+
+        private void SelectCreditCoverNeg(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvCreditCoverNegs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            int cid = (int)dgvCreditCoverNegs["colNegoID", dgvCreditCoverNegs.SelectedRows[0].Index].Value;
+            if (cid != 0)
+            {
+                CreditCoverNegotiation selectedCreditCoverNeg = App.Current.DbContext.CreditCoverNegotiations.SingleOrDefault(c => c.NegoID == cid);
+                if (selectedCreditCoverNeg != null)
+                {
+                    this.creditCoverNegBindingSource.DataSource = selectedCreditCoverNeg;
+                }
+            }
         }
 
         /// <summary>
@@ -725,6 +755,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     ControlUtil.SetComponetEditable(comp, false);
                 }
             }
+            this.tbCreateUserName.ReadOnly = true;
         }
 
         #endregion Methods

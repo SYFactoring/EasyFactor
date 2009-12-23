@@ -2,32 +2,27 @@
 namespace CMBC.EasyFactor.CaseMgr
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Drawing;
-    using System.Data;
     using System.Linq;
-    using System.Text;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
 
     public partial class CreditCoverNegMgr : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs = new BindingSource();
-           /// <summary>
+        /// <summary>
         /// flag indicates if editable
         /// </summary>
         private bool isEditable;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// 
@@ -37,12 +32,13 @@ namespace CMBC.EasyFactor.CaseMgr
             InitializeComponent();
             this.isEditable = isEditable;
             this.UpdateEditableStatus();
-            ControlUtil.SetDoubleBuffered(this.dgvCreditCovers);
+            this.dgvCreditCoverNegs.DataSource = this.bs;
+            ControlUtil.SetDoubleBuffered(this.dgvCreditCoverNegs);
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets owner form
@@ -62,11 +58,11 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (1) 
+        #region Methods (1)
 
-		// Private Methods (1) 
+        // Private Methods (1) 
 
         /// <summary>
         /// Update editable status
@@ -87,6 +83,72 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
+
+        private void QueryCreditCoverNeg(object sender, EventArgs e)
+        {
+            var queryResutl = App.Current.DbContext.CreditCoverNegotiations;
+            this.bs.DataSource = queryResutl;
+            this.lblCount.Text = String.Format("获得{0}条记录", queryResutl.Count());
+        }
+
+        private void SelectCreditCoverNeg(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvCreditCoverNegs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            int cid = (int)dgvCreditCoverNegs["colNegoID", dgvCreditCoverNegs.SelectedRows[0].Index].Value;
+            if (cid != 0)
+            {
+                CreditCoverNegotiation selectedCreditCoverNeg = App.Current.DbContext.CreditCoverNegotiations.SingleOrDefault(c => c.NegoID == cid);
+                if (selectedCreditCoverNeg != null)
+                {
+                    this.Selected = selectedCreditCoverNeg;
+                    if (this.OwnerForm != null)
+                    {
+                        this.OwnerForm.DialogResult = DialogResult.Yes;
+                        this.OwnerForm.Close();
+                    }
+                }
+            }
+        }
+
+        private void DetailCreditCoverNeg(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvCreditCoverNegs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            int cid = (int)dgvCreditCoverNegs["colNegoID", dgvCreditCoverNegs.SelectedRows[0].Index].Value;
+            if (cid != 0)
+            {
+                CreditCoverNegotiation selectedCreditCoverNeg = App.Current.DbContext.CreditCoverNegotiations.SingleOrDefault(c => c.NegoID == cid);
+                if (selectedCreditCoverNeg != null)
+                {
+                    CaseDetail caseDetail = new CaseDetail(selectedCreditCoverNeg.Case, CaseDetail.OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG);
+                    caseDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Event handler when cell double clicked
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.OwnerForm == null)
+            {
+                this.DetailCreditCoverNeg(sender, e);
+            }
+            else
+            {
+                this.SelectCreditCoverNeg(sender, e);
+            }
+        }
     }
 }

@@ -3,18 +3,27 @@ namespace CMBC.EasyFactor.ARMgr
 {
     partial class InvoiceAssign
     {
-        #region Fields (65)
+        #region Fields (77)
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn AssignAmountColumn;
         private DevComponents.DotNetBar.Controls.TextBoxX assignBatchNoTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput batchDateDateTimePicker;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
+        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
+        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private DevComponents.DotNetBar.ButtonX btnAssignBatchSave;
         private DevComponents.DotNetBar.ButtonX btnAssignBatchSelect;
         private DevComponents.DotNetBar.ButtonX btnAssignNoGenerate;
         private System.Windows.Forms.ContextMenuStrip cmuInvoiceAssign;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CommissionColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CommissionDateColumn;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -27,7 +36,9 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewTextBoxColumn18;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private CalendarColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
@@ -43,6 +54,8 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn34;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn35;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn36;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn37;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn38;
@@ -58,21 +71,20 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn47;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn48;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private CalendarColumn dataGridViewTextBoxColumn7;
+        private CalendarColumn dataGridViewTextBoxColumn8;
+        private CalendarColumn dataGridViewTextBoxColumn9;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoices;
-        private CalendarColumn DueDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceAmountColumn;
         private System.Windows.Forms.BindingSource invoiceAssignBatchBindingSource;
+        private System.Windows.Forms.BindingNavigator invoiceBindingNavigator;
         private System.Windows.Forms.BindingSource invoiceBindingSource;
-        private CalendarColumn InvoiceDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceNoColumn;
         private DevComponents.DotNetBar.Controls.CheckBoxX isCreateMsgCheckBox;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn IsFlawColumn;
         private System.Windows.Forms.ToolStripMenuItem menuItemFlaw;
         private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
         private DevComponents.DotNetBar.PanelEx panelAssignBatch;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private CalendarColumn ValueDateColumn;
 
         #endregion Fields
 
@@ -109,13 +121,8 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX assignBatchNoLabel;
             DevComponents.DotNetBar.LabelX batchDateLabel;
             DevComponents.DotNetBar.LabelX commentLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceAssign));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelAssignBatch = new DevComponents.DotNetBar.PanelEx();
             this.btnAssignBatchSelect = new DevComponents.DotNetBar.ButtonX();
             this.btnAssignNoGenerate = new DevComponents.DotNetBar.ButtonX();
@@ -125,16 +132,33 @@ namespace CMBC.EasyFactor.ARMgr
             this.isCreateMsgCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.batchDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.assignBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cmuInvoiceAssign = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemFlaw = new System.Windows.Forms.ToolStripMenuItem();
+            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.invoiceBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.InvoiceNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InvoiceDateColumn = new CalendarColumn();
+            this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new CMBC.EasyFactor.Utils.CalendarColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InvoiceAmountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AssignAmountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DueDateColumn = new CMBC.EasyFactor.Utils.CalendarColumn();
-            this.ValueDateColumn = new CalendarColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new CMBC.EasyFactor.Utils.CalendarColumn();
+            this.dataGridViewTextBoxColumn9 = new CMBC.EasyFactor.Utils.CalendarColumn();
+            this.dataGridViewTextBoxColumn8 = new CMBC.EasyFactor.Utils.CalendarColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -143,7 +167,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsFlawColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -159,8 +183,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CommissionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CommissionDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -175,20 +199,17 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn47 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn48 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuInvoiceAssign = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemFlaw = new System.Windows.Forms.ToolStripMenuItem();
-            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             batchDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
             this.panelAssignBatch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceAssignBatchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchDateDateTimePicker)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.cmuInvoiceAssign.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).BeginInit();
+            this.invoiceBindingNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.SuspendLayout();
             // 
             // assignBatchNoLabel
@@ -369,30 +390,166 @@ namespace CMBC.EasyFactor.ARMgr
             this.assignBatchNoTextBox.Size = new System.Drawing.Size(100, 20);
             this.assignBatchNoTextBox.TabIndex = 1;
             // 
+            // cmuInvoiceAssign
+            // 
+            this.cmuInvoiceAssign.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemInvoiceDetail,
+            this.toolStripSeparator,
+            this.menuItemFlaw});
+            this.cmuInvoiceAssign.Name = "cmuInvoiceAssign";
+            this.cmuInvoiceAssign.Size = new System.Drawing.Size(123, 54);
+            // 
+            // menuItemInvoiceDetail
+            // 
+            this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
+            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(122, 22);
+            this.menuItemInvoiceDetail.Text = "详细信息";
+            this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(119, 6);
+            // 
+            // menuItemFlaw
+            // 
+            this.menuItemFlaw.Name = "menuItemFlaw";
+            this.menuItemFlaw.Size = new System.Drawing.Size(122, 22);
+            this.menuItemFlaw.Text = "瑕疵处理";
+            this.menuItemFlaw.Click += new System.EventHandler(this.Flaw);
+            // 
+            // invoiceBindingSource
+            // 
+            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
+            // 
+            // invoiceBindingNavigator
+            // 
+            this.invoiceBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.invoiceBindingNavigator.BindingSource = this.invoiceBindingSource;
+            this.invoiceBindingNavigator.CountItem = this.bindingNavigatorCountItem;
+            this.invoiceBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.invoiceBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bindingNavigatorCountItem,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2,
+            this.bindingNavigatorAddNewItem,
+            this.bindingNavigatorDeleteItem});
+            this.invoiceBindingNavigator.Location = new System.Drawing.Point(0, 73);
+            this.invoiceBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.invoiceBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.invoiceBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.invoiceBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.invoiceBindingNavigator.Name = "invoiceBindingNavigator";
+            this.invoiceBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
+            this.invoiceBindingNavigator.Size = new System.Drawing.Size(695, 25);
+            this.invoiceBindingNavigator.TabIndex = 6;
+            this.invoiceBindingNavigator.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "Delete";
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "Position";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem.Text = "Move next";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "Move last";
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // dgvInvoices
             // 
-            this.dgvInvoices.AllowUserToOrderColumns = true;
             this.dgvInvoices.AutoGenerateColumns = false;
-            this.dgvInvoices.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInvoices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.InvoiceNoColumn,
-            this.InvoiceDateColumn,
+            this.colInvoiceNo,
+            this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
-            this.InvoiceAmountColumn,
-            this.AssignAmountColumn,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7,
-            this.DueDateColumn,
-            this.ValueDateColumn,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn8,
             this.dataGridViewTextBoxColumn10,
             this.dataGridViewTextBoxColumn11,
             this.dataGridViewTextBoxColumn12,
@@ -401,7 +558,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn15,
             this.dataGridViewTextBoxColumn16,
             this.dataGridViewTextBoxColumn17,
-            this.IsFlawColumn,
+            this.dataGridViewTextBoxColumn18,
             this.dataGridViewTextBoxColumn19,
             this.dataGridViewTextBoxColumn20,
             this.dataGridViewTextBoxColumn21,
@@ -417,8 +574,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn31,
             this.dataGridViewTextBoxColumn32,
             this.dataGridViewTextBoxColumn33,
-            this.CommissionColumn,
-            this.CommissionDateColumn,
+            this.dataGridViewTextBoxColumn34,
+            this.dataGridViewTextBoxColumn35,
             this.dataGridViewTextBoxColumn36,
             this.dataGridViewTextBoxColumn37,
             this.dataGridViewTextBoxColumn38,
@@ -435,43 +592,40 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn49});
             this.dgvInvoices.ContextMenuStrip = this.cmuInvoiceAssign;
             this.dgvInvoices.DataSource = this.invoiceBindingSource;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvInvoices.Location = new System.Drawing.Point(0, 73);
+            this.dgvInvoices.Location = new System.Drawing.Point(0, 98);
             this.dgvInvoices.Name = "dgvInvoices";
-            this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvInvoices.Size = new System.Drawing.Size(695, 368);
-            this.dgvInvoices.TabIndex = 6;
+            this.dgvInvoices.Size = new System.Drawing.Size(695, 497);
+            this.dgvInvoices.TabIndex = 7;
             // 
-            // InvoiceNoColumn
+            // colInvoiceNo
             // 
-            this.InvoiceNoColumn.DataPropertyName = "InvoiceNo";
-            this.InvoiceNoColumn.HeaderText = "发票号";
-            this.InvoiceNoColumn.Name = "InvoiceNoColumn";
+            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
+            this.colInvoiceNo.HeaderText = "发票号";
+            this.colInvoiceNo.Name = "colInvoiceNo";
             // 
-            // InvoiceDateColumn
+            // dataGridViewTextBoxColumn2
             // 
-            this.InvoiceDateColumn.DataPropertyName = "InvoiceDate";
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.InvoiceDateColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.InvoiceDateColumn.HeaderText = "发票日";
-            this.InvoiceDateColumn.Name = "InvoiceDateColumn";
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "InvoiceDate";
+            this.dataGridViewTextBoxColumn2.HeaderText = "发票日";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.DataPropertyName = "InvoiceCurrency";
-            this.dataGridViewTextBoxColumn3.HeaderText = "InvoiceCurrency";
+            this.dataGridViewTextBoxColumn3.HeaderText = "币种";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Visible = false;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -480,48 +634,41 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.Visible = false;
             // 
-            // InvoiceAmountColumn
+            // dataGridViewTextBoxColumn5
             // 
-            this.InvoiceAmountColumn.DataPropertyName = "InvoiceAmount";
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.InvoiceAmountColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.InvoiceAmountColumn.HeaderText = "票面金额";
-            this.InvoiceAmountColumn.Name = "InvoiceAmountColumn";
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "InvoiceAmount";
+            this.dataGridViewTextBoxColumn5.HeaderText = "发票金额";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
-            // AssignAmountColumn
+            // dataGridViewTextBoxColumn6
             // 
-            this.AssignAmountColumn.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.AssignAmountColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            this.AssignAmountColumn.HeaderText = "转让金额";
-            this.AssignAmountColumn.Name = "AssignAmountColumn";
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "AssignAmount";
+            this.dataGridViewTextBoxColumn6.HeaderText = "转让金额";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.DataPropertyName = "AssignDate";
-            this.dataGridViewTextBoxColumn7.HeaderText = "AssignDate";
+            this.dataGridViewTextBoxColumn7.HeaderText = "转让日";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.Visible = false;
+            this.dataGridViewTextBoxColumn7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // DueDateColumn
+            // dataGridViewTextBoxColumn9
             // 
-            this.DueDateColumn.DataPropertyName = "DueDate";
-            dataGridViewCellStyle5.Format = "d";
-            dataGridViewCellStyle5.NullValue = null;
-            this.DueDateColumn.DefaultCellStyle = dataGridViewCellStyle5;
-            this.DueDateColumn.HeaderText = "到期日";
-            this.DueDateColumn.Name = "DueDateColumn";
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "ValueDate";
+            this.dataGridViewTextBoxColumn9.HeaderText = "生效日";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // ValueDateColumn
+            // dataGridViewTextBoxColumn8
             // 
-            this.ValueDateColumn.DataPropertyName = "ValueDate";
-            dataGridViewCellStyle6.Format = "d";
-            dataGridViewCellStyle6.NullValue = null;
-            this.ValueDateColumn.DefaultCellStyle = dataGridViewCellStyle6;
-            this.ValueDateColumn.HeaderText = "生效日";
-            this.ValueDateColumn.Name = "ValueDateColumn";
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "DueDate";
+            this.dataGridViewTextBoxColumn8.HeaderText = "到期日";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // dataGridViewTextBoxColumn10
             // 
@@ -579,13 +726,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             this.dataGridViewTextBoxColumn17.Visible = false;
             // 
-            // IsFlawColumn
+            // dataGridViewTextBoxColumn18
             // 
-            this.IsFlawColumn.DataPropertyName = "IsFlaw";
-            this.IsFlawColumn.HeaderText = "是否瑕疵";
-            this.IsFlawColumn.Name = "IsFlawColumn";
-            this.IsFlawColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.IsFlawColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewTextBoxColumn18.DataPropertyName = "IsFlaw";
+            this.dataGridViewTextBoxColumn18.HeaderText = "IsFlaw";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            this.dataGridViewTextBoxColumn18.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn18.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // dataGridViewTextBoxColumn19
             // 
@@ -692,17 +839,19 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn33.Name = "dataGridViewTextBoxColumn33";
             this.dataGridViewTextBoxColumn33.Visible = false;
             // 
-            // CommissionColumn
+            // dataGridViewTextBoxColumn34
             // 
-            this.CommissionColumn.DataPropertyName = "Commission";
-            this.CommissionColumn.HeaderText = "手续费";
-            this.CommissionColumn.Name = "CommissionColumn";
+            this.dataGridViewTextBoxColumn34.DataPropertyName = "Commission";
+            this.dataGridViewTextBoxColumn34.HeaderText = "Commission";
+            this.dataGridViewTextBoxColumn34.Name = "dataGridViewTextBoxColumn34";
+            this.dataGridViewTextBoxColumn34.Visible = false;
             // 
-            // CommissionDateColumn
+            // dataGridViewTextBoxColumn35
             // 
-            this.CommissionDateColumn.DataPropertyName = "CommissionDate";
-            this.CommissionDateColumn.HeaderText = "收费日";
-            this.CommissionDateColumn.Name = "CommissionDateColumn";
+            this.dataGridViewTextBoxColumn35.DataPropertyName = "CommissionDate";
+            this.dataGridViewTextBoxColumn35.HeaderText = "CommissionDate";
+            this.dataGridViewTextBoxColumn35.Name = "dataGridViewTextBoxColumn35";
+            this.dataGridViewTextBoxColumn35.Visible = false;
             // 
             // dataGridViewTextBoxColumn36
             // 
@@ -790,66 +939,39 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // dataGridViewTextBoxColumn48
             // 
-            this.dataGridViewTextBoxColumn48.DataPropertyName = "InvoiceFinanceBatch";
-            this.dataGridViewTextBoxColumn48.HeaderText = "InvoiceFinanceBatch";
+            this.dataGridViewTextBoxColumn48.DataPropertyName = "InvoicePaymentBatch";
+            this.dataGridViewTextBoxColumn48.HeaderText = "InvoicePaymentBatch";
             this.dataGridViewTextBoxColumn48.Name = "dataGridViewTextBoxColumn48";
             this.dataGridViewTextBoxColumn48.Visible = false;
             // 
             // dataGridViewTextBoxColumn49
             // 
-            this.dataGridViewTextBoxColumn49.DataPropertyName = "InvoicePaymentBatch";
-            this.dataGridViewTextBoxColumn49.HeaderText = "InvoicePaymentBatch";
+            this.dataGridViewTextBoxColumn49.DataPropertyName = "InvoiceFinanceBatch";
+            this.dataGridViewTextBoxColumn49.HeaderText = "InvoiceFinanceBatch";
             this.dataGridViewTextBoxColumn49.Name = "dataGridViewTextBoxColumn49";
             this.dataGridViewTextBoxColumn49.Visible = false;
-            // 
-            // cmuInvoiceAssign
-            // 
-            this.cmuInvoiceAssign.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemInvoiceDetail,
-            this.toolStripSeparator,
-            this.menuItemFlaw});
-            this.cmuInvoiceAssign.Name = "cmuInvoiceAssign";
-            this.cmuInvoiceAssign.Size = new System.Drawing.Size(123, 54);
-            // 
-            // menuItemInvoiceDetail
-            // 
-            this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
-            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(122, 22);
-            this.menuItemInvoiceDetail.Text = "详细信息";
-            this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(119, 6);
-            // 
-            // menuItemFlaw
-            // 
-            this.menuItemFlaw.Name = "menuItemFlaw";
-            this.menuItemFlaw.Size = new System.Drawing.Size(122, 22);
-            this.menuItemFlaw.Text = "瑕疵处理";
-            this.menuItemFlaw.Click += new System.EventHandler(this.Flaw);
-            // 
-            // invoiceBindingSource
-            // 
-            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
             // 
             // InvoiceAssign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvInvoices);
+            this.Controls.Add(this.invoiceBindingNavigator);
             this.Controls.Add(this.panelAssignBatch);
             this.Name = "InvoiceAssign";
-            this.Size = new System.Drawing.Size(695, 441);
+            this.Size = new System.Drawing.Size(695, 595);
             this.panelAssignBatch.ResumeLayout(false);
             this.panelAssignBatch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceAssignBatchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchDateDateTimePicker)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).EndInit();
             this.cmuInvoiceAssign.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).EndInit();
+            this.invoiceBindingNavigator.ResumeLayout(false);
+            this.invoiceBindingNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

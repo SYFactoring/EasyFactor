@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="DepartmentMgr.cs" company="CISL@Fudan">
+// <copyright file="DepartmentMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -20,6 +20,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     /// </summary>
     public partial class DepartmentMgr : UserControl
     {
+		#region Constructors (1) 
 
         /// <summary>
         /// 
@@ -31,20 +32,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             ControlUtil.SetDoubleBuffered(this.dgvDepts);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryDepartments(object sender, EventArgs e)
-        {
-            var queryResult = App.Current.DbContext.Departments.Where( d =>
-                             (d.DepartmentCode==null?string.Empty:d.DepartmentCode).Contains(this.tbDepartmentCode.Text)
-                          && (d.DepartmentName==null?string.Empty:d.DepartmentName).Contains(this.tbDepartmentName.Text));
-           
-            this.dgvDepts.DataSource = queryResult;
-            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-        }
+		#endregion Constructors 
+
+		#region Properties (2) 
 
         /// <summary>
         /// 
@@ -64,33 +54,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             set;
         }
 
-        /// <summary>
-        /// Select department and close the query form
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void SelectDepartment(object sender, System.EventArgs e)
-        {
-            if (this.dgvDepts.SelectedRows.Count == 0 )
-            {
-                return;
-            }
+		#endregion Properties 
 
-            string did = (string)dgvDepts["departmentCodeColumn", dgvDepts.SelectedRows[0].Index].Value;
-            if (did != null)
-            {
-                Department selectedDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentCode == did);
-                if (selectedDepartment != null)
-                {
-                    this.Selected = selectedDepartment;
-                    if (this.OwnerForm != null)
-                    {
-                        this.OwnerForm.DialogResult = DialogResult.Yes;
-                        this.OwnerForm.Close();
-                    }
-                }
-            }
-        }
+		#region Methods (5) 
+
+		// Private Methods (5) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -217,5 +185,50 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             }
             app.Quit();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryDepartments(object sender, EventArgs e)
+        {
+            var queryResult = App.Current.DbContext.Departments.Where( d =>
+                             (d.DepartmentCode==null?string.Empty:d.DepartmentCode).Contains(this.tbDepartmentCode.Text)
+                          && (d.DepartmentName==null?string.Empty:d.DepartmentName).Contains(this.tbDepartmentName.Text));
+           
+            this.dgvDepts.DataSource = queryResult;
+            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+        }
+
+        /// <summary>
+        /// Select department and close the query form
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void SelectDepartment(object sender, System.EventArgs e)
+        {
+            if (this.dgvDepts.SelectedRows.Count == 0 )
+            {
+                return;
+            }
+
+            string did = (string)dgvDepts["departmentCodeColumn", dgvDepts.SelectedRows[0].Index].Value;
+            if (did != null)
+            {
+                Department selectedDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentCode == did);
+                if (selectedDepartment != null)
+                {
+                    this.Selected = selectedDepartment;
+                    if (this.OwnerForm != null)
+                    {
+                        this.OwnerForm.DialogResult = DialogResult.Yes;
+                        this.OwnerForm.Close();
+                    }
+                }
+            }
+        }
+
+		#endregion Methods 
     }
 }

@@ -2450,7 +2450,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_NegoID", DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true)]
+		[Column(Storage="_NegoID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int NegoID
 		{
 			get

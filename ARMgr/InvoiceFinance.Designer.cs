@@ -129,6 +129,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceFinance));
             this.panelFinanceBatch = new DevComponents.DotNetBar.PanelEx();
             this.financeTypeComboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.invoiceFinanceBatchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.costRateTextBoxX = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.factorCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.interestTypeComboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -139,13 +140,13 @@
             this.batchCurrencyComboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.financeBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.invoiceDataGridView = new System.Windows.Forms.DataGridView();
+            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.invoiceBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -153,7 +154,6 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.invoiceBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
-            this.invoiceFinanceBatchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -213,13 +213,13 @@
             costRateLabel = new DevComponents.DotNetBar.LabelX();
             financeTypeLabel = new DevComponents.DotNetBar.LabelX();
             this.panelFinanceBatch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceFinanceBatchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.finnacePeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).BeginInit();
             this.invoiceBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceFinanceBatchBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // financeBatchNoLabel
@@ -378,6 +378,10 @@
             this.financeTypeComboBoxEx.Size = new System.Drawing.Size(100, 20);
             this.financeTypeComboBoxEx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.financeTypeComboBoxEx.TabIndex = 19;
+            // 
+            // invoiceFinanceBatchBindingSource
+            // 
+            this.invoiceFinanceBatchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceFinanceBatch);
             // 
             // costRateTextBoxX
             // 
@@ -592,8 +596,13 @@
             this.invoiceDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.invoiceDataGridView.Location = new System.Drawing.Point(0, 148);
             this.invoiceDataGridView.Name = "invoiceDataGridView";
+            this.invoiceDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.invoiceDataGridView.Size = new System.Drawing.Size(781, 318);
             this.invoiceDataGridView.TabIndex = 2;
+            // 
+            // invoiceBindingSource
+            // 
+            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
             // 
             // bindingNavigatorSeparator
             // 
@@ -655,10 +664,6 @@
             this.invoiceBindingNavigator.Size = new System.Drawing.Size(781, 25);
             this.invoiceBindingNavigator.TabIndex = 1;
             this.invoiceBindingNavigator.Text = "bindingNavigator1";
-            // 
-            // invoiceBindingSource
-            // 
-            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
             // 
             // bindingNavigatorAddNewItem
             // 
@@ -723,10 +728,6 @@
             this.invoiceBindingNavigatorSaveItem.Text = "Save Data";
             this.invoiceBindingNavigatorSaveItem.Click += new System.EventHandler(this.invoiceBindingNavigatorSaveItem_Click);
             // 
-            // invoiceFinanceBatchBindingSource
-            // 
-            this.invoiceFinanceBatchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceFinanceBatch);
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "InvoiceNo";
@@ -767,12 +768,14 @@
             this.dataGridViewTextBoxColumn6.DataPropertyName = "AssignAmount";
             this.dataGridViewTextBoxColumn6.HeaderText = "转让金额";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Visible = false;
             // 
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.DataPropertyName = "AssignDate";
             this.dataGridViewTextBoxColumn7.HeaderText = "转让日";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.Visible = false;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -897,12 +900,14 @@
             this.dataGridViewTextBoxColumn25.DataPropertyName = "FinanceAmount";
             this.dataGridViewTextBoxColumn25.HeaderText = "融资金额";
             this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
+            this.dataGridViewTextBoxColumn25.Visible = false;
             // 
             // dataGridViewTextBoxColumn26
             // 
             this.dataGridViewTextBoxColumn26.DataPropertyName = "FinanceDate";
             this.dataGridViewTextBoxColumn26.HeaderText = "融资日";
             this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
+            this.dataGridViewTextBoxColumn26.Visible = false;
             // 
             // dataGridViewTextBoxColumn27
             // 
@@ -972,6 +977,7 @@
             this.dataGridViewTextBoxColumn36.DataPropertyName = "Interest";
             this.dataGridViewTextBoxColumn36.HeaderText = "利息";
             this.dataGridViewTextBoxColumn36.Name = "dataGridViewTextBoxColumn36";
+            this.dataGridViewTextBoxColumn36.Visible = false;
             // 
             // dataGridViewTextBoxColumn37
             // 
@@ -1081,14 +1087,14 @@
             this.Size = new System.Drawing.Size(781, 466);
             this.panelFinanceBatch.ResumeLayout(false);
             this.panelFinanceBatch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceFinanceBatchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.finnacePeriodEndDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).EndInit();
             this.invoiceBindingNavigator.ResumeLayout(false);
             this.invoiceBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceFinanceBatchBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

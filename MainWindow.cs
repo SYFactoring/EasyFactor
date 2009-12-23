@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MainWindow.cs" company="CISL@Fudan">
+// <copyright file="MainWindow.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -79,7 +79,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ChangeStyle(object sender, EventArgs e)
         {
-            string style = cbStyleManager.SelectedItem.ToString();
+            string style = cbStyleManager.Text;
             if ("Office2007Blue".Equals(style))
             {
                 this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue;
@@ -125,30 +125,55 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(invoiceAssign);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InvoiceFinance(object sender, EventArgs e)
         {
             ARCaseBasic invoiceFinance = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceFinance);
             this.SetDetailPanel(invoiceFinance);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InvoicePayment(object sender, EventArgs e)
         {
             ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoicePayment);
             this.SetDetailPanel(invoicePayment);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainPage(object sender, EventArgs e)
         {
             this.ClearDetailPanel();
             ribbonDetailPanel.Controls.Add(logoLabel);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MgrCases(object sender, EventArgs e)
         {
             CaseMgr.CaseMgr caseQuery = new CaseMgr.CaseMgr(true);
             this.SetDetailPanel(caseQuery);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MgrCDAs(object sender, EventArgs e)
         {
             CDAMgr CDAMgr = new CDAMgr(true);
@@ -166,12 +191,22 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(clientMgrUI);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MgrContracts(object sender, EventArgs e)
         {
             ContractMgr contractMgr = new ContractMgr(true);
             this.SetDetailPanel(contractMgr);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MgrCreditCoverNegs(object sender, EventArgs e)
         {
             CreditCoverNegMgr creditCoverNegMgr = new CreditCoverNegMgr(true);
@@ -223,6 +258,11 @@ namespace CMBC.EasyFactor
             caseDetail.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewCDA(object sender, EventArgs e)
         {
             CDADetail cdaDetail = new CDADetail(null, CDADetail.OpCDAType.NEW_CDA);

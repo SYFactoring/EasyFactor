@@ -837,7 +837,7 @@
             this.btnCaseQuery.Size = new System.Drawing.Size(33, 29);
             this.btnCaseQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCaseQuery.TabIndex = 0;
-            this.btnCaseQuery.Text = "Q";
+            this.btnCaseQuery.Text = "...";
             this.btnCaseQuery.Click += new System.EventHandler(this.SelectCase);
             // 
             // ownerDepartmentCodeTextBox

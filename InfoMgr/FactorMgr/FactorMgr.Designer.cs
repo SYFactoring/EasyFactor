@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="FactorDetailUI.Designer.cs" company="CISL@Fudan">
+// <copyright file="FactorDetailUI.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -11,18 +11,82 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// </summary>
     public partial class FactorMgr
     {
+		#region Fields (65) 
+
+        private DevComponents.DotNetBar.ButtonX btnQuery;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCountry;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbFactorType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CityPostColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CityVisitingColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNameCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNameENColumn;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Contacts_1Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Contacts_2Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Contacts_3Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Contacts_4Column;
         private System.Windows.Forms.ContextMenuStrip contextMenuFactorMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemFactorSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemFactorDetail;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemFactorNew;
-        private System.Windows.Forms.ToolStripMenuItem menuItemFactorUpdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateOfLatestRevisionColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvFactors;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EmailColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn factorCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FactorGroupColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FactorTypeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GeneralCorrespondence_1Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GeneralCorrespondence_2Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNameCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNameENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IFISColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsAgreementSignColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsCorrespondentBankColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsGroupColumn;
+        private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.LabelX lblCountry;
+        private DevComponents.DotNetBar.LabelX lblFactorCode;
+        private DevComponents.DotNetBar.LabelX lblFactorName;
+        private DevComponents.DotNetBar.LabelX lblFactorType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Management_1Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Management_2Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MembershipDateColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MembershipStatusColumn;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFactorCreditLineNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemFactorDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFactorDetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemFactorImport;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFactorNew;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFactorSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFactorUpdate;
+        private DevComponents.DotNetBar.PanelEx panelQuery;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PostalAddress_1Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PostalAddress_2Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PostalCodePostColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PostalCodeVisitingColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ShareHoldersColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ShortNameColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorCode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Telefax_1Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Telefax_2Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Telephone_1Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Telephone_2Column;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VisitingAddress_1Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VisitingAddress_2Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WebsiteColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WorkingHoursColumn;
+
+		#endregion Fields 
+
+		#region Methods (1) 
+
+		// Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -37,6 +101,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             base.Dispose(disposing);
         }
+
+		#endregion Methods 
+
+
 
         #region Component Designer generated code
 
@@ -60,18 +128,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.menuItemFactorImport = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbCountry = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem5 = new DevComponents.Editors.ComboItem();
-            this.comboItem6 = new DevComponents.Editors.ComboItem();
-            this.comboItem7 = new DevComponents.Editors.ComboItem();
-            this.comboItem8 = new DevComponents.Editors.ComboItem();
-            this.comboItem9 = new DevComponents.Editors.ComboItem();
             this.lblCountry = new DevComponents.DotNetBar.LabelX();
             this.cbFactorType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem0 = new DevComponents.Editors.ComboItem();
-            this.comboItem1 = new DevComponents.Editors.ComboItem();
-            this.comboItem2 = new DevComponents.Editors.ComboItem();
-            this.comboItem3 = new DevComponents.Editors.ComboItem();
-            this.comboItem4 = new DevComponents.Editors.ComboItem();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbFactorName = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -229,37 +287,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.cbCountry.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCountry.FormattingEnabled = true;
-            this.cbCountry.Items.AddRange(new object[] {
-            this.comboItem5,
-            this.comboItem6,
-            this.comboItem7,
-            this.comboItem8,
-            this.comboItem9});
             this.cbCountry.Location = new System.Drawing.Point(216, 10);
             this.cbCountry.Name = "cbCountry";
             this.cbCountry.Size = new System.Drawing.Size(99, 21);
             this.cbCountry.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbCountry.TabIndex = 9;
-            // 
-            // comboItem5
-            // 
-            this.comboItem5.Text = "全部";
-            // 
-            // comboItem6
-            // 
-            this.comboItem6.Text = "保理商";
-            // 
-            // comboItem7
-            // 
-            this.comboItem7.Text = "保险公司";
-            // 
-            // comboItem8
-            // 
-            this.comboItem8.Text = "监管机构";
-            // 
-            // comboItem9
-            // 
-            this.comboItem9.Text = "代付行";
             // 
             // lblCountry
             // 
@@ -280,36 +312,16 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.cbFactorType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFactorType.FormattingEnabled = true;
             this.cbFactorType.Items.AddRange(new object[] {
-            this.comboItem0,
-            this.comboItem1,
-            this.comboItem2,
-            this.comboItem3,
-            this.comboItem4});
+            "全部",
+            "保理商",
+            "保险公司",
+            "监管机构",
+            "代付行"});
             this.cbFactorType.Location = new System.Drawing.Point(70, 10);
             this.cbFactorType.Name = "cbFactorType";
             this.cbFactorType.Size = new System.Drawing.Size(99, 21);
             this.cbFactorType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbFactorType.TabIndex = 1;
-            // 
-            // comboItem0
-            // 
-            this.comboItem0.Text = "全部";
-            // 
-            // comboItem1
-            // 
-            this.comboItem1.Text = "保理商";
-            // 
-            // comboItem2
-            // 
-            this.comboItem2.Text = "保险公司";
-            // 
-            // comboItem3
-            // 
-            this.comboItem3.Text = "监管机构";
-            // 
-            // comboItem4
-            // 
-            this.comboItem4.Text = "代付行";
             // 
             // lblCount
             // 
@@ -793,72 +805,5 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.PanelEx panelQuery;
-        private DevComponents.DotNetBar.LabelX lblFactorName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorCode;
-        private DevComponents.DotNetBar.LabelX lblFactorCode;
-        private DevComponents.DotNetBar.LabelX lblFactorType;
-        private DevComponents.DotNetBar.ButtonX btnQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvFactors;
-        private DevComponents.DotNetBar.LabelX lblCount;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbFactorType;
-        private DevComponents.Editors.ComboItem comboItem1;
-        private DevComponents.Editors.ComboItem comboItem2;
-        private DevComponents.Editors.ComboItem comboItem3;
-        private DevComponents.Editors.ComboItem comboItem4;
-        private System.Windows.Forms.ToolStripMenuItem menuItemFactorCreditLineNew;
-        private DevComponents.Editors.ComboItem comboItem0;
-        private System.Windows.Forms.DataGridViewTextBoxColumn factorCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FactorTypeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNameCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNameENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ShortNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PostalAddress_1Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PostalAddress_2Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PostalCodePostColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CityPostColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VisitingAddress_1Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VisitingAddress_2Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PostalCodeVisitingColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CityVisitingColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EmailColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn WebsiteColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Telephone_1Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Telephone_2Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Telefax_1Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Telefax_2Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn WorkingHoursColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GeneralCorrespondence_1Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GeneralCorrespondence_2Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Contacts_1Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Contacts_2Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Contacts_3Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Contacts_4Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Management_1Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Management_2Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ShareHoldersColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IFISColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MembershipStatusColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MembershipDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DateOfLatestRevisionColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsGroupColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNameCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNameENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsCorrespondentBankColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsAgreementSignColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FactorGroupColumn;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCountry;
-        private DevComponents.Editors.ComboItem comboItem5;
-        private DevComponents.Editors.ComboItem comboItem6;
-        private DevComponents.Editors.ComboItem comboItem7;
-        private DevComponents.Editors.ComboItem comboItem8;
-        private DevComponents.Editors.ComboItem comboItem9;
-        private DevComponents.DotNetBar.LabelX lblCountry;
     }
 }

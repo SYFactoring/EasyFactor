@@ -1,4 +1,9 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="ObjectExtend.cs" company="Yiming Liu@Fudan" >
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
 namespace CMBC.EasyFactor.DB.dbml
 {
     using System.Linq;
@@ -9,10 +14,16 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Department
     {
+        #region Fields (1)
+
         /// <summary>
         /// 
         /// </summary>
         private static List<Department> _allDepartment;
+
+        #endregion Fields
+
+        #region Constructors (1)
 
         /// <summary>
         /// 
@@ -22,6 +33,12 @@ namespace CMBC.EasyFactor.DB.dbml
             _allDepartment = App.Current.DbContext.Departments.ToList();
             _allDepartment.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
         }
+
+        #endregion Constructors
+
+        #region Methods (2)
+
+        // Public Methods (2) 
 
         public static List<Department> AllDepartments()
         {
@@ -36,6 +53,8 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             return this._DepartmentName;
         }
+
+        #endregion Methods
     }
 
     /// <summary>
@@ -43,6 +62,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Client
     {
+        #region Properties (1)
 
         /// <summary>
         /// 
@@ -59,13 +79,19 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        #endregion Properties
+
+        #region Methods (1)
+
+        // Public Methods (1) 
+
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            if (_ClientNameCN != null&&!_ClientNameCN.Equals(string.Empty))
+            if (_ClientNameCN != null && !_ClientNameCN.Equals(string.Empty))
             {
                 return _ClientNameCN;
             }
@@ -74,6 +100,8 @@ namespace CMBC.EasyFactor.DB.dbml
                 return _ClientNameEN_1;
             }
         }
+
+        #endregion Methods
     }
 
     /// <summary>
@@ -81,10 +109,16 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Currency
     {
+        #region Fields (1)
+
         /// <summary>
         /// 
         /// </summary>
         private static List<Currency> _currencyList;
+
+        #endregion Fields
+
+        #region Constructors (1)
 
         /// <summary>
         /// 
@@ -95,14 +129,9 @@ namespace CMBC.EasyFactor.DB.dbml
             _currencyList.Insert(0, new Currency() { CurrencyCode = "AAA", CurrencyName = "All" });
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public static List<Currency> AllCurrencies()
-        {
-            return _currencyList.ToList();
-        }
+        #endregion Constructors
+
+        #region Properties (1)
 
         /// <summary>
         /// 
@@ -121,6 +150,23 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
+
+        #endregion Properties
+
+        #region Methods (1)
+
+        // Public Methods (1) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static List<Currency> AllCurrencies()
+        {
+            return _currencyList.ToList();
+        }
+
+        #endregion Methods
     }
 
     /// <summary>
@@ -128,11 +174,16 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Country
     {
+        #region Fields (1)
 
         /// <summary>
         /// 
         /// </summary>
         private static List<Country> _countryList;
+
+        #endregion Fields
+
+        #region Constructors (1)
 
         /// <summary>
         /// 
@@ -143,13 +194,26 @@ namespace CMBC.EasyFactor.DB.dbml
             _countryList.Insert(0, new Country() { CountryCode = "AA", CountryNameCN = "全部", CountryNameEN = "All" });
         }
 
+        #endregion Constructors
+
+        #region Properties (2)
+
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        public static List<Country> AllCountries()
+        public string CountryFormatCN
         {
-            return _countryList;
+            get
+            {
+                if ("AA".Equals(_CountryCode))
+                {
+                    return "全部";
+                }
+                else
+                {
+                    return _CountryCode + " " + _CountryNameCN;
+                }
+            }
         }
 
         /// <summary>
@@ -170,23 +234,22 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        #endregion Properties
+
+        #region Methods (1)
+
+        // Public Methods (1) 
+
         /// <summary>
         /// 
         /// </summary>
-        public string CountryFormatCN
+        /// <returns></returns>
+        public static List<Country> AllCountries()
         {
-            get
-            {
-                if ("AA".Equals(_CountryCode))
-                {
-                    return "全部";
-                }
-                else
-                {
-                    return _CountryCode + " " + _CountryNameCN;
-                }
-            }
+            return _countryList;
         }
+
+        #endregion Methods
     }
 
     /// <summary>
@@ -194,38 +257,16 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Factor
     {
+        #region Fields (1)
+
         /// <summary>
         /// 
         /// </summary>
         public static readonly string CMBC_CODE = "CN01300";
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        public static Factor FindFactorByCode(string code)
-        {
-            return App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == code);
-        }
+        #endregion Fields
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string GroupNameEN
-        {
-            get
-            {
-                if (_GroupNo != null && !_GroupNo.Trim().Equals(string.Empty))
-                {
-                    return FactorGroup.GroupNameEN;
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-        }
+        #region Properties (2)
 
         /// <summary>
         /// 
@@ -248,10 +289,44 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        public string GroupNameEN
+        {
+            get
+            {
+                if (_GroupNo != null && !_GroupNo.Trim().Equals(string.Empty))
+                {
+                    return FactorGroup.GroupNameEN;
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        #endregion Properties
+
+        #region Methods (2)
+
+        // Public Methods (2) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public static Factor FindFactorByCode(string code)
+        {
+            return App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == code);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            if (_CompanyNameCN != null&&!_CompanyNameCN.Equals(string.Empty))
+            if (_CompanyNameCN != null && !_CompanyNameCN.Equals(string.Empty))
             {
                 return _CompanyNameCN;
             }
@@ -260,5 +335,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 return _CompanyNameEN;
             }
         }
+
+        #endregion Methods
     }
 }

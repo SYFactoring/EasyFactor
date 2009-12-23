@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="LoginWindow.cs" company="CISL@Fudan">
+// <copyright file="LoginWindow.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -15,15 +15,23 @@ namespace CMBC.EasyFactor
     /// Login Window
     /// </summary>
     public partial class LoginWindow : DevComponents.DotNetBar.Office2007Form
-    {     
-        /// <summary>
+    {
+		#region Constructors (1) 
+
+             /// <summary>
         /// Initializes a new instance of the LoginWindow class
         /// </summary>
         public LoginWindow()
         {
             this.InitializeComponent();
         }
-        
+
+		#endregion Constructors 
+
+		#region Methods (5) 
+
+		// Public Methods (2) 
+
         /// <summary>
         /// Auto login system. Only used in develop period.
         /// </summary>
@@ -51,6 +59,17 @@ namespace CMBC.EasyFactor
                 return false;
             }
             return false;
+        }
+		// Private Methods (3) 
+
+        /// <summary>
+        /// Event handler when cancel button clicked
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void Cancel(object sender, EventArgs e)
+        {
+            Close();
         }
 
         /// <summary>
@@ -83,7 +102,7 @@ namespace CMBC.EasyFactor
                 }
             }
         }
-        
+
         /// <summary>
         /// Event handler when LoginWindow loaded.
         /// </summary>
@@ -93,15 +112,7 @@ namespace CMBC.EasyFactor
         {
             tbUserId.Focus();
         }
-        
-        /// <summary>
-        /// Event handler when cancel button clicked
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void Cancel(object sender, EventArgs e)
-        {
-            Close();
-        }
+
+		#endregion Methods 
     }
 }

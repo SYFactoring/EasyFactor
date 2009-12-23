@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ClientDetail.cs" company="CISL@Fudan">
+// <copyright file="ClientDetail.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -18,7 +18,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (3)
+		#region Fields (3) 
 
         /// <summary>
         /// 
@@ -33,9 +33,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpContractType opContractType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (3)
+		#region Enums (3) 
 
         /// <summary>
         /// Operation Type 
@@ -57,7 +57,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT
         }
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         public enum OpClientCreditLineType
@@ -77,7 +77,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT_CREDIT_LINE
         }
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         public enum OpContractType
@@ -98,11 +98,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DETAIL_CONTRACT
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (4)
+		#region Constructors (4) 
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client">selected client</param>
@@ -194,11 +194,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabControl.SelectedTab = this.tabItemContract;
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (24)
+		#region Methods (24) 
 
-        // Private Methods (24) 
+		// Private Methods (24) 
 
         private void cbDepartments_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
         {
@@ -596,6 +596,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
                     this.NewClientCreditLine(null, null);
                 }
             }
@@ -615,10 +616,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.dgvClientCreditLines.Refresh();
                     creditLine.Backup();
                 }
             }
-            this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
         }
 
         /// <summary>
@@ -672,6 +673,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.dgvContracts.DataSource = client.Contracts.ToList();
                     this.NewContract(null, null);
                 }
             }
@@ -691,10 +693,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.dgvContracts.Refresh();
                     contract.Backup();
                 }
             }
-            this.dgvContracts.DataSource = client.Contracts.ToList();
         }
 
         /// <summary>
@@ -980,6 +982,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbCreateUserName.ReadOnly = true;
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

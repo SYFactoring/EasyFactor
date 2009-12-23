@@ -2,18 +2,29 @@
 {
     partial class CreditCoverNegMgr
     {
-		#region Fields (16) 
+		#region Fields (27) 
 
         private DevComponents.DotNetBar.ButtonX btnCreditCoverQuery;
         private System.Windows.Forms.ContextMenuStrip cmuCreditCoverMgr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCase;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNegoID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestDate;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCreditCovers;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCreditCoverNegs;
         private DevComponents.DotNetBar.LabelX lblBuyerFactorCode;
+        private DevComponents.DotNetBar.LabelX lblCount;
         private DevComponents.DotNetBar.LabelX lblSellerFactorCode;
-        private DevComponents.DotNetBar.LabelX llbCount;
         private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverDelete;
         private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverDetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverNew;
@@ -57,14 +68,35 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCreditCoverQuery = new DevComponents.DotNetBar.PanelEx();
-            this.dgvCreditCovers = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.lblSellerFactorCode = new DevComponents.DotNetBar.LabelX();
-            this.tbSellerFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblCount = new DevComponents.DotNetBar.LabelX();
+            this.btnCreditCoverQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbBuyerFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblBuyerFactorCode = new DevComponents.DotNetBar.LabelX();
-            this.btnCreditCoverQuery = new DevComponents.DotNetBar.ButtonX();
-            this.llbCount = new DevComponents.DotNetBar.LabelX();
+            this.tbSellerFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblSellerFactorCode = new DevComponents.DotNetBar.LabelX();
+            this.dgvCreditCoverNegs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colNegoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApproveType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequestAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequestDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApproveAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApproveDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIFPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuCreditCoverMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemCreditCoverSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,7 +105,7 @@
             this.menuItemCreditCoverUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCreditCoverDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.panelCreditCoverQuery.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCreditCovers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCreditCoverNegs)).BeginInit();
             this.cmuCreditCoverMgr.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,7 +113,7 @@
             // 
             this.panelCreditCoverQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelCreditCoverQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelCreditCoverQuery.Controls.Add(this.llbCount);
+            this.panelCreditCoverQuery.Controls.Add(this.lblCount);
             this.panelCreditCoverQuery.Controls.Add(this.btnCreditCoverQuery);
             this.panelCreditCoverQuery.Controls.Add(this.tbBuyerFactorCode);
             this.panelCreditCoverQuery.Controls.Add(this.lblBuyerFactorCode);
@@ -100,51 +132,29 @@
             this.panelCreditCoverQuery.Style.GradientAngle = 90;
             this.panelCreditCoverQuery.TabIndex = 0;
             // 
-            // dgvCreditCovers
+            // lblCount
             // 
-            this.dgvCreditCovers.AllowUserToAddRows = false;
-            this.dgvCreditCovers.AllowUserToDeleteRows = false;
-            this.dgvCreditCovers.AllowUserToOrderColumns = true;
-            this.dgvCreditCovers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCreditCovers.ContextMenuStrip = this.cmuCreditCoverMgr;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCreditCovers.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvCreditCovers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCreditCovers.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvCreditCovers.Location = new System.Drawing.Point(0, 63);
-            this.dgvCreditCovers.Name = "dgvCreditCovers";
-            this.dgvCreditCovers.ReadOnly = true;
-            this.dgvCreditCovers.Size = new System.Drawing.Size(549, 282);
-            this.dgvCreditCovers.TabIndex = 1;
-            // 
-            // lblSellerFactorCode
+            this.lblCount.AutoSize = true;
             // 
             // 
             // 
+            this.lblCount.BackgroundStyle.Class = "";
+            this.lblCount.Location = new System.Drawing.Point(297, 30);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.TabIndex = 5;
             // 
-            this.lblSellerFactorCode.BackgroundStyle.Class = "";
-            this.lblSellerFactorCode.Location = new System.Drawing.Point(3, 3);
-            this.lblSellerFactorCode.Name = "lblSellerFactorCode";
-            this.lblSellerFactorCode.Size = new System.Drawing.Size(96, 23);
-            this.lblSellerFactorCode.TabIndex = 0;
-            this.lblSellerFactorCode.Text = "卖方保理商代码";
+            // btnCreditCoverQuery
             // 
-            // tbSellerFactorCode
-            // 
-            // 
-            // 
-            // 
-            this.tbSellerFactorCode.Border.Class = "TextBoxBorder";
-            this.tbSellerFactorCode.Location = new System.Drawing.Point(95, 5);
-            this.tbSellerFactorCode.Name = "tbSellerFactorCode";
-            this.tbSellerFactorCode.Size = new System.Drawing.Size(100, 20);
-            this.tbSellerFactorCode.TabIndex = 1;
+            this.btnCreditCoverQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCreditCoverQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCreditCoverQuery.Location = new System.Drawing.Point(216, 5);
+            this.btnCreditCoverQuery.Name = "btnCreditCoverQuery";
+            this.btnCreditCoverQuery.Size = new System.Drawing.Size(75, 48);
+            this.btnCreditCoverQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCreditCoverQuery.TabIndex = 4;
+            this.btnCreditCoverQuery.Text = "查询";
+            this.btnCreditCoverQuery.Click += new System.EventHandler(this.QueryCreditCoverNeg);
             // 
             // tbBuyerFactorCode
             // 
@@ -169,28 +179,161 @@
             this.lblBuyerFactorCode.TabIndex = 2;
             this.lblBuyerFactorCode.Text = "买方保理商代码";
             // 
-            // btnCreditCoverQuery
-            // 
-            this.btnCreditCoverQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCreditCoverQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCreditCoverQuery.Location = new System.Drawing.Point(216, 5);
-            this.btnCreditCoverQuery.Name = "btnCreditCoverQuery";
-            this.btnCreditCoverQuery.Size = new System.Drawing.Size(75, 48);
-            this.btnCreditCoverQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCreditCoverQuery.TabIndex = 4;
-            this.btnCreditCoverQuery.Text = "查询";
-            // 
-            // llbCount
-            // 
-            this.llbCount.AutoSize = true;
+            // tbSellerFactorCode
             // 
             // 
             // 
-            this.llbCount.BackgroundStyle.Class = "";
-            this.llbCount.Location = new System.Drawing.Point(297, 30);
-            this.llbCount.Name = "llbCount";
-            this.llbCount.Size = new System.Drawing.Size(75, 23);
-            this.llbCount.TabIndex = 5;
+            // 
+            this.tbSellerFactorCode.Border.Class = "TextBoxBorder";
+            this.tbSellerFactorCode.Location = new System.Drawing.Point(95, 5);
+            this.tbSellerFactorCode.Name = "tbSellerFactorCode";
+            this.tbSellerFactorCode.Size = new System.Drawing.Size(100, 20);
+            this.tbSellerFactorCode.TabIndex = 1;
+            // 
+            // lblSellerFactorCode
+            // 
+            // 
+            // 
+            // 
+            this.lblSellerFactorCode.BackgroundStyle.Class = "";
+            this.lblSellerFactorCode.Location = new System.Drawing.Point(3, 3);
+            this.lblSellerFactorCode.Name = "lblSellerFactorCode";
+            this.lblSellerFactorCode.Size = new System.Drawing.Size(96, 23);
+            this.lblSellerFactorCode.TabIndex = 0;
+            this.lblSellerFactorCode.Text = "卖方保理商代码";
+            // 
+            // dgvCreditCoverNegs
+            // 
+            this.dgvCreditCoverNegs.AllowUserToAddRows = false;
+            this.dgvCreditCoverNegs.AllowUserToDeleteRows = false;
+            this.dgvCreditCoverNegs.AllowUserToOrderColumns = true;
+            this.dgvCreditCoverNegs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCreditCoverNegs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvCreditCoverNegs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCreditCoverNegs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colNegoID,
+            this.colCaseCode,
+            this.colCase,
+            this.colApproveType,
+            this.colRequestAmount,
+            this.colRequestDate,
+            this.colApproveAmount,
+            this.colApproveDate,
+            this.colIFPrice,
+            this.colCreateUserName,
+            this.colComment});
+            this.dgvCreditCoverNegs.ContextMenuStrip = this.cmuCreditCoverMgr;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvCreditCoverNegs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCreditCoverNegs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvCreditCoverNegs.Location = new System.Drawing.Point(0, 63);
+            this.dgvCreditCoverNegs.Name = "dgvCreditCoverNegs";
+            this.dgvCreditCoverNegs.ReadOnly = true;
+            this.dgvCreditCoverNegs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCreditCoverNegs.Size = new System.Drawing.Size(549, 282);
+            this.dgvCreditCoverNegs.TabIndex = 1;
+            this.dgvCreditCoverNegs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
+            // 
+            // colNegoID
+            // 
+            this.colNegoID.DataPropertyName = "NegoID";
+            this.colNegoID.HeaderText = "NegoID";
+            this.colNegoID.Name = "colNegoID";
+            this.colNegoID.ReadOnly = true;
+            this.colNegoID.Visible = false;
+            // 
+            // colCaseCode
+            // 
+            this.colCaseCode.DataPropertyName = "CaseCode";
+            this.colCaseCode.HeaderText = "案件编号";
+            this.colCaseCode.Name = "colCaseCode";
+            this.colCaseCode.ReadOnly = true;
+            // 
+            // colCase
+            // 
+            this.colCase.DataPropertyName = "Case";
+            this.colCase.HeaderText = "Case";
+            this.colCase.Name = "colCase";
+            this.colCase.ReadOnly = true;
+            this.colCase.Visible = false;
+            // 
+            // colApproveType
+            // 
+            this.colApproveType.DataPropertyName = "ApproveType";
+            this.colApproveType.HeaderText = "P/C标志";
+            this.colApproveType.Name = "colApproveType";
+            this.colApproveType.ReadOnly = true;
+            // 
+            // colRequestAmount
+            // 
+            this.colRequestAmount.DataPropertyName = "RequestAmount";
+            dataGridViewCellStyle2.Format = "N2";
+            this.colRequestAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colRequestAmount.HeaderText = "申请额度";
+            this.colRequestAmount.Name = "colRequestAmount";
+            this.colRequestAmount.ReadOnly = true;
+            // 
+            // colRequestDate
+            // 
+            this.colRequestDate.DataPropertyName = "RequestDate";
+            dataGridViewCellStyle3.Format = "d";
+            this.colRequestDate.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colRequestDate.HeaderText = "申请日期";
+            this.colRequestDate.Name = "colRequestDate";
+            this.colRequestDate.ReadOnly = true;
+            // 
+            // colApproveAmount
+            // 
+            this.colApproveAmount.DataPropertyName = "ApproveAmount";
+            dataGridViewCellStyle4.Format = "N2";
+            this.colApproveAmount.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colApproveAmount.HeaderText = "回复额度";
+            this.colApproveAmount.Name = "colApproveAmount";
+            this.colApproveAmount.ReadOnly = true;
+            // 
+            // colApproveDate
+            // 
+            this.colApproveDate.DataPropertyName = "ApproveDate";
+            dataGridViewCellStyle5.Format = "d";
+            this.colApproveDate.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colApproveDate.HeaderText = "回复日期";
+            this.colApproveDate.Name = "colApproveDate";
+            this.colApproveDate.ReadOnly = true;
+            // 
+            // colIFPrice
+            // 
+            this.colIFPrice.DataPropertyName = "IFPrice";
+            this.colIFPrice.HeaderText = "IF报价";
+            this.colIFPrice.Name = "colIFPrice";
+            this.colIFPrice.ReadOnly = true;
+            // 
+            // colCreateUserName
+            // 
+            this.colCreateUserName.DataPropertyName = "CreateUserName";
+            this.colCreateUserName.HeaderText = "经办人";
+            this.colCreateUserName.Name = "colCreateUserName";
+            this.colCreateUserName.ReadOnly = true;
+            // 
+            // colComment
+            // 
+            this.colComment.DataPropertyName = "Comment";
+            this.colComment.HeaderText = "备注";
+            this.colComment.Name = "colComment";
+            this.colComment.ReadOnly = true;
             // 
             // cmuCreditCoverMgr
             // 
@@ -239,17 +382,17 @@
             this.menuItemCreditCoverDelete.Size = new System.Drawing.Size(146, 22);
             this.menuItemCreditCoverDelete.Text = "删除额度申请";
             // 
-            // CreditCoverMgr
+            // CreditCoverNegMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dgvCreditCovers);
+            this.Controls.Add(this.dgvCreditCoverNegs);
             this.Controls.Add(this.panelCreditCoverQuery);
-            this.Name = "CreditCoverMgr";
+            this.Name = "CreditCoverNegMgr";
             this.Size = new System.Drawing.Size(549, 345);
             this.panelCreditCoverQuery.ResumeLayout(false);
             this.panelCreditCoverQuery.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCreditCovers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCreditCoverNegs)).EndInit();
             this.cmuCreditCoverMgr.ResumeLayout(false);
             this.ResumeLayout(false);
 

@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ClientMgrUI.Designer.cs" company="CISL@Fudan">
+// <copyright file="ClientMgrUI.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -11,41 +11,80 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientMgr
     {
+        #region Fields (63)
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressENColumn;
+        private DevComponents.DotNetBar.ButtonX btnQuery;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CellPhoneColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CityCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CityENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientCoreNoColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clientEDICodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientGroupColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientLevelColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameEN_1Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameEN_2Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientTypeColumn;
+        private System.Windows.Forms.ContextMenuStrip cmuClientMgr;
+        private DevComponents.DotNetBar.Controls.ComboTree comboTreeDepartment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyCodeColumn;
         /// <summary> 
         /// 必需的设计器变量。
         /// </summary>
         private System.ComponentModel.IContainer components;
-        private System.Windows.Forms.ContextMenuStrip cmuClientMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemClientSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemClientDetail;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemClientNew;
-        private System.Windows.Forms.ToolStripMenuItem menuItemClientUpdate;
-        private System.Windows.Forms.ToolStripMenuItem menuItemClientDelete;
-        private System.Windows.Forms.ToolStripMenuItem menuItemClientCreditLineNew;
-        private System.Windows.Forms.ToolStripMenuItem menuItemClientImport;
-        private DevComponents.DotNetBar.PanelEx pnlQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
-        private DevComponents.DotNetBar.LabelX lblClientName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbRM;
-        private DevComponents.DotNetBar.LabelX lblRM;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbPM;
-        private DevComponents.DotNetBar.LabelX lblPM;
-        private DevComponents.DotNetBar.LabelX lblDepartment;
-        private DevComponents.DotNetBar.LabelX lblClientType;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
-        private DevComponents.DotNetBar.LabelX lblClientNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContactColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountryCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvClients;
-        private DevComponents.DotNetBar.ButtonX btnQuery;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EmailColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FaxNumberColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IndustryColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsGroupColumn;
+        private DevComponents.DotNetBar.LabelX lblClientName;
+        private DevComponents.DotNetBar.LabelX lblClientNo;
+        private DevComponents.DotNetBar.LabelX lblClientType;
         private DevComponents.DotNetBar.LabelX lblCount;
-        private DevComponents.DotNetBar.Controls.ComboTree comboTreeDepartment;
-        private DevComponents.Editors.ComboItem comboItem1;
-        private DevComponents.Editors.ComboItem comboItem2;
-        private DevComponents.Editors.ComboItem comboItem3;
-        private DevComponents.Editors.ComboItem comboItem4;
-        private DevComponents.Editors.ComboItem comboItem5;
-        private DevComponents.Editors.ComboItem comboItem6;
+        private DevComponents.DotNetBar.LabelX lblDepartment;
+        private DevComponents.DotNetBar.LabelX lblPM;
+        private DevComponents.DotNetBar.LabelX lblRM;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientCreditLineNew;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientImport;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientNew;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientUpdate;
+        private System.Windows.Forms.ToolStripMenuItem menuItemContractNew;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PMNameColumn;
+        private DevComponents.DotNetBar.PanelEx pnlQuery;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PostCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProvinceCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProvinceENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RegistrationNumberColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RepresentativeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RMNameColumn;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPM;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbRM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TelephoneColumn;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WebsiteColumn;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary> 
         /// 清理所有正在使用的资源。
@@ -60,6 +99,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             base.Dispose(disposing);
         }
+
+        #endregion Methods
+
+
 
         #region 组件设计器生成的代码
 
@@ -88,12 +131,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.cbClientType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem6 = new DevComponents.Editors.ComboItem();
-            this.comboItem1 = new DevComponents.Editors.ComboItem();
-            this.comboItem2 = new DevComponents.Editors.ComboItem();
-            this.comboItem3 = new DevComponents.Editors.ComboItem();
-            this.comboItem4 = new DevComponents.Editors.ComboItem();
-            this.comboItem5 = new DevComponents.Editors.ComboItem();
             this.lblClientType = new DevComponents.DotNetBar.LabelX();
             this.tbClientEDICode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblClientNo = new DevComponents.DotNetBar.LabelX();
@@ -299,41 +336,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbClientType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbClientType.ItemHeight = 14;
             this.cbClientType.Items.AddRange(new object[] {
-            this.comboItem6,
-            this.comboItem1,
-            this.comboItem2,
-            this.comboItem3,
-            this.comboItem4,
-            this.comboItem5});
+            "全部",
+            "国有",
+            "民营",
+            "三资",
+            "私营",
+            "中外合资"});
             this.cbClientType.Location = new System.Drawing.Point(399, 6);
             this.cbClientType.Name = "cbClientType";
             this.cbClientType.Size = new System.Drawing.Size(100, 20);
             this.cbClientType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbClientType.TabIndex = 2;
-            // 
-            // comboItem6
-            // 
-            this.comboItem6.Text = "全部";
-            // 
-            // comboItem1
-            // 
-            this.comboItem1.Text = "国有";
-            // 
-            // comboItem2
-            // 
-            this.comboItem2.Text = "民营";
-            // 
-            // comboItem3
-            // 
-            this.comboItem3.Text = "三资";
-            // 
-            // comboItem4
-            // 
-            this.comboItem4.Text = "私营";
-            // 
-            // comboItem5
-            // 
-            this.comboItem5.Text = "中外合资";
             // 
             // lblClientType
             // 
@@ -847,43 +860,5 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         #endregion
-
-        private System.Windows.Forms.ToolStripMenuItem menuItemContractNew;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clientEDICodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientCoreNoColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameEN_1Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameEN_2Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AddressCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AddressENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CityCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CityENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProvinceCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProvinceENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PostCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RepresentativeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn WebsiteColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ContactColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TelephoneColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EmailColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FaxNumberColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CellPhoneColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RegistrationNumberColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyCodeColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn IsGroupColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientTypeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientLevelColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IndustryColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PMNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RMNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CountryCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientGroupColumn;
     }
 }

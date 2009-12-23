@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="AboutBox.Designer.cs" company="CISL@Fudan">
+// <copyright file="AboutBox.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -11,18 +11,26 @@ namespace CMBC.EasyFactor.Help.About
     /// </summary>
     public partial class AboutBox
     {
+        #region Fields (9)
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.PictureBox logoPictureBox;
+        private System.Windows.Forms.Label labelCompanyName;
+        private System.Windows.Forms.Label labelCopyright;
         private System.Windows.Forms.Label labelProductName;
         private System.Windows.Forms.Label labelVersion;
-        private System.Windows.Forms.Label labelCopyright;
-        private System.Windows.Forms.Label labelCompanyName;
-        private System.Windows.Forms.TextBox textBoxDescription;
+        private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.Button okButton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
+        private System.Windows.Forms.TextBox textBoxDescription;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -37,6 +45,10 @@ namespace CMBC.EasyFactor.Help.About
 
             base.Dispose(disposing);
         }
+
+        #endregion Methods
+
+
 
         #region Windows 窗体设计器生成的代码
 
