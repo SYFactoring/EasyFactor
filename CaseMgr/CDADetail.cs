@@ -59,14 +59,17 @@ namespace CMBC.EasyFactor.CaseMgr
             this.creditCoverCurrComboBox.DataSource = Currency.AllCurrencies();
             this.creditCoverCurrComboBox.DisplayMember = "CurrencyCode";
             this.creditCoverCurrComboBox.ValueMember = "CurrencyCode";
+            this.creditCoverCurrComboBox.SelectedIndex = -1;
 
             this.financeLineCurrComboBox.DataSource = Currency.AllCurrencies();
             this.financeLineCurrComboBox.DisplayMember = "CurrencyCode";
             this.financeLineCurrComboBox.ValueMember = "CurrencyCode";
+            this.financeLineCurrComboBox.SelectedIndex = -1;
 
             this.handFeeCurrComboBox.DataSource = Currency.AllCurrencies();
             this.handFeeCurrComboBox.DisplayMember = "CurrencyCode";
             this.handFeeCurrComboBox.ValueMember = "CurrencyCode";
+            this.handFeeCurrComboBox.SelectedIndex = -1;
 
             this.assignTypeComboBox.DataSource = new string[] {"全部","部分" };
             this.commissionTypeComboBox.DataSource = new string[] {"01","02","其他"};
@@ -220,6 +223,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 CDA cda = (CDA)this.CDABindingSource.DataSource;
                 cda.Case = curCase;
+                this.contractCodeTextBox.Text = curCase.SellerClient.Contracts.SingleOrDefault(c => c.ContractStatus == "已生效").ContractCode;
             }
         }
 

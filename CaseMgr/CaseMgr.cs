@@ -34,12 +34,20 @@ namespace CMBC.EasyFactor.CaseMgr
             InitializeComponent();
             ControlUtil.SetDoubleBuffered(this.dgvCases);
 
-            this.cbOwnerDepts.DataSource = Department.AllDepartments();
+            List<string> transTypes = Case.ConstantTransTypes().ToList();
+            transTypes.Insert(0, "全部");
+            this.cbTransactionType.DataSource = transTypes;
+
+            List<Department> deptsList = Department.AllDepartments().ToList();
+            deptsList.Insert(0, new Department() {DepartmentCode="CN01300",DepartmentName="全部" });
+            this.cbOwnerDepts.DataSource = deptsList;
             this.cbOwnerDepts.DisplayMembers = "DepartmentName";
             this.cbOwnerDepts.ValueMember = "DepartmentCode";
             this.cbOwnerDepts.GroupingMembers = "Domain";
 
-            this.cbCurrency.DataSource = Currency.AllCurrencies();
+            List<Currency> currencyList = Currency.AllCurrencies().ToList();
+            currencyList.Insert(0, new Currency() { CurrencyCode = "AAA", CurrencyName = "All" });
+            this.cbCurrency.DataSource = currencyList;
             this.cbCurrency.DisplayMember = "CurrencyFormat";
             this.cbCurrency.ValueMember = "CurrencyCode";
         }
@@ -183,7 +191,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             var queryResult = App.Current.DbContext.Cases.Where(c =>
                                    ((string)this.cbOwnerDepts.SelectedValue == "CN01300" ? true : c.OwnerDepartmentCode.Equals((string)this.cbOwnerDepts.SelectedValue))
-                                && (this.cbTransactionType.Text == string.Empty ? true : c.TransactionType.Equals(this.cbTransactionType.Text))
+                                && (this.cbTransactionType.Text == "全部" ? true : c.TransactionType.Equals(this.cbTransactionType.Text))
                                 && ((string)this.cbCurrency.SelectedValue == "AAA" ? true : c.InvoiceCurrency.Equals((string)this.cbCurrency.SelectedValue))
                                 && (beginDate == this.diBegin.MinDate ? true : c.CaseAppDate > beginDate.AddDays(-1))
                                 && (endDate == this.diEnd.MaxDate ? true : c.CaseAppDate < endDate.AddDays(1))

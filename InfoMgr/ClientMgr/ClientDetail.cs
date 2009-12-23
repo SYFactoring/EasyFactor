@@ -116,15 +116,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbCountryCode.DataSource = Country.AllCountries();
             this.cbCountryCode.DisplayMember = "CountryFormatCN";
             this.cbCountryCode.ValueMember = "CountryCode";
+            this.cbCountryCode.SelectedIndex = -1;
 
             this.cbDepartments.DataSource = Department.AllDepartments();
             this.cbDepartments.DisplayMembers = "DepartmentName";
             this.cbDepartments.GroupingMembers = "Domain";
             this.cbDepartments.ValueMember = "DepartmentCode";
+            this.cbDepartments.SelectedIndex = -1;
 
             this.creditLineCurrencyComboBox.DataSource = Currency.AllCurrencies();
             this.creditLineCurrencyComboBox.DisplayMember = "CurrencyFormat";
             this.creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
+            this.creditLineCurrencyComboBox.SelectedIndex = -1;
 
             this.opClientType = opClientType;
             this.opClientCreditLineType = opClientCreditLineType;

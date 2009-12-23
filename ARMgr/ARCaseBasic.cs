@@ -13,16 +13,16 @@ namespace CMBC.EasyFactor.ARMgr
     ///
     public partial class ARCaseBasic : UserControl
     {
-		#region Fields (1) 
+        #region Fields (1)
 
         /// <summary>
         /// 
         /// </summary>
         private Case curCase;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -45,11 +45,11 @@ namespace CMBC.EasyFactor.ARMgr
             InvoicePayment
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="opARType"></param>
@@ -76,11 +76,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (3) 
+        #region Methods (3)
 
-		// Private Methods (3) 
+        // Private Methods (3) 
 
         /// <summary>
         /// 
@@ -135,22 +135,14 @@ namespace CMBC.EasyFactor.ARMgr
             }
             else
             {
-                ResetInvoiceControlStatus();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void ResetInvoiceControlStatus()
-        {
-            this.isNoticeCheckBox.Checked = false;
-            this.isRecoarseCheckBox.Checked = false;
-            this.assignTypeTextBox.Text = string.Empty;
-            Control control = this.panelInvoiceMgr.Controls[0];
-            if (control is InvoiceAssign)
-            {
-                (control as InvoiceAssign).ResetControlsStatus();
+                this.isNoticeCheckBox.Checked = false;
+                this.isRecoarseCheckBox.Checked = false;
+                this.assignTypeTextBox.Text = string.Empty;
+                Control control = this.panelInvoiceMgr.Controls[0];
+                if (control is InvoiceAssign)
+                {
+                    (control as InvoiceAssign).ResetControlsStatus();
+                }
             }
         }
 
@@ -173,6 +165,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

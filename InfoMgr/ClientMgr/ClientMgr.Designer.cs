@@ -29,7 +29,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameEN_2Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientTypeColumn;
         private System.Windows.Forms.ContextMenuStrip cmuClientMgr;
-        private DevComponents.DotNetBar.Controls.ComboTree comboTreeDepartment;
+        private DevComponents.DotNetBar.Controls.ComboTree cbDepartment;
         private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CompanyCodeColumn;
         /// <summary> 
@@ -127,7 +127,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemClientDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemClientImport = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlQuery = new DevComponents.DotNetBar.PanelEx();
-            this.comboTreeDepartment = new DevComponents.DotNetBar.Controls.ComboTree();
+            this.cbDepartment = new DevComponents.DotNetBar.Controls.ComboTree();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.cbClientType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -263,7 +263,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.pnlQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.pnlQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.pnlQuery.Controls.Add(this.comboTreeDepartment);
+            this.pnlQuery.Controls.Add(this.cbDepartment);
             this.pnlQuery.Controls.Add(this.lblCount);
             this.pnlQuery.Controls.Add(this.btnQuery);
             this.pnlQuery.Controls.Add(this.cbClientType);
@@ -292,19 +292,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // comboTreeDepartment
             // 
-            this.comboTreeDepartment.BackColor = System.Drawing.SystemColors.Window;
+            this.cbDepartment.BackColor = System.Drawing.SystemColors.Window;
             // 
             // 
             // 
-            this.comboTreeDepartment.BackgroundStyle.Class = "TextBoxBorder";
-            this.comboTreeDepartment.ButtonDropDown.Visible = true;
-            this.comboTreeDepartment.ColumnsVisible = false;
-            this.comboTreeDepartment.DropDownWidth = 150;
-            this.comboTreeDepartment.Location = new System.Drawing.Point(60, 32);
-            this.comboTreeDepartment.Name = "comboTreeDepartment";
-            this.comboTreeDepartment.Size = new System.Drawing.Size(100, 23);
-            this.comboTreeDepartment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboTreeDepartment.TabIndex = 3;
+            this.cbDepartment.BackgroundStyle.Class = "TextBoxBorder";
+            this.cbDepartment.ButtonDropDown.Visible = true;
+            this.cbDepartment.ColumnsVisible = false;
+            this.cbDepartment.DropDownWidth = 150;
+            this.cbDepartment.Location = new System.Drawing.Point(60, 32);
+            this.cbDepartment.Name = "comboTreeDepartment";
+            this.cbDepartment.Size = new System.Drawing.Size(100, 23);
+            this.cbDepartment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbDepartment.TabIndex = 3;
             // 
             // lblCount
             // 

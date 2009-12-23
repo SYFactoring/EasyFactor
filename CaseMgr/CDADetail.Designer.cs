@@ -914,6 +914,7 @@
             this.companyNameENTextBox.Name = "companyNameENTextBox";
             this.companyNameENTextBox.Size = new System.Drawing.Size(170, 20);
             this.companyNameENTextBox.TabIndex = 30;
+            this.companyNameENTextBox.WatermarkText = "英文名";
             // 
             // contractCodeTextBox
             // 
@@ -960,6 +961,7 @@
             this.buyerClientNameEN_1TextBox.Name = "buyerClientNameEN_1TextBox";
             this.buyerClientNameEN_1TextBox.Size = new System.Drawing.Size(214, 20);
             this.buyerClientNameEN_1TextBox.TabIndex = 17;
+            this.buyerClientNameEN_1TextBox.WatermarkText = "英文名";
             // 
             // buyerClientNameCNTextBox
             // 
@@ -972,6 +974,7 @@
             this.buyerClientNameCNTextBox.Name = "buyerClientNameCNTextBox";
             this.buyerClientNameCNTextBox.Size = new System.Drawing.Size(216, 20);
             this.buyerClientNameCNTextBox.TabIndex = 15;
+            this.buyerClientNameCNTextBox.WatermarkText = "中文名";
             // 
             // buyerClientEDICodeTextBox
             // 
@@ -996,6 +999,7 @@
             this.sellerClientNameEN_1TextBox.Name = "sellerClientNameEN_1TextBox";
             this.sellerClientNameEN_1TextBox.Size = new System.Drawing.Size(216, 20);
             this.sellerClientNameEN_1TextBox.TabIndex = 11;
+            this.sellerClientNameEN_1TextBox.WatermarkText = "英文名";
             // 
             // companyNameCNTextBox
             // 
@@ -1007,6 +1011,7 @@
             this.companyNameCNTextBox.Name = "companyNameCNTextBox";
             this.companyNameCNTextBox.Size = new System.Drawing.Size(170, 20);
             this.companyNameCNTextBox.TabIndex = 9;
+            this.companyNameCNTextBox.WatermarkText = "中文名";
             // 
             // factorCodeTextBox
             // 
@@ -1030,6 +1035,7 @@
             this.sellerClientNameCNTextBox.Name = "sellerClientNameCNTextBox";
             this.sellerClientNameCNTextBox.Size = new System.Drawing.Size(216, 20);
             this.sellerClientNameCNTextBox.TabIndex = 5;
+            this.sellerClientNameCNTextBox.WatermarkText = "中文名";
             // 
             // sellerClientEDICodeTextBox
             // 

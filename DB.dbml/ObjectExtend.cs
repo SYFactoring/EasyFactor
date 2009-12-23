@@ -19,7 +19,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        private static List<Department> _allDepartment;
+        private static readonly List<Department> _allDepartment;
 
         #endregion Fields
 
@@ -31,7 +31,6 @@ namespace CMBC.EasyFactor.DB.dbml
         static Department()
         {
             _allDepartment = App.Current.DbContext.Departments.ToList();
-            _allDepartment.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
         }
 
         #endregion Constructors
@@ -43,6 +42,11 @@ namespace CMBC.EasyFactor.DB.dbml
         public static List<Department> AllDepartments()
         {
             return _allDepartment;
+        }
+
+        public static List<Department> AllDepartments(string domainName)
+        {
+            return _allDepartment.Where(d => d._Domain == domainName).ToList();
         }
 
         /// <summary>
@@ -114,7 +118,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        private static List<Currency> _currencyList;
+        private static readonly List<Currency> _currencyList;
 
         #endregion Fields
 
@@ -126,7 +130,6 @@ namespace CMBC.EasyFactor.DB.dbml
         static Currency()
         {
             _currencyList = App.Current.DbContext.Currencies.ToList();
-            _currencyList.Insert(0, new Currency() { CurrencyCode = "AAA", CurrencyName = "All" });
         }
 
         #endregion Constructors
@@ -140,14 +143,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if ("AAA".Equals(_CurrencyCode))
-                {
-                    return "All";
-                }
-                else
-                {
-                    return _CurrencyCode + " " + _CurrencyName;
-                }
+                return _CurrencyCode + " " + _CurrencyName;
             }
         }
 
@@ -163,7 +159,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static List<Currency> AllCurrencies()
         {
-            return _currencyList.ToList();
+            return _currencyList;
         }
 
         #endregion Methods
@@ -179,7 +175,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        private static List<Country> _countryList;
+        private static readonly List<Country> _countryList;
 
         #endregion Fields
 
@@ -191,7 +187,6 @@ namespace CMBC.EasyFactor.DB.dbml
         static Country()
         {
             _countryList = App.Current.DbContext.Countries.ToList();
-            _countryList.Insert(0, new Country() { CountryCode = "AA", CountryNameCN = "全部", CountryNameEN = "All" });
         }
 
         #endregion Constructors
@@ -205,14 +200,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if ("AA".Equals(_CountryCode))
-                {
-                    return "全部";
-                }
-                else
-                {
-                    return _CountryCode + " " + _CountryNameCN;
-                }
+                return _CountryCode + " " + _CountryNameCN;
             }
         }
 
@@ -223,14 +211,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if ("AA".Equals(_CountryCode))
-                {
-                    return "All";
-                }
-                else
-                {
-                    return _CountryCode + " " + _CountryNameEN;
-                }
+                return _CountryCode + " " + _CountryNameEN;
             }
         }
 
@@ -337,5 +318,39 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         #endregion Methods
+    }
+
+    public partial class Case
+    {
+        #region Fields (1)
+
+        private static readonly List<string> allTransTypes;
+
+        #endregion Fields
+
+        #region Constructors (1)
+
+        static Case()
+        {
+            allTransTypes = new List<string>();
+            allTransTypes.Add("国内卖方保理");
+            allTransTypes.Add("国内买方保理");
+            allTransTypes.Add("出口保理");
+            allTransTypes.Add("进口保理");
+            allTransTypes.Add("国内信保保理");
+            allTransTypes.Add("国际信保保理");
+            allTransTypes.Add("租赁保理");
+        }
+
+        #endregion Constructors
+
+        #region Properties (1)
+
+        public static List<string> ConstantTransTypes()
+        {
+            return allTransTypes;
+        }
+
+        #endregion Properties
     }
 }

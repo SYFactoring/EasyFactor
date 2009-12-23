@@ -87,21 +87,22 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             this.InitializeComponent();
 
-            this.cbCaseInvoiceCurrency.DataSource = Currency.AllCurrencies();
+            this.cbCaseInvoiceCurrency.DataSource = Currency.AllCurrencies().ToList();
             this.cbCaseInvoiceCurrency.DisplayMember = "CurrencyFormat";
             this.cbCaseInvoiceCurrency.ValueMember = "CurrencyCode";
 
-            string[] transactionList = new string[] { "国内保理", "出口保理", "进口保理", "信保保理" };
-            this.cbCaseTransactionType.DataSource = transactionList;
+            this.cbCaseTransactionType.DataSource = Case.ConstantTransTypes();
 
-            this.cbCaseCoDepts.DataSource = Department.AllDepartments();
+            this.cbCaseCoDepts.DataSource = Department.AllDepartments("贸易金融事业部").ToList();
             this.cbCaseCoDepts.ValueMember = "DepartmentCode";
             this.cbCaseCoDepts.DisplayMember = "DepartmentName";
+            this.cbCaseCoDepts.SelectedIndex = -1;
 
             this.cbCaseOwnerDepts.DataSource = Department.AllDepartments();
             this.cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
             this.cbCaseOwnerDepts.GroupingMembers = "Domain";
             this.cbCaseOwnerDepts.ValueMember = "DepartmentCode";
+            this.cbCaseOwnerDepts.SelectedIndex = -1;
 
             this.opCaseType = opCaseType;
             this.opCreditCoverNegType = opCreditCoverNegType;
@@ -110,6 +111,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 curCase = new Case();
                 curCase.CreateUserName = App.Current.CurUser.Name;
+                curCase.CaseAppDate = DateTime.Now;
                 this.caseBindingSource.DataSource = curCase;
             }
             else
@@ -210,38 +212,46 @@ namespace CMBC.EasyFactor.CaseMgr
         private void CaseTransactionTypeChanged(object sender, EventArgs e)
         {
 
-            string transationType = this.cbCaseTransactionType.SelectedItem.ToString();
+            string transationType = this.cbCaseTransactionType.Text;
             if (transationType == null || string.Empty.Equals(transationType))
             {
                 return;
             }
 
             Case curCase = (Case)this.caseBindingSource.DataSource;
-            if ("国内保理".Equals(transationType))
+            Factor cmbc = Factor.FindFactorByCode(Factor.CMBC_CODE);
+            switch (transationType)
             {
-                Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
-                curCase.SellerFactor = selectedFactor;
-                curCase.BuyerFactor = selectedFactor;
+                case "国内卖方保理":
+                case "国内买方保理":
+                case "租赁保理":
+                    this.btnCaseFactorSelect.Enabled = false;
+                    curCase.SellerFactor = cmbc;
+                    curCase.BuyerFactor = cmbc;
+                    curCase.InvoiceCurrency = "CNY";
+                    break;
+                case "出口保理":
+                    this.btnCaseFactorSelect.Enabled = true;
+                    curCase.SellerFactor = cmbc;
+                    curCase.InvoiceCurrency = "USD";
+                    break;
+                case "进口保理":
+                    this.btnCaseFactorSelect.Enabled = true;
+                    curCase.BuyerFactor = cmbc;
+                    curCase.InvoiceCurrency = "USD";
+                    break;
+                case "国际信保保理":
+                    this.btnCaseFactorSelect.Enabled = true;
+                    curCase.SellerFactor = cmbc;
+                    curCase.InvoiceCurrency = "USD";
+                    break;
+                case "国内信保保理":
+                    this.btnCaseFactorSelect.Enabled = true;
+                    curCase.SellerFactor = cmbc;
+                    curCase.InvoiceCurrency = "CNY";
+                    break;
+                default: break;
             }
-            else if ("出口保理".Equals(transationType))
-            {
-                Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
-                curCase.SellerFactor = selectedFactor;
-                curCase.BuyerFactor = null;
-            }
-            else if ("进口保理".Equals(transationType))
-            {
-                Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
-                curCase.SellerFactor = null;
-                curCase.BuyerFactor = selectedFactor;
-            }
-            else if ("信保保理".Equals(transationType))
-            {
-                Factor selectedFactor = Factor.FindFactorByCode(Factor.CMBC_CODE);
-                curCase.SellerFactor = selectedFactor;
-                curCase.BuyerFactor = null;
-            }
-
         }
 
         /// <summary>
@@ -345,7 +355,9 @@ namespace CMBC.EasyFactor.CaseMgr
             string yearMonth = String.Format("{0:yyyy}{0:MM}", DateTime.Today);
             switch (curCase.TransactionType)
             {
-                case "国内保理":
+                case "国内卖方保理":
+
+                case "国内买方保理":
                     caseCode = "LF" + yearMonth + "-" + String.Format("{0:D4}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("LF" + yearMonth)) + 1);
                     break;
                 case "出口保理":
@@ -354,8 +366,13 @@ namespace CMBC.EasyFactor.CaseMgr
                 case "进口保理":
                     caseCode = "IF" + yearMonth + "-" + String.Format("{0:D4}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("IF" + yearMonth)) + 1);
                     break;
-                case "信保保理":
+                case "国际信保保理":
+
+                case "国内信保保理":
                     caseCode = "SF" + yearMonth + "-" + String.Format("{0:D4}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("SF" + yearMonth)) + 1);
+                    break;
+                case "租赁保理":
+                    caseCode = "LF" + yearMonth + "-" + String.Format("{0:D4}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("LF" + yearMonth)) + 1);
                     break;
                 default:
                     caseCode = string.Empty;
@@ -567,22 +584,26 @@ namespace CMBC.EasyFactor.CaseMgr
             QueryForm queryUI = new QueryForm(clientMgr, "选择买方");
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
-            curCase.BuyerClient = clientMgr.Selected;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SelectCaseBuyerFactor(object sender, EventArgs e)
-        {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            FactorMgr factorMgr = new FactorMgr(false);
-            QueryForm queryUI = new QueryForm(factorMgr, "选择买方保理商");
-            factorMgr.OwnerForm = queryUI;
-            queryUI.ShowDialog(this);
-            curCase.BuyerFactor = factorMgr.Selected;
+            if (clientMgr.Selected != null)
+            {
+                curCase.BuyerClient = clientMgr.Selected;
+                switch (this.cbCaseTransactionType.Text)
+                {
+                    case "国内卖方保理":
+                    case "国内信保保理":
+                    case "国际信保保理":
+                    case "租赁保理":
+                    case "出口保理":
+                        break;
+                    case "国内买方保理":
+                    case "进口保理":
+                        curCase.OwnerDepartment = curCase.BuyerClient.Department;
+                        List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
+                        this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
+                        break;
+                    default: break;
+                }
+            }
         }
 
         /// <summary>
@@ -597,7 +618,26 @@ namespace CMBC.EasyFactor.CaseMgr
             QueryForm queryUI = new QueryForm(clientMgr, "选择卖方");
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
-            curCase.SellerClient = clientMgr.Selected;
+            if (clientMgr.Selected != null)
+            {
+                curCase.SellerClient = clientMgr.Selected;
+                switch (this.cbCaseTransactionType.Text)
+                {
+                    case "国内卖方保理":
+                    case "国内信保保理":
+                    case "国际信保保理":
+                    case "租赁保理":
+                    case "出口保理":
+                        curCase.OwnerDepartment = curCase.SellerClient.Department;
+                        List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
+                        this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
+                        break;
+                    case "国内买方保理":
+                    case "进口保理":
+                        break;
+                    default: break;
+                }
+            }
         }
 
         private void SelectCreditCoverNeg(object sender, DataGridViewCellEventArgs e)
@@ -623,14 +663,37 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SelectSellerFactor(object sender, EventArgs e)
+        private void SelectFactor(object sender, EventArgs e)
         {
             Case curCase = (Case)this.caseBindingSource.DataSource;
             FactorMgr factorMgr = new FactorMgr(false);
-            QueryForm queryUI = new QueryForm(factorMgr, "选择卖方保理商");
+            QueryForm queryUI = new QueryForm(factorMgr, "选择保理商");
             factorMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
-            curCase.SellerFactor = factorMgr.Selected;
+
+            Factor factor = factorMgr.Selected;
+            if (factor != null)
+            {
+                this.tbCaseFactorCode.Text = factor.FactorCode;
+                this.tbCaseFactorNameCN.Text = factor.CompanyNameCN;
+                this.tbCaseFactorNameEN.Text = factor.CompanyNameEN;
+
+                switch (this.cbCaseTransactionType.Text)
+                {
+                    case "国内卖方保理":
+                    case "出口保理":
+                    case "国内信保保理":
+                    case "国际信保保理":
+                    case "租赁保理":
+                        curCase.SellerFactor = factor;
+                        break;
+                    case "国内买方保理":
+                    case "进口保理":
+                        curCase.BuyerFactor = factor;
+                        break;
+                    default: break;
+                }
+            }
         }
 
         /// <summary>
@@ -664,9 +727,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
-                this.btnCaseBuyerFactorSelect.Visible = true;
                 this.btnCaseBuyerSelect.Visible = true;
-                this.btnCaseSellerFactorSelect.Visible = true;
+                this.btnCaseFactorSelect.Visible = true;
                 this.btnCaseSellerSelect.Visible = true;
             }
             else if (this.opCaseType == OpCaseType.UPDATE_CASE)
@@ -675,9 +737,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
-                this.btnCaseBuyerFactorSelect.Visible = true;
                 this.btnCaseBuyerSelect.Visible = true;
-                this.btnCaseSellerFactorSelect.Visible = true;
+                this.btnCaseFactorSelect.Visible = true;
                 this.btnCaseSellerSelect.Visible = true;
 
                 if ("自营".Equals(curCase.OperationType))
@@ -695,9 +756,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
-                this.btnCaseBuyerFactorSelect.Visible = false;
                 this.btnCaseBuyerSelect.Visible = false;
-                this.btnCaseSellerFactorSelect.Visible = false;
+                this.btnCaseFactorSelect.Visible = false;
                 this.btnCaseSellerSelect.Visible = false;
             }
 

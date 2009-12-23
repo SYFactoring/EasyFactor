@@ -15,13 +15,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Client Management User Interface
     /// </summary>
     public partial class ClientMgr : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         /// <summary>
         /// 
@@ -32,9 +33,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private bool isEditable;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the ClientMgr class
@@ -47,15 +48,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UpdateEditableStatus();
             ControlUtil.SetDoubleBuffered(this.dgvClients);
 
-            this.comboTreeDepartment.DataSource = Department.AllDepartments();
-            this.comboTreeDepartment.DisplayMembers = "DepartmentName";
-            this.comboTreeDepartment.ValueMember = "DepartmentCode";
-            this.comboTreeDepartment.GroupingMembers = "Domain";
+            List<Department> deptsList = Department.AllDepartments().ToList();
+            deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
+            this.cbDepartment.DataSource = deptsList;
+            this.cbDepartment.DisplayMembers = "DepartmentName";
+            this.cbDepartment.ValueMember = "DepartmentCode";
+            this.cbDepartment.GroupingMembers = "Domain";
+            this.cbDepartment.SelectedIndex = -1;
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets owner form
@@ -75,11 +79,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (12) 
+        #region Methods (12)
 
-		// Private Methods (12) 
+        // Private Methods (12) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -387,9 +391,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             string department = string.Empty;
-            if (comboTreeDepartment.SelectedIndex >= 0)
+            if (cbDepartment.SelectedIndex >= 0)
             {
-                department = comboTreeDepartment.SelectedValue.ToString();
+                department = cbDepartment.SelectedValue.ToString();
                 if (department == "CN01300")
                 {
                     department = string.Empty;
@@ -486,6 +490,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }
