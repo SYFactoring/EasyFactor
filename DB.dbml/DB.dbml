@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=192.168.1.100;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=10.171.5.99\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[User]" Member="Users">
     <Type Name="User">
       <Column Name="UserID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -379,7 +379,7 @@
       <Column Name="Price" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="EFPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="IFPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="CommissonType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CommissionType" Storage="_CommissonType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="CommissionTypeComment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="HandFeeCurr" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
       <Column Name="HandFee" Type="System.Double" DbType="Float" CanBeNull="true" />

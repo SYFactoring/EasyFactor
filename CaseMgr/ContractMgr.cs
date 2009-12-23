@@ -98,7 +98,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            string cid = (string)dgvContracts["ContractCodeColumn", dgvContracts.SelectedRows[0].Index].Value;
+            string cid = (string)dgvContracts["colContractCode", dgvContracts.SelectedRows[0].Index].Value;
             if (cid != null)
             {
                 Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
@@ -135,7 +135,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            string cid = (string)dgvContracts["ContractCodeColumn", dgvContracts.SelectedRows[0].Index].Value;
+            string cid = (string)dgvContracts["colContractCode", dgvContracts.SelectedRows[0].Index].Value;
             if (cid != null)
             {
                 Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
@@ -185,7 +185,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            string cid = (string)dgvContracts["ContractCodeColumn", dgvContracts.SelectedRows[0].Index].Value;
+            string cid = (string)dgvContracts["colContractCode", dgvContracts.SelectedRows[0].Index].Value;
             if (cid != null)
             {
                 Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
@@ -224,7 +224,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            string cid = (string)dgvContracts["ContractCodeColumn", dgvContracts.SelectedRows[0].Index].Value;
+            string cid = (string)dgvContracts["colContractCode", dgvContracts.SelectedRows[0].Index].Value;
             if (cid != null)
             {
                 Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
@@ -252,7 +252,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            string cid = (string)dgvContracts["ContractCodeColumn", dgvContracts.SelectedRows[0].Index].Value;
+            string cid = (string)dgvContracts["colContractCode", dgvContracts.SelectedRows[0].Index].Value;
             if (cid != null)
             {
                 Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);

@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CaseDetail : DevComponents.DotNetBar.Office2007Form
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         /// <summary>
         /// 
@@ -28,9 +28,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCreditCoverNegType opCreditCoverNegType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (2) 
+        #region Enums (2)
 
         /// <summary>
         /// 
@@ -52,7 +52,7 @@ namespace CMBC.EasyFactor.CaseMgr
             /// </summary>
             DETAIL_CREDIT_COVER_NEG
         }
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         public enum OpCaseType
@@ -73,11 +73,11 @@ namespace CMBC.EasyFactor.CaseMgr
             DETAIL_CASE,
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (3) 
+        #region Constructors (3)
 
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="curCase"></param>
@@ -138,6 +138,7 @@ namespace CMBC.EasyFactor.CaseMgr
         public CaseDetail(Case curCase, OpCaseType opCaseType)
             : this(curCase, opCaseType, OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG)
         {
+            this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
         }
 
         /// <summary>
@@ -150,11 +151,11 @@ namespace CMBC.EasyFactor.CaseMgr
         {
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (22) 
+        #region Methods (22)
 
-		// Private Methods (22) 
+        // Private Methods (22) 
 
         private void CaseDetail_Leave(object sender, EventArgs e)
         {
@@ -726,6 +727,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

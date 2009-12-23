@@ -6502,7 +6502,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_TransationType", DbType="NVarChar(50)")]
-        public string TransactionType
+		public string TransactionType
 		{
 			get
 			{
@@ -8227,8 +8227,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnEFPriceChanged();
     partial void OnIFPriceChanging(System.Nullable<double> value);
     partial void OnIFPriceChanged();
-    partial void OnCommissonTypeChanging(string value);
-    partial void OnCommissonTypeChanged();
+    partial void OnCommissionTypeChanging(string value);
+    partial void OnCommissionTypeChanged();
     partial void OnCommissionTypeCommentChanging(string value);
     partial void OnCommissionTypeCommentChanged();
     partial void OnHandFeeCurrChanging(string value);
@@ -8809,7 +8809,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_CommissonType", DbType="NVarChar(50)")]
-		public string CommissonType
+		public string CommissionType
 		{
 			get
 			{
@@ -8819,11 +8819,11 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._CommissonType != value))
 				{
-					this.OnCommissonTypeChanging(value);
+					this.OnCommissionTypeChanging(value);
 					this.SendPropertyChanging();
 					this._CommissonType = value;
-					this.SendPropertyChanged("CommissonType");
-					this.OnCommissonTypeChanged();
+					this.SendPropertyChanged("CommissionType");
+					this.OnCommissionTypeChanged();
 				}
 			}
 		}

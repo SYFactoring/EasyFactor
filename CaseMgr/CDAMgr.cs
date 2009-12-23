@@ -95,7 +95,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            int cid = (int)dgvCDAs["CDAIDColumn", dgvCDAs.SelectedRows[0].Index].Value;
+            int cid = (int)dgvCDAs["colCDAID", dgvCDAs.SelectedRows[0].Index].Value;
             if (cid != 0)
             {
                 CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDAID == cid);
@@ -132,7 +132,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            int cid = (int)dgvCDAs["CDAIDColumn", dgvCDAs.SelectedRows[0].Index].Value;
+            int cid = (int)dgvCDAs["colCDAID", dgvCDAs.SelectedRows[0].Index].Value;
             if (cid != 0)
             {
                 CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDAID == cid);
@@ -180,7 +180,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            int cid = (int)dgvCDAs["CDAIDColumn", dgvCDAs.SelectedRows[0].Index].Value;
+            int cid = (int)dgvCDAs["colCDAID", dgvCDAs.SelectedRows[0].Index].Value;
             if (cid != 0)
             {
                 CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDAID == cid);
@@ -208,7 +208,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            int cid = (int)dgvCDAs["CDAIDColumn", dgvCDAs.SelectedRows[0].Index].Value;
+            int cid = (int)dgvCDAs["colCDAID", dgvCDAs.SelectedRows[0].Index].Value;
             if (cid != 0)
             {
                 CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDAID == cid);

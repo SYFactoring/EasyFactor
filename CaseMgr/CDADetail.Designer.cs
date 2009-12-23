@@ -2,7 +2,7 @@
 {
     partial class CDADetail
     {
-        #region Fields (79)
+		#region Fields (62) 
 
         private DevComponents.DotNetBar.Controls.TextBoxX approveNumberTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
@@ -23,17 +23,11 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput cDADueDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cDAStatusComboBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput cDAValueDateDateTimePicker;
-        private DevComponents.Editors.ComboItem comboItem10;
-        private DevComponents.Editors.ComboItem comboItem13;
-        private DevComponents.Editors.ComboItem comboItem14;
-        private DevComponents.Editors.ComboItem comboItem15;
-        private DevComponents.Editors.ComboItem comboItem16;
-        private DevComponents.Editors.ComboItem comboItem4;
-        private DevComponents.Editors.ComboItem comboItem7;
-        private DevComponents.Editors.ComboItem comboItem9;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx commissionTypeComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX commissionTypeCommentTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx commissonTypeComboBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX companyNameCNTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX companyNameENTextBox;
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -47,6 +41,7 @@
         private DevComponents.DotNetBar.Controls.TextBoxX deductiblesTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX eFPriceTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX faxTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX financeGracePeriodTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx financeLineCurrComboBox;
@@ -73,16 +68,13 @@
         private DevComponents.DotNetBar.Controls.TextBoxX sellerClientEDICodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameCNTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameEN_1TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX companyNameCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX companyNameENTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Methods (1)
+		#region Methods (1) 
 
-        // Protected Methods (1) 
+		// Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -97,7 +89,7 @@
             base.Dispose(disposing);
         }
 
-        #endregion Methods
+		#endregion Methods 
 
 
 
@@ -157,8 +149,6 @@
             this.companyNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.contractCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.assignTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem9 = new DevComponents.Editors.ComboItem();
-            this.comboItem10 = new DevComponents.Editors.ComboItem();
             this.btnCaseSelect = new DevComponents.DotNetBar.ButtonX();
             this.buyerClientNameEN_1TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.buyerClientNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -176,10 +166,7 @@
             this.lossThresholdTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.commissionTypeCommentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.deductiblesTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.commissonTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem13 = new DevComponents.Editors.ComboItem();
-            this.comboItem14 = new DevComponents.Editors.ComboItem();
-            this.comboItem15 = new DevComponents.Editors.ComboItem();
+            this.commissionTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.financeGracePeriodTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.eFPriceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.paymentTermsTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -203,9 +190,6 @@
             this.cbNoticeMethodFax = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cbNoticeMethodEmail = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cDAStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem16 = new DevComponents.Editors.ComboItem();
-            this.comboItem4 = new DevComponents.Editors.ComboItem();
-            this.comboItem7 = new DevComponents.Editors.ComboItem();
             this.cDADueDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.createUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -898,7 +882,7 @@
             // 
             // 
             this.cbIsNotice.BackgroundStyle.Class = "";
-            this.cbIsNotice.DataBindings.Add(new System.Windows.Forms.Binding("CheckValue", this.CDABindingSource, "IsNotice", true));
+            this.cbIsNotice.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsNotice", true));
             this.cbIsNotice.Location = new System.Drawing.Point(127, 124);
             this.cbIsNotice.Name = "cbIsNotice";
             this.cbIsNotice.Size = new System.Drawing.Size(100, 23);
@@ -913,11 +897,10 @@
             // 
             // 
             this.cbIsRecoarse.BackgroundStyle.Class = "";
-            this.cbIsRecoarse.DataBindings.Add(new System.Windows.Forms.Binding("CheckValue", this.CDABindingSource, "IsRecoarse", true));
+            this.cbIsRecoarse.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsRecoarse", true));
             this.cbIsRecoarse.Location = new System.Drawing.Point(19, 124);
             this.cbIsRecoarse.Name = "cbIsRecoarse";
             this.cbIsRecoarse.Size = new System.Drawing.Size(100, 23);
-            this.cbIsRecoarse.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbIsRecoarse.TabIndex = 32;
             this.cbIsRecoarse.Text = "是否有追索权";
             // 
@@ -949,21 +932,10 @@
             this.assignTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.assignTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.assignTypeComboBox.FormattingEnabled = true;
-            this.assignTypeComboBox.Items.AddRange(new object[] {
-            this.comboItem9,
-            this.comboItem10});
             this.assignTypeComboBox.Location = new System.Drawing.Point(292, 128);
             this.assignTypeComboBox.Name = "assignTypeComboBox";
             this.assignTypeComboBox.Size = new System.Drawing.Size(121, 21);
             this.assignTypeComboBox.TabIndex = 9;
-            // 
-            // comboItem9
-            // 
-            this.comboItem9.Text = "全部";
-            // 
-            // comboItem10
-            // 
-            this.comboItem10.Text = "部分";
             // 
             // btnCaseSelect
             // 
@@ -1099,7 +1071,7 @@
             this.groupPanelCreditCover.Controls.Add(this.deductiblesTextBox);
             this.groupPanelCreditCover.Controls.Add(commissonTypeLabel);
             this.groupPanelCreditCover.Controls.Add(financeGracePeriodLabel);
-            this.groupPanelCreditCover.Controls.Add(this.commissonTypeComboBox);
+            this.groupPanelCreditCover.Controls.Add(this.commissionTypeComboBox);
             this.groupPanelCreditCover.Controls.Add(this.financeGracePeriodTextBox);
             this.groupPanelCreditCover.Controls.Add(eFPriceLabel);
             this.groupPanelCreditCover.Controls.Add(paymentTermsLabel);
@@ -1188,7 +1160,7 @@
             // 
             // 
             this.cbIsCreditCoverRevolving.BackgroundStyle.Class = "";
-            this.cbIsCreditCoverRevolving.DataBindings.Add(new System.Windows.Forms.Binding("CheckValue", this.CDABindingSource, "IsCreditCoverRevolving", true));
+            this.cbIsCreditCoverRevolving.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsCreditCoverRevolving", true));
             this.cbIsCreditCoverRevolving.Location = new System.Drawing.Point(547, 0);
             this.cbIsCreditCoverRevolving.Name = "cbIsCreditCoverRevolving";
             this.cbIsCreditCoverRevolving.Size = new System.Drawing.Size(100, 23);
@@ -1244,32 +1216,16 @@
             this.deductiblesTextBox.Size = new System.Drawing.Size(100, 20);
             this.deductiblesTextBox.TabIndex = 35;
             // 
-            // commissonTypeComboBox
+            // commissionTypeComboBox
             // 
-            this.commissonTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CommissonType", true));
-            this.commissonTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.commissonTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.commissonTypeComboBox.FormattingEnabled = true;
-            this.commissonTypeComboBox.Items.AddRange(new object[] {
-            this.comboItem13,
-            this.comboItem14,
-            this.comboItem15});
-            this.commissonTypeComboBox.Location = new System.Drawing.Point(101, 201);
-            this.commissonTypeComboBox.Name = "commissonTypeComboBox";
-            this.commissonTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.commissonTypeComboBox.TabIndex = 7;
-            // 
-            // comboItem13
-            // 
-            this.comboItem13.Text = "01";
-            // 
-            // comboItem14
-            // 
-            this.comboItem14.Text = "02";
-            // 
-            // comboItem15
-            // 
-            this.comboItem15.Text = "其他";
+            this.commissionTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CommissionType", true));
+            this.commissionTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.commissionTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.commissionTypeComboBox.FormattingEnabled = true;
+            this.commissionTypeComboBox.Location = new System.Drawing.Point(101, 201);
+            this.commissionTypeComboBox.Name = "commissionTypeComboBox";
+            this.commissionTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.commissionTypeComboBox.TabIndex = 7;
             // 
             // financeGracePeriodTextBox
             // 
@@ -1687,26 +1643,10 @@
             this.cDAStatusComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cDAStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cDAStatusComboBox.FormattingEnabled = true;
-            this.cDAStatusComboBox.Items.AddRange(new object[] {
-            this.comboItem16,
-            this.comboItem4,
-            this.comboItem7});
             this.cDAStatusComboBox.Location = new System.Drawing.Point(420, 2);
             this.cDAStatusComboBox.Name = "cDAStatusComboBox";
             this.cDAStatusComboBox.Size = new System.Drawing.Size(121, 21);
             this.cDAStatusComboBox.TabIndex = 20;
-            // 
-            // comboItem16
-            // 
-            this.comboItem16.Text = "未审核";
-            // 
-            // comboItem4
-            // 
-            this.comboItem4.Text = "已生效";
-            // 
-            // comboItem7
-            // 
-            this.comboItem7.Text = "已过期";
             // 
             // cDADueDateDateTimePicker
             // 

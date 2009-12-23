@@ -6,8 +6,6 @@
 
         private DevComponents.DotNetBar.ButtonX btnContractQuery;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbContractStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientEDICodeColumn;
         private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
         private DevComponents.Editors.ComboItem comboItem1;
         private DevComponents.Editors.ComboItem comboItem2;
@@ -15,11 +13,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ContractCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ContractDueDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ContractStatusColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ContractValueDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CreateUserNameColumn;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvContracts;
         private DevComponents.DotNetBar.LabelX lblClientName;
         private DevComponents.DotNetBar.LabelX lblContractCode;
@@ -71,6 +64,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelContractQuery = new DevComponents.DotNetBar.PanelEx();
+            this.cbContractStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.comboItem1 = new DevComponents.Editors.ComboItem();
+            this.comboItem2 = new DevComponents.Editors.ComboItem();
+            this.lblContractStatus = new DevComponents.DotNetBar.LabelX();
+            this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblClientName = new DevComponents.DotNetBar.LabelX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnContractQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbContractCode = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -84,19 +83,13 @@
             this.menuItemContractUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemContractDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemContractImport = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblClientName = new DevComponents.DotNetBar.LabelX();
-            this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblContractStatus = new DevComponents.DotNetBar.LabelX();
-            this.cbContractStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem1 = new DevComponents.Editors.ComboItem();
-            this.comboItem2 = new DevComponents.Editors.ComboItem();
-            this.ContractCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractValueDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractDueDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContractStatusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreateUserNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colContractCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClientEDICode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colContractValueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colContractDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colContractStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelContractQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContracts)).BeginInit();
             this.cmuContractMgr.SuspendLayout();
@@ -127,6 +120,64 @@
             this.panelContractQuery.Style.GradientAngle = 90;
             this.panelContractQuery.TabIndex = 0;
             // 
+            // cbContractStatus
+            // 
+            this.cbContractStatus.DisplayMember = "Text";
+            this.cbContractStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbContractStatus.FormattingEnabled = true;
+            this.cbContractStatus.ItemHeight = 14;
+            this.cbContractStatus.Items.AddRange(new object[] {
+            this.comboItem1,
+            this.comboItem2});
+            this.cbContractStatus.Location = new System.Drawing.Point(377, 5);
+            this.cbContractStatus.Name = "cbContractStatus";
+            this.cbContractStatus.Size = new System.Drawing.Size(98, 20);
+            this.cbContractStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbContractStatus.TabIndex = 7;
+            // 
+            // comboItem1
+            // 
+            this.comboItem1.Text = "正常";
+            // 
+            // comboItem2
+            // 
+            this.comboItem2.Text = "已过期";
+            // 
+            // lblContractStatus
+            // 
+            // 
+            // 
+            // 
+            this.lblContractStatus.BackgroundStyle.Class = "";
+            this.lblContractStatus.Location = new System.Drawing.Point(322, 3);
+            this.lblContractStatus.Name = "lblContractStatus";
+            this.lblContractStatus.Size = new System.Drawing.Size(58, 23);
+            this.lblContractStatus.TabIndex = 6;
+            this.lblContractStatus.Text = "合同状态";
+            // 
+            // tbClientName
+            // 
+            // 
+            // 
+            // 
+            this.tbClientName.Border.Class = "TextBoxBorder";
+            this.tbClientName.Location = new System.Drawing.Point(216, 5);
+            this.tbClientName.Name = "tbClientName";
+            this.tbClientName.Size = new System.Drawing.Size(100, 20);
+            this.tbClientName.TabIndex = 5;
+            // 
+            // lblClientName
+            // 
+            // 
+            // 
+            // 
+            this.lblClientName.BackgroundStyle.Class = "";
+            this.lblClientName.Location = new System.Drawing.Point(163, 3);
+            this.lblClientName.Name = "lblClientName";
+            this.lblClientName.Size = new System.Drawing.Size(58, 23);
+            this.lblClientName.TabIndex = 4;
+            this.lblClientName.Text = "客户名称";
+            // 
             // lblCount
             // 
             this.lblCount.AutoSize = true;
@@ -136,7 +187,7 @@
             this.lblCount.BackgroundStyle.Class = "";
             this.lblCount.Location = new System.Drawing.Point(562, 9);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(36, 16);
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 3;
             // 
             // btnContractQuery
@@ -190,13 +241,13 @@
             this.dgvContracts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvContracts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvContracts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ContractCodeColumn,
-            this.ClientEDICodeColumn,
-            this.ClientColumn,
-            this.ContractValueDateColumn,
-            this.ContractDueDateColumn,
-            this.ContractStatusColumn,
-            this.CreateUserNameColumn});
+            this.colContractCode,
+            this.colClientEDICode,
+            this.colClient,
+            this.colContractValueDate,
+            this.colContractDueDate,
+            this.colContractStatus,
+            this.colCreateUserName});
             this.dgvContracts.ContextMenuStrip = this.cmuContractMgr;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -214,6 +265,7 @@
             this.dgvContracts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvContracts.Size = new System.Drawing.Size(768, 358);
             this.dgvContracts.TabIndex = 1;
+            this.dgvContracts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
             // cmuContractMgr
             // 
@@ -275,114 +327,56 @@
             this.menuItemContractImport.Text = "导入合同";
             this.menuItemContractImport.Click += new System.EventHandler(this.ImportContracts);
             // 
-            // lblClientName
+            // colContractCode
             // 
+            this.colContractCode.DataPropertyName = "ContractCode";
+            this.colContractCode.HeaderText = "合同编号";
+            this.colContractCode.Name = "colContractCode";
+            this.colContractCode.ReadOnly = true;
             // 
+            // colClientEDICode
             // 
+            this.colClientEDICode.DataPropertyName = "ClientEDICode";
+            this.colClientEDICode.HeaderText = "客户保理代码";
+            this.colClientEDICode.Name = "colClientEDICode";
+            this.colClientEDICode.ReadOnly = true;
             // 
-            this.lblClientName.BackgroundStyle.Class = "";
-            this.lblClientName.Location = new System.Drawing.Point(163, 3);
-            this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(58, 23);
-            this.lblClientName.TabIndex = 4;
-            this.lblClientName.Text = "客户名称";
+            // colClient
             // 
-            // tbClientName
+            this.colClient.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colClient.DataPropertyName = "Client";
+            this.colClient.HeaderText = "客户名称";
+            this.colClient.Name = "colClient";
+            this.colClient.ReadOnly = true;
+            this.colClient.Width = 200;
             // 
+            // colContractValueDate
             // 
+            this.colContractValueDate.DataPropertyName = "ContractValueDate";
+            this.colContractValueDate.HeaderText = "生效日";
+            this.colContractValueDate.Name = "colContractValueDate";
+            this.colContractValueDate.ReadOnly = true;
             // 
+            // colContractDueDate
             // 
-            this.tbClientName.Border.Class = "TextBoxBorder";
-            this.tbClientName.Location = new System.Drawing.Point(216, 5);
-            this.tbClientName.Name = "tbClientName";
-            this.tbClientName.Size = new System.Drawing.Size(100, 20);
-            this.tbClientName.TabIndex = 5;
+            this.colContractDueDate.DataPropertyName = "ContractDueDate";
+            this.colContractDueDate.HeaderText = "过期日";
+            this.colContractDueDate.Name = "colContractDueDate";
+            this.colContractDueDate.ReadOnly = true;
             // 
-            // lblContractStatus
+            // colContractStatus
             // 
+            this.colContractStatus.DataPropertyName = "ContractStatus";
+            this.colContractStatus.HeaderText = "合同状态";
+            this.colContractStatus.Name = "colContractStatus";
+            this.colContractStatus.ReadOnly = true;
             // 
+            // colCreateUserName
             // 
-            // 
-            this.lblContractStatus.BackgroundStyle.Class = "";
-            this.lblContractStatus.Location = new System.Drawing.Point(322, 3);
-            this.lblContractStatus.Name = "lblContractStatus";
-            this.lblContractStatus.Size = new System.Drawing.Size(58, 23);
-            this.lblContractStatus.TabIndex = 6;
-            this.lblContractStatus.Text = "合同状态";
-            // 
-            // cbContractStatus
-            // 
-            this.cbContractStatus.DisplayMember = "Text";
-            this.cbContractStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbContractStatus.FormattingEnabled = true;
-            this.cbContractStatus.ItemHeight = 14;
-            this.cbContractStatus.Items.AddRange(new object[] {
-            this.comboItem1,
-            this.comboItem2});
-            this.cbContractStatus.Location = new System.Drawing.Point(377, 5);
-            this.cbContractStatus.Name = "cbContractStatus";
-            this.cbContractStatus.Size = new System.Drawing.Size(98, 20);
-            this.cbContractStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbContractStatus.TabIndex = 7;
-            // 
-            // comboItem1
-            // 
-            this.comboItem1.Text = "正常";
-            // 
-            // comboItem2
-            // 
-            this.comboItem2.Text = "已过期";
-            // 
-            // ContractCodeColumn
-            // 
-            this.ContractCodeColumn.DataPropertyName = "ContractCode";
-            this.ContractCodeColumn.HeaderText = "合同编号";
-            this.ContractCodeColumn.Name = "ContractCodeColumn";
-            this.ContractCodeColumn.ReadOnly = true;
-            // 
-            // ClientEDICodeColumn
-            // 
-            this.ClientEDICodeColumn.DataPropertyName = "ClientEDICode";
-            this.ClientEDICodeColumn.HeaderText = "客户保理代码";
-            this.ClientEDICodeColumn.Name = "ClientEDICodeColumn";
-            this.ClientEDICodeColumn.ReadOnly = true;
-            // 
-            // ClientColumn
-            // 
-            this.ClientColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ClientColumn.DataPropertyName = "Client";
-            this.ClientColumn.HeaderText = "客户名称";
-            this.ClientColumn.Name = "ClientColumn";
-            this.ClientColumn.ReadOnly = true;
-            this.ClientColumn.Width = 200;
-            // 
-            // ContractValueDateColumn
-            // 
-            this.ContractValueDateColumn.DataPropertyName = "ContractValueDate";
-            this.ContractValueDateColumn.HeaderText = "生效日";
-            this.ContractValueDateColumn.Name = "ContractValueDateColumn";
-            this.ContractValueDateColumn.ReadOnly = true;
-            // 
-            // ContractDueDateColumn
-            // 
-            this.ContractDueDateColumn.DataPropertyName = "ContractDueDate";
-            this.ContractDueDateColumn.HeaderText = "过期日";
-            this.ContractDueDateColumn.Name = "ContractDueDateColumn";
-            this.ContractDueDateColumn.ReadOnly = true;
-            // 
-            // ContractStatusColumn
-            // 
-            this.ContractStatusColumn.DataPropertyName = "ContractStatus";
-            this.ContractStatusColumn.HeaderText = "合同状态";
-            this.ContractStatusColumn.Name = "ContractStatusColumn";
-            this.ContractStatusColumn.ReadOnly = true;
-            // 
-            // CreateUserNameColumn
-            // 
-            this.CreateUserNameColumn.DataPropertyName = "CreateUserName";
-            this.CreateUserNameColumn.HeaderText = "经办人";
-            this.CreateUserNameColumn.Name = "CreateUserNameColumn";
-            this.CreateUserNameColumn.ReadOnly = true;
+            this.colCreateUserName.DataPropertyName = "CreateUserName";
+            this.colCreateUserName.HeaderText = "经办人";
+            this.colCreateUserName.Name = "colCreateUserName";
+            this.colCreateUserName.ReadOnly = true;
             // 
             // ContractMgr
             // 
@@ -401,5 +395,13 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractValueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
     }
 }

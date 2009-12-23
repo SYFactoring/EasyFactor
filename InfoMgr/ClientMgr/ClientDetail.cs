@@ -180,6 +180,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientDetail(Client client, OpClientCreditLineType opClientCreditLineType)
             : this(client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT)
         {
+            this.tabControl.SelectedTab = this.tabItemClientCreditLine;
         }
 
         /// <summary>
@@ -190,6 +191,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientDetail(Client client, OpContractType opContractType)
             : this(client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, opContractType)
         {
+            this.tabControl.SelectedTab = this.tabItemContract;
         }
 
         #endregion Constructors

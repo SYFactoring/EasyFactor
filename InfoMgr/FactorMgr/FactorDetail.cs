@@ -136,6 +136,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         public FactorDetail(Factor factor, OpFactorCreditLineType opFactorCreditLineType)
             : this(factor, OpFactorType.DETAIL_FACTOR, opFactorCreditLineType)
         {
+            this.tabControl.SelectedTab = this.tabItemFactorCreditLine;
         }
 
 		#endregion Constructors 

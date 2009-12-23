@@ -55,7 +55,22 @@ namespace CMBC.EasyFactor.CaseMgr
         public CDADetail(CDA cda, OpCDAType opCDAType)
         {
             this.InitializeComponent();
-            this.InitComboBox();
+
+            this.creditCoverCurrComboBox.DataSource = Currency.AllCurrencies();
+            this.creditCoverCurrComboBox.DisplayMember = "CurrencyCode";
+            this.creditCoverCurrComboBox.ValueMember = "CurrencyCode";
+
+            this.financeLineCurrComboBox.DataSource = Currency.AllCurrencies();
+            this.financeLineCurrComboBox.DisplayMember = "CurrencyCode";
+            this.financeLineCurrComboBox.ValueMember = "CurrencyCode";
+
+            this.handFeeCurrComboBox.DataSource = Currency.AllCurrencies();
+            this.handFeeCurrComboBox.DisplayMember = "CurrencyCode";
+            this.handFeeCurrComboBox.ValueMember = "CurrencyCode";
+
+            this.assignTypeComboBox.DataSource = new string[] {"全部","部分" };
+            this.commissionTypeComboBox.DataSource = new string[] {"01","02","其他"};
+            this.cDAStatusComboBox.DataSource = new string[] { "未审核", "已审核未下发", "已下发未签回", "已签回","已生效","已过期" };
 
             this.opCDAType = opCDAType;
             if (opCDAType == OpCDAType.NEW_CDA)
@@ -69,6 +84,18 @@ namespace CMBC.EasyFactor.CaseMgr
             else
             {
                 this.CDABindingSource.DataSource = cda;
+                string[] methods = cda.NoticeMethod.Split(',');
+                foreach(string method in methods)
+                {
+                    if ("Fax".Equals(method))
+                    {
+                        this.cbNoticeMethodFax.Checked = true;
+                    }
+                    else if ("Email".Equals(method))
+                    {
+                        this.cbNoticeMethodEmail.Checked = true;
+                    }
+                }
                 cda.Backup();
             }
 
@@ -107,21 +134,6 @@ namespace CMBC.EasyFactor.CaseMgr
             Close();
         }
 
-        private void InitComboBox()
-        {
-            this.creditCoverCurrComboBox.DataSource = Currency.AllCurrencies();
-            this.creditCoverCurrComboBox.DisplayMember = "CurrencyCode";
-            this.creditCoverCurrComboBox.ValueMember = "CurrencyCode";
-
-            this.financeLineCurrComboBox.DataSource = Currency.AllCurrencies();
-            this.financeLineCurrComboBox.DisplayMember = "CurrencyCode";
-            this.financeLineCurrComboBox.ValueMember = "CurrencyCode";
-
-            this.handFeeCurrComboBox.DataSource = Currency.AllCurrencies();
-            this.handFeeCurrComboBox.DisplayMember = "CurrencyCode";
-            this.handFeeCurrComboBox.ValueMember = "CurrencyCode";
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -130,6 +142,20 @@ namespace CMBC.EasyFactor.CaseMgr
         private void SaveCDA(object sender, EventArgs e)
         {
             CDA cda = (CDA)this.CDABindingSource.DataSource;
+            if (this.cbNoticeMethodEmail.Checked == true)
+            {
+                cda.NoticeMethod = "Email";
+            }
+            if (this.cbNoticeMethodFax.Checked == true)
+            {
+                if(cda.NoticeMethod==null)
+                {
+                    cda.NoticeMethod="Fax";
+                }else
+                {
+                    cda.NoticeMethod="Email,Fax";
+                }
+            }
 
             if (cda.CDAID == 0)
             {
