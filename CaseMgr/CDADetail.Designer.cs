@@ -1537,7 +1537,7 @@
             // 
             // 
             this.creditCoverTextBox.Border.Class = "TextBoxBorder";
-            this.creditCoverTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CreditCover", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "C2"));
+            this.creditCoverTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CreditCover", true));
             this.creditCoverTextBox.Location = new System.Drawing.Point(171, 1);
             this.creditCoverTextBox.Name = "creditCoverTextBox";
             this.creditCoverTextBox.Size = new System.Drawing.Size(83, 20);

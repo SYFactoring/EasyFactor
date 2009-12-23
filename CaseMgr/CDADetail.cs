@@ -56,17 +56,17 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             this.InitializeComponent();
 
-            this.creditCoverCurrComboBox.DataSource = Currency.AllCurrencies();
+            this.creditCoverCurrComboBox.DataSource = Currency.AllCurrencies().ToList();
             this.creditCoverCurrComboBox.DisplayMember = "CurrencyCode";
             this.creditCoverCurrComboBox.ValueMember = "CurrencyCode";
             this.creditCoverCurrComboBox.SelectedIndex = -1;
 
-            this.financeLineCurrComboBox.DataSource = Currency.AllCurrencies();
+            this.financeLineCurrComboBox.DataSource = Currency.AllCurrencies().ToList();
             this.financeLineCurrComboBox.DisplayMember = "CurrencyCode";
             this.financeLineCurrComboBox.ValueMember = "CurrencyCode";
             this.financeLineCurrComboBox.SelectedIndex = -1;
 
-            this.handFeeCurrComboBox.DataSource = Currency.AllCurrencies();
+            this.handFeeCurrComboBox.DataSource = Currency.AllCurrencies().ToList();
             this.handFeeCurrComboBox.DisplayMember = "CurrencyCode";
             this.handFeeCurrComboBox.ValueMember = "CurrencyCode";
             this.handFeeCurrComboBox.SelectedIndex = -1;
@@ -82,6 +82,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 cda.PUGProportion = 1;
                 cda.PUGPeriod = 90;
                 cda.ReassignGracePeriod = 60;
+                cda.IsNotice = false;
+                cda.IsRecoarse = false;
+                cda.IsCreditCoverRevolving = false;
                 this.CDABindingSource.DataSource = cda;
             }
             else

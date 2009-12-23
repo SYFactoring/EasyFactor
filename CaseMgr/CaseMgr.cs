@@ -33,6 +33,7 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             InitializeComponent();
             ControlUtil.SetDoubleBuffered(this.dgvCases);
+            this.dgvCases.DataSource = this.bs;
 
             List<string> transTypes = Case.ConstantTransTypes().ToList();
             transTypes.Insert(0, "全部");
@@ -200,7 +201,6 @@ namespace CMBC.EasyFactor.CaseMgr
                                  || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN_1.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN_2.Contains(this.tbClientName.Text))
                                     );
             this.bs.DataSource = queryResult;
-            this.dgvCases.DataSource = this.bs;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
