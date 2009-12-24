@@ -30,7 +30,10 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         static Department()
         {
-            _allDepartment = App.Current.DbContext.Departments.ToList();
+            _allDepartment = new List<Department>();
+            _allDepartment.AddRange(App.Current.DbContext.Departments.Where(d => d.Domain == "贸易金融事业部"));
+            _allDepartment.AddRange(App.Current.DbContext.Departments.Where(d => d.Domain == "分行营业部"));
+            _allDepartment.AddRange(App.Current.DbContext.Departments.Where(d => d.Domain != "贸易金融事业部" && d.Domain != "分行事业部"));
         }
 
         #endregion Constructors
@@ -120,6 +123,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         private static readonly List<Currency> _currencyList;
 
+        public static Currency CNY
+        {
+            get;
+            private set;
+        }
         #endregion Fields
 
         #region Constructors (1)
@@ -130,6 +138,7 @@ namespace CMBC.EasyFactor.DB.dbml
         static Currency()
         {
             _currencyList = App.Current.DbContext.Currencies.ToList();
+            CNY = _currencyList.SingleOrDefault(c => c.CurrencyCode == "CNY");
         }
 
         #endregion Constructors

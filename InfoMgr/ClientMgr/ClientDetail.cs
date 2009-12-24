@@ -18,7 +18,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
     {
-		#region Fields (3) 
+        #region Fields (3)
 
         /// <summary>
         /// 
@@ -33,9 +33,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpContractType opContractType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (3) 
+        #region Enums (3)
 
         /// <summary>
         /// Operation Type 
@@ -57,7 +57,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT
         }
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         public enum OpClientCreditLineType
@@ -77,7 +77,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT_CREDIT_LINE
         }
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         public enum OpContractType
@@ -98,11 +98,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DETAIL_CONTRACT
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (4) 
+        #region Constructors (4)
 
-/// <summary>
+        /// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client">selected client</param>
@@ -197,11 +197,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabControl.SelectedTab = this.tabItemContract;
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (24) 
+        #region Methods (24)
 
-		// Private Methods (24) 
+        // Private Methods (24) 
 
         private void cbDepartments_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
         {
@@ -646,21 +646,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             Contract contract = (Contract)this.contractBindingSource.DataSource;
 
-            DateTime today = DateTime.Now;
-            if (contract.ContractDueDate < today)
-            {
-                contract.ContractStatus = "已过期";
-            }
-            else
-            {
-                contract.ContractStatus = "已生效";
-            }
-
             if (opContractType == OpContractType.NEW_CONTRACT)
             {
                 bool isAddOK = true;
                 contract.Client = client;
                 contract.CreateUserName = App.Current.CurUser.Name;
+                DateTime today = DateTime.Now;
+                if (contract.ContractDueDate < today)
+                {
+                    contract.ContractStatus = "已过期";
+                }
+                else
+                {
+                    contract.ContractStatus = "已生效";
+                }
 
                 try
                 {
@@ -676,6 +675,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (contract.ContractStatus == "已生效")
+                    {
+                        foreach (Contract c in client.Contracts)
+                        {
+                            if (c != contract && c.ContractStatus == "已生效")
+                            {
+                                c.ContractStatus = "已过期";
+                            }
+                        }
+                        App.Current.DbContext.SubmitChanges();
+                    }
                     this.dgvContracts.DataSource = client.Contracts.ToList();
                     this.NewContract(null, null);
                 }
@@ -683,6 +693,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             else
             {
                 bool isUpdateOK = true;
+                DateTime today = DateTime.Now;
+                if (contract.ContractDueDate < today)
+                {
+                    contract.ContractStatus = "已过期";
+                }
                 try
                 {
                     App.Current.DbContext.SubmitChanges();
@@ -985,6 +1000,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbCreateUserName.ReadOnly = true;
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

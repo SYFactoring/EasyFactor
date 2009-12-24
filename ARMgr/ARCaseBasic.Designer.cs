@@ -513,6 +513,7 @@
             this.tbFinanceARBalance.Border.Class = "TextBoxBorder";
             this.tbFinanceARBalance.Location = new System.Drawing.Point(96, 101);
             this.tbFinanceARBalance.Name = "tbFinanceARBalance";
+            this.tbFinanceARBalance.ReadOnly = true;
             this.tbFinanceARBalance.Size = new System.Drawing.Size(100, 20);
             this.tbFinanceARBalance.TabIndex = 18;
             // 
@@ -524,6 +525,7 @@
             this.tbFinanceCreditLineBalance.Border.Class = "TextBoxBorder";
             this.tbFinanceCreditLineBalance.Location = new System.Drawing.Point(96, 79);
             this.tbFinanceCreditLineBalance.Name = "tbFinanceCreditLineBalance";
+            this.tbFinanceCreditLineBalance.ReadOnly = true;
             this.tbFinanceCreditLineBalance.Size = new System.Drawing.Size(100, 20);
             this.tbFinanceCreditLineBalance.TabIndex = 16;
             // 
@@ -535,6 +537,7 @@
             this.tbDueDate.Border.Class = "TextBoxBorder";
             this.tbDueDate.Location = new System.Drawing.Point(96, 53);
             this.tbDueDate.Name = "tbDueDate";
+            this.tbDueDate.ReadOnly = true;
             this.tbDueDate.Size = new System.Drawing.Size(100, 20);
             this.tbDueDate.TabIndex = 14;
             // 
@@ -546,6 +549,7 @@
             this.tbCreditLine.Border.Class = "TextBoxBorder";
             this.tbCreditLine.Location = new System.Drawing.Point(131, 31);
             this.tbCreditLine.Name = "tbCreditLine";
+            this.tbCreditLine.ReadOnly = true;
             this.tbCreditLine.Size = new System.Drawing.Size(58, 20);
             this.tbCreditLine.TabIndex = 12;
             // 
@@ -557,6 +561,7 @@
             this.tbCreditLineCurr.Border.Class = "TextBoxBorder";
             this.tbCreditLineCurr.Location = new System.Drawing.Point(96, 31);
             this.tbCreditLineCurr.Name = "tbCreditLineCurr";
+            this.tbCreditLineCurr.ReadOnly = true;
             this.tbCreditLineCurr.Size = new System.Drawing.Size(28, 20);
             this.tbCreditLineCurr.TabIndex = 11;
             // 
@@ -566,8 +571,9 @@
             // 
             // 
             this.financeProportionTextBox.Border.Class = "TextBoxBorder";
-            this.financeProportionTextBox.Location = new System.Drawing.Point(67, 5);
+            this.financeProportionTextBox.Location = new System.Drawing.Point(96, 3);
             this.financeProportionTextBox.Name = "financeProportionTextBox";
+            this.financeProportionTextBox.ReadOnly = true;
             this.financeProportionTextBox.Size = new System.Drawing.Size(100, 20);
             this.financeProportionTextBox.TabIndex = 9;
             // 
@@ -628,6 +634,7 @@
             this.tbARBalance.Border.Class = "TextBoxBorder";
             this.tbARBalance.Location = new System.Drawing.Point(108, 86);
             this.tbARBalance.Name = "tbARBalance";
+            this.tbARBalance.ReadOnly = true;
             this.tbARBalance.Size = new System.Drawing.Size(100, 20);
             this.tbARBalance.TabIndex = 9;
             // 
@@ -639,6 +646,7 @@
             this.tbCreditCoverBalance.Border.Class = "TextBoxBorder";
             this.tbCreditCoverBalance.Location = new System.Drawing.Point(108, 64);
             this.tbCreditCoverBalance.Name = "tbCreditCoverBalance";
+            this.tbCreditCoverBalance.ReadOnly = true;
             this.tbCreditCoverBalance.Size = new System.Drawing.Size(100, 20);
             this.tbCreditCoverBalance.TabIndex = 7;
             // 
@@ -650,6 +658,7 @@
             this.periodEndTextBox.Border.Class = "TextBoxBorder";
             this.periodEndTextBox.Location = new System.Drawing.Point(108, 38);
             this.periodEndTextBox.Name = "periodEndTextBox";
+            this.periodEndTextBox.ReadOnly = true;
             this.periodEndTextBox.Size = new System.Drawing.Size(100, 20);
             this.periodEndTextBox.TabIndex = 5;
             // 
@@ -661,6 +670,7 @@
             this.creditCoverTextBox.Border.Class = "TextBoxBorder";
             this.creditCoverTextBox.Location = new System.Drawing.Point(143, 16);
             this.creditCoverTextBox.Name = "creditCoverTextBox";
+            this.creditCoverTextBox.ReadOnly = true;
             this.creditCoverTextBox.Size = new System.Drawing.Size(58, 20);
             this.creditCoverTextBox.TabIndex = 3;
             // 
@@ -672,6 +682,7 @@
             this.creditCoverCurrTextBox.Border.Class = "TextBoxBorder";
             this.creditCoverCurrTextBox.Location = new System.Drawing.Point(108, 16);
             this.creditCoverCurrTextBox.Name = "creditCoverCurrTextBox";
+            this.creditCoverCurrTextBox.ReadOnly = true;
             this.creditCoverCurrTextBox.Size = new System.Drawing.Size(28, 20);
             this.creditCoverCurrTextBox.TabIndex = 1;
             // 
@@ -729,6 +740,7 @@
             this.handFeeTextBox.Border.Class = "TextBoxBorder";
             this.handFeeTextBox.Location = new System.Drawing.Point(124, 60);
             this.handFeeTextBox.Name = "handFeeTextBox";
+            this.handFeeTextBox.ReadOnly = true;
             this.handFeeTextBox.Size = new System.Drawing.Size(57, 20);
             this.handFeeTextBox.TabIndex = 7;
             // 
@@ -740,6 +752,7 @@
             this.handFeeCurrTextBox.Border.Class = "TextBoxBorder";
             this.handFeeCurrTextBox.Location = new System.Drawing.Point(81, 60);
             this.handFeeCurrTextBox.Name = "handFeeCurrTextBox";
+            this.handFeeCurrTextBox.ReadOnly = true;
             this.handFeeCurrTextBox.Size = new System.Drawing.Size(37, 20);
             this.handFeeCurrTextBox.TabIndex = 5;
             // 
@@ -751,6 +764,7 @@
             this.iFPriceTextBox.Border.Class = "TextBoxBorder";
             this.iFPriceTextBox.Location = new System.Drawing.Point(81, 34);
             this.iFPriceTextBox.Name = "iFPriceTextBox";
+            this.iFPriceTextBox.ReadOnly = true;
             this.iFPriceTextBox.Size = new System.Drawing.Size(100, 20);
             this.iFPriceTextBox.TabIndex = 3;
             // 
@@ -762,6 +776,7 @@
             this.priceTextBox.Border.Class = "TextBoxBorder";
             this.priceTextBox.Location = new System.Drawing.Point(81, 8);
             this.priceTextBox.Name = "priceTextBox";
+            this.priceTextBox.ReadOnly = true;
             this.priceTextBox.Size = new System.Drawing.Size(100, 20);
             this.priceTextBox.TabIndex = 1;
             // 
@@ -848,6 +863,7 @@
             this.ownerDepartmentCodeTextBox.Border.Class = "TextBoxBorder";
             this.ownerDepartmentCodeTextBox.Location = new System.Drawing.Point(122, 1);
             this.ownerDepartmentCodeTextBox.Name = "ownerDepartmentCodeTextBox";
+            this.ownerDepartmentCodeTextBox.ReadOnly = true;
             this.ownerDepartmentCodeTextBox.Size = new System.Drawing.Size(100, 20);
             this.ownerDepartmentCodeTextBox.TabIndex = 2;
             // 
@@ -859,6 +875,7 @@
             this.assignTypeTextBox.Border.Class = "TextBoxBorder";
             this.assignTypeTextBox.Location = new System.Drawing.Point(398, 69);
             this.assignTypeTextBox.Name = "assignTypeTextBox";
+            this.assignTypeTextBox.ReadOnly = true;
             this.assignTypeTextBox.Size = new System.Drawing.Size(100, 20);
             this.assignTypeTextBox.TabIndex = 24;
             // 
@@ -870,6 +887,7 @@
             this.sellerEDICodeTextBox.Border.Class = "TextBoxBorder";
             this.sellerEDICodeTextBox.Location = new System.Drawing.Point(122, 23);
             this.sellerEDICodeTextBox.Name = "sellerEDICodeTextBox";
+            this.sellerEDICodeTextBox.ReadOnly = true;
             this.sellerEDICodeTextBox.Size = new System.Drawing.Size(64, 20);
             this.sellerEDICodeTextBox.TabIndex = 4;
             // 
@@ -881,6 +899,7 @@
             this.RMTextBox.Border.Class = "TextBoxBorder";
             this.RMTextBox.Location = new System.Drawing.Point(398, 43);
             this.RMTextBox.Name = "RMTextBox";
+            this.RMTextBox.ReadOnly = true;
             this.RMTextBox.Size = new System.Drawing.Size(100, 20);
             this.RMTextBox.TabIndex = 23;
             // 
@@ -892,6 +911,7 @@
             this.sellerNameTextBox.Border.Class = "TextBoxBorder";
             this.sellerNameTextBox.Location = new System.Drawing.Point(192, 23);
             this.sellerNameTextBox.Name = "sellerNameTextBox";
+            this.sellerNameTextBox.ReadOnly = true;
             this.sellerNameTextBox.Size = new System.Drawing.Size(136, 20);
             this.sellerNameTextBox.TabIndex = 6;
             // 
@@ -903,6 +923,7 @@
             this.PMTextBox.Border.Class = "TextBoxBorder";
             this.PMTextBox.Location = new System.Drawing.Point(398, 20);
             this.PMTextBox.Name = "PMTextBox";
+            this.PMTextBox.ReadOnly = true;
             this.PMTextBox.Size = new System.Drawing.Size(100, 20);
             this.PMTextBox.TabIndex = 21;
             // 
@@ -914,6 +935,7 @@
             this.buyerEDICodeTextBox.Border.Class = "TextBoxBorder";
             this.buyerEDICodeTextBox.Location = new System.Drawing.Point(122, 44);
             this.buyerEDICodeTextBox.Name = "buyerEDICodeTextBox";
+            this.buyerEDICodeTextBox.ReadOnly = true;
             this.buyerEDICodeTextBox.Size = new System.Drawing.Size(64, 20);
             this.buyerEDICodeTextBox.TabIndex = 8;
             // 
@@ -923,6 +945,7 @@
             // 
             // 
             this.isNoticeCheckBox.BackgroundStyle.Class = "";
+            this.isNoticeCheckBox.Enabled = false;
             this.isNoticeCheckBox.Location = new System.Drawing.Point(334, 113);
             this.isNoticeCheckBox.Name = "isNoticeCheckBox";
             this.isNoticeCheckBox.Size = new System.Drawing.Size(104, 24);
@@ -937,6 +960,7 @@
             this.buyerNameTextBox.Border.Class = "TextBoxBorder";
             this.buyerNameTextBox.Location = new System.Drawing.Point(192, 44);
             this.buyerNameTextBox.Name = "buyerNameTextBox";
+            this.buyerNameTextBox.ReadOnly = true;
             this.buyerNameTextBox.Size = new System.Drawing.Size(136, 20);
             this.buyerNameTextBox.TabIndex = 10;
             // 
@@ -946,6 +970,7 @@
             // 
             // 
             this.isRecoarseCheckBox.BackgroundStyle.Class = "";
+            this.isRecoarseCheckBox.Enabled = false;
             this.isRecoarseCheckBox.Location = new System.Drawing.Point(334, 88);
             this.isRecoarseCheckBox.Name = "isRecoarseCheckBox";
             this.isRecoarseCheckBox.Size = new System.Drawing.Size(104, 24);
@@ -960,6 +985,7 @@
             this.factorCodeTextBox.Border.Class = "TextBoxBorder";
             this.factorCodeTextBox.Location = new System.Drawing.Point(122, 66);
             this.factorCodeTextBox.Name = "factorCodeTextBox";
+            this.factorCodeTextBox.ReadOnly = true;
             this.factorCodeTextBox.Size = new System.Drawing.Size(64, 20);
             this.factorCodeTextBox.TabIndex = 12;
             // 
@@ -971,6 +997,7 @@
             this.invoiceCurrencyTextBox.Border.Class = "TextBoxBorder";
             this.invoiceCurrencyTextBox.Location = new System.Drawing.Point(122, 110);
             this.invoiceCurrencyTextBox.Name = "invoiceCurrencyTextBox";
+            this.invoiceCurrencyTextBox.ReadOnly = true;
             this.invoiceCurrencyTextBox.Size = new System.Drawing.Size(100, 20);
             this.invoiceCurrencyTextBox.TabIndex = 16;
             // 
@@ -982,6 +1009,7 @@
             this.factorNameTextBox.Border.Class = "TextBoxBorder";
             this.factorNameTextBox.Location = new System.Drawing.Point(192, 66);
             this.factorNameTextBox.Name = "factorNameTextBox";
+            this.factorNameTextBox.ReadOnly = true;
             this.factorNameTextBox.Size = new System.Drawing.Size(136, 20);
             this.factorNameTextBox.TabIndex = 14;
             // 
@@ -993,6 +1021,7 @@
             this.transactionTypeTextBox.Border.Class = "TextBoxBorder";
             this.transactionTypeTextBox.Location = new System.Drawing.Point(122, 88);
             this.transactionTypeTextBox.Name = "transactionTypeTextBox";
+            this.transactionTypeTextBox.ReadOnly = true;
             this.transactionTypeTextBox.Size = new System.Drawing.Size(100, 20);
             this.transactionTypeTextBox.TabIndex = 15;
             // 

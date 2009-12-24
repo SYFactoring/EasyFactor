@@ -1,31 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using CMBC.EasyFactor.DB.dbml;
-using CMBC.EasyFactor.Utils;
-using CMBC.EasyFactor.InfoMgr;
-using System.Data.Linq;
-
+﻿
 namespace CMBC.EasyFactor.ARMgr
 {
+    using System;
+    using System.Linq;
+    using System.Windows.Forms;
+    using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class InvoiceAssign : UserControl
     {
+        #region Fields (1)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpAssignType opAssignType;
+
+        #endregion Fields
+
+        #region Enums (1)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum OpAssignType
+        {
+            NEW_ASSIGN,
+            UPDATE_ASSIGN
+        }
+
+        #endregion Enums
+
         #region Constructors (1)
 
+        /// <summary>
+        /// 
+        /// </summary>
         public InvoiceAssign()
         {
             this.InitializeComponent();
+
+            this.colInvoiceCurrency.DataSource = Currency.AllCurrencies().ToList();
+            this.colInvoiceCurrency.DisplayMember = "CurrencyCode";
+            this.colInvoiceCurrency.ValueMember = "CurrencyCode";
         }
 
         #endregion Constructors
 
         #region Properties (1)
 
+        /// <summary>
+        /// 
+        /// </summary>
         public CDA CDA
         {
             get;
@@ -38,6 +67,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         // Public Methods (1) 
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ResetControlsStatus()
         {
             foreach (Control comp in this.panelAssignBatch.Controls)
@@ -97,23 +129,63 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        private void GenerateAssignNo(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewAssignBatch(object sender, EventArgs e)
         {
-
+            Client seller = this.CDA.Case.SellerClient;
+            Client buyer = this.CDA.Case.BuyerClient;
+            string date = String.Format("{0:yyyy}{0:MM}{0:dd}", DateTime.Today);
+            int batchCount = this.CDA.InvoiceAssignBatches.Count;
+            string assignNo = seller.ClientEDICode.Substring(0, 5) + buyer.ClientEDICode.Substring(3, 2) + date + "-" + String.Format("{0:D2}", batchCount + 1);
+            InvoiceAssignBatch assignBatch = new InvoiceAssignBatch();
+            assignBatch.AssignBatchNo = assignNo;
+            assignBatch.BatchDate = DateTime.Now;
+            assignBatch.CreateUserName = App.Current.CurUser.Name;
+            assignBatch.IsCreateMsg = false;
+            assignBatch.CDA = this.CDA;
+            this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
+            this.invoiceBindingSource.DataSource = assignBatch.Invoices;
+            this.opAssignType = OpAssignType.NEW_ASSIGN;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveAssignBatch(object sender, EventArgs e)
         {
+            bool isSaveOK = true;
+            InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
             try
             {
+                if (opAssignType == OpAssignType.NEW_ASSIGN)
+                {
+                    App.Current.DbContext.InvoiceAssignBatches.InsertOnSubmit(assignBatch);
+                }
                 App.Current.DbContext.SubmitChanges();
             }
             catch (Exception e1)
             {
+                isSaveOK = false;
                 MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            if (isSaveOK)
+            {
+                MessageBox.Show("数据保存成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                opAssignType = OpAssignType.UPDATE_ASSIGN;
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectAssignBatch(object sender, EventArgs e)
         {
             AssignBatchMgr assignBatchMgr = new AssignBatchMgr(this.CDA);
@@ -125,10 +197,10 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
                 this.invoiceBindingSource.DataSource = assignBatch.Invoices;
+                this.opAssignType = OpAssignType.UPDATE_ASSIGN;
             }
         }
 
         #endregion Methods
-
     }
 }

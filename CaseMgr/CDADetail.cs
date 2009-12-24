@@ -90,16 +90,19 @@ namespace CMBC.EasyFactor.CaseMgr
             else
             {
                 this.CDABindingSource.DataSource = cda;
-                string[] methods = cda.NoticeMethod.Split(',');
-                foreach(string method in methods)
+                if (cda.NoticeMethod != null)
                 {
-                    if ("Fax".Equals(method))
+                    string[] methods = cda.NoticeMethod.Split(',');
+                    foreach (string method in methods)
                     {
-                        this.cbNoticeMethodFax.Checked = true;
-                    }
-                    else if ("Email".Equals(method))
-                    {
-                        this.cbNoticeMethodEmail.Checked = true;
+                        if ("Fax".Equals(method))
+                        {
+                            this.cbNoticeMethodFax.Checked = true;
+                        }
+                        else if ("Email".Equals(method))
+                        {
+                            this.cbNoticeMethodEmail.Checked = true;
+                        }
                     }
                 }
                 cda.Backup();

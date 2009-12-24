@@ -127,6 +127,18 @@ namespace CMBC.EasyFactor.ARMgr
                 this.isNoticeCheckBox.Checked = cda.IsNotice.Value;
                 this.isRecoarseCheckBox.Checked = cda.IsRecoarse.Value;
                 this.assignTypeTextBox.Text = cda.AssignType;
+
+                this.priceTextBox.Text = String.Format("{0:N}",cda.Price);
+                this.iFPriceTextBox.Text = String.Format("{0:N}",cda.IFPrice);
+                this.handFeeCurrTextBox.Text = cda.HandFeeCurr;
+                this.handFeeTextBox.Text = String.Format("{0:N}",cda.HandFee);
+
+                this.creditCoverCurrTextBox.Text = cda.CreditCoverCurr;
+                this.creditCoverTextBox.Text = String.Format("{0:N}",cda.CreditCover);
+                this.periodEndTextBox.Text = String.Format("{0:d}",cda.CreditCoverPeriodEnd);
+
+                this.financeProportionTextBox.Text = String.Format("{0:0%}", cda.FinanceProportion);
+
                 Control control = this.panelInvoiceMgr.Controls[0];
                 if (control is InvoiceAssign)
                 {

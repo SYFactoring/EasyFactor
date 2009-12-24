@@ -406,7 +406,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                   && ((c.RMName == null ? string.Empty : c.RMName).Contains(tbRM.Text))
                   && (((c.ClientNameCN == null ? string.Empty : c.ClientNameCN).Contains(tbClientName.Text)) || ((c.ClientNameEN_1 == null ? string.Empty : c.ClientNameEN_1).Contains(tbClientName.Text)) || ((c.ClientNameEN_2 == null ? string.Empty : c.ClientNameEN_2).Contains(tbClientName.Text)))
                   && ((c.ClientEDICode == null ? string.Empty : c.ClientEDICode).Contains(tbClientEDICode.Text))
-                  && (c.ClientType.Contains(clientType)));
+                  && (c.ClientType.Contains(clientType))
+                  && (this.cbIsSigned.Checked==false?true:c.Contracts.Any(con=>con.ContractStatus=="已生效"))
+                  );
 
             this.bs.DataSource = queryResult;
             this.dgvClients.DataSource = bs;

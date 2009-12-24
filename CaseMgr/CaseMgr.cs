@@ -22,6 +22,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private BindingSource bs = new BindingSource();
 
+
         #endregion Fields
 
         #region Constructors (1)
@@ -200,6 +201,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                 && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN_1.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN_2.Contains(this.tbClientName.Text)
                                  || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN_1.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN_2.Contains(this.tbClientName.Text))
                                     );
+
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
