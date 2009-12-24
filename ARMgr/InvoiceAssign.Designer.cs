@@ -152,6 +152,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn47 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn48 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menuItemAssignImport = new System.Windows.Forms.ToolStripMenuItem();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             batchDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
@@ -349,26 +350,27 @@ namespace CMBC.EasyFactor.ARMgr
             this.cmuInvoiceAssign.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemInvoiceDetail,
             this.toolStripSeparator,
-            this.menuItemFlaw});
+            this.menuItemFlaw,
+            this.menuItemAssignImport});
             this.cmuInvoiceAssign.Name = "cmuInvoiceAssign";
-            this.cmuInvoiceAssign.Size = new System.Drawing.Size(123, 54);
+            this.cmuInvoiceAssign.Size = new System.Drawing.Size(159, 98);
             // 
             // menuItemInvoiceDetail
             // 
             this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
-            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(122, 22);
+            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(158, 22);
             this.menuItemInvoiceDetail.Text = "详细信息";
             this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(119, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(155, 6);
             // 
             // menuItemFlaw
             // 
             this.menuItemFlaw.Name = "menuItemFlaw";
-            this.menuItemFlaw.Size = new System.Drawing.Size(122, 22);
+            this.menuItemFlaw.Size = new System.Drawing.Size(158, 22);
             this.menuItemFlaw.Text = "瑕疵处理";
             this.menuItemFlaw.Click += new System.EventHandler(this.Flaw);
             // 
@@ -915,6 +917,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn49.Name = "dataGridViewTextBoxColumn49";
             this.dataGridViewTextBoxColumn49.Visible = false;
             // 
+            // menuItemAssignImport
+            // 
+            this.menuItemAssignImport.Name = "menuItemAssignImport";
+            this.menuItemAssignImport.Size = new System.Drawing.Size(158, 22);
+            this.menuItemAssignImport.Text = "导入该批次转让";
+            this.menuItemAssignImport.Click += new System.EventHandler(this.ImportAssignBatch);
+            // 
             // InvoiceAssign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -990,5 +999,6 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn47;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn48;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
+        private System.Windows.Forms.ToolStripMenuItem menuItemAssignImport;
     }
 }

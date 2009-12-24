@@ -6,6 +6,9 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using Microsoft.Office.Interop.Excel;
+    using System.Reflection;
+    using System.Data;
 
     /// <summary>
     /// 
@@ -136,6 +139,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void NewAssignBatch(object sender, EventArgs e)
         {
+            if (this.CDA == null)
+            {
+                MessageBox.Show("没有有效的额度通知书", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             Client seller = this.CDA.Case.SellerClient;
             Client buyer = this.CDA.Case.BuyerClient;
             string date = String.Format("{0:yyyy}{0:MM}{0:dd}", DateTime.Today);
@@ -159,6 +168,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SaveAssignBatch(object sender, EventArgs e)
         {
+            if (this.assignBatchNoTextBox.Text == string.Empty)
+            {
+                return;
+            }
+
             bool isSaveOK = true;
             InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
             try
@@ -202,5 +216,114 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
+
+        private void ImportAssignBatch(object sender, EventArgs e)
+        {
+            InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
+            if (assignBatch == null || assignBatch.AssignBatchNo == null)
+            {
+                MessageBox.Show("请首先创建新批次", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            OpenFileDialog fileDialog = new OpenFileDialog();
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = fileDialog.FileName;
+                ApplicationClass app = new ApplicationClass { Visible = false };
+                WorkbookClass w = (WorkbookClass)app.Workbooks.Open(
+                   @fileName,
+                   Missing.Value,
+                   Missing.Value,
+                   Missing.Value,
+                   Missing.Value,
+                   Missing.Value,
+                   Missing.Value,
+                   Missing.Value,
+                   Missing.Value,
+                   Missing.Value,
+                   Missing.Value,
+                   Missing.Value,
+                   Missing.Value,
+                   Missing.Value,
+                   Missing.Value);
+
+                Sheets sheets = w.Worksheets;
+                Worksheet datasheet = null;
+
+                foreach (Worksheet sheet in sheets)
+                {
+                    if (datasheet == null)
+                    {
+                        datasheet = sheet;
+                        break;
+                    }
+                }
+
+                if (datasheet == null)
+                {
+                    MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    app.Quit();
+                    return;
+                }
+
+                Range range = datasheet.get_Range("A10", "R1000");
+                Array values = (Array)range.Formula;
+                if (values != null)
+                {
+                    int length = values.GetLength(0);
+                    string title = values.GetValue(1, 1).ToString().Trim();
+                    if (title.IndexOf("发票") == -1)
+                    {
+                        MessageBox.Show("文件格式错误，请检查", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        app.Quit();
+                        return;
+                    }
+
+                    for (int row = 2; row <= length; row++)
+                    {
+                        if (!values.GetValue(row, 1).Equals(string.Empty))
+                        {
+                            Invoice invoice = new Invoice();
+                            try
+                            {
+                                int column = 1;
+                                invoice.InvoiceNo = values.GetValue(row, column++).ToString().Trim();
+                                invoice.AssignAmount = Double.Parse(values.GetValue(row, column++).ToString().Trim());
+                                object invoiceDate = values.GetValue(row, column++);
+                                if (invoiceDate is double)
+                                {
+                                    invoice.InvoiceDate = DateTime.FromOADate((double)invoiceDate);
+                                }
+                                else
+                                {
+                                    invoice.InvoiceDate = DateTime.Parse((string)invoiceDate);
+                                }
+                                invoice.DueDate = DateTime.Parse(values.GetValue(row, column++).ToString().Trim());
+                                invoice.AssignDate = DateTime.Parse(values.GetValue(row, column++).ToString().Trim());
+                                invoice.IsFlaw = Boolean.Parse(values.GetValue(row, column++).ToString().Trim());
+
+                                invoice.InvoiceAssignBatch = assignBatch;
+                                App.Current.DbContext.Invoices.InsertOnSubmit(invoice);
+
+                                App.Current.DbContext.SubmitChanges();
+                            }
+                            catch (Exception e1)
+                            {
+                                DialogResult dr = MessageBox.Show("导入失败: " + e1.Message + "\t" + invoice.InvoiceNo + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                                if (dr == DialogResult.No)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                app.Quit();
+            }
+        }
     }
 }
