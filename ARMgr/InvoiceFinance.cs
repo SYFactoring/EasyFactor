@@ -1,4 +1,9 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="InvoiceFinance.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
@@ -6,8 +11,8 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
-    using Microsoft.Office.Interop.Excel;
     using CMBC.EasyFactor.Utils;
+    using Microsoft.Office.Interop.Excel;
 
     /// <summary>
     /// 

@@ -1,14 +1,19 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="CaseMgr.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
 namespace CMBC.EasyFactor.CaseMgr
 {
     using System;
+    using System.Collections.Generic;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Windows.Forms;
-    using CMBC.EasyFactor.Utils;
     using CMBC.EasyFactor.DB.dbml;
-    using System.Data.SqlClient;
+    using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar.Controls;
-    using System.Collections.Generic;
 
     /// <summary>
     /// 

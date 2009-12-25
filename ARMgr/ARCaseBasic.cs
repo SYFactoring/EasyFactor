@@ -1,4 +1,8 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="ARCaseBasic.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.ARMgr
 {
@@ -10,7 +14,9 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
 
-    ///
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class ARCaseBasic : UserControl
     {
         #region Fields (1)

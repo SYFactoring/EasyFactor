@@ -1,30 +1,35 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="CaseDetail.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
 namespace CMBC.EasyFactor.CaseMgr
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.InfoMgr;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
+    using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
     using DevComponents.Editors;
-    using CMBC.EasyFactor.InfoMgr.FactorMgr;
-    using System.Collections.Generic;
 
     /// <summary>
-    /// 
+    /// Case Detail
     /// </summary>
     public partial class CaseDetail : DevComponents.DotNetBar.Office2007Form
     {
         #region Fields (2)
 
         /// <summary>
-        /// 
+        /// Operation type of Case
         /// </summary>
         private OpCaseType opCaseType;
         /// <summary>
-        /// 
+        /// Operation type of Credit Cover Negotiation
         /// </summary>
         private OpCreditCoverNegType opCreditCoverNegType;
 
@@ -33,42 +38,43 @@ namespace CMBC.EasyFactor.CaseMgr
         #region Enums (2)
 
         /// <summary>
-        /// 
+        /// Operation types of Credit Cover Negotiation
         /// </summary>
         public enum OpCreditCoverNegType
         {
             /// <summary>
-            /// 
+            /// New CreditCoverNegotiation
             /// </summary>
             NEW_CREDIT_COVER_NEG,
 
             /// <summary>
-            /// 
+            /// Update CreditCoverNegotiation
             /// </summary>
             UPDATE_CREDIT_COVER_NEG,
 
             /// <summary>
-            /// 
+            /// Detail CreditCoverNegotiation
             /// </summary>
             DETAIL_CREDIT_COVER_NEG
         }
+
         /// <summary>
-        /// 
+        /// Operation types of Case
         /// </summary>
         public enum OpCaseType
         {
             /// <summary>
-            /// 
+            /// New case
             /// </summary>
             NEW_CASE,
 
             /// <summary>
-            /// 
+            /// Update case
             /// </summary>
             UPDATE_CASE,
 
             /// <summary>
-            /// 
+            /// Detail case
             /// </summary>
             DETAIL_CASE,
         }
@@ -78,12 +84,12 @@ namespace CMBC.EasyFactor.CaseMgr
         #region Constructors (3)
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the CaseDetail class
         /// </summary>
-        /// <param name="curCase"></param>
-        /// <param name="opCaseType"></param>
-        /// <param name="opCreditCoverNegType"></param>
-        public CaseDetail(Case curCase, OpCaseType opCaseType, OpCreditCoverNegType opCreditCoverNegType)
+        /// <param name="curCase">Selected case</param>
+        /// <param name="opCaseType">operation type of Case</param>
+        /// <param name="opCreditCoverNegType">operation type of CreditCoverNegotiation</param>
+        private CaseDetail(Case curCase, OpCaseType opCaseType, OpCreditCoverNegType opCreditCoverNegType)
         {
             this.InitializeComponent();
 
@@ -135,10 +141,10 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the CaseDetail class
         /// </summary>
-        /// <param name="curCase"></param>
-        /// <param name="opCaseType"></param>
+        /// <param name="curCase">Selected case</param>
+        /// <param name="opCaseType">Operation type of Case</param>
         public CaseDetail(Case curCase, OpCaseType opCaseType)
             : this(curCase, opCaseType, OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG)
         {
@@ -146,10 +152,10 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the CaseDetail class
         /// </summary>
-        /// <param name="curCase"></param>
-        /// <param name="opCreditCoverNegType"></param>
+        /// <param name="curCase">Selected case</param>
+        /// <param name="opCreditCoverNegType">Operation type of CreditCoverNegotiation</param>
         public CaseDetail(Case curCase, OpCreditCoverNegType opCreditCoverNegType)
             : this(curCase, OpCaseType.DETAIL_CASE, opCreditCoverNegType)
         {
@@ -162,13 +168,18 @@ namespace CMBC.EasyFactor.CaseMgr
 
         // Private Methods (23) 
 
+        /// <summary>
+        /// Leave event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CaseDetail_Leave(object sender, EventArgs e)
         {
             this.CloseCase(sender, e);
         }
 
         /// <summary>
-        /// 
+        /// Case operation type changed event handler
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -192,6 +203,11 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// Case owner deparment changed event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CaseOwnerDeptsChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
         {
             if (this.caseBindingSource.DataSource is Case)
@@ -205,7 +221,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Case transaction type changed event handler
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -255,7 +271,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Close the case form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -282,7 +298,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Delete current CreditCoverNegotiation
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -326,6 +342,11 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// Show detail of the selected CDA
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DetailCDA(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dgvCDAs.SelectedRows.Count == 0)
@@ -346,7 +367,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Generate Case code
         /// </summary>
         /// <returns></returns>
         private string GenerateCaseCode(Case curCase)
@@ -383,7 +404,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Create new CDA
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -394,7 +415,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Create new CreditCoverNegotiation
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -415,7 +436,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Refresh the CDA list
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -432,7 +453,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Refresh the CreditCoverNegotiation list
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -449,7 +470,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Save current Case
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -508,7 +529,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Save current CreditCoverNegotiation
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -573,7 +594,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Select the case buyer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -607,7 +628,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Select the case seller
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -640,6 +661,11 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// Select CreditCoverNegotiation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectCreditCoverNeg(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dgvCreditCoverNegs.SelectedRows.Count == 0)
@@ -659,7 +685,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Select the factor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -697,7 +723,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Turn case into update status
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -715,7 +741,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Update case control status
         /// </summary>
         private void UpdateCaseControlStatus()
         {
@@ -767,7 +793,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Turn CreditCoverNegotiation into update status
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -790,7 +816,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
+        /// Update CreditCoverNegotiation Control Status
         /// </summary>
         private void UpdateCreditCoverNegControlStatus()
         {

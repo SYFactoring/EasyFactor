@@ -1,15 +1,18 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="InvoiceAssign.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using Microsoft.Office.Interop.Excel;
-    using System.Reflection;
-    using System.Data;
-    using System.Runtime.InteropServices;
 
     /// <summary>
     /// 

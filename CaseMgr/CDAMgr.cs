@@ -1,17 +1,17 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="CDAMgr.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
 namespace CMBC.EasyFactor.CaseMgr
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Drawing;
-    using System.Data;
+    using System.Data.SqlClient;
     using System.Linq;
-    using System.Text;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Data.SqlClient;
 
     /// <summary>
     /// 
