@@ -16,13 +16,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     using System.Data.SqlClient;
     using CMBC.EasyFactor.Utils;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
 
     /// <summary>
     /// Factor Management User Interface 
     /// </summary>
     public partial class FactorMgr : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         /// <summary>
         /// 
@@ -33,9 +34,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private readonly bool isEditable;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the FactorMgrUI class
@@ -55,9 +56,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.cbCountry.ValueMember = "CountryNameEN";
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets onwer form
@@ -77,11 +78,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (11) 
+        #region Methods (11)
 
-		// Private Methods (11) 
+        // Private Methods (11) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -168,123 +169,99 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         {
             string fileName = obj as string;
 
-            ApplicationClass app = new ApplicationClass { Visible = false };
-            WorkbookClass w = (WorkbookClass)app.Workbooks.Open(
-               @fileName,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value);
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+            WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
+               fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+               Type.Missing, Type.Missing, Type.Missing);
 
-            Sheets sheets = w.Worksheets;
-            Worksheet datasheet = null;
-
-            foreach (Worksheet sheet in sheets)
-            {
-                if (datasheet == null)
-                {
-                    datasheet = sheet;
-                    break;
-                }
-            }
-
-            if (datasheet == null)
+            if (workbook.Sheets.Count < 1)
             {
                 MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                app.Quit();
+                workbook.Close(false, fileName, null);
+                Marshal.ReleaseComObject(workbook);
                 return;
             }
 
-            Range range = datasheet.get_Range("A2", "AG300");
+            Worksheet datasheet = (Worksheet)workbook.Sheets[1];
+            Range range = datasheet.UsedRange;
+            object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
 
-            Array values = (Array)range.Formula;
-            if (values != null)
+            if (valueArray != null)
             {
-                var factorList = App.Current.DbContext.Factors;
-
-                int length = values.GetLength(0);
-
-                for (int row = 1; row <= length; row++)
+                for (int row = 2; row < range.Rows.Count; row++)
                 {
-                    if (!values.GetValue(row, 2).Equals(string.Empty))
+                    Factor factor = null;
+                    try
                     {
-                        Factor factor = null;
-                        try
+                        int column = 1;
+                        string factorCode = String.Format("{0:G}", valueArray[row, 2]);
+                        if (string.Empty.Equals(factorCode))
                         {
-                            int column = 1;
-                            bool isNew = false;
-                            string factorCode = values.GetValue(row, 2).ToString().Trim();
-                            factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                            if (factor == null)
-                            {
-                                isNew = true;
-                                factor = new Factor();
-                                factor.FactorType = "保理商";
-                            }
-                            factor.CountryName = values.GetValue(row, column++).ToString().Trim();
-                            factor.FactorCode = values.GetValue(row, column++).ToString().Trim();
-                            factor.CompanyNameEN = values.GetValue(row, column++).ToString().Trim();
-                            factor.ShortName = values.GetValue(row, column++).ToString().Trim();
-                            factor.Department = values.GetValue(row, column++).ToString().Trim();
-                            factor.PostalAddress_1 = values.GetValue(row, column++).ToString().Trim();
-                            factor.PostalAddress_2 = values.GetValue(row, column++).ToString().Trim();
-                            factor.PostalCodePost = values.GetValue(row, column++).ToString().Trim();
-                            factor.CityPost = values.GetValue(row, column++).ToString().Trim();
-                            factor.VisitingAddress_1 = values.GetValue(row, column++).ToString().Trim();
-                            factor.VisitingAddress_2 = values.GetValue(row, column++).ToString().Trim();
-                            factor.PostalCodeVisiting = values.GetValue(row, column++).ToString().Trim();
-                            factor.CityVisiting = values.GetValue(row, column++).ToString().Trim();
-                            factor.Email = values.GetValue(row, column++).ToString().Trim();
-                            factor.WebSite = values.GetValue(row, column++).ToString().Trim();
-                            factor.Telephone_1 = values.GetValue(row, column++).ToString().Trim();
-                            factor.Telephone_2 = values.GetValue(row, column++).ToString().Trim();
-                            factor.Telefax_1 = values.GetValue(row, column++).ToString().Trim();
-                            factor.Telefax_2 = values.GetValue(row, column++).ToString().Trim();
-                            factor.WorkingHours = values.GetValue(row, column++).ToString().Trim();
-                            factor.GeneralCorrespondence_1 = values.GetValue(row, column++).ToString().Trim();
-                            factor.GeneralCorrespondence_2 = values.GetValue(row, column++).ToString().Trim();
-                            factor.Contacts_1 = values.GetValue(row, column++).ToString().Trim();
-                            factor.Contacts_2 = values.GetValue(row, column++).ToString().Trim();
-                            factor.Contacts_3 = values.GetValue(row, column++).ToString().Trim();
-                            factor.Contacts_4 = values.GetValue(row, column++).ToString().Trim();
-                            factor.Management_1 = values.GetValue(row, column++).ToString().Trim();
-                            factor.Management_2 = values.GetValue(row, column++).ToString().Trim();
-                            factor.Shareholders = values.GetValue(row, column++).ToString().Trim();
-                            factor.IFISAvailableOnPrivateForum = values.GetValue(row, column++).ToString().Trim();
-                            factor.MembershipStatus = values.GetValue(row, column++).ToString().Trim();
-                            factor.MembershipDate = values.GetValue(row, column++).ToString().Trim();
-                            factor.DateOfLatestRevision = values.GetValue(row, column).ToString().Trim();
-
-                            if (isNew)
-                            {
-                                App.Current.DbContext.Factors.InsertOnSubmit(factor);
-                            }
-
-                            App.Current.DbContext.SubmitChanges();
+                            continue;
                         }
-                        catch (Exception e)
+                        bool isNew = false;
+                        factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                        if (factor == null)
                         {
-                            DialogResult dr = MessageBox.Show("导入失败: " + e.Message + "\t" + factor.FactorCode + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                            if (dr == DialogResult.No)
-                            {
-                                break;
-                            }
+                            isNew = true;
+                            factor = new Factor();
+                            factor.FactorType = "保理商";
+                        }
+                        factor.CountryName = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.FactorCode = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.CompanyNameEN = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.ShortName = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Department = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.PostalAddress_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.PostalAddress_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.PostalCodePost = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.CityPost = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.VisitingAddress_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.VisitingAddress_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.PostalCodeVisiting = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.CityVisiting = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Email = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.WebSite = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Telephone_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Telephone_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Telefax_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Telefax_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.WorkingHours = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.GeneralCorrespondence_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.GeneralCorrespondence_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Contacts_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Contacts_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Contacts_3 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Contacts_4 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Management_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Management_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Shareholders = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.IFISAvailableOnPrivateForum = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.MembershipStatus = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.MembershipDate = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.DateOfLatestRevision = String.Format("{0:G}", valueArray[row, column++]);
+
+                        if (isNew)
+                        {
+                            App.Current.DbContext.Factors.InsertOnSubmit(factor);
+                        }
+
+                        App.Current.DbContext.SubmitChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        DialogResult dr = MessageBox.Show("导入失败: " + e.Message + "\t" + factor.FactorCode + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (dr == DialogResult.No)
+                        {
+                            break;
                         }
                     }
                 }
                 MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            app.Quit();
+            workbook.Close(false, fileName, null);
+            Marshal.ReleaseComObject(workbook);
         }
 
         /// <summary>
@@ -447,6 +424,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

@@ -14,13 +14,14 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     using Microsoft.Office.Interop.Excel;
     using System.Reflection;
     using CMBC.EasyFactor.Utils;
+    using System.Runtime.InteropServices;
 
     /// <summary>
     /// User Management User Interface
     /// </summary>
     public partial class UserMgr : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         private BindingSource bs = new BindingSource();
         /// <summary>
@@ -28,9 +29,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         private readonly bool isEditable;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the UserMgrUI class
@@ -44,9 +45,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.UpdateEditableStatus();
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         public Form OwnerForm
         {
@@ -63,11 +64,11 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (10) 
+        #region Methods (10)
 
-		// Private Methods (10) 
+        // Private Methods (10) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -152,96 +153,75 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private static void ImportUsersImpl(object obj)
         {
             string fileName = obj as string;
-            ApplicationClass app = new ApplicationClass { Visible = false };
-            WorkbookClass w = (WorkbookClass)app.Workbooks.Open(
-               @fileName,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value);
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+            WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
+               fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+               Type.Missing, Type.Missing, Type.Missing);
 
-            Sheets sheets = w.Worksheets;
-            Worksheet datasheet = null;
-
-            foreach (Worksheet sheet in sheets)
-            {
-                if (datasheet == null)
-                {
-                    datasheet = sheet;
-                    break;
-                }
-            }
-
-            if (datasheet == null)
+            if (workbook.Sheets.Count < 1)
             {
                 MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                app.Quit();
+                workbook.Close(false, fileName, null);
+                Marshal.ReleaseComObject(workbook);
                 return;
             }
 
-            Range range = datasheet.get_Range("A2", "AJ1000");
-            Array values = (Array)range.Formula;
-            if (values != null)
+            Worksheet datasheet = (Worksheet)workbook.Sheets[1];
+            Range range = datasheet.UsedRange;
+            object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
+
+            if (valueArray != null)
             {
-                int length = values.GetLength(0);
-
-                for (int row = 1; row <= length; row++)
+                for (int row = 2; row < range.Rows.Count; row++)
                 {
-                    if (!values.GetValue(row, 1).Equals(string.Empty))
+                    User user = null;
+                    try
                     {
-                        User user = null;
-                        try
+                        int column = 1;
+                        string userId = String.Format("{0:G}",valueArray[row, 1]);
+                        if (string.Empty.Equals(userId))
                         {
-                            int column = 1;
-                            string userId = values.GetValue(row, 1).ToString().Trim();
-                            bool isNew = false;
-                            user = App.Current.DbContext.Users.SingleOrDefault(c => c.UserID == userId);
-                            if (user == null)
-                            {
-                                isNew = true;
-                                user = new User();
-                            }
-                            user.UserID = values.GetValue(row, column++).ToString().Trim();
-                            user.EDIAccount = values.GetValue(row, column++).ToString().Trim();
-                            user.Password = values.GetValue(row, column++).ToString().Trim();
-                            user.Role = values.GetValue(row, column++).ToString().Trim();
-                            user.Name = values.GetValue(row, column++).ToString().Trim();
-                            user.Phone = values.GetValue(row, column++).ToString().Trim();
-                            user.Telphone = values.GetValue(row, column++).ToString().Trim();
-                            user.Email = values.GetValue(row, column++).ToString().Trim();
-                            user.MSN = values.GetValue(row, column++).ToString().Trim();
-
-                            if (isNew)
-                            {
-                                App.Current.DbContext.Users.InsertOnSubmit(user);
-                            }
-
-                            App.Current.DbContext.SubmitChanges();
+                            continue;
                         }
-                        catch (Exception e)
+                        bool isNew = false;
+                        user = App.Current.DbContext.Users.SingleOrDefault(c => c.UserID == userId);
+                        if (user == null)
                         {
-                            DialogResult dr = MessageBox.Show("导入失败: " + e.Message + "\t" + user.Name + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                            if (dr == DialogResult.No)
-                            {
-                                break;
-                            }
+                            isNew = true;
+                            user = new User();
+                        }
+                        user.UserID = String.Format("{0:G}",valueArray[row, column++]);
+                        user.EDIAccount = String.Format("{0:G}",valueArray[row, column++]);
+                        user.Password = String.Format("{0:G}",valueArray[row, column++]);
+                        user.Role = String.Format("{0:G}",valueArray[row, column++]);
+                        user.Name = String.Format("{0:G}",valueArray[row, column++]);
+                        user.Phone = String.Format("{0:G}",valueArray[row, column++]);
+                        user.Telphone = String.Format("{0:G}",valueArray[row, column++]);
+                        user.Email = String.Format("{0:G}",valueArray[row, column++]);
+                        user.MSN = String.Format("{0:G}",valueArray[row, column++]);
+
+                        if (isNew)
+                        {
+                            App.Current.DbContext.Users.InsertOnSubmit(user);
+                        }
+
+                        App.Current.DbContext.SubmitChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        DialogResult dr = MessageBox.Show("导入失败: " + e.Message + "\t" + user.Name + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (dr == DialogResult.No)
+                        {
+                            break;
                         }
                     }
                 }
                 MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
-            app.Quit();
+            workbook.Close(false, fileName, null);
+            Marshal.ReleaseComObject(workbook);
         }
 
         /// <summary>
@@ -339,6 +319,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

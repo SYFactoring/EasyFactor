@@ -95,10 +95,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            int cid = (int)dgvCDAs["colCDAID", dgvCDAs.SelectedRows[0].Index].Value;
-            if (cid != 0)
+            string cdaCode = (String)dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
+            if (cdaCode != null)
             {
-                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDAID == cid);
+                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                 if (selectedCDA != null)
                 {
                     if (MessageBox.Show("是否打算删除额度通知书: " + selectedCDA.CaseCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
@@ -132,10 +132,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            int cid = (int)dgvCDAs["colCDAID", dgvCDAs.SelectedRows[0].Index].Value;
-            if (cid != 0)
+            string cdaCode = (String)dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
+            if (cdaCode != null)
             {
-                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDAID == cid);
+                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                 if (selectedCDA != null)
                 {
                     CDADetail cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.DETAIL_CDA);
@@ -185,10 +185,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            int cid = (int)dgvCDAs["colCDAID", dgvCDAs.SelectedRows[0].Index].Value;
-            if (cid != 0)
+            string cdaCode = (String)dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
+            if (cdaCode != null)
             {
-                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDAID == cid);
+                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                 if (selectedCDA != null)
                 {
                     this.Selected = selectedCDA;
@@ -213,10 +213,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            int cid = (int)dgvCDAs["colCDAID", dgvCDAs.SelectedRows[0].Index].Value;
-            if (cid != 0)
+            string cdaCode = (String)dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
+            if (cdaCode != null)
             {
-                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDAID == cid);
+                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                 if (selectedCDA != null)
                 {
                     CDADetail cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.UPDATE_CDA);

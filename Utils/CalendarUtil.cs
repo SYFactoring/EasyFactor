@@ -228,5 +228,4 @@ namespace CMBC.EasyFactor.Utils
             base.OnValueChanged(eventargs);
         }
     }
-
 }

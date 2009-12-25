@@ -11,7 +11,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCase;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCDADueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCDAStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCDAValueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
@@ -125,7 +125,7 @@
             this.tbContractCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblContractCode = new DevComponents.DotNetBar.LabelX();
             this.dgvCDAs = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colCDAID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCDACode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCase = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsRecoarse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -314,7 +314,7 @@
             this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCDAs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCDAs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colCDAID,
+            this.colCDACode,
             this.colCaseCode,
             this.colCase,
             this.colIsRecoarse,
@@ -376,11 +376,11 @@
             // 
             // colCDAID
             // 
-            this.colCDAID.DataPropertyName = "CDAID";
-            this.colCDAID.HeaderText = "CDAID";
-            this.colCDAID.Name = "colCDAID";
-            this.colCDAID.ReadOnly = true;
-            this.colCDAID.Visible = false;
+            this.colCDACode.DataPropertyName = "CDACode";
+            this.colCDACode.HeaderText = "CDACode";
+            this.colCDACode.Name = "colCDACode";
+            this.colCDACode.ReadOnly = true;
+            this.colCDACode.Visible = false;
             // 
             // colCaseCode
             // 

@@ -128,14 +128,14 @@ namespace CMBC.EasyFactor.ARMgr
                 this.isRecoarseCheckBox.Checked = cda.IsRecoarse.Value;
                 this.assignTypeTextBox.Text = cda.AssignType;
 
-                this.priceTextBox.Text = String.Format("{0:N}",cda.Price);
-                this.iFPriceTextBox.Text = String.Format("{0:N}",cda.IFPrice);
+                this.priceTextBox.Text = String.Format("{0:N}", cda.Price);
+                this.iFPriceTextBox.Text = String.Format("{0:N}", cda.IFPrice);
                 this.handFeeCurrTextBox.Text = cda.HandFeeCurr;
-                this.handFeeTextBox.Text = String.Format("{0:N}",cda.HandFee);
+                this.handFeeTextBox.Text = String.Format("{0:N}", cda.HandFee);
 
                 this.creditCoverCurrTextBox.Text = cda.CreditCoverCurr;
-                this.creditCoverTextBox.Text = String.Format("{0:N}",cda.CreditCover);
-                this.periodEndTextBox.Text = String.Format("{0:d}",cda.CreditCoverPeriodEnd);
+                this.creditCoverTextBox.Text = String.Format("{0:N}", cda.CreditCover);
+                this.periodEndTextBox.Text = String.Format("{0:d}", cda.CreditCoverPeriodEnd);
 
                 this.financeProportionTextBox.Text = String.Format("{0:0%}", cda.FinanceProportion);
 
@@ -143,6 +143,10 @@ namespace CMBC.EasyFactor.ARMgr
                 if (control is InvoiceAssign)
                 {
                     (control as InvoiceAssign).CDA = cda;
+                }
+                else if (control is InvoiceFinance)
+                {
+                    (control as InvoiceFinance).CDA = cda;
                 }
             }
             else
@@ -154,6 +158,10 @@ namespace CMBC.EasyFactor.ARMgr
                 if (control is InvoiceAssign)
                 {
                     (control as InvoiceAssign).ResetControlsStatus();
+                }
+                else if (control is InvoiceFinance)
+                {
+                    (control as InvoiceFinance).ResetControlsStatus();
                 }
             }
         }

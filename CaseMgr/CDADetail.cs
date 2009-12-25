@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace CMBC.EasyFactor.CaseMgr
 {
+    using System;
+    using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.InfoMgr.FactorMgr;
-    using CMBC.EasyFactor.InfoMgr;
     using CMBC.EasyFactor.Utils;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class CDADetail : DevComponents.DotNetBar.Office2007Form
     {
         #region Fields (1)
@@ -52,6 +48,11 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #region Constructors (1)
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cda"></param>
+        /// <param name="opCDAType"></param>
         public CDADetail(CDA cda, OpCDAType opCDAType)
         {
             this.InitializeComponent();
@@ -71,9 +72,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.handFeeCurrComboBox.ValueMember = "CurrencyCode";
             this.handFeeCurrComboBox.SelectedIndex = -1;
 
-            this.assignTypeComboBox.DataSource = new string[] {"全部","部分" };
-            this.commissionTypeComboBox.DataSource = new string[] {"01","02","其他"};
-            this.cDAStatusComboBox.DataSource = new string[] { "未审核", "已审核未下发", "已下发未签回", "已签回","已生效","已过期" };
+            this.assignTypeComboBox.DataSource = new string[] { "全部", "部分" };
+            this.commissionTypeComboBox.DataSource = new string[] { "01", "02", "其他" };
+            this.cDAStatusComboBox.DataSource = new string[] { "未审核", "已审核未下发", "已下发未签回", "已签回", "已生效", "已过期" };
 
             this.opCDAType = opCDAType;
             if (opCDAType == OpCDAType.NEW_CDA)
@@ -146,6 +147,28 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="cda"></param>
+        /// <returns></returns>
+        private string GenerateCDACode(CDA cda)
+        {
+            if (cda.Case.SellerClient == null)
+            {
+                return string.Empty;
+            }
+            Contract contract = cda.Case.SellerClient.Contracts.SingleOrDefault(c => c.ContractStatus == "已生效");
+            if (contract != null)
+            {
+                return String.Format("{0}-{1:00N}", contract.ContractCode, cda.Case.CDAs.Count + 1);
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SaveCDA(object sender, EventArgs e)
@@ -157,18 +180,26 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             if (this.cbNoticeMethodFax.Checked == true)
             {
-                if(cda.NoticeMethod==null)
+                if (cda.NoticeMethod == null)
                 {
-                    cda.NoticeMethod="Fax";
-                }else
+                    cda.NoticeMethod = "Fax";
+                }
+                else
                 {
-                    cda.NoticeMethod="Email,Fax";
+                    cda.NoticeMethod = "Email,Fax";
                 }
             }
 
-            if (cda.CDAID == 0)
+            if (cda.CDACode == null)
             {
                 bool isAddOK = true;
+                string cdaCode = GenerateCDACode(cda);
+                if (string.Empty.Equals(cdaCode))
+                {
+                    MessageBox.Show("CDA编号生成失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                cda.CDACode = cdaCode;
                 try
                 {
                     App.Current.DbContext.CDAs.InsertOnSubmit(cda);
@@ -190,7 +221,7 @@ namespace CMBC.EasyFactor.CaseMgr
             else
             {
                 bool isUpdateOK = true;
-                if (cda.CDAID == 0)
+                if (cda.CDACode == null)
                 {
                     return;
                 }
@@ -241,7 +272,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private void UpdateCDA(object sender, EventArgs e)
         {
             CDA cda = (CDA)this.CDABindingSource.DataSource;
-            if (cda == null || cda.CDAID == 0)
+            if (cda == null || cda.CDACode == null)
             {
                 MessageBox.Show("请首先选择一个额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;

@@ -16,6 +16,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
 
     /// <summary>
     /// Client Management User Interface
@@ -187,122 +188,99 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void ImportClientsImpl(object obj)
         {
             string fileName = obj as string;
-            ApplicationClass app = new ApplicationClass { Visible = false };
-            WorkbookClass w = (WorkbookClass)app.Workbooks.Open(
-               @fileName,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value,
-               Missing.Value);
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+            WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
+               fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+               Type.Missing, Type.Missing, Type.Missing);
 
-            Sheets sheets = w.Worksheets;
-            Worksheet datasheet = null;
-
-            foreach (Worksheet sheet in sheets)
-            {
-                if (datasheet == null)
-                {
-                    datasheet = sheet;
-                    break;
-                }
-            }
-
-            if (datasheet == null)
+            if (workbook.Sheets.Count < 1)
             {
                 MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                app.Quit();
+                workbook.Close(false, fileName, null);
+                Marshal.ReleaseComObject(workbook);
                 return;
             }
 
-            Range range = datasheet.get_Range("A2", "AJ1000");
-            Array values = (Array)range.Formula;
-            if (values != null)
+            Worksheet datasheet = (Worksheet)workbook.Sheets[1];
+            Range range = datasheet.UsedRange;
+            object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
+
+            if (valueArray != null)
             {
-                int length = values.GetLength(0);
-
-                for (int row = 1; row <= length; row++)
+                for (int row = 2; row < range.Rows.Count; row++)
                 {
-                    if (!values.GetValue(row, 2).Equals(string.Empty))
+                    Client client = null;
+                    try
                     {
-                        Client client = null;
-                        try
+                        int column = 1;
+                        string clientEDICode = String.Format("{0:G}", valueArray[row, 2]);
+                        if (string.Empty.Equals(clientEDICode))
                         {
-                            int column = 1;
-                            string clientEDICode = values.GetValue(row, 2).ToString().Trim();
-                            bool isNew = false;
-                            client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
-                            if (client == null)
-                            {
-                                isNew = true;
-                                client = new Client();
-                            }
-
-                            client.ClientCoreNo = values.GetValue(row, column++).ToString().Trim();
-                            client.ClientEDICode = values.GetValue(row, column++).ToString().Trim();
-                            client.ClientNameCN = values.GetValue(row, column++).ToString().Trim();
-                            client.ClientNameEN_1 = values.GetValue(row, column++).ToString().Trim();
-                            client.ClientNameEN_2 = values.GetValue(row, column++).ToString().Trim();
-                            client.AddressCN = values.GetValue(row, column++).ToString().Trim();
-                            client.AddressEN = values.GetValue(row, column++).ToString().Trim();
-                            client.CityCN = values.GetValue(row, column++).ToString().Trim();
-                            client.CityEN = values.GetValue(row, column++).ToString().Trim();
-                            client.ProductCN = values.GetValue(row, column++).ToString().Trim();
-                            client.ProductEN = values.GetValue(row, column++).ToString().Trim();
-                            client.PostCode = values.GetValue(row, column++).ToString().Trim();
-                            client.CountryCode = values.GetValue(row, column++).ToString().Trim();
-                            client.Representative = values.GetValue(row, column++).ToString().Trim();
-                            client.Website = values.GetValue(row, column++).ToString().Trim();
-                            client.Contact = values.GetValue(row, column++).ToString().Trim();
-                            client.Telephone = values.GetValue(row, column++).ToString().Trim();
-                            client.Email = values.GetValue(row, column++).ToString().Trim();
-                            client.FaxNumber = values.GetValue(row, column++).ToString().Trim();
-                            client.CellPhone = values.GetValue(row, column++).ToString().Trim();
-                            client.ClientType = values.GetValue(row, column++).ToString().Trim();
-                            client.Industry = values.GetValue(row, column++).ToString().Trim();
-                            client.ProductCN = values.GetValue(row, column++).ToString().Trim();
-                            client.ProductEN = values.GetValue(row, column++).ToString().Trim();
-                            client.ClientLevel = values.GetValue(row, column++).ToString().Trim();
-                            client.IsGroup = Convert.ToBoolean(values.GetValue(row, column++).ToString().Trim());
-                            string groupNo = values.GetValue(row, column++).ToString().Trim();
-                            string groupNameCN = values.GetValue(row, column++).ToString().Trim();
-                            string groupNameEN = values.GetValue(row, column++).ToString().Trim();
-                            client.RegistrationNumber = values.GetValue(row, column++).ToString().Trim();
-                            client.CompanyCode = values.GetValue(row, column++).ToString().Trim();
-                            string departmentName = values.GetValue(row, column++).ToString().Trim();
-                            Department dep = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName.Equals(departmentName));
-                            if (dep != null)
-                            {
-                                client.Department = dep;
-                            }
-
-                            client.PMName = values.GetValue(row, column++).ToString().Trim();
-                            client.RMName = values.GetValue(row, column++).ToString().Trim();
-                            client.Comment = values.GetValue(row, column++).ToString().Trim();
-
-                            if (isNew)
-                            {
-                                App.Current.DbContext.Clients.InsertOnSubmit(client);
-                            }
-
-                            App.Current.DbContext.SubmitChanges();
+                            continue;
                         }
-                        catch (Exception e)
+                        bool isNew = false;
+                        client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                        if (client == null)
                         {
-                            DialogResult dr = MessageBox.Show("导入失败: " + e.Message + "\t" + client.ClientEDICode + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                            if (dr == DialogResult.No)
-                            {
-                                break;
-                            }
+                            isNew = true;
+                            client = new Client();
+                        }
+                        client.ClientCoreNo = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ClientEDICode = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ClientNameCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ClientNameEN_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ClientNameEN_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        client.AddressCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.AddressEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CityCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CityEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ProductCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ProductEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.PostCode = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CountryCode = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Representative = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Website = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Contact = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Telephone = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Email = String.Format("{0:G}", valueArray[row, column++]);
+                        client.FaxNumber = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CellPhone = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ClientType = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Industry = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ProductCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ProductEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ClientLevel = String.Format("{0:G}", valueArray[row, column++]);
+                        client.IsGroup = "是".Equals(valueArray[row, column++]);
+                        string groupNo = String.Format("{0:G}", valueArray[row, column++]);
+                        string groupNameCN = String.Format("{0:G}", valueArray[row, column++]);
+                        string groupNameEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.RegistrationNumber = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CompanyCode = String.Format("{0:G}", valueArray[row, column++]);
+                        string departmentName = String.Format("{0:G}", valueArray[row, column++]);
+                        Department dep = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName.Equals(departmentName));
+                        if (dep != null)
+                        {
+                            client.Department = dep;
+                        }
+
+                        client.PMName = String.Format("{0:G}", valueArray[row, column++]);
+                        client.RMName = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                        if (isNew)
+                        {
+                            App.Current.DbContext.Clients.InsertOnSubmit(client);
+                        }
+
+                        App.Current.DbContext.SubmitChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        DialogResult dr = MessageBox.Show("导入失败: " + e.Message + "\t" + client.ClientEDICode + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (dr == DialogResult.No)
+                        {
+                            break;
                         }
                     }
                 }
@@ -310,7 +288,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            app.Quit();
+            workbook.Close(false, fileName, null);
+            Marshal.ReleaseComObject(workbook);
         }
 
         /// <summary>
@@ -407,7 +386,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                   && (((c.ClientNameCN == null ? string.Empty : c.ClientNameCN).Contains(tbClientName.Text)) || ((c.ClientNameEN_1 == null ? string.Empty : c.ClientNameEN_1).Contains(tbClientName.Text)) || ((c.ClientNameEN_2 == null ? string.Empty : c.ClientNameEN_2).Contains(tbClientName.Text)))
                   && ((c.ClientEDICode == null ? string.Empty : c.ClientEDICode).Contains(tbClientEDICode.Text))
                   && (c.ClientType.Contains(clientType))
-                  && (this.cbIsSigned.Checked==false?true:c.Contracts.Any(con=>con.ContractStatus=="已生效"))
+                  && (this.cbIsSigned.Checked == false ? true : c.Contracts.Any(con => con.ContractStatus == "已生效"))
                   );
 
             this.bs.DataSource = queryResult;

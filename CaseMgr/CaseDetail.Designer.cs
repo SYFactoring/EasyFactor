@@ -37,7 +37,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCDAComment;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCDACreateUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCDADueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCDAIFPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCDAStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCDAValueDate;
@@ -201,7 +201,7 @@
             this.tabItemCase = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelCDA = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvCDAs = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colCDAID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCDACode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCDACaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCDACase = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsRecoarse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -1090,7 +1090,7 @@
             this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCDAs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCDAs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colCDAID,
+            this.colCDACode,
             this.colCDACaseCode,
             this.colCDACase,
             this.colIsRecoarse,
@@ -1149,13 +1149,13 @@
             this.dgvCDAs.TabIndex = 1;
             this.dgvCDAs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailCDA);
             // 
-            // colCDAID
+            // colCDACode
             // 
-            this.colCDAID.DataPropertyName = "CDAID";
-            this.colCDAID.HeaderText = "CDAID";
-            this.colCDAID.Name = "colCDAID";
-            this.colCDAID.ReadOnly = true;
-            this.colCDAID.Visible = false;
+            this.colCDACode.DataPropertyName = "CDACode";
+            this.colCDACode.HeaderText = "CDACode";
+            this.colCDACode.Name = "colCDACode";
+            this.colCDACode.ReadOnly = true;
+            this.colCDACode.Visible = false;
             // 
             // colCDACaseCode
             // 

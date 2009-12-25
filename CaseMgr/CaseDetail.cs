@@ -333,10 +333,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            int cid = (int)dgvCDAs["colCDAID", dgvCDAs.SelectedRows[0].Index].Value;
-            if (cid != 0)
+            string cdaCode = (String)dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
+            if (cdaCode != null)
             {
-                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDAID == cid);
+                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                 if (selectedCDA != null)
                 {
                     CDADetail cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.DETAIL_CDA);

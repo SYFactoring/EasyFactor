@@ -3597,6 +3597,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _DisputeResolveUserName;
 		
+		private string _Comment;
+		
 		private EntityRef<InvoiceAssignBatch> _InvoiceAssignBatch;
 		
 		private EntityRef<InvoicePaymentBatch> _InvoicePaymentBatch;
@@ -3699,6 +3701,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnDisputeResolveDateChanged();
     partial void OnDisputeResolveUserNameChanging(string value);
     partial void OnDisputeResolveUserNameChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
     #endregion
 		
 		public Invoice()
@@ -4637,6 +4641,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._DisputeResolveUserName = value;
 					this.SendPropertyChanged("DisputeResolveUserName");
 					this.OnDisputeResolveUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
 				}
 			}
 		}
@@ -8081,7 +8105,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _CDAID;
+		private string _CDAID;
 		
 		private string _CaseCode;
 		
@@ -8173,8 +8197,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnCDAIDChanging(int value);
-    partial void OnCDAIDChanged();
+    partial void OnCDACodeChanging(string value);
+    partial void OnCDACodeChanged();
     partial void OnCaseCodeChanging(string value);
     partial void OnCaseCodeChanged();
     partial void OnIsRecoarseChanging(System.Nullable<bool> value);
@@ -8264,8 +8288,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_CDAID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int CDAID
+		[Column(Storage="_CDAID", DbType="Varchar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CDACode
 		{
 			get
 			{
@@ -8275,11 +8299,11 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._CDAID != value))
 				{
-					this.OnCDAIDChanging(value);
+					this.OnCDACodeChanging(value);
 					this.SendPropertyChanging();
 					this._CDAID = value;
-					this.SendPropertyChanged("CDAID");
-					this.OnCDAIDChanged();
+					this.SendPropertyChanged("CDACode");
+					this.OnCDACodeChanged();
 				}
 			}
 		}
@@ -9068,7 +9092,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="CDA_InvoiceAssignBatch", Storage="_InvoiceAssignBatches", OtherKey="CDAID")]
+		[Association(Name="CDA_InvoiceAssignBatch", Storage="_InvoiceAssignBatches", OtherKey="CDACode")]
 		public EntitySet<InvoiceAssignBatch> InvoiceAssignBatches
 		{
 			get
@@ -9081,7 +9105,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="CDA_InvoicePaymentBatch", Storage="_InvoicePaymentBatches", OtherKey="CDAID")]
+		[Association(Name="CDA_InvoicePaymentBatch", Storage="_InvoicePaymentBatches", OtherKey="CDACode")]
 		public EntitySet<InvoicePaymentBatch> InvoicePaymentBatches
 		{
 			get
@@ -9094,7 +9118,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="CDA_InvoiceFinanceBatch", Storage="_InvoiceFinanceBatches", OtherKey="CDAID")]
+		[Association(Name="CDA_InvoiceFinanceBatch", Storage="_InvoiceFinanceBatches", OtherKey="CDACode")]
 		public EntitySet<InvoiceFinanceBatch> InvoiceFinanceBatches
 		{
 			get
@@ -9206,7 +9230,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _AssignBatchNo;
 		
-		private System.Nullable<int> _CDAID;
+		private string _CDAID;
 		
 		private string _BatchCurrency;
 		
@@ -9236,8 +9260,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnAssignBatchNoChanging(string value);
     partial void OnAssignBatchNoChanged();
-    partial void OnCDAIDChanging(System.Nullable<int> value);
-    partial void OnCDAIDChanged();
+    partial void OnCDACodeChanging(string value);
+    partial void OnCDACodeChanged();
     partial void OnBatchCurrencyChanging(string value);
     partial void OnBatchCurrencyChanged();
     partial void OnBatchDateChanging(System.Nullable<System.DateTime> value);
@@ -9285,8 +9309,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDAID", DbType="Int")]
-		public System.Nullable<int> CDAID
+		[Column(Storage="_CDAID", DbType="Varchar(50) NOT NULL")]
+		public string CDACode
 		{
 			get
 			{
@@ -9300,11 +9324,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnCDAIDChanging(value);
+					this.OnCDACodeChanging(value);
 					this.SendPropertyChanging();
 					this._CDAID = value;
-					this.SendPropertyChanged("CDAID");
-					this.OnCDAIDChanged();
+					this.SendPropertyChanged("CDACode");
+					this.OnCDACodeChanged();
 				}
 			}
 		}
@@ -9502,7 +9526,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="CDA_InvoiceAssignBatch", Storage="_CDA", ThisKey="CDAID", IsForeignKey=true)]
+		[Association(Name="CDA_InvoiceAssignBatch", Storage="_CDA", ThisKey="CDACode", IsForeignKey=true)]
 		public CDA CDA
 		{
 			get
@@ -9525,11 +9549,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((value != null))
 					{
 						value.InvoiceAssignBatches.Add(this);
-						this._CDAID = value.CDAID;
+						this._CDAID = value.CDACode;
 					}
 					else
 					{
-						this._CDAID = default(Nullable<int>);
+						this._CDAID = default(string);
 					}
 					this.SendPropertyChanged("CDA");
 				}
@@ -9577,7 +9601,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _PaymentBatchNo;
 		
-		private System.Nullable<int> _CDAID;
+		private string _CDAID;
 		
 		private System.Nullable<System.DateTime> _PaymentDate;
 		
@@ -9597,8 +9621,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnPaymentBatchNoChanging(string value);
     partial void OnPaymentBatchNoChanged();
-    partial void OnCDAIDChanging(System.Nullable<int> value);
-    partial void OnCDAIDChanged();
+    partial void OnCDACodeChanging(string value);
+    partial void OnCDACodeChanged();
     partial void OnPaymentDateChanging(System.Nullable<System.DateTime> value);
     partial void OnPaymentDateChanged();
     partial void OnCreateUserNameChanging(string value);
@@ -9636,8 +9660,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDAID", DbType="Int")]
-		public System.Nullable<int> CDAID
+		[Column(Storage="_CDAID", DbType="Varchar(50) NOT NULL")]
+		public string CDACode
 		{
 			get
 			{
@@ -9651,11 +9675,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnCDAIDChanging(value);
+					this.OnCDACodeChanging(value);
 					this.SendPropertyChanging();
 					this._CDAID = value;
-					this.SendPropertyChanged("CDAID");
-					this.OnCDAIDChanged();
+					this.SendPropertyChanged("CDACode");
+					this.OnCDACodeChanged();
 				}
 			}
 		}
@@ -9753,7 +9777,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="CDA_InvoicePaymentBatch", Storage="_CDA", ThisKey="CDAID", IsForeignKey=true)]
+		[Association(Name="CDA_InvoicePaymentBatch", Storage="_CDA", ThisKey="CDACode", IsForeignKey=true)]
 		public CDA CDA
 		{
 			get
@@ -9776,11 +9800,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((value != null))
 					{
 						value.InvoicePaymentBatches.Add(this);
-						this._CDAID = value.CDAID;
+						this._CDAID = value.CDACode;
 					}
 					else
 					{
-						this._CDAID = default(Nullable<int>);
+						this._CDAID = default(string);
 					}
 					this.SendPropertyChanged("CDA");
 				}
@@ -9828,7 +9852,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _FinanceBatchNo;
 		
-		private System.Nullable<int> _CDAID;
+		private string _CDAID;
 		
 		private string _FinanceType;
 		
@@ -9862,8 +9886,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnFinanceBatchNoChanging(string value);
     partial void OnFinanceBatchNoChanged();
-    partial void OnCDAIDChanging(System.Nullable<int> value);
-    partial void OnCDAIDChanged();
+    partial void OnCDACodeChanging(string value);
+    partial void OnCDACodeChanged();
     partial void OnFinanceTypeChanging(string value);
     partial void OnFinanceTypeChanged();
     partial void OnBatchCurrencyChanging(string value);
@@ -9915,8 +9939,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDAID", DbType="Int")]
-		public System.Nullable<int> CDAID
+		[Column(Storage="_CDAID", DbType="Varchar(50) NOT NULL")]
+		public string CDACode
 		{
 			get
 			{
@@ -9930,11 +9954,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnCDAIDChanging(value);
+					this.OnCDACodeChanging(value);
 					this.SendPropertyChanging();
 					this._CDAID = value;
-					this.SendPropertyChanged("CDAID");
-					this.OnCDAIDChanged();
+					this.SendPropertyChanged("CDACode");
+					this.OnCDACodeChanged();
 				}
 			}
 		}
@@ -10172,7 +10196,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="CDA_InvoiceFinanceBatch", Storage="_CDA", ThisKey="CDAID", IsForeignKey=true)]
+		[Association(Name="CDA_InvoiceFinanceBatch", Storage="_CDA", ThisKey="CDACode", IsForeignKey=true)]
 		public CDA CDA
 		{
 			get
@@ -10195,11 +10219,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((value != null))
 					{
 						value.InvoiceFinanceBatches.Add(this);
-						this._CDAID = value.CDAID;
+						this._CDAID = value.CDACode;
 					}
 					else
 					{
-						this._CDAID = default(Nullable<int>);
+						this._CDAID = default(string);
 					}
 					this.SendPropertyChanged("CDA");
 				}

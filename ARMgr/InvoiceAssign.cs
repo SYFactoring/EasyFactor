@@ -9,6 +9,7 @@ namespace CMBC.EasyFactor.ARMgr
     using Microsoft.Office.Interop.Excel;
     using System.Reflection;
     using System.Data;
+    using System.Runtime.InteropServices;
 
     /// <summary>
     /// 
@@ -46,9 +47,9 @@ namespace CMBC.EasyFactor.ARMgr
         {
             this.InitializeComponent();
 
-            this.colInvoiceCurrency.DataSource = Currency.AllCurrencies().ToList();
-            this.colInvoiceCurrency.DisplayMember = "CurrencyCode";
-            this.colInvoiceCurrency.ValueMember = "CurrencyCode";
+            this.dataGridViewTextBoxColumn3.DataSource = Currency.AllCurrencies().ToList();
+            this.dataGridViewTextBoxColumn3.DisplayMember = "CurrencyCode";
+            this.dataGridViewTextBoxColumn3.ValueMember = "CurrencyCode";
         }
 
         #endregion Constructors
@@ -145,13 +146,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            Client seller = this.CDA.Case.SellerClient;
-            Client buyer = this.CDA.Case.BuyerClient;
-            string date = String.Format("{0:yyyy}{0:MM}{0:dd}", DateTime.Today);
-            int batchCount = this.CDA.InvoiceAssignBatches.Count;
-            string assignNo = seller.ClientEDICode.Substring(0, 5) + buyer.ClientEDICode.Substring(3, 2) + date + "-" + String.Format("{0:D2}", batchCount + 1);
             InvoiceAssignBatch assignBatch = new InvoiceAssignBatch();
-            assignBatch.AssignBatchNo = assignNo;
+            assignBatch.AssignBatchNo = GenerateAssignBatchNo(this.CDA);
             assignBatch.BatchDate = DateTime.Now;
             assignBatch.CreateUserName = App.Current.CurUser.Name;
             assignBatch.IsCreateMsg = false;
@@ -159,6 +155,21 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
             this.invoiceBindingSource.DataSource = assignBatch.Invoices;
             this.opAssignType = OpAssignType.NEW_ASSIGN;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cda"></param>
+        /// <returns></returns>
+        private string GenerateAssignBatchNo(CDA cda)
+        {
+            Client seller = cda.Case.SellerClient;
+            Client buyer = cda.Case.BuyerClient;
+            string date = String.Format("{0:yyyy}{0:MM}{0:dd}", DateTime.Today);
+            int batchCount = cda.InvoiceAssignBatches.Count;
+            string assignNo = seller.ClientEDICode.Substring(0, 5) + buyer.ClientEDICode.Substring(3, 2) + date + "-" + String.Format("{0:D2}", batchCount + 1);
+            return assignNo;
         }
 
         /// <summary>
@@ -217,6 +228,11 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportAssignBatch(object sender, EventArgs e)
         {
             InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
@@ -230,99 +246,183 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
+
                 string fileName = fileDialog.FileName;
-                ApplicationClass app = new ApplicationClass { Visible = false };
-                WorkbookClass w = (WorkbookClass)app.Workbooks.Open(
-                   @fileName,
-                   Missing.Value,
-                   Missing.Value,
-                   Missing.Value,
-                   Missing.Value,
-                   Missing.Value,
-                   Missing.Value,
-                   Missing.Value,
-                   Missing.Value,
-                   Missing.Value,
-                   Missing.Value,
-                   Missing.Value,
-                   Missing.Value,
-                   Missing.Value,
-                   Missing.Value);
-
-                Sheets sheets = w.Worksheets;
-                Worksheet datasheet = null;
-
-                foreach (Worksheet sheet in sheets)
-                {
-                    if (datasheet == null)
-                    {
-                        datasheet = sheet;
-                        break;
-                    }
-                }
-
-                if (datasheet == null)
+                ApplicationClass app = new ApplicationClass() { Visible = false };
+                WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
+                   fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                   Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                   Type.Missing, Type.Missing, Type.Missing);
+                if (workbook.Sheets.Count < 1)
                 {
                     MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    app.Quit();
+                    workbook.Close(false, fileName, null);
+                    Marshal.ReleaseComObject(workbook);
                     return;
                 }
 
-                Range range = datasheet.get_Range("A10", "R1000");
-                Array values = (Array)range.Formula;
-                if (values != null)
+                Worksheet datasheet = (Worksheet)workbook.Sheets[1];
+
+                Range range = datasheet.UsedRange;
+                object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
+                if (valueArray != null)
                 {
-                    int length = values.GetLength(0);
-                    string title = values.GetValue(1, 1).ToString().Trim();
-                    if (title.IndexOf("发票") == -1)
-                    {
-                        MessageBox.Show("文件格式错误，请检查", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        app.Quit();
-                        return;
-                    }
 
-                    for (int row = 2; row <= length; row++)
+                    for (int row = 3; row < range.Rows.Count; row++)
                     {
-                        if (!values.GetValue(row, 1).Equals(string.Empty))
+
+                        Invoice invoice = null;
+                        string invoiceNo = String.Format("{0:G}", valueArray[row, 5]);
+                        invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        if (invoice == null)
                         {
-                            Invoice invoice = new Invoice();
-                            try
-                            {
-                                int column = 1;
-                                invoice.InvoiceNo = values.GetValue(row, column++).ToString().Trim();
-                                invoice.AssignAmount = Double.Parse(values.GetValue(row, column++).ToString().Trim());
-                                object invoiceDate = values.GetValue(row, column++);
-                                if (invoiceDate is double)
-                                {
-                                    invoice.InvoiceDate = DateTime.FromOADate((double)invoiceDate);
-                                }
-                                else
-                                {
-                                    invoice.InvoiceDate = DateTime.Parse((string)invoiceDate);
-                                }
-                                invoice.DueDate = DateTime.Parse(values.GetValue(row, column++).ToString().Trim());
-                                invoice.AssignDate = DateTime.Parse(values.GetValue(row, column++).ToString().Trim());
-                                invoice.IsFlaw = Boolean.Parse(values.GetValue(row, column++).ToString().Trim());
+                            invoice = new Invoice();
+                            invoice.InvoiceNo = invoiceNo;
+                        }
+                        try
+                        {
+                            int column = 6;
+                            invoice.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                            invoice.InvoiceAmount = (double)valueArray[row, column++];
+                            invoice.AssignAmount = (double)valueArray[row, column++];
+                            invoice.InvoiceDate = (DateTime)valueArray[row, column++];
+                            invoice.DueDate = (DateTime)valueArray[row, column++];
+                            invoice.AssignDate = (DateTime)valueArray[row, column++];
+                            invoice.IsFlaw = "Y".Equals(valueArray[row, column++]);
+                            invoice.FlawReason = String.Format("{0:G}", valueArray[row, column++]);
+                            invoice.Comment = String.Format("{0:G}", valueArray[row, 23]);
 
-                                invoice.InvoiceAssignBatch = assignBatch;
-                                App.Current.DbContext.Invoices.InsertOnSubmit(invoice);
+                            invoice.InvoiceAssignBatch = assignBatch;
 
-                                App.Current.DbContext.SubmitChanges();
-                            }
-                            catch (Exception e1)
+                            App.Current.DbContext.SubmitChanges();
+                        }
+                        catch (Exception e1)
+                        {
+                            DialogResult dr = MessageBox.Show("导入失败: " + e1.Message + "\t" + invoice.InvoiceNo + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            if (dr == DialogResult.No)
                             {
-                                DialogResult dr = MessageBox.Show("导入失败: " + e1.Message + "\t" + invoice.InvoiceNo + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                                if (dr == DialogResult.No)
-                                {
-                                    break;
-                                }
+                                break;
                             }
                         }
                     }
                     MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 }
-                app.Quit();
+                workbook.Close(false, fileName, null);
+                Marshal.ReleaseComObject(workbook);
+
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportAssignBatchByCDA(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string fileName = fileDialog.FileName;
+                ApplicationClass app = new ApplicationClass() { Visible = false };
+                WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
+                   fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                   Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                   Type.Missing, Type.Missing, Type.Missing);
+                if (workbook.Sheets.Count < 1)
+                {
+                    MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    workbook.Close(false, fileName, null);
+                    Marshal.ReleaseComObject(workbook);
+                    return;
+                }
+
+                Worksheet datasheet = (Worksheet)workbook.Sheets[1];
+
+                Range range = datasheet.UsedRange;
+                object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
+                if (valueArray != null)
+                {
+                    string lastCDACode = string.Empty;
+                    string lastAssignBatchNo = string.Empty;
+                    CDA cda = null;
+                    InvoiceAssignBatch assignBatch = null;
+
+                    for (int row = 3; row < range.Rows.Count; row++)
+                    {
+                        string cdaCode = String.Format("{0:G}", valueArray[row, 1]);
+                        if (string.Empty.Equals(cdaCode))
+                        {
+                            continue;
+                        }
+                        if (!lastCDACode.Equals(cdaCode))
+                        {
+                            cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
+                            lastCDACode = cdaCode;
+                        }
+                        if (cda == null)
+                        {
+                            continue;
+                        }
+                        string assignBatchNo = String.Format("{0:G}", valueArray[row, 2]);
+                        if (string.Empty.Equals(assignBatchNo))
+                        {
+                            continue;
+                        }
+                        if (!lastAssignBatchNo.Equals(assignBatchNo))
+                        {
+                            assignBatch = App.Current.DbContext.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == assignBatchNo);
+                            if (assignBatch == null)
+                            {
+                                assignBatch = new InvoiceAssignBatch();
+                                assignBatch.AssignBatchNo = GenerateAssignBatchNo(cda);
+                            }
+                            assignBatch.CreateUserName = String.Format("{0:G}", valueArray[row, 3]);
+                            assignBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, 4]);
+                            assignBatch.CDA = cda;
+                            lastAssignBatchNo = assignBatchNo;
+                        }
+
+                        Invoice invoice = null;
+                        string invoiceNo = String.Format("{0:G}", valueArray[row, 5]);
+                        invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        if (invoice == null)
+                        {
+                            invoice = new Invoice();
+                            invoice.InvoiceNo = invoiceNo;
+                        }
+                        try
+                        {
+                            int column = 6;
+                            invoice.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                            invoice.InvoiceAmount = (double)valueArray[row, column++];
+                            invoice.AssignAmount = (double)valueArray[row, column++];
+                            invoice.InvoiceDate = (DateTime)valueArray[row, column++];
+                            invoice.DueDate = (DateTime)valueArray[row, column++];
+                            invoice.AssignDate = (DateTime)valueArray[row, column++];
+                            invoice.IsFlaw = "Y".Equals(valueArray[row, column++]);
+                            invoice.FlawReason = String.Format("{0:G}", valueArray[row, column++]);
+                            invoice.Comment = String.Format("{0:G}", valueArray[row, 23]);
+
+                            invoice.InvoiceAssignBatch = assignBatch;
+
+                            App.Current.DbContext.SubmitChanges();
+                        }
+                        catch (Exception e1)
+                        {
+                            DialogResult dr = MessageBox.Show("导入失败: " + e1.Message + "\t" + invoice.InvoiceNo + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            if (dr == DialogResult.No)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                workbook.Close(false, fileName, null);
+                Marshal.ReleaseComObject(workbook);
             }
         }
     }

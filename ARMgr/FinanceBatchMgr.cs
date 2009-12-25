@@ -9,50 +9,52 @@ namespace CMBC.EasyFactor.ARMgr
     /// <summary>
     /// 
     /// </summary>
-    public partial class AssignBatchMgr : UserControl
+    public partial class FinanceBatchMgr : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs = new BindingSource();
+
         /// <summary>
         /// 
         /// </summary>
         private CDA cda;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (2) 
+        #region Constructors (2)
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="selectedCDA"></param>
-        public AssignBatchMgr(CDA selectedCDA)
+        public FinanceBatchMgr(CDA selectedCDA)
             : this()
         {
             if (selectedCDA != null)
             {
                 this.cda = selectedCDA;
                 this.panelQuery.Visible = false;
-                this.bs.DataSource = cda.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
+                this.bs.DataSource = cda.InvoiceFinanceBatches.Where(i => i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text));
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public AssignBatchMgr()
+        public FinanceBatchMgr()
         {
             InitializeComponent();
-            this.dgvAssignBatch.DataSource = bs;
+
+            this.dgvFinanceBatch.DataSource = bs;
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets owner form
@@ -64,36 +66,35 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         /// <summary>
-        /// Gets or sets selected AssignBatch
+        /// Gets or sets selected FinanceBatch
         /// </summary>
-        public InvoiceAssignBatch Selected
+        public InvoiceFinanceBatch Selected
         {
             get;
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (2) 
+        #region Methods (2)
 
-		// Private Methods (2) 
+        // Private Methods (2) 
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void QueryAssignBatch(object sender, EventArgs e)
+        private void QueryFinanceBatch(object sender, EventArgs e)
         {
             if (cda == null)
             {
-                this.bs.DataSource = App.Current.DbContext.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
+                this.bs.DataSource = App.Current.DbContext.InvoiceFinanceBatches.Where(i => i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text));
             }
             else
             {
-                this.bs.DataSource = cda.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
+                this.bs.DataSource = cda.InvoiceFinanceBatches.Where(i => i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text));
             }
-            this.dgvAssignBatch.DataSource = bs;
         }
 
         /// <summary>
@@ -101,16 +102,16 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SelectAssignBatch(object sender, DataGridViewCellEventArgs e)
+        private void SelectFinanceBatch(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvAssignBatch.SelectedRows.Count == 0)
+            if (this.dgvFinanceBatch.SelectedRows.Count == 0)
             {
                 return;
             }
-            string ino = (string)dgvAssignBatch["AssignBatchNoColumn", dgvAssignBatch.SelectedRows[0].Index].Value;
+            string ino = (string)dgvFinanceBatch["FinanceBatchNoColumn", dgvFinanceBatch.SelectedRows[0].Index].Value;
             if (ino != null)
             {
-                InvoiceAssignBatch selectedBatch = App.Current.DbContext.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == ino);
+                InvoiceFinanceBatch selectedBatch = App.Current.DbContext.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == ino);
                 if (selectedBatch != null)
                 {
                     this.Selected = selectedBatch;
@@ -123,6 +124,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

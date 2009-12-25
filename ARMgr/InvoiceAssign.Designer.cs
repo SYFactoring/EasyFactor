@@ -89,6 +89,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemFlaw = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemAssignBatchImport = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCDAAssignBatchImport = new System.Windows.Forms.ToolStripMenuItem();
             this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.invoiceBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
@@ -103,12 +106,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new CMBC.EasyFactor.Utils.CalendarColumn();
-            this.colInvoiceCurrency = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new CMBC.EasyFactor.Utils.CalendarColumn();
             this.dataGridViewTextBoxColumn7 = new CMBC.EasyFactor.Utils.CalendarColumn();
             this.dataGridViewTextBoxColumn9 = new CMBC.EasyFactor.Utils.CalendarColumn();
             this.dataGridViewTextBoxColumn8 = new CMBC.EasyFactor.Utils.CalendarColumn();
@@ -122,6 +125,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -152,7 +156,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn47 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn48 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.menuItemAssignImport = new System.Windows.Forms.ToolStripMenuItem();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             batchDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
@@ -351,28 +354,49 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemInvoiceDetail,
             this.toolStripSeparator,
             this.menuItemFlaw,
-            this.menuItemAssignImport});
+            this.menuItemAssignBatchImport,
+            this.toolStripSeparator1,
+            this.menuItemCDAAssignBatchImport});
             this.cmuInvoiceAssign.Name = "cmuInvoiceAssign";
-            this.cmuInvoiceAssign.Size = new System.Drawing.Size(159, 98);
+            this.cmuInvoiceAssign.Size = new System.Drawing.Size(153, 126);
             // 
             // menuItemInvoiceDetail
             // 
             this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
-            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(158, 22);
+            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(152, 22);
             this.menuItemInvoiceDetail.Text = "详细信息";
             this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(155, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
             // menuItemFlaw
             // 
             this.menuItemFlaw.Name = "menuItemFlaw";
-            this.menuItemFlaw.Size = new System.Drawing.Size(158, 22);
+            this.menuItemFlaw.Size = new System.Drawing.Size(152, 22);
             this.menuItemFlaw.Text = "瑕疵处理";
             this.menuItemFlaw.Click += new System.EventHandler(this.Flaw);
+            // 
+            // menuItemAssignBatchImport
+            // 
+            this.menuItemAssignBatchImport.Name = "menuItemAssignBatchImport";
+            this.menuItemAssignBatchImport.Size = new System.Drawing.Size(152, 22);
+            this.menuItemAssignBatchImport.Text = "按批次导入";
+            this.menuItemAssignBatchImport.Click += new System.EventHandler(this.ImportAssignBatch);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // menuItemCDAAssignBatchImport
+            // 
+            this.menuItemCDAAssignBatchImport.Name = "menuItemCDAAssignBatchImport";
+            this.menuItemCDAAssignBatchImport.Size = new System.Drawing.Size(152, 22);
+            this.menuItemCDAAssignBatchImport.Text = "按CDA导入";
+            this.menuItemCDAAssignBatchImport.Click += new System.EventHandler(this.ImportAssignBatchByCDA);
             // 
             // invoiceBindingSource
             // 
@@ -497,12 +521,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.AutoGenerateColumns = false;
             this.dgvInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInvoices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colInvoiceNo,
-            this.dataGridViewTextBoxColumn2,
-            this.colInvoiceCurrency,
             this.dataGridViewTextBoxColumn4,
+            this.colInvoiceNo,
+            this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn9,
             this.dataGridViewTextBoxColumn8,
@@ -516,6 +540,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn17,
             this.dataGridViewTextBoxColumn18,
             this.dataGridViewTextBoxColumn19,
+            this.dataGridViewTextBoxColumn50,
             this.dataGridViewTextBoxColumn20,
             this.dataGridViewTextBoxColumn21,
             this.dataGridViewTextBoxColumn22,
@@ -565,34 +590,26 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.Size = new System.Drawing.Size(695, 497);
             this.dgvInvoices.TabIndex = 7;
             // 
-            // colInvoiceNo
-            // 
-            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
-            this.colInvoiceNo.HeaderText = "发票号";
-            this.colInvoiceNo.Name = "colInvoiceNo";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "InvoiceDate";
-            this.dataGridViewTextBoxColumn2.HeaderText = "发票日";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.colInvoiceCurrency.DataPropertyName = "InvoiceCurrency";
-            this.colInvoiceCurrency.HeaderText = "币种";
-            this.colInvoiceCurrency.Name = "dataGridViewTextBoxColumn3";
-            this.colInvoiceCurrency.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colInvoiceCurrency.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.DataPropertyName = "AssignBatchNo";
             this.dataGridViewTextBoxColumn4.HeaderText = "AssignBatchNo";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.Visible = false;
+            // 
+            // colInvoiceNo
+            // 
+            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
+            this.colInvoiceNo.HeaderText = "发票号";
+            this.colInvoiceNo.Name = "colInvoiceNo";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "InvoiceCurrency";
+            this.dataGridViewTextBoxColumn3.HeaderText = "发票币别";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -611,6 +628,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewTextBoxColumn6.HeaderText = "转让金额";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "InvoiceDate";
+            this.dataGridViewTextBoxColumn2.HeaderText = "发票日期";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -695,7 +720,7 @@ namespace CMBC.EasyFactor.ARMgr
             // dataGridViewTextBoxColumn18
             // 
             this.dataGridViewTextBoxColumn18.DataPropertyName = "IsFlaw";
-            this.dataGridViewTextBoxColumn18.HeaderText = "IsFlaw";
+            this.dataGridViewTextBoxColumn18.HeaderText = "是否瑕疵";
             this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
             this.dataGridViewTextBoxColumn18.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewTextBoxColumn18.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -703,9 +728,14 @@ namespace CMBC.EasyFactor.ARMgr
             // dataGridViewTextBoxColumn19
             // 
             this.dataGridViewTextBoxColumn19.DataPropertyName = "FlawReason";
-            this.dataGridViewTextBoxColumn19.HeaderText = "FlawReason";
+            this.dataGridViewTextBoxColumn19.HeaderText = "瑕疵原因";
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            this.dataGridViewTextBoxColumn19.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn50
+            // 
+            this.dataGridViewTextBoxColumn50.DataPropertyName = "Comment";
+            this.dataGridViewTextBoxColumn50.HeaderText = "备注";
+            this.dataGridViewTextBoxColumn50.Name = "dataGridViewTextBoxColumn50";
             // 
             // dataGridViewTextBoxColumn20
             // 
@@ -917,13 +947,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn49.Name = "dataGridViewTextBoxColumn49";
             this.dataGridViewTextBoxColumn49.Visible = false;
             // 
-            // menuItemAssignImport
-            // 
-            this.menuItemAssignImport.Name = "menuItemAssignImport";
-            this.menuItemAssignImport.Size = new System.Drawing.Size(158, 22);
-            this.menuItemAssignImport.Text = "导入该批次转让";
-            this.menuItemAssignImport.Click += new System.EventHandler(this.ImportAssignBatch);
-            // 
             // InvoiceAssign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -950,12 +973,15 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private CalendarColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewComboBoxColumn colInvoiceCurrency;
+        private System.Windows.Forms.ToolStripMenuItem menuItemAssignBatchImport;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDAAssignBatchImport;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private CalendarColumn dataGridViewTextBoxColumn2;
         private CalendarColumn dataGridViewTextBoxColumn7;
         private CalendarColumn dataGridViewTextBoxColumn9;
         private CalendarColumn dataGridViewTextBoxColumn8;
@@ -969,6 +995,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewTextBoxColumn18;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn50;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
@@ -999,6 +1026,5 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn47;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn48;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
-        private System.Windows.Forms.ToolStripMenuItem menuItemAssignImport;
     }
 }

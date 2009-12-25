@@ -80,9 +80,8 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput finnacePeriodEndDateTimePicker;
         private DevComponents.DotNetBar.Controls.ComboBoxEx interestTypeComboBoxEx;
         private System.Windows.Forms.BindingNavigator invoiceBindingNavigator;
-        private System.Windows.Forms.ToolStripButton invoiceBindingNavigatorSaveItem;
         private System.Windows.Forms.BindingSource invoiceBindingSource;
-        private System.Windows.Forms.DataGridView invoiceDataGridView;
+        private System.Windows.Forms.DataGridView dgvInvoices;
         private System.Windows.Forms.BindingSource invoiceFinanceBatchBindingSource;
         private DevComponents.DotNetBar.PanelEx panelFinanceBatch;
 
@@ -139,22 +138,7 @@
             this.financeAmountTextBoxX = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.batchCurrencyComboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.financeBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.invoiceDataGridView = new System.Windows.Forms.DataGridView();
-            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.invoiceBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.invoiceBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvInvoices = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -204,6 +188,29 @@
             this.dataGridViewTextBoxColumn48 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.invoiceBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.cmuInvoiceFinance = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCDAFinanceBatchImport = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnFinanceBatchSelect = new DevComponents.DotNetBar.ButtonX();
+            this.btnFinanceBatchNew = new DevComponents.DotNetBar.ButtonX();
+            this.btnFinanceBatchSave = new DevComponents.DotNetBar.ButtonX();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemFinanceBatchImport = new System.Windows.Forms.ToolStripMenuItem();
             financeBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             financeAmountLabel = new DevComponents.DotNetBar.LabelX();
             financePeriodBeginLabel = new DevComponents.DotNetBar.LabelX();
@@ -216,10 +223,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.invoiceFinanceBatchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.finnacePeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).BeginInit();
             this.invoiceBindingNavigator.SuspendLayout();
+            this.cmuInvoiceFinance.SuspendLayout();
             this.SuspendLayout();
             // 
             // financeBatchNoLabel
@@ -330,6 +338,9 @@
             // 
             this.panelFinanceBatch.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelFinanceBatch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelFinanceBatch.Controls.Add(this.btnFinanceBatchSelect);
+            this.panelFinanceBatch.Controls.Add(this.btnFinanceBatchNew);
+            this.panelFinanceBatch.Controls.Add(this.btnFinanceBatchSave);
             this.panelFinanceBatch.Controls.Add(financeTypeLabel);
             this.panelFinanceBatch.Controls.Add(this.financeTypeComboBoxEx);
             this.panelFinanceBatch.Controls.Add(costRateLabel);
@@ -537,12 +548,12 @@
             this.financeBatchNoTextBox.Size = new System.Drawing.Size(100, 20);
             this.financeBatchNoTextBox.TabIndex = 1;
             // 
-            // invoiceDataGridView
+            // dgvInvoices
             // 
-            this.invoiceDataGridView.AllowUserToOrderColumns = true;
-            this.invoiceDataGridView.AutoGenerateColumns = false;
-            this.invoiceDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.invoiceDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvInvoices.AllowUserToOrderColumns = true;
+            this.dgvInvoices.AutoGenerateColumns = false;
+            this.dgvInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInvoices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
@@ -592,148 +603,13 @@
             this.dataGridViewTextBoxColumn48,
             this.dataGridViewTextBoxColumn49,
             this.colInvoiceNo});
-            this.invoiceDataGridView.DataSource = this.invoiceBindingSource;
-            this.invoiceDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.invoiceDataGridView.Location = new System.Drawing.Point(0, 148);
-            this.invoiceDataGridView.Name = "invoiceDataGridView";
-            this.invoiceDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.invoiceDataGridView.Size = new System.Drawing.Size(781, 318);
-            this.invoiceDataGridView.TabIndex = 2;
-            // 
-            // invoiceBindingSource
-            // 
-            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
-            // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "Position";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
-            // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
-            this.bindingNavigatorCountItem.Text = "of {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // invoiceBindingNavigator
-            // 
-            this.invoiceBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
-            this.invoiceBindingNavigator.BindingSource = this.invoiceBindingSource;
-            this.invoiceBindingNavigator.CountItem = this.bindingNavigatorCountItem;
-            this.invoiceBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
-            this.invoiceBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bindingNavigatorCountItem,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2,
-            this.bindingNavigatorAddNewItem,
-            this.bindingNavigatorDeleteItem,
-            this.invoiceBindingNavigatorSaveItem});
-            this.invoiceBindingNavigator.Location = new System.Drawing.Point(0, 123);
-            this.invoiceBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.invoiceBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.invoiceBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.invoiceBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.invoiceBindingNavigator.Name = "invoiceBindingNavigator";
-            this.invoiceBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.invoiceBindingNavigator.Size = new System.Drawing.Size(781, 25);
-            this.invoiceBindingNavigator.TabIndex = 1;
-            this.invoiceBindingNavigator.Text = "bindingNavigator1";
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
-            // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveNextItem.Text = "Move next";
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveLastItem.Text = "Move last";
-            // 
-            // invoiceBindingNavigatorSaveItem
-            // 
-            this.invoiceBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.invoiceBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("invoiceBindingNavigatorSaveItem.Image")));
-            this.invoiceBindingNavigatorSaveItem.Name = "invoiceBindingNavigatorSaveItem";
-            this.invoiceBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
-            this.invoiceBindingNavigatorSaveItem.Text = "Save Data";
-            this.invoiceBindingNavigatorSaveItem.Click += new System.EventHandler(this.invoiceBindingNavigatorSaveItem_Click);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "InvoiceNo";
-            this.dataGridViewTextBoxColumn1.HeaderText = "发票号";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dgvInvoices.DataSource = this.invoiceBindingSource;
+            this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvInvoices.Location = new System.Drawing.Point(0, 148);
+            this.dgvInvoices.Name = "dgvInvoices";
+            this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvInvoices.Size = new System.Drawing.Size(781, 318);
+            this.dgvInvoices.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -894,6 +770,7 @@
             this.dataGridViewTextBoxColumn24.DataPropertyName = "FinanceRate";
             this.dataGridViewTextBoxColumn24.HeaderText = "融资比例";
             this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+            this.dataGridViewTextBoxColumn24.Visible = false;
             // 
             // dataGridViewTextBoxColumn25
             // 
@@ -1076,11 +953,214 @@
             this.colInvoiceNo.HeaderText = "发票号";
             this.colInvoiceNo.Name = "colInvoiceNo";
             // 
+            // invoiceBindingSource
+            // 
+            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "Position";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // invoiceBindingNavigator
+            // 
+            this.invoiceBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.invoiceBindingNavigator.BindingSource = this.invoiceBindingSource;
+            this.invoiceBindingNavigator.CountItem = this.bindingNavigatorCountItem;
+            this.invoiceBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.invoiceBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bindingNavigatorCountItem,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2,
+            this.bindingNavigatorAddNewItem,
+            this.bindingNavigatorDeleteItem});
+            this.invoiceBindingNavigator.Location = new System.Drawing.Point(0, 123);
+            this.invoiceBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.invoiceBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.invoiceBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.invoiceBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.invoiceBindingNavigator.Name = "invoiceBindingNavigator";
+            this.invoiceBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
+            this.invoiceBindingNavigator.Size = new System.Drawing.Size(781, 25);
+            this.invoiceBindingNavigator.TabIndex = 1;
+            this.invoiceBindingNavigator.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "Delete";
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem.Text = "Move next";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "Move last";
+            // 
+            // cmuInvoiceFinance
+            // 
+            this.cmuInvoiceFinance.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemInvoiceDetail,
+            this.toolStripSeparator1,
+            this.menuItemFinanceBatchImport,
+            this.toolStripSeparator2,
+            this.menuItemCDAFinanceBatchImport});
+            this.cmuInvoiceFinance.Name = "cmuInvoiceFinance";
+            this.cmuInvoiceFinance.Size = new System.Drawing.Size(135, 82);
+            // 
+            // menuItemInvoiceDetail
+            // 
+            this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
+            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(134, 22);
+            this.menuItemInvoiceDetail.Text = "详细信息";
+            this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(131, 6);
+            // 
+            // menuItemCDAFinanceBatchImport
+            // 
+            this.menuItemCDAFinanceBatchImport.Name = "menuItemCDAFinanceBatchImport";
+            this.menuItemCDAFinanceBatchImport.Size = new System.Drawing.Size(134, 22);
+            this.menuItemCDAFinanceBatchImport.Text = "按CDA导入";
+            this.menuItemCDAFinanceBatchImport.Click += new System.EventHandler(this.ImportFinanceBatchByCDA);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "InvoiceNo";
+            this.dataGridViewTextBoxColumn1.HeaderText = "发票号";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // btnFinanceBatchSelect
+            // 
+            this.btnFinanceBatchSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnFinanceBatchSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnFinanceBatchSelect.Location = new System.Drawing.Point(474, 85);
+            this.btnFinanceBatchSelect.Name = "btnFinanceBatchSelect";
+            this.btnFinanceBatchSelect.Size = new System.Drawing.Size(75, 23);
+            this.btnFinanceBatchSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnFinanceBatchSelect.TabIndex = 22;
+            this.btnFinanceBatchSelect.Text = "选择批次";
+            this.btnFinanceBatchSelect.Click += new System.EventHandler(this.SelectFinanceBatch);
+            // 
+            // btnFinanceBatchNew
+            // 
+            this.btnFinanceBatchNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnFinanceBatchNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnFinanceBatchNew.Location = new System.Drawing.Point(393, 86);
+            this.btnFinanceBatchNew.Name = "btnFinanceBatchNew";
+            this.btnFinanceBatchNew.Size = new System.Drawing.Size(75, 23);
+            this.btnFinanceBatchNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnFinanceBatchNew.TabIndex = 21;
+            this.btnFinanceBatchNew.Text = "新建批次";
+            this.btnFinanceBatchNew.Click += new System.EventHandler(this.NewFinanceBatch);
+            // 
+            // btnFinanceBatchSave
+            // 
+            this.btnFinanceBatchSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnFinanceBatchSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnFinanceBatchSave.Location = new System.Drawing.Point(555, 86);
+            this.btnFinanceBatchSave.Name = "btnFinanceBatchSave";
+            this.btnFinanceBatchSave.Size = new System.Drawing.Size(75, 23);
+            this.btnFinanceBatchSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnFinanceBatchSave.TabIndex = 20;
+            this.btnFinanceBatchSave.Text = "保存";
+            this.btnFinanceBatchSave.Click += new System.EventHandler(this.SaveFinanceBatch);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(131, 6);
+            // 
+            // menuItemFinanceBatchImport
+            // 
+            this.menuItemFinanceBatchImport.Name = "menuItemFinanceBatchImport";
+            this.menuItemFinanceBatchImport.Size = new System.Drawing.Size(134, 22);
+            this.menuItemFinanceBatchImport.Text = "按批次导入";
+            this.menuItemFinanceBatchImport.Click += new System.EventHandler(this.ImportFinanceBatch);
+            // 
             // InvoiceFinance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.invoiceDataGridView);
+            this.Controls.Add(this.dgvInvoices);
             this.Controls.Add(this.invoiceBindingNavigator);
             this.Controls.Add(this.panelFinanceBatch);
             this.Name = "InvoiceFinance";
@@ -1090,16 +1170,27 @@
             ((System.ComponentModel.ISupportInitialize)(this.invoiceFinanceBatchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.finnacePeriodEndDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).EndInit();
             this.invoiceBindingNavigator.ResumeLayout(false);
             this.invoiceBindingNavigator.PerformLayout();
+            this.cmuInvoiceFinance.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.ContextMenuStrip cmuInvoiceFinance;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDAFinanceBatchImport;
+        private DevComponents.DotNetBar.ButtonX btnFinanceBatchSelect;
+        private DevComponents.DotNetBar.ButtonX btnFinanceBatchNew;
+        private DevComponents.DotNetBar.ButtonX btnFinanceBatchSave;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFinanceBatchImport;
     }
 }

@@ -203,6 +203,7 @@
       <Column Name="DisputeResolveReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="DisputeResolveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="DisputeResolveUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="InvoiceAssignBatch" ThisKey="AssignBatchNo" Type="InvoiceAssignBatch" IsForeignKey="true" />
       <Association Name="InvoicePaymentBatch_Invoice" Member="InvoicePaymentBatch" ThisKey="PaymentBatchNo" Type="InvoicePaymentBatch" IsForeignKey="true" />
       <Association Name="InvoiceFinanceBatch_Invoice" Member="InvoiceFinanceBatch" ThisKey="FinanceBatchNo" Type="InvoiceFinanceBatch" IsForeignKey="true" />
@@ -352,7 +353,7 @@
   </Table>
   <Table Name="dbo.CDA" Member="CDAs">
     <Type Name="CDA">
-      <Column Name="CDAID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CDACode" Storage="_CDAID" Type="System.String" DbType="Varchar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="CaseCode" Type="System.String" DbType="NChar(13)" CanBeNull="true" />
       <Column Name="IsRecoarse" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="IsNotice" Type="System.Boolean" DbType="bit" CanBeNull="true" />
@@ -392,16 +393,16 @@
       <Column Name="Fax" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="CDA_InvoiceAssignBatch" Member="InvoiceAssignBatches" OtherKey="CDAID" Type="InvoiceAssignBatch" />
-      <Association Name="CDA_InvoicePaymentBatch" Member="InvoicePaymentBatches" OtherKey="CDAID" Type="InvoicePaymentBatch" />
-      <Association Name="CDA_InvoiceFinanceBatch" Member="InvoiceFinanceBatches" OtherKey="CDAID" Type="InvoiceFinanceBatch" />
+      <Association Name="CDA_InvoiceAssignBatch" Member="InvoiceAssignBatches" OtherKey="CDACode" Type="InvoiceAssignBatch" />
+      <Association Name="CDA_InvoicePaymentBatch" Member="InvoicePaymentBatches" OtherKey="CDACode" Type="InvoicePaymentBatch" />
+      <Association Name="CDA_InvoiceFinanceBatch" Member="InvoiceFinanceBatches" OtherKey="CDACode" Type="InvoiceFinanceBatch" />
       <Association Name="Case_CDA" Member="Case" ThisKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.InvoiceAssignBatch" Member="InvoiceAssignBatches">
     <Type Name="InvoiceAssignBatch">
       <Column Name="AssignBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CDAID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CDACode" Storage="_CDAID" Type="System.String" DbType="Varchar(50) NOT NULL" CanBeNull="true" />
       <Column Name="BatchCurrency" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
       <Column Name="BatchDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
@@ -412,25 +413,25 @@
       <Column Name="IsCreateMsg" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="Invoices" OtherKey="AssignBatchNo" Type="Invoice" />
-      <Association Name="CDA_InvoiceAssignBatch" Member="CDA" ThisKey="CDAID" Type="CDA" IsForeignKey="true" />
+      <Association Name="CDA_InvoiceAssignBatch" Member="CDA" ThisKey="CDACode" Type="CDA" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.InvoicePaymentBatch" Member="InvoicePaymentBatches">
     <Type Name="InvoicePaymentBatch">
       <Column Name="PaymentBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CDAID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CDACode" Storage="_CDAID" Type="System.String" DbType="Varchar(50) NOT NULL" CanBeNull="true" />
       <Column Name="PaymentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="IsCreateMsg" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="InvoicePaymentBatch_Invoice" Member="Invoices" OtherKey="PaymentBatchNo" Type="Invoice" />
-      <Association Name="CDA_InvoicePaymentBatch" Member="CDA" ThisKey="CDAID" Type="CDA" IsForeignKey="true" />
+      <Association Name="CDA_InvoicePaymentBatch" Member="CDA" ThisKey="CDACode" Type="CDA" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.InvoiceFinanceBatch" Member="InvoiceFinanceBatches">
     <Type Name="InvoiceFinanceBatch">
       <Column Name="FinanceBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CDAID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CDACode" Storage="_CDAID" Type="System.String" DbType="Varchar(50) NOT NULL" CanBeNull="true" />
       <Column Name="FinanceType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="BatchCurrency" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
       <Column Name="FinanceAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
@@ -443,7 +444,7 @@
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="InvoiceFinanceBatch_Invoice" Member="Invoices" OtherKey="FinanceBatchNo" Type="Invoice" />
-      <Association Name="CDA_InvoiceFinanceBatch" Member="CDA" ThisKey="CDAID" Type="CDA" IsForeignKey="true" />
+      <Association Name="CDA_InvoiceFinanceBatch" Member="CDA" ThisKey="CDACode" Type="CDA" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
