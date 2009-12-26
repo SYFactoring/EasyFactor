@@ -12,15 +12,16 @@ namespace CMBC.EasyFactor.Utils
 
     public partial class ImportForm : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (1)
-
-        private ImportType importType;
+		#region Fields (4) 
 
         private ApplicationClass app;
+        private Worksheet datasheet;
+        private ImportType importType;
+        private Workbook workbook;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         public enum ImportType
         {
@@ -29,19 +30,19 @@ namespace CMBC.EasyFactor.Utils
             IMPORT_FACTORS,
             IMPORT_DEPARTMENTS,
             IMPORT_CASES,
+            IMPORT_CREDITCOVER,
             IMPORT_ASSIGN,
             IMPORT_FINANCE
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (1)
+		#region Constructors (1) 
 
-        public ImportForm(ImportType importType)
+public ImportForm(ImportType importType)
         {
             InitializeComponent();
             this.importType = importType;
-            this.app = new ApplicationClass() { Visible = false };
             this.btnStart.Enabled = true;
             this.btnCancel.Enabled = false;
             switch (importType)
@@ -61,6 +62,9 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_CASES:
                     this.Text = "案件信息导入";
                     break;
+                case ImportType.IMPORT_CREDITCOVER:
+                    this.Text = "额度申请信息导入";
+                    break;
                 case ImportType.IMPORT_ASSIGN:
                     this.Text = "发票转让导入";
                     break;
@@ -72,11 +76,11 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (13)
+		#region Methods (16) 
 
-        // Private Methods (13) 
+		// Private Methods (16) 
 
         /// <summary>
         /// 
@@ -102,6 +106,9 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ImportType.IMPORT_CASES:
                     e.Result = ImportCases(this.tbFilePath.Text, worker);
+                    break;
+                case ImportType.IMPORT_CREDITCOVER:
+                    e.Result = ImportCreditCover(this.tbFilePath.Text, worker);
                     break;
                 case ImportType.IMPORT_ASSIGN:
                     e.Result = ImportAssignBatch(this.tbFilePath.Text, worker);
@@ -160,28 +167,43 @@ namespace CMBC.EasyFactor.Utils
             {
                 this.backgroundWorker.CancelAsync();
             }
+            else
+            {
+                this.Close();
+            }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        private int ImportAssignBatch(string fileName, BackgroundWorker worker)
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        private object[,] GetValueArray(string fileName)
         {
-            WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
-               fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing);
+            this.app = new ApplicationClass() { Visible = false };
+            this.workbook = (WorkbookClass)app.Workbooks.Open(
+                fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing, Type.Missing);
             if (workbook.Sheets.Count < 1)
             {
-                MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                workbook.Close(false, fileName, null);
-                Marshal.ReleaseComObject(workbook);
-                return 0;
+                return null;
             }
 
-            Worksheet datasheet = (Worksheet)workbook.Sheets[1];
+            this.datasheet = (Worksheet)workbook.Sheets[1];
             Range range = datasheet.UsedRange;
-            object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
+            return (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <returns></returns>
+        private int ImportAssignBatch(string fileName, BackgroundWorker worker)
+        {
+            object[,] valueArray = GetValueArray(fileName);
             int result = 0;
 
             if (valueArray != null)
@@ -190,8 +212,8 @@ namespace CMBC.EasyFactor.Utils
                 string lastAssignBatchNo = string.Empty;
                 CDA cda = null;
                 InvoiceAssignBatch assignBatch = null;
-
-                for (int row = 2; row < range.Rows.Count; row++)
+                int size = valueArray.GetUpperBound(0);
+                for (int row = 2; row <= size; row++)
                 {
                     string cdaCode = String.Format("{0:G}", valueArray[row, 1]);
                     if (string.Empty.Equals(cdaCode))
@@ -249,14 +271,12 @@ namespace CMBC.EasyFactor.Utils
 
                     App.Current.DbContext.SubmitChanges();
                     result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)range.Rows.Count));
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
             }
+            worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
-            Marshal.ReleaseComObject(datasheet);
-            datasheet = null;
-            Marshal.ReleaseComObject(workbook);
-            workbook = null;
+            ReleaseResource();
             return result;
         }
 
@@ -268,35 +288,21 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ImportCases(string fileName, BackgroundWorker worker)
         {
-            WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
-               fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing);
-            if (workbook.Sheets.Count < 1)
-            {
-                MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                workbook.Close(false, fileName, null);
-                Marshal.ReleaseComObject(workbook);
-                return 0;
-            }
-
-            Worksheet datasheet = (Worksheet)workbook.Sheets[1];
-            Range range = datasheet.UsedRange;
-            object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
+            object[,] valueArray = this.GetValueArray(fileName);
             int result = 0;
 
             if (valueArray != null)
             {
-                for (int row = 2; row < range.Rows.Count; row++)
+                int size = valueArray.GetUpperBound(0);
+                for (int row = 2; row <= size; row++)
                 {
-                    Case curCase = null;
                     string caseCode = String.Format("{0:G}", valueArray[row, 1]);
                     if (string.Empty.Equals(caseCode))
                     {
                         continue;
                     }
                     bool isNew = false;
-                    curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+                    Case curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
                     if (curCase == null)
                     {
                         isNew = true;
@@ -330,15 +336,14 @@ namespace CMBC.EasyFactor.Utils
                         App.Current.DbContext.Cases.InsertOnSubmit(curCase);
                     }
                     App.Current.DbContext.SubmitChanges();
+
                     result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)range.Rows.Count));
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
             }
+            worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
-            Marshal.ReleaseComObject(datasheet);
-            datasheet = null;
-            Marshal.ReleaseComObject(workbook);
-            workbook = null;
+            this.ReleaseResource();
             return result;
         }
 
@@ -348,44 +353,31 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="obj"></param>
         private int ImportClients(string fileName, BackgroundWorker worker)
         {
-            WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
-               fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing);
+            object[,] valueArray = this.GetValueArray(fileName);
 
-            if (workbook.Sheets.Count < 1)
-            {
-                MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                workbook.Close(false, fileName, null);
-                Marshal.ReleaseComObject(workbook);
-                return 0;
-            }
-
-            Worksheet datasheet = (Worksheet)workbook.Sheets[1];
-            Range range = datasheet.UsedRange;
-            object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
             int result = 0;
 
             if (valueArray != null)
             {
-                for (int row = 2; row < range.Rows.Count; row++)
+                int size = valueArray.GetUpperBound(0);
+                for (int row = 2; row <= size; row++)
                 {
-                    Client client = null;
-                    int column = 1;
                     string clientEDICode = String.Format("{0:G}", valueArray[row, 2]);
                     if (string.Empty.Equals(clientEDICode))
                     {
                         continue;
                     }
                     bool isNew = false;
-                    client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                    Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                     if (client == null)
                     {
                         isNew = true;
                         client = new Client();
+                        client.ClientEDICode = clientEDICode;
                     }
+                    int column = 1;
                     client.ClientCoreNo = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ClientEDICode = String.Format("{0:G}", valueArray[row, column++]);
+                    column++;
                     client.ClientNameCN = String.Format("{0:G}", valueArray[row, column++]);
                     client.ClientNameEN_1 = String.Format("{0:G}", valueArray[row, column++]);
                     client.ClientNameEN_2 = String.Format("{0:G}", valueArray[row, column++]);
@@ -429,14 +421,73 @@ namespace CMBC.EasyFactor.Utils
 
                     App.Current.DbContext.SubmitChanges();
                     result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)range.Rows.Count));
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
             }
+            worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
-            Marshal.ReleaseComObject(datasheet);
-            datasheet = null;
-            Marshal.ReleaseComObject(workbook);
-            workbook = null;
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="worker"></param>
+        /// <returns></returns>
+        private int ImportCreditCover(string fileName, BackgroundWorker worker)
+        {
+            object[,] valueArray = this.GetValueArray(fileName);
+            int result = 0;
+
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+                for (int row = 2; row <= size; row++)
+                {
+                    string caseCode = String.Format("{0:G}", valueArray[row, 1]);
+                    if (string.Empty.Equals(caseCode))
+                    {
+                        continue;
+                    }
+                    Case curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+                    if (curCase == null)
+                    {
+                        continue;
+                    }
+                    int column = 2;
+                    CreditCoverNegotiation creditCover = new CreditCoverNegotiation();
+                    creditCover.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
+                    creditCover.RequestAmount = (double)valueArray[row, column++];
+                    creditCover.RequestDate = (DateTime)valueArray[row, column++];
+                    double approveAmount;
+                    if (Double.TryParse(String.Format("{0:G}", valueArray[row, column++]), out approveAmount))
+                    {
+                        creditCover.ApproveAmount = approveAmount;
+                    }
+                    DateTime approveDate;
+                    if (DateTime.TryParse(String.Format("{0:G}", valueArray[row, column++]), out approveDate))
+                    {
+                        creditCover.ApproveDate = approveDate;
+                    }
+                    double IFPrice;
+                    if (Double.TryParse(String.Format("{0:G}", valueArray[row, column++]), out IFPrice))
+                    {
+                        creditCover.IFPrice = IFPrice;
+                    }
+                    creditCover.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                    creditCover.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                    creditCover.Case = curCase;
+                    App.Current.DbContext.CreditCoverNegotiations.InsertOnSubmit(creditCover);
+                    App.Current.DbContext.SubmitChanges();
+                    result++;
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+            }
+            worker.ReportProgress(100);
+            workbook.Close(false, fileName, null);
+            this.ReleaseResource();
             return result;
         }
 
@@ -448,42 +499,30 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ImportDepartments(string fileName, BackgroundWorker worker)
         {
-            WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
-               fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing);
-
-            if (workbook.Sheets.Count < 1)
-            {
-                MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                workbook.Close(false, fileName, null);
-                Marshal.ReleaseComObject(workbook);
-                return 0;
-            }
-
-            Worksheet datasheet = (Worksheet)workbook.Sheets[1];
-            Range range = datasheet.UsedRange;
-            object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
+            object[,] valueArray = this.GetValueArray(fileName);
             int result = 0;
+
             if (valueArray != null)
             {
-                for (int row = 2; row < range.Rows.Count; row++)
+                int size = valueArray.GetUpperBound(0);
+                for (int row = 2; row <= size; row++)
                 {
-                    Department dept = null;
-                    int column = 1;
+
                     string departmentCode = String.Format("{0:G}", valueArray[row, 1]);
                     if (string.Empty.Equals(departmentCode))
                     {
                         continue;
                     }
                     bool isNew = false;
-                    dept = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentCode == departmentCode);
+                    Department dept = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentCode == departmentCode);
                     if (dept == null)
                     {
                         isNew = true;
                         dept = new Department();
+                        dept.DepartmentCode = departmentCode;
                     }
-                    dept.DepartmentCode = string.Format("{0:G}", valueArray[row, column++]);
+
+                    int column = 2;
                     dept.DepartmentName = string.Format("{0:G}", valueArray[row, column++]);
                     dept.Location = string.Format("{0:G}", valueArray[row, column++]);
                     dept.Domain = string.Format("{0:G}", valueArray[row, column++]);
@@ -506,14 +545,12 @@ namespace CMBC.EasyFactor.Utils
 
                     App.Current.DbContext.SubmitChanges();
                     result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)range.Rows.Count));
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
             }
+            worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
-            Marshal.ReleaseComObject(datasheet);
-            datasheet = null;
-            Marshal.ReleaseComObject(workbook);
-            workbook = null;
+            this.ReleaseResource();
             return result;
         }
 
@@ -525,44 +562,31 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ImportFactors(string fileName, BackgroundWorker worker)
         {
-            WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
-               fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing);
-
-            if (workbook.Sheets.Count < 1)
-            {
-                MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                workbook.Close(false, fileName, null);
-                Marshal.ReleaseComObject(workbook);
-                return 0;
-            }
-
-            Worksheet datasheet = (Worksheet)workbook.Sheets[1];
-            Range range = datasheet.UsedRange;
-            object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
+            object[,] valueArray = this.GetValueArray(fileName);
             int result = 0;
+
             if (valueArray != null)
             {
-                for (int row = 2; row < range.Rows.Count; row++)
+                int size = valueArray.GetUpperBound(0);
+                for (int row = 2; row <= size; row++)
                 {
-                    Factor factor = null;
-                    int column = 1;
                     string factorCode = String.Format("{0:G}", valueArray[row, 2]);
                     if (string.Empty.Equals(factorCode))
                     {
                         continue;
                     }
                     bool isNew = false;
-                    factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                    Factor factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                     if (factor == null)
                     {
                         isNew = true;
                         factor = new Factor();
+                        factor.FactorCode = factorCode;
                         factor.FactorType = "保理商";
                     }
+                    int column = 1;
                     factor.CountryName = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.FactorCode = String.Format("{0:G}", valueArray[row, column++]);
+                    column++;
                     factor.CompanyNameEN = String.Format("{0:G}", valueArray[row, column++]);
                     factor.ShortName = String.Format("{0:G}", valueArray[row, column++]);
                     factor.Department = String.Format("{0:G}", valueArray[row, column++]);
@@ -602,14 +626,12 @@ namespace CMBC.EasyFactor.Utils
 
                     App.Current.DbContext.SubmitChanges();
                     result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)range.Rows.Count));
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
             }
+            worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
-            Marshal.ReleaseComObject(datasheet);
-            datasheet = null;
-            Marshal.ReleaseComObject(workbook);
-            workbook = null;
+            this.ReleaseResource();
             return result;
         }
 
@@ -621,22 +643,9 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ImportFinanceBatch(string fileName, BackgroundWorker worker)
         {
-            WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
-               fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing);
-            if (workbook.Sheets.Count < 1)
-            {
-                MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                workbook.Close(false, fileName, null);
-                Marshal.ReleaseComObject(workbook);
-                return 0;
-            }
-
-            Worksheet datasheet = (Worksheet)workbook.Sheets[1];
-            Range range = datasheet.UsedRange;
-            object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
+            object[,] valueArray = this.GetValueArray(fileName);
             int result = 0;
+
             if (valueArray != null)
             {
                 string lastCDACode = string.Empty;
@@ -644,7 +653,8 @@ namespace CMBC.EasyFactor.Utils
                 CDA cda = null;
                 InvoiceFinanceBatch financeBatch = null;
 
-                for (int row = 2; row < range.Rows.Count; row++)
+                int size = valueArray.GetUpperBound(0);
+                for (int row = 2; row <= size; row++)
                 {
                     string cdaCode = String.Format("{0:G}", valueArray[row, 1]);
                     if (string.Empty.Equals(cdaCode))
@@ -704,14 +714,12 @@ namespace CMBC.EasyFactor.Utils
 
                     App.Current.DbContext.SubmitChanges();
                     result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)range.Rows.Count));
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
             }
+            worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
-            Marshal.ReleaseComObject(datasheet);
-            datasheet = null;
-            Marshal.ReleaseComObject(workbook);
-            workbook = null;
+            this.ReleaseResource();
             return result;
         }
 
@@ -723,42 +731,27 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ImportUsers(string fileName, BackgroundWorker worker)
         {
-            WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
-               fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing);
-
-            if (workbook.Sheets.Count < 1)
-            {
-                MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                workbook.Close(false, fileName, null);
-                Marshal.ReleaseComObject(workbook);
-                return 0;
-            }
-
-            Worksheet datasheet = (Worksheet)workbook.Sheets[1];
-            Range range = datasheet.UsedRange;
-            object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
+            object[,] valueArray = this.GetValueArray(fileName);
             int result = 0;
             if (valueArray != null)
             {
-                for (int row = 2; row < range.Rows.Count; row++)
+                int size = valueArray.GetUpperBound(0);
+                for (int row = 2; row <= size; row++)
                 {
-                    User user = null;
-                    int column = 1;
                     string userId = String.Format("{0:G}", valueArray[row, 1]);
                     if (string.Empty.Equals(userId))
                     {
                         continue;
                     }
                     bool isNew = false;
-                    user = App.Current.DbContext.Users.SingleOrDefault(c => c.UserID == userId);
+                    User user = App.Current.DbContext.Users.SingleOrDefault(c => c.UserID == userId);
                     if (user == null)
                     {
                         isNew = true;
                         user = new User();
+                        user.UserID = userId;
                     }
-                    user.UserID = String.Format("{0:G}", valueArray[row, column++]);
+                    int column = 2;
                     user.EDIAccount = String.Format("{0:G}", valueArray[row, column++]);
                     user.Password = String.Format("{0:G}", valueArray[row, column++]);
                     user.Role = String.Format("{0:G}", valueArray[row, column++]);
@@ -776,21 +769,47 @@ namespace CMBC.EasyFactor.Utils
                     App.Current.DbContext.SubmitChanges();
 
                     result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)range.Rows.Count));
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
             }
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
-            Marshal.ReleaseComObject(datasheet);
-            datasheet = null;
-            Marshal.ReleaseComObject(workbook);
-            workbook = null;
+            this.ReleaseResource();
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ReleaseResource()
+        {
+            if (this.datasheet != null)
+            {
+                Marshal.ReleaseComObject(datasheet);
+                datasheet = null;
+            }
+            if (this.workbook != null)
+            {
+                Marshal.ReleaseComObject(workbook);
+                workbook = null;
+            }
+            if (this.app != null)
+            {
+                app.Quit();
+                Marshal.ReleaseComObject(app);
+                app = null;
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectFile(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "Excel files (*.xls;*.xlsx)|*.xls;*.xlsx";
 
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -798,6 +817,11 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartImport(object sender, EventArgs e)
         {
             string filePath = this.tbFilePath.Text;
@@ -810,19 +834,6 @@ namespace CMBC.EasyFactor.Utils
             this.btnCancel.Enabled = true;
         }
 
-        #endregion Methods
-
-
-        private void ImportForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (app != null)
-            {
-                app.Quit();
-            }
-            Marshal.ReleaseComObject(app);
-            app = null;
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-        }
+		#endregion Methods 
     }
 }
