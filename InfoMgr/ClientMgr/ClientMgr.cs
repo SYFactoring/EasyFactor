@@ -34,6 +34,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #region Constructors (1)
 
+        private OpClientMgrType opClientMgrType;
+
+        public enum OpClientMgrType
+        {
+            NEED_CONTRACT
+        }
+
+        public ClientMgr(OpClientMgrType clientMgrType)
+            : this(false)
+        {
+            this.cbIsSigned.Checked = true;
+            this.cbIsSigned.Enabled = false;
+        }
+
         /// <summary>
         /// Initializes a new instance of the ClientMgr class
         /// </summary>

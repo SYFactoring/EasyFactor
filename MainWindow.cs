@@ -348,7 +348,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void NewCDA(object sender, EventArgs e)
         {
-            CDADetail cdaDetail = new CDADetail(null, CDADetail.OpCDAType.NEW_CDA);
+            CDADetail cdaDetail = new CDADetail(CDADetail.OpCDAType.NEW_CDA);
             cdaDetail.ShowDialog(this);
         }
 

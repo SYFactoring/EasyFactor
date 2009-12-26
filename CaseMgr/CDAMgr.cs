@@ -151,7 +151,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void NewCDA(object sender, System.EventArgs e)
         {
-            CDADetail cdaDetail = new CDADetail(null, CDADetail.OpCDAType.NEW_CDA);
+            CDADetail cdaDetail = new CDADetail(CDADetail.OpCDAType.NEW_CDA);
             cdaDetail.ShowDialog(this);
         }
 

@@ -556,7 +556,7 @@
             // 
             // 
             lblCaseBuyerNo.BackgroundStyle.Class = "";
-            lblCaseBuyerNo.Location = new System.Drawing.Point(49, 68);
+            lblCaseBuyerNo.Location = new System.Drawing.Point(53, 68);
             lblCaseBuyerNo.Name = "lblCaseBuyerNo";
             lblCaseBuyerNo.Size = new System.Drawing.Size(34, 16);
             lblCaseBuyerNo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;

@@ -53,6 +53,18 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #region Constructors (1)
 
+        public CDADetail(OpCDAType opCDAType):this((CDA)null,opCDAType)
+        {
+
+        }
+
+        public CDADetail(Case selectedCase, OpCDAType opCDAType)
+            : this((CDA)null,opCDAType)
+        {
+            CDA cda = (CDA)this.CDABindingSource.DataSource;
+            cda.Case = selectedCase;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -82,6 +94,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cDAStatusComboBox.DataSource = new string[] { "未审核", "已审核未下发", "已下发未签回", "已签回", "已生效", "已过期" };
 
             this.opCDAType = opCDAType;
+
             if (opCDAType == OpCDAType.NEW_CDA)
             {
                 cda = new CDA();

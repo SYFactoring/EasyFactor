@@ -268,6 +268,14 @@ namespace CMBC.EasyFactor.CaseMgr
                     break;
                 default: break;
             }
+
+            if (!"进口保理".Equals(transationType) && curCase.SellerClient != null)
+            {
+                if (!curCase.SellerClient.Contracts.Any(con => con.ContractStatus == "已生效"))
+                {
+                    curCase.SellerClient = null;
+                }
+            }
         }
 
         /// <summary>
@@ -410,7 +418,8 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void NewCDA(object sender, EventArgs e)
         {
-            CDADetail cdaDetail = new CDADetail(null, CDADetail.OpCDAType.NEW_CDA);
+            Case curCase = (Case)this.caseBindingSource.DataSource;
+            CDADetail cdaDetail = new CDADetail(curCase, CDADetail.OpCDAType.NEW_CDA);
             cdaDetail.Show(this);
         }
 
@@ -635,7 +644,15 @@ namespace CMBC.EasyFactor.CaseMgr
         private void SelectCaseSeller(object sender, EventArgs e)
         {
             Case curCase = (Case)this.caseBindingSource.DataSource;
-            ClientMgr clientMgr = new ClientMgr(false);
+            ClientMgr clientMgr;
+            if (!"进口保理".Equals(this.cbCaseTransactionType.Text))
+            {
+                clientMgr = new ClientMgr(ClientMgr.OpClientMgrType.NEED_CONTRACT);
+            }
+            else
+            {
+                clientMgr = new ClientMgr(false);
+            }
             QueryForm queryUI = new QueryForm(clientMgr, "选择卖方");
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
