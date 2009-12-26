@@ -6,17 +6,13 @@
 
 namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
-    using Microsoft.Office.Interop.Excel;
     using System;
+    using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Linq;
-    using System.Reflection;
-    using System.Threading;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Collections.Generic;
-    using System.Runtime.InteropServices;
 
     /// <summary>
     /// Client Management User Interface
@@ -171,125 +167,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void ImportClients(object sender, EventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string fileName = fileDialog.FileName;
-                Thread t = new Thread(this.ImportClientsImpl);
-                t.Start(fileName);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        private void ImportClientsImpl(object obj)
-        {
-            string fileName = obj as string;
-            ApplicationClass app = new ApplicationClass() { Visible = false };
-            WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
-               fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing);
-
-            if (workbook.Sheets.Count < 1)
-            {
-                MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                workbook.Close(false, fileName, null);
-                Marshal.ReleaseComObject(workbook);
-                return;
-            }
-
-            Worksheet datasheet = (Worksheet)workbook.Sheets[1];
-            Range range = datasheet.UsedRange;
-            object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
-
-            if (valueArray != null)
-            {
-                for (int row = 2; row < range.Rows.Count; row++)
-                {
-                    Client client = null;
-                    try
-                    {
-                        int column = 1;
-                        string clientEDICode = String.Format("{0:G}", valueArray[row, 2]);
-                        if (string.Empty.Equals(clientEDICode))
-                        {
-                            continue;
-                        }
-                        bool isNew = false;
-                        client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
-                        if (client == null)
-                        {
-                            isNew = true;
-                            client = new Client();
-                        }
-                        client.ClientCoreNo = String.Format("{0:G}", valueArray[row, column++]);
-                        client.ClientEDICode = String.Format("{0:G}", valueArray[row, column++]);
-                        client.ClientNameCN = String.Format("{0:G}", valueArray[row, column++]);
-                        client.ClientNameEN_1 = String.Format("{0:G}", valueArray[row, column++]);
-                        client.ClientNameEN_2 = String.Format("{0:G}", valueArray[row, column++]);
-                        client.AddressCN = String.Format("{0:G}", valueArray[row, column++]);
-                        client.AddressEN = String.Format("{0:G}", valueArray[row, column++]);
-                        client.CityCN = String.Format("{0:G}", valueArray[row, column++]);
-                        client.CityEN = String.Format("{0:G}", valueArray[row, column++]);
-                        client.ProductCN = String.Format("{0:G}", valueArray[row, column++]);
-                        client.ProductEN = String.Format("{0:G}", valueArray[row, column++]);
-                        client.PostCode = String.Format("{0:G}", valueArray[row, column++]);
-                        client.CountryCode = String.Format("{0:G}", valueArray[row, column++]);
-                        client.Representative = String.Format("{0:G}", valueArray[row, column++]);
-                        client.Website = String.Format("{0:G}", valueArray[row, column++]);
-                        client.Contact = String.Format("{0:G}", valueArray[row, column++]);
-                        client.Telephone = String.Format("{0:G}", valueArray[row, column++]);
-                        client.Email = String.Format("{0:G}", valueArray[row, column++]);
-                        client.FaxNumber = String.Format("{0:G}", valueArray[row, column++]);
-                        client.CellPhone = String.Format("{0:G}", valueArray[row, column++]);
-                        client.ClientType = String.Format("{0:G}", valueArray[row, column++]);
-                        client.Industry = String.Format("{0:G}", valueArray[row, column++]);
-                        client.ProductCN = String.Format("{0:G}", valueArray[row, column++]);
-                        client.ProductEN = String.Format("{0:G}", valueArray[row, column++]);
-                        client.ClientLevel = String.Format("{0:G}", valueArray[row, column++]);
-                        client.IsGroup = "是".Equals(valueArray[row, column++]);
-                        string groupNo = String.Format("{0:G}", valueArray[row, column++]);
-                        string groupNameCN = String.Format("{0:G}", valueArray[row, column++]);
-                        string groupNameEN = String.Format("{0:G}", valueArray[row, column++]);
-                        client.RegistrationNumber = String.Format("{0:G}", valueArray[row, column++]);
-                        client.CompanyCode = String.Format("{0:G}", valueArray[row, column++]);
-                        string departmentName = String.Format("{0:G}", valueArray[row, column++]);
-                        Department dep = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName.Equals(departmentName));
-                        if (dep != null)
-                        {
-                            client.Department = dep;
-                        }
-
-                        client.PMName = String.Format("{0:G}", valueArray[row, column++]);
-                        client.RMName = String.Format("{0:G}", valueArray[row, column++]);
-                        client.Comment = String.Format("{0:G}", valueArray[row, column++]);
-
-                        if (isNew)
-                        {
-                            App.Current.DbContext.Clients.InsertOnSubmit(client);
-                        }
-
-                        App.Current.DbContext.SubmitChanges();
-                    }
-                    catch (Exception e)
-                    {
-                        DialogResult dr = MessageBox.Show("导入失败: " + e.Message + "\t" + client.ClientEDICode + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                        if (dr == DialogResult.No)
-                        {
-                            break;
-                        }
-                    }
-                }
-
-                MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-            workbook.Close(false, fileName, null);
-            Marshal.ReleaseComObject(workbook);
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS);
+            importForm.Show();
         }
 
         /// <summary>

@@ -10,11 +10,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
-    using System.Threading;
-    using Microsoft.Office.Interop.Excel;
-    using System.Reflection;
     using CMBC.EasyFactor.Utils;
-    using System.Runtime.InteropServices;
 
     /// <summary>
     /// User Management User Interface
@@ -66,9 +62,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
         #endregion Properties
 
-        #region Methods (10)
+        #region Methods (9)
 
-        // Private Methods (10) 
+        // Private Methods (9) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -92,7 +88,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void DeleteUser(object sender, System.EventArgs e)
+        private void DeleteUser(object sender, EventArgs e)
         {
             if (dgvUsers.SelectedRows.Count == 0)
             {
@@ -120,7 +116,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void DetailUser(object sender, System.EventArgs e)
+        private void DetailUser(object sender, EventArgs e)
         {
             if (dgvUsers.SelectedRows.Count == 0)
             {
@@ -138,90 +134,15 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportUsers(object sender, EventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string fileName = fileDialog.FileName;
-                Thread t = new Thread(ImportUsersImpl);
-                t.Start(fileName);
-            }
-        }
-
-        private static void ImportUsersImpl(object obj)
-        {
-            string fileName = obj as string;
-            ApplicationClass app = new ApplicationClass() { Visible = false };
-            WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
-               fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing);
-
-            if (workbook.Sheets.Count < 1)
-            {
-                MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                workbook.Close(false, fileName, null);
-                Marshal.ReleaseComObject(workbook);
-                return;
-            }
-
-            Worksheet datasheet = (Worksheet)workbook.Sheets[1];
-            Range range = datasheet.UsedRange;
-            object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
-
-            if (valueArray != null)
-            {
-                for (int row = 2; row < range.Rows.Count; row++)
-                {
-                    User user = null;
-                    try
-                    {
-                        int column = 1;
-                        string userId = String.Format("{0:G}",valueArray[row, 1]);
-                        if (string.Empty.Equals(userId))
-                        {
-                            continue;
-                        }
-                        bool isNew = false;
-                        user = App.Current.DbContext.Users.SingleOrDefault(c => c.UserID == userId);
-                        if (user == null)
-                        {
-                            isNew = true;
-                            user = new User();
-                        }
-                        user.UserID = String.Format("{0:G}",valueArray[row, column++]);
-                        user.EDIAccount = String.Format("{0:G}",valueArray[row, column++]);
-                        user.Password = String.Format("{0:G}",valueArray[row, column++]);
-                        user.Role = String.Format("{0:G}",valueArray[row, column++]);
-                        user.Name = String.Format("{0:G}",valueArray[row, column++]);
-                        user.Phone = String.Format("{0:G}",valueArray[row, column++]);
-                        user.Telphone = String.Format("{0:G}",valueArray[row, column++]);
-                        user.Email = String.Format("{0:G}",valueArray[row, column++]);
-                        user.MSN = String.Format("{0:G}",valueArray[row, column++]);
-
-                        if (isNew)
-                        {
-                            App.Current.DbContext.Users.InsertOnSubmit(user);
-                        }
-
-                        App.Current.DbContext.SubmitChanges();
-                    }
-                    catch (Exception e)
-                    {
-                        DialogResult dr = MessageBox.Show("导入失败: " + e.Message + "\t" + user.Name + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                        if (dr == DialogResult.No)
-                        {
-                            break;
-                        }
-                    }
-                }
-                MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            }
-            workbook.Close(false, fileName, null);
-            Marshal.ReleaseComObject(workbook);
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_USERS);
+            importForm.Show();
         }
 
         /// <summary>
@@ -229,7 +150,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void NewUser(object sender, System.EventArgs e)
+        private void NewUser(object sender, EventArgs e)
         {
             new UserDetail(null, UserDetail.OpUserType.NEW_USER).ShowDialog(this);
         }
@@ -301,7 +222,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void UpdateUser(object sender, System.EventArgs e)
+        private void UpdateUser(object sender, EventArgs e)
         {
             if (dgvUsers.SelectedRows.Count == 0)
             {

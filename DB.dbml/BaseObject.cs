@@ -50,11 +50,6 @@ namespace CMBC.EasyFactor.DB.dbml
         #endregion Methods
     }
 
-    public partial class Client : BaseObject
-    {
-
-    }
-
     public partial class ClientCreditLine : BaseObject
     {
 
@@ -65,22 +60,12 @@ namespace CMBC.EasyFactor.DB.dbml
 
     }
 
-    public partial class Factor : BaseObject
-    {
-
-    }
-
     public partial class FactorCreditLine : BaseObject
     {
 
     }
 
     public partial class User : BaseObject
-    {
-
-    }
-
-    public partial class Case : BaseObject
     {
 
     }

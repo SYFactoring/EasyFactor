@@ -38,6 +38,8 @@ namespace CMBC.EasyFactor.CaseMgr
         public CaseMgr(bool isEditable)
         {
             InitializeComponent();
+            this.dgvCases.AutoGenerateColumns = false;
+
             ControlUtil.SetDoubleBuffered(this.dgvCases);
             this.dgvCases.DataSource = this.bs;
 

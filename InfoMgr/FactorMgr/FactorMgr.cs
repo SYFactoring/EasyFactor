@@ -7,16 +7,12 @@
 namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
     using System;
+    using System.Collections.Generic;
+    using System.Data.SqlClient;
     using System.Linq;
-    using System.Reflection;
-    using System.Threading;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
-    using Microsoft.Office.Interop.Excel;
-    using System.Data.SqlClient;
     using CMBC.EasyFactor.Utils;
-    using System.Collections.Generic;
-    using System.Runtime.InteropServices;
 
     /// <summary>
     /// Factor Management User Interface 
@@ -165,104 +161,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// Import factor list from selected file
         /// </summary>
         /// <param name="obj">selected file</param>
-        private static void ImportFactorsImpl(object obj)
-        {
-            string fileName = obj as string;
 
-            ApplicationClass app = new ApplicationClass() { Visible = false };
-            WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
-               fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-               Type.Missing, Type.Missing, Type.Missing);
-
-            if (workbook.Sheets.Count < 1)
-            {
-                MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                workbook.Close(false, fileName, null);
-                Marshal.ReleaseComObject(workbook);
-                return;
-            }
-
-            Worksheet datasheet = (Worksheet)workbook.Sheets[1];
-            Range range = datasheet.UsedRange;
-            object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
-
-            if (valueArray != null)
-            {
-                for (int row = 2; row < range.Rows.Count; row++)
-                {
-                    Factor factor = null;
-                    try
-                    {
-                        int column = 1;
-                        string factorCode = String.Format("{0:G}", valueArray[row, 2]);
-                        if (string.Empty.Equals(factorCode))
-                        {
-                            continue;
-                        }
-                        bool isNew = false;
-                        factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                        if (factor == null)
-                        {
-                            isNew = true;
-                            factor = new Factor();
-                            factor.FactorType = "保理商";
-                        }
-                        factor.CountryName = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.FactorCode = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.CompanyNameEN = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.ShortName = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Department = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.PostalAddress_1 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.PostalAddress_2 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.PostalCodePost = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.CityPost = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.VisitingAddress_1 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.VisitingAddress_2 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.PostalCodeVisiting = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.CityVisiting = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Email = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.WebSite = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Telephone_1 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Telephone_2 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Telefax_1 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Telefax_2 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.WorkingHours = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.GeneralCorrespondence_1 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.GeneralCorrespondence_2 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Contacts_1 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Contacts_2 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Contacts_3 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Contacts_4 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Management_1 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Management_2 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Shareholders = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.IFISAvailableOnPrivateForum = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.MembershipStatus = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.MembershipDate = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.DateOfLatestRevision = String.Format("{0:G}", valueArray[row, column++]);
-
-                        if (isNew)
-                        {
-                            App.Current.DbContext.Factors.InsertOnSubmit(factor);
-                        }
-
-                        App.Current.DbContext.SubmitChanges();
-                    }
-                    catch (Exception e)
-                    {
-                        DialogResult dr = MessageBox.Show("导入失败: " + e.Message + "\t" + factor.FactorCode + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                        if (dr == DialogResult.No)
-                        {
-                            break;
-                        }
-                    }
-                }
-                MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            workbook.Close(false, fileName, null);
-            Marshal.ReleaseComObject(workbook);
-        }
 
         /// <summary>
         /// Popup a openfile dialog and select the import factor file.
@@ -271,15 +170,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e">Event Args</param>
         private void ImportFactos(object sender, EventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string fileName = fileDialog.FileName;
-                Thread t = new Thread(ImportFactorsImpl);
-
-                t.Start(fileName);
-            }
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS);
+            importForm.Show();
         }
 
         /// <summary>

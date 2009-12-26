@@ -165,7 +165,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="cda"></param>
         /// <returns></returns>
-        private string GenerateAssignBatchNo(CDA cda)
+        public static string GenerateAssignBatchNo(CDA cda)
         {
             Client seller = cda.Case.SellerClient;
             Client buyer = cda.Case.BuyerClient;
@@ -316,117 +316,10 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ImportAssignBatchByCDA(object sender, EventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-
-                string fileName = fileDialog.FileName;
-                ApplicationClass app = new ApplicationClass() { Visible = false };
-                WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
-                   fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                   Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                   Type.Missing, Type.Missing, Type.Missing);
-                if (workbook.Sheets.Count < 1)
-                {
-                    MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    workbook.Close(false, fileName, null);
-                    Marshal.ReleaseComObject(workbook);
-                    return;
-                }
-
-                Worksheet datasheet = (Worksheet)workbook.Sheets[1];
-
-                Range range = datasheet.UsedRange;
-                object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
-                if (valueArray != null)
-                {
-                    string lastCDACode = string.Empty;
-                    string lastAssignBatchNo = string.Empty;
-                    CDA cda = null;
-                    InvoiceAssignBatch assignBatch = null;
-
-                    for (int row = 3; row < range.Rows.Count; row++)
-                    {
-                        string cdaCode = String.Format("{0:G}", valueArray[row, 1]);
-                        if (string.Empty.Equals(cdaCode))
-                        {
-                            continue;
-                        }
-                        if (!lastCDACode.Equals(cdaCode))
-                        {
-                            cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
-                            lastCDACode = cdaCode;
-                        }
-                        if (cda == null)
-                        {
-                            continue;
-                        }
-                        string assignBatchNo = String.Format("{0:G}", valueArray[row, 2]);
-                        if (string.Empty.Equals(assignBatchNo))
-                        {
-                            continue;
-                        }
-                        if (!lastAssignBatchNo.Equals(assignBatchNo))
-                        {
-                            assignBatch = App.Current.DbContext.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == assignBatchNo);
-                            if (assignBatch == null)
-                            {
-                                assignBatch = new InvoiceAssignBatch();
-                                assignBatch.AssignBatchNo = GenerateAssignBatchNo(cda);
-                            }
-                            assignBatch.CreateUserName = String.Format("{0:G}", valueArray[row, 3]);
-                            assignBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, 4]);
-                            assignBatch.CDA = cda;
-                            lastAssignBatchNo = assignBatchNo;
-                        }
-
-                        Invoice invoice = null;
-                        string invoiceNo = String.Format("{0:G}", valueArray[row, 5]);
-                        invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                        if (invoice == null)
-                        {
-                            invoice = new Invoice();
-                            invoice.InvoiceNo = invoiceNo;
-                        }
-                        try
-                        {
-                            int column = 6;
-                            invoice.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                            invoice.InvoiceAmount = (double)valueArray[row, column++];
-                            invoice.AssignAmount = (double)valueArray[row, column++];
-                            invoice.InvoiceDate = (DateTime)valueArray[row, column++];
-                            invoice.DueDate = (DateTime)valueArray[row, column++];
-                            invoice.AssignDate = (DateTime)valueArray[row, column++];
-                            invoice.IsFlaw = "Y".Equals(valueArray[row, column++]);
-                            invoice.FlawReason = String.Format("{0:G}", valueArray[row, column++]);
-                            invoice.Comment = String.Format("{0:G}", valueArray[row, 23]);
-
-                            invoice.InvoiceAssignBatch = assignBatch;
-
-                            App.Current.DbContext.SubmitChanges();
-                        }
-                        catch (Exception e1)
-                        {
-                            DialogResult dr = MessageBox.Show("导入失败: " + e1.Message + "\t" + invoice.InvoiceNo + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                            if (dr == DialogResult.No)
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                workbook.Close(false, fileName, null);
-                Marshal.ReleaseComObject(workbook);
-            }
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
+            importForm.Show();
         }
     }
 }

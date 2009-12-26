@@ -169,7 +169,17 @@
     <Compile Include="CaseMgr\CreditCoverNegMgr.Designer.cs">
       <DependentUpon>CreditCoverNegMgr.cs</DependentUpon>
     </Compile>
+    <Compile Include="CaseMgr\InvoiceMgr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CaseMgr\InvoiceMgr.Designer.cs">
+      <DependentUpon>InvoiceMgr.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB.dbml\BaseObject.cs" />
+    <Compile Include="DB.dbml\Case.cs" />
+    <Compile Include="DB.dbml\Client.cs" />
+    <Compile Include="DB.dbml\Country.cs" />
+    <Compile Include="DB.dbml\Currency.cs" />
     <Compile Include="DB.dbml\DB.cs">
       <DependentUpon>DB.dbml</DependentUpon>
     </Compile>
@@ -178,7 +188,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB.dbml</DependentUpon>
     </Compile>
-    <Compile Include="DB.dbml\ObjectExtend.cs" />
+    <Compile Include="DB.dbml\Department.cs" />
+    <Compile Include="DB.dbml\Factor.cs" />
+    <Compile Include="DB.dbml\Invoice.cs" />
     <Compile Include="Help\About\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,6 +226,12 @@
     </Compile>
     <Compile Include="InfoMgr\FactorMgr\FactorMgr.Designer.cs">
       <DependentUpon>FactorMgr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\ImportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utils\ImportForm.Designer.cs">
+      <DependentUpon>ImportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\QueryForm.cs">
       <SubType>Form</SubType>
@@ -260,6 +278,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\FinanceBatchMgr.resx">
       <DependentUpon>FinanceBatchMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\InvoiceAssign.resx">
       <DependentUpon>InvoiceAssign.cs</DependentUpon>
@@ -301,6 +320,10 @@
       <DependentUpon>CreditCoverNegMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="CaseMgr\InvoiceMgr.resx">
+      <DependentUpon>InvoiceMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Help\About\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -323,6 +346,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\FactorMgr\FactorMgr.resx">
       <DependentUpon>FactorMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utils\ImportForm.resx">
+      <DependentUpon>ImportForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Utils\QueryForm.resx">

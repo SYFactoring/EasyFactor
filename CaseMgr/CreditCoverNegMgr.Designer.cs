@@ -6,17 +6,6 @@
 
         private DevComponents.DotNetBar.ButtonX btnCreditCoverQuery;
         private System.Windows.Forms.ContextMenuStrip cmuCreditCoverMgr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCase;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNegoID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestDate;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -73,11 +62,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCreditCoverQuery = new DevComponents.DotNetBar.PanelEx();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnCreditCoverQuery = new DevComponents.DotNetBar.ButtonX();
@@ -86,9 +70,15 @@
             this.tbSellerFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblSellerFactorCode = new DevComponents.DotNetBar.LabelX();
             this.dgvCreditCoverNegs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuCreditCoverMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCreditCoverSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCreditCoverNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.colNegoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCase = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colApproveType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRequestAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRequestDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,13 +87,7 @@
             this.colIFPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuCreditCoverMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCreditCoverSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCreditCoverNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverUpdate = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.colCase = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelCreditCoverQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCreditCoverNegs)).BeginInit();
             this.cmuCreditCoverMgr.SuspendLayout();
@@ -220,7 +204,6 @@
             this.dgvCreditCoverNegs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNegoID,
             this.colCaseCode,
-            this.colCase,
             this.colApproveType,
             this.colRequestAmount,
             this.colRequestDate,
@@ -228,7 +211,8 @@
             this.colApproveDate,
             this.colIFPrice,
             this.colCreateUserName,
-            this.colComment});
+            this.colComment,
+            this.colCase});
             this.dgvCreditCoverNegs.ContextMenuStrip = this.cmuCreditCoverMgr;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
@@ -248,6 +232,53 @@
             this.dgvCreditCoverNegs.TabIndex = 1;
             this.dgvCreditCoverNegs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
+            // cmuCreditCoverMgr
+            // 
+            this.cmuCreditCoverMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCreditCoverSelect,
+            this.menuItemCreditCoverDetail,
+            this.toolStripSeparator,
+            this.menuItemCreditCoverNew,
+            this.menuItemCreditCoverUpdate,
+            this.menuItemCreditCoverDelete});
+            this.cmuCreditCoverMgr.Name = "cmuContractMgr";
+            this.cmuCreditCoverMgr.Size = new System.Drawing.Size(147, 120);
+            // 
+            // menuItemCreditCoverSelect
+            // 
+            this.menuItemCreditCoverSelect.Name = "menuItemCreditCoverSelect";
+            this.menuItemCreditCoverSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverSelect.Text = "选定额度申请";
+            // 
+            // menuItemCreditCoverDetail
+            // 
+            this.menuItemCreditCoverDetail.Name = "menuItemCreditCoverDetail";
+            this.menuItemCreditCoverDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverDetail.Text = "详细信息";
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            // 
+            // menuItemCreditCoverNew
+            // 
+            this.menuItemCreditCoverNew.Name = "menuItemCreditCoverNew";
+            this.menuItemCreditCoverNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverNew.Text = "新建额度申请";
+            // 
+            // menuItemCreditCoverUpdate
+            // 
+            this.menuItemCreditCoverUpdate.Name = "menuItemCreditCoverUpdate";
+            this.menuItemCreditCoverUpdate.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverUpdate.Text = "更新额度申请";
+            // 
+            // menuItemCreditCoverDelete
+            // 
+            this.menuItemCreditCoverDelete.Name = "menuItemCreditCoverDelete";
+            this.menuItemCreditCoverDelete.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverDelete.Text = "删除额度申请";
+            // 
             // colNegoID
             // 
             this.colNegoID.DataPropertyName = "NegoID";
@@ -262,14 +293,6 @@
             this.colCaseCode.HeaderText = "案件编号";
             this.colCaseCode.Name = "colCaseCode";
             this.colCaseCode.ReadOnly = true;
-            // 
-            // colCase
-            // 
-            this.colCase.DataPropertyName = "Case";
-            this.colCase.HeaderText = "Case";
-            this.colCase.Name = "colCase";
-            this.colCase.ReadOnly = true;
-            this.colCase.Visible = false;
             // 
             // colApproveType
             // 
@@ -335,52 +358,13 @@
             this.colComment.Name = "colComment";
             this.colComment.ReadOnly = true;
             // 
-            // cmuCreditCoverMgr
+            // colCase
             // 
-            this.cmuCreditCoverMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemCreditCoverSelect,
-            this.menuItemCreditCoverDetail,
-            this.toolStripSeparator,
-            this.menuItemCreditCoverNew,
-            this.menuItemCreditCoverUpdate,
-            this.menuItemCreditCoverDelete});
-            this.cmuCreditCoverMgr.Name = "cmuContractMgr";
-            this.cmuCreditCoverMgr.Size = new System.Drawing.Size(147, 120);
-            // 
-            // menuItemCreditCoverSelect
-            // 
-            this.menuItemCreditCoverSelect.Name = "menuItemCreditCoverSelect";
-            this.menuItemCreditCoverSelect.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverSelect.Text = "选定额度申请";
-            // 
-            // menuItemCreditCoverDetail
-            // 
-            this.menuItemCreditCoverDetail.Name = "menuItemCreditCoverDetail";
-            this.menuItemCreditCoverDetail.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverDetail.Text = "详细信息";
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
-            // 
-            // menuItemCreditCoverNew
-            // 
-            this.menuItemCreditCoverNew.Name = "menuItemCreditCoverNew";
-            this.menuItemCreditCoverNew.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverNew.Text = "新建额度申请";
-            // 
-            // menuItemCreditCoverUpdate
-            // 
-            this.menuItemCreditCoverUpdate.Name = "menuItemCreditCoverUpdate";
-            this.menuItemCreditCoverUpdate.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverUpdate.Text = "更新额度申请";
-            // 
-            // menuItemCreditCoverDelete
-            // 
-            this.menuItemCreditCoverDelete.Name = "menuItemCreditCoverDelete";
-            this.menuItemCreditCoverDelete.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverDelete.Text = "删除额度申请";
+            this.colCase.DataPropertyName = "Case";
+            this.colCase.HeaderText = "Case";
+            this.colCase.Name = "colCase";
+            this.colCase.ReadOnly = true;
+            this.colCase.Visible = false;
             // 
             // CreditCoverNegMgr
             // 
@@ -399,5 +383,17 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNegoID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCase;
     }
 }

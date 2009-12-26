@@ -8,14 +8,14 @@ namespace CMBC.EasyFactor
 {
     using System;
     using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.ARMgr;
+    using CMBC.EasyFactor.CaseMgr;
+    using CMBC.EasyFactor.Help.About;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.DepartmentMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.InfoMgr.UserMgr;
-    using CMBC.EasyFactor.CaseMgr;
-    using CMBC.EasyFactor.Help.About;
-    using CMBC.EasyFactor.ARMgr;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// Main Window Form
@@ -62,9 +62,9 @@ namespace CMBC.EasyFactor
 
         #endregion Properties
 
-        #region Methods (20)
+        #region Methods (28)
 
-        // Private Methods (20) 
+        // Private Methods (28) 
 
         private void About(object sender, EventArgs e)
         {
@@ -112,6 +112,83 @@ namespace CMBC.EasyFactor
         private void ClearDetailPanel()
         {
             this.ribbonDetailPanel.Controls.Clear();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportAssign(object sender, EventArgs e)
+        {
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
+            importForm.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportCases(object sender, EventArgs e)
+        {
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CASES);
+            importForm.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportClients(object sender, EventArgs e)
+        {
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS);
+            importForm.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportDepartments(object sender, EventArgs e)
+        {
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_DEPARTMENTS);
+            importForm.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void importFactors(object sender, EventArgs e)
+        {
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS);
+            importForm.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportFinance(object sender, EventArgs e)
+        {
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE);
+            importForm.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportUsers(object sender, EventArgs e)
+        {
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_USERS);
+            importForm.Show();
         }
 
         /// <summary>
@@ -289,6 +366,17 @@ namespace CMBC.EasyFactor
         {
             FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
             factorDetail.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryOverDueDays(object sender, EventArgs e)
+        {
+            InvoiceMgr invoiceMgr = new InvoiceMgr();
+            this.SetDetailPanel(invoiceMgr);
         }
 
         /// <summary>
