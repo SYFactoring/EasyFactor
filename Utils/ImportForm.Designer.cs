@@ -76,7 +76,7 @@
             this.progressBar.BackgroundStyle.Class = "";
             this.progressBar.Location = new System.Drawing.Point(93, 56);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(296, 23);
+            this.progressBar.Size = new System.Drawing.Size(266, 23);
             this.progressBar.TabIndex = 2;
             // 
             // lblProgress
@@ -121,7 +121,7 @@
             // 
             this.btnStart.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnStart.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnStart.Location = new System.Drawing.Point(229, 86);
+            this.btnStart.Location = new System.Drawing.Point(194, 85);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -133,7 +133,7 @@
             // 
             this.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCancel.Location = new System.Drawing.Point(310, 86);
+            this.btnCancel.Location = new System.Drawing.Point(284, 85);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;

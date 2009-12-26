@@ -169,7 +169,7 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void importFactors(object sender, EventArgs e)
+        private void ImportFactors(object sender, EventArgs e)
         {
             ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS);
             importForm.Show();

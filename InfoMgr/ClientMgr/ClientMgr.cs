@@ -44,8 +44,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientMgr(OpClientMgrType clientMgrType)
             : this(false)
         {
-            this.cbIsSigned.Checked = true;
-            this.cbIsSigned.Enabled = false;
+            this.opClientMgrType = clientMgrType;
+            if (clientMgrType == OpClientMgrType.NEED_CONTRACT)
+            {
+                this.cbIsSigned.Checked = true;
+                this.cbIsSigned.Enabled = false;
+            }
         }
 
         /// <summary>

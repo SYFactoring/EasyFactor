@@ -21,6 +21,7 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoicePayment()
         {
             InitializeComponent();
+            this.dgvInvoices.AutoGenerateColumns = false;
         }
 
 		#endregion Constructors 

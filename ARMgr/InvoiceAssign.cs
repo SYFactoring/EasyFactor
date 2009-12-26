@@ -49,10 +49,11 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoiceAssign()
         {
             this.InitializeComponent();
+            this.dgvInvoices.AutoGenerateColumns = false;
 
-            this.dataGridViewTextBoxColumn3.DataSource = Currency.AllCurrencies().ToList();
-            this.dataGridViewTextBoxColumn3.DisplayMember = "CurrencyCode";
-            this.dataGridViewTextBoxColumn3.ValueMember = "CurrencyCode";
+            this.colInvoiceCurrency.DataSource = Currency.AllCurrencies().ToList();
+            this.colInvoiceCurrency.DisplayMember = "CurrencyCode";
+            this.colInvoiceCurrency.ValueMember = "CurrencyCode";
         }
 
         #endregion Constructors
@@ -216,6 +217,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectAssignBatch(object sender, EventArgs e)
         {
+            if (this.CDA == null)
+            {
+                return;
+            }
+
             AssignBatchMgr assignBatchMgr = new AssignBatchMgr(this.CDA);
             QueryForm queryUI = new QueryForm(assignBatchMgr, "选择转让批次");
             assignBatchMgr.OwnerForm = queryUI;

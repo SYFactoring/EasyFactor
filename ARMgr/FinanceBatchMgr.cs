@@ -53,7 +53,7 @@ namespace CMBC.EasyFactor.ARMgr
         public FinanceBatchMgr()
         {
             InitializeComponent();
-
+            this.dgvFinanceBatch.AutoGenerateColumns = false;
             this.dgvFinanceBatch.DataSource = bs;
         }
 
@@ -113,7 +113,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            string ino = (string)dgvFinanceBatch["FinanceBatchNoColumn", dgvFinanceBatch.SelectedRows[0].Index].Value;
+            string ino = (string)dgvFinanceBatch["colFinanceBatchNo", dgvFinanceBatch.SelectedRows[0].Index].Value;
             if (ino != null)
             {
                 InvoiceFinanceBatch selectedBatch = App.Current.DbContext.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == ino);

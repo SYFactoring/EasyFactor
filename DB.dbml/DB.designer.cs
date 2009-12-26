@@ -7042,6 +7042,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<Case> _SellerCases;
 		
+		private EntitySet<InvoiceFinanceBatch> _InvoiceFinanceBatches;
+		
 		private EntityRef<FactorGroup> _FactorGroup;
 		
     #region Extensibility Method Definitions
@@ -7136,6 +7138,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			this._FactorCreditLines = new EntitySet<FactorCreditLine>(new Action<FactorCreditLine>(this.attach_FactorCreditLines), new Action<FactorCreditLine>(this.detach_FactorCreditLines));
 			this._BuyerCases = new EntitySet<Case>(new Action<Case>(this.attach_BuyerCases), new Action<Case>(this.detach_BuyerCases));
 			this._SellerCases = new EntitySet<Case>(new Action<Case>(this.attach_SellerCases), new Action<Case>(this.detach_SellerCases));
+			this._InvoiceFinanceBatches = new EntitySet<InvoiceFinanceBatch>(new Action<InvoiceFinanceBatch>(this.attach_InvoiceFinanceBatches), new Action<InvoiceFinanceBatch>(this.detach_InvoiceFinanceBatches));
 			this._FactorGroup = default(EntityRef<FactorGroup>);
 			OnCreated();
 		}
@@ -7996,6 +7999,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Association(Name="Factor_InvoiceFinanceBatch", Storage="_InvoiceFinanceBatches", OtherKey="FactorCode")]
+		public EntitySet<InvoiceFinanceBatch> InvoiceFinanceBatches
+		{
+			get
+			{
+				return this._InvoiceFinanceBatches;
+			}
+			set
+			{
+				this._InvoiceFinanceBatches.Assign(value);
+			}
+		}
+		
 		[Association(Name="FactorGroup_Factor", Storage="_FactorGroup", ThisKey="GroupNo", IsForeignKey=true)]
 		public FactorGroup FactorGroup
 		{
@@ -8096,6 +8112,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		{
 			this.SendPropertyChanging();
 			entity.SellerFactor = null;
+		}
+		
+		private void attach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Factor = this;
+		}
+		
+		private void detach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Factor = null;
 		}
 	}
 	
@@ -9880,6 +9908,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntityRef<CDA> _CDA;
 		
+		private EntityRef<Factor> _Factor;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -9916,6 +9946,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		{
 			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
 			this._CDA = default(EntityRef<CDA>);
+			this._Factor = default(EntityRef<Factor>);
 			OnCreated();
 		}
 		
@@ -10103,7 +10134,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FactorCode", DbType="NChar(7)")]
+		[Column(Storage="_FactorCode", DbType="Char(7)")]
 		public string FactorCode
 		{
 			get
@@ -10114,6 +10145,10 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._FactorCode != value))
 				{
+					if (this._Factor.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnFactorCodeChanging(value);
 					this.SendPropertyChanging();
 					this._FactorCode = value;
@@ -10226,6 +10261,40 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._CDAID = default(string);
 					}
 					this.SendPropertyChanged("CDA");
+				}
+			}
+		}
+		
+		[Association(Name="Factor_InvoiceFinanceBatch", Storage="_Factor", ThisKey="FactorCode", IsForeignKey=true)]
+		public Factor Factor
+		{
+			get
+			{
+				return this._Factor.Entity;
+			}
+			set
+			{
+				Factor previousValue = this._Factor.Entity;
+				if (((previousValue != value) 
+							|| (this._Factor.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Factor.Entity = null;
+						previousValue.InvoiceFinanceBatches.Remove(this);
+					}
+					this._Factor.Entity = value;
+					if ((value != null))
+					{
+						value.InvoiceFinanceBatches.Add(this);
+						this._FactorCode = value.FactorCode;
+					}
+					else
+					{
+						this._FactorCode = default(string);
+					}
+					this.SendPropertyChanged("Factor");
 				}
 			}
 		}

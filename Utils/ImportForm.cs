@@ -10,36 +10,73 @@ namespace CMBC.EasyFactor.Utils
     using CMBC.EasyFactor.DB.dbml;
     using Microsoft.Office.Interop.Excel;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class ImportForm : DevComponents.DotNetBar.Office2007Form
     {
-		#region Fields (4) 
+        #region Fields (4)
 
         private ApplicationClass app;
         private Worksheet datasheet;
         private ImportType importType;
         private Workbook workbook;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
+        /// <summary>
+        /// 
+        /// </summary>
         public enum ImportType
         {
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_USERS,
+
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_CLIENTS,
+            
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_FACTORS,
+            
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_DEPARTMENTS,
+            
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_CASES,
+            
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_CREDITCOVER,
+            
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_ASSIGN,
+            
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_FINANCE
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
-public ImportForm(ImportType importType)
+        public ImportForm(ImportType importType)
         {
             InitializeComponent();
             this.importType = importType;
@@ -76,11 +113,11 @@ public ImportForm(ImportType importType)
             }
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (16) 
+        #region Methods (16)
 
-		// Private Methods (16) 
+        // Private Methods (16) 
 
         /// <summary>
         /// 
@@ -141,8 +178,7 @@ public ImportForm(ImportType importType)
         {
             if (e.Error != null)
             {
-                this.tbStatus.Text = e.Error.Message;
-                MessageBox.Show(e.Error.Message + Environment.NewLine + e.Error.StackTrace, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.tbStatus.Text = "发生异常: "+e.Error.Message;
             }
             else if (e.Cancelled)
             {
@@ -150,7 +186,7 @@ public ImportForm(ImportType importType)
             }
             else
             {
-                this.tbStatus.Text = String.Format("共导入{0}条记录", e.Result);
+                this.tbStatus.Text = String.Format("导入结束,共导入{0}条记录", e.Result);
             }
             this.btnStart.Enabled = true;
             this.btnCancel.Enabled = false;
@@ -265,7 +301,7 @@ public ImportForm(ImportType importType)
                     invoice.AssignDate = (DateTime)valueArray[row, column++];
                     invoice.IsFlaw = "Y".Equals(valueArray[row, column++]);
                     invoice.FlawReason = String.Format("{0:G}", valueArray[row, column++]);
-                    invoice.Comment = String.Format("{0:G}", valueArray[row, 23]);
+                    invoice.Comment = invoice.Comment == string.Empty ? String.Format("{0:G}", valueArray[row, column++]) : invoice.Comment + "\t" + String.Format("{0:G}", valueArray[row, column++]);
 
                     invoice.InvoiceAssignBatch = assignBatch;
 
@@ -675,40 +711,40 @@ public ImportForm(ImportType importType)
                     {
                         continue;
                     }
+                    int column = 3;
                     if (!lastFinanceBatchNo.Equals(financeBatchNo))
                     {
                         financeBatch = App.Current.DbContext.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == financeBatchNo);
                         if (financeBatch == null)
                         {
                             financeBatch = new InvoiceFinanceBatch();
-                            financeBatch.FinanceBatchNo = String.Format("{0:G}", valueArray[row, 2]);
+                            financeBatch.FinanceBatchNo = financeBatchNo;
                         }
-                        financeBatch.CreateUserName = String.Format("{0:G}", valueArray[row, 3]);
-                        financeBatch.FinanceType = String.Format("{0:G}", valueArray[row, 4]);
-                        financeBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, 5]);
-                        financeBatch.FinanceAmount = (double)valueArray[row, 6];
-                        financeBatch.FinanceRate = (double)valueArray[row, 7];
-                        financeBatch.CostRate = (double)valueArray[row, 8];
-                        financeBatch.FinancePeriodBegin = (DateTime)valueArray[row, 9];
-                        financeBatch.FinnacePeriodEnd = (DateTime)valueArray[row, 10];
-                        financeBatch.InterestType = String.Format("{0:G}", valueArray[row, 11]);
+                        financeBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                        financeBatch.FinanceType = String.Format("{0:G}", valueArray[row, column++]);
+                        financeBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                        financeBatch.FinanceAmount = (double)valueArray[row, column++];
+                        financeBatch.FinanceRate = (double)valueArray[row, column++];
+                        financeBatch.CostRate = (double)valueArray[row, column++];
+                        financeBatch.FinancePeriodBegin = (DateTime)valueArray[row, column++];
+                        financeBatch.FinnacePeriodEnd = (DateTime)valueArray[row, column++];
+                        financeBatch.InterestType = String.Format("{0:G}", valueArray[row, column++]);
                         financeBatch.CDA = cda;
                         lastFinanceBatchNo = financeBatchNo;
                     }
-
+                    column = 12;
                     Invoice invoice = null;
-                    string invoiceNo = String.Format("{0:G}", valueArray[row, 12]);
+                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
                     invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                     if (invoice == null)
                     {
                         invoice = new Invoice();
                         invoice.InvoiceNo = invoiceNo;
                     }
-                    int column = 13;
                     invoice.FinanceAmount = (double)valueArray[row, column++];
                     invoice.FinanceDate = (DateTime)valueArray[row, column++];
                     invoice.FinanceDueDate = (DateTime)valueArray[row, column++];
-                    invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                    invoice.Comment = invoice.Comment == string.Empty ? String.Format("{0:G}", valueArray[row, column++]) : invoice.Comment + "\t" + String.Format("{0:G}", valueArray[row, column++]);
 
                     invoice.InvoiceFinanceBatch = financeBatch;
 
@@ -800,7 +836,7 @@ public ImportForm(ImportType importType)
                 app = null;
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -834,6 +870,6 @@ public ImportForm(ImportType importType)
             this.btnCancel.Enabled = true;
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

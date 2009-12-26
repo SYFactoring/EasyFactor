@@ -52,6 +52,7 @@ namespace CMBC.EasyFactor.ARMgr
         public AssignBatchMgr()
         {
             InitializeComponent();
+            this.dgvAssignBatch.AutoGenerateColumns = false;
             this.dgvAssignBatch.DataSource = bs;
         }
 
@@ -112,7 +113,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            string ino = (string)dgvAssignBatch["AssignBatchNoColumn", dgvAssignBatch.SelectedRows[0].Index].Value;
+            string ino = (string)dgvAssignBatch["colAssignBatchNo", dgvAssignBatch.SelectedRows[0].Index].Value;
             if (ino != null)
             {
                 InvoiceAssignBatch selectedBatch = App.Current.DbContext.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == ino);

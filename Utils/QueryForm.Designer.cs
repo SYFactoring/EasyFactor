@@ -43,7 +43,7 @@ namespace CMBC.EasyFactor.Utils
             this.panelRoot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelRoot.Location = new System.Drawing.Point(0, 0);
             this.panelRoot.Name = "panelRoot";
-            this.panelRoot.Size = new System.Drawing.Size(784, 562);
+            this.panelRoot.Size = new System.Drawing.Size(624, 442);
             this.panelRoot.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelRoot.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelRoot.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -53,14 +53,14 @@ namespace CMBC.EasyFactor.Utils
             this.panelRoot.Style.GradientAngle = 90;
             this.panelRoot.TabIndex = 0;
             // 
-            // QueryUI
+            // QueryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 562);
+            this.ClientSize = new System.Drawing.Size(624, 442);
             this.Controls.Add(this.panelRoot);
             this.DoubleBuffered = true;
-            this.Name = "QueryUI";
+            this.Name = "QueryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FactorQueryUI";
             this.ResumeLayout(false);

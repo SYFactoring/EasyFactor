@@ -63,6 +63,7 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             CDA cda = (CDA)this.CDABindingSource.DataSource;
             cda.Case = selectedCase;
+            this.contractCodeTextBox.Text = selectedCase.SellerClient.Contracts.SingleOrDefault(c => c.ContractStatus == "已生效").ContractCode;
         }
 
         /// <summary>
@@ -176,7 +177,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Contract contract = cda.Case.SellerClient.Contracts.SingleOrDefault(c => c.ContractStatus == "已生效");
             if (contract != null)
             {
-                return String.Format("{0}-{1:00N}", contract.ContractCode, cda.Case.CDAs.Count + 1);
+                return String.Format("{0}-{1:000}", contract.ContractCode, cda.Case.CDAs.Count + 1);
             }
             else
             {
