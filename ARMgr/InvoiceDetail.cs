@@ -36,6 +36,7 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoiceDetail(Invoice invoice, OpInvoiceType opInvoiceType)
         {
             InitializeComponent();
+            this.invoiceBindingSource.DataSource = invoice;
         }
 
         #endregion Constructors

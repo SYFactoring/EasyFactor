@@ -62,7 +62,7 @@
         private DevComponents.DotNetBar.Controls.TextBoxX paymentTermsTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX priceTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX pUGPeriodTextBox;
-        private DevComponents.DotNetBar.Controls.MaskedTextBoxAdv pUGProportionTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX pUGProportionTextBox;
         private DevComponents.DotNetBar.Validator.RangeValidator rangeValidator1;
         private DevComponents.DotNetBar.Controls.TextBoxX reassignGracePeriodTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerClientEDICodeTextBox;
@@ -140,6 +140,7 @@
             DevComponents.DotNetBar.LabelX cDAStatusLabel;
             DevComponents.DotNetBar.LabelX noticeMethodLabel;
             DevComponents.DotNetBar.LabelX contractCodeLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -182,7 +183,7 @@
             this.pUGPeriodTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditCoverPeriodEndDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.creditCoverPeriodBeginDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.pUGProportionTextBox = new DevComponents.DotNetBar.Controls.MaskedTextBoxAdv();
+            this.pUGProportionTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.approveNumberTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditCoverTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditCoverCurrComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -201,6 +202,15 @@
             this.btnCDASave = new DevComponents.DotNetBar.ButtonX();
             this.btnCDAClose = new DevComponents.DotNetBar.ButtonX();
             this.rangeValidator1 = new DevComponents.DotNetBar.Validator.RangeValidator();
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
+            this.compareValidator2 = new DevComponents.DotNetBar.Validator.CompareValidator();
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.compareValidator3 = new DevComponents.DotNetBar.Validator.CompareValidator();
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -249,6 +259,7 @@
             this.groupPanelOther.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cDADueDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cDAValueDateDateTimePicker)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // caseCodeLabel
@@ -947,7 +958,7 @@
             this.btnCaseSelect.Size = new System.Drawing.Size(39, 40);
             this.btnCaseSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCaseSelect.TabIndex = 26;
-            this.btnCaseSelect.Text = "Q";
+            this.btnCaseSelect.Text = "...";
             this.btnCaseSelect.Click += new System.EventHandler(this.SelectCase);
             // 
             // buyerClientNameEN_1TextBox
@@ -1180,7 +1191,7 @@
             // 
             // 
             this.handFeeTextBox.Border.Class = "TextBoxBorder";
-            this.handFeeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HandFee", true));
+            this.handFeeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HandFee", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
             this.handFeeTextBox.Location = new System.Drawing.Point(698, 175);
             this.handFeeTextBox.Name = "handFeeTextBox";
             this.handFeeTextBox.Size = new System.Drawing.Size(57, 20);
@@ -1192,7 +1203,7 @@
             // 
             // 
             this.lossThresholdTextBox.Border.Class = "TextBoxBorder";
-            this.lossThresholdTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "LossThreshold", true));
+            this.lossThresholdTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "LossThreshold", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
             this.lossThresholdTextBox.Location = new System.Drawing.Point(457, 145);
             this.lossThresholdTextBox.Name = "lossThresholdTextBox";
             this.lossThresholdTextBox.Size = new System.Drawing.Size(100, 20);
@@ -1216,7 +1227,7 @@
             // 
             // 
             this.deductiblesTextBox.Border.Class = "TextBoxBorder";
-            this.deductiblesTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Deductibles", true));
+            this.deductiblesTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Deductibles", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
             this.deductiblesTextBox.Location = new System.Drawing.Point(257, 144);
             this.deductiblesTextBox.Name = "deductiblesTextBox";
             this.deductiblesTextBox.Size = new System.Drawing.Size(100, 20);
@@ -1232,6 +1243,7 @@
             this.commissionTypeComboBox.Name = "commissionTypeComboBox";
             this.commissionTypeComboBox.Size = new System.Drawing.Size(121, 21);
             this.commissionTypeComboBox.TabIndex = 7;
+            this.superValidator.SetValidator1(this.commissionTypeComboBox, this.requiredFieldValidator2);
             // 
             // financeGracePeriodTextBox
             // 
@@ -1251,7 +1263,7 @@
             // 
             // 
             this.eFPriceTextBox.Border.Class = "TextBoxBorder";
-            this.eFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "EFPrice", true));
+            this.eFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "EFPrice", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p2"));
             this.eFPriceTextBox.Location = new System.Drawing.Point(433, 176);
             this.eFPriceTextBox.Name = "eFPriceTextBox";
             this.eFPriceTextBox.Size = new System.Drawing.Size(66, 20);
@@ -1267,8 +1279,10 @@
             this.paymentTermsTextBox.Location = new System.Drawing.Point(101, 99);
             this.paymentTermsTextBox.Multiline = true;
             this.paymentTermsTextBox.Name = "paymentTermsTextBox";
+            this.paymentTermsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.paymentTermsTextBox.Size = new System.Drawing.Size(594, 43);
             this.paymentTermsTextBox.TabIndex = 31;
+            this.superValidator.SetValidator1(this.paymentTermsTextBox, this.requiredFieldValidator1);
             // 
             // iFPriceTextBox
             // 
@@ -1276,11 +1290,12 @@
             // 
             // 
             this.iFPriceTextBox.Border.Class = "TextBoxBorder";
-            this.iFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "IFPrice", true));
+            this.iFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "IFPrice", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p2"));
             this.iFPriceTextBox.Location = new System.Drawing.Point(264, 176);
             this.iFPriceTextBox.Name = "iFPriceTextBox";
             this.iFPriceTextBox.Size = new System.Drawing.Size(72, 20);
             this.iFPriceTextBox.TabIndex = 3;
+            this.iFPriceTextBox.Leave += new System.EventHandler(this.CaculateEF);
             // 
             // orderNumberTextBox
             // 
@@ -1300,11 +1315,12 @@
             // 
             // 
             this.priceTextBox.Border.Class = "TextBoxBorder";
-            this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Price", true));
+            this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Price", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p2"));
             this.priceTextBox.Location = new System.Drawing.Point(101, 176);
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(58, 20);
             this.priceTextBox.TabIndex = 1;
+            this.priceTextBox.Leave += new System.EventHandler(this.CaculateEF);
             // 
             // financeProportionTextBox
             // 
@@ -1312,7 +1328,7 @@
             // 
             // 
             this.financeProportionTextBox.Border.Class = "TextBoxBorder";
-            this.financeProportionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceProportion", true));
+            this.financeProportionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceProportion", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p0"));
             this.financeProportionTextBox.Location = new System.Drawing.Point(303, 76);
             this.financeProportionTextBox.Name = "financeProportionTextBox";
             this.financeProportionTextBox.Size = new System.Drawing.Size(100, 20);
@@ -1351,6 +1367,7 @@
             this.financeLinePeriodEndDateTimePicker.Name = "financeLinePeriodEndDateTimePicker";
             this.financeLinePeriodEndDateTimePicker.Size = new System.Drawing.Size(108, 20);
             this.financeLinePeriodEndDateTimePicker.TabIndex = 24;
+            this.superValidator.SetValidator1(this.financeLinePeriodEndDateTimePicker, this.compareValidator2);
             // 
             // financeLinePeriodBeginDateTimePicker
             // 
@@ -1392,7 +1409,7 @@
             // 
             // 
             this.financeLineTextBox.Border.Class = "TextBoxBorder";
-            this.financeLineTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceLine", true));
+            this.financeLineTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceLine", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
             this.financeLineTextBox.Location = new System.Drawing.Point(171, 51);
             this.financeLineTextBox.Name = "financeLineTextBox";
             this.financeLineTextBox.Size = new System.Drawing.Size(83, 20);
@@ -1467,6 +1484,7 @@
             this.creditCoverPeriodEndDateTimePicker.Name = "creditCoverPeriodEndDateTimePicker";
             this.creditCoverPeriodEndDateTimePicker.Size = new System.Drawing.Size(108, 20);
             this.creditCoverPeriodEndDateTimePicker.TabIndex = 13;
+            this.superValidator.SetValidator1(this.creditCoverPeriodEndDateTimePicker, this.compareValidator1);
             // 
             // creditCoverPeriodBeginDateTimePicker
             // 
@@ -1507,17 +1525,12 @@
             // 
             // 
             // 
-            this.pUGProportionTextBox.BackgroundStyle.Class = "TextBoxBorder";
-            this.pUGProportionTextBox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-            this.pUGProportionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "PUGProportion", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "P"));
-            this.pUGProportionTextBox.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
+            this.pUGProportionTextBox.Border.Class = "TextBoxBorder";
+            this.pUGProportionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "PUGProportion", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "P0"));
             this.pUGProportionTextBox.Location = new System.Drawing.Point(271, 23);
             this.pUGProportionTextBox.Name = "pUGProportionTextBox";
             this.pUGProportionTextBox.Size = new System.Drawing.Size(70, 20);
             this.pUGProportionTextBox.TabIndex = 9;
-            this.pUGProportionTextBox.Text = "";
-            this.pUGProportionTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.pUGProportionTextBox.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
             // 
             // approveNumberTextBox
             // 
@@ -1537,7 +1550,7 @@
             // 
             // 
             this.creditCoverTextBox.Border.Class = "TextBoxBorder";
-            this.creditCoverTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CreditCover", true));
+            this.creditCoverTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CreditCover", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
             this.creditCoverTextBox.Location = new System.Drawing.Point(171, 1);
             this.creditCoverTextBox.Name = "creditCoverTextBox";
             this.creditCoverTextBox.Size = new System.Drawing.Size(83, 20);
@@ -1687,6 +1700,7 @@
             this.cDADueDateDateTimePicker.Name = "cDADueDateDateTimePicker";
             this.cDADueDateDateTimePicker.Size = new System.Drawing.Size(84, 20);
             this.cDADueDateDateTimePicker.TabIndex = 19;
+            this.superValidator.SetValidator1(this.cDADueDateDateTimePicker, this.compareValidator3);
             // 
             // createUserNameTextBox
             // 
@@ -1710,6 +1724,7 @@
             this.commentTextBox.Location = new System.Drawing.Point(101, 56);
             this.commentTextBox.Multiline = true;
             this.commentTextBox.Name = "commentTextBox";
+            this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.commentTextBox.Size = new System.Drawing.Size(438, 37);
             this.commentTextBox.TabIndex = 15;
             // 
@@ -1736,6 +1751,7 @@
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(76, 20);
             this.emailTextBox.TabIndex = 11;
+            this.superValidator.SetValidator1(this.emailTextBox, this.regularExpressionValidator1);
             // 
             // noticePersonTextBox
             // 
@@ -1826,6 +1842,59 @@
             this.rangeValidator1.MaximumValue = "1";
             this.rangeValidator1.MinimumValue = "0";
             // 
+            // superValidator
+            // 
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
+            // 
+            // compareValidator1
+            // 
+            this.compareValidator1.ControlToCompare = this.creditCoverPeriodBeginDateTimePicker;
+            this.compareValidator1.ErrorMessage = "Your error message here.";
+            this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
+            // 
+            // compareValidator2
+            // 
+            this.compareValidator2.ControlToCompare = this.financeLinePeriodBeginDateTimePicker;
+            this.compareValidator2.ErrorMessage = "Your error message here.";
+            this.compareValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.compareValidator2.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
+            // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // compareValidator3
+            // 
+            this.compareValidator3.ControlToCompare = this.cDAValueDateDateTimePicker;
+            this.compareValidator3.ErrorMessage = "Your error message here.";
+            this.compareValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.compareValidator3.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
+            // 
+            // regularExpressionValidator1
+            // 
+            this.regularExpressionValidator1.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator1.ValidationExpression = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9" +
+                "})$";
+            // 
             // CDADetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1855,10 +1924,21 @@
             this.groupPanelOther.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cDADueDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cDAValueDateDateTimePicker)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator2;
+        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
+        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator3;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
     }
 }

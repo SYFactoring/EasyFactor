@@ -227,11 +227,11 @@
     <Compile Include="InfoMgr\FactorMgr\FactorMgr.Designer.cs">
       <DependentUpon>FactorMgr.cs</DependentUpon>
     </Compile>
-    <Compile Include="Report\AssignMgr.cs">
+    <Compile Include="Report\InvoiceMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Report\AssignMgr.Designer.cs">
-      <DependentUpon>AssignMgr.cs</DependentUpon>
+    <Compile Include="Report\InvoiceMgr.Designer.cs">
+      <DependentUpon>InvoiceMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ImportForm.cs">
       <SubType>Form</SubType>
@@ -354,8 +354,8 @@
       <DependentUpon>FactorMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\AssignMgr.resx">
-      <DependentUpon>AssignMgr.cs</DependentUpon>
+    <EmbeddedResource Include="Report\InvoiceMgr.resx">
+      <DependentUpon>InvoiceMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Utils\ImportForm.resx">

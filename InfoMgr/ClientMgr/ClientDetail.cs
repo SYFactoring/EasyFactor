@@ -135,7 +135,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             if (opClientType == OpClientType.NEW_CLIENT)
             {
-                this.clientBindingSource.DataSource = new Client();
+                client = new Client();
+                client.IsGroup = false;
+                this.clientBindingSource.DataSource = client;
             }
             else
             {
@@ -199,9 +201,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Constructors
 
-        #region Methods (24)
+        #region Methods (27)
 
-        // Private Methods (24) 
+        // Private Methods (27) 
 
         private void cbDepartments_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
         {
@@ -385,6 +387,25 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
+        private void IsGroupChanged(object sender, EventArgs e)
+        {
+            foreach (Control comp in this.groupPanelClientGroup.Controls)
+            {
+                if (comp == this.isGroupCheckBox)
+                {
+                    continue;
+                }
+                ControlUtil.SetComponetEditable(comp, this.isGroupCheckBox.Checked);
+            }
+            if (this.isGroupCheckBox.Checked == false)
+            {
+                Client client = this.clientBindingSource.DataSource as Client;
+                client.ClientGroup = null;
+                this.tbGroupNameCN.Text = string.Empty;
+                this.tbGroupNameEN.Text = string.Empty;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -476,6 +497,40 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
+        private bool ValidateClientControl()
+        {
+            bool result = true;
+            foreach (Control comp in this.groupPanelClientBasic.Controls)
+            {
+                if (!this.superValidator.Validate(comp))
+                {
+                    result = false;
+                }
+            }
+            foreach (Control comp in this.groupPanelClientGroup.Controls)
+            {
+                if (!this.superValidator.Validate(comp))
+                {
+                    result = false;
+                }
+            }
+            foreach (Control comp in this.groupPanelClientStat.Controls)
+            {
+                if (!this.superValidator.Validate(comp))
+                {
+                    result = false;
+                }
+            }
+            foreach (Control comp in this.groupPanelClientContact.Controls)
+            {
+                if (!this.superValidator.Validate(comp))
+                {
+                    result = false;
+                }
+            }
+            return result;
+        }
+
         /// <summary>
         /// Save current editing
         /// </summary>
@@ -483,6 +538,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void SaveClient(object sender, EventArgs e)
         {
+            if (!ValidateClientControl())
+            {
+                return;
+            }
             Client client = (Client)this.clientBindingSource.DataSource;
 
             if (this.opClientType == OpClientType.NEW_CLIENT)
@@ -737,6 +796,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (selectedClientCreditLine != null && this.clientCreditLineBindingSource.DataSource != selectedClientCreditLine)
                 {
                     this.ResetClientCreditLine();
+                    this.SetClientCreditLineEditable(false);
                     this.clientCreditLineBindingSource.DataSource = selectedClientCreditLine;
                     this.btnClientCreditLineFreeze.Enabled = true;
                     this.btnClientCreditLineUnfreeze.Enabled = true;
@@ -759,8 +819,25 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (selectedContract != null && this.contractBindingSource.DataSource != selectedContract)
                 {
                     this.ResetContract();
+                    this.SetContractEditable(false);
                     this.contractBindingSource.DataSource = selectedContract;
                 }
+            }
+        }
+
+        private void SetClientCreditLineEditable(bool editable)
+        {
+            foreach (Control comp in this.groupPanelClientCreditLine.Controls)
+            {
+                ControlUtil.SetComponetEditable(comp, editable);
+            }
+        }
+
+        private void SetContractEditable(bool editable)
+        {
+            foreach (Control comp in this.groupPanelContract.Controls)
+            {
+                ControlUtil.SetComponetEditable(comp, editable);
             }
         }
 
@@ -857,7 +934,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 foreach (Control comp in this.groupPanelClientGroup.Controls)
                 {
-                    ControlUtil.SetComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, false);
+                    this.isGroupCheckBox.Enabled = true;
                 }
 
                 foreach (Control comp in this.groupPanelClientStat.Controls)
@@ -880,6 +958,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 foreach (Control comp in this.groupPanelClientGroup.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
+                    this.IsGroupChanged(null, null);
                 }
 
                 foreach (Control comp in this.groupPanelClientStat.Controls)

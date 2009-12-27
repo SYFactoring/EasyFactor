@@ -102,9 +102,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 cda.PUGProportion = 1;
                 cda.PUGPeriod = 90;
                 cda.ReassignGracePeriod = 60;
+                cda.FinanceProportion = 0.8;
                 cda.IsNotice = false;
                 cda.IsRecoarse = false;
                 cda.IsCreditCoverRevolving = false;
+                cda.CDAStatus = "未审核";
                 this.CDABindingSource.DataSource = cda;
             }
             else
@@ -320,6 +322,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+                this.btnCaseSelect.Visible = false;
             }
             else if (this.opCDAType == OpCDAType.NEW_CDA)
             {
@@ -360,5 +363,18 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion Methods
+
+        private void CaculateEF(object sender, EventArgs e)
+        {
+            CDA cda = (CDA)this.CDABindingSource.DataSource;
+            if (!this.priceTextBox.Text.Equals(string.Empty))
+            {
+                double price;
+                double ifprice;
+                Double.TryParse(this.priceTextBox.Text, out price);
+                Double.TryParse(this.iFPriceTextBox.Text, out ifprice);
+                cda.EFPrice = price - ifprice;
+            }
+        }
     }
 }

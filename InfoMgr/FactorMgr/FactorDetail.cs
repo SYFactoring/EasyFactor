@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// </summary>
     public partial class FactorDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (2)
+		#region Fields (2) 
 
         /// <summary>
         /// 
@@ -28,9 +28,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private OpFactorType opFactorType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (2)
+		#region Enums (2) 
 
         /// <summary>
         /// Operation Type
@@ -52,7 +52,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             /// </summary>
             DETAIL_FACTOR
         }
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         public enum OpFactorCreditLineType
@@ -73,11 +73,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             DETAIL_FACTOR_CREDIT_LINE
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (3)
+		#region Constructors (3) 
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the FactorDetail class
         /// </summary>
         /// <param name="factor">selected factor</param>
@@ -142,11 +142,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.tabControl.SelectedTab = this.tabItemFactorCreditLine;
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (15)
+		#region Methods (16) 
 
-        // Private Methods (15) 
+		// Private Methods (16) 
 
         /// <summary>
         /// Cancel current editing
@@ -438,6 +438,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.dgvFactorCreditLines.DataSource = factor.FactorCreditLines.ToList();
                     this.NewFactorCreditLine(null, null);
                 }
             }
@@ -457,10 +458,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.dgvFactorCreditLines.Refresh();
                     creditLine.Backup();
                 }
             }
-            this.dgvFactorCreditLines.DataSource = factor.FactorCreditLines.ToList();
         }
 
         /// <summary>
@@ -483,10 +484,19 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 if (selectedFactorCreditLine != null && this.factorCreditLineBindingSource.DataSource != selectedFactorCreditLine)
                 {
                     this.ResetFactorCreditLine();
+                    this.SetFactorCreditLineEditable(false);
                     this.factorCreditLineBindingSource.DataSource = selectedFactorCreditLine;
                     this.btnFactorCreditLineFreeze.Enabled = true;
                     this.btnFactorCreditLineUnfreeze.Enabled = true;
                 }
+            }
+        }
+
+        private void SetFactorCreditLineEditable(bool editable)
+        {
+            foreach (Control comp in this.groupPanelCreditLineDetail.Controls)
+            {
+                ControlUtil.SetComponetEditable(comp,editable);
             }
         }
 
@@ -684,6 +694,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

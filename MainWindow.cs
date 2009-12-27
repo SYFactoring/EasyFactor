@@ -401,7 +401,7 @@ namespace CMBC.EasyFactor
 
         private void ARPaymentReport(object sender, EventArgs e)
         {
-            AssignMgr assignMgr = new AssignMgr();
+            InvoiceMgr assignMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.REPORT_AR);
             this.SetDetailPanel(assignMgr);
         }
     }

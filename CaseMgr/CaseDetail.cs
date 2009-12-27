@@ -419,6 +419,12 @@ namespace CMBC.EasyFactor.CaseMgr
         private void NewCDA(object sender, EventArgs e)
         {
             Case curCase = (Case)this.caseBindingSource.DataSource;
+            if (curCase == null || curCase.CaseCode == null)
+            {
+                MessageBox.Show("请首先选择一个案子", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             CDADetail cdaDetail = new CDADetail(curCase, CDADetail.OpCDAType.NEW_CDA);
             cdaDetail.Show(this);
         }

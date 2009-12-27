@@ -134,16 +134,23 @@ namespace CMBC.EasyFactor.ARMgr
                 this.isRecoarseCheckBox.Checked = cda.IsRecoarse.Value;
                 this.assignTypeTextBox.Text = cda.AssignType;
 
-                this.priceTextBox.Text = String.Format("{0:N}", cda.Price);
-                this.iFPriceTextBox.Text = String.Format("{0:N}", cda.IFPrice);
+                this.priceTextBox.Text = String.Format("{0:P2}", cda.Price);
+                this.iFPriceTextBox.Text = String.Format("{0:P2}", cda.IFPrice);
                 this.handFeeCurrTextBox.Text = cda.HandFeeCurr;
                 this.handFeeTextBox.Text = String.Format("{0:N}", cda.HandFee);
 
                 this.creditCoverCurrTextBox.Text = cda.CreditCoverCurr;
-                this.creditCoverTextBox.Text = String.Format("{0:N}", cda.CreditCover);
+                this.creditCoverTextBox.Text = String.Format("{0:N2}", cda.CreditCover);
                 this.periodEndTextBox.Text = String.Format("{0:d}", cda.CreditCoverPeriodEnd);
+                this.tbCreditCoverBalance.Text = "CDA.Case.SellerClient.CreditLine-";
+                this.tbARBalance.Text = "计算";
 
-                this.financeProportionTextBox.Text = String.Format("{0:0%}", cda.FinanceProportion);
+                this.financeProportionTextBox.Text = String.Format("{0:P0}", cda.FinanceProportion);
+                this.tbFinanceLineCurr.Text = cda.FinanceLineCurr;
+                this.tbFinanceLine.Text = String.Format("{0:N2}", cda.FinanceLine);
+                this.tbDueDate.Text = String.Format("{0:d}", cda.FinanceLinePeriodEnd);
+                this.tbFinanceCreditLineBalance.Text = "计算";
+                this.tbFinanceBalance.Text = "计算";
 
                 Control control = this.panelInvoiceMgr.Controls[0];
                 if (control is InvoiceAssign)

@@ -38,10 +38,10 @@
         private DevComponents.DotNetBar.Controls.TextBoxX sellerNameTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX tbARBalance;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreditCoverBalance;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCreditLine;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCreditLineCurr;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceLine;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceLineCurr;
         private DevComponents.DotNetBar.Controls.TextBoxX tbDueDate;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceARBalance;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceBalance;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceCreditLineBalance;
         private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
 
@@ -99,11 +99,11 @@
             DevComponents.DotNetBar.LabelX lblCreditLine;
             this.panelCaseBasic = new DevComponents.DotNetBar.PanelEx();
             this.groupPanelFinanceCreditLine = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.tbFinanceARBalance = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbFinanceBalance = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbFinanceCreditLineBalance = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbDueDate = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbCreditLine = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbCreditLineCurr = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbFinanceLine = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbFinanceLineCurr = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.financeProportionTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelCreditCover = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.tbARBalance = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -324,7 +324,7 @@
             // 
             // 
             financeProportionLabel.BackgroundStyle.Class = "";
-            financeProportionLabel.Location = new System.Drawing.Point(3, 8);
+            financeProportionLabel.Location = new System.Drawing.Point(24, 8);
             financeProportionLabel.Name = "financeProportionLabel";
             financeProportionLabel.Size = new System.Drawing.Size(59, 16);
             financeProportionLabel.TabIndex = 8;
@@ -389,11 +389,11 @@
             // 
             // 
             lblFinanceARBalance.BackgroundStyle.Class = "";
-            lblFinanceARBalance.Location = new System.Drawing.Point(0, 104);
+            lblFinanceARBalance.Location = new System.Drawing.Point(22, 104);
             lblFinanceARBalance.Name = "lblFinanceARBalance";
-            lblFinanceARBalance.Size = new System.Drawing.Size(84, 16);
+            lblFinanceARBalance.Size = new System.Drawing.Size(59, 16);
             lblFinanceARBalance.TabIndex = 17;
-            lblFinanceARBalance.Text = "应收帐款余额:";
+            lblFinanceARBalance.Text = "融资余额:";
             // 
             // lblFinanceCreditCoverBalance
             // 
@@ -428,11 +428,11 @@
             // 
             // 
             lblCreditLine.BackgroundStyle.Class = "";
-            lblCreditLine.Location = new System.Drawing.Point(0, 34);
+            lblCreditLine.Location = new System.Drawing.Point(12, 34);
             lblCreditLine.Name = "lblCreditLine";
-            lblCreditLine.Size = new System.Drawing.Size(84, 16);
+            lblCreditLine.Size = new System.Drawing.Size(72, 16);
             lblCreditLine.TabIndex = 10;
-            lblCreditLine.Text = "信用风险额度:";
+            lblCreditLine.Text = "预付款额度:";
             // 
             // panelCaseBasic
             // 
@@ -459,15 +459,15 @@
             // 
             this.groupPanelFinanceCreditLine.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelFinanceCreditLine.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelFinanceCreditLine.Controls.Add(this.tbFinanceARBalance);
+            this.groupPanelFinanceCreditLine.Controls.Add(this.tbFinanceBalance);
             this.groupPanelFinanceCreditLine.Controls.Add(lblFinanceARBalance);
             this.groupPanelFinanceCreditLine.Controls.Add(this.tbFinanceCreditLineBalance);
             this.groupPanelFinanceCreditLine.Controls.Add(lblFinanceCreditCoverBalance);
             this.groupPanelFinanceCreditLine.Controls.Add(lblDueDate);
             this.groupPanelFinanceCreditLine.Controls.Add(this.tbDueDate);
-            this.groupPanelFinanceCreditLine.Controls.Add(this.tbCreditLine);
+            this.groupPanelFinanceCreditLine.Controls.Add(this.tbFinanceLine);
             this.groupPanelFinanceCreditLine.Controls.Add(lblCreditLine);
-            this.groupPanelFinanceCreditLine.Controls.Add(this.tbCreditLineCurr);
+            this.groupPanelFinanceCreditLine.Controls.Add(this.tbFinanceLineCurr);
             this.groupPanelFinanceCreditLine.Controls.Add(financeProportionLabel);
             this.groupPanelFinanceCreditLine.Controls.Add(this.financeProportionTextBox);
             this.groupPanelFinanceCreditLine.Dock = System.Windows.Forms.DockStyle.Left;
@@ -505,17 +505,17 @@
             this.groupPanelFinanceCreditLine.TabIndex = 3;
             this.groupPanelFinanceCreditLine.Text = "融资额度信息";
             // 
-            // tbFinanceARBalance
+            // tbFinanceBalance
             // 
             // 
             // 
             // 
-            this.tbFinanceARBalance.Border.Class = "TextBoxBorder";
-            this.tbFinanceARBalance.Location = new System.Drawing.Point(96, 101);
-            this.tbFinanceARBalance.Name = "tbFinanceARBalance";
-            this.tbFinanceARBalance.ReadOnly = true;
-            this.tbFinanceARBalance.Size = new System.Drawing.Size(100, 20);
-            this.tbFinanceARBalance.TabIndex = 18;
+            this.tbFinanceBalance.Border.Class = "TextBoxBorder";
+            this.tbFinanceBalance.Location = new System.Drawing.Point(96, 101);
+            this.tbFinanceBalance.Name = "tbFinanceBalance";
+            this.tbFinanceBalance.ReadOnly = true;
+            this.tbFinanceBalance.Size = new System.Drawing.Size(100, 20);
+            this.tbFinanceBalance.TabIndex = 18;
             // 
             // tbFinanceCreditLineBalance
             // 
@@ -541,29 +541,29 @@
             this.tbDueDate.Size = new System.Drawing.Size(100, 20);
             this.tbDueDate.TabIndex = 14;
             // 
-            // tbCreditLine
+            // tbFinanceLine
             // 
             // 
             // 
             // 
-            this.tbCreditLine.Border.Class = "TextBoxBorder";
-            this.tbCreditLine.Location = new System.Drawing.Point(131, 31);
-            this.tbCreditLine.Name = "tbCreditLine";
-            this.tbCreditLine.ReadOnly = true;
-            this.tbCreditLine.Size = new System.Drawing.Size(58, 20);
-            this.tbCreditLine.TabIndex = 12;
+            this.tbFinanceLine.Border.Class = "TextBoxBorder";
+            this.tbFinanceLine.Location = new System.Drawing.Point(131, 31);
+            this.tbFinanceLine.Name = "tbFinanceLine";
+            this.tbFinanceLine.ReadOnly = true;
+            this.tbFinanceLine.Size = new System.Drawing.Size(58, 20);
+            this.tbFinanceLine.TabIndex = 12;
             // 
-            // tbCreditLineCurr
-            // 
-            // 
+            // tbFinanceLineCurr
             // 
             // 
-            this.tbCreditLineCurr.Border.Class = "TextBoxBorder";
-            this.tbCreditLineCurr.Location = new System.Drawing.Point(96, 31);
-            this.tbCreditLineCurr.Name = "tbCreditLineCurr";
-            this.tbCreditLineCurr.ReadOnly = true;
-            this.tbCreditLineCurr.Size = new System.Drawing.Size(28, 20);
-            this.tbCreditLineCurr.TabIndex = 11;
+            // 
+            // 
+            this.tbFinanceLineCurr.Border.Class = "TextBoxBorder";
+            this.tbFinanceLineCurr.Location = new System.Drawing.Point(96, 31);
+            this.tbFinanceLineCurr.Name = "tbFinanceLineCurr";
+            this.tbFinanceLineCurr.ReadOnly = true;
+            this.tbFinanceLineCurr.Size = new System.Drawing.Size(28, 20);
+            this.tbFinanceLineCurr.TabIndex = 11;
             // 
             // financeProportionTextBox
             // 

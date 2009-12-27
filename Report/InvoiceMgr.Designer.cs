@@ -1,6 +1,6 @@
 ﻿namespace CMBC.EasyFactor.Report
 {
-    partial class AssignMgr
+    partial class InvoiceMgr
     {
         /// <summary> 
         /// Required designer variable.
@@ -170,7 +170,7 @@
             this.btnAssignQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAssignQuery.TabIndex = 2;
             this.btnAssignQuery.Text = "查询";
-            this.btnAssignQuery.Click += new System.EventHandler(this.QueryAssign);
+            this.btnAssignQuery.Click += new System.EventHandler(this.QueryInvoices);
             // 
             // tbSeller
             // 

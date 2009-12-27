@@ -167,9 +167,9 @@
             DevComponents.DotNetBar.LabelX lblCaseBuyerNo;
             DevComponents.DotNetBar.LabelX lblCaseSellerNo;
             DevComponents.DotNetBar.LabelX lblCaseFactor;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaseDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelCase = new DevComponents.DotNetBar.TabControlPanel();
@@ -279,6 +279,12 @@
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator6 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator7 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             requestAmountLabel = new DevComponents.DotNetBar.LabelX();
             approveAmountLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
@@ -324,7 +330,8 @@
             // 
             // 
             requestAmountLabel.BackgroundStyle.Class = "";
-            requestAmountLabel.Location = new System.Drawing.Point(8, 14);
+            requestAmountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            requestAmountLabel.Location = new System.Drawing.Point(8, 12);
             requestAmountLabel.Name = "requestAmountLabel";
             requestAmountLabel.Size = new System.Drawing.Size(59, 16);
             requestAmountLabel.TabIndex = 0;
@@ -338,7 +345,7 @@
             // 
             // 
             approveAmountLabel.BackgroundStyle.Class = "";
-            approveAmountLabel.Location = new System.Drawing.Point(8, 38);
+            approveAmountLabel.Location = new System.Drawing.Point(8, 36);
             approveAmountLabel.Name = "approveAmountLabel";
             approveAmountLabel.Size = new System.Drawing.Size(59, 16);
             approveAmountLabel.TabIndex = 2;
@@ -352,7 +359,7 @@
             // 
             // 
             iFPriceLabel.BackgroundStyle.Class = "";
-            iFPriceLabel.Location = new System.Drawing.Point(180, 38);
+            iFPriceLabel.Location = new System.Drawing.Point(180, 36);
             iFPriceLabel.Name = "iFPriceLabel";
             iFPriceLabel.Size = new System.Drawing.Size(44, 16);
             iFPriceLabel.TabIndex = 4;
@@ -366,7 +373,7 @@
             // 
             // 
             approveDateLabel.BackgroundStyle.Class = "";
-            approveDateLabel.Location = new System.Drawing.Point(336, 38);
+            approveDateLabel.Location = new System.Drawing.Point(336, 36);
             approveDateLabel.Name = "approveDateLabel";
             approveDateLabel.Size = new System.Drawing.Size(59, 16);
             approveDateLabel.TabIndex = 6;
@@ -380,7 +387,8 @@
             // 
             // 
             requestDateLabel.BackgroundStyle.Class = "";
-            requestDateLabel.Location = new System.Drawing.Point(336, 13);
+            requestDateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            requestDateLabel.Location = new System.Drawing.Point(336, 11);
             requestDateLabel.Name = "requestDateLabel";
             requestDateLabel.Size = new System.Drawing.Size(59, 16);
             requestDateLabel.TabIndex = 8;
@@ -394,7 +402,8 @@
             // 
             // 
             approveTypeLabel.BackgroundStyle.Class = "";
-            approveTypeLabel.Location = new System.Drawing.Point(177, 14);
+            approveTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            approveTypeLabel.Location = new System.Drawing.Point(177, 11);
             approveTypeLabel.Name = "approveTypeLabel";
             approveTypeLabel.Size = new System.Drawing.Size(53, 16);
             approveTypeLabel.TabIndex = 10;
@@ -451,7 +460,8 @@
             // 
             // 
             lblCaseOwnerDept.BackgroundStyle.Class = "";
-            lblCaseOwnerDept.Location = new System.Drawing.Point(5, 205);
+            lblCaseOwnerDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            lblCaseOwnerDept.Location = new System.Drawing.Point(7, 209);
             lblCaseOwnerDept.Name = "lblCaseOwnerDept";
             lblCaseOwnerDept.Size = new System.Drawing.Size(84, 16);
             lblCaseOwnerDept.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -466,7 +476,8 @@
             // 
             // 
             lblCaseOpType.BackgroundStyle.Class = "";
-            lblCaseOpType.Location = new System.Drawing.Point(33, 181);
+            lblCaseOpType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            lblCaseOpType.Location = new System.Drawing.Point(33, 186);
             lblCaseOpType.Name = "lblCaseOpType";
             lblCaseOpType.Size = new System.Drawing.Size(59, 16);
             lblCaseOpType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -526,6 +537,7 @@
             // 
             // 
             lblCaseTransactionType.BackgroundStyle.Class = "";
+            lblCaseTransactionType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             lblCaseTransactionType.Location = new System.Drawing.Point(33, 3);
             lblCaseTransactionType.Name = "lblCaseTransactionType";
             lblCaseTransactionType.Size = new System.Drawing.Size(59, 16);
@@ -541,7 +553,8 @@
             // 
             // 
             lblCaseInvoiceCurrency.BackgroundStyle.Class = "";
-            lblCaseInvoiceCurrency.Location = new System.Drawing.Point(33, 161);
+            lblCaseInvoiceCurrency.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            lblCaseInvoiceCurrency.Location = new System.Drawing.Point(33, 164);
             lblCaseInvoiceCurrency.Name = "lblCaseInvoiceCurrency";
             lblCaseInvoiceCurrency.Size = new System.Drawing.Size(59, 16);
             lblCaseInvoiceCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -556,9 +569,10 @@
             // 
             // 
             lblCaseBuyerNo.BackgroundStyle.Class = "";
-            lblCaseBuyerNo.Location = new System.Drawing.Point(53, 68);
+            lblCaseBuyerNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            lblCaseBuyerNo.Location = new System.Drawing.Point(55, 68);
             lblCaseBuyerNo.Name = "lblCaseBuyerNo";
-            lblCaseBuyerNo.Size = new System.Drawing.Size(34, 16);
+            lblCaseBuyerNo.Size = new System.Drawing.Size(35, 16);
             lblCaseBuyerNo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             lblCaseBuyerNo.TabIndex = 8;
             lblCaseBuyerNo.Text = "买方:";
@@ -571,6 +585,7 @@
             // 
             // 
             lblCaseSellerNo.BackgroundStyle.Class = "";
+            lblCaseSellerNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             lblCaseSellerNo.Location = new System.Drawing.Point(57, 22);
             lblCaseSellerNo.Name = "lblCaseSellerNo";
             lblCaseSellerNo.Size = new System.Drawing.Size(34, 16);
@@ -598,8 +613,8 @@
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
             this.tabControl.Controls.Add(this.tabPanelCase);
-            this.tabControl.Controls.Add(this.tabPanelCDA);
             this.tabControl.Controls.Add(this.tabPanelCreditCoverNeg);
+            this.tabControl.Controls.Add(this.tabPanelCDA);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -797,6 +812,7 @@
             this.cbCaseOwnerDepts.Size = new System.Drawing.Size(278, 23);
             this.cbCaseOwnerDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbCaseOwnerDepts.TabIndex = 39;
+            this.superValidator.SetValidator1(this.cbCaseOwnerDepts, this.requiredFieldValidator4);
             this.cbCaseOwnerDepts.SelectionChanged += new DevComponents.AdvTree.AdvTreeNodeEventHandler(this.CaseOwnerDeptsChanged);
             // 
             // cbCaseOpType
@@ -815,6 +831,7 @@
             this.cbCaseOpType.Size = new System.Drawing.Size(100, 20);
             this.cbCaseOpType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbCaseOpType.TabIndex = 37;
+            this.superValidator.SetValidator1(this.cbCaseOpType, this.requiredFieldValidator3);
             this.cbCaseOpType.SelectionChangeCommitted += new System.EventHandler(this.CaseOpTypeChanged);
             // 
             // tbCaseBuyerNameEN
@@ -931,6 +948,7 @@
             this.cbCaseInvoiceCurrency.Size = new System.Drawing.Size(100, 20);
             this.cbCaseInvoiceCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbCaseInvoiceCurrency.TabIndex = 25;
+            this.superValidator.SetValidator1(this.cbCaseInvoiceCurrency, this.requiredFieldValidator2);
             // 
             // btnCaseBuyerSelect
             // 
@@ -1080,14 +1098,14 @@
             this.dgvCDAs.AllowUserToAddRows = false;
             this.dgvCDAs.AllowUserToDeleteRows = false;
             this.dgvCDAs.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCDAs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCDAs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCDACode,
@@ -1131,14 +1149,14 @@
             this.colFax,
             this.colCDAComment,
             this.colCDACreateUserName});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCDAs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCDAs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCDAs.Location = new System.Drawing.Point(1, 39);
@@ -1568,14 +1586,14 @@
             this.colIFPrice,
             this.colComment,
             this.colCreateUserName});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCreditCoverNegs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCreditCoverNegs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCreditCoverNegs.Location = new System.Drawing.Point(1, 166);
@@ -1828,6 +1846,7 @@
             this.cbApproveType.Name = "cbApproveType";
             this.cbApproveType.Size = new System.Drawing.Size(100, 21);
             this.cbApproveType.TabIndex = 11;
+            this.superValidator.SetValidator1(this.cbApproveType, this.requiredFieldValidator6);
             // 
             // diRequestDate
             // 
@@ -1862,6 +1881,7 @@
             this.diRequestDate.Name = "diRequestDate";
             this.diRequestDate.Size = new System.Drawing.Size(103, 20);
             this.diRequestDate.TabIndex = 9;
+            this.superValidator.SetValidator1(this.diRequestDate, this.requiredFieldValidator7);
             // 
             // diApproveDate
             // 
@@ -1932,6 +1952,7 @@
             this.tbRequestAmount.Name = "tbRequestAmount";
             this.tbRequestAmount.Size = new System.Drawing.Size(100, 20);
             this.tbRequestAmount.TabIndex = 1;
+            this.superValidator.SetValidator1(this.tbRequestAmount, this.requiredFieldValidator5);
             // 
             // tabItemCreditCoverNeg
             // 
@@ -1959,6 +1980,36 @@
             // highlighter
             // 
             this.highlighter.ContainerControl = this;
+            // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator3
+            // 
+            this.requiredFieldValidator3.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator4
+            // 
+            this.requiredFieldValidator4.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator5
+            // 
+            this.requiredFieldValidator5.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator6
+            // 
+            this.requiredFieldValidator6.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator7
+            // 
+            this.requiredFieldValidator7.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // CaseDetail
             // 
@@ -1996,5 +2047,11 @@
         #endregion
 
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator6;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator7;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
     }
 }

@@ -19,7 +19,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientMgr : UserControl
     {
-        #region Fields (2)
+		#region Fields (3) 
 
         /// <summary>
         /// 
@@ -29,19 +29,22 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// flag indicates if editable
         /// </summary>
         private bool isEditable;
-
-        #endregion Fields
-
-        #region Constructors (1)
-
         private OpClientMgrType opClientMgrType;
+
+		#endregion Fields 
+
+		#region Enums (1) 
 
         public enum OpClientMgrType
         {
             NEED_CONTRACT
         }
 
-        public ClientMgr(OpClientMgrType clientMgrType)
+		#endregion Enums 
+
+		#region Constructors (2) 
+
+public ClientMgr(OpClientMgrType clientMgrType)
             : this(false)
         {
             this.opClientMgrType = clientMgrType;
@@ -73,9 +76,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbDepartment.SelectedIndex = -1;
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Gets or sets owner form
@@ -95,11 +98,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             set;
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (12)
+		#region Methods (12) 
 
-        // Private Methods (12) 
+		// Private Methods (12) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -293,6 +296,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Reset(object sender, EventArgs e)
+        {
+            foreach (Control comp in this.pnlQuery.Controls)
+            {
+                ControlUtil.SetComponetDefault(comp);
+            }
+        }
+
+        /// <summary>
         /// Select client and close the query form
         /// </summary>
         /// <param name="sender">Event Sender</param>
@@ -369,6 +385,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

@@ -1,31 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using CMBC.EasyFactor.Utils;
-using Microsoft.Office.Interop.Excel;
-using CMBC.EasyFactor.DB.dbml;
-
+﻿
 namespace CMBC.EasyFactor.Report
 {
-    public partial class AssignMgr : UserControl
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
+    using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils;
+    using Microsoft.Office.Interop.Excel;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class InvoiceMgr : UserControl
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private BindingSource bs;
 
-        public AssignMgr()
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpInvoiceType opInvoiceType;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum OpInvoiceType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            REPORT_AR,
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            REPORT_FINANCE
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="opInvoiceType"></param>
+        public InvoiceMgr(OpInvoiceType opInvoiceType)
         {
             InitializeComponent();
+            this.opInvoiceType = opInvoiceType;
             this.bs = new BindingSource();
             this.dgvInvoices.AutoGenerateColumns = false;
             this.dgvInvoices.DataSource = this.bs;
             ControlUtil.SetDoubleBuffered(this.dgvInvoices);
         }
 
-        private void QueryAssign(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryInvoices(object sender, EventArgs e)
         {
             string sellerName = this.tbSeller.Text;
             string buyerName = this.tbBuyer.Text;

@@ -19,28 +19,6 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoiceAssign : UserControl
     {
-        #region Fields (1)
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpAssignType opAssignType;
-
-        #endregion Fields
-
-        #region Enums (1)
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public enum OpAssignType
-        {
-            NEW_ASSIGN,
-            UPDATE_ASSIGN
-        }
-
-        #endregion Enums
-
         #region Constructors (1)
 
         /// <summary>
@@ -155,10 +133,8 @@ namespace CMBC.EasyFactor.ARMgr
             assignBatch.BatchDate = DateTime.Now;
             assignBatch.CreateUserName = App.Current.CurUser.Name;
             assignBatch.IsCreateMsg = false;
-            assignBatch.CDA = this.CDA;
             this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
             this.invoiceBindingSource.DataSource = assignBatch.Invoices;
-            this.opAssignType = OpAssignType.NEW_ASSIGN;
         }
 
         /// <summary>
@@ -190,12 +166,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             bool isSaveOK = true;
             InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
+            assignBatch.CDA = this.CDA;
             try
             {
-                if (opAssignType == OpAssignType.NEW_ASSIGN)
-                {
-                    App.Current.DbContext.InvoiceAssignBatches.InsertOnSubmit(assignBatch);
-                }
                 App.Current.DbContext.SubmitChanges();
             }
             catch (Exception e1)
@@ -206,7 +179,6 @@ namespace CMBC.EasyFactor.ARMgr
             if (isSaveOK)
             {
                 MessageBox.Show("数据保存成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                opAssignType = OpAssignType.UPDATE_ASSIGN;
             }
         }
 
@@ -231,101 +203,21 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
                 this.invoiceBindingSource.DataSource = assignBatch.Invoices;
-                this.opAssignType = OpAssignType.UPDATE_ASSIGN;
             }
         }
 
         #endregion Methods
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ImportAssignBatch(object sender, EventArgs e)
-        {
-            InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
-            if (assignBatch == null || assignBatch.AssignBatchNo == null)
-            {
-                MessageBox.Show("请首先创建新批次", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            OpenFileDialog fileDialog = new OpenFileDialog();
-
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-
-                string fileName = fileDialog.FileName;
-                ApplicationClass app = new ApplicationClass() { Visible = false };
-                WorkbookClass workbook = (WorkbookClass)app.Workbooks.Open(
-                   fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                   Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                   Type.Missing, Type.Missing, Type.Missing);
-                if (workbook.Sheets.Count < 1)
-                {
-                    MessageBox.Show("未找到指定的Sheet！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    workbook.Close(false, fileName, null);
-                    Marshal.ReleaseComObject(workbook);
-                    return;
-                }
-
-                Worksheet datasheet = (Worksheet)workbook.Sheets[1];
-
-                Range range = datasheet.UsedRange;
-                object[,] valueArray = (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
-                if (valueArray != null)
-                {
-
-                    for (int row = 3; row < range.Rows.Count; row++)
-                    {
-
-                        Invoice invoice = null;
-                        string invoiceNo = String.Format("{0:G}", valueArray[row, 5]);
-                        invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                        if (invoice == null)
-                        {
-                            invoice = new Invoice();
-                            invoice.InvoiceNo = invoiceNo;
-                        }
-                        try
-                        {
-                            int column = 6;
-                            invoice.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                            invoice.InvoiceAmount = (double)valueArray[row, column++];
-                            invoice.AssignAmount = (double)valueArray[row, column++];
-                            invoice.InvoiceDate = (DateTime)valueArray[row, column++];
-                            invoice.DueDate = (DateTime)valueArray[row, column++];
-                            invoice.AssignDate = (DateTime)valueArray[row, column++];
-                            invoice.IsFlaw = "Y".Equals(valueArray[row, column++]);
-                            invoice.FlawReason = String.Format("{0:G}", valueArray[row, column++]);
-                            invoice.Comment = String.Format("{0:G}", valueArray[row, 23]);
-
-                            invoice.InvoiceAssignBatch = assignBatch;
-
-                            App.Current.DbContext.SubmitChanges();
-                        }
-                        catch (Exception e1)
-                        {
-                            DialogResult dr = MessageBox.Show("导入失败: " + e1.Message + "\t" + invoice.InvoiceNo + "\n" + "是否继续导入？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                            if (dr == DialogResult.No)
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    MessageBox.Show("导入结束", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                workbook.Close(false, fileName, null);
-                Marshal.ReleaseComObject(workbook);
-
-            }
-        }
-
-        private void ImportAssignBatchByCDA(object sender, EventArgs e)
         {
             ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
             importForm.Show();
         }
+
+        private void dgvInvoices_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DetailInvoice(null, null);
+        }
+
     }
 }

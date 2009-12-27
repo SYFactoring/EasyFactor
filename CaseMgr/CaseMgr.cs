@@ -48,7 +48,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbTransactionType.DataSource = transTypes;
 
             List<Department> deptsList = Department.AllDepartments().ToList();
-            deptsList.Insert(0, new Department() {DepartmentCode="CN01300",DepartmentName="全部" });
+            deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
             this.cbOwnerDepts.DataSource = deptsList;
             this.cbOwnerDepts.DisplayMembers = "DepartmentName";
             this.cbOwnerDepts.ValueMember = "DepartmentCode";
@@ -202,8 +202,8 @@ namespace CMBC.EasyFactor.CaseMgr
                                    ((string)this.cbOwnerDepts.SelectedValue == "CN01300" ? true : c.OwnerDepartmentCode.Equals((string)this.cbOwnerDepts.SelectedValue))
                                 && (this.cbTransactionType.Text == "全部" ? true : c.TransactionType.Equals(this.cbTransactionType.Text))
                                 && ((string)this.cbCurrency.SelectedValue == "AAA" ? true : c.InvoiceCurrency.Equals((string)this.cbCurrency.SelectedValue))
-                                && (beginDate == this.diBegin.MinDate ? true : c.CaseAppDate > beginDate.AddDays(-1))
-                                && (endDate == this.diEnd.MaxDate ? true : c.CaseAppDate < endDate.AddDays(1))
+                                && (c.CaseAppDate > beginDate.AddDays(-1))
+                                && (c.CaseAppDate < endDate.AddDays(1))
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
                                 && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN_1.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN_2.Contains(this.tbClientName.Text)
                                  || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN_1.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN_2.Contains(this.tbClientName.Text))
