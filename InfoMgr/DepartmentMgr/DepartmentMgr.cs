@@ -26,6 +26,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         public DepartmentMgr(bool isEditable)
         {
             InitializeComponent();
+            this.dgvDepts.AutoGenerateColumns = false;
             ControlUtil.SetDoubleBuffered(this.dgvDepts);
         }
 

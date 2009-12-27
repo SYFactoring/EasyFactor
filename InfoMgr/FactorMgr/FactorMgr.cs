@@ -41,6 +41,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         public FactorMgr(bool isEditable)
         {
             this.InitializeComponent();
+            this.dgvFactors.AutoGenerateColumns = false;
             this.isEditable = isEditable;
             this.UpdateEditableStatus();
             ControlUtil.SetDoubleBuffered(this.dgvFactors);

@@ -59,6 +59,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientMgr(bool isEditable)
         {
             this.InitializeComponent();
+            this.dgvClients.AutoGenerateColumns = false;
             this.isEditable = isEditable;
             this.UpdateEditableStatus();
             ControlUtil.SetDoubleBuffered(this.dgvClients);

@@ -36,6 +36,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         public UserMgr(bool isEditable)
         {
             this.InitializeComponent();
+            this.dgvUsers.AutoGenerateColumns = false;
             ControlUtil.SetDoubleBuffered(this.dgvUsers);
             this.isEditable = isEditable;
             this.UpdateEditableStatus();
