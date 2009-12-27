@@ -85,6 +85,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private FactorDetail(Factor factor, OpFactorType opFactorType, OpFactorCreditLineType opFactorCreditLineType)
         {
             this.InitializeComponent();
+            this.dgvFactorCreditLines.AutoGenerateColumns = false;
 
             this.countryNameComboBox.DataSource = Country.AllCountries();
             this.countryNameComboBox.DisplayMember = "CountryNameEN";
@@ -474,7 +475,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            int cid = (int)dgvFactorCreditLines["creditLineIDColumn", dgvFactorCreditLines.SelectedRows[0].Index].Value;
+            int cid = (int)dgvFactorCreditLines["colCreditLineID", dgvFactorCreditLines.SelectedRows[0].Index].Value;
             if (cid != 0)
             {
                 Factor factor = (Factor)this.factorBindingSource.DataSource;
