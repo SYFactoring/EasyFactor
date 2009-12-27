@@ -6,17 +6,17 @@ namespace CMBC.EasyFactor.CaseMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.Utils;
 
-    public partial class InvoiceMgr : UserControl
+    public partial class OverDueMgr : UserControl
     {
         private BindingSource bs;
 
-        public InvoiceMgr()
+        public OverDueMgr()
         {
             InitializeComponent();
-            ControlUtil.SetDoubleBuffered(this.dgvInvoices);
             this.bs = new BindingSource();
             this.dgvInvoices.DataSource = this.bs;
             this.dgvInvoices.AutoGenerateColumns = false;
+            ControlUtil.SetDoubleBuffered(this.dgvInvoices);
         }
 
         private void QueryOverDueDays(object sender, EventArgs e)

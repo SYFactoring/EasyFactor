@@ -1,6 +1,6 @@
 ﻿namespace CMBC.EasyFactor.CaseMgr
 {
-    partial class InvoiceMgr
+    partial class OverDueMgr
     {
         /// <summary> 
         /// Required designer variable.

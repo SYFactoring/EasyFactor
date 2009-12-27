@@ -126,6 +126,7 @@
             this.colFinanceDate = new CMBC.EasyFactor.Utils.CalendarColumn();
             this.colFinanceDueDate = new CMBC.EasyFactor.Utils.CalendarColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             financeBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             financeAmountLabel = new DevComponents.DotNetBar.LabelX();
             financePeriodBeginLabel = new DevComponents.DotNetBar.LabelX();
@@ -508,7 +509,8 @@
             this.colFinanceAmount,
             this.colFinanceDate,
             this.colFinanceDueDate,
-            this.colComment});
+            this.colComment,
+            this.colInvoiceNo});
             this.dgvInvoices.DataSource = this.invoiceBindingSource;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -743,6 +745,13 @@
             this.colComment.HeaderText = "备注";
             this.colComment.Name = "colComment";
             // 
+            // colInvoiceNo
+            // 
+            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
+            this.colInvoiceNo.HeaderText = "发票号";
+            this.colInvoiceNo.Name = "colInvoiceNo";
+            this.colInvoiceNo.Visible = false;
+            // 
             // InvoiceFinance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -786,5 +795,6 @@
         private CMBC.EasyFactor.Utils.CalendarColumn colFinanceDate;
         private CMBC.EasyFactor.Utils.CalendarColumn colFinanceDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
     }
 }

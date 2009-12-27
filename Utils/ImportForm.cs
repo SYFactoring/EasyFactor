@@ -217,6 +217,11 @@ namespace CMBC.EasyFactor.Utils
         private object[,] GetValueArray(string fileName)
         {
             this.app = new ApplicationClass() { Visible = false };
+            if (this.app == null)
+            {
+                MessageBox.Show("Excel 程序无法启动!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return null;
+            }
             this.workbook = (WorkbookClass)app.Workbooks.Open(
                 fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,

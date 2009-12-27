@@ -169,11 +169,11 @@
     <Compile Include="CaseMgr\CreditCoverNegMgr.Designer.cs">
       <DependentUpon>CreditCoverNegMgr.cs</DependentUpon>
     </Compile>
-    <Compile Include="CaseMgr\InvoiceMgr.cs">
+    <Compile Include="CaseMgr\OverDueMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CaseMgr\InvoiceMgr.Designer.cs">
-      <DependentUpon>InvoiceMgr.cs</DependentUpon>
+    <Compile Include="CaseMgr\OverDueMgr.Designer.cs">
+      <DependentUpon>OverDueMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="DB.dbml\BaseObject.cs" />
     <Compile Include="DB.dbml\Case.cs" />
@@ -226,6 +226,12 @@
     </Compile>
     <Compile Include="InfoMgr\FactorMgr\FactorMgr.Designer.cs">
       <DependentUpon>FactorMgr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\AssignMgr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Report\AssignMgr.Designer.cs">
+      <DependentUpon>AssignMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ImportForm.cs">
       <SubType>Form</SubType>
@@ -320,8 +326,8 @@
       <DependentUpon>CreditCoverNegMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CaseMgr\InvoiceMgr.resx">
-      <DependentUpon>InvoiceMgr.cs</DependentUpon>
+    <EmbeddedResource Include="CaseMgr\OverDueMgr.resx">
+      <DependentUpon>OverDueMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Help\About\AboutBox.resx">
@@ -346,6 +352,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\FactorMgr\FactorMgr.resx">
       <DependentUpon>FactorMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\AssignMgr.resx">
+      <DependentUpon>AssignMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Utils\ImportForm.resx">
@@ -515,7 +525,6 @@
   <ItemGroup>
     <Folder Include="Help\CheckForUpdates\" />
     <Folder Include="Help\Content\" />
-    <Folder Include="Report\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

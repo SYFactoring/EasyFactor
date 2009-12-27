@@ -16,6 +16,7 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.Report;
 
     /// <summary>
     /// Main Window Form
@@ -381,7 +382,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryOverDueDays(object sender, EventArgs e)
         {
-            InvoiceMgr invoiceMgr = new InvoiceMgr();
+            OverDueMgr invoiceMgr = new OverDueMgr();
             this.SetDetailPanel(invoiceMgr);
         }
 
@@ -397,5 +398,11 @@ namespace CMBC.EasyFactor
         }
 
 		#endregion Methods 
+
+        private void ARPaymentReport(object sender, EventArgs e)
+        {
+            AssignMgr assignMgr = new AssignMgr();
+            this.SetDetailPanel(assignMgr);
+        }
     }
 }
