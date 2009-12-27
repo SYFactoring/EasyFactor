@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using CMBC.EasyFactor.Utils;
 using Microsoft.Office.Interop.Excel;
+using CMBC.EasyFactor.DB.dbml;
 
 namespace CMBC.EasyFactor.Report
 {
@@ -56,13 +57,13 @@ namespace CMBC.EasyFactor.Report
                                  && (endDate == this.diAssignDateEnd.MaxDate ? true : invoice.AssignDate < endDate.AddDays(1))
                               select invoice;
 
-            this.bs.DataSource = queryResult;
+            this.bs.DataSource = queryResult.ToList();
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
         private void GenerateAssignReport(object sender, EventArgs e)
         {
-            Microsoft.Office.Interop.Excel.Application app = new ApplicationClass() { Visible = true };
+            Microsoft.Office.Interop.Excel.Application app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
                 MessageBox.Show("Excel 程序无法启动!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -70,16 +71,51 @@ namespace CMBC.EasyFactor.Report
             }
             Workbook workbook = app.Workbooks.Add(true);
             Worksheet sheet = workbook.Worksheets[1] as Worksheet;
-            object[,] valueArray = new object[10, 10];
-            valueArray[1, 1] = "Hello World";
-
-            for (int row = 1; row <= valueArray.GetUpperBound(0); row++)
+            if (!(this.bs.DataSource is List<Invoice>))
             {
-                for (int column = 1; column <= valueArray.GetUpperBound(1); column++)
-                {
-                    sheet.Cells[row, column] = valueArray[row, column];
-                }
+                return;
             }
+
+            List<Invoice> invoiceList = this.bs.DataSource as List<Invoice>;
+            if (invoiceList.Count == 0)
+            {
+                return;
+            }
+            Invoice firstInvoice = invoiceList[0];
+            Case selectedCase = firstInvoice.InvoiceAssignBatch.CDA.Case;
+
+            sheet.Cells[1, 1] = String.Format("致{0}公司", selectedCase.SellerClient.ToString());
+            sheet.Cells[3, 3] = "应收账款转让明细表";
+            sheet.Cells[5, 1] = "买方:";
+            sheet.Cells[5, 2] = String.Format("{0}", selectedCase.BuyerClient.ToString());
+            sheet.Cells[5, 3] = "（应收账款债务人）";
+            sheet.Cells[6, 1] = "进口保理商：";
+            sheet.Cells[6, 2] = selectedCase.BuyerFactor.ToString();
+            sheet.Cells[7, 1] = "信用风险额度：";
+            sheet.Cells[8, 1] = "应收账款余额：";
+
+            sheet.Cells[10, 1] = "发票号";
+            sheet.Cells[10, 2] = "转让金额";
+            sheet.Cells[10, 3] = "发票日期";
+            sheet.Cells[10, 4] = "到期日";
+            sheet.Cells[10, 5] = "文件瑕疵";
+
+            int count = invoiceList.Count;
+            for (int row = 0; row < count; row++)
+            {
+                sheet.Cells[row + 11, 1] = invoiceList[row].InvoiceNo;
+                sheet.Cells[row + 11, 2] = invoiceList[row].AssignAmount;
+                sheet.Cells[row + 11, 3] = invoiceList[row].InvoiceDate;
+                sheet.Cells[row + 11, 4] = invoiceList[row].DueDate;
+                sheet.Cells[row + 11, 5] = invoiceList[row].IsFlaw==false?"否":"是";
+            }
+
+            sheet.Cells[13 + count, 1] = "本行已完成上述发票/贷项发票转让，特此通知";
+            sheet.Cells[14 + count, 4] = "中国民生银行        （业务章）";
+            sheet.Cells[15 + count, 4] = "签字：";
+            sheet.Cells[16 + count, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+
+            app.Visible = true;
         }
     }
 }

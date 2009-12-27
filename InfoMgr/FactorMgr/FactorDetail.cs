@@ -89,10 +89,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.countryNameComboBox.DataSource = Country.AllCountries();
             this.countryNameComboBox.DisplayMember = "CountryNameEN";
             this.countryNameComboBox.ValueMember = "CountryNameEN";
+            this.countryNameComboBox.SelectedIndex = -1;
 
             this.creditLineCurrencyComboBox.DataSource = Currency.AllCurrencies();
             this.creditLineCurrencyComboBox.DisplayMember = "CurrencyFormat";
             this.creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
+            this.creditLineCurrencyComboBox.SelectedIndex = -1;
 
             this.opFactorType = opFactorType;
             this.opFactorCreditLineType = opFactorCreditLineType;
@@ -103,8 +105,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
             else
             {
-                factorBindingSource.DataSource = factor;
-                this.factorCreditLineBindingSource.DataSource = factor.FactorCreditLines.ToList();
+                this.factorBindingSource.DataSource = factor;
+                this.dgvFactorCreditLines.DataSource = factor.FactorCreditLines.ToList();
                 factor.Backup();
             }
 

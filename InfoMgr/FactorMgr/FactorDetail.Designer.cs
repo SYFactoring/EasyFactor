@@ -175,21 +175,6 @@
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelCreditLine = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvFactorCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.creditLineIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.creditLineCurrencyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.creditLineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.periodBeginDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.periodEndDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.approveNoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.approveTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.creditLineStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.freezeReasonDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.freezerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.freezeDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unfreezeReasonDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unfreezerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unfreezeDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.factorCreditLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupPanelCreditLineDetail = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.btnFactorCreditLineUpdate = new DevComponents.DotNetBar.ButtonX();
@@ -214,8 +199,6 @@
             this.creditLineTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditLineCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tabItemFactorCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelAccount = new DevComponents.DotNetBar.TabControlPanel();
-            this.tabItemFactorAccount = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelFactor = new DevComponents.DotNetBar.TabControlPanel();
             this.btnFactorUpdate = new DevComponents.DotNetBar.ButtonX();
             this.btnFactorClose = new DevComponents.DotNetBar.ButtonX();
@@ -259,10 +242,42 @@
             this.countryNameComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.factorTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tabItemFactor = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabPanelAccount = new DevComponents.DotNetBar.TabControlPanel();
+            this.tabItemFactorAccount = new DevComponents.DotNetBar.TabItem(this.components);
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.creditLineIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.creditLineCurrencyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.creditLineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.periodBeginDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.periodEndDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.approveNoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.approveTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.creditLineStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.freezeReasonDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.freezerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.freezeDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unfreezeReasonDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unfreezerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unfreezeDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             factorTypeLabel = new DevComponents.DotNetBar.LabelX();
             countryNameLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -868,8 +883,8 @@
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelCreditLine);
             this.tabControl.Controls.Add(this.tabPanelFactor);
+            this.tabControl.Controls.Add(this.tabPanelCreditLine);
             this.tabControl.Controls.Add(this.tabPanelAccount);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -910,7 +925,6 @@
             this.dgvFactorCreditLines.AllowUserToDeleteRows = false;
             this.dgvFactorCreditLines.AllowUserToOrderColumns = true;
             this.dgvFactorCreditLines.AutoGenerateColumns = false;
-            this.dgvFactorCreditLines.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -953,97 +967,6 @@
             this.dgvFactorCreditLines.Size = new System.Drawing.Size(593, 279);
             this.dgvFactorCreditLines.TabIndex = 0;
             this.dgvFactorCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectFactorCreditLine);
-            // 
-            // creditLineIDDataGridViewTextBoxColumn
-            // 
-            this.creditLineIDDataGridViewTextBoxColumn.DataPropertyName = "CreditLineID";
-            this.creditLineIDDataGridViewTextBoxColumn.HeaderText = "CreditLineID";
-            this.creditLineIDDataGridViewTextBoxColumn.Name = "creditLineIDDataGridViewTextBoxColumn";
-            this.creditLineIDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // creditLineCurrencyDataGridViewTextBoxColumn
-            // 
-            this.creditLineCurrencyDataGridViewTextBoxColumn.DataPropertyName = "CreditLineCurrency";
-            this.creditLineCurrencyDataGridViewTextBoxColumn.HeaderText = "额度币种";
-            this.creditLineCurrencyDataGridViewTextBoxColumn.Name = "creditLineCurrencyDataGridViewTextBoxColumn";
-            // 
-            // creditLineDataGridViewTextBoxColumn
-            // 
-            this.creditLineDataGridViewTextBoxColumn.DataPropertyName = "CreditLine";
-            this.creditLineDataGridViewTextBoxColumn.HeaderText = "额度上限";
-            this.creditLineDataGridViewTextBoxColumn.Name = "creditLineDataGridViewTextBoxColumn";
-            // 
-            // periodBeginDataGridViewTextBoxColumn
-            // 
-            this.periodBeginDataGridViewTextBoxColumn.DataPropertyName = "PeriodBegin";
-            this.periodBeginDataGridViewTextBoxColumn.HeaderText = "有效期(始)";
-            this.periodBeginDataGridViewTextBoxColumn.Name = "periodBeginDataGridViewTextBoxColumn";
-            // 
-            // periodEndDataGridViewTextBoxColumn
-            // 
-            this.periodEndDataGridViewTextBoxColumn.DataPropertyName = "PeriodEnd";
-            this.periodEndDataGridViewTextBoxColumn.HeaderText = "有效期(终)";
-            this.periodEndDataGridViewTextBoxColumn.Name = "periodEndDataGridViewTextBoxColumn";
-            // 
-            // approveNoDataGridViewTextBoxColumn
-            // 
-            this.approveNoDataGridViewTextBoxColumn.DataPropertyName = "ApproveNo";
-            this.approveNoDataGridViewTextBoxColumn.HeaderText = "授信编号";
-            this.approveNoDataGridViewTextBoxColumn.Name = "approveNoDataGridViewTextBoxColumn";
-            // 
-            // approveTypeDataGridViewTextBoxColumn
-            // 
-            this.approveTypeDataGridViewTextBoxColumn.DataPropertyName = "ApproveType";
-            this.approveTypeDataGridViewTextBoxColumn.HeaderText = "授信类别";
-            this.approveTypeDataGridViewTextBoxColumn.Name = "approveTypeDataGridViewTextBoxColumn";
-            // 
-            // creditLineStatusDataGridViewTextBoxColumn
-            // 
-            this.creditLineStatusDataGridViewTextBoxColumn.DataPropertyName = "CreditLineStatus";
-            this.creditLineStatusDataGridViewTextBoxColumn.HeaderText = "额度状态";
-            this.creditLineStatusDataGridViewTextBoxColumn.Name = "creditLineStatusDataGridViewTextBoxColumn";
-            // 
-            // freezeReasonDataGridViewTextBoxColumn
-            // 
-            this.freezeReasonDataGridViewTextBoxColumn.DataPropertyName = "FreezeReason";
-            this.freezeReasonDataGridViewTextBoxColumn.HeaderText = "冻结原因";
-            this.freezeReasonDataGridViewTextBoxColumn.Name = "freezeReasonDataGridViewTextBoxColumn";
-            // 
-            // freezerDataGridViewTextBoxColumn
-            // 
-            this.freezerDataGridViewTextBoxColumn.DataPropertyName = "Freezer";
-            this.freezerDataGridViewTextBoxColumn.HeaderText = "冻结人";
-            this.freezerDataGridViewTextBoxColumn.Name = "freezerDataGridViewTextBoxColumn";
-            // 
-            // freezeDateDataGridViewTextBoxColumn
-            // 
-            this.freezeDateDataGridViewTextBoxColumn.DataPropertyName = "FreezeDate";
-            this.freezeDateDataGridViewTextBoxColumn.HeaderText = "冻结日期";
-            this.freezeDateDataGridViewTextBoxColumn.Name = "freezeDateDataGridViewTextBoxColumn";
-            // 
-            // unfreezeReasonDataGridViewTextBoxColumn
-            // 
-            this.unfreezeReasonDataGridViewTextBoxColumn.DataPropertyName = "UnfreezeReason";
-            this.unfreezeReasonDataGridViewTextBoxColumn.HeaderText = "解冻原因";
-            this.unfreezeReasonDataGridViewTextBoxColumn.Name = "unfreezeReasonDataGridViewTextBoxColumn";
-            // 
-            // unfreezerDataGridViewTextBoxColumn
-            // 
-            this.unfreezerDataGridViewTextBoxColumn.DataPropertyName = "Unfreezer";
-            this.unfreezerDataGridViewTextBoxColumn.HeaderText = "解冻人";
-            this.unfreezerDataGridViewTextBoxColumn.Name = "unfreezerDataGridViewTextBoxColumn";
-            // 
-            // unfreezeDateDataGridViewTextBoxColumn
-            // 
-            this.unfreezeDateDataGridViewTextBoxColumn.DataPropertyName = "UnfreezeDate";
-            this.unfreezeDateDataGridViewTextBoxColumn.HeaderText = "解冻日期";
-            this.unfreezeDateDataGridViewTextBoxColumn.Name = "unfreezeDateDataGridViewTextBoxColumn";
-            // 
-            // commentDataGridViewTextBoxColumn
-            // 
-            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
-            this.commentDataGridViewTextBoxColumn.HeaderText = "备注";
-            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
             // 
             // factorCreditLineBindingSource
             // 
@@ -1475,29 +1398,6 @@
             this.tabItemFactorCreditLine.Name = "tabItemFactorCreditLine";
             this.tabItemFactorCreditLine.Text = "额度信息";
             // 
-            // tabPanelAccount
-            // 
-            this.tabPanelAccount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelAccount.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelAccount.Name = "tabPanelAccount";
-            this.tabPanelAccount.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelAccount.Size = new System.Drawing.Size(595, 577);
-            this.tabPanelAccount.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelAccount.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelAccount.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelAccount.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelAccount.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelAccount.Style.GradientAngle = 90;
-            this.tabPanelAccount.TabIndex = 3;
-            this.tabPanelAccount.TabItem = this.tabItemFactorAccount;
-            // 
-            // tabItemFactorAccount
-            // 
-            this.tabItemFactorAccount.AttachedControl = this.tabPanelAccount;
-            this.tabItemFactorAccount.Name = "tabItemFactorAccount";
-            this.tabItemFactorAccount.Text = "账户信息";
-            // 
             // tabPanelFactor
             // 
             this.tabPanelFactor.AutoScroll = true;
@@ -1733,6 +1633,7 @@
             this.tbManagement2.Location = new System.Drawing.Point(17, 176);
             this.tbManagement2.Multiline = true;
             this.tbManagement2.Name = "tbManagement2";
+            this.tbManagement2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbManagement2.Size = new System.Drawing.Size(260, 40);
             this.tbManagement2.TabIndex = 17;
             // 
@@ -1746,6 +1647,7 @@
             this.tbManagement1.Location = new System.Drawing.Point(17, 135);
             this.tbManagement1.Multiline = true;
             this.tbManagement1.Name = "tbManagement1";
+            this.tbManagement1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbManagement1.Size = new System.Drawing.Size(260, 40);
             this.tbManagement1.TabIndex = 15;
             // 
@@ -1759,6 +1661,7 @@
             this.tbContacts4.Location = new System.Drawing.Point(300, 148);
             this.tbContacts4.Multiline = true;
             this.tbContacts4.Name = "tbContacts4";
+            this.tbContacts4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbContacts4.Size = new System.Drawing.Size(260, 40);
             this.tbContacts4.TabIndex = 13;
             // 
@@ -1772,6 +1675,7 @@
             this.tbContacts3.Location = new System.Drawing.Point(300, 107);
             this.tbContacts3.Multiline = true;
             this.tbContacts3.Name = "tbContacts3";
+            this.tbContacts3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbContacts3.Size = new System.Drawing.Size(260, 40);
             this.tbContacts3.TabIndex = 11;
             // 
@@ -1785,6 +1689,7 @@
             this.tbContacts2.Location = new System.Drawing.Point(300, 66);
             this.tbContacts2.Multiline = true;
             this.tbContacts2.Name = "tbContacts2";
+            this.tbContacts2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbContacts2.Size = new System.Drawing.Size(260, 40);
             this.tbContacts2.TabIndex = 9;
             // 
@@ -1798,6 +1703,7 @@
             this.tbContacts1.Location = new System.Drawing.Point(300, 25);
             this.tbContacts1.Multiline = true;
             this.tbContacts1.Name = "tbContacts1";
+            this.tbContacts1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbContacts1.Size = new System.Drawing.Size(260, 40);
             this.tbContacts1.TabIndex = 7;
             // 
@@ -1811,6 +1717,7 @@
             this.tbGeneralCorrespondence2.Location = new System.Drawing.Point(17, 66);
             this.tbGeneralCorrespondence2.Multiline = true;
             this.tbGeneralCorrespondence2.Name = "tbGeneralCorrespondence2";
+            this.tbGeneralCorrespondence2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbGeneralCorrespondence2.Size = new System.Drawing.Size(260, 40);
             this.tbGeneralCorrespondence2.TabIndex = 5;
             // 
@@ -1824,6 +1731,7 @@
             this.tbGeneralCorrespondence1.Location = new System.Drawing.Point(17, 25);
             this.tbGeneralCorrespondence1.Multiline = true;
             this.tbGeneralCorrespondence1.Name = "tbGeneralCorrespondence1";
+            this.tbGeneralCorrespondence1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbGeneralCorrespondence1.Size = new System.Drawing.Size(260, 40);
             this.tbGeneralCorrespondence1.TabIndex = 3;
             // 
@@ -2155,6 +2063,7 @@
             this.factorTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "FactorType", true));
             this.factorTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.factorTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.factorTypeComboBox.FormattingEnabled = true;
             this.factorTypeComboBox.Items.AddRange(new object[] {
             "保理商",
             "保险公司",
@@ -2172,6 +2081,29 @@
             this.tabItemFactor.AttachedControl = this.tabPanelFactor;
             this.tabItemFactor.Name = "tabItemFactor";
             this.tabItemFactor.Text = "基本信息";
+            // 
+            // tabPanelAccount
+            // 
+            this.tabPanelAccount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelAccount.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelAccount.Name = "tabPanelAccount";
+            this.tabPanelAccount.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelAccount.Size = new System.Drawing.Size(595, 577);
+            this.tabPanelAccount.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelAccount.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelAccount.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelAccount.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelAccount.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelAccount.Style.GradientAngle = 90;
+            this.tabPanelAccount.TabIndex = 3;
+            this.tabPanelAccount.TabItem = this.tabItemFactorAccount;
+            // 
+            // tabItemFactorAccount
+            // 
+            this.tabItemFactorAccount.AttachedControl = this.tabPanelAccount;
+            this.tabItemFactorAccount.Name = "tabItemFactorAccount";
+            this.tabItemFactorAccount.Text = "账户信息";
             // 
             // superValidator
             // 
@@ -2195,6 +2127,216 @@
             // highlighter
             // 
             this.highlighter.ContainerControl = this;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "CreditLineID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "CreditLineID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "CreditLineCurrency";
+            this.dataGridViewTextBoxColumn2.HeaderText = "额度币种";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 39;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "CreditLine";
+            this.dataGridViewTextBoxColumn3.HeaderText = "额度上限";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 40;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "PeriodBegin";
+            this.dataGridViewTextBoxColumn4.HeaderText = "有效期(始)";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 39;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "PeriodEnd";
+            this.dataGridViewTextBoxColumn5.HeaderText = "有效期(终)";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 39;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "ApproveNo";
+            this.dataGridViewTextBoxColumn6.HeaderText = "授信编号";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Width = 39;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "ApproveType";
+            this.dataGridViewTextBoxColumn7.HeaderText = "授信类别";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.Width = 40;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "CreditLineStatus";
+            this.dataGridViewTextBoxColumn8.HeaderText = "额度状态";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.Width = 39;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "FreezeReason";
+            this.dataGridViewTextBoxColumn9.HeaderText = "冻结原因";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.Width = 39;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "Freezer";
+            this.dataGridViewTextBoxColumn10.HeaderText = "冻结人";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.Width = 40;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "FreezeDate";
+            this.dataGridViewTextBoxColumn11.HeaderText = "冻结日期";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.Width = 39;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "UnfreezeReason";
+            this.dataGridViewTextBoxColumn12.HeaderText = "解冻原因";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.Width = 39;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "Unfreezer";
+            this.dataGridViewTextBoxColumn13.HeaderText = "解冻人";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.Width = 39;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "UnfreezeDate";
+            this.dataGridViewTextBoxColumn14.HeaderText = "解冻日期";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.Width = 40;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "Comment";
+            this.dataGridViewTextBoxColumn15.HeaderText = "备注";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.Width = 39;
+            // 
+            // creditLineIDDataGridViewTextBoxColumn
+            // 
+            this.creditLineIDDataGridViewTextBoxColumn.DataPropertyName = "CreditLineID";
+            this.creditLineIDDataGridViewTextBoxColumn.HeaderText = "CreditLineID";
+            this.creditLineIDDataGridViewTextBoxColumn.Name = "creditLineIDDataGridViewTextBoxColumn";
+            this.creditLineIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // creditLineCurrencyDataGridViewTextBoxColumn
+            // 
+            this.creditLineCurrencyDataGridViewTextBoxColumn.DataPropertyName = "CreditLineCurrency";
+            this.creditLineCurrencyDataGridViewTextBoxColumn.HeaderText = "额度币种";
+            this.creditLineCurrencyDataGridViewTextBoxColumn.Name = "creditLineCurrencyDataGridViewTextBoxColumn";
+            this.creditLineCurrencyDataGridViewTextBoxColumn.Width = 39;
+            // 
+            // creditLineDataGridViewTextBoxColumn
+            // 
+            this.creditLineDataGridViewTextBoxColumn.DataPropertyName = "CreditLine";
+            this.creditLineDataGridViewTextBoxColumn.HeaderText = "额度上限";
+            this.creditLineDataGridViewTextBoxColumn.Name = "creditLineDataGridViewTextBoxColumn";
+            this.creditLineDataGridViewTextBoxColumn.Width = 40;
+            // 
+            // periodBeginDataGridViewTextBoxColumn
+            // 
+            this.periodBeginDataGridViewTextBoxColumn.DataPropertyName = "PeriodBegin";
+            this.periodBeginDataGridViewTextBoxColumn.HeaderText = "有效期(始)";
+            this.periodBeginDataGridViewTextBoxColumn.Name = "periodBeginDataGridViewTextBoxColumn";
+            this.periodBeginDataGridViewTextBoxColumn.Width = 39;
+            // 
+            // periodEndDataGridViewTextBoxColumn
+            // 
+            this.periodEndDataGridViewTextBoxColumn.DataPropertyName = "PeriodEnd";
+            this.periodEndDataGridViewTextBoxColumn.HeaderText = "有效期(终)";
+            this.periodEndDataGridViewTextBoxColumn.Name = "periodEndDataGridViewTextBoxColumn";
+            this.periodEndDataGridViewTextBoxColumn.Width = 39;
+            // 
+            // approveNoDataGridViewTextBoxColumn
+            // 
+            this.approveNoDataGridViewTextBoxColumn.DataPropertyName = "ApproveNo";
+            this.approveNoDataGridViewTextBoxColumn.HeaderText = "授信编号";
+            this.approveNoDataGridViewTextBoxColumn.Name = "approveNoDataGridViewTextBoxColumn";
+            this.approveNoDataGridViewTextBoxColumn.Width = 39;
+            // 
+            // approveTypeDataGridViewTextBoxColumn
+            // 
+            this.approveTypeDataGridViewTextBoxColumn.DataPropertyName = "ApproveType";
+            this.approveTypeDataGridViewTextBoxColumn.HeaderText = "授信类别";
+            this.approveTypeDataGridViewTextBoxColumn.Name = "approveTypeDataGridViewTextBoxColumn";
+            this.approveTypeDataGridViewTextBoxColumn.Width = 40;
+            // 
+            // creditLineStatusDataGridViewTextBoxColumn
+            // 
+            this.creditLineStatusDataGridViewTextBoxColumn.DataPropertyName = "CreditLineStatus";
+            this.creditLineStatusDataGridViewTextBoxColumn.HeaderText = "额度状态";
+            this.creditLineStatusDataGridViewTextBoxColumn.Name = "creditLineStatusDataGridViewTextBoxColumn";
+            this.creditLineStatusDataGridViewTextBoxColumn.Width = 39;
+            // 
+            // freezeReasonDataGridViewTextBoxColumn
+            // 
+            this.freezeReasonDataGridViewTextBoxColumn.DataPropertyName = "FreezeReason";
+            this.freezeReasonDataGridViewTextBoxColumn.HeaderText = "冻结原因";
+            this.freezeReasonDataGridViewTextBoxColumn.Name = "freezeReasonDataGridViewTextBoxColumn";
+            this.freezeReasonDataGridViewTextBoxColumn.Width = 39;
+            // 
+            // freezerDataGridViewTextBoxColumn
+            // 
+            this.freezerDataGridViewTextBoxColumn.DataPropertyName = "Freezer";
+            this.freezerDataGridViewTextBoxColumn.HeaderText = "冻结人";
+            this.freezerDataGridViewTextBoxColumn.Name = "freezerDataGridViewTextBoxColumn";
+            this.freezerDataGridViewTextBoxColumn.Width = 40;
+            // 
+            // freezeDateDataGridViewTextBoxColumn
+            // 
+            this.freezeDateDataGridViewTextBoxColumn.DataPropertyName = "FreezeDate";
+            this.freezeDateDataGridViewTextBoxColumn.HeaderText = "冻结日期";
+            this.freezeDateDataGridViewTextBoxColumn.Name = "freezeDateDataGridViewTextBoxColumn";
+            this.freezeDateDataGridViewTextBoxColumn.Width = 39;
+            // 
+            // unfreezeReasonDataGridViewTextBoxColumn
+            // 
+            this.unfreezeReasonDataGridViewTextBoxColumn.DataPropertyName = "UnfreezeReason";
+            this.unfreezeReasonDataGridViewTextBoxColumn.HeaderText = "解冻原因";
+            this.unfreezeReasonDataGridViewTextBoxColumn.Name = "unfreezeReasonDataGridViewTextBoxColumn";
+            this.unfreezeReasonDataGridViewTextBoxColumn.Width = 39;
+            // 
+            // unfreezerDataGridViewTextBoxColumn
+            // 
+            this.unfreezerDataGridViewTextBoxColumn.DataPropertyName = "Unfreezer";
+            this.unfreezerDataGridViewTextBoxColumn.HeaderText = "解冻人";
+            this.unfreezerDataGridViewTextBoxColumn.Name = "unfreezerDataGridViewTextBoxColumn";
+            this.unfreezerDataGridViewTextBoxColumn.Width = 39;
+            // 
+            // unfreezeDateDataGridViewTextBoxColumn
+            // 
+            this.unfreezeDateDataGridViewTextBoxColumn.DataPropertyName = "UnfreezeDate";
+            this.unfreezeDateDataGridViewTextBoxColumn.HeaderText = "解冻日期";
+            this.unfreezeDateDataGridViewTextBoxColumn.Name = "unfreezeDateDataGridViewTextBoxColumn";
+            this.unfreezeDateDataGridViewTextBoxColumn.Width = 40;
+            // 
+            // commentDataGridViewTextBoxColumn
+            // 
+            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
+            this.commentDataGridViewTextBoxColumn.HeaderText = "备注";
+            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
+            this.commentDataGridViewTextBoxColumn.Width = 39;
             // 
             // FactorDetail
             // 
@@ -2232,5 +2374,21 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
     }
 }
