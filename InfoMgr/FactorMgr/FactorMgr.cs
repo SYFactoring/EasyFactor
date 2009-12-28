@@ -213,7 +213,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             string factorType = string.Empty;
             if (cbFactorType.SelectedIndex >= 0)
             {
-                factorType = cbFactorType.Items[cbFactorType.SelectedIndex].ToString();
+                factorType = cbFactorType.Text;
                 if ("全部".Equals(factorType))
                 {
                     factorType = string.Empty;
@@ -232,7 +232,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             var queryResult = App.Current.DbContext.Factors.Where(f =>
                                                    ((f.FactorCode == null ? string.Empty : f.FactorCode).Contains(tbFactorCode.Text))
                                                 && ((f.CompanyNameCN == null ? string.Empty : f.CompanyNameCN).Contains(tbFactorName.Text) || (f.CompanyNameEN == null ? string.Empty : f.CompanyNameEN).Contains(tbFactorName.Text))
-                                                && (f.FactorType.Contains(cbFactorType.Text))
+                                                && (f.FactorType.Contains(factorType))
                                                 && ((f.CountryName == null ? string.Empty : f.CountryName).Contains(country)));
 
             bs.DataSource = queryResult;

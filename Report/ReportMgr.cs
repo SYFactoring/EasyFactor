@@ -12,7 +12,7 @@ namespace CMBC.EasyFactor.Report
     /// <summary>
     /// 
     /// </summary>
-    public partial class InvoiceMgr : UserControl
+    public partial class ReportMgr : UserControl
     {
         /// <summary>
         /// 
@@ -22,18 +22,18 @@ namespace CMBC.EasyFactor.Report
         /// <summary>
         /// 
         /// </summary>
-        private OpInvoiceType opInvoiceType;
+        private OpReportType opReportType;
 
         /// <summary>
         /// 
         /// </summary>
-        public enum OpInvoiceType
+        public enum OpReportType
         {
             /// <summary>
             /// 
             /// </summary>
             REPORT_AR,
-            
+
             /// <summary>
             /// 
             /// </summary>
@@ -43,11 +43,11 @@ namespace CMBC.EasyFactor.Report
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="opInvoiceType"></param>
-        public InvoiceMgr(OpInvoiceType opInvoiceType)
+        /// <param name="opReportType"></param>
+        public ReportMgr(OpReportType opReportType)
         {
             InitializeComponent();
-            this.opInvoiceType = opInvoiceType;
+            this.opReportType = opReportType;
             this.bs = new BindingSource();
             this.dgvInvoices.AutoGenerateColumns = false;
             this.dgvInvoices.DataSource = this.bs;
@@ -95,7 +95,7 @@ namespace CMBC.EasyFactor.Report
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
-        private void GenerateAssignReport(object sender, EventArgs e)
+        private void GenerateAssignReport(List<Invoice> invoiceList)
         {
             Microsoft.Office.Interop.Excel.Application app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -110,18 +110,15 @@ namespace CMBC.EasyFactor.Report
                 return;
             }
 
-            List<Invoice> invoiceList = this.bs.DataSource as List<Invoice>;
-            if (invoiceList.Count == 0)
-            {
-                return;
-            }
             Invoice firstInvoice = invoiceList[0];
             Case selectedCase = firstInvoice.InvoiceAssignBatch.CDA.Case;
 
-            sheet.Cells[1, 1] = String.Format("致{0}公司", selectedCase.SellerClient.ToString());
+            sheet.Cells[1, 1] = "致";
+            sheet.Cells[1, 2] = selectedCase.SellerClient.ToString();
+            sheet.Cells[1, 3] = "公司";
             sheet.Cells[3, 3] = "应收账款转让明细表";
             sheet.Cells[5, 1] = "买方:";
-            sheet.Cells[5, 2] = String.Format("{0}", selectedCase.BuyerClient.ToString());
+            sheet.Cells[5, 2] = selectedCase.BuyerClient.ToString();
             sheet.Cells[5, 3] = "（应收账款债务人）";
             sheet.Cells[6, 1] = "进口保理商：";
             sheet.Cells[6, 2] = selectedCase.BuyerFactor.ToString();
@@ -141,7 +138,7 @@ namespace CMBC.EasyFactor.Report
                 sheet.Cells[row + 11, 2] = invoiceList[row].AssignAmount;
                 sheet.Cells[row + 11, 3] = invoiceList[row].InvoiceDate;
                 sheet.Cells[row + 11, 4] = invoiceList[row].DueDate;
-                sheet.Cells[row + 11, 5] = invoiceList[row].IsFlaw==false?"否":"是";
+                sheet.Cells[row + 11, 5] = invoiceList[row].IsFlaw == false ? "否" : "是";
             }
 
             sheet.Cells[13 + count, 1] = "本行已完成上述发票/贷项发票转让，特此通知";
@@ -150,6 +147,92 @@ namespace CMBC.EasyFactor.Report
             sheet.Cells[16 + count, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
             app.Visible = true;
+        }
+
+        private void GenerateFinanceReport(List<Invoice> invoiceList)
+        {
+            Microsoft.Office.Interop.Excel.Application app = new ApplicationClass() { Visible = false };
+            if (app == null)
+            {
+                MessageBox.Show("Excel 程序无法启动!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            Workbook workbook = app.Workbooks.Add(true);
+            Worksheet sheet = workbook.Worksheets[1] as Worksheet;
+            if (!(this.bs.DataSource is List<Invoice>))
+            {
+                return;
+            }
+
+            Invoice firstInvoice = invoiceList[0];
+            Case selectedCase = firstInvoice.InvoiceAssignBatch.CDA.Case;
+
+
+            sheet.Cells[2, 3] = "可融资账款明细表";
+            sheet.Cells[4, 1] = "卖方";
+            sheet.Cells[4, 2] = selectedCase.SellerClient.ToString();
+            sheet.Cells[4, 3] = "公司";
+            sheet.Cells[5, 1] = "买方:";
+            sheet.Cells[5, 2] = selectedCase.BuyerClient.ToString();
+            sheet.Cells[5, 3] = "（应收账款债务人）";
+            sheet.Cells[6, 1] = "进口保理商：";
+            sheet.Cells[6, 2] = selectedCase.BuyerFactor.ToString();
+            sheet.Cells[7, 1] = "信用风险额度：";
+            sheet.Cells[8, 1] = "应收账款余额：";
+            sheet.Cells[9, 1] = "预付款额度：";
+            sheet.Cells[10, 1] = "融资余额：";
+
+            sheet.Cells[12, 1] = "发票号";
+            sheet.Cells[12, 2] = "转让金额";
+            sheet.Cells[12, 3] = "发票日期";
+            sheet.Cells[12, 4] = "到期日";
+            sheet.Cells[12, 5] = "备注";
+
+            int count = invoiceList.Count;
+            for (int row = 0; row < count; row++)
+            {
+                sheet.Cells[row + 13, 1] = invoiceList[row].InvoiceNo;
+                sheet.Cells[row + 13, 2] = invoiceList[row].AssignAmount;
+                sheet.Cells[row + 13, 3] = invoiceList[row].InvoiceDate;
+                sheet.Cells[row + 13, 4] = invoiceList[row].DueDate;
+                sheet.Cells[row + 13, 5] = invoiceList[row].Comment;
+            }
+
+            sheet.Cells[16 + count, 4] = "中国民生银行        （业务章）";
+            sheet.Cells[17 + count, 4] = "签字：";
+            sheet.Cells[18 + count, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+
+            app.Visible = true;
+        }
+
+        private void GenerateReport(object sender, EventArgs e)
+        {
+            List<Invoice> invoiceList = this.bs.DataSource as List<Invoice>;
+            if (invoiceList.Count == 0)
+            {
+                return;
+            }
+
+            switch (opReportType)
+            {
+                case OpReportType.REPORT_AR:
+                    GenerateAssignReport(invoiceList);
+                    break;
+                case OpReportType.REPORT_FINANCE:
+                    GenerateFinanceReport(invoiceList);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Reset(object sender, EventArgs e)
+        {
+            this.tbSeller.Text = string.Empty;
+            this.tbBuyer.Text = string.Empty;
+            this.tbFactor.Text = string.Empty;
+            this.diAssignDateBegin.Value = default(DateTime);
+            this.diAssignDateEnd.Value = default(DateTime);
         }
     }
 }

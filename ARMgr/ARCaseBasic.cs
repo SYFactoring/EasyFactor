@@ -161,6 +161,10 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     (control as InvoiceFinance).CDA = cda;
                 }
+                else if (control is InvoicePayment)
+                {
+                    (control as InvoicePayment).CDA = cda;
+                }
             }
             else
             {
@@ -175,6 +179,10 @@ namespace CMBC.EasyFactor.ARMgr
                 else if (control is InvoiceFinance)
                 {
                     (control as InvoiceFinance).ResetControlsStatus();
+                }
+                else if (control is InvoicePayment)
+                {
+                    (control as InvoicePayment).ResetControlsStatus();
                 }
             }
         }

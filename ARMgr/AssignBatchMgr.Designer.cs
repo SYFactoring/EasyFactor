@@ -47,23 +47,23 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.btnAssignBatchQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbAssignBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblAssignBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvAssignBatch = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAssignBatch)).BeginInit();
             this.SuspendLayout();
@@ -106,7 +106,7 @@
             // 
             // 
             this.tbAssignBatchNo.Border.Class = "TextBoxBorder";
-            this.tbAssignBatchNo.Location = new System.Drawing.Point(69, 3);
+            this.tbAssignBatchNo.Location = new System.Drawing.Point(70, 7);
             this.tbAssignBatchNo.Name = "tbAssignBatchNo";
             this.tbAssignBatchNo.Size = new System.Drawing.Size(100, 20);
             this.tbAssignBatchNo.TabIndex = 1;
@@ -118,7 +118,7 @@
             // 
             // 
             this.lblAssignBatchNo.BackgroundStyle.Class = "";
-            this.lblAssignBatchNo.Location = new System.Drawing.Point(4, 4);
+            this.lblAssignBatchNo.Location = new System.Drawing.Point(4, 9);
             this.lblAssignBatchNo.Name = "lblAssignBatchNo";
             this.lblAssignBatchNo.Size = new System.Drawing.Size(59, 16);
             this.lblAssignBatchNo.TabIndex = 0;
@@ -164,38 +164,6 @@
             this.dgvAssignBatch.TabIndex = 1;
             this.dgvAssignBatch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectAssignBatch);
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "AssignBatchNo";
-            this.dataGridViewTextBoxColumn1.HeaderText = "转让批号";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "BatchCurrency";
-            this.dataGridViewTextBoxColumn2.HeaderText = "批次币种";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "BatchDate";
-            dataGridViewCellStyle4.Format = "d";
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewTextBoxColumn3.HeaderText = "转让日期";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "CreateUserName";
-            this.dataGridViewTextBoxColumn4.HeaderText = "经办人";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Comment";
-            this.dataGridViewTextBoxColumn5.HeaderText = "备注";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
             // colAssignBatchNo
             // 
             this.colAssignBatchNo.DataPropertyName = "AssignBatchNo";
@@ -232,6 +200,38 @@
             this.colComment.HeaderText = "备注";
             this.colComment.Name = "colComment";
             this.colComment.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "AssignBatchNo";
+            this.dataGridViewTextBoxColumn1.HeaderText = "转让批号";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "BatchCurrency";
+            this.dataGridViewTextBoxColumn2.HeaderText = "批次币种";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "BatchDate";
+            dataGridViewCellStyle4.Format = "d";
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewTextBoxColumn3.HeaderText = "转让日期";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "CreateUserName";
+            this.dataGridViewTextBoxColumn4.HeaderText = "经办人";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Comment";
+            this.dataGridViewTextBoxColumn5.HeaderText = "备注";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
             // AssignBatchMgr
             // 

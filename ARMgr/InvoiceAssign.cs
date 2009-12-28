@@ -8,18 +8,21 @@ namespace CMBC.EasyFactor.ARMgr
 {
     using System;
     using System.Linq;
-    using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using Microsoft.Office.Interop.Excel;
-    using System.Collections.Generic;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceAssign : UserControl
     {
+        #region Fields (1)
+
+        private CDA _CDA;
+
+        #endregion Fields
+
         #region Constructors (1)
 
         /// <summary>
@@ -29,6 +32,8 @@ namespace CMBC.EasyFactor.ARMgr
         {
             this.InitializeComponent();
             this.dgvInvoices.AutoGenerateColumns = false;
+            this.dgvInvoices.ReadOnly = true;
+            this.superValidator.Enabled = false;
 
             this.colInvoiceCurrency.DataSource = Currency.AllCurrencies().ToList();
             this.colInvoiceCurrency.DisplayMember = "CurrencyCode";
@@ -44,15 +49,34 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         public CDA CDA
         {
-            get;
-            set;
+            set
+            {
+                this._CDA = value;
+                this.dgvInvoices.ReadOnly = false;
+                this.superValidator.Enabled = true;
+            }
         }
 
         #endregion Properties
 
-        #region Methods (6)
+        #region Methods (10)
 
-        // Public Methods (1) 
+        // Public Methods (2) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cda"></param>
+        /// <returns></returns>
+        public static string GenerateAssignBatchNo(CDA cda)
+        {
+            Client seller = cda.Case.SellerClient;
+            Client buyer = cda.Case.BuyerClient;
+            string date = String.Format("{0:yyyy}{0:MM}{0:dd}", DateTime.Today);
+            int batchCount = cda.InvoiceAssignBatches.Count;
+            string assignNo = seller.ClientEDICode.Substring(0, 5) + buyer.ClientEDICode.Substring(3, 2) + date + "-" + String.Format("{0:D2}", batchCount + 1);
+            return assignNo;
+        }
 
         /// <summary>
         /// 
@@ -66,7 +90,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoiceBindingSource.DataSource = typeof(Invoice);
             this.invoiceAssignBatchBindingSource.DataSource = typeof(InvoiceAssignBatch);
         }
-        // Private Methods (5) 
+        // Private Methods (8) 
 
         /// <summary>
         /// Show detail info of selected inovice
@@ -88,6 +112,27 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
                     invoiceDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        private void dgvInvoices_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DetailInvoice(null, null);
+        }
+
+        private void dgvInvoices_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (this._CDA != null)
+            {
+                string currency = this._CDA.Case.InvoiceCurrency;
+                if (this.dgvInvoices.Rows[e.RowIndex].Cells[1].Value == null)
+                {
+                    this.dgvInvoices.Rows[e.RowIndex].Cells[1].Value = currency;
+                }
+                if (this.dgvInvoices.Rows[e.RowIndex].Cells[5].Value == null)
+                {
+                    this.dgvInvoices.Rows[e.RowIndex].Cells[5].Value = DateTime.Now;
                 }
             }
         }
@@ -116,6 +161,12 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        private void ImportAssignBatch(object sender, EventArgs e)
+        {
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
+            importForm.Show();
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -123,14 +174,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void NewAssignBatch(object sender, EventArgs e)
         {
-            if (this.CDA == null)
+            if (this._CDA == null)
             {
                 MessageBox.Show("没有有效的额度通知书", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             InvoiceAssignBatch assignBatch = new InvoiceAssignBatch();
-            assignBatch.AssignBatchNo = GenerateAssignBatchNo(this.CDA);
+            assignBatch.AssignBatchNo = GenerateAssignBatchNo(this._CDA);
             assignBatch.BatchDate = DateTime.Now;
             assignBatch.CreateUserName = App.Current.CurUser.Name;
             assignBatch.IsCreateMsg = false;
@@ -141,34 +192,22 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cda"></param>
-        /// <returns></returns>
-        public static string GenerateAssignBatchNo(CDA cda)
-        {
-
-            Client seller = cda.Case.SellerClient;
-            Client buyer = cda.Case.BuyerClient;
-            string date = String.Format("{0:yyyy}{0:MM}{0:dd}", DateTime.Today);
-            int batchCount = cda.InvoiceAssignBatches.Count;
-            string assignNo = seller.ClientEDICode.Substring(0, 5) + buyer.ClientEDICode.Substring(3, 2) + date + "-" + String.Format("{0:D2}", batchCount + 1);
-            return assignNo;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SaveAssignBatch(object sender, EventArgs e)
         {
-            if (this.assignBatchNoTextBox.Text == string.Empty)
+            if (this._CDA == null)
+            {
+                return;
+            }
+            if (!this.superValidator.Validate())
             {
                 return;
             }
 
             bool isSaveOK = true;
             InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
-            assignBatch.CDA = this.CDA;
+            assignBatch.CDA = this._CDA;
             try
             {
                 App.Current.DbContext.SubmitChanges();
@@ -191,12 +230,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectAssignBatch(object sender, EventArgs e)
         {
-            if (this.CDA == null)
+            if (this._CDA == null)
             {
                 return;
             }
 
-            AssignBatchMgr assignBatchMgr = new AssignBatchMgr(this.CDA);
+            AssignBatchMgr assignBatchMgr = new AssignBatchMgr(this._CDA);
             QueryForm queryUI = new QueryForm(assignBatchMgr, "选择转让批次");
             assignBatchMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
@@ -209,27 +248,5 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
-
-        private void ImportAssignBatch(object sender, EventArgs e)
-        {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
-            importForm.Show();
-        }
-
-        private void dgvInvoices_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            DetailInvoice(null, null);
-        }
-
-        private void dgvInvoices_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            if (this.CDA != null)
-            {
-                string currency = this.CDA.Case.InvoiceCurrency;
-                this.dgvInvoices.Rows[e.RowIndex].Cells[1].Value=currency;
-                this.dgvInvoices.Rows[e.RowIndex].Cells[5].Value = DateTime.Now;
-            }
-        }
-
     }
 }

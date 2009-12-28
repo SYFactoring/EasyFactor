@@ -29,7 +29,7 @@ namespace CMBC.EasyFactor
                 return;
             }
 
-            // loginWindow.ShowDialog();
+            //loginWindow.ShowDialog();
             loginWindow.AutoLogin();
 
             if (App.Current.CurUser != null)

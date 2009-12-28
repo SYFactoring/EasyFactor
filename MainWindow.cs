@@ -399,10 +399,38 @@ namespace CMBC.EasyFactor
 
 		#endregion Methods 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ARPaymentReport(object sender, EventArgs e)
         {
-            InvoiceMgr assignMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.REPORT_AR);
+            ReportMgr assignMgr = new ReportMgr(ReportMgr.OpReportType.REPORT_AR);
             this.SetDetailPanel(assignMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FinanceReport(object sender, EventArgs e)
+        {
+            ReportMgr assignMgr = new ReportMgr(ReportMgr.OpReportType.REPORT_FINANCE);
+            this.SetDetailPanel(assignMgr);
+        }
+
+        private void QueryInvoice(object sender, EventArgs e)
+        {
+            InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.INVOICE_QUERY);
+            this.SetDetailPanel(invoiceMgr);
+        }
+
+        private void FlawResolve(object sender, EventArgs e)
+        {
+            InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE);
+            this.SetDetailPanel(invoiceMgr);
         }
     }
 }

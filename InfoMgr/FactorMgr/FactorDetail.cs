@@ -189,7 +189,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             {
                 MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.dgvFactorCreditLines.DataSource = factor.FactorCreditLines.ToList();
-                this.factorBindingSource.DataSource = null;
+                this.factorCreditLineBindingSource.DataSource = typeof(FactorCreditLine);
             }
 
         }

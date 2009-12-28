@@ -306,7 +306,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
-                this.clientCreditLineBindingSource.DataSource = null;
+                this.clientCreditLineBindingSource.DataSource = typeof(ClientCreditLine);
+                this.SetClientCreditLineEditable(false);
             }
 
         }
@@ -347,7 +348,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.dgvContracts.DataSource = client.Contracts.ToList();
-                this.contractBindingSource.DataSource = null;
+                this.contractBindingSource.DataSource = typeof(Contract);
+                this.SetContractEditable(false);
             }
         }
 
@@ -1154,6 +1156,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             else
             {
                 e.IsValid = true;
+            }
+        }
+
+        private void customValidator6_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.tbContractCode.Text.Length == 10)
+            {
+                e.IsValid = true;
+            }
+            else
+            {
+                e.IsValid = false;
             }
         }
     }

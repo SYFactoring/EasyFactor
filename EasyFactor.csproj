@@ -127,6 +127,12 @@
     <Compile Include="ARMgr\InvoiceFinance.Designer.cs">
       <DependentUpon>InvoiceFinance.cs</DependentUpon>
     </Compile>
+    <Compile Include="ARMgr\InvoiceMgr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ARMgr\InvoiceMgr.Designer.cs">
+      <DependentUpon>InvoiceMgr.cs</DependentUpon>
+    </Compile>
     <Compile Include="ARMgr\InvoicePayment.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -227,11 +233,11 @@
     <Compile Include="InfoMgr\FactorMgr\FactorMgr.Designer.cs">
       <DependentUpon>FactorMgr.cs</DependentUpon>
     </Compile>
-    <Compile Include="Report\InvoiceMgr.cs">
+    <Compile Include="Report\ReportMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Report\InvoiceMgr.Designer.cs">
-      <DependentUpon>InvoiceMgr.cs</DependentUpon>
+    <Compile Include="Report\ReportMgr.Designer.cs">
+      <DependentUpon>ReportMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ImportForm.cs">
       <SubType>Form</SubType>
@@ -298,6 +304,10 @@
       <DependentUpon>InvoiceFinance.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\InvoiceMgr.resx">
+      <DependentUpon>InvoiceMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\InvoicePayment.resx">
       <DependentUpon>InvoicePayment.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -354,8 +364,8 @@
       <DependentUpon>FactorMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\InvoiceMgr.resx">
-      <DependentUpon>InvoiceMgr.cs</DependentUpon>
+    <EmbeddedResource Include="Report\ReportMgr.resx">
+      <DependentUpon>ReportMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Utils\ImportForm.resx">
