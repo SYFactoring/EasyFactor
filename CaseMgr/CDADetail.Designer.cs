@@ -214,14 +214,15 @@
             this.btnCDAReset = new DevComponents.DotNetBar.ButtonX();
             this.rangeValidator1 = new DevComponents.DotNetBar.Validator.RangeValidator();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.compareValidator2 = new DevComponents.DotNetBar.Validator.CompareValidator();
             this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
             this.compareValidator3 = new DevComponents.DotNetBar.Validator.CompareValidator();
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -463,7 +464,7 @@
             // 
             // 
             financeLineCurrLabel.BackgroundStyle.Class = "";
-            financeLineCurrLabel.Location = new System.Drawing.Point(15, 47);
+            financeLineCurrLabel.Location = new System.Drawing.Point(17, 52);
             financeLineCurrLabel.Name = "financeLineCurrLabel";
             financeLineCurrLabel.Size = new System.Drawing.Size(72, 16);
             financeLineCurrLabel.TabIndex = 17;
@@ -505,7 +506,7 @@
             // 
             // 
             financeProportionLabel.BackgroundStyle.Class = "";
-            financeProportionLabel.Location = new System.Drawing.Point(241, 80);
+            financeProportionLabel.Location = new System.Drawing.Point(260, 77);
             financeProportionLabel.Name = "financeProportionLabel";
             financeProportionLabel.Size = new System.Drawing.Size(59, 16);
             financeProportionLabel.TabIndex = 26;
@@ -519,7 +520,7 @@
             // 
             // 
             orderNumberLabel.BackgroundStyle.Class = "";
-            orderNumberLabel.Location = new System.Drawing.Point(37, 148);
+            orderNumberLabel.Location = new System.Drawing.Point(43, 145);
             orderNumberLabel.Name = "orderNumberLabel";
             orderNumberLabel.Size = new System.Drawing.Size(47, 16);
             orderNumberLabel.TabIndex = 28;
@@ -533,7 +534,7 @@
             // 
             // 
             paymentTermsLabel.BackgroundStyle.Class = "";
-            paymentTermsLabel.Location = new System.Drawing.Point(25, 99);
+            paymentTermsLabel.Location = new System.Drawing.Point(30, 99);
             paymentTermsLabel.Name = "paymentTermsLabel";
             paymentTermsLabel.Size = new System.Drawing.Size(59, 16);
             paymentTermsLabel.TabIndex = 30;
@@ -547,7 +548,7 @@
             // 
             // 
             financeGracePeriodLabel.BackgroundStyle.Class = "";
-            financeGracePeriodLabel.Location = new System.Drawing.Point(420, 80);
+            financeGracePeriodLabel.Location = new System.Drawing.Point(436, 78);
             financeGracePeriodLabel.Name = "financeGracePeriodLabel";
             financeGracePeriodLabel.Size = new System.Drawing.Size(72, 16);
             financeGracePeriodLabel.TabIndex = 32;
@@ -561,7 +562,7 @@
             // 
             // 
             deductiblesLabel.BackgroundStyle.Class = "";
-            deductiblesLabel.Location = new System.Drawing.Point(207, 145);
+            deductiblesLabel.Location = new System.Drawing.Point(267, 148);
             deductiblesLabel.Name = "deductiblesLabel";
             deductiblesLabel.Size = new System.Drawing.Size(47, 16);
             deductiblesLabel.TabIndex = 34;
@@ -575,7 +576,7 @@
             // 
             // 
             lossThresholdLabel.BackgroundStyle.Class = "";
-            lossThresholdLabel.Location = new System.Drawing.Point(367, 145);
+            lossThresholdLabel.Location = new System.Drawing.Point(429, 148);
             lossThresholdLabel.Name = "lossThresholdLabel";
             lossThresholdLabel.Size = new System.Drawing.Size(84, 16);
             lossThresholdLabel.TabIndex = 36;
@@ -589,7 +590,7 @@
             // 
             // 
             priceLabel.BackgroundStyle.Class = "";
-            priceLabel.Location = new System.Drawing.Point(19, 179);
+            priceLabel.Location = new System.Drawing.Point(19, 178);
             priceLabel.Name = "priceLabel";
             priceLabel.Size = new System.Drawing.Size(72, 16);
             priceLabel.TabIndex = 0;
@@ -631,7 +632,7 @@
             // 
             // 
             commissonTypeLabel.BackgroundStyle.Class = "";
-            commissonTypeLabel.Location = new System.Drawing.Point(13, 199);
+            commissonTypeLabel.Location = new System.Drawing.Point(30, 203);
             commissonTypeLabel.Name = "commissonTypeLabel";
             commissonTypeLabel.Size = new System.Drawing.Size(59, 16);
             commissonTypeLabel.TabIndex = 6;
@@ -645,7 +646,7 @@
             // 
             // 
             commissionTypeCommentLabel.BackgroundStyle.Class = "";
-            commissionTypeCommentLabel.Location = new System.Drawing.Point(244, 199);
+            commissionTypeCommentLabel.Location = new System.Drawing.Point(244, 203);
             commissionTypeCommentLabel.Name = "commissionTypeCommentLabel";
             commissionTypeCommentLabel.Size = new System.Drawing.Size(34, 16);
             commissionTypeCommentLabel.TabIndex = 8;
@@ -673,7 +674,7 @@
             // 
             // 
             cDAValueDateLabel.BackgroundStyle.Class = "";
-            cDAValueDateLabel.Location = new System.Drawing.Point(19, 5);
+            cDAValueDateLabel.Location = new System.Drawing.Point(43, 5);
             cDAValueDateLabel.Name = "cDAValueDateLabel";
             cDAValueDateLabel.Size = new System.Drawing.Size(47, 16);
             cDAValueDateLabel.TabIndex = 2;
@@ -729,7 +730,7 @@
             // 
             // 
             commentLabel.BackgroundStyle.Class = "";
-            commentLabel.Location = new System.Drawing.Point(25, 55);
+            commentLabel.Location = new System.Drawing.Point(53, 55);
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(34, 16);
             commentLabel.TabIndex = 14;
@@ -757,7 +758,7 @@
             // 
             // 
             cDADueDateLabel.BackgroundStyle.Class = "";
-            cDADueDateLabel.Location = new System.Drawing.Point(197, 5);
+            cDADueDateLabel.Location = new System.Drawing.Point(267, 7);
             cDADueDateLabel.Name = "cDADueDateLabel";
             cDADueDateLabel.Size = new System.Drawing.Size(47, 16);
             cDADueDateLabel.TabIndex = 18;
@@ -771,7 +772,7 @@
             // 
             // 
             cDAStatusLabel.BackgroundStyle.Class = "";
-            cDAStatusLabel.Location = new System.Drawing.Point(355, 5);
+            cDAStatusLabel.Location = new System.Drawing.Point(449, 5);
             cDAStatusLabel.Name = "cDAStatusLabel";
             cDAStatusLabel.Size = new System.Drawing.Size(59, 16);
             cDAStatusLabel.TabIndex = 19;
@@ -785,7 +786,7 @@
             // 
             // 
             noticeMethodLabel.BackgroundStyle.Class = "";
-            noticeMethodLabel.Location = new System.Drawing.Point(5, 33);
+            noticeMethodLabel.Location = new System.Drawing.Point(30, 31);
             noticeMethodLabel.Name = "noticeMethodLabel";
             noticeMethodLabel.Size = new System.Drawing.Size(59, 16);
             noticeMethodLabel.TabIndex = 20;
@@ -1227,7 +1228,7 @@
             // 
             this.lossThresholdTextBox.Border.Class = "TextBoxBorder";
             this.lossThresholdTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "LossThreshold", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.lossThresholdTextBox.Location = new System.Drawing.Point(457, 145);
+            this.lossThresholdTextBox.Location = new System.Drawing.Point(514, 144);
             this.lossThresholdTextBox.Name = "lossThresholdTextBox";
             this.lossThresholdTextBox.Size = new System.Drawing.Size(100, 20);
             this.lossThresholdTextBox.TabIndex = 37;
@@ -1239,10 +1240,11 @@
             // 
             this.commissionTypeCommentTextBox.Border.Class = "TextBoxBorder";
             this.commissionTypeCommentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CommissionTypeComment", true));
-            this.commissionTypeCommentTextBox.Location = new System.Drawing.Point(282, 199);
+            this.commissionTypeCommentTextBox.Location = new System.Drawing.Point(282, 201);
             this.commissionTypeCommentTextBox.Name = "commissionTypeCommentTextBox";
             this.commissionTypeCommentTextBox.Size = new System.Drawing.Size(415, 20);
             this.commissionTypeCommentTextBox.TabIndex = 9;
+            this.superValidator.SetValidator1(this.commissionTypeCommentTextBox, this.customValidator1);
             // 
             // deductiblesTextBox
             // 
@@ -1251,7 +1253,7 @@
             // 
             this.deductiblesTextBox.Border.Class = "TextBoxBorder";
             this.deductiblesTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Deductibles", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.deductiblesTextBox.Location = new System.Drawing.Point(257, 144);
+            this.deductiblesTextBox.Location = new System.Drawing.Point(320, 145);
             this.deductiblesTextBox.Name = "deductiblesTextBox";
             this.deductiblesTextBox.Size = new System.Drawing.Size(100, 20);
             this.deductiblesTextBox.TabIndex = 35;
@@ -1275,7 +1277,7 @@
             // 
             this.financeGracePeriodTextBox.Border.Class = "TextBoxBorder";
             this.financeGracePeriodTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceGracePeriod", true));
-            this.financeGracePeriodTextBox.Location = new System.Drawing.Point(494, 76);
+            this.financeGracePeriodTextBox.Location = new System.Drawing.Point(514, 76);
             this.financeGracePeriodTextBox.Name = "financeGracePeriodTextBox";
             this.financeGracePeriodTextBox.Size = new System.Drawing.Size(100, 20);
             this.financeGracePeriodTextBox.TabIndex = 33;
@@ -1318,7 +1320,6 @@
             this.iFPriceTextBox.Name = "iFPriceTextBox";
             this.iFPriceTextBox.Size = new System.Drawing.Size(72, 20);
             this.iFPriceTextBox.TabIndex = 3;
-            this.iFPriceTextBox.Leave += new System.EventHandler(this.CaculateEF);
             // 
             // orderNumberTextBox
             // 
@@ -1343,7 +1344,6 @@
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(58, 20);
             this.priceTextBox.TabIndex = 1;
-            this.priceTextBox.Leave += new System.EventHandler(this.CaculateEF);
             // 
             // financeProportionTextBox
             // 
@@ -1352,7 +1352,7 @@
             // 
             this.financeProportionTextBox.Border.Class = "TextBoxBorder";
             this.financeProportionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceProportion", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p0"));
-            this.financeProportionTextBox.Location = new System.Drawing.Point(303, 76);
+            this.financeProportionTextBox.Location = new System.Drawing.Point(320, 76);
             this.financeProportionTextBox.Name = "financeProportionTextBox";
             this.financeProportionTextBox.Size = new System.Drawing.Size(100, 20);
             this.financeProportionTextBox.TabIndex = 27;
@@ -1657,7 +1657,7 @@
             // 
             // 
             this.cbNoticeMethodFax.BackgroundStyle.Class = "";
-            this.cbNoticeMethodFax.Location = new System.Drawing.Point(130, 33);
+            this.cbNoticeMethodFax.Location = new System.Drawing.Point(150, 33);
             this.cbNoticeMethodFax.Name = "cbNoticeMethodFax";
             this.cbNoticeMethodFax.Size = new System.Drawing.Size(51, 16);
             this.cbNoticeMethodFax.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1672,7 +1672,7 @@
             // 
             // 
             this.cbNoticeMethodEmail.BackgroundStyle.Class = "";
-            this.cbNoticeMethodEmail.Location = new System.Drawing.Point(73, 33);
+            this.cbNoticeMethodEmail.Location = new System.Drawing.Point(101, 33);
             this.cbNoticeMethodEmail.Name = "cbNoticeMethodEmail";
             this.cbNoticeMethodEmail.Size = new System.Drawing.Size(51, 16);
             this.cbNoticeMethodEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1685,7 +1685,7 @@
             this.cDAStatusComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cDAStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cDAStatusComboBox.FormattingEnabled = true;
-            this.cDAStatusComboBox.Location = new System.Drawing.Point(420, 2);
+            this.cDAStatusComboBox.Location = new System.Drawing.Point(514, 5);
             this.cDAStatusComboBox.Name = "cDAStatusComboBox";
             this.cDAStatusComboBox.Size = new System.Drawing.Size(121, 21);
             this.cDAStatusComboBox.TabIndex = 20;
@@ -1698,7 +1698,7 @@
             this.cDADueDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.cDADueDateDateTimePicker.ButtonDropDown.Visible = true;
             this.cDADueDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "CDADueDate", true));
-            this.cDADueDateDateTimePicker.Location = new System.Drawing.Point(257, 3);
+            this.cDADueDateDateTimePicker.Location = new System.Drawing.Point(320, 3);
             // 
             // 
             // 
@@ -1721,7 +1721,7 @@
             this.cDADueDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.cDADueDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.cDADueDateDateTimePicker.Name = "cDADueDateDateTimePicker";
-            this.cDADueDateDateTimePicker.Size = new System.Drawing.Size(84, 20);
+            this.cDADueDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
             this.cDADueDateDateTimePicker.TabIndex = 19;
             this.superValidator.SetValidator1(this.cDADueDateDateTimePicker, this.compareValidator3);
             // 
@@ -1760,7 +1760,7 @@
             this.faxTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Fax", true));
             this.faxTextBox.Location = new System.Drawing.Point(604, 29);
             this.faxTextBox.Name = "faxTextBox";
-            this.faxTextBox.Size = new System.Drawing.Size(57, 20);
+            this.faxTextBox.Size = new System.Drawing.Size(100, 20);
             this.faxTextBox.TabIndex = 13;
             // 
             // emailTextBox
@@ -1819,7 +1819,7 @@
             this.cDAValueDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.cDAValueDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.cDAValueDateDateTimePicker.Name = "cDAValueDateDateTimePicker";
-            this.cDAValueDateDateTimePicker.Size = new System.Drawing.Size(85, 20);
+            this.cDAValueDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
             this.cDAValueDateDateTimePicker.TabIndex = 3;
             // 
             // btnCDAUpdate
@@ -1860,7 +1860,7 @@
             // 
             // rangeValidator1
             // 
-            this.rangeValidator1.ErrorMessage = "Your error message here.";
+            this.rangeValidator1.ErrorMessage = "必填";
             this.rangeValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.rangeValidator1.MaximumValue = "1";
             this.rangeValidator1.MinimumValue = "0";
@@ -1873,38 +1873,38 @@
             // 
             // requiredFieldValidator2
             // 
-            this.requiredFieldValidator2.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator2.ErrorMessage = "必填";
             this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator1
             // 
-            this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator1.ErrorMessage = "必填";
             this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // compareValidator2
             // 
             this.compareValidator2.ControlToCompare = this.financeLinePeriodBeginDateTimePicker;
-            this.compareValidator2.ErrorMessage = "Your error message here.";
+            this.compareValidator2.ErrorMessage = "终止日期应该大于起始日期";
             this.compareValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.compareValidator2.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             // 
             // compareValidator1
             // 
             this.compareValidator1.ControlToCompare = this.creditCoverPeriodBeginDateTimePicker;
-            this.compareValidator1.ErrorMessage = "Your error message here.";
+            this.compareValidator1.ErrorMessage = "终止日期应该大于起始日期";
             this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             // 
             // compareValidator3
             // 
             this.compareValidator3.ControlToCompare = this.cDAValueDateDateTimePicker;
-            this.compareValidator3.ErrorMessage = "Your error message here.";
+            this.compareValidator3.ErrorMessage = "到期日应该大于生效日";
             this.compareValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.compareValidator3.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             // 
             // regularExpressionValidator1
             // 
-            this.regularExpressionValidator1.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator1.ErrorMessage = "需要符合Email地址格式";
             this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator1.ValidationExpression = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9" +
                 "})$";
@@ -1917,6 +1917,12 @@
             // highlighter
             // 
             this.highlighter.ContainerControl = this;
+            // 
+            // customValidator1
+            // 
+            this.customValidator1.ErrorMessage = "Your error message here.";
+            this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
             // 
             // CDADetail
             // 
@@ -1953,5 +1959,7 @@
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator1;
     }
 }

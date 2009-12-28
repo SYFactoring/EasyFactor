@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using Microsoft.Office.Interop.Excel;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -144,6 +145,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         public static string GenerateAssignBatchNo(CDA cda)
         {
+
             Client seller = cda.Case.SellerClient;
             Client buyer = cda.Case.BuyerClient;
             string date = String.Format("{0:yyyy}{0:MM}{0:dd}", DateTime.Today);
@@ -217,6 +219,16 @@ namespace CMBC.EasyFactor.ARMgr
         private void dgvInvoices_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DetailInvoice(null, null);
+        }
+
+        private void dgvInvoices_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (this.CDA != null)
+            {
+                string currency = this.CDA.Case.InvoiceCurrency;
+                this.dgvInvoices.Rows[e.RowIndex].Cells[1].Value=currency;
+                this.dgvInvoices.Rows[e.RowIndex].Cells[5].Value = DateTime.Now;
+            }
         }
 
     }

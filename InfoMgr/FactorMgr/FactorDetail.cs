@@ -697,5 +697,43 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         }
 
         #endregion Methods
+
+        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.freezeDateDateTimePicker.Enabled)
+            {
+                if (this.freezeReasonTextBox.Text == string.Empty)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator2_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.unfreezeDateDateTimePicker.Enabled)
+            {
+                if (this.unfreezeReasonTextBox.Text == string.Empty)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
     }
 }

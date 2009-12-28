@@ -130,8 +130,19 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 cda.Backup();
             }
-
+            cda.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(cda_PropertyChanged);
             this.UpdateCDAControlStatus();
+        }
+
+        void cda_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if ("Price".Equals(e.PropertyName) || "IFPrice".Equals(e.PropertyName))
+            {
+                CDA cda = sender as CDA;
+                double price = cda.Price.GetValueOrDefault();
+                double ifprice = cda.IFPrice.GetValueOrDefault();
+                cda.EFPrice = price - ifprice;
+            }
         }
 
         #endregion Constructors
@@ -373,16 +384,23 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Methods
 
-        private void CaculateEF(object sender, EventArgs e)
+        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
-            CDA cda = (CDA)this.CDABindingSource.DataSource;
-            if (!this.priceTextBox.Text.Equals(string.Empty))
+            CDA cda = this.CDABindingSource.DataSource as CDA;
+            if ("其他".Equals(cda.CommissionType))
             {
-                double price;
-                double ifprice;
-                Double.TryParse(this.priceTextBox.Text, out price);
-                Double.TryParse(this.iFPriceTextBox.Text, out ifprice);
-                cda.EFPrice = price - ifprice;
+                if (e.ControlToValidate.Text.Equals(string.Empty))
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
             }
         }
     }

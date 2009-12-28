@@ -304,7 +304,15 @@ namespace CMBC.EasyFactor.Utils
                     invoice.InvoiceDate = (DateTime)valueArray[row, column++];
                     invoice.DueDate = (DateTime)valueArray[row, column++];
                     invoice.AssignDate = (DateTime)valueArray[row, column++];
-                    invoice.IsFlaw = "Y".Equals(valueArray[row, column++]);
+                    string isFlawStr = String.Format("{0:G}",valueArray[row, column++]);
+                    if (isFlawStr == null || string.Empty.Equals(isFlawStr))
+                    {
+                        invoice.IsFlaw = false;
+                    }
+                    else
+                    {
+                        invoice.IsFlaw = "Y".Equals(isFlawStr);
+                    }
                     invoice.FlawReason = String.Format("{0:G}", valueArray[row, column++]);
                     invoice.Comment = invoice.Comment == string.Empty ? String.Format("{0:G}", valueArray[row, column++]) : invoice.Comment + "\t" + String.Format("{0:G}", valueArray[row, column++]);
 

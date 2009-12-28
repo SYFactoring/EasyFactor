@@ -18,7 +18,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
     {
-		#region Fields (3) 
+        #region Fields (3)
 
         /// <summary>
         /// 
@@ -33,9 +33,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpContractType opContractType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (3) 
+        #region Enums (3)
 
         /// <summary>
         /// Operation Type 
@@ -57,7 +57,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT
         }
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         public enum OpClientCreditLineType
@@ -77,7 +77,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT_CREDIT_LINE
         }
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         public enum OpContractType
@@ -98,11 +98,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DETAIL_CONTRACT
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (4) 
+        #region Constructors (4)
 
-/// <summary>
+        /// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client">selected client</param>
@@ -148,6 +148,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.dgvContracts.DataSource = client.Contracts.ToList();
                 List<Department> deptsList = (List<Department>)this.cbDepartments.DataSource;
                 this.cbDepartments.SelectedIndex = deptsList.IndexOf(client.Department);
+                if (client.ClientGroup != null)
+                {
+                    this.groupNoTextBox.Text = client.ClientGroup.GroupNo;
+                    this.tbGroupNameCN.Text = client.ClientGroup.GroupNameCN;
+                    this.tbGroupNameEN.Text = client.ClientGroup.GroupNameEN;
+                }
                 client.Backup();
             }
 
@@ -201,11 +207,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabControl.SelectedTab = this.tabItemContract;
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (25) 
+        #region Methods (25)
 
-		// Private Methods (25) 
+        // Private Methods (25) 
 
         private void cbDepartments_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
         {
@@ -391,8 +397,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
             if (this.isGroupCheckBox.Checked == false)
             {
-                Client client = this.clientBindingSource.DataSource as Client;
-                client.ClientGroup = null;
+                this.groupNoTextBox.Text = string.Empty;
                 this.tbGroupNameCN.Text = string.Empty;
                 this.tbGroupNameEN.Text = string.Empty;
             }
@@ -495,6 +500,23 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
             Client client = (Client)this.clientBindingSource.DataSource;
+
+            if (this.isGroupCheckBox.Checked)
+            {
+                ClientGroup clientGroup = App.Current.DbContext.ClientGroups.SingleOrDefault(cg => cg.GroupNo == this.groupNoTextBox.Text);
+                if (clientGroup == null)
+                {
+                    clientGroup = new ClientGroup();
+                    clientGroup.GroupNo = this.groupNoTextBox.Text;
+                }
+                clientGroup.GroupNameCN = this.tbGroupNameCN.Text;
+                clientGroup.GroupNameEN = this.tbGroupNameEN.Text;
+                client.ClientGroup = clientGroup;
+            }
+            else
+            {
+                client.ClientGroup = null;
+            }
 
             if (this.opClientType == OpClientType.NEW_CLIENT)
             {
@@ -749,7 +771,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            int cid = (int)this.dgvClientCreditLines["creditLineIDColumn", this.dgvClientCreditLines.SelectedRows[0].Index].Value;
+            int cid = (int)this.dgvClientCreditLines["colCreditLineID", this.dgvClientCreditLines.SelectedRows[0].Index].Value;
             if (cid != 0)
             {
                 Client clinet = (Client)this.clientBindingSource.DataSource;
@@ -1038,6 +1060,101 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbCreateUserName.ReadOnly = true;
         }
 
-		#endregion Methods 
+        #endregion Methods
+
+        private void customValidator2_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.isGroupCheckBox.Checked)
+            {
+                if (e.ControlToValidate.Text == string.Empty)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.isGroupCheckBox.Checked)
+            {
+                if (e.ControlToValidate.Text == string.Empty)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator3_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.isGroupCheckBox.Checked)
+            {
+                if (e.ControlToValidate.Text == string.Empty)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator4_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.freezeDateDateTimePicker.Enabled)
+            {
+                if (e.ControlToValidate.Text == string.Empty)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator5_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.unfreezeDateDateTimePicker.Enabled)
+            {
+                if (e.ControlToValidate.Text == string.Empty)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
     }
 }

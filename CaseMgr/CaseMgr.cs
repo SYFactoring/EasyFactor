@@ -205,6 +205,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                 && (c.CaseAppDate > beginDate.AddDays(-1))
                                 && (c.CaseAppDate < endDate.AddDays(1))
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
+                                && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == "已生效"))
                                 && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN_1.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN_2.Contains(this.tbClientName.Text)
                                  || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN_1.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN_2.Contains(this.tbClientName.Text))
                                     );
@@ -266,5 +267,16 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion Methods
+
+        private void Reset(object sender, EventArgs e)
+        {
+            this.cbOwnerDepts.SelectedIndex = 0;
+            this.cbTransactionType.SelectedIndex = 0;
+            this.cbCurrency.SelectedIndex = 0;
+            this.tbCaseCode.Text = string.Empty;
+            this.tbClientName.Text = string.Empty;
+            this.diBegin.Value = default(DateTime);
+            this.diEnd.Value = default(DateTime);
+        }
     }
 }

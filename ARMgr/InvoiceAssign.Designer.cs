@@ -330,36 +330,36 @@ namespace CMBC.EasyFactor.ARMgr
             this.toolStripSeparator1,
             this.menuItemAssignBatchImport});
             this.cmuInvoiceAssign.Name = "cmuInvoiceAssign";
-            this.cmuInvoiceAssign.Size = new System.Drawing.Size(153, 104);
+            this.cmuInvoiceAssign.Size = new System.Drawing.Size(147, 82);
             // 
             // menuItemInvoiceDetail
             // 
             this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
-            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(152, 22);
+            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(146, 22);
             this.menuItemInvoiceDetail.Text = "详细信息";
             this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
             // 
             // menuItemFlaw
             // 
             this.menuItemFlaw.Name = "menuItemFlaw";
-            this.menuItemFlaw.Size = new System.Drawing.Size(152, 22);
+            this.menuItemFlaw.Size = new System.Drawing.Size(146, 22);
             this.menuItemFlaw.Text = "瑕疵处理";
             this.menuItemFlaw.Click += new System.EventHandler(this.Flaw);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
             // 
             // menuItemAssignBatchImport
             // 
             this.menuItemAssignBatchImport.Name = "menuItemAssignBatchImport";
-            this.menuItemAssignBatchImport.Size = new System.Drawing.Size(152, 22);
+            this.menuItemAssignBatchImport.Size = new System.Drawing.Size(146, 22);
             this.menuItemAssignBatchImport.Text = "导入发票信息";
             this.menuItemAssignBatchImport.Click += new System.EventHandler(this.ImportAssignBatch);
             // 
@@ -515,6 +515,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInvoices.Size = new System.Drawing.Size(695, 497);
             this.dgvInvoices.TabIndex = 7;
+            this.dgvInvoices.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvInvoices_RowsAdded);
             this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
             // 
             // colInvoiceNo

@@ -131,6 +131,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 curCase.Backup();
             }
 
+            curCase.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(curCase_PropertyChanged);
             this.UpdateCaseControlStatus();
             this.UpdateCreditCoverNegControlStatus();
 
@@ -139,6 +140,56 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
             }
         }
+
+        void curCase_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if ("TransactionType".Equals(e.PropertyName))
+            {
+                Case curCase = sender as Case;
+                Factor cmbc = Factor.FindFactorByCode(Factor.CMBC_CODE);
+                switch (curCase.TransactionType)
+                {
+                    case "国内卖方保理":
+                    case "国内买方保理":
+                    case "租赁保理":
+                        this.btnCaseFactorSelect.Enabled = false;
+                        curCase.SellerFactor = cmbc;
+                        curCase.BuyerFactor = cmbc;
+                        curCase.InvoiceCurrency = "CNY";
+                        break;
+                    case "出口保理":
+                        this.btnCaseFactorSelect.Enabled = true;
+                        curCase.SellerFactor = cmbc;
+                        curCase.InvoiceCurrency = "USD";
+                        break;
+                    case "进口保理":
+                        this.btnCaseFactorSelect.Enabled = true;
+                        curCase.BuyerFactor = cmbc;
+                        curCase.InvoiceCurrency = "USD";
+                        break;
+                    case "国际信保保理":
+                        this.btnCaseFactorSelect.Enabled = true;
+                        curCase.SellerFactor = cmbc;
+                        curCase.InvoiceCurrency = "USD";
+                        break;
+                    case "国内信保保理":
+                        this.btnCaseFactorSelect.Enabled = true;
+                        curCase.SellerFactor = cmbc;
+                        curCase.InvoiceCurrency = "CNY";
+                        break;
+                    default: break;
+                }
+
+                if (!"进口保理".Equals(curCase.TransactionType) && curCase.SellerClient != null)
+                {
+                    if (!curCase.SellerClient.Contracts.Any(con => con.ContractStatus == "已生效"))
+                    {
+                        curCase.SellerClient = null;
+                    }
+                }
+ 
+            }
+       }
 
         /// <summary>
         /// Initializes a new instance of the CaseDetail class
@@ -238,64 +289,6 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// Case transaction type changed event handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CaseTransactionTypeChanged(object sender, EventArgs e)
-        {
-
-            string transationType = this.cbCaseTransactionType.Text;
-            if (transationType == null || string.Empty.Equals(transationType))
-            {
-                return;
-            }
-
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            Factor cmbc = Factor.FindFactorByCode(Factor.CMBC_CODE);
-            switch (transationType)
-            {
-                case "国内卖方保理":
-                case "国内买方保理":
-                case "租赁保理":
-                    this.btnCaseFactorSelect.Enabled = false;
-                    curCase.SellerFactor = cmbc;
-                    curCase.BuyerFactor = cmbc;
-                    curCase.InvoiceCurrency = "CNY";
-                    break;
-                case "出口保理":
-                    this.btnCaseFactorSelect.Enabled = true;
-                    curCase.SellerFactor = cmbc;
-                    curCase.InvoiceCurrency = "USD";
-                    break;
-                case "进口保理":
-                    this.btnCaseFactorSelect.Enabled = true;
-                    curCase.BuyerFactor = cmbc;
-                    curCase.InvoiceCurrency = "USD";
-                    break;
-                case "国际信保保理":
-                    this.btnCaseFactorSelect.Enabled = true;
-                    curCase.SellerFactor = cmbc;
-                    curCase.InvoiceCurrency = "USD";
-                    break;
-                case "国内信保保理":
-                    this.btnCaseFactorSelect.Enabled = true;
-                    curCase.SellerFactor = cmbc;
-                    curCase.InvoiceCurrency = "CNY";
-                    break;
-                default: break;
-            }
-
-            if (!"进口保理".Equals(transationType) && curCase.SellerClient != null)
-            {
-                if (!curCase.SellerClient.Contracts.Any(con => con.ContractStatus == "已生效"))
-                {
-                    curCase.SellerClient = null;
-                }
-            }
-        }
-
-        /// <summary>
         /// Close the case form
         /// </summary>
         /// <param name="sender"></param>
@@ -309,7 +302,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             else if (opCaseType == OpCaseType.NEW_CASE)
             {
-                this.caseBindingSource.DataSource = new Caes();
+                this.caseBindingSource.DataSource = new Case();
             }
         }
 

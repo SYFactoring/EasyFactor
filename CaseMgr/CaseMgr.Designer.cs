@@ -136,6 +136,8 @@
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbIsCDA = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.btnQueryReset = new DevComponents.DotNetBar.ButtonX();
             this.panelCaseQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -147,6 +149,8 @@
             // 
             this.panelCaseQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelCaseQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelCaseQuery.Controls.Add(this.btnQueryReset);
+            this.panelCaseQuery.Controls.Add(this.cbIsCDA);
             this.panelCaseQuery.Controls.Add(this.tbClientName);
             this.panelCaseQuery.Controls.Add(this.lblClientName);
             this.panelCaseQuery.Controls.Add(this.tbCaseCode);
@@ -249,9 +253,9 @@
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(416, 50);
+            this.btnQuery.Location = new System.Drawing.Point(397, 50);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(75, 21);
+            this.btnQuery.Size = new System.Drawing.Size(48, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 8;
             this.btnQuery.Text = "查询";
@@ -874,6 +878,35 @@
             this.dataGridViewTextBoxColumn23.ReadOnly = true;
             this.dataGridViewTextBoxColumn23.Visible = false;
             // 
+            // cbIsCDA
+            // 
+            this.cbIsCDA.AutoSize = true;
+            // 
+            // 
+            // 
+            this.cbIsCDA.BackgroundStyle.Class = "";
+            this.cbIsCDA.Checked = true;
+            this.cbIsCDA.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbIsCDA.CheckValue = "Y";
+            this.cbIsCDA.Location = new System.Drawing.Point(397, 28);
+            this.cbIsCDA.Name = "cbIsCDA";
+            this.cbIsCDA.Size = new System.Drawing.Size(100, 16);
+            this.cbIsCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsCDA.TabIndex = 15;
+            this.cbIsCDA.Text = "CDA是否生效";
+            // 
+            // btnQueryReset
+            // 
+            this.btnQueryReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQueryReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQueryReset.Location = new System.Drawing.Point(451, 50);
+            this.btnQueryReset.Name = "btnQueryReset";
+            this.btnQueryReset.Size = new System.Drawing.Size(48, 21);
+            this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQueryReset.TabIndex = 16;
+            this.btnQueryReset.Text = "重置";
+            this.btnQueryReset.Click += new System.EventHandler(this.Reset);
+            // 
             // CaseMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -934,6 +967,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AppDateColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CaseMarkColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreateUserColumn;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCDA;
+        private DevComponents.DotNetBar.ButtonX btnQueryReset;
 
     }
 }
