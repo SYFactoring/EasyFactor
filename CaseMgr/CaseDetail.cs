@@ -175,7 +175,24 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void CaseDetail_Leave(object sender, EventArgs e)
         {
-            this.CloseCase(sender, e);
+            Case curCase = (Case)this.caseBindingSource.DataSource;
+            if (this.opCaseType == OpCaseType.UPDATE_CASE)
+            {
+                curCase.Restore();
+            }
+
+            if (this.opCreditCoverNegType == OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG)
+            {
+                if (this.creditCoverNegBindingSource.DataSource is CreditCoverNegotiation)
+                {
+                    CreditCoverNegotiation creditCoverNeg = (CreditCoverNegotiation)this.creditCoverNegBindingSource.DataSource;
+                    if (creditCoverNeg.NegoID != 0)
+                    {
+                        creditCoverNeg.Restore();
+                    }
+                }
+            }
+            Close();
         }
 
         /// <summary>
@@ -283,26 +300,17 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CloseCase(object sender, EventArgs e)
+        private void ResetClose(object sender, EventArgs e)
         {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            if (this.opCaseType == OpCaseType.UPDATE_CASE)
+            if (opCaseType == OpCaseType.UPDATE_CASE)
             {
+                Case curCase = this.caseBindingSource.DataSource as Case;
                 curCase.Restore();
             }
-
-            if (this.opCreditCoverNegType == OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG)
+            else if (opCaseType == OpCaseType.NEW_CASE)
             {
-                if (this.creditCoverNegBindingSource.DataSource is CreditCoverNegotiation)
-                {
-                    CreditCoverNegotiation creditCoverNeg = (CreditCoverNegotiation)this.creditCoverNegBindingSource.DataSource;
-                    if (creditCoverNeg.NegoID != 0)
-                    {
-                        creditCoverNeg.Restore();
-                    }
-                }
+                this.caseBindingSource.DataSource = new Caes();
             }
-            Close();
         }
 
         /// <summary>
@@ -491,6 +499,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SaveCase(object sender, EventArgs e)
         {
+            if (!this.caseValidator.Validate())
+            {
+                return;
+            }
+
             Case curCase = (Case)this.caseBindingSource.DataSource;
 
             if (curCase.CaseCode == null)
@@ -550,6 +563,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SaveCreditCoverNeg(object sender, EventArgs e)
         {
+            if (!this.creditCoverValidator.Validate())
+            {
+                return;
+            }
+
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {

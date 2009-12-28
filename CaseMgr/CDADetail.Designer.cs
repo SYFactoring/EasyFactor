@@ -2,12 +2,12 @@
 {
     partial class CDADetail
     {
-		#region Fields (62) 
+		#region Fields (72) 
 
         private DevComponents.DotNetBar.Controls.TextBoxX approveNumberTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
         private DevComponents.DotNetBar.ButtonX btnCaseSelect;
-        private DevComponents.DotNetBar.ButtonX btnCDAClose;
+        private DevComponents.DotNetBar.ButtonX btnCDAReset;
         private DevComponents.DotNetBar.ButtonX btnCDASave;
         private DevComponents.DotNetBar.ButtonX btnCDAUpdate;
         private DevComponents.DotNetBar.Controls.TextBoxX buyerClientEDICodeTextBox;
@@ -28,6 +28,9 @@
         private DevComponents.DotNetBar.Controls.TextBoxX commissionTypeCommentTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX companyNameCNTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX companyNameENTextBox;
+        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
+        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator2;
+        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator3;
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -41,6 +44,7 @@
         private DevComponents.DotNetBar.Controls.TextBoxX deductiblesTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX eFPriceTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
+        private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX faxTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX financeGracePeriodTextBox;
@@ -54,6 +58,7 @@
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelOther;
         private DevComponents.DotNetBar.Controls.ComboBoxEx handFeeCurrComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX handFeeTextBox;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private DevComponents.DotNetBar.Controls.TextBoxX iFPriceTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX invoiceCurrencyTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX lossThresholdTextBox;
@@ -65,9 +70,14 @@
         private DevComponents.DotNetBar.Controls.TextBoxX pUGProportionTextBox;
         private DevComponents.DotNetBar.Validator.RangeValidator rangeValidator1;
         private DevComponents.DotNetBar.Controls.TextBoxX reassignGracePeriodTextBox;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerClientEDICodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameCNTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameEN_1TextBox;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbHighestFinance;
         private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
 
 		#endregion Fields 
@@ -117,7 +127,7 @@
             DevComponents.DotNetBar.LabelX reassignGracePeriodLabel;
             DevComponents.DotNetBar.LabelX financeLineCurrLabel;
             DevComponents.DotNetBar.LabelX financeLinePeriodBeginLabel;
-            DevComponents.DotNetBar.LabelX label1;
+            DevComponents.DotNetBar.LabelX lblHighestFinance;
             DevComponents.DotNetBar.LabelX financeProportionLabel;
             DevComponents.DotNetBar.LabelX orderNumberLabel;
             DevComponents.DotNetBar.LabelX paymentTermsLabel;
@@ -161,6 +171,7 @@
             this.sellerClientEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.caseCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelCreditCover = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.tbHighestFinance = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.handFeeCurrComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cbIsCreditCoverRevolving = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.handFeeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -200,17 +211,17 @@
             this.cDAValueDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.btnCDAUpdate = new DevComponents.DotNetBar.ButtonX();
             this.btnCDASave = new DevComponents.DotNetBar.ButtonX();
-            this.btnCDAClose = new DevComponents.DotNetBar.ButtonX();
+            this.btnCDAReset = new DevComponents.DotNetBar.ButtonX();
             this.rangeValidator1 = new DevComponents.DotNetBar.Validator.RangeValidator();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
-            this.compareValidator2 = new DevComponents.DotNetBar.Validator.CompareValidator();
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.compareValidator2 = new DevComponents.DotNetBar.Validator.CompareValidator();
+            this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
             this.compareValidator3 = new DevComponents.DotNetBar.Validator.CompareValidator();
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -226,7 +237,7 @@
             reassignGracePeriodLabel = new DevComponents.DotNetBar.LabelX();
             financeLineCurrLabel = new DevComponents.DotNetBar.LabelX();
             financeLinePeriodBeginLabel = new DevComponents.DotNetBar.LabelX();
-            label1 = new DevComponents.DotNetBar.LabelX();
+            lblHighestFinance = new DevComponents.DotNetBar.LabelX();
             financeProportionLabel = new DevComponents.DotNetBar.LabelX();
             orderNumberLabel = new DevComponents.DotNetBar.LabelX();
             paymentTermsLabel = new DevComponents.DotNetBar.LabelX();
@@ -472,19 +483,19 @@
             financeLinePeriodBeginLabel.TabIndex = 21;
             financeLinePeriodBeginLabel.Text = "有效期限:";
             // 
-            // label1
+            // lblHighestFinance
             // 
-            label1.AutoSize = true;
-            label1.BackColor = System.Drawing.Color.Transparent;
+            lblHighestFinance.AutoSize = true;
+            lblHighestFinance.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            label1.BackgroundStyle.Class = "";
-            label1.Location = new System.Drawing.Point(3, 77);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(121, 16);
-            label1.TabIndex = 25;
-            label1.Text = "最高保理预付款额度:";
+            lblHighestFinance.BackgroundStyle.Class = "";
+            lblHighestFinance.Location = new System.Drawing.Point(3, 77);
+            lblHighestFinance.Name = "lblHighestFinance";
+            lblHighestFinance.Size = new System.Drawing.Size(121, 16);
+            lblHighestFinance.TabIndex = 25;
+            lblHighestFinance.Text = "最高保理预付款额度:";
             // 
             // financeProportionLabel
             // 
@@ -944,7 +955,7 @@
             this.assignTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.assignTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.assignTypeComboBox.FormattingEnabled = true;
-            this.assignTypeComboBox.Location = new System.Drawing.Point(292, 128);
+            this.assignTypeComboBox.Location = new System.Drawing.Point(292, 125);
             this.assignTypeComboBox.Name = "assignTypeComboBox";
             this.assignTypeComboBox.Size = new System.Drawing.Size(121, 21);
             this.assignTypeComboBox.TabIndex = 9;
@@ -968,9 +979,9 @@
             // 
             this.buyerClientNameEN_1TextBox.Border.Class = "TextBoxBorder";
             this.buyerClientNameEN_1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.BuyerClient.ClientNameEN_1", true));
-            this.buyerClientNameEN_1TextBox.Location = new System.Drawing.Point(127, 86);
+            this.buyerClientNameEN_1TextBox.Location = new System.Drawing.Point(125, 86);
             this.buyerClientNameEN_1TextBox.Name = "buyerClientNameEN_1TextBox";
-            this.buyerClientNameEN_1TextBox.Size = new System.Drawing.Size(214, 20);
+            this.buyerClientNameEN_1TextBox.Size = new System.Drawing.Size(216, 20);
             this.buyerClientNameEN_1TextBox.TabIndex = 17;
             this.buyerClientNameEN_1TextBox.WatermarkText = "英文名";
             // 
@@ -1076,6 +1087,7 @@
             // 
             this.groupPanelCreditCover.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCreditCover.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelCreditCover.Controls.Add(this.tbHighestFinance);
             this.groupPanelCreditCover.Controls.Add(this.handFeeCurrComboBox);
             this.groupPanelCreditCover.Controls.Add(this.cbIsCreditCoverRevolving);
             this.groupPanelCreditCover.Controls.Add(handFeeLabel);
@@ -1102,7 +1114,7 @@
             this.groupPanelCreditCover.Controls.Add(this.priceTextBox);
             this.groupPanelCreditCover.Controls.Add(financeProportionLabel);
             this.groupPanelCreditCover.Controls.Add(this.financeProportionTextBox);
-            this.groupPanelCreditCover.Controls.Add(label1);
+            this.groupPanelCreditCover.Controls.Add(lblHighestFinance);
             this.groupPanelCreditCover.Controls.Add(this.financeLinePeriodEndDateTimePicker);
             this.groupPanelCreditCover.Controls.Add(financeLinePeriodBeginLabel);
             this.groupPanelCreditCover.Controls.Add(this.financeLinePeriodBeginDateTimePicker);
@@ -1157,6 +1169,17 @@
             // 
             this.groupPanelCreditCover.StyleMouseOver.Class = "";
             this.groupPanelCreditCover.TabIndex = 2;
+            // 
+            // tbHighestFinance
+            // 
+            // 
+            // 
+            // 
+            this.tbHighestFinance.Border.Class = "TextBoxBorder";
+            this.tbHighestFinance.Location = new System.Drawing.Point(127, 76);
+            this.tbHighestFinance.Name = "tbHighestFinance";
+            this.tbHighestFinance.Size = new System.Drawing.Size(83, 20);
+            this.tbHighestFinance.TabIndex = 39;
             // 
             // handFeeCurrComboBox
             // 
@@ -1823,17 +1846,17 @@
             this.btnCDASave.Text = "保存";
             this.btnCDASave.Click += new System.EventHandler(this.SaveCDA);
             // 
-            // btnCDAClose
+            // btnCDAReset
             // 
-            this.btnCDAClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCDAClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCDAClose.Location = new System.Drawing.Point(379, 524);
-            this.btnCDAClose.Name = "btnCDAClose";
-            this.btnCDAClose.Size = new System.Drawing.Size(75, 23);
-            this.btnCDAClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCDAClose.TabIndex = 7;
-            this.btnCDAClose.Text = "关闭";
-            this.btnCDAClose.Click += new System.EventHandler(this.CloseCDA);
+            this.btnCDAReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCDAReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCDAReset.Location = new System.Drawing.Point(379, 524);
+            this.btnCDAReset.Name = "btnCDAReset";
+            this.btnCDAReset.Size = new System.Drawing.Size(75, 23);
+            this.btnCDAReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCDAReset.TabIndex = 7;
+            this.btnCDAReset.Text = "重置";
+            this.btnCDAReset.Click += new System.EventHandler(this.CloseCDA);
             // 
             // rangeValidator1
             // 
@@ -1848,26 +1871,15 @@
             this.superValidator.ErrorProvider = this.errorProvider;
             this.superValidator.Highlighter = this.highlighter;
             // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // requiredFieldValidator1
             // 
             this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
             this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
-            // 
-            // highlighter
-            // 
-            this.highlighter.ContainerControl = this;
-            // 
-            // compareValidator1
-            // 
-            this.compareValidator1.ControlToCompare = this.creditCoverPeriodBeginDateTimePicker;
-            this.compareValidator1.ErrorMessage = "Your error message here.";
-            this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             // 
             // compareValidator2
             // 
@@ -1876,10 +1888,12 @@
             this.compareValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.compareValidator2.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             // 
-            // requiredFieldValidator2
+            // compareValidator1
             // 
-            this.requiredFieldValidator2.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.compareValidator1.ControlToCompare = this.creditCoverPeriodBeginDateTimePicker;
+            this.compareValidator1.ErrorMessage = "Your error message here.";
+            this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             // 
             // compareValidator3
             // 
@@ -1895,12 +1909,21 @@
             this.regularExpressionValidator1.ValidationExpression = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9" +
                 "})$";
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
+            // 
             // CDADetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.btnCDAClose);
+            this.Controls.Add(this.btnCDAReset);
             this.Controls.Add(this.btnCDASave);
             this.Controls.Add(this.btnCDAUpdate);
             this.Controls.Add(this.groupPanelOther);
@@ -1930,15 +1953,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
-        private System.Windows.Forms.ErrorProvider errorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
-        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator2;
-        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
-        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator3;
-        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
     }
 }

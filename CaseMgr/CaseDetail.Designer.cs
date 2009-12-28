@@ -5,7 +5,7 @@
 		#region Fields (112) 
 
         private DevComponents.DotNetBar.ButtonX btnCaseBuyerSelect;
-        private DevComponents.DotNetBar.ButtonX btnCaseClose;
+        private DevComponents.DotNetBar.ButtonX btnCaseReset;
         private DevComponents.DotNetBar.ButtonX btnCaseSave;
         private DevComponents.DotNetBar.ButtonX btnCaseFactorSelect;
         private DevComponents.DotNetBar.ButtonX btnCaseSellerSelect;
@@ -87,12 +87,12 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput diApproveDate;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput diCaseAppDate;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput diRequestDate;
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider caseErrorProvider;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCase;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCDA;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCreditCoverNeg;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private DevComponents.DotNetBar.Validator.Highlighter caseHighlighter;
+        private DevComponents.DotNetBar.Validator.SuperValidator caseValidator;
         private DevComponents.DotNetBar.TabControl tabControl;
         private DevComponents.DotNetBar.TabItem tabItemCase;
         private DevComponents.DotNetBar.TabItem tabItemCDA;
@@ -167,14 +167,14 @@
             DevComponents.DotNetBar.LabelX lblCaseBuyerNo;
             DevComponents.DotNetBar.LabelX lblCaseSellerNo;
             DevComponents.DotNetBar.LabelX lblCaseFactor;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaseDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelCase = new DevComponents.DotNetBar.TabControlPanel();
             this.btnCaseUpdate = new DevComponents.DotNetBar.ButtonX();
-            this.btnCaseClose = new DevComponents.DotNetBar.ButtonX();
+            this.btnCaseReset = new DevComponents.DotNetBar.ButtonX();
             this.btnCaseSave = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.cbCaseTransactionType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -275,16 +275,19 @@
             this.tbApproveAmount = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbRequestAmount = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabItemCreditCoverNeg = new DevComponents.DotNetBar.TabItem(this.components);
-            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.caseValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.caseErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.caseHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.creditCoverValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.creditCoverErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.creditCoverHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator8 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.requiredFieldValidator6 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator7 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             requestAmountLabel = new DevComponents.DotNetBar.LabelX();
             approveAmountLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
@@ -319,7 +322,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.creditCoverNegBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diRequestDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diApproveDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.caseErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.creditCoverErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // requestAmountLabel
@@ -572,7 +576,7 @@
             lblCaseBuyerNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             lblCaseBuyerNo.Location = new System.Drawing.Point(55, 68);
             lblCaseBuyerNo.Name = "lblCaseBuyerNo";
-            lblCaseBuyerNo.Size = new System.Drawing.Size(35, 16);
+            lblCaseBuyerNo.Size = new System.Drawing.Size(34, 16);
             lblCaseBuyerNo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             lblCaseBuyerNo.TabIndex = 8;
             lblCaseBuyerNo.Text = "买方:";
@@ -612,15 +616,15 @@
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelCase);
             this.tabControl.Controls.Add(this.tabPanelCreditCoverNeg);
+            this.tabControl.Controls.Add(this.tabPanelCase);
             this.tabControl.Controls.Add(this.tabPanelCDA);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl.SelectedTabIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(521, 376);
+            this.tabControl.Size = new System.Drawing.Size(521, 352);
             this.tabControl.TabIndex = 0;
             this.tabControl.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl.Tabs.Add(this.tabItemCase);
@@ -631,14 +635,14 @@
             // tabPanelCase
             // 
             this.tabPanelCase.Controls.Add(this.btnCaseUpdate);
-            this.tabPanelCase.Controls.Add(this.btnCaseClose);
+            this.tabPanelCase.Controls.Add(this.btnCaseReset);
             this.tabPanelCase.Controls.Add(this.btnCaseSave);
             this.tabPanelCase.Controls.Add(this.groupPanelCase);
             this.tabPanelCase.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPanelCase.Location = new System.Drawing.Point(0, 26);
             this.tabPanelCase.Name = "tabPanelCase";
             this.tabPanelCase.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelCase.Size = new System.Drawing.Size(521, 350);
+            this.tabPanelCase.Size = new System.Drawing.Size(521, 326);
             this.tabPanelCase.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelCase.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelCase.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -653,7 +657,7 @@
             // 
             this.btnCaseUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCaseUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseUpdate.Location = new System.Drawing.Point(129, 320);
+            this.btnCaseUpdate.Location = new System.Drawing.Point(132, 295);
             this.btnCaseUpdate.Name = "btnCaseUpdate";
             this.btnCaseUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnCaseUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -661,23 +665,23 @@
             this.btnCaseUpdate.Text = "更新";
             this.btnCaseUpdate.Click += new System.EventHandler(this.UpdateCase);
             // 
-            // btnCaseClose
+            // btnCaseReset
             // 
-            this.btnCaseClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCaseClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseClose.Location = new System.Drawing.Point(291, 320);
-            this.btnCaseClose.Name = "btnCaseClose";
-            this.btnCaseClose.Size = new System.Drawing.Size(75, 23);
-            this.btnCaseClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCaseClose.TabIndex = 8;
-            this.btnCaseClose.Text = "关闭";
-            this.btnCaseClose.Click += new System.EventHandler(this.CloseCase);
+            this.btnCaseReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCaseReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCaseReset.Location = new System.Drawing.Point(294, 295);
+            this.btnCaseReset.Name = "btnCaseReset";
+            this.btnCaseReset.Size = new System.Drawing.Size(75, 23);
+            this.btnCaseReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCaseReset.TabIndex = 8;
+            this.btnCaseReset.Text = "重置";
+            this.btnCaseReset.Click += new System.EventHandler(this.ResetClose);
             // 
             // btnCaseSave
             // 
             this.btnCaseSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCaseSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseSave.Location = new System.Drawing.Point(210, 320);
+            this.btnCaseSave.Location = new System.Drawing.Point(213, 295);
             this.btnCaseSave.Name = "btnCaseSave";
             this.btnCaseSave.Size = new System.Drawing.Size(75, 23);
             this.btnCaseSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -724,7 +728,7 @@
             this.groupPanelCase.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelCase.Location = new System.Drawing.Point(1, 1);
             this.groupPanelCase.Name = "groupPanelCase";
-            this.groupPanelCase.Size = new System.Drawing.Size(519, 398);
+            this.groupPanelCase.Size = new System.Drawing.Size(519, 288);
             // 
             // 
             // 
@@ -767,7 +771,7 @@
             this.cbCaseTransactionType.Name = "cbCaseTransactionType";
             this.cbCaseTransactionType.Size = new System.Drawing.Size(124, 21);
             this.cbCaseTransactionType.TabIndex = 44;
-            this.superValidator.SetValidator1(this.cbCaseTransactionType, this.requiredFieldValidator1);
+            this.caseValidator.SetValidator1(this.cbCaseTransactionType, this.requiredFieldValidator1);
             this.cbCaseTransactionType.SelectionChangeCommitted += new System.EventHandler(this.CaseTransactionTypeChanged);
             // 
             // caseBindingSource
@@ -812,7 +816,7 @@
             this.cbCaseOwnerDepts.Size = new System.Drawing.Size(278, 23);
             this.cbCaseOwnerDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbCaseOwnerDepts.TabIndex = 39;
-            this.superValidator.SetValidator1(this.cbCaseOwnerDepts, this.requiredFieldValidator4);
+            this.caseValidator.SetValidator1(this.cbCaseOwnerDepts, this.requiredFieldValidator4);
             this.cbCaseOwnerDepts.SelectionChanged += new DevComponents.AdvTree.AdvTreeNodeEventHandler(this.CaseOwnerDeptsChanged);
             // 
             // cbCaseOpType
@@ -831,7 +835,7 @@
             this.cbCaseOpType.Size = new System.Drawing.Size(100, 20);
             this.cbCaseOpType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbCaseOpType.TabIndex = 37;
-            this.superValidator.SetValidator1(this.cbCaseOpType, this.requiredFieldValidator3);
+            this.caseValidator.SetValidator1(this.cbCaseOpType, this.requiredFieldValidator3);
             this.cbCaseOpType.SelectionChangeCommitted += new System.EventHandler(this.CaseOpTypeChanged);
             // 
             // tbCaseBuyerNameEN
@@ -948,7 +952,7 @@
             this.cbCaseInvoiceCurrency.Size = new System.Drawing.Size(100, 20);
             this.cbCaseInvoiceCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbCaseInvoiceCurrency.TabIndex = 25;
-            this.superValidator.SetValidator1(this.cbCaseInvoiceCurrency, this.requiredFieldValidator2);
+            this.caseValidator.SetValidator1(this.cbCaseInvoiceCurrency, this.requiredFieldValidator2);
             // 
             // btnCaseBuyerSelect
             // 
@@ -1082,7 +1086,7 @@
             this.tabPanelCDA.Location = new System.Drawing.Point(0, 26);
             this.tabPanelCDA.Name = "tabPanelCDA";
             this.tabPanelCDA.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelCDA.Size = new System.Drawing.Size(521, 350);
+            this.tabPanelCDA.Size = new System.Drawing.Size(521, 326);
             this.tabPanelCDA.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelCDA.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelCDA.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -1098,14 +1102,14 @@
             this.dgvCDAs.AllowUserToAddRows = false;
             this.dgvCDAs.AllowUserToDeleteRows = false;
             this.dgvCDAs.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCDAs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCDAs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCDACode,
@@ -1149,21 +1153,21 @@
             this.colFax,
             this.colCDAComment,
             this.colCDACreateUserName});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCDAs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCDAs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCDAs.Location = new System.Drawing.Point(1, 39);
             this.dgvCDAs.Name = "dgvCDAs";
             this.dgvCDAs.ReadOnly = true;
             this.dgvCDAs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCDAs.Size = new System.Drawing.Size(519, 310);
+            this.dgvCDAs.Size = new System.Drawing.Size(519, 286);
             this.dgvCDAs.TabIndex = 1;
             this.dgvCDAs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailCDA);
             // 
@@ -1557,7 +1561,7 @@
             this.tabPanelCreditCoverNeg.Location = new System.Drawing.Point(0, 26);
             this.tabPanelCreditCoverNeg.Name = "tabPanelCreditCoverNeg";
             this.tabPanelCreditCoverNeg.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelCreditCoverNeg.Size = new System.Drawing.Size(521, 350);
+            this.tabPanelCreditCoverNeg.Size = new System.Drawing.Size(521, 326);
             this.tabPanelCreditCoverNeg.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelCreditCoverNeg.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelCreditCoverNeg.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -1586,21 +1590,21 @@
             this.colIFPrice,
             this.colComment,
             this.colCreateUserName});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCreditCoverNegs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCreditCoverNegs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCreditCoverNegs.Location = new System.Drawing.Point(1, 166);
             this.dgvCreditCoverNegs.Name = "dgvCreditCoverNegs";
             this.dgvCreditCoverNegs.ReadOnly = true;
             this.dgvCreditCoverNegs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCreditCoverNegs.Size = new System.Drawing.Size(519, 183);
+            this.dgvCreditCoverNegs.Size = new System.Drawing.Size(519, 159);
             this.dgvCreditCoverNegs.TabIndex = 1;
             this.dgvCreditCoverNegs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectCreditCoverNeg);
             // 
@@ -1830,6 +1834,7 @@
             this.tbComment.Location = new System.Drawing.Point(74, 61);
             this.tbComment.Multiline = true;
             this.tbComment.Name = "tbComment";
+            this.tbComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbComment.Size = new System.Drawing.Size(433, 42);
             this.tbComment.TabIndex = 13;
             // 
@@ -1846,7 +1851,7 @@
             this.cbApproveType.Name = "cbApproveType";
             this.cbApproveType.Size = new System.Drawing.Size(100, 21);
             this.cbApproveType.TabIndex = 11;
-            this.superValidator.SetValidator1(this.cbApproveType, this.requiredFieldValidator6);
+            this.creditCoverValidator.SetValidator1(this.cbApproveType, this.requiredFieldValidator8);
             // 
             // diRequestDate
             // 
@@ -1881,7 +1886,7 @@
             this.diRequestDate.Name = "diRequestDate";
             this.diRequestDate.Size = new System.Drawing.Size(103, 20);
             this.diRequestDate.TabIndex = 9;
-            this.superValidator.SetValidator1(this.diRequestDate, this.requiredFieldValidator7);
+            this.creditCoverValidator.SetValidator1(this.diRequestDate, this.requiredFieldValidator6);
             // 
             // diApproveDate
             // 
@@ -1952,7 +1957,7 @@
             this.tbRequestAmount.Name = "tbRequestAmount";
             this.tbRequestAmount.Size = new System.Drawing.Size(100, 20);
             this.tbRequestAmount.TabIndex = 1;
-            this.superValidator.SetValidator1(this.tbRequestAmount, this.requiredFieldValidator5);
+            this.creditCoverValidator.SetValidator1(this.tbRequestAmount, this.requiredFieldValidator5);
             // 
             // tabItemCreditCoverNeg
             // 
@@ -1960,62 +1965,77 @@
             this.tabItemCreditCoverNeg.Name = "tabItemCreditCoverNeg";
             this.tabItemCreditCoverNeg.Text = "额度申请信息";
             // 
-            // superValidator
+            // caseValidator
             // 
-            this.superValidator.ContainerControl = this;
-            this.superValidator.ErrorProvider = this.errorProvider;
-            this.superValidator.Highlighter = this.highlighter;
+            this.caseValidator.ContainerControl = this;
+            this.caseValidator.ErrorProvider = this.caseErrorProvider;
+            this.caseValidator.Highlighter = this.caseHighlighter;
             // 
             // requiredFieldValidator1
             // 
             this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
             this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // errorProvider
+            // requiredFieldValidator4
             // 
-            this.errorProvider.ContainerControl = this;
-            this.errorProvider.DataSource = this.caseBindingSource;
-            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
-            // 
-            // highlighter
-            // 
-            this.highlighter.ContainerControl = this;
-            // 
-            // requiredFieldValidator2
-            // 
-            this.requiredFieldValidator2.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.requiredFieldValidator4.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator3
             // 
             this.requiredFieldValidator3.ErrorMessage = "Your error message here.";
             this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // requiredFieldValidator4
+            // requiredFieldValidator2
             // 
-            this.requiredFieldValidator4.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.requiredFieldValidator2.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // caseErrorProvider
+            // 
+            this.caseErrorProvider.ContainerControl = this;
+            this.caseErrorProvider.DataSource = this.caseBindingSource;
+            this.caseErrorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("caseErrorProvider.Icon")));
+            // 
+            // caseHighlighter
+            // 
+            this.caseHighlighter.ContainerControl = this;
+            // 
+            // creditCoverValidator
+            // 
+            this.creditCoverValidator.ContainerControl = this;
+            this.creditCoverValidator.ErrorProvider = this.creditCoverErrorProvider;
+            this.creditCoverValidator.Highlighter = this.creditCoverHighlighter;
+            // 
+            // creditCoverErrorProvider
+            // 
+            this.creditCoverErrorProvider.ContainerControl = this;
+            this.creditCoverErrorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("creditCoverErrorProvider.Icon")));
+            // 
+            // creditCoverHighlighter
+            // 
+            this.creditCoverHighlighter.ContainerControl = this;
             // 
             // requiredFieldValidator5
             // 
             this.requiredFieldValidator5.ErrorMessage = "Your error message here.";
             this.requiredFieldValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
+            // requiredFieldValidator8
+            // 
+            this.requiredFieldValidator8.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator8.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // requiredFieldValidator6
             // 
             this.requiredFieldValidator6.ErrorMessage = "Your error message here.";
             this.requiredFieldValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // requiredFieldValidator7
-            // 
-            this.requiredFieldValidator7.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
             // CaseDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(521, 376);
+            this.ClientSize = new System.Drawing.Size(521, 352);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.Name = "CaseDetail";
@@ -2039,7 +2059,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.creditCoverNegBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diRequestDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diApproveDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.caseErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.creditCoverErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2050,8 +2071,11 @@
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
+        private DevComponents.DotNetBar.Validator.SuperValidator creditCoverValidator;
+        private System.Windows.Forms.ErrorProvider creditCoverErrorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter creditCoverHighlighter;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator8;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator6;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator7;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
     }
 }

@@ -53,13 +53,14 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #region Constructors (1)
 
-        public CDADetail(OpCDAType opCDAType):this((CDA)null,opCDAType)
+        public CDADetail(OpCDAType opCDAType)
+            : this((CDA)null, opCDAType)
         {
 
         }
 
         public CDADetail(Case selectedCase, OpCDAType opCDAType)
-            : this((CDA)null,opCDAType)
+            : this((CDA)null, opCDAType)
         {
             CDA cda = (CDA)this.CDABindingSource.DataSource;
             cda.Case = selectedCase;
@@ -146,7 +147,13 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void CDADetail_Leave(object sender, EventArgs e)
         {
-            this.CloseCDA(sender, e);
+            CDA cda = (CDA)this.CDABindingSource.DataSource;
+            if (this.opCDAType == OpCDAType.UPDATE_CDA)
+            {
+                cda.Restore();
+            }
+
+            Close();
         }
 
         /// <summary>
@@ -156,13 +163,15 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void CloseCDA(object sender, EventArgs e)
         {
-            CDA cda = (CDA)this.CDABindingSource.DataSource;
-            if (this.opCDAType == OpCDAType.UPDATE_CDA)
+            if (opCDAType == OpCDAType.UPDATE_CDA)
             {
+                CDA cda = this.CDABindingSource.DataSource as CDA;
                 cda.Restore();
             }
-
-            Close();
+            else if (opCDAType == OpCDAType.NEW_CDA)
+            {
+                this.CDABindingSource.DataSource = new CDA();
+            }
         }
 
         /// <summary>

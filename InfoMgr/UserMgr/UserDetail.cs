@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="UserDetailUI.cs" company="Yiming Liu@Fudan">
+// <copyright file="UserDetail.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -80,53 +80,21 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         // Private Methods (5) 
 
         /// <summary>
-        /// Update Editable Status
-        /// </summary>
-        private void UpdateUserControlStatus()
-        {
-            if (opUserType == OpUserType.DETAIL_USER)
-            {
-                foreach (Control comp in this.groupPanelUser.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, false);
-                }
-            }
-            else if (opUserType == OpUserType.NEW_USER)
-            {
-                foreach (Control comp in this.groupPanelUser.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, true);
-                }
-            }
-            else if (opUserType == OpUserType.UPDATE_USER)
-            {
-                foreach (Control comp in this.groupPanelUser.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, true);
-                }
-                userIDTextBox.ReadOnly = true;
-            }
-            this.loginDate.ReadOnly = true;
-        }
-
-        /// <summary>
         /// Cancel current editing and close the form
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void UserClose(object sender, EventArgs e)
+        private void ResetUser(object sender, EventArgs e)
         {
-            User user = (User)this.userBindingSource.DataSource;
             if (opUserType == OpUserType.UPDATE_USER)
             {
+                User user = this.userBindingSource.DataSource as User;
                 user.Restore();
             }
-            Close();
-        }
-
-        private void UserDetail_Leave(object sender, EventArgs e)
-        {
-            this.UserClose(sender, e);
+            else if (opUserType == OpUserType.NEW_USER)
+            {
+                this.userBindingSource.DataSource = new User();
+            }
         }
 
         /// <summary>
@@ -134,8 +102,13 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void UserSave(object sender, EventArgs e)
+        private void SaveUser(object sender, EventArgs e)
         {
+            if (!this.userValidator.Validate())
+            {
+                return;
+            }
+
             User user = (User)userBindingSource.DataSource;
             if (opUserType == OpUserType.NEW_USER)
             {
@@ -179,10 +152,60 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             }
         }
 
-        private void UserUpdate(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateUser(object sender, EventArgs e)
         {
             opUserType = OpUserType.UPDATE_USER;
             UpdateUserControlStatus();
+        }
+
+        /// <summary>
+        /// Update Editable Status
+        /// </summary>
+        private void UpdateUserControlStatus()
+        {
+            if (opUserType == OpUserType.DETAIL_USER)
+            {
+                foreach (Control comp in this.groupPanelUser.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+            }
+            else if (opUserType == OpUserType.NEW_USER)
+            {
+                foreach (Control comp in this.groupPanelUser.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+            }
+            else if (opUserType == OpUserType.UPDATE_USER)
+            {
+                foreach (Control comp in this.groupPanelUser.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                userIDTextBox.ReadOnly = true;
+            }
+            this.loginDate.ReadOnly = true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UserDetail_Leave(object sender, EventArgs e)
+        {
+            User user = (User)this.userBindingSource.DataSource;
+            if (opUserType == OpUserType.UPDATE_USER)
+            {
+                user.Restore();
+            }
+            Close();
         }
 
         #endregion Methods

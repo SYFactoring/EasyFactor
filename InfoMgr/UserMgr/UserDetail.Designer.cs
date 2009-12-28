@@ -13,7 +13,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     {
         #region Fields (19)
 
-        private DevComponents.DotNetBar.ButtonX btnUserClose;
+        private DevComponents.DotNetBar.ButtonX btnUserReset;
         private DevComponents.DotNetBar.ButtonX btnUserSave;
         private DevComponents.DotNetBar.ButtonX btnUserUpdate;
         /// <summary>
@@ -22,16 +22,16 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.TextBoxX eDIAccountTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider userErrorProvider;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelUser;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
+        private DevComponents.DotNetBar.Validator.Highlighter userHighlighter;
         private DevComponents.DotNetBar.Controls.TextBoxX loginDate;
         private DevComponents.DotNetBar.Controls.TextBoxX msnTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX nameTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX passwordTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX phoneTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx roleComboBox;
-        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private DevComponents.DotNetBar.Validator.SuperValidator userValidator;
         private DevComponents.DotNetBar.Controls.TextBoxX telphoneTextBox;
         private System.Windows.Forms.BindingSource userBindingSource;
         private DevComponents.DotNetBar.Controls.TextBoxX userIDTextBox;
@@ -90,14 +90,16 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.userIDTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.nameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnUserSave = new DevComponents.DotNetBar.ButtonX();
-            this.btnUserClose = new DevComponents.DotNetBar.ButtonX();
+            this.btnUserReset = new DevComponents.DotNetBar.ButtonX();
             this.eDIAccountTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.roleComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.groupPanelUser = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.btnUserUpdate = new DevComponents.DotNetBar.ButtonX();
-            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.userValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.userErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.userHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             emailLabel = new DevComponents.DotNetBar.LabelX();
             loginDateLabel = new DevComponents.DotNetBar.LabelX();
             mSNLabel = new DevComponents.DotNetBar.LabelX();
@@ -110,7 +112,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             roleLabel = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             this.groupPanelUser.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // emailLabel
@@ -342,6 +344,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.userIDTextBox.Name = "userIDTextBox";
             this.userIDTextBox.Size = new System.Drawing.Size(154, 20);
             this.userIDTextBox.TabIndex = 0;
+            this.userValidator.SetValidator1(this.userIDTextBox, this.requiredFieldValidator1);
             // 
             // nameTextBox
             // 
@@ -355,6 +358,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(154, 20);
             this.nameTextBox.TabIndex = 1;
+            this.userValidator.SetValidator1(this.nameTextBox, this.requiredFieldValidator2);
             // 
             // btnUserSave
             // 
@@ -366,19 +370,19 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnUserSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnUserSave.TabIndex = 18;
             this.btnUserSave.Text = "保存";
-            this.btnUserSave.Click += new System.EventHandler(this.UserSave);
+            this.btnUserSave.Click += new System.EventHandler(this.SaveUser);
             // 
-            // btnUserClose
+            // btnUserReset
             // 
-            this.btnUserClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnUserClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUserClose.Location = new System.Drawing.Point(199, 288);
-            this.btnUserClose.Name = "btnUserClose";
-            this.btnUserClose.Size = new System.Drawing.Size(75, 23);
-            this.btnUserClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnUserClose.TabIndex = 19;
-            this.btnUserClose.Text = "关闭";
-            this.btnUserClose.Click += new System.EventHandler(this.UserClose);
+            this.btnUserReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnUserReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnUserReset.Location = new System.Drawing.Point(199, 288);
+            this.btnUserReset.Name = "btnUserReset";
+            this.btnUserReset.Size = new System.Drawing.Size(75, 23);
+            this.btnUserReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnUserReset.TabIndex = 19;
+            this.btnUserReset.Text = "重置";
+            this.btnUserReset.Click += new System.EventHandler(this.ResetUser);
             // 
             // eDIAccountTextBox
             // 
@@ -476,22 +480,32 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnUserUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnUserUpdate.TabIndex = 24;
             this.btnUserUpdate.Text = "更新";
-            this.btnUserUpdate.Click += new System.EventHandler(this.UserUpdate);
+            this.btnUserUpdate.Click += new System.EventHandler(this.UpdateUser);
             // 
-            // superValidator
+            // userValidator
             // 
-            this.superValidator.ContainerControl = this;
-            this.superValidator.ErrorProvider = this.errorProvider;
-            this.superValidator.Highlighter = this.highlighter;
+            this.userValidator.ContainerControl = this;
+            this.userValidator.ErrorProvider = this.userErrorProvider;
+            this.userValidator.Highlighter = this.userHighlighter;
             // 
-            // errorProvider
+            // userErrorProvider
             // 
-            this.errorProvider.ContainerControl = this;
-            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            this.userErrorProvider.ContainerControl = this;
+            this.userErrorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("userErrorProvider.Icon")));
             // 
-            // highlighter
+            // userHighlighter
             // 
-            this.highlighter.ContainerControl = this;
+            this.userHighlighter.ContainerControl = this;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // UserDetail
             // 
@@ -501,7 +515,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.ClientSize = new System.Drawing.Size(277, 316);
             this.Controls.Add(this.btnUserUpdate);
             this.Controls.Add(this.groupPanelUser);
-            this.Controls.Add(this.btnUserClose);
+            this.Controls.Add(this.btnUserReset);
             this.Controls.Add(this.btnUserSave);
             this.DoubleBuffered = true;
             this.Name = "UserDetail";
@@ -511,11 +525,14 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.groupPanelUser.ResumeLayout(false);
             this.groupPanelUser.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
     }
 }

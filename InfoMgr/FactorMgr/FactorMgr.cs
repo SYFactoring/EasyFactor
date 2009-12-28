@@ -162,8 +162,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// Import factor list from selected file
         /// </summary>
         /// <param name="obj">selected file</param>
-
-
         /// <summary>
         /// Popup a openfile dialog and select the import factor file.
         /// </summary>
@@ -240,6 +238,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             bs.DataSource = queryResult;
             dgvFactors.DataSource = bs;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+        }
+
+        private void Reset(object sender, EventArgs e)
+        {
+            this.tbFactorCode.Text = string.Empty;
+            this.tbFactorName.Text = string.Empty;
+            this.cbCountry.SelectedIndex = -1;
+            this.cbFactorType.SelectedIndex = -1;
         }
 
         /// <summary>

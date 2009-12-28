@@ -194,7 +194,7 @@
             // 
             // 
             buyerEDICodeLabel.BackgroundStyle.Class = "";
-            buyerEDICodeLabel.Location = new System.Drawing.Point(80, 49);
+            buyerEDICodeLabel.Location = new System.Drawing.Point(80, 45);
             buyerEDICodeLabel.Name = "buyerEDICodeLabel";
             buyerEDICodeLabel.Size = new System.Drawing.Size(34, 16);
             buyerEDICodeLabel.TabIndex = 7;
@@ -207,7 +207,7 @@
             // 
             // 
             factorCodeLabel.BackgroundStyle.Class = "";
-            factorCodeLabel.Location = new System.Drawing.Point(68, 69);
+            factorCodeLabel.Location = new System.Drawing.Point(68, 65);
             factorCodeLabel.Name = "factorCodeLabel";
             factorCodeLabel.Size = new System.Drawing.Size(47, 16);
             factorCodeLabel.TabIndex = 11;
@@ -220,7 +220,7 @@
             // 
             // 
             transactionTypeLabel.BackgroundStyle.Class = "";
-            transactionTypeLabel.Location = new System.Drawing.Point(56, 91);
+            transactionTypeLabel.Location = new System.Drawing.Point(56, 88);
             transactionTypeLabel.Name = "transactionTypeLabel";
             transactionTypeLabel.Size = new System.Drawing.Size(59, 16);
             transactionTypeLabel.TabIndex = 14;
@@ -233,7 +233,7 @@
             // 
             // 
             invoiceCurrencyLabel.BackgroundStyle.Class = "";
-            invoiceCurrencyLabel.Location = new System.Drawing.Point(56, 113);
+            invoiceCurrencyLabel.Location = new System.Drawing.Point(56, 109);
             invoiceCurrencyLabel.Name = "invoiceCurrencyLabel";
             invoiceCurrencyLabel.Size = new System.Drawing.Size(59, 16);
             invoiceCurrencyLabel.TabIndex = 15;
@@ -298,7 +298,7 @@
             // 
             // 
             iFPriceLabel.BackgroundStyle.Class = "";
-            iFPriceLabel.Location = new System.Drawing.Point(6, 37);
+            iFPriceLabel.Location = new System.Drawing.Point(6, 32);
             iFPriceLabel.Name = "iFPriceLabel";
             iFPriceLabel.Size = new System.Drawing.Size(69, 16);
             iFPriceLabel.TabIndex = 2;
@@ -311,7 +311,7 @@
             // 
             // 
             handFeeCurrLabel.BackgroundStyle.Class = "";
-            handFeeCurrLabel.Location = new System.Drawing.Point(5, 61);
+            handFeeCurrLabel.Location = new System.Drawing.Point(5, 54);
             handFeeCurrLabel.Name = "handFeeCurrLabel";
             handFeeCurrLabel.Size = new System.Drawing.Size(72, 16);
             handFeeCurrLabel.TabIndex = 4;
@@ -337,7 +337,7 @@
             // 
             // 
             creditCoverCurrLabel.BackgroundStyle.Class = "";
-            creditCoverCurrLabel.Location = new System.Drawing.Point(12, 19);
+            creditCoverCurrLabel.Location = new System.Drawing.Point(12, 11);
             creditCoverCurrLabel.Name = "creditCoverCurrLabel";
             creditCoverCurrLabel.Size = new System.Drawing.Size(84, 16);
             creditCoverCurrLabel.TabIndex = 0;
@@ -350,7 +350,7 @@
             // 
             // 
             periodEndLabel.BackgroundStyle.Class = "";
-            periodEndLabel.Location = new System.Drawing.Point(48, 45);
+            periodEndLabel.Location = new System.Drawing.Point(48, 33);
             periodEndLabel.Name = "periodEndLabel";
             periodEndLabel.Size = new System.Drawing.Size(47, 16);
             periodEndLabel.TabIndex = 4;
@@ -363,7 +363,7 @@
             // 
             // 
             lblBuyerCreditCoverBalance.BackgroundStyle.Class = "";
-            lblBuyerCreditCoverBalance.Location = new System.Drawing.Point(36, 67);
+            lblBuyerCreditCoverBalance.Location = new System.Drawing.Point(36, 56);
             lblBuyerCreditCoverBalance.Name = "lblBuyerCreditCoverBalance";
             lblBuyerCreditCoverBalance.Size = new System.Drawing.Size(59, 16);
             lblBuyerCreditCoverBalance.TabIndex = 6;
@@ -376,7 +376,7 @@
             // 
             // 
             lblBuyerARBalance.BackgroundStyle.Class = "";
-            lblBuyerARBalance.Location = new System.Drawing.Point(12, 89);
+            lblBuyerARBalance.Location = new System.Drawing.Point(12, 75);
             lblBuyerARBalance.Name = "lblBuyerARBalance";
             lblBuyerARBalance.Size = new System.Drawing.Size(84, 16);
             lblBuyerARBalance.TabIndex = 8;
@@ -389,7 +389,7 @@
             // 
             // 
             lblFinanceARBalance.BackgroundStyle.Class = "";
-            lblFinanceARBalance.Location = new System.Drawing.Point(22, 104);
+            lblFinanceARBalance.Location = new System.Drawing.Point(22, 94);
             lblFinanceARBalance.Name = "lblFinanceARBalance";
             lblFinanceARBalance.Size = new System.Drawing.Size(59, 16);
             lblFinanceARBalance.TabIndex = 17;
@@ -402,7 +402,7 @@
             // 
             // 
             lblFinanceCreditCoverBalance.BackgroundStyle.Class = "";
-            lblFinanceCreditCoverBalance.Location = new System.Drawing.Point(24, 82);
+            lblFinanceCreditCoverBalance.Location = new System.Drawing.Point(23, 74);
             lblFinanceCreditCoverBalance.Name = "lblFinanceCreditCoverBalance";
             lblFinanceCreditCoverBalance.Size = new System.Drawing.Size(59, 16);
             lblFinanceCreditCoverBalance.TabIndex = 15;
@@ -415,7 +415,7 @@
             // 
             // 
             lblDueDate.BackgroundStyle.Class = "";
-            lblDueDate.Location = new System.Drawing.Point(36, 60);
+            lblDueDate.Location = new System.Drawing.Point(36, 54);
             lblDueDate.Name = "lblDueDate";
             lblDueDate.Size = new System.Drawing.Size(47, 16);
             lblDueDate.TabIndex = 13;
@@ -428,7 +428,7 @@
             // 
             // 
             lblCreditLine.BackgroundStyle.Class = "";
-            lblCreditLine.Location = new System.Drawing.Point(12, 34);
+            lblCreditLine.Location = new System.Drawing.Point(12, 32);
             lblCreditLine.Name = "lblCreditLine";
             lblCreditLine.Size = new System.Drawing.Size(72, 16);
             lblCreditLine.TabIndex = 10;
@@ -445,7 +445,7 @@
             this.panelCaseBasic.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelCaseBasic.Location = new System.Drawing.Point(0, 0);
             this.panelCaseBasic.Name = "panelCaseBasic";
-            this.panelCaseBasic.Size = new System.Drawing.Size(1120, 163);
+            this.panelCaseBasic.Size = new System.Drawing.Size(1120, 147);
             this.panelCaseBasic.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelCaseBasic.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelCaseBasic.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -473,7 +473,7 @@
             this.groupPanelFinanceCreditLine.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupPanelFinanceCreditLine.Location = new System.Drawing.Point(912, 0);
             this.groupPanelFinanceCreditLine.Name = "groupPanelFinanceCreditLine";
-            this.groupPanelFinanceCreditLine.Size = new System.Drawing.Size(207, 163);
+            this.groupPanelFinanceCreditLine.Size = new System.Drawing.Size(207, 147);
             // 
             // 
             // 
@@ -511,7 +511,7 @@
             // 
             // 
             this.tbFinanceBalance.Border.Class = "TextBoxBorder";
-            this.tbFinanceBalance.Location = new System.Drawing.Point(96, 101);
+            this.tbFinanceBalance.Location = new System.Drawing.Point(96, 93);
             this.tbFinanceBalance.Name = "tbFinanceBalance";
             this.tbFinanceBalance.ReadOnly = true;
             this.tbFinanceBalance.Size = new System.Drawing.Size(100, 20);
@@ -523,7 +523,7 @@
             // 
             // 
             this.tbFinanceCreditLineBalance.Border.Class = "TextBoxBorder";
-            this.tbFinanceCreditLineBalance.Location = new System.Drawing.Point(96, 79);
+            this.tbFinanceCreditLineBalance.Location = new System.Drawing.Point(96, 72);
             this.tbFinanceCreditLineBalance.Name = "tbFinanceCreditLineBalance";
             this.tbFinanceCreditLineBalance.ReadOnly = true;
             this.tbFinanceCreditLineBalance.Size = new System.Drawing.Size(100, 20);
@@ -535,7 +535,7 @@
             // 
             // 
             this.tbDueDate.Border.Class = "TextBoxBorder";
-            this.tbDueDate.Location = new System.Drawing.Point(96, 53);
+            this.tbDueDate.Location = new System.Drawing.Point(96, 51);
             this.tbDueDate.Name = "tbDueDate";
             this.tbDueDate.ReadOnly = true;
             this.tbDueDate.Size = new System.Drawing.Size(100, 20);
@@ -547,7 +547,7 @@
             // 
             // 
             this.tbFinanceLine.Border.Class = "TextBoxBorder";
-            this.tbFinanceLine.Location = new System.Drawing.Point(131, 31);
+            this.tbFinanceLine.Location = new System.Drawing.Point(131, 29);
             this.tbFinanceLine.Name = "tbFinanceLine";
             this.tbFinanceLine.ReadOnly = true;
             this.tbFinanceLine.Size = new System.Drawing.Size(58, 20);
@@ -559,7 +559,7 @@
             // 
             // 
             this.tbFinanceLineCurr.Border.Class = "TextBoxBorder";
-            this.tbFinanceLineCurr.Location = new System.Drawing.Point(96, 31);
+            this.tbFinanceLineCurr.Location = new System.Drawing.Point(96, 29);
             this.tbFinanceLineCurr.Name = "tbFinanceLineCurr";
             this.tbFinanceLineCurr.ReadOnly = true;
             this.tbFinanceLineCurr.Size = new System.Drawing.Size(28, 20);
@@ -571,7 +571,7 @@
             // 
             // 
             this.financeProportionTextBox.Border.Class = "TextBoxBorder";
-            this.financeProportionTextBox.Location = new System.Drawing.Point(96, 3);
+            this.financeProportionTextBox.Location = new System.Drawing.Point(96, 7);
             this.financeProportionTextBox.Name = "financeProportionTextBox";
             this.financeProportionTextBox.ReadOnly = true;
             this.financeProportionTextBox.Size = new System.Drawing.Size(100, 20);
@@ -594,7 +594,7 @@
             this.groupPanelCreditCover.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupPanelCreditCover.Location = new System.Drawing.Point(695, 0);
             this.groupPanelCreditCover.Name = "groupPanelCreditCover";
-            this.groupPanelCreditCover.Size = new System.Drawing.Size(217, 163);
+            this.groupPanelCreditCover.Size = new System.Drawing.Size(217, 147);
             // 
             // 
             // 
@@ -632,7 +632,7 @@
             // 
             // 
             this.tbARBalance.Border.Class = "TextBoxBorder";
-            this.tbARBalance.Location = new System.Drawing.Point(108, 86);
+            this.tbARBalance.Location = new System.Drawing.Point(108, 73);
             this.tbARBalance.Name = "tbARBalance";
             this.tbARBalance.ReadOnly = true;
             this.tbARBalance.Size = new System.Drawing.Size(100, 20);
@@ -644,7 +644,7 @@
             // 
             // 
             this.tbCreditCoverBalance.Border.Class = "TextBoxBorder";
-            this.tbCreditCoverBalance.Location = new System.Drawing.Point(108, 64);
+            this.tbCreditCoverBalance.Location = new System.Drawing.Point(108, 53);
             this.tbCreditCoverBalance.Name = "tbCreditCoverBalance";
             this.tbCreditCoverBalance.ReadOnly = true;
             this.tbCreditCoverBalance.Size = new System.Drawing.Size(100, 20);
@@ -656,7 +656,7 @@
             // 
             // 
             this.periodEndTextBox.Border.Class = "TextBoxBorder";
-            this.periodEndTextBox.Location = new System.Drawing.Point(108, 38);
+            this.periodEndTextBox.Location = new System.Drawing.Point(108, 32);
             this.periodEndTextBox.Name = "periodEndTextBox";
             this.periodEndTextBox.ReadOnly = true;
             this.periodEndTextBox.Size = new System.Drawing.Size(100, 20);
@@ -668,7 +668,7 @@
             // 
             // 
             this.creditCoverTextBox.Border.Class = "TextBoxBorder";
-            this.creditCoverTextBox.Location = new System.Drawing.Point(143, 16);
+            this.creditCoverTextBox.Location = new System.Drawing.Point(143, 10);
             this.creditCoverTextBox.Name = "creditCoverTextBox";
             this.creditCoverTextBox.ReadOnly = true;
             this.creditCoverTextBox.Size = new System.Drawing.Size(58, 20);
@@ -680,7 +680,7 @@
             // 
             // 
             this.creditCoverCurrTextBox.Border.Class = "TextBoxBorder";
-            this.creditCoverCurrTextBox.Location = new System.Drawing.Point(108, 16);
+            this.creditCoverCurrTextBox.Location = new System.Drawing.Point(108, 10);
             this.creditCoverCurrTextBox.Name = "creditCoverCurrTextBox";
             this.creditCoverCurrTextBox.ReadOnly = true;
             this.creditCoverCurrTextBox.Size = new System.Drawing.Size(28, 20);
@@ -700,7 +700,7 @@
             this.groupPanelPrice.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupPanelPrice.Location = new System.Drawing.Point(506, 0);
             this.groupPanelPrice.Name = "groupPanelPrice";
-            this.groupPanelPrice.Size = new System.Drawing.Size(189, 163);
+            this.groupPanelPrice.Size = new System.Drawing.Size(189, 147);
             // 
             // 
             // 
@@ -738,7 +738,7 @@
             // 
             // 
             this.handFeeTextBox.Border.Class = "TextBoxBorder";
-            this.handFeeTextBox.Location = new System.Drawing.Point(124, 60);
+            this.handFeeTextBox.Location = new System.Drawing.Point(124, 52);
             this.handFeeTextBox.Name = "handFeeTextBox";
             this.handFeeTextBox.ReadOnly = true;
             this.handFeeTextBox.Size = new System.Drawing.Size(57, 20);
@@ -750,7 +750,7 @@
             // 
             // 
             this.handFeeCurrTextBox.Border.Class = "TextBoxBorder";
-            this.handFeeCurrTextBox.Location = new System.Drawing.Point(81, 60);
+            this.handFeeCurrTextBox.Location = new System.Drawing.Point(81, 52);
             this.handFeeCurrTextBox.Name = "handFeeCurrTextBox";
             this.handFeeCurrTextBox.ReadOnly = true;
             this.handFeeCurrTextBox.Size = new System.Drawing.Size(37, 20);
@@ -762,7 +762,7 @@
             // 
             // 
             this.iFPriceTextBox.Border.Class = "TextBoxBorder";
-            this.iFPriceTextBox.Location = new System.Drawing.Point(81, 34);
+            this.iFPriceTextBox.Location = new System.Drawing.Point(81, 30);
             this.iFPriceTextBox.Name = "iFPriceTextBox";
             this.iFPriceTextBox.ReadOnly = true;
             this.iFPriceTextBox.Size = new System.Drawing.Size(100, 20);
@@ -811,7 +811,7 @@
             this.groupCaseBasic.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupCaseBasic.Location = new System.Drawing.Point(0, 0);
             this.groupCaseBasic.Name = "groupCaseBasic";
-            this.groupCaseBasic.Size = new System.Drawing.Size(506, 163);
+            this.groupCaseBasic.Size = new System.Drawing.Size(506, 147);
             // 
             // 
             // 
@@ -885,7 +885,7 @@
             // 
             // 
             this.sellerEDICodeTextBox.Border.Class = "TextBoxBorder";
-            this.sellerEDICodeTextBox.Location = new System.Drawing.Point(122, 23);
+            this.sellerEDICodeTextBox.Location = new System.Drawing.Point(122, 22);
             this.sellerEDICodeTextBox.Name = "sellerEDICodeTextBox";
             this.sellerEDICodeTextBox.ReadOnly = true;
             this.sellerEDICodeTextBox.Size = new System.Drawing.Size(64, 20);
@@ -909,7 +909,7 @@
             // 
             // 
             this.sellerNameTextBox.Border.Class = "TextBoxBorder";
-            this.sellerNameTextBox.Location = new System.Drawing.Point(192, 23);
+            this.sellerNameTextBox.Location = new System.Drawing.Point(192, 22);
             this.sellerNameTextBox.Name = "sellerNameTextBox";
             this.sellerNameTextBox.ReadOnly = true;
             this.sellerNameTextBox.Size = new System.Drawing.Size(136, 20);
@@ -933,7 +933,7 @@
             // 
             // 
             this.buyerEDICodeTextBox.Border.Class = "TextBoxBorder";
-            this.buyerEDICodeTextBox.Location = new System.Drawing.Point(122, 44);
+            this.buyerEDICodeTextBox.Location = new System.Drawing.Point(122, 43);
             this.buyerEDICodeTextBox.Name = "buyerEDICodeTextBox";
             this.buyerEDICodeTextBox.ReadOnly = true;
             this.buyerEDICodeTextBox.Size = new System.Drawing.Size(64, 20);
@@ -941,14 +941,15 @@
             // 
             // isNoticeCheckBox
             // 
+            this.isNoticeCheckBox.AutoSize = true;
             // 
             // 
             // 
             this.isNoticeCheckBox.BackgroundStyle.Class = "";
             this.isNoticeCheckBox.Enabled = false;
-            this.isNoticeCheckBox.Location = new System.Drawing.Point(334, 113);
+            this.isNoticeCheckBox.Location = new System.Drawing.Point(334, 111);
             this.isNoticeCheckBox.Name = "isNoticeCheckBox";
-            this.isNoticeCheckBox.Size = new System.Drawing.Size(104, 24);
+            this.isNoticeCheckBox.Size = new System.Drawing.Size(88, 16);
             this.isNoticeCheckBox.TabIndex = 19;
             this.isNoticeCheckBox.Text = "是否暗保理";
             // 
@@ -958,7 +959,7 @@
             // 
             // 
             this.buyerNameTextBox.Border.Class = "TextBoxBorder";
-            this.buyerNameTextBox.Location = new System.Drawing.Point(192, 44);
+            this.buyerNameTextBox.Location = new System.Drawing.Point(192, 43);
             this.buyerNameTextBox.Name = "buyerNameTextBox";
             this.buyerNameTextBox.ReadOnly = true;
             this.buyerNameTextBox.Size = new System.Drawing.Size(136, 20);
@@ -966,14 +967,15 @@
             // 
             // isRecoarseCheckBox
             // 
+            this.isRecoarseCheckBox.AutoSize = true;
             // 
             // 
             // 
             this.isRecoarseCheckBox.BackgroundStyle.Class = "";
             this.isRecoarseCheckBox.Enabled = false;
-            this.isRecoarseCheckBox.Location = new System.Drawing.Point(334, 88);
+            this.isRecoarseCheckBox.Location = new System.Drawing.Point(334, 91);
             this.isRecoarseCheckBox.Name = "isRecoarseCheckBox";
-            this.isRecoarseCheckBox.Size = new System.Drawing.Size(104, 24);
+            this.isRecoarseCheckBox.Size = new System.Drawing.Size(101, 16);
             this.isRecoarseCheckBox.TabIndex = 17;
             this.isRecoarseCheckBox.Text = "是否有追索权";
             // 
@@ -983,7 +985,7 @@
             // 
             // 
             this.factorCodeTextBox.Border.Class = "TextBoxBorder";
-            this.factorCodeTextBox.Location = new System.Drawing.Point(122, 66);
+            this.factorCodeTextBox.Location = new System.Drawing.Point(122, 64);
             this.factorCodeTextBox.Name = "factorCodeTextBox";
             this.factorCodeTextBox.ReadOnly = true;
             this.factorCodeTextBox.Size = new System.Drawing.Size(64, 20);
@@ -995,7 +997,7 @@
             // 
             // 
             this.invoiceCurrencyTextBox.Border.Class = "TextBoxBorder";
-            this.invoiceCurrencyTextBox.Location = new System.Drawing.Point(122, 110);
+            this.invoiceCurrencyTextBox.Location = new System.Drawing.Point(122, 108);
             this.invoiceCurrencyTextBox.Name = "invoiceCurrencyTextBox";
             this.invoiceCurrencyTextBox.ReadOnly = true;
             this.invoiceCurrencyTextBox.Size = new System.Drawing.Size(100, 20);
@@ -1007,7 +1009,7 @@
             // 
             // 
             this.factorNameTextBox.Border.Class = "TextBoxBorder";
-            this.factorNameTextBox.Location = new System.Drawing.Point(192, 66);
+            this.factorNameTextBox.Location = new System.Drawing.Point(192, 64);
             this.factorNameTextBox.Name = "factorNameTextBox";
             this.factorNameTextBox.ReadOnly = true;
             this.factorNameTextBox.Size = new System.Drawing.Size(136, 20);
@@ -1019,7 +1021,7 @@
             // 
             // 
             this.transactionTypeTextBox.Border.Class = "TextBoxBorder";
-            this.transactionTypeTextBox.Location = new System.Drawing.Point(122, 88);
+            this.transactionTypeTextBox.Location = new System.Drawing.Point(122, 86);
             this.transactionTypeTextBox.Name = "transactionTypeTextBox";
             this.transactionTypeTextBox.ReadOnly = true;
             this.transactionTypeTextBox.Size = new System.Drawing.Size(100, 20);
@@ -1030,9 +1032,9 @@
             this.panelInvoiceMgr.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelInvoiceMgr.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.panelInvoiceMgr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelInvoiceMgr.Location = new System.Drawing.Point(0, 163);
+            this.panelInvoiceMgr.Location = new System.Drawing.Point(0, 147);
             this.panelInvoiceMgr.Name = "panelInvoiceMgr";
-            this.panelInvoiceMgr.Size = new System.Drawing.Size(1120, 335);
+            this.panelInvoiceMgr.Size = new System.Drawing.Size(1120, 351);
             this.panelInvoiceMgr.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelInvoiceMgr.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelInvoiceMgr.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
