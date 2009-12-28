@@ -39,9 +39,6 @@
             this.tbDepartmentCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDepartmentCode = new DevComponents.DotNetBar.LabelX();
             this.dgvDepts = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemSelectDept = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemImportDepts = new System.Windows.Forms.ToolStripMenuItem();
             this.DepartmentCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DepartmentNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LocationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +55,10 @@
             this.Email_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Phone_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fax_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemSelectDept = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemImportDepts = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnReset = new DevComponents.DotNetBar.ButtonX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepts)).BeginInit();
             this.cmuDeptMgr.SuspendLayout();
@@ -67,6 +68,7 @@
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.btnReset);
             this.panelQuery.Controls.Add(this.lblCount);
             this.panelQuery.Controls.Add(this.btnQuery);
             this.panelQuery.Controls.Add(this.tbDepartmentName);
@@ -93,9 +95,9 @@
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(412, 4);
+            this.lblCount.Location = new System.Drawing.Point(427, 7);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.Size = new System.Drawing.Size(36, 16);
             this.lblCount.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.lblCount.TabIndex = 5;
             // 
@@ -103,9 +105,9 @@
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(330, 2);
+            this.btnQuery.Location = new System.Drawing.Point(330, 3);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.Size = new System.Drawing.Size(43, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 4;
             this.btnQuery.Text = "查询";
@@ -128,7 +130,7 @@
             // 
             // 
             this.lblDeparmentName.BackgroundStyle.Class = "";
-            this.lblDeparmentName.Location = new System.Drawing.Point(171, 7);
+            this.lblDeparmentName.Location = new System.Drawing.Point(171, 2);
             this.lblDeparmentName.Name = "lblDeparmentName";
             this.lblDeparmentName.Size = new System.Drawing.Size(56, 23);
             this.lblDeparmentName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -141,7 +143,7 @@
             // 
             // 
             this.tbDepartmentCode.Border.Class = "TextBoxBorder";
-            this.tbDepartmentCode.Location = new System.Drawing.Point(65, 5);
+            this.tbDepartmentCode.Location = new System.Drawing.Point(61, 5);
             this.tbDepartmentCode.Name = "tbDepartmentCode";
             this.tbDepartmentCode.Size = new System.Drawing.Size(100, 20);
             this.tbDepartmentCode.TabIndex = 1;
@@ -152,7 +154,7 @@
             // 
             // 
             this.lblDepartmentCode.BackgroundStyle.Class = "";
-            this.lblDepartmentCode.Location = new System.Drawing.Point(3, 7);
+            this.lblDepartmentCode.Location = new System.Drawing.Point(3, 3);
             this.lblDepartmentCode.Name = "lblDepartmentCode";
             this.lblDepartmentCode.Size = new System.Drawing.Size(56, 23);
             this.lblDepartmentCode.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -209,28 +211,6 @@
             this.dgvDepts.Size = new System.Drawing.Size(605, 429);
             this.dgvDepts.TabIndex = 1;
             this.dgvDepts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
-            // 
-            // cmuDeptMgr
-            // 
-            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemSelectDept,
-            this.menuItemImportDepts});
-            this.cmuDeptMgr.Name = "cmuDeptMgr";
-            this.cmuDeptMgr.Size = new System.Drawing.Size(123, 48);
-            // 
-            // menuItemSelectDept
-            // 
-            this.menuItemSelectDept.Name = "menuItemSelectDept";
-            this.menuItemSelectDept.Size = new System.Drawing.Size(122, 22);
-            this.menuItemSelectDept.Text = "选定分部";
-            this.menuItemSelectDept.Click += new System.EventHandler(this.SelectDepartment);
-            // 
-            // menuItemImportDepts
-            // 
-            this.menuItemImportDepts.Name = "menuItemImportDepts";
-            this.menuItemImportDepts.Size = new System.Drawing.Size(122, 22);
-            this.menuItemImportDepts.Text = "导入分部";
-            this.menuItemImportDepts.Click += new System.EventHandler(this.ImportDepartments);
             // 
             // DepartmentCodeColumn
             // 
@@ -362,6 +342,40 @@
             this.Fax_2Column.Name = "Fax_2Column";
             this.Fax_2Column.ReadOnly = true;
             // 
+            // cmuDeptMgr
+            // 
+            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemSelectDept,
+            this.menuItemImportDepts});
+            this.cmuDeptMgr.Name = "cmuDeptMgr";
+            this.cmuDeptMgr.Size = new System.Drawing.Size(123, 48);
+            // 
+            // menuItemSelectDept
+            // 
+            this.menuItemSelectDept.Name = "menuItemSelectDept";
+            this.menuItemSelectDept.Size = new System.Drawing.Size(122, 22);
+            this.menuItemSelectDept.Text = "选定分部";
+            this.menuItemSelectDept.Click += new System.EventHandler(this.SelectDepartment);
+            // 
+            // menuItemImportDepts
+            // 
+            this.menuItemImportDepts.Name = "menuItemImportDepts";
+            this.menuItemImportDepts.Size = new System.Drawing.Size(122, 22);
+            this.menuItemImportDepts.Text = "导入分部";
+            this.menuItemImportDepts.Click += new System.EventHandler(this.ImportDepartments);
+            // 
+            // btnReset
+            // 
+            this.btnReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnReset.Location = new System.Drawing.Point(379, 3);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(42, 23);
+            this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnReset.TabIndex = 6;
+            this.btnReset.Text = "重置";
+            this.btnReset.Click += new System.EventHandler(this.Reset);
+            // 
             // DepartmentMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -407,5 +421,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Email_2Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Phone_2Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fax_2Column;
+        private DevComponents.DotNetBar.ButtonX btnReset;
     }
 }

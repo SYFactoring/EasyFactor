@@ -7,18 +7,18 @@
 namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Client Detail
     /// </summary>
     public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (3)
+		#region Fields (3) 
 
         /// <summary>
         /// 
@@ -33,9 +33,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpContractType opContractType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (3)
+		#region Enums (3) 
 
         /// <summary>
         /// Operation Type 
@@ -57,7 +57,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT
         }
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         public enum OpClientCreditLineType
@@ -77,7 +77,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT_CREDIT_LINE
         }
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         public enum OpContractType
@@ -98,11 +98,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DETAIL_CONTRACT
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (4)
+		#region Constructors (4) 
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client">selected client</param>
@@ -112,6 +112,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private ClientDetail(Client client, OpClientType opClientType, OpClientCreditLineType opClientCreditLineType, OpContractType opContractType)
         {
             this.InitializeComponent();
+            this.dgvClientCreditLines.AutoGenerateColumns = false;
+            this.dgvContracts.AutoGenerateColumns = false;
 
             this.cbCountryCode.DataSource = Country.AllCountries();
             this.cbCountryCode.DisplayMember = "CountryFormatCN";
@@ -199,11 +201,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabControl.SelectedTab = this.tabItemContract;
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (27)
+		#region Methods (25) 
 
-        // Private Methods (27) 
+		// Private Methods (25) 
 
         private void cbDepartments_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
         {
@@ -223,16 +225,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ClientDetail_Leave(object sender, EventArgs e)
-        {
-            this.CloseClient(sender, e);
-        }
-
-        /// <summary>
-        /// Cancel current editing
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void CloseClient(object sender, EventArgs e)
         {
             Client client = (Client)this.clientBindingSource.DataSource;
             if (this.opClientType == OpClientType.UPDATE_CLIENT)
@@ -308,7 +300,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
-                this.ResetClientCreditLine();
+                this.clientCreditLineBindingSource.DataSource = null;
             }
 
         }
@@ -349,7 +341,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.dgvContracts.DataSource = client.Contracts.ToList();
-                this.ResetContract();
+                this.contractBindingSource.DataSource = null;
             }
         }
 
@@ -420,7 +412,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            this.ResetClientCreditLine();
             this.clientCreditLineBindingSource.DataSource = new ClientCreditLine();
             this.opClientCreditLineType = OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE;
             this.UpdateClientCreditLineControlStatus();
@@ -435,7 +426,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            this.ResetContract();
             this.contractBindingSource.DataSource = new Contract();
             this.opContractType = OpContractType.NEW_CONTRACT;
             this.UpdateContractControlStatus();
@@ -476,59 +466,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
-        /// 
+        /// Reset Client
         /// </summary>
-        private void ResetClientCreditLine()
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void ResetClient(object sender, EventArgs e)
         {
-            foreach (Control comp in this.groupPanelClientCreditLine.Controls)
+            if (opClientType == OpClientType.UPDATE_CLIENT)
             {
-                ControlUtil.SetComponetDefault(comp);
+                Client client = this.clientBindingSource.DataSource as Client;
+                client.Restore();
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void ResetContract()
-        {
-            foreach (Control comp in this.groupPanelContract.Controls)
+            else if (opClientType == OpClientType.NEW_CLIENT)
             {
-                ControlUtil.SetComponetDefault(comp);
+                this.clientBindingSource.DataSource = new Client();
             }
-        }
-
-        private bool ValidateClientControl()
-        {
-            bool result = true;
-            foreach (Control comp in this.groupPanelClientBasic.Controls)
-            {
-                if (!this.superValidator.Validate(comp))
-                {
-                    result = false;
-                }
-            }
-            foreach (Control comp in this.groupPanelClientGroup.Controls)
-            {
-                if (!this.superValidator.Validate(comp))
-                {
-                    result = false;
-                }
-            }
-            foreach (Control comp in this.groupPanelClientStat.Controls)
-            {
-                if (!this.superValidator.Validate(comp))
-                {
-                    result = false;
-                }
-            }
-            foreach (Control comp in this.groupPanelClientContact.Controls)
-            {
-                if (!this.superValidator.Validate(comp))
-                {
-                    result = false;
-                }
-            }
-            return result;
         }
 
         /// <summary>
@@ -538,7 +490,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void SaveClient(object sender, EventArgs e)
         {
-            if (!ValidateClientControl())
+            if (!this.clientValidator.Validate())
             {
                 return;
             }
@@ -598,6 +550,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SaveClientCreditLine(object sender, EventArgs e)
         {
+            if (!this.creditLineValidator.Validate())
+            {
+                return;
+            }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
@@ -691,6 +648,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void SaveContract(object sender, EventArgs e)
         {
+            if (!this.contractValidator.Validate())
+            {
+                return;
+            }
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null)
             {
@@ -795,7 +756,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 ClientCreditLine selectedClientCreditLine = clinet.ClientCreditLines.SingleOrDefault(c => c.CreditLineID == cid);
                 if (selectedClientCreditLine != null && this.clientCreditLineBindingSource.DataSource != selectedClientCreditLine)
                 {
-                    this.ResetClientCreditLine();
                     this.SetClientCreditLineEditable(false);
                     this.clientCreditLineBindingSource.DataSource = selectedClientCreditLine;
                     this.btnClientCreditLineFreeze.Enabled = true;
@@ -818,7 +778,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Contract selectedContract = clinet.Contracts.SingleOrDefault(c => c.ContractCode == ccode);
                 if (selectedContract != null && this.contractBindingSource.DataSource != selectedContract)
                 {
-                    this.ResetContract();
                     this.SetContractEditable(false);
                     this.contractBindingSource.DataSource = selectedContract;
                 }
@@ -1079,6 +1038,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbCreateUserName.ReadOnly = true;
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

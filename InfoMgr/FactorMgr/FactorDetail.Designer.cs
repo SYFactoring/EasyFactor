@@ -49,7 +49,7 @@
         private DevComponents.DotNetBar.Controls.TextBoxX departmentTextBox;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvFactorCreditLines;
         private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider factorErrorProvider;
         private System.Windows.Forms.BindingSource factorBindingSource;
         private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
         private System.Windows.Forms.BindingSource factorCreditLineBindingSource;
@@ -61,7 +61,7 @@
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelContacts;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCreditLineDetail;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelMembership;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
+        private DevComponents.DotNetBar.Validator.Highlighter factorHighlighter;
         private DevComponents.DotNetBar.Controls.TextBoxX iFISAvailableOnPrivateForumTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX membershipDateTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX membershipStatusTextBox;
@@ -71,7 +71,7 @@
         private DevComponents.DotNetBar.Controls.TextBoxX postalAddress_2TextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX postalCodePostTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX postalCodeVisitingTextBox;
-        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private DevComponents.DotNetBar.Validator.SuperValidator factorValidator;
         private DevComponents.DotNetBar.TabControl tabControl;
         private DevComponents.DotNetBar.TabItem tabItemFactor;
         private DevComponents.DotNetBar.TabItem tabItemFactorCreditLine;
@@ -260,19 +260,22 @@
             this.countryNameComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.factorTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tabItemFactor = new DevComponents.DotNetBar.TabItem(this.components);
-            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.factorValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator8 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator6 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator7 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator6 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator7 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator8 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.factorErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.factorHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.creditLineValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.clientLineErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.clientLineHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             factorTypeLabel = new DevComponents.DotNetBar.LabelX();
             countryNameLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -325,7 +328,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.factorBindingSource)).BeginInit();
             this.groupPanelContacts.SuspendLayout();
             this.groupPanelBasic.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.factorErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientLineErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // factorTypeLabel
@@ -887,8 +891,8 @@
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelCreditLine);
             this.tabControl.Controls.Add(this.tabPanelFactor);
+            this.tabControl.Controls.Add(this.tabPanelCreditLine);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -1410,7 +1414,7 @@
             this.approveTypeComboBox.Name = "approveTypeComboBox";
             this.approveTypeComboBox.Size = new System.Drawing.Size(124, 21);
             this.approveTypeComboBox.TabIndex = 13;
-            this.superValidator.SetValidator1(this.approveTypeComboBox, this.requiredFieldValidator9);
+            this.factorValidator.SetValidator1(this.approveTypeComboBox, this.requiredFieldValidator9);
             // 
             // approveNoTextBox
             // 
@@ -1423,7 +1427,7 @@
             this.approveNoTextBox.Name = "approveNoTextBox";
             this.approveNoTextBox.Size = new System.Drawing.Size(124, 20);
             this.approveNoTextBox.TabIndex = 11;
-            this.superValidator.SetValidator1(this.approveNoTextBox, this.requiredFieldValidator8);
+            this.factorValidator.SetValidator1(this.approveNoTextBox, this.requiredFieldValidator8);
             // 
             // creditLineStatusTextBox
             // 
@@ -1471,8 +1475,8 @@
             this.periodEndDateTimePicker.Name = "periodEndDateTimePicker";
             this.periodEndDateTimePicker.Size = new System.Drawing.Size(121, 20);
             this.periodEndDateTimePicker.TabIndex = 7;
-            this.superValidator.SetValidator1(this.periodEndDateTimePicker, this.compareValidator1);
-            this.superValidator.SetValidator2(this.periodEndDateTimePicker, this.requiredFieldValidator6);
+            this.factorValidator.SetValidator1(this.periodEndDateTimePicker, this.compareValidator1);
+            this.factorValidator.SetValidator2(this.periodEndDateTimePicker, this.requiredFieldValidator6);
             // 
             // periodBeginDateTimePicker
             // 
@@ -1507,7 +1511,7 @@
             this.periodBeginDateTimePicker.Name = "periodBeginDateTimePicker";
             this.periodBeginDateTimePicker.Size = new System.Drawing.Size(124, 20);
             this.periodBeginDateTimePicker.TabIndex = 5;
-            this.superValidator.SetValidator1(this.periodBeginDateTimePicker, this.requiredFieldValidator5);
+            this.factorValidator.SetValidator1(this.periodBeginDateTimePicker, this.requiredFieldValidator5);
             // 
             // creditLineTextBox
             // 
@@ -1520,7 +1524,7 @@
             this.creditLineTextBox.Name = "creditLineTextBox";
             this.creditLineTextBox.Size = new System.Drawing.Size(120, 20);
             this.creditLineTextBox.TabIndex = 3;
-            this.superValidator.SetValidator1(this.creditLineTextBox, this.requiredFieldValidator7);
+            this.factorValidator.SetValidator1(this.creditLineTextBox, this.requiredFieldValidator7);
             // 
             // creditLineCurrencyComboBox
             // 
@@ -1532,7 +1536,7 @@
             this.creditLineCurrencyComboBox.Name = "creditLineCurrencyComboBox";
             this.creditLineCurrencyComboBox.Size = new System.Drawing.Size(121, 21);
             this.creditLineCurrencyComboBox.TabIndex = 1;
-            this.superValidator.SetValidator1(this.creditLineCurrencyComboBox, this.requiredFieldValidator4);
+            this.factorValidator.SetValidator1(this.creditLineCurrencyComboBox, this.requiredFieldValidator4);
             // 
             // tabItemFactorCreditLine
             // 
@@ -2188,7 +2192,7 @@
             this.factorCodeTextBox.Name = "factorCodeTextBox";
             this.factorCodeTextBox.Size = new System.Drawing.Size(100, 20);
             this.factorCodeTextBox.TabIndex = 5;
-            this.superValidator.SetValidator1(this.factorCodeTextBox, this.requiredFieldValidator2);
+            this.factorValidator.SetValidator1(this.factorCodeTextBox, this.requiredFieldValidator2);
             // 
             // countryNameComboBox
             // 
@@ -2200,7 +2204,7 @@
             this.countryNameComboBox.Name = "countryNameComboBox";
             this.countryNameComboBox.Size = new System.Drawing.Size(121, 21);
             this.countryNameComboBox.TabIndex = 3;
-            this.superValidator.SetValidator1(this.countryNameComboBox, this.requiredFieldValidator3);
+            this.factorValidator.SetValidator1(this.countryNameComboBox, this.requiredFieldValidator3);
             // 
             // factorTypeComboBox
             // 
@@ -2219,7 +2223,7 @@
             this.factorTypeComboBox.Size = new System.Drawing.Size(121, 21);
             this.factorTypeComboBox.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.factorTypeComboBox.TabIndex = 1;
-            this.superValidator.SetValidator1(this.factorTypeComboBox, this.requiredFieldValidator1);
+            this.factorValidator.SetValidator1(this.factorTypeComboBox, this.requiredFieldValidator1);
             // 
             // tabItemFactor
             // 
@@ -2227,11 +2231,21 @@
             this.tabItemFactor.Name = "tabItemFactor";
             this.tabItemFactor.Text = "基本信息";
             // 
-            // superValidator
+            // factorValidator
             // 
-            this.superValidator.ContainerControl = this;
-            this.superValidator.ErrorProvider = this.errorProvider;
-            this.superValidator.Highlighter = this.highlighter;
+            this.factorValidator.ContainerControl = this;
+            this.factorValidator.ErrorProvider = this.factorErrorProvider;
+            this.factorValidator.Highlighter = this.factorHighlighter;
+            // 
+            // requiredFieldValidator9
+            // 
+            this.requiredFieldValidator9.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator9.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator8
+            // 
+            this.requiredFieldValidator8.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator8.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // compareValidator1
             // 
@@ -2241,19 +2255,25 @@
             this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             this.compareValidator1.ValuePropertyName = "Value";
             // 
-            // errorProvider
+            // requiredFieldValidator6
             // 
-            this.errorProvider.ContainerControl = this;
-            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            this.requiredFieldValidator6.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // highlighter
+            // requiredFieldValidator5
             // 
-            this.highlighter.ContainerControl = this;
+            this.requiredFieldValidator5.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // requiredFieldValidator1
+            // requiredFieldValidator7
             // 
-            this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.requiredFieldValidator7.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator4
+            // 
+            this.requiredFieldValidator4.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator2
             // 
@@ -2265,35 +2285,34 @@
             this.requiredFieldValidator3.ErrorMessage = "Your error message here.";
             this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // requiredFieldValidator4
+            // requiredFieldValidator1
             // 
-            this.requiredFieldValidator4.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // requiredFieldValidator5
+            // factorErrorProvider
             // 
-            this.requiredFieldValidator5.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.factorErrorProvider.ContainerControl = this;
+            this.factorErrorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("factorErrorProvider.Icon")));
             // 
-            // requiredFieldValidator6
+            // factorHighlighter
             // 
-            this.requiredFieldValidator6.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.factorHighlighter.ContainerControl = this;
             // 
-            // requiredFieldValidator7
+            // creditLineValidator
             // 
-            this.requiredFieldValidator7.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.creditLineValidator.ContainerControl = this;
+            this.creditLineValidator.ErrorProvider = this.clientLineErrorProvider;
+            this.creditLineValidator.Highlighter = this.clientLineHighlighter;
             // 
-            // requiredFieldValidator8
+            // clientLineErrorProvider
             // 
-            this.requiredFieldValidator8.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator8.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.clientLineErrorProvider.ContainerControl = this;
+            this.clientLineErrorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("clientLineErrorProvider.Icon")));
             // 
-            // requiredFieldValidator9
+            // clientLineHighlighter
             // 
-            this.requiredFieldValidator9.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator9.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.clientLineHighlighter.ContainerControl = this;
             // 
             // FactorDetail
             // 
@@ -2325,7 +2344,8 @@
             this.groupPanelContacts.PerformLayout();
             this.groupPanelBasic.ResumeLayout(false);
             this.groupPanelBasic.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.factorErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientLineErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2341,5 +2361,8 @@
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Validator.SuperValidator creditLineValidator;
+        private System.Windows.Forms.ErrorProvider clientLineErrorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter clientLineHighlighter;
     }
 }

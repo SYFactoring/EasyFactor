@@ -22,7 +22,7 @@ namespace CMBC.EasyFactor.DB.dbml
             PropertyInfo[] props = this.GetType().GetProperties();
             foreach (PropertyInfo p in props)
             {
-                if (p.CanWrite && p.PropertyType.IsPrimitive)
+                if (p.CanWrite && p.PropertyType.IsSerializable)
                 {
                     var value = p.GetValue(this, null);
                     _status.Add(value);
@@ -38,7 +38,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 int i = 0;
                 foreach (PropertyInfo p in props)
                 {
-                    if (p.CanWrite && p.PropertyType.IsPrimitive)
+                    if (p.CanWrite && p.PropertyType.IsSerializable)
                     {
                         var value = _status[i++];
                         p.SetValue(this, value, null);

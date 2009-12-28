@@ -101,6 +101,12 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
+        private void Reset(object sender, EventArgs e)
+        {
+            this.tbDepartmentCode.Text = string.Empty;
+            this.tbDepartmentName.Text = string.Empty;
+        }
+
         /// <summary>
         /// Select department and close the query form
         /// </summary>
