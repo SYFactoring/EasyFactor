@@ -142,6 +142,7 @@ namespace CMBC.EasyFactor.Report
             sheet.get_Range(sheet.Cells[1, 5], sheet.Cells[16 + count, 5]).ColumnWidth = 15;
 
             sheet.get_Range(sheet.Cells[11, 1], sheet.Cells[16 + count, 1]).NumberFormatLocal = "@";
+            sheet.get_Range(sheet.Cells[11, 1], sheet.Cells[16 + count, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[11, 2], sheet.Cells[16 + count, 2]).NumberFormatLocal = "0.00";
             sheet.get_Range(sheet.Cells[11, 3], sheet.Cells[16 + count, 3]).NumberFormatLocal = "yyyy/MM/dd";
             sheet.get_Range(sheet.Cells[11, 4], sheet.Cells[16 + count, 4]).NumberFormatLocal = "yyyy/MM/dd";
