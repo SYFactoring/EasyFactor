@@ -9,13 +9,14 @@ namespace CMBC.EasyFactor.Report
     using CMBC.EasyFactor.Utils;
     using Microsoft.Office.Interop.Excel;
     using Microsoft.Office.Core;
+    using CMBC.EasyFactor.ARMgr;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class ReportMgr : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         /// <summary>
         /// 
@@ -26,9 +27,9 @@ namespace CMBC.EasyFactor.Report
         /// </summary>
         private OpReportType opReportType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -46,11 +47,11 @@ namespace CMBC.EasyFactor.Report
             REPORT_FINANCE
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="opReportType"></param>
@@ -64,11 +65,11 @@ namespace CMBC.EasyFactor.Report
             ControlUtil.SetDoubleBuffered(this.dgvInvoices);
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (5) 
+        #region Methods (5)
 
-		// Private Methods (5) 
+        // Private Methods (5) 
 
         private void GenerateAssignReport(List<Invoice> invoiceList)
         {
@@ -128,7 +129,7 @@ namespace CMBC.EasyFactor.Report
             sheet.UsedRange.Font.Name = "楷体";
             sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
             sheet.get_Range(sheet.Cells[1, 2], sheet.Cells[1, 2]).Font.Underline = true;
-            sheet.get_Range(sheet.Cells[2, 1], sheet.Cells[2, 5]).RowHeight = 25;
+            sheet.get_Range(sheet.Cells[2, 1], sheet.Cells[2, 5]).RowHeight = 30;
             sheet.get_Range(sheet.Cells[3, 2], sheet.Cells[3, 2]).Font.Size = 24;
             sheet.get_Range(sheet.Cells[5, 2], sheet.Cells[5, 2]).Font.Underline = true;
             sheet.get_Range(sheet.Cells[6, 2], sheet.Cells[6, 2]).Font.Underline = true;
@@ -205,7 +206,7 @@ namespace CMBC.EasyFactor.Report
             sheet.Cells[18 + count, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
             sheet.UsedRange.Font.Name = "楷体";
-            sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 5]).RowHeight = 25;
+            sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 5]).RowHeight = 30;
             sheet.get_Range(sheet.Cells[2, 2], sheet.Cells[2, 2]).Font.Size = 24;
             sheet.get_Range(sheet.Cells[5, 2], sheet.Cells[5, 2]).Font.Underline = true;
             sheet.get_Range(sheet.Cells[6, 2], sheet.Cells[6, 2]).Font.Underline = true;
@@ -218,11 +219,13 @@ namespace CMBC.EasyFactor.Report
             sheet.get_Range(sheet.Cells[1, 5], sheet.Cells[16 + count, 5]).ColumnWidth = 15;
 
             sheet.get_Range(sheet.Cells[11, 1], sheet.Cells[16 + count, 1]).NumberFormatLocal = "@";
+            sheet.get_Range(sheet.Cells[11, 1], sheet.Cells[16 + count, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[11, 2], sheet.Cells[16 + count, 2]).NumberFormatLocal = "0.00";
             sheet.get_Range(sheet.Cells[11, 3], sheet.Cells[16 + count, 3]).NumberFormatLocal = "yyyy/MM/dd";
             sheet.get_Range(sheet.Cells[11, 4], sheet.Cells[16 + count, 4]).NumberFormatLocal = "yyyy/MM/dd";
             sheet.get_Range(sheet.Cells[11, 5], sheet.Cells[16 + count, 5]).NumberFormatLocal = "@";
- 
+            sheet.get_Range(sheet.Cells[11, 5], sheet.Cells[16 + count, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
             app.Visible = true;
         }
 
@@ -280,7 +283,8 @@ namespace CMBC.EasyFactor.Report
                               let buyerFactor = invoice.InvoiceAssignBatch.CDA.Case.BuyerFactor
                               where buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
                               where
-                                 (beginDate == this.diAssignDateBegin.MinDate ? true : invoice.AssignDate > beginDate.AddDays(-1))
+                                  invoice.IsFlaw==this.cbIsFlaw.Checked
+                                 && (beginDate == this.diAssignDateBegin.MinDate ? true : invoice.AssignDate > beginDate.AddDays(-1))
                                  && (endDate == this.diAssignDateEnd.MaxDate ? true : invoice.AssignDate < endDate.AddDays(1))
                               select invoice;
 
@@ -297,6 +301,25 @@ namespace CMBC.EasyFactor.Report
             this.diAssignDateEnd.Value = default(DateTime);
         }
 
-		#endregion Methods 
+        #endregion Methods
+
+        private void DetailInvoice(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvInvoices.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
+            if (ino != null)
+            {
+                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
+                if (selectedInvoice != null)
+                {
+                    InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
+                    invoiceDetail.ShowDialog(this);
+                }
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientMgr : UserControl
     {
-		#region Fields (3) 
+        #region Fields (3)
 
         /// <summary>
         /// 
@@ -31,20 +31,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private bool isEditable;
         private OpClientMgrType opClientMgrType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         public enum OpClientMgrType
         {
             NEED_CONTRACT
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (2) 
+        #region Constructors (2)
 
-public ClientMgr(OpClientMgrType clientMgrType)
+        public ClientMgr(OpClientMgrType clientMgrType)
             : this(false)
         {
             this.opClientMgrType = clientMgrType;
@@ -76,9 +76,9 @@ public ClientMgr(OpClientMgrType clientMgrType)
             this.cbDepartment.SelectedIndex = -1;
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets owner form
@@ -98,11 +98,11 @@ public ClientMgr(OpClientMgrType clientMgrType)
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (12) 
+        #region Methods (12)
 
-		// Private Methods (12) 
+        // Private Methods (12) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -146,9 +146,9 @@ public ClientMgr(OpClientMgrType clientMgrType)
                         {
                             App.Current.DbContext.SubmitChanges();
                         }
-                        catch (SqlException)
+                        catch (SqlException e1)
                         {
-                            MessageBox.Show("不能删除此客户,已存在相关额度.", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("不能删除此客户," + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
 
@@ -281,12 +281,12 @@ public ClientMgr(OpClientMgrType clientMgrType)
             }
 
             var queryResult = App.Current.DbContext.Clients.Where(c =>
-                    ((c.BranchCode == null ? string.Empty : c.BranchCode).Contains(department))
+                     ((c.BranchCode == null ? string.Empty : c.BranchCode).Contains(department))
                   && ((c.PMName == null ? string.Empty : c.PMName).Contains(tbPM.Text))
                   && ((c.RMName == null ? string.Empty : c.RMName).Contains(tbRM.Text))
                   && (((c.ClientNameCN == null ? string.Empty : c.ClientNameCN).Contains(tbClientName.Text)) || ((c.ClientNameEN_1 == null ? string.Empty : c.ClientNameEN_1).Contains(tbClientName.Text)) || ((c.ClientNameEN_2 == null ? string.Empty : c.ClientNameEN_2).Contains(tbClientName.Text)))
                   && ((c.ClientEDICode == null ? string.Empty : c.ClientEDICode).Contains(tbClientEDICode.Text))
-                  && (c.ClientType.Contains(clientType))
+                  && ((c.ClientType == null ? string.Empty : c.ClientType).Contains(clientType))
                   && (this.cbIsSigned.Checked == false ? true : c.Contracts.Any(con => con.ContractStatus == "已生效"))
                   );
 
@@ -385,6 +385,6 @@ public ClientMgr(OpClientMgrType clientMgrType)
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

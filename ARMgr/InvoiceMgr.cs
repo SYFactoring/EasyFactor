@@ -169,5 +169,24 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
+
+        private void DetailInvoice(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvInvoices.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
+            if (ino != null)
+            {
+                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
+                if (selectedInvoice != null)
+                {
+                    InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
+                    invoiceDetail.ShowDialog(this);
+                }
+            }
+        }
     }
 }

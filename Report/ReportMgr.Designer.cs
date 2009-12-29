@@ -48,6 +48,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.btnQueryReset = new DevComponents.DotNetBar.ButtonX();
             this.btnAssignReport = new DevComponents.DotNetBar.ButtonX();
             this.diAssignDateEnd = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.tbFactor = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -89,7 +90,7 @@
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnQueryReset = new DevComponents.DotNetBar.ButtonX();
+            this.cbIsFlaw = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diAssignDateEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diAssignDateBegin)).BeginInit();
@@ -100,6 +101,7 @@
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.cbIsFlaw);
             this.panelQuery.Controls.Add(this.btnQueryReset);
             this.panelQuery.Controls.Add(this.btnAssignReport);
             this.panelQuery.Controls.Add(this.diAssignDateEnd);
@@ -125,6 +127,18 @@
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 1;
+            // 
+            // btnQueryReset
+            // 
+            this.btnQueryReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQueryReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQueryReset.Location = new System.Drawing.Point(421, 31);
+            this.btnQueryReset.Name = "btnQueryReset";
+            this.btnQueryReset.Size = new System.Drawing.Size(46, 22);
+            this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQueryReset.TabIndex = 12;
+            this.btnQueryReset.Text = "重置";
+            this.btnQueryReset.Click += new System.EventHandler(this.Reset);
             // 
             // btnAssignReport
             // 
@@ -386,6 +400,7 @@
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInvoices.Size = new System.Drawing.Size(673, 303);
             this.dgvInvoices.TabIndex = 2;
+            this.dgvInvoices.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailInvoice);
             // 
             // colSellerName
             // 
@@ -624,25 +639,28 @@
             this.dataGridViewTextBoxColumn18.HeaderText = "融资逾期天数";
             this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
             // 
-            // btnQueryReset
+            // cbIsFlaw
             // 
-            this.btnQueryReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnQueryReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQueryReset.Location = new System.Drawing.Point(421, 31);
-            this.btnQueryReset.Name = "btnQueryReset";
-            this.btnQueryReset.Size = new System.Drawing.Size(46, 22);
-            this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQueryReset.TabIndex = 12;
-            this.btnQueryReset.Text = "重置";
-            this.btnQueryReset.Click += new System.EventHandler(this.Reset);
+            this.cbIsFlaw.AutoSize = true;
             // 
-            // InvoiceMgr
+            // 
+            // 
+            this.cbIsFlaw.BackgroundStyle.Class = "";
+            this.cbIsFlaw.CheckValueIndeterminate = "A";
+            this.cbIsFlaw.Location = new System.Drawing.Point(312, 10);
+            this.cbIsFlaw.Name = "cbIsFlaw";
+            this.cbIsFlaw.Size = new System.Drawing.Size(76, 16);
+            this.cbIsFlaw.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsFlaw.TabIndex = 22;
+            this.cbIsFlaw.Text = "是否瑕疵";
+            // 
+            // ReportMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvInvoices);
             this.Controls.Add(this.panelQuery);
-            this.Name = "InvoiceMgr";
+            this.Name = "ReportMgr";
             this.Size = new System.Drawing.Size(673, 359);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
@@ -698,5 +716,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colIsFlaw;
         private DevComponents.DotNetBar.ButtonX btnAssignReport;
         private DevComponents.DotNetBar.ButtonX btnQueryReset;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsFlaw;
     }
 }

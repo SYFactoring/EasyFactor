@@ -293,7 +293,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             bool isDeleteOK = true;
             try
             {
-                App.Current.DbContext.ClientCreditLines.DeleteOnSubmit(creditLine);
+                client.ClientCreditLines.Remove(creditLine);
                 App.Current.DbContext.SubmitChanges();
             }
             catch (Exception e1)
