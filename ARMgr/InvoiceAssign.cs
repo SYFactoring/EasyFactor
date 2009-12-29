@@ -176,7 +176,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._CDA == null)
             {
-                MessageBox.Show("没有有效的额度通知书", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

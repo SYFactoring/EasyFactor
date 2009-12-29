@@ -299,7 +299,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             catch (Exception e1)
             {
                 isDeleteOK = false;
-                MessageBox.Show(e1.Message);
+                MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isDeleteOK)
@@ -341,7 +341,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             catch (Exception e1)
             {
                 isDeleteOK = false;
-                MessageBox.Show(e1.Message);
+                MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isDeleteOK)
@@ -531,7 +531,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 catch (Exception e1)
                 {
                     isAddOK = false;
-                    MessageBox.Show(e1.Message);
+                    MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
@@ -556,7 +556,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBox.Show(e2.Message);
+                    MessageBox.Show(e2.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)
@@ -633,7 +633,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 catch (Exception e1)
                 {
                     isAddOK = false;
-                    MessageBox.Show(e1.Message);
+                    MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
@@ -653,7 +653,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBox.Show(e2.Message);
+                    MessageBox.Show(e2.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)
@@ -713,7 +713,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 catch (Exception e1)
                 {
                     isAddOK = false;
-                    MessageBox.Show(e1.Message);
+                    MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
@@ -749,7 +749,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBox.Show(e2.Message);
+                    MessageBox.Show(e2.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)

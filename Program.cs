@@ -29,8 +29,8 @@ namespace CMBC.EasyFactor
                 return;
             }
 
-            //loginWindow.ShowDialog();
-            loginWindow.AutoLogin();
+            loginWindow.ShowDialog();
+            //loginWindow.AutoLogin();
 
             if (App.Current.CurUser != null)
             {

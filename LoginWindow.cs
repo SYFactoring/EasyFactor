@@ -51,11 +51,11 @@ namespace CMBC.EasyFactor
                     return true;
                 }
 
-                MessageBox.Show("数据库连接失败", "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("数据库连接失败", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception e)
             {
-                MessageBox.Show("数据库连接失败: "+e.ToString(), "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("数据库连接失败: "+e.ToString(), "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             return false;

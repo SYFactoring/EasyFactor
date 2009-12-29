@@ -110,7 +110,7 @@ namespace CMBC.EasyFactor.ARMgr
                     }
                     catch (Exception e1)
                     {
-                        MessageBox.Show(e1.Message, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(e1.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
