@@ -118,14 +118,19 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 {
                     if (MessageBox.Show("是否确定删除保理商: " + selectedFactor.FactorCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
+                        if (selectedFactor.FactorCreditLines.Count > 0)
+                        {
+                            MessageBox.Show("不能删除此机构,已存在相关额度.", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
                         App.Current.DbContext.Factors.DeleteOnSubmit(selectedFactor);
                         try
                         {
                             App.Current.DbContext.SubmitChanges();
                         }
-                        catch (SqlException)
+                        catch (SqlException e1)
                         {
-                            MessageBox.Show("不能删除此机构,已存在相关额度.", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("删除失败:" + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                         dgvFactors.Rows.RemoveAt(dgvFactors.SelectedRows[0].Index);

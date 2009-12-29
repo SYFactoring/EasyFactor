@@ -141,6 +141,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     if (MessageBox.Show("是否打算删除客户: " + selectedClient.ClientNameCN, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
+                        if (selectedClient.ClientCreditLines.Count > 0)
+                        {
+                            MessageBox.Show("不能删除此客户,已存在相关额度", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
                         App.Current.DbContext.Clients.DeleteOnSubmit(selectedClient);
                         try
                         {
@@ -148,7 +153,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                         catch (SqlException e1)
                         {
-                            MessageBox.Show("不能删除此客户," + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("删除失败," + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
 
