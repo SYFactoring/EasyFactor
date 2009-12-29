@@ -237,28 +237,50 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DevComponents.DotNetBar.LabelX lblGroupNameCN;
             DevComponents.DotNetBar.LabelX websiteLabel;
             DevComponents.DotNetBar.LabelX telephoneLabel;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientDetail));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
+            this.tabPanelContract = new DevComponents.DotNetBar.TabControlPanel();
+            this.dgvContracts = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colContractCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colContractValueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colContractDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colContractStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClientEDICode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupPanelContract = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.btnContractUpdate = new DevComponents.DotNetBar.ButtonX();
+            this.btnContractRefresh = new DevComponents.DotNetBar.ButtonX();
+            this.btnContractDelete = new DevComponents.DotNetBar.ButtonX();
+            this.btnContractSave = new DevComponents.DotNetBar.ButtonX();
+            this.btnContractNew = new DevComponents.DotNetBar.ButtonX();
+            this.tbContractCode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.contractBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbContractStatus = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.diContractDueDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.diContractValueDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.tabItemContract = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClient = new DevComponents.DotNetBar.TabControlPanel();
             this.btnClientUpdate = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelClientContact = new DevComponents.DotNetBar.Controls.GroupPanel();
@@ -306,6 +328,23 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabItemClient = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClientCreditLine = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvClientCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colCreditLineID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditLineType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditLineCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApproveNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApproveType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditLineStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFreezeReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFreezer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFreezeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnfreezeReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnfreezer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnfreezeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupPanelClientCreditLine = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.btnClientCreditLineUpdate = new DevComponents.DotNetBar.ButtonX();
             this.creditLineTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -331,21 +370,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.creditLineTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.creditLineCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tabItemClientCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelContract = new DevComponents.DotNetBar.TabControlPanel();
-            this.dgvContracts = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.groupPanelContract = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.btnContractUpdate = new DevComponents.DotNetBar.ButtonX();
-            this.btnContractRefresh = new DevComponents.DotNetBar.ButtonX();
-            this.btnContractDelete = new DevComponents.DotNetBar.ButtonX();
-            this.btnContractSave = new DevComponents.DotNetBar.ButtonX();
-            this.btnContractNew = new DevComponents.DotNetBar.ButtonX();
-            this.tbContractCode = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.contractBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbContractStatus = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.diContractDueDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.diContractValueDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.tabItemContract = new DevComponents.DotNetBar.TabItem(this.components);
             this.clientValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.customValidator3 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
@@ -406,30 +430,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditLineID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditLineType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditLineCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colApproveNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colApproveType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditLineStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFreezeReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFreezer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFreezeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnfreezeReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnfreezer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnfreezeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colContractCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colContractValueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colContractDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colContractStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClientEDICode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             clientNameCNLabel = new DevComponents.DotNetBar.LabelX();
             addressCNLabel = new DevComponents.DotNetBar.LabelX();
             cityCNLabel = new DevComponents.DotNetBar.LabelX();
@@ -478,6 +478,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             telephoneLabel = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
+            this.tabPanelContract.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvContracts)).BeginInit();
+            this.groupPanelContract.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.contractBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diContractDueDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diContractValueDate)).BeginInit();
             this.tabPanelClient.SuspendLayout();
             this.groupPanelClientContact.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).BeginInit();
@@ -492,12 +498,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             ((System.ComponentModel.ISupportInitialize)(this.freezeDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.periodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.periodBeginDateTimePicker)).BeginInit();
-            this.tabPanelContract.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvContracts)).BeginInit();
-            this.groupPanelContract.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.contractBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diContractDueDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diContractValueDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.creditLineErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contractErrorProvider)).BeginInit();
@@ -1082,9 +1082,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblContractCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             lblContractCode.Location = new System.Drawing.Point(15, 3);
             lblContractCode.Name = "lblContractCode";
-            lblContractCode.Size = new System.Drawing.Size(72, 16);
+            lblContractCode.Size = new System.Drawing.Size(84, 16);
             lblContractCode.TabIndex = 1;
-            lblContractCode.Text = "主合同编号:";
+            lblContractCode.Text = "保理合同编号:";
             // 
             // lblCreateUserName
             // 
@@ -1125,9 +1125,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblContractValueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             lblContractValueDate.Location = new System.Drawing.Point(3, 29);
             lblContractValueDate.Name = "lblContractValueDate";
-            lblContractValueDate.Size = new System.Drawing.Size(84, 16);
+            lblContractValueDate.Size = new System.Drawing.Size(97, 16);
             lblContractValueDate.TabIndex = 7;
-            lblContractValueDate.Text = "主合同生效日:";
+            lblContractValueDate.Text = "保理合同生效日:";
             // 
             // lblContractDueDate
             // 
@@ -1140,9 +1140,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblContractDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             lblContractDueDate.Location = new System.Drawing.Point(3, 55);
             lblContractDueDate.Name = "lblContractDueDate";
-            lblContractDueDate.Size = new System.Drawing.Size(84, 16);
+            lblContractDueDate.Size = new System.Drawing.Size(97, 16);
             lblContractDueDate.TabIndex = 5;
-            lblContractDueDate.Text = "主合同到期日:";
+            lblContractDueDate.Text = "保理合同到期日:";
             // 
             // lblGroupNameCN
             // 
@@ -1193,9 +1193,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
+            this.tabControl.Controls.Add(this.tabPanelContract);
             this.tabControl.Controls.Add(this.tabPanelClientCreditLine);
             this.tabControl.Controls.Add(this.tabPanelClient);
-            this.tabControl.Controls.Add(this.tabPanelContract);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -1208,6 +1208,365 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabControl.Tabs.Add(this.tabItemClientCreditLine);
             this.tabControl.Tabs.Add(this.tabItemContract);
             this.tabControl.Text = "tabControl1";
+            // 
+            // tabPanelContract
+            // 
+            this.tabPanelContract.Controls.Add(this.dgvContracts);
+            this.tabPanelContract.Controls.Add(this.groupPanelContract);
+            this.tabPanelContract.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelContract.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelContract.Name = "tabPanelContract";
+            this.tabPanelContract.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelContract.Size = new System.Drawing.Size(614, 588);
+            this.tabPanelContract.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelContract.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelContract.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelContract.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelContract.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelContract.Style.GradientAngle = 90;
+            this.tabPanelContract.TabIndex = 4;
+            this.tabPanelContract.TabItem = this.tabItemContract;
+            // 
+            // dgvContracts
+            // 
+            this.dgvContracts.AllowUserToAddRows = false;
+            this.dgvContracts.AllowUserToDeleteRows = false;
+            this.dgvContracts.AllowUserToOrderColumns = true;
+            this.dgvContracts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvContracts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle21;
+            this.dgvContracts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvContracts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colContractCode,
+            this.colContractValueDate,
+            this.colContractDueDate,
+            this.colContractStatus,
+            this.colCreateUserName,
+            this.colClient,
+            this.colClientEDICode});
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvContracts.DefaultCellStyle = dataGridViewCellStyle24;
+            this.dgvContracts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvContracts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvContracts.Location = new System.Drawing.Point(1, 168);
+            this.dgvContracts.Name = "dgvContracts";
+            this.dgvContracts.ReadOnly = true;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvContracts.RowHeadersDefaultCellStyle = dataGridViewCellStyle25;
+            this.dgvContracts.RowTemplate.Height = 23;
+            this.dgvContracts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvContracts.Size = new System.Drawing.Size(612, 419);
+            this.dgvContracts.TabIndex = 15;
+            this.dgvContracts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectContract);
+            // 
+            // colContractCode
+            // 
+            this.colContractCode.DataPropertyName = "ContractCode";
+            this.colContractCode.HeaderText = "合同号";
+            this.colContractCode.Name = "colContractCode";
+            this.colContractCode.ReadOnly = true;
+            // 
+            // colContractValueDate
+            // 
+            this.colContractValueDate.DataPropertyName = "ContractValueDate";
+            dataGridViewCellStyle22.Format = "d";
+            dataGridViewCellStyle22.NullValue = null;
+            this.colContractValueDate.DefaultCellStyle = dataGridViewCellStyle22;
+            this.colContractValueDate.HeaderText = "生效日";
+            this.colContractValueDate.Name = "colContractValueDate";
+            this.colContractValueDate.ReadOnly = true;
+            // 
+            // colContractDueDate
+            // 
+            this.colContractDueDate.DataPropertyName = "ContractDueDate";
+            dataGridViewCellStyle23.Format = "d";
+            this.colContractDueDate.DefaultCellStyle = dataGridViewCellStyle23;
+            this.colContractDueDate.HeaderText = "到期日";
+            this.colContractDueDate.Name = "colContractDueDate";
+            this.colContractDueDate.ReadOnly = true;
+            // 
+            // colContractStatus
+            // 
+            this.colContractStatus.DataPropertyName = "ContractStatus";
+            this.colContractStatus.HeaderText = "合同状态";
+            this.colContractStatus.Name = "colContractStatus";
+            this.colContractStatus.ReadOnly = true;
+            // 
+            // colCreateUserName
+            // 
+            this.colCreateUserName.DataPropertyName = "CreateUserName";
+            this.colCreateUserName.HeaderText = "经办人";
+            this.colCreateUserName.Name = "colCreateUserName";
+            this.colCreateUserName.ReadOnly = true;
+            // 
+            // colClient
+            // 
+            this.colClient.DataPropertyName = "Client";
+            this.colClient.HeaderText = "Client";
+            this.colClient.Name = "colClient";
+            this.colClient.ReadOnly = true;
+            this.colClient.Visible = false;
+            // 
+            // colClientEDICode
+            // 
+            this.colClientEDICode.DataPropertyName = "ClientEDICode";
+            this.colClientEDICode.HeaderText = "ClientEDICode";
+            this.colClientEDICode.Name = "colClientEDICode";
+            this.colClientEDICode.ReadOnly = true;
+            this.colClientEDICode.Visible = false;
+            // 
+            // groupPanelContract
+            // 
+            this.groupPanelContract.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelContract.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelContract.Controls.Add(this.btnContractUpdate);
+            this.groupPanelContract.Controls.Add(this.btnContractRefresh);
+            this.groupPanelContract.Controls.Add(this.btnContractDelete);
+            this.groupPanelContract.Controls.Add(this.btnContractSave);
+            this.groupPanelContract.Controls.Add(this.btnContractNew);
+            this.groupPanelContract.Controls.Add(lblContractCode);
+            this.groupPanelContract.Controls.Add(lblCreateUserName);
+            this.groupPanelContract.Controls.Add(this.tbContractCode);
+            this.groupPanelContract.Controls.Add(this.tbCreateUserName);
+            this.groupPanelContract.Controls.Add(lblContractStatus);
+            this.groupPanelContract.Controls.Add(this.tbContractStatus);
+            this.groupPanelContract.Controls.Add(lblContractValueDate);
+            this.groupPanelContract.Controls.Add(this.diContractDueDate);
+            this.groupPanelContract.Controls.Add(this.diContractValueDate);
+            this.groupPanelContract.Controls.Add(lblContractDueDate);
+            this.groupPanelContract.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelContract.Location = new System.Drawing.Point(1, 1);
+            this.groupPanelContract.Name = "groupPanelContract";
+            this.groupPanelContract.Size = new System.Drawing.Size(612, 167);
+            // 
+            // 
+            // 
+            this.groupPanelContract.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelContract.Style.BackColorGradientAngle = 90;
+            this.groupPanelContract.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelContract.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelContract.Style.BorderBottomWidth = 1;
+            this.groupPanelContract.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelContract.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelContract.Style.BorderLeftWidth = 1;
+            this.groupPanelContract.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelContract.Style.BorderRightWidth = 1;
+            this.groupPanelContract.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelContract.Style.BorderTopWidth = 1;
+            this.groupPanelContract.Style.Class = "";
+            this.groupPanelContract.Style.CornerDiameter = 4;
+            this.groupPanelContract.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelContract.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelContract.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelContract.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelContract.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelContract.StyleMouseOver.Class = "";
+            this.groupPanelContract.TabIndex = 14;
+            // 
+            // btnContractUpdate
+            // 
+            this.btnContractUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnContractUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnContractUpdate.Location = new System.Drawing.Point(269, 133);
+            this.btnContractUpdate.Name = "btnContractUpdate";
+            this.btnContractUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnContractUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnContractUpdate.TabIndex = 41;
+            this.btnContractUpdate.Text = "编辑";
+            this.btnContractUpdate.Click += new System.EventHandler(this.UpdateContract);
+            // 
+            // btnContractRefresh
+            // 
+            this.btnContractRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnContractRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnContractRefresh.Location = new System.Drawing.Point(109, 133);
+            this.btnContractRefresh.Name = "btnContractRefresh";
+            this.btnContractRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnContractRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnContractRefresh.TabIndex = 40;
+            this.btnContractRefresh.Text = "刷新";
+            // 
+            // btnContractDelete
+            // 
+            this.btnContractDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnContractDelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnContractDelete.Location = new System.Drawing.Point(431, 133);
+            this.btnContractDelete.Name = "btnContractDelete";
+            this.btnContractDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnContractDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnContractDelete.TabIndex = 39;
+            this.btnContractDelete.Text = "删除";
+            this.btnContractDelete.Click += new System.EventHandler(this.DeleteContract);
+            // 
+            // btnContractSave
+            // 
+            this.btnContractSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnContractSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnContractSave.Location = new System.Drawing.Point(350, 133);
+            this.btnContractSave.Name = "btnContractSave";
+            this.btnContractSave.Size = new System.Drawing.Size(75, 23);
+            this.btnContractSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnContractSave.TabIndex = 38;
+            this.btnContractSave.Text = "保存";
+            this.btnContractSave.Click += new System.EventHandler(this.SaveContract);
+            // 
+            // btnContractNew
+            // 
+            this.btnContractNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnContractNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnContractNew.Location = new System.Drawing.Point(188, 133);
+            this.btnContractNew.Name = "btnContractNew";
+            this.btnContractNew.Size = new System.Drawing.Size(75, 23);
+            this.btnContractNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnContractNew.TabIndex = 37;
+            this.btnContractNew.Text = "新建";
+            this.btnContractNew.Click += new System.EventHandler(this.NewContract);
+            // 
+            // tbContractCode
+            // 
+            // 
+            // 
+            // 
+            this.tbContractCode.Border.Class = "TextBoxBorder";
+            this.tbContractCode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.contractBindingSource, "ContractCode", true));
+            this.tbContractCode.Location = new System.Drawing.Point(99, 3);
+            this.tbContractCode.MaxLength = 10;
+            this.tbContractCode.Name = "tbContractCode";
+            this.tbContractCode.Size = new System.Drawing.Size(100, 20);
+            this.tbContractCode.TabIndex = 2;
+            this.contractValidator.SetValidator1(this.tbContractCode, this.requiredFieldValidator11);
+            this.contractValidator.SetValidator2(this.tbContractCode, this.customValidator6);
+            // 
+            // contractBindingSource
+            // 
+            this.contractBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Contract);
+            // 
+            // tbCreateUserName
+            // 
+            // 
+            // 
+            // 
+            this.tbCreateUserName.Border.Class = "TextBoxBorder";
+            this.tbCreateUserName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.contractBindingSource, "CreateUserName", true));
+            this.tbCreateUserName.Location = new System.Drawing.Point(99, 107);
+            this.tbCreateUserName.Name = "tbCreateUserName";
+            this.tbCreateUserName.Size = new System.Drawing.Size(100, 20);
+            this.tbCreateUserName.TabIndex = 12;
+            // 
+            // tbContractStatus
+            // 
+            // 
+            // 
+            // 
+            this.tbContractStatus.Border.Class = "TextBoxBorder";
+            this.tbContractStatus.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.contractBindingSource, "ContractStatus", true));
+            this.tbContractStatus.Location = new System.Drawing.Point(99, 81);
+            this.tbContractStatus.Name = "tbContractStatus";
+            this.tbContractStatus.Size = new System.Drawing.Size(100, 20);
+            this.tbContractStatus.TabIndex = 10;
+            // 
+            // diContractDueDate
+            // 
+            // 
+            // 
+            // 
+            this.diContractDueDate.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diContractDueDate.ButtonDropDown.Visible = true;
+            this.diContractDueDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.contractBindingSource, "ContractDueDate", true));
+            this.diContractDueDate.Location = new System.Drawing.Point(99, 55);
+            // 
+            // 
+            // 
+            this.diContractDueDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diContractDueDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diContractDueDate.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.diContractDueDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diContractDueDate.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.diContractDueDate.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diContractDueDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diContractDueDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diContractDueDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diContractDueDate.Name = "diContractDueDate";
+            this.diContractDueDate.Size = new System.Drawing.Size(100, 20);
+            this.diContractDueDate.TabIndex = 6;
+            this.contractValidator.SetValidator1(this.diContractDueDate, this.requiredFieldValidator13);
+            this.contractValidator.SetValidator2(this.diContractDueDate, this.compareValidator1);
+            // 
+            // diContractValueDate
+            // 
+            // 
+            // 
+            // 
+            this.diContractValueDate.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diContractValueDate.ButtonDropDown.Visible = true;
+            this.diContractValueDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.contractBindingSource, "ContractValueDate", true));
+            this.diContractValueDate.Location = new System.Drawing.Point(99, 29);
+            // 
+            // 
+            // 
+            this.diContractValueDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diContractValueDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diContractValueDate.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.diContractValueDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diContractValueDate.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.diContractValueDate.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diContractValueDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diContractValueDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diContractValueDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diContractValueDate.Name = "diContractValueDate";
+            this.diContractValueDate.Size = new System.Drawing.Size(100, 20);
+            this.diContractValueDate.TabIndex = 8;
+            this.contractValidator.SetValidator1(this.diContractValueDate, this.requiredFieldValidator12);
+            this.diContractValueDate.ValueChanged += new System.EventHandler(this.diContractValueDate_ValueChanged);
+            // 
+            // tabItemContract
+            // 
+            this.tabItemContract.AttachedControl = this.tabPanelContract;
+            this.tabItemContract.Name = "tabItemContract";
+            this.tabItemContract.Text = "主合同";
             // 
             // tabPanelClient
             // 
@@ -1245,7 +1604,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnClientUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientUpdate.TabIndex = 7;
-            this.btnClientUpdate.Text = "更新";
+            this.btnClientUpdate.Text = "编辑";
             this.btnClientUpdate.Click += new System.EventHandler(this.UpdateClient);
             // 
             // groupPanelClientContact
@@ -1676,10 +2035,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientTypeComboBox.FormattingEnabled = true;
             this.clientTypeComboBox.Items.AddRange(new object[] {
             "国有",
-            "集体",
             "民营",
-            "三资",
-            "中外合资"});
+            "三资"});
             this.clientTypeComboBox.Location = new System.Drawing.Point(85, 7);
             this.clientTypeComboBox.Name = "clientTypeComboBox";
             this.clientTypeComboBox.Size = new System.Drawing.Size(100, 21);
@@ -1793,9 +2150,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // cbCountryCode
             // 
+            this.cbCountryCode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbCountryCode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbCountryCode.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.clientBindingSource, "CountryCode", true));
             this.cbCountryCode.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbCountryCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCountryCode.Location = new System.Drawing.Point(85, 197);
             this.cbCountryCode.Name = "cbCountryCode";
             this.cbCountryCode.Size = new System.Drawing.Size(100, 21);
@@ -1995,14 +2353,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientCreditLines.AllowUserToAddRows = false;
             this.dgvClientCreditLines.AllowUserToDeleteRows = false;
             this.dgvClientCreditLines.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
             this.dgvClientCreditLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientCreditLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCreditLineID,
@@ -2022,33 +2380,168 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colUnfreezer,
             this.colUnfreezeDate,
             this.colComment});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle32;
             this.dgvClientCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClientCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvClientCreditLines.Location = new System.Drawing.Point(1, 317);
             this.dgvClientCreditLines.MultiSelect = false;
             this.dgvClientCreditLines.Name = "dgvClientCreditLines";
             this.dgvClientCreditLines.ReadOnly = true;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvClientCreditLines.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvClientCreditLines.RowHeadersDefaultCellStyle = dataGridViewCellStyle33;
             this.dgvClientCreditLines.RowTemplate.Height = 23;
             this.dgvClientCreditLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvClientCreditLines.Size = new System.Drawing.Size(612, 270);
             this.dgvClientCreditLines.TabIndex = 0;
             this.dgvClientCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectClientCreditLine);
+            // 
+            // colCreditLineID
+            // 
+            this.colCreditLineID.DataPropertyName = "CreditLineID";
+            this.colCreditLineID.HeaderText = "额度编号";
+            this.colCreditLineID.Name = "colCreditLineID";
+            this.colCreditLineID.ReadOnly = true;
+            this.colCreditLineID.Visible = false;
+            // 
+            // ClientEDICodeColumn
+            // 
+            this.ClientEDICodeColumn.DataPropertyName = "ClientEDICode";
+            this.ClientEDICodeColumn.HeaderText = "客户保理代码";
+            this.ClientEDICodeColumn.Name = "ClientEDICodeColumn";
+            this.ClientEDICodeColumn.ReadOnly = true;
+            // 
+            // colCreditLineType
+            // 
+            this.colCreditLineType.DataPropertyName = "CreditLineType";
+            this.colCreditLineType.HeaderText = "额度类型";
+            this.colCreditLineType.Name = "colCreditLineType";
+            this.colCreditLineType.ReadOnly = true;
+            // 
+            // colCreditLineCurrency
+            // 
+            this.colCreditLineCurrency.DataPropertyName = "CreditLineCurrency";
+            this.colCreditLineCurrency.HeaderText = "额度币种";
+            this.colCreditLineCurrency.Name = "colCreditLineCurrency";
+            this.colCreditLineCurrency.ReadOnly = true;
+            // 
+            // colCreditLine
+            // 
+            this.colCreditLine.DataPropertyName = "CreditLine";
+            dataGridViewCellStyle27.Format = "C2";
+            dataGridViewCellStyle27.NullValue = null;
+            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle27;
+            this.colCreditLine.HeaderText = "额度上限";
+            this.colCreditLine.Name = "colCreditLine";
+            this.colCreditLine.ReadOnly = true;
+            // 
+            // colPeriodBegin
+            // 
+            this.colPeriodBegin.DataPropertyName = "PeriodBegin";
+            dataGridViewCellStyle28.Format = "d";
+            dataGridViewCellStyle28.NullValue = null;
+            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle28;
+            this.colPeriodBegin.HeaderText = "有效期(始)";
+            this.colPeriodBegin.Name = "colPeriodBegin";
+            this.colPeriodBegin.ReadOnly = true;
+            // 
+            // colPeriodEnd
+            // 
+            this.colPeriodEnd.DataPropertyName = "PeriodEnd";
+            dataGridViewCellStyle29.Format = "d";
+            dataGridViewCellStyle29.NullValue = null;
+            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle29;
+            this.colPeriodEnd.HeaderText = "有效期(终)";
+            this.colPeriodEnd.Name = "colPeriodEnd";
+            this.colPeriodEnd.ReadOnly = true;
+            // 
+            // colApproveNo
+            // 
+            this.colApproveNo.DataPropertyName = "ApproveNo";
+            this.colApproveNo.HeaderText = "授信编号";
+            this.colApproveNo.Name = "colApproveNo";
+            this.colApproveNo.ReadOnly = true;
+            // 
+            // colApproveType
+            // 
+            this.colApproveType.DataPropertyName = "ApproveType";
+            this.colApproveType.HeaderText = "授信类型";
+            this.colApproveType.Name = "colApproveType";
+            this.colApproveType.ReadOnly = true;
+            // 
+            // colCreditLineStatus
+            // 
+            this.colCreditLineStatus.DataPropertyName = "CreditLineStatus";
+            this.colCreditLineStatus.HeaderText = "额度状态";
+            this.colCreditLineStatus.Name = "colCreditLineStatus";
+            this.colCreditLineStatus.ReadOnly = true;
+            // 
+            // colFreezeReason
+            // 
+            this.colFreezeReason.DataPropertyName = "FreezeReason";
+            this.colFreezeReason.HeaderText = "冻结原因";
+            this.colFreezeReason.Name = "colFreezeReason";
+            this.colFreezeReason.ReadOnly = true;
+            // 
+            // colFreezer
+            // 
+            this.colFreezer.DataPropertyName = "Freezer";
+            this.colFreezer.HeaderText = "冻结人";
+            this.colFreezer.Name = "colFreezer";
+            this.colFreezer.ReadOnly = true;
+            // 
+            // colFreezeDate
+            // 
+            this.colFreezeDate.DataPropertyName = "FreezeDate";
+            dataGridViewCellStyle30.Format = "d";
+            dataGridViewCellStyle30.NullValue = null;
+            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle30;
+            this.colFreezeDate.HeaderText = "冻结日期";
+            this.colFreezeDate.Name = "colFreezeDate";
+            this.colFreezeDate.ReadOnly = true;
+            // 
+            // colUnfreezeReason
+            // 
+            this.colUnfreezeReason.DataPropertyName = "UnfreezeReason";
+            this.colUnfreezeReason.HeaderText = "解冻原因";
+            this.colUnfreezeReason.Name = "colUnfreezeReason";
+            this.colUnfreezeReason.ReadOnly = true;
+            // 
+            // colUnfreezer
+            // 
+            this.colUnfreezer.DataPropertyName = "Unfreezer";
+            this.colUnfreezer.HeaderText = "解冻人";
+            this.colUnfreezer.Name = "colUnfreezer";
+            this.colUnfreezer.ReadOnly = true;
+            // 
+            // colUnfreezeDate
+            // 
+            this.colUnfreezeDate.DataPropertyName = "UnfreezeDate";
+            dataGridViewCellStyle31.Format = "d";
+            dataGridViewCellStyle31.NullValue = null;
+            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle31;
+            this.colUnfreezeDate.HeaderText = "解冻日期";
+            this.colUnfreezeDate.Name = "colUnfreezeDate";
+            this.colUnfreezeDate.ReadOnly = true;
+            // 
+            // colComment
+            // 
+            this.colComment.DataPropertyName = "Comment";
+            this.colComment.HeaderText = "备注";
+            this.colComment.Name = "colComment";
+            this.colComment.ReadOnly = true;
             // 
             // groupPanelClientCreditLine
             // 
@@ -2134,7 +2627,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientCreditLineUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditLineUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditLineUpdate.TabIndex = 36;
-            this.btnClientCreditLineUpdate.Text = "更新";
+            this.btnClientCreditLineUpdate.Text = "编辑";
             this.btnClientCreditLineUpdate.Click += new System.EventHandler(this.UpdateClientCreditLine);
             // 
             // creditLineTextBox
@@ -2479,6 +2972,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.periodBeginDateTimePicker.Size = new System.Drawing.Size(122, 20);
             this.periodBeginDateTimePicker.TabIndex = 7;
             this.creditLineValidator.SetValidator1(this.periodBeginDateTimePicker, this.requiredFieldValidator4);
+            this.periodBeginDateTimePicker.ValueChanged += new System.EventHandler(this.periodBeginDateTimePicker_ValueChanged);
             // 
             // creditLineTypeComboBox
             // 
@@ -2512,308 +3006,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabItemClientCreditLine.AttachedControl = this.tabPanelClientCreditLine;
             this.tabItemClientCreditLine.Name = "tabItemClientCreditLine";
             this.tabItemClientCreditLine.Text = "额度信息";
-            // 
-            // tabPanelContract
-            // 
-            this.tabPanelContract.Controls.Add(this.dgvContracts);
-            this.tabPanelContract.Controls.Add(this.groupPanelContract);
-            this.tabPanelContract.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelContract.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelContract.Name = "tabPanelContract";
-            this.tabPanelContract.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelContract.Size = new System.Drawing.Size(614, 588);
-            this.tabPanelContract.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelContract.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelContract.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelContract.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelContract.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelContract.Style.GradientAngle = 90;
-            this.tabPanelContract.TabIndex = 4;
-            this.tabPanelContract.TabItem = this.tabItemContract;
-            // 
-            // dgvContracts
-            // 
-            this.dgvContracts.AllowUserToAddRows = false;
-            this.dgvContracts.AllowUserToDeleteRows = false;
-            this.dgvContracts.AllowUserToOrderColumns = true;
-            this.dgvContracts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvContracts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvContracts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvContracts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colContractCode,
-            this.colContractValueDate,
-            this.colContractDueDate,
-            this.colContractStatus,
-            this.colCreateUserName,
-            this.colClient,
-            this.colClientEDICode});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvContracts.DefaultCellStyle = dataGridViewCellStyle12;
-            this.dgvContracts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvContracts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvContracts.Location = new System.Drawing.Point(1, 168);
-            this.dgvContracts.Name = "dgvContracts";
-            this.dgvContracts.ReadOnly = true;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvContracts.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
-            this.dgvContracts.RowTemplate.Height = 23;
-            this.dgvContracts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvContracts.Size = new System.Drawing.Size(612, 419);
-            this.dgvContracts.TabIndex = 15;
-            this.dgvContracts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectContract);
-            // 
-            // groupPanelContract
-            // 
-            this.groupPanelContract.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelContract.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelContract.Controls.Add(this.btnContractUpdate);
-            this.groupPanelContract.Controls.Add(this.btnContractRefresh);
-            this.groupPanelContract.Controls.Add(this.btnContractDelete);
-            this.groupPanelContract.Controls.Add(this.btnContractSave);
-            this.groupPanelContract.Controls.Add(this.btnContractNew);
-            this.groupPanelContract.Controls.Add(lblContractCode);
-            this.groupPanelContract.Controls.Add(lblCreateUserName);
-            this.groupPanelContract.Controls.Add(this.tbContractCode);
-            this.groupPanelContract.Controls.Add(this.tbCreateUserName);
-            this.groupPanelContract.Controls.Add(lblContractStatus);
-            this.groupPanelContract.Controls.Add(this.tbContractStatus);
-            this.groupPanelContract.Controls.Add(lblContractValueDate);
-            this.groupPanelContract.Controls.Add(this.diContractDueDate);
-            this.groupPanelContract.Controls.Add(this.diContractValueDate);
-            this.groupPanelContract.Controls.Add(lblContractDueDate);
-            this.groupPanelContract.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelContract.Location = new System.Drawing.Point(1, 1);
-            this.groupPanelContract.Name = "groupPanelContract";
-            this.groupPanelContract.Size = new System.Drawing.Size(612, 167);
-            // 
-            // 
-            // 
-            this.groupPanelContract.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelContract.Style.BackColorGradientAngle = 90;
-            this.groupPanelContract.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelContract.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelContract.Style.BorderBottomWidth = 1;
-            this.groupPanelContract.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelContract.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelContract.Style.BorderLeftWidth = 1;
-            this.groupPanelContract.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelContract.Style.BorderRightWidth = 1;
-            this.groupPanelContract.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelContract.Style.BorderTopWidth = 1;
-            this.groupPanelContract.Style.Class = "";
-            this.groupPanelContract.Style.CornerDiameter = 4;
-            this.groupPanelContract.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelContract.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelContract.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelContract.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelContract.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelContract.StyleMouseOver.Class = "";
-            this.groupPanelContract.TabIndex = 14;
-            // 
-            // btnContractUpdate
-            // 
-            this.btnContractUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnContractUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnContractUpdate.Location = new System.Drawing.Point(269, 133);
-            this.btnContractUpdate.Name = "btnContractUpdate";
-            this.btnContractUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnContractUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnContractUpdate.TabIndex = 41;
-            this.btnContractUpdate.Text = "更新";
-            this.btnContractUpdate.Click += new System.EventHandler(this.UpdateContract);
-            // 
-            // btnContractRefresh
-            // 
-            this.btnContractRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnContractRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnContractRefresh.Location = new System.Drawing.Point(109, 133);
-            this.btnContractRefresh.Name = "btnContractRefresh";
-            this.btnContractRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnContractRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnContractRefresh.TabIndex = 40;
-            this.btnContractRefresh.Text = "刷新";
-            // 
-            // btnContractDelete
-            // 
-            this.btnContractDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnContractDelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnContractDelete.Location = new System.Drawing.Point(431, 133);
-            this.btnContractDelete.Name = "btnContractDelete";
-            this.btnContractDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnContractDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnContractDelete.TabIndex = 39;
-            this.btnContractDelete.Text = "删除";
-            this.btnContractDelete.Click += new System.EventHandler(this.DeleteContract);
-            // 
-            // btnContractSave
-            // 
-            this.btnContractSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnContractSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnContractSave.Location = new System.Drawing.Point(350, 133);
-            this.btnContractSave.Name = "btnContractSave";
-            this.btnContractSave.Size = new System.Drawing.Size(75, 23);
-            this.btnContractSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnContractSave.TabIndex = 38;
-            this.btnContractSave.Text = "保存";
-            this.btnContractSave.Click += new System.EventHandler(this.SaveContract);
-            // 
-            // btnContractNew
-            // 
-            this.btnContractNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnContractNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnContractNew.Location = new System.Drawing.Point(188, 133);
-            this.btnContractNew.Name = "btnContractNew";
-            this.btnContractNew.Size = new System.Drawing.Size(75, 23);
-            this.btnContractNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnContractNew.TabIndex = 37;
-            this.btnContractNew.Text = "新建";
-            this.btnContractNew.Click += new System.EventHandler(this.NewContract);
-            // 
-            // tbContractCode
-            // 
-            // 
-            // 
-            // 
-            this.tbContractCode.Border.Class = "TextBoxBorder";
-            this.tbContractCode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.contractBindingSource, "ContractCode", true));
-            this.tbContractCode.Location = new System.Drawing.Point(99, 3);
-            this.tbContractCode.MaxLength = 10;
-            this.tbContractCode.Name = "tbContractCode";
-            this.tbContractCode.Size = new System.Drawing.Size(100, 20);
-            this.tbContractCode.TabIndex = 2;
-            this.contractValidator.SetValidator1(this.tbContractCode, this.requiredFieldValidator11);
-            this.contractValidator.SetValidator2(this.tbContractCode, this.customValidator6);
-            // 
-            // contractBindingSource
-            // 
-            this.contractBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Contract);
-            // 
-            // tbCreateUserName
-            // 
-            // 
-            // 
-            // 
-            this.tbCreateUserName.Border.Class = "TextBoxBorder";
-            this.tbCreateUserName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.contractBindingSource, "CreateUserName", true));
-            this.tbCreateUserName.Location = new System.Drawing.Point(99, 107);
-            this.tbCreateUserName.Name = "tbCreateUserName";
-            this.tbCreateUserName.Size = new System.Drawing.Size(100, 20);
-            this.tbCreateUserName.TabIndex = 12;
-            // 
-            // tbContractStatus
-            // 
-            // 
-            // 
-            // 
-            this.tbContractStatus.Border.Class = "TextBoxBorder";
-            this.tbContractStatus.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.contractBindingSource, "ContractStatus", true));
-            this.tbContractStatus.Location = new System.Drawing.Point(99, 81);
-            this.tbContractStatus.Name = "tbContractStatus";
-            this.tbContractStatus.Size = new System.Drawing.Size(100, 20);
-            this.tbContractStatus.TabIndex = 10;
-            // 
-            // diContractDueDate
-            // 
-            // 
-            // 
-            // 
-            this.diContractDueDate.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.diContractDueDate.ButtonDropDown.Visible = true;
-            this.diContractDueDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.contractBindingSource, "ContractDueDate", true));
-            this.diContractDueDate.Location = new System.Drawing.Point(99, 55);
-            // 
-            // 
-            // 
-            this.diContractDueDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diContractDueDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diContractDueDate.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.diContractDueDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.diContractDueDate.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.diContractDueDate.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.diContractDueDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diContractDueDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.diContractDueDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.diContractDueDate.Name = "diContractDueDate";
-            this.diContractDueDate.Size = new System.Drawing.Size(100, 20);
-            this.diContractDueDate.TabIndex = 6;
-            this.contractValidator.SetValidator1(this.diContractDueDate, this.requiredFieldValidator13);
-            this.contractValidator.SetValidator2(this.diContractDueDate, this.compareValidator1);
-            // 
-            // diContractValueDate
-            // 
-            // 
-            // 
-            // 
-            this.diContractValueDate.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.diContractValueDate.ButtonDropDown.Visible = true;
-            this.diContractValueDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.contractBindingSource, "ContractValueDate", true));
-            this.diContractValueDate.Location = new System.Drawing.Point(99, 29);
-            // 
-            // 
-            // 
-            this.diContractValueDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diContractValueDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diContractValueDate.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.diContractValueDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.diContractValueDate.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.diContractValueDate.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.diContractValueDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diContractValueDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.diContractValueDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.diContractValueDate.Name = "diContractValueDate";
-            this.diContractValueDate.Size = new System.Drawing.Size(100, 20);
-            this.diContractValueDate.TabIndex = 8;
-            this.contractValidator.SetValidator1(this.diContractValueDate, this.requiredFieldValidator12);
-            // 
-            // tabItemContract
-            // 
-            this.tabItemContract.AttachedControl = this.tabPanelContract;
-            this.tabItemContract.Name = "tabItemContract";
-            this.tabItemContract.Text = "主合同";
             // 
             // clientValidator
             // 
@@ -3045,9 +3237,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle14.Format = "C2";
-            dataGridViewCellStyle14.NullValue = null;
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle34.Format = "C2";
+            dataGridViewCellStyle34.NullValue = null;
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle34;
             this.dataGridViewTextBoxColumn5.HeaderText = "额度上限";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
@@ -3055,9 +3247,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "PeriodBegin";
-            dataGridViewCellStyle15.Format = "d";
-            dataGridViewCellStyle15.NullValue = null;
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle35.Format = "d";
+            dataGridViewCellStyle35.NullValue = null;
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle35;
             this.dataGridViewTextBoxColumn6.HeaderText = "有效期(始)";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
@@ -3065,9 +3257,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.DataPropertyName = "PeriodEnd";
-            dataGridViewCellStyle16.Format = "d";
-            dataGridViewCellStyle16.NullValue = null;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle36.Format = "d";
+            dataGridViewCellStyle36.NullValue = null;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle36;
             this.dataGridViewTextBoxColumn7.HeaderText = "有效期(终)";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
@@ -3110,9 +3302,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn13
             // 
             this.dataGridViewTextBoxColumn13.DataPropertyName = "FreezeDate";
-            dataGridViewCellStyle17.Format = "d";
-            dataGridViewCellStyle17.NullValue = null;
-            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle37.Format = "d";
+            dataGridViewCellStyle37.NullValue = null;
+            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle37;
             this.dataGridViewTextBoxColumn13.HeaderText = "冻结日期";
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             this.dataGridViewTextBoxColumn13.ReadOnly = true;
@@ -3134,9 +3326,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn16
             // 
             this.dataGridViewTextBoxColumn16.DataPropertyName = "UnfreezeDate";
-            dataGridViewCellStyle18.Format = "d";
-            dataGridViewCellStyle18.NullValue = null;
-            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle38.Format = "d";
+            dataGridViewCellStyle38.NullValue = null;
+            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle38;
             this.dataGridViewTextBoxColumn16.HeaderText = "解冻日期";
             this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
             this.dataGridViewTextBoxColumn16.ReadOnly = true;
@@ -3159,9 +3351,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn19
             // 
             this.dataGridViewTextBoxColumn19.DataPropertyName = "ContractValueDate";
-            dataGridViewCellStyle19.Format = "d";
-            dataGridViewCellStyle19.NullValue = null;
-            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle39.Format = "d";
+            dataGridViewCellStyle39.NullValue = null;
+            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle39;
             this.dataGridViewTextBoxColumn19.HeaderText = "生效日";
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             this.dataGridViewTextBoxColumn19.ReadOnly = true;
@@ -3170,8 +3362,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn20
             // 
             this.dataGridViewTextBoxColumn20.DataPropertyName = "ContractDueDate";
-            dataGridViewCellStyle20.Format = "d";
-            this.dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle40.Format = "d";
+            this.dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle40;
             this.dataGridViewTextBoxColumn20.HeaderText = "到期日";
             this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
             this.dataGridViewTextBoxColumn20.ReadOnly = true;
@@ -3209,197 +3401,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dataGridViewTextBoxColumn24.ReadOnly = true;
             this.dataGridViewTextBoxColumn24.Visible = false;
             // 
-            // colCreditLineID
-            // 
-            this.colCreditLineID.DataPropertyName = "CreditLineID";
-            this.colCreditLineID.HeaderText = "额度编号";
-            this.colCreditLineID.Name = "colCreditLineID";
-            this.colCreditLineID.ReadOnly = true;
-            this.colCreditLineID.Visible = false;
-            // 
-            // ClientEDICodeColumn
-            // 
-            this.ClientEDICodeColumn.DataPropertyName = "ClientEDICode";
-            this.ClientEDICodeColumn.HeaderText = "客户保理代码";
-            this.ClientEDICodeColumn.Name = "ClientEDICodeColumn";
-            this.ClientEDICodeColumn.ReadOnly = true;
-            // 
-            // colCreditLineType
-            // 
-            this.colCreditLineType.DataPropertyName = "CreditLineType";
-            this.colCreditLineType.HeaderText = "额度类型";
-            this.colCreditLineType.Name = "colCreditLineType";
-            this.colCreditLineType.ReadOnly = true;
-            // 
-            // colCreditLineCurrency
-            // 
-            this.colCreditLineCurrency.DataPropertyName = "CreditLineCurrency";
-            this.colCreditLineCurrency.HeaderText = "额度币种";
-            this.colCreditLineCurrency.Name = "colCreditLineCurrency";
-            this.colCreditLineCurrency.ReadOnly = true;
-            // 
-            // colCreditLine
-            // 
-            this.colCreditLine.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colCreditLine.HeaderText = "额度上限";
-            this.colCreditLine.Name = "colCreditLine";
-            this.colCreditLine.ReadOnly = true;
-            // 
-            // colPeriodBegin
-            // 
-            this.colPeriodBegin.DataPropertyName = "PeriodBegin";
-            dataGridViewCellStyle3.Format = "d";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colPeriodBegin.HeaderText = "有效期(始)";
-            this.colPeriodBegin.Name = "colPeriodBegin";
-            this.colPeriodBegin.ReadOnly = true;
-            // 
-            // colPeriodEnd
-            // 
-            this.colPeriodEnd.DataPropertyName = "PeriodEnd";
-            dataGridViewCellStyle4.Format = "d";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colPeriodEnd.HeaderText = "有效期(终)";
-            this.colPeriodEnd.Name = "colPeriodEnd";
-            this.colPeriodEnd.ReadOnly = true;
-            // 
-            // colApproveNo
-            // 
-            this.colApproveNo.DataPropertyName = "ApproveNo";
-            this.colApproveNo.HeaderText = "授信编号";
-            this.colApproveNo.Name = "colApproveNo";
-            this.colApproveNo.ReadOnly = true;
-            // 
-            // colApproveType
-            // 
-            this.colApproveType.DataPropertyName = "ApproveType";
-            this.colApproveType.HeaderText = "授信类型";
-            this.colApproveType.Name = "colApproveType";
-            this.colApproveType.ReadOnly = true;
-            // 
-            // colCreditLineStatus
-            // 
-            this.colCreditLineStatus.DataPropertyName = "CreditLineStatus";
-            this.colCreditLineStatus.HeaderText = "额度状态";
-            this.colCreditLineStatus.Name = "colCreditLineStatus";
-            this.colCreditLineStatus.ReadOnly = true;
-            // 
-            // colFreezeReason
-            // 
-            this.colFreezeReason.DataPropertyName = "FreezeReason";
-            this.colFreezeReason.HeaderText = "冻结原因";
-            this.colFreezeReason.Name = "colFreezeReason";
-            this.colFreezeReason.ReadOnly = true;
-            // 
-            // colFreezer
-            // 
-            this.colFreezer.DataPropertyName = "Freezer";
-            this.colFreezer.HeaderText = "冻结人";
-            this.colFreezer.Name = "colFreezer";
-            this.colFreezer.ReadOnly = true;
-            // 
-            // colFreezeDate
-            // 
-            this.colFreezeDate.DataPropertyName = "FreezeDate";
-            dataGridViewCellStyle5.Format = "d";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colFreezeDate.HeaderText = "冻结日期";
-            this.colFreezeDate.Name = "colFreezeDate";
-            this.colFreezeDate.ReadOnly = true;
-            // 
-            // colUnfreezeReason
-            // 
-            this.colUnfreezeReason.DataPropertyName = "UnfreezeReason";
-            this.colUnfreezeReason.HeaderText = "解冻原因";
-            this.colUnfreezeReason.Name = "colUnfreezeReason";
-            this.colUnfreezeReason.ReadOnly = true;
-            // 
-            // colUnfreezer
-            // 
-            this.colUnfreezer.DataPropertyName = "Unfreezer";
-            this.colUnfreezer.HeaderText = "解冻人";
-            this.colUnfreezer.Name = "colUnfreezer";
-            this.colUnfreezer.ReadOnly = true;
-            // 
-            // colUnfreezeDate
-            // 
-            this.colUnfreezeDate.DataPropertyName = "UnfreezeDate";
-            dataGridViewCellStyle6.Format = "d";
-            dataGridViewCellStyle6.NullValue = null;
-            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colUnfreezeDate.HeaderText = "解冻日期";
-            this.colUnfreezeDate.Name = "colUnfreezeDate";
-            this.colUnfreezeDate.ReadOnly = true;
-            // 
-            // colComment
-            // 
-            this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "备注";
-            this.colComment.Name = "colComment";
-            this.colComment.ReadOnly = true;
-            // 
-            // colContractCode
-            // 
-            this.colContractCode.DataPropertyName = "ContractCode";
-            this.colContractCode.HeaderText = "合同号";
-            this.colContractCode.Name = "colContractCode";
-            this.colContractCode.ReadOnly = true;
-            // 
-            // colContractValueDate
-            // 
-            this.colContractValueDate.DataPropertyName = "ContractValueDate";
-            dataGridViewCellStyle10.Format = "d";
-            dataGridViewCellStyle10.NullValue = null;
-            this.colContractValueDate.DefaultCellStyle = dataGridViewCellStyle10;
-            this.colContractValueDate.HeaderText = "生效日";
-            this.colContractValueDate.Name = "colContractValueDate";
-            this.colContractValueDate.ReadOnly = true;
-            // 
-            // colContractDueDate
-            // 
-            this.colContractDueDate.DataPropertyName = "ContractDueDate";
-            dataGridViewCellStyle11.Format = "d";
-            this.colContractDueDate.DefaultCellStyle = dataGridViewCellStyle11;
-            this.colContractDueDate.HeaderText = "到期日";
-            this.colContractDueDate.Name = "colContractDueDate";
-            this.colContractDueDate.ReadOnly = true;
-            // 
-            // colContractStatus
-            // 
-            this.colContractStatus.DataPropertyName = "ContractStatus";
-            this.colContractStatus.HeaderText = "合同状态";
-            this.colContractStatus.Name = "colContractStatus";
-            this.colContractStatus.ReadOnly = true;
-            // 
-            // colCreateUserName
-            // 
-            this.colCreateUserName.DataPropertyName = "CreateUserName";
-            this.colCreateUserName.HeaderText = "经办人";
-            this.colCreateUserName.Name = "colCreateUserName";
-            this.colCreateUserName.ReadOnly = true;
-            // 
-            // colClient
-            // 
-            this.colClient.DataPropertyName = "Client";
-            this.colClient.HeaderText = "Client";
-            this.colClient.Name = "colClient";
-            this.colClient.ReadOnly = true;
-            this.colClient.Visible = false;
-            // 
-            // colClientEDICode
-            // 
-            this.colClientEDICode.DataPropertyName = "ClientEDICode";
-            this.colClientEDICode.HeaderText = "ClientEDICode";
-            this.colClientEDICode.Name = "colClientEDICode";
-            this.colClientEDICode.ReadOnly = true;
-            this.colClientEDICode.Visible = false;
-            // 
             // ClientDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3414,6 +3415,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabControl.PerformLayout();
+            this.tabPanelContract.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvContracts)).EndInit();
+            this.groupPanelContract.ResumeLayout(false);
+            this.groupPanelContract.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.contractBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diContractDueDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diContractValueDate)).EndInit();
             this.tabPanelClient.ResumeLayout(false);
             this.groupPanelClientContact.ResumeLayout(false);
             this.groupPanelClientContact.PerformLayout();
@@ -3433,13 +3441,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             ((System.ComponentModel.ISupportInitialize)(this.freezeDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.periodEndDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.periodBeginDateTimePicker)).EndInit();
-            this.tabPanelContract.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvContracts)).EndInit();
-            this.groupPanelContract.ResumeLayout(false);
-            this.groupPanelContract.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.contractBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diContractDueDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diContractValueDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.creditLineErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contractErrorProvider)).EndInit();

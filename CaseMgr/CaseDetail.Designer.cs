@@ -860,7 +860,7 @@
             this.btnCreditCoverNegUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnCreditCoverNegUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCreditCoverNegUpdate.TabIndex = 18;
-            this.btnCreditCoverNegUpdate.Text = "更新";
+            this.btnCreditCoverNegUpdate.Text = "编辑";
             this.btnCreditCoverNegUpdate.Click += new System.EventHandler(this.UpdateCreditCoverNeg);
             // 
             // btnCreditCoverNegNew
@@ -1074,7 +1074,7 @@
             this.btnCaseUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnCaseUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCaseUpdate.TabIndex = 9;
-            this.btnCaseUpdate.Text = "更新";
+            this.btnCaseUpdate.Text = "编辑";
             this.btnCaseUpdate.Click += new System.EventHandler(this.UpdateCase);
             // 
             // btnCaseReset

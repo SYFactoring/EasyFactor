@@ -9,6 +9,7 @@ namespace CMBC.EasyFactor.Utils
     using CMBC.EasyFactor.ARMgr;
     using CMBC.EasyFactor.DB.dbml;
     using Microsoft.Office.Interop.Excel;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -40,32 +41,32 @@ namespace CMBC.EasyFactor.Utils
             /// 
             /// </summary>
             IMPORT_CLIENTS,
-            
+
             /// <summary>
             /// 
             /// </summary>
             IMPORT_FACTORS,
-            
+
             /// <summary>
             /// 
             /// </summary>
             IMPORT_DEPARTMENTS,
-            
+
             /// <summary>
             /// 
             /// </summary>
             IMPORT_CASES,
-            
+
             /// <summary>
             /// 
             /// </summary>
             IMPORT_CREDITCOVER,
-            
+
             /// <summary>
             /// 
             /// </summary>
             IMPORT_ASSIGN,
-            
+
             /// <summary>
             /// 
             /// </summary>
@@ -178,7 +179,7 @@ namespace CMBC.EasyFactor.Utils
         {
             if (e.Error != null)
             {
-                this.tbStatus.Text = "发生异常: "+e.Error.Message;
+                this.tbStatus.Text = "发生异常: " + e.Error.Message;
             }
             else if (e.Cancelled)
             {
@@ -304,7 +305,7 @@ namespace CMBC.EasyFactor.Utils
                     invoice.InvoiceDate = (DateTime)valueArray[row, column++];
                     invoice.DueDate = (DateTime)valueArray[row, column++];
                     invoice.AssignDate = (DateTime)valueArray[row, column++];
-                    string isFlawStr = String.Format("{0:G}",valueArray[row, column++]);
+                    string isFlawStr = String.Format("{0:G}", valueArray[row, column++]);
                     if (isFlawStr == null || string.Empty.Equals(isFlawStr))
                     {
                         invoice.IsFlaw = false;
@@ -633,6 +634,10 @@ namespace CMBC.EasyFactor.Utils
                         factor.FactorCode = factorCode;
                         factor.FactorType = "保理商";
                     }
+                    if (factor.FactorType != "保理商")
+                    {
+                        factor.BeginMonitor();
+                    }
                     int column = 1;
                     factor.CountryName = String.Format("{0:G}", valueArray[row, column++]);
                     column++;
@@ -668,12 +673,24 @@ namespace CMBC.EasyFactor.Utils
                     factor.MembershipDate = String.Format("{0:G}", valueArray[row, column++]);
                     factor.DateOfLatestRevision = String.Format("{0:G}", valueArray[row, column++]);
 
-                    if (isNew)
+                    string monitorResult = factor.EndMonitor();
+                    if (!string.Empty.Equals(monitorResult))
                     {
-                        App.Current.DbContext.Factors.InsertOnSubmit(factor);
+                        DialogResult dr = MessageBox.Show(monitorResult, "是否更新", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (dr == DialogResult.Yes)
+                        {
+                            factor.LastModifiedDate = DateTime.Now;
+                            if (isNew)
+                            {
+                                App.Current.DbContext.Factors.InsertOnSubmit(factor);
+                            }
+                        }
+                        else
+                        {
+                            factor.Restore();
+                        }
+                        App.Current.DbContext.SubmitChanges();
                     }
-
-                    App.Current.DbContext.SubmitChanges();
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }

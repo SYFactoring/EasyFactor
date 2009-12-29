@@ -7034,6 +7034,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
+		private System.Nullable<System.DateTime> _LastModifiedDate;
+		
 		private EntitySet<FactorAccount> _FactorAccounts;
 		
 		private EntitySet<FactorCreditLine> _FactorCreditLines;
@@ -7130,6 +7132,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnIsAgreementSignedChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnLastModifiedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnLastModifiedDateChanged();
     #endregion
 		
 		public Factor()
@@ -7947,6 +7951,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Column(Storage="_LastModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> LastModifiedDate
+		{
+			get
+			{
+				return this._LastModifiedDate;
+			}
+			set
+			{
+				if ((this._LastModifiedDate != value))
+				{
+					this.OnLastModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastModifiedDate = value;
+					this.SendPropertyChanged("LastModifiedDate");
+					this.OnLastModifiedDateChanged();
+				}
+			}
+		}
+		
 		[Association(Name="Factor_FactorAccount", Storage="_FactorAccounts", OtherKey="FactorCode")]
 		public EntitySet<FactorAccount> FactorAccounts
 		{
@@ -8149,8 +8173,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<bool> _IsCreditCoverRevolving;
 		
-		private string _ApproveNumber;
-		
 		private System.Nullable<double> _PUGProportion;
 		
 		private System.Nullable<System.DateTime> _CreditCoverPeriodBegin;
@@ -8194,8 +8216,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		private string _HandFeeCurr;
 		
 		private System.Nullable<double> _HandFee;
-		
-		private System.Nullable<System.DateTime> _CDAValueDate;
 		
 		private System.Nullable<System.DateTime> _CDADueDate;
 		
@@ -8241,8 +8261,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreditCoverChanged();
     partial void OnIsCreditCoverRevolvingChanging(System.Nullable<bool> value);
     partial void OnIsCreditCoverRevolvingChanged();
-    partial void OnApproveNumberChanging(string value);
-    partial void OnApproveNumberChanged();
     partial void OnPUGProportionChanging(System.Nullable<double> value);
     partial void OnPUGProportionChanged();
     partial void OnCreditCoverPeriodBeginChanging(System.Nullable<System.DateTime> value);
@@ -8287,10 +8305,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnHandFeeCurrChanged();
     partial void OnHandFeeChanging(System.Nullable<double> value);
     partial void OnHandFeeChanged();
-    partial void OnCDAValueDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCDAValueDateChanged();
-    partial void OnCDADueDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCDADueDateChanged();
+    partial void OnCDASignDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCDASignDateChanged();
     partial void OnCDAStatusChanging(string value);
     partial void OnCDAStatusChanged();
     partial void OnNoticeMethodChanging(string value);
@@ -8476,26 +8492,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._IsCreditCoverRevolving = value;
 					this.SendPropertyChanged("IsCreditCoverRevolving");
 					this.OnIsCreditCoverRevolvingChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ApproveNumber", DbType="NVarChar(50)")]
-		public string ApproveNumber
-		{
-			get
-			{
-				return this._ApproveNumber;
-			}
-			set
-			{
-				if ((this._ApproveNumber != value))
-				{
-					this.OnApproveNumberChanging(value);
-					this.SendPropertyChanging();
-					this._ApproveNumber = value;
-					this.SendPropertyChanged("ApproveNumber");
-					this.OnApproveNumberChanged();
 				}
 			}
 		}
@@ -8940,28 +8936,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDAValueDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CDAValueDate
-		{
-			get
-			{
-				return this._CDAValueDate;
-			}
-			set
-			{
-				if ((this._CDAValueDate != value))
-				{
-					this.OnCDAValueDateChanging(value);
-					this.SendPropertyChanging();
-					this._CDAValueDate = value;
-					this.SendPropertyChanged("CDAValueDate");
-					this.OnCDAValueDateChanged();
-				}
-			}
-		}
-		
 		[Column(Storage="_CDADueDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CDADueDate
+		public System.Nullable<System.DateTime> CDASignDate
 		{
 			get
 			{
@@ -8971,11 +8947,11 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._CDADueDate != value))
 				{
-					this.OnCDADueDateChanging(value);
+					this.OnCDASignDateChanging(value);
 					this.SendPropertyChanging();
 					this._CDADueDate = value;
-					this.SendPropertyChanged("CDADueDate");
-					this.OnCDADueDateChanged();
+					this.SendPropertyChanged("CDASignDate");
+					this.OnCDASignDateChanged();
 				}
 			}
 		}

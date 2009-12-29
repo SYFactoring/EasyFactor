@@ -72,6 +72,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCaseQuery = new DevComponents.DotNetBar.PanelEx();
+            this.btnQueryReset = new DevComponents.DotNetBar.ButtonX();
+            this.cbIsCDA = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblClientName = new DevComponents.DotNetBar.LabelX();
             this.tbCaseCode = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -136,8 +138,6 @@
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cbIsCDA = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.btnQueryReset = new DevComponents.DotNetBar.ButtonX();
             this.panelCaseQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -169,7 +169,7 @@
             this.panelCaseQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelCaseQuery.Location = new System.Drawing.Point(0, 0);
             this.panelCaseQuery.Name = "panelCaseQuery";
-            this.panelCaseQuery.Size = new System.Drawing.Size(588, 77);
+            this.panelCaseQuery.Size = new System.Drawing.Size(761, 85);
             this.panelCaseQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelCaseQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelCaseQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -179,13 +179,42 @@
             this.panelCaseQuery.Style.GradientAngle = 90;
             this.panelCaseQuery.TabIndex = 0;
             // 
+            // btnQueryReset
+            // 
+            this.btnQueryReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQueryReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQueryReset.Location = new System.Drawing.Point(451, 57);
+            this.btnQueryReset.Name = "btnQueryReset";
+            this.btnQueryReset.Size = new System.Drawing.Size(48, 21);
+            this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQueryReset.TabIndex = 16;
+            this.btnQueryReset.Text = "重置";
+            this.btnQueryReset.Click += new System.EventHandler(this.Reset);
+            // 
+            // cbIsCDA
+            // 
+            this.cbIsCDA.AutoSize = true;
+            // 
+            // 
+            // 
+            this.cbIsCDA.BackgroundStyle.Class = "";
+            this.cbIsCDA.Checked = true;
+            this.cbIsCDA.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbIsCDA.CheckValue = "Y";
+            this.cbIsCDA.Location = new System.Drawing.Point(397, 10);
+            this.cbIsCDA.Name = "cbIsCDA";
+            this.cbIsCDA.Size = new System.Drawing.Size(100, 16);
+            this.cbIsCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsCDA.TabIndex = 15;
+            this.cbIsCDA.Text = "CDA是否签回";
+            // 
             // tbClientName
             // 
             // 
             // 
             // 
             this.tbClientName.Border.Class = "TextBoxBorder";
-            this.tbClientName.Location = new System.Drawing.Point(254, 50);
+            this.tbClientName.Location = new System.Drawing.Point(59, 6);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.Size = new System.Drawing.Size(133, 20);
             this.tbClientName.TabIndex = 14;
@@ -196,7 +225,7 @@
             // 
             // 
             this.lblClientName.BackgroundStyle.Class = "";
-            this.lblClientName.Location = new System.Drawing.Point(198, 51);
+            this.lblClientName.Location = new System.Drawing.Point(3, 6);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(59, 23);
             this.lblClientName.TabIndex = 13;
@@ -208,7 +237,7 @@
             // 
             // 
             this.tbCaseCode.Border.Class = "TextBoxBorder";
-            this.tbCaseCode.Location = new System.Drawing.Point(59, 50);
+            this.tbCaseCode.Location = new System.Drawing.Point(254, 6);
             this.tbCaseCode.Name = "tbCaseCode";
             this.tbCaseCode.Size = new System.Drawing.Size(133, 20);
             this.tbCaseCode.TabIndex = 12;
@@ -219,7 +248,7 @@
             // 
             // 
             this.lblCaseCode.BackgroundStyle.Class = "";
-            this.lblCaseCode.Location = new System.Drawing.Point(3, 51);
+            this.lblCaseCode.Location = new System.Drawing.Point(198, 6);
             this.lblCaseCode.Name = "lblCaseCode";
             this.lblCaseCode.Size = new System.Drawing.Size(59, 23);
             this.lblCaseCode.TabIndex = 11;
@@ -232,7 +261,7 @@
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(524, 21);
+            this.lblCount.Location = new System.Drawing.Point(524, 49);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 10;
@@ -243,7 +272,7 @@
             // 
             // 
             this.lblDate.BackgroundStyle.Class = "";
-            this.lblDate.Location = new System.Drawing.Point(198, 3);
+            this.lblDate.Location = new System.Drawing.Point(198, 31);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(59, 23);
             this.lblDate.TabIndex = 9;
@@ -253,7 +282,7 @@
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(397, 50);
+            this.btnQuery.Location = new System.Drawing.Point(397, 57);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(48, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -273,7 +302,7 @@
             "出口保理",
             "进口",
             "信保保理"});
-            this.cbCurrency.Location = new System.Drawing.Point(254, 28);
+            this.cbCurrency.Location = new System.Drawing.Point(254, 56);
             this.cbCurrency.Name = "cbCurrency";
             this.cbCurrency.Size = new System.Drawing.Size(133, 20);
             this.cbCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -285,7 +314,7 @@
             // 
             // 
             this.lblCurrency.BackgroundStyle.Class = "";
-            this.lblCurrency.Location = new System.Drawing.Point(198, 29);
+            this.lblCurrency.Location = new System.Drawing.Point(198, 57);
             this.lblCurrency.Name = "lblCurrency";
             this.lblCurrency.Size = new System.Drawing.Size(59, 23);
             this.lblCurrency.TabIndex = 6;
@@ -297,7 +326,7 @@
             this.cbTransactionType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbTransactionType.FormattingEnabled = true;
             this.cbTransactionType.ItemHeight = 14;
-            this.cbTransactionType.Location = new System.Drawing.Point(59, 29);
+            this.cbTransactionType.Location = new System.Drawing.Point(59, 57);
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
             this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -309,7 +338,7 @@
             // 
             // 
             this.lblTransactionType.BackgroundStyle.Class = "";
-            this.lblTransactionType.Location = new System.Drawing.Point(3, 26);
+            this.lblTransactionType.Location = new System.Drawing.Point(3, 54);
             this.lblTransactionType.Name = "lblTransactionType";
             this.lblTransactionType.Size = new System.Drawing.Size(59, 23);
             this.lblTransactionType.TabIndex = 4;
@@ -323,7 +352,7 @@
             this.diEnd.BackgroundStyle.Class = "DateTimeInputBackground";
             this.diEnd.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.diEnd.ButtonDropDown.Visible = true;
-            this.diEnd.Location = new System.Drawing.Point(397, 3);
+            this.diEnd.Location = new System.Drawing.Point(397, 31);
             this.diEnd.MaxDate = new System.DateTime(2050, 12, 31, 0, 0, 0, 0);
             this.diEnd.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             // 
@@ -371,7 +400,7 @@
             this.diBegin.BackgroundStyle.Class = "DateTimeInputBackground";
             this.diBegin.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.diBegin.ButtonDropDown.Visible = true;
-            this.diBegin.Location = new System.Drawing.Point(254, 3);
+            this.diBegin.Location = new System.Drawing.Point(254, 31);
             this.diBegin.MaxDate = new System.DateTime(2050, 12, 31, 0, 0, 0, 0);
             this.diBegin.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             // 
@@ -419,7 +448,7 @@
             // 
             this.cbOwnerDepts.BackgroundStyle.Class = "TextBoxBorder";
             this.cbOwnerDepts.ButtonDropDown.Visible = true;
-            this.cbOwnerDepts.Location = new System.Drawing.Point(59, 3);
+            this.cbOwnerDepts.Location = new System.Drawing.Point(59, 31);
             this.cbOwnerDepts.Name = "cbOwnerDepts";
             this.cbOwnerDepts.Size = new System.Drawing.Size(133, 23);
             this.cbOwnerDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -431,7 +460,7 @@
             // 
             // 
             this.lblOnwerDept.BackgroundStyle.Class = "";
-            this.lblOnwerDept.Location = new System.Drawing.Point(3, 3);
+            this.lblOnwerDept.Location = new System.Drawing.Point(3, 31);
             this.lblOnwerDept.Name = "lblOnwerDept";
             this.lblOnwerDept.Size = new System.Drawing.Size(59, 23);
             this.lblOnwerDept.TabIndex = 0;
@@ -480,11 +509,11 @@
             this.dgvCases.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCases.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvCases.Location = new System.Drawing.Point(0, 77);
+            this.dgvCases.Location = new System.Drawing.Point(0, 85);
             this.dgvCases.Name = "dgvCases";
             this.dgvCases.ReadOnly = true;
             this.dgvCases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCases.Size = new System.Drawing.Size(588, 308);
+            this.dgvCases.Size = new System.Drawing.Size(761, 300);
             this.dgvCases.TabIndex = 2;
             this.dgvCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
@@ -878,35 +907,6 @@
             this.dataGridViewTextBoxColumn23.ReadOnly = true;
             this.dataGridViewTextBoxColumn23.Visible = false;
             // 
-            // cbIsCDA
-            // 
-            this.cbIsCDA.AutoSize = true;
-            // 
-            // 
-            // 
-            this.cbIsCDA.BackgroundStyle.Class = "";
-            this.cbIsCDA.Checked = true;
-            this.cbIsCDA.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbIsCDA.CheckValue = "Y";
-            this.cbIsCDA.Location = new System.Drawing.Point(397, 28);
-            this.cbIsCDA.Name = "cbIsCDA";
-            this.cbIsCDA.Size = new System.Drawing.Size(100, 16);
-            this.cbIsCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsCDA.TabIndex = 15;
-            this.cbIsCDA.Text = "CDA是否生效";
-            // 
-            // btnQueryReset
-            // 
-            this.btnQueryReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnQueryReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQueryReset.Location = new System.Drawing.Point(451, 50);
-            this.btnQueryReset.Name = "btnQueryReset";
-            this.btnQueryReset.Size = new System.Drawing.Size(48, 21);
-            this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQueryReset.TabIndex = 16;
-            this.btnQueryReset.Text = "重置";
-            this.btnQueryReset.Click += new System.EventHandler(this.Reset);
-            // 
             // CaseMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -914,7 +914,7 @@
             this.Controls.Add(this.dgvCases);
             this.Controls.Add(this.panelCaseQuery);
             this.Name = "CaseMgr";
-            this.Size = new System.Drawing.Size(588, 385);
+            this.Size = new System.Drawing.Size(761, 385);
             this.panelCaseQuery.ResumeLayout(false);
             this.panelCaseQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).EndInit();

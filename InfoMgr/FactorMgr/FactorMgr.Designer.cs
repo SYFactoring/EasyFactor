@@ -73,6 +73,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuFactorMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemFactorSelect = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,6 +139,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.IsCorrespondentBankColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsAgreementSignColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CommentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLastModifiedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuFactorMgr.SuspendLayout();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactors)).BeginInit();
@@ -435,17 +437,18 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.GroupNameENColumn,
             this.IsCorrespondentBankColumn,
             this.IsAgreementSignColumn,
-            this.CommentColumn});
+            this.CommentColumn,
+            this.colLastModifiedDate});
             this.dgvFactors.ContextMenuStrip = this.contextMenuFactorMgr;
             this.dgvFactors.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactors.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactors.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvFactors.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFactors.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvFactors.Location = new System.Drawing.Point(0, 30);
@@ -752,6 +755,15 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.CommentColumn.Name = "CommentColumn";
             this.CommentColumn.ReadOnly = true;
             // 
+            // colLastModifiedDate
+            // 
+            this.colLastModifiedDate.DataPropertyName = "LastModifiedDate";
+            dataGridViewCellStyle2.Format = "d";
+            this.colLastModifiedDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colLastModifiedDate.HeaderText = "最后更新时间";
+            this.colLastModifiedDate.Name = "colLastModifiedDate";
+            this.colLastModifiedDate.ReadOnly = true;
+            // 
             // FactorMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -814,5 +826,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn IsCorrespondentBankColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn IsAgreementSignColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLastModifiedDate;
     }
 }

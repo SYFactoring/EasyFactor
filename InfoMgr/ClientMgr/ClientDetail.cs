@@ -172,6 +172,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.tabControl.SelectedTab = this.tabItemContract;
                 this.contractBindingSource.DataSource = new Contract();
             }
+
         }
 
         /// <summary>
@@ -419,6 +420,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
+            this.clientCreditLineBindingSource.DataSource = typeof(ClientCreditLine);
             this.clientCreditLineBindingSource.DataSource = new ClientCreditLine();
             this.opClientCreditLineType = OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE;
             this.UpdateClientCreditLineControlStatus();
@@ -433,6 +435,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
+            this.contractBindingSource.DataSource = typeof(Contract);
             this.contractBindingSource.DataSource = new Contract();
             this.opContractType = OpContractType.NEW_CONTRACT;
             this.UpdateContractControlStatus();
@@ -742,6 +745,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     contract.ContractStatus = "已过期";
                 }
+                else
+                {
+                    contract.ContractStatus = "已生效";
+                }
                 try
                 {
                     App.Current.DbContext.SubmitChanges();
@@ -788,6 +795,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectContract(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dgvContracts.SelectedRows.Count == 0)
@@ -808,6 +820,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="editable"></param>
         private void SetClientCreditLineEditable(bool editable)
         {
             foreach (Control comp in this.groupPanelClientCreditLine.Controls)
@@ -816,6 +832,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="editable"></param>
         private void SetContractEditable(bool editable)
         {
             foreach (Control comp in this.groupPanelContract.Controls)
@@ -1168,6 +1188,24 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             else
             {
                 e.IsValid = false;
+            }
+        }
+
+        private void periodBeginDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            ClientCreditLine creditLine = this.clientCreditLineBindingSource.DataSource as ClientCreditLine;
+            if (!creditLine.PeriodEnd.HasValue)
+            {
+                creditLine.PeriodEnd = this.periodBeginDateTimePicker.Value.AddYears(1);
+            }
+        }
+
+        private void diContractValueDate_ValueChanged(object sender, EventArgs e)
+        {
+            Contract contract = this.contractBindingSource.DataSource as Contract;
+            if (!contract.ContractDueDate.HasValue)
+            {
+                contract.ContractDueDate = this.diContractValueDate.Value.AddYears(1);
             }
         }
     }

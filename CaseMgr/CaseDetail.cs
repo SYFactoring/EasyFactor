@@ -156,26 +156,31 @@ namespace CMBC.EasyFactor.CaseMgr
                         curCase.SellerFactor = cmbc;
                         curCase.BuyerFactor = cmbc;
                         curCase.InvoiceCurrency = "CNY";
+                        this.cbCaseInvoiceCurrency.Enabled = false;
                         break;
                     case "出口保理":
                         this.btnCaseFactorSelect.Enabled = true;
                         curCase.SellerFactor = cmbc;
                         curCase.InvoiceCurrency = "USD";
+                        this.cbCaseInvoiceCurrency.Enabled = true;
                         break;
                     case "进口保理":
                         this.btnCaseFactorSelect.Enabled = true;
                         curCase.BuyerFactor = cmbc;
                         curCase.InvoiceCurrency = "USD";
+                        this.cbCaseInvoiceCurrency.Enabled = true;
                         break;
                     case "国际信保保理":
                         this.btnCaseFactorSelect.Enabled = true;
                         curCase.SellerFactor = cmbc;
                         curCase.InvoiceCurrency = "USD";
+                        this.cbCaseInvoiceCurrency.Enabled = true;
                         break;
                     case "国内信保保理":
                         this.btnCaseFactorSelect.Enabled = true;
                         curCase.SellerFactor = cmbc;
                         curCase.InvoiceCurrency = "CNY";
+                        this.cbCaseInvoiceCurrency.Enabled = false;
                         break;
                     default: break;
                 }

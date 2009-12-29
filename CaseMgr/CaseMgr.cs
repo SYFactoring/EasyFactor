@@ -205,7 +205,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                 && (c.CaseAppDate > beginDate.AddDays(-1))
                                 && (c.CaseAppDate < endDate.AddDays(1))
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
-                                && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == "已生效"))
+                                && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == "已签回"))
                                 && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN_1.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN_2.Contains(this.tbClientName.Text)
                                  || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN_1.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN_2.Contains(this.tbClientName.Text))
                                     );

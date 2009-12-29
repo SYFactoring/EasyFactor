@@ -479,7 +479,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnUserUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUserUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnUserUpdate.TabIndex = 24;
-            this.btnUserUpdate.Text = "更新";
+            this.btnUserUpdate.Text = "编辑";
             this.btnUserUpdate.Click += new System.EventHandler(this.UpdateUser);
             // 
             // userValidator

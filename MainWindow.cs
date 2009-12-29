@@ -15,15 +15,15 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.DepartmentMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.InfoMgr.UserMgr;
-    using CMBC.EasyFactor.Utils;
     using CMBC.EasyFactor.Report;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// Main Window Form
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -32,12 +32,12 @@ namespace CMBC.EasyFactor
         {
             InitializeComponent();
             this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
-            this.CommandStatus = "欢迎使用中国民生银行保理运行系统";
+            this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Sets command status
@@ -61,16 +61,27 @@ namespace CMBC.EasyFactor
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (29) 
+        #region Methods (33)
 
-		// Private Methods (29) 
+        // Private Methods (33) 
 
         private void About(object sender, EventArgs e)
         {
             AboutBox aboutBox = new AboutBox();
             aboutBox.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ARPaymentReport(object sender, EventArgs e)
+        {
+            ReportMgr assignMgr = new ReportMgr(ReportMgr.OpReportType.REPORT_AR);
+            this.SetDetailPanel(assignMgr);
         }
 
         /// <summary>
@@ -120,6 +131,23 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void FinanceReport(object sender, EventArgs e)
+        {
+            ReportMgr assignMgr = new ReportMgr(ReportMgr.OpReportType.REPORT_FINANCE);
+            this.SetDetailPanel(assignMgr);
+        }
+
+        private void FlawResolve(object sender, EventArgs e)
+        {
+            InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE);
+            this.SetDetailPanel(invoiceMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportAssign(object sender, EventArgs e)
         {
             ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
@@ -137,6 +165,19 @@ namespace CMBC.EasyFactor
             importForm.Show();
         }
 
+        private bool validateRole()
+        {
+            if (App.Current.CurUser.Role == "管理员")
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("只有管理员可以执行此操作", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -144,8 +185,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportClients(object sender, EventArgs e)
         {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS);
-            importForm.Show();
+            if (validateRole())
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS);
+                importForm.Show();
+            }
         }
 
         private void ImportCreditCover(object sender, EventArgs e)
@@ -161,8 +205,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportDepartments(object sender, EventArgs e)
         {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_DEPARTMENTS);
-            importForm.Show();
+            if (validateRole())
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_DEPARTMENTS);
+                importForm.Show();
+            }
         }
 
         /// <summary>
@@ -172,8 +219,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportFactors(object sender, EventArgs e)
         {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS);
-            importForm.Show();
+            if (validateRole())
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS);
+                importForm.Show();
+            }
         }
 
         /// <summary>
@@ -194,8 +244,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportUsers(object sender, EventArgs e)
         {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_USERS);
-            importForm.Show();
+            if (validateRole())
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_USERS);
+                importForm.Show();
+            }
         }
 
         /// <summary>
@@ -243,28 +296,6 @@ namespace CMBC.EasyFactor
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MgrCases(object sender, EventArgs e)
-        {
-            CaseMgr.CaseMgr caseQuery = new CaseMgr.CaseMgr(true);
-            this.SetDetailPanel(caseQuery);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MgrCDAs(object sender, EventArgs e)
-        {
-            CDAMgr CDAMgr = new CDAMgr(true);
-            this.SetDetailPanel(CDAMgr);
-        }
-
-        /// <summary>
         /// Client Management
         /// </summary>
         /// <param name="sender">event sender</param>
@@ -273,28 +304,6 @@ namespace CMBC.EasyFactor
         {
             ClientMgr clientMgrUI = new ClientMgr(true);
             this.SetDetailPanel(clientMgrUI);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MgrContracts(object sender, EventArgs e)
-        {
-            ContractMgr contractMgr = new ContractMgr(true);
-            this.SetDetailPanel(contractMgr);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MgrCreditCoverNegs(object sender, EventArgs e)
-        {
-            CreditCoverNegMgr creditCoverNegMgr = new CreditCoverNegMgr(true);
-            this.SetDetailPanel(creditCoverNegMgr);
         }
 
         /// <summary>
@@ -380,6 +389,56 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void QueryCase(object sender, EventArgs e)
+        {
+            CaseMgr.CaseMgr caseQuery = new CaseMgr.CaseMgr(true);
+            this.SetDetailPanel(caseQuery);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryCDA(object sender, EventArgs e)
+        {
+            CDAMgr CDAMgr = new CDAMgr(true);
+            this.SetDetailPanel(CDAMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryContract(object sender, EventArgs e)
+        {
+            ContractMgr contractMgr = new ContractMgr(true);
+            this.SetDetailPanel(contractMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryCreditCoverNegs(object sender, EventArgs e)
+        {
+            CreditCoverNegMgr creditCoverNegMgr = new CreditCoverNegMgr(true);
+            this.SetDetailPanel(creditCoverNegMgr);
+        }
+
+        private void QueryInvoice(object sender, EventArgs e)
+        {
+            InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.INVOICE_QUERY);
+            this.SetDetailPanel(invoiceMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QueryOverDueDays(object sender, EventArgs e)
         {
             OverDueMgr invoiceMgr = new OverDueMgr();
@@ -397,40 +456,6 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Add(uc);
         }
 
-		#endregion Methods 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ARPaymentReport(object sender, EventArgs e)
-        {
-            ReportMgr assignMgr = new ReportMgr(ReportMgr.OpReportType.REPORT_AR);
-            this.SetDetailPanel(assignMgr);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FinanceReport(object sender, EventArgs e)
-        {
-            ReportMgr assignMgr = new ReportMgr(ReportMgr.OpReportType.REPORT_FINANCE);
-            this.SetDetailPanel(assignMgr);
-        }
-
-        private void QueryInvoice(object sender, EventArgs e)
-        {
-            InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.INVOICE_QUERY);
-            this.SetDetailPanel(invoiceMgr);
-        }
-
-        private void FlawResolve(object sender, EventArgs e)
-        {
-            InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE);
-            this.SetDetailPanel(invoiceMgr);
-        }
+        #endregion Methods
     }
 }

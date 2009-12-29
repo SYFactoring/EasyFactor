@@ -1192,7 +1192,7 @@
             this.btnFactorCreditLineUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnFactorCreditLineUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFactorCreditLineUpdate.TabIndex = 34;
-            this.btnFactorCreditLineUpdate.Text = "更新";
+            this.btnFactorCreditLineUpdate.Text = "编辑";
             this.btnFactorCreditLineUpdate.Click += new System.EventHandler(this.UpdateCreditLine);
             // 
             // btnFactorCreditLineRefresh
@@ -1580,7 +1580,7 @@
             this.btnFactorUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnFactorUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFactorUpdate.TabIndex = 5;
-            this.btnFactorUpdate.Text = "更新";
+            this.btnFactorUpdate.Text = "编辑";
             this.btnFactorUpdate.Click += new System.EventHandler(this.UpdateFactor);
             // 
             // btnFactorReset

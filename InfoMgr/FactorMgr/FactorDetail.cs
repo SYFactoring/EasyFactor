@@ -322,6 +322,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
             Factor factor = (Factor)factorBindingSource.DataSource;
+            factor.LastModifiedDate = DateTime.Now;
 
             if (this.opFactorType == OpFactorType.NEW_FACTOR)
             {

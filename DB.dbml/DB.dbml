@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=192.168.1.100;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLexpress;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[User]" Member="Users">
     <Type Name="User">
       <Column Name="UserID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -344,6 +344,7 @@
       <Column Name="IsCorrespondentBank" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="IsAgreementSigned" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Factor_FactorAccount" Member="FactorAccounts" OtherKey="FactorCode" Type="FactorAccount" />
       <Association Name="Factor_FactorCreditLine" Member="FactorCreditLines" OtherKey="FactorCode" Type="FactorCreditLine" />
       <Association Name="Factor_Case" Member="BuyerCases" OtherKey="BuyerFactorCode" Type="Case" />
@@ -362,7 +363,6 @@
       <Column Name="CreditCoverCurr" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
       <Column Name="CreditCover" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="IsCreditCoverRevolving" Type="System.Boolean" DbType="bit" CanBeNull="true" />
-      <Column Name="ApproveNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="PUGProportion" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="CreditCoverPeriodBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreditCoverPeriodEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -385,8 +385,7 @@
       <Column Name="CommissionTypeComment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="HandFeeCurr" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
       <Column Name="HandFee" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="CDAValueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CDADueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CDASignDate" Storage="_CDADueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CDAStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="NoticeMethod" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="NoticePerson" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />

@@ -107,15 +107,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.calendarColumn1 = new CMBC.EasyFactor.Utils.CalendarColumn();
-            this.calendarColumn2 = new CMBC.EasyFactor.Utils.CalendarColumn();
-            this.calendarColumn3 = new CMBC.EasyFactor.Utils.CalendarColumn();
-            this.calendarColumn4 = new CMBC.EasyFactor.Utils.CalendarColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
@@ -123,10 +114,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.colInvoiceCurrency = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colInvoiceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInvoiceDate = new CMBC.EasyFactor.Utils.CalendarColumn();
-            this.colAssignDate = new CMBC.EasyFactor.Utils.CalendarColumn();
-            this.colDueDate = new CMBC.EasyFactor.Utils.CalendarColumn();
-            this.colValueDate = new CMBC.EasyFactor.Utils.CalendarColumn();
+            this.colInvoiceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colValueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsFlaw = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
@@ -520,74 +511,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvInvoices_RowsAdded);
             this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "InvoiceNo";
-            this.dataGridViewTextBoxColumn1.HeaderText = "发票号";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "InvoiceAmount";
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewTextBoxColumn2.HeaderText = "发票金额";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewTextBoxColumn3.HeaderText = "转让金额";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // calendarColumn1
-            // 
-            this.calendarColumn1.DataPropertyName = "InvoiceDate";
-            this.calendarColumn1.HeaderText = "发票日期";
-            this.calendarColumn1.Name = "calendarColumn1";
-            this.calendarColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.calendarColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // calendarColumn2
-            // 
-            this.calendarColumn2.DataPropertyName = "AssignDate";
-            this.calendarColumn2.HeaderText = "转让日";
-            this.calendarColumn2.Name = "calendarColumn2";
-            this.calendarColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.calendarColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // calendarColumn3
-            // 
-            this.calendarColumn3.DataPropertyName = "ValueDate";
-            this.calendarColumn3.HeaderText = "生效日";
-            this.calendarColumn3.Name = "calendarColumn3";
-            this.calendarColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.calendarColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // calendarColumn4
-            // 
-            this.calendarColumn4.DataPropertyName = "DueDate";
-            this.calendarColumn4.HeaderText = "到期日";
-            this.calendarColumn4.Name = "calendarColumn4";
-            this.calendarColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.calendarColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "FlawReason";
-            this.dataGridViewTextBoxColumn4.HeaderText = "瑕疵原因";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Comment";
-            this.dataGridViewTextBoxColumn5.HeaderText = "备注";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
             // superValidator
             // 
             this.superValidator.ContainerControl = this;
@@ -641,7 +564,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colInvoiceDate.HeaderText = "发票日";
             this.colInvoiceDate.Name = "colInvoiceDate";
             this.colInvoiceDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colInvoiceDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colAssignDate
             // 
@@ -649,7 +571,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colAssignDate.HeaderText = "转让日";
             this.colAssignDate.Name = "colAssignDate";
             this.colAssignDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colAssignDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colDueDate
             // 
@@ -657,7 +578,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colDueDate.HeaderText = "到期日";
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colDueDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colValueDate
             // 
@@ -665,7 +585,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colValueDate.HeaderText = "生效日";
             this.colValueDate.Name = "colValueDate";
             this.colValueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colValueDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colIsFlaw
             // 
@@ -710,15 +629,6 @@ namespace CMBC.EasyFactor.ARMgr
 
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuItemAssignBatchImport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private CalendarColumn calendarColumn1;
-        private CalendarColumn calendarColumn2;
-        private CalendarColumn calendarColumn3;
-        private CalendarColumn calendarColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
@@ -726,10 +636,10 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewComboBoxColumn colInvoiceCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private CalendarColumn colInvoiceDate;
-        private CalendarColumn colAssignDate;
-        private CalendarColumn colDueDate;
-        private CalendarColumn colValueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colValueDate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colIsFlaw;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
     }

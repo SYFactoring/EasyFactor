@@ -91,9 +91,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.handFeeCurrComboBox.ValueMember = "CurrencyCode";
             this.handFeeCurrComboBox.SelectedIndex = -1;
 
-            this.assignTypeComboBox.DataSource = new string[] { "全部", "部分" };
-            this.commissionTypeComboBox.DataSource = new string[] { "01", "02", "其他" };
-            this.cDAStatusComboBox.DataSource = new string[] { "未审核", "已审核未下发", "已下发未签回", "已签回", "已生效", "已过期" };
+            this.assignTypeComboBox.Items.AddRange(new string[] { "全部", "部分" });
+            this.commissionTypeComboBox.Items.AddRange(new string[] { "01", "02", "其他" });
+            this.cDAStatusComboBox.Items.AddRange(new string[] { "未审核", "已审核未下发", "已下发未签回", "已签回" });
 
             this.opCDAType = opCDAType;
 
@@ -108,6 +108,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 cda.IsRecoarse = false;
                 cda.IsCreditCoverRevolving = false;
                 cda.CDAStatus = "未审核";
+                cda.IsCreditCoverRevolving = true;
+                cda.AssignType = "全部";
                 this.CDABindingSource.DataSource = cda;
             }
             else

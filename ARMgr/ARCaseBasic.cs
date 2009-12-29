@@ -127,7 +127,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-            CDA cda = curCase.CDAs.SingleOrDefault(c => c.CDAStatus == "已生效");
+            CDA cda = curCase.CDAs.SingleOrDefault(c => c.CDAStatus == "已签回");
             if (cda != null)
             {
                 this.isNoticeCheckBox.Checked = cda.IsNotice.Value;

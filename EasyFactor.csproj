@@ -411,9 +411,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Utils\CalendarUtil.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Utils\ControlUtil.cs" />
   </ItemGroup>
   <ItemGroup>

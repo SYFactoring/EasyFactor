@@ -86,6 +86,37 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        private Dictionary<string, string> _dict;
+
+        public void BeginMonitor()
+        {
+            _dict = new Dictionary<string, string>();
+            this.Backup();
+            this.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(Factor_PropertyChanged);
+        }
+
+        void Factor_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            _dict[e.PropertyName] = String.Format("{0} : {1}\n", e.PropertyName, this.GetType().GetProperty(e.PropertyName).GetValue(this, null));
+        }
+
+        public string EndMonitor()
+        {
+            if (_dict != null)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (string value in _dict.Values)
+                {
+                    sb.Append(value).Append(Environment.NewLine);
+                }
+                this.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(Factor_PropertyChanged);
+                return sb.ToString();
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
         #endregion Methods
     }
 

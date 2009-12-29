@@ -4,7 +4,6 @@
     {
 		#region Fields (72) 
 
-        private DevComponents.DotNetBar.Controls.TextBoxX approveNumberTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
         private DevComponents.DotNetBar.ButtonX btnCaseSelect;
         private DevComponents.DotNetBar.ButtonX btnCDAReset;
@@ -20,9 +19,8 @@
         private DevComponents.DotNetBar.Controls.CheckBoxX cbNoticeMethodEmail;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbNoticeMethodFax;
         private System.Windows.Forms.BindingSource CDABindingSource;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput cDADueDateDateTimePicker;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput cDASignDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cDAStatusComboBox;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput cDAValueDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx commissionTypeComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX commissionTypeCommentTextBox;
@@ -120,7 +118,6 @@
             DevComponents.DotNetBar.LabelX invoiceCurrencyLabel;
             DevComponents.DotNetBar.LabelX assignTypeLabel;
             DevComponents.DotNetBar.LabelX creditCoverCurrLabel;
-            DevComponents.DotNetBar.LabelX approveNumberLabel;
             DevComponents.DotNetBar.LabelX pUGProportionLabel;
             DevComponents.DotNetBar.LabelX creditCoverPeriodBeginLabel;
             DevComponents.DotNetBar.LabelX pUGPeriodLabel;
@@ -140,20 +137,18 @@
             DevComponents.DotNetBar.LabelX commissonTypeLabel;
             DevComponents.DotNetBar.LabelX commissionTypeCommentLabel;
             DevComponents.DotNetBar.LabelX handFeeLabel;
-            DevComponents.DotNetBar.LabelX cDAValueDateLabel;
             DevComponents.DotNetBar.LabelX noticePersonLabel;
             DevComponents.DotNetBar.LabelX emailLabel;
             DevComponents.DotNetBar.LabelX faxLabel;
             DevComponents.DotNetBar.LabelX commentLabel;
             DevComponents.DotNetBar.LabelX createUserNameLabel;
-            DevComponents.DotNetBar.LabelX cDADueDateLabel;
+            DevComponents.DotNetBar.LabelX cDASignDateLabel;
             DevComponents.DotNetBar.LabelX cDAStatusLabel;
             DevComponents.DotNetBar.LabelX noticeMethodLabel;
             DevComponents.DotNetBar.LabelX contractCodeLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cbIsNotice = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cbIsRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -195,25 +190,24 @@
             this.creditCoverPeriodEndDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.creditCoverPeriodBeginDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.pUGProportionTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.approveNumberTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditCoverTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditCoverCurrComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.groupPanelOther = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.cbNoticeMethodFax = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cbNoticeMethodEmail = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cDAStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.cDADueDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.cDASignDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.createUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.faxTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.emailTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.noticePersonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.cDAValueDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.btnCDAUpdate = new DevComponents.DotNetBar.ButtonX();
             this.btnCDASave = new DevComponents.DotNetBar.ButtonX();
             this.btnCDAReset = new DevComponents.DotNetBar.ButtonX();
             this.rangeValidator1 = new DevComponents.DotNetBar.Validator.RangeValidator();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.compareValidator2 = new DevComponents.DotNetBar.Validator.CompareValidator();
@@ -222,7 +216,7 @@
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -231,7 +225,6 @@
             invoiceCurrencyLabel = new DevComponents.DotNetBar.LabelX();
             assignTypeLabel = new DevComponents.DotNetBar.LabelX();
             creditCoverCurrLabel = new DevComponents.DotNetBar.LabelX();
-            approveNumberLabel = new DevComponents.DotNetBar.LabelX();
             pUGProportionLabel = new DevComponents.DotNetBar.LabelX();
             creditCoverPeriodBeginLabel = new DevComponents.DotNetBar.LabelX();
             pUGPeriodLabel = new DevComponents.DotNetBar.LabelX();
@@ -251,27 +244,25 @@
             commissonTypeLabel = new DevComponents.DotNetBar.LabelX();
             commissionTypeCommentLabel = new DevComponents.DotNetBar.LabelX();
             handFeeLabel = new DevComponents.DotNetBar.LabelX();
-            cDAValueDateLabel = new DevComponents.DotNetBar.LabelX();
             noticePersonLabel = new DevComponents.DotNetBar.LabelX();
             emailLabel = new DevComponents.DotNetBar.LabelX();
             faxLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
             createUserNameLabel = new DevComponents.DotNetBar.LabelX();
-            cDADueDateLabel = new DevComponents.DotNetBar.LabelX();
+            cDASignDateLabel = new DevComponents.DotNetBar.LabelX();
             cDAStatusLabel = new DevComponents.DotNetBar.LabelX();
             noticeMethodLabel = new DevComponents.DotNetBar.LabelX();
             contractCodeLabel = new DevComponents.DotNetBar.LabelX();
             this.groupPanelCase.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.groupPanelCreditCover.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodBeginDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.creditCoverPeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.creditCoverPeriodBeginDateTimePicker)).BeginInit();
             this.groupPanelOther.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cDADueDateDateTimePicker)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cDAValueDateDateTimePicker)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cDASignDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // caseCodeLabel
@@ -385,20 +376,6 @@
             creditCoverCurrLabel.Size = new System.Drawing.Size(84, 16);
             creditCoverCurrLabel.TabIndex = 0;
             creditCoverCurrLabel.Text = "买方风险额度:";
-            // 
-            // approveNumberLabel
-            // 
-            approveNumberLabel.AutoSize = true;
-            approveNumberLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            approveNumberLabel.BackgroundStyle.Class = "";
-            approveNumberLabel.Location = new System.Drawing.Point(30, 25);
-            approveNumberLabel.Name = "approveNumberLabel";
-            approveNumberLabel.Size = new System.Drawing.Size(59, 16);
-            approveNumberLabel.TabIndex = 6;
-            approveNumberLabel.Text = "核准编号:";
             // 
             // pUGProportionLabel
             // 
@@ -666,20 +643,6 @@
             handFeeLabel.TabIndex = 10;
             handFeeLabel.Text = "单据处理费(每张):";
             // 
-            // cDAValueDateLabel
-            // 
-            cDAValueDateLabel.AutoSize = true;
-            cDAValueDateLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            cDAValueDateLabel.BackgroundStyle.Class = "";
-            cDAValueDateLabel.Location = new System.Drawing.Point(43, 5);
-            cDAValueDateLabel.Name = "cDAValueDateLabel";
-            cDAValueDateLabel.Size = new System.Drawing.Size(47, 16);
-            cDAValueDateLabel.TabIndex = 2;
-            cDAValueDateLabel.Text = "生效日:";
-            // 
             // noticePersonLabel
             // 
             noticePersonLabel.AutoSize = true;
@@ -750,19 +713,19 @@
             createUserNameLabel.TabIndex = 16;
             createUserNameLabel.Text = "经办人:";
             // 
-            // cDADueDateLabel
+            // cDASignDateLabel
             // 
-            cDADueDateLabel.AutoSize = true;
-            cDADueDateLabel.BackColor = System.Drawing.Color.Transparent;
+            cDASignDateLabel.AutoSize = true;
+            cDASignDateLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            cDADueDateLabel.BackgroundStyle.Class = "";
-            cDADueDateLabel.Location = new System.Drawing.Point(267, 7);
-            cDADueDateLabel.Name = "cDADueDateLabel";
-            cDADueDateLabel.Size = new System.Drawing.Size(47, 16);
-            cDADueDateLabel.TabIndex = 18;
-            cDADueDateLabel.Text = "到期日:";
+            cDASignDateLabel.BackgroundStyle.Class = "";
+            cDASignDateLabel.Location = new System.Drawing.Point(42, 3);
+            cDASignDateLabel.Name = "cDASignDateLabel";
+            cDASignDateLabel.Size = new System.Drawing.Size(47, 16);
+            cDASignDateLabel.TabIndex = 18;
+            cDASignDateLabel.Text = "签发日:";
             // 
             // cDAStatusLabel
             // 
@@ -881,10 +844,6 @@
             this.invoiceCurrencyTextBox.Name = "invoiceCurrencyTextBox";
             this.invoiceCurrencyTextBox.Size = new System.Drawing.Size(89, 20);
             this.invoiceCurrencyTextBox.TabIndex = 35;
-            // 
-            // CDABindingSource
-            // 
-            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
             // 
             // transactionTypeTextBox
             // 
@@ -1131,8 +1090,6 @@
             this.groupPanelCreditCover.Controls.Add(this.creditCoverPeriodBeginDateTimePicker);
             this.groupPanelCreditCover.Controls.Add(pUGProportionLabel);
             this.groupPanelCreditCover.Controls.Add(this.pUGProportionTextBox);
-            this.groupPanelCreditCover.Controls.Add(approveNumberLabel);
-            this.groupPanelCreditCover.Controls.Add(this.approveNumberTextBox);
             this.groupPanelCreditCover.Controls.Add(this.creditCoverTextBox);
             this.groupPanelCreditCover.Controls.Add(creditCoverCurrLabel);
             this.groupPanelCreditCover.Controls.Add(this.creditCoverCurrComboBox);
@@ -1202,7 +1159,7 @@
             // 
             this.cbIsCreditCoverRevolving.BackgroundStyle.Class = "";
             this.cbIsCreditCoverRevolving.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsCreditCoverRevolving", true));
-            this.cbIsCreditCoverRevolving.Location = new System.Drawing.Point(547, 0);
+            this.cbIsCreditCoverRevolving.Location = new System.Drawing.Point(101, 22);
             this.cbIsCreditCoverRevolving.Name = "cbIsCreditCoverRevolving";
             this.cbIsCreditCoverRevolving.Size = new System.Drawing.Size(100, 23);
             this.cbIsCreditCoverRevolving.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1555,18 +1512,6 @@
             this.pUGProportionTextBox.Size = new System.Drawing.Size(70, 20);
             this.pUGProportionTextBox.TabIndex = 9;
             // 
-            // approveNumberTextBox
-            // 
-            // 
-            // 
-            // 
-            this.approveNumberTextBox.Border.Class = "TextBoxBorder";
-            this.approveNumberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "ApproveNumber", true));
-            this.approveNumberTextBox.Location = new System.Drawing.Point(101, 24);
-            this.approveNumberTextBox.Name = "approveNumberTextBox";
-            this.approveNumberTextBox.Size = new System.Drawing.Size(100, 20);
-            this.approveNumberTextBox.TabIndex = 7;
-            // 
             // creditCoverTextBox
             // 
             // 
@@ -1600,8 +1545,8 @@
             this.groupPanelOther.Controls.Add(noticeMethodLabel);
             this.groupPanelOther.Controls.Add(cDAStatusLabel);
             this.groupPanelOther.Controls.Add(this.cDAStatusComboBox);
-            this.groupPanelOther.Controls.Add(cDADueDateLabel);
-            this.groupPanelOther.Controls.Add(this.cDADueDateDateTimePicker);
+            this.groupPanelOther.Controls.Add(cDASignDateLabel);
+            this.groupPanelOther.Controls.Add(this.cDASignDateDateTimePicker);
             this.groupPanelOther.Controls.Add(createUserNameLabel);
             this.groupPanelOther.Controls.Add(this.createUserNameTextBox);
             this.groupPanelOther.Controls.Add(commentLabel);
@@ -1612,8 +1557,6 @@
             this.groupPanelOther.Controls.Add(this.emailTextBox);
             this.groupPanelOther.Controls.Add(noticePersonLabel);
             this.groupPanelOther.Controls.Add(this.noticePersonTextBox);
-            this.groupPanelOther.Controls.Add(cDAValueDateLabel);
-            this.groupPanelOther.Controls.Add(this.cDAValueDateDateTimePicker);
             this.groupPanelOther.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelOther.Location = new System.Drawing.Point(0, 401);
             this.groupPanelOther.Name = "groupPanelOther";
@@ -1690,40 +1633,40 @@
             this.cDAStatusComboBox.Size = new System.Drawing.Size(121, 21);
             this.cDAStatusComboBox.TabIndex = 20;
             // 
-            // cDADueDateDateTimePicker
+            // cDASignDateDateTimePicker
             // 
             // 
             // 
             // 
-            this.cDADueDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.cDADueDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.cDADueDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "CDADueDate", true));
-            this.cDADueDateDateTimePicker.Location = new System.Drawing.Point(320, 3);
+            this.cDASignDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.cDASignDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.cDASignDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "CDASignDate", true));
+            this.cDASignDateDateTimePicker.Location = new System.Drawing.Point(101, 1);
             // 
             // 
             // 
-            this.cDADueDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            this.cDASignDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
             // 
             // 
             // 
-            this.cDADueDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.cDADueDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.cDASignDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.cDASignDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
             // 
             // 
             // 
-            this.cDADueDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.cDADueDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.cDADueDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.cDADueDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            this.cDASignDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.cDASignDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.cDASignDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.cDASignDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
             // 
             // 
             // 
-            this.cDADueDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.cDADueDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.cDADueDateDateTimePicker.Name = "cDADueDateDateTimePicker";
-            this.cDADueDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
-            this.cDADueDateDateTimePicker.TabIndex = 19;
-            this.superValidator.SetValidator1(this.cDADueDateDateTimePicker, this.compareValidator3);
+            this.cDASignDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.cDASignDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.cDASignDateDateTimePicker.Name = "cDASignDateDateTimePicker";
+            this.cDASignDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
+            this.cDASignDateDateTimePicker.TabIndex = 19;
+            this.superValidator.SetValidator1(this.cDASignDateDateTimePicker, this.compareValidator3);
             // 
             // createUserNameTextBox
             // 
@@ -1788,40 +1731,6 @@
             this.noticePersonTextBox.Size = new System.Drawing.Size(100, 20);
             this.noticePersonTextBox.TabIndex = 9;
             // 
-            // cDAValueDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.cDAValueDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.cDAValueDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.cDAValueDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "CDAValueDate", true));
-            this.cDAValueDateDateTimePicker.Location = new System.Drawing.Point(101, 3);
-            // 
-            // 
-            // 
-            this.cDAValueDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.cDAValueDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.cDAValueDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.cDAValueDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.cDAValueDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.cDAValueDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.cDAValueDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.cDAValueDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.cDAValueDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.cDAValueDateDateTimePicker.Name = "cDAValueDateDateTimePicker";
-            this.cDAValueDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
-            this.cDAValueDateDateTimePicker.TabIndex = 3;
-            // 
             // btnCDAUpdate
             // 
             this.btnCDAUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -1831,7 +1740,7 @@
             this.btnCDAUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnCDAUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCDAUpdate.TabIndex = 5;
-            this.btnCDAUpdate.Text = "更新";
+            this.btnCDAUpdate.Text = "编辑";
             this.btnCDAUpdate.Click += new System.EventHandler(this.UpdateCDA);
             // 
             // btnCDASave
@@ -1871,6 +1780,12 @@
             this.superValidator.ErrorProvider = this.errorProvider;
             this.superValidator.Highlighter = this.highlighter;
             // 
+            // customValidator1
+            // 
+            this.customValidator1.ErrorMessage = "Your error message here.";
+            this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
+            // 
             // requiredFieldValidator2
             // 
             this.requiredFieldValidator2.ErrorMessage = "必填";
@@ -1897,7 +1812,6 @@
             // 
             // compareValidator3
             // 
-            this.compareValidator3.ControlToCompare = this.cDAValueDateDateTimePicker;
             this.compareValidator3.ErrorMessage = "到期日应该大于生效日";
             this.compareValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.compareValidator3.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
@@ -1918,11 +1832,9 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // customValidator1
+            // CDABindingSource
             // 
-            this.customValidator1.ErrorMessage = "Your error message here.";
-            this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
+            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
             // 
             // CDADetail
             // 
@@ -1942,7 +1854,6 @@
             this.Leave += new System.EventHandler(this.CDADetail_Leave);
             this.groupPanelCase.ResumeLayout(false);
             this.groupPanelCase.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();
             this.groupPanelCreditCover.ResumeLayout(false);
             this.groupPanelCreditCover.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodEndDateTimePicker)).EndInit();
@@ -1951,9 +1862,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.creditCoverPeriodBeginDateTimePicker)).EndInit();
             this.groupPanelOther.ResumeLayout(false);
             this.groupPanelOther.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cDADueDateDateTimePicker)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cDAValueDateDateTimePicker)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cDASignDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
