@@ -149,6 +149,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cbIsNotice = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cbIsRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -216,7 +217,6 @@
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -254,6 +254,7 @@
             noticeMethodLabel = new DevComponents.DotNetBar.LabelX();
             contractCodeLabel = new DevComponents.DotNetBar.LabelX();
             this.groupPanelCase.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.groupPanelCreditCover.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodBeginDateTimePicker)).BeginInit();
@@ -262,7 +263,6 @@
             this.groupPanelOther.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cDASignDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // caseCodeLabel
@@ -845,6 +845,10 @@
             this.invoiceCurrencyTextBox.Size = new System.Drawing.Size(89, 20);
             this.invoiceCurrencyTextBox.TabIndex = 35;
             // 
+            // CDABindingSource
+            // 
+            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
+            // 
             // transactionTypeTextBox
             // 
             // 
@@ -1397,9 +1401,10 @@
             // 
             // financeLineCurrComboBox
             // 
+            this.financeLineCurrComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.financeLineCurrComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.financeLineCurrComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceLineCurr", true));
             this.financeLineCurrComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.financeLineCurrComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.financeLineCurrComboBox.FormattingEnabled = true;
             this.financeLineCurrComboBox.Location = new System.Drawing.Point(101, 50);
             this.financeLineCurrComboBox.Name = "financeLineCurrComboBox";
@@ -1526,9 +1531,10 @@
             // 
             // creditCoverCurrComboBox
             // 
+            this.creditCoverCurrComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.creditCoverCurrComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.creditCoverCurrComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CreditCoverCurr", true));
             this.creditCoverCurrComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.creditCoverCurrComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.creditCoverCurrComboBox.FormattingEnabled = true;
             this.creditCoverCurrComboBox.Location = new System.Drawing.Point(101, 0);
             this.creditCoverCurrComboBox.Name = "creditCoverCurrComboBox";
@@ -1832,10 +1838,6 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // CDABindingSource
-            // 
-            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
-            // 
             // CDADetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1854,6 +1856,7 @@
             this.Leave += new System.EventHandler(this.CDADetail_Leave);
             this.groupPanelCase.ResumeLayout(false);
             this.groupPanelCase.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();
             this.groupPanelCreditCover.ResumeLayout(false);
             this.groupPanelCreditCover.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodEndDateTimePicker)).EndInit();
@@ -1864,7 +1867,6 @@
             this.groupPanelOther.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cDASignDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
