@@ -183,6 +183,7 @@
     </Compile>
     <Compile Include="DB.dbml\BaseObject.cs" />
     <Compile Include="DB.dbml\Case.cs" />
+    <Compile Include="DB.dbml\CDA.cs" />
     <Compile Include="DB.dbml\Client.cs" />
     <Compile Include="DB.dbml\Country.cs" />
     <Compile Include="DB.dbml\Currency.cs" />
@@ -412,6 +413,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Utils\ControlUtil.cs" />
+    <Compile Include="Utils\RadioListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Resources\Images\Menu-Down-icon-32x32.png" />

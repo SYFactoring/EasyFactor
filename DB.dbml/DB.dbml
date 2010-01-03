@@ -293,6 +293,7 @@
       <Column Name="CaseAppDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CaseMark" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ManagerName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Case_CreditCoverNegotiation" Member="CreditCoverNegotiations" OtherKey="CaseCode" Type="CreditCoverNegotiation" />
       <Association Name="Case_CDA" Member="CDAs" OtherKey="CaseCode" Type="CDA" />
       <Association Name="Client_Case" Member="BuyerClient" ThisKey="BuyerCode" Type="Client" IsForeignKey="true" />
@@ -359,7 +360,7 @@
       <Column Name="CDACode" Storage="_CDAID" Type="System.String" DbType="Varchar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="CaseCode" Type="System.String" DbType="NChar(13)" CanBeNull="true" />
       <Column Name="IsRecoarse" Type="System.Boolean" DbType="bit" CanBeNull="true" />
-      <Column Name="IsNotice" Type="System.Boolean" DbType="bit" CanBeNull="true" />
+      <Column Name="IsNotice" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="AssignType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="CreditCoverCurr" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
       <Column Name="CreditCover" Type="System.Double" DbType="Float" CanBeNull="true" />
@@ -368,7 +369,7 @@
       <Column Name="CreditCoverPeriodBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreditCoverPeriodEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="PUGPeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ReassignGracePeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReassignGracePeriod" Type="System.Int32" DbType="int" CanBeNull="true" />
       <Column Name="FinanceLineCurr" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
       <Column Name="FinanceLine" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="FinanceLinePeriodBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -376,7 +377,7 @@
       <Column Name="FinanceProportion" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="PaymentTerms" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="FinanceGracePeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FinanceGracePeriod" Type="System.String" DbType="NVarchar(500)" CanBeNull="true" />
       <Column Name="Deductibles" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="LossThreshold" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Price" Type="System.Double" DbType="Float" CanBeNull="true" />

@@ -25,7 +25,6 @@
         private DevComponents.DotNetBar.Controls.TextBoxX handFeeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX iFPriceTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX invoiceCurrencyTextBox;
-        private DevComponents.DotNetBar.Controls.CheckBoxX isNoticeCheckBox;
         private DevComponents.DotNetBar.Controls.CheckBoxX isRecoarseCheckBox;
         private DevComponents.DotNetBar.Controls.TextBoxX ownerDepartmentCodeTextBox;
         private DevComponents.DotNetBar.PanelEx panelCaseBasic;
@@ -97,6 +96,7 @@
             DevComponents.DotNetBar.LabelX lblFinanceCreditCoverBalance;
             DevComponents.DotNetBar.LabelX lblDueDate;
             DevComponents.DotNetBar.LabelX lblCreditLine;
+            DevComponents.DotNetBar.LabelX lblIsNotice;
             this.panelCaseBasic = new DevComponents.DotNetBar.PanelEx();
             this.groupPanelFinanceCreditLine = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.tbFinanceBalance = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -125,7 +125,6 @@
             this.sellerNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.PMTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.buyerEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.isNoticeCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.buyerNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.isRecoarseCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.factorCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -133,6 +132,7 @@
             this.factorNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelInvoiceMgr = new DevComponents.DotNetBar.PanelEx();
+            this.tbIsNotice = new DevComponents.DotNetBar.Controls.TextBoxX();
             ownerDepartmentCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerEDICodeLabel = new DevComponents.DotNetBar.LabelX();
             buyerEDICodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -154,6 +154,7 @@
             lblFinanceCreditCoverBalance = new DevComponents.DotNetBar.LabelX();
             lblDueDate = new DevComponents.DotNetBar.LabelX();
             lblCreditLine = new DevComponents.DotNetBar.LabelX();
+            lblIsNotice = new DevComponents.DotNetBar.LabelX();
             this.panelCaseBasic.SuspendLayout();
             this.groupPanelFinanceCreditLine.SuspendLayout();
             this.groupPanelCreditCover.SuspendLayout();
@@ -784,6 +785,8 @@
             // 
             this.groupCaseBasic.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupCaseBasic.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupCaseBasic.Controls.Add(lblIsNotice);
+            this.groupCaseBasic.Controls.Add(this.tbIsNotice);
             this.groupCaseBasic.Controls.Add(ownerDepartmentCodeLabel);
             this.groupCaseBasic.Controls.Add(this.btnCaseQuery);
             this.groupCaseBasic.Controls.Add(assignTypeLabel);
@@ -798,7 +801,6 @@
             this.groupCaseBasic.Controls.Add(this.buyerEDICodeTextBox);
             this.groupCaseBasic.Controls.Add(PMLabel);
             this.groupCaseBasic.Controls.Add(buyerEDICodeLabel);
-            this.groupCaseBasic.Controls.Add(this.isNoticeCheckBox);
             this.groupCaseBasic.Controls.Add(this.buyerNameTextBox);
             this.groupCaseBasic.Controls.Add(this.isRecoarseCheckBox);
             this.groupCaseBasic.Controls.Add(this.factorCodeTextBox);
@@ -939,20 +941,6 @@
             this.buyerEDICodeTextBox.Size = new System.Drawing.Size(64, 20);
             this.buyerEDICodeTextBox.TabIndex = 8;
             // 
-            // isNoticeCheckBox
-            // 
-            this.isNoticeCheckBox.AutoSize = true;
-            // 
-            // 
-            // 
-            this.isNoticeCheckBox.BackgroundStyle.Class = "";
-            this.isNoticeCheckBox.Enabled = false;
-            this.isNoticeCheckBox.Location = new System.Drawing.Point(259, 109);
-            this.isNoticeCheckBox.Name = "isNoticeCheckBox";
-            this.isNoticeCheckBox.Size = new System.Drawing.Size(88, 16);
-            this.isNoticeCheckBox.TabIndex = 19;
-            this.isNoticeCheckBox.Text = "是否暗保理";
-            // 
             // buyerNameTextBox
             // 
             // 
@@ -973,7 +961,7 @@
             // 
             this.isRecoarseCheckBox.BackgroundStyle.Class = "";
             this.isRecoarseCheckBox.Enabled = false;
-            this.isRecoarseCheckBox.Location = new System.Drawing.Point(259, 87);
+            this.isRecoarseCheckBox.Location = new System.Drawing.Point(300, 109);
             this.isRecoarseCheckBox.Name = "isRecoarseCheckBox";
             this.isRecoarseCheckBox.Size = new System.Drawing.Size(101, 16);
             this.isRecoarseCheckBox.TabIndex = 17;
@@ -1044,6 +1032,31 @@
             this.panelInvoiceMgr.Style.GradientAngle = 90;
             this.panelInvoiceMgr.TabIndex = 1;
             // 
+            // lblIsNotice
+            // 
+            lblIsNotice.AutoSize = true;
+            // 
+            // 
+            // 
+            lblIsNotice.BackgroundStyle.Class = "";
+            lblIsNotice.Location = new System.Drawing.Point(299, 85);
+            lblIsNotice.Name = "lblIsNotice";
+            lblIsNotice.Size = new System.Drawing.Size(62, 16);
+            lblIsNotice.TabIndex = 25;
+            lblIsNotice.Text = "明/暗保理:";
+            // 
+            // tbIsNotice
+            // 
+            // 
+            // 
+            // 
+            this.tbIsNotice.Border.Class = "TextBoxBorder";
+            this.tbIsNotice.Location = new System.Drawing.Point(365, 84);
+            this.tbIsNotice.Name = "tbIsNotice";
+            this.tbIsNotice.ReadOnly = true;
+            this.tbIsNotice.Size = new System.Drawing.Size(100, 20);
+            this.tbIsNotice.TabIndex = 26;
+            // 
             // ARCaseBasic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1066,5 +1079,8 @@
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.Controls.TextBoxX tbIsNotice;
+
     }
 }

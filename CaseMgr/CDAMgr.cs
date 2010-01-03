@@ -35,6 +35,7 @@ namespace CMBC.EasyFactor.CaseMgr
         public CDAMgr(bool isEditable)
         {
             InitializeComponent();
+            this.dgvCDAs.AutoGenerateColumns = false;
             ControlUtil.SetDoubleBuffered(this.dgvCDAs);
         }
 
@@ -226,5 +227,26 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion Methods
+
+        private void dgvCDAs_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewColumn column = this.dgvCDAs.Columns[e.ColumnIndex];
+            if (column == colIsCreditCoverRevolving || column == colIsRecoarse)
+            {
+                Object originalData = e.Value;
+                if (originalData != null)
+                {
+                    bool result = (bool)originalData;
+                    if (result)
+                    {
+                        e.Value = "Y";
+                    }
+                    else
+                    {
+                        e.Value = "N";
+                    }
+                }
+            }
+        }
     }
 }

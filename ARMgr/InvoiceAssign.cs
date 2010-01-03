@@ -65,13 +65,16 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="cda"></param>
         /// <returns></returns>
-        public static string GenerateAssignBatchNo(CDA cda)
+        public static string GenerateAssignBatchNo(CDA cda, System.Nullable<DateTime> date)
         {
             Client seller = cda.Case.SellerClient;
             Client buyer = cda.Case.BuyerClient;
-            string date = String.Format("{0:yyyy}{0:MM}{0:dd}", DateTime.Today);
             int batchCount = cda.InvoiceAssignBatches.Count;
-            string assignNo = seller.ClientEDICode.Substring(0, 5) + buyer.ClientEDICode.Substring(3, 2) + date + "-" + String.Format("{0:D2}", batchCount + 1);
+            if (date == null)
+            {
+                date = DateTime.Now;
+            }
+            string assignNo = String.Format("ASS{0:G}{1:G}{2:yyyyMMdd}-{3:d2}", seller.ClientEDICode.Substring(0, 5), buyer.ClientEDICode.Substring(3, 2), date, batchCount + 1);
             return assignNo;
         }
 
@@ -178,7 +181,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceAssignBatch assignBatch = new InvoiceAssignBatch();
-            assignBatch.AssignBatchNo = GenerateAssignBatchNo(this._CDA);
+            assignBatch.AssignBatchNo = GenerateAssignBatchNo(this._CDA, DateTime.Now);
             assignBatch.BatchDate = DateTime.Now;
             assignBatch.CreateUserName = App.Current.CurUser.Name;
             assignBatch.IsCreateMsg = false;

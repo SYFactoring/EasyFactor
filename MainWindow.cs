@@ -23,7 +23,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-        #region Constructors (1)
+		#region Constructors (1) 
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -35,9 +35,9 @@ namespace CMBC.EasyFactor
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Sets command status
@@ -61,11 +61,11 @@ namespace CMBC.EasyFactor
             }
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (33)
+		#region Methods (36) 
 
-        // Private Methods (33) 
+		// Private Methods (36) 
 
         private void About(object sender, EventArgs e)
         {
@@ -165,19 +165,6 @@ namespace CMBC.EasyFactor
             importForm.Show();
         }
 
-        private bool validateRole()
-        {
-            if (App.Current.CurUser.Role == "管理员")
-            {
-                return true;
-            }
-            else
-            {
-                MessageBox.Show("只有管理员可以执行此操作", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
-            }
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -190,6 +177,12 @@ namespace CMBC.EasyFactor
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS);
                 importForm.Show();
             }
+        }
+
+        private void ImportContractAndCDA(object sender, EventArgs e)
+        {
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CONTRACT_CDA);
+            importForm.Show();
         }
 
         private void ImportCreditCover(object sender, EventArgs e)
@@ -234,6 +227,12 @@ namespace CMBC.EasyFactor
         private void ImportFinance(object sender, EventArgs e)
         {
             ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE);
+            importForm.Show();
+        }
+
+        private void ImportInvoices(object sender, EventArgs e)
+        {
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN_FINANCE_PAYMENT);
             importForm.Show();
         }
 
@@ -456,6 +455,19 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Add(uc);
         }
 
-        #endregion Methods
+        private bool validateRole()
+        {
+            if (App.Current.CurUser.Role == "管理员")
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("只有管理员可以执行此操作", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+        }
+
+		#endregion Methods 
     }
 }

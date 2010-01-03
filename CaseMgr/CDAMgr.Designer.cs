@@ -6,47 +6,6 @@
 
         private DevComponents.DotNetBar.ButtonX btnCDAQuery;
         private System.Windows.Forms.ContextMenuStrip cmuCDAMgr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCase;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDADueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAValueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionTypeComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCover;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeductibles;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEFPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceGracePeriod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceProportion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFeeCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsCreditCoverRevolving;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsNotice;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsRecoarse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLossThreshold;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNoticeMethod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNoticePersion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentTerms;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPUGPeriod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPUGProportion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReassignGracePeriod;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -125,15 +84,21 @@
             this.tbContractCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblContractCode = new DevComponents.DotNetBar.LabelX();
             this.dgvCDAs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuCDAMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCDASelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCDADetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCDANew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCDAUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCDADelete = new System.Windows.Forms.ToolStripMenuItem();
             this.colCDACode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCase = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsRecoarse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colIsNotice = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colIsRecoarse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsNotice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditCoverCurr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditCover = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsCreditCoverRevolving = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colIsCreditCoverRevolving = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colApproveNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPUGProportion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditCoverPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -166,13 +131,6 @@
             this.colFax = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuCDAMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCDASelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCDADetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCDANew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCDAUpdate = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCDADelete = new System.Windows.Forms.ToolStripMenuItem();
             this.panelCDAQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCDAs)).BeginInit();
             this.cmuCDAMgr.SuspendLayout();
@@ -260,7 +218,7 @@
             this.lblCount.BackgroundStyle.Class = "";
             this.lblCount.Location = new System.Drawing.Point(419, 24);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(25, 16);
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 3;
             // 
             // btnCDAQuery
@@ -316,7 +274,6 @@
             this.dgvCDAs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCDACode,
             this.colCaseCode,
-            this.colCase,
             this.colIsRecoarse,
             this.colIsNotice,
             this.colAssignType,
@@ -373,8 +330,61 @@
             this.dgvCDAs.Size = new System.Drawing.Size(643, 348);
             this.dgvCDAs.TabIndex = 1;
             this.dgvCDAs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
+            this.dgvCDAs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCDAs_CellFormatting);
             // 
-            // colCDAID
+            // cmuCDAMgr
+            // 
+            this.cmuCDAMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCDASelect,
+            this.menuItemCDADetail,
+            this.toolStripSeparator,
+            this.menuItemCDANew,
+            this.menuItemCDAUpdate,
+            this.menuItemCDADelete});
+            this.cmuCDAMgr.Name = "cmuContractMgr";
+            this.cmuCDAMgr.Size = new System.Drawing.Size(123, 120);
+            // 
+            // menuItemCDASelect
+            // 
+            this.menuItemCDASelect.Name = "menuItemCDASelect";
+            this.menuItemCDASelect.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDASelect.Text = "选定CDA";
+            this.menuItemCDASelect.Click += new System.EventHandler(this.SelectCDA);
+            // 
+            // menuItemCDADetail
+            // 
+            this.menuItemCDADetail.Name = "menuItemCDADetail";
+            this.menuItemCDADetail.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDADetail.Text = "详细信息";
+            this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(119, 6);
+            // 
+            // menuItemCDANew
+            // 
+            this.menuItemCDANew.Name = "menuItemCDANew";
+            this.menuItemCDANew.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDANew.Text = "新建CDA";
+            this.menuItemCDANew.Click += new System.EventHandler(this.NewCDA);
+            // 
+            // menuItemCDAUpdate
+            // 
+            this.menuItemCDAUpdate.Name = "menuItemCDAUpdate";
+            this.menuItemCDAUpdate.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDAUpdate.Text = "更新CDA";
+            this.menuItemCDAUpdate.Click += new System.EventHandler(this.UpdateCDA);
+            // 
+            // menuItemCDADelete
+            // 
+            this.menuItemCDADelete.Name = "menuItemCDADelete";
+            this.menuItemCDADelete.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDADelete.Text = "删除CDA";
+            this.menuItemCDADelete.Click += new System.EventHandler(this.DeleteCDA);
+            // 
+            // colCDACode
             // 
             this.colCDACode.DataPropertyName = "CDACode";
             this.colCDACode.HeaderText = "CDACode";
@@ -389,31 +399,23 @@
             this.colCaseCode.Name = "colCaseCode";
             this.colCaseCode.ReadOnly = true;
             // 
-            // colCase
-            // 
-            this.colCase.DataPropertyName = "Case";
-            this.colCase.HeaderText = "Case";
-            this.colCase.Name = "colCase";
-            this.colCase.ReadOnly = true;
-            this.colCase.Visible = false;
-            // 
             // colIsRecoarse
             // 
             this.colIsRecoarse.DataPropertyName = "IsRecoarse";
-            this.colIsRecoarse.FalseValue = "False";
             this.colIsRecoarse.HeaderText = "是否有追索权";
             this.colIsRecoarse.Name = "colIsRecoarse";
             this.colIsRecoarse.ReadOnly = true;
-            this.colIsRecoarse.TrueValue = "True";
+            this.colIsRecoarse.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colIsRecoarse.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colIsNotice
             // 
             this.colIsNotice.DataPropertyName = "IsNotice";
-            this.colIsNotice.FalseValue = "False";
-            this.colIsNotice.HeaderText = "是否暗保理";
+            this.colIsNotice.HeaderText = "明/暗保理";
             this.colIsNotice.Name = "colIsNotice";
             this.colIsNotice.ReadOnly = true;
-            this.colIsNotice.TrueValue = "True";
+            this.colIsNotice.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colIsNotice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colAssignType
             // 
@@ -442,11 +444,11 @@
             // colIsCreditCoverRevolving
             // 
             this.colIsCreditCoverRevolving.DataPropertyName = "IsCreditCoverRevolving";
-            this.colIsCreditCoverRevolving.FalseValue = "False";
             this.colIsCreditCoverRevolving.HeaderText = "是否可循环";
             this.colIsCreditCoverRevolving.Name = "colIsCreditCoverRevolving";
             this.colIsCreditCoverRevolving.ReadOnly = true;
-            this.colIsCreditCoverRevolving.TrueValue = "True";
+            this.colIsCreditCoverRevolving.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colIsCreditCoverRevolving.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colApproveNumber
             // 
@@ -715,58 +717,6 @@
             this.colCreateUserName.Name = "colCreateUserName";
             this.colCreateUserName.ReadOnly = true;
             // 
-            // cmuCDAMgr
-            // 
-            this.cmuCDAMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemCDASelect,
-            this.menuItemCDADetail,
-            this.toolStripSeparator,
-            this.menuItemCDANew,
-            this.menuItemCDAUpdate,
-            this.menuItemCDADelete});
-            this.cmuCDAMgr.Name = "cmuContractMgr";
-            this.cmuCDAMgr.Size = new System.Drawing.Size(123, 120);
-            // 
-            // menuItemCDASelect
-            // 
-            this.menuItemCDASelect.Name = "menuItemCDASelect";
-            this.menuItemCDASelect.Size = new System.Drawing.Size(122, 22);
-            this.menuItemCDASelect.Text = "选定CDA";
-            this.menuItemCDASelect.Click += new System.EventHandler(this.SelectCDA);
-            // 
-            // menuItemCDADetail
-            // 
-            this.menuItemCDADetail.Name = "menuItemCDADetail";
-            this.menuItemCDADetail.Size = new System.Drawing.Size(122, 22);
-            this.menuItemCDADetail.Text = "详细信息";
-            this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(119, 6);
-            // 
-            // menuItemCDANew
-            // 
-            this.menuItemCDANew.Name = "menuItemCDANew";
-            this.menuItemCDANew.Size = new System.Drawing.Size(122, 22);
-            this.menuItemCDANew.Text = "新建CDA";
-            this.menuItemCDANew.Click += new System.EventHandler(this.NewCDA);
-            // 
-            // menuItemCDAUpdate
-            // 
-            this.menuItemCDAUpdate.Name = "menuItemCDAUpdate";
-            this.menuItemCDAUpdate.Size = new System.Drawing.Size(122, 22);
-            this.menuItemCDAUpdate.Text = "更新CDA";
-            this.menuItemCDAUpdate.Click += new System.EventHandler(this.UpdateCDA);
-            // 
-            // menuItemCDADelete
-            // 
-            this.menuItemCDADelete.Name = "menuItemCDADelete";
-            this.menuItemCDADelete.Size = new System.Drawing.Size(122, 22);
-            this.menuItemCDADelete.Text = "删除CDA";
-            this.menuItemCDADelete.Click += new System.EventHandler(this.DeleteCDA);
-            // 
             // CDAMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -784,5 +734,47 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsRecoarse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsNotice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCover;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsCreditCoverRevolving;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPUGProportion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPUGPeriod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReassignGracePeriod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceProportion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentTerms;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceGracePeriod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDeductibles;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLossThreshold;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEFPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionTypeComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFeeCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAValueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDADueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNoticeMethod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNoticePersion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+
     }
 }

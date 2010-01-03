@@ -70,6 +70,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCaseQuery = new DevComponents.DotNetBar.PanelEx();
+            this.cbIsContractSigned = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.btnQueryReset = new DevComponents.DotNetBar.ButtonX();
             this.cbIsCDA = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -113,7 +114,6 @@
             this.menuItemCaseUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbIsContractSigned = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.panelCaseQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -155,6 +155,23 @@
             this.panelCaseQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelCaseQuery.Style.GradientAngle = 90;
             this.panelCaseQuery.TabIndex = 0;
+            // 
+            // cbIsContractSigned
+            // 
+            this.cbIsContractSigned.AutoSize = true;
+            // 
+            // 
+            // 
+            this.cbIsContractSigned.BackgroundStyle.Class = "";
+            this.cbIsContractSigned.Checked = true;
+            this.cbIsContractSigned.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbIsContractSigned.CheckValue = "Y";
+            this.cbIsContractSigned.Location = new System.Drawing.Point(393, 9);
+            this.cbIsContractSigned.Name = "cbIsContractSigned";
+            this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);
+            this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsContractSigned.TabIndex = 17;
+            this.cbIsContractSigned.Text = "是否签订保理合同";
             // 
             // btnQueryReset
             // 
@@ -242,7 +259,6 @@
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(29, 16);
             this.lblCount.TabIndex = 10;
-            this.lblCount.Text = "ABC";
             // 
             // lblDate
             // 
@@ -691,23 +707,6 @@
             this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
             this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
             this.menuItemCreditCoverNegNew.Text = "新建额度申请";
-            // 
-            // cbIsContractSigned
-            // 
-            this.cbIsContractSigned.AutoSize = true;
-            // 
-            // 
-            // 
-            this.cbIsContractSigned.BackgroundStyle.Class = "";
-            this.cbIsContractSigned.Checked = true;
-            this.cbIsContractSigned.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbIsContractSigned.CheckValue = "Y";
-            this.cbIsContractSigned.Location = new System.Drawing.Point(393, 9);
-            this.cbIsContractSigned.Name = "cbIsContractSigned";
-            this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);
-            this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsContractSigned.TabIndex = 17;
-            this.cbIsContractSigned.Text = "是否签订保理合同";
             // 
             // CaseMgr
             // 

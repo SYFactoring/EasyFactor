@@ -69,6 +69,24 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="cda"></param>
+        /// <returns></returns>
+        public static string GenerateFinanceBatchNo(CDA cda, System.Nullable<DateTime> date)
+        {
+            Client seller = cda.Case.SellerClient;
+            Client buyer = cda.Case.BuyerClient;
+            int batchCount = cda.InvoiceAssignBatches.Count;
+            if (date == null)
+            {
+                date = DateTime.Now;
+            }
+            string financeNo = String.Format("FIN{0:G}{1:G}{2:yyyyMMdd}-{3:d2}", seller.ClientEDICode.Substring(0, 5), buyer.ClientEDICode.Substring(3, 2), date, batchCount + 1);
+            return financeNo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void ResetControlsStatus()
         {
             foreach (Control comp in this.panelFinanceBatch.Controls)

@@ -230,37 +230,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cda"></param>
-        /// <returns></returns>
-        private string GenerateCDACode(CDA cda)
-        {
-            if (cda.Case.SellerClient == null)
-            {
-                return string.Empty;
-            }
-            Contract contract = cda.Case.SellerClient.Contracts.SingleOrDefault(c => c.ContractStatus == "已生效");
-            if (contract != null)
-            {
-                CDA formerCDA = App.Current.DbContext.CDAs.OrderByDescending(c => c.CDACode).FirstOrDefault(c => c.CDACode.StartsWith(contract.ContractCode));
-                if (formerCDA == null)
-                {
-                    return string.Format("{0}-{1:000}", contract.ContractCode, 1);
-                }
-                else
-                {
-                    int index = Int32.Parse(formerCDA.CDACode.Substring(11));
-                    return String.Format("{0}-{1:000}", contract.ContractCode, index + 1);
-                }
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
-
         private CDA GenerateDefaultCDA()
         {
             CDA cda = new CDA();
@@ -268,7 +237,7 @@ namespace CMBC.EasyFactor.CaseMgr
             cda.PUGPeriod = 90;
             cda.ReassignGracePeriod = 60;
             cda.FinanceProportion = 0.8;
-            cda.IsNotice = false;
+           // cda.IsNotice = false;
             cda.IsRecoarse = false;
             cda.IsCreditCoverRevolving = false;
             cda.CDAStatus = "未审核";
@@ -312,7 +281,7 @@ namespace CMBC.EasyFactor.CaseMgr
             if (cda.CDACode == null)
             {
                 bool isAddOK = true;
-                string cdaCode = GenerateCDACode(cda);
+                string cdaCode = CDA.GenerateCDACode(cda.Case);
                 if (string.Empty.Equals(cdaCode))
                 {
                     MessageBox.Show("CDA编号生成失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);

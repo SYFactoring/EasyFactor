@@ -130,7 +130,7 @@ namespace CMBC.EasyFactor.ARMgr
             CDA cda = curCase.CDAs.SingleOrDefault(c => c.CDAStatus == "已签回");
             if (cda != null)
             {
-                this.isNoticeCheckBox.Checked = cda.IsNotice.Value;
+                this.tbIsNotice.Text = cda.IsNotice;
                 this.isRecoarseCheckBox.Checked = cda.IsRecoarse.Value;
                 this.assignTypeTextBox.Text = cda.AssignType;
 
@@ -168,7 +168,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
             else
             {
-                this.isNoticeCheckBox.Checked = false;
                 this.isRecoarseCheckBox.Checked = false;
                 this.assignTypeTextBox.Text = string.Empty;
                 Control control = this.panelInvoiceMgr.Controls[0];

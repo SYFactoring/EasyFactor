@@ -25,13 +25,13 @@ namespace CMBC.EasyFactor.CaseMgr
             DateTime AROverDueDate = default(DateTime);
             if (Int32.TryParse(this.tbAROverDueDays.Text, out AROverDueDays))
             {
-                AROverDueDate = DateTime.Now.AddDays(AROverDueDays);
+                AROverDueDate = DateTime.Now.AddDays(0 - AROverDueDays);
             }
             int FinanceOverDueDays;
             DateTime FinanceOverDueDate = default(DateTime);
             if (Int32.TryParse(this.tbFinanceOverDueDays.Text, out FinanceOverDueDays))
             {
-                FinanceOverDueDate = DateTime.Now.AddDays(FinanceOverDueDays);
+                FinanceOverDueDate = DateTime.Now.AddDays(0 - FinanceOverDueDays);
             }
 
             var queryResult = App.Current.DbContext.Invoices.Where(i =>

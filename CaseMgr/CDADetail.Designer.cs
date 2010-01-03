@@ -2,7 +2,7 @@
 {
     partial class CDADetail
     {
-		#region Fields (72) 
+        #region Fields (72)
 
         private DevComponents.DotNetBar.ButtonX btnCaseSelect;
         private DevComponents.DotNetBar.ButtonX btnCDAReset;
@@ -75,11 +75,11 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbHighestFinance;
         private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Methods (1) 
+        #region Methods (1)
 
-		// Protected Methods (1) 
+        // Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -94,7 +94,7 @@
             base.Dispose(disposing);
         }
 
-		#endregion Methods 
+        #endregion Methods
 
 
 
@@ -142,9 +142,10 @@
             DevComponents.DotNetBar.LabelX cDAStatusLabel;
             DevComponents.DotNetBar.LabelX noticeMethodLabel;
             DevComponents.DotNetBar.LabelX contractCodeLabel;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
             DevComponents.DotNetBar.LabelX lblCDACode;
             DevComponents.DotNetBar.LabelX assignTypeLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
+            DevComponents.DotNetBar.LabelX lblIsNotice;
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -162,6 +163,9 @@
             this.sellerClientEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.caseCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelCreditCover = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.cbIsRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.assignTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.tbCDACode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbHighestFinance = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.handFeeCurrComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cbIsCreditCoverRevolving = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -212,10 +216,7 @@
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.tbCDACode = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.cbIsNotice = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.cbIsRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.assignTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cbIsNotice = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -253,6 +254,7 @@
             contractCodeLabel = new DevComponents.DotNetBar.LabelX();
             lblCDACode = new DevComponents.DotNetBar.LabelX();
             assignTypeLabel = new DevComponents.DotNetBar.LabelX();
+            lblIsNotice = new DevComponents.DotNetBar.LabelX();
             this.groupPanelCase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.groupPanelCreditCover.SuspendLayout();
@@ -755,6 +757,34 @@
             contractCodeLabel.TabIndex = 28;
             contractCodeLabel.Text = "主合同编号:";
             // 
+            // lblCDACode
+            // 
+            lblCDACode.AutoSize = true;
+            lblCDACode.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblCDACode.BackgroundStyle.Class = "";
+            lblCDACode.Location = new System.Drawing.Point(36, 3);
+            lblCDACode.Name = "lblCDACode";
+            lblCDACode.Size = new System.Drawing.Size(58, 16);
+            lblCDACode.TabIndex = 40;
+            lblCDACode.Text = "CDA编号:";
+            // 
+            // assignTypeLabel
+            // 
+            assignTypeLabel.AutoSize = true;
+            assignTypeLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            assignTypeLabel.BackgroundStyle.Class = "";
+            assignTypeLabel.Location = new System.Drawing.Point(264, 3);
+            assignTypeLabel.Name = "assignTypeLabel";
+            assignTypeLabel.Size = new System.Drawing.Size(59, 16);
+            assignTypeLabel.TabIndex = 42;
+            assignTypeLabel.Text = "转让方式:";
+            // 
             // groupPanelCase
             // 
             this.groupPanelCase.CanvasColor = System.Drawing.SystemColors.Control;
@@ -993,6 +1023,7 @@
             // 
             this.groupPanelCreditCover.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCreditCover.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelCreditCover.Controls.Add(lblIsNotice);
             this.groupPanelCreditCover.Controls.Add(this.cbIsNotice);
             this.groupPanelCreditCover.Controls.Add(this.cbIsRecoarse);
             this.groupPanelCreditCover.Controls.Add(assignTypeLabel);
@@ -1079,6 +1110,45 @@
             // 
             this.groupPanelCreditCover.StyleMouseOver.Class = "";
             this.groupPanelCreditCover.TabIndex = 2;
+            // 
+            // cbIsRecoarse
+            // 
+            this.cbIsRecoarse.AutoSize = true;
+            this.cbIsRecoarse.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.cbIsRecoarse.BackgroundStyle.Class = "";
+            this.cbIsRecoarse.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsRecoarse", true));
+            this.cbIsRecoarse.Location = new System.Drawing.Point(632, 3);
+            this.cbIsRecoarse.Name = "cbIsRecoarse";
+            this.cbIsRecoarse.Size = new System.Drawing.Size(101, 16);
+            this.cbIsRecoarse.TabIndex = 44;
+            this.cbIsRecoarse.Text = "是否有追索权";
+            // 
+            // assignTypeComboBox
+            // 
+            this.assignTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "AssignType", true));
+            this.assignTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.assignTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.assignTypeComboBox.FormattingEnabled = true;
+            this.assignTypeComboBox.Location = new System.Drawing.Point(329, 0);
+            this.assignTypeComboBox.Name = "assignTypeComboBox";
+            this.assignTypeComboBox.Size = new System.Drawing.Size(101, 21);
+            this.assignTypeComboBox.TabIndex = 43;
+            // 
+            // tbCDACode
+            // 
+            // 
+            // 
+            // 
+            this.tbCDACode.Border.Class = "TextBoxBorder";
+            this.tbCDACode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CDACode", true));
+            this.tbCDACode.Location = new System.Drawing.Point(105, 2);
+            this.tbCDACode.Name = "tbCDACode";
+            this.tbCDACode.ReadOnly = true;
+            this.tbCDACode.Size = new System.Drawing.Size(100, 20);
+            this.tbCDACode.TabIndex = 41;
             // 
             // tbHighestFinance
             // 
@@ -1786,86 +1856,31 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // lblCDACode
+            // lblIsNotice
             // 
-            lblCDACode.AutoSize = true;
-            lblCDACode.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblCDACode.BackgroundStyle.Class = "";
-            lblCDACode.Location = new System.Drawing.Point(36, 3);
-            lblCDACode.Name = "lblCDACode";
-            lblCDACode.Size = new System.Drawing.Size(58, 16);
-            lblCDACode.TabIndex = 40;
-            lblCDACode.Text = "CDA编号:";
-            // 
-            // tbCDACode
+            lblIsNotice.AutoSize = true;
+            lblIsNotice.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            // 
-            this.tbCDACode.Border.Class = "TextBoxBorder";
-            this.tbCDACode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CDACode", true));
-            this.tbCDACode.Location = new System.Drawing.Point(105, 2);
-            this.tbCDACode.Name = "tbCDACode";
-            this.tbCDACode.ReadOnly = true;
-            this.tbCDACode.Size = new System.Drawing.Size(100, 20);
-            this.tbCDACode.TabIndex = 41;
+            lblIsNotice.BackgroundStyle.Class = "";
+            lblIsNotice.Location = new System.Drawing.Point(444, 4);
+            lblIsNotice.Name = "lblIsNotice";
+            lblIsNotice.Size = new System.Drawing.Size(62, 16);
+            lblIsNotice.TabIndex = 45;
+            lblIsNotice.Text = "明/暗保理:";
             // 
             // cbIsNotice
             // 
-            this.cbIsNotice.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.cbIsNotice.BackgroundStyle.Class = "";
-            this.cbIsNotice.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsNotice", true));
-            this.cbIsNotice.Location = new System.Drawing.Point(433, 0);
+            this.cbIsNotice.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "IsNotice", true));
+            this.cbIsNotice.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbIsNotice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbIsNotice.FormattingEnabled = true;
+            this.cbIsNotice.Location = new System.Drawing.Point(509, 2);
             this.cbIsNotice.Name = "cbIsNotice";
-            this.cbIsNotice.Size = new System.Drawing.Size(100, 23);
-            this.cbIsNotice.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsNotice.TabIndex = 45;
-            this.cbIsNotice.Text = "是否暗保理";
-            // 
-            // cbIsRecoarse
-            // 
-            this.cbIsRecoarse.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.cbIsRecoarse.BackgroundStyle.Class = "";
-            this.cbIsRecoarse.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsRecoarse", true));
-            this.cbIsRecoarse.Location = new System.Drawing.Point(325, 0);
-            this.cbIsRecoarse.Name = "cbIsRecoarse";
-            this.cbIsRecoarse.Size = new System.Drawing.Size(100, 23);
-            this.cbIsRecoarse.TabIndex = 44;
-            this.cbIsRecoarse.Text = "是否有追索权";
-            // 
-            // assignTypeLabel
-            // 
-            assignTypeLabel.AutoSize = true;
-            assignTypeLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            assignTypeLabel.BackgroundStyle.Class = "";
-            assignTypeLabel.Location = new System.Drawing.Point(533, 4);
-            assignTypeLabel.Name = "assignTypeLabel";
-            assignTypeLabel.Size = new System.Drawing.Size(59, 16);
-            assignTypeLabel.TabIndex = 42;
-            assignTypeLabel.Text = "转让方式:";
-            // 
-            // assignTypeComboBox
-            // 
-            this.assignTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "AssignType", true));
-            this.assignTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.assignTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.assignTypeComboBox.FormattingEnabled = true;
-            this.assignTypeComboBox.Location = new System.Drawing.Point(598, 1);
-            this.assignTypeComboBox.Name = "assignTypeComboBox";
-            this.assignTypeComboBox.Size = new System.Drawing.Size(101, 21);
-            this.assignTypeComboBox.TabIndex = 43;
+            this.cbIsNotice.Size = new System.Drawing.Size(101, 21);
+            this.cbIsNotice.TabIndex = 46;
+            this.cbIsNotice.Items.AddRange(new string[] { "明保理", "暗保理" });
             // 
             // CDADetail
             // 
@@ -1904,8 +1919,8 @@
 
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator1;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCDACode;
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsNotice;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsRecoarse;
         private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbIsNotice;
     }
 }

@@ -6352,6 +6352,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
+		private string _ManagerName;
+		
 		private EntitySet<CreditCoverNegotiation> _CreditCoverNegotiations;
 		
 		private EntitySet<CDA> _CDAs;
@@ -6398,6 +6400,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCaseMarkChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
+    partial void OnManagerNameChanging(string value);
+    partial void OnManagerNameChanged();
     #endregion
 		
 		public Case()
@@ -6693,6 +6697,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CreateUserName = value;
 					this.SendPropertyChanged("CreateUserName");
 					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ManagerName", DbType="NVarChar(50)")]
+		public string ManagerName
+		{
+			get
+			{
+				return this._ManagerName;
+			}
+			set
+			{
+				if ((this._ManagerName != value))
+				{
+					this.OnManagerNameChanging(value);
+					this.SendPropertyChanging();
+					this._ManagerName = value;
+					this.SendPropertyChanged("ManagerName");
+					this.OnManagerNameChanged();
 				}
 			}
 		}
@@ -8187,7 +8211,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<bool> _IsRecoarse;
 		
-		private System.Nullable<bool> _IsNotice;
+		private string _IsNotice;
 		
 		private string _AssignType;
 		
@@ -8221,7 +8245,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _PaymentTerms;
 		
-		private System.Nullable<int> _FinanceGracePeriod;
+		private string _FinanceGracePeriod;
 		
 		private System.Nullable<double> _Deductibles;
 		
@@ -8275,7 +8299,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCaseCodeChanged();
     partial void OnIsRecoarseChanging(System.Nullable<bool> value);
     partial void OnIsRecoarseChanged();
-    partial void OnIsNoticeChanging(System.Nullable<bool> value);
+    partial void OnIsNoticeChanging(string value);
     partial void OnIsNoticeChanged();
     partial void OnAssignTypeChanging(string value);
     partial void OnAssignTypeChanged();
@@ -8309,7 +8333,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnOrderNumberChanged();
     partial void OnPaymentTermsChanging(string value);
     partial void OnPaymentTermsChanged();
-    partial void OnFinanceGracePeriodChanging(System.Nullable<int> value);
+    partial void OnFinanceGracePeriodChanging(string value);
     partial void OnFinanceGracePeriodChanged();
     partial void OnDeductiblesChanging(System.Nullable<double> value);
     partial void OnDeductiblesChanged();
@@ -8420,8 +8444,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsNotice", DbType="bit")]
-		public System.Nullable<bool> IsNotice
+		[Column(Storage="_IsNotice", DbType="NVarChar(50)")]
+		public string IsNotice
 		{
 			get
 			{
@@ -8600,7 +8624,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ReassignGracePeriod", DbType="Int")]
+		[Column(Storage="_ReassignGracePeriod", DbType="int")]
 		public System.Nullable<int> ReassignGracePeriod
 		{
 			get
@@ -8760,8 +8784,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceGracePeriod", DbType="Int")]
-		public System.Nullable<int> FinanceGracePeriod
+		[Column(Storage="_FinanceGracePeriod", DbType="NVarchar(500)")]
+		public string FinanceGracePeriod
 		{
 			get
 			{

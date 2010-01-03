@@ -51,7 +51,7 @@ namespace CMBC.EasyFactor.ARMgr
                 this.dgvInvoices.ReadOnly = false;
                 this.superValidator.Enabled = true;
                 InvoicePaymentBatch paymentBatch = new InvoicePaymentBatch();
-                paymentBatch.PaymentBatchNo = GeneratePaymentBatchNo(this._CDA);
+                paymentBatch.PaymentBatchNo = GeneratePaymentBatchNo(this._CDA, DateTime.Now);
                 paymentBatch.CreateUserName = App.Current.CurUser.Name;
                 this.invoicePaymentBatchBindingSource.DataSource = paymentBatch;
                 this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.PaymentAmount.HasValue == false).ToList();
@@ -67,6 +67,24 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="cda"></param>
+        /// <returns></returns>
+        public static string GeneratePaymentBatchNo(CDA cda, System.Nullable<DateTime> date)
+        {
+            Client seller = cda.Case.SellerClient;
+            Client buyer = cda.Case.BuyerClient;
+            int batchCount = cda.InvoiceAssignBatches.Count;
+            if (date == null)
+            {
+                date = DateTime.Now;
+            }
+            string paymentNo = String.Format("PAY{0:G}{1:G}{2:yyyyMMdd}-{3:d2}", seller.ClientEDICode.Substring(0, 5), buyer.ClientEDICode.Substring(3, 2), date, batchCount + 1);
+            return paymentNo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void ResetControlsStatus()
         {
             foreach (Control comp in this.panelPaymentBatch.Controls)
@@ -77,21 +95,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
         // Private Methods (2) 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="CDA"></param>
-        /// <returns></returns>
-        private string GeneratePaymentBatchNo(CDA CDA)
-        {
-            Client seller = CDA.Case.SellerClient;
-            Client buyer = CDA.Case.BuyerClient;
-            string date = String.Format("{0:yyyy}{0:MM}{0:dd}", DateTime.Today);
-            int batchCount = CDA.InvoiceAssignBatches.Count;
-            string assignNo = seller.ClientEDICode.Substring(0, 5) + buyer.ClientEDICode.Substring(3, 2) + date + "-" + String.Format("{0:D2}", batchCount + 1);
-            return assignNo;
-        }
 
         /// <summary>
         /// 
