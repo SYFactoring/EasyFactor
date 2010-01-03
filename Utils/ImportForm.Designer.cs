@@ -138,7 +138,7 @@
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCancel.TabIndex = 7;
-            this.btnCancel.Text = "取消";
+            this.btnCancel.Text = "关闭";
             this.btnCancel.Click += new System.EventHandler(this.CancelImport);
             // 
             // btnFileSelect

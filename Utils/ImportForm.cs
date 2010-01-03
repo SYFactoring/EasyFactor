@@ -190,7 +190,7 @@ namespace CMBC.EasyFactor.Utils
                 this.tbStatus.Text = String.Format("导入结束,共导入{0}条记录", e.Result);
             }
             this.btnStart.Enabled = true;
-            this.btnCancel.Enabled = false;
+            this.btnCancel.Text = "关闭";
         }
 
         /// <summary>
@@ -894,10 +894,10 @@ namespace CMBC.EasyFactor.Utils
             if (filePath.Trim().Equals(string.Empty))
                 return;
 
+            this.btnCancel.Text = "取消";
             backgroundWorker.RunWorkerAsync(filePath);
 
             this.btnStart.Enabled = false;
-            this.btnCancel.Enabled = true;
         }
 
         #endregion Methods

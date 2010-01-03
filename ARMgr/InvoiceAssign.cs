@@ -35,9 +35,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.ReadOnly = true;
             this.superValidator.Enabled = false;
 
-            this.colInvoiceCurrency.DataSource = Currency.AllCurrencies().ToList();
-            this.colInvoiceCurrency.DisplayMember = "CurrencyCode";
-            this.colInvoiceCurrency.ValueMember = "CurrencyCode";
         }
 
         #endregion Constructors

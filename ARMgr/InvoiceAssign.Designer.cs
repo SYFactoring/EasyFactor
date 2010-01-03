@@ -74,8 +74,6 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX commentLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceAssign));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelAssignBatch = new DevComponents.DotNetBar.PanelEx();
@@ -111,7 +109,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInvoiceCurrency = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colInvoiceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -481,7 +478,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInvoices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colInvoiceNo,
-            this.colInvoiceCurrency,
             this.colInvoiceAmount,
             this.colAssignAmount,
             this.colInvoiceDate,
@@ -531,14 +527,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colInvoiceNo.DataPropertyName = "InvoiceNo";
             this.colInvoiceNo.HeaderText = "发票号";
             this.colInvoiceNo.Name = "colInvoiceNo";
-            // 
-            // colInvoiceCurrency
-            // 
-            this.colInvoiceCurrency.DataPropertyName = "InvoiceCurrency";
-            this.colInvoiceCurrency.HeaderText = "发票币别";
-            this.colInvoiceCurrency.Name = "colInvoiceCurrency";
-            this.colInvoiceCurrency.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colInvoiceCurrency.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colInvoiceAmount
             // 
@@ -633,7 +621,6 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private System.Windows.Forms.DataGridViewComboBoxColumn colInvoiceCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;

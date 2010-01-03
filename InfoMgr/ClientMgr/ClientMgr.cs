@@ -50,8 +50,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.opClientMgrType = clientMgrType;
             if (clientMgrType == OpClientMgrType.NEED_CONTRACT)
             {
-                this.cbIsSigned.Checked = true;
-                this.cbIsSigned.Enabled = false;
+                this.cbIsContractSigned.Checked = true;
+                this.cbIsContractSigned.Enabled = false;
             }
         }
 
@@ -293,7 +293,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                   && (((c.ClientNameCN == null ? string.Empty : c.ClientNameCN).Contains(tbClientName.Text)) || ((c.ClientNameEN_1 == null ? string.Empty : c.ClientNameEN_1).Contains(tbClientName.Text)) || ((c.ClientNameEN_2 == null ? string.Empty : c.ClientNameEN_2).Contains(tbClientName.Text)))
                   && ((c.ClientEDICode == null ? string.Empty : c.ClientEDICode).Contains(tbClientEDICode.Text))
                   && ((c.ClientType == null ? string.Empty : c.ClientType).Contains(clientType))
-                  && (this.cbIsSigned.Checked == false ? true : c.Contracts.Any(con => con.ContractStatus == "已生效"))
+                  && (this.cbIsContractSigned.Checked == false ? true : c.Contracts.Any(con => con.ContractStatus == "已生效"))
                   );
 
             this.bs.DataSource = queryResult;
@@ -392,5 +392,26 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         #endregion Methods
+
+        private void dgvClients_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewColumn column = this.dgvClients.Columns[e.ColumnIndex];
+            if (column == IsGroupColumn)
+            {
+                Object originalData = e.Value;
+                if (originalData != null)
+                {
+                    bool result = (bool)originalData;
+                    if (result)
+                    {
+                        e.Value = "Y";
+                    }
+                    else
+                    {
+                        e.Value = "N";
+                    }
+                }
+            }
+        }
     }
 }

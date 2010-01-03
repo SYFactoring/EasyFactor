@@ -4,7 +4,6 @@
     {
 		#region Fields (72) 
 
-        private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
         private DevComponents.DotNetBar.ButtonX btnCaseSelect;
         private DevComponents.DotNetBar.ButtonX btnCDAReset;
         private DevComponents.DotNetBar.ButtonX btnCDASave;
@@ -14,8 +13,6 @@
         private DevComponents.DotNetBar.Controls.TextBoxX buyerClientNameEN_1TextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX caseCodeTextBox;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCreditCoverRevolving;
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsNotice;
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsRecoarse;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbNoticeMethodEmail;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbNoticeMethodFax;
         private System.Windows.Forms.BindingSource CDABindingSource;
@@ -116,7 +113,6 @@
             DevComponents.DotNetBar.LabelX buyerClientEDICodeLabel;
             DevComponents.DotNetBar.LabelX transactionTypeLabel;
             DevComponents.DotNetBar.LabelX invoiceCurrencyLabel;
-            DevComponents.DotNetBar.LabelX assignTypeLabel;
             DevComponents.DotNetBar.LabelX creditCoverCurrLabel;
             DevComponents.DotNetBar.LabelX pUGProportionLabel;
             DevComponents.DotNetBar.LabelX creditCoverPeriodBeginLabel;
@@ -147,15 +143,14 @@
             DevComponents.DotNetBar.LabelX noticeMethodLabel;
             DevComponents.DotNetBar.LabelX contractCodeLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
+            DevComponents.DotNetBar.LabelX lblCDACode;
+            DevComponents.DotNetBar.LabelX assignTypeLabel;
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.cbIsNotice = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.cbIsRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.companyNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.contractCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.assignTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnCaseSelect = new DevComponents.DotNetBar.ButtonX();
             this.buyerClientNameEN_1TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.buyerClientNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -217,13 +212,16 @@
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.tbCDACode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cbIsNotice = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.cbIsRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.assignTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
             buyerClientEDICodeLabel = new DevComponents.DotNetBar.LabelX();
             transactionTypeLabel = new DevComponents.DotNetBar.LabelX();
             invoiceCurrencyLabel = new DevComponents.DotNetBar.LabelX();
-            assignTypeLabel = new DevComponents.DotNetBar.LabelX();
             creditCoverCurrLabel = new DevComponents.DotNetBar.LabelX();
             pUGProportionLabel = new DevComponents.DotNetBar.LabelX();
             creditCoverPeriodBeginLabel = new DevComponents.DotNetBar.LabelX();
@@ -253,6 +251,8 @@
             cDAStatusLabel = new DevComponents.DotNetBar.LabelX();
             noticeMethodLabel = new DevComponents.DotNetBar.LabelX();
             contractCodeLabel = new DevComponents.DotNetBar.LabelX();
+            lblCDACode = new DevComponents.DotNetBar.LabelX();
+            assignTypeLabel = new DevComponents.DotNetBar.LabelX();
             this.groupPanelCase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.groupPanelCreditCover.SuspendLayout();
@@ -349,20 +349,6 @@
             invoiceCurrencyLabel.TabIndex = 24;
             invoiceCurrencyLabel.Text = "发票币别:";
             // 
-            // assignTypeLabel
-            // 
-            assignTypeLabel.AutoSize = true;
-            assignTypeLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            assignTypeLabel.BackgroundStyle.Class = "";
-            assignTypeLabel.Location = new System.Drawing.Point(227, 128);
-            assignTypeLabel.Name = "assignTypeLabel";
-            assignTypeLabel.Size = new System.Drawing.Size(59, 16);
-            assignTypeLabel.TabIndex = 8;
-            assignTypeLabel.Text = "转让方式:";
-            // 
             // creditCoverCurrLabel
             // 
             creditCoverCurrLabel.AutoSize = true;
@@ -371,7 +357,7 @@
             // 
             // 
             creditCoverCurrLabel.BackgroundStyle.Class = "";
-            creditCoverCurrLabel.Location = new System.Drawing.Point(5, 3);
+            creditCoverCurrLabel.Location = new System.Drawing.Point(9, 31);
             creditCoverCurrLabel.Name = "creditCoverCurrLabel";
             creditCoverCurrLabel.Size = new System.Drawing.Size(84, 16);
             creditCoverCurrLabel.TabIndex = 0;
@@ -385,7 +371,7 @@
             // 
             // 
             pUGProportionLabel.BackgroundStyle.Class = "";
-            pUGProportionLabel.Location = new System.Drawing.Point(211, 24);
+            pUGProportionLabel.Location = new System.Drawing.Point(215, 52);
             pUGProportionLabel.Name = "pUGProportionLabel";
             pUGProportionLabel.Size = new System.Drawing.Size(59, 16);
             pUGProportionLabel.TabIndex = 8;
@@ -399,7 +385,7 @@
             // 
             // 
             creditCoverPeriodBeginLabel.BackgroundStyle.Class = "";
-            creditCoverPeriodBeginLabel.Location = new System.Drawing.Point(260, 2);
+            creditCoverPeriodBeginLabel.Location = new System.Drawing.Point(264, 30);
             creditCoverPeriodBeginLabel.Name = "creditCoverPeriodBeginLabel";
             creditCoverPeriodBeginLabel.Size = new System.Drawing.Size(59, 16);
             creditCoverPeriodBeginLabel.TabIndex = 10;
@@ -413,7 +399,7 @@
             // 
             // 
             pUGPeriodLabel.BackgroundStyle.Class = "";
-            pUGPeriodLabel.Location = new System.Drawing.Point(347, 24);
+            pUGPeriodLabel.Location = new System.Drawing.Point(351, 52);
             pUGPeriodLabel.Name = "pUGPeriodLabel";
             pUGPeriodLabel.Size = new System.Drawing.Size(84, 16);
             pUGPeriodLabel.TabIndex = 13;
@@ -427,7 +413,7 @@
             // 
             // 
             reassignGracePeriodLabel.BackgroundStyle.Class = "";
-            reassignGracePeriodLabel.Location = new System.Drawing.Point(522, 25);
+            reassignGracePeriodLabel.Location = new System.Drawing.Point(526, 53);
             reassignGracePeriodLabel.Name = "reassignGracePeriodLabel";
             reassignGracePeriodLabel.Size = new System.Drawing.Size(72, 16);
             reassignGracePeriodLabel.TabIndex = 15;
@@ -441,7 +427,7 @@
             // 
             // 
             financeLineCurrLabel.BackgroundStyle.Class = "";
-            financeLineCurrLabel.Location = new System.Drawing.Point(17, 52);
+            financeLineCurrLabel.Location = new System.Drawing.Point(21, 80);
             financeLineCurrLabel.Name = "financeLineCurrLabel";
             financeLineCurrLabel.Size = new System.Drawing.Size(72, 16);
             financeLineCurrLabel.TabIndex = 17;
@@ -455,7 +441,7 @@
             // 
             // 
             financeLinePeriodBeginLabel.BackgroundStyle.Class = "";
-            financeLinePeriodBeginLabel.Location = new System.Drawing.Point(260, 52);
+            financeLinePeriodBeginLabel.Location = new System.Drawing.Point(264, 80);
             financeLinePeriodBeginLabel.Name = "financeLinePeriodBeginLabel";
             financeLinePeriodBeginLabel.Size = new System.Drawing.Size(59, 16);
             financeLinePeriodBeginLabel.TabIndex = 21;
@@ -469,7 +455,7 @@
             // 
             // 
             lblHighestFinance.BackgroundStyle.Class = "";
-            lblHighestFinance.Location = new System.Drawing.Point(3, 77);
+            lblHighestFinance.Location = new System.Drawing.Point(7, 105);
             lblHighestFinance.Name = "lblHighestFinance";
             lblHighestFinance.Size = new System.Drawing.Size(121, 16);
             lblHighestFinance.TabIndex = 25;
@@ -483,7 +469,7 @@
             // 
             // 
             financeProportionLabel.BackgroundStyle.Class = "";
-            financeProportionLabel.Location = new System.Drawing.Point(260, 77);
+            financeProportionLabel.Location = new System.Drawing.Point(264, 105);
             financeProportionLabel.Name = "financeProportionLabel";
             financeProportionLabel.Size = new System.Drawing.Size(59, 16);
             financeProportionLabel.TabIndex = 26;
@@ -497,7 +483,7 @@
             // 
             // 
             orderNumberLabel.BackgroundStyle.Class = "";
-            orderNumberLabel.Location = new System.Drawing.Point(43, 145);
+            orderNumberLabel.Location = new System.Drawing.Point(47, 173);
             orderNumberLabel.Name = "orderNumberLabel";
             orderNumberLabel.Size = new System.Drawing.Size(47, 16);
             orderNumberLabel.TabIndex = 28;
@@ -511,7 +497,7 @@
             // 
             // 
             paymentTermsLabel.BackgroundStyle.Class = "";
-            paymentTermsLabel.Location = new System.Drawing.Point(30, 99);
+            paymentTermsLabel.Location = new System.Drawing.Point(34, 127);
             paymentTermsLabel.Name = "paymentTermsLabel";
             paymentTermsLabel.Size = new System.Drawing.Size(59, 16);
             paymentTermsLabel.TabIndex = 30;
@@ -525,7 +511,7 @@
             // 
             // 
             financeGracePeriodLabel.BackgroundStyle.Class = "";
-            financeGracePeriodLabel.Location = new System.Drawing.Point(436, 78);
+            financeGracePeriodLabel.Location = new System.Drawing.Point(440, 106);
             financeGracePeriodLabel.Name = "financeGracePeriodLabel";
             financeGracePeriodLabel.Size = new System.Drawing.Size(72, 16);
             financeGracePeriodLabel.TabIndex = 32;
@@ -539,7 +525,7 @@
             // 
             // 
             deductiblesLabel.BackgroundStyle.Class = "";
-            deductiblesLabel.Location = new System.Drawing.Point(267, 148);
+            deductiblesLabel.Location = new System.Drawing.Point(271, 176);
             deductiblesLabel.Name = "deductiblesLabel";
             deductiblesLabel.Size = new System.Drawing.Size(47, 16);
             deductiblesLabel.TabIndex = 34;
@@ -553,7 +539,7 @@
             // 
             // 
             lossThresholdLabel.BackgroundStyle.Class = "";
-            lossThresholdLabel.Location = new System.Drawing.Point(429, 148);
+            lossThresholdLabel.Location = new System.Drawing.Point(433, 176);
             lossThresholdLabel.Name = "lossThresholdLabel";
             lossThresholdLabel.Size = new System.Drawing.Size(84, 16);
             lossThresholdLabel.TabIndex = 36;
@@ -567,7 +553,7 @@
             // 
             // 
             priceLabel.BackgroundStyle.Class = "";
-            priceLabel.Location = new System.Drawing.Point(19, 178);
+            priceLabel.Location = new System.Drawing.Point(23, 206);
             priceLabel.Name = "priceLabel";
             priceLabel.Size = new System.Drawing.Size(72, 16);
             priceLabel.TabIndex = 0;
@@ -581,7 +567,7 @@
             // 
             // 
             iFPriceLabel.BackgroundStyle.Class = "";
-            iFPriceLabel.Location = new System.Drawing.Point(187, 179);
+            iFPriceLabel.Location = new System.Drawing.Point(191, 207);
             iFPriceLabel.Name = "iFPriceLabel";
             iFPriceLabel.Size = new System.Drawing.Size(69, 16);
             iFPriceLabel.TabIndex = 2;
@@ -595,7 +581,7 @@
             // 
             // 
             eFPriceLabel.BackgroundStyle.Class = "";
-            eFPriceLabel.Location = new System.Drawing.Point(346, 179);
+            eFPriceLabel.Location = new System.Drawing.Point(350, 207);
             eFPriceLabel.Name = "eFPriceLabel";
             eFPriceLabel.Size = new System.Drawing.Size(74, 16);
             eFPriceLabel.TabIndex = 4;
@@ -609,7 +595,7 @@
             // 
             // 
             commissonTypeLabel.BackgroundStyle.Class = "";
-            commissonTypeLabel.Location = new System.Drawing.Point(30, 203);
+            commissonTypeLabel.Location = new System.Drawing.Point(34, 231);
             commissonTypeLabel.Name = "commissonTypeLabel";
             commissonTypeLabel.Size = new System.Drawing.Size(59, 16);
             commissonTypeLabel.TabIndex = 6;
@@ -623,7 +609,7 @@
             // 
             // 
             commissionTypeCommentLabel.BackgroundStyle.Class = "";
-            commissionTypeCommentLabel.Location = new System.Drawing.Point(244, 203);
+            commissionTypeCommentLabel.Location = new System.Drawing.Point(248, 231);
             commissionTypeCommentLabel.Name = "commissionTypeCommentLabel";
             commissionTypeCommentLabel.Size = new System.Drawing.Size(34, 16);
             commissionTypeCommentLabel.TabIndex = 8;
@@ -637,7 +623,7 @@
             // 
             // 
             handFeeLabel.BackgroundStyle.Class = "";
-            handFeeLabel.Location = new System.Drawing.Point(505, 176);
+            handFeeLabel.Location = new System.Drawing.Point(509, 204);
             handFeeLabel.Name = "handFeeLabel";
             handFeeLabel.Size = new System.Drawing.Size(104, 16);
             handFeeLabel.TabIndex = 10;
@@ -775,13 +761,9 @@
             this.groupPanelCase.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.groupPanelCase.Controls.Add(this.invoiceCurrencyTextBox);
             this.groupPanelCase.Controls.Add(this.transactionTypeTextBox);
-            this.groupPanelCase.Controls.Add(this.cbIsNotice);
-            this.groupPanelCase.Controls.Add(this.cbIsRecoarse);
             this.groupPanelCase.Controls.Add(this.companyNameENTextBox);
             this.groupPanelCase.Controls.Add(contractCodeLabel);
-            this.groupPanelCase.Controls.Add(assignTypeLabel);
             this.groupPanelCase.Controls.Add(this.contractCodeTextBox);
-            this.groupPanelCase.Controls.Add(this.assignTypeComboBox);
             this.groupPanelCase.Controls.Add(this.btnCaseSelect);
             this.groupPanelCase.Controls.Add(invoiceCurrencyLabel);
             this.groupPanelCase.Controls.Add(transactionTypeLabel);
@@ -801,7 +783,7 @@
             this.groupPanelCase.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelCase.Location = new System.Drawing.Point(0, 0);
             this.groupPanelCase.Name = "groupPanelCase";
-            this.groupPanelCase.Size = new System.Drawing.Size(784, 161);
+            this.groupPanelCase.Size = new System.Drawing.Size(784, 115);
             // 
             // 
             // 
@@ -861,35 +843,6 @@
             this.transactionTypeTextBox.Size = new System.Drawing.Size(100, 20);
             this.transactionTypeTextBox.TabIndex = 34;
             // 
-            // cbIsNotice
-            // 
-            this.cbIsNotice.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.cbIsNotice.BackgroundStyle.Class = "";
-            this.cbIsNotice.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsNotice", true));
-            this.cbIsNotice.Location = new System.Drawing.Point(127, 124);
-            this.cbIsNotice.Name = "cbIsNotice";
-            this.cbIsNotice.Size = new System.Drawing.Size(100, 23);
-            this.cbIsNotice.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsNotice.TabIndex = 33;
-            this.cbIsNotice.Text = "是否暗保理";
-            // 
-            // cbIsRecoarse
-            // 
-            this.cbIsRecoarse.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.cbIsRecoarse.BackgroundStyle.Class = "";
-            this.cbIsRecoarse.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsRecoarse", true));
-            this.cbIsRecoarse.Location = new System.Drawing.Point(19, 124);
-            this.cbIsRecoarse.Name = "cbIsRecoarse";
-            this.cbIsRecoarse.Size = new System.Drawing.Size(100, 23);
-            this.cbIsRecoarse.TabIndex = 32;
-            this.cbIsRecoarse.Text = "是否有追索权";
-            // 
             // companyNameENTextBox
             // 
             // 
@@ -912,17 +865,6 @@
             this.contractCodeTextBox.Name = "contractCodeTextBox";
             this.contractCodeTextBox.Size = new System.Drawing.Size(100, 20);
             this.contractCodeTextBox.TabIndex = 29;
-            // 
-            // assignTypeComboBox
-            // 
-            this.assignTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "AssignType", true));
-            this.assignTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.assignTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.assignTypeComboBox.FormattingEnabled = true;
-            this.assignTypeComboBox.Location = new System.Drawing.Point(292, 125);
-            this.assignTypeComboBox.Name = "assignTypeComboBox";
-            this.assignTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.assignTypeComboBox.TabIndex = 9;
             // 
             // btnCaseSelect
             // 
@@ -1051,6 +993,12 @@
             // 
             this.groupPanelCreditCover.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCreditCover.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelCreditCover.Controls.Add(this.cbIsNotice);
+            this.groupPanelCreditCover.Controls.Add(this.cbIsRecoarse);
+            this.groupPanelCreditCover.Controls.Add(assignTypeLabel);
+            this.groupPanelCreditCover.Controls.Add(this.assignTypeComboBox);
+            this.groupPanelCreditCover.Controls.Add(lblCDACode);
+            this.groupPanelCreditCover.Controls.Add(this.tbCDACode);
             this.groupPanelCreditCover.Controls.Add(this.tbHighestFinance);
             this.groupPanelCreditCover.Controls.Add(this.handFeeCurrComboBox);
             this.groupPanelCreditCover.Controls.Add(this.cbIsCreditCoverRevolving);
@@ -1098,9 +1046,9 @@
             this.groupPanelCreditCover.Controls.Add(creditCoverCurrLabel);
             this.groupPanelCreditCover.Controls.Add(this.creditCoverCurrComboBox);
             this.groupPanelCreditCover.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelCreditCover.Location = new System.Drawing.Point(0, 161);
+            this.groupPanelCreditCover.Location = new System.Drawing.Point(0, 115);
             this.groupPanelCreditCover.Name = "groupPanelCreditCover";
-            this.groupPanelCreditCover.Size = new System.Drawing.Size(784, 240);
+            this.groupPanelCreditCover.Size = new System.Drawing.Size(784, 262);
             // 
             // 
             // 
@@ -1138,7 +1086,7 @@
             // 
             // 
             this.tbHighestFinance.Border.Class = "TextBoxBorder";
-            this.tbHighestFinance.Location = new System.Drawing.Point(127, 76);
+            this.tbHighestFinance.Location = new System.Drawing.Point(131, 104);
             this.tbHighestFinance.Name = "tbHighestFinance";
             this.tbHighestFinance.Size = new System.Drawing.Size(83, 20);
             this.tbHighestFinance.TabIndex = 39;
@@ -1149,7 +1097,7 @@
             this.handFeeCurrComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.handFeeCurrComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.handFeeCurrComboBox.FormattingEnabled = true;
-            this.handFeeCurrComboBox.Location = new System.Drawing.Point(615, 174);
+            this.handFeeCurrComboBox.Location = new System.Drawing.Point(619, 202);
             this.handFeeCurrComboBox.Name = "handFeeCurrComboBox";
             this.handFeeCurrComboBox.Size = new System.Drawing.Size(77, 21);
             this.handFeeCurrComboBox.TabIndex = 13;
@@ -1163,7 +1111,7 @@
             // 
             this.cbIsCreditCoverRevolving.BackgroundStyle.Class = "";
             this.cbIsCreditCoverRevolving.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsCreditCoverRevolving", true));
-            this.cbIsCreditCoverRevolving.Location = new System.Drawing.Point(101, 22);
+            this.cbIsCreditCoverRevolving.Location = new System.Drawing.Point(105, 50);
             this.cbIsCreditCoverRevolving.Name = "cbIsCreditCoverRevolving";
             this.cbIsCreditCoverRevolving.Size = new System.Drawing.Size(100, 23);
             this.cbIsCreditCoverRevolving.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1177,7 +1125,7 @@
             // 
             this.handFeeTextBox.Border.Class = "TextBoxBorder";
             this.handFeeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HandFee", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.handFeeTextBox.Location = new System.Drawing.Point(698, 175);
+            this.handFeeTextBox.Location = new System.Drawing.Point(702, 203);
             this.handFeeTextBox.Name = "handFeeTextBox";
             this.handFeeTextBox.Size = new System.Drawing.Size(57, 20);
             this.handFeeTextBox.TabIndex = 11;
@@ -1189,7 +1137,7 @@
             // 
             this.lossThresholdTextBox.Border.Class = "TextBoxBorder";
             this.lossThresholdTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "LossThreshold", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.lossThresholdTextBox.Location = new System.Drawing.Point(514, 144);
+            this.lossThresholdTextBox.Location = new System.Drawing.Point(518, 172);
             this.lossThresholdTextBox.Name = "lossThresholdTextBox";
             this.lossThresholdTextBox.Size = new System.Drawing.Size(100, 20);
             this.lossThresholdTextBox.TabIndex = 37;
@@ -1201,7 +1149,7 @@
             // 
             this.commissionTypeCommentTextBox.Border.Class = "TextBoxBorder";
             this.commissionTypeCommentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CommissionTypeComment", true));
-            this.commissionTypeCommentTextBox.Location = new System.Drawing.Point(282, 201);
+            this.commissionTypeCommentTextBox.Location = new System.Drawing.Point(286, 229);
             this.commissionTypeCommentTextBox.Name = "commissionTypeCommentTextBox";
             this.commissionTypeCommentTextBox.Size = new System.Drawing.Size(415, 20);
             this.commissionTypeCommentTextBox.TabIndex = 9;
@@ -1214,7 +1162,7 @@
             // 
             this.deductiblesTextBox.Border.Class = "TextBoxBorder";
             this.deductiblesTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Deductibles", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.deductiblesTextBox.Location = new System.Drawing.Point(320, 145);
+            this.deductiblesTextBox.Location = new System.Drawing.Point(324, 173);
             this.deductiblesTextBox.Name = "deductiblesTextBox";
             this.deductiblesTextBox.Size = new System.Drawing.Size(100, 20);
             this.deductiblesTextBox.TabIndex = 35;
@@ -1225,7 +1173,7 @@
             this.commissionTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.commissionTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.commissionTypeComboBox.FormattingEnabled = true;
-            this.commissionTypeComboBox.Location = new System.Drawing.Point(101, 201);
+            this.commissionTypeComboBox.Location = new System.Drawing.Point(105, 229);
             this.commissionTypeComboBox.Name = "commissionTypeComboBox";
             this.commissionTypeComboBox.Size = new System.Drawing.Size(121, 21);
             this.commissionTypeComboBox.TabIndex = 7;
@@ -1238,7 +1186,7 @@
             // 
             this.financeGracePeriodTextBox.Border.Class = "TextBoxBorder";
             this.financeGracePeriodTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceGracePeriod", true));
-            this.financeGracePeriodTextBox.Location = new System.Drawing.Point(514, 76);
+            this.financeGracePeriodTextBox.Location = new System.Drawing.Point(518, 104);
             this.financeGracePeriodTextBox.Name = "financeGracePeriodTextBox";
             this.financeGracePeriodTextBox.Size = new System.Drawing.Size(100, 20);
             this.financeGracePeriodTextBox.TabIndex = 33;
@@ -1250,7 +1198,7 @@
             // 
             this.eFPriceTextBox.Border.Class = "TextBoxBorder";
             this.eFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "EFPrice", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p2"));
-            this.eFPriceTextBox.Location = new System.Drawing.Point(433, 176);
+            this.eFPriceTextBox.Location = new System.Drawing.Point(437, 204);
             this.eFPriceTextBox.Name = "eFPriceTextBox";
             this.eFPriceTextBox.Size = new System.Drawing.Size(66, 20);
             this.eFPriceTextBox.TabIndex = 5;
@@ -1262,7 +1210,7 @@
             // 
             this.paymentTermsTextBox.Border.Class = "TextBoxBorder";
             this.paymentTermsTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "PaymentTerms", true));
-            this.paymentTermsTextBox.Location = new System.Drawing.Point(101, 99);
+            this.paymentTermsTextBox.Location = new System.Drawing.Point(105, 127);
             this.paymentTermsTextBox.Multiline = true;
             this.paymentTermsTextBox.Name = "paymentTermsTextBox";
             this.paymentTermsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -1277,7 +1225,7 @@
             // 
             this.iFPriceTextBox.Border.Class = "TextBoxBorder";
             this.iFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "IFPrice", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p2"));
-            this.iFPriceTextBox.Location = new System.Drawing.Point(264, 176);
+            this.iFPriceTextBox.Location = new System.Drawing.Point(268, 204);
             this.iFPriceTextBox.Name = "iFPriceTextBox";
             this.iFPriceTextBox.Size = new System.Drawing.Size(72, 20);
             this.iFPriceTextBox.TabIndex = 3;
@@ -1289,7 +1237,7 @@
             // 
             this.orderNumberTextBox.Border.Class = "TextBoxBorder";
             this.orderNumberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "OrderNumber", true));
-            this.orderNumberTextBox.Location = new System.Drawing.Point(101, 144);
+            this.orderNumberTextBox.Location = new System.Drawing.Point(105, 172);
             this.orderNumberTextBox.Name = "orderNumberTextBox";
             this.orderNumberTextBox.Size = new System.Drawing.Size(100, 20);
             this.orderNumberTextBox.TabIndex = 29;
@@ -1301,7 +1249,7 @@
             // 
             this.priceTextBox.Border.Class = "TextBoxBorder";
             this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Price", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p2"));
-            this.priceTextBox.Location = new System.Drawing.Point(101, 176);
+            this.priceTextBox.Location = new System.Drawing.Point(105, 204);
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(58, 20);
             this.priceTextBox.TabIndex = 1;
@@ -1313,7 +1261,7 @@
             // 
             this.financeProportionTextBox.Border.Class = "TextBoxBorder";
             this.financeProportionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceProportion", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p0"));
-            this.financeProportionTextBox.Location = new System.Drawing.Point(320, 76);
+            this.financeProportionTextBox.Location = new System.Drawing.Point(324, 104);
             this.financeProportionTextBox.Name = "financeProportionTextBox";
             this.financeProportionTextBox.Size = new System.Drawing.Size(100, 20);
             this.financeProportionTextBox.TabIndex = 27;
@@ -1326,7 +1274,7 @@
             this.financeLinePeriodEndDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.financeLinePeriodEndDateTimePicker.ButtonDropDown.Visible = true;
             this.financeLinePeriodEndDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "FinanceLinePeriodEnd", true));
-            this.financeLinePeriodEndDateTimePicker.Location = new System.Drawing.Point(433, 52);
+            this.financeLinePeriodEndDateTimePicker.Location = new System.Drawing.Point(437, 80);
             // 
             // 
             // 
@@ -1361,7 +1309,7 @@
             this.financeLinePeriodBeginDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.financeLinePeriodBeginDateTimePicker.ButtonDropDown.Visible = true;
             this.financeLinePeriodBeginDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "FinanceLinePeriodBegin", true));
-            this.financeLinePeriodBeginDateTimePicker.Location = new System.Drawing.Point(320, 52);
+            this.financeLinePeriodBeginDateTimePicker.Location = new System.Drawing.Point(324, 80);
             // 
             // 
             // 
@@ -1394,7 +1342,7 @@
             // 
             this.financeLineTextBox.Border.Class = "TextBoxBorder";
             this.financeLineTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceLine", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.financeLineTextBox.Location = new System.Drawing.Point(171, 51);
+            this.financeLineTextBox.Location = new System.Drawing.Point(175, 79);
             this.financeLineTextBox.Name = "financeLineTextBox";
             this.financeLineTextBox.Size = new System.Drawing.Size(83, 20);
             this.financeLineTextBox.TabIndex = 20;
@@ -1406,7 +1354,7 @@
             this.financeLineCurrComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceLineCurr", true));
             this.financeLineCurrComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.financeLineCurrComboBox.FormattingEnabled = true;
-            this.financeLineCurrComboBox.Location = new System.Drawing.Point(101, 50);
+            this.financeLineCurrComboBox.Location = new System.Drawing.Point(105, 78);
             this.financeLineCurrComboBox.Name = "financeLineCurrComboBox";
             this.financeLineCurrComboBox.Size = new System.Drawing.Size(64, 21);
             this.financeLineCurrComboBox.TabIndex = 18;
@@ -1419,7 +1367,7 @@
             // 
             this.reassignGracePeriodTextBox.Border.Class = "TextBoxBorder";
             this.reassignGracePeriodTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "ReassignGracePeriod", true));
-            this.reassignGracePeriodTextBox.Location = new System.Drawing.Point(595, 25);
+            this.reassignGracePeriodTextBox.Location = new System.Drawing.Point(599, 53);
             this.reassignGracePeriodTextBox.Name = "reassignGracePeriodTextBox";
             this.reassignGracePeriodTextBox.Size = new System.Drawing.Size(100, 20);
             this.reassignGracePeriodTextBox.TabIndex = 16;
@@ -1431,7 +1379,7 @@
             // 
             this.pUGPeriodTextBox.Border.Class = "TextBoxBorder";
             this.pUGPeriodTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "PUGPeriod", true));
-            this.pUGPeriodTextBox.Location = new System.Drawing.Point(433, 23);
+            this.pUGPeriodTextBox.Location = new System.Drawing.Point(437, 51);
             this.pUGPeriodTextBox.Name = "pUGPeriodTextBox";
             this.pUGPeriodTextBox.Size = new System.Drawing.Size(83, 20);
             this.pUGPeriodTextBox.TabIndex = 14;
@@ -1444,7 +1392,7 @@
             this.creditCoverPeriodEndDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.creditCoverPeriodEndDateTimePicker.ButtonDropDown.Visible = true;
             this.creditCoverPeriodEndDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "CreditCoverPeriodEnd", true));
-            this.creditCoverPeriodEndDateTimePicker.Location = new System.Drawing.Point(433, 1);
+            this.creditCoverPeriodEndDateTimePicker.Location = new System.Drawing.Point(437, 29);
             // 
             // 
             // 
@@ -1479,7 +1427,7 @@
             this.creditCoverPeriodBeginDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.creditCoverPeriodBeginDateTimePicker.ButtonDropDown.Visible = true;
             this.creditCoverPeriodBeginDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "CreditCoverPeriodBegin", true));
-            this.creditCoverPeriodBeginDateTimePicker.Location = new System.Drawing.Point(320, 1);
+            this.creditCoverPeriodBeginDateTimePicker.Location = new System.Drawing.Point(324, 29);
             // 
             // 
             // 
@@ -1511,8 +1459,8 @@
             // 
             // 
             this.pUGProportionTextBox.Border.Class = "TextBoxBorder";
-            this.pUGProportionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "PUGProportion", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "P0"));
-            this.pUGProportionTextBox.Location = new System.Drawing.Point(271, 23);
+            this.pUGProportionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "PUGProportion", true));
+            this.pUGProportionTextBox.Location = new System.Drawing.Point(275, 51);
             this.pUGProportionTextBox.Name = "pUGProportionTextBox";
             this.pUGProportionTextBox.Size = new System.Drawing.Size(70, 20);
             this.pUGProportionTextBox.TabIndex = 9;
@@ -1524,7 +1472,7 @@
             // 
             this.creditCoverTextBox.Border.Class = "TextBoxBorder";
             this.creditCoverTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CreditCover", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.creditCoverTextBox.Location = new System.Drawing.Point(171, 1);
+            this.creditCoverTextBox.Location = new System.Drawing.Point(175, 29);
             this.creditCoverTextBox.Name = "creditCoverTextBox";
             this.creditCoverTextBox.Size = new System.Drawing.Size(83, 20);
             this.creditCoverTextBox.TabIndex = 3;
@@ -1536,7 +1484,7 @@
             this.creditCoverCurrComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CreditCoverCurr", true));
             this.creditCoverCurrComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.creditCoverCurrComboBox.FormattingEnabled = true;
-            this.creditCoverCurrComboBox.Location = new System.Drawing.Point(101, 0);
+            this.creditCoverCurrComboBox.Location = new System.Drawing.Point(105, 28);
             this.creditCoverCurrComboBox.Name = "creditCoverCurrComboBox";
             this.creditCoverCurrComboBox.Size = new System.Drawing.Size(64, 21);
             this.creditCoverCurrComboBox.TabIndex = 1;
@@ -1564,7 +1512,7 @@
             this.groupPanelOther.Controls.Add(noticePersonLabel);
             this.groupPanelOther.Controls.Add(this.noticePersonTextBox);
             this.groupPanelOther.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelOther.Location = new System.Drawing.Point(0, 401);
+            this.groupPanelOther.Location = new System.Drawing.Point(0, 377);
             this.groupPanelOther.Name = "groupPanelOther";
             this.groupPanelOther.Size = new System.Drawing.Size(784, 106);
             // 
@@ -1838,6 +1786,87 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
+            // lblCDACode
+            // 
+            lblCDACode.AutoSize = true;
+            lblCDACode.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblCDACode.BackgroundStyle.Class = "";
+            lblCDACode.Location = new System.Drawing.Point(36, 3);
+            lblCDACode.Name = "lblCDACode";
+            lblCDACode.Size = new System.Drawing.Size(58, 16);
+            lblCDACode.TabIndex = 40;
+            lblCDACode.Text = "CDA编号:";
+            // 
+            // tbCDACode
+            // 
+            // 
+            // 
+            // 
+            this.tbCDACode.Border.Class = "TextBoxBorder";
+            this.tbCDACode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CDACode", true));
+            this.tbCDACode.Location = new System.Drawing.Point(105, 2);
+            this.tbCDACode.Name = "tbCDACode";
+            this.tbCDACode.ReadOnly = true;
+            this.tbCDACode.Size = new System.Drawing.Size(100, 20);
+            this.tbCDACode.TabIndex = 41;
+            // 
+            // cbIsNotice
+            // 
+            this.cbIsNotice.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.cbIsNotice.BackgroundStyle.Class = "";
+            this.cbIsNotice.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsNotice", true));
+            this.cbIsNotice.Location = new System.Drawing.Point(433, 0);
+            this.cbIsNotice.Name = "cbIsNotice";
+            this.cbIsNotice.Size = new System.Drawing.Size(100, 23);
+            this.cbIsNotice.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsNotice.TabIndex = 45;
+            this.cbIsNotice.Text = "是否暗保理";
+            // 
+            // cbIsRecoarse
+            // 
+            this.cbIsRecoarse.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.cbIsRecoarse.BackgroundStyle.Class = "";
+            this.cbIsRecoarse.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsRecoarse", true));
+            this.cbIsRecoarse.Location = new System.Drawing.Point(325, 0);
+            this.cbIsRecoarse.Name = "cbIsRecoarse";
+            this.cbIsRecoarse.Size = new System.Drawing.Size(100, 23);
+            this.cbIsRecoarse.TabIndex = 44;
+            this.cbIsRecoarse.Text = "是否有追索权";
+            // 
+            // assignTypeLabel
+            // 
+            assignTypeLabel.AutoSize = true;
+            assignTypeLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            assignTypeLabel.BackgroundStyle.Class = "";
+            assignTypeLabel.Location = new System.Drawing.Point(533, 4);
+            assignTypeLabel.Name = "assignTypeLabel";
+            assignTypeLabel.Size = new System.Drawing.Size(59, 16);
+            assignTypeLabel.TabIndex = 42;
+            assignTypeLabel.Text = "转让方式:";
+            // 
+            // assignTypeComboBox
+            // 
+            this.assignTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "AssignType", true));
+            this.assignTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.assignTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.assignTypeComboBox.FormattingEnabled = true;
+            this.assignTypeComboBox.Location = new System.Drawing.Point(598, 1);
+            this.assignTypeComboBox.Name = "assignTypeComboBox";
+            this.assignTypeComboBox.Size = new System.Drawing.Size(101, 21);
+            this.assignTypeComboBox.TabIndex = 43;
+            // 
             // CDADetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1874,5 +1903,9 @@
         #endregion
 
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator1;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCDACode;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsNotice;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsRecoarse;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
     }
 }

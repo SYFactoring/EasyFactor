@@ -69,8 +69,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCaseQuery = new DevComponents.DotNetBar.PanelEx();
             this.btnQueryReset = new DevComponents.DotNetBar.ButtonX();
             this.cbIsCDA = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -115,29 +113,7 @@
             this.menuItemCaseUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbIsContractSigned = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.panelCaseQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -149,6 +125,7 @@
             // 
             this.panelCaseQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelCaseQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelCaseQuery.Controls.Add(this.cbIsContractSigned);
             this.panelCaseQuery.Controls.Add(this.btnQueryReset);
             this.panelCaseQuery.Controls.Add(this.cbIsCDA);
             this.panelCaseQuery.Controls.Add(this.tbClientName);
@@ -183,7 +160,7 @@
             // 
             this.btnQueryReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQueryReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQueryReset.Location = new System.Drawing.Point(451, 57);
+            this.btnQueryReset.Location = new System.Drawing.Point(524, 33);
             this.btnQueryReset.Name = "btnQueryReset";
             this.btnQueryReset.Size = new System.Drawing.Size(48, 21);
             this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -201,7 +178,7 @@
             this.cbIsCDA.Checked = true;
             this.cbIsCDA.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbIsCDA.CheckValue = "Y";
-            this.cbIsCDA.Location = new System.Drawing.Point(397, 10);
+            this.cbIsCDA.Location = new System.Drawing.Point(393, 33);
             this.cbIsCDA.Name = "cbIsCDA";
             this.cbIsCDA.Size = new System.Drawing.Size(100, 16);
             this.cbIsCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -261,10 +238,11 @@
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(524, 49);
+            this.lblCount.Location = new System.Drawing.Point(595, 60);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.Size = new System.Drawing.Size(29, 16);
             this.lblCount.TabIndex = 10;
+            this.lblCount.Text = "ABC";
             // 
             // lblDate
             // 
@@ -272,7 +250,7 @@
             // 
             // 
             this.lblDate.BackgroundStyle.Class = "";
-            this.lblDate.Location = new System.Drawing.Point(198, 31);
+            this.lblDate.Location = new System.Drawing.Point(198, 53);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(59, 23);
             this.lblDate.TabIndex = 9;
@@ -282,7 +260,7 @@
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(397, 57);
+            this.btnQuery.Location = new System.Drawing.Point(524, 10);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(48, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -302,7 +280,7 @@
             "出口保理",
             "进口",
             "信保保理"});
-            this.cbCurrency.Location = new System.Drawing.Point(254, 56);
+            this.cbCurrency.Location = new System.Drawing.Point(254, 31);
             this.cbCurrency.Name = "cbCurrency";
             this.cbCurrency.Size = new System.Drawing.Size(133, 20);
             this.cbCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -314,7 +292,7 @@
             // 
             // 
             this.lblCurrency.BackgroundStyle.Class = "";
-            this.lblCurrency.Location = new System.Drawing.Point(198, 57);
+            this.lblCurrency.Location = new System.Drawing.Point(198, 32);
             this.lblCurrency.Name = "lblCurrency";
             this.lblCurrency.Size = new System.Drawing.Size(59, 23);
             this.lblCurrency.TabIndex = 6;
@@ -352,7 +330,7 @@
             this.diEnd.BackgroundStyle.Class = "DateTimeInputBackground";
             this.diEnd.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.diEnd.ButtonDropDown.Visible = true;
-            this.diEnd.Location = new System.Drawing.Point(397, 31);
+            this.diEnd.Location = new System.Drawing.Point(358, 53);
             this.diEnd.MaxDate = new System.DateTime(2050, 12, 31, 0, 0, 0, 0);
             this.diEnd.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             // 
@@ -388,7 +366,7 @@
             this.diEnd.MonthCalendar.TodayButtonVisible = true;
             this.diEnd.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.diEnd.Name = "diEnd";
-            this.diEnd.Size = new System.Drawing.Size(121, 20);
+            this.diEnd.Size = new System.Drawing.Size(85, 20);
             this.diEnd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.diEnd.TabIndex = 3;
             // 
@@ -400,7 +378,7 @@
             this.diBegin.BackgroundStyle.Class = "DateTimeInputBackground";
             this.diBegin.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.diBegin.ButtonDropDown.Visible = true;
-            this.diBegin.Location = new System.Drawing.Point(254, 31);
+            this.diBegin.Location = new System.Drawing.Point(254, 53);
             this.diBegin.MaxDate = new System.DateTime(2050, 12, 31, 0, 0, 0, 0);
             this.diBegin.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             // 
@@ -436,7 +414,7 @@
             this.diBegin.MonthCalendar.TodayButtonVisible = true;
             this.diBegin.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.diBegin.Name = "diBegin";
-            this.diBegin.Size = new System.Drawing.Size(133, 20);
+            this.diBegin.Size = new System.Drawing.Size(98, 20);
             this.diBegin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.diBegin.TabIndex = 2;
             // 
@@ -714,198 +692,22 @@
             this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
             this.menuItemCreditCoverNegNew.Text = "新建额度申请";
             // 
-            // dataGridViewTextBoxColumn1
+            // cbIsContractSigned
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "CaseCode";
-            this.dataGridViewTextBoxColumn1.HeaderText = "案件编号";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 80;
+            this.cbIsContractSigned.AutoSize = true;
             // 
-            // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "SellerCode";
-            this.dataGridViewTextBoxColumn2.HeaderText = "卖方保理代码";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 104;
             // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "SellerClient";
-            this.dataGridViewTextBoxColumn3.HeaderText = "卖方名称";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "SellerFactorCode";
-            this.dataGridViewTextBoxColumn4.HeaderText = "卖方保理商代码";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 116;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "SellerFactor";
-            this.dataGridViewTextBoxColumn5.HeaderText = "卖方保理商";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 92;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "BuyerCode";
-            this.dataGridViewTextBoxColumn6.HeaderText = "买方保理代码";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.Width = 104;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "BuyerClient";
-            this.dataGridViewTextBoxColumn7.HeaderText = "买方名称";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.Visible = false;
-            this.dataGridViewTextBoxColumn7.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "BuyerFactorCode";
-            this.dataGridViewTextBoxColumn8.HeaderText = "买方保理商代码";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.Width = 116;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "BuyerFactor";
-            this.dataGridViewTextBoxColumn9.HeaderText = "买方保理商";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.Width = 92;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "InvoiceCurrency";
-            this.dataGridViewTextBoxColumn10.HeaderText = "发票币别";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            this.dataGridViewTextBoxColumn10.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "TransactionType";
-            this.dataGridViewTextBoxColumn11.HeaderText = "业务类别";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            this.dataGridViewTextBoxColumn11.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "OperationType";
-            this.dataGridViewTextBoxColumn12.HeaderText = "操作类型";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            this.dataGridViewTextBoxColumn12.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "OwnerDepartment";
-            this.dataGridViewTextBoxColumn13.HeaderText = "业务归属机构";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            this.dataGridViewTextBoxColumn13.Width = 104;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "OwnerDepartmentCode";
-            this.dataGridViewTextBoxColumn14.HeaderText = "Onwer Dept Code";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            this.dataGridViewTextBoxColumn14.Visible = false;
-            this.dataGridViewTextBoxColumn14.Width = 117;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "CoDepartment";
-            dataGridViewCellStyle4.Format = "d";
-            this.dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewTextBoxColumn15.HeaderText = "业务协作机构";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            this.dataGridViewTextBoxColumn15.Width = 104;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.DataPropertyName = "CoDepartmentCode";
-            this.dataGridViewTextBoxColumn16.HeaderText = "Co Dept Code ";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            this.dataGridViewTextBoxColumn16.Visible = false;
-            this.dataGridViewTextBoxColumn16.Width = 102;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.DataPropertyName = "CaseAppDate";
-            dataGridViewCellStyle5.Format = "d";
-            this.dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewTextBoxColumn17.HeaderText = "申请日期";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            this.dataGridViewTextBoxColumn17.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            this.dataGridViewTextBoxColumn18.DataPropertyName = "CaseMark";
-            this.dataGridViewTextBoxColumn18.HeaderText = "案件状态";
-            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            this.dataGridViewTextBoxColumn18.ReadOnly = true;
-            this.dataGridViewTextBoxColumn18.Visible = false;
-            this.dataGridViewTextBoxColumn18.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            this.dataGridViewTextBoxColumn19.DataPropertyName = "CreateUserName";
-            this.dataGridViewTextBoxColumn19.HeaderText = "经办人";
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            this.dataGridViewTextBoxColumn19.ReadOnly = true;
-            this.dataGridViewTextBoxColumn19.Visible = false;
-            this.dataGridViewTextBoxColumn19.Width = 68;
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.DataPropertyName = "BuyerClient";
-            this.dataGridViewTextBoxColumn20.HeaderText = "Buyer Client";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.ReadOnly = true;
-            this.dataGridViewTextBoxColumn20.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            this.dataGridViewTextBoxColumn21.DataPropertyName = "SellerClient";
-            this.dataGridViewTextBoxColumn21.HeaderText = "Seller Client";
-            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            this.dataGridViewTextBoxColumn21.ReadOnly = true;
-            this.dataGridViewTextBoxColumn21.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            this.dataGridViewTextBoxColumn22.DataPropertyName = "BuyerFactor";
-            this.dataGridViewTextBoxColumn22.HeaderText = "Buyer Factor";
-            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            this.dataGridViewTextBoxColumn22.ReadOnly = true;
-            this.dataGridViewTextBoxColumn22.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn23
-            // 
-            this.dataGridViewTextBoxColumn23.DataPropertyName = "SellerFactor";
-            this.dataGridViewTextBoxColumn23.HeaderText = "Seller Factor";
-            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
-            this.dataGridViewTextBoxColumn23.ReadOnly = true;
-            this.dataGridViewTextBoxColumn23.Visible = false;
+            this.cbIsContractSigned.BackgroundStyle.Class = "";
+            this.cbIsContractSigned.Checked = true;
+            this.cbIsContractSigned.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbIsContractSigned.CheckValue = "Y";
+            this.cbIsContractSigned.Location = new System.Drawing.Point(393, 9);
+            this.cbIsContractSigned.Name = "cbIsContractSigned";
+            this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);
+            this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsContractSigned.TabIndex = 17;
+            this.cbIsContractSigned.Text = "是否签订保理合同";
             // 
             // CaseMgr
             // 
@@ -927,29 +729,6 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
         private System.Windows.Forms.DataGridViewTextBoxColumn CaseCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SellerCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SellerClientColumn;
@@ -969,6 +748,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CreateUserColumn;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCDA;
         private DevComponents.DotNetBar.ButtonX btnQueryReset;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsContractSigned;
 
     }
 }

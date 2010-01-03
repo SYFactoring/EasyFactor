@@ -2075,6 +2075,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
+		private string _ContractType;
+		
 		private EntityRef<Client> _Client;
 		
     #region Extensibility Method Definitions
@@ -2093,6 +2095,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnContractStatusChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
+    partial void OnContractTypeChanging(string value);
+    partial void OnContractTypeChanged();
     #endregion
 		
 		public Contract()
@@ -2101,7 +2105,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_ContractCode", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_ContractCode", DbType="VarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string ContractCode
 		{
 			get
@@ -2221,6 +2225,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CreateUserName = value;
 					this.SendPropertyChanged("CreateUserName");
 					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ContractType", DbType="NVarChar(50)")]
+		public string ContractType
+		{
+			get
+			{
+				return this._ContractType;
+			}
+			set
+			{
+				if ((this._ContractType != value))
+				{
+					this.OnContractTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ContractType = value;
+					this.SendPropertyChanged("ContractType");
+					this.OnContractTypeChanged();
 				}
 			}
 		}

@@ -51,13 +51,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Enums
 
-        #region Constructors (1)
-
-        public CDADetail(OpCDAType opCDAType)
-            : this((CDA)null, opCDAType)
-        {
-
-        }
+        #region Constructors (3)
 
         public CDADetail(Case selectedCase, OpCDAType opCDAType)
             : this((CDA)null, opCDAType)
@@ -76,6 +70,20 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             this.InitializeComponent();
 
+            this.pUGProportionTextBox.DataBindings[0].Format += new ConvertEventHandler(FormatFloatToPercent);
+            this.pUGProportionTextBox.DataBindings[0].Parse += new ConvertEventHandler(ParsePercentToFloat);
+
+            this.financeProportionTextBox.DataBindings[0].Format += new ConvertEventHandler(FormatFloatToPercent);
+            this.financeProportionTextBox.DataBindings[0].Format += new ConvertEventHandler(ParsePercentToFloat);
+
+            this.priceTextBox.DataBindings[0].Format += new ConvertEventHandler(FormatFloatToPercent);
+            this.priceTextBox.DataBindings[0].Parse += new ConvertEventHandler(ParsePercentToFloat);
+            this.iFPriceTextBox.DataBindings[0].Format += new ConvertEventHandler(FormatFloatToPercent);
+            this.iFPriceTextBox.DataBindings[0].Parse += new ConvertEventHandler(ParsePercentToFloat);
+            this.eFPriceTextBox.DataBindings[0].Format += new ConvertEventHandler(FormatFloatToPercent);
+            this.eFPriceTextBox.DataBindings[0].Parse += new ConvertEventHandler(ParsePercentToFloat);
+
+
             this.creditCoverCurrComboBox.DataSource = Currency.AllCurrencies().ToList();
             this.creditCoverCurrComboBox.DisplayMember = "CurrencyCode";
             this.creditCoverCurrComboBox.ValueMember = "CurrencyCode";
@@ -92,24 +100,14 @@ namespace CMBC.EasyFactor.CaseMgr
             this.handFeeCurrComboBox.SelectedIndex = -1;
 
             this.assignTypeComboBox.Items.AddRange(new string[] { "全部", "部分" });
-            this.commissionTypeComboBox.Items.AddRange(new string[] { "01", "02", "其他" });
+            this.commissionTypeComboBox.Items.AddRange(new string[] { "按转让金额", "按融资金额", "其他" });
             this.cDAStatusComboBox.Items.AddRange(new string[] { "未审核", "已审核未下发", "已下发未签回", "已签回" });
 
             this.opCDAType = opCDAType;
 
             if (opCDAType == OpCDAType.NEW_CDA)
             {
-                cda = new CDA();
-                cda.PUGProportion = 1;
-                cda.PUGPeriod = 90;
-                cda.ReassignGracePeriod = 60;
-                cda.FinanceProportion = 0.8;
-                cda.IsNotice = false;
-                cda.IsRecoarse = false;
-                cda.IsCreditCoverRevolving = false;
-                cda.CDAStatus = "未审核";
-                cda.IsCreditCoverRevolving = true;
-                cda.AssignType = "全部";
+                cda = GenerateDefaultCDA();
                 this.CDABindingSource.DataSource = cda;
             }
             else
@@ -136,22 +134,39 @@ namespace CMBC.EasyFactor.CaseMgr
             this.UpdateCDAControlStatus();
         }
 
-        void cda_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        public CDADetail(OpCDAType opCDAType)
+            : this((CDA)null, opCDAType)
         {
-            if ("Price".Equals(e.PropertyName) || "IFPrice".Equals(e.PropertyName))
-            {
-                CDA cda = sender as CDA;
-                double price = cda.Price.GetValueOrDefault();
-                double ifprice = cda.IFPrice.GetValueOrDefault();
-                cda.EFPrice = price - ifprice;
-            }
+
         }
 
         #endregion Constructors
 
-        #region Methods (7)
+        #region Methods (12)
 
-        // Private Methods (7) 
+        // Private Methods (12) 
+
+        void cda_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            CDA cda = sender as CDA;
+            if ("Price".Equals(e.PropertyName) || "IFPrice".Equals(e.PropertyName))
+            {
+                double price = cda.Price.GetValueOrDefault();
+                double ifprice = cda.IFPrice.GetValueOrDefault();
+                cda.EFPrice = price - ifprice;
+            }
+            if ("IsRecoarse".Equals(e.PropertyName))
+            {
+                bool isRecoarse = cda.IsRecoarse.GetValueOrDefault();
+                this.creditCoverCurrComboBox.Enabled = !isRecoarse;
+                this.creditCoverPeriodBeginDateTimePicker.Enabled = !isRecoarse;
+                this.creditCoverPeriodEndDateTimePicker.Enabled = !isRecoarse;
+                this.creditCoverTextBox.Enabled = !isRecoarse;
+                this.pUGPeriodTextBox.Enabled = !isRecoarse;
+                this.pUGProportionTextBox.Enabled = !isRecoarse;
+                this.cbIsCreditCoverRevolving.Enabled = !isRecoarse;
+            }
+        }
 
         /// <summary>
         /// 
@@ -187,6 +202,34 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            CDA cda = this.CDABindingSource.DataSource as CDA;
+            if ("其他".Equals(cda.CommissionType))
+            {
+                if (e.ControlToValidate.Text.Equals(string.Empty))
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void FormatFloatToPercent(object sender, ConvertEventArgs e)
+        {
+            if (e.DesiredType == typeof(string) && e.Value != null)
+            {
+                e.Value = (double)e.Value * 100 + "%";
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -201,11 +244,44 @@ namespace CMBC.EasyFactor.CaseMgr
             Contract contract = cda.Case.SellerClient.Contracts.SingleOrDefault(c => c.ContractStatus == "已生效");
             if (contract != null)
             {
-                return String.Format("{0}-{1:000}", contract.ContractCode, cda.Case.CDAs.Count + 1);
+                CDA formerCDA = App.Current.DbContext.CDAs.OrderByDescending(c => c.CDACode).FirstOrDefault(c => c.CDACode.StartsWith(contract.ContractCode));
+                if (formerCDA == null)
+                {
+                    return string.Format("{0}-{1:000}", contract.ContractCode, 1);
+                }
+                else
+                {
+                    int index = Int32.Parse(formerCDA.CDACode.Substring(11));
+                    return String.Format("{0}-{1:000}", contract.ContractCode, index + 1);
+                }
             }
             else
             {
                 return string.Empty;
+            }
+        }
+
+        private CDA GenerateDefaultCDA()
+        {
+            CDA cda = new CDA();
+            cda.PUGProportion = 1;
+            cda.PUGPeriod = 90;
+            cda.ReassignGracePeriod = 60;
+            cda.FinanceProportion = 0.8;
+            cda.IsNotice = false;
+            cda.IsRecoarse = false;
+            cda.IsCreditCoverRevolving = false;
+            cda.CDAStatus = "未审核";
+            cda.IsCreditCoverRevolving = true;
+            cda.AssignType = "全部";
+            return cda;
+        }
+
+        private void ParsePercentToFloat(object sender, ConvertEventArgs e)
+        {
+            if (e.DesiredType == typeof(System.Nullable<double>) && e.Value != null)
+            {
+                e.Value = Double.Parse(e.Value.ToString()) / 100;
             }
         }
 
@@ -301,9 +377,10 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = caseMgr.Selected;
             if (curCase != null)
             {
-                CDA cda = (CDA)this.CDABindingSource.DataSource;
-                cda.Case = curCase;
                 this.contractCodeTextBox.Text = curCase.SellerClient.Contracts.SingleOrDefault(c => c.ContractStatus == "已生效").ContractCode;
+                CDA cda = GenerateDefaultCDA();
+                cda.Case = curCase;
+                this.CDABindingSource.DataSource = cda;
             }
         }
 
@@ -360,9 +437,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
-                this.cbIsNotice.Enabled = true;
-                this.cbIsRecoarse.Enabled = true;
-                this.assignTypeComboBox.Enabled = true;
             }
             else if (this.opCDAType == OpCDAType.UPDATE_CDA)
             {
@@ -378,32 +452,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
-                this.cbIsNotice.Enabled = true;
-                this.cbIsRecoarse.Enabled = true;
-                this.assignTypeComboBox.Enabled = true;
             }
+            this.tbCDACode.ReadOnly = true;
         }
 
         #endregion Methods
-
-        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            CDA cda = this.CDABindingSource.DataSource as CDA;
-            if ("其他".Equals(cda.CommissionType))
-            {
-                if (e.ControlToValidate.Text.Equals(string.Empty))
-                {
-                    e.IsValid = false;
-                }
-                else
-                {
-                    e.IsValid = true;
-                }
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
     }
 }

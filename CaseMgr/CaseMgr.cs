@@ -206,6 +206,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                 && (c.CaseAppDate < endDate.AddDays(1))
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
                                 && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == "已签回"))
+                                && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == "已生效"))
                                 && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN_1.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN_2.Contains(this.tbClientName.Text)
                                  || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN_1.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN_2.Contains(this.tbClientName.Text))
                                     );
@@ -277,6 +278,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbClientName.Text = string.Empty;
             this.diBegin.Value = default(DateTime);
             this.diEnd.Value = default(DateTime);
+            this.cbIsContractSigned.Checked = true;
+            this.cbIsCDA.Checked = true;
         }
     }
 }
