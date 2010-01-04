@@ -70,18 +70,18 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             this.InitializeComponent();
 
-            this.pUGProportionTextBox.DataBindings[0].Format += new ConvertEventHandler(FormatFloatToPercent);
-            this.pUGProportionTextBox.DataBindings[0].Parse += new ConvertEventHandler(ParsePercentToFloat);
+            this.pUGProportionTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
+            this.pUGProportionTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
 
-            this.financeProportionTextBox.DataBindings[0].Format += new ConvertEventHandler(FormatFloatToPercent);
-            this.financeProportionTextBox.DataBindings[0].Format += new ConvertEventHandler(ParsePercentToFloat);
+            this.financeProportionTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
+            this.financeProportionTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
 
-            this.priceTextBox.DataBindings[0].Format += new ConvertEventHandler(FormatFloatToPercent);
-            this.priceTextBox.DataBindings[0].Parse += new ConvertEventHandler(ParsePercentToFloat);
-            this.iFPriceTextBox.DataBindings[0].Format += new ConvertEventHandler(FormatFloatToPercent);
-            this.iFPriceTextBox.DataBindings[0].Parse += new ConvertEventHandler(ParsePercentToFloat);
-            this.eFPriceTextBox.DataBindings[0].Format += new ConvertEventHandler(FormatFloatToPercent);
-            this.eFPriceTextBox.DataBindings[0].Parse += new ConvertEventHandler(ParsePercentToFloat);
+            this.priceTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
+            this.priceTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+            this.iFPriceTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
+            this.iFPriceTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+            this.eFPriceTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
+            this.eFPriceTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
 
 
             this.creditCoverCurrComboBox.DataSource = Currency.AllCurrencies().ToList();
@@ -222,13 +222,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        private void FormatFloatToPercent(object sender, ConvertEventArgs e)
-        {
-            if (e.DesiredType == typeof(string) && e.Value != null)
-            {
-                e.Value = (double)e.Value * 100 + "%";
-            }
-        }
+
 
         private CDA GenerateDefaultCDA()
         {
@@ -246,13 +240,7 @@ namespace CMBC.EasyFactor.CaseMgr
             return cda;
         }
 
-        private void ParsePercentToFloat(object sender, ConvertEventArgs e)
-        {
-            if (e.DesiredType == typeof(System.Nullable<double>) && e.Value != null)
-            {
-                e.Value = Double.Parse(e.Value.ToString()) / 100;
-            }
-        }
+
 
         /// <summary>
         /// 

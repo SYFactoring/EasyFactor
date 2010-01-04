@@ -13,6 +13,8 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
+    using System.Collections;
+    using System.Globalization;
 
     /// <summary>
     /// 
@@ -39,6 +41,16 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchCurrencyComboBoxEx.ValueMember = "CurrencyCode";
 
             this.interestTypeComboBoxEx.Items.AddRange(new string[] { "预扣息", "后扣息" });
+
+            this.dgvInvoices.CellFormatting += new DataGridViewCellFormattingEventHandler(dgvInvoices_CellFormatting);
+            this.dgvInvoices.CellParsing += new DataGridViewCellParsingEventHandler(dgvInvoices_CellParsing);
+
+            this.financeRateTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
+            this.financeRateTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+
+            this.costRateTextBoxX.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
+            this.costRateTextBoxX.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+
         }
 
         #endregion Constructors
@@ -54,7 +66,6 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 this._CDA = value;
                 this.dgvInvoices.ReadOnly = false;
-                this.superValidator.Enabled = true;
                 this.invoiceFinanceBatchBindingSource.DataSource = new InvoiceFinanceBatch();
                 this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.FinanceAmount.HasValue == false).ToList();
             }
@@ -62,9 +73,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (5)
+        #region Methods (11)
 
-        // Public Methods (1) 
+        // Public Methods (2) 
 
         /// <summary>
         /// 
@@ -80,7 +91,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 date = DateTime.Now;
             }
-            string financeNo = String.Format("FIN{0:G}{1:G}{2:yyyyMMdd}-{3:d2}", seller.ClientEDICode.Substring(0, 5), buyer.ClientEDICode.Substring(3, 2), date, batchCount + 1);
+            string financeNo = String.Format("FIN{0:G}{1:yyyyMMdd}-{2:d2}", cda.CDACode, date, batchCount + 1);
             return financeNo;
         }
 
@@ -96,7 +107,21 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoiceFinanceBatchBindingSource.DataSource = typeof(InvoiceFinanceBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
-        // Private Methods (4) 
+        // Private Methods (9) 
+
+        private void CaculateCurrentFinanceAmount()
+        {
+            IList invoiceList = this.invoiceBindingSource.List;
+            double currentFinanceAmount = 0;
+            for (int i = 0; i < this.dgvInvoices.Rows.Count; i++)
+            {
+                if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+                {
+                    currentFinanceAmount += ((Invoice)invoiceList[i]).FinanceAmount.GetValueOrDefault();
+                }
+            }
+            this.tbCurrentFinanceAmount.Text = String.Format("{0:N2}", currentFinanceAmount);
+        }
 
         /// <summary>
         /// Show detail info of selected inovice
@@ -113,12 +138,80 @@ namespace CMBC.EasyFactor.ARMgr
             string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
             if (ino != null)
             {
-                Invoice selectedInvoice = ((InvoiceAssignBatch)this.invoiceFinanceBatchBindingSource.DataSource).Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
+                Invoice selectedInvoice = ((InvoiceFinanceBatch)this.invoiceFinanceBatchBindingSource.DataSource).Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
                 if (selectedInvoice != null)
                 {
                     InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
                     invoiceDetail.ShowDialog(this);
                 }
+            }
+        }
+
+        private void dgvInvoices_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            IList invoiceList = this.invoiceBindingSource.List;
+            Invoice invoice = (Invoice)invoiceList[e.RowIndex];
+            this.dgvInvoices.EndEdit();
+            if (this.dgvInvoices.Columns[e.ColumnIndex] == colCheckBox)
+            {
+
+                DataGridViewCheckBoxCell checkBoxCell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[e.RowIndex].Cells[0];
+
+                if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
+                {
+                    invoice.FinanceAmount = invoice.AssignAmount;
+                    invoice.FinanceDate = DateTime.Now;
+                }
+                else
+                {
+                    invoice.FinanceAmount = null;
+                    invoice.FinanceDate = null;
+                }
+                CaculateCurrentFinanceAmount();
+            }
+
+        }
+
+        void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value == null)
+                return;
+            DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
+            if (col == colDueDate || col == colFinanceDate || col == colFinanceDueDate)
+            {
+                DateTime date = (DateTime)e.Value;
+                e.Value = date.ToString("yyyyMMdd");
+                e.FormattingApplied = true;
+            }
+        }
+
+        void dgvInvoices_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
+        {
+            if (e.Value == null)
+            {
+                return;
+            }
+            DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
+            if (col == colDueDate || col == colFinanceDate || col == colFinanceDueDate)
+            {
+                string str = (string)e.Value;
+                DateTime result;
+                bool ok = DateTime.TryParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out result);
+                if (ok)
+                {
+                    e.Value = result;
+                    e.ParsingApplied = true;
+                }
+            }
+        }
+
+        private void dgvInvoices_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvInvoices.Columns[e.ColumnIndex] == colFinanceAmount)
+            {
+                CaculateCurrentFinanceAmount();
             }
         }
 
@@ -130,7 +223,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void ImportFinanceBatch(object sender, EventArgs e)
         {
             ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE);
-            importForm.Show();
+            importForm.ShowDialog(this);
         }
 
         private void SaveFinanceBatch(object sender, EventArgs e)
@@ -149,9 +242,14 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.invoiceFinanceBatchBindingSource.DataSource;
             financeBatch.CreateUserName = App.Current.CurUser.Name;
             financeBatch.CDA = this._CDA;
-            foreach (Invoice invoice in this.invoiceBindingSource.DataSource as List<Invoice>)
+
+            IList invoiceList = this.invoiceBindingSource.List;
+            for (int i = 0; i < this.dgvInvoices.Rows.Count; i++)
             {
-                invoice.InvoiceFinanceBatch = financeBatch;
+                if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+                {
+                    ((Invoice)invoiceList[i]).InvoiceFinanceBatch = financeBatch;
+                }
             }
             try
             {

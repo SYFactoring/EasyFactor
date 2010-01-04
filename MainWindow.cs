@@ -23,7 +23,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -35,9 +35,9 @@ namespace CMBC.EasyFactor
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Sets command status
@@ -61,11 +61,11 @@ namespace CMBC.EasyFactor
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (36) 
+        #region Methods (36)
 
-		// Private Methods (36) 
+        // Private Methods (36) 
 
         private void About(object sender, EventArgs e)
         {
@@ -277,12 +277,43 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void InvoicePayment(object sender, EventArgs e)
+        private void InvoiceBuyerPayment(object sender, EventArgs e)
         {
-            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoicePayment);
+            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceBuyerPayment);
             this.SetDetailPanel(invoicePayment);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InvoiceIndirectPayment(object sender, EventArgs e)
+        {
+            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceIndirectPayment);
+            this.SetDetailPanel(invoicePayment);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InvoiceSellerPayment(object sender, EventArgs e)
+        {
+            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceSellerPayment);
+            this.SetDetailPanel(invoicePayment);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InvoiceGuaranteePayment(object sender, EventArgs e)
+        {
+            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceGuaranteePayment);
+            this.SetDetailPanel(invoicePayment);
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -468,6 +499,6 @@ namespace CMBC.EasyFactor
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

@@ -81,6 +81,11 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
+            IMPORT_PAYMENT,
+
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_ASSIGN_FINANCE_PAYMENT
         }
 
@@ -311,7 +316,7 @@ namespace CMBC.EasyFactor.Utils
                     invoice.FlawResolveDate = (System.Nullable<DateTime>)valueArray[row, column++];
                     invoice.FlawResolveUserName = String.Format("{0:G}", valueArray[row, column++]);
                     invoice.ValueDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    
+
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
@@ -398,13 +403,13 @@ namespace CMBC.EasyFactor.Utils
                             if (assignBatch == null)
                             {
                                 assignBatch = new InvoiceAssignBatch();
-                                assignBatch.AssignBatchNo = InvoiceAssign.GenerateAssignBatchNo(cda, assignBatch.BatchDate);
                                 column = 3;
                                 assignBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, column++]);
                                 assignBatch.BatchDate = (System.Nullable<DateTime>)valueArray[row, column++];
                                 assignBatch.IsCreateMsg = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                                 assignBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                                 assignBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                                assignBatch.AssignBatchNo = InvoiceAssign.GenerateAssignBatchNo(cda, assignBatch.BatchDate);
                             }
                             assignBatch.CDA = cda;
                             assignBatches.Add(assignBatch);
@@ -426,7 +431,6 @@ namespace CMBC.EasyFactor.Utils
                             if (financeBatch == null)
                             {
                                 financeBatch = new InvoiceFinanceBatch();
-                                financeBatch.FinanceBatchNo = InvoiceFinance.GenerateFinanceBatchNo(cda, financeBatch.FinancePeriodBegin);
                                 column = 22;
                                 financeBatch.FinanceType = String.Format("{0:G}", valueArray[row, column++]);
                                 string factorCode = String.Format("{0:G}", valueArray[row, column++]);
@@ -440,6 +444,7 @@ namespace CMBC.EasyFactor.Utils
                                 financeBatch.FinnacePeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++];
                                 financeBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                                 financeBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                                financeBatch.FinanceBatchNo = InvoiceFinance.GenerateFinanceBatchNo(cda, financeBatch.FinancePeriodBegin);
                             }
                             financeBatch.CDA = cda;
                             financeBatches.Add(financeBatch);
@@ -472,13 +477,13 @@ namespace CMBC.EasyFactor.Utils
                             if (paymentBatch == null)
                             {
                                 paymentBatch = new InvoicePaymentBatch();
-                                paymentBatch.PaymentBatchNo = InvoicePayment.GeneratePaymentBatchNo(cda, paymentBatch.PaymentDate);
                                 column = 37;
                                 paymentBatch.PaymentType = String.Format("{0:G}", valueArray[row, column++]);
                                 paymentBatch.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
                                 paymentBatch.IsCreateMsg = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                                 paymentBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                                 paymentBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                                paymentBatch.PaymentBatchNo = InvoicePayment.GeneratePaymentBatchNo(cda, paymentBatch.PaymentDate);
                             }
                             paymentBatch.CDA = cda;
                             paymentBatches.Add(paymentBatch);
@@ -489,8 +494,8 @@ namespace CMBC.EasyFactor.Utils
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
+                App.Current.DbContext.SubmitChanges();
             }
-            App.Current.DbContext.SubmitChanges();
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
             ReleaseResource();

@@ -125,6 +125,7 @@ namespace CMBC.EasyFactor
             this.btnCaseImport = new DevComponents.DotNetBar.ButtonItem();
             this.btnCreditCoverImport = new DevComponents.DotNetBar.ButtonItem();
             this.btnContractAndCDAImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnInvoicesImport = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarHelp = new DevComponents.DotNetBar.RibbonBar();
             this.btnHelp = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanelInvoiceMgr = new DevComponents.DotNetBar.RibbonPanel();
@@ -210,7 +211,6 @@ namespace CMBC.EasyFactor
             this.lblCurrentUser = new DevComponents.DotNetBar.LabelItem();
             this.ribbonDetailPanel = new DevComponents.DotNetBar.Ribbon.RibbonClientPanel();
             this.logoLabel = new DevComponents.DotNetBar.Controls.ReflectionLabel();
-            this.btnInvoicesImport = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonControl.SuspendLayout();
             this.ribbonPanelHelp.SuspendLayout();
             this.ribbonPanelInvoiceMgr.SuspendLayout();
@@ -228,8 +228,8 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
-            this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
             this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
+            this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
             this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanelReport);
             this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
@@ -277,6 +277,7 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelHelp.StyleMouseOver.Class = "";
             this.ribbonPanelHelp.TabIndex = 6;
+            this.ribbonPanelHelp.Visible = false;
             // 
             // ribbonBarImport
             // 
@@ -356,6 +357,13 @@ namespace CMBC.EasyFactor
             this.btnContractAndCDAImport.Text = "导入主合同及额度通知书";
             this.btnContractAndCDAImport.Click += new System.EventHandler(this.ImportContractAndCDA);
             // 
+            // btnInvoicesImport
+            // 
+            this.btnInvoicesImport.Name = "btnInvoicesImport";
+            this.btnInvoicesImport.SubItemsExpandWidth = 14;
+            this.btnInvoicesImport.Text = "导入台帐";
+            this.btnInvoicesImport.Click += new System.EventHandler(this.ImportInvoices);
+            // 
             // ribbonBarHelp
             // 
             this.ribbonBarHelp.AutoOverflowEnabled = true;
@@ -418,7 +426,6 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelInvoiceMgr.StyleMouseOver.Class = "";
             this.ribbonPanelInvoiceMgr.TabIndex = 1;
-            this.ribbonPanelInvoiceMgr.Visible = false;
             // 
             // ribbonBarInvoiceCheck
             // 
@@ -587,28 +594,28 @@ namespace CMBC.EasyFactor
             this.btnBuyerPayment.Name = "btnBuyerPayment";
             this.btnBuyerPayment.SubItemsExpandWidth = 14;
             this.btnBuyerPayment.Text = "买方还款";
-            this.btnBuyerPayment.Click += new System.EventHandler(this.InvoicePayment);
+            this.btnBuyerPayment.Click += new System.EventHandler(this.InvoiceBuyerPayment);
             // 
             // btnIndirectPayment
             // 
             this.btnIndirectPayment.Name = "btnIndirectPayment";
             this.btnIndirectPayment.SubItemsExpandWidth = 14;
             this.btnIndirectPayment.Text = "间接还款";
-            this.btnIndirectPayment.Click += new System.EventHandler(this.InvoicePayment);
+            this.btnIndirectPayment.Click += new System.EventHandler(this.InvoiceIndirectPayment);
             // 
             // btnSellerPayment
             // 
             this.btnSellerPayment.Name = "btnSellerPayment";
             this.btnSellerPayment.SubItemsExpandWidth = 14;
             this.btnSellerPayment.Text = "卖方还款";
-            this.btnSellerPayment.Click += new System.EventHandler(this.InvoicePayment);
+            this.btnSellerPayment.Click += new System.EventHandler(this.InvoiceSellerPayment);
             // 
             // btnGuaranteePayment
             // 
             this.btnGuaranteePayment.Name = "btnGuaranteePayment";
             this.btnGuaranteePayment.SubItemsExpandWidth = 14;
             this.btnGuaranteePayment.Text = "担保付款";
-            this.btnGuaranteePayment.Click += new System.EventHandler(this.InvoicePayment);
+            this.btnGuaranteePayment.Click += new System.EventHandler(this.InvoiceGuaranteePayment);
             // 
             // btnReassignment
             // 
@@ -1116,6 +1123,7 @@ namespace CMBC.EasyFactor
             // 
             // itemAccountsReceivableMgr
             // 
+            this.itemAccountsReceivableMgr.Checked = true;
             this.itemAccountsReceivableMgr.Name = "itemAccountsReceivableMgr";
             this.itemAccountsReceivableMgr.Panel = this.ribbonPanelInvoiceMgr;
             this.itemAccountsReceivableMgr.Text = "应收账款管理";
@@ -1134,7 +1142,6 @@ namespace CMBC.EasyFactor
             // 
             // itemHelp
             // 
-            this.itemHelp.Checked = true;
             this.itemHelp.Name = "itemHelp";
             this.itemHelp.Panel = this.ribbonPanelHelp;
             this.itemHelp.Text = "帮助";
@@ -1384,13 +1391,6 @@ namespace CMBC.EasyFactor
             this.logoLabel.Size = new System.Drawing.Size(768, 289);
             this.logoLabel.TabIndex = 0;
             this.logoLabel.Text = "<b><font size=\"+60\"><i>Easy</i><font color=\"#B02B2C\">Factoring</font></font></b>";
-            // 
-            // btnInvoicesImport
-            // 
-            this.btnInvoicesImport.Name = "btnInvoicesImport";
-            this.btnInvoicesImport.SubItemsExpandWidth = 14;
-            this.btnInvoicesImport.Text = "导入台帐";
-            this.btnInvoicesImport.Click += new System.EventHandler(this.ImportInvoices);
             // 
             // MainWindow
             // 

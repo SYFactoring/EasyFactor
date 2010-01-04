@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace CMBC.EasyFactor.Utils
 {
@@ -10,6 +11,22 @@ namespace CMBC.EasyFactor.Utils
         #region Methods (2)
 
         // Public Methods (2) 
+
+        public static void FormatFloatToPercent(object sender, ConvertEventArgs e)
+        {
+            if (e.DesiredType == typeof(string) && e.Value != null)
+            {
+                e.Value = (double)e.Value * 100 + "%";
+            }
+        }
+
+        public static void ParsePercentToFloat(object sender, ConvertEventArgs e)
+        {
+            if (e.DesiredType == typeof(System.Nullable<double>) && e.Value != null)
+            {
+                e.Value = Double.Parse(e.Value.ToString()) / 100;
+            }
+        }
 
         public static string ConvertBoolToStr(System.Nullable<bool> obj)
         {

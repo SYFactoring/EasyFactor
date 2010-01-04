@@ -104,14 +104,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         public static string GenerateAssignBatchNo(CDA cda, System.Nullable<DateTime> date)
         {
-            Client seller = cda.Case.SellerClient;
-            Client buyer = cda.Case.BuyerClient;
             int batchCount = cda.InvoiceAssignBatches.Count;
             if (date == null)
             {
                 date = DateTime.Now;
             }
-            string assignNo = String.Format("ASS{0:G}{1:G}{2:yyyyMMdd}-{3:d2}", seller.ClientEDICode.Substring(0, 5), buyer.ClientEDICode.Substring(3, 2), date, batchCount + 1);
+            string assignNo = String.Format("ASS{0:G}{1:yyyyMMdd}-{2:d2}", cda.CDACode, date, batchCount + 1);
             return assignNo;
         }
 

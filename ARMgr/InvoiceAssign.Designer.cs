@@ -81,6 +81,8 @@ namespace CMBC.EasyFactor.ARMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelAssignBatch = new DevComponents.DotNetBar.PanelEx();
+            this.btnAssignBatchImport = new DevComponents.DotNetBar.ButtonX();
+            this.btnAssignBatchExport = new DevComponents.DotNetBar.ButtonX();
             this.btnAssignBatchSelect = new DevComponents.DotNetBar.ButtonX();
             this.btnAssignBatchNew = new DevComponents.DotNetBar.ButtonX();
             this.btnAssignBatchSave = new DevComponents.DotNetBar.ButtonX();
@@ -94,6 +96,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemFlaw = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemAssignBatchExport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAssignBatchImport = new System.Windows.Forms.ToolStripMenuItem();
             this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.invoiceBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
@@ -109,12 +112,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.btnAssignBatchExport = new DevComponents.DotNetBar.ButtonX();
-            this.btnAssignBatchImport = new DevComponents.DotNetBar.ButtonX();
-            this.menuItemAssignBatchExport = new System.Windows.Forms.ToolStripMenuItem();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -123,6 +120,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colValueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             batchDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
@@ -157,7 +157,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             batchDateLabel.BackgroundStyle.Class = "";
-            batchDateLabel.Location = new System.Drawing.Point(204, 10);
+            batchDateLabel.Location = new System.Drawing.Point(225, 8);
             batchDateLabel.Name = "batchDateLabel";
             batchDateLabel.Size = new System.Drawing.Size(47, 16);
             batchDateLabel.TabIndex = 2;
@@ -205,6 +205,30 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelAssignBatch.Style.GradientAngle = 90;
             this.panelAssignBatch.TabIndex = 5;
             // 
+            // btnAssignBatchImport
+            // 
+            this.btnAssignBatchImport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAssignBatchImport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAssignBatchImport.Location = new System.Drawing.Point(602, 35);
+            this.btnAssignBatchImport.Name = "btnAssignBatchImport";
+            this.btnAssignBatchImport.Size = new System.Drawing.Size(75, 23);
+            this.btnAssignBatchImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAssignBatchImport.TabIndex = 12;
+            this.btnAssignBatchImport.Text = "导入批次";
+            this.btnAssignBatchImport.Click += new System.EventHandler(this.ImportAssignBatch);
+            // 
+            // btnAssignBatchExport
+            // 
+            this.btnAssignBatchExport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAssignBatchExport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAssignBatchExport.Location = new System.Drawing.Point(521, 35);
+            this.btnAssignBatchExport.Name = "btnAssignBatchExport";
+            this.btnAssignBatchExport.Size = new System.Drawing.Size(75, 23);
+            this.btnAssignBatchExport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAssignBatchExport.TabIndex = 11;
+            this.btnAssignBatchExport.Text = "导出批次";
+            this.btnAssignBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
+            // 
             // btnAssignBatchSelect
             // 
             this.btnAssignBatchSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -248,7 +272,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.commentTextBox.Border.Class = "TextBoxBorder";
             this.commentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceAssignBatchBindingSource, "Comment", true));
-            this.commentTextBox.Location = new System.Drawing.Point(98, 33);
+            this.commentTextBox.Location = new System.Drawing.Point(89, 33);
             this.commentTextBox.Multiline = true;
             this.commentTextBox.Name = "commentTextBox";
             this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -314,10 +338,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.assignBatchNoTextBox.Border.Class = "TextBoxBorder";
             this.assignBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceAssignBatchBindingSource, "AssignBatchNo", true));
-            this.assignBatchNoTextBox.Location = new System.Drawing.Point(98, 7);
+            this.assignBatchNoTextBox.Location = new System.Drawing.Point(89, 7);
             this.assignBatchNoTextBox.Name = "assignBatchNoTextBox";
             this.assignBatchNoTextBox.ReadOnly = true;
-            this.assignBatchNoTextBox.Size = new System.Drawing.Size(100, 20);
+            this.assignBatchNoTextBox.Size = new System.Drawing.Size(130, 20);
             this.assignBatchNoTextBox.TabIndex = 1;
             // 
             // cmuInvoiceAssign
@@ -355,6 +379,13 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
+            // 
+            // menuItemAssignBatchExport
+            // 
+            this.menuItemAssignBatchExport.Name = "menuItemAssignBatchExport";
+            this.menuItemAssignBatchExport.Size = new System.Drawing.Size(122, 22);
+            this.menuItemAssignBatchExport.Text = "导出批次";
+            this.menuItemAssignBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
             // 
             // menuItemAssignBatchImport
             // 
@@ -514,52 +545,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.TabIndex = 7;
             this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
             // 
-            // superValidator
-            // 
-            this.superValidator.ContainerControl = this;
-            this.superValidator.ErrorProvider = this.errorProvider;
-            this.superValidator.Highlighter = this.highlighter;
-            // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
-            // 
-            // highlighter
-            // 
-            this.highlighter.ContainerControl = this;
-            // 
-            // btnAssignBatchExport
-            // 
-            this.btnAssignBatchExport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnAssignBatchExport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAssignBatchExport.Location = new System.Drawing.Point(521, 35);
-            this.btnAssignBatchExport.Name = "btnAssignBatchExport";
-            this.btnAssignBatchExport.Size = new System.Drawing.Size(75, 23);
-            this.btnAssignBatchExport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAssignBatchExport.TabIndex = 11;
-            this.btnAssignBatchExport.Text = "导出批次";
-            this.btnAssignBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
-            // 
-            // btnAssignBatchImport
-            // 
-            this.btnAssignBatchImport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnAssignBatchImport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAssignBatchImport.Location = new System.Drawing.Point(602, 35);
-            this.btnAssignBatchImport.Name = "btnAssignBatchImport";
-            this.btnAssignBatchImport.Size = new System.Drawing.Size(75, 23);
-            this.btnAssignBatchImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAssignBatchImport.TabIndex = 12;
-            this.btnAssignBatchImport.Text = "导入批次";
-            this.btnAssignBatchImport.Click += new System.EventHandler(this.ImportAssignBatch);
-            // 
-            // menuItemAssignBatchExport
-            // 
-            this.menuItemAssignBatchExport.Name = "menuItemAssignBatchExport";
-            this.menuItemAssignBatchExport.Size = new System.Drawing.Size(122, 22);
-            this.menuItemAssignBatchExport.Text = "导出批次";
-            this.menuItemAssignBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
-            // 
             // colInvoiceNo
             // 
             this.colInvoiceNo.DataPropertyName = "InvoiceNo";
@@ -625,6 +610,21 @@ namespace CMBC.EasyFactor.ARMgr
             this.colComment.DataPropertyName = "Comment";
             this.colComment.HeaderText = "备注";
             this.colComment.Name = "colComment";
+            // 
+            // superValidator
+            // 
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
             // 
             // InvoiceAssign
             // 

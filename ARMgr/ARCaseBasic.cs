@@ -10,7 +10,6 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.CaseMgr;
-    using CMBC.EasyFactor.InfoMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
 
@@ -48,7 +47,22 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            InvoicePayment
+            InvoiceBuyerPayment,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            InvoiceIndirectPayment,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            InvoiceSellerPayment,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            InvoiceGuaranteePayment
         }
 
         #endregion Enums
@@ -62,31 +76,40 @@ namespace CMBC.EasyFactor.ARMgr
         public ARCaseBasic(OpARType opARType)
         {
             InitializeComponent();
-            if (opARType == OpARType.InvoiceAssign)
+            UserControl uc;
+            switch (opARType)
             {
-                UserControl invoiceAssign = new InvoiceAssign();
-                invoiceAssign.Dock = DockStyle.Fill;
-                this.panelInvoiceMgr.Controls.Add(invoiceAssign);
+                case OpARType.InvoiceAssign:
+                    uc = new InvoiceAssign();
+                    break;
+                case OpARType.InvoiceFinance:
+                    uc = new InvoiceFinance();
+                    break;
+                case OpARType.InvoiceBuyerPayment:
+                    uc = new InvoicePayment(InvoicePayment.PaymentType.BUYER_PAYMENT);
+                    break;
+                case OpARType.InvoiceIndirectPayment:
+                    uc = new InvoicePayment(InvoicePayment.PaymentType.INDIRECT_PAYMENT);
+                    break;
+                case OpARType.InvoiceSellerPayment:
+                    uc = new InvoicePayment(InvoicePayment.PaymentType.SELLER_PAYMENT);
+                    break;
+                case OpARType.InvoiceGuaranteePayment:
+                    uc = new InvoicePayment(InvoicePayment.PaymentType.GUARANTEE_PAYMENT);
+                    break;
+                default:
+                    uc = new UserControl();
+                    break;
             }
-            else if (opARType == OpARType.InvoiceFinance)
-            {
-                UserControl invoiceFinance = new InvoiceFinance();
-                invoiceFinance.Dock = DockStyle.Fill;
-                this.panelInvoiceMgr.Controls.Add(invoiceFinance);
-            }
-            else if (opARType == OpARType.InvoicePayment)
-            {
-                UserControl invoicePayment = new InvoicePayment();
-                invoicePayment.Dock = DockStyle.Fill;
-                this.panelInvoiceMgr.Controls.Add(invoicePayment);
-            }
+            uc.Dock = DockStyle.Fill;
+            this.panelInvoiceMgr.Controls.Add(uc);
         }
 
         #endregion Constructors
 
-        #region Methods (3)
+        #region Methods (2)
 
-        // Private Methods (3) 
+        // Private Methods (2) 
 
         /// <summary>
         /// 

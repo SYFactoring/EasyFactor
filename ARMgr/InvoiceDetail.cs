@@ -9,13 +9,18 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using System;
     using System.Windows.Forms;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceDetail : DevComponents.DotNetBar.Office2007Form
     {
+        #region Fields (1)
+
         private OpInvoiceType opInvoiceType;
+
+        #endregion Fields
 
         #region Enums (1)
 
@@ -54,15 +59,16 @@ namespace CMBC.EasyFactor.ARMgr
             InitializeComponent();
             this.opInvoiceType = opInvoiceType;
             this.invoiceBindingSource.DataSource = invoice;
-            
+
             invoice.Backup();
             UpdateInvoiceControlStatus();
         }
 
-        private void UpdateInvoiceControlStatus()
-        {
-            throw new NotImplementedException();
-        }
+        #endregion Constructors
+
+        #region Methods (5)
+
+        // Private Methods (5) 
 
         /// <summary>
         /// 
@@ -121,6 +127,68 @@ namespace CMBC.EasyFactor.ARMgr
             this.UpdateInvoiceControlStatus();
         }
 
-        #endregion Constructors
+        private void UpdateInvoiceControlStatus()
+        {
+            if (opInvoiceType == OpInvoiceType.DETAIL_INVOICE)
+            {
+                foreach (Control comp in this.groupPanelInvoiceBasic.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelFlaw.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelFlawResolve.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+            }
+            else if (opInvoiceType == OpInvoiceType.UPDATE_INVOICE)
+            {
+                foreach (Control comp in this.groupPanelInvoiceBasic.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelFlaw.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelFlawResolve.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+            }
+            else if (opInvoiceType == OpInvoiceType.FLAW)
+            {
+                foreach (Control comp in this.groupPanelInvoiceBasic.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelFlaw.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelFlawResolve.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+            }
+            this.invoiceNoTextBox.ReadOnly = true;
+        }
+
+        #endregion Methods
     }
 }
