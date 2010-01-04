@@ -153,7 +153,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                         catch (SqlException e1)
                         {
-                            App.Current.DbContext.Transaction.Rollback();
                             MessageBox.Show("删除失败," + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }

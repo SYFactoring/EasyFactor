@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CMBC.EasyFactor.DB.dbml
 {
-    public partial class Invoice
+    public partial class Invoice : BaseObject
     {
         public string SellerName
         {

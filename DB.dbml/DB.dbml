@@ -185,15 +185,14 @@
       <Column Name="FinanceAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="FinanceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="FinanceDueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="PaymentType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="PaymentBatchNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="PaymentAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="PaymentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="RefundAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="RefundDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Commission" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Commission" Type="System.Double" DbType="float" CanBeNull="true" />
       <Column Name="CommissionDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Interest" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Interest" Type="System.Double" DbType="float" CanBeNull="true" />
       <Column Name="InterestDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="IsDispute" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="DisputeType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
@@ -426,6 +425,7 @@
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="IsCreateMsg" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="PaymentType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="InvoicePaymentBatch_Invoice" Member="Invoices" OtherKey="PaymentBatchNo" Type="Invoice" />
       <Association Name="CDA_InvoicePaymentBatch" Member="CDA" ThisKey="CDACode" Type="CDA" IsForeignKey="true" />
     </Type>

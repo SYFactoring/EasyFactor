@@ -115,7 +115,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colValueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsFlaw = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             batchDateLabel = new DevComponents.DotNetBar.LabelX();
@@ -484,7 +483,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colAssignDate,
             this.colDueDate,
             this.colValueDate,
-            this.colIsFlaw,
             this.colComment});
             this.dgvInvoices.ContextMenuStrip = this.cmuInvoiceAssign;
             this.dgvInvoices.DataSource = this.invoiceBindingSource;
@@ -504,7 +502,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInvoices.Size = new System.Drawing.Size(695, 497);
             this.dgvInvoices.TabIndex = 7;
-            this.dgvInvoices.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvInvoices_RowsAdded);
             this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
             // 
             // superValidator
@@ -574,14 +571,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colValueDate.Name = "colValueDate";
             this.colValueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // colIsFlaw
-            // 
-            this.colIsFlaw.DataPropertyName = "IsFlaw";
-            this.colIsFlaw.HeaderText = "是否瑕疵";
-            this.colIsFlaw.Name = "colIsFlaw";
-            this.colIsFlaw.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colIsFlaw.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
             // colComment
             // 
             this.colComment.DataPropertyName = "Comment";
@@ -627,7 +616,6 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValueDate;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsFlaw;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
     }
 }

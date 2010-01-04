@@ -7,6 +7,7 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Collections;
 
     /// <summary>
     /// 
@@ -61,6 +62,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.opInvoiceType = opInvoiceType;
             ControlUtil.SetDoubleBuffered(this.dgvInvoices);
 
+            this.dgvInvoices.CellFormatting += new DataGridViewCellFormattingEventHandler(dgvInvoices_CellFormatting);
+
             if (opInvoiceType == OpInvoiceType.FLAW_RESOLVE)
             {
                 this.cbIsFlaw.CheckValue = "Y";
@@ -72,46 +75,104 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregion Constructors
-
-        #region Methods (3)
-
-        // Private Methods (3) 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dgvInvoices_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (opInvoiceType == OpInvoiceType.FLAW_RESOLVE)
+            DataGridViewColumn column = this.dgvInvoices.Columns[e.ColumnIndex];
+            if (column == colIsFlaw)
             {
-                if (e.ColumnIndex == 9)
+                Object originalData = e.Value;
+                if (originalData != null)
                 {
-                    DataGridViewCheckBoxCell cell = this.dgvInvoices.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewCheckBoxCell;
-                    bool isFlaw = Convert.ToBoolean(cell.EditedFormattedValue);
-
-                    List<Invoice> invoiceList = this.bs.DataSource as List<Invoice>;
-                    Invoice invoice = invoiceList[e.RowIndex];
-                    if (isFlaw)
+                    bool result = (bool)originalData;
+                    if (result)
                     {
-                        invoice.IsFlaw = true;
+                        e.Value = "Y";
                     }
                     else
                     {
-                        invoice.IsFlaw = false;
-                        invoice.FlawResolveDate = DateTime.Now;
-                        invoice.FlawResolveUserName = App.Current.CurUser.Name;
+                        e.Value = "N";
                     }
-                    try
+                }
+            }
+        }
+
+        #endregion Constructors
+
+        #region Methods (4)
+
+        // Private Methods (4) 
+
+        private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DetailInvoice(sender, e);
+        }
+
+        private void DetailInvoice(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
+            if (ino != null)
+            {
+                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
+                if (selectedInvoice != null)
+                {
+                    InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
+                    invoiceDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        private void DeleteInvoice(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
+            if (ino != null)
+            {
+                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
+                if (selectedInvoice != null)
+                {
+                    if (MessageBox.Show("是否打算删除发票: " + selectedInvoice.InvoiceNo, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
-                        App.Current.DbContext.SubmitChanges();
+                        App.Current.DbContext.Invoices.DeleteOnSubmit(selectedInvoice);
+                        try
+                        {
+                            App.Current.DbContext.SubmitChanges();
+                        }
+                        catch (Exception e1)
+                        {
+                            MessageBox.Show("删除失败," + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        dgvInvoices.Rows.RemoveAt(dgvInvoices.SelectedRows[0].Index);
                     }
-                    catch (Exception e1)
-                    {
-                        MessageBox.Show(e1.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+
+                }
+            }
+        }
+
+        private void InvoiceFlaw(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
+            if (ino != null)
+            {
+                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
+                if (selectedInvoice != null)
+                {
+                    InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.FLAW);
+                    invoiceDetail.ShowDialog(this);
                 }
             }
         }
@@ -170,22 +231,12 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Methods
 
-        private void DetailInvoice(object sender, DataGridViewCellEventArgs e)
+        private void ExportAssignFinancePayment(object sender, EventArgs e)
         {
-            if (this.dgvInvoices.SelectedRows.Count == 0)
+            if (this.bs.DataSource is List<Invoice>)
             {
-                return;
-            }
-
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
-            if (ino != null)
-            {
-                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
-                if (selectedInvoice != null)
-                {
-                    InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
-                    invoiceDetail.ShowDialog(this);
-                }
+                ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_ASSIGN_FINANCE_PAYMENT);
+                exportUtil.StartExport(((List<Invoice>)this.bs.DataSource).ToArray());
             }
         }
     }

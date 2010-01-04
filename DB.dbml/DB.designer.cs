@@ -3583,8 +3583,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _FinanceDueDate;
 		
-		private string _PaymentType;
-		
 		private string _PaymentBatchNo;
 		
 		private System.Nullable<double> _PaymentAmount;
@@ -3595,11 +3593,11 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _RefundDate;
 		
-		private string _Commission;
+		private System.Nullable<double> _Commission;
 		
 		private System.Nullable<System.DateTime> _CommissionDate;
 		
-		private string _Interest;
+		private System.Nullable<double> _Interest;
 		
 		private System.Nullable<System.DateTime> _InterestDate;
 		
@@ -3687,8 +3685,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFinanceDateChanged();
     partial void OnFinanceDueDateChanging(System.Nullable<System.DateTime> value);
     partial void OnFinanceDueDateChanged();
-    partial void OnPaymentTypeChanging(string value);
-    partial void OnPaymentTypeChanged();
     partial void OnPaymentBatchNoChanging(string value);
     partial void OnPaymentBatchNoChanged();
     partial void OnPaymentAmountChanging(System.Nullable<double> value);
@@ -3699,11 +3695,11 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnRefundAmountChanged();
     partial void OnRefundDateChanging(System.Nullable<System.DateTime> value);
     partial void OnRefundDateChanged();
-    partial void OnCommissionChanging(string value);
+    partial void OnCommissionChanging(System.Nullable<double> value);
     partial void OnCommissionChanged();
     partial void OnCommissionDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCommissionDateChanged();
-    partial void OnInterestChanging(string value);
+    partial void OnInterestChanging(System.Nullable<double> value);
     partial void OnInterestChanged();
     partial void OnInterestDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInterestDateChanged();
@@ -4285,26 +4281,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PaymentType", DbType="NVarChar(50)")]
-		public string PaymentType
-		{
-			get
-			{
-				return this._PaymentType;
-			}
-			set
-			{
-				if ((this._PaymentType != value))
-				{
-					this.OnPaymentTypeChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentType = value;
-					this.SendPropertyChanged("PaymentType");
-					this.OnPaymentTypeChanged();
-				}
-			}
-		}
-		
 		[Column(Storage="_PaymentBatchNo", DbType="NVarChar(50)")]
 		public string PaymentBatchNo
 		{
@@ -4409,8 +4385,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Commission", DbType="NVarChar(50)")]
-		public string Commission
+		[Column(Storage="_Commission", DbType="float")]
+		public System.Nullable<double> Commission
 		{
 			get
 			{
@@ -4449,8 +4425,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Interest", DbType="NVarChar(50)")]
-		public string Interest
+		[Column(Storage="_Interest", DbType="float")]
+		public System.Nullable<double> Interest
 		{
 			get
 			{
@@ -9663,6 +9639,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
+		private string _PaymentType;
+		
 		private EntitySet<Invoice> _Invoices;
 		
 		private EntityRef<CDA> _CDA;
@@ -9683,6 +9661,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnIsCreateMsgChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnPaymentTypeChanging(string value);
+    partial void OnPaymentTypeChanged();
     #endregion
 		
 		public InvoicePaymentBatch()
@@ -9812,6 +9792,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Comment = value;
 					this.SendPropertyChanged("Comment");
 					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PaymentType", DbType="NVarChar(50)")]
+		public string PaymentType
+		{
+			get
+			{
+				return this._PaymentType;
+			}
+			set
+			{
+				if ((this._PaymentType != value))
+				{
+					this.OnPaymentTypeChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentType = value;
+					this.SendPropertyChanged("PaymentType");
+					this.OnPaymentTypeChanged();
 				}
 			}
 		}

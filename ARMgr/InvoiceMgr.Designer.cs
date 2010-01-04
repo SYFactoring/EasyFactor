@@ -28,16 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbIsFlaw = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.tbInvoiceNo = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -61,18 +58,17 @@
             this.colInvoiceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsFlaw = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsFlaw = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuInvoiceMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemInvoiceFlaw = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemInvoiceDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemExportAssignFinancePayment = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
+            this.cmuInvoiceMgr.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelQuery
@@ -281,6 +277,7 @@
             this.colAssignDate,
             this.colDueDate,
             this.colIsFlaw});
+            this.dgvInvoices.ContextMenuStrip = this.cmuInvoiceMgr;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -296,8 +293,7 @@
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInvoices.Size = new System.Drawing.Size(513, 301);
             this.dgvInvoices.TabIndex = 3;
-            this.dgvInvoices.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailInvoice);
-            this.dgvInvoices.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellContentClick);
+            this.dgvInvoices.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
             // colSellerName
             // 
@@ -374,96 +370,60 @@
             // colIsFlaw
             // 
             this.colIsFlaw.DataPropertyName = "IsFlaw";
-            this.colIsFlaw.FalseValue = "false";
             this.colIsFlaw.HeaderText = "是否瑕疵";
             this.colIsFlaw.Name = "colIsFlaw";
             this.colIsFlaw.ReadOnly = true;
             this.colIsFlaw.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colIsFlaw.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colIsFlaw.TrueValue = "true";
             // 
-            // dataGridViewTextBoxColumn1
+            // cmuInvoiceMgr
             // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "SellerName";
-            this.dataGridViewTextBoxColumn1.Frozen = true;
-            this.dataGridViewTextBoxColumn1.HeaderText = "卖方名称";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 47;
+            this.cmuInvoiceMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemInvoiceDetail,
+            this.toolStripSeparator,
+            this.menuItemInvoiceFlaw,
+            this.menuItemInvoiceDelete,
+            this.toolStripSeparator1,
+            this.menuItemExportAssignFinancePayment});
+            this.cmuInvoiceMgr.Name = "cmuContractMgr";
+            this.cmuInvoiceMgr.Size = new System.Drawing.Size(153, 126);
             // 
-            // dataGridViewTextBoxColumn2
+            // menuItemInvoiceDetail
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "BuyerName";
-            this.dataGridViewTextBoxColumn2.HeaderText = "买方名称";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 47;
+            this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
+            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(152, 22);
+            this.menuItemInvoiceDetail.Text = "详细信息";
+            this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
             // 
-            // dataGridViewTextBoxColumn3
+            // toolStripSeparator
             // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "FactorName";
-            this.dataGridViewTextBoxColumn3.HeaderText = "保理商";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 47;
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
-            // dataGridViewTextBoxColumn4
+            // menuItemInvoiceFlaw
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "InvoiceNo";
-            this.dataGridViewTextBoxColumn4.HeaderText = "发票号";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 47;
+            this.menuItemInvoiceFlaw.Name = "menuItemInvoiceFlaw";
+            this.menuItemInvoiceFlaw.Size = new System.Drawing.Size(152, 22);
+            this.menuItemInvoiceFlaw.Text = "瑕疵处理";
+            this.menuItemInvoiceFlaw.Click += new System.EventHandler(this.InvoiceFlaw);
             // 
-            // dataGridViewTextBoxColumn5
+            // menuItemInvoiceDelete
             // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "InvoiceCurrency";
-            this.dataGridViewTextBoxColumn5.HeaderText = "发票币别";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 47;
+            this.menuItemInvoiceDelete.Name = "menuItemInvoiceDelete";
+            this.menuItemInvoiceDelete.Size = new System.Drawing.Size(152, 22);
+            this.menuItemInvoiceDelete.Text = "删除发票";
+            this.menuItemInvoiceDelete.Click += new System.EventHandler(this.DeleteInvoice);
             // 
-            // dataGridViewTextBoxColumn6
+            // toolStripSeparator1
             // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle7.Format = "N2";
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle7;
-            this.dataGridViewTextBoxColumn6.HeaderText = "转让金额";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.Width = 47;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
-            // dataGridViewTextBoxColumn7
+            // menuItemExportAssignFinancePayment
             // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "InvoiceDate";
-            dataGridViewCellStyle8.Format = "d";
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridViewTextBoxColumn7.HeaderText = "发票日";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.Width = 47;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "AssignDate";
-            dataGridViewCellStyle9.Format = "d";
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle9;
-            this.dataGridViewTextBoxColumn8.HeaderText = "转让日";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.Width = 47;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "DueDate";
-            dataGridViewCellStyle10.Format = "d";
-            dataGridViewCellStyle10.NullValue = null;
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle10;
-            this.dataGridViewTextBoxColumn9.HeaderText = "到期日";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.Width = 47;
+            this.menuItemExportAssignFinancePayment.Name = "menuItemExportAssignFinancePayment";
+            this.menuItemExportAssignFinancePayment.Size = new System.Drawing.Size(152, 22);
+            this.menuItemExportAssignFinancePayment.Text = "导出台帐";
+            this.menuItemExportAssignFinancePayment.Click += new System.EventHandler(this.ExportAssignFinancePayment);
             // 
             // InvoiceMgr
             // 
@@ -476,6 +436,7 @@
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).EndInit();
+            this.cmuInvoiceMgr.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -495,15 +456,6 @@
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoices;
         private DevComponents.DotNetBar.Controls.TextBoxX tbInvoiceNo;
         private DevComponents.DotNetBar.LabelX lblInvoiceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsFlaw;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
@@ -514,6 +466,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsFlaw;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsFlaw;
+        private System.Windows.Forms.ContextMenuStrip cmuInvoiceMgr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceFlaw;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDelete;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemExportAssignFinancePayment;
     }
 }

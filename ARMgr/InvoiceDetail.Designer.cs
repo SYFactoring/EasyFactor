@@ -96,10 +96,22 @@
             DevComponents.DotNetBar.LabelX flawResolveReasonLabel;
             DevComponents.DotNetBar.LabelX flawResolveDateLabel;
             DevComponents.DotNetBar.LabelX flawResolveUserNameLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
-            this.tabPanelInvoice = new DevComponents.DotNetBar.TabControlPanel();
-            this.invoiceReferenceNumberTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tabPanelFlaw = new DevComponents.DotNetBar.TabControlPanel();
+            this.flawResolveUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.flawResolveDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.flawResolveReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbFlawReason = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.flawReasonCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.isFlawCheckBox2 = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.tabItemFlaw = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabPanelInvoice = new DevComponents.DotNetBar.TabControlPanel();
+            this.btnInvoiceReset = new DevComponents.DotNetBar.ButtonX();
+            this.btnInvoiceSave = new DevComponents.DotNetBar.ButtonX();
+            this.btnInvoiceUpdate = new DevComponents.DotNetBar.ButtonX();
+            this.invoiceReferenceNumberTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.orderNumberReferenceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.paymentConditionsComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.secondaryDiscountRateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -116,18 +128,13 @@
             this.invoiceDateTextBox = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.invoiceNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabItemInvoice = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelFlaw = new DevComponents.DotNetBar.TabControlPanel();
-            this.flawResolveUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.flawResolveDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.flawResolveReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbFlawReason = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.flawReasonCheckedListBox = new System.Windows.Forms.CheckedListBox();
-            this.isFlawCheckBox2 = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.tabItemFlaw = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelFinance = new DevComponents.DotNetBar.TabControlPanel();
             this.tabItemFinance = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelPayment = new DevComponents.DotNetBar.TabControlPanel();
             this.tabItemPayment = new DevComponents.DotNetBar.TabItem(this.components);
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             lblInvoiceBasicInfo = new DevComponents.DotNetBar.LabelX();
             invoiceNoLabel = new DevComponents.DotNetBar.LabelX();
             invoiceDateLabel = new DevComponents.DotNetBar.LabelX();
@@ -153,12 +160,13 @@
             flawResolveUserNameLabel = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
-            this.tabPanelInvoice.SuspendLayout();
+            this.tabPanelFlaw.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flawResolveDateDateTimePicker)).BeginInit();
+            this.tabPanelInvoice.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.valueDateTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceDateTextBox)).BeginInit();
-            this.tabPanelFlaw.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.flawResolveDateDateTimePicker)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // lblInvoiceBasicInfo
@@ -415,7 +423,7 @@
             // 
             // 
             flawReasonLabel.BackgroundStyle.Class = "";
-            flawReasonLabel.Location = new System.Drawing.Point(99, 29);
+            flawReasonLabel.Location = new System.Drawing.Point(112, 30);
             flawReasonLabel.Name = "flawReasonLabel";
             flawReasonLabel.Size = new System.Drawing.Size(59, 16);
             flawReasonLabel.TabIndex = 17;
@@ -520,9 +528,157 @@
             this.tabControl.Tabs.Add(this.tabItemFinance);
             this.tabControl.Tabs.Add(this.tabItemPayment);
             // 
+            // tabPanelFlaw
+            // 
+            this.tabPanelFlaw.AutoScroll = true;
+            this.tabPanelFlaw.Controls.Add(flawResolveUserNameLabel);
+            this.tabPanelFlaw.Controls.Add(this.flawResolveUserNameTextBox);
+            this.tabPanelFlaw.Controls.Add(flawResolveDateLabel);
+            this.tabPanelFlaw.Controls.Add(this.flawResolveDateDateTimePicker);
+            this.tabPanelFlaw.Controls.Add(flawResolveReasonLabel);
+            this.tabPanelFlaw.Controls.Add(this.flawResolveReasonTextBox);
+            this.tabPanelFlaw.Controls.Add(labelX2);
+            this.tabPanelFlaw.Controls.Add(labelX1);
+            this.tabPanelFlaw.Controls.Add(this.tbFlawReason);
+            this.tabPanelFlaw.Controls.Add(flawReasonLabel);
+            this.tabPanelFlaw.Controls.Add(this.flawReasonCheckedListBox);
+            this.tabPanelFlaw.Controls.Add(this.isFlawCheckBox2);
+            this.tabPanelFlaw.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelFlaw.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelFlaw.Name = "tabPanelFlaw";
+            this.tabPanelFlaw.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelFlaw.Size = new System.Drawing.Size(572, 368);
+            this.tabPanelFlaw.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelFlaw.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelFlaw.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelFlaw.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelFlaw.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelFlaw.Style.GradientAngle = 90;
+            this.tabPanelFlaw.TabIndex = 4;
+            this.tabPanelFlaw.TabItem = this.tabItemFlaw;
+            // 
+            // flawResolveUserNameTextBox
+            // 
+            // 
+            // 
+            // 
+            this.flawResolveUserNameTextBox.Border.Class = "TextBoxBorder";
+            this.flawResolveUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "FlawResolveUserName", true));
+            this.flawResolveUserNameTextBox.Location = new System.Drawing.Point(428, 186);
+            this.flawResolveUserNameTextBox.Name = "flawResolveUserNameTextBox";
+            this.flawResolveUserNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.flawResolveUserNameTextBox.TabIndex = 24;
+            // 
+            // invoiceBindingSource
+            // 
+            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
+            // 
+            // flawResolveDateDateTimePicker
+            // 
+            // 
+            // 
+            // 
+            this.flawResolveDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.flawResolveDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.flawResolveDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "FlawResolveDate", true));
+            this.flawResolveDateDateTimePicker.Location = new System.Drawing.Point(428, 160);
+            // 
+            // 
+            // 
+            this.flawResolveDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.flawResolveDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.flawResolveDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.flawResolveDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.flawResolveDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.flawResolveDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.flawResolveDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.flawResolveDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.flawResolveDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.flawResolveDateDateTimePicker.Name = "flawResolveDateDateTimePicker";
+            this.flawResolveDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
+            this.flawResolveDateDateTimePicker.TabIndex = 23;
+            // 
+            // flawResolveReasonTextBox
+            // 
+            // 
+            // 
+            // 
+            this.flawResolveReasonTextBox.Border.Class = "TextBoxBorder";
+            this.flawResolveReasonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "FlawResolveReason", true));
+            this.flawResolveReasonTextBox.Location = new System.Drawing.Point(76, 163);
+            this.flawResolveReasonTextBox.Multiline = true;
+            this.flawResolveReasonTextBox.Name = "flawResolveReasonTextBox";
+            this.flawResolveReasonTextBox.Size = new System.Drawing.Size(256, 38);
+            this.flawResolveReasonTextBox.TabIndex = 22;
+            // 
+            // tbFlawReason
+            // 
+            // 
+            // 
+            // 
+            this.tbFlawReason.Border.Class = "TextBoxBorder";
+            this.tbFlawReason.Location = new System.Drawing.Point(376, 29);
+            this.tbFlawReason.Multiline = true;
+            this.tbFlawReason.Name = "tbFlawReason";
+            this.tbFlawReason.Size = new System.Drawing.Size(170, 94);
+            this.tbFlawReason.TabIndex = 19;
+            // 
+            // flawReasonCheckedListBox
+            // 
+            this.flawReasonCheckedListBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.invoiceBindingSource, "FlawReason", true));
+            this.flawReasonCheckedListBox.FormattingEnabled = true;
+            this.flawReasonCheckedListBox.Items.AddRange(new object[] {
+            "卖方/买方基本资料不符",
+            "发票为存根联或副联复印件",
+            "发票无转让字据记载或贴错",
+            "账款到期日不符",
+            "单据内容不符",
+            "额度通知书过期或未签回",
+            "保理主合同过期或未签回",
+            "交货凭证内容不完整",
+            "其他"});
+            this.flawReasonCheckedListBox.Location = new System.Drawing.Point(177, 29);
+            this.flawReasonCheckedListBox.Name = "flawReasonCheckedListBox";
+            this.flawReasonCheckedListBox.Size = new System.Drawing.Size(193, 94);
+            this.flawReasonCheckedListBox.TabIndex = 18;
+            // 
+            // isFlawCheckBox2
+            // 
+            this.isFlawCheckBox2.AutoSize = true;
+            this.isFlawCheckBox2.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.isFlawCheckBox2.BackgroundStyle.Class = "";
+            this.isFlawCheckBox2.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.invoiceBindingSource, "IsFlaw", true));
+            this.isFlawCheckBox2.Location = new System.Drawing.Point(30, 31);
+            this.isFlawCheckBox2.Name = "isFlawCheckBox2";
+            this.isFlawCheckBox2.Size = new System.Drawing.Size(76, 16);
+            this.isFlawCheckBox2.TabIndex = 17;
+            this.isFlawCheckBox2.Text = "是否瑕疵";
+            // 
+            // tabItemFlaw
+            // 
+            this.tabItemFlaw.AttachedControl = this.tabPanelFlaw;
+            this.tabItemFlaw.Name = "tabItemFlaw";
+            this.tabItemFlaw.Text = "瑕疵处理";
+            // 
             // tabPanelInvoice
             // 
             this.tabPanelInvoice.AutoScroll = true;
+            this.tabPanelInvoice.Controls.Add(this.btnInvoiceReset);
+            this.tabPanelInvoice.Controls.Add(this.btnInvoiceSave);
+            this.tabPanelInvoice.Controls.Add(this.btnInvoiceUpdate);
             this.tabPanelInvoice.Controls.Add(invoiceReferenceNumberLabel);
             this.tabPanelInvoice.Controls.Add(this.invoiceReferenceNumberTextBox);
             this.tabPanelInvoice.Controls.Add(orderNumberReferenceLabel);
@@ -571,6 +727,42 @@
             this.tabPanelInvoice.TabIndex = 1;
             this.tabPanelInvoice.TabItem = this.tabItemInvoice;
             // 
+            // btnInvoiceReset
+            // 
+            this.btnInvoiceReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnInvoiceReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnInvoiceReset.Location = new System.Drawing.Point(339, 333);
+            this.btnInvoiceReset.Name = "btnInvoiceReset";
+            this.btnInvoiceReset.Size = new System.Drawing.Size(75, 23);
+            this.btnInvoiceReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnInvoiceReset.TabIndex = 36;
+            this.btnInvoiceReset.Text = "重置";
+            this.btnInvoiceReset.Click += new System.EventHandler(this.ResetInvoice);
+            // 
+            // btnInvoiceSave
+            // 
+            this.btnInvoiceSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnInvoiceSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnInvoiceSave.Location = new System.Drawing.Point(258, 333);
+            this.btnInvoiceSave.Name = "btnInvoiceSave";
+            this.btnInvoiceSave.Size = new System.Drawing.Size(75, 23);
+            this.btnInvoiceSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnInvoiceSave.TabIndex = 35;
+            this.btnInvoiceSave.Text = "保存";
+            this.btnInvoiceSave.Click += new System.EventHandler(this.SaveInvoice);
+            // 
+            // btnInvoiceUpdate
+            // 
+            this.btnInvoiceUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnInvoiceUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnInvoiceUpdate.Location = new System.Drawing.Point(177, 333);
+            this.btnInvoiceUpdate.Name = "btnInvoiceUpdate";
+            this.btnInvoiceUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnInvoiceUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnInvoiceUpdate.TabIndex = 34;
+            this.btnInvoiceUpdate.Text = "编辑";
+            this.btnInvoiceUpdate.Click += new System.EventHandler(this.UpdateInvoice);
+            // 
             // invoiceReferenceNumberTextBox
             // 
             // 
@@ -582,10 +774,6 @@
             this.invoiceReferenceNumberTextBox.Name = "invoiceReferenceNumberTextBox";
             this.invoiceReferenceNumberTextBox.Size = new System.Drawing.Size(100, 20);
             this.invoiceReferenceNumberTextBox.TabIndex = 33;
-            // 
-            // invoiceBindingSource
-            // 
-            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
             // 
             // orderNumberReferenceTextBox
             // 
@@ -672,6 +860,7 @@
             // 
             // isFlawCheckBox
             // 
+            this.isFlawCheckBox.AutoSize = true;
             this.isFlawCheckBox.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
@@ -680,7 +869,7 @@
             this.isFlawCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.invoiceBindingSource, "IsFlaw", true));
             this.isFlawCheckBox.Location = new System.Drawing.Point(414, 88);
             this.isFlawCheckBox.Name = "isFlawCheckBox";
-            this.isFlawCheckBox.Size = new System.Drawing.Size(104, 24);
+            this.isFlawCheckBox.Size = new System.Drawing.Size(76, 16);
             this.isFlawCheckBox.TabIndex = 16;
             this.isFlawCheckBox.Text = "是否瑕疵";
             // 
@@ -818,146 +1007,6 @@
             this.tabItemInvoice.Name = "tabItemInvoice";
             this.tabItemInvoice.Text = "发票明细";
             // 
-            // tabPanelFlaw
-            // 
-            this.tabPanelFlaw.AutoScroll = true;
-            this.tabPanelFlaw.Controls.Add(flawResolveUserNameLabel);
-            this.tabPanelFlaw.Controls.Add(this.flawResolveUserNameTextBox);
-            this.tabPanelFlaw.Controls.Add(flawResolveDateLabel);
-            this.tabPanelFlaw.Controls.Add(this.flawResolveDateDateTimePicker);
-            this.tabPanelFlaw.Controls.Add(flawResolveReasonLabel);
-            this.tabPanelFlaw.Controls.Add(this.flawResolveReasonTextBox);
-            this.tabPanelFlaw.Controls.Add(labelX2);
-            this.tabPanelFlaw.Controls.Add(labelX1);
-            this.tabPanelFlaw.Controls.Add(this.tbFlawReason);
-            this.tabPanelFlaw.Controls.Add(flawReasonLabel);
-            this.tabPanelFlaw.Controls.Add(this.flawReasonCheckedListBox);
-            this.tabPanelFlaw.Controls.Add(this.isFlawCheckBox2);
-            this.tabPanelFlaw.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelFlaw.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelFlaw.Name = "tabPanelFlaw";
-            this.tabPanelFlaw.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelFlaw.Size = new System.Drawing.Size(572, 368);
-            this.tabPanelFlaw.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelFlaw.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelFlaw.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelFlaw.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelFlaw.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelFlaw.Style.GradientAngle = 90;
-            this.tabPanelFlaw.TabIndex = 4;
-            this.tabPanelFlaw.TabItem = this.tabItemFlaw;
-            // 
-            // flawResolveUserNameTextBox
-            // 
-            // 
-            // 
-            // 
-            this.flawResolveUserNameTextBox.Border.Class = "TextBoxBorder";
-            this.flawResolveUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "FlawResolveUserName", true));
-            this.flawResolveUserNameTextBox.Location = new System.Drawing.Point(428, 186);
-            this.flawResolveUserNameTextBox.Name = "flawResolveUserNameTextBox";
-            this.flawResolveUserNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.flawResolveUserNameTextBox.TabIndex = 24;
-            // 
-            // flawResolveDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.flawResolveDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.flawResolveDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.flawResolveDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "FlawResolveDate", true));
-            this.flawResolveDateDateTimePicker.Location = new System.Drawing.Point(428, 160);
-            // 
-            // 
-            // 
-            this.flawResolveDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.flawResolveDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.flawResolveDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.flawResolveDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.flawResolveDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.flawResolveDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.flawResolveDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.flawResolveDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.flawResolveDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.flawResolveDateDateTimePicker.Name = "flawResolveDateDateTimePicker";
-            this.flawResolveDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
-            this.flawResolveDateDateTimePicker.TabIndex = 23;
-            // 
-            // flawResolveReasonTextBox
-            // 
-            // 
-            // 
-            // 
-            this.flawResolveReasonTextBox.Border.Class = "TextBoxBorder";
-            this.flawResolveReasonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "FlawResolveReason", true));
-            this.flawResolveReasonTextBox.Location = new System.Drawing.Point(76, 163);
-            this.flawResolveReasonTextBox.Multiline = true;
-            this.flawResolveReasonTextBox.Name = "flawResolveReasonTextBox";
-            this.flawResolveReasonTextBox.Size = new System.Drawing.Size(256, 38);
-            this.flawResolveReasonTextBox.TabIndex = 22;
-            // 
-            // tbFlawReason
-            // 
-            // 
-            // 
-            // 
-            this.tbFlawReason.Border.Class = "TextBoxBorder";
-            this.tbFlawReason.Location = new System.Drawing.Point(376, 29);
-            this.tbFlawReason.Multiline = true;
-            this.tbFlawReason.Name = "tbFlawReason";
-            this.tbFlawReason.Size = new System.Drawing.Size(170, 94);
-            this.tbFlawReason.TabIndex = 19;
-            // 
-            // flawReasonCheckedListBox
-            // 
-            this.flawReasonCheckedListBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.invoiceBindingSource, "FlawReason", true));
-            this.flawReasonCheckedListBox.FormattingEnabled = true;
-            this.flawReasonCheckedListBox.Items.AddRange(new object[] {
-            "卖方/买方基本资料不符",
-            "发票为存根联或副联复印件",
-            "发票无转让字据记载或贴错",
-            "账款到期日不符",
-            "单据内容不符",
-            "额度通知书过期或未签回",
-            "保理主合同过期或未签回",
-            "交货凭证内容不完整",
-            "其他"});
-            this.flawReasonCheckedListBox.Location = new System.Drawing.Point(177, 29);
-            this.flawReasonCheckedListBox.Name = "flawReasonCheckedListBox";
-            this.flawReasonCheckedListBox.Size = new System.Drawing.Size(193, 94);
-            this.flawReasonCheckedListBox.TabIndex = 18;
-            // 
-            // isFlawCheckBox2
-            // 
-            this.isFlawCheckBox2.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.isFlawCheckBox2.BackgroundStyle.Class = "";
-            this.isFlawCheckBox2.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.invoiceBindingSource, "IsFlaw", true));
-            this.isFlawCheckBox2.Location = new System.Drawing.Point(12, 29);
-            this.isFlawCheckBox2.Name = "isFlawCheckBox2";
-            this.isFlawCheckBox2.Size = new System.Drawing.Size(104, 24);
-            this.isFlawCheckBox2.TabIndex = 17;
-            this.isFlawCheckBox2.Text = "是否瑕疵";
-            // 
-            // tabItemFlaw
-            // 
-            this.tabItemFlaw.AttachedControl = this.tabPanelFlaw;
-            this.tabItemFlaw.Name = "tabItemFlaw";
-            this.tabItemFlaw.Text = "瑕疵处理";
-            // 
             // tabPanelFinance
             // 
             this.tabPanelFinance.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1004,6 +1053,21 @@
             this.tabItemPayment.Name = "tabItemPayment";
             this.tabItemPayment.Text = "还款明细";
             // 
+            // superValidator
+            // 
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
+            // 
             // InvoiceDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1012,21 +1076,30 @@
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.Name = "InvoiceDetail";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "发票详细信息";
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
-            this.tabPanelInvoice.ResumeLayout(false);
-            this.tabPanelInvoice.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.valueDateTextBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceDateTextBox)).EndInit();
             this.tabPanelFlaw.ResumeLayout(false);
             this.tabPanelFlaw.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.flawResolveDateDateTimePicker)).EndInit();
+            this.tabPanelInvoice.ResumeLayout(false);
+            this.tabPanelInvoice.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.valueDateTextBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceDateTextBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.ButtonX btnInvoiceReset;
+        private DevComponents.DotNetBar.ButtonX btnInvoiceSave;
+        private DevComponents.DotNetBar.ButtonX btnInvoiceUpdate;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
     }
 }

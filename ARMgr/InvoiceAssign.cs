@@ -121,22 +121,6 @@ namespace CMBC.EasyFactor.ARMgr
             DetailInvoice(null, null);
         }
 
-        private void dgvInvoices_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            if (this._CDA != null)
-            {
-                string currency = this._CDA.Case.InvoiceCurrency;
-                if (this.dgvInvoices.Rows[e.RowIndex].Cells[1].Value == null)
-                {
-                    this.dgvInvoices.Rows[e.RowIndex].Cells[1].Value = currency;
-                }
-                if (this.dgvInvoices.Rows[e.RowIndex].Cells[5].Value == null)
-                {
-                    this.dgvInvoices.Rows[e.RowIndex].Cells[5].Value = DateTime.Now;
-                }
-            }
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -243,10 +227,11 @@ namespace CMBC.EasyFactor.ARMgr
             if (assignBatch != null)
             {
                 this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
-                this.invoiceBindingSource.DataSource = assignBatch.Invoices;
+                this.invoiceBindingSource.DataSource = assignBatch.Invoices.ToList();
             }
         }
 
         #endregion Methods
+
     }
 }

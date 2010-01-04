@@ -240,6 +240,7 @@
     <Compile Include="Report\ReportMgr.Designer.cs">
       <DependentUpon>ReportMgr.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ExportUtil.cs" />
     <Compile Include="Utils\ImportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -413,9 +414,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Utils\ControlUtil.cs" />
-    <Compile Include="Utils\RadioListBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Utils\TypeUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Resources\Images\Menu-Down-icon-32x32.png" />
