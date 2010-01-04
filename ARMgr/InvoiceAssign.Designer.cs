@@ -73,9 +73,13 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX batchDateLabel;
             DevComponents.DotNetBar.LabelX commentLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceAssign));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelAssignBatch = new DevComponents.DotNetBar.PanelEx();
             this.btnAssignBatchSelect = new DevComponents.DotNetBar.ButtonX();
             this.btnAssignBatchNew = new DevComponents.DotNetBar.ButtonX();
@@ -108,6 +112,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.btnAssignBatchExport = new DevComponents.DotNetBar.ButtonX();
+            this.btnAssignBatchImport = new DevComponents.DotNetBar.ButtonX();
+            this.menuItemAssignBatchExport = new System.Windows.Forms.ToolStripMenuItem();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -173,6 +180,8 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.panelAssignBatch.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelAssignBatch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelAssignBatch.Controls.Add(this.btnAssignBatchImport);
+            this.panelAssignBatch.Controls.Add(this.btnAssignBatchExport);
             this.panelAssignBatch.Controls.Add(this.btnAssignBatchSelect);
             this.panelAssignBatch.Controls.Add(this.btnAssignBatchNew);
             this.panelAssignBatch.Controls.Add(this.btnAssignBatchSave);
@@ -186,7 +195,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelAssignBatch.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelAssignBatch.Location = new System.Drawing.Point(0, 0);
             this.panelAssignBatch.Name = "panelAssignBatch";
-            this.panelAssignBatch.Size = new System.Drawing.Size(695, 73);
+            this.panelAssignBatch.Size = new System.Drawing.Size(767, 73);
             this.panelAssignBatch.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelAssignBatch.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelAssignBatch.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -224,12 +233,12 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.btnAssignBatchSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnAssignBatchSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAssignBatchSave.Location = new System.Drawing.Point(521, 36);
+            this.btnAssignBatchSave.Location = new System.Drawing.Point(683, 6);
             this.btnAssignBatchSave.Name = "btnAssignBatchSave";
             this.btnAssignBatchSave.Size = new System.Drawing.Size(75, 23);
             this.btnAssignBatchSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAssignBatchSave.TabIndex = 8;
-            this.btnAssignBatchSave.Text = "保存";
+            this.btnAssignBatchSave.Text = "保存批次";
             this.btnAssignBatchSave.Click += new System.EventHandler(this.SaveAssignBatch);
             // 
             // commentTextBox
@@ -318,39 +327,40 @@ namespace CMBC.EasyFactor.ARMgr
             this.toolStripSeparator,
             this.menuItemFlaw,
             this.toolStripSeparator1,
+            this.menuItemAssignBatchExport,
             this.menuItemAssignBatchImport});
             this.cmuInvoiceAssign.Name = "cmuInvoiceAssign";
-            this.cmuInvoiceAssign.Size = new System.Drawing.Size(147, 82);
+            this.cmuInvoiceAssign.Size = new System.Drawing.Size(123, 104);
             // 
             // menuItemInvoiceDetail
             // 
             this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
-            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(122, 22);
             this.menuItemInvoiceDetail.Text = "详细信息";
             this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(119, 6);
             // 
             // menuItemFlaw
             // 
             this.menuItemFlaw.Name = "menuItemFlaw";
-            this.menuItemFlaw.Size = new System.Drawing.Size(146, 22);
+            this.menuItemFlaw.Size = new System.Drawing.Size(122, 22);
             this.menuItemFlaw.Text = "瑕疵处理";
             this.menuItemFlaw.Click += new System.EventHandler(this.Flaw);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
             // 
             // menuItemAssignBatchImport
             // 
             this.menuItemAssignBatchImport.Name = "menuItemAssignBatchImport";
-            this.menuItemAssignBatchImport.Size = new System.Drawing.Size(146, 22);
-            this.menuItemAssignBatchImport.Text = "导入发票信息";
+            this.menuItemAssignBatchImport.Size = new System.Drawing.Size(122, 22);
+            this.menuItemAssignBatchImport.Text = "导入批次";
             this.menuItemAssignBatchImport.Click += new System.EventHandler(this.ImportAssignBatch);
             // 
             // invoiceBindingSource
@@ -382,7 +392,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoiceBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.invoiceBindingNavigator.Name = "invoiceBindingNavigator";
             this.invoiceBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.invoiceBindingNavigator.Size = new System.Drawing.Size(695, 25);
+            this.invoiceBindingNavigator.Size = new System.Drawing.Size(767, 25);
             this.invoiceBindingNavigator.TabIndex = 6;
             this.invoiceBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -486,21 +496,21 @@ namespace CMBC.EasyFactor.ARMgr
             this.colComment});
             this.dgvInvoices.ContextMenuStrip = this.cmuInvoiceAssign;
             this.dgvInvoices.DataSource = this.invoiceBindingSource;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvInvoices.Location = new System.Drawing.Point(0, 98);
             this.dgvInvoices.Name = "dgvInvoices";
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvInvoices.Size = new System.Drawing.Size(695, 497);
+            this.dgvInvoices.Size = new System.Drawing.Size(767, 497);
             this.dgvInvoices.TabIndex = 7;
             this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
             // 
@@ -518,6 +528,37 @@ namespace CMBC.EasyFactor.ARMgr
             // highlighter
             // 
             this.highlighter.ContainerControl = this;
+            // 
+            // btnAssignBatchExport
+            // 
+            this.btnAssignBatchExport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAssignBatchExport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAssignBatchExport.Location = new System.Drawing.Point(521, 35);
+            this.btnAssignBatchExport.Name = "btnAssignBatchExport";
+            this.btnAssignBatchExport.Size = new System.Drawing.Size(75, 23);
+            this.btnAssignBatchExport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAssignBatchExport.TabIndex = 11;
+            this.btnAssignBatchExport.Text = "导出批次";
+            this.btnAssignBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
+            // 
+            // btnAssignBatchImport
+            // 
+            this.btnAssignBatchImport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAssignBatchImport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAssignBatchImport.Location = new System.Drawing.Point(602, 35);
+            this.btnAssignBatchImport.Name = "btnAssignBatchImport";
+            this.btnAssignBatchImport.Size = new System.Drawing.Size(75, 23);
+            this.btnAssignBatchImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAssignBatchImport.TabIndex = 12;
+            this.btnAssignBatchImport.Text = "导入批次";
+            this.btnAssignBatchImport.Click += new System.EventHandler(this.ImportAssignBatch);
+            // 
+            // menuItemAssignBatchExport
+            // 
+            this.menuItemAssignBatchExport.Name = "menuItemAssignBatchExport";
+            this.menuItemAssignBatchExport.Size = new System.Drawing.Size(122, 22);
+            this.menuItemAssignBatchExport.Text = "导出批次";
+            this.menuItemAssignBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
             // 
             // colInvoiceNo
             // 
@@ -546,6 +587,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colInvoiceDate
             // 
             this.colInvoiceDate.DataPropertyName = "InvoiceDate";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colInvoiceDate.DefaultCellStyle = dataGridViewCellStyle3;
             this.colInvoiceDate.HeaderText = "发票日";
             this.colInvoiceDate.Name = "colInvoiceDate";
             this.colInvoiceDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -553,6 +596,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colAssignDate
             // 
             this.colAssignDate.DataPropertyName = "AssignDate";
+            dataGridViewCellStyle4.Format = "yyyyMMdd";
+            this.colAssignDate.DefaultCellStyle = dataGridViewCellStyle4;
             this.colAssignDate.HeaderText = "转让日";
             this.colAssignDate.Name = "colAssignDate";
             this.colAssignDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -560,6 +605,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colDueDate
             // 
             this.colDueDate.DataPropertyName = "DueDate";
+            dataGridViewCellStyle5.Format = "yyyyMMdd";
+            this.colDueDate.DefaultCellStyle = dataGridViewCellStyle5;
             this.colDueDate.HeaderText = "到期日";
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -567,6 +614,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colValueDate
             // 
             this.colValueDate.DataPropertyName = "ValueDate";
+            dataGridViewCellStyle6.Format = "yyyyMMdd";
+            this.colValueDate.DefaultCellStyle = dataGridViewCellStyle6;
             this.colValueDate.HeaderText = "生效日";
             this.colValueDate.Name = "colValueDate";
             this.colValueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -585,7 +634,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.Controls.Add(this.invoiceBindingNavigator);
             this.Controls.Add(this.panelAssignBatch);
             this.Name = "InvoiceAssign";
-            this.Size = new System.Drawing.Size(695, 595);
+            this.Size = new System.Drawing.Size(767, 595);
             this.panelAssignBatch.ResumeLayout(false);
             this.panelAssignBatch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceAssignBatchBindingSource)).EndInit();
@@ -609,6 +658,9 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
+        private DevComponents.DotNetBar.ButtonX btnAssignBatchImport;
+        private DevComponents.DotNetBar.ButtonX btnAssignBatchExport;
+        private System.Windows.Forms.ToolStripMenuItem menuItemAssignBatchExport;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;

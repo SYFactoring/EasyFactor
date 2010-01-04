@@ -11,6 +11,9 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Collections;
 
     /// <summary>
     /// 
@@ -35,6 +38,41 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.ReadOnly = true;
             this.superValidator.Enabled = false;
 
+            this.dgvInvoices.CellFormatting += new DataGridViewCellFormattingEventHandler(dgvInvoices_CellFormatting);
+            this.dgvInvoices.CellParsing += new DataGridViewCellParsingEventHandler(dgvInvoices_CellParsing);
+        }
+
+        void dgvInvoices_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
+        {
+            if (e.Value == null)
+            {
+                return;
+            }
+            DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
+            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colValueDate)
+            {
+                string str = (string)e.Value;
+                DateTime result;
+                bool ok = DateTime.TryParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out result);
+                if (ok)
+                {
+                    e.Value = result;
+                    e.ParsingApplied = true;
+                }
+            }
+        }
+
+        void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value == null)
+                return;
+            DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
+            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colValueDate)
+            {
+                DateTime date = (DateTime)e.Value;
+                e.Value = date.ToString("yyyyMMdd");
+                e.FormattingApplied = true;
+            }
         }
 
         #endregion Constructors
@@ -49,7 +87,6 @@ namespace CMBC.EasyFactor.ARMgr
             set
             {
                 this._CDA = value;
-                this.dgvInvoices.ReadOnly = false;
                 this.superValidator.Enabled = true;
             }
         }
@@ -145,10 +182,34 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportAssignBatch(object sender, EventArgs e)
         {
             ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
-            importForm.Show();
+            importForm.ShowDialog(this);
+            IList invoiceList = importForm.ImportedList;
+            InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
+            foreach (Invoice invoice in invoiceList)
+            {
+                invoice.InvoiceAssignBatch = assignBatch;
+            }
+
+            this.invoiceBindingSource.DataSource = invoiceList;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportAssignBatch(object sender, EventArgs e)
+        {
+            ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_ASSIGN);
+            exportUtil.StartExport(this.invoiceBindingSource.List);
         }
 
         /// <summary>
@@ -165,12 +226,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceAssignBatch assignBatch = new InvoiceAssignBatch();
-            assignBatch.AssignBatchNo = GenerateAssignBatchNo(this._CDA, DateTime.Now);
-            assignBatch.BatchDate = DateTime.Now;
             assignBatch.CreateUserName = App.Current.CurUser.Name;
             assignBatch.IsCreateMsg = false;
             this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
-            this.invoiceBindingSource.DataSource = assignBatch.Invoices;
+            this.invoiceBindingSource.DataSource = assignBatch.Invoices.ToList();
+            this.dgvInvoices.ReadOnly = false;
         }
 
         /// <summary>
@@ -188,10 +248,19 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+            if (!(this.invoiceAssignBatchBindingSource.DataSource is InvoiceAssignBatch))
+            {
+                return;
+            }
 
             bool isSaveOK = true;
             InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
             assignBatch.CDA = this._CDA;
+            if (assignBatch.AssignBatchNo == null)
+            {
+                assignBatch.AssignBatchNo = GenerateAssignBatchNo(this._CDA, DateTime.Now);
+                assignBatch.BatchDate = DateTime.Now;
+            }
             try
             {
                 App.Current.DbContext.SubmitChanges();
@@ -228,6 +297,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
                 this.invoiceBindingSource.DataSource = assignBatch.Invoices.ToList();
+                this.dgvInvoices.ReadOnly = false;
             }
         }
 

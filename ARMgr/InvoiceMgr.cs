@@ -75,55 +75,15 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            DataGridViewColumn column = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (column == colIsFlaw)
-            {
-                Object originalData = e.Value;
-                if (originalData != null)
-                {
-                    bool result = (bool)originalData;
-                    if (result)
-                    {
-                        e.Value = "Y";
-                    }
-                    else
-                    {
-                        e.Value = "N";
-                    }
-                }
-            }
-        }
-
         #endregion Constructors
 
-        #region Methods (4)
+        #region Methods (8)
 
-        // Private Methods (4) 
+        // Private Methods (8) 
 
         private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DetailInvoice(sender, e);
-        }
-
-        private void DetailInvoice(object sender, EventArgs e)
-        {
-            if (this.dgvInvoices.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
-            if (ino != null)
-            {
-                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
-                if (selectedInvoice != null)
-                {
-                    InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
-                    invoiceDetail.ShowDialog(this);
-                }
-            }
         }
 
         private void DeleteInvoice(object sender, EventArgs e)
@@ -155,6 +115,55 @@ namespace CMBC.EasyFactor.ARMgr
                     }
 
                 }
+            }
+        }
+
+        private void DetailInvoice(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
+            if (ino != null)
+            {
+                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
+                if (selectedInvoice != null)
+                {
+                    InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
+                    invoiceDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewColumn column = this.dgvInvoices.Columns[e.ColumnIndex];
+            if (column == colIsFlaw)
+            {
+                Object originalData = e.Value;
+                if (originalData != null)
+                {
+                    bool result = (bool)originalData;
+                    if (result)
+                    {
+                        e.Value = "Y";
+                    }
+                    else
+                    {
+                        e.Value = "N";
+                    }
+                }
+            }
+        }
+
+        private void ExportAssignFinancePayment(object sender, EventArgs e)
+        {
+            if (this.bs.DataSource is List<Invoice>)
+            {
+                ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_ASSIGN_FINANCE_PAYMENT);
+                exportUtil.StartExport(((List<Invoice>)this.bs.DataSource).ToArray());
             }
         }
 
@@ -230,14 +239,5 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
-
-        private void ExportAssignFinancePayment(object sender, EventArgs e)
-        {
-            if (this.bs.DataSource is List<Invoice>)
-            {
-                ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_ASSIGN_FINANCE_PAYMENT);
-                exportUtil.StartExport(((List<Invoice>)this.bs.DataSource).ToArray());
-            }
-        }
     }
 }
