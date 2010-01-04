@@ -75,7 +75,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             Client seller = cda.Case.SellerClient;
             Client buyer = cda.Case.BuyerClient;
-            int batchCount = cda.InvoiceAssignBatches.Count;
+            int batchCount = cda.InvoiceFinanceBatches.Count;
             if (date == null)
             {
                 date = DateTime.Now;

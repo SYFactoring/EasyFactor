@@ -197,6 +197,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="e"></param>
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            this.ReleaseResource();
             if (e.Error != null)
             {
                 this.tbStatus.Text = "发生异常: " + e.Error.Message;
@@ -273,9 +274,10 @@ namespace CMBC.EasyFactor.Utils
                 int size = valueArray.GetUpperBound(0);
 
                 CDA cda = null;
-                InvoiceAssignBatch assignBatch = null;
-                InvoiceFinanceBatch financeBatch = null;
-                InvoicePaymentBatch paymentBatch = null;
+                List<InvoiceAssignBatch> assignBatches = new List<InvoiceAssignBatch>();
+                List<InvoiceFinanceBatch> financeBatches = new List<InvoiceFinanceBatch>();
+                List<InvoicePaymentBatch> paymentBatches = new List<InvoicePaymentBatch>();
+                List<Invoice> invoiceList = new List<Invoice>();
                 for (int row = 2; row <= size; row++)
                 {
                     string cdaCode = String.Format("{0:G}", valueArray[row, 1]);
@@ -298,6 +300,15 @@ namespace CMBC.EasyFactor.Utils
                     {
                         invoice = new Invoice();
                         invoice.InvoiceNo = invoiceNo;
+                        Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        if (old == null)
+                        {
+                            invoiceList.Add(invoice);
+                        }
+                        else
+                        {
+                            throw new Exception("发票号重复: " + old.InvoiceNo);
+                        }
                     }
                     int column = 4;
                     invoice.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
@@ -313,61 +324,77 @@ namespace CMBC.EasyFactor.Utils
                     invoice.FlawResolveUserName = String.Format("{0:G}", valueArray[row, column++]);
                     invoice.ValueDate = (System.Nullable<DateTime>)valueArray[row, column++];
 
-                    if (assignBatch == null || !assignBatch.BatchDate.Equals(invoice.AssignDate) || assignBatch.CDA != cda)
+                    if (invoice.InvoiceAmount.HasValue)
                     {
-                        assignBatch = new InvoiceAssignBatch();
-                        assignBatch.CreateUserName = String.Format("{0:G}", valueArray[row, 2]);
-                        assignBatch.BatchCurrency = invoice.InvoiceCurrency;
-                        assignBatch.BatchDate = invoice.AssignDate;
-                        assignBatch.AssignBatchNo = InvoiceAssign.GenerateAssignBatchNo(cda, assignBatch.BatchDate);
-                        assignBatch.CDA = cda;
+                        InvoiceAssignBatch assignBatch = assignBatches.SingleOrDefault(batch => batch.BatchDate.Equals(invoice.AssignDate) && batch.CDACode == cda.CDACode);
+                        if (assignBatch == null)
+                        {
+                            assignBatch = new InvoiceAssignBatch();
+                            assignBatch.CreateUserName = String.Format("{0:G}", valueArray[row, 2]);
+                            assignBatch.BatchCurrency = invoice.InvoiceCurrency;
+                            assignBatch.BatchDate = invoice.AssignDate;
+                            assignBatch.AssignBatchNo = InvoiceAssign.GenerateAssignBatchNo(cda, assignBatch.BatchDate);
+                            assignBatch.CDA = cda;
+                            assignBatches.Add(assignBatch);
+                        }
+                        invoice.InvoiceAssignBatch = assignBatch;
                     }
-                    invoice.InvoiceAssignBatch = assignBatch;
-
                     column = 24;
                     invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.FinanceDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.FinanceDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
-
-                    if (financeBatch == null || !financeBatch.FinancePeriodBegin.Equals(invoice.FinanceDate) || financeBatch.CDA != cda)
+                    if (invoice.FinanceAmount.HasValue)
                     {
-                        financeBatch = new InvoiceFinanceBatch();
-                        column = 17;
-                        financeBatch.FinanceType = String.Format("{0:G}", valueArray[row, column++]);
-                        financeBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                        financeBatch.FinanceRate = (System.Nullable<double>)valueArray[row, column++];
-                        financeBatch.CostRate = (System.Nullable<double>)valueArray[row, column++];
-                        financeBatch.FinancePeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++];
-                        financeBatch.FinnacePeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++];
-                        financeBatch.InterestType = String.Format("{0:G}", valueArray[row, column++]);
-                        financeBatch.CreateUserName = String.Format("{0:G}", valueArray[row, 2]);
-                        financeBatch.FinanceBatchNo = InvoiceFinance.GenerateFinanceBatchNo(cda, financeBatch.FinancePeriodBegin);
-                        financeBatch.CDA = cda;
+                        invoice.FinanceDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        invoice.FinanceDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
+
+                        InvoiceFinanceBatch financeBatch = financeBatches.SingleOrDefault(batch => batch.FinancePeriodBegin.Equals(invoice.FinanceDate) && batch.CDACode == cda.CDACode);
+                        if (financeBatch == null)
+                        {
+                            financeBatch = new InvoiceFinanceBatch();
+                            column = 17;
+                            financeBatch.FinanceType = String.Format("{0:G}", valueArray[row, column++]);
+                            financeBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                            financeBatch.FinanceRate = (System.Nullable<double>)valueArray[row, column++];
+                            financeBatch.CostRate = (System.Nullable<double>)valueArray[row, column++];
+                            financeBatch.FinancePeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++];
+                            financeBatch.FinnacePeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++];
+                            financeBatch.InterestType = String.Format("{0:G}", valueArray[row, column++]);
+                            financeBatch.CreateUserName = String.Format("{0:G}", valueArray[row, 2]);
+                            financeBatch.FinanceBatchNo = InvoiceFinance.GenerateFinanceBatchNo(cda, financeBatch.FinancePeriodBegin);
+                            financeBatch.CDA = cda;
+                            financeBatches.Add(financeBatch);
+                        }
+                        financeBatch.FinanceAmount += invoice.FinanceAmount;
+                        invoice.InvoiceFinanceBatch = financeBatch;
                     }
-                    invoice.InvoiceFinanceBatch = financeBatch;
 
                     column = 28;
                     invoice.PaymentType = String.Format("{0:G}", valueArray[row, column++]);
-                    invoice.PaymentAmount = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.RefundAmount = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.RefundDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
-
-                    if (paymentBatch == null || !paymentBatch.PaymentDate.Equals(invoice.PaymentDate) || paymentBatch.CDA != cda)
+                    if (!string.Empty.Equals(invoice.PaymentType))
                     {
-                        paymentBatch = new InvoicePaymentBatch();
-                        paymentBatch.CreateUserName = String.Format("{0:G}", valueArray[row, 27]);
-                        paymentBatch.PaymentDate = (System.Nullable<DateTime>)valueArray[row, 30];
-                        paymentBatch.PaymentBatchNo = InvoicePayment.GeneratePaymentBatchNo(cda, paymentBatch.PaymentDate);
-                        paymentBatch.CDA = cda;
+                        invoice.PaymentAmount = (System.Nullable<double>)valueArray[row, column++];
+                        invoice.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        invoice.RefundAmount = (System.Nullable<double>)valueArray[row, column++];
+                        invoice.RefundDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                        InvoicePaymentBatch paymentBatch = paymentBatches.SingleOrDefault(batch => batch.PaymentDate.Equals(invoice.PaymentDate) && batch.CDACode == cda.CDACode);
+                        if (paymentBatch == null)
+                        {
+                            paymentBatch = new InvoicePaymentBatch();
+                            paymentBatch.CreateUserName = String.Format("{0:G}", valueArray[row, 27]);
+                            paymentBatch.PaymentDate = (System.Nullable<DateTime>)valueArray[row, 30];
+                            paymentBatch.PaymentBatchNo = InvoicePayment.GeneratePaymentBatchNo(cda, paymentBatch.PaymentDate);
+                            paymentBatch.CDA = cda;
+                            paymentBatches.Add(paymentBatch);
+                        }
+                        invoice.InvoicePaymentBatch = paymentBatch;
                     }
 
-                    App.Current.DbContext.SubmitChanges();
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
             }
+            App.Current.DbContext.SubmitChanges();
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
             ReleaseResource();
