@@ -35,13 +35,13 @@
         private DevComponents.DotNetBar.Controls.TextBoxX RMTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerEDICodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerNameTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbARBalance;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCreditCoverBalance;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbAROutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCreditCoverOutstanding;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceLine;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceLineCurr;
         private DevComponents.DotNetBar.Controls.TextBoxX tbDueDate;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceBalance;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceCreditLineBalance;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceOutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceCreditLineOutstanding;
         private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
 
 		#endregion Fields 
@@ -99,15 +99,15 @@
             DevComponents.DotNetBar.LabelX lblIsNotice;
             this.panelCaseBasic = new DevComponents.DotNetBar.PanelEx();
             this.groupPanelFinanceCreditLine = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.tbFinanceBalance = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbFinanceCreditLineBalance = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbFinanceOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbFinanceCreditLineOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbDueDate = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbFinanceLine = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbFinanceLineCurr = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.financeProportionTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelCreditCover = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.tbARBalance = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbCreditCoverBalance = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbAROutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbCreditCoverOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.periodEndTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditCoverTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditCoverCurrTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -117,6 +117,7 @@
             this.iFPriceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.priceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupCaseBasic = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.tbIsNotice = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnCaseQuery = new DevComponents.DotNetBar.ButtonX();
             this.ownerDepartmentCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.assignTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -132,7 +133,6 @@
             this.factorNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelInvoiceMgr = new DevComponents.DotNetBar.PanelEx();
-            this.tbIsNotice = new DevComponents.DotNetBar.Controls.TextBoxX();
             ownerDepartmentCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerEDICodeLabel = new DevComponents.DotNetBar.LabelX();
             buyerEDICodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -435,6 +435,19 @@
             lblCreditLine.TabIndex = 10;
             lblCreditLine.Text = "预付款额度:";
             // 
+            // lblIsNotice
+            // 
+            lblIsNotice.AutoSize = true;
+            // 
+            // 
+            // 
+            lblIsNotice.BackgroundStyle.Class = "";
+            lblIsNotice.Location = new System.Drawing.Point(299, 85);
+            lblIsNotice.Name = "lblIsNotice";
+            lblIsNotice.Size = new System.Drawing.Size(62, 16);
+            lblIsNotice.TabIndex = 25;
+            lblIsNotice.Text = "明/暗保理:";
+            // 
             // panelCaseBasic
             // 
             this.panelCaseBasic.CanvasColor = System.Drawing.SystemColors.Control;
@@ -460,9 +473,9 @@
             // 
             this.groupPanelFinanceCreditLine.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelFinanceCreditLine.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelFinanceCreditLine.Controls.Add(this.tbFinanceBalance);
+            this.groupPanelFinanceCreditLine.Controls.Add(this.tbFinanceOutstanding);
             this.groupPanelFinanceCreditLine.Controls.Add(lblFinanceARBalance);
-            this.groupPanelFinanceCreditLine.Controls.Add(this.tbFinanceCreditLineBalance);
+            this.groupPanelFinanceCreditLine.Controls.Add(this.tbFinanceCreditLineOutstanding);
             this.groupPanelFinanceCreditLine.Controls.Add(lblFinanceCreditCoverBalance);
             this.groupPanelFinanceCreditLine.Controls.Add(lblDueDate);
             this.groupPanelFinanceCreditLine.Controls.Add(this.tbDueDate);
@@ -506,29 +519,29 @@
             this.groupPanelFinanceCreditLine.TabIndex = 3;
             this.groupPanelFinanceCreditLine.Text = "融资额度信息";
             // 
-            // tbFinanceBalance
+            // tbFinanceOutstanding
             // 
             // 
             // 
             // 
-            this.tbFinanceBalance.Border.Class = "TextBoxBorder";
-            this.tbFinanceBalance.Location = new System.Drawing.Point(80, 90);
-            this.tbFinanceBalance.Name = "tbFinanceBalance";
-            this.tbFinanceBalance.ReadOnly = true;
-            this.tbFinanceBalance.Size = new System.Drawing.Size(100, 20);
-            this.tbFinanceBalance.TabIndex = 18;
+            this.tbFinanceOutstanding.Border.Class = "TextBoxBorder";
+            this.tbFinanceOutstanding.Location = new System.Drawing.Point(80, 90);
+            this.tbFinanceOutstanding.Name = "tbFinanceOutstanding";
+            this.tbFinanceOutstanding.ReadOnly = true;
+            this.tbFinanceOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbFinanceOutstanding.TabIndex = 18;
             // 
             // tbFinanceCreditLineBalance
             // 
             // 
             // 
             // 
-            this.tbFinanceCreditLineBalance.Border.Class = "TextBoxBorder";
-            this.tbFinanceCreditLineBalance.Location = new System.Drawing.Point(80, 69);
-            this.tbFinanceCreditLineBalance.Name = "tbFinanceCreditLineBalance";
-            this.tbFinanceCreditLineBalance.ReadOnly = true;
-            this.tbFinanceCreditLineBalance.Size = new System.Drawing.Size(100, 20);
-            this.tbFinanceCreditLineBalance.TabIndex = 16;
+            this.tbFinanceCreditLineOutstanding.Border.Class = "TextBoxBorder";
+            this.tbFinanceCreditLineOutstanding.Location = new System.Drawing.Point(80, 69);
+            this.tbFinanceCreditLineOutstanding.Name = "tbFinanceCreditLineBalance";
+            this.tbFinanceCreditLineOutstanding.ReadOnly = true;
+            this.tbFinanceCreditLineOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbFinanceCreditLineOutstanding.TabIndex = 16;
             // 
             // tbDueDate
             // 
@@ -583,9 +596,9 @@
             this.groupPanelCreditCover.AutoScroll = true;
             this.groupPanelCreditCover.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCreditCover.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelCreditCover.Controls.Add(this.tbARBalance);
+            this.groupPanelCreditCover.Controls.Add(this.tbAROutstanding);
             this.groupPanelCreditCover.Controls.Add(lblBuyerARBalance);
-            this.groupPanelCreditCover.Controls.Add(this.tbCreditCoverBalance);
+            this.groupPanelCreditCover.Controls.Add(this.tbCreditCoverOutstanding);
             this.groupPanelCreditCover.Controls.Add(lblBuyerCreditCoverBalance);
             this.groupPanelCreditCover.Controls.Add(periodEndLabel);
             this.groupPanelCreditCover.Controls.Add(this.periodEndTextBox);
@@ -627,29 +640,29 @@
             this.groupPanelCreditCover.TabIndex = 2;
             this.groupPanelCreditCover.Text = "买方信用担保";
             // 
-            // tbARBalance
+            // tbAROutstanding
             // 
             // 
             // 
             // 
-            this.tbARBalance.Border.Class = "TextBoxBorder";
-            this.tbARBalance.Location = new System.Drawing.Point(89, 67);
-            this.tbARBalance.Name = "tbARBalance";
-            this.tbARBalance.ReadOnly = true;
-            this.tbARBalance.Size = new System.Drawing.Size(100, 20);
-            this.tbARBalance.TabIndex = 9;
+            this.tbAROutstanding.Border.Class = "TextBoxBorder";
+            this.tbAROutstanding.Location = new System.Drawing.Point(89, 67);
+            this.tbAROutstanding.Name = "tbAROutstanding";
+            this.tbAROutstanding.ReadOnly = true;
+            this.tbAROutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbAROutstanding.TabIndex = 9;
             // 
-            // tbCreditCoverBalance
-            // 
-            // 
+            // tbCreditCoverOutstanding
             // 
             // 
-            this.tbCreditCoverBalance.Border.Class = "TextBoxBorder";
-            this.tbCreditCoverBalance.Location = new System.Drawing.Point(89, 47);
-            this.tbCreditCoverBalance.Name = "tbCreditCoverBalance";
-            this.tbCreditCoverBalance.ReadOnly = true;
-            this.tbCreditCoverBalance.Size = new System.Drawing.Size(100, 20);
-            this.tbCreditCoverBalance.TabIndex = 7;
+            // 
+            // 
+            this.tbCreditCoverOutstanding.Border.Class = "TextBoxBorder";
+            this.tbCreditCoverOutstanding.Location = new System.Drawing.Point(89, 47);
+            this.tbCreditCoverOutstanding.Name = "tbCreditCoverOutstanding";
+            this.tbCreditCoverOutstanding.ReadOnly = true;
+            this.tbCreditCoverOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbCreditCoverOutstanding.TabIndex = 7;
             // 
             // periodEndTextBox
             // 
@@ -672,7 +685,7 @@
             this.creditCoverTextBox.Location = new System.Drawing.Point(124, 4);
             this.creditCoverTextBox.Name = "creditCoverTextBox";
             this.creditCoverTextBox.ReadOnly = true;
-            this.creditCoverTextBox.Size = new System.Drawing.Size(58, 20);
+            this.creditCoverTextBox.Size = new System.Drawing.Size(65, 20);
             this.creditCoverTextBox.TabIndex = 3;
             // 
             // creditCoverCurrTextBox
@@ -844,6 +857,18 @@
             this.groupCaseBasic.StyleMouseOver.Class = "";
             this.groupCaseBasic.TabIndex = 0;
             this.groupCaseBasic.Text = "基本信息";
+            // 
+            // tbIsNotice
+            // 
+            // 
+            // 
+            // 
+            this.tbIsNotice.Border.Class = "TextBoxBorder";
+            this.tbIsNotice.Location = new System.Drawing.Point(365, 84);
+            this.tbIsNotice.Name = "tbIsNotice";
+            this.tbIsNotice.ReadOnly = true;
+            this.tbIsNotice.Size = new System.Drawing.Size(100, 20);
+            this.tbIsNotice.TabIndex = 26;
             // 
             // btnCaseQuery
             // 
@@ -1031,31 +1056,6 @@
             this.panelInvoiceMgr.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelInvoiceMgr.Style.GradientAngle = 90;
             this.panelInvoiceMgr.TabIndex = 1;
-            // 
-            // lblIsNotice
-            // 
-            lblIsNotice.AutoSize = true;
-            // 
-            // 
-            // 
-            lblIsNotice.BackgroundStyle.Class = "";
-            lblIsNotice.Location = new System.Drawing.Point(299, 85);
-            lblIsNotice.Name = "lblIsNotice";
-            lblIsNotice.Size = new System.Drawing.Size(62, 16);
-            lblIsNotice.TabIndex = 25;
-            lblIsNotice.Text = "明/暗保理:";
-            // 
-            // tbIsNotice
-            // 
-            // 
-            // 
-            // 
-            this.tbIsNotice.Border.Class = "TextBoxBorder";
-            this.tbIsNotice.Location = new System.Drawing.Point(365, 84);
-            this.tbIsNotice.Name = "tbIsNotice";
-            this.tbIsNotice.ReadOnly = true;
-            this.tbIsNotice.Size = new System.Drawing.Size(100, 20);
-            this.tbIsNotice.TabIndex = 26;
             // 
             // ARCaseBasic
             // 

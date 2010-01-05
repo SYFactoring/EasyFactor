@@ -165,15 +165,15 @@ namespace CMBC.EasyFactor.ARMgr
                 this.creditCoverCurrTextBox.Text = cda.CreditCoverCurr;
                 this.creditCoverTextBox.Text = String.Format("{0:N2}", cda.CreditCover);
                 this.periodEndTextBox.Text = String.Format("{0:d}", cda.CreditCoverPeriodEnd);
-                this.tbCreditCoverBalance.Text = "CDA.Case.SellerClient.CreditLine-";
-                this.tbARBalance.Text = "计算";
+                this.tbCreditCoverOutstanding.Text = CaculateCreditCoverOutstanding(cda);
+                this.tbAROutstanding.Text = CaculateAROutstanding(cda);
 
                 this.financeProportionTextBox.Text = String.Format("{0:P0}", cda.FinanceProportion);
                 this.tbFinanceLineCurr.Text = cda.FinanceLineCurr;
                 this.tbFinanceLine.Text = String.Format("{0:N2}", cda.FinanceLine);
                 this.tbDueDate.Text = String.Format("{0:d}", cda.FinanceLinePeriodEnd);
-                this.tbFinanceCreditLineBalance.Text = "计算";
-                this.tbFinanceBalance.Text = "计算";
+                this.tbFinanceCreditLineOutstanding.Text = CaculateCreditLineOutstanding(cda);
+                this.tbFinanceOutstanding.Text = CaculateFinanceOutstanding(cda);
 
                 Control control = this.panelInvoiceMgr.Controls[0];
                 if (control is InvoiceAssign)
@@ -207,6 +207,74 @@ namespace CMBC.EasyFactor.ARMgr
                     (control as InvoicePayment).ResetControlsStatus();
                 }
             }
+        }
+
+        private string CaculateCreditLineOutstanding(CDA cda)
+        {
+            if (cda.FinanceLine == null)
+            {
+                return string.Empty;
+            }
+            if (cda.FinanceLine == 0)
+            {
+                return String.Format("{0:N2}", 0);
+            }
+            double total = 0;
+            foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
+            {
+                foreach (Invoice invoice in assignBatch.Invoices)
+                {
+                    total += invoice.FinanceOutstanding;
+                }
+            }
+            return String.Format("{0:N2}", cda.FinanceLine - total);
+        }
+
+        private string CaculateFinanceOutstanding(CDA cda)
+        {
+            double total = 0;
+            foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
+            {
+                foreach (Invoice invoice in assignBatch.Invoices)
+                {
+                    total += invoice.FinanceOutstanding;
+                }
+            }
+            return String.Format("{0:N2}", total);
+        }
+
+        private string CaculateCreditCoverOutstanding(CDA cda)
+        {
+            if (cda.CreditCover == null)
+            {
+                return string.Empty;
+            }
+            if (cda.CreditCover == 0)
+            {
+                return String.Format("{0:N2}", 0);
+            }
+            double total = 0;
+            foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
+            {
+                foreach (Invoice invoice in assignBatch.Invoices)
+                {
+                    total += invoice.AssignOutstanding;
+                }
+            }
+            return String.Format("{0:N2}", cda.CreditCover - total);
+        }
+
+        private string CaculateAROutstanding(CDA cda)
+        {
+            double total = 0;
+            foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
+            {
+                foreach (Invoice invoice in assignBatch.Invoices)
+                {
+                    total += invoice.AssignOutstanding;
+                }
+            }
+            return String.Format("{0:N2}", total);
         }
 
         /// <summary>

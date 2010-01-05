@@ -5336,7 +5336,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreditLineCurrency;
 		
-		private System.Nullable<int> _CreditLine;
+		private System.Nullable<double> _CreditLine;
 		
 		private System.Nullable<System.DateTime> _PeriodBegin;
 		
@@ -5376,7 +5376,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreditLineTypeChanged();
     partial void OnCreditLineCurrencyChanging(string value);
     partial void OnCreditLineCurrencyChanged();
-    partial void OnCreditLineChanging(System.Nullable<int> value);
+    partial void OnCreditLineChanging(System.Nullable<double> value);
     partial void OnCreditLineChanged();
     partial void OnPeriodBeginChanging(System.Nullable<System.DateTime> value);
     partial void OnPeriodBeginChanged();
@@ -5494,8 +5494,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditLine", DbType="Int")]
-		public System.Nullable<int> CreditLine
+		[Column(Storage="_CreditLine", DbType="float")]
+		public System.Nullable<double> CreditLine
 		{
 			get
 			{

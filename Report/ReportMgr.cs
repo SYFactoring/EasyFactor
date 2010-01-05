@@ -10,6 +10,7 @@ namespace CMBC.EasyFactor.Report
     using Microsoft.Office.Interop.Excel;
     using Microsoft.Office.Core;
     using CMBC.EasyFactor.ARMgr;
+    using System.Collections;
 
     /// <summary>
     /// 
@@ -71,22 +72,33 @@ namespace CMBC.EasyFactor.Report
 
         // Private Methods (5) 
 
-        private void GenerateAssignReport(List<Invoice> invoiceList)
+        private void GenerateAssignReport(IList invoiceList)
         {
-            Microsoft.Office.Interop.Excel.Application app = new ApplicationClass() { Visible = false };
+
+            List<CDA> cdaList = new List<CDA>();
+            List<Client> sellerList = new List<Client>();
+            foreach (Invoice invoice in invoiceList)
+            {
+                if (!cdaList.Contains(invoice.InvoiceAssignBatch.CDA))
+                {
+                    cdaList.Add(invoice.InvoiceAssignBatch.CDA);
+                }
+                if (!sellerList.Contains(invoice.InvoiceAssignBatch.CDA.Case.SellerClient))
+                {
+                    sellerList.Add(invoice.InvoiceAssignBatch.CDA.Case.SellerClient);
+                }
+            }
+
+
+            ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
                 MessageBox.Show("Excel 程序无法启动!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            Workbook workbook = app.Workbooks.Add(true);
-            Worksheet sheet = workbook.Worksheets[1] as Worksheet;
-            if (!(this.bs.DataSource is List<Invoice>))
-            {
-                return;
-            }
+            Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-            Invoice firstInvoice = invoiceList[0];
+            Invoice firstInvoice = (Invoice)invoiceList[0];
             Case selectedCase = firstInvoice.InvoiceAssignBatch.CDA.Case;
 
             string executablePath = System.Windows.Forms.Application.ExecutablePath;
@@ -114,11 +126,12 @@ namespace CMBC.EasyFactor.Report
             int count = invoiceList.Count;
             for (int row = 0; row < count; row++)
             {
-                sheet.Cells[row + 11, 1] = invoiceList[row].InvoiceNo;
-                sheet.Cells[row + 11, 2] = invoiceList[row].AssignAmount;
-                sheet.Cells[row + 11, 3] = invoiceList[row].InvoiceDate;
-                sheet.Cells[row + 11, 4] = invoiceList[row].DueDate;
-                sheet.Cells[row + 11, 5] = invoiceList[row].IsFlaw == false ? "否" : "是";
+                Invoice invoice = (Invoice)invoiceList[row];
+                sheet.Cells[row + 11, 1] = invoice.InvoiceNo;
+                sheet.Cells[row + 11, 2] = invoice.AssignAmount;
+                sheet.Cells[row + 11, 3] = invoice.InvoiceDate;
+                sheet.Cells[row + 11, 4] = invoice.DueDate;
+                sheet.Cells[row + 11, 5] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
             }
 
             sheet.Cells[13 + count, 1] = "本行已完成上述发票/贷项发票转让，特此通知";
@@ -147,10 +160,11 @@ namespace CMBC.EasyFactor.Report
             sheet.get_Range(sheet.Cells[11, 3], sheet.Cells[16 + count, 3]).NumberFormatLocal = "yyyy/MM/dd";
             sheet.get_Range(sheet.Cells[11, 4], sheet.Cells[16 + count, 4]).NumberFormatLocal = "yyyy/MM/dd";
             sheet.get_Range(sheet.Cells[11, 5], sheet.Cells[16 + count, 5]).NumberFormatLocal = "0.00";
+
             app.Visible = true;
         }
 
-        private void GenerateFinanceReport(List<Invoice> invoiceList)
+        private void GenerateFinanceReport(IList invoiceList)
         {
             Microsoft.Office.Interop.Excel.Application app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -160,12 +174,8 @@ namespace CMBC.EasyFactor.Report
             }
             Workbook workbook = app.Workbooks.Add(true);
             Worksheet sheet = workbook.Worksheets[1] as Worksheet;
-            if (!(this.bs.DataSource is List<Invoice>))
-            {
-                return;
-            }
 
-            Invoice firstInvoice = invoiceList[0];
+            Invoice firstInvoice = (Invoice)invoiceList[0];
             Case selectedCase = firstInvoice.InvoiceAssignBatch.CDA.Case;
 
             string executablePath = System.Windows.Forms.Application.ExecutablePath;
@@ -195,11 +205,12 @@ namespace CMBC.EasyFactor.Report
             int count = invoiceList.Count;
             for (int row = 0; row < count; row++)
             {
-                sheet.Cells[row + 13, 1] = invoiceList[row].InvoiceNo;
-                sheet.Cells[row + 13, 2] = invoiceList[row].AssignAmount;
-                sheet.Cells[row + 13, 3] = invoiceList[row].InvoiceDate;
-                sheet.Cells[row + 13, 4] = invoiceList[row].DueDate;
-                sheet.Cells[row + 13, 5] = invoiceList[row].Comment;
+                Invoice invoice = (Invoice)invoiceList[row];
+                sheet.Cells[row + 13, 1] = invoice.InvoiceNo;
+                sheet.Cells[row + 13, 2] = invoice.AssignAmount;
+                sheet.Cells[row + 13, 3] = invoice.InvoiceDate;
+                sheet.Cells[row + 13, 4] = invoice.DueDate;
+                sheet.Cells[row + 13, 5] = invoice.Comment;
             }
 
             sheet.Cells[16 + count, 3] = "中国民生银行__________（业务章）";
@@ -232,7 +243,7 @@ namespace CMBC.EasyFactor.Report
 
         private void GenerateReport(object sender, EventArgs e)
         {
-            List<Invoice> invoiceList = this.bs.DataSource as List<Invoice>;
+            IList invoiceList = this.bs.List;
             if (invoiceList == null || invoiceList.Count == 0)
             {
                 return;
@@ -284,7 +295,7 @@ namespace CMBC.EasyFactor.Report
                               let buyerFactor = invoice.InvoiceAssignBatch.CDA.Case.BuyerFactor
                               where buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
                               where
-                                  invoice.IsFlaw==this.cbIsFlaw.Checked
+                                  invoice.IsFlaw == this.cbIsFlaw.Checked
                                  && (beginDate == this.diAssignDateBegin.MinDate ? true : invoice.AssignDate > beginDate.AddDays(-1))
                                  && (endDate == this.diAssignDateEnd.MaxDate ? true : invoice.AssignDate < endDate.AddDays(1))
                               select invoice;

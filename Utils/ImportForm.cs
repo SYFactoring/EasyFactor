@@ -17,16 +17,16 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class ImportForm : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (4)
+		#region Fields (4) 
 
         private ApplicationClass app;
         private Worksheet datasheet;
         private ImportType importType;
         private Workbook workbook;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         /// <summary>
         /// 
@@ -46,7 +46,17 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
+            IMPORT_CLIENTS_CREDITLINE,
+
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_FACTORS,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            IMPORT_FACTORS_CREDITLINE,
 
             /// <summary>
             /// 
@@ -89,11 +99,11 @@ namespace CMBC.EasyFactor.Utils
             IMPORT_ASSIGN_FINANCE_PAYMENT
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (1)
+		#region Constructors (1) 
 
-        public ImportForm(ImportType importType)
+public ImportForm(ImportType importType)
         {
             InitializeComponent();
             this.importType = importType;
@@ -105,8 +115,14 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_CLIENTS:
                     this.Text = "客户信息导入";
                     break;
+                case ImportType.IMPORT_CLIENTS_CREDITLINE:
+                    this.Text = "客户额度信息导入";
+                    break;
                 case ImportType.IMPORT_FACTORS:
                     this.Text = "合作机构信息导入";
+                    break;
+                case ImportType.IMPORT_FACTORS_CREDITLINE:
+                    this.Text = "合作机构额度信息导入";
                     break;
                 case ImportType.IMPORT_DEPARTMENTS:
                     this.Text = "部门信息导入";
@@ -134,7 +150,9 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
-        #endregion Constructors
+		#endregion Constructors 
+
+		#region Properties (1) 
 
         public IList ImportedList
         {
@@ -142,9 +160,11 @@ namespace CMBC.EasyFactor.Utils
             get;
         }
 
-        #region Methods (18)
+		#endregion Properties 
 
-        // Private Methods (18) 
+		#region Methods (20) 
+
+		// Private Methods (20) 
 
         /// <summary>
         /// 
@@ -162,8 +182,14 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_CLIENTS:
                     e.Result = ImportClients((string)e.Argument, worker);
                     break;
+                case ImportType.IMPORT_CLIENTS_CREDITLINE:
+                    e.Result = ImportClientsCreditLine((string)e.Argument, worker);
+                    break;
                 case ImportType.IMPORT_FACTORS:
                     e.Result = ImportFactors((string)e.Argument, worker);
+                    break;
+                case ImportType.IMPORT_FACTORS_CREDITLINE:
+                    e.Result = ImportFactorsCreditLine((string)e.Argument, worker);
                     break;
                 case ImportType.IMPORT_DEPARTMENTS:
                     e.Result = ImportDepartments((string)e.Argument, worker);
@@ -639,7 +665,7 @@ namespace CMBC.EasyFactor.Utils
                     client.ProductCN = String.Format("{0:G}", valueArray[row, column++]);
                     client.ProductEN = String.Format("{0:G}", valueArray[row, column++]);
                     client.ClientLevel = String.Format("{0:G}", valueArray[row, column++]);
-                    client.IsGroup = "Y".Equals(valueArray[row, column++]);
+                    client.IsGroup = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                     string groupNo = String.Format("{0:G}", valueArray[row, column++]);
                     string groupNameCN = String.Format("{0:G}", valueArray[row, column++]);
                     string groupNameEN = String.Format("{0:G}", valueArray[row, column++]);
@@ -673,6 +699,58 @@ namespace CMBC.EasyFactor.Utils
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
+            }
+            worker.ReportProgress(100);
+            workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <returns></returns>
+        private object ImportClientsCreditLine(string fileName, BackgroundWorker worker)
+        {
+            object[,] valueArray = this.GetValueArray(fileName);
+            int result = 0;
+
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+                for (int row = 2; row <= size; row++)
+                {
+                    string clientEDICode = String.Format("{0:G}", valueArray[row, 1]);
+                    if (String.Empty.Equals(clientEDICode))
+                    {
+                        continue;
+                    }
+                    Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                    if (client == null)
+                    {
+                        throw new Exception("客户保理代码不存在: " + clientEDICode);
+                    }
+                    int column = 2;
+                    ClientCreditLine creditLine = new ClientCreditLine();
+                    creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.CreditLine = (System.Nullable<double>)valueArray[row, column++]; ;
+                    creditLine.PeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++]; ;
+                    creditLine.PeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++]; ;
+                    creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.FreezeReason = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.Freezer = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++]; ;
+                    creditLine.UnfreezeReason = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.Unfreezer = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.Client = client;
+                }
+                App.Current.DbContext.SubmitChanges();
             }
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
@@ -721,8 +799,8 @@ namespace CMBC.EasyFactor.Utils
                     }
                     int column = 3;
                     contract.ContractType = String.Format("{0:G}", valueArray[row, column++]);
-                    contract.ContractValueDate = (DateTime)valueArray[row, column++];
-                    contract.ContractDueDate = (DateTime)valueArray[row, column++];
+                    contract.ContractValueDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    contract.ContractDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
                     contract.ContractStatus = String.Format("{0:G}", valueArray[row, column++]);
                     contract.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                     contract.Client = curCase.SellerClient;
@@ -1020,6 +1098,60 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="fileName"></param>
         /// <param name="worker"></param>
         /// <returns></returns>
+        private object ImportFactorsCreditLine(string fileName, BackgroundWorker worker)
+        {
+            {
+                object[,] valueArray = this.GetValueArray(fileName);
+                int result = 0;
+
+                if (valueArray != null)
+                {
+                    int size = valueArray.GetUpperBound(0);
+                    for (int row = 2; row <= size; row++)
+                    {
+                        string factorCode = String.Format("{0:G}", valueArray[row, 1]);
+                        if (String.Empty.Equals(factorCode))
+                        {
+                            continue;
+                        }
+                        Factor factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                        if (factor == null)
+                        {
+                            throw new Exception("合作机构代码不存在: " + factorCode);
+                        }
+                        int column = 2;
+                        FactorCreditLine creditLine = new FactorCreditLine();
+                        creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.CreditLine = (System.Nullable<double>)valueArray[row, column++]; ;
+                        creditLine.PeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++]; ;
+                        creditLine.PeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++]; ;
+                        creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.FreezeReason = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Freezer = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++]; ;
+                        creditLine.UnfreezeReason = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Unfreezer = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Factor = factor;
+                    }
+                    App.Current.DbContext.SubmitChanges();
+                }
+                worker.ReportProgress(100);
+                workbook.Close(false, fileName, null);
+                this.ReleaseResource();
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <returns></returns>
         private int ImportFinanceBatch(string fileName, BackgroundWorker worker)
         {
             object[,] valueArray = this.GetValueArray(fileName);
@@ -1214,6 +1346,6 @@ namespace CMBC.EasyFactor.Utils
             this.btnStart.Enabled = false;
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

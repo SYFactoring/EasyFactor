@@ -63,9 +63,9 @@ namespace CMBC.EasyFactor
 
         #endregion Properties
 
-        #region Methods (36)
+        #region Methods (41)
 
-        // Private Methods (36) 
+        // Private Methods (41) 
 
         private void About(object sender, EventArgs e)
         {
@@ -137,6 +137,11 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(assignMgr);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FlawResolve(object sender, EventArgs e)
         {
             InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE);
@@ -170,6 +175,20 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ImportClientCreditLine(object sender, EventArgs e)
+        {
+            if (validateRole())
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_CREDITLINE);
+                importForm.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportClients(object sender, EventArgs e)
         {
             if (validateRole())
@@ -179,16 +198,32 @@ namespace CMBC.EasyFactor
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportContractAndCDA(object sender, EventArgs e)
         {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CONTRACT_CDA);
-            importForm.Show();
+            if (validateRole())
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CONTRACT_CDA);
+                importForm.Show();
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportCreditCover(object sender, EventArgs e)
         {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CREDITCOVER);
-            importForm.Show();
+            if (validateRole())
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CREDITCOVER);
+                importForm.Show();
+            }
         }
 
         /// <summary>
@@ -201,6 +236,20 @@ namespace CMBC.EasyFactor
             if (validateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_DEPARTMENTS);
+                importForm.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportFactorCreditLine(object sender, EventArgs e)
+        {
+            if (validateRole())
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS_CREDITLINE);
                 importForm.Show();
             }
         }
@@ -230,6 +279,11 @@ namespace CMBC.EasyFactor
             importForm.Show();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportInvoices(object sender, EventArgs e)
         {
             ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN_FINANCE_PAYMENT);
@@ -266,6 +320,17 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void InvoiceBuyerPayment(object sender, EventArgs e)
+        {
+            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceBuyerPayment);
+            this.SetDetailPanel(invoicePayment);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InvoiceFinance(object sender, EventArgs e)
         {
             ARCaseBasic invoiceFinance = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceFinance);
@@ -277,9 +342,9 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void InvoiceBuyerPayment(object sender, EventArgs e)
+        private void InvoiceGuaranteePayment(object sender, EventArgs e)
         {
-            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceBuyerPayment);
+            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceGuaranteePayment);
             this.SetDetailPanel(invoicePayment);
         }
 
@@ -293,6 +358,7 @@ namespace CMBC.EasyFactor
             ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceIndirectPayment);
             this.SetDetailPanel(invoicePayment);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -304,16 +370,6 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(invoicePayment);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void InvoiceGuaranteePayment(object sender, EventArgs e)
-        {
-            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceGuaranteePayment);
-            this.SetDetailPanel(invoicePayment);
-        }
         /// <summary>
         /// 
         /// </summary>
@@ -458,6 +514,11 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(creditCoverNegMgr);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QueryInvoice(object sender, EventArgs e)
         {
             InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.INVOICE_QUERY);
@@ -486,6 +547,10 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Add(uc);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private bool validateRole()
         {
             if (App.Current.CurUser.Role == "管理员")
