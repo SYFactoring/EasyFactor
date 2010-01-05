@@ -7,13 +7,12 @@
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
+    using System.Collections;
+    using System.Globalization;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Collections;
 
     /// <summary>
     /// 
@@ -21,6 +20,8 @@ namespace CMBC.EasyFactor.ARMgr
     public partial class InvoiceAssign : UserControl
     {
         #region Fields (1)
+
+        private ARCaseBasic caseBasic;
 
         private CDA _CDA;
 
@@ -31,48 +32,16 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        public InvoiceAssign()
+        public InvoiceAssign(ARCaseBasic caseBasic)
         {
             this.InitializeComponent();
+            this.caseBasic = caseBasic;
             this.dgvInvoices.AutoGenerateColumns = false;
             this.dgvInvoices.ReadOnly = true;
             this.superValidator.Enabled = false;
 
             this.dgvInvoices.CellFormatting += new DataGridViewCellFormattingEventHandler(dgvInvoices_CellFormatting);
             this.dgvInvoices.CellParsing += new DataGridViewCellParsingEventHandler(dgvInvoices_CellParsing);
-        }
-
-        void dgvInvoices_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
-        {
-            if (e.Value == null)
-            {
-                return;
-            }
-            DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colValueDate)
-            {
-                string str = (string)e.Value;
-                DateTime result;
-                bool ok = DateTime.TryParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out result);
-                if (ok)
-                {
-                    e.Value = result;
-                    e.ParsingApplied = true;
-                }
-            }
-        }
-
-        void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.Value == null)
-                return;
-            DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colValueDate)
-            {
-                DateTime date = (DateTime)e.Value;
-                e.Value = date.ToString("yyyyMMdd");
-                e.FormattingApplied = true;
-            }
         }
 
         #endregion Constructors
@@ -93,7 +62,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (10)
+        #region Methods (12)
 
         // Public Methods (2) 
 
@@ -125,7 +94,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoiceBindingSource.DataSource = typeof(Invoice);
             this.invoiceAssignBatchBindingSource.DataSource = typeof(InvoiceAssignBatch);
         }
-        // Private Methods (8) 
+        // Private Methods (10) 
 
         /// <summary>
         /// Show detail info of selected inovice
@@ -151,9 +120,53 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value == null)
+                return;
+            DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
+            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colValueDate)
+            {
+                DateTime date = (DateTime)e.Value;
+                e.Value = date.ToString("yyyyMMdd");
+                e.FormattingApplied = true;
+            }
+        }
+
+        void dgvInvoices_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
+        {
+            if (e.Value == null)
+            {
+                return;
+            }
+            DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
+            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colValueDate)
+            {
+                string str = (string)e.Value;
+                DateTime result;
+                bool ok = DateTime.TryParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out result);
+                if (ok)
+                {
+                    e.Value = result;
+                    e.ParsingApplied = true;
+                }
+            }
+        }
+
         private void dgvInvoices_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DetailInvoice(null, null);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportAssignBatch(object sender, EventArgs e)
+        {
+            ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_ASSIGN);
+            exportUtil.StartExport(this.invoiceBindingSource.List);
         }
 
         /// <summary>
@@ -197,17 +210,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             this.invoiceBindingSource.DataSource = invoiceList;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ExportAssignBatch(object sender, EventArgs e)
-        {
-            ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_ASSIGN);
-            exportUtil.StartExport(this.invoiceBindingSource.List);
         }
 
         /// <summary>
@@ -271,6 +273,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (isSaveOK)
             {
                 MessageBox.Show("数据保存成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.caseBasic.CaculateOutstanding();
             }
         }
 
@@ -300,6 +303,5 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
-
     }
 }

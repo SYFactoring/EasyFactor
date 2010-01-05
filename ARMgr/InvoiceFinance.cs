@@ -7,31 +7,32 @@
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections;
+    using System.Globalization;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
-    using System.Collections;
-    using System.Globalization;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceFinance : UserControl
     {
-        #region Fields (1)
+        #region Fields (2)
 
         private CDA _CDA;
+        private ARCaseBasic caseBasic;
 
         #endregion Fields
 
         #region Constructors (1)
 
-        public InvoiceFinance()
+        public InvoiceFinance(ARCaseBasic caseBisc)
         {
             InitializeComponent();
+            this.caseBasic = caseBasic;
             this.dgvInvoices.AutoGenerateColumns = false;
             this.dgvInvoices.ReadOnly = true;
             this.superValidator.Enabled = false;
@@ -263,6 +264,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (isSaveOK)
             {
                 MessageBox.Show("数据保存成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.caseBasic.CaculateOutstanding();
             }
         }
 

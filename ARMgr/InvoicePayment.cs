@@ -19,10 +19,15 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoicePayment : UserControl
     {
-        #region Fields (1)
+        #region Fields (3)
 
         private CDA _CDA;
+        private ARCaseBasic caseBasic;
         private PaymentType paymentType;
+
+        #endregion Fields
+
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -50,16 +55,17 @@ namespace CMBC.EasyFactor.ARMgr
             GUARANTEE_PAYMENT
         }
 
-        #endregion Fields
+        #endregion Enums
 
         #region Constructors (1)
 
         /// <summary>
         /// 
         /// </summary>
-        public InvoicePayment(PaymentType paymentType)
+        public InvoicePayment(ARCaseBasic caseBasic, PaymentType paymentType)
         {
             InitializeComponent();
+            this.caseBasic = caseBasic;
             this.paymentType = paymentType;
             this.dgvInvoices.AutoGenerateColumns = false;
             this.dgvInvoices.ReadOnly = true;
@@ -201,6 +207,8 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     invoice.PaymentAmount = null;
                     invoice.PaymentDate = null;
+                    invoice.RefundAmount = null;
+                    invoice.RefundDate = null;
                 }
                 CaculateCurrentPaymentAmount();
             }
@@ -303,6 +311,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (isSaveOK)
             {
                 MessageBox.Show("数据保存成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.caseBasic.CaculateOutstanding();
             }
         }
 
