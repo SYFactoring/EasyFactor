@@ -80,22 +80,22 @@ namespace CMBC.EasyFactor.ARMgr
             switch (opARType)
             {
                 case OpARType.InvoiceAssign:
-                    uc = new InvoiceAssign();
+                    uc = new InvoiceAssign(this);
                     break;
                 case OpARType.InvoiceFinance:
-                    uc = new InvoiceFinance();
+                    uc = new InvoiceFinance(this);
                     break;
                 case OpARType.InvoiceBuyerPayment:
-                    uc = new InvoicePayment(InvoicePayment.PaymentType.BUYER_PAYMENT);
+                    uc = new InvoicePayment(this, InvoicePayment.PaymentType.BUYER_PAYMENT);
                     break;
                 case OpARType.InvoiceIndirectPayment:
-                    uc = new InvoicePayment(InvoicePayment.PaymentType.INDIRECT_PAYMENT);
+                    uc = new InvoicePayment(this, InvoicePayment.PaymentType.INDIRECT_PAYMENT);
                     break;
                 case OpARType.InvoiceSellerPayment:
-                    uc = new InvoicePayment(InvoicePayment.PaymentType.SELLER_PAYMENT);
+                    uc = new InvoicePayment(this, InvoicePayment.PaymentType.SELLER_PAYMENT);
                     break;
                 case OpARType.InvoiceGuaranteePayment:
-                    uc = new InvoicePayment(InvoicePayment.PaymentType.GUARANTEE_PAYMENT);
+                    uc = new InvoicePayment(this, InvoicePayment.PaymentType.GUARANTEE_PAYMENT);
                     break;
                 default:
                     uc = new UserControl();

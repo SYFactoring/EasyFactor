@@ -311,7 +311,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (isSaveOK)
             {
                 MessageBox.Show("数据保存成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.caseBasic.CaculateOutstanding();
+                this.caseBasic.CaculateOutstanding(this._CDA);
             }
         }
 

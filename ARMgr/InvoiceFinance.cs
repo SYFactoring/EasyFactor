@@ -29,7 +29,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         #region Constructors (1)
 
-        public InvoiceFinance(ARCaseBasic caseBisc)
+        public InvoiceFinance(ARCaseBasic caseBasic)
         {
             InitializeComponent();
             this.caseBasic = caseBasic;
@@ -85,8 +85,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         public static string GenerateFinanceBatchNo(CDA cda, System.Nullable<DateTime> date)
         {
-            Client seller = cda.Case.SellerClient;
-            Client buyer = cda.Case.BuyerClient;
             int batchCount = cda.InvoiceFinanceBatches.Count;
             if (date == null)
             {
@@ -107,6 +105,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             this.invoiceFinanceBatchBindingSource.DataSource = typeof(InvoiceFinanceBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
+            this.dgvInvoices.ReadOnly = true;
         }
         // Private Methods (9) 
 
@@ -164,11 +163,22 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     invoice.FinanceAmount = invoice.AssignAmount;
                     invoice.FinanceDate = DateTime.Now;
+
+                    colFinanceAmount.ReadOnly = false;
+                    colFinanceDate.ReadOnly = false;
+                    colFinanceDueDate.ReadOnly = false;
+                    colComment.ReadOnly = false;
                 }
                 else
                 {
                     invoice.FinanceAmount = null;
                     invoice.FinanceDate = null;
+                    invoice.FinanceDueDate = null;
+
+                    colFinanceAmount.ReadOnly = true;
+                    colFinanceDate.ReadOnly = true;
+                    colFinanceDueDate.ReadOnly = true;
+                    colComment.ReadOnly = true;
                 }
                 CaculateCurrentFinanceAmount();
             }
@@ -264,7 +274,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (isSaveOK)
             {
                 MessageBox.Show("数据保存成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.caseBasic.CaculateOutstanding();
+                this.caseBasic.CaculateOutstanding(this._CDA);
             }
         }
 
