@@ -66,6 +66,7 @@
             this.menuItemInvoiceDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExportAssignFinancePayment = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbIsDispute = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.cmuInvoiceMgr.SuspendLayout();
@@ -75,6 +76,7 @@
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.cbIsDispute);
             this.panelQuery.Controls.Add(this.cbIsFlaw);
             this.panelQuery.Controls.Add(this.tbInvoiceNo);
             this.panelQuery.Controls.Add(this.lblInvoiceNo);
@@ -385,45 +387,64 @@
             this.toolStripSeparator1,
             this.menuItemExportAssignFinancePayment});
             this.cmuInvoiceMgr.Name = "cmuContractMgr";
-            this.cmuInvoiceMgr.Size = new System.Drawing.Size(153, 126);
+            this.cmuInvoiceMgr.Size = new System.Drawing.Size(123, 104);
             // 
             // menuItemInvoiceDetail
             // 
             this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
-            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(152, 22);
+            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(122, 22);
             this.menuItemInvoiceDetail.Text = "详细信息";
             this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(119, 6);
             // 
             // menuItemInvoiceFlaw
             // 
             this.menuItemInvoiceFlaw.Name = "menuItemInvoiceFlaw";
-            this.menuItemInvoiceFlaw.Size = new System.Drawing.Size(152, 22);
+            this.menuItemInvoiceFlaw.Size = new System.Drawing.Size(122, 22);
             this.menuItemInvoiceFlaw.Text = "瑕疵处理";
             this.menuItemInvoiceFlaw.Click += new System.EventHandler(this.InvoiceFlaw);
             // 
             // menuItemInvoiceDelete
             // 
             this.menuItemInvoiceDelete.Name = "menuItemInvoiceDelete";
-            this.menuItemInvoiceDelete.Size = new System.Drawing.Size(152, 22);
+            this.menuItemInvoiceDelete.Size = new System.Drawing.Size(122, 22);
             this.menuItemInvoiceDelete.Text = "删除发票";
             this.menuItemInvoiceDelete.Click += new System.EventHandler(this.DeleteInvoice);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
             // 
             // menuItemExportAssignFinancePayment
             // 
             this.menuItemExportAssignFinancePayment.Name = "menuItemExportAssignFinancePayment";
-            this.menuItemExportAssignFinancePayment.Size = new System.Drawing.Size(152, 22);
+            this.menuItemExportAssignFinancePayment.Size = new System.Drawing.Size(122, 22);
             this.menuItemExportAssignFinancePayment.Text = "导出台帐";
             this.menuItemExportAssignFinancePayment.Click += new System.EventHandler(this.ExportAssignFinancePayment);
+            // 
+            // cbIsDispute
+            // 
+            this.cbIsDispute.AutoSize = true;
+            // 
+            // 
+            // 
+            this.cbIsDispute.BackgroundStyle.Class = "";
+            this.cbIsDispute.Checked = true;
+            this.cbIsDispute.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+            this.cbIsDispute.CheckValue = "A";
+            this.cbIsDispute.CheckValueIndeterminate = "A";
+            this.cbIsDispute.Location = new System.Drawing.Point(314, 34);
+            this.cbIsDispute.Name = "cbIsDispute";
+            this.cbIsDispute.Size = new System.Drawing.Size(76, 16);
+            this.cbIsDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsDispute.TabIndex = 22;
+            this.cbIsDispute.Text = "是否商纠";
+            this.cbIsDispute.ThreeState = true;
             // 
             // InvoiceMgr
             // 
@@ -474,5 +495,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuItemExportAssignFinancePayment;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsDispute;
     }
 }

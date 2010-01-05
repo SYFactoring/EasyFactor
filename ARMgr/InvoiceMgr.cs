@@ -198,6 +198,7 @@ namespace CMBC.EasyFactor.ARMgr
             string factorName = this.tbFactor.Text;
             string invoiceNo = this.tbInvoiceNo.Text;
             string isFlaw = this.cbIsFlaw.CheckValue as string;
+            string isDispute = this.cbIsDispute.CheckValue as string;
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
                               let seller = invoice.InvoiceAssignBatch.CDA.Case.SellerClient
@@ -210,6 +211,7 @@ namespace CMBC.EasyFactor.ARMgr
                               where buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
                               where (invoiceNo == string.Empty ? true : invoice.InvoiceNo == invoiceNo)
                                 && (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
+                                && (isDispute=="A"?true:invoice.IsDispute==(isDispute=="Y"?true:false))
                               select invoice;
             this.bs.DataSource = queryResult.ToList();
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());

@@ -64,27 +64,30 @@
             DevComponents.DotNetBar.LabelX paymentBatchNoLabel;
             DevComponents.DotNetBar.LabelX paymentDateLabel;
             DevComponents.DotNetBar.LabelX commentLabel;
+            DevComponents.DotNetBar.LabelX lblPaymentType;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoicePayment));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            DevComponents.DotNetBar.LabelX lblPaymentType;
             this.panelPaymentBatch = new DevComponents.DotNetBar.PanelEx();
+            this.tbPaymentType = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.invoicePaymentBatchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnPaymentBatchSave = new DevComponents.DotNetBar.ButtonX();
             this.lblPaymentAmount = new DevComponents.DotNetBar.LabelX();
             this.tbPaymentAmount = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.invoicePaymentBatchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.isCreateMsgCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.paymentDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.paymentBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -100,12 +103,22 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvInvoices = new System.Windows.Forms.DataGridView();
+            this.cmuInvoicePayment = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemPaymentBatchExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemPaymentBatchImport = new System.Windows.Forms.ToolStripMenuItem();
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.colCheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -115,15 +128,6 @@
             this.colCommissionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInterest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInterestDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuInvoicePayment = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemPaymentBatchExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemPaymentBatchImport = new System.Windows.Forms.ToolStripMenuItem();
-            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.tbPaymentType = new DevComponents.DotNetBar.Controls.TextBoxX();
             paymentBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             paymentDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
@@ -178,6 +182,19 @@
             commentLabel.TabIndex = 5;
             commentLabel.Text = "备注:";
             // 
+            // lblPaymentType
+            // 
+            lblPaymentType.AutoSize = true;
+            // 
+            // 
+            // 
+            lblPaymentType.BackgroundStyle.Class = "";
+            lblPaymentType.Location = new System.Drawing.Point(12, 31);
+            lblPaymentType.Name = "lblPaymentType";
+            lblPaymentType.Size = new System.Drawing.Size(59, 16);
+            lblPaymentType.TabIndex = 11;
+            lblPaymentType.Text = "还款类型:";
+            // 
             // panelPaymentBatch
             // 
             this.panelPaymentBatch.CanvasColor = System.Drawing.SystemColors.Control;
@@ -206,6 +223,22 @@
             this.panelPaymentBatch.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelPaymentBatch.Style.GradientAngle = 90;
             this.panelPaymentBatch.TabIndex = 0;
+            // 
+            // tbPaymentType
+            // 
+            // 
+            // 
+            // 
+            this.tbPaymentType.Border.Class = "TextBoxBorder";
+            this.tbPaymentType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoicePaymentBatchBindingSource, "PaymentType", true));
+            this.tbPaymentType.Location = new System.Drawing.Point(81, 29);
+            this.tbPaymentType.Name = "tbPaymentType";
+            this.tbPaymentType.Size = new System.Drawing.Size(100, 20);
+            this.tbPaymentType.TabIndex = 12;
+            // 
+            // invoicePaymentBatchBindingSource
+            // 
+            this.invoicePaymentBatchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoicePaymentBatch);
             // 
             // btnPaymentBatchSave
             // 
@@ -256,10 +289,6 @@
             this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.commentTextBox.Size = new System.Drawing.Size(209, 43);
             this.commentTextBox.TabIndex = 6;
-            // 
-            // invoicePaymentBatchBindingSource
-            // 
-            this.invoicePaymentBatchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoicePaymentBatch);
             // 
             // isCreateMsgCheckBox
             // 
@@ -423,22 +452,24 @@
             this.dgvInvoices.AllowUserToAddRows = false;
             this.dgvInvoices.AllowUserToDeleteRows = false;
             this.dgvInvoices.AutoGenerateColumns = false;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInvoices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCheckBox,
             this.colInvoiceNo,
             this.colInvoiceCurrency,
             this.colAssignAmount,
+            this.colAssignOutstanding,
             this.colDueDate,
             this.colFinanceAmount,
+            this.colFinanceOutstanding,
             this.colFinanceDueDate,
             this.colPaymentAmount,
             this.colPaymentDate,
@@ -458,141 +489,8 @@
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInvoices.Size = new System.Drawing.Size(680, 417);
             this.dgvInvoices.TabIndex = 2;
-            // 
-            // colCheckBox
-            // 
-            this.colCheckBox.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colCheckBox.Frozen = true;
-            this.colCheckBox.HeaderText = "";
-            this.colCheckBox.Name = "colCheckBox";
-            this.colCheckBox.ReadOnly = true;
-            this.colCheckBox.Width = 5;
-            // 
-            // colInvoiceNo
-            // 
-            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
-            this.colInvoiceNo.HeaderText = "发票号";
-            this.colInvoiceNo.Name = "colInvoiceNo";
-            this.colInvoiceNo.ReadOnly = true;
-            // 
-            // colInvoiceCurrency
-            // 
-            this.colInvoiceCurrency.DataPropertyName = "InvoiceCurrency";
-            this.colInvoiceCurrency.HeaderText = "发票币别";
-            this.colInvoiceCurrency.Name = "colInvoiceCurrency";
-            this.colInvoiceCurrency.ReadOnly = true;
-            // 
-            // colAssignAmount
-            // 
-            this.colAssignAmount.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle15.Format = "N2";
-            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle15;
-            this.colAssignAmount.HeaderText = "转让金额";
-            this.colAssignAmount.Name = "colAssignAmount";
-            this.colAssignAmount.ReadOnly = true;
-            // 
-            // colDueDate
-            // 
-            this.colDueDate.DataPropertyName = "DueDate";
-            dataGridViewCellStyle16.Format = "d";
-            this.colDueDate.DefaultCellStyle = dataGridViewCellStyle16;
-            this.colDueDate.HeaderText = "发票到期日";
-            this.colDueDate.Name = "colDueDate";
-            this.colDueDate.ReadOnly = true;
-            // 
-            // colFinanceAmount
-            // 
-            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
-            dataGridViewCellStyle17.Format = "N2";
-            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle17;
-            this.colFinanceAmount.HeaderText = "融资金额";
-            this.colFinanceAmount.Name = "colFinanceAmount";
-            this.colFinanceAmount.ReadOnly = true;
-            // 
-            // colFinanceDueDate
-            // 
-            this.colFinanceDueDate.DataPropertyName = "FinanceDueDate";
-            dataGridViewCellStyle18.Format = "d";
-            this.colFinanceDueDate.DefaultCellStyle = dataGridViewCellStyle18;
-            this.colFinanceDueDate.HeaderText = "融资到期日";
-            this.colFinanceDueDate.Name = "colFinanceDueDate";
-            this.colFinanceDueDate.ReadOnly = true;
-            // 
-            // colPaymentAmount
-            // 
-            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
-            dataGridViewCellStyle19.Format = "N2";
-            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle19;
-            this.colPaymentAmount.HeaderText = "付款金额";
-            this.colPaymentAmount.Name = "colPaymentAmount";
-            this.colPaymentAmount.ReadOnly = true;
-            // 
-            // colPaymentDate
-            // 
-            this.colPaymentDate.DataPropertyName = "PaymentDate";
-            dataGridViewCellStyle20.Format = "d";
-            this.colPaymentDate.DefaultCellStyle = dataGridViewCellStyle20;
-            this.colPaymentDate.HeaderText = "付款日";
-            this.colPaymentDate.Name = "colPaymentDate";
-            this.colPaymentDate.ReadOnly = true;
-            this.colPaymentDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // colRefundAmount
-            // 
-            this.colRefundAmount.DataPropertyName = "RefundAmount";
-            dataGridViewCellStyle21.Format = "N2";
-            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle21;
-            this.colRefundAmount.HeaderText = "还款金额";
-            this.colRefundAmount.Name = "colRefundAmount";
-            this.colRefundAmount.ReadOnly = true;
-            // 
-            // colRefundDate
-            // 
-            this.colRefundDate.DataPropertyName = "RefundDate";
-            dataGridViewCellStyle22.Format = "d";
-            this.colRefundDate.DefaultCellStyle = dataGridViewCellStyle22;
-            this.colRefundDate.HeaderText = "还款日";
-            this.colRefundDate.Name = "colRefundDate";
-            this.colRefundDate.ReadOnly = true;
-            this.colRefundDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // colCommission
-            // 
-            this.colCommission.DataPropertyName = "Commission";
-            dataGridViewCellStyle23.Format = "N2";
-            this.colCommission.DefaultCellStyle = dataGridViewCellStyle23;
-            this.colCommission.HeaderText = "手续费";
-            this.colCommission.Name = "colCommission";
-            this.colCommission.ReadOnly = true;
-            // 
-            // colCommissionDate
-            // 
-            this.colCommissionDate.DataPropertyName = "CommissionDate";
-            dataGridViewCellStyle24.Format = "d";
-            this.colCommissionDate.DefaultCellStyle = dataGridViewCellStyle24;
-            this.colCommissionDate.HeaderText = "手续费收取日";
-            this.colCommissionDate.Name = "colCommissionDate";
-            this.colCommissionDate.ReadOnly = true;
-            this.colCommissionDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // colInterest
-            // 
-            this.colInterest.DataPropertyName = "Interest";
-            dataGridViewCellStyle25.Format = "N2";
-            this.colInterest.DefaultCellStyle = dataGridViewCellStyle25;
-            this.colInterest.HeaderText = "利息";
-            this.colInterest.Name = "colInterest";
-            this.colInterest.ReadOnly = true;
-            // 
-            // colInterestDate
-            // 
-            this.colInterestDate.DataPropertyName = "InterestDate";
-            dataGridViewCellStyle26.Format = "d";
-            this.colInterestDate.DefaultCellStyle = dataGridViewCellStyle26;
-            this.colInterestDate.HeaderText = "利息收取日";
-            this.colInterestDate.Name = "colInterestDate";
-            this.colInterestDate.ReadOnly = true;
-            this.colInterestDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvInvoices.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellValueChanged);
+            this.dgvInvoices.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellContentClick);
             // 
             // cmuInvoicePayment
             // 
@@ -642,30 +540,158 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // lblPaymentType
+            // colCheckBox
             // 
-            lblPaymentType.AutoSize = true;
+            this.colCheckBox.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colCheckBox.Frozen = true;
+            this.colCheckBox.HeaderText = "";
+            this.colCheckBox.Name = "colCheckBox";
+            this.colCheckBox.ReadOnly = true;
+            this.colCheckBox.Width = 5;
             // 
+            // colInvoiceNo
             // 
+            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
+            this.colInvoiceNo.HeaderText = "发票号";
+            this.colInvoiceNo.Name = "colInvoiceNo";
+            this.colInvoiceNo.ReadOnly = true;
             // 
-            lblPaymentType.BackgroundStyle.Class = "";
-            lblPaymentType.Location = new System.Drawing.Point(12, 31);
-            lblPaymentType.Name = "lblPaymentType";
-            lblPaymentType.Size = new System.Drawing.Size(59, 16);
-            lblPaymentType.TabIndex = 11;
-            lblPaymentType.Text = "还款类型:";
+            // colInvoiceCurrency
             // 
-            // tbPaymentType
+            this.colInvoiceCurrency.DataPropertyName = "InvoiceCurrency";
+            this.colInvoiceCurrency.HeaderText = "发票币别";
+            this.colInvoiceCurrency.Name = "colInvoiceCurrency";
+            this.colInvoiceCurrency.ReadOnly = true;
             // 
+            // colAssignAmount
             // 
+            this.colAssignAmount.DataPropertyName = "AssignAmount";
+            dataGridViewCellStyle2.Format = "N2";
+            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colAssignAmount.HeaderText = "转让金额";
+            this.colAssignAmount.Name = "colAssignAmount";
+            this.colAssignAmount.ReadOnly = true;
             // 
+            // colAssignOutstanding
             // 
-            this.tbPaymentType.Border.Class = "TextBoxBorder";
-            this.tbPaymentType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoicePaymentBatchBindingSource, "PaymentType", true));
-            this.tbPaymentType.Location = new System.Drawing.Point(81, 29);
-            this.tbPaymentType.Name = "tbPaymentType";
-            this.tbPaymentType.Size = new System.Drawing.Size(100, 20);
-            this.tbPaymentType.TabIndex = 12;
+            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
+            dataGridViewCellStyle3.Format = "N2";
+            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colAssignOutstanding.HeaderText = "转让余额";
+            this.colAssignOutstanding.Name = "colAssignOutstanding";
+            this.colAssignOutstanding.ReadOnly = true;
+            // 
+            // colDueDate
+            // 
+            this.colDueDate.DataPropertyName = "DueDate";
+            dataGridViewCellStyle4.Format = "d";
+            this.colDueDate.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colDueDate.HeaderText = "发票到期日";
+            this.colDueDate.Name = "colDueDate";
+            this.colDueDate.ReadOnly = true;
+            // 
+            // colFinanceAmount
+            // 
+            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
+            dataGridViewCellStyle5.Format = "N2";
+            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colFinanceAmount.HeaderText = "融资金额";
+            this.colFinanceAmount.Name = "colFinanceAmount";
+            this.colFinanceAmount.ReadOnly = true;
+            // 
+            // colFinanceOutstanding
+            // 
+            this.colFinanceOutstanding.DataPropertyName = "FinanceOutstanding";
+            dataGridViewCellStyle6.Format = "N2";
+            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colFinanceOutstanding.HeaderText = "融资余额";
+            this.colFinanceOutstanding.Name = "colFinanceOutstanding";
+            this.colFinanceOutstanding.ReadOnly = true;
+            // 
+            // colFinanceDueDate
+            // 
+            this.colFinanceDueDate.DataPropertyName = "FinanceDueDate";
+            dataGridViewCellStyle7.Format = "d";
+            this.colFinanceDueDate.DefaultCellStyle = dataGridViewCellStyle7;
+            this.colFinanceDueDate.HeaderText = "融资到期日";
+            this.colFinanceDueDate.Name = "colFinanceDueDate";
+            this.colFinanceDueDate.ReadOnly = true;
+            // 
+            // colPaymentAmount
+            // 
+            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
+            dataGridViewCellStyle8.Format = "N2";
+            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle8;
+            this.colPaymentAmount.HeaderText = "付款金额";
+            this.colPaymentAmount.Name = "colPaymentAmount";
+            this.colPaymentAmount.ReadOnly = true;
+            // 
+            // colPaymentDate
+            // 
+            this.colPaymentDate.DataPropertyName = "PaymentDate";
+            dataGridViewCellStyle9.Format = "d";
+            this.colPaymentDate.DefaultCellStyle = dataGridViewCellStyle9;
+            this.colPaymentDate.HeaderText = "付款日";
+            this.colPaymentDate.Name = "colPaymentDate";
+            this.colPaymentDate.ReadOnly = true;
+            this.colPaymentDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colRefundAmount
+            // 
+            this.colRefundAmount.DataPropertyName = "RefundAmount";
+            dataGridViewCellStyle10.Format = "N2";
+            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle10;
+            this.colRefundAmount.HeaderText = "还款金额";
+            this.colRefundAmount.Name = "colRefundAmount";
+            this.colRefundAmount.ReadOnly = true;
+            // 
+            // colRefundDate
+            // 
+            this.colRefundDate.DataPropertyName = "RefundDate";
+            dataGridViewCellStyle11.Format = "d";
+            this.colRefundDate.DefaultCellStyle = dataGridViewCellStyle11;
+            this.colRefundDate.HeaderText = "还款日";
+            this.colRefundDate.Name = "colRefundDate";
+            this.colRefundDate.ReadOnly = true;
+            this.colRefundDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colCommission
+            // 
+            this.colCommission.DataPropertyName = "Commission";
+            dataGridViewCellStyle12.Format = "N2";
+            this.colCommission.DefaultCellStyle = dataGridViewCellStyle12;
+            this.colCommission.HeaderText = "手续费";
+            this.colCommission.Name = "colCommission";
+            this.colCommission.ReadOnly = true;
+            // 
+            // colCommissionDate
+            // 
+            this.colCommissionDate.DataPropertyName = "CommissionDate";
+            dataGridViewCellStyle13.Format = "d";
+            this.colCommissionDate.DefaultCellStyle = dataGridViewCellStyle13;
+            this.colCommissionDate.HeaderText = "手续费收取日";
+            this.colCommissionDate.Name = "colCommissionDate";
+            this.colCommissionDate.ReadOnly = true;
+            this.colCommissionDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colInterest
+            // 
+            this.colInterest.DataPropertyName = "Interest";
+            dataGridViewCellStyle14.Format = "N2";
+            this.colInterest.DefaultCellStyle = dataGridViewCellStyle14;
+            this.colInterest.HeaderText = "利息";
+            this.colInterest.Name = "colInterest";
+            this.colInterest.ReadOnly = true;
+            // 
+            // colInterestDate
+            // 
+            this.colInterestDate.DataPropertyName = "InterestDate";
+            dataGridViewCellStyle15.Format = "d";
+            this.colInterestDate.DefaultCellStyle = dataGridViewCellStyle15;
+            this.colInterestDate.HeaderText = "利息收取日";
+            this.colInterestDate.Name = "colInterestDate";
+            this.colInterestDate.ReadOnly = true;
+            this.colInterestDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // InvoicePayment
             // 
@@ -703,12 +729,15 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuItemPaymentBatchExport;
         private System.Windows.Forms.ToolStripMenuItem menuItemPaymentBatchImport;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentType;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;
@@ -718,7 +747,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInterest;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInterestDate;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentType;
 
 
     }

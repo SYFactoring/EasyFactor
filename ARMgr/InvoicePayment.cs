@@ -19,7 +19,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoicePayment : UserControl
     {
-		#region Fields (1) 
+        #region Fields (1)
 
         private CDA _CDA;
         private PaymentType paymentType;
@@ -50,9 +50,9 @@ namespace CMBC.EasyFactor.ARMgr
             GUARANTEE_PAYMENT
         }
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// 
@@ -69,9 +69,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.CellParsing += new DataGridViewCellParsingEventHandler(dgvInvoices_CellParsing);
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (1) 
+        #region Properties (1)
 
         public CDA CDA
         {
@@ -80,19 +80,19 @@ namespace CMBC.EasyFactor.ARMgr
                 this._CDA = value;
                 this.dgvInvoices.ReadOnly = false;
                 InvoicePaymentBatch batch = new InvoicePaymentBatch();
-                switch(paymentType)
+                switch (paymentType)
                 {
                     case PaymentType.BUYER_PAYMENT:
-                        batch.PaymentType="买方还款";
+                        batch.PaymentType = "买方还款";
                         break;
                     case PaymentType.INDIRECT_PAYMENT:
-                        batch.PaymentType ="间接还款";
+                        batch.PaymentType = "间接还款";
                         break;
                     case PaymentType.SELLER_PAYMENT:
-                        batch.PaymentType="卖方还款";
+                        batch.PaymentType = "卖方还款";
                         break;
                     case PaymentType.GUARANTEE_PAYMENT:
-                        batch.PaymentType="担保付款";
+                        batch.PaymentType = "担保付款";
                         break;
                     default:
                         break;
@@ -102,11 +102,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (10) 
+        #region Methods (10)
 
-		// Public Methods (2) 
+        // Public Methods (2) 
 
         /// <summary>
         /// 
@@ -138,7 +138,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoicePaymentBatchBindingSource.DataSource = typeof(InvoicePaymentBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
-		// Private Methods (8) 
+        // Private Methods (8) 
 
         private void CaculateCurrentPaymentAmount()
         {
@@ -194,6 +194,8 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     invoice.PaymentAmount = invoice.AssignAmount;
                     invoice.PaymentDate = DateTime.Now;
+                    invoice.RefundAmount = invoice.FinanceAmount;
+                    invoice.RefundDate = DateTime.Now;
                 }
                 else
                 {
@@ -210,7 +212,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (e.Value == null)
                 return;
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colDueDate || col == colFinanceDueDate||col==colPaymentDate)
+            if (col == colDueDate || col == colFinanceDueDate || col == colPaymentDate || col == colRefundDate || col == colCommissionDate || col == colInterestDate)
             {
                 DateTime date = (DateTime)e.Value;
                 e.Value = date.ToString("yyyyMMdd");
@@ -225,7 +227,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colDueDate || col == colFinanceDueDate || col == colPaymentDate)
+            if (col == colDueDate || col == colFinanceDueDate || col == colPaymentDate || col == colRefundDate || col == colCommissionDate || col == colInterestDate)
             {
                 string str = (string)e.Value;
                 DateTime result;
@@ -304,6 +306,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

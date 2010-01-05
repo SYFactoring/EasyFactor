@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -42,7 +43,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -53,8 +53,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.tbFinanceOverDueDays = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblFinanceOverDueDays = new DevComponents.DotNetBar.LabelX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnOverDueDaysQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbAROverDueDays = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -92,12 +93,10 @@
             this.colFinanceCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAROverDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceOverDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tbFinanceOverDueDays = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblFinanceOverDueDays = new DevComponents.DotNetBar.LabelX();
+            this.colIsDispute = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.SuspendLayout();
@@ -125,6 +124,30 @@
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
             // 
+            // tbFinanceOverDueDays
+            // 
+            // 
+            // 
+            // 
+            this.tbFinanceOverDueDays.Border.Class = "TextBoxBorder";
+            this.tbFinanceOverDueDays.Location = new System.Drawing.Point(110, 29);
+            this.tbFinanceOverDueDays.Name = "tbFinanceOverDueDays";
+            this.tbFinanceOverDueDays.Size = new System.Drawing.Size(100, 20);
+            this.tbFinanceOverDueDays.TabIndex = 5;
+            // 
+            // lblFinanceOverDueDays
+            // 
+            this.lblFinanceOverDueDays.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblFinanceOverDueDays.BackgroundStyle.Class = "";
+            this.lblFinanceOverDueDays.Location = new System.Drawing.Point(23, 30);
+            this.lblFinanceOverDueDays.Name = "lblFinanceOverDueDays";
+            this.lblFinanceOverDueDays.Size = new System.Drawing.Size(81, 16);
+            this.lblFinanceOverDueDays.TabIndex = 4;
+            this.lblFinanceOverDueDays.Text = "融资逾期天数";
+            // 
             // lblCount
             // 
             this.lblCount.AutoSize = true;
@@ -134,7 +157,7 @@
             this.lblCount.BackgroundStyle.Class = "";
             this.lblCount.Location = new System.Drawing.Point(325, 23);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(75, 23);
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 3;
             // 
             // btnOverDueDaysQuery
@@ -202,18 +225,18 @@
             this.colFinanceCurrency,
             this.colFinanceAmount,
             this.colFinanceOutstanding,
-            this.colFinanceDate,
             this.colFinanceDueDate,
             this.colAROverDueDays,
-            this.colFinanceOverDueDays});
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle13;
+            this.colFinanceOverDueDays,
+            this.colIsDispute});
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvInvoices.Location = new System.Drawing.Point(0, 56);
@@ -261,9 +284,9 @@
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "InvoiceAmount";
-            dataGridViewCellStyle14.Format = "N2";
-            dataGridViewCellStyle14.NullValue = null;
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle13.Format = "N2";
+            dataGridViewCellStyle13.NullValue = null;
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridViewTextBoxColumn6.HeaderText = "票面金额";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
@@ -271,8 +294,8 @@
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle15.Format = "N2";
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle14.Format = "N2";
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridViewTextBoxColumn7.HeaderText = "转让金额";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
@@ -280,8 +303,8 @@
             // dataGridViewTextBoxColumn8
             // 
             this.dataGridViewTextBoxColumn8.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle16.Format = "N2";
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle15.Format = "N2";
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridViewTextBoxColumn8.HeaderText = "转让余额";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.ReadOnly = true;
@@ -289,9 +312,9 @@
             // dataGridViewTextBoxColumn9
             // 
             this.dataGridViewTextBoxColumn9.DataPropertyName = "AssignDate";
-            dataGridViewCellStyle17.Format = "d";
-            dataGridViewCellStyle17.NullValue = null;
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle16.Format = "d";
+            dataGridViewCellStyle16.NullValue = null;
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridViewTextBoxColumn9.HeaderText = "转让日";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             this.dataGridViewTextBoxColumn9.ReadOnly = true;
@@ -299,9 +322,9 @@
             // dataGridViewTextBoxColumn10
             // 
             this.dataGridViewTextBoxColumn10.DataPropertyName = "DueDate";
-            dataGridViewCellStyle18.Format = "d";
-            dataGridViewCellStyle18.NullValue = null;
-            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle17.Format = "d";
+            dataGridViewCellStyle17.NullValue = null;
+            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridViewTextBoxColumn10.HeaderText = "发票到期日";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
@@ -309,9 +332,9 @@
             // dataGridViewTextBoxColumn11
             // 
             this.dataGridViewTextBoxColumn11.DataPropertyName = "DueDate";
-            dataGridViewCellStyle19.Format = "d";
-            dataGridViewCellStyle19.NullValue = null;
-            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle18.Format = "d";
+            dataGridViewCellStyle18.NullValue = null;
+            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridViewTextBoxColumn11.HeaderText = "融资币种";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
@@ -319,8 +342,8 @@
             // dataGridViewTextBoxColumn12
             // 
             this.dataGridViewTextBoxColumn12.DataPropertyName = "FinanceAmount";
-            dataGridViewCellStyle20.Format = "N2";
-            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle19.Format = "N2";
+            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle19;
             this.dataGridViewTextBoxColumn12.HeaderText = "融资金额";
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             this.dataGridViewTextBoxColumn12.ReadOnly = true;
@@ -328,8 +351,8 @@
             // dataGridViewTextBoxColumn13
             // 
             this.dataGridViewTextBoxColumn13.DataPropertyName = "FinanceAmount";
-            dataGridViewCellStyle21.Format = "N2";
-            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle20.Format = "N2";
+            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle20;
             this.dataGridViewTextBoxColumn13.HeaderText = "融资余额";
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             this.dataGridViewTextBoxColumn13.ReadOnly = true;
@@ -337,8 +360,8 @@
             // dataGridViewTextBoxColumn14
             // 
             this.dataGridViewTextBoxColumn14.DataPropertyName = "FinanceDate";
-            dataGridViewCellStyle22.Format = "d";
-            this.dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle21.Format = "d";
+            this.dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle21;
             this.dataGridViewTextBoxColumn14.HeaderText = "融资日";
             this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
             this.dataGridViewTextBoxColumn14.ReadOnly = true;
@@ -346,8 +369,8 @@
             // dataGridViewTextBoxColumn15
             // 
             this.dataGridViewTextBoxColumn15.DataPropertyName = "FinanceDueDate";
-            dataGridViewCellStyle23.Format = "d";
-            this.dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle22.Format = "d";
+            this.dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle22;
             this.dataGridViewTextBoxColumn15.HeaderText = "融资到期日";
             this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
             this.dataGridViewTextBoxColumn15.ReadOnly = true;
@@ -355,8 +378,8 @@
             // dataGridViewTextBoxColumn16
             // 
             this.dataGridViewTextBoxColumn16.DataPropertyName = "FinanceDueDate";
-            dataGridViewCellStyle24.Format = "d";
-            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle23.Format = "d";
+            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle23;
             this.dataGridViewTextBoxColumn16.HeaderText = "应收帐款逾期天数";
             this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
             this.dataGridViewTextBoxColumn16.ReadOnly = true;
@@ -364,9 +387,9 @@
             // dataGridViewTextBoxColumn17
             // 
             this.dataGridViewTextBoxColumn17.DataPropertyName = "AROverDueDays";
-            dataGridViewCellStyle25.Format = "N0";
-            dataGridViewCellStyle25.NullValue = null;
-            this.dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle24.Format = "N0";
+            dataGridViewCellStyle24.NullValue = null;
+            this.dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle24;
             this.dataGridViewTextBoxColumn17.HeaderText = "融资逾期天数";
             this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             this.dataGridViewTextBoxColumn17.ReadOnly = true;
@@ -374,8 +397,8 @@
             // dataGridViewTextBoxColumn18
             // 
             this.dataGridViewTextBoxColumn18.DataPropertyName = "FinanceOverDueDays";
-            dataGridViewCellStyle26.Format = "N0";
-            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle25.Format = "N0";
+            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle25;
             this.dataGridViewTextBoxColumn18.HeaderText = "融资逾期天数";
             this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
             this.dataGridViewTextBoxColumn18.ReadOnly = true;
@@ -495,20 +518,11 @@
             this.colFinanceOutstanding.Name = "colFinanceOutstanding";
             this.colFinanceOutstanding.ReadOnly = true;
             // 
-            // colFinanceDate
-            // 
-            this.colFinanceDate.DataPropertyName = "FinanceDate";
-            dataGridViewCellStyle9.Format = "d";
-            this.colFinanceDate.DefaultCellStyle = dataGridViewCellStyle9;
-            this.colFinanceDate.HeaderText = "融资日";
-            this.colFinanceDate.Name = "colFinanceDate";
-            this.colFinanceDate.ReadOnly = true;
-            // 
             // colFinanceDueDate
             // 
             this.colFinanceDueDate.DataPropertyName = "FinanceDueDate";
-            dataGridViewCellStyle10.Format = "d";
-            this.colFinanceDueDate.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle9.Format = "d";
+            this.colFinanceDueDate.DefaultCellStyle = dataGridViewCellStyle9;
             this.colFinanceDueDate.HeaderText = "融资到期日";
             this.colFinanceDueDate.Name = "colFinanceDueDate";
             this.colFinanceDueDate.ReadOnly = true;
@@ -516,9 +530,9 @@
             // colAROverDueDays
             // 
             this.colAROverDueDays.DataPropertyName = "AROverDueDays";
-            dataGridViewCellStyle11.Format = "N0";
-            dataGridViewCellStyle11.NullValue = null;
-            this.colAROverDueDays.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle10.Format = "N0";
+            dataGridViewCellStyle10.NullValue = null;
+            this.colAROverDueDays.DefaultCellStyle = dataGridViewCellStyle10;
             this.colAROverDueDays.HeaderText = "应收帐款逾期天数";
             this.colAROverDueDays.Name = "colAROverDueDays";
             this.colAROverDueDays.ReadOnly = true;
@@ -526,43 +540,26 @@
             // colFinanceOverDueDays
             // 
             this.colFinanceOverDueDays.DataPropertyName = "FinanceOverDueDays";
-            dataGridViewCellStyle12.Format = "N0";
-            this.colFinanceOverDueDays.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle11.Format = "N0";
+            this.colFinanceOverDueDays.DefaultCellStyle = dataGridViewCellStyle11;
             this.colFinanceOverDueDays.HeaderText = "融资逾期天数";
             this.colFinanceOverDueDays.Name = "colFinanceOverDueDays";
             this.colFinanceOverDueDays.ReadOnly = true;
             // 
-            // tbFinanceOverDueDays
+            // colIsDispute
             // 
+            this.colIsDispute.DataPropertyName = "IsDispute";
+            this.colIsDispute.HeaderText = "是否商纠";
+            this.colIsDispute.Name = "colIsDispute";
+            this.colIsDispute.ReadOnly = true;
             // 
-            // 
-            // 
-            this.tbFinanceOverDueDays.Border.Class = "TextBoxBorder";
-            this.tbFinanceOverDueDays.Location = new System.Drawing.Point(110, 29);
-            this.tbFinanceOverDueDays.Name = "tbFinanceOverDueDays";
-            this.tbFinanceOverDueDays.Size = new System.Drawing.Size(100, 20);
-            this.tbFinanceOverDueDays.TabIndex = 5;
-            // 
-            // lblFinanceOverDueDays
-            // 
-            this.lblFinanceOverDueDays.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblFinanceOverDueDays.BackgroundStyle.Class = "";
-            this.lblFinanceOverDueDays.Location = new System.Drawing.Point(23, 30);
-            this.lblFinanceOverDueDays.Name = "lblFinanceOverDueDays";
-            this.lblFinanceOverDueDays.Size = new System.Drawing.Size(81, 16);
-            this.lblFinanceOverDueDays.TabIndex = 4;
-            this.lblFinanceOverDueDays.Text = "融资逾期天数";
-            // 
-            // InvoiceMgr
+            // OverDueMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvInvoices);
             this.Controls.Add(this.panelQuery);
-            this.Name = "InvoiceMgr";
+            this.Name = "OverDueMgr";
             this.Size = new System.Drawing.Size(550, 348);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
@@ -597,6 +594,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceOverDueDays;
+        private DevComponents.DotNetBar.LabelX lblFinanceOverDueDays;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
@@ -611,11 +610,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAROverDueDays;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOverDueDays;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceOverDueDays;
-        private DevComponents.DotNetBar.LabelX lblFinanceOverDueDays;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsDispute;
     }
 }
