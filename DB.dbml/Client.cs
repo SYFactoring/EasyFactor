@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CMBC.EasyFactor.ARMgr;
 
 namespace CMBC.EasyFactor.DB.dbml
 {
@@ -49,6 +50,73 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        public System.Nullable<double> FinanceOutstanding
+        {
+            get
+            {
+                double? total = null;
+                foreach (Case curCase in this.SellerCases)
+                {
+                    foreach (CDA cda in curCase.CDAs)
+                    {
+                        double? temp = ARCaseBasic.CaculateFinanceOutstanding(cda);
+                        if (temp.HasValue)
+                        {
+                            if (total == null)
+                            {
+                                total = 0;
+                            }
+                            total += temp.Value;
+                        }
+                    }
+                }
+                return total;
+            }
+        }
+
+        public System.Nullable<double> CreditLineOutstanding
+        {
+            get
+            {
+                double? total = this.FinanceOutstanding;
+
+                foreach (ClientCreditLine creditLine in this.ClientCreditLines)
+                {
+                    if (creditLine.CreditLineType == "保理预付款融资额度" && creditLine.CreditLineStatus == "已生效")
+                    {
+                        return creditLine.CreditLine - total;
+                    }
+                }
+                return null;
+            }
+        }
+
+        public ClientCreditLine AssignCreditLine
+        {
+            get
+            {
+                return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == "已生效" && c.CreditLineType == "买方信用风险担保额度");
+            }
+        }
+
+        public ClientCreditLine FinanceCreditLine
+        {
+            get
+            {
+                return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == "已生效" && c.CreditLineType == "保理预付款融资额度");
+            }
+        }
+
+        /// <summary>
+        /// 主合同
+        /// </summary>
+        public Contract Contract
+        {
+            get
+            {
+                return this.Contracts.SingleOrDefault(c => c.ContractStatus == "已生效");
+            }
+        }
         #endregion Methods
     }
 

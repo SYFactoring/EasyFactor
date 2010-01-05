@@ -192,9 +192,9 @@ namespace CMBC.EasyFactor.CaseMgr
                         curCase.SellerClient = null;
                     }
                 }
- 
+
             }
-       }
+        }
 
         /// <summary>
         /// Initializes a new instance of the CaseDetail class
@@ -448,12 +448,18 @@ namespace CMBC.EasyFactor.CaseMgr
                 MessageBox.Show("请首先选择一个案子", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
-            CreditCoverNegotiation creditCoverNeg = new CreditCoverNegotiation();
-            creditCoverNeg.CreateUserName = App.Current.CurUser.Name;
-            this.creditCoverNegBindingSource.DataSource = creditCoverNeg;
-            this.opCreditCoverNegType = OpCreditCoverNegType.NEW_CREDIT_COVER_NEG;
-            this.UpdateCreditCoverNegControlStatus();
+            if (curCase.TransactionType == "出口保理" || curCase.TransactionType == "进口保理" || curCase.TransactionType == "国际信保保理")
+            {
+                CreditCoverNegotiation creditCoverNeg = new CreditCoverNegotiation();
+                creditCoverNeg.CreateUserName = App.Current.CurUser.Name;
+                this.creditCoverNegBindingSource.DataSource = creditCoverNeg;
+                this.opCreditCoverNegType = OpCreditCoverNegType.NEW_CREDIT_COVER_NEG;
+                this.UpdateCreditCoverNegControlStatus();
+            }
+            else
+            {
+                MessageBox.Show("国内保理案不需要向国外保理商申请额度", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         /// <summary>
@@ -827,7 +833,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             this.tbCaseCreateUser.ReadOnly = true;
-            this.cbCaseMark.Enabled = false;
 
         }
 

@@ -6330,6 +6330,12 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _ManagerName;
 		
+		private string _PaymentTerm;
+		
+		private string _ReviewNo;
+		
+		private string _Comment;
+		
 		private EntitySet<CreditCoverNegotiation> _CreditCoverNegotiations;
 		
 		private EntitySet<CDA> _CDAs;
@@ -6378,6 +6384,12 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreateUserNameChanged();
     partial void OnManagerNameChanging(string value);
     partial void OnManagerNameChanged();
+    partial void OnPaymentTermChanging(string value);
+    partial void OnPaymentTermChanged();
+    partial void OnReviewNoChanging(string value);
+    partial void OnReviewNoChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
     #endregion
 		
 		public Case()
@@ -6693,6 +6705,66 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._ManagerName = value;
 					this.SendPropertyChanged("ManagerName");
 					this.OnManagerNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PaymentTerm", DbType="NVarChar(500)")]
+		public string PaymentTerm
+		{
+			get
+			{
+				return this._PaymentTerm;
+			}
+			set
+			{
+				if ((this._PaymentTerm != value))
+				{
+					this.OnPaymentTermChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentTerm = value;
+					this.SendPropertyChanged("PaymentTerm");
+					this.OnPaymentTermChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ReviewNo", DbType="VarChar(50)")]
+		public string ReviewNo
+		{
+			get
+			{
+				return this._ReviewNo;
+			}
+			set
+			{
+				if ((this._ReviewNo != value))
+				{
+					this.OnReviewNoChanging(value);
+					this.SendPropertyChanging();
+					this._ReviewNo = value;
+					this.SendPropertyChanged("ReviewNo");
+					this.OnReviewNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
 				}
 			}
 		}
@@ -8221,7 +8293,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _PaymentTerms;
 		
-		private string _FinanceGracePeriod;
+		private System.Nullable<int> _FinanceGracePeriod;
 		
 		private System.Nullable<double> _Deductibles;
 		
@@ -8309,7 +8381,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnOrderNumberChanged();
     partial void OnPaymentTermsChanging(string value);
     partial void OnPaymentTermsChanged();
-    partial void OnFinanceGracePeriodChanging(string value);
+    partial void OnFinanceGracePeriodChanging(System.Nullable<int> value);
     partial void OnFinanceGracePeriodChanged();
     partial void OnDeductiblesChanging(System.Nullable<double> value);
     partial void OnDeductiblesChanged();
@@ -8760,8 +8832,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceGracePeriod", DbType="NVarchar(500)")]
-		public string FinanceGracePeriod
+		[Column(Storage="_FinanceGracePeriod", DbType="int")]
+		public System.Nullable<int> FinanceGracePeriod
 		{
 			get
 			{

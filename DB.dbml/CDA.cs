@@ -18,7 +18,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 return string.Empty;
             }
-            Contract contract = selectedCase.SellerClient.Contracts.SingleOrDefault(c => c.ContractStatus == "已生效");
+            Contract contract = selectedCase.SellerClient.Contract;
             if (contract != null)
             {
                 CDA formerCDA = App.Current.DbContext.CDAs.OrderByDescending(c => c.CDACode).FirstOrDefault(c => c.CDACode.StartsWith(contract.ContractCode));
@@ -28,9 +28,13 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
                 else
                 {
-                    int index = Int32.Parse(formerCDA.CDACode.Substring(formerCDA.CDACode.LastIndexOf("-")+1));
+                    int index = Int32.Parse(formerCDA.CDACode.Substring(formerCDA.CDACode.LastIndexOf("-") + 1));
                     return String.Format("{0}-{1:000}", contract.ContractCode, index + 1);
                 }
+            }
+            else if (selectedCase.TransactionType == "进口保理")
+            {
+                return String.Format("{0}000-{1:000}", selectedCase.CaseCode, selectedCase.CDAs.Count + 1);
             }
             else
             {

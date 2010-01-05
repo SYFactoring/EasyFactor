@@ -1175,7 +1175,7 @@
             this.tbCDACode.Location = new System.Drawing.Point(105, 2);
             this.tbCDACode.Name = "tbCDACode";
             this.tbCDACode.ReadOnly = true;
-            this.tbCDACode.Size = new System.Drawing.Size(100, 20);
+            this.tbCDACode.Size = new System.Drawing.Size(153, 20);
             this.tbCDACode.TabIndex = 1;
             // 
             // tbHighestFinance

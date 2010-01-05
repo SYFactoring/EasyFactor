@@ -234,11 +234,11 @@
     <Compile Include="InfoMgr\FactorMgr\FactorMgr.Designer.cs">
       <DependentUpon>FactorMgr.cs</DependentUpon>
     </Compile>
-    <Compile Include="Report\ReportMgr.cs">
+    <Compile Include="Report\AssignReportMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Report\ReportMgr.Designer.cs">
-      <DependentUpon>ReportMgr.cs</DependentUpon>
+    <Compile Include="Report\AssignReportMgr.Designer.cs">
+      <DependentUpon>AssignReportMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ExportUtil.cs" />
     <Compile Include="Utils\ImportForm.cs">
@@ -366,8 +366,8 @@
       <DependentUpon>FactorMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\ReportMgr.resx">
-      <DependentUpon>ReportMgr.cs</DependentUpon>
+    <EmbeddedResource Include="Report\AssignReportMgr.resx">
+      <DependentUpon>AssignReportMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Utils\ImportForm.resx">
@@ -472,7 +472,6 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FOMSLOGO.png" />
     <Content Include="Properties\Resources\Images\army-officer-icon-48.png" />
     <Content Include="Properties\Resources\Images\banknote-icon-48.png" />
     <Content Include="Properties\Resources\Images\bar-chart-icon-48.png" />

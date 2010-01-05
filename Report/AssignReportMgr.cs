@@ -12,11 +12,12 @@ namespace CMBC.EasyFactor.Report
     using Microsoft.Office.Core;
     using Microsoft.Office.Interop.Excel;
     using System.IO;
+    using CMBC.EasyFactor.CaseMgr;
 
     /// <summary>
     /// 
     /// </summary>
-    public partial class ReportMgr : UserControl
+    public partial class AssignReportMgr : UserControl
     {
         #region Fields (2)
 
@@ -41,7 +42,7 @@ namespace CMBC.EasyFactor.Report
             /// <summary>
             /// 
             /// </summary>
-            REPORT_AR,
+            REPORT_ASSIGN,
 
             /// <summary>
             /// 
@@ -62,7 +63,7 @@ namespace CMBC.EasyFactor.Report
         /// 
         /// </summary>
         /// <param name="opReportType"></param>
-        public ReportMgr(OpReportType opReportType)
+        public AssignReportMgr(OpReportType opReportType)
         {
             InitializeComponent();
             this.opReportType = opReportType;
@@ -70,13 +71,68 @@ namespace CMBC.EasyFactor.Report
             this.dgvInvoices.AutoGenerateColumns = false;
             this.dgvInvoices.DataSource = this.bs;
             ControlUtil.SetDoubleBuffered(this.dgvInvoices);
+
+
+            if (this.opReportType == OpReportType.REPORT_ASSIGN)
+            {
+                this.diAssignDateBegin.Value = DateTime.Now;
+                this.diAssignDateEnd.Value = DateTime.Now;
+            }
+            else if (this.opReportType == OpReportType.REPORT_FINANCE)
+            {
+                this.cbIsFlaw.Checked = false;
+                this.cbIsFlaw.Enabled = false;
+            }
+            else if (this.opReportType == OpReportType.REPORT_FEE)
+            {
+                this.diAssignDateBegin.Value = DateTime.Now;
+                this.diAssignDateEnd.Value = DateTime.Now;
+            }
         }
 
         #endregion Constructors
 
-        #region Methods (7)
+        #region Methods (11)
 
-        // Private Methods (7) 
+        // Private Methods (11) 
+
+        private void DetailCase(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
+            {
+                return;
+            }
+
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
+            if (ino != null)
+            {
+                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
+                if (selectedInvoice != null)
+                {
+                    CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.CDA.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+                    caseDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        private void DetailCDA(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
+            {
+                return;
+            }
+
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
+            if (ino != null)
+            {
+                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
+                if (selectedInvoice != null)
+                {
+                    CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
+                    cdaDetail.ShowDialog(this);
+                }
+            }
+        }
 
         private void DetailInvoice(object sender, DataGridViewCellEventArgs e)
         {
@@ -93,6 +149,46 @@ namespace CMBC.EasyFactor.Report
                 {
                     InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
                     invoiceDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        private void DetailInvoice(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
+            {
+                return;
+            }
+
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
+            if (ino != null)
+            {
+                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
+                if (selectedInvoice != null)
+                {
+                    InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
+                    invoiceDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        private void dgvInvoiceAssignBatch_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewColumn column = this.dgvInvoices.Columns[e.ColumnIndex];
+            if (column == colIsFlaw)
+            {
+                Object originalData = e.Value;
+                if (originalData != null)
+                {
+                    bool result = (bool)originalData;
+                    if (result)
+                    {
+                        e.Value = "Y";
+                    }
+                    else
+                    {
+                        e.Value = "N";
+                    }
                 }
             }
         }
@@ -115,7 +211,7 @@ namespace CMBC.EasyFactor.Report
                 string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSLOGO.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 40);
 
-                sheet.Cells[1, 1] = String.Format("致{0}公司", seller.ToString());
+                sheet.Cells[1, 1] = String.Format("致{0}", seller.ToString());
                 sheet.Cells[3, 2] = "应收账款转让明细表";
                 sheet.get_Range(sheet.Cells[3, 2], sheet.Cells[3, 2]).Font.Size = 24;
                 sheet.get_Range(sheet.Cells[2, 1], sheet.Cells[2, 5]).RowHeight = 30;
@@ -126,13 +222,35 @@ namespace CMBC.EasyFactor.Report
                 foreach (IGrouping<Client, Invoice> buyerGroup in groupsByBuyer)
                 {
                     Client buyer = buyerGroup.Key;
-                    Factor buyerFactor = buyerGroup.First().InvoiceAssignBatch.CDA.Case.BuyerFactor;
+                    CDA cda = buyerGroup.First().InvoiceAssignBatch.CDA;
+                    Case curCase = cda.Case;
+                    Factor factor = null;
+                    switch (curCase.TransactionType)
+                    {
+                        case "国内卖方保理":
+                        case "国内信保保理":
+                        case "国内买方保理":
+                        case "租赁保理":
+                            break;
+                        case "国际信保保理":
+                        case "出口保理":
+                        case "进口保理":
+                            factor = curCase.BuyerFactor;
+                            break;
+                        default:
+                            break;
+                    }
                     sheet.Cells[row, 1] = "买方：";
                     sheet.Cells[row++, 2] = String.Format("{0}（应收账款债务人）", buyer.ToString());
-                    sheet.Cells[row, 1] = "进口保理商：";
-                    sheet.Cells[row++, 2] = buyerFactor.ToString();
-                    sheet.Cells[row++, 1] = "信用风险额度：";
-                    sheet.Cells[row++, 1] = "应收账款余额：";
+                    if (factor != null)
+                    {
+                        sheet.Cells[row, 1] = "进口保理商：";
+                        sheet.Cells[row++, 2] = factor.ToString();
+                    }
+                    sheet.Cells[row, 1] = "信用风险额度：";
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", ARCaseBasic.CaculateCreditCoverOutstanding(cda));
+                    sheet.Cells[row, 1] = "应收账款余额：";
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", ARCaseBasic.CaculateAROutstanding(cda));
 
                     row++;
                     sheet.Cells[row, 1] = "发票号";
@@ -142,10 +260,10 @@ namespace CMBC.EasyFactor.Report
                     sheet.Cells[row, 5] = "文件瑕疵";
 
                     row++;
-                    int invoiceStart = row - 1;
+                    int invoiceStart = row;
                     foreach (Invoice invoice in buyerGroup)
                     {
-                        sheet.Cells[row, 1] = invoice.InvoiceNo;
+                        sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
                         sheet.Cells[row, 2] = invoice.AssignAmount;
                         sheet.Cells[row, 3] = invoice.InvoiceDate;
                         sheet.Cells[row, 4] = invoice.DueDate;
@@ -161,94 +279,7 @@ namespace CMBC.EasyFactor.Report
                     sheet.get_Range(sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]).NumberFormatLocal = "yyyy/MM/dd";
                     sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "yyyy/MM/dd";
                     sheet.get_Range(sheet.Cells[invoiceStart, 5], sheet.Cells[invoiceEnd, 5]).NumberFormatLocal = "0.00";
-                    sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
-                }
-
-                row++;
-                row++;
-
-                sheet.Cells[row, 1] = "本行已完成上述发票/贷项发票转让，特此通知";
-                sheet.Cells[row + 2, 3] = "中国民生银行       （业务章）";
-                sheet.Cells[row + 3, 3] = "签字：";
-                sheet.Cells[row + 4, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
-
-                sheet.UsedRange.Font.Name = "楷体";
-
-                sheet.get_Range("A1", Type.Missing).ColumnWidth = 15;
-                sheet.get_Range("B1", Type.Missing).ColumnWidth = 15;
-                sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
-                sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
-                sheet.get_Range("E1", Type.Missing).ColumnWidth = 15;
-                app.Visible = true;
-            }
-        }
-
-        private void GenerateFinanceReport(List<Invoice> invoiceList)
-        {
-            IEnumerable<IGrouping<Client, Invoice>> groupsBySeller = invoiceList.GroupBy(i => i.InvoiceAssignBatch.CDA.Case.SellerClient);
-            foreach (IGrouping<Client, Invoice> sellerGroup in groupsBySeller)
-            {
-                Client seller = sellerGroup.Key;
-                ApplicationClass app = new ApplicationClass() { Visible = false };
-                if (app == null)
-                {
-                    MessageBox.Show("Excel 程序无法启动!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
-
-                string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSLOGO.png");
-                sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 40);
-
-                sheet.Cells[1, 1] = String.Format("卖方：{0}公司", seller.ToString());
-                sheet.Cells[3, 2] = "可融资账款明细表";
-                sheet.get_Range(sheet.Cells[3, 2], sheet.Cells[3, 2]).Font.Size = 24;
-                sheet.get_Range(sheet.Cells[2, 1], sheet.Cells[2, 5]).RowHeight = 30;
-
-                IEnumerable<IGrouping<Client, Invoice>> groupsByBuyer = sellerGroup.GroupBy(i => i.InvoiceAssignBatch.CDA.Case.BuyerClient);
-
-                int row = 5;
-                foreach (IGrouping<Client, Invoice> buyerGroup in groupsByBuyer)
-                {
-                    Client buyer = buyerGroup.Key;
-                    Factor buyerFactor = buyerGroup.First().InvoiceAssignBatch.CDA.Case.BuyerFactor;
-                    sheet.Cells[row, 1] = "买方:";
-                    sheet.Cells[row++, 2] = String.Format("{0}（应收账款债务人）", buyer.ToString());
-                    sheet.Cells[row, 1] = "进口保理商：";
-                    sheet.Cells[row++, 2] = buyerFactor.ToString();
-                    sheet.Cells[row++, 1] = "信用风险额度：";
-                    sheet.Cells[row++, 1] = "应收账款余额：";
-                    sheet.Cells[row++, 1] = "预付款额度：";
-                    sheet.Cells[row++, 1] = "融资余额：";
-
-                    row++;
-                    sheet.Cells[row, 1] = "发票号";
-                    sheet.Cells[row, 2] = "转让金额";
-                    sheet.Cells[row, 3] = "发票日期";
-                    sheet.Cells[row, 4] = "到期日";
-                    sheet.Cells[row, 5] = "备注";
-
-                    row++;
-                    int invoiceStart = row - 1;
-                    foreach (Invoice invoice in buyerGroup)
-                    {
-                        sheet.Cells[row, 1] = invoice.InvoiceNo;
-                        sheet.Cells[row, 2] = invoice.AssignAmount;
-                        sheet.Cells[row, 3] = invoice.InvoiceDate;
-                        sheet.Cells[row, 4] = invoice.DueDate;
-                        sheet.Cells[row, 5] = invoice.Comment;
-                        row++;
-                    }
-                    int invoiceEnd = row - 1;
-                    row++;
-                    row++;
-                    sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
-                    sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                    sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = "0.00";
-                    sheet.get_Range(sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]).NumberFormatLocal = "yyyy/MM/dd";
-                    sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "yyyy/MM/dd";
-                    sheet.get_Range(sheet.Cells[invoiceStart, 5], sheet.Cells[invoiceEnd, 5]).NumberFormatLocal = "0.00";
-                    sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
                 }
 
                 row++;
@@ -287,7 +318,7 @@ namespace CMBC.EasyFactor.Report
                 string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSLOGO.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 40);
 
-                sheet.Cells[1, 1] = String.Format("卖方：{0}公司", seller.ToString());
+                sheet.Cells[1, 1] = String.Format("卖方：{0}", seller.ToString());
                 sheet.Cells[3, 2] = "保理费用明细表";
                 sheet.get_Range(sheet.Cells[3, 2], sheet.Cells[3, 2]).Font.Size = 24;
                 sheet.get_Range(sheet.Cells[2, 1], sheet.Cells[2, 5]).RowHeight = 30;
@@ -300,12 +331,30 @@ namespace CMBC.EasyFactor.Report
                 {
                     Client buyer = buyerGroup.Key;
                     Case curCase = buyerGroup.First().InvoiceAssignBatch.CDA.Case;
-                    Factor buyerFactor = curCase.BuyerFactor;
+                    Factor factor = null;
+                    switch (curCase.TransactionType)
+                    {
+                        case "国内卖方保理":
+                        case "国内信保保理":
+                        case "国内买方保理":
+                        case "租赁保理":
+                            break;
+                        case "国际信保保理":
+                        case "出口保理":
+                        case "进口保理":
+                            factor = curCase.BuyerFactor;
+                            break;
+                        default:
+                            break;
+                    }
 
                     sheet.Cells[row, 1] = "买方";
                     sheet.Cells[row++, 2] = String.Format("{0}（应收账款债务人）", buyer.ToString());
-                    sheet.Cells[row, 1] = "保理商";
-                    sheet.Cells[row, 2] = buyerFactor.ToString();
+                    if (factor != null)
+                    {
+                        sheet.Cells[row, 1] = "保理商";
+                        sheet.Cells[row, 2] = factor.ToString();
+                    }
                     sheet.Cells[row, 5] = "币别";
                     sheet.Cells[row++, 6] = curCase.InvoiceCurrency;
                     sheet.Cells[row, 1] = "发票号码";
@@ -314,11 +363,11 @@ namespace CMBC.EasyFactor.Report
                     sheet.Cells[row, 4] = "保理费率";
                     sheet.Cells[row, 5] = "单据处理费";
                     sheet.Cells[row++, 6] = "每笔费用";
-                    int invoiceStart = row - 1;
+                    int invoiceStart = row;
                     foreach (Invoice invoice in buyerGroup)
                     {
-                        sheet.Cells[row, 1] = invoice.InvoiceNo;
-                        sheet.Cells[row, 2] = invoice.InvoiceAmount;
+                        sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
+                        sheet.Cells[row, 2] = invoice.AssignAmount;
                         sheet.Cells[row, 3] = invoice.AssignDate;
                         sheet.Cells[row, 4] = invoice.InvoiceAssignBatch.CDA.Price;
                         sheet.Cells[row, 5] = invoice.InvoiceAssignBatch.CDA.HandFee;
@@ -335,7 +384,7 @@ namespace CMBC.EasyFactor.Report
                     sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "0.00%";
                     sheet.get_Range(sheet.Cells[invoiceStart, 5], sheet.Cells[invoiceEnd, 5]).NumberFormatLocal = "0.00";
                     sheet.get_Range(sheet.Cells[invoiceStart, 6], sheet.Cells[invoiceEnd, 6]).NumberFormatLocal = "0.00";
-                    sheet.get_Range(sheet.Cells[invoiceStart - 2, 1], sheet.Cells[invoiceEnd, 6]).Borders.LineStyle = 1;
+                    sheet.get_Range(sheet.Cells[invoiceStart - 3, 1], sheet.Cells[invoiceEnd, 6]).Borders.LineStyle = 1;
                 }
 
                 row++;
@@ -362,6 +411,123 @@ namespace CMBC.EasyFactor.Report
             }
         }
 
+        private void GenerateFinanceReport(List<Invoice> invoiceList)
+        {
+            IEnumerable<IGrouping<Client, Invoice>> groupsBySeller = invoiceList.GroupBy(i => i.InvoiceAssignBatch.CDA.Case.SellerClient);
+            foreach (IGrouping<Client, Invoice> sellerGroup in groupsBySeller)
+            {
+                Client seller = sellerGroup.Key;
+                ApplicationClass app = new ApplicationClass() { Visible = false };
+                if (app == null)
+                {
+                    MessageBox.Show("Excel 程序无法启动!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+                string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSLOGO.png");
+                sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 40);
+
+                sheet.Cells[3, 2] = "可融资账款明细表";
+                sheet.get_Range(sheet.Cells[3, 2], sheet.Cells[3, 2]).Font.Size = 24;
+                sheet.get_Range(sheet.Cells[2, 1], sheet.Cells[2, 5]).RowHeight = 30;
+
+                sheet.Cells[5, 1] = "卖方：";
+                sheet.Cells[5, 2] = seller.ToString();
+                sheet.Cells[6, 1] = "最高预付款额度：";
+                sheet.Cells[6, 2] = String.Format("{0:N2}", seller.CreditLineOutstanding);
+                sheet.Cells[7, 1] = "总融资余额";
+                sheet.Cells[7, 2] = String.Format("{0:N2}", seller.FinanceOutstanding);
+
+                IEnumerable<IGrouping<Client, Invoice>> groupsByBuyer = sellerGroup.GroupBy(i => i.InvoiceAssignBatch.CDA.Case.BuyerClient);
+
+                int row = 9;
+                foreach (IGrouping<Client, Invoice> buyerGroup in groupsByBuyer)
+                {
+                    Client buyer = buyerGroup.Key;
+                    CDA cda = buyerGroup.First().InvoiceAssignBatch.CDA;
+                    Case curCase = cda.Case;
+                    Factor factor = null;
+                    switch (curCase.TransactionType)
+                    {
+                        case "国内卖方保理":
+                        case "国内信保保理":
+                        case "国内买方保理":
+                        case "租赁保理":
+                            break;
+                        case "国际信保保理":
+                        case "出口保理":
+                        case "进口保理":
+                            factor = curCase.BuyerFactor;
+                            break;
+                        default:
+                            break;
+                    }
+                    sheet.Cells[row, 1] = "买方:";
+                    sheet.Cells[row++, 2] = String.Format("{0}（应收账款债务人）", buyer.ToString());
+                    if (factor != null)
+                    {
+                        sheet.Cells[row, 1] = "进口保理商：";
+                        sheet.Cells[row++, 2] = factor.ToString();
+                    }
+                    sheet.Cells[row, 1] = "信用风险额度：";
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", ARCaseBasic.CaculateCreditCoverOutstanding(cda));
+                    sheet.Cells[row, 1] = "应收账款余额：";
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", ARCaseBasic.CaculateAROutstanding(cda));
+                    sheet.Cells[row, 1] = "预付款额度：";
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", ARCaseBasic.CaculateCreditLineOutstanding(cda));
+                    sheet.Cells[row, 1] = "融资余额：";
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", ARCaseBasic.CaculateFinanceOutstanding(cda));
+
+                    row++;
+                    sheet.Cells[row, 1] = "发票号";
+                    sheet.Cells[row, 2] = "转让金额";
+                    sheet.Cells[row, 3] = "发票日期";
+                    sheet.Cells[row, 4] = "到期日";
+                    sheet.Cells[row, 5] = "备注";
+
+                    row++;
+                    int invoiceStart = row;
+                    foreach (Invoice invoice in buyerGroup)
+                    {
+                        sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
+                        sheet.Cells[row, 2] = invoice.AssignAmount;
+                        sheet.Cells[row, 3] = invoice.InvoiceDate;
+                        sheet.Cells[row, 4] = invoice.DueDate;
+                        sheet.Cells[row, 5] = invoice.Comment;
+                        row++;
+                    }
+                    int invoiceEnd = row - 1;
+                    row++;
+                    row++;
+                    sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
+                    sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = "0.00";
+                    sheet.get_Range(sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]).NumberFormatLocal = "yyyy/MM/dd";
+                    sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "yyyy/MM/dd";
+                    sheet.get_Range(sheet.Cells[invoiceStart, 5], sheet.Cells[invoiceEnd, 5]).NumberFormatLocal = "0.00";
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
+                }
+
+                row++;
+                row++;
+
+                sheet.Cells[row, 1] = "本行已完成上述发票/贷项发票转让，特此通知";
+                sheet.Cells[row + 2, 3] = "中国民生银行       （业务章）";
+                sheet.Cells[row + 3, 3] = "签字：";
+                sheet.Cells[row + 4, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+
+                sheet.UsedRange.Font.Name = "楷体";
+
+                sheet.get_Range("A1", Type.Missing).ColumnWidth = 15;
+                sheet.get_Range("B1", Type.Missing).ColumnWidth = 15;
+                sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
+                sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
+                sheet.get_Range("E1", Type.Missing).ColumnWidth = 15;
+                app.Visible = true;
+            }
+        }
+
         private void GenerateReport(object sender, EventArgs e)
         {
             List<Invoice> invoiceList = (List<Invoice>)this.bs.DataSource;
@@ -372,7 +538,7 @@ namespace CMBC.EasyFactor.Report
 
             switch (opReportType)
             {
-                case OpReportType.REPORT_AR:
+                case OpReportType.REPORT_ASSIGN:
                     GenerateAssignReport(invoiceList);
                     break;
                 case OpReportType.REPORT_FINANCE:
@@ -396,6 +562,7 @@ namespace CMBC.EasyFactor.Report
             string sellerName = this.tbSeller.Text;
             string buyerName = this.tbBuyer.Text;
             string factorName = this.tbFactor.Text;
+            string isFlaw = this.cbIsFlaw.CheckValue as string;
 
             DateTime beginDate = this.diAssignDateBegin.MinDate;
             if (this.diAssignDateBegin.Value > this.diAssignDateBegin.MinDate)
@@ -419,7 +586,7 @@ namespace CMBC.EasyFactor.Report
                               let buyerFactor = invoice.InvoiceAssignBatch.CDA.Case.BuyerFactor
                               where buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
                               where
-                                  invoice.IsFlaw == this.cbIsFlaw.Checked
+                                    (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
                                  && (beginDate == this.diAssignDateBegin.MinDate ? true : invoice.AssignDate > beginDate.AddDays(-1))
                                  && (endDate == this.diAssignDateEnd.MaxDate ? true : invoice.AssignDate < endDate.AddDays(1))
                               select invoice;

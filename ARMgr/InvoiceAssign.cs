@@ -19,11 +19,10 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoiceAssign : UserControl
     {
-        #region Fields (1)
-
-        private ARCaseBasic caseBasic;
+        #region Fields (2)
 
         private CDA _CDA;
+        private ARCaseBasic caseBasic;
 
         #endregion Fields
 
@@ -62,7 +61,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (12)
+        #region Methods (14)
 
         // Public Methods (2) 
 
@@ -94,7 +93,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoiceBindingSource.DataSource = typeof(Invoice);
             this.invoiceAssignBatchBindingSource.DataSource = typeof(InvoiceAssignBatch);
         }
-        // Private Methods (10) 
+        // Private Methods (12) 
 
         /// <summary>
         /// Show detail info of selected inovice
@@ -117,6 +116,23 @@ namespace CMBC.EasyFactor.ARMgr
                     InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
                     invoiceDetail.ShowDialog(this);
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvInvoices_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvInvoices.Rows[e.RowIndex].IsNewRow)
+            {
+                IList invoiceList = this.invoiceBindingSource.List;
+                Invoice invoice = (Invoice)invoiceList[e.RowIndex];
+                InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
+                invoice.InvoiceCurrency = assignBatch.BatchCurrency;
+                invoice.AssignDate = DateTime.Now;
             }
         }
 
@@ -153,6 +169,34 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvInvoices_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+
+            IList invoiceList = this.invoiceBindingSource.List;
+            Invoice invoice = (Invoice)invoiceList[e.RowIndex];
+            if (this.dgvInvoices.Columns[e.ColumnIndex] == colInvoiceAmount)
+            {
+                if (!invoice.AssignAmount.HasValue)
+                {
+                    invoice.AssignAmount = invoice.InvoiceAmount;
+                }
+            }
+            else if (this.dgvInvoices.Columns[e.ColumnIndex] == colInvoiceDate)
+            {
+                if (!invoice.ValueDate.HasValue)
+                {
+                    invoice.ValueDate = invoice.InvoiceDate;
+                }
+            }
+        }
+
         private void dgvInvoices_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DetailInvoice(null, null);
@@ -176,12 +220,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e">Event Args</param>
         private void Flaw(object sender, System.EventArgs e)
         {
-            if (this.dgvInvoices.SelectedRows.Count == 0)
+            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
             {
                 return;
             }
 
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
             if (ino != null)
             {
                 Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
@@ -226,8 +270,10 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceAssignBatch assignBatch = new InvoiceAssignBatch();
+            assignBatch.BatchDate = DateTime.Now;
             assignBatch.CreateUserName = App.Current.CurUser.Name;
             assignBatch.IsCreateMsg = false;
+            assignBatch.BatchCurrency = this._CDA.Case.InvoiceCurrency;
             this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
             this.invoiceBindingSource.DataSource = assignBatch.Invoices.ToList();
         }
@@ -258,7 +304,12 @@ namespace CMBC.EasyFactor.ARMgr
             if (assignBatch.AssignBatchNo == null)
             {
                 assignBatch.AssignBatchNo = GenerateAssignBatchNo(this._CDA, DateTime.Now);
-                assignBatch.BatchDate = DateTime.Now;
+            }
+            IList invoiceList = this.invoiceBindingSource.List;
+            for (int i = 0; i < invoiceList.Count; i++)
+            {
+
+                ((Invoice)invoiceList[i]).InvoiceAssignBatch = assignBatch;
             }
             try
             {

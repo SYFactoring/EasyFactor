@@ -80,7 +80,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ARPaymentReport(object sender, EventArgs e)
         {
-            ReportMgr assignMgr = new ReportMgr(ReportMgr.OpReportType.REPORT_AR);
+            AssignReportMgr assignMgr = new AssignReportMgr(AssignReportMgr.OpReportType.REPORT_ASSIGN);
             this.SetDetailPanel(assignMgr);
         }
 
@@ -133,7 +133,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void FeeReport(object sender, EventArgs e)
         {
-            ReportMgr reportMgr = new ReportMgr(ReportMgr.OpReportType.REPORT_FEE);
+            AssignReportMgr reportMgr = new AssignReportMgr(AssignReportMgr.OpReportType.REPORT_FEE);
             this.SetDetailPanel(reportMgr);
         }
 
@@ -144,7 +144,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void FinanceReport(object sender, EventArgs e)
         {
-            ReportMgr assignMgr = new ReportMgr(ReportMgr.OpReportType.REPORT_FINANCE);
+            AssignReportMgr assignMgr = new AssignReportMgr(AssignReportMgr.OpReportType.REPORT_FINANCE);
             this.SetDetailPanel(assignMgr);
         }
 

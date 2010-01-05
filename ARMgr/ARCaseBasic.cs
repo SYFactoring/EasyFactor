@@ -107,34 +107,33 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Constructors
 
-        #region Methods (6)
+        #region Methods (7)
 
-        // Private Methods (6) 
-
-        public void CaculateOutstanding(CDA cda)
-        {
-            this.CaculateAROutstanding(cda);
-            this.CaculateCreditCoverOutstanding(cda);
-            this.CaculateCreditLineOutstanding(cda);
-            this.CaculateFinanceOutstanding(cda);
-        }
+        // Public Methods (5) 
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="cda"></param>
         /// <returns></returns>
-        private string CaculateAROutstanding(CDA cda)
+        public static System.Nullable<double> CaculateAROutstanding(CDA cda)
         {
-            double total = 0;
+            double? total = null;
             foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
             {
                 foreach (Invoice invoice in assignBatch.Invoices)
                 {
-                    total += invoice.AssignOutstanding;
+                    if (invoice.AssignOutstanding.HasValue)
+                    {
+                        if (total == null)
+                        {
+                            total = 0;
+                        }
+                        total += invoice.AssignOutstanding.Value;
+                    }
                 }
             }
-            return String.Format("{0:N2}", total);
+            return total;
         }
 
         /// <summary>
@@ -142,25 +141,32 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="cda"></param>
         /// <returns></returns>
-        private string CaculateCreditCoverOutstanding(CDA cda)
+        public static System.Nullable<double> CaculateCreditCoverOutstanding(CDA cda)
         {
             if (cda.CreditCover == null)
             {
-                return string.Empty;
+                return null;
             }
             if (cda.CreditCover == 0)
             {
-                return String.Format("{0:N2}", 0);
+                return 0;
             }
-            double total = 0;
+            double? total = null;
             foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
             {
                 foreach (Invoice invoice in assignBatch.Invoices)
                 {
-                    total += invoice.AssignOutstanding;
+                    if (invoice.AssignOutstanding.HasValue)
+                    {
+                        if (total == null)
+                        {
+                            total = 0;
+                        }
+                        total += invoice.AssignOutstanding.Value;
+                    }
                 }
             }
-            return String.Format("{0:N2}", cda.CreditCover - total);
+            return cda.CreditCover - total;
         }
 
         /// <summary>
@@ -168,25 +174,32 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="cda"></param>
         /// <returns></returns>
-        private string CaculateCreditLineOutstanding(CDA cda)
+        public static System.Nullable<double> CaculateCreditLineOutstanding(CDA cda)
         {
             if (cda.FinanceLine == null)
             {
-                return string.Empty;
+                return null;
             }
             if (cda.FinanceLine == 0)
             {
-                return String.Format("{0:N2}", 0);
+                return 0;
             }
-            double total = 0;
+            double? total = null;
             foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
             {
                 foreach (Invoice invoice in assignBatch.Invoices)
                 {
-                    total += invoice.FinanceOutstanding;
+                    if (invoice.FinanceOutstanding.HasValue)
+                    {
+                        if (total == null)
+                        {
+                            total = 0;
+                        }
+                        total += invoice.FinanceOutstanding.Value;
+                    }
                 }
             }
-            return String.Format("{0:N2}", cda.FinanceLine - total);
+            return cda.FinanceLine - total;
         }
 
         /// <summary>
@@ -194,18 +207,34 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="cda"></param>
         /// <returns></returns>
-        private string CaculateFinanceOutstanding(CDA cda)
+        public static System.Nullable<double> CaculateFinanceOutstanding(CDA cda)
         {
-            double total = 0;
+            double? total = null;
             foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
             {
                 foreach (Invoice invoice in assignBatch.Invoices)
                 {
-                    total += invoice.FinanceOutstanding;
+                    if (invoice.FinanceOutstanding.HasValue)
+                    {
+                        if (total == null)
+                        {
+                            total = 0;
+                        }
+                        total += invoice.FinanceOutstanding.Value;
+                    }
                 }
             }
-            return String.Format("{0:N2}", total);
+            return total;
         }
+
+        public void CaculateOutstanding(CDA cda)
+        {
+            this.tbCreditCoverOutstanding.Text = String.Format("{0:N2}", CaculateCreditCoverOutstanding(cda));
+            this.tbAROutstanding.Text = String.Format("{0:N2}", CaculateAROutstanding(cda));
+            this.tbFinanceCreditLineOutstanding.Text = String.Format("{0:N2}", CaculateCreditLineOutstanding(cda));
+            this.tbFinanceOutstanding.Text = String.Format("{0:N2}", CaculateFinanceOutstanding(cda));
+        }
+        // Private Methods (2) 
 
         /// <summary>
         /// 
@@ -261,15 +290,14 @@ namespace CMBC.EasyFactor.ARMgr
                 this.creditCoverCurrTextBox.Text = cda.CreditCoverCurr;
                 this.creditCoverTextBox.Text = String.Format("{0:N2}", cda.CreditCover);
                 this.periodEndTextBox.Text = String.Format("{0:d}", cda.CreditCoverPeriodEnd);
-                this.tbCreditCoverOutstanding.Text = CaculateCreditCoverOutstanding(cda);
-                this.tbAROutstanding.Text = CaculateAROutstanding(cda);
+
 
                 this.financeProportionTextBox.Text = String.Format("{0:P0}", cda.FinanceProportion);
                 this.tbFinanceLineCurr.Text = cda.FinanceLineCurr;
                 this.tbFinanceLine.Text = String.Format("{0:N2}", cda.FinanceLine);
                 this.tbDueDate.Text = String.Format("{0:d}", cda.FinanceLinePeriodEnd);
-                this.tbFinanceCreditLineOutstanding.Text = CaculateCreditLineOutstanding(cda);
-                this.tbFinanceOutstanding.Text = CaculateFinanceOutstanding(cda);
+
+                CaculateOutstanding(cda);
 
                 Control control = this.panelInvoiceMgr.Controls[0];
                 if (control is InvoiceAssign)

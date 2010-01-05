@@ -58,7 +58,6 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             CDA cda = (CDA)this.CDABindingSource.DataSource;
             cda.Case = selectedCase;
-            this.contractCodeTextBox.Text = selectedCase.SellerClient.Contracts.SingleOrDefault(c => c.ContractStatus == "已生效").ContractCode;
         }
 
         /// <summary>
@@ -69,6 +68,7 @@ namespace CMBC.EasyFactor.CaseMgr
         public CDADetail(CDA cda, OpCDAType opCDAType)
         {
             this.InitializeComponent();
+            this.opCDAType = opCDAType;
 
             this.pUGProportionTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
             this.pUGProportionTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
@@ -101,18 +101,17 @@ namespace CMBC.EasyFactor.CaseMgr
 
             this.assignTypeComboBox.Items.AddRange(new string[] { "全部", "部分" });
             this.commissionTypeComboBox.Items.AddRange(new string[] { "按转让金额", "按融资金额", "其他" });
-            this.cDAStatusComboBox.Items.AddRange(new string[] { "未审核", "已审核未下发", "已下发未签回", "已签回" });
-
-            this.opCDAType = opCDAType;
+            this.cDAStatusComboBox.Items.AddRange(new string[] { "未审核", "已审核未下发", "已下发未签回", "已签回", "已失效" });
 
             if (opCDAType == OpCDAType.NEW_CDA)
             {
-                cda = GenerateDefaultCDA();
+                cda = GenerateDefaultCDA(null);
                 this.CDABindingSource.DataSource = cda;
             }
             else
             {
                 this.CDABindingSource.DataSource = cda;
+                FillCase(cda.Case);
                 if (cda.NoticeMethod != null)
                 {
                     string[] methods = cda.NoticeMethod.Split(',');
@@ -142,9 +141,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Constructors
 
-        #region Methods (12)
+        #region Methods (10)
 
-        // Private Methods (12) 
+        // Private Methods (10) 
 
         void cda_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -222,25 +221,62 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="curCase"></param>
+        private void FillCase(Case curCase)
+        {
+            CDA cda = (CDA)this.CDABindingSource.DataSource;
+            Contract contract = cda.Case.SellerClient.Contract;
+            if (contract != null)
+            {
+                this.contractCodeTextBox.Text = contract.ContractCode;
+            }
+            this.tbHighestFinance.Text = String.Format("{0:N2}", cda.Case.SellerClient.FinanceCreditLine.CreditLine);
+        }
 
-
-        private CDA GenerateDefaultCDA()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="curCase"></param>
+        /// <returns></returns>
+        private CDA GenerateDefaultCDA(Case curCase)
         {
             CDA cda = new CDA();
+            if (curCase != null)
+            {
+                cda.HandFeeCurr = curCase.InvoiceCurrency;
+                ClientCreditLine buyerCreditLine = curCase.BuyerClient.AssignCreditLine;
+                if (buyerCreditLine != null)
+                {
+                    cda.CreditCoverPeriodBegin = buyerCreditLine.PeriodBegin;
+                    cda.CreditCoverPeriodEnd = buyerCreditLine.PeriodEnd;
+                    cda.CreditCoverCurr = buyerCreditLine.CreditLineCurrency;
+                    cda.CreditCover = buyerCreditLine.CreditLine;
+                }
+                ClientCreditLine sellerCreditLine = curCase.SellerClient.FinanceCreditLine;
+                if (sellerCreditLine != null)
+                {
+                    cda.FinanceLinePeriodBegin = sellerCreditLine.PeriodBegin;
+                    cda.FinanceLinePeriodEnd = sellerCreditLine.PeriodEnd;
+                    cda.FinanceLineCurr = sellerCreditLine.CreditLineCurrency;
+                    cda.FinanceLine = sellerCreditLine.CreditLine;
+                }
+            }
+            cda.CDASignDate = DateTime.Now;
+            cda.CommissionType = "按转让金额";
             cda.PUGProportion = 1;
             cda.PUGPeriod = 90;
             cda.ReassignGracePeriod = 60;
             cda.FinanceProportion = 0.8;
-           // cda.IsNotice = false;
+            cda.IsNotice = "明保理";
             cda.IsRecoarse = false;
-            cda.IsCreditCoverRevolving = false;
             cda.CDAStatus = "未审核";
             cda.IsCreditCoverRevolving = true;
             cda.AssignType = "全部";
             return cda;
         }
-
-
 
         /// <summary>
         /// 
@@ -291,6 +327,22 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     cda.Backup();
+                    if (cda.Case.CaseMark == "申请案")
+                    {
+                        cda.Case.CaseMark = "启动案";
+                        App.Current.DbContext.SubmitChanges();
+                    }
+                    if (cda.CDAStatus == "已签回")
+                    {
+                        foreach (CDA c in cda.Case.CDAs)
+                        {
+                            if (c != cda && c.CDAStatus == "已签回")
+                            {
+                                c.CDAStatus = "已失效";
+                            }
+                        }
+                        App.Current.DbContext.SubmitChanges();
+                    }
                     this.opCDAType = OpCDAType.UPDATE_CDA;
                 }
             }
@@ -316,6 +368,17 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     cda.Backup();
+                    if (cda.CDAStatus == "已签回")
+                    {
+                        foreach (CDA c in cda.Case.CDAs)
+                        {
+                            if (c != cda && c.CDAStatus == "已签回")
+                            {
+                                c.CDAStatus = "已失效";
+                            }
+                        }
+                        App.Current.DbContext.SubmitChanges();
+                    }
                 }
             }
         }
@@ -334,10 +397,10 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = caseMgr.Selected;
             if (curCase != null)
             {
-                this.contractCodeTextBox.Text = curCase.SellerClient.Contracts.SingleOrDefault(c => c.ContractStatus == "已生效").ContractCode;
-                CDA cda = GenerateDefaultCDA();
+                CDA cda = GenerateDefaultCDA(curCase);
                 cda.Case = curCase;
                 this.CDABindingSource.DataSource = cda;
+                FillCase(curCase);
             }
         }
 

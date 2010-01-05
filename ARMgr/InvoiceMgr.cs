@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using System.Collections;
+    using CMBC.EasyFactor.CaseMgr;
 
     /// <summary>
     /// 
@@ -77,9 +78,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Constructors
 
-        #region Methods (8)
+        #region Methods (10)
 
-        // Private Methods (8) 
+        // Private Methods (10) 
 
         private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -88,12 +89,12 @@ namespace CMBC.EasyFactor.ARMgr
 
         private void DeleteInvoice(object sender, EventArgs e)
         {
-            if (this.dgvInvoices.SelectedRows.Count == 0)
+            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
             {
                 return;
             }
 
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
             if (ino != null)
             {
                 Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
@@ -118,14 +119,52 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        private void DetailInvoice(object sender, EventArgs e)
+        private void DetailCase(object sender, EventArgs e)
         {
-            if (this.dgvInvoices.SelectedRows.Count == 0)
+            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
             {
                 return;
             }
 
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
+            if (ino != null)
+            {
+                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
+                if (selectedInvoice != null)
+                {
+                    CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.CDA.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+                    caseDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        private void DetailCDA(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
+            {
+                return;
+            }
+
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
+            if (ino != null)
+            {
+                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
+                if (selectedInvoice != null)
+                {
+                    CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
+                    cdaDetail.ShowDialog(this);
+                }
+            }
+        }
+
+        private void DetailInvoice(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
+            {
+                return;
+            }
+
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
             if (ino != null)
             {
                 Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
@@ -169,12 +208,12 @@ namespace CMBC.EasyFactor.ARMgr
 
         private void InvoiceFlaw(object sender, EventArgs e)
         {
-            if (this.dgvInvoices.SelectedRows.Count == 0)
+            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
             {
                 return;
             }
 
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
+            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
             if (ino != null)
             {
                 Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
@@ -211,7 +250,7 @@ namespace CMBC.EasyFactor.ARMgr
                               where buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
                               where (invoiceNo == string.Empty ? true : invoice.InvoiceNo == invoiceNo)
                                 && (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
-                                && (isDispute=="A"?true:invoice.IsDispute==(isDispute=="Y"?true:false))
+                                && (isDispute == "A" ? true : invoice.IsDispute == (isDispute == "Y" ? true : false))
                               select invoice;
             this.bs.DataSource = queryResult.ToList();
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());

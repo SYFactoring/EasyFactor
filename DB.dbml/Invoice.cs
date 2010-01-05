@@ -54,19 +54,23 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public double AssignOutstanding
+        public System.Nullable<double> AssignOutstanding
         {
             get
             {
-                return this.AssignAmount.GetValueOrDefault() - this.PaymentAmount.GetValueOrDefault();
+                if (!this.AssignAmount.HasValue)
+                    return null;
+                return this.AssignAmount.Value - this.PaymentAmount.GetValueOrDefault();
             }
         }
 
-        public double FinanceOutstanding
+        public System.Nullable<double> FinanceOutstanding
         {
             get
             {
-                return this.FinanceAmount.GetValueOrDefault() - this.RefundAmount.GetValueOrDefault();
+                if (!this.FinanceAmount.HasValue)
+                    return null;
+                return this.FinanceAmount.Value - this.RefundAmount.GetValueOrDefault();
             }
         }
 

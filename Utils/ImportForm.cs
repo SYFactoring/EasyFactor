@@ -17,16 +17,16 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class ImportForm : DevComponents.DotNetBar.Office2007Form
     {
-		#region Fields (4) 
+        #region Fields (4)
 
         private ApplicationClass app;
         private Worksheet datasheet;
         private ImportType importType;
         private Workbook workbook;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -99,11 +99,11 @@ namespace CMBC.EasyFactor.Utils
             IMPORT_ASSIGN_FINANCE_PAYMENT
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
-public ImportForm(ImportType importType)
+        public ImportForm(ImportType importType)
         {
             InitializeComponent();
             this.importType = importType;
@@ -150,9 +150,9 @@ public ImportForm(ImportType importType)
             }
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (1) 
+        #region Properties (1)
 
         public IList ImportedList
         {
@@ -160,11 +160,11 @@ public ImportForm(ImportType importType)
             get;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (20) 
+        #region Methods (20)
 
-		// Private Methods (20) 
+        // Private Methods (20) 
 
         /// <summary>
         /// 
@@ -564,6 +564,7 @@ public ImportForm(ImportType importType)
                         curCase.OwnerDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == ownerDeptName);
                     }
                     curCase.TransactionType = String.Format("{0:G}", valueArray[row, column++]);
+                    curCase.ReviewNo = String.Format("{0:G}", valueArray[row, column++]);
                     curCase.OperationType = String.Format("{0:G}", valueArray[row, column++]);
                     string coDeptName = String.Format("{0:G}", valueArray[row, column++]);
                     if (!String.Empty.Equals(coDeptName))
@@ -596,8 +597,9 @@ public ImportForm(ImportType importType)
                     }
                     column++;
                     curCase.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.CaseAppDate = (DateTime)valueArray[row, column++];
+                    curCase.CaseAppDate = (System.Nullable<DateTime>)valueArray[row, column++];
                     curCase.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                    curCase.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
                     App.Current.DbContext.SubmitChanges();
                     result++;
@@ -839,7 +841,7 @@ public ImportForm(ImportType importType)
                     cda.FinanceLinePeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++];
                     column++;//最高保理预付款额度
                     cda.FinanceProportion = (System.Nullable<double>)valueArray[row, column++];
-                    cda.FinanceGracePeriod = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.FinanceGracePeriod = (System.Nullable<int>)valueArray[row, column++];
                     cda.PaymentTerms = String.Format("{0:G}", valueArray[row, column++]);
                     cda.OrderNumber = String.Format("{0:G}", valueArray[row, column++]);
                     cda.Deductibles = (System.Nullable<double>)valueArray[row, column++];
@@ -860,11 +862,12 @@ public ImportForm(ImportType importType)
                     cda.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                     cda.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
+                    App.Current.DbContext.SubmitChanges();
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
             }
-            App.Current.DbContext.SubmitChanges();
+
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
             this.ReleaseResource();
@@ -1346,6 +1349,6 @@ public ImportForm(ImportType importType)
             this.btnStart.Enabled = false;
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

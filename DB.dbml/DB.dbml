@@ -293,6 +293,9 @@
       <Column Name="CaseMark" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="ManagerName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PaymentTerm" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="ReviewNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="Case_CreditCoverNegotiation" Member="CreditCoverNegotiations" OtherKey="CaseCode" Type="CreditCoverNegotiation" />
       <Association Name="Case_CDA" Member="CDAs" OtherKey="CaseCode" Type="CDA" />
       <Association Name="Client_Case" Member="BuyerClient" ThisKey="BuyerCode" Type="Client" IsForeignKey="true" />
@@ -376,7 +379,7 @@
       <Column Name="FinanceProportion" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="PaymentTerms" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="FinanceGracePeriod" Type="System.String" DbType="NVarchar(500)" CanBeNull="true" />
+      <Column Name="FinanceGracePeriod" Type="System.Int32" DbType="int" CanBeNull="true" />
       <Column Name="Deductibles" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="LossThreshold" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Price" Type="System.Double" DbType="Float" CanBeNull="true" />

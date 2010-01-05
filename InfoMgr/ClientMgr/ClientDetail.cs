@@ -642,6 +642,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (creditLine.CreditLineStatus == "已生效")
+                    {
+                        foreach (ClientCreditLine ccl in client.ClientCreditLines)
+                        {
+                            if (ccl != creditLine && ccl.CreditLineStatus == "已生效" && ccl.CreditLineType == creditLine.CreditLineType)
+                            {
+                                ccl.CreditLineStatus = "已过期";
+                            }
+                        }
+                        App.Current.DbContext.SubmitChanges();
+                    }
                     this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
                     this.NewClientCreditLine(null, null);
                 }
@@ -662,6 +673,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (creditLine.CreditLineStatus == "已生效")
+                    {
+                        foreach (ClientCreditLine ccl in client.ClientCreditLines)
+                        {
+                            if (ccl != creditLine && ccl.CreditLineStatus == "已生效" && ccl.CreditLineType == creditLine.CreditLineType)
+                            {
+                                ccl.CreditLineStatus = "已过期";
+                            }
+                        }
+                        App.Current.DbContext.SubmitChanges();
+                    }
                     this.dgvClientCreditLines.Refresh();
                     creditLine.Backup();
                 }

@@ -2,7 +2,7 @@
 {
     partial class CaseDetail
     {
-		#region Fields (112) 
+        #region Fields (112)
 
         private DevComponents.DotNetBar.ButtonX btnCaseBuyerSelect;
         private DevComponents.DotNetBar.ButtonX btnCaseReset;
@@ -27,54 +27,13 @@
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseTransactionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colApproveAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colApproveDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colApproveType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCase;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACase;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDADueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAIFPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAValueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionTypeComment;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCover;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeductibles;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEFPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceGracePeriod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceProportion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFeeCurr;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsCreditCoverRevolving;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsNotice;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsRecoarse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLossThreshold;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNegoID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNoticeMethod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNoticePersion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentTerms;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPUGPeriod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPUGProportion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReassignGracePeriod;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequestDate;
         /// <summary>
@@ -111,16 +70,16 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerNameCN;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerNameEN;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerNo;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbComment;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCreditCoverComment;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbIFPrice;
         private DevComponents.DotNetBar.Controls.TextBoxX tbRequestAmount;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Methods (1) 
+        #region Methods (1)
 
-		// Protected Methods (1) 
+        // Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -135,7 +94,7 @@
             base.Dispose(disposing);
         }
 
-		#endregion Methods 
+        #endregion Methods
 
 
 
@@ -167,18 +126,25 @@
             DevComponents.DotNetBar.LabelX lblCaseBuyerNo;
             DevComponents.DotNetBar.LabelX lblCaseSellerNo;
             DevComponents.DotNetBar.LabelX lblCaseFactor;
+            DevComponents.DotNetBar.LabelX lblManagerName;
+            DevComponents.DotNetBar.LabelX lblPaymentTerm;
+            DevComponents.DotNetBar.LabelX lblReviewNo;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaseDetail));
+            DevComponents.DotNetBar.LabelX lblComment;
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelCase = new DevComponents.DotNetBar.TabControlPanel();
             this.btnCaseUpdate = new DevComponents.DotNetBar.ButtonX();
             this.btnCaseReset = new DevComponents.DotNetBar.ButtonX();
             this.btnCaseSave = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.cbCaseTransactionType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.tbReviewNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.caseBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tbPaymentTerm = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbManagerName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cbCaseTransactionType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tbCaseFactorNameEN = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cbCaseCoDepts = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cbCaseOwnerDepts = new DevComponents.DotNetBar.Controls.ComboTree();
@@ -220,7 +186,7 @@
             this.btnCreditCoverNegRefresh = new DevComponents.DotNetBar.ButtonX();
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditCoverNegBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tbComment = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbCreditCoverComment = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cbApproveType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.diRequestDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.diApproveDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -233,12 +199,12 @@
             this.colCDACode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCDACaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCDACase = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsRecoarse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colIsNotice = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colIsRecoarse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsNotice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditCoverCurr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditCover = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsCreditCoverRevolving = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colIsCreditCoverRevolving = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colApproveNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPUGProportion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditCoverPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -288,6 +254,7 @@
             this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.creditCoverErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.creditCoverHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.tbComment = new DevComponents.DotNetBar.Controls.TextBoxX();
             requestAmountLabel = new DevComponents.DotNetBar.LabelX();
             approveAmountLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
@@ -307,6 +274,10 @@
             lblCaseBuyerNo = new DevComponents.DotNetBar.LabelX();
             lblCaseSellerNo = new DevComponents.DotNetBar.LabelX();
             lblCaseFactor = new DevComponents.DotNetBar.LabelX();
+            lblManagerName = new DevComponents.DotNetBar.LabelX();
+            lblPaymentTerm = new DevComponents.DotNetBar.LabelX();
+            lblReviewNo = new DevComponents.DotNetBar.LabelX();
+            lblComment = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPanelCase.SuspendLayout();
@@ -449,11 +420,11 @@
             // 
             // 
             lblCaseCoDept.BackgroundStyle.Class = "";
-            lblCaseCoDept.Location = new System.Drawing.Point(204, 181);
+            lblCaseCoDept.Location = new System.Drawing.Point(204, 176);
             lblCaseCoDept.Name = "lblCaseCoDept";
             lblCaseCoDept.Size = new System.Drawing.Size(59, 16);
             lblCaseCoDept.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            lblCaseCoDept.TabIndex = 21;
+            lblCaseCoDept.TabIndex = 23;
             lblCaseCoDept.Text = "协销分部:";
             // 
             // lblCaseOwnerDept
@@ -465,11 +436,11 @@
             // 
             lblCaseOwnerDept.BackgroundStyle.Class = "";
             lblCaseOwnerDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            lblCaseOwnerDept.Location = new System.Drawing.Point(7, 209);
+            lblCaseOwnerDept.Location = new System.Drawing.Point(7, 200);
             lblCaseOwnerDept.Name = "lblCaseOwnerDept";
             lblCaseOwnerDept.Size = new System.Drawing.Size(84, 16);
             lblCaseOwnerDept.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            lblCaseOwnerDept.TabIndex = 23;
+            lblCaseOwnerDept.TabIndex = 25;
             lblCaseOwnerDept.Text = "业务归属机构:";
             // 
             // lblCaseOpType
@@ -481,11 +452,11 @@
             // 
             lblCaseOpType.BackgroundStyle.Class = "";
             lblCaseOpType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            lblCaseOpType.Location = new System.Drawing.Point(33, 186);
+            lblCaseOpType.Location = new System.Drawing.Point(33, 177);
             lblCaseOpType.Name = "lblCaseOpType";
             lblCaseOpType.Size = new System.Drawing.Size(59, 16);
             lblCaseOpType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            lblCaseOpType.TabIndex = 19;
+            lblCaseOpType.TabIndex = 21;
             lblCaseOpType.Text = "操作类型:";
             // 
             // lblCaseCreateUser
@@ -496,11 +467,11 @@
             // 
             // 
             lblCaseCreateUser.BackgroundStyle.Class = "";
-            lblCaseCreateUser.Location = new System.Drawing.Point(225, 249);
+            lblCaseCreateUser.Location = new System.Drawing.Point(236, 286);
             lblCaseCreateUser.Name = "lblCaseCreateUser";
             lblCaseCreateUser.Size = new System.Drawing.Size(47, 16);
             lblCaseCreateUser.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            lblCaseCreateUser.TabIndex = 29;
+            lblCaseCreateUser.TabIndex = 35;
             lblCaseCreateUser.Text = "经办人:";
             // 
             // lblCaseMark
@@ -511,11 +482,11 @@
             // 
             // 
             lblCaseMark.BackgroundStyle.Class = "";
-            lblCaseMark.Location = new System.Drawing.Point(225, 229);
+            lblCaseMark.Location = new System.Drawing.Point(225, 262);
             lblCaseMark.Name = "lblCaseMark";
             lblCaseMark.Size = new System.Drawing.Size(59, 16);
             lblCaseMark.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            lblCaseMark.TabIndex = 27;
+            lblCaseMark.TabIndex = 31;
             lblCaseMark.Text = "案件状态:";
             // 
             // lblCaseAppDate
@@ -526,11 +497,11 @@
             // 
             // 
             lblCaseAppDate.BackgroundStyle.Class = "";
-            lblCaseAppDate.Location = new System.Drawing.Point(31, 229);
+            lblCaseAppDate.Location = new System.Drawing.Point(30, 264);
             lblCaseAppDate.Name = "lblCaseAppDate";
             lblCaseAppDate.Size = new System.Drawing.Size(59, 16);
             lblCaseAppDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            lblCaseAppDate.TabIndex = 25;
+            lblCaseAppDate.TabIndex = 29;
             lblCaseAppDate.Text = "申请日期:";
             // 
             // lblCaseTransactionType
@@ -558,7 +529,7 @@
             // 
             lblCaseInvoiceCurrency.BackgroundStyle.Class = "";
             lblCaseInvoiceCurrency.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            lblCaseInvoiceCurrency.Location = new System.Drawing.Point(33, 164);
+            lblCaseInvoiceCurrency.Location = new System.Drawing.Point(33, 155);
             lblCaseInvoiceCurrency.Name = "lblCaseInvoiceCurrency";
             lblCaseInvoiceCurrency.Size = new System.Drawing.Size(59, 16);
             lblCaseInvoiceCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -612,6 +583,53 @@
             lblCaseFactor.TabIndex = 12;
             lblCaseFactor.Text = "保理商:";
             // 
+            // lblManagerName
+            // 
+            lblManagerName.AutoSize = true;
+            lblManagerName.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblManagerName.BackgroundStyle.Class = "";
+            lblManagerName.Location = new System.Drawing.Point(2, 285);
+            lblManagerName.Name = "lblManagerName";
+            lblManagerName.Size = new System.Drawing.Size(87, 16);
+            lblManagerName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            lblManagerName.TabIndex = 33;
+            lblManagerName.Text = "营销/维护经理:";
+            // 
+            // lblPaymentTerm
+            // 
+            lblPaymentTerm.AutoSize = true;
+            lblPaymentTerm.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblPaymentTerm.BackgroundStyle.Class = "";
+            lblPaymentTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            lblPaymentTerm.Location = new System.Drawing.Point(30, 222);
+            lblPaymentTerm.Name = "lblPaymentTerm";
+            lblPaymentTerm.Size = new System.Drawing.Size(59, 16);
+            lblPaymentTerm.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            lblPaymentTerm.TabIndex = 27;
+            lblPaymentTerm.Text = "付款条件:";
+            // 
+            // lblReviewNo
+            // 
+            lblReviewNo.AutoSize = true;
+            lblReviewNo.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblReviewNo.BackgroundStyle.Class = "";
+            lblReviewNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            lblReviewNo.Location = new System.Drawing.Point(204, 153);
+            lblReviewNo.Name = "lblReviewNo";
+            lblReviewNo.Size = new System.Drawing.Size(97, 16);
+            lblReviewNo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            lblReviewNo.TabIndex = 19;
+            lblReviewNo.Text = "协查意见书编号:";
+            // 
             // tabControl
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
@@ -624,7 +642,7 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl.SelectedTabIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(521, 352);
+            this.tabControl.Size = new System.Drawing.Size(521, 424);
             this.tabControl.TabIndex = 0;
             this.tabControl.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl.Tabs.Add(this.tabItemCase);
@@ -642,7 +660,7 @@
             this.tabPanelCase.Location = new System.Drawing.Point(0, 26);
             this.tabPanelCase.Name = "tabPanelCase";
             this.tabPanelCase.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelCase.Size = new System.Drawing.Size(521, 326);
+            this.tabPanelCase.Size = new System.Drawing.Size(521, 398);
             this.tabPanelCase.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelCase.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelCase.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -657,7 +675,7 @@
             // 
             this.btnCaseUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCaseUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseUpdate.Location = new System.Drawing.Point(132, 295);
+            this.btnCaseUpdate.Location = new System.Drawing.Point(148, 363);
             this.btnCaseUpdate.Name = "btnCaseUpdate";
             this.btnCaseUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnCaseUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -669,7 +687,7 @@
             // 
             this.btnCaseReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCaseReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseReset.Location = new System.Drawing.Point(294, 295);
+            this.btnCaseReset.Location = new System.Drawing.Point(310, 363);
             this.btnCaseReset.Name = "btnCaseReset";
             this.btnCaseReset.Size = new System.Drawing.Size(75, 23);
             this.btnCaseReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -681,7 +699,7 @@
             // 
             this.btnCaseSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCaseSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseSave.Location = new System.Drawing.Point(213, 295);
+            this.btnCaseSave.Location = new System.Drawing.Point(229, 363);
             this.btnCaseSave.Name = "btnCaseSave";
             this.btnCaseSave.Size = new System.Drawing.Size(75, 23);
             this.btnCaseSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -694,6 +712,14 @@
             this.groupPanelCase.AutoScroll = true;
             this.groupPanelCase.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCase.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelCase.Controls.Add(this.tbComment);
+            this.groupPanelCase.Controls.Add(lblComment);
+            this.groupPanelCase.Controls.Add(this.tbReviewNo);
+            this.groupPanelCase.Controls.Add(lblReviewNo);
+            this.groupPanelCase.Controls.Add(this.tbPaymentTerm);
+            this.groupPanelCase.Controls.Add(lblPaymentTerm);
+            this.groupPanelCase.Controls.Add(this.tbManagerName);
+            this.groupPanelCase.Controls.Add(lblManagerName);
             this.groupPanelCase.Controls.Add(this.cbCaseTransactionType);
             this.groupPanelCase.Controls.Add(this.tbCaseFactorNameEN);
             this.groupPanelCase.Controls.Add(this.cbCaseCoDepts);
@@ -728,7 +754,7 @@
             this.groupPanelCase.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelCase.Location = new System.Drawing.Point(1, 1);
             this.groupPanelCase.Name = "groupPanelCase";
-            this.groupPanelCase.Size = new System.Drawing.Size(519, 288);
+            this.groupPanelCase.Size = new System.Drawing.Size(519, 356);
             // 
             // 
             // 
@@ -760,6 +786,48 @@
             this.groupPanelCase.StyleMouseOver.Class = "";
             this.groupPanelCase.TabIndex = 0;
             // 
+            // tbReviewNo
+            // 
+            // 
+            // 
+            // 
+            this.tbReviewNo.Border.Class = "TextBoxBorder";
+            this.tbReviewNo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "ReviewNo", true));
+            this.tbReviewNo.Location = new System.Drawing.Point(307, 152);
+            this.tbReviewNo.Name = "tbReviewNo";
+            this.tbReviewNo.Size = new System.Drawing.Size(100, 20);
+            this.tbReviewNo.TabIndex = 20;
+            // 
+            // caseBindingSource
+            // 
+            this.caseBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Case);
+            // 
+            // tbPaymentTerm
+            // 
+            // 
+            // 
+            // 
+            this.tbPaymentTerm.Border.Class = "TextBoxBorder";
+            this.tbPaymentTerm.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "PaymentTerm", true));
+            this.tbPaymentTerm.Location = new System.Drawing.Point(98, 222);
+            this.tbPaymentTerm.Multiline = true;
+            this.tbPaymentTerm.Name = "tbPaymentTerm";
+            this.tbPaymentTerm.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbPaymentTerm.Size = new System.Drawing.Size(375, 35);
+            this.tbPaymentTerm.TabIndex = 28;
+            // 
+            // tbManagerName
+            // 
+            // 
+            // 
+            // 
+            this.tbManagerName.Border.Class = "TextBoxBorder";
+            this.tbManagerName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "ManagerName", true));
+            this.tbManagerName.Location = new System.Drawing.Point(98, 284);
+            this.tbManagerName.Name = "tbManagerName";
+            this.tbManagerName.Size = new System.Drawing.Size(102, 20);
+            this.tbManagerName.TabIndex = 34;
+            // 
             // cbCaseTransactionType
             // 
             this.cbCaseTransactionType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "TransactionType", true));
@@ -772,10 +840,6 @@
             this.cbCaseTransactionType.Size = new System.Drawing.Size(124, 21);
             this.cbCaseTransactionType.TabIndex = 1;
             this.caseValidator.SetValidator1(this.cbCaseTransactionType, this.requiredFieldValidator1);
-            // 
-            // caseBindingSource
-            // 
-            this.caseBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Case);
             // 
             // tbCaseFactorNameEN
             // 
@@ -796,11 +860,11 @@
             this.cbCaseCoDepts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbCaseCoDepts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCaseCoDepts.FormattingEnabled = true;
-            this.cbCaseCoDepts.Location = new System.Drawing.Point(269, 181);
+            this.cbCaseCoDepts.Location = new System.Drawing.Point(269, 174);
             this.cbCaseCoDepts.Name = "cbCaseCoDepts";
             this.cbCaseCoDepts.Size = new System.Drawing.Size(176, 21);
             this.cbCaseCoDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCaseCoDepts.TabIndex = 22;
+            this.cbCaseCoDepts.TabIndex = 24;
             // 
             // cbCaseOwnerDepts
             // 
@@ -810,11 +874,11 @@
             // 
             this.cbCaseOwnerDepts.BackgroundStyle.Class = "TextBoxBorder";
             this.cbCaseOwnerDepts.ButtonDropDown.Visible = true;
-            this.cbCaseOwnerDepts.Location = new System.Drawing.Point(98, 206);
+            this.cbCaseOwnerDepts.Location = new System.Drawing.Point(98, 197);
             this.cbCaseOwnerDepts.Name = "cbCaseOwnerDepts";
             this.cbCaseOwnerDepts.Size = new System.Drawing.Size(278, 23);
             this.cbCaseOwnerDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCaseOwnerDepts.TabIndex = 24;
+            this.cbCaseOwnerDepts.TabIndex = 26;
             this.caseValidator.SetValidator1(this.cbCaseOwnerDepts, this.requiredFieldValidator4);
             this.cbCaseOwnerDepts.SelectionChanged += new DevComponents.AdvTree.AdvTreeNodeEventHandler(this.CaseOwnerDeptsChanged);
             // 
@@ -829,11 +893,11 @@
             "自营",
             "协销",
             "其他"});
-            this.cbCaseOpType.Location = new System.Drawing.Point(98, 184);
+            this.cbCaseOpType.Location = new System.Drawing.Point(98, 175);
             this.cbCaseOpType.Name = "cbCaseOpType";
             this.cbCaseOpType.Size = new System.Drawing.Size(100, 20);
             this.cbCaseOpType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCaseOpType.TabIndex = 20;
+            this.cbCaseOpType.TabIndex = 22;
             this.caseValidator.SetValidator1(this.cbCaseOpType, this.requiredFieldValidator3);
             this.cbCaseOpType.SelectionChangeCommitted += new System.EventHandler(this.CaseOpTypeChanged);
             // 
@@ -872,11 +936,11 @@
             // 
             this.tbCaseCreateUser.Border.Class = "TextBoxBorder";
             this.tbCaseCreateUser.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "CreateUserName", true));
-            this.tbCaseCreateUser.Location = new System.Drawing.Point(285, 252);
+            this.tbCaseCreateUser.Location = new System.Drawing.Point(285, 285);
             this.tbCaseCreateUser.Name = "tbCaseCreateUser";
             this.tbCaseCreateUser.ReadOnly = true;
             this.tbCaseCreateUser.Size = new System.Drawing.Size(100, 20);
-            this.tbCaseCreateUser.TabIndex = 30;
+            this.tbCaseCreateUser.TabIndex = 36;
             // 
             // cbCaseMark
             // 
@@ -886,11 +950,12 @@
             this.cbCaseMark.ForeColor = System.Drawing.SystemColors.WindowText;
             this.cbCaseMark.Items.AddRange(new object[] {
             "申请案",
-            "交易案"});
-            this.cbCaseMark.Location = new System.Drawing.Point(285, 230);
+            "启动案",
+            "已结案"});
+            this.cbCaseMark.Location = new System.Drawing.Point(285, 263);
             this.cbCaseMark.Name = "cbCaseMark";
             this.cbCaseMark.Size = new System.Drawing.Size(100, 21);
-            this.cbCaseMark.TabIndex = 28;
+            this.cbCaseMark.TabIndex = 32;
             // 
             // diCaseAppDate
             // 
@@ -902,7 +967,7 @@
             this.diCaseAppDate.ButtonDropDown.Visible = true;
             this.diCaseAppDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "CaseAppDate", true));
             this.diCaseAppDate.FocusHighlightEnabled = true;
-            this.diCaseAppDate.Location = new System.Drawing.Point(99, 230);
+            this.diCaseAppDate.Location = new System.Drawing.Point(99, 263);
             // 
             // 
             // 
@@ -938,7 +1003,7 @@
             this.diCaseAppDate.Name = "diCaseAppDate";
             this.diCaseAppDate.Size = new System.Drawing.Size(120, 20);
             this.diCaseAppDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.diCaseAppDate.TabIndex = 26;
+            this.diCaseAppDate.TabIndex = 30;
             // 
             // cbCaseInvoiceCurrency
             // 
@@ -946,7 +1011,7 @@
             this.cbCaseInvoiceCurrency.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbCaseInvoiceCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCaseInvoiceCurrency.ItemHeight = 14;
-            this.cbCaseInvoiceCurrency.Location = new System.Drawing.Point(98, 162);
+            this.cbCaseInvoiceCurrency.Location = new System.Drawing.Point(98, 153);
             this.cbCaseInvoiceCurrency.Name = "cbCaseInvoiceCurrency";
             this.cbCaseInvoiceCurrency.Size = new System.Drawing.Size(100, 20);
             this.cbCaseInvoiceCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1085,7 +1150,7 @@
             this.tabPanelCreditCoverNeg.Location = new System.Drawing.Point(0, 26);
             this.tabPanelCreditCoverNeg.Name = "tabPanelCreditCoverNeg";
             this.tabPanelCreditCoverNeg.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelCreditCoverNeg.Size = new System.Drawing.Size(521, 326);
+            this.tabPanelCreditCoverNeg.Size = new System.Drawing.Size(521, 398);
             this.tabPanelCreditCoverNeg.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelCreditCoverNeg.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelCreditCoverNeg.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -1128,7 +1193,7 @@
             this.dgvCreditCoverNegs.Name = "dgvCreditCoverNegs";
             this.dgvCreditCoverNegs.ReadOnly = true;
             this.dgvCreditCoverNegs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCreditCoverNegs.Size = new System.Drawing.Size(519, 159);
+            this.dgvCreditCoverNegs.Size = new System.Drawing.Size(519, 231);
             this.dgvCreditCoverNegs.TabIndex = 0;
             this.dgvCreditCoverNegs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectCreditCoverNeg);
             // 
@@ -1224,7 +1289,7 @@
             this.groupPanelCreditCoverNeg.Controls.Add(createUserNameLabel);
             this.groupPanelCreditCoverNeg.Controls.Add(this.tbCreateUserName);
             this.groupPanelCreditCoverNeg.Controls.Add(commentLabel);
-            this.groupPanelCreditCoverNeg.Controls.Add(this.tbComment);
+            this.groupPanelCreditCoverNeg.Controls.Add(this.tbCreditCoverComment);
             this.groupPanelCreditCoverNeg.Controls.Add(approveTypeLabel);
             this.groupPanelCreditCoverNeg.Controls.Add(this.cbApproveType);
             this.groupPanelCreditCoverNeg.Controls.Add(requestDateLabel);
@@ -1348,19 +1413,19 @@
             // 
             this.creditCoverNegBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CreditCoverNegotiation);
             // 
-            // tbComment
+            // tbCreditCoverComment
             // 
             // 
             // 
             // 
             this.tbComment.Border.Class = "TextBoxBorder";
-            this.tbComment.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.creditCoverNegBindingSource, "Comment", true));
-            this.tbComment.Location = new System.Drawing.Point(74, 61);
-            this.tbComment.Multiline = true;
-            this.tbComment.Name = "tbComment";
-            this.tbComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbComment.Size = new System.Drawing.Size(433, 42);
-            this.tbComment.TabIndex = 13;
+            this.tbCreditCoverComment.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.creditCoverNegBindingSource, "Comment", true));
+            this.tbCreditCoverComment.Location = new System.Drawing.Point(74, 61);
+            this.tbCreditCoverComment.Multiline = true;
+            this.tbCreditCoverComment.Name = "tbCreditCoverComment";
+            this.tbCreditCoverComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbCreditCoverComment.Size = new System.Drawing.Size(433, 42);
+            this.tbCreditCoverComment.TabIndex = 13;
             // 
             // cbApproveType
             // 
@@ -1497,7 +1562,7 @@
             this.tabPanelCDA.Location = new System.Drawing.Point(0, 26);
             this.tabPanelCDA.Name = "tabPanelCDA";
             this.tabPanelCDA.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelCDA.Size = new System.Drawing.Size(521, 326);
+            this.tabPanelCDA.Size = new System.Drawing.Size(521, 355);
             this.tabPanelCDA.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelCDA.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelCDA.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -1578,7 +1643,7 @@
             this.dgvCDAs.Name = "dgvCDAs";
             this.dgvCDAs.ReadOnly = true;
             this.dgvCDAs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCDAs.Size = new System.Drawing.Size(519, 286);
+            this.dgvCDAs.Size = new System.Drawing.Size(519, 315);
             this.dgvCDAs.TabIndex = 1;
             this.dgvCDAs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailCDA);
             // 
@@ -1608,20 +1673,20 @@
             // colIsRecoarse
             // 
             this.colIsRecoarse.DataPropertyName = "IsRecoarse";
-            this.colIsRecoarse.FalseValue = "False";
             this.colIsRecoarse.HeaderText = "是否有追索权";
             this.colIsRecoarse.Name = "colIsRecoarse";
             this.colIsRecoarse.ReadOnly = true;
-            this.colIsRecoarse.TrueValue = "True";
+            this.colIsRecoarse.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colIsRecoarse.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colIsNotice
             // 
             this.colIsNotice.DataPropertyName = "IsNotice";
-            this.colIsNotice.FalseValue = "False";
             this.colIsNotice.HeaderText = "是否暗保理";
             this.colIsNotice.Name = "colIsNotice";
             this.colIsNotice.ReadOnly = true;
-            this.colIsNotice.TrueValue = "True";
+            this.colIsNotice.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colIsNotice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colAssignType
             // 
@@ -1647,11 +1712,11 @@
             // colIsCreditCoverRevolving
             // 
             this.colIsCreditCoverRevolving.DataPropertyName = "IsCreditCoverRevolving";
-            this.colIsCreditCoverRevolving.FalseValue = "False";
             this.colIsCreditCoverRevolving.HeaderText = "是否可循环";
             this.colIsCreditCoverRevolving.Name = "colIsCreditCoverRevolving";
             this.colIsCreditCoverRevolving.ReadOnly = true;
-            this.colIsCreditCoverRevolving.TrueValue = "True";
+            this.colIsCreditCoverRevolving.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colIsCreditCoverRevolving.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colApproveNumber
             // 
@@ -2030,11 +2095,41 @@
             // 
             this.creditCoverHighlighter.ContainerControl = this;
             // 
+            // tbComment
+            // 
+            // 
+            // 
+            // 
+            this.tbComment.Border.Class = "TextBoxBorder";
+            this.tbComment.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "Comment", true));
+            this.tbComment.Location = new System.Drawing.Point(98, 307);
+            this.tbComment.Multiline = true;
+            this.tbComment.Name = "tbComment";
+            this.tbComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbComment.Size = new System.Drawing.Size(375, 35);
+            this.tbComment.TabIndex = 38;
+            // 
+            // lblComment
+            // 
+            lblComment.AutoSize = true;
+            lblComment.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblComment.BackgroundStyle.Class = "";
+            lblComment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            lblComment.Location = new System.Drawing.Point(55, 307);
+            lblComment.Name = "lblComment";
+            lblComment.Size = new System.Drawing.Size(34, 16);
+            lblComment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            lblComment.TabIndex = 37;
+            lblComment.Text = "备注:";
+            // 
             // CaseDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(521, 352);
+            this.ClientSize = new System.Drawing.Size(521, 424);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.Name = "CaseDetail";
@@ -2076,5 +2171,50 @@
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator8;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator6;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACase;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsRecoarse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsNotice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCover;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsCreditCoverRevolving;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPUGProportion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPUGPeriod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReassignGracePeriod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceProportion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentTerms;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceGracePeriod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDeductibles;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLossThreshold;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEFPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAIFPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionTypeComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFeeCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAValueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDADueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNoticeMethod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNoticePersion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACreateUserName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbManagerName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbReviewNo;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentTerm;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbComment;
     }
 }
