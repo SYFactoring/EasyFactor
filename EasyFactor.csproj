@@ -472,6 +472,7 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="FOMSLOGO.png" />
     <Content Include="Properties\Resources\Images\army-officer-icon-48.png" />
     <Content Include="Properties\Resources\Images\banknote-icon-48.png" />
     <Content Include="Properties\Resources\Images\bar-chart-icon-48.png" />

@@ -151,13 +151,6 @@ namespace CMBC.EasyFactor.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap FOMSLOGO {
-            get {
-                object obj = ResourceManager.GetObject("FOMSLOGO", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap footballer_icon_48 {
             get {
                 object obj = ResourceManager.GetObject("footballer_icon_48", resourceCulture);

@@ -15,32 +15,32 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private System.Windows.Forms.ContextMenuStrip cmuUserMgr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEDIAccount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLoginDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMSN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPassword;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRole;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUserID;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvUsers;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EDIAccountColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EmailColumn;
         private DevComponents.DotNetBar.LabelX lblCount;
         private DevComponents.DotNetBar.LabelX lblUserID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LoginDateColumn;
         private System.Windows.Forms.ToolStripMenuItem menuItemDeleteUser;
         private System.Windows.Forms.ToolStripMenuItem menuItemDetailUser;
         private System.Windows.Forms.ToolStripMenuItem menuItemImportUsers;
         private System.Windows.Forms.ToolStripMenuItem menuItemNewUser;
         private System.Windows.Forms.ToolStripMenuItem menuItemSelectUser;
         private System.Windows.Forms.ToolStripMenuItem menuItemUpdateUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MSNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
         private DevComponents.DotNetBar.PanelEx panelQuery;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PasswordColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PhoneColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RoleColumn;
         private DevComponents.DotNetBar.Controls.TextBoxX tbUserID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TelphoneColumn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserIDColumn;
 
         #endregion Fields
 
@@ -369,16 +369,5 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserIDColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EDIAccountColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RoleColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PhoneColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TelphoneColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EmailColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MSNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LoginDateColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PasswordColumn;
     }
 }

@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.Report
     using CMBC.EasyFactor.Utils;
     using Microsoft.Office.Core;
     using Microsoft.Office.Interop.Excel;
+    using System.IO;
 
     /// <summary>
     /// 
@@ -111,8 +112,7 @@ namespace CMBC.EasyFactor.Report
                 }
                 Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-                string executablePath = System.Windows.Forms.Application.ExecutablePath;
-                string logoPath = executablePath.Substring(0, executablePath.IndexOf("bin")) + "\\Properties\\Resources\\Images\\FOMSLOGO.png";
+                string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSLOGO.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 40);
 
                 sheet.Cells[1, 1] = String.Format("致{0}公司", seller.ToString());
@@ -197,8 +197,7 @@ namespace CMBC.EasyFactor.Report
                 }
                 Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-                string executablePath = System.Windows.Forms.Application.ExecutablePath;
-                string logoPath = executablePath.Substring(0, executablePath.IndexOf("bin")) + "\\Properties\\Resources\\Images\\FOMSLOGO.png";
+                string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSLOGO.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 40);
 
                 sheet.Cells[1, 1] = String.Format("卖方：{0}公司", seller.ToString());
@@ -285,8 +284,7 @@ namespace CMBC.EasyFactor.Report
                 }
                 Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-                string executablePath = System.Windows.Forms.Application.ExecutablePath;
-                string logoPath = executablePath.Substring(0, executablePath.IndexOf("bin")) + "\\Properties\\Resources\\Images\\FOMSLOGO.png";
+                string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSLOGO.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 40);
 
                 sheet.Cells[1, 1] = String.Format("卖方：{0}公司", seller.ToString());
@@ -337,7 +335,7 @@ namespace CMBC.EasyFactor.Report
                     sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "0.00%";
                     sheet.get_Range(sheet.Cells[invoiceStart, 5], sheet.Cells[invoiceEnd, 5]).NumberFormatLocal = "0.00";
                     sheet.get_Range(sheet.Cells[invoiceStart, 6], sheet.Cells[invoiceEnd, 6]).NumberFormatLocal = "0.00";
-                    sheet.get_Range(sheet.Cells[invoiceStart-2, 1], sheet.Cells[invoiceEnd, 6]).Borders.LineStyle = 1;
+                    sheet.get_Range(sheet.Cells[invoiceStart - 2, 1], sheet.Cells[invoiceEnd, 6]).Borders.LineStyle = 1;
                 }
 
                 row++;

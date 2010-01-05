@@ -125,6 +125,14 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
             this.tbCurrentFinanceAmount.Text = String.Format("{0:N2}", currentFinanceAmount);
+            InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.invoiceFinanceBatchBindingSource.DataSource;
+            if (financeBatch.FinanceAmount.HasValue)
+            {
+                if (currentFinanceAmount > financeBatch.FinanceAmount)
+                {
+                    MessageBox.Show("当前融资额超过限定", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         /// <summary>
