@@ -23,7 +23,7 @@
     <ManifestCertificateThumbprint>39C659FC473C3F4A98E2A9A80A4966A1A8E399B5</ManifestCertificateThumbprint>
     <ManifestKeyFile>EasyFactor_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <PublishUrl>C:\Users\Yiming\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
