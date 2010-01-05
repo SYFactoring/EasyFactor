@@ -202,7 +202,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblRM.Location = new System.Drawing.Point(340, 33);
             lblRM.Name = "lblRM";
             lblRM.Size = new System.Drawing.Size(56, 16);
-            lblRM.TabIndex = 10;
+            lblRM.TabIndex = 11;
             lblRM.Text = "客户经理";
             lblRM.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
@@ -216,7 +216,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblPM.Location = new System.Drawing.Point(170, 33);
             lblPM.Name = "lblPM";
             lblPM.Size = new System.Drawing.Size(56, 16);
-            lblPM.TabIndex = 8;
+            lblPM.TabIndex = 9;
             lblPM.Text = "产品经理";
             lblPM.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
@@ -230,7 +230,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblDepartment.Location = new System.Drawing.Point(3, 33);
             lblDepartment.Name = "lblDepartment";
             lblDepartment.Size = new System.Drawing.Size(56, 16);
-            lblDepartment.TabIndex = 6;
+            lblDepartment.TabIndex = 7;
             lblDepartment.Text = "所属机构";
             lblDepartment.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
@@ -351,7 +351,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(60, 23);
             this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnReset.TabIndex = 15;
+            this.btnReset.TabIndex = 14;
             this.btnReset.Text = "重置";
             this.btnReset.Click += new System.EventHandler(this.Reset);
             // 
@@ -369,7 +369,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbIsContractSigned.Name = "cbIsContractSigned";
             this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);
             this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsContractSigned.TabIndex = 12;
+            this.cbIsContractSigned.TabIndex = 6;
             this.cbIsContractSigned.Text = "是否签订保理合同";
             // 
             // cbDepartment
@@ -386,7 +386,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbDepartment.Name = "cbDepartment";
             this.cbDepartment.Size = new System.Drawing.Size(100, 22);
             this.cbDepartment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbDepartment.TabIndex = 7;
+            this.cbDepartment.TabIndex = 8;
             // 
             // lblCount
             // 
@@ -398,7 +398,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblCount.Location = new System.Drawing.Point(707, 33);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
-            this.lblCount.TabIndex = 14;
+            this.lblCount.TabIndex = 15;
             // 
             // btnQuery
             // 
@@ -465,7 +465,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbRM.Location = new System.Drawing.Point(397, 33);
             this.tbRM.Name = "tbRM";
             this.tbRM.Size = new System.Drawing.Size(100, 20);
-            this.tbRM.TabIndex = 11;
+            this.tbRM.TabIndex = 12;
             // 
             // tbPM
             // 
@@ -477,7 +477,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbPM.Location = new System.Drawing.Point(227, 33);
             this.tbPM.Name = "tbPM";
             this.tbPM.Size = new System.Drawing.Size(100, 20);
-            this.tbPM.TabIndex = 9;
+            this.tbPM.TabIndex = 10;
             // 
             // dgvClients
             // 

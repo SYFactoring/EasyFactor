@@ -198,7 +198,7 @@
             buyerEDICodeLabel.Location = new System.Drawing.Point(47, 42);
             buyerEDICodeLabel.Name = "buyerEDICodeLabel";
             buyerEDICodeLabel.Size = new System.Drawing.Size(34, 16);
-            buyerEDICodeLabel.TabIndex = 7;
+            buyerEDICodeLabel.TabIndex = 6;
             buyerEDICodeLabel.Text = "买方:";
             // 
             // factorCodeLabel
@@ -211,7 +211,7 @@
             factorCodeLabel.Location = new System.Drawing.Point(35, 62);
             factorCodeLabel.Name = "factorCodeLabel";
             factorCodeLabel.Size = new System.Drawing.Size(47, 16);
-            factorCodeLabel.TabIndex = 11;
+            factorCodeLabel.TabIndex = 9;
             factorCodeLabel.Text = "保理商:";
             // 
             // transactionTypeLabel
@@ -224,7 +224,7 @@
             transactionTypeLabel.Location = new System.Drawing.Point(23, 85);
             transactionTypeLabel.Name = "transactionTypeLabel";
             transactionTypeLabel.Size = new System.Drawing.Size(59, 16);
-            transactionTypeLabel.TabIndex = 14;
+            transactionTypeLabel.TabIndex = 12;
             transactionTypeLabel.Text = "业务类别:";
             // 
             // invoiceCurrencyLabel
@@ -237,7 +237,7 @@
             invoiceCurrencyLabel.Location = new System.Drawing.Point(23, 106);
             invoiceCurrencyLabel.Name = "invoiceCurrencyLabel";
             invoiceCurrencyLabel.Size = new System.Drawing.Size(59, 16);
-            invoiceCurrencyLabel.TabIndex = 15;
+            invoiceCurrencyLabel.TabIndex = 14;
             invoiceCurrencyLabel.Text = "发票币别:";
             // 
             // PMLabel
@@ -250,7 +250,7 @@
             PMLabel.Location = new System.Drawing.Point(301, 20);
             PMLabel.Name = "PMLabel";
             PMLabel.Size = new System.Drawing.Size(59, 16);
-            PMLabel.TabIndex = 20;
+            PMLabel.TabIndex = 16;
             PMLabel.Text = "产品经理:";
             // 
             // RMLabel
@@ -263,7 +263,7 @@
             RMLabel.Location = new System.Drawing.Point(301, 43);
             RMLabel.Name = "RMLabel";
             RMLabel.Size = new System.Drawing.Size(59, 16);
-            RMLabel.TabIndex = 22;
+            RMLabel.TabIndex = 18;
             RMLabel.Text = "客户经理:";
             // 
             // assignTypeLabel
@@ -276,7 +276,7 @@
             assignTypeLabel.Location = new System.Drawing.Point(301, 62);
             assignTypeLabel.Name = "assignTypeLabel";
             assignTypeLabel.Size = new System.Drawing.Size(59, 16);
-            assignTypeLabel.TabIndex = 23;
+            assignTypeLabel.TabIndex = 20;
             assignTypeLabel.Text = "转让方式:";
             // 
             // priceLabel
@@ -328,7 +328,7 @@
             financeProportionLabel.Location = new System.Drawing.Point(15, 6);
             financeProportionLabel.Name = "financeProportionLabel";
             financeProportionLabel.Size = new System.Drawing.Size(59, 16);
-            financeProportionLabel.TabIndex = 8;
+            financeProportionLabel.TabIndex = 0;
             financeProportionLabel.Text = "预付比例:";
             // 
             // creditCoverCurrLabel
@@ -354,7 +354,7 @@
             periodEndLabel.Location = new System.Drawing.Point(39, 30);
             periodEndLabel.Name = "periodEndLabel";
             periodEndLabel.Size = new System.Drawing.Size(47, 16);
-            periodEndLabel.TabIndex = 4;
+            periodEndLabel.TabIndex = 3;
             periodEndLabel.Text = "到期日:";
             // 
             // lblBuyerCreditCoverBalance
@@ -367,7 +367,7 @@
             lblBuyerCreditCoverBalance.Location = new System.Drawing.Point(27, 53);
             lblBuyerCreditCoverBalance.Name = "lblBuyerCreditCoverBalance";
             lblBuyerCreditCoverBalance.Size = new System.Drawing.Size(59, 16);
-            lblBuyerCreditCoverBalance.TabIndex = 6;
+            lblBuyerCreditCoverBalance.TabIndex = 5;
             lblBuyerCreditCoverBalance.Text = "授信余额:";
             // 
             // lblBuyerARBalance
@@ -380,7 +380,7 @@
             lblBuyerARBalance.Location = new System.Drawing.Point(3, 72);
             lblBuyerARBalance.Name = "lblBuyerARBalance";
             lblBuyerARBalance.Size = new System.Drawing.Size(84, 16);
-            lblBuyerARBalance.TabIndex = 8;
+            lblBuyerARBalance.TabIndex = 7;
             lblBuyerARBalance.Text = "应收帐款余额:";
             // 
             // lblFinanceARBalance
@@ -393,7 +393,7 @@
             lblFinanceARBalance.Location = new System.Drawing.Point(13, 92);
             lblFinanceARBalance.Name = "lblFinanceARBalance";
             lblFinanceARBalance.Size = new System.Drawing.Size(59, 16);
-            lblFinanceARBalance.TabIndex = 17;
+            lblFinanceARBalance.TabIndex = 9;
             lblFinanceARBalance.Text = "融资余额:";
             // 
             // lblFinanceCreditCoverBalance
@@ -406,7 +406,7 @@
             lblFinanceCreditCoverBalance.Location = new System.Drawing.Point(14, 72);
             lblFinanceCreditCoverBalance.Name = "lblFinanceCreditCoverBalance";
             lblFinanceCreditCoverBalance.Size = new System.Drawing.Size(59, 16);
-            lblFinanceCreditCoverBalance.TabIndex = 15;
+            lblFinanceCreditCoverBalance.TabIndex = 7;
             lblFinanceCreditCoverBalance.Text = "授信余额:";
             // 
             // lblDueDate
@@ -419,7 +419,7 @@
             lblDueDate.Location = new System.Drawing.Point(27, 52);
             lblDueDate.Name = "lblDueDate";
             lblDueDate.Size = new System.Drawing.Size(47, 16);
-            lblDueDate.TabIndex = 13;
+            lblDueDate.TabIndex = 5;
             lblDueDate.Text = "到期日:";
             // 
             // lblCreditLine
@@ -432,7 +432,7 @@
             lblCreditLine.Location = new System.Drawing.Point(3, 30);
             lblCreditLine.Name = "lblCreditLine";
             lblCreditLine.Size = new System.Drawing.Size(72, 16);
-            lblCreditLine.TabIndex = 10;
+            lblCreditLine.TabIndex = 2;
             lblCreditLine.Text = "预付款额度:";
             // 
             // lblIsNotice
@@ -445,7 +445,7 @@
             lblIsNotice.Location = new System.Drawing.Point(299, 85);
             lblIsNotice.Name = "lblIsNotice";
             lblIsNotice.Size = new System.Drawing.Size(62, 16);
-            lblIsNotice.TabIndex = 25;
+            lblIsNotice.TabIndex = 22;
             lblIsNotice.Text = "明/暗保理:";
             // 
             // panelCaseBasic
@@ -529,19 +529,19 @@
             this.tbFinanceOutstanding.Name = "tbFinanceOutstanding";
             this.tbFinanceOutstanding.ReadOnly = true;
             this.tbFinanceOutstanding.Size = new System.Drawing.Size(100, 20);
-            this.tbFinanceOutstanding.TabIndex = 18;
+            this.tbFinanceOutstanding.TabIndex = 10;
             // 
-            // tbFinanceCreditLineBalance
+            // tbFinanceCreditLineOutstanding
             // 
             // 
             // 
             // 
             this.tbFinanceCreditLineOutstanding.Border.Class = "TextBoxBorder";
             this.tbFinanceCreditLineOutstanding.Location = new System.Drawing.Point(80, 69);
-            this.tbFinanceCreditLineOutstanding.Name = "tbFinanceCreditLineBalance";
+            this.tbFinanceCreditLineOutstanding.Name = "tbFinanceCreditLineOutstanding";
             this.tbFinanceCreditLineOutstanding.ReadOnly = true;
             this.tbFinanceCreditLineOutstanding.Size = new System.Drawing.Size(100, 20);
-            this.tbFinanceCreditLineOutstanding.TabIndex = 16;
+            this.tbFinanceCreditLineOutstanding.TabIndex = 8;
             // 
             // tbDueDate
             // 
@@ -553,7 +553,7 @@
             this.tbDueDate.Name = "tbDueDate";
             this.tbDueDate.ReadOnly = true;
             this.tbDueDate.Size = new System.Drawing.Size(100, 20);
-            this.tbDueDate.TabIndex = 14;
+            this.tbDueDate.TabIndex = 6;
             // 
             // tbFinanceLine
             // 
@@ -565,7 +565,7 @@
             this.tbFinanceLine.Name = "tbFinanceLine";
             this.tbFinanceLine.ReadOnly = true;
             this.tbFinanceLine.Size = new System.Drawing.Size(58, 20);
-            this.tbFinanceLine.TabIndex = 12;
+            this.tbFinanceLine.TabIndex = 4;
             // 
             // tbFinanceLineCurr
             // 
@@ -577,7 +577,7 @@
             this.tbFinanceLineCurr.Name = "tbFinanceLineCurr";
             this.tbFinanceLineCurr.ReadOnly = true;
             this.tbFinanceLineCurr.Size = new System.Drawing.Size(28, 20);
-            this.tbFinanceLineCurr.TabIndex = 11;
+            this.tbFinanceLineCurr.TabIndex = 3;
             // 
             // financeProportionTextBox
             // 
@@ -589,7 +589,7 @@
             this.financeProportionTextBox.Name = "financeProportionTextBox";
             this.financeProportionTextBox.ReadOnly = true;
             this.financeProportionTextBox.Size = new System.Drawing.Size(100, 20);
-            this.financeProportionTextBox.TabIndex = 9;
+            this.financeProportionTextBox.TabIndex = 1;
             // 
             // groupPanelCreditCover
             // 
@@ -650,7 +650,7 @@
             this.tbAROutstanding.Name = "tbAROutstanding";
             this.tbAROutstanding.ReadOnly = true;
             this.tbAROutstanding.Size = new System.Drawing.Size(100, 20);
-            this.tbAROutstanding.TabIndex = 9;
+            this.tbAROutstanding.TabIndex = 8;
             // 
             // tbCreditCoverOutstanding
             // 
@@ -662,7 +662,7 @@
             this.tbCreditCoverOutstanding.Name = "tbCreditCoverOutstanding";
             this.tbCreditCoverOutstanding.ReadOnly = true;
             this.tbCreditCoverOutstanding.Size = new System.Drawing.Size(100, 20);
-            this.tbCreditCoverOutstanding.TabIndex = 7;
+            this.tbCreditCoverOutstanding.TabIndex = 6;
             // 
             // periodEndTextBox
             // 
@@ -674,7 +674,7 @@
             this.periodEndTextBox.Name = "periodEndTextBox";
             this.periodEndTextBox.ReadOnly = true;
             this.periodEndTextBox.Size = new System.Drawing.Size(100, 20);
-            this.periodEndTextBox.TabIndex = 5;
+            this.periodEndTextBox.TabIndex = 4;
             // 
             // creditCoverTextBox
             // 
@@ -686,7 +686,7 @@
             this.creditCoverTextBox.Name = "creditCoverTextBox";
             this.creditCoverTextBox.ReadOnly = true;
             this.creditCoverTextBox.Size = new System.Drawing.Size(65, 20);
-            this.creditCoverTextBox.TabIndex = 3;
+            this.creditCoverTextBox.TabIndex = 2;
             // 
             // creditCoverCurrTextBox
             // 
@@ -756,7 +756,7 @@
             this.handFeeTextBox.Name = "handFeeTextBox";
             this.handFeeTextBox.ReadOnly = true;
             this.handFeeTextBox.Size = new System.Drawing.Size(46, 20);
-            this.handFeeTextBox.TabIndex = 7;
+            this.handFeeTextBox.TabIndex = 6;
             // 
             // handFeeCurrTextBox
             // 
@@ -868,7 +868,7 @@
             this.tbIsNotice.Name = "tbIsNotice";
             this.tbIsNotice.ReadOnly = true;
             this.tbIsNotice.Size = new System.Drawing.Size(100, 20);
-            this.tbIsNotice.TabIndex = 26;
+            this.tbIsNotice.TabIndex = 23;
             // 
             // btnCaseQuery
             // 
@@ -904,7 +904,7 @@
             this.assignTypeTextBox.Name = "assignTypeTextBox";
             this.assignTypeTextBox.ReadOnly = true;
             this.assignTypeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.assignTypeTextBox.TabIndex = 24;
+            this.assignTypeTextBox.TabIndex = 21;
             // 
             // sellerEDICodeTextBox
             // 
@@ -928,7 +928,7 @@
             this.RMTextBox.Name = "RMTextBox";
             this.RMTextBox.ReadOnly = true;
             this.RMTextBox.Size = new System.Drawing.Size(100, 20);
-            this.RMTextBox.TabIndex = 23;
+            this.RMTextBox.TabIndex = 19;
             // 
             // sellerNameTextBox
             // 
@@ -940,7 +940,7 @@
             this.sellerNameTextBox.Name = "sellerNameTextBox";
             this.sellerNameTextBox.ReadOnly = true;
             this.sellerNameTextBox.Size = new System.Drawing.Size(136, 20);
-            this.sellerNameTextBox.TabIndex = 6;
+            this.sellerNameTextBox.TabIndex = 5;
             // 
             // PMTextBox
             // 
@@ -952,7 +952,7 @@
             this.PMTextBox.Name = "PMTextBox";
             this.PMTextBox.ReadOnly = true;
             this.PMTextBox.Size = new System.Drawing.Size(100, 20);
-            this.PMTextBox.TabIndex = 21;
+            this.PMTextBox.TabIndex = 17;
             // 
             // buyerEDICodeTextBox
             // 
@@ -964,7 +964,7 @@
             this.buyerEDICodeTextBox.Name = "buyerEDICodeTextBox";
             this.buyerEDICodeTextBox.ReadOnly = true;
             this.buyerEDICodeTextBox.Size = new System.Drawing.Size(64, 20);
-            this.buyerEDICodeTextBox.TabIndex = 8;
+            this.buyerEDICodeTextBox.TabIndex = 7;
             // 
             // buyerNameTextBox
             // 
@@ -976,7 +976,7 @@
             this.buyerNameTextBox.Name = "buyerNameTextBox";
             this.buyerNameTextBox.ReadOnly = true;
             this.buyerNameTextBox.Size = new System.Drawing.Size(136, 20);
-            this.buyerNameTextBox.TabIndex = 10;
+            this.buyerNameTextBox.TabIndex = 8;
             // 
             // isRecoarseCheckBox
             // 
@@ -989,7 +989,7 @@
             this.isRecoarseCheckBox.Location = new System.Drawing.Point(300, 109);
             this.isRecoarseCheckBox.Name = "isRecoarseCheckBox";
             this.isRecoarseCheckBox.Size = new System.Drawing.Size(101, 16);
-            this.isRecoarseCheckBox.TabIndex = 17;
+            this.isRecoarseCheckBox.TabIndex = 24;
             this.isRecoarseCheckBox.Text = "是否有追索权";
             // 
             // factorCodeTextBox
@@ -1002,7 +1002,7 @@
             this.factorCodeTextBox.Name = "factorCodeTextBox";
             this.factorCodeTextBox.ReadOnly = true;
             this.factorCodeTextBox.Size = new System.Drawing.Size(64, 20);
-            this.factorCodeTextBox.TabIndex = 12;
+            this.factorCodeTextBox.TabIndex = 10;
             // 
             // invoiceCurrencyTextBox
             // 
@@ -1014,7 +1014,7 @@
             this.invoiceCurrencyTextBox.Name = "invoiceCurrencyTextBox";
             this.invoiceCurrencyTextBox.ReadOnly = true;
             this.invoiceCurrencyTextBox.Size = new System.Drawing.Size(100, 20);
-            this.invoiceCurrencyTextBox.TabIndex = 16;
+            this.invoiceCurrencyTextBox.TabIndex = 15;
             // 
             // factorNameTextBox
             // 
@@ -1026,7 +1026,7 @@
             this.factorNameTextBox.Name = "factorNameTextBox";
             this.factorNameTextBox.ReadOnly = true;
             this.factorNameTextBox.Size = new System.Drawing.Size(136, 20);
-            this.factorNameTextBox.TabIndex = 14;
+            this.factorNameTextBox.TabIndex = 11;
             // 
             // transactionTypeTextBox
             // 
@@ -1038,7 +1038,7 @@
             this.transactionTypeTextBox.Name = "transactionTypeTextBox";
             this.transactionTypeTextBox.ReadOnly = true;
             this.transactionTypeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.transactionTypeTextBox.TabIndex = 15;
+            this.transactionTypeTextBox.TabIndex = 13;
             // 
             // panelInvoiceMgr
             // 
@@ -1055,7 +1055,7 @@
             this.panelInvoiceMgr.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelInvoiceMgr.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelInvoiceMgr.Style.GradientAngle = 90;
-            this.panelInvoiceMgr.TabIndex = 1;
+            this.panelInvoiceMgr.TabIndex = 0;
             // 
             // ARCaseBasic
             // 

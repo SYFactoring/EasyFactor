@@ -170,7 +170,7 @@
             this.cbIsContractSigned.Name = "cbIsContractSigned";
             this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);
             this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsContractSigned.TabIndex = 17;
+            this.cbIsContractSigned.TabIndex = 13;
             this.cbIsContractSigned.Text = "是否签订保理合同";
             // 
             // btnQueryReset
@@ -199,7 +199,7 @@
             this.cbIsCDA.Name = "cbIsCDA";
             this.cbIsCDA.Size = new System.Drawing.Size(100, 16);
             this.cbIsCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsCDA.TabIndex = 15;
+            this.cbIsCDA.TabIndex = 14;
             this.cbIsCDA.Text = "CDA是否签回";
             // 
             // tbClientName
@@ -211,7 +211,7 @@
             this.tbClientName.Location = new System.Drawing.Point(59, 6);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.Size = new System.Drawing.Size(133, 20);
-            this.tbClientName.TabIndex = 14;
+            this.tbClientName.TabIndex = 1;
             // 
             // lblClientName
             // 
@@ -222,7 +222,7 @@
             this.lblClientName.Location = new System.Drawing.Point(3, 6);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(59, 23);
-            this.lblClientName.TabIndex = 13;
+            this.lblClientName.TabIndex = 0;
             this.lblClientName.Text = "客户名称";
             // 
             // tbCaseCode
@@ -234,7 +234,7 @@
             this.tbCaseCode.Location = new System.Drawing.Point(254, 6);
             this.tbCaseCode.Name = "tbCaseCode";
             this.tbCaseCode.Size = new System.Drawing.Size(133, 20);
-            this.tbCaseCode.TabIndex = 12;
+            this.tbCaseCode.TabIndex = 3;
             // 
             // lblCaseCode
             // 
@@ -245,7 +245,7 @@
             this.lblCaseCode.Location = new System.Drawing.Point(198, 6);
             this.lblCaseCode.Name = "lblCaseCode";
             this.lblCaseCode.Size = new System.Drawing.Size(59, 23);
-            this.lblCaseCode.TabIndex = 11;
+            this.lblCaseCode.TabIndex = 2;
             this.lblCaseCode.Text = "案件编号";
             // 
             // lblCount
@@ -257,8 +257,8 @@
             this.lblCount.BackgroundStyle.Class = "";
             this.lblCount.Location = new System.Drawing.Point(595, 60);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(29, 16);
-            this.lblCount.TabIndex = 10;
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.TabIndex = 17;
             // 
             // lblDate
             // 
@@ -269,7 +269,7 @@
             this.lblDate.Location = new System.Drawing.Point(198, 53);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(59, 23);
-            this.lblDate.TabIndex = 9;
+            this.lblDate.TabIndex = 10;
             this.lblDate.Text = "申请期限";
             // 
             // btnQuery
@@ -280,7 +280,7 @@
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(48, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 8;
+            this.btnQuery.TabIndex = 15;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.QueryCase);
             // 
@@ -324,7 +324,7 @@
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
             this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbTransactionType.TabIndex = 5;
+            this.cbTransactionType.TabIndex = 9;
             // 
             // lblTransactionType
             // 
@@ -335,7 +335,7 @@
             this.lblTransactionType.Location = new System.Drawing.Point(3, 54);
             this.lblTransactionType.Name = "lblTransactionType";
             this.lblTransactionType.Size = new System.Drawing.Size(59, 23);
-            this.lblTransactionType.TabIndex = 4;
+            this.lblTransactionType.TabIndex = 8;
             this.lblTransactionType.Text = "业务类别";
             // 
             // diEnd
@@ -384,7 +384,7 @@
             this.diEnd.Name = "diEnd";
             this.diEnd.Size = new System.Drawing.Size(85, 20);
             this.diEnd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.diEnd.TabIndex = 3;
+            this.diEnd.TabIndex = 12;
             // 
             // diBegin
             // 
@@ -432,7 +432,7 @@
             this.diBegin.Name = "diBegin";
             this.diBegin.Size = new System.Drawing.Size(98, 20);
             this.diBegin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.diBegin.TabIndex = 2;
+            this.diBegin.TabIndex = 11;
             // 
             // cbOwnerDepts
             // 
@@ -446,7 +446,7 @@
             this.cbOwnerDepts.Name = "cbOwnerDepts";
             this.cbOwnerDepts.Size = new System.Drawing.Size(133, 23);
             this.cbOwnerDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbOwnerDepts.TabIndex = 1;
+            this.cbOwnerDepts.TabIndex = 5;
             // 
             // lblOnwerDept
             // 
@@ -457,7 +457,7 @@
             this.lblOnwerDept.Location = new System.Drawing.Point(3, 31);
             this.lblOnwerDept.Name = "lblOnwerDept";
             this.lblOnwerDept.Size = new System.Drawing.Size(59, 23);
-            this.lblOnwerDept.TabIndex = 0;
+            this.lblOnwerDept.TabIndex = 4;
             this.lblOnwerDept.Text = "业务归属";
             // 
             // dgvCases
@@ -508,7 +508,7 @@
             this.dgvCases.ReadOnly = true;
             this.dgvCases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCases.Size = new System.Drawing.Size(761, 300);
-            this.dgvCases.TabIndex = 2;
+            this.dgvCases.TabIndex = 1;
             this.dgvCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
             // CaseCodeColumn

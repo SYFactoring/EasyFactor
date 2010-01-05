@@ -65,7 +65,7 @@
             this.lblStatus.Location = new System.Drawing.Point(53, 34);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(34, 16);
-            this.lblStatus.TabIndex = 1;
+            this.lblStatus.TabIndex = 3;
             this.lblStatus.Text = "状态:";
             // 
             // progressBar
@@ -77,7 +77,7 @@
             this.progressBar.Location = new System.Drawing.Point(93, 56);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(266, 23);
-            this.progressBar.TabIndex = 2;
+            this.progressBar.TabIndex = 6;
             // 
             // lblProgress
             // 
@@ -90,7 +90,7 @@
             this.lblProgress.Location = new System.Drawing.Point(28, 56);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(59, 16);
-            this.lblProgress.TabIndex = 3;
+            this.lblProgress.TabIndex = 5;
             this.lblProgress.Text = "导入进度:";
             // 
             // tbStatus
@@ -115,7 +115,7 @@
             this.tbFilePath.Name = "tbFilePath";
             this.tbFilePath.ReadOnly = true;
             this.tbFilePath.Size = new System.Drawing.Size(266, 20);
-            this.tbFilePath.TabIndex = 5;
+            this.tbFilePath.TabIndex = 1;
             // 
             // btnStart
             // 
@@ -125,7 +125,7 @@
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnStart.TabIndex = 6;
+            this.btnStart.TabIndex = 7;
             this.btnStart.Text = "开始";
             this.btnStart.Click += new System.EventHandler(this.StartImport);
             // 
@@ -137,7 +137,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCancel.TabIndex = 7;
+            this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "关闭";
             this.btnCancel.Click += new System.EventHandler(this.CancelImport);
             // 
@@ -149,7 +149,7 @@
             this.btnFileSelect.Name = "btnFileSelect";
             this.btnFileSelect.Size = new System.Drawing.Size(24, 23);
             this.btnFileSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFileSelect.TabIndex = 8;
+            this.btnFileSelect.TabIndex = 2;
             this.btnFileSelect.Text = "...";
             this.btnFileSelect.Click += new System.EventHandler(this.SelectFile);
             // 

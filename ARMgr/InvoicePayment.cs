@@ -68,11 +68,17 @@ namespace CMBC.EasyFactor.ARMgr
             this.caseBasic = caseBasic;
             this.paymentType = paymentType;
             this.dgvInvoices.AutoGenerateColumns = false;
-            this.dgvInvoices.ReadOnly = true;
             this.superValidator.Enabled = false;
+            ControlUtil.SetDoubleBuffered(this.dgvInvoices);
 
             this.dgvInvoices.CellFormatting += new DataGridViewCellFormattingEventHandler(dgvInvoices_CellFormatting);
             this.dgvInvoices.CellParsing += new DataGridViewCellParsingEventHandler(dgvInvoices_CellParsing);
+
+            foreach (DataGridViewColumn column in this.dgvInvoices.Columns)
+            {
+                column.ReadOnly = true;
+            }
+            colCheckBox.ReadOnly = false;
         }
 
         #endregion Constructors
@@ -84,7 +90,6 @@ namespace CMBC.EasyFactor.ARMgr
             set
             {
                 this._CDA = value;
-                this.dgvInvoices.ReadOnly = false;
                 InvoicePaymentBatch batch = new InvoicePaymentBatch();
                 switch (paymentType)
                 {
@@ -202,6 +207,16 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.PaymentDate = DateTime.Now;
                     invoice.RefundAmount = invoice.FinanceAmount;
                     invoice.RefundDate = DateTime.Now;
+
+                    colPaymentAmount.ReadOnly = false;
+                    colPaymentDate.ReadOnly = false;
+                    colRefundAmount.ReadOnly = false;
+                    colRefundDate.ReadOnly = false;
+                    colCommission.ReadOnly = false;
+                    colCommissionDate.ReadOnly = false;
+                    colInterest.ReadOnly = false;
+                    colInterestDate.ReadOnly = false;
+
                 }
                 else
                 {
@@ -209,6 +224,19 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.PaymentDate = null;
                     invoice.RefundAmount = null;
                     invoice.RefundDate = null;
+                    invoice.Commission = null;
+                    invoice.CommissionDate = null;
+                    invoice.Interest = null;
+                    invoice.InterestDate = null;
+
+                    colPaymentAmount.ReadOnly = true;
+                    colPaymentDate.ReadOnly = true;
+                    colRefundAmount.ReadOnly = true;
+                    colRefundDate.ReadOnly = true;
+                    colCommission.ReadOnly = true;
+                    colCommissionDate.ReadOnly = true;
+                    colInterest.ReadOnly = true;
+                    colInterestDate.ReadOnly = true;
                 }
                 CaculateCurrentPaymentAmount();
             }

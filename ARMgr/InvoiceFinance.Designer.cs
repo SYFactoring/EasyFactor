@@ -74,11 +74,11 @@
             DevComponents.DotNetBar.LabelX costRateLabel;
             DevComponents.DotNetBar.LabelX financeTypeLabel;
             DevComponents.DotNetBar.LabelX lblCurrentFinanceAmount;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceFinance));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceFinance));
             this.panelFinanceBatch = new DevComponents.DotNetBar.PanelEx();
             this.tbCurrentFinanceAmount = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnFactorSelect = new DevComponents.DotNetBar.ButtonX();
@@ -95,6 +95,16 @@
             this.batchCurrencyComboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.financeBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.dgvInvoices = new System.Windows.Forms.DataGridView();
+            this.colCheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
@@ -123,16 +133,6 @@
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.colCheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             financeBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             financeAmountLabel = new DevComponents.DotNetBar.LabelX();
             financePeriodBeginLabel = new DevComponents.DotNetBar.LabelX();
@@ -164,7 +164,7 @@
             financeBatchNoLabel.Location = new System.Drawing.Point(195, 3);
             financeBatchNoLabel.Name = "financeBatchNoLabel";
             financeBatchNoLabel.Size = new System.Drawing.Size(59, 16);
-            financeBatchNoLabel.TabIndex = 0;
+            financeBatchNoLabel.TabIndex = 2;
             financeBatchNoLabel.Text = "放款编号:";
             // 
             // financeAmountLabel
@@ -177,7 +177,7 @@
             financeAmountLabel.Location = new System.Drawing.Point(15, 45);
             financeAmountLabel.Name = "financeAmountLabel";
             financeAmountLabel.Size = new System.Drawing.Size(59, 16);
-            financeAmountLabel.TabIndex = 4;
+            financeAmountLabel.TabIndex = 13;
             financeAmountLabel.Text = "融资金额:";
             // 
             // financePeriodBeginLabel
@@ -190,7 +190,7 @@
             financePeriodBeginLabel.Location = new System.Drawing.Point(375, 4);
             financePeriodBeginLabel.Name = "financePeriodBeginLabel";
             financePeriodBeginLabel.Size = new System.Drawing.Size(59, 16);
-            financePeriodBeginLabel.TabIndex = 6;
+            financePeriodBeginLabel.TabIndex = 4;
             financePeriodBeginLabel.Text = "融资期限:";
             // 
             // financeRateLabel
@@ -203,7 +203,7 @@
             financeRateLabel.Location = new System.Drawing.Point(15, 25);
             financeRateLabel.Name = "financeRateLabel";
             financeRateLabel.Size = new System.Drawing.Size(59, 16);
-            financeRateLabel.TabIndex = 9;
+            financeRateLabel.TabIndex = 7;
             financeRateLabel.Text = "融资利率:";
             // 
             // interestTypeLabel
@@ -229,7 +229,7 @@
             factorCodeLabel.Location = new System.Drawing.Point(375, 47);
             factorCodeLabel.Name = "factorCodeLabel";
             factorCodeLabel.Size = new System.Drawing.Size(47, 16);
-            factorCodeLabel.TabIndex = 14;
+            factorCodeLabel.TabIndex = 16;
             factorCodeLabel.Text = "代付行:";
             // 
             // costRateLabel
@@ -242,7 +242,7 @@
             costRateLabel.Location = new System.Drawing.Point(195, 25);
             costRateLabel.Name = "costRateLabel";
             costRateLabel.Size = new System.Drawing.Size(59, 16);
-            costRateLabel.TabIndex = 16;
+            costRateLabel.TabIndex = 9;
             costRateLabel.Text = "成本利率:";
             // 
             // financeTypeLabel
@@ -255,7 +255,7 @@
             financeTypeLabel.Location = new System.Drawing.Point(15, 5);
             financeTypeLabel.Name = "financeTypeLabel";
             financeTypeLabel.Size = new System.Drawing.Size(59, 16);
-            financeTypeLabel.TabIndex = 18;
+            financeTypeLabel.TabIndex = 0;
             financeTypeLabel.Text = "融资类型:";
             // 
             // lblCurrentFinanceAmount
@@ -268,7 +268,7 @@
             lblCurrentFinanceAmount.Location = new System.Drawing.Point(76, 68);
             lblCurrentFinanceAmount.Name = "lblCurrentFinanceAmount";
             lblCurrentFinanceAmount.Size = new System.Drawing.Size(72, 16);
-            lblCurrentFinanceAmount.TabIndex = 22;
+            lblCurrentFinanceAmount.TabIndex = 20;
             lblCurrentFinanceAmount.Text = "当前融资额:";
             // 
             // panelFinanceBatch
@@ -319,7 +319,7 @@
             this.tbCurrentFinanceAmount.Location = new System.Drawing.Point(154, 67);
             this.tbCurrentFinanceAmount.Name = "tbCurrentFinanceAmount";
             this.tbCurrentFinanceAmount.Size = new System.Drawing.Size(100, 20);
-            this.tbCurrentFinanceAmount.TabIndex = 23;
+            this.tbCurrentFinanceAmount.TabIndex = 21;
             // 
             // btnFactorSelect
             // 
@@ -329,7 +329,7 @@
             this.btnFactorSelect.Name = "btnFactorSelect";
             this.btnFactorSelect.Size = new System.Drawing.Size(28, 23);
             this.btnFactorSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFactorSelect.TabIndex = 21;
+            this.btnFactorSelect.TabIndex = 18;
             this.btnFactorSelect.Text = "...";
             this.btnFactorSelect.Click += new System.EventHandler(this.SelectFactor);
             // 
@@ -341,7 +341,7 @@
             this.btnFinanceBatchSave.Name = "btnFinanceBatchSave";
             this.btnFinanceBatchSave.Size = new System.Drawing.Size(48, 23);
             this.btnFinanceBatchSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFinanceBatchSave.TabIndex = 20;
+            this.btnFinanceBatchSave.TabIndex = 19;
             this.btnFinanceBatchSave.Text = "保存";
             this.btnFinanceBatchSave.Click += new System.EventHandler(this.SaveFinanceBatch);
             // 
@@ -361,7 +361,7 @@
             this.financeTypeComboBoxEx.Name = "financeTypeComboBoxEx";
             this.financeTypeComboBoxEx.Size = new System.Drawing.Size(100, 20);
             this.financeTypeComboBoxEx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.financeTypeComboBoxEx.TabIndex = 19;
+            this.financeTypeComboBoxEx.TabIndex = 1;
             this.superValidator.SetValidator1(this.financeTypeComboBoxEx, this.requiredFieldValidator1);
             // 
             // invoiceFinanceBatchBindingSource
@@ -378,7 +378,7 @@
             this.costRateTextBoxX.Location = new System.Drawing.Point(260, 24);
             this.costRateTextBoxX.Name = "costRateTextBoxX";
             this.costRateTextBoxX.Size = new System.Drawing.Size(100, 20);
-            this.costRateTextBoxX.TabIndex = 17;
+            this.costRateTextBoxX.TabIndex = 10;
             this.superValidator.SetValidator1(this.costRateTextBoxX, this.requiredFieldValidator6);
             // 
             // factorCodeTextBox
@@ -391,7 +391,7 @@
             this.factorCodeTextBox.Location = new System.Drawing.Point(440, 46);
             this.factorCodeTextBox.Name = "factorCodeTextBox";
             this.factorCodeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.factorCodeTextBox.TabIndex = 15;
+            this.factorCodeTextBox.TabIndex = 17;
             // 
             // interestTypeComboBoxEx
             // 
@@ -417,7 +417,7 @@
             this.financeRateTextBox.Location = new System.Drawing.Point(80, 23);
             this.financeRateTextBox.Name = "financeRateTextBox";
             this.financeRateTextBox.Size = new System.Drawing.Size(100, 20);
-            this.financeRateTextBox.TabIndex = 10;
+            this.financeRateTextBox.TabIndex = 8;
             this.superValidator.SetValidator1(this.financeRateTextBox, this.requiredFieldValidator3);
             // 
             // finnacePeriodEndDateTimePicker
@@ -452,7 +452,7 @@
             this.finnacePeriodEndDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.finnacePeriodEndDateTimePicker.Name = "finnacePeriodEndDateTimePicker";
             this.finnacePeriodEndDateTimePicker.Size = new System.Drawing.Size(122, 20);
-            this.finnacePeriodEndDateTimePicker.TabIndex = 9;
+            this.finnacePeriodEndDateTimePicker.TabIndex = 6;
             this.superValidator.SetValidator1(this.finnacePeriodEndDateTimePicker, this.requiredFieldValidator5);
             this.superValidator.SetValidator2(this.finnacePeriodEndDateTimePicker, this.compareValidator1);
             // 
@@ -488,7 +488,7 @@
             this.financePeriodBeginDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.financePeriodBeginDateTimePicker.Name = "financePeriodBeginDateTimePicker";
             this.financePeriodBeginDateTimePicker.Size = new System.Drawing.Size(122, 20);
-            this.financePeriodBeginDateTimePicker.TabIndex = 7;
+            this.financePeriodBeginDateTimePicker.TabIndex = 5;
             this.superValidator.SetValidator1(this.financePeriodBeginDateTimePicker, this.requiredFieldValidator4);
             // 
             // financeAmountTextBoxX
@@ -501,7 +501,7 @@
             this.financeAmountTextBoxX.Location = new System.Drawing.Point(154, 45);
             this.financeAmountTextBoxX.Name = "financeAmountTextBoxX";
             this.financeAmountTextBoxX.Size = new System.Drawing.Size(100, 20);
-            this.financeAmountTextBoxX.TabIndex = 5;
+            this.financeAmountTextBoxX.TabIndex = 15;
             // 
             // batchCurrencyComboBoxEx
             // 
@@ -516,7 +516,7 @@
             this.batchCurrencyComboBoxEx.Name = "batchCurrencyComboBoxEx";
             this.batchCurrencyComboBoxEx.Size = new System.Drawing.Size(68, 20);
             this.batchCurrencyComboBoxEx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.batchCurrencyComboBoxEx.TabIndex = 3;
+            this.batchCurrencyComboBoxEx.TabIndex = 14;
             this.superValidator.SetValidator1(this.batchCurrencyComboBoxEx, this.requiredFieldValidator8);
             // 
             // financeBatchNoTextBox
@@ -529,7 +529,7 @@
             this.financeBatchNoTextBox.Location = new System.Drawing.Point(260, 2);
             this.financeBatchNoTextBox.Name = "financeBatchNoTextBox";
             this.financeBatchNoTextBox.Size = new System.Drawing.Size(100, 20);
-            this.financeBatchNoTextBox.TabIndex = 1;
+            this.financeBatchNoTextBox.TabIndex = 3;
             this.superValidator.SetValidator1(this.financeBatchNoTextBox, this.requiredFieldValidator2);
             // 
             // dgvInvoices
@@ -555,12 +555,94 @@
             this.dgvInvoices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvInvoices.Location = new System.Drawing.Point(0, 117);
             this.dgvInvoices.Name = "dgvInvoices";
-            this.dgvInvoices.ReadOnly = true;
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInvoices.Size = new System.Drawing.Size(781, 349);
             this.dgvInvoices.TabIndex = 2;
             this.dgvInvoices.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellValueChanged);
             this.dgvInvoices.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellContentClick);
+            // 
+            // colCheckBox
+            // 
+            this.colCheckBox.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colCheckBox.Frozen = true;
+            this.colCheckBox.HeaderText = "";
+            this.colCheckBox.Name = "colCheckBox";
+            this.colCheckBox.ReadOnly = true;
+            this.colCheckBox.Width = 5;
+            // 
+            // colInvoiceNo
+            // 
+            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
+            this.colInvoiceNo.Frozen = true;
+            this.colInvoiceNo.HeaderText = "发票号";
+            this.colInvoiceNo.Name = "colInvoiceNo";
+            this.colInvoiceNo.ReadOnly = true;
+            // 
+            // colAssignAmount
+            // 
+            this.colAssignAmount.DataPropertyName = "AssignAmount";
+            dataGridViewCellStyle1.Format = "N2";
+            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colAssignAmount.HeaderText = "转让金额";
+            this.colAssignAmount.Name = "colAssignAmount";
+            this.colAssignAmount.ReadOnly = true;
+            // 
+            // colAssignOutstanding
+            // 
+            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
+            dataGridViewCellStyle2.Format = "N2";
+            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colAssignOutstanding.HeaderText = "转让余额";
+            this.colAssignOutstanding.Name = "colAssignOutstanding";
+            this.colAssignOutstanding.ReadOnly = true;
+            // 
+            // colDueDate
+            // 
+            this.colDueDate.DataPropertyName = "DueDate";
+            this.colDueDate.HeaderText = "发票到期日";
+            this.colDueDate.Name = "colDueDate";
+            this.colDueDate.ReadOnly = true;
+            // 
+            // colFinanceAmount
+            // 
+            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
+            dataGridViewCellStyle3.Format = "N2";
+            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colFinanceAmount.HeaderText = "融资金额";
+            this.colFinanceAmount.Name = "colFinanceAmount";
+            this.colFinanceAmount.ReadOnly = true;
+            // 
+            // colFinanceOutstanding
+            // 
+            this.colFinanceOutstanding.DataPropertyName = "FinanceOutstanding";
+            dataGridViewCellStyle4.Format = "N2";
+            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colFinanceOutstanding.HeaderText = "融资余额";
+            this.colFinanceOutstanding.Name = "colFinanceOutstanding";
+            this.colFinanceOutstanding.ReadOnly = true;
+            // 
+            // colFinanceDate
+            // 
+            this.colFinanceDate.DataPropertyName = "FinanceDate";
+            this.colFinanceDate.HeaderText = "融资日";
+            this.colFinanceDate.Name = "colFinanceDate";
+            this.colFinanceDate.ReadOnly = true;
+            this.colFinanceDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colFinanceDueDate
+            // 
+            this.colFinanceDueDate.DataPropertyName = "FinanceDueDate";
+            this.colFinanceDueDate.HeaderText = "融资到期日";
+            this.colFinanceDueDate.Name = "colFinanceDueDate";
+            this.colFinanceDueDate.ReadOnly = true;
+            this.colFinanceDueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colComment
+            // 
+            this.colComment.DataPropertyName = "Comment";
+            this.colComment.HeaderText = "备注";
+            this.colComment.Name = "colComment";
+            this.colComment.ReadOnly = true;
             // 
             // invoiceBindingSource
             // 
@@ -756,89 +838,6 @@
             // highlighter
             // 
             this.highlighter.ContainerControl = this;
-            // 
-            // colCheckBox
-            // 
-            this.colCheckBox.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colCheckBox.Frozen = true;
-            this.colCheckBox.HeaderText = "";
-            this.colCheckBox.Name = "colCheckBox";
-            this.colCheckBox.ReadOnly = true;
-            this.colCheckBox.Width = 5;
-            // 
-            // colInvoiceNo
-            // 
-            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
-            this.colInvoiceNo.Frozen = true;
-            this.colInvoiceNo.HeaderText = "发票号";
-            this.colInvoiceNo.Name = "colInvoiceNo";
-            this.colInvoiceNo.ReadOnly = true;
-            // 
-            // colAssignAmount
-            // 
-            this.colAssignAmount.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle1.Format = "N2";
-            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colAssignAmount.HeaderText = "转让金额";
-            this.colAssignAmount.Name = "colAssignAmount";
-            this.colAssignAmount.ReadOnly = true;
-            // 
-            // colAssignOutstanding
-            // 
-            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
-            dataGridViewCellStyle2.Format = "N2";
-            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAssignOutstanding.HeaderText = "转让余额";
-            this.colAssignOutstanding.Name = "colAssignOutstanding";
-            this.colAssignOutstanding.ReadOnly = true;
-            // 
-            // colDueDate
-            // 
-            this.colDueDate.DataPropertyName = "DueDate";
-            this.colDueDate.HeaderText = "发票到期日";
-            this.colDueDate.Name = "colDueDate";
-            this.colDueDate.ReadOnly = true;
-            // 
-            // colFinanceAmount
-            // 
-            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
-            dataGridViewCellStyle3.Format = "N2";
-            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colFinanceAmount.HeaderText = "融资金额";
-            this.colFinanceAmount.Name = "colFinanceAmount";
-            this.colFinanceAmount.ReadOnly = true;
-            // 
-            // colFinanceOutstanding
-            // 
-            this.colFinanceOutstanding.DataPropertyName = "FinanceOutstanding";
-            dataGridViewCellStyle4.Format = "N2";
-            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colFinanceOutstanding.HeaderText = "融资余额";
-            this.colFinanceOutstanding.Name = "colFinanceOutstanding";
-            this.colFinanceOutstanding.ReadOnly = true;
-            // 
-            // colFinanceDate
-            // 
-            this.colFinanceDate.DataPropertyName = "FinanceDate";
-            this.colFinanceDate.HeaderText = "融资日";
-            this.colFinanceDate.Name = "colFinanceDate";
-            this.colFinanceDate.ReadOnly = true;
-            this.colFinanceDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // colFinanceDueDate
-            // 
-            this.colFinanceDueDate.DataPropertyName = "FinanceDueDate";
-            this.colFinanceDueDate.HeaderText = "融资到期日";
-            this.colFinanceDueDate.Name = "colFinanceDueDate";
-            this.colFinanceDueDate.ReadOnly = true;
-            this.colFinanceDueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // colComment
-            // 
-            this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "备注";
-            this.colComment.Name = "colComment";
-            this.colComment.ReadOnly = true;
             // 
             // InvoiceFinance
             // 

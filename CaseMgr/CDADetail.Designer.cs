@@ -144,8 +144,8 @@
             DevComponents.DotNetBar.LabelX contractCodeLabel;
             DevComponents.DotNetBar.LabelX lblCDACode;
             DevComponents.DotNetBar.LabelX assignTypeLabel;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
             DevComponents.DotNetBar.LabelX lblIsNotice;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -163,6 +163,7 @@
             this.sellerClientEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.caseCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelCreditCover = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.cbIsNotice = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cbIsRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.assignTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tbCDACode = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -216,7 +217,6 @@
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.cbIsNotice = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -292,7 +292,7 @@
             sellerClientLabel.Location = new System.Drawing.Point(15, 26);
             sellerClientLabel.Name = "sellerClientLabel";
             sellerClientLabel.Size = new System.Drawing.Size(34, 16);
-            sellerClientLabel.TabIndex = 2;
+            sellerClientLabel.TabIndex = 8;
             sellerClientLabel.Text = "卖方:";
             // 
             // factorCodeLabel
@@ -306,7 +306,7 @@
             factorCodeLabel.Location = new System.Drawing.Point(355, 26);
             factorCodeLabel.Name = "factorCodeLabel";
             factorCodeLabel.Size = new System.Drawing.Size(47, 16);
-            factorCodeLabel.TabIndex = 6;
+            factorCodeLabel.TabIndex = 12;
             factorCodeLabel.Text = "保理商:";
             // 
             // buyerClientEDICodeLabel
@@ -320,7 +320,7 @@
             buyerClientEDICodeLabel.Location = new System.Drawing.Point(15, 69);
             buyerClientEDICodeLabel.Name = "buyerClientEDICodeLabel";
             buyerClientEDICodeLabel.Size = new System.Drawing.Size(34, 16);
-            buyerClientEDICodeLabel.TabIndex = 12;
+            buyerClientEDICodeLabel.TabIndex = 16;
             buyerClientEDICodeLabel.Text = "买方:";
             // 
             // transactionTypeLabel
@@ -334,7 +334,7 @@
             transactionTypeLabel.Location = new System.Drawing.Point(177, 6);
             transactionTypeLabel.Name = "transactionTypeLabel";
             transactionTypeLabel.Size = new System.Drawing.Size(59, 16);
-            transactionTypeLabel.TabIndex = 22;
+            transactionTypeLabel.TabIndex = 2;
             transactionTypeLabel.Text = "业务类别:";
             // 
             // invoiceCurrencyLabel
@@ -348,7 +348,7 @@
             invoiceCurrencyLabel.Location = new System.Drawing.Point(353, 4);
             invoiceCurrencyLabel.Name = "invoiceCurrencyLabel";
             invoiceCurrencyLabel.Size = new System.Drawing.Size(59, 16);
-            invoiceCurrencyLabel.TabIndex = 24;
+            invoiceCurrencyLabel.TabIndex = 4;
             invoiceCurrencyLabel.Text = "发票币别:";
             // 
             // creditCoverCurrLabel
@@ -362,7 +362,7 @@
             creditCoverCurrLabel.Location = new System.Drawing.Point(9, 31);
             creditCoverCurrLabel.Name = "creditCoverCurrLabel";
             creditCoverCurrLabel.Size = new System.Drawing.Size(84, 16);
-            creditCoverCurrLabel.TabIndex = 0;
+            creditCoverCurrLabel.TabIndex = 7;
             creditCoverCurrLabel.Text = "买方风险额度:";
             // 
             // pUGProportionLabel
@@ -376,7 +376,7 @@
             pUGProportionLabel.Location = new System.Drawing.Point(215, 52);
             pUGProportionLabel.Name = "pUGProportionLabel";
             pUGProportionLabel.Size = new System.Drawing.Size(59, 16);
-            pUGProportionLabel.TabIndex = 8;
+            pUGProportionLabel.TabIndex = 14;
             pUGProportionLabel.Text = "担保比例:";
             // 
             // creditCoverPeriodBeginLabel
@@ -404,7 +404,7 @@
             pUGPeriodLabel.Location = new System.Drawing.Point(351, 52);
             pUGPeriodLabel.Name = "pUGPeriodLabel";
             pUGPeriodLabel.Size = new System.Drawing.Size(84, 16);
-            pUGPeriodLabel.TabIndex = 13;
+            pUGPeriodLabel.TabIndex = 16;
             pUGPeriodLabel.Text = "担保付款期限:";
             // 
             // reassignGracePeriodLabel
@@ -418,7 +418,7 @@
             reassignGracePeriodLabel.Location = new System.Drawing.Point(526, 53);
             reassignGracePeriodLabel.Name = "reassignGracePeriodLabel";
             reassignGracePeriodLabel.Size = new System.Drawing.Size(72, 16);
-            reassignGracePeriodLabel.TabIndex = 15;
+            reassignGracePeriodLabel.TabIndex = 18;
             reassignGracePeriodLabel.Text = "回购宽限期:";
             // 
             // financeLineCurrLabel
@@ -432,7 +432,7 @@
             financeLineCurrLabel.Location = new System.Drawing.Point(21, 80);
             financeLineCurrLabel.Name = "financeLineCurrLabel";
             financeLineCurrLabel.Size = new System.Drawing.Size(72, 16);
-            financeLineCurrLabel.TabIndex = 17;
+            financeLineCurrLabel.TabIndex = 20;
             financeLineCurrLabel.Text = "预付款额度:";
             // 
             // financeLinePeriodBeginLabel
@@ -446,7 +446,7 @@
             financeLinePeriodBeginLabel.Location = new System.Drawing.Point(264, 80);
             financeLinePeriodBeginLabel.Name = "financeLinePeriodBeginLabel";
             financeLinePeriodBeginLabel.Size = new System.Drawing.Size(59, 16);
-            financeLinePeriodBeginLabel.TabIndex = 21;
+            financeLinePeriodBeginLabel.TabIndex = 23;
             financeLinePeriodBeginLabel.Text = "有效期限:";
             // 
             // lblHighestFinance
@@ -460,7 +460,7 @@
             lblHighestFinance.Location = new System.Drawing.Point(7, 105);
             lblHighestFinance.Name = "lblHighestFinance";
             lblHighestFinance.Size = new System.Drawing.Size(121, 16);
-            lblHighestFinance.TabIndex = 25;
+            lblHighestFinance.TabIndex = 26;
             lblHighestFinance.Text = "最高保理预付款额度:";
             // 
             // financeProportionLabel
@@ -474,7 +474,7 @@
             financeProportionLabel.Location = new System.Drawing.Point(264, 105);
             financeProportionLabel.Name = "financeProportionLabel";
             financeProportionLabel.Size = new System.Drawing.Size(59, 16);
-            financeProportionLabel.TabIndex = 26;
+            financeProportionLabel.TabIndex = 28;
             financeProportionLabel.Text = "预付比例:";
             // 
             // orderNumberLabel
@@ -488,7 +488,7 @@
             orderNumberLabel.Location = new System.Drawing.Point(47, 173);
             orderNumberLabel.Name = "orderNumberLabel";
             orderNumberLabel.Size = new System.Drawing.Size(47, 16);
-            orderNumberLabel.TabIndex = 28;
+            orderNumberLabel.TabIndex = 34;
             orderNumberLabel.Text = "订单号:";
             // 
             // paymentTermsLabel
@@ -502,7 +502,7 @@
             paymentTermsLabel.Location = new System.Drawing.Point(34, 127);
             paymentTermsLabel.Name = "paymentTermsLabel";
             paymentTermsLabel.Size = new System.Drawing.Size(59, 16);
-            paymentTermsLabel.TabIndex = 30;
+            paymentTermsLabel.TabIndex = 32;
             paymentTermsLabel.Text = "付款条件:";
             // 
             // financeGracePeriodLabel
@@ -516,7 +516,7 @@
             financeGracePeriodLabel.Location = new System.Drawing.Point(440, 106);
             financeGracePeriodLabel.Name = "financeGracePeriodLabel";
             financeGracePeriodLabel.Size = new System.Drawing.Size(72, 16);
-            financeGracePeriodLabel.TabIndex = 32;
+            financeGracePeriodLabel.TabIndex = 30;
             financeGracePeriodLabel.Text = "融资宽限期:";
             // 
             // deductiblesLabel
@@ -530,7 +530,7 @@
             deductiblesLabel.Location = new System.Drawing.Point(271, 176);
             deductiblesLabel.Name = "deductiblesLabel";
             deductiblesLabel.Size = new System.Drawing.Size(47, 16);
-            deductiblesLabel.TabIndex = 34;
+            deductiblesLabel.TabIndex = 36;
             deductiblesLabel.Text = "自负额:";
             // 
             // lossThresholdLabel
@@ -544,7 +544,7 @@
             lossThresholdLabel.Location = new System.Drawing.Point(433, 176);
             lossThresholdLabel.Name = "lossThresholdLabel";
             lossThresholdLabel.Size = new System.Drawing.Size(84, 16);
-            lossThresholdLabel.TabIndex = 36;
+            lossThresholdLabel.TabIndex = 38;
             lossThresholdLabel.Text = "最低损失门槛:";
             // 
             // priceLabel
@@ -558,7 +558,7 @@
             priceLabel.Location = new System.Drawing.Point(23, 206);
             priceLabel.Name = "priceLabel";
             priceLabel.Size = new System.Drawing.Size(72, 16);
-            priceLabel.TabIndex = 0;
+            priceLabel.TabIndex = 40;
             priceLabel.Text = "总手续费率:";
             // 
             // iFPriceLabel
@@ -572,7 +572,7 @@
             iFPriceLabel.Location = new System.Drawing.Point(191, 207);
             iFPriceLabel.Name = "iFPriceLabel";
             iFPriceLabel.Size = new System.Drawing.Size(69, 16);
-            iFPriceLabel.TabIndex = 2;
+            iFPriceLabel.TabIndex = 42;
             iFPriceLabel.Text = "IF手续费率:";
             // 
             // eFPriceLabel
@@ -586,7 +586,7 @@
             eFPriceLabel.Location = new System.Drawing.Point(350, 207);
             eFPriceLabel.Name = "eFPriceLabel";
             eFPriceLabel.Size = new System.Drawing.Size(74, 16);
-            eFPriceLabel.TabIndex = 4;
+            eFPriceLabel.TabIndex = 44;
             eFPriceLabel.Text = "EF手续费率:";
             // 
             // commissonTypeLabel
@@ -600,7 +600,7 @@
             commissonTypeLabel.Location = new System.Drawing.Point(34, 231);
             commissonTypeLabel.Name = "commissonTypeLabel";
             commissonTypeLabel.Size = new System.Drawing.Size(59, 16);
-            commissonTypeLabel.TabIndex = 6;
+            commissonTypeLabel.TabIndex = 49;
             commissonTypeLabel.Text = "计费方式:";
             // 
             // commissionTypeCommentLabel
@@ -614,7 +614,7 @@
             commissionTypeCommentLabel.Location = new System.Drawing.Point(248, 231);
             commissionTypeCommentLabel.Name = "commissionTypeCommentLabel";
             commissionTypeCommentLabel.Size = new System.Drawing.Size(34, 16);
-            commissionTypeCommentLabel.TabIndex = 8;
+            commissionTypeCommentLabel.TabIndex = 51;
             commissionTypeCommentLabel.Text = "说明:";
             // 
             // handFeeLabel
@@ -628,7 +628,7 @@
             handFeeLabel.Location = new System.Drawing.Point(509, 204);
             handFeeLabel.Name = "handFeeLabel";
             handFeeLabel.Size = new System.Drawing.Size(104, 16);
-            handFeeLabel.TabIndex = 10;
+            handFeeLabel.TabIndex = 46;
             handFeeLabel.Text = "单据处理费(每张):";
             // 
             // noticePersonLabel
@@ -642,7 +642,7 @@
             noticePersonLabel.Location = new System.Drawing.Point(220, 30);
             noticePersonLabel.Name = "noticePersonLabel";
             noticePersonLabel.Size = new System.Drawing.Size(47, 16);
-            noticePersonLabel.TabIndex = 8;
+            noticePersonLabel.TabIndex = 7;
             noticePersonLabel.Text = "通知人:";
             // 
             // emailLabel
@@ -656,7 +656,7 @@
             emailLabel.Location = new System.Drawing.Point(388, 31);
             emailLabel.Name = "emailLabel";
             emailLabel.Size = new System.Drawing.Size(63, 16);
-            emailLabel.TabIndex = 10;
+            emailLabel.TabIndex = 9;
             emailLabel.Text = "Email地址:";
             // 
             // faxLabel
@@ -670,7 +670,7 @@
             faxLabel.Location = new System.Drawing.Point(539, 31);
             faxLabel.Name = "faxLabel";
             faxLabel.Size = new System.Drawing.Size(59, 16);
-            faxLabel.TabIndex = 12;
+            faxLabel.TabIndex = 11;
             faxLabel.Text = "传真号码:";
             // 
             // commentLabel
@@ -684,7 +684,7 @@
             commentLabel.Location = new System.Drawing.Point(53, 55);
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(34, 16);
-            commentLabel.TabIndex = 14;
+            commentLabel.TabIndex = 13;
             commentLabel.Text = "备注:";
             // 
             // createUserNameLabel
@@ -698,7 +698,7 @@
             createUserNameLabel.Location = new System.Drawing.Point(552, 57);
             createUserNameLabel.Name = "createUserNameLabel";
             createUserNameLabel.Size = new System.Drawing.Size(47, 16);
-            createUserNameLabel.TabIndex = 16;
+            createUserNameLabel.TabIndex = 15;
             createUserNameLabel.Text = "经办人:";
             // 
             // cDASignDateLabel
@@ -712,7 +712,7 @@
             cDASignDateLabel.Location = new System.Drawing.Point(42, 3);
             cDASignDateLabel.Name = "cDASignDateLabel";
             cDASignDateLabel.Size = new System.Drawing.Size(47, 16);
-            cDASignDateLabel.TabIndex = 18;
+            cDASignDateLabel.TabIndex = 0;
             cDASignDateLabel.Text = "签发日:";
             // 
             // cDAStatusLabel
@@ -726,7 +726,7 @@
             cDAStatusLabel.Location = new System.Drawing.Point(449, 5);
             cDAStatusLabel.Name = "cDAStatusLabel";
             cDAStatusLabel.Size = new System.Drawing.Size(59, 16);
-            cDAStatusLabel.TabIndex = 19;
+            cDAStatusLabel.TabIndex = 2;
             cDAStatusLabel.Text = "合同状态:";
             // 
             // noticeMethodLabel
@@ -740,7 +740,7 @@
             noticeMethodLabel.Location = new System.Drawing.Point(30, 31);
             noticeMethodLabel.Name = "noticeMethodLabel";
             noticeMethodLabel.Size = new System.Drawing.Size(59, 16);
-            noticeMethodLabel.TabIndex = 20;
+            noticeMethodLabel.TabIndex = 4;
             noticeMethodLabel.Text = "通知方式:";
             // 
             // contractCodeLabel
@@ -754,7 +754,7 @@
             contractCodeLabel.Location = new System.Drawing.Point(529, 4);
             contractCodeLabel.Name = "contractCodeLabel";
             contractCodeLabel.Size = new System.Drawing.Size(72, 16);
-            contractCodeLabel.TabIndex = 28;
+            contractCodeLabel.TabIndex = 6;
             contractCodeLabel.Text = "主合同编号:";
             // 
             // lblCDACode
@@ -768,7 +768,7 @@
             lblCDACode.Location = new System.Drawing.Point(36, 3);
             lblCDACode.Name = "lblCDACode";
             lblCDACode.Size = new System.Drawing.Size(58, 16);
-            lblCDACode.TabIndex = 40;
+            lblCDACode.TabIndex = 0;
             lblCDACode.Text = "CDA编号:";
             // 
             // assignTypeLabel
@@ -782,8 +782,22 @@
             assignTypeLabel.Location = new System.Drawing.Point(264, 3);
             assignTypeLabel.Name = "assignTypeLabel";
             assignTypeLabel.Size = new System.Drawing.Size(59, 16);
-            assignTypeLabel.TabIndex = 42;
+            assignTypeLabel.TabIndex = 2;
             assignTypeLabel.Text = "转让方式:";
+            // 
+            // lblIsNotice
+            // 
+            lblIsNotice.AutoSize = true;
+            lblIsNotice.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblIsNotice.BackgroundStyle.Class = "";
+            lblIsNotice.Location = new System.Drawing.Point(444, 4);
+            lblIsNotice.Name = "lblIsNotice";
+            lblIsNotice.Size = new System.Drawing.Size(62, 16);
+            lblIsNotice.TabIndex = 4;
+            lblIsNotice.Text = "明/暗保理:";
             // 
             // groupPanelCase
             // 
@@ -855,7 +869,7 @@
             this.invoiceCurrencyTextBox.Location = new System.Drawing.Point(429, 1);
             this.invoiceCurrencyTextBox.Name = "invoiceCurrencyTextBox";
             this.invoiceCurrencyTextBox.Size = new System.Drawing.Size(89, 20);
-            this.invoiceCurrencyTextBox.TabIndex = 35;
+            this.invoiceCurrencyTextBox.TabIndex = 5;
             // 
             // CDABindingSource
             // 
@@ -871,7 +885,7 @@
             this.transactionTypeTextBox.Location = new System.Drawing.Point(242, 2);
             this.transactionTypeTextBox.Name = "transactionTypeTextBox";
             this.transactionTypeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.transactionTypeTextBox.TabIndex = 34;
+            this.transactionTypeTextBox.TabIndex = 3;
             // 
             // companyNameENTextBox
             // 
@@ -882,7 +896,7 @@
             this.companyNameENTextBox.Location = new System.Drawing.Point(520, 44);
             this.companyNameENTextBox.Name = "companyNameENTextBox";
             this.companyNameENTextBox.Size = new System.Drawing.Size(170, 20);
-            this.companyNameENTextBox.TabIndex = 30;
+            this.companyNameENTextBox.TabIndex = 15;
             this.companyNameENTextBox.WatermarkText = "英文名";
             // 
             // contractCodeTextBox
@@ -894,7 +908,7 @@
             this.contractCodeTextBox.Location = new System.Drawing.Point(613, 1);
             this.contractCodeTextBox.Name = "contractCodeTextBox";
             this.contractCodeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.contractCodeTextBox.TabIndex = 29;
+            this.contractCodeTextBox.TabIndex = 7;
             // 
             // btnCaseSelect
             // 
@@ -904,7 +918,7 @@
             this.btnCaseSelect.Name = "btnCaseSelect";
             this.btnCaseSelect.Size = new System.Drawing.Size(39, 40);
             this.btnCaseSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCaseSelect.TabIndex = 26;
+            this.btnCaseSelect.TabIndex = 20;
             this.btnCaseSelect.Text = "...";
             this.btnCaseSelect.Click += new System.EventHandler(this.SelectCase);
             // 
@@ -918,7 +932,7 @@
             this.buyerClientNameEN_1TextBox.Location = new System.Drawing.Point(125, 86);
             this.buyerClientNameEN_1TextBox.Name = "buyerClientNameEN_1TextBox";
             this.buyerClientNameEN_1TextBox.Size = new System.Drawing.Size(216, 20);
-            this.buyerClientNameEN_1TextBox.TabIndex = 17;
+            this.buyerClientNameEN_1TextBox.TabIndex = 19;
             this.buyerClientNameEN_1TextBox.WatermarkText = "英文名";
             // 
             // buyerClientNameCNTextBox
@@ -931,7 +945,7 @@
             this.buyerClientNameCNTextBox.Location = new System.Drawing.Point(125, 65);
             this.buyerClientNameCNTextBox.Name = "buyerClientNameCNTextBox";
             this.buyerClientNameCNTextBox.Size = new System.Drawing.Size(216, 20);
-            this.buyerClientNameCNTextBox.TabIndex = 15;
+            this.buyerClientNameCNTextBox.TabIndex = 18;
             this.buyerClientNameCNTextBox.WatermarkText = "中文名";
             // 
             // buyerClientEDICodeTextBox
@@ -944,7 +958,7 @@
             this.buyerClientEDICodeTextBox.Location = new System.Drawing.Point(55, 67);
             this.buyerClientEDICodeTextBox.Name = "buyerClientEDICodeTextBox";
             this.buyerClientEDICodeTextBox.Size = new System.Drawing.Size(64, 20);
-            this.buyerClientEDICodeTextBox.TabIndex = 13;
+            this.buyerClientEDICodeTextBox.TabIndex = 17;
             // 
             // sellerClientNameEN_1TextBox
             // 
@@ -968,7 +982,7 @@
             this.companyNameCNTextBox.Location = new System.Drawing.Point(520, 23);
             this.companyNameCNTextBox.Name = "companyNameCNTextBox";
             this.companyNameCNTextBox.Size = new System.Drawing.Size(170, 20);
-            this.companyNameCNTextBox.TabIndex = 9;
+            this.companyNameCNTextBox.TabIndex = 14;
             this.companyNameCNTextBox.WatermarkText = "中文名";
             // 
             // factorCodeTextBox
@@ -980,7 +994,7 @@
             this.factorCodeTextBox.Location = new System.Drawing.Point(429, 23);
             this.factorCodeTextBox.Name = "factorCodeTextBox";
             this.factorCodeTextBox.Size = new System.Drawing.Size(85, 20);
-            this.factorCodeTextBox.TabIndex = 7;
+            this.factorCodeTextBox.TabIndex = 13;
             // 
             // sellerClientNameCNTextBox
             // 
@@ -992,7 +1006,7 @@
             this.sellerClientNameCNTextBox.Location = new System.Drawing.Point(125, 23);
             this.sellerClientNameCNTextBox.Name = "sellerClientNameCNTextBox";
             this.sellerClientNameCNTextBox.Size = new System.Drawing.Size(216, 20);
-            this.sellerClientNameCNTextBox.TabIndex = 5;
+            this.sellerClientNameCNTextBox.TabIndex = 10;
             this.sellerClientNameCNTextBox.WatermarkText = "中文名";
             // 
             // sellerClientEDICodeTextBox
@@ -1005,7 +1019,7 @@
             this.sellerClientEDICodeTextBox.Location = new System.Drawing.Point(55, 23);
             this.sellerClientEDICodeTextBox.Name = "sellerClientEDICodeTextBox";
             this.sellerClientEDICodeTextBox.Size = new System.Drawing.Size(64, 20);
-            this.sellerClientEDICodeTextBox.TabIndex = 3;
+            this.sellerClientEDICodeTextBox.TabIndex = 9;
             // 
             // caseCodeTextBox
             // 
@@ -1109,7 +1123,21 @@
             // 
             // 
             this.groupPanelCreditCover.StyleMouseOver.Class = "";
-            this.groupPanelCreditCover.TabIndex = 2;
+            this.groupPanelCreditCover.TabIndex = 1;
+            // 
+            // cbIsNotice
+            // 
+            this.cbIsNotice.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "IsNotice", true));
+            this.cbIsNotice.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbIsNotice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbIsNotice.FormattingEnabled = true;
+            this.cbIsNotice.Items.AddRange(new object[] {
+            "明保理",
+            "暗保理"});
+            this.cbIsNotice.Location = new System.Drawing.Point(509, 2);
+            this.cbIsNotice.Name = "cbIsNotice";
+            this.cbIsNotice.Size = new System.Drawing.Size(101, 21);
+            this.cbIsNotice.TabIndex = 5;
             // 
             // cbIsRecoarse
             // 
@@ -1123,7 +1151,7 @@
             this.cbIsRecoarse.Location = new System.Drawing.Point(632, 3);
             this.cbIsRecoarse.Name = "cbIsRecoarse";
             this.cbIsRecoarse.Size = new System.Drawing.Size(101, 16);
-            this.cbIsRecoarse.TabIndex = 44;
+            this.cbIsRecoarse.TabIndex = 6;
             this.cbIsRecoarse.Text = "是否有追索权";
             // 
             // assignTypeComboBox
@@ -1135,7 +1163,7 @@
             this.assignTypeComboBox.Location = new System.Drawing.Point(329, 0);
             this.assignTypeComboBox.Name = "assignTypeComboBox";
             this.assignTypeComboBox.Size = new System.Drawing.Size(101, 21);
-            this.assignTypeComboBox.TabIndex = 43;
+            this.assignTypeComboBox.TabIndex = 3;
             // 
             // tbCDACode
             // 
@@ -1148,7 +1176,7 @@
             this.tbCDACode.Name = "tbCDACode";
             this.tbCDACode.ReadOnly = true;
             this.tbCDACode.Size = new System.Drawing.Size(100, 20);
-            this.tbCDACode.TabIndex = 41;
+            this.tbCDACode.TabIndex = 1;
             // 
             // tbHighestFinance
             // 
@@ -1159,7 +1187,7 @@
             this.tbHighestFinance.Location = new System.Drawing.Point(131, 104);
             this.tbHighestFinance.Name = "tbHighestFinance";
             this.tbHighestFinance.Size = new System.Drawing.Size(83, 20);
-            this.tbHighestFinance.TabIndex = 39;
+            this.tbHighestFinance.TabIndex = 27;
             // 
             // handFeeCurrComboBox
             // 
@@ -1170,7 +1198,7 @@
             this.handFeeCurrComboBox.Location = new System.Drawing.Point(619, 202);
             this.handFeeCurrComboBox.Name = "handFeeCurrComboBox";
             this.handFeeCurrComboBox.Size = new System.Drawing.Size(77, 21);
-            this.handFeeCurrComboBox.TabIndex = 13;
+            this.handFeeCurrComboBox.TabIndex = 47;
             this.handFeeCurrComboBox.WatermarkText = "币别";
             // 
             // cbIsCreditCoverRevolving
@@ -1185,7 +1213,7 @@
             this.cbIsCreditCoverRevolving.Name = "cbIsCreditCoverRevolving";
             this.cbIsCreditCoverRevolving.Size = new System.Drawing.Size(100, 23);
             this.cbIsCreditCoverRevolving.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsCreditCoverRevolving.TabIndex = 38;
+            this.cbIsCreditCoverRevolving.TabIndex = 13;
             this.cbIsCreditCoverRevolving.Text = "是否循环额度";
             // 
             // handFeeTextBox
@@ -1198,7 +1226,7 @@
             this.handFeeTextBox.Location = new System.Drawing.Point(702, 203);
             this.handFeeTextBox.Name = "handFeeTextBox";
             this.handFeeTextBox.Size = new System.Drawing.Size(57, 20);
-            this.handFeeTextBox.TabIndex = 11;
+            this.handFeeTextBox.TabIndex = 48;
             // 
             // lossThresholdTextBox
             // 
@@ -1210,7 +1238,7 @@
             this.lossThresholdTextBox.Location = new System.Drawing.Point(518, 172);
             this.lossThresholdTextBox.Name = "lossThresholdTextBox";
             this.lossThresholdTextBox.Size = new System.Drawing.Size(100, 20);
-            this.lossThresholdTextBox.TabIndex = 37;
+            this.lossThresholdTextBox.TabIndex = 39;
             // 
             // commissionTypeCommentTextBox
             // 
@@ -1222,7 +1250,7 @@
             this.commissionTypeCommentTextBox.Location = new System.Drawing.Point(286, 229);
             this.commissionTypeCommentTextBox.Name = "commissionTypeCommentTextBox";
             this.commissionTypeCommentTextBox.Size = new System.Drawing.Size(415, 20);
-            this.commissionTypeCommentTextBox.TabIndex = 9;
+            this.commissionTypeCommentTextBox.TabIndex = 52;
             this.superValidator.SetValidator1(this.commissionTypeCommentTextBox, this.customValidator1);
             // 
             // deductiblesTextBox
@@ -1235,7 +1263,7 @@
             this.deductiblesTextBox.Location = new System.Drawing.Point(324, 173);
             this.deductiblesTextBox.Name = "deductiblesTextBox";
             this.deductiblesTextBox.Size = new System.Drawing.Size(100, 20);
-            this.deductiblesTextBox.TabIndex = 35;
+            this.deductiblesTextBox.TabIndex = 37;
             // 
             // commissionTypeComboBox
             // 
@@ -1246,7 +1274,7 @@
             this.commissionTypeComboBox.Location = new System.Drawing.Point(105, 229);
             this.commissionTypeComboBox.Name = "commissionTypeComboBox";
             this.commissionTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.commissionTypeComboBox.TabIndex = 7;
+            this.commissionTypeComboBox.TabIndex = 50;
             this.superValidator.SetValidator1(this.commissionTypeComboBox, this.requiredFieldValidator2);
             // 
             // financeGracePeriodTextBox
@@ -1259,7 +1287,7 @@
             this.financeGracePeriodTextBox.Location = new System.Drawing.Point(518, 104);
             this.financeGracePeriodTextBox.Name = "financeGracePeriodTextBox";
             this.financeGracePeriodTextBox.Size = new System.Drawing.Size(100, 20);
-            this.financeGracePeriodTextBox.TabIndex = 33;
+            this.financeGracePeriodTextBox.TabIndex = 31;
             // 
             // eFPriceTextBox
             // 
@@ -1271,7 +1299,7 @@
             this.eFPriceTextBox.Location = new System.Drawing.Point(437, 204);
             this.eFPriceTextBox.Name = "eFPriceTextBox";
             this.eFPriceTextBox.Size = new System.Drawing.Size(66, 20);
-            this.eFPriceTextBox.TabIndex = 5;
+            this.eFPriceTextBox.TabIndex = 45;
             // 
             // paymentTermsTextBox
             // 
@@ -1285,7 +1313,7 @@
             this.paymentTermsTextBox.Name = "paymentTermsTextBox";
             this.paymentTermsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.paymentTermsTextBox.Size = new System.Drawing.Size(594, 43);
-            this.paymentTermsTextBox.TabIndex = 31;
+            this.paymentTermsTextBox.TabIndex = 33;
             this.superValidator.SetValidator1(this.paymentTermsTextBox, this.requiredFieldValidator1);
             // 
             // iFPriceTextBox
@@ -1298,7 +1326,7 @@
             this.iFPriceTextBox.Location = new System.Drawing.Point(268, 204);
             this.iFPriceTextBox.Name = "iFPriceTextBox";
             this.iFPriceTextBox.Size = new System.Drawing.Size(72, 20);
-            this.iFPriceTextBox.TabIndex = 3;
+            this.iFPriceTextBox.TabIndex = 43;
             // 
             // orderNumberTextBox
             // 
@@ -1310,7 +1338,7 @@
             this.orderNumberTextBox.Location = new System.Drawing.Point(105, 172);
             this.orderNumberTextBox.Name = "orderNumberTextBox";
             this.orderNumberTextBox.Size = new System.Drawing.Size(100, 20);
-            this.orderNumberTextBox.TabIndex = 29;
+            this.orderNumberTextBox.TabIndex = 35;
             // 
             // priceTextBox
             // 
@@ -1322,7 +1350,7 @@
             this.priceTextBox.Location = new System.Drawing.Point(105, 204);
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(58, 20);
-            this.priceTextBox.TabIndex = 1;
+            this.priceTextBox.TabIndex = 41;
             // 
             // financeProportionTextBox
             // 
@@ -1334,7 +1362,7 @@
             this.financeProportionTextBox.Location = new System.Drawing.Point(324, 104);
             this.financeProportionTextBox.Name = "financeProportionTextBox";
             this.financeProportionTextBox.Size = new System.Drawing.Size(100, 20);
-            this.financeProportionTextBox.TabIndex = 27;
+            this.financeProportionTextBox.TabIndex = 29;
             // 
             // financeLinePeriodEndDateTimePicker
             // 
@@ -1368,7 +1396,7 @@
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.financeLinePeriodEndDateTimePicker.Name = "financeLinePeriodEndDateTimePicker";
             this.financeLinePeriodEndDateTimePicker.Size = new System.Drawing.Size(108, 20);
-            this.financeLinePeriodEndDateTimePicker.TabIndex = 24;
+            this.financeLinePeriodEndDateTimePicker.TabIndex = 25;
             this.superValidator.SetValidator1(this.financeLinePeriodEndDateTimePicker, this.compareValidator2);
             // 
             // financeLinePeriodBeginDateTimePicker
@@ -1403,7 +1431,7 @@
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.financeLinePeriodBeginDateTimePicker.Name = "financeLinePeriodBeginDateTimePicker";
             this.financeLinePeriodBeginDateTimePicker.Size = new System.Drawing.Size(104, 20);
-            this.financeLinePeriodBeginDateTimePicker.TabIndex = 22;
+            this.financeLinePeriodBeginDateTimePicker.TabIndex = 24;
             // 
             // financeLineTextBox
             // 
@@ -1415,7 +1443,7 @@
             this.financeLineTextBox.Location = new System.Drawing.Point(175, 79);
             this.financeLineTextBox.Name = "financeLineTextBox";
             this.financeLineTextBox.Size = new System.Drawing.Size(83, 20);
-            this.financeLineTextBox.TabIndex = 20;
+            this.financeLineTextBox.TabIndex = 22;
             // 
             // financeLineCurrComboBox
             // 
@@ -1427,7 +1455,7 @@
             this.financeLineCurrComboBox.Location = new System.Drawing.Point(105, 78);
             this.financeLineCurrComboBox.Name = "financeLineCurrComboBox";
             this.financeLineCurrComboBox.Size = new System.Drawing.Size(64, 21);
-            this.financeLineCurrComboBox.TabIndex = 18;
+            this.financeLineCurrComboBox.TabIndex = 21;
             this.financeLineCurrComboBox.WatermarkText = "币别";
             // 
             // reassignGracePeriodTextBox
@@ -1440,7 +1468,7 @@
             this.reassignGracePeriodTextBox.Location = new System.Drawing.Point(599, 53);
             this.reassignGracePeriodTextBox.Name = "reassignGracePeriodTextBox";
             this.reassignGracePeriodTextBox.Size = new System.Drawing.Size(100, 20);
-            this.reassignGracePeriodTextBox.TabIndex = 16;
+            this.reassignGracePeriodTextBox.TabIndex = 19;
             // 
             // pUGPeriodTextBox
             // 
@@ -1452,7 +1480,7 @@
             this.pUGPeriodTextBox.Location = new System.Drawing.Point(437, 51);
             this.pUGPeriodTextBox.Name = "pUGPeriodTextBox";
             this.pUGPeriodTextBox.Size = new System.Drawing.Size(83, 20);
-            this.pUGPeriodTextBox.TabIndex = 14;
+            this.pUGPeriodTextBox.TabIndex = 17;
             // 
             // creditCoverPeriodEndDateTimePicker
             // 
@@ -1486,7 +1514,7 @@
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.creditCoverPeriodEndDateTimePicker.Name = "creditCoverPeriodEndDateTimePicker";
             this.creditCoverPeriodEndDateTimePicker.Size = new System.Drawing.Size(108, 20);
-            this.creditCoverPeriodEndDateTimePicker.TabIndex = 13;
+            this.creditCoverPeriodEndDateTimePicker.TabIndex = 12;
             this.superValidator.SetValidator1(this.creditCoverPeriodEndDateTimePicker, this.compareValidator1);
             // 
             // creditCoverPeriodBeginDateTimePicker
@@ -1533,7 +1561,7 @@
             this.pUGProportionTextBox.Location = new System.Drawing.Point(275, 51);
             this.pUGProportionTextBox.Name = "pUGProportionTextBox";
             this.pUGProportionTextBox.Size = new System.Drawing.Size(70, 20);
-            this.pUGProportionTextBox.TabIndex = 9;
+            this.pUGProportionTextBox.TabIndex = 15;
             // 
             // creditCoverTextBox
             // 
@@ -1545,7 +1573,7 @@
             this.creditCoverTextBox.Location = new System.Drawing.Point(175, 29);
             this.creditCoverTextBox.Name = "creditCoverTextBox";
             this.creditCoverTextBox.Size = new System.Drawing.Size(83, 20);
-            this.creditCoverTextBox.TabIndex = 3;
+            this.creditCoverTextBox.TabIndex = 9;
             // 
             // creditCoverCurrComboBox
             // 
@@ -1557,7 +1585,7 @@
             this.creditCoverCurrComboBox.Location = new System.Drawing.Point(105, 28);
             this.creditCoverCurrComboBox.Name = "creditCoverCurrComboBox";
             this.creditCoverCurrComboBox.Size = new System.Drawing.Size(64, 21);
-            this.creditCoverCurrComboBox.TabIndex = 1;
+            this.creditCoverCurrComboBox.TabIndex = 8;
             this.creditCoverCurrComboBox.WatermarkText = "币别";
             // 
             // groupPanelOther
@@ -1614,7 +1642,7 @@
             // 
             // 
             this.groupPanelOther.StyleMouseOver.Class = "";
-            this.groupPanelOther.TabIndex = 4;
+            this.groupPanelOther.TabIndex = 2;
             // 
             // cbNoticeMethodFax
             // 
@@ -1628,7 +1656,7 @@
             this.cbNoticeMethodFax.Name = "cbNoticeMethodFax";
             this.cbNoticeMethodFax.Size = new System.Drawing.Size(51, 16);
             this.cbNoticeMethodFax.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbNoticeMethodFax.TabIndex = 22;
+            this.cbNoticeMethodFax.TabIndex = 6;
             this.cbNoticeMethodFax.Text = "传真";
             // 
             // cbNoticeMethodEmail
@@ -1643,7 +1671,7 @@
             this.cbNoticeMethodEmail.Name = "cbNoticeMethodEmail";
             this.cbNoticeMethodEmail.Size = new System.Drawing.Size(51, 16);
             this.cbNoticeMethodEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbNoticeMethodEmail.TabIndex = 21;
+            this.cbNoticeMethodEmail.TabIndex = 5;
             this.cbNoticeMethodEmail.Text = "电邮";
             // 
             // cDAStatusComboBox
@@ -1655,7 +1683,7 @@
             this.cDAStatusComboBox.Location = new System.Drawing.Point(514, 5);
             this.cDAStatusComboBox.Name = "cDAStatusComboBox";
             this.cDAStatusComboBox.Size = new System.Drawing.Size(121, 21);
-            this.cDAStatusComboBox.TabIndex = 20;
+            this.cDAStatusComboBox.TabIndex = 3;
             // 
             // cDASignDateDateTimePicker
             // 
@@ -1689,7 +1717,7 @@
             this.cDASignDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.cDASignDateDateTimePicker.Name = "cDASignDateDateTimePicker";
             this.cDASignDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
-            this.cDASignDateDateTimePicker.TabIndex = 19;
+            this.cDASignDateDateTimePicker.TabIndex = 1;
             this.superValidator.SetValidator1(this.cDASignDateDateTimePicker, this.compareValidator3);
             // 
             // createUserNameTextBox
@@ -1702,7 +1730,7 @@
             this.createUserNameTextBox.Location = new System.Drawing.Point(604, 57);
             this.createUserNameTextBox.Name = "createUserNameTextBox";
             this.createUserNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.createUserNameTextBox.TabIndex = 17;
+            this.createUserNameTextBox.TabIndex = 16;
             // 
             // commentTextBox
             // 
@@ -1716,7 +1744,7 @@
             this.commentTextBox.Name = "commentTextBox";
             this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.commentTextBox.Size = new System.Drawing.Size(438, 37);
-            this.commentTextBox.TabIndex = 15;
+            this.commentTextBox.TabIndex = 14;
             // 
             // faxTextBox
             // 
@@ -1728,7 +1756,7 @@
             this.faxTextBox.Location = new System.Drawing.Point(604, 29);
             this.faxTextBox.Name = "faxTextBox";
             this.faxTextBox.Size = new System.Drawing.Size(100, 20);
-            this.faxTextBox.TabIndex = 13;
+            this.faxTextBox.TabIndex = 12;
             // 
             // emailTextBox
             // 
@@ -1740,7 +1768,7 @@
             this.emailTextBox.Location = new System.Drawing.Point(457, 30);
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(76, 20);
-            this.emailTextBox.TabIndex = 11;
+            this.emailTextBox.TabIndex = 10;
             this.superValidator.SetValidator1(this.emailTextBox, this.regularExpressionValidator1);
             // 
             // noticePersonTextBox
@@ -1753,7 +1781,7 @@
             this.noticePersonTextBox.Location = new System.Drawing.Point(271, 29);
             this.noticePersonTextBox.Name = "noticePersonTextBox";
             this.noticePersonTextBox.Size = new System.Drawing.Size(100, 20);
-            this.noticePersonTextBox.TabIndex = 9;
+            this.noticePersonTextBox.TabIndex = 8;
             // 
             // btnCDAUpdate
             // 
@@ -1763,7 +1791,7 @@
             this.btnCDAUpdate.Name = "btnCDAUpdate";
             this.btnCDAUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnCDAUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCDAUpdate.TabIndex = 5;
+            this.btnCDAUpdate.TabIndex = 3;
             this.btnCDAUpdate.Text = "编辑";
             this.btnCDAUpdate.Click += new System.EventHandler(this.UpdateCDA);
             // 
@@ -1775,7 +1803,7 @@
             this.btnCDASave.Name = "btnCDASave";
             this.btnCDASave.Size = new System.Drawing.Size(75, 23);
             this.btnCDASave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCDASave.TabIndex = 6;
+            this.btnCDASave.TabIndex = 4;
             this.btnCDASave.Text = "保存";
             this.btnCDASave.Click += new System.EventHandler(this.SaveCDA);
             // 
@@ -1787,7 +1815,7 @@
             this.btnCDAReset.Name = "btnCDAReset";
             this.btnCDAReset.Size = new System.Drawing.Size(75, 23);
             this.btnCDAReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCDAReset.TabIndex = 7;
+            this.btnCDAReset.TabIndex = 5;
             this.btnCDAReset.Text = "重置";
             this.btnCDAReset.Click += new System.EventHandler(this.CloseCDA);
             // 
@@ -1855,32 +1883,6 @@
             // highlighter
             // 
             this.highlighter.ContainerControl = this;
-            // 
-            // lblIsNotice
-            // 
-            lblIsNotice.AutoSize = true;
-            lblIsNotice.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblIsNotice.BackgroundStyle.Class = "";
-            lblIsNotice.Location = new System.Drawing.Point(444, 4);
-            lblIsNotice.Name = "lblIsNotice";
-            lblIsNotice.Size = new System.Drawing.Size(62, 16);
-            lblIsNotice.TabIndex = 45;
-            lblIsNotice.Text = "明/暗保理:";
-            // 
-            // cbIsNotice
-            // 
-            this.cbIsNotice.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "IsNotice", true));
-            this.cbIsNotice.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbIsNotice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbIsNotice.FormattingEnabled = true;
-            this.cbIsNotice.Location = new System.Drawing.Point(509, 2);
-            this.cbIsNotice.Name = "cbIsNotice";
-            this.cbIsNotice.Size = new System.Drawing.Size(101, 21);
-            this.cbIsNotice.TabIndex = 46;
-            this.cbIsNotice.Items.AddRange(new string[] { "明保理", "暗保理" });
             // 
             // CDADetail
             // 

@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.btnReset = new DevComponents.DotNetBar.ButtonX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbDepartmentName = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -58,7 +59,6 @@
             this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemSelectDept = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemImportDepts = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnReset = new DevComponents.DotNetBar.ButtonX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepts)).BeginInit();
             this.cmuDeptMgr.SuspendLayout();
@@ -88,6 +88,18 @@
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
             // 
+            // btnReset
+            // 
+            this.btnReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnReset.Location = new System.Drawing.Point(379, 3);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(42, 23);
+            this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnReset.TabIndex = 5;
+            this.btnReset.Text = "重置";
+            this.btnReset.Click += new System.EventHandler(this.Reset);
+            // 
             // lblCount
             // 
             this.lblCount.AutoSize = true;
@@ -97,9 +109,9 @@
             this.lblCount.BackgroundStyle.Class = "";
             this.lblCount.Location = new System.Drawing.Point(427, 7);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(36, 16);
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.lblCount.TabIndex = 5;
+            this.lblCount.TabIndex = 6;
             // 
             // btnQuery
             // 
@@ -130,7 +142,7 @@
             // 
             // 
             this.lblDeparmentName.BackgroundStyle.Class = "";
-            this.lblDeparmentName.Location = new System.Drawing.Point(171, 2);
+            this.lblDeparmentName.Location = new System.Drawing.Point(167, 3);
             this.lblDeparmentName.Name = "lblDeparmentName";
             this.lblDeparmentName.Size = new System.Drawing.Size(56, 23);
             this.lblDeparmentName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -209,7 +221,7 @@
             this.dgvDepts.ReadOnly = true;
             this.dgvDepts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDepts.Size = new System.Drawing.Size(605, 429);
-            this.dgvDepts.TabIndex = 1;
+            this.dgvDepts.TabIndex = 0;
             this.dgvDepts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
             // DepartmentCodeColumn
@@ -363,18 +375,6 @@
             this.menuItemImportDepts.Size = new System.Drawing.Size(122, 22);
             this.menuItemImportDepts.Text = "导入分部";
             this.menuItemImportDepts.Click += new System.EventHandler(this.ImportDepartments);
-            // 
-            // btnReset
-            // 
-            this.btnReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnReset.Location = new System.Drawing.Point(379, 3);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(42, 23);
-            this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnReset.TabIndex = 6;
-            this.btnReset.Text = "重置";
-            this.btnReset.Click += new System.EventHandler(this.Reset);
             // 
             // DepartmentMgr
             // 

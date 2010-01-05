@@ -23,7 +23,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-        #region Constructors (1)
+		#region Constructors (1) 
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -35,9 +35,9 @@ namespace CMBC.EasyFactor
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Sets command status
@@ -61,11 +61,11 @@ namespace CMBC.EasyFactor
             }
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (41)
+		#region Methods (42) 
 
-        // Private Methods (41) 
+		// Private Methods (42) 
 
         private void About(object sender, EventArgs e)
         {
@@ -124,6 +124,17 @@ namespace CMBC.EasyFactor
         private void ClearDetailPanel()
         {
             this.ribbonDetailPanel.Controls.Clear();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FeeReport(object sender, EventArgs e)
+        {
+            ReportMgr reportMgr = new ReportMgr(ReportMgr.OpReportType.REPORT_FEE);
+            this.SetDetailPanel(reportMgr);
         }
 
         /// <summary>
@@ -564,6 +575,6 @@ namespace CMBC.EasyFactor
             }
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

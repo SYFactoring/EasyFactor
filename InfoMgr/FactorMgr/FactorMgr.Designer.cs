@@ -249,7 +249,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(41, 23);
             this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnReset.TabIndex = 10;
+            this.btnReset.TabIndex = 9;
             this.btnReset.Text = "重置";
             this.btnReset.Click += new System.EventHandler(this.Reset);
             // 
@@ -263,7 +263,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.cbCountry.Name = "cbCountry";
             this.cbCountry.Size = new System.Drawing.Size(99, 21);
             this.cbCountry.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCountry.TabIndex = 9;
+            this.cbCountry.TabIndex = 3;
             // 
             // lblCountry
             // 
@@ -275,7 +275,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblCountry.Location = new System.Drawing.Point(175, 5);
             this.lblCountry.Name = "lblCountry";
             this.lblCountry.Size = new System.Drawing.Size(44, 16);
-            this.lblCountry.TabIndex = 8;
+            this.lblCountry.TabIndex = 2;
             this.lblCountry.Text = "所在国";
             // 
             // cbFactorType
@@ -306,7 +306,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblCount.Location = new System.Drawing.Point(740, 8);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
-            this.lblCount.TabIndex = 7;
+            this.lblCount.TabIndex = 10;
             // 
             // btnQuery
             // 
@@ -316,7 +316,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(41, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 6;
+            this.btnQuery.TabIndex = 8;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.QueryFactors);
             // 
@@ -329,7 +329,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.tbFactorName.Location = new System.Drawing.Point(540, 5);
             this.tbFactorName.Name = "tbFactorName";
             this.tbFactorName.Size = new System.Drawing.Size(100, 20);
-            this.tbFactorName.TabIndex = 5;
+            this.tbFactorName.TabIndex = 7;
             // 
             // lblFactorName
             // 
@@ -341,7 +341,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblFactorName.Location = new System.Drawing.Point(485, 5);
             this.lblFactorName.Name = "lblFactorName";
             this.lblFactorName.Size = new System.Drawing.Size(56, 16);
-            this.lblFactorName.TabIndex = 4;
+            this.lblFactorName.TabIndex = 6;
             this.lblFactorName.Text = "机构名称";
             // 
             // tbFactorCode
@@ -353,7 +353,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.tbFactorCode.Location = new System.Drawing.Point(379, 5);
             this.tbFactorCode.Name = "tbFactorCode";
             this.tbFactorCode.Size = new System.Drawing.Size(100, 20);
-            this.tbFactorCode.TabIndex = 3;
+            this.tbFactorCode.TabIndex = 5;
             // 
             // lblFactorCode
             // 
@@ -365,7 +365,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblFactorCode.Location = new System.Drawing.Point(321, 5);
             this.lblFactorCode.Name = "lblFactorCode";
             this.lblFactorCode.Size = new System.Drawing.Size(56, 16);
-            this.lblFactorCode.TabIndex = 2;
+            this.lblFactorCode.TabIndex = 4;
             this.lblFactorCode.Text = "机构编号";
             // 
             // lblFactorType
@@ -458,7 +458,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactors.RowTemplate.Height = 23;
             this.dgvFactors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvFactors.Size = new System.Drawing.Size(911, 318);
-            this.dgvFactors.TabIndex = 2;
+            this.dgvFactors.TabIndex = 0;
             this.dgvFactors.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
             // factorCodeColumn

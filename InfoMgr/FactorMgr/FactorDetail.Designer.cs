@@ -166,13 +166,13 @@
             DevComponents.DotNetBar.LabelX unfreezeReasonLabel;
             DevComponents.DotNetBar.LabelX unfreezerLabel;
             DevComponents.DotNetBar.LabelX unfreezeDateLabel;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FactorDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelCreditLine = new DevComponents.DotNetBar.TabControlPanel();
@@ -266,6 +266,8 @@
             this.factorErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.factorHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.creditLineValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator8 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator6 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
@@ -275,8 +277,6 @@
             this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.clientLineErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.clientLineHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
             factorTypeLabel = new DevComponents.DotNetBar.LabelX();
             countryNameLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -362,7 +362,7 @@
             countryNameLabel.Name = "countryNameLabel";
             countryNameLabel.Size = new System.Drawing.Size(47, 16);
             countryNameLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            countryNameLabel.TabIndex = 2;
+            countryNameLabel.TabIndex = 4;
             countryNameLabel.Text = "所在国:";
             // 
             // factorCodeLabel
@@ -378,7 +378,7 @@
             factorCodeLabel.Name = "factorCodeLabel";
             factorCodeLabel.Size = new System.Drawing.Size(59, 16);
             factorCodeLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            factorCodeLabel.TabIndex = 4;
+            factorCodeLabel.TabIndex = 2;
             factorCodeLabel.Text = "机构代码:";
             // 
             // companyNameLabel
@@ -409,7 +409,7 @@
             departmentLabel.Name = "departmentLabel";
             departmentLabel.Size = new System.Drawing.Size(62, 16);
             departmentLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            departmentLabel.TabIndex = 8;
+            departmentLabel.TabIndex = 9;
             departmentLabel.Text = "部门/分行:";
             // 
             // postalAddress_1Label
@@ -424,7 +424,7 @@
             postalAddress_1Label.Name = "postalAddress_1Label";
             postalAddress_1Label.Size = new System.Drawing.Size(59, 16);
             postalAddress_1Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            postalAddress_1Label.TabIndex = 10;
+            postalAddress_1Label.TabIndex = 11;
             postalAddress_1Label.Text = "邮寄地址:";
             // 
             // postalCodePostLabel
@@ -439,7 +439,7 @@
             postalCodePostLabel.Name = "postalCodePostLabel";
             postalCodePostLabel.Size = new System.Drawing.Size(34, 16);
             postalCodePostLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            postalCodePostLabel.TabIndex = 14;
+            postalCodePostLabel.TabIndex = 17;
             postalCodePostLabel.Text = "邮编:";
             // 
             // cityPostLabel
@@ -454,7 +454,7 @@
             cityPostLabel.Name = "cityPostLabel";
             cityPostLabel.Size = new System.Drawing.Size(34, 16);
             cityPostLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            cityPostLabel.TabIndex = 16;
+            cityPostLabel.TabIndex = 21;
             cityPostLabel.Text = "城市:";
             // 
             // visitingAddress_1Label
@@ -469,7 +469,7 @@
             visitingAddress_1Label.Name = "visitingAddress_1Label";
             visitingAddress_1Label.Size = new System.Drawing.Size(91, 16);
             visitingAddress_1Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            visitingAddress_1Label.TabIndex = 18;
+            visitingAddress_1Label.TabIndex = 14;
             visitingAddress_1Label.Text = "Visiting Address:";
             // 
             // postalCodeVisitingLabel
@@ -484,7 +484,7 @@
             postalCodeVisitingLabel.Name = "postalCodeVisitingLabel";
             postalCodeVisitingLabel.Size = new System.Drawing.Size(111, 16);
             postalCodeVisitingLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            postalCodeVisitingLabel.TabIndex = 22;
+            postalCodeVisitingLabel.TabIndex = 19;
             postalCodeVisitingLabel.Text = "Postal Code Visiting:";
             // 
             // cityVisitingLabel
@@ -499,7 +499,7 @@
             cityVisitingLabel.Name = "cityVisitingLabel";
             cityVisitingLabel.Size = new System.Drawing.Size(69, 16);
             cityVisitingLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            cityVisitingLabel.TabIndex = 24;
+            cityVisitingLabel.TabIndex = 23;
             cityVisitingLabel.Text = "City Visiting:";
             // 
             // emailLabel
@@ -529,7 +529,7 @@
             webSiteLabel.Name = "webSiteLabel";
             webSiteLabel.Size = new System.Drawing.Size(59, 16);
             webSiteLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            webSiteLabel.TabIndex = 26;
+            webSiteLabel.TabIndex = 27;
             webSiteLabel.Text = "公司网址:";
             // 
             // telephone_1Label
@@ -544,7 +544,7 @@
             telephone_1Label.Name = "telephone_1Label";
             telephone_1Label.Size = new System.Drawing.Size(59, 16);
             telephone_1Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            telephone_1Label.TabIndex = 28;
+            telephone_1Label.TabIndex = 29;
             telephone_1Label.Text = "联系电话:";
             // 
             // telefax_1Label
@@ -629,7 +629,7 @@
             llbShareholders.Location = new System.Drawing.Point(300, 200);
             llbShareholders.Name = "llbShareholders";
             llbShareholders.Size = new System.Drawing.Size(77, 16);
-            llbShareholders.TabIndex = 18;
+            llbShareholders.TabIndex = 13;
             llbShareholders.Text = "Shareholders:";
             // 
             // lblManagement
@@ -643,7 +643,7 @@
             lblManagement.Location = new System.Drawing.Point(17, 114);
             lblManagement.Name = "lblManagement";
             lblManagement.Size = new System.Drawing.Size(75, 16);
-            lblManagement.TabIndex = 14;
+            lblManagement.TabIndex = 3;
             lblManagement.Text = "Management:";
             // 
             // lblContacts
@@ -670,7 +670,7 @@
             lblGeneralCorrespondence.Location = new System.Drawing.Point(17, 7);
             lblGeneralCorrespondence.Name = "lblGeneralCorrespondence";
             lblGeneralCorrespondence.Size = new System.Drawing.Size(151, 16);
-            lblGeneralCorrespondence.TabIndex = 2;
+            lblGeneralCorrespondence.TabIndex = 0;
             lblGeneralCorrespondence.Text = "General Correspondence:";
             lblGeneralCorrespondence.WordWrap = true;
             // 
@@ -685,7 +685,7 @@
             lblWorkingHours.Location = new System.Drawing.Point(17, 222);
             lblWorkingHours.Name = "lblWorkingHours";
             lblWorkingHours.Size = new System.Drawing.Size(84, 16);
-            lblWorkingHours.TabIndex = 0;
+            lblWorkingHours.TabIndex = 11;
             lblWorkingHours.Text = "Working Hours:";
             // 
             // creditLineCurrencyLabel
@@ -717,7 +717,7 @@
             creditLineLabel.Name = "creditLineLabel";
             creditLineLabel.Size = new System.Drawing.Size(59, 16);
             creditLineLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            creditLineLabel.TabIndex = 2;
+            creditLineLabel.TabIndex = 5;
             creditLineLabel.Text = "额度上限:";
             // 
             // periodBeginLabel
@@ -733,7 +733,7 @@
             periodBeginLabel.Name = "periodBeginLabel";
             periodBeginLabel.Size = new System.Drawing.Size(59, 16);
             periodBeginLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            periodBeginLabel.TabIndex = 4;
+            periodBeginLabel.TabIndex = 2;
             periodBeginLabel.Text = "有效期限:";
             // 
             // creditLineStatusLabel
@@ -748,7 +748,7 @@
             creditLineStatusLabel.Name = "creditLineStatusLabel";
             creditLineStatusLabel.Size = new System.Drawing.Size(59, 16);
             creditLineStatusLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            creditLineStatusLabel.TabIndex = 8;
+            creditLineStatusLabel.TabIndex = 9;
             creditLineStatusLabel.Text = "额度状态:";
             // 
             // approveNoLabel
@@ -764,7 +764,7 @@
             approveNoLabel.Name = "approveNoLabel";
             approveNoLabel.Size = new System.Drawing.Size(59, 16);
             approveNoLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            approveNoLabel.TabIndex = 10;
+            approveNoLabel.TabIndex = 7;
             approveNoLabel.Text = "授信编号:";
             // 
             // approveTypeLabel
@@ -780,7 +780,7 @@
             approveTypeLabel.Name = "approveTypeLabel";
             approveTypeLabel.Size = new System.Drawing.Size(59, 16);
             approveTypeLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            approveTypeLabel.TabIndex = 12;
+            approveTypeLabel.TabIndex = 11;
             approveTypeLabel.Text = "授信类型:";
             // 
             // commentLabel
@@ -795,7 +795,7 @@
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(34, 16);
             commentLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            commentLabel.TabIndex = 14;
+            commentLabel.TabIndex = 13;
             commentLabel.Text = "备注:";
             // 
             // freezeReasonLabel
@@ -810,7 +810,7 @@
             freezeReasonLabel.Name = "freezeReasonLabel";
             freezeReasonLabel.Size = new System.Drawing.Size(59, 16);
             freezeReasonLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            freezeReasonLabel.TabIndex = 16;
+            freezeReasonLabel.TabIndex = 15;
             freezeReasonLabel.Text = "冻结原因:";
             // 
             // freezerLabel
@@ -825,7 +825,7 @@
             freezerLabel.Name = "freezerLabel";
             freezerLabel.Size = new System.Drawing.Size(47, 16);
             freezerLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            freezerLabel.TabIndex = 18;
+            freezerLabel.TabIndex = 17;
             freezerLabel.Text = "经办人:";
             // 
             // freezeDateLabel
@@ -840,7 +840,7 @@
             freezeDateLabel.Name = "freezeDateLabel";
             freezeDateLabel.Size = new System.Drawing.Size(59, 16);
             freezeDateLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            freezeDateLabel.TabIndex = 20;
+            freezeDateLabel.TabIndex = 19;
             freezeDateLabel.Text = "冻结日期:";
             // 
             // unfreezeReasonLabel
@@ -855,7 +855,7 @@
             unfreezeReasonLabel.Name = "unfreezeReasonLabel";
             unfreezeReasonLabel.Size = new System.Drawing.Size(59, 16);
             unfreezeReasonLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            unfreezeReasonLabel.TabIndex = 22;
+            unfreezeReasonLabel.TabIndex = 21;
             unfreezeReasonLabel.Text = "解冻原因:";
             // 
             // unfreezerLabel
@@ -870,7 +870,7 @@
             unfreezerLabel.Name = "unfreezerLabel";
             unfreezerLabel.Size = new System.Drawing.Size(47, 16);
             unfreezerLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            unfreezerLabel.TabIndex = 24;
+            unfreezerLabel.TabIndex = 23;
             unfreezerLabel.Text = "经办人:";
             // 
             // unfreezeDateLabel
@@ -885,15 +885,15 @@
             unfreezeDateLabel.Name = "unfreezeDateLabel";
             unfreezeDateLabel.Size = new System.Drawing.Size(59, 16);
             unfreezeDateLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            unfreezeDateLabel.TabIndex = 26;
+            unfreezeDateLabel.TabIndex = 25;
             unfreezeDateLabel.Text = "解冻日期:";
             // 
             // tabControl
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelCreditLine);
             this.tabControl.Controls.Add(this.tabPanelFactor);
+            this.tabControl.Controls.Add(this.tabPanelCreditLine);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -932,14 +932,14 @@
             this.dgvFactorCreditLines.AllowUserToDeleteRows = false;
             this.dgvFactorCreditLines.AllowUserToOrderColumns = true;
             this.dgvFactorCreditLines.AutoGenerateColumns = false;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactorCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactorCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvFactorCreditLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFactorCreditLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCreditLineID,
@@ -958,14 +958,14 @@
             this.colUnfreezeDate,
             this.colComment});
             this.dgvFactorCreditLines.DataSource = this.factorCreditLineBindingSource;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactorCreditLines.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactorCreditLines.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvFactorCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFactorCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvFactorCreditLines.Location = new System.Drawing.Point(1, 297);
@@ -995,8 +995,8 @@
             // colCreditLine
             // 
             this.colCreditLine.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle9.Format = "N2";
-            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.Format = "N2";
+            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle2;
             this.colCreditLine.HeaderText = "额度上限";
             this.colCreditLine.Name = "colCreditLine";
             this.colCreditLine.ReadOnly = true;
@@ -1005,8 +1005,8 @@
             // colPeriodBegin
             // 
             this.colPeriodBegin.DataPropertyName = "PeriodBegin";
-            dataGridViewCellStyle10.Format = "d";
-            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle3.Format = "d";
+            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle3;
             this.colPeriodBegin.HeaderText = "有效期(始)";
             this.colPeriodBegin.Name = "colPeriodBegin";
             this.colPeriodBegin.ReadOnly = true;
@@ -1015,8 +1015,8 @@
             // colPeriodEnd
             // 
             this.colPeriodEnd.DataPropertyName = "PeriodEnd";
-            dataGridViewCellStyle11.Format = "d";
-            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle4.Format = "d";
+            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle4;
             this.colPeriodEnd.HeaderText = "有效期(终)";
             this.colPeriodEnd.Name = "colPeriodEnd";
             this.colPeriodEnd.ReadOnly = true;
@@ -1065,8 +1065,8 @@
             // colFreezeDate
             // 
             this.colFreezeDate.DataPropertyName = "FreezeDate";
-            dataGridViewCellStyle12.Format = "d";
-            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle5.Format = "d";
+            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle5;
             this.colFreezeDate.HeaderText = "冻结日期";
             this.colFreezeDate.Name = "colFreezeDate";
             this.colFreezeDate.ReadOnly = true;
@@ -1091,8 +1091,8 @@
             // colUnfreezeDate
             // 
             this.colUnfreezeDate.DataPropertyName = "UnfreezeDate";
-            dataGridViewCellStyle13.Format = "d";
-            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle6.Format = "d";
+            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle6;
             this.colUnfreezeDate.HeaderText = "解冻日期";
             this.colUnfreezeDate.Name = "colUnfreezeDate";
             this.colUnfreezeDate.ReadOnly = true;
@@ -1191,7 +1191,7 @@
             this.btnFactorCreditLineUpdate.Name = "btnFactorCreditLineUpdate";
             this.btnFactorCreditLineUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnFactorCreditLineUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFactorCreditLineUpdate.TabIndex = 34;
+            this.btnFactorCreditLineUpdate.TabIndex = 29;
             this.btnFactorCreditLineUpdate.Text = "编辑";
             this.btnFactorCreditLineUpdate.Click += new System.EventHandler(this.UpdateCreditLine);
             // 
@@ -1203,7 +1203,7 @@
             this.btnFactorCreditLineRefresh.Name = "btnFactorCreditLineRefresh";
             this.btnFactorCreditLineRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnFactorCreditLineRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFactorCreditLineRefresh.TabIndex = 33;
+            this.btnFactorCreditLineRefresh.TabIndex = 27;
             this.btnFactorCreditLineRefresh.Text = "刷新";
             this.btnFactorCreditLineRefresh.Click += new System.EventHandler(this.RefreshFactorCreditLine);
             // 
@@ -1215,7 +1215,7 @@
             this.btnFactorCreditLineUnfreeze.Name = "btnFactorCreditLineUnfreeze";
             this.btnFactorCreditLineUnfreeze.Size = new System.Drawing.Size(75, 23);
             this.btnFactorCreditLineUnfreeze.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFactorCreditLineUnfreeze.TabIndex = 32;
+            this.btnFactorCreditLineUnfreeze.TabIndex = 33;
             this.btnFactorCreditLineUnfreeze.Text = "解冻";
             this.btnFactorCreditLineUnfreeze.Click += new System.EventHandler(this.UnfreezeFactorCreditLine);
             // 
@@ -1227,7 +1227,7 @@
             this.btnFactorCreditLineFreeze.Name = "btnFactorCreditLineFreeze";
             this.btnFactorCreditLineFreeze.Size = new System.Drawing.Size(75, 23);
             this.btnFactorCreditLineFreeze.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFactorCreditLineFreeze.TabIndex = 31;
+            this.btnFactorCreditLineFreeze.TabIndex = 32;
             this.btnFactorCreditLineFreeze.Text = "冻结";
             this.btnFactorCreditLineFreeze.Click += new System.EventHandler(this.FreezeFactorCreditLine);
             // 
@@ -1239,7 +1239,7 @@
             this.btnFactorCreditLineDelete.Name = "btnFactorCreditLineDelete";
             this.btnFactorCreditLineDelete.Size = new System.Drawing.Size(75, 23);
             this.btnFactorCreditLineDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFactorCreditLineDelete.TabIndex = 30;
+            this.btnFactorCreditLineDelete.TabIndex = 31;
             this.btnFactorCreditLineDelete.Text = "删除";
             this.btnFactorCreditLineDelete.Click += new System.EventHandler(this.DeleteFactorCreditLine);
             // 
@@ -1251,7 +1251,7 @@
             this.btnFactorCreditLineSave.Name = "btnFactorCreditLineSave";
             this.btnFactorCreditLineSave.Size = new System.Drawing.Size(75, 23);
             this.btnFactorCreditLineSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFactorCreditLineSave.TabIndex = 29;
+            this.btnFactorCreditLineSave.TabIndex = 30;
             this.btnFactorCreditLineSave.Text = "保存";
             this.btnFactorCreditLineSave.Click += new System.EventHandler(this.SaveFactorCreditLine);
             // 
@@ -1299,7 +1299,7 @@
             this.unfreezeDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.unfreezeDateDateTimePicker.Name = "unfreezeDateDateTimePicker";
             this.unfreezeDateDateTimePicker.Size = new System.Drawing.Size(124, 20);
-            this.unfreezeDateDateTimePicker.TabIndex = 27;
+            this.unfreezeDateDateTimePicker.TabIndex = 26;
             // 
             // unfreezerTextBox
             // 
@@ -1312,7 +1312,7 @@
             this.unfreezerTextBox.Name = "unfreezerTextBox";
             this.unfreezerTextBox.ReadOnly = true;
             this.unfreezerTextBox.Size = new System.Drawing.Size(103, 20);
-            this.unfreezerTextBox.TabIndex = 25;
+            this.unfreezerTextBox.TabIndex = 24;
             // 
             // unfreezeReasonTextBox
             // 
@@ -1326,7 +1326,7 @@
             this.unfreezeReasonTextBox.Name = "unfreezeReasonTextBox";
             this.unfreezeReasonTextBox.ReadOnly = true;
             this.unfreezeReasonTextBox.Size = new System.Drawing.Size(458, 38);
-            this.unfreezeReasonTextBox.TabIndex = 23;
+            this.unfreezeReasonTextBox.TabIndex = 22;
             this.creditLineValidator.SetValidator1(this.unfreezeReasonTextBox, this.customValidator2);
             // 
             // freezeDateDateTimePicker
@@ -1361,7 +1361,7 @@
             this.freezeDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.freezeDateDateTimePicker.Name = "freezeDateDateTimePicker";
             this.freezeDateDateTimePicker.Size = new System.Drawing.Size(124, 20);
-            this.freezeDateDateTimePicker.TabIndex = 21;
+            this.freezeDateDateTimePicker.TabIndex = 20;
             // 
             // freezerTextBox
             // 
@@ -1374,7 +1374,7 @@
             this.freezerTextBox.Name = "freezerTextBox";
             this.freezerTextBox.ReadOnly = true;
             this.freezerTextBox.Size = new System.Drawing.Size(100, 20);
-            this.freezerTextBox.TabIndex = 19;
+            this.freezerTextBox.TabIndex = 18;
             // 
             // freezeReasonTextBox
             // 
@@ -1388,7 +1388,7 @@
             this.freezeReasonTextBox.Name = "freezeReasonTextBox";
             this.freezeReasonTextBox.ReadOnly = true;
             this.freezeReasonTextBox.Size = new System.Drawing.Size(458, 38);
-            this.freezeReasonTextBox.TabIndex = 17;
+            this.freezeReasonTextBox.TabIndex = 16;
             this.creditLineValidator.SetValidator1(this.freezeReasonTextBox, this.customValidator1);
             // 
             // commentTextBox
@@ -1402,7 +1402,7 @@
             this.commentTextBox.Multiline = true;
             this.commentTextBox.Name = "commentTextBox";
             this.commentTextBox.Size = new System.Drawing.Size(458, 38);
-            this.commentTextBox.TabIndex = 15;
+            this.commentTextBox.TabIndex = 14;
             // 
             // approveTypeComboBox
             // 
@@ -1416,7 +1416,7 @@
             this.approveTypeComboBox.Location = new System.Drawing.Point(297, 50);
             this.approveTypeComboBox.Name = "approveTypeComboBox";
             this.approveTypeComboBox.Size = new System.Drawing.Size(124, 21);
-            this.approveTypeComboBox.TabIndex = 13;
+            this.approveTypeComboBox.TabIndex = 12;
             this.creditLineValidator.SetValidator1(this.approveTypeComboBox, this.requiredFieldValidator9);
             // 
             // approveNoTextBox
@@ -1429,7 +1429,7 @@
             this.approveNoTextBox.Location = new System.Drawing.Point(297, 29);
             this.approveNoTextBox.Name = "approveNoTextBox";
             this.approveNoTextBox.Size = new System.Drawing.Size(124, 20);
-            this.approveNoTextBox.TabIndex = 11;
+            this.approveNoTextBox.TabIndex = 8;
             this.creditLineValidator.SetValidator1(this.approveNoTextBox, this.requiredFieldValidator8);
             // 
             // creditLineStatusTextBox
@@ -1443,7 +1443,7 @@
             this.creditLineStatusTextBox.Name = "creditLineStatusTextBox";
             this.creditLineStatusTextBox.ReadOnly = true;
             this.creditLineStatusTextBox.Size = new System.Drawing.Size(120, 20);
-            this.creditLineStatusTextBox.TabIndex = 9;
+            this.creditLineStatusTextBox.TabIndex = 10;
             // 
             // periodEndDateTimePicker
             // 
@@ -1477,7 +1477,7 @@
             this.periodEndDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.periodEndDateTimePicker.Name = "periodEndDateTimePicker";
             this.periodEndDateTimePicker.Size = new System.Drawing.Size(121, 20);
-            this.periodEndDateTimePicker.TabIndex = 7;
+            this.periodEndDateTimePicker.TabIndex = 4;
             this.creditLineValidator.SetValidator1(this.periodEndDateTimePicker, this.requiredFieldValidator6);
             this.creditLineValidator.SetValidator2(this.periodEndDateTimePicker, this.compareValidator1);
             // 
@@ -1513,7 +1513,7 @@
             this.periodBeginDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.periodBeginDateTimePicker.Name = "periodBeginDateTimePicker";
             this.periodBeginDateTimePicker.Size = new System.Drawing.Size(124, 20);
-            this.periodBeginDateTimePicker.TabIndex = 5;
+            this.periodBeginDateTimePicker.TabIndex = 3;
             this.creditLineValidator.SetValidator1(this.periodBeginDateTimePicker, this.requiredFieldValidator5);
             // 
             // creditLineTextBox
@@ -1526,7 +1526,7 @@
             this.creditLineTextBox.Location = new System.Drawing.Point(90, 29);
             this.creditLineTextBox.Name = "creditLineTextBox";
             this.creditLineTextBox.Size = new System.Drawing.Size(120, 20);
-            this.creditLineTextBox.TabIndex = 3;
+            this.creditLineTextBox.TabIndex = 6;
             this.creditLineValidator.SetValidator1(this.creditLineTextBox, this.requiredFieldValidator7);
             // 
             // creditLineCurrencyComboBox
@@ -1579,7 +1579,7 @@
             this.btnFactorUpdate.Name = "btnFactorUpdate";
             this.btnFactorUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnFactorUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFactorUpdate.TabIndex = 5;
+            this.btnFactorUpdate.TabIndex = 0;
             this.btnFactorUpdate.Text = "编辑";
             this.btnFactorUpdate.Click += new System.EventHandler(this.UpdateFactor);
             // 
@@ -1591,7 +1591,7 @@
             this.btnFactorReset.Name = "btnFactorReset";
             this.btnFactorReset.Size = new System.Drawing.Size(75, 23);
             this.btnFactorReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFactorReset.TabIndex = 4;
+            this.btnFactorReset.TabIndex = 2;
             this.btnFactorReset.Text = "重置";
             this.btnFactorReset.Click += new System.EventHandler(this.ResetFactor);
             // 
@@ -1603,7 +1603,7 @@
             this.btnFactorSave.Name = "btnFactorSave";
             this.btnFactorSave.Size = new System.Drawing.Size(75, 23);
             this.btnFactorSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFactorSave.TabIndex = 3;
+            this.btnFactorSave.TabIndex = 1;
             this.btnFactorSave.Text = "保存";
             this.btnFactorSave.Click += new System.EventHandler(this.SaveFactor);
             // 
@@ -1770,7 +1770,7 @@
             this.tbShareholders.Location = new System.Drawing.Point(300, 221);
             this.tbShareholders.Name = "tbShareholders";
             this.tbShareholders.Size = new System.Drawing.Size(260, 20);
-            this.tbShareholders.TabIndex = 19;
+            this.tbShareholders.TabIndex = 14;
             // 
             // tbManagement2
             // 
@@ -1784,7 +1784,7 @@
             this.tbManagement2.Name = "tbManagement2";
             this.tbManagement2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbManagement2.Size = new System.Drawing.Size(260, 40);
-            this.tbManagement2.TabIndex = 17;
+            this.tbManagement2.TabIndex = 5;
             // 
             // tbManagement1
             // 
@@ -1798,7 +1798,7 @@
             this.tbManagement1.Name = "tbManagement1";
             this.tbManagement1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbManagement1.Size = new System.Drawing.Size(260, 40);
-            this.tbManagement1.TabIndex = 15;
+            this.tbManagement1.TabIndex = 4;
             // 
             // tbContacts4
             // 
@@ -1812,7 +1812,7 @@
             this.tbContacts4.Name = "tbContacts4";
             this.tbContacts4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbContacts4.Size = new System.Drawing.Size(260, 40);
-            this.tbContacts4.TabIndex = 13;
+            this.tbContacts4.TabIndex = 10;
             // 
             // tbContacts3
             // 
@@ -1826,7 +1826,7 @@
             this.tbContacts3.Name = "tbContacts3";
             this.tbContacts3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbContacts3.Size = new System.Drawing.Size(260, 40);
-            this.tbContacts3.TabIndex = 11;
+            this.tbContacts3.TabIndex = 9;
             // 
             // tbContacts2
             // 
@@ -1840,7 +1840,7 @@
             this.tbContacts2.Name = "tbContacts2";
             this.tbContacts2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbContacts2.Size = new System.Drawing.Size(260, 40);
-            this.tbContacts2.TabIndex = 9;
+            this.tbContacts2.TabIndex = 8;
             // 
             // tbContacts1
             // 
@@ -1868,7 +1868,7 @@
             this.tbGeneralCorrespondence2.Name = "tbGeneralCorrespondence2";
             this.tbGeneralCorrespondence2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbGeneralCorrespondence2.Size = new System.Drawing.Size(260, 40);
-            this.tbGeneralCorrespondence2.TabIndex = 5;
+            this.tbGeneralCorrespondence2.TabIndex = 2;
             // 
             // tbGeneralCorrespondence1
             // 
@@ -1882,7 +1882,7 @@
             this.tbGeneralCorrespondence1.Name = "tbGeneralCorrespondence1";
             this.tbGeneralCorrespondence1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbGeneralCorrespondence1.Size = new System.Drawing.Size(260, 40);
-            this.tbGeneralCorrespondence1.TabIndex = 3;
+            this.tbGeneralCorrespondence1.TabIndex = 1;
             // 
             // tbWorkingHours
             // 
@@ -1894,7 +1894,7 @@
             this.tbWorkingHours.Location = new System.Drawing.Point(107, 221);
             this.tbWorkingHours.Name = "tbWorkingHours";
             this.tbWorkingHours.Size = new System.Drawing.Size(172, 20);
-            this.tbWorkingHours.TabIndex = 1;
+            this.tbWorkingHours.TabIndex = 12;
             // 
             // groupPanelBasic
             // 
@@ -1980,7 +1980,7 @@
             this.companyNameCNTextBox.Location = new System.Drawing.Point(82, 29);
             this.companyNameCNTextBox.Name = "companyNameCNTextBox";
             this.companyNameCNTextBox.Size = new System.Drawing.Size(150, 20);
-            this.companyNameCNTextBox.TabIndex = 36;
+            this.companyNameCNTextBox.TabIndex = 7;
             this.companyNameCNTextBox.WatermarkText = "中文";
             // 
             // telefax_2TextBox
@@ -1993,7 +1993,7 @@
             this.telefax_2TextBox.Location = new System.Drawing.Point(393, 179);
             this.telefax_2TextBox.Name = "telefax_2TextBox";
             this.telefax_2TextBox.Size = new System.Drawing.Size(175, 20);
-            this.telefax_2TextBox.TabIndex = 35;
+            this.telefax_2TextBox.TabIndex = 34;
             this.telefax_2TextBox.WatermarkText = "Telefax 2";
             // 
             // telefax_1TextBox
@@ -2032,7 +2032,7 @@
             this.telephone_1TextBox.Location = new System.Drawing.Point(82, 157);
             this.telephone_1TextBox.Name = "telephone_1TextBox";
             this.telephone_1TextBox.Size = new System.Drawing.Size(193, 20);
-            this.telephone_1TextBox.TabIndex = 29;
+            this.telephone_1TextBox.TabIndex = 30;
             this.telephone_1TextBox.WatermarkText = "Telephone 1";
             // 
             // webSiteTextBox
@@ -2045,7 +2045,7 @@
             this.webSiteTextBox.Location = new System.Drawing.Point(393, 136);
             this.webSiteTextBox.Name = "webSiteTextBox";
             this.webSiteTextBox.Size = new System.Drawing.Size(175, 20);
-            this.webSiteTextBox.TabIndex = 27;
+            this.webSiteTextBox.TabIndex = 28;
             // 
             // emailTextBox
             // 
@@ -2069,7 +2069,7 @@
             this.cityVisitingTextBox.Location = new System.Drawing.Point(393, 115);
             this.cityVisitingTextBox.Name = "cityVisitingTextBox";
             this.cityVisitingTextBox.Size = new System.Drawing.Size(175, 20);
-            this.cityVisitingTextBox.TabIndex = 25;
+            this.cityVisitingTextBox.TabIndex = 24;
             // 
             // postalCodeVisitingTextBox
             // 
@@ -2081,7 +2081,7 @@
             this.postalCodeVisitingTextBox.Location = new System.Drawing.Point(393, 94);
             this.postalCodeVisitingTextBox.Name = "postalCodeVisitingTextBox";
             this.postalCodeVisitingTextBox.Size = new System.Drawing.Size(175, 20);
-            this.postalCodeVisitingTextBox.TabIndex = 23;
+            this.postalCodeVisitingTextBox.TabIndex = 20;
             // 
             // visitingAddress_2TextBox
             // 
@@ -2093,7 +2093,7 @@
             this.visitingAddress_2TextBox.Location = new System.Drawing.Point(393, 72);
             this.visitingAddress_2TextBox.Name = "visitingAddress_2TextBox";
             this.visitingAddress_2TextBox.Size = new System.Drawing.Size(175, 20);
-            this.visitingAddress_2TextBox.TabIndex = 21;
+            this.visitingAddress_2TextBox.TabIndex = 16;
             this.visitingAddress_2TextBox.WatermarkText = "Visiting Address, continued";
             // 
             // visitingAddress_1TextBox
@@ -2106,7 +2106,7 @@
             this.visitingAddress_1TextBox.Location = new System.Drawing.Point(393, 50);
             this.visitingAddress_1TextBox.Name = "visitingAddress_1TextBox";
             this.visitingAddress_1TextBox.Size = new System.Drawing.Size(175, 20);
-            this.visitingAddress_1TextBox.TabIndex = 19;
+            this.visitingAddress_1TextBox.TabIndex = 15;
             this.visitingAddress_1TextBox.WatermarkText = "Visiting Address";
             // 
             // cityPostTextBox
@@ -2119,7 +2119,7 @@
             this.cityPostTextBox.Location = new System.Drawing.Point(82, 114);
             this.cityPostTextBox.Name = "cityPostTextBox";
             this.cityPostTextBox.Size = new System.Drawing.Size(193, 20);
-            this.cityPostTextBox.TabIndex = 17;
+            this.cityPostTextBox.TabIndex = 22;
             // 
             // postalCodePostTextBox
             // 
@@ -2131,7 +2131,7 @@
             this.postalCodePostTextBox.Location = new System.Drawing.Point(82, 93);
             this.postalCodePostTextBox.Name = "postalCodePostTextBox";
             this.postalCodePostTextBox.Size = new System.Drawing.Size(193, 20);
-            this.postalCodePostTextBox.TabIndex = 15;
+            this.postalCodePostTextBox.TabIndex = 18;
             // 
             // postalAddress_2TextBox
             // 
@@ -2156,7 +2156,7 @@
             this.postalAddress_1TextBox.Location = new System.Drawing.Point(82, 50);
             this.postalAddress_1TextBox.Name = "postalAddress_1TextBox";
             this.postalAddress_1TextBox.Size = new System.Drawing.Size(193, 20);
-            this.postalAddress_1TextBox.TabIndex = 11;
+            this.postalAddress_1TextBox.TabIndex = 12;
             this.postalAddress_1TextBox.WatermarkText = "Postal Address";
             // 
             // departmentTextBox
@@ -2169,7 +2169,7 @@
             this.departmentTextBox.Location = new System.Drawing.Point(465, 29);
             this.departmentTextBox.Name = "departmentTextBox";
             this.departmentTextBox.Size = new System.Drawing.Size(103, 20);
-            this.departmentTextBox.TabIndex = 9;
+            this.departmentTextBox.TabIndex = 10;
             // 
             // companyNameENTextBox
             // 
@@ -2181,7 +2181,7 @@
             this.companyNameENTextBox.Location = new System.Drawing.Point(241, 29);
             this.companyNameENTextBox.Name = "companyNameENTextBox";
             this.companyNameENTextBox.Size = new System.Drawing.Size(150, 20);
-            this.companyNameENTextBox.TabIndex = 7;
+            this.companyNameENTextBox.TabIndex = 8;
             this.companyNameENTextBox.WatermarkText = "英文";
             // 
             // factorCodeTextBox
@@ -2194,7 +2194,7 @@
             this.factorCodeTextBox.Location = new System.Drawing.Point(285, 5);
             this.factorCodeTextBox.Name = "factorCodeTextBox";
             this.factorCodeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.factorCodeTextBox.TabIndex = 5;
+            this.factorCodeTextBox.TabIndex = 3;
             this.factorValidator.SetValidator1(this.factorCodeTextBox, this.requiredFieldValidator2);
             // 
             // countryNameComboBox
@@ -2206,7 +2206,7 @@
             this.countryNameComboBox.Location = new System.Drawing.Point(444, 5);
             this.countryNameComboBox.Name = "countryNameComboBox";
             this.countryNameComboBox.Size = new System.Drawing.Size(121, 21);
-            this.countryNameComboBox.TabIndex = 3;
+            this.countryNameComboBox.TabIndex = 5;
             this.factorValidator.SetValidator1(this.countryNameComboBox, this.requiredFieldValidator3);
             // 
             // factorTypeComboBox
@@ -2270,6 +2270,18 @@
             this.creditLineValidator.ErrorProvider = this.clientLineErrorProvider;
             this.creditLineValidator.Highlighter = this.clientLineHighlighter;
             // 
+            // customValidator2
+            // 
+            this.customValidator2.ErrorMessage = "Your error message here.";
+            this.customValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator2.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator2_ValidateValue);
+            // 
+            // customValidator1
+            // 
+            this.customValidator1.ErrorMessage = "Your error message here.";
+            this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
+            // 
             // requiredFieldValidator9
             // 
             this.requiredFieldValidator9.ErrorMessage = "必填";
@@ -2315,18 +2327,6 @@
             // clientLineHighlighter
             // 
             this.clientLineHighlighter.ContainerControl = this;
-            // 
-            // customValidator1
-            // 
-            this.customValidator1.ErrorMessage = "Your error message here.";
-            this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
-            // 
-            // customValidator2
-            // 
-            this.customValidator2.ErrorMessage = "Your error message here.";
-            this.customValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator2.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator2_ValidateValue);
             // 
             // FactorDetail
             // 

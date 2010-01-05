@@ -37,8 +37,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.InitializeComponent();
             this.caseBasic = caseBasic;
             this.dgvInvoices.AutoGenerateColumns = false;
-            this.dgvInvoices.ReadOnly = true;
             this.superValidator.Enabled = false;
+            ControlUtil.SetDoubleBuffered(this.dgvInvoices);
 
             this.dgvInvoices.CellFormatting += new DataGridViewCellFormattingEventHandler(dgvInvoices_CellFormatting);
             this.dgvInvoices.CellParsing += new DataGridViewCellParsingEventHandler(dgvInvoices_CellParsing);
@@ -230,7 +230,6 @@ namespace CMBC.EasyFactor.ARMgr
             assignBatch.IsCreateMsg = false;
             this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
             this.invoiceBindingSource.DataSource = assignBatch.Invoices.ToList();
-            this.dgvInvoices.ReadOnly = false;
         }
 
         /// <summary>
@@ -298,7 +297,6 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
                 this.invoiceBindingSource.DataSource = assignBatch.Invoices.ToList();
-                this.dgvInvoices.ReadOnly = false;
             }
         }
 

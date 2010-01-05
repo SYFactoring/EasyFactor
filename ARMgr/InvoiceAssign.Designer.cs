@@ -173,7 +173,7 @@ namespace CMBC.EasyFactor.ARMgr
             commentLabel.Location = new System.Drawing.Point(38, 36);
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(34, 16);
-            commentLabel.TabIndex = 6;
+            commentLabel.TabIndex = 5;
             commentLabel.Text = "备注:";
             // 
             // panelAssignBatch
@@ -203,7 +203,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelAssignBatch.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelAssignBatch.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelAssignBatch.Style.GradientAngle = 90;
-            this.panelAssignBatch.TabIndex = 5;
+            this.panelAssignBatch.TabIndex = 0;
             // 
             // btnAssignBatchImport
             // 
@@ -213,7 +213,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnAssignBatchImport.Name = "btnAssignBatchImport";
             this.btnAssignBatchImport.Size = new System.Drawing.Size(75, 23);
             this.btnAssignBatchImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAssignBatchImport.TabIndex = 12;
+            this.btnAssignBatchImport.TabIndex = 11;
             this.btnAssignBatchImport.Text = "导入批次";
             this.btnAssignBatchImport.Click += new System.EventHandler(this.ImportAssignBatch);
             // 
@@ -225,7 +225,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnAssignBatchExport.Name = "btnAssignBatchExport";
             this.btnAssignBatchExport.Size = new System.Drawing.Size(75, 23);
             this.btnAssignBatchExport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAssignBatchExport.TabIndex = 11;
+            this.btnAssignBatchExport.TabIndex = 10;
             this.btnAssignBatchExport.Text = "导出批次";
             this.btnAssignBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
             // 
@@ -237,7 +237,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnAssignBatchSelect.Name = "btnAssignBatchSelect";
             this.btnAssignBatchSelect.Size = new System.Drawing.Size(75, 23);
             this.btnAssignBatchSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAssignBatchSelect.TabIndex = 10;
+            this.btnAssignBatchSelect.TabIndex = 8;
             this.btnAssignBatchSelect.Text = "选择批次";
             this.btnAssignBatchSelect.Click += new System.EventHandler(this.SelectAssignBatch);
             // 
@@ -249,7 +249,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnAssignBatchNew.Name = "btnAssignBatchNew";
             this.btnAssignBatchNew.Size = new System.Drawing.Size(75, 23);
             this.btnAssignBatchNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAssignBatchNew.TabIndex = 9;
+            this.btnAssignBatchNew.TabIndex = 7;
             this.btnAssignBatchNew.Text = "新建批次";
             this.btnAssignBatchNew.Click += new System.EventHandler(this.NewAssignBatch);
             // 
@@ -261,7 +261,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnAssignBatchSave.Name = "btnAssignBatchSave";
             this.btnAssignBatchSave.Size = new System.Drawing.Size(75, 23);
             this.btnAssignBatchSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAssignBatchSave.TabIndex = 8;
+            this.btnAssignBatchSave.TabIndex = 9;
             this.btnAssignBatchSave.Text = "保存批次";
             this.btnAssignBatchSave.Click += new System.EventHandler(this.SaveAssignBatch);
             // 
@@ -277,7 +277,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.commentTextBox.Name = "commentTextBox";
             this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.commentTextBox.Size = new System.Drawing.Size(415, 36);
-            this.commentTextBox.TabIndex = 7;
+            this.commentTextBox.TabIndex = 6;
             // 
             // invoiceAssignBatchBindingSource
             // 
@@ -294,7 +294,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.isCreateMsgCheckBox.Location = new System.Drawing.Point(393, 10);
             this.isCreateMsgCheckBox.Name = "isCreateMsgCheckBox";
             this.isCreateMsgCheckBox.Size = new System.Drawing.Size(120, 16);
-            this.isCreateMsgCheckBox.TabIndex = 5;
+            this.isCreateMsgCheckBox.TabIndex = 4;
             this.isCreateMsgCheckBox.Text = "是否生成EDI报文";
             // 
             // batchDateDateTimePicker
@@ -424,7 +424,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoiceBindingNavigator.Name = "invoiceBindingNavigator";
             this.invoiceBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
             this.invoiceBindingNavigator.Size = new System.Drawing.Size(767, 25);
-            this.invoiceBindingNavigator.TabIndex = 6;
+            this.invoiceBindingNavigator.TabIndex = 1;
             this.invoiceBindingNavigator.Text = "bindingNavigator1";
             // 
             // bindingNavigatorAddNewItem
@@ -542,7 +542,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.Name = "dgvInvoices";
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInvoices.Size = new System.Drawing.Size(767, 497);
-            this.dgvInvoices.TabIndex = 7;
+            this.dgvInvoices.TabIndex = 2;
             this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
             // 
             // colInvoiceNo

@@ -36,6 +36,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.cbIsDispute = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cbIsFlaw = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.tbInvoiceNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblInvoiceNo = new DevComponents.DotNetBar.LabelX();
@@ -66,7 +67,6 @@
             this.menuItemInvoiceDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExportAssignFinancePayment = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbIsDispute = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.cmuInvoiceMgr.SuspendLayout();
@@ -102,6 +102,25 @@
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 1;
             // 
+            // cbIsDispute
+            // 
+            this.cbIsDispute.AutoSize = true;
+            // 
+            // 
+            // 
+            this.cbIsDispute.BackgroundStyle.Class = "";
+            this.cbIsDispute.Checked = true;
+            this.cbIsDispute.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+            this.cbIsDispute.CheckValue = "A";
+            this.cbIsDispute.CheckValueIndeterminate = "A";
+            this.cbIsDispute.Location = new System.Drawing.Point(314, 34);
+            this.cbIsDispute.Name = "cbIsDispute";
+            this.cbIsDispute.Size = new System.Drawing.Size(76, 16);
+            this.cbIsDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsDispute.TabIndex = 9;
+            this.cbIsDispute.Text = "是否商纠";
+            this.cbIsDispute.ThreeState = true;
+            // 
             // cbIsFlaw
             // 
             this.cbIsFlaw.AutoSize = true;
@@ -117,7 +136,7 @@
             this.cbIsFlaw.Name = "cbIsFlaw";
             this.cbIsFlaw.Size = new System.Drawing.Size(76, 16);
             this.cbIsFlaw.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsFlaw.TabIndex = 21;
+            this.cbIsFlaw.TabIndex = 8;
             this.cbIsFlaw.Text = "是否瑕疵";
             this.cbIsFlaw.ThreeState = true;
             // 
@@ -130,7 +149,7 @@
             this.tbInvoiceNo.Location = new System.Drawing.Point(208, 30);
             this.tbInvoiceNo.Name = "tbInvoiceNo";
             this.tbInvoiceNo.Size = new System.Drawing.Size(100, 20);
-            this.tbInvoiceNo.TabIndex = 20;
+            this.tbInvoiceNo.TabIndex = 7;
             // 
             // lblInvoiceNo
             // 
@@ -142,7 +161,7 @@
             this.lblInvoiceNo.Location = new System.Drawing.Point(158, 31);
             this.lblInvoiceNo.Name = "lblInvoiceNo";
             this.lblInvoiceNo.Size = new System.Drawing.Size(44, 16);
-            this.lblInvoiceNo.TabIndex = 19;
+            this.lblInvoiceNo.TabIndex = 6;
             this.lblInvoiceNo.Text = "发票号";
             // 
             // lblCount
@@ -155,7 +174,7 @@
             this.lblCount.Location = new System.Drawing.Point(460, 9);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
-            this.lblCount.TabIndex = 18;
+            this.lblCount.TabIndex = 12;
             // 
             // btnQueryReset
             // 
@@ -165,7 +184,7 @@
             this.btnQueryReset.Name = "btnQueryReset";
             this.btnQueryReset.Size = new System.Drawing.Size(46, 22);
             this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQueryReset.TabIndex = 17;
+            this.btnQueryReset.TabIndex = 11;
             this.btnQueryReset.Text = "重置";
             this.btnQueryReset.Click += new System.EventHandler(this.Reset);
             // 
@@ -177,7 +196,7 @@
             this.btnBatchQuery.Name = "btnBatchQuery";
             this.btnBatchQuery.Size = new System.Drawing.Size(46, 22);
             this.btnBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnBatchQuery.TabIndex = 16;
+            this.btnBatchQuery.TabIndex = 10;
             this.btnBatchQuery.Text = "查询";
             this.btnBatchQuery.Click += new System.EventHandler(this.QueryInvoices);
             // 
@@ -190,7 +209,7 @@
             this.tbFactor.Location = new System.Drawing.Point(52, 30);
             this.tbFactor.Name = "tbFactor";
             this.tbFactor.Size = new System.Drawing.Size(100, 20);
-            this.tbFactor.TabIndex = 15;
+            this.tbFactor.TabIndex = 5;
             // 
             // lblFactor
             // 
@@ -202,7 +221,7 @@
             this.lblFactor.Location = new System.Drawing.Point(5, 31);
             this.lblFactor.Name = "lblFactor";
             this.lblFactor.Size = new System.Drawing.Size(44, 16);
-            this.lblFactor.TabIndex = 14;
+            this.lblFactor.TabIndex = 4;
             this.lblFactor.Text = "保理商";
             // 
             // tbBuyer
@@ -214,7 +233,7 @@
             this.tbBuyer.Location = new System.Drawing.Point(208, 7);
             this.tbBuyer.Name = "tbBuyer";
             this.tbBuyer.Size = new System.Drawing.Size(100, 20);
-            this.tbBuyer.TabIndex = 13;
+            this.tbBuyer.TabIndex = 3;
             // 
             // lblBuyer
             // 
@@ -226,7 +245,7 @@
             this.lblBuyer.Location = new System.Drawing.Point(171, 8);
             this.lblBuyer.Name = "lblBuyer";
             this.lblBuyer.Size = new System.Drawing.Size(31, 16);
-            this.lblBuyer.TabIndex = 12;
+            this.lblBuyer.TabIndex = 2;
             this.lblBuyer.Text = "买方";
             // 
             // tbSeller
@@ -238,7 +257,7 @@
             this.tbSeller.Location = new System.Drawing.Point(52, 7);
             this.tbSeller.Name = "tbSeller";
             this.tbSeller.Size = new System.Drawing.Size(100, 20);
-            this.tbSeller.TabIndex = 11;
+            this.tbSeller.TabIndex = 1;
             // 
             // lblSeller
             // 
@@ -250,7 +269,7 @@
             this.lblSeller.Location = new System.Drawing.Point(17, 9);
             this.lblSeller.Name = "lblSeller";
             this.lblSeller.Size = new System.Drawing.Size(31, 16);
-            this.lblSeller.TabIndex = 10;
+            this.lblSeller.TabIndex = 0;
             this.lblSeller.Text = "卖方";
             // 
             // dgvInvoices
@@ -294,7 +313,7 @@
             this.dgvInvoices.Name = "dgvInvoices";
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInvoices.Size = new System.Drawing.Size(513, 301);
-            this.dgvInvoices.TabIndex = 3;
+            this.dgvInvoices.TabIndex = 0;
             this.dgvInvoices.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
             // colSellerName
@@ -426,25 +445,6 @@
             this.menuItemExportAssignFinancePayment.Size = new System.Drawing.Size(122, 22);
             this.menuItemExportAssignFinancePayment.Text = "导出台帐";
             this.menuItemExportAssignFinancePayment.Click += new System.EventHandler(this.ExportAssignFinancePayment);
-            // 
-            // cbIsDispute
-            // 
-            this.cbIsDispute.AutoSize = true;
-            // 
-            // 
-            // 
-            this.cbIsDispute.BackgroundStyle.Class = "";
-            this.cbIsDispute.Checked = true;
-            this.cbIsDispute.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.cbIsDispute.CheckValue = "A";
-            this.cbIsDispute.CheckValueIndeterminate = "A";
-            this.cbIsDispute.Location = new System.Drawing.Point(314, 34);
-            this.cbIsDispute.Name = "cbIsDispute";
-            this.cbIsDispute.Size = new System.Drawing.Size(76, 16);
-            this.cbIsDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsDispute.TabIndex = 22;
-            this.cbIsDispute.Text = "是否商纠";
-            this.cbIsDispute.ThreeState = true;
             // 
             // InvoiceMgr
             // 

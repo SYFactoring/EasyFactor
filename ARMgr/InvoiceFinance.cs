@@ -34,8 +34,8 @@ namespace CMBC.EasyFactor.ARMgr
             InitializeComponent();
             this.caseBasic = caseBasic;
             this.dgvInvoices.AutoGenerateColumns = false;
-            this.dgvInvoices.ReadOnly = true;
             this.superValidator.Enabled = false;
+            ControlUtil.SetDoubleBuffered(this.dgvInvoices);
 
             this.batchCurrencyComboBoxEx.DataSource = Currency.AllCurrencies();
             this.batchCurrencyComboBoxEx.DisplayMember = "CurrencyCode";
@@ -52,6 +52,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.costRateTextBoxX.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
             this.costRateTextBoxX.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
 
+            foreach (DataGridViewColumn column in this.dgvInvoices.Columns)
+            {
+                column.ReadOnly = true;
+            }
+            colCheckBox.ReadOnly = false;
+
         }
 
         #endregion Constructors
@@ -66,7 +72,6 @@ namespace CMBC.EasyFactor.ARMgr
             set
             {
                 this._CDA = value;
-                this.dgvInvoices.ReadOnly = false;
                 this.invoiceFinanceBatchBindingSource.DataSource = new InvoiceFinanceBatch();
                 this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.FinanceAmount.HasValue == false).ToList();
             }
@@ -105,7 +110,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
             this.invoiceFinanceBatchBindingSource.DataSource = typeof(InvoiceFinanceBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
-            this.dgvInvoices.ReadOnly = true;
         }
         // Private Methods (9) 
 

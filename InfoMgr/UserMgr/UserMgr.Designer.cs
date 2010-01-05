@@ -75,8 +75,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmuUserMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemSelectUser = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDetailUser = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,16 +91,16 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.tbUserID = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblUserID = new DevComponents.DotNetBar.LabelX();
             this.dgvUsers = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colUserID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEDIAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMSN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLoginDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPassword = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UserIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EDIAccountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RoleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PhoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TelphoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmailColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MSNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LoginDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PasswordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuUserMgr.SuspendLayout();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
@@ -185,7 +185,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.panelQuery.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
-            this.panelQuery.TabIndex = 5;
+            this.panelQuery.TabIndex = 0;
             // 
             // lblCount
             // 
@@ -239,35 +239,35 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.dgvUsers.AllowUserToDeleteRows = false;
             this.dgvUsers.AllowUserToOrderColumns = true;
             this.dgvUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colUserID,
-            this.colName,
-            this.colEDIAccount,
-            this.colRole,
-            this.colPhone,
-            this.colTelphone,
-            this.colEmail,
-            this.colMSN,
-            this.colLoginDate,
-            this.colPassword});
+            this.UserIDColumn,
+            this.NameColumn,
+            this.EDIAccountColumn,
+            this.RoleColumn,
+            this.PhoneColumn,
+            this.TelphoneColumn,
+            this.EmailColumn,
+            this.MSNColumn,
+            this.LoginDateColumn,
+            this.PasswordColumn});
             this.dgvUsers.ContextMenuStrip = this.cmuUserMgr;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUsers.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUsers.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvUsers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUsers.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvUsers.Location = new System.Drawing.Point(0, 33);
@@ -277,79 +277,79 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.dgvUsers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUsers.Size = new System.Drawing.Size(800, 567);
-            this.dgvUsers.TabIndex = 6;
+            this.dgvUsers.TabIndex = 1;
             this.dgvUsers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             // 
             // UserIDColumn
             // 
-            this.colUserID.DataPropertyName = "UserID";
-            this.colUserID.HeaderText = "用户ID";
-            this.colUserID.Name = "UserIDColumn";
-            this.colUserID.ReadOnly = true;
+            this.UserIDColumn.DataPropertyName = "UserID";
+            this.UserIDColumn.HeaderText = "用户ID";
+            this.UserIDColumn.Name = "UserIDColumn";
+            this.UserIDColumn.ReadOnly = true;
             // 
             // NameColumn
             // 
-            this.colName.DataPropertyName = "Name";
-            this.colName.HeaderText = "姓名";
-            this.colName.Name = "NameColumn";
-            this.colName.ReadOnly = true;
+            this.NameColumn.DataPropertyName = "Name";
+            this.NameColumn.HeaderText = "姓名";
+            this.NameColumn.Name = "NameColumn";
+            this.NameColumn.ReadOnly = true;
             // 
             // EDIAccountColumn
             // 
-            this.colEDIAccount.DataPropertyName = "EDIAccount";
-            this.colEDIAccount.HeaderText = "EDI帐号";
-            this.colEDIAccount.Name = "EDIAccountColumn";
-            this.colEDIAccount.ReadOnly = true;
+            this.EDIAccountColumn.DataPropertyName = "EDIAccount";
+            this.EDIAccountColumn.HeaderText = "EDI帐号";
+            this.EDIAccountColumn.Name = "EDIAccountColumn";
+            this.EDIAccountColumn.ReadOnly = true;
             // 
             // RoleColumn
             // 
-            this.colRole.DataPropertyName = "Role";
-            this.colRole.HeaderText = "角色";
-            this.colRole.Name = "RoleColumn";
-            this.colRole.ReadOnly = true;
+            this.RoleColumn.DataPropertyName = "Role";
+            this.RoleColumn.HeaderText = "角色";
+            this.RoleColumn.Name = "RoleColumn";
+            this.RoleColumn.ReadOnly = true;
             // 
             // PhoneColumn
             // 
-            this.colPhone.DataPropertyName = "Phone";
-            this.colPhone.HeaderText = "电话";
-            this.colPhone.Name = "PhoneColumn";
-            this.colPhone.ReadOnly = true;
+            this.PhoneColumn.DataPropertyName = "Phone";
+            this.PhoneColumn.HeaderText = "电话";
+            this.PhoneColumn.Name = "PhoneColumn";
+            this.PhoneColumn.ReadOnly = true;
             // 
             // TelphoneColumn
             // 
-            this.colTelphone.DataPropertyName = "Telphone";
-            this.colTelphone.HeaderText = "手机";
-            this.colTelphone.Name = "TelphoneColumn";
-            this.colTelphone.ReadOnly = true;
+            this.TelphoneColumn.DataPropertyName = "Telphone";
+            this.TelphoneColumn.HeaderText = "手机";
+            this.TelphoneColumn.Name = "TelphoneColumn";
+            this.TelphoneColumn.ReadOnly = true;
             // 
             // EmailColumn
             // 
-            this.colEmail.DataPropertyName = "Email";
-            this.colEmail.HeaderText = "Email";
-            this.colEmail.Name = "EmailColumn";
-            this.colEmail.ReadOnly = true;
+            this.EmailColumn.DataPropertyName = "Email";
+            this.EmailColumn.HeaderText = "Email";
+            this.EmailColumn.Name = "EmailColumn";
+            this.EmailColumn.ReadOnly = true;
             // 
             // MSNColumn
             // 
-            this.colMSN.DataPropertyName = "MSN";
-            this.colMSN.HeaderText = "MSN";
-            this.colMSN.Name = "MSNColumn";
-            this.colMSN.ReadOnly = true;
+            this.MSNColumn.DataPropertyName = "MSN";
+            this.MSNColumn.HeaderText = "MSN";
+            this.MSNColumn.Name = "MSNColumn";
+            this.MSNColumn.ReadOnly = true;
             // 
             // LoginDateColumn
             // 
-            this.colLoginDate.DataPropertyName = "LoginDate";
-            this.colLoginDate.HeaderText = "最后登录日期";
-            this.colLoginDate.Name = "LoginDateColumn";
-            this.colLoginDate.ReadOnly = true;
+            this.LoginDateColumn.DataPropertyName = "LoginDate";
+            this.LoginDateColumn.HeaderText = "最后登录日期";
+            this.LoginDateColumn.Name = "LoginDateColumn";
+            this.LoginDateColumn.ReadOnly = true;
             // 
             // PasswordColumn
             // 
-            this.colPassword.DataPropertyName = "Password";
-            this.colPassword.HeaderText = "密码";
-            this.colPassword.Name = "PasswordColumn";
-            this.colPassword.ReadOnly = true;
-            this.colPassword.Visible = false;
+            this.PasswordColumn.DataPropertyName = "Password";
+            this.PasswordColumn.HeaderText = "密码";
+            this.PasswordColumn.Name = "PasswordColumn";
+            this.PasswordColumn.ReadOnly = true;
+            this.PasswordColumn.Visible = false;
             // 
             // UserMgr
             // 
@@ -369,5 +369,16 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserIDColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EDIAccountColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RoleColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PhoneColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TelphoneColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EmailColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MSNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LoginDateColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PasswordColumn;
     }
 }

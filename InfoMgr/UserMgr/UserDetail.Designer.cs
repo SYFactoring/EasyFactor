@@ -96,10 +96,10 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.groupPanelUser = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.btnUserUpdate = new DevComponents.DotNetBar.ButtonX();
             this.userValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.userErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.userHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.userErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.userHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             emailLabel = new DevComponents.DotNetBar.LabelX();
             loginDateLabel = new DevComponents.DotNetBar.LabelX();
             mSNLabel = new DevComponents.DotNetBar.LabelX();
@@ -126,7 +126,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             emailLabel.Location = new System.Drawing.Point(44, 147);
             emailLabel.Name = "emailLabel";
             emailLabel.Size = new System.Drawing.Size(35, 16);
-            emailLabel.TabIndex = 1;
+            emailLabel.TabIndex = 10;
             emailLabel.Text = "Email";
             // 
             // loginDateLabel
@@ -140,7 +140,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             loginDateLabel.Location = new System.Drawing.Point(23, 247);
             loginDateLabel.Name = "loginDateLabel";
             loginDateLabel.Size = new System.Drawing.Size(56, 16);
-            loginDateLabel.TabIndex = 3;
+            loginDateLabel.TabIndex = 18;
             loginDateLabel.Text = "登录时间";
             // 
             // mSNLabel
@@ -154,7 +154,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             mSNLabel.Location = new System.Drawing.Point(45, 222);
             mSNLabel.Name = "mSNLabel";
             mSNLabel.Size = new System.Drawing.Size(34, 16);
-            mSNLabel.TabIndex = 5;
+            mSNLabel.TabIndex = 16;
             mSNLabel.Text = "MSN:";
             // 
             // passwordLabel
@@ -168,7 +168,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             passwordLabel.Location = new System.Drawing.Point(48, 97);
             passwordLabel.Name = "passwordLabel";
             passwordLabel.Size = new System.Drawing.Size(31, 16);
-            passwordLabel.TabIndex = 7;
+            passwordLabel.TabIndex = 6;
             passwordLabel.Text = "密码";
             // 
             // phoneLabel
@@ -182,7 +182,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             phoneLabel.Location = new System.Drawing.Point(48, 172);
             phoneLabel.Name = "phoneLabel";
             phoneLabel.Size = new System.Drawing.Size(31, 16);
-            phoneLabel.TabIndex = 9;
+            phoneLabel.TabIndex = 12;
             phoneLabel.Text = "电话";
             // 
             // telphoneLabel
@@ -196,7 +196,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             telphoneLabel.Location = new System.Drawing.Point(48, 197);
             telphoneLabel.Name = "telphoneLabel";
             telphoneLabel.Size = new System.Drawing.Size(31, 16);
-            telphoneLabel.TabIndex = 13;
+            telphoneLabel.TabIndex = 14;
             telphoneLabel.Text = "手机";
             // 
             // userIDLabel
@@ -210,7 +210,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             userIDLabel.Location = new System.Drawing.Point(37, 7);
             userIDLabel.Name = "userIDLabel";
             userIDLabel.Size = new System.Drawing.Size(42, 16);
-            userIDLabel.TabIndex = 15;
+            userIDLabel.TabIndex = 0;
             userIDLabel.Text = "登录ID";
             // 
             // userNameLabel
@@ -224,7 +224,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             userNameLabel.Location = new System.Drawing.Point(35, 32);
             userNameLabel.Name = "userNameLabel";
             userNameLabel.Size = new System.Drawing.Size(44, 16);
-            userNameLabel.TabIndex = 17;
+            userNameLabel.TabIndex = 2;
             userNameLabel.Text = "用户名";
             // 
             // eDIAccountLabel
@@ -238,7 +238,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             eDIAccountLabel.Location = new System.Drawing.Point(29, 63);
             eDIAccountLabel.Name = "eDIAccountLabel";
             eDIAccountLabel.Size = new System.Drawing.Size(50, 16);
-            eDIAccountLabel.TabIndex = 20;
+            eDIAccountLabel.TabIndex = 4;
             eDIAccountLabel.Text = "EDI帐号";
             // 
             // roleLabel
@@ -252,7 +252,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             roleLabel.Location = new System.Drawing.Point(48, 122);
             roleLabel.Name = "roleLabel";
             roleLabel.Size = new System.Drawing.Size(31, 16);
-            roleLabel.TabIndex = 21;
+            roleLabel.TabIndex = 8;
             roleLabel.Text = "角色";
             // 
             // userBindingSource
@@ -269,7 +269,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.emailTextBox.Location = new System.Drawing.Point(92, 146);
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(154, 20);
-            this.emailTextBox.TabIndex = 4;
+            this.emailTextBox.TabIndex = 11;
             // 
             // loginDate
             // 
@@ -282,7 +282,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.loginDate.Name = "loginDate";
             this.loginDate.ReadOnly = true;
             this.loginDate.Size = new System.Drawing.Size(154, 20);
-            this.loginDate.TabIndex = 8;
+            this.loginDate.TabIndex = 19;
             // 
             // msnTextBox
             // 
@@ -294,7 +294,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.msnTextBox.Location = new System.Drawing.Point(92, 221);
             this.msnTextBox.Name = "msnTextBox";
             this.msnTextBox.Size = new System.Drawing.Size(154, 20);
-            this.msnTextBox.TabIndex = 7;
+            this.msnTextBox.TabIndex = 17;
             // 
             // passwordTextBox
             // 
@@ -307,7 +307,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(154, 20);
-            this.passwordTextBox.TabIndex = 2;
+            this.passwordTextBox.TabIndex = 7;
             // 
             // phoneTextBox
             // 
@@ -319,7 +319,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.phoneTextBox.Location = new System.Drawing.Point(92, 171);
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.Size = new System.Drawing.Size(154, 20);
-            this.phoneTextBox.TabIndex = 5;
+            this.phoneTextBox.TabIndex = 13;
             // 
             // telphoneTextBox
             // 
@@ -331,7 +331,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.telphoneTextBox.Location = new System.Drawing.Point(92, 196);
             this.telphoneTextBox.Name = "telphoneTextBox";
             this.telphoneTextBox.Size = new System.Drawing.Size(154, 20);
-            this.telphoneTextBox.TabIndex = 6;
+            this.telphoneTextBox.TabIndex = 15;
             // 
             // userIDTextBox
             // 
@@ -343,7 +343,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.userIDTextBox.Location = new System.Drawing.Point(92, 6);
             this.userIDTextBox.Name = "userIDTextBox";
             this.userIDTextBox.Size = new System.Drawing.Size(154, 20);
-            this.userIDTextBox.TabIndex = 0;
+            this.userIDTextBox.TabIndex = 1;
             this.userValidator.SetValidator1(this.userIDTextBox, this.requiredFieldValidator1);
             // 
             // nameTextBox
@@ -357,7 +357,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.nameTextBox.Location = new System.Drawing.Point(92, 31);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(154, 20);
-            this.nameTextBox.TabIndex = 1;
+            this.nameTextBox.TabIndex = 3;
             this.userValidator.SetValidator1(this.nameTextBox, this.requiredFieldValidator2);
             // 
             // btnUserSave
@@ -368,7 +368,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnUserSave.Name = "btnUserSave";
             this.btnUserSave.Size = new System.Drawing.Size(75, 23);
             this.btnUserSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnUserSave.TabIndex = 18;
+            this.btnUserSave.TabIndex = 1;
             this.btnUserSave.Text = "保存";
             this.btnUserSave.Click += new System.EventHandler(this.SaveUser);
             // 
@@ -380,7 +380,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnUserReset.Name = "btnUserReset";
             this.btnUserReset.Size = new System.Drawing.Size(75, 23);
             this.btnUserReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnUserReset.TabIndex = 19;
+            this.btnUserReset.TabIndex = 2;
             this.btnUserReset.Text = "重置";
             this.btnUserReset.Click += new System.EventHandler(this.ResetUser);
             // 
@@ -391,10 +391,10 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.eDIAccountTextBox.Border.Class = "TextBoxBorder";
             this.eDIAccountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "EDIAccount", true));
-            this.eDIAccountTextBox.Location = new System.Drawing.Point(94, 62);
+            this.eDIAccountTextBox.Location = new System.Drawing.Point(92, 62);
             this.eDIAccountTextBox.Name = "eDIAccountTextBox";
-            this.eDIAccountTextBox.Size = new System.Drawing.Size(152, 20);
-            this.eDIAccountTextBox.TabIndex = 21;
+            this.eDIAccountTextBox.Size = new System.Drawing.Size(154, 20);
+            this.eDIAccountTextBox.TabIndex = 5;
             // 
             // roleComboBox
             // 
@@ -409,7 +409,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.roleComboBox.Location = new System.Drawing.Point(92, 122);
             this.roleComboBox.Name = "roleComboBox";
             this.roleComboBox.Size = new System.Drawing.Size(154, 21);
-            this.roleComboBox.TabIndex = 22;
+            this.roleComboBox.TabIndex = 9;
             // 
             // groupPanelUser
             // 
@@ -468,7 +468,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             // 
             this.groupPanelUser.StyleMouseOver.Class = "";
-            this.groupPanelUser.TabIndex = 23;
+            this.groupPanelUser.TabIndex = 3;
             // 
             // btnUserUpdate
             // 
@@ -478,7 +478,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnUserUpdate.Name = "btnUserUpdate";
             this.btnUserUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUserUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnUserUpdate.TabIndex = 24;
+            this.btnUserUpdate.TabIndex = 0;
             this.btnUserUpdate.Text = "编辑";
             this.btnUserUpdate.Click += new System.EventHandler(this.UpdateUser);
             // 
@@ -487,15 +487,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.userValidator.ContainerControl = this;
             this.userValidator.ErrorProvider = this.userErrorProvider;
             this.userValidator.Highlighter = this.userHighlighter;
-            // 
-            // userErrorProvider
-            // 
-            this.userErrorProvider.ContainerControl = this;
-            this.userErrorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("userErrorProvider.Icon")));
-            // 
-            // userHighlighter
-            // 
-            this.userHighlighter.ContainerControl = this;
             // 
             // requiredFieldValidator1
             // 
@@ -506,6 +497,15 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.requiredFieldValidator2.ErrorMessage = "必填";
             this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // userErrorProvider
+            // 
+            this.userErrorProvider.ContainerControl = this;
+            this.userErrorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("userErrorProvider.Icon")));
+            // 
+            // userHighlighter
+            // 
+            this.userHighlighter.ContainerControl = this;
             // 
             // UserDetail
             // 
