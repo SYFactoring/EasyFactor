@@ -123,6 +123,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                             MessageBox.Show("不能删除此机构,已存在相关额度.", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
+                        if (selectedFactor.SellerCases.Count > 0 || selectedFactor.BuyerCases.Count > 0)
+                        {
+                            MessageBox.Show("不能删除此机构,已存在相关案件信息", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
                         App.Current.DbContext.Factors.DeleteOnSubmit(selectedFactor);
                         try
                         {

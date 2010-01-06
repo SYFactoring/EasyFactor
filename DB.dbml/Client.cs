@@ -11,7 +11,53 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Client : BaseObject
     {
-        #region Properties (1)
+        #region Properties (8)
+
+        /// <summary>
+        /// 买方信用风险担保额度
+        /// </summary>
+        public ClientCreditLine AssignCreditLine
+        {
+            get
+            {
+                return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == "已生效" && c.CreditLineType == "买方信用风险担保额度");
+            }
+        }
+
+        public System.Nullable<double> AssignTotal
+        {
+            get
+            {
+                double? total = null;
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == "启动案"))
+                {
+                    foreach (CDA cda in curCase.CDAs)
+                    {
+                        double? temp = cda.AssignTotal;
+                        if (temp.HasValue)
+                        {
+                            if (total == null)
+                            {
+                                total = 0;
+                            }
+                            total += temp.Value;
+                        }
+                    }
+                }
+                return total;
+            }
+        }
+
+        /// <summary>
+        /// 主合同
+        /// </summary>
+        public Contract Contract
+        {
+            get
+            {
+                return this.Contracts.SingleOrDefault(c => c.ContractStatus == "已生效");
+            }
+        }
 
         /// <summary>
         /// 
@@ -25,6 +71,82 @@ namespace CMBC.EasyFactor.DB.dbml
                     return App.Current.DbContext.Countries.Where(c => c.CountryCode == _CountryCode).SingleOrDefault().CountryNameCN;
                 }
                 return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// 最高保理预付款融资额度余额
+        /// </summary>
+        public System.Nullable<double> FinanceLineOutstanding
+        {
+            get
+            {
+                return this.FinanceCreditLine.CreditLine - this.FinanceOutstanding;
+            }
+        }
+
+        /// <summary>
+        /// 保理预付款融资额度
+        /// </summary>
+        public ClientCreditLine FinanceCreditLine
+        {
+            get
+            {
+                return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == "已生效" && c.CreditLineType == "保理预付款融资额度");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public System.Nullable<double> FinanceOutstanding
+        {
+            get
+            {
+                double? total = null;
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == "启动案"))
+                {
+                    foreach (CDA cda in curCase.CDAs)
+                    {
+                        double? temp = cda.FinanceOutstanding;
+                        if (temp.HasValue)
+                        {
+                            if (total == null)
+                            {
+                                total = 0;
+                            }
+                            total += temp.Value;
+                        }
+                    }
+                }
+                return total;
+            }
+        }
+
+        /// <summary>
+        /// 总融资金额
+        /// </summary>
+        public System.Nullable<double> FinanceTotal
+        {
+            get
+            {
+                double? total = null;
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == "启动案"))
+                {
+                    foreach (CDA cda in curCase.CDAs)
+                    {
+                        double? temp = cda.FinanceTotal;
+                        if (temp.HasValue)
+                        {
+                            if (total == null)
+                            {
+                                total = 0;
+                            }
+                            total += temp.Value;
+                        }
+                    }
+                }
+                return total;
             }
         }
 
@@ -50,73 +172,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public System.Nullable<double> FinanceOutstanding
-        {
-            get
-            {
-                double? total = null;
-                foreach (Case curCase in this.SellerCases)
-                {
-                    foreach (CDA cda in curCase.CDAs)
-                    {
-                        double? temp = cda.FinanceOutstanding;
-                        if (temp.HasValue)
-                        {
-                            if (total == null)
-                            {
-                                total = 0;
-                            }
-                            total += temp.Value;
-                        }
-                    }
-                }
-                return total;
-            }
-        }
-
-        public System.Nullable<double> CreditLineOutstanding
-        {
-            get
-            {
-                double? total = this.FinanceOutstanding;
-
-                foreach (ClientCreditLine creditLine in this.ClientCreditLines)
-                {
-                    if (creditLine.CreditLineType == "保理预付款融资额度" && creditLine.CreditLineStatus == "已生效")
-                    {
-                        return creditLine.CreditLine - total;
-                    }
-                }
-                return null;
-            }
-        }
-
-        public ClientCreditLine AssignCreditLine
-        {
-            get
-            {
-                return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == "已生效" && c.CreditLineType == "买方信用风险担保额度");
-            }
-        }
-
-        public ClientCreditLine FinanceCreditLine
-        {
-            get
-            {
-                return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == "已生效" && c.CreditLineType == "保理预付款融资额度");
-            }
-        }
-
-        /// <summary>
-        /// 主合同
-        /// </summary>
-        public Contract Contract
-        {
-            get
-            {
-                return this.Contracts.SingleOrDefault(c => c.ContractStatus == "已生效");
-            }
-        }
         #endregion Methods
     }
 

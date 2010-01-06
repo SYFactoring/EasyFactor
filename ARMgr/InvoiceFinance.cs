@@ -89,12 +89,16 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         public static string GenerateFinanceBatchNo(CDA cda, System.Nullable<DateTime> date)
         {
-            int batchCount = cda.InvoiceFinanceBatches.Count;
+            int batchCount = 0;
+            foreach (CDA c in cda.Case.CDAs)
+            {
+                batchCount += c.InvoiceFinanceBatches.Count;
+            }
             if (date == null)
             {
                 date = DateTime.Now;
             }
-            string financeNo = String.Format("FIN{0:G}{1:yyyyMMdd}-{2:d2}", cda.CDACode, date, batchCount + 1);
+            string financeNo = String.Format("FIN{0:G}{1:yyyyMMdd}-{2:d2}", cda.CaseCode, date, batchCount + 1);
             return financeNo;
         }
 

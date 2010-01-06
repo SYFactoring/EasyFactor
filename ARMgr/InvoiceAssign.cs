@@ -73,12 +73,16 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         public static string GenerateAssignBatchNo(CDA cda, System.Nullable<DateTime> date)
         {
-            int batchCount = cda.InvoiceAssignBatches.Count;
+            int batchCount = 0;
+            foreach (CDA c in cda.Case.CDAs)
+            {
+                batchCount += c.InvoiceAssignBatches.Count;
+            }
             if (date == null)
             {
                 date = DateTime.Now;
             }
-            string assignNo = String.Format("ASS{0:G}{1:yyyyMMdd}-{2:d2}", cda.CDACode, date, batchCount + 1);
+            string assignNo = String.Format("ASS{0:G}{1:yyyyMMdd}-{2:d2}", cda.CaseCode, date, batchCount + 1);
             return assignNo;
         }
 

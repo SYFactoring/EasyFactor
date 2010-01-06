@@ -146,6 +146,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             MessageBox.Show("不能删除此客户,已存在相关额度", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
+                        if (selectedClient.Contracts.Count > 0)
+                        {
+                            MessageBox.Show("不能删除此客户,已存在相关保理合同", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        if (selectedClient.SellerCases.Count > 0 || selectedClient.BuyerCases.Count > 0)
+                        {
+                            MessageBox.Show("不能删除此客户,已存在相关案件信息", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
                         App.Current.DbContext.Clients.DeleteOnSubmit(selectedClient);
                         try
                         {

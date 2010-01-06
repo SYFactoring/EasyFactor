@@ -248,9 +248,9 @@ namespace CMBC.EasyFactor.Report
                         sheet.Cells[row++, 2] = factor.ToString();
                     }
                     sheet.Cells[row, 1] = "信用风险额度：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.CreditCoverOutstanding);
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.CreditCover);
                     sheet.Cells[row, 1] = "应收账款余额：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.AROutstanding);
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.AssignOutstanding);
 
                     row++;
                     sheet.Cells[row, 1] = "发票号";
@@ -411,6 +411,10 @@ namespace CMBC.EasyFactor.Report
             }
         }
 
+        /// <summary>
+        /// 可融资账款明细表
+        /// </summary>
+        /// <param name="invoiceList"></param>
         private void GenerateFinanceReport(List<Invoice> invoiceList)
         {
             IEnumerable<IGrouping<Client, Invoice>> groupsBySeller = invoiceList.GroupBy(i => i.InvoiceAssignBatch.CDA.Case.SellerClient);
@@ -435,13 +439,15 @@ namespace CMBC.EasyFactor.Report
                 sheet.Cells[5, 1] = "卖方：";
                 sheet.Cells[5, 2] = seller.ToString();
                 sheet.Cells[6, 1] = "最高预付款额度：";
-                sheet.Cells[6, 2] = String.Format("{0:N2}", seller.CreditLineOutstanding);
+                sheet.Cells[6, 2] = String.Format("{0:N2}", seller.FinanceCreditLine.CreditLine);
                 sheet.Cells[7, 1] = "总融资余额";
                 sheet.Cells[7, 2] = String.Format("{0:N2}", seller.FinanceOutstanding);
+                sheet.Cells[8, 1] = "尚可动拨金额";
+                sheet.Cells[8, 2] = String.Format("{0:N2}", Math.Min((seller.AssignTotal - seller.FinanceTotal).GetValueOrDefault(), seller.FinanceLineOutstanding.GetValueOrDefault()));
 
                 IEnumerable<IGrouping<Client, Invoice>> groupsByBuyer = sellerGroup.GroupBy(i => i.InvoiceAssignBatch.CDA.Case.BuyerClient);
 
-                int row = 9;
+                int row = 10;
                 foreach (IGrouping<Client, Invoice> buyerGroup in groupsByBuyer)
                 {
                     Client buyer = buyerGroup.Key;
@@ -473,11 +479,13 @@ namespace CMBC.EasyFactor.Report
                     sheet.Cells[row, 1] = "信用风险额度：";
                     sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.CreditCoverOutstanding);
                     sheet.Cells[row, 1] = "应收账款余额：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.AROutstanding);
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.AssignOutstanding);
                     sheet.Cells[row, 1] = "预付款额度：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.CreditLineOutstanding);
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.FinanceLineOutstanding);
                     sheet.Cells[row, 1] = "融资余额：";
                     sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.FinanceOutstanding);
+                    sheet.Cells[row, 1] = "尚可动拨金额：";
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", Math.Min(Math.Min((cda.AssignTotal - cda.FinanceTotal).GetValueOrDefault(), cda.FinanceLineOutstanding.GetValueOrDefault()), seller.FinanceLineOutstanding.GetValueOrDefault()));
 
                     row++;
                     sheet.Cells[row, 1] = "发票号";

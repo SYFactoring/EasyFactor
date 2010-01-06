@@ -2,13 +2,18 @@
 {
     partial class ContractMgr
     {
-		#region Fields (28) 
+		#region Fields (26) 
 
         private DevComponents.DotNetBar.ButtonX btnContractQuery;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbContractStatus;
         private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
-        private DevComponents.Editors.ComboItem comboItem1;
-        private DevComponents.Editors.ComboItem comboItem2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractValueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -65,8 +70,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelContractQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbContractStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboItem1 = new DevComponents.Editors.ComboItem();
-            this.comboItem2 = new DevComponents.Editors.ComboItem();
             this.lblContractStatus = new DevComponents.DotNetBar.LabelX();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblClientName = new DevComponents.DotNetBar.LabelX();
@@ -127,21 +130,13 @@
             this.cbContractStatus.FormattingEnabled = true;
             this.cbContractStatus.ItemHeight = 14;
             this.cbContractStatus.Items.AddRange(new object[] {
-            this.comboItem1,
-            this.comboItem2});
+            "已生效",
+            "已过期"});
             this.cbContractStatus.Location = new System.Drawing.Point(377, 5);
             this.cbContractStatus.Name = "cbContractStatus";
             this.cbContractStatus.Size = new System.Drawing.Size(98, 20);
             this.cbContractStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbContractStatus.TabIndex = 5;
-            // 
-            // comboItem1
-            // 
-            this.comboItem1.Text = "正常";
-            // 
-            // comboItem2
-            // 
-            this.comboItem2.Text = "已过期";
             // 
             // lblContractStatus
             // 
@@ -395,13 +390,5 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContractCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContractValueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContractDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContractStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
     }
 }

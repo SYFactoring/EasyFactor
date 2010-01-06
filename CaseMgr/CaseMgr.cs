@@ -39,9 +39,8 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             InitializeComponent();
             this.dgvCases.AutoGenerateColumns = false;
-
-            ControlUtil.SetDoubleBuffered(this.dgvCases);
             this.dgvCases.DataSource = this.bs;
+            ControlUtil.SetDoubleBuffered(this.dgvCases);
 
             List<string> transTypes = Case.ConstantTransTypes().ToList();
             transTypes.Insert(0, "全部");
@@ -113,48 +112,41 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void DeleteCase(object sender, System.EventArgs e)
         {
-            if (this.dgvCases.SelectedRows.Count == 0)
+            if (this.dgvCases.CurrentCell == null)
             {
                 return;
             }
 
-            string cid = (string)dgvCases["CaseCodeColumn", dgvCases.SelectedRows[0].Index].Value;
-            if (cid != null)
+            Case selectedCase = (Case)this.bs.List[this.dgvCases.CurrentCell.RowIndex];
+            if (MessageBox.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                Case selectedCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == cid);
-                if (selectedCase != null)
+                bool isDeleteOK = true;
+                foreach (CDA cda in selectedCase.CDAs)
                 {
-                    if (MessageBox.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
                     {
-                        bool isDeleteOK = true;
-                        foreach (CDA cda in selectedCase.CDAs)
-                        {
-                            foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
-                            {
-                                App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
-                            }
-                            App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
-                            App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
-                            App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
-                        }
-                        App.Current.DbContext.CDAs.DeleteAllOnSubmit(selectedCase.CDAs);
-                        App.Current.DbContext.Cases.DeleteOnSubmit(selectedCase);
-                        try
-                        {
-                            App.Current.DbContext.SubmitChanges();
-                        }
-                        catch (Exception e1)
-                        {
-                            isDeleteOK = false;
-                            MessageBox.Show("不能删除此案件: " + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        if (isDeleteOK)
-                        {
-                            MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            dgvCases.Rows.RemoveAt(dgvCases.SelectedRows[0].Index);
-                        }
+                        App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
                     }
+                    App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
+                    App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
+                    App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
+                }
+                App.Current.DbContext.CDAs.DeleteAllOnSubmit(selectedCase.CDAs);
+                App.Current.DbContext.Cases.DeleteOnSubmit(selectedCase);
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    isDeleteOK = false;
+                    MessageBox.Show("不能删除此案件: " + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (isDeleteOK)
+                {
+                    MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dgvCases.Rows.RemoveAt(dgvCases.CurrentCell.RowIndex);
                 }
             }
         }
@@ -166,21 +158,14 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void DetailCase(object sender, System.EventArgs e)
         {
-            if (this.dgvCases.SelectedRows.Count == 0)
+            if (this.dgvCases.CurrentCell == null)
             {
                 return;
             }
 
-            string cid = (string)dgvCases["CaseCodeColumn", dgvCases.SelectedRows[0].Index].Value;
-            if (cid != null)
-            {
-                Case selectedCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == cid);
-                if (selectedCase != null)
-                {
-                    CaseDetail caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.DETAIL_CASE);
-                    caseDetail.ShowDialog(this);
-                }
-            }
+            Case selectedCase = (Case)this.bs.List[this.dgvCases.CurrentCell.RowIndex];
+            CaseDetail caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.DETAIL_CASE);
+            caseDetail.ShowDialog(this);
         }
 
         /// <summary>
@@ -238,24 +223,17 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void SelectCase(object sender, System.EventArgs e)
         {
-            if (this.dgvCases.SelectedRows.Count == 0)
+            if (this.dgvCases.CurrentCell == null)
             {
                 return;
             }
 
-            string cid = (string)dgvCases["CaseCodeColumn", dgvCases.SelectedRows[0].Index].Value;
-            if (cid != null)
+            Case selectedCase = (Case)this.bs.List[this.dgvCases.CurrentCell.RowIndex];
+            this.Selected = selectedCase;
+            if (this.OwnerForm != null)
             {
-                Case selectedCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == cid);
-                if (selectedCase != null)
-                {
-                    this.Selected = selectedCase;
-                    if (this.OwnerForm != null)
-                    {
-                        this.OwnerForm.DialogResult = DialogResult.Yes;
-                        this.OwnerForm.Close();
-                    }
-                }
+                this.OwnerForm.DialogResult = DialogResult.Yes;
+                this.OwnerForm.Close();
             }
         }
 
@@ -266,21 +244,14 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void UpdateCase(object sender, System.EventArgs e)
         {
-            if (this.dgvCases.SelectedRows.Count == 0)
+            if (this.dgvCases.CurrentCell == null)
             {
                 return;
             }
 
-            string cid = (string)dgvCases["CaseCodeColumn", dgvCases.SelectedRows[0].Index].Value;
-            if (cid != null)
-            {
-                Case selectedCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == cid);
-                if (selectedCase != null)
-                {
-                    CaseDetail caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.UPDATE_CASE);
-                    caseDetail.ShowDialog(this);
-                }
-            }
+            Case selectedCase = (Case)this.bs.List[this.dgvCases.CurrentCell.RowIndex];
+            CaseDetail caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.UPDATE_CASE);
+            caseDetail.ShowDialog(this);
         }
 
         #endregion Methods

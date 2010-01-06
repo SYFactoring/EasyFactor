@@ -107,12 +107,16 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         public static string GeneratePaymentBatchNo(CDA cda, System.Nullable<DateTime> date)
         {
-            int batchCount = cda.InvoicePaymentBatches.Count;
+            int batchCount = 0;
+            foreach (CDA c in cda.Case.CDAs)
+            {
+                batchCount += c.InvoicePaymentBatches.Count;
+            }
             if (date == null)
             {
                 date = DateTime.Now;
             }
-            string paymentNo = String.Format("PAY{0:G}{1:yyyyMMdd}-{2:d2}", cda.CDACode, date, batchCount + 1);
+            string paymentNo = String.Format("PAY{0:G}{1:yyyyMMdd}-{2:d2}", cda.CaseCode, date, batchCount + 1);
             return paymentNo;
         }
 

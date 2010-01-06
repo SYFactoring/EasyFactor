@@ -132,9 +132,9 @@
             // 
             this.btnCreditCoverQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCreditCoverQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCreditCoverQuery.Location = new System.Drawing.Point(216, 5);
+            this.btnCreditCoverQuery.Location = new System.Drawing.Point(213, 3);
             this.btnCreditCoverQuery.Name = "btnCreditCoverQuery";
-            this.btnCreditCoverQuery.Size = new System.Drawing.Size(75, 48);
+            this.btnCreditCoverQuery.Size = new System.Drawing.Size(52, 25);
             this.btnCreditCoverQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCreditCoverQuery.TabIndex = 4;
             this.btnCreditCoverQuery.Text = "查询";
@@ -146,20 +146,21 @@
             // 
             // 
             this.tbBuyerFactorCode.Border.Class = "TextBoxBorder";
-            this.tbBuyerFactorCode.Location = new System.Drawing.Point(95, 33);
+            this.tbBuyerFactorCode.Location = new System.Drawing.Point(95, 27);
             this.tbBuyerFactorCode.Name = "tbBuyerFactorCode";
             this.tbBuyerFactorCode.Size = new System.Drawing.Size(100, 20);
             this.tbBuyerFactorCode.TabIndex = 3;
             // 
             // lblBuyerFactorCode
             // 
+            this.lblBuyerFactorCode.AutoSize = true;
             // 
             // 
             // 
             this.lblBuyerFactorCode.BackgroundStyle.Class = "";
-            this.lblBuyerFactorCode.Location = new System.Drawing.Point(3, 31);
+            this.lblBuyerFactorCode.Location = new System.Drawing.Point(3, 28);
             this.lblBuyerFactorCode.Name = "lblBuyerFactorCode";
-            this.lblBuyerFactorCode.Size = new System.Drawing.Size(96, 23);
+            this.lblBuyerFactorCode.Size = new System.Drawing.Size(93, 16);
             this.lblBuyerFactorCode.TabIndex = 2;
             this.lblBuyerFactorCode.Text = "买方保理商代码";
             // 
@@ -176,13 +177,14 @@
             // 
             // lblSellerFactorCode
             // 
+            this.lblSellerFactorCode.AutoSize = true;
             // 
             // 
             // 
             this.lblSellerFactorCode.BackgroundStyle.Class = "";
-            this.lblSellerFactorCode.Location = new System.Drawing.Point(3, 3);
+            this.lblSellerFactorCode.Location = new System.Drawing.Point(3, 9);
             this.lblSellerFactorCode.Name = "lblSellerFactorCode";
-            this.lblSellerFactorCode.Size = new System.Drawing.Size(96, 23);
+            this.lblSellerFactorCode.Size = new System.Drawing.Size(93, 16);
             this.lblSellerFactorCode.TabIndex = 0;
             this.lblSellerFactorCode.Text = "卖方保理商代码";
             // 

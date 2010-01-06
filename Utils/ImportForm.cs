@@ -304,6 +304,10 @@ namespace CMBC.EasyFactor.Utils
                 {
                     int column = 8;
                     string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                    if (invoiceNo.Equals(string.Equals))
+                    {
+                        continue;
+                    }
                     Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                     if (invoice == null)
                     {
@@ -380,6 +384,10 @@ namespace CMBC.EasyFactor.Utils
                     }
                     int column = 8;
                     string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                    if (invoiceNo.Equals(string.Empty))
+                    {
+                        continue;
+                    }
                     Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                     if (invoice == null)
                     {
@@ -536,7 +544,7 @@ namespace CMBC.EasyFactor.Utils
                     string caseCode = String.Format("{0:G}", valueArray[row, 1]);
                     if (String.Empty.Equals(caseCode))
                     {
-                        throw new Exception("案件编号不能为空");
+                        continue;
                     }
 
                     Case curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
@@ -590,7 +598,7 @@ namespace CMBC.EasyFactor.Utils
                     curCase.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                     curCase.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
-                    
+
                     CreditCoverNegotiation creditCover = new CreditCoverNegotiation();
                     creditCover.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
                     creditCover.RequestAmount = (System.Nullable<double>)valueArray[row, column++];
@@ -637,7 +645,7 @@ namespace CMBC.EasyFactor.Utils
                     string clientEDICode = String.Format("{0:G}", valueArray[row, 2]);
                     if (String.Empty.Equals(clientEDICode))
                     {
-                        throw new Exception("客户保理代码不能为空");
+                        continue;
                     }
                     bool isNew = false;
                     Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
@@ -733,7 +741,7 @@ namespace CMBC.EasyFactor.Utils
                     string clientEDICode = String.Format("{0:G}", valueArray[row, 1]);
                     if (String.Empty.Equals(clientEDICode))
                     {
-                        throw new Exception("客户保理代码不能为空");
+                        continue;
                     }
                     Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                     if (client == null)
@@ -787,7 +795,7 @@ namespace CMBC.EasyFactor.Utils
                     string caseCode = String.Format("{0:G}", valueArray[row, column++]);
                     if (string.Empty.Equals(caseCode))
                     {
-                        throw new Exception("案件编号不能为空");
+                        continue;
                     }
                     Case curCase = null;
                     curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
@@ -879,10 +887,10 @@ namespace CMBC.EasyFactor.Utils
 
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
-                } 
+                }
                 App.Current.DbContext.SubmitChanges();
             }
-           
+
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
             this.ReleaseResource();
@@ -909,7 +917,7 @@ namespace CMBC.EasyFactor.Utils
                     string departmentCode = String.Format("{0:G}", valueArray[row, 1]);
                     if (String.Empty.Equals(departmentCode))
                     {
-                        throw new Exception("部门代码不能为空");
+                        continue;
                     }
                     bool isNew = false;
                     Department dept = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentCode == departmentCode);
@@ -971,7 +979,7 @@ namespace CMBC.EasyFactor.Utils
                     string factorCode = String.Format("{0:G}", valueArray[row, 2]);
                     if (String.Empty.Equals(factorCode))
                     {
-                        throw new Exception("合作机构代码不能为空");
+                        continue;
                     }
                     bool isNew = false;
                     Factor factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
@@ -1069,7 +1077,7 @@ namespace CMBC.EasyFactor.Utils
                         string factorCode = String.Format("{0:G}", valueArray[row, 1]);
                         if (String.Empty.Equals(factorCode))
                         {
-                            throw new Exception("合作机构代码不能为空");
+                            continue;
                         }
                         Factor factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                         if (factor == null)
@@ -1210,7 +1218,7 @@ namespace CMBC.EasyFactor.Utils
                     string userId = String.Format("{0:G}", valueArray[row, 1]);
                     if (String.Empty.Equals(userId))
                     {
-                        throw new Exception("用户ID不能为空");
+                        continue;
                     }
                     bool isNew = false;
                     User user = App.Current.DbContext.Users.SingleOrDefault(c => c.UserID == userId);

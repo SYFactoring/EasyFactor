@@ -228,8 +228,16 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void QueryContracts(object sender, EventArgs e)
         {
-            var queryResult = App.Current.DbContext.Contracts.Where(c =>
-                c.ContractCode.Contains(this.tbContractCode.Text));
+            string contractCode = this.tbContractCode.Text;
+            string clientName = this.tbClientName.Text;
+            string contractStatus = this.cbContractStatus.Text;
+
+            var queryResult = from contract in App.Current.DbContext.Contracts
+                              let client = contract.Client
+                              where client.ClientNameCN.Contains(clientName) || client.ClientNameEN_1.Contains(clientName) || client.ClientNameEN_2.Contains(clientName)
+                              where contract.ContractCode.Contains(contractCode)
+                              && contractStatus == string.Empty ? true : contract.ContractStatus == contractStatus
+                              select contract;
 
             this.bs.DataSource = queryResult;
             this.dgvContracts.DataSource = this.bs;
