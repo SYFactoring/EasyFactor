@@ -71,11 +71,6 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_CREDITCOVER,
-
-            /// <summary>
-            /// 
-            /// </summary>
             IMPORT_CONTRACT_CDA,
 
             /// <summary>
@@ -130,11 +125,8 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_CASES:
                     this.Text = "案件信息导入";
                     break;
-                case ImportType.IMPORT_CREDITCOVER:
-                    this.Text = "额度申请信息导入";
-                    break;
                 case ImportType.IMPORT_CONTRACT_CDA:
-                    this.Text = "主合同及额度通知书导入";
+                    this.Text = "保理合同及额度通知书导入";
                     break;
                 case ImportType.IMPORT_ASSIGN:
                     this.Text = "发票转让导入";
@@ -196,9 +188,6 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ImportType.IMPORT_CASES:
                     e.Result = ImportCases((string)e.Argument, worker);
-                    break;
-                case ImportType.IMPORT_CREDITCOVER:
-                    e.Result = ImportCreditCover((string)e.Argument, worker);
                     break;
                 case ImportType.IMPORT_CONTRACT_CDA:
                     e.Result = ImportContractAndCDA((string)e.Argument, worker);
@@ -601,6 +590,19 @@ namespace CMBC.EasyFactor.Utils
                     curCase.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                     curCase.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
+                    CreditCoverNegotiation creditCover = new CreditCoverNegotiation();
+                    creditCover.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
+                    creditCover.RequestAmount = (System.Nullable<double>)valueArray[row, column++];
+                    curCase.PaymentTerm = String.Format("{0:G}", valueArray[row, column++]);
+                    creditCover.RequestDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    creditCover.ApproveAmount = (System.Nullable<double>)valueArray[row, column++];
+                    creditCover.ApproveDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    creditCover.IFPrice = (System.Nullable<double>)valueArray[row, column++];
+                    column++;
+                    creditCover.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                    creditCover.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                    creditCover.Case = curCase;
+
                     App.Current.DbContext.SubmitChanges();
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
@@ -815,9 +817,19 @@ namespace CMBC.EasyFactor.Utils
                         cda.CDACode = CDA.GenerateCDACode(curCase);
                         cda.Case = curCase;
                     }
+                    else if (cdaCode.Length < 3)
+                    {
+                        cda = new CDA();
+                        cda.CDACode = String.Format("{0}{1:00N}", contract.ContractCode, cdaCode);
+                        cda.Case = curCase;
+                    }
                     else
                     {
                         cda = App.Current.DbContext.CDAs.Single(c => c.CDACode == cdaCode);
+                        if (cda == null)
+                        {
+                            continue;
+                        }
                         cda.Case = curCase;
                     }
                     column = 9;
@@ -869,67 +881,6 @@ namespace CMBC.EasyFactor.Utils
                 }
             }
 
-            worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
-            this.ReleaseResource();
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="p"></param>
-        /// <param name="worker"></param>
-        /// <returns></returns>
-        private int ImportCreditCover(string fileName, BackgroundWorker worker)
-        {
-            object[,] valueArray = this.GetValueArray(fileName);
-            int result = 0;
-
-            if (valueArray != null)
-            {
-                int size = valueArray.GetUpperBound(0);
-                for (int row = 2; row <= size; row++)
-                {
-                    string caseCode = String.Format("{0:G}", valueArray[row, 1]);
-                    if (String.Empty.Equals(caseCode))
-                    {
-                        continue;
-                    }
-                    Case curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
-                    if (curCase == null)
-                    {
-                        continue;
-                    }
-                    int column = 2;
-                    CreditCoverNegotiation creditCover = new CreditCoverNegotiation();
-                    creditCover.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
-                    creditCover.RequestAmount = (System.Nullable<double>)valueArray[row, column++];
-                    creditCover.RequestDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    double approveAmount;
-                    if (Double.TryParse(String.Format("{0:G}", valueArray[row, column++]), out approveAmount))
-                    {
-                        creditCover.ApproveAmount = approveAmount;
-                    }
-                    DateTime approveDate;
-                    if (DateTime.TryParse(String.Format("{0:G}", valueArray[row, column++]), out approveDate))
-                    {
-                        creditCover.ApproveDate = approveDate;
-                    }
-                    double IFPrice;
-                    if (Double.TryParse(String.Format("{0:G}", valueArray[row, column++]), out IFPrice))
-                    {
-                        creditCover.IFPrice = IFPrice;
-                    }
-                    creditCover.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                    creditCover.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                    creditCover.Case = curCase;
-
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
-                }
-            }
-            App.Current.DbContext.SubmitChanges();
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
             this.ReleaseResource();

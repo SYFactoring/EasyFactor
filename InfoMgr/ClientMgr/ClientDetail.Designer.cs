@@ -2244,7 +2244,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.tabItemContract.AttachedControl = this.tabPanelContract;
             this.tabItemContract.Name = "tabItemContract";
-            this.tabItemContract.Text = "主合同";
+            this.tabItemContract.Text = "保理合同";
             // 
             // tabPanelClient
             // 
@@ -3174,7 +3174,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // customValidator6
             // 
-            this.customValidator6.ErrorMessage = "主合同编号应为10位";
+            this.customValidator6.ErrorMessage = "保理合同编号应为10位";
             this.customValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator6.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator6_ValidateValue);
             // 

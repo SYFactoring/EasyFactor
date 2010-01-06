@@ -1044,7 +1044,7 @@
             "账款到期日不符",
             "单据内容不符",
             "额度通知书过期或未签回",
-            "保理主合同过期或未签回",
+            "保理合同过期或未签回",
             "交货凭证内容不完整",
             "其他"});
             this.flawReasonCheckedListBox.Location = new System.Drawing.Point(170, 10);

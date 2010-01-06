@@ -41,5 +41,58 @@ namespace CMBC.EasyFactor.DB.dbml
                 return string.Empty;
             }
         }
+
+        public string SellerName
+        {
+            get
+            {
+                return this.Case.SellerClient.ToString();
+            }
+        }
+
+        public string BuyerName
+        {
+            get
+            {
+                return this.Case.BuyerClient.ToString();
+            }
+        }
+
+        public string FactorName
+        {
+            get 
+            {
+                switch (this.Case.TransactionType)
+                {
+                    case "国内卖方保理":
+                    case "出口保理":
+                    case "国内信保保理":
+                    case "国际信保保理":
+                    case "租赁保理":
+                        return this.Case.SellerFactor.ToString();
+                    case "国内买方保理":
+                    case "进口保理":
+                        return this.Case.BuyerFactor.ToString();
+                    default:
+                        return string.Empty;
+                }
+            }
+        }
+
+        public string TransactionType
+        {
+            get
+            {
+                return this.Case.TransactionType;
+            }
+        }
+
+        public string InvoiceCurrency
+        {
+            get
+            {
+                return this.Case.InvoiceCurrency;
+            }
+        }
     }
 }

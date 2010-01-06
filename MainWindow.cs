@@ -228,20 +228,6 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ImportCreditCover(object sender, EventArgs e)
-        {
-            if (validateRole())
-            {
-                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CREDITCOVER);
-                importForm.Show();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ImportDepartments(object sender, EventArgs e)
         {
             if (validateRole())

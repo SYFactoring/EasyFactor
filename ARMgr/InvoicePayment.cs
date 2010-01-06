@@ -96,7 +96,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (12)
+        #region Methods (13)
 
         // Public Methods (2) 
 
@@ -128,7 +128,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoicePaymentBatchBindingSource.DataSource = typeof(InvoicePaymentBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
-        // Private Methods (10) 
+        // Private Methods (11) 
 
         private void CaculateCurrentPaymentAmount()
         {
@@ -234,17 +234,48 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+            if (e.Value.Equals(string.Empty))
+            {
+                e.Value = null;
+                e.ParsingApplied = true;
+                return;
+            }
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colDueDate || col == colFinanceDueDate || col == colPaymentDate || col == colRefundDate || col == colCommissionDate || col == colInterestDate)
+            if (col == colRefundDate || col == colCommissionDate || col == colInterestDate)
             {
                 string str = (string)e.Value;
+                e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
+                e.ParsingApplied = true;
+            }
+        }
+
+        private void dgvInvoices_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (e.FormattedValue == null || e.FormattedValue.Equals(string.Empty))
+            {
+                return;
+            }
+            DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
+            if (col == colPaymentDate || col == colRefundDate || col == colCommissionDate || col == colInterestDate)
+            {
+                string str = (string)e.FormattedValue;
                 DateTime result;
                 bool ok = DateTime.TryParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out result);
-                if (ok)
+                if (!ok)
                 {
-                    e.Value = result;
-                    e.ParsingApplied = true;
+                    e.Cancel = true;
                 }
+            }
+            else if (col == colPaymentAmount || col == colRefundAmount || col == colCommission || col == colInterest)
+            {
+                string str = (string)e.FormattedValue;
+                double result;
+                bool ok = Double.TryParse(str, out result);
+                if (!ok)
+                {
+                    e.Cancel = true;
+                }
+
             }
         }
 

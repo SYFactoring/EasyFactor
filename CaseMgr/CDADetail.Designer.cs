@@ -755,7 +755,7 @@
             contractCodeLabel.Name = "contractCodeLabel";
             contractCodeLabel.Size = new System.Drawing.Size(72, 16);
             contractCodeLabel.TabIndex = 6;
-            contractCodeLabel.Text = "主合同编号:";
+            contractCodeLabel.Text = "保理合同编号:";
             // 
             // lblCDACode
             // 

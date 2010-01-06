@@ -320,7 +320,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.menuItemContractNew.Name = "menuItemContractNew";
             this.menuItemContractNew.Size = new System.Drawing.Size(146, 22);
-            this.menuItemContractNew.Text = "新建主合同";
+            this.menuItemContractNew.Text = "新建保理合同";
             this.menuItemContractNew.Click += new System.EventHandler(this.NewContract);
             // 
             // menuItemClientUpdate

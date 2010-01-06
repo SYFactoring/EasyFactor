@@ -20,14 +20,14 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoiceFinance : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         private CDA _CDA;
         private ARCaseBasic caseBasic;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
         public InvoiceFinance(ARCaseBasic caseBasic)
         {
@@ -60,9 +60,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (1) 
+        #region Properties (1)
 
         /// <summary>
         /// 
@@ -76,11 +76,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (13) 
+        #region Methods (14)
 
-		// Public Methods (2) 
+        // Public Methods (2) 
 
         /// <summary>
         /// 
@@ -110,7 +110,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoiceFinanceBatchBindingSource.DataSource = typeof(InvoiceFinanceBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
-		// Private Methods (11) 
+        // Private Methods (12) 
 
         private void CaculateCurrentFinanceAmount()
         {
@@ -208,18 +208,50 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+            if (e.Value.Equals(string.Empty))
+            {
+                e.Value = null;
+                e.ParsingApplied = true;
+                return;
+            }
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
             if (col == colDueDate || col == colFinanceDate || col == colFinanceDueDate)
             {
                 string str = (string)e.Value;
+                e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
+                e.ParsingApplied = true;
+            }
+        }
+
+        private void dgvInvoices_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (e.FormattedValue == null || e.FormattedValue.Equals(string.Empty))
+            {
+                return;
+            }
+            DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
+            if (col == colDueDate || col == colFinanceDate || col == colFinanceDueDate)
+            {
+                string str = (string)e.FormattedValue;
                 DateTime result;
                 bool ok = DateTime.TryParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out result);
-                if (ok)
+                if (!ok)
                 {
-                    e.Value = result;
-                    e.ParsingApplied = true;
+                    e.Cancel = true;
                 }
             }
+            else if (col == colFinanceAmount)
+            {
+                string str = (string)e.FormattedValue;
+                double result;
+                bool ok = Double.TryParse(str, out result);
+                if (!ok)
+                {
+                    e.Cancel = true;
+                }
+
+            }
+
         }
 
         private void dgvInvoices_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -326,6 +358,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

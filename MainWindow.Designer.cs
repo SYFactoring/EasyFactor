@@ -165,7 +165,6 @@ namespace CMBC.EasyFactor
             this.btnFactorImport2 = new DevComponents.DotNetBar.ButtonItem();
             this.btnFactorCreditLineImport = new DevComponents.DotNetBar.ButtonItem();
             this.btnCaseImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnCreditCoverImport = new DevComponents.DotNetBar.ButtonItem();
             this.btnContractAndCDAImport = new DevComponents.DotNetBar.ButtonItem();
             this.btnInvoicesImport = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarHelp = new DevComponents.DotNetBar.RibbonBar();
@@ -229,10 +228,10 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
+            this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
             this.ribbonControl.Controls.Add(this.ribbonPanelReport);
             this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
             this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
-            this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
             this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
             this.ribbonControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.ribbonControl.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
@@ -278,6 +277,7 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelReport.StyleMouseOver.Class = "";
             this.ribbonPanelReport.TabIndex = 3;
+            this.ribbonPanelReport.Visible = false;
             // 
             // ribbonBarAnalysisReport
             // 
@@ -451,7 +451,7 @@ namespace CMBC.EasyFactor
             // 
             this.btnContractQuery.Name = "btnContractQuery";
             this.btnContractQuery.SubItemsExpandWidth = 14;
-            this.btnContractQuery.Text = "主合同查询";
+            this.btnContractQuery.Text = "保理合同查询";
             this.btnContractQuery.Click += new System.EventHandler(this.QueryContract);
             // 
             // btnCaseQuery
@@ -786,7 +786,6 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelHelp.StyleMouseOver.Class = "";
             this.ribbonPanelHelp.TabIndex = 6;
-            this.ribbonPanelHelp.Visible = false;
             // 
             // ribbonBarImport
             // 
@@ -809,7 +808,6 @@ namespace CMBC.EasyFactor
             this.btnFactorImport2,
             this.btnFactorCreditLineImport,
             this.btnCaseImport,
-            this.btnCreditCoverImport,
             this.btnContractAndCDAImport,
             this.btnInvoicesImport});
             this.ribbonBarImport.Location = new System.Drawing.Point(84, 0);
@@ -876,18 +874,11 @@ namespace CMBC.EasyFactor
             this.btnCaseImport.Text = "导入案件信息";
             this.btnCaseImport.Click += new System.EventHandler(this.ImportCases);
             // 
-            // btnCreditCoverImport
-            // 
-            this.btnCreditCoverImport.Name = "btnCreditCoverImport";
-            this.btnCreditCoverImport.SubItemsExpandWidth = 14;
-            this.btnCreditCoverImport.Text = "导入额度申请信息";
-            this.btnCreditCoverImport.Click += new System.EventHandler(this.ImportCreditCover);
-            // 
             // btnContractAndCDAImport
             // 
             this.btnContractAndCDAImport.Name = "btnContractAndCDAImport";
             this.btnContractAndCDAImport.SubItemsExpandWidth = 14;
-            this.btnContractAndCDAImport.Text = "导入主合同及额度通知书";
+            this.btnContractAndCDAImport.Text = "导入保理合同及额度通知书";
             this.btnContractAndCDAImport.Click += new System.EventHandler(this.ImportContractAndCDA);
             // 
             // btnInvoicesImport
@@ -1154,13 +1145,13 @@ namespace CMBC.EasyFactor
             // 
             // itemReport
             // 
-            this.itemReport.Checked = true;
             this.itemReport.Name = "itemReport";
             this.itemReport.Panel = this.ribbonPanelReport;
             this.itemReport.Text = "报表";
             // 
             // itemHelp
             // 
+            this.itemHelp.Checked = true;
             this.itemHelp.Name = "itemHelp";
             this.itemHelp.Panel = this.ribbonPanelHelp;
             this.itemHelp.Text = "帮助";
@@ -1443,7 +1434,6 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnDepartmentImport;
         private DevComponents.DotNetBar.ButtonItem btnUserImport;
         private DevComponents.DotNetBar.ButtonItem btnCaseImport;
-        private DevComponents.DotNetBar.ButtonItem btnCreditCoverImport;
         private DevComponents.DotNetBar.RibbonBar ribbonBarInvoiceImport;
         private DevComponents.DotNetBar.ButtonItem btnAssignImport;
         private DevComponents.DotNetBar.ButtonItem btnFinanceImport;
