@@ -89,91 +89,62 @@ namespace CMBC.EasyFactor.ARMgr
 
         private void DeleteInvoice(object sender, EventArgs e)
         {
-            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
+            if (this.dgvInvoices.CurrentCell == null)
             {
                 return;
             }
 
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
-            if (ino != null)
+            Invoice selectedInvoice = (Invoice)this.bs.List[this.dgvInvoices.CurrentCell.RowIndex];
+            if (MessageBox.Show("是否打算删除发票: " + selectedInvoice.InvoiceNo, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
-                if (selectedInvoice != null)
+                App.Current.DbContext.Invoices.DeleteOnSubmit(selectedInvoice);
+                try
                 {
-                    if (MessageBox.Show("是否打算删除发票: " + selectedInvoice.InvoiceNo, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-                    {
-                        App.Current.DbContext.Invoices.DeleteOnSubmit(selectedInvoice);
-                        try
-                        {
-                            App.Current.DbContext.SubmitChanges();
-                        }
-                        catch (Exception e1)
-                        {
-                            MessageBox.Show("删除失败," + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        dgvInvoices.Rows.RemoveAt(dgvInvoices.SelectedRows[0].Index);
-                    }
-
+                    App.Current.DbContext.SubmitChanges();
                 }
+                catch (Exception e1)
+                {
+                    MessageBox.Show("删除失败," + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                dgvInvoices.Rows.RemoveAt(dgvInvoices.CurrentCell.RowIndex);
             }
         }
 
         private void DetailCase(object sender, EventArgs e)
         {
-            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
+            if (this.dgvInvoices.CurrentCell == null)
             {
                 return;
             }
 
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
-            if (ino != null)
-            {
-                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
-                if (selectedInvoice != null)
-                {
-                    CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.CDA.Case, CaseDetail.OpCaseType.DETAIL_CASE);
-                    caseDetail.ShowDialog(this);
-                }
-            }
+            Invoice selectedInvoice = (Invoice)this.bs.List[this.dgvInvoices.CurrentCell.RowIndex];
+            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.CDA.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            caseDetail.ShowDialog(this);
         }
 
         private void DetailCDA(object sender, EventArgs e)
         {
-            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
+            if (this.dgvInvoices.CurrentCell == null)
             {
                 return;
             }
 
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
-            if (ino != null)
-            {
-                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
-                if (selectedInvoice != null)
-                {
-                    CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
-                    cdaDetail.ShowDialog(this);
-                }
-            }
+            Invoice selectedInvoice = (Invoice)this.bs.List[this.dgvInvoices.CurrentCell.RowIndex];
+            CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
+            cdaDetail.ShowDialog(this);
         }
 
         private void DetailInvoice(object sender, EventArgs e)
         {
-            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
+            if (this.dgvInvoices.CurrentCell == null)
             {
                 return;
             }
 
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
-            if (ino != null)
-            {
-                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
-                if (selectedInvoice != null)
-                {
-                    InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
-                    invoiceDetail.ShowDialog(this);
-                }
-            }
+            Invoice selectedInvoice = (Invoice)this.bs.List[this.dgvInvoices.CurrentCell.RowIndex];
+            InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
+            invoiceDetail.ShowDialog(this);
         }
 
         void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -208,21 +179,14 @@ namespace CMBC.EasyFactor.ARMgr
 
         private void InvoiceFlaw(object sender, EventArgs e)
         {
-            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
+            if (this.dgvInvoices.CurrentCell == null)
             {
                 return;
             }
 
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
-            if (ino != null)
-            {
-                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
-                if (selectedInvoice != null)
-                {
-                    InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.FLAW);
-                    invoiceDetail.ShowDialog(this);
-                }
-            }
+            Invoice selectedInvoice = (Invoice)this.bs.List[this.dgvInvoices.CurrentCell.RowIndex];
+            InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.FLAW);
+            invoiceDetail.ShowDialog(this);
         }
 
         /// <summary>

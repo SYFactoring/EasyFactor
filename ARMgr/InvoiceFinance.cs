@@ -20,14 +20,14 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoiceFinance : UserControl
     {
-        #region Fields (2)
+		#region Fields (2) 
 
         private CDA _CDA;
         private ARCaseBasic caseBasic;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Constructors (1)
+		#region Constructors (1) 
 
         public InvoiceFinance(ARCaseBasic caseBasic)
         {
@@ -60,9 +60,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (1)
+		#region Properties (1) 
 
         /// <summary>
         /// 
@@ -72,16 +72,15 @@ namespace CMBC.EasyFactor.ARMgr
             set
             {
                 this._CDA = value;
-                this.invoiceFinanceBatchBindingSource.DataSource = new InvoiceFinanceBatch();
-                this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.FinanceAmount.HasValue == false).ToList();
+                this.NewFinanceBatch(null, null);
             }
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (11)
+		#region Methods (13) 
 
-        // Public Methods (2) 
+		// Public Methods (2) 
 
         /// <summary>
         /// 
@@ -111,13 +110,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoiceFinanceBatchBindingSource.DataSource = typeof(InvoiceFinanceBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
-        // Private Methods (9) 
+		// Private Methods (11) 
 
         private void CaculateCurrentFinanceAmount()
         {
             IList invoiceList = this.invoiceBindingSource.List;
             double currentFinanceAmount = 0;
-            for (int i = 0; i < this.dgvInvoices.Rows.Count; i++)
+            for (int i = 0; i < invoiceList.Count; i++)
             {
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
@@ -142,21 +141,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e">Event Args</param>
         private void DetailInvoice(object sender, System.EventArgs e)
         {
-            if (this.dgvInvoices.SelectedRows.Count == 0)
+            if (this.dgvInvoices.CurrentCell == null)
             {
                 return;
             }
 
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
-            if (ino != null)
-            {
-                Invoice selectedInvoice = ((InvoiceFinanceBatch)this.invoiceFinanceBatchBindingSource.DataSource).Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
-                if (selectedInvoice != null)
-                {
-                    InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
-                    invoiceDetail.ShowDialog(this);
-                }
-            }
+            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
+            InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
+            invoiceDetail.ShowDialog(this);
         }
 
         private void dgvInvoices_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -232,10 +224,19 @@ namespace CMBC.EasyFactor.ARMgr
 
         private void dgvInvoices_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1)
+            {
+                return;
+            }
             if (this.dgvInvoices.Columns[e.ColumnIndex] == colFinanceAmount)
             {
                 CaculateCurrentFinanceAmount();
             }
+        }
+
+        private void dgvInvoices_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DetailInvoice(null, null);
         }
 
         /// <summary>
@@ -247,6 +248,16 @@ namespace CMBC.EasyFactor.ARMgr
         {
             ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE);
             importForm.ShowDialog(this);
+        }
+
+        private void NewFinanceBatch(object sender, EventArgs e)
+        {
+            this.tbCurrentFinanceAmount.Text = string.Empty;
+            InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
+            financeBatch.BatchCurrency = this._CDA.Case.InvoiceCurrency;
+            financeBatch.FinancePeriodBegin = DateTime.Now;
+            this.invoiceFinanceBatchBindingSource.DataSource = financeBatch;
+            this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.FinanceAmount.HasValue == false).ToList();
         }
 
         private void SaveFinanceBatch(object sender, EventArgs e)
@@ -267,7 +278,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeBatch.CDA = this._CDA;
 
             IList invoiceList = this.invoiceBindingSource.List;
-            for (int i = 0; i < this.dgvInvoices.Rows.Count; i++)
+            for (int i = 0; i < invoiceList.Count; i++)
             {
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
@@ -315,6 +326,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

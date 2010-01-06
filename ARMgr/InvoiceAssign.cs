@@ -102,21 +102,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e">Event Args</param>
         private void DetailInvoice(object sender, System.EventArgs e)
         {
-            if (this.dgvInvoices.SelectedRows.Count == 0)
+            if (this.dgvInvoices.CurrentCell == null)
             {
                 return;
             }
 
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
-            if (ino != null)
-            {
-                Invoice selectedInvoice = ((InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource).Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
-                if (selectedInvoice != null)
-                {
-                    InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
-                    invoiceDetail.ShowDialog(this);
-                }
-            }
+            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
+            InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
+            invoiceDetail.ShowDialog(this);
         }
 
         /// <summary>
@@ -128,11 +121,10 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this.dgvInvoices.Rows[e.RowIndex].IsNewRow)
             {
-                IList invoiceList = this.invoiceBindingSource.List;
-                Invoice invoice = (Invoice)invoiceList[e.RowIndex];
+                Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
                 InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
-                invoice.InvoiceCurrency = assignBatch.BatchCurrency;
-                invoice.AssignDate = DateTime.Now;
+                selectedInvoice.InvoiceCurrency = assignBatch.BatchCurrency;
+                selectedInvoice.AssignDate = DateTime.Now;
             }
         }
 
@@ -179,20 +171,19 @@ namespace CMBC.EasyFactor.ARMgr
             if (e.RowIndex == -1)
                 return;
 
-            IList invoiceList = this.invoiceBindingSource.List;
-            Invoice invoice = (Invoice)invoiceList[e.RowIndex];
+            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
             if (this.dgvInvoices.Columns[e.ColumnIndex] == colInvoiceAmount)
             {
-                if (!invoice.AssignAmount.HasValue)
+                if (!selectedInvoice.AssignAmount.HasValue)
                 {
-                    invoice.AssignAmount = invoice.InvoiceAmount;
+                    selectedInvoice.AssignAmount = selectedInvoice.InvoiceAmount;
                 }
             }
             else if (this.dgvInvoices.Columns[e.ColumnIndex] == colInvoiceDate)
             {
-                if (!invoice.ValueDate.HasValue)
+                if (!selectedInvoice.ValueDate.HasValue)
                 {
-                    invoice.ValueDate = invoice.InvoiceDate;
+                    selectedInvoice.ValueDate = selectedInvoice.InvoiceDate;
                 }
             }
         }
@@ -220,21 +211,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e">Event Args</param>
         private void Flaw(object sender, System.EventArgs e)
         {
-            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
+            if (this.dgvInvoices.CurrentCell == null)
             {
                 return;
             }
 
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.CurrentCell.RowIndex].Value;
-            if (ino != null)
-            {
-                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
-                if (selectedInvoice != null)
-                {
-                    InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.FLAW);
-                    invoiceDetail.ShowDialog(this);
-                }
-            }
+            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
+            InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.FLAW);
+            invoiceDetail.ShowDialog(this);
         }
 
         /// <summary>

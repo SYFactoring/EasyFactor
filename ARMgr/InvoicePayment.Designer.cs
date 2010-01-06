@@ -82,6 +82,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelPaymentBatch = new DevComponents.DotNetBar.PanelEx();
+            this.btnPaymentBatchNew = new DevComponents.DotNetBar.ButtonX();
             this.tbPaymentType = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.invoicePaymentBatchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnPaymentBatchSave = new DevComponents.DotNetBar.ButtonX();
@@ -199,6 +200,7 @@
             // 
             this.panelPaymentBatch.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelPaymentBatch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelPaymentBatch.Controls.Add(this.btnPaymentBatchNew);
             this.panelPaymentBatch.Controls.Add(this.tbPaymentType);
             this.panelPaymentBatch.Controls.Add(lblPaymentType);
             this.panelPaymentBatch.Controls.Add(this.btnPaymentBatchSave);
@@ -224,6 +226,18 @@
             this.panelPaymentBatch.Style.GradientAngle = 90;
             this.panelPaymentBatch.TabIndex = 0;
             // 
+            // btnPaymentBatchNew
+            // 
+            this.btnPaymentBatchNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnPaymentBatchNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnPaymentBatchNew.Location = new System.Drawing.Point(599, 38);
+            this.btnPaymentBatchNew.Name = "btnPaymentBatchNew";
+            this.btnPaymentBatchNew.Size = new System.Drawing.Size(47, 23);
+            this.btnPaymentBatchNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnPaymentBatchNew.TabIndex = 12;
+            this.btnPaymentBatchNew.Text = "新建";
+            this.btnPaymentBatchNew.Click += new System.EventHandler(this.NewPaymentBatch);
+            // 
             // tbPaymentType
             // 
             // 
@@ -244,9 +258,9 @@
             // 
             this.btnPaymentBatchSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnPaymentBatchSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnPaymentBatchSave.Location = new System.Drawing.Point(602, 32);
+            this.btnPaymentBatchSave.Location = new System.Drawing.Point(599, 9);
             this.btnPaymentBatchSave.Name = "btnPaymentBatchSave";
-            this.btnPaymentBatchSave.Size = new System.Drawing.Size(75, 23);
+            this.btnPaymentBatchSave.Size = new System.Drawing.Size(47, 23);
             this.btnPaymentBatchSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnPaymentBatchSave.TabIndex = 11;
             this.btnPaymentBatchSave.Text = "保存";
@@ -485,10 +499,11 @@
             this.dgvInvoices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvInvoices.Location = new System.Drawing.Point(0, 109);
             this.dgvInvoices.Name = "dgvInvoices";
-            this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvInvoices.Size = new System.Drawing.Size(680, 417);
             this.dgvInvoices.TabIndex = 2;
             this.dgvInvoices.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellValueChanged);
+            this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
             this.dgvInvoices.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellContentClick);
             // 
             // colCheckBox
@@ -642,6 +657,7 @@
             this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
             this.menuItemInvoiceDetail.Size = new System.Drawing.Size(122, 22);
             this.menuItemInvoiceDetail.Text = "详细信息";
+            this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
             // 
             // toolStripSeparator1
             // 
@@ -650,12 +666,14 @@
             // 
             // menuItemPaymentBatchExport
             // 
+            this.menuItemPaymentBatchExport.Enabled = false;
             this.menuItemPaymentBatchExport.Name = "menuItemPaymentBatchExport";
             this.menuItemPaymentBatchExport.Size = new System.Drawing.Size(122, 22);
             this.menuItemPaymentBatchExport.Text = "导出批次";
             // 
             // menuItemPaymentBatchImport
             // 
+            this.menuItemPaymentBatchImport.Enabled = false;
             this.menuItemPaymentBatchImport.Name = "menuItemPaymentBatchImport";
             this.menuItemPaymentBatchImport.Size = new System.Drawing.Size(122, 22);
             this.menuItemPaymentBatchImport.Text = "导入批次";
@@ -729,6 +747,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInterest;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInterestDate;
+        private DevComponents.DotNetBar.ButtonX btnPaymentBatchNew;
 
 
     }
