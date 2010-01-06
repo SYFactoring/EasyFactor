@@ -304,7 +304,7 @@ namespace CMBC.EasyFactor.Utils
                 {
                     int column = 8;
                     string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
-                    if (invoiceNo.Equals(string.Equals))
+                    if (invoiceNo.Equals(string.Empty))
                     {
                         continue;
                     }
