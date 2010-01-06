@@ -828,6 +828,7 @@ namespace CMBC.EasyFactor.Utils
                     column++;//发票币别
                     cda.IsRecoarse = "Y".Equals(valueArray[row, column++]);
                     cda.IsNotice = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.AssignType = String.Format("{0:G}", valueArray[row, column++]);
                     cda.CreditCoverCurr = String.Format("{0:G}", valueArray[row, column++]);
                     cda.CreditCover = (System.Nullable<double>)valueArray[row, column++];
                     cda.CreditCoverPeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++];
