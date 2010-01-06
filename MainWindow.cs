@@ -31,6 +31,7 @@ namespace CMBC.EasyFactor
         public MainWindow()
         {
             InitializeComponent();
+            
             this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
         }

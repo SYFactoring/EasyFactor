@@ -59,7 +59,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     foreach (CDA cda in curCase.CDAs)
                     {
-                        double? temp = ARCaseBasic.CaculateFinanceOutstanding(cda);
+                        double? temp = cda.FinanceOutstanding;
                         if (temp.HasValue)
                         {
                             if (total == null)

@@ -100,7 +100,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Enums
 
-        #region Constructors (4)
+        #region Constructors (6)
 
         /// <summary>
         /// Initializes a new instance of the ClientDetail class
@@ -205,14 +205,38 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientDetail(Client client, OpContractType opContractType)
             : this(client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, opContractType)
         {
+        }
+
+        public ClientDetail(ClientCreditLine creditLine, OpClientCreditLineType opClientCreditLineType)
+            : this(creditLine.Client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT)
+        {
+            this.tabControl.SelectedTab = this.tabItemClientCreditLine;
+            if (opClientCreditLineType == OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE || opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
+            {
+                this.clientCreditLineBindingSource.DataSource = creditLine;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="opContractType"></param>
+        public ClientDetail(Contract contract, OpContractType opContractType)
+            : this(contract.Client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, opContractType)
+        {
             this.tabControl.SelectedTab = this.tabItemContract;
+            if (opContractType == OpContractType.DETAIL_CONTRACT || opContractType == OpContractType.UPDATE_CONTRACT)
+            {
+                this.contractBindingSource.DataSource = contract;
+            }
         }
 
         #endregion Constructors
 
-        #region Methods (25)
+        #region Methods (33)
 
-        // Private Methods (25) 
+        // Private Methods (33) 
 
         private void cbDepartments_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
         {
@@ -266,6 +290,113 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Close();
         }
 
+        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.isGroupCheckBox.Checked)
+            {
+                if (e.ControlToValidate.Text == string.Empty)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator2_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.isGroupCheckBox.Checked)
+            {
+                if (e.ControlToValidate.Text == string.Empty)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator3_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.isGroupCheckBox.Checked)
+            {
+                if (e.ControlToValidate.Text == string.Empty)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator4_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.freezeDateDateTimePicker.Enabled)
+            {
+                if (e.ControlToValidate.Text == string.Empty)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator5_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.unfreezeDateDateTimePicker.Enabled)
+            {
+                if (e.ControlToValidate.Text == string.Empty)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator6_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.tbContractCode.Text.Length == 10)
+            {
+                e.IsValid = true;
+            }
+            else
+            {
+                e.IsValid = false;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -290,7 +421,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 return;
             }
-
+            if (MessageBox.Show("是否打算删除此额度信息", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            {
+                return;
+            }
             bool isDeleteOK = true;
             try
             {
@@ -332,10 +466,26 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 return;
             }
+            if (MessageBox.Show("是否打算删除保理合同: " + contract.ContractCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            {
+                return;
+            }
 
             bool isDeleteOK = true;
             try
             {
+                var CDAList = App.Current.DbContext.CDAs.Where(c => c.CDACode.StartsWith(contract.ContractCode));
+                foreach (CDA cda in CDAList)
+                {
+                    foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
+                    {
+                        App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
+                    }
+                    App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
+                    App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
+                    App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
+                }
+                App.Current.DbContext.CDAs.DeleteAllOnSubmit(CDAList);
                 App.Current.DbContext.Contracts.DeleteOnSubmit(contract);
                 App.Current.DbContext.SubmitChanges();
             }
@@ -351,6 +501,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.dgvContracts.DataSource = client.Contracts.ToList();
                 this.contractBindingSource.DataSource = typeof(Contract);
                 this.SetContractEditable(false);
+            }
+        }
+
+        private void diContractValueDate_ValueChanged(object sender, EventArgs e)
+        {
+            Contract contract = this.contractBindingSource.DataSource as Contract;
+            if (!contract.ContractDueDate.HasValue)
+            {
+                contract.ContractDueDate = this.diContractValueDate.Value.AddYears(1);
             }
         }
 
@@ -439,6 +598,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.contractBindingSource.DataSource = new Contract();
             this.opContractType = OpContractType.NEW_CONTRACT;
             this.UpdateContractControlStatus();
+        }
+
+        private void periodBeginDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            ClientCreditLine creditLine = this.clientCreditLineBindingSource.DataSource as ClientCreditLine;
+            if (!creditLine.PeriodEnd.HasValue)
+            {
+                creditLine.PeriodEnd = this.periodBeginDateTimePicker.Value.AddYears(1);
+            }
         }
 
         /// <summary>
@@ -1105,130 +1273,5 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         #endregion Methods
-
-        private void customValidator2_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            if (this.isGroupCheckBox.Checked)
-            {
-                if (e.ControlToValidate.Text == string.Empty)
-                {
-                    e.IsValid = false;
-                }
-                else
-                {
-                    e.IsValid = true;
-                }
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
-
-        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            if (this.isGroupCheckBox.Checked)
-            {
-                if (e.ControlToValidate.Text == string.Empty)
-                {
-                    e.IsValid = false;
-                }
-                else
-                {
-                    e.IsValid = true;
-                }
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
-
-        private void customValidator3_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            if (this.isGroupCheckBox.Checked)
-            {
-                if (e.ControlToValidate.Text == string.Empty)
-                {
-                    e.IsValid = false;
-                }
-                else
-                {
-                    e.IsValid = true;
-                }
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
-
-        private void customValidator4_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            if (this.freezeDateDateTimePicker.Enabled)
-            {
-                if (e.ControlToValidate.Text == string.Empty)
-                {
-                    e.IsValid = false;
-                }
-                else
-                {
-                    e.IsValid = true;
-                }
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
-
-        private void customValidator5_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            if (this.unfreezeDateDateTimePicker.Enabled)
-            {
-                if (e.ControlToValidate.Text == string.Empty)
-                {
-                    e.IsValid = false;
-                }
-                else
-                {
-                    e.IsValid = true;
-                }
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
-
-        private void customValidator6_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            if (this.tbContractCode.Text.Length == 10)
-            {
-                e.IsValid = true;
-            }
-            else
-            {
-                e.IsValid = false;
-            }
-        }
-
-        private void periodBeginDateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-            ClientCreditLine creditLine = this.clientCreditLineBindingSource.DataSource as ClientCreditLine;
-            if (!creditLine.PeriodEnd.HasValue)
-            {
-                creditLine.PeriodEnd = this.periodBeginDateTimePicker.Value.AddYears(1);
-            }
-        }
-
-        private void diContractValueDate_ValueChanged(object sender, EventArgs e)
-        {
-            Contract contract = this.contractBindingSource.DataSource as Contract;
-            if (!contract.ContractDueDate.HasValue)
-            {
-                contract.ContractDueDate = this.diContractValueDate.Value.AddYears(1);
-            }
-        }
     }
 }

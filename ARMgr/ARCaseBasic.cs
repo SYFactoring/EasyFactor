@@ -107,132 +107,16 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Constructors
 
-        #region Methods (7)
+        #region Methods (3)
 
-        // Public Methods (5) 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cda"></param>
-        /// <returns></returns>
-        public static System.Nullable<double> CaculateAROutstanding(CDA cda)
-        {
-            double? total = null;
-            foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
-            {
-                foreach (Invoice invoice in assignBatch.Invoices)
-                {
-                    if (invoice.AssignOutstanding.HasValue)
-                    {
-                        if (total == null)
-                        {
-                            total = 0;
-                        }
-                        total += invoice.AssignOutstanding.Value;
-                    }
-                }
-            }
-            return total;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cda"></param>
-        /// <returns></returns>
-        public static System.Nullable<double> CaculateCreditCoverOutstanding(CDA cda)
-        {
-            if (cda.CreditCover == null)
-            {
-                return null;
-            }
-            if (cda.CreditCover == 0)
-            {
-                return 0;
-            }
-            double? total = null;
-            foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
-            {
-                foreach (Invoice invoice in assignBatch.Invoices)
-                {
-                    if (invoice.AssignOutstanding.HasValue)
-                    {
-                        if (total == null)
-                        {
-                            total = 0;
-                        }
-                        total += invoice.AssignOutstanding.Value;
-                    }
-                }
-            }
-            return cda.CreditCover - total;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cda"></param>
-        /// <returns></returns>
-        public static System.Nullable<double> CaculateCreditLineOutstanding(CDA cda)
-        {
-            if (cda.FinanceLine == null)
-            {
-                return null;
-            }
-            if (cda.FinanceLine == 0)
-            {
-                return 0;
-            }
-            double? total = null;
-            foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
-            {
-                foreach (Invoice invoice in assignBatch.Invoices)
-                {
-                    if (invoice.FinanceOutstanding.HasValue)
-                    {
-                        if (total == null)
-                        {
-                            total = 0;
-                        }
-                        total += invoice.FinanceOutstanding.Value;
-                    }
-                }
-            }
-            return cda.FinanceLine - total;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cda"></param>
-        /// <returns></returns>
-        public static System.Nullable<double> CaculateFinanceOutstanding(CDA cda)
-        {
-            double? total = null;
-            foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
-            {
-                foreach (Invoice invoice in assignBatch.Invoices)
-                {
-                    if (invoice.FinanceOutstanding.HasValue)
-                    {
-                        if (total == null)
-                        {
-                            total = 0;
-                        }
-                        total += invoice.FinanceOutstanding.Value;
-                    }
-                }
-            }
-            return total;
-        }
+        // Public Methods (1) 
 
         public void CaculateOutstanding(CDA cda)
         {
-            this.tbCreditCoverOutstanding.Text = String.Format("{0:N2}", CaculateCreditCoverOutstanding(cda));
-            this.tbAROutstanding.Text = String.Format("{0:N2}", CaculateAROutstanding(cda));
-            this.tbFinanceCreditLineOutstanding.Text = String.Format("{0:N2}", CaculateCreditLineOutstanding(cda));
-            this.tbFinanceOutstanding.Text = String.Format("{0:N2}", CaculateFinanceOutstanding(cda));
+            this.tbCreditCoverOutstanding.Text = String.Format("{0:N2}", cda.CreditCoverOutstanding);
+            this.tbAROutstanding.Text = String.Format("{0:N2}", cda.AROutstanding);
+            this.tbFinanceCreditLineOutstanding.Text = String.Format("{0:N2}", cda.CreditLineOutstanding);
+            this.tbFinanceOutstanding.Text = String.Format("{0:N2}", cda.FinanceOutstanding);
         }
         // Private Methods (2) 
 

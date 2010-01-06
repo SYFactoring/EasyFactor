@@ -146,6 +146,7 @@
             DevComponents.DotNetBar.LabelX assignTypeLabel;
             DevComponents.DotNetBar.LabelX lblIsNotice;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
+            DevComponents.DotNetBar.LabelX lblReviewNo;
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -217,6 +218,7 @@
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.tbReviewNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -255,6 +257,7 @@
             lblCDACode = new DevComponents.DotNetBar.LabelX();
             assignTypeLabel = new DevComponents.DotNetBar.LabelX();
             lblIsNotice = new DevComponents.DotNetBar.LabelX();
+            lblReviewNo = new DevComponents.DotNetBar.LabelX();
             this.groupPanelCase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.groupPanelCreditCover.SuspendLayout();
@@ -751,9 +754,9 @@
             // 
             // 
             contractCodeLabel.BackgroundStyle.Class = "";
-            contractCodeLabel.Location = new System.Drawing.Point(529, 4);
+            contractCodeLabel.Location = new System.Drawing.Point(367, 66);
             contractCodeLabel.Name = "contractCodeLabel";
-            contractCodeLabel.Size = new System.Drawing.Size(72, 16);
+            contractCodeLabel.Size = new System.Drawing.Size(84, 16);
             contractCodeLabel.TabIndex = 6;
             contractCodeLabel.Text = "保理合同编号:";
             // 
@@ -803,6 +806,8 @@
             // 
             this.groupPanelCase.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCase.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelCase.Controls.Add(this.tbReviewNo);
+            this.groupPanelCase.Controls.Add(lblReviewNo);
             this.groupPanelCase.Controls.Add(this.invoiceCurrencyTextBox);
             this.groupPanelCase.Controls.Add(this.transactionTypeTextBox);
             this.groupPanelCase.Controls.Add(this.companyNameENTextBox);
@@ -905,7 +910,7 @@
             // 
             // 
             this.contractCodeTextBox.Border.Class = "TextBoxBorder";
-            this.contractCodeTextBox.Location = new System.Drawing.Point(613, 1);
+            this.contractCodeTextBox.Location = new System.Drawing.Point(456, 65);
             this.contractCodeTextBox.Name = "contractCodeTextBox";
             this.contractCodeTextBox.Size = new System.Drawing.Size(100, 20);
             this.contractCodeTextBox.TabIndex = 7;
@@ -914,7 +919,7 @@
             // 
             this.btnCaseSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCaseSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseSelect.Location = new System.Drawing.Point(713, 44);
+            this.btnCaseSelect.Location = new System.Drawing.Point(720, 23);
             this.btnCaseSelect.Name = "btnCaseSelect";
             this.btnCaseSelect.Size = new System.Drawing.Size(39, 40);
             this.btnCaseSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1884,6 +1889,32 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
+            // tbReviewNo
+            // 
+            // 
+            // 
+            // 
+            this.tbReviewNo.Border.Class = "TextBoxBorder";
+            this.tbReviewNo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.ReviewNo", true));
+            this.tbReviewNo.Location = new System.Drawing.Point(456, 87);
+            this.tbReviewNo.Name = "tbReviewNo";
+            this.tbReviewNo.Size = new System.Drawing.Size(100, 20);
+            this.tbReviewNo.TabIndex = 22;
+            // 
+            // lblReviewNo
+            // 
+            lblReviewNo.AutoSize = true;
+            lblReviewNo.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblReviewNo.BackgroundStyle.Class = "";
+            lblReviewNo.Location = new System.Drawing.Point(355, 89);
+            lblReviewNo.Name = "lblReviewNo";
+            lblReviewNo.Size = new System.Drawing.Size(97, 16);
+            lblReviewNo.TabIndex = 21;
+            lblReviewNo.Text = "协查意见书编号:";
+            // 
             // CDADetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1924,5 +1955,6 @@
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsRecoarse;
         private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbIsNotice;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbReviewNo;
     }
 }

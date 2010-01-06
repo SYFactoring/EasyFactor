@@ -146,7 +146,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
                 if (selectedContract != null)
                 {
-                    ClientDetail clientDetail = new ClientDetail(selectedContract.Client, ClientDetail.OpContractType.DETAIL_CONTRACT);
+                    ClientDetail clientDetail = new ClientDetail(selectedContract, ClientDetail.OpContractType.DETAIL_CONTRACT);
                     clientDetail.ShowDialog(this);
                 }
             }

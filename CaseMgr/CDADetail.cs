@@ -233,7 +233,11 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 this.contractCodeTextBox.Text = contract.ContractCode;
             }
-            this.tbHighestFinance.Text = String.Format("{0:N2}", cda.Case.SellerClient.FinanceCreditLine.CreditLine);
+            ClientCreditLine creditLine = cda.Case.SellerClient.FinanceCreditLine;
+            if (creditLine != null)
+            {
+                this.tbHighestFinance.Text = String.Format("{0:N2}", creditLine.CreditLine);
+            }
         }
 
         /// <summary>

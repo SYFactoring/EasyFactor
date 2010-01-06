@@ -248,9 +248,9 @@ namespace CMBC.EasyFactor.Report
                         sheet.Cells[row++, 2] = factor.ToString();
                     }
                     sheet.Cells[row, 1] = "信用风险额度：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", ARCaseBasic.CaculateCreditCoverOutstanding(cda));
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.CreditCoverOutstanding);
                     sheet.Cells[row, 1] = "应收账款余额：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", ARCaseBasic.CaculateAROutstanding(cda));
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.AROutstanding);
 
                     row++;
                     sheet.Cells[row, 1] = "发票号";
@@ -471,13 +471,13 @@ namespace CMBC.EasyFactor.Report
                         sheet.Cells[row++, 2] = factor.ToString();
                     }
                     sheet.Cells[row, 1] = "信用风险额度：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", ARCaseBasic.CaculateCreditCoverOutstanding(cda));
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.CreditCoverOutstanding);
                     sheet.Cells[row, 1] = "应收账款余额：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", ARCaseBasic.CaculateAROutstanding(cda));
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.AROutstanding);
                     sheet.Cells[row, 1] = "预付款额度：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", ARCaseBasic.CaculateCreditLineOutstanding(cda));
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.CreditLineOutstanding);
                     sheet.Cells[row, 1] = "融资余额：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", ARCaseBasic.CaculateFinanceOutstanding(cda));
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.FinanceOutstanding);
 
                     row++;
                     sheet.Cells[row, 1] = "发票号";
