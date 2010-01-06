@@ -25,6 +25,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private Case curCase;
 
+        private OpARType opARType;
+
         #endregion Fields
 
         #region Enums (1)
@@ -76,6 +78,7 @@ namespace CMBC.EasyFactor.ARMgr
         public ARCaseBasic(OpARType opARType)
         {
             InitializeComponent();
+            this.opARType = opARType;
             UserControl uc;
             switch (opARType)
             {
@@ -182,6 +185,12 @@ namespace CMBC.EasyFactor.ARMgr
                 this.tbDueDate.Text = String.Format("{0:d}", cda.FinanceLinePeriodEnd);
 
                 CaculateOutstanding(cda);
+
+                if (!cda.FinanceLine.HasValue && this.opARType == OpARType.InvoiceFinance)
+                {
+                    MessageBox.Show("本案无预付款额度，不能融资。", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
 
                 Control control = this.panelInvoiceMgr.Controls[0];
                 if (control is InvoiceAssign)

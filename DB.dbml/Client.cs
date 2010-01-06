@@ -81,7 +81,11 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.FinanceCreditLine.CreditLine - this.FinanceOutstanding;
+                if (this.FinanceCreditLine == null || !this.FinanceCreditLine.CreditLine.HasValue)
+                {
+                    return null;
+                }
+                return this.FinanceCreditLine.CreditLine - this.FinanceOutstanding.GetValueOrDefault();
             }
         }
 

@@ -54,13 +54,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public System.Nullable<double> AssignOutstanding
+        public double AssignOutstanding
         {
             get
             {
-                if (!this.AssignAmount.HasValue)
-                    return null;
-                return this.AssignAmount.Value - this.PaymentAmount.GetValueOrDefault();
+                return this.AssignAmount - this.PaymentAmount.GetValueOrDefault();
             }
         }
 
@@ -89,19 +87,12 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public System.Nullable<double> AROverDueDays
+        public double AROverDueDays
         {
             get
             {
-                if (this.DueDate.HasValue)
-                {
-                    TimeSpan duedays = DateTime.Now - this.DueDate.Value;
-                    return duedays.TotalDays;
-                }
-                else
-                {
-                    return null;
-                }
+                TimeSpan duedays = DateTime.Now - this.DueDate;
+                return duedays.TotalDays;
             }
         }
 

@@ -105,18 +105,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="cda"></param>
         /// <returns></returns>
-        public static string GeneratePaymentBatchNo(CDA cda, System.Nullable<DateTime> date)
+        public static string GeneratePaymentBatchNo(DateTime date)
         {
-            int batchCount = 0;
-            foreach (CDA c in cda.Case.CDAs)
-            {
-                batchCount += c.InvoicePaymentBatches.Count;
-            }
-            if (date == null)
-            {
-                date = DateTime.Now;
-            }
-            string paymentNo = String.Format("PAY{0:G}{1:yyyyMMdd}-{2:d2}", cda.CaseCode, date, batchCount + 1);
+            DateTime begin = new DateTime(date.Year, date.Month, date.Day);
+            DateTime end = begin.AddDays(1);
+            int batchCount = App.Current.DbContext.InvoicePaymentBatches.Count(batch => batch.PaymentDate > begin && batch.PaymentDate < end);
+            string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return paymentNo;
         }
 
@@ -383,7 +377,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             if (paymentBatch.PaymentBatchNo == null)
             {
-                paymentBatch.PaymentBatchNo = GeneratePaymentBatchNo(this._CDA, DateTime.Now);
+                paymentBatch.PaymentBatchNo = GeneratePaymentBatchNo(DateTime.Now);
             }
             try
             {

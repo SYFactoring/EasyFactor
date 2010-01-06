@@ -12,23 +12,17 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 转让余额
         /// </summary>
-        public System.Nullable<double> AssignOutstanding
+        public double AssignOutstanding
         {
             get
             {
-                double? total = null;
+                double total = 0;
                 foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
                 {
                     foreach (Invoice invoice in assignBatch.Invoices)
                     {
-                        if (invoice.AssignOutstanding.HasValue)
-                        {
-                            if (total == null)
-                            {
-                                total = 0;
-                            }
-                            total += invoice.AssignOutstanding.Value;
-                        }
+
+                        total += invoice.AssignOutstanding;
                     }
                 }
                 return total;
@@ -91,11 +85,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     return null;
                 }
-                if (this.CreditCover == 0)
-                {
-                    return 0;
-                }
-                return this.CreditCover - this.AssignOutstanding.GetValueOrDefault();
+                return this.CreditCover - this.AssignOutstanding;
             }
         }
 
@@ -109,10 +99,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 if (!this.FinanceLine.HasValue)
                 {
                     return null;
-                }
-                if (this.FinanceLine == 0)
-                {
-                    return 0;
                 }
                 return this.FinanceLine - this.FinanceOutstanding.GetValueOrDefault();
             }

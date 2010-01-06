@@ -62,7 +62,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (15)
+        #region Methods (16)
 
         // Public Methods (2) 
 
@@ -71,18 +71,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="cda"></param>
         /// <returns></returns>
-        public static string GenerateAssignBatchNo(CDA cda, System.Nullable<DateTime> date)
+        public static string GenerateAssignBatchNo(DateTime date)
         {
-            int batchCount = 0;
-            foreach (CDA c in cda.Case.CDAs)
-            {
-                batchCount += c.InvoiceAssignBatches.Count;
-            }
-            if (date == null)
-            {
-                date = DateTime.Now;
-            }
-            string assignNo = String.Format("ASS{0:G}{1:yyyyMMdd}-{2:d2}", cda.CaseCode, date, batchCount + 1);
+            DateTime begin = new DateTime(date.Year, date.Month, date.Day);
+            DateTime end = begin.AddDays(1);
+            int batchCount = App.Current.DbContext.InvoiceAssignBatches.Count(batch => batch.BatchDate > begin && batch.BatchDate < end);
+            string assignNo = String.Format("ASS{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return assignNo;
         }
 
@@ -98,7 +92,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoiceBindingSource.DataSource = typeof(Invoice);
             this.invoiceAssignBatchBindingSource.DataSource = typeof(InvoiceAssignBatch);
         }
-        // Private Methods (13) 
+        // Private Methods (14) 
 
         /// <summary>
         /// Show detail info of selected inovice
@@ -149,7 +143,14 @@ namespace CMBC.EasyFactor.ARMgr
             if (col == colAssignDate || col == colDueDate || col == colInvoiceDate)
             {
                 DateTime date = (DateTime)e.Value;
-                e.Value = date.ToString("yyyyMMdd");
+                if (date == default(DateTime))
+                {
+                    e.Value = "";
+                }
+                else
+                {
+                    e.Value = date.ToString("yyyyMMdd");
+                }
                 e.FormattingApplied = true;
             }
         }
@@ -219,17 +220,7 @@ namespace CMBC.EasyFactor.ARMgr
             Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
             if (this.dgvInvoices.Columns[e.ColumnIndex] == colInvoiceAmount)
             {
-                if (!selectedInvoice.AssignAmount.HasValue)
-                {
-                    selectedInvoice.AssignAmount = selectedInvoice.InvoiceAmount;
-                }
-            }
-            else if (this.dgvInvoices.Columns[e.ColumnIndex] == colInvoiceDate)
-            {
-                if (!selectedInvoice.ValueDate.HasValue)
-                {
-                    selectedInvoice.ValueDate = selectedInvoice.InvoiceDate;
-                }
+                selectedInvoice.AssignAmount = selectedInvoice.InvoiceAmount;
             }
         }
 
@@ -357,13 +348,16 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-
+            if (!ValidateAssignBatch())
+            {
+                return;
+            }
             bool isSaveOK = true;
             InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
             assignBatch.CDA = this._CDA;
             if (assignBatch.AssignBatchNo == null)
             {
-                assignBatch.AssignBatchNo = GenerateAssignBatchNo(this._CDA, DateTime.Now);
+                assignBatch.AssignBatchNo = GenerateAssignBatchNo(DateTime.Now);
             }
             foreach (Invoice invoice in invoiceList)
             {
@@ -408,6 +402,29 @@ namespace CMBC.EasyFactor.ARMgr
                 this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
                 this.invoiceBindingSource.DataSource = assignBatch.Invoices.ToList();
             }
+        }
+
+        private bool ValidateAssignBatch()
+        {
+            foreach (Invoice invoice in this.invoiceBindingSource.List)
+            {
+                if (invoice.AssignAmount > invoice.InvoiceAmount)
+                {
+                    MessageBox.Show("转让金额不能大于票面金额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
+                if (invoice.InvoiceDate > invoice.AssignDate)
+                {
+                    MessageBox.Show("转让日不能早于发票日: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
+                if (invoice.DueDate < invoice.AssignDate)
+                {
+                    MessageBox.Show("转让日不能晚于发票到期日: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
+            }
+            return true;
         }
 
         #endregion Methods

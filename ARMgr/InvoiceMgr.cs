@@ -232,7 +232,7 @@ namespace CMBC.EasyFactor.ARMgr
                                 && (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
                                 && (isDispute == "A" ? true : invoice.IsDispute == (isDispute == "Y" ? true : false))
                               select invoice;
-            this.bs.DataSource = queryResult.ToList();
+            this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 

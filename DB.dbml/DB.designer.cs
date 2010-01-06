@@ -3531,19 +3531,19 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _InvoiceNo;
 		
-		private System.Nullable<System.DateTime> _InvoiceDate;
+		private System.DateTime _InvoiceDate;
 		
 		private string _InvoiceCurrency;
 		
 		private string _AssignBatchNo;
 		
-		private System.Nullable<double> _InvoiceAmount;
+		private double _InvoiceAmount;
 		
-		private System.Nullable<double> _AssignAmount;
+		private double _AssignAmount;
 		
-		private System.Nullable<System.DateTime> _AssignDate;
+		private System.DateTime _AssignDate;
 		
-		private System.Nullable<System.DateTime> _DueDate;
+		private System.DateTime _DueDate;
 		
 		private System.Nullable<System.DateTime> _ValueDate;
 		
@@ -3633,19 +3633,19 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnInvoiceNoChanging(string value);
     partial void OnInvoiceNoChanged();
-    partial void OnInvoiceDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnInvoiceDateChanging(System.DateTime value);
     partial void OnInvoiceDateChanged();
     partial void OnInvoiceCurrencyChanging(string value);
     partial void OnInvoiceCurrencyChanged();
     partial void OnAssignBatchNoChanging(string value);
     partial void OnAssignBatchNoChanged();
-    partial void OnInvoiceAmountChanging(System.Nullable<double> value);
+    partial void OnInvoiceAmountChanging(double value);
     partial void OnInvoiceAmountChanged();
-    partial void OnAssignAmountChanging(System.Nullable<double> value);
+    partial void OnAssignAmountChanging(double value);
     partial void OnAssignAmountChanged();
-    partial void OnAssignDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnAssignDateChanging(System.DateTime value);
     partial void OnAssignDateChanged();
-    partial void OnDueDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDueDateChanging(System.DateTime value);
     partial void OnDueDateChanged();
     partial void OnValueDateChanging(System.Nullable<System.DateTime> value);
     partial void OnValueDateChanged();
@@ -3733,7 +3733,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_InvoiceNo", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_InvoiceNo", DbType="NVarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string InvoiceNo
 		{
 			get
@@ -3754,7 +3754,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_InvoiceDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> InvoiceDate
+		public System.DateTime InvoiceDate
 		{
 			get
 			{
@@ -3773,7 +3773,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_InvoiceCurrency", DbType="NChar(3)")]
+		[Column(Storage="_InvoiceCurrency", DbType="NChar(3)", CanBeNull=false)]
 		public string InvoiceCurrency
 		{
 			get
@@ -3793,7 +3793,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AssignBatchNo", DbType="NVarChar(50)")]
+		[Column(Storage="_AssignBatchNo", DbType="NVarChar(50)", CanBeNull=false)]
 		public string AssignBatchNo
 		{
 			get
@@ -3818,7 +3818,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_InvoiceAmount", DbType="Float")]
-		public System.Nullable<double> InvoiceAmount
+		public double InvoiceAmount
 		{
 			get
 			{
@@ -3838,7 +3838,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_AssignAmount", DbType="Float")]
-		public System.Nullable<double> AssignAmount
+		public double AssignAmount
 		{
 			get
 			{
@@ -3858,7 +3858,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_AssignDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> AssignDate
+		public System.DateTime AssignDate
 		{
 			get
 			{
@@ -3878,7 +3878,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_DueDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> DueDate
+		public System.DateTime DueDate
 		{
 			get
 			{
