@@ -87,7 +87,6 @@
             this.primaryDiscountDaysTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.netPaymentTermsTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelInvoiceBasic = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.isFlawCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.assignDateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.assignAmountTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.valueDateTextBox = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -228,11 +227,11 @@
             // 
             // 
             valueDateLabel.BackgroundStyle.Class = "";
-            valueDateLabel.Location = new System.Drawing.Point(406, 29);
+            valueDateLabel.Location = new System.Drawing.Point(352, 110);
             valueDateLabel.Name = "valueDateLabel";
-            valueDateLabel.Size = new System.Drawing.Size(47, 16);
+            valueDateLabel.Size = new System.Drawing.Size(65, 16);
             valueDateLabel.TabIndex = 8;
-            valueDateLabel.Text = "生效日:";
+            valueDateLabel.Text = "Value Date:";
             // 
             // dueDateLabel
             // 
@@ -469,7 +468,9 @@
             this.groupPanelInvoiceAdv.Controls.Add(orderNumberReferenceLabel);
             this.groupPanelInvoiceAdv.Controls.Add(this.orderNumberReferenceTextBox);
             this.groupPanelInvoiceAdv.Controls.Add(paymentConditionsLabel);
+            this.groupPanelInvoiceAdv.Controls.Add(valueDateLabel);
             this.groupPanelInvoiceAdv.Controls.Add(this.paymentConditionsComboBox);
+            this.groupPanelInvoiceAdv.Controls.Add(this.valueDateTextBox);
             this.groupPanelInvoiceAdv.Controls.Add(secondaryDiscountRateLabel);
             this.groupPanelInvoiceAdv.Controls.Add(this.secondaryDiscountRateTextBox);
             this.groupPanelInvoiceAdv.Controls.Add(secondaryDiscountDaysLabel);
@@ -619,13 +620,10 @@
             // 
             this.groupPanelInvoiceBasic.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelInvoiceBasic.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelInvoiceBasic.Controls.Add(this.isFlawCheckBox);
             this.groupPanelInvoiceBasic.Controls.Add(assignDateLabel);
             this.groupPanelInvoiceBasic.Controls.Add(this.assignDateTextBox);
             this.groupPanelInvoiceBasic.Controls.Add(assignAmountLabel);
             this.groupPanelInvoiceBasic.Controls.Add(this.assignAmountTextBox);
-            this.groupPanelInvoiceBasic.Controls.Add(valueDateLabel);
-            this.groupPanelInvoiceBasic.Controls.Add(this.valueDateTextBox);
             this.groupPanelInvoiceBasic.Controls.Add(dueDateLabel);
             this.groupPanelInvoiceBasic.Controls.Add(this.dueDateTextBox);
             this.groupPanelInvoiceBasic.Controls.Add(invoiceAmountLabel);
@@ -669,21 +667,6 @@
             this.groupPanelInvoiceBasic.StyleMouseOver.Class = "";
             this.groupPanelInvoiceBasic.TabIndex = 0;
             // 
-            // isFlawCheckBox
-            // 
-            this.isFlawCheckBox.AutoSize = true;
-            this.isFlawCheckBox.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.isFlawCheckBox.BackgroundStyle.Class = "";
-            this.isFlawCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.invoiceBindingSource, "IsFlaw", true));
-            this.isFlawCheckBox.Location = new System.Drawing.Point(406, 53);
-            this.isFlawCheckBox.Name = "isFlawCheckBox";
-            this.isFlawCheckBox.Size = new System.Drawing.Size(76, 16);
-            this.isFlawCheckBox.TabIndex = 14;
-            this.isFlawCheckBox.Text = "是否瑕疵";
-            // 
             // assignDateTextBox
             // 
             // 
@@ -716,7 +699,7 @@
             this.valueDateTextBox.BackgroundStyle.Class = "DateTimeInputBackground";
             this.valueDateTextBox.ButtonDropDown.Visible = true;
             this.valueDateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "ValueDate", true));
-            this.valueDateTextBox.Location = new System.Drawing.Point(459, 28);
+            this.valueDateTextBox.Location = new System.Drawing.Point(423, 109);
             // 
             // 
             // 
@@ -1174,7 +1157,6 @@
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelInvoiceBasic;
-        private DevComponents.DotNetBar.Controls.CheckBoxX isFlawCheckBox;
         private DevComponents.DotNetBar.Controls.TextBoxX assignDateTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX assignAmountTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput valueDateTextBox;

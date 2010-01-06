@@ -70,8 +70,23 @@
             this.tbSellerFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblSellerFactorCode = new DevComponents.DotNetBar.LabelX();
             this.dgvCreditCoverNegs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuCreditCoverMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCreditCoverSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCreditCoverNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.colNegoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOwnerDept = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBuyerFactorCountry = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSellerFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBuyerFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCaseCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colApproveType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRequestAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRequestDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,14 +95,7 @@
             this.colIFPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCase = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuCreditCoverMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCreditCoverSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCreditCoverNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverUpdate = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.colManagerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelCreditCoverQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCreditCoverNegs)).BeginInit();
             this.cmuCreditCoverMgr.SuspendLayout();
@@ -106,7 +114,7 @@
             this.panelCreditCoverQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelCreditCoverQuery.Location = new System.Drawing.Point(0, 0);
             this.panelCreditCoverQuery.Name = "panelCreditCoverQuery";
-            this.panelCreditCoverQuery.Size = new System.Drawing.Size(549, 63);
+            this.panelCreditCoverQuery.Size = new System.Drawing.Size(549, 57);
             this.panelCreditCoverQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelCreditCoverQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelCreditCoverQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -193,7 +201,6 @@
             this.dgvCreditCoverNegs.AllowUserToAddRows = false;
             this.dgvCreditCoverNegs.AllowUserToDeleteRows = false;
             this.dgvCreditCoverNegs.AllowUserToOrderColumns = true;
-            this.dgvCreditCoverNegs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -206,6 +213,14 @@
             this.dgvCreditCoverNegs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNegoID,
             this.colCaseCode,
+            this.colOwnerDept,
+            this.colSellerName,
+            this.colBuyerName,
+            this.colBuyerFactorCountry,
+            this.colSellerFactorName,
+            this.colBuyerFactorName,
+            this.colTransactionType,
+            this.colCaseCurrency,
             this.colApproveType,
             this.colRequestAmount,
             this.colRequestDate,
@@ -214,7 +229,7 @@
             this.colIFPrice,
             this.colCreateUserName,
             this.colComment,
-            this.colCase});
+            this.colManagerName});
             this.dgvCreditCoverNegs.ContextMenuStrip = this.cmuCreditCoverMgr;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
@@ -226,100 +241,14 @@
             this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCreditCoverNegs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCreditCoverNegs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvCreditCoverNegs.Location = new System.Drawing.Point(0, 63);
+            this.dgvCreditCoverNegs.Location = new System.Drawing.Point(0, 57);
+            this.dgvCreditCoverNegs.MultiSelect = false;
             this.dgvCreditCoverNegs.Name = "dgvCreditCoverNegs";
             this.dgvCreditCoverNegs.ReadOnly = true;
             this.dgvCreditCoverNegs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCreditCoverNegs.Size = new System.Drawing.Size(549, 282);
+            this.dgvCreditCoverNegs.Size = new System.Drawing.Size(549, 288);
             this.dgvCreditCoverNegs.TabIndex = 1;
             this.dgvCreditCoverNegs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
-            // 
-            // colNegoID
-            // 
-            this.colNegoID.DataPropertyName = "NegoID";
-            this.colNegoID.HeaderText = "NegoID";
-            this.colNegoID.Name = "colNegoID";
-            this.colNegoID.ReadOnly = true;
-            this.colNegoID.Visible = false;
-            // 
-            // colCaseCode
-            // 
-            this.colCaseCode.DataPropertyName = "CaseCode";
-            this.colCaseCode.HeaderText = "案件编号";
-            this.colCaseCode.Name = "colCaseCode";
-            this.colCaseCode.ReadOnly = true;
-            // 
-            // colApproveType
-            // 
-            this.colApproveType.DataPropertyName = "ApproveType";
-            this.colApproveType.HeaderText = "P/C标志";
-            this.colApproveType.Name = "colApproveType";
-            this.colApproveType.ReadOnly = true;
-            // 
-            // colRequestAmount
-            // 
-            this.colRequestAmount.DataPropertyName = "RequestAmount";
-            dataGridViewCellStyle2.Format = "N2";
-            this.colRequestAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colRequestAmount.HeaderText = "申请额度";
-            this.colRequestAmount.Name = "colRequestAmount";
-            this.colRequestAmount.ReadOnly = true;
-            // 
-            // colRequestDate
-            // 
-            this.colRequestDate.DataPropertyName = "RequestDate";
-            dataGridViewCellStyle3.Format = "d";
-            this.colRequestDate.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colRequestDate.HeaderText = "申请日期";
-            this.colRequestDate.Name = "colRequestDate";
-            this.colRequestDate.ReadOnly = true;
-            // 
-            // colApproveAmount
-            // 
-            this.colApproveAmount.DataPropertyName = "ApproveAmount";
-            dataGridViewCellStyle4.Format = "N2";
-            this.colApproveAmount.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colApproveAmount.HeaderText = "回复额度";
-            this.colApproveAmount.Name = "colApproveAmount";
-            this.colApproveAmount.ReadOnly = true;
-            // 
-            // colApproveDate
-            // 
-            this.colApproveDate.DataPropertyName = "ApproveDate";
-            dataGridViewCellStyle5.Format = "d";
-            this.colApproveDate.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colApproveDate.HeaderText = "回复日期";
-            this.colApproveDate.Name = "colApproveDate";
-            this.colApproveDate.ReadOnly = true;
-            // 
-            // colIFPrice
-            // 
-            this.colIFPrice.DataPropertyName = "IFPrice";
-            this.colIFPrice.HeaderText = "IF报价";
-            this.colIFPrice.Name = "colIFPrice";
-            this.colIFPrice.ReadOnly = true;
-            // 
-            // colCreateUserName
-            // 
-            this.colCreateUserName.DataPropertyName = "CreateUserName";
-            this.colCreateUserName.HeaderText = "经办人";
-            this.colCreateUserName.Name = "colCreateUserName";
-            this.colCreateUserName.ReadOnly = true;
-            // 
-            // colComment
-            // 
-            this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "备注";
-            this.colComment.Name = "colComment";
-            this.colComment.ReadOnly = true;
-            // 
-            // colCase
-            // 
-            this.colCase.DataPropertyName = "Case";
-            this.colCase.HeaderText = "Case";
-            this.colCase.Name = "colCase";
-            this.colCase.ReadOnly = true;
-            this.colCase.Visible = false;
             // 
             // cmuCreditCoverMgr
             // 
@@ -368,6 +297,158 @@
             this.menuItemCreditCoverDelete.Size = new System.Drawing.Size(146, 22);
             this.menuItemCreditCoverDelete.Text = "删除额度申请";
             // 
+            // colNegoID
+            // 
+            this.colNegoID.DataPropertyName = "NegoID";
+            this.colNegoID.HeaderText = "NegoID";
+            this.colNegoID.Name = "colNegoID";
+            this.colNegoID.ReadOnly = true;
+            this.colNegoID.Visible = false;
+            // 
+            // colCaseCode
+            // 
+            this.colCaseCode.DataPropertyName = "CaseCode";
+            this.colCaseCode.HeaderText = "案件编号";
+            this.colCaseCode.Name = "colCaseCode";
+            this.colCaseCode.ReadOnly = true;
+            this.colCaseCode.Width = 80;
+            // 
+            // colOwnerDept
+            // 
+            this.colOwnerDept.DataPropertyName = "OwnerDept";
+            this.colOwnerDept.HeaderText = "业务归属机构";
+            this.colOwnerDept.Name = "colOwnerDept";
+            this.colOwnerDept.ReadOnly = true;
+            // 
+            // colSellerName
+            // 
+            this.colSellerName.DataPropertyName = "SellerName";
+            this.colSellerName.HeaderText = "出口商";
+            this.colSellerName.Name = "colSellerName";
+            this.colSellerName.ReadOnly = true;
+            this.colSellerName.Width = 200;
+            // 
+            // colBuyerName
+            // 
+            this.colBuyerName.DataPropertyName = "BuyerName";
+            this.colBuyerName.HeaderText = "进口商";
+            this.colBuyerName.Name = "colBuyerName";
+            this.colBuyerName.ReadOnly = true;
+            this.colBuyerName.Width = 200;
+            // 
+            // colBuyerFactorCountry
+            // 
+            this.colBuyerFactorCountry.DataPropertyName = "BuyerCountry";
+            this.colBuyerFactorCountry.HeaderText = "国别";
+            this.colBuyerFactorCountry.Name = "colBuyerFactorCountry";
+            this.colBuyerFactorCountry.ReadOnly = true;
+            this.colBuyerFactorCountry.Width = 40;
+            // 
+            // colSellerFactorName
+            // 
+            this.colSellerFactorName.DataPropertyName = "SellerFactorName";
+            this.colSellerFactorName.HeaderText = "出口保理商";
+            this.colSellerFactorName.Name = "colSellerFactorName";
+            this.colSellerFactorName.ReadOnly = true;
+            this.colSellerFactorName.Width = 200;
+            // 
+            // colBuyerFactorName
+            // 
+            this.colBuyerFactorName.DataPropertyName = "BuyerFactorName";
+            this.colBuyerFactorName.HeaderText = "进口保理商";
+            this.colBuyerFactorName.Name = "colBuyerFactorName";
+            this.colBuyerFactorName.ReadOnly = true;
+            this.colBuyerFactorName.Width = 200;
+            // 
+            // colTransactionType
+            // 
+            this.colTransactionType.DataPropertyName = "TransactionType";
+            this.colTransactionType.HeaderText = "业务类型";
+            this.colTransactionType.Name = "colTransactionType";
+            this.colTransactionType.ReadOnly = true;
+            // 
+            // colCaseCurrency
+            // 
+            this.colCaseCurrency.DataPropertyName = "CaseCurrency";
+            this.colCaseCurrency.HeaderText = "发票币别";
+            this.colCaseCurrency.Name = "colCaseCurrency";
+            this.colCaseCurrency.ReadOnly = true;
+            // 
+            // colApproveType
+            // 
+            this.colApproveType.DataPropertyName = "ApproveType";
+            this.colApproveType.HeaderText = "P/C标志";
+            this.colApproveType.Name = "colApproveType";
+            this.colApproveType.ReadOnly = true;
+            this.colApproveType.Width = 50;
+            // 
+            // colRequestAmount
+            // 
+            this.colRequestAmount.DataPropertyName = "RequestAmount";
+            dataGridViewCellStyle2.Format = "N2";
+            this.colRequestAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colRequestAmount.HeaderText = "申请额度";
+            this.colRequestAmount.Name = "colRequestAmount";
+            this.colRequestAmount.ReadOnly = true;
+            // 
+            // colRequestDate
+            // 
+            this.colRequestDate.DataPropertyName = "RequestDate";
+            dataGridViewCellStyle3.Format = "d";
+            this.colRequestDate.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colRequestDate.HeaderText = "申请日期";
+            this.colRequestDate.Name = "colRequestDate";
+            this.colRequestDate.ReadOnly = true;
+            // 
+            // colApproveAmount
+            // 
+            this.colApproveAmount.DataPropertyName = "ApproveAmount";
+            dataGridViewCellStyle4.Format = "N2";
+            this.colApproveAmount.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colApproveAmount.HeaderText = "回复额度";
+            this.colApproveAmount.Name = "colApproveAmount";
+            this.colApproveAmount.ReadOnly = true;
+            // 
+            // colApproveDate
+            // 
+            this.colApproveDate.DataPropertyName = "ApproveDate";
+            dataGridViewCellStyle5.Format = "d";
+            this.colApproveDate.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colApproveDate.HeaderText = "回复日期";
+            this.colApproveDate.Name = "colApproveDate";
+            this.colApproveDate.ReadOnly = true;
+            // 
+            // colIFPrice
+            // 
+            this.colIFPrice.DataPropertyName = "IFPrice";
+            this.colIFPrice.HeaderText = "IF报价";
+            this.colIFPrice.Name = "colIFPrice";
+            this.colIFPrice.ReadOnly = true;
+            this.colIFPrice.Width = 50;
+            // 
+            // colCreateUserName
+            // 
+            this.colCreateUserName.DataPropertyName = "CreateUserName";
+            this.colCreateUserName.HeaderText = "经办人";
+            this.colCreateUserName.Name = "colCreateUserName";
+            this.colCreateUserName.ReadOnly = true;
+            this.colCreateUserName.Width = 50;
+            // 
+            // colComment
+            // 
+            this.colComment.DataPropertyName = "Comment";
+            this.colComment.HeaderText = "备注";
+            this.colComment.Name = "colComment";
+            this.colComment.ReadOnly = true;
+            this.colComment.Width = 80;
+            // 
+            // colManagerName
+            // 
+            this.colManagerName.DataPropertyName = "ManagerName";
+            this.colManagerName.HeaderText = "营销/维护经理";
+            this.colManagerName.Name = "colManagerName";
+            this.colManagerName.ReadOnly = true;
+            // 
             // CreditCoverNegMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -388,6 +469,14 @@
 
         private System.Windows.Forms.DataGridViewTextBoxColumn colNegoID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactorCountry;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactorName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactorName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colApproveType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequestDate;
@@ -396,6 +485,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCase;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colManagerName;
+
+
+
+
+
+
+
+
     }
 }

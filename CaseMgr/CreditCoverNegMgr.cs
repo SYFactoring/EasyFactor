@@ -36,9 +36,11 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             InitializeComponent();
             this.isEditable = isEditable;
-            this.UpdateEditableStatus();
+            this.dgvCreditCoverNegs.AutoGenerateColumns = false;
             this.dgvCreditCoverNegs.DataSource = this.bs;
             ControlUtil.SetDoubleBuffered(this.dgvCreditCoverNegs);
+
+            this.UpdateEditableStatus();
         }
 
         #endregion Constructors
@@ -92,7 +94,13 @@ namespace CMBC.EasyFactor.CaseMgr
 
         private void QueryCreditCoverNeg(object sender, EventArgs e)
         {
-            var queryResutl = App.Current.DbContext.CreditCoverNegotiations;
+            string sellerFactorCode = this.tbSellerFactorCode.Text;
+            string buyerFactorCode = this.tbBuyerFactorCode.Text;
+
+            var queryResutl = from neg in App.Current.DbContext.CreditCoverNegotiations
+                              where neg.Case.SellerFactorCode.Contains(sellerFactorCode) && neg.Case.BuyerFactorCode.Contains(buyerFactorCode)
+                              select neg;
+
             this.bs.DataSource = queryResutl;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResutl.Count());
         }
@@ -104,20 +112,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            int cid = (int)dgvCreditCoverNegs["colNegoID", dgvCreditCoverNegs.SelectedRows[0].Index].Value;
-            if (cid != 0)
+            CreditCoverNegotiation selectedCreditCoverNeg = (CreditCoverNegotiation)this.bs.List[this.dgvCreditCoverNegs.SelectedRows[0].Index];
+            this.Selected = selectedCreditCoverNeg;
+            if (this.OwnerForm != null)
             {
-                CreditCoverNegotiation selectedCreditCoverNeg = App.Current.DbContext.CreditCoverNegotiations.SingleOrDefault(c => c.NegoID == cid);
-                if (selectedCreditCoverNeg != null)
-                {
-                    this.Selected = selectedCreditCoverNeg;
-                    if (this.OwnerForm != null)
-                    {
-                        this.OwnerForm.DialogResult = DialogResult.Yes;
-                        this.OwnerForm.Close();
-                    }
-                }
+                this.OwnerForm.DialogResult = DialogResult.Yes;
+                this.OwnerForm.Close();
             }
+
         }
 
         private void DetailCreditCoverNeg(object sender, DataGridViewCellEventArgs e)
@@ -127,17 +129,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            int cid = (int)dgvCreditCoverNegs["colNegoID", dgvCreditCoverNegs.SelectedRows[0].Index].Value;
-            if (cid != 0)
-            {
-                CreditCoverNegotiation selectedCreditCoverNeg = App.Current.DbContext.CreditCoverNegotiations.SingleOrDefault(c => c.NegoID == cid);
-                if (selectedCreditCoverNeg != null)
-                {
-                    CaseDetail caseDetail = new CaseDetail(selectedCreditCoverNeg.Case, CaseDetail.OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG);
-                    caseDetail.ShowDialog(this);
-                }
-            }
+            CreditCoverNegotiation selectedCreditCoverNeg = (CreditCoverNegotiation)this.bs.List[this.dgvCreditCoverNegs.SelectedRows[0].Index];
+            CaseDetail caseDetail = new CaseDetail(selectedCreditCoverNeg, CaseDetail.OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG);
+            caseDetail.ShowDialog(this);
         }
+
 
         /// <summary>
         /// Event handler when cell double clicked

@@ -186,6 +186,7 @@
     <Compile Include="DB.dbml\CDA.cs" />
     <Compile Include="DB.dbml\Client.cs" />
     <Compile Include="DB.dbml\Country.cs" />
+    <Compile Include="DB.dbml\CreditCoverNegotiation.cs" />
     <Compile Include="DB.dbml\Currency.cs" />
     <Compile Include="DB.dbml\DB.cs">
       <DependentUpon>DB.dbml</DependentUpon>

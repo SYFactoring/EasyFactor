@@ -372,7 +372,7 @@ namespace CMBC.EasyFactor.Utils
                     string cdaCode = String.Format("{0:G}", valueArray[row, 1]);
                     if (string.Empty.Equals(cdaCode))
                     {
-                        throw new Exception("额度通知书编号不能为空");
+                        continue;
                     }
                     if (cda == null || cda.CDACode != cdaCode)
                     {
@@ -600,7 +600,15 @@ namespace CMBC.EasyFactor.Utils
 
 
                     CreditCoverNegotiation creditCover = new CreditCoverNegotiation();
-                    creditCover.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
+                    string approveType = String.Format("{0:G}", valueArray[row, column++]);
+                    if ("P".Equals(approveType))
+                    {
+                        creditCover.ApproveType = "P-预额度";
+                    }
+                    else if ("C".Equals(approveType))
+                    {
+                        creditCover.ApproveType = "C-正式额度";
+                    }
                     creditCover.RequestAmount = (System.Nullable<double>)valueArray[row, column++];
                     curCase.PaymentTerm = String.Format("{0:G}", valueArray[row, column++]);
                     creditCover.RequestDate = (System.Nullable<DateTime>)valueArray[row, column++];
@@ -789,6 +797,7 @@ namespace CMBC.EasyFactor.Utils
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
+                List<Contract> contractList = new List<Contract>();
                 for (int row = 2; row <= size; row++)
                 {
                     int column = 1;
@@ -814,9 +823,14 @@ namespace CMBC.EasyFactor.Utils
                         Contract contract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == ContractCode);
                         if (contract == null)
                         {
-                            contract = new Contract();
-                            contract.ContractCode = ContractCode;
-                            contract.Client = curCase.SellerClient;
+                            contract = contractList.SingleOrDefault(c => c.ContractCode == ContractCode);
+                            if (contract == null)
+                            {
+                                contract = new Contract();
+                                contract.ContractCode = ContractCode;
+                                contract.Client = curCase.SellerClient;
+                                contractList.Add(contract);
+                            }
                         }
                         contract.ContractType = String.Format("{0:G}", valueArray[row, column++]);
                         contract.ContractValueDate = (System.Nullable<DateTime>)valueArray[row, column++];
@@ -835,7 +849,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                     else
                     {
-                        cda = App.Current.DbContext.CDAs.Single(c => c.CDACode == cdaCode);
+                        cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                         if (cda == null)
                         {
                             cda = new CDA();

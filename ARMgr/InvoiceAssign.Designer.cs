@@ -108,17 +108,16 @@ namespace CMBC.EasyFactor.ARMgr
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colValueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             batchDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
@@ -519,7 +518,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colInvoiceDate,
             this.colAssignDate,
             this.colDueDate,
-            this.colValueDate,
             this.colComment});
             this.dgvInvoices.ContextMenuStrip = this.cmuInvoiceAssign;
             this.dgvInvoices.DataSource = this.invoiceBindingSource;
@@ -543,6 +541,21 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvInvoices_CellValidating);
             this.dgvInvoices.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellClick);
             this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
+            // 
+            // superValidator
+            // 
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
             // 
             // colInvoiceNo
             // 
@@ -589,33 +602,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // colValueDate
-            // 
-            this.colValueDate.DataPropertyName = "ValueDate";
-            this.colValueDate.HeaderText = "生效日";
-            this.colValueDate.Name = "colValueDate";
-            this.colValueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
             // colComment
             // 
             this.colComment.DataPropertyName = "Comment";
             this.colComment.HeaderText = "备注";
             this.colComment.Name = "colComment";
-            // 
-            // superValidator
-            // 
-            this.superValidator.ContainerControl = this;
-            this.superValidator.ErrorProvider = this.errorProvider;
-            this.superValidator.Highlighter = this.highlighter;
-            // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
-            // 
-            // highlighter
-            // 
-            this.highlighter.ContainerControl = this;
             // 
             // InvoiceAssign
             // 
@@ -658,7 +649,6 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colValueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
     }
 }

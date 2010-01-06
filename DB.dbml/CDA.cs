@@ -277,7 +277,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
             else if (selectedCase.TransactionType == "进口保理")
             {
-                return String.Format("{0}000-{1:000}", selectedCase.CaseCode, selectedCase.CDAs.Count + 1);
+                return String.Format("{0}XXX-{1:000}", selectedCase.CaseCode, selectedCase.CDAs.Count + 1);
             }
             else
             {

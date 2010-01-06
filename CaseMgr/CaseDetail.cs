@@ -165,6 +165,15 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
         }
 
+        public CaseDetail(CreditCoverNegotiation neg, OpCreditCoverNegType opCreditCoverNegType)
+            : this(neg.Case, OpCaseType.DETAIL_CASE, opCreditCoverNegType)
+        {
+            this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
+            if (opCreditCoverNegType == OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG || opCreditCoverNegType == OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG)
+            {
+                this.creditCoverNegBindingSource.DataSource = neg;
+            }
+        }
         #endregion Constructors
 
         #region Methods (23)
