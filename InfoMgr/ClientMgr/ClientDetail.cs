@@ -952,6 +952,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (contract.ContractStatus == "已生效")
+                    {
+                        foreach (Contract c in client.Contracts)
+                        {
+                            if (c != contract && c.ContractStatus == "已生效")
+                            {
+                                c.ContractStatus = "已过期";
+                            }
+                        }
+                        App.Current.DbContext.SubmitChanges();
+                    }
                     this.dgvContracts.Refresh();
                     contract.Backup();
                 }

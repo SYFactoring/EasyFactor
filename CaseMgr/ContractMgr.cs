@@ -20,7 +20,7 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class ContractMgr : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         /// <summary>
         /// 
@@ -31,9 +31,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private bool isEditable;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// 
@@ -42,13 +42,14 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             this.InitializeComponent();
             this.isEditable = isEditable;
+            this.dgvContracts.AutoGenerateColumns = false;
             this.UpdateEditableStatus();
             ControlUtil.SetDoubleBuffered(this.dgvContracts);
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets owner form
@@ -68,11 +69,11 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (10) 
+        #region Methods (10)
 
-		// Private Methods (10) 
+        // Private Methods (10) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -106,22 +107,40 @@ namespace CMBC.EasyFactor.CaseMgr
             string cid = (string)dgvContracts["colContractCode", dgvContracts.SelectedRows[0].Index].Value;
             if (cid != null)
             {
-                Contract selectedContract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
-                if (selectedContract != null)
+                Contract contract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == cid);
+                if (contract != null)
                 {
-                    if (MessageBox.Show("是否打算删除合同: " + selectedContract.ContractCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    if (MessageBox.Show("是否打算删除保理合同: " + contract.ContractCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                     {
-                        App.Current.DbContext.Contracts.DeleteOnSubmit(selectedContract);
-                        try
+                        return;
+                    }
+                    bool isDeleteOK = true;
+                    try
+                    {
+                        var CDAList = App.Current.DbContext.CDAs.Where(c => c.CDACode.StartsWith(contract.ContractCode));
+                        foreach (CDA cda in CDAList)
                         {
-                            App.Current.DbContext.SubmitChanges();
+                            foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
+                            {
+                                App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
+                            }
+                            App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
+                            App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
+                            App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
                         }
-                        catch (SqlException)
-                        {
-                            MessageBox.Show("不能删除此合同", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
+                        App.Current.DbContext.CDAs.DeleteAllOnSubmit(CDAList);
+                        App.Current.DbContext.Contracts.DeleteOnSubmit(contract);
+                        App.Current.DbContext.SubmitChanges();
+                    }
+                    catch (Exception e1)
+                    {
+                        isDeleteOK = false;
+                        MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
 
+                    if (isDeleteOK)
+                    {
+                        MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         dgvContracts.Rows.RemoveAt(dgvContracts.SelectedRows[0].Index);
                     }
                 }
@@ -185,7 +204,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void NewContract(object sender, System.EventArgs e)
         {
-             if (this.dgvContracts.SelectedRows.Count == 0)
+            if (this.dgvContracts.SelectedRows.Count == 0)
             {
                 return;
             }
@@ -290,6 +309,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

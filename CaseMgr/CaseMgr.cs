@@ -124,20 +124,36 @@ namespace CMBC.EasyFactor.CaseMgr
                 Case selectedCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == cid);
                 if (selectedCase != null)
                 {
-                    if (MessageBox.Show("是否打算删除案件: " + selectedCase.CaseCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    if (MessageBox.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
+                        bool isDeleteOK = true;
+                        foreach (CDA cda in selectedCase.CDAs)
+                        {
+                            foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
+                            {
+                                App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
+                            }
+                            App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
+                            App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
+                            App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
+                        }
+                        App.Current.DbContext.CDAs.DeleteAllOnSubmit(selectedCase.CDAs);
                         App.Current.DbContext.Cases.DeleteOnSubmit(selectedCase);
                         try
                         {
                             App.Current.DbContext.SubmitChanges();
                         }
-                        catch (SqlException)
+                        catch (Exception e1)
                         {
-                            MessageBox.Show("不能删除此案件", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            isDeleteOK = false;
+                            MessageBox.Show("不能删除此案件: " + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
-
-                        dgvCases.Rows.RemoveAt(dgvCases.SelectedRows[0].Index);
+                        if (isDeleteOK)
+                        {
+                            MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            dgvCases.Rows.RemoveAt(dgvCases.SelectedRows[0].Index);
+                        }
                     }
                 }
             }

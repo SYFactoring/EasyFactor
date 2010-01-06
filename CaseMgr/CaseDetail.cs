@@ -57,7 +57,6 @@ namespace CMBC.EasyFactor.CaseMgr
             /// </summary>
             DETAIL_CREDIT_COVER_NEG
         }
-
         /// <summary>
         /// Operation types of Case
         /// </summary>
@@ -92,6 +91,9 @@ namespace CMBC.EasyFactor.CaseMgr
         private CaseDetail(Case curCase, OpCaseType opCaseType, OpCreditCoverNegType opCreditCoverNegType)
         {
             this.InitializeComponent();
+
+            this.dgvCDAs.AutoGenerateColumns = false;
+            this.dgvCreditCoverNegs.AutoGenerateColumns = false;
 
             this.cbCaseInvoiceCurrency.DataSource = Currency.AllCurrencies().ToList();
             this.cbCaseInvoiceCurrency.DisplayMember = "CurrencyFormat";
@@ -138,61 +140,6 @@ namespace CMBC.EasyFactor.CaseMgr
             if (opCreditCoverNegType == OpCreditCoverNegType.NEW_CREDIT_COVER_NEG)
             {
                 this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
-            }
-        }
-
-        void curCase_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if ("TransactionType".Equals(e.PropertyName))
-            {
-                Case curCase = sender as Case;
-                Factor cmbc = Factor.FindFactorByCode(Factor.CMBC_CODE);
-                switch (curCase.TransactionType)
-                {
-                    case "国内卖方保理":
-                    case "国内买方保理":
-                    case "租赁保理":
-                        this.btnCaseFactorSelect.Enabled = false;
-                        curCase.SellerFactor = cmbc;
-                        curCase.BuyerFactor = cmbc;
-                        curCase.InvoiceCurrency = "CNY";
-                        this.cbCaseInvoiceCurrency.Enabled = false;
-                        break;
-                    case "出口保理":
-                        this.btnCaseFactorSelect.Enabled = true;
-                        curCase.SellerFactor = cmbc;
-                        curCase.InvoiceCurrency = "USD";
-                        this.cbCaseInvoiceCurrency.Enabled = true;
-                        break;
-                    case "进口保理":
-                        this.btnCaseFactorSelect.Enabled = true;
-                        curCase.BuyerFactor = cmbc;
-                        curCase.InvoiceCurrency = "USD";
-                        this.cbCaseInvoiceCurrency.Enabled = true;
-                        break;
-                    case "国际信保保理":
-                        this.btnCaseFactorSelect.Enabled = true;
-                        curCase.SellerFactor = cmbc;
-                        curCase.InvoiceCurrency = "USD";
-                        this.cbCaseInvoiceCurrency.Enabled = true;
-                        break;
-                    case "国内信保保理":
-                        this.btnCaseFactorSelect.Enabled = true;
-                        curCase.SellerFactor = cmbc;
-                        curCase.InvoiceCurrency = "CNY";
-                        this.cbCaseInvoiceCurrency.Enabled = false;
-                        break;
-                    default: break;
-                }
-
-                if (!"进口保理".Equals(curCase.TransactionType) && curCase.SellerClient != null)
-                {
-                    if (!curCase.SellerClient.Contracts.Any(con => con.ContractStatus == "已生效"))
-                    {
-                        curCase.SellerClient = null;
-                    }
-                }
-
             }
         }
 
@@ -293,21 +240,102 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        /// <summary>
-        /// Close the case form
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ResetClose(object sender, EventArgs e)
+        void curCase_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (opCaseType == OpCaseType.UPDATE_CASE)
+            if ("TransactionType".Equals(e.PropertyName))
             {
-                Case curCase = this.caseBindingSource.DataSource as Case;
-                curCase.Restore();
+                Case curCase = sender as Case;
+                Factor cmbc = Factor.FindFactorByCode(Factor.CMBC_CODE);
+                switch (curCase.TransactionType)
+                {
+                    case "国内卖方保理":
+                    case "国内买方保理":
+                    case "租赁保理":
+                        this.btnCaseFactorSelect.Enabled = false;
+                        curCase.SellerFactor = cmbc;
+                        curCase.BuyerFactor = cmbc;
+                        curCase.InvoiceCurrency = "CNY";
+                        this.cbCaseInvoiceCurrency.Enabled = false;
+                        break;
+                    case "出口保理":
+                        this.btnCaseFactorSelect.Enabled = true;
+                        curCase.SellerFactor = cmbc;
+                        curCase.InvoiceCurrency = "USD";
+                        this.cbCaseInvoiceCurrency.Enabled = true;
+                        break;
+                    case "进口保理":
+                        this.btnCaseFactorSelect.Enabled = true;
+                        curCase.BuyerFactor = cmbc;
+                        curCase.InvoiceCurrency = "USD";
+                        this.cbCaseInvoiceCurrency.Enabled = true;
+                        break;
+                    case "国际信保保理":
+                        this.btnCaseFactorSelect.Enabled = true;
+                        curCase.SellerFactor = cmbc;
+                        curCase.InvoiceCurrency = "USD";
+                        this.cbCaseInvoiceCurrency.Enabled = true;
+                        break;
+                    case "国内信保保理":
+                        this.btnCaseFactorSelect.Enabled = true;
+                        curCase.SellerFactor = cmbc;
+                        curCase.InvoiceCurrency = "CNY";
+                        this.cbCaseInvoiceCurrency.Enabled = false;
+                        break;
+                    default: break;
+                }
+
+                if (!"进口保理".Equals(curCase.TransactionType) && curCase.SellerClient != null)
+                {
+                    if (!curCase.SellerClient.Contracts.Any(con => con.ContractStatus == "已生效"))
+                    {
+                        curCase.SellerClient = null;
+                    }
+                }
+
             }
-            else if (opCaseType == OpCaseType.NEW_CASE)
+        }
+
+        private void DeleteCDA(object sender, EventArgs e)
+        {
+            if (this.dgvCDAs.SelectedRows.Count == 0)
             {
-                this.caseBindingSource.DataSource = new Case();
+                return;
+            }
+
+            string cdaCode = (String)dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
+            if (cdaCode != null)
+            {
+                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
+                if (selectedCDA != null)
+                {
+                    if (MessageBox.Show("是否打算删除额度通知书: " + cdaCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+                    bool isDeleteOK = true;
+                    foreach (InvoiceAssignBatch assignBatch in selectedCDA.InvoiceAssignBatches)
+                    {
+                        App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
+                    }
+                    App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(selectedCDA.InvoiceAssignBatches);
+                    App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(selectedCDA.InvoiceFinanceBatches);
+                    App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(selectedCDA.InvoicePaymentBatches);
+                    App.Current.DbContext.CDAs.DeleteOnSubmit(selectedCDA);
+                    try
+                    {
+                        App.Current.DbContext.SubmitChanges();
+                    }
+                    catch (Exception e1)
+                    {
+                        isDeleteOK = false;
+                        MessageBox.Show("不能删除此额度通知书: " + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    if (isDeleteOK)
+                    {
+                        MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        dgvCDAs.Rows.RemoveAt(dgvCDAs.SelectedRows[0].Index);
+                    }
+                }
             }
         }
 
@@ -494,6 +522,24 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
+        }
+
+        /// <summary>
+        /// Close the case form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ResetClose(object sender, EventArgs e)
+        {
+            if (opCaseType == OpCaseType.UPDATE_CASE)
+            {
+                Case curCase = this.caseBindingSource.DataSource as Case;
+                curCase.Restore();
+            }
+            else if (opCaseType == OpCaseType.NEW_CASE)
+            {
+                this.caseBindingSource.DataSource = new Case();
+            }
         }
 
         /// <summary>

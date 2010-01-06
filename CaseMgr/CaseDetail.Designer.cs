@@ -129,19 +129,20 @@
             DevComponents.DotNetBar.LabelX lblManagerName;
             DevComponents.DotNetBar.LabelX lblPaymentTerm;
             DevComponents.DotNetBar.LabelX lblReviewNo;
+            DevComponents.DotNetBar.LabelX lblComment;
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaseDetail));
-            DevComponents.DotNetBar.LabelX lblComment;
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelCase = new DevComponents.DotNetBar.TabControlPanel();
             this.btnCaseUpdate = new DevComponents.DotNetBar.ButtonX();
             this.btnCaseReset = new DevComponents.DotNetBar.ButtonX();
             this.btnCaseSave = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.tbReviewNo = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbComment = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.caseBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tbReviewNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbPaymentTerm = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbManagerName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cbCaseTransactionType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -254,7 +255,7 @@
             this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.creditCoverErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.creditCoverHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.tbComment = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.btnCDADelete = new DevComponents.DotNetBar.ButtonX();
             requestAmountLabel = new DevComponents.DotNetBar.LabelX();
             approveAmountLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
@@ -630,13 +631,29 @@
             lblReviewNo.TabIndex = 19;
             lblReviewNo.Text = "协查意见书编号:";
             // 
+            // lblComment
+            // 
+            lblComment.AutoSize = true;
+            lblComment.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblComment.BackgroundStyle.Class = "";
+            lblComment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            lblComment.Location = new System.Drawing.Point(55, 307);
+            lblComment.Name = "lblComment";
+            lblComment.Size = new System.Drawing.Size(34, 16);
+            lblComment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            lblComment.TabIndex = 37;
+            lblComment.Text = "备注:";
+            // 
             // tabControl
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
+            this.tabControl.Controls.Add(this.tabPanelCDA);
             this.tabControl.Controls.Add(this.tabPanelCase);
             this.tabControl.Controls.Add(this.tabPanelCreditCoverNeg);
-            this.tabControl.Controls.Add(this.tabPanelCDA);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -786,6 +803,24 @@
             this.groupPanelCase.StyleMouseOver.Class = "";
             this.groupPanelCase.TabIndex = 0;
             // 
+            // tbComment
+            // 
+            // 
+            // 
+            // 
+            this.tbComment.Border.Class = "TextBoxBorder";
+            this.tbComment.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "Comment", true));
+            this.tbComment.Location = new System.Drawing.Point(98, 307);
+            this.tbComment.Multiline = true;
+            this.tbComment.Name = "tbComment";
+            this.tbComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbComment.Size = new System.Drawing.Size(375, 35);
+            this.tbComment.TabIndex = 38;
+            // 
+            // caseBindingSource
+            // 
+            this.caseBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Case);
+            // 
             // tbReviewNo
             // 
             // 
@@ -797,10 +832,6 @@
             this.tbReviewNo.Name = "tbReviewNo";
             this.tbReviewNo.Size = new System.Drawing.Size(100, 20);
             this.tbReviewNo.TabIndex = 20;
-            // 
-            // caseBindingSource
-            // 
-            this.caseBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Case);
             // 
             // tbPaymentTerm
             // 
@@ -1179,14 +1210,14 @@
             this.colIFPrice,
             this.colComment,
             this.colCreateUserName});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCreditCoverNegs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCreditCoverNegs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCreditCoverNegs.Location = new System.Drawing.Point(1, 166);
@@ -1418,7 +1449,7 @@
             // 
             // 
             // 
-            this.tbComment.Border.Class = "TextBoxBorder";
+            this.tbCreditCoverComment.Border.Class = "";
             this.tbCreditCoverComment.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.creditCoverNegBindingSource, "Comment", true));
             this.tbCreditCoverComment.Location = new System.Drawing.Point(74, 61);
             this.tbCreditCoverComment.Multiline = true;
@@ -1562,7 +1593,7 @@
             this.tabPanelCDA.Location = new System.Drawing.Point(0, 26);
             this.tabPanelCDA.Name = "tabPanelCDA";
             this.tabPanelCDA.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelCDA.Size = new System.Drawing.Size(521, 355);
+            this.tabPanelCDA.Size = new System.Drawing.Size(521, 398);
             this.tabPanelCDA.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelCDA.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelCDA.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -1578,14 +1609,14 @@
             this.dgvCDAs.AllowUserToAddRows = false;
             this.dgvCDAs.AllowUserToDeleteRows = false;
             this.dgvCDAs.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCDAs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCDAs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCDACode,
@@ -1629,21 +1660,21 @@
             this.colFax,
             this.colCDAComment,
             this.colCDACreateUserName});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCDAs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCDAs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCDAs.Location = new System.Drawing.Point(1, 39);
             this.dgvCDAs.Name = "dgvCDAs";
             this.dgvCDAs.ReadOnly = true;
             this.dgvCDAs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCDAs.Size = new System.Drawing.Size(519, 315);
+            this.dgvCDAs.Size = new System.Drawing.Size(519, 358);
             this.dgvCDAs.TabIndex = 1;
             this.dgvCDAs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailCDA);
             // 
@@ -1962,6 +1993,7 @@
             // 
             this.groupPanelCDA.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCDA.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelCDA.Controls.Add(this.btnCDADelete);
             this.groupPanelCDA.Controls.Add(this.btnCDANew);
             this.groupPanelCDA.Controls.Add(this.btnCDARefresh);
             this.groupPanelCDA.Dock = System.Windows.Forms.DockStyle.Top;
@@ -2095,35 +2127,17 @@
             // 
             this.creditCoverHighlighter.ContainerControl = this;
             // 
-            // tbComment
+            // btnCDADelete
             // 
-            // 
-            // 
-            // 
-            this.tbComment.Border.Class = "TextBoxBorder";
-            this.tbComment.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "Comment", true));
-            this.tbComment.Location = new System.Drawing.Point(98, 307);
-            this.tbComment.Multiline = true;
-            this.tbComment.Name = "tbComment";
-            this.tbComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbComment.Size = new System.Drawing.Size(375, 35);
-            this.tbComment.TabIndex = 38;
-            // 
-            // lblComment
-            // 
-            lblComment.AutoSize = true;
-            lblComment.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblComment.BackgroundStyle.Class = "";
-            lblComment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            lblComment.Location = new System.Drawing.Point(55, 307);
-            lblComment.Name = "lblComment";
-            lblComment.Size = new System.Drawing.Size(34, 16);
-            lblComment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            lblComment.TabIndex = 37;
-            lblComment.Text = "备注:";
+            this.btnCDADelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCDADelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCDADelete.Location = new System.Drawing.Point(170, 6);
+            this.btnCDADelete.Name = "btnCDADelete";
+            this.btnCDADelete.Size = new System.Drawing.Size(75, 23);
+            this.btnCDADelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCDADelete.TabIndex = 2;
+            this.btnCDADelete.Text = "删除";
+            this.btnCDADelete.Click += new System.EventHandler(this.DeleteCDA);
             // 
             // CaseDetail
             // 
@@ -2216,5 +2230,6 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbReviewNo;
         private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentTerm;
         private DevComponents.DotNetBar.Controls.TextBoxX tbComment;
+        private DevComponents.DotNetBar.ButtonX btnCDADelete;
     }
 }

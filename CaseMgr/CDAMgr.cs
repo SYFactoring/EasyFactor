@@ -63,9 +63,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Properties
 
-        #region Methods (7)
+        #region Methods (8)
 
-        // Private Methods (7) 
+        // Private Methods (8) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -99,22 +99,34 @@ namespace CMBC.EasyFactor.CaseMgr
             string cdaCode = (String)dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
             if (cdaCode != null)
             {
-                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
-                if (selectedCDA != null)
+                CDA cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
+                if (cda != null)
                 {
-                    if (MessageBox.Show("是否打算删除额度通知书: " + selectedCDA.CaseCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    if (MessageBox.Show("是否打算删除额度通知书: " + cdaCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                     {
-                        App.Current.DbContext.CDAs.DeleteOnSubmit(selectedCDA);
-                        try
-                        {
-                            App.Current.DbContext.SubmitChanges();
-                        }
-                        catch (SqlException)
-                        {
-                            MessageBox.Show("不能删除此额度通知书", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
+                        return;
+                    }
+                    bool isDeleteOK = true;
+                    foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
+                    {
+                        App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
+                    }
+                    App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
+                    App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
+                    App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
+                    App.Current.DbContext.CDAs.DeleteOnSubmit(cda);
+                    try
+                    {
+                        App.Current.DbContext.SubmitChanges();
+                    }
+                    catch (Exception e1)
+                    {
+                        isDeleteOK = false;
+                        MessageBox.Show("不能删除此额度通知书: " + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    if (isDeleteOK)
+                    {
+                        MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         dgvCDAs.Rows.RemoveAt(dgvCDAs.SelectedRows[0].Index);
                     }
                 }
@@ -145,6 +157,27 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        private void dgvCDAs_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewColumn column = this.dgvCDAs.Columns[e.ColumnIndex];
+            if (column == colIsCreditCoverRevolving || column == colIsRecoarse)
+            {
+                Object originalData = e.Value;
+                if (originalData != null)
+                {
+                    bool result = (bool)originalData;
+                    if (result)
+                    {
+                        e.Value = "Y";
+                    }
+                    else
+                    {
+                        e.Value = "N";
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Create a new CDA
         /// </summary>
@@ -163,11 +196,15 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void QueryCDAs(object sender, EventArgs e)
         {
-            var queryResult = App.Current.DbContext.CDAs.Where(c =>
-                (c.Case.SellerClient.Contracts.Where(contract => contract.ContractStatus == "已生效").SingleOrDefault().ContractCode.Contains(this.tbContractCode.Text))
-                && (c.Case.SellerClient.ClientNameCN.Contains(this.tbSellerName.Text) || c.Case.SellerClient.ClientNameEN_1.Contains(this.tbSellerName.Text) || c.Case.SellerClient.ClientNameEN_2.Contains(this.tbSellerName.Text))
-                && (c.Case.BuyerClient.ClientNameCN.Contains(this.tbSellerName.Text) || c.Case.BuyerClient.ClientNameEN_1.Contains(this.tbSellerName.Text) || c.Case.BuyerClient.ClientNameEN_2.Contains(this.tbSellerName.Text))
-                );
+            var queryResult =
+                from cda in App.Current.DbContext.CDAs
+                let contracts = cda.Case.SellerClient.Contracts
+                where this.tbContractCode.Text == string.Empty ? true : contracts.Any(con => con.ContractCode.Contains(this.tbContractCode.Text))
+                let seller = cda.Case.SellerClient
+                where seller.ClientNameCN.Contains(this.tbSellerName.Text) || seller.ClientNameEN_1.Contains(this.tbSellerName.Text) || seller.ClientNameEN_2.Contains(this.tbSellerName.Text)
+                let buyer = cda.Case.BuyerClient
+                where buyer.ClientNameCN.Contains(this.tbBuyerName.Text) || buyer.ClientNameEN_1.Contains(this.tbBuyerName.Text) || buyer.ClientNameEN_2.Contains(this.tbBuyerName.Text)
+                select cda;
 
             this.bs.DataSource = queryResult;
             this.dgvCDAs.DataSource = bs;
@@ -227,26 +264,5 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion Methods
-
-        private void dgvCDAs_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            DataGridViewColumn column = this.dgvCDAs.Columns[e.ColumnIndex];
-            if (column == colIsCreditCoverRevolving || column == colIsRecoarse)
-            {
-                Object originalData = e.Value;
-                if (originalData != null)
-                {
-                    bool result = (bool)originalData;
-                    if (result)
-                    {
-                        e.Value = "Y";
-                    }
-                    else
-                    {
-                        e.Value = "N";
-                    }
-                }
-            }
-        }
     }
 }
