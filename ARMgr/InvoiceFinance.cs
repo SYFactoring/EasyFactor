@@ -249,9 +249,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     e.Cancel = true;
                 }
-
             }
-
         }
 
         private void dgvInvoices_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -284,10 +282,17 @@ namespace CMBC.EasyFactor.ARMgr
 
         private void NewFinanceBatch(object sender, EventArgs e)
         {
+            if (this._CDA == null)
+            {
+                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             this.tbCurrentFinanceAmount.Text = string.Empty;
             InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
             financeBatch.BatchCurrency = this._CDA.Case.InvoiceCurrency;
             financeBatch.FinancePeriodBegin = DateTime.Now;
+            financeBatch.CreateUserName = App.Current.CurUser.Name;
             this.invoiceFinanceBatchBindingSource.DataSource = financeBatch;
             this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.FinanceAmount.HasValue == false).ToList();
         }
@@ -296,6 +301,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._CDA == null)
             {
+                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -304,9 +310,13 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            if (!(this.invoiceFinanceBatchBindingSource.DataSource is InvoiceFinanceBatch))
+            {
+                return;
+            }
+
             bool isSaveOK = true;
             InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.invoiceFinanceBatchBindingSource.DataSource;
-            financeBatch.CreateUserName = App.Current.CurUser.Name;
             financeBatch.CDA = this._CDA;
 
             IList invoiceList = this.invoiceBindingSource.List;
@@ -316,6 +326,10 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     ((Invoice)invoiceList[i]).InvoiceFinanceBatch = financeBatch;
                 }
+            }
+            if (financeBatch.Invoices.Count == 0)
+            {
+                return;
             }
             try
             {
@@ -340,12 +354,17 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectFactor(object sender, EventArgs e)
         {
-            InvoiceFinanceBatch invoiceFinanceBatch = this.invoiceFinanceBatchBindingSource.DataSource as InvoiceFinanceBatch;
-            if (invoiceFinanceBatch == null)
+            if (this._CDA == null)
             {
+                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
+            if (!(this.invoiceFinanceBatchBindingSource.DataSource is InvoiceFinanceBatch))
+            {
+                return;
+            }
+            InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.invoiceFinanceBatchBindingSource.DataSource;
             FactorMgr factorMgr = new FactorMgr(false);
             QueryForm queryForm = new QueryForm(factorMgr, "选择代付行");
             factorMgr.OwnerForm = queryForm;
@@ -354,7 +373,7 @@ namespace CMBC.EasyFactor.ARMgr
             Factor factor = factorMgr.Selected;
             if (factor != null)
             {
-                invoiceFinanceBatch.Factor = factor;
+                financeBatch.Factor = factor;
             }
         }
 

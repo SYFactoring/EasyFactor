@@ -309,6 +309,12 @@ namespace CMBC.EasyFactor.ARMgr
 
         private void NewPaymentBatch(object sender, EventArgs e)
         {
+            if (this._CDA == null)
+            {
+                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             this.tbPaymentAmount.Text = string.Empty;
             InvoicePaymentBatch batch = new InvoicePaymentBatch();
             switch (paymentType)
@@ -329,6 +335,7 @@ namespace CMBC.EasyFactor.ARMgr
                     break;
             }
             batch.PaymentDate = DateTime.Now;
+            batch.CreateUserName = App.Current.CurUser.Name;
             this.invoicePaymentBatchBindingSource.DataSource = batch;
             this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.PaymentAmount.HasValue == false).ToList();
 
@@ -343,9 +350,14 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._CDA == null)
             {
+                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             if (!this.superValidator.Validate())
+            {
+                return;
+            }
+            if (!(this.invoicePaymentBatchBindingSource.DataSource is InvoicePaymentBatch))
             {
                 return;
             }
@@ -353,11 +365,6 @@ namespace CMBC.EasyFactor.ARMgr
             bool isSaveOK = true;
             InvoicePaymentBatch paymentBatch = (InvoicePaymentBatch)this.invoicePaymentBatchBindingSource.DataSource;
             paymentBatch.CDA = this._CDA;
-            if (paymentBatch.PaymentBatchNo == null)
-            {
-                paymentBatch.PaymentBatchNo = GeneratePaymentBatchNo(this._CDA, DateTime.Now);
-                paymentBatch.CreateUserName = App.Current.CurUser.Name;
-            }
             IList invoiceList = this.invoiceBindingSource.List;
             for (int i = 0; i < invoiceList.Count; i++)
             {
@@ -365,6 +372,14 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     ((Invoice)invoiceList[i]).InvoicePaymentBatch = paymentBatch;
                 }
+            }
+            if (paymentBatch.Invoices.Count == 0)
+            {
+                return;
+            }
+            if (paymentBatch.PaymentBatchNo == null)
+            {
+                paymentBatch.PaymentBatchNo = GeneratePaymentBatchNo(this._CDA, DateTime.Now);
             }
             try
             {

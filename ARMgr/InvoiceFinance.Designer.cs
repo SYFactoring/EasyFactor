@@ -316,12 +316,12 @@
             // 
             this.btnFinanceBatchNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnFinanceBatchNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFinanceBatchNew.Location = new System.Drawing.Point(706, 43);
+            this.btnFinanceBatchNew.Location = new System.Drawing.Point(639, 38);
             this.btnFinanceBatchNew.Name = "btnFinanceBatchNew";
-            this.btnFinanceBatchNew.Size = new System.Drawing.Size(48, 23);
+            this.btnFinanceBatchNew.Size = new System.Drawing.Size(61, 23);
             this.btnFinanceBatchNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFinanceBatchNew.TabIndex = 22;
-            this.btnFinanceBatchNew.Text = "新建";
+            this.btnFinanceBatchNew.Text = "新建批次";
             this.btnFinanceBatchNew.Click += new System.EventHandler(this.NewFinanceBatch);
             // 
             // tbCurrentFinanceAmount
@@ -351,12 +351,12 @@
             // 
             this.btnFinanceBatchSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnFinanceBatchSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFinanceBatchSave.Location = new System.Drawing.Point(652, 43);
+            this.btnFinanceBatchSave.Location = new System.Drawing.Point(706, 38);
             this.btnFinanceBatchSave.Name = "btnFinanceBatchSave";
-            this.btnFinanceBatchSave.Size = new System.Drawing.Size(48, 23);
+            this.btnFinanceBatchSave.Size = new System.Drawing.Size(61, 23);
             this.btnFinanceBatchSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFinanceBatchSave.TabIndex = 19;
-            this.btnFinanceBatchSave.Text = "保存";
+            this.btnFinanceBatchSave.Text = "保存批次";
             this.btnFinanceBatchSave.Click += new System.EventHandler(this.SaveFinanceBatch);
             // 
             // financeTypeComboBoxEx
