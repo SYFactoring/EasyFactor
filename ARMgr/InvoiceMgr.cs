@@ -89,15 +89,25 @@ namespace CMBC.EasyFactor.ARMgr
 
         private void DeleteInvoice(object sender, EventArgs e)
         {
-            if (this.dgvInvoices.CurrentCell == null)
+            if (this.dgvInvoices.SelectedCells.Count == 0)
             {
                 return;
             }
-
-            Invoice selectedInvoice = (Invoice)this.bs.List[this.dgvInvoices.CurrentCell.RowIndex];
-            if (MessageBox.Show("是否打算删除发票: " + selectedInvoice.InvoiceNo, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            List<Invoice> selectedInvoices = new List<Invoice>();
+            List<int> rowIndexes = new List<int>();
+            foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
             {
-                App.Current.DbContext.Invoices.DeleteOnSubmit(selectedInvoice);
+                Invoice invoice = (Invoice)this.bs.List[cell.RowIndex];
+                if (!selectedInvoices.Contains(invoice))
+                {
+                    rowIndexes.Add(cell.RowIndex);
+                    selectedInvoices.Add(invoice);
+                }
+            }
+
+            if (MessageBox.Show("是否打算删除此" + selectedInvoices.Count + "条发票", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            {
+                App.Current.DbContext.Invoices.DeleteAllOnSubmit(selectedInvoices);
                 try
                 {
                     App.Current.DbContext.SubmitChanges();
@@ -107,7 +117,13 @@ namespace CMBC.EasyFactor.ARMgr
                     MessageBox.Show("删除失败," + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                dgvInvoices.Rows.RemoveAt(dgvInvoices.CurrentCell.RowIndex);
+                rowIndexes.Sort();
+                rowIndexes.Reverse();
+                foreach (int rowIndex in rowIndexes)
+                {
+                    dgvInvoices.Rows.RemoveAt(rowIndex);
+                }
+
             }
         }
 
