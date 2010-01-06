@@ -146,7 +146,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (e.Value == null)
                 return;
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colValueDate)
+            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate)
             {
                 DateTime date = (DateTime)e.Value;
                 e.Value = date.ToString("yyyyMMdd");
@@ -167,7 +167,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colValueDate)
+            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate)
             {
                 string str = (string)e.Value;
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
@@ -182,7 +182,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colValueDate)
+            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate)
             {
                 string str = (string)e.FormattedValue;
                 DateTime result;

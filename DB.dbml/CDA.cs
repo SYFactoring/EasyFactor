@@ -87,7 +87,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (this.CreditCover == null)
+                if (!this.CreditCover.HasValue)
                 {
                     return null;
                 }
@@ -95,7 +95,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     return 0;
                 }
-                return this.CreditCover - this.AssignOutstanding;
+                return this.CreditCover - this.AssignOutstanding.GetValueOrDefault();
             }
         }
 
@@ -106,7 +106,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (this.FinanceLine == null)
+                if (!this.FinanceLine.HasValue)
                 {
                     return null;
                 }
@@ -114,7 +114,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     return 0;
                 }
-                return this.FinanceLine - this.FinanceOutstanding;
+                return this.FinanceLine - this.FinanceOutstanding.GetValueOrDefault();
             }
         }
 
