@@ -140,7 +140,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (e.Value == null)
                 return;
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate)
+            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colCommissionDate)
             {
                 DateTime date = (DateTime)e.Value;
                 if (date == default(DateTime))
@@ -168,7 +168,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate)
+            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colCommissionDate)
             {
                 string str = (string)e.Value;
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
@@ -183,7 +183,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate)
+            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colCommissionDate)
             {
                 string str = (string)e.FormattedValue;
                 DateTime result;
@@ -193,7 +193,7 @@ namespace CMBC.EasyFactor.ARMgr
                     e.Cancel = true;
                 }
             }
-            else if (col == colInvoiceAmount || col == colAssignAmount)
+            else if (col == colInvoiceAmount || col == colAssignAmount || col == colCommission)
             {
                 string str = (string)e.FormattedValue;
                 double result;
@@ -221,6 +221,17 @@ namespace CMBC.EasyFactor.ARMgr
             if (this.dgvInvoices.Columns[e.ColumnIndex] == colInvoiceAmount)
             {
                 selectedInvoice.AssignAmount = selectedInvoice.InvoiceAmount;
+            }
+            else if (this.dgvInvoices.Columns[e.ColumnIndex] == colAssignAmount)
+            {
+                if (this._CDA.CommissionType == "按转让金额")
+                {
+                    selectedInvoice.Commission = selectedInvoice.AssignAmount * this._CDA.Price ?? 0;
+                    if (selectedInvoice.Commission.GetValueOrDefault() > 0)
+                    {
+                        selectedInvoice.CommissionDate = selectedInvoice.AssignDate;
+                    }
+                }
             }
         }
 

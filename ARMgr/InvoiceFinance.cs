@@ -183,32 +183,6 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.FinanceDate = batch.FinancePeriodBegin ?? DateTime.Now;
                     invoice.FinanceDueDate = batch.FinnacePeriodEnd ?? null;
 
-                    if (batch.FinanceRate.HasValue)
-                    {
-                        int period = (batch.FinnacePeriodEnd.Value - batch.FinancePeriodBegin.Value).Days;
-                        switch (batch.InterestType)
-                        {
-                            case "一次性收取":
-                                invoice.Interest = invoice.FinanceAmount * (batch.FinanceRate - batch.CostRate) / 360 * period;
-                                invoice.InterestDate = invoice.FinanceDate;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-
-                    switch (this._CDA.CommissionType)
-                    {
-                        case "按融资金额":
-                            invoice.Commission = invoice.FinanceAmount * this._CDA.Price ?? 0;
-                            invoice.CommissionDate = invoice.FinanceDate;
-                            break;
-                        case "按转让金额":
-                            break;
-                        default:
-                            break;
-                    }
-
                     colFinanceAmount.ReadOnly = false;
                     colFinanceDate.ReadOnly = false;
                     colFinanceDueDate.ReadOnly = false;
@@ -311,9 +285,35 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+            IList invoiceList = this.invoiceBindingSource.List;
+            Invoice invoice = (Invoice)invoiceList[e.RowIndex];
+
             if (this.dgvInvoices.Columns[e.ColumnIndex] == colFinanceAmount)
             {
                 CaculateCurrentFinanceAmount();
+                InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.invoiceFinanceBatchBindingSource.DataSource;
+                if (batch.FinanceRate.HasValue)
+                {
+                    int period = (batch.FinnacePeriodEnd.Value - batch.FinancePeriodBegin.Value).Days;
+                    switch (batch.InterestType)
+                    {
+                        case "一次性收取":
+                            invoice.Interest = invoice.FinanceAmount * (batch.FinanceRate - batch.CostRate) / 360 * period;
+                            invoice.InterestDate = invoice.FinanceDate;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                if (this._CDA.CommissionType == "按融资金额")
+                {
+                    invoice.Commission = invoice.FinanceAmount * this._CDA.Price ?? 0;
+                    if (invoice.Commission.GetValueOrDefault > 0)
+                    {
+                        invoice.CommissionDate = invoice.FinanceDate;
+                    }
+                }
             }
         }
 

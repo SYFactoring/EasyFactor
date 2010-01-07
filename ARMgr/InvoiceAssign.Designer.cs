@@ -73,9 +73,10 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX batchDateLabel;
             DevComponents.DotNetBar.LabelX commentLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceAssign));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelAssignBatch = new DevComponents.DotNetBar.PanelEx();
             this.btnAssignBatchImport = new DevComponents.DotNetBar.ButtonX();
             this.btnAssignBatchExport = new DevComponents.DotNetBar.ButtonX();
@@ -117,6 +118,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.colInvoiceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCommissionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             batchDateLabel = new DevComponents.DotNetBar.LabelX();
@@ -518,17 +521,19 @@ namespace CMBC.EasyFactor.ARMgr
             this.colInvoiceDate,
             this.colAssignDate,
             this.colDueDate,
+            this.colCommission,
+            this.colCommissionDate,
             this.colComment});
             this.dgvInvoices.ContextMenuStrip = this.cmuInvoiceAssign;
             this.dgvInvoices.DataSource = this.invoiceBindingSource;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
@@ -602,6 +607,20 @@ namespace CMBC.EasyFactor.ARMgr
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // colCommission
+            // 
+            this.colCommission.DataPropertyName = "Commission";
+            dataGridViewCellStyle3.Format = "N2";
+            this.colCommission.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colCommission.HeaderText = "手续费";
+            this.colCommission.Name = "colCommission";
+            // 
+            // colCommissionDate
+            // 
+            this.colCommissionDate.DataPropertyName = "CommissionDate";
+            this.colCommissionDate.HeaderText = "收费日";
+            this.colCommissionDate.Name = "colCommissionDate";
+            // 
             // colComment
             // 
             this.colComment.DataPropertyName = "Comment";
@@ -649,6 +668,8 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
     }
 }

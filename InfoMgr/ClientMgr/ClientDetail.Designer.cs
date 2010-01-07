@@ -2270,14 +2270,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbIndustry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbIndustry.FormattingEnabled = true;
             this.cbIndustry.Items.AddRange(new object[] {
-            "电子",
-            "纺织",
-            "化工",
-            "金属",
-            "家电",
-            "机械",
-            "能源",
-            "电力",
+            "化学能源",
+            "交通运输",
+            "冶金",
+            "房地产",
+            "电子通讯",
+            "租赁",
+            "医药",
+            "教育",
+            "商贸",
             "其他"});
             this.cbIndustry.Location = new System.Drawing.Point(471, 7);
             this.cbIndustry.Name = "cbIndustry";
