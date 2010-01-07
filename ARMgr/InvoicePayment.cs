@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.CaseMgr;
 
     /// <summary>
     /// 
@@ -96,7 +97,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (13)
+        #region Methods (15)
 
         // Public Methods (2) 
 
@@ -126,7 +127,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoicePaymentBatchBindingSource.DataSource = typeof(InvoicePaymentBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
-        // Private Methods (11) 
+        // Private Methods (13) 
 
         private void CaculateCurrentPaymentAmount()
         {
@@ -140,6 +141,30 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
             this.tbPaymentAmount.Text = String.Format("{0:N2}", currentPaymentAmount);
+        }
+
+        private void DetailCase(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.CurrentCell == null)
+            {
+                return;
+            }
+
+            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
+            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.CDA.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            caseDetail.ShowDialog(this);
+        }
+
+        private void DetailCDA(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.CurrentCell == null)
+            {
+                return;
+            }
+
+            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
+            CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
+            cdaDetail.ShowDialog(this);
         }
 
         /// <summary>

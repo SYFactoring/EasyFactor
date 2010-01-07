@@ -97,6 +97,8 @@
             DevComponents.DotNetBar.LabelX lblDueDate;
             DevComponents.DotNetBar.LabelX lblCreditLine;
             DevComponents.DotNetBar.LabelX lblIsNotice;
+            DevComponents.DotNetBar.LabelX efPriceLbl;
+            DevComponents.DotNetBar.LabelX lblCommissionType;
             this.panelCaseBasic = new DevComponents.DotNetBar.PanelEx();
             this.groupPanelFinanceCreditLine = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.tbFinanceOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -133,6 +135,8 @@
             this.factorNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelInvoiceMgr = new DevComponents.DotNetBar.PanelEx();
+            this.eFPriceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.commissionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             ownerDepartmentCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerEDICodeLabel = new DevComponents.DotNetBar.LabelX();
             buyerEDICodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -155,6 +159,8 @@
             lblDueDate = new DevComponents.DotNetBar.LabelX();
             lblCreditLine = new DevComponents.DotNetBar.LabelX();
             lblIsNotice = new DevComponents.DotNetBar.LabelX();
+            efPriceLbl = new DevComponents.DotNetBar.LabelX();
+            lblCommissionType = new DevComponents.DotNetBar.LabelX();
             this.panelCaseBasic.SuspendLayout();
             this.groupPanelFinanceCreditLine.SuspendLayout();
             this.groupPanelCreditCover.SuspendLayout();
@@ -299,7 +305,7 @@
             // 
             // 
             iFPriceLabel.BackgroundStyle.Class = "";
-            iFPriceLabel.Location = new System.Drawing.Point(6, 29);
+            iFPriceLabel.Location = new System.Drawing.Point(6, 49);
             iFPriceLabel.Name = "iFPriceLabel";
             iFPriceLabel.Size = new System.Drawing.Size(69, 16);
             iFPriceLabel.TabIndex = 2;
@@ -312,7 +318,7 @@
             // 
             // 
             handFeeCurrLabel.BackgroundStyle.Class = "";
-            handFeeCurrLabel.Location = new System.Drawing.Point(5, 51);
+            handFeeCurrLabel.Location = new System.Drawing.Point(5, 71);
             handFeeCurrLabel.Name = "handFeeCurrLabel";
             handFeeCurrLabel.Size = new System.Drawing.Size(72, 16);
             handFeeCurrLabel.TabIndex = 4;
@@ -704,6 +710,10 @@
             // 
             this.groupPanelPrice.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelPrice.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelPrice.Controls.Add(this.commissionTypeTextBox);
+            this.groupPanelPrice.Controls.Add(lblCommissionType);
+            this.groupPanelPrice.Controls.Add(efPriceLbl);
+            this.groupPanelPrice.Controls.Add(this.eFPriceTextBox);
             this.groupPanelPrice.Controls.Add(this.handFeeTextBox);
             this.groupPanelPrice.Controls.Add(handFeeCurrLabel);
             this.groupPanelPrice.Controls.Add(this.handFeeCurrTextBox);
@@ -752,7 +762,7 @@
             // 
             // 
             this.handFeeTextBox.Border.Class = "TextBoxBorder";
-            this.handFeeTextBox.Location = new System.Drawing.Point(115, 49);
+            this.handFeeTextBox.Location = new System.Drawing.Point(115, 69);
             this.handFeeTextBox.Name = "handFeeTextBox";
             this.handFeeTextBox.ReadOnly = true;
             this.handFeeTextBox.Size = new System.Drawing.Size(39, 20);
@@ -764,7 +774,7 @@
             // 
             // 
             this.handFeeCurrTextBox.Border.Class = "TextBoxBorder";
-            this.handFeeCurrTextBox.Location = new System.Drawing.Point(81, 49);
+            this.handFeeCurrTextBox.Location = new System.Drawing.Point(81, 69);
             this.handFeeCurrTextBox.Name = "handFeeCurrTextBox";
             this.handFeeCurrTextBox.ReadOnly = true;
             this.handFeeCurrTextBox.Size = new System.Drawing.Size(28, 20);
@@ -776,7 +786,7 @@
             // 
             // 
             this.iFPriceTextBox.Border.Class = "TextBoxBorder";
-            this.iFPriceTextBox.Location = new System.Drawing.Point(81, 27);
+            this.iFPriceTextBox.Location = new System.Drawing.Point(81, 47);
             this.iFPriceTextBox.Name = "iFPriceTextBox";
             this.iFPriceTextBox.ReadOnly = true;
             this.iFPriceTextBox.Size = new System.Drawing.Size(73, 20);
@@ -1057,6 +1067,56 @@
             this.panelInvoiceMgr.Style.GradientAngle = 90;
             this.panelInvoiceMgr.TabIndex = 0;
             // 
+            // efPriceLbl
+            // 
+            efPriceLbl.AutoSize = true;
+            // 
+            // 
+            // 
+            efPriceLbl.BackgroundStyle.Class = "";
+            efPriceLbl.Location = new System.Drawing.Point(5, 28);
+            efPriceLbl.Name = "efPriceLbl";
+            efPriceLbl.Size = new System.Drawing.Size(74, 16);
+            efPriceLbl.TabIndex = 7;
+            efPriceLbl.Text = "EF手续费率:";
+            // 
+            // eFPriceTextBox
+            // 
+            // 
+            // 
+            // 
+            this.eFPriceTextBox.Border.Class = "TextBoxBorder";
+            this.eFPriceTextBox.Location = new System.Drawing.Point(80, 26);
+            this.eFPriceTextBox.Name = "eFPriceTextBox";
+            this.eFPriceTextBox.ReadOnly = true;
+            this.eFPriceTextBox.Size = new System.Drawing.Size(73, 20);
+            this.eFPriceTextBox.TabIndex = 8;
+            // 
+            // lblCommissionType
+            // 
+            lblCommissionType.AutoSize = true;
+            // 
+            // 
+            // 
+            lblCommissionType.BackgroundStyle.Class = "";
+            lblCommissionType.Location = new System.Drawing.Point(15, 91);
+            lblCommissionType.Name = "lblCommissionType";
+            lblCommissionType.Size = new System.Drawing.Size(59, 16);
+            lblCommissionType.TabIndex = 9;
+            lblCommissionType.Text = "计费方式:";
+            // 
+            // commissionTextBox
+            // 
+            // 
+            // 
+            // 
+            this.commissionTypeTextBox.Border.Class = "TextBoxBorder";
+            this.commissionTypeTextBox.Location = new System.Drawing.Point(80, 90);
+            this.commissionTypeTextBox.Name = "commissionTextBox";
+            this.commissionTypeTextBox.ReadOnly = true;
+            this.commissionTypeTextBox.Size = new System.Drawing.Size(73, 20);
+            this.commissionTypeTextBox.TabIndex = 10;
+            // 
             // ARCaseBasic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1081,6 +1141,8 @@
         #endregion
 
         private DevComponents.DotNetBar.Controls.TextBoxX tbIsNotice;
+        private DevComponents.DotNetBar.Controls.TextBoxX commissionTypeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX eFPriceTextBox;
 
     }
 }

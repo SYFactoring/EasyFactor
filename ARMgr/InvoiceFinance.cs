@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.CaseMgr;
 
     /// <summary>
     /// 
@@ -78,7 +79,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (14)
+        #region Methods (18)
 
         // Public Methods (2) 
 
@@ -108,28 +109,87 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoiceFinanceBatchBindingSource.DataSource = typeof(InvoiceFinanceBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
-        // Private Methods (12) 
+        // Private Methods (16) 
 
-        private void CaculateCurrentFinanceAmount()
+        private void CaculateCommissionAndInterest(object sender, DataGridViewCellEventArgs e)
         {
             IList invoiceList = this.invoiceBindingSource.List;
-            double currentFinanceAmount = 0;
+            Invoice invoice = (Invoice)invoiceList[e.RowIndex];
+            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.invoiceFinanceBatchBindingSource.DataSource;
+            if (batch.FinanceRate.HasValue)
+            {
+                int period = (batch.FinnacePeriodEnd.Value - batch.FinancePeriodBegin.Value).Days;
+                switch (batch.InterestType)
+                {
+                    case "一次性收取":
+                        invoice.Interest = invoice.FinanceAmount * (batch.FinanceRate - batch.CostRate) / 360 * period;
+                        invoice.InterestDate = invoice.FinanceDate;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (this._CDA.CommissionType == "按融资金额")
+            {
+                invoice.Commission = invoice.FinanceAmount * this._CDA.Price ?? 0;
+                if (invoice.Commission.GetValueOrDefault() > 0)
+                {
+                    invoice.CommissionDate = invoice.FinanceDate;
+                }
+            }
+
+        }
+
+        private void CaculateCurrentFinance()
+        {
+            IList invoiceList = this.invoiceBindingSource.List;
+            InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.invoiceFinanceBatchBindingSource.DataSource;
+
+            double totalFinance = 0;
+            double totalInterest = 0;
             for (int i = 0; i < invoiceList.Count; i++)
             {
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    currentFinanceAmount += ((Invoice)invoiceList[i]).FinanceAmount.GetValueOrDefault();
+                    totalFinance += ((Invoice)invoiceList[i]).FinanceAmount.GetValueOrDefault();
+                    totalInterest += ((Invoice)invoiceList[i]).Interest.GetValueOrDefault();
                 }
             }
-            this.tbCurrentFinanceAmount.Text = String.Format("{0:N2}", currentFinanceAmount);
-            InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.invoiceFinanceBatchBindingSource.DataSource;
+            this.tbTotalFinance.Text = String.Format("{0:N2}", totalFinance);
+            this.tbFinanceLineBalance.Text = String.Format("{0:N2}", financeBatch.FinanceAmount - totalFinance);
+            this.tbTotalInterest.Text = String.Format("{0:N2}", totalInterest);
             if (financeBatch.FinanceAmount.HasValue)
             {
-                if (currentFinanceAmount > financeBatch.FinanceAmount)
+                if (totalFinance > financeBatch.FinanceAmount)
                 {
                     MessageBox.Show("当前融资额超过限定", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+        }
+
+        private void DetailCase(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.CurrentCell == null)
+            {
+                return;
+            }
+
+            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
+            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.CDA.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            caseDetail.ShowDialog(this);
+        }
+
+        private void DetailCDA(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.CurrentCell == null)
+            {
+                return;
+            }
+
+            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
+            CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
+            cdaDetail.ShowDialog(this);
         }
 
         /// <summary>
@@ -164,7 +224,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
                 {
                     double currentFinanceAmount;
-                    if (!Double.TryParse(this.tbCurrentFinanceAmount.Text, out currentFinanceAmount))
+                    if (!Double.TryParse(this.tbTotalFinance.Text, out currentFinanceAmount))
                         currentFinanceAmount = 0;
 
                     InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.invoiceFinanceBatchBindingSource.DataSource;
@@ -213,7 +273,7 @@ namespace CMBC.EasyFactor.ARMgr
                     colCommission.ReadOnly = true;
                     colCommissionDate.ReadOnly = true;
                 }
-                CaculateCurrentFinanceAmount();
+                CaculateCurrentFinance();
             }
 
         }
@@ -289,39 +349,9 @@ namespace CMBC.EasyFactor.ARMgr
             }
             if (this.dgvInvoices.Columns[e.ColumnIndex] == colFinanceAmount)
             {
-                CaculateCurrentFinanceAmount();
+                CaculateCurrentFinance();
                 CaculateCommissionAndInterest(sender, e);
             }
-        }
-
-        private void CaculateCommissionAndInterest(object sender, DataGridViewCellEventArgs e)
-        {
-            IList invoiceList = this.invoiceBindingSource.List;
-            Invoice invoice = (Invoice)invoiceList[e.RowIndex];
-            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.invoiceFinanceBatchBindingSource.DataSource;
-            if (batch.FinanceRate.HasValue)
-            {
-                int period = (batch.FinnacePeriodEnd.Value - batch.FinancePeriodBegin.Value).Days;
-                switch (batch.InterestType)
-                {
-                    case "一次性收取":
-                        invoice.Interest = invoice.FinanceAmount * (batch.FinanceRate - batch.CostRate) / 360 * period;
-                        invoice.InterestDate = invoice.FinanceDate;
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            if (this._CDA.CommissionType == "按融资金额")
-            {
-                invoice.Commission = invoice.FinanceAmount * this._CDA.Price ?? 0;
-                if (invoice.Commission.GetValueOrDefault() > 0)
-                {
-                    invoice.CommissionDate = invoice.FinanceDate;
-                }
-            }
-
         }
 
         private void dgvInvoices_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -348,7 +378,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            this.tbCurrentFinanceAmount.Text = string.Empty;
+            this.tbTotalFinance.Text = string.Empty;
             InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
             financeBatch.BatchCurrency = this._CDA.Case.InvoiceCurrency;
             financeBatch.CreateUserName = App.Current.CurUser.Name;

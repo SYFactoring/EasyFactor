@@ -77,6 +77,10 @@ namespace CMBC.EasyFactor.ARMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            DevComponents.DotNetBar.LabelX lblTotalAssign;
+            DevComponents.DotNetBar.LabelX lblAssignNumber;
+            DevComponents.DotNetBar.LabelX lblTotalCommission;
+            DevComponents.DotNetBar.LabelX lblTotalHandfee;
             this.panelAssignBatch = new DevComponents.DotNetBar.PanelEx();
             this.btnAssignBatchImport = new DevComponents.DotNetBar.ButtonX();
             this.btnAssignBatchExport = new DevComponents.DotNetBar.ButtonX();
@@ -121,9 +125,19 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCommissionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCDADetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbTotalAssign = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbAssignNumber = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbTotalCommission = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbTotalHandfee = new DevComponents.DotNetBar.Controls.TextBoxX();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             batchDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
+            lblTotalAssign = new DevComponents.DotNetBar.LabelX();
+            lblAssignNumber = new DevComponents.DotNetBar.LabelX();
+            lblTotalCommission = new DevComponents.DotNetBar.LabelX();
+            lblTotalHandfee = new DevComponents.DotNetBar.LabelX();
             this.panelAssignBatch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceAssignBatchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchDateDateTimePicker)).BeginInit();
@@ -178,6 +192,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.panelAssignBatch.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelAssignBatch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelAssignBatch.Controls.Add(this.tbTotalHandfee);
+            this.panelAssignBatch.Controls.Add(this.tbTotalCommission);
+            this.panelAssignBatch.Controls.Add(this.tbAssignNumber);
+            this.panelAssignBatch.Controls.Add(this.tbTotalAssign);
+            this.panelAssignBatch.Controls.Add(lblTotalHandfee);
+            this.panelAssignBatch.Controls.Add(lblTotalCommission);
+            this.panelAssignBatch.Controls.Add(lblAssignNumber);
+            this.panelAssignBatch.Controls.Add(lblTotalAssign);
             this.panelAssignBatch.Controls.Add(this.btnAssignBatchImport);
             this.panelAssignBatch.Controls.Add(this.btnAssignBatchExport);
             this.panelAssignBatch.Controls.Add(this.btnAssignBatchSelect);
@@ -193,7 +215,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelAssignBatch.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelAssignBatch.Location = new System.Drawing.Point(0, 0);
             this.panelAssignBatch.Name = "panelAssignBatch";
-            this.panelAssignBatch.Size = new System.Drawing.Size(767, 73);
+            this.panelAssignBatch.Size = new System.Drawing.Size(1235, 81);
             this.panelAssignBatch.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelAssignBatch.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelAssignBatch.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -346,49 +368,51 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.cmuInvoiceAssign.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemInvoiceDetail,
+            this.menuItemCDADetail,
+            this.menuItemCaseDetail,
             this.toolStripSeparator,
             this.menuItemFlaw,
             this.toolStripSeparator1,
             this.menuItemAssignBatchExport,
             this.menuItemAssignBatchImport});
             this.cmuInvoiceAssign.Name = "cmuInvoiceAssign";
-            this.cmuInvoiceAssign.Size = new System.Drawing.Size(123, 104);
+            this.cmuInvoiceAssign.Size = new System.Drawing.Size(183, 148);
             // 
             // menuItemInvoiceDetail
             // 
             this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
-            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(122, 22);
+            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(182, 22);
             this.menuItemInvoiceDetail.Text = "详细信息";
             this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(119, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(179, 6);
             // 
             // menuItemFlaw
             // 
             this.menuItemFlaw.Name = "menuItemFlaw";
-            this.menuItemFlaw.Size = new System.Drawing.Size(122, 22);
+            this.menuItemFlaw.Size = new System.Drawing.Size(182, 22);
             this.menuItemFlaw.Text = "瑕疵处理";
             this.menuItemFlaw.Click += new System.EventHandler(this.Flaw);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
             // 
             // menuItemAssignBatchExport
             // 
             this.menuItemAssignBatchExport.Name = "menuItemAssignBatchExport";
-            this.menuItemAssignBatchExport.Size = new System.Drawing.Size(122, 22);
+            this.menuItemAssignBatchExport.Size = new System.Drawing.Size(182, 22);
             this.menuItemAssignBatchExport.Text = "导出批次";
             this.menuItemAssignBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
             // 
             // menuItemAssignBatchImport
             // 
             this.menuItemAssignBatchImport.Name = "menuItemAssignBatchImport";
-            this.menuItemAssignBatchImport.Size = new System.Drawing.Size(122, 22);
+            this.menuItemAssignBatchImport.Size = new System.Drawing.Size(182, 22);
             this.menuItemAssignBatchImport.Text = "导入批次";
             this.menuItemAssignBatchImport.Click += new System.EventHandler(this.ImportAssignBatch);
             // 
@@ -414,14 +438,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem});
-            this.invoiceBindingNavigator.Location = new System.Drawing.Point(0, 73);
+            this.invoiceBindingNavigator.Location = new System.Drawing.Point(0, 81);
             this.invoiceBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.invoiceBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.invoiceBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
             this.invoiceBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.invoiceBindingNavigator.Name = "invoiceBindingNavigator";
             this.invoiceBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.invoiceBindingNavigator.Size = new System.Drawing.Size(767, 25);
+            this.invoiceBindingNavigator.Size = new System.Drawing.Size(1235, 25);
             this.invoiceBindingNavigator.TabIndex = 1;
             this.invoiceBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -537,10 +561,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvInvoices.Location = new System.Drawing.Point(0, 98);
+            this.dgvInvoices.Location = new System.Drawing.Point(0, 106);
             this.dgvInvoices.Name = "dgvInvoices";
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvInvoices.Size = new System.Drawing.Size(767, 497);
+            this.dgvInvoices.Size = new System.Drawing.Size(1235, 489);
             this.dgvInvoices.TabIndex = 0;
             this.dgvInvoices.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellValueChanged);
             this.dgvInvoices.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvInvoices_CellValidating);
@@ -627,6 +651,116 @@ namespace CMBC.EasyFactor.ARMgr
             this.colComment.HeaderText = "备注";
             this.colComment.Name = "colComment";
             // 
+            // menuItemCaseDetail
+            // 
+            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCaseDetail.Text = "案子详细信息";
+            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
+            // 
+            // menuItemCDADetail
+            // 
+            this.menuItemCDADetail.Name = "menuItemCDADetail";
+            this.menuItemCDADetail.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCDADetail.Text = "额度通知书详细信息";
+            this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
+            // 
+            // lblTotalAssign
+            // 
+            lblTotalAssign.AutoSize = true;
+            // 
+            // 
+            // 
+            lblTotalAssign.BackgroundStyle.Class = "";
+            lblTotalAssign.Location = new System.Drawing.Point(811, 3);
+            lblTotalAssign.Name = "lblTotalAssign";
+            lblTotalAssign.Size = new System.Drawing.Size(93, 16);
+            lblTotalAssign.TabIndex = 12;
+            lblTotalAssign.Text = "本次转让总金额";
+            // 
+            // lblAssignNumber
+            // 
+            lblAssignNumber.AutoSize = true;
+            // 
+            // 
+            // 
+            lblAssignNumber.BackgroundStyle.Class = "";
+            lblAssignNumber.Location = new System.Drawing.Point(811, 22);
+            lblAssignNumber.Name = "lblAssignNumber";
+            lblAssignNumber.Size = new System.Drawing.Size(93, 16);
+            lblAssignNumber.TabIndex = 13;
+            lblAssignNumber.Text = "本次转让总笔数";
+            // 
+            // lblTotalCommission
+            // 
+            lblTotalCommission.AutoSize = true;
+            // 
+            // 
+            // 
+            lblTotalCommission.BackgroundStyle.Class = "";
+            lblTotalCommission.Location = new System.Drawing.Point(811, 41);
+            lblTotalCommission.Name = "lblTotalCommission";
+            lblTotalCommission.Size = new System.Drawing.Size(93, 16);
+            lblTotalCommission.TabIndex = 14;
+            lblTotalCommission.Text = "本次手续费收入";
+            // 
+            // lblTotalHandfee
+            // 
+            lblTotalHandfee.AutoSize = true;
+            // 
+            // 
+            // 
+            lblTotalHandfee.BackgroundStyle.Class = "";
+            lblTotalHandfee.Location = new System.Drawing.Point(786, 60);
+            lblTotalHandfee.Name = "lblTotalHandfee";
+            lblTotalHandfee.Size = new System.Drawing.Size(118, 16);
+            lblTotalHandfee.TabIndex = 15;
+            lblTotalHandfee.Text = "本次单据处理费收入";
+            // 
+            // tbTotalAssign
+            // 
+            // 
+            // 
+            // 
+            this.tbTotalAssign.Border.Class = "TextBoxBorder";
+            this.tbTotalAssign.Location = new System.Drawing.Point(910, 2);
+            this.tbTotalAssign.Name = "tbTotalAssign";
+            this.tbTotalAssign.Size = new System.Drawing.Size(89, 20);
+            this.tbTotalAssign.TabIndex = 16;
+            // 
+            // tbAssignNumber
+            // 
+            // 
+            // 
+            // 
+            this.tbAssignNumber.Border.Class = "TextBoxBorder";
+            this.tbAssignNumber.Location = new System.Drawing.Point(910, 21);
+            this.tbAssignNumber.Name = "tbAssignNumber";
+            this.tbAssignNumber.Size = new System.Drawing.Size(89, 20);
+            this.tbAssignNumber.TabIndex = 17;
+            // 
+            // tbTotalCommission
+            // 
+            // 
+            // 
+            // 
+            this.tbTotalCommission.Border.Class = "TextBoxBorder";
+            this.tbTotalCommission.Location = new System.Drawing.Point(910, 40);
+            this.tbTotalCommission.Name = "tbTotalCommission";
+            this.tbTotalCommission.Size = new System.Drawing.Size(89, 20);
+            this.tbTotalCommission.TabIndex = 18;
+            // 
+            // tbTotalHandfee
+            // 
+            // 
+            // 
+            // 
+            this.tbTotalHandfee.Border.Class = "TextBoxBorder";
+            this.tbTotalHandfee.Location = new System.Drawing.Point(910, 59);
+            this.tbTotalHandfee.Name = "tbTotalHandfee";
+            this.tbTotalHandfee.Size = new System.Drawing.Size(89, 20);
+            this.tbTotalHandfee.TabIndex = 19;
+            // 
             // InvoiceAssign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -635,7 +769,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.Controls.Add(this.invoiceBindingNavigator);
             this.Controls.Add(this.panelAssignBatch);
             this.Name = "InvoiceAssign";
-            this.Size = new System.Drawing.Size(767, 595);
+            this.Size = new System.Drawing.Size(1235, 595);
             this.panelAssignBatch.ResumeLayout(false);
             this.panelAssignBatch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceAssignBatchBindingSource)).EndInit();
@@ -671,5 +805,11 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalHandfee;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalCommission;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbAssignNumber;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalAssign;
     }
 }

@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.CaseMgr;
 
     /// <summary>
     /// 
@@ -62,7 +63,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (16)
+        #region Methods (20)
 
         // Public Methods (2) 
 
@@ -92,7 +93,63 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoiceBindingSource.DataSource = typeof(Invoice);
             this.invoiceAssignBatchBindingSource.DataSource = typeof(InvoiceAssignBatch);
         }
-        // Private Methods (14) 
+        // Private Methods (18) 
+
+        private void CaculateCommisssion(Invoice selectedInvoice)
+        {
+            if (this._CDA.CommissionType == "按转让金额")
+            {
+                selectedInvoice.Commission = selectedInvoice.AssignAmount * this._CDA.Price ?? 0;
+                if (selectedInvoice.Commission.GetValueOrDefault() > 0)
+                {
+                    selectedInvoice.CommissionDate = selectedInvoice.AssignDate;
+                }
+                else
+                {
+                    selectedInvoice.CommissionDate = null;
+                }
+            }
+        }
+
+        private void CaculateCurrentAssign()
+        {
+            IList invoiceList = this.invoiceBindingSource.List;
+            double totalAssign = 0;
+            double totalCommmission = 0;
+            foreach (Invoice invoice in invoiceList)
+            {
+                totalAssign += invoice.AssignAmount;
+                totalCommmission += invoice.Commission.GetValueOrDefault();
+            }
+            this.tbTotalAssign.Text = String.Format("{0:N2}", totalAssign);
+            this.tbAssignNumber.Text = String.Format("{0}", invoiceList.Count);
+            this.tbTotalCommission.Text = String.Format("{0:N2}", totalCommmission);
+            this.tbTotalHandfee.Text = String.Format("{0:N2}", invoiceList.Count * this._CDA.HandFee.GetValueOrDefault());
+        }
+
+        private void DetailCase(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.CurrentCell == null)
+            {
+                return;
+            }
+
+            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
+            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.CDA.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            caseDetail.ShowDialog(this);
+        }
+
+        private void DetailCDA(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.CurrentCell == null)
+            {
+                return;
+            }
+
+            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
+            CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
+            cdaDetail.ShowDialog(this);
+        }
 
         /// <summary>
         /// Show detail info of selected inovice
@@ -236,24 +293,10 @@ namespace CMBC.EasyFactor.ARMgr
             else if (this.dgvInvoices.Columns[e.ColumnIndex] == colAssignAmount)
             {
                 CaculateCommisssion(selectedInvoice);
+                CaculateCurrentAssign();
             }
         }
 
-        private void CaculateCommisssion(Invoice selectedInvoice)
-        {
-            if (this._CDA.CommissionType == "按转让金额")
-            {
-                selectedInvoice.Commission = selectedInvoice.AssignAmount * this._CDA.Price ?? 0;
-                if (selectedInvoice.Commission.GetValueOrDefault() > 0)
-                {
-                    selectedInvoice.CommissionDate = selectedInvoice.AssignDate;
-                }
-                else
-                {
-                    selectedInvoice.CommissionDate = null;
-                }
-            }
-        }
         private void dgvInvoices_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DetailInvoice(null, null);
@@ -431,6 +474,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
                 this.invoiceBindingSource.DataSource = assignBatch.Invoices.ToList();
+                this.CaculateCurrentAssign();
             }
         }
 

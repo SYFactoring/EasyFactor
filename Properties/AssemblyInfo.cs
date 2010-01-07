@@ -5,19 +5,19 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("中国民生银行保理运营系统")]
-[assembly: AssemblyDescription("本系统由复旦大学刘一鸣开发并维护。联系方式：liuyiming.vip@gmail.com")]
+[assembly: AssemblyTitle("中国民生银行保理运营系统（简化版）")]
+[assembly: AssemblyDescription("本系统由刘一鸣、张晓兰开发并维护。联系方式：liuyiming.vip@gmail.com")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("中国民生银行贸易金融部")]
 [assembly: AssemblyProduct("EasyFactor")]
-[assembly: AssemblyCopyright("Copyright ©  2009")]
+[assembly: AssemblyCopyright("Copyright ©  2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
+[assembly: ComVisible(true)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("86309aa8-1c08-48ce-97fc-f362eabfd472")]
