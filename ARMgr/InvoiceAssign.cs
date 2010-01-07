@@ -75,7 +75,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             DateTime begin = new DateTime(date.Year, date.Month, date.Day);
             DateTime end = begin.AddDays(1);
-            int batchCount = App.Current.DbContext.InvoiceAssignBatches.Count(batch => batch.BatchDate > begin && batch.BatchDate < end);
+            int batchCount = App.Current.DbContext.InvoiceAssignBatches.Count(batch => batch.BatchDate >= begin && batch.BatchDate < end);
             string assignNo = String.Format("ASS{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return assignNo;
         }

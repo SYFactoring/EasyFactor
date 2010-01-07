@@ -484,11 +484,6 @@ namespace CMBC.EasyFactor.Utils
                         invoice.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
                         invoice.RefundAmount = (System.Nullable<double>)valueArray[row, column++];
                         invoice.RefundDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                        invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
-                        invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                        invoice.Interest = (System.Nullable<double>)valueArray[row, column++];
-                        invoice.InterestDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                        invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
                         InvoicePaymentBatch paymentBatch = paymentBatches.SingleOrDefault(batch => batch.PaymentDate.Equals(invoice.PaymentDate) && batch.CDACode == cda.CDACode);
                         if (paymentBatch == null)
@@ -512,10 +507,48 @@ namespace CMBC.EasyFactor.Utils
                         invoice.InvoicePaymentBatch = paymentBatch;
                     }
 
+                    column = 46;
+                    invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    if (!invoice.Commission.HasValue)
+                    {
+                        switch (cda.CommissionType)
+                        {
+                            case "按融资金额":
+                                invoice.Commission = invoice.FinanceAmount * cda.Price ?? 0;
+                                invoice.CommissionDate = invoice.FinanceDate;
+                                break;
+                            case "按转让金额":
+                                invoice.Commission = invoice.AssignAmount * cda.Price ?? 0;
+                                invoice.CommissionDate = invoice.AssignDate;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    invoice.Interest = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.InterestDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    if (!invoice.Interest.HasValue)
+                    {
+                        if (invoice.InvoiceFinanceBatch != null && invoice.InvoiceFinanceBatch.InterestType == "一次性收取")
+                        {
+                            int period = (invoice.InvoiceFinanceBatch.FinnacePeriodEnd.Value - invoice.InvoiceFinanceBatch.FinancePeriodBegin.Value).Days;
+                            invoice.Interest = invoice.FinanceAmount * (invoice.InvoiceFinanceBatch.FinanceRate - invoice.InvoiceFinanceBatch.CostRate) / 360 * period;
+                            if (invoice.Interest.HasValue)
+                            {
+                                invoice.InterestDate = invoice.FinanceDate;
+                            }
+                        }
+                    }
+                    invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+
+                    App.Current.DbContext.SubmitChanges();
+
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
-                App.Current.DbContext.SubmitChanges();
+               
             }
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);

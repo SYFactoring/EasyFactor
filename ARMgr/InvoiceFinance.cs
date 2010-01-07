@@ -91,7 +91,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             DateTime begin = new DateTime(date.Year, date.Month, date.Day);
             DateTime end = begin.AddDays(1);
-            int batchCount = App.Current.DbContext.InvoiceFinanceBatches.Count(batch => batch.FinancePeriodBegin > begin && batch.FinancePeriodBegin < end);
+            int batchCount = App.Current.DbContext.InvoiceFinanceBatches.Count(batch => batch.FinancePeriodBegin >= begin && batch.FinancePeriodBegin < end);
             string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return financeNo;
         }

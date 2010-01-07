@@ -109,7 +109,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             DateTime begin = new DateTime(date.Year, date.Month, date.Day);
             DateTime end = begin.AddDays(1);
-            int batchCount = App.Current.DbContext.InvoicePaymentBatches.Count(batch => batch.PaymentDate > begin && batch.PaymentDate < end);
+            int batchCount = App.Current.DbContext.InvoicePaymentBatches.Count(batch => batch.PaymentDate >= begin && batch.PaymentDate < end);
             string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return paymentNo;
         }
