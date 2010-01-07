@@ -29,13 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.tbFinanceOverDueDays = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblFinanceOverDueDays = new DevComponents.DotNetBar.LabelX();
+            this.tbAssignOverDueDays = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblAssignOverDueDays = new DevComponents.DotNetBar.LabelX();
             this.cbIsDispute = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cbIsFlaw = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.tbInvoiceNo = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -59,16 +63,22 @@
             this.colInvoiceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsFlaw = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignOverDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceOverDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsDispute = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuInvoiceMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCDADetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemInvoiceFlaw = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemInvoiceDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemExportAssignFinancePayment = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemExportAllInvoices = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemExportSelectedInvoices = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.cmuInvoiceMgr.SuspendLayout();
@@ -78,6 +88,10 @@
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.tbFinanceOverDueDays);
+            this.panelQuery.Controls.Add(this.lblFinanceOverDueDays);
+            this.panelQuery.Controls.Add(this.tbAssignOverDueDays);
+            this.panelQuery.Controls.Add(this.lblAssignOverDueDays);
             this.panelQuery.Controls.Add(this.cbIsDispute);
             this.panelQuery.Controls.Add(this.cbIsFlaw);
             this.panelQuery.Controls.Add(this.tbInvoiceNo);
@@ -94,7 +108,7 @@
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(513, 56);
+            this.panelQuery.Size = new System.Drawing.Size(805, 56);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -103,6 +117,54 @@
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 1;
+            // 
+            // tbFinanceOverDueDays
+            // 
+            // 
+            // 
+            // 
+            this.tbFinanceOverDueDays.Border.Class = "TextBoxBorder";
+            this.tbFinanceOverDueDays.Location = new System.Drawing.Point(412, 30);
+            this.tbFinanceOverDueDays.Name = "tbFinanceOverDueDays";
+            this.tbFinanceOverDueDays.Size = new System.Drawing.Size(100, 20);
+            this.tbFinanceOverDueDays.TabIndex = 16;
+            // 
+            // lblFinanceOverDueDays
+            // 
+            this.lblFinanceOverDueDays.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblFinanceOverDueDays.BackgroundStyle.Class = "";
+            this.lblFinanceOverDueDays.Location = new System.Drawing.Point(325, 33);
+            this.lblFinanceOverDueDays.Name = "lblFinanceOverDueDays";
+            this.lblFinanceOverDueDays.Size = new System.Drawing.Size(81, 16);
+            this.lblFinanceOverDueDays.TabIndex = 15;
+            this.lblFinanceOverDueDays.Text = "融资逾期天数";
+            // 
+            // tbAssignOverDueDays
+            // 
+            // 
+            // 
+            // 
+            this.tbAssignOverDueDays.Border.Class = "TextBoxBorder";
+            this.tbAssignOverDueDays.Location = new System.Drawing.Point(412, 7);
+            this.tbAssignOverDueDays.Name = "tbAssignOverDueDays";
+            this.tbAssignOverDueDays.Size = new System.Drawing.Size(100, 20);
+            this.tbAssignOverDueDays.TabIndex = 14;
+            // 
+            // lblAssignOverDueDays
+            // 
+            this.lblAssignOverDueDays.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblAssignOverDueDays.BackgroundStyle.Class = "";
+            this.lblAssignOverDueDays.Location = new System.Drawing.Point(305, 10);
+            this.lblAssignOverDueDays.Name = "lblAssignOverDueDays";
+            this.lblAssignOverDueDays.Size = new System.Drawing.Size(106, 16);
+            this.lblAssignOverDueDays.TabIndex = 13;
+            this.lblAssignOverDueDays.Text = "应收帐款逾期天数";
             // 
             // cbIsDispute
             // 
@@ -115,7 +177,7 @@
             this.cbIsDispute.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.cbIsDispute.CheckValue = "A";
             this.cbIsDispute.CheckValueIndeterminate = "A";
-            this.cbIsDispute.Location = new System.Drawing.Point(314, 34);
+            this.cbIsDispute.Location = new System.Drawing.Point(518, 35);
             this.cbIsDispute.Name = "cbIsDispute";
             this.cbIsDispute.Size = new System.Drawing.Size(76, 16);
             this.cbIsDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -134,7 +196,7 @@
             this.cbIsFlaw.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.cbIsFlaw.CheckValue = "A";
             this.cbIsFlaw.CheckValueIndeterminate = "A";
-            this.cbIsFlaw.Location = new System.Drawing.Point(314, 9);
+            this.cbIsFlaw.Location = new System.Drawing.Point(518, 10);
             this.cbIsFlaw.Name = "cbIsFlaw";
             this.cbIsFlaw.Size = new System.Drawing.Size(76, 16);
             this.cbIsFlaw.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -148,7 +210,7 @@
             // 
             // 
             this.tbInvoiceNo.Border.Class = "TextBoxBorder";
-            this.tbInvoiceNo.Location = new System.Drawing.Point(208, 30);
+            this.tbInvoiceNo.Location = new System.Drawing.Point(199, 31);
             this.tbInvoiceNo.Name = "tbInvoiceNo";
             this.tbInvoiceNo.Size = new System.Drawing.Size(100, 20);
             this.tbInvoiceNo.TabIndex = 7;
@@ -173,7 +235,7 @@
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(460, 9);
+            this.lblCount.Location = new System.Drawing.Point(671, 34);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 12;
@@ -182,7 +244,7 @@
             // 
             this.btnQueryReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQueryReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQueryReset.Location = new System.Drawing.Point(408, 31);
+            this.btnQueryReset.Location = new System.Drawing.Point(600, 30);
             this.btnQueryReset.Name = "btnQueryReset";
             this.btnQueryReset.Size = new System.Drawing.Size(46, 22);
             this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -194,7 +256,7 @@
             // 
             this.btnBatchQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnBatchQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnBatchQuery.Location = new System.Drawing.Point(408, 5);
+            this.btnBatchQuery.Location = new System.Drawing.Point(600, 7);
             this.btnBatchQuery.Name = "btnBatchQuery";
             this.btnBatchQuery.Size = new System.Drawing.Size(46, 22);
             this.btnBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -232,7 +294,7 @@
             // 
             // 
             this.tbBuyer.Border.Class = "TextBoxBorder";
-            this.tbBuyer.Location = new System.Drawing.Point(208, 7);
+            this.tbBuyer.Location = new System.Drawing.Point(199, 8);
             this.tbBuyer.Name = "tbBuyer";
             this.tbBuyer.Size = new System.Drawing.Size(100, 20);
             this.tbBuyer.TabIndex = 3;
@@ -280,14 +342,14 @@
             this.dgvInvoices.AllowUserToDeleteRows = false;
             this.dgvInvoices.AllowUserToOrderColumns = true;
             this.dgvInvoices.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInvoices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSellerName,
@@ -299,24 +361,30 @@
             this.colInvoiceDate,
             this.colAssignDate,
             this.colDueDate,
-            this.colIsFlaw});
+            this.colFinanceDate,
+            this.colFinanceDueDate,
+            this.colIsFlaw,
+            this.colAssignOverDueDays,
+            this.colFinanceOverDueDays,
+            this.colIsDispute});
             this.dgvInvoices.ContextMenuStrip = this.cmuInvoiceMgr;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvInvoices.Location = new System.Drawing.Point(0, 56);
             this.dgvInvoices.Name = "dgvInvoices";
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvInvoices.Size = new System.Drawing.Size(513, 301);
+            this.dgvInvoices.Size = new System.Drawing.Size(805, 301);
             this.dgvInvoices.TabIndex = 0;
             this.dgvInvoices.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
+            this.dgvInvoices.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvInvoices_DataBindingComplete);
             // 
             // colSellerName
             // 
@@ -356,8 +424,8 @@
             // colAssignAmount
             // 
             this.colAssignAmount.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle8.Format = "N2";
-            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Format = "N2";
+            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colAssignAmount.HeaderText = "转让金额";
             this.colAssignAmount.Name = "colAssignAmount";
             this.colAssignAmount.ReadOnly = true;
@@ -365,8 +433,8 @@
             // colInvoiceDate
             // 
             this.colInvoiceDate.DataPropertyName = "InvoiceDate";
-            dataGridViewCellStyle9.Format = "d";
-            this.colInvoiceDate.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Format = "d";
+            this.colInvoiceDate.DefaultCellStyle = dataGridViewCellStyle3;
             this.colInvoiceDate.HeaderText = "发票日";
             this.colInvoiceDate.Name = "colInvoiceDate";
             this.colInvoiceDate.ReadOnly = true;
@@ -374,8 +442,8 @@
             // colAssignDate
             // 
             this.colAssignDate.DataPropertyName = "AssignDate";
-            dataGridViewCellStyle10.Format = "d";
-            this.colAssignDate.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Format = "d";
+            this.colAssignDate.DefaultCellStyle = dataGridViewCellStyle4;
             this.colAssignDate.HeaderText = "转让日";
             this.colAssignDate.Name = "colAssignDate";
             this.colAssignDate.ReadOnly = true;
@@ -383,12 +451,24 @@
             // colDueDate
             // 
             this.colDueDate.DataPropertyName = "DueDate";
-            dataGridViewCellStyle11.Format = "d";
-            dataGridViewCellStyle11.NullValue = null;
-            this.colDueDate.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Format = "d";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colDueDate.DefaultCellStyle = dataGridViewCellStyle5;
             this.colDueDate.HeaderText = "到期日";
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.ReadOnly = true;
+            // 
+            // colFinanceDate
+            // 
+            this.colFinanceDate.DataPropertyName = "FinanceDate";
+            this.colFinanceDate.HeaderText = "融资日";
+            this.colFinanceDate.Name = "colFinanceDate";
+            // 
+            // colFinanceDueDate
+            // 
+            this.colFinanceDueDate.DataPropertyName = "FinanceDueDate";
+            this.colFinanceDueDate.HeaderText = "融资到期日";
+            this.colFinanceDueDate.Name = "colFinanceDueDate";
             // 
             // colIsFlaw
             // 
@@ -397,6 +477,24 @@
             this.colIsFlaw.Name = "colIsFlaw";
             this.colIsFlaw.ReadOnly = true;
             this.colIsFlaw.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colAssignOverDueDays
+            // 
+            this.colAssignOverDueDays.DataPropertyName = "AssignOverDueDays";
+            this.colAssignOverDueDays.HeaderText = "应收账款逾期天数";
+            this.colAssignOverDueDays.Name = "colAssignOverDueDays";
+            // 
+            // colFinanceOverDueDays
+            // 
+            this.colFinanceOverDueDays.DataPropertyName = "FinanceOverDueDays";
+            this.colFinanceOverDueDays.HeaderText = "融资逾期天数";
+            this.colFinanceOverDueDays.Name = "colFinanceOverDueDays";
+            // 
+            // colIsDispute
+            // 
+            this.colIsDispute.DataPropertyName = "IsDispute";
+            this.colIsDispute.HeaderText = "是否商纠";
+            this.colIsDispute.Name = "colIsDispute";
             // 
             // cmuInvoiceMgr
             // 
@@ -408,9 +506,10 @@
             this.menuItemInvoiceFlaw,
             this.menuItemInvoiceDelete,
             this.toolStripSeparator1,
-            this.menuItemExportAssignFinancePayment});
+            this.menuItemExportAllInvoices,
+            this.menuItemExportSelectedInvoices});
             this.cmuInvoiceMgr.Name = "cmuContractMgr";
-            this.cmuInvoiceMgr.Size = new System.Drawing.Size(183, 170);
+            this.cmuInvoiceMgr.Size = new System.Drawing.Size(183, 192);
             // 
             // menuItemInvoiceDetail
             // 
@@ -419,19 +518,19 @@
             this.menuItemInvoiceDetail.Text = "详细信息";
             this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
             // 
-            // menuItemCaseDetail
-            // 
-            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCaseDetail.Text = "案子详细信息";
-            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
-            // 
             // menuItemCDADetail
             // 
             this.menuItemCDADetail.Name = "menuItemCDADetail";
             this.menuItemCDADetail.Size = new System.Drawing.Size(182, 22);
             this.menuItemCDADetail.Text = "额度通知书详细信息";
             this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
+            // 
+            // menuItemCaseDetail
+            // 
+            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCaseDetail.Text = "案子详细信息";
+            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
             // 
             // toolStripSeparator
             // 
@@ -457,12 +556,19 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
             // 
-            // menuItemExportAssignFinancePayment
+            // menuItemExportAllInvoices
             // 
-            this.menuItemExportAssignFinancePayment.Name = "menuItemExportAssignFinancePayment";
-            this.menuItemExportAssignFinancePayment.Size = new System.Drawing.Size(182, 22);
-            this.menuItemExportAssignFinancePayment.Text = "导出台帐";
-            this.menuItemExportAssignFinancePayment.Click += new System.EventHandler(this.ExportAssignFinancePayment);
+            this.menuItemExportAllInvoices.Name = "menuItemExportAllInvoices";
+            this.menuItemExportAllInvoices.Size = new System.Drawing.Size(182, 22);
+            this.menuItemExportAllInvoices.Text = "导出全部发票";
+            this.menuItemExportAllInvoices.Click += new System.EventHandler(this.ExportAllInvoices);
+            // 
+            // menuItemExportSelectedInvoices
+            // 
+            this.menuItemExportSelectedInvoices.Name = "menuItemExportSelectedInvoices";
+            this.menuItemExportSelectedInvoices.Size = new System.Drawing.Size(182, 22);
+            this.menuItemExportSelectedInvoices.Text = "导出所选发票";
+            this.menuItemExportSelectedInvoices.Click += new System.EventHandler(this.ExportSelectedInvoices);
             // 
             // InvoiceMgr
             // 
@@ -471,7 +577,7 @@
             this.Controls.Add(this.dgvInvoices);
             this.Controls.Add(this.panelQuery);
             this.Name = "InvoiceMgr";
-            this.Size = new System.Drawing.Size(513, 357);
+            this.Size = new System.Drawing.Size(805, 357);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).EndInit();
@@ -496,6 +602,20 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbInvoiceNo;
         private DevComponents.DotNetBar.LabelX lblInvoiceNo;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsFlaw;
+        private System.Windows.Forms.ContextMenuStrip cmuInvoiceMgr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceFlaw;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDelete;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemExportAllInvoices;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsDispute;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceOverDueDays;
+        private DevComponents.DotNetBar.LabelX lblFinanceOverDueDays;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbAssignOverDueDays;
+        private DevComponents.DotNetBar.LabelX lblAssignOverDueDays;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
@@ -505,16 +625,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsFlaw;
-        private System.Windows.Forms.ContextMenuStrip cmuInvoiceMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceFlaw;
-        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDelete;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem menuItemExportAssignFinancePayment;
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsDispute;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOverDueDays;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOverDueDays;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsDispute;
+        private System.Windows.Forms.ToolStripMenuItem menuItemExportSelectedInvoices;
     }
 }

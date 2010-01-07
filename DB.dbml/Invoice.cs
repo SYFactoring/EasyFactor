@@ -87,23 +87,23 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public double AROverDueDays
+        public int AssignOverDueDays
         {
             get
             {
                 TimeSpan duedays = DateTime.Now - this.DueDate;
-                return duedays.TotalDays;
+                return duedays.Days;
             }
         }
 
-        public System.Nullable<double> FinanceOverDueDays
+        public System.Nullable<int> FinanceOverDueDays
         {
             get
             {
                 if (this.FinanceDueDate.HasValue)
                 {
                     TimeSpan duedays = DateTime.Now - this.FinanceDueDate.Value;
-                    return duedays.TotalDays;
+                    return duedays.Days;
                 }
                 else
                 {

@@ -165,6 +165,11 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the CaseDetail class
+        /// </summary>
+        /// <param name="neg"></param>
+        /// <param name="opCreditCoverNegType"></param>
         public CaseDetail(CreditCoverNegotiation neg, OpCreditCoverNegType opCreditCoverNegType)
             : this(neg.Case, OpCaseType.DETAIL_CASE, opCreditCoverNegType)
         {
@@ -249,6 +254,11 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void curCase_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if ("TransactionType".Equals(e.PropertyName))
@@ -304,6 +314,11 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteCDA(object sender, EventArgs e)
         {
             if (this.dgvCDAs.SelectedRows.Count == 0)

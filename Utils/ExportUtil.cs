@@ -30,7 +30,7 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            EXPORT_ASSIGN_FINANCE_PAYMENT,
+            EXPORT_INVOICES,
 
             /// <summary>
             /// 
@@ -67,7 +67,7 @@ namespace CMBC.EasyFactor.Utils
             BackgroundWorker worker = sender as BackgroundWorker;
             switch (exportType)
             {
-                case ExportType.EXPORT_ASSIGN_FINANCE_PAYMENT:
+                case ExportType.EXPORT_INVOICES:
                     ExportAssignFinancePayment((IList)e.Argument, worker);
                     break;
                 case ExportType.EXPORT_ASSIGN:

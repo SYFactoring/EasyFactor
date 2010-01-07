@@ -6,9 +6,10 @@
 
 namespace CMBC.EasyFactor.ARMgr
 {
-    using CMBC.EasyFactor.DB.dbml;
     using System;
     using System.Windows.Forms;
+    using System.Linq;
+    using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
 
     /// <summary>
@@ -42,7 +43,12 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            FLAW
+            FLAW,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            DISPUTE
         }
 
         #endregion Enums
@@ -60,8 +66,21 @@ namespace CMBC.EasyFactor.ARMgr
             this.opInvoiceType = opInvoiceType;
             this.invoiceBindingSource.DataSource = invoice;
 
+            this.invoiceCurrencyComboBox.DataSource = Currency.AllCurrencies().ToList();
+            this.invoiceCurrencyComboBox.DisplayMember = "CurrencyCode";
+            this.invoiceCurrencyComboBox.ValueMember = "CurrencyCode";
+
             invoice.Backup();
             UpdateInvoiceControlStatus();
+
+            if (opInvoiceType == OpInvoiceType.FLAW)
+            {
+                this.tabControl.SelectedTab = this.tabItemFlaw;
+            }
+            else if (opInvoiceType == OpInvoiceType.DISPUTE)
+            {
+                this.tabControl.SelectedTab=this.tabItemDispute;
+            }
         }
 
         #endregion Constructors
@@ -135,7 +154,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
-                foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
+                foreach (Control comp in this.groupPanelInvoiceProcess.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
@@ -144,6 +163,18 @@ namespace CMBC.EasyFactor.ARMgr
                     ControlUtil.SetComponetEditable(comp, false);
                 }
                 foreach (Control comp in this.groupPanelFlawResolve.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelDispute.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelDisputeResolve.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
@@ -154,15 +185,27 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
-                foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
+                foreach (Control comp in this.groupPanelInvoiceProcess.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
                 foreach (Control comp in this.groupPanelFlaw.Controls)
                 {
-                    ControlUtil.SetComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, false);
                 }
                 foreach (Control comp in this.groupPanelFlawResolve.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelDispute.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelDisputeResolve.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
@@ -173,7 +216,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
-                foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
+                foreach (Control comp in this.groupPanelInvoiceProcess.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
@@ -184,6 +227,49 @@ namespace CMBC.EasyFactor.ARMgr
                 foreach (Control comp in this.groupPanelFlawResolve.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelDispute.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelDisputeResolve.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+            }
+            else if (opInvoiceType == OpInvoiceType.DISPUTE)
+            {
+                foreach (Control comp in this.groupPanelInvoiceBasic.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelInvoiceProcess.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelFlaw.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelFlawResolve.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+                foreach (Control comp in this.groupPanelDispute.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelDisputeResolve.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+                foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
                 }
             }
             this.invoiceNoTextBox.ReadOnly = true;

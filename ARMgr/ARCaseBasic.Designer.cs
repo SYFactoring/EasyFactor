@@ -597,7 +597,7 @@
             this.tbFinanceLine.Location = new System.Drawing.Point(115, 26);
             this.tbFinanceLine.Name = "tbFinanceLine";
             this.tbFinanceLine.ReadOnly = true;
-            this.tbFinanceLine.Size = new System.Drawing.Size(58, 20);
+            this.tbFinanceLine.Size = new System.Drawing.Size(65, 20);
             this.tbFinanceLine.TabIndex = 4;
             // 
             // tbFinanceLineCurr

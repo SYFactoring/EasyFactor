@@ -53,7 +53,12 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            GUARANTEE_PAYMENT
+            GUARANTEE_PAYMENT,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            SELLER_REASSIGN
         }
 
         #endregion Enums
@@ -129,18 +134,21 @@ namespace CMBC.EasyFactor.ARMgr
         }
         // Private Methods (13) 
 
-        private void CaculateCurrentPaymentAmount()
+        private void CaculateCurrentPayment()
         {
             IList invoiceList = this.invoiceBindingSource.List;
-            double currentPaymentAmount = 0;
+            double totalPayment = 0;
+            double totalRefund = 0;
             for (int i = 0; i < invoiceList.Count; i++)
             {
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    currentPaymentAmount += ((Invoice)invoiceList[i]).PaymentAmount.GetValueOrDefault();
+                    totalPayment += ((Invoice)invoiceList[i]).PaymentAmount.GetValueOrDefault();
+                    totalRefund += ((Invoice)invoiceList[i]).RefundAmount.GetValueOrDefault();
                 }
             }
-            this.tbPaymentAmount.Text = String.Format("{0:N2}", currentPaymentAmount);
+            this.tbTotalPayment.Text = String.Format("{0:N2}", totalPayment);
+            this.tbTotalRefund.Text = String.Format("{0:N2}", totalRefund);
         }
 
         private void DetailCase(object sender, EventArgs e)
@@ -233,7 +241,7 @@ namespace CMBC.EasyFactor.ARMgr
                     colInterest.ReadOnly = true;
                     colInterestDate.ReadOnly = true;
                 }
-                CaculateCurrentPaymentAmount();
+                CaculateCurrentPayment();
             }
 
         }
@@ -243,7 +251,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (e.Value == null)
                 return;
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colDueDate || col == colFinanceDueDate || col == colPaymentDate || col == colRefundDate || col == colCommissionDate || col == colInterestDate)
+            if (col == colAssignDate || col == colDueDate || col == colFinanceDate || col == colFinanceDueDate || col == colPaymentDate || col == colRefundDate || col == colCommissionDate || col == colInterestDate)
             {
                 DateTime date = (DateTime)e.Value;
                 e.Value = date.ToString("yyyyMMdd");
@@ -264,7 +272,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colRefundDate || col == colCommissionDate || col == colInterestDate)
+            if (col == colPaymentDate || col == colRefundDate || col == colCommissionDate || col == colInterestDate)
             {
                 string str = (string)e.Value;
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
@@ -310,7 +318,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             if (this.dgvInvoices.Columns[e.ColumnIndex] == colPaymentAmount)
             {
-                CaculateCurrentPaymentAmount();
+                CaculateCurrentPayment();
             }
         }
 
@@ -338,7 +346,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            this.tbPaymentAmount.Text = string.Empty;
+            this.tbTotalPayment.Text = string.Empty;
             InvoicePaymentBatch batch = new InvoicePaymentBatch();
             switch (paymentType)
             {
@@ -354,6 +362,9 @@ namespace CMBC.EasyFactor.ARMgr
                 case PaymentType.GUARANTEE_PAYMENT:
                     batch.PaymentType = "担保付款";
                     break;
+                case PaymentType.SELLER_REASSIGN:
+                    batch.PaymentType = "卖方回购";
+                    break;
                 default:
                     break;
             }
@@ -361,7 +372,7 @@ namespace CMBC.EasyFactor.ARMgr
             batch.CreateUserName = App.Current.CurUser.Name;
             this.invoicePaymentBatchBindingSource.DataSource = batch;
             this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.PaymentAmount.HasValue == false).ToList();
-
+            this.CaculateCurrentPayment();
         }
 
         /// <summary>

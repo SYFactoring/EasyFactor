@@ -9,6 +9,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.Utils;
     using System.Collections;
     using CMBC.EasyFactor.CaseMgr;
+    using System.Drawing;
 
     /// <summary>
     /// 
@@ -57,8 +58,8 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoiceMgr(OpInvoiceType opInvoiceType)
         {
             InitializeComponent();
-            this.dgvInvoices.AutoGenerateColumns = false;
             this.bs = new BindingSource();
+            this.dgvInvoices.AutoGenerateColumns = false;
             this.dgvInvoices.DataSource = bs;
             this.opInvoiceType = opInvoiceType;
             ControlUtil.SetDoubleBuffered(this.dgvInvoices);
@@ -78,15 +79,25 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Constructors
 
-        #region Methods (10)
+        #region Methods (11)
 
-        // Private Methods (10) 
+        // Private Methods (11) 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DetailInvoice(sender, e);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteInvoice(object sender, EventArgs e)
         {
             if (this.dgvInvoices.SelectedCells.Count == 0)
@@ -127,6 +138,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DetailCase(object sender, EventArgs e)
         {
             if (this.dgvInvoices.CurrentCell == null)
@@ -139,6 +155,11 @@ namespace CMBC.EasyFactor.ARMgr
             caseDetail.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DetailCDA(object sender, EventArgs e)
         {
             if (this.dgvInvoices.CurrentCell == null)
@@ -151,6 +172,11 @@ namespace CMBC.EasyFactor.ARMgr
             cdaDetail.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DetailInvoice(object sender, EventArgs e)
         {
             if (this.dgvInvoices.CurrentCell == null)
@@ -163,6 +189,11 @@ namespace CMBC.EasyFactor.ARMgr
             invoiceDetail.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewColumn column = this.dgvInvoices.Columns[e.ColumnIndex];
@@ -184,15 +215,71 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        private void ExportAssignFinancePayment(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvInvoices_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            for (int i = 0; i < this.bs.List.Count; i++)
+            {
+                Invoice invoice = (Invoice)this.bs.List[i];
+                if (invoice.AssignOverDueDays > 0)
+                {
+                    this.dgvInvoices["colDueDate", i].Style.BackColor = Color.Yellow;
+                }
+                if (invoice.FinanceOverDueDays > 0)
+                {
+                    this.dgvInvoices["colFinanceDueDate", i].Style.BackColor = Color.Red;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportAllInvoices(object sender, EventArgs e)
         {
             if (this.bs.DataSource is List<Invoice>)
             {
-                ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_ASSIGN_FINANCE_PAYMENT);
-                exportUtil.StartExport(((List<Invoice>)this.bs.DataSource).ToArray());
+                ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_INVOICES);
+                exportUtil.StartExport(this.bs.List);
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportSelectedInvoices(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.SelectedCells.Count == 0)
+            {
+                return;
+            }
+            List<Invoice> selectedInvoices = new List<Invoice>();
+            foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
+            {
+                Invoice invoice = (Invoice)this.bs.List[cell.RowIndex];
+                if (!selectedInvoices.Contains(invoice))
+                {
+                    selectedInvoices.Add(invoice);
+                }
+            }
+            ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_INVOICES);
+            exportUtil.StartExport(selectedInvoices);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InvoiceFlaw(object sender, EventArgs e)
         {
             if (this.dgvInvoices.CurrentCell == null)
@@ -219,18 +306,35 @@ namespace CMBC.EasyFactor.ARMgr
             string isFlaw = this.cbIsFlaw.CheckValue as string;
             string isDispute = this.cbIsDispute.CheckValue as string;
 
+            int AssignOverDueDays = 0;
+            DateTime AssignOverDueDate = default(DateTime);
+            if (Int32.TryParse(this.tbAssignOverDueDays.Text, out AssignOverDueDays))
+            {
+                AssignOverDueDate = DateTime.Now.AddDays(0 - AssignOverDueDays);
+            }
+            int FinanceOverDueDays = 0;
+            DateTime FinanceOverDueDate = default(DateTime);
+            if (Int32.TryParse(this.tbFinanceOverDueDays.Text, out FinanceOverDueDays))
+            {
+                FinanceOverDueDate = DateTime.Now.AddDays(0 - FinanceOverDueDays);
+            }
+
             var queryResult = from invoice in App.Current.DbContext.Invoices
-                              let seller = invoice.InvoiceAssignBatch.CDA.Case.SellerClient
+                              let curCase = invoice.InvoiceAssignBatch.CDA.Case
+                              where curCase.CaseMark == "启动案"
+                              let seller = curCase.SellerClient
                               where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN_1.Contains(sellerName) || seller.ClientNameEN_2.Contains(sellerName)
-                              let buyer = invoice.InvoiceAssignBatch.CDA.Case.BuyerClient
+                              let buyer = curCase.BuyerClient
                               where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN_1.Contains(buyerName) || buyer.ClientNameEN_2.Contains(buyerName)
-                              let sellerFactor = invoice.InvoiceAssignBatch.CDA.Case.SellerFactor
+                              let sellerFactor = curCase.SellerFactor
                               where sellerFactor.CompanyNameCN.Contains(factorName) || sellerFactor.CompanyNameEN.Contains(factorName)
-                              let buyerFactor = invoice.InvoiceAssignBatch.CDA.Case.BuyerFactor
+                              let buyerFactor = curCase.BuyerFactor
                               where buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
                               where (invoiceNo == string.Empty ? true : invoice.InvoiceNo == invoiceNo)
                                 && (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
                                 && (isDispute == "A" ? true : invoice.IsDispute == (isDispute == "Y" ? true : false))
+                                && (AssignOverDueDays == 0 ? true : invoice.DueDate < AssignOverDueDate)
+                                && (FinanceOverDueDays == 0 ? true : invoice.FinanceDueDate < FinanceOverDueDate)
                               select invoice;
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
@@ -247,6 +351,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbSeller.Text = string.Empty;
             this.tbFactor.Text = string.Empty;
             this.tbInvoiceNo.Text = string.Empty;
+            this.tbAssignOverDueDays.Text = string.Empty;
+            this.tbFinanceOverDueDays.Text = string.Empty;
+
             switch (opInvoiceType)
             {
                 case OpInvoiceType.FLAW_RESOLVE:

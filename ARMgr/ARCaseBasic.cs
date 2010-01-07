@@ -37,34 +37,39 @@ namespace CMBC.EasyFactor.ARMgr
         public enum OpARType
         {
             /// <summary>
-            /// 
+            /// 转让
             /// </summary>
             InvoiceAssign,
 
             /// <summary>
-            /// 
+            /// 融资
             /// </summary>
             InvoiceFinance,
 
             /// <summary>
-            /// 
+            /// 买方付款
             /// </summary>
             InvoiceBuyerPayment,
 
             /// <summary>
-            /// 
-            /// </summary>
-            InvoiceIndirectPayment,
-
-            /// <summary>
-            /// 
+            /// 卖方付款
             /// </summary>
             InvoiceSellerPayment,
 
             /// <summary>
-            /// 
+            /// 间接付款
             /// </summary>
-            InvoiceGuaranteePayment
+            InvoiceIndirectPayment,
+
+            /// <summary>
+            /// 担保付款
+            /// </summary>
+            InvoiceGuaranteePayment,
+
+            /// <summary>
+            /// 卖方回购
+            /// </summary>
+            InvoiceSellerReassign
         }
 
         #endregion Enums
@@ -99,6 +104,9 @@ namespace CMBC.EasyFactor.ARMgr
                     break;
                 case OpARType.InvoiceGuaranteePayment:
                     uc = new InvoicePayment(this, InvoicePayment.PaymentType.GUARANTEE_PAYMENT);
+                    break;
+                case OpARType.InvoiceSellerReassign:
+                    uc = new InvoicePayment(this, InvoicePayment.PaymentType.SELLER_REASSIGN);
                     break;
                 default:
                     uc = new UserControl();

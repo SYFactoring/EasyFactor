@@ -52,6 +52,10 @@ namespace CMBC.EasyFactor.Utils
             {
                 (comp as DateTimeInput).Value = default(DateTime);
             }
+            else if (comp is CheckedListBox)
+            {
+                (comp as CheckedListBox).SelectedIndex = -1;
+            }
         }
 
         /// <summary>
@@ -92,6 +96,10 @@ namespace CMBC.EasyFactor.Utils
             else if (comp is DateTimeInput)
             {
                 (comp as DateTimeInput).Enabled = isEditable;
+            }
+            else if (comp is CheckedListBox)
+            {
+                (comp as CheckedListBox).Enabled = isEditable;
             }
         }
 
