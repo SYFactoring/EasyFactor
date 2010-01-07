@@ -439,7 +439,7 @@ namespace CMBC.EasyFactor.Report
                 sheet.Cells[5, 1] = "卖方：";
                 sheet.Cells[5, 2] = seller.ToString();
                 sheet.Cells[6, 1] = "最高预付款额度：";
-                sheet.Cells[6, 2] = String.Format("{0:N2}", seller.FinanceCreditLine.CreditLine);
+                sheet.Cells[6, 2] = String.Format("{0:N2}", seller.FinanceCreditLine == null ? null : seller.FinanceCreditLine.CreditLine);
                 sheet.Cells[7, 1] = "总融资余额";
                 sheet.Cells[7, 2] = String.Format("{0:N2}", seller.FinanceOutstanding);
                 sheet.Cells[8, 1] = "尚可动拨金额";
