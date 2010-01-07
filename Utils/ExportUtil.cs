@@ -114,7 +114,6 @@ namespace CMBC.EasyFactor.Utils
             datasheet.Cells[1, column++] = "瑕疵解除原因";
             datasheet.Cells[1, column++] = "瑕疵解除日";
             datasheet.Cells[1, column++] = "瑕疵解除人";
-            datasheet.Cells[1, column++] = "生效日";
 
             int size = objArray.Count;
             for (int row = 0; row < size; row++)
@@ -144,7 +143,6 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[row + 2, column++] = invoice.FlawResolveReason;
                 datasheet.Cells[row + 2, column++] = invoice.FlawResolveDate;
                 datasheet.Cells[row + 2, column++] = invoice.FlawResolveUserName;
-                datasheet.Cells[row + 2, column++] = invoice.ValueDate;
             }
 
             foreach (Range range in datasheet.UsedRange.Columns)

@@ -183,6 +183,8 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.FinanceDate = batch.FinancePeriodBegin ?? DateTime.Now;
                     invoice.FinanceDueDate = batch.FinnacePeriodEnd ?? null;
 
+                    CaculateCommissionAndInterest(sender, e);
+
                     colFinanceAmount.ReadOnly = false;
                     colFinanceDate.ReadOnly = false;
                     colFinanceDueDate.ReadOnly = false;
@@ -285,36 +287,41 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            IList invoiceList = this.invoiceBindingSource.List;
-            Invoice invoice = (Invoice)invoiceList[e.RowIndex];
-
             if (this.dgvInvoices.Columns[e.ColumnIndex] == colFinanceAmount)
             {
                 CaculateCurrentFinanceAmount();
-                InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.invoiceFinanceBatchBindingSource.DataSource;
-                if (batch.FinanceRate.HasValue)
-                {
-                    int period = (batch.FinnacePeriodEnd.Value - batch.FinancePeriodBegin.Value).Days;
-                    switch (batch.InterestType)
-                    {
-                        case "一次性收取":
-                            invoice.Interest = invoice.FinanceAmount * (batch.FinanceRate - batch.CostRate) / 360 * period;
-                            invoice.InterestDate = invoice.FinanceDate;
-                            break;
-                        default:
-                            break;
-                    }
-                }
+                CaculateCommissionAndInterest(sender, e);
+            }
+        }
 
-                if (this._CDA.CommissionType == "按融资金额")
+        private void CaculateCommissionAndInterest(object sender, DataGridViewCellEventArgs e)
+        {
+            IList invoiceList = this.invoiceBindingSource.List;
+            Invoice invoice = (Invoice)invoiceList[e.RowIndex];
+            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.invoiceFinanceBatchBindingSource.DataSource;
+            if (batch.FinanceRate.HasValue)
+            {
+                int period = (batch.FinnacePeriodEnd.Value - batch.FinancePeriodBegin.Value).Days;
+                switch (batch.InterestType)
                 {
-                    invoice.Commission = invoice.FinanceAmount * this._CDA.Price ?? 0;
-                    if (invoice.Commission.GetValueOrDefault > 0)
-                    {
-                        invoice.CommissionDate = invoice.FinanceDate;
-                    }
+                    case "一次性收取":
+                        invoice.Interest = invoice.FinanceAmount * (batch.FinanceRate - batch.CostRate) / 360 * period;
+                        invoice.InterestDate = invoice.FinanceDate;
+                        break;
+                    default:
+                        break;
                 }
             }
+
+            if (this._CDA.CommissionType == "按融资金额")
+            {
+                invoice.Commission = invoice.FinanceAmount * this._CDA.Price ?? 0;
+                if (invoice.Commission.GetValueOrDefault() > 0)
+                {
+                    invoice.CommissionDate = invoice.FinanceDate;
+                }
+            }
+
         }
 
         private void dgvInvoices_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)

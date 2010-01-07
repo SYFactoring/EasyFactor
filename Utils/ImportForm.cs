@@ -334,7 +334,6 @@ namespace CMBC.EasyFactor.Utils
                     invoice.FlawResolveReason = String.Format("{0:G}", valueArray[row, column++]);
                     invoice.FlawResolveDate = (System.Nullable<DateTime>)valueArray[row, column++];
                     invoice.FlawResolveUserName = String.Format("{0:G}", valueArray[row, column++]);
-                    invoice.ValueDate = (System.Nullable<DateTime>)valueArray[row, column++];
 
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));

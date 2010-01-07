@@ -161,18 +161,28 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            if (e.Value.Equals(string.Empty))
-            {
-                e.Value = null;
-                e.ParsingApplied = true;
-                return;
-            }
+
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
             if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colCommissionDate)
             {
+                if (e.Value.Equals(string.Empty))
+                {
+                    e.Value = null;
+                    e.ParsingApplied = true;
+                    return;
+                }
                 string str = (string)e.Value;
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
                 e.ParsingApplied = true;
+            }
+            else if (col == colInvoiceAmount || col == colAssignAmount || col == colCommission)
+            {
+                if (e.Value.Equals(string.Empty))
+                {
+                    e.Value = default(double);
+                    e.ParsingApplied = true;
+                    return;
+                }
             }
         }
 
