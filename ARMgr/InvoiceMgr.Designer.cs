@@ -79,6 +79,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExportAllInvoices = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemExportSelectedInvoices = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemInvoiceDispute = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.cmuInvoiceMgr.SuspendLayout();
@@ -504,6 +505,7 @@
             this.menuItemCaseDetail,
             this.toolStripSeparator,
             this.menuItemInvoiceFlaw,
+            this.menuItemInvoiceDispute,
             this.menuItemInvoiceDelete,
             this.toolStripSeparator1,
             this.menuItemExportAllInvoices,
@@ -570,6 +572,13 @@
             this.menuItemExportSelectedInvoices.Text = "导出所选发票";
             this.menuItemExportSelectedInvoices.Click += new System.EventHandler(this.ExportSelectedInvoices);
             // 
+            // menuItemInvoiceDispute
+            // 
+            this.menuItemInvoiceDispute.Name = "menuItemInvoiceDispute";
+            this.menuItemInvoiceDispute.Size = new System.Drawing.Size(182, 22);
+            this.menuItemInvoiceDispute.Text = "商纠处理";
+            this.menuItemInvoiceDispute.Click += new System.EventHandler(this.InvoiceDispute);
+            // 
             // InvoiceMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -632,5 +641,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOverDueDays;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsDispute;
         private System.Windows.Forms.ToolStripMenuItem menuItemExportSelectedInvoices;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDispute;
     }
 }

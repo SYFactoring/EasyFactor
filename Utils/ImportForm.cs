@@ -430,6 +430,7 @@ namespace CMBC.EasyFactor.Utils
                             assignBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                             assignBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                             assignBatch.AssignBatchNo = InvoiceAssign.GenerateAssignBatchNo(assignBatch.BatchDate.GetValueOrDefault());
+                            assignBatch.CheckStatus = "已审核";
                         }
                         assignBatch.CDA = cda;
                         assignBatches.Add(assignBatch);

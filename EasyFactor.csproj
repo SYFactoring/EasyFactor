@@ -177,12 +177,6 @@
     <Compile Include="CaseMgr\CreditCoverNegMgr.Designer.cs">
       <DependentUpon>CreditCoverNegMgr.cs</DependentUpon>
     </Compile>
-    <Compile Include="CaseMgr\OverDueMgr.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CaseMgr\OverDueMgr.Designer.cs">
-      <DependentUpon>OverDueMgr.cs</DependentUpon>
-    </Compile>
     <Compile Include="DB.dbml\BaseObject.cs" />
     <Compile Include="DB.dbml\Case.cs" />
     <Compile Include="DB.dbml\CDA.cs" />
@@ -339,10 +333,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CaseMgr\CreditCoverNegMgr.resx">
       <DependentUpon>CreditCoverNegMgr.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CaseMgr\OverDueMgr.resx">
-      <DependentUpon>OverDueMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Help\About\AboutBox.resx">

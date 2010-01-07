@@ -536,17 +536,6 @@ namespace CMBC.EasyFactor
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryOverDueDays(object sender, EventArgs e)
-        {
-            OverDueMgr invoiceMgr = new OverDueMgr();
-            this.SetDetailPanel(invoiceMgr);
-        }
-
-        /// <summary>
         /// Fill detail panel with user control
         /// </summary>
         /// <param name="uc">user control</param>

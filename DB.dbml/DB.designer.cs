@@ -3575,8 +3575,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _FinanceBatchNo;
 		
-		private System.Nullable<double> _FinanceRate;
-		
 		private System.Nullable<double> _FinanceAmount;
 		
 		private System.Nullable<System.DateTime> _FinanceDate;
@@ -3677,8 +3675,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFlawResolveUserNameChanged();
     partial void OnFinanceBatchNoChanging(string value);
     partial void OnFinanceBatchNoChanged();
-    partial void OnFinanceRateChanging(System.Nullable<double> value);
-    partial void OnFinanceRateChanged();
     partial void OnFinanceAmountChanging(System.Nullable<double> value);
     partial void OnFinanceAmountChanged();
     partial void OnFinanceDateChanging(System.Nullable<System.DateTime> value);
@@ -4197,26 +4193,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._FinanceBatchNo = value;
 					this.SendPropertyChanged("FinanceBatchNo");
 					this.OnFinanceBatchNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FinanceRate", DbType="Float")]
-		public System.Nullable<double> FinanceRate
-		{
-			get
-			{
-				return this._FinanceRate;
-			}
-			set
-			{
-				if ((this._FinanceRate != value))
-				{
-					this.OnFinanceRateChanging(value);
-					this.SendPropertyChanging();
-					this._FinanceRate = value;
-					this.SendPropertyChanged("FinanceRate");
-					this.OnFinanceRateChanged();
 				}
 			}
 		}
@@ -9368,8 +9344,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnBatchDateChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
-    partial void OnCheckResultChanging(string value);
-    partial void OnCheckResultChanged();
+    partial void OnCheckStatusChanging(string value);
+    partial void OnCheckStatusChanged();
     partial void OnRejectReasonChanging(string value);
     partial void OnRejectReasonChanged();
     partial void OnCheckUserNameChanging(string value);
@@ -9493,8 +9469,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckResult", DbType="NVarChar(500)")]
-		public string CheckResult
+		[Column(Storage="_CheckResult", DbType="NVarChar(50)")]
+		public string CheckStatus
 		{
 			get
 			{
@@ -9504,11 +9480,11 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._CheckResult != value))
 				{
-					this.OnCheckResultChanging(value);
+					this.OnCheckStatusChanging(value);
 					this.SendPropertyChanging();
 					this._CheckResult = value;
-					this.SendPropertyChanged("CheckResult");
-					this.OnCheckResultChanged();
+					this.SendPropertyChanged("CheckStatus");
+					this.OnCheckStatusChanged();
 				}
 			}
 		}

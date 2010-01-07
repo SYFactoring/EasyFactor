@@ -54,7 +54,11 @@ namespace CMBC.EasyFactor.Utils
             }
             else if (comp is CheckedListBox)
             {
-                (comp as CheckedListBox).SelectedIndex = -1;
+                (comp as CheckedListBox).ClearSelected();
+                for (int i = 0; i < (comp as CheckedListBox).Items.Count; i++)
+                {
+                    (comp as CheckedListBox).SetItemChecked(i, false);
+                }
             }
         }
 

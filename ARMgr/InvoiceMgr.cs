@@ -79,9 +79,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Constructors
 
-        #region Methods (11)
+        #region Methods (13)
 
-        // Private Methods (11) 
+        // Private Methods (13) 
 
         /// <summary>
         /// 
@@ -197,7 +197,7 @@ namespace CMBC.EasyFactor.ARMgr
         void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewColumn column = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (column == colIsFlaw)
+            if (column == colIsFlaw || column == colIsDispute)
             {
                 Object originalData = e.Value;
                 if (originalData != null)
@@ -273,6 +273,23 @@ namespace CMBC.EasyFactor.ARMgr
             }
             ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_INVOICES);
             exportUtil.StartExport(selectedInvoices);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InvoiceDispute(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.CurrentCell == null)
+            {
+                return;
+            }
+
+            Invoice selectedInvoice = (Invoice)this.bs.List[this.dgvInvoices.CurrentCell.RowIndex];
+            InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DISPUTE);
+            invoiceDetail.ShowDialog(this);
         }
 
         /// <summary>

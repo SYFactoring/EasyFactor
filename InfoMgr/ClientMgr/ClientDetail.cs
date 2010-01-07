@@ -385,18 +385,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-        private void customValidator6_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            if (this.tbContractCode.Text.Length == 10)
-            {
-                e.IsValid = true;
-            }
-            else
-            {
-                e.IsValid = false;
-            }
-        }
-
         /// <summary>
         /// 
         /// </summary>
