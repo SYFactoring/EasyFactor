@@ -231,20 +231,29 @@ namespace CMBC.EasyFactor.ARMgr
             if (this.dgvInvoices.Columns[e.ColumnIndex] == colInvoiceAmount)
             {
                 selectedInvoice.AssignAmount = selectedInvoice.InvoiceAmount;
+                CaculateCommisssion(selectedInvoice);
             }
             else if (this.dgvInvoices.Columns[e.ColumnIndex] == colAssignAmount)
             {
-                if (this._CDA.CommissionType == "按转让金额")
-                {
-                    selectedInvoice.Commission = selectedInvoice.AssignAmount * this._CDA.Price ?? 0;
-                    if (selectedInvoice.Commission.GetValueOrDefault() > 0)
-                    {
-                        selectedInvoice.CommissionDate = selectedInvoice.AssignDate;
-                    }
-                }
+                CaculateCommisssion(selectedInvoice);
             }
         }
 
+        private void CaculateCommisssion(Invoice selectedInvoice)
+        {
+            if (this._CDA.CommissionType == "按转让金额")
+            {
+                selectedInvoice.Commission = selectedInvoice.AssignAmount * this._CDA.Price ?? 0;
+                if (selectedInvoice.Commission.GetValueOrDefault() > 0)
+                {
+                    selectedInvoice.CommissionDate = selectedInvoice.AssignDate;
+                }
+                else
+                {
+                    selectedInvoice.CommissionDate = null;
+                }
+            }
+        }
         private void dgvInvoices_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DetailInvoice(null, null);
