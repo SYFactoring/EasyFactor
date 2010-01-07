@@ -1080,17 +1080,17 @@ namespace CMBC.EasyFactor.Utils
                         if (dr == DialogResult.Yes)
                         {
                             factor.LastModifiedDate = DateTime.Now;
-                            if (isNew)
-                            {
-                                App.Current.DbContext.Factors.InsertOnSubmit(factor);
-                            }
                         }
                         else
                         {
                             factor.Restore();
                         }
-                        App.Current.DbContext.SubmitChanges();
                     }
+                    if (isNew)
+                    {
+                        App.Current.DbContext.Factors.InsertOnSubmit(factor);
+                    }
+                    App.Current.DbContext.SubmitChanges();
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
