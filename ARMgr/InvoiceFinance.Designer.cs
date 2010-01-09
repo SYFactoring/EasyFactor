@@ -30,7 +30,7 @@
         private System.Windows.Forms.BindingNavigator invoiceBindingNavigator;
         private System.Windows.Forms.BindingSource invoiceBindingSource;
         private System.Windows.Forms.DataGridView dgvInvoices;
-        private System.Windows.Forms.BindingSource invoiceFinanceBatchBindingSource;
+        private System.Windows.Forms.BindingSource batchBindingSource;
         private DevComponents.DotNetBar.PanelEx panelFinanceBatch;
 
         #endregion Fields
@@ -74,6 +74,8 @@
             DevComponents.DotNetBar.LabelX costRateLabel;
             DevComponents.DotNetBar.LabelX financeTypeLabel;
             DevComponents.DotNetBar.LabelX lblCurrentFinanceAmount;
+            DevComponents.DotNetBar.LabelX lblTotalInterest;
+            DevComponents.DotNetBar.LabelX lblFinanceLineBalance;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -81,15 +83,18 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceFinance));
-            DevComponents.DotNetBar.LabelX lblTotalInterest;
-            DevComponents.DotNetBar.LabelX lblFinanceLineBalance;
             this.panelFinanceBatch = new DevComponents.DotNetBar.PanelEx();
+            this.btnFinanceBatchImport = new DevComponents.DotNetBar.ButtonX();
+            this.btnFinanceBatchExport = new DevComponents.DotNetBar.ButtonX();
+            this.btnFinanceBatchSelect = new DevComponents.DotNetBar.ButtonX();
+            this.tbFinanceLineBalance = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbTotalInterest = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnFinanceBatchNew = new DevComponents.DotNetBar.ButtonX();
             this.tbTotalFinance = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnFactorSelect = new DevComponents.DotNetBar.ButtonX();
             this.btnFinanceBatchSave = new DevComponents.DotNetBar.ButtonX();
             this.financeTypeComboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.invoiceFinanceBatchBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.costRateTextBoxX = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.factorCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.interestTypeComboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -120,9 +125,6 @@
             this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCDADetail = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemFinanceBatchExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFinanceBatchImport = new System.Windows.Forms.ToolStripMenuItem();
             this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
@@ -146,8 +148,6 @@
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.tbTotalInterest = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbFinanceLineBalance = new DevComponents.DotNetBar.Controls.TextBoxX();
             financeBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             financeAmountLabel = new DevComponents.DotNetBar.LabelX();
             financePeriodBeginLabel = new DevComponents.DotNetBar.LabelX();
@@ -160,7 +160,7 @@
             lblTotalInterest = new DevComponents.DotNetBar.LabelX();
             lblFinanceLineBalance = new DevComponents.DotNetBar.LabelX();
             this.panelFinanceBatch.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceFinanceBatchBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.finnacePeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
@@ -282,16 +282,45 @@
             // 
             // 
             lblCurrentFinanceAmount.BackgroundStyle.Class = "";
-            lblCurrentFinanceAmount.Location = new System.Drawing.Point(816, 27);
+            lblCurrentFinanceAmount.Location = new System.Drawing.Point(943, 27);
             lblCurrentFinanceAmount.Name = "lblCurrentFinanceAmount";
             lblCurrentFinanceAmount.Size = new System.Drawing.Size(81, 16);
             lblCurrentFinanceAmount.TabIndex = 20;
             lblCurrentFinanceAmount.Text = "本次融资总额";
             // 
+            // lblTotalInterest
+            // 
+            lblTotalInterest.AutoSize = true;
+            // 
+            // 
+            // 
+            lblTotalInterest.BackgroundStyle.Class = "";
+            lblTotalInterest.Location = new System.Drawing.Point(920, 48);
+            lblTotalInterest.Name = "lblTotalInterest";
+            lblTotalInterest.Size = new System.Drawing.Size(106, 16);
+            lblTotalInterest.TabIndex = 23;
+            lblTotalInterest.Text = "本次应收利息总额";
+            // 
+            // lblFinanceLineBalance
+            // 
+            lblFinanceLineBalance.AutoSize = true;
+            // 
+            // 
+            // 
+            lblFinanceLineBalance.BackgroundStyle.Class = "";
+            lblFinanceLineBalance.Location = new System.Drawing.Point(906, 6);
+            lblFinanceLineBalance.Name = "lblFinanceLineBalance";
+            lblFinanceLineBalance.Size = new System.Drawing.Size(118, 16);
+            lblFinanceLineBalance.TabIndex = 25;
+            lblFinanceLineBalance.Text = "预付款融资额度余额";
+            // 
             // panelFinanceBatch
             // 
             this.panelFinanceBatch.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelFinanceBatch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelFinanceBatch.Controls.Add(this.btnFinanceBatchImport);
+            this.panelFinanceBatch.Controls.Add(this.btnFinanceBatchExport);
+            this.panelFinanceBatch.Controls.Add(this.btnFinanceBatchSelect);
             this.panelFinanceBatch.Controls.Add(this.tbFinanceLineBalance);
             this.panelFinanceBatch.Controls.Add(lblFinanceLineBalance);
             this.panelFinanceBatch.Controls.Add(this.tbTotalInterest);
@@ -332,11 +361,69 @@
             this.panelFinanceBatch.Style.GradientAngle = 90;
             this.panelFinanceBatch.TabIndex = 0;
             // 
+            // btnFinanceBatchImport
+            // 
+            this.btnFinanceBatchImport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnFinanceBatchImport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnFinanceBatchImport.Location = new System.Drawing.Point(767, 35);
+            this.btnFinanceBatchImport.Name = "btnFinanceBatchImport";
+            this.btnFinanceBatchImport.Size = new System.Drawing.Size(61, 23);
+            this.btnFinanceBatchImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnFinanceBatchImport.TabIndex = 29;
+            this.btnFinanceBatchImport.Text = "导入批次";
+            this.btnFinanceBatchImport.Click += new System.EventHandler(this.ImportFinanceBatch);
+            // 
+            // btnFinanceBatchExport
+            // 
+            this.btnFinanceBatchExport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnFinanceBatchExport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnFinanceBatchExport.Location = new System.Drawing.Point(700, 35);
+            this.btnFinanceBatchExport.Name = "btnFinanceBatchExport";
+            this.btnFinanceBatchExport.Size = new System.Drawing.Size(61, 23);
+            this.btnFinanceBatchExport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnFinanceBatchExport.TabIndex = 28;
+            this.btnFinanceBatchExport.Text = "导出批次";
+            this.btnFinanceBatchExport.Click += new System.EventHandler(this.ExportFinanceBatch);
+            // 
+            // btnFinanceBatchSelect
+            // 
+            this.btnFinanceBatchSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnFinanceBatchSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnFinanceBatchSelect.Location = new System.Drawing.Point(834, 6);
+            this.btnFinanceBatchSelect.Name = "btnFinanceBatchSelect";
+            this.btnFinanceBatchSelect.Size = new System.Drawing.Size(61, 23);
+            this.btnFinanceBatchSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnFinanceBatchSelect.TabIndex = 27;
+            this.btnFinanceBatchSelect.Text = "选择批次";
+            this.btnFinanceBatchSelect.Click += new System.EventHandler(this.SelectBatch);
+            // 
+            // tbFinanceLineBalance
+            // 
+            // 
+            // 
+            // 
+            this.tbFinanceLineBalance.Border.Class = "TextBoxBorder";
+            this.tbFinanceLineBalance.Location = new System.Drawing.Point(1025, 3);
+            this.tbFinanceLineBalance.Name = "tbFinanceLineBalance";
+            this.tbFinanceLineBalance.Size = new System.Drawing.Size(100, 20);
+            this.tbFinanceLineBalance.TabIndex = 26;
+            // 
+            // tbTotalInterest
+            // 
+            // 
+            // 
+            // 
+            this.tbTotalInterest.Border.Class = "TextBoxBorder";
+            this.tbTotalInterest.Location = new System.Drawing.Point(1025, 46);
+            this.tbTotalInterest.Name = "tbTotalInterest";
+            this.tbTotalInterest.Size = new System.Drawing.Size(100, 20);
+            this.tbTotalInterest.TabIndex = 24;
+            // 
             // btnFinanceBatchNew
             // 
             this.btnFinanceBatchNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnFinanceBatchNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFinanceBatchNew.Location = new System.Drawing.Point(639, 38);
+            this.btnFinanceBatchNew.Location = new System.Drawing.Point(700, 6);
             this.btnFinanceBatchNew.Name = "btnFinanceBatchNew";
             this.btnFinanceBatchNew.Size = new System.Drawing.Size(61, 23);
             this.btnFinanceBatchNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -344,14 +431,14 @@
             this.btnFinanceBatchNew.Text = "新建批次";
             this.btnFinanceBatchNew.Click += new System.EventHandler(this.NewFinanceBatch);
             // 
-            // tbCurrentFinanceAmount
+            // tbTotalFinance
             // 
             // 
             // 
             // 
             this.tbTotalFinance.Border.Class = "TextBoxBorder";
-            this.tbTotalFinance.Location = new System.Drawing.Point(898, 24);
-            this.tbTotalFinance.Name = "tbCurrentFinanceAmount";
+            this.tbTotalFinance.Location = new System.Drawing.Point(1025, 24);
+            this.tbTotalFinance.Name = "tbTotalFinance";
             this.tbTotalFinance.Size = new System.Drawing.Size(100, 20);
             this.tbTotalFinance.TabIndex = 21;
             // 
@@ -371,17 +458,17 @@
             // 
             this.btnFinanceBatchSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnFinanceBatchSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFinanceBatchSave.Location = new System.Drawing.Point(706, 38);
+            this.btnFinanceBatchSave.Location = new System.Drawing.Point(767, 6);
             this.btnFinanceBatchSave.Name = "btnFinanceBatchSave";
             this.btnFinanceBatchSave.Size = new System.Drawing.Size(61, 23);
             this.btnFinanceBatchSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFinanceBatchSave.TabIndex = 19;
             this.btnFinanceBatchSave.Text = "保存批次";
-            this.btnFinanceBatchSave.Click += new System.EventHandler(this.SaveFinanceBatch);
+            this.btnFinanceBatchSave.Click += new System.EventHandler(this.SaveBatch);
             // 
             // financeTypeComboBoxEx
             // 
-            this.financeTypeComboBoxEx.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceFinanceBatchBindingSource, "FinanceType", true));
+            this.financeTypeComboBoxEx.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "FinanceType", true));
             this.financeTypeComboBoxEx.DisplayMember = "Text";
             this.financeTypeComboBoxEx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.financeTypeComboBoxEx.FormattingEnabled = true;
@@ -400,7 +487,7 @@
             // 
             // invoiceFinanceBatchBindingSource
             // 
-            this.invoiceFinanceBatchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceFinanceBatch);
+            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceFinanceBatch);
             // 
             // costRateTextBoxX
             // 
@@ -408,7 +495,7 @@
             // 
             // 
             this.costRateTextBoxX.Border.Class = "TextBoxBorder";
-            this.costRateTextBoxX.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceFinanceBatchBindingSource, "CostRate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "P3"));
+            this.costRateTextBoxX.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CostRate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "P3"));
             this.costRateTextBoxX.Location = new System.Drawing.Point(260, 24);
             this.costRateTextBoxX.Name = "costRateTextBoxX";
             this.costRateTextBoxX.Size = new System.Drawing.Size(100, 20);
@@ -421,7 +508,7 @@
             // 
             // 
             this.factorCodeTextBox.Border.Class = "TextBoxBorder";
-            this.factorCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceFinanceBatchBindingSource, "FactorCode", true));
+            this.factorCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "FactorCode", true));
             this.factorCodeTextBox.Location = new System.Drawing.Point(440, 46);
             this.factorCodeTextBox.Name = "factorCodeTextBox";
             this.factorCodeTextBox.Size = new System.Drawing.Size(100, 20);
@@ -429,7 +516,7 @@
             // 
             // interestTypeComboBoxEx
             // 
-            this.interestTypeComboBoxEx.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceFinanceBatchBindingSource, "InterestType", true));
+            this.interestTypeComboBoxEx.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "InterestType", true));
             this.interestTypeComboBoxEx.DisplayMember = "Text";
             this.interestTypeComboBoxEx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.interestTypeComboBoxEx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -448,7 +535,7 @@
             // 
             // 
             this.financeRateTextBox.Border.Class = "TextBoxBorder";
-            this.financeRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceFinanceBatchBindingSource, "FinanceRate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "P3"));
+            this.financeRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "FinanceRate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "P3"));
             this.financeRateTextBox.Location = new System.Drawing.Point(80, 23);
             this.financeRateTextBox.Name = "financeRateTextBox";
             this.financeRateTextBox.Size = new System.Drawing.Size(100, 20);
@@ -462,7 +549,7 @@
             // 
             this.finnacePeriodEndDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.finnacePeriodEndDateTimePicker.ButtonDropDown.Visible = true;
-            this.finnacePeriodEndDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceFinanceBatchBindingSource, "FinnacePeriodEnd", true));
+            this.finnacePeriodEndDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "FinnacePeriodEnd", true));
             this.finnacePeriodEndDateTimePicker.Location = new System.Drawing.Point(572, 3);
             // 
             // 
@@ -498,7 +585,7 @@
             // 
             this.financePeriodBeginDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.financePeriodBeginDateTimePicker.ButtonDropDown.Visible = true;
-            this.financePeriodBeginDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceFinanceBatchBindingSource, "FinancePeriodBegin", true));
+            this.financePeriodBeginDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "FinancePeriodBegin", true));
             this.financePeriodBeginDateTimePicker.Location = new System.Drawing.Point(440, 3);
             // 
             // 
@@ -532,7 +619,7 @@
             // 
             // 
             this.financeAmountTextBoxX.Border.Class = "TextBoxBorder";
-            this.financeAmountTextBoxX.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceFinanceBatchBindingSource, "FinanceAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.financeAmountTextBoxX.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "FinanceAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
             this.financeAmountTextBoxX.Location = new System.Drawing.Point(154, 45);
             this.financeAmountTextBoxX.Name = "financeAmountTextBoxX";
             this.financeAmountTextBoxX.Size = new System.Drawing.Size(100, 20);
@@ -542,7 +629,7 @@
             // 
             this.batchCurrencyComboBoxEx.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.batchCurrencyComboBoxEx.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.batchCurrencyComboBoxEx.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceFinanceBatchBindingSource, "BatchCurrency", true));
+            this.batchCurrencyComboBoxEx.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "BatchCurrency", true));
             this.batchCurrencyComboBoxEx.DisplayMember = "Text";
             this.batchCurrencyComboBoxEx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.batchCurrencyComboBoxEx.FormattingEnabled = true;
@@ -560,7 +647,7 @@
             // 
             // 
             this.financeBatchNoTextBox.Border.Class = "TextBoxBorder";
-            this.financeBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceFinanceBatchBindingSource, "FinanceBatchNo", true));
+            this.financeBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "FinanceBatchNo", true));
             this.financeBatchNoTextBox.Location = new System.Drawing.Point(260, 2);
             this.financeBatchNoTextBox.Name = "financeBatchNoTextBox";
             this.financeBatchNoTextBox.Size = new System.Drawing.Size(100, 20);
@@ -733,12 +820,9 @@
             this.cmuInvoiceFinance.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemInvoiceDetail,
             this.menuItemCDADetail,
-            this.menuItemCaseDetail,
-            this.toolStripSeparator1,
-            this.menuItemFinanceBatchExport,
-            this.menuItemFinanceBatchImport});
+            this.menuItemCaseDetail});
             this.cmuInvoiceFinance.Name = "cmuInvoiceFinance";
-            this.cmuInvoiceFinance.Size = new System.Drawing.Size(183, 120);
+            this.cmuInvoiceFinance.Size = new System.Drawing.Size(183, 92);
             // 
             // menuItemInvoiceDetail
             // 
@@ -760,26 +844,6 @@
             this.menuItemCaseDetail.Size = new System.Drawing.Size(182, 22);
             this.menuItemCaseDetail.Text = "案子详细信息";
             this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
-            // 
-            // menuItemFinanceBatchExport
-            // 
-            this.menuItemFinanceBatchExport.Enabled = false;
-            this.menuItemFinanceBatchExport.Name = "menuItemFinanceBatchExport";
-            this.menuItemFinanceBatchExport.Size = new System.Drawing.Size(182, 22);
-            this.menuItemFinanceBatchExport.Text = "导出批次";
-            // 
-            // menuItemFinanceBatchImport
-            // 
-            this.menuItemFinanceBatchImport.Enabled = false;
-            this.menuItemFinanceBatchImport.Name = "menuItemFinanceBatchImport";
-            this.menuItemFinanceBatchImport.Size = new System.Drawing.Size(182, 22);
-            this.menuItemFinanceBatchImport.Text = "导入批次";
-            this.menuItemFinanceBatchImport.Click += new System.EventHandler(this.ImportFinanceBatch);
             // 
             // invoiceBindingSource
             // 
@@ -941,54 +1005,6 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // tbTotalInterest
-            // 
-            // 
-            // 
-            // 
-            this.tbTotalInterest.Border.Class = "TextBoxBorder";
-            this.tbTotalInterest.Location = new System.Drawing.Point(898, 46);
-            this.tbTotalInterest.Name = "tbTotalInterest";
-            this.tbTotalInterest.Size = new System.Drawing.Size(100, 20);
-            this.tbTotalInterest.TabIndex = 24;
-            // 
-            // lblTotalInterest
-            // 
-            lblTotalInterest.AutoSize = true;
-            // 
-            // 
-            // 
-            lblTotalInterest.BackgroundStyle.Class = "";
-            lblTotalInterest.Location = new System.Drawing.Point(793, 48);
-            lblTotalInterest.Name = "lblTotalInterest";
-            lblTotalInterest.Size = new System.Drawing.Size(106, 16);
-            lblTotalInterest.TabIndex = 23;
-            lblTotalInterest.Text = "本次应收利息总额";
-            // 
-            // tbFinanceLineBalance
-            // 
-            // 
-            // 
-            // 
-            this.tbFinanceLineBalance.Border.Class = "TextBoxBorder";
-            this.tbFinanceLineBalance.Location = new System.Drawing.Point(898, 3);
-            this.tbFinanceLineBalance.Name = "tbFinanceLineBalance";
-            this.tbFinanceLineBalance.Size = new System.Drawing.Size(100, 20);
-            this.tbFinanceLineBalance.TabIndex = 26;
-            // 
-            // lblFinanceLineBalance
-            // 
-            lblFinanceLineBalance.AutoSize = true;
-            // 
-            // 
-            // 
-            lblFinanceLineBalance.BackgroundStyle.Class = "";
-            lblFinanceLineBalance.Location = new System.Drawing.Point(779, 6);
-            lblFinanceLineBalance.Name = "lblFinanceLineBalance";
-            lblFinanceLineBalance.Size = new System.Drawing.Size(118, 16);
-            lblFinanceLineBalance.TabIndex = 25;
-            lblFinanceLineBalance.Text = "预付款融资额度余额";
-            // 
             // InvoiceFinance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1000,7 +1016,7 @@
             this.Size = new System.Drawing.Size(1257, 466);
             this.panelFinanceBatch.ResumeLayout(false);
             this.panelFinanceBatch.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceFinanceBatchBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.finnacePeriodEndDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).EndInit();
@@ -1019,9 +1035,7 @@
 
         private System.Windows.Forms.ContextMenuStrip cmuInvoiceFinance;
         private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private DevComponents.DotNetBar.ButtonX btnFinanceBatchSave;
-        private System.Windows.Forms.ToolStripMenuItem menuItemFinanceBatchImport;
         private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
@@ -1036,7 +1050,6 @@
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator8;
         private DevComponents.DotNetBar.ButtonX btnFactorSelect;
         private DevComponents.DotNetBar.Controls.TextBoxX tbTotalFinance;
-        private System.Windows.Forms.ToolStripMenuItem menuItemFinanceBatchExport;
         private DevComponents.DotNetBar.ButtonX btnFinanceBatchNew;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
@@ -1058,5 +1071,8 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceLineBalance;
         private DevComponents.DotNetBar.Controls.TextBoxX tbTotalInterest;
+        private DevComponents.DotNetBar.ButtonX btnFinanceBatchExport;
+        private DevComponents.DotNetBar.ButtonX btnFinanceBatchSelect;
+        private DevComponents.DotNetBar.ButtonX btnFinanceBatchImport;
     }
 }

@@ -10,6 +10,8 @@ namespace CMBC.EasyFactor.CaseMgr
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.InfoMgr.ClientMgr;
+    using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
 
     /// <summary>
@@ -53,6 +55,11 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #region Constructors (3)
 
+        /// <summary>
+        /// 通过Case新建CDA
+        /// </summary>
+        /// <param name="selectedCase"></param>
+        /// <param name="opCDAType"></param>
         public CDADetail(Case selectedCase, OpCDAType opCDAType)
             : this((CDA)null, opCDAType)
         {
@@ -80,9 +87,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.priceTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
             this.iFPriceTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
             this.iFPriceTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
-            this.eFPriceTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
-            this.eFPriceTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
-
 
             this.creditCoverCurrComboBox.DataSource = Currency.AllCurrencies().ToList();
             this.creditCoverCurrComboBox.DisplayMember = "CurrencyCode";
@@ -141,19 +145,13 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Constructors
 
-        #region Methods (10)
+        #region Methods (15)
 
-        // Private Methods (10) 
+        // Private Methods (15) 
 
         void cda_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             CDA cda = sender as CDA;
-            if ("Price".Equals(e.PropertyName) || "IFPrice".Equals(e.PropertyName))
-            {
-                double price = cda.Price.GetValueOrDefault();
-                double ifprice = cda.IFPrice.GetValueOrDefault();
-                cda.EFPrice = price - ifprice;
-            }
             if ("IsRecoarse".Equals(e.PropertyName))
             {
                 bool isRecoarse = cda.IsRecoarse.GetValueOrDefault();
@@ -224,6 +222,109 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailBuyer(object sender, EventArgs e)
+        {
+            CDA cda = (CDA)this.CDABindingSource.DataSource;
+            if (cda == null || cda.Case == null)
+            {
+                return;
+            }
+            ClientDetail clientDetail = new ClientDetail(cda.Case.BuyerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
+            clientDetail.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailCase(object sender, EventArgs e)
+        {
+            CDA cda = (CDA)this.CDABindingSource.DataSource;
+            if (cda == null || cda.Case == null)
+            {
+                return;
+            }
+            CaseDetail caseDetail = new CaseDetail(cda.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            caseDetail.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailContract(object sender, EventArgs e)
+        {
+            CDA cda = (CDA)this.CDABindingSource.DataSource;
+            if (cda == null || cda.Case == null)
+            {
+                return;
+            }
+            if (cda.Case.SellerClient.Contract != null)
+            {
+                ClientDetail clientDetail = new ClientDetail(cda.Case.SellerClient.Contract, ClientDetail.OpContractType.DETAIL_CONTRACT);
+                clientDetail.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailFactor(object sender, EventArgs e)
+        {
+            CDA cda = (CDA)this.CDABindingSource.DataSource;
+            if (cda == null || cda.Case == null)
+            {
+                return;
+            }
+            Factor factor = null;
+            switch (cda.Case.TransactionType)
+            {
+                case "国内卖方保理":
+                case "出口保理":
+                case "国内信保保理":
+                case "国际信保保理":
+                case "租赁保理":
+                    factor = cda.Case.SellerFactor;
+                    break;
+                case "国内买方保理":
+                case "进口保理":
+                    factor = cda.Case.BuyerFactor;
+                    break;
+                default: break;
+            }
+            if (factor != null)
+            {
+                FactorDetail factorDetail = new FactorDetail(factor, FactorDetail.OpFactorType.DETAIL_FACTOR);
+                factorDetail.Show();
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailSeller(object sender, EventArgs e)
+        {
+            CDA cda = (CDA)this.CDABindingSource.DataSource;
+            if (cda == null || cda.Case == null)
+            {
+                return;
+            }
+            ClientDetail clientDetail = new ClientDetail(cda.Case.SellerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
+            clientDetail.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="curCase"></param>
         private void FillCase(Case curCase)
         {
@@ -268,7 +369,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     cda.FinanceLine = sellerCreditLine.CreditLine;
                 }
             }
-            cda.CDASignDate = DateTime.Now;
+            cda.CDASignDate = DateTime.Now.Date;
             cda.CommissionType = "按转让金额";
             cda.PUGProportion = 1;
             cda.PUGPeriod = 90;
@@ -305,7 +406,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     cda.NoticeMethod = "Email,Fax";
                 }
             }
-
+            cda.EFPrice = cda.Price - cda.IFPrice;
             if (cda.CDACode == null)
             {
                 bool isAddOK = true;

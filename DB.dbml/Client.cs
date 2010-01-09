@@ -81,7 +81,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (this.FinanceCreditLine == null || !this.FinanceCreditLine.CreditLine.HasValue)
+                if (this.FinanceCreditLine == null )
                 {
                     return null;
                 }

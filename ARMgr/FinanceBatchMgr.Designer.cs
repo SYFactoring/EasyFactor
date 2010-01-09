@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -38,7 +39,7 @@
             this.btnFinanceBatchQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbFinanceBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFinanceBatchNo = new DevComponents.DotNetBar.LabelX();
-            this.dgvFinanceBatch = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colFinanceBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,8 +52,15 @@
             this.colCostRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemInvoiceList = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFinanceBatch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBatches)).BeginInit();
+            this.cmuBatchMgr.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelQuery
@@ -85,7 +93,7 @@
             this.btnFinanceBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFinanceBatchQuery.TabIndex = 2;
             this.btnFinanceBatchQuery.Text = "查询";
-            this.btnFinanceBatchQuery.Click += new System.EventHandler(this.QueryFinanceBatch);
+            this.btnFinanceBatchQuery.Click += new System.EventHandler(this.QueryBatch);
             // 
             // tbFinanceBatchNo
             // 
@@ -111,13 +119,13 @@
             this.lblFinanceBatchNo.TabIndex = 0;
             this.lblFinanceBatchNo.Text = "融资编号";
             // 
-            // dgvFinanceBatch
+            // dgvBatches
             // 
-            this.dgvFinanceBatch.AllowUserToAddRows = false;
-            this.dgvFinanceBatch.AllowUserToDeleteRows = false;
-            this.dgvFinanceBatch.AllowUserToOrderColumns = true;
-            this.dgvFinanceBatch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFinanceBatch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvBatches.AllowUserToAddRows = false;
+            this.dgvBatches.AllowUserToDeleteRows = false;
+            this.dgvBatches.AllowUserToOrderColumns = true;
+            this.dgvBatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBatches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colFinanceBatchNo,
             this.colFinanceType,
             this.colBatchCurrency,
@@ -130,6 +138,7 @@
             this.colCostRate,
             this.colCreateUserName,
             this.colComment});
+            this.dgvBatches.ContextMenuStrip = this.cmuBatchMgr;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -137,16 +146,16 @@
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFinanceBatch.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvFinanceBatch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvFinanceBatch.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvFinanceBatch.Location = new System.Drawing.Point(0, 35);
-            this.dgvFinanceBatch.Name = "dgvFinanceBatch";
-            this.dgvFinanceBatch.ReadOnly = true;
-            this.dgvFinanceBatch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFinanceBatch.Size = new System.Drawing.Size(569, 402);
-            this.dgvFinanceBatch.TabIndex = 1;
-            this.dgvFinanceBatch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectFinanceBatch);
+            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvBatches.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvBatches.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvBatches.Location = new System.Drawing.Point(0, 35);
+            this.dgvBatches.Name = "dgvBatches";
+            this.dgvBatches.ReadOnly = true;
+            this.dgvBatches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvBatches.Size = new System.Drawing.Size(569, 402);
+            this.dgvBatches.TabIndex = 1;
+            this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBatches_CellDoubleClick);
             // 
             // colFinanceBatchNo
             // 
@@ -245,17 +254,62 @@
             this.colComment.Name = "colComment";
             this.colComment.ReadOnly = true;
             // 
+            // cmuBatchMgr
+            // 
+            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemBatchSelect,
+            this.menuItemInvoiceList,
+            this.toolStripSeparator1,
+            this.menuItemCheck,
+            this.menuItemReject});
+            this.cmuBatchMgr.Name = "cmuBatchMgr";
+            this.cmuBatchMgr.Size = new System.Drawing.Size(153, 120);
+            // 
+            // menuItemBatchSelect
+            // 
+            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
+            this.menuItemBatchSelect.Size = new System.Drawing.Size(152, 22);
+            this.menuItemBatchSelect.Text = "选择批次";
+            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
+            // 
+            // menuItemInvoiceList
+            // 
+            this.menuItemInvoiceList.Name = "menuItemInvoiceList";
+            this.menuItemInvoiceList.Size = new System.Drawing.Size(152, 22);
+            this.menuItemInvoiceList.Text = "批次详情";
+            this.menuItemInvoiceList.Click += new System.EventHandler(this.DetailBatch);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // menuItemCheck
+            // 
+            this.menuItemCheck.Name = "menuItemCheck";
+            this.menuItemCheck.Size = new System.Drawing.Size(152, 22);
+            this.menuItemCheck.Text = "复核通过";
+            this.menuItemCheck.Click += new System.EventHandler(this.Check);
+            // 
+            // menuItemReject
+            // 
+            this.menuItemReject.Name = "menuItemReject";
+            this.menuItemReject.Size = new System.Drawing.Size(152, 22);
+            this.menuItemReject.Text = "复核拒绝";
+            this.menuItemReject.Click += new System.EventHandler(this.Reject);
+            // 
             // FinanceBatchMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dgvFinanceBatch);
+            this.Controls.Add(this.dgvBatches);
             this.Controls.Add(this.panelQuery);
             this.Name = "FinanceBatchMgr";
             this.Size = new System.Drawing.Size(569, 437);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFinanceBatch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBatches)).EndInit();
+            this.cmuBatchMgr.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -266,7 +320,7 @@
         private DevComponents.DotNetBar.ButtonX btnFinanceBatchQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceBatchNo;
         private DevComponents.DotNetBar.LabelX lblFinanceBatchNo;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvFinanceBatch;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvBatches;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceBatchNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCurrency;
@@ -279,5 +333,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCostRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.ContextMenuStrip cmuBatchMgr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemBatchSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceList;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCheck;
+        private System.Windows.Forms.ToolStripMenuItem menuItemReject;
     }
 }

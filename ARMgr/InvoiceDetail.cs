@@ -81,12 +81,15 @@ namespace CMBC.EasyFactor.ARMgr
                     if (reasonList.Contains(item))
                     {
                         this.flawReasonCheckedListBox.SetItemChecked(i, true);
+                        reasonList.Remove(item);
                     }
                 }
-                if (reasonList.Count > this.flawReasonCheckedListBox.CheckedItems.Count)
+                string otherReason = string.Empty;
+                foreach (string other in reasonList)
                 {
-                    this.tbFlawReason.Text = reasonList[reasonList.Count - 1];
+                    otherReason += (other + Environment.NewLine);
                 }
+                this.tbFlawReason.Text = otherReason;
             }
             if (invoice.DisputeReason != null)
             {
@@ -98,12 +101,15 @@ namespace CMBC.EasyFactor.ARMgr
                     if (disputeList.Contains(item))
                     {
                         this.disputeReasonCheckedListBox.SetItemChecked(i, true);
+                        disputeList.Remove(item);
                     }
                 }
-                if (disputeList.Count > this.disputeReasonCheckedListBox.CheckedItems.Count)
+                string otherReason = string.Empty;
+                foreach (string other in disputeList)
                 {
-                    this.tbDisputeReason.Text = disputeList[disputeList.Count - 1];
+                    otherReason += (other + Environment.NewLine);
                 }
+                this.tbDisputeReason.Text = otherReason;
             }
             invoice.Backup();
             UpdateInvoiceControlStatus();
@@ -132,14 +138,9 @@ namespace CMBC.EasyFactor.ARMgr
         private void Dispute(object sender, EventArgs e)
         {
             Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
-            if (!invoice.DisputeDate.HasValue)
-            {
-                invoice.DisputeDate = DateTime.Now;
-            }
-            if (invoice.DisputeUserName == null)
-            {
-                invoice.DisputeUserName = App.Current.CurUser.Name;
-            }
+            invoice.DisputeDate = DateTime.Now.Date;
+            invoice.DisputeUserName = App.Current.CurUser.Name;
+            invoice.IsDispute = true;
             foreach (Control comp in this.groupPanelDispute.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, true);
@@ -154,27 +155,22 @@ namespace CMBC.EasyFactor.ARMgr
         private void DisputeResolve(object sender, EventArgs e)
         {
             Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
-            invoice.DisputeResolveDate = DateTime.Now;
+            invoice.DisputeResolveDate = DateTime.Now.Date;
             invoice.DisputeResolveUserName = App.Current.CurUser.Name;
-
+            invoice.IsDispute = false;
             foreach (Control comp in this.groupPanelDisputeResolve.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, true);
             }
-            for (int i = 0; i < this.disputeReasonCheckedListBox.Items.Count; i++)
+
+            List<string> reasonList = new List<string>();
+            reasonList.AddRange(invoice.DisputeReason.Split(';'));
+            string disputeResolveReason = string.Empty;
+            foreach (string reason in reasonList)
             {
-                bool check = this.disputeReasonCheckedListBox.GetItemChecked(i);
-                if (check)
-                {
-                    invoice.DisputeResolveReason += (this.disputeReasonCheckedListBox.Items[i].ToString() + " 已解决" + Environment.NewLine);
-                    this.disputeReasonCheckedListBox.SetItemChecked(i, false);
-                }
+                disputeResolveReason += (reason + " 已解除" + Environment.NewLine);
             }
-            if (this.tbDisputeReason.Text != string.Empty)
-            {
-                invoice.DisputeResolveReason += (this.tbDisputeReason.Text + " 已解决");
-                this.tbDisputeReason.Text = string.Empty;
-            }
+            invoice.DisputeResolveReason = disputeResolveReason;
         }
 
         /// <summary>
@@ -186,6 +182,8 @@ namespace CMBC.EasyFactor.ARMgr
         {
             this.flawReasonCheckedListBox.Enabled = true;
             this.tbFlawReason.ReadOnly = false;
+            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+            invoice.IsFlaw = true;
         }
 
         /// <summary>
@@ -196,25 +194,22 @@ namespace CMBC.EasyFactor.ARMgr
         private void FlawResolve(object sender, EventArgs e)
         {
             Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
-            invoice.FlawResolveDate = DateTime.Now;
+            invoice.FlawResolveDate = DateTime.Now.Date;
             invoice.FlawResolveUserName = App.Current.CurUser.Name;
+            invoice.IsFlaw = false;
 
             this.flawResolveDateDateTimePicker.Enabled = true;
             this.tbFlawResolveReason.ReadOnly = false;
-            for (int i = 0; i < this.flawReasonCheckedListBox.Items.Count; i++)
+            this.flawResolveUserNameTextBox.ReadOnly = false;
+
+            List<string> reasonList = new List<string>();
+            reasonList.AddRange(invoice.FlawReason.Split(';'));
+            string flawResolveReason = string.Empty;
+            foreach (string reason in reasonList)
             {
-                bool check = this.flawReasonCheckedListBox.GetItemChecked(i);
-                if (check)
-                {
-                    invoice.FlawResolveReason += (this.flawReasonCheckedListBox.Items[i].ToString() + " 已解决" + Environment.NewLine);
-                    this.flawReasonCheckedListBox.SetItemChecked(i, false);
-                }
+                flawResolveReason += (reason + " 已解除" + Environment.NewLine);
             }
-            if (this.tbFlawReason.Text != string.Empty)
-            {
-                invoice.FlawResolveReason += (this.tbFlawReason.Text + " 已解决");
-                this.tbFlawReason.Text = string.Empty;
-            }
+            invoice.FlawResolveReason = flawResolveReason;
         }
 
         /// <summary>
@@ -257,42 +252,29 @@ namespace CMBC.EasyFactor.ARMgr
             }
             Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
 
-            invoice.FlawReason = string.Empty;
+            string flawReason = string.Empty;
             foreach (string item in this.flawReasonCheckedListBox.CheckedItems)
             {
-                invoice.FlawReason += (item + ";");
+                flawReason += (item + ";");
             }
-            if (!this.tbFlawReason.Text.Equals(string.Empty))
+            if (this.tbFlawReason.Text != string.Empty)
             {
-                invoice.FlawReason += this.tbFlawReason.Text;
+                flawReason += this.tbFlawReason.Text;
             }
-            if (!invoice.FlawReason.Equals(string.Empty))
-            {
-                invoice.IsFlaw = true;
-            }
-            else
-            {
-                invoice.IsFlaw = false;
-            }
-            invoice.DisputeReason = string.Empty;
+            invoice.FlawReason = flawReason;
+
+            string disputeReason = string.Empty;
             foreach (string item in this.disputeReasonCheckedListBox.CheckedItems)
             {
-                invoice.DisputeReason += (item + ";");
+                disputeReason += (item + ";");
             }
-            if (!this.tbDisputeReason.Text.Equals(string.Empty))
+            if (this.tbDisputeReason.Text != string.Empty)
             {
-                invoice.DisputeReason += this.tbDisputeReason.Text;
+                disputeReason += this.tbDisputeReason.Text;
             }
-            if (!invoice.DisputeReason.Equals(string.Empty))
-            {
-                invoice.IsDispute = true;
-            }
-            else
-            {
-                invoice.IsDispute = false;
-            }
-            bool isUpdateOK = true;
+            invoice.DisputeReason = disputeReason;
 
+            bool isUpdateOK = true;
             try
             {
                 App.Current.DbContext.SubmitChanges();
@@ -337,6 +319,10 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+                foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
             }
             else if (opInvoiceType == OpInvoiceType.UPDATE_INVOICE)
             {
@@ -352,6 +338,9 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+                this.assignBatchNoTextBox.ReadOnly = true;
+                this.financeBatchNoTextBox.ReadOnly = true;
+                this.paymentBatchNoTextBox.ReadOnly = true;
             }
             foreach (Control comp in this.groupPanelFlaw.Controls)
             {
@@ -369,13 +358,11 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 ControlUtil.SetComponetEditable(comp, false);
             }
-            foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
-            {
-                ControlUtil.SetComponetEditable(comp, false);
-            }
             this.invoiceNoTextBox.ReadOnly = true;
             this.btnFlaw.Enabled = true;
             this.btnFlawResolve.Enabled = true;
+            this.isDisputeCheckBox.Enabled = true;
+            this.isFlawCheckBox.Enabled = true;
         }
 
         #endregion Methods

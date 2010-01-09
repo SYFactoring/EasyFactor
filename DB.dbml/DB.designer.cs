@@ -30,15 +30,24 @@ namespace CMBC.EasyFactor.DB.dbml
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertCase(Case instance);
+    partial void UpdateCase(Case instance);
+    partial void DeleteCase(Case instance);
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
+    partial void InsertCDA(CDA instance);
+    partial void UpdateCDA(CDA instance);
+    partial void DeleteCDA(CDA instance);
     partial void InsertClient(Client instance);
     partial void UpdateClient(Client instance);
     partial void DeleteClient(Client instance);
     partial void InsertClientAccount(ClientAccount instance);
     partial void UpdateClientAccount(ClientAccount instance);
     partial void DeleteClientAccount(ClientAccount instance);
+    partial void InsertClientCreditLine(ClientCreditLine instance);
+    partial void UpdateClientCreditLine(ClientCreditLine instance);
+    partial void DeleteClientCreditLine(ClientCreditLine instance);
     partial void InsertClientGroup(ClientGroup instance);
     partial void UpdateClientGroup(ClientGroup instance);
     partial void DeleteClientGroup(ClientGroup instance);
@@ -54,45 +63,36 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertCurrency(Currency instance);
     partial void UpdateCurrency(Currency instance);
     partial void DeleteCurrency(Currency instance);
+    partial void InsertDepartment(Department instance);
+    partial void UpdateDepartment(Department instance);
+    partial void DeleteDepartment(Department instance);
     partial void InsertDepartmentAccount(DepartmentAccount instance);
     partial void UpdateDepartmentAccount(DepartmentAccount instance);
     partial void DeleteDepartmentAccount(DepartmentAccount instance);
+    partial void InsertFactor(Factor instance);
+    partial void UpdateFactor(Factor instance);
+    partial void DeleteFactor(Factor instance);
     partial void InsertFactorAccount(FactorAccount instance);
     partial void UpdateFactorAccount(FactorAccount instance);
     partial void DeleteFactorAccount(FactorAccount instance);
+    partial void InsertFactorCreditLine(FactorCreditLine instance);
+    partial void UpdateFactorCreditLine(FactorCreditLine instance);
+    partial void DeleteFactorCreditLine(FactorCreditLine instance);
     partial void InsertFactorGroup(FactorGroup instance);
     partial void UpdateFactorGroup(FactorGroup instance);
     partial void DeleteFactorGroup(FactorGroup instance);
     partial void InsertInvoice(Invoice instance);
     partial void UpdateInvoice(Invoice instance);
     partial void DeleteInvoice(Invoice instance);
-    partial void InsertDepartment(Department instance);
-    partial void UpdateDepartment(Department instance);
-    partial void DeleteDepartment(Department instance);
-    partial void InsertClientCreditLine(ClientCreditLine instance);
-    partial void UpdateClientCreditLine(ClientCreditLine instance);
-    partial void DeleteClientCreditLine(ClientCreditLine instance);
-    partial void InsertFactorCreditLine(FactorCreditLine instance);
-    partial void UpdateFactorCreditLine(FactorCreditLine instance);
-    partial void DeleteFactorCreditLine(FactorCreditLine instance);
-    partial void InsertCase(Case instance);
-    partial void UpdateCase(Case instance);
-    partial void DeleteCase(Case instance);
-    partial void InsertFactor(Factor instance);
-    partial void UpdateFactor(Factor instance);
-    partial void DeleteFactor(Factor instance);
-    partial void InsertCDA(CDA instance);
-    partial void UpdateCDA(CDA instance);
-    partial void DeleteCDA(CDA instance);
     partial void InsertInvoiceAssignBatch(InvoiceAssignBatch instance);
     partial void UpdateInvoiceAssignBatch(InvoiceAssignBatch instance);
     partial void DeleteInvoiceAssignBatch(InvoiceAssignBatch instance);
-    partial void InsertInvoicePaymentBatch(InvoicePaymentBatch instance);
-    partial void UpdateInvoicePaymentBatch(InvoicePaymentBatch instance);
-    partial void DeleteInvoicePaymentBatch(InvoicePaymentBatch instance);
     partial void InsertInvoiceFinanceBatch(InvoiceFinanceBatch instance);
     partial void UpdateInvoiceFinanceBatch(InvoiceFinanceBatch instance);
     partial void DeleteInvoiceFinanceBatch(InvoiceFinanceBatch instance);
+    partial void InsertInvoicePaymentBatch(InvoicePaymentBatch instance);
+    partial void UpdateInvoicePaymentBatch(InvoicePaymentBatch instance);
+    partial void DeleteInvoicePaymentBatch(InvoicePaymentBatch instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -125,11 +125,27 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<Case> Cases
+		{
+			get
+			{
+				return this.GetTable<Case>();
+			}
+		}
+		
 		public System.Data.Linq.Table<User> Users
 		{
 			get
 			{
 				return this.GetTable<User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CDA> CDAs
+		{
+			get
+			{
+				return this.GetTable<CDA>();
 			}
 		}
 		
@@ -146,6 +162,14 @@ namespace CMBC.EasyFactor.DB.dbml
 			get
 			{
 				return this.GetTable<ClientAccount>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ClientCreditLine> ClientCreditLines
+		{
+			get
+			{
+				return this.GetTable<ClientCreditLine>();
 			}
 		}
 		
@@ -189,6 +213,14 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		public System.Data.Linq.Table<Department> Departments
+		{
+			get
+			{
+				return this.GetTable<Department>();
+			}
+		}
+		
 		public System.Data.Linq.Table<DepartmentAccount> DepartmentAccounts
 		{
 			get
@@ -197,11 +229,27 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		public System.Data.Linq.Table<Factor> Factors
+		{
+			get
+			{
+				return this.GetTable<Factor>();
+			}
+		}
+		
 		public System.Data.Linq.Table<FactorAccount> FactorAccounts
 		{
 			get
 			{
 				return this.GetTable<FactorAccount>();
+			}
+		}
+		
+		public System.Data.Linq.Table<FactorCreditLine> FactorCreditLines
+		{
+			get
+			{
+				return this.GetTable<FactorCreditLine>();
 			}
 		}
 		
@@ -221,59 +269,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		public System.Data.Linq.Table<Department> Departments
-		{
-			get
-			{
-				return this.GetTable<Department>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ClientCreditLine> ClientCreditLines
-		{
-			get
-			{
-				return this.GetTable<ClientCreditLine>();
-			}
-		}
-		
-		public System.Data.Linq.Table<FactorCreditLine> FactorCreditLines
-		{
-			get
-			{
-				return this.GetTable<FactorCreditLine>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Case> Cases
-		{
-			get
-			{
-				return this.GetTable<Case>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Factor> Factors
-		{
-			get
-			{
-				return this.GetTable<Factor>();
-			}
-		}
-		
-		public System.Data.Linq.Table<CDA> CDAs
-		{
-			get
-			{
-				return this.GetTable<CDA>();
-			}
-		}
-		
 		public System.Data.Linq.Table<InvoiceAssignBatch> InvoiceAssignBatches
 		{
 			get
 			{
 				return this.GetTable<InvoiceAssignBatch>();
+			}
+		}
+		
+		public System.Data.Linq.Table<InvoiceFinanceBatch> InvoiceFinanceBatches
+		{
+			get
+			{
+				return this.GetTable<InvoiceFinanceBatch>();
 			}
 		}
 		
@@ -284,13 +292,753 @@ namespace CMBC.EasyFactor.DB.dbml
 				return this.GetTable<InvoicePaymentBatch>();
 			}
 		}
+	}
+	
+	[Table(Name="dbo.[Case]")]
+	public partial class Case : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		public System.Data.Linq.Table<InvoiceFinanceBatch> InvoiceFinanceBatches
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CaseCode;
+		
+		private string _SellerCode;
+		
+		private string _SellerFactorCode;
+		
+		private string _BuyerCode;
+		
+		private string _BuyerFactorCode;
+		
+		private string _InvoiceCurrency;
+		
+		private string _TransactionType;
+		
+		private string _OperationType;
+		
+		private string _OwnerDepartmentCode;
+		
+		private string _CoDepartmentCode;
+		
+		private System.DateTime _CaseAppDate;
+		
+		private string _CaseMark;
+		
+		private string _CreateUserName;
+		
+		private string _ManagerName;
+		
+		private int _NetPaymentTerm;
+		
+		private string _ReviewNo;
+		
+		private string _Comment;
+		
+		private EntitySet<CDA> _CDAs;
+		
+		private EntitySet<CreditCoverNegotiation> _CreditCoverNegotiations;
+		
+		private EntityRef<Client> _BuyerClient;
+		
+		private EntityRef<Client> _SellerClient;
+		
+		private EntityRef<Department> _CoDepartment;
+		
+		private EntityRef<Department> _OwnerDepartment;
+		
+		private EntityRef<Factor> _BuyerFactor;
+		
+		private EntityRef<Factor> _SellerFactor;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCaseCodeChanging(string value);
+    partial void OnCaseCodeChanged();
+    partial void OnSellerCodeChanging(string value);
+    partial void OnSellerCodeChanged();
+    partial void OnSellerFactorCodeChanging(string value);
+    partial void OnSellerFactorCodeChanged();
+    partial void OnBuyerCodeChanging(string value);
+    partial void OnBuyerCodeChanged();
+    partial void OnBuyerFactorCodeChanging(string value);
+    partial void OnBuyerFactorCodeChanged();
+    partial void OnInvoiceCurrencyChanging(string value);
+    partial void OnInvoiceCurrencyChanged();
+    partial void OnTransactionTypeChanging(string value);
+    partial void OnTransactionTypeChanged();
+    partial void OnOperationTypeChanging(string value);
+    partial void OnOperationTypeChanged();
+    partial void OnOwnerDepartmentCodeChanging(string value);
+    partial void OnOwnerDepartmentCodeChanged();
+    partial void OnCoDepartmentCodeChanging(string value);
+    partial void OnCoDepartmentCodeChanged();
+    partial void OnCaseAppDateChanging(System.DateTime value);
+    partial void OnCaseAppDateChanged();
+    partial void OnCaseMarkChanging(string value);
+    partial void OnCaseMarkChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
+    partial void OnManagerNameChanging(string value);
+    partial void OnManagerNameChanged();
+    partial void OnNetPaymentTermChanging(int value);
+    partial void OnNetPaymentTermChanged();
+    partial void OnReviewNoChanging(string value);
+    partial void OnReviewNoChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    #endregion
+		
+		public Case()
+		{
+			this._CDAs = new EntitySet<CDA>(new Action<CDA>(this.attach_CDAs), new Action<CDA>(this.detach_CDAs));
+			this._CreditCoverNegotiations = new EntitySet<CreditCoverNegotiation>(new Action<CreditCoverNegotiation>(this.attach_CreditCoverNegotiations), new Action<CreditCoverNegotiation>(this.detach_CreditCoverNegotiations));
+			this._BuyerClient = default(EntityRef<Client>);
+			this._SellerClient = default(EntityRef<Client>);
+			this._CoDepartment = default(EntityRef<Department>);
+			this._OwnerDepartment = default(EntityRef<Department>);
+			this._BuyerFactor = default(EntityRef<Factor>);
+			this._SellerFactor = default(EntityRef<Factor>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CaseCode
 		{
 			get
 			{
-				return this.GetTable<InvoiceFinanceBatch>();
+				return this._CaseCode;
 			}
+			set
+			{
+				if ((this._CaseCode != value))
+				{
+					this.OnCaseCodeChanging(value);
+					this.SendPropertyChanging();
+					this._CaseCode = value;
+					this.SendPropertyChanged("CaseCode");
+					this.OnCaseCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_SellerCode", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		public string SellerCode
+		{
+			get
+			{
+				return this._SellerCode;
+			}
+			set
+			{
+				if ((this._SellerCode != value))
+				{
+					if (this._SellerClient.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSellerCodeChanging(value);
+					this.SendPropertyChanging();
+					this._SellerCode = value;
+					this.SendPropertyChanged("SellerCode");
+					this.OnSellerCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_SellerFactorCode", DbType="Char(7) NOT NULL", CanBeNull=false)]
+		public string SellerFactorCode
+		{
+			get
+			{
+				return this._SellerFactorCode;
+			}
+			set
+			{
+				if ((this._SellerFactorCode != value))
+				{
+					if (this._SellerFactor.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSellerFactorCodeChanging(value);
+					this.SendPropertyChanging();
+					this._SellerFactorCode = value;
+					this.SendPropertyChanged("SellerFactorCode");
+					this.OnSellerFactorCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_BuyerCode", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		public string BuyerCode
+		{
+			get
+			{
+				return this._BuyerCode;
+			}
+			set
+			{
+				if ((this._BuyerCode != value))
+				{
+					if (this._BuyerClient.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnBuyerCodeChanging(value);
+					this.SendPropertyChanging();
+					this._BuyerCode = value;
+					this.SendPropertyChanged("BuyerCode");
+					this.OnBuyerCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_BuyerFactorCode", DbType="Char(7) NOT NULL", CanBeNull=false)]
+		public string BuyerFactorCode
+		{
+			get
+			{
+				return this._BuyerFactorCode;
+			}
+			set
+			{
+				if ((this._BuyerFactorCode != value))
+				{
+					if (this._BuyerFactor.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnBuyerFactorCodeChanging(value);
+					this.SendPropertyChanging();
+					this._BuyerFactorCode = value;
+					this.SendPropertyChanged("BuyerFactorCode");
+					this.OnBuyerFactorCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_InvoiceCurrency", DbType="Char(3) NOT NULL", CanBeNull=false)]
+		public string InvoiceCurrency
+		{
+			get
+			{
+				return this._InvoiceCurrency;
+			}
+			set
+			{
+				if ((this._InvoiceCurrency != value))
+				{
+					this.OnInvoiceCurrencyChanging(value);
+					this.SendPropertyChanging();
+					this._InvoiceCurrency = value;
+					this.SendPropertyChanged("InvoiceCurrency");
+					this.OnInvoiceCurrencyChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_TransactionType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string TransactionType
+		{
+			get
+			{
+				return this._TransactionType;
+			}
+			set
+			{
+				if ((this._TransactionType != value))
+				{
+					this.OnTransactionTypeChanging(value);
+					this.SendPropertyChanging();
+					this._TransactionType = value;
+					this.SendPropertyChanged("TransactionType");
+					this.OnTransactionTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_OperationType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string OperationType
+		{
+			get
+			{
+				return this._OperationType;
+			}
+			set
+			{
+				if ((this._OperationType != value))
+				{
+					this.OnOperationTypeChanging(value);
+					this.SendPropertyChanging();
+					this._OperationType = value;
+					this.SendPropertyChanged("OperationType");
+					this.OnOperationTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_OwnerDepartmentCode", DbType="VarChar(14) NOT NULL", CanBeNull=false)]
+		public string OwnerDepartmentCode
+		{
+			get
+			{
+				return this._OwnerDepartmentCode;
+			}
+			set
+			{
+				if ((this._OwnerDepartmentCode != value))
+				{
+					if (this._OwnerDepartment.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOwnerDepartmentCodeChanging(value);
+					this.SendPropertyChanging();
+					this._OwnerDepartmentCode = value;
+					this.SendPropertyChanged("OwnerDepartmentCode");
+					this.OnOwnerDepartmentCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CoDepartmentCode", DbType="VarChar(14)")]
+		public string CoDepartmentCode
+		{
+			get
+			{
+				return this._CoDepartmentCode;
+			}
+			set
+			{
+				if ((this._CoDepartmentCode != value))
+				{
+					if (this._CoDepartment.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCoDepartmentCodeChanging(value);
+					this.SendPropertyChanging();
+					this._CoDepartmentCode = value;
+					this.SendPropertyChanged("CoDepartmentCode");
+					this.OnCoDepartmentCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CaseAppDate", DbType="DateTime NOT NULL")]
+		public System.DateTime CaseAppDate
+		{
+			get
+			{
+				return this._CaseAppDate;
+			}
+			set
+			{
+				if ((this._CaseAppDate != value))
+				{
+					this.OnCaseAppDateChanging(value);
+					this.SendPropertyChanging();
+					this._CaseAppDate = value;
+					this.SendPropertyChanged("CaseAppDate");
+					this.OnCaseAppDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CaseMark", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CaseMark
+		{
+			get
+			{
+				return this._CaseMark;
+			}
+			set
+			{
+				if ((this._CaseMark != value))
+				{
+					this.OnCaseMarkChanging(value);
+					this.SendPropertyChanging();
+					this._CaseMark = value;
+					this.SendPropertyChanged("CaseMark");
+					this.OnCaseMarkChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ManagerName", DbType="NVarChar(50)")]
+		public string ManagerName
+		{
+			get
+			{
+				return this._ManagerName;
+			}
+			set
+			{
+				if ((this._ManagerName != value))
+				{
+					this.OnManagerNameChanging(value);
+					this.SendPropertyChanging();
+					this._ManagerName = value;
+					this.SendPropertyChanged("ManagerName");
+					this.OnManagerNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_NetPaymentTerm", DbType="Int NOT NULL")]
+		public int NetPaymentTerm
+		{
+			get
+			{
+				return this._NetPaymentTerm;
+			}
+			set
+			{
+				if ((this._NetPaymentTerm != value))
+				{
+					this.OnNetPaymentTermChanging(value);
+					this.SendPropertyChanging();
+					this._NetPaymentTerm = value;
+					this.SendPropertyChanged("NetPaymentTerm");
+					this.OnNetPaymentTermChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ReviewNo", DbType="VarChar(50)")]
+		public string ReviewNo
+		{
+			get
+			{
+				return this._ReviewNo;
+			}
+			set
+			{
+				if ((this._ReviewNo != value))
+				{
+					this.OnReviewNoChanging(value);
+					this.SendPropertyChanging();
+					this._ReviewNo = value;
+					this.SendPropertyChanged("ReviewNo");
+					this.OnReviewNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Case_CDA", Storage="_CDAs", OtherKey="CaseCode")]
+		public EntitySet<CDA> CDAs
+		{
+			get
+			{
+				return this._CDAs;
+			}
+			set
+			{
+				this._CDAs.Assign(value);
+			}
+		}
+		
+		[Association(Name="Case_CreditCoverNegotiation", Storage="_CreditCoverNegotiations", OtherKey="CaseCode")]
+		public EntitySet<CreditCoverNegotiation> CreditCoverNegotiations
+		{
+			get
+			{
+				return this._CreditCoverNegotiations;
+			}
+			set
+			{
+				this._CreditCoverNegotiations.Assign(value);
+			}
+		}
+		
+		[Association(Name="Client_Case", Storage="_BuyerClient", ThisKey="BuyerCode", IsForeignKey=true)]
+		public Client BuyerClient
+		{
+			get
+			{
+				return this._BuyerClient.Entity;
+			}
+			set
+			{
+				Client previousValue = this._BuyerClient.Entity;
+				if (((previousValue != value) 
+							|| (this._BuyerClient.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._BuyerClient.Entity = null;
+						previousValue.BuyerCases.Remove(this);
+					}
+					this._BuyerClient.Entity = value;
+					if ((value != null))
+					{
+						value.BuyerCases.Add(this);
+						this._BuyerCode = value.ClientEDICode;
+					}
+					else
+					{
+						this._BuyerCode = default(string);
+					}
+					this.SendPropertyChanged("BuyerClient");
+				}
+			}
+		}
+		
+		[Association(Name="Client_Case1", Storage="_SellerClient", ThisKey="SellerCode", IsForeignKey=true)]
+		public Client SellerClient
+		{
+			get
+			{
+				return this._SellerClient.Entity;
+			}
+			set
+			{
+				Client previousValue = this._SellerClient.Entity;
+				if (((previousValue != value) 
+							|| (this._SellerClient.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SellerClient.Entity = null;
+						previousValue.SellerCases.Remove(this);
+					}
+					this._SellerClient.Entity = value;
+					if ((value != null))
+					{
+						value.SellerCases.Add(this);
+						this._SellerCode = value.ClientEDICode;
+					}
+					else
+					{
+						this._SellerCode = default(string);
+					}
+					this.SendPropertyChanged("SellerClient");
+				}
+			}
+		}
+		
+		[Association(Name="Department_Case", Storage="_CoDepartment", ThisKey="CoDepartmentCode", IsForeignKey=true)]
+		public Department CoDepartment
+		{
+			get
+			{
+				return this._CoDepartment.Entity;
+			}
+			set
+			{
+				Department previousValue = this._CoDepartment.Entity;
+				if (((previousValue != value) 
+							|| (this._CoDepartment.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CoDepartment.Entity = null;
+						previousValue.CoCases.Remove(this);
+					}
+					this._CoDepartment.Entity = value;
+					if ((value != null))
+					{
+						value.CoCases.Add(this);
+						this._CoDepartmentCode = value.DepartmentCode;
+					}
+					else
+					{
+						this._CoDepartmentCode = default(string);
+					}
+					this.SendPropertyChanged("CoDepartment");
+				}
+			}
+		}
+		
+		[Association(Name="Department_Case1", Storage="_OwnerDepartment", ThisKey="OwnerDepartmentCode", IsForeignKey=true)]
+		public Department OwnerDepartment
+		{
+			get
+			{
+				return this._OwnerDepartment.Entity;
+			}
+			set
+			{
+				Department previousValue = this._OwnerDepartment.Entity;
+				if (((previousValue != value) 
+							|| (this._OwnerDepartment.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._OwnerDepartment.Entity = null;
+						previousValue.OwnerCases.Remove(this);
+					}
+					this._OwnerDepartment.Entity = value;
+					if ((value != null))
+					{
+						value.OwnerCases.Add(this);
+						this._OwnerDepartmentCode = value.DepartmentCode;
+					}
+					else
+					{
+						this._OwnerDepartmentCode = default(string);
+					}
+					this.SendPropertyChanged("OwnerDepartment");
+				}
+			}
+		}
+		
+		[Association(Name="Factor_Case", Storage="_BuyerFactor", ThisKey="BuyerFactorCode", IsForeignKey=true)]
+		public Factor BuyerFactor
+		{
+			get
+			{
+				return this._BuyerFactor.Entity;
+			}
+			set
+			{
+				Factor previousValue = this._BuyerFactor.Entity;
+				if (((previousValue != value) 
+							|| (this._BuyerFactor.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._BuyerFactor.Entity = null;
+						previousValue.BuyerCases.Remove(this);
+					}
+					this._BuyerFactor.Entity = value;
+					if ((value != null))
+					{
+						value.BuyerCases.Add(this);
+						this._BuyerFactorCode = value.FactorCode;
+					}
+					else
+					{
+						this._BuyerFactorCode = default(string);
+					}
+					this.SendPropertyChanged("BuyerFactor");
+				}
+			}
+		}
+		
+		[Association(Name="Factor_Case1", Storage="_SellerFactor", ThisKey="SellerFactorCode", IsForeignKey=true)]
+		public Factor SellerFactor
+		{
+			get
+			{
+				return this._SellerFactor.Entity;
+			}
+			set
+			{
+				Factor previousValue = this._SellerFactor.Entity;
+				if (((previousValue != value) 
+							|| (this._SellerFactor.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SellerFactor.Entity = null;
+						previousValue.SellerCases.Remove(this);
+					}
+					this._SellerFactor.Entity = value;
+					if ((value != null))
+					{
+						value.SellerCases.Add(this);
+						this._SellerFactorCode = value.FactorCode;
+					}
+					else
+					{
+						this._SellerFactorCode = default(string);
+					}
+					this.SendPropertyChanged("SellerFactor");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_CDAs(CDA entity)
+		{
+			this.SendPropertyChanging();
+			entity.Case = this;
+		}
+		
+		private void detach_CDAs(CDA entity)
+		{
+			this.SendPropertyChanging();
+			entity.Case = null;
+		}
+		
+		private void attach_CreditCoverNegotiations(CreditCoverNegotiation entity)
+		{
+			this.SendPropertyChanging();
+			entity.Case = this;
+		}
+		
+		private void detach_CreditCoverNegotiations(CreditCoverNegotiation entity)
+		{
+			this.SendPropertyChanging();
+			entity.Case = null;
 		}
 	}
 	
@@ -371,7 +1119,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Name", DbType="NVarChar(50)")]
+		[Column(Storage="_Name", DbType="NVarChar(50)", CanBeNull=false)]
 		public string Name
 		{
 			get
@@ -391,7 +1139,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Password", DbType="VarChar(50)")]
+		[Column(Storage="_Password", DbType="VarChar(50)", CanBeNull=false)]
 		public string Password
 		{
 			get
@@ -572,6 +1320,1105 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 	}
 	
+	[Table(Name="dbo.CDA")]
+	public partial class CDA : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CDACode;
+		
+		private string _CaseCode;
+		
+		private System.Nullable<bool> _IsRecoarse;
+		
+		private string _IsNotice;
+		
+		private string _AssignType;
+		
+		private string _CreditCoverCurr;
+		
+		private System.Nullable<double> _CreditCover;
+		
+		private System.Nullable<bool> _IsCreditCoverRevolving;
+		
+		private System.Nullable<double> _PUGProportion;
+		
+		private System.Nullable<System.DateTime> _CreditCoverPeriodBegin;
+		
+		private System.Nullable<System.DateTime> _CreditCoverPeriodEnd;
+		
+		private System.Nullable<int> _PUGPeriod;
+		
+		private System.Nullable<int> _ReassignGracePeriod;
+		
+		private string _FinanceLineCurr;
+		
+		private System.Nullable<double> _FinanceLine;
+		
+		private System.Nullable<System.DateTime> _FinanceLinePeriodBegin;
+		
+		private System.Nullable<System.DateTime> _FinanceLinePeriodEnd;
+		
+		private System.Nullable<double> _FinanceProportion;
+		
+		private string _OrderNumber;
+		
+		private string _PaymentTerms;
+		
+		private System.Nullable<int> _FinanceGracePeriod;
+		
+		private System.Nullable<double> _Deductibles;
+		
+		private System.Nullable<double> _LossThreshold;
+		
+		private System.Nullable<double> _Price;
+		
+		private System.Nullable<double> _EFPrice;
+		
+		private System.Nullable<double> _IFPrice;
+		
+		private string _CommissionType;
+		
+		private string _CommissionTypeComment;
+		
+		private string _HandFeeCurr;
+		
+		private System.Nullable<double> _HandFee;
+		
+		private System.Nullable<System.DateTime> _CDASignDate;
+		
+		private string _CDAStatus;
+		
+		private string _NoticeMethod;
+		
+		private string _NoticePerson;
+		
+		private string _Email;
+		
+		private string _Fax;
+		
+		private string _Comment;
+		
+		private string _CreateUserName;
+		
+		private string _Remark;
+		
+		private EntitySet<InvoiceAssignBatch> _InvoiceAssignBatches;
+		
+		private EntitySet<InvoiceFinanceBatch> _InvoiceFinanceBatches;
+		
+		private EntitySet<InvoicePaymentBatch> _InvoicePaymentBatches;
+		
+		private EntityRef<Case> _Case;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCDACodeChanging(string value);
+    partial void OnCDACodeChanged();
+    partial void OnCaseCodeChanging(string value);
+    partial void OnCaseCodeChanged();
+    partial void OnIsRecoarseChanging(System.Nullable<bool> value);
+    partial void OnIsRecoarseChanged();
+    partial void OnIsNoticeChanging(string value);
+    partial void OnIsNoticeChanged();
+    partial void OnAssignTypeChanging(string value);
+    partial void OnAssignTypeChanged();
+    partial void OnCreditCoverCurrChanging(string value);
+    partial void OnCreditCoverCurrChanged();
+    partial void OnCreditCoverChanging(System.Nullable<double> value);
+    partial void OnCreditCoverChanged();
+    partial void OnIsCreditCoverRevolvingChanging(System.Nullable<bool> value);
+    partial void OnIsCreditCoverRevolvingChanged();
+    partial void OnPUGProportionChanging(System.Nullable<double> value);
+    partial void OnPUGProportionChanged();
+    partial void OnCreditCoverPeriodBeginChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreditCoverPeriodBeginChanged();
+    partial void OnCreditCoverPeriodEndChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreditCoverPeriodEndChanged();
+    partial void OnPUGPeriodChanging(System.Nullable<int> value);
+    partial void OnPUGPeriodChanged();
+    partial void OnReassignGracePeriodChanging(System.Nullable<int> value);
+    partial void OnReassignGracePeriodChanged();
+    partial void OnFinanceLineCurrChanging(string value);
+    partial void OnFinanceLineCurrChanged();
+    partial void OnFinanceLineChanging(System.Nullable<double> value);
+    partial void OnFinanceLineChanged();
+    partial void OnFinanceLinePeriodBeginChanging(System.Nullable<System.DateTime> value);
+    partial void OnFinanceLinePeriodBeginChanged();
+    partial void OnFinanceLinePeriodEndChanging(System.Nullable<System.DateTime> value);
+    partial void OnFinanceLinePeriodEndChanged();
+    partial void OnFinanceProportionChanging(System.Nullable<double> value);
+    partial void OnFinanceProportionChanged();
+    partial void OnOrderNumberChanging(string value);
+    partial void OnOrderNumberChanged();
+    partial void OnPaymentTermsChanging(string value);
+    partial void OnPaymentTermsChanged();
+    partial void OnFinanceGracePeriodChanging(System.Nullable<int> value);
+    partial void OnFinanceGracePeriodChanged();
+    partial void OnDeductiblesChanging(System.Nullable<double> value);
+    partial void OnDeductiblesChanged();
+    partial void OnLossThresholdChanging(System.Nullable<double> value);
+    partial void OnLossThresholdChanged();
+    partial void OnPriceChanging(System.Nullable<double> value);
+    partial void OnPriceChanged();
+    partial void OnEFPriceChanging(System.Nullable<double> value);
+    partial void OnEFPriceChanged();
+    partial void OnIFPriceChanging(System.Nullable<double> value);
+    partial void OnIFPriceChanged();
+    partial void OnCommissionTypeChanging(string value);
+    partial void OnCommissionTypeChanged();
+    partial void OnCommissionTypeCommentChanging(string value);
+    partial void OnCommissionTypeCommentChanged();
+    partial void OnHandFeeCurrChanging(string value);
+    partial void OnHandFeeCurrChanged();
+    partial void OnHandFeeChanging(System.Nullable<double> value);
+    partial void OnHandFeeChanged();
+    partial void OnCDASignDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCDASignDateChanged();
+    partial void OnCDAStatusChanging(string value);
+    partial void OnCDAStatusChanged();
+    partial void OnNoticeMethodChanging(string value);
+    partial void OnNoticeMethodChanged();
+    partial void OnNoticePersonChanging(string value);
+    partial void OnNoticePersonChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnFaxChanging(string value);
+    partial void OnFaxChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
+    partial void OnRemarkChanging(string value);
+    partial void OnRemarkChanged();
+    #endregion
+		
+		public CDA()
+		{
+			this._InvoiceAssignBatches = new EntitySet<InvoiceAssignBatch>(new Action<InvoiceAssignBatch>(this.attach_InvoiceAssignBatches), new Action<InvoiceAssignBatch>(this.detach_InvoiceAssignBatches));
+			this._InvoiceFinanceBatches = new EntitySet<InvoiceFinanceBatch>(new Action<InvoiceFinanceBatch>(this.attach_InvoiceFinanceBatches), new Action<InvoiceFinanceBatch>(this.detach_InvoiceFinanceBatches));
+			this._InvoicePaymentBatches = new EntitySet<InvoicePaymentBatch>(new Action<InvoicePaymentBatch>(this.attach_InvoicePaymentBatches), new Action<InvoicePaymentBatch>(this.detach_InvoicePaymentBatches));
+			this._Case = default(EntityRef<Case>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CDACode
+		{
+			get
+			{
+				return this._CDACode;
+			}
+			set
+			{
+				if ((this._CDACode != value))
+				{
+					this.OnCDACodeChanging(value);
+					this.SendPropertyChanging();
+					this._CDACode = value;
+					this.SendPropertyChanged("CDACode");
+					this.OnCDACodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string CaseCode
+		{
+			get
+			{
+				return this._CaseCode;
+			}
+			set
+			{
+				if ((this._CaseCode != value))
+				{
+					if (this._Case.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCaseCodeChanging(value);
+					this.SendPropertyChanging();
+					this._CaseCode = value;
+					this.SendPropertyChanged("CaseCode");
+					this.OnCaseCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsRecoarse", DbType="Bit")]
+		public System.Nullable<bool> IsRecoarse
+		{
+			get
+			{
+				return this._IsRecoarse;
+			}
+			set
+			{
+				if ((this._IsRecoarse != value))
+				{
+					this.OnIsRecoarseChanging(value);
+					this.SendPropertyChanging();
+					this._IsRecoarse = value;
+					this.SendPropertyChanged("IsRecoarse");
+					this.OnIsRecoarseChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsNotice", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string IsNotice
+		{
+			get
+			{
+				return this._IsNotice;
+			}
+			set
+			{
+				if ((this._IsNotice != value))
+				{
+					this.OnIsNoticeChanging(value);
+					this.SendPropertyChanging();
+					this._IsNotice = value;
+					this.SendPropertyChanged("IsNotice");
+					this.OnIsNoticeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_AssignType", DbType="NVarChar(50)")]
+		public string AssignType
+		{
+			get
+			{
+				return this._AssignType;
+			}
+			set
+			{
+				if ((this._AssignType != value))
+				{
+					this.OnAssignTypeChanging(value);
+					this.SendPropertyChanging();
+					this._AssignType = value;
+					this.SendPropertyChanged("AssignType");
+					this.OnAssignTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditCoverCurr", DbType="Char(3)")]
+		public string CreditCoverCurr
+		{
+			get
+			{
+				return this._CreditCoverCurr;
+			}
+			set
+			{
+				if ((this._CreditCoverCurr != value))
+				{
+					this.OnCreditCoverCurrChanging(value);
+					this.SendPropertyChanging();
+					this._CreditCoverCurr = value;
+					this.SendPropertyChanged("CreditCoverCurr");
+					this.OnCreditCoverCurrChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditCover", DbType="Float")]
+		public System.Nullable<double> CreditCover
+		{
+			get
+			{
+				return this._CreditCover;
+			}
+			set
+			{
+				if ((this._CreditCover != value))
+				{
+					this.OnCreditCoverChanging(value);
+					this.SendPropertyChanging();
+					this._CreditCover = value;
+					this.SendPropertyChanged("CreditCover");
+					this.OnCreditCoverChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsCreditCoverRevolving", DbType="Bit")]
+		public System.Nullable<bool> IsCreditCoverRevolving
+		{
+			get
+			{
+				return this._IsCreditCoverRevolving;
+			}
+			set
+			{
+				if ((this._IsCreditCoverRevolving != value))
+				{
+					this.OnIsCreditCoverRevolvingChanging(value);
+					this.SendPropertyChanging();
+					this._IsCreditCoverRevolving = value;
+					this.SendPropertyChanged("IsCreditCoverRevolving");
+					this.OnIsCreditCoverRevolvingChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PUGProportion", DbType="Float")]
+		public System.Nullable<double> PUGProportion
+		{
+			get
+			{
+				return this._PUGProportion;
+			}
+			set
+			{
+				if ((this._PUGProportion != value))
+				{
+					this.OnPUGProportionChanging(value);
+					this.SendPropertyChanging();
+					this._PUGProportion = value;
+					this.SendPropertyChanged("PUGProportion");
+					this.OnPUGProportionChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditCoverPeriodBegin", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreditCoverPeriodBegin
+		{
+			get
+			{
+				return this._CreditCoverPeriodBegin;
+			}
+			set
+			{
+				if ((this._CreditCoverPeriodBegin != value))
+				{
+					this.OnCreditCoverPeriodBeginChanging(value);
+					this.SendPropertyChanging();
+					this._CreditCoverPeriodBegin = value;
+					this.SendPropertyChanged("CreditCoverPeriodBegin");
+					this.OnCreditCoverPeriodBeginChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditCoverPeriodEnd", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreditCoverPeriodEnd
+		{
+			get
+			{
+				return this._CreditCoverPeriodEnd;
+			}
+			set
+			{
+				if ((this._CreditCoverPeriodEnd != value))
+				{
+					this.OnCreditCoverPeriodEndChanging(value);
+					this.SendPropertyChanging();
+					this._CreditCoverPeriodEnd = value;
+					this.SendPropertyChanged("CreditCoverPeriodEnd");
+					this.OnCreditCoverPeriodEndChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PUGPeriod", DbType="Int")]
+		public System.Nullable<int> PUGPeriod
+		{
+			get
+			{
+				return this._PUGPeriod;
+			}
+			set
+			{
+				if ((this._PUGPeriod != value))
+				{
+					this.OnPUGPeriodChanging(value);
+					this.SendPropertyChanging();
+					this._PUGPeriod = value;
+					this.SendPropertyChanged("PUGPeriod");
+					this.OnPUGPeriodChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ReassignGracePeriod", DbType="Int")]
+		public System.Nullable<int> ReassignGracePeriod
+		{
+			get
+			{
+				return this._ReassignGracePeriod;
+			}
+			set
+			{
+				if ((this._ReassignGracePeriod != value))
+				{
+					this.OnReassignGracePeriodChanging(value);
+					this.SendPropertyChanging();
+					this._ReassignGracePeriod = value;
+					this.SendPropertyChanged("ReassignGracePeriod");
+					this.OnReassignGracePeriodChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FinanceLineCurr", DbType="Char(3)")]
+		public string FinanceLineCurr
+		{
+			get
+			{
+				return this._FinanceLineCurr;
+			}
+			set
+			{
+				if ((this._FinanceLineCurr != value))
+				{
+					this.OnFinanceLineCurrChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceLineCurr = value;
+					this.SendPropertyChanged("FinanceLineCurr");
+					this.OnFinanceLineCurrChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FinanceLine", DbType="Float")]
+		public System.Nullable<double> FinanceLine
+		{
+			get
+			{
+				return this._FinanceLine;
+			}
+			set
+			{
+				if ((this._FinanceLine != value))
+				{
+					this.OnFinanceLineChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceLine = value;
+					this.SendPropertyChanged("FinanceLine");
+					this.OnFinanceLineChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FinanceLinePeriodBegin", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FinanceLinePeriodBegin
+		{
+			get
+			{
+				return this._FinanceLinePeriodBegin;
+			}
+			set
+			{
+				if ((this._FinanceLinePeriodBegin != value))
+				{
+					this.OnFinanceLinePeriodBeginChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceLinePeriodBegin = value;
+					this.SendPropertyChanged("FinanceLinePeriodBegin");
+					this.OnFinanceLinePeriodBeginChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FinanceLinePeriodEnd", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FinanceLinePeriodEnd
+		{
+			get
+			{
+				return this._FinanceLinePeriodEnd;
+			}
+			set
+			{
+				if ((this._FinanceLinePeriodEnd != value))
+				{
+					this.OnFinanceLinePeriodEndChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceLinePeriodEnd = value;
+					this.SendPropertyChanged("FinanceLinePeriodEnd");
+					this.OnFinanceLinePeriodEndChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FinanceProportion", DbType="Float")]
+		public System.Nullable<double> FinanceProportion
+		{
+			get
+			{
+				return this._FinanceProportion;
+			}
+			set
+			{
+				if ((this._FinanceProportion != value))
+				{
+					this.OnFinanceProportionChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceProportion = value;
+					this.SendPropertyChanged("FinanceProportion");
+					this.OnFinanceProportionChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_OrderNumber", DbType="VarChar(35)")]
+		public string OrderNumber
+		{
+			get
+			{
+				return this._OrderNumber;
+			}
+			set
+			{
+				if ((this._OrderNumber != value))
+				{
+					this.OnOrderNumberChanging(value);
+					this.SendPropertyChanging();
+					this._OrderNumber = value;
+					this.SendPropertyChanged("OrderNumber");
+					this.OnOrderNumberChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PaymentTerms", DbType="NVarChar(500)")]
+		public string PaymentTerms
+		{
+			get
+			{
+				return this._PaymentTerms;
+			}
+			set
+			{
+				if ((this._PaymentTerms != value))
+				{
+					this.OnPaymentTermsChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentTerms = value;
+					this.SendPropertyChanged("PaymentTerms");
+					this.OnPaymentTermsChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FinanceGracePeriod", DbType="Int")]
+		public System.Nullable<int> FinanceGracePeriod
+		{
+			get
+			{
+				return this._FinanceGracePeriod;
+			}
+			set
+			{
+				if ((this._FinanceGracePeriod != value))
+				{
+					this.OnFinanceGracePeriodChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceGracePeriod = value;
+					this.SendPropertyChanged("FinanceGracePeriod");
+					this.OnFinanceGracePeriodChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Deductibles", DbType="Float")]
+		public System.Nullable<double> Deductibles
+		{
+			get
+			{
+				return this._Deductibles;
+			}
+			set
+			{
+				if ((this._Deductibles != value))
+				{
+					this.OnDeductiblesChanging(value);
+					this.SendPropertyChanging();
+					this._Deductibles = value;
+					this.SendPropertyChanged("Deductibles");
+					this.OnDeductiblesChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_LossThreshold", DbType="Float")]
+		public System.Nullable<double> LossThreshold
+		{
+			get
+			{
+				return this._LossThreshold;
+			}
+			set
+			{
+				if ((this._LossThreshold != value))
+				{
+					this.OnLossThresholdChanging(value);
+					this.SendPropertyChanging();
+					this._LossThreshold = value;
+					this.SendPropertyChanged("LossThreshold");
+					this.OnLossThresholdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Price", DbType="Float")]
+		public System.Nullable<double> Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this.OnPriceChanging(value);
+					this.SendPropertyChanging();
+					this._Price = value;
+					this.SendPropertyChanged("Price");
+					this.OnPriceChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_EFPrice", DbType="Float")]
+		public System.Nullable<double> EFPrice
+		{
+			get
+			{
+				return this._EFPrice;
+			}
+			set
+			{
+				if ((this._EFPrice != value))
+				{
+					this.OnEFPriceChanging(value);
+					this.SendPropertyChanging();
+					this._EFPrice = value;
+					this.SendPropertyChanged("EFPrice");
+					this.OnEFPriceChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IFPrice", DbType="Float")]
+		public System.Nullable<double> IFPrice
+		{
+			get
+			{
+				return this._IFPrice;
+			}
+			set
+			{
+				if ((this._IFPrice != value))
+				{
+					this.OnIFPriceChanging(value);
+					this.SendPropertyChanging();
+					this._IFPrice = value;
+					this.SendPropertyChanged("IFPrice");
+					this.OnIFPriceChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CommissionType", DbType="NVarChar(50)")]
+		public string CommissionType
+		{
+			get
+			{
+				return this._CommissionType;
+			}
+			set
+			{
+				if ((this._CommissionType != value))
+				{
+					this.OnCommissionTypeChanging(value);
+					this.SendPropertyChanging();
+					this._CommissionType = value;
+					this.SendPropertyChanged("CommissionType");
+					this.OnCommissionTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CommissionTypeComment", DbType="NVarChar(500)")]
+		public string CommissionTypeComment
+		{
+			get
+			{
+				return this._CommissionTypeComment;
+			}
+			set
+			{
+				if ((this._CommissionTypeComment != value))
+				{
+					this.OnCommissionTypeCommentChanging(value);
+					this.SendPropertyChanging();
+					this._CommissionTypeComment = value;
+					this.SendPropertyChanged("CommissionTypeComment");
+					this.OnCommissionTypeCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_HandFeeCurr", DbType="Char(10)")]
+		public string HandFeeCurr
+		{
+			get
+			{
+				return this._HandFeeCurr;
+			}
+			set
+			{
+				if ((this._HandFeeCurr != value))
+				{
+					this.OnHandFeeCurrChanging(value);
+					this.SendPropertyChanging();
+					this._HandFeeCurr = value;
+					this.SendPropertyChanged("HandFeeCurr");
+					this.OnHandFeeCurrChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_HandFee", DbType="Float")]
+		public System.Nullable<double> HandFee
+		{
+			get
+			{
+				return this._HandFee;
+			}
+			set
+			{
+				if ((this._HandFee != value))
+				{
+					this.OnHandFeeChanging(value);
+					this.SendPropertyChanging();
+					this._HandFee = value;
+					this.SendPropertyChanged("HandFee");
+					this.OnHandFeeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CDASignDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CDASignDate
+		{
+			get
+			{
+				return this._CDASignDate;
+			}
+			set
+			{
+				if ((this._CDASignDate != value))
+				{
+					this.OnCDASignDateChanging(value);
+					this.SendPropertyChanging();
+					this._CDASignDate = value;
+					this.SendPropertyChanged("CDASignDate");
+					this.OnCDASignDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CDAStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CDAStatus
+		{
+			get
+			{
+				return this._CDAStatus;
+			}
+			set
+			{
+				if ((this._CDAStatus != value))
+				{
+					this.OnCDAStatusChanging(value);
+					this.SendPropertyChanging();
+					this._CDAStatus = value;
+					this.SendPropertyChanged("CDAStatus");
+					this.OnCDAStatusChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_NoticeMethod", DbType="NVarChar(50)")]
+		public string NoticeMethod
+		{
+			get
+			{
+				return this._NoticeMethod;
+			}
+			set
+			{
+				if ((this._NoticeMethod != value))
+				{
+					this.OnNoticeMethodChanging(value);
+					this.SendPropertyChanging();
+					this._NoticeMethod = value;
+					this.SendPropertyChanged("NoticeMethod");
+					this.OnNoticeMethodChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_NoticePerson", DbType="NVarChar(50)")]
+		public string NoticePerson
+		{
+			get
+			{
+				return this._NoticePerson;
+			}
+			set
+			{
+				if ((this._NoticePerson != value))
+				{
+					this.OnNoticePersonChanging(value);
+					this.SendPropertyChanging();
+					this._NoticePerson = value;
+					this.SendPropertyChanged("NoticePerson");
+					this.OnNoticePersonChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Email", DbType="VarChar(70)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Fax", DbType="VarChar(25)")]
+		public string Fax
+		{
+			get
+			{
+				return this._Fax;
+			}
+			set
+			{
+				if ((this._Fax != value))
+				{
+					this.OnFaxChanging(value);
+					this.SendPropertyChanging();
+					this._Fax = value;
+					this.SendPropertyChanged("Fax");
+					this.OnFaxChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Remark", DbType="NVarChar(500)")]
+		public string Remark
+		{
+			get
+			{
+				return this._Remark;
+			}
+			set
+			{
+				if ((this._Remark != value))
+				{
+					this.OnRemarkChanging(value);
+					this.SendPropertyChanging();
+					this._Remark = value;
+					this.SendPropertyChanged("Remark");
+					this.OnRemarkChanged();
+				}
+			}
+		}
+		
+		[Association(Name="CDA_InvoiceAssignBatch", Storage="_InvoiceAssignBatches", OtherKey="CDACode")]
+		public EntitySet<InvoiceAssignBatch> InvoiceAssignBatches
+		{
+			get
+			{
+				return this._InvoiceAssignBatches;
+			}
+			set
+			{
+				this._InvoiceAssignBatches.Assign(value);
+			}
+		}
+		
+		[Association(Name="CDA_InvoiceFinanceBatch", Storage="_InvoiceFinanceBatches", OtherKey="CDACode")]
+		public EntitySet<InvoiceFinanceBatch> InvoiceFinanceBatches
+		{
+			get
+			{
+				return this._InvoiceFinanceBatches;
+			}
+			set
+			{
+				this._InvoiceFinanceBatches.Assign(value);
+			}
+		}
+		
+		[Association(Name="CDA_InvoicePaymentBatch", Storage="_InvoicePaymentBatches", OtherKey="CDACode")]
+		public EntitySet<InvoicePaymentBatch> InvoicePaymentBatches
+		{
+			get
+			{
+				return this._InvoicePaymentBatches;
+			}
+			set
+			{
+				this._InvoicePaymentBatches.Assign(value);
+			}
+		}
+		
+		[Association(Name="Case_CDA", Storage="_Case", ThisKey="CaseCode", IsForeignKey=true)]
+		public Case Case
+		{
+			get
+			{
+				return this._Case.Entity;
+			}
+			set
+			{
+				Case previousValue = this._Case.Entity;
+				if (((previousValue != value) 
+							|| (this._Case.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Case.Entity = null;
+						previousValue.CDAs.Remove(this);
+					}
+					this._Case.Entity = value;
+					if ((value != null))
+					{
+						value.CDAs.Add(this);
+						this._CaseCode = value.CaseCode;
+					}
+					else
+					{
+						this._CaseCode = default(string);
+					}
+					this.SendPropertyChanged("Case");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_InvoiceAssignBatches(InvoiceAssignBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.CDA = this;
+		}
+		
+		private void detach_InvoiceAssignBatches(InvoiceAssignBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.CDA = null;
+		}
+		
+		private void attach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.CDA = this;
+		}
+		
+		private void detach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.CDA = null;
+		}
+		
+		private void attach_InvoicePaymentBatches(InvoicePaymentBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.CDA = this;
+		}
+		
+		private void detach_InvoicePaymentBatches(InvoicePaymentBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.CDA = null;
+		}
+	}
+	
 	[Table(Name="dbo.Client")]
 	public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -644,15 +2491,17 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
-		private EntitySet<ClientAccount> _ClientAccounts;
-		
-		private EntitySet<Contract> _Contracts;
-		
-		private EntitySet<ClientCreditLine> _ClientCreditLines;
+		private string _CreateUserName;
 		
 		private EntitySet<Case> _BuyerCases;
 		
 		private EntitySet<Case> _SellerCases;
+		
+		private EntitySet<ClientAccount> _ClientAccounts;
+		
+		private EntitySet<ClientCreditLine> _ClientCreditLines;
+		
+		private EntitySet<Contract> _Contracts;
 		
 		private EntityRef<ClientGroup> _ClientGroup;
 		
@@ -728,15 +2577,17 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnRMNameChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
     #endregion
 		
 		public Client()
 		{
-			this._ClientAccounts = new EntitySet<ClientAccount>(new Action<ClientAccount>(this.attach_ClientAccounts), new Action<ClientAccount>(this.detach_ClientAccounts));
-			this._Contracts = new EntitySet<Contract>(new Action<Contract>(this.attach_Contracts), new Action<Contract>(this.detach_Contracts));
-			this._ClientCreditLines = new EntitySet<ClientCreditLine>(new Action<ClientCreditLine>(this.attach_ClientCreditLines), new Action<ClientCreditLine>(this.detach_ClientCreditLines));
 			this._BuyerCases = new EntitySet<Case>(new Action<Case>(this.attach_BuyerCases), new Action<Case>(this.detach_BuyerCases));
 			this._SellerCases = new EntitySet<Case>(new Action<Case>(this.attach_SellerCases), new Action<Case>(this.detach_SellerCases));
+			this._ClientAccounts = new EntitySet<ClientAccount>(new Action<ClientAccount>(this.attach_ClientAccounts), new Action<ClientAccount>(this.detach_ClientAccounts));
+			this._ClientCreditLines = new EntitySet<ClientCreditLine>(new Action<ClientCreditLine>(this.attach_ClientCreditLines), new Action<ClientCreditLine>(this.detach_ClientCreditLines));
+			this._Contracts = new EntitySet<Contract>(new Action<Contract>(this.attach_Contracts), new Action<Contract>(this.detach_Contracts));
 			this._ClientGroup = default(EntityRef<ClientGroup>);
 			this._Department = default(EntityRef<Department>);
 			OnCreated();
@@ -762,7 +2613,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientCoreNo", DbType="NVarChar(10)")]
+		[Column(Storage="_ClientCoreNo", DbType="NVarChar(50)")]
 		public string ClientCoreNo
 		{
 			get
@@ -802,7 +2653,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientNameEN_1", DbType="NVarChar(100)")]
+		[Column(Storage="_ClientNameEN_1", DbType="NVarChar(35)")]
 		public string ClientNameEN_1
 		{
 			get
@@ -822,7 +2673,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientNameEN_2", DbType="NVarChar(100)")]
+		[Column(Storage="_ClientNameEN_2", DbType="NVarChar(35)")]
 		public string ClientNameEN_2
 		{
 			get
@@ -862,7 +2713,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AddressEN", DbType="NVarChar(200)")]
+		[Column(Storage="_AddressEN", DbType="NVarChar(35)")]
 		public string AddressEN
 		{
 			get
@@ -942,7 +2793,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ProvinceEN", DbType="NVarChar(50)")]
+		[Column(Storage="_ProvinceEN", DbType="NVarChar(9)")]
 		public string ProvinceEN
 		{
 			get
@@ -982,7 +2833,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CountryCode", DbType="NChar(2)")]
+		[Column(Storage="_CountryCode", DbType="Char(2)")]
 		public string CountryCode
 		{
 			get
@@ -1022,7 +2873,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Website", DbType="NVarChar(200)")]
+		[Column(Storage="_Website", DbType="VarChar(200)")]
 		public string Website
 		{
 			get
@@ -1042,7 +2893,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Contact", DbType="NVarChar(200)")]
+		[Column(Storage="_Contact", DbType="NVarChar(50)")]
 		public string Contact
 		{
 			get
@@ -1062,7 +2913,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Telephone", DbType="VarChar(50)")]
+		[Column(Storage="_Telephone", DbType="VarChar(25)")]
 		public string Telephone
 		{
 			get
@@ -1082,7 +2933,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Email", DbType="VarChar(100)")]
+		[Column(Storage="_Email", DbType="VarChar(70)")]
 		public string Email
 		{
 			get
@@ -1102,7 +2953,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FaxNumber", DbType="VarChar(50)")]
+		[Column(Storage="_FaxNumber", DbType="VarChar(25)")]
 		public string FaxNumber
 		{
 			get
@@ -1202,7 +3053,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ProductEN", DbType="NVarChar(500)")]
+		[Column(Storage="_ProductEN", DbType="VarChar(70)")]
 		public string ProductEN
 		{
 			get
@@ -1242,7 +3093,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsGroup", DbType="bit")]
+		[Column(Storage="_IsGroup", DbType="Bit")]
 		public System.Nullable<bool> IsGroup
 		{
 			get
@@ -1262,7 +3113,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_GroupNo", DbType="VarChar(50)")]
+		[Column(Storage="_GroupNo", DbType="VarChar(35)")]
 		public string GroupNo
 		{
 			get
@@ -1410,42 +3261,23 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Client_ClientAccount", Storage="_ClientAccounts", OtherKey="ClientEDICode")]
-		public EntitySet<ClientAccount> ClientAccounts
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50)", CanBeNull=false)]
+		public string CreateUserName
 		{
 			get
 			{
-				return this._ClientAccounts;
+				return this._CreateUserName;
 			}
 			set
 			{
-				this._ClientAccounts.Assign(value);
-			}
-		}
-		
-		[Association(Name="Client_Contract", Storage="_Contracts", OtherKey="ClientEDICode")]
-		public EntitySet<Contract> Contracts
-		{
-			get
-			{
-				return this._Contracts;
-			}
-			set
-			{
-				this._Contracts.Assign(value);
-			}
-		}
-		
-		[Association(Name="Client_ClientCreditLine", Storage="_ClientCreditLines", OtherKey="ClientEDICode")]
-		public EntitySet<ClientCreditLine> ClientCreditLines
-		{
-			get
-			{
-				return this._ClientCreditLines;
-			}
-			set
-			{
-				this._ClientCreditLines.Assign(value);
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
+				}
 			}
 		}
 		
@@ -1472,6 +3304,45 @@ namespace CMBC.EasyFactor.DB.dbml
 			set
 			{
 				this._SellerCases.Assign(value);
+			}
+		}
+		
+		[Association(Name="Client_ClientAccount", Storage="_ClientAccounts", OtherKey="ClientEDICode")]
+		public EntitySet<ClientAccount> ClientAccounts
+		{
+			get
+			{
+				return this._ClientAccounts;
+			}
+			set
+			{
+				this._ClientAccounts.Assign(value);
+			}
+		}
+		
+		[Association(Name="Client_ClientCreditLine", Storage="_ClientCreditLines", OtherKey="ClientEDICode")]
+		public EntitySet<ClientCreditLine> ClientCreditLines
+		{
+			get
+			{
+				return this._ClientCreditLines;
+			}
+			set
+			{
+				this._ClientCreditLines.Assign(value);
+			}
+		}
+		
+		[Association(Name="Client_Contract", Storage="_Contracts", OtherKey="ClientEDICode")]
+		public EntitySet<Contract> Contracts
+		{
+			get
+			{
+				return this._Contracts;
+			}
+			set
+			{
+				this._Contracts.Assign(value);
 			}
 		}
 		
@@ -1563,42 +3434,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		private void attach_ClientAccounts(ClientAccount entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = this;
-		}
-		
-		private void detach_ClientAccounts(ClientAccount entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = null;
-		}
-		
-		private void attach_Contracts(Contract entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = this;
-		}
-		
-		private void detach_Contracts(Contract entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = null;
-		}
-		
-		private void attach_ClientCreditLines(ClientCreditLine entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = this;
-		}
-		
-		private void detach_ClientCreditLines(ClientCreditLine entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = null;
-		}
-		
 		private void attach_BuyerCases(Case entity)
 		{
 			this.SendPropertyChanging();
@@ -1621,6 +3456,42 @@ namespace CMBC.EasyFactor.DB.dbml
 		{
 			this.SendPropertyChanging();
 			entity.SellerClient = null;
+		}
+		
+		private void attach_ClientAccounts(ClientAccount entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = this;
+		}
+		
+		private void detach_ClientAccounts(ClientAccount entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = null;
+		}
+		
+		private void attach_ClientCreditLines(ClientCreditLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = this;
+		}
+		
+		private void detach_ClientCreditLines(ClientCreditLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = null;
+		}
+		
+		private void attach_Contracts(Contract entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = this;
+		}
+		
+		private void detach_Contracts(Contract entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = null;
 		}
 	}
 	
@@ -1680,7 +3551,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_AccountID", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_AccountID", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string AccountID
 		{
 			get
@@ -1824,7 +3695,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsDefault", DbType="bit")]
+		[Column(Storage="_IsDefault", DbType="Bit")]
 		public System.Nullable<bool> IsDefault
 		{
 			get
@@ -1919,6 +3790,517 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 	}
 	
+	[Table(Name="dbo.ClientCreditLine")]
+	public partial class ClientCreditLine : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CreditLineID;
+		
+		private string _ClientEDICode;
+		
+		private string _CreditLineType;
+		
+		private string _CreditLineCurrency;
+		
+		private double _CreditLine;
+		
+		private System.DateTime _PeriodBegin;
+		
+		private System.DateTime _PeriodEnd;
+		
+		private string _ApproveNo;
+		
+		private string _ApproveType;
+		
+		private string _CreditLineStatus;
+		
+		private string _FreezeReason;
+		
+		private string _Freezer;
+		
+		private System.Nullable<System.DateTime> _FreezeDate;
+		
+		private string _UnfreezeReason;
+		
+		private string _Unfreezer;
+		
+		private System.Nullable<System.DateTime> _UnfreezeDate;
+		
+		private string _Comment;
+		
+		private string _CreateUserName;
+		
+		private EntityRef<Client> _Client;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCreditLineIDChanging(int value);
+    partial void OnCreditLineIDChanged();
+    partial void OnClientEDICodeChanging(string value);
+    partial void OnClientEDICodeChanged();
+    partial void OnCreditLineTypeChanging(string value);
+    partial void OnCreditLineTypeChanged();
+    partial void OnCreditLineCurrencyChanging(string value);
+    partial void OnCreditLineCurrencyChanged();
+    partial void OnCreditLineChanging(double value);
+    partial void OnCreditLineChanged();
+    partial void OnPeriodBeginChanging(System.DateTime value);
+    partial void OnPeriodBeginChanged();
+    partial void OnPeriodEndChanging(System.DateTime value);
+    partial void OnPeriodEndChanged();
+    partial void OnApproveNoChanging(string value);
+    partial void OnApproveNoChanged();
+    partial void OnApproveTypeChanging(string value);
+    partial void OnApproveTypeChanged();
+    partial void OnCreditLineStatusChanging(string value);
+    partial void OnCreditLineStatusChanged();
+    partial void OnFreezeReasonChanging(string value);
+    partial void OnFreezeReasonChanged();
+    partial void OnFreezerChanging(string value);
+    partial void OnFreezerChanged();
+    partial void OnFreezeDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnFreezeDateChanged();
+    partial void OnUnfreezeReasonChanging(string value);
+    partial void OnUnfreezeReasonChanged();
+    partial void OnUnfreezerChanging(string value);
+    partial void OnUnfreezerChanged();
+    partial void OnUnfreezeDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnUnfreezeDateChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
+    #endregion
+		
+		public ClientCreditLine()
+		{
+			this._Client = default(EntityRef<Client>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_CreditLineID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CreditLineID
+		{
+			get
+			{
+				return this._CreditLineID;
+			}
+			set
+			{
+				if ((this._CreditLineID != value))
+				{
+					this.OnCreditLineIDChanging(value);
+					this.SendPropertyChanging();
+					this._CreditLineID = value;
+					this.SendPropertyChanged("CreditLineID");
+					this.OnCreditLineIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		public string ClientEDICode
+		{
+			get
+			{
+				return this._ClientEDICode;
+			}
+			set
+			{
+				if ((this._ClientEDICode != value))
+				{
+					if (this._Client.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnClientEDICodeChanging(value);
+					this.SendPropertyChanging();
+					this._ClientEDICode = value;
+					this.SendPropertyChanged("ClientEDICode");
+					this.OnClientEDICodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditLineType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreditLineType
+		{
+			get
+			{
+				return this._CreditLineType;
+			}
+			set
+			{
+				if ((this._CreditLineType != value))
+				{
+					this.OnCreditLineTypeChanging(value);
+					this.SendPropertyChanging();
+					this._CreditLineType = value;
+					this.SendPropertyChanged("CreditLineType");
+					this.OnCreditLineTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditLineCurrency", DbType="Char(3) NOT NULL", CanBeNull=false)]
+		public string CreditLineCurrency
+		{
+			get
+			{
+				return this._CreditLineCurrency;
+			}
+			set
+			{
+				if ((this._CreditLineCurrency != value))
+				{
+					this.OnCreditLineCurrencyChanging(value);
+					this.SendPropertyChanging();
+					this._CreditLineCurrency = value;
+					this.SendPropertyChanged("CreditLineCurrency");
+					this.OnCreditLineCurrencyChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditLine", DbType="Float NOT NULL")]
+		public double CreditLine
+		{
+			get
+			{
+				return this._CreditLine;
+			}
+			set
+			{
+				if ((this._CreditLine != value))
+				{
+					this.OnCreditLineChanging(value);
+					this.SendPropertyChanging();
+					this._CreditLine = value;
+					this.SendPropertyChanged("CreditLine");
+					this.OnCreditLineChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PeriodBegin", DbType="DateTime NOT NULL")]
+		public System.DateTime PeriodBegin
+		{
+			get
+			{
+				return this._PeriodBegin;
+			}
+			set
+			{
+				if ((this._PeriodBegin != value))
+				{
+					this.OnPeriodBeginChanging(value);
+					this.SendPropertyChanging();
+					this._PeriodBegin = value;
+					this.SendPropertyChanged("PeriodBegin");
+					this.OnPeriodBeginChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PeriodEnd", DbType="DateTime NOT NULL")]
+		public System.DateTime PeriodEnd
+		{
+			get
+			{
+				return this._PeriodEnd;
+			}
+			set
+			{
+				if ((this._PeriodEnd != value))
+				{
+					this.OnPeriodEndChanging(value);
+					this.SendPropertyChanging();
+					this._PeriodEnd = value;
+					this.SendPropertyChanged("PeriodEnd");
+					this.OnPeriodEndChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ApproveNo", DbType="NVarChar(50)")]
+		public string ApproveNo
+		{
+			get
+			{
+				return this._ApproveNo;
+			}
+			set
+			{
+				if ((this._ApproveNo != value))
+				{
+					this.OnApproveNoChanging(value);
+					this.SendPropertyChanging();
+					this._ApproveNo = value;
+					this.SendPropertyChanged("ApproveNo");
+					this.OnApproveNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ApproveType", DbType="NVarChar(50)")]
+		public string ApproveType
+		{
+			get
+			{
+				return this._ApproveType;
+			}
+			set
+			{
+				if ((this._ApproveType != value))
+				{
+					this.OnApproveTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ApproveType = value;
+					this.SendPropertyChanged("ApproveType");
+					this.OnApproveTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditLineStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreditLineStatus
+		{
+			get
+			{
+				return this._CreditLineStatus;
+			}
+			set
+			{
+				if ((this._CreditLineStatus != value))
+				{
+					this.OnCreditLineStatusChanging(value);
+					this.SendPropertyChanging();
+					this._CreditLineStatus = value;
+					this.SendPropertyChanged("CreditLineStatus");
+					this.OnCreditLineStatusChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FreezeReason", DbType="NVarChar(50)")]
+		public string FreezeReason
+		{
+			get
+			{
+				return this._FreezeReason;
+			}
+			set
+			{
+				if ((this._FreezeReason != value))
+				{
+					this.OnFreezeReasonChanging(value);
+					this.SendPropertyChanging();
+					this._FreezeReason = value;
+					this.SendPropertyChanged("FreezeReason");
+					this.OnFreezeReasonChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Freezer", DbType="NVarChar(50)")]
+		public string Freezer
+		{
+			get
+			{
+				return this._Freezer;
+			}
+			set
+			{
+				if ((this._Freezer != value))
+				{
+					this.OnFreezerChanging(value);
+					this.SendPropertyChanging();
+					this._Freezer = value;
+					this.SendPropertyChanged("Freezer");
+					this.OnFreezerChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FreezeDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FreezeDate
+		{
+			get
+			{
+				return this._FreezeDate;
+			}
+			set
+			{
+				if ((this._FreezeDate != value))
+				{
+					this.OnFreezeDateChanging(value);
+					this.SendPropertyChanging();
+					this._FreezeDate = value;
+					this.SendPropertyChanged("FreezeDate");
+					this.OnFreezeDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UnfreezeReason", DbType="NVarChar(50)")]
+		public string UnfreezeReason
+		{
+			get
+			{
+				return this._UnfreezeReason;
+			}
+			set
+			{
+				if ((this._UnfreezeReason != value))
+				{
+					this.OnUnfreezeReasonChanging(value);
+					this.SendPropertyChanging();
+					this._UnfreezeReason = value;
+					this.SendPropertyChanged("UnfreezeReason");
+					this.OnUnfreezeReasonChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Unfreezer", DbType="NVarChar(50)")]
+		public string Unfreezer
+		{
+			get
+			{
+				return this._Unfreezer;
+			}
+			set
+			{
+				if ((this._Unfreezer != value))
+				{
+					this.OnUnfreezerChanging(value);
+					this.SendPropertyChanging();
+					this._Unfreezer = value;
+					this.SendPropertyChanged("Unfreezer");
+					this.OnUnfreezerChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UnfreezeDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UnfreezeDate
+		{
+			get
+			{
+				return this._UnfreezeDate;
+			}
+			set
+			{
+				if ((this._UnfreezeDate != value))
+				{
+					this.OnUnfreezeDateChanging(value);
+					this.SendPropertyChanging();
+					this._UnfreezeDate = value;
+					this.SendPropertyChanged("UnfreezeDate");
+					this.OnUnfreezeDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50)", CanBeNull=false)]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Client_ClientCreditLine", Storage="_Client", ThisKey="ClientEDICode", IsForeignKey=true)]
+		public Client Client
+		{
+			get
+			{
+				return this._Client.Entity;
+			}
+			set
+			{
+				Client previousValue = this._Client.Entity;
+				if (((previousValue != value) 
+							|| (this._Client.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Client.Entity = null;
+						previousValue.ClientCreditLines.Remove(this);
+					}
+					this._Client.Entity = value;
+					if ((value != null))
+					{
+						value.ClientCreditLines.Add(this);
+						this._ClientEDICode = value.ClientEDICode;
+					}
+					else
+					{
+						this._ClientEDICode = default(string);
+					}
+					this.SendPropertyChanged("Client");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[Table(Name="dbo.ClientGroup")]
 	public partial class ClientGroup : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1951,7 +4333,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_GroupNo", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_GroupNo", DbType="VarChar(35) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string GroupNo
 		{
 			get
@@ -2065,17 +4447,17 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _ContractCode;
 		
+		private string _ContractType;
+		
 		private string _ClientEDICode;
 		
-		private System.Nullable<System.DateTime> _ContractValueDate;
+		private System.DateTime _ContractValueDate;
 		
-		private System.Nullable<System.DateTime> _ContractDueDate;
+		private System.DateTime _ContractDueDate;
 		
 		private string _ContractStatus;
 		
 		private string _CreateUserName;
-		
-		private string _ContractType;
 		
 		private EntityRef<Client> _Client;
 		
@@ -2085,18 +4467,18 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnContractCodeChanging(string value);
     partial void OnContractCodeChanged();
+    partial void OnContractTypeChanging(string value);
+    partial void OnContractTypeChanged();
     partial void OnClientEDICodeChanging(string value);
     partial void OnClientEDICodeChanged();
-    partial void OnContractValueDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnContractValueDateChanging(System.DateTime value);
     partial void OnContractValueDateChanged();
-    partial void OnContractDueDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnContractDueDateChanging(System.DateTime value);
     partial void OnContractDueDateChanged();
     partial void OnContractStatusChanging(string value);
     partial void OnContractStatusChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
-    partial void OnContractTypeChanging(string value);
-    partial void OnContractTypeChanged();
     #endregion
 		
 		public Contract()
@@ -2105,7 +4487,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_ContractCode", DbType="VarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_ContractCode", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string ContractCode
 		{
 			get
@@ -2125,7 +4507,27 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientEDICode", DbType="VarChar(35)")]
+		[Column(Storage="_ContractType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ContractType
+		{
+			get
+			{
+				return this._ContractType;
+			}
+			set
+			{
+				if ((this._ContractType != value))
+				{
+					this.OnContractTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ContractType = value;
+					this.SendPropertyChanged("ContractType");
+					this.OnContractTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
 		public string ClientEDICode
 		{
 			get
@@ -2149,8 +4551,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ContractValueDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ContractValueDate
+		[Column(Storage="_ContractValueDate", DbType="DateTime NOT NULL")]
+		public System.DateTime ContractValueDate
 		{
 			get
 			{
@@ -2169,8 +4571,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ContractDueDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ContractDueDate
+		[Column(Storage="_ContractDueDate", DbType="DateTime NOT NULL")]
+		public System.DateTime ContractDueDate
 		{
 			get
 			{
@@ -2189,7 +4591,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ContractStatus", DbType="NVarChar(50)")]
+		[Column(Storage="_ContractStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string ContractStatus
 		{
 			get
@@ -2209,7 +4611,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50)")]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string CreateUserName
 		{
 			get
@@ -2225,26 +4627,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CreateUserName = value;
 					this.SendPropertyChanged("CreateUserName");
 					this.OnCreateUserNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ContractType", DbType="NVarChar(50)")]
-		public string ContractType
-		{
-			get
-			{
-				return this._ContractType;
-			}
-			set
-			{
-				if ((this._ContractType != value))
-				{
-					this.OnContractTypeChanging(value);
-					this.SendPropertyChanging();
-					this._ContractType = value;
-					this.SendPropertyChanged("ContractType");
-					this.OnContractTypeChanged();
 				}
 			}
 		}
@@ -2333,7 +4715,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_CountryCode", DbType="NChar(2) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_CountryCode", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string CountryCode
 		{
 			get
@@ -2353,7 +4735,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CountryNameEN", DbType="VarChar(50)")]
+		[Column(Storage="_CountryNameEN", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string CountryNameEN
 		{
 			get
@@ -2373,7 +4755,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CountryNameCN", DbType="NVarChar(50)")]
+		[Column(Storage="_CountryNameCN", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string CountryNameCN
 		{
 			get
@@ -2424,21 +4806,21 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CaseCode;
 		
-		private System.Nullable<System.DateTime> _RequestDate;
+		private string _RequestType;
+		
+		private double _RequestAmount;
+		
+		private System.DateTime _RequestDate;
+		
+		private System.Nullable<double> _ReplyAmount;
 		
 		private System.Nullable<System.DateTime> _ReplyDate;
 		
-		private string _ApproveType;
-		
-		private System.Nullable<double> _RequestAmount;
-		
-		private System.Nullable<double> _ApproveAmount;
-		
 		private System.Nullable<double> _IFPrice;
 		
-		private string _CreateUserName;
-		
 		private string _Comment;
+		
+		private string _CreateUserName;
 		
 		private EntityRef<Case> _Case;
 		
@@ -2450,22 +4832,22 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnNegoIDChanged();
     partial void OnCaseCodeChanging(string value);
     partial void OnCaseCodeChanged();
-    partial void OnRequestDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnRequestDateChanged();
-    partial void OnApproveDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnApproveDateChanged();
-    partial void OnApproveTypeChanging(string value);
-    partial void OnApproveTypeChanged();
-    partial void OnRequestAmountChanging(System.Nullable<double> value);
+    partial void OnRequestTypeChanging(string value);
+    partial void OnRequestTypeChanged();
+    partial void OnRequestAmountChanging(double value);
     partial void OnRequestAmountChanged();
-    partial void OnApproveAmountChanging(System.Nullable<double> value);
-    partial void OnApproveAmountChanged();
+    partial void OnRequestDateChanging(System.DateTime value);
+    partial void OnRequestDateChanged();
+    partial void OnReplyAmountChanging(System.Nullable<double> value);
+    partial void OnReplyAmountChanged();
+    partial void OnReplyDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnReplyDateChanged();
     partial void OnIFPriceChanging(System.Nullable<double> value);
     partial void OnIFPriceChanged();
-    partial void OnCreateUserNameChanging(string value);
-    partial void OnCreateUserNameChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
     #endregion
 		
 		public CreditCoverNegotiation()
@@ -2494,7 +4876,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CaseCode", DbType="NChar(13)")]
+		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
 		public string CaseCode
 		{
 			get
@@ -2518,68 +4900,28 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RequestDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> RequestDate
+		[Column(Storage="_RequestType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string RequestType
 		{
 			get
 			{
-				return this._RequestDate;
+				return this._RequestType;
 			}
 			set
 			{
-				if ((this._RequestDate != value))
+				if ((this._RequestType != value))
 				{
-					this.OnRequestDateChanging(value);
+					this.OnRequestTypeChanging(value);
 					this.SendPropertyChanging();
-					this._RequestDate = value;
-					this.SendPropertyChanged("RequestDate");
-					this.OnRequestDateChanged();
+					this._RequestType = value;
+					this.SendPropertyChanged("RequestType");
+					this.OnRequestTypeChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_ReplyDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ApproveDate
-		{
-			get
-			{
-				return this._ReplyDate;
-			}
-			set
-			{
-				if ((this._ReplyDate != value))
-				{
-					this.OnApproveDateChanging(value);
-					this.SendPropertyChanging();
-					this._ReplyDate = value;
-					this.SendPropertyChanged("ApproveDate");
-					this.OnApproveDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ApproveType", DbType="NChar(10)")]
-		public string ApproveType
-		{
-			get
-			{
-				return this._ApproveType;
-			}
-			set
-			{
-				if ((this._ApproveType != value))
-				{
-					this.OnApproveTypeChanging(value);
-					this.SendPropertyChanging();
-					this._ApproveType = value;
-					this.SendPropertyChanged("ApproveType");
-					this.OnApproveTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_RequestAmount", DbType="Float")]
-		public System.Nullable<double> RequestAmount
+		[Column(Storage="_RequestAmount", DbType="Float NOT NULL")]
+		public double RequestAmount
 		{
 			get
 			{
@@ -2598,22 +4940,62 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ApproveAmount", DbType="Float")]
-		public System.Nullable<double> ApproveAmount
+		[Column(Storage="_RequestDate", DbType="DateTime NOT NULL")]
+		public System.DateTime RequestDate
 		{
 			get
 			{
-				return this._ApproveAmount;
+				return this._RequestDate;
 			}
 			set
 			{
-				if ((this._ApproveAmount != value))
+				if ((this._RequestDate != value))
 				{
-					this.OnApproveAmountChanging(value);
+					this.OnRequestDateChanging(value);
 					this.SendPropertyChanging();
-					this._ApproveAmount = value;
-					this.SendPropertyChanged("ApproveAmount");
-					this.OnApproveAmountChanged();
+					this._RequestDate = value;
+					this.SendPropertyChanged("RequestDate");
+					this.OnRequestDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ReplyAmount", DbType="Float")]
+		public System.Nullable<double> ReplyAmount
+		{
+			get
+			{
+				return this._ReplyAmount;
+			}
+			set
+			{
+				if ((this._ReplyAmount != value))
+				{
+					this.OnReplyAmountChanging(value);
+					this.SendPropertyChanging();
+					this._ReplyAmount = value;
+					this.SendPropertyChanged("ReplyAmount");
+					this.OnReplyAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ReplyDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ReplyDate
+		{
+			get
+			{
+				return this._ReplyDate;
+			}
+			set
+			{
+				if ((this._ReplyDate != value))
+				{
+					this.OnReplyDateChanging(value);
+					this.SendPropertyChanging();
+					this._ReplyDate = value;
+					this.SendPropertyChanged("ReplyDate");
+					this.OnReplyDateChanged();
 				}
 			}
 		}
@@ -2638,27 +5020,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50)")]
-		public string CreateUserName
-		{
-			get
-			{
-				return this._CreateUserName;
-			}
-			set
-			{
-				if ((this._CreateUserName != value))
-				{
-					this.OnCreateUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._CreateUserName = value;
-					this.SendPropertyChanged("CreateUserName");
-					this.OnCreateUserNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Comment", DbType="NVarChar(50)")]
+		[Column(Storage="_Comment", DbType="NVarChar(1400)")]
 		public string Comment
 		{
 			get
@@ -2674,6 +5036,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Comment = value;
 					this.SendPropertyChanged("Comment");
 					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
 				}
 			}
 		}
@@ -2758,7 +5140,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_CurrencyCode", DbType="NChar(3) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_CurrencyCode", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string CurrencyCode
 		{
 			get
@@ -2794,1951 +5176,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CurrencyName = value;
 					this.SendPropertyChanged("CurrencyName");
 					this.OnCurrencyNameChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[Table(Name="dbo.DepartmentAccount")]
-	public partial class DepartmentAccount : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _AccountID;
-		
-		private string _DepartmentCode;
-		
-		private string _AccountNo;
-		
-		private string _AccountCurrency;
-		
-		private string _AccountType;
-		
-		private string _Comment;
-		
-		private EntityRef<Department> _Department;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnAccountIDChanging(string value);
-    partial void OnAccountIDChanged();
-    partial void OnDepartmentCodeChanging(string value);
-    partial void OnDepartmentCodeChanged();
-    partial void OnAccountNoChanging(string value);
-    partial void OnAccountNoChanged();
-    partial void OnAccountCurrencyChanging(string value);
-    partial void OnAccountCurrencyChanged();
-    partial void OnAccountTypeChanging(string value);
-    partial void OnAccountTypeChanged();
-    partial void OnCommentChanging(string value);
-    partial void OnCommentChanged();
-    #endregion
-		
-		public DepartmentAccount()
-		{
-			this._Department = default(EntityRef<Department>);
-			OnCreated();
-		}
-		
-		[Column(Storage="_AccountID", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string AccountID
-		{
-			get
-			{
-				return this._AccountID;
-			}
-			set
-			{
-				if ((this._AccountID != value))
-				{
-					this.OnAccountIDChanging(value);
-					this.SendPropertyChanging();
-					this._AccountID = value;
-					this.SendPropertyChanged("AccountID");
-					this.OnAccountIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DepartmentCode", DbType="VarChar(14)")]
-		public string DepartmentCode
-		{
-			get
-			{
-				return this._DepartmentCode;
-			}
-			set
-			{
-				if ((this._DepartmentCode != value))
-				{
-					if (this._Department.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDepartmentCodeChanging(value);
-					this.SendPropertyChanging();
-					this._DepartmentCode = value;
-					this.SendPropertyChanged("DepartmentCode");
-					this.OnDepartmentCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_AccountNo", DbType="NVarChar(50)")]
-		public string AccountNo
-		{
-			get
-			{
-				return this._AccountNo;
-			}
-			set
-			{
-				if ((this._AccountNo != value))
-				{
-					this.OnAccountNoChanging(value);
-					this.SendPropertyChanging();
-					this._AccountNo = value;
-					this.SendPropertyChanged("AccountNo");
-					this.OnAccountNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_AccountCurrency", DbType="NChar(3)")]
-		public string AccountCurrency
-		{
-			get
-			{
-				return this._AccountCurrency;
-			}
-			set
-			{
-				if ((this._AccountCurrency != value))
-				{
-					this.OnAccountCurrencyChanging(value);
-					this.SendPropertyChanging();
-					this._AccountCurrency = value;
-					this.SendPropertyChanged("AccountCurrency");
-					this.OnAccountCurrencyChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_AccountType", DbType="NVarChar(50)")]
-		public string AccountType
-		{
-			get
-			{
-				return this._AccountType;
-			}
-			set
-			{
-				if ((this._AccountType != value))
-				{
-					this.OnAccountTypeChanging(value);
-					this.SendPropertyChanging();
-					this._AccountType = value;
-					this.SendPropertyChanged("AccountType");
-					this.OnAccountTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
-		public string Comment
-		{
-			get
-			{
-				return this._Comment;
-			}
-			set
-			{
-				if ((this._Comment != value))
-				{
-					this.OnCommentChanging(value);
-					this.SendPropertyChanging();
-					this._Comment = value;
-					this.SendPropertyChanged("Comment");
-					this.OnCommentChanged();
-				}
-			}
-		}
-		
-		[Association(Name="Department_DepartmentAccount", Storage="_Department", ThisKey="DepartmentCode", IsForeignKey=true)]
-		public Department Department
-		{
-			get
-			{
-				return this._Department.Entity;
-			}
-			set
-			{
-				Department previousValue = this._Department.Entity;
-				if (((previousValue != value) 
-							|| (this._Department.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Department.Entity = null;
-						previousValue.DepartmentAccounts.Remove(this);
-					}
-					this._Department.Entity = value;
-					if ((value != null))
-					{
-						value.DepartmentAccounts.Add(this);
-						this._DepartmentCode = value.DepartmentCode;
-					}
-					else
-					{
-						this._DepartmentCode = default(string);
-					}
-					this.SendPropertyChanged("Department");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[Table(Name="dbo.FactorAccount")]
-	public partial class FactorAccount : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _AccountID;
-		
-		private string _FactorCode;
-		
-		private string _AccountNo;
-		
-		private string _AccountCurrency;
-		
-		private string _AccountType;
-		
-		private string _AccountSWIFT;
-		
-		private string _HaveInterAccount;
-		
-		private string _IntermediaryBank;
-		
-		private string _InterBankSWIFT;
-		
-		private System.Nullable<bool> _IsDefault;
-		
-		private string _Commment;
-		
-		private EntityRef<Factor> _Factor;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnAccountIDChanging(string value);
-    partial void OnAccountIDChanged();
-    partial void OnFactorCodeChanging(string value);
-    partial void OnFactorCodeChanged();
-    partial void OnAccountNoChanging(string value);
-    partial void OnAccountNoChanged();
-    partial void OnAccountCurrencyChanging(string value);
-    partial void OnAccountCurrencyChanged();
-    partial void OnAccountTypeChanging(string value);
-    partial void OnAccountTypeChanged();
-    partial void OnAccountSWIFTChanging(string value);
-    partial void OnAccountSWIFTChanged();
-    partial void OnHaveInterAccountChanging(string value);
-    partial void OnHaveInterAccountChanged();
-    partial void OnIntermediaryBankChanging(string value);
-    partial void OnIntermediaryBankChanged();
-    partial void OnInterBankSWIFTChanging(string value);
-    partial void OnInterBankSWIFTChanged();
-    partial void OnIsDefaultChanging(System.Nullable<bool> value);
-    partial void OnIsDefaultChanged();
-    partial void OnCommmentChanging(string value);
-    partial void OnCommmentChanged();
-    #endregion
-		
-		public FactorAccount()
-		{
-			this._Factor = default(EntityRef<Factor>);
-			OnCreated();
-		}
-		
-		[Column(Storage="_AccountID", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string AccountID
-		{
-			get
-			{
-				return this._AccountID;
-			}
-			set
-			{
-				if ((this._AccountID != value))
-				{
-					this.OnAccountIDChanging(value);
-					this.SendPropertyChanging();
-					this._AccountID = value;
-					this.SendPropertyChanged("AccountID");
-					this.OnAccountIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FactorCode", DbType="Char(7)")]
-		public string FactorCode
-		{
-			get
-			{
-				return this._FactorCode;
-			}
-			set
-			{
-				if ((this._FactorCode != value))
-				{
-					if (this._Factor.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFactorCodeChanging(value);
-					this.SendPropertyChanging();
-					this._FactorCode = value;
-					this.SendPropertyChanged("FactorCode");
-					this.OnFactorCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_AccountNo", DbType="VarChar(200)")]
-		public string AccountNo
-		{
-			get
-			{
-				return this._AccountNo;
-			}
-			set
-			{
-				if ((this._AccountNo != value))
-				{
-					this.OnAccountNoChanging(value);
-					this.SendPropertyChanging();
-					this._AccountNo = value;
-					this.SendPropertyChanged("AccountNo");
-					this.OnAccountNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_AccountCurrency", DbType="NChar(3)")]
-		public string AccountCurrency
-		{
-			get
-			{
-				return this._AccountCurrency;
-			}
-			set
-			{
-				if ((this._AccountCurrency != value))
-				{
-					this.OnAccountCurrencyChanging(value);
-					this.SendPropertyChanging();
-					this._AccountCurrency = value;
-					this.SendPropertyChanged("AccountCurrency");
-					this.OnAccountCurrencyChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_AccountType", DbType="NVarChar(50)")]
-		public string AccountType
-		{
-			get
-			{
-				return this._AccountType;
-			}
-			set
-			{
-				if ((this._AccountType != value))
-				{
-					this.OnAccountTypeChanging(value);
-					this.SendPropertyChanging();
-					this._AccountType = value;
-					this.SendPropertyChanged("AccountType");
-					this.OnAccountTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_AccountSWIFT", DbType="NVarChar(50)")]
-		public string AccountSWIFT
-		{
-			get
-			{
-				return this._AccountSWIFT;
-			}
-			set
-			{
-				if ((this._AccountSWIFT != value))
-				{
-					this.OnAccountSWIFTChanging(value);
-					this.SendPropertyChanging();
-					this._AccountSWIFT = value;
-					this.SendPropertyChanged("AccountSWIFT");
-					this.OnAccountSWIFTChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_HaveInterAccount", DbType="NVarChar(50)")]
-		public string HaveInterAccount
-		{
-			get
-			{
-				return this._HaveInterAccount;
-			}
-			set
-			{
-				if ((this._HaveInterAccount != value))
-				{
-					this.OnHaveInterAccountChanging(value);
-					this.SendPropertyChanging();
-					this._HaveInterAccount = value;
-					this.SendPropertyChanged("HaveInterAccount");
-					this.OnHaveInterAccountChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_IntermediaryBank", DbType="NVarChar(50)")]
-		public string IntermediaryBank
-		{
-			get
-			{
-				return this._IntermediaryBank;
-			}
-			set
-			{
-				if ((this._IntermediaryBank != value))
-				{
-					this.OnIntermediaryBankChanging(value);
-					this.SendPropertyChanging();
-					this._IntermediaryBank = value;
-					this.SendPropertyChanged("IntermediaryBank");
-					this.OnIntermediaryBankChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_InterBankSWIFT", DbType="NVarChar(50)")]
-		public string InterBankSWIFT
-		{
-			get
-			{
-				return this._InterBankSWIFT;
-			}
-			set
-			{
-				if ((this._InterBankSWIFT != value))
-				{
-					this.OnInterBankSWIFTChanging(value);
-					this.SendPropertyChanging();
-					this._InterBankSWIFT = value;
-					this.SendPropertyChanged("InterBankSWIFT");
-					this.OnInterBankSWIFTChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_IsDefault", DbType="bit")]
-		public System.Nullable<bool> IsDefault
-		{
-			get
-			{
-				return this._IsDefault;
-			}
-			set
-			{
-				if ((this._IsDefault != value))
-				{
-					this.OnIsDefaultChanging(value);
-					this.SendPropertyChanging();
-					this._IsDefault = value;
-					this.SendPropertyChanged("IsDefault");
-					this.OnIsDefaultChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Commment", DbType="NVarChar(200)")]
-		public string Commment
-		{
-			get
-			{
-				return this._Commment;
-			}
-			set
-			{
-				if ((this._Commment != value))
-				{
-					this.OnCommmentChanging(value);
-					this.SendPropertyChanging();
-					this._Commment = value;
-					this.SendPropertyChanged("Commment");
-					this.OnCommmentChanged();
-				}
-			}
-		}
-		
-		[Association(Name="Factor_FactorAccount", Storage="_Factor", ThisKey="FactorCode", IsForeignKey=true)]
-		public Factor Factor
-		{
-			get
-			{
-				return this._Factor.Entity;
-			}
-			set
-			{
-				Factor previousValue = this._Factor.Entity;
-				if (((previousValue != value) 
-							|| (this._Factor.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Factor.Entity = null;
-						previousValue.FactorAccounts.Remove(this);
-					}
-					this._Factor.Entity = value;
-					if ((value != null))
-					{
-						value.FactorAccounts.Add(this);
-						this._FactorCode = value.FactorCode;
-					}
-					else
-					{
-						this._FactorCode = default(string);
-					}
-					this.SendPropertyChanged("Factor");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[Table(Name="dbo.FactorGroup")]
-	public partial class FactorGroup : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _GroupNo;
-		
-		private string _GroupNameCN;
-		
-		private string _GroupNameEN;
-		
-		private EntitySet<Factor> _Factors;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnGroupNoChanging(string value);
-    partial void OnGroupNoChanged();
-    partial void OnGroupNameCNChanging(string value);
-    partial void OnGroupNameCNChanged();
-    partial void OnGroupNameENChanging(string value);
-    partial void OnGroupNameENChanged();
-    #endregion
-		
-		public FactorGroup()
-		{
-			this._Factors = new EntitySet<Factor>(new Action<Factor>(this.attach_Factors), new Action<Factor>(this.detach_Factors));
-			OnCreated();
-		}
-		
-		[Column(Storage="_GroupNo", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string GroupNo
-		{
-			get
-			{
-				return this._GroupNo;
-			}
-			set
-			{
-				if ((this._GroupNo != value))
-				{
-					this.OnGroupNoChanging(value);
-					this.SendPropertyChanging();
-					this._GroupNo = value;
-					this.SendPropertyChanged("GroupNo");
-					this.OnGroupNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_GroupNameCN", DbType="NVarChar(50)")]
-		public string GroupNameCN
-		{
-			get
-			{
-				return this._GroupNameCN;
-			}
-			set
-			{
-				if ((this._GroupNameCN != value))
-				{
-					this.OnGroupNameCNChanging(value);
-					this.SendPropertyChanging();
-					this._GroupNameCN = value;
-					this.SendPropertyChanged("GroupNameCN");
-					this.OnGroupNameCNChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_GroupNameEN", DbType="NVarChar(50)")]
-		public string GroupNameEN
-		{
-			get
-			{
-				return this._GroupNameEN;
-			}
-			set
-			{
-				if ((this._GroupNameEN != value))
-				{
-					this.OnGroupNameENChanging(value);
-					this.SendPropertyChanging();
-					this._GroupNameEN = value;
-					this.SendPropertyChanged("GroupNameEN");
-					this.OnGroupNameENChanged();
-				}
-			}
-		}
-		
-		[Association(Name="FactorGroup_Factor", Storage="_Factors", OtherKey="GroupNo")]
-		public EntitySet<Factor> Factors
-		{
-			get
-			{
-				return this._Factors;
-			}
-			set
-			{
-				this._Factors.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Factors(Factor entity)
-		{
-			this.SendPropertyChanging();
-			entity.FactorGroup = this;
-		}
-		
-		private void detach_Factors(Factor entity)
-		{
-			this.SendPropertyChanging();
-			entity.FactorGroup = null;
-		}
-	}
-	
-	[Table(Name="dbo.Invoice")]
-	public partial class Invoice : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _InvoiceNo;
-		
-		private System.DateTime _InvoiceDate;
-		
-		private string _InvoiceCurrency;
-		
-		private string _AssignBatchNo;
-		
-		private double _InvoiceAmount;
-		
-		private double _AssignAmount;
-		
-		private System.DateTime _AssignDate;
-		
-		private System.DateTime _DueDate;
-		
-		private System.Nullable<System.DateTime> _ValueDate;
-		
-		private string _NetPaymentTerms;
-		
-		private System.Nullable<int> _PrimaryDiscountDays;
-		
-		private System.Nullable<double> _PrimaryDiscountRate;
-		
-		private System.Nullable<int> _SecondaryDiscountDays;
-		
-		private System.Nullable<double> _SecondaryDiscountRate;
-		
-		private string _PaymentConditions;
-		
-		private string _OrderNumberReference;
-		
-		private string _InvoiceReferenceNumber;
-		
-		private System.Nullable<bool> _IsFlaw;
-		
-		private string _FlawReason;
-		
-		private string _FlawResolveReason;
-		
-		private System.Nullable<System.DateTime> _FlawResolveDate;
-		
-		private string _FlawResolveUserName;
-		
-		private string _FinanceBatchNo;
-		
-		private System.Nullable<double> _FinanceAmount;
-		
-		private System.Nullable<System.DateTime> _FinanceDate;
-		
-		private System.Nullable<System.DateTime> _FinanceDueDate;
-		
-		private string _PaymentBatchNo;
-		
-		private System.Nullable<double> _PaymentAmount;
-		
-		private System.Nullable<System.DateTime> _PaymentDate;
-		
-		private System.Nullable<double> _RefundAmount;
-		
-		private System.Nullable<System.DateTime> _RefundDate;
-		
-		private System.Nullable<double> _Commission;
-		
-		private System.Nullable<System.DateTime> _CommissionDate;
-		
-		private System.Nullable<double> _Interest;
-		
-		private System.Nullable<System.DateTime> _InterestDate;
-		
-		private System.Nullable<bool> _IsDispute;
-		
-		private string _DisputeType;
-		
-		private System.Nullable<double> _DisputeAmount;
-		
-		private string _DisputeReason;
-		
-		private System.Nullable<System.DateTime> _DisputeDate;
-		
-		private string _DisputeUserName;
-		
-		private string _DisputeResolveReason;
-		
-		private System.Nullable<System.DateTime> _DisputeResolveDate;
-		
-		private string _DisputeResolveUserName;
-		
-		private string _Comment;
-		
-		private EntityRef<InvoiceAssignBatch> _InvoiceAssignBatch;
-		
-		private EntityRef<InvoicePaymentBatch> _InvoicePaymentBatch;
-		
-		private EntityRef<InvoiceFinanceBatch> _InvoiceFinanceBatch;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnInvoiceNoChanging(string value);
-    partial void OnInvoiceNoChanged();
-    partial void OnInvoiceDateChanging(System.DateTime value);
-    partial void OnInvoiceDateChanged();
-    partial void OnInvoiceCurrencyChanging(string value);
-    partial void OnInvoiceCurrencyChanged();
-    partial void OnAssignBatchNoChanging(string value);
-    partial void OnAssignBatchNoChanged();
-    partial void OnInvoiceAmountChanging(double value);
-    partial void OnInvoiceAmountChanged();
-    partial void OnAssignAmountChanging(double value);
-    partial void OnAssignAmountChanged();
-    partial void OnAssignDateChanging(System.DateTime value);
-    partial void OnAssignDateChanged();
-    partial void OnDueDateChanging(System.DateTime value);
-    partial void OnDueDateChanged();
-    partial void OnValueDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnValueDateChanged();
-    partial void OnNetPaymentTermsChanging(string value);
-    partial void OnNetPaymentTermsChanged();
-    partial void OnPrimaryDiscountDaysChanging(System.Nullable<int> value);
-    partial void OnPrimaryDiscountDaysChanged();
-    partial void OnPrimaryDiscountRateChanging(System.Nullable<double> value);
-    partial void OnPrimaryDiscountRateChanged();
-    partial void OnSecondaryDiscountDaysChanging(System.Nullable<int> value);
-    partial void OnSecondaryDiscountDaysChanged();
-    partial void OnSecondaryDiscountRateChanging(System.Nullable<double> value);
-    partial void OnSecondaryDiscountRateChanged();
-    partial void OnPaymentConditionsChanging(string value);
-    partial void OnPaymentConditionsChanged();
-    partial void OnOrderNumberReferenceChanging(string value);
-    partial void OnOrderNumberReferenceChanged();
-    partial void OnInvoiceReferenceNumberChanging(string value);
-    partial void OnInvoiceReferenceNumberChanged();
-    partial void OnIsFlawChanging(System.Nullable<bool> value);
-    partial void OnIsFlawChanged();
-    partial void OnFlawReasonChanging(string value);
-    partial void OnFlawReasonChanged();
-    partial void OnFlawResolveReasonChanging(string value);
-    partial void OnFlawResolveReasonChanged();
-    partial void OnFlawResolveDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnFlawResolveDateChanged();
-    partial void OnFlawResolveUserNameChanging(string value);
-    partial void OnFlawResolveUserNameChanged();
-    partial void OnFinanceBatchNoChanging(string value);
-    partial void OnFinanceBatchNoChanged();
-    partial void OnFinanceAmountChanging(System.Nullable<double> value);
-    partial void OnFinanceAmountChanged();
-    partial void OnFinanceDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnFinanceDateChanged();
-    partial void OnFinanceDueDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnFinanceDueDateChanged();
-    partial void OnPaymentBatchNoChanging(string value);
-    partial void OnPaymentBatchNoChanged();
-    partial void OnPaymentAmountChanging(System.Nullable<double> value);
-    partial void OnPaymentAmountChanged();
-    partial void OnPaymentDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnPaymentDateChanged();
-    partial void OnRefundAmountChanging(System.Nullable<double> value);
-    partial void OnRefundAmountChanged();
-    partial void OnRefundDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnRefundDateChanged();
-    partial void OnCommissionChanging(System.Nullable<double> value);
-    partial void OnCommissionChanged();
-    partial void OnCommissionDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCommissionDateChanged();
-    partial void OnInterestChanging(System.Nullable<double> value);
-    partial void OnInterestChanged();
-    partial void OnInterestDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnInterestDateChanged();
-    partial void OnIsDisputeChanging(System.Nullable<bool> value);
-    partial void OnIsDisputeChanged();
-    partial void OnDisputeTypeChanging(string value);
-    partial void OnDisputeTypeChanged();
-    partial void OnDisputeAmountChanging(System.Nullable<double> value);
-    partial void OnDisputeAmountChanged();
-    partial void OnDisputeReasonChanging(string value);
-    partial void OnDisputeReasonChanged();
-    partial void OnDisputeDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnDisputeDateChanged();
-    partial void OnDisputeUserNameChanging(string value);
-    partial void OnDisputeUserNameChanged();
-    partial void OnDisputeResolveReasonChanging(string value);
-    partial void OnDisputeResolveReasonChanged();
-    partial void OnDisputeResolveDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnDisputeResolveDateChanged();
-    partial void OnDisputeResolveUserNameChanging(string value);
-    partial void OnDisputeResolveUserNameChanged();
-    partial void OnCommentChanging(string value);
-    partial void OnCommentChanged();
-    #endregion
-		
-		public Invoice()
-		{
-			this._InvoiceAssignBatch = default(EntityRef<InvoiceAssignBatch>);
-			this._InvoicePaymentBatch = default(EntityRef<InvoicePaymentBatch>);
-			this._InvoiceFinanceBatch = default(EntityRef<InvoiceFinanceBatch>);
-			OnCreated();
-		}
-		
-		[Column(Storage="_InvoiceNo", DbType="NVarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string InvoiceNo
-		{
-			get
-			{
-				return this._InvoiceNo;
-			}
-			set
-			{
-				if ((this._InvoiceNo != value))
-				{
-					this.OnInvoiceNoChanging(value);
-					this.SendPropertyChanging();
-					this._InvoiceNo = value;
-					this.SendPropertyChanged("InvoiceNo");
-					this.OnInvoiceNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_InvoiceDate", DbType="DateTime")]
-		public System.DateTime InvoiceDate
-		{
-			get
-			{
-				return this._InvoiceDate;
-			}
-			set
-			{
-				if ((this._InvoiceDate != value))
-				{
-					this.OnInvoiceDateChanging(value);
-					this.SendPropertyChanging();
-					this._InvoiceDate = value;
-					this.SendPropertyChanged("InvoiceDate");
-					this.OnInvoiceDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_InvoiceCurrency", DbType="NChar(3)", CanBeNull=false)]
-		public string InvoiceCurrency
-		{
-			get
-			{
-				return this._InvoiceCurrency;
-			}
-			set
-			{
-				if ((this._InvoiceCurrency != value))
-				{
-					this.OnInvoiceCurrencyChanging(value);
-					this.SendPropertyChanging();
-					this._InvoiceCurrency = value;
-					this.SendPropertyChanged("InvoiceCurrency");
-					this.OnInvoiceCurrencyChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_AssignBatchNo", DbType="NVarChar(50)", CanBeNull=false)]
-		public string AssignBatchNo
-		{
-			get
-			{
-				return this._AssignBatchNo;
-			}
-			set
-			{
-				if ((this._AssignBatchNo != value))
-				{
-					if (this._InvoiceAssignBatch.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnAssignBatchNoChanging(value);
-					this.SendPropertyChanging();
-					this._AssignBatchNo = value;
-					this.SendPropertyChanged("AssignBatchNo");
-					this.OnAssignBatchNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_InvoiceAmount", DbType="Float")]
-		public double InvoiceAmount
-		{
-			get
-			{
-				return this._InvoiceAmount;
-			}
-			set
-			{
-				if ((this._InvoiceAmount != value))
-				{
-					this.OnInvoiceAmountChanging(value);
-					this.SendPropertyChanging();
-					this._InvoiceAmount = value;
-					this.SendPropertyChanged("InvoiceAmount");
-					this.OnInvoiceAmountChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_AssignAmount", DbType="Float")]
-		public double AssignAmount
-		{
-			get
-			{
-				return this._AssignAmount;
-			}
-			set
-			{
-				if ((this._AssignAmount != value))
-				{
-					this.OnAssignAmountChanging(value);
-					this.SendPropertyChanging();
-					this._AssignAmount = value;
-					this.SendPropertyChanged("AssignAmount");
-					this.OnAssignAmountChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_AssignDate", DbType="DateTime")]
-		public System.DateTime AssignDate
-		{
-			get
-			{
-				return this._AssignDate;
-			}
-			set
-			{
-				if ((this._AssignDate != value))
-				{
-					this.OnAssignDateChanging(value);
-					this.SendPropertyChanging();
-					this._AssignDate = value;
-					this.SendPropertyChanged("AssignDate");
-					this.OnAssignDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DueDate", DbType="DateTime")]
-		public System.DateTime DueDate
-		{
-			get
-			{
-				return this._DueDate;
-			}
-			set
-			{
-				if ((this._DueDate != value))
-				{
-					this.OnDueDateChanging(value);
-					this.SendPropertyChanging();
-					this._DueDate = value;
-					this.SendPropertyChanged("DueDate");
-					this.OnDueDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ValueDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ValueDate
-		{
-			get
-			{
-				return this._ValueDate;
-			}
-			set
-			{
-				if ((this._ValueDate != value))
-				{
-					this.OnValueDateChanging(value);
-					this.SendPropertyChanging();
-					this._ValueDate = value;
-					this.SendPropertyChanged("ValueDate");
-					this.OnValueDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_NetPaymentTerms", DbType="NVarChar(500)")]
-		public string NetPaymentTerms
-		{
-			get
-			{
-				return this._NetPaymentTerms;
-			}
-			set
-			{
-				if ((this._NetPaymentTerms != value))
-				{
-					this.OnNetPaymentTermsChanging(value);
-					this.SendPropertyChanging();
-					this._NetPaymentTerms = value;
-					this.SendPropertyChanged("NetPaymentTerms");
-					this.OnNetPaymentTermsChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PrimaryDiscountDays", DbType="Int")]
-		public System.Nullable<int> PrimaryDiscountDays
-		{
-			get
-			{
-				return this._PrimaryDiscountDays;
-			}
-			set
-			{
-				if ((this._PrimaryDiscountDays != value))
-				{
-					this.OnPrimaryDiscountDaysChanging(value);
-					this.SendPropertyChanging();
-					this._PrimaryDiscountDays = value;
-					this.SendPropertyChanged("PrimaryDiscountDays");
-					this.OnPrimaryDiscountDaysChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PrimaryDiscountRate", DbType="Float")]
-		public System.Nullable<double> PrimaryDiscountRate
-		{
-			get
-			{
-				return this._PrimaryDiscountRate;
-			}
-			set
-			{
-				if ((this._PrimaryDiscountRate != value))
-				{
-					this.OnPrimaryDiscountRateChanging(value);
-					this.SendPropertyChanging();
-					this._PrimaryDiscountRate = value;
-					this.SendPropertyChanged("PrimaryDiscountRate");
-					this.OnPrimaryDiscountRateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_SecondaryDiscountDays", DbType="Int")]
-		public System.Nullable<int> SecondaryDiscountDays
-		{
-			get
-			{
-				return this._SecondaryDiscountDays;
-			}
-			set
-			{
-				if ((this._SecondaryDiscountDays != value))
-				{
-					this.OnSecondaryDiscountDaysChanging(value);
-					this.SendPropertyChanging();
-					this._SecondaryDiscountDays = value;
-					this.SendPropertyChanged("SecondaryDiscountDays");
-					this.OnSecondaryDiscountDaysChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_SecondaryDiscountRate", DbType="Float")]
-		public System.Nullable<double> SecondaryDiscountRate
-		{
-			get
-			{
-				return this._SecondaryDiscountRate;
-			}
-			set
-			{
-				if ((this._SecondaryDiscountRate != value))
-				{
-					this.OnSecondaryDiscountRateChanging(value);
-					this.SendPropertyChanging();
-					this._SecondaryDiscountRate = value;
-					this.SendPropertyChanged("SecondaryDiscountRate");
-					this.OnSecondaryDiscountRateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PaymentConditions", DbType="NVarChar(50)")]
-		public string PaymentConditions
-		{
-			get
-			{
-				return this._PaymentConditions;
-			}
-			set
-			{
-				if ((this._PaymentConditions != value))
-				{
-					this.OnPaymentConditionsChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentConditions = value;
-					this.SendPropertyChanged("PaymentConditions");
-					this.OnPaymentConditionsChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_OrderNumberReference", DbType="NVarChar(50)")]
-		public string OrderNumberReference
-		{
-			get
-			{
-				return this._OrderNumberReference;
-			}
-			set
-			{
-				if ((this._OrderNumberReference != value))
-				{
-					this.OnOrderNumberReferenceChanging(value);
-					this.SendPropertyChanging();
-					this._OrderNumberReference = value;
-					this.SendPropertyChanged("OrderNumberReference");
-					this.OnOrderNumberReferenceChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_InvoiceReferenceNumber", DbType="NVarChar(50)")]
-		public string InvoiceReferenceNumber
-		{
-			get
-			{
-				return this._InvoiceReferenceNumber;
-			}
-			set
-			{
-				if ((this._InvoiceReferenceNumber != value))
-				{
-					this.OnInvoiceReferenceNumberChanging(value);
-					this.SendPropertyChanging();
-					this._InvoiceReferenceNumber = value;
-					this.SendPropertyChanged("InvoiceReferenceNumber");
-					this.OnInvoiceReferenceNumberChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_IsFlaw", DbType="bit")]
-		public System.Nullable<bool> IsFlaw
-		{
-			get
-			{
-				return this._IsFlaw;
-			}
-			set
-			{
-				if ((this._IsFlaw != value))
-				{
-					this.OnIsFlawChanging(value);
-					this.SendPropertyChanging();
-					this._IsFlaw = value;
-					this.SendPropertyChanged("IsFlaw");
-					this.OnIsFlawChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FlawReason", DbType="NVarChar(500)")]
-		public string FlawReason
-		{
-			get
-			{
-				return this._FlawReason;
-			}
-			set
-			{
-				if ((this._FlawReason != value))
-				{
-					this.OnFlawReasonChanging(value);
-					this.SendPropertyChanging();
-					this._FlawReason = value;
-					this.SendPropertyChanged("FlawReason");
-					this.OnFlawReasonChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FlawResolveReason", DbType="NVarChar(500)")]
-		public string FlawResolveReason
-		{
-			get
-			{
-				return this._FlawResolveReason;
-			}
-			set
-			{
-				if ((this._FlawResolveReason != value))
-				{
-					this.OnFlawResolveReasonChanging(value);
-					this.SendPropertyChanging();
-					this._FlawResolveReason = value;
-					this.SendPropertyChanged("FlawResolveReason");
-					this.OnFlawResolveReasonChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FlawResolveDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FlawResolveDate
-		{
-			get
-			{
-				return this._FlawResolveDate;
-			}
-			set
-			{
-				if ((this._FlawResolveDate != value))
-				{
-					this.OnFlawResolveDateChanging(value);
-					this.SendPropertyChanging();
-					this._FlawResolveDate = value;
-					this.SendPropertyChanged("FlawResolveDate");
-					this.OnFlawResolveDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FlawResolveUserName", DbType="NVarChar(50)")]
-		public string FlawResolveUserName
-		{
-			get
-			{
-				return this._FlawResolveUserName;
-			}
-			set
-			{
-				if ((this._FlawResolveUserName != value))
-				{
-					this.OnFlawResolveUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._FlawResolveUserName = value;
-					this.SendPropertyChanged("FlawResolveUserName");
-					this.OnFlawResolveUserNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FinanceBatchNo", DbType="NVarChar(50)")]
-		public string FinanceBatchNo
-		{
-			get
-			{
-				return this._FinanceBatchNo;
-			}
-			set
-			{
-				if ((this._FinanceBatchNo != value))
-				{
-					if (this._InvoiceFinanceBatch.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFinanceBatchNoChanging(value);
-					this.SendPropertyChanging();
-					this._FinanceBatchNo = value;
-					this.SendPropertyChanged("FinanceBatchNo");
-					this.OnFinanceBatchNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FinanceAmount", DbType="Float")]
-		public System.Nullable<double> FinanceAmount
-		{
-			get
-			{
-				return this._FinanceAmount;
-			}
-			set
-			{
-				if ((this._FinanceAmount != value))
-				{
-					this.OnFinanceAmountChanging(value);
-					this.SendPropertyChanging();
-					this._FinanceAmount = value;
-					this.SendPropertyChanged("FinanceAmount");
-					this.OnFinanceAmountChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FinanceDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FinanceDate
-		{
-			get
-			{
-				return this._FinanceDate;
-			}
-			set
-			{
-				if ((this._FinanceDate != value))
-				{
-					this.OnFinanceDateChanging(value);
-					this.SendPropertyChanging();
-					this._FinanceDate = value;
-					this.SendPropertyChanged("FinanceDate");
-					this.OnFinanceDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FinanceDueDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FinanceDueDate
-		{
-			get
-			{
-				return this._FinanceDueDate;
-			}
-			set
-			{
-				if ((this._FinanceDueDate != value))
-				{
-					this.OnFinanceDueDateChanging(value);
-					this.SendPropertyChanging();
-					this._FinanceDueDate = value;
-					this.SendPropertyChanged("FinanceDueDate");
-					this.OnFinanceDueDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PaymentBatchNo", DbType="NVarChar(50)")]
-		public string PaymentBatchNo
-		{
-			get
-			{
-				return this._PaymentBatchNo;
-			}
-			set
-			{
-				if ((this._PaymentBatchNo != value))
-				{
-					if (this._InvoicePaymentBatch.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPaymentBatchNoChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentBatchNo = value;
-					this.SendPropertyChanged("PaymentBatchNo");
-					this.OnPaymentBatchNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PaymentAmount", DbType="Float")]
-		public System.Nullable<double> PaymentAmount
-		{
-			get
-			{
-				return this._PaymentAmount;
-			}
-			set
-			{
-				if ((this._PaymentAmount != value))
-				{
-					this.OnPaymentAmountChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentAmount = value;
-					this.SendPropertyChanged("PaymentAmount");
-					this.OnPaymentAmountChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PaymentDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> PaymentDate
-		{
-			get
-			{
-				return this._PaymentDate;
-			}
-			set
-			{
-				if ((this._PaymentDate != value))
-				{
-					this.OnPaymentDateChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentDate = value;
-					this.SendPropertyChanged("PaymentDate");
-					this.OnPaymentDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_RefundAmount", DbType="Float")]
-		public System.Nullable<double> RefundAmount
-		{
-			get
-			{
-				return this._RefundAmount;
-			}
-			set
-			{
-				if ((this._RefundAmount != value))
-				{
-					this.OnRefundAmountChanging(value);
-					this.SendPropertyChanging();
-					this._RefundAmount = value;
-					this.SendPropertyChanged("RefundAmount");
-					this.OnRefundAmountChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_RefundDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> RefundDate
-		{
-			get
-			{
-				return this._RefundDate;
-			}
-			set
-			{
-				if ((this._RefundDate != value))
-				{
-					this.OnRefundDateChanging(value);
-					this.SendPropertyChanging();
-					this._RefundDate = value;
-					this.SendPropertyChanged("RefundDate");
-					this.OnRefundDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Commission", DbType="float")]
-		public System.Nullable<double> Commission
-		{
-			get
-			{
-				return this._Commission;
-			}
-			set
-			{
-				if ((this._Commission != value))
-				{
-					this.OnCommissionChanging(value);
-					this.SendPropertyChanging();
-					this._Commission = value;
-					this.SendPropertyChanged("Commission");
-					this.OnCommissionChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CommissionDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CommissionDate
-		{
-			get
-			{
-				return this._CommissionDate;
-			}
-			set
-			{
-				if ((this._CommissionDate != value))
-				{
-					this.OnCommissionDateChanging(value);
-					this.SendPropertyChanging();
-					this._CommissionDate = value;
-					this.SendPropertyChanged("CommissionDate");
-					this.OnCommissionDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Interest", DbType="float")]
-		public System.Nullable<double> Interest
-		{
-			get
-			{
-				return this._Interest;
-			}
-			set
-			{
-				if ((this._Interest != value))
-				{
-					this.OnInterestChanging(value);
-					this.SendPropertyChanging();
-					this._Interest = value;
-					this.SendPropertyChanged("Interest");
-					this.OnInterestChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_InterestDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> InterestDate
-		{
-			get
-			{
-				return this._InterestDate;
-			}
-			set
-			{
-				if ((this._InterestDate != value))
-				{
-					this.OnInterestDateChanging(value);
-					this.SendPropertyChanging();
-					this._InterestDate = value;
-					this.SendPropertyChanged("InterestDate");
-					this.OnInterestDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_IsDispute", DbType="bit")]
-		public System.Nullable<bool> IsDispute
-		{
-			get
-			{
-				return this._IsDispute;
-			}
-			set
-			{
-				if ((this._IsDispute != value))
-				{
-					this.OnIsDisputeChanging(value);
-					this.SendPropertyChanging();
-					this._IsDispute = value;
-					this.SendPropertyChanged("IsDispute");
-					this.OnIsDisputeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DisputeType", DbType="NVarChar(50)")]
-		public string DisputeType
-		{
-			get
-			{
-				return this._DisputeType;
-			}
-			set
-			{
-				if ((this._DisputeType != value))
-				{
-					this.OnDisputeTypeChanging(value);
-					this.SendPropertyChanging();
-					this._DisputeType = value;
-					this.SendPropertyChanged("DisputeType");
-					this.OnDisputeTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DisputeAmount", DbType="Float")]
-		public System.Nullable<double> DisputeAmount
-		{
-			get
-			{
-				return this._DisputeAmount;
-			}
-			set
-			{
-				if ((this._DisputeAmount != value))
-				{
-					this.OnDisputeAmountChanging(value);
-					this.SendPropertyChanging();
-					this._DisputeAmount = value;
-					this.SendPropertyChanged("DisputeAmount");
-					this.OnDisputeAmountChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DisputeReason", DbType="NVarChar(500)")]
-		public string DisputeReason
-		{
-			get
-			{
-				return this._DisputeReason;
-			}
-			set
-			{
-				if ((this._DisputeReason != value))
-				{
-					this.OnDisputeReasonChanging(value);
-					this.SendPropertyChanging();
-					this._DisputeReason = value;
-					this.SendPropertyChanged("DisputeReason");
-					this.OnDisputeReasonChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DisputeDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> DisputeDate
-		{
-			get
-			{
-				return this._DisputeDate;
-			}
-			set
-			{
-				if ((this._DisputeDate != value))
-				{
-					this.OnDisputeDateChanging(value);
-					this.SendPropertyChanging();
-					this._DisputeDate = value;
-					this.SendPropertyChanged("DisputeDate");
-					this.OnDisputeDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DisputeUserName", DbType="NVarChar(50)")]
-		public string DisputeUserName
-		{
-			get
-			{
-				return this._DisputeUserName;
-			}
-			set
-			{
-				if ((this._DisputeUserName != value))
-				{
-					this.OnDisputeUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._DisputeUserName = value;
-					this.SendPropertyChanged("DisputeUserName");
-					this.OnDisputeUserNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DisputeResolveReason", DbType="NVarChar(500)")]
-		public string DisputeResolveReason
-		{
-			get
-			{
-				return this._DisputeResolveReason;
-			}
-			set
-			{
-				if ((this._DisputeResolveReason != value))
-				{
-					this.OnDisputeResolveReasonChanging(value);
-					this.SendPropertyChanging();
-					this._DisputeResolveReason = value;
-					this.SendPropertyChanged("DisputeResolveReason");
-					this.OnDisputeResolveReasonChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DisputeResolveDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> DisputeResolveDate
-		{
-			get
-			{
-				return this._DisputeResolveDate;
-			}
-			set
-			{
-				if ((this._DisputeResolveDate != value))
-				{
-					this.OnDisputeResolveDateChanging(value);
-					this.SendPropertyChanging();
-					this._DisputeResolveDate = value;
-					this.SendPropertyChanged("DisputeResolveDate");
-					this.OnDisputeResolveDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DisputeResolveUserName", DbType="NVarChar(50)")]
-		public string DisputeResolveUserName
-		{
-			get
-			{
-				return this._DisputeResolveUserName;
-			}
-			set
-			{
-				if ((this._DisputeResolveUserName != value))
-				{
-					this.OnDisputeResolveUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._DisputeResolveUserName = value;
-					this.SendPropertyChanged("DisputeResolveUserName");
-					this.OnDisputeResolveUserNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
-		public string Comment
-		{
-			get
-			{
-				return this._Comment;
-			}
-			set
-			{
-				if ((this._Comment != value))
-				{
-					this.OnCommentChanging(value);
-					this.SendPropertyChanging();
-					this._Comment = value;
-					this.SendPropertyChanged("Comment");
-					this.OnCommentChanged();
-				}
-			}
-		}
-		
-		[Association(Name="InvoiceAssignBatch_Invoice", Storage="_InvoiceAssignBatch", ThisKey="AssignBatchNo", IsForeignKey=true)]
-		public InvoiceAssignBatch InvoiceAssignBatch
-		{
-			get
-			{
-				return this._InvoiceAssignBatch.Entity;
-			}
-			set
-			{
-				InvoiceAssignBatch previousValue = this._InvoiceAssignBatch.Entity;
-				if (((previousValue != value) 
-							|| (this._InvoiceAssignBatch.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._InvoiceAssignBatch.Entity = null;
-						previousValue.Invoices.Remove(this);
-					}
-					this._InvoiceAssignBatch.Entity = value;
-					if ((value != null))
-					{
-						value.Invoices.Add(this);
-						this._AssignBatchNo = value.AssignBatchNo;
-					}
-					else
-					{
-						this._AssignBatchNo = default(string);
-					}
-					this.SendPropertyChanged("InvoiceAssignBatch");
-				}
-			}
-		}
-		
-		[Association(Name="InvoicePaymentBatch_Invoice", Storage="_InvoicePaymentBatch", ThisKey="PaymentBatchNo", IsForeignKey=true)]
-		public InvoicePaymentBatch InvoicePaymentBatch
-		{
-			get
-			{
-				return this._InvoicePaymentBatch.Entity;
-			}
-			set
-			{
-				InvoicePaymentBatch previousValue = this._InvoicePaymentBatch.Entity;
-				if (((previousValue != value) 
-							|| (this._InvoicePaymentBatch.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._InvoicePaymentBatch.Entity = null;
-						previousValue.Invoices.Remove(this);
-					}
-					this._InvoicePaymentBatch.Entity = value;
-					if ((value != null))
-					{
-						value.Invoices.Add(this);
-						this._PaymentBatchNo = value.PaymentBatchNo;
-					}
-					else
-					{
-						this._PaymentBatchNo = default(string);
-					}
-					this.SendPropertyChanged("InvoicePaymentBatch");
-				}
-			}
-		}
-		
-		[Association(Name="InvoiceFinanceBatch_Invoice", Storage="_InvoiceFinanceBatch", ThisKey="FinanceBatchNo", IsForeignKey=true)]
-		public InvoiceFinanceBatch InvoiceFinanceBatch
-		{
-			get
-			{
-				return this._InvoiceFinanceBatch.Entity;
-			}
-			set
-			{
-				InvoiceFinanceBatch previousValue = this._InvoiceFinanceBatch.Entity;
-				if (((previousValue != value) 
-							|| (this._InvoiceFinanceBatch.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._InvoiceFinanceBatch.Entity = null;
-						previousValue.Invoices.Remove(this);
-					}
-					this._InvoiceFinanceBatch.Entity = value;
-					if ((value != null))
-					{
-						value.Invoices.Add(this);
-						this._FinanceBatchNo = value.FinanceBatchNo;
-					}
-					else
-					{
-						this._FinanceBatchNo = default(string);
-					}
-					this.SendPropertyChanged("InvoiceFinanceBatch");
 				}
 			}
 		}
@@ -4802,13 +5239,13 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Fax_2;
 		
-		private EntitySet<Client> _Clients;
-		
-		private EntitySet<DepartmentAccount> _DepartmentAccounts;
-		
 		private EntitySet<Case> _CoCases;
 		
 		private EntitySet<Case> _OwnerCases;
+		
+		private EntitySet<Client> _Clients;
+		
+		private EntitySet<DepartmentAccount> _DepartmentAccounts;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -4850,10 +5287,10 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		public Department()
 		{
-			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
-			this._DepartmentAccounts = new EntitySet<DepartmentAccount>(new Action<DepartmentAccount>(this.attach_DepartmentAccounts), new Action<DepartmentAccount>(this.detach_DepartmentAccounts));
 			this._CoCases = new EntitySet<Case>(new Action<Case>(this.attach_CoCases), new Action<Case>(this.detach_CoCases));
 			this._OwnerCases = new EntitySet<Case>(new Action<Case>(this.attach_OwnerCases), new Action<Case>(this.detach_OwnerCases));
+			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
+			this._DepartmentAccounts = new EntitySet<DepartmentAccount>(new Action<DepartmentAccount>(this.attach_DepartmentAccounts), new Action<DepartmentAccount>(this.detach_DepartmentAccounts));
 			OnCreated();
 		}
 		
@@ -4877,7 +5314,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_DepartmentName", DbType="NVarChar(50)")]
+		[Column(Storage="_DepartmentName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string DepartmentName
 		{
 			get
@@ -4897,7 +5334,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Location", DbType="NVarChar(50)")]
+		[Column(Storage="_Location", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string Location
 		{
 			get
@@ -4917,7 +5354,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Domain", DbType="NVarChar(50)")]
+		[Column(Storage="_Domain", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string Domain
 		{
 			get
@@ -5177,32 +5614,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Department_Client", Storage="_Clients", OtherKey="BranchCode")]
-		public EntitySet<Client> Clients
-		{
-			get
-			{
-				return this._Clients;
-			}
-			set
-			{
-				this._Clients.Assign(value);
-			}
-		}
-		
-		[Association(Name="Department_DepartmentAccount", Storage="_DepartmentAccounts", OtherKey="DepartmentCode")]
-		public EntitySet<DepartmentAccount> DepartmentAccounts
-		{
-			get
-			{
-				return this._DepartmentAccounts;
-			}
-			set
-			{
-				this._DepartmentAccounts.Assign(value);
-			}
-		}
-		
 		[Association(Name="Department_Case", Storage="_CoCases", OtherKey="CoDepartmentCode")]
 		public EntitySet<Case> CoCases
 		{
@@ -5229,6 +5640,32 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Association(Name="Department_Client", Storage="_Clients", OtherKey="BranchCode")]
+		public EntitySet<Client> Clients
+		{
+			get
+			{
+				return this._Clients;
+			}
+			set
+			{
+				this._Clients.Assign(value);
+			}
+		}
+		
+		[Association(Name="Department_DepartmentAccount", Storage="_DepartmentAccounts", OtherKey="DepartmentCode")]
+		public EntitySet<DepartmentAccount> DepartmentAccounts
+		{
+			get
+			{
+				return this._DepartmentAccounts;
+			}
+			set
+			{
+				this._DepartmentAccounts.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -5247,30 +5684,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Clients(Client entity)
-		{
-			this.SendPropertyChanging();
-			entity.Department = this;
-		}
-		
-		private void detach_Clients(Client entity)
-		{
-			this.SendPropertyChanging();
-			entity.Department = null;
-		}
-		
-		private void attach_DepartmentAccounts(DepartmentAccount entity)
-		{
-			this.SendPropertyChanging();
-			entity.Department = this;
-		}
-		
-		private void detach_DepartmentAccounts(DepartmentAccount entity)
-		{
-			this.SendPropertyChanging();
-			entity.Department = null;
 		}
 		
 		private void attach_CoCases(Case entity)
@@ -5296,416 +5709,176 @@ namespace CMBC.EasyFactor.DB.dbml
 			this.SendPropertyChanging();
 			entity.OwnerDepartment = null;
 		}
+		
+		private void attach_Clients(Client entity)
+		{
+			this.SendPropertyChanging();
+			entity.Department = this;
+		}
+		
+		private void detach_Clients(Client entity)
+		{
+			this.SendPropertyChanging();
+			entity.Department = null;
+		}
+		
+		private void attach_DepartmentAccounts(DepartmentAccount entity)
+		{
+			this.SendPropertyChanging();
+			entity.Department = this;
+		}
+		
+		private void detach_DepartmentAccounts(DepartmentAccount entity)
+		{
+			this.SendPropertyChanging();
+			entity.Department = null;
+		}
 	}
 	
-	[Table(Name="dbo.ClientCreditLine")]
-	public partial class ClientCreditLine : INotifyPropertyChanging, INotifyPropertyChanged
+	[Table(Name="dbo.DepartmentAccount")]
+	public partial class DepartmentAccount : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _CreditLineID;
+		private string _AccountID;
 		
-		private string _ClientEDICode;
+		private string _DepartmentCode;
 		
-		private string _CreditLineType;
+		private string _AccountNo;
 		
-		private string _CreditLineCurrency;
+		private string _AccountCurrency;
 		
-		private System.Nullable<double> _CreditLine;
-		
-		private System.Nullable<System.DateTime> _PeriodBegin;
-		
-		private System.Nullable<System.DateTime> _PeriodEnd;
-		
-		private string _ApproveNo;
-		
-		private string _ApproveType;
-		
-		private string _CreditLineStatus;
-		
-		private string _FreezeReason;
-		
-		private string _Freezer;
-		
-		private System.Nullable<System.DateTime> _FreezeDate;
-		
-		private string _UnfreezeReason;
-		
-		private string _Unfreezer;
-		
-		private System.Nullable<System.DateTime> _UnfreezeDate;
+		private string _AccountType;
 		
 		private string _Comment;
 		
-		private EntityRef<Client> _Client;
+		private EntityRef<Department> _Department;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnCreditLineIDChanging(int value);
-    partial void OnCreditLineIDChanged();
-    partial void OnClientEDICodeChanging(string value);
-    partial void OnClientEDICodeChanged();
-    partial void OnCreditLineTypeChanging(string value);
-    partial void OnCreditLineTypeChanged();
-    partial void OnCreditLineCurrencyChanging(string value);
-    partial void OnCreditLineCurrencyChanged();
-    partial void OnCreditLineChanging(System.Nullable<double> value);
-    partial void OnCreditLineChanged();
-    partial void OnPeriodBeginChanging(System.Nullable<System.DateTime> value);
-    partial void OnPeriodBeginChanged();
-    partial void OnPeriodEndChanging(System.Nullable<System.DateTime> value);
-    partial void OnPeriodEndChanged();
-    partial void OnApproveNoChanging(string value);
-    partial void OnApproveNoChanged();
-    partial void OnApproveTypeChanging(string value);
-    partial void OnApproveTypeChanged();
-    partial void OnCreditLineStatusChanging(string value);
-    partial void OnCreditLineStatusChanged();
-    partial void OnFreezeReasonChanging(string value);
-    partial void OnFreezeReasonChanged();
-    partial void OnFreezerChanging(string value);
-    partial void OnFreezerChanged();
-    partial void OnFreezeDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnFreezeDateChanged();
-    partial void OnUnfreezeReasonChanging(string value);
-    partial void OnUnfreezeReasonChanged();
-    partial void OnUnfreezerChanging(string value);
-    partial void OnUnfreezerChanged();
-    partial void OnUnfreezeDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnUnfreezeDateChanged();
+    partial void OnAccountIDChanging(string value);
+    partial void OnAccountIDChanged();
+    partial void OnDepartmentCodeChanging(string value);
+    partial void OnDepartmentCodeChanged();
+    partial void OnAccountNoChanging(string value);
+    partial void OnAccountNoChanged();
+    partial void OnAccountCurrencyChanging(string value);
+    partial void OnAccountCurrencyChanged();
+    partial void OnAccountTypeChanging(string value);
+    partial void OnAccountTypeChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
     #endregion
 		
-		public ClientCreditLine()
+		public DepartmentAccount()
 		{
-			this._Client = default(EntityRef<Client>);
+			this._Department = default(EntityRef<Department>);
 			OnCreated();
 		}
 		
-		[Column(Storage="_CreditLineID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int CreditLineID
+		[Column(Storage="_AccountID", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string AccountID
 		{
 			get
 			{
-				return this._CreditLineID;
+				return this._AccountID;
 			}
 			set
 			{
-				if ((this._CreditLineID != value))
+				if ((this._AccountID != value))
 				{
-					this.OnCreditLineIDChanging(value);
+					this.OnAccountIDChanging(value);
 					this.SendPropertyChanging();
-					this._CreditLineID = value;
-					this.SendPropertyChanged("CreditLineID");
-					this.OnCreditLineIDChanged();
+					this._AccountID = value;
+					this.SendPropertyChanged("AccountID");
+					this.OnAccountIDChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_ClientEDICode", DbType="VarChar(35)")]
-		public string ClientEDICode
+		[Column(Storage="_DepartmentCode", DbType="VarChar(14)")]
+		public string DepartmentCode
 		{
 			get
 			{
-				return this._ClientEDICode;
+				return this._DepartmentCode;
 			}
 			set
 			{
-				if ((this._ClientEDICode != value))
+				if ((this._DepartmentCode != value))
 				{
-					if (this._Client.HasLoadedOrAssignedValue)
+					if (this._Department.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnClientEDICodeChanging(value);
+					this.OnDepartmentCodeChanging(value);
 					this.SendPropertyChanging();
-					this._ClientEDICode = value;
-					this.SendPropertyChanged("ClientEDICode");
-					this.OnClientEDICodeChanged();
+					this._DepartmentCode = value;
+					this.SendPropertyChanged("DepartmentCode");
+					this.OnDepartmentCodeChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_CreditLineType", DbType="NVarChar(50)")]
-		public string CreditLineType
+		[Column(Storage="_AccountNo", DbType="NVarChar(50)")]
+		public string AccountNo
 		{
 			get
 			{
-				return this._CreditLineType;
+				return this._AccountNo;
 			}
 			set
 			{
-				if ((this._CreditLineType != value))
+				if ((this._AccountNo != value))
 				{
-					this.OnCreditLineTypeChanging(value);
+					this.OnAccountNoChanging(value);
 					this.SendPropertyChanging();
-					this._CreditLineType = value;
-					this.SendPropertyChanged("CreditLineType");
-					this.OnCreditLineTypeChanged();
+					this._AccountNo = value;
+					this.SendPropertyChanged("AccountNo");
+					this.OnAccountNoChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_CreditLineCurrency", DbType="NChar(3)")]
-		public string CreditLineCurrency
+		[Column(Storage="_AccountCurrency", DbType="NChar(3)")]
+		public string AccountCurrency
 		{
 			get
 			{
-				return this._CreditLineCurrency;
+				return this._AccountCurrency;
 			}
 			set
 			{
-				if ((this._CreditLineCurrency != value))
+				if ((this._AccountCurrency != value))
 				{
-					this.OnCreditLineCurrencyChanging(value);
+					this.OnAccountCurrencyChanging(value);
 					this.SendPropertyChanging();
-					this._CreditLineCurrency = value;
-					this.SendPropertyChanged("CreditLineCurrency");
-					this.OnCreditLineCurrencyChanged();
+					this._AccountCurrency = value;
+					this.SendPropertyChanged("AccountCurrency");
+					this.OnAccountCurrencyChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_CreditLine", DbType="float")]
-		public System.Nullable<double> CreditLine
+		[Column(Storage="_AccountType", DbType="NVarChar(50)")]
+		public string AccountType
 		{
 			get
 			{
-				return this._CreditLine;
+				return this._AccountType;
 			}
 			set
 			{
-				if ((this._CreditLine != value))
+				if ((this._AccountType != value))
 				{
-					this.OnCreditLineChanging(value);
+					this.OnAccountTypeChanging(value);
 					this.SendPropertyChanging();
-					this._CreditLine = value;
-					this.SendPropertyChanged("CreditLine");
-					this.OnCreditLineChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PeriodBegin", DbType="DateTime")]
-		public System.Nullable<System.DateTime> PeriodBegin
-		{
-			get
-			{
-				return this._PeriodBegin;
-			}
-			set
-			{
-				if ((this._PeriodBegin != value))
-				{
-					this.OnPeriodBeginChanging(value);
-					this.SendPropertyChanging();
-					this._PeriodBegin = value;
-					this.SendPropertyChanged("PeriodBegin");
-					this.OnPeriodBeginChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PeriodEnd", DbType="DateTime")]
-		public System.Nullable<System.DateTime> PeriodEnd
-		{
-			get
-			{
-				return this._PeriodEnd;
-			}
-			set
-			{
-				if ((this._PeriodEnd != value))
-				{
-					this.OnPeriodEndChanging(value);
-					this.SendPropertyChanging();
-					this._PeriodEnd = value;
-					this.SendPropertyChanged("PeriodEnd");
-					this.OnPeriodEndChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ApproveNo", DbType="NVarChar(50)")]
-		public string ApproveNo
-		{
-			get
-			{
-				return this._ApproveNo;
-			}
-			set
-			{
-				if ((this._ApproveNo != value))
-				{
-					this.OnApproveNoChanging(value);
-					this.SendPropertyChanging();
-					this._ApproveNo = value;
-					this.SendPropertyChanged("ApproveNo");
-					this.OnApproveNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ApproveType", DbType="NVarChar(50)")]
-		public string ApproveType
-		{
-			get
-			{
-				return this._ApproveType;
-			}
-			set
-			{
-				if ((this._ApproveType != value))
-				{
-					this.OnApproveTypeChanging(value);
-					this.SendPropertyChanging();
-					this._ApproveType = value;
-					this.SendPropertyChanged("ApproveType");
-					this.OnApproveTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreditLineStatus", DbType="NVarChar(50)")]
-		public string CreditLineStatus
-		{
-			get
-			{
-				return this._CreditLineStatus;
-			}
-			set
-			{
-				if ((this._CreditLineStatus != value))
-				{
-					this.OnCreditLineStatusChanging(value);
-					this.SendPropertyChanging();
-					this._CreditLineStatus = value;
-					this.SendPropertyChanged("CreditLineStatus");
-					this.OnCreditLineStatusChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FreezeReason", DbType="NVarChar(50)")]
-		public string FreezeReason
-		{
-			get
-			{
-				return this._FreezeReason;
-			}
-			set
-			{
-				if ((this._FreezeReason != value))
-				{
-					this.OnFreezeReasonChanging(value);
-					this.SendPropertyChanging();
-					this._FreezeReason = value;
-					this.SendPropertyChanged("FreezeReason");
-					this.OnFreezeReasonChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Freezer", DbType="NVarChar(50)")]
-		public string Freezer
-		{
-			get
-			{
-				return this._Freezer;
-			}
-			set
-			{
-				if ((this._Freezer != value))
-				{
-					this.OnFreezerChanging(value);
-					this.SendPropertyChanging();
-					this._Freezer = value;
-					this.SendPropertyChanged("Freezer");
-					this.OnFreezerChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FreezeDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FreezeDate
-		{
-			get
-			{
-				return this._FreezeDate;
-			}
-			set
-			{
-				if ((this._FreezeDate != value))
-				{
-					this.OnFreezeDateChanging(value);
-					this.SendPropertyChanging();
-					this._FreezeDate = value;
-					this.SendPropertyChanged("FreezeDate");
-					this.OnFreezeDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UnfreezeReason", DbType="NVarChar(50)")]
-		public string UnfreezeReason
-		{
-			get
-			{
-				return this._UnfreezeReason;
-			}
-			set
-			{
-				if ((this._UnfreezeReason != value))
-				{
-					this.OnUnfreezeReasonChanging(value);
-					this.SendPropertyChanging();
-					this._UnfreezeReason = value;
-					this.SendPropertyChanged("UnfreezeReason");
-					this.OnUnfreezeReasonChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Unfreezer", DbType="NVarChar(50)")]
-		public string Unfreezer
-		{
-			get
-			{
-				return this._Unfreezer;
-			}
-			set
-			{
-				if ((this._Unfreezer != value))
-				{
-					this.OnUnfreezerChanging(value);
-					this.SendPropertyChanging();
-					this._Unfreezer = value;
-					this.SendPropertyChanged("Unfreezer");
-					this.OnUnfreezerChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UnfreezeDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> UnfreezeDate
-		{
-			get
-			{
-				return this._UnfreezeDate;
-			}
-			set
-			{
-				if ((this._UnfreezeDate != value))
-				{
-					this.OnUnfreezeDateChanging(value);
-					this.SendPropertyChanging();
-					this._UnfreezeDate = value;
-					this.SendPropertyChanged("UnfreezeDate");
-					this.OnUnfreezeDateChanged();
+					this._AccountType = value;
+					this.SendPropertyChanged("AccountType");
+					this.OnAccountTypeChanged();
 				}
 			}
 		}
@@ -5730,36 +5903,36 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Client_ClientCreditLine", Storage="_Client", ThisKey="ClientEDICode", IsForeignKey=true)]
-		public Client Client
+		[Association(Name="Department_DepartmentAccount", Storage="_Department", ThisKey="DepartmentCode", IsForeignKey=true)]
+		public Department Department
 		{
 			get
 			{
-				return this._Client.Entity;
+				return this._Department.Entity;
 			}
 			set
 			{
-				Client previousValue = this._Client.Entity;
+				Department previousValue = this._Department.Entity;
 				if (((previousValue != value) 
-							|| (this._Client.HasLoadedOrAssignedValue == false)))
+							|| (this._Department.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Client.Entity = null;
-						previousValue.ClientCreditLines.Remove(this);
+						this._Department.Entity = null;
+						previousValue.DepartmentAccounts.Remove(this);
 					}
-					this._Client.Entity = value;
+					this._Department.Entity = value;
 					if ((value != null))
 					{
-						value.ClientCreditLines.Add(this);
-						this._ClientEDICode = value.ClientEDICode;
+						value.DepartmentAccounts.Add(this);
+						this._DepartmentCode = value.DepartmentCode;
 					}
 					else
 					{
-						this._ClientEDICode = default(string);
+						this._DepartmentCode = default(string);
 					}
-					this.SendPropertyChanged("Client");
+					this.SendPropertyChanged("Department");
 				}
 			}
 		}
@@ -5782,1241 +5955,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[Table(Name="dbo.FactorCreditLine")]
-	public partial class FactorCreditLine : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _CreditLineID;
-		
-		private string _FactorCode;
-		
-		private string _CreditLineType;
-		
-		private string _CreditLineCurrency;
-		
-		private System.Nullable<double> _CreditLine;
-		
-		private System.Nullable<System.DateTime> _PeriodBegin;
-		
-		private System.Nullable<System.DateTime> _PeriodEnd;
-		
-		private string _ApproveNo;
-		
-		private string _ApproveType;
-		
-		private string _CreditLineStatus;
-		
-		private string _FreezeReason;
-		
-		private string _Freezer;
-		
-		private System.Nullable<System.DateTime> _FreezeDate;
-		
-		private string _UnfreezeReason;
-		
-		private string _Unfreezer;
-		
-		private System.Nullable<System.DateTime> _UnfreezeDate;
-		
-		private string _Comment;
-		
-		private EntityRef<Factor> _Factor;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnCreditLineIDChanging(int value);
-    partial void OnCreditLineIDChanged();
-    partial void OnFactorCodeChanging(string value);
-    partial void OnFactorCodeChanged();
-    partial void OnCreditLineTypeChanging(string value);
-    partial void OnCreditLineTypeChanged();
-    partial void OnCreditLineCurrencyChanging(string value);
-    partial void OnCreditLineCurrencyChanged();
-    partial void OnCreditLineChanging(System.Nullable<double> value);
-    partial void OnCreditLineChanged();
-    partial void OnPeriodBeginChanging(System.Nullable<System.DateTime> value);
-    partial void OnPeriodBeginChanged();
-    partial void OnPeriodEndChanging(System.Nullable<System.DateTime> value);
-    partial void OnPeriodEndChanged();
-    partial void OnApproveNoChanging(string value);
-    partial void OnApproveNoChanged();
-    partial void OnApproveTypeChanging(string value);
-    partial void OnApproveTypeChanged();
-    partial void OnCreditLineStatusChanging(string value);
-    partial void OnCreditLineStatusChanged();
-    partial void OnFreezeReasonChanging(string value);
-    partial void OnFreezeReasonChanged();
-    partial void OnFreezerChanging(string value);
-    partial void OnFreezerChanged();
-    partial void OnFreezeDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnFreezeDateChanged();
-    partial void OnUnfreezeReasonChanging(string value);
-    partial void OnUnfreezeReasonChanged();
-    partial void OnUnfreezerChanging(string value);
-    partial void OnUnfreezerChanged();
-    partial void OnUnfreezeDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnUnfreezeDateChanged();
-    partial void OnCommentChanging(string value);
-    partial void OnCommentChanged();
-    #endregion
-		
-		public FactorCreditLine()
-		{
-			this._Factor = default(EntityRef<Factor>);
-			OnCreated();
-		}
-		
-		[Column(Storage="_CreditLineID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int CreditLineID
-		{
-			get
-			{
-				return this._CreditLineID;
-			}
-			set
-			{
-				if ((this._CreditLineID != value))
-				{
-					this.OnCreditLineIDChanging(value);
-					this.SendPropertyChanging();
-					this._CreditLineID = value;
-					this.SendPropertyChanged("CreditLineID");
-					this.OnCreditLineIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FactorCode", DbType="Char(7)")]
-		public string FactorCode
-		{
-			get
-			{
-				return this._FactorCode;
-			}
-			set
-			{
-				if ((this._FactorCode != value))
-				{
-					if (this._Factor.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFactorCodeChanging(value);
-					this.SendPropertyChanging();
-					this._FactorCode = value;
-					this.SendPropertyChanged("FactorCode");
-					this.OnFactorCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreditLineType", DbType="NVarChar(50)")]
-		public string CreditLineType
-		{
-			get
-			{
-				return this._CreditLineType;
-			}
-			set
-			{
-				if ((this._CreditLineType != value))
-				{
-					this.OnCreditLineTypeChanging(value);
-					this.SendPropertyChanging();
-					this._CreditLineType = value;
-					this.SendPropertyChanged("CreditLineType");
-					this.OnCreditLineTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreditLineCurrency", DbType="NChar(3)")]
-		public string CreditLineCurrency
-		{
-			get
-			{
-				return this._CreditLineCurrency;
-			}
-			set
-			{
-				if ((this._CreditLineCurrency != value))
-				{
-					this.OnCreditLineCurrencyChanging(value);
-					this.SendPropertyChanging();
-					this._CreditLineCurrency = value;
-					this.SendPropertyChanged("CreditLineCurrency");
-					this.OnCreditLineCurrencyChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreditLine", DbType="Float")]
-		public System.Nullable<double> CreditLine
-		{
-			get
-			{
-				return this._CreditLine;
-			}
-			set
-			{
-				if ((this._CreditLine != value))
-				{
-					this.OnCreditLineChanging(value);
-					this.SendPropertyChanging();
-					this._CreditLine = value;
-					this.SendPropertyChanged("CreditLine");
-					this.OnCreditLineChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PeriodBegin", DbType="DateTime")]
-		public System.Nullable<System.DateTime> PeriodBegin
-		{
-			get
-			{
-				return this._PeriodBegin;
-			}
-			set
-			{
-				if ((this._PeriodBegin != value))
-				{
-					this.OnPeriodBeginChanging(value);
-					this.SendPropertyChanging();
-					this._PeriodBegin = value;
-					this.SendPropertyChanged("PeriodBegin");
-					this.OnPeriodBeginChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PeriodEnd", DbType="DateTime")]
-		public System.Nullable<System.DateTime> PeriodEnd
-		{
-			get
-			{
-				return this._PeriodEnd;
-			}
-			set
-			{
-				if ((this._PeriodEnd != value))
-				{
-					this.OnPeriodEndChanging(value);
-					this.SendPropertyChanging();
-					this._PeriodEnd = value;
-					this.SendPropertyChanged("PeriodEnd");
-					this.OnPeriodEndChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ApproveNo", DbType="NVarChar(50)")]
-		public string ApproveNo
-		{
-			get
-			{
-				return this._ApproveNo;
-			}
-			set
-			{
-				if ((this._ApproveNo != value))
-				{
-					this.OnApproveNoChanging(value);
-					this.SendPropertyChanging();
-					this._ApproveNo = value;
-					this.SendPropertyChanged("ApproveNo");
-					this.OnApproveNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ApproveType", DbType="NVarChar(50)")]
-		public string ApproveType
-		{
-			get
-			{
-				return this._ApproveType;
-			}
-			set
-			{
-				if ((this._ApproveType != value))
-				{
-					this.OnApproveTypeChanging(value);
-					this.SendPropertyChanging();
-					this._ApproveType = value;
-					this.SendPropertyChanged("ApproveType");
-					this.OnApproveTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreditLineStatus", DbType="NVarChar(50)")]
-		public string CreditLineStatus
-		{
-			get
-			{
-				return this._CreditLineStatus;
-			}
-			set
-			{
-				if ((this._CreditLineStatus != value))
-				{
-					this.OnCreditLineStatusChanging(value);
-					this.SendPropertyChanging();
-					this._CreditLineStatus = value;
-					this.SendPropertyChanged("CreditLineStatus");
-					this.OnCreditLineStatusChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FreezeReason", DbType="NVarChar(50)")]
-		public string FreezeReason
-		{
-			get
-			{
-				return this._FreezeReason;
-			}
-			set
-			{
-				if ((this._FreezeReason != value))
-				{
-					this.OnFreezeReasonChanging(value);
-					this.SendPropertyChanging();
-					this._FreezeReason = value;
-					this.SendPropertyChanged("FreezeReason");
-					this.OnFreezeReasonChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Freezer", DbType="NVarChar(50)")]
-		public string Freezer
-		{
-			get
-			{
-				return this._Freezer;
-			}
-			set
-			{
-				if ((this._Freezer != value))
-				{
-					this.OnFreezerChanging(value);
-					this.SendPropertyChanging();
-					this._Freezer = value;
-					this.SendPropertyChanged("Freezer");
-					this.OnFreezerChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FreezeDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FreezeDate
-		{
-			get
-			{
-				return this._FreezeDate;
-			}
-			set
-			{
-				if ((this._FreezeDate != value))
-				{
-					this.OnFreezeDateChanging(value);
-					this.SendPropertyChanging();
-					this._FreezeDate = value;
-					this.SendPropertyChanged("FreezeDate");
-					this.OnFreezeDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UnfreezeReason", DbType="NVarChar(50)")]
-		public string UnfreezeReason
-		{
-			get
-			{
-				return this._UnfreezeReason;
-			}
-			set
-			{
-				if ((this._UnfreezeReason != value))
-				{
-					this.OnUnfreezeReasonChanging(value);
-					this.SendPropertyChanging();
-					this._UnfreezeReason = value;
-					this.SendPropertyChanged("UnfreezeReason");
-					this.OnUnfreezeReasonChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Unfreezer", DbType="NVarChar(50)")]
-		public string Unfreezer
-		{
-			get
-			{
-				return this._Unfreezer;
-			}
-			set
-			{
-				if ((this._Unfreezer != value))
-				{
-					this.OnUnfreezerChanging(value);
-					this.SendPropertyChanging();
-					this._Unfreezer = value;
-					this.SendPropertyChanged("Unfreezer");
-					this.OnUnfreezerChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UnfreezeDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> UnfreezeDate
-		{
-			get
-			{
-				return this._UnfreezeDate;
-			}
-			set
-			{
-				if ((this._UnfreezeDate != value))
-				{
-					this.OnUnfreezeDateChanging(value);
-					this.SendPropertyChanging();
-					this._UnfreezeDate = value;
-					this.SendPropertyChanged("UnfreezeDate");
-					this.OnUnfreezeDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
-		public string Comment
-		{
-			get
-			{
-				return this._Comment;
-			}
-			set
-			{
-				if ((this._Comment != value))
-				{
-					this.OnCommentChanging(value);
-					this.SendPropertyChanging();
-					this._Comment = value;
-					this.SendPropertyChanged("Comment");
-					this.OnCommentChanged();
-				}
-			}
-		}
-		
-		[Association(Name="Factor_FactorCreditLine", Storage="_Factor", ThisKey="FactorCode", IsForeignKey=true)]
-		public Factor Factor
-		{
-			get
-			{
-				return this._Factor.Entity;
-			}
-			set
-			{
-				Factor previousValue = this._Factor.Entity;
-				if (((previousValue != value) 
-							|| (this._Factor.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Factor.Entity = null;
-						previousValue.FactorCreditLines.Remove(this);
-					}
-					this._Factor.Entity = value;
-					if ((value != null))
-					{
-						value.FactorCreditLines.Add(this);
-						this._FactorCode = value.FactorCode;
-					}
-					else
-					{
-						this._FactorCode = default(string);
-					}
-					this.SendPropertyChanged("Factor");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[Table(Name="dbo.[Case]")]
-	public partial class Case : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _CaseCode;
-		
-		private string _SellerCode;
-		
-		private string _SellerFactorCode;
-		
-		private string _BuyerCode;
-		
-		private string _BuyerFactorCode;
-		
-		private string _InvoiceCurrency;
-		
-		private string _TransationType;
-		
-		private string _OperationType;
-		
-		private string _OwnerDepartmentCode;
-		
-		private string _CoDepartmentCode;
-		
-		private System.Nullable<System.DateTime> _CaseAppDate;
-		
-		private string _CaseMark;
-		
-		private string _CreateUserName;
-		
-		private string _ManagerName;
-		
-		private string _PaymentTerm;
-		
-		private string _ReviewNo;
-		
-		private string _Comment;
-		
-		private EntitySet<CreditCoverNegotiation> _CreditCoverNegotiations;
-		
-		private EntitySet<CDA> _CDAs;
-		
-		private EntityRef<Client> _BuyerClient;
-		
-		private EntityRef<Department> _CoDepartment;
-		
-		private EntityRef<Department> _OwnerDepartment;
-		
-		private EntityRef<Client> _SellerClient;
-		
-		private EntityRef<Factor> _BuyerFactor;
-		
-		private EntityRef<Factor> _SellerFactor;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnCaseCodeChanging(string value);
-    partial void OnCaseCodeChanged();
-    partial void OnSellerCodeChanging(string value);
-    partial void OnSellerCodeChanged();
-    partial void OnSellerFactorCodeChanging(string value);
-    partial void OnSellerFactorCodeChanged();
-    partial void OnBuyerCodeChanging(string value);
-    partial void OnBuyerCodeChanged();
-    partial void OnBuyerFactorCodeChanging(string value);
-    partial void OnBuyerFactorCodeChanged();
-    partial void OnInvoiceCurrencyChanging(string value);
-    partial void OnInvoiceCurrencyChanged();
-    partial void OnTransactionTypeChanging(string value);
-    partial void OnTransactionTypeChanged();
-    partial void OnOperationTypeChanging(string value);
-    partial void OnOperationTypeChanged();
-    partial void OnOwnerDepartmentCodeChanging(string value);
-    partial void OnOwnerDepartmentCodeChanged();
-    partial void OnCoDepartmentCodeChanging(string value);
-    partial void OnCoDepartmentCodeChanged();
-    partial void OnCaseAppDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCaseAppDateChanged();
-    partial void OnCaseMarkChanging(string value);
-    partial void OnCaseMarkChanged();
-    partial void OnCreateUserNameChanging(string value);
-    partial void OnCreateUserNameChanged();
-    partial void OnManagerNameChanging(string value);
-    partial void OnManagerNameChanged();
-    partial void OnPaymentTermChanging(string value);
-    partial void OnPaymentTermChanged();
-    partial void OnReviewNoChanging(string value);
-    partial void OnReviewNoChanged();
-    partial void OnCommentChanging(string value);
-    partial void OnCommentChanged();
-    #endregion
-		
-		public Case()
-		{
-			this._CreditCoverNegotiations = new EntitySet<CreditCoverNegotiation>(new Action<CreditCoverNegotiation>(this.attach_CreditCoverNegotiations), new Action<CreditCoverNegotiation>(this.detach_CreditCoverNegotiations));
-			this._CDAs = new EntitySet<CDA>(new Action<CDA>(this.attach_CDAs), new Action<CDA>(this.detach_CDAs));
-			this._BuyerClient = default(EntityRef<Client>);
-			this._CoDepartment = default(EntityRef<Department>);
-			this._OwnerDepartment = default(EntityRef<Department>);
-			this._SellerClient = default(EntityRef<Client>);
-			this._BuyerFactor = default(EntityRef<Factor>);
-			this._SellerFactor = default(EntityRef<Factor>);
-			OnCreated();
-		}
-		
-		[Column(Storage="_CaseCode", DbType="NChar(13) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string CaseCode
-		{
-			get
-			{
-				return this._CaseCode;
-			}
-			set
-			{
-				if ((this._CaseCode != value))
-				{
-					this.OnCaseCodeChanging(value);
-					this.SendPropertyChanging();
-					this._CaseCode = value;
-					this.SendPropertyChanged("CaseCode");
-					this.OnCaseCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_SellerCode", DbType="VarChar(35)")]
-		public string SellerCode
-		{
-			get
-			{
-				return this._SellerCode;
-			}
-			set
-			{
-				if ((this._SellerCode != value))
-				{
-					if (this._SellerClient.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSellerCodeChanging(value);
-					this.SendPropertyChanging();
-					this._SellerCode = value;
-					this.SendPropertyChanged("SellerCode");
-					this.OnSellerCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_SellerFactorCode", DbType="Char(7)")]
-		public string SellerFactorCode
-		{
-			get
-			{
-				return this._SellerFactorCode;
-			}
-			set
-			{
-				if ((this._SellerFactorCode != value))
-				{
-					if (this._SellerFactor.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSellerFactorCodeChanging(value);
-					this.SendPropertyChanging();
-					this._SellerFactorCode = value;
-					this.SendPropertyChanged("SellerFactorCode");
-					this.OnSellerFactorCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_BuyerCode", DbType="VarChar(35)")]
-		public string BuyerCode
-		{
-			get
-			{
-				return this._BuyerCode;
-			}
-			set
-			{
-				if ((this._BuyerCode != value))
-				{
-					if (this._BuyerClient.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnBuyerCodeChanging(value);
-					this.SendPropertyChanging();
-					this._BuyerCode = value;
-					this.SendPropertyChanged("BuyerCode");
-					this.OnBuyerCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_BuyerFactorCode", DbType="Char(7)")]
-		public string BuyerFactorCode
-		{
-			get
-			{
-				return this._BuyerFactorCode;
-			}
-			set
-			{
-				if ((this._BuyerFactorCode != value))
-				{
-					if (this._BuyerFactor.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnBuyerFactorCodeChanging(value);
-					this.SendPropertyChanging();
-					this._BuyerFactorCode = value;
-					this.SendPropertyChanged("BuyerFactorCode");
-					this.OnBuyerFactorCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_InvoiceCurrency", DbType="NChar(3)")]
-		public string InvoiceCurrency
-		{
-			get
-			{
-				return this._InvoiceCurrency;
-			}
-			set
-			{
-				if ((this._InvoiceCurrency != value))
-				{
-					this.OnInvoiceCurrencyChanging(value);
-					this.SendPropertyChanging();
-					this._InvoiceCurrency = value;
-					this.SendPropertyChanged("InvoiceCurrency");
-					this.OnInvoiceCurrencyChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_TransationType", DbType="NVarChar(50)")]
-		public string TransactionType
-		{
-			get
-			{
-				return this._TransationType;
-			}
-			set
-			{
-				if ((this._TransationType != value))
-				{
-					this.OnTransactionTypeChanging(value);
-					this.SendPropertyChanging();
-					this._TransationType = value;
-					this.SendPropertyChanged("TransactionType");
-					this.OnTransactionTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_OperationType", DbType="NVarChar(50)")]
-		public string OperationType
-		{
-			get
-			{
-				return this._OperationType;
-			}
-			set
-			{
-				if ((this._OperationType != value))
-				{
-					this.OnOperationTypeChanging(value);
-					this.SendPropertyChanging();
-					this._OperationType = value;
-					this.SendPropertyChanged("OperationType");
-					this.OnOperationTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_OwnerDepartmentCode", DbType="VarChar(14)")]
-		public string OwnerDepartmentCode
-		{
-			get
-			{
-				return this._OwnerDepartmentCode;
-			}
-			set
-			{
-				if ((this._OwnerDepartmentCode != value))
-				{
-					if (this._OwnerDepartment.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnOwnerDepartmentCodeChanging(value);
-					this.SendPropertyChanging();
-					this._OwnerDepartmentCode = value;
-					this.SendPropertyChanged("OwnerDepartmentCode");
-					this.OnOwnerDepartmentCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CoDepartmentCode", DbType="VarChar(14)")]
-		public string CoDepartmentCode
-		{
-			get
-			{
-				return this._CoDepartmentCode;
-			}
-			set
-			{
-				if ((this._CoDepartmentCode != value))
-				{
-					if (this._CoDepartment.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCoDepartmentCodeChanging(value);
-					this.SendPropertyChanging();
-					this._CoDepartmentCode = value;
-					this.SendPropertyChanged("CoDepartmentCode");
-					this.OnCoDepartmentCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CaseAppDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CaseAppDate
-		{
-			get
-			{
-				return this._CaseAppDate;
-			}
-			set
-			{
-				if ((this._CaseAppDate != value))
-				{
-					this.OnCaseAppDateChanging(value);
-					this.SendPropertyChanging();
-					this._CaseAppDate = value;
-					this.SendPropertyChanged("CaseAppDate");
-					this.OnCaseAppDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CaseMark", DbType="NVarChar(50)")]
-		public string CaseMark
-		{
-			get
-			{
-				return this._CaseMark;
-			}
-			set
-			{
-				if ((this._CaseMark != value))
-				{
-					this.OnCaseMarkChanging(value);
-					this.SendPropertyChanging();
-					this._CaseMark = value;
-					this.SendPropertyChanged("CaseMark");
-					this.OnCaseMarkChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50)")]
-		public string CreateUserName
-		{
-			get
-			{
-				return this._CreateUserName;
-			}
-			set
-			{
-				if ((this._CreateUserName != value))
-				{
-					this.OnCreateUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._CreateUserName = value;
-					this.SendPropertyChanged("CreateUserName");
-					this.OnCreateUserNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ManagerName", DbType="NVarChar(50)")]
-		public string ManagerName
-		{
-			get
-			{
-				return this._ManagerName;
-			}
-			set
-			{
-				if ((this._ManagerName != value))
-				{
-					this.OnManagerNameChanging(value);
-					this.SendPropertyChanging();
-					this._ManagerName = value;
-					this.SendPropertyChanged("ManagerName");
-					this.OnManagerNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PaymentTerm", DbType="NVarChar(500)")]
-		public string PaymentTerm
-		{
-			get
-			{
-				return this._PaymentTerm;
-			}
-			set
-			{
-				if ((this._PaymentTerm != value))
-				{
-					this.OnPaymentTermChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentTerm = value;
-					this.SendPropertyChanged("PaymentTerm");
-					this.OnPaymentTermChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ReviewNo", DbType="VarChar(50)")]
-		public string ReviewNo
-		{
-			get
-			{
-				return this._ReviewNo;
-			}
-			set
-			{
-				if ((this._ReviewNo != value))
-				{
-					this.OnReviewNoChanging(value);
-					this.SendPropertyChanging();
-					this._ReviewNo = value;
-					this.SendPropertyChanged("ReviewNo");
-					this.OnReviewNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
-		public string Comment
-		{
-			get
-			{
-				return this._Comment;
-			}
-			set
-			{
-				if ((this._Comment != value))
-				{
-					this.OnCommentChanging(value);
-					this.SendPropertyChanging();
-					this._Comment = value;
-					this.SendPropertyChanged("Comment");
-					this.OnCommentChanged();
-				}
-			}
-		}
-		
-		[Association(Name="Case_CreditCoverNegotiation", Storage="_CreditCoverNegotiations", OtherKey="CaseCode")]
-		public EntitySet<CreditCoverNegotiation> CreditCoverNegotiations
-		{
-			get
-			{
-				return this._CreditCoverNegotiations;
-			}
-			set
-			{
-				this._CreditCoverNegotiations.Assign(value);
-			}
-		}
-		
-		[Association(Name="Case_CDA", Storage="_CDAs", OtherKey="CaseCode")]
-		public EntitySet<CDA> CDAs
-		{
-			get
-			{
-				return this._CDAs;
-			}
-			set
-			{
-				this._CDAs.Assign(value);
-			}
-		}
-		
-		[Association(Name="Client_Case", Storage="_BuyerClient", ThisKey="BuyerCode", IsForeignKey=true)]
-		public Client BuyerClient
-		{
-			get
-			{
-				return this._BuyerClient.Entity;
-			}
-			set
-			{
-				Client previousValue = this._BuyerClient.Entity;
-				if (((previousValue != value) 
-							|| (this._BuyerClient.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._BuyerClient.Entity = null;
-						previousValue.BuyerCases.Remove(this);
-					}
-					this._BuyerClient.Entity = value;
-					if ((value != null))
-					{
-						value.BuyerCases.Add(this);
-						this._BuyerCode = value.ClientEDICode;
-					}
-					else
-					{
-						this._BuyerCode = default(string);
-					}
-					this.SendPropertyChanged("BuyerClient");
-				}
-			}
-		}
-		
-		[Association(Name="Department_Case", Storage="_CoDepartment", ThisKey="CoDepartmentCode", IsForeignKey=true)]
-		public Department CoDepartment
-		{
-			get
-			{
-				return this._CoDepartment.Entity;
-			}
-			set
-			{
-				Department previousValue = this._CoDepartment.Entity;
-				if (((previousValue != value) 
-							|| (this._CoDepartment.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CoDepartment.Entity = null;
-						previousValue.CoCases.Remove(this);
-					}
-					this._CoDepartment.Entity = value;
-					if ((value != null))
-					{
-						value.CoCases.Add(this);
-						this._CoDepartmentCode = value.DepartmentCode;
-					}
-					else
-					{
-						this._CoDepartmentCode = default(string);
-					}
-					this.SendPropertyChanged("CoDepartment");
-				}
-			}
-		}
-		
-		[Association(Name="Department_Case1", Storage="_OwnerDepartment", ThisKey="OwnerDepartmentCode", IsForeignKey=true)]
-		public Department OwnerDepartment
-		{
-			get
-			{
-				return this._OwnerDepartment.Entity;
-			}
-			set
-			{
-				Department previousValue = this._OwnerDepartment.Entity;
-				if (((previousValue != value) 
-							|| (this._OwnerDepartment.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._OwnerDepartment.Entity = null;
-						previousValue.OwnerCases.Remove(this);
-					}
-					this._OwnerDepartment.Entity = value;
-					if ((value != null))
-					{
-						value.OwnerCases.Add(this);
-						this._OwnerDepartmentCode = value.DepartmentCode;
-					}
-					else
-					{
-						this._OwnerDepartmentCode = default(string);
-					}
-					this.SendPropertyChanged("OwnerDepartment");
-				}
-			}
-		}
-		
-		[Association(Name="Client_Case1", Storage="_SellerClient", ThisKey="SellerCode", IsForeignKey=true)]
-		public Client SellerClient
-		{
-			get
-			{
-				return this._SellerClient.Entity;
-			}
-			set
-			{
-				Client previousValue = this._SellerClient.Entity;
-				if (((previousValue != value) 
-							|| (this._SellerClient.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SellerClient.Entity = null;
-						previousValue.SellerCases.Remove(this);
-					}
-					this._SellerClient.Entity = value;
-					if ((value != null))
-					{
-						value.SellerCases.Add(this);
-						this._SellerCode = value.ClientEDICode;
-					}
-					else
-					{
-						this._SellerCode = default(string);
-					}
-					this.SendPropertyChanged("SellerClient");
-				}
-			}
-		}
-		
-		[Association(Name="Factor_Case", Storage="_BuyerFactor", ThisKey="BuyerFactorCode", IsForeignKey=true)]
-		public Factor BuyerFactor
-		{
-			get
-			{
-				return this._BuyerFactor.Entity;
-			}
-			set
-			{
-				Factor previousValue = this._BuyerFactor.Entity;
-				if (((previousValue != value) 
-							|| (this._BuyerFactor.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._BuyerFactor.Entity = null;
-						previousValue.BuyerCases.Remove(this);
-					}
-					this._BuyerFactor.Entity = value;
-					if ((value != null))
-					{
-						value.BuyerCases.Add(this);
-						this._BuyerFactorCode = value.FactorCode;
-					}
-					else
-					{
-						this._BuyerFactorCode = default(string);
-					}
-					this.SendPropertyChanged("BuyerFactor");
-				}
-			}
-		}
-		
-		[Association(Name="Factor_Case1", Storage="_SellerFactor", ThisKey="SellerFactorCode", IsForeignKey=true)]
-		public Factor SellerFactor
-		{
-			get
-			{
-				return this._SellerFactor.Entity;
-			}
-			set
-			{
-				Factor previousValue = this._SellerFactor.Entity;
-				if (((previousValue != value) 
-							|| (this._SellerFactor.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SellerFactor.Entity = null;
-						previousValue.SellerCases.Remove(this);
-					}
-					this._SellerFactor.Entity = value;
-					if ((value != null))
-					{
-						value.SellerCases.Add(this);
-						this._SellerFactorCode = value.FactorCode;
-					}
-					else
-					{
-						this._SellerFactorCode = default(string);
-					}
-					this.SendPropertyChanged("SellerFactor");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_CreditCoverNegotiations(CreditCoverNegotiation entity)
-		{
-			this.SendPropertyChanging();
-			entity.Case = this;
-		}
-		
-		private void detach_CreditCoverNegotiations(CreditCoverNegotiation entity)
-		{
-			this.SendPropertyChanging();
-			entity.Case = null;
-		}
-		
-		private void attach_CDAs(CDA entity)
-		{
-			this.SendPropertyChanging();
-			entity.Case = this;
-		}
-		
-		private void detach_CDAs(CDA entity)
-		{
-			this.SendPropertyChanging();
-			entity.Case = null;
 		}
 	}
 	
@@ -7108,13 +6046,15 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _LastModifiedDate;
 		
-		private EntitySet<FactorAccount> _FactorAccounts;
-		
-		private EntitySet<FactorCreditLine> _FactorCreditLines;
+		private string _CreateUserName;
 		
 		private EntitySet<Case> _BuyerCases;
 		
 		private EntitySet<Case> _SellerCases;
+		
+		private EntitySet<FactorAccount> _FactorAccounts;
+		
+		private EntitySet<FactorCreditLine> _FactorCreditLines;
 		
 		private EntitySet<InvoiceFinanceBatch> _InvoiceFinanceBatches;
 		
@@ -7206,14 +6146,16 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnLastModifiedDateChanging(System.Nullable<System.DateTime> value);
     partial void OnLastModifiedDateChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
     #endregion
 		
 		public Factor()
 		{
-			this._FactorAccounts = new EntitySet<FactorAccount>(new Action<FactorAccount>(this.attach_FactorAccounts), new Action<FactorAccount>(this.detach_FactorAccounts));
-			this._FactorCreditLines = new EntitySet<FactorCreditLine>(new Action<FactorCreditLine>(this.attach_FactorCreditLines), new Action<FactorCreditLine>(this.detach_FactorCreditLines));
 			this._BuyerCases = new EntitySet<Case>(new Action<Case>(this.attach_BuyerCases), new Action<Case>(this.detach_BuyerCases));
 			this._SellerCases = new EntitySet<Case>(new Action<Case>(this.attach_SellerCases), new Action<Case>(this.detach_SellerCases));
+			this._FactorAccounts = new EntitySet<FactorAccount>(new Action<FactorAccount>(this.attach_FactorAccounts), new Action<FactorAccount>(this.detach_FactorAccounts));
+			this._FactorCreditLines = new EntitySet<FactorCreditLine>(new Action<FactorCreditLine>(this.attach_FactorCreditLines), new Action<FactorCreditLine>(this.detach_FactorCreditLines));
 			this._InvoiceFinanceBatches = new EntitySet<InvoiceFinanceBatch>(new Action<InvoiceFinanceBatch>(this.attach_InvoiceFinanceBatches), new Action<InvoiceFinanceBatch>(this.detach_InvoiceFinanceBatches));
 			this._FactorGroup = default(EntityRef<FactorGroup>);
 			OnCreated();
@@ -7939,7 +6881,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_GroupNo", DbType="NChar(10)")]
+		[Column(Storage="_GroupNo", DbType="NVarChar(10)")]
 		public string GroupNo
 		{
 			get
@@ -7963,7 +6905,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsCorrespondentBank", DbType="bit")]
+		[Column(Storage="_IsCorrespondentBank", DbType="Bit")]
 		public System.Nullable<bool> IsCorrespondentBank
 		{
 			get
@@ -7983,7 +6925,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsAgreementSigned", DbType="bit")]
+		[Column(Storage="_IsAgreementSigned", DbType="Bit")]
 		public System.Nullable<bool> IsAgreementSigned
 		{
 			get
@@ -8043,29 +6985,23 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Factor_FactorAccount", Storage="_FactorAccounts", OtherKey="FactorCode")]
-		public EntitySet<FactorAccount> FactorAccounts
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50)", CanBeNull=false)]
+		public string CreateUserName
 		{
 			get
 			{
-				return this._FactorAccounts;
+				return this._CreateUserName;
 			}
 			set
 			{
-				this._FactorAccounts.Assign(value);
-			}
-		}
-		
-		[Association(Name="Factor_FactorCreditLine", Storage="_FactorCreditLines", OtherKey="FactorCode")]
-		public EntitySet<FactorCreditLine> FactorCreditLines
-		{
-			get
-			{
-				return this._FactorCreditLines;
-			}
-			set
-			{
-				this._FactorCreditLines.Assign(value);
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
+				}
 			}
 		}
 		
@@ -8092,6 +7028,32 @@ namespace CMBC.EasyFactor.DB.dbml
 			set
 			{
 				this._SellerCases.Assign(value);
+			}
+		}
+		
+		[Association(Name="Factor_FactorAccount", Storage="_FactorAccounts", OtherKey="FactorCode")]
+		public EntitySet<FactorAccount> FactorAccounts
+		{
+			get
+			{
+				return this._FactorAccounts;
+			}
+			set
+			{
+				this._FactorAccounts.Assign(value);
+			}
+		}
+		
+		[Association(Name="Factor_FactorCreditLine", Storage="_FactorCreditLines", OtherKey="FactorCode")]
+		public EntitySet<FactorCreditLine> FactorCreditLines
+		{
+			get
+			{
+				return this._FactorCreditLines;
+			}
+			set
+			{
+				this._FactorCreditLines.Assign(value);
 			}
 		}
 		
@@ -8162,30 +7124,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		private void attach_FactorAccounts(FactorAccount entity)
-		{
-			this.SendPropertyChanging();
-			entity.Factor = this;
-		}
-		
-		private void detach_FactorAccounts(FactorAccount entity)
-		{
-			this.SendPropertyChanging();
-			entity.Factor = null;
-		}
-		
-		private void attach_FactorCreditLines(FactorCreditLine entity)
-		{
-			this.SendPropertyChanging();
-			entity.Factor = this;
-		}
-		
-		private void detach_FactorCreditLines(FactorCreditLine entity)
-		{
-			this.SendPropertyChanging();
-			entity.Factor = null;
-		}
-		
 		private void attach_BuyerCases(Case entity)
 		{
 			this.SendPropertyChanging();
@@ -8210,6 +7148,30 @@ namespace CMBC.EasyFactor.DB.dbml
 			entity.SellerFactor = null;
 		}
 		
+		private void attach_FactorAccounts(FactorAccount entity)
+		{
+			this.SendPropertyChanging();
+			entity.Factor = this;
+		}
+		
+		private void detach_FactorAccounts(FactorAccount entity)
+		{
+			this.SendPropertyChanging();
+			entity.Factor = null;
+		}
+		
+		private void attach_FactorCreditLines(FactorCreditLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.Factor = this;
+		}
+		
+		private void detach_FactorCreditLines(FactorCreditLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.Factor = null;
+		}
+		
 		private void attach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
 		{
 			this.SendPropertyChanging();
@@ -8223,907 +7185,761 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 	}
 	
-	[Table(Name="dbo.CDA")]
-	public partial class CDA : INotifyPropertyChanging, INotifyPropertyChanged
+	[Table(Name="dbo.FactorAccount")]
+	public partial class FactorAccount : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _CDAID;
+		private string _AccountID;
 		
-		private string _CaseCode;
+		private string _FactorCode;
 		
-		private System.Nullable<bool> _IsRecoarse;
+		private string _AccountNo;
 		
-		private string _IsNotice;
+		private string _AccountCurrency;
 		
-		private string _AssignType;
+		private string _AccountType;
 		
-		private string _CreditCoverCurr;
+		private string _AccountSWIFT;
 		
-		private System.Nullable<double> _CreditCover;
+		private string _HaveInterAccount;
 		
-		private System.Nullable<bool> _IsCreditCoverRevolving;
+		private string _IntermediaryBank;
 		
-		private System.Nullable<double> _PUGProportion;
+		private string _InterBankSWIFT;
 		
-		private System.Nullable<System.DateTime> _CreditCoverPeriodBegin;
+		private System.Nullable<bool> _IsDefault;
 		
-		private System.Nullable<System.DateTime> _CreditCoverPeriodEnd;
+		private string _Commment;
 		
-		private System.Nullable<int> _PUGPeriod;
-		
-		private System.Nullable<int> _ReassignGracePeriod;
-		
-		private string _FinanceLineCurr;
-		
-		private System.Nullable<double> _FinanceLine;
-		
-		private System.Nullable<System.DateTime> _FinanceLinePeriodBegin;
-		
-		private System.Nullable<System.DateTime> _FinanceLinePeriodEnd;
-		
-		private System.Nullable<double> _FinanceProportion;
-		
-		private string _OrderNumber;
-		
-		private string _PaymentTerms;
-		
-		private System.Nullable<int> _FinanceGracePeriod;
-		
-		private System.Nullable<double> _Deductibles;
-		
-		private System.Nullable<double> _LossThreshold;
-		
-		private System.Nullable<double> _Price;
-		
-		private System.Nullable<double> _EFPrice;
-		
-		private System.Nullable<double> _IFPrice;
-		
-		private string _CommissonType;
-		
-		private string _CommissionTypeComment;
-		
-		private string _HandFeeCurr;
-		
-		private System.Nullable<double> _HandFee;
-		
-		private System.Nullable<System.DateTime> _CDADueDate;
-		
-		private string _CDAStatus;
-		
-		private string _NoticeMethod;
-		
-		private string _NoticePerson;
-		
-		private string _Email;
-		
-		private string _Fax;
-		
-		private string _Comment;
-		
-		private string _CreateUserName;
-		
-		private EntitySet<InvoiceAssignBatch> _InvoiceAssignBatches;
-		
-		private EntitySet<InvoicePaymentBatch> _InvoicePaymentBatches;
-		
-		private EntitySet<InvoiceFinanceBatch> _InvoiceFinanceBatches;
-		
-		private EntityRef<Case> _Case;
+		private EntityRef<Factor> _Factor;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnCDACodeChanging(string value);
-    partial void OnCDACodeChanged();
-    partial void OnCaseCodeChanging(string value);
-    partial void OnCaseCodeChanged();
-    partial void OnIsRecoarseChanging(System.Nullable<bool> value);
-    partial void OnIsRecoarseChanged();
-    partial void OnIsNoticeChanging(string value);
-    partial void OnIsNoticeChanged();
-    partial void OnAssignTypeChanging(string value);
-    partial void OnAssignTypeChanged();
-    partial void OnCreditCoverCurrChanging(string value);
-    partial void OnCreditCoverCurrChanged();
-    partial void OnCreditCoverChanging(System.Nullable<double> value);
-    partial void OnCreditCoverChanged();
-    partial void OnIsCreditCoverRevolvingChanging(System.Nullable<bool> value);
-    partial void OnIsCreditCoverRevolvingChanged();
-    partial void OnPUGProportionChanging(System.Nullable<double> value);
-    partial void OnPUGProportionChanged();
-    partial void OnCreditCoverPeriodBeginChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreditCoverPeriodBeginChanged();
-    partial void OnCreditCoverPeriodEndChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreditCoverPeriodEndChanged();
-    partial void OnPUGPeriodChanging(System.Nullable<int> value);
-    partial void OnPUGPeriodChanged();
-    partial void OnReassignGracePeriodChanging(System.Nullable<int> value);
-    partial void OnReassignGracePeriodChanged();
-    partial void OnFinanceLineCurrChanging(string value);
-    partial void OnFinanceLineCurrChanged();
-    partial void OnFinanceLineChanging(System.Nullable<double> value);
-    partial void OnFinanceLineChanged();
-    partial void OnFinanceLinePeriodBeginChanging(System.Nullable<System.DateTime> value);
-    partial void OnFinanceLinePeriodBeginChanged();
-    partial void OnFinanceLinePeriodEndChanging(System.Nullable<System.DateTime> value);
-    partial void OnFinanceLinePeriodEndChanged();
-    partial void OnFinanceProportionChanging(System.Nullable<double> value);
-    partial void OnFinanceProportionChanged();
-    partial void OnOrderNumberChanging(string value);
-    partial void OnOrderNumberChanged();
-    partial void OnPaymentTermsChanging(string value);
-    partial void OnPaymentTermsChanged();
-    partial void OnFinanceGracePeriodChanging(System.Nullable<int> value);
-    partial void OnFinanceGracePeriodChanged();
-    partial void OnDeductiblesChanging(System.Nullable<double> value);
-    partial void OnDeductiblesChanged();
-    partial void OnLossThresholdChanging(System.Nullable<double> value);
-    partial void OnLossThresholdChanged();
-    partial void OnPriceChanging(System.Nullable<double> value);
-    partial void OnPriceChanged();
-    partial void OnEFPriceChanging(System.Nullable<double> value);
-    partial void OnEFPriceChanged();
-    partial void OnIFPriceChanging(System.Nullable<double> value);
-    partial void OnIFPriceChanged();
-    partial void OnCommissionTypeChanging(string value);
-    partial void OnCommissionTypeChanged();
-    partial void OnCommissionTypeCommentChanging(string value);
-    partial void OnCommissionTypeCommentChanged();
-    partial void OnHandFeeCurrChanging(string value);
-    partial void OnHandFeeCurrChanged();
-    partial void OnHandFeeChanging(System.Nullable<double> value);
-    partial void OnHandFeeChanged();
-    partial void OnCDASignDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCDASignDateChanged();
-    partial void OnCDAStatusChanging(string value);
-    partial void OnCDAStatusChanged();
-    partial void OnNoticeMethodChanging(string value);
-    partial void OnNoticeMethodChanged();
-    partial void OnNoticePersonChanging(string value);
-    partial void OnNoticePersonChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnFaxChanging(string value);
-    partial void OnFaxChanged();
+    partial void OnAccountIDChanging(string value);
+    partial void OnAccountIDChanged();
+    partial void OnFactorCodeChanging(string value);
+    partial void OnFactorCodeChanged();
+    partial void OnAccountNoChanging(string value);
+    partial void OnAccountNoChanged();
+    partial void OnAccountCurrencyChanging(string value);
+    partial void OnAccountCurrencyChanged();
+    partial void OnAccountTypeChanging(string value);
+    partial void OnAccountTypeChanged();
+    partial void OnAccountSWIFTChanging(string value);
+    partial void OnAccountSWIFTChanged();
+    partial void OnHaveInterAccountChanging(string value);
+    partial void OnHaveInterAccountChanged();
+    partial void OnIntermediaryBankChanging(string value);
+    partial void OnIntermediaryBankChanged();
+    partial void OnInterBankSWIFTChanging(string value);
+    partial void OnInterBankSWIFTChanged();
+    partial void OnIsDefaultChanging(System.Nullable<bool> value);
+    partial void OnIsDefaultChanged();
+    partial void OnCommmentChanging(string value);
+    partial void OnCommmentChanged();
+    #endregion
+		
+		public FactorAccount()
+		{
+			this._Factor = default(EntityRef<Factor>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_AccountID", DbType="NVarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string AccountID
+		{
+			get
+			{
+				return this._AccountID;
+			}
+			set
+			{
+				if ((this._AccountID != value))
+				{
+					this.OnAccountIDChanging(value);
+					this.SendPropertyChanging();
+					this._AccountID = value;
+					this.SendPropertyChanged("AccountID");
+					this.OnAccountIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FactorCode", DbType="Char(7)")]
+		public string FactorCode
+		{
+			get
+			{
+				return this._FactorCode;
+			}
+			set
+			{
+				if ((this._FactorCode != value))
+				{
+					if (this._Factor.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFactorCodeChanging(value);
+					this.SendPropertyChanging();
+					this._FactorCode = value;
+					this.SendPropertyChanged("FactorCode");
+					this.OnFactorCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_AccountNo", DbType="VarChar(200)")]
+		public string AccountNo
+		{
+			get
+			{
+				return this._AccountNo;
+			}
+			set
+			{
+				if ((this._AccountNo != value))
+				{
+					this.OnAccountNoChanging(value);
+					this.SendPropertyChanging();
+					this._AccountNo = value;
+					this.SendPropertyChanged("AccountNo");
+					this.OnAccountNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_AccountCurrency", DbType="NChar(3)")]
+		public string AccountCurrency
+		{
+			get
+			{
+				return this._AccountCurrency;
+			}
+			set
+			{
+				if ((this._AccountCurrency != value))
+				{
+					this.OnAccountCurrencyChanging(value);
+					this.SendPropertyChanging();
+					this._AccountCurrency = value;
+					this.SendPropertyChanged("AccountCurrency");
+					this.OnAccountCurrencyChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_AccountType", DbType="NVarChar(50)")]
+		public string AccountType
+		{
+			get
+			{
+				return this._AccountType;
+			}
+			set
+			{
+				if ((this._AccountType != value))
+				{
+					this.OnAccountTypeChanging(value);
+					this.SendPropertyChanging();
+					this._AccountType = value;
+					this.SendPropertyChanged("AccountType");
+					this.OnAccountTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_AccountSWIFT", DbType="NVarChar(50)")]
+		public string AccountSWIFT
+		{
+			get
+			{
+				return this._AccountSWIFT;
+			}
+			set
+			{
+				if ((this._AccountSWIFT != value))
+				{
+					this.OnAccountSWIFTChanging(value);
+					this.SendPropertyChanging();
+					this._AccountSWIFT = value;
+					this.SendPropertyChanged("AccountSWIFT");
+					this.OnAccountSWIFTChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_HaveInterAccount", DbType="NVarChar(50)")]
+		public string HaveInterAccount
+		{
+			get
+			{
+				return this._HaveInterAccount;
+			}
+			set
+			{
+				if ((this._HaveInterAccount != value))
+				{
+					this.OnHaveInterAccountChanging(value);
+					this.SendPropertyChanging();
+					this._HaveInterAccount = value;
+					this.SendPropertyChanged("HaveInterAccount");
+					this.OnHaveInterAccountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IntermediaryBank", DbType="NVarChar(50)")]
+		public string IntermediaryBank
+		{
+			get
+			{
+				return this._IntermediaryBank;
+			}
+			set
+			{
+				if ((this._IntermediaryBank != value))
+				{
+					this.OnIntermediaryBankChanging(value);
+					this.SendPropertyChanging();
+					this._IntermediaryBank = value;
+					this.SendPropertyChanged("IntermediaryBank");
+					this.OnIntermediaryBankChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_InterBankSWIFT", DbType="NVarChar(50)")]
+		public string InterBankSWIFT
+		{
+			get
+			{
+				return this._InterBankSWIFT;
+			}
+			set
+			{
+				if ((this._InterBankSWIFT != value))
+				{
+					this.OnInterBankSWIFTChanging(value);
+					this.SendPropertyChanging();
+					this._InterBankSWIFT = value;
+					this.SendPropertyChanged("InterBankSWIFT");
+					this.OnInterBankSWIFTChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsDefault", DbType="Bit")]
+		public System.Nullable<bool> IsDefault
+		{
+			get
+			{
+				return this._IsDefault;
+			}
+			set
+			{
+				if ((this._IsDefault != value))
+				{
+					this.OnIsDefaultChanging(value);
+					this.SendPropertyChanging();
+					this._IsDefault = value;
+					this.SendPropertyChanged("IsDefault");
+					this.OnIsDefaultChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Commment", DbType="NVarChar(200)")]
+		public string Commment
+		{
+			get
+			{
+				return this._Commment;
+			}
+			set
+			{
+				if ((this._Commment != value))
+				{
+					this.OnCommmentChanging(value);
+					this.SendPropertyChanging();
+					this._Commment = value;
+					this.SendPropertyChanged("Commment");
+					this.OnCommmentChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Factor_FactorAccount", Storage="_Factor", ThisKey="FactorCode", IsForeignKey=true)]
+		public Factor Factor
+		{
+			get
+			{
+				return this._Factor.Entity;
+			}
+			set
+			{
+				Factor previousValue = this._Factor.Entity;
+				if (((previousValue != value) 
+							|| (this._Factor.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Factor.Entity = null;
+						previousValue.FactorAccounts.Remove(this);
+					}
+					this._Factor.Entity = value;
+					if ((value != null))
+					{
+						value.FactorAccounts.Add(this);
+						this._FactorCode = value.FactorCode;
+					}
+					else
+					{
+						this._FactorCode = default(string);
+					}
+					this.SendPropertyChanged("Factor");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.FactorCreditLine")]
+	public partial class FactorCreditLine : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CreditLineID;
+		
+		private string _FactorCode;
+		
+		private string _CreditLineType;
+		
+		private string _CreditLineCurrency;
+		
+		private double _CreditLine;
+		
+		private System.DateTime _PeriodBegin;
+		
+		private System.DateTime _PeriodEnd;
+		
+		private string _ApproveNo;
+		
+		private string _ApproveType;
+		
+		private string _CreditLineStatus;
+		
+		private string _FreezeReason;
+		
+		private string _Freezer;
+		
+		private System.Nullable<System.DateTime> _FreezeDate;
+		
+		private string _UnfreezeReason;
+		
+		private string _Unfreezer;
+		
+		private System.Nullable<System.DateTime> _UnfreezeDate;
+		
+		private string _Comment;
+		
+		private string _CreateUserName;
+		
+		private EntityRef<Factor> _Factor;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCreditLineIDChanging(int value);
+    partial void OnCreditLineIDChanged();
+    partial void OnFactorCodeChanging(string value);
+    partial void OnFactorCodeChanged();
+    partial void OnCreditLineTypeChanging(string value);
+    partial void OnCreditLineTypeChanged();
+    partial void OnCreditLineCurrencyChanging(string value);
+    partial void OnCreditLineCurrencyChanged();
+    partial void OnCreditLineChanging(double value);
+    partial void OnCreditLineChanged();
+    partial void OnPeriodBeginChanging(System.DateTime value);
+    partial void OnPeriodBeginChanged();
+    partial void OnPeriodEndChanging(System.DateTime value);
+    partial void OnPeriodEndChanged();
+    partial void OnApproveNoChanging(string value);
+    partial void OnApproveNoChanged();
+    partial void OnApproveTypeChanging(string value);
+    partial void OnApproveTypeChanged();
+    partial void OnCreditLineStatusChanging(string value);
+    partial void OnCreditLineStatusChanged();
+    partial void OnFreezeReasonChanging(string value);
+    partial void OnFreezeReasonChanged();
+    partial void OnFreezerChanging(string value);
+    partial void OnFreezerChanged();
+    partial void OnFreezeDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnFreezeDateChanged();
+    partial void OnUnfreezeReasonChanging(string value);
+    partial void OnUnfreezeReasonChanged();
+    partial void OnUnfreezerChanging(string value);
+    partial void OnUnfreezerChanged();
+    partial void OnUnfreezeDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnUnfreezeDateChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
     #endregion
 		
-		public CDA()
+		public FactorCreditLine()
 		{
-			this._InvoiceAssignBatches = new EntitySet<InvoiceAssignBatch>(new Action<InvoiceAssignBatch>(this.attach_InvoiceAssignBatches), new Action<InvoiceAssignBatch>(this.detach_InvoiceAssignBatches));
-			this._InvoicePaymentBatches = new EntitySet<InvoicePaymentBatch>(new Action<InvoicePaymentBatch>(this.attach_InvoicePaymentBatches), new Action<InvoicePaymentBatch>(this.detach_InvoicePaymentBatches));
-			this._InvoiceFinanceBatches = new EntitySet<InvoiceFinanceBatch>(new Action<InvoiceFinanceBatch>(this.attach_InvoiceFinanceBatches), new Action<InvoiceFinanceBatch>(this.detach_InvoiceFinanceBatches));
-			this._Case = default(EntityRef<Case>);
+			this._Factor = default(EntityRef<Factor>);
 			OnCreated();
 		}
 		
-		[Column(Storage="_CDAID", DbType="Varchar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string CDACode
+		[Column(Storage="_CreditLineID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CreditLineID
 		{
 			get
 			{
-				return this._CDAID;
+				return this._CreditLineID;
 			}
 			set
 			{
-				if ((this._CDAID != value))
+				if ((this._CreditLineID != value))
 				{
-					this.OnCDACodeChanging(value);
+					this.OnCreditLineIDChanging(value);
 					this.SendPropertyChanging();
-					this._CDAID = value;
-					this.SendPropertyChanged("CDACode");
-					this.OnCDACodeChanged();
+					this._CreditLineID = value;
+					this.SendPropertyChanged("CreditLineID");
+					this.OnCreditLineIDChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_CaseCode", DbType="NChar(13)")]
-		public string CaseCode
+		[Column(Storage="_FactorCode", DbType="Char(7) NOT NULL", CanBeNull=false)]
+		public string FactorCode
 		{
 			get
 			{
-				return this._CaseCode;
+				return this._FactorCode;
 			}
 			set
 			{
-				if ((this._CaseCode != value))
+				if ((this._FactorCode != value))
 				{
-					if (this._Case.HasLoadedOrAssignedValue)
+					if (this._Factor.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnCaseCodeChanging(value);
+					this.OnFactorCodeChanging(value);
 					this.SendPropertyChanging();
-					this._CaseCode = value;
-					this.SendPropertyChanged("CaseCode");
-					this.OnCaseCodeChanged();
+					this._FactorCode = value;
+					this.SendPropertyChanged("FactorCode");
+					this.OnFactorCodeChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_IsRecoarse", DbType="bit")]
-		public System.Nullable<bool> IsRecoarse
+		[Column(Storage="_CreditLineType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreditLineType
 		{
 			get
 			{
-				return this._IsRecoarse;
+				return this._CreditLineType;
 			}
 			set
 			{
-				if ((this._IsRecoarse != value))
+				if ((this._CreditLineType != value))
 				{
-					this.OnIsRecoarseChanging(value);
+					this.OnCreditLineTypeChanging(value);
 					this.SendPropertyChanging();
-					this._IsRecoarse = value;
-					this.SendPropertyChanged("IsRecoarse");
-					this.OnIsRecoarseChanged();
+					this._CreditLineType = value;
+					this.SendPropertyChanged("CreditLineType");
+					this.OnCreditLineTypeChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_IsNotice", DbType="NVarChar(50)")]
-		public string IsNotice
+		[Column(Storage="_CreditLineCurrency", DbType="Char(3) NOT NULL", CanBeNull=false)]
+		public string CreditLineCurrency
 		{
 			get
 			{
-				return this._IsNotice;
+				return this._CreditLineCurrency;
 			}
 			set
 			{
-				if ((this._IsNotice != value))
+				if ((this._CreditLineCurrency != value))
 				{
-					this.OnIsNoticeChanging(value);
+					this.OnCreditLineCurrencyChanging(value);
 					this.SendPropertyChanging();
-					this._IsNotice = value;
-					this.SendPropertyChanged("IsNotice");
-					this.OnIsNoticeChanged();
+					this._CreditLineCurrency = value;
+					this.SendPropertyChanged("CreditLineCurrency");
+					this.OnCreditLineCurrencyChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_AssignType", DbType="NVarChar(50)")]
-		public string AssignType
+		[Column(Storage="_CreditLine", DbType="Float NOT NULL")]
+		public double CreditLine
 		{
 			get
 			{
-				return this._AssignType;
+				return this._CreditLine;
 			}
 			set
 			{
-				if ((this._AssignType != value))
+				if ((this._CreditLine != value))
 				{
-					this.OnAssignTypeChanging(value);
+					this.OnCreditLineChanging(value);
 					this.SendPropertyChanging();
-					this._AssignType = value;
-					this.SendPropertyChanged("AssignType");
-					this.OnAssignTypeChanged();
+					this._CreditLine = value;
+					this.SendPropertyChanged("CreditLine");
+					this.OnCreditLineChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_CreditCoverCurr", DbType="NChar(3)")]
-		public string CreditCoverCurr
+		[Column(Storage="_PeriodBegin", DbType="DateTime NOT NULL")]
+		public System.DateTime PeriodBegin
 		{
 			get
 			{
-				return this._CreditCoverCurr;
+				return this._PeriodBegin;
 			}
 			set
 			{
-				if ((this._CreditCoverCurr != value))
+				if ((this._PeriodBegin != value))
 				{
-					this.OnCreditCoverCurrChanging(value);
+					this.OnPeriodBeginChanging(value);
 					this.SendPropertyChanging();
-					this._CreditCoverCurr = value;
-					this.SendPropertyChanged("CreditCoverCurr");
-					this.OnCreditCoverCurrChanged();
+					this._PeriodBegin = value;
+					this.SendPropertyChanged("PeriodBegin");
+					this.OnPeriodBeginChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_CreditCover", DbType="Float")]
-		public System.Nullable<double> CreditCover
+		[Column(Storage="_PeriodEnd", DbType="DateTime NOT NULL")]
+		public System.DateTime PeriodEnd
 		{
 			get
 			{
-				return this._CreditCover;
+				return this._PeriodEnd;
 			}
 			set
 			{
-				if ((this._CreditCover != value))
+				if ((this._PeriodEnd != value))
 				{
-					this.OnCreditCoverChanging(value);
+					this.OnPeriodEndChanging(value);
 					this.SendPropertyChanging();
-					this._CreditCover = value;
-					this.SendPropertyChanged("CreditCover");
-					this.OnCreditCoverChanged();
+					this._PeriodEnd = value;
+					this.SendPropertyChanged("PeriodEnd");
+					this.OnPeriodEndChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_IsCreditCoverRevolving", DbType="bit")]
-		public System.Nullable<bool> IsCreditCoverRevolving
+		[Column(Storage="_ApproveNo", DbType="NVarChar(50)")]
+		public string ApproveNo
 		{
 			get
 			{
-				return this._IsCreditCoverRevolving;
+				return this._ApproveNo;
 			}
 			set
 			{
-				if ((this._IsCreditCoverRevolving != value))
+				if ((this._ApproveNo != value))
 				{
-					this.OnIsCreditCoverRevolvingChanging(value);
+					this.OnApproveNoChanging(value);
 					this.SendPropertyChanging();
-					this._IsCreditCoverRevolving = value;
-					this.SendPropertyChanged("IsCreditCoverRevolving");
-					this.OnIsCreditCoverRevolvingChanged();
+					this._ApproveNo = value;
+					this.SendPropertyChanged("ApproveNo");
+					this.OnApproveNoChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_PUGProportion", DbType="Float")]
-		public System.Nullable<double> PUGProportion
+		[Column(Storage="_ApproveType", DbType="NVarChar(50)")]
+		public string ApproveType
 		{
 			get
 			{
-				return this._PUGProportion;
+				return this._ApproveType;
 			}
 			set
 			{
-				if ((this._PUGProportion != value))
+				if ((this._ApproveType != value))
 				{
-					this.OnPUGProportionChanging(value);
+					this.OnApproveTypeChanging(value);
 					this.SendPropertyChanging();
-					this._PUGProportion = value;
-					this.SendPropertyChanged("PUGProportion");
-					this.OnPUGProportionChanged();
+					this._ApproveType = value;
+					this.SendPropertyChanged("ApproveType");
+					this.OnApproveTypeChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_CreditCoverPeriodBegin", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreditCoverPeriodBegin
+		[Column(Storage="_CreditLineStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreditLineStatus
 		{
 			get
 			{
-				return this._CreditCoverPeriodBegin;
+				return this._CreditLineStatus;
 			}
 			set
 			{
-				if ((this._CreditCoverPeriodBegin != value))
+				if ((this._CreditLineStatus != value))
 				{
-					this.OnCreditCoverPeriodBeginChanging(value);
+					this.OnCreditLineStatusChanging(value);
 					this.SendPropertyChanging();
-					this._CreditCoverPeriodBegin = value;
-					this.SendPropertyChanged("CreditCoverPeriodBegin");
-					this.OnCreditCoverPeriodBeginChanged();
+					this._CreditLineStatus = value;
+					this.SendPropertyChanged("CreditLineStatus");
+					this.OnCreditLineStatusChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_CreditCoverPeriodEnd", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreditCoverPeriodEnd
+		[Column(Storage="_FreezeReason", DbType="NVarChar(50)")]
+		public string FreezeReason
 		{
 			get
 			{
-				return this._CreditCoverPeriodEnd;
+				return this._FreezeReason;
 			}
 			set
 			{
-				if ((this._CreditCoverPeriodEnd != value))
+				if ((this._FreezeReason != value))
 				{
-					this.OnCreditCoverPeriodEndChanging(value);
+					this.OnFreezeReasonChanging(value);
 					this.SendPropertyChanging();
-					this._CreditCoverPeriodEnd = value;
-					this.SendPropertyChanged("CreditCoverPeriodEnd");
-					this.OnCreditCoverPeriodEndChanged();
+					this._FreezeReason = value;
+					this.SendPropertyChanged("FreezeReason");
+					this.OnFreezeReasonChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_PUGPeriod", DbType="Int")]
-		public System.Nullable<int> PUGPeriod
+		[Column(Storage="_Freezer", DbType="NVarChar(50)")]
+		public string Freezer
 		{
 			get
 			{
-				return this._PUGPeriod;
+				return this._Freezer;
 			}
 			set
 			{
-				if ((this._PUGPeriod != value))
+				if ((this._Freezer != value))
 				{
-					this.OnPUGPeriodChanging(value);
+					this.OnFreezerChanging(value);
 					this.SendPropertyChanging();
-					this._PUGPeriod = value;
-					this.SendPropertyChanged("PUGPeriod");
-					this.OnPUGPeriodChanged();
+					this._Freezer = value;
+					this.SendPropertyChanged("Freezer");
+					this.OnFreezerChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_ReassignGracePeriod", DbType="int")]
-		public System.Nullable<int> ReassignGracePeriod
+		[Column(Storage="_FreezeDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FreezeDate
 		{
 			get
 			{
-				return this._ReassignGracePeriod;
+				return this._FreezeDate;
 			}
 			set
 			{
-				if ((this._ReassignGracePeriod != value))
+				if ((this._FreezeDate != value))
 				{
-					this.OnReassignGracePeriodChanging(value);
+					this.OnFreezeDateChanging(value);
 					this.SendPropertyChanging();
-					this._ReassignGracePeriod = value;
-					this.SendPropertyChanged("ReassignGracePeriod");
-					this.OnReassignGracePeriodChanged();
+					this._FreezeDate = value;
+					this.SendPropertyChanged("FreezeDate");
+					this.OnFreezeDateChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_FinanceLineCurr", DbType="NChar(3)")]
-		public string FinanceLineCurr
+		[Column(Storage="_UnfreezeReason", DbType="NVarChar(50)")]
+		public string UnfreezeReason
 		{
 			get
 			{
-				return this._FinanceLineCurr;
+				return this._UnfreezeReason;
 			}
 			set
 			{
-				if ((this._FinanceLineCurr != value))
+				if ((this._UnfreezeReason != value))
 				{
-					this.OnFinanceLineCurrChanging(value);
+					this.OnUnfreezeReasonChanging(value);
 					this.SendPropertyChanging();
-					this._FinanceLineCurr = value;
-					this.SendPropertyChanged("FinanceLineCurr");
-					this.OnFinanceLineCurrChanged();
+					this._UnfreezeReason = value;
+					this.SendPropertyChanged("UnfreezeReason");
+					this.OnUnfreezeReasonChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_FinanceLine", DbType="Float")]
-		public System.Nullable<double> FinanceLine
+		[Column(Storage="_Unfreezer", DbType="NVarChar(50)")]
+		public string Unfreezer
 		{
 			get
 			{
-				return this._FinanceLine;
+				return this._Unfreezer;
 			}
 			set
 			{
-				if ((this._FinanceLine != value))
+				if ((this._Unfreezer != value))
 				{
-					this.OnFinanceLineChanging(value);
+					this.OnUnfreezerChanging(value);
 					this.SendPropertyChanging();
-					this._FinanceLine = value;
-					this.SendPropertyChanged("FinanceLine");
-					this.OnFinanceLineChanged();
+					this._Unfreezer = value;
+					this.SendPropertyChanged("Unfreezer");
+					this.OnUnfreezerChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_FinanceLinePeriodBegin", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FinanceLinePeriodBegin
+		[Column(Storage="_UnfreezeDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UnfreezeDate
 		{
 			get
 			{
-				return this._FinanceLinePeriodBegin;
+				return this._UnfreezeDate;
 			}
 			set
 			{
-				if ((this._FinanceLinePeriodBegin != value))
+				if ((this._UnfreezeDate != value))
 				{
-					this.OnFinanceLinePeriodBeginChanging(value);
+					this.OnUnfreezeDateChanging(value);
 					this.SendPropertyChanging();
-					this._FinanceLinePeriodBegin = value;
-					this.SendPropertyChanged("FinanceLinePeriodBegin");
-					this.OnFinanceLinePeriodBeginChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FinanceLinePeriodEnd", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FinanceLinePeriodEnd
-		{
-			get
-			{
-				return this._FinanceLinePeriodEnd;
-			}
-			set
-			{
-				if ((this._FinanceLinePeriodEnd != value))
-				{
-					this.OnFinanceLinePeriodEndChanging(value);
-					this.SendPropertyChanging();
-					this._FinanceLinePeriodEnd = value;
-					this.SendPropertyChanged("FinanceLinePeriodEnd");
-					this.OnFinanceLinePeriodEndChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FinanceProportion", DbType="Float")]
-		public System.Nullable<double> FinanceProportion
-		{
-			get
-			{
-				return this._FinanceProportion;
-			}
-			set
-			{
-				if ((this._FinanceProportion != value))
-				{
-					this.OnFinanceProportionChanging(value);
-					this.SendPropertyChanging();
-					this._FinanceProportion = value;
-					this.SendPropertyChanged("FinanceProportion");
-					this.OnFinanceProportionChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_OrderNumber", DbType="NVarChar(50)")]
-		public string OrderNumber
-		{
-			get
-			{
-				return this._OrderNumber;
-			}
-			set
-			{
-				if ((this._OrderNumber != value))
-				{
-					this.OnOrderNumberChanging(value);
-					this.SendPropertyChanging();
-					this._OrderNumber = value;
-					this.SendPropertyChanged("OrderNumber");
-					this.OnOrderNumberChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PaymentTerms", DbType="NVarChar(500)")]
-		public string PaymentTerms
-		{
-			get
-			{
-				return this._PaymentTerms;
-			}
-			set
-			{
-				if ((this._PaymentTerms != value))
-				{
-					this.OnPaymentTermsChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentTerms = value;
-					this.SendPropertyChanged("PaymentTerms");
-					this.OnPaymentTermsChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FinanceGracePeriod", DbType="int")]
-		public System.Nullable<int> FinanceGracePeriod
-		{
-			get
-			{
-				return this._FinanceGracePeriod;
-			}
-			set
-			{
-				if ((this._FinanceGracePeriod != value))
-				{
-					this.OnFinanceGracePeriodChanging(value);
-					this.SendPropertyChanging();
-					this._FinanceGracePeriod = value;
-					this.SendPropertyChanged("FinanceGracePeriod");
-					this.OnFinanceGracePeriodChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Deductibles", DbType="Float")]
-		public System.Nullable<double> Deductibles
-		{
-			get
-			{
-				return this._Deductibles;
-			}
-			set
-			{
-				if ((this._Deductibles != value))
-				{
-					this.OnDeductiblesChanging(value);
-					this.SendPropertyChanging();
-					this._Deductibles = value;
-					this.SendPropertyChanged("Deductibles");
-					this.OnDeductiblesChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_LossThreshold", DbType="Float")]
-		public System.Nullable<double> LossThreshold
-		{
-			get
-			{
-				return this._LossThreshold;
-			}
-			set
-			{
-				if ((this._LossThreshold != value))
-				{
-					this.OnLossThresholdChanging(value);
-					this.SendPropertyChanging();
-					this._LossThreshold = value;
-					this.SendPropertyChanged("LossThreshold");
-					this.OnLossThresholdChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Price", DbType="Float")]
-		public System.Nullable<double> Price
-		{
-			get
-			{
-				return this._Price;
-			}
-			set
-			{
-				if ((this._Price != value))
-				{
-					this.OnPriceChanging(value);
-					this.SendPropertyChanging();
-					this._Price = value;
-					this.SendPropertyChanged("Price");
-					this.OnPriceChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_EFPrice", DbType="Float")]
-		public System.Nullable<double> EFPrice
-		{
-			get
-			{
-				return this._EFPrice;
-			}
-			set
-			{
-				if ((this._EFPrice != value))
-				{
-					this.OnEFPriceChanging(value);
-					this.SendPropertyChanging();
-					this._EFPrice = value;
-					this.SendPropertyChanged("EFPrice");
-					this.OnEFPriceChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_IFPrice", DbType="Float")]
-		public System.Nullable<double> IFPrice
-		{
-			get
-			{
-				return this._IFPrice;
-			}
-			set
-			{
-				if ((this._IFPrice != value))
-				{
-					this.OnIFPriceChanging(value);
-					this.SendPropertyChanging();
-					this._IFPrice = value;
-					this.SendPropertyChanged("IFPrice");
-					this.OnIFPriceChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CommissonType", DbType="NVarChar(50)")]
-		public string CommissionType
-		{
-			get
-			{
-				return this._CommissonType;
-			}
-			set
-			{
-				if ((this._CommissonType != value))
-				{
-					this.OnCommissionTypeChanging(value);
-					this.SendPropertyChanging();
-					this._CommissonType = value;
-					this.SendPropertyChanged("CommissionType");
-					this.OnCommissionTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CommissionTypeComment", DbType="NVarChar(500)")]
-		public string CommissionTypeComment
-		{
-			get
-			{
-				return this._CommissionTypeComment;
-			}
-			set
-			{
-				if ((this._CommissionTypeComment != value))
-				{
-					this.OnCommissionTypeCommentChanging(value);
-					this.SendPropertyChanging();
-					this._CommissionTypeComment = value;
-					this.SendPropertyChanged("CommissionTypeComment");
-					this.OnCommissionTypeCommentChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_HandFeeCurr", DbType="NChar(3)")]
-		public string HandFeeCurr
-		{
-			get
-			{
-				return this._HandFeeCurr;
-			}
-			set
-			{
-				if ((this._HandFeeCurr != value))
-				{
-					this.OnHandFeeCurrChanging(value);
-					this.SendPropertyChanging();
-					this._HandFeeCurr = value;
-					this.SendPropertyChanged("HandFeeCurr");
-					this.OnHandFeeCurrChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_HandFee", DbType="Float")]
-		public System.Nullable<double> HandFee
-		{
-			get
-			{
-				return this._HandFee;
-			}
-			set
-			{
-				if ((this._HandFee != value))
-				{
-					this.OnHandFeeChanging(value);
-					this.SendPropertyChanging();
-					this._HandFee = value;
-					this.SendPropertyChanged("HandFee");
-					this.OnHandFeeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CDADueDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CDASignDate
-		{
-			get
-			{
-				return this._CDADueDate;
-			}
-			set
-			{
-				if ((this._CDADueDate != value))
-				{
-					this.OnCDASignDateChanging(value);
-					this.SendPropertyChanging();
-					this._CDADueDate = value;
-					this.SendPropertyChanged("CDASignDate");
-					this.OnCDASignDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CDAStatus", DbType="NVarChar(50)")]
-		public string CDAStatus
-		{
-			get
-			{
-				return this._CDAStatus;
-			}
-			set
-			{
-				if ((this._CDAStatus != value))
-				{
-					this.OnCDAStatusChanging(value);
-					this.SendPropertyChanging();
-					this._CDAStatus = value;
-					this.SendPropertyChanged("CDAStatus");
-					this.OnCDAStatusChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_NoticeMethod", DbType="NVarChar(50)")]
-		public string NoticeMethod
-		{
-			get
-			{
-				return this._NoticeMethod;
-			}
-			set
-			{
-				if ((this._NoticeMethod != value))
-				{
-					this.OnNoticeMethodChanging(value);
-					this.SendPropertyChanging();
-					this._NoticeMethod = value;
-					this.SendPropertyChanged("NoticeMethod");
-					this.OnNoticeMethodChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_NoticePerson", DbType="NVarChar(50)")]
-		public string NoticePerson
-		{
-			get
-			{
-				return this._NoticePerson;
-			}
-			set
-			{
-				if ((this._NoticePerson != value))
-				{
-					this.OnNoticePersonChanging(value);
-					this.SendPropertyChanging();
-					this._NoticePerson = value;
-					this.SendPropertyChanged("NoticePerson");
-					this.OnNoticePersonChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Email", DbType="NVarChar(50)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Fax", DbType="NVarChar(50)")]
-		public string Fax
-		{
-			get
-			{
-				return this._Fax;
-			}
-			set
-			{
-				if ((this._Fax != value))
-				{
-					this.OnFaxChanging(value);
-					this.SendPropertyChanging();
-					this._Fax = value;
-					this.SendPropertyChanged("Fax");
-					this.OnFaxChanged();
+					this._UnfreezeDate = value;
+					this.SendPropertyChanged("UnfreezeDate");
+					this.OnUnfreezeDateChanged();
 				}
 			}
 		}
@@ -9168,75 +7984,36 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="CDA_InvoiceAssignBatch", Storage="_InvoiceAssignBatches", OtherKey="CDACode")]
-		public EntitySet<InvoiceAssignBatch> InvoiceAssignBatches
+		[Association(Name="Factor_FactorCreditLine", Storage="_Factor", ThisKey="FactorCode", IsForeignKey=true)]
+		public Factor Factor
 		{
 			get
 			{
-				return this._InvoiceAssignBatches;
+				return this._Factor.Entity;
 			}
 			set
 			{
-				this._InvoiceAssignBatches.Assign(value);
-			}
-		}
-		
-		[Association(Name="CDA_InvoicePaymentBatch", Storage="_InvoicePaymentBatches", OtherKey="CDACode")]
-		public EntitySet<InvoicePaymentBatch> InvoicePaymentBatches
-		{
-			get
-			{
-				return this._InvoicePaymentBatches;
-			}
-			set
-			{
-				this._InvoicePaymentBatches.Assign(value);
-			}
-		}
-		
-		[Association(Name="CDA_InvoiceFinanceBatch", Storage="_InvoiceFinanceBatches", OtherKey="CDACode")]
-		public EntitySet<InvoiceFinanceBatch> InvoiceFinanceBatches
-		{
-			get
-			{
-				return this._InvoiceFinanceBatches;
-			}
-			set
-			{
-				this._InvoiceFinanceBatches.Assign(value);
-			}
-		}
-		
-		[Association(Name="Case_CDA", Storage="_Case", ThisKey="CaseCode", IsForeignKey=true)]
-		public Case Case
-		{
-			get
-			{
-				return this._Case.Entity;
-			}
-			set
-			{
-				Case previousValue = this._Case.Entity;
+				Factor previousValue = this._Factor.Entity;
 				if (((previousValue != value) 
-							|| (this._Case.HasLoadedOrAssignedValue == false)))
+							|| (this._Factor.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Case.Entity = null;
-						previousValue.CDAs.Remove(this);
+						this._Factor.Entity = null;
+						previousValue.FactorCreditLines.Remove(this);
 					}
-					this._Case.Entity = value;
+					this._Factor.Entity = value;
 					if ((value != null))
 					{
-						value.CDAs.Add(this);
-						this._CaseCode = value.CaseCode;
+						value.FactorCreditLines.Add(this);
+						this._FactorCode = value.FactorCode;
 					}
 					else
 					{
-						this._CaseCode = default(string);
+						this._FactorCode = default(string);
 					}
-					this.SendPropertyChanged("Case");
+					this.SendPropertyChanged("Factor");
 				}
 			}
 		}
@@ -9260,41 +8037,1360 @@ namespace CMBC.EasyFactor.DB.dbml
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+	}
+	
+	[Table(Name="dbo.FactorGroup")]
+	public partial class FactorGroup : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		private void attach_InvoiceAssignBatches(InvoiceAssignBatch entity)
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _GroupNo;
+		
+		private string _GroupNameCN;
+		
+		private string _GroupNameEN;
+		
+		private EntitySet<Factor> _Factors;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnGroupNoChanging(string value);
+    partial void OnGroupNoChanged();
+    partial void OnGroupNameCNChanging(string value);
+    partial void OnGroupNameCNChanged();
+    partial void OnGroupNameENChanging(string value);
+    partial void OnGroupNameENChanged();
+    #endregion
+		
+		public FactorGroup()
 		{
-			this.SendPropertyChanging();
-			entity.CDA = this;
+			this._Factors = new EntitySet<Factor>(new Action<Factor>(this.attach_Factors), new Action<Factor>(this.detach_Factors));
+			OnCreated();
 		}
 		
-		private void detach_InvoiceAssignBatches(InvoiceAssignBatch entity)
+		[Column(Storage="_GroupNo", DbType="NVarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string GroupNo
 		{
-			this.SendPropertyChanging();
-			entity.CDA = null;
+			get
+			{
+				return this._GroupNo;
+			}
+			set
+			{
+				if ((this._GroupNo != value))
+				{
+					this.OnGroupNoChanging(value);
+					this.SendPropertyChanging();
+					this._GroupNo = value;
+					this.SendPropertyChanged("GroupNo");
+					this.OnGroupNoChanged();
+				}
+			}
 		}
 		
-		private void attach_InvoicePaymentBatches(InvoicePaymentBatch entity)
+		[Column(Storage="_GroupNameCN", DbType="NVarChar(50)")]
+		public string GroupNameCN
 		{
-			this.SendPropertyChanging();
-			entity.CDA = this;
+			get
+			{
+				return this._GroupNameCN;
+			}
+			set
+			{
+				if ((this._GroupNameCN != value))
+				{
+					this.OnGroupNameCNChanging(value);
+					this.SendPropertyChanging();
+					this._GroupNameCN = value;
+					this.SendPropertyChanged("GroupNameCN");
+					this.OnGroupNameCNChanged();
+				}
+			}
 		}
 		
-		private void detach_InvoicePaymentBatches(InvoicePaymentBatch entity)
+		[Column(Storage="_GroupNameEN", DbType="NVarChar(50)")]
+		public string GroupNameEN
 		{
-			this.SendPropertyChanging();
-			entity.CDA = null;
+			get
+			{
+				return this._GroupNameEN;
+			}
+			set
+			{
+				if ((this._GroupNameEN != value))
+				{
+					this.OnGroupNameENChanging(value);
+					this.SendPropertyChanging();
+					this._GroupNameEN = value;
+					this.SendPropertyChanged("GroupNameEN");
+					this.OnGroupNameENChanged();
+				}
+			}
 		}
 		
-		private void attach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
+		[Association(Name="FactorGroup_Factor", Storage="_Factors", OtherKey="GroupNo")]
+		public EntitySet<Factor> Factors
 		{
-			this.SendPropertyChanging();
-			entity.CDA = this;
+			get
+			{
+				return this._Factors;
+			}
+			set
+			{
+				this._Factors.Assign(value);
+			}
 		}
 		
-		private void detach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Factors(Factor entity)
 		{
 			this.SendPropertyChanging();
-			entity.CDA = null;
+			entity.FactorGroup = this;
+		}
+		
+		private void detach_Factors(Factor entity)
+		{
+			this.SendPropertyChanging();
+			entity.FactorGroup = null;
+		}
+	}
+	
+	[Table(Name="dbo.Invoice")]
+	public partial class Invoice : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _InvoiceNo;
+		
+		private string _InvoiceType;
+		
+		private System.DateTime _InvoiceDate;
+		
+		private double _InvoiceAmount;
+		
+		private string _AssignBatchNo;
+		
+		private double _AssignAmount;
+		
+		private System.DateTime _DueDate;
+		
+		private System.Nullable<System.DateTime> _ValueDate;
+		
+		private System.Nullable<int> _NetPaymentTerms;
+		
+		private System.Nullable<int> _PrimaryDiscountDays;
+		
+		private System.Nullable<int> _PrimaryDiscountRate;
+		
+		private System.Nullable<int> _SecondaryDiscountDays;
+		
+		private System.Nullable<int> _SecondaryDiscountRate;
+		
+		private string _PaymentConditions;
+		
+		private string _OrderNumberReference;
+		
+		private string _InvoiceReferenceNumber;
+		
+		private bool _IsFlaw;
+		
+		private string _FlawReason;
+		
+		private string _FlawResolveReason;
+		
+		private System.Nullable<System.DateTime> _FlawResolveDate;
+		
+		private string _FlawResolveUserName;
+		
+		private string _FinanceBatchNo;
+		
+		private System.Nullable<double> _FinanceAmount;
+		
+		private System.Nullable<System.DateTime> _FinanceDate;
+		
+		private System.Nullable<System.DateTime> _FinanceDueDate;
+		
+		private string _PaymentBatchNo;
+		
+		private System.Nullable<double> _PaymentAmount;
+		
+		private System.Nullable<System.DateTime> _PaymentDate;
+		
+		private System.Nullable<double> _RefundAmount;
+		
+		private System.Nullable<System.DateTime> _RefundDate;
+		
+		private System.Nullable<double> _Commission;
+		
+		private System.Nullable<System.DateTime> _CommissionDate;
+		
+		private System.Nullable<double> _Interest;
+		
+		private System.Nullable<System.DateTime> _InterestDate;
+		
+		private System.Nullable<bool> _IsDispute;
+		
+		private string _DisputeType;
+		
+		private System.Nullable<double> _DisputeAmount;
+		
+		private string _DisputeReason;
+		
+		private System.Nullable<System.DateTime> _DisputeDate;
+		
+		private string _DisputeUserName;
+		
+		private string _DisputeResolveReason;
+		
+		private System.Nullable<System.DateTime> _DisputeResolveDate;
+		
+		private string _DisputeResolveUserName;
+		
+		private string _Comment;
+		
+		private EntityRef<InvoiceAssignBatch> _InvoiceAssignBatch;
+		
+		private EntityRef<InvoiceFinanceBatch> _InvoiceFinanceBatch;
+		
+		private EntityRef<InvoicePaymentBatch> _InvoicePaymentBatch;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnInvoiceNoChanging(string value);
+    partial void OnInvoiceNoChanged();
+    partial void OnInvoiceTypeChanging(string value);
+    partial void OnInvoiceTypeChanged();
+    partial void OnInvoiceDateChanging(System.DateTime value);
+    partial void OnInvoiceDateChanged();
+    partial void OnInvoiceAmountChanging(double value);
+    partial void OnInvoiceAmountChanged();
+    partial void OnAssignBatchNoChanging(string value);
+    partial void OnAssignBatchNoChanged();
+    partial void OnAssignAmountChanging(double value);
+    partial void OnAssignAmountChanged();
+    partial void OnDueDateChanging(System.DateTime value);
+    partial void OnDueDateChanged();
+    partial void OnValueDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnValueDateChanged();
+    partial void OnNetPaymentTermsChanging(System.Nullable<int> value);
+    partial void OnNetPaymentTermsChanged();
+    partial void OnPrimaryDiscountDaysChanging(System.Nullable<int> value);
+    partial void OnPrimaryDiscountDaysChanged();
+    partial void OnPrimaryDiscountRateChanging(System.Nullable<int> value);
+    partial void OnPrimaryDiscountRateChanged();
+    partial void OnSecondaryDiscountDaysChanging(System.Nullable<int> value);
+    partial void OnSecondaryDiscountDaysChanged();
+    partial void OnSecondaryDiscountRateChanging(System.Nullable<int> value);
+    partial void OnSecondaryDiscountRateChanged();
+    partial void OnPaymentConditionsChanging(string value);
+    partial void OnPaymentConditionsChanged();
+    partial void OnOrderNumberReferenceChanging(string value);
+    partial void OnOrderNumberReferenceChanged();
+    partial void OnInvoiceReferenceNumberChanging(string value);
+    partial void OnInvoiceReferenceNumberChanged();
+    partial void OnIsFlawChanging(bool value);
+    partial void OnIsFlawChanged();
+    partial void OnFlawReasonChanging(string value);
+    partial void OnFlawReasonChanged();
+    partial void OnFlawResolveReasonChanging(string value);
+    partial void OnFlawResolveReasonChanged();
+    partial void OnFlawResolveDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnFlawResolveDateChanged();
+    partial void OnFlawResolveUserNameChanging(string value);
+    partial void OnFlawResolveUserNameChanged();
+    partial void OnFinanceBatchNoChanging(string value);
+    partial void OnFinanceBatchNoChanged();
+    partial void OnFinanceAmountChanging(System.Nullable<double> value);
+    partial void OnFinanceAmountChanged();
+    partial void OnFinanceDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnFinanceDateChanged();
+    partial void OnFinanceDueDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnFinanceDueDateChanged();
+    partial void OnPaymentBatchNoChanging(string value);
+    partial void OnPaymentBatchNoChanged();
+    partial void OnPaymentAmountChanging(System.Nullable<double> value);
+    partial void OnPaymentAmountChanged();
+    partial void OnPaymentDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnPaymentDateChanged();
+    partial void OnRefundAmountChanging(System.Nullable<double> value);
+    partial void OnRefundAmountChanged();
+    partial void OnRefundDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnRefundDateChanged();
+    partial void OnCommissionChanging(System.Nullable<double> value);
+    partial void OnCommissionChanged();
+    partial void OnCommissionDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCommissionDateChanged();
+    partial void OnInterestChanging(System.Nullable<double> value);
+    partial void OnInterestChanged();
+    partial void OnInterestDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnInterestDateChanged();
+    partial void OnIsDisputeChanging(System.Nullable<bool> value);
+    partial void OnIsDisputeChanged();
+    partial void OnDisputeTypeChanging(string value);
+    partial void OnDisputeTypeChanged();
+    partial void OnDisputeAmountChanging(System.Nullable<double> value);
+    partial void OnDisputeAmountChanged();
+    partial void OnDisputeReasonChanging(string value);
+    partial void OnDisputeReasonChanged();
+    partial void OnDisputeDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDisputeDateChanged();
+    partial void OnDisputeUserNameChanging(string value);
+    partial void OnDisputeUserNameChanged();
+    partial void OnDisputeResolveReasonChanging(string value);
+    partial void OnDisputeResolveReasonChanged();
+    partial void OnDisputeResolveDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDisputeResolveDateChanged();
+    partial void OnDisputeResolveUserNameChanging(string value);
+    partial void OnDisputeResolveUserNameChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    #endregion
+		
+		public Invoice()
+		{
+			this._InvoiceAssignBatch = default(EntityRef<InvoiceAssignBatch>);
+			this._InvoiceFinanceBatch = default(EntityRef<InvoiceFinanceBatch>);
+			this._InvoicePaymentBatch = default(EntityRef<InvoicePaymentBatch>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_InvoiceNo", DbType="NVarChar(35) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string InvoiceNo
+		{
+			get
+			{
+				return this._InvoiceNo;
+			}
+			set
+			{
+				if ((this._InvoiceNo != value))
+				{
+					this.OnInvoiceNoChanging(value);
+					this.SendPropertyChanging();
+					this._InvoiceNo = value;
+					this.SendPropertyChanged("InvoiceNo");
+					this.OnInvoiceNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_InvoiceType", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string InvoiceType
+		{
+			get
+			{
+				return this._InvoiceType;
+			}
+			set
+			{
+				if ((this._InvoiceType != value))
+				{
+					this.OnInvoiceTypeChanging(value);
+					this.SendPropertyChanging();
+					this._InvoiceType = value;
+					this.SendPropertyChanged("InvoiceType");
+					this.OnInvoiceTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_InvoiceDate", DbType="DateTime NOT NULL")]
+		public System.DateTime InvoiceDate
+		{
+			get
+			{
+				return this._InvoiceDate;
+			}
+			set
+			{
+				if ((this._InvoiceDate != value))
+				{
+					this.OnInvoiceDateChanging(value);
+					this.SendPropertyChanging();
+					this._InvoiceDate = value;
+					this.SendPropertyChanged("InvoiceDate");
+					this.OnInvoiceDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_InvoiceAmount", DbType="Float NOT NULL")]
+		public double InvoiceAmount
+		{
+			get
+			{
+				return this._InvoiceAmount;
+			}
+			set
+			{
+				if ((this._InvoiceAmount != value))
+				{
+					this.OnInvoiceAmountChanging(value);
+					this.SendPropertyChanging();
+					this._InvoiceAmount = value;
+					this.SendPropertyChanged("InvoiceAmount");
+					this.OnInvoiceAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_AssignBatchNo", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		public string AssignBatchNo
+		{
+			get
+			{
+				return this._AssignBatchNo;
+			}
+			set
+			{
+				if ((this._AssignBatchNo != value))
+				{
+					if (this._InvoiceAssignBatch.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAssignBatchNoChanging(value);
+					this.SendPropertyChanging();
+					this._AssignBatchNo = value;
+					this.SendPropertyChanged("AssignBatchNo");
+					this.OnAssignBatchNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_AssignAmount", DbType="Float NOT NULL")]
+		public double AssignAmount
+		{
+			get
+			{
+				return this._AssignAmount;
+			}
+			set
+			{
+				if ((this._AssignAmount != value))
+				{
+					this.OnAssignAmountChanging(value);
+					this.SendPropertyChanging();
+					this._AssignAmount = value;
+					this.SendPropertyChanged("AssignAmount");
+					this.OnAssignAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DueDate", DbType="DateTime NOT NULL")]
+		public System.DateTime DueDate
+		{
+			get
+			{
+				return this._DueDate;
+			}
+			set
+			{
+				if ((this._DueDate != value))
+				{
+					this.OnDueDateChanging(value);
+					this.SendPropertyChanging();
+					this._DueDate = value;
+					this.SendPropertyChanged("DueDate");
+					this.OnDueDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ValueDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ValueDate
+		{
+			get
+			{
+				return this._ValueDate;
+			}
+			set
+			{
+				if ((this._ValueDate != value))
+				{
+					this.OnValueDateChanging(value);
+					this.SendPropertyChanging();
+					this._ValueDate = value;
+					this.SendPropertyChanged("ValueDate");
+					this.OnValueDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_NetPaymentTerms", DbType="Int")]
+		public System.Nullable<int> NetPaymentTerms
+		{
+			get
+			{
+				return this._NetPaymentTerms;
+			}
+			set
+			{
+				if ((this._NetPaymentTerms != value))
+				{
+					this.OnNetPaymentTermsChanging(value);
+					this.SendPropertyChanging();
+					this._NetPaymentTerms = value;
+					this.SendPropertyChanged("NetPaymentTerms");
+					this.OnNetPaymentTermsChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PrimaryDiscountDays", DbType="Int")]
+		public System.Nullable<int> PrimaryDiscountDays
+		{
+			get
+			{
+				return this._PrimaryDiscountDays;
+			}
+			set
+			{
+				if ((this._PrimaryDiscountDays != value))
+				{
+					this.OnPrimaryDiscountDaysChanging(value);
+					this.SendPropertyChanging();
+					this._PrimaryDiscountDays = value;
+					this.SendPropertyChanged("PrimaryDiscountDays");
+					this.OnPrimaryDiscountDaysChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PrimaryDiscountRate", DbType="Int")]
+		public System.Nullable<int> PrimaryDiscountRate
+		{
+			get
+			{
+				return this._PrimaryDiscountRate;
+			}
+			set
+			{
+				if ((this._PrimaryDiscountRate != value))
+				{
+					this.OnPrimaryDiscountRateChanging(value);
+					this.SendPropertyChanging();
+					this._PrimaryDiscountRate = value;
+					this.SendPropertyChanged("PrimaryDiscountRate");
+					this.OnPrimaryDiscountRateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_SecondaryDiscountDays", DbType="Int")]
+		public System.Nullable<int> SecondaryDiscountDays
+		{
+			get
+			{
+				return this._SecondaryDiscountDays;
+			}
+			set
+			{
+				if ((this._SecondaryDiscountDays != value))
+				{
+					this.OnSecondaryDiscountDaysChanging(value);
+					this.SendPropertyChanging();
+					this._SecondaryDiscountDays = value;
+					this.SendPropertyChanged("SecondaryDiscountDays");
+					this.OnSecondaryDiscountDaysChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_SecondaryDiscountRate", DbType="Int")]
+		public System.Nullable<int> SecondaryDiscountRate
+		{
+			get
+			{
+				return this._SecondaryDiscountRate;
+			}
+			set
+			{
+				if ((this._SecondaryDiscountRate != value))
+				{
+					this.OnSecondaryDiscountRateChanging(value);
+					this.SendPropertyChanging();
+					this._SecondaryDiscountRate = value;
+					this.SendPropertyChanged("SecondaryDiscountRate");
+					this.OnSecondaryDiscountRateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PaymentConditions", DbType="VarChar(50)")]
+		public string PaymentConditions
+		{
+			get
+			{
+				return this._PaymentConditions;
+			}
+			set
+			{
+				if ((this._PaymentConditions != value))
+				{
+					this.OnPaymentConditionsChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentConditions = value;
+					this.SendPropertyChanged("PaymentConditions");
+					this.OnPaymentConditionsChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_OrderNumberReference", DbType="VarChar(35)")]
+		public string OrderNumberReference
+		{
+			get
+			{
+				return this._OrderNumberReference;
+			}
+			set
+			{
+				if ((this._OrderNumberReference != value))
+				{
+					this.OnOrderNumberReferenceChanging(value);
+					this.SendPropertyChanging();
+					this._OrderNumberReference = value;
+					this.SendPropertyChanged("OrderNumberReference");
+					this.OnOrderNumberReferenceChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_InvoiceReferenceNumber", DbType="VarChar(35)")]
+		public string InvoiceReferenceNumber
+		{
+			get
+			{
+				return this._InvoiceReferenceNumber;
+			}
+			set
+			{
+				if ((this._InvoiceReferenceNumber != value))
+				{
+					this.OnInvoiceReferenceNumberChanging(value);
+					this.SendPropertyChanging();
+					this._InvoiceReferenceNumber = value;
+					this.SendPropertyChanged("InvoiceReferenceNumber");
+					this.OnInvoiceReferenceNumberChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsFlaw", DbType="Bit NOT NULL")]
+		public bool IsFlaw
+		{
+			get
+			{
+				return this._IsFlaw;
+			}
+			set
+			{
+				if ((this._IsFlaw != value))
+				{
+					this.OnIsFlawChanging(value);
+					this.SendPropertyChanging();
+					this._IsFlaw = value;
+					this.SendPropertyChanged("IsFlaw");
+					this.OnIsFlawChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FlawReason", DbType="NVarChar(500)")]
+		public string FlawReason
+		{
+			get
+			{
+				return this._FlawReason;
+			}
+			set
+			{
+				if ((this._FlawReason != value))
+				{
+					this.OnFlawReasonChanging(value);
+					this.SendPropertyChanging();
+					this._FlawReason = value;
+					this.SendPropertyChanged("FlawReason");
+					this.OnFlawReasonChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FlawResolveReason", DbType="NVarChar(500)")]
+		public string FlawResolveReason
+		{
+			get
+			{
+				return this._FlawResolveReason;
+			}
+			set
+			{
+				if ((this._FlawResolveReason != value))
+				{
+					this.OnFlawResolveReasonChanging(value);
+					this.SendPropertyChanging();
+					this._FlawResolveReason = value;
+					this.SendPropertyChanged("FlawResolveReason");
+					this.OnFlawResolveReasonChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FlawResolveDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FlawResolveDate
+		{
+			get
+			{
+				return this._FlawResolveDate;
+			}
+			set
+			{
+				if ((this._FlawResolveDate != value))
+				{
+					this.OnFlawResolveDateChanging(value);
+					this.SendPropertyChanging();
+					this._FlawResolveDate = value;
+					this.SendPropertyChanged("FlawResolveDate");
+					this.OnFlawResolveDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FlawResolveUserName", DbType="NVarChar(50)")]
+		public string FlawResolveUserName
+		{
+			get
+			{
+				return this._FlawResolveUserName;
+			}
+			set
+			{
+				if ((this._FlawResolveUserName != value))
+				{
+					this.OnFlawResolveUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._FlawResolveUserName = value;
+					this.SendPropertyChanged("FlawResolveUserName");
+					this.OnFlawResolveUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FinanceBatchNo", DbType="NVarChar(50)")]
+		public string FinanceBatchNo
+		{
+			get
+			{
+				return this._FinanceBatchNo;
+			}
+			set
+			{
+				if ((this._FinanceBatchNo != value))
+				{
+					if (this._InvoiceFinanceBatch.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFinanceBatchNoChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceBatchNo = value;
+					this.SendPropertyChanged("FinanceBatchNo");
+					this.OnFinanceBatchNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FinanceAmount", DbType="Float")]
+		public System.Nullable<double> FinanceAmount
+		{
+			get
+			{
+				return this._FinanceAmount;
+			}
+			set
+			{
+				if ((this._FinanceAmount != value))
+				{
+					this.OnFinanceAmountChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceAmount = value;
+					this.SendPropertyChanged("FinanceAmount");
+					this.OnFinanceAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FinanceDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FinanceDate
+		{
+			get
+			{
+				return this._FinanceDate;
+			}
+			set
+			{
+				if ((this._FinanceDate != value))
+				{
+					this.OnFinanceDateChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceDate = value;
+					this.SendPropertyChanged("FinanceDate");
+					this.OnFinanceDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FinanceDueDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FinanceDueDate
+		{
+			get
+			{
+				return this._FinanceDueDate;
+			}
+			set
+			{
+				if ((this._FinanceDueDate != value))
+				{
+					this.OnFinanceDueDateChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceDueDate = value;
+					this.SendPropertyChanged("FinanceDueDate");
+					this.OnFinanceDueDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PaymentBatchNo", DbType="NVarChar(50)")]
+		public string PaymentBatchNo
+		{
+			get
+			{
+				return this._PaymentBatchNo;
+			}
+			set
+			{
+				if ((this._PaymentBatchNo != value))
+				{
+					if (this._InvoicePaymentBatch.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPaymentBatchNoChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentBatchNo = value;
+					this.SendPropertyChanged("PaymentBatchNo");
+					this.OnPaymentBatchNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PaymentAmount", DbType="Float")]
+		public System.Nullable<double> PaymentAmount
+		{
+			get
+			{
+				return this._PaymentAmount;
+			}
+			set
+			{
+				if ((this._PaymentAmount != value))
+				{
+					this.OnPaymentAmountChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentAmount = value;
+					this.SendPropertyChanged("PaymentAmount");
+					this.OnPaymentAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PaymentDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> PaymentDate
+		{
+			get
+			{
+				return this._PaymentDate;
+			}
+			set
+			{
+				if ((this._PaymentDate != value))
+				{
+					this.OnPaymentDateChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentDate = value;
+					this.SendPropertyChanged("PaymentDate");
+					this.OnPaymentDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RefundAmount", DbType="Float")]
+		public System.Nullable<double> RefundAmount
+		{
+			get
+			{
+				return this._RefundAmount;
+			}
+			set
+			{
+				if ((this._RefundAmount != value))
+				{
+					this.OnRefundAmountChanging(value);
+					this.SendPropertyChanging();
+					this._RefundAmount = value;
+					this.SendPropertyChanged("RefundAmount");
+					this.OnRefundAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RefundDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> RefundDate
+		{
+			get
+			{
+				return this._RefundDate;
+			}
+			set
+			{
+				if ((this._RefundDate != value))
+				{
+					this.OnRefundDateChanging(value);
+					this.SendPropertyChanging();
+					this._RefundDate = value;
+					this.SendPropertyChanged("RefundDate");
+					this.OnRefundDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Commission", DbType="Float")]
+		public System.Nullable<double> Commission
+		{
+			get
+			{
+				return this._Commission;
+			}
+			set
+			{
+				if ((this._Commission != value))
+				{
+					this.OnCommissionChanging(value);
+					this.SendPropertyChanging();
+					this._Commission = value;
+					this.SendPropertyChanged("Commission");
+					this.OnCommissionChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CommissionDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CommissionDate
+		{
+			get
+			{
+				return this._CommissionDate;
+			}
+			set
+			{
+				if ((this._CommissionDate != value))
+				{
+					this.OnCommissionDateChanging(value);
+					this.SendPropertyChanging();
+					this._CommissionDate = value;
+					this.SendPropertyChanged("CommissionDate");
+					this.OnCommissionDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Interest", DbType="Float")]
+		public System.Nullable<double> Interest
+		{
+			get
+			{
+				return this._Interest;
+			}
+			set
+			{
+				if ((this._Interest != value))
+				{
+					this.OnInterestChanging(value);
+					this.SendPropertyChanging();
+					this._Interest = value;
+					this.SendPropertyChanged("Interest");
+					this.OnInterestChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_InterestDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> InterestDate
+		{
+			get
+			{
+				return this._InterestDate;
+			}
+			set
+			{
+				if ((this._InterestDate != value))
+				{
+					this.OnInterestDateChanging(value);
+					this.SendPropertyChanging();
+					this._InterestDate = value;
+					this.SendPropertyChanged("InterestDate");
+					this.OnInterestDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsDispute", DbType="Bit")]
+		public System.Nullable<bool> IsDispute
+		{
+			get
+			{
+				return this._IsDispute;
+			}
+			set
+			{
+				if ((this._IsDispute != value))
+				{
+					this.OnIsDisputeChanging(value);
+					this.SendPropertyChanging();
+					this._IsDispute = value;
+					this.SendPropertyChanged("IsDispute");
+					this.OnIsDisputeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DisputeType", DbType="NVarChar(50)")]
+		public string DisputeType
+		{
+			get
+			{
+				return this._DisputeType;
+			}
+			set
+			{
+				if ((this._DisputeType != value))
+				{
+					this.OnDisputeTypeChanging(value);
+					this.SendPropertyChanging();
+					this._DisputeType = value;
+					this.SendPropertyChanged("DisputeType");
+					this.OnDisputeTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DisputeAmount", DbType="Float")]
+		public System.Nullable<double> DisputeAmount
+		{
+			get
+			{
+				return this._DisputeAmount;
+			}
+			set
+			{
+				if ((this._DisputeAmount != value))
+				{
+					this.OnDisputeAmountChanging(value);
+					this.SendPropertyChanging();
+					this._DisputeAmount = value;
+					this.SendPropertyChanged("DisputeAmount");
+					this.OnDisputeAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DisputeReason", DbType="NVarChar(500)")]
+		public string DisputeReason
+		{
+			get
+			{
+				return this._DisputeReason;
+			}
+			set
+			{
+				if ((this._DisputeReason != value))
+				{
+					this.OnDisputeReasonChanging(value);
+					this.SendPropertyChanging();
+					this._DisputeReason = value;
+					this.SendPropertyChanged("DisputeReason");
+					this.OnDisputeReasonChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DisputeDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DisputeDate
+		{
+			get
+			{
+				return this._DisputeDate;
+			}
+			set
+			{
+				if ((this._DisputeDate != value))
+				{
+					this.OnDisputeDateChanging(value);
+					this.SendPropertyChanging();
+					this._DisputeDate = value;
+					this.SendPropertyChanged("DisputeDate");
+					this.OnDisputeDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DisputeUserName", DbType="NVarChar(50)")]
+		public string DisputeUserName
+		{
+			get
+			{
+				return this._DisputeUserName;
+			}
+			set
+			{
+				if ((this._DisputeUserName != value))
+				{
+					this.OnDisputeUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._DisputeUserName = value;
+					this.SendPropertyChanged("DisputeUserName");
+					this.OnDisputeUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DisputeResolveReason", DbType="NVarChar(500)")]
+		public string DisputeResolveReason
+		{
+			get
+			{
+				return this._DisputeResolveReason;
+			}
+			set
+			{
+				if ((this._DisputeResolveReason != value))
+				{
+					this.OnDisputeResolveReasonChanging(value);
+					this.SendPropertyChanging();
+					this._DisputeResolveReason = value;
+					this.SendPropertyChanged("DisputeResolveReason");
+					this.OnDisputeResolveReasonChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DisputeResolveDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DisputeResolveDate
+		{
+			get
+			{
+				return this._DisputeResolveDate;
+			}
+			set
+			{
+				if ((this._DisputeResolveDate != value))
+				{
+					this.OnDisputeResolveDateChanging(value);
+					this.SendPropertyChanging();
+					this._DisputeResolveDate = value;
+					this.SendPropertyChanged("DisputeResolveDate");
+					this.OnDisputeResolveDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DisputeResolveUserName", DbType="NVarChar(50)")]
+		public string DisputeResolveUserName
+		{
+			get
+			{
+				return this._DisputeResolveUserName;
+			}
+			set
+			{
+				if ((this._DisputeResolveUserName != value))
+				{
+					this.OnDisputeResolveUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._DisputeResolveUserName = value;
+					this.SendPropertyChanged("DisputeResolveUserName");
+					this.OnDisputeResolveUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Association(Name="InvoiceAssignBatch_Invoice", Storage="_InvoiceAssignBatch", ThisKey="AssignBatchNo", IsForeignKey=true)]
+		public InvoiceAssignBatch InvoiceAssignBatch
+		{
+			get
+			{
+				return this._InvoiceAssignBatch.Entity;
+			}
+			set
+			{
+				InvoiceAssignBatch previousValue = this._InvoiceAssignBatch.Entity;
+				if (((previousValue != value) 
+							|| (this._InvoiceAssignBatch.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._InvoiceAssignBatch.Entity = null;
+						previousValue.Invoices.Remove(this);
+					}
+					this._InvoiceAssignBatch.Entity = value;
+					if ((value != null))
+					{
+						value.Invoices.Add(this);
+						this._AssignBatchNo = value.AssignBatchNo;
+					}
+					else
+					{
+						this._AssignBatchNo = default(string);
+					}
+					this.SendPropertyChanged("InvoiceAssignBatch");
+				}
+			}
+		}
+		
+		[Association(Name="InvoiceFinanceBatch_Invoice", Storage="_InvoiceFinanceBatch", ThisKey="FinanceBatchNo", IsForeignKey=true)]
+		public InvoiceFinanceBatch InvoiceFinanceBatch
+		{
+			get
+			{
+				return this._InvoiceFinanceBatch.Entity;
+			}
+			set
+			{
+				InvoiceFinanceBatch previousValue = this._InvoiceFinanceBatch.Entity;
+				if (((previousValue != value) 
+							|| (this._InvoiceFinanceBatch.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._InvoiceFinanceBatch.Entity = null;
+						previousValue.Invoices.Remove(this);
+					}
+					this._InvoiceFinanceBatch.Entity = value;
+					if ((value != null))
+					{
+						value.Invoices.Add(this);
+						this._FinanceBatchNo = value.FinanceBatchNo;
+					}
+					else
+					{
+						this._FinanceBatchNo = default(string);
+					}
+					this.SendPropertyChanged("InvoiceFinanceBatch");
+				}
+			}
+		}
+		
+		[Association(Name="InvoicePaymentBatch_Invoice", Storage="_InvoicePaymentBatch", ThisKey="PaymentBatchNo", IsForeignKey=true)]
+		public InvoicePaymentBatch InvoicePaymentBatch
+		{
+			get
+			{
+				return this._InvoicePaymentBatch.Entity;
+			}
+			set
+			{
+				InvoicePaymentBatch previousValue = this._InvoicePaymentBatch.Entity;
+				if (((previousValue != value) 
+							|| (this._InvoicePaymentBatch.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._InvoicePaymentBatch.Entity = null;
+						previousValue.Invoices.Remove(this);
+					}
+					this._InvoicePaymentBatch.Entity = value;
+					if ((value != null))
+					{
+						value.Invoices.Add(this);
+						this._PaymentBatchNo = value.PaymentBatchNo;
+					}
+					else
+					{
+						this._PaymentBatchNo = default(string);
+					}
+					this.SendPropertyChanged("InvoicePaymentBatch");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -9306,15 +9402,13 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _AssignBatchNo;
 		
-		private string _CDAID;
+		private string _CDACode;
 		
 		private string _BatchCurrency;
 		
-		private System.Nullable<System.DateTime> _BatchDate;
+		private System.DateTime _AssignDate;
 		
-		private string _CreateUserName;
-		
-		private string _CheckResult;
+		private string _CheckStatus;
 		
 		private string _RejectReason;
 		
@@ -9325,6 +9419,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		private System.Nullable<bool> _IsCreateMsg;
 		
 		private string _Comment;
+		
+		private string _CreateUserName;
 		
 		private EntitySet<Invoice> _Invoices;
 		
@@ -9340,10 +9436,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCDACodeChanged();
     partial void OnBatchCurrencyChanging(string value);
     partial void OnBatchCurrencyChanged();
-    partial void OnBatchDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnBatchDateChanged();
-    partial void OnCreateUserNameChanging(string value);
-    partial void OnCreateUserNameChanged();
+    partial void OnAssignDateChanging(System.DateTime value);
+    partial void OnAssignDateChanged();
     partial void OnCheckStatusChanging(string value);
     partial void OnCheckStatusChanged();
     partial void OnRejectReasonChanging(string value);
@@ -9356,6 +9450,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnIsCreateMsgChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
     #endregion
 		
 		public InvoiceAssignBatch()
@@ -9365,7 +9461,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_AssignBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_AssignBatchNo", DbType="VarChar(35) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string AssignBatchNo
 		{
 			get
@@ -9385,16 +9481,16 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDAID", DbType="Varchar(50) NOT NULL")]
+		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string CDACode
 		{
 			get
 			{
-				return this._CDAID;
+				return this._CDACode;
 			}
 			set
 			{
-				if ((this._CDAID != value))
+				if ((this._CDACode != value))
 				{
 					if (this._CDA.HasLoadedOrAssignedValue)
 					{
@@ -9402,14 +9498,14 @@ namespace CMBC.EasyFactor.DB.dbml
 					}
 					this.OnCDACodeChanging(value);
 					this.SendPropertyChanging();
-					this._CDAID = value;
+					this._CDACode = value;
 					this.SendPropertyChanged("CDACode");
 					this.OnCDACodeChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_BatchCurrency", DbType="NChar(3)")]
+		[Column(Storage="_BatchCurrency", DbType="Char(3) NOT NULL", CanBeNull=false)]
 		public string BatchCurrency
 		{
 			get
@@ -9429,60 +9525,40 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_BatchDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> BatchDate
+		[Column(Storage="_AssignDate", DbType="DateTime NOT NULL")]
+		public System.DateTime AssignDate
 		{
 			get
 			{
-				return this._BatchDate;
+				return this._AssignDate;
 			}
 			set
 			{
-				if ((this._BatchDate != value))
+				if ((this._AssignDate != value))
 				{
-					this.OnBatchDateChanging(value);
+					this.OnAssignDateChanging(value);
 					this.SendPropertyChanging();
-					this._BatchDate = value;
-					this.SendPropertyChanged("BatchDate");
-					this.OnBatchDateChanged();
+					this._AssignDate = value;
+					this.SendPropertyChanged("AssignDate");
+					this.OnAssignDateChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50)")]
-		public string CreateUserName
-		{
-			get
-			{
-				return this._CreateUserName;
-			}
-			set
-			{
-				if ((this._CreateUserName != value))
-				{
-					this.OnCreateUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._CreateUserName = value;
-					this.SendPropertyChanged("CreateUserName");
-					this.OnCreateUserNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CheckResult", DbType="NVarChar(50)")]
+		[Column(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string CheckStatus
 		{
 			get
 			{
-				return this._CheckResult;
+				return this._CheckStatus;
 			}
 			set
 			{
-				if ((this._CheckResult != value))
+				if ((this._CheckStatus != value))
 				{
 					this.OnCheckStatusChanging(value);
 					this.SendPropertyChanging();
-					this._CheckResult = value;
+					this._CheckStatus = value;
 					this.SendPropertyChanged("CheckStatus");
 					this.OnCheckStatusChanged();
 				}
@@ -9549,7 +9625,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsCreateMsg", DbType="bit")]
+		[Column(Storage="_IsCreateMsg", DbType="Bit")]
 		public System.Nullable<bool> IsCreateMsg
 		{
 			get
@@ -9585,6 +9661,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Comment = value;
 					this.SendPropertyChanged("Comment");
 					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
 				}
 			}
 		}
@@ -9625,11 +9721,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((value != null))
 					{
 						value.InvoiceAssignBatches.Add(this);
-						this._CDAID = value.CDACode;
+						this._CDACode = value.CDACode;
 					}
 					else
 					{
-						this._CDAID = default(string);
+						this._CDACode = default(string);
 					}
 					this.SendPropertyChanged("CDA");
 				}
@@ -9669,281 +9765,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 	}
 	
-	[Table(Name="dbo.InvoicePaymentBatch")]
-	public partial class InvoicePaymentBatch : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _PaymentBatchNo;
-		
-		private string _CDAID;
-		
-		private System.Nullable<System.DateTime> _PaymentDate;
-		
-		private string _CreateUserName;
-		
-		private System.Nullable<bool> _IsCreateMsg;
-		
-		private string _Comment;
-		
-		private string _PaymentType;
-		
-		private EntitySet<Invoice> _Invoices;
-		
-		private EntityRef<CDA> _CDA;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnPaymentBatchNoChanging(string value);
-    partial void OnPaymentBatchNoChanged();
-    partial void OnCDACodeChanging(string value);
-    partial void OnCDACodeChanged();
-    partial void OnPaymentDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnPaymentDateChanged();
-    partial void OnCreateUserNameChanging(string value);
-    partial void OnCreateUserNameChanged();
-    partial void OnIsCreateMsgChanging(System.Nullable<bool> value);
-    partial void OnIsCreateMsgChanged();
-    partial void OnCommentChanging(string value);
-    partial void OnCommentChanged();
-    partial void OnPaymentTypeChanging(string value);
-    partial void OnPaymentTypeChanged();
-    #endregion
-		
-		public InvoicePaymentBatch()
-		{
-			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
-			this._CDA = default(EntityRef<CDA>);
-			OnCreated();
-		}
-		
-		[Column(Storage="_PaymentBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string PaymentBatchNo
-		{
-			get
-			{
-				return this._PaymentBatchNo;
-			}
-			set
-			{
-				if ((this._PaymentBatchNo != value))
-				{
-					this.OnPaymentBatchNoChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentBatchNo = value;
-					this.SendPropertyChanged("PaymentBatchNo");
-					this.OnPaymentBatchNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CDAID", DbType="Varchar(50) NOT NULL")]
-		public string CDACode
-		{
-			get
-			{
-				return this._CDAID;
-			}
-			set
-			{
-				if ((this._CDAID != value))
-				{
-					if (this._CDA.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCDACodeChanging(value);
-					this.SendPropertyChanging();
-					this._CDAID = value;
-					this.SendPropertyChanged("CDACode");
-					this.OnCDACodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PaymentDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> PaymentDate
-		{
-			get
-			{
-				return this._PaymentDate;
-			}
-			set
-			{
-				if ((this._PaymentDate != value))
-				{
-					this.OnPaymentDateChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentDate = value;
-					this.SendPropertyChanged("PaymentDate");
-					this.OnPaymentDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50)")]
-		public string CreateUserName
-		{
-			get
-			{
-				return this._CreateUserName;
-			}
-			set
-			{
-				if ((this._CreateUserName != value))
-				{
-					this.OnCreateUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._CreateUserName = value;
-					this.SendPropertyChanged("CreateUserName");
-					this.OnCreateUserNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_IsCreateMsg", DbType="bit")]
-		public System.Nullable<bool> IsCreateMsg
-		{
-			get
-			{
-				return this._IsCreateMsg;
-			}
-			set
-			{
-				if ((this._IsCreateMsg != value))
-				{
-					this.OnIsCreateMsgChanging(value);
-					this.SendPropertyChanging();
-					this._IsCreateMsg = value;
-					this.SendPropertyChanged("IsCreateMsg");
-					this.OnIsCreateMsgChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
-		public string Comment
-		{
-			get
-			{
-				return this._Comment;
-			}
-			set
-			{
-				if ((this._Comment != value))
-				{
-					this.OnCommentChanging(value);
-					this.SendPropertyChanging();
-					this._Comment = value;
-					this.SendPropertyChanged("Comment");
-					this.OnCommentChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PaymentType", DbType="NVarChar(50)")]
-		public string PaymentType
-		{
-			get
-			{
-				return this._PaymentType;
-			}
-			set
-			{
-				if ((this._PaymentType != value))
-				{
-					this.OnPaymentTypeChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentType = value;
-					this.SendPropertyChanged("PaymentType");
-					this.OnPaymentTypeChanged();
-				}
-			}
-		}
-		
-		[Association(Name="InvoicePaymentBatch_Invoice", Storage="_Invoices", OtherKey="PaymentBatchNo")]
-		public EntitySet<Invoice> Invoices
-		{
-			get
-			{
-				return this._Invoices;
-			}
-			set
-			{
-				this._Invoices.Assign(value);
-			}
-		}
-		
-		[Association(Name="CDA_InvoicePaymentBatch", Storage="_CDA", ThisKey="CDACode", IsForeignKey=true)]
-		public CDA CDA
-		{
-			get
-			{
-				return this._CDA.Entity;
-			}
-			set
-			{
-				CDA previousValue = this._CDA.Entity;
-				if (((previousValue != value) 
-							|| (this._CDA.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CDA.Entity = null;
-						previousValue.InvoicePaymentBatches.Remove(this);
-					}
-					this._CDA.Entity = value;
-					if ((value != null))
-					{
-						value.InvoicePaymentBatches.Add(this);
-						this._CDAID = value.CDACode;
-					}
-					else
-					{
-						this._CDAID = default(string);
-					}
-					this.SendPropertyChanged("CDA");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Invoices(Invoice entity)
-		{
-			this.SendPropertyChanging();
-			entity.InvoicePaymentBatch = this;
-		}
-		
-		private void detach_Invoices(Invoice entity)
-		{
-			this.SendPropertyChanging();
-			entity.InvoicePaymentBatch = null;
-		}
-	}
-	
 	[Table(Name="dbo.InvoiceFinanceBatch")]
 	public partial class InvoiceFinanceBatch : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -9952,17 +9773,17 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _FinanceBatchNo;
 		
-		private string _CDAID;
+		private string _CDACode;
 		
 		private string _FinanceType;
 		
 		private string _BatchCurrency;
 		
-		private System.Nullable<double> _FinanceAmount;
+		private double _FinanceAmount;
 		
-		private System.Nullable<System.DateTime> _FinancePeriodBegin;
+		private System.DateTime _FinancePeriodBegin;
 		
-		private System.Nullable<System.DateTime> _FinnacePeriodEnd;
+		private System.DateTime _FinnacePeriodEnd;
 		
 		private System.Nullable<double> _FinanceRate;
 		
@@ -9972,9 +9793,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<double> _CostRate;
 		
-		private string _CreateUserName;
-		
 		private string _Comment;
+		
+		private string _CreateUserName;
 		
 		private EntitySet<Invoice> _Invoices;
 		
@@ -9994,11 +9815,11 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFinanceTypeChanged();
     partial void OnBatchCurrencyChanging(string value);
     partial void OnBatchCurrencyChanged();
-    partial void OnFinanceAmountChanging(System.Nullable<double> value);
+    partial void OnFinanceAmountChanging(double value);
     partial void OnFinanceAmountChanged();
-    partial void OnFinancePeriodBeginChanging(System.Nullable<System.DateTime> value);
+    partial void OnFinancePeriodBeginChanging(System.DateTime value);
     partial void OnFinancePeriodBeginChanged();
-    partial void OnFinnacePeriodEndChanging(System.Nullable<System.DateTime> value);
+    partial void OnFinnacePeriodEndChanging(System.DateTime value);
     partial void OnFinnacePeriodEndChanged();
     partial void OnFinanceRateChanging(System.Nullable<double> value);
     partial void OnFinanceRateChanged();
@@ -10008,10 +9829,10 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFactorCodeChanged();
     partial void OnCostRateChanging(System.Nullable<double> value);
     partial void OnCostRateChanged();
-    partial void OnCreateUserNameChanging(string value);
-    partial void OnCreateUserNameChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
     #endregion
 		
 		public InvoiceFinanceBatch()
@@ -10042,16 +9863,16 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDAID", DbType="Varchar(50) NOT NULL")]
+		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string CDACode
 		{
 			get
 			{
-				return this._CDAID;
+				return this._CDACode;
 			}
 			set
 			{
-				if ((this._CDAID != value))
+				if ((this._CDACode != value))
 				{
 					if (this._CDA.HasLoadedOrAssignedValue)
 					{
@@ -10059,14 +9880,14 @@ namespace CMBC.EasyFactor.DB.dbml
 					}
 					this.OnCDACodeChanging(value);
 					this.SendPropertyChanging();
-					this._CDAID = value;
+					this._CDACode = value;
 					this.SendPropertyChanged("CDACode");
 					this.OnCDACodeChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_FinanceType", DbType="NVarChar(50)")]
+		[Column(Storage="_FinanceType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string FinanceType
 		{
 			get
@@ -10086,7 +9907,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_BatchCurrency", DbType="NChar(3)")]
+		[Column(Storage="_BatchCurrency", DbType="Char(3) NOT NULL", CanBeNull=false)]
 		public string BatchCurrency
 		{
 			get
@@ -10106,8 +9927,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceAmount", DbType="Float")]
-		public System.Nullable<double> FinanceAmount
+		[Column(Storage="_FinanceAmount", DbType="Float NOT NULL")]
+		public double FinanceAmount
 		{
 			get
 			{
@@ -10126,8 +9947,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinancePeriodBegin", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FinancePeriodBegin
+		[Column(Storage="_FinancePeriodBegin", DbType="DateTime NOT NULL")]
+		public System.DateTime FinancePeriodBegin
 		{
 			get
 			{
@@ -10146,8 +9967,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinnacePeriodEnd", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FinnacePeriodEnd
+		[Column(Storage="_FinnacePeriodEnd", DbType="DateTime NOT NULL")]
+		public System.DateTime FinnacePeriodEnd
 		{
 			get
 			{
@@ -10250,26 +10071,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50)")]
-		public string CreateUserName
-		{
-			get
-			{
-				return this._CreateUserName;
-			}
-			set
-			{
-				if ((this._CreateUserName != value))
-				{
-					this.OnCreateUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._CreateUserName = value;
-					this.SendPropertyChanged("CreateUserName");
-					this.OnCreateUserNameChanged();
-				}
-			}
-		}
-		
 		[Column(Storage="_Comment", DbType="NVarChar(500)")]
 		public string Comment
 		{
@@ -10286,6 +10087,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Comment = value;
 					this.SendPropertyChanged("Comment");
 					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
 				}
 			}
 		}
@@ -10326,11 +10147,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((value != null))
 					{
 						value.InvoiceFinanceBatches.Add(this);
-						this._CDAID = value.CDACode;
+						this._CDACode = value.CDACode;
 					}
 					else
 					{
-						this._CDAID = default(string);
+						this._CDACode = default(string);
 					}
 					this.SendPropertyChanged("CDA");
 				}
@@ -10401,6 +10222,377 @@ namespace CMBC.EasyFactor.DB.dbml
 		{
 			this.SendPropertyChanging();
 			entity.InvoiceFinanceBatch = null;
+		}
+	}
+	
+	[Table(Name="dbo.InvoicePaymentBatch")]
+	public partial class InvoicePaymentBatch : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _PaymentBatchNo;
+		
+		private string _CDACode;
+		
+		private string _PaymentType;
+		
+		private System.DateTime _PaymentDate;
+		
+		private System.Nullable<bool> _IsCreateMsg;
+		
+		private string _Comment;
+		
+		private string _CreateUserName;
+		
+		private string _CheckStatus;
+		
+		private string _RejectReason;
+		
+		private string _CheckUserName;
+		
+		private System.Nullable<System.DateTime> _CheckDate;
+		
+		private EntitySet<Invoice> _Invoices;
+		
+		private EntityRef<CDA> _CDA;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPaymentBatchNoChanging(string value);
+    partial void OnPaymentBatchNoChanged();
+    partial void OnCDACodeChanging(string value);
+    partial void OnCDACodeChanged();
+    partial void OnPaymentTypeChanging(string value);
+    partial void OnPaymentTypeChanged();
+    partial void OnPaymentDateChanging(System.DateTime value);
+    partial void OnPaymentDateChanged();
+    partial void OnIsCreateMsgChanging(System.Nullable<bool> value);
+    partial void OnIsCreateMsgChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
+    partial void OnCheckStatusChanging(string value);
+    partial void OnCheckStatusChanged();
+    partial void OnRejectReasonChanging(string value);
+    partial void OnRejectReasonChanged();
+    partial void OnCheckUserNameChanging(string value);
+    partial void OnCheckUserNameChanged();
+    partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCheckDateChanged();
+    #endregion
+		
+		public InvoicePaymentBatch()
+		{
+			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
+			this._CDA = default(EntityRef<CDA>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_PaymentBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string PaymentBatchNo
+		{
+			get
+			{
+				return this._PaymentBatchNo;
+			}
+			set
+			{
+				if ((this._PaymentBatchNo != value))
+				{
+					this.OnPaymentBatchNoChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentBatchNo = value;
+					this.SendPropertyChanged("PaymentBatchNo");
+					this.OnPaymentBatchNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CDACode
+		{
+			get
+			{
+				return this._CDACode;
+			}
+			set
+			{
+				if ((this._CDACode != value))
+				{
+					if (this._CDA.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCDACodeChanging(value);
+					this.SendPropertyChanging();
+					this._CDACode = value;
+					this.SendPropertyChanged("CDACode");
+					this.OnCDACodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PaymentType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string PaymentType
+		{
+			get
+			{
+				return this._PaymentType;
+			}
+			set
+			{
+				if ((this._PaymentType != value))
+				{
+					this.OnPaymentTypeChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentType = value;
+					this.SendPropertyChanged("PaymentType");
+					this.OnPaymentTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PaymentDate", DbType="DateTime NOT NULL")]
+		public System.DateTime PaymentDate
+		{
+			get
+			{
+				return this._PaymentDate;
+			}
+			set
+			{
+				if ((this._PaymentDate != value))
+				{
+					this.OnPaymentDateChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentDate = value;
+					this.SendPropertyChanged("PaymentDate");
+					this.OnPaymentDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsCreateMsg", DbType="Bit")]
+		public System.Nullable<bool> IsCreateMsg
+		{
+			get
+			{
+				return this._IsCreateMsg;
+			}
+			set
+			{
+				if ((this._IsCreateMsg != value))
+				{
+					this.OnIsCreateMsgChanging(value);
+					this.SendPropertyChanging();
+					this._IsCreateMsg = value;
+					this.SendPropertyChanged("IsCreateMsg");
+					this.OnIsCreateMsgChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CheckStatus
+		{
+			get
+			{
+				return this._CheckStatus;
+			}
+			set
+			{
+				if ((this._CheckStatus != value))
+				{
+					this.OnCheckStatusChanging(value);
+					this.SendPropertyChanging();
+					this._CheckStatus = value;
+					this.SendPropertyChanged("CheckStatus");
+					this.OnCheckStatusChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RejectReason", DbType="NVarChar(500)")]
+		public string RejectReason
+		{
+			get
+			{
+				return this._RejectReason;
+			}
+			set
+			{
+				if ((this._RejectReason != value))
+				{
+					this.OnRejectReasonChanging(value);
+					this.SendPropertyChanging();
+					this._RejectReason = value;
+					this.SendPropertyChanged("RejectReason");
+					this.OnRejectReasonChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CheckUserName", DbType="NVarChar(50)")]
+		public string CheckUserName
+		{
+			get
+			{
+				return this._CheckUserName;
+			}
+			set
+			{
+				if ((this._CheckUserName != value))
+				{
+					this.OnCheckUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CheckUserName = value;
+					this.SendPropertyChanged("CheckUserName");
+					this.OnCheckUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CheckDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CheckDate
+		{
+			get
+			{
+				return this._CheckDate;
+			}
+			set
+			{
+				if ((this._CheckDate != value))
+				{
+					this.OnCheckDateChanging(value);
+					this.SendPropertyChanging();
+					this._CheckDate = value;
+					this.SendPropertyChanged("CheckDate");
+					this.OnCheckDateChanged();
+				}
+			}
+		}
+		
+		[Association(Name="InvoicePaymentBatch_Invoice", Storage="_Invoices", OtherKey="PaymentBatchNo")]
+		public EntitySet<Invoice> Invoices
+		{
+			get
+			{
+				return this._Invoices;
+			}
+			set
+			{
+				this._Invoices.Assign(value);
+			}
+		}
+		
+		[Association(Name="CDA_InvoicePaymentBatch", Storage="_CDA", ThisKey="CDACode", IsForeignKey=true)]
+		public CDA CDA
+		{
+			get
+			{
+				return this._CDA.Entity;
+			}
+			set
+			{
+				CDA previousValue = this._CDA.Entity;
+				if (((previousValue != value) 
+							|| (this._CDA.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CDA.Entity = null;
+						previousValue.InvoicePaymentBatches.Remove(this);
+					}
+					this._CDA.Entity = value;
+					if ((value != null))
+					{
+						value.InvoicePaymentBatches.Add(this);
+						this._CDACode = value.CDACode;
+					}
+					else
+					{
+						this._CDACode = default(string);
+					}
+					this.SendPropertyChanged("CDA");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Invoices(Invoice entity)
+		{
+			this.SendPropertyChanging();
+			entity.InvoicePaymentBatch = this;
+		}
+		
+		private void detach_Invoices(Invoice entity)
+		{
+			this.SendPropertyChanging();
+			entity.InvoicePaymentBatch = null;
 		}
 	}
 }

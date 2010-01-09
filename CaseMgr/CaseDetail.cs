@@ -80,7 +80,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Enums
 
-        #region Constructors (3)
+        #region Constructors (4)
 
         /// <summary>
         /// Initializes a new instance of the CaseDetail class
@@ -119,7 +119,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 curCase = new Case();
                 curCase.CreateUserName = App.Current.CurUser.Name;
-                curCase.CaseAppDate = DateTime.Now;
+                curCase.CaseAppDate = DateTime.Now.Date;
                 this.caseBindingSource.DataSource = curCase;
             }
             else
@@ -179,11 +179,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.creditCoverNegBindingSource.DataSource = neg;
             }
         }
+
         #endregion Constructors
 
-        #region Methods (23)
+        #region Methods (26)
 
-        // Private Methods (23) 
+        // Private Methods (26) 
 
         /// <summary>
         /// Leave event handler
@@ -409,6 +410,23 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailBuyer(object sender, EventArgs e)
+        {
+            Case curCase = (Case)this.caseBindingSource.DataSource;
+            if (curCase == null || curCase.BuyerClient == null)
+            {
+                return;
+            }
+            ClientDetail clientDetail = new ClientDetail(curCase.BuyerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
+            clientDetail.Show();
+
+        }
+
+        /// <summary>
         /// Show detail of the selected CDA
         /// </summary>
         /// <param name="sender"></param>
@@ -430,6 +448,57 @@ namespace CMBC.EasyFactor.CaseMgr
                     cdaDetail.ShowDialog(this);
                 }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailFactor(object sender, EventArgs e)
+        {
+            Case curCase = (Case)this.caseBindingSource.DataSource;
+            if (curCase == null || curCase.TransactionType == null)
+            {
+                return;
+            }
+            Factor factor = null;
+            switch (curCase.TransactionType)
+            {
+                case "国内卖方保理":
+                case "出口保理":
+                case "国内信保保理":
+                case "国际信保保理":
+                case "租赁保理":
+                    factor = curCase.SellerFactor;
+                    break;
+                case "国内买方保理":
+                case "进口保理":
+                    factor = curCase.BuyerFactor;
+                    break;
+                default: break;
+            }
+            if (factor != null)
+            {
+                FactorDetail factorDetail = new FactorDetail(factor, FactorDetail.OpFactorType.DETAIL_FACTOR);
+                factorDetail.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailSeller(object sender, EventArgs e)
+        {
+            Case curCase = (Case)this.caseBindingSource.DataSource;
+            if (curCase == null || curCase.SellerClient == null)
+            {
+                return;
+            }
+            ClientDetail clientDetail = new ClientDetail(curCase.SellerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
+            clientDetail.Show();
         }
 
         /// <summary>

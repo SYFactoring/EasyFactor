@@ -11,9 +11,9 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Globalization;
     using System.Linq;
     using System.Windows.Forms;
+    using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.CaseMgr;
 
     /// <summary>
     /// 
@@ -57,7 +57,7 @@ namespace CMBC.EasyFactor.ARMgr
             set
             {
                 this._CDA = value;
-                NewAssignBatch(null, null);
+                NewBatch(null, null);
             }
         }
 
@@ -76,7 +76,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             DateTime begin = new DateTime(date.Year, date.Month, date.Day);
             DateTime end = begin.AddDays(1);
-            int batchCount = App.Current.DbContext.InvoiceAssignBatches.Count(batch => batch.BatchDate >= begin && batch.BatchDate < end);
+            int batchCount = App.Current.DbContext.InvoiceAssignBatches.Count(batch => batch.AssignDate >= begin && batch.AssignDate < end);
             string assignNo = String.Format("ASS{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return assignNo;
         }
@@ -91,10 +91,14 @@ namespace CMBC.EasyFactor.ARMgr
                 ControlUtil.SetComponetDefault(comp);
             }
             this.invoiceBindingSource.DataSource = typeof(Invoice);
-            this.invoiceAssignBatchBindingSource.DataSource = typeof(InvoiceAssignBatch);
+            this.batchBindingSource.DataSource = typeof(InvoiceAssignBatch);
         }
         // Private Methods (18) 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="selectedInvoice"></param>
         private void CaculateCommisssion(Invoice selectedInvoice)
         {
             if (this._CDA.CommissionType == "按转让金额")
@@ -102,7 +106,7 @@ namespace CMBC.EasyFactor.ARMgr
                 selectedInvoice.Commission = selectedInvoice.AssignAmount * this._CDA.Price ?? 0;
                 if (selectedInvoice.Commission.GetValueOrDefault() > 0)
                 {
-                    selectedInvoice.CommissionDate = selectedInvoice.AssignDate;
+                    selectedInvoice.CommissionDate = selectedInvoice.InvoiceAssignBatch.AssignDate;
                 }
                 else
                 {
@@ -111,22 +115,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        private void CaculateCurrentAssign()
-        {
-            IList invoiceList = this.invoiceBindingSource.List;
-            double totalAssign = 0;
-            double totalCommmission = 0;
-            foreach (Invoice invoice in invoiceList)
-            {
-                totalAssign += invoice.AssignAmount;
-                totalCommmission += invoice.Commission.GetValueOrDefault();
-            }
-            this.tbTotalAssign.Text = String.Format("{0:N2}", totalAssign);
-            this.tbAssignNumber.Text = String.Format("{0}", invoiceList.Count);
-            this.tbTotalCommission.Text = String.Format("{0:N2}", totalCommmission);
-            this.tbTotalHandfee.Text = String.Format("{0:N2}", invoiceList.Count * this._CDA.HandFee.GetValueOrDefault());
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DetailCase(object sender, EventArgs e)
         {
             if (this.dgvInvoices.CurrentCell == null)
@@ -139,6 +132,11 @@ namespace CMBC.EasyFactor.ARMgr
             caseDetail.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DetailCDA(object sender, EventArgs e)
         {
             if (this.dgvInvoices.CurrentCell == null)
@@ -181,17 +179,20 @@ namespace CMBC.EasyFactor.ARMgr
             }
             if (this.dgvInvoices.Rows[e.RowIndex].IsNewRow)
             {
-                if (!(this.invoiceAssignBatchBindingSource.DataSource is InvoiceAssignBatch))
+                if (!(this.batchBindingSource.DataSource is InvoiceAssignBatch))
                 {
                     return;
                 }
                 Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
-                InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
-                selectedInvoice.InvoiceCurrency = assignBatch.BatchCurrency;
-                selectedInvoice.AssignDate = DateTime.Now;
+                InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.batchBindingSource.DataSource;
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value == null)
@@ -212,6 +213,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void dgvInvoices_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
             if (e.Value == null)
@@ -243,6 +249,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvInvoices_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             if (e.FormattedValue == null || e.FormattedValue.Equals(string.Empty))
@@ -293,7 +304,7 @@ namespace CMBC.EasyFactor.ARMgr
             else if (this.dgvInvoices.Columns[e.ColumnIndex] == colAssignAmount)
             {
                 CaculateCommisssion(selectedInvoice);
-                CaculateCurrentAssign();
+                StatBatch();
             }
         }
 
@@ -314,7 +325,7 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if (!(this.invoiceAssignBatchBindingSource.DataSource is InvoiceAssignBatch))
+            if (!(this.batchBindingSource.DataSource is InvoiceAssignBatch))
             {
                 return;
             }
@@ -323,7 +334,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_ASSIGN);
+            ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_INVOICES);
             exportUtil.StartExport(this.invoiceBindingSource.List);
         }
 
@@ -356,21 +367,23 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if (!(this.invoiceAssignBatchBindingSource.DataSource is InvoiceAssignBatch))
+            if (!(this.batchBindingSource.DataSource is InvoiceAssignBatch))
             {
                 return;
             }
 
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES_BY_BATCH);
             importForm.ShowDialog(this);
             IList invoiceList = importForm.ImportedList;
-            InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
-            foreach (Invoice invoice in invoiceList)
+            if (invoiceList != null)
             {
-                invoice.InvoiceAssignBatch = assignBatch;
+                foreach (Invoice invoice in this.invoiceBindingSource.List)
+                {
+                    invoice.InvoiceAssignBatch = null;
+                }
+                this.invoiceBindingSource.DataSource = invoiceList;
+                this.StatBatch();
             }
-
-            this.invoiceBindingSource.DataSource = invoiceList;
         }
 
         /// <summary>
@@ -378,7 +391,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void NewAssignBatch(object sender, EventArgs e)
+        private void NewBatch(object sender, EventArgs e)
         {
             if (this._CDA == null)
             {
@@ -386,13 +399,14 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            InvoiceAssignBatch assignBatch = new InvoiceAssignBatch();
-            assignBatch.BatchDate = DateTime.Now;
-            assignBatch.CreateUserName = App.Current.CurUser.Name;
-            assignBatch.IsCreateMsg = false;
-            assignBatch.BatchCurrency = this._CDA.Case.InvoiceCurrency;
-            this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
-            this.invoiceBindingSource.DataSource = assignBatch.Invoices.ToList();
+            InvoiceAssignBatch batch = new InvoiceAssignBatch();
+            batch.AssignDate = DateTime.Now.Date;
+            batch.CreateUserName = App.Current.CurUser.Name;
+            batch.IsCreateMsg = false;
+            batch.BatchCurrency = this._CDA.Case.InvoiceCurrency;
+            batch.CheckStatus = "未审核";
+            this.batchBindingSource.DataSource = batch;
+            this.invoiceBindingSource.DataSource = batch.Invoices.ToList();
             this.dgvInvoices.ReadOnly = false;
         }
 
@@ -412,7 +426,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            if (!(this.invoiceAssignBatchBindingSource.DataSource is InvoiceAssignBatch))
+            if (!(this.batchBindingSource.DataSource is InvoiceAssignBatch))
             {
                 return;
             }
@@ -421,20 +435,21 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            if (!ValidateAssignBatch())
+            if (!ValidateBatch())
             {
                 return;
             }
+
             bool isSaveOK = true;
-            InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.invoiceAssignBatchBindingSource.DataSource;
-            assignBatch.CDA = this._CDA;
-            if (assignBatch.AssignBatchNo == null)
+            InvoiceAssignBatch batch = (InvoiceAssignBatch)this.batchBindingSource.DataSource;
+            batch.CDA = this._CDA;
+            if (batch.AssignBatchNo == null)
             {
-                assignBatch.AssignBatchNo = GenerateAssignBatchNo(DateTime.Now);
+                batch.AssignBatchNo = GenerateAssignBatchNo(DateTime.Now.Date);
             }
             foreach (Invoice invoice in invoiceList)
             {
-                invoice.InvoiceAssignBatch = assignBatch;
+                invoice.InvoiceAssignBatch = batch;
             }
             try
             {
@@ -457,7 +472,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SelectAssignBatch(object sender, EventArgs e)
+        private void SelectBatch(object sender, EventArgs e)
         {
             if (this._CDA == null)
             {
@@ -465,20 +480,43 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            AssignBatchMgr assignBatchMgr = new AssignBatchMgr(this._CDA);
-            QueryForm queryUI = new QueryForm(assignBatchMgr, "选择转让批次");
-            assignBatchMgr.OwnerForm = queryUI;
+            AssignBatchMgr batchMgr = new AssignBatchMgr(this._CDA);
+            QueryForm queryUI = new QueryForm(batchMgr, "选择转让批次");
+            batchMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
-            InvoiceAssignBatch assignBatch = assignBatchMgr.Selected;
-            if (assignBatch != null)
+            InvoiceAssignBatch selectedBatch = batchMgr.Selected;
+            if (selectedBatch != null)
             {
-                this.invoiceAssignBatchBindingSource.DataSource = assignBatch;
-                this.invoiceBindingSource.DataSource = assignBatch.Invoices.ToList();
-                this.CaculateCurrentAssign();
+                this.batchBindingSource.DataSource = selectedBatch;
+                this.invoiceBindingSource.DataSource = selectedBatch.Invoices.ToList();
+                this.StatBatch();
             }
         }
 
-        private bool ValidateAssignBatch()
+        /// <summary>
+        /// 
+        /// </summary>
+        private void StatBatch()
+        {
+            IList invoiceList = this.invoiceBindingSource.List;
+            double totalAssign = 0;
+            double totalCommmission = 0;
+            foreach (Invoice invoice in invoiceList)
+            {
+                totalAssign += invoice.AssignAmount;
+                totalCommmission += invoice.Commission.GetValueOrDefault();
+            }
+            this.tbTotalAssign.Text = String.Format("{0:N2}", totalAssign);
+            this.tbAssignNumber.Text = String.Format("{0}", invoiceList.Count);
+            this.tbTotalCommission.Text = String.Format("{0:N2}", totalCommmission);
+            this.tbTotalHandfee.Text = String.Format("{0:N2}", invoiceList.Count * this._CDA.HandFee.GetValueOrDefault());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private bool ValidateBatch()
         {
             foreach (Invoice invoice in this.invoiceBindingSource.List)
             {
@@ -487,12 +525,12 @@ namespace CMBC.EasyFactor.ARMgr
                     MessageBox.Show("转让金额不能大于票面金额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
-                if (invoice.InvoiceDate > invoice.AssignDate)
+                if (invoice.InvoiceDate > invoice.InvoiceAssignBatch.AssignDate)
                 {
                     MessageBox.Show("转让日不能早于发票日: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
-                if (invoice.DueDate < invoice.AssignDate)
+                if (invoice.DueDate < invoice.InvoiceAssignBatch.AssignDate)
                 {
                     MessageBox.Show("转让日不能晚于发票到期日: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;

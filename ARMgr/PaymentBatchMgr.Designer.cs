@@ -1,24 +1,11 @@
 ﻿namespace CMBC.EasyFactor.ARMgr
 {
-    partial class AssignBatchMgr
+    partial class PaymentBatchMgr
     {
-        #region Fields (7)
-
-        private DevComponents.DotNetBar.ButtonX btnAssignBatchQuery;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvBatches;
-        private DevComponents.DotNetBar.LabelX lblAssignBatchNo;
-        private DevComponents.DotNetBar.PanelEx panelQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbAssignBatchNo;
-
-        #endregion Fields
-
-        #region Methods (1)
-
-        // Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -33,10 +20,6 @@
             base.Dispose(disposing);
         }
 
-        #endregion Methods
-
-
-
         #region Component Designer generated code
 
         /// <summary> 
@@ -47,12 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
-            this.btnAssignBatchQuery = new DevComponents.DotNetBar.ButtonX();
-            this.tbAssignBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblAssignBatchNo = new DevComponents.DotNetBar.LabelX();
+            this.btnPaymentBatchQuery = new DevComponents.DotNetBar.ButtonX();
+            this.tbPaymentBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblPaymentBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,13 +42,13 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
-            this.colAssignBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBatchCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsCreateMsg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsMsgCreate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
@@ -78,13 +60,13 @@
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelQuery.Controls.Add(this.btnAssignBatchQuery);
-            this.panelQuery.Controls.Add(this.tbAssignBatchNo);
-            this.panelQuery.Controls.Add(this.lblAssignBatchNo);
+            this.panelQuery.Controls.Add(this.btnPaymentBatchQuery);
+            this.panelQuery.Controls.Add(this.tbPaymentBatchNo);
+            this.panelQuery.Controls.Add(this.lblPaymentBatchNo);
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(623, 36);
+            this.panelQuery.Size = new System.Drawing.Size(647, 38);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -94,48 +76,47 @@
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
             // 
-            // btnAssignBatchQuery
+            // btnPaymentBatchQuery
             // 
-            this.btnAssignBatchQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnAssignBatchQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAssignBatchQuery.Location = new System.Drawing.Point(176, 6);
-            this.btnAssignBatchQuery.Name = "btnAssignBatchQuery";
-            this.btnAssignBatchQuery.Size = new System.Drawing.Size(75, 23);
-            this.btnAssignBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAssignBatchQuery.TabIndex = 2;
-            this.btnAssignBatchQuery.Text = "查询";
-            this.btnAssignBatchQuery.Click += new System.EventHandler(this.QueryBatch);
+            this.btnPaymentBatchQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnPaymentBatchQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnPaymentBatchQuery.Location = new System.Drawing.Point(196, 8);
+            this.btnPaymentBatchQuery.Name = "btnPaymentBatchQuery";
+            this.btnPaymentBatchQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnPaymentBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnPaymentBatchQuery.TabIndex = 5;
+            this.btnPaymentBatchQuery.Text = "查询";
+            this.btnPaymentBatchQuery.Click += new System.EventHandler(this.QueryBatch);
             // 
-            // tbAssignBatchNo
-            // 
-            // 
-            // 
-            // 
-            this.tbAssignBatchNo.Border.Class = "TextBoxBorder";
-            this.tbAssignBatchNo.Location = new System.Drawing.Point(70, 7);
-            this.tbAssignBatchNo.Name = "tbAssignBatchNo";
-            this.tbAssignBatchNo.Size = new System.Drawing.Size(100, 20);
-            this.tbAssignBatchNo.TabIndex = 1;
-            // 
-            // lblAssignBatchNo
-            // 
-            this.lblAssignBatchNo.AutoSize = true;
+            // tbPaymentBatchNo
             // 
             // 
             // 
-            this.lblAssignBatchNo.BackgroundStyle.Class = "";
-            this.lblAssignBatchNo.Location = new System.Drawing.Point(4, 9);
-            this.lblAssignBatchNo.Name = "lblAssignBatchNo";
-            this.lblAssignBatchNo.Size = new System.Drawing.Size(59, 16);
-            this.lblAssignBatchNo.TabIndex = 0;
-            this.lblAssignBatchNo.Text = "转让批号:";
+            // 
+            this.tbPaymentBatchNo.Border.Class = "TextBoxBorder";
+            this.tbPaymentBatchNo.Location = new System.Drawing.Point(80, 10);
+            this.tbPaymentBatchNo.Name = "tbPaymentBatchNo";
+            this.tbPaymentBatchNo.Size = new System.Drawing.Size(100, 20);
+            this.tbPaymentBatchNo.TabIndex = 4;
+            // 
+            // lblPaymentBatchNo
+            // 
+            this.lblPaymentBatchNo.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblPaymentBatchNo.BackgroundStyle.Class = "";
+            this.lblPaymentBatchNo.Location = new System.Drawing.Point(14, 12);
+            this.lblPaymentBatchNo.Name = "lblPaymentBatchNo";
+            this.lblPaymentBatchNo.Size = new System.Drawing.Size(59, 16);
+            this.lblPaymentBatchNo.TabIndex = 3;
+            this.lblPaymentBatchNo.Text = "付款批号:";
             // 
             // dgvBatches
             // 
             this.dgvBatches.AllowUserToAddRows = false;
             this.dgvBatches.AllowUserToDeleteRows = false;
             this.dgvBatches.AllowUserToOrderColumns = true;
-            this.dgvBatches.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -146,33 +127,33 @@
             this.dgvBatches.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvBatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBatches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colAssignBatchNo,
-            this.colBatchCurrency,
-            this.colAssignDate,
+            this.colPaymentBatchNo,
+            this.colPaymentType,
+            this.colPaymentDate,
             this.colCheckStatus,
             this.colCheckUserName,
             this.colCheckDate,
-            this.colIsCreateMsg,
+            this.colIsMsgCreate,
             this.colCreateUserName,
             this.colComment});
             this.dgvBatches.ContextMenuStrip = this.cmuBatchMgr;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvBatches.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBatches.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvBatches.Location = new System.Drawing.Point(0, 36);
+            this.dgvBatches.Location = new System.Drawing.Point(0, 38);
             this.dgvBatches.Name = "dgvBatches";
             this.dgvBatches.ReadOnly = true;
             this.dgvBatches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBatches.Size = new System.Drawing.Size(623, 321);
+            this.dgvBatches.Size = new System.Drawing.Size(647, 350);
             this.dgvBatches.TabIndex = 1;
-            this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBatches_CellDoubleClick);
+            this.dgvBatches.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBatches_CellDoubleClick);
             // 
             // cmuBatchMgr
             // 
@@ -218,31 +199,26 @@
             this.menuItemReject.Text = "复核拒绝";
             this.menuItemReject.Click += new System.EventHandler(this.Reject);
             // 
-            // colAssignBatchNo
+            // colPaymentBatchNo
             // 
-            this.colAssignBatchNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colAssignBatchNo.DataPropertyName = "AssignBatchNo";
-            this.colAssignBatchNo.Frozen = true;
-            this.colAssignBatchNo.HeaderText = "转让批号";
-            this.colAssignBatchNo.Name = "colAssignBatchNo";
-            this.colAssignBatchNo.ReadOnly = true;
-            this.colAssignBatchNo.Width = 116;
+            this.colPaymentBatchNo.DataPropertyName = "PaymentBatchNo";
+            this.colPaymentBatchNo.HeaderText = "付款批号";
+            this.colPaymentBatchNo.Name = "colPaymentBatchNo";
+            this.colPaymentBatchNo.ReadOnly = true;
             // 
-            // colBatchCurrency
+            // colPaymentType
             // 
-            this.colBatchCurrency.DataPropertyName = "BatchCurrency";
-            this.colBatchCurrency.HeaderText = "批次币种";
-            this.colBatchCurrency.Name = "colBatchCurrency";
-            this.colBatchCurrency.ReadOnly = true;
+            this.colPaymentType.DataPropertyName = "PaymentType";
+            this.colPaymentType.HeaderText = "付款类型";
+            this.colPaymentType.Name = "colPaymentType";
+            this.colPaymentType.ReadOnly = true;
             // 
-            // colAssignDate
+            // colPaymentDate
             // 
-            this.colAssignDate.DataPropertyName = "AssignDate";
-            dataGridViewCellStyle2.Format = "d";
-            this.colAssignDate.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAssignDate.HeaderText = "转让日期";
-            this.colAssignDate.Name = "colAssignDate";
-            this.colAssignDate.ReadOnly = true;
+            this.colPaymentDate.DataPropertyName = "PaymentDate";
+            this.colPaymentDate.HeaderText = "付款日";
+            this.colPaymentDate.Name = "colPaymentDate";
+            this.colPaymentDate.ReadOnly = true;
             // 
             // colCheckStatus
             // 
@@ -265,12 +241,12 @@
             this.colCheckDate.Name = "colCheckDate";
             this.colCheckDate.ReadOnly = true;
             // 
-            // colIsCreateMsg
+            // colIsMsgCreate
             // 
-            this.colIsCreateMsg.DataPropertyName = "IsCreateMsg";
-            this.colIsCreateMsg.HeaderText = "是否生成报文";
-            this.colIsCreateMsg.Name = "colIsCreateMsg";
-            this.colIsCreateMsg.ReadOnly = true;
+            this.colIsMsgCreate.DataPropertyName = "IsMsgCreate";
+            this.colIsMsgCreate.HeaderText = "是否生成报文";
+            this.colIsMsgCreate.Name = "colIsMsgCreate";
+            this.colIsMsgCreate.ReadOnly = true;
             // 
             // colCreateUserName
             // 
@@ -286,14 +262,14 @@
             this.colComment.Name = "colComment";
             this.colComment.ReadOnly = true;
             // 
-            // AssignBatchMgr
+            // PaymentBatchMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvBatches);
             this.Controls.Add(this.panelQuery);
-            this.Name = "AssignBatchMgr";
-            this.Size = new System.Drawing.Size(623, 357);
+            this.Name = "PaymentBatchMgr";
+            this.Size = new System.Drawing.Size(647, 388);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBatches)).EndInit();
@@ -304,19 +280,24 @@
 
         #endregion
 
+        private DevComponents.DotNetBar.PanelEx panelQuery;
+        private DevComponents.DotNetBar.ButtonX btnPaymentBatchQuery;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentBatchNo;
+        private DevComponents.DotNetBar.LabelX lblPaymentBatchNo;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvBatches;
         private System.Windows.Forms.ContextMenuStrip cmuBatchMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceList;
         private System.Windows.Forms.ToolStripMenuItem menuItemBatchSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceList;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuItemCheck;
         private System.Windows.Forms.ToolStripMenuItem menuItemReject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignBatchNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentBatchNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsCreateMsg;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsMsgCreate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
     }

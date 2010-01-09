@@ -11,9 +11,9 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Globalization;
     using System.Linq;
     using System.Windows.Forms;
+    using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.CaseMgr;
 
     /// <summary>
     /// 
@@ -91,18 +91,21 @@ namespace CMBC.EasyFactor.ARMgr
 
         #region Properties (1)
 
+        /// <summary>
+        /// 
+        /// </summary>
         public CDA CDA
         {
             set
             {
                 this._CDA = value;
-                NewPaymentBatch(null, null);
+                NewBatch(null, null);
             }
         }
 
         #endregion Properties
 
-        #region Methods (15)
+        #region Methods (19)
 
         // Public Methods (2) 
 
@@ -111,7 +114,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="cda"></param>
         /// <returns></returns>
-        public static string GeneratePaymentBatchNo(DateTime date)
+        public static string GenerateBatchNo(DateTime date)
         {
             DateTime begin = new DateTime(date.Year, date.Month, date.Day);
             DateTime end = begin.AddDays(1);
@@ -129,28 +132,16 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 ControlUtil.SetComponetDefault(comp);
             }
-            this.invoicePaymentBatchBindingSource.DataSource = typeof(InvoicePaymentBatch);
+            this.batchBindingSource.DataSource = typeof(InvoicePaymentBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
-        // Private Methods (13) 
+        // Private Methods (17) 
 
-        private void CaculateCurrentPayment()
-        {
-            IList invoiceList = this.invoiceBindingSource.List;
-            double totalPayment = 0;
-            double totalRefund = 0;
-            for (int i = 0; i < invoiceList.Count; i++)
-            {
-                if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
-                {
-                    totalPayment += ((Invoice)invoiceList[i]).PaymentAmount.GetValueOrDefault();
-                    totalRefund += ((Invoice)invoiceList[i]).RefundAmount.GetValueOrDefault();
-                }
-            }
-            this.tbTotalPayment.Text = String.Format("{0:N2}", totalPayment);
-            this.tbTotalRefund.Text = String.Format("{0:N2}", totalRefund);
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DetailCase(object sender, EventArgs e)
         {
             if (this.dgvInvoices.CurrentCell == null)
@@ -163,6 +154,11 @@ namespace CMBC.EasyFactor.ARMgr
             caseDetail.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DetailCDA(object sender, EventArgs e)
         {
             if (this.dgvInvoices.CurrentCell == null)
@@ -192,6 +188,11 @@ namespace CMBC.EasyFactor.ARMgr
             invoiceDetail.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvInvoices_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)
@@ -207,45 +208,26 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
                 {
                     invoice.PaymentAmount = invoice.AssignAmount;
-                    invoice.PaymentDate = DateTime.Now;
+                    invoice.PaymentDate = DateTime.Now.Date;
                     invoice.RefundAmount = invoice.FinanceAmount;
-                    invoice.RefundDate = DateTime.Now;
+                    invoice.RefundDate = DateTime.Now.Date;
 
-                    colPaymentAmount.ReadOnly = false;
-                    colPaymentDate.ReadOnly = false;
-                    colRefundAmount.ReadOnly = false;
-                    colRefundDate.ReadOnly = false;
-                    colCommission.ReadOnly = false;
-                    colCommissionDate.ReadOnly = false;
-                    colInterest.ReadOnly = false;
-                    colInterestDate.ReadOnly = false;
-
+                    ResetRow(e.RowIndex, true);
                 }
                 else
                 {
-                    invoice.PaymentAmount = null;
-                    invoice.PaymentDate = null;
-                    invoice.RefundAmount = null;
-                    invoice.RefundDate = null;
-                    invoice.Commission = null;
-                    invoice.CommissionDate = null;
-                    invoice.Interest = null;
-                    invoice.InterestDate = null;
-
-                    colPaymentAmount.ReadOnly = true;
-                    colPaymentDate.ReadOnly = true;
-                    colRefundAmount.ReadOnly = true;
-                    colRefundDate.ReadOnly = true;
-                    colCommission.ReadOnly = true;
-                    colCommissionDate.ReadOnly = true;
-                    colInterest.ReadOnly = true;
-                    colInterestDate.ReadOnly = true;
+                    ResetRow(e.RowIndex, false);
                 }
-                CaculateCurrentPayment();
+                StatBatch();
             }
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value == null)
@@ -259,6 +241,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void dgvInvoices_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
             if (e.Value == null)
@@ -280,6 +267,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvInvoices_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             if (e.FormattedValue == null || e.FormattedValue.Equals(string.Empty))
@@ -310,6 +302,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvInvoices_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)
@@ -318,10 +315,15 @@ namespace CMBC.EasyFactor.ARMgr
             }
             if (this.dgvInvoices.Columns[e.ColumnIndex] == colPaymentAmount)
             {
-                CaculateCurrentPayment();
+                StatBatch();
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvInvoices_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             this.DetailInvoice(null, null);
@@ -332,13 +334,71 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ImportPaymentBatch(object sender, EventArgs e)
+        private void ExportBatch(object sender, EventArgs e)
         {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_PAYMENT);
-            importForm.ShowDialog(this);
+            if (this._CDA == null)
+            {
+                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (!(this.batchBindingSource.DataSource is InvoicePaymentBatch))
+            {
+                return;
+            }
+            if (this.invoiceBindingSource.List.Count == 0)
+            {
+                return;
+            }
+
+            ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_INVOICES);
+            exportUtil.StartExport(this.invoiceBindingSource.List);
+
         }
 
-        private void NewPaymentBatch(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportBatch(object sender, EventArgs e)
+        {
+            if (this._CDA == null)
+            {
+                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (!(this.batchBindingSource.DataSource is InvoicePaymentBatch))
+            {
+                return;
+            }
+
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES_BY_BATCH);
+            importForm.ShowDialog(this);
+            IList invoiceList = importForm.ImportedList;
+            if (invoiceList != null)
+            {
+                for (int i = 0; i < this.invoiceBindingSource.List.Count; i++)
+                {
+                    DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[i].Cells[0];
+                    cell.Value = 0;
+                    Invoice oldInvoice = (Invoice)this.invoiceBindingSource.List[i];
+                    int index = invoiceList.IndexOf(oldInvoice);
+                    if (invoiceList.Contains(oldInvoice) && oldInvoice.PaymentAmount.HasValue)
+                    {
+                        cell.Value = 1;
+                    }
+                    ResetRow(i, 1 == (int)cell.Value ? true : false);
+                }
+                this.StatBatch();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewBatch(object sender, EventArgs e)
         {
             if (this._CDA == null)
             {
@@ -368,11 +428,42 @@ namespace CMBC.EasyFactor.ARMgr
                 default:
                     break;
             }
-            batch.PaymentDate = DateTime.Now;
+            batch.PaymentDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
-            this.invoicePaymentBatchBindingSource.DataSource = batch;
+            batch.CheckStatus = "未审核";
+            this.batchBindingSource.DataSource = batch;
             this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.PaymentAmount.HasValue == false).ToList();
-            this.CaculateCurrentPayment();
+            this.StatBatch();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rowIndex"></param>
+        /// <param name="editable"></param>
+        private void ResetRow(int rowIndex, bool editable)
+        {
+            this.dgvInvoices.Rows[rowIndex].Cells["colPaymentAmount"].ReadOnly = !editable;
+            this.dgvInvoices.Rows[rowIndex].Cells["colPaymentDate"].ReadOnly = !editable;
+            this.dgvInvoices.Rows[rowIndex].Cells["colRefundAmount"].ReadOnly = !editable;
+            this.dgvInvoices.Rows[rowIndex].Cells["colRefundDate"].ReadOnly = !editable;
+            this.dgvInvoices.Rows[rowIndex].Cells["colInterest"].ReadOnly = !editable;
+            this.dgvInvoices.Rows[rowIndex].Cells["colInterestDate"].ReadOnly = !editable;
+            this.dgvInvoices.Rows[rowIndex].Cells["colCommission"].ReadOnly = !editable;
+            this.dgvInvoices.Rows[rowIndex].Cells["colCommissionDate"].ReadOnly = !editable;
+            if (!editable)
+            {
+                IList invoiceList = this.invoiceBindingSource.List;
+                Invoice invoice = (Invoice)invoiceList[rowIndex];
+                invoice.PaymentAmount = null;
+                invoice.PaymentDate = null;
+                invoice.RefundAmount = null;
+                invoice.RefundDate = null;
+                invoice.Commission = null;
+                invoice.CommissionDate = null;
+                invoice.Interest = null;
+                invoice.InterestDate = null;
+            }
         }
 
         /// <summary>
@@ -380,7 +471,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SavePaymentBatch(object sender, EventArgs e)
+        private void SaveBatch(object sender, EventArgs e)
         {
             if (this._CDA == null)
             {
@@ -391,29 +482,34 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            if (!(this.invoicePaymentBatchBindingSource.DataSource is InvoicePaymentBatch))
+            if (!(this.batchBindingSource.DataSource is InvoicePaymentBatch))
+            {
+                return;
+            }
+            if (!ValidateBatch())
             {
                 return;
             }
 
             bool isSaveOK = true;
-            InvoicePaymentBatch paymentBatch = (InvoicePaymentBatch)this.invoicePaymentBatchBindingSource.DataSource;
-            paymentBatch.CDA = this._CDA;
+            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.batchBindingSource.DataSource;
+            batch.CDA = this._CDA;
+
             IList invoiceList = this.invoiceBindingSource.List;
             for (int i = 0; i < invoiceList.Count; i++)
             {
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    ((Invoice)invoiceList[i]).InvoicePaymentBatch = paymentBatch;
+                    ((Invoice)invoiceList[i]).InvoicePaymentBatch = batch;
                 }
             }
-            if (paymentBatch.Invoices.Count == 0)
+            if (batch.Invoices.Count == 0)
             {
                 return;
             }
-            if (paymentBatch.PaymentBatchNo == null)
+            if (batch.PaymentBatchNo == null)
             {
-                paymentBatch.PaymentBatchNo = GeneratePaymentBatchNo(DateTime.Now);
+                batch.PaymentBatchNo = GenerateBatchNo(DateTime.Now.Date);
             }
             try
             {
@@ -429,6 +525,71 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("数据保存成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.caseBasic.CaculateOutstanding(this._CDA);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectBatch(object sender, EventArgs e)
+        {
+            if (this._CDA == null)
+            {
+                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            PaymentBatchMgr batchMgr = new PaymentBatchMgr(this._CDA);
+            QueryForm queryUI = new QueryForm(batchMgr, "选择付款批次");
+            batchMgr.OwnerForm = queryUI;
+            queryUI.ShowDialog(this);
+            InvoicePaymentBatch selectedBatch = batchMgr.Selected;
+            if (selectedBatch != null)
+            {
+                this.batchBindingSource.DataSource = selectedBatch;
+                this.invoiceBindingSource.DataSource = selectedBatch.Invoices.ToList();
+                for (int i = 0; i < this.invoiceBindingSource.List.Count; i++)
+                {
+                    DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[i].Cells[0];
+                    cell.Value = 1;
+                    ResetRow(i, true);
+                }
+                this.StatBatch();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void StatBatch()
+        {
+            IList invoiceList = this.invoiceBindingSource.List;
+            double totalPayment = 0;
+            double totalRefund = 0;
+            for (int i = 0; i < invoiceList.Count; i++)
+            {
+                if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+                {
+                    totalPayment += ((Invoice)invoiceList[i]).PaymentAmount.GetValueOrDefault();
+                    totalRefund += ((Invoice)invoiceList[i]).RefundAmount.GetValueOrDefault();
+                }
+            }
+            this.tbTotalPayment.Text = String.Format("{0:N2}", totalPayment);
+            this.tbTotalRefund.Text = String.Format("{0:N2}", totalRefund);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private bool ValidateBatch()
+        {
+            foreach (Invoice invoice in this.invoiceBindingSource.List)
+            {
+
+            }
+            return true;
         }
 
         #endregion Methods

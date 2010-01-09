@@ -7,11 +7,22 @@ namespace CMBC.EasyFactor.DB.dbml
 {
     public partial class Invoice : BaseObject
     {
-        public string SellerName
+        #region Properties (9)
+
+        public double AssignOutstanding
         {
             get
             {
-                return this.InvoiceAssignBatch.CDA.Case.SellerClient.ToString();
+                return this.AssignAmount - this.PaymentAmount.GetValueOrDefault();
+            }
+        }
+
+        public int AssignOverDueDays
+        {
+            get
+            {
+                TimeSpan duedays = DateTime.Now.Date - this.DueDate;
+                return duedays.Days;
             }
         }
 
@@ -20,14 +31,6 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 return this.InvoiceAssignBatch.CDA.Case.BuyerClient.ToString();
-            }
-        }
-
-        public string TransactionType
-        {
-            get
-            {
-                return this.InvoiceAssignBatch.CDA.Case.TransactionType;
             }
         }
 
@@ -54,24 +57,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public double AssignOutstanding
-        {
-            get
-            {
-                return this.AssignAmount - this.PaymentAmount.GetValueOrDefault();
-            }
-        }
-
-        public System.Nullable<double> FinanceOutstanding
-        {
-            get
-            {
-                if (!this.FinanceAmount.HasValue)
-                    return null;
-                return this.FinanceAmount.Value - this.RefundAmount.GetValueOrDefault();
-            }
-        }
-
         public string FinanceCurrency
         {
             get
@@ -87,12 +72,13 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public int AssignOverDueDays
+        public System.Nullable<double> FinanceOutstanding
         {
             get
             {
-                TimeSpan duedays = DateTime.Now - this.DueDate;
-                return duedays.Days;
+                if (!this.FinanceAmount.HasValue)
+                    return null;
+                return this.FinanceAmount.Value - this.RefundAmount.GetValueOrDefault();
             }
         }
 
@@ -102,7 +88,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (this.FinanceDueDate.HasValue)
                 {
-                    TimeSpan duedays = DateTime.Now - this.FinanceDueDate.Value;
+                    TimeSpan duedays = DateTime.Now.Date - this.FinanceDueDate.Value;
                     return duedays.Days;
                 }
                 else
@@ -111,5 +97,55 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
+
+        public string SellerName
+        {
+            get
+            {
+                return this.InvoiceAssignBatch.CDA.Case.SellerClient.ToString();
+            }
+        }
+
+        public string TransactionType
+        {
+            get
+            {
+                return this.InvoiceAssignBatch.CDA.Case.TransactionType;
+            }
+        }
+
+        #endregion Properties
+
+        #region Methods (1)
+
+        // Public Methods (1) 
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            Invoice right = obj as Invoice;
+            if (right == null)
+            {
+                return false;
+            }
+            return this.GetHashCode() == right.GetHashCode();
+        }
+
+        public override int GetHashCode()
+        {
+            if (this.InvoiceNo == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return this.InvoiceNo.GetHashCode();
+            }
+        }
+
+        #endregion Methods
     }
 }

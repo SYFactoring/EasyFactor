@@ -16,9 +16,9 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class LoginWindow : DevComponents.DotNetBar.Office2007Form
     {
-		#region Constructors (1) 
+        #region Constructors (1)
 
-             /// <summary>
+        /// <summary>
         /// Initializes a new instance of the LoginWindow class
         /// </summary>
         public LoginWindow()
@@ -26,11 +26,11 @@ namespace CMBC.EasyFactor
             this.InitializeComponent();
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (5) 
+        #region Methods (4)
 
-		// Public Methods (2) 
+        // Public Methods (2) 
 
         /// <summary>
         /// Auto login system. Only used in develop period.
@@ -55,12 +55,12 @@ namespace CMBC.EasyFactor
             }
             catch (Exception e)
             {
-                MessageBox.Show("数据库连接失败: "+e.ToString(), "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("数据库连接失败: " + e.ToString(), "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             return false;
         }
-		// Private Methods (3) 
+        // Private Methods (2) 
 
         /// <summary>
         /// Event handler when cancel button clicked
@@ -79,40 +79,33 @@ namespace CMBC.EasyFactor
         /// <param name="e">Event Args</param>
         private void Login(object sender, EventArgs e)
         {
+            if (!this.superValidator.Validate())
+            {
+                return;
+            }
             string uid = tbUserId.Text.Trim();
             string pass = tbPassword.Text.Trim();
-            if (uid == string.Empty || pass == string.Empty)
+            User curUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid);
+
+            if (curUser != null)
             {
-                labelMessage.Text = "用户名或密码不能为空";
+                if (!curUser.Password.Equals(pass))
+                {
+                    errorProvider.SetError(tbUserId, "密码不正确");
+                    return;
+                }
+                curUser.LoginDate = DateTime.Now;
+                App.Current.DbContext.SubmitChanges();
+                App.Current.CurUser = curUser;
+                Close();
             }
             else
             {
-                User curUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid && u.Password == pass);
-
-                if (curUser != null)
-                {
-                    curUser.LoginDate = DateTime.Now;
-                    App.Current.DbContext.SubmitChanges();
-                    App.Current.CurUser = curUser;
-                    Close();
-                }
-                else
-                {
-                    labelMessage.Text = "用户名或密码不对";
-                }
+                errorProvider.SetError(tbUserId, "用户名不存在");
             }
+
         }
 
-        /// <summary>
-        /// Event handler when LoginWindow loaded.
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void Login_Load(object sender, EventArgs e)
-        {
-            tbUserId.Focus();
-        }
-
-		#endregion Methods 
+        #endregion Methods
     }
 }

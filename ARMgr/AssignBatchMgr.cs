@@ -10,13 +10,14 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class AssignBatchMgr : UserControl
     {
-		#region Fields (2) 
+        #region Fields (3)
 
         /// <summary>
         /// 
@@ -26,39 +27,71 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         private CDA cda;
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpBatchType opBatchType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (2) 
+        #region Enums (1)
+
+        /// <summary>
+        ///
+        /// </summary>
+        public enum OpBatchType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            CHECK,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            DETAIL,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            QUERY
+        }
+
+        #endregion Enums
+
+        #region Constructors (2)
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="selectedCDA"></param>
         public AssignBatchMgr(CDA selectedCDA)
-            : this()
+            : this(OpBatchType.DETAIL)
         {
-            if (selectedCDA != null)
-            {
-                this.cda = selectedCDA;
-                this.panelQuery.Visible = false;
-                this.bs.DataSource = cda.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
-            }
+            this.cda = selectedCDA;
+            this.panelQuery.Visible = false;
+            this.bs.DataSource = cda.InvoiceAssignBatches;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public AssignBatchMgr()
+        public AssignBatchMgr(OpBatchType batchType)
         {
             InitializeComponent();
-            this.dgvAssignBatch.AutoGenerateColumns = false;
-            this.dgvAssignBatch.DataSource = bs;
+            this.dgvBatches.AutoGenerateColumns = false;
+            this.dgvBatches.DataSource = bs;
+            this.opBatchType = batchType;
+
+            if (batchType == OpBatchType.CHECK)
+            {
+                this.bs.DataSource = App.Current.DbContext.InvoiceAssignBatches.Where(i => i.CheckStatus == "未审核");
+            }
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets owner form
@@ -78,57 +111,126 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (2) 
+        #region Methods (6)
 
-		// Private Methods (2) 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryAssignBatch(object sender, EventArgs e)
-        {
-            if (cda == null)
-            {
-                this.bs.DataSource = App.Current.DbContext.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
-            }
-            else
-            {
-                this.bs.DataSource = cda.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
-            }
-            this.dgvAssignBatch.DataSource = bs;
-        }
+        // Private Methods (6) 
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SelectAssignBatch(object sender, DataGridViewCellEventArgs e)
+        private void Check(object sender, EventArgs e)
         {
-            if (this.dgvAssignBatch.SelectedRows.Count == 0)
+            if (this.dgvBatches.SelectedRows.Count == 0)
             {
                 return;
             }
-            string ino = (string)dgvAssignBatch["colAssignBatchNo", dgvAssignBatch.SelectedRows[0].Index].Value;
-            if (ino != null)
+            foreach (DataGridViewRow row in this.dgvBatches.SelectedRows)
             {
-                InvoiceAssignBatch selectedBatch = App.Current.DbContext.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == ino);
-                if (selectedBatch != null)
-                {
-                    this.Selected = selectedBatch;
-                    if (this.OwnerForm != null)
-                    {
-                        this.OwnerForm.DialogResult = DialogResult.Yes;
-                        this.OwnerForm.Close();
-                    }
-                }
+                InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[row.Index];
+                batch.CheckStatus = "已通过";
+                batch.CheckUserName = App.Current.CurUser.Name;
+                batch.CheckDate = DateTime.Now.Date;
+            }
+            App.Current.DbContext.SubmitChanges();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailBatch(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceMgr invoiceMgr = new InvoiceMgr(selectedBatch.Invoices.ToList());
+            QueryForm queryUI = new QueryForm(invoiceMgr, "批次详情");
+            invoiceMgr.OwnerForm = queryUI;
+            queryUI.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvBatches_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.OwnerForm == null)
+            {
+                this.DetailBatch(sender, e);
+            }
+            else
+            {
+                this.SelectBatch(sender, e);
             }
         }
 
-		#endregion Methods 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryBatch(object sender, EventArgs e)
+        {
+            if (opBatchType == OpBatchType.QUERY || opBatchType == OpBatchType.CHECK)
+            {
+                this.bs.DataSource = App.Current.DbContext.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
+            }
+            else if (opBatchType == OpBatchType.DETAIL)
+            {
+                this.bs.DataSource = cda.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Reject(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            foreach (DataGridViewRow row in this.dgvBatches.SelectedRows)
+            {
+                InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[row.Index];
+                batch.CheckStatus = "已拒绝";
+                batch.CheckUserName = App.Current.CurUser.Name;
+                batch.CheckDate = DateTime.Now.Date;
+            }
+            App.Current.DbContext.SubmitChanges();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectBatch(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            this.Selected = selectedBatch;
+            if (this.OwnerForm != null)
+            {
+                this.OwnerForm.DialogResult = DialogResult.Yes;
+                this.OwnerForm.Close();
+            }
+        }
+
+        #endregion Methods
     }
 }

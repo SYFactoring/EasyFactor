@@ -18,14 +18,11 @@ namespace CMBC.EasyFactor
         private System.Windows.Forms.Panel panelHeader;
         private System.Windows.Forms.Panel panelFooter;
         private System.Windows.Forms.Panel panelCenter;
-        private System.Windows.Forms.Label lblPassword;
-        private System.Windows.Forms.Label lblUserId;
-        private System.Windows.Forms.TextBox tbPassword;
-        private System.Windows.Forms.TextBox tbUserId;
-        private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.Label labelMessage;
-        private System.Windows.Forms.Button btnCancel;
-   
+        private DevComponents.DotNetBar.LabelX lblPassword;
+        private DevComponents.DotNetBar.LabelX lblUserId;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPassword;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbUserId;
+
         /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
@@ -33,8 +30,8 @@ namespace CMBC.EasyFactor
         protected override void Dispose(bool disposing)
         {
             if (disposing && (this.components != null))
-            { 
-                this.components.Dispose(); 
+            {
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -47,19 +44,23 @@ namespace CMBC.EasyFactor
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginWindow));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.panelFooter = new System.Windows.Forms.Panel();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.labelMessage = new System.Windows.Forms.Label();
-            this.btnLogin = new System.Windows.Forms.Button();
+            this.btnCancel = new DevComponents.DotNetBar.ButtonX();
+            this.btnLogin = new DevComponents.DotNetBar.ButtonX();
             this.panelCenter = new System.Windows.Forms.Panel();
-            this.tbPassword = new System.Windows.Forms.TextBox();
-            this.tbUserId = new System.Windows.Forms.TextBox();
-            this.lblPassword = new System.Windows.Forms.Label();
-            this.lblUserId = new System.Windows.Forms.Label();
+            this.tbPassword = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbUserId = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblPassword = new DevComponents.DotNetBar.LabelX();
+            this.lblUserId = new DevComponents.DotNetBar.LabelX();
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.panelFooter.SuspendLayout();
             this.panelCenter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -70,48 +71,42 @@ namespace CMBC.EasyFactor
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(317, 64);
-            this.panelHeader.TabIndex = 100;
+            this.panelHeader.Size = new System.Drawing.Size(289, 69);
+            this.panelHeader.TabIndex = 0;
             // 
             // panelFooter
             // 
             this.panelFooter.BackColor = System.Drawing.Color.LightSkyBlue;
             this.panelFooter.Controls.Add(this.btnCancel);
-            this.panelFooter.Controls.Add(this.labelMessage);
             this.panelFooter.Controls.Add(this.btnLogin);
             this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelFooter.Location = new System.Drawing.Point(0, 142);
+            this.panelFooter.Location = new System.Drawing.Point(0, 154);
             this.panelFooter.Name = "panelFooter";
-            this.panelFooter.Size = new System.Drawing.Size(317, 33);
-            this.panelFooter.TabIndex = 100;
+            this.panelFooter.Size = new System.Drawing.Size(289, 36);
+            this.panelFooter.TabIndex = 2;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(235, 5);
+            this.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCancel.Location = new System.Drawing.Point(200, 6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "取消";
-            this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.Cancel);
-            // 
-            // labelMessage
-            // 
-            this.labelMessage.AutoSize = true;
-            this.labelMessage.ForeColor = System.Drawing.Color.Red;
-            this.labelMessage.Location = new System.Drawing.Point(3, 10);
-            this.labelMessage.Name = "labelMessage";
-            this.labelMessage.Size = new System.Drawing.Size(0, 12);
-            this.labelMessage.TabIndex = 1;
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(154, 5);
+            this.btnLogin.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnLogin.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnLogin.Location = new System.Drawing.Point(119, 6);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "登录";
-            this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.Login);
             // 
             // panelCenter
@@ -122,64 +117,106 @@ namespace CMBC.EasyFactor
             this.panelCenter.Controls.Add(this.lblPassword);
             this.panelCenter.Controls.Add(this.lblUserId);
             this.panelCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCenter.Location = new System.Drawing.Point(0, 64);
+            this.panelCenter.Location = new System.Drawing.Point(0, 69);
             this.panelCenter.Name = "panelCenter";
-            this.panelCenter.Size = new System.Drawing.Size(317, 78);
-            this.panelCenter.TabIndex = 2;
+            this.panelCenter.Size = new System.Drawing.Size(289, 85);
+            this.panelCenter.TabIndex = 1;
             // 
             // tbPassword
             // 
-            this.tbPassword.Location = new System.Drawing.Point(98, 44);
+            // 
+            // 
+            // 
+            this.tbPassword.Border.Class = "TextBoxBorder";
+            this.tbPassword.Location = new System.Drawing.Point(83, 48);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
-            this.tbPassword.Size = new System.Drawing.Size(160, 21);
-            this.tbPassword.TabIndex = 1;
+            this.tbPassword.Size = new System.Drawing.Size(160, 20);
+            this.tbPassword.TabIndex = 3;
             // 
-            // tbUserID
+            // tbUserId
             // 
-            this.tbUserId.Location = new System.Drawing.Point(98, 14);
-            this.tbUserId.Name = "tbUserID";
-            this.tbUserId.Size = new System.Drawing.Size(160, 21);
-            this.tbUserId.TabIndex = 0;
+            // 
+            // 
+            // 
+            this.tbUserId.Border.Class = "TextBoxBorder";
+            this.tbUserId.Location = new System.Drawing.Point(83, 15);
+            this.tbUserId.Name = "tbUserId";
+            this.tbUserId.Size = new System.Drawing.Size(160, 20);
+            this.tbUserId.TabIndex = 1;
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(58, 46);
+            // 
+            // 
+            // 
+            this.lblPassword.BackgroundStyle.Class = "";
+            this.lblPassword.Location = new System.Drawing.Point(43, 50);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(35, 12);
-            this.lblPassword.TabIndex = 101;
+            this.lblPassword.Size = new System.Drawing.Size(34, 16);
+            this.lblPassword.TabIndex = 2;
             this.lblPassword.Text = "密码:";
             // 
-            // lblUserID
+            // lblUserId
             // 
             this.lblUserId.AutoSize = true;
-            this.lblUserId.Location = new System.Drawing.Point(58, 17);
-            this.lblUserId.Name = "lblUserID";
-            this.lblUserId.Size = new System.Drawing.Size(35, 12);
-            this.lblUserId.TabIndex = 100;
+            // 
+            // 
+            // 
+            this.lblUserId.BackgroundStyle.Class = "";
+            this.lblUserId.Location = new System.Drawing.Point(43, 16);
+            this.lblUserId.Name = "lblUserId";
+            this.lblUserId.Size = new System.Drawing.Size(34, 16);
+            this.lblUserId.TabIndex = 0;
             this.lblUserId.Text = "帐号:";
+            // 
+            // superValidator
+            // 
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
             // 
             // LoginWindow
             // 
             this.AcceptButton = this.btnLogin;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(317, 175);
+            this.ClientSize = new System.Drawing.Size(289, 190);
             this.Controls.Add(this.panelCenter);
             this.Controls.Add(this.panelFooter);
             this.Controls.Add(this.panelHeader);
+            this.DoubleBuffered = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "LoginWindow";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.Login_Load);
+            this.Text = "登录";
+            this.TopMost = true;
             this.panelFooter.ResumeLayout(false);
-            this.panelFooter.PerformLayout();
             this.panelCenter.ResumeLayout(false);
             this.panelCenter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
+        private DevComponents.DotNetBar.ButtonX btnCancel;
+        private DevComponents.DotNetBar.ButtonX btnLogin;
     }
 }

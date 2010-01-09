@@ -368,7 +368,7 @@ namespace CMBC.EasyFactor.Report
                     {
                         sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
                         sheet.Cells[row, 2] = invoice.AssignAmount;
-                        sheet.Cells[row, 3] = invoice.AssignDate;
+                        sheet.Cells[row, 3] = invoice.InvoiceAssignBatch.AssignDate;
                         sheet.Cells[row, 4] = invoice.InvoiceAssignBatch.CDA.Price;
                         sheet.Cells[row, 5] = invoice.InvoiceAssignBatch.CDA.HandFee;
                         sheet.Cells[row, 6] = invoice.Commission;
@@ -439,7 +439,10 @@ namespace CMBC.EasyFactor.Report
                 sheet.Cells[5, 1] = "卖方：";
                 sheet.Cells[5, 2] = seller.ToString();
                 sheet.Cells[6, 1] = "最高预付款额度：";
-                sheet.Cells[6, 2] = String.Format("{0:N2}", seller.FinanceCreditLine == null ? null : seller.FinanceCreditLine.CreditLine);
+                if (seller.FinanceCreditLine != null)
+                {
+                    sheet.Cells[6, 2] = String.Format("{0:N2}", seller.FinanceCreditLine.CreditLine);
+                }
                 sheet.Cells[7, 1] = "总融资余额";
                 sheet.Cells[7, 2] = String.Format("{0:N2}", seller.FinanceOutstanding);
                 sheet.Cells[8, 1] = "尚可动拨金额";
@@ -595,8 +598,8 @@ namespace CMBC.EasyFactor.Report
                               where buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
                               where
                                     (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
-                                 && (beginDate == this.diAssignDateBegin.MinDate ? true : invoice.AssignDate > beginDate.AddDays(-1))
-                                 && (endDate == this.diAssignDateEnd.MaxDate ? true : invoice.AssignDate < endDate.AddDays(1))
+                                 && (beginDate == this.diAssignDateBegin.MinDate ? true : invoice.InvoiceAssignBatch.AssignDate > beginDate.AddDays(-1))
+                                 && (endDate == this.diAssignDateEnd.MaxDate ? true : invoice.InvoiceAssignBatch.AssignDate < endDate.AddDays(1))
                               select invoice;
 
             this.bs.DataSource = queryResult.ToList();

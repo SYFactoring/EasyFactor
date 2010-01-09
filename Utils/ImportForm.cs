@@ -76,22 +76,12 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_ASSIGN,
+            IMPORT_INVOICES_BY_BATCH,
 
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_FINANCE,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            IMPORT_PAYMENT,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            IMPORT_ASSIGN_FINANCE_PAYMENT
+            IMPORT_INVOICES
         }
 
         #endregion Enums
@@ -128,13 +118,10 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_CONTRACT_CDA:
                     this.Text = "保理合同及额度通知书导入";
                     break;
-                case ImportType.IMPORT_ASSIGN:
-                    this.Text = "发票转让导入";
+                case ImportType.IMPORT_INVOICES_BY_BATCH:
+                    this.Text = "当前批次导入";
                     break;
-                case ImportType.IMPORT_FINANCE:
-                    this.Text = "发票融资导入";
-                    break;
-                case ImportType.IMPORT_ASSIGN_FINANCE_PAYMENT:
+                case ImportType.IMPORT_INVOICES:
                     this.Text = "发票转让、融资、还款导入";
                     break;
                 default:
@@ -192,14 +179,11 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_CONTRACT_CDA:
                     e.Result = ImportContractAndCDA((string)e.Argument, worker);
                     break;
-                case ImportType.IMPORT_ASSIGN:
-                    e.Result = ImportAssignBatch((string)e.Argument, worker);
+                case ImportType.IMPORT_INVOICES_BY_BATCH:
+                    e.Result = ImportInvoicesByBatch((string)e.Argument, worker);
                     break;
-                case ImportType.IMPORT_FINANCE:
-                    e.Result = ImportFinanceBatch((string)e.Argument, worker);
-                    break;
-                case ImportType.IMPORT_ASSIGN_FINANCE_PAYMENT:
-                    e.Result = ImportAssignFinancePayment((string)e.Argument, worker);
+                case ImportType.IMPORT_INVOICES:
+                    e.Result = ImportInvoices((string)e.Argument, worker);
                     break;
                 default:
                     break;
@@ -239,6 +223,10 @@ namespace CMBC.EasyFactor.Utils
             }
             this.btnStart.Enabled = true;
             this.btnCancel.Text = "关闭";
+            if (e.Error == null && this.importType == ImportType.IMPORT_INVOICES_BY_BATCH)
+            {
+                this.Close();
+            }
         }
 
         /// <summary>
@@ -291,7 +279,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="fileName"></param>
         /// <param name="worker"></param>
         /// <returns></returns>
-        private int ImportAssignBatch(string fileName, BackgroundWorker worker)
+        private int ImportInvoicesByBatch(string fileName, BackgroundWorker worker)
         {
             object[,] valueArray = GetValueArray(fileName);
             int result = 0;
@@ -314,27 +302,39 @@ namespace CMBC.EasyFactor.Utils
                         invoice = new Invoice();
                         invoice.InvoiceNo = invoiceNo;
                         Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                        if (old == null)
-                        {
-                            invoiceList.Add(invoice);
-                        }
-                        else
+                        if (old != null)
                         {
                             throw new Exception("发票号重复: " + old.InvoiceNo);
                         }
                     }
-                    invoice.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
                     invoice.InvoiceAmount = (double)valueArray[row, column++];
                     invoice.AssignAmount = (double)valueArray[row, column++];
                     invoice.InvoiceDate = (DateTime)valueArray[row, column++];
                     invoice.DueDate = (DateTime)valueArray[row, column++];
-                    invoice.AssignDate = (DateTime)valueArray[row, column++];
                     invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                     invoice.FlawReason = String.Format("{0:G}", valueArray[row, column++]);
                     invoice.FlawResolveReason = String.Format("{0:G}", valueArray[row, column++]);
                     invoice.FlawResolveDate = (System.Nullable<DateTime>)valueArray[row, column++];
                     invoice.FlawResolveUserName = String.Format("{0:G}", valueArray[row, column++]);
+                    invoice.ValueDate = (System.Nullable<DateTime>)valueArray[row, column++];
 
+                    column = 33;
+                    invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.FinanceDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.FinanceDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
+
+                    column = 42;
+                    invoice.PaymentAmount = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.RefundAmount = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.RefundDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.Interest = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.InterestDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                    invoiceList.Add(invoice);
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
@@ -352,7 +352,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="fileName"></param>
         /// <param name="worker"></param>
         /// <returns></returns>
-        private int ImportAssignFinancePayment(string fileName, BackgroundWorker worker)
+        private int ImportInvoices(string fileName, BackgroundWorker worker)
         {
             object[,] valueArray = GetValueArray(fileName);
             int result = 0;
@@ -383,9 +383,9 @@ namespace CMBC.EasyFactor.Utils
                     }
                     int column = 8;
                     string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
-                    if (invoiceNo.Equals(string.Empty))
+                    if (invoiceNo == string.Empty)
                     {
-                        continue;
+                        throw new Exception("发票号不能为空");
                     }
                     Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                     if (invoice == null)
@@ -402,12 +402,10 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("发票号重复: " + old.InvoiceNo);
                         }
                     }
-                    invoice.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
                     invoice.InvoiceAmount = (double)valueArray[row, column++];
                     invoice.AssignAmount = (double)valueArray[row, column++];
                     invoice.InvoiceDate = (DateTime)valueArray[row, column++];
                     invoice.DueDate = (DateTime)valueArray[row, column++];
-                    invoice.AssignDate = (DateTime)valueArray[row, column++];
                     invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                     invoice.FlawReason = String.Format("{0:G}", valueArray[row, column++]);
                     invoice.FlawResolveReason = String.Format("{0:G}", valueArray[row, column++]);
@@ -415,7 +413,7 @@ namespace CMBC.EasyFactor.Utils
                     invoice.FlawResolveUserName = String.Format("{0:G}", valueArray[row, column++]);
                     invoice.ValueDate = (System.Nullable<DateTime>)valueArray[row, column++];
 
-                    InvoiceAssignBatch assignBatch = assignBatches.SingleOrDefault(batch => batch.BatchDate.Equals(invoice.AssignDate) && batch.CDACode == cda.CDACode);
+                    InvoiceAssignBatch assignBatch = assignBatches.SingleOrDefault(batch => batch.AssignDate.Equals(invoice.InvoiceAssignBatch.AssignDate) && batch.CDACode == cda.CDACode);
                     if (assignBatch == null)
                     {
                         string assignBatchNo = String.Format("{0:G}", valueArray[row, 2]);
@@ -425,11 +423,11 @@ namespace CMBC.EasyFactor.Utils
                             assignBatch = new InvoiceAssignBatch();
                             column = 3;
                             assignBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                            assignBatch.BatchDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                            assignBatch.AssignDate = (DateTime)valueArray[row, column++];
                             assignBatch.IsCreateMsg = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                             assignBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                             assignBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                            assignBatch.AssignBatchNo = InvoiceAssign.GenerateAssignBatchNo(assignBatch.BatchDate.GetValueOrDefault());
+                            assignBatch.AssignBatchNo = InvoiceAssign.GenerateAssignBatchNo(assignBatch.AssignDate);
                             assignBatch.CheckStatus = "已审核";
                         }
                         assignBatch.CDA = cda;
@@ -439,11 +437,10 @@ namespace CMBC.EasyFactor.Utils
 
                     column = 33;
                     invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
-                    if (invoice.FinanceAmount.HasValue && invoice.FinanceAmount.Value > 0)
+                    invoice.FinanceDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.FinanceDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    if (invoice.FinanceAmount.HasValue)
                     {
-                        invoice.FinanceDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                        invoice.FinanceDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
-
                         InvoiceFinanceBatch financeBatch = financeBatches.SingleOrDefault(batch => batch.FinancePeriodBegin.Equals(invoice.FinanceDate) && batch.CDACode == cda.CDACode);
                         if (financeBatch == null)
                         {
@@ -461,30 +458,29 @@ namespace CMBC.EasyFactor.Utils
                                 financeBatch.FinanceRate = (System.Nullable<double>)valueArray[row, column++];
                                 financeBatch.CostRate = (System.Nullable<double>)valueArray[row, column++];
                                 financeBatch.InterestType = String.Format("{0:G}", valueArray[row, column++]);
-                                financeBatch.FinancePeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++];
-                                financeBatch.FinnacePeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++];
+                                financeBatch.FinancePeriodBegin = (DateTime)valueArray[row, column++];
+                                financeBatch.FinnacePeriodEnd = (DateTime)valueArray[row, column++];
                                 financeBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                                 financeBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                                financeBatch.FinanceBatchNo = InvoiceFinance.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin.GetValueOrDefault());
+                                financeBatch.FinanceBatchNo = InvoiceFinance.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin);
                             }
                             financeBatch.CDA = cda;
                             financeBatches.Add(financeBatch);
                         }
                         if (!financeBatch.Invoices.Contains(invoice))
                         {
-                            financeBatch.FinanceAmount = financeBatch.FinanceAmount.GetValueOrDefault() + invoice.FinanceAmount.Value;
+                            financeBatch.FinanceAmount = financeBatch.FinanceAmount + invoice.FinanceAmount.Value;
                             invoice.InvoiceFinanceBatch = financeBatch;
                         }
                     }
 
                     column = 42;
                     invoice.PaymentAmount = (System.Nullable<double>)valueArray[row, column++];
-                    if (invoice.PaymentAmount.HasValue && invoice.PaymentAmount.Value > 0)
+                    invoice.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.RefundAmount = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.RefundDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    if (invoice.PaymentAmount.HasValue)
                     {
-                        invoice.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                        invoice.RefundAmount = (System.Nullable<double>)valueArray[row, column++];
-                        invoice.RefundDate = (System.Nullable<DateTime>)valueArray[row, column++];
-
                         InvoicePaymentBatch paymentBatch = paymentBatches.SingleOrDefault(batch => batch.PaymentDate.Equals(invoice.PaymentDate) && batch.CDACode == cda.CDACode);
                         if (paymentBatch == null)
                         {
@@ -495,11 +491,11 @@ namespace CMBC.EasyFactor.Utils
                                 paymentBatch = new InvoicePaymentBatch();
                                 column = 37;
                                 paymentBatch.PaymentType = String.Format("{0:G}", valueArray[row, column++]);
-                                paymentBatch.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                                paymentBatch.PaymentDate = (DateTime)valueArray[row, column++];
                                 paymentBatch.IsCreateMsg = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                                 paymentBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                                 paymentBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                                paymentBatch.PaymentBatchNo = InvoicePayment.GeneratePaymentBatchNo(paymentBatch.PaymentDate.GetValueOrDefault());
+                                paymentBatch.PaymentBatchNo = InvoicePayment.GenerateBatchNo(paymentBatch.PaymentDate);
                             }
                             paymentBatch.CDA = cda;
                             paymentBatches.Add(paymentBatch);
@@ -515,12 +511,18 @@ namespace CMBC.EasyFactor.Utils
                         switch (cda.CommissionType)
                         {
                             case "按融资金额":
-                                invoice.Commission = invoice.FinanceAmount * cda.Price ?? 0;
-                                invoice.CommissionDate = invoice.FinanceDate;
+                                invoice.Commission = invoice.FinanceAmount * cda.Price;
+                                if (invoice.Commission.HasValue)
+                                {
+                                    invoice.CommissionDate = invoice.FinanceDate;
+                                }
                                 break;
                             case "按转让金额":
-                                invoice.Commission = invoice.AssignAmount * cda.Price ?? 0;
-                                invoice.CommissionDate = invoice.AssignDate;
+                                invoice.Commission = invoice.AssignAmount * cda.Price;
+                                if (invoice.Commission.HasValue)
+                                {
+                                    invoice.CommissionDate = invoice.InvoiceAssignBatch.AssignDate;
+                                }
                                 break;
                             default:
                                 break;
@@ -532,7 +534,7 @@ namespace CMBC.EasyFactor.Utils
                     {
                         if (invoice.InvoiceFinanceBatch != null && invoice.InvoiceFinanceBatch.InterestType == "一次性收取")
                         {
-                            int period = (invoice.InvoiceFinanceBatch.FinnacePeriodEnd.Value - invoice.InvoiceFinanceBatch.FinancePeriodBegin.Value).Days;
+                            int period = (invoice.InvoiceFinanceBatch.FinnacePeriodEnd - invoice.InvoiceFinanceBatch.FinancePeriodBegin).Days;
                             invoice.Interest = invoice.FinanceAmount * (invoice.InvoiceFinanceBatch.FinanceRate - invoice.InvoiceFinanceBatch.CostRate) / 360 * period;
                             if (invoice.Interest.HasValue)
                             {
@@ -548,7 +550,7 @@ namespace CMBC.EasyFactor.Utils
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
-               
+
             }
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
@@ -625,35 +627,34 @@ namespace CMBC.EasyFactor.Utils
                     }
                     column++;
                     curCase.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.CaseAppDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    curCase.CaseAppDate = (DateTime)valueArray[row, column++];
                     curCase.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                     curCase.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
 
                     CreditCoverNegotiation creditCover = new CreditCoverNegotiation();
-                    string approveType = String.Format("{0:G}", valueArray[row, column++]);
-                    if ("P".Equals(approveType))
+                    string requestType = String.Format("{0:G}", valueArray[row, column++]);
+                    if ("P".Equals(requestType))
                     {
-                        creditCover.ApproveType = "P-预额度";
+                        creditCover.RequestType = "P-预额度";
                     }
-                    else if ("C".Equals(approveType))
+                    else if ("C".Equals(requestType))
                     {
-                        creditCover.ApproveType = "C-正式额度";
+                        creditCover.RequestType = "C-正式额度";
                     }
-                    creditCover.RequestAmount = (System.Nullable<double>)valueArray[row, column++];
-                    curCase.PaymentTerm = String.Format("{0:G}", valueArray[row, column++]);
-                    creditCover.RequestDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    creditCover.ApproveAmount = (System.Nullable<double>)valueArray[row, column++];
-                    creditCover.ApproveDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    creditCover.RequestAmount = (double)valueArray[row, column++];
+                    curCase.NetPaymentTerm = (int)valueArray[row, column++];
+                    creditCover.RequestDate = (DateTime)valueArray[row, column++];
+                    creditCover.ReplyAmount = (double)valueArray[row, column++];
+                    creditCover.ReplyDate = (System.Nullable<DateTime>)valueArray[row, column++];
                     creditCover.IFPrice = (System.Nullable<double>)valueArray[row, column++];
                     column++;
                     creditCover.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                     creditCover.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                    if (creditCover.RequestAmount.HasValue)
+                    if (creditCover.RequestType != null)
                     {
                         creditCover.Case = curCase;
                     }
-
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
@@ -744,6 +745,11 @@ namespace CMBC.EasyFactor.Utils
                     client.PMName = String.Format("{0:G}", valueArray[row, column++]);
                     client.RMName = String.Format("{0:G}", valueArray[row, column++]);
                     client.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                    client.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                    if (client.CreateUserName == null)
+                    {
+                        client.CreateUserName = App.Current.CurUser.Name;
+                    }
 
                     if (isNew)
                     {
@@ -791,9 +797,9 @@ namespace CMBC.EasyFactor.Utils
                     ClientCreditLine creditLine = new ClientCreditLine();
                     creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
                     creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.CreditLine = (System.Nullable<double>)valueArray[row, column++]; ;
-                    creditLine.PeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++]; ;
-                    creditLine.PeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++]; ;
+                    creditLine.CreditLine = (double)valueArray[row, column++]; ;
+                    creditLine.PeriodBegin = (DateTime)valueArray[row, column++]; ;
+                    creditLine.PeriodEnd = (DateTime)valueArray[row, column++]; ;
                     creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
                     creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
                     creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
@@ -864,8 +870,8 @@ namespace CMBC.EasyFactor.Utils
                             }
                         }
                         contract.ContractType = String.Format("{0:G}", valueArray[row, column++]);
-                        contract.ContractValueDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                        contract.ContractDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        contract.ContractValueDate = (DateTime)valueArray[row, column++];
+                        contract.ContractDueDate = (DateTime)valueArray[row, column++];
                         contract.ContractStatus = String.Format("{0:G}", valueArray[row, column++]);
                         contract.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                     }
@@ -1073,6 +1079,11 @@ namespace CMBC.EasyFactor.Utils
                     factor.MembershipStatus = String.Format("{0:G}", valueArray[row, column++]);
                     factor.MembershipDate = String.Format("{0:G}", valueArray[row, column++]);
                     factor.DateOfLatestRevision = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                    if (factor.CreateUserName == null)
+                    {
+                        factor.CreateUserName = App.Current.CurUser.Name;
+                    }
 
                     string monitorResult = factor.EndMonitor();
                     if (!String.Empty.Equals(monitorResult))
@@ -1133,9 +1144,9 @@ namespace CMBC.EasyFactor.Utils
                         FactorCreditLine creditLine = new FactorCreditLine();
                         creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
                         creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.CreditLine = (System.Nullable<double>)valueArray[row, column++]; ;
-                        creditLine.PeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++]; ;
-                        creditLine.PeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++]; ;
+                        creditLine.CreditLine = (double)valueArray[row, column++]; ;
+                        creditLine.PeriodBegin = (DateTime)valueArray[row, column++]; ;
+                        creditLine.PeriodEnd = (DateTime)valueArray[row, column++]; ;
                         creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
                         creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
                         creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
@@ -1154,95 +1165,6 @@ namespace CMBC.EasyFactor.Utils
                 this.ReleaseResource();
                 return result;
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="worker"></param>
-        /// <returns></returns>
-        private int ImportFinanceBatch(string fileName, BackgroundWorker worker)
-        {
-            object[,] valueArray = this.GetValueArray(fileName);
-            int result = 0;
-
-            if (valueArray != null)
-            {
-                string lastCDACode = String.Empty;
-                string lastFinanceBatchNo = String.Empty;
-                CDA cda = null;
-                InvoiceFinanceBatch financeBatch = null;
-
-                int size = valueArray.GetUpperBound(0);
-                for (int row = 2; row <= size; row++)
-                {
-                    string cdaCode = String.Format("{0:G}", valueArray[row, 1]);
-                    if (String.Empty.Equals(cdaCode))
-                    {
-                        continue;
-                    }
-                    if (!lastCDACode.Equals(cdaCode))
-                    {
-                        cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
-                        lastCDACode = cdaCode;
-                    }
-                    if (cda == null)
-                    {
-                        continue;
-                    }
-                    string financeBatchNo = String.Format("{0:G}", valueArray[row, 2]);
-                    if (String.Empty.Equals(financeBatchNo))
-                    {
-                        continue;
-                    }
-                    int column = 3;
-                    if (!lastFinanceBatchNo.Equals(financeBatchNo))
-                    {
-                        financeBatch = App.Current.DbContext.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == financeBatchNo);
-                        if (financeBatch == null)
-                        {
-                            financeBatch = new InvoiceFinanceBatch();
-                            financeBatch.FinanceBatchNo = financeBatchNo;
-                        }
-                        financeBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                        financeBatch.FinanceType = String.Format("{0:G}", valueArray[row, column++]);
-                        financeBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                        financeBatch.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
-                        financeBatch.FinanceRate = (System.Nullable<double>)valueArray[row, column++];
-                        financeBatch.CostRate = (System.Nullable<double>)valueArray[row, column++];
-                        financeBatch.FinancePeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++];
-                        financeBatch.FinnacePeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++];
-                        financeBatch.InterestType = String.Format("{0:G}", valueArray[row, column++]);
-                        financeBatch.CDA = cda;
-                        lastFinanceBatchNo = financeBatchNo;
-                    }
-                    column = 12;
-                    Invoice invoice = null;
-                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
-                    invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                    if (invoice == null)
-                    {
-                        invoice = new Invoice();
-                        invoice.InvoiceNo = invoiceNo;
-                    }
-                    invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.FinanceDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.FinanceDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.Comment = invoice.Comment == String.Empty ? String.Format("{0:G}", valueArray[row, column++]) : invoice.Comment + "\t" + String.Format("{0:G}", valueArray[row, column++]);
-
-                    invoice.InvoiceFinanceBatch = financeBatch;
-
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
-                }
-            }
-
-            App.Current.DbContext.SubmitChanges();
-            worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
-            this.ReleaseResource();
-            return result;
         }
 
         /// <summary>

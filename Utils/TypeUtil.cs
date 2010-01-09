@@ -11,7 +11,11 @@ namespace CMBC.EasyFactor.Utils
         #region Methods (2)
 
         // Public Methods (2) 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public static void FormatFloatToPercent(object sender, ConvertEventArgs e)
         {
             if (e.DesiredType == typeof(string) && e.Value != null)
@@ -20,6 +24,11 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public static void ParsePercentToFloat(object sender, ConvertEventArgs e)
         {
             if (e.DesiredType == typeof(System.Nullable<double>) && e.Value != null)
@@ -28,6 +37,11 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static string ConvertBoolToStr(System.Nullable<bool> obj)
         {
             if (obj == null)
@@ -52,16 +66,21 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
-        public static System.Nullable<bool> ConvertStrToBool(object obj)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool ConvertStrToBool(object obj)
         {
             if (obj == null)
             {
-                return null;
+                return false;
             }
             string str = String.Format("{0:G}", obj);
             if (string.Empty.Equals(str))
             {
-                return null;
+                return false;
             }
             if ("Y".Equals(str))
             {
@@ -78,6 +97,5 @@ namespace CMBC.EasyFactor.Utils
         }
 
         #endregion Methods
-
     }
 }

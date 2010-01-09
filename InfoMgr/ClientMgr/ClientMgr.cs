@@ -328,7 +328,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void SelectClient(object sender, System.EventArgs e)
+        private void SelectClient(object sender, EventArgs e)
         {
             if (this.dgvClients.SelectedRows.Count == 0)
             {

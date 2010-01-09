@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoiceMgr : UserControl
     {
-        #region Fields (2)
+		#region Fields (2) 
 
         /// <summary>
         /// 
@@ -27,9 +27,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpInvoiceType opInvoiceType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         /// <summary>
         /// 
@@ -44,12 +44,33 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            FLAW_RESOLVE
+            FLAW_RESOLVE,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            DISPUTE_RESOLVE,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            BATCH_DETAIL
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (1)
+		#region Constructors (2) 
+
+/// <summary>
+        /// 
+        /// </summary>
+        /// <param name="invoiceList"></param>
+        public InvoiceMgr(List<Invoice> invoiceList):this(OpInvoiceType.BATCH_DETAIL)
+        {
+            this.bs.DataSource = invoiceList;
+            this.lblCount.Text = String.Format("获得{0}条记录", invoiceList.Count());
+            this.panelQuery.Visible = false;
+        }
 
         /// <summary>
         /// 
@@ -69,19 +90,46 @@ namespace CMBC.EasyFactor.ARMgr
             if (opInvoiceType == OpInvoiceType.FLAW_RESOLVE)
             {
                 this.cbIsFlaw.CheckValue = "Y";
-                this.cbIsFlaw.Enabled = false;
-                this.colIsFlaw.ReadOnly = false;
                 var queryResult = App.Current.DbContext.Invoices.Where(invoice => invoice.IsFlaw == true);
-                this.bs.DataSource = queryResult.ToList();
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            }
+            else if (opInvoiceType == OpInvoiceType.DISPUTE_RESOLVE)
+            {
+                this.cbIsDispute.CheckValue = "Y";
+                var queryResult = App.Current.DbContext.Invoices.Where(invoice => invoice.IsDispute == true);
+                this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (13)
+		#region Properties (2) 
 
-        // Private Methods (13) 
+        /// <summary>
+        /// Gets or sets owner form
+        /// </summary>
+        public Form OwnerForm
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets selected AssignBatch
+        /// </summary>
+        public Invoice Selected
+        {
+            get;
+            set;
+        }
+
+		#endregion Properties 
+
+		#region Methods (13) 
+
+		// Private Methods (13) 
 
         /// <summary>
         /// 
@@ -304,9 +352,25 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            Invoice selectedInvoice = (Invoice)this.bs.List[this.dgvInvoices.CurrentCell.RowIndex];
-            InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.FLAW);
-            invoiceDetail.ShowDialog(this);
+            List<Invoice> selectedInvoices = new List<Invoice>();
+            foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
+            {
+                Invoice invoice = (Invoice)this.bs.List[cell.RowIndex];
+                if (!selectedInvoices.Contains(invoice))
+                {
+                    selectedInvoices.Add(invoice);
+                }
+            }
+            if (selectedInvoices.Count == 1)
+            {
+                InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoices[0], InvoiceDetail.OpInvoiceType.FLAW);
+                invoiceDetail.ShowDialog(this);
+            }
+            else if (selectedInvoices.Count > 1)
+            {
+                InvoiceFlaw invoiceFlaw = new InvoiceFlaw(selectedInvoices);
+                invoiceFlaw.ShowDialog(this);
+            }
         }
 
         /// <summary>
@@ -327,13 +391,13 @@ namespace CMBC.EasyFactor.ARMgr
             DateTime AssignOverDueDate = default(DateTime);
             if (Int32.TryParse(this.tbAssignOverDueDays.Text, out AssignOverDueDays))
             {
-                AssignOverDueDate = DateTime.Now.AddDays(0 - AssignOverDueDays);
+                AssignOverDueDate = DateTime.Now.Date.AddDays(0 - AssignOverDueDays);
             }
             int FinanceOverDueDays = 0;
             DateTime FinanceOverDueDate = default(DateTime);
             if (Int32.TryParse(this.tbFinanceOverDueDays.Text, out FinanceOverDueDays))
             {
-                FinanceOverDueDate = DateTime.Now.AddDays(0 - FinanceOverDueDays);
+                FinanceOverDueDate = DateTime.Now.Date.AddDays(0 - FinanceOverDueDays);
             }
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
@@ -383,6 +447,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

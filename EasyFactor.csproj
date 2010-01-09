@@ -129,6 +129,12 @@
     <Compile Include="ARMgr\InvoiceFinance.Designer.cs">
       <DependentUpon>InvoiceFinance.cs</DependentUpon>
     </Compile>
+    <Compile Include="ARMgr\InvoiceFlaw.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ARMgr\InvoiceFlaw.Designer.cs">
+      <DependentUpon>InvoiceFlaw.cs</DependentUpon>
+    </Compile>
     <Compile Include="ARMgr\InvoiceMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -140,6 +146,12 @@
     </Compile>
     <Compile Include="ARMgr\InvoicePayment.Designer.cs">
       <DependentUpon>InvoicePayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ARMgr\PaymentBatchMgr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ARMgr\PaymentBatchMgr.Designer.cs">
+      <DependentUpon>PaymentBatchMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="CaseMgr\CaseDetail.cs">
       <SubType>Form</SubType>
@@ -303,12 +315,20 @@
       <DependentUpon>InvoiceFinance.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\InvoiceFlaw.resx">
+      <DependentUpon>InvoiceFlaw.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\InvoiceMgr.resx">
       <DependentUpon>InvoiceMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\InvoicePayment.resx">
       <DependentUpon>InvoicePayment.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\PaymentBatchMgr.resx">
+      <DependentUpon>PaymentBatchMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CaseMgr\CaseDetail.resx">

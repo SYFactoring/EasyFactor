@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="FinanceBatchMgr.cs" company="Yiming Liu@Fudan">
+// <copyright file="PaymentBatchMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -11,13 +11,12 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-
     /// <summary>
     /// 
     /// </summary>
-    public partial class FinanceBatchMgr : UserControl
+    public partial class PaymentBatchMgr : UserControl
     {
-        #region Fields (3)
+		#region Fields (3) 
 
         /// <summary>
         /// 
@@ -32,9 +31,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         /// <summary>
         /// 
@@ -57,26 +56,27 @@ namespace CMBC.EasyFactor.ARMgr
             QUERY
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (2)
+		#region Constructors (2) 
 
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         /// <param name="selectedCDA"></param>
-        public FinanceBatchMgr(CDA selectedCDA)
+        public PaymentBatchMgr(CDA selectedCDA)
             : this(OpBatchType.DETAIL)
         {
             this.cda = selectedCDA;
             this.panelQuery.Visible = false;
-            this.bs.DataSource = cda.InvoiceFinanceBatches;
+            this.bs.DataSource = cda.InvoicePaymentBatches;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public FinanceBatchMgr(OpBatchType batchType)
+        /// <param name="batchType"></param>
+        public PaymentBatchMgr(OpBatchType batchType)
         {
             InitializeComponent();
             this.dgvBatches.AutoGenerateColumns = false;
@@ -84,13 +84,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.opBatchType = batchType;
             if (batchType == OpBatchType.CHECK)
             {
+                this.bs.DataSource = App.Current.DbContext.InvoicePaymentBatches.Where(i => i.CheckStatus == "未审核");
             }
 
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Gets or sets owner form
@@ -102,19 +103,19 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         /// <summary>
-        /// Gets or sets selected FinanceBatch
+        /// Gets or sets selected PaymentBatch
         /// </summary>
-        public InvoiceFinanceBatch Selected
+        public InvoicePaymentBatch Selected
         {
             get;
             set;
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (5)
+		#region Methods (6) 
 
-        // Private Methods (5) 
+		// Private Methods (6) 
 
         /// <summary>
         /// 
@@ -123,7 +124,18 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void Check(object sender, EventArgs e)
         {
-
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            foreach (DataGridViewRow row in this.dgvBatches.SelectedRows)
+            {
+                InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[row.Index];
+                batch.CheckStatus = "已通过";
+                batch.CheckUserName = App.Current.CurUser.Name;
+                batch.CheckDate = DateTime.Now.Date;
+            }
+            App.Current.DbContext.SubmitChanges();
         }
 
         /// <summary>
@@ -137,7 +149,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
             InvoiceMgr invoiceMgr = new InvoiceMgr(selectedBatch.Invoices.ToList());
             QueryForm queryUI = new QueryForm(invoiceMgr, "批次详情");
             invoiceMgr.OwnerForm = queryUI;
@@ -170,12 +182,33 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (opBatchType == OpBatchType.QUERY || opBatchType == OpBatchType.CHECK)
             {
-                this.bs.DataSource = App.Current.DbContext.InvoiceFinanceBatches.Where(i => i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text));
+                this.bs.DataSource = App.Current.DbContext.InvoicePaymentBatches.Where(i => i.PaymentBatchNo.Contains(this.tbPaymentBatchNo.Text));
             }
             else if (opBatchType == OpBatchType.DETAIL)
             {
-                this.bs.DataSource = cda.InvoiceFinanceBatches.Where(i => i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text));
+                this.bs.DataSource = cda.InvoicePaymentBatches.Where(i => i.PaymentBatchNo.Contains(this.tbPaymentBatchNo.Text));
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Reject(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            foreach (DataGridViewRow row in this.dgvBatches.SelectedRows)
+            {
+                InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[row.Index];
+                batch.CheckStatus = "已拒绝";
+                batch.CheckUserName = App.Current.CurUser.Name;
+                batch.CheckDate = DateTime.Now.Date;
+            }
+            App.Current.DbContext.SubmitChanges();
         }
 
         /// <summary>
@@ -189,7 +222,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
             this.Selected = selectedBatch;
             if (this.OwnerForm != null)
             {
@@ -198,11 +231,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregion Methods
-
-        private void Reject(object sender, EventArgs e)
-        {
-
-        }
+		#endregion Methods 
     }
 }

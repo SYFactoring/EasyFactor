@@ -495,10 +495,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void diContractValueDate_ValueChanged(object sender, EventArgs e)
         {
             Contract contract = this.contractBindingSource.DataSource as Contract;
-            if (!contract.ContractDueDate.HasValue)
-            {
-                contract.ContractDueDate = this.diContractValueDate.Value.AddYears(1);
-            }
+            contract.ContractDueDate = this.diContractValueDate.Value.AddYears(1);
         }
 
         /// <summary>
@@ -531,7 +528,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.freezeReasonTextBox.ReadOnly = false;
                 this.freezeDateDateTimePicker.Enabled = true;
                 creditLine.Freezer = App.Current.CurUser.Name;
-                creditLine.FreezeDate = System.DateTime.Now;
+                creditLine.FreezeDate = System.DateTime.Now.Date;
             }
         }
 
@@ -591,10 +588,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void periodBeginDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
             ClientCreditLine creditLine = this.clientCreditLineBindingSource.DataSource as ClientCreditLine;
-            if (!creditLine.PeriodEnd.HasValue)
-            {
-                creditLine.PeriodEnd = this.periodBeginDateTimePicker.Value.AddYears(1);
-            }
+            creditLine.PeriodEnd = this.periodBeginDateTimePicker.Value.AddYears(1);
         }
 
         /// <summary>
@@ -678,6 +672,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 client.ClientGroup = null;
             }
+            client.CreateUserName = App.Current.CurUser.Name;
 
             if (this.opClientType == OpClientType.NEW_CLIENT)
             {
@@ -752,7 +747,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
 
-            DateTime today = DateTime.Now;
+            DateTime today = DateTime.Now.Date;
             if (creditLine.PeriodEnd < today)
             {
                 creditLine.CreditLineStatus = "已过期";
@@ -782,7 +777,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (creditLine.CreditLineID == 0)
             {
                 creditLine.Client = client;
-
+                creditLine.CreateUserName = App.Current.CurUser.Name;
                 bool isAddOK = true;
                 try
                 {
@@ -876,7 +871,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 bool isAddOK = true;
                 contract.Client = client;
                 contract.CreateUserName = App.Current.CurUser.Name;
-                DateTime today = DateTime.Now;
+                DateTime today = DateTime.Now.Date ;
                 if (contract.ContractDueDate < today)
                 {
                     contract.ContractStatus = "已过期";
@@ -918,7 +913,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             else
             {
                 bool isUpdateOK = true;
-                DateTime today = DateTime.Now;
+                DateTime today = DateTime.Now.Date;
                 if (contract.ContractDueDate < today)
                 {
                     contract.ContractStatus = "已过期";
@@ -1063,7 +1058,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.unfreezeReasonTextBox.ReadOnly = false;
                 this.unfreezeDateDateTimePicker.Enabled = true;
                 creditLine.Unfreezer = App.Current.CurUser.Name;
-                creditLine.UnfreezeDate = System.DateTime.Now;
+                creditLine.UnfreezeDate = System.DateTime.Now.Date;
             }
         }
 
@@ -1268,7 +1263,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.tbContractCode.ReadOnly = true;
             }
             this.tbContractStatus.ReadOnly = true;
-            this.tbCreateUserName.ReadOnly = true;
+            this.tbContractCreateUserName.ReadOnly = true;
         }
 
         #endregion Methods

@@ -2,10 +2,15 @@
 {
     partial class InvoiceDetail
     {
-        #region Fields (68)
+        #region Fields (75)
 
         private DevComponents.DotNetBar.Controls.TextBoxX assignAmountTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX assignBatchNoTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput assignDateTextBox;
+        private DevComponents.DotNetBar.ButtonX btnDispute;
+        private DevComponents.DotNetBar.ButtonX btnDisputeResolve;
+        private DevComponents.DotNetBar.ButtonX btnFlaw;
+        private DevComponents.DotNetBar.ButtonX btnFlawResolve;
         private DevComponents.DotNetBar.ButtonX btnInvoiceReset;
         private DevComponents.DotNetBar.ButtonX btnInvoiceSave;
         private DevComponents.DotNetBar.ButtonX btnInvoiceUpdate;
@@ -27,11 +32,11 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dueDateTextBox;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Controls.TextBoxX financeAmountTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX financeBatchNoTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput financeDateDateTimePicker;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput financeDueDateDateTimePicker;
         private System.Windows.Forms.CheckedListBox flawReasonCheckedListBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput flawResolveDateDateTimePicker;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFlawResolveReason;
         private DevComponents.DotNetBar.Controls.TextBoxX flawResolveUserNameTextBox;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelDispute;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelDisputeResolve;
@@ -52,6 +57,7 @@
         private DevComponents.DotNetBar.Controls.TextBoxX netPaymentTermsTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX orderNumberReferenceTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX paymentAmountTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX paymentBatchNoTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx paymentConditionsComboBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput paymentDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX primaryDiscountDaysTextBox;
@@ -72,6 +78,7 @@
         private DevComponents.DotNetBar.TabControlPanel tabPanelInvoice;
         private DevComponents.DotNetBar.Controls.TextBoxX tbDisputeReason;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFlawReason;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFlawResolveReason;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput valueDateTextBox;
 
         #endregion Fields
@@ -146,13 +153,28 @@
             DevComponents.DotNetBar.LabelX disputeUserNameLabel;
             DevComponents.DotNetBar.LabelX disputeAmountLabel;
             DevComponents.DotNetBar.LabelX disputeResolveDateLabel;
+            DevComponents.DotNetBar.LabelX assignBatchNoLabel;
+            DevComponents.DotNetBar.LabelX financeBatchNoLabel;
+            DevComponents.DotNetBar.LabelX paymentBatchNoLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
+            this.tabPanelEDI = new DevComponents.DotNetBar.TabControlPanel();
+            this.groupPanelInvoiceAdv = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.invoiceReferenceNumberTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.orderNumberReferenceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.paymentConditionsComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.valueDateTextBox = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.secondaryDiscountRateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.secondaryDiscountDaysTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.primaryDiscountRateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.primaryDiscountDaysTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.netPaymentTermsTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tabItemEDI = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanelDispute = new DevComponents.DotNetBar.TabControlPanel();
             this.groupPanelDisputeResolve = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.btnDisputeResolve = new DevComponents.DotNetBar.ButtonX();
             this.disputeResolveDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.disputeResolveUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.disputeResolveReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelDispute = new DevComponents.DotNetBar.Controls.GroupPanel();
@@ -164,8 +186,22 @@
             this.disputeDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.disputeUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabItemDispute = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabPanelFlaw = new DevComponents.DotNetBar.TabControlPanel();
+            this.groupPanelFlawResolve = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.btnFlawResolve = new DevComponents.DotNetBar.ButtonX();
+            this.tbFlawResolveReason = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.flawResolveDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.flawResolveUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.groupPanelFlaw = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.btnFlaw = new DevComponents.DotNetBar.ButtonX();
+            this.tbFlawReason = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.flawReasonCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.tabItemFlaw = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelInvoice = new DevComponents.DotNetBar.TabControlPanel();
             this.groupPanelInvoiceProcess = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.paymentBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.financeBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.assignBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.interestDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.interestTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.commissionDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -180,8 +216,6 @@
             this.assignAmountTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.assignDateTextBox = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.groupPanelInvoiceBasic = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.isDisputeCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.isFlawCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.invoiceCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.dueDateTextBox = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -192,32 +226,11 @@
             this.btnInvoiceSave = new DevComponents.DotNetBar.ButtonX();
             this.btnInvoiceUpdate = new DevComponents.DotNetBar.ButtonX();
             this.tabItemInvoice = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelFlaw = new DevComponents.DotNetBar.TabControlPanel();
-            this.groupPanelFlawResolve = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.btnFlawResolve = new DevComponents.DotNetBar.ButtonX();
-            this.tbFlawResolveReason = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.flawResolveDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.flawResolveUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.groupPanelFlaw = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.btnFlaw = new DevComponents.DotNetBar.ButtonX();
-            this.tbFlawReason = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.flawReasonCheckedListBox = new System.Windows.Forms.CheckedListBox();
-            this.tabItemFlaw = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelEDI = new DevComponents.DotNetBar.TabControlPanel();
-            this.groupPanelInvoiceAdv = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.invoiceReferenceNumberTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.orderNumberReferenceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.paymentConditionsComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.valueDateTextBox = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.secondaryDiscountRateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.secondaryDiscountDaysTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.primaryDiscountRateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.primaryDiscountDaysTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.netPaymentTermsTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tabItemEDI = new DevComponents.DotNetBar.TabItem(this.components);
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.isFlawCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.isDisputeCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             flawResolveReasonLabel = new DevComponents.DotNetBar.LabelX();
             flawResolveDateLabel = new DevComponents.DotNetBar.LabelX();
             flawResolveUserNameLabel = new DevComponents.DotNetBar.LabelX();
@@ -258,14 +271,24 @@
             disputeUserNameLabel = new DevComponents.DotNetBar.LabelX();
             disputeAmountLabel = new DevComponents.DotNetBar.LabelX();
             disputeResolveDateLabel = new DevComponents.DotNetBar.LabelX();
+            assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
+            financeBatchNoLabel = new DevComponents.DotNetBar.LabelX();
+            paymentBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
+            this.tabPanelEDI.SuspendLayout();
+            this.groupPanelInvoiceAdv.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valueDateTextBox)).BeginInit();
             this.tabControlPanelDispute.SuspendLayout();
             this.groupPanelDisputeResolve.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.disputeResolveDateDateTimePicker)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
             this.groupPanelDispute.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.disputeDateDateTimePicker)).BeginInit();
+            this.tabPanelFlaw.SuspendLayout();
+            this.groupPanelFlawResolve.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.flawResolveDateDateTimePicker)).BeginInit();
+            this.groupPanelFlaw.SuspendLayout();
             this.tabPanelInvoice.SuspendLayout();
             this.groupPanelInvoiceProcess.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.interestDateDateTimePicker)).BeginInit();
@@ -278,13 +301,6 @@
             this.groupPanelInvoiceBasic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dueDateTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceDateTextBox)).BeginInit();
-            this.tabPanelFlaw.SuspendLayout();
-            this.groupPanelFlawResolve.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.flawResolveDateDateTimePicker)).BeginInit();
-            this.groupPanelFlaw.SuspendLayout();
-            this.tabPanelEDI.SuspendLayout();
-            this.groupPanelInvoiceAdv.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.valueDateTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -422,7 +438,7 @@
             // 
             // 
             flawReasonLabel.BackgroundStyle.Class = "";
-            flawReasonLabel.Location = new System.Drawing.Point(23, 41);
+            flawReasonLabel.Location = new System.Drawing.Point(21, 73);
             flawReasonLabel.Name = "flawReasonLabel";
             flawReasonLabel.Size = new System.Drawing.Size(59, 16);
             flawReasonLabel.TabIndex = 1;
@@ -562,11 +578,11 @@
             // 
             // 
             invoiceCurrencyLabel.BackgroundStyle.Class = "";
-            invoiceCurrencyLabel.Location = new System.Drawing.Point(179, 6);
+            invoiceCurrencyLabel.Location = new System.Drawing.Point(192, 7);
             invoiceCurrencyLabel.Name = "invoiceCurrencyLabel";
-            invoiceCurrencyLabel.Size = new System.Drawing.Size(59, 16);
+            invoiceCurrencyLabel.Size = new System.Drawing.Size(34, 16);
             invoiceCurrencyLabel.TabIndex = 2;
-            invoiceCurrencyLabel.Text = "发票币别:";
+            invoiceCurrencyLabel.Text = "币别:";
             // 
             // financeAmountLabel
             // 
@@ -604,7 +620,7 @@
             // 
             // 
             financeDueDateLabel.BackgroundStyle.Class = "";
-            financeDueDateLabel.Location = new System.Drawing.Point(360, 24);
+            financeDueDateLabel.Location = new System.Drawing.Point(154, 46);
             financeDueDateLabel.Name = "financeDueDateLabel";
             financeDueDateLabel.Size = new System.Drawing.Size(72, 16);
             financeDueDateLabel.TabIndex = 8;
@@ -618,7 +634,7 @@
             // 
             // 
             paymentAmountLabel.BackgroundStyle.Class = "";
-            paymentAmountLabel.Location = new System.Drawing.Point(8, 46);
+            paymentAmountLabel.Location = new System.Drawing.Point(8, 67);
             paymentAmountLabel.Name = "paymentAmountLabel";
             paymentAmountLabel.Size = new System.Drawing.Size(59, 16);
             paymentAmountLabel.TabIndex = 10;
@@ -632,7 +648,7 @@
             // 
             // 
             paymentDateLabel.BackgroundStyle.Class = "";
-            paymentDateLabel.Location = new System.Drawing.Point(179, 46);
+            paymentDateLabel.Location = new System.Drawing.Point(179, 67);
             paymentDateLabel.Name = "paymentDateLabel";
             paymentDateLabel.Size = new System.Drawing.Size(47, 16);
             paymentDateLabel.TabIndex = 12;
@@ -646,7 +662,7 @@
             // 
             // 
             refundAmountLabel.BackgroundStyle.Class = "";
-            refundAmountLabel.Location = new System.Drawing.Point(8, 68);
+            refundAmountLabel.Location = new System.Drawing.Point(8, 89);
             refundAmountLabel.Name = "refundAmountLabel";
             refundAmountLabel.Size = new System.Drawing.Size(59, 16);
             refundAmountLabel.TabIndex = 14;
@@ -660,7 +676,7 @@
             // 
             // 
             refundDateLabel.BackgroundStyle.Class = "";
-            refundDateLabel.Location = new System.Drawing.Point(179, 68);
+            refundDateLabel.Location = new System.Drawing.Point(179, 89);
             refundDateLabel.Name = "refundDateLabel";
             refundDateLabel.Size = new System.Drawing.Size(47, 16);
             refundDateLabel.TabIndex = 16;
@@ -674,7 +690,7 @@
             // 
             // 
             commissionLabel.BackgroundStyle.Class = "";
-            commissionLabel.Location = new System.Drawing.Point(20, 89);
+            commissionLabel.Location = new System.Drawing.Point(20, 110);
             commissionLabel.Name = "commissionLabel";
             commissionLabel.Size = new System.Drawing.Size(47, 16);
             commissionLabel.TabIndex = 18;
@@ -688,7 +704,7 @@
             // 
             // 
             commissionDateLabel.BackgroundStyle.Class = "";
-            commissionDateLabel.Location = new System.Drawing.Point(179, 89);
+            commissionDateLabel.Location = new System.Drawing.Point(179, 110);
             commissionDateLabel.Name = "commissionDateLabel";
             commissionDateLabel.Size = new System.Drawing.Size(47, 16);
             commissionDateLabel.TabIndex = 20;
@@ -702,7 +718,7 @@
             // 
             // 
             interestLabel.BackgroundStyle.Class = "";
-            interestLabel.Location = new System.Drawing.Point(21, 111);
+            interestLabel.Location = new System.Drawing.Point(21, 132);
             interestLabel.Name = "interestLabel";
             interestLabel.Size = new System.Drawing.Size(47, 16);
             interestLabel.TabIndex = 22;
@@ -716,7 +732,7 @@
             // 
             // 
             interestDateLabel.BackgroundStyle.Class = "";
-            interestDateLabel.Location = new System.Drawing.Point(179, 111);
+            interestDateLabel.Location = new System.Drawing.Point(179, 132);
             interestDateLabel.Name = "interestDateLabel";
             interestDateLabel.Size = new System.Drawing.Size(47, 16);
             interestDateLabel.TabIndex = 24;
@@ -744,7 +760,7 @@
             // 
             // 
             disputeReasonLabel.BackgroundStyle.Class = "";
-            disputeReasonLabel.Location = new System.Drawing.Point(19, 41);
+            disputeReasonLabel.Location = new System.Drawing.Point(19, 68);
             disputeReasonLabel.Name = "disputeReasonLabel";
             disputeReasonLabel.Size = new System.Drawing.Size(59, 16);
             disputeReasonLabel.TabIndex = 1;
@@ -848,1235 +864,68 @@
             disputeResolveDateLabel.TabIndex = 3;
             disputeResolveDateLabel.Text = "解除日:";
             // 
+            // assignBatchNoLabel
+            // 
+            assignBatchNoLabel.AutoSize = true;
+            assignBatchNoLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            assignBatchNoLabel.BackgroundStyle.Class = "";
+            assignBatchNoLabel.Location = new System.Drawing.Point(367, 4);
+            assignBatchNoLabel.Name = "assignBatchNoLabel";
+            assignBatchNoLabel.Size = new System.Drawing.Size(59, 16);
+            assignBatchNoLabel.TabIndex = 26;
+            assignBatchNoLabel.Text = "转让批号:";
+            // 
+            // financeBatchNoLabel
+            // 
+            financeBatchNoLabel.AutoSize = true;
+            financeBatchNoLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            financeBatchNoLabel.BackgroundStyle.Class = "";
+            financeBatchNoLabel.Location = new System.Drawing.Point(367, 23);
+            financeBatchNoLabel.Name = "financeBatchNoLabel";
+            financeBatchNoLabel.Size = new System.Drawing.Size(59, 16);
+            financeBatchNoLabel.TabIndex = 28;
+            financeBatchNoLabel.Text = "融资批号:";
+            // 
+            // paymentBatchNoLabel
+            // 
+            paymentBatchNoLabel.AutoSize = true;
+            paymentBatchNoLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            paymentBatchNoLabel.BackgroundStyle.Class = "";
+            paymentBatchNoLabel.Location = new System.Drawing.Point(367, 67);
+            paymentBatchNoLabel.Name = "paymentBatchNoLabel";
+            paymentBatchNoLabel.Size = new System.Drawing.Size(59, 16);
+            paymentBatchNoLabel.TabIndex = 30;
+            paymentBatchNoLabel.Text = "付款批号:";
+            // 
             // tabControl
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelInvoice);
-            this.tabControl.Controls.Add(this.tabPanelFlaw);
             this.tabControl.Controls.Add(this.tabControlPanelDispute);
+            this.tabControl.Controls.Add(this.tabPanelFlaw);
+            this.tabControl.Controls.Add(this.tabPanelInvoice);
             this.tabControl.Controls.Add(this.tabPanelEDI);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl.SelectedTabIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(558, 345);
+            this.tabControl.Size = new System.Drawing.Size(558, 355);
             this.tabControl.TabIndex = 0;
             this.tabControl.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl.Tabs.Add(this.tabItemInvoice);
             this.tabControl.Tabs.Add(this.tabItemFlaw);
             this.tabControl.Tabs.Add(this.tabItemDispute);
             this.tabControl.Tabs.Add(this.tabItemEDI);
-            // 
-            // tabControlPanelDispute
-            // 
-            this.tabControlPanelDispute.Controls.Add(this.groupPanelDisputeResolve);
-            this.tabControlPanelDispute.Controls.Add(this.groupPanelDispute);
-            this.tabControlPanelDispute.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanelDispute.Location = new System.Drawing.Point(0, 26);
-            this.tabControlPanelDispute.Name = "tabControlPanelDispute";
-            this.tabControlPanelDispute.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanelDispute.Size = new System.Drawing.Size(558, 319);
-            this.tabControlPanelDispute.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabControlPanelDispute.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabControlPanelDispute.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanelDispute.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabControlPanelDispute.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanelDispute.Style.GradientAngle = 90;
-            this.tabControlPanelDispute.TabIndex = 5;
-            this.tabControlPanelDispute.TabItem = this.tabItemDispute;
-            // 
-            // groupPanelDisputeResolve
-            // 
-            this.groupPanelDisputeResolve.AutoScroll = true;
-            this.groupPanelDisputeResolve.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelDisputeResolve.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelDisputeResolve.Controls.Add(this.btnDisputeResolve);
-            this.groupPanelDisputeResolve.Controls.Add(disputeResolveDateLabel);
-            this.groupPanelDisputeResolve.Controls.Add(this.disputeResolveDateDateTimePicker);
-            this.groupPanelDisputeResolve.Controls.Add(disputeResolveUserNameLabel);
-            this.groupPanelDisputeResolve.Controls.Add(this.disputeResolveUserNameTextBox);
-            this.groupPanelDisputeResolve.Controls.Add(disputeResolveReasonLabel);
-            this.groupPanelDisputeResolve.Controls.Add(this.disputeResolveReasonTextBox);
-            this.groupPanelDisputeResolve.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelDisputeResolve.Location = new System.Drawing.Point(1, 167);
-            this.groupPanelDisputeResolve.Name = "groupPanelDisputeResolve";
-            this.groupPanelDisputeResolve.Size = new System.Drawing.Size(556, 104);
-            // 
-            // 
-            // 
-            this.groupPanelDisputeResolve.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelDisputeResolve.Style.BackColorGradientAngle = 90;
-            this.groupPanelDisputeResolve.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelDisputeResolve.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelDisputeResolve.Style.BorderBottomWidth = 1;
-            this.groupPanelDisputeResolve.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelDisputeResolve.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelDisputeResolve.Style.BorderLeftWidth = 1;
-            this.groupPanelDisputeResolve.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelDisputeResolve.Style.BorderRightWidth = 1;
-            this.groupPanelDisputeResolve.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelDisputeResolve.Style.BorderTopWidth = 1;
-            this.groupPanelDisputeResolve.Style.Class = "";
-            this.groupPanelDisputeResolve.Style.CornerDiameter = 4;
-            this.groupPanelDisputeResolve.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelDisputeResolve.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelDisputeResolve.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelDisputeResolve.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelDisputeResolve.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelDisputeResolve.StyleMouseOver.Class = "";
-            this.groupPanelDisputeResolve.TabIndex = 1;
-            // 
-            // btnDisputeResolve
-            // 
-            this.btnDisputeResolve.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnDisputeResolve.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDisputeResolve.Location = new System.Drawing.Point(8, 9);
-            this.btnDisputeResolve.Name = "btnDisputeResolve";
-            this.btnDisputeResolve.Size = new System.Drawing.Size(75, 23);
-            this.btnDisputeResolve.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnDisputeResolve.TabIndex = 0;
-            this.btnDisputeResolve.Text = "商纠解除";
-            this.btnDisputeResolve.Click += new System.EventHandler(this.DisputeResolve);
-            // 
-            // disputeResolveDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.disputeResolveDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.disputeResolveDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.disputeResolveDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "DisputeResolveDate", true));
-            this.disputeResolveDateDateTimePicker.Location = new System.Drawing.Point(172, 69);
-            // 
-            // 
-            // 
-            this.disputeResolveDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.disputeResolveDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.disputeResolveDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.disputeResolveDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.disputeResolveDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.disputeResolveDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.disputeResolveDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.disputeResolveDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.disputeResolveDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.disputeResolveDateDateTimePicker.Name = "disputeResolveDateDateTimePicker";
-            this.disputeResolveDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
-            this.disputeResolveDateDateTimePicker.TabIndex = 4;
-            // 
-            // invoiceBindingSource
-            // 
-            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
-            // 
-            // disputeResolveUserNameTextBox
-            // 
-            // 
-            // 
-            // 
-            this.disputeResolveUserNameTextBox.Border.Class = "TextBoxBorder";
-            this.disputeResolveUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "DisputeResolveUserName", true));
-            this.disputeResolveUserNameTextBox.Location = new System.Drawing.Point(370, 70);
-            this.disputeResolveUserNameTextBox.Name = "disputeResolveUserNameTextBox";
-            this.disputeResolveUserNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.disputeResolveUserNameTextBox.TabIndex = 6;
-            // 
-            // disputeResolveReasonTextBox
-            // 
-            // 
-            // 
-            // 
-            this.disputeResolveReasonTextBox.Border.Class = "TextBoxBorder";
-            this.disputeResolveReasonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "DisputeResolveReason", true));
-            this.disputeResolveReasonTextBox.Location = new System.Drawing.Point(98, 3);
-            this.disputeResolveReasonTextBox.Multiline = true;
-            this.disputeResolveReasonTextBox.Name = "disputeResolveReasonTextBox";
-            this.disputeResolveReasonTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.disputeResolveReasonTextBox.Size = new System.Drawing.Size(449, 61);
-            this.disputeResolveReasonTextBox.TabIndex = 2;
-            // 
-            // groupPanelDispute
-            // 
-            this.groupPanelDispute.AutoScroll = true;
-            this.groupPanelDispute.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelDispute.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelDispute.Controls.Add(this.btnDispute);
-            this.groupPanelDispute.Controls.Add(this.tbDisputeReason);
-            this.groupPanelDispute.Controls.Add(this.disputeReasonCheckedListBox);
-            this.groupPanelDispute.Controls.Add(this.disputeTypeComboBoxEx);
-            this.groupPanelDispute.Controls.Add(disputeAmountLabel);
-            this.groupPanelDispute.Controls.Add(this.disputeAmountTextBox);
-            this.groupPanelDispute.Controls.Add(disputeUserNameLabel);
-            this.groupPanelDispute.Controls.Add(disputeDateLabel);
-            this.groupPanelDispute.Controls.Add(this.disputeDateDateTimePicker);
-            this.groupPanelDispute.Controls.Add(this.disputeUserNameTextBox);
-            this.groupPanelDispute.Controls.Add(disputeTypeLabel);
-            this.groupPanelDispute.Controls.Add(disputeReasonLabel);
-            this.groupPanelDispute.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelDispute.Location = new System.Drawing.Point(1, 1);
-            this.groupPanelDispute.Name = "groupPanelDispute";
-            this.groupPanelDispute.Size = new System.Drawing.Size(556, 166);
-            // 
-            // 
-            // 
-            this.groupPanelDispute.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelDispute.Style.BackColorGradientAngle = 90;
-            this.groupPanelDispute.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelDispute.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelDispute.Style.BorderBottomWidth = 1;
-            this.groupPanelDispute.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelDispute.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelDispute.Style.BorderLeftWidth = 1;
-            this.groupPanelDispute.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelDispute.Style.BorderRightWidth = 1;
-            this.groupPanelDispute.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelDispute.Style.BorderTopWidth = 1;
-            this.groupPanelDispute.Style.Class = "";
-            this.groupPanelDispute.Style.CornerDiameter = 4;
-            this.groupPanelDispute.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelDispute.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelDispute.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelDispute.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelDispute.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelDispute.StyleMouseOver.Class = "";
-            this.groupPanelDispute.TabIndex = 0;
-            // 
-            // btnDispute
-            // 
-            this.btnDispute.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnDispute.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDispute.Location = new System.Drawing.Point(8, 12);
-            this.btnDispute.Name = "btnDispute";
-            this.btnDispute.Size = new System.Drawing.Size(75, 23);
-            this.btnDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnDispute.TabIndex = 0;
-            this.btnDispute.Text = "商纠设定";
-            this.btnDispute.Click += new System.EventHandler(this.Dispute);
-            // 
-            // tbDisputeReason
-            // 
-            // 
-            // 
-            // 
-            this.tbDisputeReason.Border.Class = "TextBoxBorder";
-            this.tbDisputeReason.Location = new System.Drawing.Point(352, 7);
-            this.tbDisputeReason.Multiline = true;
-            this.tbDisputeReason.Name = "tbDisputeReason";
-            this.tbDisputeReason.Size = new System.Drawing.Size(195, 94);
-            this.tbDisputeReason.TabIndex = 3;
-            this.tbDisputeReason.WatermarkText = "其他原因";
-            // 
-            // disputeReasonCheckedListBox
-            // 
-            this.disputeReasonCheckedListBox.CheckOnClick = true;
-            this.disputeReasonCheckedListBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.invoiceBindingSource, "FlawReason", true));
-            this.disputeReasonCheckedListBox.FormattingEnabled = true;
-            this.disputeReasonCheckedListBox.Items.AddRange(new object[] {
-            "Settlement agreed with seller",
-            "Direct payment to Export Factor",
-            "Direct payment to seller",
-            "Direct payment to seller’s agent",
-            "Invoice not received",
-            "Duplicate invoice",
-            "Wrong invoice details",
-            "Credit note to buyer, not to us",
-            "Debit note to seller",
-            "Offset against credit balances or other invoices",
-            "Discount beyond terms",
-            "Trade discount deducted",
-            "Counter claim",
-            "Deduction for other costs",
-            "Wrong delivery",
-            "Proof of delivery required",
-            "Wrong goods",
-            "Damaged goods",
-            "Goods on consignment",
-            "Goods returned to seller",
-            "Goods returned to agent",
-            "Buyer refuses delivery",
-            "Other reasons, see message text"});
-            this.disputeReasonCheckedListBox.Location = new System.Drawing.Point(98, 8);
-            this.disputeReasonCheckedListBox.Name = "disputeReasonCheckedListBox";
-            this.disputeReasonCheckedListBox.Size = new System.Drawing.Size(248, 94);
-            this.disputeReasonCheckedListBox.TabIndex = 2;
-            // 
-            // disputeTypeComboBoxEx
-            // 
-            this.disputeTypeComboBoxEx.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "DisputeType", true));
-            this.disputeTypeComboBoxEx.DisplayMember = "Text";
-            this.disputeTypeComboBoxEx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.disputeTypeComboBoxEx.FormattingEnabled = true;
-            this.disputeTypeComboBoxEx.ItemHeight = 14;
-            this.disputeTypeComboBoxEx.Items.AddRange(new object[] {
-            "Invoice (default)",
-            "Credit note",
-            "Non factored invoice",
-            "Non factored credit note",
-            "Payment"});
-            this.disputeTypeComboBoxEx.Location = new System.Drawing.Point(173, 111);
-            this.disputeTypeComboBoxEx.Name = "disputeTypeComboBoxEx";
-            this.disputeTypeComboBoxEx.Size = new System.Drawing.Size(100, 20);
-            this.disputeTypeComboBoxEx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.disputeTypeComboBoxEx.TabIndex = 5;
-            // 
-            // disputeAmountTextBox
-            // 
-            // 
-            // 
-            // 
-            this.disputeAmountTextBox.Border.Class = "TextBoxBorder";
-            this.disputeAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "DisputeAmount", true));
-            this.disputeAmountTextBox.Location = new System.Drawing.Point(173, 132);
-            this.disputeAmountTextBox.Name = "disputeAmountTextBox";
-            this.disputeAmountTextBox.Size = new System.Drawing.Size(100, 20);
-            this.disputeAmountTextBox.TabIndex = 9;
-            // 
-            // disputeDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.disputeDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.disputeDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.disputeDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "DisputeDate", true));
-            this.disputeDateDateTimePicker.Location = new System.Drawing.Point(370, 111);
-            // 
-            // 
-            // 
-            this.disputeDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.disputeDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.disputeDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.disputeDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.disputeDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.disputeDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.disputeDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.disputeDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.disputeDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.disputeDateDateTimePicker.Name = "disputeDateDateTimePicker";
-            this.disputeDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
-            this.disputeDateDateTimePicker.TabIndex = 7;
-            // 
-            // disputeUserNameTextBox
-            // 
-            // 
-            // 
-            // 
-            this.disputeUserNameTextBox.Border.Class = "TextBoxBorder";
-            this.disputeUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "DisputeUserName", true));
-            this.disputeUserNameTextBox.Location = new System.Drawing.Point(370, 132);
-            this.disputeUserNameTextBox.Name = "disputeUserNameTextBox";
-            this.disputeUserNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.disputeUserNameTextBox.TabIndex = 11;
-            // 
-            // tabItemDispute
-            // 
-            this.tabItemDispute.AttachedControl = this.tabControlPanelDispute;
-            this.tabItemDispute.Name = "tabItemDispute";
-            this.tabItemDispute.Text = "商纠处理";
-            // 
-            // tabPanelInvoice
-            // 
-            this.tabPanelInvoice.AutoScroll = true;
-            this.tabPanelInvoice.Controls.Add(this.groupPanelInvoiceProcess);
-            this.tabPanelInvoice.Controls.Add(this.groupPanelInvoiceBasic);
-            this.tabPanelInvoice.Controls.Add(this.btnInvoiceReset);
-            this.tabPanelInvoice.Controls.Add(this.btnInvoiceSave);
-            this.tabPanelInvoice.Controls.Add(this.btnInvoiceUpdate);
-            this.tabPanelInvoice.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelInvoice.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelInvoice.Name = "tabPanelInvoice";
-            this.tabPanelInvoice.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelInvoice.Size = new System.Drawing.Size(558, 319);
-            this.tabPanelInvoice.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelInvoice.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelInvoice.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelInvoice.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelInvoice.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelInvoice.Style.GradientAngle = 90;
-            this.tabPanelInvoice.TabIndex = 1;
-            this.tabPanelInvoice.TabItem = this.tabItemInvoice;
-            // 
-            // groupPanelInvoiceProcess
-            // 
-            this.groupPanelInvoiceProcess.AutoScroll = true;
-            this.groupPanelInvoiceProcess.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelInvoiceProcess.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelInvoiceProcess.Controls.Add(interestDateLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.interestDateDateTimePicker);
-            this.groupPanelInvoiceProcess.Controls.Add(interestLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.interestTextBox);
-            this.groupPanelInvoiceProcess.Controls.Add(commissionDateLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.commissionDateDateTimePicker);
-            this.groupPanelInvoiceProcess.Controls.Add(commissionLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.commissionTextBox);
-            this.groupPanelInvoiceProcess.Controls.Add(refundDateLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.refundDateDateTimePicker);
-            this.groupPanelInvoiceProcess.Controls.Add(refundAmountLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.refundAmountTextBox);
-            this.groupPanelInvoiceProcess.Controls.Add(paymentDateLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.paymentDateDateTimePicker);
-            this.groupPanelInvoiceProcess.Controls.Add(paymentAmountLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.paymentAmountTextBox);
-            this.groupPanelInvoiceProcess.Controls.Add(financeDueDateLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.financeDueDateDateTimePicker);
-            this.groupPanelInvoiceProcess.Controls.Add(financeDateLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.financeDateDateTimePicker);
-            this.groupPanelInvoiceProcess.Controls.Add(financeAmountLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.financeAmountTextBox);
-            this.groupPanelInvoiceProcess.Controls.Add(assignAmountLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.assignAmountTextBox);
-            this.groupPanelInvoiceProcess.Controls.Add(assignDateLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.assignDateTextBox);
-            this.groupPanelInvoiceProcess.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelInvoiceProcess.Location = new System.Drawing.Point(1, 106);
-            this.groupPanelInvoiceProcess.Name = "groupPanelInvoiceProcess";
-            this.groupPanelInvoiceProcess.Size = new System.Drawing.Size(556, 136);
-            // 
-            // 
-            // 
-            this.groupPanelInvoiceProcess.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelInvoiceProcess.Style.BackColorGradientAngle = 90;
-            this.groupPanelInvoiceProcess.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelInvoiceProcess.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelInvoiceProcess.Style.BorderBottomWidth = 1;
-            this.groupPanelInvoiceProcess.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelInvoiceProcess.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelInvoiceProcess.Style.BorderLeftWidth = 1;
-            this.groupPanelInvoiceProcess.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelInvoiceProcess.Style.BorderRightWidth = 1;
-            this.groupPanelInvoiceProcess.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelInvoiceProcess.Style.BorderTopWidth = 1;
-            this.groupPanelInvoiceProcess.Style.Class = "";
-            this.groupPanelInvoiceProcess.Style.CornerDiameter = 4;
-            this.groupPanelInvoiceProcess.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelInvoiceProcess.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelInvoiceProcess.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelInvoiceProcess.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelInvoiceProcess.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelInvoiceProcess.StyleMouseOver.Class = "";
-            this.groupPanelInvoiceProcess.TabIndex = 0;
-            // 
-            // interestDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.interestDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.interestDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.interestDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "InterestDate", true));
-            this.interestDateDateTimePicker.Location = new System.Drawing.Point(232, 107);
-            // 
-            // 
-            // 
-            this.interestDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.interestDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.interestDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.interestDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.interestDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.interestDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.interestDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.interestDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.interestDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.interestDateDateTimePicker.Name = "interestDateDateTimePicker";
-            this.interestDateDateTimePicker.Size = new System.Drawing.Size(118, 20);
-            this.interestDateDateTimePicker.TabIndex = 25;
-            // 
-            // interestTextBox
-            // 
-            // 
-            // 
-            // 
-            this.interestTextBox.Border.Class = "TextBoxBorder";
-            this.interestTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "Interest", true));
-            this.interestTextBox.Location = new System.Drawing.Point(73, 107);
-            this.interestTextBox.Name = "interestTextBox";
-            this.interestTextBox.Size = new System.Drawing.Size(100, 20);
-            this.interestTextBox.TabIndex = 23;
-            // 
-            // commissionDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.commissionDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.commissionDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.commissionDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "CommissionDate", true));
-            this.commissionDateDateTimePicker.Location = new System.Drawing.Point(232, 86);
-            // 
-            // 
-            // 
-            this.commissionDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.commissionDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.commissionDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.commissionDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.commissionDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.commissionDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.commissionDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.commissionDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.commissionDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.commissionDateDateTimePicker.Name = "commissionDateDateTimePicker";
-            this.commissionDateDateTimePicker.Size = new System.Drawing.Size(118, 20);
-            this.commissionDateDateTimePicker.TabIndex = 21;
-            // 
-            // commissionTextBox
-            // 
-            // 
-            // 
-            // 
-            this.commissionTextBox.Border.Class = "TextBoxBorder";
-            this.commissionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "Commission", true));
-            this.commissionTextBox.Location = new System.Drawing.Point(73, 86);
-            this.commissionTextBox.Name = "commissionTextBox";
-            this.commissionTextBox.Size = new System.Drawing.Size(100, 20);
-            this.commissionTextBox.TabIndex = 19;
-            // 
-            // refundDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.refundDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.refundDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.refundDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "RefundDate", true));
-            this.refundDateDateTimePicker.Location = new System.Drawing.Point(232, 65);
-            // 
-            // 
-            // 
-            this.refundDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.refundDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.refundDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.refundDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.refundDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.refundDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.refundDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.refundDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.refundDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.refundDateDateTimePicker.Name = "refundDateDateTimePicker";
-            this.refundDateDateTimePicker.Size = new System.Drawing.Size(118, 20);
-            this.refundDateDateTimePicker.TabIndex = 17;
-            // 
-            // refundAmountTextBox
-            // 
-            // 
-            // 
-            // 
-            this.refundAmountTextBox.Border.Class = "TextBoxBorder";
-            this.refundAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "RefundAmount", true));
-            this.refundAmountTextBox.Location = new System.Drawing.Point(73, 65);
-            this.refundAmountTextBox.Name = "refundAmountTextBox";
-            this.refundAmountTextBox.Size = new System.Drawing.Size(100, 20);
-            this.refundAmountTextBox.TabIndex = 15;
-            // 
-            // paymentDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.paymentDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.paymentDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.paymentDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "PaymentDate", true));
-            this.paymentDateDateTimePicker.Location = new System.Drawing.Point(232, 43);
-            // 
-            // 
-            // 
-            this.paymentDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.paymentDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.paymentDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.paymentDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.paymentDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.paymentDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.paymentDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.paymentDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.paymentDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.paymentDateDateTimePicker.Name = "paymentDateDateTimePicker";
-            this.paymentDateDateTimePicker.Size = new System.Drawing.Size(118, 20);
-            this.paymentDateDateTimePicker.TabIndex = 13;
-            // 
-            // paymentAmountTextBox
-            // 
-            // 
-            // 
-            // 
-            this.paymentAmountTextBox.Border.Class = "TextBoxBorder";
-            this.paymentAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "PaymentAmount", true));
-            this.paymentAmountTextBox.Location = new System.Drawing.Point(73, 43);
-            this.paymentAmountTextBox.Name = "paymentAmountTextBox";
-            this.paymentAmountTextBox.Size = new System.Drawing.Size(100, 20);
-            this.paymentAmountTextBox.TabIndex = 11;
-            // 
-            // financeDueDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.financeDueDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.financeDueDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.financeDueDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "FinanceDueDate", true));
-            this.financeDueDateDateTimePicker.Location = new System.Drawing.Point(436, 21);
-            // 
-            // 
-            // 
-            this.financeDueDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.financeDueDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.financeDueDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.financeDueDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.financeDueDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.financeDueDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.financeDueDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.financeDueDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.financeDueDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.financeDueDateDateTimePicker.Name = "financeDueDateDateTimePicker";
-            this.financeDueDateDateTimePicker.Size = new System.Drawing.Size(103, 20);
-            this.financeDueDateDateTimePicker.TabIndex = 9;
-            // 
-            // financeDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.financeDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.financeDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.financeDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "FinanceDate", true));
-            this.financeDateDateTimePicker.Location = new System.Drawing.Point(231, 21);
-            // 
-            // 
-            // 
-            this.financeDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.financeDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.financeDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.financeDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.financeDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.financeDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.financeDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.financeDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.financeDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.financeDateDateTimePicker.Name = "financeDateDateTimePicker";
-            this.financeDateDateTimePicker.Size = new System.Drawing.Size(119, 20);
-            this.financeDateDateTimePicker.TabIndex = 7;
-            // 
-            // financeAmountTextBox
-            // 
-            // 
-            // 
-            // 
-            this.financeAmountTextBox.Border.Class = "TextBoxBorder";
-            this.financeAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "FinanceAmount", true));
-            this.financeAmountTextBox.Location = new System.Drawing.Point(73, 21);
-            this.financeAmountTextBox.Name = "financeAmountTextBox";
-            this.financeAmountTextBox.Size = new System.Drawing.Size(100, 20);
-            this.financeAmountTextBox.TabIndex = 5;
-            // 
-            // assignAmountTextBox
-            // 
-            // 
-            // 
-            // 
-            this.assignAmountTextBox.Border.Class = "TextBoxBorder";
-            this.assignAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "AssignAmount", true));
-            this.assignAmountTextBox.Location = new System.Drawing.Point(73, 0);
-            this.assignAmountTextBox.Name = "assignAmountTextBox";
-            this.assignAmountTextBox.Size = new System.Drawing.Size(100, 20);
-            this.assignAmountTextBox.TabIndex = 1;
-            // 
-            // assignDateTextBox
-            // 
-            // 
-            // 
-            // 
-            this.assignDateTextBox.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.assignDateTextBox.ButtonDropDown.Visible = true;
-            this.assignDateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "AssignDate", true));
-            this.assignDateTextBox.Location = new System.Drawing.Point(232, 0);
-            // 
-            // 
-            // 
-            this.assignDateTextBox.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.assignDateTextBox.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.assignDateTextBox.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.assignDateTextBox.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.assignDateTextBox.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.assignDateTextBox.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.assignDateTextBox.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.assignDateTextBox.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.assignDateTextBox.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.assignDateTextBox.Name = "assignDateTextBox";
-            this.assignDateTextBox.Size = new System.Drawing.Size(118, 20);
-            this.assignDateTextBox.TabIndex = 3;
-            // 
-            // groupPanelInvoiceBasic
-            // 
-            this.groupPanelInvoiceBasic.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelInvoiceBasic.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelInvoiceBasic.Controls.Add(this.isDisputeCheckBox);
-            this.groupPanelInvoiceBasic.Controls.Add(this.isFlawCheckBox);
-            this.groupPanelInvoiceBasic.Controls.Add(commentLabel);
-            this.groupPanelInvoiceBasic.Controls.Add(this.commentTextBox);
-            this.groupPanelInvoiceBasic.Controls.Add(invoiceCurrencyLabel);
-            this.groupPanelInvoiceBasic.Controls.Add(this.invoiceCurrencyComboBox);
-            this.groupPanelInvoiceBasic.Controls.Add(dueDateLabel);
-            this.groupPanelInvoiceBasic.Controls.Add(this.dueDateTextBox);
-            this.groupPanelInvoiceBasic.Controls.Add(invoiceAmountLabel);
-            this.groupPanelInvoiceBasic.Controls.Add(this.invoiceAmountTextBox);
-            this.groupPanelInvoiceBasic.Controls.Add(invoiceDateLabel);
-            this.groupPanelInvoiceBasic.Controls.Add(this.invoiceDateTextBox);
-            this.groupPanelInvoiceBasic.Controls.Add(invoiceNoLabel);
-            this.groupPanelInvoiceBasic.Controls.Add(this.invoiceNoTextBox);
-            this.groupPanelInvoiceBasic.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelInvoiceBasic.Location = new System.Drawing.Point(1, 1);
-            this.groupPanelInvoiceBasic.Name = "groupPanelInvoiceBasic";
-            this.groupPanelInvoiceBasic.Size = new System.Drawing.Size(556, 105);
-            // 
-            // 
-            // 
-            this.groupPanelInvoiceBasic.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelInvoiceBasic.Style.BackColorGradientAngle = 90;
-            this.groupPanelInvoiceBasic.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelInvoiceBasic.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelInvoiceBasic.Style.BorderBottomWidth = 1;
-            this.groupPanelInvoiceBasic.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelInvoiceBasic.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelInvoiceBasic.Style.BorderLeftWidth = 1;
-            this.groupPanelInvoiceBasic.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelInvoiceBasic.Style.BorderRightWidth = 1;
-            this.groupPanelInvoiceBasic.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelInvoiceBasic.Style.BorderTopWidth = 1;
-            this.groupPanelInvoiceBasic.Style.Class = "";
-            this.groupPanelInvoiceBasic.Style.CornerDiameter = 4;
-            this.groupPanelInvoiceBasic.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelInvoiceBasic.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelInvoiceBasic.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelInvoiceBasic.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelInvoiceBasic.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelInvoiceBasic.StyleMouseOver.Class = "";
-            this.groupPanelInvoiceBasic.TabIndex = 0;
-            // 
-            // isDisputeCheckBox
-            // 
-            this.isDisputeCheckBox.AutoSize = true;
-            this.isDisputeCheckBox.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.isDisputeCheckBox.BackgroundStyle.Class = "";
-            this.isDisputeCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.invoiceBindingSource, "IsDispute", true));
-            this.isDisputeCheckBox.Location = new System.Drawing.Point(452, 6);
-            this.isDisputeCheckBox.Name = "isDisputeCheckBox";
-            this.isDisputeCheckBox.Size = new System.Drawing.Size(76, 16);
-            this.isDisputeCheckBox.TabIndex = 5;
-            this.isDisputeCheckBox.Text = "是否商纠";
-            // 
-            // isFlawCheckBox
-            // 
-            this.isFlawCheckBox.AutoSize = true;
-            this.isFlawCheckBox.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.isFlawCheckBox.BackgroundStyle.Class = "";
-            this.isFlawCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.invoiceBindingSource, "IsFlaw", true));
-            this.isFlawCheckBox.Location = new System.Drawing.Point(370, 7);
-            this.isFlawCheckBox.Name = "isFlawCheckBox";
-            this.isFlawCheckBox.Size = new System.Drawing.Size(76, 16);
-            this.isFlawCheckBox.TabIndex = 4;
-            this.isFlawCheckBox.Text = "是否瑕疵";
-            // 
-            // commentTextBox
-            // 
-            // 
-            // 
-            // 
-            this.commentTextBox.Border.Class = "TextBoxBorder";
-            this.commentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "Comment", true));
-            this.commentTextBox.Location = new System.Drawing.Point(73, 49);
-            this.commentTextBox.Multiline = true;
-            this.commentTextBox.Name = "commentTextBox";
-            this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.commentTextBox.Size = new System.Drawing.Size(459, 43);
-            this.commentTextBox.TabIndex = 13;
-            // 
-            // invoiceCurrencyComboBox
-            // 
-            this.invoiceCurrencyComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.invoiceCurrencyComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.invoiceCurrencyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "InvoiceCurrency", true));
-            this.invoiceCurrencyComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.invoiceCurrencyComboBox.FormattingEnabled = true;
-            this.invoiceCurrencyComboBox.Location = new System.Drawing.Point(244, 3);
-            this.invoiceCurrencyComboBox.Name = "invoiceCurrencyComboBox";
-            this.invoiceCurrencyComboBox.Size = new System.Drawing.Size(100, 21);
-            this.invoiceCurrencyComboBox.TabIndex = 3;
-            // 
-            // dueDateTextBox
-            // 
-            // 
-            // 
-            // 
-            this.dueDateTextBox.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.dueDateTextBox.ButtonDropDown.Visible = true;
-            this.dueDateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "DueDate", true));
-            this.dueDateTextBox.Location = new System.Drawing.Point(432, 25);
-            // 
-            // 
-            // 
-            this.dueDateTextBox.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.dueDateTextBox.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.dueDateTextBox.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.dueDateTextBox.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.dueDateTextBox.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.dueDateTextBox.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.dueDateTextBox.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.dueDateTextBox.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.dueDateTextBox.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.dueDateTextBox.Name = "dueDateTextBox";
-            this.dueDateTextBox.Size = new System.Drawing.Size(100, 20);
-            this.dueDateTextBox.TabIndex = 11;
-            // 
-            // invoiceAmountTextBox
-            // 
-            // 
-            // 
-            // 
-            this.invoiceAmountTextBox.Border.Class = "TextBoxBorder";
-            this.invoiceAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "InvoiceAmount", true));
-            this.invoiceAmountTextBox.Location = new System.Drawing.Point(73, 27);
-            this.invoiceAmountTextBox.Name = "invoiceAmountTextBox";
-            this.invoiceAmountTextBox.Size = new System.Drawing.Size(100, 20);
-            this.invoiceAmountTextBox.TabIndex = 7;
-            // 
-            // invoiceDateTextBox
-            // 
-            // 
-            // 
-            // 
-            this.invoiceDateTextBox.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.invoiceDateTextBox.ButtonDropDown.Visible = true;
-            this.invoiceDateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "InvoiceDate", true));
-            this.invoiceDateTextBox.Location = new System.Drawing.Point(232, 27);
-            // 
-            // 
-            // 
-            this.invoiceDateTextBox.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.invoiceDateTextBox.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.invoiceDateTextBox.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.invoiceDateTextBox.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.invoiceDateTextBox.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.invoiceDateTextBox.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.invoiceDateTextBox.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.invoiceDateTextBox.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.invoiceDateTextBox.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.invoiceDateTextBox.Name = "invoiceDateTextBox";
-            this.invoiceDateTextBox.Size = new System.Drawing.Size(112, 20);
-            this.invoiceDateTextBox.TabIndex = 9;
-            // 
-            // invoiceNoTextBox
-            // 
-            // 
-            // 
-            // 
-            this.invoiceNoTextBox.Border.Class = "TextBoxBorder";
-            this.invoiceNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "InvoiceNo", true));
-            this.invoiceNoTextBox.Location = new System.Drawing.Point(73, 4);
-            this.invoiceNoTextBox.Name = "invoiceNoTextBox";
-            this.invoiceNoTextBox.Size = new System.Drawing.Size(100, 20);
-            this.invoiceNoTextBox.TabIndex = 1;
-            // 
-            // btnInvoiceReset
-            // 
-            this.btnInvoiceReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnInvoiceReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnInvoiceReset.Location = new System.Drawing.Point(338, 285);
-            this.btnInvoiceReset.Name = "btnInvoiceReset";
-            this.btnInvoiceReset.Size = new System.Drawing.Size(75, 23);
-            this.btnInvoiceReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnInvoiceReset.TabIndex = 2;
-            this.btnInvoiceReset.Text = "重置";
-            this.btnInvoiceReset.Click += new System.EventHandler(this.ResetInvoice);
-            // 
-            // btnInvoiceSave
-            // 
-            this.btnInvoiceSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnInvoiceSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnInvoiceSave.Location = new System.Drawing.Point(257, 285);
-            this.btnInvoiceSave.Name = "btnInvoiceSave";
-            this.btnInvoiceSave.Size = new System.Drawing.Size(75, 23);
-            this.btnInvoiceSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnInvoiceSave.TabIndex = 1;
-            this.btnInvoiceSave.Text = "保存";
-            this.btnInvoiceSave.Click += new System.EventHandler(this.SaveInvoice);
-            // 
-            // btnInvoiceUpdate
-            // 
-            this.btnInvoiceUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnInvoiceUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnInvoiceUpdate.Location = new System.Drawing.Point(176, 285);
-            this.btnInvoiceUpdate.Name = "btnInvoiceUpdate";
-            this.btnInvoiceUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnInvoiceUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnInvoiceUpdate.TabIndex = 0;
-            this.btnInvoiceUpdate.Text = "编辑";
-            this.btnInvoiceUpdate.Click += new System.EventHandler(this.UpdateInvoice);
-            // 
-            // tabItemInvoice
-            // 
-            this.tabItemInvoice.AttachedControl = this.tabPanelInvoice;
-            this.tabItemInvoice.Name = "tabItemInvoice";
-            this.tabItemInvoice.Text = "发票明细";
-            // 
-            // tabPanelFlaw
-            // 
-            this.tabPanelFlaw.AutoScroll = true;
-            this.tabPanelFlaw.Controls.Add(this.groupPanelFlawResolve);
-            this.tabPanelFlaw.Controls.Add(this.groupPanelFlaw);
-            this.tabPanelFlaw.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelFlaw.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelFlaw.Name = "tabPanelFlaw";
-            this.tabPanelFlaw.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelFlaw.Size = new System.Drawing.Size(558, 319);
-            this.tabPanelFlaw.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelFlaw.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelFlaw.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelFlaw.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelFlaw.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelFlaw.Style.GradientAngle = 90;
-            this.tabPanelFlaw.TabIndex = 4;
-            this.tabPanelFlaw.TabItem = this.tabItemFlaw;
-            // 
-            // groupPanelFlawResolve
-            // 
-            this.groupPanelFlawResolve.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelFlawResolve.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelFlawResolve.Controls.Add(this.btnFlawResolve);
-            this.groupPanelFlawResolve.Controls.Add(flawResolveReasonLabel);
-            this.groupPanelFlawResolve.Controls.Add(this.tbFlawResolveReason);
-            this.groupPanelFlawResolve.Controls.Add(flawResolveUserNameLabel);
-            this.groupPanelFlawResolve.Controls.Add(this.flawResolveDateDateTimePicker);
-            this.groupPanelFlawResolve.Controls.Add(this.flawResolveUserNameTextBox);
-            this.groupPanelFlawResolve.Controls.Add(flawResolveDateLabel);
-            this.groupPanelFlawResolve.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelFlawResolve.Location = new System.Drawing.Point(1, 123);
-            this.groupPanelFlawResolve.Name = "groupPanelFlawResolve";
-            this.groupPanelFlawResolve.Size = new System.Drawing.Size(556, 127);
-            // 
-            // 
-            // 
-            this.groupPanelFlawResolve.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelFlawResolve.Style.BackColorGradientAngle = 90;
-            this.groupPanelFlawResolve.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelFlawResolve.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelFlawResolve.Style.BorderBottomWidth = 1;
-            this.groupPanelFlawResolve.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelFlawResolve.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelFlawResolve.Style.BorderLeftWidth = 1;
-            this.groupPanelFlawResolve.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelFlawResolve.Style.BorderRightWidth = 1;
-            this.groupPanelFlawResolve.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelFlawResolve.Style.BorderTopWidth = 1;
-            this.groupPanelFlawResolve.Style.Class = "";
-            this.groupPanelFlawResolve.Style.CornerDiameter = 4;
-            this.groupPanelFlawResolve.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelFlawResolve.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelFlawResolve.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelFlawResolve.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelFlawResolve.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelFlawResolve.StyleMouseOver.Class = "";
-            this.groupPanelFlawResolve.TabIndex = 1;
-            // 
-            // btnFlawResolve
-            // 
-            this.btnFlawResolve.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnFlawResolve.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFlawResolve.Location = new System.Drawing.Point(15, 6);
-            this.btnFlawResolve.Name = "btnFlawResolve";
-            this.btnFlawResolve.Size = new System.Drawing.Size(75, 23);
-            this.btnFlawResolve.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFlawResolve.TabIndex = 0;
-            this.btnFlawResolve.Text = "瑕疵解除";
-            this.btnFlawResolve.Click += new System.EventHandler(this.FlawResolve);
-            // 
-            // tbFlawResolveReason
-            // 
-            // 
-            // 
-            // 
-            this.tbFlawResolveReason.Border.Class = "TextBoxBorder";
-            this.tbFlawResolveReason.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "FlawResolveReason", true));
-            this.tbFlawResolveReason.Location = new System.Drawing.Point(105, 0);
-            this.tbFlawResolveReason.Multiline = true;
-            this.tbFlawResolveReason.Name = "tbFlawResolveReason";
-            this.tbFlawResolveReason.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbFlawResolveReason.Size = new System.Drawing.Size(434, 79);
-            this.tbFlawResolveReason.TabIndex = 2;
-            // 
-            // flawResolveDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.flawResolveDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.flawResolveDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.flawResolveDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "FlawResolveDate", true));
-            this.flawResolveDateDateTimePicker.Location = new System.Drawing.Point(156, 94);
-            // 
-            // 
-            // 
-            this.flawResolveDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.flawResolveDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.flawResolveDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.flawResolveDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.flawResolveDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.flawResolveDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.flawResolveDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.flawResolveDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.flawResolveDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.flawResolveDateDateTimePicker.Name = "flawResolveDateDateTimePicker";
-            this.flawResolveDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
-            this.flawResolveDateDateTimePicker.TabIndex = 4;
-            // 
-            // flawResolveUserNameTextBox
-            // 
-            // 
-            // 
-            // 
-            this.flawResolveUserNameTextBox.Border.Class = "TextBoxBorder";
-            this.flawResolveUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "FlawResolveUserName", true));
-            this.flawResolveUserNameTextBox.Location = new System.Drawing.Point(324, 93);
-            this.flawResolveUserNameTextBox.Name = "flawResolveUserNameTextBox";
-            this.flawResolveUserNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.flawResolveUserNameTextBox.TabIndex = 6;
-            // 
-            // groupPanelFlaw
-            // 
-            this.groupPanelFlaw.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelFlaw.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelFlaw.Controls.Add(this.btnFlaw);
-            this.groupPanelFlaw.Controls.Add(this.tbFlawReason);
-            this.groupPanelFlaw.Controls.Add(flawReasonLabel);
-            this.groupPanelFlaw.Controls.Add(this.flawReasonCheckedListBox);
-            this.groupPanelFlaw.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelFlaw.Location = new System.Drawing.Point(1, 1);
-            this.groupPanelFlaw.Name = "groupPanelFlaw";
-            this.groupPanelFlaw.Size = new System.Drawing.Size(556, 122);
-            // 
-            // 
-            // 
-            this.groupPanelFlaw.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelFlaw.Style.BackColorGradientAngle = 90;
-            this.groupPanelFlaw.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelFlaw.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelFlaw.Style.BorderBottomWidth = 1;
-            this.groupPanelFlaw.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelFlaw.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelFlaw.Style.BorderLeftWidth = 1;
-            this.groupPanelFlaw.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelFlaw.Style.BorderRightWidth = 1;
-            this.groupPanelFlaw.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelFlaw.Style.BorderTopWidth = 1;
-            this.groupPanelFlaw.Style.Class = "";
-            this.groupPanelFlaw.Style.CornerDiameter = 4;
-            this.groupPanelFlaw.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelFlaw.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelFlaw.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelFlaw.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelFlaw.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelFlaw.StyleMouseOver.Class = "";
-            this.groupPanelFlaw.TabIndex = 0;
-            // 
-            // btnFlaw
-            // 
-            this.btnFlaw.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnFlaw.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFlaw.Location = new System.Drawing.Point(15, 11);
-            this.btnFlaw.Name = "btnFlaw";
-            this.btnFlaw.Size = new System.Drawing.Size(75, 23);
-            this.btnFlaw.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFlaw.TabIndex = 0;
-            this.btnFlaw.Text = "瑕疵设定";
-            this.btnFlaw.Click += new System.EventHandler(this.Flaw);
-            // 
-            // tbFlawReason
-            // 
-            // 
-            // 
-            // 
-            this.tbFlawReason.Border.Class = "TextBoxBorder";
-            this.tbFlawReason.Location = new System.Drawing.Point(344, 10);
-            this.tbFlawReason.Multiline = true;
-            this.tbFlawReason.Name = "tbFlawReason";
-            this.tbFlawReason.Size = new System.Drawing.Size(195, 94);
-            this.tbFlawReason.TabIndex = 3;
-            this.tbFlawReason.WatermarkText = "其他原因";
-            // 
-            // flawReasonCheckedListBox
-            // 
-            this.flawReasonCheckedListBox.CheckOnClick = true;
-            this.flawReasonCheckedListBox.FormattingEnabled = true;
-            this.flawReasonCheckedListBox.Items.AddRange(new object[] {
-            "卖方/买方基本资料不符",
-            "发票为存根联或副联复印件",
-            "发票无转让字据记载或贴错",
-            "账款到期日不符",
-            "单据内容不符",
-            "额度通知书过期或未签回",
-            "保理合同过期或未签回",
-            "交货凭证内容不完整",
-            "其他"});
-            this.flawReasonCheckedListBox.Location = new System.Drawing.Point(105, 11);
-            this.flawReasonCheckedListBox.Name = "flawReasonCheckedListBox";
-            this.flawReasonCheckedListBox.Size = new System.Drawing.Size(233, 94);
-            this.flawReasonCheckedListBox.TabIndex = 2;
-            // 
-            // tabItemFlaw
-            // 
-            this.tabItemFlaw.AttachedControl = this.tabPanelFlaw;
-            this.tabItemFlaw.Name = "tabItemFlaw";
-            this.tabItemFlaw.Text = "瑕疵处理";
             // 
             // tabPanelEDI
             // 
@@ -2085,7 +934,7 @@
             this.tabPanelEDI.Location = new System.Drawing.Point(0, 26);
             this.tabPanelEDI.Name = "tabPanelEDI";
             this.tabPanelEDI.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelEDI.Size = new System.Drawing.Size(558, 319);
+            this.tabPanelEDI.Size = new System.Drawing.Size(558, 329);
             this.tabPanelEDI.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelEDI.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelEDI.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -2164,6 +1013,10 @@
             this.invoiceReferenceNumberTextBox.Name = "invoiceReferenceNumberTextBox";
             this.invoiceReferenceNumberTextBox.Size = new System.Drawing.Size(120, 20);
             this.invoiceReferenceNumberTextBox.TabIndex = 17;
+            // 
+            // invoiceBindingSource
+            // 
+            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
             // 
             // orderNumberReferenceTextBox
             // 
@@ -2288,7 +1141,7 @@
             this.netPaymentTermsTextBox.Location = new System.Drawing.Point(143, 7);
             this.netPaymentTermsTextBox.Multiline = true;
             this.netPaymentTermsTextBox.Name = "netPaymentTermsTextBox";
-            this.netPaymentTermsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.netPaymentTermsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.netPaymentTermsTextBox.Size = new System.Drawing.Size(380, 47);
             this.netPaymentTermsTextBox.TabIndex = 1;
             // 
@@ -2297,6 +1150,1222 @@
             this.tabItemEDI.AttachedControl = this.tabPanelEDI;
             this.tabItemEDI.Name = "tabItemEDI";
             this.tabItemEDI.Text = "更多";
+            // 
+            // tabControlPanelDispute
+            // 
+            this.tabControlPanelDispute.Controls.Add(this.groupPanelDisputeResolve);
+            this.tabControlPanelDispute.Controls.Add(this.groupPanelDispute);
+            this.tabControlPanelDispute.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanelDispute.Location = new System.Drawing.Point(0, 26);
+            this.tabControlPanelDispute.Name = "tabControlPanelDispute";
+            this.tabControlPanelDispute.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanelDispute.Size = new System.Drawing.Size(558, 329);
+            this.tabControlPanelDispute.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabControlPanelDispute.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabControlPanelDispute.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanelDispute.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabControlPanelDispute.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanelDispute.Style.GradientAngle = 90;
+            this.tabControlPanelDispute.TabIndex = 5;
+            this.tabControlPanelDispute.TabItem = this.tabItemDispute;
+            // 
+            // groupPanelDisputeResolve
+            // 
+            this.groupPanelDisputeResolve.AutoScroll = true;
+            this.groupPanelDisputeResolve.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelDisputeResolve.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelDisputeResolve.Controls.Add(this.btnDisputeResolve);
+            this.groupPanelDisputeResolve.Controls.Add(disputeResolveDateLabel);
+            this.groupPanelDisputeResolve.Controls.Add(this.disputeResolveDateDateTimePicker);
+            this.groupPanelDisputeResolve.Controls.Add(disputeResolveUserNameLabel);
+            this.groupPanelDisputeResolve.Controls.Add(this.disputeResolveUserNameTextBox);
+            this.groupPanelDisputeResolve.Controls.Add(disputeResolveReasonLabel);
+            this.groupPanelDisputeResolve.Controls.Add(this.disputeResolveReasonTextBox);
+            this.groupPanelDisputeResolve.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelDisputeResolve.Location = new System.Drawing.Point(1, 167);
+            this.groupPanelDisputeResolve.Name = "groupPanelDisputeResolve";
+            this.groupPanelDisputeResolve.Size = new System.Drawing.Size(556, 104);
+            // 
+            // 
+            // 
+            this.groupPanelDisputeResolve.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelDisputeResolve.Style.BackColorGradientAngle = 90;
+            this.groupPanelDisputeResolve.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelDisputeResolve.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelDisputeResolve.Style.BorderBottomWidth = 1;
+            this.groupPanelDisputeResolve.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelDisputeResolve.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelDisputeResolve.Style.BorderLeftWidth = 1;
+            this.groupPanelDisputeResolve.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelDisputeResolve.Style.BorderRightWidth = 1;
+            this.groupPanelDisputeResolve.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelDisputeResolve.Style.BorderTopWidth = 1;
+            this.groupPanelDisputeResolve.Style.Class = "";
+            this.groupPanelDisputeResolve.Style.CornerDiameter = 4;
+            this.groupPanelDisputeResolve.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelDisputeResolve.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelDisputeResolve.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelDisputeResolve.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelDisputeResolve.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelDisputeResolve.StyleMouseOver.Class = "";
+            this.groupPanelDisputeResolve.TabIndex = 1;
+            // 
+            // btnDisputeResolve
+            // 
+            this.btnDisputeResolve.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnDisputeResolve.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnDisputeResolve.Location = new System.Drawing.Point(8, 9);
+            this.btnDisputeResolve.Name = "btnDisputeResolve";
+            this.btnDisputeResolve.Size = new System.Drawing.Size(75, 23);
+            this.btnDisputeResolve.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDisputeResolve.TabIndex = 0;
+            this.btnDisputeResolve.Text = "商纠解除";
+            this.btnDisputeResolve.Click += new System.EventHandler(this.DisputeResolve);
+            // 
+            // disputeResolveDateDateTimePicker
+            // 
+            // 
+            // 
+            // 
+            this.disputeResolveDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.disputeResolveDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.disputeResolveDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "DisputeResolveDate", true));
+            this.disputeResolveDateDateTimePicker.Location = new System.Drawing.Point(172, 69);
+            // 
+            // 
+            // 
+            this.disputeResolveDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.disputeResolveDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.disputeResolveDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.disputeResolveDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.disputeResolveDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.disputeResolveDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.disputeResolveDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.disputeResolveDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.disputeResolveDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.disputeResolveDateDateTimePicker.Name = "disputeResolveDateDateTimePicker";
+            this.disputeResolveDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
+            this.disputeResolveDateDateTimePicker.TabIndex = 4;
+            // 
+            // disputeResolveUserNameTextBox
+            // 
+            // 
+            // 
+            // 
+            this.disputeResolveUserNameTextBox.Border.Class = "TextBoxBorder";
+            this.disputeResolveUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "DisputeResolveUserName", true));
+            this.disputeResolveUserNameTextBox.Location = new System.Drawing.Point(370, 70);
+            this.disputeResolveUserNameTextBox.Name = "disputeResolveUserNameTextBox";
+            this.disputeResolveUserNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.disputeResolveUserNameTextBox.TabIndex = 6;
+            // 
+            // disputeResolveReasonTextBox
+            // 
+            // 
+            // 
+            // 
+            this.disputeResolveReasonTextBox.Border.Class = "TextBoxBorder";
+            this.disputeResolveReasonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "DisputeResolveReason", true));
+            this.disputeResolveReasonTextBox.Location = new System.Drawing.Point(98, 3);
+            this.disputeResolveReasonTextBox.Multiline = true;
+            this.disputeResolveReasonTextBox.Name = "disputeResolveReasonTextBox";
+            this.disputeResolveReasonTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.disputeResolveReasonTextBox.Size = new System.Drawing.Size(449, 61);
+            this.disputeResolveReasonTextBox.TabIndex = 2;
+            // 
+            // groupPanelDispute
+            // 
+            this.groupPanelDispute.AutoScroll = true;
+            this.groupPanelDispute.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelDispute.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelDispute.Controls.Add(this.isDisputeCheckBox);
+            this.groupPanelDispute.Controls.Add(this.btnDispute);
+            this.groupPanelDispute.Controls.Add(this.tbDisputeReason);
+            this.groupPanelDispute.Controls.Add(this.disputeReasonCheckedListBox);
+            this.groupPanelDispute.Controls.Add(this.disputeTypeComboBoxEx);
+            this.groupPanelDispute.Controls.Add(disputeAmountLabel);
+            this.groupPanelDispute.Controls.Add(this.disputeAmountTextBox);
+            this.groupPanelDispute.Controls.Add(disputeUserNameLabel);
+            this.groupPanelDispute.Controls.Add(disputeDateLabel);
+            this.groupPanelDispute.Controls.Add(this.disputeDateDateTimePicker);
+            this.groupPanelDispute.Controls.Add(this.disputeUserNameTextBox);
+            this.groupPanelDispute.Controls.Add(disputeTypeLabel);
+            this.groupPanelDispute.Controls.Add(disputeReasonLabel);
+            this.groupPanelDispute.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelDispute.Location = new System.Drawing.Point(1, 1);
+            this.groupPanelDispute.Name = "groupPanelDispute";
+            this.groupPanelDispute.Size = new System.Drawing.Size(556, 166);
+            // 
+            // 
+            // 
+            this.groupPanelDispute.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelDispute.Style.BackColorGradientAngle = 90;
+            this.groupPanelDispute.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelDispute.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelDispute.Style.BorderBottomWidth = 1;
+            this.groupPanelDispute.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelDispute.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelDispute.Style.BorderLeftWidth = 1;
+            this.groupPanelDispute.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelDispute.Style.BorderRightWidth = 1;
+            this.groupPanelDispute.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelDispute.Style.BorderTopWidth = 1;
+            this.groupPanelDispute.Style.Class = "";
+            this.groupPanelDispute.Style.CornerDiameter = 4;
+            this.groupPanelDispute.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelDispute.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelDispute.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelDispute.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelDispute.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelDispute.StyleMouseOver.Class = "";
+            this.groupPanelDispute.TabIndex = 0;
+            // 
+            // btnDispute
+            // 
+            this.btnDispute.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnDispute.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnDispute.Location = new System.Drawing.Point(8, 39);
+            this.btnDispute.Name = "btnDispute";
+            this.btnDispute.Size = new System.Drawing.Size(75, 23);
+            this.btnDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDispute.TabIndex = 0;
+            this.btnDispute.Text = "商纠设定";
+            this.btnDispute.Click += new System.EventHandler(this.Dispute);
+            // 
+            // tbDisputeReason
+            // 
+            // 
+            // 
+            // 
+            this.tbDisputeReason.Border.Class = "TextBoxBorder";
+            this.tbDisputeReason.Location = new System.Drawing.Point(352, 7);
+            this.tbDisputeReason.Multiline = true;
+            this.tbDisputeReason.Name = "tbDisputeReason";
+            this.tbDisputeReason.Size = new System.Drawing.Size(195, 94);
+            this.tbDisputeReason.TabIndex = 3;
+            this.tbDisputeReason.WatermarkText = "其他原因";
+            // 
+            // disputeReasonCheckedListBox
+            // 
+            this.disputeReasonCheckedListBox.CheckOnClick = true;
+            this.disputeReasonCheckedListBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.invoiceBindingSource, "FlawReason", true));
+            this.disputeReasonCheckedListBox.FormattingEnabled = true;
+            this.disputeReasonCheckedListBox.Items.AddRange(new object[] {
+            "Settlement agreed with seller",
+            "Direct payment to Export Factor",
+            "Direct payment to seller",
+            "Direct payment to seller’s agent",
+            "Invoice not received",
+            "Duplicate invoice",
+            "Wrong invoice details",
+            "Credit note to buyer, not to us",
+            "Debit note to seller",
+            "Offset against credit balances or other invoices",
+            "Discount beyond terms",
+            "Trade discount deducted",
+            "Counter claim",
+            "Deduction for other costs",
+            "Wrong delivery",
+            "Proof of delivery required",
+            "Wrong goods",
+            "Damaged goods",
+            "Goods on consignment",
+            "Goods returned to seller",
+            "Goods returned to agent",
+            "Buyer refuses delivery",
+            "Other reasons, see message text"});
+            this.disputeReasonCheckedListBox.Location = new System.Drawing.Point(98, 8);
+            this.disputeReasonCheckedListBox.Name = "disputeReasonCheckedListBox";
+            this.disputeReasonCheckedListBox.Size = new System.Drawing.Size(248, 94);
+            this.disputeReasonCheckedListBox.TabIndex = 2;
+            // 
+            // disputeTypeComboBoxEx
+            // 
+            this.disputeTypeComboBoxEx.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "DisputeType", true));
+            this.disputeTypeComboBoxEx.DisplayMember = "Text";
+            this.disputeTypeComboBoxEx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.disputeTypeComboBoxEx.FormattingEnabled = true;
+            this.disputeTypeComboBoxEx.ItemHeight = 14;
+            this.disputeTypeComboBoxEx.Items.AddRange(new object[] {
+            "Invoice (default)",
+            "Credit note",
+            "Non factored invoice",
+            "Non factored credit note",
+            "Payment"});
+            this.disputeTypeComboBoxEx.Location = new System.Drawing.Point(173, 111);
+            this.disputeTypeComboBoxEx.Name = "disputeTypeComboBoxEx";
+            this.disputeTypeComboBoxEx.Size = new System.Drawing.Size(100, 20);
+            this.disputeTypeComboBoxEx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.disputeTypeComboBoxEx.TabIndex = 5;
+            // 
+            // disputeAmountTextBox
+            // 
+            // 
+            // 
+            // 
+            this.disputeAmountTextBox.Border.Class = "TextBoxBorder";
+            this.disputeAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "DisputeAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.disputeAmountTextBox.Location = new System.Drawing.Point(173, 132);
+            this.disputeAmountTextBox.Name = "disputeAmountTextBox";
+            this.disputeAmountTextBox.Size = new System.Drawing.Size(100, 20);
+            this.disputeAmountTextBox.TabIndex = 9;
+            // 
+            // disputeDateDateTimePicker
+            // 
+            // 
+            // 
+            // 
+            this.disputeDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.disputeDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.disputeDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "DisputeDate", true));
+            this.disputeDateDateTimePicker.Location = new System.Drawing.Point(370, 111);
+            // 
+            // 
+            // 
+            this.disputeDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.disputeDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.disputeDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.disputeDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.disputeDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.disputeDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.disputeDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.disputeDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.disputeDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.disputeDateDateTimePicker.Name = "disputeDateDateTimePicker";
+            this.disputeDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
+            this.disputeDateDateTimePicker.TabIndex = 7;
+            // 
+            // disputeUserNameTextBox
+            // 
+            // 
+            // 
+            // 
+            this.disputeUserNameTextBox.Border.Class = "TextBoxBorder";
+            this.disputeUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "DisputeUserName", true));
+            this.disputeUserNameTextBox.Location = new System.Drawing.Point(370, 132);
+            this.disputeUserNameTextBox.Name = "disputeUserNameTextBox";
+            this.disputeUserNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.disputeUserNameTextBox.TabIndex = 11;
+            // 
+            // tabItemDispute
+            // 
+            this.tabItemDispute.AttachedControl = this.tabControlPanelDispute;
+            this.tabItemDispute.Name = "tabItemDispute";
+            this.tabItemDispute.Text = "商纠处理";
+            // 
+            // tabPanelFlaw
+            // 
+            this.tabPanelFlaw.AutoScroll = true;
+            this.tabPanelFlaw.Controls.Add(this.groupPanelFlawResolve);
+            this.tabPanelFlaw.Controls.Add(this.groupPanelFlaw);
+            this.tabPanelFlaw.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelFlaw.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelFlaw.Name = "tabPanelFlaw";
+            this.tabPanelFlaw.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelFlaw.Size = new System.Drawing.Size(558, 329);
+            this.tabPanelFlaw.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelFlaw.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelFlaw.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelFlaw.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelFlaw.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelFlaw.Style.GradientAngle = 90;
+            this.tabPanelFlaw.TabIndex = 4;
+            this.tabPanelFlaw.TabItem = this.tabItemFlaw;
+            // 
+            // groupPanelFlawResolve
+            // 
+            this.groupPanelFlawResolve.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelFlawResolve.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelFlawResolve.Controls.Add(this.btnFlawResolve);
+            this.groupPanelFlawResolve.Controls.Add(flawResolveReasonLabel);
+            this.groupPanelFlawResolve.Controls.Add(this.tbFlawResolveReason);
+            this.groupPanelFlawResolve.Controls.Add(flawResolveUserNameLabel);
+            this.groupPanelFlawResolve.Controls.Add(this.flawResolveDateDateTimePicker);
+            this.groupPanelFlawResolve.Controls.Add(this.flawResolveUserNameTextBox);
+            this.groupPanelFlawResolve.Controls.Add(flawResolveDateLabel);
+            this.groupPanelFlawResolve.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelFlawResolve.Location = new System.Drawing.Point(1, 154);
+            this.groupPanelFlawResolve.Name = "groupPanelFlawResolve";
+            this.groupPanelFlawResolve.Size = new System.Drawing.Size(556, 127);
+            // 
+            // 
+            // 
+            this.groupPanelFlawResolve.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelFlawResolve.Style.BackColorGradientAngle = 90;
+            this.groupPanelFlawResolve.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelFlawResolve.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelFlawResolve.Style.BorderBottomWidth = 1;
+            this.groupPanelFlawResolve.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelFlawResolve.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelFlawResolve.Style.BorderLeftWidth = 1;
+            this.groupPanelFlawResolve.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelFlawResolve.Style.BorderRightWidth = 1;
+            this.groupPanelFlawResolve.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelFlawResolve.Style.BorderTopWidth = 1;
+            this.groupPanelFlawResolve.Style.Class = "";
+            this.groupPanelFlawResolve.Style.CornerDiameter = 4;
+            this.groupPanelFlawResolve.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelFlawResolve.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelFlawResolve.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelFlawResolve.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelFlawResolve.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelFlawResolve.StyleMouseOver.Class = "";
+            this.groupPanelFlawResolve.TabIndex = 1;
+            // 
+            // btnFlawResolve
+            // 
+            this.btnFlawResolve.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnFlawResolve.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnFlawResolve.Location = new System.Drawing.Point(15, 6);
+            this.btnFlawResolve.Name = "btnFlawResolve";
+            this.btnFlawResolve.Size = new System.Drawing.Size(75, 23);
+            this.btnFlawResolve.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnFlawResolve.TabIndex = 0;
+            this.btnFlawResolve.Text = "瑕疵解除";
+            this.btnFlawResolve.Click += new System.EventHandler(this.FlawResolve);
+            // 
+            // tbFlawResolveReason
+            // 
+            // 
+            // 
+            // 
+            this.tbFlawResolveReason.Border.Class = "TextBoxBorder";
+            this.tbFlawResolveReason.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "FlawResolveReason", true));
+            this.tbFlawResolveReason.Location = new System.Drawing.Point(105, 0);
+            this.tbFlawResolveReason.Multiline = true;
+            this.tbFlawResolveReason.Name = "tbFlawResolveReason";
+            this.tbFlawResolveReason.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbFlawResolveReason.Size = new System.Drawing.Size(434, 79);
+            this.tbFlawResolveReason.TabIndex = 2;
+            // 
+            // flawResolveDateDateTimePicker
+            // 
+            // 
+            // 
+            // 
+            this.flawResolveDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.flawResolveDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.flawResolveDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "FlawResolveDate", true));
+            this.flawResolveDateDateTimePicker.Location = new System.Drawing.Point(156, 94);
+            // 
+            // 
+            // 
+            this.flawResolveDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.flawResolveDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.flawResolveDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.flawResolveDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.flawResolveDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.flawResolveDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.flawResolveDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.flawResolveDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.flawResolveDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.flawResolveDateDateTimePicker.Name = "flawResolveDateDateTimePicker";
+            this.flawResolveDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
+            this.flawResolveDateDateTimePicker.TabIndex = 4;
+            // 
+            // flawResolveUserNameTextBox
+            // 
+            // 
+            // 
+            // 
+            this.flawResolveUserNameTextBox.Border.Class = "TextBoxBorder";
+            this.flawResolveUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "FlawResolveUserName", true));
+            this.flawResolveUserNameTextBox.Location = new System.Drawing.Point(324, 93);
+            this.flawResolveUserNameTextBox.Name = "flawResolveUserNameTextBox";
+            this.flawResolveUserNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.flawResolveUserNameTextBox.TabIndex = 6;
+            // 
+            // groupPanelFlaw
+            // 
+            this.groupPanelFlaw.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelFlaw.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelFlaw.Controls.Add(this.isFlawCheckBox);
+            this.groupPanelFlaw.Controls.Add(this.btnFlaw);
+            this.groupPanelFlaw.Controls.Add(this.tbFlawReason);
+            this.groupPanelFlaw.Controls.Add(flawReasonLabel);
+            this.groupPanelFlaw.Controls.Add(this.flawReasonCheckedListBox);
+            this.groupPanelFlaw.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelFlaw.Location = new System.Drawing.Point(1, 1);
+            this.groupPanelFlaw.Name = "groupPanelFlaw";
+            this.groupPanelFlaw.Size = new System.Drawing.Size(556, 153);
+            // 
+            // 
+            // 
+            this.groupPanelFlaw.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelFlaw.Style.BackColorGradientAngle = 90;
+            this.groupPanelFlaw.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelFlaw.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelFlaw.Style.BorderBottomWidth = 1;
+            this.groupPanelFlaw.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelFlaw.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelFlaw.Style.BorderLeftWidth = 1;
+            this.groupPanelFlaw.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelFlaw.Style.BorderRightWidth = 1;
+            this.groupPanelFlaw.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelFlaw.Style.BorderTopWidth = 1;
+            this.groupPanelFlaw.Style.Class = "";
+            this.groupPanelFlaw.Style.CornerDiameter = 4;
+            this.groupPanelFlaw.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelFlaw.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelFlaw.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelFlaw.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelFlaw.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelFlaw.StyleMouseOver.Class = "";
+            this.groupPanelFlaw.TabIndex = 0;
+            // 
+            // btnFlaw
+            // 
+            this.btnFlaw.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnFlaw.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnFlaw.Location = new System.Drawing.Point(13, 43);
+            this.btnFlaw.Name = "btnFlaw";
+            this.btnFlaw.Size = new System.Drawing.Size(75, 23);
+            this.btnFlaw.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnFlaw.TabIndex = 0;
+            this.btnFlaw.Text = "瑕疵设定";
+            this.btnFlaw.Click += new System.EventHandler(this.Flaw);
+            // 
+            // tbFlawReason
+            // 
+            // 
+            // 
+            // 
+            this.tbFlawReason.Border.Class = "TextBoxBorder";
+            this.tbFlawReason.Location = new System.Drawing.Point(344, 10);
+            this.tbFlawReason.Multiline = true;
+            this.tbFlawReason.Name = "tbFlawReason";
+            this.tbFlawReason.Size = new System.Drawing.Size(195, 125);
+            this.tbFlawReason.TabIndex = 3;
+            this.tbFlawReason.WatermarkText = "其他原因";
+            // 
+            // flawReasonCheckedListBox
+            // 
+            this.flawReasonCheckedListBox.CheckOnClick = true;
+            this.flawReasonCheckedListBox.FormattingEnabled = true;
+            this.flawReasonCheckedListBox.Items.AddRange(new object[] {
+            "卖方/买方基本资料不符",
+            "发票为存根联或副联复印件",
+            "发票无转让字据记载或贴错",
+            "账款到期日不符",
+            "单据内容不符",
+            "额度通知书过期或未签回",
+            "保理合同过期或未签回",
+            "交货凭证内容不完整"});
+            this.flawReasonCheckedListBox.Location = new System.Drawing.Point(105, 11);
+            this.flawReasonCheckedListBox.Name = "flawReasonCheckedListBox";
+            this.flawReasonCheckedListBox.Size = new System.Drawing.Size(233, 124);
+            this.flawReasonCheckedListBox.TabIndex = 2;
+            // 
+            // tabItemFlaw
+            // 
+            this.tabItemFlaw.AttachedControl = this.tabPanelFlaw;
+            this.tabItemFlaw.Name = "tabItemFlaw";
+            this.tabItemFlaw.Text = "瑕疵处理";
+            // 
+            // tabPanelInvoice
+            // 
+            this.tabPanelInvoice.AutoScroll = true;
+            this.tabPanelInvoice.Controls.Add(this.groupPanelInvoiceProcess);
+            this.tabPanelInvoice.Controls.Add(this.groupPanelInvoiceBasic);
+            this.tabPanelInvoice.Controls.Add(this.btnInvoiceReset);
+            this.tabPanelInvoice.Controls.Add(this.btnInvoiceSave);
+            this.tabPanelInvoice.Controls.Add(this.btnInvoiceUpdate);
+            this.tabPanelInvoice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelInvoice.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelInvoice.Name = "tabPanelInvoice";
+            this.tabPanelInvoice.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelInvoice.Size = new System.Drawing.Size(558, 329);
+            this.tabPanelInvoice.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelInvoice.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelInvoice.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelInvoice.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelInvoice.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelInvoice.Style.GradientAngle = 90;
+            this.tabPanelInvoice.TabIndex = 1;
+            this.tabPanelInvoice.TabItem = this.tabItemInvoice;
+            // 
+            // groupPanelInvoiceProcess
+            // 
+            this.groupPanelInvoiceProcess.AutoScroll = true;
+            this.groupPanelInvoiceProcess.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelInvoiceProcess.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelInvoiceProcess.Controls.Add(paymentBatchNoLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.paymentBatchNoTextBox);
+            this.groupPanelInvoiceProcess.Controls.Add(financeBatchNoLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.financeBatchNoTextBox);
+            this.groupPanelInvoiceProcess.Controls.Add(assignBatchNoLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.assignBatchNoTextBox);
+            this.groupPanelInvoiceProcess.Controls.Add(interestDateLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.interestDateDateTimePicker);
+            this.groupPanelInvoiceProcess.Controls.Add(interestLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.interestTextBox);
+            this.groupPanelInvoiceProcess.Controls.Add(commissionDateLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.commissionDateDateTimePicker);
+            this.groupPanelInvoiceProcess.Controls.Add(commissionLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.commissionTextBox);
+            this.groupPanelInvoiceProcess.Controls.Add(refundDateLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.refundDateDateTimePicker);
+            this.groupPanelInvoiceProcess.Controls.Add(refundAmountLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.refundAmountTextBox);
+            this.groupPanelInvoiceProcess.Controls.Add(paymentDateLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.paymentDateDateTimePicker);
+            this.groupPanelInvoiceProcess.Controls.Add(paymentAmountLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.paymentAmountTextBox);
+            this.groupPanelInvoiceProcess.Controls.Add(financeDueDateLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.financeDueDateDateTimePicker);
+            this.groupPanelInvoiceProcess.Controls.Add(financeDateLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.financeDateDateTimePicker);
+            this.groupPanelInvoiceProcess.Controls.Add(financeAmountLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.financeAmountTextBox);
+            this.groupPanelInvoiceProcess.Controls.Add(assignAmountLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.assignAmountTextBox);
+            this.groupPanelInvoiceProcess.Controls.Add(assignDateLabel);
+            this.groupPanelInvoiceProcess.Controls.Add(this.assignDateTextBox);
+            this.groupPanelInvoiceProcess.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelInvoiceProcess.Location = new System.Drawing.Point(1, 106);
+            this.groupPanelInvoiceProcess.Name = "groupPanelInvoiceProcess";
+            this.groupPanelInvoiceProcess.Size = new System.Drawing.Size(556, 162);
+            // 
+            // 
+            // 
+            this.groupPanelInvoiceProcess.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelInvoiceProcess.Style.BackColorGradientAngle = 90;
+            this.groupPanelInvoiceProcess.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelInvoiceProcess.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelInvoiceProcess.Style.BorderBottomWidth = 1;
+            this.groupPanelInvoiceProcess.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelInvoiceProcess.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelInvoiceProcess.Style.BorderLeftWidth = 1;
+            this.groupPanelInvoiceProcess.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelInvoiceProcess.Style.BorderRightWidth = 1;
+            this.groupPanelInvoiceProcess.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelInvoiceProcess.Style.BorderTopWidth = 1;
+            this.groupPanelInvoiceProcess.Style.Class = "";
+            this.groupPanelInvoiceProcess.Style.CornerDiameter = 4;
+            this.groupPanelInvoiceProcess.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelInvoiceProcess.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelInvoiceProcess.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelInvoiceProcess.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelInvoiceProcess.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelInvoiceProcess.StyleMouseOver.Class = "";
+            this.groupPanelInvoiceProcess.TabIndex = 0;
+            // 
+            // paymentBatchNoTextBox
+            // 
+            // 
+            // 
+            // 
+            this.paymentBatchNoTextBox.Border.Class = "TextBoxBorder";
+            this.paymentBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "PaymentBatchNo", true));
+            this.paymentBatchNoTextBox.Location = new System.Drawing.Point(433, 63);
+            this.paymentBatchNoTextBox.Name = "paymentBatchNoTextBox";
+            this.paymentBatchNoTextBox.Size = new System.Drawing.Size(100, 20);
+            this.paymentBatchNoTextBox.TabIndex = 31;
+            // 
+            // financeBatchNoTextBox
+            // 
+            // 
+            // 
+            // 
+            this.financeBatchNoTextBox.Border.Class = "TextBoxBorder";
+            this.financeBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "FinanceBatchNo", true));
+            this.financeBatchNoTextBox.Location = new System.Drawing.Point(433, 20);
+            this.financeBatchNoTextBox.Name = "financeBatchNoTextBox";
+            this.financeBatchNoTextBox.Size = new System.Drawing.Size(100, 20);
+            this.financeBatchNoTextBox.TabIndex = 29;
+            // 
+            // assignBatchNoTextBox
+            // 
+            // 
+            // 
+            // 
+            this.assignBatchNoTextBox.Border.Class = "TextBoxBorder";
+            this.assignBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "AssignBatchNo", true));
+            this.assignBatchNoTextBox.Location = new System.Drawing.Point(433, -1);
+            this.assignBatchNoTextBox.Name = "assignBatchNoTextBox";
+            this.assignBatchNoTextBox.Size = new System.Drawing.Size(100, 20);
+            this.assignBatchNoTextBox.TabIndex = 27;
+            // 
+            // interestDateDateTimePicker
+            // 
+            // 
+            // 
+            // 
+            this.interestDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.interestDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.interestDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "InterestDate", true));
+            this.interestDateDateTimePicker.Location = new System.Drawing.Point(232, 128);
+            // 
+            // 
+            // 
+            this.interestDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.interestDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.interestDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.interestDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.interestDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.interestDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.interestDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.interestDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.interestDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.interestDateDateTimePicker.Name = "interestDateDateTimePicker";
+            this.interestDateDateTimePicker.Size = new System.Drawing.Size(118, 20);
+            this.interestDateDateTimePicker.TabIndex = 25;
+            // 
+            // interestTextBox
+            // 
+            // 
+            // 
+            // 
+            this.interestTextBox.Border.Class = "TextBoxBorder";
+            this.interestTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "Interest", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.interestTextBox.Location = new System.Drawing.Point(73, 128);
+            this.interestTextBox.Name = "interestTextBox";
+            this.interestTextBox.Size = new System.Drawing.Size(100, 20);
+            this.interestTextBox.TabIndex = 23;
+            // 
+            // commissionDateDateTimePicker
+            // 
+            // 
+            // 
+            // 
+            this.commissionDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.commissionDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.commissionDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "CommissionDate", true));
+            this.commissionDateDateTimePicker.Location = new System.Drawing.Point(232, 107);
+            // 
+            // 
+            // 
+            this.commissionDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.commissionDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.commissionDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.commissionDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.commissionDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.commissionDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.commissionDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.commissionDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.commissionDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.commissionDateDateTimePicker.Name = "commissionDateDateTimePicker";
+            this.commissionDateDateTimePicker.Size = new System.Drawing.Size(118, 20);
+            this.commissionDateDateTimePicker.TabIndex = 21;
+            // 
+            // commissionTextBox
+            // 
+            // 
+            // 
+            // 
+            this.commissionTextBox.Border.Class = "TextBoxBorder";
+            this.commissionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "Commission", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.commissionTextBox.Location = new System.Drawing.Point(73, 107);
+            this.commissionTextBox.Name = "commissionTextBox";
+            this.commissionTextBox.Size = new System.Drawing.Size(100, 20);
+            this.commissionTextBox.TabIndex = 19;
+            // 
+            // refundDateDateTimePicker
+            // 
+            // 
+            // 
+            // 
+            this.refundDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.refundDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.refundDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "RefundDate", true));
+            this.refundDateDateTimePicker.Location = new System.Drawing.Point(232, 86);
+            // 
+            // 
+            // 
+            this.refundDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.refundDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.refundDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.refundDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.refundDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.refundDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.refundDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.refundDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.refundDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.refundDateDateTimePicker.Name = "refundDateDateTimePicker";
+            this.refundDateDateTimePicker.Size = new System.Drawing.Size(118, 20);
+            this.refundDateDateTimePicker.TabIndex = 17;
+            // 
+            // refundAmountTextBox
+            // 
+            // 
+            // 
+            // 
+            this.refundAmountTextBox.Border.Class = "TextBoxBorder";
+            this.refundAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "RefundAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.refundAmountTextBox.Location = new System.Drawing.Point(73, 86);
+            this.refundAmountTextBox.Name = "refundAmountTextBox";
+            this.refundAmountTextBox.Size = new System.Drawing.Size(100, 20);
+            this.refundAmountTextBox.TabIndex = 15;
+            // 
+            // paymentDateDateTimePicker
+            // 
+            // 
+            // 
+            // 
+            this.paymentDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.paymentDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.paymentDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "PaymentDate", true));
+            this.paymentDateDateTimePicker.Location = new System.Drawing.Point(232, 64);
+            // 
+            // 
+            // 
+            this.paymentDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.paymentDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.paymentDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.paymentDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.paymentDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.paymentDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.paymentDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.paymentDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.paymentDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.paymentDateDateTimePicker.Name = "paymentDateDateTimePicker";
+            this.paymentDateDateTimePicker.Size = new System.Drawing.Size(118, 20);
+            this.paymentDateDateTimePicker.TabIndex = 13;
+            // 
+            // paymentAmountTextBox
+            // 
+            // 
+            // 
+            // 
+            this.paymentAmountTextBox.Border.Class = "TextBoxBorder";
+            this.paymentAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "PaymentAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.paymentAmountTextBox.Location = new System.Drawing.Point(73, 64);
+            this.paymentAmountTextBox.Name = "paymentAmountTextBox";
+            this.paymentAmountTextBox.Size = new System.Drawing.Size(100, 20);
+            this.paymentAmountTextBox.TabIndex = 11;
+            // 
+            // financeDueDateDateTimePicker
+            // 
+            // 
+            // 
+            // 
+            this.financeDueDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.financeDueDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.financeDueDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "FinanceDueDate", true));
+            this.financeDueDateDateTimePicker.Location = new System.Drawing.Point(232, 43);
+            // 
+            // 
+            // 
+            this.financeDueDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.financeDueDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.financeDueDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.financeDueDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.financeDueDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.financeDueDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.financeDueDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.financeDueDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.financeDueDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.financeDueDateDateTimePicker.Name = "financeDueDateDateTimePicker";
+            this.financeDueDateDateTimePicker.Size = new System.Drawing.Size(118, 20);
+            this.financeDueDateDateTimePicker.TabIndex = 9;
+            // 
+            // financeDateDateTimePicker
+            // 
+            // 
+            // 
+            // 
+            this.financeDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.financeDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.financeDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "FinanceDate", true));
+            this.financeDateDateTimePicker.Location = new System.Drawing.Point(231, 21);
+            // 
+            // 
+            // 
+            this.financeDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.financeDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.financeDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.financeDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.financeDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.financeDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.financeDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.financeDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.financeDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.financeDateDateTimePicker.Name = "financeDateDateTimePicker";
+            this.financeDateDateTimePicker.Size = new System.Drawing.Size(119, 20);
+            this.financeDateDateTimePicker.TabIndex = 7;
+            // 
+            // financeAmountTextBox
+            // 
+            // 
+            // 
+            // 
+            this.financeAmountTextBox.Border.Class = "TextBoxBorder";
+            this.financeAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "FinanceAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.financeAmountTextBox.Location = new System.Drawing.Point(73, 21);
+            this.financeAmountTextBox.Name = "financeAmountTextBox";
+            this.financeAmountTextBox.Size = new System.Drawing.Size(100, 20);
+            this.financeAmountTextBox.TabIndex = 5;
+            // 
+            // assignAmountTextBox
+            // 
+            // 
+            // 
+            // 
+            this.assignAmountTextBox.Border.Class = "TextBoxBorder";
+            this.assignAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "AssignAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.assignAmountTextBox.Location = new System.Drawing.Point(73, 0);
+            this.assignAmountTextBox.Name = "assignAmountTextBox";
+            this.assignAmountTextBox.Size = new System.Drawing.Size(100, 20);
+            this.assignAmountTextBox.TabIndex = 1;
+            // 
+            // assignDateTextBox
+            // 
+            // 
+            // 
+            // 
+            this.assignDateTextBox.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.assignDateTextBox.ButtonDropDown.Visible = true;
+            this.assignDateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "AssignDate", true));
+            this.assignDateTextBox.Location = new System.Drawing.Point(232, 0);
+            // 
+            // 
+            // 
+            this.assignDateTextBox.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.assignDateTextBox.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.assignDateTextBox.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.assignDateTextBox.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.assignDateTextBox.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.assignDateTextBox.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.assignDateTextBox.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.assignDateTextBox.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.assignDateTextBox.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.assignDateTextBox.Name = "assignDateTextBox";
+            this.assignDateTextBox.Size = new System.Drawing.Size(118, 20);
+            this.assignDateTextBox.TabIndex = 3;
+            // 
+            // groupPanelInvoiceBasic
+            // 
+            this.groupPanelInvoiceBasic.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelInvoiceBasic.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelInvoiceBasic.Controls.Add(commentLabel);
+            this.groupPanelInvoiceBasic.Controls.Add(this.commentTextBox);
+            this.groupPanelInvoiceBasic.Controls.Add(invoiceCurrencyLabel);
+            this.groupPanelInvoiceBasic.Controls.Add(this.invoiceCurrencyComboBox);
+            this.groupPanelInvoiceBasic.Controls.Add(dueDateLabel);
+            this.groupPanelInvoiceBasic.Controls.Add(this.dueDateTextBox);
+            this.groupPanelInvoiceBasic.Controls.Add(invoiceAmountLabel);
+            this.groupPanelInvoiceBasic.Controls.Add(this.invoiceAmountTextBox);
+            this.groupPanelInvoiceBasic.Controls.Add(invoiceDateLabel);
+            this.groupPanelInvoiceBasic.Controls.Add(this.invoiceDateTextBox);
+            this.groupPanelInvoiceBasic.Controls.Add(invoiceNoLabel);
+            this.groupPanelInvoiceBasic.Controls.Add(this.invoiceNoTextBox);
+            this.groupPanelInvoiceBasic.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelInvoiceBasic.Location = new System.Drawing.Point(1, 1);
+            this.groupPanelInvoiceBasic.Name = "groupPanelInvoiceBasic";
+            this.groupPanelInvoiceBasic.Size = new System.Drawing.Size(556, 105);
+            // 
+            // 
+            // 
+            this.groupPanelInvoiceBasic.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelInvoiceBasic.Style.BackColorGradientAngle = 90;
+            this.groupPanelInvoiceBasic.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelInvoiceBasic.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelInvoiceBasic.Style.BorderBottomWidth = 1;
+            this.groupPanelInvoiceBasic.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelInvoiceBasic.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelInvoiceBasic.Style.BorderLeftWidth = 1;
+            this.groupPanelInvoiceBasic.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelInvoiceBasic.Style.BorderRightWidth = 1;
+            this.groupPanelInvoiceBasic.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelInvoiceBasic.Style.BorderTopWidth = 1;
+            this.groupPanelInvoiceBasic.Style.Class = "";
+            this.groupPanelInvoiceBasic.Style.CornerDiameter = 4;
+            this.groupPanelInvoiceBasic.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelInvoiceBasic.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelInvoiceBasic.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelInvoiceBasic.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelInvoiceBasic.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelInvoiceBasic.StyleMouseOver.Class = "";
+            this.groupPanelInvoiceBasic.TabIndex = 0;
+            // 
+            // commentTextBox
+            // 
+            // 
+            // 
+            // 
+            this.commentTextBox.Border.Class = "TextBoxBorder";
+            this.commentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "Comment", true));
+            this.commentTextBox.Location = new System.Drawing.Point(73, 49);
+            this.commentTextBox.Multiline = true;
+            this.commentTextBox.Name = "commentTextBox";
+            this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.commentTextBox.Size = new System.Drawing.Size(459, 43);
+            this.commentTextBox.TabIndex = 13;
+            // 
+            // invoiceCurrencyComboBox
+            // 
+            this.invoiceCurrencyComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.invoiceCurrencyComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.invoiceCurrencyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "InvoiceCurrency", true));
+            this.invoiceCurrencyComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.invoiceCurrencyComboBox.FormattingEnabled = true;
+            this.invoiceCurrencyComboBox.Location = new System.Drawing.Point(232, 3);
+            this.invoiceCurrencyComboBox.Name = "invoiceCurrencyComboBox";
+            this.invoiceCurrencyComboBox.Size = new System.Drawing.Size(112, 21);
+            this.invoiceCurrencyComboBox.TabIndex = 3;
+            // 
+            // dueDateTextBox
+            // 
+            // 
+            // 
+            // 
+            this.dueDateTextBox.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.dueDateTextBox.ButtonDropDown.Visible = true;
+            this.dueDateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "DueDate", true));
+            this.dueDateTextBox.Location = new System.Drawing.Point(432, 25);
+            // 
+            // 
+            // 
+            this.dueDateTextBox.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.dueDateTextBox.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dueDateTextBox.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.dueDateTextBox.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.dueDateTextBox.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.dueDateTextBox.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.dueDateTextBox.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.dueDateTextBox.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.dueDateTextBox.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.dueDateTextBox.Name = "dueDateTextBox";
+            this.dueDateTextBox.Size = new System.Drawing.Size(100, 20);
+            this.dueDateTextBox.TabIndex = 11;
+            // 
+            // invoiceAmountTextBox
+            // 
+            // 
+            // 
+            // 
+            this.invoiceAmountTextBox.Border.Class = "TextBoxBorder";
+            this.invoiceAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "InvoiceAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.invoiceAmountTextBox.Location = new System.Drawing.Point(73, 27);
+            this.invoiceAmountTextBox.Name = "invoiceAmountTextBox";
+            this.invoiceAmountTextBox.Size = new System.Drawing.Size(100, 20);
+            this.invoiceAmountTextBox.TabIndex = 7;
+            // 
+            // invoiceDateTextBox
+            // 
+            // 
+            // 
+            // 
+            this.invoiceDateTextBox.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.invoiceDateTextBox.ButtonDropDown.Visible = true;
+            this.invoiceDateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "InvoiceDate", true));
+            this.invoiceDateTextBox.Location = new System.Drawing.Point(232, 27);
+            // 
+            // 
+            // 
+            this.invoiceDateTextBox.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.invoiceDateTextBox.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.invoiceDateTextBox.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.invoiceDateTextBox.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.invoiceDateTextBox.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.invoiceDateTextBox.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.invoiceDateTextBox.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.invoiceDateTextBox.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.invoiceDateTextBox.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.invoiceDateTextBox.Name = "invoiceDateTextBox";
+            this.invoiceDateTextBox.Size = new System.Drawing.Size(112, 20);
+            this.invoiceDateTextBox.TabIndex = 9;
+            // 
+            // invoiceNoTextBox
+            // 
+            // 
+            // 
+            // 
+            this.invoiceNoTextBox.Border.Class = "TextBoxBorder";
+            this.invoiceNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "InvoiceNo", true));
+            this.invoiceNoTextBox.Location = new System.Drawing.Point(73, 4);
+            this.invoiceNoTextBox.Name = "invoiceNoTextBox";
+            this.invoiceNoTextBox.Size = new System.Drawing.Size(100, 20);
+            this.invoiceNoTextBox.TabIndex = 1;
+            // 
+            // btnInvoiceReset
+            // 
+            this.btnInvoiceReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnInvoiceReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnInvoiceReset.Location = new System.Drawing.Point(308, 294);
+            this.btnInvoiceReset.Name = "btnInvoiceReset";
+            this.btnInvoiceReset.Size = new System.Drawing.Size(75, 23);
+            this.btnInvoiceReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnInvoiceReset.TabIndex = 2;
+            this.btnInvoiceReset.Text = "重置";
+            this.btnInvoiceReset.Click += new System.EventHandler(this.ResetInvoice);
+            // 
+            // btnInvoiceSave
+            // 
+            this.btnInvoiceSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnInvoiceSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnInvoiceSave.Location = new System.Drawing.Point(227, 294);
+            this.btnInvoiceSave.Name = "btnInvoiceSave";
+            this.btnInvoiceSave.Size = new System.Drawing.Size(75, 23);
+            this.btnInvoiceSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnInvoiceSave.TabIndex = 1;
+            this.btnInvoiceSave.Text = "保存";
+            this.btnInvoiceSave.Click += new System.EventHandler(this.SaveInvoice);
+            // 
+            // btnInvoiceUpdate
+            // 
+            this.btnInvoiceUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnInvoiceUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnInvoiceUpdate.Location = new System.Drawing.Point(146, 294);
+            this.btnInvoiceUpdate.Name = "btnInvoiceUpdate";
+            this.btnInvoiceUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnInvoiceUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnInvoiceUpdate.TabIndex = 0;
+            this.btnInvoiceUpdate.Text = "编辑";
+            this.btnInvoiceUpdate.Click += new System.EventHandler(this.UpdateInvoice);
+            // 
+            // tabItemInvoice
+            // 
+            this.tabItemInvoice.AttachedControl = this.tabPanelInvoice;
+            this.tabItemInvoice.Name = "tabItemInvoice";
+            this.tabItemInvoice.Text = "发票明细";
             // 
             // superValidator
             // 
@@ -2313,11 +2382,41 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
+            // isFlawCheckBox
+            // 
+            this.isFlawCheckBox.AutoSize = true;
+            this.isFlawCheckBox.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.isFlawCheckBox.BackgroundStyle.Class = "";
+            this.isFlawCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.invoiceBindingSource, "IsFlaw", true));
+            this.isFlawCheckBox.Location = new System.Drawing.Point(13, 21);
+            this.isFlawCheckBox.Name = "isFlawCheckBox";
+            this.isFlawCheckBox.Size = new System.Drawing.Size(76, 16);
+            this.isFlawCheckBox.TabIndex = 5;
+            this.isFlawCheckBox.Text = "是否瑕疵";
+            // 
+            // isDisputeCheckBox
+            // 
+            this.isDisputeCheckBox.AutoSize = true;
+            this.isDisputeCheckBox.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.isDisputeCheckBox.BackgroundStyle.Class = "";
+            this.isDisputeCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.invoiceBindingSource, "IsDispute", true));
+            this.isDisputeCheckBox.Location = new System.Drawing.Point(8, 17);
+            this.isDisputeCheckBox.Name = "isDisputeCheckBox";
+            this.isDisputeCheckBox.Size = new System.Drawing.Size(76, 16);
+            this.isDisputeCheckBox.TabIndex = 12;
+            this.isDisputeCheckBox.Text = "是否商纠";
+            // 
             // InvoiceDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(558, 345);
+            this.ClientSize = new System.Drawing.Size(558, 355);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.Name = "InvoiceDetail";
@@ -2326,14 +2425,24 @@
             this.Leave += new System.EventHandler(this.InvoiceDetail_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
+            this.tabPanelEDI.ResumeLayout(false);
+            this.groupPanelInvoiceAdv.ResumeLayout(false);
+            this.groupPanelInvoiceAdv.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valueDateTextBox)).EndInit();
             this.tabControlPanelDispute.ResumeLayout(false);
             this.groupPanelDisputeResolve.ResumeLayout(false);
             this.groupPanelDisputeResolve.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.disputeResolveDateDateTimePicker)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
             this.groupPanelDispute.ResumeLayout(false);
             this.groupPanelDispute.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.disputeDateDateTimePicker)).EndInit();
+            this.tabPanelFlaw.ResumeLayout(false);
+            this.groupPanelFlawResolve.ResumeLayout(false);
+            this.groupPanelFlawResolve.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.flawResolveDateDateTimePicker)).EndInit();
+            this.groupPanelFlaw.ResumeLayout(false);
+            this.groupPanelFlaw.PerformLayout();
             this.tabPanelInvoice.ResumeLayout(false);
             this.groupPanelInvoiceProcess.ResumeLayout(false);
             this.groupPanelInvoiceProcess.PerformLayout();
@@ -2348,16 +2457,6 @@
             this.groupPanelInvoiceBasic.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dueDateTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceDateTextBox)).EndInit();
-            this.tabPanelFlaw.ResumeLayout(false);
-            this.groupPanelFlawResolve.ResumeLayout(false);
-            this.groupPanelFlawResolve.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.flawResolveDateDateTimePicker)).EndInit();
-            this.groupPanelFlaw.ResumeLayout(false);
-            this.groupPanelFlaw.PerformLayout();
-            this.tabPanelEDI.ResumeLayout(false);
-            this.groupPanelInvoiceAdv.ResumeLayout(false);
-            this.groupPanelInvoiceAdv.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.valueDateTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
@@ -2365,11 +2464,7 @@
 
         #endregion
 
-        private DevComponents.DotNetBar.ButtonX btnFlawResolve;
         private DevComponents.DotNetBar.Controls.CheckBoxX isFlawCheckBox;
-        private DevComponents.DotNetBar.ButtonX btnFlaw;
-        private DevComponents.DotNetBar.ButtonX btnDisputeResolve;
-        private DevComponents.DotNetBar.ButtonX btnDispute;
         private DevComponents.DotNetBar.Controls.CheckBoxX isDisputeCheckBox;
     }
 }

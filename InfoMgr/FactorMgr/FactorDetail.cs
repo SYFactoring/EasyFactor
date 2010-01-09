@@ -252,7 +252,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 this.freezeReasonTextBox.ReadOnly = false;
                 this.freezeDateDateTimePicker.Enabled = true;
                 creditLine.Freezer = App.Current.CurUser.Name;
-                creditLine.FreezeDate = System.DateTime.Now;
+                creditLine.FreezeDate = System.DateTime.Now.Date;
             }
         }
 
@@ -322,7 +322,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
             Factor factor = (Factor)factorBindingSource.DataSource;
-            factor.LastModifiedDate = DateTime.Now;
+            factor.LastModifiedDate = DateTime.Now.Date;
+            factor.CreateUserName = App.Current.CurUser.Name;
 
             if (this.opFactorType == OpFactorType.NEW_FACTOR)
             {
@@ -396,7 +397,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             FactorCreditLine creditLine = (FactorCreditLine)this.factorCreditLineBindingSource.DataSource;
 
-            DateTime today = DateTime.Now;
+            DateTime today = DateTime.Now.Date;
             if (creditLine.PeriodBegin < today)
             {
                 creditLine.CreditLineStatus = "已过期";
@@ -422,6 +423,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     creditLine.CreditLineStatus = "已生效";
                 }
             }
+            creditLine.CreateUserName = App.Current.CurUser.Name;
 
             if (creditLine.CreditLineID == 0)
             {
@@ -555,7 +557,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 this.unfreezeReasonTextBox.ReadOnly = false;
                 this.unfreezeDateDateTimePicker.Enabled = true;
                 creditLine.Unfreezer = App.Current.CurUser.Name;
-                creditLine.UnfreezeDate = System.DateTime.Now;
+                creditLine.UnfreezeDate = System.DateTime.Now.Date;
             }
         }
 

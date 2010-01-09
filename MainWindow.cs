@@ -64,9 +64,9 @@ namespace CMBC.EasyFactor
 
         #endregion Properties
 
-        #region Methods (42)
+        #region Methods (46)
 
-        // Private Methods (42) 
+        // Private Methods (46) 
 
         private void About(object sender, EventArgs e)
         {
@@ -122,9 +122,69 @@ namespace CMBC.EasyFactor
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckAssignBatch(object sender, EventArgs e)
+        {
+            AssignBatchMgr batchMgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.CHECK);
+            this.SetDetailPanel(batchMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckCDA(object sender, EventArgs e)
+        {
+            CDAMgr cdaMgr = new CDAMgr(false);
+            this.SetDetailPanel(cdaMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckFinanceBatch(object sender, EventArgs e)
+        {
+            FinanceBatchMgr batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.CHECK);
+            this.SetDetailPanel(batchMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckPaymentBatch(object sender, EventArgs e)
+        {
+            PaymentBatchMgr batchMgr = new PaymentBatchMgr(PaymentBatchMgr.OpBatchType.CHECK);
+            this.SetDetailPanel(batchMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void ClearDetailPanel()
         {
             this.ribbonDetailPanel.Controls.Clear();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DisputeResolve(object sender, EventArgs e)
+        {
+            InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.DISPUTE_RESOLVE);
+            this.SetDetailPanel(invoiceMgr);
+        }
+
+        private void Exit(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         /// <summary>
@@ -167,7 +227,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportAssign(object sender, EventArgs e)
         {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES_BY_BATCH);
             importForm.Show();
         }
 
@@ -189,7 +249,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportClientCreditLine(object sender, EventArgs e)
         {
-            if (validateRole())
+            if (ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_CREDITLINE);
                 importForm.Show();
@@ -203,7 +263,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportClients(object sender, EventArgs e)
         {
-            if (validateRole())
+            if (ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS);
                 importForm.Show();
@@ -217,7 +277,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportContractAndCDA(object sender, EventArgs e)
         {
-            if (validateRole())
+            if (ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CONTRACT_CDA);
                 importForm.Show();
@@ -231,7 +291,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportDepartments(object sender, EventArgs e)
         {
-            if (validateRole())
+            if (ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_DEPARTMENTS);
                 importForm.Show();
@@ -245,7 +305,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportFactorCreditLine(object sender, EventArgs e)
         {
-            if (validateRole())
+            if (ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS_CREDITLINE);
                 importForm.Show();
@@ -259,7 +319,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportFactors(object sender, EventArgs e)
         {
-            if (validateRole())
+            if (ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS);
                 importForm.Show();
@@ -271,20 +331,9 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ImportFinance(object sender, EventArgs e)
-        {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE);
-            importForm.Show();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ImportInvoices(object sender, EventArgs e)
         {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN_FINANCE_PAYMENT);
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES);
             importForm.Show();
         }
 
@@ -295,7 +344,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportUsers(object sender, EventArgs e)
         {
-            if (validateRole())
+            if (ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_USERS);
                 importForm.Show();
@@ -388,7 +437,7 @@ namespace CMBC.EasyFactor
         {
             this.ClearDetailPanel();
             this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
-             ribbonDetailPanel.Controls.Add(logoLabel);
+            ribbonDetailPanel.Controls.Add(logoLabel);
         }
 
         /// <summary>
@@ -550,7 +599,7 @@ namespace CMBC.EasyFactor
         /// 
         /// </summary>
         /// <returns></returns>
-        private bool validateRole()
+        private bool ValidateRole()
         {
             if (App.Current.CurUser.Role == "管理员")
             {
