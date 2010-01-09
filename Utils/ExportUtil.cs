@@ -91,22 +91,25 @@ namespace CMBC.EasyFactor.Utils
             datasheet.Cells[1, column++] = "转让批次号";
             datasheet.Cells[1, column++] = "转让批次币别";
             datasheet.Cells[1, column++] = "转让批次日";
+            datasheet.Cells[1, column++] = "复核结果";
+            datasheet.Cells[1, column++] = "退回原因";
+            datasheet.Cells[1, column++] = "复核人";
+            datasheet.Cells[1, column++] = "复核日";
             datasheet.Cells[1, column++] = "是否生成报文";
             datasheet.Cells[1, column++] = "本次转让备注";
             datasheet.Cells[1, column++] = "转让经办人";
-            datasheet.Cells[1, column++] = "发票号";
+            datasheet.Cells[1, column++] = "发票号/贷项通知";
+            datasheet.Cells[1, column++] = "单据类别";
             datasheet.Cells[1, column++] = "发票币别";
             datasheet.Cells[1, column++] = "票面金额";
             datasheet.Cells[1, column++] = "转让金额";
             datasheet.Cells[1, column++] = "发票日期";
             datasheet.Cells[1, column++] = "到期日";
-            datasheet.Cells[1, column++] = "转让日";
             datasheet.Cells[1, column++] = "是否瑕疵";
             datasheet.Cells[1, column++] = "瑕疵原因";
             datasheet.Cells[1, column++] = "瑕疵解除原因";
             datasheet.Cells[1, column++] = "瑕疵解除日";
             datasheet.Cells[1, column++] = "瑕疵解除人";
-            datasheet.Cells[1, column++] = "生效日";
             datasheet.Cells[1, column++] = "融资编号（即放款编号）";
             datasheet.Cells[1, column++] = "融资类型";
             datasheet.Cells[1, column++] = "代付行编码";
@@ -125,6 +128,10 @@ namespace CMBC.EasyFactor.Utils
             datasheet.Cells[1, column++] = "付款批次号";
             datasheet.Cells[1, column++] = "付款类型";
             datasheet.Cells[1, column++] = "付款批次日";
+            datasheet.Cells[1, column++] = "复核结果";
+            datasheet.Cells[1, column++] = "退回原因";
+            datasheet.Cells[1, column++] = "复核人";
+            datasheet.Cells[1, column++] = "复核日";
             datasheet.Cells[1, column++] = "是否生成报文";
             datasheet.Cells[1, column++] = "本次付款备注";
             datasheet.Cells[1, column++] = "销账经办人";
@@ -149,13 +156,18 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.AssignBatchNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.BatchCurrency;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.AssignDate;
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CheckStatus;
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.RejectReason;
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CheckUserName;
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CheckDate;
                     datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.InvoiceAssignBatch.IsCreateMsg);
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Comment;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CreateUserName;
                 }
 
-                column = 8;
+                column = 12;
                 datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
+                datasheet.Cells[row + 2, column++] = invoice.InvoiceType;
                 datasheet.Cells[row + 2, column++] = invoice.InvoiceAmount;
                 datasheet.Cells[row + 2, column++] = invoice.AssignAmount;
                 datasheet.Cells[row + 2, column++] = invoice.InvoiceDate;
@@ -165,11 +177,10 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[row + 2, column++] = invoice.FlawResolveReason;
                 datasheet.Cells[row + 2, column++] = invoice.FlawResolveDate;
                 datasheet.Cells[row + 2, column++] = invoice.FlawResolveUserName;
-                datasheet.Cells[row + 2, column++] = invoice.ValueDate;
 
                 if (invoice.InvoiceFinanceBatch != null)
                 {
-                    column = 21;
+                    column = 23;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinanceBatchNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinanceType;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FactorCode;
@@ -183,22 +194,26 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.Comment;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.CreateUserName;
                 }
-                column = 33;
+                column = 35;
                 datasheet.Cells[row + 2, column++] = invoice.FinanceAmount;
                 datasheet.Cells[row + 2, column++] = invoice.FinanceDate;
                 datasheet.Cells[row + 2, column++] = invoice.FinanceDueDate;
 
                 if (invoice.InvoicePaymentBatch != null)
                 {
-                    column = 36;
+                    column = 38;
                     datasheet.Cells[row + 2, column++] = invoice.InvoicePaymentBatch.PaymentBatchNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoicePaymentBatch.PaymentType;
                     datasheet.Cells[row + 2, column++] = invoice.InvoicePaymentBatch.PaymentDate;
+                    datasheet.Cells[row + 2, column++] = invoice.InvoicePaymentBatch.CheckStatus;
+                    datasheet.Cells[row + 2, column++] = invoice.InvoicePaymentBatch.RejectReason;
+                    datasheet.Cells[row + 2, column++] = invoice.InvoicePaymentBatch.CheckUserName;
+                    datasheet.Cells[row + 2, column++] = invoice.InvoicePaymentBatch.CheckDate;
                     datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.InvoicePaymentBatch.IsCreateMsg);
                     datasheet.Cells[row + 2, column++] = invoice.InvoicePaymentBatch.Comment;
                     datasheet.Cells[row + 2, column++] = invoice.InvoicePaymentBatch.CreateUserName;
                 }
-                column = 42;
+                column = 48;
                 datasheet.Cells[row + 2, column++] = invoice.PaymentAmount;
                 datasheet.Cells[row + 2, column++] = invoice.PaymentDate;
                 datasheet.Cells[row + 2, column++] = invoice.RefundAmount;
@@ -214,7 +229,7 @@ namespace CMBC.EasyFactor.Utils
             foreach (Range range in datasheet.UsedRange.Columns)
             {
                 range.EntireColumn.AutoFit();
-                if (range.Column == 10 || range.Column == 11 || range.Column == 33 || range.Column == 42 || range.Column == 44 || range.Column == 46 || range.Column == 48)
+                if (range.Column == 14 || range.Column == 15 || range.Column == 36 || range.Column == 45 || range.Column == 47 || range.Column == 49 || range.Column == 51)
                 {
                     range.NumberFormatLocal = "0.00";
                 }

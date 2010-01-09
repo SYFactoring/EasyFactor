@@ -15,6 +15,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -94,13 +95,27 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         public static string GenerateFinanceBatchNo(DateTime date)
         {
-            DateTime begin = new DateTime(date.Year, date.Month, date.Day);
+            DateTime begin = date.Date;
             DateTime end = begin.AddDays(1);
             int batchCount = App.Current.DbContext.InvoiceFinanceBatches.Count(batch => batch.FinancePeriodBegin >= begin && batch.FinancePeriodBegin < end);
             string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return financeNo;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cda"></param>
+        /// <returns></returns>
+        public static string GenerateFinanceBatchNo(DateTime date, List<InvoiceFinanceBatch> batchesInMemory)
+        {
+            DateTime begin = date.Date;
+            DateTime end = begin.AddDays(1);
+            int batchCount = App.Current.DbContext.InvoiceFinanceBatches.Count(batch => batch.FinancePeriodBegin >= begin && batch.FinancePeriodBegin < end);
+            batchCount += batchesInMemory.Count(batch => batch.FinancePeriodBegin >= begin && batch.FinancePeriodBegin < end);
+            string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            return financeNo;
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -615,11 +630,24 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private bool ValidateBatch()
         {
             foreach (Invoice invoice in this.invoiceBindingSource.List)
             {
-
+                if (invoice.FinanceAmount > invoice.AssignOutstanding)
+                {
+                    MessageBox.Show("融资金额不能大于转让余额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
+                if (invoice.FinanceDueDate < invoice.FinanceDate)
+                {
+                    MessageBox.Show("融资到期日不能早于融资日: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
             }
             return true;
         }

@@ -485,7 +485,7 @@
             this.financeTypeComboBoxEx.TabIndex = 1;
             this.superValidator.SetValidator1(this.financeTypeComboBoxEx, this.requiredFieldValidator1);
             // 
-            // invoiceFinanceBatchBindingSource
+            // batchBindingSource
             // 
             this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceFinanceBatch);
             // 
@@ -822,7 +822,7 @@
             this.menuItemCDADetail,
             this.menuItemCaseDetail});
             this.cmuInvoiceFinance.Name = "cmuInvoiceFinance";
-            this.cmuInvoiceFinance.Size = new System.Drawing.Size(183, 92);
+            this.cmuInvoiceFinance.Size = new System.Drawing.Size(183, 70);
             // 
             // menuItemInvoiceDetail
             // 
@@ -1012,6 +1012,7 @@
             this.Controls.Add(this.dgvInvoices);
             this.Controls.Add(this.invoiceBindingNavigator);
             this.Controls.Add(this.panelFinanceBatch);
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "InvoiceFinance";
             this.Size = new System.Drawing.Size(1257, 466);
             this.panelFinanceBatch.ResumeLayout(false);

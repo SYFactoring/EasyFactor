@@ -156,6 +156,7 @@
             // 
             // 
             this.tbClientName.Border.Class = "TextBoxBorder";
+            this.tbClientName.ImeMode = System.Windows.Forms.ImeMode.On;
             this.tbClientName.Location = new System.Drawing.Point(216, 5);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.Size = new System.Drawing.Size(100, 20);
@@ -203,6 +204,7 @@
             // 
             // 
             this.tbContractCode.Border.Class = "TextBoxBorder";
+            this.tbContractCode.ImeMode = System.Windows.Forms.ImeMode.On;
             this.tbContractCode.Location = new System.Drawing.Point(57, 6);
             this.tbContractCode.Name = "tbContractCode";
             this.tbContractCode.Size = new System.Drawing.Size(100, 20);
@@ -379,6 +381,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvContracts);
             this.Controls.Add(this.panelContractQuery);
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "ContractMgr";
             this.Size = new System.Drawing.Size(768, 390);
             this.panelContractQuery.ResumeLayout(false);

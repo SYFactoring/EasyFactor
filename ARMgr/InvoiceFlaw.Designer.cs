@@ -32,8 +32,8 @@
             DevComponents.DotNetBar.LabelX flawResolveUserNameLabel;
             DevComponents.DotNetBar.LabelX flawResolveDateLabel;
             DevComponents.DotNetBar.LabelX flawReasonLabel;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupPanelFlawResolve = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.btnFlawClose = new DevComponents.DotNetBar.ButtonX();
             this.btnFlawSave = new DevComponents.DotNetBar.ButtonX();
@@ -42,6 +42,7 @@
             this.flawResolveDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.flawResolveUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelFlaw = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.isFlawCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.btnFlaw = new DevComponents.DotNetBar.ButtonX();
             this.tbFlawReason = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.flawReasonCheckedListBox = new System.Windows.Forms.CheckedListBox();
@@ -50,7 +51,6 @@
             this.colInvoiceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isFlawCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             flawResolveReasonLabel = new DevComponents.DotNetBar.LabelX();
             flawResolveUserNameLabel = new DevComponents.DotNetBar.LabelX();
             flawResolveDateLabel = new DevComponents.DotNetBar.LabelX();
@@ -304,6 +304,20 @@
             this.groupPanelFlaw.StyleMouseOver.Class = "";
             this.groupPanelFlaw.TabIndex = 2;
             // 
+            // isFlawCheckBox
+            // 
+            this.isFlawCheckBox.AutoSize = true;
+            this.isFlawCheckBox.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.isFlawCheckBox.BackgroundStyle.Class = "";
+            this.isFlawCheckBox.Location = new System.Drawing.Point(15, 7);
+            this.isFlawCheckBox.Name = "isFlawCheckBox";
+            this.isFlawCheckBox.Size = new System.Drawing.Size(76, 16);
+            this.isFlawCheckBox.TabIndex = 6;
+            this.isFlawCheckBox.Text = "是否瑕疵";
+            // 
             // btnFlaw
             // 
             this.btnFlaw.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -361,14 +375,14 @@
             this.colInvoiceDate,
             this.colInvoiceCurrency,
             this.colInvoiceAmount});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvInvoices.Location = new System.Drawing.Point(0, 283);
@@ -401,26 +415,12 @@
             // colInvoiceAmount
             // 
             this.colInvoiceAmount.DataPropertyName = "InvoiceAmount";
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colInvoiceAmount.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colInvoiceAmount.DefaultCellStyle = dataGridViewCellStyle1;
             this.colInvoiceAmount.HeaderText = "发票金额";
             this.colInvoiceAmount.Name = "colInvoiceAmount";
             this.colInvoiceAmount.ReadOnly = true;
-            // 
-            // isFlawCheckBox
-            // 
-            this.isFlawCheckBox.AutoSize = true;
-            this.isFlawCheckBox.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.isFlawCheckBox.BackgroundStyle.Class = "";
-            this.isFlawCheckBox.Location = new System.Drawing.Point(15, 7);
-            this.isFlawCheckBox.Name = "isFlawCheckBox";
-            this.isFlawCheckBox.Size = new System.Drawing.Size(76, 16);
-            this.isFlawCheckBox.TabIndex = 6;
-            this.isFlawCheckBox.Text = "是否瑕疵";
             // 
             // InvoiceFlaw
             // 
@@ -431,6 +431,7 @@
             this.Controls.Add(this.groupPanelFlawResolve);
             this.Controls.Add(this.groupPanelFlaw);
             this.DoubleBuffered = true;
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "InvoiceFlaw";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "瑕疵处理";

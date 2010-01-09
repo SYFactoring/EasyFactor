@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -74,9 +75,25 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         public static string GenerateAssignBatchNo(DateTime date)
         {
-            DateTime begin = new DateTime(date.Year, date.Month, date.Day);
+            DateTime begin = date.Date;
             DateTime end = begin.AddDays(1);
             int batchCount = App.Current.DbContext.InvoiceAssignBatches.Count(batch => batch.AssignDate >= begin && batch.AssignDate < end);
+            string assignNo = String.Format("ASS{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            return assignNo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="batchesInMemory"></param>
+        /// <returns></returns>
+        public static string GenerateAssignBatchNo(DateTime date, List<InvoiceAssignBatch> batchesInMemory)
+        {
+            DateTime begin = date.Date;
+            DateTime end = begin.AddDays(1);
+            int batchCount = App.Current.DbContext.InvoiceAssignBatches.Count(batch => batch.AssignDate >= begin && batch.AssignDate < end);
+            batchCount += batchesInMemory.Count(batch => batch.AssignDate >= begin && batch.AssignDate < end);
             string assignNo = String.Format("ASS{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return assignNo;
         }
@@ -106,7 +123,10 @@ namespace CMBC.EasyFactor.ARMgr
                 selectedInvoice.Commission = selectedInvoice.AssignAmount * this._CDA.Price ?? 0;
                 if (selectedInvoice.Commission.GetValueOrDefault() > 0)
                 {
-                    selectedInvoice.CommissionDate = selectedInvoice.InvoiceAssignBatch.AssignDate;
+                    if (selectedInvoice.InvoiceAssignBatch != null)
+                    {
+                        selectedInvoice.CommissionDate = selectedInvoice.InvoiceAssignBatch.AssignDate;
+                    }
                 }
                 else
                 {
@@ -184,6 +204,7 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
                 Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
+                selectedInvoice.InvoiceType = "Invoice";
                 InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)this.batchBindingSource.DataSource;
             }
         }
@@ -198,7 +219,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (e.Value == null)
                 return;
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colCommissionDate)
+            if (col == colDueDate || col == colInvoiceDate || col == colCommissionDate)
             {
                 DateTime date = (DateTime)e.Value;
                 if (date == default(DateTime))
@@ -226,7 +247,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colCommissionDate)
+            if (col == colDueDate || col == colInvoiceDate || col == colCommissionDate)
             {
                 if (e.Value.Equals(string.Empty))
                 {
@@ -261,7 +282,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colInvoiceDate || col == colCommissionDate)
+            if (col == colDueDate || col == colInvoiceDate || col == colCommissionDate)
             {
                 string str = (string)e.FormattedValue;
                 DateTime result;
@@ -525,12 +546,13 @@ namespace CMBC.EasyFactor.ARMgr
                     MessageBox.Show("转让金额不能大于票面金额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
-                if (invoice.InvoiceDate > invoice.InvoiceAssignBatch.AssignDate)
+                DateTime date = this.assignDateDateTimePicker.Value;
+                if (invoice.InvoiceDate > date)
                 {
                     MessageBox.Show("转让日不能早于发票日: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
-                if (invoice.DueDate < invoice.InvoiceAssignBatch.AssignDate)
+                if (invoice.DueDate < date)
                 {
                     MessageBox.Show("转让日不能晚于发票到期日: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;

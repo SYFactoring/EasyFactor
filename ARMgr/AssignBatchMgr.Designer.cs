@@ -64,6 +64,7 @@
             this.colBatchCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRejectReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsCreateMsg = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -150,6 +151,7 @@
             this.colBatchCurrency,
             this.colAssignDate,
             this.colCheckStatus,
+            this.colRejectReason,
             this.colCheckUserName,
             this.colCheckDate,
             this.colIsCreateMsg,
@@ -251,6 +253,13 @@
             this.colCheckStatus.Name = "colCheckStatus";
             this.colCheckStatus.ReadOnly = true;
             // 
+            // colRejectReason
+            // 
+            this.colRejectReason.DataPropertyName = "RejectReason";
+            this.colRejectReason.HeaderText = "退回原因";
+            this.colRejectReason.Name = "colRejectReason";
+            this.colRejectReason.ReadOnly = true;
+            // 
             // colCheckUserName
             // 
             this.colCheckUserName.DataPropertyName = "CheckUserName";
@@ -292,6 +301,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvBatches);
             this.Controls.Add(this.panelQuery);
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "AssignBatchMgr";
             this.Size = new System.Drawing.Size(623, 357);
             this.panelQuery.ResumeLayout(false);
@@ -314,6 +324,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRejectReason;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsCreateMsg;

@@ -382,6 +382,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvDepts);
             this.Controls.Add(this.panelQuery);
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "DepartmentMgr";
             this.Size = new System.Drawing.Size(605, 460);
             this.panelQuery.ResumeLayout(false);

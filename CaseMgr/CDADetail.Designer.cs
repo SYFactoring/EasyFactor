@@ -144,8 +144,8 @@
             DevComponents.DotNetBar.LabelX assignTypeLabel;
             DevComponents.DotNetBar.LabelX lblIsNotice;
             DevComponents.DotNetBar.LabelX lblReviewNo;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
             DevComponents.DotNetBar.LabelX lblRemark;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.tbReviewNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -194,6 +194,7 @@
             this.creditCoverTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditCoverCurrComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.groupPanelOther = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.tbRemark = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cbNoticeMethodFax = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cbNoticeMethodEmail = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cDAStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -217,7 +218,6 @@
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.tbRemark = new DevComponents.DotNetBar.Controls.TextBoxX();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -800,6 +800,20 @@
             lblReviewNo.Size = new System.Drawing.Size(97, 16);
             lblReviewNo.TabIndex = 21;
             lblReviewNo.Text = "协查意见书编号:";
+            // 
+            // lblRemark
+            // 
+            lblRemark.AutoSize = true;
+            lblRemark.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblRemark.BackgroundStyle.Class = "";
+            lblRemark.Location = new System.Drawing.Point(0, 86);
+            lblRemark.Name = "lblRemark";
+            lblRemark.Size = new System.Drawing.Size(84, 16);
+            lblRemark.TabIndex = 17;
+            lblRemark.Text = "内部提示信息:";
             // 
             // groupPanelCase
             // 
@@ -1660,6 +1674,20 @@
             this.groupPanelOther.StyleMouseOver.Class = "";
             this.groupPanelOther.TabIndex = 2;
             // 
+            // tbRemark
+            // 
+            // 
+            // 
+            // 
+            this.tbRemark.Border.Class = "TextBoxBorder";
+            this.tbRemark.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Remark", true));
+            this.tbRemark.Location = new System.Drawing.Point(101, 86);
+            this.tbRemark.Multiline = true;
+            this.tbRemark.Name = "tbRemark";
+            this.tbRemark.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbRemark.Size = new System.Drawing.Size(438, 37);
+            this.tbRemark.TabIndex = 18;
+            // 
             // cbNoticeMethodFax
             // 
             this.cbNoticeMethodFax.AutoSize = true;
@@ -1900,34 +1928,6 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // lblRemark
-            // 
-            lblRemark.AutoSize = true;
-            lblRemark.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblRemark.BackgroundStyle.Class = "";
-            lblRemark.Location = new System.Drawing.Point(0, 86);
-            lblRemark.Name = "lblRemark";
-            lblRemark.Size = new System.Drawing.Size(84, 16);
-            lblRemark.TabIndex = 17;
-            lblRemark.Text = "内部提示信息:";
-            // 
-            // tbRemark
-            // 
-            // 
-            // 
-            // 
-            this.tbRemark.Border.Class = "TextBoxBorder";
-            this.tbRemark.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Remark", true));
-            this.tbRemark.Location = new System.Drawing.Point(101, 86);
-            this.tbRemark.Multiline = true;
-            this.tbRemark.Name = "tbRemark";
-            this.tbRemark.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbRemark.Size = new System.Drawing.Size(438, 37);
-            this.tbRemark.TabIndex = 18;
-            // 
             // CDADetail
             // 
             this.AcceptButton = this.btnCDASave;
@@ -1941,6 +1941,7 @@
             this.Controls.Add(this.groupPanelCreditCover);
             this.Controls.Add(this.groupPanelCase);
             this.DoubleBuffered = true;
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "CDADetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "额度通知书";

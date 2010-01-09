@@ -166,6 +166,8 @@
             DevComponents.DotNetBar.LabelX unfreezeReasonLabel;
             DevComponents.DotNetBar.LabelX unfreezerLabel;
             DevComponents.DotNetBar.LabelX unfreezeDateLabel;
+            DevComponents.DotNetBar.LabelX lblCreateUserName;
+            DevComponents.DotNetBar.LabelX lblCreditLineCreateUserName;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -174,8 +176,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FactorDetail));
-            DevComponents.DotNetBar.LabelX lblCreateUserName;
-            DevComponents.DotNetBar.LabelX lblCreditLineCreateUserName;
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelFactor = new DevComponents.DotNetBar.TabControlPanel();
             this.btnFactorUpdate = new DevComponents.DotNetBar.ButtonX();
@@ -199,6 +199,7 @@
             this.tbGeneralCorrespondence1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbWorkingHours = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelBasic = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.companyNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.telefax_2TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.telefax_1TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -239,6 +240,7 @@
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.factorCreditLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupPanelCreditLineDetail = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.tbCreditLineCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnFactorCreditLineUpdate = new DevComponents.DotNetBar.ButtonX();
             this.btnFactorCreditLineRefresh = new DevComponents.DotNetBar.ButtonX();
             this.btnFactorCreditLineUnfreeze = new DevComponents.DotNetBar.ButtonX();
@@ -267,6 +269,7 @@
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.factorErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.factorHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.requiredFieldValidator10 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.creditLineValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
@@ -279,9 +282,6 @@
             this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.clientLineErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.clientLineHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.requiredFieldValidator10 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.tbCreditLineCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.requiredFieldValidator11 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             factorTypeLabel = new DevComponents.DotNetBar.LabelX();
             countryNameLabel = new DevComponents.DotNetBar.LabelX();
@@ -896,6 +896,36 @@
             unfreezeDateLabel.TabIndex = 25;
             unfreezeDateLabel.Text = "解冻日期:";
             // 
+            // lblCreateUserName
+            // 
+            lblCreateUserName.AutoSize = true;
+            lblCreateUserName.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblCreateUserName.BackgroundStyle.Class = "";
+            lblCreateUserName.Location = new System.Drawing.Point(30, 201);
+            lblCreateUserName.Name = "lblCreateUserName";
+            lblCreateUserName.Size = new System.Drawing.Size(47, 16);
+            lblCreateUserName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            lblCreateUserName.TabIndex = 35;
+            lblCreateUserName.Text = "经办人:";
+            // 
+            // lblCreditLineCreateUserName
+            // 
+            lblCreditLineCreateUserName.AutoSize = true;
+            lblCreditLineCreateUserName.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblCreditLineCreateUserName.BackgroundStyle.Class = "";
+            lblCreditLineCreateUserName.Location = new System.Drawing.Point(35, 111);
+            lblCreditLineCreateUserName.Name = "lblCreditLineCreateUserName";
+            lblCreditLineCreateUserName.Size = new System.Drawing.Size(47, 16);
+            lblCreditLineCreateUserName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            lblCreditLineCreateUserName.TabIndex = 34;
+            lblCreditLineCreateUserName.Text = "经办人:";
+            // 
             // tabControl
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
@@ -1338,6 +1368,19 @@
             // 
             this.groupPanelBasic.StyleMouseOver.Class = "";
             this.groupPanelBasic.TabIndex = 0;
+            // 
+            // tbCreateUserName
+            // 
+            // 
+            // 
+            // 
+            this.tbCreateUserName.Border.Class = "TextBoxBorder";
+            this.tbCreateUserName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "CreateUserName", true));
+            this.tbCreateUserName.Location = new System.Drawing.Point(82, 199);
+            this.tbCreateUserName.Name = "tbCreateUserName";
+            this.tbCreateUserName.Size = new System.Drawing.Size(193, 20);
+            this.tbCreateUserName.TabIndex = 36;
+            this.factorValidator.SetValidator1(this.tbCreateUserName, this.requiredFieldValidator10);
             // 
             // companyNameCNTextBox
             // 
@@ -1882,6 +1925,20 @@
             this.groupPanelCreditLineDetail.StyleMouseOver.Class = "";
             this.groupPanelCreditLineDetail.TabIndex = 0;
             // 
+            // tbCreditLineCreateUserName
+            // 
+            // 
+            // 
+            // 
+            this.tbCreditLineCreateUserName.Border.Class = "TextBoxBorder";
+            this.tbCreditLineCreateUserName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorCreditLineBindingSource, "CreateUserName", true));
+            this.tbCreditLineCreateUserName.Location = new System.Drawing.Point(90, 111);
+            this.tbCreditLineCreateUserName.Name = "tbCreditLineCreateUserName";
+            this.tbCreditLineCreateUserName.ReadOnly = true;
+            this.tbCreditLineCreateUserName.Size = new System.Drawing.Size(120, 20);
+            this.tbCreditLineCreateUserName.TabIndex = 35;
+            this.creditLineValidator.SetValidator1(this.tbCreditLineCreateUserName, this.requiredFieldValidator11);
+            // 
             // btnFactorCreditLineUpdate
             // 
             this.btnFactorCreditLineUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -2279,6 +2336,11 @@
             // 
             this.factorHighlighter.ContainerControl = this;
             // 
+            // requiredFieldValidator10
+            // 
+            this.requiredFieldValidator10.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator10.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // creditLineValidator
             // 
             this.creditLineValidator.ContainerControl = this;
@@ -2343,68 +2405,6 @@
             // 
             this.clientLineHighlighter.ContainerControl = this;
             // 
-            // lblCreateUserName
-            // 
-            lblCreateUserName.AutoSize = true;
-            lblCreateUserName.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblCreateUserName.BackgroundStyle.Class = "";
-            lblCreateUserName.Location = new System.Drawing.Point(30, 201);
-            lblCreateUserName.Name = "lblCreateUserName";
-            lblCreateUserName.Size = new System.Drawing.Size(47, 16);
-            lblCreateUserName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            lblCreateUserName.TabIndex = 35;
-            lblCreateUserName.Text = "经办人:";
-            // 
-            // tbCreateUserName
-            // 
-            // 
-            // 
-            // 
-            this.tbCreateUserName.Border.Class = "TextBoxBorder";
-            this.tbCreateUserName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "CreateUserName", true));
-            this.tbCreateUserName.Location = new System.Drawing.Point(82, 199);
-            this.tbCreateUserName.Name = "tbCreateUserName";
-            this.tbCreateUserName.Size = new System.Drawing.Size(193, 20);
-            this.tbCreateUserName.TabIndex = 36;
-            this.factorValidator.SetValidator1(this.tbCreateUserName, this.requiredFieldValidator10);
-            // 
-            // requiredFieldValidator10
-            // 
-            this.requiredFieldValidator10.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator10.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // lblCreditLineCreateUserName
-            // 
-            lblCreditLineCreateUserName.AutoSize = true;
-            lblCreditLineCreateUserName.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblCreditLineCreateUserName.BackgroundStyle.Class = "";
-            lblCreditLineCreateUserName.Location = new System.Drawing.Point(35, 111);
-            lblCreditLineCreateUserName.Name = "lblCreditLineCreateUserName";
-            lblCreditLineCreateUserName.Size = new System.Drawing.Size(47, 16);
-            lblCreditLineCreateUserName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            lblCreditLineCreateUserName.TabIndex = 34;
-            lblCreditLineCreateUserName.Text = "经办人:";
-            // 
-            // tbCreditLineCreateUserName
-            // 
-            // 
-            // 
-            // 
-            this.tbCreditLineCreateUserName.Border.Class = "TextBoxBorder";
-            this.tbCreditLineCreateUserName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorCreditLineBindingSource, "CreateUserName", true));
-            this.tbCreditLineCreateUserName.Location = new System.Drawing.Point(90, 111);
-            this.tbCreditLineCreateUserName.Name = "tbCreditLineCreateUserName";
-            this.tbCreditLineCreateUserName.ReadOnly = true;
-            this.tbCreditLineCreateUserName.Size = new System.Drawing.Size(120, 20);
-            this.tbCreditLineCreateUserName.TabIndex = 35;
-            this.creditLineValidator.SetValidator1(this.tbCreditLineCreateUserName, this.requiredFieldValidator11);
-            // 
             // requiredFieldValidator11
             // 
             this.requiredFieldValidator11.ErrorMessage = "Your error message here.";
@@ -2417,6 +2417,7 @@
             this.ClientSize = new System.Drawing.Size(595, 603);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "FactorDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "合作机构详细信息";

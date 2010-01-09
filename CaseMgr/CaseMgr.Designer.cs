@@ -712,6 +712,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvCases);
             this.Controls.Add(this.panelCaseQuery);
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "CaseMgr";
             this.Size = new System.Drawing.Size(761, 385);
             this.panelCaseQuery.ResumeLayout(false);

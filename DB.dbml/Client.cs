@@ -16,12 +16,9 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 买方信用风险担保额度
         /// </summary>
-        public ClientCreditLine AssignCreditLine
+        public ClientCreditLine GetAssignCreditLine(string currency)
         {
-            get
-            {
-                return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == "已生效" && c.CreditLineType == "买方信用风险担保额度");
-            }
+            return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == "已生效" && c.CreditLineType == "买方信用风险担保额度" && c.CreditLineCurrency == currency);
         }
 
         public System.Nullable<double> AssignTotal
@@ -77,27 +74,22 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 最高保理预付款融资额度余额
         /// </summary>
-        public System.Nullable<double> FinanceLineOutstanding
+        public System.Nullable<double> GetFinanceLineOutstanding(string currency)
         {
-            get
+            ClientCreditLine creditLine = GetFinanceCreditLine(currency);
+            if (creditLine == null)
             {
-                if (this.FinanceCreditLine == null )
-                {
-                    return null;
-                }
-                return this.FinanceCreditLine.CreditLine - this.FinanceOutstanding.GetValueOrDefault();
+                return null;
             }
+            return creditLine.CreditLine - this.FinanceOutstanding.GetValueOrDefault();
         }
 
         /// <summary>
         /// 保理预付款融资额度
         /// </summary>
-        public ClientCreditLine FinanceCreditLine
+        public ClientCreditLine GetFinanceCreditLine(string currency)
         {
-            get
-            {
-                return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == "已生效" && c.CreditLineType == "保理预付款融资额度");
-            }
+            return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == "已生效" && c.CreditLineType == "保理预付款融资额度" && c.CreditLineCurrency == currency);
         }
 
         /// <summary>

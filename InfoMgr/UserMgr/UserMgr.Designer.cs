@@ -359,6 +359,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.ContextMenuStrip = this.cmuUserMgr;
             this.Controls.Add(this.dgvUsers);
             this.Controls.Add(this.panelQuery);
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "UserMgr";
             this.Size = new System.Drawing.Size(800, 600);
             this.cmuUserMgr.ResumeLayout(false);

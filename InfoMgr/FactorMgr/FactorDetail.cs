@@ -479,7 +479,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     {
                         foreach (FactorCreditLine fcl in factor.FactorCreditLines)
                         {
-                            if (fcl != creditLine && fcl.CreditLineStatus == "已生效" && fcl.CreditLineType == creditLine.CreditLineType)
+                            if (fcl != creditLine && fcl.CreditLineStatus == "已生效" && fcl.CreditLineType == creditLine.CreditLineType && fcl.CreditLineCurrency == creditLine.CreditLineCurrency)
                             {
                                 fcl.CreditLineStatus = "已过期";
                             }

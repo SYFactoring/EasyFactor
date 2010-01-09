@@ -128,6 +128,27 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations;
                 this.dgvCDAs.DataSource = curCase.CDAs;
 
+                switch (curCase.TransactionType)
+                {
+                    case "国内卖方保理":
+                    case "出口保理":
+                    case "国内信保保理":
+                    case "国际信保保理":
+                    case "租赁保理":
+                        this.tbCaseFactorCode.Text = curCase.SellerFactor.FactorCode;
+                        this.tbCaseFactorNameCN.Text = curCase.SellerFactor.CompanyNameCN;
+                        this.tbCaseFactorNameEN.Text = curCase.SellerFactor.CompanyNameEN;
+                        break;
+                    case "国内买方保理":
+                    case "进口保理":
+                        this.tbCaseFactorCode.Text = curCase.BuyerFactor.FactorCode;
+                        this.tbCaseFactorNameCN.Text = curCase.BuyerFactor.CompanyNameCN;
+                        this.tbCaseFactorNameEN.Text = curCase.BuyerFactor.CompanyNameEN;
+
+                        break;
+                    default: break;
+                }
+
                 List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
                 this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
                 curCase.Backup();
@@ -306,7 +327,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (!"进口保理".Equals(curCase.TransactionType) && curCase.SellerClient != null)
                 {
-                    if (!curCase.SellerClient.Contracts.Any(con => con.ContractStatus == "已生效"))
+                    if (curCase.SellerClient.Contract == null)
                     {
                         curCase.SellerClient = null;
                     }

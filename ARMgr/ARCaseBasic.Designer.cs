@@ -1135,6 +1135,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panelInvoiceMgr);
             this.Controls.Add(this.panelCaseBasic);
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "ARCaseBasic";
             this.Size = new System.Drawing.Size(1058, 276);
             this.panelCaseBasic.ResumeLayout(false);

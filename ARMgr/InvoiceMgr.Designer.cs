@@ -75,11 +75,11 @@
             this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemInvoiceFlaw = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemInvoiceDispute = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemInvoiceDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExportAllInvoices = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemExportSelectedInvoices = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemInvoiceDispute = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.cmuInvoiceMgr.SuspendLayout();
@@ -342,7 +342,7 @@
             this.dgvInvoices.AllowUserToAddRows = false;
             this.dgvInvoices.AllowUserToDeleteRows = false;
             this.dgvInvoices.AllowUserToOrderColumns = true;
-            this.dgvInvoices.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvInvoices.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -351,7 +351,6 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvInvoices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInvoices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSellerName,
             this.colBuyerName,
@@ -393,6 +392,7 @@
             this.colSellerName.HeaderText = "卖方名称";
             this.colSellerName.Name = "colSellerName";
             this.colSellerName.ReadOnly = true;
+            this.colSellerName.Width = 80;
             // 
             // colBuyerName
             // 
@@ -400,6 +400,7 @@
             this.colBuyerName.HeaderText = "买方名称";
             this.colBuyerName.Name = "colBuyerName";
             this.colBuyerName.ReadOnly = true;
+            this.colBuyerName.Width = 80;
             // 
             // colFactorName
             // 
@@ -407,6 +408,7 @@
             this.colFactorName.HeaderText = "保理商";
             this.colFactorName.Name = "colFactorName";
             this.colFactorName.ReadOnly = true;
+            this.colFactorName.Width = 68;
             // 
             // colInvoiceNo
             // 
@@ -414,6 +416,7 @@
             this.colInvoiceNo.HeaderText = "发票号";
             this.colInvoiceNo.Name = "colInvoiceNo";
             this.colInvoiceNo.ReadOnly = true;
+            this.colInvoiceNo.Width = 68;
             // 
             // colInvoiceCurrency
             // 
@@ -421,6 +424,7 @@
             this.colInvoiceCurrency.HeaderText = "发票币别";
             this.colInvoiceCurrency.Name = "colInvoiceCurrency";
             this.colInvoiceCurrency.ReadOnly = true;
+            this.colInvoiceCurrency.Width = 80;
             // 
             // colAssignAmount
             // 
@@ -430,6 +434,7 @@
             this.colAssignAmount.HeaderText = "转让金额";
             this.colAssignAmount.Name = "colAssignAmount";
             this.colAssignAmount.ReadOnly = true;
+            this.colAssignAmount.Width = 80;
             // 
             // colInvoiceDate
             // 
@@ -439,6 +444,7 @@
             this.colInvoiceDate.HeaderText = "发票日";
             this.colInvoiceDate.Name = "colInvoiceDate";
             this.colInvoiceDate.ReadOnly = true;
+            this.colInvoiceDate.Width = 68;
             // 
             // colAssignDate
             // 
@@ -448,6 +454,7 @@
             this.colAssignDate.HeaderText = "转让日";
             this.colAssignDate.Name = "colAssignDate";
             this.colAssignDate.ReadOnly = true;
+            this.colAssignDate.Width = 68;
             // 
             // colDueDate
             // 
@@ -458,18 +465,21 @@
             this.colDueDate.HeaderText = "到期日";
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.ReadOnly = true;
+            this.colDueDate.Width = 68;
             // 
             // colFinanceDate
             // 
             this.colFinanceDate.DataPropertyName = "FinanceDate";
             this.colFinanceDate.HeaderText = "融资日";
             this.colFinanceDate.Name = "colFinanceDate";
+            this.colFinanceDate.Width = 68;
             // 
             // colFinanceDueDate
             // 
             this.colFinanceDueDate.DataPropertyName = "FinanceDueDate";
             this.colFinanceDueDate.HeaderText = "融资到期日";
             this.colFinanceDueDate.Name = "colFinanceDueDate";
+            this.colFinanceDueDate.Width = 92;
             // 
             // colIsFlaw
             // 
@@ -478,24 +488,28 @@
             this.colIsFlaw.Name = "colIsFlaw";
             this.colIsFlaw.ReadOnly = true;
             this.colIsFlaw.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colIsFlaw.Width = 80;
             // 
             // colAssignOverDueDays
             // 
             this.colAssignOverDueDays.DataPropertyName = "AssignOverDueDays";
             this.colAssignOverDueDays.HeaderText = "应收账款逾期天数";
             this.colAssignOverDueDays.Name = "colAssignOverDueDays";
+            this.colAssignOverDueDays.Width = 128;
             // 
             // colFinanceOverDueDays
             // 
             this.colFinanceOverDueDays.DataPropertyName = "FinanceOverDueDays";
             this.colFinanceOverDueDays.HeaderText = "融资逾期天数";
             this.colFinanceOverDueDays.Name = "colFinanceOverDueDays";
+            this.colFinanceOverDueDays.Width = 104;
             // 
             // colIsDispute
             // 
             this.colIsDispute.DataPropertyName = "IsDispute";
             this.colIsDispute.HeaderText = "是否商纠";
             this.colIsDispute.Name = "colIsDispute";
+            this.colIsDispute.Width = 80;
             // 
             // cmuInvoiceMgr
             // 
@@ -546,6 +560,13 @@
             this.menuItemInvoiceFlaw.Text = "瑕疵处理";
             this.menuItemInvoiceFlaw.Click += new System.EventHandler(this.InvoiceFlaw);
             // 
+            // menuItemInvoiceDispute
+            // 
+            this.menuItemInvoiceDispute.Name = "menuItemInvoiceDispute";
+            this.menuItemInvoiceDispute.Size = new System.Drawing.Size(182, 22);
+            this.menuItemInvoiceDispute.Text = "商纠处理";
+            this.menuItemInvoiceDispute.Click += new System.EventHandler(this.InvoiceDispute);
+            // 
             // menuItemInvoiceDelete
             // 
             this.menuItemInvoiceDelete.Name = "menuItemInvoiceDelete";
@@ -572,19 +593,13 @@
             this.menuItemExportSelectedInvoices.Text = "导出所选发票";
             this.menuItemExportSelectedInvoices.Click += new System.EventHandler(this.ExportSelectedInvoices);
             // 
-            // menuItemInvoiceDispute
-            // 
-            this.menuItemInvoiceDispute.Name = "menuItemInvoiceDispute";
-            this.menuItemInvoiceDispute.Size = new System.Drawing.Size(182, 22);
-            this.menuItemInvoiceDispute.Text = "商纠处理";
-            this.menuItemInvoiceDispute.Click += new System.EventHandler(this.InvoiceDispute);
-            // 
             // InvoiceMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvInvoices);
             this.Controls.Add(this.panelQuery);
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "InvoiceMgr";
             this.Size = new System.Drawing.Size(805, 357);
             this.panelQuery.ResumeLayout(false);

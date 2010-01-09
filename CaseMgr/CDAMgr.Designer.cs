@@ -769,6 +769,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvCDAs);
             this.Controls.Add(this.panelCDAQuery);
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "CDAMgr";
             this.Size = new System.Drawing.Size(643, 402);
             this.panelCDAQuery.ResumeLayout(false);

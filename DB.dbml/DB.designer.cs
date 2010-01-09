@@ -4715,7 +4715,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_CountryCode", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_CountryCode", DbType="Char(2) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string CountryCode
 		{
 			get
@@ -5140,7 +5140,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_CurrencyCode", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_CurrencyCode", DbType="Char(3) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string CurrencyCode
 		{
 			get

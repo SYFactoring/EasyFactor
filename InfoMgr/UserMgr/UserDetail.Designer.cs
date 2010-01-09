@@ -518,6 +518,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.Controls.Add(this.btnUserReset);
             this.Controls.Add(this.btnUserSave);
             this.DoubleBuffered = true;
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "UserDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "用户详细信息";

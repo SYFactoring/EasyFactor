@@ -195,7 +195,7 @@
   </Table>
   <Table Name="dbo.Country" Member="Countries">
     <Type Name="Country">
-      <Column Name="CountryCode" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CountryCode" Type="System.String" DbType="Char(2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="CountryNameEN" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="CountryNameCN" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
@@ -217,7 +217,7 @@
   </Table>
   <Table Name="dbo.Currency" Member="Currencies">
     <Type Name="Currency">
-      <Column Name="CurrencyCode" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CurrencyCode" Type="System.String" DbType="Char(3) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="CurrencyName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>

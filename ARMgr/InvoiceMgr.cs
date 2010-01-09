@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoiceMgr : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         /// <summary>
         /// 
@@ -27,9 +27,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpInvoiceType opInvoiceType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -57,15 +57,16 @@ namespace CMBC.EasyFactor.ARMgr
             BATCH_DETAIL
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (2) 
+        #region Constructors (2)
 
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="invoiceList"></param>
-        public InvoiceMgr(List<Invoice> invoiceList):this(OpInvoiceType.BATCH_DETAIL)
+        public InvoiceMgr(List<Invoice> invoiceList)
+            : this(OpInvoiceType.BATCH_DETAIL)
         {
             this.bs.DataSource = invoiceList;
             this.lblCount.Text = String.Format("获得{0}条记录", invoiceList.Count());
@@ -103,9 +104,9 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets owner form
@@ -125,11 +126,11 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (13) 
+        #region Methods (13)
 
-		// Private Methods (13) 
+        // Private Methods (13) 
 
         /// <summary>
         /// 
@@ -417,6 +418,20 @@ namespace CMBC.EasyFactor.ARMgr
                                 && (AssignOverDueDays == 0 ? true : invoice.DueDate < AssignOverDueDate)
                                 && (FinanceOverDueDays == 0 ? true : invoice.FinanceDueDate < FinanceOverDueDate)
                               select invoice;
+            if (queryResult.Count() > 1000)
+            {
+                DialogResult dr = MessageBox.Show("查询结果为" + queryResult.Count() + "，全部显示可能速度较慢，选择YES可以继续显示，选择NO可以重新查询。", "提醒", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dr == DialogResult.Yes)
+                {
+                    this.bs.DataSource = queryResult;
+                    this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            }
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
@@ -447,6 +462,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

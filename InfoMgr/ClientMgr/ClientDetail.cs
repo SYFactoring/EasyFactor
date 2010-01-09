@@ -118,7 +118,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbCountryCode.DataSource = Country.AllCountries();
             this.cbCountryCode.DisplayMember = "CountryFormatCN";
             this.cbCountryCode.ValueMember = "CountryCode";
-            this.cbCountryCode.SelectedIndex = -1;
 
             this.cbDepartments.DataSource = Department.AllDepartments();
             this.cbDepartments.DisplayMembers = "DepartmentName";
@@ -494,8 +493,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         private void diContractValueDate_ValueChanged(object sender, EventArgs e)
         {
-            Contract contract = this.contractBindingSource.DataSource as Contract;
-            contract.ContractDueDate = this.diContractValueDate.Value.AddYears(1);
+            if (opContractType == OpContractType.NEW_CONTRACT)
+            {
+                Contract contract = this.contractBindingSource.DataSource as Contract;
+                contract.ContractDueDate = this.diContractValueDate.Value.AddYears(1);
+            }
         }
 
         /// <summary>
@@ -587,8 +589,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         private void periodBeginDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            ClientCreditLine creditLine = this.clientCreditLineBindingSource.DataSource as ClientCreditLine;
-            creditLine.PeriodEnd = this.periodBeginDateTimePicker.Value.AddYears(1);
+            if (opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
+            {
+                ClientCreditLine creditLine = this.clientCreditLineBindingSource.DataSource as ClientCreditLine;
+                creditLine.PeriodEnd = this.periodBeginDateTimePicker.Value.AddYears(1);
+            }
         }
 
         /// <summary>
@@ -797,7 +802,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     {
                         foreach (ClientCreditLine ccl in client.ClientCreditLines)
                         {
-                            if (ccl != creditLine && ccl.CreditLineStatus == "已生效" && ccl.CreditLineType == creditLine.CreditLineType)
+                            if (ccl != creditLine && ccl.CreditLineStatus == "已生效" && ccl.CreditLineType == creditLine.CreditLineType && ccl.CreditLineCurrency == creditLine.CreditLineCurrency)
                             {
                                 ccl.CreditLineStatus = "已过期";
                             }
@@ -871,7 +876,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 bool isAddOK = true;
                 contract.Client = client;
                 contract.CreateUserName = App.Current.CurUser.Name;
-                DateTime today = DateTime.Now.Date ;
+                DateTime today = DateTime.Now.Date;
                 if (contract.ContractDueDate < today)
                 {
                     contract.ContractStatus = "已过期";

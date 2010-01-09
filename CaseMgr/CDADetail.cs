@@ -65,6 +65,7 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             CDA cda = (CDA)this.CDABindingSource.DataSource;
             cda.Case = selectedCase;
+            FillCase(selectedCase);
         }
 
         /// <summary>
@@ -188,14 +189,14 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void CloseCDA(object sender, EventArgs e)
         {
+            CDA cda = this.CDABindingSource.DataSource as CDA;
             if (opCDAType == OpCDAType.UPDATE_CDA)
             {
-                CDA cda = this.CDABindingSource.DataSource as CDA;
                 cda.Restore();
             }
-            else if (opCDAType == OpCDAType.NEW_CDA)
+            if (cda.CDACode == null && cda.Case != null)
             {
-                this.CDABindingSource.DataSource = new CDA();
+                cda.Case = null;
             }
         }
 
@@ -334,10 +335,31 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 this.contractCodeTextBox.Text = contract.ContractCode;
             }
-            ClientCreditLine creditLine = cda.Case.SellerClient.FinanceCreditLine;
+            ClientCreditLine creditLine = cda.Case.SellerClient.GetFinanceCreditLine(curCase.InvoiceCurrency);
             if (creditLine != null)
             {
                 this.tbHighestFinance.Text = String.Format("{0:N2}", creditLine.CreditLine);
+            }
+
+            switch (curCase.TransactionType)
+            {
+                case "国内卖方保理":
+                case "出口保理":
+                case "国内信保保理":
+                case "国际信保保理":
+                case "租赁保理":
+                    this.factorCodeTextBox.Text = curCase.SellerFactor.FactorCode;
+                    this.companyNameCNTextBox.Text = curCase.SellerFactor.CompanyNameCN;
+                    this.companyNameENTextBox.Text = curCase.SellerFactor.CompanyNameEN;
+                    break;
+                case "国内买方保理":
+                case "进口保理":
+                    this.factorCodeTextBox.Text = curCase.BuyerFactor.FactorCode;
+                    this.companyNameCNTextBox.Text = curCase.BuyerFactor.CompanyNameCN;
+                    this.companyNameENTextBox.Text = curCase.BuyerFactor.CompanyNameEN;
+
+                    break;
+                default: break;
             }
         }
 
@@ -352,7 +374,7 @@ namespace CMBC.EasyFactor.CaseMgr
             if (curCase != null)
             {
                 cda.HandFeeCurr = curCase.InvoiceCurrency;
-                ClientCreditLine buyerCreditLine = curCase.BuyerClient.AssignCreditLine;
+                ClientCreditLine buyerCreditLine = curCase.BuyerClient.GetAssignCreditLine(curCase.InvoiceCurrency);
                 if (buyerCreditLine != null)
                 {
                     cda.CreditCoverPeriodBegin = buyerCreditLine.PeriodBegin;
@@ -360,13 +382,27 @@ namespace CMBC.EasyFactor.CaseMgr
                     cda.CreditCoverCurr = buyerCreditLine.CreditLineCurrency;
                     cda.CreditCover = buyerCreditLine.CreditLine;
                 }
-                ClientCreditLine sellerCreditLine = curCase.SellerClient.FinanceCreditLine;
+                else
+                {
+                    this.creditCoverPeriodBeginDateTimePicker.Enabled = false;
+                    this.creditCoverPeriodEndDateTimePicker.Enabled = false;
+                    this.creditCoverCurrComboBox.Enabled = false;
+                    this.creditCoverTextBox.Enabled = false;
+                }
+                ClientCreditLine sellerCreditLine = curCase.SellerClient.GetFinanceCreditLine(curCase.InvoiceCurrency);
                 if (sellerCreditLine != null)
                 {
                     cda.FinanceLinePeriodBegin = sellerCreditLine.PeriodBegin;
                     cda.FinanceLinePeriodEnd = sellerCreditLine.PeriodEnd;
                     cda.FinanceLineCurr = sellerCreditLine.CreditLineCurrency;
                     cda.FinanceLine = sellerCreditLine.CreditLine;
+                }
+                else
+                {
+                    this.financeLineCurrComboBox.Enabled = false;
+                    this.financeLinePeriodBeginDateTimePicker.Enabled = false;
+                    this.financeLinePeriodEndDateTimePicker.Enabled = false;
+                    this.financeLineTextBox.Enabled = false;
                 }
             }
             cda.CDASignDate = DateTime.Now.Date;

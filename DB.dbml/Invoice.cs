@@ -7,7 +7,15 @@ namespace CMBC.EasyFactor.DB.dbml
 {
     public partial class Invoice : BaseObject
     {
-        #region Properties (9)
+        #region Properties (11)
+
+        public DateTime AssignDate
+        {
+            get
+            {
+                return this.InvoiceAssignBatch.AssignDate;
+            }
+        }
 
         public double AssignOutstanding
         {
@@ -17,12 +25,16 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public int AssignOverDueDays
+        public System.Nullable<int> AssignOverDueDays
         {
             get
             {
-                TimeSpan duedays = DateTime.Now.Date - this.DueDate;
-                return duedays.Days;
+                if (AssignOutstanding > 0)
+                {
+                    TimeSpan duedays = DateTime.Now.Date - this.DueDate;
+                    return duedays.Days;
+                }
+                return null;
             }
         }
 
@@ -86,7 +98,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (this.FinanceDueDate.HasValue)
+                if (FinanceOutstanding > 0)
                 {
                     TimeSpan duedays = DateTime.Now.Date - this.FinanceDueDate.Value;
                     return duedays.Days;
@@ -95,6 +107,14 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     return null;
                 }
+            }
+        }
+
+        public string InvoiceCurrency
+        {
+            get
+            {
+                return this.InvoiceAssignBatch.BatchCurrency;
             }
         }
 
@@ -116,9 +136,9 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Properties
 
-        #region Methods (1)
+        #region Methods (2)
 
-        // Public Methods (1) 
+        // Public Methods (2) 
 
         public override bool Equals(object obj)
         {

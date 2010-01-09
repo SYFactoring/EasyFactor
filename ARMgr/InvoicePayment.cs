@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -116,9 +117,24 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         public static string GenerateBatchNo(DateTime date)
         {
-            DateTime begin = new DateTime(date.Year, date.Month, date.Day);
+            DateTime begin = date.Date;
             DateTime end = begin.AddDays(1);
             int batchCount = App.Current.DbContext.InvoicePaymentBatches.Count(batch => batch.PaymentDate >= begin && batch.PaymentDate < end);
+            string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            return paymentNo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cda"></param>
+        /// <returns></returns>
+        public static string GenerateBatchNo(DateTime date, List<InvoicePaymentBatch> batchesInMemory)
+        {
+            DateTime begin = date.Date;
+            DateTime end = begin.AddDays(1);
+            int batchCount = App.Current.DbContext.InvoicePaymentBatches.Count(batch => batch.PaymentDate >= begin && batch.PaymentDate < end);
+            batchCount += batchesInMemory.Count(batch => batch.PaymentDate >= begin && batch.PaymentDate < end);
             string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return paymentNo;
         }
@@ -587,7 +603,16 @@ namespace CMBC.EasyFactor.ARMgr
         {
             foreach (Invoice invoice in this.invoiceBindingSource.List)
             {
-
+                if (invoice.PaymentAmount > invoice.AssignOutstanding)
+                {
+                    MessageBox.Show("付款金额不能大于转让余额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
+                if (invoice.RefundAmount > invoice.FinanceOutstanding)
+                {
+                    MessageBox.Show("还款金额不能大于融资余额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
             }
             return true;
         }

@@ -111,7 +111,6 @@
             this.dgvInvoices = new System.Windows.Forms.DataGridView();
             this.colCheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInvoiceCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -321,7 +320,7 @@
             this.tbPaymentType.Size = new System.Drawing.Size(100, 20);
             this.tbPaymentType.TabIndex = 5;
             // 
-            // invoicePaymentBatchBindingSource
+            // batchBindingSource
             // 
             this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoicePaymentBatch);
             // 
@@ -550,7 +549,6 @@
             this.dgvInvoices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCheckBox,
             this.colInvoiceNo,
-            this.colInvoiceCurrency,
             this.colAssignAmount,
             this.colAssignOutstanding,
             this.colAssignDate,
@@ -594,12 +592,6 @@
             this.colInvoiceNo.DataPropertyName = "InvoiceNo";
             this.colInvoiceNo.HeaderText = "发票号";
             this.colInvoiceNo.Name = "colInvoiceNo";
-            // 
-            // colInvoiceCurrency
-            // 
-            this.colInvoiceCurrency.DataPropertyName = "InvoiceCurrency";
-            this.colInvoiceCurrency.HeaderText = "发票币别";
-            this.colInvoiceCurrency.Name = "colInvoiceCurrency";
             // 
             // colAssignAmount
             // 
@@ -781,6 +773,7 @@
             this.Controls.Add(this.dgvInvoices);
             this.Controls.Add(this.invoiceBindingNavigator);
             this.Controls.Add(this.panelPaymentBatch);
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "InvoicePayment";
             this.Size = new System.Drawing.Size(1069, 526);
             this.panelPaymentBatch.ResumeLayout(false);
@@ -813,7 +806,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;

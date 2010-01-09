@@ -771,6 +771,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.AutoSize = true;
             this.Controls.Add(this.dgvFactors);
             this.Controls.Add(this.panelQuery);
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "FactorMgr";
             this.Size = new System.Drawing.Size(911, 348);
             this.contextMenuFactorMgr.ResumeLayout(false);
