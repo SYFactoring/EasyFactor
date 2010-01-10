@@ -171,22 +171,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CDADetail_Leave(object sender, EventArgs e)
-        {
-            CDA cda = (CDA)this.CDABindingSource.DataSource;
-            if (this.opCDAType == OpCDAType.UPDATE_CDA)
-            {
-                cda.Restore();
-            }
-
-            Close();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CloseCDA(object sender, EventArgs e)
         {
             CDA cda = this.CDABindingSource.DataSource as CDA;
@@ -460,6 +444,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 catch (Exception e1)
                 {
+                    cdaCode = null;
                     isAddOK = false;
                     MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }

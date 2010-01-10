@@ -187,24 +187,15 @@ namespace CMBC.EasyFactor.CaseMgr
         private void QueryCase(object sender, EventArgs e)
         {
 
-            DateTime beginDate = this.diBegin.MinDate;
-            if (this.diBegin.Value > this.diBegin.MinDate)
-            {
-                beginDate = this.diBegin.Value;
-            }
-
-            DateTime endDate = this.diEnd.MaxDate;
-            if (this.diEnd.Value > this.diEnd.MinDate && this.diEnd.Value < this.diEnd.MaxDate)
-            {
-                endDate = this.diEnd.Value;
-            }
+            DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
+            DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
 
             var queryResult = App.Current.DbContext.Cases.Where(c =>
                                    ((string)this.cbOwnerDepts.SelectedValue == "CN01300" ? true : c.OwnerDepartmentCode.Equals((string)this.cbOwnerDepts.SelectedValue))
                                 && (this.cbTransactionType.Text == "全部" ? true : c.TransactionType.Equals(this.cbTransactionType.Text))
                                 && ((string)this.cbCurrency.SelectedValue == "AAA" ? true : c.InvoiceCurrency.Equals((string)this.cbCurrency.SelectedValue))
-                                && (c.CaseAppDate > beginDate.AddDays(-1))
-                                && (c.CaseAppDate < endDate.AddDays(1))
+                                && (beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
+                                && (endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
                                 && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == "已签回"))
                                 && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == "已生效"))

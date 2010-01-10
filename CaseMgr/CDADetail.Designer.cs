@@ -1945,7 +1945,7 @@
             this.Name = "CDADetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "额度通知书";
-            this.Leave += new System.EventHandler(this.CDADetail_Leave);
+            this.Leave += new System.EventHandler(this.CloseCDA);
             this.groupPanelCase.ResumeLayout(false);
             this.groupPanelCase.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();

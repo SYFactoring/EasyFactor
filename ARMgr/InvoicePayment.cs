@@ -446,7 +446,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             batch.PaymentDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
-            batch.CheckStatus = "未审核";
+            batch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = batch;
             this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.PaymentAmount.HasValue == false).ToList();
             this.StatBatch();

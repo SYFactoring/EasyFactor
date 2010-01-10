@@ -189,8 +189,6 @@
             this.diAssignDateEnd.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.diAssignDateEnd.ButtonDropDown.Visible = true;
             this.diAssignDateEnd.Location = new System.Drawing.Point(312, 28);
-            this.diAssignDateEnd.MaxDate = new System.DateTime(2050, 12, 31, 0, 0, 0, 0);
-            this.diAssignDateEnd.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             // 
             // 
             // 
@@ -274,8 +272,6 @@
             this.diAssignDateBegin.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.diAssignDateBegin.ButtonDropDown.Visible = true;
             this.diAssignDateBegin.Location = new System.Drawing.Point(206, 29);
-            this.diAssignDateBegin.MaxDate = new System.DateTime(2050, 12, 31, 0, 0, 0, 0);
-            this.diAssignDateBegin.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
             // 
             // 
             // 

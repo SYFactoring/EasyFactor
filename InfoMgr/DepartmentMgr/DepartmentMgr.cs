@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     /// </summary>
     public partial class DepartmentMgr : UserControl
     {
-        #region Constructors (1)
+		#region Constructors (1) 
 
         /// <summary>
         /// 
@@ -30,9 +30,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             ControlUtil.SetDoubleBuffered(this.dgvDepts);
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// 
@@ -52,11 +52,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             set;
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (5)
+		#region Methods (6) 
 
-        // Private Methods (5) 
+		// Private Methods (6) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -67,11 +67,35 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         {
             if (this.OwnerForm == null)
             {
-                //this.DetailClient(sender, e);
+                this.Detail(sender, e);
             }
             else
             {
-                this.SelectDepartment(sender, e);
+                this.Select(sender, e);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Detail(object sender, EventArgs e)
+        {
+            if (this.dgvDepts.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            string did = (string)dgvDepts["departmentCodeColumn", dgvDepts.SelectedRows[0].Index].Value;
+            if (did != null)
+            {
+                Department selectedDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentCode == did);
+                if (selectedDepartment != null)
+                {
+                    DepartmentDetail detail = new DepartmentDetail(selectedDepartment, DepartmentDetail.OpDepartmentType.DETAIL_DEPARTMENT);
+                    detail.ShowDialog(this);
+                }
             }
         }
 
@@ -91,7 +115,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void QueryDepartments(object sender, EventArgs e)
+        private void Query(object sender, EventArgs e)
         {
             var queryResult = App.Current.DbContext.Departments.Where(d =>
                              (d.DepartmentCode == null ? string.Empty : d.DepartmentCode).Contains(this.tbDepartmentCode.Text)
@@ -112,7 +136,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void SelectDepartment(object sender, System.EventArgs e)
+        private void Select(object sender, System.EventArgs e)
         {
             if (this.dgvDepts.SelectedRows.Count == 0)
             {
@@ -135,6 +159,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             }
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

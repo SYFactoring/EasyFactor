@@ -156,10 +156,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 client.Backup();
             }
 
-            this.UpdateClientControlStatus();
-            this.UpdateClientCreditLineControlStatus();
-            this.UpdateContractControlStatus();
-
             if (opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
                 this.tabControl.SelectedTab = this.tabItemClientCreditLine;
@@ -172,6 +168,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.contractBindingSource.DataSource = new Contract();
             }
 
+            this.UpdateClientControlStatus();
+            this.UpdateClientCreditLineControlStatus();
+            this.UpdateContractControlStatus();
         }
 
         /// <summary>
@@ -791,6 +790,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 }
                 catch (Exception e1)
                 {
+                    creditLine.Client = null;
                     isAddOK = false;
                     MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -833,7 +833,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     {
                         foreach (ClientCreditLine ccl in client.ClientCreditLines)
                         {
-                            if (ccl != creditLine && ccl.CreditLineStatus == "已生效" && ccl.CreditLineType == creditLine.CreditLineType)
+                            if (ccl != creditLine && ccl.CreditLineStatus == "已生效" && ccl.CreditLineType == creditLine.CreditLineType && ccl.CreditLineCurrency == creditLine.CreditLineCurrency)
                             {
                                 ccl.CreditLineStatus = "已过期";
                             }
@@ -893,6 +893,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 }
                 catch (Exception e1)
                 {
+                    contract.Client = null;
                     isAddOK = false;
                     MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }

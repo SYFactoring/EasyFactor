@@ -225,6 +225,12 @@
     <Compile Include="InfoMgr\ClientMgr\ClientMgr.Designer.cs">
       <DependentUpon>ClientMgr.cs</DependentUpon>
     </Compile>
+    <Compile Include="InfoMgr\DepartmentMgr\DepartmentDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\DepartmentMgr\DepartmentDetail.Designer.cs">
+      <DependentUpon>DepartmentDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="InfoMgr\DepartmentMgr\DepartmentMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -365,6 +371,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\ClientMgr\ClientMgr.resx">
       <DependentUpon>ClientMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\DepartmentMgr\DepartmentDetail.resx">
+      <DependentUpon>DepartmentDetail.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\DepartmentMgr\DepartmentMgr.resx">

@@ -5,7 +5,7 @@
         #region Fields (75)
 
         private DevComponents.DotNetBar.Controls.TextBoxX assignAmountTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX assignBatchNoTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX assignOutstandingTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput assignDateTextBox;
         private DevComponents.DotNetBar.ButtonX btnDispute;
         private DevComponents.DotNetBar.ButtonX btnDisputeResolve;
@@ -32,7 +32,7 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dueDateTextBox;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Controls.TextBoxX financeAmountTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX financeBatchNoTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX financeOutstandingTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput financeDateDateTimePicker;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput financeDueDateDateTimePicker;
         private System.Windows.Forms.CheckedListBox flawReasonCheckedListBox;
@@ -57,7 +57,6 @@
         private DevComponents.DotNetBar.Controls.TextBoxX netPaymentTermsTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX orderNumberReferenceTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX paymentAmountTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX paymentBatchNoTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx paymentConditionsComboBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput paymentDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX primaryDiscountDaysTextBox;
@@ -155,16 +154,14 @@
             DevComponents.DotNetBar.LabelX disputeResolveDateLabel;
             DevComponents.DotNetBar.LabelX assignBatchNoLabel;
             DevComponents.DotNetBar.LabelX financeBatchNoLabel;
-            DevComponents.DotNetBar.LabelX paymentBatchNoLabel;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceDetail));
             DevComponents.DotNetBar.LabelX lblInvoiceType;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelInvoice = new DevComponents.DotNetBar.TabControlPanel();
             this.groupPanelInvoiceProcess = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.paymentBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.financeBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.assignBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.financeOutstandingTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.assignOutstandingTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.interestDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.interestTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.commissionDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -179,6 +176,7 @@
             this.assignAmountTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.assignDateTextBox = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.groupPanelInvoiceBasic = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.cbInvoiceType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.invoiceCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.dueDateTextBox = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -232,7 +230,6 @@
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.cbInvoiceType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             flawResolveReasonLabel = new DevComponents.DotNetBar.LabelX();
             flawResolveDateLabel = new DevComponents.DotNetBar.LabelX();
             flawResolveUserNameLabel = new DevComponents.DotNetBar.LabelX();
@@ -275,7 +272,6 @@
             disputeResolveDateLabel = new DevComponents.DotNetBar.LabelX();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             financeBatchNoLabel = new DevComponents.DotNetBar.LabelX();
-            paymentBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             lblInvoiceType = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -879,7 +875,7 @@
             assignBatchNoLabel.Name = "assignBatchNoLabel";
             assignBatchNoLabel.Size = new System.Drawing.Size(59, 16);
             assignBatchNoLabel.TabIndex = 26;
-            assignBatchNoLabel.Text = "转让批号:";
+            assignBatchNoLabel.Text = "转让余额:";
             // 
             // financeBatchNoLabel
             // 
@@ -893,21 +889,21 @@
             financeBatchNoLabel.Name = "financeBatchNoLabel";
             financeBatchNoLabel.Size = new System.Drawing.Size(59, 16);
             financeBatchNoLabel.TabIndex = 28;
-            financeBatchNoLabel.Text = "融资批号:";
+            financeBatchNoLabel.Text = "融资余额:";
             // 
-            // paymentBatchNoLabel
+            // lblInvoiceType
             // 
-            paymentBatchNoLabel.AutoSize = true;
-            paymentBatchNoLabel.BackColor = System.Drawing.Color.Transparent;
+            lblInvoiceType.AutoSize = true;
+            lblInvoiceType.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            paymentBatchNoLabel.BackgroundStyle.Class = "";
-            paymentBatchNoLabel.Location = new System.Drawing.Point(367, 67);
-            paymentBatchNoLabel.Name = "paymentBatchNoLabel";
-            paymentBatchNoLabel.Size = new System.Drawing.Size(59, 16);
-            paymentBatchNoLabel.TabIndex = 30;
-            paymentBatchNoLabel.Text = "付款批号:";
+            lblInvoiceType.BackgroundStyle.Class = "";
+            lblInvoiceType.Location = new System.Drawing.Point(358, 5);
+            lblInvoiceType.Name = "lblInvoiceType";
+            lblInvoiceType.Size = new System.Drawing.Size(59, 16);
+            lblInvoiceType.TabIndex = 14;
+            lblInvoiceType.Text = "单据类别:";
             // 
             // tabControl
             // 
@@ -922,7 +918,7 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl.SelectedTabIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(558, 355);
+            this.tabControl.Size = new System.Drawing.Size(550, 355);
             this.tabControl.TabIndex = 0;
             this.tabControl.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl.Tabs.Add(this.tabItemInvoice);
@@ -942,7 +938,7 @@
             this.tabPanelInvoice.Location = new System.Drawing.Point(0, 26);
             this.tabPanelInvoice.Name = "tabPanelInvoice";
             this.tabPanelInvoice.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelInvoice.Size = new System.Drawing.Size(558, 329);
+            this.tabPanelInvoice.Size = new System.Drawing.Size(550, 329);
             this.tabPanelInvoice.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelInvoice.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelInvoice.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -958,12 +954,10 @@
             this.groupPanelInvoiceProcess.AutoScroll = true;
             this.groupPanelInvoiceProcess.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelInvoiceProcess.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelInvoiceProcess.Controls.Add(paymentBatchNoLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.paymentBatchNoTextBox);
             this.groupPanelInvoiceProcess.Controls.Add(financeBatchNoLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.financeBatchNoTextBox);
+            this.groupPanelInvoiceProcess.Controls.Add(this.financeOutstandingTextBox);
             this.groupPanelInvoiceProcess.Controls.Add(assignBatchNoLabel);
-            this.groupPanelInvoiceProcess.Controls.Add(this.assignBatchNoTextBox);
+            this.groupPanelInvoiceProcess.Controls.Add(this.assignOutstandingTextBox);
             this.groupPanelInvoiceProcess.Controls.Add(interestDateLabel);
             this.groupPanelInvoiceProcess.Controls.Add(this.interestDateDateTimePicker);
             this.groupPanelInvoiceProcess.Controls.Add(interestLabel);
@@ -993,7 +987,7 @@
             this.groupPanelInvoiceProcess.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelInvoiceProcess.Location = new System.Drawing.Point(1, 106);
             this.groupPanelInvoiceProcess.Name = "groupPanelInvoiceProcess";
-            this.groupPanelInvoiceProcess.Size = new System.Drawing.Size(556, 162);
+            this.groupPanelInvoiceProcess.Size = new System.Drawing.Size(548, 162);
             // 
             // 
             // 
@@ -1025,45 +1019,33 @@
             this.groupPanelInvoiceProcess.StyleMouseOver.Class = "";
             this.groupPanelInvoiceProcess.TabIndex = 0;
             // 
-            // paymentBatchNoTextBox
-            // 
-            // 
-            // 
-            // 
-            this.paymentBatchNoTextBox.Border.Class = "TextBoxBorder";
-            this.paymentBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "PaymentBatchNo", true));
-            this.paymentBatchNoTextBox.Location = new System.Drawing.Point(433, 63);
-            this.paymentBatchNoTextBox.Name = "paymentBatchNoTextBox";
-            this.paymentBatchNoTextBox.Size = new System.Drawing.Size(100, 20);
-            this.paymentBatchNoTextBox.TabIndex = 31;
-            // 
             // invoiceBindingSource
             // 
             this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
             // 
-            // financeBatchNoTextBox
+            // financeOutstandingTextBox
             // 
             // 
             // 
             // 
-            this.financeBatchNoTextBox.Border.Class = "TextBoxBorder";
-            this.financeBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "FinanceBatchNo", true));
-            this.financeBatchNoTextBox.Location = new System.Drawing.Point(433, 20);
-            this.financeBatchNoTextBox.Name = "financeBatchNoTextBox";
-            this.financeBatchNoTextBox.Size = new System.Drawing.Size(100, 20);
-            this.financeBatchNoTextBox.TabIndex = 29;
+            this.financeOutstandingTextBox.Border.Class = "TextBoxBorder";
+            this.financeOutstandingTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "FinanceOutstanding", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.financeOutstandingTextBox.Location = new System.Drawing.Point(433, 22);
+            this.financeOutstandingTextBox.Name = "financeOutstandingTextBox";
+            this.financeOutstandingTextBox.Size = new System.Drawing.Size(100, 20);
+            this.financeOutstandingTextBox.TabIndex = 29;
             // 
-            // assignBatchNoTextBox
-            // 
-            // 
+            // assignOutstandingTextBox
             // 
             // 
-            this.assignBatchNoTextBox.Border.Class = "TextBoxBorder";
-            this.assignBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "AssignBatchNo", true));
-            this.assignBatchNoTextBox.Location = new System.Drawing.Point(433, -1);
-            this.assignBatchNoTextBox.Name = "assignBatchNoTextBox";
-            this.assignBatchNoTextBox.Size = new System.Drawing.Size(100, 20);
-            this.assignBatchNoTextBox.TabIndex = 27;
+            // 
+            // 
+            this.assignOutstandingTextBox.Border.Class = "TextBoxBorder";
+            this.assignOutstandingTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "AssignOutstanding", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.assignOutstandingTextBox.Location = new System.Drawing.Point(433, 1);
+            this.assignOutstandingTextBox.Name = "assignOutstandingTextBox";
+            this.assignOutstandingTextBox.Size = new System.Drawing.Size(100, 20);
+            this.assignOutstandingTextBox.TabIndex = 27;
             // 
             // interestDateDateTimePicker
             // 
@@ -1396,7 +1378,7 @@
             this.groupPanelInvoiceBasic.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelInvoiceBasic.Location = new System.Drawing.Point(1, 1);
             this.groupPanelInvoiceBasic.Name = "groupPanelInvoiceBasic";
-            this.groupPanelInvoiceBasic.Size = new System.Drawing.Size(556, 105);
+            this.groupPanelInvoiceBasic.Size = new System.Drawing.Size(548, 105);
             // 
             // 
             // 
@@ -1427,6 +1409,21 @@
             // 
             this.groupPanelInvoiceBasic.StyleMouseOver.Class = "";
             this.groupPanelInvoiceBasic.TabIndex = 0;
+            // 
+            // cbInvoiceType
+            // 
+            this.cbInvoiceType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbInvoiceType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbInvoiceType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "InvoiceType", true));
+            this.cbInvoiceType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbInvoiceType.FormattingEnabled = true;
+            this.cbInvoiceType.Items.AddRange(new object[] {
+            "Invoice",
+            "Credit Note"});
+            this.cbInvoiceType.Location = new System.Drawing.Point(432, 3);
+            this.cbInvoiceType.Name = "cbInvoiceType";
+            this.cbInvoiceType.Size = new System.Drawing.Size(100, 21);
+            this.cbInvoiceType.TabIndex = 15;
             // 
             // commentTextBox
             // 
@@ -1595,7 +1592,7 @@
             this.tabPanelEDI.Location = new System.Drawing.Point(0, 26);
             this.tabPanelEDI.Name = "tabPanelEDI";
             this.tabPanelEDI.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelEDI.Size = new System.Drawing.Size(558, 329);
+            this.tabPanelEDI.Size = new System.Drawing.Size(550, 329);
             this.tabPanelEDI.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelEDI.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelEDI.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -1631,7 +1628,7 @@
             this.groupPanelInvoiceAdv.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelInvoiceAdv.Location = new System.Drawing.Point(1, 1);
             this.groupPanelInvoiceAdv.Name = "groupPanelInvoiceAdv";
-            this.groupPanelInvoiceAdv.Size = new System.Drawing.Size(556, 185);
+            this.groupPanelInvoiceAdv.Size = new System.Drawing.Size(548, 185);
             // 
             // 
             // 
@@ -1816,7 +1813,7 @@
             this.tabControlPanelDispute.Location = new System.Drawing.Point(0, 26);
             this.tabControlPanelDispute.Name = "tabControlPanelDispute";
             this.tabControlPanelDispute.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanelDispute.Size = new System.Drawing.Size(558, 329);
+            this.tabControlPanelDispute.Size = new System.Drawing.Size(550, 329);
             this.tabControlPanelDispute.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabControlPanelDispute.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabControlPanelDispute.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -1842,7 +1839,7 @@
             this.groupPanelDisputeResolve.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelDisputeResolve.Location = new System.Drawing.Point(1, 167);
             this.groupPanelDisputeResolve.Name = "groupPanelDisputeResolve";
-            this.groupPanelDisputeResolve.Size = new System.Drawing.Size(556, 104);
+            this.groupPanelDisputeResolve.Size = new System.Drawing.Size(548, 104);
             // 
             // 
             // 
@@ -1967,7 +1964,7 @@
             this.groupPanelDispute.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelDispute.Location = new System.Drawing.Point(1, 1);
             this.groupPanelDispute.Name = "groupPanelDispute";
-            this.groupPanelDispute.Size = new System.Drawing.Size(556, 166);
+            this.groupPanelDispute.Size = new System.Drawing.Size(548, 166);
             // 
             // 
             // 
@@ -2165,7 +2162,7 @@
             this.tabPanelFlaw.Location = new System.Drawing.Point(0, 26);
             this.tabPanelFlaw.Name = "tabPanelFlaw";
             this.tabPanelFlaw.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelFlaw.Size = new System.Drawing.Size(558, 329);
+            this.tabPanelFlaw.Size = new System.Drawing.Size(550, 329);
             this.tabPanelFlaw.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelFlaw.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelFlaw.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -2190,7 +2187,7 @@
             this.groupPanelFlawResolve.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelFlawResolve.Location = new System.Drawing.Point(1, 154);
             this.groupPanelFlawResolve.Name = "groupPanelFlawResolve";
-            this.groupPanelFlawResolve.Size = new System.Drawing.Size(556, 127);
+            this.groupPanelFlawResolve.Size = new System.Drawing.Size(548, 127);
             // 
             // 
             // 
@@ -2306,7 +2303,7 @@
             this.groupPanelFlaw.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelFlaw.Location = new System.Drawing.Point(1, 1);
             this.groupPanelFlaw.Name = "groupPanelFlaw";
-            this.groupPanelFlaw.Size = new System.Drawing.Size(556, 153);
+            this.groupPanelFlaw.Size = new System.Drawing.Size(548, 153);
             // 
             // 
             // 
@@ -2417,38 +2414,11 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // lblInvoiceType
-            // 
-            lblInvoiceType.AutoSize = true;
-            lblInvoiceType.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblInvoiceType.BackgroundStyle.Class = "";
-            lblInvoiceType.Location = new System.Drawing.Point(358, 5);
-            lblInvoiceType.Name = "lblInvoiceType";
-            lblInvoiceType.Size = new System.Drawing.Size(59, 16);
-            lblInvoiceType.TabIndex = 14;
-            lblInvoiceType.Text = "单据类别:";
-            // 
-            // cbInvoiceType
-            // 
-            this.cbInvoiceType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbInvoiceType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbInvoiceType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "InvoiceType", true));
-            this.cbInvoiceType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbInvoiceType.FormattingEnabled = true;
-            this.cbInvoiceType.Location = new System.Drawing.Point(432, 3);
-            this.cbInvoiceType.Name = "cbInvoiceType";
-            this.cbInvoiceType.Size = new System.Drawing.Size(100, 21);
-            this.cbInvoiceType.TabIndex = 15;
-            this.cbInvoiceType.Items.AddRange(new string[] { "Invoice", "Credit Note" });
-            // 
             // InvoiceDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(558, 355);
+            this.ClientSize = new System.Drawing.Size(550, 355);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.ImeMode = System.Windows.Forms.ImeMode.On;

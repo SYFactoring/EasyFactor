@@ -170,7 +170,15 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (opBatchType == OpBatchType.QUERY || opBatchType == OpBatchType.CHECK)
             {
-                this.bs.DataSource = App.Current.DbContext.InvoiceFinanceBatches.Where(i => i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text));
+                DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
+                DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
+                string status = this.cbCheckStatus.Text;
+
+                this.bs.DataSource = App.Current.DbContext.InvoiceFinanceBatches.Where(i =>
+                    i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
+                    && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
+                    && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
+                    );
             }
             else if (opBatchType == OpBatchType.DETAIL)
             {

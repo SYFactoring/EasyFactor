@@ -85,7 +85,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batchType == OpBatchType.CHECK)
             {
-                this.bs.DataSource = App.Current.DbContext.InvoiceAssignBatches.Where(i => i.CheckStatus == "未审核");
+                this.bs.DataSource = App.Current.DbContext.InvoiceAssignBatches.Where(i => i.CheckStatus == "未复核");
             }
         }
 
@@ -182,7 +182,15 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (opBatchType == OpBatchType.QUERY || opBatchType == OpBatchType.CHECK)
             {
-                this.bs.DataSource = App.Current.DbContext.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
+                DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
+                DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
+                string status = this.cbCheckStatus.Text;
+                this.bs.DataSource = App.Current.DbContext.InvoiceAssignBatches.Where(i =>
+                    i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text)
+                    && (beginDate != this.dateFrom.MinDate ? i.AssignDate >= beginDate : true)
+                    && (endDate != this.dateTo.MinDate ? i.AssignDate <= endDate : true)
+                    && (status!=string.Empty?i.CheckStatus == status:true)
+                    );
             }
             else if (opBatchType == OpBatchType.DETAIL)
             {

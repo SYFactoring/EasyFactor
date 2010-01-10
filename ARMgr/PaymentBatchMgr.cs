@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class PaymentBatchMgr : UserControl
     {
-		#region Fields (3) 
+        #region Fields (3)
 
         /// <summary>
         /// 
@@ -31,9 +31,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -56,11 +56,11 @@ namespace CMBC.EasyFactor.ARMgr
             QUERY
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (2) 
+        #region Constructors (2)
 
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="selectedCDA"></param>
@@ -84,14 +84,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.opBatchType = batchType;
             if (batchType == OpBatchType.CHECK)
             {
-                this.bs.DataSource = App.Current.DbContext.InvoicePaymentBatches.Where(i => i.CheckStatus == "未审核");
+                this.bs.DataSource = App.Current.DbContext.InvoicePaymentBatches.Where(i => i.CheckStatus == "未复核");
             }
 
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets owner form
@@ -111,11 +111,11 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (6) 
+        #region Methods (6)
 
-		// Private Methods (6) 
+        // Private Methods (6) 
 
         /// <summary>
         /// 
@@ -182,7 +182,16 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (opBatchType == OpBatchType.QUERY || opBatchType == OpBatchType.CHECK)
             {
-                this.bs.DataSource = App.Current.DbContext.InvoicePaymentBatches.Where(i => i.PaymentBatchNo.Contains(this.tbPaymentBatchNo.Text));
+                DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
+                DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
+                string status = this.cbCheckStatus.Text;
+
+                this.bs.DataSource = App.Current.DbContext.InvoicePaymentBatches.Where(i =>
+                    i.PaymentBatchNo.Contains(this.tbPaymentBatchNo.Text)
+                    && (beginDate != this.dateFrom.MinDate ? i.PaymentDate >= beginDate : true)
+                    && (endDate != this.dateTo.MinDate ? i.PaymentDate <= endDate : true)
+                    && (status != string.Empty ? i.CheckStatus == status : true)
+                    );
             }
             else if (opBatchType == OpBatchType.DETAIL)
             {
@@ -231,6 +240,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

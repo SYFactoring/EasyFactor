@@ -134,25 +134,6 @@ namespace CMBC.EasyFactor.Report
             }
         }
 
-        private void DetailInvoice(object sender, DataGridViewCellEventArgs e)
-        {
-            if (this.dgvInvoices.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string ino = (string)dgvInvoices["colInvoiceNo", dgvInvoices.SelectedRows[0].Index].Value;
-            if (ino != null)
-            {
-                Invoice selectedInvoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == ino);
-                if (selectedInvoice != null)
-                {
-                    InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
-                    invoiceDetail.ShowDialog(this);
-                }
-            }
-        }
-
         private void DetailInvoice(object sender, EventArgs e)
         {
             if (this.dgvInvoices.CurrentCell.RowIndex == -1)
@@ -576,17 +557,8 @@ namespace CMBC.EasyFactor.Report
             string factorName = this.tbFactor.Text;
             string isFlaw = this.cbIsFlaw.CheckValue as string;
 
-            DateTime beginDate = this.diAssignDateBegin.MinDate;
-            if (this.diAssignDateBegin.Value > this.diAssignDateBegin.MinDate)
-            {
-                beginDate = this.diAssignDateBegin.Value;
-            }
-
-            DateTime endDate = this.diAssignDateEnd.MaxDate;
-            if (this.diAssignDateEnd.Value > this.diAssignDateEnd.MinDate && this.diAssignDateEnd.Value < this.diAssignDateEnd.MaxDate)
-            {
-                endDate = this.diAssignDateEnd.Value;
-            }
+            DateTime beginDate = this.diAssignDateBegin.Text != string.Empty ? this.diAssignDateBegin.Value : this.diAssignDateBegin.MinDate;
+            DateTime endDate = this.diAssignDateEnd.Text != string.Empty ? this.diAssignDateEnd.Value : this.diAssignDateEnd.MinDate;
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
                               let seller = invoice.InvoiceAssignBatch.CDA.Case.SellerClient
@@ -599,8 +571,10 @@ namespace CMBC.EasyFactor.Report
                               where buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
                               where
                                     (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
-                                 && (beginDate == this.diAssignDateBegin.MinDate ? true : invoice.InvoiceAssignBatch.AssignDate > beginDate.AddDays(-1))
-                                 && (endDate == this.diAssignDateEnd.MaxDate ? true : invoice.InvoiceAssignBatch.AssignDate < endDate.AddDays(1))
+                                 && (beginDate != this.diAssignDateBegin.MinDate ? invoice.InvoiceAssignBatch.AssignDate >= beginDate : true)
+                                 && (endDate != this.diAssignDateEnd.MinDate ? invoice.InvoiceAssignBatch.AssignDate <= endDate : true)
+                                 && (opReportType == OpReportType.REPORT_FINANCE ? invoice.AssignAmount > invoice.PaymentAmount.GetValueOrDefault() : true)
+                                 && (opReportType == OpReportType.REPORT_FINANCE ? invoice.FinanceAmount == null || invoice.FinanceAmount == 0 : true)
                               select invoice;
 
             this.bs.DataSource = queryResult.ToList();

@@ -338,9 +338,8 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
-                this.assignBatchNoTextBox.ReadOnly = true;
-                this.financeBatchNoTextBox.ReadOnly = true;
-                this.paymentBatchNoTextBox.ReadOnly = true;
+                this.assignOutstandingTextBox.ReadOnly = true;
+                this.financeOutstandingTextBox.ReadOnly = true;
             }
             foreach (Control comp in this.groupPanelFlaw.Controls)
             {

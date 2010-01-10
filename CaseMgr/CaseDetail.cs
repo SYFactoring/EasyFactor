@@ -231,6 +231,15 @@ namespace CMBC.EasyFactor.CaseMgr
                     }
                 }
             }
+            if (curCase.CaseCode == null)
+            {
+                curCase.BuyerFactor = null;
+                curCase.SellerFactor = null;
+                curCase.BuyerClient = null;
+                curCase.SellerClient = null;
+                curCase.CoDepartment = null;
+                curCase.OwnerDepartment = null;
+            }
             Close();
         }
 
@@ -683,6 +692,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 catch (Exception e1)
                 {
+                    curCase.CaseCode = null;
                     isAddOK = false;
                     MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -757,6 +767,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 catch (Exception e1)
                 {
+                    creditCoverNeg.Case = null;
                     isAddOK = false;
                     MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
