@@ -123,7 +123,18 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void Check(object sender, EventArgs e)
         {
-
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            foreach (DataGridViewRow row in this.dgvBatches.SelectedRows)
+            {
+                InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[row.Index];
+                batch.CheckStatus = "已复核";
+                batch.CheckUserName = App.Current.CurUser.Name;
+                batch.CheckDate = DateTime.Now.Date;
+            }
+            App.Current.DbContext.SubmitChanges();
         }
 
         /// <summary>
@@ -208,9 +219,25 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Reject(object sender, EventArgs e)
         {
-
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            foreach (DataGridViewRow row in this.dgvBatches.SelectedRows)
+            {
+                InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[row.Index];
+                batch.CheckStatus = "复核未通过";
+                batch.CheckUserName = App.Current.CurUser.Name;
+                batch.CheckDate = DateTime.Now.Date;
+            }
+            App.Current.DbContext.SubmitChanges();
         }
     }
 }

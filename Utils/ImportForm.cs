@@ -1285,7 +1285,8 @@ namespace CMBC.EasyFactor.Utils
                         e.Cancel = true;
                         return -1;
                     }
-                    int column = 12;
+                    //int column = 12;
+                    int column = 1;
                     string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
                     if (invoiceNo.Equals(string.Empty))
                     {
@@ -1308,17 +1309,17 @@ namespace CMBC.EasyFactor.Utils
                     invoice.InvoiceDate = (DateTime)valueArray[row, column++];
                     invoice.DueDate = (DateTime)valueArray[row, column++];
                     invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
-                    invoice.FlawReason = String.Format("{0:G}", valueArray[row, column++]);
-                    invoice.FlawResolveReason = String.Format("{0:G}", valueArray[row, column++]);
-                    invoice.FlawResolveDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.FlawResolveUserName = String.Format("{0:G}", valueArray[row, column++]);
+                    //invoice.FlawReason = String.Format("{0:G}", valueArray[row, column++]);
+                    //invoice.FlawResolveReason = String.Format("{0:G}", valueArray[row, column++]);
+                    //invoice.FlawResolveDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    //invoice.FlawResolveUserName = String.Format("{0:G}", valueArray[row, column++]);
 
-                    column = 35;
+                    //column = 35;
                     invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
                     invoice.FinanceDate = (System.Nullable<DateTime>)valueArray[row, column++];
                     invoice.FinanceDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
 
-                    column = 48;
+                    //column = 48;
                     invoice.PaymentAmount = (System.Nullable<double>)valueArray[row, column++];
                     invoice.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
                     invoice.RefundAmount = (System.Nullable<double>)valueArray[row, column++];

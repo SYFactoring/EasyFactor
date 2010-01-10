@@ -613,6 +613,11 @@ namespace CMBC.EasyFactor.ARMgr
                     MessageBox.Show("还款金额不能大于融资金额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
+                if (invoice.RefundAmount > invoice.PaymentAmount)
+                {
+                    MessageBox.Show("还款金额不能大于付款金额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
             }
             return true;
         }
