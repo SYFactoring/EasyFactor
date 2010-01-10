@@ -67,7 +67,7 @@ namespace CMBC.EasyFactor
         #region Methods (46)
 
         // Private Methods (46) 
-
+        
         private void About(object sender, EventArgs e)
         {
             AboutBox aboutBox = new AboutBox();
@@ -480,8 +480,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void MgrUsers(object sender, EventArgs e)
         {
-            UserMgr userMgrUI = new UserMgr(true);
-            this.SetDetailPanel(userMgrUI);
+            if (this.ValidateRole())
+            {
+                UserMgr userMgrUI = new UserMgr(true);
+                this.SetDetailPanel(userMgrUI);
+            }
         }
 
         /// <summary>
@@ -613,5 +616,50 @@ namespace CMBC.EasyFactor
         }
 
         #endregion Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryClients(object sender, EventArgs e)
+        {
+            ClientMgr query = new ClientMgr(false);
+            this.SetDetailPanel(query);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryClientExport(object sender, EventArgs e)
+        {
+            ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.EXPORT_CLIENT);
+            this.SetDetailPanel(query);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryClientImport(object sender, EventArgs e)
+        {
+            ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.IMPORT_CLIENT);
+            this.SetDetailPanel(query);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryClientDominate(object sender, EventArgs e)
+        {
+            ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.DOMINATE_CLIENT);
+            this.SetDetailPanel(query);
+        }
+
     }
 }

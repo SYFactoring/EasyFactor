@@ -37,7 +37,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         public enum OpClientMgrType
         {
-            NEED_CONTRACT
+            NEED_CONTRACT,
+
+            EXPORT_CLIENT,
+
+            IMPORT_CLIENT,
+
+            DOMINATE_CLIENT
         }
 
         #endregion Enums
@@ -53,6 +59,30 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.cbIsContractSigned.Checked = true;
                 this.cbIsContractSigned.Enabled = false;
             }
+            else if (clientMgrType == OpClientMgrType.DOMINATE_CLIENT)
+            {
+                this.cbCaseType.Text = "国内保理";
+                var queryResult = App.Current.DbContext.Clients.Where(c =>
+                  c.SellerCases.Any(ca => ca.TransactionType == "国内卖方保理" || ca.TransactionType == "国内买方保理") || c.BuyerCases.Any(ca => ca.TransactionType == "国内卖方保理" || ca.TransactionType == "国内买方保理"));
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            }
+            else if (clientMgrType == OpClientMgrType.EXPORT_CLIENT)
+            {
+                this.cbCaseType.Text = "出口保理";
+                var queryResult = App.Current.DbContext.Clients.Where(c =>
+                  c.SellerCases.Any(ca => ca.TransactionType == "出口保理") || c.BuyerCases.Any(ca => ca.TransactionType == "出口保理"));
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            }
+            else if (clientMgrType == OpClientMgrType.IMPORT_CLIENT)
+            {
+                this.cbCaseType.Text = "进口保理";
+                var queryResult = App.Current.DbContext.Clients.Where(c =>
+                  c.SellerCases.Any(ca => ca.TransactionType == "进口保理") || c.BuyerCases.Any(ca => ca.TransactionType == "进口保理"));
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            }
         }
 
         /// <summary>
@@ -63,9 +93,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
             this.InitializeComponent();
             this.dgvClients.AutoGenerateColumns = false;
+            this.dgvClients.DataSource = bs;
+            ControlUtil.SetDoubleBuffered(this.dgvClients);
             this.isEditable = isEditable;
             this.UpdateEditableStatus();
-            ControlUtil.SetDoubleBuffered(this.dgvClients);
 
             List<Department> deptsList = Department.AllDepartments().ToList();
             deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
@@ -275,25 +306,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void QueryClients(object sender, System.EventArgs e)
         {
-            string clientType = string.Empty;
-            if (cbClientType.SelectedIndex >= 0)
+            string clientType = cbClientType.Text;
+            if (clientType == "全部")
             {
-                clientType = cbClientType.Items[cbClientType.SelectedIndex].ToString();
-                if ("全部".Equals(clientType))
-                {
-                    clientType = string.Empty;
-                }
+                clientType = string.Empty;
             }
 
-            string department = string.Empty;
-            if (cbDepartment.SelectedIndex >= 0)
+            string department = cbDepartment.Text;
+            if (department == "全部")
             {
-                department = cbDepartment.SelectedValue.ToString();
-                if (department == "CN01300")
-                {
-                    department = string.Empty;
-                }
+                department = string.Empty;
             }
+
+            string caseType = cbCaseType.Text;
 
             var queryResult = App.Current.DbContext.Clients.Where(c =>
                      ((c.BranchCode == null ? string.Empty : c.BranchCode).Contains(department))
@@ -303,10 +328,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                   && ((c.ClientEDICode == null ? string.Empty : c.ClientEDICode).Contains(tbClientEDICode.Text))
                   && ((c.ClientType == null ? string.Empty : c.ClientType).Contains(clientType))
                   && (this.cbIsContractSigned.Checked == false ? true : c.Contracts.Any(con => con.ContractStatus == "已生效"))
+                  && (caseType == "出口保理" ? c.SellerCases.Any(ca => ca.TransactionType == "出口保理") || c.BuyerCases.Any(ca => ca.TransactionType == "出口保理") : true)
+                  && (caseType == "进口保理" ? c.SellerCases.Any(ca => ca.TransactionType == "进口保理") || c.BuyerCases.Any(ca => ca.TransactionType == "进口保理") : true)
+                  && (caseType == "国内保理" ? c.SellerCases.Any(ca => ca.TransactionType == "国内卖方保理" || ca.TransactionType == "国内买方保理") || c.BuyerCases.Any(ca => ca.TransactionType == "国内卖方保理" || ca.TransactionType == "国内买方保理") : true)
                   );
 
             this.bs.DataSource = queryResult;
-            this.dgvClients.DataSource = bs;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 

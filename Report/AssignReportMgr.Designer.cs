@@ -98,6 +98,9 @@
             this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCDADetail = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemExportSelected = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemExportAll = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diAssignDateEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diAssignDateBegin)).BeginInit();
@@ -178,7 +181,7 @@
             this.btnAssignReport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAssignReport.TabIndex = 13;
             this.btnAssignReport.Text = "生成报表";
-            this.btnAssignReport.Click += new System.EventHandler(this.GenerateReport);
+            this.btnAssignReport.Click += new System.EventHandler(this.GenerateReportAll);
             // 
             // diAssignDateEnd
             // 
@@ -425,7 +428,6 @@
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvInvoices.Size = new System.Drawing.Size(673, 303);
             this.dgvInvoices.TabIndex = 2;
-            this.dgvInvoices.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailInvoice);
             this.dgvInvoices.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvInvoiceAssignBatch_CellFormatting);
             // 
             // colSellerName
@@ -520,9 +522,12 @@
             this.cmuInvoiceMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemInvoiceDetail,
             this.menuItemCDADetail,
-            this.menuItemCaseDetail});
+            this.menuItemCaseDetail,
+            this.toolStripSeparator1,
+            this.menuItemExportSelected,
+            this.menuItemExportAll});
             this.cmuInvoiceMgr.Name = "cmuContractMgr";
-            this.cmuInvoiceMgr.Size = new System.Drawing.Size(183, 70);
+            this.cmuInvoiceMgr.Size = new System.Drawing.Size(183, 142);
             // 
             // menuItemInvoiceDetail
             // 
@@ -544,6 +549,25 @@
             this.menuItemCaseDetail.Size = new System.Drawing.Size(182, 22);
             this.menuItemCaseDetail.Text = "案子详细信息";
             this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
+            // 
+            // menuItemExportSelected
+            // 
+            this.menuItemExportSelected.Name = "menuItemExportSelected";
+            this.menuItemExportSelected.Size = new System.Drawing.Size(182, 22);
+            this.menuItemExportSelected.Text = "所选区域生成报表";
+            this.menuItemExportSelected.Click += new System.EventHandler(this.GenerateReportSelected);
+            // 
+            // menuItemExportAll
+            // 
+            this.menuItemExportAll.Name = "menuItemExportAll";
+            this.menuItemExportAll.Size = new System.Drawing.Size(182, 22);
+            this.menuItemExportAll.Text = "生成报表";
+            this.menuItemExportAll.Click += new System.EventHandler(this.GenerateReportAll);
             // 
             // AssignReportMgr
             // 
@@ -577,6 +601,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsFlaw;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemExportSelected;
+        private System.Windows.Forms.ToolStripMenuItem menuItemExportAll;
 
     }
 }

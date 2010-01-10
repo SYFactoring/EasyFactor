@@ -85,6 +85,7 @@
             DevComponents.DotNetBar.LabelX invoiceCurrencyLabel;
             DevComponents.DotNetBar.LabelX factorCodeLabel;
             DevComponents.DotNetBar.LabelX transactionTypeLabel;
+            DevComponents.DotNetBar.LabelX labelX2;
             this.panelCaseBasic = new DevComponents.DotNetBar.ExpandablePanel();
             this.panelFinanceCreditLine = new DevComponents.DotNetBar.ExpandablePanel();
             this.tbFinanceOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -93,7 +94,7 @@
             this.tbFinanceLineCurr = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbFinanceLine = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbDueDate = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.panelCreditCover = new DevComponents.DotNetBar.ExpandablePanel();
+            this.panelBuyer = new DevComponents.DotNetBar.ExpandablePanel();
             this.tbAROutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditCoverCurrTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbCreditCoverOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -125,6 +126,7 @@
             this.factorNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelInvoiceMgr = new DevComponents.DotNetBar.PanelEx();
+            this.tbHighestFinance = new DevComponents.DotNetBar.Controls.TextBoxX();
             priceLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
             handFeeCurrLabel = new DevComponents.DotNetBar.LabelX();
@@ -151,9 +153,10 @@
             invoiceCurrencyLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
             transactionTypeLabel = new DevComponents.DotNetBar.LabelX();
+            labelX2 = new DevComponents.DotNetBar.LabelX();
             this.panelCaseBasic.SuspendLayout();
             this.panelFinanceCreditLine.SuspendLayout();
-            this.panelCreditCover.SuspendLayout();
+            this.panelBuyer.SuspendLayout();
             this.panelFee.SuspendLayout();
             this.panelCase.SuspendLayout();
             this.SuspendLayout();
@@ -247,7 +250,7 @@
             lblBuyerCreditCoverBalance.Name = "lblBuyerCreditCoverBalance";
             lblBuyerCreditCoverBalance.Size = new System.Drawing.Size(59, 16);
             lblBuyerCreditCoverBalance.TabIndex = 5;
-            lblBuyerCreditCoverBalance.Text = "授信余额:";
+            lblBuyerCreditCoverBalance.Text = "剩余额度:";
             // 
             // lblBuyerARBalance
             // 
@@ -286,7 +289,7 @@
             lblFinanceCreditCoverBalance.Name = "lblFinanceCreditCoverBalance";
             lblFinanceCreditCoverBalance.Size = new System.Drawing.Size(59, 16);
             lblFinanceCreditCoverBalance.TabIndex = 7;
-            lblFinanceCreditCoverBalance.Text = "授信余额:";
+            lblFinanceCreditCoverBalance.Text = "剩余额度:";
             // 
             // lblDueDate
             // 
@@ -502,7 +505,7 @@
             this.panelCaseBasic.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelCaseBasic.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.panelCaseBasic.Controls.Add(this.panelFinanceCreditLine);
-            this.panelCaseBasic.Controls.Add(this.panelCreditCover);
+            this.panelCaseBasic.Controls.Add(this.panelBuyer);
             this.panelCaseBasic.Controls.Add(this.panelFee);
             this.panelCaseBasic.Controls.Add(this.panelCase);
             this.panelCaseBasic.Dock = System.Windows.Forms.DockStyle.Top;
@@ -510,7 +513,7 @@
             this.panelCaseBasic.Location = new System.Drawing.Point(0, 0);
             this.panelCaseBasic.Margin = new System.Windows.Forms.Padding(0);
             this.panelCaseBasic.Name = "panelCaseBasic";
-            this.panelCaseBasic.Size = new System.Drawing.Size(1058, 192);
+            this.panelCaseBasic.Size = new System.Drawing.Size(1254, 192);
             this.panelCaseBasic.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelCaseBasic.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelCaseBasic.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -527,6 +530,8 @@
             this.panelFinanceCreditLine.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelFinanceCreditLine.CollapseDirection = DevComponents.DotNetBar.eCollapseDirection.RightToLeft;
             this.panelFinanceCreditLine.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelFinanceCreditLine.Controls.Add(this.tbHighestFinance);
+            this.panelFinanceCreditLine.Controls.Add(labelX2);
             this.panelFinanceCreditLine.Controls.Add(this.tbFinanceOutstanding);
             this.panelFinanceCreditLine.Controls.Add(financeProportionLabel);
             this.panelFinanceCreditLine.Controls.Add(lblFinanceARBalance);
@@ -633,42 +638,42 @@
             this.tbDueDate.Size = new System.Drawing.Size(100, 20);
             this.tbDueDate.TabIndex = 6;
             // 
-            // panelCreditCover
+            // panelBuyer
             // 
-            this.panelCreditCover.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelCreditCover.CollapseDirection = DevComponents.DotNetBar.eCollapseDirection.RightToLeft;
-            this.panelCreditCover.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelCreditCover.Controls.Add(this.tbAROutstanding);
-            this.panelCreditCover.Controls.Add(creditCoverCurrLabel);
-            this.panelCreditCover.Controls.Add(lblBuyerARBalance);
-            this.panelCreditCover.Controls.Add(this.creditCoverCurrTextBox);
-            this.panelCreditCover.Controls.Add(this.tbCreditCoverOutstanding);
-            this.panelCreditCover.Controls.Add(this.creditCoverTextBox);
-            this.panelCreditCover.Controls.Add(lblBuyerCreditCoverBalance);
-            this.panelCreditCover.Controls.Add(this.periodEndTextBox);
-            this.panelCreditCover.Controls.Add(periodEndLabel);
-            this.panelCreditCover.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelCreditCover.ExpandOnTitleClick = true;
-            this.panelCreditCover.Location = new System.Drawing.Point(652, 15);
-            this.panelCreditCover.Name = "panelCreditCover";
-            this.panelCreditCover.Size = new System.Drawing.Size(209, 177);
-            this.panelCreditCover.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelCreditCover.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelCreditCover.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelCreditCover.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelCreditCover.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.panelCreditCover.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
-            this.panelCreditCover.Style.GradientAngle = 90;
-            this.panelCreditCover.TabIndex = 4;
-            this.panelCreditCover.TitleHeight = 20;
-            this.panelCreditCover.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelCreditCover.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelCreditCover.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelCreditCover.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
-            this.panelCreditCover.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.panelCreditCover.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelCreditCover.TitleStyle.GradientAngle = 90;
-            this.panelCreditCover.TitleText = "买方信用担保";
+            this.panelBuyer.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelBuyer.CollapseDirection = DevComponents.DotNetBar.eCollapseDirection.RightToLeft;
+            this.panelBuyer.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelBuyer.Controls.Add(this.tbAROutstanding);
+            this.panelBuyer.Controls.Add(creditCoverCurrLabel);
+            this.panelBuyer.Controls.Add(lblBuyerARBalance);
+            this.panelBuyer.Controls.Add(this.creditCoverCurrTextBox);
+            this.panelBuyer.Controls.Add(this.tbCreditCoverOutstanding);
+            this.panelBuyer.Controls.Add(this.creditCoverTextBox);
+            this.panelBuyer.Controls.Add(lblBuyerCreditCoverBalance);
+            this.panelBuyer.Controls.Add(this.periodEndTextBox);
+            this.panelBuyer.Controls.Add(periodEndLabel);
+            this.panelBuyer.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelBuyer.ExpandOnTitleClick = true;
+            this.panelBuyer.Location = new System.Drawing.Point(652, 15);
+            this.panelBuyer.Name = "panelBuyer";
+            this.panelBuyer.Size = new System.Drawing.Size(209, 177);
+            this.panelBuyer.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelBuyer.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelBuyer.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelBuyer.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelBuyer.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelBuyer.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelBuyer.Style.GradientAngle = 90;
+            this.panelBuyer.TabIndex = 4;
+            this.panelBuyer.TitleHeight = 20;
+            this.panelBuyer.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelBuyer.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelBuyer.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelBuyer.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
+            this.panelBuyer.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelBuyer.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelBuyer.TitleStyle.GradientAngle = 90;
+            this.panelBuyer.TitleText = "买方信用担保";
             // 
             // tbAROutstanding
             // 
@@ -1119,7 +1124,7 @@
             this.panelInvoiceMgr.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelInvoiceMgr.Location = new System.Drawing.Point(0, 192);
             this.panelInvoiceMgr.Name = "panelInvoiceMgr";
-            this.panelInvoiceMgr.Size = new System.Drawing.Size(1058, 84);
+            this.panelInvoiceMgr.Size = new System.Drawing.Size(1254, 84);
             this.panelInvoiceMgr.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelInvoiceMgr.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelInvoiceMgr.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -1129,6 +1134,31 @@
             this.panelInvoiceMgr.Style.GradientAngle = 90;
             this.panelInvoiceMgr.TabIndex = 0;
             // 
+            // labelX2
+            // 
+            labelX2.AutoSize = true;
+            // 
+            // 
+            // 
+            labelX2.BackgroundStyle.Class = "";
+            labelX2.Location = new System.Drawing.Point(5, 134);
+            labelX2.Name = "labelX2";
+            labelX2.Size = new System.Drawing.Size(121, 16);
+            labelX2.TabIndex = 11;
+            labelX2.Text = "最高保理预付款额度:";
+            // 
+            // tbHighestFinance
+            // 
+            // 
+            // 
+            // 
+            this.tbHighestFinance.Border.Class = "TextBoxBorder";
+            this.tbHighestFinance.Location = new System.Drawing.Point(82, 151);
+            this.tbHighestFinance.Name = "tbHighestFinance";
+            this.tbHighestFinance.ReadOnly = true;
+            this.tbHighestFinance.Size = new System.Drawing.Size(100, 20);
+            this.tbHighestFinance.TabIndex = 12;
+            // 
             // ARCaseBasic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1137,12 +1167,12 @@
             this.Controls.Add(this.panelCaseBasic);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "ARCaseBasic";
-            this.Size = new System.Drawing.Size(1058, 276);
+            this.Size = new System.Drawing.Size(1254, 276);
             this.panelCaseBasic.ResumeLayout(false);
             this.panelFinanceCreditLine.ResumeLayout(false);
             this.panelFinanceCreditLine.PerformLayout();
-            this.panelCreditCover.ResumeLayout(false);
-            this.panelCreditCover.PerformLayout();
+            this.panelBuyer.ResumeLayout(false);
+            this.panelBuyer.PerformLayout();
             this.panelFee.ResumeLayout(false);
             this.panelFee.PerformLayout();
             this.panelCase.ResumeLayout(false);
@@ -1153,7 +1183,7 @@
 
         #endregion
 
-        private DevComponents.DotNetBar.ExpandablePanel panelCreditCover;
+        private DevComponents.DotNetBar.ExpandablePanel panelBuyer;
         private DevComponents.DotNetBar.ExpandablePanel panelCase;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCDACode;
@@ -1174,5 +1204,6 @@
         private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
         private DevComponents.DotNetBar.ExpandablePanel panelFee;
         private DevComponents.DotNetBar.ExpandablePanel panelFinanceCreditLine;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbHighestFinance;
     }
 }

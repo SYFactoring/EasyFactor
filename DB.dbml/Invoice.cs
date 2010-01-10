@@ -31,8 +31,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (AssignOutstanding > 0)
                 {
-                    TimeSpan duedays = DateTime.Now.Date - this.DueDate;
-                    return duedays.Days;
+                    return (DateTime.Now.Date - this.DueDate).Days;
                 }
                 return null;
             }

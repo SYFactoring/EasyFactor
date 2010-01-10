@@ -329,7 +329,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            if (this.dgvInvoices.Columns[e.ColumnIndex] == colPaymentAmount)
+            if (this.dgvInvoices.Columns[e.ColumnIndex] == colPaymentAmount || this.dgvInvoices.Columns[e.ColumnIndex] == colRefundAmount)
             {
                 StatBatch();
             }
@@ -603,14 +603,14 @@ namespace CMBC.EasyFactor.ARMgr
         {
             foreach (Invoice invoice in this.invoiceBindingSource.List)
             {
-                if (invoice.PaymentAmount > invoice.AssignOutstanding)
+                if (invoice.AssignOutstanding < 0)
                 {
-                    MessageBox.Show("付款金额不能大于转让余额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("付款金额不能大于转让金额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
-                if (invoice.RefundAmount > invoice.FinanceOutstanding)
+                if (invoice.FinanceOutstanding < 0)
                 {
-                    MessageBox.Show("还款金额不能大于融资余额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("还款金额不能大于融资金额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
             }

@@ -30,11 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.tbFinanceOverDueDays = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFinanceOverDueDays = new DevComponents.DotNetBar.LabelX();
@@ -59,16 +62,21 @@
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRefundDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsFlaw = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsDispute = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignOverDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceOverDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsDispute = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuInvoiceMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCDADetail = new System.Windows.Forms.ToolStripMenuItem();
@@ -342,7 +350,6 @@
             this.dgvInvoices.AllowUserToAddRows = false;
             this.dgvInvoices.AllowUserToDeleteRows = false;
             this.dgvInvoices.AllowUserToOrderColumns = true;
-            this.dgvInvoices.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -357,25 +364,30 @@
             this.colFactorName,
             this.colInvoiceNo,
             this.colInvoiceCurrency,
-            this.colAssignAmount,
             this.colInvoiceDate,
-            this.colAssignDate,
             this.colDueDate,
+            this.colAssignDate,
+            this.colAssignAmount,
             this.colFinanceDate,
             this.colFinanceDueDate,
+            this.colFinanceAmount,
+            this.colPaymentDate,
+            this.colPaymentAmount,
+            this.colRefundDate,
+            this.colRefundAmount,
             this.colIsFlaw,
+            this.colIsDispute,
             this.colAssignOverDueDays,
-            this.colFinanceOverDueDays,
-            this.colIsDispute});
+            this.colFinanceOverDueDays});
             this.dgvInvoices.ContextMenuStrip = this.cmuInvoiceMgr;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvInvoices.Location = new System.Drawing.Point(0, 56);
@@ -426,25 +438,26 @@
             this.colInvoiceCurrency.ReadOnly = true;
             this.colInvoiceCurrency.Width = 80;
             // 
-            // colAssignAmount
-            // 
-            this.colAssignAmount.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle2.Format = "N2";
-            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAssignAmount.HeaderText = "转让金额";
-            this.colAssignAmount.Name = "colAssignAmount";
-            this.colAssignAmount.ReadOnly = true;
-            this.colAssignAmount.Width = 80;
-            // 
             // colInvoiceDate
             // 
             this.colInvoiceDate.DataPropertyName = "InvoiceDate";
-            dataGridViewCellStyle3.Format = "d";
-            this.colInvoiceDate.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Format = "d";
+            this.colInvoiceDate.DefaultCellStyle = dataGridViewCellStyle2;
             this.colInvoiceDate.HeaderText = "发票日";
             this.colInvoiceDate.Name = "colInvoiceDate";
             this.colInvoiceDate.ReadOnly = true;
             this.colInvoiceDate.Width = 68;
+            // 
+            // colDueDate
+            // 
+            this.colDueDate.DataPropertyName = "DueDate";
+            dataGridViewCellStyle3.Format = "d";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colDueDate.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colDueDate.HeaderText = "到期日";
+            this.colDueDate.Name = "colDueDate";
+            this.colDueDate.ReadOnly = true;
+            this.colDueDate.Width = 68;
             // 
             // colAssignDate
             // 
@@ -456,16 +469,15 @@
             this.colAssignDate.ReadOnly = true;
             this.colAssignDate.Width = 68;
             // 
-            // colDueDate
+            // colAssignAmount
             // 
-            this.colDueDate.DataPropertyName = "DueDate";
-            dataGridViewCellStyle5.Format = "d";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colDueDate.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colDueDate.HeaderText = "到期日";
-            this.colDueDate.Name = "colDueDate";
-            this.colDueDate.ReadOnly = true;
-            this.colDueDate.Width = 68;
+            this.colAssignAmount.DataPropertyName = "AssignAmount";
+            dataGridViewCellStyle5.Format = "N2";
+            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colAssignAmount.HeaderText = "转让金额";
+            this.colAssignAmount.Name = "colAssignAmount";
+            this.colAssignAmount.ReadOnly = true;
+            this.colAssignAmount.Width = 80;
             // 
             // colFinanceDate
             // 
@@ -481,6 +493,47 @@
             this.colFinanceDueDate.Name = "colFinanceDueDate";
             this.colFinanceDueDate.Width = 92;
             // 
+            // colFinanceAmount
+            // 
+            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
+            dataGridViewCellStyle6.Format = "N2";
+            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colFinanceAmount.HeaderText = "融资金额";
+            this.colFinanceAmount.Name = "colFinanceAmount";
+            this.colFinanceAmount.Width = 80;
+            // 
+            // colPaymentDate
+            // 
+            this.colPaymentDate.DataPropertyName = "PaymentDate";
+            this.colPaymentDate.HeaderText = "付款日";
+            this.colPaymentDate.Name = "colPaymentDate";
+            this.colPaymentDate.Width = 68;
+            // 
+            // colPaymentAmount
+            // 
+            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
+            dataGridViewCellStyle7.Format = "N2";
+            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle7;
+            this.colPaymentAmount.HeaderText = "付款金额";
+            this.colPaymentAmount.Name = "colPaymentAmount";
+            this.colPaymentAmount.Width = 80;
+            // 
+            // colRefundDate
+            // 
+            this.colRefundDate.DataPropertyName = "RefundDate";
+            this.colRefundDate.HeaderText = "还款日";
+            this.colRefundDate.Name = "colRefundDate";
+            this.colRefundDate.Width = 68;
+            // 
+            // colRefundAmount
+            // 
+            this.colRefundAmount.DataPropertyName = "RefundAmount";
+            dataGridViewCellStyle8.Format = "N2";
+            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle8;
+            this.colRefundAmount.HeaderText = "还款金额";
+            this.colRefundAmount.Name = "colRefundAmount";
+            this.colRefundAmount.Width = 80;
+            // 
             // colIsFlaw
             // 
             this.colIsFlaw.DataPropertyName = "IsFlaw";
@@ -489,6 +542,13 @@
             this.colIsFlaw.ReadOnly = true;
             this.colIsFlaw.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colIsFlaw.Width = 80;
+            // 
+            // colIsDispute
+            // 
+            this.colIsDispute.DataPropertyName = "IsDispute";
+            this.colIsDispute.HeaderText = "是否商纠";
+            this.colIsDispute.Name = "colIsDispute";
+            this.colIsDispute.Width = 80;
             // 
             // colAssignOverDueDays
             // 
@@ -503,13 +563,6 @@
             this.colFinanceOverDueDays.HeaderText = "融资逾期天数";
             this.colFinanceOverDueDays.Name = "colFinanceOverDueDays";
             this.colFinanceOverDueDays.Width = 104;
-            // 
-            // colIsDispute
-            // 
-            this.colIsDispute.DataPropertyName = "IsDispute";
-            this.colIsDispute.HeaderText = "是否商纠";
-            this.colIsDispute.Name = "colIsDispute";
-            this.colIsDispute.Width = 80;
             // 
             // cmuInvoiceMgr
             // 
@@ -640,22 +693,27 @@
         private DevComponents.DotNetBar.LabelX lblFinanceOverDueDays;
         private DevComponents.DotNetBar.Controls.TextBoxX tbAssignOverDueDays;
         private DevComponents.DotNetBar.LabelX lblAssignOverDueDays;
+        private System.Windows.Forms.ToolStripMenuItem menuItemExportSelectedInvoices;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDispute;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsFlaw;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsDispute;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOverDueDays;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOverDueDays;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsDispute;
-        private System.Windows.Forms.ToolStripMenuItem menuItemExportSelectedInvoices;
-        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDispute;
     }
 }

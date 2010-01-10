@@ -437,6 +437,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     return;
                 }
                 cda.CDACode = cdaCode;
+                cda.CreateUserName = App.Current.CurUser.Name;
                 try
                 {
                     App.Current.DbContext.CDAs.InsertOnSubmit(cda);
@@ -444,7 +445,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 catch (Exception e1)
                 {
-                    cdaCode = null;
+                    cda.CDACode = null;
                     isAddOK = false;
                     MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }

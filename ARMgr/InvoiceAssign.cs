@@ -350,10 +350,6 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            if (this.invoiceBindingSource.List.Count == 0)
-            {
-                return;
-            }
 
             ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_INVOICES);
             exportUtil.StartExport(this.invoiceBindingSource.List);
@@ -452,10 +448,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             IList invoiceList = this.invoiceBindingSource.List;
-            if (invoiceList.Count == 0)
-            {
-                return;
-            }
+
             if (!ValidateBatch())
             {
                 return;

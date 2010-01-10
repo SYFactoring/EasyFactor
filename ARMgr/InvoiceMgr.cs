@@ -388,11 +388,14 @@ namespace CMBC.EasyFactor.ARMgr
             string isFlaw = this.cbIsFlaw.CheckValue as string;
             string isDispute = this.cbIsDispute.CheckValue as string;
 
-            int AssignOverDueDays = 0;
-            DateTime AssignOverDueDate = default(DateTime);
-            if (Int32.TryParse(this.tbAssignOverDueDays.Text, out AssignOverDueDays))
+            int assignOverDueDays = 0;
+            DateTime assignOverDueDate = default(DateTime);
+            if (Int32.TryParse(this.tbAssignOverDueDays.Text, out assignOverDueDays))
             {
-                AssignOverDueDate = DateTime.Now.Date.AddDays(0 - AssignOverDueDays);
+                if (assignOverDueDays != 0)
+                {
+                    assignOverDueDate = DateTime.Now.Date.AddDays(0 - assignOverDueDays);
+                }
             }
             int FinanceOverDueDays = 0;
             DateTime FinanceOverDueDate = default(DateTime);
@@ -415,10 +418,10 @@ namespace CMBC.EasyFactor.ARMgr
                               where (invoiceNo == string.Empty ? true : invoice.InvoiceNo == invoiceNo)
                                 && (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
                                 && (isDispute == "A" ? true : invoice.IsDispute == (isDispute == "Y" ? true : false))
-                                && (AssignOverDueDays == 0 ? true : invoice.DueDate < AssignOverDueDate)
-                                && (FinanceOverDueDays == 0 ? true : invoice.FinanceDueDate < FinanceOverDueDate)
+                                && (assignOverDueDays == 0 ? true : (invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount && invoice.DueDate <= assignOverDueDate))
+                                && (FinanceOverDueDays == 0 ? true : (invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() && invoice.FinanceDueDate <= FinanceOverDueDate))
                               select invoice;
-            if (queryResult.Count() > 1000)
+            if (queryResult.Count() > 2000)
             {
                 DialogResult dr = MessageBox.Show("查询结果为" + queryResult.Count() + "，全部显示可能速度较慢，选择YES可以继续显示，选择NO可以重新查询。", "提醒", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dr == DialogResult.Yes)

@@ -207,6 +207,9 @@
     <Compile Include="DB.dbml\Department.cs" />
     <Compile Include="DB.dbml\Factor.cs" />
     <Compile Include="DB.dbml\Invoice.cs" />
+    <Compile Include="DB.dbml\InvoiceAssignBatch.cs" />
+    <Compile Include="DB.dbml\InvoiceFinanceBatch.cs" />
+    <Compile Include="DB.dbml\InvoicePaymentBatch.cs" />
     <Compile Include="Help\About\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>

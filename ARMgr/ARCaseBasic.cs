@@ -248,6 +248,11 @@ namespace CMBC.EasyFactor.ARMgr
                 this.tbFinanceLineCurr.Text = cda.FinanceLineCurr;
                 this.tbFinanceLine.Text = String.Format("{0:N2}", cda.FinanceLine);
                 this.tbDueDate.Text = String.Format("{0:d}", cda.FinanceLinePeriodEnd);
+                ClientCreditLine creditLine = cda.Case.SellerClient.GetFinanceCreditLine(cda.Case.InvoiceCurrency);
+                if (creditLine != null)
+                {
+                    this.tbHighestFinance.Text = String.Format("{0:N2}", creditLine.CreditLine);
+                }
 
                 CaculateOutstanding(cda);
 

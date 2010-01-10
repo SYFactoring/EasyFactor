@@ -427,7 +427,7 @@ namespace CMBC.EasyFactor.Report
                 }
                 sheet.Cells[7, 1] = "总融资余额";
                 sheet.Cells[7, 2] = String.Format("{0:N2}", seller.FinanceOutstanding);
-                sheet.Cells[8, 1] = "尚可动拨金额";
+                sheet.Cells[8, 1] = "总剩余额度";
                 sheet.Cells[8, 2] = String.Format("{0:N2}", Math.Min((seller.AssignTotal - seller.FinanceTotal).GetValueOrDefault(), seller.GetFinanceLineOutstanding("CNY").GetValueOrDefault()));
 
                 IEnumerable<IGrouping<Client, Invoice>> groupsByBuyer = sellerGroup.GroupBy(i => i.InvoiceAssignBatch.CDA.Case.BuyerClient);
@@ -469,7 +469,7 @@ namespace CMBC.EasyFactor.Report
                     sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.FinanceLineOutstanding);
                     sheet.Cells[row, 1] = "融资余额：";
                     sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.FinanceOutstanding);
-                    sheet.Cells[row, 1] = "尚可动拨金额：";
+                    sheet.Cells[row, 1] = "剩余额度：";
                     sheet.Cells[row++, 2] = String.Format("{0:N2}", Math.Min(Math.Min((cda.AssignTotal - cda.FinanceTotal).GetValueOrDefault(), cda.FinanceLineOutstanding.GetValueOrDefault()), seller.GetFinanceLineOutstanding("CNY").GetValueOrDefault()));
 
                     row++;
@@ -521,9 +521,28 @@ namespace CMBC.EasyFactor.Report
             }
         }
 
-        private void GenerateReport(object sender, EventArgs e)
+        private void GenerateReportAll(object sender, EventArgs e)
         {
             List<Invoice> invoiceList = (List<Invoice>)this.bs.DataSource;
+            GenerateReportImpl(invoiceList);
+        }
+
+        private void GenerateReportSelected(object sender, EventArgs e)
+        {
+            List<Invoice> selectedInvoices = new List<Invoice>();
+            foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
+            {
+                Invoice invoice = (Invoice)this.bs.List[cell.RowIndex];
+                if (!selectedInvoices.Contains(invoice))
+                {
+                    selectedInvoices.Add(invoice);
+                }
+            }
+            GenerateReportImpl(selectedInvoices);
+        }
+
+        private void GenerateReportImpl(List<Invoice> invoiceList)
+        {
             if (invoiceList == null || invoiceList.Count == 0)
             {
                 return;
@@ -591,5 +610,7 @@ namespace CMBC.EasyFactor.Report
         }
 
         #endregion Methods
+
+
     }
 }

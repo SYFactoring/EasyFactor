@@ -40,27 +40,17 @@
             this.tbDepartmentCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDepartmentCode = new DevComponents.DotNetBar.LabelX();
             this.dgvDepts = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemImportDepts = new System.Windows.Forms.ToolStripMenuItem();
             this.DepartmentCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DepartmentNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LocationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DomainColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AddressCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AddressENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PostCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ManagerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Contact_1Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email_1Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Phone_1Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fax_1Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Contact_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Phone_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fax_2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemImportDepts = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepts)).BeginInit();
             this.cmuDeptMgr.SuspendLayout();
@@ -194,18 +184,8 @@
             this.DepartmentNameColumn,
             this.LocationColumn,
             this.DomainColumn,
-            this.AddressCNColumn,
-            this.AddressENColumn,
-            this.PostCodeColumn,
             this.ManagerColumn,
-            this.Contact_1Column,
-            this.Email_1Column,
-            this.Phone_1Column,
-            this.Fax_1Column,
-            this.Contact_2Column,
-            this.Email_2Column,
-            this.Phone_2Column,
-            this.Fax_2Column});
+            this.Contact_1Column});
             this.dgvDepts.ContextMenuStrip = this.cmuDeptMgr;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -225,6 +205,42 @@
             this.dgvDepts.Size = new System.Drawing.Size(605, 429);
             this.dgvDepts.TabIndex = 0;
             this.dgvDepts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
+            // 
+            // cmuDeptMgr
+            // 
+            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemDetail,
+            this.menuItemSelect,
+            this.toolStripSeparator1,
+            this.menuItemImportDepts});
+            this.cmuDeptMgr.Name = "cmuDeptMgr";
+            this.cmuDeptMgr.Size = new System.Drawing.Size(123, 76);
+            // 
+            // menuItemDetail
+            // 
+            this.menuItemDetail.Name = "menuItemDetail";
+            this.menuItemDetail.Size = new System.Drawing.Size(122, 22);
+            this.menuItemDetail.Text = "详细信息";
+            this.menuItemDetail.Click += new System.EventHandler(this.Detail);
+            // 
+            // menuItemSelect
+            // 
+            this.menuItemSelect.Name = "menuItemSelect";
+            this.menuItemSelect.Size = new System.Drawing.Size(122, 22);
+            this.menuItemSelect.Text = "选定分部";
+            this.menuItemSelect.Click += new System.EventHandler(this.Select);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
+            // 
+            // menuItemImportDepts
+            // 
+            this.menuItemImportDepts.Name = "menuItemImportDepts";
+            this.menuItemImportDepts.Size = new System.Drawing.Size(122, 22);
+            this.menuItemImportDepts.Text = "导入分部";
+            this.menuItemImportDepts.Click += new System.EventHandler(this.ImportDepartments);
             // 
             // DepartmentCodeColumn
             // 
@@ -260,30 +276,6 @@
             this.DomainColumn.Name = "DomainColumn";
             this.DomainColumn.ReadOnly = true;
             // 
-            // AddressCNColumn
-            // 
-            this.AddressCNColumn.DataPropertyName = "AddressCN";
-            this.AddressCNColumn.FillWeight = 77.31959F;
-            this.AddressCNColumn.HeaderText = "中文地址";
-            this.AddressCNColumn.Name = "AddressCNColumn";
-            this.AddressCNColumn.ReadOnly = true;
-            // 
-            // AddressENColumn
-            // 
-            this.AddressENColumn.DataPropertyName = "AddressEN";
-            this.AddressENColumn.FillWeight = 77.31959F;
-            this.AddressENColumn.HeaderText = "英文地址";
-            this.AddressENColumn.Name = "AddressENColumn";
-            this.AddressENColumn.ReadOnly = true;
-            // 
-            // PostCodeColumn
-            // 
-            this.PostCodeColumn.DataPropertyName = "PostCode";
-            this.PostCodeColumn.FillWeight = 77.31959F;
-            this.PostCodeColumn.HeaderText = "邮编";
-            this.PostCodeColumn.Name = "PostCodeColumn";
-            this.PostCodeColumn.ReadOnly = true;
-            // 
             // ManagerColumn
             // 
             this.ManagerColumn.DataPropertyName = "Manager";
@@ -296,101 +288,9 @@
             // 
             this.Contact_1Column.DataPropertyName = "Contact_1";
             this.Contact_1Column.FillWeight = 77.31959F;
-            this.Contact_1Column.HeaderText = "联系人1";
+            this.Contact_1Column.HeaderText = "联系人";
             this.Contact_1Column.Name = "Contact_1Column";
             this.Contact_1Column.ReadOnly = true;
-            // 
-            // Email_1Column
-            // 
-            this.Email_1Column.DataPropertyName = "Email_1";
-            this.Email_1Column.FillWeight = 77.31959F;
-            this.Email_1Column.HeaderText = "Email";
-            this.Email_1Column.Name = "Email_1Column";
-            this.Email_1Column.ReadOnly = true;
-            // 
-            // Phone_1Column
-            // 
-            this.Phone_1Column.DataPropertyName = "Phone_1";
-            this.Phone_1Column.FillWeight = 77.31959F;
-            this.Phone_1Column.HeaderText = "联系电话";
-            this.Phone_1Column.Name = "Phone_1Column";
-            this.Phone_1Column.ReadOnly = true;
-            // 
-            // Fax_1Column
-            // 
-            this.Fax_1Column.DataPropertyName = "Fax_1";
-            this.Fax_1Column.FillWeight = 77.31959F;
-            this.Fax_1Column.HeaderText = "传真";
-            this.Fax_1Column.Name = "Fax_1Column";
-            this.Fax_1Column.ReadOnly = true;
-            // 
-            // Contact_2Column
-            // 
-            this.Contact_2Column.DataPropertyName = "Contact_2";
-            this.Contact_2Column.FillWeight = 77.31959F;
-            this.Contact_2Column.HeaderText = "联系人2";
-            this.Contact_2Column.Name = "Contact_2Column";
-            this.Contact_2Column.ReadOnly = true;
-            // 
-            // Email_2Column
-            // 
-            this.Email_2Column.DataPropertyName = "Email_2";
-            this.Email_2Column.FillWeight = 77.31959F;
-            this.Email_2Column.HeaderText = "Email";
-            this.Email_2Column.Name = "Email_2Column";
-            this.Email_2Column.ReadOnly = true;
-            // 
-            // Phone_2Column
-            // 
-            this.Phone_2Column.DataPropertyName = "Phone_2";
-            this.Phone_2Column.FillWeight = 77.31959F;
-            this.Phone_2Column.HeaderText = "联系电话";
-            this.Phone_2Column.Name = "Phone_2Column";
-            this.Phone_2Column.ReadOnly = true;
-            // 
-            // Fax_2Column
-            // 
-            this.Fax_2Column.DataPropertyName = "Fax_2";
-            this.Fax_2Column.FillWeight = 77.31959F;
-            this.Fax_2Column.HeaderText = "传真";
-            this.Fax_2Column.Name = "Fax_2Column";
-            this.Fax_2Column.ReadOnly = true;
-            // 
-            // cmuDeptMgr
-            // 
-            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemDetail,
-            this.menuItemSelect,
-            this.toolStripSeparator1,
-            this.menuItemImportDepts});
-            this.cmuDeptMgr.Name = "cmuDeptMgr";
-            this.cmuDeptMgr.Size = new System.Drawing.Size(153, 98);
-            // 
-            // menuItemSelect
-            // 
-            this.menuItemSelect.Name = "menuItemSelect";
-            this.menuItemSelect.Size = new System.Drawing.Size(152, 22);
-            this.menuItemSelect.Text = "选定分部";
-            this.menuItemSelect.Click += new System.EventHandler(this.Select);
-            // 
-            // menuItemImportDepts
-            // 
-            this.menuItemImportDepts.Name = "menuItemImportDepts";
-            this.menuItemImportDepts.Size = new System.Drawing.Size(152, 22);
-            this.menuItemImportDepts.Text = "导入分部";
-            this.menuItemImportDepts.Click += new System.EventHandler(this.ImportDepartments);
-            // 
-            // menuItemDetail
-            // 
-            this.menuItemDetail.Name = "menuItemDetail";
-            this.menuItemDetail.Size = new System.Drawing.Size(152, 22);
-            this.menuItemDetail.Text = "详细信息";
-            this.menuItemDetail.Click += new System.EventHandler(this.Detail);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // DepartmentMgr
             // 
@@ -422,24 +322,14 @@
         private System.Windows.Forms.ContextMenuStrip cmuDeptMgr;
         private System.Windows.Forms.ToolStripMenuItem menuItemSelect;
         private System.Windows.Forms.ToolStripMenuItem menuItemImportDepts;
+        private DevComponents.DotNetBar.ButtonX btnReset;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDetail;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn LocationColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DomainColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AddressCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AddressENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PostCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ManagerColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Contact_1Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email_1Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Phone_1Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fax_1Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Contact_2Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email_2Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Phone_2Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fax_2Column;
-        private DevComponents.DotNetBar.ButtonX btnReset;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDetail;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

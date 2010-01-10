@@ -40,7 +40,7 @@ namespace CMBC.EasyFactor.Utils
         public ExportUtil(ExportType exportType)
         {
             this.exportType = exportType;
-
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             backgroundWorker = new BackgroundWorker();
             this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
         }
@@ -100,7 +100,6 @@ namespace CMBC.EasyFactor.Utils
             datasheet.Cells[1, column++] = "转让经办人";
             datasheet.Cells[1, column++] = "发票号/贷项通知";
             datasheet.Cells[1, column++] = "单据类别";
-            datasheet.Cells[1, column++] = "发票币别";
             datasheet.Cells[1, column++] = "票面金额";
             datasheet.Cells[1, column++] = "转让金额";
             datasheet.Cells[1, column++] = "发票日期";
@@ -229,7 +228,7 @@ namespace CMBC.EasyFactor.Utils
             foreach (Range range in datasheet.UsedRange.Columns)
             {
                 range.EntireColumn.AutoFit();
-                if (range.Column == 14 || range.Column == 15 || range.Column == 36 || range.Column == 45 || range.Column == 47 || range.Column == 49 || range.Column == 51)
+                if (range.Column == 14 || range.Column == 15 || range.Column == 35 || range.Column == 48 || range.Column == 50 || range.Column == 52 || range.Column == 54)
                 {
                     range.NumberFormatLocal = "0.00";
                 }

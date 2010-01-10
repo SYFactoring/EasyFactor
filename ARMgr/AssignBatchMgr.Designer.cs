@@ -46,9 +46,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbCheckStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblCheckStatus = new DevComponents.DotNetBar.LabelX();
@@ -59,6 +59,14 @@
             this.tbAssignBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblAssignBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemInvoiceList = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
+            this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,12 +77,6 @@
             this.colIsCreateMsg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemInvoiceList = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -114,7 +116,7 @@
             this.cbCheckStatus.FormattingEnabled = true;
             this.cbCheckStatus.ItemHeight = 14;
             this.cbCheckStatus.Items.AddRange(new object[] {
-                "",
+            "",
             "未复核",
             "已复核",
             "复核未通过"});
@@ -283,17 +285,18 @@
             this.dgvBatches.AllowUserToAddRows = false;
             this.dgvBatches.AllowUserToDeleteRows = false;
             this.dgvBatches.AllowUserToOrderColumns = true;
-            this.dgvBatches.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBatches.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBatches.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvBatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBatches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSellerName,
+            this.colBuyerName,
             this.colAssignBatchNo,
             this.colBatchCurrency,
             this.colAssignDate,
@@ -305,14 +308,14 @@
             this.colCreateUserName,
             this.colComment});
             this.dgvBatches.ContextMenuStrip = this.cmuBatchMgr;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvBatches.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBatches.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvBatches.Location = new System.Drawing.Point(0, 57);
@@ -322,81 +325,6 @@
             this.dgvBatches.Size = new System.Drawing.Size(752, 300);
             this.dgvBatches.TabIndex = 1;
             this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBatches_CellDoubleClick);
-            // 
-            // colAssignBatchNo
-            // 
-            this.colAssignBatchNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colAssignBatchNo.DataPropertyName = "AssignBatchNo";
-            this.colAssignBatchNo.Frozen = true;
-            this.colAssignBatchNo.HeaderText = "转让批号";
-            this.colAssignBatchNo.Name = "colAssignBatchNo";
-            this.colAssignBatchNo.ReadOnly = true;
-            this.colAssignBatchNo.Width = 116;
-            // 
-            // colBatchCurrency
-            // 
-            this.colBatchCurrency.DataPropertyName = "BatchCurrency";
-            this.colBatchCurrency.HeaderText = "批次币种";
-            this.colBatchCurrency.Name = "colBatchCurrency";
-            this.colBatchCurrency.ReadOnly = true;
-            // 
-            // colAssignDate
-            // 
-            this.colAssignDate.DataPropertyName = "AssignDate";
-            dataGridViewCellStyle5.Format = "d";
-            this.colAssignDate.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colAssignDate.HeaderText = "转让日期";
-            this.colAssignDate.Name = "colAssignDate";
-            this.colAssignDate.ReadOnly = true;
-            // 
-            // colCheckStatus
-            // 
-            this.colCheckStatus.DataPropertyName = "CheckStatus";
-            this.colCheckStatus.HeaderText = "复核结果";
-            this.colCheckStatus.Name = "colCheckStatus";
-            this.colCheckStatus.ReadOnly = true;
-            // 
-            // colRejectReason
-            // 
-            this.colRejectReason.DataPropertyName = "RejectReason";
-            this.colRejectReason.HeaderText = "退回原因";
-            this.colRejectReason.Name = "colRejectReason";
-            this.colRejectReason.ReadOnly = true;
-            // 
-            // colCheckUserName
-            // 
-            this.colCheckUserName.DataPropertyName = "CheckUserName";
-            this.colCheckUserName.HeaderText = "复核人";
-            this.colCheckUserName.Name = "colCheckUserName";
-            this.colCheckUserName.ReadOnly = true;
-            // 
-            // colCheckDate
-            // 
-            this.colCheckDate.DataPropertyName = "CheckDate";
-            this.colCheckDate.HeaderText = "复核日";
-            this.colCheckDate.Name = "colCheckDate";
-            this.colCheckDate.ReadOnly = true;
-            // 
-            // colIsCreateMsg
-            // 
-            this.colIsCreateMsg.DataPropertyName = "IsCreateMsg";
-            this.colIsCreateMsg.HeaderText = "是否生成报文";
-            this.colIsCreateMsg.Name = "colIsCreateMsg";
-            this.colIsCreateMsg.ReadOnly = true;
-            // 
-            // colCreateUserName
-            // 
-            this.colCreateUserName.DataPropertyName = "CreateUserName";
-            this.colCreateUserName.HeaderText = "经办人";
-            this.colCreateUserName.Name = "colCreateUserName";
-            this.colCreateUserName.ReadOnly = true;
-            // 
-            // colComment
-            // 
-            this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "备注";
-            this.colComment.Name = "colComment";
-            this.colComment.ReadOnly = true;
             // 
             // cmuBatchMgr
             // 
@@ -442,6 +370,103 @@
             this.menuItemReject.Text = "复核拒绝";
             this.menuItemReject.Click += new System.EventHandler(this.Reject);
             // 
+            // colSellerName
+            // 
+            this.colSellerName.DataPropertyName = "SellerName";
+            this.colSellerName.HeaderText = "卖方名称";
+            this.colSellerName.Name = "colSellerName";
+            this.colSellerName.ReadOnly = true;
+            // 
+            // colBuyerName
+            // 
+            this.colBuyerName.DataPropertyName = "BuyerName";
+            this.colBuyerName.HeaderText = "买方名称";
+            this.colBuyerName.Name = "colBuyerName";
+            this.colBuyerName.ReadOnly = true;
+            // 
+            // colAssignBatchNo
+            // 
+            this.colAssignBatchNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colAssignBatchNo.DataPropertyName = "AssignBatchNo";
+            this.colAssignBatchNo.HeaderText = "转让批号";
+            this.colAssignBatchNo.Name = "colAssignBatchNo";
+            this.colAssignBatchNo.ReadOnly = true;
+            this.colAssignBatchNo.Width = 116;
+            // 
+            // colBatchCurrency
+            // 
+            this.colBatchCurrency.DataPropertyName = "BatchCurrency";
+            this.colBatchCurrency.HeaderText = "批次币种";
+            this.colBatchCurrency.Name = "colBatchCurrency";
+            this.colBatchCurrency.ReadOnly = true;
+            this.colBatchCurrency.Width = 66;
+            // 
+            // colAssignDate
+            // 
+            this.colAssignDate.DataPropertyName = "AssignDate";
+            dataGridViewCellStyle2.Format = "d";
+            this.colAssignDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colAssignDate.HeaderText = "转让日期";
+            this.colAssignDate.Name = "colAssignDate";
+            this.colAssignDate.ReadOnly = true;
+            this.colAssignDate.Width = 66;
+            // 
+            // colCheckStatus
+            // 
+            this.colCheckStatus.DataPropertyName = "CheckStatus";
+            this.colCheckStatus.HeaderText = "复核结果";
+            this.colCheckStatus.Name = "colCheckStatus";
+            this.colCheckStatus.ReadOnly = true;
+            this.colCheckStatus.Width = 66;
+            // 
+            // colRejectReason
+            // 
+            this.colRejectReason.DataPropertyName = "RejectReason";
+            this.colRejectReason.HeaderText = "退回原因";
+            this.colRejectReason.Name = "colRejectReason";
+            this.colRejectReason.ReadOnly = true;
+            this.colRejectReason.Width = 66;
+            // 
+            // colCheckUserName
+            // 
+            this.colCheckUserName.DataPropertyName = "CheckUserName";
+            this.colCheckUserName.HeaderText = "复核人";
+            this.colCheckUserName.Name = "colCheckUserName";
+            this.colCheckUserName.ReadOnly = true;
+            this.colCheckUserName.Width = 65;
+            // 
+            // colCheckDate
+            // 
+            this.colCheckDate.DataPropertyName = "CheckDate";
+            this.colCheckDate.HeaderText = "复核日";
+            this.colCheckDate.Name = "colCheckDate";
+            this.colCheckDate.ReadOnly = true;
+            this.colCheckDate.Width = 66;
+            // 
+            // colIsCreateMsg
+            // 
+            this.colIsCreateMsg.DataPropertyName = "IsCreateMsg";
+            this.colIsCreateMsg.HeaderText = "是否生成报文";
+            this.colIsCreateMsg.Name = "colIsCreateMsg";
+            this.colIsCreateMsg.ReadOnly = true;
+            this.colIsCreateMsg.Width = 66;
+            // 
+            // colCreateUserName
+            // 
+            this.colCreateUserName.DataPropertyName = "CreateUserName";
+            this.colCreateUserName.HeaderText = "经办人";
+            this.colCreateUserName.Name = "colCreateUserName";
+            this.colCreateUserName.ReadOnly = true;
+            this.colCreateUserName.Width = 66;
+            // 
+            // colComment
+            // 
+            this.colComment.DataPropertyName = "Comment";
+            this.colComment.HeaderText = "备注";
+            this.colComment.Name = "colComment";
+            this.colComment.ReadOnly = true;
+            this.colComment.Width = 66;
+            // 
             // AssignBatchMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -469,6 +494,13 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuItemCheck;
         private System.Windows.Forms.ToolStripMenuItem menuItemReject;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTo;
+        private DevComponents.DotNetBar.LabelX lblDatePicker;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateFrom;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCheckStatus;
+        private DevComponents.DotNetBar.LabelX lblCheckStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignBatchNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
@@ -479,10 +511,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsCreateMsg;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTo;
-        private DevComponents.DotNetBar.LabelX lblDatePicker;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateFrom;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCheckStatus;
-        private DevComponents.DotNetBar.LabelX lblCheckStatus;
     }
 }

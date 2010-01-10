@@ -159,8 +159,8 @@
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelInvoice = new DevComponents.DotNetBar.TabControlPanel();
             this.groupPanelInvoiceProcess = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.financeOutstandingTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.assignOutstandingTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.interestDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.interestTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -909,9 +909,9 @@
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
+            this.tabControl.Controls.Add(this.tabControlPanelDispute);
             this.tabControl.Controls.Add(this.tabPanelInvoice);
             this.tabControl.Controls.Add(this.tabPanelEDI);
-            this.tabControl.Controls.Add(this.tabControlPanelDispute);
             this.tabControl.Controls.Add(this.tabPanelFlaw);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -1019,10 +1019,6 @@
             this.groupPanelInvoiceProcess.StyleMouseOver.Class = "";
             this.groupPanelInvoiceProcess.TabIndex = 0;
             // 
-            // invoiceBindingSource
-            // 
-            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
-            // 
             // financeOutstandingTextBox
             // 
             // 
@@ -1034,6 +1030,10 @@
             this.financeOutstandingTextBox.Name = "financeOutstandingTextBox";
             this.financeOutstandingTextBox.Size = new System.Drawing.Size(100, 20);
             this.financeOutstandingTextBox.TabIndex = 29;
+            // 
+            // invoiceBindingSource
+            // 
+            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
             // 
             // assignOutstandingTextBox
             // 
@@ -1837,7 +1837,7 @@
             this.groupPanelDisputeResolve.Controls.Add(disputeResolveReasonLabel);
             this.groupPanelDisputeResolve.Controls.Add(this.disputeResolveReasonTextBox);
             this.groupPanelDisputeResolve.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelDisputeResolve.Location = new System.Drawing.Point(1, 167);
+            this.groupPanelDisputeResolve.Location = new System.Drawing.Point(1, 186);
             this.groupPanelDisputeResolve.Name = "groupPanelDisputeResolve";
             this.groupPanelDisputeResolve.Size = new System.Drawing.Size(548, 104);
             // 
@@ -1940,7 +1940,7 @@
             this.disputeResolveReasonTextBox.Multiline = true;
             this.disputeResolveReasonTextBox.Name = "disputeResolveReasonTextBox";
             this.disputeResolveReasonTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.disputeResolveReasonTextBox.Size = new System.Drawing.Size(449, 61);
+            this.disputeResolveReasonTextBox.Size = new System.Drawing.Size(425, 61);
             this.disputeResolveReasonTextBox.TabIndex = 2;
             // 
             // groupPanelDispute
@@ -1964,7 +1964,7 @@
             this.groupPanelDispute.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelDispute.Location = new System.Drawing.Point(1, 1);
             this.groupPanelDispute.Name = "groupPanelDispute";
-            this.groupPanelDispute.Size = new System.Drawing.Size(548, 166);
+            this.groupPanelDispute.Size = new System.Drawing.Size(548, 185);
             // 
             // 
             // 
@@ -2032,7 +2032,7 @@
             this.tbDisputeReason.Location = new System.Drawing.Point(352, 7);
             this.tbDisputeReason.Multiline = true;
             this.tbDisputeReason.Name = "tbDisputeReason";
-            this.tbDisputeReason.Size = new System.Drawing.Size(195, 94);
+            this.tbDisputeReason.Size = new System.Drawing.Size(171, 94);
             this.tbDisputeReason.TabIndex = 3;
             this.tbDisputeReason.WatermarkText = "其他原因";
             // 

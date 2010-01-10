@@ -79,6 +79,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DevComponents.DotNetBar.LabelX lblRM;
             DevComponents.DotNetBar.LabelX lblPM;
             DevComponents.DotNetBar.LabelX lblDepartment;
+            DevComponents.DotNetBar.LabelX lblCaseType;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -93,6 +94,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemClientDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemClientImport = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlQuery = new DevComponents.DotNetBar.PanelEx();
+            this.cbCaseType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnReset = new DevComponents.DotNetBar.ButtonX();
             this.cbIsContractSigned = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cbDepartment = new DevComponents.DotNetBar.Controls.ComboTree();
@@ -144,6 +146,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblRM = new DevComponents.DotNetBar.LabelX();
             lblPM = new DevComponents.DotNetBar.LabelX();
             lblDepartment = new DevComponents.DotNetBar.LabelX();
+            lblCaseType = new DevComponents.DotNetBar.LabelX();
             this.cmuClientMgr.SuspendLayout();
             this.pnlQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
@@ -234,6 +237,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblDepartment.Text = "所属机构";
             lblDepartment.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
+            // lblCaseType
+            // 
+            lblCaseType.AutoSize = true;
+            // 
+            // 
+            // 
+            lblCaseType.BackgroundStyle.Class = "";
+            lblCaseType.Location = new System.Drawing.Point(509, 10);
+            lblCaseType.Name = "lblCaseType";
+            lblCaseType.Size = new System.Drawing.Size(56, 16);
+            lblCaseType.TabIndex = 16;
+            lblCaseType.Text = "案件类型";
+            lblCaseType.TextLineAlignment = System.Drawing.StringAlignment.Far;
+            // 
             // cmuClientMgr
             // 
             this.cmuClientMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -314,6 +331,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.pnlQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.pnlQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.pnlQuery.Controls.Add(this.cbCaseType);
+            this.pnlQuery.Controls.Add(lblCaseType);
             this.pnlQuery.Controls.Add(this.btnReset);
             this.pnlQuery.Controls.Add(this.cbIsContractSigned);
             this.pnlQuery.Controls.Add(this.cbDepartment);
@@ -333,7 +352,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.pnlQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlQuery.Location = new System.Drawing.Point(0, 0);
             this.pnlQuery.Name = "pnlQuery";
-            this.pnlQuery.Size = new System.Drawing.Size(800, 61);
+            this.pnlQuery.Size = new System.Drawing.Size(937, 61);
             this.pnlQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.pnlQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.pnlQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -343,11 +362,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.pnlQuery.Style.GradientAngle = 90;
             this.pnlQuery.TabIndex = 1;
             // 
+            // cbCaseType
+            // 
+            this.cbCaseType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCaseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCaseType.FocusHighlightEnabled = true;
+            this.cbCaseType.ItemHeight = 14;
+            this.cbCaseType.Items.AddRange(new object[] {
+            "全部",
+            "进口保理",
+            "出口保理",
+            "国内保理"});
+            this.cbCaseType.Location = new System.Drawing.Point(566, 7);
+            this.cbCaseType.Name = "cbCaseType";
+            this.cbCaseType.Size = new System.Drawing.Size(100, 20);
+            this.cbCaseType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCaseType.TabIndex = 17;
+            // 
             // btnReset
             // 
             this.btnReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnReset.Location = new System.Drawing.Point(641, 32);
+            this.btnReset.Location = new System.Drawing.Point(672, 32);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(60, 23);
             this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -365,7 +401,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbIsContractSigned.Checked = true;
             this.cbIsContractSigned.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbIsContractSigned.CheckValue = "Y";
-            this.cbIsContractSigned.Location = new System.Drawing.Point(509, 10);
+            this.cbIsContractSigned.Location = new System.Drawing.Point(509, 34);
             this.cbIsContractSigned.Name = "cbIsContractSigned";
             this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);
             this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -390,21 +426,22 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // lblCount
             // 
+            this.lblCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblCount.AutoSize = true;
             // 
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(707, 33);
+            this.lblCount.Location = new System.Drawing.Point(738, 37);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.Size = new System.Drawing.Size(29, 16);
             this.lblCount.TabIndex = 15;
             // 
             // btnQuery
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(641, 7);
+            this.btnQuery.Location = new System.Drawing.Point(672, 7);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(60, 22);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -552,7 +589,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvClients.RowTemplate.Height = 23;
             this.dgvClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClients.Size = new System.Drawing.Size(800, 539);
+            this.dgvClients.Size = new System.Drawing.Size(937, 539);
             this.dgvClients.TabIndex = 2;
             this.dgvClients.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvClients.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvClients_CellFormatting);
@@ -840,7 +877,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.Controls.Add(this.pnlQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "ClientMgr";
-            this.Size = new System.Drawing.Size(800, 600);
+            this.Size = new System.Drawing.Size(937, 600);
             this.cmuClientMgr.ResumeLayout(false);
             this.pnlQuery.ResumeLayout(false);
             this.pnlQuery.PerformLayout();
@@ -885,5 +922,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn PMNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn RMNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CommentColumn;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseType;
     }
 }

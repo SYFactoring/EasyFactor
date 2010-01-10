@@ -544,21 +544,21 @@ namespace CMBC.EasyFactor.CaseMgr
                 case "国内卖方保理":
 
                 case "国内买方保理":
-                    caseCode = "LF" + yearMonth + "-" + String.Format("{0:D4}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("LF" + yearMonth)) + 1);
+                    caseCode = "LF" + yearMonth + "-" + String.Format("{0:D3}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("LF" + yearMonth)) + 1);
                     break;
                 case "出口保理":
-                    caseCode = "EF" + yearMonth + "-" + String.Format("{0:D4}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("LF" + yearMonth)) + 1);
+                    caseCode = "EF" + yearMonth + "-" + String.Format("{0:D3}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("LF" + yearMonth)) + 1);
                     break;
                 case "进口保理":
-                    caseCode = "IF" + yearMonth + "-" + String.Format("{0:D4}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("IF" + yearMonth)) + 1);
+                    caseCode = "IF" + yearMonth + "-" + String.Format("{0:D3}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("IF" + yearMonth)) + 1);
                     break;
                 case "国际信保保理":
 
                 case "国内信保保理":
-                    caseCode = "SF" + yearMonth + "-" + String.Format("{0:D4}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("SF" + yearMonth)) + 1);
+                    caseCode = "SF" + yearMonth + "-" + String.Format("{0:D3}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("SF" + yearMonth)) + 1);
                     break;
                 case "租赁保理":
-                    caseCode = "LF" + yearMonth + "-" + String.Format("{0:D4}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("LF" + yearMonth)) + 1);
+                    caseCode = "LF" + yearMonth + "-" + String.Format("{0:D3}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("LF" + yearMonth)) + 1);
                     break;
                 default:
                     caseCode = string.Empty;
@@ -682,7 +682,6 @@ namespace CMBC.EasyFactor.CaseMgr
             if (curCase.CaseCode == null)
             {
                 curCase.CaseCode = this.GenerateCaseCode(curCase);
-                curCase.CaseMark = "申请案";
 
                 bool isAddOK = true;
                 try
@@ -927,11 +926,11 @@ namespace CMBC.EasyFactor.CaseMgr
                     case "国内信保保理":
                     case "国际信保保理":
                     case "租赁保理":
-                        curCase.SellerFactor = factor;
+                        curCase.BuyerFactor = factor;
                         break;
                     case "国内买方保理":
                     case "进口保理":
-                        curCase.BuyerFactor = factor;
+                        curCase.SellerFactor = factor;
                         break;
                     default: break;
                 }

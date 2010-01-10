@@ -2,24 +2,26 @@
 namespace CMBC.EasyFactor.Utils
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Globalization;
     using System.Linq;
     using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using CMBC.EasyFactor.ARMgr;
     using CMBC.EasyFactor.DB.dbml;
     using Microsoft.Office.Interop.Excel;
-    using System.Collections;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class ImportForm : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (4)
+        #region Fields (5)
 
         private ApplicationClass app;
+        private CultureInfo cultureInfo;
         private Worksheet datasheet;
         private ImportType importType;
         private Workbook workbook;
@@ -141,9 +143,9 @@ namespace CMBC.EasyFactor.Utils
 
         #endregion Properties
 
-        #region Methods (20)
+        #region Methods (18)
 
-        // Private Methods (20) 
+        // Private Methods (18) 
 
         /// <summary>
         /// 
@@ -254,6 +256,8 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private object[,] GetValueArray(string fileName)
         {
+            cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             this.app = new ApplicationClass() { Visible = false };
             if (this.app == null)
             {
@@ -277,18 +281,19 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="fileName"></param>
+        /// <param name="p"></param>
         /// <param name="worker"></param>
         /// <returns></returns>
-        private int ImportInvoicesByBatch(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportCases(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = GetValueArray(fileName);
+            object[,] valueArray = this.GetValueArray(fileName);
             int result = 0;
-            List<Invoice> invoiceList = new List<Invoice>();
+
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
-
+                List<Case> caseList = new List<Case>();
+                List<CreditCoverNegotiation> creditCoverList = new List<CreditCoverNegotiation>();
                 for (int row = 2; row <= size; row++)
                 {
                     if (worker.CancellationPending)
@@ -296,60 +301,696 @@ namespace CMBC.EasyFactor.Utils
                         e.Cancel = true;
                         return -1;
                     }
-                    int column = 12;
-                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
-                    if (invoiceNo.Equals(string.Empty))
+
+                    string caseCode = String.Format("{0:G}", valueArray[row, 1]);
+                    if (String.Empty.Equals(caseCode))
                     {
                         continue;
                     }
-                    Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                    if (invoice == null)
+
+                    Case curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+                    if (curCase == null)
                     {
-                        invoice = new Invoice();
-                        invoice.InvoiceNo = invoiceNo;
-                        Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                        if (old != null)
+                        curCase = new Case();
+                        curCase.CaseCode = caseCode;
+                        caseList.Add(curCase);
+                    }
+                    int column = 2;
+                    curCase.ManagerName = String.Format("{0:G}", valueArray[row, column++]);
+                    string ownerDeptName = String.Format("{0:G}", valueArray[row, column++]);
+                    curCase.OwnerDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == ownerDeptName);
+                    curCase.TransactionType = String.Format("{0:G}", valueArray[row, column++]);
+                    curCase.ReviewNo = String.Format("{0:G}", valueArray[row, column++]);
+                    curCase.OperationType = String.Format("{0:G}", valueArray[row, column++]);
+                    string coDeptName = String.Format("{0:G}", valueArray[row, column++]);
+                    curCase.CoDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == coDeptName);
+                    curCase.CaseMark = String.Format("{0:G}", valueArray[row, column++]);
+                    string sellerEDICode = String.Format("{0:G}", valueArray[row, column++]);
+                    curCase.SellerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == sellerEDICode);
+                    column++;
+                    column++;
+                    string buyerEDICode = String.Format("{0:G}", valueArray[row, column++]);
+                    curCase.BuyerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == buyerEDICode);
+                    column++;
+                    column++;
+                    string EFCode = String.Format("{0:G}", valueArray[row, column++]);
+                    curCase.SellerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == EFCode);
+                    string IFCode = String.Format("{0:G}", valueArray[row, column++]);
+                    curCase.BuyerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == IFCode);
+                    column++;
+                    curCase.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                    curCase.CaseAppDate = (DateTime)valueArray[row, column++];
+                    curCase.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                    curCase.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                    if (valueArray.GetUpperBound(1) > 21)
+                    {
+                        CreditCoverNegotiation creditCover = new CreditCoverNegotiation();
+                        string requestType = String.Format("{0:G}", valueArray[row, column++]);
+                        if ("P".Equals(requestType))
                         {
-                            throw new Exception("发票号重复: " + old.InvoiceNo);
+                            creditCover.RequestType = "P-预额度";
+                        }
+                        else if ("C".Equals(requestType))
+                        {
+                            creditCover.RequestType = "C-正式额度";
+                        }
+                        creditCover.RequestAmount = (double)valueArray[row, column++];
+                        curCase.NetPaymentTerm = (int)valueArray[row, column++];
+                        creditCover.RequestDate = (DateTime)valueArray[row, column++];
+                        creditCover.ReplyAmount = (double)valueArray[row, column++];
+                        creditCover.ReplyDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        creditCover.IFPrice = (System.Nullable<double>)valueArray[row, column++];
+                        column++;
+                        creditCover.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                        creditCover.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                        if (creditCover.RequestType != null)
+                        {
+                            creditCover.Case = curCase;
+                            creditCoverList.Add(creditCover);
                         }
                     }
-                    invoice.InvoiceType = String.Format("{0:G}", valueArray[row, column++]);
-                    invoice.InvoiceAmount = (double)valueArray[row, column++];
-                    invoice.AssignAmount = (double)valueArray[row, column++];
-                    invoice.InvoiceDate = (DateTime)valueArray[row, column++];
-                    invoice.DueDate = (DateTime)valueArray[row, column++];
-                    invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
-                    invoice.FlawReason = String.Format("{0:G}", valueArray[row, column++]);
-                    invoice.FlawResolveReason = String.Format("{0:G}", valueArray[row, column++]);
-                    invoice.FlawResolveDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.FlawResolveUserName = String.Format("{0:G}", valueArray[row, column++]);
-
-                    column = 35;
-                    invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.FinanceDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.FinanceDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
-
-                    column = 48;
-                    invoice.PaymentAmount = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.RefundAmount = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.RefundDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.Interest = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.InterestDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
-
-                    invoiceList.Add(invoice);
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    foreach (Case curCase in caseList)
+                    {
+                        curCase.BuyerClient = null;
+                        curCase.SellerClient = null;
+                        curCase.BuyerFactor = null;
+                        curCase.SellerFactor = null;
+                        curCase.CoDepartment = null;
+                        curCase.OwnerDepartment = null;
+                    }
+                    foreach (CreditCoverNegotiation neg in creditCoverList)
+                    {
+                        neg.Case = null;
+                    }
+                    throw e1;
+                }
             }
-            ImportedList = invoiceList;
+
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
-            ReleaseResource();
+            this.ReleaseResource();
             return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        private int ImportClients(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            object[,] valueArray = this.GetValueArray(fileName);
+
+            int result = 0;
+
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+                for (int row = 2; row <= size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        return -1;
+                    }
+
+                    string clientEDICode = String.Format("{0:G}", valueArray[row, 2]);
+                    if (String.Empty.Equals(clientEDICode))
+                    {
+                        continue;
+                    }
+                    bool isNew = false;
+                    Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                    if (client == null)
+                    {
+                        isNew = true;
+                        client = new Client();
+                        client.ClientEDICode = clientEDICode;
+                    }
+                    int column = 1;
+                    client.ClientCoreNo = String.Format("{0:G}", valueArray[row, column++]);
+                    column++;
+                    client.ClientNameCN = String.Format("{0:G}", valueArray[row, column++]);
+                    client.ClientNameEN_1 = String.Format("{0:G}", valueArray[row, column++]);
+                    client.ClientNameEN_2 = String.Format("{0:G}", valueArray[row, column++]);
+                    client.AddressCN = String.Format("{0:G}", valueArray[row, column++]);
+                    client.AddressEN = String.Format("{0:G}", valueArray[row, column++]);
+                    client.CityCN = String.Format("{0:G}", valueArray[row, column++]);
+                    client.CityEN = String.Format("{0:G}", valueArray[row, column++]);
+                    client.ProvinceCN = String.Format("{0:G}", valueArray[row, column++]);
+                    client.ProvinceEN = String.Format("{0:G}", valueArray[row, column++]);
+                    client.PostCode = String.Format("{0:G}", valueArray[row, column++]);
+                    client.CountryCode = String.Format("{0:G}", valueArray[row, column++]);
+                    client.Representative = String.Format("{0:G}", valueArray[row, column++]);
+                    client.Website = String.Format("{0:G}", valueArray[row, column++]);
+                    client.Contact = String.Format("{0:G}", valueArray[row, column++]);
+                    client.Telephone = String.Format("{0:G}", valueArray[row, column++]);
+                    client.Email = String.Format("{0:G}", valueArray[row, column++]);
+                    client.FaxNumber = String.Format("{0:G}", valueArray[row, column++]);
+                    client.CellPhone = String.Format("{0:G}", valueArray[row, column++]);
+                    client.ClientType = String.Format("{0:G}", valueArray[row, column++]);
+                    client.Industry = String.Format("{0:G}", valueArray[row, column++]);
+                    client.ProductCN = String.Format("{0:G}", valueArray[row, column++]);
+                    client.ProductEN = String.Format("{0:G}", valueArray[row, column++]);
+                    client.ClientLevel = String.Format("{0:G}", valueArray[row, column++]);
+                    client.IsGroup = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
+                    string groupNo = String.Format("{0:G}", valueArray[row, column++]);
+                    string groupNameCN = String.Format("{0:G}", valueArray[row, column++]);
+                    string groupNameEN = String.Format("{0:G}", valueArray[row, column++]);
+                    if (client.IsGroup.GetValueOrDefault())
+                    {
+                        ClientGroup clientGroup = App.Current.DbContext.ClientGroups.SingleOrDefault(cg => cg.GroupNo == groupNo);
+                        if (clientGroup == null)
+                        {
+                            clientGroup = new ClientGroup();
+                            clientGroup.GroupNo = groupNo;
+                        }
+                        clientGroup.GroupNameCN = groupNameCN;
+                        clientGroup.GroupNameEN = groupNameEN;
+                    }
+
+                    client.RegistrationNumber = String.Format("{0:G}", valueArray[row, column++]);
+                    client.CompanyCode = String.Format("{0:G}", valueArray[row, column++]);
+                    string departmentName = String.Format("{0:G}", valueArray[row, column++]);
+                    client.Department = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName.Equals(departmentName));
+
+                    client.PMName = String.Format("{0:G}", valueArray[row, column++]);
+                    client.RMName = String.Format("{0:G}", valueArray[row, column++]);
+                    client.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                    client.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                    if (client.CreateUserName == string.Empty)
+                    {
+                        client.CreateUserName = App.Current.CurUser.Name;
+                    }
+
+                    if (isNew)
+                    {
+                        App.Current.DbContext.Clients.InsertOnSubmit(client);
+                    }
+
+                    result++;
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+                App.Current.DbContext.SubmitChanges();
+            }
+
+            worker.ReportProgress(100);
+            workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <returns></returns>
+        private object ImportClientsCreditLine(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            object[,] valueArray = this.GetValueArray(fileName);
+            int result = 0;
+
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+                List<ClientCreditLine> creditLineList = new List<ClientCreditLine>();
+                for (int row = 2; row <= size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        return -1;
+                    }
+
+                    string clientEDICode = String.Format("{0:G}", valueArray[row, 1]);
+                    if (String.Empty.Equals(clientEDICode))
+                    {
+                        continue;
+                    }
+                    Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                    if (client == null)
+                    {
+                        throw new Exception("客户保理代码错误: " + clientEDICode);
+                    }
+                    int column = 3;
+                    ClientCreditLine creditLine = new ClientCreditLine();
+                    creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.CreditLine = (double)valueArray[row, column++]; ;
+                    creditLine.PeriodBegin = (DateTime)valueArray[row, column++]; ;
+                    creditLine.PeriodEnd = (DateTime)valueArray[row, column++]; ;
+                    creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.FreezeReason = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.Freezer = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++]; ;
+                    creditLine.UnfreezeReason = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.Unfreezer = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                    creditLine.Client = client;
+                    creditLineList.Add(creditLine);
+
+                    result++;
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    foreach (ClientCreditLine creditLine in creditLineList)
+                    {
+                        creditLine.Client = null;
+                    }
+                    throw e1;
+                }
+            }
+            worker.ReportProgress(100);
+            workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <returns></returns>
+        private int ImportContractAndCDA(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            object[,] valueArray = this.GetValueArray(fileName);
+
+            int result = 0;
+
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+                List<Contract> contractList = new List<Contract>();
+                List<CDA> cdaList = new List<CDA>();
+                for (int row = 2; row <= size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        return -1;
+                    }
+
+                    int column = 1;
+                    string caseCode = String.Format("{0:G}", valueArray[row, column++]);
+                    if (string.Empty.Equals(caseCode))
+                    {
+                        continue;
+                    }
+                    Case curCase = null;
+                    curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+                    if (curCase == null)
+                    {
+                        throw new Exception("案件编号错误: " + caseCode);
+                    }
+
+                    string ContractCode = String.Format("{0:G}", valueArray[row, column++]);
+                    Contract contract = null;
+                    if (String.Empty.Equals(ContractCode) && curCase.TransactionType != "进口保理")
+                    {
+                        throw new Exception("保理合同号不能为空");
+                    }
+                    if (!String.Empty.Equals(ContractCode))
+                    {
+                        contract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == ContractCode);
+                        if (contract == null)
+                        {
+                            contract = contractList.SingleOrDefault(c => c.ContractCode == ContractCode);
+                            if (contract == null)
+                            {
+                                contract = new Contract();
+                                contract.ContractCode = ContractCode;
+                                contract.Client = curCase.SellerClient;
+                                contractList.Add(contract);
+                            }
+                        }
+                        contract.ContractType = String.Format("{0:G}", valueArray[row, column++]);
+                        contract.ContractValueDate = (DateTime)valueArray[row, column++];
+                        contract.ContractDueDate = (DateTime)valueArray[row, column++];
+                        contract.ContractStatus = String.Format("{0:G}", valueArray[row, column++]);
+                        contract.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                    }
+
+                    column = 8;
+                    string cdaCode = String.Format("{0:G}", valueArray[row, column++]);
+                    CDA cda = null;
+                    if (String.Empty.Equals(cdaCode))
+                    {
+                        throw new Exception("CDA编号不能为空");
+
+                    }
+                    else
+                    {
+                        cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
+                        if (cda == null)
+                        {
+                            cda = new CDA();
+                            cda.CDACode = cdaCode;
+                            cdaList.Add(cda);
+                        }
+                        cda.Case = curCase;
+                    }
+                    column++;//卖方
+                    column++;//买方
+                    column++;//保理商
+                    column++;//业务类别
+                    column++;//发票币别
+                    cda.IsRecoarse = "Y".Equals(valueArray[row, column++]);
+                    cda.IsNotice = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.AssignType = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.CreditCoverCurr = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.CreditCover = (System.Nullable<double>)valueArray[row, column++];
+                    cda.CreditCoverPeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++];
+                    cda.CreditCoverPeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++];
+                    cda.PUGProportion = (System.Nullable<double>)valueArray[row, column++];
+                    cda.PUGPeriod = (System.Nullable<int>)valueArray[row, column++];
+                    cda.ReassignGracePeriod = (System.Nullable<int>)valueArray[row, column++];
+                    cda.FinanceLineCurr = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.FinanceLine = (System.Nullable<double>)valueArray[row, column++];
+                    cda.FinanceLinePeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++];
+                    cda.FinanceLinePeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++];
+                    column++;//最高保理预付款额度
+                    cda.FinanceProportion = (System.Nullable<double>)valueArray[row, column++];
+                    cda.FinanceGracePeriod = (System.Nullable<int>)valueArray[row, column++];
+                    cda.PaymentTerms = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.OrderNumber = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.Deductibles = (System.Nullable<double>)valueArray[row, column++];
+                    cda.LossThreshold = (System.Nullable<double>)valueArray[row, column++];
+                    cda.Price = (System.Nullable<double>)valueArray[row, column++];
+                    cda.IFPrice = (System.Nullable<double>)valueArray[row, column++];
+                    cda.EFPrice = (System.Nullable<double>)valueArray[row, column++];
+                    cda.HandFeeCurr = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.HandFee = (System.Nullable<double>)valueArray[row, column++];
+                    cda.CommissionType = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.CommissionTypeComment = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.CDASignDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    cda.CDAStatus = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.NoticeMethod = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.NoticePerson = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.Email = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.Fax = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                    cda.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                    result++;
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    foreach (Contract contract in contractList)
+                    {
+                        contract.Client = null;
+                    }
+                    foreach (CDA cda in cdaList)
+                    {
+                        cda.Case = null;
+                    }
+                    throw e1;
+                }
+            }
+
+            worker.ReportProgress(100);
+            workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <returns></returns>
+        private int ImportDepartments(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            object[,] valueArray = this.GetValueArray(fileName);
+            int result = 0;
+
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+                for (int row = 2; row <= size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        return -1;
+                    }
+
+                    string departmentCode = String.Format("{0:G}", valueArray[row, 1]);
+                    if (String.Empty.Equals(departmentCode))
+                    {
+                        continue;
+                    }
+                    bool isNew = false;
+                    Department dept = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentCode == departmentCode);
+                    if (dept == null)
+                    {
+                        isNew = true;
+                        dept = new Department();
+                        dept.DepartmentCode = departmentCode;
+                    }
+
+                    int column = 2;
+                    dept.DepartmentName = String.Format("{0:G}", valueArray[row, column++]);
+                    dept.Location = String.Format("{0:G}", valueArray[row, column++]);
+                    dept.Domain = String.Format("{0:G}", valueArray[row, column++]);
+                    dept.AddressCN = String.Format("{0:G}", valueArray[row, column++]);
+                    dept.AddressEN = String.Format("{0:G}", valueArray[row, column++]);
+                    dept.PostCode = String.Format("{0:G}", valueArray[row, column++]);
+                    dept.Manager = String.Format("{0:G}", valueArray[row, column++]);
+                    dept.Contact_1 = String.Format("{0:G}", valueArray[row, column++]);
+                    dept.Email_1 = String.Format("{0:G}", valueArray[row, column++]);
+                    dept.Phone_1 = String.Format("{0:G}", valueArray[row, column++]);
+                    dept.Fax_1 = String.Format("{0:G}", valueArray[row, column++]);
+                    dept.Contact_2 = String.Format("{0:G}", valueArray[row, column++]);
+                    dept.Email_2 = String.Format("{0:G}", valueArray[row, column++]);
+                    dept.Phone_2 = String.Format("{0:G}", valueArray[row, column++]);
+                    dept.Fax_2 = String.Format("{0:G}", valueArray[row, column++]);
+                    if (isNew)
+                    {
+                        App.Current.DbContext.Departments.InsertOnSubmit(dept);
+                    }
+
+                    result++;
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+                App.Current.DbContext.SubmitChanges();
+            }
+            worker.ReportProgress(100);
+            workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <returns></returns>
+        private int ImportFactors(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            object[,] valueArray = this.GetValueArray(fileName);
+            int result = 0;
+
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+                List<Factor> factorList = new List<Factor>();
+                for (int row = 2; row <= size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        return -1;
+                    }
+
+                    string factorCode = String.Format("{0:G}", valueArray[row, 2]);
+                    if (String.Empty.Equals(factorCode))
+                    {
+                        continue;
+                    }
+                    bool isNew = false;
+                    Factor factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                    if (factor == null)
+                    {
+                        isNew = true;
+                        factor = new Factor();
+                        factor.FactorCode = factorCode;
+                        factor.FactorType = "保理商";
+                    }
+                    if (factor.FactorType != "保理商")
+                    {
+                        factor.BeginMonitor();
+                    }
+                    int column = 1;
+                    factor.CountryName = String.Format("{0:G}", valueArray[row, column++]);
+                    column++;
+                    factor.CompanyNameEN = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.ShortName = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.Department = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.PostalAddress_1 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.PostalAddress_2 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.PostalCodePost = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.CityPost = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.VisitingAddress_1 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.VisitingAddress_2 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.PostalCodeVisiting = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.CityVisiting = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.Email = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.WebSite = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.Telephone_1 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.Telephone_2 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.Telefax_1 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.Telefax_2 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.WorkingHours = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.GeneralCorrespondence_1 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.GeneralCorrespondence_2 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.Contacts_1 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.Contacts_2 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.Contacts_3 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.Contacts_4 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.Management_1 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.Management_2 = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.Shareholders = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.IFISAvailableOnPrivateForum = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.MembershipStatus = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.MembershipDate = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.DateOfLatestRevision = String.Format("{0:G}", valueArray[row, column++]);
+                    factor.CreateUserName = App.Current.CurUser.Name;
+
+                    string monitorResult = factor.EndMonitor();
+                    if (!String.Empty.Equals(monitorResult))
+                    {
+                        DialogResult dr = MessageBox.Show(monitorResult, "是否更新", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (dr == DialogResult.Yes)
+                        {
+                            factor.LastModifiedDate = DateTime.Now;
+                        }
+                        else
+                        {
+                            factor.Restore();
+                        }
+                    }
+                    if (isNew)
+                    {
+                        factorList.Add(factor);
+                    }
+
+                    result++;
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+                try
+                {
+                    App.Current.DbContext.Factors.InsertAllOnSubmit(factorList);
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    throw e1;
+                }
+            }
+            worker.ReportProgress(100);
+            workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <returns></returns>
+        private object ImportFactorsCreditLine(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            {
+                object[,] valueArray = this.GetValueArray(fileName);
+                int result = 0;
+
+                if (valueArray != null)
+                {
+                    int size = valueArray.GetUpperBound(0);
+                    List<FactorCreditLine> creditLineList = new List<FactorCreditLine>();
+                    for (int row = 2; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+
+                        string factorCode = String.Format("{0:G}", valueArray[row, 1]);
+                        if (String.Empty.Equals(factorCode))
+                        {
+                            continue;
+                        }
+                        Factor factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                        if (factor == null)
+                        {
+                            throw new Exception("合作机构代码错误: " + factorCode);
+                        }
+                        int column = 2;
+                        FactorCreditLine creditLine = new FactorCreditLine();
+                        creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.CreditLine = (double)valueArray[row, column++]; ;
+                        creditLine.PeriodBegin = (DateTime)valueArray[row, column++]; ;
+                        creditLine.PeriodEnd = (DateTime)valueArray[row, column++]; ;
+                        creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.FreezeReason = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Freezer = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++]; ;
+                        creditLine.UnfreezeReason = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Unfreezer = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Factor = factor;
+                        creditLineList.Add(creditLine);
+                    }
+                    try
+                    {
+                        App.Current.DbContext.FactorCreditLines.InsertAllOnSubmit(creditLineList);
+                        App.Current.DbContext.SubmitChanges();
+                    }
+                    catch (Exception e1)
+                    {
+                        foreach (FactorCreditLine creditLine in creditLineList)
+                        {
+                            creditLine.Factor = null;
+                        }
+                        throw e1;
+                    }
+                }
+                worker.ReportProgress(100);
+                workbook.Close(false, fileName, null);
+                this.ReleaseResource();
+                return result;
+            }
         }
 
         /// <summary>
@@ -595,7 +1236,26 @@ namespace CMBC.EasyFactor.Utils
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
-                App.Current.DbContext.SubmitChanges();
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    foreach (InvoiceAssignBatch batch in assignBatches)
+                    {
+                        batch.CDA = null;
+                    }
+                    foreach (InvoiceFinanceBatch batch in financeBatches)
+                    {
+                        batch.CDA = null;
+                    }
+                    foreach (InvoicePaymentBatch batch in paymentBatches)
+                    {
+                        batch.CDA = null;
+                    }
+                    throw e1;
+                }
             }
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
@@ -606,225 +1266,18 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="p"></param>
-        /// <param name="worker"></param>
-        /// <returns></returns>
-        private int ImportCases(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            object[,] valueArray = this.GetValueArray(fileName);
-            int result = 0;
-
-            if (valueArray != null)
-            {
-                int size = valueArray.GetUpperBound(0);
-                for (int row = 2; row <= size; row++)
-                {
-                    if (worker.CancellationPending)
-                    {
-                        e.Cancel = true;
-                        return -1;
-                    }
-
-                    string caseCode = String.Format("{0:G}", valueArray[row, 1]);
-                    if (String.Empty.Equals(caseCode))
-                    {
-                        continue;
-                    }
-
-                    Case curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
-                    if (curCase == null)
-                    {
-                        curCase = new Case();
-                        curCase.CaseCode = caseCode;
-                    }
-                    int column = 2;
-                    curCase.ManagerName = String.Format("{0:G}", valueArray[row, column++]);
-                    string ownerDeptName = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.OwnerDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == ownerDeptName);
-                    curCase.TransactionType = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.ReviewNo = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.OperationType = String.Format("{0:G}", valueArray[row, column++]);
-                    string coDeptName = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.CoDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == coDeptName);
-                    curCase.CaseMark = String.Format("{0:G}", valueArray[row, column++]);
-                    string sellerEDICode = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.SellerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == sellerEDICode);
-                    column++;
-                    column++;
-                    string buyerEDICode = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.BuyerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == buyerEDICode);
-                    column++;
-                    column++;
-                    string EFCode = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.SellerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == EFCode);
-                    string IFCode = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.BuyerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == IFCode);
-                    column++;
-                    curCase.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.CaseAppDate = (DateTime)valueArray[row, column++];
-                    curCase.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.Comment = String.Format("{0:G}", valueArray[row, column++]);
-
-                    if (valueArray.GetUpperBound(1) > 21)
-                    {
-                        CreditCoverNegotiation creditCover = new CreditCoverNegotiation();
-                        string requestType = String.Format("{0:G}", valueArray[row, column++]);
-                        if ("P".Equals(requestType))
-                        {
-                            creditCover.RequestType = "P-预额度";
-                        }
-                        else if ("C".Equals(requestType))
-                        {
-                            creditCover.RequestType = "C-正式额度";
-                        }
-                        creditCover.RequestAmount = (double)valueArray[row, column++];
-                        curCase.NetPaymentTerm = (int)valueArray[row, column++];
-                        creditCover.RequestDate = (DateTime)valueArray[row, column++];
-                        creditCover.ReplyAmount = (double)valueArray[row, column++];
-                        creditCover.ReplyDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                        creditCover.IFPrice = (System.Nullable<double>)valueArray[row, column++];
-                        column++;
-                        creditCover.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                        creditCover.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                        if (creditCover.RequestType != null)
-                        {
-                            creditCover.Case = curCase;
-                        }
-                    }
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
-                }
-                App.Current.DbContext.SubmitChanges();
-            }
-
-            worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
-            this.ReleaseResource();
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        private int ImportClients(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            object[,] valueArray = this.GetValueArray(fileName);
-
-            int result = 0;
-
-            if (valueArray != null)
-            {
-                int size = valueArray.GetUpperBound(0);
-                for (int row = 2; row <= size; row++)
-                {
-                    if (worker.CancellationPending)
-                    {
-                        e.Cancel = true;
-                        return -1;
-                    }
-
-                    string clientEDICode = String.Format("{0:G}", valueArray[row, 2]);
-                    if (String.Empty.Equals(clientEDICode))
-                    {
-                        continue;
-                    }
-                    bool isNew = false;
-                    Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
-                    if (client == null)
-                    {
-                        isNew = true;
-                        client = new Client();
-                        client.ClientEDICode = clientEDICode;
-                    }
-                    int column = 1;
-                    client.ClientCoreNo = String.Format("{0:G}", valueArray[row, column++]);
-                    column++;
-                    client.ClientNameCN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ClientNameEN_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ClientNameEN_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    client.AddressCN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.AddressEN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.CityCN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.CityEN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ProvinceCN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ProvinceEN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.PostCode = String.Format("{0:G}", valueArray[row, column++]);
-                    client.CountryCode = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Representative = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Website = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Contact = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Telephone = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Email = String.Format("{0:G}", valueArray[row, column++]);
-                    client.FaxNumber = String.Format("{0:G}", valueArray[row, column++]);
-                    client.CellPhone = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ClientType = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Industry = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ProductCN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ProductEN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ClientLevel = String.Format("{0:G}", valueArray[row, column++]);
-                    client.IsGroup = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
-                    string groupNo = String.Format("{0:G}", valueArray[row, column++]);
-                    string groupNameCN = String.Format("{0:G}", valueArray[row, column++]);
-                    string groupNameEN = String.Format("{0:G}", valueArray[row, column++]);
-                    if (client.IsGroup.GetValueOrDefault())
-                    {
-                        ClientGroup clientGroup = App.Current.DbContext.ClientGroups.SingleOrDefault(cg => cg.GroupNo == groupNo);
-                        if (clientGroup == null)
-                        {
-                            clientGroup = new ClientGroup();
-                            clientGroup.GroupNo = groupNo;
-                        }
-                        clientGroup.GroupNameCN = groupNameCN;
-                        clientGroup.GroupNameEN = groupNameEN;
-                    }
-
-                    client.RegistrationNumber = String.Format("{0:G}", valueArray[row, column++]);
-                    client.CompanyCode = String.Format("{0:G}", valueArray[row, column++]);
-                    string departmentName = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Department = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName.Equals(departmentName));
-
-                    client.PMName = String.Format("{0:G}", valueArray[row, column++]);
-                    client.RMName = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                    client.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                    if (client.CreateUserName == string.Empty)
-                    {
-                        client.CreateUserName = App.Current.CurUser.Name;
-                    }
-
-                    if (isNew)
-                    {
-                        App.Current.DbContext.Clients.InsertOnSubmit(client);
-                    }
-
-
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
-                }
-                App.Current.DbContext.SubmitChanges();
-            }
-
-            worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
-            this.ReleaseResource();
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="fileName"></param>
         /// <param name="worker"></param>
         /// <returns></returns>
-        private object ImportClientsCreditLine(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportInvoicesByBatch(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = this.GetValueArray(fileName);
+            object[,] valueArray = GetValueArray(fileName);
             int result = 0;
-
+            List<Invoice> invoiceList = new List<Invoice>();
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
+
                 for (int row = 2; row <= size; row++)
                 {
                     if (worker.CancellationPending)
@@ -832,414 +1285,60 @@ namespace CMBC.EasyFactor.Utils
                         e.Cancel = true;
                         return -1;
                     }
-
-                    string clientEDICode = String.Format("{0:G}", valueArray[row, 1]);
-                    if (String.Empty.Equals(clientEDICode))
+                    int column = 12;
+                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                    if (invoiceNo.Equals(string.Empty))
                     {
                         continue;
                     }
-                    Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
-                    if (client == null)
+                    Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                    if (invoice == null)
                     {
-                        throw new Exception("客户保理代码错误: " + clientEDICode);
+                        invoice = new Invoice();
+                        invoice.InvoiceNo = invoiceNo;
+                        Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        if (old != null)
+                        {
+                            throw new Exception("发票号重复: " + old.InvoiceNo);
+                        }
                     }
-                    int column = 3;
-                    ClientCreditLine creditLine = new ClientCreditLine();
-                    creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.CreditLine = (double)valueArray[row, column++]; ;
-                    creditLine.PeriodBegin = (DateTime)valueArray[row, column++]; ;
-                    creditLine.PeriodEnd = (DateTime)valueArray[row, column++]; ;
-                    creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.FreezeReason = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.Freezer = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++]; ;
-                    creditLine.UnfreezeReason = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.Unfreezer = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.Client = client;
+                    invoice.InvoiceType = String.Format("{0:G}", valueArray[row, column++]);
+                    invoice.InvoiceAmount = (double)valueArray[row, column++];
+                    invoice.AssignAmount = (double)valueArray[row, column++];
+                    invoice.InvoiceDate = (DateTime)valueArray[row, column++];
+                    invoice.DueDate = (DateTime)valueArray[row, column++];
+                    invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
+                    invoice.FlawReason = String.Format("{0:G}", valueArray[row, column++]);
+                    invoice.FlawResolveReason = String.Format("{0:G}", valueArray[row, column++]);
+                    invoice.FlawResolveDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.FlawResolveUserName = String.Format("{0:G}", valueArray[row, column++]);
 
+                    column = 35;
+                    invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.FinanceDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.FinanceDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
+
+                    column = 48;
+                    invoice.PaymentAmount = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.RefundAmount = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.RefundDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.Interest = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.InterestDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                    invoiceList.Add(invoice);
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
-                App.Current.DbContext.SubmitChanges();
             }
+            ImportedList = invoiceList;
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
-            this.ReleaseResource();
+            ReleaseResource();
             return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="worker"></param>
-        /// <returns></returns>
-        private int ImportContractAndCDA(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            object[,] valueArray = this.GetValueArray(fileName);
-
-            int result = 0;
-
-            if (valueArray != null)
-            {
-                int size = valueArray.GetUpperBound(0);
-                List<Contract> contractList = new List<Contract>();
-                for (int row = 2; row <= size; row++)
-                {
-                    if (worker.CancellationPending)
-                    {
-                        e.Cancel = true;
-                        return -1;
-                    }
-
-                    int column = 1;
-                    string caseCode = String.Format("{0:G}", valueArray[row, column++]);
-                    if (string.Empty.Equals(caseCode))
-                    {
-                        continue;
-                    }
-                    Case curCase = null;
-                    curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
-                    if (curCase == null)
-                    {
-                        throw new Exception("案件编号错误: " + caseCode);
-                    }
-
-                    string ContractCode = String.Format("{0:G}", valueArray[row, column++]);
-                    Contract contract = null;
-                    if (String.Empty.Equals(ContractCode) && curCase.TransactionType != "进口保理")
-                    {
-                        throw new Exception("保理合同号不能为空");
-                    }
-                    if (!String.Empty.Equals(ContractCode))
-                    {
-                        contract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == ContractCode);
-                        if (contract == null)
-                        {
-                            contract = contractList.SingleOrDefault(c => c.ContractCode == ContractCode);
-                            if (contract == null)
-                            {
-                                contract = new Contract();
-                                contract.ContractCode = ContractCode;
-                                contract.Client = curCase.SellerClient;
-                                contractList.Add(contract);
-                            }
-                        }
-                        contract.ContractType = String.Format("{0:G}", valueArray[row, column++]);
-                        contract.ContractValueDate = (DateTime)valueArray[row, column++];
-                        contract.ContractDueDate = (DateTime)valueArray[row, column++];
-                        contract.ContractStatus = String.Format("{0:G}", valueArray[row, column++]);
-                        contract.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                    }
-
-                    column = 8;
-                    string cdaCode = String.Format("{0:G}", valueArray[row, column++]);
-                    CDA cda = null;
-                    if (String.Empty.Equals(cdaCode))
-                    {
-                        throw new Exception("CDA编号不能为空");
-
-                    }
-                    else
-                    {
-                        cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
-                        if (cda == null)
-                        {
-                            cda = new CDA();
-                            cda.CDACode = cdaCode;
-                        }
-                        cda.Case = curCase;
-                    }
-                    column++;//卖方
-                    column++;//买方
-                    column++;//保理商
-                    column++;//业务类别
-                    column++;//发票币别
-                    cda.IsRecoarse = "Y".Equals(valueArray[row, column++]);
-                    cda.IsNotice = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.AssignType = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.CreditCoverCurr = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.CreditCover = (System.Nullable<double>)valueArray[row, column++];
-                    cda.CreditCoverPeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++];
-                    cda.CreditCoverPeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++];
-                    cda.PUGProportion = (System.Nullable<double>)valueArray[row, column++];
-                    cda.PUGPeriod = (System.Nullable<int>)valueArray[row, column++];
-                    cda.ReassignGracePeriod = (System.Nullable<int>)valueArray[row, column++];
-                    cda.FinanceLineCurr = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.FinanceLine = (System.Nullable<double>)valueArray[row, column++];
-                    cda.FinanceLinePeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++];
-                    cda.FinanceLinePeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++];
-                    column++;//最高保理预付款额度
-                    cda.FinanceProportion = (System.Nullable<double>)valueArray[row, column++];
-                    cda.FinanceGracePeriod = (System.Nullable<int>)valueArray[row, column++];
-                    cda.PaymentTerms = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.OrderNumber = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.Deductibles = (System.Nullable<double>)valueArray[row, column++];
-                    cda.LossThreshold = (System.Nullable<double>)valueArray[row, column++];
-                    cda.Price = (System.Nullable<double>)valueArray[row, column++];
-                    cda.IFPrice = (System.Nullable<double>)valueArray[row, column++];
-                    cda.EFPrice = (System.Nullable<double>)valueArray[row, column++];
-                    cda.HandFeeCurr = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.HandFee = (System.Nullable<double>)valueArray[row, column++];
-                    cda.CommissionType = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.CommissionTypeComment = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.CDASignDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    cda.CDAStatus = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.NoticeMethod = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.NoticePerson = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.Email = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.Fax = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.Comment = String.Format("{0:G}", valueArray[row, column++]);
-
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
-                }
-                App.Current.DbContext.SubmitChanges();
-            }
-
-            worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
-            this.ReleaseResource();
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="worker"></param>
-        /// <returns></returns>
-        private int ImportDepartments(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            object[,] valueArray = this.GetValueArray(fileName);
-            int result = 0;
-
-            if (valueArray != null)
-            {
-                int size = valueArray.GetUpperBound(0);
-                for (int row = 2; row <= size; row++)
-                {
-                    if (worker.CancellationPending)
-                    {
-                        e.Cancel = true;
-                        return -1;
-                    }
-
-                    string departmentCode = String.Format("{0:G}", valueArray[row, 1]);
-                    if (String.Empty.Equals(departmentCode))
-                    {
-                        continue;
-                    }
-                    bool isNew = false;
-                    Department dept = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentCode == departmentCode);
-                    if (dept == null)
-                    {
-                        isNew = true;
-                        dept = new Department();
-                        dept.DepartmentCode = departmentCode;
-                    }
-
-                    int column = 2;
-                    dept.DepartmentName = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Location = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Domain = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.AddressCN = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.AddressEN = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.PostCode = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Manager = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Contact_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Email_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Phone_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Fax_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Contact_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Email_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Phone_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Fax_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    if (isNew)
-                    {
-                        App.Current.DbContext.Departments.InsertOnSubmit(dept);
-                    }
-
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
-                }
-                App.Current.DbContext.SubmitChanges();
-            }
-            worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
-            this.ReleaseResource();
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="worker"></param>
-        /// <returns></returns>
-        private int ImportFactors(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            object[,] valueArray = this.GetValueArray(fileName);
-            int result = 0;
-
-            if (valueArray != null)
-            {
-                int size = valueArray.GetUpperBound(0);
-                for (int row = 2; row <= size; row++)
-                {
-                    if (worker.CancellationPending)
-                    {
-                        e.Cancel = true;
-                        return -1;
-                    }
-
-                    string factorCode = String.Format("{0:G}", valueArray[row, 2]);
-                    if (String.Empty.Equals(factorCode))
-                    {
-                        continue;
-                    }
-                    bool isNew = false;
-                    Factor factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                    if (factor == null)
-                    {
-                        isNew = true;
-                        factor = new Factor();
-                        factor.FactorCode = factorCode;
-                        factor.FactorType = "保理商";
-                    }
-                    if (factor.FactorType != "保理商")
-                    {
-                        factor.BeginMonitor();
-                    }
-                    int column = 1;
-                    factor.CountryName = String.Format("{0:G}", valueArray[row, column++]);
-                    column++;
-                    factor.CompanyNameEN = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.ShortName = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Department = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.PostalAddress_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.PostalAddress_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.PostalCodePost = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.CityPost = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.VisitingAddress_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.VisitingAddress_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.PostalCodeVisiting = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.CityVisiting = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Email = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.WebSite = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Telephone_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Telephone_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Telefax_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Telefax_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.WorkingHours = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.GeneralCorrespondence_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.GeneralCorrespondence_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Contacts_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Contacts_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Contacts_3 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Contacts_4 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Management_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Management_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Shareholders = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.IFISAvailableOnPrivateForum = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.MembershipStatus = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.MembershipDate = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.DateOfLatestRevision = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.CreateUserName = App.Current.CurUser.Name;
-
-                    string monitorResult = factor.EndMonitor();
-                    if (!String.Empty.Equals(monitorResult))
-                    {
-                        DialogResult dr = MessageBox.Show(monitorResult, "是否更新", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                        if (dr == DialogResult.Yes)
-                        {
-                            factor.LastModifiedDate = DateTime.Now;
-                        }
-                        else
-                        {
-                            factor.Restore();
-                        }
-                    }
-                    if (isNew)
-                    {
-                        App.Current.DbContext.Factors.InsertOnSubmit(factor);
-                    }
-
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
-                }
-                App.Current.DbContext.SubmitChanges();
-            }
-            worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
-            this.ReleaseResource();
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="worker"></param>
-        /// <returns></returns>
-        private object ImportFactorsCreditLine(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            {
-                object[,] valueArray = this.GetValueArray(fileName);
-                int result = 0;
-
-                if (valueArray != null)
-                {
-                    int size = valueArray.GetUpperBound(0);
-                    for (int row = 2; row <= size; row++)
-                    {
-                        if (worker.CancellationPending)
-                        {
-                            e.Cancel = true;
-                            return -1;
-                        }
-
-                        string factorCode = String.Format("{0:G}", valueArray[row, 1]);
-                        if (String.Empty.Equals(factorCode))
-                        {
-                            continue;
-                        }
-                        Factor factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                        if (factor == null)
-                        {
-                            throw new Exception("合作机构代码错误: " + factorCode);
-                        }
-                        int column = 2;
-                        FactorCreditLine creditLine = new FactorCreditLine();
-                        creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.CreditLine = (double)valueArray[row, column++]; ;
-                        creditLine.PeriodBegin = (DateTime)valueArray[row, column++]; ;
-                        creditLine.PeriodEnd = (DateTime)valueArray[row, column++]; ;
-                        creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.FreezeReason = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.Freezer = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++]; ;
-                        creditLine.UnfreezeReason = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.Unfreezer = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.Factor = factor;
-                    }
-                    App.Current.DbContext.SubmitChanges();
-                }
-                worker.ReportProgress(100);
-                workbook.Close(false, fileName, null);
-                this.ReleaseResource();
-                return result;
-            }
         }
 
         /// <summary>
@@ -1255,6 +1354,7 @@ namespace CMBC.EasyFactor.Utils
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
+                List<User> userList = new List<User>();
                 for (int row = 2; row <= size; row++)
                 {
                     if (worker.CancellationPending)
@@ -1288,13 +1388,21 @@ namespace CMBC.EasyFactor.Utils
 
                     if (isNew)
                     {
-                        App.Current.DbContext.Users.InsertOnSubmit(user);
+                        userList.Add(user);
                     }
 
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
-                App.Current.DbContext.SubmitChanges();
+                try
+                {
+                    App.Current.DbContext.Users.InsertAllOnSubmit(userList);
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    throw e1;
+                }
             }
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
@@ -1307,6 +1415,7 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         private void ReleaseResource()
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = this.cultureInfo;
             if (this.datasheet != null)
             {
                 Marshal.ReleaseComObject(datasheet);
