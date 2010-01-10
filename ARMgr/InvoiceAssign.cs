@@ -399,6 +399,13 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.InvoiceAssignBatch = null;
                 }
                 this.invoiceBindingSource.DataSource = invoiceList;
+                foreach (Invoice invoice in invoiceList)
+                {
+                    if (invoice.Commission.HasValue == false)
+                    {
+                        CaculateCommisssion(invoice);
+                    }
+                }
                 this.StatBatch();
             }
         }
