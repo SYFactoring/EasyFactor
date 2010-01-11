@@ -120,7 +120,18 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void Check(object sender, EventArgs e)
         {
-
+            if (this.dgvCDAs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            foreach (DataGridViewRow row in this.dgvCDAs.SelectedRows)
+            {
+                CDA cda = (CDA)this.bs.List[row.Index];
+                cda.CheckStatus = "已复核";
+                cda.CheckUserName = App.Current.CurUser.Name;
+                cda.CheckDate = DateTime.Now.Date;
+            }
+            App.Current.DbContext.SubmitChanges();
         }
 
         /// <summary>
@@ -244,7 +255,18 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void Reject(object sender, EventArgs e)
         {
-
+            if (this.dgvCDAs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            foreach (DataGridViewRow row in this.dgvCDAs.SelectedRows)
+            {
+                CDA cda = (CDA)this.bs.List[row.Index];
+                cda.CheckStatus = "复核未通过";
+                cda.CheckUserName = App.Current.CurUser.Name;
+                cda.CheckDate = DateTime.Now.Date;
+            }
+            App.Current.DbContext.SubmitChanges();
         }
 
         /// <summary>
