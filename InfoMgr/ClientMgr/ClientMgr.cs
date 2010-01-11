@@ -54,12 +54,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             : this(false)
         {
             this.opClientMgrType = clientMgrType;
-            if (clientMgrType == OpClientMgrType.NEED_CONTRACT)
-            {
-                this.cbIsContractSigned.Checked = true;
-                this.cbIsContractSigned.Enabled = false;
-            }
-            else if (clientMgrType == OpClientMgrType.DOMINATE_CLIENT)
+            //if (clientMgrType == OpClientMgrType.NEED_CONTRACT)
+            //{
+            //    this.cbIsContractSigned.Checked = true;
+            //    this.cbIsContractSigned.Enabled = false;
+            //}
+            //else 
+            if (clientMgrType == OpClientMgrType.DOMINATE_CLIENT)
             {
                 this.cbCaseType.Text = "国内保理";
                 var queryResult = App.Current.DbContext.Clients.Where(c =>

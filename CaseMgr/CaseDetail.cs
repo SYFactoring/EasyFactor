@@ -842,15 +842,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private void SelectCaseSeller(object sender, EventArgs e)
         {
             Case curCase = (Case)this.caseBindingSource.DataSource;
-            ClientMgr clientMgr;
-            if (!"进口保理".Equals(this.cbCaseTransactionType.Text))
-            {
-                clientMgr = new ClientMgr(ClientMgr.OpClientMgrType.NEED_CONTRACT);
-            }
-            else
-            {
-                clientMgr = new ClientMgr(false);
-            }
+            ClientMgr clientMgr = new ClientMgr(false);
             QueryForm queryUI = new QueryForm(clientMgr, "选择卖方");
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
