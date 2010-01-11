@@ -232,8 +232,8 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
-            this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
             this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
+            this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
             this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
@@ -291,6 +291,7 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelQuery.StyleMouseOver.Class = "";
             this.ribbonPanelQuery.TabIndex = 7;
+            this.ribbonPanelQuery.Visible = false;
             // 
             // ribbonBarClientQuery
             // 
@@ -447,7 +448,6 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelInfoMgr.StyleMouseOver.Class = "";
             this.ribbonPanelInfoMgr.TabIndex = 2;
-            this.ribbonPanelInfoMgr.Visible = false;
             // 
             // ribbonBarUserMgr
             // 
@@ -464,7 +464,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarUserMgr.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarUserMgr.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnUserMgr});
-            this.ribbonBarUserMgr.Location = new System.Drawing.Point(481, 0);
+            this.ribbonBarUserMgr.Location = new System.Drawing.Point(463, 0);
             this.ribbonBarUserMgr.Name = "ribbonBarUserMgr";
             this.ribbonBarUserMgr.Size = new System.Drawing.Size(74, 93);
             this.ribbonBarUserMgr.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -501,7 +501,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarDepartment.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarDepartment.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnDepartMgr});
-            this.ribbonBarDepartment.Location = new System.Drawing.Point(409, 0);
+            this.ribbonBarDepartment.Location = new System.Drawing.Point(391, 0);
             this.ribbonBarDepartment.Name = "ribbonBarDepartment";
             this.ribbonBarDepartment.Size = new System.Drawing.Size(72, 93);
             this.ribbonBarDepartment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -542,7 +542,7 @@ namespace CMBC.EasyFactor
             this.btnFactorImport});
             this.ribbonBarFactor.Location = new System.Drawing.Point(140, 0);
             this.ribbonBarFactor.Name = "ribbonBarFactor";
-            this.ribbonBarFactor.Size = new System.Drawing.Size(269, 93);
+            this.ribbonBarFactor.Size = new System.Drawing.Size(251, 93);
             this.ribbonBarFactor.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarFactor.TabIndex = 1;
             this.ribbonBarFactor.Text = "合作机构";
@@ -573,7 +573,7 @@ namespace CMBC.EasyFactor
             // 
             this.btnFactorImport.Name = "btnFactorImport";
             this.btnFactorImport.SubItemsExpandWidth = 14;
-            this.btnFactorImport.Text = "导入合作机构信息";
+            this.btnFactorImport.Text = "导入保理商信息";
             this.btnFactorImport.Click += new System.EventHandler(this.ImportFactors);
             // 
             // ribbonBarClient
@@ -1178,6 +1178,7 @@ namespace CMBC.EasyFactor
             // 
             // itemInfoMgr
             // 
+            this.itemInfoMgr.Checked = true;
             this.itemInfoMgr.Name = "itemInfoMgr";
             this.itemInfoMgr.Panel = this.ribbonPanelInfoMgr;
             this.itemInfoMgr.Text = "信息管理";
@@ -1190,7 +1191,6 @@ namespace CMBC.EasyFactor
             // 
             // itemQuery
             // 
-            this.itemQuery.Checked = true;
             this.itemQuery.Name = "itemQuery";
             this.itemQuery.Panel = this.ribbonPanelQuery;
             this.itemQuery.Text = "查询";

@@ -92,9 +92,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Properties
 
-        #region Methods (9)
+        #region Methods (10)
 
-        // Private Methods (9) 
+        // Private Methods (10) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -207,6 +207,27 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        private void dgvCDAs_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewColumn column = this.dgvCDAs.Columns[e.ColumnIndex];
+            if (column == colIsRecoarse)
+            {
+                Object originalData = e.Value;
+                if (originalData != null)
+                {
+                    bool result = (bool)originalData;
+                    if (result)
+                    {
+                        e.Value = "Y";
+                    }
+                    else
+                    {
+                        e.Value = "N";
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Create a new CDA
         /// </summary>
@@ -227,7 +248,7 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             string buyerName = tbBuyerName.Text;
             string sellerName = tbSellerName.Text;
-            string factorName = lblFactorName.Text;
+            string factorName = tbFactorName.Text;
             string contractCode = tbContractCode.Text;
             string status = this.cbCheckStatus.Text;
 
@@ -239,12 +260,15 @@ namespace CMBC.EasyFactor.CaseMgr
                 where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN_1.Contains(sellerName) || seller.ClientNameEN_2.Contains(sellerName)
                 let buyer = cda.Case.BuyerClient
                 where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN_1.Contains(buyerName) || buyer.ClientNameEN_2.Contains(buyerName)
-                where cda.Case.SellerFactor.CompanyNameCN.Contains(factorName) || cda.Case.SellerFactor.CompanyNameEN.Contains(factorName) || cda.Case.BuyerFactor.CompanyNameCN.Contains(factorName) || cda.Case.BuyerFactor.CompanyNameEN.Contains(factorName)
-                && (status != string.Empty ? cda.CheckStatus == status : true)
+                let sellerfactor = cda.Case.SellerFactor
+                where sellerfactor.CompanyNameCN.Contains(factorName) || sellerfactor.CompanyNameEN.Contains(factorName)
+                let buyerfactor = cda.Case.BuyerFactor
+                where buyerfactor.CompanyNameCN.Contains(factorName) || buyerfactor.CompanyNameEN.Contains(factorName)
+                where
+                 (status != string.Empty ? cda.CheckStatus == status : true)
                 select cda;
 
             this.bs.DataSource = queryResult;
-            this.dgvCDAs.DataSource = bs;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 

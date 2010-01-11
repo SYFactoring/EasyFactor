@@ -351,6 +351,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactors.AllowUserToAddRows = false;
             this.dgvFactors.AllowUserToDeleteRows = false;
             this.dgvFactors.AllowUserToOrderColumns = true;
+            this.dgvFactors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -416,6 +417,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // CompanyNameENColumn
             // 
             this.CompanyNameENColumn.DataPropertyName = "CompanyNameEN";
+            this.CompanyNameENColumn.FillWeight = 300F;
             this.CompanyNameENColumn.HeaderText = "公司名称(英)";
             this.CompanyNameENColumn.Name = "CompanyNameENColumn";
             this.CompanyNameENColumn.ReadOnly = true;
@@ -423,6 +425,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // CountryNameColumn
             // 
             this.CountryNameColumn.DataPropertyName = "CountryName";
+            this.CountryNameColumn.FillWeight = 120F;
             this.CountryNameColumn.HeaderText = "国家";
             this.CountryNameColumn.Name = "CountryNameColumn";
             this.CountryNameColumn.ReadOnly = true;

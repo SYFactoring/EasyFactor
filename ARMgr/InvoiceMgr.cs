@@ -421,20 +421,20 @@ namespace CMBC.EasyFactor.ARMgr
                                 && (assignOverDueDays == 0 ? true : (invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount && invoice.DueDate <= assignOverDueDate))
                                 && (FinanceOverDueDays == 0 ? true : (invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() && invoice.FinanceDueDate <= FinanceOverDueDate))
                               select invoice;
-            if (queryResult.Count() > 2000)
-            {
-                DialogResult dr = MessageBox.Show("查询结果为" + queryResult.Count() + "，全部显示可能速度较慢，选择YES可以继续显示，选择NO可以重新查询。", "提醒", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (dr == DialogResult.Yes)
-                {
-                    this.bs.DataSource = queryResult;
-                    this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-                    return;
-                }
-                else
-                {
-                    return;
-                }
-            }
+            //if (queryResult.Count() > 2000)
+            //{
+            //    DialogResult dr = MessageBox.Show("查询结果为" + queryResult.Count() + "，全部显示可能速度较慢，选择YES可以继续显示，选择NO可以重新查询。", "提醒", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            //    if (dr == DialogResult.Yes)
+            //    {
+            //        this.bs.DataSource = queryResult;
+            //        this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            //        return;
+            //    }
+            //    else
+            //    {
+            //        return;
+            //    }
+            //}
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }

@@ -244,16 +244,15 @@
             // 
             // DepartmentCodeColumn
             // 
-            this.DepartmentCodeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DepartmentCodeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.DepartmentCodeColumn.DataPropertyName = "DepartmentCode";
-            this.DepartmentCodeColumn.FillWeight = 77.31959F;
             this.DepartmentCodeColumn.HeaderText = "部门代码";
             this.DepartmentCodeColumn.Name = "DepartmentCodeColumn";
             this.DepartmentCodeColumn.ReadOnly = true;
             // 
             // DepartmentNameColumn
             // 
-            this.DepartmentNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DepartmentNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.DepartmentNameColumn.DataPropertyName = "DepartmentName";
             this.DepartmentNameColumn.HeaderText = "部门名称";
             this.DepartmentNameColumn.Name = "DepartmentNameColumn";
@@ -261,33 +260,32 @@
             // 
             // LocationColumn
             // 
+            this.LocationColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.LocationColumn.DataPropertyName = "Location";
-            this.LocationColumn.FillWeight = 77.31959F;
             this.LocationColumn.HeaderText = "城市";
             this.LocationColumn.Name = "LocationColumn";
             this.LocationColumn.ReadOnly = true;
             // 
             // DomainColumn
             // 
-            this.DomainColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DomainColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.DomainColumn.DataPropertyName = "Domain";
-            this.DomainColumn.FillWeight = 417.5258F;
             this.DomainColumn.HeaderText = "事业部";
             this.DomainColumn.Name = "DomainColumn";
             this.DomainColumn.ReadOnly = true;
             // 
             // ManagerColumn
             // 
+            this.ManagerColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ManagerColumn.DataPropertyName = "Manager";
-            this.ManagerColumn.FillWeight = 77.31959F;
             this.ManagerColumn.HeaderText = "负责人";
             this.ManagerColumn.Name = "ManagerColumn";
             this.ManagerColumn.ReadOnly = true;
             // 
             // Contact_1Column
             // 
+            this.Contact_1Column.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Contact_1Column.DataPropertyName = "Contact_1";
-            this.Contact_1Column.FillWeight = 77.31959F;
             this.Contact_1Column.HeaderText = "联系人";
             this.Contact_1Column.Name = "Contact_1Column";
             this.Contact_1Column.ReadOnly = true;

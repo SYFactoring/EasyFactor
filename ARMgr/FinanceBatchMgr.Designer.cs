@@ -65,7 +65,9 @@
             this.colFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCostRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
@@ -89,7 +91,7 @@
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(569, 54);
+            this.panelQuery.Size = new System.Drawing.Size(904, 54);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -275,6 +277,7 @@
             this.dgvBatches.AllowUserToAddRows = false;
             this.dgvBatches.AllowUserToDeleteRows = false;
             this.dgvBatches.AllowUserToOrderColumns = true;
+            this.dgvBatches.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -298,7 +301,9 @@
             this.colFactor,
             this.colCostRate,
             this.colCreateUserName,
-            this.colComment,
+            this.colCheckStatus,
+            this.colCheckUserName,
+            this.colCheckDate,
             this.colBatchCount});
             this.dgvBatches.ContextMenuStrip = this.cmuBatchMgr;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -315,7 +320,7 @@
             this.dgvBatches.Name = "dgvBatches";
             this.dgvBatches.ReadOnly = true;
             this.dgvBatches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBatches.Size = new System.Drawing.Size(569, 383);
+            this.dgvBatches.Size = new System.Drawing.Size(904, 383);
             this.dgvBatches.TabIndex = 1;
             this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBatches_CellDoubleClick);
             // 
@@ -383,7 +388,6 @@
             this.colFinanceBatchNo.HeaderText = "融资批号";
             this.colFinanceBatchNo.Name = "colFinanceBatchNo";
             this.colFinanceBatchNo.ReadOnly = true;
-            this.colFinanceBatchNo.Width = 80;
             // 
             // colFinanceType
             // 
@@ -391,15 +395,13 @@
             this.colFinanceType.HeaderText = "融资类型";
             this.colFinanceType.Name = "colFinanceType";
             this.colFinanceType.ReadOnly = true;
-            this.colFinanceType.Width = 80;
             // 
             // colBatchCurrency
             // 
             this.colBatchCurrency.DataPropertyName = "BatchCurrency";
-            this.colBatchCurrency.HeaderText = "批次币种";
+            this.colBatchCurrency.HeaderText = "币种";
             this.colBatchCurrency.Name = "colBatchCurrency";
             this.colBatchCurrency.ReadOnly = true;
-            this.colBatchCurrency.Width = 80;
             // 
             // colFinanceAmount
             // 
@@ -409,7 +411,6 @@
             this.colFinanceAmount.HeaderText = "融资金额";
             this.colFinanceAmount.Name = "colFinanceAmount";
             this.colFinanceAmount.ReadOnly = true;
-            this.colFinanceAmount.Width = 80;
             // 
             // colFinancePeriodBegin
             // 
@@ -420,7 +421,6 @@
             this.colFinancePeriodBegin.Name = "colFinancePeriodBegin";
             this.colFinancePeriodBegin.ReadOnly = true;
             this.colFinancePeriodBegin.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colFinancePeriodBegin.Width = 98;
             // 
             // colFinancePeriodEnd
             // 
@@ -431,7 +431,6 @@
             this.colFinancePeriodEnd.Name = "colFinancePeriodEnd";
             this.colFinancePeriodEnd.ReadOnly = true;
             this.colFinancePeriodEnd.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colFinancePeriodEnd.Width = 98;
             // 
             // colFinnaceRate
             // 
@@ -442,7 +441,6 @@
             this.colFinnaceRate.HeaderText = "融资利率";
             this.colFinnaceRate.Name = "colFinnaceRate";
             this.colFinnaceRate.ReadOnly = true;
-            this.colFinnaceRate.Width = 80;
             // 
             // colInterestType
             // 
@@ -450,7 +448,6 @@
             this.colInterestType.HeaderText = "计息方式";
             this.colInterestType.Name = "colInterestType";
             this.colInterestType.ReadOnly = true;
-            this.colInterestType.Width = 80;
             // 
             // colFactor
             // 
@@ -458,7 +455,6 @@
             this.colFactor.HeaderText = "代付行";
             this.colFactor.Name = "colFactor";
             this.colFactor.ReadOnly = true;
-            this.colFactor.Width = 68;
             // 
             // colCostRate
             // 
@@ -468,7 +464,6 @@
             this.colCostRate.HeaderText = "代付费率";
             this.colCostRate.Name = "colCostRate";
             this.colCostRate.ReadOnly = true;
-            this.colCostRate.Width = 80;
             // 
             // colCreateUserName
             // 
@@ -476,15 +471,27 @@
             this.colCreateUserName.HeaderText = "经办人";
             this.colCreateUserName.Name = "colCreateUserName";
             this.colCreateUserName.ReadOnly = true;
-            this.colCreateUserName.Width = 68;
             // 
-            // colComment
+            // colCheckStatus
             // 
-            this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "备注";
-            this.colComment.Name = "colComment";
-            this.colComment.ReadOnly = true;
-            this.colComment.Width = 56;
+            this.colCheckStatus.DataPropertyName = "CheckStatus";
+            this.colCheckStatus.HeaderText = "复核结果";
+            this.colCheckStatus.Name = "colCheckStatus";
+            this.colCheckStatus.ReadOnly = true;
+            // 
+            // colCheckUserName
+            // 
+            this.colCheckUserName.DataPropertyName = "CheckUserName";
+            this.colCheckUserName.HeaderText = "复核人";
+            this.colCheckUserName.Name = "colCheckUserName";
+            this.colCheckUserName.ReadOnly = true;
+            // 
+            // colCheckDate
+            // 
+            this.colCheckDate.DataPropertyName = "CheckDate";
+            this.colCheckDate.HeaderText = "复核日";
+            this.colCheckDate.Name = "colCheckDate";
+            this.colCheckDate.ReadOnly = true;
             // 
             // colBatchCount
             // 
@@ -501,7 +508,7 @@
             this.Controls.Add(this.panelQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "FinanceBatchMgr";
-            this.Size = new System.Drawing.Size(569, 437);
+            this.Size = new System.Drawing.Size(904, 437);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).EndInit();
@@ -543,7 +550,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactor;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCostRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
     }
 }

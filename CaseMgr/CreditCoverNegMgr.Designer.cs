@@ -81,6 +81,9 @@
             this.tbSellerFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblSellerFactorCode = new DevComponents.DotNetBar.LabelX();
             this.dgvCreditCoverNegs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuCreditCoverMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCreditCoverSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.colNegoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -98,11 +101,7 @@
             this.colIFPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOwnerDept = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colManagerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuCreditCoverMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCreditCoverSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.panelCreditCoverQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -526,7 +525,6 @@
             this.colIFPrice,
             this.colOwnerDept,
             this.colCreateUserName,
-            this.colComment,
             this.colManagerName});
             this.dgvCreditCoverNegs.ContextMenuStrip = this.cmuCreditCoverMgr;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -547,6 +545,26 @@
             this.dgvCreditCoverNegs.Size = new System.Drawing.Size(753, 270);
             this.dgvCreditCoverNegs.TabIndex = 1;
             this.dgvCreditCoverNegs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
+            // 
+            // cmuCreditCoverMgr
+            // 
+            this.cmuCreditCoverMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCreditCoverSelect,
+            this.menuItemCreditCoverDetail});
+            this.cmuCreditCoverMgr.Name = "cmuContractMgr";
+            this.cmuCreditCoverMgr.Size = new System.Drawing.Size(147, 48);
+            // 
+            // menuItemCreditCoverSelect
+            // 
+            this.menuItemCreditCoverSelect.Name = "menuItemCreditCoverSelect";
+            this.menuItemCreditCoverSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverSelect.Text = "选定额度申请";
+            // 
+            // menuItemCreditCoverDetail
+            // 
+            this.menuItemCreditCoverDetail.Name = "menuItemCreditCoverDetail";
+            this.menuItemCreditCoverDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverDetail.Text = "详细信息";
             // 
             // colNegoID
             // 
@@ -685,40 +703,12 @@
             this.colCreateUserName.ReadOnly = true;
             this.colCreateUserName.Width = 50;
             // 
-            // colComment
-            // 
-            this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "备注";
-            this.colComment.Name = "colComment";
-            this.colComment.ReadOnly = true;
-            this.colComment.Width = 80;
-            // 
             // colManagerName
             // 
             this.colManagerName.DataPropertyName = "ManagerName";
             this.colManagerName.HeaderText = "营销/维护经理";
             this.colManagerName.Name = "colManagerName";
             this.colManagerName.ReadOnly = true;
-            // 
-            // cmuCreditCoverMgr
-            // 
-            this.cmuCreditCoverMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemCreditCoverSelect,
-            this.menuItemCreditCoverDetail});
-            this.cmuCreditCoverMgr.Name = "cmuContractMgr";
-            this.cmuCreditCoverMgr.Size = new System.Drawing.Size(153, 70);
-            // 
-            // menuItemCreditCoverSelect
-            // 
-            this.menuItemCreditCoverSelect.Name = "menuItemCreditCoverSelect";
-            this.menuItemCreditCoverSelect.Size = new System.Drawing.Size(152, 22);
-            this.menuItemCreditCoverSelect.Text = "选定额度申请";
-            // 
-            // menuItemCreditCoverDetail
-            // 
-            this.menuItemCreditCoverDetail.Name = "menuItemCreditCoverDetail";
-            this.menuItemCreditCoverDetail.Size = new System.Drawing.Size(152, 22);
-            this.menuItemCreditCoverDetail.Text = "详细信息";
             // 
             // CreditCoverNegMgr
             // 
@@ -775,7 +765,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
         private System.Windows.Forms.DataGridViewTextBoxColumn colManagerName;
 
 
