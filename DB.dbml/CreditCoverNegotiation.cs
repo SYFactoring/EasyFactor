@@ -51,7 +51,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.Case.BuyerClient.CountryNameCN;
+                return this.Case.BuyerClient.CountryCode;
             }
         }
 

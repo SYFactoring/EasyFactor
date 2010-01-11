@@ -177,7 +177,7 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             string buyerName = tbBuyerName.Text;
             string sellerName = tbSellerName.Text;
-            string factorName = tbFactorName.Text;
+            string factorName = lblFactorName.Text;
             string contractCode = tbContractCode.Text;
 
             var queryResult =

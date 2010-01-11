@@ -125,7 +125,6 @@ namespace CMBC.EasyFactor
             this.btnQueryClientDominate = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarQuery = new DevComponents.DotNetBar.RibbonBar();
             this.btnContractQuery = new DevComponents.DotNetBar.ButtonItem();
-            this.btnCaseQuery = new DevComponents.DotNetBar.ButtonItem();
             this.btnCreditCoverNegQuery = new DevComponents.DotNetBar.ButtonItem();
             this.btnCDAQuery = new DevComponents.DotNetBar.ButtonItem();
             this.btnInvoiceQuery = new DevComponents.DotNetBar.ButtonItem();
@@ -309,7 +308,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarClientQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnClientQuery,
             this.itemContainerClientQuery});
-            this.ribbonBarClientQuery.Location = new System.Drawing.Point(475, 0);
+            this.ribbonBarClientQuery.Location = new System.Drawing.Point(331, 0);
             this.ribbonBarClientQuery.Name = "ribbonBarClientQuery";
             this.ribbonBarClientQuery.Size = new System.Drawing.Size(130, 93);
             this.ribbonBarClientQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -377,13 +376,12 @@ namespace CMBC.EasyFactor
             this.ribbonBarQuery.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnContractQuery,
-            this.btnCaseQuery,
             this.btnCreditCoverNegQuery,
             this.btnCDAQuery,
             this.btnInvoiceQuery});
             this.ribbonBarQuery.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarQuery.Name = "ribbonBarQuery";
-            this.ribbonBarQuery.Size = new System.Drawing.Size(472, 93);
+            this.ribbonBarQuery.Size = new System.Drawing.Size(328, 93);
             this.ribbonBarQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarQuery.TabIndex = 0;
             this.ribbonBarQuery.Text = "查询";
@@ -402,13 +400,6 @@ namespace CMBC.EasyFactor
             this.btnContractQuery.SubItemsExpandWidth = 14;
             this.btnContractQuery.Text = "保理合同查询";
             this.btnContractQuery.Click += new System.EventHandler(this.QueryContract);
-            // 
-            // btnCaseQuery
-            // 
-            this.btnCaseQuery.Name = "btnCaseQuery";
-            this.btnCaseQuery.SubItemsExpandWidth = 14;
-            this.btnCaseQuery.Text = "案件查询";
-            this.btnCaseQuery.Click += new System.EventHandler(this.QueryCase);
             // 
             // btnCreditCoverNegQuery
             // 
@@ -1517,7 +1508,6 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnCDANew;
         private DevComponents.DotNetBar.RibbonBar ribbonBarQuery;
         private DevComponents.DotNetBar.ButtonItem btnContractQuery;
-        private DevComponents.DotNetBar.ButtonItem btnCaseQuery;
         private DevComponents.DotNetBar.ButtonItem btnCreditCoverNegQuery;
         private DevComponents.DotNetBar.ButtonItem btnCDAQuery;
         private DevComponents.DotNetBar.ButtonItem btnInvoiceQuery;
