@@ -563,6 +563,14 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
+                for (int i = 0; i < invoiceList.Count; i++)
+                {
+                    if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+                    {
+                        ((Invoice)invoiceList[i]).InvoiceFinanceBatch = null;
+                    }
+                }
+                batch.CDA = null;
                 isSaveOK = false;
                 MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }

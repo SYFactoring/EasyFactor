@@ -478,6 +478,12 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
+                foreach (Invoice invoice in invoiceList)
+                {
+                    invoice.InvoiceAssignBatch = null;
+                }
+                batch.CDA = null;
+                batch.AssignBatchNo = null;
                 isSaveOK = false;
                 MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -557,7 +563,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     if (date > invoice.InvoiceDate.AddDays(paymentTermDays))
                     {
-                        MessageBox.Show("转让日不能晚于发票日+付款期限: "+invoice.InvoiceNo,"提醒",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                        MessageBox.Show("转让日不能晚于发票日+付款期限: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
                 }

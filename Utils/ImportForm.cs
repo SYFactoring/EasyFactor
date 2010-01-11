@@ -294,87 +294,88 @@ namespace CMBC.EasyFactor.Utils
                 int size = valueArray.GetUpperBound(0);
                 List<Case> caseList = new List<Case>();
                 List<CreditCoverNegotiation> creditCoverList = new List<CreditCoverNegotiation>();
-                for (int row = 2; row <= size; row++)
-                {
-                    if (worker.CancellationPending)
-                    {
-                        e.Cancel = true;
-                        return -1;
-                    }
-
-                    string caseCode = String.Format("{0:G}", valueArray[row, 1]);
-                    if (String.Empty.Equals(caseCode))
-                    {
-                        continue;
-                    }
-
-                    Case curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
-                    if (curCase == null)
-                    {
-                        curCase = new Case();
-                        curCase.CaseCode = caseCode;
-                        caseList.Add(curCase);
-                    }
-                    int column = 2;
-                    curCase.ManagerName = String.Format("{0:G}", valueArray[row, column++]);
-                    string ownerDeptName = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.OwnerDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == ownerDeptName);
-                    curCase.TransactionType = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.ReviewNo = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.OperationType = String.Format("{0:G}", valueArray[row, column++]);
-                    string coDeptName = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.CoDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == coDeptName);
-                    curCase.CaseMark = String.Format("{0:G}", valueArray[row, column++]);
-                    string sellerEDICode = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.SellerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == sellerEDICode);
-                    column++;
-                    column++;
-                    string buyerEDICode = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.BuyerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == buyerEDICode);
-                    column++;
-                    column++;
-                    string EFCode = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.SellerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == EFCode);
-                    string IFCode = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.BuyerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == IFCode);
-                    column++;
-                    curCase.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.CaseAppDate = (DateTime)valueArray[row, column++];
-                    curCase.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                    curCase.Comment = String.Format("{0:G}", valueArray[row, column++]);
-
-                    if (valueArray.GetUpperBound(1) > 21)
-                    {
-                        CreditCoverNegotiation creditCover = new CreditCoverNegotiation();
-                        string requestType = String.Format("{0:G}", valueArray[row, column++]);
-                        if ("P".Equals(requestType))
-                        {
-                            creditCover.RequestType = "P-预额度";
-                        }
-                        else if ("C".Equals(requestType))
-                        {
-                            creditCover.RequestType = "C-正式额度";
-                        }
-                        creditCover.RequestAmount = (double)valueArray[row, column++];
-                        curCase.NetPaymentTerm = (int)valueArray[row, column++];
-                        creditCover.RequestDate = (DateTime)valueArray[row, column++];
-                        creditCover.ReplyAmount = (double)valueArray[row, column++];
-                        creditCover.ReplyDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                        creditCover.IFPrice = (System.Nullable<double>)valueArray[row, column++];
-                        column++;
-                        creditCover.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                        creditCover.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                        if (creditCover.RequestType != null)
-                        {
-                            creditCover.Case = curCase;
-                            creditCoverList.Add(creditCover);
-                        }
-                    }
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
-                }
                 try
                 {
+                    for (int row = 2; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+
+                        string caseCode = String.Format("{0:G}", valueArray[row, 1]);
+                        if (String.Empty.Equals(caseCode))
+                        {
+                            continue;
+                        }
+
+                        Case curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+                        if (curCase == null)
+                        {
+                            curCase = new Case();
+                            curCase.CaseCode = caseCode;
+                            caseList.Add(curCase);
+                        }
+                        int column = 2;
+                        curCase.ManagerName = String.Format("{0:G}", valueArray[row, column++]);
+                        string ownerDeptName = String.Format("{0:G}", valueArray[row, column++]);
+                        curCase.OwnerDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == ownerDeptName);
+                        curCase.TransactionType = String.Format("{0:G}", valueArray[row, column++]);
+                        curCase.ReviewNo = String.Format("{0:G}", valueArray[row, column++]);
+                        curCase.OperationType = String.Format("{0:G}", valueArray[row, column++]);
+                        string coDeptName = String.Format("{0:G}", valueArray[row, column++]);
+                        curCase.CoDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == coDeptName);
+                        curCase.CaseMark = String.Format("{0:G}", valueArray[row, column++]);
+                        string sellerEDICode = String.Format("{0:G}", valueArray[row, column++]);
+                        curCase.SellerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == sellerEDICode);
+                        column++;
+                        column++;
+                        string buyerEDICode = String.Format("{0:G}", valueArray[row, column++]);
+                        curCase.BuyerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == buyerEDICode);
+                        column++;
+                        column++;
+                        string EFCode = String.Format("{0:G}", valueArray[row, column++]);
+                        curCase.SellerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == EFCode);
+                        string IFCode = String.Format("{0:G}", valueArray[row, column++]);
+                        curCase.BuyerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == IFCode);
+                        column++;
+                        curCase.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                        curCase.CaseAppDate = (DateTime)valueArray[row, column++];
+                        curCase.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                        curCase.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                        if (valueArray.GetUpperBound(1) > 21)
+                        {
+                            CreditCoverNegotiation creditCover = new CreditCoverNegotiation();
+                            string requestType = String.Format("{0:G}", valueArray[row, column++]);
+                            if ("P".Equals(requestType))
+                            {
+                                creditCover.RequestType = "P-预额度";
+                            }
+                            else if ("C".Equals(requestType))
+                            {
+                                creditCover.RequestType = "C-正式额度";
+                            }
+                            creditCover.RequestAmount = (double)valueArray[row, column++];
+                            curCase.NetPaymentTerm = (int)valueArray[row, column++];
+                            creditCover.RequestDate = (DateTime)valueArray[row, column++];
+                            creditCover.ReplyAmount = (double)valueArray[row, column++];
+                            creditCover.ReplyDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                            creditCover.IFPrice = (System.Nullable<double>)valueArray[row, column++];
+                            column++;
+                            creditCover.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                            creditCover.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                            if (creditCover.RequestType != null)
+                            {
+                                creditCover.Case = curCase;
+                                creditCoverList.Add(creditCover);
+                            }
+                        }
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    }
+
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e1)
@@ -524,49 +525,49 @@ namespace CMBC.EasyFactor.Utils
             {
                 int size = valueArray.GetUpperBound(0);
                 List<ClientCreditLine> creditLineList = new List<ClientCreditLine>();
-                for (int row = 2; row <= size; row++)
-                {
-                    if (worker.CancellationPending)
-                    {
-                        e.Cancel = true;
-                        return -1;
-                    }
-
-                    string clientEDICode = String.Format("{0:G}", valueArray[row, 1]);
-                    if (String.Empty.Equals(clientEDICode))
-                    {
-                        continue;
-                    }
-                    Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
-                    if (client == null)
-                    {
-                        throw new Exception("客户保理代码错误: " + clientEDICode);
-                    }
-                    int column = 3;
-                    ClientCreditLine creditLine = new ClientCreditLine();
-                    creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.CreditLine = (double)valueArray[row, column++]; ;
-                    creditLine.PeriodBegin = (DateTime)valueArray[row, column++]; ;
-                    creditLine.PeriodEnd = (DateTime)valueArray[row, column++]; ;
-                    creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.FreezeReason = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.Freezer = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++]; ;
-                    creditLine.UnfreezeReason = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.Unfreezer = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                    creditLine.Client = client;
-                    creditLineList.Add(creditLine);
-
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
-                }
                 try
                 {
+                    for (int row = 2; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+
+                        string clientEDICode = String.Format("{0:G}", valueArray[row, 1]);
+                        if (String.Empty.Equals(clientEDICode))
+                        {
+                            continue;
+                        }
+                        Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                        if (client == null)
+                        {
+                            throw new Exception("客户保理代码错误: " + clientEDICode);
+                        }
+                        int column = 3;
+                        ClientCreditLine creditLine = new ClientCreditLine();
+                        creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.CreditLine = (double)valueArray[row, column++]; ;
+                        creditLine.PeriodBegin = (DateTime)valueArray[row, column++]; ;
+                        creditLine.PeriodEnd = (DateTime)valueArray[row, column++]; ;
+                        creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.FreezeReason = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Freezer = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++]; ;
+                        creditLine.UnfreezeReason = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Unfreezer = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Client = client;
+                        creditLineList.Add(creditLine);
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    }
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e1)
@@ -601,121 +602,122 @@ namespace CMBC.EasyFactor.Utils
                 int size = valueArray.GetUpperBound(0);
                 List<Contract> contractList = new List<Contract>();
                 List<CDA> cdaList = new List<CDA>();
-                for (int row = 2; row <= size; row++)
-                {
-                    if (worker.CancellationPending)
-                    {
-                        e.Cancel = true;
-                        return -1;
-                    }
-
-                    int column = 1;
-                    string caseCode = String.Format("{0:G}", valueArray[row, column++]);
-                    if (string.Empty.Equals(caseCode))
-                    {
-                        continue;
-                    }
-                    Case curCase = null;
-                    curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
-                    if (curCase == null)
-                    {
-                        throw new Exception("案件编号错误: " + caseCode);
-                    }
-
-                    string ContractCode = String.Format("{0:G}", valueArray[row, column++]);
-                    Contract contract = null;
-                    if (String.Empty.Equals(ContractCode) && curCase.TransactionType != "进口保理")
-                    {
-                        throw new Exception("保理合同号不能为空");
-                    }
-                    if (!String.Empty.Equals(ContractCode))
-                    {
-                        contract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == ContractCode);
-                        if (contract == null)
-                        {
-                            contract = contractList.SingleOrDefault(c => c.ContractCode == ContractCode);
-                            if (contract == null)
-                            {
-                                contract = new Contract();
-                                contract.ContractCode = ContractCode;
-                                contract.Client = curCase.SellerClient;
-                                contractList.Add(contract);
-                            }
-                        }
-                        contract.ContractType = String.Format("{0:G}", valueArray[row, column++]);
-                        contract.ContractValueDate = (DateTime)valueArray[row, column++];
-                        contract.ContractDueDate = (DateTime)valueArray[row, column++];
-                        contract.ContractStatus = String.Format("{0:G}", valueArray[row, column++]);
-                        contract.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                    }
-
-                    column = 8;
-                    string cdaCode = String.Format("{0:G}", valueArray[row, column++]);
-                    CDA cda = null;
-                    if (String.Empty.Equals(cdaCode))
-                    {
-                        throw new Exception("CDA编号不能为空");
-
-                    }
-                    else
-                    {
-                        cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
-                        if (cda == null)
-                        {
-                            cda = new CDA();
-                            cda.CDACode = cdaCode;
-                            cda.CheckStatus = "已复核";
-                            cdaList.Add(cda);
-                        }
-                        cda.Case = curCase;
-                    }
-                    column++;//卖方
-                    column++;//买方
-                    column++;//保理商
-                    column++;//业务类别
-                    column++;//发票币别
-                    cda.IsRecoarse = "Y".Equals(valueArray[row, column++]);
-                    cda.IsNotice = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.AssignType = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.CreditCoverCurr = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.CreditCover = (System.Nullable<double>)valueArray[row, column++];
-                    cda.CreditCoverPeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++];
-                    cda.CreditCoverPeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++];
-                    cda.PUGProportion = (System.Nullable<double>)valueArray[row, column++];
-                    cda.PUGPeriod = (System.Nullable<int>)valueArray[row, column++];
-                    cda.ReassignGracePeriod = (System.Nullable<int>)valueArray[row, column++];
-                    cda.FinanceLineCurr = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.FinanceLine = (System.Nullable<double>)valueArray[row, column++];
-                    cda.FinanceLinePeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++];
-                    cda.FinanceLinePeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++];
-                    column++;//最高保理预付款额度
-                    cda.FinanceProportion = (System.Nullable<double>)valueArray[row, column++];
-                    cda.FinanceGracePeriod = (System.Nullable<int>)valueArray[row, column++];
-                    cda.PaymentTerms = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.OrderNumber = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.Deductibles = (System.Nullable<double>)valueArray[row, column++];
-                    cda.LossThreshold = (System.Nullable<double>)valueArray[row, column++];
-                    cda.Price = (System.Nullable<double>)valueArray[row, column++];
-                    cda.IFPrice = (System.Nullable<double>)valueArray[row, column++];
-                    cda.EFPrice = (System.Nullable<double>)valueArray[row, column++];
-                    cda.HandFeeCurr = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.HandFee = (System.Nullable<double>)valueArray[row, column++];
-                    cda.CommissionType = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.CommissionTypeComment = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.CDASignDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    cda.CDAStatus = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.NoticeMethod = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.NoticePerson = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.Email = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.Fax = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                    cda.Comment = String.Format("{0:G}", valueArray[row, column++]);
-
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
-                }
                 try
                 {
+                    for (int row = 2; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+
+                        int column = 1;
+                        string caseCode = String.Format("{0:G}", valueArray[row, column++]);
+                        if (string.Empty.Equals(caseCode))
+                        {
+                            continue;
+                        }
+                        Case curCase = null;
+                        curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+                        if (curCase == null)
+                        {
+                            throw new Exception("案件编号错误: " + caseCode);
+                        }
+
+                        string ContractCode = String.Format("{0:G}", valueArray[row, column++]);
+                        Contract contract = null;
+                        if (String.Empty.Equals(ContractCode) && curCase.TransactionType != "进口保理")
+                        {
+                            throw new Exception("保理合同号不能为空");
+                        }
+                        if (!String.Empty.Equals(ContractCode))
+                        {
+                            contract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == ContractCode);
+                            if (contract == null)
+                            {
+                                contract = contractList.SingleOrDefault(c => c.ContractCode == ContractCode);
+                                if (contract == null)
+                                {
+                                    contract = new Contract();
+                                    contract.ContractCode = ContractCode;
+                                    contract.Client = curCase.SellerClient;
+                                    contractList.Add(contract);
+                                }
+                            }
+                            contract.ContractType = String.Format("{0:G}", valueArray[row, column++]);
+                            contract.ContractValueDate = (DateTime)valueArray[row, column++];
+                            contract.ContractDueDate = (DateTime)valueArray[row, column++];
+                            contract.ContractStatus = String.Format("{0:G}", valueArray[row, column++]);
+                            contract.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                        }
+
+                        column = 8;
+                        string cdaCode = String.Format("{0:G}", valueArray[row, column++]);
+                        CDA cda = null;
+                        if (String.Empty.Equals(cdaCode))
+                        {
+                            throw new Exception("CDA编号不能为空");
+
+                        }
+                        else
+                        {
+                            cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
+                            if (cda == null)
+                            {
+                                cda = new CDA();
+                                cda.CDACode = cdaCode;
+                                cda.CheckStatus = "已复核";
+                                cdaList.Add(cda);
+                            }
+                            cda.Case = curCase;
+                        }
+                        column++;//卖方
+                        column++;//买方
+                        column++;//保理商
+                        column++;//业务类别
+                        column++;//发票币别
+                        cda.IsRecoarse = "Y".Equals(valueArray[row, column++]);
+                        cda.IsNotice = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.AssignType = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.CreditCoverCurr = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.CreditCover = (System.Nullable<double>)valueArray[row, column++];
+                        cda.CreditCoverPeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++];
+                        cda.CreditCoverPeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++];
+                        cda.PUGProportion = (System.Nullable<double>)valueArray[row, column++];
+                        cda.PUGPeriod = (System.Nullable<int>)valueArray[row, column++];
+                        cda.ReassignGracePeriod = (System.Nullable<int>)valueArray[row, column++];
+                        cda.FinanceLineCurr = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.FinanceLine = (System.Nullable<double>)valueArray[row, column++];
+                        cda.FinanceLinePeriodBegin = (System.Nullable<DateTime>)valueArray[row, column++];
+                        cda.FinanceLinePeriodEnd = (System.Nullable<DateTime>)valueArray[row, column++];
+                        column++;//最高保理预付款额度
+                        cda.FinanceProportion = (System.Nullable<double>)valueArray[row, column++];
+                        cda.FinanceGracePeriod = (System.Nullable<int>)valueArray[row, column++];
+                        cda.PaymentTerms = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.OrderNumber = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.Deductibles = (System.Nullable<double>)valueArray[row, column++];
+                        cda.LossThreshold = (System.Nullable<double>)valueArray[row, column++];
+                        cda.Price = (System.Nullable<double>)valueArray[row, column++];
+                        cda.IFPrice = (System.Nullable<double>)valueArray[row, column++];
+                        cda.EFPrice = (System.Nullable<double>)valueArray[row, column++];
+                        cda.HandFeeCurr = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.HandFee = (System.Nullable<double>)valueArray[row, column++];
+                        cda.CommissionType = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.CommissionTypeComment = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.CDASignDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        cda.CDAStatus = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.NoticeMethod = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.NoticePerson = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.Email = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.Fax = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    }
+
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e1)
@@ -821,91 +823,92 @@ namespace CMBC.EasyFactor.Utils
             {
                 int size = valueArray.GetUpperBound(0);
                 List<Factor> factorList = new List<Factor>();
-                for (int row = 2; row <= size; row++)
-                {
-                    if (worker.CancellationPending)
-                    {
-                        e.Cancel = true;
-                        return -1;
-                    }
-
-                    string factorCode = String.Format("{0:G}", valueArray[row, 2]);
-                    if (String.Empty.Equals(factorCode))
-                    {
-                        continue;
-                    }
-                    bool isNew = false;
-                    Factor factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                    if (factor == null)
-                    {
-                        isNew = true;
-                        factor = new Factor();
-                        factor.FactorCode = factorCode;
-                        factor.FactorType = "保理商";
-                    }
-                    if (factor.FactorType != "保理商")
-                    {
-                        factor.BeginMonitor();
-                    }
-                    int column = 1;
-                    factor.CountryName = String.Format("{0:G}", valueArray[row, column++]);
-                    column++;
-                    factor.CompanyNameEN = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.ShortName = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Department = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.PostalAddress_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.PostalAddress_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.PostalCodePost = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.CityPost = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.VisitingAddress_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.VisitingAddress_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.PostalCodeVisiting = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.CityVisiting = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Email = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.WebSite = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Telephone_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Telephone_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Telefax_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Telefax_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.WorkingHours = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.GeneralCorrespondence_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.GeneralCorrespondence_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Contacts_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Contacts_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Contacts_3 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Contacts_4 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Management_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Management_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.Shareholders = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.IFISAvailableOnPrivateForum = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.MembershipStatus = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.MembershipDate = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.DateOfLatestRevision = String.Format("{0:G}", valueArray[row, column++]);
-                    factor.CreateUserName = App.Current.CurUser.Name;
-
-                    string monitorResult = factor.EndMonitor();
-                    if (!String.Empty.Equals(monitorResult))
-                    {
-                        DialogResult dr = MessageBox.Show(monitorResult, "是否更新", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                        if (dr == DialogResult.Yes)
-                        {
-                            factor.LastModifiedDate = DateTime.Now;
-                        }
-                        else
-                        {
-                            factor.Restore();
-                        }
-                    }
-                    if (isNew)
-                    {
-                        factorList.Add(factor);
-                    }
-
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
-                }
                 try
                 {
+                    for (int row = 2; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+
+                        string factorCode = String.Format("{0:G}", valueArray[row, 2]);
+                        if (String.Empty.Equals(factorCode))
+                        {
+                            continue;
+                        }
+                        bool isNew = false;
+                        Factor factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                        if (factor == null)
+                        {
+                            isNew = true;
+                            factor = new Factor();
+                            factor.FactorCode = factorCode;
+                            factor.FactorType = "保理商";
+                        }
+                        if (factor.FactorType != "保理商")
+                        {
+                            factor.BeginMonitor();
+                        }
+                        int column = 1;
+                        factor.CountryName = String.Format("{0:G}", valueArray[row, column++]);
+                        column++;
+                        factor.CompanyNameEN = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.ShortName = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Department = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.PostalAddress_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.PostalAddress_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.PostalCodePost = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.CityPost = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.VisitingAddress_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.VisitingAddress_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.PostalCodeVisiting = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.CityVisiting = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Email = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.WebSite = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Telephone_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Telephone_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Telefax_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Telefax_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.WorkingHours = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.GeneralCorrespondence_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.GeneralCorrespondence_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Contacts_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Contacts_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Contacts_3 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Contacts_4 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Management_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Management_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Shareholders = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.IFISAvailableOnPrivateForum = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.MembershipStatus = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.MembershipDate = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.DateOfLatestRevision = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.CreateUserName = App.Current.CurUser.Name;
+
+                        string monitorResult = factor.EndMonitor();
+                        if (!String.Empty.Equals(monitorResult))
+                        {
+                            DialogResult dr = MessageBox.Show(monitorResult, "是否更新", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                            if (dr == DialogResult.Yes)
+                            {
+                                factor.LastModifiedDate = DateTime.Now;
+                            }
+                            else
+                            {
+                                factor.Restore();
+                            }
+                        }
+                        if (isNew)
+                        {
+                            factorList.Add(factor);
+                        }
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    }
+
                     App.Current.DbContext.Factors.InsertAllOnSubmit(factorList);
                     App.Current.DbContext.SubmitChanges();
                 }
@@ -936,45 +939,45 @@ namespace CMBC.EasyFactor.Utils
                 {
                     int size = valueArray.GetUpperBound(0);
                     List<FactorCreditLine> creditLineList = new List<FactorCreditLine>();
-                    for (int row = 2; row <= size; row++)
-                    {
-                        if (worker.CancellationPending)
-                        {
-                            e.Cancel = true;
-                            return -1;
-                        }
-
-                        string factorCode = String.Format("{0:G}", valueArray[row, 1]);
-                        if (String.Empty.Equals(factorCode))
-                        {
-                            continue;
-                        }
-                        Factor factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                        if (factor == null)
-                        {
-                            throw new Exception("合作机构代码错误: " + factorCode);
-                        }
-                        int column = 2;
-                        FactorCreditLine creditLine = new FactorCreditLine();
-                        creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.CreditLine = (double)valueArray[row, column++]; ;
-                        creditLine.PeriodBegin = (DateTime)valueArray[row, column++]; ;
-                        creditLine.PeriodEnd = (DateTime)valueArray[row, column++]; ;
-                        creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.FreezeReason = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.Freezer = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++]; ;
-                        creditLine.UnfreezeReason = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.Unfreezer = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.Factor = factor;
-                        creditLineList.Add(creditLine);
-                    }
                     try
                     {
+                        for (int row = 2; row <= size; row++)
+                        {
+                            if (worker.CancellationPending)
+                            {
+                                e.Cancel = true;
+                                return -1;
+                            }
+
+                            string factorCode = String.Format("{0:G}", valueArray[row, 1]);
+                            if (String.Empty.Equals(factorCode))
+                            {
+                                continue;
+                            }
+                            Factor factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                            if (factor == null)
+                            {
+                                throw new Exception("合作机构代码错误: " + factorCode);
+                            }
+                            int column = 2;
+                            FactorCreditLine creditLine = new FactorCreditLine();
+                            creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
+                            creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                            creditLine.CreditLine = (double)valueArray[row, column++]; ;
+                            creditLine.PeriodBegin = (DateTime)valueArray[row, column++]; ;
+                            creditLine.PeriodEnd = (DateTime)valueArray[row, column++]; ;
+                            creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
+                            creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
+                            creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
+                            creditLine.FreezeReason = String.Format("{0:G}", valueArray[row, column++]);
+                            creditLine.Freezer = String.Format("{0:G}", valueArray[row, column++]);
+                            creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++]; ;
+                            creditLine.UnfreezeReason = String.Format("{0:G}", valueArray[row, column++]);
+                            creditLine.Unfreezer = String.Format("{0:G}", valueArray[row, column++]);
+                            creditLine.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                            creditLine.Factor = factor;
+                            creditLineList.Add(creditLine);
+                        }
                         App.Current.DbContext.FactorCreditLines.InsertAllOnSubmit(creditLineList);
                         App.Current.DbContext.SubmitChanges();
                     }
@@ -1014,232 +1017,233 @@ namespace CMBC.EasyFactor.Utils
                 List<InvoiceFinanceBatch> financeBatches = new List<InvoiceFinanceBatch>();
                 List<InvoicePaymentBatch> paymentBatches = new List<InvoicePaymentBatch>();
                 List<Invoice> invoiceList = new List<Invoice>();
-                for (int row = 2; row <= size; row++)
+                try
                 {
-                    if (worker.CancellationPending)
+                    for (int row = 2; row <= size; row++)
                     {
-                        e.Cancel = true;
-                        return -1;
-                    }
-
-                    string cdaCode = String.Format("{0:G}", valueArray[row, 1]);
-                    if (string.Empty.Equals(cdaCode))
-                    {
-                        continue;
-                    }
-                    if (cda == null || cda.CDACode != cdaCode)
-                    {
-                        cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
-                        if (cda == null)
+                        if (worker.CancellationPending)
                         {
-                            throw new Exception("额度通知书编号错误: " + cdaCode);
+                            e.Cancel = true;
+                            return -1;
                         }
-                    }
 
-                    int column = 0;
-
-                    string assignBatchNo = String.Format("{0:G}", valueArray[row, 2]);
-                    InvoiceAssignBatch assignBatch = null;
-                    if (assignBatchNo != string.Empty)
-                    {
-                        assignBatch = assignBatches.SingleOrDefault(i => i.AssignBatchNo == assignBatchNo);
-                        if (assignBatch == null)
+                        string cdaCode = String.Format("{0:G}", valueArray[row, 1]);
+                        if (string.Empty.Equals(cdaCode))
                         {
-                            assignBatch = App.Current.DbContext.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == assignBatchNo);
-                            if (assignBatch == null)
+                            continue;
+                        }
+                        if (cda == null || cda.CDACode != cdaCode)
+                        {
+                            cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
+                            if (cda == null)
                             {
-                                throw new Exception("转让批号错误: " + assignBatchNo);
+                                throw new Exception("额度通知书编号错误: " + cdaCode);
                             }
                         }
-                    }
-                    else
-                    {
-                        DateTime assignDate = (DateTime)valueArray[row, 4];
-                        assignBatch = assignBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.AssignDate == assignDate);
-                        if (assignBatch == null)
-                        {
-                            column = 3;
-                            assignBatch = new InvoiceAssignBatch();
-                            assignBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                            assignBatch.AssignDate = (DateTime)valueArray[row, column++];
-                            assignBatch.CheckStatus = "已复核";
-                            assignBatch.IsCreateMsg = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
-                            assignBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                            assignBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                            assignBatch.AssignBatchNo = InvoiceAssign.GenerateAssignBatchNo(assignBatch.AssignDate, assignBatches);
-                            assignBatch.CDA = cda;
-                            assignBatches.Add(assignBatch);
-                        }
-                    }
 
-                    column = 8;
-                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
-                    if (invoiceNo == string.Empty)
-                    {
-                        throw new Exception("发票号不能为空");
-                    }
-                    Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                    if (invoice == null)
-                    {
-                        invoice = new Invoice();
-                        invoice.InvoiceNo = invoiceNo;
-                        Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                        if (old == null)
+                        int column = 0;
+
+                        string assignBatchNo = String.Format("{0:G}", valueArray[row, 2]);
+                        InvoiceAssignBatch assignBatch = null;
+                        if (assignBatchNo != string.Empty)
                         {
-                            invoiceList.Add(invoice);
+                            assignBatch = assignBatches.SingleOrDefault(i => i.AssignBatchNo == assignBatchNo);
+                            if (assignBatch == null)
+                            {
+                                assignBatch = App.Current.DbContext.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == assignBatchNo);
+                                if (assignBatch == null)
+                                {
+                                    throw new Exception("转让批号错误: " + assignBatchNo);
+                                }
+                            }
                         }
                         else
                         {
-                            throw new Exception("发票号重复: " + old.InvoiceNo);
+                            DateTime assignDate = (DateTime)valueArray[row, 4];
+                            assignBatch = assignBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.AssignDate == assignDate);
+                            if (assignBatch == null)
+                            {
+                                column = 3;
+                                assignBatch = new InvoiceAssignBatch();
+                                assignBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                                assignBatch.AssignDate = (DateTime)valueArray[row, column++];
+                                assignBatch.CheckStatus = "已复核";
+                                assignBatch.IsCreateMsg = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
+                                assignBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                                assignBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                                assignBatch.AssignBatchNo = InvoiceAssign.GenerateAssignBatchNo(assignBatch.AssignDate, assignBatches);
+                                assignBatch.CDA = cda;
+                                assignBatches.Add(assignBatch);
+                            }
                         }
-                    }
-                    invoice.InvoiceType = String.Format("{0:G}", valueArray[row, column++]);
-                    invoice.InvoiceAmount = (double)valueArray[row, column++];
-                    invoice.AssignAmount = (double)valueArray[row, column++];
-                    invoice.InvoiceDate = (DateTime)valueArray[row, column++];
-                    invoice.DueDate = (DateTime)valueArray[row, column++];
-                    invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
-                    invoice.FlawReason = String.Format("{0:G}", valueArray[row, column++]);
-                    invoice.FlawResolveReason = String.Format("{0:G}", valueArray[row, column++]);
-                    invoice.FlawResolveDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.FlawResolveUserName = String.Format("{0:G}", valueArray[row, column++]);
-                    invoice.InvoiceAssignBatch = assignBatch;
 
-                    string financeBatchNo = String.Format("{0:G}", valueArray[row, 19]);
-                    InvoiceFinanceBatch financeBatch = null;
-                    if (financeBatchNo != string.Empty)
-                    {
-                        financeBatch = financeBatches.SingleOrDefault(i => i.FinanceBatchNo == financeBatchNo);
-                        if (financeBatch == null)
+                        column = 8;
+                        string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                        if (invoiceNo == string.Empty)
                         {
-                            financeBatch = App.Current.DbContext.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == financeBatchNo);
+                            throw new Exception("发票号不能为空");
+                        }
+                        Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        if (invoice == null)
+                        {
+                            invoice = new Invoice();
+                            invoice.InvoiceNo = invoiceNo;
+                            Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                            if (old == null)
+                            {
+                                invoiceList.Add(invoice);
+                            }
+                            else
+                            {
+                                throw new Exception("发票号重复: " + old.InvoiceNo);
+                            }
+                        }
+                        invoice.InvoiceType = String.Format("{0:G}", valueArray[row, column++]);
+                        invoice.InvoiceAmount = (double)valueArray[row, column++];
+                        invoice.AssignAmount = (double)valueArray[row, column++];
+                        invoice.InvoiceDate = (DateTime)valueArray[row, column++];
+                        invoice.DueDate = (DateTime)valueArray[row, column++];
+                        invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
+                        invoice.FlawReason = String.Format("{0:G}", valueArray[row, column++]);
+                        invoice.FlawResolveReason = String.Format("{0:G}", valueArray[row, column++]);
+                        invoice.FlawResolveDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        invoice.FlawResolveUserName = String.Format("{0:G}", valueArray[row, column++]);
+                        invoice.InvoiceAssignBatch = assignBatch;
+
+                        string financeBatchNo = String.Format("{0:G}", valueArray[row, 19]);
+                        InvoiceFinanceBatch financeBatch = null;
+                        if (financeBatchNo != string.Empty)
+                        {
+                            financeBatch = financeBatches.SingleOrDefault(i => i.FinanceBatchNo == financeBatchNo);
                             if (financeBatch == null)
                             {
-                                throw new Exception("融资批号错误: " + financeBatchNo);
+                                financeBatch = App.Current.DbContext.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == financeBatchNo);
+                                if (financeBatch == null)
+                                {
+                                    throw new Exception("融资批号错误: " + financeBatchNo);
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        DateTime? financeDate = (System.Nullable<DateTime>)valueArray[row, 27];
-                        if (financeDate != null)
+                        else
                         {
-                            financeBatch = financeBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.FinancePeriodBegin == financeDate);
-                            if (financeBatch == null)
+                            DateTime? financeDate = (System.Nullable<DateTime>)valueArray[row, 27];
+                            if (financeDate != null)
                             {
-                                financeBatch = new InvoiceFinanceBatch();
-                                column = 20;
-                                financeBatch.FinanceType = String.Format("{0:G}", valueArray[row, column++]);
-                                string factorCode = String.Format("{0:G}", valueArray[row, column++]);
-                                financeBatch.Factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                                column++;
-                                financeBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                                financeBatch.FinanceRate = (System.Nullable<double>)valueArray[row, column++];
-                                financeBatch.CostRate = (System.Nullable<double>)valueArray[row, column++];
-                                financeBatch.InterestType = String.Format("{0:G}", valueArray[row, column++]);
-                                financeBatch.FinancePeriodBegin = (DateTime)valueArray[row, column++];
-                                financeBatch.FinnacePeriodEnd = (DateTime)valueArray[row, column++];
-                                financeBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                                financeBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                                financeBatch.CheckStatus = "已复核";
-                                financeBatch.FinanceBatchNo = InvoiceFinance.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin, financeBatches);
-                                financeBatch.CDA = cda;
-                                financeBatches.Add(financeBatch);
+                                financeBatch = financeBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.FinancePeriodBegin == financeDate);
+                                if (financeBatch == null)
+                                {
+                                    financeBatch = new InvoiceFinanceBatch();
+                                    column = 20;
+                                    financeBatch.FinanceType = String.Format("{0:G}", valueArray[row, column++]);
+                                    string factorCode = String.Format("{0:G}", valueArray[row, column++]);
+                                    financeBatch.Factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                                    column++;
+                                    financeBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                                    financeBatch.FinanceRate = (System.Nullable<double>)valueArray[row, column++];
+                                    financeBatch.CostRate = (System.Nullable<double>)valueArray[row, column++];
+                                    financeBatch.InterestType = String.Format("{0:G}", valueArray[row, column++]);
+                                    financeBatch.FinancePeriodBegin = (DateTime)valueArray[row, column++];
+                                    financeBatch.FinnacePeriodEnd = (DateTime)valueArray[row, column++];
+                                    financeBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                                    financeBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                                    financeBatch.CheckStatus = "已复核";
+                                    financeBatch.FinanceBatchNo = InvoiceFinance.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin, financeBatches);
+                                    financeBatch.CDA = cda;
+                                    financeBatches.Add(financeBatch);
+                                }
                             }
                         }
-                    }
 
-                    column = 31;
-                    invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.FinanceDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.FinanceDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        column = 31;
+                        invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
+                        invoice.FinanceDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        invoice.FinanceDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
 
-                    if (invoice.FinanceAmount.HasValue)
-                    {
-                        financeBatch.FinanceAmount += invoice.FinanceAmount.Value;
-                        invoice.InvoiceFinanceBatch = financeBatch;
-                    }
-
-                    string paymentBatchNo = String.Format("{0:G}", valueArray[row, 34]);
-                    InvoicePaymentBatch paymentBatch = null;
-                    if (paymentBatchNo != string.Empty)
-                    {
-                        paymentBatch = paymentBatches.SingleOrDefault(i => i.PaymentBatchNo == paymentBatchNo);
-                        if (paymentBatch == null)
+                        if (invoice.FinanceAmount.HasValue)
                         {
-                            paymentBatch = App.Current.DbContext.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == paymentBatchNo);
+                            financeBatch.FinanceAmount += invoice.FinanceAmount.Value;
+                            invoice.InvoiceFinanceBatch = financeBatch;
+                        }
+
+                        string paymentBatchNo = String.Format("{0:G}", valueArray[row, 34]);
+                        InvoicePaymentBatch paymentBatch = null;
+                        if (paymentBatchNo != string.Empty)
+                        {
+                            paymentBatch = paymentBatches.SingleOrDefault(i => i.PaymentBatchNo == paymentBatchNo);
                             if (paymentBatch == null)
                             {
-                                throw new Exception("付款批号错误: " + paymentBatchNo);
+                                paymentBatch = App.Current.DbContext.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == paymentBatchNo);
+                                if (paymentBatch == null)
+                                {
+                                    throw new Exception("付款批号错误: " + paymentBatchNo);
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        DateTime? paymentDate = (System.Nullable<DateTime>)valueArray[row, 36];
-                        if (paymentDate != null)
+                        else
                         {
-                            paymentBatch = paymentBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.PaymentDate == paymentDate);
-                            if (paymentBatch == null)
+                            DateTime? paymentDate = (System.Nullable<DateTime>)valueArray[row, 36];
+                            if (paymentDate != null)
                             {
-                                paymentBatch = new InvoicePaymentBatch();
-                                column = 35;
-                                paymentBatch.PaymentType = String.Format("{0:G}", valueArray[row, column++]);
-                                paymentBatch.PaymentDate = (DateTime)valueArray[row, column++];
-                                paymentBatch.IsCreateMsg = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
-                                paymentBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                                paymentBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                                paymentBatch.PaymentBatchNo = InvoicePayment.GenerateBatchNo(paymentBatch.PaymentDate, paymentBatches);
-                                paymentBatch.CheckStatus = "已复核";
-                                paymentBatch.CDA = cda;
-                                paymentBatches.Add(paymentBatch);
+                                paymentBatch = paymentBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.PaymentDate == paymentDate);
+                                if (paymentBatch == null)
+                                {
+                                    paymentBatch = new InvoicePaymentBatch();
+                                    column = 35;
+                                    paymentBatch.PaymentType = String.Format("{0:G}", valueArray[row, column++]);
+                                    paymentBatch.PaymentDate = (DateTime)valueArray[row, column++];
+                                    paymentBatch.IsCreateMsg = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
+                                    paymentBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                                    paymentBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                                    paymentBatch.PaymentBatchNo = InvoicePayment.GenerateBatchNo(paymentBatch.PaymentDate, paymentBatches);
+                                    paymentBatch.CheckStatus = "已复核";
+                                    paymentBatch.CDA = cda;
+                                    paymentBatches.Add(paymentBatch);
+                                }
                             }
                         }
-                    }
 
-                    column = 40;
-                    invoice.PaymentAmount = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.RefundAmount = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.RefundDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    if (invoice.PaymentAmount.HasValue)
-                    {
-                        invoice.InvoicePaymentBatch = paymentBatch;
-                    }
-
-                    invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    if (!invoice.Commission.HasValue)
-                    {
-                        switch (cda.CommissionType)
+                        column = 40;
+                        invoice.PaymentAmount = (System.Nullable<double>)valueArray[row, column++];
+                        invoice.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        invoice.RefundAmount = (System.Nullable<double>)valueArray[row, column++];
+                        invoice.RefundDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        if (invoice.PaymentAmount.HasValue)
                         {
-                            case "按融资金额":
-                                invoice.Commission = invoice.FinanceAmount * cda.Price;
-                                if (invoice.Commission.HasValue)
-                                {
-                                    invoice.CommissionDate = invoice.FinanceDate;
-                                }
-                                break;
-                            case "按转让金额":
-                                invoice.Commission = invoice.AssignAmount * cda.Price;
-                                if (invoice.Commission.HasValue)
-                                {
-                                    invoice.CommissionDate = invoice.InvoiceAssignBatch.AssignDate;
-                                }
-                                break;
-                            default:
-                                break;
+                            invoice.InvoicePaymentBatch = paymentBatch;
                         }
-                    }
-                    invoice.Interest = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.InterestDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
-                }
-                try
-                {
+                        invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
+                        invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        if (!invoice.Commission.HasValue)
+                        {
+                            switch (cda.CommissionType)
+                            {
+                                case "按融资金额":
+                                    invoice.Commission = invoice.FinanceAmount * cda.Price;
+                                    if (invoice.Commission.HasValue)
+                                    {
+                                        invoice.CommissionDate = invoice.FinanceDate;
+                                    }
+                                    break;
+                                case "按转让金额":
+                                    invoice.Commission = invoice.AssignAmount * cda.Price;
+                                    if (invoice.Commission.HasValue)
+                                    {
+                                        invoice.CommissionDate = invoice.InvoiceAssignBatch.AssignDate;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        invoice.Interest = (System.Nullable<double>)valueArray[row, column++];
+                        invoice.InterestDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    }
+
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e1)
