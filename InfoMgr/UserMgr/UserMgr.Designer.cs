@@ -20,27 +20,17 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvUsers;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EDIAccountColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EmailColumn;
         private DevComponents.DotNetBar.LabelX lblCount;
         private DevComponents.DotNetBar.LabelX lblUserID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LoginDateColumn;
         private System.Windows.Forms.ToolStripMenuItem menuItemDeleteUser;
         private System.Windows.Forms.ToolStripMenuItem menuItemDetailUser;
         private System.Windows.Forms.ToolStripMenuItem menuItemImportUsers;
         private System.Windows.Forms.ToolStripMenuItem menuItemNewUser;
         private System.Windows.Forms.ToolStripMenuItem menuItemSelectUser;
         private System.Windows.Forms.ToolStripMenuItem menuItemUpdateUser;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MSNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
         private DevComponents.DotNetBar.PanelEx panelQuery;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PasswordColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PhoneColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RoleColumn;
         private DevComponents.DotNetBar.Controls.TextBoxX tbUserID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TelphoneColumn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserIDColumn;
 
         #endregion Fields
 
@@ -98,9 +88,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.PhoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TelphoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EmailColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MSNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LoginDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PasswordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuUserMgr.SuspendLayout();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
@@ -256,9 +244,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.PhoneColumn,
             this.TelphoneColumn,
             this.EmailColumn,
-            this.MSNColumn,
-            this.LoginDateColumn,
-            this.PasswordColumn});
+            this.LoginDateColumn});
             this.dgvUsers.ContextMenuStrip = this.cmuUserMgr;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -329,27 +315,12 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.EmailColumn.Name = "EmailColumn";
             this.EmailColumn.ReadOnly = true;
             // 
-            // MSNColumn
-            // 
-            this.MSNColumn.DataPropertyName = "MSN";
-            this.MSNColumn.HeaderText = "MSN";
-            this.MSNColumn.Name = "MSNColumn";
-            this.MSNColumn.ReadOnly = true;
-            // 
             // LoginDateColumn
             // 
             this.LoginDateColumn.DataPropertyName = "LoginDate";
             this.LoginDateColumn.HeaderText = "最后登录日期";
             this.LoginDateColumn.Name = "LoginDateColumn";
             this.LoginDateColumn.ReadOnly = true;
-            // 
-            // PasswordColumn
-            // 
-            this.PasswordColumn.DataPropertyName = "Password";
-            this.PasswordColumn.HeaderText = "密码";
-            this.PasswordColumn.Name = "PasswordColumn";
-            this.PasswordColumn.ReadOnly = true;
-            this.PasswordColumn.Visible = false;
             // 
             // UserMgr
             // 
@@ -370,5 +341,14 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserIDColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EDIAccountColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RoleColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PhoneColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TelphoneColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EmailColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LoginDateColumn;
     }
 }

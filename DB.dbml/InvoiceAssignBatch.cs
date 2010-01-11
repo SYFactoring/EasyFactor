@@ -7,6 +7,15 @@ namespace CMBC.EasyFactor.DB.dbml
 {
     public partial class InvoiceAssignBatch
     {
+
+        public int BatchCount
+        {
+            get
+            {
+                return this.Invoices.Count;
+            }
+        }
+
         public string SellerName
         {
             get

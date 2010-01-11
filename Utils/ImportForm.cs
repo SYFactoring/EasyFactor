@@ -1140,6 +1140,7 @@ namespace CMBC.EasyFactor.Utils
                                 financeBatch.FinnacePeriodEnd = (DateTime)valueArray[row, column++];
                                 financeBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                                 financeBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                                financeBatch.CheckStatus = "已复核";
                                 financeBatch.FinanceBatchNo = InvoiceFinance.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin, financeBatches);
                                 financeBatch.CDA = cda;
                                 financeBatches.Add(financeBatch);

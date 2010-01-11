@@ -231,6 +231,7 @@ namespace CMBC.EasyFactor.ARMgr
                 this.tbIsNotice.Text = cda.IsNotice;
                 this.isRecoarseCheckBox.Checked = cda.IsRecoarse.Value;
                 this.assignTypeTextBox.Text = cda.AssignType;
+                this.tbPaymentTerms.Text = cda.PaymentTerms;
 
                 this.priceTextBox.Text = String.Format("{0:P2}", cda.Price);
                 this.eFPriceTextBox.Text = String.Format("{0:P2}", cda.EFPrice);

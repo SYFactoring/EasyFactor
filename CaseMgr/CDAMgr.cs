@@ -157,27 +157,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        private void dgvCDAs_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            DataGridViewColumn column = this.dgvCDAs.Columns[e.ColumnIndex];
-            if (column == colIsCreditCoverRevolving || column == colIsRecoarse)
-            {
-                Object originalData = e.Value;
-                if (originalData != null)
-                {
-                    bool result = (bool)originalData;
-                    if (result)
-                    {
-                        e.Value = "Y";
-                    }
-                    else
-                    {
-                        e.Value = "N";
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// Create a new CDA
         /// </summary>
@@ -196,14 +175,20 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void QueryCDAs(object sender, EventArgs e)
         {
+            string buyerName = tbBuyerName.Text;
+            string sellerName = tbSellerName.Text;
+            string factorName = tbFactorName.Text;
+            string contractCode = tbContractCode.Text;
+
             var queryResult =
                 from cda in App.Current.DbContext.CDAs
                 let contracts = cda.Case.SellerClient.Contracts
-                where this.tbContractCode.Text == string.Empty ? true : contracts.Any(con => con.ContractCode.Contains(this.tbContractCode.Text))
+                where contractCode == string.Empty ? true : contracts.Any(con => con.ContractCode.Contains(contractCode))
                 let seller = cda.Case.SellerClient
-                where seller.ClientNameCN.Contains(this.tbSellerName.Text) || seller.ClientNameEN_1.Contains(this.tbSellerName.Text) || seller.ClientNameEN_2.Contains(this.tbSellerName.Text)
+                where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN_1.Contains(sellerName) || seller.ClientNameEN_2.Contains(sellerName)
                 let buyer = cda.Case.BuyerClient
-                where buyer.ClientNameCN.Contains(this.tbBuyerName.Text) || buyer.ClientNameEN_1.Contains(this.tbBuyerName.Text) || buyer.ClientNameEN_2.Contains(this.tbBuyerName.Text)
+                where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN_1.Contains(buyerName) || buyer.ClientNameEN_2.Contains(buyerName)
+                where cda.Case.SellerFactor.CompanyNameCN.Contains(factorName) || cda.Case.SellerFactor.CompanyNameEN.Contains(factorName) || cda.Case.BuyerFactor.CompanyNameCN.Contains(factorName) || cda.Case.BuyerFactor.CompanyNameEN.Contains(factorName)
                 select cda;
 
             this.bs.DataSource = queryResult;

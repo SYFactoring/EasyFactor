@@ -120,7 +120,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInvoiceType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInvoiceType = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colInvoiceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -681,7 +681,12 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.colInvoiceType.DataPropertyName = "InvoiceType";
             this.colInvoiceType.HeaderText = "单据类别";
+            this.colInvoiceType.Items.AddRange(new object[] {
+            "Invoice",
+            "Credit Note"});
             this.colInvoiceType.Name = "colInvoiceType";
+            this.colInvoiceType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colInvoiceType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colInvoiceAmount
             // 
@@ -775,7 +780,7 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Controls.TextBoxX tbAssignNumber;
         private DevComponents.DotNetBar.Controls.TextBoxX tbTotalAssign;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceType;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colInvoiceType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;

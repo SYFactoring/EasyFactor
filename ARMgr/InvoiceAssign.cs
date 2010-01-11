@@ -546,16 +546,24 @@ namespace CMBC.EasyFactor.ARMgr
                     MessageBox.Show("转让金额不能大于票面金额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
-                DateTime date = this.assignDateDateTimePicker.Value;
+                DateTime date = this.assignDateDateTimePicker.Value.Date;
                 if (invoice.InvoiceDate > date)
                 {
                     MessageBox.Show("转让日不能早于发票日: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
+                int paymentTermDays = this._CDA.Case.NetPaymentTerm;
+                if (paymentTermDays != 0)
+                {
+                    if (date > invoice.InvoiceDate.AddDays(paymentTermDays))
+                    {
+                        MessageBox.Show("转让日不能晚于发票日+付款期限: "+invoice.InvoiceNo,"提醒",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                        return false;
+                    }
+                }
                 if (invoice.DueDate < date)
                 {
-                    MessageBox.Show("转让日不能晚于发票到期日: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
+                    invoice.IsDispute = true;
                 }
             }
             return true;

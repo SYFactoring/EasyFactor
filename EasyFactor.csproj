@@ -206,6 +206,7 @@
     </Compile>
     <Compile Include="DB.dbml\Department.cs" />
     <Compile Include="DB.dbml\Factor.cs" />
+    <Compile Include="DB.dbml\FactorCreditLine.cs" />
     <Compile Include="DB.dbml\Invoice.cs" />
     <Compile Include="DB.dbml\InvoiceAssignBatch.cs" />
     <Compile Include="DB.dbml\InvoiceFinanceBatch.cs" />
