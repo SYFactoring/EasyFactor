@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CMBC.EasyFactor.ARMgr;
+using CMBC.EasyFactor.Utils;
 
 namespace CMBC.EasyFactor.DB.dbml
 {
@@ -18,7 +19,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public ClientCreditLine GetAssignCreditLine(string currency)
         {
-            return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == "已生效" && c.CreditLineType == "买方信用风险担保额度" && c.CreditLineCurrency == currency);
+            return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "买方信用风险担保额度" && c.CreditLineCurrency == currency);
         }
 
         public System.Nullable<double> AssignTotal
@@ -26,7 +27,7 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double? total = null;
-                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == "启动案"))
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
                 {
                     foreach (CDA cda in curCase.CDAs)
                     {
@@ -52,22 +53,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.Contracts.SingleOrDefault(c => c.ContractStatus == "已生效");
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string CountryNameCN
-        {
-            get
-            {
-                if (_CountryCode != null && !_CountryCode.Trim().Equals(string.Empty))
-                {
-                    return App.Current.DbContext.Countries.Where(c => c.CountryCode == _CountryCode).SingleOrDefault().CountryNameCN;
-                }
-                return string.Empty;
+                return this.Contracts.SingleOrDefault(c => c.ContractStatus == ConstStr.CONTRACT.AVAILABILITY);
             }
         }
 
@@ -89,7 +75,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public ClientCreditLine GetFinanceCreditLine(string currency)
         {
-            return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == "已生效" && c.CreditLineType == "保理预付款融资额度" && c.CreditLineCurrency == currency);
+            return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "保理预付款融资额度" && c.CreditLineCurrency == currency);
         }
 
         /// <summary>
@@ -100,7 +86,7 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double? total = null;
-                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == "启动案"))
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
                 {
                     foreach (CDA cda in curCase.CDAs)
                     {
@@ -127,7 +113,7 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double? total = null;
-                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == "启动案"))
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
                 {
                     foreach (CDA cda in curCase.CDAs)
                     {

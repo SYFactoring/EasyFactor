@@ -165,7 +165,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-            if (MessageBox.Show("是否打算删除此" + selectedInvoices.Count + "条发票", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            if (MessageBox.Show("是否打算删除此" + selectedInvoices.Count + "条发票", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 App.Current.DbContext.Invoices.DeleteAllOnSubmit(selectedInvoices);
                 try
@@ -174,7 +174,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
                 catch (Exception e1)
                 {
-                    MessageBox.Show("删除失败," + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 rowIndexes.Sort();
@@ -274,11 +274,11 @@ namespace CMBC.EasyFactor.ARMgr
             for (int i = 0; i < this.bs.List.Count; i++)
             {
                 Invoice invoice = (Invoice)this.bs.List[i];
-                if (invoice.AssignOverDueDays > 0)
+                if (invoice.AssignOverDueDays >= 0)
                 {
                     this.dgvInvoices["colDueDate", i].Style.BackColor = Color.Yellow;
                 }
-                if (invoice.FinanceOverDueDays > 0)
+                if (invoice.FinanceOverDueDays >= 0)
                 {
                     this.dgvInvoices["colFinanceDueDate", i].Style.BackColor = Color.Red;
                 }
@@ -406,7 +406,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
                               let curCase = invoice.InvoiceAssignBatch.CDA.Case
-                              where curCase.CaseMark == "启动案"
+                              where curCase.CaseMark == ConstStr.CASE.ENABLE
                               let seller = curCase.SellerClient
                               where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN_1.Contains(sellerName) || seller.ClientNameEN_2.Contains(sellerName)
                               let buyer = curCase.BuyerClient
@@ -423,7 +423,7 @@ namespace CMBC.EasyFactor.ARMgr
                               select invoice;
             //if (queryResult.Count() > 2000)
             //{
-            //    DialogResult dr = MessageBox.Show("查询结果为" + queryResult.Count() + "，全部显示可能速度较慢，选择YES可以继续显示，选择NO可以重新查询。", "提醒", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            //    DialogResult dr = MessageBox.Show("查询结果为" + queryResult.Count() + "，全部显示可能速度较慢，选择YES可以继续显示，选择NO可以重新查询。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             //    if (dr == DialogResult.Yes)
             //    {
             //        this.bs.DataSource = queryResult;

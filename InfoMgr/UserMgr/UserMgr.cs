@@ -102,7 +102,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 User selectedUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid);
                 if (selectedUser != null)
                 {
-                    if (MessageBox.Show("是否确定删除帐号: " + selectedUser.UserID, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    if (MessageBox.Show("是否确定删除帐号: " + selectedUser.UserID, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
                         dgvUsers.Rows.RemoveAt(dgvUsers.SelectedRows[0].Index);
                         App.Current.DbContext.Users.DeleteOnSubmit(selectedUser);

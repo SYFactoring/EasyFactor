@@ -35,11 +35,6 @@ namespace CMBC.EasyFactor
         }
 
         /// <summary>
-        /// Gets or sets MainWindow
-        /// </summary>
-        public MainWindow MainWindow { get; set; }
-
-        /// <summary>
         /// Gets or sets Current User
         /// </summary>
         public User CurUser { get; set; }

@@ -680,7 +680,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // GroupNoColumn
             // 
-            this.GroupNoColumn.DataPropertyName = "GroupNo";
+            this.GroupNoColumn.DataPropertyName = "GroupEDICode";
             this.GroupNoColumn.HeaderText = "所属集团客户号";
             this.GroupNoColumn.Name = "GroupNoColumn";
             this.GroupNoColumn.ReadOnly = true;

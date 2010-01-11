@@ -116,16 +116,16 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 Factor selectedFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                 if (selectedFactor != null)
                 {
-                    if (MessageBox.Show("是否确定删除保理商: " + selectedFactor.FactorCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    if (MessageBox.Show("是否确定删除保理商: " + selectedFactor.FactorCode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
                         if (selectedFactor.FactorCreditLines.Count > 0)
                         {
-                            MessageBox.Show("不能删除此机构,已存在相关额度.", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("不能删除此机构,已存在相关额度.", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                         if (selectedFactor.SellerCases.Count > 0 || selectedFactor.BuyerCases.Count > 0)
                         {
-                            MessageBox.Show("不能删除此机构,已存在相关案件信息", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("不能删除此机构,已存在相关案件信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                         App.Current.DbContext.Factors.DeleteOnSubmit(selectedFactor);
@@ -135,7 +135,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                         }
                         catch (SqlException e1)
                         {
-                            MessageBox.Show("删除失败:" + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("删除失败:" + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                         dgvFactors.Rows.RemoveAt(dgvFactors.SelectedRows[0].Index);

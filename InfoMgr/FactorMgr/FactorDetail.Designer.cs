@@ -168,13 +168,15 @@
             DevComponents.DotNetBar.LabelX unfreezeDateLabel;
             DevComponents.DotNetBar.LabelX lblCreateUserName;
             DevComponents.DotNetBar.LabelX lblCreditLineCreateUserName;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            DevComponents.DotNetBar.LabelX lblFactorGroupCode;
+            DevComponents.DotNetBar.LabelX lblFactorGroupType;
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FactorDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelFactor = new DevComponents.DotNetBar.TabControlPanel();
@@ -199,6 +201,8 @@
             this.tbGeneralCorrespondence1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbWorkingHours = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelBasic = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.cbFactorGroupType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.tbGroupFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.companyNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.telefax_2TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -264,13 +268,10 @@
             this.creditLineCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tabItemFactorCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
             this.factorValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.factorErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.factorHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.requiredFieldValidator10 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.creditLineValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.requiredFieldValidator11 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
@@ -282,7 +283,8 @@
             this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.clientLineErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.clientLineHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.requiredFieldValidator11 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.btnGroupSelect = new DevComponents.DotNetBar.ButtonX();
+            this.tbFactorGroupName = new DevComponents.DotNetBar.Controls.TextBoxX();
             factorTypeLabel = new DevComponents.DotNetBar.LabelX();
             countryNameLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -322,6 +324,8 @@
             unfreezeDateLabel = new DevComponents.DotNetBar.LabelX();
             lblCreateUserName = new DevComponents.DotNetBar.LabelX();
             lblCreditLineCreateUserName = new DevComponents.DotNetBar.LabelX();
+            lblFactorGroupCode = new DevComponents.DotNetBar.LabelX();
+            lblFactorGroupType = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPanelFactor.SuspendLayout();
@@ -382,7 +386,7 @@
             // 
             factorCodeLabel.BackgroundStyle.Class = "";
             factorCodeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            factorCodeLabel.Location = new System.Drawing.Point(220, 6);
+            factorCodeLabel.Location = new System.Drawing.Point(220, 8);
             factorCodeLabel.Name = "factorCodeLabel";
             factorCodeLabel.Size = new System.Drawing.Size(59, 16);
             factorCodeLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -926,6 +930,37 @@
             lblCreditLineCreateUserName.TabIndex = 34;
             lblCreditLineCreateUserName.Text = "经办人:";
             // 
+            // lblFactorGroupCode
+            // 
+            lblFactorGroupCode.AutoSize = true;
+            lblFactorGroupCode.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblFactorGroupCode.BackgroundStyle.Class = "";
+            lblFactorGroupCode.Location = new System.Drawing.Point(340, 203);
+            lblFactorGroupCode.Name = "lblFactorGroupCode";
+            lblFactorGroupCode.Size = new System.Drawing.Size(47, 16);
+            lblFactorGroupCode.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            lblFactorGroupCode.TabIndex = 37;
+            lblFactorGroupCode.Text = "集团号:";
+            // 
+            // lblFactorGroupType
+            // 
+            lblFactorGroupType.AutoSize = true;
+            lblFactorGroupType.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblFactorGroupType.BackgroundStyle.Class = "";
+            lblFactorGroupType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            lblFactorGroupType.Location = new System.Drawing.Point(14, 225);
+            lblFactorGroupType.Name = "lblFactorGroupType";
+            lblFactorGroupType.Size = new System.Drawing.Size(62, 16);
+            lblFactorGroupType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            lblFactorGroupType.TabIndex = 39;
+            lblFactorGroupType.Text = "机构/集团:";
+            // 
             // tabControl
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
@@ -937,7 +972,7 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl.SelectedTabIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(595, 603);
+            this.tabControl.Size = new System.Drawing.Size(602, 632);
             this.tabControl.TabIndex = 0;
             this.tabControl.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl.Tabs.Add(this.tabItemFactor);
@@ -957,7 +992,7 @@
             this.tabPanelFactor.Location = new System.Drawing.Point(0, 26);
             this.tabPanelFactor.Name = "tabPanelFactor";
             this.tabPanelFactor.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelFactor.Size = new System.Drawing.Size(595, 577);
+            this.tabPanelFactor.Size = new System.Drawing.Size(602, 606);
             this.tabPanelFactor.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelFactor.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelFactor.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -972,7 +1007,7 @@
             // 
             this.btnFactorUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnFactorUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFactorUpdate.Location = new System.Drawing.Point(174, 547);
+            this.btnFactorUpdate.Location = new System.Drawing.Point(175, 571);
             this.btnFactorUpdate.Name = "btnFactorUpdate";
             this.btnFactorUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnFactorUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -984,7 +1019,7 @@
             // 
             this.btnFactorReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnFactorReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFactorReset.Location = new System.Drawing.Point(336, 547);
+            this.btnFactorReset.Location = new System.Drawing.Point(337, 571);
             this.btnFactorReset.Name = "btnFactorReset";
             this.btnFactorReset.Size = new System.Drawing.Size(75, 23);
             this.btnFactorReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -996,7 +1031,7 @@
             // 
             this.btnFactorSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnFactorSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFactorSave.Location = new System.Drawing.Point(255, 547);
+            this.btnFactorSave.Location = new System.Drawing.Point(256, 571);
             this.btnFactorSave.Name = "btnFactorSave";
             this.btnFactorSave.Size = new System.Drawing.Size(75, 23);
             this.btnFactorSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1017,9 +1052,9 @@
             this.groupPanelMembership.Controls.Add(iFISAvailableOnPrivateForumLabel);
             this.groupPanelMembership.Controls.Add(this.iFISAvailableOnPrivateForumTextBox);
             this.groupPanelMembership.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelMembership.Location = new System.Drawing.Point(1, 480);
+            this.groupPanelMembership.Location = new System.Drawing.Point(1, 502);
             this.groupPanelMembership.Name = "groupPanelMembership";
-            this.groupPanelMembership.Size = new System.Drawing.Size(593, 63);
+            this.groupPanelMembership.Size = new System.Drawing.Size(600, 63);
             // 
             // 
             // 
@@ -1123,9 +1158,9 @@
             this.groupPanelContacts.Controls.Add(lblWorkingHours);
             this.groupPanelContacts.Controls.Add(this.tbWorkingHours);
             this.groupPanelContacts.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelContacts.Location = new System.Drawing.Point(1, 230);
+            this.groupPanelContacts.Location = new System.Drawing.Point(1, 252);
             this.groupPanelContacts.Name = "groupPanelContacts";
-            this.groupPanelContacts.Size = new System.Drawing.Size(593, 250);
+            this.groupPanelContacts.Size = new System.Drawing.Size(600, 250);
             // 
             // 
             // 
@@ -1297,6 +1332,12 @@
             // 
             this.groupPanelBasic.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelBasic.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelBasic.Controls.Add(this.tbFactorGroupName);
+            this.groupPanelBasic.Controls.Add(this.btnGroupSelect);
+            this.groupPanelBasic.Controls.Add(lblFactorGroupType);
+            this.groupPanelBasic.Controls.Add(this.cbFactorGroupType);
+            this.groupPanelBasic.Controls.Add(lblFactorGroupCode);
+            this.groupPanelBasic.Controls.Add(this.tbGroupFactorCode);
             this.groupPanelBasic.Controls.Add(lblCreateUserName);
             this.groupPanelBasic.Controls.Add(this.tbCreateUserName);
             this.groupPanelBasic.Controls.Add(this.companyNameCNTextBox);
@@ -1337,7 +1378,7 @@
             this.groupPanelBasic.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelBasic.Location = new System.Drawing.Point(1, 1);
             this.groupPanelBasic.Name = "groupPanelBasic";
-            this.groupPanelBasic.Size = new System.Drawing.Size(593, 229);
+            this.groupPanelBasic.Size = new System.Drawing.Size(600, 251);
             // 
             // 
             // 
@@ -1369,6 +1410,34 @@
             this.groupPanelBasic.StyleMouseOver.Class = "";
             this.groupPanelBasic.TabIndex = 0;
             // 
+            // cbFactorGroupType
+            // 
+            this.cbFactorGroupType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "FactorGroupType", true));
+            this.cbFactorGroupType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbFactorGroupType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFactorGroupType.FormattingEnabled = true;
+            this.cbFactorGroupType.Items.AddRange(new object[] {
+            "机构",
+            "集团"});
+            this.cbFactorGroupType.Location = new System.Drawing.Point(83, 223);
+            this.cbFactorGroupType.MaxDropDownItems = 4;
+            this.cbFactorGroupType.Name = "cbFactorGroupType";
+            this.cbFactorGroupType.Size = new System.Drawing.Size(121, 21);
+            this.cbFactorGroupType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbFactorGroupType.TabIndex = 40;
+            // 
+            // tbGroupFactorCode
+            // 
+            // 
+            // 
+            // 
+            this.tbGroupFactorCode.Border.Class = "TextBoxBorder";
+            this.tbGroupFactorCode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "FactorGroup.FactorCode", true));
+            this.tbGroupFactorCode.Location = new System.Drawing.Point(393, 201);
+            this.tbGroupFactorCode.Name = "tbGroupFactorCode";
+            this.tbGroupFactorCode.Size = new System.Drawing.Size(102, 20);
+            this.tbGroupFactorCode.TabIndex = 38;
+            // 
             // tbCreateUserName
             // 
             // 
@@ -1380,7 +1449,6 @@
             this.tbCreateUserName.Name = "tbCreateUserName";
             this.tbCreateUserName.Size = new System.Drawing.Size(193, 20);
             this.tbCreateUserName.TabIndex = 36;
-            this.factorValidator.SetValidator1(this.tbCreateUserName, this.requiredFieldValidator10);
             // 
             // companyNameCNTextBox
             // 
@@ -1603,11 +1671,10 @@
             // 
             this.factorCodeTextBox.Border.Class = "TextBoxBorder";
             this.factorCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "FactorCode", true));
-            this.factorCodeTextBox.Location = new System.Drawing.Point(285, 5);
+            this.factorCodeTextBox.Location = new System.Drawing.Point(285, 6);
             this.factorCodeTextBox.Name = "factorCodeTextBox";
             this.factorCodeTextBox.Size = new System.Drawing.Size(100, 20);
             this.factorCodeTextBox.TabIndex = 3;
-            this.factorValidator.SetValidator1(this.factorCodeTextBox, this.requiredFieldValidator2);
             // 
             // countryNameComboBox
             // 
@@ -1619,7 +1686,6 @@
             this.countryNameComboBox.Name = "countryNameComboBox";
             this.countryNameComboBox.Size = new System.Drawing.Size(121, 21);
             this.countryNameComboBox.TabIndex = 5;
-            this.factorValidator.SetValidator1(this.countryNameComboBox, this.requiredFieldValidator3);
             // 
             // factorTypeComboBox
             // 
@@ -1638,7 +1704,6 @@
             this.factorTypeComboBox.Size = new System.Drawing.Size(121, 21);
             this.factorTypeComboBox.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.factorTypeComboBox.TabIndex = 1;
-            this.factorValidator.SetValidator1(this.factorTypeComboBox, this.requiredFieldValidator1);
             // 
             // tabItemFactor
             // 
@@ -1655,7 +1720,7 @@
             this.tabPanelCreditLine.Location = new System.Drawing.Point(0, 26);
             this.tabPanelCreditLine.Name = "tabPanelCreditLine";
             this.tabPanelCreditLine.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelCreditLine.Size = new System.Drawing.Size(595, 577);
+            this.tabPanelCreditLine.Size = new System.Drawing.Size(602, 606);
             this.tabPanelCreditLine.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.tabPanelCreditLine.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.tabPanelCreditLine.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -1672,14 +1737,14 @@
             this.dgvFactorCreditLines.AllowUserToDeleteRows = false;
             this.dgvFactorCreditLines.AllowUserToOrderColumns = true;
             this.dgvFactorCreditLines.AutoGenerateColumns = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactorCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactorCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvFactorCreditLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFactorCreditLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCreditLineID,
@@ -1698,21 +1763,21 @@
             this.colUnfreezeDate,
             this.colComment});
             this.dgvFactorCreditLines.DataSource = this.factorCreditLineBindingSource;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactorCreditLines.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactorCreditLines.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvFactorCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFactorCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvFactorCreditLines.Location = new System.Drawing.Point(1, 320);
             this.dgvFactorCreditLines.Name = "dgvFactorCreditLines";
             this.dgvFactorCreditLines.ReadOnly = true;
             this.dgvFactorCreditLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFactorCreditLines.Size = new System.Drawing.Size(593, 256);
+            this.dgvFactorCreditLines.Size = new System.Drawing.Size(600, 285);
             this.dgvFactorCreditLines.TabIndex = 0;
             this.dgvFactorCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectFactorCreditLine);
             // 
@@ -1735,8 +1800,8 @@
             // colCreditLine
             // 
             this.colCreditLine.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle2.Format = "N2";
-            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle9.Format = "N2";
+            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle9;
             this.colCreditLine.HeaderText = "额度上限";
             this.colCreditLine.Name = "colCreditLine";
             this.colCreditLine.ReadOnly = true;
@@ -1745,8 +1810,8 @@
             // colPeriodBegin
             // 
             this.colPeriodBegin.DataPropertyName = "PeriodBegin";
-            dataGridViewCellStyle3.Format = "d";
-            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Format = "d";
+            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle10;
             this.colPeriodBegin.HeaderText = "有效期(始)";
             this.colPeriodBegin.Name = "colPeriodBegin";
             this.colPeriodBegin.ReadOnly = true;
@@ -1755,8 +1820,8 @@
             // colPeriodEnd
             // 
             this.colPeriodEnd.DataPropertyName = "PeriodEnd";
-            dataGridViewCellStyle4.Format = "d";
-            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle11.Format = "d";
+            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle11;
             this.colPeriodEnd.HeaderText = "有效期(终)";
             this.colPeriodEnd.Name = "colPeriodEnd";
             this.colPeriodEnd.ReadOnly = true;
@@ -1805,8 +1870,8 @@
             // colFreezeDate
             // 
             this.colFreezeDate.DataPropertyName = "FreezeDate";
-            dataGridViewCellStyle5.Format = "d";
-            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle12.Format = "d";
+            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle12;
             this.colFreezeDate.HeaderText = "冻结日期";
             this.colFreezeDate.Name = "colFreezeDate";
             this.colFreezeDate.ReadOnly = true;
@@ -1831,8 +1896,8 @@
             // colUnfreezeDate
             // 
             this.colUnfreezeDate.DataPropertyName = "UnfreezeDate";
-            dataGridViewCellStyle6.Format = "d";
-            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle13.Format = "d";
+            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle13;
             this.colUnfreezeDate.HeaderText = "解冻日期";
             this.colUnfreezeDate.Name = "colUnfreezeDate";
             this.colUnfreezeDate.ReadOnly = true;
@@ -1893,7 +1958,7 @@
             this.groupPanelCreditLineDetail.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelCreditLineDetail.Location = new System.Drawing.Point(1, 1);
             this.groupPanelCreditLineDetail.Name = "groupPanelCreditLineDetail";
-            this.groupPanelCreditLineDetail.Size = new System.Drawing.Size(593, 319);
+            this.groupPanelCreditLineDetail.Size = new System.Drawing.Size(600, 319);
             // 
             // 
             // 
@@ -2312,21 +2377,6 @@
             this.factorValidator.ErrorProvider = this.factorErrorProvider;
             this.factorValidator.Highlighter = this.factorHighlighter;
             // 
-            // requiredFieldValidator2
-            // 
-            this.requiredFieldValidator2.ErrorMessage = "必填";
-            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // requiredFieldValidator3
-            // 
-            this.requiredFieldValidator3.ErrorMessage = "必填";
-            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "必填";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
             // factorErrorProvider
             // 
             this.factorErrorProvider.ContainerControl = this;
@@ -2336,16 +2386,16 @@
             // 
             this.factorHighlighter.ContainerControl = this;
             // 
-            // requiredFieldValidator10
-            // 
-            this.requiredFieldValidator10.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator10.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
             // creditLineValidator
             // 
             this.creditLineValidator.ContainerControl = this;
             this.creditLineValidator.ErrorProvider = this.clientLineErrorProvider;
             this.creditLineValidator.Highlighter = this.clientLineHighlighter;
+            // 
+            // requiredFieldValidator11
+            // 
+            this.requiredFieldValidator11.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator11.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // customValidator2
             // 
@@ -2405,16 +2455,35 @@
             // 
             this.clientLineHighlighter.ContainerControl = this;
             // 
-            // requiredFieldValidator11
+            // btnGroupSelect
             // 
-            this.requiredFieldValidator11.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator11.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.btnGroupSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnGroupSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnGroupSelect.Location = new System.Drawing.Point(505, 199);
+            this.btnGroupSelect.Name = "btnGroupSelect";
+            this.btnGroupSelect.Size = new System.Drawing.Size(24, 23);
+            this.btnGroupSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnGroupSelect.TabIndex = 41;
+            this.btnGroupSelect.Text = "...";
+            this.btnGroupSelect.Click += new System.EventHandler(this.SelectGroup);
+            // 
+            // tbFactorGroupName
+            // 
+            // 
+            // 
+            // 
+            this.tbFactorGroupName.Border.Class = "TextBoxBorder";
+            this.tbFactorGroupName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "FactorGroup.CompanyNameEN", true));
+            this.tbFactorGroupName.Location = new System.Drawing.Point(393, 223);
+            this.tbFactorGroupName.Name = "tbFactorGroupName";
+            this.tbFactorGroupName.Size = new System.Drawing.Size(175, 20);
+            this.tbFactorGroupName.TabIndex = 42;
             // 
             // FactorDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(595, 603);
+            this.ClientSize = new System.Drawing.Size(602, 632);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.ImeMode = System.Windows.Forms.ImeMode.On;
@@ -2449,9 +2518,6 @@
 
         #endregion
 
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
         private DevComponents.DotNetBar.Validator.SuperValidator creditLineValidator;
         private System.Windows.Forms.ErrorProvider clientLineErrorProvider;
         private DevComponents.DotNetBar.Validator.Highlighter clientLineHighlighter;
@@ -2465,8 +2531,11 @@
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator1;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator2;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator10;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreditLineCreateUserName;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator11;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbFactorGroupType;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbGroupFactorCode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorGroupName;
+        private DevComponents.DotNetBar.ButtonX btnGroupSelect;
     }
 }

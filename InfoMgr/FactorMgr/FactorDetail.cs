@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// </summary>
     public partial class FactorDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (2)
+		#region Fields (2) 
 
         /// <summary>
         /// 
@@ -28,9 +28,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private OpFactorType opFactorType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (2)
+		#region Enums (2) 
 
         /// <summary>
         /// Operation Type
@@ -52,7 +52,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             /// </summary>
             DETAIL_FACTOR
         }
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         public enum OpFactorCreditLineType
@@ -73,11 +73,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             DETAIL_FACTOR_CREDIT_LINE
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (3)
+		#region Constructors (3) 
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the FactorDetail class
         /// </summary>
         /// <param name="factor">selected factor</param>
@@ -142,11 +142,49 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.tabControl.SelectedTab = this.tabItemFactorCreditLine;
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (15)
+		#region Methods (18) 
 
-        // Private Methods (15) 
+		// Private Methods (18) 
+
+        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.freezeDateDateTimePicker.Enabled)
+            {
+                if (this.freezeReasonTextBox.Text == string.Empty)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator2_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (this.unfreezeDateDateTimePicker.Enabled)
+            {
+                if (this.unfreezeReasonTextBox.Text == string.Empty)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
 
         /// <summary>
         /// 
@@ -158,7 +196,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -182,12 +220,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             catch (Exception e1)
             {
                 isDeleteOK = false;
-                MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isDeleteOK)
             {
-                MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.dgvFactorCreditLines.DataSource = factor.FactorCreditLines.ToList();
                 this.factorCreditLineBindingSource.DataSource = typeof(FactorCreditLine);
             }
@@ -232,7 +270,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -247,7 +285,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            if (creditLine.CreditLineStatus == "已生效")
+            if (creditLine.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY)
             {
                 this.freezeReasonTextBox.ReadOnly = false;
                 this.freezeDateDateTimePicker.Enabled = true;
@@ -266,7 +304,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -285,7 +323,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -336,12 +374,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 catch (Exception e1)
                 {
                     isAddOK = false;
-                    MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
                 {
-                    MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     factor.Backup();
                     this.opFactorType = OpFactorType.UPDATE_FACTOR;
                 }
@@ -361,12 +399,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBox.Show(e2.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)
                 {
-                    MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     factor.Backup();
                 }
             }
@@ -386,7 +424,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null)
             {
-                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -400,27 +438,27 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             DateTime today = DateTime.Now.Date;
             if (creditLine.PeriodBegin < today)
             {
-                creditLine.CreditLineStatus = "已过期";
+                creditLine.CreditLineStatus = ConstStr.FACTOR_CREDIT_LINE.EXPIRY;
             }
             else
             {
-                creditLine.CreditLineStatus = "已生效";
+                creditLine.CreditLineStatus = ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY;
             }
 
             if (this.freezeDateDateTimePicker.Enabled)
             {
-                creditLine.CreditLineStatus = "已冻结";
+                creditLine.CreditLineStatus = ConstStr.FACTOR_CREDIT_LINE.FREEZE;
             }
 
             if (this.unfreezeDateDateTimePicker.Enabled)
             {
                 if (creditLine.PeriodBegin < today)
                 {
-                    creditLine.CreditLineStatus = "已过期";
+                    creditLine.CreditLineStatus = ConstStr.FACTOR_CREDIT_LINE.EXPIRY;
                 }
                 else
                 {
-                    creditLine.CreditLineStatus = "已生效";
+                    creditLine.CreditLineStatus = ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY;
                 }
             }
             creditLine.CreateUserName = App.Current.CurUser.Name;
@@ -438,19 +476,19 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 catch (Exception e1)
                 {
                     isAddOK = false;
-                    MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
                 {
-                    MessageBox.Show("数据新建成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (creditLine.CreditLineStatus == "已生效")
+                    MessageBox.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (creditLine.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY)
                     {
                         foreach (FactorCreditLine fcl in factor.FactorCreditLines)
                         {
-                            if (fcl != creditLine && fcl.CreditLineStatus == "已生效" && fcl.CreditLineType == creditLine.CreditLineType)
+                            if (fcl != creditLine && fcl.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY && fcl.CreditLineType == creditLine.CreditLineType)
                             {
-                                fcl.CreditLineStatus = "已过期";
+                                fcl.CreditLineStatus = ConstStr.FACTOR_CREDIT_LINE.EXPIRY;
                             }
                         }
                         App.Current.DbContext.SubmitChanges();
@@ -469,19 +507,19 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBox.Show(e2.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)
                 {
-                    MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (creditLine.CreditLineStatus == "已生效")
+                    MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (creditLine.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY)
                     {
                         foreach (FactorCreditLine fcl in factor.FactorCreditLines)
                         {
-                            if (fcl != creditLine && fcl.CreditLineStatus == "已生效" && fcl.CreditLineType == creditLine.CreditLineType && fcl.CreditLineCurrency == creditLine.CreditLineCurrency)
+                            if (fcl != creditLine && fcl.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY && fcl.CreditLineType == creditLine.CreditLineType && fcl.CreditLineCurrency == creditLine.CreditLineCurrency)
                             {
-                                fcl.CreditLineStatus = "已过期";
+                                fcl.CreditLineStatus = ConstStr.FACTOR_CREDIT_LINE.EXPIRY;
                             }
                         }
                         App.Current.DbContext.SubmitChanges();
@@ -519,6 +557,30 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectGroup(object sender, EventArgs e)
+        {
+            Factor factor = (Factor)this.factorBindingSource.DataSource;
+            FactorMgr factorMgr = new FactorMgr(false);
+            QueryForm queryUI = new QueryForm(factorMgr, "选择集团");
+            factorMgr.OwnerForm = queryUI;
+            queryUI.ShowDialog(this);
+            if (factorMgr.Selected != null)
+            {
+                if (factorMgr.Selected.FactorGroupType != "集团")
+                {
+                    MessageBox.Show("所选客户不是集团类型", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                factor.FactorGroup = factorMgr.Selected;
+                factor.IsGroup = true;
+            }
+        }
+
         private void SetFactorCreditLineEditable(bool editable)
         {
             foreach (Control comp in this.groupPanelCreditLineDetail.Controls)
@@ -537,7 +599,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -552,7 +614,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            if (creditLine.CreditLineStatus == "已冻结")
+            if (creditLine.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.FREEZE)
             {
                 this.unfreezeReasonTextBox.ReadOnly = false;
                 this.unfreezeDateDateTimePicker.Enabled = true;
@@ -571,7 +633,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -594,7 +656,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBox.Show("请首先选定一个机构", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -721,44 +783,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
         }
 
-        #endregion Methods
-
-        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            if (this.freezeDateDateTimePicker.Enabled)
-            {
-                if (this.freezeReasonTextBox.Text == string.Empty)
-                {
-                    e.IsValid = false;
-                }
-                else
-                {
-                    e.IsValid = true;
-                }
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
-
-        private void customValidator2_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            if (this.unfreezeDateDateTimePicker.Enabled)
-            {
-                if (this.unfreezeReasonTextBox.Text == string.Empty)
-                {
-                    e.IsValid = false;
-                }
-                else
-                {
-                    e.IsValid = true;
-                }
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
+		#endregion Methods 
     }
 }

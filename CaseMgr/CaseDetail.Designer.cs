@@ -1,15 +1,17 @@
-﻿namespace CMBC.EasyFactor.CaseMgr
+﻿using CMBC.EasyFactor.Utils;
+namespace CMBC.EasyFactor.CaseMgr
 {
     partial class CaseDetail
     {
-        #region Fields (112)
+		#region Fields (127) 
 
         private DevComponents.DotNetBar.ButtonX btnCaseBuyerSelect;
+        private DevComponents.DotNetBar.ButtonX btnCaseFactorSelect;
         private DevComponents.DotNetBar.ButtonX btnCaseReset;
         private DevComponents.DotNetBar.ButtonX btnCaseSave;
-        private DevComponents.DotNetBar.ButtonX btnCaseFactorSelect;
         private DevComponents.DotNetBar.ButtonX btnCaseSellerSelect;
         private DevComponents.DotNetBar.ButtonX btnCaseUpdate;
+        private DevComponents.DotNetBar.ButtonX btnCDADelete;
         private DevComponents.DotNetBar.ButtonX btnCDANew;
         private DevComponents.DotNetBar.ButtonX btnCDARefresh;
         private DevComponents.DotNetBar.ButtonX btnCreditCoverNegDelete;
@@ -18,28 +20,95 @@
         private DevComponents.DotNetBar.ButtonX btnCreditCoverNegSave;
         private DevComponents.DotNetBar.ButtonX btnCreditCoverNegUpdate;
         private System.Windows.Forms.BindingSource caseBindingSource;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbRequestType;
+        private System.Windows.Forms.ErrorProvider caseErrorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter caseHighlighter;
+        private DevComponents.DotNetBar.Validator.SuperValidator caseValidator;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseCoDepts;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseInvoiceCurrency;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseMark;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseOpType;
         private DevComponents.DotNetBar.Controls.ComboTree cbCaseOwnerDepts;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseTransactionType;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbRequestType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDADueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAIFPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAValueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionTypeComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCover;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDeductibles;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEFPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceGracePeriod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceProportion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFeeCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsCreditCoverRevolving;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsNotice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsRecoarse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLossThreshold;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNegoID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNoticeMethod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNoticePersion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentTerms;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPUGPeriod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPUGProportion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReassignGracePeriod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReplyAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReplyDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestType;
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.ErrorProvider creditCoverErrorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter creditCoverHighlighter;
         private System.Windows.Forms.BindingSource creditCoverNegBindingSource;
+        private DevComponents.DotNetBar.Validator.SuperValidator creditCoverValidator;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvCDAs;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvCreditCoverNegs;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diReplyDate;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput diCaseAppDate;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diReplyDate;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput diRequestDate;
-        private System.Windows.Forms.ErrorProvider caseErrorProvider;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCase;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCDA;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCreditCoverNeg;
-        private DevComponents.DotNetBar.Validator.Highlighter caseHighlighter;
-        private DevComponents.DotNetBar.Validator.SuperValidator caseValidator;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator11;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator12;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator13;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator6;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator7;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator8;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator9;
         private DevComponents.DotNetBar.TabControl tabControl;
         private DevComponents.DotNetBar.TabItem tabItemCase;
         private DevComponents.DotNetBar.TabItem tabItemCDA;
@@ -47,7 +116,6 @@
         private DevComponents.DotNetBar.TabControlPanel tabPanelCase;
         private DevComponents.DotNetBar.TabControlPanel tabPanelCDA;
         private DevComponents.DotNetBar.TabControlPanel tabPanelCreditCoverNeg;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbReplyAmount;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerNameCN;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerNameEN;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerNo;
@@ -58,16 +126,21 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerNameCN;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerNameEN;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseSellerNo;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCreditCoverComment;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbComment;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCreditCoverComment;
         private DevComponents.DotNetBar.Controls.TextBoxX tbIFPrice;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbManagerName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentTerm;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbReplyAmount;
         private DevComponents.DotNetBar.Controls.TextBoxX tbRequestAmount;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbReviewNo;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Methods (1)
+		#region Methods (1) 
 
-        // Protected Methods (1) 
+		// Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -82,7 +155,7 @@
             base.Dispose(disposing);
         }
 
-        #endregion Methods
+		#endregion Methods 
 
 
 
@@ -118,10 +191,11 @@
             DevComponents.DotNetBar.LabelX lblPaymentTerm;
             DevComponents.DotNetBar.LabelX lblReviewNo;
             DevComponents.DotNetBar.LabelX lblComment;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaseDetail));
+            DevComponents.DotNetBar.LabelX lblCaseCode;
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelCase = new DevComponents.DotNetBar.TabControlPanel();
             this.btnCaseUpdate = new DevComponents.DotNetBar.ButtonX();
@@ -230,24 +304,25 @@
             this.btnCDARefresh = new DevComponents.DotNetBar.ButtonX();
             this.tabItemCDA = new DevComponents.DotNetBar.TabItem(this.components);
             this.caseValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.requiredFieldValidator12 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator13 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator12 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.requiredFieldValidator13 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator7 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.requiredFieldValidator7 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.caseErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.caseHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.requiredFieldValidator11 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator11 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.creditCoverValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.requiredFieldValidator8 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator6 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.creditCoverErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.creditCoverHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.tbCaseCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             requestAmountLabel = new DevComponents.DotNetBar.LabelX();
             replyAmountLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
@@ -271,6 +346,7 @@
             lblPaymentTerm = new DevComponents.DotNetBar.LabelX();
             lblReviewNo = new DevComponents.DotNetBar.LabelX();
             lblComment = new DevComponents.DotNetBar.LabelX();
+            lblCaseCode = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPanelCase.SuspendLayout();
@@ -721,6 +797,8 @@
             this.groupPanelCase.AutoScroll = true;
             this.groupPanelCase.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCase.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelCase.Controls.Add(this.tbCaseCode);
+            this.groupPanelCase.Controls.Add(lblCaseCode);
             this.groupPanelCase.Controls.Add(this.cbCaseMark);
             this.groupPanelCase.Controls.Add(this.tbComment);
             this.groupPanelCase.Controls.Add(lblComment);
@@ -1217,14 +1295,14 @@
             this.colIFPrice,
             this.colComment,
             this.colCreateUserName});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCreditCoverNegs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCreditCoverNegs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCreditCoverNegs.Location = new System.Drawing.Point(1, 166);
@@ -1608,14 +1686,14 @@
             this.dgvCDAs.AllowUserToAddRows = false;
             this.dgvCDAs.AllowUserToDeleteRows = false;
             this.dgvCDAs.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCDAs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCDAs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCDACode,
@@ -1658,14 +1736,14 @@
             this.colFax,
             this.colCDAComment,
             this.colCDACreateUserName});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCDAs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCDAs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCDAs.Location = new System.Drawing.Point(1, 39);
@@ -2068,6 +2146,18 @@
             this.caseValidator.ErrorProvider = this.caseErrorProvider;
             this.caseValidator.Highlighter = this.caseHighlighter;
             // 
+            // requiredFieldValidator3
+            // 
+            this.requiredFieldValidator3.ErrorMessage = "必填";
+            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // regularExpressionValidator1
+            // 
+            this.regularExpressionValidator1.EmptyValueIsValid = true;
+            this.regularExpressionValidator1.ErrorMessage = "正确格式如下：FC20100001-010SH-NY";
+            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator1.ValidationExpression = "^[A-Z]{2}\\d{8}-\\d{4}[A-Z]{2}-[A-Z]{2}$";
+            // 
             // requiredFieldValidator1
             // 
             this.requiredFieldValidator1.ErrorMessage = "必填";
@@ -2078,19 +2168,14 @@
             this.requiredFieldValidator4.ErrorMessage = "必填";
             this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // requiredFieldValidator3
-            // 
-            this.requiredFieldValidator3.ErrorMessage = "必填";
-            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
             // requiredFieldValidator12
             // 
-            this.requiredFieldValidator12.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator12.ErrorMessage = "必填";
             this.requiredFieldValidator12.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator13
             // 
-            this.requiredFieldValidator13.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator13.ErrorMessage = "必填";
             this.requiredFieldValidator13.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator2
@@ -2100,12 +2185,12 @@
             // 
             // requiredFieldValidator9
             // 
-            this.requiredFieldValidator9.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator9.ErrorMessage = "必填";
             this.requiredFieldValidator9.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator7
             // 
-            this.requiredFieldValidator7.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator7.ErrorMessage = "必填";
             this.requiredFieldValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // caseErrorProvider
@@ -2120,7 +2205,7 @@
             // 
             // requiredFieldValidator11
             // 
-            this.requiredFieldValidator11.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator11.ErrorMessage = "必填";
             this.requiredFieldValidator11.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // creditCoverValidator
@@ -2153,11 +2238,35 @@
             // 
             this.creditCoverHighlighter.ContainerControl = this;
             // 
-            // regularExpressionValidator1
+            // tbCaseCode
             // 
-            this.regularExpressionValidator1.ErrorMessage = "正确格式如下：FC20100001-010SH-NY";
-            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.regularExpressionValidator1.ValidationExpression = "^[A-Z]{2}\\d{8}-\\d{4}[A-Z]{2}-[A-Z]{2}$";
+            // 
+            // 
+            // 
+            this.tbCaseCode.Border.Class = "TextBoxBorder";
+            this.tbCaseCode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "CaseCode", true));
+            this.tbCaseCode.Location = new System.Drawing.Point(352, 3);
+            this.tbCaseCode.Name = "tbCaseCode";
+            this.tbCaseCode.ReadOnly = true;
+            this.tbCaseCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbCaseCode.Size = new System.Drawing.Size(121, 20);
+            this.tbCaseCode.TabIndex = 41;
+            // 
+            // lblCaseCode
+            // 
+            lblCaseCode.AutoSize = true;
+            lblCaseCode.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblCaseCode.BackgroundStyle.Class = "";
+            lblCaseCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            lblCaseCode.Location = new System.Drawing.Point(287, 5);
+            lblCaseCode.Name = "lblCaseCode";
+            lblCaseCode.Size = new System.Drawing.Size(59, 16);
+            lblCaseCode.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            lblCaseCode.TabIndex = 40;
+            lblCaseCode.Text = "案件编号:";
             // 
             // CaseDetail
             // 
@@ -2196,77 +2305,6 @@
 
         #endregion
 
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
-        private DevComponents.DotNetBar.Validator.SuperValidator creditCoverValidator;
-        private System.Windows.Forms.ErrorProvider creditCoverErrorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter creditCoverHighlighter;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator8;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator6;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbManagerName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbReviewNo;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentTerm;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbComment;
-        private DevComponents.DotNetBar.ButtonX btnCDADelete;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsRecoarse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsNotice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCover;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsCreditCoverRevolving;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPUGProportion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPUGPeriod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReassignGracePeriod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceProportion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentTerms;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceGracePeriod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeductibles;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLossThreshold;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEFPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAIFPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionTypeComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFeeCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAValueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDADueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNoticeMethod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNoticePersion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACreateUserName;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator9;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator7;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator12;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator11;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNegoID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReplyAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReplyDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseMark;
-        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
     }
 }

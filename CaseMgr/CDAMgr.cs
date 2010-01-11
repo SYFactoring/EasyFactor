@@ -152,7 +152,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 CDA cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                 if (cda != null)
                 {
-                    if (MessageBox.Show("是否打算删除额度通知书: " + cdaCode, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+                    if (MessageBox.Show("是否打算删除额度通知书: " + cdaCode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                     {
                         return;
                     }
@@ -172,11 +172,11 @@ namespace CMBC.EasyFactor.CaseMgr
                     catch (Exception e1)
                     {
                         isDeleteOK = false;
-                        MessageBox.Show("不能删除此额度通知书: " + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("不能删除此额度通知书: " + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     if (isDeleteOK)
                     {
-                        MessageBox.Show("数据删除成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         dgvCDAs.Rows.RemoveAt(dgvCDAs.SelectedRows[0].Index);
                     }
                 }

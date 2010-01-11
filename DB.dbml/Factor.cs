@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CMBC.EasyFactor.Utils;
 
 namespace CMBC.EasyFactor.DB.dbml
 {
     public partial class Factor : BaseObject
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         private Dictionary<string, string> _dict;
         /// <summary>
@@ -15,16 +16,16 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public static readonly string CMBC_CODE = "CN01300";
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Properties (4) 
+        #region Properties (4)
 
         public string CreditLine
         {
             get
             {
                 StringBuilder sb = new StringBuilder();
-                var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == "已生效");
+                var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY);
                 foreach (FactorCreditLine creditLine in creditLines)
                 {
                     sb.Append(creditLine.CreditLineCurrency).Append(" ").Append(creditLine.CreditLine).Append(Environment.NewLine);
@@ -38,7 +39,7 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 StringBuilder sb = new StringBuilder();
-                var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == "已生效");
+                var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY);
                 foreach (FactorCreditLine creditLine in creditLines)
                 {
                     sb.Append(creditLine.PeriodEnd).Append(Environment.NewLine);
@@ -52,7 +53,7 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 StringBuilder sb = new StringBuilder();
-                var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == "已生效");
+                var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY);
                 foreach (FactorCreditLine creditLine in creditLines)
                 {
                     sb.Append(creditLine.PeriodEnd).Append(Environment.NewLine);
@@ -60,16 +61,16 @@ namespace CMBC.EasyFactor.DB.dbml
                 return sb.ToString();
             }
         }
-        
+
         public double AssignOutstanding
         {
             get
             {
                 double assignOutstanding = 0;
-                foreach (Case curCase in this.BuyerCases.Where(c=>c.CaseMark=="启动案"))
+                foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
                 {
-                    
-                    foreach (CDA cda in curCase.CDAs.Where(c=>c.CDAStatus=="已签回"))
+
+                    foreach (CDA cda in curCase.CDAs.Where(c => c.CDAStatus == "已签回"))
                     {
                         assignOutstanding += cda.AssignOutstanding;
                     }
@@ -114,11 +115,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (5) 
+        #region Methods (5)
 
-		// Public Methods (4) 
+        // Public Methods (4) 
 
         public void BeginMonitor()
         {
@@ -170,16 +171,16 @@ namespace CMBC.EasyFactor.DB.dbml
                 return _CompanyNameEN;
             }
         }
-		// Private Methods (1) 
+        // Private Methods (1) 
 
         void Factor_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             _dict[e.PropertyName] = String.Format("{0} : {1}\n", e.PropertyName, this.GetType().GetProperty(e.PropertyName).GetValue(this, null));
         }
 
-        
 
-		#endregion Methods 
+
+        #endregion Methods
     }
 
 }

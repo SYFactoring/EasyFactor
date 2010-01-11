@@ -261,7 +261,7 @@ namespace CMBC.EasyFactor.Utils
             this.app = new ApplicationClass() { Visible = false };
             if (this.app == null)
             {
-                MessageBox.Show("Excel 程序无法启动!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return null;
             }
             this.workbook = (WorkbookClass)app.Workbooks.Open(
@@ -341,6 +341,7 @@ namespace CMBC.EasyFactor.Utils
                         curCase.BuyerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == IFCode);
                         column++;
                         curCase.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                        curCase.NetPaymentTerm = (System.Nullable<int>)valueArray[row, column++];
                         curCase.CaseAppDate = (DateTime)valueArray[row, column++];
                         curCase.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                         curCase.Comment = String.Format("{0:G}", valueArray[row, column++]);
@@ -465,18 +466,13 @@ namespace CMBC.EasyFactor.Utils
                     client.ClientLevel = String.Format("{0:G}", valueArray[row, column++]);
                     client.IsGroup = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                     string groupNo = String.Format("{0:G}", valueArray[row, column++]);
-                    string groupNameCN = String.Format("{0:G}", valueArray[row, column++]);
-                    string groupNameEN = String.Format("{0:G}", valueArray[row, column++]);
-                    if (client.IsGroup.GetValueOrDefault())
+                    if (client.IsGroup)
                     {
-                        ClientGroup clientGroup = App.Current.DbContext.ClientGroups.SingleOrDefault(cg => cg.GroupNo == groupNo);
+                        Client clientGroup = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == groupNo);
                         if (clientGroup == null)
                         {
-                            clientGroup = new ClientGroup();
-                            clientGroup.GroupNo = groupNo;
+                            throw new Exception("集团客户号错误: " + groupNo);
                         }
-                        clientGroup.GroupNameCN = groupNameCN;
-                        clientGroup.GroupNameEN = groupNameEN;
                     }
 
                     client.RegistrationNumber = String.Format("{0:G}", valueArray[row, column++]);
@@ -1043,7 +1039,7 @@ namespace CMBC.EasyFactor.Utils
 
                         int column = 0;
 
-                        string assignBatchNo = String.Format("{0:G}", valueArray[row, 2]);
+                        string assignBatchNo = String.Format("{0:G}", valueArray[row, 3]);
                         InvoiceAssignBatch assignBatch = null;
                         if (assignBatchNo != string.Empty)
                         {
@@ -1059,11 +1055,11 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            DateTime assignDate = (DateTime)valueArray[row, 4];
+                            DateTime assignDate = (DateTime)valueArray[row, 5];
                             assignBatch = assignBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.AssignDate == assignDate);
                             if (assignBatch == null)
                             {
-                                column = 3;
+                                column = 4;
                                 assignBatch = new InvoiceAssignBatch();
                                 assignBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, column++]);
                                 assignBatch.AssignDate = (DateTime)valueArray[row, column++];
@@ -1098,7 +1094,6 @@ namespace CMBC.EasyFactor.Utils
                                 throw new Exception("发票号重复: " + old.InvoiceNo);
                             }
                         }
-                        invoice.InvoiceType = String.Format("{0:G}", valueArray[row, column++]);
                         invoice.InvoiceAmount = (double)valueArray[row, column++];
                         invoice.AssignAmount = (double)valueArray[row, column++];
                         invoice.InvoiceDate = (DateTime)valueArray[row, column++];
@@ -1309,7 +1304,6 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("发票号重复: " + old.InvoiceNo);
                         }
                     }
-                    invoice.InvoiceType = String.Format("{0:G}", valueArray[row, column++]);
                     invoice.InvoiceAmount = (double)valueArray[row, column++];
                     invoice.AssignAmount = (double)valueArray[row, column++];
                     invoice.InvoiceDate = (DateTime)valueArray[row, column++];

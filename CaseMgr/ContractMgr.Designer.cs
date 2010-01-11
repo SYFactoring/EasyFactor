@@ -1,4 +1,6 @@
-﻿namespace CMBC.EasyFactor.CaseMgr
+﻿using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+namespace CMBC.EasyFactor.CaseMgr
 {
     partial class ContractMgr
     {
@@ -130,8 +132,8 @@
             this.cbContractStatus.FormattingEnabled = true;
             this.cbContractStatus.ItemHeight = 14;
             this.cbContractStatus.Items.AddRange(new object[] {
-            "已生效",
-            "已过期"});
+            ConstStr.CONTRACT.AVAILABILITY,
+            ConstStr.CONTRACT.EXPIRY});
             this.cbContractStatus.Location = new System.Drawing.Point(377, 5);
             this.cbContractStatus.Name = "cbContractStatus";
             this.cbContractStatus.Size = new System.Drawing.Size(98, 20);

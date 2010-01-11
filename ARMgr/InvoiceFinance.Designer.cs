@@ -73,15 +73,14 @@
             DevComponents.DotNetBar.LabelX factorCodeLabel;
             DevComponents.DotNetBar.LabelX costRateLabel;
             DevComponents.DotNetBar.LabelX financeTypeLabel;
-            DevComponents.DotNetBar.LabelX lblCurrentFinanceAmount;
             DevComponents.DotNetBar.LabelX lblTotalInterest;
             DevComponents.DotNetBar.LabelX lblFinanceLineBalance;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceFinance));
             this.panelFinanceBatch = new DevComponents.DotNetBar.PanelEx();
             this.btnFinanceBatchImport = new DevComponents.DotNetBar.ButtonX();
@@ -90,7 +89,6 @@
             this.tbFinanceLineBalance = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbTotalInterest = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnFinanceBatchNew = new DevComponents.DotNetBar.ButtonX();
-            this.tbTotalFinance = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnFactorSelect = new DevComponents.DotNetBar.ButtonX();
             this.btnFinanceBatchSave = new DevComponents.DotNetBar.ButtonX();
             this.financeTypeComboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -148,6 +146,7 @@
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             financeBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             financeAmountLabel = new DevComponents.DotNetBar.LabelX();
             financePeriodBeginLabel = new DevComponents.DotNetBar.LabelX();
@@ -156,7 +155,6 @@
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
             costRateLabel = new DevComponents.DotNetBar.LabelX();
             financeTypeLabel = new DevComponents.DotNetBar.LabelX();
-            lblCurrentFinanceAmount = new DevComponents.DotNetBar.LabelX();
             lblTotalInterest = new DevComponents.DotNetBar.LabelX();
             lblFinanceLineBalance = new DevComponents.DotNetBar.LabelX();
             this.panelFinanceBatch.SuspendLayout();
@@ -275,19 +273,6 @@
             financeTypeLabel.TabIndex = 0;
             financeTypeLabel.Text = "融资类型:";
             // 
-            // lblCurrentFinanceAmount
-            // 
-            lblCurrentFinanceAmount.AutoSize = true;
-            // 
-            // 
-            // 
-            lblCurrentFinanceAmount.BackgroundStyle.Class = "";
-            lblCurrentFinanceAmount.Location = new System.Drawing.Point(943, 27);
-            lblCurrentFinanceAmount.Name = "lblCurrentFinanceAmount";
-            lblCurrentFinanceAmount.Size = new System.Drawing.Size(81, 16);
-            lblCurrentFinanceAmount.TabIndex = 20;
-            lblCurrentFinanceAmount.Text = "本次融资总额";
-            // 
             // lblTotalInterest
             // 
             lblTotalInterest.AutoSize = true;
@@ -295,7 +280,7 @@
             // 
             // 
             lblTotalInterest.BackgroundStyle.Class = "";
-            lblTotalInterest.Location = new System.Drawing.Point(920, 48);
+            lblTotalInterest.Location = new System.Drawing.Point(920, 26);
             lblTotalInterest.Name = "lblTotalInterest";
             lblTotalInterest.Size = new System.Drawing.Size(106, 16);
             lblTotalInterest.TabIndex = 23;
@@ -308,11 +293,11 @@
             // 
             // 
             lblFinanceLineBalance.BackgroundStyle.Class = "";
-            lblFinanceLineBalance.Location = new System.Drawing.Point(906, 6);
+            lblFinanceLineBalance.Location = new System.Drawing.Point(945, 5);
             lblFinanceLineBalance.Name = "lblFinanceLineBalance";
-            lblFinanceLineBalance.Size = new System.Drawing.Size(118, 16);
+            lblFinanceLineBalance.Size = new System.Drawing.Size(81, 16);
             lblFinanceLineBalance.TabIndex = 25;
-            lblFinanceLineBalance.Text = "预付款融资额度余额";
+            lblFinanceLineBalance.Text = "本次融资差额";
             // 
             // panelFinanceBatch
             // 
@@ -326,8 +311,6 @@
             this.panelFinanceBatch.Controls.Add(this.tbTotalInterest);
             this.panelFinanceBatch.Controls.Add(lblTotalInterest);
             this.panelFinanceBatch.Controls.Add(this.btnFinanceBatchNew);
-            this.panelFinanceBatch.Controls.Add(this.tbTotalFinance);
-            this.panelFinanceBatch.Controls.Add(lblCurrentFinanceAmount);
             this.panelFinanceBatch.Controls.Add(this.btnFactorSelect);
             this.panelFinanceBatch.Controls.Add(this.btnFinanceBatchSave);
             this.panelFinanceBatch.Controls.Add(financeTypeLabel);
@@ -414,7 +397,7 @@
             // 
             // 
             this.tbTotalInterest.Border.Class = "TextBoxBorder";
-            this.tbTotalInterest.Location = new System.Drawing.Point(1025, 46);
+            this.tbTotalInterest.Location = new System.Drawing.Point(1025, 24);
             this.tbTotalInterest.Name = "tbTotalInterest";
             this.tbTotalInterest.Size = new System.Drawing.Size(100, 20);
             this.tbTotalInterest.TabIndex = 24;
@@ -430,17 +413,6 @@
             this.btnFinanceBatchNew.TabIndex = 22;
             this.btnFinanceBatchNew.Text = "新建批次";
             this.btnFinanceBatchNew.Click += new System.EventHandler(this.NewFinanceBatch);
-            // 
-            // tbTotalFinance
-            // 
-            // 
-            // 
-            // 
-            this.tbTotalFinance.Border.Class = "TextBoxBorder";
-            this.tbTotalFinance.Location = new System.Drawing.Point(1025, 24);
-            this.tbTotalFinance.Name = "tbTotalFinance";
-            this.tbTotalFinance.Size = new System.Drawing.Size(100, 20);
-            this.tbTotalFinance.TabIndex = 21;
             // 
             // btnFactorSelect
             // 
@@ -624,6 +596,7 @@
             this.financeAmountTextBoxX.Name = "financeAmountTextBoxX";
             this.financeAmountTextBoxX.Size = new System.Drawing.Size(100, 20);
             this.financeAmountTextBoxX.TabIndex = 15;
+            this.superValidator.SetValidator1(this.financeAmountTextBoxX, this.requiredFieldValidator9);
             // 
             // batchCurrencyComboBoxEx
             // 
@@ -712,8 +685,8 @@
             // colAssignAmount
             // 
             this.colAssignAmount.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle1.Format = "N2";
-            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.Format = "N2";
+            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle13;
             this.colAssignAmount.HeaderText = "转让金额";
             this.colAssignAmount.Name = "colAssignAmount";
             this.colAssignAmount.ReadOnly = true;
@@ -721,8 +694,8 @@
             // colAssignOutstanding
             // 
             this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
-            dataGridViewCellStyle2.Format = "N2";
-            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.Format = "N2";
+            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle14;
             this.colAssignOutstanding.HeaderText = "转让余额";
             this.colAssignOutstanding.Name = "colAssignOutstanding";
             this.colAssignOutstanding.ReadOnly = true;
@@ -749,8 +722,8 @@
             // colFinanceAmount
             // 
             this.colFinanceAmount.DataPropertyName = "FinanceAmount";
-            dataGridViewCellStyle3.Format = "N2";
-            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Format = "N2";
+            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle15;
             this.colFinanceAmount.HeaderText = "融资金额";
             this.colFinanceAmount.Name = "colFinanceAmount";
             this.colFinanceAmount.ReadOnly = true;
@@ -758,8 +731,8 @@
             // colFinanceOutstanding
             // 
             this.colFinanceOutstanding.DataPropertyName = "FinanceOutstanding";
-            dataGridViewCellStyle4.Format = "N2";
-            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.Format = "N2";
+            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle16;
             this.colFinanceOutstanding.HeaderText = "融资余额";
             this.colFinanceOutstanding.Name = "colFinanceOutstanding";
             this.colFinanceOutstanding.ReadOnly = true;
@@ -783,8 +756,8 @@
             // colInterest
             // 
             this.colInterest.DataPropertyName = "Interest";
-            dataGridViewCellStyle5.Format = "N2";
-            this.colInterest.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle17.Format = "N2";
+            this.colInterest.DefaultCellStyle = dataGridViewCellStyle17;
             this.colInterest.HeaderText = "利息";
             this.colInterest.Name = "colInterest";
             // 
@@ -797,8 +770,8 @@
             // colCommission
             // 
             this.colCommission.DataPropertyName = "Commission";
-            dataGridViewCellStyle6.Format = "N2";
-            this.colCommission.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle18.Format = "N2";
+            this.colCommission.DefaultCellStyle = dataGridViewCellStyle18;
             this.colCommission.HeaderText = "手续费";
             this.colCommission.Name = "colCommission";
             // 
@@ -1005,6 +978,11 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
+            // requiredFieldValidator9
+            // 
+            this.requiredFieldValidator9.ErrorMessage = "必填";
+            this.requiredFieldValidator9.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // InvoiceFinance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1050,7 +1028,6 @@
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator7;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator8;
         private DevComponents.DotNetBar.ButtonX btnFactorSelect;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalFinance;
         private DevComponents.DotNetBar.ButtonX btnFinanceBatchNew;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
@@ -1075,5 +1052,6 @@
         private DevComponents.DotNetBar.ButtonX btnFinanceBatchExport;
         private DevComponents.DotNetBar.ButtonX btnFinanceBatchSelect;
         private DevComponents.DotNetBar.ButtonX btnFinanceBatchImport;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator9;
     }
 }

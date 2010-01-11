@@ -314,7 +314,10 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     e.Cancel = true;
                 }
-
+                if (result < 0)
+                {
+                    e.Cancel = true;
+                }
             }
         }
 
@@ -354,7 +357,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._CDA == null)
             {
-                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             if (!(this.batchBindingSource.DataSource is InvoicePaymentBatch))
@@ -380,7 +383,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._CDA == null)
             {
-                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             if (!(this.batchBindingSource.DataSource is InvoicePaymentBatch))
@@ -418,7 +421,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._CDA == null)
             {
-                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -491,7 +494,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._CDA == null)
             {
-                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             if (!this.superValidator.Validate())
@@ -542,11 +545,11 @@ namespace CMBC.EasyFactor.ARMgr
                 }
                 batch.CDA = null;
                 isSaveOK = false;
-                MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             if (isSaveOK)
             {
-                MessageBox.Show("数据保存成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.caseBasic.CaculateOutstanding(this._CDA);
             }
         }
@@ -560,7 +563,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._CDA == null)
             {
-                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -613,17 +616,17 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (invoice.AssignOutstanding < 0)
                 {
-                    MessageBox.Show("付款金额不能大于转让金额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("付款金额不能大于转让金额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
                 if (invoice.FinanceOutstanding < 0)
                 {
-                    MessageBox.Show("还款金额不能大于融资金额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("还款金额不能大于融资金额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
                 if (invoice.RefundAmount > invoice.PaymentAmount)
                 {
-                    MessageBox.Show("还款金额不能大于付款金额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("还款金额不能大于付款金额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
             }

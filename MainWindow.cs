@@ -31,6 +31,7 @@ namespace CMBC.EasyFactor
         public MainWindow()
         {
             InitializeComponent();
+
             this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
             this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
@@ -64,10 +65,10 @@ namespace CMBC.EasyFactor
 
         #endregion Properties
 
-        #region Methods (46)
+        #region Methods (53)
 
-        // Private Methods (46) 
-        
+        // Private Methods (53) 
+
         private void About(object sender, EventArgs e)
         {
             AboutBox aboutBox = new AboutBox();
@@ -218,17 +219,6 @@ namespace CMBC.EasyFactor
         {
             InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE);
             this.SetDetailPanel(invoiceMgr);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ImportAssign(object sender, EventArgs e)
-        {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES_BY_BATCH);
-            importForm.Show();
         }
 
         /// <summary>
@@ -559,6 +549,61 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void QueryClientDominate(object sender, EventArgs e)
+        {
+            ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.DOMINATE_CLIENT);
+            this.SetDetailPanel(query);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryClientExport(object sender, EventArgs e)
+        {
+            ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.EXPORT_CLIENT);
+            this.SetDetailPanel(query);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryClientImport(object sender, EventArgs e)
+        {
+            ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.IMPORT_CLIENT);
+            this.SetDetailPanel(query);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryClients(object sender, EventArgs e)
+        {
+            ClientMgr query = new ClientMgr(false);
+            this.SetDetailPanel(query);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryClientCreditLine(object sender, EventArgs e)
+        {
+            ClientCreditLineMgr query = new ClientCreditLineMgr(ClientCreditLineMgr.OpClientCreditMgrType.QUERY_CLINET);
+            this.SetDetailPanel(query);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QueryContract(object sender, EventArgs e)
         {
             ContractMgr contractMgr = new ContractMgr(true);
@@ -574,6 +619,28 @@ namespace CMBC.EasyFactor
         {
             CreditCoverNegMgr creditCoverNegMgr = new CreditCoverNegMgr(true);
             this.SetDetailPanel(creditCoverNegMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryFactorCreditLine(object sender, EventArgs e)
+        {
+            FactorCreditLineMgr query = new FactorCreditLineMgr();
+            this.SetDetailPanel(query);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryClientGroupCreditLine(object sender, EventArgs e)
+        {
+            ClientCreditLineMgr query = new ClientCreditLineMgr(ClientCreditLineMgr.OpClientCreditMgrType.QUERY_GROUP);
+            this.SetDetailPanel(query);
         }
 
         /// <summary>
@@ -610,78 +677,11 @@ namespace CMBC.EasyFactor
             }
             else
             {
-                MessageBox.Show("只有管理员可以执行此操作", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("只有管理员可以执行此操作", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
         }
 
         #endregion Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryClients(object sender, EventArgs e)
-        {
-            ClientMgr query = new ClientMgr(false);
-            this.SetDetailPanel(query);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryClientExport(object sender, EventArgs e)
-        {
-            ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.EXPORT_CLIENT);
-            this.SetDetailPanel(query);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryClientImport(object sender, EventArgs e)
-        {
-            ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.IMPORT_CLIENT);
-            this.SetDetailPanel(query);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryClientDominate(object sender, EventArgs e)
-        {
-            ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.DOMINATE_CLIENT);
-            this.SetDetailPanel(query);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryClinetCreditLine(object sender, EventArgs e)
-        {
-            ClientCreditLineMgr query = new ClientCreditLineMgr();
-            this.SetDetailPanel(query);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryFactorCreditLine(object sender, EventArgs e)
-        {
-            FactorCreditLineMgr query = new FactorCreditLineMgr();
-            this.SetDetailPanel(query);
-        }
-
     }
 }

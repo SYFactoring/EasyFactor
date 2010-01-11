@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("中国民生银行保理运营系统（内测版）")]
-[assembly: AssemblyDescription("本系统由Jerry、晓兰提议，刘一鸣设计、开发并维护。感谢Jerry、Nina、Sissi、Lele、Clara、Cindy不辞辛劳的测试和负责任的反馈。希望我们可以做的更好。联系方式：liuyiming.vip@gmail.com")]
+[assembly: AssemblyDescription("本系统由Jerry提议，晓兰、一鸣设计、开发并维护。感谢Jerry、Nina、Sissi、Lele、Clara、Cindy不辞辛劳的测试和负责任的反馈。希望我们可以做的更好。联系方式：liuyiming.vip@gmail.com")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("中国民生银行贸易金融部")]
 [assembly: AssemblyProduct("EasyFactoring")]

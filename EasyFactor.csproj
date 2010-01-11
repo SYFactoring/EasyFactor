@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CMBC.EasyFactor</RootNamespace>
-    <AssemblyName>EasyFactor</AssemblyName>
+    <AssemblyName>EasyFactoring</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -25,7 +25,7 @@
     <GenerateManifests>false</GenerateManifests>
     <SignManifests>false</SignManifests>
     <TargetZone>LocalIntranet</TargetZone>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <ApplicationIcon>EasyFactoring.ico</ApplicationIcon>
     <PublishUrl>C:\Users\Yiming\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -194,6 +194,7 @@
     <Compile Include="DB.dbml\CDA.cs" />
     <Compile Include="DB.dbml\Client.cs" />
     <Compile Include="DB.dbml\ClientCreditLine.cs" />
+    <Compile Include="Utils\ConstStr.cs" />
     <Compile Include="DB.dbml\Country.cs" />
     <Compile Include="DB.dbml\CreditCoverNegotiation.cs" />
     <Compile Include="DB.dbml\Currency.cs" />
@@ -521,6 +522,7 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EasyFactoring.ico" />
     <Content Include="Properties\Resources\Images\army-officer-icon-48.png" />
     <Content Include="Properties\Resources\Images\banknote-icon-48.png" />
     <Content Include="Properties\Resources\Images\bar-chart-icon-48.png" />

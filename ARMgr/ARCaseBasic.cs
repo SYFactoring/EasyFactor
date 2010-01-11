@@ -259,7 +259,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (!cda.FinanceLine.HasValue && this.opARType == OpARType.InvoiceFinance)
                 {
-                    MessageBox.Show("本案无预付款额度，不能融资。", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("本案无预付款额度，不能融资。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 

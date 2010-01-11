@@ -171,21 +171,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
                 if (selectedClient != null)
                 {
-                    if (MessageBox.Show("是否打算删除客户: " + selectedClient.ClientNameCN, "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    if (MessageBox.Show("是否打算删除客户: " + selectedClient.ClientNameCN, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
                         if (selectedClient.ClientCreditLines.Count > 0)
                         {
-                            MessageBox.Show("不能删除此客户,已存在相关额度", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("不能删除此客户,已存在相关额度", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                         if (selectedClient.Contracts.Count > 0)
                         {
-                            MessageBox.Show("不能删除此客户,已存在相关保理合同", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("不能删除此客户,已存在相关保理合同", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                         if (selectedClient.SellerCases.Count > 0 || selectedClient.BuyerCases.Count > 0)
                         {
-                            MessageBox.Show("不能删除此客户,已存在相关案件信息", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("不能删除此客户,已存在相关案件信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                         App.Current.DbContext.Clients.DeleteOnSubmit(selectedClient);
@@ -195,7 +195,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                         catch (SqlException e1)
                         {
-                            MessageBox.Show("删除失败," + e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
 
@@ -328,7 +328,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                   && (((c.ClientNameCN == null ? string.Empty : c.ClientNameCN).Contains(tbClientName.Text)) || ((c.ClientNameEN_1 == null ? string.Empty : c.ClientNameEN_1).Contains(tbClientName.Text)) || ((c.ClientNameEN_2 == null ? string.Empty : c.ClientNameEN_2).Contains(tbClientName.Text)))
                   && ((c.ClientEDICode == null ? string.Empty : c.ClientEDICode).Contains(tbClientEDICode.Text))
                   && ((c.ClientType == null ? string.Empty : c.ClientType).Contains(clientType))
-                  && (this.cbIsContractSigned.Checked == false ? true : c.Contracts.Any(con => con.ContractStatus == "已生效"))
+                  && (this.cbIsContractSigned.Checked == false ? true : c.Contracts.Any(con => con.ContractStatus == ConstStr.CONTRACT.AVAILABILITY))
                   && (caseType == "出口保理" ? c.SellerCases.Any(ca => ca.TransactionType == "出口保理") || c.BuyerCases.Any(ca => ca.TransactionType == "出口保理") : true)
                   && (caseType == "进口保理" ? c.SellerCases.Any(ca => ca.TransactionType == "进口保理") || c.BuyerCases.Any(ca => ca.TransactionType == "进口保理") : true)
                   && (caseType == "国内保理" ? c.SellerCases.Any(ca => ca.TransactionType == "国内卖方保理" || ca.TransactionType == "国内买方保理") || c.BuyerCases.Any(ca => ca.TransactionType == "国内卖方保理" || ca.TransactionType == "国内买方保理") : true)

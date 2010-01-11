@@ -10,6 +10,7 @@ namespace CMBC.EasyFactor
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// Login Window
@@ -51,11 +52,11 @@ namespace CMBC.EasyFactor
                     return true;
                 }
 
-                MessageBox.Show("数据库连接失败", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("数据库连接失败", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception e)
             {
-                MessageBox.Show("数据库连接失败: " + e.ToString(), "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("数据库连接失败: " + e.ToString(), ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             return false;
@@ -69,6 +70,7 @@ namespace CMBC.EasyFactor
         /// <param name="e">Event Args</param>
         private void Cancel(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             Close();
         }
 
@@ -97,7 +99,7 @@ namespace CMBC.EasyFactor
                 curUser.LoginDate = DateTime.Now;
                 App.Current.DbContext.SubmitChanges();
                 App.Current.CurUser = curUser;
-                Close();
+                this.DialogResult = DialogResult.OK;
             }
             else
             {

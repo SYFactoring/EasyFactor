@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CMBC.EasyFactor.Utils;
 
 namespace CMBC.EasyFactor.DB.dbml
 {
@@ -29,7 +30,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (AssignOutstanding > 0)
+                if (TypeUtil.GreaterZero(AssignOutstanding))
                 {
                     return (DateTime.Now.Date - this.DueDate).Days;
                 }
@@ -97,7 +98,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (FinanceOutstanding > 0)
+                if (TypeUtil.GreaterZero(FinanceOutstanding))
                 {
                     TimeSpan duedays = DateTime.Now.Date - this.FinanceDueDate.Value;
                     return duedays.Days;

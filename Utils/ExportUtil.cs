@@ -81,7 +81,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBox.Show("Excel 程序无法启动!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -99,7 +99,6 @@ namespace CMBC.EasyFactor.Utils
             //datasheet.Cells[1, column++] = "本次转让备注";
             //datasheet.Cells[1, column++] = "转让经办人";
             datasheet.Cells[1, column++] = "发票号/贷项通知";
-            datasheet.Cells[1, column++] = "单据类别";
             datasheet.Cells[1, column++] = "票面金额";
             datasheet.Cells[1, column++] = "转让金额";
             datasheet.Cells[1, column++] = "发票日期";
@@ -166,7 +165,6 @@ namespace CMBC.EasyFactor.Utils
 
                 //column = 12;
                 datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
-                datasheet.Cells[row + 2, column++] = invoice.InvoiceType;
                 datasheet.Cells[row + 2, column++] = invoice.InvoiceAmount;
                 datasheet.Cells[row + 2, column++] = invoice.AssignAmount;
                 datasheet.Cells[row + 2, column++] = invoice.InvoiceDate;
@@ -229,7 +227,7 @@ namespace CMBC.EasyFactor.Utils
             {
                 range.EntireColumn.AutoFit();
                 //if (range.Column == 14 || range.Column == 15 || range.Column == 35 || range.Column == 48 || range.Column == 50 || range.Column == 52 || range.Column == 54)
-                if (range.Column == 3 || range.Column == 4 || range.Column == 8 || range.Column == 11 || range.Column == 13 || range.Column == 15 || range.Column == 17)
+                if (range.Column == 2 || range.Column == 3 || range.Column == 7 || range.Column == 9 || range.Column == 12 || range.Column == 14 || range.Column == 16)
                 {
                     range.NumberFormatLocal = "0.00";
                 }

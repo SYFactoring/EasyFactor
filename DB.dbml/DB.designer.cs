@@ -48,9 +48,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertClientCreditLine(ClientCreditLine instance);
     partial void UpdateClientCreditLine(ClientCreditLine instance);
     partial void DeleteClientCreditLine(ClientCreditLine instance);
-    partial void InsertClientGroup(ClientGroup instance);
-    partial void UpdateClientGroup(ClientGroup instance);
-    partial void DeleteClientGroup(ClientGroup instance);
     partial void InsertContract(Contract instance);
     partial void UpdateContract(Contract instance);
     partial void DeleteContract(Contract instance);
@@ -78,9 +75,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertFactorCreditLine(FactorCreditLine instance);
     partial void UpdateFactorCreditLine(FactorCreditLine instance);
     partial void DeleteFactorCreditLine(FactorCreditLine instance);
-    partial void InsertFactorGroup(FactorGroup instance);
-    partial void UpdateFactorGroup(FactorGroup instance);
-    partial void DeleteFactorGroup(FactorGroup instance);
     partial void InsertInvoice(Invoice instance);
     partial void UpdateInvoice(Invoice instance);
     partial void DeleteInvoice(Invoice instance);
@@ -93,6 +87,12 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertInvoicePaymentBatch(InvoicePaymentBatch instance);
     partial void UpdateInvoicePaymentBatch(InvoicePaymentBatch instance);
     partial void DeleteInvoicePaymentBatch(InvoicePaymentBatch instance);
+    partial void InsertInvoiceDeduction(InvoiceDeduction instance);
+    partial void UpdateInvoiceDeduction(InvoiceDeduction instance);
+    partial void DeleteInvoiceDeduction(InvoiceDeduction instance);
+    partial void InsertCreditNote(CreditNote instance);
+    partial void UpdateCreditNote(CreditNote instance);
+    partial void DeleteCreditNote(CreditNote instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -173,14 +173,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		public System.Data.Linq.Table<ClientGroup> ClientGroups
-		{
-			get
-			{
-				return this.GetTable<ClientGroup>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Contract> Contracts
 		{
 			get
@@ -253,14 +245,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		public System.Data.Linq.Table<FactorGroup> FactorGroups
-		{
-			get
-			{
-				return this.GetTable<FactorGroup>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Invoice> Invoices
 		{
 			get
@@ -290,6 +274,22 @@ namespace CMBC.EasyFactor.DB.dbml
 			get
 			{
 				return this.GetTable<InvoicePaymentBatch>();
+			}
+		}
+		
+		public System.Data.Linq.Table<InvoiceDeduction> InvoiceDeductions
+		{
+			get
+			{
+				return this.GetTable<InvoiceDeduction>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CreditNote> CreditNotes
+		{
+			get
+			{
+				return this.GetTable<CreditNote>();
 			}
 		}
 	}
@@ -328,7 +328,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _ManagerName;
 		
-		private int _NetPaymentTerm;
+		private System.Nullable<int> _NetPaymentTerm;
 		
 		private string _ReviewNo;
 		
@@ -382,7 +382,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreateUserNameChanged();
     partial void OnManagerNameChanging(string value);
     partial void OnManagerNameChanged();
-    partial void OnNetPaymentTermChanging(int value);
+    partial void OnNetPaymentTermChanging(System.Nullable<int> value);
     partial void OnNetPaymentTermChanged();
     partial void OnReviewNoChanging(string value);
     partial void OnReviewNoChanged();
@@ -707,8 +707,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_NetPaymentTerm", DbType="Int NOT NULL")]
-		public int NetPaymentTerm
+		[Column(Storage="_NetPaymentTerm", DbType="Int")]
+		public System.Nullable<int> NetPaymentTerm
 		{
 			get
 			{
@@ -2571,7 +2571,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _ClientLevel;
 		
-		private System.Nullable<bool> _IsGroup;
+		private bool _IsGroup;
 		
 		private string _GroupNo;
 		
@@ -2589,9 +2589,13 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
+		private string _ClientGroupType;
+		
 		private EntitySet<Case> _BuyerCases;
 		
 		private EntitySet<Case> _SellerCases;
+		
+		private EntitySet<Client> _GroupClients;
 		
 		private EntitySet<ClientAccount> _ClientAccounts;
 		
@@ -2599,9 +2603,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<Contract> _Contracts;
 		
-		private EntityRef<ClientGroup> _ClientGroup;
-		
 		private EntityRef<Department> _Department;
+		
+		private EntityRef<Client> _ClientGroup;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2657,10 +2661,10 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnProductENChanged();
     partial void OnClientLevelChanging(string value);
     partial void OnClientLevelChanged();
-    partial void OnIsGroupChanging(System.Nullable<bool> value);
+    partial void OnIsGroupChanging(bool value);
     partial void OnIsGroupChanged();
-    partial void OnGroupNoChanging(string value);
-    partial void OnGroupNoChanged();
+    partial void OnGroupEDICodeChanging(string value);
+    partial void OnGroupEDICodeChanged();
     partial void OnRegistrationNumberChanging(string value);
     partial void OnRegistrationNumberChanged();
     partial void OnCompanyCodeChanging(string value);
@@ -2675,17 +2679,20 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
+    partial void OnClientGroupTypeChanging(string value);
+    partial void OnClientGroupTypeChanged();
     #endregion
 		
 		public Client()
 		{
 			this._BuyerCases = new EntitySet<Case>(new Action<Case>(this.attach_BuyerCases), new Action<Case>(this.detach_BuyerCases));
 			this._SellerCases = new EntitySet<Case>(new Action<Case>(this.attach_SellerCases), new Action<Case>(this.detach_SellerCases));
+			this._GroupClients = new EntitySet<Client>(new Action<Client>(this.attach_GroupClients), new Action<Client>(this.detach_GroupClients));
 			this._ClientAccounts = new EntitySet<ClientAccount>(new Action<ClientAccount>(this.attach_ClientAccounts), new Action<ClientAccount>(this.detach_ClientAccounts));
 			this._ClientCreditLines = new EntitySet<ClientCreditLine>(new Action<ClientCreditLine>(this.attach_ClientCreditLines), new Action<ClientCreditLine>(this.detach_ClientCreditLines));
 			this._Contracts = new EntitySet<Contract>(new Action<Contract>(this.attach_Contracts), new Action<Contract>(this.detach_Contracts));
-			this._ClientGroup = default(EntityRef<ClientGroup>);
 			this._Department = default(EntityRef<Department>);
+			this._ClientGroup = default(EntityRef<Client>);
 			OnCreated();
 		}
 		
@@ -3190,7 +3197,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_IsGroup", DbType="Bit")]
-		public System.Nullable<bool> IsGroup
+		public bool IsGroup
 		{
 			get
 			{
@@ -3210,7 +3217,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_GroupNo", DbType="VarChar(35)")]
-		public string GroupNo
+		public string GroupEDICode
 		{
 			get
 			{
@@ -3224,11 +3231,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnGroupNoChanging(value);
+					this.OnGroupEDICodeChanging(value);
 					this.SendPropertyChanging();
 					this._GroupNo = value;
-					this.SendPropertyChanged("GroupNo");
-					this.OnGroupNoChanged();
+					this.SendPropertyChanged("GroupEDICode");
+					this.OnGroupEDICodeChanged();
 				}
 			}
 		}
@@ -3377,6 +3384,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Column(Storage="_ClientGroupType", DbType="NVarChar(50)")]
+		public string ClientGroupType
+		{
+			get
+			{
+				return this._ClientGroupType;
+			}
+			set
+			{
+				if ((this._ClientGroupType != value))
+				{
+					this.OnClientGroupTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ClientGroupType = value;
+					this.SendPropertyChanged("ClientGroupType");
+					this.OnClientGroupTypeChanged();
+				}
+			}
+		}
+		
 		[Association(Name="Client_Case", Storage="_BuyerCases", OtherKey="BuyerCode")]
 		public EntitySet<Case> BuyerCases
 		{
@@ -3400,6 +3427,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			set
 			{
 				this._SellerCases.Assign(value);
+			}
+		}
+		
+		[Association(Name="Client_Client", Storage="_GroupClients", OtherKey="GroupEDICode")]
+		public EntitySet<Client> GroupClients
+		{
+			get
+			{
+				return this._GroupClients;
+			}
+			set
+			{
+				this._GroupClients.Assign(value);
 			}
 		}
 		
@@ -3442,40 +3482,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="ClientGroup_Client", Storage="_ClientGroup", ThisKey="GroupNo", IsForeignKey=true)]
-		public ClientGroup ClientGroup
-		{
-			get
-			{
-				return this._ClientGroup.Entity;
-			}
-			set
-			{
-				ClientGroup previousValue = this._ClientGroup.Entity;
-				if (((previousValue != value) 
-							|| (this._ClientGroup.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ClientGroup.Entity = null;
-						previousValue.Clients.Remove(this);
-					}
-					this._ClientGroup.Entity = value;
-					if ((value != null))
-					{
-						value.Clients.Add(this);
-						this._GroupNo = value.GroupNo;
-					}
-					else
-					{
-						this._GroupNo = default(string);
-					}
-					this.SendPropertyChanged("ClientGroup");
-				}
-			}
-		}
-		
 		[Association(Name="Department_Client", Storage="_Department", ThisKey="BranchCode", IsForeignKey=true)]
 		public Department Department
 		{
@@ -3506,6 +3512,40 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._BranchCode = default(string);
 					}
 					this.SendPropertyChanged("Department");
+				}
+			}
+		}
+		
+		[Association(Name="Client_Client", Storage="_ClientGroup", ThisKey="GroupEDICode", IsForeignKey=true)]
+		public Client ClientGroup
+		{
+			get
+			{
+				return this._ClientGroup.Entity;
+			}
+			set
+			{
+				Client previousValue = this._ClientGroup.Entity;
+				if (((previousValue != value) 
+							|| (this._ClientGroup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ClientGroup.Entity = null;
+						previousValue.GroupClients.Remove(this);
+					}
+					this._ClientGroup.Entity = value;
+					if ((value != null))
+					{
+						value.GroupClients.Add(this);
+						this._GroupNo = value.ClientEDICode;
+					}
+					else
+					{
+						this._GroupNo = default(string);
+					}
+					this.SendPropertyChanged("ClientGroup");
 				}
 			}
 		}
@@ -3552,6 +3592,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		{
 			this.SendPropertyChanging();
 			entity.SellerClient = null;
+		}
+		
+		private void attach_GroupClients(Client entity)
+		{
+			this.SendPropertyChanging();
+			entity.ClientGroup = this;
+		}
+		
+		private void detach_GroupClients(Client entity)
+		{
+			this.SendPropertyChanging();
+			entity.ClientGroup = null;
 		}
 		
 		private void attach_ClientAccounts(ClientAccount entity)
@@ -4394,144 +4446,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[Table(Name="dbo.ClientGroup")]
-	public partial class ClientGroup : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _GroupNo;
-		
-		private string _GroupNameCN;
-		
-		private string _GroupNameEN;
-		
-		private EntitySet<Client> _Clients;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnGroupNoChanging(string value);
-    partial void OnGroupNoChanged();
-    partial void OnGroupNameCNChanging(string value);
-    partial void OnGroupNameCNChanged();
-    partial void OnGroupNameENChanging(string value);
-    partial void OnGroupNameENChanged();
-    #endregion
-		
-		public ClientGroup()
-		{
-			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
-			OnCreated();
-		}
-		
-		[Column(Storage="_GroupNo", DbType="VarChar(35) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string GroupNo
-		{
-			get
-			{
-				return this._GroupNo;
-			}
-			set
-			{
-				if ((this._GroupNo != value))
-				{
-					this.OnGroupNoChanging(value);
-					this.SendPropertyChanging();
-					this._GroupNo = value;
-					this.SendPropertyChanged("GroupNo");
-					this.OnGroupNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_GroupNameCN", DbType="NVarChar(50)")]
-		public string GroupNameCN
-		{
-			get
-			{
-				return this._GroupNameCN;
-			}
-			set
-			{
-				if ((this._GroupNameCN != value))
-				{
-					this.OnGroupNameCNChanging(value);
-					this.SendPropertyChanging();
-					this._GroupNameCN = value;
-					this.SendPropertyChanged("GroupNameCN");
-					this.OnGroupNameCNChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_GroupNameEN", DbType="NVarChar(50)")]
-		public string GroupNameEN
-		{
-			get
-			{
-				return this._GroupNameEN;
-			}
-			set
-			{
-				if ((this._GroupNameEN != value))
-				{
-					this.OnGroupNameENChanging(value);
-					this.SendPropertyChanging();
-					this._GroupNameEN = value;
-					this.SendPropertyChanged("GroupNameEN");
-					this.OnGroupNameENChanged();
-				}
-			}
-		}
-		
-		[Association(Name="ClientGroup_Client", Storage="_Clients", OtherKey="GroupNo")]
-		public EntitySet<Client> Clients
-		{
-			get
-			{
-				return this._Clients;
-			}
-			set
-			{
-				this._Clients.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Clients(Client entity)
-		{
-			this.SendPropertyChanging();
-			entity.ClientGroup = this;
-		}
-		
-		private void detach_Clients(Client entity)
-		{
-			this.SendPropertyChanging();
-			entity.ClientGroup = null;
 		}
 	}
 	
@@ -6144,9 +6058,13 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
+		private string _FactorGroupType;
+		
 		private EntitySet<Case> _BuyerCases;
 		
 		private EntitySet<Case> _SellerCases;
+		
+		private EntitySet<Factor> _GroupFactors;
 		
 		private EntitySet<FactorAccount> _FactorAccounts;
 		
@@ -6154,7 +6072,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<InvoiceFinanceBatch> _InvoiceFinanceBatches;
 		
-		private EntityRef<FactorGroup> _FactorGroup;
+		private EntityRef<Factor> _FactorGroup;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -6232,8 +6150,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnDateOfLatestRevisionChanged();
     partial void OnIsGroupChanging(System.Nullable<bool> value);
     partial void OnIsGroupChanged();
-    partial void OnGroupNoChanging(string value);
-    partial void OnGroupNoChanged();
+    partial void OnGroupFactorCodeChanging(string value);
+    partial void OnGroupFactorCodeChanged();
     partial void OnIsCorrespondentBankChanging(System.Nullable<bool> value);
     partial void OnIsCorrespondentBankChanged();
     partial void OnIsAgreementSignedChanging(System.Nullable<bool> value);
@@ -6244,16 +6162,19 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnLastModifiedDateChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
+    partial void OnFactorGroupTypeChanging(string value);
+    partial void OnFactorGroupTypeChanged();
     #endregion
 		
 		public Factor()
 		{
 			this._BuyerCases = new EntitySet<Case>(new Action<Case>(this.attach_BuyerCases), new Action<Case>(this.detach_BuyerCases));
 			this._SellerCases = new EntitySet<Case>(new Action<Case>(this.attach_SellerCases), new Action<Case>(this.detach_SellerCases));
+			this._GroupFactors = new EntitySet<Factor>(new Action<Factor>(this.attach_GroupFactors), new Action<Factor>(this.detach_GroupFactors));
 			this._FactorAccounts = new EntitySet<FactorAccount>(new Action<FactorAccount>(this.attach_FactorAccounts), new Action<FactorAccount>(this.detach_FactorAccounts));
 			this._FactorCreditLines = new EntitySet<FactorCreditLine>(new Action<FactorCreditLine>(this.attach_FactorCreditLines), new Action<FactorCreditLine>(this.detach_FactorCreditLines));
 			this._InvoiceFinanceBatches = new EntitySet<InvoiceFinanceBatch>(new Action<InvoiceFinanceBatch>(this.attach_InvoiceFinanceBatches), new Action<InvoiceFinanceBatch>(this.detach_InvoiceFinanceBatches));
-			this._FactorGroup = default(EntityRef<FactorGroup>);
+			this._FactorGroup = default(EntityRef<Factor>);
 			OnCreated();
 		}
 		
@@ -6977,8 +6898,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_GroupNo", DbType="NVarChar(10)")]
-		public string GroupNo
+		[Column(Storage="_GroupNo", DbType="Char(7)")]
+		public string GroupFactorCode
 		{
 			get
 			{
@@ -6992,11 +6913,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnGroupNoChanging(value);
+					this.OnGroupFactorCodeChanging(value);
 					this.SendPropertyChanging();
 					this._GroupNo = value;
-					this.SendPropertyChanged("GroupNo");
-					this.OnGroupNoChanged();
+					this.SendPropertyChanged("GroupFactorCode");
+					this.OnGroupFactorCodeChanged();
 				}
 			}
 		}
@@ -7101,6 +7022,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Column(Storage="_FactorGroupType", DbType="NVarChar(50)")]
+		public string FactorGroupType
+		{
+			get
+			{
+				return this._FactorGroupType;
+			}
+			set
+			{
+				if ((this._FactorGroupType != value))
+				{
+					this.OnFactorGroupTypeChanging(value);
+					this.SendPropertyChanging();
+					this._FactorGroupType = value;
+					this.SendPropertyChanged("FactorGroupType");
+					this.OnFactorGroupTypeChanged();
+				}
+			}
+		}
+		
 		[Association(Name="Factor_Case", Storage="_BuyerCases", OtherKey="BuyerFactorCode")]
 		public EntitySet<Case> BuyerCases
 		{
@@ -7124,6 +7065,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			set
 			{
 				this._SellerCases.Assign(value);
+			}
+		}
+		
+		[Association(Name="Factor_Factor", Storage="_GroupFactors", OtherKey="GroupFactorCode")]
+		public EntitySet<Factor> GroupFactors
+		{
+			get
+			{
+				return this._GroupFactors;
+			}
+			set
+			{
+				this._GroupFactors.Assign(value);
 			}
 		}
 		
@@ -7166,8 +7120,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="FactorGroup_Factor", Storage="_FactorGroup", ThisKey="GroupNo", IsForeignKey=true)]
-		public FactorGroup FactorGroup
+		[Association(Name="Factor_Factor", Storage="_FactorGroup", ThisKey="GroupFactorCode", IsForeignKey=true)]
+		public Factor FactorGroup
 		{
 			get
 			{
@@ -7175,7 +7129,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 			set
 			{
-				FactorGroup previousValue = this._FactorGroup.Entity;
+				Factor previousValue = this._FactorGroup.Entity;
 				if (((previousValue != value) 
 							|| (this._FactorGroup.HasLoadedOrAssignedValue == false)))
 				{
@@ -7183,13 +7137,13 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((previousValue != null))
 					{
 						this._FactorGroup.Entity = null;
-						previousValue.Factors.Remove(this);
+						previousValue.GroupFactors.Remove(this);
 					}
 					this._FactorGroup.Entity = value;
 					if ((value != null))
 					{
-						value.Factors.Add(this);
-						this._GroupNo = value.GroupNo;
+						value.GroupFactors.Add(this);
+						this._GroupNo = value.FactorCode;
 					}
 					else
 					{
@@ -7242,6 +7196,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		{
 			this.SendPropertyChanging();
 			entity.SellerFactor = null;
+		}
+		
+		private void attach_GroupFactors(Factor entity)
+		{
+			this.SendPropertyChanging();
+			entity.FactorGroup = this;
+		}
+		
+		private void detach_GroupFactors(Factor entity)
+		{
+			this.SendPropertyChanging();
+			entity.FactorGroup = null;
 		}
 		
 		private void attach_FactorAccounts(FactorAccount entity)
@@ -8135,144 +8101,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 	}
 	
-	[Table(Name="dbo.FactorGroup")]
-	public partial class FactorGroup : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _GroupNo;
-		
-		private string _GroupNameCN;
-		
-		private string _GroupNameEN;
-		
-		private EntitySet<Factor> _Factors;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnGroupNoChanging(string value);
-    partial void OnGroupNoChanged();
-    partial void OnGroupNameCNChanging(string value);
-    partial void OnGroupNameCNChanged();
-    partial void OnGroupNameENChanging(string value);
-    partial void OnGroupNameENChanged();
-    #endregion
-		
-		public FactorGroup()
-		{
-			this._Factors = new EntitySet<Factor>(new Action<Factor>(this.attach_Factors), new Action<Factor>(this.detach_Factors));
-			OnCreated();
-		}
-		
-		[Column(Storage="_GroupNo", DbType="NVarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string GroupNo
-		{
-			get
-			{
-				return this._GroupNo;
-			}
-			set
-			{
-				if ((this._GroupNo != value))
-				{
-					this.OnGroupNoChanging(value);
-					this.SendPropertyChanging();
-					this._GroupNo = value;
-					this.SendPropertyChanged("GroupNo");
-					this.OnGroupNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_GroupNameCN", DbType="NVarChar(50)")]
-		public string GroupNameCN
-		{
-			get
-			{
-				return this._GroupNameCN;
-			}
-			set
-			{
-				if ((this._GroupNameCN != value))
-				{
-					this.OnGroupNameCNChanging(value);
-					this.SendPropertyChanging();
-					this._GroupNameCN = value;
-					this.SendPropertyChanged("GroupNameCN");
-					this.OnGroupNameCNChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_GroupNameEN", DbType="NVarChar(50)")]
-		public string GroupNameEN
-		{
-			get
-			{
-				return this._GroupNameEN;
-			}
-			set
-			{
-				if ((this._GroupNameEN != value))
-				{
-					this.OnGroupNameENChanging(value);
-					this.SendPropertyChanging();
-					this._GroupNameEN = value;
-					this.SendPropertyChanged("GroupNameEN");
-					this.OnGroupNameENChanged();
-				}
-			}
-		}
-		
-		[Association(Name="FactorGroup_Factor", Storage="_Factors", OtherKey="GroupNo")]
-		public EntitySet<Factor> Factors
-		{
-			get
-			{
-				return this._Factors;
-			}
-			set
-			{
-				this._Factors.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Factors(Factor entity)
-		{
-			this.SendPropertyChanging();
-			entity.FactorGroup = this;
-		}
-		
-		private void detach_Factors(Factor entity)
-		{
-			this.SendPropertyChanging();
-			entity.FactorGroup = null;
-		}
-	}
-	
 	[Table(Name="dbo.Invoice")]
 	public partial class Invoice : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -8280,8 +8108,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private string _InvoiceNo;
-		
-		private string _InvoiceType;
 		
 		private System.DateTime _InvoiceDate;
 		
@@ -8367,6 +8193,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
+		private EntitySet<InvoiceDeduction> _InvoiceDeductions;
+		
 		private EntityRef<InvoiceAssignBatch> _InvoiceAssignBatch;
 		
 		private EntityRef<InvoiceFinanceBatch> _InvoiceFinanceBatch;
@@ -8379,8 +8207,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnInvoiceNoChanging(string value);
     partial void OnInvoiceNoChanged();
-    partial void OnInvoiceTypeChanging(string value);
-    partial void OnInvoiceTypeChanged();
     partial void OnInvoiceDateChanging(System.DateTime value);
     partial void OnInvoiceDateChanged();
     partial void OnInvoiceAmountChanging(double value);
@@ -8469,6 +8295,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		public Invoice()
 		{
+			this._InvoiceDeductions = new EntitySet<InvoiceDeduction>(new Action<InvoiceDeduction>(this.attach_InvoiceDeductions), new Action<InvoiceDeduction>(this.detach_InvoiceDeductions));
 			this._InvoiceAssignBatch = default(EntityRef<InvoiceAssignBatch>);
 			this._InvoiceFinanceBatch = default(EntityRef<InvoiceFinanceBatch>);
 			this._InvoicePaymentBatch = default(EntityRef<InvoicePaymentBatch>);
@@ -8491,26 +8318,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._InvoiceNo = value;
 					this.SendPropertyChanged("InvoiceNo");
 					this.OnInvoiceNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_InvoiceType", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string InvoiceType
-		{
-			get
-			{
-				return this._InvoiceType;
-			}
-			set
-			{
-				if ((this._InvoiceType != value))
-				{
-					this.OnInvoiceTypeChanging(value);
-					this.SendPropertyChanging();
-					this._InvoiceType = value;
-					this.SendPropertyChanged("InvoiceType");
-					this.OnInvoiceTypeChanged();
 				}
 			}
 		}
@@ -9367,6 +9174,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Association(Name="Invoice_InvoiceDeduction", Storage="_InvoiceDeductions", OtherKey="InvoiceNo")]
+		public EntitySet<InvoiceDeduction> InvoiceDeductions
+		{
+			get
+			{
+				return this._InvoiceDeductions;
+			}
+			set
+			{
+				this._InvoiceDeductions.Assign(value);
+			}
+		}
+		
 		[Association(Name="InvoiceAssignBatch_Invoice", Storage="_InvoiceAssignBatch", ThisKey="AssignBatchNo", IsForeignKey=true)]
 		public InvoiceAssignBatch InvoiceAssignBatch
 		{
@@ -9487,6 +9307,18 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_InvoiceDeductions(InvoiceDeduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.Invoice = this;
+		}
+		
+		private void detach_InvoiceDeductions(InvoiceDeduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.Invoice = null;
 		}
 	}
 	
@@ -9901,6 +9733,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CheckUserName;
 		
+		private System.Nullable<double> _OtherIncome;
+		
 		private EntitySet<Invoice> _Invoices;
 		
 		private EntityRef<CDA> _CDA;
@@ -9945,6 +9779,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnRejectReasonChanged();
     partial void OnCheckUserNameChanging(string value);
     partial void OnCheckUserNameChanged();
+    partial void OnOtherIncomeChanging(System.Nullable<double> value);
+    partial void OnOtherIncomeChanged();
     #endregion
 		
 		public InvoiceFinanceBatch()
@@ -10299,6 +10135,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CheckUserName = value;
 					this.SendPropertyChanged("CheckUserName");
 					this.OnCheckUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_OtherIncome", DbType="float")]
+		public System.Nullable<double> OtherIncome
+		{
+			get
+			{
+				return this._OtherIncome;
+			}
+			set
+			{
+				if ((this._OtherIncome != value))
+				{
+					this.OnOtherIncomeChanging(value);
+					this.SendPropertyChanging();
+					this._OtherIncome = value;
+					this.SendPropertyChanged("OtherIncome");
+					this.OnOtherIncomeChanged();
 				}
 			}
 		}
@@ -10785,6 +10641,480 @@ namespace CMBC.EasyFactor.DB.dbml
 		{
 			this.SendPropertyChanging();
 			entity.InvoicePaymentBatch = null;
+		}
+	}
+	
+	[Table(Name="dbo.InvoiceDeduction")]
+	public partial class InvoiceDeduction : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _InvoiceDeductionID;
+		
+		private string _InvoiceNo;
+		
+		private string _CreditNoteNo;
+		
+		private double _DeductionAmount;
+		
+		private System.DateTime _DeductionDate;
+		
+		private EntityRef<Invoice> _Invoice;
+		
+		private EntityRef<CreditNote> _CreditNote;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnInvoiceDeductionIDChanging(int value);
+    partial void OnInvoiceDeductionIDChanged();
+    partial void OnInvoiceNoChanging(string value);
+    partial void OnInvoiceNoChanged();
+    partial void OnCreditNoteNoChanging(string value);
+    partial void OnCreditNoteNoChanged();
+    partial void OnDeductionAmountChanging(double value);
+    partial void OnDeductionAmountChanged();
+    partial void OnDeductionDateChanging(System.DateTime value);
+    partial void OnDeductionDateChanged();
+    #endregion
+		
+		public InvoiceDeduction()
+		{
+			this._Invoice = default(EntityRef<Invoice>);
+			this._CreditNote = default(EntityRef<CreditNote>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_InvoiceDeductionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int InvoiceDeductionID
+		{
+			get
+			{
+				return this._InvoiceDeductionID;
+			}
+			set
+			{
+				if ((this._InvoiceDeductionID != value))
+				{
+					this.OnInvoiceDeductionIDChanging(value);
+					this.SendPropertyChanging();
+					this._InvoiceDeductionID = value;
+					this.SendPropertyChanged("InvoiceDeductionID");
+					this.OnInvoiceDeductionIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_InvoiceNo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string InvoiceNo
+		{
+			get
+			{
+				return this._InvoiceNo;
+			}
+			set
+			{
+				if ((this._InvoiceNo != value))
+				{
+					if (this._Invoice.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnInvoiceNoChanging(value);
+					this.SendPropertyChanging();
+					this._InvoiceNo = value;
+					this.SendPropertyChanged("InvoiceNo");
+					this.OnInvoiceNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditNoteNo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreditNoteNo
+		{
+			get
+			{
+				return this._CreditNoteNo;
+			}
+			set
+			{
+				if ((this._CreditNoteNo != value))
+				{
+					if (this._CreditNote.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCreditNoteNoChanging(value);
+					this.SendPropertyChanging();
+					this._CreditNoteNo = value;
+					this.SendPropertyChanged("CreditNoteNo");
+					this.OnCreditNoteNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DeductionAmount", DbType="Float NOT NULL")]
+		public double DeductionAmount
+		{
+			get
+			{
+				return this._DeductionAmount;
+			}
+			set
+			{
+				if ((this._DeductionAmount != value))
+				{
+					this.OnDeductionAmountChanging(value);
+					this.SendPropertyChanging();
+					this._DeductionAmount = value;
+					this.SendPropertyChanged("DeductionAmount");
+					this.OnDeductionAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DeductionDate", DbType="DateTime NOT NULL")]
+		public System.DateTime DeductionDate
+		{
+			get
+			{
+				return this._DeductionDate;
+			}
+			set
+			{
+				if ((this._DeductionDate != value))
+				{
+					this.OnDeductionDateChanging(value);
+					this.SendPropertyChanging();
+					this._DeductionDate = value;
+					this.SendPropertyChanged("DeductionDate");
+					this.OnDeductionDateChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Invoice_InvoiceDeduction", Storage="_Invoice", ThisKey="InvoiceNo", IsForeignKey=true)]
+		public Invoice Invoice
+		{
+			get
+			{
+				return this._Invoice.Entity;
+			}
+			set
+			{
+				Invoice previousValue = this._Invoice.Entity;
+				if (((previousValue != value) 
+							|| (this._Invoice.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Invoice.Entity = null;
+						previousValue.InvoiceDeductions.Remove(this);
+					}
+					this._Invoice.Entity = value;
+					if ((value != null))
+					{
+						value.InvoiceDeductions.Add(this);
+						this._InvoiceNo = value.InvoiceNo;
+					}
+					else
+					{
+						this._InvoiceNo = default(string);
+					}
+					this.SendPropertyChanged("Invoice");
+				}
+			}
+		}
+		
+		[Association(Name="CreditNote_InvoiceDeduction", Storage="_CreditNote", ThisKey="CreditNoteNo", IsForeignKey=true)]
+		public CreditNote CreditNote
+		{
+			get
+			{
+				return this._CreditNote.Entity;
+			}
+			set
+			{
+				CreditNote previousValue = this._CreditNote.Entity;
+				if (((previousValue != value) 
+							|| (this._CreditNote.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CreditNote.Entity = null;
+						previousValue.InvoiceDeductions.Remove(this);
+					}
+					this._CreditNote.Entity = value;
+					if ((value != null))
+					{
+						value.InvoiceDeductions.Add(this);
+						this._CreditNoteNo = value.CreditNoteNo;
+					}
+					else
+					{
+						this._CreditNoteNo = default(string);
+					}
+					this.SendPropertyChanged("CreditNote");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.CreditNote")]
+	public partial class CreditNote : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CreditNoteNo;
+		
+		private double _CreditNoteAmount;
+		
+		private System.DateTime _CreditNoteDate;
+		
+		private System.DateTime _CreditNoteDueDate;
+		
+		private System.DateTime _InputDate;
+		
+		private string _Comment;
+		
+		private string _CreateUserName;
+		
+		private EntitySet<InvoiceDeduction> _InvoiceDeductions;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCreditNoteNoChanging(string value);
+    partial void OnCreditNoteNoChanged();
+    partial void OnCreditNoteAmountChanging(double value);
+    partial void OnCreditNoteAmountChanged();
+    partial void OnCreditNoteDateChanging(System.DateTime value);
+    partial void OnCreditNoteDateChanged();
+    partial void OnCreditNoteDueDateChanging(System.DateTime value);
+    partial void OnCreditNoteDueDateChanged();
+    partial void OnInputDateChanging(System.DateTime value);
+    partial void OnInputDateChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
+    #endregion
+		
+		public CreditNote()
+		{
+			this._InvoiceDeductions = new EntitySet<InvoiceDeduction>(new Action<InvoiceDeduction>(this.attach_InvoiceDeductions), new Action<InvoiceDeduction>(this.detach_InvoiceDeductions));
+			OnCreated();
+		}
+		
+		[Column(Storage="_CreditNoteNo", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CreditNoteNo
+		{
+			get
+			{
+				return this._CreditNoteNo;
+			}
+			set
+			{
+				if ((this._CreditNoteNo != value))
+				{
+					this.OnCreditNoteNoChanging(value);
+					this.SendPropertyChanging();
+					this._CreditNoteNo = value;
+					this.SendPropertyChanged("CreditNoteNo");
+					this.OnCreditNoteNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditNoteAmount", DbType="Float NOT NULL")]
+		public double CreditNoteAmount
+		{
+			get
+			{
+				return this._CreditNoteAmount;
+			}
+			set
+			{
+				if ((this._CreditNoteAmount != value))
+				{
+					this.OnCreditNoteAmountChanging(value);
+					this.SendPropertyChanging();
+					this._CreditNoteAmount = value;
+					this.SendPropertyChanged("CreditNoteAmount");
+					this.OnCreditNoteAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditNoteDate", DbType="DateTime NOT NULL")]
+		public System.DateTime CreditNoteDate
+		{
+			get
+			{
+				return this._CreditNoteDate;
+			}
+			set
+			{
+				if ((this._CreditNoteDate != value))
+				{
+					this.OnCreditNoteDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreditNoteDate = value;
+					this.SendPropertyChanged("CreditNoteDate");
+					this.OnCreditNoteDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditNoteDueDate", DbType="DateTime NOT NULL")]
+		public System.DateTime CreditNoteDueDate
+		{
+			get
+			{
+				return this._CreditNoteDueDate;
+			}
+			set
+			{
+				if ((this._CreditNoteDueDate != value))
+				{
+					this.OnCreditNoteDueDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreditNoteDueDate = value;
+					this.SendPropertyChanged("CreditNoteDueDate");
+					this.OnCreditNoteDueDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_InputDate", DbType="DateTime NOT NULL")]
+		public System.DateTime InputDate
+		{
+			get
+			{
+				return this._InputDate;
+			}
+			set
+			{
+				if ((this._InputDate != value))
+				{
+					this.OnInputDateChanging(value);
+					this.SendPropertyChanging();
+					this._InputDate = value;
+					this.SendPropertyChanged("InputDate");
+					this.OnInputDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[Association(Name="CreditNote_InvoiceDeduction", Storage="_InvoiceDeductions", OtherKey="CreditNoteNo")]
+		public EntitySet<InvoiceDeduction> InvoiceDeductions
+		{
+			get
+			{
+				return this._InvoiceDeductions;
+			}
+			set
+			{
+				this._InvoiceDeductions.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_InvoiceDeductions(InvoiceDeduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.CreditNote = this;
+		}
+		
+		private void detach_InvoiceDeductions(InvoiceDeduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.CreditNote = null;
 		}
 	}
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
 
 namespace CMBC.EasyFactor.ARMgr
 {
@@ -68,9 +69,12 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 invoice.IsFlaw = this.isFlawCheckBox.Checked;
                 invoice.FlawReason = flawReason;
-                invoice.FlawResolveReason = this.tbFlawResolveReason.Text;
-                invoice.FlawResolveDate = this.flawResolveDateDateTimePicker.Value;
-                invoice.FlawResolveUserName = this.flawResolveUserNameTextBox.Text;
+                if (this.flawResolveDateDateTimePicker.Value != default(DateTime))
+                {
+                    invoice.FlawResolveReason = this.tbFlawResolveReason.Text;
+                    invoice.FlawResolveDate = this.flawResolveDateDateTimePicker.Value;
+                    invoice.FlawResolveUserName = this.flawResolveUserNameTextBox.Text;
+                }
             }
             bool isUpdateOK = true;
 
@@ -81,12 +85,12 @@ namespace CMBC.EasyFactor.ARMgr
             catch (Exception e2)
             {
                 isUpdateOK = false;
-                MessageBox.Show(e2.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isUpdateOK)
             {
-                MessageBox.Show("数据更新成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 foreach (Invoice invoice in this.bs.List)
                 {
                     invoice.Backup();

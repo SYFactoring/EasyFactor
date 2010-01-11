@@ -184,7 +184,7 @@ namespace CMBC.EasyFactor.Report
                 ApplicationClass app = new ApplicationClass() { Visible = false };
                 if (app == null)
                 {
-                    MessageBox.Show("Excel 程序无法启动!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -291,7 +291,7 @@ namespace CMBC.EasyFactor.Report
                 ApplicationClass app = new ApplicationClass() { Visible = false };
                 if (app == null)
                 {
-                    MessageBox.Show("Excel 程序无法启动!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -405,7 +405,7 @@ namespace CMBC.EasyFactor.Report
                 ApplicationClass app = new ApplicationClass() { Visible = false };
                 if (app == null)
                 {
-                    MessageBox.Show("Excel 程序无法启动!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -593,7 +593,7 @@ namespace CMBC.EasyFactor.Report
                                  && (beginDate != this.diAssignDateBegin.MinDate ? invoice.InvoiceAssignBatch.AssignDate >= beginDate : true)
                                  && (endDate != this.diAssignDateEnd.MinDate ? invoice.InvoiceAssignBatch.AssignDate <= endDate : true)
                                  && (opReportType == OpReportType.REPORT_FINANCE ? invoice.AssignAmount > invoice.PaymentAmount.GetValueOrDefault() : true)
-                                 && (opReportType == OpReportType.REPORT_FINANCE ? invoice.FinanceAmount == null || invoice.FinanceAmount == 0 : true)
+                                 && (opReportType == OpReportType.REPORT_FINANCE ? invoice.FinanceAmount == null || TypeUtil.EqualsZero(invoice.FinanceAmount) : true)
                               select invoice;
 
             this.bs.DataSource = queryResult.ToList();

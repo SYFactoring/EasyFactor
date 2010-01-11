@@ -162,6 +162,8 @@ namespace CMBC.EasyFactor.ARMgr
 
         }
 
+        private double currentBatchFinanceAmount = 0;
+
         /// <summary>
         /// 
         /// </summary>
@@ -180,12 +182,12 @@ namespace CMBC.EasyFactor.ARMgr
                     totalInterest += ((Invoice)invoiceList[i]).Interest.GetValueOrDefault();
                 }
             }
-            this.tbTotalFinance.Text = String.Format("{0:N2}", totalFinance);
+            currentBatchFinanceAmount = totalFinance;
             this.tbFinanceLineBalance.Text = String.Format("{0:N2}", financeBatch.FinanceAmount - totalFinance);
             this.tbTotalInterest.Text = String.Format("{0:N2}", totalInterest);
             if (totalFinance > financeBatch.FinanceAmount)
             {
-                MessageBox.Show("当前融资额超过限定", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("当前融资额超过限定", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -249,6 +251,10 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (e.RowIndex == -1)
                 return;
+            if (!this.superValidator.Validate())
+            {
+                return;
+            }
             IList invoiceList = this.invoiceBindingSource.List;
             Invoice invoice = (Invoice)invoiceList[e.RowIndex];
             this.dgvInvoices.EndEdit();
@@ -259,9 +265,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
                 {
-                    double currentFinanceAmount;
-                    if (!Double.TryParse(this.tbTotalFinance.Text, out currentFinanceAmount))
-                        currentFinanceAmount = 0;
+                    double currentFinanceAmount = currentBatchFinanceAmount;
 
                     InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
                     double financeAmount = 0;
@@ -367,6 +371,10 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     e.Cancel = true;
                 }
+                if (result < 0)
+                {
+                    e.Cancel = true;
+                }
             }
         }
 
@@ -407,7 +415,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._CDA == null)
             {
-                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             if (!(this.batchBindingSource.DataSource is InvoiceFinanceBatch))
@@ -432,7 +440,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._CDA == null)
             {
-                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             if (!(this.batchBindingSource.DataSource is InvoiceFinanceBatch))
@@ -470,16 +478,14 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._CDA == null)
             {
-                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
-            this.tbTotalFinance.Text = string.Empty;
             InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
             financeBatch.BatchCurrency = this._CDA.Case.InvoiceCurrency;
             financeBatch.CreateUserName = App.Current.CurUser.Name;
             this.batchBindingSource.DataSource = financeBatch;
-            this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.FinanceAmount.HasValue == false).ToList();
+            this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.AssignAmount - i.PaymentAmount.GetValueOrDefault() > 0 && (i.FinanceAmount.HasValue == false || TypeUtil.EqualsZero(i.FinanceAmount))).ToList();
             this.StatBatch();
         }
 
@@ -523,7 +529,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._CDA == null)
             {
-                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -572,11 +578,11 @@ namespace CMBC.EasyFactor.ARMgr
                 }
                 batch.CDA = null;
                 isSaveOK = false;
-                MessageBox.Show(e1.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             if (isSaveOK)
             {
-                MessageBox.Show("数据保存成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.caseBasic.CaculateOutstanding(this._CDA);
             }
         }
@@ -590,7 +596,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._CDA == null)
             {
-                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -615,7 +621,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._CDA == null)
             {
-                MessageBox.Show("没有有效的额度通知书", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -648,12 +654,12 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (invoice.FinanceAmount > invoice.AssignOutstanding)
                 {
-                    MessageBox.Show("融资金额不能大于转让余额: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("融资金额不能大于转让余额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
                 if (invoice.FinanceDueDate < invoice.FinanceDate)
                 {
-                    MessageBox.Show("融资到期日不能早于融资日: " + invoice.InvoiceNo, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("融资到期日不能早于融资日: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
             }

@@ -82,6 +82,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.AutoGenerateColumns = false;
             this.dgvBatches.DataSource = bs;
             this.opBatchType = batchType;
+            ControlUtil.SetDoubleBuffered(this.dgvBatches);
 
             if (batchType == OpBatchType.CHECK)
             {

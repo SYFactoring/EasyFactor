@@ -244,6 +244,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DevComponents.DotNetBar.LabelX telephoneLabel;
             DevComponents.DotNetBar.LabelX lblContractType;
             DevComponents.DotNetBar.LabelX lblCreateUserName;
+            DevComponents.DotNetBar.LabelX lblClientGroupType;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -273,6 +274,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.websiteTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.representativeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelClientGroup = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.cbClientGroupType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.isGroupCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.tbGroupNameEN = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbGroupNameCN = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -406,6 +408,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.requiredFieldValidator12 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.contractErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.contractHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.btnGroupSelect = new DevComponents.DotNetBar.ButtonX();
             clientNameCNLabel = new DevComponents.DotNetBar.LabelX();
             addressCNLabel = new DevComponents.DotNetBar.LabelX();
             cityCNLabel = new DevComponents.DotNetBar.LabelX();
@@ -454,6 +457,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             telephoneLabel = new DevComponents.DotNetBar.LabelX();
             lblContractType = new DevComponents.DotNetBar.LabelX();
             lblCreateUserName = new DevComponents.DotNetBar.LabelX();
+            lblClientGroupType = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPanelClient.SuspendLayout();
@@ -673,7 +677,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             groupNoLabel.BackgroundStyle.Class = "";
-            groupNoLabel.Location = new System.Drawing.Point(226, 7);
+            groupNoLabel.Location = new System.Drawing.Point(177, 8);
             groupNoLabel.Name = "groupNoLabel";
             groupNoLabel.Size = new System.Drawing.Size(97, 16);
             groupNoLabel.TabIndex = 2;
@@ -1197,6 +1201,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblCreateUserName.Text = "经办人:";
             lblCreateUserName.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
+            // lblClientGroupType
+            // 
+            lblClientGroupType.AutoSize = true;
+            lblClientGroupType.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblClientGroupType.BackgroundStyle.Class = "";
+            lblClientGroupType.Location = new System.Drawing.Point(400, 7);
+            lblClientGroupType.Name = "lblClientGroupType";
+            lblClientGroupType.Size = new System.Drawing.Size(62, 16);
+            lblClientGroupType.TabIndex = 12;
+            lblClientGroupType.Text = "客户/集团:";
+            lblClientGroupType.TextLineAlignment = System.Drawing.StringAlignment.Far;
+            // 
             // tabControl
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
@@ -1435,6 +1454,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.groupPanelClientGroup.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelClientGroup.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelClientGroup.Controls.Add(this.btnGroupSelect);
+            this.groupPanelClientGroup.Controls.Add(lblClientGroupType);
+            this.groupPanelClientGroup.Controls.Add(this.cbClientGroupType);
             this.groupPanelClientGroup.Controls.Add(this.isGroupCheckBox);
             this.groupPanelClientGroup.Controls.Add(this.tbGroupNameEN);
             this.groupPanelClientGroup.Controls.Add(this.tbGroupNameCN);
@@ -1476,20 +1498,35 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientGroup.StyleMouseOver.Class = "";
             this.groupPanelClientGroup.TabIndex = 2;
             // 
+            // cbClientGroupType
+            // 
+            this.cbClientGroupType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientGroupType", true));
+            this.cbClientGroupType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbClientGroupType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbClientGroupType.FormattingEnabled = true;
+            this.cbClientGroupType.Items.AddRange(new object[] {
+            "客户",
+            "集团"});
+            this.cbClientGroupType.Location = new System.Drawing.Point(471, 4);
+            this.cbClientGroupType.Name = "cbClientGroupType";
+            this.cbClientGroupType.Size = new System.Drawing.Size(100, 21);
+            this.cbClientGroupType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbClientGroupType.TabIndex = 13;
+            // 
             // isGroupCheckBox
             // 
+            this.isGroupCheckBox.AutoSize = true;
             this.isGroupCheckBox.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
             this.isGroupCheckBox.BackgroundStyle.Class = "";
             this.isGroupCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.clientBindingSource, "IsGroup", true));
-            this.isGroupCheckBox.Location = new System.Drawing.Point(85, 5);
+            this.isGroupCheckBox.Location = new System.Drawing.Point(64, 9);
             this.isGroupCheckBox.Name = "isGroupCheckBox";
-            this.isGroupCheckBox.Size = new System.Drawing.Size(104, 24);
+            this.isGroupCheckBox.Size = new System.Drawing.Size(101, 16);
             this.isGroupCheckBox.TabIndex = 7;
             this.isGroupCheckBox.Text = "是否集团客户";
-            this.isGroupCheckBox.CheckedChanged += new System.EventHandler(this.IsGroupChanged);
             // 
             // tbGroupNameEN
             // 
@@ -1497,9 +1534,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.tbGroupNameEN.Border.Class = "TextBoxBorder";
+            this.tbGroupNameEN.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientGroup.ClientNameEN_1", true));
             this.tbGroupNameEN.Location = new System.Drawing.Point(85, 54);
             this.tbGroupNameEN.Name = "tbGroupNameEN";
-            this.tbGroupNameEN.Size = new System.Drawing.Size(340, 20);
+            this.tbGroupNameEN.Size = new System.Drawing.Size(295, 20);
             this.tbGroupNameEN.TabIndex = 6;
             this.clientValidator.SetValidator1(this.tbGroupNameEN, this.customValidator3);
             this.tbGroupNameEN.WatermarkText = "英文名";
@@ -1510,9 +1548,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.tbGroupNameCN.Border.Class = "TextBoxBorder";
+            this.tbGroupNameCN.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientGroup.ClientNameCN", true));
             this.tbGroupNameCN.Location = new System.Drawing.Point(85, 30);
             this.tbGroupNameCN.Name = "tbGroupNameCN";
-            this.tbGroupNameCN.Size = new System.Drawing.Size(340, 20);
+            this.tbGroupNameCN.Size = new System.Drawing.Size(295, 20);
             this.tbGroupNameCN.TabIndex = 5;
             this.clientValidator.SetValidator1(this.tbGroupNameCN, this.customValidator1);
             this.tbGroupNameCN.WatermarkText = "中文名";
@@ -1523,7 +1562,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.groupNoTextBox.Border.Class = "TextBoxBorder";
-            this.groupNoTextBox.Location = new System.Drawing.Point(325, 7);
+            this.groupNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientGroup.ClientEDICode", true));
+            this.groupNoTextBox.Location = new System.Drawing.Point(280, 5);
             this.groupNoTextBox.Name = "groupNoTextBox";
             this.groupNoTextBox.Size = new System.Drawing.Size(100, 20);
             this.groupNoTextBox.TabIndex = 3;
@@ -3242,6 +3282,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.contractHighlighter.ContainerControl = this;
             // 
+            // btnGroupSelect
+            // 
+            this.btnGroupSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnGroupSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnGroupSelect.Location = new System.Drawing.Point(393, 31);
+            this.btnGroupSelect.Name = "btnGroupSelect";
+            this.btnGroupSelect.Size = new System.Drawing.Size(27, 23);
+            this.btnGroupSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnGroupSelect.TabIndex = 14;
+            this.btnGroupSelect.Text = "...";
+            this.btnGroupSelect.Click += new System.EventHandler(this.SelectGroup);
+            // 
             // ClientDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3294,6 +3346,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientGroupType;
+        private DevComponents.DotNetBar.ButtonX btnGroupSelect;
 
     }
 }

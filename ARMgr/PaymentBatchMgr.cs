@@ -79,6 +79,7 @@ namespace CMBC.EasyFactor.ARMgr
         public PaymentBatchMgr(OpBatchType batchType)
         {
             InitializeComponent();
+            ControlUtil.SetDoubleBuffered(this.dgvBatches);
             this.dgvBatches.AutoGenerateColumns = false;
             this.dgvBatches.DataSource = bs;
             this.opBatchType = batchType;
