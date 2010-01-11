@@ -8475,7 +8475,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_InvoiceNo", DbType="NVarChar(35) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_InvoiceNo", DbType="NVarChar(70) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string InvoiceNo
 		{
 			get

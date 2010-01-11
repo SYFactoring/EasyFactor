@@ -661,5 +661,27 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(query);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryClinetCreditLine(object sender, EventArgs e)
+        {
+            ClientCreditLineMgr query = new ClientCreditLineMgr();
+            this.SetDetailPanel(query);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryFactorCreditLine(object sender, EventArgs e)
+        {
+            FactorCreditLineMgr query = new FactorCreditLineMgr();
+            this.SetDetailPanel(query);
+        }
+
     }
 }

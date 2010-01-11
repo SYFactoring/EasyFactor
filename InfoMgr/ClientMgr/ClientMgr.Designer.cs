@@ -385,9 +385,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.cbIsContractSigned.BackgroundStyle.Class = "";
-            this.cbIsContractSigned.Checked = true;
-            this.cbIsContractSigned.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbIsContractSigned.CheckValue = "Y";
             this.cbIsContractSigned.Location = new System.Drawing.Point(509, 34);
             this.cbIsContractSigned.Name = "cbIsContractSigned";
             this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);

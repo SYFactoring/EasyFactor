@@ -488,45 +488,56 @@
             // 
             // colInvoiceCurrency
             // 
+            this.colInvoiceCurrency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colInvoiceCurrency.DataPropertyName = "InvoiceCurrency";
             this.colInvoiceCurrency.HeaderText = "发票币别";
             this.colInvoiceCurrency.Name = "colInvoiceCurrency";
             this.colInvoiceCurrency.ReadOnly = true;
+            this.colInvoiceCurrency.Width = 80;
             // 
             // colIsRecoarse
             // 
+            this.colIsRecoarse.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colIsRecoarse.DataPropertyName = "IsRecoarse";
-            this.colIsRecoarse.HeaderText = "是否有追索权";
+            this.colIsRecoarse.HeaderText = "是否有追";
             this.colIsRecoarse.Name = "colIsRecoarse";
             this.colIsRecoarse.ReadOnly = true;
             this.colIsRecoarse.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colIsRecoarse.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colIsRecoarse.Width = 61;
             // 
             // colIsNotice
             // 
+            this.colIsNotice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colIsNotice.DataPropertyName = "IsNotice";
             this.colIsNotice.HeaderText = "明/暗保理";
             this.colIsNotice.Name = "colIsNotice";
             this.colIsNotice.ReadOnly = true;
             this.colIsNotice.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colIsNotice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colIsNotice.Width = 66;
             // 
             // colAssignType
             // 
+            this.colAssignType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colAssignType.DataPropertyName = "AssignType";
             this.colAssignType.HeaderText = "转让方式";
             this.colAssignType.Name = "colAssignType";
             this.colAssignType.ReadOnly = true;
+            this.colAssignType.Width = 80;
             // 
             // colCreditCoverCurr
             // 
+            this.colCreditCoverCurr.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colCreditCoverCurr.DataPropertyName = "CreditCoverCurr";
-            this.colCreditCoverCurr.HeaderText = "买方风险额度币别";
+            this.colCreditCoverCurr.HeaderText = "额度币别";
             this.colCreditCoverCurr.Name = "colCreditCoverCurr";
             this.colCreditCoverCurr.ReadOnly = true;
+            this.colCreditCoverCurr.Width = 80;
             // 
             // colCreditCover
             // 
+            this.colCreditCover.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCreditCover.DataPropertyName = "CreditCover";
             dataGridViewCellStyle2.Format = "N2";
             dataGridViewCellStyle2.NullValue = null;
@@ -534,13 +545,14 @@
             this.colCreditCover.HeaderText = "买方信用风险额度";
             this.colCreditCover.Name = "colCreditCover";
             this.colCreditCover.ReadOnly = true;
+            this.colCreditCover.Width = 128;
             // 
             // colCreditCoverPeriodBegin
             // 
             this.colCreditCoverPeriodBegin.DataPropertyName = "CreditCoverPeriodBegin";
             dataGridViewCellStyle3.Format = "d";
             this.colCreditCoverPeriodBegin.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colCreditCoverPeriodBegin.HeaderText = "买方信用风险额度有效期限(始)";
+            this.colCreditCoverPeriodBegin.HeaderText = "有效期(始)";
             this.colCreditCoverPeriodBegin.Name = "colCreditCoverPeriodBegin";
             this.colCreditCoverPeriodBegin.ReadOnly = true;
             this.colCreditCoverPeriodBegin.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -551,7 +563,7 @@
             this.colCreditCoverPeriodEnd.DataPropertyName = "CreditCoverPeriodEnd";
             dataGridViewCellStyle4.Format = "d";
             this.colCreditCoverPeriodEnd.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colCreditCoverPeriodEnd.HeaderText = "买方信用风险额度有效期限(终)";
+            this.colCreditCoverPeriodEnd.HeaderText = "有效期(终)";
             this.colCreditCoverPeriodEnd.Name = "colCreditCoverPeriodEnd";
             this.colCreditCoverPeriodEnd.ReadOnly = true;
             this.colCreditCoverPeriodEnd.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -559,15 +571,18 @@
             // 
             // colFinanceLineCurr
             // 
+            this.colFinanceLineCurr.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colFinanceLineCurr.DataPropertyName = "FinanceLineCurr";
-            this.colFinanceLineCurr.HeaderText = "预付款额度币别";
+            this.colFinanceLineCurr.HeaderText = "额度币别";
             this.colFinanceLineCurr.Name = "colFinanceLineCurr";
             this.colFinanceLineCurr.ReadOnly = true;
             this.colFinanceLineCurr.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colFinanceLineCurr.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colFinanceLineCurr.Width = 61;
             // 
             // colFinanceLine
             // 
+            this.colFinanceLine.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colFinanceLine.DataPropertyName = "FinanceLine";
             dataGridViewCellStyle5.Format = "N2";
             this.colFinanceLine.DefaultCellStyle = dataGridViewCellStyle5;
@@ -576,24 +591,29 @@
             this.colFinanceLine.ReadOnly = true;
             this.colFinanceLine.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colFinanceLine.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colFinanceLine.Width = 73;
             // 
             // colFinanceLinePeriodBegin
             // 
+            this.colFinanceLinePeriodBegin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colFinanceLinePeriodBegin.DataPropertyName = "FinanceLinePeriodBegin";
             dataGridViewCellStyle6.Format = "d";
             this.colFinanceLinePeriodBegin.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colFinanceLinePeriodBegin.HeaderText = "预付款额度有效期限(始)";
+            this.colFinanceLinePeriodBegin.HeaderText = "有效期(始)";
             this.colFinanceLinePeriodBegin.Name = "colFinanceLinePeriodBegin";
             this.colFinanceLinePeriodBegin.ReadOnly = true;
+            this.colFinanceLinePeriodBegin.Width = 86;
             // 
             // colFinanceLinePeriodEnd
             // 
+            this.colFinanceLinePeriodEnd.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colFinanceLinePeriodEnd.DataPropertyName = "FinanceLinePeriodEnd";
             dataGridViewCellStyle7.Format = "d";
             this.colFinanceLinePeriodEnd.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colFinanceLinePeriodEnd.HeaderText = "预付款额度有效期限(终)";
+            this.colFinanceLinePeriodEnd.HeaderText = "有效期(终)";
             this.colFinanceLinePeriodEnd.Name = "colFinanceLinePeriodEnd";
             this.colFinanceLinePeriodEnd.ReadOnly = true;
+            this.colFinanceLinePeriodEnd.Width = 86;
             // 
             // colPaymentTerms
             // 
@@ -604,26 +624,30 @@
             // 
             // colPrice
             // 
+            this.colPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colPrice.DataPropertyName = "Price";
             dataGridViewCellStyle8.Format = "p";
             this.colPrice.DefaultCellStyle = dataGridViewCellStyle8;
             this.colPrice.HeaderText = "总手续费率";
             this.colPrice.Name = "colPrice";
             this.colPrice.ReadOnly = true;
+            this.colPrice.Width = 92;
             // 
             // colIFPrice
             // 
+            this.colIFPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colIFPrice.DataPropertyName = "IFPrice";
             dataGridViewCellStyle9.Format = "p";
             this.colIFPrice.DefaultCellStyle = dataGridViewCellStyle9;
-            this.colIFPrice.HeaderText = "买方保理商手续费率";
+            this.colIFPrice.HeaderText = "IF手续费率";
             this.colIFPrice.Name = "colIFPrice";
             this.colIFPrice.ReadOnly = true;
+            this.colIFPrice.Width = 89;
             // 
             // colHandFeeCurr
             // 
             this.colHandFeeCurr.DataPropertyName = "HandFeeCurr";
-            this.colHandFeeCurr.HeaderText = "单据处理费币别";
+            this.colHandFeeCurr.HeaderText = "费用币别";
             this.colHandFeeCurr.Name = "colHandFeeCurr";
             this.colHandFeeCurr.ReadOnly = true;
             // 
@@ -632,7 +656,7 @@
             this.colHandFee.DataPropertyName = "HandFee";
             dataGridViewCellStyle10.Format = "N2";
             this.colHandFee.DefaultCellStyle = dataGridViewCellStyle10;
-            this.colHandFee.HeaderText = "单据处理费(每张)";
+            this.colHandFee.HeaderText = "单据处理费";
             this.colHandFee.Name = "colHandFee";
             this.colHandFee.ReadOnly = true;
             // 
