@@ -85,6 +85,10 @@
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Remark" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="CheckStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RejectReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="CheckUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="CDA_InvoiceAssignBatch" Member="InvoiceAssignBatches" OtherKey="CDACode" Type="InvoiceAssignBatch" />
       <Association Name="CDA_InvoiceFinanceBatch" Member="InvoiceFinanceBatches" OtherKey="CDACode" Type="InvoiceFinanceBatch" />
       <Association Name="CDA_InvoicePaymentBatch" Member="InvoicePaymentBatches" OtherKey="CDACode" Type="InvoicePaymentBatch" />

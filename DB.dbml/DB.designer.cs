@@ -1404,6 +1404,14 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Remark;
 		
+		private string _CheckStatus;
+		
+		private string _RejectReason;
+		
+		private string _CheckUserName;
+		
+		private System.Nullable<System.DateTime> _CheckDate;
+		
 		private EntitySet<InvoiceAssignBatch> _InvoiceAssignBatches;
 		
 		private EntitySet<InvoiceFinanceBatch> _InvoiceFinanceBatches;
@@ -1494,6 +1502,14 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreateUserNameChanged();
     partial void OnRemarkChanging(string value);
     partial void OnRemarkChanged();
+    partial void OnCheckStatusChanging(string value);
+    partial void OnCheckStatusChanged();
+    partial void OnRejectReasonChanging(string value);
+    partial void OnRejectReasonChanged();
+    partial void OnCheckUserNameChanging(string value);
+    partial void OnCheckUserNameChanged();
+    partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCheckDateChanged();
     #endregion
 		
 		public CDA()
@@ -2285,6 +2301,86 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Remark = value;
 					this.SendPropertyChanged("Remark");
 					this.OnRemarkChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CheckStatus
+		{
+			get
+			{
+				return this._CheckStatus;
+			}
+			set
+			{
+				if ((this._CheckStatus != value))
+				{
+					this.OnCheckStatusChanging(value);
+					this.SendPropertyChanging();
+					this._CheckStatus = value;
+					this.SendPropertyChanged("CheckStatus");
+					this.OnCheckStatusChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RejectReason", DbType="NVarChar(500)")]
+		public string RejectReason
+		{
+			get
+			{
+				return this._RejectReason;
+			}
+			set
+			{
+				if ((this._RejectReason != value))
+				{
+					this.OnRejectReasonChanging(value);
+					this.SendPropertyChanging();
+					this._RejectReason = value;
+					this.SendPropertyChanged("RejectReason");
+					this.OnRejectReasonChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CheckUserName", DbType="NVarChar(50)")]
+		public string CheckUserName
+		{
+			get
+			{
+				return this._CheckUserName;
+			}
+			set
+			{
+				if ((this._CheckUserName != value))
+				{
+					this.OnCheckUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CheckUserName = value;
+					this.SendPropertyChanged("CheckUserName");
+					this.OnCheckUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CheckDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CheckDate
+		{
+			get
+			{
+				return this._CheckDate;
+			}
+			set
+			{
+				if ((this._CheckDate != value))
+				{
+					this.OnCheckDateChanging(value);
+					this.SendPropertyChanging();
+					this._CheckDate = value;
+					this.SendPropertyChanged("CheckDate");
+					this.OnCheckDateChanged();
 				}
 			}
 		}

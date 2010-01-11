@@ -137,7 +137,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckCDA(object sender, EventArgs e)
         {
-            CDAMgr cdaMgr = new CDAMgr(false);
+            CDAMgr cdaMgr = new CDAMgr(CDAMgr.OpCDAType.CHECK);
             this.SetDetailPanel(cdaMgr);
         }
 
@@ -550,7 +550,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryCDA(object sender, EventArgs e)
         {
-            CDAMgr CDAMgr = new CDAMgr(true);
+            CDAMgr CDAMgr = new CDAMgr(CDAMgr.OpCDAType.QUERY);
             this.SetDetailPanel(CDAMgr);
         }
 

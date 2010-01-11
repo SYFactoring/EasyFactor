@@ -75,6 +75,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCDAQuery = new DevComponents.DotNetBar.PanelEx();
+            this.cbCheckStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblCheckStatus = new DevComponents.DotNetBar.LabelX();
+            this.tbFactorName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblFactorName = new DevComponents.DotNetBar.LabelX();
             this.tbBuyerName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbSellerName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblBuyerName = new DevComponents.DotNetBar.LabelX();
@@ -136,8 +140,9 @@
             this.menuItemCDANew = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCDAUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCDADelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbFactorName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblFactorName = new DevComponents.DotNetBar.LabelX();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
             this.panelCDAQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCDAs)).BeginInit();
             this.cmuCDAMgr.SuspendLayout();
@@ -147,6 +152,8 @@
             // 
             this.panelCDAQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelCDAQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelCDAQuery.Controls.Add(this.cbCheckStatus);
+            this.panelCDAQuery.Controls.Add(this.lblCheckStatus);
             this.panelCDAQuery.Controls.Add(this.tbFactorName);
             this.panelCDAQuery.Controls.Add(this.lblFactorName);
             this.panelCDAQuery.Controls.Add(this.tbBuyerName);
@@ -170,6 +177,60 @@
             this.panelCDAQuery.Style.GradientAngle = 90;
             this.panelCDAQuery.TabIndex = 0;
             // 
+            // cbCheckStatus
+            // 
+            this.cbCheckStatus.DisplayMember = "Text";
+            this.cbCheckStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCheckStatus.FormattingEnabled = true;
+            this.cbCheckStatus.ItemHeight = 14;
+            this.cbCheckStatus.Items.AddRange(new object[] {
+            "",
+            "未复核",
+            "已复核",
+            "复核未通过"});
+            this.cbCheckStatus.Location = new System.Drawing.Point(416, 3);
+            this.cbCheckStatus.Name = "cbCheckStatus";
+            this.cbCheckStatus.Size = new System.Drawing.Size(101, 20);
+            this.cbCheckStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCheckStatus.TabIndex = 9;
+            // 
+            // lblCheckStatus
+            // 
+            this.lblCheckStatus.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCheckStatus.BackgroundStyle.Class = "";
+            this.lblCheckStatus.Location = new System.Drawing.Point(351, 4);
+            this.lblCheckStatus.Name = "lblCheckStatus";
+            this.lblCheckStatus.Size = new System.Drawing.Size(59, 16);
+            this.lblCheckStatus.TabIndex = 8;
+            this.lblCheckStatus.Text = "复核结果:";
+            // 
+            // tbFactorName
+            // 
+            // 
+            // 
+            // 
+            this.tbFactorName.Border.Class = "TextBoxBorder";
+            this.tbFactorName.Location = new System.Drawing.Point(245, 3);
+            this.tbFactorName.Name = "tbFactorName";
+            this.tbFactorName.Size = new System.Drawing.Size(100, 20);
+            this.tbFactorName.TabIndex = 3;
+            // 
+            // lblFactorName
+            // 
+            this.lblFactorName.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblFactorName.BackgroundStyle.Class = "";
+            this.lblFactorName.Location = new System.Drawing.Point(192, 4);
+            this.lblFactorName.Name = "lblFactorName";
+            this.lblFactorName.Size = new System.Drawing.Size(44, 16);
+            this.lblFactorName.TabIndex = 2;
+            this.lblFactorName.Text = "保理商";
+            // 
             // tbBuyerName
             // 
             // 
@@ -179,7 +240,7 @@
             this.tbBuyerName.Location = new System.Drawing.Point(245, 25);
             this.tbBuyerName.Name = "tbBuyerName";
             this.tbBuyerName.Size = new System.Drawing.Size(100, 20);
-            this.tbBuyerName.TabIndex = 5;
+            this.tbBuyerName.TabIndex = 7;
             // 
             // tbSellerName
             // 
@@ -190,7 +251,7 @@
             this.tbSellerName.Location = new System.Drawing.Point(86, 24);
             this.tbSellerName.Name = "tbSellerName";
             this.tbSellerName.Size = new System.Drawing.Size(100, 20);
-            this.tbSellerName.TabIndex = 3;
+            this.tbSellerName.TabIndex = 5;
             // 
             // lblBuyerName
             // 
@@ -202,7 +263,7 @@
             this.lblBuyerName.Location = new System.Drawing.Point(192, 25);
             this.lblBuyerName.Name = "lblBuyerName";
             this.lblBuyerName.Size = new System.Drawing.Size(31, 16);
-            this.lblBuyerName.TabIndex = 4;
+            this.lblBuyerName.TabIndex = 6;
             this.lblBuyerName.Text = "买方";
             // 
             // lblSellerName
@@ -215,7 +276,7 @@
             this.lblSellerName.Location = new System.Drawing.Point(49, 28);
             this.lblSellerName.Name = "lblSellerName";
             this.lblSellerName.Size = new System.Drawing.Size(31, 16);
-            this.lblSellerName.TabIndex = 2;
+            this.lblSellerName.TabIndex = 4;
             this.lblSellerName.Text = "卖方";
             // 
             // lblCount
@@ -225,20 +286,20 @@
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(419, 24);
+            this.lblCount.Location = new System.Drawing.Point(537, 32);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
-            this.lblCount.TabIndex = 7;
+            this.lblCount.TabIndex = 11;
             // 
             // btnCDAQuery
             // 
             this.btnCDAQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCDAQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCDAQuery.Location = new System.Drawing.Point(356, 3);
+            this.btnCDAQuery.Location = new System.Drawing.Point(523, 3);
             this.btnCDAQuery.Name = "btnCDAQuery";
-            this.btnCDAQuery.Size = new System.Drawing.Size(47, 45);
+            this.btnCDAQuery.Size = new System.Drawing.Size(47, 23);
             this.btnCDAQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCDAQuery.TabIndex = 6;
+            this.btnCDAQuery.TabIndex = 10;
             this.btnCDAQuery.Text = "查询";
             this.btnCDAQuery.Click += new System.EventHandler(this.QueryCDAs);
             // 
@@ -722,73 +783,71 @@
             this.toolStripSeparator,
             this.menuItemCDANew,
             this.menuItemCDAUpdate,
-            this.menuItemCDADelete});
+            this.menuItemCDADelete,
+            this.toolStripSeparator1,
+            this.menuItemCheck,
+            this.menuItemReject});
             this.cmuCDAMgr.Name = "cmuContractMgr";
-            this.cmuCDAMgr.Size = new System.Drawing.Size(123, 120);
+            this.cmuCDAMgr.Size = new System.Drawing.Size(153, 192);
             // 
             // menuItemCDASelect
             // 
             this.menuItemCDASelect.Name = "menuItemCDASelect";
-            this.menuItemCDASelect.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDASelect.Size = new System.Drawing.Size(152, 22);
             this.menuItemCDASelect.Text = "选定CDA";
             this.menuItemCDASelect.Click += new System.EventHandler(this.SelectCDA);
             // 
             // menuItemCDADetail
             // 
             this.menuItemCDADetail.Name = "menuItemCDADetail";
-            this.menuItemCDADetail.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDADetail.Size = new System.Drawing.Size(152, 22);
             this.menuItemCDADetail.Text = "详细信息";
             this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(119, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
             // menuItemCDANew
             // 
             this.menuItemCDANew.Name = "menuItemCDANew";
-            this.menuItemCDANew.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDANew.Size = new System.Drawing.Size(152, 22);
             this.menuItemCDANew.Text = "新建CDA";
             this.menuItemCDANew.Click += new System.EventHandler(this.NewCDA);
             // 
             // menuItemCDAUpdate
             // 
             this.menuItemCDAUpdate.Name = "menuItemCDAUpdate";
-            this.menuItemCDAUpdate.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDAUpdate.Size = new System.Drawing.Size(152, 22);
             this.menuItemCDAUpdate.Text = "更新CDA";
             this.menuItemCDAUpdate.Click += new System.EventHandler(this.UpdateCDA);
             // 
             // menuItemCDADelete
             // 
             this.menuItemCDADelete.Name = "menuItemCDADelete";
-            this.menuItemCDADelete.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDADelete.Size = new System.Drawing.Size(152, 22);
             this.menuItemCDADelete.Text = "删除CDA";
             this.menuItemCDADelete.Click += new System.EventHandler(this.DeleteCDA);
             // 
-            // tbFactorName
+            // toolStripSeparator1
             // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
+            // menuItemCheck
             // 
+            this.menuItemCheck.Name = "menuItemCheck";
+            this.menuItemCheck.Size = new System.Drawing.Size(152, 22);
+            this.menuItemCheck.Text = "复核通过";
+            this.menuItemCheck.Click += new System.EventHandler(this.Check);
             // 
-            this.tbFactorName.Border.Class = "TextBoxBorder";
-            this.tbFactorName.Location = new System.Drawing.Point(245, 3);
-            this.tbFactorName.Name = "tbFactorName";
-            this.tbFactorName.Size = new System.Drawing.Size(100, 20);
-            this.tbFactorName.TabIndex = 9;
+            // menuItemReject
             // 
-            // lblFactorName
-            // 
-            this.lblFactorName.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblFactorName.BackgroundStyle.Class = "";
-            this.lblFactorName.Location = new System.Drawing.Point(192, 4);
-            this.lblFactorName.Name = "lblFactorName";
-            this.lblFactorName.Size = new System.Drawing.Size(44, 16);
-            this.lblFactorName.TabIndex = 8;
-            this.lblFactorName.Text = "保理商";
+            this.menuItemReject.Name = "menuItemReject";
+            this.menuItemReject.Size = new System.Drawing.Size(152, 22);
+            this.menuItemReject.Text = "复核拒绝";
+            this.menuItemReject.Click += new System.EventHandler(this.Reject);
             // 
             // CDAMgr
             // 
@@ -856,5 +915,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
         private DevComponents.DotNetBar.LabelX lblFactorName;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCheckStatus;
+        private DevComponents.DotNetBar.LabelX lblCheckStatus;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemReject;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCheck;
     }
 }

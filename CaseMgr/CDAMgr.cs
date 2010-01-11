@@ -18,25 +18,54 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CDAMgr : UserControl
     {
-        #region Fields (1)
+        #region Fields (2)
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs = new BindingSource();
+        private OpCDAType opCDAType;
 
         #endregion Fields
+
+        #region Enums (1)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum OpCDAType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            QUERY,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            CHECK
+        }
+
+        #endregion Enums
 
         #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the CDAMgr class.
         /// </summary>
-        public CDAMgr(bool isEditable)
+        public CDAMgr(OpCDAType opCDAType)
         {
             InitializeComponent();
             this.dgvCDAs.AutoGenerateColumns = false;
+            this.dgvCDAs.DataSource = bs;
             ControlUtil.SetDoubleBuffered(this.dgvCDAs);
+
+            this.opCDAType = opCDAType;
+
+            if (opCDAType == OpCDAType.CHECK)
+            {
+                this.bs.DataSource = App.Current.DbContext.CDAs.Where(c => c.CheckStatus == "未复核");
+            }
         }
 
         #endregion Constructors
@@ -63,9 +92,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Properties
 
-        #region Methods (8)
+        #region Methods (9)
 
-        // Private Methods (8) 
+        // Private Methods (9) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -82,6 +111,16 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 this.SelectCDA(sender, e);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Check(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -179,6 +218,7 @@ namespace CMBC.EasyFactor.CaseMgr
             string sellerName = tbSellerName.Text;
             string factorName = lblFactorName.Text;
             string contractCode = tbContractCode.Text;
+            string status = this.cbCheckStatus.Text;
 
             var queryResult =
                 from cda in App.Current.DbContext.CDAs
@@ -189,11 +229,22 @@ namespace CMBC.EasyFactor.CaseMgr
                 let buyer = cda.Case.BuyerClient
                 where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN_1.Contains(buyerName) || buyer.ClientNameEN_2.Contains(buyerName)
                 where cda.Case.SellerFactor.CompanyNameCN.Contains(factorName) || cda.Case.SellerFactor.CompanyNameEN.Contains(factorName) || cda.Case.BuyerFactor.CompanyNameCN.Contains(factorName) || cda.Case.BuyerFactor.CompanyNameEN.Contains(factorName)
+                && (status != string.Empty ? cda.CheckStatus == status : true)
                 select cda;
 
             this.bs.DataSource = queryResult;
             this.dgvCDAs.DataSource = bs;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Reject(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>

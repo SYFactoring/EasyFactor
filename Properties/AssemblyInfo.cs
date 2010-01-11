@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("中国民生银行保理运营系统（内测版）")]
-[assembly: AssemblyDescription("本系统由张晓兰、刘一鸣设计、开发并维护。联系方式：liuyiming.vip@gmail.com")]
+[assembly: AssemblyDescription("本系统由Jerry、晓兰提议，刘一鸣设计、开发并维护。感谢Jerry、Nina、Sissi、Lele、Clara、Cindy不辞辛劳的测试和负责任的反馈。希望我们可以做的更好。联系方式：liuyiming.vip@gmail.com")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("中国民生银行贸易金融部")]
-[assembly: AssemblyProduct("EasyFactor")]
+[assembly: AssemblyProduct("EasyFactoring")]
 [assembly: AssemblyCopyright("Copyright ©  2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.6")]
-[assembly: AssemblyFileVersion("1.0.0.6")]
+[assembly: AssemblyVersion("1.1.11.1")]
+[assembly: AssemblyFileVersion("1.1.11.1")]

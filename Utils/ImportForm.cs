@@ -664,6 +664,7 @@ namespace CMBC.EasyFactor.Utils
                         {
                             cda = new CDA();
                             cda.CDACode = cdaCode;
+                            cda.CheckStatus = "已复核";
                             cdaList.Add(cda);
                         }
                         cda.Case = curCase;
