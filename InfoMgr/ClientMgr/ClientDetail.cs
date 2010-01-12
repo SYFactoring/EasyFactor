@@ -38,31 +38,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         #region Enums (3)
 
         /// <summary>
-        /// Operation Type 
-        /// </summary>
-        public enum OpClientType
-        {
-            /// <summary>
-            /// New Client
-            /// </summary>
-            NEW_CLIENT,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            NEW_GROUP_CLIENT,
-
-            /// <summary>
-            /// Update Client
-            /// </summary>
-            UPDATE_CLIENT,
-
-            /// <summary>
-            /// Detail Client
-            /// </summary>
-            DETAIL_CLIENT
-        }
-        /// <summary>
         /// 
         /// </summary>
         public enum OpClientCreditLineType
@@ -101,6 +76,31 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// 
             /// </summary>
             DETAIL_CONTRACT
+        }
+        /// <summary>
+        /// Operation Type 
+        /// </summary>
+        public enum OpClientType
+        {
+            /// <summary>
+            /// New Client
+            /// </summary>
+            NEW_CLIENT,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            NEW_GROUP_CLIENT,
+
+            /// <summary>
+            /// Update Client
+            /// </summary>
+            UPDATE_CLIENT,
+
+            /// <summary>
+            /// Detail Client
+            /// </summary>
+            DETAIL_CLIENT
         }
 
         #endregion Enums
@@ -265,7 +265,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClientDetail_Leave(object sender, EventArgs e)
+        private void ClientDetail_Closing(object sender, FormClosingEventArgs e)
         {
             Client client = (Client)this.clientBindingSource.DataSource;
             if (this.opClientType == OpClientType.UPDATE_CLIENT)
@@ -296,7 +296,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     }
                 }
             }
-
+            if (client.ClientGroup != null)
+            {
+                if (client.ClientEDICode == null || client.ClientEDICode.Trim() == string.Empty)
+                {
+                    client.ClientGroup = null;
+                }
+                else
+                {
+                    if (App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == client.ClientEDICode) == null)
+                    {
+                        client.ClientGroup = null;
+                    }
+                }
+            }
             Close();
         }
 
@@ -671,21 +684,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
             Client client = (Client)this.clientBindingSource.DataSource;
-
-            if (this.isGroupCheckBox.Checked)
-            {
-                Client clientGroup = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == this.groupNoTextBox.Text);
-                if (clientGroup == null)
-                {
-                    MessageBox.Show("集团客户不存在", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                client.ClientGroup = clientGroup;
-            }
-            else
-            {
-                client.ClientGroup = null;
-            }
             client.CreateUserName = App.Current.CurUser.Name;
 
             if (this.opClientType == OpClientType.NEW_CLIENT)
@@ -790,11 +788,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             if (creditLine.CreditLineID == 0)
             {
-                creditLine.Client = client;
-                creditLine.CreateUserName = App.Current.CurUser.Name;
                 bool isAddOK = true;
                 try
                 {
+                    creditLine.Client = client;
+                    creditLine.CreateUserName = App.Current.CurUser.Name;
+
                     App.Current.DbContext.ClientCreditLines.InsertOnSubmit(creditLine);
                     App.Current.DbContext.SubmitChanges();
                 }
@@ -884,20 +883,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (opContractType == OpContractType.NEW_CONTRACT)
             {
                 bool isAddOK = true;
-                contract.Client = client;
-                contract.CreateUserName = App.Current.CurUser.Name;
-                DateTime today = DateTime.Now.Date;
-                if (contract.ContractDueDate < today)
-                {
-                    contract.ContractStatus = ConstStr.CONTRACT.EXPIRY;
-                }
-                else
-                {
-                    contract.ContractStatus = ConstStr.CONTRACT.AVAILABILITY;
-                }
-
                 try
                 {
+                    contract.Client = client;
+                    contract.CreateUserName = App.Current.CurUser.Name;
+                    DateTime today = DateTime.Now.Date;
+                    if (contract.ContractDueDate < today)
+                    {
+                        contract.ContractStatus = ConstStr.CONTRACT.EXPIRY;
+                    }
+                    else
+                    {
+                        contract.ContractStatus = ConstStr.CONTRACT.AVAILABILITY;
+                    }
+
                     App.Current.DbContext.Contracts.InsertOnSubmit(contract);
                     App.Current.DbContext.SubmitChanges();
                 }

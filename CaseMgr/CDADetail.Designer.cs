@@ -1861,7 +1861,7 @@
             this.btnCDAReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCDAReset.TabIndex = 5;
             this.btnCDAReset.Text = "重置";
-            this.btnCDAReset.Click += new System.EventHandler(this.CloseCDA);
+            this.btnCDAReset.Click += new System.EventHandler(this.ResetCDA);
             // 
             // rangeValidator1
             // 
@@ -1945,7 +1945,7 @@
             this.Name = "CDADetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "额度通知书";
-            this.Leave += new System.EventHandler(this.CloseCDA);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CDADetail_FormClosing);
             this.groupPanelCase.ResumeLayout(false);
             this.groupPanelCase.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();

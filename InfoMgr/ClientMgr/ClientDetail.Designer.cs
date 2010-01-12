@@ -3306,7 +3306,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.Name = "ClientDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "客户详细信息";
-            this.Leave += new System.EventHandler(this.ClientDetail_Leave);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClientDetail_Closing);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabControl.PerformLayout();

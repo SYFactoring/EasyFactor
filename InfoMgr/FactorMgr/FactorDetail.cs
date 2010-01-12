@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// </summary>
     public partial class FactorDetail : DevComponents.DotNetBar.Office2007Form
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         /// <summary>
         /// 
@@ -28,9 +28,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private OpFactorType opFactorType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (2) 
+        #region Enums (2)
 
         /// <summary>
         /// Operation Type
@@ -52,7 +52,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             /// </summary>
             DETAIL_FACTOR
         }
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         public enum OpFactorCreditLineType
@@ -73,11 +73,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             DETAIL_FACTOR_CREDIT_LINE
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (3) 
+        #region Constructors (3)
 
-/// <summary>
+        /// <summary>
         /// Initializes a new instance of the FactorDetail class
         /// </summary>
         /// <param name="factor">selected factor</param>
@@ -143,11 +143,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.tabControl.SelectedTab = this.tabItemFactorCreditLine;
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (18) 
+        #region Methods (18)
 
-		// Private Methods (18) 
+        // Private Methods (18) 
 
         private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
@@ -238,7 +238,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FactorDetail_Leave(object sender, EventArgs e)
+        private void FactorDetail_FormClosing(object sender, FormClosingEventArgs e)
         {
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (opFactorType == OpFactorType.UPDATE_FACTOR)
@@ -257,8 +257,23 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     }
                 }
             }
+            if (factor.FactorGroup != null)
+            {
+                if (factor.FactorCode == null || factor.FactorCode.Trim() == string.Empty)
+                {
+                    factor.FactorGroup = null;
+                }
+                else
+                {
+                    if (App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode) == null)
+                    {
+                        factor.FactorGroup = null;
+                    }
+                }
+            }
 
             Close();
+
         }
 
         /// <summary>
@@ -361,14 +376,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
             Factor factor = (Factor)factorBindingSource.DataSource;
-            factor.LastModifiedDate = DateTime.Now.Date;
-            factor.CreateUserName = App.Current.CurUser.Name;
-
             if (this.opFactorType == OpFactorType.NEW_FACTOR)
             {
                 bool isAddOK = true;
                 try
                 {
+                    factor.LastModifiedDate = DateTime.Now.Date;
+                    factor.CreateUserName = App.Current.CurUser.Name;
                     App.Current.DbContext.Factors.InsertOnSubmit(factor);
                     App.Current.DbContext.SubmitChanges();
                 }
@@ -462,21 +476,20 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     creditLine.CreditLineStatus = ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY;
                 }
             }
-            creditLine.CreateUserName = App.Current.CurUser.Name;
-
             if (creditLine.CreditLineID == 0)
             {
-                creditLine.Factor = factor;
-
                 bool isAddOK = true;
                 try
                 {
+                    creditLine.Factor = factor;
+                    creditLine.CreateUserName = App.Current.CurUser.Name;
                     App.Current.DbContext.FactorCreditLines.InsertOnSubmit(creditLine);
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
                     isAddOK = false;
+                    creditLine.Factor = null;
                     MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
@@ -784,6 +797,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

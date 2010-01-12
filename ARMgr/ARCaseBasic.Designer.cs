@@ -74,7 +74,7 @@
             DevComponents.DotNetBar.LabelX efPriceLbl;
             DevComponents.DotNetBar.LabelX lblCommissionType;
             DevComponents.DotNetBar.LabelX lblCaseCode;
-            DevComponents.DotNetBar.LabelX labelX1;
+            DevComponents.DotNetBar.LabelX lblCDACode;
             DevComponents.DotNetBar.LabelX lblIsNotice;
             DevComponents.DotNetBar.LabelX ownerDepartmentCodeLabel;
             DevComponents.DotNetBar.LabelX assignTypeLabel;
@@ -85,8 +85,9 @@
             DevComponents.DotNetBar.LabelX invoiceCurrencyLabel;
             DevComponents.DotNetBar.LabelX factorCodeLabel;
             DevComponents.DotNetBar.LabelX transactionTypeLabel;
-            DevComponents.DotNetBar.LabelX labelX2;
+            DevComponents.DotNetBar.LabelX lblHighestFinance;
             DevComponents.DotNetBar.LabelX lblPaymentTerms;
+            DevComponents.DotNetBar.LabelX lblNetPaymentTerm;
             this.panelCaseBasic = new DevComponents.DotNetBar.ExpandablePanel();
             this.panelFinanceCreditLine = new DevComponents.DotNetBar.ExpandablePanel();
             this.tbHighestFinance = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -110,6 +111,8 @@
             this.handFeeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.handFeeCurrTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelCase = new DevComponents.DotNetBar.ExpandablePanel();
+            this.tbNetPaymentTerm = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbPaymentTerms = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbCaseCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbCDACode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbIsNotice = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -128,7 +131,6 @@
             this.factorNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelInvoiceMgr = new DevComponents.DotNetBar.PanelEx();
-            this.tbPaymentTerms = new DevComponents.DotNetBar.Controls.TextBoxX();
             priceLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
             handFeeCurrLabel = new DevComponents.DotNetBar.LabelX();
@@ -144,7 +146,7 @@
             efPriceLbl = new DevComponents.DotNetBar.LabelX();
             lblCommissionType = new DevComponents.DotNetBar.LabelX();
             lblCaseCode = new DevComponents.DotNetBar.LabelX();
-            labelX1 = new DevComponents.DotNetBar.LabelX();
+            lblCDACode = new DevComponents.DotNetBar.LabelX();
             lblIsNotice = new DevComponents.DotNetBar.LabelX();
             ownerDepartmentCodeLabel = new DevComponents.DotNetBar.LabelX();
             assignTypeLabel = new DevComponents.DotNetBar.LabelX();
@@ -155,8 +157,9 @@
             invoiceCurrencyLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
             transactionTypeLabel = new DevComponents.DotNetBar.LabelX();
-            labelX2 = new DevComponents.DotNetBar.LabelX();
+            lblHighestFinance = new DevComponents.DotNetBar.LabelX();
             lblPaymentTerms = new DevComponents.DotNetBar.LabelX();
+            lblNetPaymentTerm = new DevComponents.DotNetBar.LabelX();
             this.panelCaseBasic.SuspendLayout();
             this.panelFinanceCreditLine.SuspendLayout();
             this.panelBuyer.SuspendLayout();
@@ -359,18 +362,18 @@
             lblCaseCode.TabIndex = 56;
             lblCaseCode.Text = "案件编号:";
             // 
-            // labelX1
+            // lblCDACode
             // 
-            labelX1.AutoSize = true;
+            lblCDACode.AutoSize = true;
             // 
             // 
             // 
-            labelX1.BackgroundStyle.Class = "";
-            labelX1.Location = new System.Drawing.Point(272, 27);
-            labelX1.Name = "labelX1";
-            labelX1.Size = new System.Drawing.Size(97, 16);
-            labelX1.TabIndex = 54;
-            labelX1.Text = "额度通知书编号:";
+            lblCDACode.BackgroundStyle.Class = "";
+            lblCDACode.Location = new System.Drawing.Point(272, 27);
+            lblCDACode.Name = "lblCDACode";
+            lblCDACode.Size = new System.Drawing.Size(97, 16);
+            lblCDACode.TabIndex = 54;
+            lblCDACode.Text = "额度通知书编号:";
             // 
             // lblIsNotice
             // 
@@ -502,18 +505,44 @@
             transactionTypeLabel.TabIndex = 41;
             transactionTypeLabel.Text = "业务类别:";
             // 
-            // labelX2
+            // lblHighestFinance
             // 
-            labelX2.AutoSize = true;
+            lblHighestFinance.AutoSize = true;
             // 
             // 
             // 
-            labelX2.BackgroundStyle.Class = "";
-            labelX2.Location = new System.Drawing.Point(5, 134);
-            labelX2.Name = "labelX2";
-            labelX2.Size = new System.Drawing.Size(121, 16);
-            labelX2.TabIndex = 11;
-            labelX2.Text = "最高保理预付款额度:";
+            lblHighestFinance.BackgroundStyle.Class = "";
+            lblHighestFinance.Location = new System.Drawing.Point(5, 134);
+            lblHighestFinance.Name = "lblHighestFinance";
+            lblHighestFinance.Size = new System.Drawing.Size(121, 16);
+            lblHighestFinance.TabIndex = 11;
+            lblHighestFinance.Text = "最高保理预付款额度:";
+            // 
+            // lblPaymentTerms
+            // 
+            lblPaymentTerms.AutoSize = true;
+            // 
+            // 
+            // 
+            lblPaymentTerms.BackgroundStyle.Class = "";
+            lblPaymentTerms.Location = new System.Drawing.Point(27, 155);
+            lblPaymentTerms.Name = "lblPaymentTerms";
+            lblPaymentTerms.Size = new System.Drawing.Size(59, 16);
+            lblPaymentTerms.TabIndex = 58;
+            lblPaymentTerms.Text = "付款条件:";
+            // 
+            // lblNetPaymentTerm
+            // 
+            lblNetPaymentTerm.AutoSize = true;
+            // 
+            // 
+            // 
+            lblNetPaymentTerm.BackgroundStyle.Class = "";
+            lblNetPaymentTerm.Location = new System.Drawing.Point(309, 157);
+            lblNetPaymentTerm.Name = "lblNetPaymentTerm";
+            lblNetPaymentTerm.Size = new System.Drawing.Size(59, 16);
+            lblNetPaymentTerm.TabIndex = 60;
+            lblNetPaymentTerm.Text = "结算方式:";
             // 
             // panelCaseBasic
             // 
@@ -547,7 +576,7 @@
             this.panelFinanceCreditLine.CollapseDirection = DevComponents.DotNetBar.eCollapseDirection.RightToLeft;
             this.panelFinanceCreditLine.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.panelFinanceCreditLine.Controls.Add(this.tbHighestFinance);
-            this.panelFinanceCreditLine.Controls.Add(labelX2);
+            this.panelFinanceCreditLine.Controls.Add(lblHighestFinance);
             this.panelFinanceCreditLine.Controls.Add(this.tbFinanceOutstanding);
             this.panelFinanceCreditLine.Controls.Add(financeProportionLabel);
             this.panelFinanceCreditLine.Controls.Add(lblFinanceARBalance);
@@ -879,12 +908,14 @@
             this.panelCase.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelCase.CollapseDirection = DevComponents.DotNetBar.eCollapseDirection.RightToLeft;
             this.panelCase.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelCase.Controls.Add(this.tbNetPaymentTerm);
+            this.panelCase.Controls.Add(lblNetPaymentTerm);
             this.panelCase.Controls.Add(this.tbPaymentTerms);
             this.panelCase.Controls.Add(lblPaymentTerms);
             this.panelCase.Controls.Add(this.tbCaseCode);
             this.panelCase.Controls.Add(lblCaseCode);
             this.panelCase.Controls.Add(this.tbCDACode);
-            this.panelCase.Controls.Add(labelX1);
+            this.panelCase.Controls.Add(lblCDACode);
             this.panelCase.Controls.Add(lblIsNotice);
             this.panelCase.Controls.Add(this.tbIsNotice);
             this.panelCase.Controls.Add(ownerDepartmentCodeLabel);
@@ -932,6 +963,30 @@
             this.panelCase.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelCase.TitleStyle.GradientAngle = 90;
             this.panelCase.TitleText = "基本信息";
+            // 
+            // tbNetPaymentTerm
+            // 
+            // 
+            // 
+            // 
+            this.tbNetPaymentTerm.Border.Class = "TextBoxBorder";
+            this.tbNetPaymentTerm.Location = new System.Drawing.Point(373, 157);
+            this.tbNetPaymentTerm.Name = "tbNetPaymentTerm";
+            this.tbNetPaymentTerm.ReadOnly = true;
+            this.tbNetPaymentTerm.Size = new System.Drawing.Size(100, 20);
+            this.tbNetPaymentTerm.TabIndex = 61;
+            // 
+            // tbPaymentTerms
+            // 
+            // 
+            // 
+            // 
+            this.tbPaymentTerms.Border.Class = "TextBoxBorder";
+            this.tbPaymentTerms.Location = new System.Drawing.Point(97, 156);
+            this.tbPaymentTerms.Name = "tbPaymentTerms";
+            this.tbPaymentTerms.ReadOnly = true;
+            this.tbPaymentTerms.Size = new System.Drawing.Size(206, 20);
+            this.tbPaymentTerms.TabIndex = 59;
             // 
             // tbCaseCode
             // 
@@ -1091,7 +1146,7 @@
             // 
             this.isRecoarseCheckBox.BackgroundStyle.Class = "";
             this.isRecoarseCheckBox.Enabled = false;
-            this.isRecoarseCheckBox.Location = new System.Drawing.Point(167, 138);
+            this.isRecoarseCheckBox.Location = new System.Drawing.Point(198, 138);
             this.isRecoarseCheckBox.Name = "isRecoarseCheckBox";
             this.isRecoarseCheckBox.Size = new System.Drawing.Size(101, 16);
             this.isRecoarseCheckBox.TabIndex = 53;
@@ -1164,31 +1219,6 @@
             this.panelInvoiceMgr.Style.GradientAngle = 90;
             this.panelInvoiceMgr.TabIndex = 0;
             // 
-            // lblPaymentTerms
-            // 
-            lblPaymentTerms.AutoSize = true;
-            // 
-            // 
-            // 
-            lblPaymentTerms.BackgroundStyle.Class = "";
-            lblPaymentTerms.Location = new System.Drawing.Point(27, 155);
-            lblPaymentTerms.Name = "lblPaymentTerms";
-            lblPaymentTerms.Size = new System.Drawing.Size(59, 16);
-            lblPaymentTerms.TabIndex = 58;
-            lblPaymentTerms.Text = "付款条件:";
-            // 
-            // tbPaymentTerms
-            // 
-            // 
-            // 
-            // 
-            this.tbPaymentTerms.Border.Class = "TextBoxBorder";
-            this.tbPaymentTerms.Location = new System.Drawing.Point(97, 156);
-            this.tbPaymentTerms.Name = "tbPaymentTerms";
-            this.tbPaymentTerms.ReadOnly = true;
-            this.tbPaymentTerms.Size = new System.Drawing.Size(376, 20);
-            this.tbPaymentTerms.TabIndex = 59;
-            // 
             // ARCaseBasic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1236,5 +1266,6 @@
         private DevComponents.DotNetBar.ExpandablePanel panelFinanceCreditLine;
         private DevComponents.DotNetBar.Controls.TextBoxX tbHighestFinance;
         private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentTerms;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbNetPaymentTerm;
     }
 }

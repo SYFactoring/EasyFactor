@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreditNotePayment));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.invoiceDeductionBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
@@ -46,17 +47,17 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.invoiceDeductionBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
-            this.dgvCreditNote = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.dgvInvoiceDeduction = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colCreditNoteNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeductionAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditNoteDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeductionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceDeductionBindingNavigator)).BeginInit();
             this.invoiceDeductionBindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceDeductionBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCreditNote)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInvoiceDeduction)).BeginInit();
             this.SuspendLayout();
             // 
             // invoiceDeductionBindingNavigator
@@ -187,9 +188,9 @@
             this.invoiceDeductionBindingNavigatorSaveItem.Text = "Save Data";
             this.invoiceDeductionBindingNavigatorSaveItem.Click += new System.EventHandler(this.Save);
             // 
-            // dgvCreditNote
+            // dgvInvoiceDeduction
             // 
-            this.dgvCreditNote.AutoGenerateColumns = false;
+            this.dgvInvoiceDeduction.AutoGenerateColumns = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -197,35 +198,35 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCreditNote.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvCreditNote.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCreditNote.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvInvoiceDeduction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvInvoiceDeduction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInvoiceDeduction.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCreditNoteNo,
             this.colDeductionAmount,
             this.colCreditNoteDate,
             this.colDeductionDate,
-            this.InvoiceNo,
+            this.colInvoiceNo,
             this.colComment});
-            this.dgvCreditNote.DataSource = this.invoiceDeductionBindingSource;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCreditNote.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvCreditNote.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCreditNote.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvCreditNote.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvCreditNote.Location = new System.Drawing.Point(0, 25);
-            this.dgvCreditNote.Name = "dgvCreditNote";
-            this.dgvCreditNote.Size = new System.Drawing.Size(870, 458);
-            this.dgvCreditNote.TabIndex = 1;
-            this.dgvCreditNote.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCreditNote_CellValueChanged);
-            this.dgvCreditNote.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.dgvCreditNote_CellParsing);
-            this.dgvCreditNote.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCreditNote_CellFormatting);
-            this.dgvCreditNote.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvCreditNote_CellValidating);
+            this.dgvInvoiceDeduction.DataSource = this.invoiceDeductionBindingSource;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoiceDeduction.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvInvoiceDeduction.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvInvoiceDeduction.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvInvoiceDeduction.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvInvoiceDeduction.Location = new System.Drawing.Point(0, 25);
+            this.dgvInvoiceDeduction.Name = "dgvInvoiceDeduction";
+            this.dgvInvoiceDeduction.Size = new System.Drawing.Size(870, 458);
+            this.dgvInvoiceDeduction.TabIndex = 1;
+            this.dgvInvoiceDeduction.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.dgvCreditNote_CellParsing);
+            this.dgvInvoiceDeduction.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCreditNote_CellFormatting);
+            this.dgvInvoiceDeduction.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvCreditNote_CellValidating);
+            this.dgvInvoiceDeduction.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCreditNote_CellClick);
             // 
             // colCreditNoteNo
             // 
@@ -236,6 +237,8 @@
             // colDeductionAmount
             // 
             this.colDeductionAmount.DataPropertyName = "DeductionAmount";
+            dataGridViewCellStyle2.Format = "N2";
+            this.colDeductionAmount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colDeductionAmount.HeaderText = "贷项通知金额";
             this.colDeductionAmount.Name = "colDeductionAmount";
             // 
@@ -251,11 +254,11 @@
             this.colDeductionDate.HeaderText = "录入日期";
             this.colDeductionDate.Name = "colDeductionDate";
             // 
-            // InvoiceNo
+            // colInvoiceNo
             // 
-            this.InvoiceNo.DataPropertyName = "InvoiceNo";
-            this.InvoiceNo.HeaderText = "对应发票号";
-            this.InvoiceNo.Name = "InvoiceNo";
+            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
+            this.colInvoiceNo.HeaderText = "对应发票号";
+            this.colInvoiceNo.Name = "colInvoiceNo";
             // 
             // colComment
             // 
@@ -267,7 +270,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dgvCreditNote);
+            this.Controls.Add(this.dgvInvoiceDeduction);
             this.Controls.Add(this.invoiceDeductionBindingNavigator);
             this.Name = "CreditNotePayment";
             this.Size = new System.Drawing.Size(870, 483);
@@ -275,7 +278,7 @@
             this.invoiceDeductionBindingNavigator.ResumeLayout(false);
             this.invoiceDeductionBindingNavigator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceDeductionBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCreditNote)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInvoiceDeduction)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -297,12 +300,12 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton invoiceDeductionBindingNavigatorSaveItem;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCreditNote;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoiceDeduction;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeductionAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeductionDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
     }
 }

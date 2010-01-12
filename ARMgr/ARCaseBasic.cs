@@ -210,6 +210,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.sellerEDICodeTextBox.Text = curCase.SellerCode;
             this.sellerNameTextBox.Text = curCase.SellerClient == null ? string.Empty : curCase.SellerClient.ToString();
             this.buyerEDICodeTextBox.Text = curCase.BuyerCode;
+            this.tbNetPaymentTerm.Text = String.Format("{0:G}",curCase.NetPaymentTerm);
             this.buyerNameTextBox.Text = curCase.BuyerClient == null ? string.Empty : curCase.BuyerClient.ToString();
             if ("国内卖方保理".Equals(curCase.TransactionType) || "出口保理".Equals(curCase.TransactionType) || "国际信保保理".Equals(curCase.TransactionType) || "国内信保保理".Equals(curCase.TransactionType))
             {

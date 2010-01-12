@@ -208,42 +208,6 @@ namespace CMBC.EasyFactor.CaseMgr
         // Private Methods (26) 
 
         /// <summary>
-        /// Leave event handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CaseDetail_Leave(object sender, EventArgs e)
-        {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            if (this.opCaseType == OpCaseType.UPDATE_CASE)
-            {
-                curCase.Restore();
-            }
-
-            if (this.opCreditCoverNegType == OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG)
-            {
-                if (this.creditCoverNegBindingSource.DataSource is CreditCoverNegotiation)
-                {
-                    CreditCoverNegotiation creditCoverNeg = (CreditCoverNegotiation)this.creditCoverNegBindingSource.DataSource;
-                    if (creditCoverNeg.NegoID != 0)
-                    {
-                        creditCoverNeg.Restore();
-                    }
-                }
-            }
-            if (curCase.CaseCode == null)
-            {
-                curCase.BuyerFactor = null;
-                curCase.SellerFactor = null;
-                curCase.BuyerClient = null;
-                curCase.SellerClient = null;
-                curCase.CoDepartment = null;
-                curCase.OwnerDepartment = null;
-            }
-            Close();
-        }
-
-        /// <summary>
         /// Case operation type changed event handler
         /// </summary>
         /// <param name="sender"></param>
@@ -681,11 +645,10 @@ namespace CMBC.EasyFactor.CaseMgr
 
             if (curCase.CaseCode == null)
             {
-                curCase.CaseCode = this.GenerateCaseCode(curCase);
-
                 bool isAddOK = true;
                 try
                 {
+                    curCase.CaseCode = this.GenerateCaseCode(curCase);
                     App.Current.DbContext.Cases.InsertOnSubmit(curCase);
                     App.Current.DbContext.SubmitChanges();
                 }
@@ -757,10 +720,11 @@ namespace CMBC.EasyFactor.CaseMgr
 
             if (creditCoverNeg.NegoID == 0)
             {
-                creditCoverNeg.Case = curCase;
+
                 bool isAddOK = true;
                 try
                 {
+                    creditCoverNeg.Case = curCase;
                     App.Current.DbContext.CreditCoverNegotiations.InsertOnSubmit(creditCoverNeg);
                     App.Current.DbContext.SubmitChanges();
                 }
@@ -1051,5 +1015,37 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion Methods
+
+        private void CaseDetail_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Case curCase = (Case)this.caseBindingSource.DataSource;
+            if (this.opCaseType == OpCaseType.UPDATE_CASE)
+            {
+                curCase.Restore();
+            }
+
+            if (this.opCreditCoverNegType == OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG)
+            {
+                if (this.creditCoverNegBindingSource.DataSource is CreditCoverNegotiation)
+                {
+                    CreditCoverNegotiation creditCoverNeg = (CreditCoverNegotiation)this.creditCoverNegBindingSource.DataSource;
+                    if (creditCoverNeg.NegoID != 0)
+                    {
+                        creditCoverNeg.Restore();
+                    }
+                }
+            }
+            if (curCase.CaseCode == null)
+            {
+                curCase.BuyerFactor = null;
+                curCase.SellerFactor = null;
+                curCase.BuyerClient = null;
+                curCase.SellerClient = null;
+                curCase.CoDepartment = null;
+                curCase.OwnerDepartment = null;
+            }
+            Close();
+
+        }
     }
 }

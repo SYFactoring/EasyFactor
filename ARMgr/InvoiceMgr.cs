@@ -128,9 +128,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (13)
+        #region Methods (14)
 
-        // Private Methods (13) 
+        // Private Methods (14) 
 
         /// <summary>
         /// 
@@ -284,6 +284,20 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
+        }
+
+        private void dgvInvoices_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                dgvInvoices.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                dgvInvoices.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                dgvInvoices.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>

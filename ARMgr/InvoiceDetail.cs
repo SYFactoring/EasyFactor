@@ -218,19 +218,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void InvoiceDetail_Leave(object sender, EventArgs e)
-        {
-            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
-            invoice.Restore();
-
-            this.Close();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ResetInvoice(object sender, EventArgs e)
         {
             if (opInvoiceType == OpInvoiceType.UPDATE_INVOICE)
@@ -366,5 +353,13 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
+
+        private void InvoiceDetail_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+            invoice.Restore();
+
+            this.Close();
+        }
     }
 }

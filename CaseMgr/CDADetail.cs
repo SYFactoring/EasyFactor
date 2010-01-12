@@ -167,24 +167,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CloseCDA(object sender, EventArgs e)
-        {
-            CDA cda = this.CDABindingSource.DataSource as CDA;
-            if (opCDAType == OpCDAType.UPDATE_CDA)
-            {
-                cda.Restore();
-            }
-            if (cda.CDACode == null && cda.Case != null)
-            {
-                cda.Case = null;
-            }
-        }
-
         private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             CDA cda = this.CDABindingSource.DataSource as CDA;
@@ -606,5 +588,42 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion Methods
+
+        private void ResetCDA(object sender, EventArgs e)
+        {
+            foreach (Control comp in this.groupPanelCreditCover.Controls)
+            {
+                ControlUtil.SetComponetDefault(comp);
+            }
+            foreach (Control comp in this.groupPanelOther.Controls)
+            {
+                ControlUtil.SetComponetDefault(comp);
+            }
+            CDA cda = this.CDABindingSource.DataSource as CDA;
+            cda.CDASignDate = DateTime.Now.Date;
+            cda.CommissionType = "按转让金额";
+            cda.PUGProportion = 1;
+            cda.PUGPeriod = 90;
+            cda.ReassignGracePeriod = 60;
+            cda.FinanceProportion = 0.8;
+            cda.IsNotice = "明保理";
+            cda.IsRecoarse = false;
+            cda.CDAStatus = "未审核";
+            cda.IsCreditCoverRevolving = true;
+            cda.AssignType = "全部";
+        }
+
+        private void CDADetail_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            CDA cda = this.CDABindingSource.DataSource as CDA;
+            if (opCDAType == OpCDAType.UPDATE_CDA)
+            {
+                cda.Restore();
+            }
+            if (cda.CDACode == null)
+            {
+                cda.Case = null;
+            }
+        }
     }
 }
