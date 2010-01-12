@@ -64,6 +64,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             if (opCDAType == OpCDAType.CHECK)
             {
+                this.cbCheckStatus.Text = "未复核";
                 this.bs.DataSource = App.Current.DbContext.CDAs.Where(c => c.CheckStatus == "未复核");
             }
         }

@@ -86,7 +86,10 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batchType == OpBatchType.CHECK)
             {
-                this.bs.DataSource = App.Current.DbContext.InvoiceAssignBatches.Where(i => i.CheckStatus == "未复核");
+                this.cbCheckStatus.Text = "未复核";
+                var queryResult = App.Current.DbContext.InvoiceAssignBatches.Where(i => i.CheckStatus == "未复核");
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
         }
 
@@ -114,9 +117,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (6)
+        #region Methods (7)
 
-        // Private Methods (6) 
+        // Private Methods (7) 
 
         /// <summary>
         /// 
@@ -174,6 +177,27 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        private void dgvBatches_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewColumn column = this.dgvBatches.Columns[e.ColumnIndex];
+            if (column == colIsCreateMsg)
+            {
+                Object originalData = e.Value;
+                if (originalData != null)
+                {
+                    bool result = (bool)originalData;
+                    if (result)
+                    {
+                        e.Value = "Y";
+                    }
+                    else
+                    {
+                        e.Value = "N";
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -186,16 +210,20 @@ namespace CMBC.EasyFactor.ARMgr
                 DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
                 DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
                 string status = this.cbCheckStatus.Text;
-                this.bs.DataSource = App.Current.DbContext.InvoiceAssignBatches.Where(i =>
+                var queryResult = App.Current.DbContext.InvoiceAssignBatches.Where(i =>
                     i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text)
                     && (beginDate != this.dateFrom.MinDate ? i.AssignDate >= beginDate : true)
                     && (endDate != this.dateTo.MinDate ? i.AssignDate <= endDate : true)
-                    && (status!=string.Empty?i.CheckStatus == status:true)
+                    && (status != string.Empty ? i.CheckStatus == status : true)
                     );
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
             else if (opBatchType == OpBatchType.DETAIL)
             {
-                this.bs.DataSource = cda.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
+                var queryResult = cda.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
         }
 

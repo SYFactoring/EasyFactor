@@ -85,7 +85,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.opBatchType = batchType;
             if (batchType == OpBatchType.CHECK)
             {
-                this.bs.DataSource = App.Current.DbContext.InvoicePaymentBatches.Where(i => i.CheckStatus == "未复核");
+                this.cbCheckStatus.Text = "未复核";
+                var queryResult = App.Current.DbContext.InvoicePaymentBatches.Where(i => i.CheckStatus == "未复核");
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
 
         }
@@ -114,9 +117,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (6)
+        #region Methods (7)
 
-        // Private Methods (6) 
+        // Private Methods (7) 
 
         /// <summary>
         /// 
@@ -174,6 +177,27 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        private void dgvBatches_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewColumn column = this.dgvBatches.Columns[e.ColumnIndex];
+            if (column == colIsMsgCreate)
+            {
+                Object originalData = e.Value;
+                if (originalData != null)
+                {
+                    bool result = (bool)originalData;
+                    if (result)
+                    {
+                        e.Value = "Y";
+                    }
+                    else
+                    {
+                        e.Value = "N";
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -187,16 +211,20 @@ namespace CMBC.EasyFactor.ARMgr
                 DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
                 string status = this.cbCheckStatus.Text;
 
-                this.bs.DataSource = App.Current.DbContext.InvoicePaymentBatches.Where(i =>
+                var queryResult = App.Current.DbContext.InvoicePaymentBatches.Where(i =>
                     i.PaymentBatchNo.Contains(this.tbPaymentBatchNo.Text)
                     && (beginDate != this.dateFrom.MinDate ? i.PaymentDate >= beginDate : true)
                     && (endDate != this.dateTo.MinDate ? i.PaymentDate <= endDate : true)
                     && (status != string.Empty ? i.CheckStatus == status : true)
                     );
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
             else if (opBatchType == OpBatchType.DETAIL)
             {
-                this.bs.DataSource = cda.InvoicePaymentBatches.Where(i => i.PaymentBatchNo.Contains(this.tbPaymentBatchNo.Text));
+                var queryResult = cda.InvoicePaymentBatches.Where(i => i.PaymentBatchNo.Contains(this.tbPaymentBatchNo.Text));
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
         }
 

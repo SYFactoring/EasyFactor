@@ -85,6 +85,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.opBatchType = batchType;
             if (batchType == OpBatchType.CHECK)
             {
+                this.cbCheckStatus.Text = "未复核";
+                var queryResult = App.Current.DbContext.InvoiceFinanceBatches.Where(i => i.CheckStatus == "未复核");
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
 
         }
@@ -186,15 +190,21 @@ namespace CMBC.EasyFactor.ARMgr
                 DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
                 string status = this.cbCheckStatus.Text;
 
-                this.bs.DataSource = App.Current.DbContext.InvoiceFinanceBatches.Where(i =>
+                var queryResult = App.Current.DbContext.InvoiceFinanceBatches.Where(i =>
                     i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
                     && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
                     && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
+                    && (status != string.Empty ? i.CheckStatus == status : true)
                     );
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+
             }
             else if (opBatchType == OpBatchType.DETAIL)
             {
-                this.bs.DataSource = cda.InvoiceFinanceBatches.Where(i => i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text));
+                var queryResult = cda.InvoiceFinanceBatches.Where(i => i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)); ;
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
         }
 
