@@ -85,6 +85,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private FactorDetail(Factor factor, OpFactorType opFactorType, OpFactorCreditLineType opFactorCreditLineType)
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.dgvFactorCreditLines.AutoGenerateColumns = false;
 
             this.countryNameComboBox.DataSource = Country.AllCountries();

@@ -60,6 +60,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         public UserDetail(User user, OpUserType opType)
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.opUserType = opType;
             if (opType == OpUserType.NEW_USER)
             {

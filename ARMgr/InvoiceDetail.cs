@@ -64,6 +64,7 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoiceDetail(Invoice invoice, OpInvoiceType opInvoiceType)
         {
             InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.opInvoiceType = opInvoiceType;
             this.invoiceBindingSource.DataSource = invoice;
 

@@ -43,7 +43,7 @@ namespace CMBC.EasyFactor.Utils
             this.panelRoot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelRoot.Location = new System.Drawing.Point(0, 0);
             this.panelRoot.Name = "panelRoot";
-            this.panelRoot.Size = new System.Drawing.Size(701, 442);
+            this.panelRoot.Size = new System.Drawing.Size(784, 562);
             this.panelRoot.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelRoot.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelRoot.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -58,7 +58,7 @@ namespace CMBC.EasyFactor.Utils
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(701, 442);
+            this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.panelRoot);
             this.DoubleBuffered = true;
             this.Name = "QueryForm";

@@ -274,6 +274,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.websiteTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.representativeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelClientGroup = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.btnGroupSelect = new DevComponents.DotNetBar.ButtonX();
             this.cbClientGroupType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.isGroupCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.tbGroupNameEN = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -408,7 +409,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.requiredFieldValidator12 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.contractErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.contractHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.btnGroupSelect = new DevComponents.DotNetBar.ButtonX();
             clientNameCNLabel = new DevComponents.DotNetBar.LabelX();
             addressCNLabel = new DevComponents.DotNetBar.LabelX();
             cityCNLabel = new DevComponents.DotNetBar.LabelX();
@@ -1498,6 +1498,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientGroup.StyleMouseOver.Class = "";
             this.groupPanelClientGroup.TabIndex = 2;
             // 
+            // btnGroupSelect
+            // 
+            this.btnGroupSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnGroupSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnGroupSelect.Location = new System.Drawing.Point(393, 31);
+            this.btnGroupSelect.Name = "btnGroupSelect";
+            this.btnGroupSelect.Size = new System.Drawing.Size(27, 23);
+            this.btnGroupSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnGroupSelect.TabIndex = 14;
+            this.btnGroupSelect.Text = "...";
+            this.btnGroupSelect.Click += new System.EventHandler(this.SelectGroup);
+            // 
             // cbClientGroupType
             // 
             this.cbClientGroupType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientGroupType", true));
@@ -1848,6 +1860,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.clientEDICodeTextBox.Border.Class = "TextBoxBorder";
             this.clientEDICodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientEDICode", true));
+            this.clientEDICodeTextBox.ImeMode = System.Windows.Forms.ImeMode.On;
             this.clientEDICodeTextBox.Location = new System.Drawing.Point(85, 7);
             this.clientEDICodeTextBox.MaxLength = 9;
             this.clientEDICodeTextBox.Name = "clientEDICodeTextBox";
@@ -3281,18 +3294,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // contractHighlighter
             // 
             this.contractHighlighter.ContainerControl = this;
-            // 
-            // btnGroupSelect
-            // 
-            this.btnGroupSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnGroupSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnGroupSelect.Location = new System.Drawing.Point(393, 31);
-            this.btnGroupSelect.Name = "btnGroupSelect";
-            this.btnGroupSelect.Size = new System.Drawing.Size(27, 23);
-            this.btnGroupSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnGroupSelect.TabIndex = 14;
-            this.btnGroupSelect.Text = "...";
-            this.btnGroupSelect.Click += new System.EventHandler(this.SelectGroup);
             // 
             // ClientDetail
             // 

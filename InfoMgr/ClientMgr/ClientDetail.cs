@@ -48,6 +48,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             NEW_CLIENT,
 
             /// <summary>
+            /// 
+            /// </summary>
+            NEW_GROUP_CLIENT,
+
+            /// <summary>
             /// Update Client
             /// </summary>
             UPDATE_CLIENT,
@@ -112,6 +117,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private ClientDetail(Client client, OpClientType opClientType, OpClientCreditLineType opClientCreditLineType, OpContractType opContractType)
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.dgvClientCreditLines.AutoGenerateColumns = false;
             this.dgvContracts.AutoGenerateColumns = false;
 
@@ -138,6 +144,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 client = new Client();
                 client.IsGroup = false;
+                this.clientBindingSource.DataSource = client;
+            }
+            else if (opClientType == OpClientType.NEW_GROUP_CLIENT)
+            {
+                client = new Client();
+                client.IsGroup = false;
+                client.ClientGroupType = "集团";
                 this.clientBindingSource.DataSource = client;
             }
             else
@@ -589,6 +602,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
                 ClientCreditLine creditLine = this.clientCreditLineBindingSource.DataSource as ClientCreditLine;
+                creditLine.PeriodBegin = this.periodBeginDateTimePicker.Value;
                 creditLine.PeriodEnd = this.periodBeginDateTimePicker.Value.AddYears(1);
             }
         }

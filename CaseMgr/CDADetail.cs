@@ -76,6 +76,7 @@ namespace CMBC.EasyFactor.CaseMgr
         public CDADetail(CDA cda, OpCDAType opCDAType)
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.opCDAType = opCDAType;
 
             this.pUGProportionTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
@@ -438,6 +439,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 cda.CDACode = cdaCode;
                 cda.CreateUserName = App.Current.CurUser.Name;
+                cda.CheckStatus = "未复核";
                 try
                 {
                     App.Current.DbContext.CDAs.InsertOnSubmit(cda);

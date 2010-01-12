@@ -22,6 +22,7 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoiceFlaw(List<Invoice> invoiceList)
         {
             InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.dgvInvoices.AutoGenerateColumns = false;
             this.dgvInvoices.DataSource = bs;
 

@@ -59,7 +59,12 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            SELLER_REASSIGN
+            SELLER_REASSIGN,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            CREDIT_NOTE_PAYMENT,
         }
 
         #endregion Enums

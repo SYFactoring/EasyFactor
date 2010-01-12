@@ -22,6 +22,7 @@ namespace CMBC.EasyFactor.Utils
         public QueryForm(UserControl userControl,string title)
         {
             InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.Text = title;
             userControl.Dock = DockStyle.Fill;
             this.panelRoot.Controls.Clear();

@@ -105,6 +105,12 @@
     <Compile Include="ARMgr\AssignBatchMgr.Designer.cs">
       <DependentUpon>AssignBatchMgr.cs</DependentUpon>
     </Compile>
+    <Compile Include="ARMgr\CreditNotePayment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ARMgr\CreditNotePayment.Designer.cs">
+      <DependentUpon>CreditNotePayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="ARMgr\FinanceBatchMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -194,6 +200,7 @@
     <Compile Include="DB.dbml\CDA.cs" />
     <Compile Include="DB.dbml\Client.cs" />
     <Compile Include="DB.dbml\ClientCreditLine.cs" />
+    <Compile Include="DB.dbml\InvoiceDeduction.cs" />
     <Compile Include="Utils\ConstStr.cs" />
     <Compile Include="DB.dbml\Country.cs" />
     <Compile Include="DB.dbml\CreditCoverNegotiation.cs" />
@@ -321,6 +328,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\AssignBatchMgr.resx">
       <DependentUpon>AssignBatchMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\CreditNotePayment.resx">
+      <DependentUpon>CreditNotePayment.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\FinanceBatchMgr.resx">
@@ -499,19 +510,19 @@
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Client.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.ClientAccount.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.ClientCreditLine.datasource" />
-    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.ClientGroup.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Contract.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Country.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.CreditCoverNegotiation.datasource" />
+    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.CreditNote.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Currency.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Department.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.DepartmentAccount.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Factor.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.FactorAccount.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.FactorCreditLine.datasource" />
-    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.FactorGroup.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Invoice.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoiceAssignBatch.datasource" />
+    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoiceDeduction.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoiceFinanceBatch.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoicePaymentBatch.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.User.datasource" />

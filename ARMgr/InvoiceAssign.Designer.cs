@@ -78,9 +78,9 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX lblTotalHandfee;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceAssign));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelAssignBatch = new DevComponents.DotNetBar.PanelEx();
             this.tbTotalHandfee = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbTotalCommission = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -92,6 +92,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnAssignBatchNew = new DevComponents.DotNetBar.ButtonX();
             this.btnAssignBatchSave = new DevComponents.DotNetBar.ButtonX();
             this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.isCreateMsgCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.assignDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.assignBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -103,6 +104,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemFlaw = new System.Windows.Forms.ToolStripMenuItem();
             this.invoiceBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -114,21 +116,19 @@ namespace CMBC.EasyFactor.ARMgr
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.colCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCommissionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsFlaw = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.colCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCommissionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsFlaw = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             assignDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
@@ -137,14 +137,14 @@ namespace CMBC.EasyFactor.ARMgr
             lblTotalCommission = new DevComponents.DotNetBar.LabelX();
             lblTotalHandfee = new DevComponents.DotNetBar.LabelX();
             this.panelAssignBatch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.assignDateDateTimePicker)).BeginInit();
             this.cmuInvoiceAssign.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).BeginInit();
             this.invoiceBindingNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // assignBatchNoLabel
@@ -393,6 +393,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.commentTextBox.Size = new System.Drawing.Size(415, 36);
             this.commentTextBox.TabIndex = 6;
             // 
+            // batchBindingSource
+            // 
+            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceAssignBatch);
+            // 
             // isCreateMsgCheckBox
             // 
             this.isCreateMsgCheckBox.AutoSize = true;
@@ -537,6 +541,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
+            // invoiceBindingSource
+            // 
+            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
+            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
@@ -646,50 +654,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.Size = new System.Drawing.Size(1235, 489);
             this.dgvInvoices.TabIndex = 0;
             this.dgvInvoices.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellValueChanged);
+            this.dgvInvoices.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.dgvInvoices_CellParsing);
+            this.dgvInvoices.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvInvoices_CellFormatting);
             this.dgvInvoices.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvInvoices_CellValidating);
             this.dgvInvoices.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellClick);
             this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
-            // 
-            // superValidator
-            // 
-            this.superValidator.ContainerControl = this;
-            this.superValidator.ErrorProvider = this.errorProvider;
-            this.superValidator.Highlighter = this.highlighter;
-            // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
-            // 
-            // highlighter
-            // 
-            this.highlighter.ContainerControl = this;
-            // 
-            // colCommission
-            // 
-            this.colCommission.DataPropertyName = "Commission";
-            dataGridViewCellStyle3.Format = "N2";
-            this.colCommission.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colCommission.HeaderText = "手续费";
-            this.colCommission.Name = "colCommission";
-            // 
-            // colCommissionDate
-            // 
-            this.colCommissionDate.DataPropertyName = "CommissionDate";
-            this.colCommissionDate.HeaderText = "收费日";
-            this.colCommissionDate.Name = "colCommissionDate";
-            // 
-            // colComment
-            // 
-            this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "备注";
-            this.colComment.Name = "colComment";
-            // 
-            // colIsFlaw
-            // 
-            this.colIsFlaw.DataPropertyName = "IsFlaw";
-            this.colIsFlaw.HeaderText = "是否瑕疵";
-            this.colIsFlaw.Name = "colIsFlaw";
             // 
             // colInvoiceNo
             // 
@@ -729,18 +698,51 @@ namespace CMBC.EasyFactor.ARMgr
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // invoiceBindingSource
+            // colCommission
             // 
-            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
+            this.colCommission.DataPropertyName = "Commission";
+            dataGridViewCellStyle3.Format = "N2";
+            this.colCommission.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colCommission.HeaderText = "手续费";
+            this.colCommission.Name = "colCommission";
             // 
-            // batchBindingSource
+            // colCommissionDate
             // 
-            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceAssignBatch);
+            this.colCommissionDate.DataPropertyName = "CommissionDate";
+            this.colCommissionDate.HeaderText = "收费日";
+            this.colCommissionDate.Name = "colCommissionDate";
+            // 
+            // colComment
+            // 
+            this.colComment.DataPropertyName = "Comment";
+            this.colComment.HeaderText = "备注";
+            this.colComment.Name = "colComment";
+            // 
+            // colIsFlaw
+            // 
+            this.colIsFlaw.DataPropertyName = "IsFlaw";
+            this.colIsFlaw.HeaderText = "是否瑕疵";
+            this.colIsFlaw.Name = "colIsFlaw";
+            // 
+            // superValidator
+            // 
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
             // 
             // requiredFieldValidator1
             // 
             this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
             this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
             // 
             // InvoiceAssign
             // 
@@ -754,15 +756,15 @@ namespace CMBC.EasyFactor.ARMgr
             this.Size = new System.Drawing.Size(1235, 595);
             this.panelAssignBatch.ResumeLayout(false);
             this.panelAssignBatch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.assignDateDateTimePicker)).EndInit();
             this.cmuInvoiceAssign.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).EndInit();
             this.invoiceBindingNavigator.ResumeLayout(false);
             this.invoiceBindingNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -91,7 +91,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private CaseDetail(Case curCase, OpCaseType opCaseType, OpCreditCoverNegType opCreditCoverNegType)
         {
             this.InitializeComponent();
-
+            this.ImeMode = ImeMode.OnHalf;
             this.dgvCDAs.AutoGenerateColumns = false;
             this.dgvCreditCoverNegs.AutoGenerateColumns = false;
 

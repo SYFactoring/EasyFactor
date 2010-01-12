@@ -10660,6 +10660,10 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.DateTime _DeductionDate;
 		
+		private string _Comment;
+		
+		private string _CreateUserName;
+		
 		private EntityRef<Invoice> _Invoice;
 		
 		private EntityRef<CreditNote> _CreditNote;
@@ -10678,6 +10682,10 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnDeductionAmountChanged();
     partial void OnDeductionDateChanging(System.DateTime value);
     partial void OnDeductionDateChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
     #endregion
 		
 		public InvoiceDeduction()
@@ -10795,6 +10803,46 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
 		[Association(Name="Invoice_InvoiceDeduction", Storage="_Invoice", ThisKey="InvoiceNo", IsForeignKey=true)]
 		public Invoice Invoice
 		{
@@ -10892,17 +10940,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreditNoteNo;
 		
-		private double _CreditNoteAmount;
-		
 		private System.DateTime _CreditNoteDate;
-		
-		private System.DateTime _CreditNoteDueDate;
-		
-		private System.DateTime _InputDate;
-		
-		private string _Comment;
-		
-		private string _CreateUserName;
 		
 		private EntitySet<InvoiceDeduction> _InvoiceDeductions;
 		
@@ -10912,18 +10950,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnCreditNoteNoChanging(string value);
     partial void OnCreditNoteNoChanged();
-    partial void OnCreditNoteAmountChanging(double value);
-    partial void OnCreditNoteAmountChanged();
     partial void OnCreditNoteDateChanging(System.DateTime value);
     partial void OnCreditNoteDateChanged();
-    partial void OnCreditNoteDueDateChanging(System.DateTime value);
-    partial void OnCreditNoteDueDateChanged();
-    partial void OnInputDateChanging(System.DateTime value);
-    partial void OnInputDateChanged();
-    partial void OnCommentChanging(string value);
-    partial void OnCommentChanged();
-    partial void OnCreateUserNameChanging(string value);
-    partial void OnCreateUserNameChanged();
     #endregion
 		
 		public CreditNote()
@@ -10952,26 +10980,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditNoteAmount", DbType="Float NOT NULL")]
-		public double CreditNoteAmount
-		{
-			get
-			{
-				return this._CreditNoteAmount;
-			}
-			set
-			{
-				if ((this._CreditNoteAmount != value))
-				{
-					this.OnCreditNoteAmountChanging(value);
-					this.SendPropertyChanging();
-					this._CreditNoteAmount = value;
-					this.SendPropertyChanged("CreditNoteAmount");
-					this.OnCreditNoteAmountChanged();
-				}
-			}
-		}
-		
 		[Column(Storage="_CreditNoteDate", DbType="DateTime NOT NULL")]
 		public System.DateTime CreditNoteDate
 		{
@@ -10988,86 +10996,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CreditNoteDate = value;
 					this.SendPropertyChanged("CreditNoteDate");
 					this.OnCreditNoteDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreditNoteDueDate", DbType="DateTime NOT NULL")]
-		public System.DateTime CreditNoteDueDate
-		{
-			get
-			{
-				return this._CreditNoteDueDate;
-			}
-			set
-			{
-				if ((this._CreditNoteDueDate != value))
-				{
-					this.OnCreditNoteDueDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreditNoteDueDate = value;
-					this.SendPropertyChanged("CreditNoteDueDate");
-					this.OnCreditNoteDueDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_InputDate", DbType="DateTime NOT NULL")]
-		public System.DateTime InputDate
-		{
-			get
-			{
-				return this._InputDate;
-			}
-			set
-			{
-				if ((this._InputDate != value))
-				{
-					this.OnInputDateChanging(value);
-					this.SendPropertyChanging();
-					this._InputDate = value;
-					this.SendPropertyChanged("InputDate");
-					this.OnInputDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
-		public string Comment
-		{
-			get
-			{
-				return this._Comment;
-			}
-			set
-			{
-				if ((this._Comment != value))
-				{
-					this.OnCommentChanging(value);
-					this.SendPropertyChanging();
-					this._Comment = value;
-					this.SendPropertyChanged("Comment");
-					this.OnCommentChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string CreateUserName
-		{
-			get
-			{
-				return this._CreateUserName;
-			}
-			set
-			{
-				if ((this._CreateUserName != value))
-				{
-					this.OnCreateUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._CreateUserName = value;
-					this.SendPropertyChanged("CreateUserName");
-					this.OnCreateUserNameChanged();
 				}
 			}
 		}

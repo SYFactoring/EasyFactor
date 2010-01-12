@@ -42,6 +42,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         public DepartmentDetail(Department department, OpDepartmentType opDepartmentType)
         {
             InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.opDepartmentType = opDepartmentType;
 
             if (opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)

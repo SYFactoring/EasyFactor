@@ -31,6 +31,7 @@ namespace CMBC.EasyFactor
         public MainWindow()
         {
             InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
 
             this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
             this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
@@ -683,5 +684,17 @@ namespace CMBC.EasyFactor
         }
 
         #endregion Methods
+
+        private void CreditNotePayment(object sender, EventArgs e)
+        {
+            ARCaseBasic creditNotePayment = new ARCaseBasic(ARCaseBasic.OpARType.CreditNotePayment);
+            this.SetDetailPanel(creditNotePayment);
+        }
+
+        private void NewGroupClient(object sender, EventArgs e)
+        {
+            ClientDetail detail = new ClientDetail(null, ClientDetail.OpClientType.NEW_GROUP_CLIENT);
+            detail.ShowDialog(this);
+        }
     }
 }

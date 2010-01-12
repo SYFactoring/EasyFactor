@@ -70,7 +70,12 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 卖方回购
             /// </summary>
-            InvoiceSellerReassign
+            InvoiceSellerReassign,
+
+            /// <summary>
+            /// 贷项通知
+            /// </summary>
+            CreditNotePayment,
         }
 
 		#endregion Enums 
@@ -108,6 +113,9 @@ namespace CMBC.EasyFactor.ARMgr
                     break;
                 case OpARType.InvoiceSellerReassign:
                     uc = new InvoicePayment(this, InvoicePayment.PaymentType.SELLER_REASSIGN);
+                    break;
+                case OpARType.CreditNotePayment:
+                    uc = new CreditNotePayment();
                     break;
                 default:
                     uc = new UserControl();
@@ -224,7 +232,7 @@ namespace CMBC.EasyFactor.ARMgr
                 this.RMTextBox.Text = curCase.BuyerClient.RMName;
             }
 
-            CDA cda = curCase.CDAs.SingleOrDefault(c => c.CDAStatus == "已签回");
+            CDA cda = curCase.CDAs.SingleOrDefault(c => c.CDAStatus == ConstStr.CDA.SIGNED);
             if (cda != null)
             {
                 this.tbCDACode.Text = cda.CDACode;
@@ -276,6 +284,10 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     (control as InvoicePayment).CDA = cda;
                 }
+                else if (control is CreditNotePayment)
+                {
+                    (control as CreditNotePayment).CDA = cda;
+                }
             }
             else
             {
@@ -293,6 +305,10 @@ namespace CMBC.EasyFactor.ARMgr
                 else if (control is InvoicePayment)
                 {
                     (control as InvoicePayment).ResetControlsStatus();
+                }
+                else if (control is CreditNotePayment)
+                {
+                    (control as CreditNotePayment).ResetControlsStatus();
                 }
             }
         }

@@ -8,14 +8,14 @@ namespace CMBC.EasyFactor.ARMgr
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Windows.Forms;
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Collections.Generic;
-    using System.Text.RegularExpressions;
 
     /// <summary>
     /// 
@@ -42,9 +42,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.superValidator.Enabled = false;
             this.dgvInvoices.ReadOnly = true;
             ControlUtil.SetDoubleBuffered(this.dgvInvoices);
-
-            this.dgvInvoices.CellFormatting += new DataGridViewCellFormattingEventHandler(dgvInvoices_CellFormatting);
-            this.dgvInvoices.CellParsing += new DataGridViewCellParsingEventHandler(dgvInvoices_CellParsing);
         }
 
         #endregion Constructors
