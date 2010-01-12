@@ -179,17 +179,17 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 foreach (InvoiceDeduction decution in deductionList)
                 {
-                    CreditNote cn = App.Current.DbContext.CreditNotes.SingleOrDefault(c => c.CreditNoteNo == decution.CreditNoteNo);
-                    if (cn == null)
+                    CreditNote creditNote = App.Current.DbContext.CreditNotes.SingleOrDefault(c => c.CreditNoteNo == decution.CreditNoteNo);
+                    if (creditNote == null)
                     {
-                        cn = creditNoteList.SingleOrDefault(c => c.CreditNoteNo == decution.CreditNoteNo);
-                        if (cn == null)
+                        creditNote = creditNoteList.SingleOrDefault(c => c.CreditNoteNo == decution.CreditNoteNo);
+                        if (creditNote == null)
                         {
-                            cn = new CreditNote() { CreditNoteNo = decution.CreditNoteNo, CreditNoteDate = decution.CreditNoteDate };
-                            creditNoteList.Add(cn);
+                            creditNote = new CreditNote() { CreditNoteNo = decution.CreditNoteNo, CreditNoteDate = decution.CreditNoteDate };
+                            creditNoteList.Add(creditNote);
                         }
                     }
-                    decution.CreditNote = cn;
+                    decution.CreditNote = creditNote;
                     Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == decution.InvoiceNo && i.InvoiceAssignBatch.CDACode == this._CDA.CDACode);
                     if (invoice == null)
                     {
@@ -206,7 +206,6 @@ namespace CMBC.EasyFactor.ARMgr
                 foreach (InvoiceDeduction decution in deductionList)
                 {
                     decution.Invoice = null;
-                    decution.CreditNote = null;
                 }
                 isSaveOK = false;
                 MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);

@@ -2,10 +2,39 @@
 {
     partial class CreditNotePayment
     {
+		#region Fields (22) 
+
+        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
+        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
+        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDeductionAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDeductionDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoiceDeduction;
+        private System.Windows.Forms.BindingNavigator invoiceDeductionBindingNavigator;
+        private System.Windows.Forms.ToolStripButton invoiceDeductionBindingNavigatorSaveItem;
+        private System.Windows.Forms.BindingSource invoiceDeductionBindingSource;
+
+		#endregion Fields 
+
+		#region Methods (1) 
+
+		// Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -19,6 +48,10 @@
             }
             base.Dispose(disposing);
         }
+
+		#endregion Methods 
+
+
 
         #region Component Designer generated code
 
@@ -285,27 +318,5 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.BindingSource invoiceDeductionBindingSource;
-        private System.Windows.Forms.BindingNavigator invoiceDeductionBindingNavigator;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
-        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
-        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.ToolStripButton invoiceDeductionBindingNavigatorSaveItem;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoiceDeduction;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeductionAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeductionDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
     }
 }
