@@ -133,6 +133,20 @@ namespace CMBC.EasyFactor.Utils
             }
             return (double1 >= 0.0000001);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="double1"></param>
+        /// <returns></returns>
+        public static bool LessZero(double? double1)
+        {
+            if (double1 == null)
+            {
+                return false;
+            }
+            return (double1 <= -0.0000001);
+        }
         #endregion Methods
     }
 }

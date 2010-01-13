@@ -147,6 +147,12 @@
     <Compile Include="ARMgr\InvoicePayment.Designer.cs">
       <DependentUpon>InvoicePayment.cs</DependentUpon>
     </Compile>
+    <Compile Include="ARMgr\InvoicePaymentLogMgr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ARMgr\InvoicePaymentLogMgr.Designer.cs">
+      <DependentUpon>InvoicePaymentLogMgr.cs</DependentUpon>
+    </Compile>
     <Compile Include="ARMgr\PaymentBatchMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -350,6 +356,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\InvoicePayment.resx">
       <DependentUpon>InvoicePayment.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\InvoicePaymentLogMgr.resx">
+      <DependentUpon>InvoicePaymentLogMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\PaymentBatchMgr.resx">

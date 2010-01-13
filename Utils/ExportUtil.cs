@@ -32,7 +32,7 @@ namespace CMBC.EasyFactor.Utils
             /// </summary>
             EXPORT_INVOICES,
 
-            EXPORT_PAYMENT_LOG,
+            EXPORT_PAYMENTS,
         }
 
         #endregion Enums
@@ -67,8 +67,8 @@ namespace CMBC.EasyFactor.Utils
                 case ExportType.EXPORT_INVOICES:
                     ExportInvoices((IList)e.Argument, worker, e);
                     break;
-                case ExportType.EXPORT_PAYMENT_LOG:
-                    ExportPaymentLogs((IList)e.Argument, worker, e);
+                case ExportType.EXPORT_PAYMENTS:
+                    ExportPayments((IList)e.Argument, worker, e);
                     break;
                 default:
                     break;
@@ -79,10 +79,10 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="paymentLogList"></param>
+        /// <param name="paymentsList"></param>
         /// <param name="worker"></param>
         /// <param name="e"></param>
-        private void ExportPaymentLogs(IList paymentLogList, BackgroundWorker worker, DoWorkEventArgs e)
+        private void ExportPayments(IList paymentsList, BackgroundWorker worker, DoWorkEventArgs e)
         {
 
         }

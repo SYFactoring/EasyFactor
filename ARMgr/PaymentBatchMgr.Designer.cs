@@ -33,6 +33,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.cbPaymentType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblPaymentType = new DevComponents.DotNetBar.LabelX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.cbCheckStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblCheckStatus = new DevComponents.DotNetBar.LabelX();
@@ -61,8 +63,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbPaymentType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.lblPaymentType = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -98,6 +98,39 @@
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
             // 
+            // cbPaymentType
+            // 
+            this.cbPaymentType.DisplayMember = "Text";
+            this.cbPaymentType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbPaymentType.FormattingEnabled = true;
+            this.cbPaymentType.ItemHeight = 14;
+            this.cbPaymentType.Items.AddRange(new object[] {
+            "",
+            "卖方付款",
+            "间接付款",
+            "买方付款",
+            "担保付款",
+            "买方回购",
+            "贷项通知"});
+            this.cbPaymentType.Location = new System.Drawing.Point(251, 35);
+            this.cbPaymentType.Name = "cbPaymentType";
+            this.cbPaymentType.Size = new System.Drawing.Size(101, 20);
+            this.cbPaymentType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbPaymentType.TabIndex = 14;
+            // 
+            // lblPaymentType
+            // 
+            this.lblPaymentType.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblPaymentType.BackgroundStyle.Class = "";
+            this.lblPaymentType.Location = new System.Drawing.Point(186, 36);
+            this.lblPaymentType.Name = "lblPaymentType";
+            this.lblPaymentType.Size = new System.Drawing.Size(59, 16);
+            this.lblPaymentType.TabIndex = 13;
+            this.lblPaymentType.Text = "付款类型:";
+            // 
             // lblCount
             // 
             this.lblCount.AutoSize = true;
@@ -105,9 +138,9 @@
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(532, 14);
+            this.lblCount.Location = new System.Drawing.Point(559, 37);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.Size = new System.Drawing.Size(18, 16);
             this.lblCount.TabIndex = 12;
             // 
             // cbCheckStatus
@@ -459,39 +492,6 @@
             this.menuItemReject.Size = new System.Drawing.Size(122, 22);
             this.menuItemReject.Text = "复核拒绝";
             this.menuItemReject.Click += new System.EventHandler(this.Reject);
-            // 
-            // cbPaymentType
-            // 
-            this.cbPaymentType.DisplayMember = "Text";
-            this.cbPaymentType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbPaymentType.FormattingEnabled = true;
-            this.cbPaymentType.ItemHeight = 14;
-            this.cbPaymentType.Items.AddRange(new object[] {
-            "",
-            "卖方付款",
-            "间接付款",
-            "买方付款",
-            "担保付款",
-            "买方回购",
-            "贷项通知"});
-            this.cbPaymentType.Location = new System.Drawing.Point(251, 35);
-            this.cbPaymentType.Name = "cbPaymentType";
-            this.cbPaymentType.Size = new System.Drawing.Size(101, 20);
-            this.cbPaymentType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbPaymentType.TabIndex = 14;
-            // 
-            // lblPaymentType
-            // 
-            this.lblPaymentType.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblPaymentType.BackgroundStyle.Class = "";
-            this.lblPaymentType.Location = new System.Drawing.Point(186, 36);
-            this.lblPaymentType.Name = "lblPaymentType";
-            this.lblPaymentType.Size = new System.Drawing.Size(59, 16);
-            this.lblPaymentType.TabIndex = 13;
-            this.lblPaymentType.Text = "付款类型:";
             // 
             // PaymentBatchMgr
             // 

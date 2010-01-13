@@ -88,7 +88,7 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_PAYMENT_LOG_BY_BATCH,
+            IMPORT_PAYMENTS_BY_BATCH,
         }
 
         #endregion Enums
@@ -131,7 +131,7 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_INVOICES:
                     this.Text = "台帐导入";
                     break;
-                case ImportType.IMPORT_PAYMENT_LOG_BY_BATCH:
+                case ImportType.IMPORT_PAYMENTS_BY_BATCH:
                     this.Text = "付款导入";
                     break;
                 default:
@@ -195,7 +195,7 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_INVOICES:
                     e.Result = ImportInvoices((string)e.Argument, worker, e);
                     break;
-                case ImportType.IMPORT_PAYMENT_LOG_BY_BATCH:
+                case ImportType.IMPORT_PAYMENTS_BY_BATCH:
                     e.Result = ImoprtPaymentLogs((string)e.Argument, worker, e);
                     break;
                 default:

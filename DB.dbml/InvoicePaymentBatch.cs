@@ -27,7 +27,10 @@ namespace CMBC.EasyFactor.DB.dbml
                 double result = 0;
                 foreach (InvoicePaymentLog paymentLog in this.InvoicePaymentLogs)
                 {
-                    result += paymentLog.PaymentAmount;
+                    if (paymentLog.PaymentAmount.HasValue)
+                    {
+                        result += paymentLog.PaymentAmount.Value;
+                    }
                 }
                 return result;
             }

@@ -10705,9 +10705,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _InvoiceNo;
 		
-		private double _PaymentAmount;
+		private System.Nullable<double> _PaymentAmount;
 		
-		private System.DateTime _PaymentDate;
+		private System.Nullable<System.DateTime> _PaymentDate;
 		
 		private System.Nullable<double> _RefundAmount;
 		
@@ -10727,15 +10727,15 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnInvoiceDeductionIDChanging(int value);
-    partial void OnInvoiceDeductionIDChanged();
+    partial void OnPaymentLogIDChanging(int value);
+    partial void OnPaymentLogIDChanged();
     partial void OnPaymentBatchNoChanging(string value);
     partial void OnPaymentBatchNoChanged();
     partial void OnInvoiceNoChanging(string value);
     partial void OnInvoiceNoChanged();
-    partial void OnPaymentAmountChanging(double value);
+    partial void OnPaymentAmountChanging(System.Nullable<double> value);
     partial void OnPaymentAmountChanged();
-    partial void OnPaymentDateChanging(System.DateTime value);
+    partial void OnPaymentDateChanging(System.Nullable<System.DateTime> value);
     partial void OnPaymentDateChanged();
     partial void OnRefundAmountChanging(System.Nullable<double> value);
     partial void OnRefundAmountChanged();
@@ -10756,7 +10756,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_InvoiceDeductionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int InvoiceDeductionID
+		public int PaymentLogID
 		{
 			get
 			{
@@ -10766,11 +10766,11 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._InvoiceDeductionID != value))
 				{
-					this.OnInvoiceDeductionIDChanging(value);
+					this.OnPaymentLogIDChanging(value);
 					this.SendPropertyChanging();
 					this._InvoiceDeductionID = value;
-					this.SendPropertyChanged("InvoiceDeductionID");
-					this.OnInvoiceDeductionIDChanged();
+					this.SendPropertyChanged("PaymentLogID");
+					this.OnPaymentLogIDChanged();
 				}
 			}
 		}
@@ -10824,7 +10824,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_PaymentAmount", DbType="Float NOT NULL")]
-		public double PaymentAmount
+		public System.Nullable<double> PaymentAmount
 		{
 			get
 			{
@@ -10844,7 +10844,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_PaymentDate", DbType="DateTime NOT NULL")]
-		public System.DateTime PaymentDate
+		public System.Nullable<System.DateTime> PaymentDate
 		{
 			get
 			{

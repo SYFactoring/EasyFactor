@@ -29,7 +29,7 @@
         private DevComponents.DotNetBar.Controls.ComboBoxEx interestTypeComboBoxEx;
         private System.Windows.Forms.BindingNavigator invoiceBindingNavigator;
         private System.Windows.Forms.BindingSource invoiceBindingSource;
-        private System.Windows.Forms.DataGridView dgvInvoices;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoices;
         private System.Windows.Forms.BindingSource batchBindingSource;
         private DevComponents.DotNetBar.PanelEx panelFinanceBatch;
 
@@ -102,7 +102,7 @@
             this.financeAmountTextBoxX = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.batchCurrencyComboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.financeBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.dgvInvoices = new System.Windows.Forms.DataGridView();
+            this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colCheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();

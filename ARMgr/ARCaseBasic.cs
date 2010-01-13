@@ -100,22 +100,22 @@ namespace CMBC.EasyFactor.ARMgr
                     uc = new InvoiceFinance(this);
                     break;
                 case OpARType.InvoiceBuyerPayment:
-                    uc = new InvoicePayment(this, InvoicePayment.PaymentType.BUYER_PAYMENT);
+                    uc = new InvoicePayment(this, InvoicePayment.OpPaymentType.BUYER_PAYMENT);
                     break;
                 case OpARType.InvoiceIndirectPayment:
-                    uc = new InvoicePayment(this, InvoicePayment.PaymentType.INDIRECT_PAYMENT);
+                    uc = new InvoicePayment(this, InvoicePayment.OpPaymentType.INDIRECT_PAYMENT);
                     break;
                 case OpARType.InvoiceSellerPayment:
-                    uc = new InvoicePayment(this, InvoicePayment.PaymentType.SELLER_PAYMENT);
+                    uc = new InvoicePayment(this, InvoicePayment.OpPaymentType.SELLER_PAYMENT);
                     break;
                 case OpARType.InvoiceGuaranteePayment:
-                    uc = new InvoicePayment(this, InvoicePayment.PaymentType.GUARANTEE_PAYMENT);
+                    uc = new InvoicePayment(this, InvoicePayment.OpPaymentType.GUARANTEE_PAYMENT);
                     break;
                 case OpARType.InvoiceSellerReassign:
-                    uc = new InvoicePayment(this, InvoicePayment.PaymentType.SELLER_REASSIGN);
+                    uc = new InvoicePayment(this, InvoicePayment.OpPaymentType.SELLER_REASSIGN);
                     break;
                 case OpARType.CreditNotePayment:
-                    uc = new InvoicePayment(this,InvoicePayment.PaymentType.CREDIT_NOTE_PAYMENT);
+                    uc = new InvoicePayment(this,InvoicePayment.OpPaymentType.CREDIT_NOTE_PAYMENT);
                     break;
                 default:
                     uc = new UserControl();

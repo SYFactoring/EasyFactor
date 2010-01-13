@@ -8,7 +8,7 @@ namespace CMBC.EasyFactor.DB.dbml
 {
     public partial class Invoice : BaseObject
     {
-		#region Properties (11) 
+        #region Properties (11)
 
         public DateTime AssignDate
         {
@@ -134,11 +134,97 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion Properties 
+        private double? _paymentAmount2;
 
-		#region Methods (8) 
+        public double? PaymentAmount2
+        {
+            get
+            {
+                return _paymentAmount2;
+            }
+            set
+            {
+                this._paymentAmount2 = value;
+                this.SendPropertyChanged("PaymentAmount2");
+            }
+        }
+        private DateTime? _paymentDate2;
 
-		// Public Methods (8) 
+        public DateTime? PaymentDate2
+        {
+            get
+            {
+                return _paymentDate2;
+            }
+            set
+            {
+                this._paymentDate2 = value;
+                this.SendPropertyChanged("PaymentDate2");
+            }
+        }
+
+        private double? _refundAmount2;
+
+        public double? RefundAmount2
+        {
+            get
+            {
+                return _refundAmount2;
+            }
+            set
+            {
+                this._refundAmount2 = value;
+                this.SendPropertyChanged("RefundAmount2");
+            }
+        }
+
+        private DateTime? _refundDate2;
+
+        public DateTime? RefundDate2
+        {
+            get
+            {
+                return _refundDate2;
+            }
+            set
+            {
+                this._refundDate2 = value;
+                this.SendPropertyChanged("RefundDate2");
+            }
+        }
+        public int? PaymentLogID2
+        {
+            set;
+            get;
+        }
+
+        private string _creditNoteNo2;
+
+        public string CreditNoteNo2
+        {
+            get { return _creditNoteNo2; }
+            set
+            {
+                this._creditNoteNo2 = value;
+                this.SendPropertyChanged("CreditNoteNo2");
+            }
+        }
+
+        private DateTime? _creditNoteDate2;
+        public DateTime? CreditNoteDate2
+        {
+            get { return _creditNoteDate2; }
+            set
+            {
+                this._creditNoteDate2 = value;
+                this.SendPropertyChanged("CreditNoteDate2");
+            }
+        }
+        #endregion Properties
+
+        #region Methods (8)
+
+        // Public Methods (8) 
 
         public override bool Equals(object obj)
         {
@@ -254,6 +340,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }
