@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Drawing;
 
     /// <summary>
     /// 
@@ -269,5 +270,19 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
+
+        private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                dgvBatches.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                dgvBatches.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
     }
 }

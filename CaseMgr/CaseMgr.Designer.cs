@@ -501,6 +501,7 @@
             this.dgvCases.Size = new System.Drawing.Size(761, 300);
             this.dgvCases.TabIndex = 1;
             this.dgvCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
+            this.dgvCases.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCases_RowPostPaint);
             // 
             // CaseCodeColumn
             // 

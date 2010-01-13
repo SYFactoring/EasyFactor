@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.cbClientGroupType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblClientName = new DevComponents.DotNetBar.LabelX();
@@ -47,7 +48,6 @@
             this.colPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cbClientGroupType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLines)).BeginInit();
             this.SuspendLayout();
@@ -74,6 +74,22 @@
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
+            // 
+            // cbClientGroupType
+            // 
+            this.cbClientGroupType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbClientGroupType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbClientGroupType.FocusHighlightEnabled = true;
+            this.cbClientGroupType.ItemHeight = 14;
+            this.cbClientGroupType.Items.AddRange(new object[] {
+            "全部",
+            "客户",
+            "集团"});
+            this.cbClientGroupType.Location = new System.Drawing.Point(342, 3);
+            this.cbClientGroupType.Name = "cbClientGroupType";
+            this.cbClientGroupType.Size = new System.Drawing.Size(100, 20);
+            this.cbClientGroupType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbClientGroupType.TabIndex = 7;
             // 
             // btnQuery
             // 
@@ -141,14 +157,14 @@
             this.dgvClientCreditLines.AllowUserToDeleteRows = false;
             this.dgvClientCreditLines.AllowUserToOrderColumns = true;
             this.dgvClientCreditLines.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvClientCreditLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientCreditLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colClientEDICode,
@@ -160,14 +176,14 @@
             this.colPeriodBegin,
             this.colPeriodEnd,
             this.colCreditLineStatus});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvClientCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClientCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvClientCreditLines.Location = new System.Drawing.Point(0, 33);
@@ -177,6 +193,8 @@
             this.dgvClientCreditLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvClientCreditLines.Size = new System.Drawing.Size(935, 314);
             this.dgvClientCreditLines.TabIndex = 1;
+            this.dgvClientCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientCreditLines_CellDoubleClick);
+            this.dgvClientCreditLines.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvClientCreditLines_RowPostPaint);
             // 
             // colClientEDICode
             // 
@@ -216,8 +234,8 @@
             // colCreditLine
             // 
             this.colCreditLine.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle5.Format = "N2";
-            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Format = "N2";
+            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle2;
             this.colCreditLine.HeaderText = "额度上限";
             this.colCreditLine.Name = "colCreditLine";
             this.colCreditLine.ReadOnly = true;
@@ -242,22 +260,6 @@
             this.colCreditLineStatus.HeaderText = "额度状态";
             this.colCreditLineStatus.Name = "colCreditLineStatus";
             this.colCreditLineStatus.ReadOnly = true;
-            // 
-            // cbClientGroupType
-            // 
-            this.cbClientGroupType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbClientGroupType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbClientGroupType.FocusHighlightEnabled = true;
-            this.cbClientGroupType.ItemHeight = 14;
-            this.cbClientGroupType.Items.AddRange(new object[] {
-            "全部",
-            "客户",
-            "集团"});
-            this.cbClientGroupType.Location = new System.Drawing.Point(342, 3);
-            this.cbClientGroupType.Name = "cbClientGroupType";
-            this.cbClientGroupType.Size = new System.Drawing.Size(100, 20);
-            this.cbClientGroupType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbClientGroupType.TabIndex = 7;
             // 
             // ClientCreditLineMgr
             // 

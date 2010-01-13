@@ -37,6 +37,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.cbCheckStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblCheckStatus = new DevComponents.DotNetBar.LabelX();
             this.dateTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -69,7 +70,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -102,6 +102,18 @@
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
+            // 
+            // lblCount
+            // 
+            this.lblCount.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCount.BackgroundStyle.Class = "";
+            this.lblCount.Location = new System.Drawing.Point(521, 13);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.TabIndex = 12;
             // 
             // cbCheckStatus
             // 
@@ -325,6 +337,7 @@
             this.dgvBatches.Size = new System.Drawing.Size(904, 383);
             this.dgvBatches.TabIndex = 1;
             this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBatches_CellDoubleClick);
+            this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBatches_RowPostPaint);
             // 
             // colSellerName
             // 
@@ -501,18 +514,6 @@
             this.menuItemReject.Size = new System.Drawing.Size(122, 22);
             this.menuItemReject.Text = "复核拒绝";
             this.menuItemReject.Click += new System.EventHandler(this.Reject);
-            // 
-            // lblCount
-            // 
-            this.lblCount.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(521, 13);
-            this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(19, 16);
-            this.lblCount.TabIndex = 12;
             // 
             // FinanceBatchMgr
             // 

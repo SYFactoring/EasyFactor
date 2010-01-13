@@ -132,8 +132,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbContractStatus.FormattingEnabled = true;
             this.cbContractStatus.ItemHeight = 14;
             this.cbContractStatus.Items.AddRange(new object[] {
-            ConstStr.CONTRACT.AVAILABILITY,
-            ConstStr.CONTRACT.EXPIRY});
+            "已生效",
+            "已过期"});
             this.cbContractStatus.Location = new System.Drawing.Point(377, 5);
             this.cbContractStatus.Name = "cbContractStatus";
             this.cbContractStatus.Size = new System.Drawing.Size(98, 20);
@@ -265,6 +265,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvContracts.Size = new System.Drawing.Size(768, 358);
             this.dgvContracts.TabIndex = 0;
             this.dgvContracts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
+            this.dgvContracts.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvContracts_RowPostPaint);
             // 
             // colContractCode
             // 

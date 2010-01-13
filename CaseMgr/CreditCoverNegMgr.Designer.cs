@@ -542,6 +542,7 @@
             this.dgvCreditCoverNegs.Size = new System.Drawing.Size(753, 270);
             this.dgvCreditCoverNegs.TabIndex = 1;
             this.dgvCreditCoverNegs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
+            this.dgvCreditCoverNegs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCreditCoverNegs_RowPostPaint);
             // 
             // colNegoID
             // 

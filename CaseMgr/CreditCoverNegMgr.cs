@@ -12,6 +12,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using System.Collections.Generic;
+    using System.Drawing;
 
     public partial class CreditCoverNegMgr : UserControl
     {
@@ -245,5 +246,19 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion Methods
+
+        private void dgvCreditCoverNegs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                this.dgvCreditCoverNegs.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                this.dgvCreditCoverNegs.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                this.dgvCreditCoverNegs.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
     }
 }

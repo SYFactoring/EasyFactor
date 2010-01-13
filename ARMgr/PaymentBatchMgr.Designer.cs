@@ -33,6 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.cbCheckStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblCheckStatus = new DevComponents.DotNetBar.LabelX();
             this.dateTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -60,7 +61,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblCount = new DevComponents.DotNetBar.LabelX();
+            this.cbPaymentType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblPaymentType = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -72,6 +74,8 @@
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.cbPaymentType);
+            this.panelQuery.Controls.Add(this.lblPaymentType);
             this.panelQuery.Controls.Add(this.lblCount);
             this.panelQuery.Controls.Add(this.cbCheckStatus);
             this.panelQuery.Controls.Add(this.lblCheckStatus);
@@ -93,6 +97,18 @@
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
+            // 
+            // lblCount
+            // 
+            this.lblCount.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCount.BackgroundStyle.Class = "";
+            this.lblCount.Location = new System.Drawing.Point(532, 14);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.TabIndex = 12;
             // 
             // cbCheckStatus
             // 
@@ -132,7 +148,7 @@
             this.dateTo.BackgroundStyle.Class = "DateTimeInputBackground";
             this.dateTo.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateTo.ButtonDropDown.Visible = true;
-            this.dateTo.Location = new System.Drawing.Point(345, 10);
+            this.dateTo.Location = new System.Drawing.Point(357, 10);
             // 
             // 
             // 
@@ -177,7 +193,7 @@
             // 
             // 
             this.lblDatePicker.BackgroundStyle.Class = "";
-            this.lblDatePicker.Location = new System.Drawing.Point(186, 12);
+            this.lblDatePicker.Location = new System.Drawing.Point(198, 14);
             this.lblDatePicker.Name = "lblDatePicker";
             this.lblDatePicker.Size = new System.Drawing.Size(47, 16);
             this.lblDatePicker.TabIndex = 7;
@@ -191,7 +207,7 @@
             this.dateFrom.BackgroundStyle.Class = "DateTimeInputBackground";
             this.dateFrom.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateFrom.ButtonDropDown.Visible = true;
-            this.dateFrom.Location = new System.Drawing.Point(239, 10);
+            this.dateFrom.Location = new System.Drawing.Point(251, 10);
             // 
             // 
             // 
@@ -233,7 +249,7 @@
             // 
             this.btnPaymentBatchQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnPaymentBatchQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnPaymentBatchQuery.Location = new System.Drawing.Point(451, 7);
+            this.btnPaymentBatchQuery.Location = new System.Drawing.Point(463, 7);
             this.btnPaymentBatchQuery.Name = "btnPaymentBatchQuery";
             this.btnPaymentBatchQuery.Size = new System.Drawing.Size(75, 23);
             this.btnPaymentBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -311,6 +327,7 @@
             this.dgvBatches.Size = new System.Drawing.Size(888, 327);
             this.dgvBatches.TabIndex = 1;
             this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBatches_CellDoubleClick);
+            this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBatches_RowPostPaint);
             this.dgvBatches.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvBatches_CellFormatting);
             // 
             // colSellerName
@@ -443,17 +460,38 @@
             this.menuItemReject.Text = "复核拒绝";
             this.menuItemReject.Click += new System.EventHandler(this.Reject);
             // 
-            // lblCount
+            // cbPaymentType
             // 
-            this.lblCount.AutoSize = true;
+            this.cbPaymentType.DisplayMember = "Text";
+            this.cbPaymentType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbPaymentType.FormattingEnabled = true;
+            this.cbPaymentType.ItemHeight = 14;
+            this.cbPaymentType.Items.AddRange(new object[] {
+            "",
+            "卖方付款",
+            "间接付款",
+            "买方付款",
+            "担保付款",
+            "买方回购",
+            "贷项通知"});
+            this.cbPaymentType.Location = new System.Drawing.Point(251, 35);
+            this.cbPaymentType.Name = "cbPaymentType";
+            this.cbPaymentType.Size = new System.Drawing.Size(101, 20);
+            this.cbPaymentType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbPaymentType.TabIndex = 14;
+            // 
+            // lblPaymentType
+            // 
+            this.lblPaymentType.AutoSize = true;
             // 
             // 
             // 
-            this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(532, 14);
-            this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(19, 16);
-            this.lblCount.TabIndex = 12;
+            this.lblPaymentType.BackgroundStyle.Class = "";
+            this.lblPaymentType.Location = new System.Drawing.Point(186, 36);
+            this.lblPaymentType.Name = "lblPaymentType";
+            this.lblPaymentType.Size = new System.Drawing.Size(59, 16);
+            this.lblPaymentType.TabIndex = 13;
+            this.lblPaymentType.Text = "付款类型:";
             // 
             // PaymentBatchMgr
             // 
@@ -505,5 +543,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
         private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbPaymentType;
+        private DevComponents.DotNetBar.LabelX lblPaymentType;
     }
 }

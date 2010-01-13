@@ -40,17 +40,17 @@
             this.tbDepartmentCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDepartmentCode = new DevComponents.DotNetBar.LabelX();
             this.dgvDepts = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemImportDepts = new System.Windows.Forms.ToolStripMenuItem();
             this.DepartmentCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DepartmentNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LocationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DomainColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ManagerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Contact_1Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemImportDepts = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepts)).BeginInit();
             this.cmuDeptMgr.SuspendLayout();
@@ -205,42 +205,7 @@
             this.dgvDepts.Size = new System.Drawing.Size(605, 429);
             this.dgvDepts.TabIndex = 0;
             this.dgvDepts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
-            // 
-            // cmuDeptMgr
-            // 
-            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemDetail,
-            this.menuItemSelect,
-            this.toolStripSeparator1,
-            this.menuItemImportDepts});
-            this.cmuDeptMgr.Name = "cmuDeptMgr";
-            this.cmuDeptMgr.Size = new System.Drawing.Size(123, 76);
-            // 
-            // menuItemDetail
-            // 
-            this.menuItemDetail.Name = "menuItemDetail";
-            this.menuItemDetail.Size = new System.Drawing.Size(122, 22);
-            this.menuItemDetail.Text = "详细信息";
-            this.menuItemDetail.Click += new System.EventHandler(this.Detail);
-            // 
-            // menuItemSelect
-            // 
-            this.menuItemSelect.Name = "menuItemSelect";
-            this.menuItemSelect.Size = new System.Drawing.Size(122, 22);
-            this.menuItemSelect.Text = "选定分部";
-            this.menuItemSelect.Click += new System.EventHandler(this.Select);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
-            // 
-            // menuItemImportDepts
-            // 
-            this.menuItemImportDepts.Name = "menuItemImportDepts";
-            this.menuItemImportDepts.Size = new System.Drawing.Size(122, 22);
-            this.menuItemImportDepts.Text = "导入分部";
-            this.menuItemImportDepts.Click += new System.EventHandler(this.ImportDepartments);
+            this.dgvDepts.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvDepts_RowPostPaint);
             // 
             // DepartmentCodeColumn
             // 
@@ -289,6 +254,42 @@
             this.Contact_1Column.HeaderText = "联系人";
             this.Contact_1Column.Name = "Contact_1Column";
             this.Contact_1Column.ReadOnly = true;
+            // 
+            // cmuDeptMgr
+            // 
+            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemDetail,
+            this.menuItemSelect,
+            this.toolStripSeparator1,
+            this.menuItemImportDepts});
+            this.cmuDeptMgr.Name = "cmuDeptMgr";
+            this.cmuDeptMgr.Size = new System.Drawing.Size(123, 76);
+            // 
+            // menuItemDetail
+            // 
+            this.menuItemDetail.Name = "menuItemDetail";
+            this.menuItemDetail.Size = new System.Drawing.Size(122, 22);
+            this.menuItemDetail.Text = "详细信息";
+            this.menuItemDetail.Click += new System.EventHandler(this.Detail);
+            // 
+            // menuItemSelect
+            // 
+            this.menuItemSelect.Name = "menuItemSelect";
+            this.menuItemSelect.Size = new System.Drawing.Size(122, 22);
+            this.menuItemSelect.Text = "选定分部";
+            this.menuItemSelect.Click += new System.EventHandler(this.Select);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
+            // 
+            // menuItemImportDepts
+            // 
+            this.menuItemImportDepts.Name = "menuItemImportDepts";
+            this.menuItemImportDepts.Size = new System.Drawing.Size(122, 22);
+            this.menuItemImportDepts.Text = "导入分部";
+            this.menuItemImportDepts.Click += new System.EventHandler(this.ImportDepartments);
             // 
             // DepartmentMgr
             // 

@@ -685,16 +685,37 @@ namespace CMBC.EasyFactor
 
         #endregion Methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreditNotePayment(object sender, EventArgs e)
         {
             ARCaseBasic creditNotePayment = new ARCaseBasic(ARCaseBasic.OpARType.CreditNotePayment);
             this.SetDetailPanel(creditNotePayment);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewGroupClient(object sender, EventArgs e)
         {
             ClientDetail detail = new ClientDetail(null, ClientDetail.OpClientType.NEW_GROUP_CLIENT);
             detail.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FactorQuery(object sender, EventArgs e)
+        {
+            FactorMgr fatcorQuery = new FactorMgr(false);
+            this.SetDetailPanel(fatcorQuery);
         }
     }
 }

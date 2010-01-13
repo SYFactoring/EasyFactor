@@ -392,6 +392,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactors.Size = new System.Drawing.Size(911, 318);
             this.dgvFactors.TabIndex = 0;
             this.dgvFactors.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
+            this.dgvFactors.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvFactors_RowPostPaint);
             // 
             // factorCodeColumn
             // 

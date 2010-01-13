@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Drawing;
 
     /// <summary>
     /// Factor Management User Interface 
@@ -334,5 +335,19 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         }
 
         #endregion Methods
+
+        private void dgvFactors_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                this.dgvFactors.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                this.dgvFactors.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                this.dgvFactors.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
     }
 }

@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.Utils;
+    using System.Drawing;
 
     /// <summary>
     /// 
@@ -318,5 +319,19 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion Methods
+
+        private void dgvContracts_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                this.dgvContracts.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                dgvContracts.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                dgvContracts.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
     }
 }

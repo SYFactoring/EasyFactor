@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=10.171.5.99\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=192.168.1.100;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[Case]" Member="Cases">
     <Type Name="Case">
       <Column Name="CaseCode" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -473,7 +473,6 @@
       <Column Name="RefundDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreditNoteNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="CreditNote_InvoicePaymentLog" Member="CreditNote" ThisKey="CreditNoteNo" Type="CreditNote" IsForeignKey="true" />
       <Association Name="Invoice_InvoicePaymentLog" Member="Invoice" ThisKey="InvoiceNo" Type="Invoice" IsForeignKey="true" />
       <Association Name="InvoicePaymentBatch_InvoicePaymentLog" Member="InvoicePaymentBatch" ThisKey="PaymentBatchNo" Type="InvoicePaymentBatch" IsForeignKey="true" />

@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Drawing;
 
     /// <summary>
     /// 
@@ -160,5 +161,19 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         }
 
 		#endregion Methods 
+
+        private void dgvDepts_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                 e.RowBounds.Location.Y,
+                 this.dgvDepts.RowHeadersWidth - 4,
+                 e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                this.dgvDepts.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                this.dgvDepts.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
     }
 }

@@ -23,9 +23,5 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Properties
 
-        partial void OnCreated()
-        {
-            this.CreditNote = new CreditNote();
-        }
     }
 }

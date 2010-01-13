@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar.Controls;
+    using System.Drawing;
 
     /// <summary>
     /// 
@@ -258,6 +259,20 @@ namespace CMBC.EasyFactor.CaseMgr
             this.diEnd.Value = default(DateTime);
             this.cbIsContractSigned.Checked = true;
             this.cbIsCDA.Checked = true;
+        }
+
+        private void dgvCases_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                 e.RowBounds.Location.Y,
+                 this.dgvCases.RowHeadersWidth - 4,
+                 e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                dgvCases.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                dgvCases.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);    
         }
     }
 }

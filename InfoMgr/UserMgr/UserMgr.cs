@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Drawing;
 
     /// <summary>
     /// User Management User Interface
@@ -242,5 +243,19 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         }
 
         #endregion Methods
+
+        private void dgvUsers_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                this.dgvUsers.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                this.dgvUsers.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                this.dgvUsers.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
     }
 }

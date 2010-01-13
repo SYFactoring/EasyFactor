@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Drawing;
     /// <summary>
     /// 
     /// </summary>
@@ -210,12 +211,14 @@ namespace CMBC.EasyFactor.ARMgr
                 DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
                 DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
                 string status = this.cbCheckStatus.Text;
+                string paymentType = this.cbPaymentType.Text;
 
                 var queryResult = App.Current.DbContext.InvoicePaymentBatches.Where(i =>
                     i.PaymentBatchNo.Contains(this.tbPaymentBatchNo.Text)
                     && (beginDate != this.dateFrom.MinDate ? i.PaymentDate >= beginDate : true)
                     && (endDate != this.dateTo.MinDate ? i.PaymentDate <= endDate : true)
                     && (status != string.Empty ? i.CheckStatus == status : true)
+                    && (paymentType!=string.Empty?i.PaymentType==paymentType:true)
                     );
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
@@ -270,5 +273,19 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
+
+        private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                dgvBatches.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                dgvBatches.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
     }
 }

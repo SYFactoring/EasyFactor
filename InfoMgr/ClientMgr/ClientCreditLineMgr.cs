@@ -7,18 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CMBC.EasyFactor.Utils;
+using CMBC.EasyFactor.DB.dbml;
 
 namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
     public partial class ClientCreditLineMgr : UserControl
     {
-        #region Fields (1)
+		#region Fields (2) 
 
+        private BindingSource bs;
         private OpClientCreditMgrType opType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         public enum OpClientCreditMgrType
         {
@@ -27,14 +29,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             QUERY_GROUP,
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (1)
+		#region Constructors (1) 
 
-        public ClientCreditLineMgr(OpClientCreditMgrType opType)
+public ClientCreditLineMgr(OpClientCreditMgrType opType)
         {
             InitializeComponent();
+            this.bs = new BindingSource();
             this.opType = opType;
+            this.dgvClientCreditLines.DataSource = bs;
             this.dgvClientCreditLines.AutoGenerateColumns = false;
             ControlUtil.SetDoubleBuffered(this.dgvClientCreditLines);
 
@@ -51,11 +55,22 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (1)
+		#region Methods (2) 
 
-        // Private Methods (1) 
+		// Private Methods (2) 
+
+        private void dgvClientCreditLines_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvClientCreditLines.CurrentCell == null)
+            {
+                return;
+            }
+            ClientCreditLine creditLine = (ClientCreditLine)this.bs.List[this.dgvClientCreditLines.CurrentCell.RowIndex];
+            ClientDetail detail = new ClientDetail(creditLine, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE);
+            detail.ShowDialog(this);
+        }
 
         private void Query(object sender, EventArgs e)
         {
@@ -72,9 +87,23 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
              && (c.Client.ClientNameCN.Contains(clientName) || c.Client.ClientNameEN_1.Contains(clientName) || c.Client.ClientNameEN_2.Contains(clientName))
              && (c.Client.ClientGroupType == null ? string.Empty : c.Client.ClientGroupType).Contains(clientGroupType)
                  );
-            this.dgvClientCreditLines.DataSource = queryResult;
+            this.bs.DataSource = queryResult;
         }
 
-        #endregion Methods
+		#endregion Methods 
+
+        private void dgvClientCreditLines_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                this.dgvClientCreditLines.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                this.dgvClientCreditLines.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                this.dgvClientCreditLines.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
     }
 }

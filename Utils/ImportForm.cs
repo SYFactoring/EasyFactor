@@ -18,7 +18,7 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class ImportForm : DevComponents.DotNetBar.Office2007Form
     {
-		#region Fields (5) 
+        #region Fields (5)
 
         private ApplicationClass app;
         private CultureInfo cultureInfo;
@@ -26,9 +26,9 @@ namespace CMBC.EasyFactor.Utils
         private ImportType importType;
         private Workbook workbook;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -91,11 +91,11 @@ namespace CMBC.EasyFactor.Utils
             IMPORT_PAYMENT_LOG_BY_BATCH,
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
-public ImportForm(ImportType importType)
+        public ImportForm(ImportType importType)
         {
             InitializeComponent();
             this.importType = importType;
@@ -139,9 +139,9 @@ public ImportForm(ImportType importType)
             }
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (1) 
+        #region Properties (1)
 
         public IList ImportedList
         {
@@ -149,11 +149,11 @@ public ImportForm(ImportType importType)
             get;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (19) 
+        #region Methods (19)
 
-		// Private Methods (19) 
+        // Private Methods (19) 
 
         /// <summary>
         /// 
@@ -264,8 +264,9 @@ public ImportForm(ImportType importType)
         /// 
         /// </summary>
         /// <param name="fileName"></param>
+        /// <param name="sheetIndex"></param>
         /// <returns></returns>
-        private object[,] GetValueArray(string fileName)
+        private object[,] GetValueArray(string fileName, int sheetIndex)
         {
             cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
@@ -284,7 +285,7 @@ public ImportForm(ImportType importType)
                 return null;
             }
 
-            this.datasheet = (Worksheet)workbook.Sheets[1];
+            this.datasheet = (Worksheet)workbook.Sheets[sheetIndex];
             Range range = datasheet.UsedRange;
             return (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
         }
@@ -309,7 +310,7 @@ public ImportForm(ImportType importType)
         /// <returns></returns>
         private int ImportCases(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = this.GetValueArray(fileName);
+            object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
 
             if (valueArray != null)
@@ -369,7 +370,7 @@ public ImportForm(ImportType importType)
                         curCase.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                         curCase.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
-                        if (valueArray.GetUpperBound(1) > 21)
+                        if (valueArray.GetUpperBound(1) > 30)
                         {
                             CreditCoverNegotiation creditCover = new CreditCoverNegotiation();
                             string requestType = String.Format("{0:G}", valueArray[row, column++]);
@@ -433,7 +434,7 @@ public ImportForm(ImportType importType)
         /// <param name="obj"></param>
         private int ImportClients(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = this.GetValueArray(fileName);
+            object[,] valueArray = this.GetValueArray(fileName, 1);
 
             int result = 0;
 
@@ -537,7 +538,7 @@ public ImportForm(ImportType importType)
         /// <returns></returns>
         private object ImportClientsCreditLine(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = this.GetValueArray(fileName);
+            object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
 
             if (valueArray != null)
@@ -612,7 +613,7 @@ public ImportForm(ImportType importType)
         /// <returns></returns>
         private int ImportContractAndCDA(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = this.GetValueArray(fileName);
+            object[,] valueArray = this.GetValueArray(fileName, 1);
 
             int result = 0;
 
@@ -767,7 +768,7 @@ public ImportForm(ImportType importType)
         /// <returns></returns>
         private int ImportDepartments(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = this.GetValueArray(fileName);
+            object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
 
             if (valueArray != null)
@@ -835,7 +836,7 @@ public ImportForm(ImportType importType)
         /// <returns></returns>
         private int ImportFactors(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = this.GetValueArray(fileName);
+            object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
 
             if (valueArray != null)
@@ -951,7 +952,7 @@ public ImportForm(ImportType importType)
         private object ImportFactorsCreditLine(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             {
-                object[,] valueArray = this.GetValueArray(fileName);
+                object[,] valueArray = this.GetValueArray(fileName, 1);
                 int result = 0;
 
                 if (valueArray != null)
@@ -1024,9 +1025,9 @@ public ImportForm(ImportType importType)
         /// <returns></returns>
         private int ImportInvoices(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = GetValueArray(fileName);
+            object[,] valueArray = GetValueArray(fileName, 1);
             int result = 0;
-
+            List<InvoicePaymentBatch> paymentBatches = new List<InvoicePaymentBatch>();
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
@@ -1034,7 +1035,6 @@ public ImportForm(ImportType importType)
                 CDA cda = null;
                 List<InvoiceAssignBatch> assignBatches = new List<InvoiceAssignBatch>();
                 List<InvoiceFinanceBatch> financeBatches = new List<InvoiceFinanceBatch>();
-                List<InvoicePaymentBatch> paymentBatches = new List<InvoicePaymentBatch>();
                 List<Invoice> invoiceList = new List<Invoice>();
                 try
                 {
@@ -1096,7 +1096,7 @@ public ImportForm(ImportType importType)
                             }
                         }
 
-                        column = 8;
+                        column = 9;
                         string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
                         if (invoiceNo == string.Empty)
                         {
@@ -1199,10 +1199,11 @@ public ImportForm(ImportType importType)
                         }
                         else
                         {
+                            string paymentType = String.Format("{0:G}", valueArray[row, 35]);
                             DateTime? paymentDate = (System.Nullable<DateTime>)valueArray[row, 36];
                             if (paymentDate != null)
                             {
-                                paymentBatch = paymentBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.PaymentDate == paymentDate);
+                                paymentBatch = paymentBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.PaymentDate == paymentDate && i.PaymentType == paymentType);
                                 if (paymentBatch == null)
                                 {
                                     paymentBatch = new InvoicePaymentBatch();
@@ -1286,6 +1287,142 @@ public ImportForm(ImportType importType)
                     throw e1;
                 }
             }
+
+            valueArray = GetValueArray(fileName, 2);
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+
+                CDA cda = null;
+                try
+                {
+                    for (int row = 2; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+
+                        string cdaCode = String.Format("{0:G}", valueArray[row, 1]);
+                        if (string.Empty.Equals(cdaCode))
+                        {
+                            continue;
+                        }
+                        if (cda == null || cda.CDACode != cdaCode)
+                        {
+                            cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
+                            if (cda == null)
+                            {
+                                throw new Exception("额度通知书编号错误: " + cdaCode);
+                            }
+                        }
+
+                        string paymentBatchNo = String.Format("{0:G}", valueArray[row, 3]);
+                        InvoicePaymentBatch paymentBatch = null;
+                        if (paymentBatchNo != string.Empty)
+                        {
+                            paymentBatch = paymentBatches.SingleOrDefault(i => i.PaymentBatchNo == paymentBatchNo);
+                            if (paymentBatch == null)
+                            {
+                                paymentBatch = App.Current.DbContext.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == paymentBatchNo);
+                                if (paymentBatch == null)
+                                {
+                                    throw new Exception("付款批号错误: " + paymentBatchNo);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            string paymentType = String.Format("{0:G}", valueArray[row, 4]);
+                            DateTime? paymentDate = (System.Nullable<DateTime>)valueArray[row, 5];
+                            if (paymentDate != null)
+                            {
+                                paymentBatch = paymentBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.PaymentDate == paymentDate && i.PaymentType == paymentType);
+                                if (paymentBatch == null)
+                                {
+                                    paymentBatch = new InvoicePaymentBatch();
+                                    int column = 4;
+                                    paymentBatch.PaymentType = String.Format("{0:G}", valueArray[row, column++]);
+                                    paymentBatch.PaymentDate = (DateTime)valueArray[row, column++];
+                                    paymentBatch.IsCreateMsg = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
+                                    paymentBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                                    paymentBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                                    paymentBatch.PaymentBatchNo = Invoice.GeneratePaymentBatchNo(paymentBatch.PaymentDate, paymentBatches);
+                                    paymentBatch.CheckStatus = "已复核";
+                                    paymentBatch.CDA = cda;
+                                    paymentBatches.Add(paymentBatch);
+                                }
+                            }
+                        }
+
+                        string creditNoteNo = String.Format("{0:G}", valueArray[row, 9]);
+                        if (creditNoteNo == string.Empty)
+                        {
+                            throw new Exception("贷项通知编号不能为空");
+                        }
+                        CreditNote creditNote = App.Current.DbContext.CreditNotes.SingleOrDefault(c => c.CreditNoteNo==creditNoteNo);
+                        if (creditNote == null)
+                        {
+                            creditNote = new CreditNote();
+                            creditNote.CreditNoteNo = creditNoteNo;
+                            creditNote.CreditNoteDate = (DateTime)valueArray[row, 11];
+                        }
+                        InvoicePaymentLog log = new InvoicePaymentLog();
+                        log.CreditNote = creditNote;
+                        log.PaymentAmount = (double)valueArray[row, 10];
+                        log.PaymentDate = paymentBatch.PaymentDate;
+
+                        string invoiceNo = String.Format("{0:G}", valueArray[row, 12]);
+                        if (invoiceNo == string.Empty)
+                        {
+                            throw new Exception("发票号不能为空");
+                        }
+                        Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        if (invoice == null)
+                        {
+                            throw new Exception("发票号错误: " + invoiceNo);
+                        }
+                        log.Invoice = invoice;
+                        log.Comment = String.Format("{0:G}", valueArray[row, 13]);
+                        log.InvoicePaymentBatch = paymentBatch;
+                    }
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e2)
+                {
+                    foreach (InvoicePaymentBatch batch in paymentBatches)
+                    {
+                        foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
+                        {
+                            log.Invoice = null;
+                            log.CreditNote = null;
+                        }
+                        batch.CDA = null;
+                    }
+                    throw e2;
+                }
+            }
+
+            try
+            {
+                foreach (InvoicePaymentBatch batch in paymentBatches)
+                {
+                    foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
+                    {
+                        Invoice invoice = log.Invoice;
+                        invoice.PaymentAmount = invoice.InvoicePaymentLogs.Sum(logs => logs.PaymentAmount);
+                        invoice.PaymentDate = invoice.InvoicePaymentLogs.Max(logs => logs.PaymentDate);
+                        invoice.RefundAmount = invoice.InvoicePaymentLogs.Sum(logs => logs.RefundAmount);
+                        invoice.RefundDate = invoice.InvoicePaymentLogs.Max(logs => logs.RefundDate);
+                    }
+                }
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e3)
+            {
+                throw e3;
+            }
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);
             ReleaseResource();
@@ -1300,7 +1437,7 @@ public ImportForm(ImportType importType)
         /// <returns></returns>
         private int ImportInvoicesByBatch(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = GetValueArray(fileName);
+            object[,] valueArray = GetValueArray(fileName, 1);
             int result = 0;
             List<Invoice> invoiceList = new List<Invoice>();
             if (valueArray != null)
@@ -1378,7 +1515,7 @@ public ImportForm(ImportType importType)
         /// <returns></returns>
         private int ImportUsers(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = this.GetValueArray(fileName);
+            object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
             if (valueArray != null)
             {
@@ -1496,6 +1633,6 @@ public ImportForm(ImportType importType)
             this.btnStart.Enabled = false;
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }
