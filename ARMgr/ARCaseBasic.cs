@@ -115,7 +115,7 @@ namespace CMBC.EasyFactor.ARMgr
                     uc = new InvoicePayment(this, InvoicePayment.PaymentType.SELLER_REASSIGN);
                     break;
                 case OpARType.CreditNotePayment:
-                    uc = new CreditNotePayment();
+                    uc = new InvoicePayment(this,InvoicePayment.PaymentType.CREDIT_NOTE_PAYMENT);
                     break;
                 default:
                     uc = new UserControl();
@@ -285,10 +285,6 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     (control as InvoicePayment).CDA = cda;
                 }
-                else if (control is CreditNotePayment)
-                {
-                    (control as CreditNotePayment).CDA = cda;
-                }
             }
             else
             {
@@ -306,10 +302,6 @@ namespace CMBC.EasyFactor.ARMgr
                 else if (control is InvoicePayment)
                 {
                     (control as InvoicePayment).ResetControlsStatus();
-                }
-                else if (control is CreditNotePayment)
-                {
-                    (control as CreditNotePayment).ResetControlsStatus();
                 }
             }
         }

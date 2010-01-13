@@ -18,7 +18,7 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class ImportForm : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (5)
+		#region Fields (5) 
 
         private ApplicationClass app;
         private CultureInfo cultureInfo;
@@ -26,9 +26,9 @@ namespace CMBC.EasyFactor.Utils
         private ImportType importType;
         private Workbook workbook;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         /// <summary>
         /// 
@@ -83,14 +83,19 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_INVOICES
+            IMPORT_INVOICES,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            IMPORT_PAYMENT_LOG_BY_BATCH,
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (1)
+		#region Constructors (1) 
 
-        public ImportForm(ImportType importType)
+public ImportForm(ImportType importType)
         {
             InitializeComponent();
             this.importType = importType;
@@ -126,14 +131,17 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_INVOICES:
                     this.Text = "台帐导入";
                     break;
+                case ImportType.IMPORT_PAYMENT_LOG_BY_BATCH:
+                    this.Text = "付款导入";
+                    break;
                 default:
                     break;
             }
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (1)
+		#region Properties (1) 
 
         public IList ImportedList
         {
@@ -141,11 +149,11 @@ namespace CMBC.EasyFactor.Utils
             get;
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (18)
+		#region Methods (19) 
 
-        // Private Methods (18) 
+		// Private Methods (19) 
 
         /// <summary>
         /// 
@@ -186,6 +194,9 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ImportType.IMPORT_INVOICES:
                     e.Result = ImportInvoices((string)e.Argument, worker, e);
+                    break;
+                case ImportType.IMPORT_PAYMENT_LOG_BY_BATCH:
+                    e.Result = ImoprtPaymentLogs((string)e.Argument, worker, e);
                     break;
                 default:
                     break;
@@ -276,6 +287,18 @@ namespace CMBC.EasyFactor.Utils
             this.datasheet = (Worksheet)workbook.Sheets[1];
             Range range = datasheet.UsedRange;
             return (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private object ImoprtPaymentLogs(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -1198,15 +1221,20 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         column = 40;
-                        invoice.PaymentAmount = (System.Nullable<double>)valueArray[row, column++];
-                        invoice.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                        invoice.RefundAmount = (System.Nullable<double>)valueArray[row, column++];
-                        invoice.RefundDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                        if (invoice.PaymentAmount.HasValue)
+
+                        double? paymentAmount = (System.Nullable<double>)valueArray[row, column++];
+                        if (paymentAmount.HasValue)
                         {
-                            invoice.InvoicePaymentBatch = paymentBatch;
+                            InvoicePaymentLog paymentLog = new InvoicePaymentLog();
+                            paymentLog.PaymentAmount = paymentAmount.Value;
+                            paymentLog.PaymentDate = (DateTime)valueArray[row, column++];
+                            paymentLog.RefundAmount = (System.Nullable<double>)valueArray[row, column++];
+                            paymentLog.RefundDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                            paymentLog.Invoice = invoice;
+                            paymentLog.InvoicePaymentBatch = paymentBatch;
                         }
 
+                        column = 44;
                         invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
                         invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
                         if (!invoice.Commission.HasValue)
@@ -1468,6 +1496,6 @@ namespace CMBC.EasyFactor.Utils
             this.btnStart.Enabled = false;
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

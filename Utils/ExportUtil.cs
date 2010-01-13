@@ -31,6 +31,8 @@ namespace CMBC.EasyFactor.Utils
             /// 
             /// </summary>
             EXPORT_INVOICES,
+
+            EXPORT_PAYMENT_LOG,
         }
 
         #endregion Enums
@@ -63,7 +65,10 @@ namespace CMBC.EasyFactor.Utils
             switch (exportType)
             {
                 case ExportType.EXPORT_INVOICES:
-                    ExportInvoices((IList)e.Argument, worker);
+                    ExportInvoices((IList)e.Argument, worker, e);
+                    break;
+                case ExportType.EXPORT_PAYMENT_LOG:
+                    ExportPaymentLogs((IList)e.Argument, worker, e);
                     break;
                 default:
                     break;
@@ -74,9 +79,21 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="objArray"></param>
+        /// <param name="paymentLogList"></param>
         /// <param name="worker"></param>
-        private void ExportInvoices(IList invoiceList, BackgroundWorker worker)
+        /// <param name="e"></param>
+        private void ExportPaymentLogs(IList paymentLogList, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="invoiceList"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        private void ExportInvoices(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)

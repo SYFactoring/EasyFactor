@@ -105,12 +105,6 @@
     <Compile Include="ARMgr\AssignBatchMgr.Designer.cs">
       <DependentUpon>AssignBatchMgr.cs</DependentUpon>
     </Compile>
-    <Compile Include="ARMgr\CreditNotePayment.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ARMgr\CreditNotePayment.Designer.cs">
-      <DependentUpon>CreditNotePayment.cs</DependentUpon>
-    </Compile>
     <Compile Include="ARMgr\FinanceBatchMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -200,7 +194,7 @@
     <Compile Include="DB.dbml\CDA.cs" />
     <Compile Include="DB.dbml\Client.cs" />
     <Compile Include="DB.dbml\ClientCreditLine.cs" />
-    <Compile Include="DB.dbml\InvoiceDeduction.cs" />
+    <Compile Include="DB.dbml\InvoicePaymentLog.cs" />
     <Compile Include="Utils\ConstStr.cs" />
     <Compile Include="DB.dbml\Country.cs" />
     <Compile Include="DB.dbml\CreditCoverNegotiation.cs" />
@@ -328,10 +322,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\AssignBatchMgr.resx">
       <DependentUpon>AssignBatchMgr.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ARMgr\CreditNotePayment.resx">
-      <DependentUpon>CreditNotePayment.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\FinanceBatchMgr.resx">
@@ -522,7 +512,6 @@
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.FactorCreditLine.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Invoice.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoiceAssignBatch.datasource" />
-    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoiceDeduction.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoiceFinanceBatch.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoicePaymentBatch.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.User.datasource" />

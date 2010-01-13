@@ -87,12 +87,12 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertInvoicePaymentBatch(InvoicePaymentBatch instance);
     partial void UpdateInvoicePaymentBatch(InvoicePaymentBatch instance);
     partial void DeleteInvoicePaymentBatch(InvoicePaymentBatch instance);
-    partial void InsertInvoiceDeduction(InvoiceDeduction instance);
-    partial void UpdateInvoiceDeduction(InvoiceDeduction instance);
-    partial void DeleteInvoiceDeduction(InvoiceDeduction instance);
     partial void InsertCreditNote(CreditNote instance);
     partial void UpdateCreditNote(CreditNote instance);
     partial void DeleteCreditNote(CreditNote instance);
+    partial void InsertInvoicePaymentLog(InvoicePaymentLog instance);
+    partial void UpdateInvoicePaymentLog(InvoicePaymentLog instance);
+    partial void DeleteInvoicePaymentLog(InvoicePaymentLog instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -277,19 +277,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		public System.Data.Linq.Table<InvoiceDeduction> InvoiceDeductions
-		{
-			get
-			{
-				return this.GetTable<InvoiceDeduction>();
-			}
-		}
-		
 		public System.Data.Linq.Table<CreditNote> CreditNotes
 		{
 			get
 			{
 				return this.GetTable<CreditNote>();
+			}
+		}
+		
+		public System.Data.Linq.Table<InvoicePaymentLog> InvoicePaymentLogs
+		{
+			get
+			{
+				return this.GetTable<InvoicePaymentLog>();
 			}
 		}
 	}
@@ -8155,8 +8155,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _FinanceDueDate;
 		
-		private string _PaymentBatchNo;
-		
 		private System.Nullable<double> _PaymentAmount;
 		
 		private System.Nullable<System.DateTime> _PaymentDate;
@@ -8193,13 +8191,11 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
-		private EntitySet<InvoiceDeduction> _InvoiceDeductions;
+		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
 		
 		private EntityRef<InvoiceAssignBatch> _InvoiceAssignBatch;
 		
 		private EntityRef<InvoiceFinanceBatch> _InvoiceFinanceBatch;
-		
-		private EntityRef<InvoicePaymentBatch> _InvoicePaymentBatch;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -8253,8 +8249,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFinanceDateChanged();
     partial void OnFinanceDueDateChanging(System.Nullable<System.DateTime> value);
     partial void OnFinanceDueDateChanged();
-    partial void OnPaymentBatchNoChanging(string value);
-    partial void OnPaymentBatchNoChanged();
     partial void OnPaymentAmountChanging(System.Nullable<double> value);
     partial void OnPaymentAmountChanged();
     partial void OnPaymentDateChanging(System.Nullable<System.DateTime> value);
@@ -8295,10 +8289,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		public Invoice()
 		{
-			this._InvoiceDeductions = new EntitySet<InvoiceDeduction>(new Action<InvoiceDeduction>(this.attach_InvoiceDeductions), new Action<InvoiceDeduction>(this.detach_InvoiceDeductions));
+			this._InvoicePaymentLogs = new EntitySet<InvoicePaymentLog>(new Action<InvoicePaymentLog>(this.attach_InvoicePaymentLogs), new Action<InvoicePaymentLog>(this.detach_InvoicePaymentLogs));
 			this._InvoiceAssignBatch = default(EntityRef<InvoiceAssignBatch>);
 			this._InvoiceFinanceBatch = default(EntityRef<InvoiceFinanceBatch>);
-			this._InvoicePaymentBatch = default(EntityRef<InvoicePaymentBatch>);
 			OnCreated();
 		}
 		
@@ -8790,30 +8783,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PaymentBatchNo", DbType="NVarChar(50)")]
-		public string PaymentBatchNo
-		{
-			get
-			{
-				return this._PaymentBatchNo;
-			}
-			set
-			{
-				if ((this._PaymentBatchNo != value))
-				{
-					if (this._InvoicePaymentBatch.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPaymentBatchNoChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentBatchNo = value;
-					this.SendPropertyChanged("PaymentBatchNo");
-					this.OnPaymentBatchNoChanged();
-				}
-			}
-		}
-		
 		[Column(Storage="_PaymentAmount", DbType="Float")]
 		public System.Nullable<double> PaymentAmount
 		{
@@ -9174,16 +9143,16 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Invoice_InvoiceDeduction", Storage="_InvoiceDeductions", OtherKey="InvoiceNo")]
-		public EntitySet<InvoiceDeduction> InvoiceDeductions
+		[Association(Name="Invoice_InvoicePaymentLog", Storage="_InvoicePaymentLogs", OtherKey="InvoiceNo")]
+		public EntitySet<InvoicePaymentLog> InvoicePaymentLogs
 		{
 			get
 			{
-				return this._InvoiceDeductions;
+				return this._InvoicePaymentLogs;
 			}
 			set
 			{
-				this._InvoiceDeductions.Assign(value);
+				this._InvoicePaymentLogs.Assign(value);
 			}
 		}
 		
@@ -9255,40 +9224,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="InvoicePaymentBatch_Invoice", Storage="_InvoicePaymentBatch", ThisKey="PaymentBatchNo", IsForeignKey=true)]
-		public InvoicePaymentBatch InvoicePaymentBatch
-		{
-			get
-			{
-				return this._InvoicePaymentBatch.Entity;
-			}
-			set
-			{
-				InvoicePaymentBatch previousValue = this._InvoicePaymentBatch.Entity;
-				if (((previousValue != value) 
-							|| (this._InvoicePaymentBatch.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._InvoicePaymentBatch.Entity = null;
-						previousValue.Invoices.Remove(this);
-					}
-					this._InvoicePaymentBatch.Entity = value;
-					if ((value != null))
-					{
-						value.Invoices.Add(this);
-						this._PaymentBatchNo = value.PaymentBatchNo;
-					}
-					else
-					{
-						this._PaymentBatchNo = default(string);
-					}
-					this.SendPropertyChanged("InvoicePaymentBatch");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -9309,13 +9244,13 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		private void attach_InvoiceDeductions(InvoiceDeduction entity)
+		private void attach_InvoicePaymentLogs(InvoicePaymentLog entity)
 		{
 			this.SendPropertyChanging();
 			entity.Invoice = this;
 		}
 		
-		private void detach_InvoiceDeductions(InvoiceDeduction entity)
+		private void detach_InvoicePaymentLogs(InvoicePaymentLog entity)
 		{
 			this.SendPropertyChanging();
 			entity.Invoice = null;
@@ -10301,7 +10236,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _CheckDate;
 		
-		private EntitySet<Invoice> _Invoices;
+		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
 		
 		private EntityRef<CDA> _CDA;
 		
@@ -10335,7 +10270,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		public InvoicePaymentBatch()
 		{
-			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
+			this._InvoicePaymentLogs = new EntitySet<InvoicePaymentLog>(new Action<InvoicePaymentLog>(this.attach_InvoicePaymentLogs), new Action<InvoicePaymentLog>(this.detach_InvoicePaymentLogs));
 			this._CDA = default(EntityRef<CDA>);
 			OnCreated();
 		}
@@ -10564,16 +10499,16 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="InvoicePaymentBatch_Invoice", Storage="_Invoices", OtherKey="PaymentBatchNo")]
-		public EntitySet<Invoice> Invoices
+		[Association(Name="InvoicePaymentBatch_InvoicePaymentLog", Storage="_InvoicePaymentLogs", OtherKey="PaymentBatchNo")]
+		public EntitySet<InvoicePaymentLog> InvoicePaymentLogs
 		{
 			get
 			{
-				return this._Invoices;
+				return this._InvoicePaymentLogs;
 			}
 			set
 			{
-				this._Invoices.Assign(value);
+				this._InvoicePaymentLogs.Assign(value);
 			}
 		}
 		
@@ -10631,42 +10566,164 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		private void attach_Invoices(Invoice entity)
+		private void attach_InvoicePaymentLogs(InvoicePaymentLog entity)
 		{
 			this.SendPropertyChanging();
 			entity.InvoicePaymentBatch = this;
 		}
 		
-		private void detach_Invoices(Invoice entity)
+		private void detach_InvoicePaymentLogs(InvoicePaymentLog entity)
 		{
 			this.SendPropertyChanging();
 			entity.InvoicePaymentBatch = null;
 		}
 	}
 	
-	[Table(Name="dbo.InvoiceDeduction")]
-	public partial class InvoiceDeduction : INotifyPropertyChanging, INotifyPropertyChanged
+	[Table(Name="dbo.CreditNote")]
+	public partial class CreditNote : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CreditNoteNo;
+		
+		private System.DateTime _CreditNoteDate;
+		
+		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCreditNoteNoChanging(string value);
+    partial void OnCreditNoteNoChanged();
+    partial void OnCreditNoteDateChanging(System.DateTime value);
+    partial void OnCreditNoteDateChanged();
+    #endregion
+		
+		public CreditNote()
+		{
+			this._InvoicePaymentLogs = new EntitySet<InvoicePaymentLog>(new Action<InvoicePaymentLog>(this.attach_InvoicePaymentLogs), new Action<InvoicePaymentLog>(this.detach_InvoicePaymentLogs));
+			OnCreated();
+		}
+		
+		[Column(Storage="_CreditNoteNo", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CreditNoteNo
+		{
+			get
+			{
+				return this._CreditNoteNo;
+			}
+			set
+			{
+				if ((this._CreditNoteNo != value))
+				{
+					this.OnCreditNoteNoChanging(value);
+					this.SendPropertyChanging();
+					this._CreditNoteNo = value;
+					this.SendPropertyChanged("CreditNoteNo");
+					this.OnCreditNoteNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditNoteDate", DbType="DateTime NOT NULL")]
+		public System.DateTime CreditNoteDate
+		{
+			get
+			{
+				return this._CreditNoteDate;
+			}
+			set
+			{
+				if ((this._CreditNoteDate != value))
+				{
+					this.OnCreditNoteDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreditNoteDate = value;
+					this.SendPropertyChanged("CreditNoteDate");
+					this.OnCreditNoteDateChanged();
+				}
+			}
+		}
+		
+		[Association(Name="CreditNote_InvoicePaymentLog", Storage="_InvoicePaymentLogs", OtherKey="CreditNoteNo")]
+		public EntitySet<InvoicePaymentLog> InvoicePaymentLogs
+		{
+			get
+			{
+				return this._InvoicePaymentLogs;
+			}
+			set
+			{
+				this._InvoicePaymentLogs.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_InvoicePaymentLogs(InvoicePaymentLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.CreditNote = this;
+		}
+		
+		private void detach_InvoicePaymentLogs(InvoicePaymentLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.CreditNote = null;
+		}
+	}
+	
+	[Table(Name="dbo.InvoicePaymentLog")]
+	public partial class InvoicePaymentLog : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _InvoiceDeductionID;
 		
+		private string _PaymentBatchNo;
+		
 		private string _InvoiceNo;
 		
+		private double _PaymentAmount;
+		
+		private System.DateTime _PaymentDate;
+		
+		private System.Nullable<double> _RefundAmount;
+		
+		private System.Nullable<System.DateTime> _RefundDate;
+		
 		private string _CreditNoteNo;
-		
-		private double _DeductionAmount;
-		
-		private System.DateTime _DeductionDate;
 		
 		private string _Comment;
 		
 		private string _CreateUserName;
 		
+		private EntityRef<CreditNote> _CreditNote;
+		
 		private EntityRef<Invoice> _Invoice;
 		
-		private EntityRef<CreditNote> _CreditNote;
+		private EntityRef<InvoicePaymentBatch> _InvoicePaymentBatch;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -10674,24 +10731,31 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnInvoiceDeductionIDChanging(int value);
     partial void OnInvoiceDeductionIDChanged();
+    partial void OnPaymentBatchNoChanging(string value);
+    partial void OnPaymentBatchNoChanged();
     partial void OnInvoiceNoChanging(string value);
     partial void OnInvoiceNoChanged();
+    partial void OnPaymentAmountChanging(double value);
+    partial void OnPaymentAmountChanged();
+    partial void OnPaymentDateChanging(System.DateTime value);
+    partial void OnPaymentDateChanged();
+    partial void OnRefundAmountChanging(System.Nullable<double> value);
+    partial void OnRefundAmountChanged();
+    partial void OnRefundDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnRefundDateChanged();
     partial void OnCreditNoteNoChanging(string value);
     partial void OnCreditNoteNoChanged();
-    partial void OnDeductionAmountChanging(double value);
-    partial void OnDeductionAmountChanged();
-    partial void OnDeductionDateChanging(System.DateTime value);
-    partial void OnDeductionDateChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
     #endregion
 		
-		public InvoiceDeduction()
+		public InvoicePaymentLog()
 		{
-			this._Invoice = default(EntityRef<Invoice>);
 			this._CreditNote = default(EntityRef<CreditNote>);
+			this._Invoice = default(EntityRef<Invoice>);
+			this._InvoicePaymentBatch = default(EntityRef<InvoicePaymentBatch>);
 			OnCreated();
 		}
 		
@@ -10711,6 +10775,30 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._InvoiceDeductionID = value;
 					this.SendPropertyChanged("InvoiceDeductionID");
 					this.OnInvoiceDeductionIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PaymentBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string PaymentBatchNo
+		{
+			get
+			{
+				return this._PaymentBatchNo;
+			}
+			set
+			{
+				if ((this._PaymentBatchNo != value))
+				{
+					if (this._InvoicePaymentBatch.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPaymentBatchNoChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentBatchNo = value;
+					this.SendPropertyChanged("PaymentBatchNo");
+					this.OnPaymentBatchNoChanged();
 				}
 			}
 		}
@@ -10739,7 +10827,87 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditNoteNo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_PaymentAmount", DbType="Float NOT NULL")]
+		public double PaymentAmount
+		{
+			get
+			{
+				return this._PaymentAmount;
+			}
+			set
+			{
+				if ((this._PaymentAmount != value))
+				{
+					this.OnPaymentAmountChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentAmount = value;
+					this.SendPropertyChanged("PaymentAmount");
+					this.OnPaymentAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PaymentDate", DbType="DateTime NOT NULL")]
+		public System.DateTime PaymentDate
+		{
+			get
+			{
+				return this._PaymentDate;
+			}
+			set
+			{
+				if ((this._PaymentDate != value))
+				{
+					this.OnPaymentDateChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentDate = value;
+					this.SendPropertyChanged("PaymentDate");
+					this.OnPaymentDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RefundAmount", DbType="Float")]
+		public System.Nullable<double> RefundAmount
+		{
+			get
+			{
+				return this._RefundAmount;
+			}
+			set
+			{
+				if ((this._RefundAmount != value))
+				{
+					this.OnRefundAmountChanging(value);
+					this.SendPropertyChanging();
+					this._RefundAmount = value;
+					this.SendPropertyChanged("RefundAmount");
+					this.OnRefundAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RefundDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> RefundDate
+		{
+			get
+			{
+				return this._RefundDate;
+			}
+			set
+			{
+				if ((this._RefundDate != value))
+				{
+					this.OnRefundDateChanging(value);
+					this.SendPropertyChanging();
+					this._RefundDate = value;
+					this.SendPropertyChanged("RefundDate");
+					this.OnRefundDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreditNoteNo", DbType="VarChar(50)")]
 		public string CreditNoteNo
 		{
 			get
@@ -10759,46 +10927,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CreditNoteNo = value;
 					this.SendPropertyChanged("CreditNoteNo");
 					this.OnCreditNoteNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DeductionAmount", DbType="Float NOT NULL")]
-		public double DeductionAmount
-		{
-			get
-			{
-				return this._DeductionAmount;
-			}
-			set
-			{
-				if ((this._DeductionAmount != value))
-				{
-					this.OnDeductionAmountChanging(value);
-					this.SendPropertyChanging();
-					this._DeductionAmount = value;
-					this.SendPropertyChanged("DeductionAmount");
-					this.OnDeductionAmountChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DeductionDate", DbType="DateTime NOT NULL")]
-		public System.DateTime DeductionDate
-		{
-			get
-			{
-				return this._DeductionDate;
-			}
-			set
-			{
-				if ((this._DeductionDate != value))
-				{
-					this.OnDeductionDateChanging(value);
-					this.SendPropertyChanging();
-					this._DeductionDate = value;
-					this.SendPropertyChanged("DeductionDate");
-					this.OnDeductionDateChanged();
 				}
 			}
 		}
@@ -10843,41 +10971,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Invoice_InvoiceDeduction", Storage="_Invoice", ThisKey="InvoiceNo", IsForeignKey=true)]
-		public Invoice Invoice
-		{
-			get
-			{
-				return this._Invoice.Entity;
-			}
-			set
-			{
-				Invoice previousValue = this._Invoice.Entity;
-				if (((previousValue != value) 
-							|| (this._Invoice.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Invoice.Entity = null;
-						previousValue.InvoiceDeductions.Remove(this);
-					}
-					this._Invoice.Entity = value;
-					if ((value != null))
-					{
-						value.InvoiceDeductions.Add(this);
-						this._InvoiceNo = value.InvoiceNo;
-					}
-					else
-					{
-						this._InvoiceNo = default(string);
-					}
-					this.SendPropertyChanged("Invoice");
-				}
-			}
-		}
-		
-		[Association(Name="CreditNote_InvoiceDeduction", Storage="_CreditNote", ThisKey="CreditNoteNo", IsForeignKey=true)]
+		[Association(Name="CreditNote_InvoicePaymentLog", Storage="_CreditNote", ThisKey="CreditNoteNo", IsForeignKey=true)]
 		public CreditNote CreditNote
 		{
 			get
@@ -10894,12 +10988,12 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((previousValue != null))
 					{
 						this._CreditNote.Entity = null;
-						previousValue.InvoiceDeductions.Remove(this);
+						previousValue.InvoicePaymentLogs.Remove(this);
 					}
 					this._CreditNote.Entity = value;
 					if ((value != null))
 					{
-						value.InvoiceDeductions.Add(this);
+						value.InvoicePaymentLogs.Add(this);
 						this._CreditNoteNo = value.CreditNoteNo;
 					}
 					else
@@ -10911,105 +11005,71 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[Table(Name="dbo.CreditNote")]
-	public partial class CreditNote : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _CreditNoteNo;
-		
-		private System.DateTime _CreditNoteDate;
-		
-		private EntitySet<InvoiceDeduction> _InvoiceDeductions;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnCreditNoteNoChanging(string value);
-    partial void OnCreditNoteNoChanged();
-    partial void OnCreditNoteDateChanging(System.DateTime value);
-    partial void OnCreditNoteDateChanged();
-    #endregion
-		
-		public CreditNote()
-		{
-			this._InvoiceDeductions = new EntitySet<InvoiceDeduction>(new Action<InvoiceDeduction>(this.attach_InvoiceDeductions), new Action<InvoiceDeduction>(this.detach_InvoiceDeductions));
-			OnCreated();
-		}
-		
-		[Column(Storage="_CreditNoteNo", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string CreditNoteNo
+		[Association(Name="Invoice_InvoicePaymentLog", Storage="_Invoice", ThisKey="InvoiceNo", IsForeignKey=true)]
+		public Invoice Invoice
 		{
 			get
 			{
-				return this._CreditNoteNo;
+				return this._Invoice.Entity;
 			}
 			set
 			{
-				if ((this._CreditNoteNo != value))
+				Invoice previousValue = this._Invoice.Entity;
+				if (((previousValue != value) 
+							|| (this._Invoice.HasLoadedOrAssignedValue == false)))
 				{
-					this.OnCreditNoteNoChanging(value);
 					this.SendPropertyChanging();
-					this._CreditNoteNo = value;
-					this.SendPropertyChanged("CreditNoteNo");
-					this.OnCreditNoteNoChanged();
+					if ((previousValue != null))
+					{
+						this._Invoice.Entity = null;
+						previousValue.InvoicePaymentLogs.Remove(this);
+					}
+					this._Invoice.Entity = value;
+					if ((value != null))
+					{
+						value.InvoicePaymentLogs.Add(this);
+						this._InvoiceNo = value.InvoiceNo;
+					}
+					else
+					{
+						this._InvoiceNo = default(string);
+					}
+					this.SendPropertyChanged("Invoice");
 				}
 			}
 		}
 		
-		[Column(Storage="_CreditNoteDate", DbType="DateTime NOT NULL")]
-		public System.DateTime CreditNoteDate
+		[Association(Name="InvoicePaymentBatch_InvoicePaymentLog", Storage="_InvoicePaymentBatch", ThisKey="PaymentBatchNo", IsForeignKey=true)]
+		public InvoicePaymentBatch InvoicePaymentBatch
 		{
 			get
 			{
-				return this._CreditNoteDate;
+				return this._InvoicePaymentBatch.Entity;
 			}
 			set
 			{
-				if ((this._CreditNoteDate != value))
+				InvoicePaymentBatch previousValue = this._InvoicePaymentBatch.Entity;
+				if (((previousValue != value) 
+							|| (this._InvoicePaymentBatch.HasLoadedOrAssignedValue == false)))
 				{
-					this.OnCreditNoteDateChanging(value);
 					this.SendPropertyChanging();
-					this._CreditNoteDate = value;
-					this.SendPropertyChanged("CreditNoteDate");
-					this.OnCreditNoteDateChanged();
+					if ((previousValue != null))
+					{
+						this._InvoicePaymentBatch.Entity = null;
+						previousValue.InvoicePaymentLogs.Remove(this);
+					}
+					this._InvoicePaymentBatch.Entity = value;
+					if ((value != null))
+					{
+						value.InvoicePaymentLogs.Add(this);
+						this._PaymentBatchNo = value.PaymentBatchNo;
+					}
+					else
+					{
+						this._PaymentBatchNo = default(string);
+					}
+					this.SendPropertyChanged("InvoicePaymentBatch");
 				}
-			}
-		}
-		
-		[Association(Name="CreditNote_InvoiceDeduction", Storage="_InvoiceDeductions", OtherKey="CreditNoteNo")]
-		public EntitySet<InvoiceDeduction> InvoiceDeductions
-		{
-			get
-			{
-				return this._InvoiceDeductions;
-			}
-			set
-			{
-				this._InvoiceDeductions.Assign(value);
 			}
 		}
 		
@@ -11031,18 +11091,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_InvoiceDeductions(InvoiceDeduction entity)
-		{
-			this.SendPropertyChanging();
-			entity.CreditNote = this;
-		}
-		
-		private void detach_InvoiceDeductions(InvoiceDeduction entity)
-		{
-			this.SendPropertyChanging();
-			entity.CreditNote = null;
 		}
 	}
 }

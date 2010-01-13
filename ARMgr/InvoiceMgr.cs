@@ -54,13 +54,29 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            BATCH_DETAIL
+            BATCH_DETAIL,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            PAYMENT_LOG_QUERY,
         }
 
         #endregion Enums
 
         #region Constructors (2)
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="paymentLogList"></param>
+        public InvoiceMgr(List<InvoicePaymentLog> paymentLogList)
+            : this(OpInvoiceType.PAYMENT_LOG_QUERY)
+        {
+            this.bs.DataSource = paymentLogList;
+            this.lblCount.Text = String.Format("获得{0}条记录", paymentLogList.Count());
+            this.panelQuery.Visible = false;
+        }
         /// <summary>
         /// 
         /// </summary>

@@ -12,9 +12,9 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-                foreach (Invoice invoice in this.Invoices)
+                foreach (InvoicePaymentLog paymentLog in this.InvoicePaymentLogs)
                 {
-                    result += invoice.RefundAmount.GetValueOrDefault();
+                    result += paymentLog.RefundAmount.GetValueOrDefault();
                 }
                 return result;
             }
@@ -25,9 +25,9 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-                foreach (Invoice invoice in this.Invoices)
+                foreach (InvoicePaymentLog paymentLog in this.InvoicePaymentLogs)
                 {
-                    result += invoice.PaymentAmount.GetValueOrDefault();
+                    result += paymentLog.PaymentAmount;
                 }
                 return result;
             }
@@ -37,7 +37,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.Invoices.Count;
+                return this.InvoicePaymentLogs.Count;
             }
         }
 
