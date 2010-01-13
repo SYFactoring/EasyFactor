@@ -616,7 +616,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ResetClose(object sender, EventArgs e)
+        private void ResetCase(object sender, EventArgs e)
         {
             if (opCaseType == OpCaseType.UPDATE_CASE)
             {
@@ -1044,7 +1044,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 curCase.CoDepartment = null;
                 curCase.OwnerDepartment = null;
             }
-            Close();
 
         }
     }

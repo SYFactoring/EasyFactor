@@ -523,6 +523,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "用户详细信息";
             this.Leave += new System.EventHandler(this.UserDetail_Leave);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserDetail_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.groupPanelUser.ResumeLayout(false);
             this.groupPanelUser.PerformLayout();

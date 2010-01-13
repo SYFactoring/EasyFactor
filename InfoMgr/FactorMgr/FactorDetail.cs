@@ -271,9 +271,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     }
                 }
             }
-
-            Close();
-
         }
 
         /// <summary>

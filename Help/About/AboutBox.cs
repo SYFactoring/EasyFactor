@@ -42,7 +42,7 @@ namespace CMBC.EasyFactor.Help.About
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void ButtonClick(object sender, EventArgs e)
+        private void Close(object sender, EventArgs e)
         {
             this.Close();
         }

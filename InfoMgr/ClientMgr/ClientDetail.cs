@@ -310,7 +310,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     }
                 }
             }
-            Close();
         }
 
         private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)

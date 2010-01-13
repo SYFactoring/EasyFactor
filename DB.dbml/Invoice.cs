@@ -8,7 +8,7 @@ namespace CMBC.EasyFactor.DB.dbml
 {
     public partial class Invoice : BaseObject
     {
-        #region Properties (11)
+		#region Properties (11) 
 
         public DateTime AssignDate
         {
@@ -134,11 +134,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (2)
+		#region Methods (8) 
 
-        // Public Methods (2) 
+		// Public Methods (8) 
 
         public override bool Equals(object obj)
         {
@@ -154,6 +154,94 @@ namespace CMBC.EasyFactor.DB.dbml
             return this.GetHashCode() == right.GetHashCode();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cda"></param>
+        /// <returns></returns>
+        public static string GenerateAssignBatchNo(DateTime date)
+        {
+            DateTime begin = date.Date;
+            DateTime end = begin.AddDays(1);
+            int batchCount = App.Current.DbContext.InvoiceAssignBatches.Count(batch => batch.AssignDate >= begin && batch.AssignDate < end);
+            string assignNo = String.Format("ASS{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            return assignNo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="batchesInMemory"></param>
+        /// <returns></returns>
+        public static string GenerateAssignBatchNo(DateTime date, List<InvoiceAssignBatch> batchesInMemory)
+        {
+            DateTime begin = date.Date;
+            DateTime end = begin.AddDays(1);
+            int batchCount = App.Current.DbContext.InvoiceAssignBatches.Count(batch => batch.AssignDate >= begin && batch.AssignDate < end);
+            batchCount += batchesInMemory.Count(batch => batch.AssignDate >= begin && batch.AssignDate < end);
+            string assignNo = String.Format("ASS{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            return assignNo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cda"></param>
+        /// <returns></returns>
+        public static string GenerateFinanceBatchNo(DateTime date)
+        {
+            DateTime begin = date.Date;
+            DateTime end = begin.AddDays(1);
+            int batchCount = App.Current.DbContext.InvoiceFinanceBatches.Count(batch => batch.FinancePeriodBegin >= begin && batch.FinancePeriodBegin < end);
+            string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            return financeNo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cda"></param>
+        /// <returns></returns>
+        public static string GenerateFinanceBatchNo(DateTime date, List<InvoiceFinanceBatch> batchesInMemory)
+        {
+            DateTime begin = date.Date;
+            DateTime end = begin.AddDays(1);
+            int batchCount = App.Current.DbContext.InvoiceFinanceBatches.Count(batch => batch.FinancePeriodBegin >= begin && batch.FinancePeriodBegin < end);
+            batchCount += batchesInMemory.Count(batch => batch.FinancePeriodBegin >= begin && batch.FinancePeriodBegin < end);
+            string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            return financeNo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cda"></param>
+        /// <returns></returns>
+        public static string GeneratePaymentBatchNo(DateTime date)
+        {
+            DateTime begin = date.Date;
+            DateTime end = begin.AddDays(1);
+            int batchCount = App.Current.DbContext.InvoicePaymentBatches.Count(batch => batch.PaymentDate >= begin && batch.PaymentDate < end);
+            string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            return paymentNo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cda"></param>
+        /// <returns></returns>
+        public static string GeneratePaymentBatchNo(DateTime date, List<InvoicePaymentBatch> batchesInMemory)
+        {
+            DateTime begin = date.Date;
+            DateTime end = begin.AddDays(1);
+            int batchCount = App.Current.DbContext.InvoicePaymentBatches.Count(batch => batch.PaymentDate >= begin && batch.PaymentDate < end);
+            batchCount += batchesInMemory.Count(batch => batch.PaymentDate >= begin && batch.PaymentDate < end);
+            string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            return paymentNo;
+        }
+
         public override int GetHashCode()
         {
             if (this.InvoiceNo == null)
@@ -166,6 +254,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

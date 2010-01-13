@@ -199,14 +199,13 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UserDetail_Leave(object sender, EventArgs e)
+        private void UserDetail_FormClosing(object sender, FormClosingEventArgs e)
         {
             User user = (User)this.userBindingSource.DataSource;
             if (opUserType == OpUserType.UPDATE_USER)
             {
                 user.Restore();
             }
-            Close();
         }
 
         #endregion Methods

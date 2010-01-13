@@ -358,8 +358,6 @@ namespace CMBC.EasyFactor.ARMgr
         {
             Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
             invoice.Restore();
-
-            this.Close();
         }
     }
 }

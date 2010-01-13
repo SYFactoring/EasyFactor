@@ -794,7 +794,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.btnCaseReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCaseReset.TabIndex = 3;
             this.btnCaseReset.Text = "重置";
-            this.btnCaseReset.Click += new System.EventHandler(this.ResetClose);
+            this.btnCaseReset.Click += new System.EventHandler(this.ResetCase);
             // 
             // btnCaseSave
             // 

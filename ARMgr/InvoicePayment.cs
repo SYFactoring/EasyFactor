@@ -118,35 +118,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cda"></param>
-        /// <returns></returns>
-        public static string GenerateBatchNo(DateTime date)
-        {
-            DateTime begin = date.Date;
-            DateTime end = begin.AddDays(1);
-            int batchCount = App.Current.DbContext.InvoicePaymentBatches.Count(batch => batch.PaymentDate >= begin && batch.PaymentDate < end);
-            string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
-            return paymentNo;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cda"></param>
-        /// <returns></returns>
-        public static string GenerateBatchNo(DateTime date, List<InvoicePaymentBatch> batchesInMemory)
-        {
-            DateTime begin = date.Date;
-            DateTime end = begin.AddDays(1);
-            int batchCount = App.Current.DbContext.InvoicePaymentBatches.Count(batch => batch.PaymentDate >= begin && batch.PaymentDate < end);
-            batchCount += batchesInMemory.Count(batch => batch.PaymentDate >= begin && batch.PaymentDate < end);
-            string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
-            return paymentNo;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public void ResetControlsStatus()
         {
             foreach (Control comp in this.panelPaymentBatch.Controls)
@@ -533,7 +504,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             if (batch.PaymentBatchNo == null)
             {
-                batch.PaymentBatchNo = GenerateBatchNo(DateTime.Now.Date);
+                batch.PaymentBatchNo = Invoice.GeneratePaymentBatchNo(DateTime.Now.Date);
             }
             try
             {

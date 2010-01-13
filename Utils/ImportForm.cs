@@ -1067,7 +1067,7 @@ namespace CMBC.EasyFactor.Utils
                                 assignBatch.IsCreateMsg = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                                 assignBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                                 assignBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                                assignBatch.AssignBatchNo = InvoiceAssign.GenerateAssignBatchNo(assignBatch.AssignDate, assignBatches);
+                                assignBatch.AssignBatchNo = Invoice.GenerateAssignBatchNo(assignBatch.AssignDate, assignBatches);
                                 assignBatch.CDA = cda;
                                 assignBatches.Add(assignBatch);
                             }
@@ -1142,7 +1142,7 @@ namespace CMBC.EasyFactor.Utils
                                     financeBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                                     financeBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                                     financeBatch.CheckStatus = "已复核";
-                                    financeBatch.FinanceBatchNo = InvoiceFinance.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin, financeBatches);
+                                    financeBatch.FinanceBatchNo = Invoice.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin, financeBatches);
                                     financeBatch.CDA = cda;
                                     financeBatches.Add(financeBatch);
                                 }
@@ -1189,7 +1189,7 @@ namespace CMBC.EasyFactor.Utils
                                     paymentBatch.IsCreateMsg = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                                     paymentBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                                     paymentBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                                    paymentBatch.PaymentBatchNo = InvoicePayment.GenerateBatchNo(paymentBatch.PaymentDate, paymentBatches);
+                                    paymentBatch.PaymentBatchNo = Invoice.GeneratePaymentBatchNo(paymentBatch.PaymentDate, paymentBatches);
                                     paymentBatch.CheckStatus = "已复核";
                                     paymentBatch.CDA = cda;
                                     paymentBatches.Add(paymentBatch);

@@ -69,36 +69,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cda"></param>
-        /// <returns></returns>
-        public static string GenerateAssignBatchNo(DateTime date)
-        {
-            DateTime begin = date.Date;
-            DateTime end = begin.AddDays(1);
-            int batchCount = App.Current.DbContext.InvoiceAssignBatches.Count(batch => batch.AssignDate >= begin && batch.AssignDate < end);
-            string assignNo = String.Format("ASS{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
-            return assignNo;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="batchesInMemory"></param>
-        /// <returns></returns>
-        public static string GenerateAssignBatchNo(DateTime date, List<InvoiceAssignBatch> batchesInMemory)
-        {
-            DateTime begin = date.Date;
-            DateTime end = begin.AddDays(1);
-            int batchCount = App.Current.DbContext.InvoiceAssignBatches.Count(batch => batch.AssignDate >= begin && batch.AssignDate < end);
-            batchCount += batchesInMemory.Count(batch => batch.AssignDate >= begin && batch.AssignDate < end);
-            string assignNo = String.Format("ASS{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
-            return assignNo;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public void ResetControlsStatus()
         {
             foreach (Control comp in this.panelAssignBatch.Controls)
@@ -532,7 +502,7 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.CDA = this._CDA;
                 if (batch.AssignBatchNo == null)
                 {
-                    batch.AssignBatchNo = GenerateAssignBatchNo(DateTime.Now.Date);
+                    batch.AssignBatchNo = Invoice.GenerateAssignBatchNo(DateTime.Now.Date);
                 }
                 foreach (Invoice invoice in invoiceList)
                 {

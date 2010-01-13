@@ -91,34 +91,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cda"></param>
-        /// <returns></returns>
-        public static string GenerateFinanceBatchNo(DateTime date)
-        {
-            DateTime begin = date.Date;
-            DateTime end = begin.AddDays(1);
-            int batchCount = App.Current.DbContext.InvoiceFinanceBatches.Count(batch => batch.FinancePeriodBegin >= begin && batch.FinancePeriodBegin < end);
-            string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
-            return financeNo;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cda"></param>
-        /// <returns></returns>
-        public static string GenerateFinanceBatchNo(DateTime date, List<InvoiceFinanceBatch> batchesInMemory)
-        {
-            DateTime begin = date.Date;
-            DateTime end = begin.AddDays(1);
-            int batchCount = App.Current.DbContext.InvoiceFinanceBatches.Count(batch => batch.FinancePeriodBegin >= begin && batch.FinancePeriodBegin < end);
-            batchCount += batchesInMemory.Count(batch => batch.FinancePeriodBegin >= begin && batch.FinancePeriodBegin < end);
-            string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
-            return financeNo;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
         public void ResetControlsStatus()
         {
             foreach (Control comp in this.panelFinanceBatch.Controls)
