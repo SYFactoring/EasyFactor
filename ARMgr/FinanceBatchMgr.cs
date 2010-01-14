@@ -118,9 +118,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (5)
+        #region Methods (8)
 
-        // Private Methods (5) 
+        // Private Methods (8) 
 
         /// <summary>
         /// 
@@ -141,6 +141,31 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.CheckDate = DateTime.Now.Date;
             }
             App.Current.DbContext.SubmitChanges();
+        }
+
+        private void DeleteBatch(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            if (selectedBatch.Invoices.Count > 0)
+            {
+                MessageBox.Show("不能删除此批次，它包含相关发票信息", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            App.Current.DbContext.InvoiceFinanceBatches.DeleteOnSubmit(selectedBatch);
+            try
+            {
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
         }
 
         /// <summary>
@@ -176,6 +201,20 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 this.SelectBatch(sender, e);
             }
+        }
+
+        private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+               this.dgvBatches.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                dgvBatches.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -214,28 +253,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SelectBatch(object sender, EventArgs e)
-        {
-            if (this.dgvBatches.SelectedRows.Count == 0)
-            {
-                return;
-            }
-            InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            this.Selected = selectedBatch;
-            if (this.OwnerForm != null)
-            {
-                this.OwnerForm.DialogResult = DialogResult.Yes;
-                this.OwnerForm.Close();
-            }
-        }
-
-        #endregion Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Reject(object sender, EventArgs e)
         {
             if (this.dgvBatches.SelectedRows.Count == 0)
@@ -252,18 +269,26 @@ namespace CMBC.EasyFactor.ARMgr
             App.Current.DbContext.SubmitChanges();
         }
 
-        private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectBatch(object sender, EventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-               this.dgvBatches.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgvBatches.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            this.Selected = selectedBatch;
+            if (this.OwnerForm != null)
+            {
+                this.OwnerForm.DialogResult = DialogResult.Yes;
+                this.OwnerForm.Close();
+            }
         }
+
+        #endregion Methods
     }
 }

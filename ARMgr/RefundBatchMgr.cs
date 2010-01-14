@@ -266,5 +266,41 @@ namespace CMBC.EasyFactor.ARMgr
                 dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
                 TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
+
+        private void DeleteBatch(object sender, EventArgs e)
+        {
+
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            if (MessageBox.Show("是否打算删除此" + selectedBatch.BatchCount + "条还款记录", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            {
+                foreach (InvoiceRefundLog log in selectedBatch.InvoiceRefundLogs)
+                {
+                    Invoice invoice = log.Invoice;
+                    invoice.RefundAmount -= log.RefundAmount;
+                }
+                App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(selectedBatch.InvoiceRefundLogs);
+                App.Current.DbContext.InvoiceRefundBatches.DeleteOnSubmit(selectedBatch);
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    foreach (InvoiceRefundLog log in selectedBatch.InvoiceRefundLogs)
+                    {
+                        Invoice invoice = log.Invoice;
+                        invoice.RefundAmount += log.RefundAmount;
+                    }
+                    MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+            }
+
+        }
     }
 }

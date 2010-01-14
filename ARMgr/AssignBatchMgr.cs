@@ -118,9 +118,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (7)
+        #region Methods (9)
 
-        // Private Methods (7) 
+        // Private Methods (9) 
 
         /// <summary>
         /// 
@@ -141,6 +141,31 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.CheckDate = DateTime.Now.Date;
             }
             App.Current.DbContext.SubmitChanges();
+        }
+
+        private void DeleteBatch(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            if (selectedBatch.Invoices.Count > 0)
+            {
+                MessageBox.Show("不能删除此批次，它包含相关发票信息", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            App.Current.DbContext.InvoiceAssignBatches.DeleteOnSubmit(selectedBatch);
+            try
+            {
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
         }
 
         /// <summary>
@@ -197,6 +222,20 @@ namespace CMBC.EasyFactor.ARMgr
                     }
                 }
             }
+        }
+
+        private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                dgvBatches.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                dgvBatches.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -270,19 +309,5 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
-
-        private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                dgvBatches.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgvBatches.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
-        }
     }
 }

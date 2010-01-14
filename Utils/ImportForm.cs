@@ -258,6 +258,8 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private object[,] GetValueArray(string fileName, int sheetIndex)
         {
+            ReleaseResource();
+
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             this.app = new ApplicationClass() { Visible = false };
             if (this.app == null)
@@ -265,6 +267,7 @@ namespace CMBC.EasyFactor.Utils
                 MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return null;
             }
+
             this.workbook = (WorkbookClass)app.Workbooks.Open(
                 fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
@@ -1175,9 +1178,9 @@ namespace CMBC.EasyFactor.Utils
                             }
                             financeBatch.FinanceAmount += invoice.FinanceAmount.Value;
                             invoice.InvoiceFinanceBatch = financeBatch;
+                            invoice.FinanceDate = financeBatch.FinancePeriodBegin;
+                            invoice.FinanceDueDate = financeBatch.FinnacePeriodEnd;
                         }
-                        invoice.FinanceDate = financeBatch.FinancePeriodBegin;
-                        invoice.FinanceDueDate = financeBatch.FinnacePeriodEnd;
 
                         //付款批次信息
                         column = 27;
@@ -1256,7 +1259,7 @@ namespace CMBC.EasyFactor.Utils
                             DateTime? refundDate = (System.Nullable<DateTime>)valueArray[row, column++];
                             if (refundDate != null)
                             {
-                                refundBatch = refundBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.RefundDate == refundDate&&i.RefundType==refundType);
+                                refundBatch = refundBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.RefundDate == refundDate && i.RefundType == refundType);
                                 if (refundBatch == null)
                                 {
                                     refundBatch = new InvoiceRefundBatch();
