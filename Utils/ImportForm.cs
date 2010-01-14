@@ -1167,7 +1167,6 @@ namespace CMBC.EasyFactor.Utils
                         //融资信息
                         column = 26;
                         invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
-
                         if (invoice.FinanceAmount.HasValue)
                         {
                             if (financeBatch == null)
@@ -1177,6 +1176,8 @@ namespace CMBC.EasyFactor.Utils
                             financeBatch.FinanceAmount += invoice.FinanceAmount.Value;
                             invoice.InvoiceFinanceBatch = financeBatch;
                         }
+                        invoice.FinanceDate = financeBatch.FinancePeriodBegin;
+                        invoice.FinanceDueDate = financeBatch.FinnacePeriodEnd;
 
                         //付款批次信息
                         column = 27;

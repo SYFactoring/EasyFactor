@@ -398,7 +398,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
-                              where invoice.InvoiceAssignBatch.CDACode == this._CDA.CDACode && (invoice.RefundAmount - invoice.FinanceAmount < 0.00000001)
+                              where invoice.InvoiceAssignBatch.CDACode == this._CDA.CDACode && (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < 0.00000001)
                               select invoice;
             this.invoiceBindingSource.DataSource = queryResult;
             this.StatBatch();
