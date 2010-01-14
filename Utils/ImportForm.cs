@@ -475,7 +475,7 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("集团客户号错误: " + groupNo);
                         }
                     }
-
+                    column++;
                     client.RegistrationNumber = String.Format("{0:G}", valueArray[row, column++]);
                     client.CompanyCode = String.Format("{0:G}", valueArray[row, column++]);
                     string departmentName = String.Format("{0:G}", valueArray[row, column++]);
