@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="PaymentBatchMgr.cs" company="Yiming Liu@Fudan">
+// <copyright file="RefundBatchMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -70,7 +70,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             this.cda = selectedCDA;
             this.panelQuery.Visible = false;
-            this.bs.DataSource = cda.InvoicePaymentBatches;
+            this.bs.DataSource = cda.InvoiceRefundBatches;
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (batchType == OpBatchType.CHECK)
             {
                 this.cbCheckStatus.Text = "未复核";
-                var queryResult = App.Current.DbContext.InvoicePaymentBatches.Where(i => i.CheckStatus == "未复核");
+                var queryResult = App.Current.DbContext.InvoiceRefundBatches.Where(i => i.CheckStatus == "未复核");
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
@@ -108,9 +108,9 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         /// <summary>
-        /// Gets or sets selected PaymentBatch
+        /// Gets or sets selected RefundBatch
         /// </summary>
-        public InvoicePaymentBatch Selected
+        public InvoiceRefundBatch Selected
         {
             get;
             set;
@@ -135,7 +135,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             foreach (DataGridViewRow row in this.dgvBatches.SelectedRows)
             {
-                InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[row.Index];
+                InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[row.Index];
                 batch.CheckStatus = "已复核";
                 batch.CheckUserName = App.Current.CurUser.Name;
                 batch.CheckDate = DateTime.Now.Date;
@@ -154,8 +154,8 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            InvoicePaymentLogMgr logMgr = new InvoicePaymentLogMgr(selectedBatch.InvoicePaymentLogs.ToList());
+            InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            RefundBatchDetail logMgr = new RefundBatchDetail(selectedBatch.InvoiceRefundLogs.ToList());
             QueryForm queryUI = new QueryForm(logMgr, "批次详情");
             logMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
@@ -178,27 +178,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        private void dgvBatches_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            DataGridViewColumn column = this.dgvBatches.Columns[e.ColumnIndex];
-            if (column == colIsMsgCreate)
-            {
-                Object originalData = e.Value;
-                if (originalData != null)
-                {
-                    bool result = (bool)originalData;
-                    if (result)
-                    {
-                        e.Value = "Y";
-                    }
-                    else
-                    {
-                        e.Value = "N";
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -211,21 +190,21 @@ namespace CMBC.EasyFactor.ARMgr
                 DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
                 DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
                 string status = this.cbCheckStatus.Text;
-                string paymentType = this.cbRefundType.Text;
+                string refundType = this.cbRefundType.Text;
 
-                var queryResult = App.Current.DbContext.InvoicePaymentBatches.Where(i =>
-                    i.PaymentBatchNo.Contains(this.tbRefundBatchNo.Text)
-                    && (beginDate != this.dateFrom.MinDate ? i.PaymentDate >= beginDate : true)
-                    && (endDate != this.dateTo.MinDate ? i.PaymentDate <= endDate : true)
+                var queryResult = App.Current.DbContext.InvoiceRefundBatches.Where(i =>
+                    i.RefundBatchNo.Contains(this.tbRefundBatchNo.Text)
+                    && (beginDate != this.dateFrom.MinDate ? i.RefundDate >= beginDate : true)
+                    && (endDate != this.dateTo.MinDate ? i.RefundDate <= endDate : true)
                     && (status != string.Empty ? i.CheckStatus == status : true)
-                    && (paymentType!=string.Empty?i.PaymentType==paymentType:true)
+                    && (refundType!=string.Empty?i.RefundType==refundType:true)
                     );
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
             else if (opBatchType == OpBatchType.DETAIL)
             {
-                var queryResult = cda.InvoicePaymentBatches.Where(i => i.PaymentBatchNo.Contains(this.tbRefundBatchNo.Text));
+                var queryResult = cda.InvoiceRefundBatches.Where(i => i.RefundBatchNo.Contains(this.tbRefundBatchNo.Text));
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
@@ -263,7 +242,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
             this.Selected = selectedBatch;
             if (this.OwnerForm != null)
             {

@@ -1547,10 +1547,8 @@ namespace CMBC.EasyFactor.Utils
                     invoice.FinanceDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
 
                     invoice.PaymentAmount2 = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.PaymentDate2 = (System.Nullable<DateTime>)valueArray[row, column++];
 
                     invoice.RefundAmount2 = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.RefundDate2 = (System.Nullable<DateTime>)valueArray[row, column++];
 
                     invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
                     invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];

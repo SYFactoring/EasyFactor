@@ -19,5 +19,29 @@ namespace CMBC.EasyFactor.DB.dbml
                 return result;
             }
         }
+        public int BatchCount
+        {
+            get
+            {
+                return this.InvoiceRefundLogs.Count;
+            }
+        }
+
+        public string SellerName
+        {
+            get
+            {
+                return this.CDA.Case.SellerClient.ToString();
+            }
+        }
+
+        public string BuyerName
+        {
+            get
+            {
+                return this.CDA.Case.BuyerClient.ToString();
+            }
+        }
+
     }
 }

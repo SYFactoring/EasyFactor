@@ -8,13 +8,13 @@ namespace CMBC.EasyFactor.ARMgr
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -82,9 +82,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.AutoGenerateColumns = false;
             this.superValidator.Enabled = false;
             ControlUtil.SetDoubleBuffered(this.dgvInvoices);
-
-            this.dgvInvoices.CellFormatting += new DataGridViewCellFormattingEventHandler(dgvInvoices_CellFormatting);
-            this.dgvInvoices.CellParsing += new DataGridViewCellParsingEventHandler(dgvInvoices_CellParsing);
 
             foreach (DataGridViewColumn column in this.dgvInvoices.Columns)
             {
@@ -208,15 +205,6 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
                 {
                     invoice.PaymentAmount2 = invoice.AssignAmount;
-                    if (invoice.PaymentAmount2.HasValue)
-                    {
-                        invoice.PaymentDate2 = DateTime.Now.Date;
-                    }
-                    invoice.RefundAmount2 = invoice.FinanceAmount;
-                    if (invoice.RefundAmount2.HasValue)
-                    {
-                        invoice.RefundDate2 = DateTime.Now.Date;
-                    }
                     ResetRow(e.RowIndex, true);
                 }
                 else
@@ -240,7 +228,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colFinanceDate || col == colFinanceDueDate || col == colPaymentDate2 || col == colRefundDate2 || col == colCreditNoteDate2)
+            if (col == colAssignDate || col == colDueDate || col == colFinanceDate || col == colFinanceDueDate || col == colCreditNoteDate2)
             {
                 DateTime date = (DateTime)e.Value;
                 e.Value = date.ToString("yyyyMMdd");
@@ -266,7 +254,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colPaymentDate2 || col == colRefundDate2 || col == colCreditNoteDate2)
+            if (col == colCreditNoteDate2)
             {
                 string str = (string)e.Value;
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
@@ -286,7 +274,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colPaymentDate2 || col == colRefundDate2 || col == colCreditNoteDate2)
+            if (col == colCreditNoteDate2)
             {
                 string str = (string)e.FormattedValue;
                 DateTime result;
@@ -296,7 +284,7 @@ namespace CMBC.EasyFactor.ARMgr
                     e.Cancel = true;
                 }
             }
-            else if (col == colPaymentAmount2 || col == colRefundAmount2)
+            else if (col == colPaymentAmount2)
             {
                 string str = (string)e.FormattedValue;
                 double result;
@@ -323,7 +311,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            if (this.dgvInvoices.Columns[e.ColumnIndex] == colPaymentAmount2 || this.dgvInvoices.Columns[e.ColumnIndex] == colRefundAmount2)
+            if (this.dgvInvoices.Columns[e.ColumnIndex] == colPaymentAmount2)
             {
                 StatBatch();
             }
@@ -462,8 +450,6 @@ namespace CMBC.EasyFactor.ARMgr
         {
             this.dgvInvoices.Rows[rowIndex].Cells["colPaymentAmount2"].ReadOnly = !editable;
             this.dgvInvoices.Rows[rowIndex].Cells["colPaymentDate2"].ReadOnly = !editable;
-            this.dgvInvoices.Rows[rowIndex].Cells["colRefundAmount2"].ReadOnly = !editable;
-            this.dgvInvoices.Rows[rowIndex].Cells["colRefundDate2"].ReadOnly = !editable;
             this.dgvInvoices.Rows[rowIndex].Cells["colCreditNoteNo2"].ReadOnly = !editable;
             this.dgvInvoices.Rows[rowIndex].Cells["colCreditNoteDate2"].ReadOnly = !editable;
             if (!editable)
@@ -471,9 +457,6 @@ namespace CMBC.EasyFactor.ARMgr
                 IList invoiceList = this.invoiceBindingSource.List;
                 Invoice invoice = (Invoice)invoiceList[rowIndex];
                 invoice.PaymentAmount2 = null;
-                invoice.PaymentDate2 = null;
-                invoice.RefundAmount2 = null;
-                invoice.RefundDate2 = null;
                 invoice.CreditNoteDate2 = null;
                 invoice.CreditNoteNo2 = null;
             }
@@ -534,7 +517,7 @@ namespace CMBC.EasyFactor.ARMgr
                                 throw new Exception("还款ID错误");
                             }
                         }
-                        log.PaymentAmount = invoice.PaymentAmount2;
+                        log.PaymentAmount = invoice.PaymentAmount2.GetValueOrDefault();
                         log.Invoice = invoice;
                         CreditNote creditNote = null;
                         if (invoice.CreditNoteNo2 != null && invoice.CreditNoteNo2 != string.Empty)
@@ -636,17 +619,14 @@ namespace CMBC.EasyFactor.ARMgr
         {
             IList paymentLogList = this.invoiceBindingSource.List;
             double totalPayment = 0;
-            double totalRefund = 0;
             for (int i = 0; i < paymentLogList.Count; i++)
             {
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     totalPayment += ((Invoice)paymentLogList[i]).PaymentAmount2.GetValueOrDefault();
-                    totalRefund += ((Invoice)paymentLogList[i]).RefundAmount2.GetValueOrDefault();
                 }
             }
             this.tbTotalPayment.Text = String.Format("{0:N2}", totalPayment);
-            this.tbTotalRefund.Text = String.Format("{0:N2}", totalRefund);
         }
 
         /// <summary>
@@ -660,16 +640,6 @@ namespace CMBC.EasyFactor.ARMgr
                 if (TypeUtil.LessZero(invoice.AssignOutstanding))
                 {
                     MessageBox.Show("付款金额不能大于转让金额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
-                }
-                if (TypeUtil.LessZero(invoice.FinanceOutstanding))
-                {
-                    MessageBox.Show("还款金额不能大于融资金额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
-                }
-                if (TypeUtil.GreaterZero(invoice.RefundAmount2 - invoice.PaymentAmount2))
-                {
-                    MessageBox.Show("还款金额不能大于付款金额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
             }

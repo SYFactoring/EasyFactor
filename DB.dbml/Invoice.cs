@@ -149,21 +149,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 this.SendPropertyChanged("PaymentAmount2");
             }
         }
-        private DateTime? _PaymentDate2;
-
-        public DateTime? PaymentDate2
-        {
-            get
-            {
-                return _PaymentDate2;
-            }
-            set
-            {
-                this.SendPropertyChanging();
-                this._PaymentDate2 = value;
-                this.SendPropertyChanged("PaymentDate2");
-            }
-        }
 
         private double? _RefundAmount2;
 
@@ -181,22 +166,13 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        private DateTime? _RefundDate2;
-
-        public DateTime? RefundDate2
-        {
-            get
-            {
-                return _RefundDate2;
-            }
-            set
-            {
-                this.SendPropertyChanging();
-                this._RefundDate2 = value;
-                this.SendPropertyChanged("RefundDate2");
-            }
-        }
         public int? PaymentLogID2
+        {
+            set;
+            get;
+        }
+
+        public int? RefundLogID2
         {
             set;
             get;

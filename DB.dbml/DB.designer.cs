@@ -10759,7 +10759,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _InvoiceNo;
 		
-		private System.Nullable<double> _PaymentAmount;
+		private double _PaymentAmount;
 		
 		private string _CreditNoteNo;
 		
@@ -10781,7 +10781,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnPaymentBatchNoChanged();
     partial void OnInvoiceNoChanging(string value);
     partial void OnInvoiceNoChanged();
-    partial void OnPaymentAmountChanging(System.Nullable<double> value);
+    partial void OnPaymentAmountChanging(double value);
     partial void OnPaymentAmountChanged();
     partial void OnCreditNoteNoChanging(string value);
     partial void OnCreditNoteNoChanged();
@@ -10866,7 +10866,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_PaymentAmount", DbType="Float NOT NULL")]
-		public System.Nullable<double> PaymentAmount
+		public double PaymentAmount
 		{
 			get
 			{

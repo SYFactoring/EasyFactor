@@ -1,6 +1,6 @@
 ﻿namespace CMBC.EasyFactor.ARMgr
 {
-    partial class InvoicePaymentLogMgr
+    partial class PaymentBatchDetail
     {
         /// <summary> 
         /// Required designer variable.
@@ -33,9 +33,6 @@
             this.dgvPaymentLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRefundDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditNoteNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditNoteDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,9 +56,6 @@
             this.dgvPaymentLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colInvoiceNo,
             this.colPaymentAmount,
-            this.colPaymentDate,
-            this.colRefundAmount,
-            this.colRefundDate,
             this.colCreditNoteNo,
             this.colCreditNoteDate,
             this.colComment});
@@ -94,27 +88,6 @@
             this.colPaymentAmount.HeaderText = "付款金额";
             this.colPaymentAmount.Name = "colPaymentAmount";
             this.colPaymentAmount.ReadOnly = true;
-            // 
-            // colPaymentDate
-            // 
-            this.colPaymentDate.DataPropertyName = "PaymentDate";
-            this.colPaymentDate.HeaderText = "付款日";
-            this.colPaymentDate.Name = "colPaymentDate";
-            this.colPaymentDate.ReadOnly = true;
-            // 
-            // colRefundAmount
-            // 
-            this.colRefundAmount.DataPropertyName = "RefundAmount";
-            this.colRefundAmount.HeaderText = "还款金额";
-            this.colRefundAmount.Name = "colRefundAmount";
-            this.colRefundAmount.ReadOnly = true;
-            // 
-            // colRefundDate
-            // 
-            this.colRefundDate.DataPropertyName = "RefundDate";
-            this.colRefundDate.HeaderText = "还款日";
-            this.colRefundDate.Name = "colRefundDate";
-            this.colRefundDate.ReadOnly = true;
             // 
             // colCreditNoteNo
             // 
@@ -154,9 +127,6 @@
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvPaymentLogs;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;

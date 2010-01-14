@@ -155,7 +155,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            InvoicePaymentLogMgr logMgr = new InvoicePaymentLogMgr(selectedBatch.InvoicePaymentLogs.ToList());
+            PaymentBatchDetail logMgr = new PaymentBatchDetail(selectedBatch.InvoicePaymentLogs.ToList());
             QueryForm queryUI = new QueryForm(logMgr, "批次详情");
             logMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);

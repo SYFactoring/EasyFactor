@@ -11,11 +11,11 @@ using CMBC.EasyFactor.DB.dbml;
 
 namespace CMBC.EasyFactor.ARMgr
 {
-    public partial class InvoicePaymentLogMgr : UserControl
+    public partial class PaymentBatchDetail : UserControl
     {
         private BindingSource bs;
 
-        public InvoicePaymentLogMgr(List<InvoicePaymentLog> logList)
+        public PaymentBatchDetail(List<InvoicePaymentLog> logList)
         {
             InitializeComponent();
             this.bs = new BindingSource();

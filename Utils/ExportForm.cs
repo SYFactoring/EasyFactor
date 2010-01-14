@@ -213,9 +213,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.FinanceDate;
                     datasheet.Cells[row + 2, column++] = invoice.FinanceDueDate;
                     datasheet.Cells[row + 2, column++] = invoice.PaymentAmount2;
-                    datasheet.Cells[row + 2, column++] = invoice.PaymentDate2;
                     datasheet.Cells[row + 2, column++] = invoice.RefundAmount2;
-                    datasheet.Cells[row + 2, column++] = invoice.RefundDate2;
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
                     datasheet.Cells[row + 2, column++] = invoice.CommissionDate;
                     datasheet.Cells[row + 2, column++] = invoice.Interest;

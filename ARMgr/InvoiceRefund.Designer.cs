@@ -22,10 +22,9 @@
         private System.Windows.Forms.BindingNavigator invoiceBindingNavigator;
         private System.Windows.Forms.BindingSource invoiceBindingSource;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoices;
-        private DevComponents.DotNetBar.Controls.CheckBoxX isCreateMsgCheckBox;
         private DevComponents.DotNetBar.LabelX lblTotalPayment;
-        private DevComponents.DotNetBar.PanelEx panelPaymentBatch;
-        private DevComponents.DotNetBar.Controls.TextBoxX paymentBatchNoTextBox;
+        private DevComponents.DotNetBar.PanelEx panelRefundBatch;
+        private DevComponents.DotNetBar.Controls.TextBoxX refundBatchNoTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput paymentDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX tbTotalPayment;
 
@@ -61,39 +60,34 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevComponents.DotNetBar.LabelX paymentBatchNoLabel;
-            DevComponents.DotNetBar.LabelX paymentDateLabel;
+            DevComponents.DotNetBar.LabelX refundBatchNoLabel;
+            DevComponents.DotNetBar.LabelX refundDateLabel;
             DevComponents.DotNetBar.LabelX commentLabel;
-            DevComponents.DotNetBar.LabelX lblPaymentType;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoicePayment));
+            DevComponents.DotNetBar.LabelX lblRefundType;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceRefund));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panelPaymentBatch = new DevComponents.DotNetBar.PanelEx();
+            this.panelRefundBatch = new DevComponents.DotNetBar.PanelEx();
             this.btnPaymentBatchImport = new DevComponents.DotNetBar.ButtonX();
             this.btnPaymentBatchExport = new DevComponents.DotNetBar.ButtonX();
             this.btnPaymentBatchSelect = new DevComponents.DotNetBar.ButtonX();
             this.lblTotalRefund = new DevComponents.DotNetBar.LabelX();
             this.tbTotalRefund = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnPaymentBatchNew = new DevComponents.DotNetBar.ButtonX();
-            this.tbPaymentType = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cbRefundType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnPaymentBatchSave = new DevComponents.DotNetBar.ButtonX();
             this.lblTotalPayment = new DevComponents.DotNetBar.LabelX();
             this.tbTotalPayment = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.isCreateMsgCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.paymentDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.paymentBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.refundBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.invoiceBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -123,17 +117,12 @@
             this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentAmount2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentDate2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRefundAmount2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRefundDate2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditNoteNo2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditNoteDate2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            paymentBatchNoLabel = new DevComponents.DotNetBar.LabelX();
-            paymentDateLabel = new DevComponents.DotNetBar.LabelX();
+            refundBatchNoLabel = new DevComponents.DotNetBar.LabelX();
+            refundDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
-            lblPaymentType = new DevComponents.DotNetBar.LabelX();
-            this.panelPaymentBatch.SuspendLayout();
+            lblRefundType = new DevComponents.DotNetBar.LabelX();
+            this.panelRefundBatch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).BeginInit();
@@ -144,31 +133,31 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
-            // paymentBatchNoLabel
+            // refundBatchNoLabel
             // 
-            paymentBatchNoLabel.AutoSize = true;
-            // 
-            // 
-            // 
-            paymentBatchNoLabel.BackgroundStyle.Class = "";
-            paymentBatchNoLabel.Location = new System.Drawing.Point(25, 6);
-            paymentBatchNoLabel.Name = "paymentBatchNoLabel";
-            paymentBatchNoLabel.Size = new System.Drawing.Size(56, 16);
-            paymentBatchNoLabel.TabIndex = 0;
-            paymentBatchNoLabel.Text = "还款批号";
-            // 
-            // paymentDateLabel
-            // 
-            paymentDateLabel.AutoSize = true;
+            refundBatchNoLabel.AutoSize = true;
             // 
             // 
             // 
-            paymentDateLabel.BackgroundStyle.Class = "";
-            paymentDateLabel.Location = new System.Drawing.Point(206, 6);
-            paymentDateLabel.Name = "paymentDateLabel";
-            paymentDateLabel.Size = new System.Drawing.Size(47, 16);
-            paymentDateLabel.TabIndex = 2;
-            paymentDateLabel.Text = "还款日:";
+            refundBatchNoLabel.BackgroundStyle.Class = "";
+            refundBatchNoLabel.Location = new System.Drawing.Point(25, 6);
+            refundBatchNoLabel.Name = "refundBatchNoLabel";
+            refundBatchNoLabel.Size = new System.Drawing.Size(56, 16);
+            refundBatchNoLabel.TabIndex = 0;
+            refundBatchNoLabel.Text = "还款批号";
+            // 
+            // refundDateLabel
+            // 
+            refundDateLabel.AutoSize = true;
+            // 
+            // 
+            // 
+            refundDateLabel.BackgroundStyle.Class = "";
+            refundDateLabel.Location = new System.Drawing.Point(206, 6);
+            refundDateLabel.Name = "refundDateLabel";
+            refundDateLabel.Size = new System.Drawing.Size(47, 16);
+            refundDateLabel.TabIndex = 2;
+            refundDateLabel.Text = "还款日:";
             // 
             // commentLabel
             // 
@@ -183,53 +172,52 @@
             commentLabel.TabIndex = 9;
             commentLabel.Text = "备注";
             // 
-            // lblPaymentType
+            // lblRefundType
             // 
-            lblPaymentType.AutoSize = true;
+            lblRefundType.AutoSize = true;
             // 
             // 
             // 
-            lblPaymentType.BackgroundStyle.Class = "";
-            lblPaymentType.Location = new System.Drawing.Point(25, 31);
-            lblPaymentType.Name = "lblPaymentType";
-            lblPaymentType.Size = new System.Drawing.Size(56, 16);
-            lblPaymentType.TabIndex = 4;
-            lblPaymentType.Text = "还款类型";
+            lblRefundType.BackgroundStyle.Class = "";
+            lblRefundType.Location = new System.Drawing.Point(25, 31);
+            lblRefundType.Name = "lblRefundType";
+            lblRefundType.Size = new System.Drawing.Size(56, 16);
+            lblRefundType.TabIndex = 4;
+            lblRefundType.Text = "还款类型";
             // 
-            // panelPaymentBatch
+            // panelRefundBatch
             // 
-            this.panelPaymentBatch.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelPaymentBatch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelPaymentBatch.Controls.Add(this.btnPaymentBatchImport);
-            this.panelPaymentBatch.Controls.Add(this.btnPaymentBatchExport);
-            this.panelPaymentBatch.Controls.Add(this.btnPaymentBatchSelect);
-            this.panelPaymentBatch.Controls.Add(this.lblTotalRefund);
-            this.panelPaymentBatch.Controls.Add(this.tbTotalRefund);
-            this.panelPaymentBatch.Controls.Add(this.btnPaymentBatchNew);
-            this.panelPaymentBatch.Controls.Add(this.tbPaymentType);
-            this.panelPaymentBatch.Controls.Add(lblPaymentType);
-            this.panelPaymentBatch.Controls.Add(this.btnPaymentBatchSave);
-            this.panelPaymentBatch.Controls.Add(this.lblTotalPayment);
-            this.panelPaymentBatch.Controls.Add(this.tbTotalPayment);
-            this.panelPaymentBatch.Controls.Add(commentLabel);
-            this.panelPaymentBatch.Controls.Add(this.commentTextBox);
-            this.panelPaymentBatch.Controls.Add(this.isCreateMsgCheckBox);
-            this.panelPaymentBatch.Controls.Add(paymentDateLabel);
-            this.panelPaymentBatch.Controls.Add(this.paymentDateDateTimePicker);
-            this.panelPaymentBatch.Controls.Add(paymentBatchNoLabel);
-            this.panelPaymentBatch.Controls.Add(this.paymentBatchNoTextBox);
-            this.panelPaymentBatch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelPaymentBatch.Location = new System.Drawing.Point(0, 0);
-            this.panelPaymentBatch.Name = "panelPaymentBatch";
-            this.panelPaymentBatch.Size = new System.Drawing.Size(1069, 81);
-            this.panelPaymentBatch.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelPaymentBatch.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelPaymentBatch.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelPaymentBatch.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelPaymentBatch.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.panelPaymentBatch.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelPaymentBatch.Style.GradientAngle = 90;
-            this.panelPaymentBatch.TabIndex = 0;
+            this.panelRefundBatch.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelRefundBatch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelRefundBatch.Controls.Add(this.btnPaymentBatchImport);
+            this.panelRefundBatch.Controls.Add(this.btnPaymentBatchExport);
+            this.panelRefundBatch.Controls.Add(this.btnPaymentBatchSelect);
+            this.panelRefundBatch.Controls.Add(this.lblTotalRefund);
+            this.panelRefundBatch.Controls.Add(this.tbTotalRefund);
+            this.panelRefundBatch.Controls.Add(this.btnPaymentBatchNew);
+            this.panelRefundBatch.Controls.Add(this.cbRefundType);
+            this.panelRefundBatch.Controls.Add(lblRefundType);
+            this.panelRefundBatch.Controls.Add(this.btnPaymentBatchSave);
+            this.panelRefundBatch.Controls.Add(this.lblTotalPayment);
+            this.panelRefundBatch.Controls.Add(this.tbTotalPayment);
+            this.panelRefundBatch.Controls.Add(commentLabel);
+            this.panelRefundBatch.Controls.Add(this.commentTextBox);
+            this.panelRefundBatch.Controls.Add(refundDateLabel);
+            this.panelRefundBatch.Controls.Add(this.paymentDateDateTimePicker);
+            this.panelRefundBatch.Controls.Add(refundBatchNoLabel);
+            this.panelRefundBatch.Controls.Add(this.refundBatchNoTextBox);
+            this.panelRefundBatch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelRefundBatch.Location = new System.Drawing.Point(0, 0);
+            this.panelRefundBatch.Name = "panelRefundBatch";
+            this.panelRefundBatch.Size = new System.Drawing.Size(1069, 81);
+            this.panelRefundBatch.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelRefundBatch.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelRefundBatch.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelRefundBatch.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelRefundBatch.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelRefundBatch.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelRefundBatch.Style.GradientAngle = 90;
+            this.panelRefundBatch.TabIndex = 0;
             // 
             // btnPaymentBatchImport
             // 
@@ -303,17 +291,20 @@
             this.btnPaymentBatchNew.Text = "新建批次";
             this.btnPaymentBatchNew.Click += new System.EventHandler(this.NewBatch);
             // 
-            // tbPaymentType
+            // cbRefundType
             // 
-            // 
-            // 
-            // 
-            this.tbPaymentType.Border.Class = "TextBoxBorder";
-            this.tbPaymentType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "PaymentType", true));
-            this.tbPaymentType.Location = new System.Drawing.Point(90, 29);
-            this.tbPaymentType.Name = "tbPaymentType";
-            this.tbPaymentType.Size = new System.Drawing.Size(100, 20);
-            this.tbPaymentType.TabIndex = 5;
+            this.cbRefundType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "RefundType", true));
+            this.cbRefundType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbRefundType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRefundType.Items.AddRange(new object[] {
+            "买方付款",
+            "卖方还款",
+            "担保付款",
+            "间接付款"});
+            this.cbRefundType.Location = new System.Drawing.Point(90, 29);
+            this.cbRefundType.Name = "cbRefundType";
+            this.cbRefundType.Size = new System.Drawing.Size(100, 21);
+            this.cbRefundType.TabIndex = 5;
             // 
             // batchBindingSource
             // 
@@ -369,20 +360,6 @@
             this.commentTextBox.Size = new System.Drawing.Size(307, 43);
             this.commentTextBox.TabIndex = 10;
             // 
-            // isCreateMsgCheckBox
-            // 
-            this.isCreateMsgCheckBox.AutoSize = true;
-            // 
-            // 
-            // 
-            this.isCreateMsgCheckBox.BackgroundStyle.Class = "";
-            this.isCreateMsgCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.batchBindingSource, "IsCreateMsg", true));
-            this.isCreateMsgCheckBox.Location = new System.Drawing.Point(25, 55);
-            this.isCreateMsgCheckBox.Name = "isCreateMsgCheckBox";
-            this.isCreateMsgCheckBox.Size = new System.Drawing.Size(120, 16);
-            this.isCreateMsgCheckBox.TabIndex = 6;
-            this.isCreateMsgCheckBox.Text = "是否生成EDI报文";
-            // 
             // paymentDateDateTimePicker
             // 
             // 
@@ -390,7 +367,7 @@
             // 
             this.paymentDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.paymentDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.paymentDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "PaymentDate", true));
+            this.paymentDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "RefundDate", true));
             this.paymentDateDateTimePicker.Location = new System.Drawing.Point(259, 4);
             // 
             // 
@@ -417,17 +394,17 @@
             this.paymentDateDateTimePicker.Size = new System.Drawing.Size(120, 20);
             this.paymentDateDateTimePicker.TabIndex = 3;
             // 
-            // paymentBatchNoTextBox
+            // refundBatchNoTextBox
             // 
             // 
             // 
             // 
-            this.paymentBatchNoTextBox.Border.Class = "TextBoxBorder";
-            this.paymentBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "PaymentBatchNo", true));
-            this.paymentBatchNoTextBox.Location = new System.Drawing.Point(90, 3);
-            this.paymentBatchNoTextBox.Name = "paymentBatchNoTextBox";
-            this.paymentBatchNoTextBox.Size = new System.Drawing.Size(100, 20);
-            this.paymentBatchNoTextBox.TabIndex = 1;
+            this.refundBatchNoTextBox.Border.Class = "TextBoxBorder";
+            this.refundBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "RefundBatchNo", true));
+            this.refundBatchNoTextBox.Location = new System.Drawing.Point(90, 3);
+            this.refundBatchNoTextBox.Name = "refundBatchNoTextBox";
+            this.refundBatchNoTextBox.Size = new System.Drawing.Size(100, 20);
+            this.refundBatchNoTextBox.TabIndex = 1;
             // 
             // invoiceBindingNavigator
             // 
@@ -552,23 +529,17 @@
             this.colFinanceOutstanding,
             this.colFinanceDate,
             this.colFinanceDueDate,
-            this.colPaymentAmount2,
-            this.colPaymentDate2,
-            this.colRefundAmount2,
-            this.colRefundDate2,
-            this.colCreditNoteNo2,
-            this.colCreditNoteDate2
-            });
+            this.colRefundAmount2});
             this.dgvInvoices.ContextMenuStrip = this.cmuInvoicePayment;
             this.dgvInvoices.DataSource = this.invoiceBindingSource;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
@@ -578,6 +549,8 @@
             this.dgvInvoices.Size = new System.Drawing.Size(1069, 420);
             this.dgvInvoices.TabIndex = 2;
             this.dgvInvoices.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellValueChanged);
+            this.dgvInvoices.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.dgvInvoices_CellParsing);
+            this.dgvInvoices.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvInvoices_CellFormatting);
             this.dgvInvoices.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvInvoices_CellValidating);
             this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
             this.dgvInvoices.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellContentClick);
@@ -701,68 +674,24 @@
             this.colFinanceDueDate.HeaderText = "融资到期日";
             this.colFinanceDueDate.Name = "colFinanceDueDate";
             // 
-            // colPaymentAmount2
-            // 
-            this.colPaymentAmount2.DataPropertyName = "PaymentAmount2";
-            dataGridViewCellStyle8.Format = "N2";
-            this.colPaymentAmount2.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colPaymentAmount2.HeaderText = "付款金额";
-            this.colPaymentAmount2.Name = "colPaymentAmount2";
-            // 
-            // colPaymentDate2
-            // 
-            this.colPaymentDate2.DataPropertyName = "PaymentDate2";
-            dataGridViewCellStyle9.Format = "d";
-            this.colPaymentDate2.DefaultCellStyle = dataGridViewCellStyle9;
-            this.colPaymentDate2.HeaderText = "付款日";
-            this.colPaymentDate2.Name = "colPaymentDate2";
-            this.colPaymentDate2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
             // colRefundAmount2
             // 
             this.colRefundAmount2.DataPropertyName = "RefundAmount2";
-            dataGridViewCellStyle10.Format = "N2";
-            this.colRefundAmount2.DefaultCellStyle = dataGridViewCellStyle10;
             this.colRefundAmount2.HeaderText = "还款金额";
             this.colRefundAmount2.Name = "colRefundAmount2";
             // 
-            // colRefundDate2
-            // 
-            this.colRefundDate2.DataPropertyName = "RefundDate2";
-            dataGridViewCellStyle11.Format = "d";
-            this.colRefundDate2.DefaultCellStyle = dataGridViewCellStyle11;
-            this.colRefundDate2.HeaderText = "还款日";
-            this.colRefundDate2.Name = "colRefundDate2";
-            this.colRefundDate2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            //
-            // colCreditNoteNo2
-            //
-            this.colCreditNoteNo2.DataPropertyName = "CreditNoteNo2";
-            this.colCreditNoteNo2.HeaderText = "贷项通知编号";
-            this.colCreditNoteNo2.Name = "colCreditNoteNo2";
-            this.colCreditNoteNo2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colCreditNoteNo2.Visible = false;
-            //
-            // colCreditNoteDate2
-            //
-            this.colCreditNoteDate2.DataPropertyName = "CreditNoteDate2";
-            this.colCreditNoteDate2.HeaderText = "贷项通知日";
-            this.colCreditNoteDate2.Name = "colCreditNoteDate2";
-            this.colCreditNoteDate2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colCreditNoteDate2.Visible = false;
-            // 
-            // InvoicePayment
+            // InvoiceRefund
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvInvoices);
             this.Controls.Add(this.invoiceBindingNavigator);
-            this.Controls.Add(this.panelPaymentBatch);
+            this.Controls.Add(this.panelRefundBatch);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.Name = "InvoicePayment";
+            this.Name = "InvoiceRefund";
             this.Size = new System.Drawing.Size(1069, 526);
-            this.panelPaymentBatch.ResumeLayout(false);
-            this.panelPaymentBatch.PerformLayout();
+            this.panelRefundBatch.ResumeLayout(false);
+            this.panelRefundBatch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).EndInit();
@@ -785,7 +714,7 @@
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private System.Windows.Forms.ContextMenuStrip cmuInvoicePayment;
         private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentType;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbRefundType;
         private DevComponents.DotNetBar.ButtonX btnPaymentBatchNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
@@ -804,11 +733,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundDate2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate2;
     }
 }

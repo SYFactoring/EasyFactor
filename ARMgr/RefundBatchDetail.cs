@@ -11,24 +11,19 @@ using CMBC.EasyFactor.DB.dbml;
 
 namespace CMBC.EasyFactor.ARMgr
 {
-    public partial class InvoiceRefundLogMgr : UserControl
+    public partial class RefundBatchDetail : UserControl
     {
         private BindingSource bs;
 
-        public InvoiceRefundLogMgr(List<InvoicePaymentLog> logList)
+        public RefundBatchDetail(List<InvoiceRefundLog> logList)
         {
             InitializeComponent();
             this.bs = new BindingSource();
-            this.dgvPaymentLogs.AutoGenerateColumns = false;
-            this.dgvPaymentLogs.DataSource = bs;
-            ControlUtil.SetDoubleBuffered(this.dgvPaymentLogs);
+            this.dgvRefundLogs.AutoGenerateColumns = false;
+            this.dgvRefundLogs.DataSource = bs;
+            ControlUtil.SetDoubleBuffered(this.dgvRefundLogs);
 
             bs.DataSource = logList;
-            if (logList[0].CreditNote == null)
-            {
-                colCreditNoteDate.Visible = false;
-                colCreditNoteNo.Visible = false;
-            }
         }
 
         /// <summary>
@@ -43,7 +38,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// Gets or sets selected AssignBatch
         /// </summary>
-        public InvoicePaymentLog Selected
+        public InvoiceRefundLog Selected
         {
             get;
             set;
