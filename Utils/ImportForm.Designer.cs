@@ -48,7 +48,7 @@
             // 
             // 
             this.lblFilePath.BackgroundStyle.Class = "";
-            this.lblFilePath.Location = new System.Drawing.Point(28, 12);
+            this.lblFilePath.Location = new System.Drawing.Point(12, 12);
             this.lblFilePath.Name = "lblFilePath";
             this.lblFilePath.Size = new System.Drawing.Size(59, 16);
             this.lblFilePath.TabIndex = 0;
@@ -62,7 +62,7 @@
             // 
             // 
             this.lblStatus.BackgroundStyle.Class = "";
-            this.lblStatus.Location = new System.Drawing.Point(53, 34);
+            this.lblStatus.Location = new System.Drawing.Point(37, 34);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(34, 16);
             this.lblStatus.TabIndex = 3;
@@ -74,7 +74,7 @@
             // 
             // 
             this.progressBar.BackgroundStyle.Class = "";
-            this.progressBar.Location = new System.Drawing.Point(93, 56);
+            this.progressBar.Location = new System.Drawing.Point(77, 56);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(266, 23);
             this.progressBar.TabIndex = 6;
@@ -87,7 +87,7 @@
             // 
             // 
             this.lblProgress.BackgroundStyle.Class = "";
-            this.lblProgress.Location = new System.Drawing.Point(28, 56);
+            this.lblProgress.Location = new System.Drawing.Point(12, 56);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(59, 16);
             this.lblProgress.TabIndex = 5;
@@ -99,7 +99,7 @@
             // 
             // 
             this.tbStatus.Border.Class = "TextBoxBorder";
-            this.tbStatus.Location = new System.Drawing.Point(93, 32);
+            this.tbStatus.Location = new System.Drawing.Point(77, 32);
             this.tbStatus.Name = "tbStatus";
             this.tbStatus.ReadOnly = true;
             this.tbStatus.Size = new System.Drawing.Size(266, 20);
@@ -111,7 +111,7 @@
             // 
             // 
             this.tbFilePath.Border.Class = "TextBoxBorder";
-            this.tbFilePath.Location = new System.Drawing.Point(93, 8);
+            this.tbFilePath.Location = new System.Drawing.Point(77, 8);
             this.tbFilePath.Name = "tbFilePath";
             this.tbFilePath.ReadOnly = true;
             this.tbFilePath.Size = new System.Drawing.Size(266, 20);
@@ -121,7 +121,7 @@
             // 
             this.btnStart.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnStart.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnStart.Location = new System.Drawing.Point(194, 85);
+            this.btnStart.Location = new System.Drawing.Point(178, 85);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -133,7 +133,7 @@
             // 
             this.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCancel.Location = new System.Drawing.Point(284, 85);
+            this.btnCancel.Location = new System.Drawing.Point(268, 85);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -145,7 +145,7 @@
             // 
             this.btnFileSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnFileSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFileSelect.Location = new System.Drawing.Point(365, 8);
+            this.btnFileSelect.Location = new System.Drawing.Point(349, 8);
             this.btnFileSelect.Name = "btnFileSelect";
             this.btnFileSelect.Size = new System.Drawing.Size(24, 23);
             this.btnFileSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -165,7 +165,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 111);
+            this.ClientSize = new System.Drawing.Size(384, 112);
             this.Controls.Add(this.btnFileSelect);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnStart);

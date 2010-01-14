@@ -55,7 +55,7 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 卖方付款
             /// </summary>
-            InvoiceSellerPayment,
+            InvoiceSellerRefund,
 
             /// <summary>
             /// 间接付款
@@ -105,8 +105,8 @@ namespace CMBC.EasyFactor.ARMgr
                 case OpARType.InvoiceIndirectPayment:
                     uc = new InvoicePayment(this, InvoicePayment.OpPaymentType.INDIRECT_PAYMENT);
                     break;
-                case OpARType.InvoiceSellerPayment:
-                    uc = new InvoicePayment(this, InvoicePayment.OpPaymentType.SELLER_PAYMENT);
+                case OpARType.InvoiceSellerRefund:
+                    uc = new InvoicePayment(this, InvoicePayment.OpPaymentType.SELLER_REFUND);
                     break;
                 case OpARType.InvoiceGuaranteePayment:
                     uc = new InvoicePayment(this, InvoicePayment.OpPaymentType.GUARANTEE_PAYMENT);

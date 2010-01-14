@@ -402,9 +402,9 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void InvoiceSellerPayment(object sender, EventArgs e)
+        private void InvoiceSellerRefund(object sender, EventArgs e)
         {
-            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceSellerPayment);
+            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceSellerRefund);
             this.SetDetailPanel(invoicePayment);
         }
 

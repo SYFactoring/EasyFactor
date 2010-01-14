@@ -49,7 +49,7 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            SELLER_PAYMENT,
+            SELLER_REFUND,
 
             /// <summary>
             /// 
@@ -360,8 +360,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_PAYMENTS);
-            exportUtil.StartExport(this.invoiceBindingSource.List);
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_BY_BATCH);
+            exportForm.StartExport(this.invoiceBindingSource.List);
 
         }
 
@@ -382,7 +382,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_PAYMENTS_BY_BATCH);
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES_BY_BATCH);
             importForm.ShowDialog(this);
             IList invoiceList = importForm.ImportedList;
             if (invoiceList != null)
@@ -426,7 +426,7 @@ namespace CMBC.EasyFactor.ARMgr
                 case OpPaymentType.INDIRECT_PAYMENT:
                     batch.PaymentType = "间接还款";
                     break;
-                case OpPaymentType.SELLER_PAYMENT:
+                case OpPaymentType.SELLER_REFUND:
                     batch.PaymentType = "卖方还款";
                     break;
                 case OpPaymentType.GUARANTEE_PAYMENT:

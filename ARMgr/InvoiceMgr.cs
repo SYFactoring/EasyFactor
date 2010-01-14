@@ -310,8 +310,8 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this.bs.DataSource is List<Invoice>)
             {
-                ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_INVOICES);
-                exportUtil.StartExport(this.bs.List);
+                ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES);
+                exportForm.StartExport(this.bs.List);
             }
         }
 
@@ -335,8 +335,8 @@ namespace CMBC.EasyFactor.ARMgr
                     selectedInvoices.Add(invoice);
                 }
             }
-            ExportUtil exportUtil = new ExportUtil(ExportUtil.ExportType.EXPORT_INVOICES);
-            exportUtil.StartExport(selectedInvoices);
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES);
+            exportForm.StartExport(selectedInvoices);
         }
 
         /// <summary>

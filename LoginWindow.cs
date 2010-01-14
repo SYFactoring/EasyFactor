@@ -93,7 +93,7 @@ namespace CMBC.EasyFactor
             {
                 if (!curUser.Password.Equals(pass))
                 {
-                    errorProvider.SetError(tbUserId, "密码不正确");
+                    errorProvider.SetError(tbPassword, "密码不正确");
                     return;
                 }
                 curUser.LoginDate = DateTime.Now;

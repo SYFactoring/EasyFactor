@@ -21,7 +21,6 @@ namespace CMBC.EasyFactor.Utils
         #region Fields (5)
 
         private ApplicationClass app;
-        private CultureInfo cultureInfo;
         private Worksheet datasheet;
         private ImportType importType;
         private Workbook workbook;
@@ -85,10 +84,6 @@ namespace CMBC.EasyFactor.Utils
             /// </summary>
             IMPORT_INVOICES,
 
-            /// <summary>
-            /// 
-            /// </summary>
-            IMPORT_PAYMENTS_BY_BATCH,
         }
 
         #endregion Enums
@@ -130,9 +125,6 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ImportType.IMPORT_INVOICES:
                     this.Text = "台帐导入";
-                    break;
-                case ImportType.IMPORT_PAYMENTS_BY_BATCH:
-                    this.Text = "付款导入";
                     break;
                 default:
                     break;
@@ -194,9 +186,6 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ImportType.IMPORT_INVOICES:
                     e.Result = ImportInvoices((string)e.Argument, worker, e);
-                    break;
-                case ImportType.IMPORT_PAYMENTS_BY_BATCH:
-                    e.Result = ImoprtPaymentLogs((string)e.Argument, worker, e);
                     break;
                 default:
                     break;
@@ -269,7 +258,6 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private object[,] GetValueArray(string fileName, int sheetIndex)
         {
-            cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             this.app = new ApplicationClass() { Visible = false };
             if (this.app == null)
@@ -289,18 +277,6 @@ namespace CMBC.EasyFactor.Utils
             this.datasheet = (Worksheet)workbook.Sheets[sheetIndex];
             Range range = datasheet.UsedRange;
             return (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="worker"></param>
-        /// <param name="e"></param>
-        /// <returns></returns>
-        private object ImoprtPaymentLogs(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -1281,6 +1257,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                 }
 
+                //处理Credit Note
                 if (valueArray2 != null)
                 {
                     int size = valueArray2.GetUpperBound(0);
@@ -1489,15 +1466,20 @@ namespace CMBC.EasyFactor.Utils
                     invoice.FinanceDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
 
                     //column = 48;
-                    invoice.PaymentAmount = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.PaymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.RefundAmount = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.RefundDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.PaymentAmount2 = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.PaymentDate2 = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.RefundAmount2 = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.RefundDate2 = (System.Nullable<DateTime>)valueArray[row, column++];
                     invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
                     invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
                     invoice.Interest = (System.Nullable<double>)valueArray[row, column++];
                     invoice.InterestDate = (System.Nullable<DateTime>)valueArray[row, column++];
                     invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                    if (column > 56)
+                    {
+                        invoice.CreditNoteNo2 = String.Format("{0:G}", valueArray[row, column++]);
+                        invoice.CreditNoteDate2 = (System.Nullable<DateTime>)valueArray[row, column++];
+                    }
 
                     invoiceList.Add(invoice);
                     result++;
@@ -1585,7 +1567,6 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         private void ReleaseResource()
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = this.cultureInfo;
             if (this.datasheet != null)
             {
                 Marshal.ReleaseComObject(datasheet);
