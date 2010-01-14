@@ -114,7 +114,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.InvoiceAssignBatch.BatchCurrency;
+                return this.InvoiceAssignBatch.CDA.Case.InvoiceCurrency;
             }
         }
 
@@ -332,6 +332,35 @@ namespace CMBC.EasyFactor.DB.dbml
             batchCount += batchesInMemory.Count(batch => batch.PaymentDate >= begin && batch.PaymentDate < end);
             string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return paymentNo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cda"></param>
+        /// <returns></returns>
+        public static string GenerateRefundBatchNo(DateTime date)
+        {
+            DateTime begin = date.Date;
+            DateTime end = begin.AddDays(1);
+            int batchCount = App.Current.DbContext.InvoiceRefundBatches.Count(batch => batch.RefundDate >= begin && batch.RefundDate < end);
+            string refundNo = String.Format("RFD{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            return refundNo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cda"></param>
+        /// <returns></returns>
+        public static string GenerateRefundBatchNo(DateTime date, List<InvoiceRefundBatch> batchesInMemory)
+        {
+            DateTime begin = date.Date;
+            DateTime end = begin.AddDays(1);
+            int batchCount = App.Current.DbContext.InvoiceRefundBatches.Count(batch => batch.RefundDate >= begin && batch.RefundDate < end);
+            batchCount += batchesInMemory.Count(batch => batch.RefundDate >= begin && batch.RefundDate < end);
+            string refundNo = String.Format("RFD{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            return refundNo;
         }
 
         public override int GetHashCode()

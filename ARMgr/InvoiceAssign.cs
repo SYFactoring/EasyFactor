@@ -457,7 +457,6 @@ namespace CMBC.EasyFactor.ARMgr
             batch.AssignDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
             batch.IsCreateMsg = false;
-            batch.BatchCurrency = this._CDA.Case.InvoiceCurrency;
             batch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = batch;
             this.invoiceBindingSource.DataSource = batch.Invoices.ToList();

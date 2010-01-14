@@ -7,19 +7,6 @@ namespace CMBC.EasyFactor.DB.dbml
 {
     public partial class InvoicePaymentBatch
     {
-        public double RefundAmount
-        {
-            get
-            {
-                double result = 0;
-                foreach (InvoicePaymentLog paymentLog in this.InvoicePaymentLogs)
-                {
-                    result += paymentLog.RefundAmount.GetValueOrDefault();
-                }
-                return result;
-            }
-        }
-
         public double PaymentAmount
         {
             get

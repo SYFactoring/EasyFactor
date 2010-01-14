@@ -1,6 +1,6 @@
 ﻿namespace CMBC.EasyFactor.ARMgr
 {
-    partial class PaymentBatchMgr
+    partial class RefundBatchMgr
     {
         /// <summary> 
         /// Required designer variable.
@@ -33,36 +33,35 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
-            this.cbPaymentType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.lblPaymentType = new DevComponents.DotNetBar.LabelX();
+            this.cbRefundType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblRefundType = new DevComponents.DotNetBar.LabelX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.cbCheckStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblCheckStatus = new DevComponents.DotNetBar.LabelX();
             this.dateTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblDatePicker = new DevComponents.DotNetBar.LabelX();
             this.dateFrom = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.btnPaymentBatchQuery = new DevComponents.DotNetBar.ButtonX();
-            this.tbPaymentBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblPaymentBatchNo = new DevComponents.DotNetBar.LabelX();
+            this.btnBatchQuery = new DevComponents.DotNetBar.ButtonX();
+            this.tbRefundBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblRefundBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsMsgCreate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemInvoiceList = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
+            this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRefundBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRefundType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRefundDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -74,17 +73,17 @@
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelQuery.Controls.Add(this.cbPaymentType);
-            this.panelQuery.Controls.Add(this.lblPaymentType);
+            this.panelQuery.Controls.Add(this.cbRefundType);
+            this.panelQuery.Controls.Add(this.lblRefundType);
             this.panelQuery.Controls.Add(this.lblCount);
             this.panelQuery.Controls.Add(this.cbCheckStatus);
             this.panelQuery.Controls.Add(this.lblCheckStatus);
             this.panelQuery.Controls.Add(this.dateTo);
             this.panelQuery.Controls.Add(this.lblDatePicker);
             this.panelQuery.Controls.Add(this.dateFrom);
-            this.panelQuery.Controls.Add(this.btnPaymentBatchQuery);
-            this.panelQuery.Controls.Add(this.tbPaymentBatchNo);
-            this.panelQuery.Controls.Add(this.lblPaymentBatchNo);
+            this.panelQuery.Controls.Add(this.btnBatchQuery);
+            this.panelQuery.Controls.Add(this.tbRefundBatchNo);
+            this.panelQuery.Controls.Add(this.lblRefundBatchNo);
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
@@ -98,37 +97,36 @@
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
             // 
-            // cbPaymentType
+            // cbRefundType
             // 
-            this.cbPaymentType.DisplayMember = "Text";
-            this.cbPaymentType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbPaymentType.FormattingEnabled = true;
-            this.cbPaymentType.ItemHeight = 14;
-            this.cbPaymentType.Items.AddRange(new object[] {
+            this.cbRefundType.DisplayMember = "Text";
+            this.cbRefundType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbRefundType.FormattingEnabled = true;
+            this.cbRefundType.ItemHeight = 14;
+            this.cbRefundType.Items.AddRange(new object[] {
             "",
             "买方付款",
-            "间接付款",
+            "卖方还款",
             "担保付款",
-            "卖方回购",
-            "贷项通知"});
-            this.cbPaymentType.Location = new System.Drawing.Point(251, 35);
-            this.cbPaymentType.Name = "cbPaymentType";
-            this.cbPaymentType.Size = new System.Drawing.Size(101, 20);
-            this.cbPaymentType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbPaymentType.TabIndex = 14;
+            "间接付款"});
+            this.cbRefundType.Location = new System.Drawing.Point(251, 35);
+            this.cbRefundType.Name = "cbRefundType";
+            this.cbRefundType.Size = new System.Drawing.Size(101, 20);
+            this.cbRefundType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbRefundType.TabIndex = 14;
             // 
-            // lblPaymentType
+            // lblRefundType
             // 
-            this.lblPaymentType.AutoSize = true;
-            // 
+            this.lblRefundType.AutoSize = true;
             // 
             // 
-            this.lblPaymentType.BackgroundStyle.Class = "";
-            this.lblPaymentType.Location = new System.Drawing.Point(186, 36);
-            this.lblPaymentType.Name = "lblPaymentType";
-            this.lblPaymentType.Size = new System.Drawing.Size(59, 16);
-            this.lblPaymentType.TabIndex = 13;
-            this.lblPaymentType.Text = "付款类型:";
+            // 
+            this.lblRefundType.BackgroundStyle.Class = "";
+            this.lblRefundType.Location = new System.Drawing.Point(186, 36);
+            this.lblRefundType.Name = "lblRefundType";
+            this.lblRefundType.Size = new System.Drawing.Size(59, 16);
+            this.lblRefundType.TabIndex = 13;
+            this.lblRefundType.Text = "还款类型:";
             // 
             // lblCount
             // 
@@ -139,7 +137,7 @@
             this.lblCount.BackgroundStyle.Class = "";
             this.lblCount.Location = new System.Drawing.Point(559, 37);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(18, 16);
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 12;
             // 
             // cbCheckStatus
@@ -229,7 +227,7 @@
             this.lblDatePicker.Name = "lblDatePicker";
             this.lblDatePicker.Size = new System.Drawing.Size(47, 16);
             this.lblDatePicker.TabIndex = 7;
-            this.lblDatePicker.Text = "付款日:";
+            this.lblDatePicker.Text = "还款日:";
             // 
             // dateFrom
             // 
@@ -277,41 +275,41 @@
             this.dateFrom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dateFrom.TabIndex = 8;
             // 
-            // btnPaymentBatchQuery
+            // btnBatchQuery
             // 
-            this.btnPaymentBatchQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnPaymentBatchQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnPaymentBatchQuery.Location = new System.Drawing.Point(463, 7);
-            this.btnPaymentBatchQuery.Name = "btnPaymentBatchQuery";
-            this.btnPaymentBatchQuery.Size = new System.Drawing.Size(75, 23);
-            this.btnPaymentBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnPaymentBatchQuery.TabIndex = 5;
-            this.btnPaymentBatchQuery.Text = "查询";
-            this.btnPaymentBatchQuery.Click += new System.EventHandler(this.QueryBatch);
+            this.btnBatchQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnBatchQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnBatchQuery.Location = new System.Drawing.Point(463, 7);
+            this.btnBatchQuery.Name = "btnBatchQuery";
+            this.btnBatchQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnBatchQuery.TabIndex = 5;
+            this.btnBatchQuery.Text = "查询";
+            this.btnBatchQuery.Click += new System.EventHandler(this.QueryBatch);
             // 
-            // tbPaymentBatchNo
-            // 
-            // 
-            // 
-            // 
-            this.tbPaymentBatchNo.Border.Class = "TextBoxBorder";
-            this.tbPaymentBatchNo.Location = new System.Drawing.Point(80, 10);
-            this.tbPaymentBatchNo.Name = "tbPaymentBatchNo";
-            this.tbPaymentBatchNo.Size = new System.Drawing.Size(100, 20);
-            this.tbPaymentBatchNo.TabIndex = 4;
-            // 
-            // lblPaymentBatchNo
-            // 
-            this.lblPaymentBatchNo.AutoSize = true;
+            // tbRefundBatchNo
             // 
             // 
             // 
-            this.lblPaymentBatchNo.BackgroundStyle.Class = "";
-            this.lblPaymentBatchNo.Location = new System.Drawing.Point(14, 12);
-            this.lblPaymentBatchNo.Name = "lblPaymentBatchNo";
-            this.lblPaymentBatchNo.Size = new System.Drawing.Size(59, 16);
-            this.lblPaymentBatchNo.TabIndex = 3;
-            this.lblPaymentBatchNo.Text = "付款批号:";
+            // 
+            this.tbRefundBatchNo.Border.Class = "TextBoxBorder";
+            this.tbRefundBatchNo.Location = new System.Drawing.Point(80, 10);
+            this.tbRefundBatchNo.Name = "tbRefundBatchNo";
+            this.tbRefundBatchNo.Size = new System.Drawing.Size(100, 20);
+            this.tbRefundBatchNo.TabIndex = 4;
+            // 
+            // lblRefundBatchNo
+            // 
+            this.lblRefundBatchNo.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblRefundBatchNo.BackgroundStyle.Class = "";
+            this.lblRefundBatchNo.Location = new System.Drawing.Point(14, 12);
+            this.lblRefundBatchNo.Name = "lblRefundBatchNo";
+            this.lblRefundBatchNo.Size = new System.Drawing.Size(59, 16);
+            this.lblRefundBatchNo.TabIndex = 3;
+            this.lblRefundBatchNo.Text = "还款批号:";
             // 
             // dgvBatches
             // 
@@ -331,11 +329,10 @@
             this.dgvBatches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSellerName,
             this.colBuyerName,
-            this.colPaymentBatchNo,
-            this.colPaymentType,
-            this.colPaymentDate,
-            this.colPaymentAmount,
-            this.colIsMsgCreate,
+            this.colRefundBatchNo,
+            this.colRefundType,
+            this.colRefundDate,
+            this.colRefundAmount,
             this.colCreateUserName,
             this.colCheckStatus,
             this.colCheckUserName,
@@ -361,92 +358,6 @@
             this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBatches_CellDoubleClick);
             this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBatches_RowPostPaint);
             this.dgvBatches.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvBatches_CellFormatting);
-            // 
-            // colSellerName
-            // 
-            this.colSellerName.DataPropertyName = "SellerName";
-            this.colSellerName.HeaderText = "卖方名称";
-            this.colSellerName.Name = "colSellerName";
-            this.colSellerName.ReadOnly = true;
-            // 
-            // colBuyerName
-            // 
-            this.colBuyerName.DataPropertyName = "BuyerName";
-            this.colBuyerName.HeaderText = "买方名称";
-            this.colBuyerName.Name = "colBuyerName";
-            this.colBuyerName.ReadOnly = true;
-            // 
-            // colPaymentBatchNo
-            // 
-            this.colPaymentBatchNo.DataPropertyName = "PaymentBatchNo";
-            this.colPaymentBatchNo.HeaderText = "付款批号";
-            this.colPaymentBatchNo.Name = "colPaymentBatchNo";
-            this.colPaymentBatchNo.ReadOnly = true;
-            // 
-            // colPaymentType
-            // 
-            this.colPaymentType.DataPropertyName = "PaymentType";
-            this.colPaymentType.HeaderText = "付款类型";
-            this.colPaymentType.Name = "colPaymentType";
-            this.colPaymentType.ReadOnly = true;
-            // 
-            // colPaymentDate
-            // 
-            this.colPaymentDate.DataPropertyName = "PaymentDate";
-            this.colPaymentDate.HeaderText = "付款日";
-            this.colPaymentDate.Name = "colPaymentDate";
-            this.colPaymentDate.ReadOnly = true;
-            // 
-            // colPaymentAmount
-            // 
-            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
-            dataGridViewCellStyle2.Format = "N2";
-            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colPaymentAmount.HeaderText = "付款金额";
-            this.colPaymentAmount.Name = "colPaymentAmount";
-            this.colPaymentAmount.ReadOnly = true;
-            // 
-            // colIsMsgCreate
-            // 
-            this.colIsMsgCreate.DataPropertyName = "IsMsgCreate";
-            this.colIsMsgCreate.HeaderText = "是否生成报文";
-            this.colIsMsgCreate.Name = "colIsMsgCreate";
-            this.colIsMsgCreate.ReadOnly = true;
-            // 
-            // colCreateUserName
-            // 
-            this.colCreateUserName.DataPropertyName = "CreateUserName";
-            this.colCreateUserName.HeaderText = "经办人";
-            this.colCreateUserName.Name = "colCreateUserName";
-            this.colCreateUserName.ReadOnly = true;
-            // 
-            // colCheckStatus
-            // 
-            this.colCheckStatus.DataPropertyName = "CheckStatus";
-            this.colCheckStatus.HeaderText = "复核结果";
-            this.colCheckStatus.Name = "colCheckStatus";
-            this.colCheckStatus.ReadOnly = true;
-            // 
-            // colCheckUserName
-            // 
-            this.colCheckUserName.DataPropertyName = "CheckUserName";
-            this.colCheckUserName.HeaderText = "复核人";
-            this.colCheckUserName.Name = "colCheckUserName";
-            this.colCheckUserName.ReadOnly = true;
-            // 
-            // colCheckDate
-            // 
-            this.colCheckDate.DataPropertyName = "CheckDate";
-            this.colCheckDate.HeaderText = "复核日";
-            this.colCheckDate.Name = "colCheckDate";
-            this.colCheckDate.ReadOnly = true;
-            // 
-            // colBatchCount
-            // 
-            this.colBatchCount.DataPropertyName = "BatchCount";
-            this.colBatchCount.HeaderText = "发票笔数";
-            this.colBatchCount.Name = "colBatchCount";
-            this.colBatchCount.ReadOnly = true;
             // 
             // cmuBatchMgr
             // 
@@ -492,14 +403,93 @@
             this.menuItemReject.Text = "复核拒绝";
             this.menuItemReject.Click += new System.EventHandler(this.Reject);
             // 
-            // PaymentBatchMgr
+            // colSellerName
+            // 
+            this.colSellerName.DataPropertyName = "SellerName";
+            this.colSellerName.HeaderText = "卖方名称";
+            this.colSellerName.Name = "colSellerName";
+            this.colSellerName.ReadOnly = true;
+            // 
+            // colBuyerName
+            // 
+            this.colBuyerName.DataPropertyName = "BuyerName";
+            this.colBuyerName.HeaderText = "买方名称";
+            this.colBuyerName.Name = "colBuyerName";
+            this.colBuyerName.ReadOnly = true;
+            // 
+            // colRefundBatchNo
+            // 
+            this.colRefundBatchNo.DataPropertyName = "RefundBatchNo";
+            this.colRefundBatchNo.HeaderText = "付款批号";
+            this.colRefundBatchNo.Name = "colRefundBatchNo";
+            this.colRefundBatchNo.ReadOnly = true;
+            // 
+            // colRefundType
+            // 
+            this.colRefundType.DataPropertyName = "RefundType";
+            this.colRefundType.HeaderText = "付款类型";
+            this.colRefundType.Name = "colRefundType";
+            this.colRefundType.ReadOnly = true;
+            // 
+            // colRefundDate
+            // 
+            this.colRefundDate.DataPropertyName = "RefundDate";
+            this.colRefundDate.HeaderText = "付款日";
+            this.colRefundDate.Name = "colRefundDate";
+            this.colRefundDate.ReadOnly = true;
+            // 
+            // colRefundAmount
+            // 
+            this.colRefundAmount.DataPropertyName = "RefundAmount";
+            dataGridViewCellStyle2.Format = "N2";
+            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colRefundAmount.HeaderText = "付款金额";
+            this.colRefundAmount.Name = "colRefundAmount";
+            this.colRefundAmount.ReadOnly = true;
+            // 
+            // colCreateUserName
+            // 
+            this.colCreateUserName.DataPropertyName = "CreateUserName";
+            this.colCreateUserName.HeaderText = "经办人";
+            this.colCreateUserName.Name = "colCreateUserName";
+            this.colCreateUserName.ReadOnly = true;
+            // 
+            // colCheckStatus
+            // 
+            this.colCheckStatus.DataPropertyName = "CheckStatus";
+            this.colCheckStatus.HeaderText = "复核结果";
+            this.colCheckStatus.Name = "colCheckStatus";
+            this.colCheckStatus.ReadOnly = true;
+            // 
+            // colCheckUserName
+            // 
+            this.colCheckUserName.DataPropertyName = "CheckUserName";
+            this.colCheckUserName.HeaderText = "复核人";
+            this.colCheckUserName.Name = "colCheckUserName";
+            this.colCheckUserName.ReadOnly = true;
+            // 
+            // colCheckDate
+            // 
+            this.colCheckDate.DataPropertyName = "CheckDate";
+            this.colCheckDate.HeaderText = "复核日";
+            this.colCheckDate.Name = "colCheckDate";
+            this.colCheckDate.ReadOnly = true;
+            // 
+            // colBatchCount
+            // 
+            this.colBatchCount.DataPropertyName = "BatchCount";
+            this.colBatchCount.HeaderText = "发票笔数";
+            this.colBatchCount.Name = "colBatchCount";
+            this.colBatchCount.ReadOnly = true;
+            // 
+            // RefundBatchMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvBatches);
             this.Controls.Add(this.panelQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.Name = "PaymentBatchMgr";
+            this.Name = "RefundBatchMgr";
             this.Size = new System.Drawing.Size(888, 388);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
@@ -514,9 +504,9 @@
         #endregion
 
         private DevComponents.DotNetBar.PanelEx panelQuery;
-        private DevComponents.DotNetBar.ButtonX btnPaymentBatchQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentBatchNo;
-        private DevComponents.DotNetBar.LabelX lblPaymentBatchNo;
+        private DevComponents.DotNetBar.ButtonX btnBatchQuery;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbRefundBatchNo;
+        private DevComponents.DotNetBar.LabelX lblRefundBatchNo;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvBatches;
         private System.Windows.Forms.ContextMenuStrip cmuBatchMgr;
         private System.Windows.Forms.ToolStripMenuItem menuItemBatchSelect;
@@ -529,20 +519,19 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTo;
         private DevComponents.DotNetBar.LabelX lblDatePicker;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateFrom;
+        private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbRefundType;
+        private DevComponents.DotNetBar.LabelX lblRefundType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentBatchNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsMsgCreate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundBatchNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
-        private DevComponents.DotNetBar.LabelX lblCount;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbPaymentType;
-        private DevComponents.DotNetBar.LabelX lblPaymentType;
     }
 }

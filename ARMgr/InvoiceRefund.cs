@@ -19,7 +19,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// <summary>
     /// 
     /// </summary>
-    public partial class InvoicePayment : UserControl
+    public partial class InvoiceRefund : UserControl
     {
         #region Fields (3)
 
@@ -74,7 +74,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        public InvoicePayment(ARCaseBasic caseBasic, OpPaymentType paymentType)
+        public InvoiceRefund(ARCaseBasic caseBasic, OpPaymentType paymentType)
         {
             InitializeComponent();
             this.caseBasic = caseBasic;

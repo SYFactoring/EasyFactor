@@ -19,7 +19,7 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CDAMgr : UserControl
     {
-        #region Fields (2)
+		#region Fields (2) 
 
         /// <summary>
         /// 
@@ -27,9 +27,9 @@ namespace CMBC.EasyFactor.CaseMgr
         private BindingSource bs = new BindingSource();
         private OpCDAType opCDAType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         /// <summary>
         /// 
@@ -47,11 +47,11 @@ namespace CMBC.EasyFactor.CaseMgr
             CHECK
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (1)
+		#region Constructors (1) 
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the CDAMgr class.
         /// </summary>
         public CDAMgr(OpCDAType opCDAType)
@@ -70,9 +70,9 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Gets or sets owner form
@@ -92,11 +92,11 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (10)
+		#region Methods (11) 
 
-        // Private Methods (10) 
+		// Private Methods (11) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -165,7 +165,23 @@ namespace CMBC.EasyFactor.CaseMgr
                     }
                     App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
                     App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
+                    foreach (InvoicePaymentBatch paymentBatch in cda.InvoicePaymentBatches)
+                    {
+                        foreach (InvoicePaymentLog paymentLog in paymentBatch.InvoicePaymentLogs)
+                        {
+                            if (paymentLog.CreditNote != null)
+                            {
+                                App.Current.DbContext.CreditNotes.DeleteOnSubmit(paymentLog.CreditNote);
+                            }
+                        }
+                        App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(paymentBatch.InvoicePaymentLogs);
+                    }
                     App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
+                    foreach (InvoiceRefundBatch refundBatch in cda.InvoiceRefundBatches)
+                    {
+                        App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(refundBatch.InvoiceRefundLogs);
+                    }
+                    App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(cda.InvoiceRefundBatches);
                     App.Current.DbContext.CDAs.DeleteOnSubmit(cda);
                     try
                     {
@@ -228,6 +244,20 @@ namespace CMBC.EasyFactor.CaseMgr
                     }
                 }
             }
+        }
+
+        private void dgvCDAs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                this.dgvCDAs.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                dgvCDAs.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                dgvCDAs.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -347,20 +377,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        #endregion Methods
-
-        private void dgvCDAs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                this.dgvCDAs.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgvCDAs.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgvCDAs.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
-        }
+		#endregion Methods 
     }
 }

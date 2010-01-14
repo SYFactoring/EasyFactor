@@ -105,6 +105,24 @@
     <Compile Include="ARMgr\AssignBatchMgr.Designer.cs">
       <DependentUpon>AssignBatchMgr.cs</DependentUpon>
     </Compile>
+    <Compile Include="ARMgr\InvoiceRefundLogMgr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ARMgr\InvoiceRefundLogMgr.Designer.cs">
+      <DependentUpon>InvoiceRefundLogMgr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ARMgr\InvoiceRefund.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ARMgr\InvoiceRefund.Designer.cs">
+      <DependentUpon>InvoiceRefund.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ARMgr\RefundBatchMgr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ARMgr\RefundBatchMgr.Designer.cs">
+      <DependentUpon>RefundBatchMgr.cs</DependentUpon>
+    </Compile>
     <Compile Include="ARMgr\FinanceBatchMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -201,6 +219,8 @@
     <Compile Include="DB.dbml\Client.cs" />
     <Compile Include="DB.dbml\ClientCreditLine.cs" />
     <Compile Include="DB.dbml\InvoicePaymentLog.cs" />
+    <Compile Include="DB.dbml\InvoiceRefundBatch.cs" />
+    <Compile Include="DB.dbml\InvoiceRefundLog.cs" />
     <Compile Include="Utils\ConstStr.cs" />
     <Compile Include="DB.dbml\Country.cs" />
     <Compile Include="DB.dbml\CreditCoverNegotiation.cs" />
@@ -333,6 +353,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\AssignBatchMgr.resx">
       <DependentUpon>AssignBatchMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\InvoiceRefundLogMgr.resx">
+      <DependentUpon>InvoiceRefundLogMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\InvoiceRefund.resx">
+      <DependentUpon>InvoiceRefund.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\RefundBatchMgr.resx">
+      <DependentUpon>RefundBatchMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\FinanceBatchMgr.resx">

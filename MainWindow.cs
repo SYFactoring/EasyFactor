@@ -717,5 +717,16 @@ namespace CMBC.EasyFactor
             FactorMgr fatcorQuery = new FactorMgr(false);
             this.SetDetailPanel(fatcorQuery);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckRefundBatch(object sender, EventArgs e)
+        {
+            RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.CHECK);
+            this.SetDetailPanel(batchMgr);
+        }
     }
 }
