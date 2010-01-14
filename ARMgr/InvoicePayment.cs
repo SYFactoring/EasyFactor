@@ -447,7 +447,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
-                              where invoice.InvoiceAssignBatch.CDACode == this._CDA.CDACode && (invoice.PaymentAmount.HasValue == false && invoice.RefundAmount.HasValue == false)
+                              where invoice.InvoiceAssignBatch.CDACode == this._CDA.CDACode && (invoice.PaymentAmount.HasValue == false || invoice.RefundAmount.HasValue == false)
                               select invoice;
             this.invoiceBindingSource.DataSource = queryResult;
             this.StatBatch();
@@ -589,6 +589,8 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.PaymentDate = invoice.InvoicePaymentLogs.Max(logs => logs.PaymentDate);
                     invoice.RefundAmount = invoice.InvoicePaymentLogs.Sum(logs => logs.RefundAmount);
                     invoice.RefundDate = invoice.InvoicePaymentLogs.Max(logs => logs.RefundDate);
+                    invoice.PaymentAmount2 = null;
+                    invoice.RefundAmount2 = null;
                 }
                 App.Current.DbContext.SubmitChanges();
                 this.caseBasic.CaculateOutstanding(this._CDA);

@@ -22,7 +22,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.AssignAmount - this.PaymentAmount.GetValueOrDefault();
+                return this.AssignAmount - this.PaymentAmount.GetValueOrDefault()-this.PaymentAmount2.GetValueOrDefault();
             }
         }
 
@@ -90,7 +90,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (!this.FinanceAmount.HasValue)
                     return null;
-                return this.FinanceAmount.Value - this.RefundAmount.GetValueOrDefault();
+                return this.FinanceAmount.Value - this.RefundAmount.GetValueOrDefault()-this.RefundAmount2.GetValueOrDefault();
             }
         }
 
@@ -134,61 +134,65 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        private double? _paymentAmount2;
+        private double? _PaymentAmount2;
 
         public double? PaymentAmount2
         {
             get
             {
-                return _paymentAmount2;
+                return _PaymentAmount2;
             }
             set
             {
-                this._paymentAmount2 = value;
+                this.SendPropertyChanging();
+                this._PaymentAmount2 = value;
                 this.SendPropertyChanged("PaymentAmount2");
             }
         }
-        private DateTime? _paymentDate2;
+        private DateTime? _PaymentDate2;
 
         public DateTime? PaymentDate2
         {
             get
             {
-                return _paymentDate2;
+                return _PaymentDate2;
             }
             set
             {
-                this._paymentDate2 = value;
+                this.SendPropertyChanging();
+                this._PaymentDate2 = value;
                 this.SendPropertyChanged("PaymentDate2");
             }
         }
 
-        private double? _refundAmount2;
+        private double? _RefundAmount2;
 
         public double? RefundAmount2
         {
             get
             {
-                return _refundAmount2;
+                return _RefundAmount2;
             }
             set
             {
-                this._refundAmount2 = value;
+                this.SendPropertyChanging();
+                this._RefundAmount2 = value;
                 this.SendPropertyChanged("RefundAmount2");
             }
         }
 
-        private DateTime? _refundDate2;
+        private DateTime? _RefundDate2;
 
         public DateTime? RefundDate2
         {
             get
             {
-                return _refundDate2;
+                return _RefundDate2;
             }
             set
             {
-                this._refundDate2 = value;
+                this.SendPropertyChanging();
+                this._RefundDate2 = value;
                 this.SendPropertyChanged("RefundDate2");
             }
         }
@@ -205,6 +209,7 @@ namespace CMBC.EasyFactor.DB.dbml
             get { return _creditNoteNo2; }
             set
             {
+                this.SendPropertyChanging();
                 this._creditNoteNo2 = value;
                 this.SendPropertyChanged("CreditNoteNo2");
             }
@@ -216,6 +221,7 @@ namespace CMBC.EasyFactor.DB.dbml
             get { return _creditNoteDate2; }
             set
             {
+                this.SendPropertyChanging();
                 this._creditNoteDate2 = value;
                 this.SendPropertyChanged("CreditNoteDate2");
             }

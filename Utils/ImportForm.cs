@@ -212,6 +212,7 @@ namespace CMBC.EasyFactor.Utils
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.progressBar.Value = e.ProgressPercentage;
+            this.tbStatus.Text = String.Format("导入进度 {0:G}%", e.ProgressPercentage);
         }
 
         /// <summary>
@@ -280,7 +281,7 @@ namespace CMBC.EasyFactor.Utils
                 fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing);
-            if (workbook.Sheets.Count < 1)
+            if (workbook.Sheets.Count < sheetIndex)
             {
                 return null;
             }
@@ -1026,18 +1027,29 @@ namespace CMBC.EasyFactor.Utils
         private int ImportInvoices(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = GetValueArray(fileName, 1);
-            int result = 0;
-            List<InvoicePaymentBatch> paymentBatches = new List<InvoicePaymentBatch>();
+            object[,] valueArray2 = GetValueArray(fileName, 2);
+            int totalSize = 0;
             if (valueArray != null)
             {
-                int size = valueArray.GetUpperBound(0);
+                totalSize += valueArray.GetUpperBound(0);
+            }
+            if (valueArray2 != null)
+            {
+                totalSize += valueArray2.GetUpperBound(0);
+            }
 
-                CDA cda = null;
-                List<InvoiceAssignBatch> assignBatches = new List<InvoiceAssignBatch>();
-                List<InvoiceFinanceBatch> financeBatches = new List<InvoiceFinanceBatch>();
-                List<Invoice> invoiceList = new List<Invoice>();
-                try
+            int result = 0;
+            List<InvoicePaymentBatch> paymentBatches = new List<InvoicePaymentBatch>();
+            CDA cda = null;
+            List<InvoiceAssignBatch> assignBatches = new List<InvoiceAssignBatch>();
+            List<InvoiceFinanceBatch> financeBatches = new List<InvoiceFinanceBatch>();
+            List<Invoice> invoiceList = new List<Invoice>();
+            try
+            {
+                if (valueArray != null)
                 {
+                    int size = valueArray.GetUpperBound(0);
+
                     for (int row = 2; row <= size; row++)
                     {
                         if (worker.CancellationPending)
@@ -1265,37 +1277,15 @@ namespace CMBC.EasyFactor.Utils
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
                         result++;
-                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                        worker.ReportProgress((int)((float)row * 100 / (float)totalSize));
                     }
-
-                    App.Current.DbContext.SubmitChanges();
                 }
-                catch (Exception e1)
-                {
-                    foreach (InvoiceAssignBatch batch in assignBatches)
-                    {
-                        batch.CDA = null;
-                    }
-                    foreach (InvoiceFinanceBatch batch in financeBatches)
-                    {
-                        batch.CDA = null;
-                    }
-                    foreach (InvoicePaymentBatch batch in paymentBatches)
-                    {
-                        batch.CDA = null;
-                    }
-                    throw e1;
-                }
-            }
 
-            valueArray = GetValueArray(fileName, 2);
-            if (valueArray != null)
-            {
-                int size = valueArray.GetUpperBound(0);
-
-                CDA cda = null;
-                try
+                if (valueArray2 != null)
                 {
+                    int size = valueArray2.GetUpperBound(0);
+                    int size1 = totalSize - size;
+
                     for (int row = 2; row <= size; row++)
                     {
                         if (worker.CancellationPending)
@@ -1304,7 +1294,7 @@ namespace CMBC.EasyFactor.Utils
                             return -1;
                         }
 
-                        string cdaCode = String.Format("{0:G}", valueArray[row, 1]);
+                        string cdaCode = String.Format("{0:G}", valueArray2[row, 1]);
                         if (string.Empty.Equals(cdaCode))
                         {
                             continue;
@@ -1318,7 +1308,7 @@ namespace CMBC.EasyFactor.Utils
                             }
                         }
 
-                        string paymentBatchNo = String.Format("{0:G}", valueArray[row, 3]);
+                        string paymentBatchNo = String.Format("{0:G}", valueArray2[row, 3]);
                         InvoicePaymentBatch paymentBatch = null;
                         if (paymentBatchNo != string.Empty)
                         {
@@ -1334,8 +1324,8 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            string paymentType = String.Format("{0:G}", valueArray[row, 4]);
-                            DateTime? paymentDate = (System.Nullable<DateTime>)valueArray[row, 5];
+                            string paymentType = String.Format("{0:G}", valueArray2[row, 4]);
+                            DateTime? paymentDate = (System.Nullable<DateTime>)valueArray2[row, 5];
                             if (paymentDate != null)
                             {
                                 paymentBatch = paymentBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.PaymentDate == paymentDate && i.PaymentType == paymentType);
@@ -1343,11 +1333,11 @@ namespace CMBC.EasyFactor.Utils
                                 {
                                     paymentBatch = new InvoicePaymentBatch();
                                     int column = 4;
-                                    paymentBatch.PaymentType = String.Format("{0:G}", valueArray[row, column++]);
-                                    paymentBatch.PaymentDate = (DateTime)valueArray[row, column++];
-                                    paymentBatch.IsCreateMsg = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
-                                    paymentBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                                    paymentBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                                    paymentBatch.PaymentType = String.Format("{0:G}", valueArray2[row, column++]);
+                                    paymentBatch.PaymentDate = (DateTime)valueArray2[row, column++];
+                                    paymentBatch.IsCreateMsg = TypeUtil.ConvertStrToBool(valueArray2[row, column++]);
+                                    paymentBatch.Comment = String.Format("{0:G}", valueArray2[row, column++]);
+                                    paymentBatch.CreateUserName = String.Format("{0:G}", valueArray2[row, column++]);
                                     paymentBatch.PaymentBatchNo = Invoice.GeneratePaymentBatchNo(paymentBatch.PaymentDate, paymentBatches);
                                     paymentBatch.CheckStatus = "已复核";
                                     paymentBatch.CDA = cda;
@@ -1356,24 +1346,24 @@ namespace CMBC.EasyFactor.Utils
                             }
                         }
 
-                        string creditNoteNo = String.Format("{0:G}", valueArray[row, 9]);
+                        string creditNoteNo = String.Format("{0:G}", valueArray2[row, 9]);
                         if (creditNoteNo == string.Empty)
                         {
                             throw new Exception("贷项通知编号不能为空");
                         }
-                        CreditNote creditNote = App.Current.DbContext.CreditNotes.SingleOrDefault(c => c.CreditNoteNo==creditNoteNo);
+                        CreditNote creditNote = App.Current.DbContext.CreditNotes.SingleOrDefault(c => c.CreditNoteNo == creditNoteNo);
                         if (creditNote == null)
                         {
                             creditNote = new CreditNote();
                             creditNote.CreditNoteNo = creditNoteNo;
-                            creditNote.CreditNoteDate = (DateTime)valueArray[row, 11];
+                            creditNote.CreditNoteDate = (DateTime)valueArray2[row, 11];
                         }
                         InvoicePaymentLog log = new InvoicePaymentLog();
                         log.CreditNote = creditNote;
-                        log.PaymentAmount = (double)valueArray[row, 10];
+                        log.PaymentAmount = (double)valueArray2[row, 10];
                         log.PaymentDate = paymentBatch.PaymentDate;
 
-                        string invoiceNo = String.Format("{0:G}", valueArray[row, 12]);
+                        string invoiceNo = String.Format("{0:G}", valueArray2[row, 12]);
                         if (invoiceNo == string.Empty)
                         {
                             throw new Exception("发票号不能为空");
@@ -1381,29 +1371,43 @@ namespace CMBC.EasyFactor.Utils
                         Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                         if (invoice == null)
                         {
-                            throw new Exception("发票号错误: " + invoiceNo);
+                            invoice = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                            if (invoice == null)
+                            {
+                                throw new Exception("发票号错误: " + invoiceNo);
+                            }
                         }
                         log.Invoice = invoice;
-                        log.Comment = String.Format("{0:G}", valueArray[row, 13]);
+                        log.Comment = String.Format("{0:G}", valueArray2[row, 13]);
                         log.InvoicePaymentBatch = paymentBatch;
-                    }
-                    App.Current.DbContext.SubmitChanges();
-                }
-                catch (Exception e2)
-                {
-                    foreach (InvoicePaymentBatch batch in paymentBatches)
-                    {
-                        foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
-                        {
-                            log.Invoice = null;
-                            log.CreditNote = null;
-                        }
-                        batch.CDA = null;
-                    }
-                    throw e2;
-                }
-            }
 
+                        result++;
+                        worker.ReportProgress((int)((float)(row + size1) * 100 / (float)totalSize));
+                    }
+                }
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                foreach (InvoiceAssignBatch batch in assignBatches)
+                {
+                    batch.CDA = null;
+                }
+                foreach (InvoiceFinanceBatch batch in financeBatches)
+                {
+                    batch.CDA = null;
+                }
+                foreach (InvoicePaymentBatch batch in paymentBatches)
+                {
+                    foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
+                    {
+                        log.Invoice = null;
+                        log.CreditNote = null;
+                    }
+                    batch.CDA = null;
+                }
+                throw e1;
+            }
             try
             {
                 foreach (InvoicePaymentBatch batch in paymentBatches)
