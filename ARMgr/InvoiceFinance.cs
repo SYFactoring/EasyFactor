@@ -457,7 +457,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeBatch.BatchCurrency = this._CDA.Case.InvoiceCurrency;
             financeBatch.CreateUserName = App.Current.CurUser.Name;
             this.batchBindingSource.DataSource = financeBatch;
-            this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.AssignAmount - i.PaymentAmount.GetValueOrDefault() > 0 && (i.FinanceAmount.HasValue == false || i.FinanceAmount < 0.0000001)).ToList();
+            this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.AssignAmount - i.PaymentAmount > 0.00000001 && (i.FinanceAmount.HasValue == false || i.FinanceAmount < 0.0000001)).ToList();
             this.StatBatch();
         }
 

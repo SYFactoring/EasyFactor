@@ -468,15 +468,11 @@ namespace CMBC.EasyFactor.Utils
                     client.ProductCN = String.Format("{0:G}", valueArray[row, column++]);
                     client.ProductEN = String.Format("{0:G}", valueArray[row, column++]);
                     client.ClientLevel = String.Format("{0:G}", valueArray[row, column++]);
-                    client.IsGroup = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                     string groupNo = String.Format("{0:G}", valueArray[row, column++]);
-                    if (client.IsGroup)
+                    Client clientGroup = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == groupNo);
+                    if (clientGroup == null)
                     {
-                        Client clientGroup = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == groupNo);
-                        if (clientGroup == null)
-                        {
-                            throw new Exception("集团客户号错误: " + groupNo);
-                        }
+                        throw new Exception("集团客户号错误: " + groupNo);
                     }
                     column++;
                     client.RegistrationNumber = String.Format("{0:G}", valueArray[row, column++]);
@@ -1467,32 +1463,6 @@ namespace CMBC.EasyFactor.Utils
                     batch.CDA = null;
                 }
                 throw e1;
-            }
-            try
-            {
-                foreach (InvoicePaymentBatch batch in paymentBatches)
-                {
-                    foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
-                    {
-                        Invoice invoice = log.Invoice;
-                        invoice.PaymentAmount = invoice.InvoicePaymentLogs.Sum(logs => logs.PaymentAmount);
-                        invoice.PaymentDate = invoice.InvoicePaymentLogs.Max(logs => logs.InvoicePaymentBatch.PaymentDate);
-                    }
-                }
-                foreach (InvoiceRefundBatch batch in refundBatches)
-                {
-                    foreach (InvoiceRefundLog log in batch.InvoiceRefundLogs)
-                    {
-                        Invoice invoice = log.Invoice;
-                        invoice.RefundAmount = invoice.InvoiceRefundLogs.Sum(logs => logs.RefundAmount);
-                        invoice.RefundDate = invoice.InvoiceRefundLogs.Max(logs => logs.InvoiceRefundBatch.RefundDate);
-                    }
-                }
-                App.Current.DbContext.SubmitChanges();
-            }
-            catch (Exception e3)
-            {
-                throw e3;
             }
             worker.ReportProgress(100);
             workbook.Close(false, fileName, null);

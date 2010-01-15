@@ -143,14 +143,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (opClientType == OpClientType.NEW_CLIENT)
             {
                 client = new Client();
-                client.IsGroup = false;
                 this.clientBindingSource.DataSource = client;
             }
             else if (opClientType == OpClientType.NEW_GROUP_CLIENT)
             {
                 client = new Client();
-                client.IsGroup = false;
-                client.ClientGroupType = "集团";
                 this.clientBindingSource.DataSource = client;
             }
             else
@@ -309,63 +306,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         client.ClientGroup = null;
                     }
                 }
-            }
-        }
-
-        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            if (this.isGroupCheckBox.Checked)
-            {
-                if (e.ControlToValidate.Text == string.Empty)
-                {
-                    e.IsValid = false;
-                }
-                else
-                {
-                    e.IsValid = true;
-                }
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
-
-        private void customValidator2_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            if (this.isGroupCheckBox.Checked)
-            {
-                if (e.ControlToValidate.Text == string.Empty)
-                {
-                    e.IsValid = false;
-                }
-                else
-                {
-                    e.IsValid = true;
-                }
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
-
-        private void customValidator3_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            if (this.isGroupCheckBox.Checked)
-            {
-                if (e.ControlToValidate.Text == string.Empty)
-                {
-                    e.IsValid = false;
-                }
-                else
-                {
-                    e.IsValid = true;
-                }
-            }
-            else
-            {
-                e.IsValid = true;
             }
         }
 
@@ -1027,13 +967,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             queryUI.ShowDialog(this);
             if (clientMgr.Selected != null)
             {
-                if (clientMgr.Selected.ClientGroupType != "集团")
-                {
-                    MessageBox.Show("所选客户不是集团类型", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
                 client.ClientGroup = clientMgr.Selected;
-                client.IsGroup = true;
             }
         }
 
@@ -1155,7 +1089,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 foreach (Control comp in this.groupPanelClientGroup.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
-                    this.isGroupCheckBox.Enabled = true;
                 }
 
                 foreach (Control comp in this.groupPanelClientStat.Controls)

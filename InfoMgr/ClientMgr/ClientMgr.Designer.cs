@@ -119,7 +119,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.CountryNameCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PostCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContactColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsGroupColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GroupNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IndustryColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -526,7 +525,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.CountryNameCNColumn,
             this.PostCodeColumn,
             this.ContactColumn,
-            this.IsGroupColumn,
             this.GroupNoColumn,
             this.ClientTypeColumn,
             this.IndustryColumn,
@@ -537,7 +535,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.ContextMenuStrip = this.cmuClientMgr;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
@@ -564,7 +562,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.TabIndex = 2;
             this.dgvClients.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvClients.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvClients_RowPostPaint);
-            this.dgvClients.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvClients_CellFormatting);
             // 
             // clientEDICodeColumn
             // 
@@ -670,15 +667,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ContactColumn.ReadOnly = true;
             this.ContactColumn.Width = 68;
             // 
-            // IsGroupColumn
-            // 
-            this.IsGroupColumn.DataPropertyName = "IsGroup";
-            this.IsGroupColumn.HeaderText = "是否集团客户";
-            this.IsGroupColumn.Name = "IsGroupColumn";
-            this.IsGroupColumn.ReadOnly = true;
-            this.IsGroupColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.IsGroupColumn.Width = 104;
-            // 
             // GroupNoColumn
             // 
             this.GroupNoColumn.DataPropertyName = "GroupEDICode";
@@ -770,7 +758,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameCNColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn PostCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ContactColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsGroupColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientTypeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn IndustryColumn;

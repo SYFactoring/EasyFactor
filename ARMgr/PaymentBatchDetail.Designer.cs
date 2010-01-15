@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvPaymentLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -36,7 +37,10 @@
             this.colCreditNoteNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditNoteDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemLogDelete = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentLogs)).BeginInit();
+            this.cmuLogMgr.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvPaymentLogs
@@ -59,6 +63,7 @@
             this.colCreditNoteNo,
             this.colCreditNoteDate,
             this.colComment});
+            this.dgvPaymentLogs.ContextMenuStrip = this.cmuLogMgr;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -110,14 +115,29 @@
             this.colComment.Name = "colComment";
             this.colComment.ReadOnly = true;
             // 
-            // InvoicePaymentLogMgr
+            // cmuLogMgr
+            // 
+            this.cmuLogMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemLogDelete});
+            this.cmuLogMgr.Name = "cmuContractMgr";
+            this.cmuLogMgr.Size = new System.Drawing.Size(153, 48);
+            // 
+            // menuItemLogDelete
+            // 
+            this.menuItemLogDelete.Name = "menuItemLogDelete";
+            this.menuItemLogDelete.Size = new System.Drawing.Size(152, 22);
+            this.menuItemLogDelete.Text = "&D删除";
+            this.menuItemLogDelete.Click += new System.EventHandler(this.DeleteLog);
+            // 
+            // PaymentBatchDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvPaymentLogs);
-            this.Name = "InvoicePaymentLogMgr";
+            this.Name = "PaymentBatchDetail";
             this.Size = new System.Drawing.Size(620, 376);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentLogs)).EndInit();
+            this.cmuLogMgr.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -130,5 +150,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.ContextMenuStrip cmuLogMgr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemLogDelete;
     }
 }

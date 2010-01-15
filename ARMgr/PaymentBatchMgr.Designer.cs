@@ -467,14 +467,14 @@
             // 
             this.menuItemBatchSelect.Name = "menuItemBatchSelect";
             this.menuItemBatchSelect.Size = new System.Drawing.Size(152, 22);
-            this.menuItemBatchSelect.Text = "选择批次";
+            this.menuItemBatchSelect.Text = "&S选择批次";
             this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
             // 
             // menuItemBatchDetail
             // 
             this.menuItemBatchDetail.Name = "menuItemBatchDetail";
             this.menuItemBatchDetail.Size = new System.Drawing.Size(152, 22);
-            this.menuItemBatchDetail.Text = "批次详情";
+            this.menuItemBatchDetail.Text = "&M批次详情";
             this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
             // 
             // toolStripSeparator1
@@ -486,14 +486,14 @@
             // 
             this.menuItemCheck.Name = "menuItemCheck";
             this.menuItemCheck.Size = new System.Drawing.Size(152, 22);
-            this.menuItemCheck.Text = "复核通过";
+            this.menuItemCheck.Text = "&P复核通过";
             this.menuItemCheck.Click += new System.EventHandler(this.Check);
             // 
             // menuItemReject
             // 
             this.menuItemReject.Name = "menuItemReject";
             this.menuItemReject.Size = new System.Drawing.Size(152, 22);
-            this.menuItemReject.Text = "复核拒绝";
+            this.menuItemReject.Text = "&R复核拒绝";
             this.menuItemReject.Click += new System.EventHandler(this.Reject);
             // 
             // toolStripSeparator2
@@ -505,7 +505,7 @@
             // 
             this.menuItemBatchDelete.Name = "menuItemBatchDelete";
             this.menuItemBatchDelete.Size = new System.Drawing.Size(152, 22);
-            this.menuItemBatchDelete.Text = "删除批次";
+            this.menuItemBatchDelete.Text = "&D删除批次";
             this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
             // 
             // PaymentBatchMgr

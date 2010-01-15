@@ -592,7 +592,7 @@ namespace CMBC.EasyFactor.Report
                                     (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
                                  && (beginDate != this.diAssignDateBegin.MinDate ? invoice.InvoiceAssignBatch.AssignDate >= beginDate : true)
                                  && (endDate != this.diAssignDateEnd.MinDate ? invoice.InvoiceAssignBatch.AssignDate <= endDate : true)
-                                 && (opReportType == OpReportType.REPORT_FINANCE ? invoice.AssignAmount > invoice.PaymentAmount.GetValueOrDefault() : true)
+                                 && (opReportType == OpReportType.REPORT_FINANCE ? invoice.AssignAmount > invoice.PaymentAmount : true)
                                  && (opReportType == OpReportType.REPORT_FINANCE ? invoice.FinanceAmount == null || TypeUtil.EqualsZero(invoice.FinanceAmount) : true)
                               select invoice;
 

@@ -435,7 +435,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
-                              where invoice.InvoiceAssignBatch.CDACode == this._CDA.CDACode && (invoice.PaymentAmount.GetValueOrDefault()-invoice.AssignAmount<0.00000001)
+                              where invoice.InvoiceAssignBatch.CDACode == this._CDA.CDACode && (invoice.PaymentAmount-invoice.AssignAmount<0.00000001)
                               select invoice;
             this.invoiceBindingSource.DataSource = queryResult;
             this.StatBatch();
@@ -565,8 +565,6 @@ namespace CMBC.EasyFactor.ARMgr
                 foreach (InvoicePaymentLog log in logList)
                 {
                     Invoice invoice = log.Invoice;
-                    invoice.PaymentAmount = invoice.InvoicePaymentLogs.Sum(logs => logs.PaymentAmount);
-                    invoice.PaymentDate = invoice.InvoicePaymentLogs.Max(logs => logs.InvoicePaymentBatch.PaymentDate);
                     invoice.PaymentAmount2 = null;
                 }
                 App.Current.DbContext.SubmitChanges();

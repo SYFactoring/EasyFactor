@@ -431,28 +431,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Methods
 
-        private void dgvClients_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            DataGridViewColumn column = this.dgvClients.Columns[e.ColumnIndex];
-            if (column == IsGroupColumn)
-            {
-                Object originalData = e.Value;
-                if (originalData != null)
-                {
-                    bool result = (bool)originalData;
-                    if (result)
-                    {
-                        e.Value = "Y";
-                    }
-                    else
-                    {
-                        e.Value = "N";
-                    }
-                }
-            }
-        }
-
-        private void dgvClients_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+         private void dgvClients_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
                 e.RowBounds.Location.Y,

@@ -152,11 +152,6 @@ namespace CMBC.EasyFactor.ARMgr
             InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
             if (MessageBox.Show("是否打算删除此" + selectedBatch.BatchCount + "条付款记录", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                foreach (InvoicePaymentLog log in selectedBatch.InvoicePaymentLogs)
-                {
-                    Invoice invoice = log.Invoice;
-                    invoice.PaymentAmount -= log.PaymentAmount;
-                }
                 App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(selectedBatch.InvoicePaymentLogs);
                 App.Current.DbContext.InvoicePaymentBatches.DeleteOnSubmit(selectedBatch);
                 try
@@ -165,15 +160,10 @@ namespace CMBC.EasyFactor.ARMgr
                 }
                 catch (Exception e1)
                 {
-                    foreach (InvoicePaymentLog log in selectedBatch.InvoicePaymentLogs)
-                    {
-                        Invoice invoice = log.Invoice;
-                        invoice.PaymentAmount += log.PaymentAmount;
-                    }
                     MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
+                this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
             }
         }
 

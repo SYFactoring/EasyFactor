@@ -48,5 +48,25 @@ namespace CMBC.EasyFactor.ARMgr
             get;
             set;
         }
+
+        private void DeleteLog(object sender, EventArgs e)
+        {
+            if (this.dgvPaymentLogs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            InvoicePaymentLog log = (InvoicePaymentLog)this.bs.List[this.dgvPaymentLogs.SelectedRows[0].Index];
+            try
+            {
+                App.Current.DbContext.InvoicePaymentLogs.DeleteOnSubmit(log);
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            dgvPaymentLogs.Rows.RemoveAt(this.dgvPaymentLogs.SelectedRows[0].Index);
+        }
     }
 }

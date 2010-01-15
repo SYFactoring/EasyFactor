@@ -433,8 +433,8 @@ namespace CMBC.EasyFactor.ARMgr
                               where (invoiceNo == string.Empty ? true : invoice.InvoiceNo == invoiceNo)
                                 && (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
                                 && (isDispute == "A" ? true : invoice.IsDispute == (isDispute == "Y" ? true : false))
-                                && (assignOverDueDays == 0 ? true : (invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount && invoice.DueDate <= assignOverDueDate))
-                                && (FinanceOverDueDays == 0 ? true : (invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() && invoice.FinanceDueDate <= FinanceOverDueDate))
+                                && (assignOverDueDays == 0 ? true : (invoice.PaymentAmount < invoice.AssignAmount && invoice.DueDate <= assignOverDueDate))
+                                && (FinanceOverDueDays == 0 ? true : (invoice.RefundAmount < invoice.FinanceAmount.GetValueOrDefault() && invoice.FinanceDueDate <= FinanceOverDueDate))
                               select invoice;
             //if (queryResult.Count() > 2000)
             //{

@@ -212,7 +212,7 @@
             // 
             // colClientNameEN_1
             // 
-            this.colClientNameEN_1.DataPropertyName = "colClientNameEN_1";
+            this.colClientNameEN_1.DataPropertyName = "ClientNameEN_1";
             this.colClientNameEN_1.HeaderText = "客户名称（英1）";
             this.colClientNameEN_1.Name = "colClientNameEN_1";
             this.colClientNameEN_1.ReadOnly = true;
@@ -285,6 +285,7 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
         private DevComponents.DotNetBar.LabelX lblClientName;
         private DevComponents.DotNetBar.ButtonX btnQuery;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientGroupType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameCN;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameEN_1;
@@ -294,6 +295,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientGroupType;
     }
 }

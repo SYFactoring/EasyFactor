@@ -13,14 +13,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
     public partial class ClientCreditLineMgr : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         private BindingSource bs;
         private OpClientCreditMgrType opType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         public enum OpClientCreditMgrType
         {
@@ -29,11 +29,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             QUERY_GROUP,
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
-public ClientCreditLineMgr(OpClientCreditMgrType opType)
+        public ClientCreditLineMgr(OpClientCreditMgrType opType)
         {
             InitializeComponent();
             this.bs = new BindingSource();
@@ -55,11 +55,11 @@ public ClientCreditLineMgr(OpClientCreditMgrType opType)
             }
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (2) 
+        #region Methods (2)
 
-		// Private Methods (2) 
+        // Private Methods (2) 
 
         private void dgvClientCreditLines_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -77,20 +77,21 @@ public ClientCreditLineMgr(OpClientCreditMgrType opType)
             string clientEDICode = tbClientEDICode.Text;
             string clientName = tbClientName.Text;
             string clientGroupType = cbClientGroupType.Text;
-            if (clientGroupType == "全部")
+            bool isGroup = false;
+            if (clientGroupType == "集团")
             {
-                clientGroupType = string.Empty;
+                isGroup = true;
             }
 
             var queryResult = App.Current.DbContext.ClientCreditLines.Where(c =>
                 c.Client.ClientEDICode.Contains(clientEDICode)
              && (c.Client.ClientNameCN.Contains(clientName) || c.Client.ClientNameEN_1.Contains(clientName) || c.Client.ClientNameEN_2.Contains(clientName))
-             && (c.Client.ClientGroupType == null ? string.Empty : c.Client.ClientGroupType).Contains(clientGroupType)
+             && (isGroup == true ? c.Client.GroupClients.Count > 0 : true)
                  );
             this.bs.DataSource = queryResult;
         }
 
-		#endregion Methods 
+        #endregion Methods
 
         private void dgvClientCreditLines_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {

@@ -8,7 +8,7 @@ namespace CMBC.EasyFactor.DB.dbml
 {
     public partial class Invoice : BaseObject
     {
-        #region Properties (11)
+        #region Properties (21)
 
         public DateTime AssignDate
         {
@@ -22,7 +22,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.AssignAmount - this.PaymentAmount.GetValueOrDefault()-this.PaymentAmount2.GetValueOrDefault();
+                return this.AssignAmount - this.PaymentAmount.GetValueOrDefault() - this.PaymentAmount2.GetValueOrDefault();
             }
         }
 
@@ -44,6 +44,18 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 return this.InvoiceAssignBatch.CDA.Case.BuyerClient.ToString();
             }
+        }
+
+        public DateTime? CreditNoteDate2
+        {
+            get;
+            set;
+        }
+
+        public string CreditNoteNo2
+        {
+            get;
+            set;
         }
 
         public string FactorName
@@ -90,7 +102,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (!this.FinanceAmount.HasValue)
                     return null;
-                return this.FinanceAmount.Value - this.RefundAmount.GetValueOrDefault()-this.RefundAmount2.GetValueOrDefault();
+                return this.FinanceAmount.Value - this.RefundAmount - this.RefundAmount2.GetValueOrDefault();
             }
         }
 
@@ -118,6 +130,42 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        public int? PaymentLogID2
+        {
+            set;
+            get;
+        }
+
+        public double? PaymentAmount2
+        {
+            set;
+            get;
+        }
+
+        public DateTime? PaymentDate2
+        {
+            set;
+            get;
+        }
+
+        public int? RefundLogID2
+        {
+            set;
+            get;
+        }
+
+        public double? RefundAmount2
+        {
+            set;
+            get;
+        }
+
+        public DateTime? RefundDate2
+        {
+            set;
+            get;
+        }
+
         public string SellerName
         {
             get
@@ -134,79 +182,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        private double? _PaymentAmount2;
-
-        public double? PaymentAmount2
-        {
-            get
-            {
-                return _PaymentAmount2;
-            }
-            set
-            {
-                this.SendPropertyChanging();
-                this._PaymentAmount2 = value;
-                this.SendPropertyChanged("PaymentAmount2");
-            }
-        }
-
-        private double? _RefundAmount2;
-
-        public double? RefundAmount2
-        {
-            get
-            {
-                return _RefundAmount2;
-            }
-            set
-            {
-                this.SendPropertyChanging();
-                this._RefundAmount2 = value;
-                this.SendPropertyChanged("RefundAmount2");
-            }
-        }
-
-        public int? PaymentLogID2
-        {
-            set;
-            get;
-        }
-
-        public int? RefundLogID2
-        {
-            set;
-            get;
-        }
-
-        private string _creditNoteNo2;
-
-        public string CreditNoteNo2
-        {
-            get { return _creditNoteNo2; }
-            set
-            {
-                this.SendPropertyChanging();
-                this._creditNoteNo2 = value;
-                this.SendPropertyChanged("CreditNoteNo2");
-            }
-        }
-
-        private DateTime? _creditNoteDate2;
-        public DateTime? CreditNoteDate2
-        {
-            get { return _creditNoteDate2; }
-            set
-            {
-                this.SendPropertyChanging();
-                this._creditNoteDate2 = value;
-                this.SendPropertyChanged("CreditNoteDate2");
-            }
-        }
         #endregion Properties
 
-        #region Methods (8)
+        #region Methods (10)
 
-        // Public Methods (8) 
+        // Public Methods (10) 
 
         public override bool Equals(object obj)
         {

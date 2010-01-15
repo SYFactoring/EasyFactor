@@ -399,7 +399,7 @@
             this.dgvInvoices.Location = new System.Drawing.Point(0, 56);
             this.dgvInvoices.Name = "dgvInvoices";
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvInvoices.Size = new System.Drawing.Size(805, 301);
+            this.dgvInvoices.Size = new System.Drawing.Size(805, 369);
             this.dgvInvoices.TabIndex = 0;
             this.dgvInvoices.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvInvoices.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvInvoices_RowPostPaint);
@@ -677,7 +677,7 @@
             this.Controls.Add(this.panelQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "InvoiceMgr";
-            this.Size = new System.Drawing.Size(805, 357);
+            this.Size = new System.Drawing.Size(805, 425);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).EndInit();
