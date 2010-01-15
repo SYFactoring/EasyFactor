@@ -73,6 +73,7 @@
             this.dgvRefundLogs.Location = new System.Drawing.Point(0, 0);
             this.dgvRefundLogs.Name = "dgvRefundLogs";
             this.dgvRefundLogs.ReadOnly = true;
+            this.dgvRefundLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRefundLogs.Size = new System.Drawing.Size(620, 376);
             this.dgvRefundLogs.TabIndex = 0;
             // 

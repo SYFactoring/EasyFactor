@@ -2,11 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.Linq;
 
 namespace CMBC.EasyFactor.DB.dbml
 {
     public partial class InvoiceRefundLog
     {
+        partial void OnValidate(ChangeAction action)
+        {
+            Invoice.RefundAmount = Invoice.InvoiceRefundLogs.Sum(log => log.RefundAmount);
+            Invoice.RefundDate = Invoice.InvoiceRefundLogs.Max(log => log.InvoiceRefundBatch.RefundDate);
+        }
+
         public double AssignAmount
         {
             get

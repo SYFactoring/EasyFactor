@@ -77,6 +77,7 @@
             this.dgvPaymentLogs.Location = new System.Drawing.Point(0, 0);
             this.dgvPaymentLogs.Name = "dgvPaymentLogs";
             this.dgvPaymentLogs.ReadOnly = true;
+            this.dgvPaymentLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPaymentLogs.Size = new System.Drawing.Size(620, 376);
             this.dgvPaymentLogs.TabIndex = 0;
             // 
@@ -120,12 +121,12 @@
             this.cmuLogMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemLogDelete});
             this.cmuLogMgr.Name = "cmuContractMgr";
-            this.cmuLogMgr.Size = new System.Drawing.Size(153, 48);
+            this.cmuLogMgr.Size = new System.Drawing.Size(107, 26);
             // 
             // menuItemLogDelete
             // 
             this.menuItemLogDelete.Name = "menuItemLogDelete";
-            this.menuItemLogDelete.Size = new System.Drawing.Size(152, 22);
+            this.menuItemLogDelete.Size = new System.Drawing.Size(106, 22);
             this.menuItemLogDelete.Text = "&D删除";
             this.menuItemLogDelete.Click += new System.EventHandler(this.DeleteLog);
             // 

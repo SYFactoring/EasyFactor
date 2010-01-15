@@ -477,8 +477,8 @@ namespace CMBC.EasyFactor.ARMgr
                                 throw new Exception("还款ID错误");
                             }
                         }
-                        log.RefundAmount = invoice.RefundAmount2.GetValueOrDefault();
                         log.Invoice = invoice;
+                        log.RefundAmount = invoice.RefundAmount2.GetValueOrDefault();
                         log.InvoiceRefundBatch = batch;
                     }
                 }

@@ -517,8 +517,9 @@ namespace CMBC.EasyFactor.ARMgr
                                 throw new Exception("还款ID错误");
                             }
                         }
-                        log.PaymentAmount = invoice.PaymentAmount2.GetValueOrDefault();
                         log.Invoice = invoice;
+                        log.PaymentAmount = invoice.PaymentAmount2.GetValueOrDefault();
+
                         CreditNote creditNote = null;
                         if (invoice.CreditNoteNo2 != null && invoice.CreditNoteNo2 != string.Empty)
                         {
