@@ -165,6 +165,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.pUGProportionTextBox.Enabled = !isRecoarse;
                 this.cbIsCreditCoverRevolving.Enabled = !isRecoarse;
             }
+            else if ("CreditCoverCurr".Equals(e.PropertyName))
+            {
+                FillCreditCover(cda.CreditCoverCurr);
+            }
+            else if ("FinanceLineCurr".Equals(e.PropertyName))
+            {
+                FillFinanceLine(cda.FinanceLineCurr);
+            }
         }
 
         private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
@@ -365,13 +373,13 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             ClientCreditLine sellerCreditLine = cda.Case.SellerClient.GetFinanceCreditLine(currency);
-            this.tbHighestFinance.Text = String.Format("{0:N2}", sellerCreditLine.CreditLine);
             if (sellerCreditLine != null)
             {
                 cda.FinanceLinePeriodBegin = sellerCreditLine.PeriodBegin;
                 cda.FinanceLinePeriodEnd = sellerCreditLine.PeriodEnd;
                 cda.FinanceLineCurr = sellerCreditLine.CreditLineCurrency;
                 cda.FinanceLine = sellerCreditLine.CreditLine;
+                this.tbHighestFinance.Text = String.Format("{0:N2}", sellerCreditLine.CreditLine);
             }
             else
             {
@@ -379,6 +387,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.financeLinePeriodBeginDateTimePicker.Enabled = false;
                 this.financeLinePeriodEndDateTimePicker.Enabled = false;
                 this.financeLineTextBox.Enabled = false;
+                this.tbHighestFinance.Text = String.Empty;
             }
         }
 
@@ -646,18 +655,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        private void creditCoverCurrComboBox_TextChanged(object sender, EventArgs e)
-        {
-            CDA cda = this.CDABindingSource.DataSource as CDA;
-            FillCreditCover(this.creditCoverCurrComboBox.Text);
-        }
-
-        private void financeLineCurrComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CDA cda = this.CDABindingSource.DataSource as CDA;
-            FillFinanceLine(this.financeLineCurrComboBox.Text);
-        }
-
         private void customValidator2_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             CDA cda = this.CDABindingSource.DataSource as CDA;
@@ -727,6 +724,26 @@ namespace CMBC.EasyFactor.CaseMgr
             else
             {
                 e.IsValid = true;
+            }
+        }
+
+        private void customValidator5_ValidateValue_1(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            CDA cda = this.CDABindingSource.DataSource as CDA;
+            if (cda.Case == null)
+            {
+                return;
+            }
+            if (cda.IsRecoarse.GetValueOrDefault())
+            {
+                if (cda.FinanceLine > cda.CreditCover)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
             }
         }
     }

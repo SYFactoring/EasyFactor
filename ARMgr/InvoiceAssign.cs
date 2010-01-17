@@ -492,6 +492,19 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+            double totalAssign = 0;
+            foreach (Invoice invoice in invoiceList)
+            {
+                totalAssign += invoice.AssignAmount;
+            }
+            if (totalAssign > this._CDA.AssignOutstanding)
+            {
+                DialogResult dr = MessageBox.Show("买卖方关联额度中的买方信用风险担保额度已占满，超额度转让部分不再进行担保，是否确认转让？", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.No)
+                {
+                    return;
+                }
+            }
 
             bool isSaveOK = true;
             InvoiceAssignBatch batch = (InvoiceAssignBatch)this.batchBindingSource.DataSource;
