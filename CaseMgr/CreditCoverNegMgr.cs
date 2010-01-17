@@ -128,11 +128,17 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
                     {
+                        foreach (Invoice invoice in assignBatch.Invoices)
+                        {
+                            App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
+                            App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
+                        }
                         App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
                     }
                     App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
                     App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
                     App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
+                    App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(cda.InvoiceRefundBatches);
                 }
                 App.Current.DbContext.CDAs.DeleteAllOnSubmit(selectedCase.CDAs);
                 App.Current.DbContext.Cases.DeleteOnSubmit(selectedCase);

@@ -28,7 +28,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private BindingSource bs = new BindingSource();
 
-
         #endregion Fields
 
         #region Constructors (1)
@@ -85,9 +84,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Properties
 
-        #region Methods (7)
+        #region Methods (9)
 
-        // Private Methods (7) 
+        // Private Methods (9) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -126,11 +125,17 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
                     {
+                        foreach (Invoice invoice in assignBatch.Invoices)
+                        {
+                            App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
+                            App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
+                        }
                         App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
                     }
                     App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
                     App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
                     App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
+                    App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(cda.InvoiceRefundBatches);
                 }
                 App.Current.DbContext.CDAs.DeleteAllOnSubmit(selectedCase.CDAs);
                 App.Current.DbContext.Cases.DeleteOnSubmit(selectedCase);
@@ -167,6 +172,25 @@ namespace CMBC.EasyFactor.CaseMgr
             Case selectedCase = (Case)this.bs.List[this.dgvCases.CurrentCell.RowIndex];
             CaseDetail caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvCases_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                 e.RowBounds.Location.Y,
+                 this.dgvCases.RowHeadersWidth - 4,
+                 e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                dgvCases.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                dgvCases.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -209,6 +233,24 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Reset(object sender, EventArgs e)
+        {
+            this.cbOwnerDepts.SelectedIndex = 0;
+            this.cbTransactionType.SelectedIndex = 0;
+            this.cbCurrency.SelectedIndex = 0;
+            this.tbCaseCode.Text = string.Empty;
+            this.tbClientName.Text = string.Empty;
+            this.diBegin.Value = default(DateTime);
+            this.diEnd.Value = default(DateTime);
+            this.cbIsContractSigned.Checked = true;
+            this.cbIsCDA.Checked = true;
+        }
+
+        /// <summary>
         /// Select case and close the query form
         /// </summary>
         /// <param name="sender">Event Sender</param>
@@ -247,32 +289,5 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion Methods
-
-        private void Reset(object sender, EventArgs e)
-        {
-            this.cbOwnerDepts.SelectedIndex = 0;
-            this.cbTransactionType.SelectedIndex = 0;
-            this.cbCurrency.SelectedIndex = 0;
-            this.tbCaseCode.Text = string.Empty;
-            this.tbClientName.Text = string.Empty;
-            this.diBegin.Value = default(DateTime);
-            this.diEnd.Value = default(DateTime);
-            this.cbIsContractSigned.Checked = true;
-            this.cbIsCDA.Checked = true;
-        }
-
-        private void dgvCases_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                 e.RowBounds.Location.Y,
-                 this.dgvCases.RowHeadersWidth - 4,
-                 e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgvCases.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgvCases.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);    
-        }
     }
 }

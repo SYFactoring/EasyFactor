@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class RefundBatchMgr : UserControl
     {
-        #region Fields (3)
+		#region Fields (3) 
 
         /// <summary>
         /// 
@@ -32,9 +32,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         /// <summary>
         /// 
@@ -57,11 +57,11 @@ namespace CMBC.EasyFactor.ARMgr
             QUERY
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (2)
+		#region Constructors (2) 
 
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         /// <param name="selectedCDA"></param>
@@ -94,9 +94,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Gets or sets owner form
@@ -116,11 +116,11 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (7)
+		#region Methods (8) 
 
-        // Private Methods (7) 
+		// Private Methods (8) 
 
         /// <summary>
         /// 
@@ -141,6 +141,38 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.CheckDate = DateTime.Now.Date;
             }
             App.Current.DbContext.SubmitChanges();
+        }
+
+        private void DeleteBatch(object sender, EventArgs e)
+        {
+
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            if (MessageBox.Show("是否打算删除此" + selectedBatch.BatchCount + "条还款记录", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            {
+                foreach(InvoiceRefundLog log in selectedBatch.InvoiceRefundLogs)
+                {
+                    Invoice invoice = log.Invoice;
+                    log.Invoice = null;
+                    invoice.CaculateRefund();
+                    App.Current.DbContext.InvoiceRefundLogs.DeleteOnSubmit(log);
+                }
+                App.Current.DbContext.InvoiceRefundBatches.DeleteOnSubmit(selectedBatch);
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
+            }
+
         }
 
         /// <summary>
@@ -176,6 +208,20 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 this.SelectBatch(sender, e);
             }
+        }
+
+        private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                dgvBatches.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                dgvBatches.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -223,7 +269,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             foreach (DataGridViewRow row in this.dgvBatches.SelectedRows)
             {
-                InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[row.Index];
+                InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[row.Index];
                 batch.CheckStatus = "复核未通过";
                 batch.CheckUserName = App.Current.CurUser.Name;
                 batch.CheckDate = DateTime.Now.Date;
@@ -251,52 +297,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregion Methods
-
-        private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                dgvBatches.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgvBatches.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
-        }
-
-        private void DeleteBatch(object sender, EventArgs e)
-        {
-
-            if (this.dgvBatches.SelectedRows.Count == 0)
-            {
-                return;
-            }
-            InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (MessageBox.Show("是否打算删除此" + selectedBatch.BatchCount + "条还款记录", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-            {
-                foreach(InvoiceRefundLog log in selectedBatch.InvoiceRefundLogs)
-                {
-                    Invoice invoice = log.Invoice;
-                    log.Invoice = null;
-                    invoice.CaculateRefund();
-                    App.Current.DbContext.InvoiceRefundLogs.DeleteOnSubmit(log);
-                }
-                App.Current.DbContext.InvoiceRefundBatches.DeleteOnSubmit(selectedBatch);
-                try
-                {
-                    App.Current.DbContext.SubmitChanges();
-                }
-                catch (Exception e1)
-                {
-                    MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
-            }
-
-        }
+		#endregion Methods 
     }
 }
