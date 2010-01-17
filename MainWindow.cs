@@ -17,6 +17,7 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.Report;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.InfoMgr.ExchangeMgr;
 
     /// <summary>
     /// Main Window Form
@@ -727,6 +728,17 @@ namespace CMBC.EasyFactor
         {
             RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.CHECK);
             this.SetDetailPanel(batchMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryExchange(object sender, EventArgs e)
+        {
+            ExchangeMgr mgr = new ExchangeMgr();
+            this.SetDetailPanel(mgr);
         }
     }
 }

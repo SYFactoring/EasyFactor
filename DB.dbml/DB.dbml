@@ -504,4 +504,12 @@
       <Association Name="InvoiceFinanceBatch_Invoice" Member="InvoiceFinanceBatch" ThisKey="FinanceBatchNo" Type="InvoiceFinanceBatch" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Exchange" Member="Exchanges">
+    <Type Name="Exchange">
+      <Column Name="FromCurr" Type="System.String" DbType="Char(3) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ToCurr" Type="System.String" DbType="Char(3) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ExchangeRate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ReExchangeRate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

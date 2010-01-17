@@ -99,6 +99,9 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertInvoice(Invoice instance);
     partial void UpdateInvoice(Invoice instance);
     partial void DeleteInvoice(Invoice instance);
+    partial void InsertExchange(Exchange instance);
+    partial void UpdateExchange(Exchange instance);
+    partial void DeleteExchange(Exchange instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -312,6 +315,14 @@ namespace CMBC.EasyFactor.DB.dbml
 			get
 			{
 				return this.GetTable<Invoice>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Exchange> Exchanges
+		{
+			get
+			{
+				return this.GetTable<Exchange>();
 			}
 		}
 	}
@@ -11681,6 +11692,140 @@ namespace CMBC.EasyFactor.DB.dbml
 		{
 			this.SendPropertyChanging();
 			entity.Invoice = null;
+		}
+	}
+	
+	[Table(Name="dbo.Exchange")]
+	public partial class Exchange : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _FromCurr;
+		
+		private string _ToCurr;
+		
+		private double _ExchangeRate;
+		
+		private double _ReExchangeRate;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnFromCurrChanging(string value);
+    partial void OnFromCurrChanged();
+    partial void OnToCurrChanging(string value);
+    partial void OnToCurrChanged();
+    partial void OnExchangeRateChanging(double value);
+    partial void OnExchangeRateChanged();
+    partial void OnReExchangeRateChanging(double value);
+    partial void OnReExchangeRateChanged();
+    #endregion
+		
+		public Exchange()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_FromCurr", DbType="Char(3) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string FromCurr
+		{
+			get
+			{
+				return this._FromCurr;
+			}
+			set
+			{
+				if ((this._FromCurr != value))
+				{
+					this.OnFromCurrChanging(value);
+					this.SendPropertyChanging();
+					this._FromCurr = value;
+					this.SendPropertyChanged("FromCurr");
+					this.OnFromCurrChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ToCurr", DbType="Char(3) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ToCurr
+		{
+			get
+			{
+				return this._ToCurr;
+			}
+			set
+			{
+				if ((this._ToCurr != value))
+				{
+					this.OnToCurrChanging(value);
+					this.SendPropertyChanging();
+					this._ToCurr = value;
+					this.SendPropertyChanged("ToCurr");
+					this.OnToCurrChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ExchangeRate", DbType="Float NOT NULL")]
+		public double ExchangeRate
+		{
+			get
+			{
+				return this._ExchangeRate;
+			}
+			set
+			{
+				if ((this._ExchangeRate != value))
+				{
+					this.OnExchangeRateChanging(value);
+					this.SendPropertyChanging();
+					this._ExchangeRate = value;
+					this.SendPropertyChanged("ExchangeRate");
+					this.OnExchangeRateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ReExchangeRate", DbType="Float NOT NULL")]
+		public double ReExchangeRate
+		{
+			get
+			{
+				return this._ReExchangeRate;
+			}
+			set
+			{
+				if ((this._ReExchangeRate != value))
+				{
+					this.OnReExchangeRateChanging(value);
+					this.SendPropertyChanging();
+					this._ReExchangeRate = value;
+					this.SendPropertyChanged("ReExchangeRate");
+					this.OnReExchangeRateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

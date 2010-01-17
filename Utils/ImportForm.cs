@@ -469,10 +469,13 @@ namespace CMBC.EasyFactor.Utils
                     client.ProductEN = String.Format("{0:G}", valueArray[row, column++]);
                     client.ClientLevel = String.Format("{0:G}", valueArray[row, column++]);
                     string groupNo = String.Format("{0:G}", valueArray[row, column++]);
-                    Client clientGroup = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == groupNo);
-                    if (clientGroup == null)
+                    if (groupNo != string.Empty)
                     {
-                        throw new Exception("集团客户号错误: " + groupNo);
+                        Client clientGroup = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == groupNo);
+                        if (clientGroup == null)
+                        {
+                            throw new Exception("集团客户号错误: " + groupNo);
+                        }
                     }
                     column++;
                     client.RegistrationNumber = String.Format("{0:G}", valueArray[row, column++]);
