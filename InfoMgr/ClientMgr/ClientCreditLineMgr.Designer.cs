@@ -48,6 +48,7 @@
             this.colPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLines)).BeginInit();
             this.SuspendLayout();
@@ -56,6 +57,7 @@
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.lblCount);
             this.panelQuery.Controls.Add(this.cbClientGroupType);
             this.panelQuery.Controls.Add(this.btnQuery);
             this.panelQuery.Controls.Add(this.tbClientName);
@@ -193,7 +195,7 @@
             this.dgvClientCreditLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvClientCreditLines.Size = new System.Drawing.Size(935, 314);
             this.dgvClientCreditLines.TabIndex = 1;
-            this.dgvClientCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientCreditLines_CellDoubleClick);
+            this.dgvClientCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvClientCreditLines.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvClientCreditLines_RowPostPaint);
             // 
             // colClientEDICode
@@ -261,6 +263,18 @@
             this.colCreditLineStatus.Name = "colCreditLineStatus";
             this.colCreditLineStatus.ReadOnly = true;
             // 
+            // lblCount
+            // 
+            this.lblCount.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCount.BackgroundStyle.Class = "";
+            this.lblCount.Location = new System.Drawing.Point(529, 7);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(56, 16);
+            this.lblCount.TabIndex = 8;
+            // 
             // ClientCreditLineMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -295,5 +309,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
+        private DevComponents.DotNetBar.LabelX lblCount;
     }
 }

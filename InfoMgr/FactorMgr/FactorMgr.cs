@@ -20,7 +20,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// </summary>
     public partial class FactorMgr : UserControl
     {
-        #region Fields (2)
+		#region Fields (2) 
 
         /// <summary>
         /// 
@@ -31,9 +31,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private readonly bool isEditable;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Constructors (1)
+		#region Constructors (1) 
 
         /// <summary>
         /// Initializes a new instance of the FactorMgrUI class
@@ -54,9 +54,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.cbCountry.ValueMember = "CountryNameEN";
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Gets or sets onwer form
@@ -76,11 +76,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             set;
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (11)
+		#region Methods (12) 
 
-        // Private Methods (11) 
+		// Private Methods (12) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -129,6 +129,16 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                             MessageBox.Show("不能删除此机构,已存在相关案件信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
+                        if (selectedFactor.FactorAccounts.Count > 0)
+                        {
+                            MessageBox.Show("不能删除此机构,已存在相关账户信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        if (selectedFactor.GroupFactors.Count > 0)
+                        {
+                            MessageBox.Show("不能删除此机构,已存在相关子机构信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
                         App.Current.DbContext.Factors.DeleteOnSubmit(selectedFactor);
                         try
                         {
@@ -167,6 +177,25 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     factorDetail.ShowDialog(this);
                 }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvFactors_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                this.dgvFactors.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                this.dgvFactors.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                this.dgvFactors.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -334,20 +363,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
         }
 
-        #endregion Methods
-
-        private void dgvFactors_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                this.dgvFactors.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                this.dgvFactors.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                this.dgvFactors.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
-        }
+		#endregion Methods 
     }
 }

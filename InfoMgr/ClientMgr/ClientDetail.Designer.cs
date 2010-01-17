@@ -243,6 +243,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DevComponents.DotNetBar.LabelX telephoneLabel;
             DevComponents.DotNetBar.LabelX lblContractType;
             DevComponents.DotNetBar.LabelX lblCreateUserName;
+            DevComponents.DotNetBar.LabelX lblGroupCreditLine;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -278,7 +279,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colUnfreezeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupPanelClientCreditLine = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.isShareGroupCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.btnGroupCreditLineSelect = new DevComponents.DotNetBar.ButtonX();
+            this.tbGroupCreditLine = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientCreditLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnClientCreditLineUpdate = new DevComponents.DotNetBar.ButtonX();
             this.creditLineTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -406,6 +408,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.requiredFieldValidator12 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.contractErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.contractHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.tbGroupCreditLineCurr = new DevComponents.DotNetBar.Controls.TextBoxX();
             clientNameCNLabel = new DevComponents.DotNetBar.LabelX();
             addressCNLabel = new DevComponents.DotNetBar.LabelX();
             cityCNLabel = new DevComponents.DotNetBar.LabelX();
@@ -454,6 +457,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             telephoneLabel = new DevComponents.DotNetBar.LabelX();
             lblContractType = new DevComponents.DotNetBar.LabelX();
             lblCreateUserName = new DevComponents.DotNetBar.LabelX();
+            lblGroupCreditLine = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPanelClientCreditLine.SuspendLayout();
@@ -857,7 +861,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             periodBeginLabel.BackgroundStyle.Class = "";
             periodBeginLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            periodBeginLabel.Location = new System.Drawing.Point(252, 11);
+            periodBeginLabel.Location = new System.Drawing.Point(252, 8);
             periodBeginLabel.Name = "periodBeginLabel";
             periodBeginLabel.Size = new System.Drawing.Size(59, 16);
             periodBeginLabel.TabIndex = 2;
@@ -872,7 +876,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             approveNoLabel.BackgroundStyle.Class = "";
             approveNoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            approveNoLabel.Location = new System.Drawing.Point(252, 34);
+            approveNoLabel.Location = new System.Drawing.Point(252, 30);
             approveNoLabel.Name = "approveNoLabel";
             approveNoLabel.Size = new System.Drawing.Size(59, 16);
             approveNoLabel.TabIndex = 7;
@@ -887,7 +891,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             approveTypeLabel.BackgroundStyle.Class = "";
             approveTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            approveTypeLabel.Location = new System.Drawing.Point(253, 55);
+            approveTypeLabel.Location = new System.Drawing.Point(253, 52);
             approveTypeLabel.Name = "approveTypeLabel";
             approveTypeLabel.Size = new System.Drawing.Size(59, 16);
             approveTypeLabel.TabIndex = 11;
@@ -1197,6 +1201,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblCreateUserName.Text = "经办人:";
             lblCreateUserName.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
+            // lblGroupCreditLine
+            // 
+            lblGroupCreditLine.AutoSize = true;
+            lblGroupCreditLine.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblGroupCreditLine.BackgroundStyle.Class = "";
+            lblGroupCreditLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            lblGroupCreditLine.Location = new System.Drawing.Point(253, 75);
+            lblGroupCreditLine.Name = "lblGroupCreditLine";
+            lblGroupCreditLine.Size = new System.Drawing.Size(84, 16);
+            lblGroupCreditLine.TabIndex = 36;
+            lblGroupCreditLine.Text = "集团额度上限:";
+            // 
             // tabControl
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
@@ -1436,7 +1455,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.groupPanelClientCreditLine.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelClientCreditLine.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.groupPanelClientCreditLine.Controls.Add(this.isShareGroupCheckBox);
+            this.groupPanelClientCreditLine.Controls.Add(this.tbGroupCreditLineCurr);
+            this.groupPanelClientCreditLine.Controls.Add(this.btnGroupCreditLineSelect);
+            this.groupPanelClientCreditLine.Controls.Add(lblGroupCreditLine);
+            this.groupPanelClientCreditLine.Controls.Add(this.tbGroupCreditLine);
             this.groupPanelClientCreditLine.Controls.Add(this.btnClientCreditLineUpdate);
             this.groupPanelClientCreditLine.Controls.Add(this.creditLineTextBox);
             this.groupPanelClientCreditLine.Controls.Add(this.btnClientCreditLineRefresh);
@@ -1508,20 +1530,30 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientCreditLine.StyleMouseOver.Class = "";
             this.groupPanelClientCreditLine.TabIndex = 0;
             // 
-            // isShareGroupCheckBox
+            // btnGroupCreditLineSelect
             // 
-            this.isShareGroupCheckBox.AutoSize = true;
-            this.isShareGroupCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.btnGroupCreditLineSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnGroupCreditLineSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnGroupCreditLineSelect.Location = new System.Drawing.Point(543, 69);
+            this.btnGroupCreditLineSelect.Name = "btnGroupCreditLineSelect";
+            this.btnGroupCreditLineSelect.Size = new System.Drawing.Size(27, 23);
+            this.btnGroupCreditLineSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnGroupCreditLineSelect.TabIndex = 38;
+            this.btnGroupCreditLineSelect.Text = "...";
+            this.btnGroupCreditLineSelect.Click += new System.EventHandler(this.SelectGroupCreditLine);
+            // 
+            // tbGroupCreditLine
             // 
             // 
             // 
-            this.isShareGroupCheckBox.BackgroundStyle.Class = "";
-            this.isShareGroupCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.clientCreditLineBindingSource, "IsShareGroup", true));
-            this.isShareGroupCheckBox.Location = new System.Drawing.Point(444, 32);
-            this.isShareGroupCheckBox.Name = "isShareGroupCheckBox";
-            this.isShareGroupCheckBox.Size = new System.Drawing.Size(126, 16);
-            this.isShareGroupCheckBox.TabIndex = 37;
-            this.isShareGroupCheckBox.Text = "是否占用集团额度";
+            // 
+            this.tbGroupCreditLine.Border.Class = "TextBoxBorder";
+            this.tbGroupCreditLine.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "GroupCreditLine.CreditLine", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.tbGroupCreditLine.Location = new System.Drawing.Point(415, 71);
+            this.tbGroupCreditLine.Name = "tbGroupCreditLine";
+            this.tbGroupCreditLine.Size = new System.Drawing.Size(122, 20);
+            this.tbGroupCreditLine.TabIndex = 37;
+            this.creditLineValidator.SetValidator1(this.tbGroupCreditLine, this.requiredFieldValidator7);
             // 
             // clientCreditLineBindingSource
             // 
@@ -1546,7 +1578,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.creditLineTextBox.Border.Class = "TextBoxBorder";
             this.creditLineTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "CreditLine", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.creditLineTextBox.Location = new System.Drawing.Point(90, 51);
+            this.creditLineTextBox.Location = new System.Drawing.Point(90, 50);
             this.creditLineTextBox.Name = "creditLineTextBox";
             this.creditLineTextBox.Size = new System.Drawing.Size(152, 20);
             this.creditLineTextBox.TabIndex = 10;
@@ -1571,7 +1603,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.creditLineCommentTextBox.Border.Class = "TextBoxBorder";
             this.creditLineCommentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "Comment", true));
-            this.creditLineCommentTextBox.Location = new System.Drawing.Point(90, 94);
+            this.creditLineCommentTextBox.Location = new System.Drawing.Point(90, 97);
             this.creditLineCommentTextBox.Multiline = true;
             this.creditLineCommentTextBox.Name = "creditLineCommentTextBox";
             this.creditLineCommentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -1791,7 +1823,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             "进口保理",
             "有追索权保理",
             "无追索权保理"});
-            this.approveTypeComboBox.Location = new System.Drawing.Point(317, 52);
+            this.approveTypeComboBox.Location = new System.Drawing.Point(317, 49);
             this.approveTypeComboBox.Name = "approveTypeComboBox";
             this.approveTypeComboBox.Size = new System.Drawing.Size(121, 21);
             this.approveTypeComboBox.TabIndex = 12;
@@ -1804,7 +1836,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.approveNoTextBox.Border.Class = "TextBoxBorder";
             this.approveNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "ApproveNo", true));
-            this.approveNoTextBox.Location = new System.Drawing.Point(316, 30);
+            this.approveNoTextBox.Location = new System.Drawing.Point(316, 27);
             this.approveNoTextBox.Name = "approveNoTextBox";
             this.approveNoTextBox.Size = new System.Drawing.Size(122, 20);
             this.approveNoTextBox.TabIndex = 8;
@@ -1891,7 +1923,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.creditLineTypeComboBox.Items.AddRange(new object[] {
             "保理预付款融资额度",
             "买方信用风险担保额度"});
-            this.creditLineTypeComboBox.Location = new System.Drawing.Point(90, 7);
+            this.creditLineTypeComboBox.Location = new System.Drawing.Point(90, 4);
             this.creditLineTypeComboBox.Name = "creditLineTypeComboBox";
             this.creditLineTypeComboBox.Size = new System.Drawing.Size(152, 21);
             this.creditLineTypeComboBox.TabIndex = 1;
@@ -1901,7 +1933,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.creditLineCurrencyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.clientCreditLineBindingSource, "CreditLineCurrency", true));
             this.creditLineCurrencyComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.creditLineCurrencyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.creditLineCurrencyComboBox.Location = new System.Drawing.Point(90, 29);
+            this.creditLineCurrencyComboBox.Location = new System.Drawing.Point(90, 27);
             this.creditLineCurrencyComboBox.Name = "creditLineCurrencyComboBox";
             this.creditLineCurrencyComboBox.Size = new System.Drawing.Size(152, 21);
             this.creditLineCurrencyComboBox.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -3239,6 +3271,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.contractHighlighter.ContainerControl = this;
             // 
+            // tbGroupCreditLineCurr
+            // 
+            // 
+            // 
+            // 
+            this.tbGroupCreditLineCurr.Border.Class = "TextBoxBorder";
+            this.tbGroupCreditLineCurr.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientCreditLineBindingSource, "GroupCreditLine.CreditLineCurrency", true));
+            this.tbGroupCreditLineCurr.Location = new System.Drawing.Point(343, 71);
+            this.tbGroupCreditLineCurr.Name = "tbGroupCreditLineCurr";
+            this.tbGroupCreditLineCurr.Size = new System.Drawing.Size(66, 20);
+            this.tbGroupCreditLineCurr.TabIndex = 39;
+            this.creditLineValidator.SetValidator1(this.tbGroupCreditLineCurr, this.requiredFieldValidator7);
+            // 
             // ClientDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3292,7 +3337,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
         private DevComponents.DotNetBar.ButtonX btnGroupSelect;
-        private DevComponents.DotNetBar.Controls.CheckBoxX isShareGroupCheckBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbGroupCreditLine;
+        private DevComponents.DotNetBar.ButtonX btnGroupCreditLineSelect;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbGroupCreditLineCurr;
 
     }
 }

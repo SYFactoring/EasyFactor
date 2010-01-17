@@ -20,7 +20,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientMgr : UserControl
     {
-        #region Fields (3)
+		#region Fields (3) 
 
         /// <summary>
         /// 
@@ -32,9 +32,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private bool isEditable;
         private OpClientMgrType opClientMgrType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         public enum OpClientMgrType
         {
@@ -47,11 +47,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DOMINATE_CLIENT
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (2)
+		#region Constructors (2) 
 
-        public ClientMgr(OpClientMgrType clientMgrType)
+public ClientMgr(OpClientMgrType clientMgrType)
             : this(false)
         {
             this.opClientMgrType = clientMgrType;
@@ -109,9 +109,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbDepartment.SelectedIndex = -1;
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Gets or sets owner form
@@ -131,11 +131,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             set;
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (12)
+		#region Methods (13) 
 
-        // Private Methods (12) 
+		// Private Methods (13) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -189,6 +189,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             MessageBox.Show("不能删除此客户,已存在相关案件信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
+                        if (selectedClient.GroupClients.Count > 0)
+                        {
+                            MessageBox.Show("不能删除此客户,已存在相关子公司信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        if (selectedClient.ClientAccounts.Count > 0)
+                        {
+                            MessageBox.Show("不能删除此客户,已存在相关账户信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
                         App.Current.DbContext.Clients.DeleteOnSubmit(selectedClient);
                         try
                         {
@@ -228,6 +238,25 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     clientDetail.ShowDialog(this);
                 }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+         private void dgvClients_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                this.dgvClients.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                this.dgvClients.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                this.dgvClients.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -429,20 +458,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-        #endregion Methods
-
-         private void dgvClients_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                this.dgvClients.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                this.dgvClients.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                this.dgvClients.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
-        }
+		#endregion Methods 
     }
 }

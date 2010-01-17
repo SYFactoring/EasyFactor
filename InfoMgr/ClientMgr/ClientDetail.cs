@@ -241,9 +241,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Constructors
 
-        #region Methods (32)
+        #region Methods (30)
 
-        // Private Methods (32) 
+        // Private Methods (30) 
 
         private void cbDepartments_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
         {
@@ -379,6 +379,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             try
             {
                 client.ClientCreditLines.Remove(creditLine);
+                App.Current.DbContext.ClientCreditLines.DeleteOnSubmit(creditLine);
                 App.Current.DbContext.SubmitChanges();
             }
             catch (Exception e1)
@@ -397,6 +398,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteContract(object sender, EventArgs e)
         {
             Client client = (Client)this.clientBindingSource.DataSource;
@@ -429,11 +435,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
                     {
+                        foreach (Invoice invoice in assignBatch.Invoices)
+                        {
+                            App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
+                            App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
+                        }
                         App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
                     }
                     App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
                     App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
                     App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
+                    App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(cda.InvoiceRefundBatches);
                 }
                 App.Current.DbContext.CDAs.DeleteAllOnSubmit(CDAList);
                 App.Current.DbContext.Contracts.DeleteOnSubmit(contract);
@@ -968,6 +980,36 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (clientMgr.Selected != null)
             {
                 client.ClientGroup = clientMgr.Selected;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectGroupCreditLine(object sender, EventArgs e)
+        {
+            Client client = (Client)clientBindingSource.DataSource;
+            ClientCreditLineMgr mgr = new ClientCreditLineMgr(client.ClientGroup);
+            QueryForm queryFrom = new QueryForm(mgr, "选择集团额度");
+            mgr.OwnerForm = queryFrom;
+            queryFrom.ShowDialog(this);
+            ClientCreditLine selected = mgr.Selected;
+            if (selected != null)
+            {
+                ClientCreditLine clientCreditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
+                if (clientCreditLine.CreditLineType != selected.CreditLineType)
+                {
+                    MessageBox.Show("所选集团的额度类型与客户的额度类型不相同", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                if (clientCreditLine.CreditLine > selected.CreditLine)
+                {
+                    MessageBox.Show("所选集团的保理预付款融资额度必须大于客户的保理预付款融资额度", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                clientCreditLine.GroupCreditLine = selected;
             }
         }
 

@@ -33,6 +33,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #region Constructors (1)
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="groupClient"></param>
+        public ClientCreditLineMgr(Client groupClient):this(OpClientCreditMgrType.QUERY_GROUP)
+        {
+            this.panelQuery.Visible = false;
+            this.bs.DataSource = groupClient.ClientCreditLines;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="opType"></param>
         public ClientCreditLineMgr(OpClientCreditMgrType opType)
         {
             InitializeComponent();
@@ -57,11 +71,55 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Constructors
 
-        #region Methods (2)
+        #region Properties (2)
 
-        // Private Methods (2) 
+        /// <summary>
+        /// Gets or sets owner form
+        /// </summary>
+        public Form OwnerForm
+        {
+            get;
+            set;
+        }
 
-        private void dgvClientCreditLines_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        /// <summary>
+        /// Gets or sets selected ClientCreditLine
+        /// </summary>
+        public ClientCreditLine Selected
+        {
+            get;
+            set;
+        }
+
+        #endregion Properties
+
+        #region Methods (5)
+
+        // Private Methods (5) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.OwnerForm == null)
+            {
+                this.DetailClientCreditLine(sender, e);
+            }
+            else
+            {
+                this.SelectClientCreditLine(sender, e);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailClientCreditLine(object sender, EventArgs e)
         {
             if (this.dgvClientCreditLines.CurrentCell == null)
             {
@@ -72,6 +130,30 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             detail.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvClientCreditLines_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                this.dgvClientCreditLines.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                this.dgvClientCreditLines.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                this.dgvClientCreditLines.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Query(object sender, EventArgs e)
         {
             string clientEDICode = tbClientEDICode.Text;
@@ -89,22 +171,30 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
              && (isGroup == true ? c.Client.GroupClients.Count > 0 : true)
                  );
             this.bs.DataSource = queryResult;
+            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectClientCreditLine(object sender, EventArgs e)
+        {
+            if (this.dgvClientCreditLines.CurrentCell == null)
+            {
+                return;
+            }
+
+            ClientCreditLine creditLine = (ClientCreditLine)this.bs.List[this.dgvClientCreditLines.CurrentCell.RowIndex];
+            this.Selected = creditLine;
+            if (this.OwnerForm != null)
+            {
+                this.OwnerForm.DialogResult = DialogResult.Yes;
+                this.OwnerForm.Close();
+            }
         }
 
         #endregion Methods
-
-        private void dgvClientCreditLines_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                this.dgvClientCreditLines.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                this.dgvClientCreditLines.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                this.dgvClientCreditLines.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
-        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=10.171.5.99\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=192.168.1.100;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[Case]" Member="Cases">
     <Type Name="Case">
       <Column Name="CaseCode" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -175,8 +175,10 @@
       <Column Name="UnfreezeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="false" />
-      <Column Name="IsShareGroup" Type="System.Boolean" DbType="bit" CanBeNull="false" />
+      <Column Name="GroupCreditLineID" Type="System.Int32" DbType="INT" CanBeNull="true" />
+      <Association Name="ClientCreditLine_ClientCreditLine" Member="ClientCreditLines" OtherKey="GroupCreditLineID" Type="ClientCreditLine" />
       <Association Name="Client_ClientCreditLine" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
+      <Association Name="ClientCreditLine_ClientCreditLine" Member="GroupCreditLine" ThisKey="GroupCreditLineID" Type="ClientCreditLine" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Contract" Member="Contracts">

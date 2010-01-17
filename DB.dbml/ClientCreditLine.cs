@@ -11,7 +11,14 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.Client.ClientNameCN;
+                if (Client != null)
+                {
+                    return this.Client.ClientNameCN;
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
 
@@ -19,7 +26,14 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.Client.ClientNameEN_1;
+                if (Client != null)
+                {
+                    return this.Client.ClientNameEN_1;
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
     }

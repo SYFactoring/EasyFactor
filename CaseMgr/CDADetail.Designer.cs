@@ -218,6 +218,10 @@
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.customValidator3 = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.customValidator4 = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.customValidator5 = new DevComponents.DotNetBar.Validator.CustomValidator();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -1426,6 +1430,7 @@
             this.financeLinePeriodEndDateTimePicker.Size = new System.Drawing.Size(108, 20);
             this.financeLinePeriodEndDateTimePicker.TabIndex = 25;
             this.superValidator.SetValidator1(this.financeLinePeriodEndDateTimePicker, this.compareValidator2);
+            this.superValidator.SetValidator2(this.financeLinePeriodEndDateTimePicker, this.customValidator5);
             // 
             // financeLinePeriodBeginDateTimePicker
             // 
@@ -1472,6 +1477,7 @@
             this.financeLineTextBox.Name = "financeLineTextBox";
             this.financeLineTextBox.Size = new System.Drawing.Size(100, 20);
             this.financeLineTextBox.TabIndex = 22;
+            this.superValidator.SetValidator1(this.financeLineTextBox, this.customValidator4);
             // 
             // financeLineCurrComboBox
             // 
@@ -1485,6 +1491,7 @@
             this.financeLineCurrComboBox.Size = new System.Drawing.Size(64, 21);
             this.financeLineCurrComboBox.TabIndex = 21;
             this.financeLineCurrComboBox.WatermarkText = "币别";
+            this.financeLineCurrComboBox.SelectedIndexChanged += new System.EventHandler(this.financeLineCurrComboBox_SelectedIndexChanged);
             // 
             // reassignGracePeriodTextBox
             // 
@@ -1544,6 +1551,7 @@
             this.creditCoverPeriodEndDateTimePicker.Size = new System.Drawing.Size(108, 20);
             this.creditCoverPeriodEndDateTimePicker.TabIndex = 12;
             this.superValidator.SetValidator1(this.creditCoverPeriodEndDateTimePicker, this.compareValidator1);
+            this.superValidator.SetValidator2(this.creditCoverPeriodEndDateTimePicker, this.customValidator3);
             // 
             // creditCoverPeriodBeginDateTimePicker
             // 
@@ -1602,6 +1610,7 @@
             this.creditCoverTextBox.Name = "creditCoverTextBox";
             this.creditCoverTextBox.Size = new System.Drawing.Size(100, 20);
             this.creditCoverTextBox.TabIndex = 9;
+            this.superValidator.SetValidator1(this.creditCoverTextBox, this.customValidator2);
             // 
             // creditCoverCurrComboBox
             // 
@@ -1615,6 +1624,7 @@
             this.creditCoverCurrComboBox.Size = new System.Drawing.Size(64, 21);
             this.creditCoverCurrComboBox.TabIndex = 8;
             this.creditCoverCurrComboBox.WatermarkText = "币别";
+            this.creditCoverCurrComboBox.TextChanged += new System.EventHandler(this.creditCoverCurrComboBox_TextChanged);
             // 
             // groupPanelOther
             // 
@@ -1928,6 +1938,30 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
+            // customValidator2
+            // 
+            this.customValidator2.ErrorMessage = "额度通知书中买方信用风险额度不能大于案子中买方信用风险额度";
+            this.customValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator2.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator2_ValidateValue);
+            // 
+            // customValidator3
+            // 
+            this.customValidator3.ErrorMessage = "额度通知书的有效期限不能超过买方客户额度的有效期限";
+            this.customValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator3.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator3_ValidateValue);
+            // 
+            // customValidator4
+            // 
+            this.customValidator4.ErrorMessage = "额度通知书中卖方预付款额度不能大于案子中卖方预付款额度";
+            this.customValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator4.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator4_ValidateValue);
+            // 
+            // customValidator5
+            // 
+            this.customValidator5.ErrorMessage = "额度通知书的有效期限不能超过卖方客户额度的有效期限";
+            this.customValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator5.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator5_ValidateValue);
+            // 
             // CDADetail
             // 
             this.AcceptButton = this.btnCDASave;
@@ -1972,5 +2006,9 @@
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbIsNotice;
         private DevComponents.DotNetBar.Controls.TextBoxX tbReviewNo;
         private DevComponents.DotNetBar.Controls.TextBoxX tbRemark;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator2;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator3;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator4;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator5;
     }
 }
