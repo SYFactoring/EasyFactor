@@ -261,7 +261,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             foreach (DataGridViewRow row in this.dgvBatches.SelectedRows)
             {
-                InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[row.Index];
+                InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.bs.List[row.Index];
                 batch.CheckStatus = "复核未通过";
                 batch.CheckUserName = App.Current.CurUser.Name;
                 batch.CheckDate = DateTime.Now.Date;

@@ -30,13 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvRefundLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemLogDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemLogDelete = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRefundLogs)).BeginInit();
             this.cmuLogMgr.SuspendLayout();
             this.SuspendLayout();
@@ -60,14 +61,14 @@
             this.colRefundAmount,
             this.colComment});
             this.dgvRefundLogs.ContextMenuStrip = this.cmuLogMgr;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRefundLogs.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRefundLogs.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvRefundLogs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvRefundLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvRefundLogs.Location = new System.Drawing.Point(0, 0);
@@ -77,27 +78,6 @@
             this.dgvRefundLogs.Size = new System.Drawing.Size(620, 376);
             this.dgvRefundLogs.TabIndex = 0;
             this.dgvRefundLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvRefundLogs_RowPostPaint);
-            // 
-            // colInvoiceNo
-            // 
-            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
-            this.colInvoiceNo.HeaderText = "发票号";
-            this.colInvoiceNo.Name = "colInvoiceNo";
-            this.colInvoiceNo.ReadOnly = true;
-            // 
-            // colRefundAmount
-            // 
-            this.colRefundAmount.DataPropertyName = "RefundAmount";
-            this.colRefundAmount.HeaderText = "还款金额";
-            this.colRefundAmount.Name = "colRefundAmount";
-            this.colRefundAmount.ReadOnly = true;
-            // 
-            // colComment
-            // 
-            this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "备注";
-            this.colComment.Name = "colComment";
-            this.colComment.ReadOnly = true;
             // 
             // cmuLogMgr
             // 
@@ -112,6 +92,29 @@
             this.menuItemLogDelete.Size = new System.Drawing.Size(106, 22);
             this.menuItemLogDelete.Text = "&D删除";
             this.menuItemLogDelete.Click += new System.EventHandler(this.DeleteLog);
+            // 
+            // colInvoiceNo
+            // 
+            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
+            this.colInvoiceNo.HeaderText = "发票号";
+            this.colInvoiceNo.Name = "colInvoiceNo";
+            this.colInvoiceNo.ReadOnly = true;
+            // 
+            // colRefundAmount
+            // 
+            this.colRefundAmount.DataPropertyName = "RefundAmount";
+            dataGridViewCellStyle2.Format = "N2";
+            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colRefundAmount.HeaderText = "还款金额";
+            this.colRefundAmount.Name = "colRefundAmount";
+            this.colRefundAmount.ReadOnly = true;
+            // 
+            // colComment
+            // 
+            this.colComment.DataPropertyName = "Comment";
+            this.colComment.HeaderText = "备注";
+            this.colComment.Name = "colComment";
+            this.colComment.ReadOnly = true;
             // 
             // RefundBatchDetail
             // 
@@ -129,10 +132,10 @@
         #endregion
 
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvRefundLogs;
+        private System.Windows.Forms.ContextMenuStrip cmuLogMgr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemLogDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
-        private System.Windows.Forms.ContextMenuStrip cmuLogMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemLogDelete;
     }
 }

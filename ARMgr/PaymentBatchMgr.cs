@@ -152,8 +152,13 @@ namespace CMBC.EasyFactor.ARMgr
             InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
             if (MessageBox.Show("是否打算删除此" + selectedBatch.BatchCount + "条付款记录", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(selectedBatch.InvoicePaymentLogs);
-                App.Current.DbContext.InvoicePaymentBatches.DeleteOnSubmit(selectedBatch);
+                foreach (InvoicePaymentLog log in selectedBatch.InvoicePaymentLogs)
+                {
+                    Invoice invoice = log.Invoice;
+                    log.Invoice = null;
+                    invoice.CaculatePayment();
+                    App.Current.DbContext.InvoicePaymentLogs.DeleteOnSubmit(log);
+                } App.Current.DbContext.InvoicePaymentBatches.DeleteOnSubmit(selectedBatch);
                 try
                 {
                     App.Current.DbContext.SubmitChanges();
@@ -282,7 +287,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             foreach (DataGridViewRow row in this.dgvBatches.SelectedRows)
             {
-                InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[row.Index];
+                InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[row.Index];
                 batch.CheckStatus = "复核未通过";
                 batch.CheckUserName = App.Current.CurUser.Name;
                 batch.CheckDate = DateTime.Now.Date;

@@ -277,7 +277,13 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
             if (MessageBox.Show("是否打算删除此" + selectedBatch.BatchCount + "条还款记录", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(selectedBatch.InvoiceRefundLogs);
+                foreach(InvoiceRefundLog log in selectedBatch.InvoiceRefundLogs)
+                {
+                    Invoice invoice = log.Invoice;
+                    log.Invoice = null;
+                    invoice.CaculateRefund();
+                    App.Current.DbContext.InvoiceRefundLogs.DeleteOnSubmit(log);
+                }
                 App.Current.DbContext.InvoiceRefundBatches.DeleteOnSubmit(selectedBatch);
                 try
                 {
