@@ -1231,6 +1231,7 @@ namespace CMBC.EasyFactor.Utils
                                 throw new Exception("缺少付款批次信息: " + invoice.InvoiceNo);
                             }
                             paymentLog.InvoicePaymentBatch = paymentBatch;
+                            invoice.CaculatePayment();
                         }
 
                         //还款批次信息
@@ -1285,6 +1286,7 @@ namespace CMBC.EasyFactor.Utils
                                 throw new Exception("缺少还款批次信息: " + invoice.InvoiceNo);
                             }
                             refundLog.InvoiceRefundBatch = refundBatch;
+                            invoice.CaculateRefund();
                         }
 
                         //手续费
@@ -1428,6 +1430,7 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("缺少贷项通知付款批次信息: " + invoice.InvoiceNo);
                         }
                         log.InvoicePaymentBatch = paymentBatch;
+                        invoice.CaculatePayment();
 
                         result++;
                         worker.ReportProgress((int)((float)(row + size1) * 100 / (float)totalSize));

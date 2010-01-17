@@ -539,6 +539,7 @@ namespace CMBC.EasyFactor.ARMgr
                             log.CreditNote = creditNote;
                         }
                         log.InvoicePaymentBatch = batch;
+                        invoice.CaculatePayment();
                     }
                 }
                 if (batch.InvoicePaymentLogs.Count == 0)
@@ -552,7 +553,9 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 foreach (InvoicePaymentLog log in logList)
                 {
-                    log.Invoice = null;
+                    Invoice invoice = log.Invoice;
+                    invoice.InvoicePaymentLogs.Remove(log);
+                    invoice.CaculatePayment();
                     log.CreditNote = null;
                     log.InvoicePaymentBatch = null;
                 }

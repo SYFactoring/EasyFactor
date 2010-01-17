@@ -480,6 +480,7 @@ namespace CMBC.EasyFactor.ARMgr
                         log.Invoice = invoice;
                         log.RefundAmount = invoice.RefundAmount2.GetValueOrDefault();
                         log.InvoiceRefundBatch = batch;
+                        invoice.CaculateRefund();
                     }
                 }
                 if (batch.InvoiceRefundLogs.Count == 0)
@@ -493,7 +494,9 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 foreach (InvoiceRefundLog log in logList)
                 {
-                    log.Invoice = null;
+                    Invoice invoice = log.Invoice;
+                    invoice.InvoiceRefundLogs.Remove(log);
+                    invoice.CaculateRefund();
                     log.InvoiceRefundBatch = null;
                 }
                 batch.CDA = null;

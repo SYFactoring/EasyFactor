@@ -44,6 +44,11 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteLog(object sender, EventArgs e)
         {
             if (this.dgvRefundLogs.SelectedRows.Count == 0)
@@ -53,7 +58,9 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceRefundLog log = (InvoiceRefundLog)this.bs.List[this.dgvRefundLogs.SelectedRows[0].Index];
             try
             {
-                App.Current.DbContext.InvoiceRefundLogs.DeleteOnSubmit(log);
+                Invoice invoice = log.Invoice;
+                invoice.InvoiceRefundLogs.Remove(log);
+                invoice.CaculateRefund();
                 App.Current.DbContext.SubmitChanges();
             }
             catch (Exception e1)

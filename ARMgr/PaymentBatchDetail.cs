@@ -58,7 +58,9 @@ namespace CMBC.EasyFactor.ARMgr
             InvoicePaymentLog log = (InvoicePaymentLog)this.bs.List[this.dgvPaymentLogs.SelectedRows[0].Index];
             try
             {
-                App.Current.DbContext.InvoicePaymentLogs.DeleteOnSubmit(log);
+                Invoice invoice = log.Invoice;
+                invoice.InvoicePaymentLogs.Remove(log);
+                invoice.CaculatePayment();
                 App.Current.DbContext.SubmitChanges();
             }
             catch (Exception e1)

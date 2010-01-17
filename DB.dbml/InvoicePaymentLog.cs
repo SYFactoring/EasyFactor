@@ -9,51 +9,6 @@ namespace CMBC.EasyFactor.DB.dbml
     {
         #region Properties (1)
 
-        partial void OnValidate(System.Data.Linq.ChangeAction action)
-        {
-            switch (action)
-            {
-                case System.Data.Linq.ChangeAction.Insert:
-                    Invoice.PaymentAmount = Invoice.PaymentAmount.GetValueOrDefault() + PaymentAmount;
-                    if (this.InvoicePaymentBatch.PaymentDate > Invoice.PaymentDate)
-                    {
-                        Invoice.PaymentDate = this.InvoicePaymentBatch.PaymentDate;
-                    }
-                    break;
-                case System.Data.Linq.ChangeAction.Update:
-                    Invoice.PaymentAmount = Invoice.InvoicePaymentLogs.Sum(log => log.PaymentAmount);
-                    Invoice.PaymentDate = Invoice.InvoicePaymentLogs.Max(log => log.InvoicePaymentBatch.PaymentDate);
-                    break;
-                case System.Data.Linq.ChangeAction.Delete:
-                    if(Invoice.InvoicePaymentLogs.Count==1)
-                    {
-                        Invoice.PaymentAmount=null;
-                        Invoice.PaymentDate=null;
-                    }
-                    else
-                    {
-                        Invoice.PaymentAmount = Invoice.PaymentAmount.GetValueOrDefault() - PaymentAmount;
-                        DateTime maxDate = default(DateTime);
-                        foreach (InvoicePaymentLog log in Invoice.InvoicePaymentLogs)
-                        {
-                            if (log == this)
-                            {
-                                continue;
-                            }
-                            if (log.InvoicePaymentBatch.PaymentDate > maxDate)
-                            {
-                                maxDate = log.InvoicePaymentBatch.PaymentDate;
-                            }
-                        }
-                        Invoice.PaymentDate = maxDate;
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-        }
-
         public DateTime CreditNoteDate
         {
             get

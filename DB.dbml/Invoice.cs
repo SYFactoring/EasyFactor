@@ -188,6 +188,34 @@ namespace CMBC.EasyFactor.DB.dbml
 
         // Public Methods (10) 
 
+        public void CaculatePayment()
+        {
+            if (InvoicePaymentLogs.Count > 0)
+            {
+                PaymentAmount = InvoicePaymentLogs.Sum(log => log.PaymentAmount);
+                PaymentDate = InvoicePaymentLogs.Max(log => log.InvoicePaymentBatch.PaymentDate);
+            }
+            else
+            {
+                PaymentAmount = null;
+                PaymentDate = null;
+            }
+        }
+
+        public void CaculateRefund()
+        {
+            if (InvoiceRefundLogs.Count > 0)
+            {
+                RefundAmount = InvoiceRefundLogs.Sum(log => log.RefundAmount);
+                RefundDate = InvoiceRefundLogs.Max(log => log.InvoiceRefundBatch.RefundDate);
+            }
+            else
+            {
+                RefundAmount = null;
+                RefundDate = null;
+            }
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)
