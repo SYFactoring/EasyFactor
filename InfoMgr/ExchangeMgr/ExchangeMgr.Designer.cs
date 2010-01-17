@@ -32,8 +32,8 @@
             this.dgvExchange = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colFromCurr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colToCurr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colExchange = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReExchange = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colExchangeRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReExchangeRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExchange)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,8 +46,8 @@
             this.dgvExchange.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colFromCurr,
             this.colToCurr,
-            this.colExchange,
-            this.colReExchange});
+            this.colExchangeRate,
+            this.colReExchangeRate});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -78,19 +78,19 @@
             this.colToCurr.Name = "colToCurr";
             this.colToCurr.ReadOnly = true;
             // 
-            // colExchange
+            // colExchangeRate
             // 
-            this.colExchange.DataPropertyName = "Exchange";
-            this.colExchange.HeaderText = "换算率";
-            this.colExchange.Name = "colExchange";
-            this.colExchange.ReadOnly = true;
+            this.colExchangeRate.DataPropertyName = "ExchangeRate";
+            this.colExchangeRate.HeaderText = "换算率";
+            this.colExchangeRate.Name = "colExchangeRate";
+            this.colExchangeRate.ReadOnly = true;
             // 
-            // colReExchange
+            // colReExchangeRate
             // 
-            this.colReExchange.DataPropertyName = "ReExchange";
-            this.colReExchange.HeaderText = "逆换算率";
-            this.colReExchange.Name = "colReExchange";
-            this.colReExchange.ReadOnly = true;
+            this.colReExchangeRate.DataPropertyName = "ReExchangeRate";
+            this.colReExchangeRate.HeaderText = "逆换算率";
+            this.colReExchangeRate.Name = "colReExchangeRate";
+            this.colReExchangeRate.ReadOnly = true;
             // 
             // ExchangeMgr
             // 
@@ -109,7 +109,7 @@
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvExchange;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFromCurr;
         private System.Windows.Forms.DataGridViewTextBoxColumn colToCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colExchange;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReExchange;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colExchangeRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReExchangeRate;
     }
 }
