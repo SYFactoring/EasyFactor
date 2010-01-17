@@ -13,7 +13,13 @@ namespace CMBC.EasyFactor.ARMgr
 {
     public partial class RefundBatchDetail : UserControl
     {
+        #region Fields (1)
+
         private BindingSource bs;
+
+        #endregion Fields
+
+        #region Constructors (1)
 
         public RefundBatchDetail(List<InvoiceRefundLog> logList)
         {
@@ -25,6 +31,10 @@ namespace CMBC.EasyFactor.ARMgr
 
             bs.DataSource = logList;
         }
+
+        #endregion Constructors
+
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets owner form
@@ -44,6 +54,12 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
+        #endregion Properties
+
+        #region Methods (2)
+
+        // Private Methods (2) 
+
         /// <summary>
         /// 
         /// </summary>
@@ -59,8 +75,9 @@ namespace CMBC.EasyFactor.ARMgr
             try
             {
                 Invoice invoice = log.Invoice;
-                invoice.InvoiceRefundLogs.Remove(log);
+                log.Invoice = null;
                 invoice.CaculateRefund();
+                App.Current.DbContext.InvoiceRefundLogs.DeleteOnSubmit(log);
                 App.Current.DbContext.SubmitChanges();
             }
             catch (Exception e1)
@@ -70,5 +87,26 @@ namespace CMBC.EasyFactor.ARMgr
             }
             dgvRefundLogs.Rows.RemoveAt(this.dgvRefundLogs.SelectedRows[0].Index);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvRefundLogs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+            e.RowBounds.Location.Y,
+            dgvRefundLogs.RowHeadersWidth - 4,
+            e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                dgvRefundLogs.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                dgvRefundLogs.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
+
+        #endregion Methods
     }
 }

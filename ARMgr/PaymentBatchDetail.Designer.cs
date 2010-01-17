@@ -80,6 +80,7 @@
             this.dgvPaymentLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPaymentLogs.Size = new System.Drawing.Size(620, 376);
             this.dgvPaymentLogs.TabIndex = 0;
+            this.dgvPaymentLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPaymentLogs_RowPostPaint);
             // 
             // colInvoiceNo
             // 

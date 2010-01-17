@@ -76,6 +76,7 @@
             this.dgvRefundLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRefundLogs.Size = new System.Drawing.Size(620, 376);
             this.dgvRefundLogs.TabIndex = 0;
+            this.dgvRefundLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvRefundLogs_RowPostPaint);
             // 
             // colInvoiceNo
             // 

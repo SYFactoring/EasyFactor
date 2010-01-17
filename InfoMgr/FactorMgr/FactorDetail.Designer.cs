@@ -477,7 +477,7 @@
             // 
             // 
             visitingAddress_1Label.BackgroundStyle.Class = "";
-            visitingAddress_1Label.Location = new System.Drawing.Point(300, 51);
+            visitingAddress_1Label.Location = new System.Drawing.Point(311, 51);
             visitingAddress_1Label.Name = "visitingAddress_1Label";
             visitingAddress_1Label.Size = new System.Drawing.Size(91, 16);
             visitingAddress_1Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -492,7 +492,7 @@
             // 
             // 
             postalCodeVisitingLabel.BackgroundStyle.Class = "";
-            postalCodeVisitingLabel.Location = new System.Drawing.Point(280, 95);
+            postalCodeVisitingLabel.Location = new System.Drawing.Point(292, 95);
             postalCodeVisitingLabel.Name = "postalCodeVisitingLabel";
             postalCodeVisitingLabel.Size = new System.Drawing.Size(111, 16);
             postalCodeVisitingLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -507,7 +507,7 @@
             // 
             // 
             cityVisitingLabel.BackgroundStyle.Class = "";
-            cityVisitingLabel.Location = new System.Drawing.Point(318, 116);
+            cityVisitingLabel.Location = new System.Drawing.Point(333, 116);
             cityVisitingLabel.Name = "cityVisitingLabel";
             cityVisitingLabel.Size = new System.Drawing.Size(69, 16);
             cityVisitingLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -537,7 +537,7 @@
             // 
             // 
             webSiteLabel.BackgroundStyle.Class = "";
-            webSiteLabel.Location = new System.Drawing.Point(328, 136);
+            webSiteLabel.Location = new System.Drawing.Point(344, 136);
             webSiteLabel.Name = "webSiteLabel";
             webSiteLabel.Size = new System.Drawing.Size(59, 16);
             webSiteLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -567,7 +567,7 @@
             // 
             // 
             telefax_1Label.BackgroundStyle.Class = "";
-            telefax_1Label.Location = new System.Drawing.Point(345, 159);
+            telefax_1Label.Location = new System.Drawing.Point(369, 161);
             telefax_1Label.Name = "telefax_1Label";
             telefax_1Label.Size = new System.Drawing.Size(34, 16);
             telefax_1Label.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -938,7 +938,7 @@
             // 
             // 
             lblFactorGroupCode.BackgroundStyle.Class = "";
-            lblFactorGroupCode.Location = new System.Drawing.Point(340, 203);
+            lblFactorGroupCode.Location = new System.Drawing.Point(397, 203);
             lblFactorGroupCode.Name = "lblFactorGroupCode";
             lblFactorGroupCode.Size = new System.Drawing.Size(47, 16);
             lblFactorGroupCode.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1417,7 +1417,7 @@
             // 
             this.tbFactorGroupName.Border.Class = "TextBoxBorder";
             this.tbFactorGroupName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "FactorGroup.CompanyNameEN", true));
-            this.tbFactorGroupName.Location = new System.Drawing.Point(393, 223);
+            this.tbFactorGroupName.Location = new System.Drawing.Point(409, 223);
             this.tbFactorGroupName.Name = "tbFactorGroupName";
             this.tbFactorGroupName.Size = new System.Drawing.Size(175, 20);
             this.tbFactorGroupName.TabIndex = 42;
@@ -1426,7 +1426,7 @@
             // 
             this.btnGroupSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnGroupSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnGroupSelect.Location = new System.Drawing.Point(505, 199);
+            this.btnGroupSelect.Location = new System.Drawing.Point(560, 199);
             this.btnGroupSelect.Name = "btnGroupSelect";
             this.btnGroupSelect.Size = new System.Drawing.Size(24, 23);
             this.btnGroupSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1457,7 +1457,7 @@
             // 
             this.tbGroupFactorCode.Border.Class = "TextBoxBorder";
             this.tbGroupFactorCode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "FactorGroup.FactorCode", true));
-            this.tbGroupFactorCode.Location = new System.Drawing.Point(393, 201);
+            this.tbGroupFactorCode.Location = new System.Drawing.Point(452, 201);
             this.tbGroupFactorCode.Name = "tbGroupFactorCode";
             this.tbGroupFactorCode.Size = new System.Drawing.Size(102, 20);
             this.tbGroupFactorCode.TabIndex = 38;
@@ -1494,7 +1494,7 @@
             // 
             this.telefax_2TextBox.Border.Class = "TextBoxBorder";
             this.telefax_2TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "Telefax_2", true));
-            this.telefax_2TextBox.Location = new System.Drawing.Point(393, 179);
+            this.telefax_2TextBox.Location = new System.Drawing.Point(409, 179);
             this.telefax_2TextBox.Name = "telefax_2TextBox";
             this.telefax_2TextBox.Size = new System.Drawing.Size(175, 20);
             this.telefax_2TextBox.TabIndex = 34;
@@ -1507,7 +1507,7 @@
             // 
             this.telefax_1TextBox.Border.Class = "TextBoxBorder";
             this.telefax_1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "Telefax_1", true));
-            this.telefax_1TextBox.Location = new System.Drawing.Point(393, 158);
+            this.telefax_1TextBox.Location = new System.Drawing.Point(409, 158);
             this.telefax_1TextBox.Name = "telefax_1TextBox";
             this.telefax_1TextBox.Size = new System.Drawing.Size(175, 20);
             this.telefax_1TextBox.TabIndex = 33;
@@ -1546,7 +1546,7 @@
             // 
             this.webSiteTextBox.Border.Class = "TextBoxBorder";
             this.webSiteTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "WebSite", true));
-            this.webSiteTextBox.Location = new System.Drawing.Point(393, 136);
+            this.webSiteTextBox.Location = new System.Drawing.Point(409, 136);
             this.webSiteTextBox.Name = "webSiteTextBox";
             this.webSiteTextBox.Size = new System.Drawing.Size(175, 20);
             this.webSiteTextBox.TabIndex = 28;
@@ -1570,7 +1570,7 @@
             // 
             this.cityVisitingTextBox.Border.Class = "TextBoxBorder";
             this.cityVisitingTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "CityVisiting", true));
-            this.cityVisitingTextBox.Location = new System.Drawing.Point(393, 115);
+            this.cityVisitingTextBox.Location = new System.Drawing.Point(409, 115);
             this.cityVisitingTextBox.Name = "cityVisitingTextBox";
             this.cityVisitingTextBox.Size = new System.Drawing.Size(175, 20);
             this.cityVisitingTextBox.TabIndex = 24;
@@ -1582,7 +1582,7 @@
             // 
             this.postalCodeVisitingTextBox.Border.Class = "TextBoxBorder";
             this.postalCodeVisitingTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "PostalCodeVisiting", true));
-            this.postalCodeVisitingTextBox.Location = new System.Drawing.Point(393, 94);
+            this.postalCodeVisitingTextBox.Location = new System.Drawing.Point(409, 94);
             this.postalCodeVisitingTextBox.Name = "postalCodeVisitingTextBox";
             this.postalCodeVisitingTextBox.Size = new System.Drawing.Size(175, 20);
             this.postalCodeVisitingTextBox.TabIndex = 20;
@@ -1594,7 +1594,7 @@
             // 
             this.visitingAddress_2TextBox.Border.Class = "TextBoxBorder";
             this.visitingAddress_2TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "VisitingAddress_2", true));
-            this.visitingAddress_2TextBox.Location = new System.Drawing.Point(393, 72);
+            this.visitingAddress_2TextBox.Location = new System.Drawing.Point(409, 72);
             this.visitingAddress_2TextBox.Name = "visitingAddress_2TextBox";
             this.visitingAddress_2TextBox.Size = new System.Drawing.Size(175, 20);
             this.visitingAddress_2TextBox.TabIndex = 16;
@@ -1607,7 +1607,7 @@
             // 
             this.visitingAddress_1TextBox.Border.Class = "TextBoxBorder";
             this.visitingAddress_1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "VisitingAddress_1", true));
-            this.visitingAddress_1TextBox.Location = new System.Drawing.Point(393, 50);
+            this.visitingAddress_1TextBox.Location = new System.Drawing.Point(409, 50);
             this.visitingAddress_1TextBox.Name = "visitingAddress_1TextBox";
             this.visitingAddress_1TextBox.Size = new System.Drawing.Size(175, 20);
             this.visitingAddress_1TextBox.TabIndex = 15;
@@ -1670,7 +1670,7 @@
             // 
             this.departmentTextBox.Border.Class = "TextBoxBorder";
             this.departmentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorBindingSource, "Department", true));
-            this.departmentTextBox.Location = new System.Drawing.Point(465, 29);
+            this.departmentTextBox.Location = new System.Drawing.Point(481, 27);
             this.departmentTextBox.Name = "departmentTextBox";
             this.departmentTextBox.Size = new System.Drawing.Size(103, 20);
             this.departmentTextBox.TabIndex = 10;
