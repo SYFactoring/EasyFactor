@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyFactor", "EasyFactor.csproj", "{3876B9CE-93F3-42D1-B12B-6BD0F39D4CCA}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EasyFactor Alpha", "..\EasyFactor Installer\EasyFactor Installer.vdproj", "{4EF9CB95-773B-4C28-B1F6-08BED9C6797D}"
-EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EasyFactor Beta", "..\EasyFactor Beta\EasyFactor Beta.vdproj", "{B28A39AA-6810-421E-8C37-5C97875D4FD0}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EasyFactor Alpha", "..\EasyFactor Alpha\EasyFactor Installer.vdproj", "{7BF7DC21-D117-4B6B-93E8-07CED29C2659}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,13 @@ Global
 		{3876B9CE-93F3-42D1-B12B-6BD0F39D4CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3876B9CE-93F3-42D1-B12B-6BD0F39D4CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3876B9CE-93F3-42D1-B12B-6BD0F39D4CCA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4EF9CB95-773B-4C28-B1F6-08BED9C6797D}.Debug|Any CPU.ActiveCfg = Debug
-		{4EF9CB95-773B-4C28-B1F6-08BED9C6797D}.Release|Any CPU.ActiveCfg = Release
-		{B28A39AA-6810-421E-8C37-5C97875D4FD0}.Debug|Any CPU.ActiveCfg = Debug
+		{B28A39AA-6810-421E-8C37-5C97875D4FD0}.Debug|Any CPU.ActiveCfg = Release
+		{B28A39AA-6810-421E-8C37-5C97875D4FD0}.Debug|Any CPU.Build.0 = Release
 		{B28A39AA-6810-421E-8C37-5C97875D4FD0}.Release|Any CPU.ActiveCfg = Release
+		{7BF7DC21-D117-4B6B-93E8-07CED29C2659}.Debug|Any CPU.ActiveCfg = Debug
+		{7BF7DC21-D117-4B6B-93E8-07CED29C2659}.Debug|Any CPU.Build.0 = Debug
+		{7BF7DC21-D117-4B6B-93E8-07CED29C2659}.Release|Any CPU.ActiveCfg = Release
+		{7BF7DC21-D117-4B6B-93E8-07CED29C2659}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
