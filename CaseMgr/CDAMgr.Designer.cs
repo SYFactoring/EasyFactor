@@ -121,6 +121,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCDAReport = new System.Windows.Forms.ToolStripMenuItem();
             this.panelCDAQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCDAs)).BeginInit();
             this.cmuCDAMgr.SuspendLayout();
@@ -633,68 +635,82 @@
             this.menuItemCDADelete,
             this.toolStripSeparator1,
             this.menuItemCheck,
-            this.menuItemReject});
+            this.menuItemReject,
+            this.toolStripSeparator2,
+            this.menuItemCDAReport});
             this.cmuCDAMgr.Name = "cmuContractMgr";
-            this.cmuCDAMgr.Size = new System.Drawing.Size(123, 170);
+            this.cmuCDAMgr.Size = new System.Drawing.Size(183, 220);
             // 
             // menuItemCDASelect
             // 
             this.menuItemCDASelect.Name = "menuItemCDASelect";
-            this.menuItemCDASelect.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDASelect.Size = new System.Drawing.Size(182, 22);
             this.menuItemCDASelect.Text = "选定CDA";
             this.menuItemCDASelect.Click += new System.EventHandler(this.SelectCDA);
             // 
             // menuItemCDADetail
             // 
             this.menuItemCDADetail.Name = "menuItemCDADetail";
-            this.menuItemCDADetail.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDADetail.Size = new System.Drawing.Size(182, 22);
             this.menuItemCDADetail.Text = "详细信息";
             this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(119, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(179, 6);
             // 
             // menuItemCDANew
             // 
             this.menuItemCDANew.Name = "menuItemCDANew";
-            this.menuItemCDANew.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDANew.Size = new System.Drawing.Size(182, 22);
             this.menuItemCDANew.Text = "新建CDA";
             this.menuItemCDANew.Click += new System.EventHandler(this.NewCDA);
             // 
             // menuItemCDAUpdate
             // 
             this.menuItemCDAUpdate.Name = "menuItemCDAUpdate";
-            this.menuItemCDAUpdate.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDAUpdate.Size = new System.Drawing.Size(182, 22);
             this.menuItemCDAUpdate.Text = "更新CDA";
             this.menuItemCDAUpdate.Click += new System.EventHandler(this.UpdateCDA);
             // 
             // menuItemCDADelete
             // 
             this.menuItemCDADelete.Name = "menuItemCDADelete";
-            this.menuItemCDADelete.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCDADelete.Size = new System.Drawing.Size(182, 22);
             this.menuItemCDADelete.Text = "删除CDA";
             this.menuItemCDADelete.Click += new System.EventHandler(this.DeleteCDA);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
             // 
             // menuItemCheck
             // 
             this.menuItemCheck.Name = "menuItemCheck";
-            this.menuItemCheck.Size = new System.Drawing.Size(122, 22);
+            this.menuItemCheck.Size = new System.Drawing.Size(182, 22);
             this.menuItemCheck.Text = "复核通过";
             this.menuItemCheck.Click += new System.EventHandler(this.Check);
             // 
             // menuItemReject
             // 
             this.menuItemReject.Name = "menuItemReject";
-            this.menuItemReject.Size = new System.Drawing.Size(122, 22);
+            this.menuItemReject.Size = new System.Drawing.Size(182, 22);
             this.menuItemReject.Text = "复核拒绝";
             this.menuItemReject.Click += new System.EventHandler(this.Reject);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(179, 6);
+            // 
+            // menuItemCDAReport
+            // 
+            this.menuItemCDAReport.Name = "menuItemCDAReport";
+            this.menuItemCDAReport.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCDAReport.Text = "生成保理额度通知书";
+            this.menuItemCDAReport.Click += new System.EventHandler(this.ReportCDA);
             // 
             // CDAMgr
             // 
@@ -750,5 +766,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDAReport;
     }
 }

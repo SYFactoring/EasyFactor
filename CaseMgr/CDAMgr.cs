@@ -13,13 +13,14 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using System.Drawing;
+    using Microsoft.Office.Interop.Excel;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class CDAMgr : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         /// <summary>
         /// 
@@ -27,9 +28,9 @@ namespace CMBC.EasyFactor.CaseMgr
         private BindingSource bs = new BindingSource();
         private OpCDAType opCDAType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -47,11 +48,11 @@ namespace CMBC.EasyFactor.CaseMgr
             CHECK
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
-/// <summary>
+        /// <summary>
         /// Initializes a new instance of the CDAMgr class.
         /// </summary>
         public CDAMgr(OpCDAType opCDAType)
@@ -70,9 +71,9 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets owner form
@@ -92,11 +93,11 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (11) 
+        #region Methods (12)
 
-		// Private Methods (11) 
+        // Private Methods (12) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -148,56 +149,50 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            string cdaCode = (String)dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
-            if (cdaCode != null)
+            CDA cda = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
+
+            if (MessageBox.Show("是否打算删除额度通知书: " + cda.CDACode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
-                CDA cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
-                if (cda != null)
+                return;
+            }
+            bool isDeleteOK = true;
+            foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
+            {
+                App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
+            }
+            App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
+            App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
+            foreach (InvoicePaymentBatch paymentBatch in cda.InvoicePaymentBatches)
+            {
+                foreach (InvoicePaymentLog paymentLog in paymentBatch.InvoicePaymentLogs)
                 {
-                    if (MessageBox.Show("是否打算删除额度通知书: " + cdaCode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+                    if (paymentLog.CreditNote != null)
                     {
-                        return;
-                    }
-                    bool isDeleteOK = true;
-                    foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
-                    {
-                        App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
-                    }
-                    App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
-                    App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
-                    foreach (InvoicePaymentBatch paymentBatch in cda.InvoicePaymentBatches)
-                    {
-                        foreach (InvoicePaymentLog paymentLog in paymentBatch.InvoicePaymentLogs)
-                        {
-                            if (paymentLog.CreditNote != null)
-                            {
-                                App.Current.DbContext.CreditNotes.DeleteOnSubmit(paymentLog.CreditNote);
-                            }
-                        }
-                        App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(paymentBatch.InvoicePaymentLogs);
-                    }
-                    App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
-                    foreach (InvoiceRefundBatch refundBatch in cda.InvoiceRefundBatches)
-                    {
-                        App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(refundBatch.InvoiceRefundLogs);
-                    }
-                    App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(cda.InvoiceRefundBatches);
-                    App.Current.DbContext.CDAs.DeleteOnSubmit(cda);
-                    try
-                    {
-                        App.Current.DbContext.SubmitChanges();
-                    }
-                    catch (Exception e1)
-                    {
-                        isDeleteOK = false;
-                        MessageBox.Show("不能删除此额度通知书: " + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    if (isDeleteOK)
-                    {
-                        MessageBox.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        dgvCDAs.Rows.RemoveAt(dgvCDAs.SelectedRows[0].Index);
+                        App.Current.DbContext.CreditNotes.DeleteOnSubmit(paymentLog.CreditNote);
                     }
                 }
+                App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(paymentBatch.InvoicePaymentLogs);
+            }
+            App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
+            foreach (InvoiceRefundBatch refundBatch in cda.InvoiceRefundBatches)
+            {
+                App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(refundBatch.InvoiceRefundLogs);
+            }
+            App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(cda.InvoiceRefundBatches);
+            App.Current.DbContext.CDAs.DeleteOnSubmit(cda);
+            try
+            {
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                isDeleteOK = false;
+                MessageBox.Show("不能删除此额度通知书: " + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            if (isDeleteOK)
+            {
+                MessageBox.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dgvCDAs.Rows.RemoveAt(dgvCDAs.SelectedRows[0].Index);
             }
         }
 
@@ -213,16 +208,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            string cdaCode = (String)dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
-            if (cdaCode != null)
-            {
-                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
-                if (selectedCDA != null)
-                {
-                    CDADetail cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.DETAIL_CDA);
-                    cdaDetail.ShowDialog(this);
-                }
-            }
+            CDA selectedCDA = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
+            CDADetail cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.DETAIL_CDA);
+            cdaDetail.ShowDialog(this);
         }
 
         private void dgvCDAs_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -248,7 +236,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
         private void dgvCDAs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X,
                 e.RowBounds.Location.Y,
                 this.dgvCDAs.RowHeadersWidth - 4,
                 e.RowBounds.Height);
@@ -326,6 +314,45 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReportCDA(object sender, EventArgs e)
+        {
+            if (this.dgvCDAs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            CDA selectedCDA = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
+
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+            if (app == null)
+            {
+                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            sheet.Cells[1, 2] = "中国民生银行保理额度通知书 ";
+            sheet.Cells[2,1]=String.Format("贵公司（{0}公司）前洽本行办理保理业务并签立保理服务合同",selectedCDA.Case.SellerClient.ToString());
+            sheet.Cells[3,1]=String.Format("(合同编号:{0}), 经本行评估后,核定额度如下:",selectedCDA.Case.SellerClient.Contract.ContractCode);
+
+            sheet.Cells[5, 1] = "买方名称";
+            sheet.Cells[6, 1]="";
+            sheet.Cells[7, 1]="";
+            sheet.Cells[8, 1]="";
+            sheet.Cells[9, 1]="";
+            sheet.Cells[10, 1]="";
+            sheet.Cells[11, 1]="";
+            sheet.Cells[12, 1]="";
+            sheet.Cells[13, 1]="";
+            sheet.Cells[14, 1]="";
+            sheet.Cells[15, 1]="";
+            app.Visible = true;
+        }
+
+        /// <summary>
         /// Select CDA and close the query form
         /// </summary>
         /// <param name="sender">Event Sender</param>
@@ -337,19 +364,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            string cdaCode = (String)dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
-            if (cdaCode != null)
+            CDA selectedCDA = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
+            this.Selected = selectedCDA;
+            if (this.OwnerForm != null)
             {
-                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
-                if (selectedCDA != null)
-                {
-                    this.Selected = selectedCDA;
-                    if (this.OwnerForm != null)
-                    {
-                        this.OwnerForm.DialogResult = DialogResult.Yes;
-                        this.OwnerForm.Close();
-                    }
-                }
+                this.OwnerForm.DialogResult = DialogResult.Yes;
+                this.OwnerForm.Close();
             }
         }
 
@@ -365,18 +385,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            string cdaCode = (String)dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
-            if (cdaCode != null)
+            CDA selectedCDA = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
+            if (selectedCDA != null)
             {
-                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
-                if (selectedCDA != null)
-                {
-                    CDADetail cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.UPDATE_CDA);
-                    cdaDetail.ShowDialog(this);
-                }
+                CDADetail cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.UPDATE_CDA);
+                cdaDetail.ShowDialog(this);
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

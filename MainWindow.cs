@@ -740,5 +740,6 @@ namespace CMBC.EasyFactor
             ExchangeMgr mgr = new ExchangeMgr();
             this.SetDetailPanel(mgr);
         }
+
     }
 }
