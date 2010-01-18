@@ -27,7 +27,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.CreditLine-this.Factor.AssignOutstanding;
+                return this.CreditLine-this.Factor.GetAssignOutstanding(this.CreditLineCurrency);
             }
         }
     }

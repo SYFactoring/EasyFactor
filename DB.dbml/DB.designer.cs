@@ -11707,8 +11707,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private double _ExchangeRate;
 		
-		private double _ReExchangeRate;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -11719,8 +11717,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnToCurrChanged();
     partial void OnExchangeRateChanging(double value);
     partial void OnExchangeRateChanged();
-    partial void OnReExchangeRateChanging(double value);
-    partial void OnReExchangeRateChanged();
     #endregion
 		
 		public Exchange()
@@ -11784,26 +11780,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._ExchangeRate = value;
 					this.SendPropertyChanged("ExchangeRate");
 					this.OnExchangeRateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ReExchangeRate", DbType="Float NOT NULL")]
-		public double ReExchangeRate
-		{
-			get
-			{
-				return this._ReExchangeRate;
-			}
-			set
-			{
-				if ((this._ReExchangeRate != value))
-				{
-					this.OnReExchangeRateChanging(value);
-					this.SendPropertyChanging();
-					this._ReExchangeRate = value;
-					this.SendPropertyChanged("ReExchangeRate");
-					this.OnReExchangeRateChanged();
 				}
 			}
 		}

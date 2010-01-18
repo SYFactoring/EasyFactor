@@ -407,6 +407,8 @@ namespace CMBC.EasyFactor.ARMgr
             string invoiceNo = this.tbInvoiceNo.Text;
             string isFlaw = this.cbIsFlaw.CheckValue as string;
             string isDispute = this.cbIsDispute.CheckValue as string;
+            string caseMark = this.cbCaseMark.Text;
+            string cdaStatus = this.cbCDAStatus.Text;
 
             int assignOverDueDays = 0;
             DateTime assignOverDueDate = default(DateTime);
@@ -426,7 +428,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
                               let curCase = invoice.InvoiceAssignBatch.CDA.Case
-                              where curCase.CaseMark == ConstStr.CASE.ENABLE
+                              where curCase.CaseMark == caseMark
+                              let cda = invoice.InvoiceAssignBatch.CDA
+                              where cda.CDAStatus == cdaStatus
                               let seller = curCase.SellerClient
                               where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN_1.Contains(sellerName) || seller.ClientNameEN_2.Contains(sellerName)
                               let buyer = curCase.BuyerClient

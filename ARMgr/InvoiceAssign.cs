@@ -497,12 +497,31 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 totalAssign += invoice.AssignAmount;
             }
-            if (totalAssign > this._CDA.AssignOutstanding)
+            if (totalAssign > this._CDA.CreditCoverOutstanding)
             {
                 DialogResult dr = MessageBox.Show("买卖方关联额度中的买方信用风险担保额度已占满，超额度转让部分不再进行担保，是否确认转让？", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     return;
+                }
+            }
+            if (totalAssign > this._CDA.Case.BuyerClient.AssignCreditLineOutstanding)
+            {
+                DialogResult dr = MessageBox.Show("客户额度已占满，超额度转让部分不再进行担保，是否确认转让？", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.No)
+                {
+                    return;
+                }
+            }
+            if (this._CDA.Case.BuyerClient.GroupAssignCreditLine != null)
+            {
+                if (totalAssign > this._CDA.Case.BuyerClient.GroupAssignCreditLine.AssignCreditLineOutstanding)
+                {
+                    DialogResult dr = MessageBox.Show("集团额度已占满，超额度转让部分不再进行担保，是否确认转让？", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == DialogResult.No)
+                    {
+                        return;
+                    }
                 }
             }
 

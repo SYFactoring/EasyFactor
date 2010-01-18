@@ -231,7 +231,7 @@ namespace CMBC.EasyFactor.Report
                     sheet.Cells[row, 1] = "信用风险额度：";
                     sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.CreditCover);
                     sheet.Cells[row, 1] = "应收账款余额：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.AssignOutstanding);
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.GetAssignOutstanding(cda.Case.InvoiceCurrency));
 
                     row++;
                     sheet.Cells[row, 1] = "发票号";
@@ -420,15 +420,15 @@ namespace CMBC.EasyFactor.Report
                 sheet.Cells[5, 1] = "卖方：";
                 sheet.Cells[5, 2] = seller.ToString();
                 sheet.Cells[6, 1] = "最高预付款额度：";
-                ClientCreditLine creditLine = seller.GetFinanceCreditLine("CNY");
+                ClientCreditLine creditLine = seller.FinanceCreditLine;
                 if (creditLine != null)
                 {
                     sheet.Cells[6, 2] = String.Format("{0:N2}", creditLine.CreditLine);
                 }
                 sheet.Cells[7, 1] = "总融资余额";
-                sheet.Cells[7, 2] = String.Format("{0:N2}", seller.FinanceOutstanding);
+                sheet.Cells[7, 2] = String.Format("{0:N2}", seller.GetFinanceOutstanding(creditLine.CreditLineCurrency));
                 sheet.Cells[8, 1] = "总剩余额度";
-                sheet.Cells[8, 2] = String.Format("{0:N2}", Math.Min((seller.AssignTotal - seller.FinanceTotal).GetValueOrDefault(), seller.GetFinanceLineOutstanding("CNY").GetValueOrDefault()));
+                //sheet.Cells[8, 2] = String.Format("{0:N2}", Math.Min((seller.AssignTotal - seller.FinanceTotal).GetValueOrDefault(), seller.GetFinanceLineOutstanding("CNY").GetValueOrDefault()));
 
                 IEnumerable<IGrouping<Client, Invoice>> groupsByBuyer = sellerGroup.GroupBy(i => i.InvoiceAssignBatch.CDA.Case.BuyerClient);
 
@@ -464,13 +464,13 @@ namespace CMBC.EasyFactor.Report
                     sheet.Cells[row, 1] = "信用风险额度：";
                     sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.CreditCoverOutstanding);
                     sheet.Cells[row, 1] = "应收账款余额：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.AssignOutstanding);
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.GetAssignOutstanding(cda.Case.InvoiceCurrency));
                     sheet.Cells[row, 1] = "预付款额度：";
                     sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.FinanceLineOutstanding);
                     sheet.Cells[row, 1] = "融资余额：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.FinanceOutstanding);
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.GetFinanceOutstanding(cda.Case.InvoiceCurrency));
                     sheet.Cells[row, 1] = "剩余额度：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", Math.Min(Math.Min((cda.AssignTotal - cda.FinanceTotal).GetValueOrDefault(), cda.FinanceLineOutstanding.GetValueOrDefault()), seller.GetFinanceLineOutstanding("CNY").GetValueOrDefault()));
+                    //sheet.Cells[row++, 2] = String.Format("{0:N2}", Math.Min(Math.Min((cda.AssignTotal - cda.FinanceTotal).GetValueOrDefault(), cda.FinanceLineOutstanding.GetValueOrDefault()), seller.GetFinanceLineOutstanding("CNY").GetValueOrDefault()));
 
                     row++;
                     sheet.Cells[row, 1] = "发票号";
@@ -588,12 +588,16 @@ namespace CMBC.EasyFactor.Report
                               where sellerFactor.CompanyNameCN.Contains(factorName) || sellerFactor.CompanyNameEN.Contains(factorName)
                               let buyerFactor = invoice.InvoiceAssignBatch.CDA.Case.BuyerFactor
                               where buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
+                              let curCase = invoice.InvoiceAssignBatch.CDA.Case
+                              where curCase.CaseMark==ConstStr.CASE.ENABLE
+                              let cda = invoice.InvoiceAssignBatch.CDA
+                              where cda.CDAStatus ==ConstStr.CDA.SIGNED
                               where
                                     (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
                                  && (beginDate != this.diAssignDateBegin.MinDate ? invoice.InvoiceAssignBatch.AssignDate >= beginDate : true)
                                  && (endDate != this.diAssignDateEnd.MinDate ? invoice.InvoiceAssignBatch.AssignDate <= endDate : true)
-                                 && (opReportType == OpReportType.REPORT_FINANCE ? invoice.AssignAmount > invoice.PaymentAmount : true)
-                                 && (opReportType == OpReportType.REPORT_FINANCE ? invoice.FinanceAmount == null || TypeUtil.EqualsZero(invoice.FinanceAmount) : true)
+                                 && (opReportType == OpReportType.REPORT_ASSIGN ? invoice.AssignAmount > invoice.PaymentAmount : true)
+                                 && (opReportType == OpReportType.REPORT_FINANCE ? invoice.FinanceAmount == null || invoice.FinanceAmount.GetValueOrDefault()<0.00000001 : true)
                               select invoice;
 
             this.bs.DataSource = queryResult.ToList();

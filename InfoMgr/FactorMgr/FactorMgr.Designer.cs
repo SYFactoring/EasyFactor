@@ -101,10 +101,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.CompanyNameCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CompanyNameENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CountryNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditLineOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuFactorMgr.SuspendLayout();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactors)).BeginInit();
@@ -366,11 +362,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.FactorTypeColumn,
             this.CompanyNameCNColumn,
             this.CompanyNameENColumn,
-            this.CountryNameColumn,
-            this.colCreditLine,
-            this.colDueDate,
-            this.colCreditLineOutstanding,
-            this.colAssignOutstanding});
+            this.CountryNameColumn});
             this.dgvFactors.ContextMenuStrip = this.contextMenuFactorMgr;
             this.dgvFactors.Cursor = System.Windows.Forms.Cursors.Default;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -431,34 +423,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.CountryNameColumn.Name = "CountryNameColumn";
             this.CountryNameColumn.ReadOnly = true;
             // 
-            // colCreditLine
-            // 
-            this.colCreditLine.DataPropertyName = "CreditLine";
-            this.colCreditLine.HeaderText = "额度";
-            this.colCreditLine.Name = "colCreditLine";
-            this.colCreditLine.ReadOnly = true;
-            // 
-            // colDueDate
-            // 
-            this.colDueDate.DataPropertyName = "DueDate";
-            this.colDueDate.HeaderText = "到期日";
-            this.colDueDate.Name = "colDueDate";
-            this.colDueDate.ReadOnly = true;
-            // 
-            // colCreditLineOutstanding
-            // 
-            this.colCreditLineOutstanding.DataPropertyName = "CreditLineOutstanding";
-            this.colCreditLineOutstanding.HeaderText = "剩余额度";
-            this.colCreditLineOutstanding.Name = "colCreditLineOutstanding";
-            this.colCreditLineOutstanding.ReadOnly = true;
-            // 
-            // colAssignOutstanding
-            // 
-            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
-            this.colAssignOutstanding.HeaderText = "应收账款余额";
-            this.colAssignOutstanding.Name = "colAssignOutstanding";
-            this.colAssignOutstanding.ReadOnly = true;
-            // 
             // FactorMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -485,9 +449,5 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNameCNColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNameENColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
     }
 }

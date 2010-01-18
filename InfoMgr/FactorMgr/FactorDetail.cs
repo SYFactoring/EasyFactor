@@ -528,7 +528,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     {
                         foreach (FactorCreditLine fcl in factor.FactorCreditLines)
                         {
-                            if (fcl != creditLine && fcl.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY && fcl.CreditLineType == creditLine.CreditLineType && fcl.CreditLineCurrency == creditLine.CreditLineCurrency)
+                            if (fcl != creditLine && fcl.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY && fcl.CreditLineType == creditLine.CreditLineType)
                             {
                                 fcl.CreditLineStatus = ConstStr.FACTOR_CREDIT_LINE.EXPIRY;
                             }

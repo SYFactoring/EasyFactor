@@ -12,49 +12,51 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 转让余额
         /// </summary>
-        public double AssignOutstanding
+        public double GetAssignOutstanding(string currency)
         {
-            get
+            double total = 0;
+            foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
             {
-                double total = 0;
-                foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
+                foreach (Invoice invoice in assignBatch.Invoices)
                 {
-                    foreach (Invoice invoice in assignBatch.Invoices)
-                    {
-
-                        total += invoice.AssignOutstanding;
-                    }
+                    total += invoice.AssignOutstanding;
                 }
-                return total;
             }
+            if (this.Case.InvoiceCurrency != currency)
+            {
+                double exchange = Exchange.GetExchangeRate(this.Case.InvoiceCurrency, currency);
+                total *= exchange;
+            }
+            return total;
         }
 
-        /// <summary>
-        /// 转让总额
-        /// </summary>
-        public System.Nullable<double> AssignTotal
-        {
-            get
-            {
-                double? total = null;
-                foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
-                {
-                    foreach (Invoice invoice in batch.Invoices)
-                    {
-                        double? temp = invoice.AssignAmount;
-                        if (temp.HasValue)
-                        {
-                            if (total == null)
-                            {
-                                total = 0;
-                            }
-                            total += temp.Value;
-                        }
-                    }
-                }
-                return total;
-            }
-        }
+
+        ///// <summary>
+        ///// 转让总额
+        ///// </summary>
+        //public System.Nullable<double> AssignTotal
+        //{
+        //    get
+        //    {
+        //        double? total = null;
+        //        foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
+        //        {
+        //            foreach (Invoice invoice in batch.Invoices)
+        //            {
+        //                double? temp = invoice.AssignAmount;
+        //                if (temp.HasValue)
+        //                {
+        //                    if (total == null)
+        //                    {
+        //                        total = 0;
+        //                    }
+        //                    total += temp.Value;
+        //                }
+        //            }
+        //        }
+        //        return total;
+        //    }
+        //}
 
         /// <summary>
         /// 
@@ -85,7 +87,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     return null;
                 }
-                return this.CreditCover - this.AssignOutstanding;
+                return this.CreditCover - this.GetAssignOutstanding(this.CreditCoverCurr);
             }
         }
 
@@ -100,7 +102,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     return null;
                 }
-                return this.FinanceLine - this.FinanceOutstanding.GetValueOrDefault();
+                return this.FinanceLine - this.GetFinanceOutstanding(this.FinanceLineCurr);
             }
         }
 
@@ -135,55 +137,58 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 融资余额
         /// </summary>
-        public System.Nullable<double> FinanceOutstanding
+        public System.Nullable<double> GetFinanceOutstanding(string currency)
         {
-            get
+            double? total = null;
+            foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
             {
-                double? total = null;
-                foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
+                foreach (Invoice invoice in assignBatch.Invoices)
                 {
-                    foreach (Invoice invoice in assignBatch.Invoices)
+                    if (invoice.FinanceOutstanding.HasValue)
                     {
-                        if (invoice.FinanceOutstanding.HasValue)
+                        if (total == null)
                         {
-                            if (total == null)
-                            {
-                                total = 0;
-                            }
-                            total += invoice.FinanceOutstanding.Value;
+                            total = 0;
                         }
+                        double financeOutstanding = invoice.FinanceOutstanding.Value;
+                        if(invoice.InvoiceFinanceBatch.BatchCurrency!=currency)
+                        {
+                            double exchange = Exchange.GetExchangeRate(invoice.InvoiceFinanceBatch.BatchCurrency,currency);
+                            financeOutstanding*=exchange;
+                        }
+                        total += financeOutstanding;
                     }
                 }
-                return total;
             }
+            return total;
         }
 
-        /// <summary>
-        /// 融资总额
-        /// </summary>
-        public System.Nullable<double> FinanceTotal
-        {
-            get
-            {
-                double? total = null;
-                foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
-                {
-                    foreach (Invoice invoice in batch.Invoices)
-                    {
-                        double? temp = invoice.FinanceAmount;
-                        if (temp.HasValue)
-                        {
-                            if (total == null)
-                            {
-                                total = 0;
-                            }
-                            total += temp.Value;
-                        }
-                    }
-                }
-                return total;
-            }
-        }
+        ///// <summary>
+        ///// 融资总额
+        ///// </summary>
+        //public System.Nullable<double> FinanceTotal
+        //{
+        //    get
+        //    {
+        //        double? total = null;
+        //        foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
+        //        {
+        //            foreach (Invoice invoice in batch.Invoices)
+        //            {
+        //                double? temp = invoice.FinanceAmount;
+        //                if (temp.HasValue)
+        //                {
+        //                    if (total == null)
+        //                    {
+        //                        total = 0;
+        //                    }
+        //                    total += temp.Value;
+        //                }
+        //            }
+        //        }
+        //        return total;
+        //    }
+        //}
 
         public string InvoiceCurrency
         {

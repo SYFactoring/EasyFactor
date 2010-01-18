@@ -20,64 +20,91 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #region Properties (4)
 
-        public string CreditLine
+        //public string CreditLine
+        //{
+        //    get
+        //    {
+        //        StringBuilder sb = new StringBuilder();
+        //        var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY);
+        //        foreach (FactorCreditLine creditLine in creditLines)
+        //        {
+        //            sb.Append(creditLine.CreditLineCurrency).Append(" ").Append(creditLine.CreditLine).Append(Environment.NewLine);
+        //        }
+        //        return sb.ToString();
+        //    }
+        //}
+
+        //public string DueDate
+        //{
+        //    get
+        //    {
+        //        StringBuilder sb = new StringBuilder();
+        //        var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY);
+        //        foreach (FactorCreditLine creditLine in creditLines)
+        //        {
+        //            sb.Append(creditLine.PeriodEnd).Append(Environment.NewLine);
+        //        }
+        //        return sb.ToString();
+        //    }
+        //}
+
+        //public string CreditLineOutstanding
+        //{
+        //    get
+        //    {
+        //        StringBuilder sb = new StringBuilder();
+        //        var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY);
+        //        foreach (FactorCreditLine creditLine in creditLines)
+        //        {
+        //            sb.Append(creditLine.PeriodEnd).Append(Environment.NewLine);
+        //        }
+        //        return sb.ToString();
+        //    }
+        //}
+
+        public FactorCreditLine CreditLine
         {
             get
             {
-                StringBuilder sb = new StringBuilder();
-                var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY);
-                foreach (FactorCreditLine creditLine in creditLines)
-                {
-                    sb.Append(creditLine.CreditLineCurrency).Append(" ").Append(creditLine.CreditLine).Append(Environment.NewLine);
-                }
-                return sb.ToString();
+                return this.FactorCreditLines.SingleOrDefault(f => f.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY);
             }
         }
 
-        public string DueDate
+        /// <summary>
+        /// 
+        /// </summary>
+        public double CreditLineOutstanding
         {
             get
             {
-                StringBuilder sb = new StringBuilder();
-                var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY);
-                foreach (FactorCreditLine creditLine in creditLines)
+                FactorCreditLine creditLine = CreditLine;
+                if (creditLine == null)
                 {
-                    sb.Append(creditLine.PeriodEnd).Append(Environment.NewLine);
+                    return 0;
                 }
-                return sb.ToString();
+                return creditLine.CreditLine - GetAssignOutstanding(creditLine.CreditLineCurrency);
             }
         }
 
-        public string CreditLineOutstanding
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public double GetAssignOutstanding(string currency)
         {
-            get
+            double result = 0;
+            foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
             {
-                StringBuilder sb = new StringBuilder();
-                var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY);
-                foreach (FactorCreditLine creditLine in creditLines)
+                foreach (CDA cda in curCase.CDAs.Where(c => c.CDAStatus == ConstStr.CDA.SIGNED))
                 {
-                    sb.Append(creditLine.PeriodEnd).Append(Environment.NewLine);
+                    double cdaAssignOutstanding = cda.GetAssignOutstanding(currency);
+                    result += cdaAssignOutstanding;
                 }
-                return sb.ToString();
             }
+            return result;
         }
 
-        public double AssignOutstanding
-        {
-            get
-            {
-                double assignOutstanding = 0;
-                foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
-                {
-
-                    foreach (CDA cda in curCase.CDAs.Where(c => c.CDAStatus == "已签回"))
-                    {
-                        assignOutstanding += cda.AssignOutstanding;
-                    }
-                }
-                return assignOutstanding;
-            }
-        }
 
         /// <summary>
         /// 

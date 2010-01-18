@@ -1,4 +1,5 @@
-﻿namespace CMBC.EasyFactor.ARMgr
+﻿using CMBC.EasyFactor.Utils;
+namespace CMBC.EasyFactor.ARMgr
 {
     partial class InvoiceMgr
     {
@@ -92,6 +93,10 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExportAllInvoices = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemExportSelectedInvoices = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbCaseMark = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cbCDAStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblCaseMark = new DevComponents.DotNetBar.LabelX();
+            this.lblCDAStatus = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.cmuInvoiceMgr.SuspendLayout();
@@ -101,6 +106,10 @@
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.lblCDAStatus);
+            this.panelQuery.Controls.Add(this.lblCaseMark);
+            this.panelQuery.Controls.Add(this.cbCDAStatus);
+            this.panelQuery.Controls.Add(this.cbCaseMark);
             this.panelQuery.Controls.Add(this.tbFinanceOverDueDays);
             this.panelQuery.Controls.Add(this.lblFinanceOverDueDays);
             this.panelQuery.Controls.Add(this.tbAssignOverDueDays);
@@ -121,7 +130,7 @@
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(805, 56);
+            this.panelQuery.Size = new System.Drawing.Size(805, 78);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -137,9 +146,9 @@
             // 
             // 
             this.tbFinanceOverDueDays.Border.Class = "TextBoxBorder";
-            this.tbFinanceOverDueDays.Location = new System.Drawing.Point(412, 30);
+            this.tbFinanceOverDueDays.Location = new System.Drawing.Point(464, 31);
             this.tbFinanceOverDueDays.Name = "tbFinanceOverDueDays";
-            this.tbFinanceOverDueDays.Size = new System.Drawing.Size(100, 20);
+            this.tbFinanceOverDueDays.Size = new System.Drawing.Size(98, 20);
             this.tbFinanceOverDueDays.TabIndex = 16;
             // 
             // lblFinanceOverDueDays
@@ -149,7 +158,7 @@
             // 
             // 
             this.lblFinanceOverDueDays.BackgroundStyle.Class = "";
-            this.lblFinanceOverDueDays.Location = new System.Drawing.Point(325, 33);
+            this.lblFinanceOverDueDays.Location = new System.Drawing.Point(377, 33);
             this.lblFinanceOverDueDays.Name = "lblFinanceOverDueDays";
             this.lblFinanceOverDueDays.Size = new System.Drawing.Size(81, 16);
             this.lblFinanceOverDueDays.TabIndex = 15;
@@ -161,9 +170,9 @@
             // 
             // 
             this.tbAssignOverDueDays.Border.Class = "TextBoxBorder";
-            this.tbAssignOverDueDays.Location = new System.Drawing.Point(412, 7);
+            this.tbAssignOverDueDays.Location = new System.Drawing.Point(464, 9);
             this.tbAssignOverDueDays.Name = "tbAssignOverDueDays";
-            this.tbAssignOverDueDays.Size = new System.Drawing.Size(100, 20);
+            this.tbAssignOverDueDays.Size = new System.Drawing.Size(98, 20);
             this.tbAssignOverDueDays.TabIndex = 14;
             // 
             // lblAssignOverDueDays
@@ -173,7 +182,7 @@
             // 
             // 
             this.lblAssignOverDueDays.BackgroundStyle.Class = "";
-            this.lblAssignOverDueDays.Location = new System.Drawing.Point(305, 10);
+            this.lblAssignOverDueDays.Location = new System.Drawing.Point(352, 11);
             this.lblAssignOverDueDays.Name = "lblAssignOverDueDays";
             this.lblAssignOverDueDays.Size = new System.Drawing.Size(106, 16);
             this.lblAssignOverDueDays.TabIndex = 13;
@@ -190,7 +199,7 @@
             this.cbIsDispute.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.cbIsDispute.CheckValue = "A";
             this.cbIsDispute.CheckValueIndeterminate = "A";
-            this.cbIsDispute.Location = new System.Drawing.Point(518, 35);
+            this.cbIsDispute.Location = new System.Drawing.Point(568, 36);
             this.cbIsDispute.Name = "cbIsDispute";
             this.cbIsDispute.Size = new System.Drawing.Size(76, 16);
             this.cbIsDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -209,7 +218,7 @@
             this.cbIsFlaw.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.cbIsFlaw.CheckValue = "A";
             this.cbIsFlaw.CheckValueIndeterminate = "A";
-            this.cbIsFlaw.Location = new System.Drawing.Point(518, 10);
+            this.cbIsFlaw.Location = new System.Drawing.Point(568, 11);
             this.cbIsFlaw.Name = "cbIsFlaw";
             this.cbIsFlaw.Size = new System.Drawing.Size(76, 16);
             this.cbIsFlaw.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -223,7 +232,7 @@
             // 
             // 
             this.tbInvoiceNo.Border.Class = "TextBoxBorder";
-            this.tbInvoiceNo.Location = new System.Drawing.Point(199, 31);
+            this.tbInvoiceNo.Location = new System.Drawing.Point(246, 30);
             this.tbInvoiceNo.Name = "tbInvoiceNo";
             this.tbInvoiceNo.Size = new System.Drawing.Size(100, 20);
             this.tbInvoiceNo.TabIndex = 7;
@@ -235,7 +244,7 @@
             // 
             // 
             this.lblInvoiceNo.BackgroundStyle.Class = "";
-            this.lblInvoiceNo.Location = new System.Drawing.Point(158, 31);
+            this.lblInvoiceNo.Location = new System.Drawing.Point(196, 29);
             this.lblInvoiceNo.Name = "lblInvoiceNo";
             this.lblInvoiceNo.Size = new System.Drawing.Size(44, 16);
             this.lblInvoiceNo.TabIndex = 6;
@@ -248,16 +257,16 @@
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(671, 34);
+            this.lblCount.Location = new System.Drawing.Point(713, 36);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.Size = new System.Drawing.Size(25, 16);
             this.lblCount.TabIndex = 12;
             // 
             // btnQueryReset
             // 
             this.btnQueryReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQueryReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQueryReset.Location = new System.Drawing.Point(600, 30);
+            this.btnQueryReset.Location = new System.Drawing.Point(650, 31);
             this.btnQueryReset.Name = "btnQueryReset";
             this.btnQueryReset.Size = new System.Drawing.Size(46, 22);
             this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -269,7 +278,7 @@
             // 
             this.btnBatchQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnBatchQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnBatchQuery.Location = new System.Drawing.Point(600, 7);
+            this.btnBatchQuery.Location = new System.Drawing.Point(650, 8);
             this.btnBatchQuery.Name = "btnBatchQuery";
             this.btnBatchQuery.Size = new System.Drawing.Size(46, 22);
             this.btnBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -283,7 +292,7 @@
             // 
             // 
             this.tbFactor.Border.Class = "TextBoxBorder";
-            this.tbFactor.Location = new System.Drawing.Point(52, 30);
+            this.tbFactor.Location = new System.Drawing.Point(67, 29);
             this.tbFactor.Name = "tbFactor";
             this.tbFactor.Size = new System.Drawing.Size(100, 20);
             this.tbFactor.TabIndex = 5;
@@ -307,7 +316,7 @@
             // 
             // 
             this.tbBuyer.Border.Class = "TextBoxBorder";
-            this.tbBuyer.Location = new System.Drawing.Point(199, 8);
+            this.tbBuyer.Location = new System.Drawing.Point(246, 8);
             this.tbBuyer.Name = "tbBuyer";
             this.tbBuyer.Size = new System.Drawing.Size(100, 20);
             this.tbBuyer.TabIndex = 3;
@@ -319,7 +328,7 @@
             // 
             // 
             this.lblBuyer.BackgroundStyle.Class = "";
-            this.lblBuyer.Location = new System.Drawing.Point(171, 8);
+            this.lblBuyer.Location = new System.Drawing.Point(209, 9);
             this.lblBuyer.Name = "lblBuyer";
             this.lblBuyer.Size = new System.Drawing.Size(31, 16);
             this.lblBuyer.TabIndex = 2;
@@ -331,7 +340,7 @@
             // 
             // 
             this.tbSeller.Border.Class = "TextBoxBorder";
-            this.tbSeller.Location = new System.Drawing.Point(52, 7);
+            this.tbSeller.Location = new System.Drawing.Point(67, 5);
             this.tbSeller.Name = "tbSeller";
             this.tbSeller.Size = new System.Drawing.Size(100, 20);
             this.tbSeller.TabIndex = 1;
@@ -396,10 +405,10 @@
             this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvInvoices.Location = new System.Drawing.Point(0, 56);
+            this.dgvInvoices.Location = new System.Drawing.Point(0, 78);
             this.dgvInvoices.Name = "dgvInvoices";
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvInvoices.Size = new System.Drawing.Size(805, 369);
+            this.dgvInvoices.Size = new System.Drawing.Size(805, 347);
             this.dgvInvoices.TabIndex = 0;
             this.dgvInvoices.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvInvoices.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvInvoices_RowPostPaint);
@@ -669,6 +678,70 @@
             this.menuItemExportSelectedInvoices.Text = "导出所选发票";
             this.menuItemExportSelectedInvoices.Click += new System.EventHandler(this.ExportSelectedInvoices);
             // 
+            // cbCaseMark
+            // 
+            this.cbCaseMark.DisplayMember = "Text";
+            this.cbCaseMark.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCaseMark.FormattingEnabled = true;
+            this.cbCaseMark.ItemHeight = 14;
+            this.cbCaseMark.Location = new System.Drawing.Point(67, 53);
+            this.cbCaseMark.Name = "cbCaseMark";
+            this.cbCaseMark.Size = new System.Drawing.Size(100, 20);
+            this.cbCaseMark.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCaseMark.TabIndex = 17;
+            this.cbCaseMark.Items.AddRange(new object[]{
+            ConstStr.CASE.APPLICATION,
+            ConstStr.CASE.ENABLE,
+            ConstStr.CASE.CLOSED,
+            });
+            this.cbCaseMark.SelectedIndex = 1;
+            // 
+            // cbCDAStatus
+            // 
+            this.cbCDAStatus.DisplayMember = "Text";
+            this.cbCDAStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCDAStatus.FormattingEnabled = true;
+            this.cbCDAStatus.ItemHeight = 14;
+            this.cbCDAStatus.Location = new System.Drawing.Point(246, 53);
+            this.cbCDAStatus.Name = "cbCDAStatus";
+            this.cbCDAStatus.Size = new System.Drawing.Size(100, 20);
+            this.cbCDAStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCDAStatus.TabIndex = 18;
+            this.cbCDAStatus.Items.AddRange(new object[] { 
+            ConstStr.CDA.INVALID,
+            ConstStr.CDA.NO_CHECK,
+            ConstStr.CDA.CHECK_NO_DELIVER,
+            ConstStr.CDA.DELIVER_NO_SIGN,
+            ConstStr.CDA.SIGNED,
+            });
+            this.cbCDAStatus.SelectedIndex = 4;
+            // 
+            // lblCaseMark
+            // 
+            this.lblCaseMark.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCaseMark.BackgroundStyle.Class = "";
+            this.lblCaseMark.Location = new System.Drawing.Point(5, 56);
+            this.lblCaseMark.Name = "lblCaseMark";
+            this.lblCaseMark.Size = new System.Drawing.Size(56, 16);
+            this.lblCaseMark.TabIndex = 19;
+            this.lblCaseMark.Text = "案件状态";
+            // 
+            // lblCDAStatus
+            // 
+            this.lblCDAStatus.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCDAStatus.BackgroundStyle.Class = "";
+            this.lblCDAStatus.Location = new System.Drawing.Point(185, 56);
+            this.lblCDAStatus.Name = "lblCDAStatus";
+            this.lblCDAStatus.Size = new System.Drawing.Size(55, 16);
+            this.lblCDAStatus.TabIndex = 20;
+            this.lblCDAStatus.Text = "CDA状态";
+            // 
             // InvoiceMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -740,5 +813,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsDispute;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOverDueDays;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOverDueDays;
+        private DevComponents.DotNetBar.LabelX lblCDAStatus;
+        private DevComponents.DotNetBar.LabelX lblCaseMark;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCDAStatus;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseMark;
     }
 }

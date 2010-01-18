@@ -218,6 +218,7 @@
     <Compile Include="DB.dbml\CDA.cs" />
     <Compile Include="DB.dbml\Client.cs" />
     <Compile Include="DB.dbml\ClientCreditLine.cs" />
+    <Compile Include="DB.dbml\Exchange.cs" />
     <Compile Include="DB.dbml\InvoicePaymentLog.cs" />
     <Compile Include="DB.dbml\InvoiceRefundBatch.cs" />
     <Compile Include="DB.dbml\InvoiceRefundLog.cs" />

@@ -134,9 +134,9 @@ namespace CMBC.EasyFactor.ARMgr
         public void CaculateOutstanding(CDA cda)
         {
             this.tbCreditCoverOutstanding.Text = String.Format("{0:N2}", cda.CreditCoverOutstanding);
-            this.tbAROutstanding.Text = String.Format("{0:N2}", cda.AssignOutstanding);
+            this.tbAROutstanding.Text = String.Format("{0:N2}", cda.GetAssignOutstanding(cda.Case.InvoiceCurrency));
             this.tbFinanceCreditLineOutstanding.Text = String.Format("{0:N2}", cda.FinanceLineOutstanding);
-            this.tbFinanceOutstanding.Text = String.Format("{0:N2}", cda.FinanceOutstanding);
+            this.tbFinanceOutstanding.Text = String.Format("{0:N2}", cda.GetFinanceOutstanding(cda.Case.InvoiceCurrency));
         }
 		// Private Methods (7) 
 
@@ -258,7 +258,7 @@ namespace CMBC.EasyFactor.ARMgr
                 this.tbFinanceLineCurr.Text = cda.FinanceLineCurr;
                 this.tbFinanceLine.Text = String.Format("{0:N2}", cda.FinanceLine);
                 this.tbDueDate.Text = String.Format("{0:d}", cda.FinanceLinePeriodEnd);
-                ClientCreditLine creditLine = cda.Case.SellerClient.GetFinanceCreditLine(cda.Case.InvoiceCurrency);
+                ClientCreditLine creditLine = cda.Case.SellerClient.FinanceCreditLine;
                 if (creditLine != null)
                 {
                     this.tbHighestFinance.Text = String.Format("{0:N2}", creditLine.CreditLine);

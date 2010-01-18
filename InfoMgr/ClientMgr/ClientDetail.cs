@@ -746,7 +746,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     {
                         foreach (ClientCreditLine ccl in client.ClientCreditLines)
                         {
-                            if (ccl != creditLine && ccl.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && ccl.CreditLineType == creditLine.CreditLineType && ccl.CreditLineCurrency == creditLine.CreditLineCurrency)
+                            if (ccl != creditLine && ccl.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && ccl.CreditLineType == creditLine.CreditLineType)
                             {
                                 ccl.CreditLineStatus = ConstStr.CLIENT_CREDIT_LINE.EXPIRY;
                             }

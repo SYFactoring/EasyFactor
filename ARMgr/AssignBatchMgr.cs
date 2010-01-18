@@ -12,6 +12,9 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using System.Drawing;
+    using Microsoft.Office.Interop.Excel;
+    using System.IO;
+    using Microsoft.Office.Core;
 
     /// <summary>
     /// 
@@ -226,7 +229,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X,
                 e.RowBounds.Location.Y,
                 dgvBatches.RowHeadersWidth - 4,
                 e.RowBounds.Height);
@@ -309,5 +312,119 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
+
+        private void ReportAssign(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+            if (app == null)
+            {
+                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSLOGO.png");
+            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 40);
+
+            Client seller = selectedBatch.CDA.Case.SellerClient;
+            Client buyer = selectedBatch.CDA.Case.BuyerClient;
+            sheet.Cells[1, 1] = String.Format("致{0}", seller.ToString());
+            sheet.Cells[3, 2] = "应收账款转让明细表";
+            sheet.get_Range(sheet.Cells[3, 2], sheet.Cells[3, 2]).Font.Size = 24;
+            sheet.get_Range(sheet.Cells[2, 1], sheet.Cells[2, 5]).RowHeight = 30;
+
+            Factor factor = null;
+            switch (selectedBatch.CDA.Case.TransactionType)
+            {
+                case "国内卖方保理":
+                case "国内信保保理":
+                case "国内买方保理":
+                case "租赁保理":
+                    break;
+                case "国际信保保理":
+                case "出口保理":
+                case "进口保理":
+                    factor = selectedBatch.CDA.Case.BuyerFactor;
+                    break;
+                default:
+                    break;
+            }
+
+            int row = 5;
+            sheet.Cells[row, 1] = "买方：";
+            sheet.Cells[row++, 2] = String.Format("{0}（应收账款债务人）", buyer.ToString());
+            if (factor != null)
+            {
+                sheet.Cells[row, 1] = "进口保理商：";
+                sheet.Cells[row++, 2] = factor.ToString();
+            }
+            sheet.Cells[row, 1] = "信用风险额度：";
+            sheet.Cells[row++, 2] = String.Format("{0:N2}", selectedBatch.CDA.CreditCover);
+            sheet.Cells[row, 1] = "应收账款余额：";
+            sheet.Cells[row++, 2] = String.Format("{0:N2}", selectedBatch.CDA.GetAssignOutstanding(selectedBatch.CDA.Case.InvoiceCurrency));
+
+            row++;
+            sheet.Cells[row, 1] = "发票号";
+            sheet.Cells[row, 2] = "转让金额";
+            sheet.Cells[row, 3] = "发票日期";
+            sheet.Cells[row, 4] = "到期日";
+            sheet.Cells[row, 5] = "文件瑕疵";
+
+            row++;
+            int invoiceStart = row;
+            foreach (Invoice invoice in selectedBatch.Invoices)
+            {
+                sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
+                sheet.Cells[row, 2] = invoice.AssignAmount;
+                sheet.Cells[row, 3] = invoice.InvoiceDate;
+                sheet.Cells[row, 4] = invoice.DueDate;
+                sheet.Cells[row, 5] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
+                row++;
+            }
+            int invoiceEnd = row - 1;
+            row++;
+            row++;
+            sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
+            sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = "0.00";
+            sheet.get_Range(sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]).NumberFormatLocal = "yyyy/MM/dd";
+            sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "yyyy/MM/dd";
+            sheet.get_Range(sheet.Cells[invoiceStart, 5], sheet.Cells[invoiceEnd, 5]).NumberFormatLocal = "0.00";
+            sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
+
+
+            row++;
+            row++;
+
+            sheet.Cells[row, 1] = "本行已完成上述发票/贷项发票转让，特此通知";
+            sheet.Cells[row + 2, 3] = "中国民生银行       （业务章）";
+            sheet.Cells[row + 3, 3] = "签字：";
+            sheet.Cells[row + 4, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+
+            sheet.UsedRange.Font.Name = "楷体";
+
+            sheet.get_Range("A1", Type.Missing).ColumnWidth = 15;
+            sheet.get_Range("B1", Type.Missing).ColumnWidth = 15;
+            sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
+            sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
+            sheet.get_Range("E1", Type.Missing).ColumnWidth = 15;
+            app.Visible = true;
+        }
+
+        private void ReportFinance(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ReportCommission(object sender, EventArgs e)
+        {
+
+        }
     }
 }

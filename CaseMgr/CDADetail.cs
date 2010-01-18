@@ -369,7 +369,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
-            ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.GetAssignCreditLine(currency);
+            ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.AssignCreditLine;
             if (buyerCreditLine != null)
             {
                 cda.CreditCoverPeriodBegin = buyerCreditLine.PeriodBegin;
@@ -396,7 +396,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            ClientCreditLine sellerCreditLine = cda.Case.SellerClient.GetFinanceCreditLine(currency);
+            ClientCreditLine sellerCreditLine = cda.Case.SellerClient.FinanceCreditLine;
             if (sellerCreditLine != null)
             {
                 cda.FinanceLinePeriodBegin = sellerCreditLine.PeriodBegin;
@@ -448,6 +448,12 @@ namespace CMBC.EasyFactor.CaseMgr
         private void SaveCDA(object sender, EventArgs e)
         {
             CDA cda = (CDA)this.CDABindingSource.DataSource;
+
+            if (!superValidator.Validate())
+            {
+                return;
+            }
+
             if (this.cbNoticeMethodEmail.Checked == true)
             {
                 cda.NoticeMethod = "Email";
@@ -687,7 +693,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
-            ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.GetAssignCreditLine(cda.CreditCoverCurr);
+            ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.AssignCreditLine;
             if (cda.CreditCover > buyerCreditLine.CreditLine)
             {
                 e.IsValid = false;
@@ -705,7 +711,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
-            ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.GetAssignCreditLine(cda.CreditCoverCurr);
+            ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.AssignCreditLine;
             if (cda.CreditCoverPeriodEnd > buyerCreditLine.PeriodEnd)
             {
                 e.IsValid = false;
@@ -723,7 +729,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
-            ClientCreditLine sellerCreditLine = cda.Case.SellerClient.GetFinanceCreditLine(cda.FinanceLineCurr);
+            ClientCreditLine sellerCreditLine = cda.Case.SellerClient.FinanceCreditLine;
             if (cda.FinanceLine > sellerCreditLine.CreditLine)
             {
                 e.IsValid = false;
@@ -741,7 +747,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
-            ClientCreditLine sellerCreditLine = cda.Case.SellerClient.GetFinanceCreditLine(cda.FinanceLineCurr);
+            ClientCreditLine sellerCreditLine = cda.Case.SellerClient.FinanceCreditLine;
             if (cda.FinanceLinePeriodEnd > sellerCreditLine.PeriodEnd)
             {
                 e.IsValid = false;

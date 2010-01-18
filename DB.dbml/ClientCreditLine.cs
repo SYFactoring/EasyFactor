@@ -36,5 +36,24 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double AssignCreditLineOutstanding
+        {
+            get
+            {
+                double result =  this.CreditLine - this.Client.GetAssignOutstanding(this.CreditLineCurrency);
+                if (this.ClientCreditLines.Count > 0)
+                {
+                    foreach (ClientCreditLine creditLine in this.ClientCreditLines)
+                    {
+                        result -= creditLine.Client.GetAssignOutstanding(this.CreditLineCurrency);
+                    }
+                }
+                return result;
+            }
+        }
     }
 }
