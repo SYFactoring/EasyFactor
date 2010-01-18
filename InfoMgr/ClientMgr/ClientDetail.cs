@@ -471,7 +471,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (opContractType == OpContractType.NEW_CONTRACT)
             {
                 Contract contract = this.contractBindingSource.DataSource as Contract;
-                contract.ContractDueDate = this.diContractValueDate.Value.AddYears(1);
+                contract.ContractValueDate = this.diContractValueDate.Value.Date;
+                contract.ContractDueDate = this.diContractValueDate.Value.Date.AddYears(1);
             }
         }
 

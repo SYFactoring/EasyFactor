@@ -965,8 +965,8 @@
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelFactor);
             this.tabControl.Controls.Add(this.tabPanelCreditLine);
+            this.tabControl.Controls.Add(this.tabPanelFactor);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -2379,9 +2379,10 @@
             // 
             // creditLineCurrencyComboBox
             // 
+            this.creditLineCurrencyComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.creditLineCurrencyComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.creditLineCurrencyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.factorCreditLineBindingSource, "CreditLineCurrency", true));
             this.creditLineCurrencyComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.creditLineCurrencyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.creditLineCurrencyComboBox.FormattingEnabled = true;
             this.creditLineCurrencyComboBox.Location = new System.Drawing.Point(90, 7);
             this.creditLineCurrencyComboBox.Name = "creditLineCurrencyComboBox";

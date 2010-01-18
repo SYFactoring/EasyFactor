@@ -102,7 +102,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (!this.FinanceAmount.HasValue)
                     return null;
-                return this.FinanceAmount.Value - this.RefundAmount - this.RefundAmount2.GetValueOrDefault();
+                return this.FinanceAmount.Value - this.RefundAmount.GetValueOrDefault() - this.RefundAmount2.GetValueOrDefault();
             }
         }
 

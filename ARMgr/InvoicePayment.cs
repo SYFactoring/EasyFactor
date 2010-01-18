@@ -49,11 +49,6 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            SELLER_REFUND,
-
-            /// <summary>
-            /// 
-            /// </summary>
             GUARANTEE_PAYMENT,
 
             /// <summary>
@@ -91,6 +86,11 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 colCreditNoteDate2.Visible = true;
                 colCreditNoteNo2.Visible = true;
+            }
+            else
+            {
+                colCreditNoteDate2.Visible = false;
+                colCreditNoteNo2.Visible = false;
             }
             colCheckBox.ReadOnly = false;
         }
@@ -409,13 +409,10 @@ namespace CMBC.EasyFactor.ARMgr
             switch (paymentType)
             {
                 case OpPaymentType.BUYER_PAYMENT:
-                    batch.PaymentType = "买方还款";
+                    batch.PaymentType = "买方付款";
                     break;
                 case OpPaymentType.INDIRECT_PAYMENT:
-                    batch.PaymentType = "间接还款";
-                    break;
-                case OpPaymentType.SELLER_REFUND:
-                    batch.PaymentType = "卖方还款";
+                    batch.PaymentType = "间接付款";
                     break;
                 case OpPaymentType.GUARANTEE_PAYMENT:
                     batch.PaymentType = "担保付款";
@@ -435,7 +432,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
-                              where invoice.InvoiceAssignBatch.CDACode == this._CDA.CDACode && (invoice.PaymentAmount-invoice.AssignAmount<0.00000001)
+                              where invoice.InvoiceAssignBatch.CDACode == this._CDA.CDACode && (invoice.PaymentAmount.GetValueOrDefault()-invoice.AssignAmount<0.00000001)
                               select invoice;
             this.invoiceBindingSource.DataSource = queryResult;
             this.StatBatch();
@@ -449,7 +446,6 @@ namespace CMBC.EasyFactor.ARMgr
         private void ResetRow(int rowIndex, bool editable)
         {
             this.dgvInvoices.Rows[rowIndex].Cells["colPaymentAmount2"].ReadOnly = !editable;
-            this.dgvInvoices.Rows[rowIndex].Cells["colPaymentDate2"].ReadOnly = !editable;
             this.dgvInvoices.Rows[rowIndex].Cells["colCreditNoteNo2"].ReadOnly = !editable;
             this.dgvInvoices.Rows[rowIndex].Cells["colCreditNoteDate2"].ReadOnly = !editable;
             if (!editable)

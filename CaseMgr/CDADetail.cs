@@ -113,6 +113,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 cda = GenerateDefaultCDA(null);
                 this.CDABindingSource.DataSource = cda;
+                FillCase();
             }
             else
             {
@@ -324,6 +325,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="curCase"></param>
         private void FillCase()
         {
+
             CDA cda = (CDA)this.CDABindingSource.DataSource;
             if (cda.Case == null)
             {
@@ -435,7 +437,6 @@ namespace CMBC.EasyFactor.CaseMgr
             cda.IsCreditCoverRevolving = true;
             cda.AssignType = "全部";
             cda.Case = curCase;
-            FillCase();
             return cda;
         }
 

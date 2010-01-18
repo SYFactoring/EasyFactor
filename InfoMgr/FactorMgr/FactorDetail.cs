@@ -701,6 +701,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+                this.btnGroupSelect.Visible = true;
             }
             else if (this.opFactorType == OpFactorType.UPDATE_FACTOR)
             {
@@ -725,6 +726,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 }
 
                 this.factorCodeTextBox.ReadOnly = true;
+                this.btnGroupSelect.Visible = true;
             }
             else if (this.opFactorType == OpFactorType.DETAIL_FACTOR)
             {
@@ -747,6 +749,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+                this.btnGroupSelect.Visible = false;
             }
         }
 

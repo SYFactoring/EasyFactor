@@ -2184,7 +2184,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // regularExpressionValidator1
             // 
             this.regularExpressionValidator1.EmptyValueIsValid = true;
-            this.regularExpressionValidator1.ErrorMessage = "正确格式如下：FC20100001-010SH-NY";
+            this.regularExpressionValidator1.ErrorMessage = "正确格式如下：FC20100001-0010SH-NY";
             this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator1.ValidationExpression = "^[A-Z]{2}\\d{8}-\\d{4}[A-Z]{2}-[A-Z]{2}$";
             // 

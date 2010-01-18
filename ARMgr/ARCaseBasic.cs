@@ -106,7 +106,7 @@ namespace CMBC.EasyFactor.ARMgr
                     uc = new InvoicePayment(this, InvoicePayment.OpPaymentType.INDIRECT_PAYMENT);
                     break;
                 case OpARType.InvoiceSellerRefund:
-                    uc = new InvoicePayment(this, InvoicePayment.OpPaymentType.SELLER_REFUND);
+                    uc = new InvoiceRefund(this, InvoiceRefund.OpRefundType.SELLER_REFUND);
                     break;
                 case OpARType.InvoiceGuaranteePayment:
                     uc = new InvoicePayment(this, InvoicePayment.OpPaymentType.GUARANTEE_PAYMENT);
@@ -285,6 +285,10 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     (control as InvoicePayment).CDA = cda;
                 }
+                else if (control is InvoiceRefund)
+                {
+                    (control as InvoiceRefund).CDA = cda;
+                }
             }
             else
             {
@@ -302,6 +306,10 @@ namespace CMBC.EasyFactor.ARMgr
                 else if (control is InvoicePayment)
                 {
                     (control as InvoicePayment).ResetControlsStatus();
+                }
+                else if (control is InvoiceRefund)
+                {
+                    (control as InvoiceRefund).ResetControlsStatus();
                 }
             }
         }
