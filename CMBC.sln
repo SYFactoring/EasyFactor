@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyFactor", "EasyFactor.cs
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EasyFactor Beta", "..\EasyFactor Beta\EasyFactor Beta.vdproj", "{B28A39AA-6810-421E-8C37-5C97875D4FD0}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EasyFactor Alpha", "..\EasyFactor Alpha\EasyFactor Installer.vdproj", "{7BF7DC21-D117-4B6B-93E8-07CED29C2659}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EasyFactor Alpha", "..\EasyFactor Alpha\EasyFactor Alpha.vdproj", "{8BC2A5FF-3EF4-4AC1-A8D7-8D7EE4F46B46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,12 +18,10 @@ Global
 		{3876B9CE-93F3-42D1-B12B-6BD0F39D4CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3876B9CE-93F3-42D1-B12B-6BD0F39D4CCA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B28A39AA-6810-421E-8C37-5C97875D4FD0}.Debug|Any CPU.ActiveCfg = Release
-		{B28A39AA-6810-421E-8C37-5C97875D4FD0}.Debug|Any CPU.Build.0 = Release
 		{B28A39AA-6810-421E-8C37-5C97875D4FD0}.Release|Any CPU.ActiveCfg = Release
-		{7BF7DC21-D117-4B6B-93E8-07CED29C2659}.Debug|Any CPU.ActiveCfg = Debug
-		{7BF7DC21-D117-4B6B-93E8-07CED29C2659}.Debug|Any CPU.Build.0 = Debug
-		{7BF7DC21-D117-4B6B-93E8-07CED29C2659}.Release|Any CPU.ActiveCfg = Release
-		{7BF7DC21-D117-4B6B-93E8-07CED29C2659}.Release|Any CPU.Build.0 = Release
+		{8BC2A5FF-3EF4-4AC1-A8D7-8D7EE4F46B46}.Debug|Any CPU.ActiveCfg = Debug
+		{8BC2A5FF-3EF4-4AC1-A8D7-8D7EE4F46B46}.Release|Any CPU.ActiveCfg = Release
+		{8BC2A5FF-3EF4-4AC1-A8D7-8D7EE4F46B46}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

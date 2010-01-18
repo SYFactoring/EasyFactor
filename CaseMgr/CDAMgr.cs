@@ -334,21 +334,73 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
-            sheet.Cells[1, 2] = "中国民生银行保理额度通知书 ";
-            sheet.Cells[2,1]=String.Format("贵公司（{0}公司）前洽本行办理保理业务并签立保理服务合同",selectedCDA.Case.SellerClient.ToString());
-            sheet.Cells[3,1]=String.Format("(合同编号:{0}), 经本行评估后,核定额度如下:",selectedCDA.Case.SellerClient.Contract.ContractCode);
+            sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 2]).MergeCells = true;
+            sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).Font.Size = 24;
+            sheet.Cells[1, 1] = "中国民生银行保理额度通知书 ";
+            
+            sheet.Cells[2, 1] = String.Format("贵公司（{0}公司）前洽本行办理保理业务并签立保理服务合同", selectedCDA.Case.SellerClient.ToString());
+            sheet.Cells[3, 1] = String.Format("(合同编号:{0}), 经本行评估后,核定额度如下:", selectedCDA.Case.SellerClient.Contract.ContractCode);
 
             sheet.Cells[5, 1] = "买方名称";
-            sheet.Cells[6, 1]="";
-            sheet.Cells[7, 1]="";
-            sheet.Cells[8, 1]="";
-            sheet.Cells[9, 1]="";
-            sheet.Cells[10, 1]="";
-            sheet.Cells[11, 1]="";
-            sheet.Cells[12, 1]="";
-            sheet.Cells[13, 1]="";
-            sheet.Cells[14, 1]="";
-            sheet.Cells[15, 1]="";
+            sheet.Cells[5, 2] = selectedCDA.Case.BuyerClient.ToString();
+            sheet.Cells[6, 1] = "买方地址";
+            sheet.Cells[6, 2] = selectedCDA.Case.BuyerClient.AddressCN == string.Empty ? selectedCDA.Case.BuyerClient.AddressEN : selectedCDA.Case.BuyerClient.AddressCN;
+            sheet.Cells[7, 1] = "付款条件";
+            sheet.Cells[7, 2] = selectedCDA.PaymentTerms;
+            sheet.Cells[8, 1] = "信用风险额度";
+            sheet.Cells[8, 2] = selectedCDA.CreditCover;
+            sheet.Cells[9, 1] = "信用风险承担比例";
+            sheet.Cells[9, 2] = selectedCDA.PUGProportion;
+            sheet.Cells[10, 1] = "信用风险额度有效期限";
+            sheet.Cells[10, 2] = String.Format("{0:yyyyMMdd} - {1:yyyyMMdd}", selectedCDA.CreditCoverPeriodBegin, selectedCDA.CreditCoverPeriodEnd);
+            sheet.Cells[11, 1] = "保理预付款额度";
+            sheet.Cells[11, 2] = selectedCDA.FinanceLine;
+            sheet.Cells[12, 1] = "预付款额度有效期限";
+            sheet.Cells[12, 2] = String.Format("{0:yyyyMMdd} - {1:yyyyMMdd}", selectedCDA.FinanceLinePeriodBegin, selectedCDA.FinanceLinePeriodEnd);
+            sheet.Cells[13, 1] = "最高保理预付款额度";
+            sheet.Cells[13, 2] = "";
+            sheet.Cells[14, 1] = "预付比例";
+            sheet.Cells[14, 2] = selectedCDA.FinanceProportion;
+            sheet.Cells[15, 1] = "保理费率";
+            sheet.Cells[15, 2] = selectedCDA.Price;
+            sheet.Cells[16, 1] = "单据处理费";
+            sheet.Cells[16, 2] = selectedCDA.HandFee;
+            sheet.Cells[17, 1] = "进口保理商";
+            sheet.Cells[17, 2] = selectedCDA.Case.BuyerFactor.ToString();
+            sheet.Cells[18, 1] = "自负额";
+            sheet.Cells[18, 2] = selectedCDA.Deductibles;
+            sheet.Cells[19, 1] = "最低损失门槛";
+            sheet.Cells[19, 2] = selectedCDA.LossThreshold;
+            sheet.get_Range(sheet.Cells[5, 2], sheet.Cells[19, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+
+            sheet.get_Range(sheet.Cells[5, 1], sheet.Cells[19, 2]).Borders.LineStyle = 1;
+            sheet.get_Range(sheet.Cells[5, 1], sheet.Cells[19, 2]).WrapText = true;
+
+            sheet.Cells[21, 1] = String.Format("备注：{0}", selectedCDA.Comment);
+            sheet.Cells[23, 1] = "如贵公司于本行发出本通知书后10日内未签回或于本行收到签回通知书后30日内未动用额度时，本行得停止额度之动用。贵公司嗣后如欲动用该额度，须重新提出申请。";
+
+            sheet.Cells[25, 1] = "";
+            sheet.Cells[25, 2] = "";
+            sheet.Cells[26, 1] = "客户经理";
+            sheet.Cells[26, 2] = "保理部门主管";
+            sheet.Cells[27, 1] = "日期： 年   月   日";
+            sheet.Cells[27, 2] = "日期： 年   月   日";
+
+            sheet.Cells[29, 1] = "同意并签回";
+            sheet.Cells[30, 1] = "客户";
+            sheet.Cells[30, 2] = "日期： 年   月   日";
+
+            sheet.UsedRange.Font.Name = "楷体";
+
+            sheet.get_Range("A1", Type.Missing).ColumnWidth = 40;
+            sheet.get_Range("B1", Type.Missing).ColumnWidth = 50;
+
+            foreach (Range range in sheet.UsedRange.Rows)
+            {
+                range.EntireRow.AutoFit();
+            }
+
             app.Visible = true;
         }
 
