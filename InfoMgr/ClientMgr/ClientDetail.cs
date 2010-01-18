@@ -18,7 +18,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (3)
+		#region Fields (3) 
 
         /// <summary>
         /// 
@@ -33,9 +33,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpContractType opContractType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (3)
+		#region Enums (3) 
 
         /// <summary>
         /// 
@@ -57,7 +57,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT_CREDIT_LINE
         }
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         public enum OpContractType
@@ -77,7 +77,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CONTRACT
         }
-        /// <summary>
+/// <summary>
         /// Operation Type 
         /// </summary>
         public enum OpClientType
@@ -103,11 +103,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DETAIL_CLIENT
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (6)
+		#region Constructors (6) 
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client">selected client</param>
@@ -239,11 +239,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (30)
+		#region Methods (30) 
 
-        // Private Methods (30) 
+		// Private Methods (30) 
 
         private void cbDepartments_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
         {
@@ -509,23 +509,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-        //private void IsGroupChanged(object sender, EventArgs e)
-        //{
-        //    foreach (Control comp in this.groupPanelClientGroup.Controls)
-        //    {
-        //        if (comp == this.isGroupCheckBox)
-        //        {
-        //            continue;
-        //        }
-        //        ControlUtil.SetComponetEditable(comp, this.isGroupCheckBox.Checked);
-        //    }
-        //    if (this.isGroupCheckBox.Checked == false)
-        //    {
-        //        this.groupNoTextBox.Text = string.Empty;
-        //        this.tbGroupNameCN.Text = string.Empty;
-        //        this.tbGroupNameEN.Text = string.Empty;
-        //    }
-        //}
         /// <summary>
         /// 
         /// </summary>
@@ -1115,6 +1098,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+                this.btnGroupSelect.Visible = false;
             }
             else if (this.opClientType == OpClientType.NEW_CLIENT)
             {
@@ -1137,6 +1121,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+                this.btnGroupSelect.Visible = true;
             }
             else if (this.opClientType == OpClientType.UPDATE_CLIENT)
             {
@@ -1159,7 +1144,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
-
+                this.btnGroupSelect.Visible = true;
                 this.clientEDICodeTextBox.ReadOnly = true;
             }
         }
@@ -1198,6 +1183,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+                this.btnGroupCreditLineSelect.Visible = false;
             }
             else if (this.opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
@@ -1213,6 +1199,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.unfreezeReasonTextBox.ReadOnly = true;
                 this.unfreezerTextBox.ReadOnly = true;
                 this.unfreezeDateDateTimePicker.Enabled = false;
+                this.btnGroupCreditLineSelect.Visible = true;
             }
             else if (this.opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
             {
@@ -1228,6 +1215,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.unfreezeReasonTextBox.ReadOnly = true;
                 this.unfreezerTextBox.ReadOnly = true;
                 this.unfreezeDateDateTimePicker.Enabled = false;
+                this.btnGroupCreditLineSelect.Visible = true;
             }
         }
 
@@ -1273,6 +1261,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbContractCreateUserName.ReadOnly = true;
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }
