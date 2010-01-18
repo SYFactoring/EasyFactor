@@ -157,13 +157,33 @@ namespace CMBC.EasyFactor.CaseMgr
             if ("IsRecoarse".Equals(e.PropertyName))
             {
                 bool isRecoarse = cda.IsRecoarse.GetValueOrDefault();
-                this.creditCoverCurrComboBox.Enabled = !isRecoarse;
-                this.creditCoverPeriodBeginDateTimePicker.Enabled = !isRecoarse;
-                this.creditCoverPeriodEndDateTimePicker.Enabled = !isRecoarse;
-                this.creditCoverTextBox.Enabled = !isRecoarse;
-                this.pUGPeriodTextBox.Enabled = !isRecoarse;
-                this.pUGProportionTextBox.Enabled = !isRecoarse;
-                this.cbIsCreditCoverRevolving.Enabled = !isRecoarse;
+                if (isRecoarse)
+                {
+                    this.creditCoverCurrComboBox.Enabled = false;
+                    this.creditCoverPeriodBeginDateTimePicker.Enabled = false;
+                    this.creditCoverPeriodEndDateTimePicker.Enabled = false;
+                    this.creditCoverTextBox.Enabled = false;
+                    this.pUGPeriodTextBox.Enabled = false;
+                    this.pUGProportionTextBox.Enabled = false;
+                    this.cbIsCreditCoverRevolving.Enabled = false;
+                    cda.CreditCoverCurr = string.Empty;
+                    cda.CreditCover = null;
+                    cda.CreditCoverPeriodBegin = null;
+                    cda.CreditCoverPeriodEnd = null;
+                    cda.PUGPeriod = null;
+                    cda.PUGProportion = null;
+                    cda.IsCreditCoverRevolving = null;
+                }
+                else
+                {
+                    this.creditCoverCurrComboBox.Enabled = true;
+                    this.creditCoverPeriodBeginDateTimePicker.Enabled = true;
+                    this.creditCoverPeriodEndDateTimePicker.Enabled = true;
+                    this.creditCoverTextBox.Enabled = true;
+                    this.pUGPeriodTextBox.Enabled = true;
+                    this.pUGProportionTextBox.Enabled = true;
+                    this.cbIsCreditCoverRevolving.Enabled = true;
+                }
             }
             else if ("CreditCoverCurr".Equals(e.PropertyName))
             {
@@ -359,8 +379,10 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 this.creditCoverPeriodBeginDateTimePicker.Enabled = false;
                 this.creditCoverPeriodEndDateTimePicker.Enabled = false;
-                this.creditCoverCurrComboBox.Enabled = false;
                 this.creditCoverTextBox.Enabled = false;
+                cda.CreditCoverPeriodBegin = null;
+                cda.CreditCoverPeriodEnd = null;
+                cda.CreditCover = null;
             }
         }
 
@@ -383,11 +405,13 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             else
             {
-                this.financeLineCurrComboBox.Enabled = false;
                 this.financeLinePeriodBeginDateTimePicker.Enabled = false;
                 this.financeLinePeriodEndDateTimePicker.Enabled = false;
                 this.financeLineTextBox.Enabled = false;
                 this.tbHighestFinance.Text = String.Empty;
+                cda.FinanceLinePeriodBegin = null;
+                cda.FinanceLinePeriodEnd = null;
+                cda.FinanceLine = null;
             }
         }
 
