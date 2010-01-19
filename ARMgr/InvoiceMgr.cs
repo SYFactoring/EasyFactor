@@ -432,9 +432,9 @@ namespace CMBC.EasyFactor.ARMgr
                               let cda = invoice.InvoiceAssignBatch.CDA
                               where cda.CDAStatus == cdaStatus
                               let seller = curCase.SellerClient
-                              where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN_1.Contains(sellerName) || seller.ClientNameEN_2.Contains(sellerName)
+                              where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN.Contains(sellerName) 
                               let buyer = curCase.BuyerClient
-                              where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN_1.Contains(buyerName) || buyer.ClientNameEN_2.Contains(buyerName)
+                              where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN.Contains(buyerName)
                               let sellerFactor = curCase.SellerFactor
                               where sellerFactor.CompanyNameCN.Contains(factorName) || sellerFactor.CompanyNameEN.Contains(factorName)
                               let buyerFactor = curCase.BuyerFactor

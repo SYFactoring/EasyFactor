@@ -20,7 +20,7 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CDAMgr : UserControl
     {
-        #region Fields (2)
+		#region Fields (2) 
 
         /// <summary>
         /// 
@@ -28,9 +28,9 @@ namespace CMBC.EasyFactor.CaseMgr
         private BindingSource bs = new BindingSource();
         private OpCDAType opCDAType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         /// <summary>
         /// 
@@ -48,11 +48,11 @@ namespace CMBC.EasyFactor.CaseMgr
             CHECK
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (1)
+		#region Constructors (1) 
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the CDAMgr class.
         /// </summary>
         public CDAMgr(OpCDAType opCDAType)
@@ -71,9 +71,9 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Gets or sets owner form
@@ -93,11 +93,11 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (12)
+		#region Methods (13) 
 
-        // Private Methods (12) 
+		// Private Methods (13) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -234,6 +234,27 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvCDAs_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            for (int i = 0; i < this.bs.List.Count; i++)
+            {
+                CDA cda = (CDA)this.bs.List[i];
+                if(cda.CreditCoverPeriodEnd<DateTime.Now.Date)
+                {
+                    this.dgvCDAs["colCreditCoverPeriodEnd", i].Style.BackColor = Color.Red;
+                }
+                if (cda.FinanceLinePeriodEnd < DateTime.Now.Date)
+                {
+                    this.dgvCDAs["colFinanceLinePeriodEnd", i].Style.BackColor = Color.Red;
+                }
+            }
+        }
+
         private void dgvCDAs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X,
@@ -277,9 +298,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 let contracts = cda.Case.SellerClient.Contracts
                 where contractCode == string.Empty ? true : contracts.Any(con => con.ContractCode.Contains(contractCode))
                 let seller = cda.Case.SellerClient
-                where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN_1.Contains(sellerName) || seller.ClientNameEN_2.Contains(sellerName)
+                where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN.Contains(sellerName) 
                 let buyer = cda.Case.BuyerClient
-                where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN_1.Contains(buyerName) || buyer.ClientNameEN_2.Contains(buyerName)
+                where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN.Contains(buyerName)
                 let sellerfactor = cda.Case.SellerFactor
                 where sellerfactor.CompanyNameCN.Contains(factorName) || sellerfactor.CompanyNameEN.Contains(factorName)
                 let buyerfactor = cda.Case.BuyerFactor
@@ -445,6 +466,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

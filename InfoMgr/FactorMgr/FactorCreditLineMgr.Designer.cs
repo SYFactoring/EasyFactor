@@ -93,6 +93,7 @@
             this.dgvFactorCreditLines.TabIndex = 3;
             this.dgvFactorCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFactorCreditLines_CellDoubleClick);
             this.dgvFactorCreditLines.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvFactorCreditLines_RowPostPaint);
+            this.dgvFactorCreditLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvFactorCreditLines_DataBindingComplete);
             // 
             // colFactorCode
             // 

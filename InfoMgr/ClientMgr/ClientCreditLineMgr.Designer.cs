@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.cbClientGroupType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -41,14 +42,13 @@
             this.dgvClientCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colClientEDICode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClientNameCN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClientNameEN_1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClientNameEN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLines)).BeginInit();
             this.SuspendLayout();
@@ -76,6 +76,18 @@
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
+            // 
+            // lblCount
+            // 
+            this.lblCount.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCount.BackgroundStyle.Class = "";
+            this.lblCount.Location = new System.Drawing.Point(529, 7);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.TabIndex = 8;
             // 
             // cbClientGroupType
             // 
@@ -171,7 +183,7 @@
             this.dgvClientCreditLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colClientEDICode,
             this.colClientNameCN,
-            this.colClientNameEN_1,
+            this.colClientNameEN,
             this.colCreditLineType,
             this.colCreditLineCurrency,
             this.colCreditLine,
@@ -197,6 +209,7 @@
             this.dgvClientCreditLines.TabIndex = 1;
             this.dgvClientCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvClientCreditLines.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvClientCreditLines_RowPostPaint);
+            this.dgvClientCreditLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvClientCreditLines_DataBindingComplete);
             // 
             // colClientEDICode
             // 
@@ -212,12 +225,12 @@
             this.colClientNameCN.Name = "colClientNameCN";
             this.colClientNameCN.ReadOnly = true;
             // 
-            // colClientNameEN_1
+            // colClientNameEN
             // 
-            this.colClientNameEN_1.DataPropertyName = "ClientNameEN_1";
-            this.colClientNameEN_1.HeaderText = "客户名称（英1）";
-            this.colClientNameEN_1.Name = "colClientNameEN_1";
-            this.colClientNameEN_1.ReadOnly = true;
+            this.colClientNameEN.DataPropertyName = "ClientNameEN";
+            this.colClientNameEN.HeaderText = "客户名称（英）";
+            this.colClientNameEN.Name = "colClientNameEN";
+            this.colClientNameEN.ReadOnly = true;
             // 
             // colCreditLineType
             // 
@@ -263,18 +276,6 @@
             this.colCreditLineStatus.Name = "colCreditLineStatus";
             this.colCreditLineStatus.ReadOnly = true;
             // 
-            // lblCount
-            // 
-            this.lblCount.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(529, 7);
-            this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(56, 16);
-            this.lblCount.TabIndex = 8;
-            // 
             // ClientCreditLineMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -302,7 +303,7 @@
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientGroupType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameCN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameEN_1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameEN;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;

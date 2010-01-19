@@ -18,7 +18,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
     {
-		#region Fields (3) 
+        #region Fields (3)
 
         /// <summary>
         /// 
@@ -33,9 +33,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpContractType opContractType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (3) 
+        #region Enums (3)
 
         /// <summary>
         /// 
@@ -57,7 +57,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT_CREDIT_LINE
         }
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         public enum OpContractType
@@ -77,7 +77,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CONTRACT
         }
-/// <summary>
+        /// <summary>
         /// Operation Type 
         /// </summary>
         public enum OpClientType
@@ -86,11 +86,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// New Client
             /// </summary>
             NEW_CLIENT,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            NEW_GROUP_CLIENT,
 
             /// <summary>
             /// Update Client
@@ -103,11 +98,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DETAIL_CLIENT
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (6) 
+        #region Constructors (5)
 
-/// <summary>
+        /// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client">selected client</param>
@@ -145,11 +140,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 client = new Client();
                 this.clientBindingSource.DataSource = client;
             }
-            else if (opClientType == OpClientType.NEW_GROUP_CLIENT)
-            {
-                client = new Client();
-                this.clientBindingSource.DataSource = client;
-            }
             else
             {
                 this.clientBindingSource.DataSource = client;
@@ -160,21 +150,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (client.ClientGroup != null)
                 {
                     this.tbGroupNameCN.Text = client.ClientGroup.ClientNameCN;
-                    this.tbGroupNameEN.Text = client.ClientGroup.ClientNameEN_1;
+                    this.tbGroupNameEN.Text = client.ClientGroup.ClientNameEN;
                 }
                 client.Backup();
             }
 
             if (opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
-                this.tabControl.SelectedTab = this.tabItemClientCreditLine;
                 this.clientCreditLineBindingSource.DataSource = new ClientCreditLine();
+                this.tabControl.SelectedTab = this.tabItemClientCreditLine;
             }
 
             if (opContractType == OpContractType.NEW_CONTRACT)
             {
-                this.tabControl.SelectedTab = this.tabItemContract;
                 this.contractBindingSource.DataSource = new Contract();
+                this.tabControl.SelectedTab = this.tabItemContract;
             }
 
             this.UpdateClientControlStatus();
@@ -190,18 +180,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientDetail(Client client, OpClientType opClientType)
             : this(client, opClientType, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, OpContractType.DETAIL_CONTRACT)
         {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="client"></param>
-        /// <param name="opClientCreditLineType"></param>
-        public ClientDetail(Client client, OpClientCreditLineType opClientCreditLineType)
-            : this(client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT)
-        {
-            this.tabControl.SelectedTab = this.tabItemClientCreditLine;
+            this.tabControl.SelectedTab = this.tabItemClient;
         }
 
         /// <summary>
@@ -214,14 +193,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
         }
 
-        public ClientDetail(ClientCreditLine creditLine, OpClientCreditLineType opClientCreditLineType)
-            : this(creditLine.Client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="opClientCreditLineType"></param>
+        public ClientDetail(Client client, OpClientCreditLineType opClientCreditLineType)
+            : this(client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT)
         {
-            this.tabControl.SelectedTab = this.tabItemClientCreditLine;
-            if (opClientCreditLineType == OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE || opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
-            {
-                this.clientCreditLineBindingSource.DataSource = creditLine;
-            }
         }
 
         /// <summary>
@@ -239,11 +218,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-		#endregion Constructors 
+        public ClientDetail(ClientCreditLine creditLine, OpClientCreditLineType opClientCreditLineType)
+            : this(creditLine.Client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT)
+        {
+            this.tabControl.SelectedTab = this.tabItemClientCreditLine;
+            if (opClientCreditLineType == OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE || opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
+            {
+                this.clientCreditLineBindingSource.DataSource = creditLine;
+            }
+        }
 
-		#region Methods (30) 
+        #endregion Constructors
 
-		// Private Methods (30) 
+        #region Methods (30)
+
+        // Private Methods (30) 
 
         private void cbDepartments_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
         {
@@ -1262,6 +1251,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbContractCreateUserName.ReadOnly = true;
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

@@ -219,7 +219,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
             else
             {
-                return _ClientNameEN_1;
+                return _ClientNameEN;
             }
         }
 

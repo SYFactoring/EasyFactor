@@ -22,13 +22,13 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public string ClientNameEN_1
+        public string ClientNameEN
         {
             get
             {
                 if (Client != null)
                 {
-                    return this.Client.ClientNameEN_1;
+                    return this.Client.ClientNameEN;
                 }
                 else
                 {

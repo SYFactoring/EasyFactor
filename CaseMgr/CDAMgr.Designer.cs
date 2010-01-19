@@ -370,6 +370,7 @@
             this.dgvCDAs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvCDAs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCDAs_RowPostPaint);
             this.dgvCDAs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCDAs_CellFormatting);
+            this.dgvCDAs.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCDAs_DataBindingComplete);
             // 
             // colCDACode
             // 
@@ -639,7 +640,7 @@
             this.toolStripSeparator2,
             this.menuItemCDAReport});
             this.cmuCDAMgr.Name = "cmuContractMgr";
-            this.cmuCDAMgr.Size = new System.Drawing.Size(183, 220);
+            this.cmuCDAMgr.Size = new System.Drawing.Size(183, 198);
             // 
             // menuItemCDASelect
             // 

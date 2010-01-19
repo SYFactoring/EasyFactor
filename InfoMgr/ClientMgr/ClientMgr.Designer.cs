@@ -109,7 +109,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientCoreNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientNameCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientNameEN_1Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientNameENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddressCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddressENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CityCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -515,7 +515,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientEDICodeColumn,
             this.ClientCoreNoColumn,
             this.ClientNameCNColumn,
-            this.ClientNameEN_1Column,
+            this.ClientNameENColumn,
             this.AddressCNColumn,
             this.AddressENColumn,
             this.CityCNColumn,
@@ -587,13 +587,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ClientNameCNColumn.ReadOnly = true;
             this.ClientNameCNColumn.Width = 98;
             // 
-            // ClientNameEN_1Column
+            // ClientNameENColumn
             // 
-            this.ClientNameEN_1Column.DataPropertyName = "ClientNameEN_1";
-            this.ClientNameEN_1Column.HeaderText = "客户名称(英1)";
-            this.ClientNameEN_1Column.Name = "ClientNameEN_1Column";
-            this.ClientNameEN_1Column.ReadOnly = true;
-            this.ClientNameEN_1Column.Width = 104;
+            this.ClientNameENColumn.DataPropertyName = "ClientNameEN";
+            this.ClientNameENColumn.HeaderText = "客户名称(英)";
+            this.ClientNameENColumn.Name = "ClientNameENColumn";
+            this.ClientNameENColumn.ReadOnly = true;
+            this.ClientNameENColumn.Width = 104;
             // 
             // AddressCNColumn
             // 
@@ -748,7 +748,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn clientEDICodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientCoreNoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameEN_1Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameENColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn AddressCNColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn AddressENColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CityCNColumn;

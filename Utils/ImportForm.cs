@@ -446,8 +446,7 @@ namespace CMBC.EasyFactor.Utils
                     client.ClientCoreNo = String.Format("{0:G}", valueArray[row, column++]);
                     column++;
                     client.ClientNameCN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ClientNameEN_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ClientNameEN_2 = String.Format("{0:G}", valueArray[row, column++]);
+                    client.ClientNameEN = String.Format("{0:G}", valueArray[row, column++]);
                     client.AddressCN = String.Format("{0:G}", valueArray[row, column++]);
                     client.AddressEN = String.Format("{0:G}", valueArray[row, column++]);
                     client.CityCN = String.Format("{0:G}", valueArray[row, column++]);

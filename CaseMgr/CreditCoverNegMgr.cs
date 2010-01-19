@@ -200,9 +200,9 @@ namespace CMBC.EasyFactor.CaseMgr
                                && c.CaseCode.Contains(this.tbCaseCode.Text)
                                && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == "已签回"))
                                && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == ConstStr.CONTRACT.AVAILABILITY))
-                               && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN_1.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN_2.Contains(this.tbClientName.Text)
-                                || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN_1.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN_2.Contains(this.tbClientName.Text))
-                               && neg.Case.SellerFactorCode.Contains(sellerFactorCode) && neg.Case.BuyerFactorCode.Contains(buyerFactorCode)
+                               && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN.Contains(this.tbClientName.Text) 
+                                || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN.Contains(this.tbClientName.Text) 
+                               && neg.Case.SellerFactorCode.Contains(sellerFactorCode) && neg.Case.BuyerFactorCode.Contains(buyerFactorCode))
                               select neg;
 
             this.bs.DataSource = queryResult;

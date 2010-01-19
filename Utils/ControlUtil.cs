@@ -6,11 +6,10 @@
 
 namespace CMBC.EasyFactor.Utils
 {
-    using System.Windows.Forms;
-    using DevComponents.DotNetBar.Controls;
-    using DevComponents.DotNetBar;
     using System;
     using System.Reflection;
+    using System.Windows.Forms;
+    using DevComponents.DotNetBar.Controls;
     using DevComponents.Editors.DateTimeAdv;
 
     /// <summary>

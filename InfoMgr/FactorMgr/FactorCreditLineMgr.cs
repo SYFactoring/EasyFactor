@@ -13,13 +13,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
     public partial class FactorCreditLineMgr : UserControl
     {
-		#region Fields (1) 
+        #region Fields (1)
 
         private BindingSource bs;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
         public FactorCreditLineMgr()
         {
@@ -30,11 +30,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             ControlUtil.SetDoubleBuffered(this.dgvFactorCreditLines);
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (2) 
+        #region Methods (4)
 
-		// Private Methods (2) 
+        // Private Methods (4) 
 
         /// <summary>
         /// 
@@ -58,17 +58,17 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Query(object sender, EventArgs e)
+        private void dgvFactorCreditLines_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            string factorCode = tbFactorCode.Text;
-            string factorName = tbFactorName.Text;
-
-            var queryResult = App.Current.DbContext.FactorCreditLines.Where(f => f.Factor.FactorCode.Contains(factorCode) && (f.Factor.CompanyNameCN.Contains(factorName) || f.Factor.CompanyNameEN.Contains(factorName)));
-            this.bs.DataSource = queryResult;
-
+            for (int i = 0; i < this.bs.List.Count; i++)
+            {
+                FactorCreditLine creditLine = (FactorCreditLine)this.bs.List[i];
+                if (creditLine.PeriodEnd < DateTime.Now.Date)
+                {
+                    this.dgvFactorCreditLines["colPeriodEnd", i].Style.BackColor = Color.Red;
+                }
+            }
         }
-
-		#endregion Methods 
 
         private void dgvFactorCreditLines_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
@@ -83,5 +83,22 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 this.dgvFactorCreditLines.RowHeadersDefaultCellStyle.ForeColor,
                 TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Query(object sender, EventArgs e)
+        {
+            string factorCode = tbFactorCode.Text;
+            string factorName = tbFactorName.Text;
+
+            var queryResult = App.Current.DbContext.FactorCreditLines.Where(f => f.Factor.FactorCode.Contains(factorCode) && (f.Factor.CompanyNameCN.Contains(factorName) || f.Factor.CompanyNameEN.Contains(factorName)));
+            this.bs.DataSource = queryResult;
+
+        }
+
+        #endregion Methods
     }
 }

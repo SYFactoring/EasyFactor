@@ -10,7 +10,7 @@
         private DevComponents.DotNetBar.ButtonX btnCDAUpdate;
         private DevComponents.DotNetBar.Controls.TextBoxX buyerClientEDICodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX buyerClientNameCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX buyerClientNameEN_1TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX buyerClientNameENTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX caseCodeTextBox;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCreditCoverRevolving;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbNoticeMethodEmail;
@@ -25,7 +25,6 @@
         private DevComponents.DotNetBar.Controls.TextBoxX companyNameENTextBox;
         private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
         private DevComponents.DotNetBar.Validator.CompareValidator compareValidator2;
-        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator3;
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -68,7 +67,7 @@
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerClientEDICodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameEN_1TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameENTextBox;
         private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
         private DevComponents.DotNetBar.Controls.TextBoxX tbHighestFinance;
         private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
@@ -153,10 +152,10 @@
             this.companyNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.contractCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnCaseSelect = new DevComponents.DotNetBar.ButtonX();
-            this.buyerClientNameEN_1TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.buyerClientNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.buyerClientNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.buyerClientEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.sellerClientNameEN_1TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.sellerClientNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.companyNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.factorCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.sellerClientNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -211,15 +210,15 @@
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.compareValidator2 = new DevComponents.DotNetBar.Validator.CompareValidator();
+            this.customValidator4 = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.customValidator5 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
-            this.compareValidator3 = new DevComponents.DotNetBar.Validator.CompareValidator();
+            this.customValidator3 = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.customValidator3 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.customValidator4 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.customValidator5 = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.customValidator6 = new DevComponents.DotNetBar.Validator.CustomValidator();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -831,11 +830,11 @@
             this.groupPanelCase.Controls.Add(this.btnCaseSelect);
             this.groupPanelCase.Controls.Add(invoiceCurrencyLabel);
             this.groupPanelCase.Controls.Add(transactionTypeLabel);
-            this.groupPanelCase.Controls.Add(this.buyerClientNameEN_1TextBox);
+            this.groupPanelCase.Controls.Add(this.buyerClientNameENTextBox);
             this.groupPanelCase.Controls.Add(this.buyerClientNameCNTextBox);
             this.groupPanelCase.Controls.Add(buyerClientEDICodeLabel);
             this.groupPanelCase.Controls.Add(this.buyerClientEDICodeTextBox);
-            this.groupPanelCase.Controls.Add(this.sellerClientNameEN_1TextBox);
+            this.groupPanelCase.Controls.Add(this.sellerClientNameENTextBox);
             this.groupPanelCase.Controls.Add(this.companyNameCNTextBox);
             this.groupPanelCase.Controls.Add(factorCodeLabel);
             this.groupPanelCase.Controls.Add(this.factorCodeTextBox);
@@ -956,19 +955,19 @@
             this.btnCaseSelect.Text = "...";
             this.btnCaseSelect.Click += new System.EventHandler(this.SelectCase);
             // 
-            // buyerClientNameEN_1TextBox
+            // buyerClientNameENTextBox
             // 
             // 
             // 
             // 
-            this.buyerClientNameEN_1TextBox.Border.Class = "TextBoxBorder";
-            this.buyerClientNameEN_1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.BuyerClient.ClientNameEN_1", true));
-            this.buyerClientNameEN_1TextBox.Location = new System.Drawing.Point(125, 86);
-            this.buyerClientNameEN_1TextBox.Name = "buyerClientNameEN_1TextBox";
-            this.buyerClientNameEN_1TextBox.Size = new System.Drawing.Size(216, 20);
-            this.buyerClientNameEN_1TextBox.TabIndex = 19;
-            this.buyerClientNameEN_1TextBox.WatermarkText = "英文名";
-            this.buyerClientNameEN_1TextBox.DoubleClick += new System.EventHandler(this.DetailBuyer);
+            this.buyerClientNameENTextBox.Border.Class = "TextBoxBorder";
+            this.buyerClientNameENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.BuyerClient.ClientNameEN", true));
+            this.buyerClientNameENTextBox.Location = new System.Drawing.Point(125, 86);
+            this.buyerClientNameENTextBox.Name = "buyerClientNameENTextBox";
+            this.buyerClientNameENTextBox.Size = new System.Drawing.Size(216, 20);
+            this.buyerClientNameENTextBox.TabIndex = 19;
+            this.buyerClientNameENTextBox.WatermarkText = "英文名";
+            this.buyerClientNameENTextBox.DoubleClick += new System.EventHandler(this.DetailBuyer);
             // 
             // buyerClientNameCNTextBox
             // 
@@ -997,19 +996,19 @@
             this.buyerClientEDICodeTextBox.TabIndex = 17;
             this.buyerClientEDICodeTextBox.DoubleClick += new System.EventHandler(this.DetailBuyer);
             // 
-            // sellerClientNameEN_1TextBox
+            // sellerClientNameENTextBox
             // 
             // 
             // 
             // 
-            this.sellerClientNameEN_1TextBox.Border.Class = "TextBoxBorder";
-            this.sellerClientNameEN_1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.SellerClient.ClientNameEN_1", true));
-            this.sellerClientNameEN_1TextBox.Location = new System.Drawing.Point(125, 44);
-            this.sellerClientNameEN_1TextBox.Name = "sellerClientNameEN_1TextBox";
-            this.sellerClientNameEN_1TextBox.Size = new System.Drawing.Size(216, 20);
-            this.sellerClientNameEN_1TextBox.TabIndex = 11;
-            this.sellerClientNameEN_1TextBox.WatermarkText = "英文名";
-            this.sellerClientNameEN_1TextBox.DoubleClick += new System.EventHandler(this.DetailSeller);
+            this.sellerClientNameENTextBox.Border.Class = "TextBoxBorder";
+            this.sellerClientNameENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.SellerClient.ClientNameEN", true));
+            this.sellerClientNameENTextBox.Location = new System.Drawing.Point(125, 44);
+            this.sellerClientNameENTextBox.Name = "sellerClientNameENTextBox";
+            this.sellerClientNameENTextBox.Size = new System.Drawing.Size(216, 20);
+            this.sellerClientNameENTextBox.TabIndex = 11;
+            this.sellerClientNameENTextBox.WatermarkText = "英文名";
+            this.sellerClientNameENTextBox.DoubleClick += new System.EventHandler(this.DetailSeller);
             // 
             // companyNameCNTextBox
             // 
@@ -1428,6 +1427,7 @@
             this.financeLinePeriodEndDateTimePicker.Size = new System.Drawing.Size(108, 20);
             this.financeLinePeriodEndDateTimePicker.TabIndex = 25;
             this.superValidator.SetValidator1(this.financeLinePeriodEndDateTimePicker, this.compareValidator2);
+            this.superValidator.SetValidator2(this.financeLinePeriodEndDateTimePicker, this.customValidator6);
             // 
             // financeLinePeriodBeginDateTimePicker
             // 
@@ -1768,7 +1768,6 @@
             this.cDASignDateDateTimePicker.Name = "cDASignDateDateTimePicker";
             this.cDASignDateDateTimePicker.Size = new System.Drawing.Size(109, 20);
             this.cDASignDateDateTimePicker.TabIndex = 1;
-            this.superValidator.SetValidator1(this.cDASignDateDateTimePicker, this.compareValidator3);
             // 
             // createUserNameTextBox
             // 
@@ -1898,6 +1897,18 @@
             this.compareValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.compareValidator2.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             // 
+            // customValidator4
+            // 
+            this.customValidator4.ErrorMessage = "预付款额度不能大于客户的融资额度上限";
+            this.customValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator4.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator4_ValidateValue);
+            // 
+            // customValidator5
+            // 
+            this.customValidator5.ErrorMessage = "预付款额度不能大于买方风险担保额度";
+            this.customValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator5.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator5_ValidateValue);
+            // 
             // compareValidator1
             // 
             this.compareValidator1.ControlToCompare = this.creditCoverPeriodBeginDateTimePicker;
@@ -1905,14 +1916,21 @@
             this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             // 
-            // compareValidator3
+            // customValidator3
             // 
-            this.compareValidator3.ErrorMessage = "到期日应该大于生效日";
-            this.compareValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.compareValidator3.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
+            this.customValidator3.ErrorMessage = "额度通知书的有效期限不能超过买方客户额度的有效期限";
+            this.customValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator3.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator3_ValidateValue);
+            // 
+            // customValidator2
+            // 
+            this.customValidator2.ErrorMessage = "额度通知书中买方信用风险额度不能大于案子中买方信用风险额度";
+            this.customValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator2.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator2_ValidateValue);
             // 
             // regularExpressionValidator1
             // 
+            this.regularExpressionValidator1.EmptyValueIsValid = true;
             this.regularExpressionValidator1.ErrorMessage = "需要符合Email地址格式";
             this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator1.ValidationExpression = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9" +
@@ -1927,28 +1945,11 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // customValidator2
+            // customValidator6
             // 
-            this.customValidator2.ErrorMessage = "额度通知书中买方信用风险额度不能大于案子中买方信用风险额度";
-            this.customValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator2.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator2_ValidateValue);
-            // 
-            // customValidator3
-            // 
-            this.customValidator3.ErrorMessage = "额度通知书的有效期限不能超过买方客户额度的有效期限";
-            this.customValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator3.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator3_ValidateValue);
-            // 
-            // customValidator4
-            // 
-            this.customValidator4.ErrorMessage = "Your error message here.";
-            this.customValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // customValidator5
-            // 
-            this.customValidator5.ErrorMessage = "预付款额度不能大于买方风险担保额度";
-            this.customValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator5.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator5_ValidateValue_1);
+            this.customValidator6.ErrorMessage = "Your error message here.";
+            this.customValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator6.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator6_ValidateValue);
             // 
             // CDADetail
             // 
@@ -1998,5 +1999,6 @@
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator3;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator4;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator5;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator6;
     }
 }

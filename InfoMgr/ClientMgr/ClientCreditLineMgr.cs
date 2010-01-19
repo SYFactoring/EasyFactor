@@ -31,13 +31,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Enums
 
-        #region Constructors (1)
+        #region Constructors (2)
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="groupClient"></param>
-        public ClientCreditLineMgr(Client groupClient):this(OpClientCreditMgrType.QUERY_GROUP)
+        public ClientCreditLineMgr(Client groupClient)
+            : this(OpClientCreditMgrType.QUERY_GROUP)
         {
             this.panelQuery.Visible = false;
             this.bs.DataSource = groupClient.ClientCreditLines;
@@ -60,7 +61,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 lblClientName.Text = "集团名称";
                 this.colClientNameCN.HeaderText = "集团客户名称（中）";
-                this.colClientNameEN_1.HeaderText = "集团客户名称（英1）";
+                this.colClientNameEN.HeaderText = "集团客户名称（英）";
                 this.cbClientGroupType.Text = "集团";
             }
             else
@@ -93,9 +94,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Properties
 
-        #region Methods (5)
+        #region Methods (6)
 
-        // Private Methods (5) 
+        // Private Methods (6) 
 
         /// <summary>
         /// 
@@ -135,6 +136,23 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void dgvClientCreditLines_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            for (int i = 0; i < this.bs.List.Count; i++)
+            {
+                ClientCreditLine creditLine = (ClientCreditLine)this.bs.List[i];
+                if (creditLine.PeriodEnd < DateTime.Now.Date)
+                {
+                    this.dgvClientCreditLines["colPeriodEnd", i].Style.BackColor = Color.Red;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvClientCreditLines_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
@@ -167,7 +185,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             var queryResult = App.Current.DbContext.ClientCreditLines.Where(c =>
                 c.Client.ClientEDICode.Contains(clientEDICode)
-             && (c.Client.ClientNameCN.Contains(clientName) || c.Client.ClientNameEN_1.Contains(clientName) || c.Client.ClientNameEN_2.Contains(clientName))
+             && (c.Client.ClientNameCN.Contains(clientName) || c.Client.ClientNameEN.Contains(clientName))
              && (isGroup == true ? c.Client.GroupClients.Count > 0 : true)
                  );
             this.bs.DataSource = queryResult;

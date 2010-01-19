@@ -581,9 +581,9 @@ namespace CMBC.EasyFactor.Report
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
                               let seller = invoice.InvoiceAssignBatch.CDA.Case.SellerClient
-                              where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN_1.Contains(sellerName) || seller.ClientNameEN_2.Contains(sellerName)
+                              where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN.Contains(sellerName) 
                               let buyer = invoice.InvoiceAssignBatch.CDA.Case.BuyerClient
-                              where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN_1.Contains(buyerName) || buyer.ClientNameEN_2.Contains(buyerName)
+                              where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN.Contains(buyerName) 
                               let sellerFactor = invoice.InvoiceAssignBatch.CDA.Case.SellerFactor
                               where sellerFactor.CompanyNameCN.Contains(factorName) || sellerFactor.CompanyNameEN.Contains(factorName)
                               let buyerFactor = invoice.InvoiceAssignBatch.CDA.Case.BuyerFactor

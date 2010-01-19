@@ -100,11 +100,10 @@
     <Type Name="Client">
       <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ClientCoreNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ClientNameCN" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="ClientNameEN_1" Type="System.String" DbType="NVarChar(35)" CanBeNull="true" />
-      <Column Name="ClientNameEN_2" Type="System.String" DbType="NVarChar(35)" CanBeNull="true" />
+      <Column Name="ClientNameCN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="ClientNameEN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="AddressCN" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="AddressEN" Type="System.String" DbType="NVarChar(35)" CanBeNull="true" />
+      <Column Name="AddressEN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="CityCN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="CityEN" Type="System.String" DbType="NVarChar(35)" CanBeNull="true" />
       <Column Name="ProvinceCN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />

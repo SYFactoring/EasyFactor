@@ -19,16 +19,16 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CDADetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (1)
+		#region Fields (1) 
 
         /// <summary>
         /// 
         /// </summary>
         private OpCDAType opCDAType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         /// <summary>
         /// Operation Type 
@@ -51,11 +51,11 @@ namespace CMBC.EasyFactor.CaseMgr
             DETAIL_CDA
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (3)
+		#region Constructors (3) 
 
-        /// <summary>
+/// <summary>
         /// 通过Case新建CDA
         /// </summary>
         /// <param name="selectedCase"></param>
@@ -146,11 +146,11 @@ namespace CMBC.EasyFactor.CaseMgr
 
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (15)
+		#region Methods (22) 
 
-        // Private Methods (15) 
+		// Private Methods (22) 
 
         void cda_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -163,9 +163,9 @@ namespace CMBC.EasyFactor.CaseMgr
                     this.creditCoverCurrComboBox.Enabled = false;
                     this.creditCoverPeriodBeginDateTimePicker.Enabled = false;
                     this.creditCoverPeriodEndDateTimePicker.Enabled = false;
-                    this.creditCoverTextBox.Enabled = false;
-                    this.pUGPeriodTextBox.Enabled = false;
-                    this.pUGProportionTextBox.Enabled = false;
+                    this.creditCoverTextBox.ReadOnly = true;
+                    this.pUGPeriodTextBox.ReadOnly = true;
+                    this.pUGProportionTextBox.ReadOnly = true;
                     this.cbIsCreditCoverRevolving.Enabled = false;
                     cda.CreditCoverCurr = string.Empty;
                     cda.CreditCover = null;
@@ -180,19 +180,32 @@ namespace CMBC.EasyFactor.CaseMgr
                     this.creditCoverCurrComboBox.Enabled = true;
                     this.creditCoverPeriodBeginDateTimePicker.Enabled = true;
                     this.creditCoverPeriodEndDateTimePicker.Enabled = true;
-                    this.creditCoverTextBox.Enabled = true;
-                    this.pUGPeriodTextBox.Enabled = true;
-                    this.pUGProportionTextBox.Enabled = true;
+                    this.creditCoverTextBox.ReadOnly = false;
+                    this.pUGPeriodTextBox.ReadOnly = false;
+                    this.pUGProportionTextBox.ReadOnly = false;
                     this.cbIsCreditCoverRevolving.Enabled = true;
                 }
             }
-            else if ("CreditCoverCurr".Equals(e.PropertyName))
+            //else if ("CreditCoverCurr".Equals(e.PropertyName))
+            //{
+            //    FillCreditCover(cda.CreditCoverCurr);
+            //}
+            //else if ("FinanceLineCurr".Equals(e.PropertyName))
+            //{
+            //    FillFinanceLine(cda.FinanceLineCurr);
+            //}
+        }
+
+        private void CDADetail_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            CDA cda = this.CDABindingSource.DataSource as CDA;
+            if (opCDAType == OpCDAType.UPDATE_CDA)
             {
-                FillCreditCover(cda.CreditCoverCurr);
+                cda.Restore();
             }
-            else if ("FinanceLineCurr".Equals(e.PropertyName))
+            if (cda.CDACode == null)
             {
-                FillFinanceLine(cda.FinanceLineCurr);
+                cda.Case = null;
             }
         }
 
@@ -209,6 +222,129 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     e.IsValid = true;
                 }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator2_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            CDA cda = this.CDABindingSource.DataSource as CDA;
+            if (cda.Case == null)
+            {
+                return;
+            }
+            ClientCreditLine creditLine = cda.Case.BuyerClient.AssignCreditLine;
+            if (creditLine != null)
+            {
+                double buyerCreditLine = creditLine.CreditLine;
+                if (cda.CreditCoverCurr != creditLine.CreditLineCurrency)
+                {
+                    double exchange = Exchange.GetExchangeRate(creditLine.CreditLineCurrency, cda.CreditCoverCurr);
+                    buyerCreditLine *= exchange;
+                }
+                if (cda.CreditCover > buyerCreditLine)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator3_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            CDA cda = this.CDABindingSource.DataSource as CDA;
+            if (cda.Case == null)
+            {
+                return;
+            }
+            ClientCreditLine creditLine = cda.Case.BuyerClient.AssignCreditLine;
+            if (creditLine != null && cda.CreditCoverPeriodEnd > creditLine.PeriodEnd)
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator4_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            CDA cda = this.CDABindingSource.DataSource as CDA;
+            if (cda.Case == null)
+            {
+                return;
+            }
+            ClientCreditLine creditLine;
+            if (cda.Case.TransactionType == "国内买方保理" || cda.Case.TransactionType == "进口保理")
+            {
+                creditLine = cda.Case.BuyerClient.FinanceCreditLine;
+            }
+            else
+            {
+                creditLine = cda.Case.SellerClient.FinanceCreditLine;
+            }
+            if (creditLine != null)
+            {
+                double theCreditLine = creditLine.CreditLine;
+                if (cda.FinanceLineCurr != creditLine.CreditLineCurrency)
+                {
+                    double exchange = Exchange.GetExchangeRate(creditLine.CreditLineCurrency, cda.FinanceLineCurr);
+                    theCreditLine *= exchange;
+                }
+                if (cda.FinanceLine > theCreditLine)
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator5_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            CDA cda = this.CDABindingSource.DataSource as CDA;
+            if (cda.Case == null)
+            {
+                return;
+            }
+            if (cda.IsRecoarse.GetValueOrDefault() && cda.FinanceLine > cda.CreditCover)
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customValidator6_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            CDA cda = this.CDABindingSource.DataSource as CDA;
+            if (cda.Case == null)
+            {
+                return;
+            }
+            ClientCreditLine sellerCreditLine = cda.Case.SellerClient.FinanceCreditLine;
+            if (sellerCreditLine != null && cda.FinanceLinePeriodEnd > sellerCreditLine.PeriodEnd)
+            {
+                e.IsValid = false;
             }
             else
             {
@@ -357,7 +493,6 @@ namespace CMBC.EasyFactor.CaseMgr
                     break;
                 default: break;
             }
-            cda.HandFeeCurr = cda.Case.InvoiceCurrency;
             FillCreditCover(cda.Case.InvoiceCurrency);
             FillFinanceLine(cda.Case.InvoiceCurrency);
         }
@@ -376,15 +511,22 @@ namespace CMBC.EasyFactor.CaseMgr
                 cda.CreditCoverPeriodEnd = buyerCreditLine.PeriodEnd;
                 cda.CreditCoverCurr = buyerCreditLine.CreditLineCurrency;
                 cda.CreditCover = buyerCreditLine.CreditLine;
+                if (TypeUtil.EqualsZero(buyerCreditLine.CreditLine))
+                {
+                    cda.PUGProportion = 0;
+                }
             }
             else
             {
+                this.creditCoverCurrComboBox.Enabled = false;
                 this.creditCoverPeriodBeginDateTimePicker.Enabled = false;
                 this.creditCoverPeriodEndDateTimePicker.Enabled = false;
-                this.creditCoverTextBox.Enabled = false;
+                this.creditCoverTextBox.ReadOnly = true;
                 cda.CreditCoverPeriodBegin = null;
                 cda.CreditCoverPeriodEnd = null;
                 cda.CreditCover = null;
+                cda.CreditCoverCurr = null;
+                cda.PUGProportion = 0;
             }
         }
 
@@ -407,9 +549,10 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             else
             {
+                this.financeLineCurrComboBox.Enabled = false;
                 this.financeLinePeriodBeginDateTimePicker.Enabled = false;
                 this.financeLinePeriodEndDateTimePicker.Enabled = false;
-                this.financeLineTextBox.Enabled = false;
+                this.financeLineTextBox.ReadOnly = true;
                 this.tbHighestFinance.Text = String.Empty;
                 cda.FinanceLinePeriodBegin = null;
                 cda.FinanceLinePeriodEnd = null;
@@ -438,6 +581,30 @@ namespace CMBC.EasyFactor.CaseMgr
             cda.AssignType = "全部";
             cda.Case = curCase;
             return cda;
+        }
+
+        private void ResetCDA(object sender, EventArgs e)
+        {
+            foreach (Control comp in this.groupPanelCreditCover.Controls)
+            {
+                ControlUtil.SetComponetDefault(comp);
+            }
+            foreach (Control comp in this.groupPanelOther.Controls)
+            {
+                ControlUtil.SetComponetDefault(comp);
+            }
+            CDA cda = this.CDABindingSource.DataSource as CDA;
+            cda.CDASignDate = DateTime.Now.Date;
+            cda.CommissionType = "按转让金额";
+            cda.PUGProportion = 1;
+            cda.PUGPeriod = 90;
+            cda.ReassignGracePeriod = 60;
+            cda.FinanceProportion = 0.8;
+            cda.IsNotice = "明保理";
+            cda.IsRecoarse = false;
+            cda.CDAStatus = "未审核";
+            cda.IsCreditCoverRevolving = true;
+            cda.AssignType = "全部";
         }
 
         /// <summary>
@@ -644,138 +811,31 @@ namespace CMBC.EasyFactor.CaseMgr
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }
+
             this.tbCDACode.ReadOnly = true;
-        }
-
-        #endregion Methods
-
-        private void ResetCDA(object sender, EventArgs e)
-        {
-            foreach (Control comp in this.groupPanelCreditCover.Controls)
+            this.tbHighestFinance.ReadOnly = true;
+            CDA cda = (CDA)this.CDABindingSource.DataSource;
+            if (cda.Case != null)
             {
-                ControlUtil.SetComponetDefault(comp);
-            }
-            foreach (Control comp in this.groupPanelOther.Controls)
-            {
-                ControlUtil.SetComponetDefault(comp);
-            }
-            CDA cda = this.CDABindingSource.DataSource as CDA;
-            cda.CDASignDate = DateTime.Now.Date;
-            cda.CommissionType = "按转让金额";
-            cda.PUGProportion = 1;
-            cda.PUGPeriod = 90;
-            cda.ReassignGracePeriod = 60;
-            cda.FinanceProportion = 0.8;
-            cda.IsNotice = "明保理";
-            cda.IsRecoarse = false;
-            cda.CDAStatus = "未审核";
-            cda.IsCreditCoverRevolving = true;
-            cda.AssignType = "全部";
-        }
-
-        private void CDADetail_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            CDA cda = this.CDABindingSource.DataSource as CDA;
-            if (opCDAType == OpCDAType.UPDATE_CDA)
-            {
-                cda.Restore();
-            }
-            if (cda.CDACode == null)
-            {
-                cda.Case = null;
-            }
-        }
-
-        private void customValidator2_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            CDA cda = this.CDABindingSource.DataSource as CDA;
-            if (cda.Case == null)
-            {
-                return;
-            }
-            ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.AssignCreditLine;
-            if (cda.CreditCover > buyerCreditLine.CreditLine)
-            {
-                e.IsValid = false;
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
-
-        private void customValidator3_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            CDA cda = this.CDABindingSource.DataSource as CDA;
-            if (cda.Case == null)
-            {
-                return;
-            }
-            ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.AssignCreditLine;
-            if (cda.CreditCoverPeriodEnd > buyerCreditLine.PeriodEnd)
-            {
-                e.IsValid = false;
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
-
-        private void customValidator4_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            CDA cda = this.CDABindingSource.DataSource as CDA;
-            if (cda.Case == null)
-            {
-                return;
-            }
-            ClientCreditLine sellerCreditLine = cda.Case.SellerClient.FinanceCreditLine;
-            if (cda.FinanceLine > sellerCreditLine.CreditLine)
-            {
-                e.IsValid = false;
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
-
-        private void customValidator5_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            CDA cda = this.CDABindingSource.DataSource as CDA;
-            if (cda.Case == null)
-            {
-                return;
-            }
-            ClientCreditLine sellerCreditLine = cda.Case.SellerClient.FinanceCreditLine;
-            if (cda.FinanceLinePeriodEnd > sellerCreditLine.PeriodEnd)
-            {
-                e.IsValid = false;
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
-
-        private void customValidator5_ValidateValue_1(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            CDA cda = this.CDABindingSource.DataSource as CDA;
-            if (cda.Case == null)
-            {
-                return;
-            }
-            if (cda.IsRecoarse.GetValueOrDefault())
-            {
-                if (cda.FinanceLine > cda.CreditCover)
+                ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.AssignCreditLine;
+                if (buyerCreditLine == null)
                 {
-                    e.IsValid = false;
+                    this.creditCoverCurrComboBox.Enabled = false;
+                    this.creditCoverPeriodBeginDateTimePicker.Enabled = false;
+                    this.creditCoverPeriodEndDateTimePicker.Enabled = false;
+                    this.creditCoverTextBox.Enabled = false;
                 }
-                else
+                ClientCreditLine sellerFinanceLine = cda.Case.SellerClient.FinanceCreditLine;
+                if (sellerFinanceLine == null)
                 {
-                    e.IsValid = true;
+                    this.financeLineCurrComboBox.Enabled = false;
+                    this.financeLinePeriodBeginDateTimePicker.Enabled = false;
+                    this.financeLinePeriodEndDateTimePicker.Enabled = false;
+                    this.financeLineTextBox.Enabled = false;
                 }
             }
         }
+
+		#endregion Methods 
     }
 }

@@ -2588,9 +2588,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _ClientNameCN;
 		
-		private string _ClientNameEN_1;
-		
-		private string _ClientNameEN_2;
+		private string _ClientNameEN;
 		
 		private string _AddressCN;
 		
@@ -2674,10 +2672,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnClientCoreNoChanged();
     partial void OnClientNameCNChanging(string value);
     partial void OnClientNameCNChanged();
-    partial void OnClientNameEN_1Changing(string value);
-    partial void OnClientNameEN_1Changed();
-    partial void OnClientNameEN_2Changing(string value);
-    partial void OnClientNameEN_2Changed();
+    partial void OnClientNameENChanging(string value);
+    partial void OnClientNameENChanged();
     partial void OnAddressCNChanging(string value);
     partial void OnAddressCNChanged();
     partial void OnAddressENChanging(string value);
@@ -2789,7 +2785,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientNameCN", DbType="NVarChar(100)")]
+		[Column(Storage="_ClientNameCN", DbType="NVarChar(500)")]
 		public string ClientNameCN
 		{
 			get
@@ -2809,42 +2805,22 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientNameEN_1", DbType="NVarChar(35)")]
-		public string ClientNameEN_1
+		[Column(Storage="_ClientNameEN", DbType="NVarChar(500)")]
+		public string ClientNameEN
 		{
 			get
 			{
-				return this._ClientNameEN_1;
+				return this._ClientNameEN;
 			}
 			set
 			{
-				if ((this._ClientNameEN_1 != value))
+				if ((this._ClientNameEN != value))
 				{
-					this.OnClientNameEN_1Changing(value);
+					this.OnClientNameENChanging(value);
 					this.SendPropertyChanging();
-					this._ClientNameEN_1 = value;
-					this.SendPropertyChanged("ClientNameEN_1");
-					this.OnClientNameEN_1Changed();
-				}
-			}
-		}
-		
-		[Column(Storage="_ClientNameEN_2", DbType="NVarChar(35)")]
-		public string ClientNameEN_2
-		{
-			get
-			{
-				return this._ClientNameEN_2;
-			}
-			set
-			{
-				if ((this._ClientNameEN_2 != value))
-				{
-					this.OnClientNameEN_2Changing(value);
-					this.SendPropertyChanging();
-					this._ClientNameEN_2 = value;
-					this.SendPropertyChanged("ClientNameEN_2");
-					this.OnClientNameEN_2Changed();
+					this._ClientNameEN = value;
+					this.SendPropertyChanged("ClientNameEN");
+					this.OnClientNameENChanged();
 				}
 			}
 		}
@@ -2869,7 +2845,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AddressEN", DbType="NVarChar(35)")]
+		[Column(Storage="_AddressEN", DbType="NVarChar(500)")]
 		public string AddressEN
 		{
 			get
