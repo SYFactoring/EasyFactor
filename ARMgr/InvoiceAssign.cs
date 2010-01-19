@@ -497,7 +497,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 totalAssign += invoice.AssignAmount;
             }
-            if (totalAssign > this._CDA.CreditCoverOutstanding)
+            if (this._CDA.CreditCoverOutstanding.HasValue && totalAssign > this._CDA.CreditCoverOutstanding.Value)
             {
                 DialogResult dr = MessageBox.Show("买卖方关联额度中的买方信用风险担保额度已占满，超额度转让部分不再进行担保，是否确认转让？", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
@@ -505,7 +505,7 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
             }
-            if (totalAssign > this._CDA.Case.BuyerClient.AssignCreditLineOutstanding)
+            if (this._CDA.Case.BuyerClient.AssignCreditLineOutstanding.HasValue && totalAssign > this._CDA.Case.BuyerClient.AssignCreditLineOutstanding.Value)
             {
                 DialogResult dr = MessageBox.Show("客户额度已占满，超额度转让部分不再进行担保，是否确认转让？", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
@@ -515,7 +515,14 @@ namespace CMBC.EasyFactor.ARMgr
             }
             if (this._CDA.Case.BuyerClient.GroupAssignCreditLine != null)
             {
-                if (totalAssign > this._CDA.Case.BuyerClient.GroupAssignCreditLine.AssignCreditLineOutstanding)
+                double assignCreditLineOutstanding = this._CDA.Case.BuyerClient.GroupAssignCreditLine.AssignCreditLineOutstanding;
+                if (this._CDA.Case.BuyerClient.GroupAssignCreditLine.CreditLineCurrency != this._CDA.Case.BuyerClient.AssignCreditLine.CreditLineCurrency)
+                {
+                    double exchange = Exchange.GetExchangeRate(this._CDA.Case.BuyerClient.GroupAssignCreditLine.CreditLineCurrency, this._CDA.Case.BuyerClient.AssignCreditLine.CreditLineCurrency);
+                    assignCreditLineOutstanding *= exchange;
+                }
+
+                if (totalAssign > assignCreditLineOutstanding)
                 {
                     DialogResult dr = MessageBox.Show("集团额度已占满，超额度转让部分不再进行担保，是否确认转让？", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.No)

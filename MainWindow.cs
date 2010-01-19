@@ -67,9 +67,9 @@ namespace CMBC.EasyFactor
 
         #endregion Properties
 
-        #region Methods (53)
+        #region Methods (57)
 
-        // Private Methods (53) 
+        // Private Methods (57) 
 
         private void About(object sender, EventArgs e)
         {
@@ -169,9 +169,31 @@ namespace CMBC.EasyFactor
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckRefundBatch(object sender, EventArgs e)
+        {
+            RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.CHECK);
+            this.SetDetailPanel(batchMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void ClearDetailPanel()
         {
             this.ribbonDetailPanel.Controls.Clear();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CreditNotePayment(object sender, EventArgs e)
+        {
+            ARCaseBasic creditNotePayment = new ARCaseBasic(ARCaseBasic.OpARType.CreditNotePayment);
+            this.SetDetailPanel(creditNotePayment);
         }
 
         /// <summary>
@@ -188,6 +210,17 @@ namespace CMBC.EasyFactor
         private void Exit(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FactorQuery(object sender, EventArgs e)
+        {
+            FactorMgr fatcorQuery = new FactorMgr(false);
+            this.SetDetailPanel(fatcorQuery);
         }
 
         /// <summary>
@@ -403,10 +436,10 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void InvoiceSellerRefund(object sender, EventArgs e)
+        private void InvoiceSellerReassign(object sender, EventArgs e)
         {
-            ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceSellerRefund);
-            this.SetDetailPanel(invoiceRefund);
+            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceSellerReassign);
+            this.SetDetailPanel(invoicePayment);
         }
 
         /// <summary>
@@ -414,10 +447,10 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void InvoiceSellerReassign(object sender, EventArgs e)
+        private void InvoiceSellerRefund(object sender, EventArgs e)
         {
-            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceSellerReassign);
-            this.SetDetailPanel(invoicePayment);
+            ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceSellerRefund);
+            this.SetDetailPanel(invoiceRefund);
         }
 
         /// <summary>
@@ -551,6 +584,17 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void QueryClientCreditLine(object sender, EventArgs e)
+        {
+            ClientCreditLineMgr query = new ClientCreditLineMgr(ClientCreditLineMgr.OpClientCreditMgrType.QUERY_CLINET);
+            this.SetDetailPanel(query);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QueryClientDominate(object sender, EventArgs e)
         {
             ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.DOMINATE_CLIENT);
@@ -565,6 +609,17 @@ namespace CMBC.EasyFactor
         private void QueryClientExport(object sender, EventArgs e)
         {
             ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.EXPORT_CLIENT);
+            this.SetDetailPanel(query);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryClientGroupCreditLine(object sender, EventArgs e)
+        {
+            ClientCreditLineMgr query = new ClientCreditLineMgr(ClientCreditLineMgr.OpClientCreditMgrType.QUERY_GROUP);
             this.SetDetailPanel(query);
         }
 
@@ -595,17 +650,6 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void QueryClientCreditLine(object sender, EventArgs e)
-        {
-            ClientCreditLineMgr query = new ClientCreditLineMgr(ClientCreditLineMgr.OpClientCreditMgrType.QUERY_CLINET);
-            this.SetDetailPanel(query);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void QueryContract(object sender, EventArgs e)
         {
             ContractMgr contractMgr = new ContractMgr(true);
@@ -628,10 +672,10 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void QueryFactorCreditLine(object sender, EventArgs e)
+        private void QueryExchange(object sender, EventArgs e)
         {
-            FactorCreditLineMgr query = new FactorCreditLineMgr();
-            this.SetDetailPanel(query);
+            ExchangeMgr mgr = new ExchangeMgr();
+            this.SetDetailPanel(mgr);
         }
 
         /// <summary>
@@ -639,9 +683,9 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void QueryClientGroupCreditLine(object sender, EventArgs e)
+        private void QueryFactorCreditLine(object sender, EventArgs e)
         {
-            ClientCreditLineMgr query = new ClientCreditLineMgr(ClientCreditLineMgr.OpClientCreditMgrType.QUERY_GROUP);
+            FactorCreditLineMgr query = new FactorCreditLineMgr();
             this.SetDetailPanel(query);
         }
 
@@ -654,6 +698,17 @@ namespace CMBC.EasyFactor
         {
             InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.INVOICE_QUERY);
             this.SetDetailPanel(invoiceMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryOverDue(object sender, EventArgs e)
+        {
+            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.OVER_DUE);
+            this.SetDetailPanel(mgr);
         }
 
         /// <summary>
@@ -685,50 +740,5 @@ namespace CMBC.EasyFactor
         }
 
         #endregion Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CreditNotePayment(object sender, EventArgs e)
-        {
-            ARCaseBasic creditNotePayment = new ARCaseBasic(ARCaseBasic.OpARType.CreditNotePayment);
-            this.SetDetailPanel(creditNotePayment);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FactorQuery(object sender, EventArgs e)
-        {
-            FactorMgr fatcorQuery = new FactorMgr(false);
-            this.SetDetailPanel(fatcorQuery);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CheckRefundBatch(object sender, EventArgs e)
-        {
-            RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.CHECK);
-            this.SetDetailPanel(batchMgr);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryExchange(object sender, EventArgs e)
-        {
-            ExchangeMgr mgr = new ExchangeMgr();
-            this.SetDetailPanel(mgr);
-        }
-
     }
 }

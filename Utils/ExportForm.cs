@@ -33,12 +33,18 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            EXPORT_INVOICES,
+            EXPORT_INVOICES_FULL,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            EXPORT_INVOICES_OVERDUE,
 
             /// <summary>
             /// 
             /// </summary>
             EXPORT_CREDIT_NOTES,
+
             /// <summary>
             /// 
             /// </summary>
@@ -92,8 +98,11 @@ namespace CMBC.EasyFactor.Utils
                 case ExportType.EXPORT_INVOICES_BY_BATCH:
                     e.Result = ExportInvoicesByBatch((IList)e.Argument, worker, e);
                     break;
-                case ExportType.EXPORT_INVOICES:
-                    e.Result = ExportInvoices((IList)e.Argument, worker, e);
+                case ExportType.EXPORT_INVOICES_FULL:
+                    e.Result = ExportInvoicesFull((IList)e.Argument, worker, e);
+                    break;
+                case ExportType.EXPORT_INVOICES_OVERDUE:
+                    e.Result = ExportInvoicesOverDue((IList)e.Argument, worker, e);
                     break;
                 default:
                     break;
@@ -271,7 +280,7 @@ namespace CMBC.EasyFactor.Utils
             return creditNoteList.Count;
         }
 
-        private int ExportInvoices(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ExportInvoicesFull(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             ApplicationClass app = new ApplicationClass() { Visible = false };
@@ -291,6 +300,7 @@ namespace CMBC.EasyFactor.Utils
                 int column = 1;
                 //CDA
                 datasheet.Cells[1, column++] = "CDA编号";
+                datasheet.Cells[1, column++] = "卖方名称";
                 datasheet.Cells[1, column++] = "买方名称";
                 //转让批次
                 datasheet.Cells[1, column++] = "转让批次号";
@@ -345,6 +355,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "利息收取日";
                 datasheet.Cells[1, column++] = "备注";
 
+
                 int size = invoiceList.Count;
                 for (int row = 0; row < size; row++)
                 {
@@ -374,6 +385,7 @@ namespace CMBC.EasyFactor.Utils
                     Invoice invoice = (Invoice)invoiceList[row];
                     //CDA
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CDA.CDACode;
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CDA.Case.SellerClient.ToString();
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CDA.Case.BuyerClient.ToString();
                     //转让批次
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.AssignBatchNo;
@@ -391,7 +403,7 @@ namespace CMBC.EasyFactor.Utils
                     //融资批次
                     if (invoice.InvoiceFinanceBatch != null)
                     {
-                        column = 14;
+                        column = 15;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinanceBatchNo;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinanceType;
                         if (invoice.InvoiceFinanceBatch.Factor != null)
@@ -399,7 +411,7 @@ namespace CMBC.EasyFactor.Utils
                             datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FactorCode;
                             datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.Factor.ToString();
                         }
-                        column = 18;
+                        column = 19;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.BatchCurrency;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinanceRate;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.CostRate;
@@ -410,12 +422,12 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.CreateUserName;
                     }
                     //融资
-                    column = 26;
+                    column = 27;
                     datasheet.Cells[row + 2, column++] = invoice.FinanceAmount;
                     //付款批次
                     if (invoice.InvoicePaymentLogs.Count > 0)
                     {
-                        column = 27;
+                        column = 28;
                         InvoicePaymentLog log = invoice.InvoicePaymentLogs[0];
                         datasheet.Cells[row + 2, column++] = log.InvoicePaymentBatch.PaymentBatchNo;
                         datasheet.Cells[row + 2, column++] = log.InvoicePaymentBatch.PaymentType;
@@ -425,12 +437,12 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2, column++] = log.InvoicePaymentBatch.CreateUserName;
                     }
                     //付款
-                    column = 33;
+                    column = 34;
                     datasheet.Cells[row + 2, column++] = invoice.PaymentAmount;
                     //还款批次
                     if (invoice.InvoiceRefundLogs.Count > 0)
                     {
-                        column = 34;
+                        column = 35;
                         InvoiceRefundLog log = invoice.InvoiceRefundLogs[0];
                         datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundBatchNo;
                         datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundType;
@@ -439,7 +451,7 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.CreateUserName;
                     }
                     //还款
-                    column = 38;
+                    column = 39;
                     datasheet.Cells[row + 2, column++] = invoice.RefundAmount;
                     //手续费
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
@@ -455,7 +467,7 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 9 || range.Column == 10 || range.Column == 26 || range.Column == 33 || range.Column == 39 || range.Column == 40 || range.Column == 42)
+                    if (range.Column == 10 || range.Column == 11 || range.Column == 27 || range.Column == 34 || range.Column == 40 || range.Column == 41 || range.Column == 43)
                     {
                         range.NumberFormatLocal = "0.00";
                     }
@@ -487,6 +499,116 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="invoiceList"></param>
         /// <param name="worker"></param>
         /// <param name="e"></param>
+        private int ExportInvoicesOverDue(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+            if (app == null)
+            {
+                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return -1;
+            }
+            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            if (datasheet == null)
+            {
+                return -1;
+            }
+            try
+            {
+                int column = 1;
+                datasheet.Cells[1, column++] = "卖方名称";
+                datasheet.Cells[1, column++] = "买方名称";
+                datasheet.Cells[1, column++] = "发票号";
+                datasheet.Cells[1, column++] = "转让金额";
+                datasheet.Cells[1, column++] = "发票日";
+                datasheet.Cells[1, column++] = "到期日";
+                datasheet.Cells[1, column++] = "是否瑕疵";
+                datasheet.Cells[1, column++] = "融资金额";
+                datasheet.Cells[1, column++] = "融资日";
+                datasheet.Cells[1, column++] = "融资到期日";
+                datasheet.Cells[1, column++] = "备注";
+                datasheet.Cells[1, column++] = "应收帐款逾期天数";
+                datasheet.Cells[1, column++] = "预付款逾期天数";
+
+                int size = invoiceList.Count;
+                for (int row = 0; row < size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        if (datasheet != null)
+                        {
+                            Marshal.ReleaseComObject(datasheet);
+                            datasheet = null;
+                        }
+                        if (app != null)
+                        {
+                            foreach (Workbook wb in app.Workbooks)
+                            {
+                                wb.Close(false, Type.Missing, Type.Missing);
+                            }
+                            app.Workbooks.Close();
+                            app.Quit();
+                            Marshal.ReleaseComObject(app);
+                            app = null;
+                        }
+                        e.Cancel = true;
+                        return -1;
+                    }
+
+                    column = 1;
+                    Invoice invoice = (Invoice)invoiceList[row];
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CDA.Case.SellerClient.ToString();
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CDA.Case.BuyerClient.ToString();
+                    datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
+                    datasheet.Cells[row + 2, column++] = invoice.AssignAmount;
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceDate;
+                    datasheet.Cells[row + 2, column++] = invoice.DueDate;
+                    datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
+                    datasheet.Cells[row + 2, column++] = invoice.FinanceAmount;
+                    datasheet.Cells[row + 2, column++] = invoice.FinanceDate;
+                    datasheet.Cells[row + 2, column++] = invoice.FinanceDueDate;
+                    datasheet.Cells[row + 2, column++] = invoice.Comment;
+                    datasheet.Cells[row + 2, column++] = invoice.AssignOverDueDays;
+                    datasheet.Cells[row + 2, column++] = invoice.FinanceOverDueDays;
+
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+
+                foreach (Range range in datasheet.UsedRange.Columns)
+                {
+                    range.EntireColumn.AutoFit();
+                    if (range.Column == 4 || range.Column == 8)
+                    {
+                        range.NumberFormatLocal = "0.00";
+                    }
+                }
+                app.Visible = true;
+            }
+            catch (Exception e1)
+            {
+                if (datasheet != null)
+                {
+                    Marshal.ReleaseComObject(datasheet);
+                    datasheet = null;
+                }
+                if (app != null)
+                {
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                    app = null;
+                }
+                throw e1;
+            }
+            return invoiceList.Count;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="invoiceList"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
         private int ExportInvoicesByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
@@ -508,7 +630,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "发票号";
                 datasheet.Cells[1, column++] = "票面金额";
                 datasheet.Cells[1, column++] = "转让金额";
-                datasheet.Cells[1, column++] = "发票日期";
+                datasheet.Cells[1, column++] = "发票日";
                 datasheet.Cells[1, column++] = "到期日";
                 datasheet.Cells[1, column++] = "是否瑕疵";
                 datasheet.Cells[1, column++] = "融资金额";

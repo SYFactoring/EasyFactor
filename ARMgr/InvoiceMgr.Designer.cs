@@ -42,6 +42,10 @@ namespace CMBC.EasyFactor.ARMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.lblCDAStatus = new DevComponents.DotNetBar.LabelX();
+            this.lblCaseMark = new DevComponents.DotNetBar.LabelX();
+            this.cbCDAStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cbCaseMark = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tbFinanceOverDueDays = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFinanceOverDueDays = new DevComponents.DotNetBar.LabelX();
             this.tbAssignOverDueDays = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -92,11 +96,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemInvoiceDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExportAllInvoices = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemAllInvoiceFull = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemAllInvoiceOverDue = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemExportSelectedInvoices = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbCaseMark = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.cbCDAStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.lblCaseMark = new DevComponents.DotNetBar.LabelX();
-            this.lblCDAStatus = new DevComponents.DotNetBar.LabelX();
+            this.menuItemSelectedInvoiceFull = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSelectedInvoiceOverDue = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.cmuInvoiceMgr.SuspendLayout();
@@ -139,6 +143,66 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 1;
+            // 
+            // lblCDAStatus
+            // 
+            this.lblCDAStatus.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCDAStatus.BackgroundStyle.Class = "";
+            this.lblCDAStatus.Location = new System.Drawing.Point(185, 56);
+            this.lblCDAStatus.Name = "lblCDAStatus";
+            this.lblCDAStatus.Size = new System.Drawing.Size(55, 16);
+            this.lblCDAStatus.TabIndex = 20;
+            this.lblCDAStatus.Text = "CDA状态";
+            // 
+            // lblCaseMark
+            // 
+            this.lblCaseMark.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCaseMark.BackgroundStyle.Class = "";
+            this.lblCaseMark.Location = new System.Drawing.Point(5, 56);
+            this.lblCaseMark.Name = "lblCaseMark";
+            this.lblCaseMark.Size = new System.Drawing.Size(56, 16);
+            this.lblCaseMark.TabIndex = 19;
+            this.lblCaseMark.Text = "案件状态";
+            // 
+            // cbCDAStatus
+            // 
+            this.cbCDAStatus.DisplayMember = "Text";
+            this.cbCDAStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCDAStatus.FormattingEnabled = true;
+            this.cbCDAStatus.ItemHeight = 14;
+            this.cbCDAStatus.Items.AddRange(new object[] {
+            "已失效",
+            "未审核",
+            "已审核未下发",
+            "已下发未签回",
+            "已签回"});
+            this.cbCDAStatus.Location = new System.Drawing.Point(246, 53);
+            this.cbCDAStatus.Name = "cbCDAStatus";
+            this.cbCDAStatus.Size = new System.Drawing.Size(100, 20);
+            this.cbCDAStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCDAStatus.TabIndex = 18;
+            // 
+            // cbCaseMark
+            // 
+            this.cbCaseMark.DisplayMember = "Text";
+            this.cbCaseMark.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCaseMark.FormattingEnabled = true;
+            this.cbCaseMark.ItemHeight = 14;
+            this.cbCaseMark.Items.AddRange(new object[] {
+            "申请案",
+            "启动案",
+            "已结案"});
+            this.cbCaseMark.Location = new System.Drawing.Point(67, 53);
+            this.cbCaseMark.Name = "cbCaseMark";
+            this.cbCaseMark.Size = new System.Drawing.Size(100, 20);
+            this.cbCaseMark.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCaseMark.TabIndex = 17;
             // 
             // tbFinanceOverDueDays
             // 
@@ -259,7 +323,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblCount.BackgroundStyle.Class = "";
             this.lblCount.Location = new System.Drawing.Point(713, 36);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(25, 16);
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 12;
             // 
             // btnQueryReset
@@ -610,7 +674,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemExportAllInvoices,
             this.menuItemExportSelectedInvoices});
             this.cmuInvoiceMgr.Name = "cmuContractMgr";
-            this.cmuInvoiceMgr.Size = new System.Drawing.Size(183, 192);
+            this.cmuInvoiceMgr.Size = new System.Drawing.Size(183, 214);
             // 
             // menuItemInvoiceDetail
             // 
@@ -666,81 +730,49 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // menuItemExportAllInvoices
             // 
+            this.menuItemExportAllInvoices.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemAllInvoiceFull,
+            this.menuItemAllInvoiceOverDue});
             this.menuItemExportAllInvoices.Name = "menuItemExportAllInvoices";
             this.menuItemExportAllInvoices.Size = new System.Drawing.Size(182, 22);
             this.menuItemExportAllInvoices.Text = "导出全部发票";
-            this.menuItemExportAllInvoices.Click += new System.EventHandler(this.ExportAllInvoices);
+            // 
+            // menuItemAllInvoiceFull
+            // 
+            this.menuItemAllInvoiceFull.Name = "menuItemAllInvoiceFull";
+            this.menuItemAllInvoiceFull.Size = new System.Drawing.Size(152, 22);
+            this.menuItemAllInvoiceFull.Text = "完整格式";
+            this.menuItemAllInvoiceFull.Click += new System.EventHandler(this.ExportAllInvoicesFull);
+            // 
+            // menuItemAllInvoiceOverDue
+            // 
+            this.menuItemAllInvoiceOverDue.Name = "menuItemAllInvoiceOverDue";
+            this.menuItemAllInvoiceOverDue.Size = new System.Drawing.Size(152, 22);
+            this.menuItemAllInvoiceOverDue.Text = "逾期台帐格式";
+            this.menuItemAllInvoiceOverDue.Click += new System.EventHandler(this.ExportAllInvoiceOverDue);
             // 
             // menuItemExportSelectedInvoices
             // 
+            this.menuItemExportSelectedInvoices.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemSelectedInvoiceFull,
+            this.menuItemSelectedInvoiceOverDue});
             this.menuItemExportSelectedInvoices.Name = "menuItemExportSelectedInvoices";
             this.menuItemExportSelectedInvoices.Size = new System.Drawing.Size(182, 22);
             this.menuItemExportSelectedInvoices.Text = "导出所选发票";
-            this.menuItemExportSelectedInvoices.Click += new System.EventHandler(this.ExportSelectedInvoices);
             // 
-            // cbCaseMark
+            // menuItemSelectedInvoiceFull
             // 
-            this.cbCaseMark.DisplayMember = "Text";
-            this.cbCaseMark.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbCaseMark.FormattingEnabled = true;
-            this.cbCaseMark.ItemHeight = 14;
-            this.cbCaseMark.Location = new System.Drawing.Point(67, 53);
-            this.cbCaseMark.Name = "cbCaseMark";
-            this.cbCaseMark.Size = new System.Drawing.Size(100, 20);
-            this.cbCaseMark.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCaseMark.TabIndex = 17;
-            this.cbCaseMark.Items.AddRange(new object[]{
-            ConstStr.CASE.APPLICATION,
-            ConstStr.CASE.ENABLE,
-            ConstStr.CASE.CLOSED,
-            });
-            this.cbCaseMark.SelectedIndex = 1;
+            this.menuItemSelectedInvoiceFull.Name = "menuItemSelectedInvoiceFull";
+            this.menuItemSelectedInvoiceFull.Size = new System.Drawing.Size(152, 22);
+            this.menuItemSelectedInvoiceFull.Text = "完整格式";
+            this.menuItemSelectedInvoiceFull.Click += new System.EventHandler(this.ExportSelectedInvoicesFull);
             // 
-            // cbCDAStatus
+            // menuItemSelectedInvoiceOverDue
             // 
-            this.cbCDAStatus.DisplayMember = "Text";
-            this.cbCDAStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbCDAStatus.FormattingEnabled = true;
-            this.cbCDAStatus.ItemHeight = 14;
-            this.cbCDAStatus.Location = new System.Drawing.Point(246, 53);
-            this.cbCDAStatus.Name = "cbCDAStatus";
-            this.cbCDAStatus.Size = new System.Drawing.Size(100, 20);
-            this.cbCDAStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCDAStatus.TabIndex = 18;
-            this.cbCDAStatus.Items.AddRange(new object[] { 
-            ConstStr.CDA.INVALID,
-            ConstStr.CDA.NO_CHECK,
-            ConstStr.CDA.CHECK_NO_DELIVER,
-            ConstStr.CDA.DELIVER_NO_SIGN,
-            ConstStr.CDA.SIGNED,
-            });
-            this.cbCDAStatus.SelectedIndex = 4;
-            // 
-            // lblCaseMark
-            // 
-            this.lblCaseMark.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblCaseMark.BackgroundStyle.Class = "";
-            this.lblCaseMark.Location = new System.Drawing.Point(5, 56);
-            this.lblCaseMark.Name = "lblCaseMark";
-            this.lblCaseMark.Size = new System.Drawing.Size(56, 16);
-            this.lblCaseMark.TabIndex = 19;
-            this.lblCaseMark.Text = "案件状态";
-            // 
-            // lblCDAStatus
-            // 
-            this.lblCDAStatus.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblCDAStatus.BackgroundStyle.Class = "";
-            this.lblCDAStatus.Location = new System.Drawing.Point(185, 56);
-            this.lblCDAStatus.Name = "lblCDAStatus";
-            this.lblCDAStatus.Size = new System.Drawing.Size(55, 16);
-            this.lblCDAStatus.TabIndex = 20;
-            this.lblCDAStatus.Text = "CDA状态";
+            this.menuItemSelectedInvoiceOverDue.Name = "menuItemSelectedInvoiceOverDue";
+            this.menuItemSelectedInvoiceOverDue.Size = new System.Drawing.Size(152, 22);
+            this.menuItemSelectedInvoiceOverDue.Text = "逾期台帐格式";
+            this.menuItemSelectedInvoiceOverDue.Click += new System.EventHandler(this.ExportSelectedInvoicesOverDue);
             // 
             // InvoiceMgr
             // 
@@ -817,5 +849,9 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.LabelX lblCaseMark;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCDAStatus;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseMark;
+        private System.Windows.Forms.ToolStripMenuItem menuItemAllInvoiceFull;
+        private System.Windows.Forms.ToolStripMenuItem menuItemAllInvoiceOverDue;
+        private System.Windows.Forms.ToolStripMenuItem menuItemSelectedInvoiceFull;
+        private System.Windows.Forms.ToolStripMenuItem menuItemSelectedInvoiceOverDue;
     }
 }

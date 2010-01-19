@@ -28,14 +28,14 @@ namespace CMBC.EasyFactor.DB.dbml
         ///<summary>
         ///买方信用风险担保额度余额
         ///</summary>
-        public double AssignCreditLineOutstanding
+        public System.Nullable<double> AssignCreditLineOutstanding
         {
             get
             {
                 ClientCreditLine creditLine = AssignCreditLine;
                 if (creditLine == null)
                 {
-                    return 0;
+                    return null;
                 }
                 return creditLine.CreditLine - GetAssignOutstanding(creditLine.CreditLineCurrency);
             }

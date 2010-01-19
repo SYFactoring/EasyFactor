@@ -4,15 +4,15 @@ namespace CMBC.EasyFactor.Report
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.ARMgr;
+    using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using Microsoft.Office.Core;
     using Microsoft.Office.Interop.Excel;
-    using System.IO;
-    using CMBC.EasyFactor.CaseMgr;
 
     /// <summary>
     /// 
@@ -75,27 +75,35 @@ namespace CMBC.EasyFactor.Report
 
             if (this.opReportType == OpReportType.REPORT_ASSIGN)
             {
-                this.diAssignDateBegin.Value = DateTime.Now;
-                this.diAssignDateEnd.Value = DateTime.Now;
+                this.diAssignDateBegin.Value = DateTime.Now.Date;
+                this.diAssignDateEnd.Value = DateTime.Now.Date;
+                QueryInvoices(null, null);
             }
             else if (this.opReportType == OpReportType.REPORT_FINANCE)
             {
                 this.cbIsFlaw.Checked = false;
                 this.cbIsFlaw.Enabled = false;
+                this.diAssignDateEnd.Value = DateTime.Now.Date;
+                QueryInvoices(null, null);
             }
             else if (this.opReportType == OpReportType.REPORT_FEE)
             {
-                this.diAssignDateBegin.Value = DateTime.Now;
-                this.diAssignDateEnd.Value = DateTime.Now;
+                this.diAssignDateBegin.Value = DateTime.Now.Date;
+                this.diAssignDateEnd.Value = DateTime.Now.Date;
             }
         }
 
         #endregion Constructors
 
-        #region Methods (11)
+        #region Methods (12)
 
-        // Private Methods (11) 
+        // Private Methods (12) 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DetailCase(object sender, EventArgs e)
         {
             if (this.dgvInvoices.CurrentCell.RowIndex == -1)
@@ -115,6 +123,11 @@ namespace CMBC.EasyFactor.Report
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DetailCDA(object sender, EventArgs e)
         {
             if (this.dgvInvoices.CurrentCell.RowIndex == -1)
@@ -134,6 +147,11 @@ namespace CMBC.EasyFactor.Report
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DetailInvoice(object sender, EventArgs e)
         {
             if (this.dgvInvoices.CurrentCell.RowIndex == -1)
@@ -153,6 +171,11 @@ namespace CMBC.EasyFactor.Report
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvInvoiceAssignBatch_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewColumn column = this.dgvInvoices.Columns[e.ColumnIndex];
@@ -174,6 +197,10 @@ namespace CMBC.EasyFactor.Report
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="invoiceList"></param>
         private void GenerateAssignReport(List<Invoice> invoiceList)
         {
 
@@ -282,6 +309,10 @@ namespace CMBC.EasyFactor.Report
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="invoiceList"></param>
         private void GenerateFeeReport(List<Invoice> invoiceList)
         {
             IEnumerable<IGrouping<Client, Invoice>> groupsBySeller = invoiceList.GroupBy(i => i.InvoiceAssignBatch.CDA.Case.SellerClient);
@@ -423,12 +454,30 @@ namespace CMBC.EasyFactor.Report
                 ClientCreditLine creditLine = seller.FinanceCreditLine;
                 if (creditLine != null)
                 {
-                    sheet.Cells[6, 2] = String.Format("{0:N2}", creditLine.CreditLine);
+                    sheet.Cells[6, 2] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, creditLine.CreditLine);
                 }
                 sheet.Cells[7, 1] = "总融资余额";
-                sheet.Cells[7, 2] = String.Format("{0:N2}", seller.GetFinanceOutstanding(creditLine.CreditLineCurrency));
+                double? financeOutstanding = seller.GetFinanceOutstanding(creditLine.CreditLineCurrency);
+                sheet.Cells[7, 2] = String.Format("{0} {1:N2}", financeOutstanding == null ? "" : creditLine.CreditLineCurrency, financeOutstanding);
                 sheet.Cells[8, 1] = "总剩余额度";
-                //sheet.Cells[8, 2] = String.Format("{0:N2}", Math.Min((seller.AssignTotal - seller.FinanceTotal).GetValueOrDefault(), seller.GetFinanceLineOutstanding("CNY").GetValueOrDefault()));
+                if (creditLine != null)
+                {
+                    sheet.Cells[8, 2] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, creditLine.CreditLine - financeOutstanding.GetValueOrDefault());
+                }
+                //if (creditLine.GroupCreditLine == null)
+                //{
+                //    sheet.Cells[8, 2] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, creditLine.CreditLine - financeOutstanding.GetValueOrDefault());
+                //}
+                //else
+                //{
+                //    double groupFinanceLineOutstanding = creditLine.GroupCreditLine.FinanceCreditLineOutstanding;
+                //    if (creditLine.GroupCreditLine.CreditLineCurrency != creditLine.CreditLineCurrency)
+                //    {
+                //        double exchange = Exchange.GetExchangeRate(creditLine.GroupCreditLine.CreditLineCurrency, creditLine.CreditLineCurrency);
+                //        groupFinanceLineOutstanding *= exchange;
+                //    }
+                //    sheet.Cells[8, 2] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, Math.Min(groupFinanceLineOutstanding, creditLine.CreditLine - financeOutstanding.GetValueOrDefault()));
+                //}
 
                 IEnumerable<IGrouping<Client, Invoice>> groupsByBuyer = sellerGroup.GroupBy(i => i.InvoiceAssignBatch.CDA.Case.BuyerClient);
 
@@ -462,14 +511,21 @@ namespace CMBC.EasyFactor.Report
                         sheet.Cells[row++, 2] = factor.ToString();
                     }
                     sheet.Cells[row, 1] = "信用风险额度：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.CreditCoverOutstanding);
+                    double? creditCoverOutstanding = cda.CreditCoverOutstanding;
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", creditCoverOutstanding == null ? "" : cda.CreditCoverCurr, creditCoverOutstanding);
                     sheet.Cells[row, 1] = "应收账款余额：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.GetAssignOutstanding(cda.Case.InvoiceCurrency));
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", cda.Case.InvoiceCurrency, cda.GetAssignOutstanding(cda.Case.InvoiceCurrency));
                     sheet.Cells[row, 1] = "预付款额度：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.FinanceLineOutstanding);
+                    double? financeLineOustanding = cda.FinanceLineOutstanding;
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", financeLineOustanding == null ? "" : cda.FinanceLineCurr, financeLineOustanding);
                     sheet.Cells[row, 1] = "融资余额：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.GetFinanceOutstanding(cda.Case.InvoiceCurrency));
+                    financeOutstanding = cda.GetFinanceOutstanding(cda.FinanceLineCurr);
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", financeOutstanding == null ? "" : cda.FinanceLineCurr, financeOutstanding);
                     sheet.Cells[row, 1] = "剩余额度：";
+                    if ((financeLineOustanding - financeOutstanding) != null)
+                    {
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", cda.FinanceLineCurr, cda.FinanceLineOutstanding - cda.GetFinanceOutstanding(cda.FinanceLineCurr));
+                    }
                     //sheet.Cells[row++, 2] = String.Format("{0:N2}", Math.Min(Math.Min((cda.AssignTotal - cda.FinanceTotal).GetValueOrDefault(), cda.FinanceLineOutstanding.GetValueOrDefault()), seller.GetFinanceLineOutstanding("CNY").GetValueOrDefault()));
 
                     row++;
@@ -521,26 +577,21 @@ namespace CMBC.EasyFactor.Report
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GenerateReportAll(object sender, EventArgs e)
         {
             List<Invoice> invoiceList = (List<Invoice>)this.bs.DataSource;
             GenerateReportImpl(invoiceList);
         }
 
-        private void GenerateReportSelected(object sender, EventArgs e)
-        {
-            List<Invoice> selectedInvoices = new List<Invoice>();
-            foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
-            {
-                Invoice invoice = (Invoice)this.bs.List[cell.RowIndex];
-                if (!selectedInvoices.Contains(invoice))
-                {
-                    selectedInvoices.Add(invoice);
-                }
-            }
-            GenerateReportImpl(selectedInvoices);
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="invoiceList"></param>
         private void GenerateReportImpl(List<Invoice> invoiceList)
         {
             if (invoiceList == null || invoiceList.Count == 0)
@@ -569,6 +620,25 @@ namespace CMBC.EasyFactor.Report
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void GenerateReportSelected(object sender, EventArgs e)
+        {
+            List<Invoice> selectedInvoices = new List<Invoice>();
+            foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
+            {
+                Invoice invoice = (Invoice)this.bs.List[cell.RowIndex];
+                if (!selectedInvoices.Contains(invoice))
+                {
+                    selectedInvoices.Add(invoice);
+                }
+            }
+            GenerateReportImpl(selectedInvoices);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QueryInvoices(object sender, EventArgs e)
         {
             string sellerName = this.tbSeller.Text;
@@ -581,29 +651,34 @@ namespace CMBC.EasyFactor.Report
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
                               let seller = invoice.InvoiceAssignBatch.CDA.Case.SellerClient
-                              where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN.Contains(sellerName) 
+                              where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN.Contains(sellerName)
                               let buyer = invoice.InvoiceAssignBatch.CDA.Case.BuyerClient
-                              where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN.Contains(buyerName) 
+                              where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN.Contains(buyerName)
                               let sellerFactor = invoice.InvoiceAssignBatch.CDA.Case.SellerFactor
                               where sellerFactor.CompanyNameCN.Contains(factorName) || sellerFactor.CompanyNameEN.Contains(factorName)
                               let buyerFactor = invoice.InvoiceAssignBatch.CDA.Case.BuyerFactor
                               where buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
                               let curCase = invoice.InvoiceAssignBatch.CDA.Case
-                              where curCase.CaseMark==ConstStr.CASE.ENABLE
+                              where curCase.CaseMark == ConstStr.CASE.ENABLE
                               let cda = invoice.InvoiceAssignBatch.CDA
-                              where cda.CDAStatus ==ConstStr.CDA.SIGNED
+                              where cda.CDAStatus == ConstStr.CDA.SIGNED
                               where
                                     (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
                                  && (beginDate != this.diAssignDateBegin.MinDate ? invoice.InvoiceAssignBatch.AssignDate >= beginDate : true)
                                  && (endDate != this.diAssignDateEnd.MinDate ? invoice.InvoiceAssignBatch.AssignDate <= endDate : true)
-                                 && (opReportType == OpReportType.REPORT_ASSIGN ? invoice.AssignAmount > invoice.PaymentAmount : true)
-                                 && (opReportType == OpReportType.REPORT_FINANCE ? invoice.FinanceAmount == null || invoice.FinanceAmount.GetValueOrDefault()<0.00000001 : true)
+                                 && (opReportType == OpReportType.REPORT_ASSIGN ? invoice.AssignAmount > invoice.PaymentAmount.GetValueOrDefault() : true)
+                                 && (opReportType == OpReportType.REPORT_FINANCE ? invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() < 0.00000001 : true)
                               select invoice;
 
             this.bs.DataSource = queryResult.ToList();
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Reset(object sender, EventArgs e)
         {
             this.tbSeller.Text = string.Empty;
@@ -614,7 +689,5 @@ namespace CMBC.EasyFactor.Report
         }
 
         #endregion Methods
-
-
     }
 }

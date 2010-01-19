@@ -3,13 +3,12 @@ namespace CMBC.EasyFactor.ARMgr
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
+    using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Collections;
-    using CMBC.EasyFactor.CaseMgr;
-    using System.Drawing;
 
     /// <summary>
     /// 
@@ -56,6 +55,10 @@ namespace CMBC.EasyFactor.ARMgr
             /// </summary>
             BATCH_DETAIL,
 
+            /// <summary>
+            /// 
+            /// </summary>
+            OVER_DUE,
         }
 
         #endregion Enums
@@ -103,6 +106,18 @@ namespace CMBC.EasyFactor.ARMgr
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
+            else if (opInvoiceType == OpInvoiceType.OVER_DUE)
+            {
+                DateTime assignOverDueDate = DateTime.Now.Date.AddDays(-1);
+                DateTime financeOverDueDate = DateTime.Now.Date.AddDays(-1);
+                var queryResult = App.Current.DbContext.Invoices.Where(invoice =>
+                     (invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount && invoice.DueDate <= assignOverDueDate)
+                  || (invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() && invoice.FinanceDueDate <= financeOverDueDate));
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            }
+            this.cbCaseMark.SelectedIndex = 1;
+            this.cbCDAStatus.SelectedIndex = 4;
         }
 
         #endregion Constructors
@@ -129,9 +144,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (14)
+        #region Methods (15)
 
-        // Private Methods (14) 
+        // Private Methods (15) 
 
         /// <summary>
         /// 
@@ -311,13 +326,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ExportAllInvoices(object sender, EventArgs e)
+        private void ExportAllInvoiceOverDue(object sender, EventArgs e)
         {
-            if (this.bs.DataSource is List<Invoice>)
+            if (this.dgvInvoices.Rows.Count == 0)
             {
-                ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES);
-                exportForm.StartExport(this.bs.List);
+                return;
             }
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_OVERDUE);
+            exportForm.StartExport(this.bs.List);
         }
 
         /// <summary>
@@ -325,7 +341,22 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ExportSelectedInvoices(object sender, EventArgs e)
+        private void ExportAllInvoicesFull(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.Rows.Count == 0)
+            {
+                return;
+            }
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_FULL);
+            exportForm.StartExport(this.bs.List);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportSelectedInvoicesFull(object sender, EventArgs e)
         {
             if (this.dgvInvoices.SelectedCells.Count == 0)
             {
@@ -340,7 +371,31 @@ namespace CMBC.EasyFactor.ARMgr
                     selectedInvoices.Add(invoice);
                 }
             }
-            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES);
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_FULL);
+            exportForm.StartExport(selectedInvoices);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportSelectedInvoicesOverDue(object sender, EventArgs e)
+        {
+            if (this.dgvInvoices.SelectedCells.Count == 0)
+            {
+                return;
+            }
+            List<Invoice> selectedInvoices = new List<Invoice>();
+            foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
+            {
+                Invoice invoice = (Invoice)this.bs.List[cell.RowIndex];
+                if (!selectedInvoices.Contains(invoice))
+                {
+                    selectedInvoices.Add(invoice);
+                }
+            }
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_OVERDUE);
             exportForm.StartExport(selectedInvoices);
         }
 
@@ -420,10 +475,10 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
             int FinanceOverDueDays = 0;
-            DateTime FinanceOverDueDate = default(DateTime);
+            DateTime financeOverDueDate = default(DateTime);
             if (Int32.TryParse(this.tbFinanceOverDueDays.Text, out FinanceOverDueDays))
             {
-                FinanceOverDueDate = DateTime.Now.Date.AddDays(0 - FinanceOverDueDays);
+                financeOverDueDate = DateTime.Now.Date.AddDays(0 - FinanceOverDueDays);
             }
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
@@ -432,7 +487,7 @@ namespace CMBC.EasyFactor.ARMgr
                               let cda = invoice.InvoiceAssignBatch.CDA
                               where cda.CDAStatus == cdaStatus
                               let seller = curCase.SellerClient
-                              where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN.Contains(sellerName) 
+                              where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN.Contains(sellerName)
                               let buyer = curCase.BuyerClient
                               where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN.Contains(buyerName)
                               let sellerFactor = curCase.SellerFactor
@@ -442,8 +497,8 @@ namespace CMBC.EasyFactor.ARMgr
                               where (invoiceNo == string.Empty ? true : invoice.InvoiceNo == invoiceNo)
                                 && (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
                                 && (isDispute == "A" ? true : invoice.IsDispute == (isDispute == "Y" ? true : false))
-                                && (assignOverDueDays == 0 ? true : (invoice.PaymentAmount < invoice.AssignAmount && invoice.DueDate <= assignOverDueDate))
-                                && (FinanceOverDueDays == 0 ? true : (invoice.RefundAmount < invoice.FinanceAmount.GetValueOrDefault() && invoice.FinanceDueDate <= FinanceOverDueDate))
+                                && (assignOverDueDays == 0 ? true : (invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount && invoice.DueDate <= assignOverDueDate))
+                                && (FinanceOverDueDays == 0 ? true : (invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() && invoice.FinanceDueDate <= financeOverDueDate))
                               select invoice;
             //if (queryResult.Count() > 2000)
             //{

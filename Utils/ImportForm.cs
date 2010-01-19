@@ -363,9 +363,9 @@ namespace CMBC.EasyFactor.Utils
                                 creditCover.RequestType = "C-正式额度";
                             }
                             creditCover.RequestAmount = (double)valueArray[row, column++];
-                            curCase.NetPaymentTerm = (int)valueArray[row, column++];
+                            curCase.NetPaymentTerm = (System.Nullable<int>)valueArray[row, column++];
                             creditCover.RequestDate = (DateTime)valueArray[row, column++];
-                            creditCover.ReplyAmount = (double)valueArray[row, column++];
+                            creditCover.ReplyAmount = (System.Nullable<double>)valueArray[row, column++];
                             creditCover.ReplyDate = (System.Nullable<DateTime>)valueArray[row, column++];
                             creditCover.IFPrice = (System.Nullable<double>)valueArray[row, column++];
                             column++;

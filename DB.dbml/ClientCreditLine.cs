@@ -44,12 +44,31 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double result =  this.CreditLine - this.Client.GetAssignOutstanding(this.CreditLineCurrency);
+                double result = this.CreditLine - this.Client.GetAssignOutstanding(this.CreditLineCurrency);
                 if (this.ClientCreditLines.Count > 0)
                 {
                     foreach (ClientCreditLine creditLine in this.ClientCreditLines)
                     {
                         result -= creditLine.Client.GetAssignOutstanding(this.CreditLineCurrency);
+                    }
+                }
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double FinanceCreditLineOutstanding
+        {
+            get
+            {
+                double result = this.CreditLine - this.Client.GetFinanceOutstanding(this.CreditLineCurrency).GetValueOrDefault();
+                if (this.ClientCreditLines.Count > 0)
+                {
+                    foreach (ClientCreditLine creditLine in this.ClientCreditLines)
+                    {
+                        result -= creditLine.Client.GetFinanceOutstanding(this.CreditLineCurrency).GetValueOrDefault();
                     }
                 }
                 return result;
