@@ -42,6 +42,10 @@ namespace CMBC.EasyFactor
             App.Current.CurUser = curUser;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool PreLogin()
         {
             DBDataContext context = App.Current.DbContext;
@@ -59,6 +63,7 @@ namespace CMBC.EasyFactor
                 MessageBox.Show("数据库连接失败: " + e.ToString(), ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+
             return false;
         }
         // Private Methods (2) 
@@ -85,17 +90,19 @@ namespace CMBC.EasyFactor
             {
                 return;
             }
-            string uid = tbUserId.Text.Trim();
-            string pass = tbPassword.Text.Trim();
+
+            string uid = this.tbUserId.Text.Trim();
+            string pass = this.tbPassword.Text.Trim();
             User curUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid);
 
             if (curUser != null)
             {
                 if (!curUser.Password.Equals(pass))
                 {
-                    errorProvider.SetError(tbPassword, "密码不正确");
+                    this.errorProvider.SetError(this.tbPassword, "密码不正确");
                     return;
                 }
+
                 curUser.LoginDate = DateTime.Now;
                 App.Current.DbContext.SubmitChanges();
                 App.Current.CurUser = curUser;
@@ -103,9 +110,8 @@ namespace CMBC.EasyFactor
             }
             else
             {
-                errorProvider.SetError(tbUserId, "用户名不存在");
+                this.errorProvider.SetError(this.tbUserId, "用户名不存在");
             }
-
         }
 
         #endregion Methods

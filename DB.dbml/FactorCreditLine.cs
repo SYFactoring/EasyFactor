@@ -1,12 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//-----------------------------------------------------------------------
+// <copyright file="FactorCreditLine.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.DB.dbml
 {
-    public partial class FactorCreditLine
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class FactorCreditLine : BaseObject
     {
+        #region Properties (3)
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public double CreditLineOutstanding
+        {
+            get
+            {
+                return this.CreditLine - this.Factor.GetAssignOutstanding(this.CreditLineCurrency);
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string FactorName
         {
             get
@@ -15,6 +40,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string FactorType
         {
             get
@@ -23,12 +51,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public double CreditLineOutstanding
-        {
-            get
-            {
-                return this.CreditLine-this.Factor.GetAssignOutstanding(this.CreditLineCurrency);
-            }
-        }
+        #endregion Properties
     }
 }

@@ -11,17 +11,30 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class LoginWindow
     {
+		#region Fields (13) 
+
         /// <summary> 
         /// Required designer variable.
         /// </summary>
+        private DevComponents.DotNetBar.ButtonX btnCancel;
+        private DevComponents.DotNetBar.ButtonX btnLogin;
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.Panel panelHeader;
-        private System.Windows.Forms.Panel panelFooter;
-        private System.Windows.Forms.Panel panelCenter;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private DevComponents.DotNetBar.LabelX lblPassword;
         private DevComponents.DotNetBar.LabelX lblUserId;
+        private System.Windows.Forms.Panel panelCenter;
+        private System.Windows.Forms.Panel panelFooter;
+        private System.Windows.Forms.Panel panelHeader;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
         private DevComponents.DotNetBar.Controls.TextBoxX tbPassword;
         private DevComponents.DotNetBar.Controls.TextBoxX tbUserId;
+
+		#endregion Fields 
+
+		#region Methods (1) 
+
+		// Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -33,8 +46,11 @@ namespace CMBC.EasyFactor
             {
                 this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
+
+		#endregion Methods 
 
         #region Component Designer generated code
 
@@ -212,11 +228,5 @@ namespace CMBC.EasyFactor
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
-        private System.Windows.Forms.ErrorProvider errorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private DevComponents.DotNetBar.ButtonX btnCancel;
-        private DevComponents.DotNetBar.ButtonX btnLogin;
     }
 }

@@ -1,23 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using CMBC.EasyFactor.Utils;
+﻿//-----------------------------------------------------------------------
+// <copyright file="ExchangeMgr.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
 {
+    using System.Windows.Forms;
+    using CMBC.EasyFactor.Utils;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class ExchangeMgr : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the ExchangeMgr class
+        /// </summary>
         public ExchangeMgr()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.dgvExchange.AutoGenerateColumns = false;
-            ControlUtil.SetDoubleBuffered(this.dgvExchange);
             this.dgvExchange.DataSource = App.Current.DbContext.Exchanges;
+            ControlUtil.SetDoubleBuffered(this.dgvExchange);
         }
     }
 }

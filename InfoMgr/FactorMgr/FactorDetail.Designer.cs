@@ -1,12 +1,23 @@
-﻿namespace CMBC.EasyFactor.InfoMgr.FactorMgr
-{
-    partial class FactorDetail
-    {
-		#region Fields (92) 
+﻿//-----------------------------------------------------------------------
+// <copyright file="FactorMgr.Designer.cs" company="CISL@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
+namespace CMBC.EasyFactor.InfoMgr.FactorMgr
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class FactorDetail
+    {
+		#region Fields (107) 
+
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
         private DevComponents.DotNetBar.Controls.TextBoxX approveNoTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx approveTypeComboBox;
-        private DevComponents.DotNetBar.ButtonX btnFactorReset;
         private DevComponents.DotNetBar.ButtonX btnFactorCreditLineDelete;
         private DevComponents.DotNetBar.ButtonX btnFactorCreditLineFreeze;
         private DevComponents.DotNetBar.ButtonX btnFactorCreditLineNew;
@@ -14,10 +25,14 @@
         private DevComponents.DotNetBar.ButtonX btnFactorCreditLineSave;
         private DevComponents.DotNetBar.ButtonX btnFactorCreditLineUnfreeze;
         private DevComponents.DotNetBar.ButtonX btnFactorCreditLineUpdate;
+        private DevComponents.DotNetBar.ButtonX btnFactorReset;
         private DevComponents.DotNetBar.ButtonX btnFactorSave;
         private DevComponents.DotNetBar.ButtonX btnFactorUpdate;
+        private DevComponents.DotNetBar.ButtonX btnGroupSelect;
         private DevComponents.DotNetBar.Controls.TextBoxX cityPostTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX cityVisitingTextBox;
+        private System.Windows.Forms.ErrorProvider clientLineErrorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter clientLineHighlighter;
         private System.Windows.Forms.DataGridViewTextBoxColumn colApproveNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colApproveType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
@@ -36,23 +51,26 @@
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX companyNameCNTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX companyNameENTextBox;
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
+        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.ComboBoxEx countryNameComboBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx creditLineCurrencyComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX creditLineStatusTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX creditLineTextBox;
+        private DevComponents.DotNetBar.Validator.SuperValidator creditLineValidator;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator1;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator2;
         private DevComponents.DotNetBar.Controls.TextBoxX dateOfLatestRevisionTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX departmentTextBox;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvFactorCreditLines;
         private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
-        private System.Windows.Forms.ErrorProvider factorErrorProvider;
         private System.Windows.Forms.BindingSource factorBindingSource;
         private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
         private System.Windows.Forms.BindingSource factorCreditLineBindingSource;
+        private System.Windows.Forms.ErrorProvider factorErrorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter factorHighlighter;
         private DevComponents.DotNetBar.Controls.ComboBoxEx factorTypeComboBox;
+        private DevComponents.DotNetBar.Validator.SuperValidator factorValidator;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput freezeDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX freezeReasonTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX freezerTextBox;
@@ -60,7 +78,6 @@
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelContacts;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCreditLineDetail;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelMembership;
-        private DevComponents.DotNetBar.Validator.Highlighter factorHighlighter;
         private DevComponents.DotNetBar.Controls.TextBoxX iFISAvailableOnPrivateForumTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX membershipDateTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX membershipStatusTextBox;
@@ -70,7 +87,13 @@
         private DevComponents.DotNetBar.Controls.TextBoxX postalAddress_2TextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX postalCodePostTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX postalCodeVisitingTextBox;
-        private DevComponents.DotNetBar.Validator.SuperValidator factorValidator;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator11;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator6;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator7;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator8;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator9;
         private DevComponents.DotNetBar.TabControl tabControl;
         private DevComponents.DotNetBar.TabItem tabItemFactor;
         private DevComponents.DotNetBar.TabItem tabItemFactorCreditLine;
@@ -80,8 +103,12 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbContacts2;
         private DevComponents.DotNetBar.Controls.TextBoxX tbContacts3;
         private DevComponents.DotNetBar.Controls.TextBoxX tbContacts4;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCreditLineCreateUserName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorGroupName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbGeneralCorrespondence1;
         private DevComponents.DotNetBar.Controls.TextBoxX tbGeneralCorrespondence2;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbGroupFactorCode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbManagement1;
         private DevComponents.DotNetBar.Controls.TextBoxX tbManagement2;
         private DevComponents.DotNetBar.Controls.TextBoxX tbShareholders;
@@ -2477,28 +2504,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.factorErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientLineErrorProvider)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Validator.SuperValidator creditLineValidator;
-        private System.Windows.Forms.ErrorProvider clientLineErrorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter clientLineHighlighter;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator9;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator8;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator7;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator6;
-        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidator1;
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidator2;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCreditLineCreateUserName;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator11;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbGroupFactorCode;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorGroupName;
-        private DevComponents.DotNetBar.ButtonX btnGroupSelect;
     }
 }

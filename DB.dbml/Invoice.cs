@@ -1,15 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CMBC.EasyFactor.Utils;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Invoice.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.DB.dbml
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using CMBC.EasyFactor.Utils;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class Invoice : BaseObject
     {
-        #region Properties (21)
+		#region Properties (19) 
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public DateTime AssignDate
         {
             get
@@ -18,6 +30,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public double AssignOutstanding
         {
             get
@@ -26,6 +41,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public System.Nullable<int> AssignOverDueDays
         {
             get
@@ -38,6 +56,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string BuyerName
         {
             get
@@ -46,18 +67,27 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets or sets
+        /// </summary>
         public DateTime? CreditNoteDate2
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets
+        /// </summary>
         public string CreditNoteNo2
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string FactorName
         {
             get
@@ -81,6 +111,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string FinanceCurrency
         {
             get
@@ -96,6 +129,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public System.Nullable<double> FinanceOutstanding
         {
             get
@@ -106,6 +142,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public System.Nullable<int> FinanceOverDueDays
         {
             get
@@ -122,6 +161,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string InvoiceCurrency
         {
             get
@@ -130,42 +172,63 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public int? PaymentLogID2
-        {
-            set;
-            get;
-        }
-
+        /// <summary>
+        /// Gets or sets
+        /// </summary>
         public double? PaymentAmount2
         {
             set;
             get;
         }
 
+        /// <summary>
+        /// Gets or sets
+        /// </summary>
         public DateTime? PaymentDate2
         {
             set;
             get;
         }
 
-        public int? RefundLogID2
+        /// <summary>
+        /// Gets or sets
+        /// </summary>
+        public int? PaymentLogID2
         {
             set;
             get;
         }
 
+        /// <summary>
+        /// Gets or sets
+        /// </summary>
         public double? RefundAmount2
         {
             set;
             get;
         }
 
+        /// <summary>
+        /// Gets or sets
+        /// </summary>
         public DateTime? RefundDate2
         {
             set;
             get;
         }
+        
+        /// <summary>
+        /// Gets or sets
+        /// </summary>
+        public int? RefundLogID2
+        {
+            set;
+            get;
+        }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string SellerName
         {
             get
@@ -174,6 +237,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string TransactionType
         {
             get
@@ -182,12 +248,15 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (10)
+		#region Methods (12) 
 
-        // Public Methods (10) 
+		// Public Methods (12) 
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void CaculatePayment()
         {
             if (InvoicePaymentLogs.Count > 0)
@@ -202,6 +271,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void CaculateRefund()
         {
             if (InvoiceRefundLogs.Count > 0)
@@ -216,6 +288,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -233,7 +310,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cda"></param>
+        /// <param name="date"></param>
         /// <returns></returns>
         public static string GenerateAssignBatchNo(DateTime date)
         {
@@ -263,7 +340,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cda"></param>
+        /// <param name="date"></param>
         /// <returns></returns>
         public static string GenerateFinanceBatchNo(DateTime date)
         {
@@ -277,7 +354,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cda"></param>
+        /// <param name="date"></param>
+        /// <param name="batchesInMemory"></param>
         /// <returns></returns>
         public static string GenerateFinanceBatchNo(DateTime date, List<InvoiceFinanceBatch> batchesInMemory)
         {
@@ -292,7 +370,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cda"></param>
+        /// <param name="date"></param>
         /// <returns></returns>
         public static string GeneratePaymentBatchNo(DateTime date)
         {
@@ -306,7 +384,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cda"></param>
+        /// <param name="date"></param>
+        /// <param name="batchesInMemory"></param>
         /// <returns></returns>
         public static string GeneratePaymentBatchNo(DateTime date, List<InvoicePaymentBatch> batchesInMemory)
         {
@@ -321,7 +400,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cda"></param>
+        /// <param name="date"></param>
         /// <returns></returns>
         public static string GenerateRefundBatchNo(DateTime date)
         {
@@ -335,7 +414,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cda"></param>
+        /// <param name="date"></param>
+        /// <param name="batchesInMemory"></param>
         /// <returns></returns>
         public static string GenerateRefundBatchNo(DateTime date, List<InvoiceRefundBatch> batchesInMemory)
         {
@@ -347,6 +427,10 @@ namespace CMBC.EasyFactor.DB.dbml
             return refundNo;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             if (this.InvoiceNo == null)
@@ -359,6 +443,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

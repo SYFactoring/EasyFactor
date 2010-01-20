@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="FactorDetial.cs" company="Yiming Liu@Fudan">
+// <copyright file="FactorDetail.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -81,7 +81,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// Initializes a new instance of the FactorDetail class
         /// </summary>
         /// <param name="factor">selected factor</param>
-        /// <param name="opType"></param>
+        /// <param name="opFactorType"></param>
+        /// <param name="opFactorCreditLineType"></param>
         private FactorDetail(Factor factor, OpFactorType opFactorType, OpFactorCreditLineType opFactorCreditLineType)
         {
             this.InitializeComponent();
@@ -123,7 +124,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the FactorDetail class
         /// </summary>
         /// <param name="factor"></param>
         /// <param name="opFactorType"></param>
@@ -133,7 +134,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the FactorDetail class
         /// </summary>
         /// <param name="factor"></param>
         /// <param name="opFactorCreditLineType"></param>
@@ -149,6 +150,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
         // Private Methods (18) 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             if (this.freezeDateDateTimePicker.Enabled)
@@ -168,6 +174,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void customValidator2_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             if (this.unfreezeDateDateTimePicker.Enabled)

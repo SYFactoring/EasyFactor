@@ -13,15 +13,14 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class QueryForm : DevComponents.DotNetBar.Office2007Form
     {
-
         /// <summary>
-        /// 
+        /// Initializes a new instance of the QueryForm class.
         /// </summary>
         /// <param name="userControl"></param>
         /// <param name="title"></param>
-        public QueryForm(UserControl userControl,string title)
+        public QueryForm(UserControl userControl, string title)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
             this.Text = title;
             userControl.Dock = DockStyle.Fill;

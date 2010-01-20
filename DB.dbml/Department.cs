@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Department.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.DB.dbml
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     /// <summary>
     /// 
     /// </summary>
@@ -22,7 +28,7 @@ namespace CMBC.EasyFactor.DB.dbml
         #region Constructors (1)
 
         /// <summary>
-        /// 
+        /// Initializes static members of the Department class
         /// </summary>
         static Department()
         {
@@ -34,15 +40,24 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Constructors
 
-        #region Methods (2)
+        #region Methods (3)
 
-        // Public Methods (2) 
+        // Public Methods (3) 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static List<Department> AllDepartments()
         {
             return _allDepartment;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="domainName"></param>
+        /// <returns></returns>
         public static List<Department> AllDepartments(string domainName)
         {
             return _allDepartment.Where(d => d._Domain == domainName).ToList();

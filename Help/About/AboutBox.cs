@@ -33,55 +33,39 @@ namespace CMBC.EasyFactor.Help.About
 
         #endregion Constructors
 
-        #region Methods (1)
-
-        // Private Methods (1) 
+        #region Properties (6)
 
         /// <summary>
-        /// Close the dialog
+        /// Gets assembly company
         /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void Close(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        #endregion Methods
-
-
-
-        #region 程序集属性访问器
-
-        /// <summary>
-        /// Gets assembly title
-        /// </summary>
-        public string AssemblyTitle
+        public string AssemblyCompany
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
-                if (attributes.Length > 0)
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
+                if (attributes.Length == 0)
                 {
-                    AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-                    if (titleAttribute.Title != string.Empty)
-                    {
-                        return titleAttribute.Title;
-                    }
+                    return string.Empty;
                 }
 
-                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+                return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
 
         /// <summary>
-        /// Gets assembly version
+        /// Gets assembly copyright
         /// </summary>
-        public string AssemblyVersion
+        public string AssemblyCopyright
         {
             get
             {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    return string.Empty;
+                }
+
+                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
             }
         }
 
@@ -120,38 +104,53 @@ namespace CMBC.EasyFactor.Help.About
         }
 
         /// <summary>
-        /// Gets assembly copyright
+        /// Gets assembly title
         /// </summary>
-        public string AssemblyCopyright
+        public string AssemblyTitle
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-                if (attributes.Length == 0)
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+                if (attributes.Length > 0)
                 {
-                    return string.Empty;
+                    AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
+                    if (titleAttribute.Title != string.Empty)
+                    {
+                        return titleAttribute.Title;
+                    }
                 }
 
-                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
             }
         }
 
         /// <summary>
-        /// Gets assembly company
+        /// Gets assembly version
         /// </summary>
-        public string AssemblyCompany
+        public string AssemblyVersion
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return string.Empty;
-                }
-
-                return ((AssemblyCompanyAttribute)attributes[0]).Company;
+                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
         }
-        #endregion
+
+        #endregion Properties
+
+        #region Methods (1)
+
+        // Private Methods (1) 
+
+        /// <summary>
+        /// Close the dialog
+        /// </summary>
+        /// <param name="sender">Event Sender</param>
+        /// <param name="e">Event Args</param>
+        private void Close(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        #endregion Methods
     }
 }

@@ -1,11 +1,38 @@
-﻿namespace CMBC.EasyFactor.Utils
+﻿//-----------------------------------------------------------------------
+// <copyright file="ImportForm.Designer.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace CMBC.EasyFactor.Utils
 {
-    partial class ImportForm
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class ImportForm
     {
+        #region Fields (11)
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private DevComponents.DotNetBar.ButtonX btnCancel;
+        private DevComponents.DotNetBar.ButtonX btnFileSelect;
+        private DevComponents.DotNetBar.ButtonX btnStart;
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.LabelX lblFilePath;
+        private DevComponents.DotNetBar.LabelX lblProgress;
+        private DevComponents.DotNetBar.LabelX lblStatus;
+        private DevComponents.DotNetBar.Controls.ProgressBarX progressBar;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFilePath;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbStatus;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -13,12 +40,15 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
+
+        #endregion Methods
 
         #region Windows Form Designer generated code
 
@@ -185,16 +215,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.LabelX lblFilePath;
-        private DevComponents.DotNetBar.LabelX lblStatus;
-        private DevComponents.DotNetBar.Controls.ProgressBarX progressBar;
-        private DevComponents.DotNetBar.LabelX lblProgress;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbStatus;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFilePath;
-        private DevComponents.DotNetBar.ButtonX btnStart;
-        private DevComponents.DotNetBar.ButtonX btnCancel;
-        private DevComponents.DotNetBar.ButtonX btnFileSelect;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }

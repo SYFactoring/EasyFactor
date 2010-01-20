@@ -110,30 +110,51 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connection"></param>
 		public DBDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connection"></param>
 		public DBDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="mappingSource"></param>
 		public DBDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="mappingSource"></param>
 		public DBDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
+        /// <summary>
+        /// Gets
+        /// </summary>
 		public System.Data.Linq.Table<Case> Cases
 		{
 			get
@@ -142,6 +163,9 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+        /// <summary>
+        /// Gets
+        /// </summary>
 		public System.Data.Linq.Table<User> Users
 		{
 			get

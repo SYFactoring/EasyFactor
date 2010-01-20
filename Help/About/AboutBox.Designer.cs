@@ -11,7 +11,7 @@ namespace CMBC.EasyFactor.Help.About
     /// </summary>
     public partial class AboutBox
     {
-        #region Fields (9)
+		#region Fields (9) 
 
         /// <summary>
         /// Required designer variable.
@@ -26,16 +26,16 @@ namespace CMBC.EasyFactor.Help.About
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private System.Windows.Forms.TextBox textBoxDescription;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Methods (1)
+		#region Methods (2) 
 
-        // Protected Methods (1) 
+		// Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (this.components != null))
@@ -45,12 +45,7 @@ namespace CMBC.EasyFactor.Help.About
 
             base.Dispose(disposing);
         }
-
-        #endregion Methods
-
-
-
-        #region Windows 窗体设计器生成的代码
+		// Private Methods (1) 
 
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -201,9 +196,8 @@ namespace CMBC.EasyFactor.Help.About
             this.tableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
-
         }
 
-        #endregion
+		#endregion Methods 
     }
 }

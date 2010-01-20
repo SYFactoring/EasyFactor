@@ -1,16 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using CMBC.EasyFactor.Utils;
-using CMBC.EasyFactor.DB.dbml;
+﻿//-----------------------------------------------------------------------
+// <copyright file="FactorCreditLineMgr.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
+    using System;
+    using System.Drawing;
+    using System.Linq;
+    using System.Windows.Forms;
+    using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class FactorCreditLineMgr : UserControl
     {
         #region Fields (1)
@@ -21,11 +26,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
         #region Constructors (1)
 
+        /// <summary>
+        /// Initializes a new instance of the FactorCreditLineMgr class
+        /// </summary>
         public FactorCreditLineMgr()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.bs = new BindingSource();
-            this.dgvFactorCreditLines.DataSource = bs;
+            this.dgvFactorCreditLines.DataSource = this.bs;
             this.dgvFactorCreditLines.AutoGenerateColumns = false;
             ControlUtil.SetDoubleBuffered(this.dgvFactorCreditLines);
         }
@@ -70,18 +78,15 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvFactorCreditLines_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                 e.RowBounds.Location.Y,
-                 this.dgvFactorCreditLines.RowHeadersWidth - 4,
-                 e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                this.dgvFactorCreditLines.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                this.dgvFactorCreditLines.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvFactorCreditLines.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvFactorCreditLines.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvFactorCreditLines.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -91,12 +96,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void Query(object sender, EventArgs e)
         {
-            string factorCode = tbFactorCode.Text;
-            string factorName = tbFactorName.Text;
+            string factorCode = this.tbFactorCode.Text;
+            string factorName = this.tbFactorName.Text;
 
             var queryResult = App.Current.DbContext.FactorCreditLines.Where(f => f.Factor.FactorCode.Contains(factorCode) && (f.Factor.CompanyNameCN.Contains(factorName) || f.Factor.CompanyNameEN.Contains(factorName)));
             this.bs.DataSource = queryResult;
-
         }
 
         #endregion Methods

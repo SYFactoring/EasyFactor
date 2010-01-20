@@ -24,10 +24,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// 
         /// </summary>
         private OpClientCreditLineType opClientCreditLineType;
+
         /// <summary>
         /// 
         /// </summary>
         private OpClientType opClientType;
+
         /// <summary>
         /// 
         /// </summary>
@@ -57,6 +59,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT_CREDIT_LINE
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -77,6 +80,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CONTRACT
         }
+
         /// <summary>
         /// Operation Type 
         /// </summary>
@@ -152,6 +156,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     this.tbGroupNameCN.Text = client.ClientGroup.ClientNameCN;
                     this.tbGroupNameEN.Text = client.ClientGroup.ClientNameEN;
                 }
+
                 client.Backup();
             }
 
@@ -173,7 +178,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client"></param>
         /// <param name="opClientType"></param>
@@ -184,7 +189,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client"></param>
         /// <param name="opContractType"></param>
@@ -194,7 +199,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client"></param>
         /// <param name="opClientCreditLineType"></param>
@@ -204,9 +209,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the ClientDetail class
         /// </summary>
-        /// <param name="client"></param>
+        /// <param name="contract"></param>
         /// <param name="opContractType"></param>
         public ClientDetail(Contract contract, OpContractType opContractType)
             : this(contract.Client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, opContractType)
@@ -218,6 +223,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the ClientDetail class
+        /// </summary>
+        /// <param name="creditLine"></param>
+        /// <param name="opClientCreditLineType"></param>
         public ClientDetail(ClientCreditLine creditLine, OpClientCreditLineType opClientCreditLineType)
             : this(creditLine.Client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT)
         {
@@ -234,6 +244,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         // Private Methods (30) 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbDepartments_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
         {
             if (this.clientBindingSource.DataSource is Client)
@@ -282,6 +297,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     }
                 }
             }
+
             if (client.ClientGroup != null)
             {
                 if (client.ClientEDICode == null || client.ClientEDICode.Trim() == string.Empty)
@@ -298,6 +314,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void customValidator4_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             if (this.freezeDateDateTimePicker.Enabled)
@@ -317,6 +338,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void customValidator5_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             if (this.unfreezeDateDateTimePicker.Enabled)
@@ -360,10 +386,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 return;
             }
+
             if (MessageBox.Show("是否打算删除此额度信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
+
             bool isDeleteOK = true;
             try
             {
@@ -384,7 +412,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.clientCreditLineBindingSource.DataSource = typeof(ClientCreditLine);
                 this.SetClientCreditLineEditable(false);
             }
-
         }
 
         /// <summary>
@@ -411,6 +438,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 return;
             }
+
             if (MessageBox.Show("是否打算删除保理合同: " + contract.ContractCode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
@@ -429,13 +457,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
                             App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
                         }
+
                         App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
                     }
+
                     App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
                     App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
                     App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
                     App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(cda.InvoiceRefundBatches);
                 }
+
                 App.Current.DbContext.CDAs.DeleteAllOnSubmit(CDAList);
                 App.Current.DbContext.Contracts.DeleteOnSubmit(contract);
                 App.Current.DbContext.SubmitChanges();
@@ -455,9 +486,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void diContractValueDate_ValueChanged(object sender, EventArgs e)
         {
-            if (opContractType == OpContractType.NEW_CONTRACT)
+            if (this.opContractType == OpContractType.NEW_CONTRACT)
             {
                 Contract contract = this.contractBindingSource.DataSource as Contract;
                 contract.ContractValueDate = this.diContractValueDate.Value.Date;
@@ -519,6 +555,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UpdateClientCreditLineControlStatus();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewContract(object sender, EventArgs e)
         {
             Client client = (Client)this.clientBindingSource.DataSource;
@@ -534,9 +575,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UpdateContractControlStatus();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void periodBeginDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            if (opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
+            if (this.opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
                 ClientCreditLine creditLine = this.clientCreditLineBindingSource.DataSource as ClientCreditLine;
                 creditLine.PeriodBegin = this.periodBeginDateTimePicker.Value;
@@ -585,12 +631,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void ResetClient(object sender, EventArgs e)
         {
-            if (opClientType == OpClientType.UPDATE_CLIENT)
+            if (this.opClientType == OpClientType.UPDATE_CLIENT)
             {
                 Client client = this.clientBindingSource.DataSource as Client;
                 client.Restore();
             }
-            else if (opClientType == OpClientType.NEW_CLIENT)
+            else if (this.opClientType == OpClientType.NEW_CLIENT)
             {
                 this.clientBindingSource.DataSource = new Client();
             }
@@ -607,6 +653,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 return;
             }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             client.CreateUserName = App.Current.CurUser.Name;
 
@@ -740,8 +787,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                                 ccl.CreditLineStatus = ConstStr.CLIENT_CREDIT_LINE.EXPIRY;
                             }
                         }
+
                         App.Current.DbContext.SubmitChanges();
                     }
+
                     this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
                     this.NewClientCreditLine(null, null);
                 }
@@ -771,8 +820,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                                 ccl.CreditLineStatus = ConstStr.CLIENT_CREDIT_LINE.EXPIRY;
                             }
                         }
+
                         App.Current.DbContext.SubmitChanges();
                     }
+
                     this.dgvClientCreditLines.Refresh();
                     creditLine.Backup();
                 }
@@ -790,6 +841,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 return;
             }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null)
             {
@@ -804,7 +856,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             Contract contract = (Contract)this.contractBindingSource.DataSource;
 
-            if (opContractType == OpContractType.NEW_CONTRACT)
+            if (this.opContractType == OpContractType.NEW_CONTRACT)
             {
                 bool isAddOK = true;
                 try
@@ -843,8 +895,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                                 c.ContractStatus = ConstStr.CONTRACT.EXPIRY;
                             }
                         }
+
                         App.Current.DbContext.SubmitChanges();
                     }
+
                     this.dgvContracts.DataSource = client.Contracts.ToList();
                     this.NewContract(null, null);
                 }
@@ -861,6 +915,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     contract.ContractStatus = ConstStr.CONTRACT.AVAILABILITY;
                 }
+
                 try
                 {
                     App.Current.DbContext.SubmitChanges();
@@ -883,8 +938,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                                 c.ContractStatus = ConstStr.CONTRACT.EXPIRY;
                             }
                         }
+
                         App.Current.DbContext.SubmitChanges();
                     }
+
                     this.dgvContracts.Refresh();
                     contract.Backup();
                 }
@@ -903,19 +960,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            int cid = (int)this.dgvClientCreditLines["colCreditLineID", this.dgvClientCreditLines.SelectedRows[0].Index].Value;
-            if (cid != 0)
-            {
-                Client clinet = (Client)this.clientBindingSource.DataSource;
-                ClientCreditLine selectedClientCreditLine = clinet.ClientCreditLines.SingleOrDefault(c => c.CreditLineID == cid);
-                if (selectedClientCreditLine != null && this.clientCreditLineBindingSource.DataSource != selectedClientCreditLine)
-                {
-                    this.SetClientCreditLineEditable(false);
-                    this.clientCreditLineBindingSource.DataSource = selectedClientCreditLine;
-                    this.btnClientCreditLineFreeze.Enabled = true;
-                    this.btnClientCreditLineUnfreeze.Enabled = true;
-                }
-            }
+            ClientCreditLine selectedClientCreditLine = ((List<ClientCreditLine>)this.dgvClientCreditLines.DataSource)[this.dgvClientCreditLines.SelectedRows[0].Index];
+            this.SetClientCreditLineEditable(false);
+            this.clientCreditLineBindingSource.DataSource = selectedClientCreditLine;
+            this.btnClientCreditLineFreeze.Enabled = true;
+            this.btnClientCreditLineUnfreeze.Enabled = true;
         }
 
         /// <summary>
@@ -930,19 +979,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            string ccode = (String)this.dgvContracts["colContractCode", this.dgvContracts.SelectedRows[0].Index].Value;
-            if (ccode != null)
-            {
-                Client clinet = (Client)this.clientBindingSource.DataSource;
-                Contract selectedContract = clinet.Contracts.SingleOrDefault(c => c.ContractCode == ccode);
-                if (selectedContract != null && this.contractBindingSource.DataSource != selectedContract)
-                {
-                    this.SetContractEditable(false);
-                    this.contractBindingSource.DataSource = selectedContract;
-                }
-            }
+            Contract selectedContract = ((List<Contract>)this.dgvContracts.DataSource)[this.dgvClientCreditLines.SelectedRows[0].Index];
+            this.SetContractEditable(false);
+            this.contractBindingSource.DataSource = selectedContract;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectGroup(object sender, EventArgs e)
         {
             Client client = (Client)this.clientBindingSource.DataSource;
@@ -963,7 +1009,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SelectGroupCreditLine(object sender, EventArgs e)
         {
-            Client client = (Client)clientBindingSource.DataSource;
+            Client client = (Client)this.clientBindingSource.DataSource;
             ClientCreditLineMgr mgr = new ClientCreditLineMgr(client.ClientGroup);
             QueryForm queryFrom = new QueryForm(mgr, "选择集团额度");
             mgr.OwnerForm = queryFrom;
@@ -977,11 +1023,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     MessageBox.Show("所选集团的额度类型与客户的额度类型不相同", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
+
                 if (clientCreditLine.CreditLine > selected.CreditLine)
                 {
                     MessageBox.Show("所选集团的保理预付款融资额度必须大于客户的保理预付款融资额度", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
+
                 clientCreditLine.GroupCreditLine = selected;
             }
         }
@@ -1088,6 +1136,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+
                 this.btnGroupSelect.Visible = false;
             }
             else if (this.opClientType == OpClientType.NEW_CLIENT)
@@ -1111,6 +1160,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+
                 this.btnGroupSelect.Visible = true;
             }
             else if (this.opClientType == OpClientType.UPDATE_CLIENT)
@@ -1134,6 +1184,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+
                 this.btnGroupSelect.Visible = true;
                 this.clientEDICodeTextBox.ReadOnly = true;
             }
@@ -1173,6 +1224,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+
                 this.btnGroupCreditLineSelect.Visible = false;
             }
             else if (this.opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
@@ -1245,8 +1297,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+
                 this.tbContractCode.ReadOnly = true;
             }
+
             this.tbContractStatus.ReadOnly = true;
             this.tbContractCreateUserName.ReadOnly = true;
         }

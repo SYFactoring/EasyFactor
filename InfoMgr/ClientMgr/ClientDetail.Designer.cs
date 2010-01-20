@@ -11,8 +11,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientDetail
     {
-		#region Fields (152) 
-
+        #region Fields (147)
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
         private DevComponents.DotNetBar.Controls.TextBoxX addressCNTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX addressENTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX approveNoTextBox;
@@ -45,12 +47,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX clientCommentTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX clientCoreNoTextBox;
         private System.Windows.Forms.BindingSource clientCreditLineBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
         private DevComponents.DotNetBar.Controls.TextBoxX clientEDICodeTextBox;
         private System.Windows.Forms.ErrorProvider clientErrorProvider;
         private DevComponents.DotNetBar.Validator.Highlighter clientHighlighter;
         private DevComponents.DotNetBar.Controls.ComboBoxEx clientLevelComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX clientNameCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX clientNameEN_1TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX clientNameENTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx clientTypeComboBox;
         private DevComponents.DotNetBar.Validator.SuperValidator clientValidator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colApproveNo;
@@ -78,9 +81,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX companyCodeTextBox;
         private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
         private DevComponents.DotNetBar.Validator.CompareValidator compareValidator2;
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.TextBoxX contactTextBox;
         private System.Windows.Forms.BindingSource contractBindingSource;
@@ -163,11 +163,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX unfreezerTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX websiteTextBox;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Methods (1) 
+        #region Methods (1)
 
-		// Protected Methods (1) 
+        // Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -179,12 +179,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
-		#endregion Methods 
-
-
+        #endregion Methods
 
         #region Windows Form Designer generated code
 
@@ -323,13 +322,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cityCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.addressENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.addressCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.clientNameEN_1TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.clientNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabItemClient = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClientCreditLine = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvClientCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colCreditLineID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClientEDICode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -2112,7 +2111,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientBasic.Controls.Add(this.addressENTextBox);
             this.groupPanelClientBasic.Controls.Add(addressCNLabel);
             this.groupPanelClientBasic.Controls.Add(this.addressCNTextBox);
-            this.groupPanelClientBasic.Controls.Add(this.clientNameEN_1TextBox);
+            this.groupPanelClientBasic.Controls.Add(this.clientNameENTextBox);
             this.groupPanelClientBasic.Controls.Add(clientNameCNLabel);
             this.groupPanelClientBasic.Controls.Add(this.clientNameCNTextBox);
             this.groupPanelClientBasic.Dock = System.Windows.Forms.DockStyle.Top;
@@ -2334,14 +2333,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             // 
-            this.clientNameEN_1TextBox.Border.Class = "TextBoxBorder";
-            this.clientNameEN_1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientNameEN", true));
-            this.clientNameEN_1TextBox.Location = new System.Drawing.Point(85, 54);
-            this.clientNameEN_1TextBox.Name = "clientNameEN_1TextBox";
-            this.clientNameEN_1TextBox.Size = new System.Drawing.Size(295, 20);
-            this.clientNameEN_1TextBox.TabIndex = 6;
-            this.clientValidator.SetValidator1(this.clientNameEN_1TextBox, this.requiredFieldValidator15);
-            this.clientNameEN_1TextBox.WatermarkText = "英文名";
+            this.clientNameENTextBox.Border.Class = "TextBoxBorder";
+            this.clientNameENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientBindingSource, "ClientNameEN", true));
+            this.clientNameENTextBox.Location = new System.Drawing.Point(85, 54);
+            this.clientNameENTextBox.Name = "clientNameEN_1TextBox";
+            this.clientNameENTextBox.Size = new System.Drawing.Size(295, 20);
+            this.clientNameENTextBox.TabIndex = 6;
+            this.clientValidator.SetValidator1(this.clientNameENTextBox, this.requiredFieldValidator15);
+            this.clientNameENTextBox.WatermarkText = "英文名";
             // 
             // clientNameCNTextBox
             // 
@@ -2399,7 +2398,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientCreditLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientCreditLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCreditLineID,
-            this.ClientEDICodeColumn,
+            this.colClientEDICode,
             this.colCreditLineType,
             this.colCreditLineCurrency,
             this.colCreditLine,
@@ -2451,12 +2450,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colCreditLineID.ReadOnly = true;
             this.colCreditLineID.Visible = false;
             // 
-            // ClientEDICodeColumn
+            // colClientEDICode
             // 
-            this.ClientEDICodeColumn.DataPropertyName = "ClientEDICode";
-            this.ClientEDICodeColumn.HeaderText = "客户保理代码";
-            this.ClientEDICodeColumn.Name = "ClientEDICodeColumn";
-            this.ClientEDICodeColumn.ReadOnly = true;
+            this.colClientEDICode.DataPropertyName = "ClientEDICode";
+            this.colClientEDICode.HeaderText = "客户保理代码";
+            this.colClientEDICode.Name = "colClientEDICode";
+            this.colClientEDICode.ReadOnly = true;
             // 
             // colCreditLineType
             // 
@@ -3300,7 +3299,5 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientEDICodeColumn;
     }
 }

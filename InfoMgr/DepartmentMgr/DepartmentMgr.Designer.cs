@@ -1,6 +1,15 @@
-﻿namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
+﻿//-----------------------------------------------------------------------
+// <copyright file="DepartmentMgr.Designer.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 {
-    partial class DepartmentMgr
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class DepartmentMgr
     {
         /// <summary> 
         /// Required designer variable.
@@ -13,10 +22,11 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 

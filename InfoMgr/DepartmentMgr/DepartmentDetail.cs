@@ -1,23 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using CMBC.EasyFactor.DB.dbml;
-using CMBC.EasyFactor.Utils;
+﻿//-----------------------------------------------------------------------
+// <copyright file="DepartmentDetail.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 {
+    using System;
+    using System.Windows.Forms;
+    using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class DepartmentDetail : DevComponents.DotNetBar.Office2007Form
     {
+        #region Fields (1)
+
         /// <summary>
         /// 
         /// </summary>
         private OpDepartmentType opDepartmentType;
-        
+
+        #endregion Fields
+
+        #region Enums (1)
+
         /// <summary>
         /// Operation Type
         /// </summary>
@@ -39,27 +48,46 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             DETAIL_DEPARTMENT
         }
 
+        #endregion Enums
+
+        #region Constructors (1)
+
+        /// <summary>
+        /// Initializes a new instance of the DepartmentDetail class
+        /// </summary>
+        /// <param name="department"></param>
+        /// <param name="opDepartmentType"></param>
         public DepartmentDetail(Department department, OpDepartmentType opDepartmentType)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
             this.opDepartmentType = opDepartmentType;
-
-            if (opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)
-            {
-
-            }
-            else
-            {
-                this.departmentBindingSource.DataSource = department;
-            }
-
+            this.departmentBindingSource.DataSource = department;
             this.UpdateDepartmentControlStatus();
         }
 
+        #endregion Constructors
+
+        #region Methods (2)
+
+        // Private Methods (2) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Close(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void UpdateDepartmentControlStatus()
         {
-            if (opDepartmentType == OpDepartmentType.DETAIL_DEPARTMENT)
+            if (this.opDepartmentType == OpDepartmentType.DETAIL_DEPARTMENT)
             {
                 foreach (Control comp in this.groupPanelDepartment.Controls)
                 {
@@ -68,9 +96,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             }
         }
 
-        private void Close(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        #endregion Methods
     }
 }

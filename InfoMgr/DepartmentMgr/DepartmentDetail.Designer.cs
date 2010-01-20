@@ -1,11 +1,46 @@
-﻿namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
+﻿//-----------------------------------------------------------------------
+// <copyright file="DepartmentDetail.Designer.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 {
-    partial class DepartmentDetail
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class DepartmentDetail
     {
+        #region Fields (20)
         /// <summary>
         /// Required designer variable.
         /// </summary>
+        private DevComponents.DotNetBar.Controls.TextBoxX addressCNTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX addressENTextBox;
+        private DevComponents.DotNetBar.ButtonX btnClose;
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.Controls.TextBoxX contact_1TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX contact_2TextBox;
+        private System.Windows.Forms.BindingSource departmentBindingSource;
+        private DevComponents.DotNetBar.Controls.TextBoxX departmentCodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX departmentNameTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx domainComboBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX email_1TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX email_2TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX fax_1TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX fax_2TextBox;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelDepartment;
+        private DevComponents.DotNetBar.Controls.TextBoxX locationTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX managerTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX phone_1TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX phone_2TextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX postCodeTextBox;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -13,12 +48,15 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
+
+        #endregion Methods
 
         #region Windows Form Designer generated code
 
@@ -600,25 +638,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelDepartment;
-        private DevComponents.DotNetBar.Controls.TextBoxX managerTextBox;
-        private System.Windows.Forms.BindingSource departmentBindingSource;
-        private DevComponents.DotNetBar.Controls.TextBoxX postCodeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX fax_2TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX fax_1TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX email_2TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX email_1TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX phone_2TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX phone_1TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX contact_2TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX contact_1TextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX addressENTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX addressCNTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX locationTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx domainComboBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX departmentNameTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX departmentCodeTextBox;
-        private DevComponents.DotNetBar.ButtonX btnClose;
     }
 }

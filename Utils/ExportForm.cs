@@ -83,7 +83,7 @@ namespace CMBC.EasyFactor.Utils
         public void StartExport(IList objArray)
         {
             this.Show();
-            backgroundWorker.RunWorkerAsync(objArray);
+            this.backgroundWorker.RunWorkerAsync(objArray);
         }
         // Private Methods (8) 
 
@@ -305,6 +305,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="invoiceList"></param>
         /// <param name="worker"></param>
         /// <param name="e"></param>
+        /// <returns></returns>
         private int ExportInvoicesByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
@@ -676,6 +677,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="invoiceList"></param>
         /// <param name="worker"></param>
         /// <param name="e"></param>
+        /// <returns></returns>
         private int ExportInvoicesOverDue(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");

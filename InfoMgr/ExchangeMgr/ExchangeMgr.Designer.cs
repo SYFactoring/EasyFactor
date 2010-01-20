@@ -1,11 +1,32 @@
-﻿namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
+﻿//-----------------------------------------------------------------------
+// <copyright file="ExchangeMgr.Designer.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
 {
-    partial class ExchangeMgr
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class ExchangeMgr
     {
+        #region Fields (5)
+
         /// <summary> 
         /// Required designer variable.
         /// </summary>
+        private System.Windows.Forms.DataGridViewTextBoxColumn colExchangeRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFromCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colToCurr;
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvExchange;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -13,12 +34,15 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
+
+        #endregion Methods
 
         #region Component Designer generated code
 
@@ -96,10 +120,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvExchange;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFromCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colToCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colExchangeRate;
     }
 }

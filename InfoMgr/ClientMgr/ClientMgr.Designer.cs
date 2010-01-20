@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ClientMgrUI.Designer.cs" company="Yiming Liu@Fudan">
+// <copyright file="ClientMgr.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -11,19 +11,35 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientMgr
     {
-        #region Fields (57)
+        #region Fields (44)
 
-        private DevComponents.DotNetBar.ButtonX btnQuery;
-        private DevComponents.DotNetBar.ButtonX btnReset;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientType;
-        private DevComponents.DotNetBar.Controls.ComboTree cbDepartment;
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsContractSigned;
-        private System.Windows.Forms.ContextMenuStrip cmuClientMgr;
         /// <summary> 
         /// 必需的设计器变量。
         /// </summary>
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressENColumn;
+        private DevComponents.DotNetBar.ButtonX btnQuery;
+        private DevComponents.DotNetBar.ButtonX btnReset;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseType;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientType;
+        private DevComponents.DotNetBar.Controls.ComboTree cbDepartment;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsContractSigned;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CityCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CityENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientCoreNoColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clientEDICodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientTypeColumn;
+        private System.Windows.Forms.ContextMenuStrip cmuClientMgr;
         private System.ComponentModel.IContainer components;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContactColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvClients;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IndustryColumn;
         private DevComponents.DotNetBar.LabelX lblCount;
         private System.Windows.Forms.ToolStripMenuItem menuItemClientCreditLineNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemClientDelete;
@@ -33,7 +49,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemClientSelect;
         private System.Windows.Forms.ToolStripMenuItem menuItemClientUpdate;
         private System.Windows.Forms.ToolStripMenuItem menuItemContractNew;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PMNameColumn;
         private DevComponents.DotNetBar.PanelEx pnlQuery;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PostCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProvinceCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProvinceENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RMNameColumn;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbPM;
@@ -61,8 +82,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         #endregion Methods
-
-
 
         #region 组件设计器生成的代码
 
@@ -135,7 +154,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblCaseType = new DevComponents.DotNetBar.LabelX();
             this.cmuClientMgr.SuspendLayout();
             this.pnlQuery.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.dgvClients).BeginInit();
             this.SuspendLayout();
             // 
             // lblClientType
@@ -409,7 +428,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // lblCount
             // 
-            this.lblCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblCount.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
             this.lblCount.AutoSize = true;
             // 
             // 
@@ -504,7 +523,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.AllowUserToOrderColumns = true;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)134);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -542,14 +561,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvClients.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvClients.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvClients.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvClients.GridColor = System.Drawing.Color.FromArgb((int)((byte)208), (int)((byte)215), (int)((byte)229));
             this.dgvClients.Location = new System.Drawing.Point(0, 61);
             this.dgvClients.MultiSelect = false;
             this.dgvClients.Name = "dgvClients";
             this.dgvClients.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)134);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -737,33 +756,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cmuClientMgr.ResumeLayout(false);
             this.pnlQuery.ResumeLayout(false);
             this.pnlQuery.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.dgvClients).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clientEDICodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientCoreNoColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AddressCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AddressENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CityCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CityENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProvinceCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProvinceENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PostCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ContactColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientTypeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IndustryColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PMNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RMNameColumn;
     }
 }

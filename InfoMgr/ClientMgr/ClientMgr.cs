@@ -9,81 +9,90 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
+    using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Drawing;
 
     /// <summary>
     /// Client Management User Interface
     /// </summary>
     public partial class ClientMgr : UserControl
     {
-		#region Fields (3) 
+        #region Fields (3)
 
         /// <summary>
         /// 
         /// </summary>
-        private BindingSource bs = new BindingSource();
+        private BindingSource bs;
+
         /// <summary>
         /// flag indicates if editable
         /// </summary>
         private bool isEditable;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private OpClientMgrType opClientMgrType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
+        /// <summary>
+        /// 
+        /// </summary>
         public enum OpClientMgrType
         {
+            /// <summary>
+            /// 
+            /// </summary>
             NEED_CONTRACT,
 
+            /// <summary>
+            /// 
+            /// </summary>
             EXPORT_CLIENT,
 
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_CLIENT,
 
+            /// <summary>
+            /// 
+            /// </summary>
             DOMINATE_CLIENT
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (2) 
+        #region Constructors (2)
 
-public ClientMgr(OpClientMgrType clientMgrType)
+        /// <summary>
+        /// Initializes a new instance of the ClientMgr class
+        /// </summary>
+        /// <param name="clientMgrType"></param>
+        public ClientMgr(OpClientMgrType clientMgrType)
             : this(false)
         {
             this.opClientMgrType = clientMgrType;
-            //if (clientMgrType == OpClientMgrType.NEED_CONTRACT)
-            //{
-            //    this.cbIsContractSigned.Checked = true;
-            //    this.cbIsContractSigned.Enabled = false;
-            //}
-            //else 
-            if (clientMgrType == OpClientMgrType.DOMINATE_CLIENT)
+            if (this.opClientMgrType == OpClientMgrType.DOMINATE_CLIENT)
             {
                 this.cbCaseType.Text = "国内保理";
-                var queryResult = App.Current.DbContext.Clients.Where(c =>
-                  c.SellerCases.Any(ca => ca.TransactionType == "国内卖方保理" || ca.TransactionType == "国内买方保理") || c.BuyerCases.Any(ca => ca.TransactionType == "国内卖方保理" || ca.TransactionType == "国内买方保理"));
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                this.QueryClients(null, null);
             }
-            else if (clientMgrType == OpClientMgrType.EXPORT_CLIENT)
+            else if (this.opClientMgrType == OpClientMgrType.EXPORT_CLIENT)
             {
                 this.cbCaseType.Text = "出口保理";
-                var queryResult = App.Current.DbContext.Clients.Where(c =>
-                  c.SellerCases.Any(ca => ca.TransactionType == "出口保理") || c.BuyerCases.Any(ca => ca.TransactionType == "出口保理"));
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                this.QueryClients(null, null);
             }
-            else if (clientMgrType == OpClientMgrType.IMPORT_CLIENT)
+            else if (this.opClientMgrType == OpClientMgrType.IMPORT_CLIENT)
             {
                 this.cbCaseType.Text = "进口保理";
-                var queryResult = App.Current.DbContext.Clients.Where(c =>
-                  c.SellerCases.Any(ca => ca.TransactionType == "进口保理") || c.BuyerCases.Any(ca => ca.TransactionType == "进口保理"));
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                this.QueryClients(null, null);
             }
         }
 
@@ -94,11 +103,12 @@ public ClientMgr(OpClientMgrType clientMgrType)
         public ClientMgr(bool isEditable)
         {
             this.InitializeComponent();
+            this.bs = new BindingSource();
             this.dgvClients.AutoGenerateColumns = false;
-            this.dgvClients.DataSource = bs;
-            ControlUtil.SetDoubleBuffered(this.dgvClients);
+            this.dgvClients.DataSource = this.bs;
             this.isEditable = isEditable;
             this.UpdateEditableStatus();
+            ControlUtil.SetDoubleBuffered(this.dgvClients);
 
             List<Department> deptsList = Department.AllDepartments().ToList();
             deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
@@ -109,9 +119,9 @@ public ClientMgr(OpClientMgrType clientMgrType)
             this.cbDepartment.SelectedIndex = -1;
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets owner form
@@ -131,11 +141,11 @@ public ClientMgr(OpClientMgrType clientMgrType)
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (13) 
+        #region Methods (13)
 
-		// Private Methods (13) 
+        // Private Methods (13) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -166,53 +176,51 @@ public ClientMgr(OpClientMgrType clientMgrType)
                 return;
             }
 
-            string cid = (string)dgvClients["clientEDICodeColumn", dgvClients.SelectedRows[0].Index].Value;
-            if (cid != null)
+            Client selectedClient = (Client)this.bs.List[this.dgvClients.SelectedRows[0].Index];
+            if (MessageBox.Show("是否打算删除客户: " + selectedClient.ClientNameCN, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
-                if (selectedClient != null)
+                if (selectedClient.ClientCreditLines.Count > 0)
                 {
-                    if (MessageBox.Show("是否打算删除客户: " + selectedClient.ClientNameCN, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-                    {
-                        if (selectedClient.ClientCreditLines.Count > 0)
-                        {
-                            MessageBox.Show("不能删除此客户,已存在相关额度", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        if (selectedClient.Contracts.Count > 0)
-                        {
-                            MessageBox.Show("不能删除此客户,已存在相关保理合同", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        if (selectedClient.SellerCases.Count > 0 || selectedClient.BuyerCases.Count > 0)
-                        {
-                            MessageBox.Show("不能删除此客户,已存在相关案件信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        if (selectedClient.GroupClients.Count > 0)
-                        {
-                            MessageBox.Show("不能删除此客户,已存在相关子公司信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        if (selectedClient.ClientAccounts.Count > 0)
-                        {
-                            MessageBox.Show("不能删除此客户,已存在相关账户信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        App.Current.DbContext.Clients.DeleteOnSubmit(selectedClient);
-                        try
-                        {
-                            App.Current.DbContext.SubmitChanges();
-                        }
-                        catch (SqlException e1)
-                        {
-                            MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        dgvClients.Rows.RemoveAt(dgvClients.SelectedRows[0].Index);
-                    }
+                    MessageBox.Show("不能删除此客户,已存在相关额度", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
+
+                if (selectedClient.Contracts.Count > 0)
+                {
+                    MessageBox.Show("不能删除此客户,已存在相关保理合同", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (selectedClient.SellerCases.Count > 0 || selectedClient.BuyerCases.Count > 0)
+                {
+                    MessageBox.Show("不能删除此客户,已存在相关案件信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (selectedClient.GroupClients.Count > 0)
+                {
+                    MessageBox.Show("不能删除此客户,已存在相关子公司信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (selectedClient.ClientAccounts.Count > 0)
+                {
+                    MessageBox.Show("不能删除此客户,已存在相关账户信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                App.Current.DbContext.Clients.DeleteOnSubmit(selectedClient);
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (SqlException e1)
+                {
+                    MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                this.dgvClients.Rows.RemoveAt(dgvClients.SelectedRows[0].Index);
             }
         }
 
@@ -228,16 +236,9 @@ public ClientMgr(OpClientMgrType clientMgrType)
                 return;
             }
 
-            string cid = (string)dgvClients["clientEDICodeColumn", dgvClients.SelectedRows[0].Index].Value;
-            if (cid != null)
-            {
-                Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
-                if (selectedClient != null)
-                {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.DETAIL_CLIENT);
-                    clientDetail.ShowDialog(this);
-                }
-            }
+            Client selectedClient = (Client)this.bs.List[this.dgvClients.SelectedRows[0].Index];
+            ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.DETAIL_CLIENT);
+            clientDetail.ShowDialog(this);
         }
 
         /// <summary>
@@ -245,18 +246,10 @@ public ClientMgr(OpClientMgrType clientMgrType)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-         private void dgvClients_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void dgvClients_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                this.dgvClients.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                this.dgvClients.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                this.dgvClients.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvClients.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvClients.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvClients.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -293,16 +286,9 @@ public ClientMgr(OpClientMgrType clientMgrType)
                 return;
             }
 
-            string cid = (string)dgvClients["clientEDICodeColumn", dgvClients.SelectedRows[0].Index].Value;
-            if (cid != null)
-            {
-                Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
-                if (selectedClient != null)
-                {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE);
-                    clientDetail.ShowDialog(this);
-                }
-            }
+            Client selectedClient = (Client)this.bs.List[this.dgvClients.SelectedRows[0].Index];
+            ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE);
+            clientDetail.ShowDialog(this);
         }
 
         /// <summary>
@@ -317,17 +303,9 @@ public ClientMgr(OpClientMgrType clientMgrType)
                 return;
             }
 
-            string cid = (string)dgvClients["clientEDICodeColumn", dgvClients.SelectedRows[0].Index].Value;
-            if (cid != null)
-            {
-                Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
-                if (selectedClient != null)
-                {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpContractType.NEW_CONTRACT);
-                    clientDetail.ShowDialog(this);
-                }
-            }
-
+            Client selectedClient = (Client)this.bs.List[this.dgvClients.SelectedRows[0].Index];
+            ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpContractType.NEW_CONTRACT);
+            clientDetail.ShowDialog(this);
         }
 
         /// <summary>
@@ -337,22 +315,22 @@ public ClientMgr(OpClientMgrType clientMgrType)
         /// <param name="e">Event Args</param>
         private void QueryClients(object sender, System.EventArgs e)
         {
-            string clientType = cbClientType.Text;
+            string clientType = this.cbClientType.Text;
             if (clientType == "全部")
             {
                 clientType = string.Empty;
             }
 
-            string department = cbDepartment.Text;
+            string department = this.cbDepartment.Text;
             if (department == "全部")
             {
                 department = string.Empty;
             }
 
-            string caseType = cbCaseType.Text;
+            string caseType = this.cbCaseType.Text;
 
             var queryResult = App.Current.DbContext.Clients.Where(c =>
-                     ((c.BranchCode == null ? string.Empty : c.BranchCode).Contains(department))
+                     ((c.BranchCode == null ? string.Empty : c.Department.DepartmentName).Contains(department))
                   && ((c.PMName == null ? string.Empty : c.PMName).Contains(tbPM.Text))
                   && ((c.RMName == null ? string.Empty : c.RMName).Contains(tbRM.Text))
                   && (((c.ClientNameCN == null ? string.Empty : c.ClientNameCN).Contains(tbClientName.Text)) || ((c.ClientNameEN == null ? string.Empty : c.ClientNameEN).Contains(tbClientName.Text)))
@@ -361,8 +339,7 @@ public ClientMgr(OpClientMgrType clientMgrType)
                   && (this.cbIsContractSigned.Checked == false ? true : c.Contracts.Any(con => con.ContractStatus == ConstStr.CONTRACT.AVAILABILITY))
                   && (caseType == "出口保理" ? c.SellerCases.Any(ca => ca.TransactionType == "出口保理") || c.BuyerCases.Any(ca => ca.TransactionType == "出口保理") : true)
                   && (caseType == "进口保理" ? c.SellerCases.Any(ca => ca.TransactionType == "进口保理") || c.BuyerCases.Any(ca => ca.TransactionType == "进口保理") : true)
-                  && (caseType == "国内保理" ? c.SellerCases.Any(ca => ca.TransactionType == "国内卖方保理" || ca.TransactionType == "国内买方保理") || c.BuyerCases.Any(ca => ca.TransactionType == "国内卖方保理" || ca.TransactionType == "国内买方保理") : true)
-                  );
+                  && (caseType == "国内保理" ? c.SellerCases.Any(ca => ca.TransactionType == "国内卖方保理" || ca.TransactionType == "国内买方保理") || c.BuyerCases.Any(ca => ca.TransactionType == "国内卖方保理" || ca.TransactionType == "国内买方保理") : true));
 
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
@@ -393,19 +370,12 @@ public ClientMgr(OpClientMgrType clientMgrType)
                 return;
             }
 
-            string cid = (string)dgvClients["clientEDICodeColumn", dgvClients.SelectedRows[0].Index].Value;
-            if (cid != null)
+            Client selectedClient = (Client)this.bs.List[this.dgvClients.SelectedRows[0].Index];
+            this.Selected = selectedClient;
+            if (this.OwnerForm != null)
             {
-                Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
-                if (selectedClient != null)
-                {
-                    this.Selected = selectedClient;
-                    if (this.OwnerForm != null)
-                    {
-                        this.OwnerForm.DialogResult = DialogResult.Yes;
-                        this.OwnerForm.Close();
-                    }
-                }
+                this.OwnerForm.DialogResult = DialogResult.Yes;
+                this.OwnerForm.Close();
             }
         }
 
@@ -421,16 +391,9 @@ public ClientMgr(OpClientMgrType clientMgrType)
                 return;
             }
 
-            string cid = (string)dgvClients["clientEDICodeColumn", dgvClients.SelectedRows[0].Index].Value;
-            if (cid != null)
-            {
-                Client selectedClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == cid);
-                if (selectedClient != null)
-                {
-                    ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.UPDATE_CLIENT);
-                    clientDetail.ShowDialog(this);
-                }
-            }
+            Client selectedClient = (Client)this.bs.List[this.dgvClients.SelectedRows[0].Index];
+            ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.UPDATE_CLIENT);
+            clientDetail.ShowDialog(this);
         }
 
         /// <summary>
@@ -458,6 +421,6 @@ public ClientMgr(OpClientMgrType clientMgrType)
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

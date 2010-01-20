@@ -1,35 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//-----------------------------------------------------------------------
+// <copyright file="CDA.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.DB.dbml
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class CDA : BaseObject
     {
-        #region Properties (11)
-
-        /// <summary>
-        /// 转让余额
-        /// </summary>
-        public double GetAssignOutstanding(string currency)
-        {
-            double total = 0;
-            foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
-            {
-                foreach (Invoice invoice in assignBatch.Invoices)
-                {
-                    total += invoice.AssignOutstanding;
-                }
-            }
-            if (this.Case.InvoiceCurrency != currency)
-            {
-                double exchange = Exchange.GetExchangeRate(this.Case.InvoiceCurrency, currency);
-                total *= exchange;
-            }
-            return total;
-        }
-
+        #region Properties (7)
 
         ///// <summary>
         ///// 转让总额
@@ -59,7 +46,7 @@ namespace CMBC.EasyFactor.DB.dbml
         //}
 
         /// <summary>
-        /// 
+        /// Gets
         /// </summary>
         public string BuyerName
         {
@@ -77,7 +64,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 关联额度中的买方信用风险担保额度余额
+        /// Gets 关联额度中的买方信用风险担保额度余额
         /// </summary>
         public System.Nullable<double> CreditCoverOutstanding
         {
@@ -87,25 +74,14 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     return null;
                 }
+
                 return this.CreditCover - this.GetAssignOutstanding(this.CreditCoverCurr);
             }
         }
 
         /// <summary>
-        /// 关联额度中预付款融资额度余额
+        /// Gets
         /// </summary>
-        public System.Nullable<double> FinanceLineOutstanding
-        {
-            get
-            {
-                if (!this.FinanceLine.HasValue)
-                {
-                    return null;
-                }
-                return this.FinanceLine - this.GetFinanceOutstanding(this.FinanceLineCurr);
-            }
-        }
-
         public string FactorName
         {
             get
@@ -135,32 +111,19 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 融资余额
+        /// Gets 关联额度中预付款融资额度余额
         /// </summary>
-        public System.Nullable<double> GetFinanceOutstanding(string currency)
+        public System.Nullable<double> FinanceLineOutstanding
         {
-            double? total = null;
-            foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
+            get
             {
-                foreach (Invoice invoice in assignBatch.Invoices)
+                if (!this.FinanceLine.HasValue)
                 {
-                    if (invoice.FinanceOutstanding.HasValue)
-                    {
-                        if (total == null)
-                        {
-                            total = 0;
-                        }
-                        double financeOutstanding = invoice.FinanceOutstanding.Value;
-                        if (invoice.InvoiceFinanceBatch.BatchCurrency != currency)
-                        {
-                            double exchange = Exchange.GetExchangeRate(invoice.InvoiceFinanceBatch.BatchCurrency, currency);
-                            financeOutstanding *= exchange;
-                        }
-                        total += financeOutstanding;
-                    }
+                    return null;
                 }
+
+                return this.FinanceLine - this.GetFinanceOutstanding(this.FinanceLineCurr);
             }
-            return total;
         }
 
         ///// <summary>
@@ -190,6 +153,9 @@ namespace CMBC.EasyFactor.DB.dbml
         //    }
         //}
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string InvoiceCurrency
         {
             get
@@ -205,6 +171,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string SellerName
         {
             get
@@ -220,6 +189,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string TransactionType
         {
             get
@@ -237,9 +209,9 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Properties
 
-        #region Methods (1)
+        #region Methods (3)
 
-        // Public Methods (1) 
+        // Public Methods (3) 
 
         /// <summary>
         /// 
@@ -252,6 +224,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 return string.Empty;
             }
+
             Contract contract = selectedCase.SellerClient.Contract;
             if (contract != null)
             {
@@ -281,6 +254,65 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 return string.Empty;
             }
+        }
+
+        /// <summary>
+        /// 转让余额
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public double GetAssignOutstanding(string currency)
+        {
+            double total = 0;
+            foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
+            {
+                foreach (Invoice invoice in assignBatch.Invoices)
+                {
+                    total += invoice.AssignOutstanding;
+                }
+            }
+
+            if (this.Case.InvoiceCurrency != currency)
+            {
+                double exchange = Exchange.GetExchangeRate(this.Case.InvoiceCurrency, currency);
+                total *= exchange;
+            }
+
+            return total;
+        }
+
+        /// <summary>
+        /// 融资余额
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public System.Nullable<double> GetFinanceOutstanding(string currency)
+        {
+            double? total = null;
+            foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
+            {
+                foreach (Invoice invoice in assignBatch.Invoices)
+                {
+                    if (invoice.FinanceOutstanding.HasValue)
+                    {
+                        if (total == null)
+                        {
+                            total = 0;
+                        }
+
+                        double financeOutstanding = invoice.FinanceOutstanding.Value;
+                        if (invoice.InvoiceFinanceBatch.BatchCurrency != currency)
+                        {
+                            double exchange = Exchange.GetExchangeRate(invoice.InvoiceFinanceBatch.BatchCurrency, currency);
+                            financeOutstanding *= exchange;
+                        }
+
+                        total += financeOutstanding;
+                    }
+                }
+            }
+
+            return total;
         }
 
         #endregion Methods

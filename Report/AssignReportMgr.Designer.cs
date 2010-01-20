@@ -1,17 +1,37 @@
-﻿namespace CMBC.EasyFactor.Report
-{
-    partial class AssignReportMgr
-    {
-        #region Fields (32)
+﻿//-----------------------------------------------------------------------
+// <copyright file="AssignReportMgr.Designer.cs" company="CISL@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
+namespace CMBC.EasyFactor.Report
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class AssignReportMgr
+    {
+        #region Fields (35)
+
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
         private DevComponents.DotNetBar.ButtonX btnAssignQuery;
         private DevComponents.DotNetBar.ButtonX btnAssignReport;
         private DevComponents.DotNetBar.ButtonX btnQueryReset;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsFlaw;
         private System.Windows.Forms.ContextMenuStrip cmuInvoiceMgr;
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignBatchNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsFlaw;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoices;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput diAssignDateBegin;
@@ -23,11 +43,14 @@
         private DevComponents.DotNetBar.LabelX lblSeller;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemExportAll;
+        private System.Windows.Forms.ToolStripMenuItem menuItemExportSelected;
         private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbBuyer;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFactor;
         private DevComponents.DotNetBar.Controls.TextBoxX tbSeller;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
         #endregion Fields
 
@@ -41,16 +64,15 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
         #endregion Methods
-
-
 
         #region Component Designer generated code
 
@@ -428,7 +450,7 @@
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvInvoices.Size = new System.Drawing.Size(673, 303);
             this.dgvInvoices.TabIndex = 2;
-            this.dgvInvoices.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvInvoiceAssignBatch_CellFormatting);
+            this.dgvInvoices.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvInvoices_CellFormatting);
             // 
             // colSellerName
             // 
@@ -589,21 +611,5 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignBatchNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsFlaw;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem menuItemExportSelected;
-        private System.Windows.Forms.ToolStripMenuItem menuItemExportAll;
-
     }
 }

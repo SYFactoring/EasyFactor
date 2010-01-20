@@ -7,36 +7,40 @@
 namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 {
     using System;
+    using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Drawing;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class DepartmentMgr : UserControl
     {
-		#region Constructors (1) 
+        #region Constructors (1)
+
+        private BindingSource bs;
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the DepartmentMgr class
         /// </summary>
         /// <param name="isEditable"></param>
         public DepartmentMgr(bool isEditable)
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.bs = new BindingSource();
+            this.dgvDepts.DataSource = this.bs;
             this.dgvDepts.AutoGenerateColumns = false;
             ControlUtil.SetDoubleBuffered(this.dgvDepts);
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
-        /// 
+        /// Gets or sets Owner Form
         /// </summary>
         public Form OwnerForm
         {
@@ -45,7 +49,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets Selected Department
         /// </summary>
         public Department Selected
         {
@@ -53,11 +57,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (6) 
+        #region Methods (7)
 
-		// Private Methods (6) 
+        // Private Methods (7) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -88,16 +92,20 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 return;
             }
 
-            string did = (string)dgvDepts["departmentCodeColumn", dgvDepts.SelectedRows[0].Index].Value;
-            if (did != null)
-            {
-                Department selectedDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentCode == did);
-                if (selectedDepartment != null)
-                {
-                    DepartmentDetail detail = new DepartmentDetail(selectedDepartment, DepartmentDetail.OpDepartmentType.DETAIL_DEPARTMENT);
-                    detail.ShowDialog(this);
-                }
-            }
+            Department selectedDepartment = (Department)this.bs.List[this.dgvDepts.SelectedRows[0].Index];
+            DepartmentDetail detail = new DepartmentDetail(selectedDepartment, DepartmentDetail.OpDepartmentType.DETAIL_DEPARTMENT);
+            detail.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvDepts_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvDepts.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvDepts.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvDepts.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -126,6 +134,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Reset(object sender, EventArgs e)
         {
             this.tbDepartmentCode.Text = string.Empty;
@@ -144,36 +157,15 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 return;
             }
 
-            string did = (string)dgvDepts["departmentCodeColumn", dgvDepts.SelectedRows[0].Index].Value;
-            if (did != null)
+            Department selectedDepartment = (Department)this.bs.List[this.dgvDepts.SelectedRows[0].Index];
+            this.Selected = selectedDepartment;
+            if (this.OwnerForm != null)
             {
-                Department selectedDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentCode == did);
-                if (selectedDepartment != null)
-                {
-                    this.Selected = selectedDepartment;
-                    if (this.OwnerForm != null)
-                    {
-                        this.OwnerForm.DialogResult = DialogResult.Yes;
-                        this.OwnerForm.Close();
-                    }
-                }
+                this.OwnerForm.DialogResult = DialogResult.Yes;
+                this.OwnerForm.Close();
             }
         }
 
-		#endregion Methods 
-
-        private void dgvDepts_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                 e.RowBounds.Location.Y,
-                 this.dgvDepts.RowHeadersWidth - 4,
-                 e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                this.dgvDepts.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                this.dgvDepts.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
-        }
+        #endregion Methods
     }
 }

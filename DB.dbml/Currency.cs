@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Currency.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.DB.dbml
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     /// <summary>
     /// 
     /// </summary>
@@ -17,17 +23,12 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         private static readonly List<Currency> _currencyList;
 
-        public static Currency CNY
-        {
-            get;
-            private set;
-        }
         #endregion Fields
 
         #region Constructors (1)
 
         /// <summary>
-        /// 
+        /// Initializes static members of the Currency class
         /// </summary>
         static Currency()
         {
@@ -37,10 +38,19 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Constructors
 
-        #region Properties (1)
+        #region Properties (2)
 
         /// <summary>
-        /// 
+        /// Gets
+        /// </summary>
+        public static Currency CNY
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets
         /// </summary>
         public string CurrencyFormat
         {
@@ -67,5 +77,4 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Methods
     }
-
 }

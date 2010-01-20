@@ -1,4 +1,9 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="QueryForm.Designer.cs" company="CISL@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
 namespace CMBC.EasyFactor.Utils
 {
     /// <summary>
@@ -6,10 +11,19 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class QueryForm
     {
+        #region Fields (2)
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.PanelEx panelRoot;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -24,6 +38,8 @@ namespace CMBC.EasyFactor.Utils
 
             base.Dispose(disposing);
         }
+
+        #endregion Methods
 
         #region Windows Form Designer generated code
 
@@ -69,7 +85,5 @@ namespace CMBC.EasyFactor.Utils
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.PanelEx panelRoot;
     }
 }

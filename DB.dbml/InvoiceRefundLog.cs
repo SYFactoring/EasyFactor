@@ -1,13 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.Linq;
+﻿//-----------------------------------------------------------------------
+// <copyright file="InvoiceRefundLog.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.DB.dbml
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Data.Linq;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class InvoiceRefundLog
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public double AssignAmount
         {
             get
@@ -15,6 +27,10 @@ namespace CMBC.EasyFactor.DB.dbml
                 return Invoice.AssignAmount;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public double AssignOutstanding
         {
             get
@@ -22,6 +38,10 @@ namespace CMBC.EasyFactor.DB.dbml
                 return Invoice.AssignOutstanding;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime AssignDate
         {
             get
@@ -29,6 +49,10 @@ namespace CMBC.EasyFactor.DB.dbml
                 return Invoice.AssignDate;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime DueDate
         {
             get
@@ -36,6 +60,10 @@ namespace CMBC.EasyFactor.DB.dbml
                 return Invoice.DueDate;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public double? FinanceAmount
         {
             get
@@ -43,6 +71,10 @@ namespace CMBC.EasyFactor.DB.dbml
                 return this.Invoice.FinanceAmount;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime? FinanceDate
         {
             get
@@ -50,6 +82,10 @@ namespace CMBC.EasyFactor.DB.dbml
                 return this.Invoice.FinanceDate;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime? FinanceDueDate
         {
             get
@@ -57,6 +93,10 @@ namespace CMBC.EasyFactor.DB.dbml
                 return this.Invoice.FinanceDueDate;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public double? FinanceOutstanding
         {
             get

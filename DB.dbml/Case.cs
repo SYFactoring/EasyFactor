@@ -1,20 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Case.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.DB.dbml
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class Case : BaseObject
     {
-		#region Fields (1) 
+        #region Fields (1)
 
+        /// <summary>
+        /// 
+        /// </summary>
         private static readonly List<string> allTransTypes;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
+        /// <summary>
+        /// Initializes static members of the Case class
+        /// </summary>
         static Case()
         {
             allTransTypes = new List<string>();
@@ -27,17 +42,21 @@ namespace CMBC.EasyFactor.DB.dbml
             allTransTypes.Add("租赁保理");
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (1) 
+        #region Methods (1)
 
-		// Public Methods (1) 
+        // Public Methods (1) 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static List<string> ConstantTransTypes()
         {
             return allTransTypes;
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

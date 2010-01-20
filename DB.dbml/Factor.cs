@@ -1,15 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CMBC.EasyFactor.Utils;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Factor.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.DB.dbml
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using CMBC.EasyFactor.Utils;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class Factor : BaseObject
     {
         #region Fields (2)
 
+        /// <summary>
+        /// 
+        /// </summary>
         private Dictionary<string, string> _dict;
         /// <summary>
         /// 
@@ -33,7 +45,6 @@ namespace CMBC.EasyFactor.DB.dbml
         //        return sb.ToString();
         //    }
         //}
-
         //public string DueDate
         //{
         //    get
@@ -47,7 +58,6 @@ namespace CMBC.EasyFactor.DB.dbml
         //        return sb.ToString();
         //    }
         //}
-
         //public string CreditLineOutstanding
         //{
         //    get
@@ -61,7 +71,6 @@ namespace CMBC.EasyFactor.DB.dbml
         //        return sb.ToString();
         //    }
         //}
-
         public FactorCreditLine CreditLine
         {
             get
@@ -71,7 +80,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 
+        /// Gets
         /// </summary>
         public double CreditLineOutstanding
         {
@@ -87,27 +96,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="currency"></param>
-        /// <returns></returns>
-        public double GetAssignOutstanding(string currency)
-        {
-            double result = 0;
-            foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
-            {
-                foreach (CDA cda in curCase.CDAs.Where(c => c.CDAStatus == ConstStr.CDA.SIGNED))
-                {
-                    double cdaAssignOutstanding = cda.GetAssignOutstanding(currency);
-                    result += cdaAssignOutstanding;
-                }
-            }
-            return result;
-        }
-
-
-        /// <summary>
-        /// 
+        /// Gets
         /// </summary>
         public string GroupNameCN
         {
@@ -125,7 +114,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 
+        /// Gets
         /// </summary>
         public string GroupNameEN
         {
@@ -144,10 +133,13 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Properties
 
-        #region Methods (5)
+        #region Methods (6)
 
-        // Public Methods (4) 
+        // Public Methods (5) 
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void BeginMonitor()
         {
             _dict = new Dictionary<string, string>();
@@ -155,6 +147,10 @@ namespace CMBC.EasyFactor.DB.dbml
             this.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(Factor_PropertyChanged);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string EndMonitor()
         {
             if (_dict != null)
@@ -186,6 +182,25 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public double GetAssignOutstanding(string currency)
+        {
+            double result = 0;
+            foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
+            {
+                foreach (CDA cda in curCase.CDAs.Where(c => c.CDAStatus == ConstStr.CDA.SIGNED))
+                {
+                    double cdaAssignOutstanding = cda.GetAssignOutstanding(currency);
+                    result += cdaAssignOutstanding;
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
@@ -200,12 +215,15 @@ namespace CMBC.EasyFactor.DB.dbml
         }
         // Private Methods (1) 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void Factor_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             _dict[e.PropertyName] = String.Format("{0} : {1}\n", e.PropertyName, this.GetType().GetProperty(e.PropertyName).GetValue(this, null));
         }
-
-
 
         #endregion Methods
     }

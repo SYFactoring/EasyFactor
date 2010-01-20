@@ -1,31 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using CMBC.EasyFactor.Utils;
-using CMBC.EasyFactor.DB.dbml;
+﻿//-----------------------------------------------------------------------
+// <copyright file="ClientCreditLineMgr.cs" company="CISL@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
+    using System;
+    using System.Drawing;
+    using System.Linq;
+    using System.Windows.Forms;
+    using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class ClientCreditLineMgr : UserControl
     {
         #region Fields (2)
 
+        /// <summary>
+        /// 
+        /// </summary>
         private BindingSource bs;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private OpClientCreditMgrType opType;
 
         #endregion Fields
 
         #region Enums (1)
 
+        /// <summary>
+        /// 
+        /// </summary>
         public enum OpClientCreditMgrType
         {
+            /// <summary>
+            /// 
+            /// </summary>
             QUERY_CLINET,
 
+            /// <summary>
+            /// 
+            /// </summary>
             QUERY_GROUP,
         }
 
@@ -34,7 +55,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         #region Constructors (2)
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the ClientCreditLineMgr class.
         /// </summary>
         /// <param name="groupClient"></param>
         public ClientCreditLineMgr(Client groupClient)
@@ -45,21 +66,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the ClientCreditLineMgr class.
         /// </summary>
         /// <param name="opType"></param>
         public ClientCreditLineMgr(OpClientCreditMgrType opType)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.bs = new BindingSource();
             this.opType = opType;
-            this.dgvClientCreditLines.DataSource = bs;
+            this.dgvClientCreditLines.DataSource = this.bs;
             this.dgvClientCreditLines.AutoGenerateColumns = false;
             ControlUtil.SetDoubleBuffered(this.dgvClientCreditLines);
 
             if (opType == OpClientCreditMgrType.QUERY_GROUP)
             {
-                lblClientName.Text = "集团名称";
+                this.lblClientName.Text = "集团名称";
                 this.colClientNameCN.HeaderText = "集团客户名称（中）";
                 this.colClientNameEN.HeaderText = "集团客户名称（英）";
                 this.cbClientGroupType.Text = "集团";
@@ -126,6 +147,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 return;
             }
+
             ClientCreditLine creditLine = (ClientCreditLine)this.bs.List[this.dgvClientCreditLines.CurrentCell.RowIndex];
             ClientDetail detail = new ClientDetail(creditLine, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE);
             detail.ShowDialog(this);
@@ -155,16 +177,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void dgvClientCreditLines_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                this.dgvClientCreditLines.RowHeadersWidth - 4,
-                e.RowBounds.Height);
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvClientCreditLines.RowHeadersWidth - 4, e.RowBounds.Height);
 
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                this.dgvClientCreditLines.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                this.dgvClientCreditLines.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvClientCreditLines.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvClientCreditLines.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -174,9 +189,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void Query(object sender, EventArgs e)
         {
-            string clientEDICode = tbClientEDICode.Text;
-            string clientName = tbClientName.Text;
-            string clientGroupType = cbClientGroupType.Text;
+            string clientEDICode = this.tbClientEDICode.Text;
+            string clientName = this.tbClientName.Text;
+            string clientGroupType = this.cbClientGroupType.Text;
             bool isGroup = false;
             if (clientGroupType == "集团")
             {
@@ -186,8 +201,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             var queryResult = App.Current.DbContext.ClientCreditLines.Where(c =>
                 c.Client.ClientEDICode.Contains(clientEDICode)
              && (c.Client.ClientNameCN.Contains(clientName) || c.Client.ClientNameEN.Contains(clientName))
-             && (isGroup == true ? c.Client.GroupClients.Count > 0 : true)
-                 );
+             && (isGroup == true ? c.Client.GroupClients.Count > 0 : true));
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }

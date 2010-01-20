@@ -1,52 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//-----------------------------------------------------------------------
+// <copyright file="CreditCoverNegotiation.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.DB.dbml
 {
-    public partial class CreditCoverNegotiation
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class CreditCoverNegotiation : BaseObject
     {
-        public string SellerName
-        {
-            get
-            {
-                return this.Case.SellerClient.ToString();
-            }
-        }
+        #region Properties (9)
 
-        public string BuyerName
-        {
-            get
-            {
-                return this.Case.BuyerClient.ToString();
-            }
-        }
-
-        public string SellerFactorName
-        {
-            get
-            {
-                return this.Case.SellerFactor.ToString();
-            }
-        }
-
-        public string BuyerFactorName
-        {
-            get
-            {
-                return this.Case.BuyerFactor.ToString();
-            }
-        }
-
-        public string TransactionType
-        {
-            get
-            {
-                return this.Case.TransactionType;
-            }
-        }
-
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string BuyerCountry
         {
             get
@@ -55,6 +29,31 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public string BuyerFactorName
+        {
+            get
+            {
+                return this.Case.BuyerFactor.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public string BuyerName
+        {
+            get
+            {
+                return this.Case.BuyerClient.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string CaseCurrency
         {
             get
@@ -63,6 +62,20 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public string ManagerName
+        {
+            get
+            {
+                return this.Case.ManagerName;
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string OwnerDept
         {
             get
@@ -71,12 +84,39 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public string ManagerName
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public string SellerFactorName
         {
             get
             {
-                return this.Case.ManagerName;
+                return this.Case.SellerFactor.ToString();
             }
         }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public string SellerName
+        {
+            get
+            {
+                return this.Case.SellerClient.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public string TransactionType
+        {
+            get
+            {
+                return this.Case.TransactionType;
+            }
+        }
+
+        #endregion Properties
     }
 }

@@ -13,11 +13,11 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.Help.About;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.DepartmentMgr;
+    using CMBC.EasyFactor.InfoMgr.ExchangeMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.Report;
     using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.InfoMgr.ExchangeMgr;
 
     /// <summary>
     /// Main Window Form
@@ -31,7 +31,7 @@ namespace CMBC.EasyFactor
         /// </summary>
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
 
             this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
@@ -71,6 +71,11 @@ namespace CMBC.EasyFactor
 
         // Private Methods (57) 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void About(object sender, EventArgs e)
         {
             AboutBox aboutBox = new AboutBox();
@@ -95,7 +100,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ChangeStyle(object sender, EventArgs e)
         {
-            string style = cbStyleManager.Text;
+            string style = this.cbStyleManager.Text;
             if ("Office2007Blue".Equals(style))
             {
                 this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue;
@@ -207,6 +212,11 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(invoiceMgr);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Exit(object sender, EventArgs e)
         {
             Application.Exit();
@@ -274,7 +284,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportClientCreditLine(object sender, EventArgs e)
         {
-            if (ValidateRole())
+            if (this.ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_CREDITLINE);
                 importForm.Show();
@@ -288,7 +298,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportClients(object sender, EventArgs e)
         {
-            if (ValidateRole())
+            if (this.ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS);
                 importForm.Show();
@@ -302,7 +312,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportContractAndCDA(object sender, EventArgs e)
         {
-            if (ValidateRole())
+            if (this.ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CONTRACT_CDA);
                 importForm.Show();
@@ -316,7 +326,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportDepartments(object sender, EventArgs e)
         {
-            if (ValidateRole())
+            if (this.ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_DEPARTMENTS);
                 importForm.Show();
@@ -330,7 +340,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportFactorCreditLine(object sender, EventArgs e)
         {
-            if (ValidateRole())
+            if (this.ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS_CREDITLINE);
                 importForm.Show();
@@ -344,7 +354,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportFactors(object sender, EventArgs e)
         {
-            if (ValidateRole())
+            if (this.ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS);
                 importForm.Show();
@@ -369,7 +379,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportUsers(object sender, EventArgs e)
         {
-            if (ValidateRole())
+            if (this.ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_USERS);
                 importForm.Show();
@@ -462,7 +472,7 @@ namespace CMBC.EasyFactor
         {
             this.ClearDetailPanel();
             this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
-            ribbonDetailPanel.Controls.Add(logoLabel);
+            this.ribbonDetailPanel.Controls.Add(this.logoLabel);
         }
 
         /// <summary>
@@ -575,8 +585,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryCDA(object sender, EventArgs e)
         {
-            CDAMgr CDAMgr = new CDAMgr(CDAMgr.OpCDAType.QUERY);
-            this.SetDetailPanel(CDAMgr);
+            CDAMgr mgr = new CDAMgr(CDAMgr.OpCDAType.QUERY);
+            this.SetDetailPanel(mgr);
         }
 
         /// <summary>

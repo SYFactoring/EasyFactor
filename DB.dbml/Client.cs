@@ -1,21 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CMBC.EasyFactor.ARMgr;
-using CMBC.EasyFactor.Utils;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Client.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.DB.dbml
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using CMBC.EasyFactor.ARMgr;
+    using CMBC.EasyFactor.Utils;
+
     /// <summary>
     /// 
     /// </summary>
     public partial class Client : BaseObject
     {
-		#region Properties (7) 
+        #region Properties (7)
 
         /// <summary>
-        /// 买方信用风险担保额度
+        /// Gets 买方信用风险担保额度
         /// </summary>
         public ClientCreditLine AssignCreditLine
         {
@@ -26,18 +32,19 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         ///<summary>
-        ///买方信用风险担保额度余额
+        /// Gets 买方信用风险担保额度余额
         ///</summary>
         public System.Nullable<double> AssignCreditLineOutstanding
         {
             get
             {
-                ClientCreditLine creditLine = AssignCreditLine;
+                ClientCreditLine creditLine = this.AssignCreditLine;
                 if (creditLine == null)
                 {
                     return null;
                 }
-                return creditLine.CreditLine - GetAssignOutstanding(creditLine.CreditLineCurrency);
+
+                return creditLine.CreditLine - this.GetAssignOutstanding(creditLine.CreditLineCurrency);
             }
         }
 
@@ -64,8 +71,9 @@ namespace CMBC.EasyFactor.DB.dbml
         //        return total;
         //    }
         //}
+
         /// <summary>
-        /// 主合同
+        /// Gets 主合同
         /// </summary>
         public Contract Contract
         {
@@ -76,7 +84,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 保理预付款融资额度
+        /// Gets 保理预付款融资额度
         /// </summary>
         public ClientCreditLine FinanceCreditLine
         {
@@ -87,62 +95,67 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 最高保理预付款融资额度余额
+        /// Gets 最高保理预付款融资额度余额
         /// </summary>
         public System.Nullable<double> FinanceLineOutstanding
         {
             get
             {
-                ClientCreditLine creditLine = FinanceCreditLine;
+                ClientCreditLine creditLine = this.FinanceCreditLine;
                 if (creditLine == null)
                 {
                     return null;
                 }
-                return creditLine.CreditLine - GetFinanceOutstanding(creditLine.CreditLineCurrency);
+
+                return creditLine.CreditLine - this.GetFinanceOutstanding(creditLine.CreditLineCurrency);
             }
         }
 
         /// <summary>
-        /// 
+        /// Gets
         /// </summary>
         public ClientCreditLine GroupAssignCreditLine
         {
             get
             {
-                ClientCreditLine creditLine = AssignCreditLine;
+                ClientCreditLine creditLine = this.AssignCreditLine;
                 if (creditLine != null)
                 {
                     return creditLine.GroupCreditLine;
                 }
+
                 return null;
             }
         }
 
         /// <summary>
-        /// 
+        /// Gets
         /// </summary>
         public ClientCreditLine GroupFinanceCreditLine
         {
             get
             {
-                ClientCreditLine creditLine = FinanceCreditLine;
+                ClientCreditLine creditLine = this.FinanceCreditLine;
                 if (creditLine != null)
                 {
                     return creditLine.GroupCreditLine;
                 }
+
                 return null;
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (3) 
+        #region Methods (3)
 
-		// Public Methods (3) 
+        // Public Methods (3) 
 
         /// <summary>
         /// 转让余额
         /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
         public double GetAssignOutstanding(string currency)
         {
             double result = 0;
@@ -154,12 +167,15 @@ namespace CMBC.EasyFactor.DB.dbml
                     result += cdaAssignOutstanding;
                 }
             }
+
             return result;
         }
 
         /// <summary>
         /// 融资余额
         /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
         public System.Nullable<double> GetFinanceOutstanding(string currency)
         {
             double? total = null;
@@ -174,10 +190,12 @@ namespace CMBC.EasyFactor.DB.dbml
                         {
                             total = 0;
                         }
+
                         total += financeOutstanding.Value;
                     }
                 }
             }
+
             return total;
         }
 
@@ -207,6 +225,7 @@ namespace CMBC.EasyFactor.DB.dbml
         //        return total;
         //    }
         //}
+
         /// <summary>
         /// 
         /// </summary>
@@ -222,8 +241,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 return _ClientNameEN;
             }
         }
-
-		#endregion Methods 
+        #endregion Methods
     }
-
 }

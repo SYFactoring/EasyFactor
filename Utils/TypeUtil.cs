@@ -12,46 +12,14 @@ namespace CMBC.EasyFactor.Utils
     using System.Text;
     using System.Windows.Forms;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class TypeUtil
     {
-        #region Methods (2)
+        #region Methods (7)
 
-        // Public Methods (2) 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public static void FormatFloatToPercent(object sender, ConvertEventArgs e)
-        {
-            if (e.DesiredType == typeof(string) && e.Value != null && e.Value.ToString() != string.Empty)
-            {
-                double result;
-                bool isOK = Double.TryParse(e.Value.ToString(), out result);
-                if (isOK)
-                {
-                    e.Value = result * 100 + "%";
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public static void ParsePercentToFloat(object sender, ConvertEventArgs e)
-        {
-            if (e.DesiredType == typeof(System.Nullable<double>) && e.Value != null && e.Value.ToString() != string.Empty)
-            {
-                double result;
-                bool isOK = Double.TryParse(e.Value.ToString(), out result);
-                if (isOK)
-                {
-                    e.Value = result / 100;
-                }
-            }
-        }
+        // Public Methods (7) 
 
         /// <summary>
         /// 
@@ -64,10 +32,12 @@ namespace CMBC.EasyFactor.Utils
             {
                 return string.Empty;
             }
+
             if (!obj.HasValue)
             {
                 return string.Empty;
             }
+
             if (obj.Value == true)
             {
                 return "Y";
@@ -93,11 +63,13 @@ namespace CMBC.EasyFactor.Utils
             {
                 return false;
             }
+
             string str = String.Format("{0:G}", obj);
             if (string.Empty.Equals(str))
             {
                 return false;
             }
+
             if ("Y".Equals(str))
             {
                 return true;
@@ -123,7 +95,26 @@ namespace CMBC.EasyFactor.Utils
             {
                 return false;
             }
-            return (Math.Abs(double1.Value) <= 0.0000001);
+
+            return Math.Abs(double1.Value) <= 0.0000001;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public static void FormatFloatToPercent(object sender, ConvertEventArgs e)
+        {
+            if (e.DesiredType == typeof(string) && e.Value != null && e.Value.ToString() != string.Empty)
+            {
+                double result;
+                bool isOK = Double.TryParse(e.Value.ToString(), out result);
+                if (isOK)
+                {
+                    e.Value = (result * 100) + "%";
+                }
+            }
         }
 
         /// <summary>
@@ -137,7 +128,8 @@ namespace CMBC.EasyFactor.Utils
             {
                 return false;
             }
-            return (double1 >= 0.0000001);
+
+            return double1 >= 0.0000001;
         }
 
         /// <summary>
@@ -151,8 +143,28 @@ namespace CMBC.EasyFactor.Utils
             {
                 return false;
             }
-            return (double1 <= -0.0000001);
+
+            return double1 <= -0.0000001;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public static void ParsePercentToFloat(object sender, ConvertEventArgs e)
+        {
+            if (e.DesiredType == typeof(System.Nullable<double>) && e.Value != null && e.Value.ToString() != string.Empty)
+            {
+                double result;
+                bool isOK = Double.TryParse(e.Value.ToString(), out result);
+                if (isOK)
+                {
+                    e.Value = result / 100;
+                }
+            }
+        }
+
         #endregion Methods
     }
 }

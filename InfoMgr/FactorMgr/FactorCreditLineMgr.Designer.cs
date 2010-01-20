@@ -1,11 +1,43 @@
-﻿namespace CMBC.EasyFactor.InfoMgr.FactorMgr
+﻿//-----------------------------------------------------------------------
+// <copyright file="FactorCreditLineMgr.Designer.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
-    partial class FactorCreditLineMgr
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class FactorCreditLineMgr
     {
+        #region Fields (16)
+
         /// <summary> 
         /// Required designer variable.
         /// </summary>
+        private DevComponents.DotNetBar.ButtonX btnQuery;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFactorCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFactorType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvFactorCreditLines;
+        private DevComponents.DotNetBar.LabelX lblFactorCode;
+        private DevComponents.DotNetBar.LabelX lblFactorName;
+        private DevComponents.DotNetBar.PanelEx panelQuery;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorCode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -13,12 +45,15 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
+
+        #endregion Methods
 
         #region Component Designer generated code
 
@@ -249,25 +284,8 @@
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvFactorCreditLines;
-        private DevComponents.DotNetBar.PanelEx panelQuery;
-        private DevComponents.DotNetBar.ButtonX btnQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
-        private DevComponents.DotNetBar.LabelX lblFactorName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorCode;
-        private DevComponents.DotNetBar.LabelX lblFactorCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFactorCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFactorType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
     }
 }

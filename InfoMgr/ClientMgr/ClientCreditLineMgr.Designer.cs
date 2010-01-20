@@ -1,11 +1,46 @@
-﻿namespace CMBC.EasyFactor.InfoMgr.ClientMgr
+﻿//-----------------------------------------------------------------------
+// <copyright file="ClientCreditLineMgr.Designer.cs" company="CISL@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
-    partial class ClientCreditLineMgr
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class ClientCreditLineMgr
     {
+        #region Fields (19)
+
         /// <summary> 
         /// Required designer variable.
         /// </summary>
+        private DevComponents.DotNetBar.ButtonX btnQuery;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientGroupType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameCN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameEN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvClientCreditLines;
+        private DevComponents.DotNetBar.LabelX lblClientEDICode;
+        private DevComponents.DotNetBar.LabelX lblClientName;
+        private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.PanelEx panelQuery;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -13,12 +48,15 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
+
+        #endregion Methods
 
         #region Component Designer generated code
 
@@ -292,24 +330,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.PanelEx panelQuery;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvClientCreditLines;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
-        private DevComponents.DotNetBar.LabelX lblClientEDICode;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
-        private DevComponents.DotNetBar.LabelX lblClientName;
-        private DevComponents.DotNetBar.ButtonX btnQuery;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientGroupType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameCN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameEN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
-        private DevComponents.DotNetBar.LabelX lblCount;
     }
 }

@@ -92,9 +92,13 @@ namespace CMBC.EasyFactor.Utils
 
         #region Constructors (1)
 
+        /// <summary>
+        /// Initializes a new instance of the ImportForm class.
+        /// </summary>
+        /// <param name="importType"></param>
         public ImportForm(ImportType importType)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.importType = importType;
             switch (importType)
             {
@@ -137,10 +141,13 @@ namespace CMBC.EasyFactor.Utils
 
         #region Properties (1)
 
+        /// <summary>
+        /// Gets or sets Imported List
+        /// </summary>
         public IList ImportedList
         {
-            set;
             get;
+            set;
         }
 
         #endregion Properties
@@ -260,7 +267,7 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private object[,] GetValueArray(string fileName, int sheetIndex)
         {
-            ReleaseResource();
+            this.ReleaseResource();
 
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             this.app = new ApplicationClass() { Visible = false };
@@ -270,25 +277,23 @@ namespace CMBC.EasyFactor.Utils
                 return null;
             }
 
-            this.workbook = (WorkbookClass)app.Workbooks.Open(
-                fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                Type.Missing, Type.Missing, Type.Missing);
-            if (workbook.Sheets.Count < sheetIndex)
+            this.workbook = (WorkbookClass)this.app.Workbooks.Open(fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+            if (this.workbook.Sheets.Count < sheetIndex)
             {
                 return null;
             }
 
-            this.datasheet = (Worksheet)workbook.Sheets[sheetIndex];
-            Range range = datasheet.UsedRange;
+            this.datasheet = (Worksheet)this.workbook.Sheets[sheetIndex];
+            Range range = this.datasheet.UsedRange;
             return (object[,])range.get_Value(XlRangeValueDataType.xlRangeValueDefault);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="fileName"></param>
         /// <param name="worker"></param>
+        /// <param name="e"></param>
         /// <returns></returns>
         private int ImportCases(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
@@ -440,7 +445,7 @@ namespace CMBC.EasyFactor.Utils
             }
 
             worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
+            this.workbook.Close(false, fileName, null);
             this.ReleaseResource();
             return result;
         }
@@ -448,7 +453,10 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         private int ImportClients(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
@@ -544,7 +552,7 @@ namespace CMBC.EasyFactor.Utils
             }
 
             worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
+            this.workbook.Close(false, fileName, null);
             this.ReleaseResource();
             return result;
         }
@@ -554,6 +562,7 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="worker"></param>
+        /// <param name="e"></param>
         /// <returns></returns>
         private object ImportClientsCreditLine(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
@@ -578,27 +587,27 @@ namespace CMBC.EasyFactor.Utils
                         if (String.Empty.Equals(clientEDICode))
                         {
                             continue;
-                        }                        
-                        
+                        }
+
                         Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client == null)
                         {
                             throw new Exception("客户保理代码错误: " + clientEDICode);
-                        }                        
-                        
+                        }
+
                         int column = 3;
                         ClientCreditLine creditLine = new ClientCreditLine();
                         creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
                         creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.CreditLine = (double)valueArray[row, column++]; ;
-                        creditLine.PeriodBegin = (DateTime)valueArray[row, column++]; ;
-                        creditLine.PeriodEnd = (DateTime)valueArray[row, column++]; ;
+                        creditLine.CreditLine = (double)valueArray[row, column++];
+                        creditLine.PeriodBegin = (DateTime)valueArray[row, column++];
+                        creditLine.PeriodEnd = (DateTime)valueArray[row, column++];
                         creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
                         creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
                         creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
                         creditLine.FreezeReason = String.Format("{0:G}", valueArray[row, column++]);
                         creditLine.Freezer = String.Format("{0:G}", valueArray[row, column++]);
-                        creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++]; ;
+                        creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++];
                         creditLine.UnfreezeReason = String.Format("{0:G}", valueArray[row, column++]);
                         creditLine.Unfreezer = String.Format("{0:G}", valueArray[row, column++]);
                         creditLine.Comment = String.Format("{0:G}", valueArray[row, column++]);
@@ -624,7 +633,7 @@ namespace CMBC.EasyFactor.Utils
             }
 
             worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
+            this.workbook.Close(false, fileName, null);
             this.ReleaseResource();
             return result;
         }
@@ -634,6 +643,7 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="worker"></param>
+        /// <param name="e"></param>
         /// <returns></returns>
         private int ImportContractAndCDA(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
@@ -670,23 +680,23 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("案件编号错误: " + caseCode);
                         }
 
-                        string ContractCode = String.Format("{0:G}", valueArray[row, column++]);
+                        string contractCode = String.Format("{0:G}", valueArray[row, column++]);
                         Contract contract = null;
-                        if (String.Empty.Equals(ContractCode) && curCase.TransactionType != "进口保理")
+                        if (String.Empty.Equals(contractCode) && curCase.TransactionType != "进口保理")
                         {
                             throw new Exception("保理合同号不能为空");
                         }
 
-                        if (!String.Empty.Equals(ContractCode))
+                        if (!String.Empty.Equals(contractCode))
                         {
-                            contract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == ContractCode);
+                            contract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == contractCode);
                             if (contract == null)
                             {
-                                contract = contractList.SingleOrDefault(c => c.ContractCode == ContractCode);
+                                contract = contractList.SingleOrDefault(c => c.ContractCode == contractCode);
                                 if (contract == null)
                                 {
                                     contract = new Contract();
-                                    contract.ContractCode = ContractCode;
+                                    contract.ContractCode = contractCode;
                                     contract.Client = curCase.SellerClient;
                                     contractList.Add(contract);
                                 }
@@ -785,7 +795,7 @@ namespace CMBC.EasyFactor.Utils
             }
 
             worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
+            this.workbook.Close(false, fileName, null);
             this.ReleaseResource();
             return result;
         }
@@ -795,6 +805,7 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="worker"></param>
+        /// <param name="e"></param>
         /// <returns></returns>
         private int ImportDepartments(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
@@ -856,7 +867,7 @@ namespace CMBC.EasyFactor.Utils
             }
 
             worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
+            this.workbook.Close(false, fileName, null);
             this.ReleaseResource();
             return result;
         }
@@ -866,6 +877,7 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="worker"></param>
+        /// <param name="e"></param>
         /// <returns></returns>
         private int ImportFactors(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
@@ -976,7 +988,7 @@ namespace CMBC.EasyFactor.Utils
             }
 
             worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
+            this.workbook.Close(false, fileName, null);
             this.ReleaseResource();
             return result;
         }
@@ -986,6 +998,7 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="worker"></param>
+        /// <param name="e"></param>
         /// <returns></returns>
         private object ImportFactorsCreditLine(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
@@ -1023,15 +1036,15 @@ namespace CMBC.EasyFactor.Utils
                             FactorCreditLine creditLine = new FactorCreditLine();
                             creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
                             creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                            creditLine.CreditLine = (double)valueArray[row, column++]; ;
-                            creditLine.PeriodBegin = (DateTime)valueArray[row, column++]; ;
-                            creditLine.PeriodEnd = (DateTime)valueArray[row, column++]; ;
+                            creditLine.CreditLine = (double)valueArray[row, column++];
+                            creditLine.PeriodBegin = (DateTime)valueArray[row, column++];
+                            creditLine.PeriodEnd = (DateTime)valueArray[row, column++];
                             creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
                             creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
                             creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
                             creditLine.FreezeReason = String.Format("{0:G}", valueArray[row, column++]);
                             creditLine.Freezer = String.Format("{0:G}", valueArray[row, column++]);
-                            creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++]; ;
+                            creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++];
                             creditLine.UnfreezeReason = String.Format("{0:G}", valueArray[row, column++]);
                             creditLine.Unfreezer = String.Format("{0:G}", valueArray[row, column++]);
                             creditLine.Comment = String.Format("{0:G}", valueArray[row, column++]);
@@ -1054,7 +1067,7 @@ namespace CMBC.EasyFactor.Utils
                 }
 
                 worker.ReportProgress(100);
-                workbook.Close(false, fileName, null);
+                this.workbook.Close(false, fileName, null);
                 this.ReleaseResource();
                 return result;
             }
@@ -1065,11 +1078,12 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="worker"></param>
+        /// <param name="e"></param>
         /// <returns></returns>
         private int ImportInvoices(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = GetValueArray(fileName, 1);
-            object[,] valueArray2 = GetValueArray(fileName, 2);
+            object[,] valueArray = this.GetValueArray(fileName, 1);
+            object[,] valueArray2 = this.GetValueArray(fileName, 2);
             int totalSize = 0;
             if (valueArray != null)
             {
@@ -1559,8 +1573,8 @@ namespace CMBC.EasyFactor.Utils
             }
 
             worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
-            ReleaseResource();
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
             return result;
         }
 
@@ -1569,10 +1583,11 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="worker"></param>
+        /// <param name="e"></param>
         /// <returns></returns>
         private int ImportInvoicesByBatch(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = GetValueArray(fileName, 1);
+            object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
             List<Invoice> invoiceList = new List<Invoice>();
             if (valueArray != null)
@@ -1639,10 +1654,10 @@ namespace CMBC.EasyFactor.Utils
                 }
             }
 
-            ImportedList = invoiceList;
+            this.ImportedList = invoiceList;
             worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
-            ReleaseResource();
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
             return result;
         }
 
@@ -1651,6 +1666,7 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="worker"></param>
+        /// <param name="e"></param>
         /// <returns></returns>
         private int ImportUsers(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
@@ -1714,7 +1730,7 @@ namespace CMBC.EasyFactor.Utils
             }
 
             worker.ReportProgress(100);
-            workbook.Close(false, fileName, null);
+            this.workbook.Close(false, fileName, null);
             this.ReleaseResource();
             return result;
         }
@@ -1726,27 +1742,27 @@ namespace CMBC.EasyFactor.Utils
         {
             if (this.datasheet != null)
             {
-                Marshal.ReleaseComObject(datasheet);
-                datasheet = null;
+                Marshal.ReleaseComObject(this.datasheet);
+                this.datasheet = null;
             }
 
             if (this.workbook != null)
             {
-                Marshal.ReleaseComObject(workbook);
-                workbook = null;
+                Marshal.ReleaseComObject(this.workbook);
+                this.workbook = null;
             }
 
             if (this.app != null)
             {
-                foreach (Workbook wb in app.Workbooks)
+                foreach (Workbook wb in this.app.Workbooks)
                 {
                     wb.Close(false, Type.Missing, Type.Missing);
                 }
 
-                app.Workbooks.Close();
-                app.Quit();
-                Marshal.ReleaseComObject(app);
-                app = null;
+                this.app.Workbooks.Close();
+                this.app.Quit();
+                Marshal.ReleaseComObject(this.app);
+                this.app = null;
             }
         }
 
@@ -1775,10 +1791,12 @@ namespace CMBC.EasyFactor.Utils
         {
             string filePath = this.tbFilePath.Text;
             if (filePath.Trim().Equals(String.Empty))
+            {
                 return;
+            }
 
             this.btnCancel.Text = "取消";
-            backgroundWorker.RunWorkerAsync(filePath);
+            this.backgroundWorker.RunWorkerAsync(filePath);
 
             this.btnStart.Enabled = false;
         }

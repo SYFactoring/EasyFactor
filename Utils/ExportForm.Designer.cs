@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ExportForm.cs" company="Yiming Liu@Fudan">
+// <copyright file="ExportForm.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -13,11 +13,11 @@ namespace CMBC.EasyFactor.Utils
     {
         #region Fields (7)
 
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
-        private DevComponents.DotNetBar.ButtonX btnCancel;
         /// <summary>
         /// Required designer variable.
         /// </summary>
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private DevComponents.DotNetBar.ButtonX btnCancel;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.LabelX lblProgress;
         private DevComponents.DotNetBar.LabelX lblStatus;
