@@ -1,11 +1,34 @@
-﻿namespace CMBC.EasyFactor.Utils
+﻿//-----------------------------------------------------------------------
+// <copyright file="ExportForm.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace CMBC.EasyFactor.Utils
 {
-    partial class ExportForm
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class ExportForm
     {
+        #region Fields (7)
+
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private DevComponents.DotNetBar.ButtonX btnCancel;
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.LabelX lblProgress;
+        private DevComponents.DotNetBar.LabelX lblStatus;
+        private DevComponents.DotNetBar.Controls.ProgressBarX progressBar;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbStatus;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -13,12 +36,15 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
+
+        #endregion Methods
 
         #region Windows Form Designer generated code
 
@@ -103,9 +129,9 @@
             // 
             this.backgroundWorker.WorkerReportsProgress = true;
             this.backgroundWorker.WorkerSupportsCancellation = true;
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
-            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_RunWorkerCompleted);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorker_ProgressChanged);
             // 
             // ExportForm
             // 
@@ -126,13 +152,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.ButtonX btnCancel;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbStatus;
-        private DevComponents.DotNetBar.LabelX lblProgress;
-        private DevComponents.DotNetBar.Controls.ProgressBarX progressBar;
-        private DevComponents.DotNetBar.LabelX lblStatus;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
-
     }
 }

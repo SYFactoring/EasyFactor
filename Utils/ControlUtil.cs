@@ -112,10 +112,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="control"></param>
         public static void SetDoubleBuffered(Control control)
         {
-            typeof(Control).InvokeMember("DoubleBuffered",
-                BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-                null, control, new object[] { true });
+            typeof(Control).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, control, new object[] { true });
         }
-
     }
 }
