@@ -151,10 +151,10 @@ namespace CMBC.EasyFactor.DB.dbml
                             total = 0;
                         }
                         double financeOutstanding = invoice.FinanceOutstanding.Value;
-                        if(invoice.InvoiceFinanceBatch.BatchCurrency!=currency)
+                        if (invoice.InvoiceFinanceBatch.BatchCurrency != currency)
                         {
-                            double exchange = Exchange.GetExchangeRate(invoice.InvoiceFinanceBatch.BatchCurrency,currency);
-                            financeOutstanding*=exchange;
+                            double exchange = Exchange.GetExchangeRate(invoice.InvoiceFinanceBatch.BatchCurrency, currency);
+                            financeOutstanding *= exchange;
                         }
                         total += financeOutstanding;
                     }
@@ -255,15 +255,22 @@ namespace CMBC.EasyFactor.DB.dbml
             Contract contract = selectedCase.SellerClient.Contract;
             if (contract != null)
             {
-                CDA formerCDA = App.Current.DbContext.CDAs.OrderByDescending(c => c.CDACode).FirstOrDefault(c => c.CDACode.StartsWith(contract.ContractCode));
-                if (formerCDA == null)
+                if (contract.ContractType == "新合同")
                 {
-                    return string.Format("{0}-{1:000}", contract.ContractCode, 1);
+                    CDA formerCDA = App.Current.DbContext.CDAs.OrderByDescending(c => c.CDACode).FirstOrDefault(c => c.CDACode.StartsWith(contract.ContractCode));
+                    if (formerCDA == null)
+                    {
+                        return string.Format("{0}-{1:000}", contract.ContractCode, 1);
+                    }
+                    else
+                    {
+                        int index = Int32.Parse(formerCDA.CDACode.Substring(formerCDA.CDACode.LastIndexOf("-") + 1));
+                        return String.Format("{0}-{1:000}", contract.ContractCode, index + 1);
+                    }
                 }
                 else
                 {
-                    int index = Int32.Parse(formerCDA.CDACode.Substring(formerCDA.CDACode.LastIndexOf("-") + 1));
-                    return String.Format("{0}-{1:000}", contract.ContractCode, index + 1);
+                    return String.Format("{0}XXX-{1:000}", selectedCase.CaseCode, selectedCase.CDAs.Count + 1);
                 }
             }
             else if (selectedCase.TransactionType == "进口保理")

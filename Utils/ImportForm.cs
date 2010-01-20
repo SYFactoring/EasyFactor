@@ -324,7 +324,12 @@ namespace CMBC.EasyFactor.Utils
                         int column = 2;
                         curCase.ManagerName = String.Format("{0:G}", valueArray[row, column++]);
                         string ownerDeptName = String.Format("{0:G}", valueArray[row, column++]);
-                        curCase.OwnerDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == ownerDeptName);
+                        Department ownerDept = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == ownerDeptName);
+                        if (ownerDept == null)
+                        {
+                            throw new Exception("所属分部名称错误: " + ownerDeptName);
+                        }
+                        curCase.OwnerDepartment = ownerDept;
                         curCase.TransactionType = String.Format("{0:G}", valueArray[row, column++]);
                         curCase.ReviewNo = String.Format("{0:G}", valueArray[row, column++]);
                         curCase.OperationType = String.Format("{0:G}", valueArray[row, column++]);
@@ -332,17 +337,37 @@ namespace CMBC.EasyFactor.Utils
                         curCase.CoDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == coDeptName);
                         curCase.CaseMark = String.Format("{0:G}", valueArray[row, column++]);
                         string sellerEDICode = String.Format("{0:G}", valueArray[row, column++]);
-                        curCase.SellerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == sellerEDICode);
+                        Client sellerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == sellerEDICode);
+                        if (sellerClient == null)
+                        {
+                            throw new Exception("卖方保理代码错误: " + sellerEDICode);
+                        }
+                        curCase.SellerClient = sellerClient;
                         column++;
                         column++;
                         string buyerEDICode = String.Format("{0:G}", valueArray[row, column++]);
-                        curCase.BuyerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == buyerEDICode);
+                        Client buyerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == buyerEDICode);
+                        if (buyerClient == null)
+                        {
+                            throw new Exception("买方保理代码错误: " + buyerEDICode);
+                        }
+                        curCase.BuyerClient = buyerClient;
                         column++;
                         column++;
                         string EFCode = String.Format("{0:G}", valueArray[row, column++]);
-                        curCase.SellerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == EFCode);
+                        Factor sellerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == EFCode);
+                        if (sellerFactor == null)
+                        {
+                            throw new Exception("卖方保理商代码错误: " + EFCode);
+                        }
+                        curCase.SellerFactor = sellerFactor;
                         string IFCode = String.Format("{0:G}", valueArray[row, column++]);
-                        curCase.BuyerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == IFCode);
+                        Factor buyerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == IFCode);
+                        if (buyerFactor == null)
+                        {
+                            throw new Exception("买方保理商代码错误: " + IFCode);
+                        }
+                        curCase.BuyerFactor = buyerFactor;
                         column++;
                         curCase.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
                         curCase.NetPaymentTerm = (System.Nullable<int>)valueArray[row, column++];
@@ -1640,6 +1665,11 @@ namespace CMBC.EasyFactor.Utils
             }
             if (this.app != null)
             {
+                foreach (Workbook wb in app.Workbooks)
+                {
+                    wb.Close(false, Type.Missing, Type.Missing);
+                }
+                app.Workbooks.Close();
                 app.Quit();
                 Marshal.ReleaseComObject(app);
                 app = null;

@@ -6126,8 +6126,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _DateOfLatestRevision;
 		
-		private System.Nullable<bool> _IsGroup;
-		
 		private string _GroupNo;
 		
 		private System.Nullable<bool> _IsCorrespondentBank;
@@ -6139,8 +6137,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		private System.Nullable<System.DateTime> _LastModifiedDate;
 		
 		private string _CreateUserName;
-		
-		private string _FactorGroupType;
 		
 		private EntitySet<Case> _BuyerCases;
 		
@@ -6230,8 +6226,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnMembershipDateChanged();
     partial void OnDateOfLatestRevisionChanging(string value);
     partial void OnDateOfLatestRevisionChanged();
-    partial void OnIsGroupChanging(System.Nullable<bool> value);
-    partial void OnIsGroupChanged();
     partial void OnGroupFactorCodeChanging(string value);
     partial void OnGroupFactorCodeChanged();
     partial void OnIsCorrespondentBankChanging(System.Nullable<bool> value);
@@ -6244,8 +6238,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnLastModifiedDateChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
-    partial void OnFactorGroupTypeChanging(string value);
-    partial void OnFactorGroupTypeChanged();
     #endregion
 		
 		public Factor()
@@ -6960,26 +6952,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsGroup", DbType="Bit")]
-		public System.Nullable<bool> IsGroup
-		{
-			get
-			{
-				return this._IsGroup;
-			}
-			set
-			{
-				if ((this._IsGroup != value))
-				{
-					this.OnIsGroupChanging(value);
-					this.SendPropertyChanging();
-					this._IsGroup = value;
-					this.SendPropertyChanged("IsGroup");
-					this.OnIsGroupChanged();
-				}
-			}
-		}
-		
 		[Column(Storage="_GroupNo", DbType="Char(7)")]
 		public string GroupFactorCode
 		{
@@ -7100,26 +7072,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CreateUserName = value;
 					this.SendPropertyChanged("CreateUserName");
 					this.OnCreateUserNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FactorGroupType", DbType="NVarChar(50)")]
-		public string FactorGroupType
-		{
-			get
-			{
-				return this._FactorGroupType;
-			}
-			set
-			{
-				if ((this._FactorGroupType != value))
-				{
-					this.OnFactorGroupTypeChanging(value);
-					this.SendPropertyChanging();
-					this._FactorGroupType = value;
-					this.SendPropertyChanged("FactorGroupType");
-					this.OnFactorGroupTypeChanged();
 				}
 			}
 		}

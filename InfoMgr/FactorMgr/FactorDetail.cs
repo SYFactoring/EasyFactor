@@ -582,13 +582,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             queryUI.ShowDialog(this);
             if (factorMgr.Selected != null)
             {
-                if (factorMgr.Selected.FactorGroupType != "集团")
-                {
-                    MessageBox.Show("所选客户不是集团类型", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
                 factor.FactorGroup = factorMgr.Selected;
-                factor.IsGroup = true;
             }
         }
 
