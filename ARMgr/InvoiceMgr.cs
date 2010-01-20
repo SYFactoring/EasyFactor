@@ -144,9 +144,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (15)
+        #region Methods (17)
 
-        // Private Methods (15) 
+        // Private Methods (17) 
 
         /// <summary>
         /// 
@@ -362,17 +362,9 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            List<Invoice> selectedInvoices = new List<Invoice>();
-            foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
-            {
-                Invoice invoice = (Invoice)this.bs.List[cell.RowIndex];
-                if (!selectedInvoices.Contains(invoice))
-                {
-                    selectedInvoices.Add(invoice);
-                }
-            }
+
             ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_FULL);
-            exportForm.StartExport(selectedInvoices);
+            exportForm.StartExport(GetSelectedInvoices());
         }
 
         /// <summary>
@@ -386,6 +378,16 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_OVERDUE);
+            exportForm.StartExport(GetSelectedInvoices());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private List<Invoice> GetSelectedInvoices()
+        {
             List<Invoice> selectedInvoices = new List<Invoice>();
             foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
             {
@@ -395,8 +397,7 @@ namespace CMBC.EasyFactor.ARMgr
                     selectedInvoices.Add(invoice);
                 }
             }
-            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_OVERDUE);
-            exportForm.StartExport(selectedInvoices);
+            return selectedInvoices;
         }
 
         /// <summary>
@@ -474,11 +475,11 @@ namespace CMBC.EasyFactor.ARMgr
                     assignOverDueDate = DateTime.Now.Date.AddDays(0 - assignOverDueDays);
                 }
             }
-            int FinanceOverDueDays = 0;
+            int financeOverDueDays = 0;
             DateTime financeOverDueDate = default(DateTime);
-            if (Int32.TryParse(this.tbFinanceOverDueDays.Text, out FinanceOverDueDays))
+            if (Int32.TryParse(this.tbFinanceOverDueDays.Text, out financeOverDueDays))
             {
-                financeOverDueDate = DateTime.Now.Date.AddDays(0 - FinanceOverDueDays);
+                financeOverDueDate = DateTime.Now.Date.AddDays(0 - financeOverDueDays);
             }
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
@@ -498,22 +499,8 @@ namespace CMBC.EasyFactor.ARMgr
                                 && (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
                                 && (isDispute == "A" ? true : invoice.IsDispute == (isDispute == "Y" ? true : false))
                                 && (assignOverDueDays == 0 ? true : (invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount && invoice.DueDate <= assignOverDueDate))
-                                && (FinanceOverDueDays == 0 ? true : (invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() && invoice.FinanceDueDate <= financeOverDueDate))
+                                && (financeOverDueDays == 0 ? true : (invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() && invoice.FinanceDueDate <= financeOverDueDate))
                               select invoice;
-            //if (queryResult.Count() > 2000)
-            //{
-            //    DialogResult dr = MessageBox.Show("查询结果为" + queryResult.Count() + "，全部显示可能速度较慢，选择YES可以继续显示，选择NO可以重新查询。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            //    if (dr == DialogResult.Yes)
-            //    {
-            //        this.bs.DataSource = queryResult;
-            //        this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-            //        return;
-            //    }
-            //    else
-            //    {
-            //        return;
-            //    }
-            //}
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }

@@ -271,6 +271,11 @@ namespace CMBC.EasyFactor.Utils
                 }
                 if (app != null)
                 {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+                    app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
                     app = null;
@@ -483,6 +488,11 @@ namespace CMBC.EasyFactor.Utils
                 }
                 if (app != null)
                 {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+                    app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
                     app = null;
@@ -594,6 +604,11 @@ namespace CMBC.EasyFactor.Utils
                 }
                 if (app != null)
                 {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+                    app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
                     app = null;
@@ -716,6 +731,11 @@ namespace CMBC.EasyFactor.Utils
                 }
                 if (app != null)
                 {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+                    app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
                     app = null;
