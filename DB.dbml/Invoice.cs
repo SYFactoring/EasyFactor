@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Invoice : BaseObject
     {
-		#region Properties (19) 
+        #region Properties (19)
 
         /// <summary>
         /// Gets
@@ -48,10 +48,11 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (TypeUtil.GreaterZero(AssignOutstanding))
+                if (TypeUtil.GreaterZero(this.AssignOutstanding))
                 {
                     return (DateTime.Now.Date - this.DueDate).Days;
                 }
+
                 return null;
             }
         }
@@ -137,7 +138,10 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 if (!this.FinanceAmount.HasValue)
+                {
                     return null;
+                }
+
                 return this.FinanceAmount.Value - this.RefundAmount.GetValueOrDefault() - this.RefundAmount2.GetValueOrDefault();
             }
         }
@@ -149,7 +153,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (TypeUtil.GreaterZero(FinanceOutstanding))
+                if (TypeUtil.GreaterZero(this.FinanceOutstanding))
                 {
                     TimeSpan duedays = DateTime.Now.Date - this.FinanceDueDate.Value;
                     return duedays.Days;
@@ -177,8 +181,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public double? PaymentAmount2
         {
-            set;
             get;
+            set;
         }
 
         /// <summary>
@@ -186,8 +190,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public DateTime? PaymentDate2
         {
-            set;
             get;
+            set;
         }
 
         /// <summary>
@@ -195,8 +199,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public int? PaymentLogID2
         {
-            set;
             get;
+            set;
         }
 
         /// <summary>
@@ -204,8 +208,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public double? RefundAmount2
         {
-            set;
             get;
+            set;
         }
 
         /// <summary>
@@ -213,17 +217,17 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public DateTime? RefundDate2
         {
-            set;
             get;
+            set;
         }
-        
+
         /// <summary>
         /// Gets or sets
         /// </summary>
         public int? RefundLogID2
         {
-            set;
             get;
+            set;
         }
 
         /// <summary>
@@ -248,11 +252,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (12) 
+        #region Methods (12)
 
-		// Public Methods (12) 
+        // Public Methods (12) 
 
         /// <summary>
         /// 
@@ -299,11 +303,13 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 return false;
             }
+
             Invoice right = obj as Invoice;
             if (right == null)
             {
                 return false;
             }
+
             return this.GetHashCode() == right.GetHashCode();
         }
 
@@ -443,6 +449,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

@@ -244,7 +244,7 @@ namespace CMBC.EasyFactor.Report
                     sheet.Cells[row, 1] = "信用风险额度：";
                     sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.CreditCover);
                     sheet.Cells[row, 1] = "应收账款余额：";
-                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.GetAssignOutstanding(cda.Case.InvoiceCurrency));
+                    sheet.Cells[row++, 2] = String.Format("{0:N2}", cda.Case.AssignOutstanding);
 
                     row++;
                     sheet.Cells[row, 1] = "发票号";
@@ -507,12 +507,12 @@ namespace CMBC.EasyFactor.Report
                     double? creditCoverOutstanding = cda.CreditCoverOutstanding;
                     sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", creditCoverOutstanding == null ? "" : cda.CreditCoverCurr, creditCoverOutstanding);
                     sheet.Cells[row, 1] = "应收账款余额：";
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", cda.Case.InvoiceCurrency, cda.GetAssignOutstanding(cda.Case.InvoiceCurrency));
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", cda.Case.InvoiceCurrency, cda.Case.AssignOutstanding);
                     sheet.Cells[row, 1] = "预付款额度：";
                     double? financeLineOustanding = cda.FinanceLineOutstanding;
                     sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", financeLineOustanding == null ? "" : cda.FinanceLineCurr, financeLineOustanding);
                     sheet.Cells[row, 1] = "融资余额：";
-                    financeOutstanding = cda.GetFinanceOutstanding(cda.FinanceLineCurr);
+                    financeOutstanding = cda.Case.FinanceOutstanding;
                     sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", financeOutstanding == null ? "" : cda.FinanceLineCurr, financeOutstanding);
                     sheet.Cells[row, 1] = "剩余额度：";
                     if ((financeLineOustanding - financeOutstanding) != null)

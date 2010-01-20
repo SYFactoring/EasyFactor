@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoicePaymentBatch
     {
-		#region Properties (4) 
+        #region Properties (4)
 
         /// <summary>
         /// Gets
@@ -52,6 +52,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     result += paymentLog.PaymentAmount;
                 }
+
                 return result;
             }
         }
@@ -67,6 +68,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
     }
 }

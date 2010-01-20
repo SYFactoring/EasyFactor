@@ -30,6 +30,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     result += invoice.AssignAmount;
                 }
+
                 return result;
             }
         }

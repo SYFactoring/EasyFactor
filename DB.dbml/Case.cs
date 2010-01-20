@@ -44,6 +44,60 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Constructors
 
+        #region Properties (1)
+
+        /// <summary>
+        /// Gets 
+        /// </summary>
+        public CDA ActiveCDA
+        {
+            get
+            {
+                return this.CDAs.SingleOrDefault(c => c.CDAStatus == "已签回");
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public double AssignOutstanding
+        {
+            get
+            {
+                double result = 0;
+                foreach (CDA cda in this.CDAs)
+                {
+                    result += cda.GetAssignOutstanding(this.InvoiceCurrency);
+                }
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public double? FinanceOutstanding
+        {
+            get
+            {
+                double? result = null;
+                foreach (CDA cda in this.CDAs)
+                {
+                    double? temp = cda.GetFinanceOutstanding(this.InvoiceCurrency).GetValueOrDefault();
+                    if (temp.HasValue)
+                    {
+                        if (result == null)
+                        {
+                            result = 0;
+                        }
+                        result += temp.Value;
+                    }
+                }
+                return result;
+            }
+        }
+        #endregion Properties
+
         #region Methods (1)
 
         // Public Methods (1) 

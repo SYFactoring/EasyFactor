@@ -1,10 +1,23 @@
-﻿using CMBC.EasyFactor.Utils;
+﻿//-----------------------------------------------------------------------
+// <copyright file="CaseDetail.Designer.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
 namespace CMBC.EasyFactor.CaseMgr
 {
-    partial class CaseDetail
-    {
-        #region Fields (127)
+    using CMBC.EasyFactor.Utils;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class CaseDetail
+    {
+		#region Fields (128) 
+        
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
         private DevComponents.DotNetBar.ButtonX btnCaseBuyerSelect;
         private DevComponents.DotNetBar.ButtonX btnCaseFactorSelect;
         private DevComponents.DotNetBar.ButtonX btnCaseReset;
@@ -80,9 +93,6 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequestDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequestType;
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.ErrorProvider creditCoverErrorProvider;
         private DevComponents.DotNetBar.Validator.Highlighter creditCoverHighlighter;
@@ -119,6 +129,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerNameCN;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerNameEN;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseBuyerNo;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCreateUser;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseFactorCode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseFactorNameCN;
@@ -136,11 +147,11 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.Controls.TextBoxX tbRequestAmount;
         private DevComponents.DotNetBar.Controls.TextBoxX tbReviewNo;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Methods (1)
+		#region Methods (1) 
 
-        // Protected Methods (1) 
+		// Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -148,16 +159,15 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
-        #endregion Methods
-
-
+		#endregion Methods 
 
         #region Windows Form Designer generated code
 
@@ -2300,11 +2310,7 @@ namespace CMBC.EasyFactor.CaseMgr
             ((System.ComponentModel.ISupportInitialize)(this.caseErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.creditCoverErrorProvider)).EndInit();
             this.ResumeLayout(false);
-
         }
-
         #endregion
-
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
     }
 }

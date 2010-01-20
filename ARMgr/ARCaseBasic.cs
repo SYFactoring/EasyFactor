@@ -134,9 +134,9 @@ namespace CMBC.EasyFactor.ARMgr
         public void CaculateOutstanding(CDA cda)
         {
             this.tbCreditCoverOutstanding.Text = String.Format("{0:N2}", cda.CreditCoverOutstanding);
-            this.tbAROutstanding.Text = String.Format("{0:N2}", cda.GetAssignOutstanding(cda.Case.InvoiceCurrency));
+            this.tbAROutstanding.Text = String.Format("{0:N2}", cda.Case.AssignOutstanding);
             this.tbFinanceCreditLineOutstanding.Text = String.Format("{0:N2}", cda.FinanceLineOutstanding);
-            this.tbFinanceOutstanding.Text = String.Format("{0:N2}", cda.GetFinanceOutstanding(cda.Case.InvoiceCurrency));
+            this.tbFinanceOutstanding.Text = String.Format("{0:N2}", cda.Case.FinanceOutstanding);
         }
 		// Private Methods (7) 
 

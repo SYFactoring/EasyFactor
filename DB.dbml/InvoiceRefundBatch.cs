@@ -52,6 +52,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     result += refundLog.RefundAmount;
                 }
+
                 return result;
             }
         }

@@ -7,10 +7,6 @@
 namespace CMBC.EasyFactor.DB.dbml
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Data.Linq;
 
     /// <summary>
     /// 
@@ -18,7 +14,7 @@ namespace CMBC.EasyFactor.DB.dbml
     public partial class InvoiceRefundLog
     {
         /// <summary>
-        /// 
+        /// Gets
         /// </summary>
         public double AssignAmount
         {
@@ -29,7 +25,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 
+        /// Gets
         /// </summary>
         public double AssignOutstanding
         {
@@ -40,7 +36,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 
+        /// Gets
         /// </summary>
         public DateTime AssignDate
         {
@@ -51,7 +47,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 
+        /// Gets
         /// </summary>
         public DateTime DueDate
         {
@@ -62,7 +58,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 
+        /// Gets
         /// </summary>
         public double? FinanceAmount
         {
@@ -73,7 +69,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 
+        /// Gets
         /// </summary>
         public DateTime? FinanceDate
         {
@@ -84,7 +80,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 
+        /// Gets
         /// </summary>
         public DateTime? FinanceDueDate
         {
@@ -95,7 +91,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 
+        /// Gets
         /// </summary>
         public double? FinanceOutstanding
         {
@@ -104,6 +100,5 @@ namespace CMBC.EasyFactor.DB.dbml
                 return this.Invoice.FinanceOutstanding;
             }
         }
-
     }
 }

@@ -19,16 +19,16 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CDADetail : DevComponents.DotNetBar.Office2007Form
     {
-		#region Fields (1) 
+        #region Fields (1)
 
         /// <summary>
         /// 
         /// </summary>
         private OpCDAType opCDAType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         /// Operation Type 
@@ -51,11 +51,11 @@ namespace CMBC.EasyFactor.CaseMgr
             DETAIL_CDA
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (3) 
+        #region Constructors (3)
 
-/// <summary>
+        /// <summary>
         /// 通过Case新建CDA
         /// </summary>
         /// <param name="selectedCase"></param>
@@ -146,11 +146,11 @@ namespace CMBC.EasyFactor.CaseMgr
 
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (22) 
+        #region Methods (22)
 
-		// Private Methods (22) 
+        // Private Methods (22) 
 
         void cda_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -497,6 +497,10 @@ namespace CMBC.EasyFactor.CaseMgr
             FillFinanceLine(cda.Case.InvoiceCurrency);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currency"></param>
         private void FillCreditCover(string currency)
         {
             CDA cda = (CDA)this.CDABindingSource.DataSource;
@@ -530,6 +534,10 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currency"></param>
         private void FillFinanceLine(string currency)
         {
             CDA cda = (CDA)this.CDABindingSource.DataSource;
@@ -651,7 +659,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 cda.CheckStatus = "未复核";
                 try
                 {
-                    App.Current.DbContext.CDAs.InsertOnSubmit(cda);
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e1)
@@ -836,6 +843,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

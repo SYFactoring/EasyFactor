@@ -16,16 +16,16 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Department
     {
-        #region Fields (1)
+		#region Fields (1) 
 
         /// <summary>
         /// 
         /// </summary>
         private static readonly List<Department> _allDepartment;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Constructors (1)
+		#region Constructors (1) 
 
         /// <summary>
         /// Initializes static members of the Department class
@@ -38,11 +38,11 @@ namespace CMBC.EasyFactor.DB.dbml
             _allDepartment.AddRange(App.Current.DbContext.Departments.Where(d => d.Domain != "贸易金融事业部" && d.Domain != "分行事业部"));
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (3)
+		#region Methods (3) 
 
-        // Public Methods (3) 
+		// Public Methods (3) 
 
         /// <summary>
         /// 
@@ -72,7 +72,6 @@ namespace CMBC.EasyFactor.DB.dbml
             return this._DepartmentName;
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
-
 }

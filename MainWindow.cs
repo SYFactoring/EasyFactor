@@ -67,9 +67,9 @@ namespace CMBC.EasyFactor
 
         #endregion Properties
 
-        #region Methods (57)
+        #region Methods (60)
 
-        // Private Methods (57) 
+        // Private Methods (60) 
 
         /// <summary>
         /// 
@@ -80,17 +80,6 @@ namespace CMBC.EasyFactor
         {
             AboutBox aboutBox = new AboutBox();
             aboutBox.ShowDialog(this);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ARPaymentReport(object sender, EventArgs e)
-        {
-            AssignReportMgr assignMgr = new AssignReportMgr(AssignReportMgr.OpReportType.REPORT_ASSIGN);
-            this.SetDetailPanel(assignMgr);
         }
 
         /// <summary>
@@ -220,39 +209,6 @@ namespace CMBC.EasyFactor
         private void Exit(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FactorQuery(object sender, EventArgs e)
-        {
-            FactorMgr fatcorQuery = new FactorMgr(false);
-            this.SetDetailPanel(fatcorQuery);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FeeReport(object sender, EventArgs e)
-        {
-            AssignReportMgr reportMgr = new AssignReportMgr(AssignReportMgr.OpReportType.REPORT_FEE);
-            this.SetDetailPanel(reportMgr);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FinanceReport(object sender, EventArgs e)
-        {
-            AssignReportMgr assignMgr = new AssignReportMgr(AssignReportMgr.OpReportType.REPORT_FINANCE);
-            this.SetDetailPanel(assignMgr);
         }
 
         /// <summary>
@@ -704,6 +660,17 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void QueryFactors(object sender, EventArgs e)
+        {
+            FactorMgr fatcorQuery = new FactorMgr(false);
+            this.SetDetailPanel(fatcorQuery);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QueryInvoice(object sender, EventArgs e)
         {
             InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.INVOICE_QUERY);
@@ -718,6 +685,72 @@ namespace CMBC.EasyFactor
         private void QueryOverDue(object sender, EventArgs e)
         {
             InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.OVER_DUE);
+            this.SetDetailPanel(mgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReportARPayment(object sender, EventArgs e)
+        {
+            AssignReportMgr assignMgr = new AssignReportMgr(AssignReportMgr.OpReportType.REPORT_ASSIGN);
+            this.SetDetailPanel(assignMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReportCDA(object sender, EventArgs e)
+        {
+            CDAMgr mgr = new CDAMgr(CDAMgr.OpCDAType.REPORT);
+            this.SetDetailPanel(mgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReportFee(object sender, EventArgs e)
+        {
+            AssignReportMgr reportMgr = new AssignReportMgr(AssignReportMgr.OpReportType.REPORT_FEE);
+            this.SetDetailPanel(reportMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReportFinance(object sender, EventArgs e)
+        {
+            AssignReportMgr assignMgr = new AssignReportMgr(AssignReportMgr.OpReportType.REPORT_FINANCE);
+            this.SetDetailPanel(assignMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReportInvoiceFlaw(object sender, EventArgs e)
+        {
+            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE);
+            this.SetDetailPanel(mgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReportLeger(object sender, EventArgs e)
+        {
+            CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr(false);
             this.SetDetailPanel(mgr);
         }
 

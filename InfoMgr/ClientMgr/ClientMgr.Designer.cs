@@ -102,6 +102,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmuClientMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemClientSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemClientDetail = new System.Windows.Forms.ToolStripMenuItem();
@@ -154,7 +155,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblCaseType = new DevComponents.DotNetBar.LabelX();
             this.cmuClientMgr.SuspendLayout();
             this.pnlQuery.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.dgvClients).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
             this.SuspendLayout();
             // 
             // lblClientType
@@ -428,7 +429,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // lblCount
             // 
-            this.lblCount.Anchor = (System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
+            this.lblCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblCount.AutoSize = true;
             // 
             // 
@@ -523,7 +524,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.AllowUserToOrderColumns = true;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)134);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -561,20 +562,22 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvClients.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvClients.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvClients.GridColor = System.Drawing.Color.FromArgb((int)((byte)208), (int)((byte)215), (int)((byte)229));
+            this.dgvClients.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvClients.Location = new System.Drawing.Point(0, 61);
             this.dgvClients.MultiSelect = false;
             this.dgvClients.Name = "dgvClients";
             this.dgvClients.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)134);
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvClients.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvClients.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("SimHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvClients.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvClients.RowTemplate.Height = 23;
             this.dgvClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvClients.Size = new System.Drawing.Size(937, 539);
@@ -756,8 +759,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cmuClientMgr.ResumeLayout(false);
             this.pnlQuery.ResumeLayout(false);
             this.pnlQuery.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)this.dgvClients).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         #endregion

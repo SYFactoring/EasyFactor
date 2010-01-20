@@ -114,6 +114,8 @@
             this.menuItemCaseUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemLegerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.panelCaseQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -650,55 +652,69 @@
             this.menuItemCaseNew,
             this.menuItemCaseUpdate,
             this.menuItemCaseDelete,
-            this.menuItemCreditCoverNegNew});
+            this.menuItemCreditCoverNegNew,
+            this.toolStripSeparator1,
+            this.menuItemLegerReport});
             this.cmuContractMgr.Name = "cmuContractMgr";
-            this.cmuContractMgr.Size = new System.Drawing.Size(147, 142);
+            this.cmuContractMgr.Size = new System.Drawing.Size(153, 192);
             // 
             // menuItemCaseSelect
             // 
             this.menuItemCaseSelect.Name = "menuItemCaseSelect";
-            this.menuItemCaseSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseSelect.Size = new System.Drawing.Size(152, 22);
             this.menuItemCaseSelect.Text = "选定案件";
             this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
             // 
             // menuItemCaseDetail
             // 
             this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(152, 22);
             this.menuItemCaseDetail.Text = "详细信息";
             this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
             // menuItemCaseNew
             // 
             this.menuItemCaseNew.Name = "menuItemCaseNew";
-            this.menuItemCaseNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseNew.Size = new System.Drawing.Size(152, 22);
             this.menuItemCaseNew.Text = "新建案件";
             this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
             // 
             // menuItemCaseUpdate
             // 
             this.menuItemCaseUpdate.Name = "menuItemCaseUpdate";
-            this.menuItemCaseUpdate.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseUpdate.Size = new System.Drawing.Size(152, 22);
             this.menuItemCaseUpdate.Text = "更新案件";
             this.menuItemCaseUpdate.Click += new System.EventHandler(this.UpdateCase);
             // 
             // menuItemCaseDelete
             // 
             this.menuItemCaseDelete.Name = "menuItemCaseDelete";
-            this.menuItemCaseDelete.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDelete.Size = new System.Drawing.Size(152, 22);
             this.menuItemCaseDelete.Text = "删除案件";
             this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
             // 
             // menuItemCreditCoverNegNew
             // 
             this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
-            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(152, 22);
             this.menuItemCreditCoverNegNew.Text = "新建额度申请";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // menuItemLegerReport
+            // 
+            this.menuItemLegerReport.Name = "menuItemLegerReport";
+            this.menuItemLegerReport.Size = new System.Drawing.Size(152, 22);
+            this.menuItemLegerReport.Text = "导出台帐";
+            this.menuItemLegerReport.Click += new System.EventHandler(this.ReportLeger);
             // 
             // CaseMgr
             // 
@@ -741,6 +757,8 @@
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCDA;
         private DevComponents.DotNetBar.ButtonX btnQueryReset;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsContractSigned;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemLegerReport;
 
     }
 }

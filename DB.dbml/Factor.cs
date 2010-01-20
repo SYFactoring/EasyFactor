@@ -23,6 +23,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// 
         /// </summary>
         private Dictionary<string, string> _dict;
+
         /// <summary>
         /// 
         /// </summary>
@@ -71,6 +72,10 @@ namespace CMBC.EasyFactor.DB.dbml
         //        return sb.ToString();
         //    }
         //}
+
+        /// <summary>
+        /// Gets
+        /// </summary>
         public FactorCreditLine CreditLine
         {
             get
@@ -86,12 +91,13 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                FactorCreditLine creditLine = CreditLine;
+                FactorCreditLine creditLine = this.CreditLine;
                 if (creditLine == null)
                 {
                     return 0;
                 }
-                return creditLine.CreditLine - GetAssignOutstanding(creditLine.CreditLineCurrency);
+
+                return creditLine.CreditLine - this.GetAssignOutstanding(creditLine.CreditLineCurrency);
             }
         }
 
@@ -142,9 +148,9 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public void BeginMonitor()
         {
-            _dict = new Dictionary<string, string>();
+            this._dict = new Dictionary<string, string>();
             this.Backup();
-            this.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(Factor_PropertyChanged);
+            this.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(this.Factor_PropertyChanged);
         }
 
         /// <summary>
@@ -153,14 +159,15 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public string EndMonitor()
         {
-            if (_dict != null)
+            if (this._dict != null)
             {
                 StringBuilder sb = new StringBuilder();
-                foreach (string value in _dict.Values)
+                foreach (string value in this._dict.Values)
                 {
                     sb.Append(value).Append(Environment.NewLine);
                 }
-                this.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(Factor_PropertyChanged);
+
+                this.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(this.Factor_PropertyChanged);
                 return sb.ToString();
             }
             else
@@ -195,6 +202,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     result += cdaAssignOutstanding;
                 }
             }
+
             return result;
         }
 
@@ -220,12 +228,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void Factor_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void Factor_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            _dict[e.PropertyName] = String.Format("{0} : {1}\n", e.PropertyName, this.GetType().GetProperty(e.PropertyName).GetValue(this, null));
+            this._dict[e.PropertyName] = String.Format("{0} : {1}\n", e.PropertyName, this.GetType().GetProperty(e.PropertyName).GetValue(this, null));
         }
 
         #endregion Methods
     }
-
 }
