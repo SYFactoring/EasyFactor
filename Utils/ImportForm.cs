@@ -466,89 +466,103 @@ namespace CMBC.EasyFactor.Utils
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
-                for (int row = 2; row <= size; row++)
+                List<Client> clientList = new List<Client>();
+                try
                 {
-                    if (worker.CancellationPending)
+                    for (int row = 2; row <= size; row++)
                     {
-                        e.Cancel = true;
-                        return -1;
-                    }
-
-                    string clientEDICode = String.Format("{0:G}", valueArray[row, 2]);
-                    if (String.Empty.Equals(clientEDICode))
-                    {
-                        continue;
-                    }
-
-                    bool isNew = false;
-                    Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
-                    if (client == null)
-                    {
-                        isNew = true;
-                        client = new Client();
-                        client.ClientEDICode = clientEDICode;
-                    }
-
-                    int column = 1;
-                    client.ClientCoreNo = String.Format("{0:G}", valueArray[row, column++]);
-                    column++;
-                    client.ClientNameCN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ClientNameEN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.AddressCN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.AddressEN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.CityCN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.CityEN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ProvinceCN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ProvinceEN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.PostCode = String.Format("{0:G}", valueArray[row, column++]);
-                    client.CountryCode = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Representative = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Website = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Contact = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Telephone = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Email = String.Format("{0:G}", valueArray[row, column++]);
-                    client.FaxNumber = String.Format("{0:G}", valueArray[row, column++]);
-                    client.CellPhone = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ClientType = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Industry = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ProductCN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ProductEN = String.Format("{0:G}", valueArray[row, column++]);
-                    client.ClientLevel = String.Format("{0:G}", valueArray[row, column++]);
-                    string groupNo = String.Format("{0:G}", valueArray[row, column++]);
-                    if (groupNo != string.Empty)
-                    {
-                        Client clientGroup = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == groupNo);
-                        if (clientGroup == null)
+                        if (worker.CancellationPending)
                         {
-                            throw new Exception("集团客户号错误: " + groupNo);
+                            e.Cancel = true;
+                            return -1;
                         }
+
+                        string clientEDICode = String.Format("{0:G}", valueArray[row, 2]);
+                        if (String.Empty.Equals(clientEDICode))
+                        {
+                            continue;
+                        }
+
+                        bool isNew = false;
+                        Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                        if (client == null)
+                        {
+                            isNew = true;
+                            client = new Client();
+                            client.ClientEDICode = clientEDICode;
+                            clientList.Add(client);
+                        }
+
+                        int column = 1;
+                        client.ClientCoreNo = String.Format("{0:G}", valueArray[row, column++]);
+                        column++;
+                        client.ClientNameCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ClientNameEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.AddressCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.AddressEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CityCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CityEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ProvinceCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ProvinceEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.PostCode = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CountryCode = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Representative = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Website = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Contact = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Telephone = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Email = String.Format("{0:G}", valueArray[row, column++]);
+                        client.FaxNumber = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CellPhone = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ClientType = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Industry = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ProductCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ProductEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ClientLevel = String.Format("{0:G}", valueArray[row, column++]);
+                        string groupNo = String.Format("{0:G}", valueArray[row, column++]);
+                        if (groupNo != string.Empty)
+                        {
+                            Client clientGroup = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == groupNo);
+                            if (clientGroup == null)
+                            {
+                                throw new Exception("集团客户号错误: " + groupNo);
+                            }
+                        }
+
+                        column++;
+                        client.RegistrationNumber = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CompanyCode = String.Format("{0:G}", valueArray[row, column++]);
+                        string departmentName = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Department = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName.Equals(departmentName));
+
+                        client.PMName = String.Format("{0:G}", valueArray[row, column++]);
+                        client.RMName = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                        if (client.CreateUserName == string.Empty)
+                        {
+                            client.CreateUserName = App.Current.CurUser.Name;
+                        }
+
+                        if (isNew)
+                        {
+                            App.Current.DbContext.Clients.InsertOnSubmit(client);
+                        }
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
 
-                    column++;
-                    client.RegistrationNumber = String.Format("{0:G}", valueArray[row, column++]);
-                    client.CompanyCode = String.Format("{0:G}", valueArray[row, column++]);
-                    string departmentName = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Department = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName.Equals(departmentName));
-
-                    client.PMName = String.Format("{0:G}", valueArray[row, column++]);
-                    client.RMName = String.Format("{0:G}", valueArray[row, column++]);
-                    client.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                    client.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                    if (client.CreateUserName == string.Empty)
-                    {
-                        client.CreateUserName = App.Current.CurUser.Name;
-                    }
-
-                    if (isNew)
-                    {
-                        App.Current.DbContext.Clients.InsertOnSubmit(client);
-                    }
-
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    App.Current.DbContext.SubmitChanges();
                 }
-
-                App.Current.DbContext.SubmitChanges();
+                catch (Exception e1)
+                {
+                    foreach (Client client in clientList)
+                    {
+                        client.ClientGroup = null;
+                        client.Department = null;
+                    }
+                    throw e1;
+                }
             }
 
             worker.ReportProgress(100);
