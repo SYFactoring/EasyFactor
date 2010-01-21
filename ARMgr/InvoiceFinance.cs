@@ -229,6 +229,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                     if (TypeUtil.EqualsZero(financeAmount))
                     {
+                        checkBoxCell.Value = 0;
                         return;
                     }
 

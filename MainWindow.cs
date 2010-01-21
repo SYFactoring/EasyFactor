@@ -69,8 +69,32 @@ namespace CMBC.EasyFactor
 
         #endregion Properties
 
-        #region Methods (60)
+        #region Methods (62)
 
+        // Public Methods (2) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="refundList"></param>
+        public void InvoiceRefund(List<Invoice> refundList, string paymentType)
+        {
+            ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REFUND);
+            this.SetDetailPanel(invoiceRefund);
+            InvoiceRefund uc = (InvoiceRefund)invoiceRefund.InvoiceControl;
+            uc.NewBatch(refundList,paymentType);
+        }
+
+        /// <summary>
+        /// Fill detail panel with user control
+        /// </summary>
+        /// <param name="uc">user control</param>
+        public void SetDetailPanel(UserControl uc)
+        {
+            uc.Dock = DockStyle.Fill;
+            this.ribbonDetailPanel.Controls.Clear();
+            this.ribbonDetailPanel.Controls.Add(uc);
+        }
         // Private Methods (60) 
 
         /// <summary>
@@ -188,7 +212,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CreditNotePayment(object sender, EventArgs e)
         {
-            ARCaseBasic creditNotePayment = new ARCaseBasic(ARCaseBasic.OpARType.CreditNotePayment);
+            ARCaseBasic creditNotePayment = new ARCaseBasic(ARCaseBasic.OpARType.CREDIT_NOTE);
             this.SetDetailPanel(creditNotePayment);
         }
 
@@ -351,7 +375,7 @@ namespace CMBC.EasyFactor
         /// <param name="e">event args</param>
         private void InvoiceAssign(object sender, EventArgs e)
         {
-            ARCaseBasic invoiceAssign = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceAssign);
+            ARCaseBasic invoiceAssign = new ARCaseBasic(ARCaseBasic.OpARType.ASSIGN);
             this.SetDetailPanel(invoiceAssign);
         }
 
@@ -362,7 +386,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceBuyerPayment(object sender, EventArgs e)
         {
-            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceBuyerPayment);
+            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.BUYER_PAYMENT);
             this.SetDetailPanel(invoicePayment);
         }
 
@@ -373,7 +397,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceFinance(object sender, EventArgs e)
         {
-            ARCaseBasic invoiceFinance = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceFinance);
+            ARCaseBasic invoiceFinance = new ARCaseBasic(ARCaseBasic.OpARType.FINANCE);
             this.SetDetailPanel(invoiceFinance);
         }
 
@@ -384,7 +408,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceGuaranteePayment(object sender, EventArgs e)
         {
-            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceGuaranteePayment);
+            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.GUARANTEE_PAYMENT);
             this.SetDetailPanel(invoicePayment);
         }
 
@@ -395,7 +419,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceIndirectPayment(object sender, EventArgs e)
         {
-            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceIndirectPayment);
+            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.INDIRECT_PAYMENT);
             this.SetDetailPanel(invoicePayment);
         }
 
@@ -406,20 +430,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceSellerReassign(object sender, EventArgs e)
         {
-            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceSellerReassign);
+            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REASSIGN);
             this.SetDetailPanel(invoicePayment);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="refundList"></param>
-        public void InvoiceSellerRefund(List<Invoice> refundList)
-        {
-            ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceSellerRefund);
-            this.SetDetailPanel(invoiceRefund);
-            InvoiceRefund uc = (InvoiceRefund)invoiceRefund.InvoiceControl;
-            uc.NewBatch(refundList);
         }
 
         /// <summary>
@@ -429,7 +441,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceSellerRefund(object sender, EventArgs e)
         {
-            ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceSellerRefund);
+            ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REFUND);
             this.SetDetailPanel(invoiceRefund);
         }
 
@@ -769,14 +781,28 @@ namespace CMBC.EasyFactor
         }
 
         /// <summary>
-        /// Fill detail panel with user control
+        /// 
         /// </summary>
-        /// <param name="uc">user control</param>
-        public void SetDetailPanel(UserControl uc)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SVNStat(object sender, EventArgs e)
         {
-            uc.Dock = DockStyle.Fill;
-            this.ribbonDetailPanel.Controls.Clear();
-            this.ribbonDetailPanel.Controls.Add(uc);
+            string target = "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/";
+            try
+            {
+                System.Diagnostics.Process.Start(target);
+            }
+            catch (System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                {
+                    MessageBox.Show(noBrowser.Message);
+                }
+            }
+            catch (Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
         }
 
         /// <summary>

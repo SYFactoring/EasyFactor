@@ -375,7 +375,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="refundList"></param>
-        public void NewBatch(List<Invoice> refundList)
+        public void NewBatch(List<Invoice> refundList, String refundType)
         {
             if (refundList == null || refundList.Count == 0)
             {
@@ -386,12 +386,21 @@ namespace CMBC.EasyFactor.ARMgr
             this._CDA = refundList[0].InvoiceAssignBatch.CDA;
             this.tbTotalRefund.Text = string.Empty;
             InvoiceRefundBatch batch = new InvoiceRefundBatch();
-            batch.RefundType = "卖方还款";
+            batch.RefundType = refundType;
             batch.RefundDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
             batch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = batch;
             this.invoiceBindingSource.DataSource = refundList;
+
+            for (int i = 0; i < this.invoiceBindingSource.List.Count; i++)
+            {
+                DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[i].Cells[0];
+                cell.Value = 1;
+                Invoice invoice = (Invoice)invoiceBindingSource.List[i];
+                invoice.RefundAmount2 = invoice.FinanceOutstanding;
+            }
+
             this.StatBatch();
         }
 
@@ -543,6 +552,7 @@ namespace CMBC.EasyFactor.ARMgr
                 isSaveOK = false;
                 MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
             if (isSaveOK)
             {
                 MessageBox.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -553,7 +563,6 @@ namespace CMBC.EasyFactor.ARMgr
                 }
                 App.Current.DbContext.SubmitChanges();
                 this.caseBasic.CaculateOutstanding(this._CDA);
-                this.NewBatch(null, null);
             }
         }
 

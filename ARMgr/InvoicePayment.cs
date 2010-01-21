@@ -601,7 +601,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (refundList.Count > 0)
                 {
                     MainWindow mainWindow = App.Current.MainWindow;
-                    mainWindow.InvoiceSellerRefund(refundList);
+                    mainWindow.InvoiceRefund(refundList,batch.PaymentType);
                 }
                 else
                 {

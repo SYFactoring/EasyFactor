@@ -152,5 +152,6 @@ namespace CMBC.EasyFactor.Help.About
         }
 
         #endregion Methods
+
     }
 }

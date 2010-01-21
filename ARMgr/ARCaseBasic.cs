@@ -20,7 +20,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class ARCaseBasic : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         private Case _case;
 
@@ -45,9 +45,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpARType opARType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -57,49 +57,49 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 转让
             /// </summary>
-            InvoiceAssign,
+            ASSIGN,
 
             /// <summary>
             /// 融资
             /// </summary>
-            InvoiceFinance,
+            FINANCE,
 
             /// <summary>
             /// 买方付款
             /// </summary>
-            InvoiceBuyerPayment,
+            BUYER_PAYMENT,
 
             /// <summary>
-            /// 卖方付款
+            /// 卖方还款
             /// </summary>
-            InvoiceSellerRefund,
+            SELLER_REFUND,
 
             /// <summary>
             /// 间接付款
             /// </summary>
-            InvoiceIndirectPayment,
+            INDIRECT_PAYMENT,
 
             /// <summary>
             /// 担保付款
             /// </summary>
-            InvoiceGuaranteePayment,
+            GUARANTEE_PAYMENT,
 
             /// <summary>
             /// 卖方回购
             /// </summary>
-            InvoiceSellerReassign,
+            SELLER_REASSIGN,
 
             /// <summary>
             /// 贷项通知
             /// </summary>
-            CreditNotePayment,
+            CREDIT_NOTE,
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
-/// <summary>
+        /// <summary>
         /// Initializes a new instance of the ARCaseBasic class
         /// </summary>
         /// <param name="opARType"></param>
@@ -109,29 +109,29 @@ namespace CMBC.EasyFactor.ARMgr
             this.opARType = opARType;
             switch (opARType)
             {
-                case OpARType.InvoiceAssign:
+                case OpARType.ASSIGN:
                     this.InvoiceControl = new InvoiceAssign(this);
                     break;
-                case OpARType.InvoiceFinance:
+                case OpARType.FINANCE:
                     this.InvoiceControl = new InvoiceFinance(this);
                     break;
-                case OpARType.InvoiceBuyerPayment:
+                case OpARType.BUYER_PAYMENT:
                     this.InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.BUYER_PAYMENT);
                     break;
-                case OpARType.InvoiceIndirectPayment:
+                case OpARType.INDIRECT_PAYMENT:
                     this.InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.INDIRECT_PAYMENT);
                     break;
-                case OpARType.InvoiceSellerRefund:
-                    this.InvoiceControl = new InvoiceRefund(this, InvoiceRefund.OpRefundType.SELLER_REFUND);
-                    break;
-                case OpARType.InvoiceGuaranteePayment:
+                case OpARType.GUARANTEE_PAYMENT:
                     this.InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.GUARANTEE_PAYMENT);
                     break;
-                case OpARType.InvoiceSellerReassign:
+                case OpARType.SELLER_REASSIGN:
                     this.InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.SELLER_REASSIGN);
                     break;
-                case OpARType.CreditNotePayment:
+                case OpARType.CREDIT_NOTE:
                     this.InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.CREDIT_NOTE_PAYMENT);
+                    break;
+                case OpARType.SELLER_REFUND:
+                    this.InvoiceControl = new InvoiceRefund(this, InvoiceRefund.OpRefundType.SELLER_REFUND);
                     break;
                 default:
                     this.InvoiceControl = new UserControl();
@@ -142,9 +142,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelInvoiceMgr.Controls.Add(InvoiceControl);
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (1) 
+        #region Properties (1)
 
         /// <summary>
         /// Gets or sets
@@ -155,11 +155,11 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (8) 
+        #region Methods (8)
 
-		// Public Methods (1) 
+        // Public Methods (1) 
 
         /// <summary>
         /// 
@@ -172,7 +172,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbFinanceCreditLineOutstanding.Text = String.Format("{0:N2}", cda.FinanceLineOutstanding);
             this.tbFinanceOutstanding.Text = String.Format("{0:N2}", cda.Case.FinanceOutstanding);
         }
-		// Private Methods (7) 
+        // Private Methods (7) 
 
         /// <summary>
         /// 
@@ -328,7 +328,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 this.CaculateOutstanding(cda);
 
-                if (!cda.FinanceLine.HasValue && this.opARType == OpARType.InvoiceFinance)
+                if (!cda.FinanceLine.HasValue && this.opARType == OpARType.FINANCE)
                 {
                     MessageBox.Show("本案无预付款额度，不能融资。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -394,6 +394,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }
