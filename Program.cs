@@ -35,7 +35,8 @@ namespace CMBC.EasyFactor
             if (App.Current.CurUser != null)
             {
                 MainWindow mainWindow = new MainWindow();
-                Application.Run(new MainWindow());
+                App.Current.MainWindow = mainWindow;
+                Application.Run(mainWindow);
             }
         }
     }

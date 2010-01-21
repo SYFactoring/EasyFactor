@@ -18,6 +18,8 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.Report;
     using CMBC.EasyFactor.Utils;
+    using System.Collections.Generic;
+    using CMBC.EasyFactor.DB.dbml;
 
     /// <summary>
     /// Main Window Form
@@ -411,6 +413,18 @@ namespace CMBC.EasyFactor
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="refundList"></param>
+        public void InvoiceSellerRefund(List<Invoice> refundList)
+        {
+            ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.InvoiceSellerRefund);
+            this.SetDetailPanel(invoiceRefund);
+            InvoiceRefund uc = (InvoiceRefund)invoiceRefund.InvoiceControl;
+            uc.NewBatch(refundList);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void InvoiceSellerRefund(object sender, EventArgs e)
@@ -758,7 +772,7 @@ namespace CMBC.EasyFactor
         /// Fill detail panel with user control
         /// </summary>
         /// <param name="uc">user control</param>
-        private void SetDetailPanel(UserControl uc)
+        public void SetDetailPanel(UserControl uc)
         {
             uc.Dock = DockStyle.Fill;
             this.ribbonDetailPanel.Controls.Clear();

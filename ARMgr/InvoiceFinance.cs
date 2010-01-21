@@ -98,6 +98,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 ControlUtil.SetComponetDefault(comp);
             }
+
             this.batchBindingSource.DataSource = typeof(InvoiceFinanceBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
@@ -194,19 +195,23 @@ namespace CMBC.EasyFactor.ARMgr
         private void dgvInvoices_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)
+            {
                 return;
+            }
+
             if (!this.superValidator.Validate())
             {
                 return;
             }
+
             IList invoiceList = this.invoiceBindingSource.List;
             Invoice invoice = (Invoice)invoiceList[e.RowIndex];
             this.dgvInvoices.EndEdit();
+
             if (this.dgvInvoices.Columns[e.ColumnIndex] == colCheckBox)
             {
 
                 DataGridViewCheckBoxCell checkBoxCell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[e.RowIndex].Cells[0];
-
                 if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
                 {
                     double currentFinanceAmount = currentBatchFinanceAmount;
@@ -222,20 +227,23 @@ namespace CMBC.EasyFactor.ARMgr
                         financeAmount = invoice.AssignOutstanding * this._CDA.FinanceProportion.Value;
                     }
 
-                    invoice.FinanceAmount = financeAmount;
+                    if (TypeUtil.EqualsZero(financeAmount))
+                    {
+                        return;
+                    }
 
+                    invoice.FinanceAmount = financeAmount;
                     invoice.FinanceDate = batch.FinancePeriodBegin;
                     invoice.FinanceDueDate = batch.FinancePeriodEnd;
 
-                    CaculateCommissionAndInterest(sender, e);
-
-                    ResetRow(e.RowIndex, true);
+                    this.CaculateCommissionAndInterest(sender, e);
+                    this.ResetRow(e.RowIndex, true);
                 }
                 else
                 {
-                    ResetRow(e.RowIndex, false);
+                    this.ResetRow(e.RowIndex, false);
                 }
-                StatBatch();
+                this.StatBatch();
             }
 
         }
@@ -248,9 +256,12 @@ namespace CMBC.EasyFactor.ARMgr
         void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value == null)
+            {
                 return;
+            }
+
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colFinanceDate || col == colFinanceDueDate || col == colInterestDate || col == colCommissionDate)
+            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colInterestDate || col == colCommissionDate)
             {
                 DateTime date = (DateTime)e.Value;
                 e.Value = date.ToString("yyyyMMdd");
@@ -269,14 +280,16 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             if (e.Value.Equals(string.Empty))
             {
                 e.Value = null;
                 e.ParsingApplied = true;
                 return;
             }
+
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colFinanceDate || col == colFinanceDueDate || col == colInterestDate || col == colCommissionDate)
+            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colInterestDate || col == colCommissionDate)
             {
                 string str = (string)e.Value;
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
@@ -295,8 +308,9 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colFinanceDate || col == colFinanceDueDate || col == colInterestDate || col == colCommissionDate)
+            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colInterestDate || col == colCommissionDate)
             {
                 string str = (string)e.FormattedValue;
                 DateTime result;
@@ -315,6 +329,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     e.Cancel = true;
                 }
+
                 if (result < 0)
                 {
                     e.Cancel = true;
@@ -333,10 +348,10 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            if (this.dgvInvoices.Columns[e.ColumnIndex] == colFinanceAmount)
+            if (this.dgvInvoices.Columns[e.ColumnIndex] == this.colFinanceAmount)
             {
-                StatBatch();
-                CaculateCommissionAndInterest(sender, e);
+                this.StatBatch();
+                this.CaculateCommissionAndInterest(sender, e);
             }
         }
 
@@ -362,10 +377,12 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
             if (!(this.batchBindingSource.DataSource is InvoiceFinanceBatch))
             {
                 return;
             }
+
             if (this.invoiceBindingSource.List.Count == 0)
             {
                 return;
@@ -387,6 +404,7 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
             if (!(this.batchBindingSource.DataSource is InvoiceFinanceBatch))
             {
                 return;
@@ -407,8 +425,10 @@ namespace CMBC.EasyFactor.ARMgr
                     {
                         cell.Value = 1;
                     }
-                    ResetRow(i, 1 == (int)cell.Value ? true : false);
+
+                    this.ResetRow(i, 1 == (int)cell.Value ? true : false);
                 }
+
                 this.StatBatch();
             }
         }
@@ -425,6 +445,7 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
             InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
             financeBatch.BatchCurrency = this._CDA.Case.InvoiceCurrency;
             financeBatch.CreateUserName = App.Current.CurUser.Name;
@@ -442,26 +463,27 @@ namespace CMBC.EasyFactor.ARMgr
         private void ResetRow(int rowIndex, bool editable)
         {
             this.dgvInvoices.Rows[rowIndex].Cells["colFinanceAmount"].ReadOnly = !editable;
-            this.dgvInvoices.Rows[rowIndex].Cells["colFinanceAmount"].ReadOnly = !editable;
-            this.dgvInvoices.Rows[rowIndex].Cells["colFinanceDate"].ReadOnly = !editable;
-            this.dgvInvoices.Rows[rowIndex].Cells["colFinanceDueDate"].ReadOnly = !editable;
             this.dgvInvoices.Rows[rowIndex].Cells["colComment"].ReadOnly = !editable;
             this.dgvInvoices.Rows[rowIndex].Cells["colInterest"].ReadOnly = !editable;
             this.dgvInvoices.Rows[rowIndex].Cells["colInterestDate"].ReadOnly = !editable;
-            this.dgvInvoices.Rows[rowIndex].Cells["colCommission"].ReadOnly = !editable;
-            this.dgvInvoices.Rows[rowIndex].Cells["colCommissionDate"].ReadOnly = !editable;
+            if (this._CDA.CommissionType == "按融资金额")
+            {
+                this.dgvInvoices.Rows[rowIndex].Cells["colCommission"].ReadOnly = !editable;
+                this.dgvInvoices.Rows[rowIndex].Cells["colCommissionDate"].ReadOnly = !editable;
+            }
+
             if (!editable)
             {
                 IList invoiceList = this.invoiceBindingSource.List;
                 Invoice invoice = (Invoice)invoiceList[rowIndex];
                 invoice.FinanceAmount = null;
-                invoice.FinanceDate = null;
-                invoice.FinanceDueDate = null;
                 invoice.Interest = null;
                 invoice.InterestDate = null;
-                invoice.Commission = null;
-                invoice.CommissionDate = null;
-                invoice.Comment = string.Empty;
+                if (this._CDA.CommissionType == "按融资金额")
+                {
+                    invoice.Commission = null;
+                    invoice.CommissionDate = null;
+                }
             }
         }
 
@@ -501,7 +523,10 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    ((Invoice)invoiceList[i]).InvoiceFinanceBatch = batch;
+                    Invoice invoice = (Invoice)invoiceList[i];
+                    invoice.InvoiceFinanceBatch = batch;
+                    invoice.FinanceDate = batch.FinancePeriodBegin;
+                    invoice.FinanceDueDate = batch.FinancePeriodEnd;
                 }
             }
 
@@ -535,6 +560,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectBatch(object sender, EventArgs e)
         {
             if (this._CDA == null)
@@ -579,6 +609,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
             FactorMgr factorMgr = new FactorMgr(false);
             QueryForm queryForm = new QueryForm(factorMgr, "选择代付行");
@@ -610,6 +641,7 @@ namespace CMBC.EasyFactor.ARMgr
                     totalInterest += ((Invoice)invoiceList[i]).Interest.GetValueOrDefault();
                 }
             }
+
             currentBatchFinanceAmount = totalFinance;
             this.tbFinanceLineBalance.Text = String.Format("{0:N2}", financeBatch.FinanceAmount - totalFinance);
             this.tbTotalInterest.Text = String.Format("{0:N2}", totalInterest);

@@ -126,6 +126,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 ControlUtil.SetComponetDefault(comp);
             }
+
             this.batchBindingSource.DataSource = typeof(InvoicePaymentBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
@@ -197,6 +198,7 @@ namespace CMBC.EasyFactor.ARMgr
             IList invoicePaymentList = this.invoiceBindingSource.List;
             Invoice invoice = (Invoice)invoicePaymentList[e.RowIndex];
             this.dgvInvoices.EndEdit();
+
             if (this.dgvInvoices.Columns[e.ColumnIndex] == colCheckBox)
             {
 
@@ -204,14 +206,15 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
                 {
-                    invoice.PaymentAmount2 = invoice.AssignAmount;
-                    ResetRow(e.RowIndex, true);
+                    invoice.PaymentAmount2 = invoice.AssignOutstanding;
+                    this.ResetRow(e.RowIndex, true);
                 }
                 else
                 {
-                    ResetRow(e.RowIndex, false);
+                    this.ResetRow(e.RowIndex, false);
                 }
-                StatBatch();
+
+                this.StatBatch();
             }
 
         }
@@ -227,6 +230,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
             if (col == colAssignDate || col == colDueDate || col == colFinanceDate || col == colFinanceDueDate || col == colCreditNoteDate2)
             {
@@ -247,12 +251,14 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             if (e.Value.Equals(string.Empty))
             {
                 e.Value = null;
                 e.ParsingApplied = true;
                 return;
             }
+
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
             if (col == colCreditNoteDate2)
             {
@@ -273,6 +279,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
             if (col == colCreditNoteDate2)
             {
@@ -311,9 +318,10 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            if (this.dgvInvoices.Columns[e.ColumnIndex] == colPaymentAmount2)
+
+            if (this.dgvInvoices.Columns[e.ColumnIndex] == this.colPaymentAmount2)
             {
-                StatBatch();
+                this.StatBatch();
             }
         }
 
@@ -339,10 +347,12 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
             if (!(this.batchBindingSource.DataSource is InvoicePaymentBatch))
             {
                 return;
             }
+
             if (this.invoiceBindingSource.List.Count == 0)
             {
                 return;
@@ -365,6 +375,7 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
             if (!(this.batchBindingSource.DataSource is InvoicePaymentBatch))
             {
                 return;
@@ -385,7 +396,8 @@ namespace CMBC.EasyFactor.ARMgr
                     {
                         cell.Value = 1;
                     }
-                    ResetRow(i, 1 == (int)cell.Value ? true : false);
+
+                    this.ResetRow(i, 1 == (int)cell.Value ? true : false);
                 }
                 this.StatBatch();
             }
@@ -426,13 +438,14 @@ namespace CMBC.EasyFactor.ARMgr
                 default:
                     break;
             }
+
             batch.PaymentDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
             batch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
-                              where invoice.InvoiceAssignBatch.CDACode == this._CDA.CDACode && (invoice.PaymentAmount.GetValueOrDefault()-invoice.AssignAmount<0.00000001)
+                              where invoice.InvoiceAssignBatch.CDACode == this._CDA.CDACode && (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.00000001)
                               select invoice;
             this.invoiceBindingSource.DataSource = queryResult;
             this.StatBatch();
@@ -470,14 +483,17 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
             if (!this.superValidator.Validate())
             {
                 return;
             }
+
             if (!(this.batchBindingSource.DataSource is InvoicePaymentBatch))
             {
                 return;
             }
+
             if (!ValidateBatch())
             {
                 return;
@@ -487,6 +503,7 @@ namespace CMBC.EasyFactor.ARMgr
             InvoicePaymentBatch batch = (InvoicePaymentBatch)this.batchBindingSource.DataSource;
             IList invoiceList = this.invoiceBindingSource.List;
             List<InvoicePaymentLog> logList = new List<InvoicePaymentLog>();
+            List<Invoice> refundList = new List<Invoice>();
             try
             {
                 batch.CDA = this._CDA;
@@ -494,6 +511,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     batch.PaymentBatchNo = Invoice.GeneratePaymentBatchNo(DateTime.Now.Date);
                 }
+
                 for (int i = 0; i < invoiceList.Count; i++)
                 {
                     if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
@@ -513,6 +531,7 @@ namespace CMBC.EasyFactor.ARMgr
                                 throw new Exception("还款ID错误");
                             }
                         }
+
                         log.Invoice = invoice;
                         log.PaymentAmount = invoice.PaymentAmount2.GetValueOrDefault();
 
@@ -530,14 +549,22 @@ namespace CMBC.EasyFactor.ARMgr
                                 }
                             }
                         }
+
                         if (creditNote != null)
                         {
                             log.CreditNote = creditNote;
                         }
+
                         log.InvoicePaymentBatch = batch;
                         invoice.CaculatePayment();
+
+                        if (invoice.FinanceOutstanding > 0)
+                        {
+                            refundList.Add(invoice);
+                        }
                     }
                 }
+
                 if (batch.InvoicePaymentLogs.Count == 0)
                 {
                     return;
@@ -559,6 +586,7 @@ namespace CMBC.EasyFactor.ARMgr
                 isSaveOK = false;
                 MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
             if (isSaveOK)
             {
                 MessageBox.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -567,8 +595,18 @@ namespace CMBC.EasyFactor.ARMgr
                     Invoice invoice = log.Invoice;
                     invoice.PaymentAmount2 = null;
                 }
+
                 App.Current.DbContext.SubmitChanges();
                 this.caseBasic.CaculateOutstanding(this._CDA);
+                if (refundList.Count > 0)
+                {
+                    MainWindow mainWindow = App.Current.MainWindow;
+                    mainWindow.InvoiceSellerRefund(refundList);
+                }
+                else
+                {
+                    this.NewBatch(null, null);
+                }
             }
         }
 

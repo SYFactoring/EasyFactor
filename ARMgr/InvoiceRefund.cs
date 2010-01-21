@@ -189,14 +189,15 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
                 {
-                    invoice.RefundAmount2 = invoice.AssignAmount;
-                    ResetRow(e.RowIndex, true);
+                    invoice.RefundAmount2 = invoice.FinanceOutstanding;
+                    this.ResetRow(e.RowIndex, true);
                 }
                 else
                 {
-                    ResetRow(e.RowIndex, false);
+                    this.ResetRow(e.RowIndex, false);
                 }
-                StatBatch();
+
+                this.StatBatch();
             }
 
         }
@@ -212,8 +213,9 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colFinanceDate || col == colFinanceDueDate)
+            if (col == this.colAssignDate || col == this.colDueDate || col == this.colFinanceDate || col == this.colFinanceDueDate)
             {
                 DateTime date = (DateTime)e.Value;
                 e.Value = date.ToString("yyyyMMdd");
@@ -232,12 +234,14 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             if (e.Value.Equals(string.Empty))
             {
                 e.Value = null;
                 e.ParsingApplied = true;
                 return;
             }
+
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
         }
 
@@ -252,8 +256,9 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colRefundAmount2)
+            if (col == this.colRefundAmount2)
             {
                 string str = (string)e.FormattedValue;
                 double result;
@@ -262,6 +267,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     e.Cancel = true;
                 }
+
                 if (result < 0)
                 {
                     e.Cancel = true;
@@ -280,9 +286,10 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             if (this.dgvInvoices.Columns[e.ColumnIndex] == colRefundAmount2)
             {
-                StatBatch();
+                this.StatBatch();
             }
         }
 
@@ -308,10 +315,12 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
             if (!(this.batchBindingSource.DataSource is InvoiceRefundBatch))
             {
                 return;
             }
+
             if (this.invoiceBindingSource.List.Count == 0)
             {
                 return;
@@ -319,7 +328,6 @@ namespace CMBC.EasyFactor.ARMgr
 
             ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_BY_BATCH);
             exportForm.StartExport(this.invoiceBindingSource.List);
-
         }
 
         /// <summary>
@@ -334,6 +342,7 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
             if (!(this.batchBindingSource.DataSource is InvoiceRefundBatch))
             {
                 return;
@@ -354,10 +363,36 @@ namespace CMBC.EasyFactor.ARMgr
                     {
                         cell.Value = 1;
                     }
-                    ResetRow(i, 1 == (int)cell.Value ? true : false);
+
+                    this.ResetRow(i, 1 == (int)cell.Value ? true : false);
                 }
+
                 this.StatBatch();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="refundList"></param>
+        public void NewBatch(List<Invoice> refundList)
+        {
+            if (refundList == null || refundList.Count == 0)
+            {
+                return;
+            }
+
+            this.caseBasic.Case = refundList[0].InvoiceAssignBatch.CDA.Case;
+            this._CDA = refundList[0].InvoiceAssignBatch.CDA;
+            this.tbTotalRefund.Text = string.Empty;
+            InvoiceRefundBatch batch = new InvoiceRefundBatch();
+            batch.RefundType = "卖方还款";
+            batch.RefundDate = DateTime.Now.Date;
+            batch.CreateUserName = App.Current.CurUser.Name;
+            batch.CheckStatus = "未复核";
+            this.batchBindingSource.DataSource = batch;
+            this.invoiceBindingSource.DataSource = refundList;
+            this.StatBatch();
         }
 
         /// <summary>
@@ -392,13 +427,14 @@ namespace CMBC.EasyFactor.ARMgr
                 default:
                     break;
             }
+
             batch.RefundDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
             batch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
-                              where invoice.InvoiceAssignBatch.CDACode == this._CDA.CDACode && (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < 0.00000001)
+                              where invoice.InvoiceAssignBatch.CDACode == this._CDA.CDACode && (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.00000001)
                               select invoice;
             this.invoiceBindingSource.DataSource = queryResult;
             this.StatBatch();
@@ -433,14 +469,17 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
             if (!this.superValidator.Validate())
             {
                 return;
             }
+
             if (!(this.batchBindingSource.DataSource is InvoiceRefundBatch))
             {
                 return;
             }
+
             if (!ValidateBatch())
             {
                 return;
@@ -476,6 +515,7 @@ namespace CMBC.EasyFactor.ARMgr
                                 throw new Exception("还款ID错误");
                             }
                         }
+
                         log.Invoice = invoice;
                         log.RefundAmount = invoice.RefundAmount2.GetValueOrDefault();
                         log.InvoiceRefundBatch = batch;
@@ -498,6 +538,7 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.CaculateRefund();
                     log.InvoiceRefundBatch = null;
                 }
+
                 batch.CDA = null;
                 isSaveOK = false;
                 MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -510,8 +551,10 @@ namespace CMBC.EasyFactor.ARMgr
                     Invoice invoice = log.Invoice;
                     invoice.RefundAmount2 = null;
                 }
+
                 App.Current.DbContext.SubmitChanges();
                 this.caseBasic.CaculateOutstanding(this._CDA);
+                this.NewBatch(null, null);
             }
         }
 

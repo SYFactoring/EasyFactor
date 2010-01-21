@@ -203,6 +203,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            priceLabel.BackgroundStyle.Class = "";
             priceLabel.Location = new System.Drawing.Point(6, 30);
             priceLabel.Name = "priceLabel";
             priceLabel.Size = new System.Drawing.Size(72, 16);
@@ -215,6 +216,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            iFPriceLabel.BackgroundStyle.Class = "";
             iFPriceLabel.Location = new System.Drawing.Point(7, 71);
             iFPriceLabel.Name = "iFPriceLabel";
             iFPriceLabel.Size = new System.Drawing.Size(69, 16);
@@ -227,6 +229,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            handFeeCurrLabel.BackgroundStyle.Class = "";
             handFeeCurrLabel.Location = new System.Drawing.Point(6, 93);
             handFeeCurrLabel.Name = "handFeeCurrLabel";
             handFeeCurrLabel.Size = new System.Drawing.Size(72, 16);
@@ -239,6 +242,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            financeProportionLabel.BackgroundStyle.Class = "";
             financeProportionLabel.Location = new System.Drawing.Point(17, 27);
             financeProportionLabel.Name = "financeProportionLabel";
             financeProportionLabel.Size = new System.Drawing.Size(59, 16);
@@ -251,6 +255,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            creditCoverCurrLabel.BackgroundStyle.Class = "";
             creditCoverCurrLabel.Location = new System.Drawing.Point(6, 30);
             creditCoverCurrLabel.Name = "creditCoverCurrLabel";
             creditCoverCurrLabel.Size = new System.Drawing.Size(84, 16);
@@ -263,6 +268,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            periodEndLabel.BackgroundStyle.Class = "";
             periodEndLabel.Location = new System.Drawing.Point(42, 54);
             periodEndLabel.Name = "periodEndLabel";
             periodEndLabel.Size = new System.Drawing.Size(47, 16);
@@ -275,6 +281,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            lblBuyerCreditCoverBalance.BackgroundStyle.Class = "";
             lblBuyerCreditCoverBalance.Location = new System.Drawing.Point(30, 79);
             lblBuyerCreditCoverBalance.Name = "lblBuyerCreditCoverBalance";
             lblBuyerCreditCoverBalance.Size = new System.Drawing.Size(59, 16);
@@ -287,6 +294,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            lblBuyerARBalance.BackgroundStyle.Class = "";
             lblBuyerARBalance.Location = new System.Drawing.Point(6, 99);
             lblBuyerARBalance.Name = "lblBuyerARBalance";
             lblBuyerARBalance.Size = new System.Drawing.Size(84, 16);
@@ -299,6 +307,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            lblFinanceARBalance.BackgroundStyle.Class = "";
             lblFinanceARBalance.Location = new System.Drawing.Point(15, 113);
             lblFinanceARBalance.Name = "lblFinanceARBalance";
             lblFinanceARBalance.Size = new System.Drawing.Size(59, 16);
@@ -311,6 +320,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            lblFinanceCreditCoverBalance.BackgroundStyle.Class = "";
             lblFinanceCreditCoverBalance.Location = new System.Drawing.Point(16, 93);
             lblFinanceCreditCoverBalance.Name = "lblFinanceCreditCoverBalance";
             lblFinanceCreditCoverBalance.Size = new System.Drawing.Size(59, 16);
@@ -323,6 +333,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            lblDueDate.BackgroundStyle.Class = "";
             lblDueDate.Location = new System.Drawing.Point(29, 73);
             lblDueDate.Name = "lblDueDate";
             lblDueDate.Size = new System.Drawing.Size(47, 16);
@@ -335,6 +346,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            lblCreditLine.BackgroundStyle.Class = "";
             lblCreditLine.Location = new System.Drawing.Point(5, 51);
             lblCreditLine.Name = "lblCreditLine";
             lblCreditLine.Size = new System.Drawing.Size(72, 16);
@@ -347,6 +359,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            efPriceLbl.BackgroundStyle.Class = "";
             efPriceLbl.Location = new System.Drawing.Point(6, 50);
             efPriceLbl.Name = "efPriceLbl";
             efPriceLbl.Size = new System.Drawing.Size(74, 16);
@@ -359,6 +372,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            lblCommissionType.BackgroundStyle.Class = "";
             lblCommissionType.Location = new System.Drawing.Point(16, 113);
             lblCommissionType.Name = "lblCommissionType";
             lblCommissionType.Size = new System.Drawing.Size(59, 16);
@@ -371,6 +385,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            lblCaseCode.BackgroundStyle.Class = "";
             lblCaseCode.Location = new System.Drawing.Point(307, 48);
             lblCaseCode.Name = "lblCaseCode";
             lblCaseCode.Size = new System.Drawing.Size(59, 16);
@@ -383,6 +398,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            lblCDACode.BackgroundStyle.Class = "";
             lblCDACode.Location = new System.Drawing.Point(272, 27);
             lblCDACode.Name = "lblCDACode";
             lblCDACode.Size = new System.Drawing.Size(97, 16);
@@ -395,6 +411,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            lblIsNotice.BackgroundStyle.Class = "";
             lblIsNotice.Location = new System.Drawing.Point(307, 135);
             lblIsNotice.Name = "lblIsNotice";
             lblIsNotice.Size = new System.Drawing.Size(62, 16);
@@ -407,6 +424,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            ownerDepartmentCodeLabel.BackgroundStyle.Class = "";
             ownerDepartmentCodeLabel.Location = new System.Drawing.Point(6, 30);
             ownerDepartmentCodeLabel.Name = "ownerDepartmentCodeLabel";
             ownerDepartmentCodeLabel.Size = new System.Drawing.Size(87, 16);
@@ -419,6 +437,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            assignTypeLabel.BackgroundStyle.Class = "";
             assignTypeLabel.Location = new System.Drawing.Point(309, 112);
             assignTypeLabel.Name = "assignTypeLabel";
             assignTypeLabel.Size = new System.Drawing.Size(59, 16);
@@ -431,6 +450,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            sellerEDICodeLabel.BackgroundStyle.Class = "";
             sellerEDICodeLabel.Location = new System.Drawing.Point(56, 49);
             sellerEDICodeLabel.Name = "sellerEDICodeLabel";
             sellerEDICodeLabel.Size = new System.Drawing.Size(34, 16);
@@ -443,6 +463,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            RMLabel.BackgroundStyle.Class = "";
             RMLabel.Location = new System.Drawing.Point(309, 93);
             RMLabel.Name = "RMLabel";
             RMLabel.Size = new System.Drawing.Size(59, 16);
@@ -455,6 +476,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            PMLabel.BackgroundStyle.Class = "";
             PMLabel.Location = new System.Drawing.Point(309, 70);
             PMLabel.Name = "PMLabel";
             PMLabel.Size = new System.Drawing.Size(59, 16);
@@ -467,6 +489,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            buyerEDICodeLabel.BackgroundStyle.Class = "";
             buyerEDICodeLabel.Location = new System.Drawing.Point(55, 71);
             buyerEDICodeLabel.Name = "buyerEDICodeLabel";
             buyerEDICodeLabel.Size = new System.Drawing.Size(34, 16);
@@ -479,6 +502,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            invoiceCurrencyLabel.BackgroundStyle.Class = "";
             invoiceCurrencyLabel.Location = new System.Drawing.Point(31, 135);
             invoiceCurrencyLabel.Name = "invoiceCurrencyLabel";
             invoiceCurrencyLabel.Size = new System.Drawing.Size(59, 16);
@@ -491,6 +515,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            factorCodeLabel.BackgroundStyle.Class = "";
             factorCodeLabel.Location = new System.Drawing.Point(43, 91);
             factorCodeLabel.Name = "factorCodeLabel";
             factorCodeLabel.Size = new System.Drawing.Size(47, 16);
@@ -503,6 +528,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            transactionTypeLabel.BackgroundStyle.Class = "";
             transactionTypeLabel.Location = new System.Drawing.Point(31, 114);
             transactionTypeLabel.Name = "transactionTypeLabel";
             transactionTypeLabel.Size = new System.Drawing.Size(59, 16);
@@ -515,6 +541,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            lblHighestFinance.BackgroundStyle.Class = "";
             lblHighestFinance.Location = new System.Drawing.Point(5, 134);
             lblHighestFinance.Name = "lblHighestFinance";
             lblHighestFinance.Size = new System.Drawing.Size(121, 16);
@@ -527,6 +554,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            lblPaymentTerms.BackgroundStyle.Class = "";
             lblPaymentTerms.Location = new System.Drawing.Point(27, 155);
             lblPaymentTerms.Name = "lblPaymentTerms";
             lblPaymentTerms.Size = new System.Drawing.Size(59, 16);
@@ -987,7 +1015,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbCaseCode.ReadOnly = true;
             this.tbCaseCode.Size = new System.Drawing.Size(100, 20);
             this.tbCaseCode.TabIndex = 57;
-            this.tbCaseCode.Click += new System.EventHandler(this.DetailCase);
+            this.tbCaseCode.DoubleClick += new System.EventHandler(this.DetailCase);
             // 
             // tbCDACode
             // 
@@ -1000,7 +1028,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbCDACode.ReadOnly = true;
             this.tbCDACode.Size = new System.Drawing.Size(100, 20);
             this.tbCDACode.TabIndex = 55;
-            this.tbCDACode.Click += new System.EventHandler(this.DetailCDA);
+            this.tbCDACode.DoubleClick += new System.EventHandler(this.DetailCDA);
             // 
             // tbIsNotice
             // 
@@ -1061,7 +1089,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.sellerEDICodeTextBox.ReadOnly = true;
             this.sellerEDICodeTextBox.Size = new System.Drawing.Size(64, 20);
             this.sellerEDICodeTextBox.TabIndex = 33;
-            this.sellerEDICodeTextBox.Click += new System.EventHandler(this.DetailSeller);
+            this.sellerEDICodeTextBox.DoubleClick += new System.EventHandler(this.DetailSeller);
             // 
             // RMTextBox
             // 
@@ -1086,7 +1114,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.sellerNameTextBox.ReadOnly = true;
             this.sellerNameTextBox.Size = new System.Drawing.Size(136, 20);
             this.sellerNameTextBox.TabIndex = 34;
-            this.sellerNameTextBox.Click += new System.EventHandler(this.DetailSeller);
+            this.sellerNameTextBox.DoubleClick += new System.EventHandler(this.DetailSeller);
             // 
             // PMTextBox
             // 
@@ -1111,7 +1139,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.buyerEDICodeTextBox.ReadOnly = true;
             this.buyerEDICodeTextBox.Size = new System.Drawing.Size(64, 20);
             this.buyerEDICodeTextBox.TabIndex = 36;
-            this.buyerEDICodeTextBox.Click += new System.EventHandler(this.DetailBuyer);
+            this.buyerEDICodeTextBox.DoubleClick += new System.EventHandler(this.DetailBuyer);
             // 
             // buyerNameTextBox
             // 
@@ -1124,7 +1152,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.buyerNameTextBox.ReadOnly = true;
             this.buyerNameTextBox.Size = new System.Drawing.Size(136, 20);
             this.buyerNameTextBox.TabIndex = 37;
-            this.buyerNameTextBox.Click += new System.EventHandler(this.DetailBuyer);
+            this.buyerNameTextBox.DoubleClick += new System.EventHandler(this.DetailBuyer);
             // 
             // isRecoarseCheckBox
             // 
@@ -1132,6 +1160,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            this.isRecoarseCheckBox.BackgroundStyle.Class = "";
             this.isRecoarseCheckBox.Enabled = false;
             this.isRecoarseCheckBox.Location = new System.Drawing.Point(198, 138);
             this.isRecoarseCheckBox.Name = "isRecoarseCheckBox";
@@ -1150,7 +1179,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.factorCodeTextBox.ReadOnly = true;
             this.factorCodeTextBox.Size = new System.Drawing.Size(64, 20);
             this.factorCodeTextBox.TabIndex = 39;
-            this.factorCodeTextBox.Click += new System.EventHandler(this.DetailFactor);
+            this.factorCodeTextBox.DoubleClick += new System.EventHandler(this.DetailFactor);
             // 
             // invoiceCurrencyTextBox
             // 
@@ -1175,7 +1204,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.factorNameTextBox.ReadOnly = true;
             this.factorNameTextBox.Size = new System.Drawing.Size(136, 20);
             this.factorNameTextBox.TabIndex = 40;
-            this.factorNameTextBox.Click += new System.EventHandler(this.DetailFactor);
+            this.factorNameTextBox.DoubleClick += new System.EventHandler(this.DetailFactor);
             // 
             // transactionTypeTextBox
             // 
@@ -1225,6 +1254,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelCase.ResumeLayout(false);
             this.panelCase.PerformLayout();
             this.ResumeLayout(false);
+
         }
         #endregion
     }
