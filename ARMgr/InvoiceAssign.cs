@@ -95,19 +95,22 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="selectedInvoice"></param>
         private void CaculateCommisssion(Invoice selectedInvoice)
         {
-            if (this._CDA.CommissionType == "按转让金额")
+            if (selectedInvoice.Commission.HasValue == false)
             {
-                selectedInvoice.Commission = selectedInvoice.AssignAmount * this._CDA.Price ?? 0;
-                if (selectedInvoice.Commission.GetValueOrDefault() > 0)
+                if (this._CDA.CommissionType == "按转让金额")
                 {
-                    if (selectedInvoice.InvoiceAssignBatch != null)
+                    selectedInvoice.Commission = selectedInvoice.AssignAmount * this._CDA.Price ?? 0;
+                    if (selectedInvoice.Commission.GetValueOrDefault() > 0)
                     {
-                        selectedInvoice.CommissionDate = selectedInvoice.InvoiceAssignBatch.AssignDate;
+                        if (selectedInvoice.InvoiceAssignBatch != null)
+                        {
+                            selectedInvoice.CommissionDate = selectedInvoice.InvoiceAssignBatch.AssignDate;
+                        }
                     }
-                }
-                else
-                {
-                    selectedInvoice.CommissionDate = null;
+                    else
+                    {
+                        selectedInvoice.CommissionDate = null;
+                    }
                 }
             }
         }

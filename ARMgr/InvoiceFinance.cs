@@ -109,28 +109,32 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CaculateCommissionAndInterest(object sender, DataGridViewCellEventArgs e)
+        private void CaculateCommissionAndInterest(Invoice invoice)
         {
-            IList invoiceList = this.invoiceBindingSource.List;
-            Invoice invoice = (Invoice)invoiceList[e.RowIndex];
             InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
-            int period = (batch.FinancePeriodEnd - batch.FinancePeriodBegin).Days;
-            switch (batch.InterestType)
+            if (invoice.Interest.HasValue == false)
             {
-                case "一次性收取":
-                    invoice.Interest = invoice.FinanceAmount * (batch.FinanceRate - batch.CostRate) / 360 * period;
-                    invoice.InterestDate = invoice.FinanceDate;
-                    break;
-                default:
-                    break;
+                int period = (batch.FinancePeriodEnd - batch.FinancePeriodBegin).Days;
+                switch (batch.InterestType)
+                {
+                    case "一次性收取":
+                        invoice.Interest = invoice.FinanceAmount * (batch.FinanceRate - batch.CostRate) / 360 * period;
+                        invoice.InterestDate = invoice.FinanceDate;
+                        break;
+                    default:
+                        break;
+                }
             }
 
-            if (this._CDA.CommissionType == "按融资金额")
+            if (invoice.Commission.HasValue == false)
             {
-                invoice.Commission = invoice.FinanceAmount * this._CDA.Price ?? 0;
-                if (invoice.Commission.GetValueOrDefault() > 0)
+                if (this._CDA.CommissionType == "按融资金额")
                 {
-                    invoice.CommissionDate = invoice.FinanceDate;
+                    invoice.Commission = invoice.FinanceAmount * this._CDA.Price ?? 0;
+                    if (invoice.Commission.GetValueOrDefault() > 0)
+                    {
+                        invoice.CommissionDate = invoice.FinanceDate;
+                    }
                 }
             }
 
@@ -237,7 +241,7 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.FinanceDate = batch.FinancePeriodBegin;
                     invoice.FinanceDueDate = batch.FinancePeriodEnd;
 
-                    this.CaculateCommissionAndInterest(sender, e);
+                    this.CaculateCommissionAndInterest(invoice);
                     this.ResetRow(e.RowIndex, true);
                 }
                 else
@@ -349,10 +353,11 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             if (this.dgvInvoices.Columns[e.ColumnIndex] == this.colFinanceAmount)
             {
                 this.StatBatch();
-                this.CaculateCommissionAndInterest(sender, e);
+                this.CaculateCommissionAndInterest((Invoice)this.invoiceBindingSource.List[e.RowIndex]);
             }
         }
 
@@ -425,6 +430,10 @@ namespace CMBC.EasyFactor.ARMgr
                     if (invoiceList.Contains(oldInvoice) && oldInvoice.FinanceAmount.HasValue)
                     {
                         cell.Value = 1;
+                        if (oldInvoice.Interest.HasValue == false)
+                        {
+                            this.CaculateCommissionAndInterest(oldInvoice);
+                        }
                     }
 
                     this.ResetRow(i, 1 == (int)cell.Value ? true : false);
