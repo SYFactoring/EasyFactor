@@ -80,7 +80,22 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_INVOICES_BY_BATCH,
+            IMPORT_ASSIGN_BY_BATCH,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            IMPORT_FINANCE_BY_BATCH,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            IMPORT_PAYMENT_BY_BATCH,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            IMPORT_REFUND_BY_BATCH,
 
             /// <summary>
             /// 
@@ -126,8 +141,17 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_CONTRACT_CDA:
                     this.Text = "保理合同及额度通知书导入";
                     break;
-                case ImportType.IMPORT_INVOICES_BY_BATCH:
-                    this.Text = "当前批次导入";
+                case ImportType.IMPORT_ASSIGN_BY_BATCH:
+                    this.Text = "当前转让批次导入";
+                    break;
+                case ImportType.IMPORT_FINANCE_BY_BATCH:
+                    this.Text = "当前融资批次导入";
+                    break;
+                case ImportType.IMPORT_PAYMENT_BY_BATCH:
+                    this.Text = "当前付款批次导入";
+                    break;
+                case ImportType.IMPORT_REFUND_BY_BATCH:
+                    this.Text = "当前还款批次导入";
                     break;
                 case ImportType.IMPORT_INVOICES:
                     this.Text = "台帐导入";
@@ -190,8 +214,17 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_CONTRACT_CDA:
                     e.Result = this.ImportContractAndCDA((string)e.Argument, worker, e);
                     break;
-                case ImportType.IMPORT_INVOICES_BY_BATCH:
-                    e.Result = this.ImportInvoicesByBatch((string)e.Argument, worker, e);
+                case ImportType.IMPORT_ASSIGN_BY_BATCH:
+                    e.Result = this.ImportAssignByBatch((string)e.Argument, worker, e);
+                    break;
+                case ImportType.IMPORT_FINANCE_BY_BATCH:
+                    e.Result = this.ImportFinanceByBatch((string)e.Argument, worker, e);
+                    break;
+                case ImportType.IMPORT_PAYMENT_BY_BATCH:
+                    e.Result = this.ImportPaymentByBatch((string)e.Argument, worker, e);
+                    break;
+                case ImportType.IMPORT_REFUND_BY_BATCH:
+                    e.Result = this.ImportRefundByBatch((string)e.Argument, worker, e);
                     break;
                 case ImportType.IMPORT_INVOICES:
                     e.Result = this.ImportInvoices((string)e.Argument, worker, e);
@@ -236,7 +269,7 @@ namespace CMBC.EasyFactor.Utils
 
             this.btnStart.Enabled = true;
             this.btnCancel.Text = "关闭";
-            if (e.Error == null && this.importType == ImportType.IMPORT_INVOICES_BY_BATCH)
+            if (e.Error == null && (this.importType == ImportType.IMPORT_ASSIGN_BY_BATCH || this.importType == ImportType.IMPORT_FINANCE_BY_BATCH || this.importType == ImportType.IMPORT_PAYMENT_BY_BATCH || this.importType == ImportType.IMPORT_REFUND_BY_BATCH))
             {
                 this.Close();
             }
@@ -1603,7 +1636,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ImportInvoicesByBatch(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportAssignByBatch(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
@@ -1644,23 +1677,135 @@ namespace CMBC.EasyFactor.Utils
                     invoice.InvoiceDate = (DateTime)valueArray[row, column++];
                     invoice.DueDate = (DateTime)valueArray[row, column++];
                     invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
-
-                    invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.FinanceDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.FinanceDueDate = (System.Nullable<DateTime>)valueArray[row, column++];
-
-                    invoice.PaymentAmount2 = (System.Nullable<double>)valueArray[row, column++];
-
-                    invoice.RefundAmount2 = (System.Nullable<double>)valueArray[row, column++];
-
                     invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
                     invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                    invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
+                    invoiceList.Add(invoice);
+                    result++;
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+            }
+
+            this.ImportedList = invoiceList;
+            worker.ReportProgress(100);
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int ImportFinanceByBatch(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            object[,] valueArray = this.GetValueArray(fileName, 1);
+            int result = 0;
+            List<Invoice> invoiceList = new List<Invoice>();
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+
+                for (int row = 2; row <= size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        return -1;
+                    }
+                    //int column = 12;
+                    int column = 1;
+                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                    if (invoiceNo.Equals(string.Empty))
+                    {
+                        continue;
+                    }
+
+                    Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                    if (invoice == null)
+                    {
+                        invoice = new Invoice();
+                        invoice.InvoiceNo = invoiceNo;
+                        Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        if (old != null)
+                        {
+                            throw new Exception("发票号重复: " + old.InvoiceNo);
+                        }
+                    }
+
+                    column++;
+                    invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
                     invoice.Interest = (System.Nullable<double>)valueArray[row, column++];
                     invoice.InterestDate = (System.Nullable<DateTime>)valueArray[row, column++];
-
                     invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                    if (column > 18)
+
+                    invoiceList.Add(invoice);
+                    result++;
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+            }
+
+            this.ImportedList = invoiceList;
+            worker.ReportProgress(100);
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int ImportPaymentByBatch(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            object[,] valueArray = this.GetValueArray(fileName, 1);
+            int result = 0;
+            List<Invoice> invoiceList = new List<Invoice>();
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+
+                for (int row = 2; row <= size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        return -1;
+                    }
+                    //int column = 12;
+                    int column = 1;
+                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                    if (invoiceNo.Equals(string.Empty))
+                    {
+                        continue;
+                    }
+
+                    Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                    if (invoice == null)
+                    {
+                        invoice = new Invoice();
+                        invoice.InvoiceNo = invoiceNo;
+                        Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        if (old != null)
+                        {
+                            throw new Exception("发票号重复: " + old.InvoiceNo);
+                        }
+                    }
+
+                    column++;
+                    invoice.PaymentAmount2 = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                    if (valueArray.GetUpperBound(1) > 4)
                     {
                         invoice.CreditNoteNo2 = String.Format("{0:G}", valueArray[row, column++]);
                         invoice.CreditNoteDate2 = (System.Nullable<DateTime>)valueArray[row, column++];
@@ -1679,6 +1824,64 @@ namespace CMBC.EasyFactor.Utils
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int ImportRefundByBatch(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            object[,] valueArray = this.GetValueArray(fileName, 1);
+            int result = 0;
+            List<Invoice> invoiceList = new List<Invoice>();
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+
+                for (int row = 2; row <= size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        return -1;
+                    }
+                    //int column = 12;
+                    int column = 1;
+                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                    if (invoiceNo.Equals(string.Empty))
+                    {
+                        continue;
+                    }
+
+                    Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                    if (invoice == null)
+                    {
+                        invoice = new Invoice();
+                        invoice.InvoiceNo = invoiceNo;
+                        Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        if (old != null)
+                        {
+                            throw new Exception("发票号重复: " + old.InvoiceNo);
+                        }
+                    }
+                    column++;
+                    invoice.RefundAmount2 = (System.Nullable<double>)valueArray[row, column++];
+                    invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                    invoiceList.Add(invoice);
+                    result++;
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+            }
+
+            this.ImportedList = invoiceList;
+            worker.ReportProgress(100);
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
         /// <summary>
         /// 
         /// </summary>

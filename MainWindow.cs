@@ -82,7 +82,7 @@ namespace CMBC.EasyFactor
             ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REFUND);
             this.SetDetailPanel(invoiceRefund);
             InvoiceRefund uc = (InvoiceRefund)invoiceRefund.InvoiceControl;
-            uc.NewBatch(refundList,paymentType);
+            uc.NewBatch(refundList, paymentType);
         }
 
         /// <summary>
@@ -255,8 +255,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportCases(object sender, EventArgs e)
         {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CASES);
-            importForm.Show();
+            if (this.ValidateRole())
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CASES);
+                importForm.Show();
+            }
         }
 
         /// <summary>
@@ -350,8 +353,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportInvoices(object sender, EventArgs e)
         {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES);
-            importForm.Show();
+            if (this.ValidateRole())
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES);
+                importForm.Show();
+            }
         }
 
         /// <summary>

@@ -210,6 +210,7 @@
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.compareValidator2 = new DevComponents.DotNetBar.Validator.CompareValidator();
+            this.customValidator6 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator4 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator5 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
@@ -218,7 +219,6 @@
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.customValidator6 = new DevComponents.DotNetBar.Validator.CustomValidator();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -1876,7 +1876,7 @@
             // 
             // customValidator1
             // 
-            this.customValidator1.ErrorMessage = "Your error message here.";
+            this.customValidator1.ErrorMessage = "必填";
             this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
             // 
@@ -1896,6 +1896,12 @@
             this.compareValidator2.ErrorMessage = "终止日期应该大于起始日期";
             this.compareValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.compareValidator2.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
+            // 
+            // customValidator6
+            // 
+            this.customValidator6.ErrorMessage = "预付款额度有效期限不能超出客户融资额度的有效期限";
+            this.customValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator6.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator6_ValidateValue);
             // 
             // customValidator4
             // 
@@ -1918,7 +1924,7 @@
             // 
             // customValidator3
             // 
-            this.customValidator3.ErrorMessage = "额度通知书的有效期限不能超过买方客户额度的有效期限";
+            this.customValidator3.ErrorMessage = "买方信用风险额度的有效期限不能超出客户买方信用风险额度的有效期限";
             this.customValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator3.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator3_ValidateValue);
             // 
@@ -1944,12 +1950,6 @@
             // highlighter
             // 
             this.highlighter.ContainerControl = this;
-            // 
-            // customValidator6
-            // 
-            this.customValidator6.ErrorMessage = "Your error message here.";
-            this.customValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator6.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator6_ValidateValue);
             // 
             // CDADetail
             // 

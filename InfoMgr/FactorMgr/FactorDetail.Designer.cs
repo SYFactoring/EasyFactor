@@ -298,7 +298,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.factorErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.factorHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.creditLineValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator11 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator11 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
@@ -2409,18 +2409,18 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // requiredFieldValidator11
             // 
-            this.requiredFieldValidator11.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator11.ErrorMessage = "必填";
             this.requiredFieldValidator11.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // customValidator2
             // 
-            this.customValidator2.ErrorMessage = "Your error message here.";
+            this.customValidator2.ErrorMessage = "解冻原因不能为空";
             this.customValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator2.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator2_ValidateValue);
             // 
             // customValidator1
             // 
-            this.customValidator1.ErrorMessage = "Your error message here.";
+            this.customValidator1.ErrorMessage = "冻结原因不能为空";
             this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
             // 

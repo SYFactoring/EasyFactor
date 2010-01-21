@@ -411,7 +411,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES_BY_BATCH);
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE_BY_BATCH);
             importForm.ShowDialog(this);
             IList invoiceList = importForm.ImportedList;
             if (invoiceList != null)
