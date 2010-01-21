@@ -632,11 +632,18 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     Invoice invoice = (Invoice)invoiceList[i];
+                    if (invoice.FinanceAmount.HasValue == false)
+                    {
+                        MessageBox.Show("融资金额不能为空: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
+                    }
+
                     if (invoice.FinanceAmount > invoice.AssignOutstanding)
                     {
                         MessageBox.Show("融资金额不能大于转让余额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
+
                     if (invoice.FinanceDueDate < invoice.FinanceDate)
                     {
                         MessageBox.Show("融资到期日不能早于融资日: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
