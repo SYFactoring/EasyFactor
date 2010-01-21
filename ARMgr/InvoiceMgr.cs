@@ -9,6 +9,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Data.Linq;
 
     /// <summary>
     /// 
@@ -69,7 +70,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="invoiceList"></param>
-        public InvoiceMgr(List<Invoice> invoiceList)
+        public InvoiceMgr(EntitySet<Invoice> invoiceList)
             : this(OpInvoiceType.BATCH_DETAIL)
         {
             this.bs.DataSource = invoiceList;

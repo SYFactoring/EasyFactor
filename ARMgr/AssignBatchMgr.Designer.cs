@@ -1,24 +1,57 @@
 ﻿namespace CMBC.EasyFactor.ARMgr
 {
+    /// <summary>
+    /// 
+    /// </summary>
     partial class AssignBatchMgr
     {
-        #region Fields (7)
+		#region Fields (36) 
 
         private DevComponents.DotNetBar.ButtonX btnAssignBatchQuery;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCheckStatus;
+        private System.Windows.Forms.ContextMenuStrip cmuBatchMgr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignBatchNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsCreateMsg;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateFrom;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTo;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvBatches;
         private DevComponents.DotNetBar.LabelX lblAssignBatchNo;
+        private DevComponents.DotNetBar.LabelX lblCheckStatus;
+        private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.LabelX lblDatePicker;
+        private System.Windows.Forms.ToolStripMenuItem menuItemAssignReport;
+        private System.Windows.Forms.ToolStripMenuItem menuItemBatchDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemBatchDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemBatchSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCheck;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCommissionReport;
+        private System.Windows.Forms.ToolStripMenuItem menuItemFinanceReport;
+        private System.Windows.Forms.ToolStripMenuItem menuItemReject;
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbAssignBatchNo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Methods (1)
+		#region Methods (1) 
 
-        // Protected Methods (1) 
+		// Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -33,7 +66,7 @@
             base.Dispose(disposing);
         }
 
-        #endregion Methods
+		#endregion Methods 
 
 
 
@@ -124,7 +157,6 @@
             // 
             // 
             // 
-            this.lblCount.BackgroundStyle.Class = "";
             this.lblCount.Location = new System.Drawing.Point(534, 14);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
@@ -153,7 +185,6 @@
             // 
             // 
             // 
-            this.lblCheckStatus.BackgroundStyle.Class = "";
             this.lblCheckStatus.Location = new System.Drawing.Point(4, 31);
             this.lblCheckStatus.Name = "lblCheckStatus";
             this.lblCheckStatus.Size = new System.Drawing.Size(59, 16);
@@ -177,7 +208,6 @@
             // 
             // 
             this.dateTo.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.dateTo.MonthCalendar.BackgroundStyle.Class = "";
             this.dateTo.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
@@ -188,7 +218,6 @@
             this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
             this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
             this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.dateTo.MonthCalendar.CommandsBackgroundStyle.Class = "";
             this.dateTo.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.dateTo.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.dateTo.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -198,7 +227,6 @@
             this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
             this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.dateTo.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.dateTo.MonthCalendar.TodayButtonVisible = true;
             this.dateTo.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dateTo.Name = "dateTo";
@@ -212,7 +240,6 @@
             // 
             // 
             // 
-            this.lblDatePicker.BackgroundStyle.Class = "";
             this.lblDatePicker.Location = new System.Drawing.Point(176, 9);
             this.lblDatePicker.Name = "lblDatePicker";
             this.lblDatePicker.Size = new System.Drawing.Size(47, 16);
@@ -236,7 +263,6 @@
             // 
             // 
             this.dateFrom.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.dateFrom.MonthCalendar.BackgroundStyle.Class = "";
             this.dateFrom.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
@@ -247,7 +273,6 @@
             this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
             this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
             this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.Class = "";
             this.dateFrom.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.dateFrom.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.dateFrom.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -257,7 +282,6 @@
             this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
             this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.dateFrom.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.dateFrom.MonthCalendar.TodayButtonVisible = true;
             this.dateFrom.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dateFrom.Name = "dateFrom";
@@ -294,7 +318,6 @@
             // 
             // 
             // 
-            this.lblAssignBatchNo.BackgroundStyle.Class = "";
             this.lblAssignBatchNo.Location = new System.Drawing.Point(4, 9);
             this.lblAssignBatchNo.Name = "lblAssignBatchNo";
             this.lblAssignBatchNo.Size = new System.Drawing.Size(59, 16);
@@ -548,36 +571,5 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ContextMenuStrip cmuBatchMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemBatchDetail;
-        private System.Windows.Forms.ToolStripMenuItem menuItemBatchSelect;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCheck;
-        private System.Windows.Forms.ToolStripMenuItem menuItemReject;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTo;
-        private DevComponents.DotNetBar.LabelX lblDatePicker;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateFrom;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCheckStatus;
-        private DevComponents.DotNetBar.LabelX lblCheckStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignBatchNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsCreateMsg;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
-        private DevComponents.DotNetBar.LabelX lblCount;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem menuItemBatchDelete;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem menuItemAssignReport;
-        private System.Windows.Forms.ToolStripMenuItem menuItemFinanceReport;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCommissionReport;
     }
 }

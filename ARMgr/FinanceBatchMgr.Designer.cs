@@ -161,7 +161,6 @@
             // 
             // 
             // 
-            this.lblCount.BackgroundStyle.Class = "";
             this.lblCount.Location = new System.Drawing.Point(521, 13);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
@@ -190,7 +189,6 @@
             // 
             // 
             // 
-            this.lblCheckStatus.BackgroundStyle.Class = "";
             this.lblCheckStatus.Location = new System.Drawing.Point(3, 32);
             this.lblCheckStatus.Name = "lblCheckStatus";
             this.lblCheckStatus.Size = new System.Drawing.Size(59, 16);
@@ -214,7 +212,6 @@
             // 
             // 
             this.dateTo.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.dateTo.MonthCalendar.BackgroundStyle.Class = "";
             this.dateTo.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
@@ -225,7 +222,6 @@
             this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
             this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
             this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.dateTo.MonthCalendar.CommandsBackgroundStyle.Class = "";
             this.dateTo.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.dateTo.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.dateTo.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -235,7 +231,6 @@
             this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
             this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.dateTo.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.dateTo.MonthCalendar.TodayButtonVisible = true;
             this.dateTo.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dateTo.Name = "dateTo";
@@ -249,7 +244,6 @@
             // 
             // 
             // 
-            this.lblDatePicker.BackgroundStyle.Class = "";
             this.lblDatePicker.Location = new System.Drawing.Point(175, 10);
             this.lblDatePicker.Name = "lblDatePicker";
             this.lblDatePicker.Size = new System.Drawing.Size(47, 16);
@@ -273,7 +267,6 @@
             // 
             // 
             this.dateFrom.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.dateFrom.MonthCalendar.BackgroundStyle.Class = "";
             this.dateFrom.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
@@ -284,7 +277,6 @@
             this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
             this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
             this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.Class = "";
             this.dateFrom.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.dateFrom.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.dateFrom.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -294,7 +286,6 @@
             this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
             this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.dateFrom.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.dateFrom.MonthCalendar.TodayButtonVisible = true;
             this.dateFrom.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dateFrom.Name = "dateFrom";
@@ -331,7 +322,6 @@
             // 
             // 
             // 
-            this.lblFinanceBatchNo.BackgroundStyle.Class = "";
             this.lblFinanceBatchNo.Location = new System.Drawing.Point(3, 10);
             this.lblFinanceBatchNo.Name = "lblFinanceBatchNo";
             this.lblFinanceBatchNo.Size = new System.Drawing.Size(56, 16);

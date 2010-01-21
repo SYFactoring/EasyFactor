@@ -17,10 +17,10 @@ namespace CMBC.EasyFactor.Help.About
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.Label labelCompanyName;
-        private System.Windows.Forms.Label labelCopyright;
-        private System.Windows.Forms.Label labelProductName;
-        private System.Windows.Forms.Label labelVersion;
+        private DevComponents.DotNetBar.LabelX labelCompanyName;
+        private DevComponents.DotNetBar.LabelX labelCopyright;
+        private DevComponents.DotNetBar.LabelX labelProductName;
+        private DevComponents.DotNetBar.LabelX labelVersion;
         private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
@@ -56,10 +56,10 @@ namespace CMBC.EasyFactor.Help.About
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutBox));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
-            this.labelProductName = new System.Windows.Forms.Label();
-            this.labelVersion = new System.Windows.Forms.Label();
-            this.labelCopyright = new System.Windows.Forms.Label();
-            this.labelCompanyName = new System.Windows.Forms.Label();
+            this.labelProductName = new DevComponents.DotNetBar.LabelX();
+            this.labelVersion = new DevComponents.DotNetBar.LabelX();
+            this.labelCopyright = new DevComponents.DotNetBar.LabelX();
+            this.labelCompanyName = new DevComponents.DotNetBar.LabelX();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.okButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
@@ -105,6 +105,10 @@ namespace CMBC.EasyFactor.Help.About
             // 
             // labelProductName
             // 
+            // 
+            // 
+            // 
+            this.labelProductName.BackgroundStyle.Class = "";
             this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelProductName.Location = new System.Drawing.Point(143, 0);
             this.labelProductName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
@@ -113,10 +117,13 @@ namespace CMBC.EasyFactor.Help.About
             this.labelProductName.Size = new System.Drawing.Size(271, 17);
             this.labelProductName.TabIndex = 19;
             this.labelProductName.Text = "产品名称";
-            this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelVersion
             // 
+            // 
+            // 
+            // 
+            this.labelVersion.BackgroundStyle.Class = "";
             this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelVersion.Location = new System.Drawing.Point(143, 26);
             this.labelVersion.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
@@ -125,10 +132,13 @@ namespace CMBC.EasyFactor.Help.About
             this.labelVersion.Size = new System.Drawing.Size(271, 17);
             this.labelVersion.TabIndex = 0;
             this.labelVersion.Text = "版本";
-            this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelCopyright
             // 
+            // 
+            // 
+            // 
+            this.labelCopyright.BackgroundStyle.Class = "";
             this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelCopyright.Location = new System.Drawing.Point(143, 52);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
@@ -137,10 +147,13 @@ namespace CMBC.EasyFactor.Help.About
             this.labelCopyright.Size = new System.Drawing.Size(271, 17);
             this.labelCopyright.TabIndex = 21;
             this.labelCopyright.Text = "版权";
-            this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelCompanyName
             // 
+            // 
+            // 
+            // 
+            this.labelCompanyName.BackgroundStyle.Class = "";
             this.labelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelCompanyName.Location = new System.Drawing.Point(143, 78);
             this.labelCompanyName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
@@ -149,7 +162,6 @@ namespace CMBC.EasyFactor.Help.About
             this.labelCompanyName.Size = new System.Drawing.Size(271, 17);
             this.labelCompanyName.TabIndex = 22;
             this.labelCompanyName.Text = "公司名称";
-            this.labelCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBoxDescription
             // 
@@ -183,6 +195,7 @@ namespace CMBC.EasyFactor.Help.About
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(435, 283);
             this.Controls.Add(this.tableLayoutPanel);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -191,11 +204,12 @@ namespace CMBC.EasyFactor.Help.About
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "AboutBox";
+            this.Text = "关于EasyFactoring";
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
+
         }
 
 		#endregion Methods 

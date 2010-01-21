@@ -7,11 +7,11 @@
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
+    using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Drawing;
 
     /// <summary>
     /// 
@@ -84,6 +84,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.AutoGenerateColumns = false;
             this.dgvBatches.DataSource = bs;
             this.opBatchType = batchType;
+
             if (batchType == OpBatchType.CHECK)
             {
                 this.cbCheckStatus.Text = "未复核";
@@ -140,6 +141,7 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.CheckUserName = App.Current.CurUser.Name;
                 batch.CheckDate = DateTime.Now.Date;
             }
+
             App.Current.DbContext.SubmitChanges();
         }
 
@@ -149,12 +151,14 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
             if (selectedBatch.Invoices.Count > 0)
             {
                 MessageBox.Show("不能删除此批次，它包含相关发票信息", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
             App.Current.DbContext.InvoiceFinanceBatches.DeleteOnSubmit(selectedBatch);
             try
             {
@@ -165,6 +169,7 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
         }
 
@@ -179,11 +184,10 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            InvoiceMgr invoiceMgr = new InvoiceMgr(selectedBatch.Invoices.ToList());
-            QueryForm queryUI = new QueryForm(invoiceMgr, "批次详情");
-            invoiceMgr.OwnerForm = queryUI;
-            queryUI.ShowDialog(this);
+            FinanceBatchDetail detail = new FinanceBatchDetail(selectedBatch);
+            detail.ShowDialog(this);
         }
 
         /// <summary>
@@ -203,18 +207,15 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-               this.dgvBatches.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgvBatches.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvBatches.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvBatches.RowHeadersDefaultCellStyle.Font, rectangle, dgvBatches.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>

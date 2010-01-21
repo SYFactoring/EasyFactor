@@ -180,7 +180,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            assignBatchNoLabel.BackgroundStyle.Class = "";
             assignBatchNoLabel.Location = new System.Drawing.Point(24, 10);
             assignBatchNoLabel.Name = "assignBatchNoLabel";
             assignBatchNoLabel.Size = new System.Drawing.Size(59, 16);
@@ -193,7 +192,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            assignDateLabel.BackgroundStyle.Class = "";
             assignDateLabel.Location = new System.Drawing.Point(225, 8);
             assignDateLabel.Name = "assignDateLabel";
             assignDateLabel.Size = new System.Drawing.Size(47, 16);
@@ -206,7 +204,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            commentLabel.BackgroundStyle.Class = "";
             commentLabel.Location = new System.Drawing.Point(38, 36);
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(34, 16);
@@ -219,7 +216,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            lblTotalAssign.BackgroundStyle.Class = "";
             lblTotalAssign.Location = new System.Drawing.Point(811, 3);
             lblTotalAssign.Name = "lblTotalAssign";
             lblTotalAssign.Size = new System.Drawing.Size(93, 16);
@@ -232,7 +228,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            lblAssignNumber.BackgroundStyle.Class = "";
             lblAssignNumber.Location = new System.Drawing.Point(811, 22);
             lblAssignNumber.Name = "lblAssignNumber";
             lblAssignNumber.Size = new System.Drawing.Size(93, 16);
@@ -245,7 +240,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            lblTotalCommission.BackgroundStyle.Class = "";
             lblTotalCommission.Location = new System.Drawing.Point(811, 41);
             lblTotalCommission.Name = "lblTotalCommission";
             lblTotalCommission.Size = new System.Drawing.Size(93, 16);
@@ -258,7 +252,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            lblTotalHandfee.BackgroundStyle.Class = "";
             lblTotalHandfee.Location = new System.Drawing.Point(786, 60);
             lblTotalHandfee.Name = "lblTotalHandfee";
             lblTotalHandfee.Size = new System.Drawing.Size(118, 16);
@@ -430,7 +423,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            this.isCreateMsgCheckBox.BackgroundStyle.Class = "";
             this.isCreateMsgCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.batchBindingSource, "IsCreateMsg", true));
             this.isCreateMsgCheckBox.Location = new System.Drawing.Point(393, 10);
             this.isCreateMsgCheckBox.Name = "isCreateMsgCheckBox";
@@ -455,18 +447,15 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.assignDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.assignDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
             // 
             // 
             // 
-            this.assignDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
             this.assignDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
             this.assignDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.assignDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
             // 
             // 
             // 
-            this.assignDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.assignDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.assignDateDateTimePicker.Name = "assignDateDateTimePicker";
             this.assignDateDateTimePicker.Size = new System.Drawing.Size(113, 20);

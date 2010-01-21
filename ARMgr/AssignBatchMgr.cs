@@ -183,10 +183,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            InvoiceMgr invoiceMgr = new InvoiceMgr(selectedBatch.Invoices.ToList());
-            QueryForm queryUI = new QueryForm(invoiceMgr, "批次详情");
-            invoiceMgr.OwnerForm = queryUI;
-            queryUI.ShowDialog(this);
+            AssignBatchDetail detail = new AssignBatchDetail(selectedBatch);
+            detail.ShowDialog(this);
         }
 
         /// <summary>

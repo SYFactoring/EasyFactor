@@ -321,7 +321,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            flawResolveReasonLabel.BackgroundStyle.Class = "";
             flawResolveReasonLabel.Location = new System.Drawing.Point(23, 35);
             flawResolveReasonLabel.Name = "flawResolveReasonLabel";
             flawResolveReasonLabel.Size = new System.Drawing.Size(59, 16);
@@ -335,7 +334,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            flawResolveDateLabel.BackgroundStyle.Class = "";
             flawResolveDateLabel.Location = new System.Drawing.Point(106, 94);
             flawResolveDateLabel.Name = "flawResolveDateLabel";
             flawResolveDateLabel.Size = new System.Drawing.Size(47, 16);
@@ -349,7 +347,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            flawResolveUserNameLabel.BackgroundStyle.Class = "";
             flawResolveUserNameLabel.Location = new System.Drawing.Point(271, 94);
             flawResolveUserNameLabel.Name = "flawResolveUserNameLabel";
             flawResolveUserNameLabel.Size = new System.Drawing.Size(47, 16);
@@ -363,7 +360,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            assignDateLabel.BackgroundStyle.Class = "";
             assignDateLabel.Location = new System.Drawing.Point(179, 3);
             assignDateLabel.Name = "assignDateLabel";
             assignDateLabel.Size = new System.Drawing.Size(47, 16);
@@ -377,7 +373,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            assignAmountLabel.BackgroundStyle.Class = "";
             assignAmountLabel.Location = new System.Drawing.Point(8, 3);
             assignAmountLabel.Name = "assignAmountLabel";
             assignAmountLabel.Size = new System.Drawing.Size(59, 16);
@@ -391,7 +386,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            dueDateLabel.BackgroundStyle.Class = "";
             dueDateLabel.Location = new System.Drawing.Point(370, 28);
             dueDateLabel.Name = "dueDateLabel";
             dueDateLabel.Size = new System.Drawing.Size(47, 16);
@@ -405,7 +399,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            invoiceAmountLabel.BackgroundStyle.Class = "";
             invoiceAmountLabel.Location = new System.Drawing.Point(8, 30);
             invoiceAmountLabel.Name = "invoiceAmountLabel";
             invoiceAmountLabel.Size = new System.Drawing.Size(59, 16);
@@ -419,7 +412,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            invoiceDateLabel.BackgroundStyle.Class = "";
             invoiceDateLabel.Location = new System.Drawing.Point(179, 28);
             invoiceDateLabel.Name = "invoiceDateLabel";
             invoiceDateLabel.Size = new System.Drawing.Size(47, 16);
@@ -433,7 +425,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            invoiceNoLabel.BackgroundStyle.Class = "";
             invoiceNoLabel.Location = new System.Drawing.Point(20, 5);
             invoiceNoLabel.Name = "invoiceNoLabel";
             invoiceNoLabel.Size = new System.Drawing.Size(47, 16);
@@ -447,7 +438,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            flawReasonLabel.BackgroundStyle.Class = "";
             flawReasonLabel.Location = new System.Drawing.Point(21, 73);
             flawReasonLabel.Name = "flawReasonLabel";
             flawReasonLabel.Size = new System.Drawing.Size(59, 16);
@@ -461,7 +451,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            invoiceReferenceNumberLabel.BackgroundStyle.Class = "";
             invoiceReferenceNumberLabel.Location = new System.Drawing.Point(-1, 159);
             invoiceReferenceNumberLabel.Name = "invoiceReferenceNumberLabel";
             invoiceReferenceNumberLabel.Size = new System.Drawing.Size(144, 16);
@@ -475,7 +464,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            orderNumberReferenceLabel.BackgroundStyle.Class = "";
             orderNumberReferenceLabel.Location = new System.Drawing.Point(8, 137);
             orderNumberReferenceLabel.Name = "orderNumberReferenceLabel";
             orderNumberReferenceLabel.Size = new System.Drawing.Size(137, 16);
@@ -489,7 +477,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            paymentConditionsLabel.BackgroundStyle.Class = "";
             paymentConditionsLabel.Location = new System.Drawing.Point(34, 113);
             paymentConditionsLabel.Name = "paymentConditionsLabel";
             paymentConditionsLabel.Size = new System.Drawing.Size(111, 16);
@@ -503,7 +490,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            valueDateLabel.BackgroundStyle.Class = "";
             valueDateLabel.Location = new System.Drawing.Point(352, 110);
             valueDateLabel.Name = "valueDateLabel";
             valueDateLabel.Size = new System.Drawing.Size(65, 16);
@@ -517,7 +503,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            secondaryDiscountRateLabel.BackgroundStyle.Class = "";
             secondaryDiscountRateLabel.Location = new System.Drawing.Point(285, 86);
             secondaryDiscountRateLabel.Name = "secondaryDiscountRateLabel";
             secondaryDiscountRateLabel.Size = new System.Drawing.Size(138, 16);
@@ -531,7 +516,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            secondaryDiscountDaysLabel.BackgroundStyle.Class = "";
             secondaryDiscountDaysLabel.Location = new System.Drawing.Point(4, 86);
             secondaryDiscountDaysLabel.Name = "secondaryDiscountDaysLabel";
             secondaryDiscountDaysLabel.Size = new System.Drawing.Size(139, 16);
@@ -545,7 +529,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            primaryDiscountRateLabel.BackgroundStyle.Class = "";
             primaryDiscountRateLabel.Location = new System.Drawing.Point(295, 64);
             primaryDiscountRateLabel.Name = "primaryDiscountRateLabel";
             primaryDiscountRateLabel.Size = new System.Drawing.Size(122, 16);
@@ -559,7 +542,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            primaryDiscountDaysLabel.BackgroundStyle.Class = "";
             primaryDiscountDaysLabel.Location = new System.Drawing.Point(19, 63);
             primaryDiscountDaysLabel.Name = "primaryDiscountDaysLabel";
             primaryDiscountDaysLabel.Size = new System.Drawing.Size(124, 16);
@@ -573,7 +555,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            netPaymentTermsLabel.BackgroundStyle.Class = "";
             netPaymentTermsLabel.Location = new System.Drawing.Point(33, 8);
             netPaymentTermsLabel.Name = "netPaymentTermsLabel";
             netPaymentTermsLabel.Size = new System.Drawing.Size(110, 16);
@@ -587,7 +568,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            invoiceCurrencyLabel.BackgroundStyle.Class = "";
             invoiceCurrencyLabel.Location = new System.Drawing.Point(192, 7);
             invoiceCurrencyLabel.Name = "invoiceCurrencyLabel";
             invoiceCurrencyLabel.Size = new System.Drawing.Size(34, 16);
@@ -601,7 +581,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            financeAmountLabel.BackgroundStyle.Class = "";
             financeAmountLabel.Location = new System.Drawing.Point(8, 24);
             financeAmountLabel.Name = "financeAmountLabel";
             financeAmountLabel.Size = new System.Drawing.Size(59, 16);
@@ -615,7 +594,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            financeDateLabel.BackgroundStyle.Class = "";
             financeDateLabel.Location = new System.Drawing.Point(179, 24);
             financeDateLabel.Name = "financeDateLabel";
             financeDateLabel.Size = new System.Drawing.Size(47, 16);
@@ -629,7 +607,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            financeDueDateLabel.BackgroundStyle.Class = "";
             financeDueDateLabel.Location = new System.Drawing.Point(154, 46);
             financeDueDateLabel.Name = "financeDueDateLabel";
             financeDueDateLabel.Size = new System.Drawing.Size(72, 16);
@@ -643,7 +620,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            paymentAmountLabel.BackgroundStyle.Class = "";
             paymentAmountLabel.Location = new System.Drawing.Point(8, 67);
             paymentAmountLabel.Name = "paymentAmountLabel";
             paymentAmountLabel.Size = new System.Drawing.Size(59, 16);
@@ -657,7 +633,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            paymentDateLabel.BackgroundStyle.Class = "";
             paymentDateLabel.Location = new System.Drawing.Point(179, 67);
             paymentDateLabel.Name = "paymentDateLabel";
             paymentDateLabel.Size = new System.Drawing.Size(47, 16);
@@ -671,7 +646,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            refundAmountLabel.BackgroundStyle.Class = "";
             refundAmountLabel.Location = new System.Drawing.Point(8, 89);
             refundAmountLabel.Name = "refundAmountLabel";
             refundAmountLabel.Size = new System.Drawing.Size(59, 16);
@@ -685,7 +659,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            refundDateLabel.BackgroundStyle.Class = "";
             refundDateLabel.Location = new System.Drawing.Point(179, 89);
             refundDateLabel.Name = "refundDateLabel";
             refundDateLabel.Size = new System.Drawing.Size(47, 16);
@@ -699,7 +672,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            commissionLabel.BackgroundStyle.Class = "";
             commissionLabel.Location = new System.Drawing.Point(20, 110);
             commissionLabel.Name = "commissionLabel";
             commissionLabel.Size = new System.Drawing.Size(47, 16);
@@ -713,7 +685,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            commissionDateLabel.BackgroundStyle.Class = "";
             commissionDateLabel.Location = new System.Drawing.Point(179, 110);
             commissionDateLabel.Name = "commissionDateLabel";
             commissionDateLabel.Size = new System.Drawing.Size(47, 16);
@@ -727,7 +698,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            interestLabel.BackgroundStyle.Class = "";
             interestLabel.Location = new System.Drawing.Point(21, 132);
             interestLabel.Name = "interestLabel";
             interestLabel.Size = new System.Drawing.Size(47, 16);
@@ -741,7 +711,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            interestDateLabel.BackgroundStyle.Class = "";
             interestDateLabel.Location = new System.Drawing.Point(179, 132);
             interestDateLabel.Name = "interestDateLabel";
             interestDateLabel.Size = new System.Drawing.Size(47, 16);
@@ -755,7 +724,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            commentLabel.BackgroundStyle.Class = "";
             commentLabel.Location = new System.Drawing.Point(31, 52);
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(34, 16);
@@ -769,7 +737,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            disputeReasonLabel.BackgroundStyle.Class = "";
             disputeReasonLabel.Location = new System.Drawing.Point(19, 68);
             disputeReasonLabel.Name = "disputeReasonLabel";
             disputeReasonLabel.Size = new System.Drawing.Size(59, 16);
@@ -783,7 +750,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            disputeDateLabel.BackgroundStyle.Class = "";
             disputeDateLabel.Location = new System.Drawing.Point(317, 113);
             disputeDateLabel.Name = "disputeDateLabel";
             disputeDateLabel.Size = new System.Drawing.Size(47, 16);
@@ -797,7 +763,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            disputeResolveReasonLabel.BackgroundStyle.Class = "";
             disputeResolveReasonLabel.Location = new System.Drawing.Point(19, 38);
             disputeResolveReasonLabel.Name = "disputeResolveReasonLabel";
             disputeResolveReasonLabel.Size = new System.Drawing.Size(59, 16);
@@ -811,7 +776,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            disputeResolveUserNameLabel.BackgroundStyle.Class = "";
             disputeResolveUserNameLabel.Location = new System.Drawing.Point(317, 70);
             disputeResolveUserNameLabel.Name = "disputeResolveUserNameLabel";
             disputeResolveUserNameLabel.Size = new System.Drawing.Size(47, 16);
@@ -825,7 +789,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            disputeTypeLabel.BackgroundStyle.Class = "";
             disputeTypeLabel.Location = new System.Drawing.Point(107, 111);
             disputeTypeLabel.Name = "disputeTypeLabel";
             disputeTypeLabel.Size = new System.Drawing.Size(59, 16);
@@ -839,7 +802,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            disputeUserNameLabel.BackgroundStyle.Class = "";
             disputeUserNameLabel.Location = new System.Drawing.Point(317, 132);
             disputeUserNameLabel.Name = "disputeUserNameLabel";
             disputeUserNameLabel.Size = new System.Drawing.Size(47, 16);
@@ -853,7 +815,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            disputeAmountLabel.BackgroundStyle.Class = "";
             disputeAmountLabel.Location = new System.Drawing.Point(107, 133);
             disputeAmountLabel.Name = "disputeAmountLabel";
             disputeAmountLabel.Size = new System.Drawing.Size(59, 16);
@@ -867,7 +828,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            disputeResolveDateLabel.BackgroundStyle.Class = "";
             disputeResolveDateLabel.Location = new System.Drawing.Point(119, 70);
             disputeResolveDateLabel.Name = "disputeResolveDateLabel";
             disputeResolveDateLabel.Size = new System.Drawing.Size(47, 16);
@@ -881,7 +841,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            assignBatchNoLabel.BackgroundStyle.Class = "";
             assignBatchNoLabel.Location = new System.Drawing.Point(367, 4);
             assignBatchNoLabel.Name = "assignBatchNoLabel";
             assignBatchNoLabel.Size = new System.Drawing.Size(59, 16);
@@ -895,7 +854,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            financeBatchNoLabel.BackgroundStyle.Class = "";
             financeBatchNoLabel.Location = new System.Drawing.Point(367, 23);
             financeBatchNoLabel.Name = "financeBatchNoLabel";
             financeBatchNoLabel.Size = new System.Drawing.Size(59, 16);
@@ -986,16 +944,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.groupPanelDisputeResolve.Style.BorderRightWidth = 1;
             this.groupPanelDisputeResolve.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
             this.groupPanelDisputeResolve.Style.BorderTopWidth = 1;
-            this.groupPanelDisputeResolve.Style.Class = "";
             this.groupPanelDisputeResolve.Style.CornerDiameter = 4;
             this.groupPanelDisputeResolve.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
             this.groupPanelDisputeResolve.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
             this.groupPanelDisputeResolve.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.groupPanelDisputeResolve.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelDisputeResolve.StyleMouseDown.Class = "";
             // 
             // 
             // 
