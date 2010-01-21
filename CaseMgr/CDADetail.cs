@@ -546,14 +546,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            ClientCreditLine sellerCreditLine = cda.Case.SellerClient.FinanceCreditLine;
-            if (sellerCreditLine != null)
+            ClientCreditLine creditLine = cda.FinanceCreditLine;
+            if (creditLine != null)
             {
-                cda.FinanceLinePeriodBegin = sellerCreditLine.PeriodBegin;
-                cda.FinanceLinePeriodEnd = sellerCreditLine.PeriodEnd;
-                cda.FinanceLineCurr = sellerCreditLine.CreditLineCurrency;
-                cda.FinanceLine = sellerCreditLine.CreditLine;
-                this.tbHighestFinance.Text = String.Format("{0:N2}", sellerCreditLine.CreditLine);
+                cda.FinanceLinePeriodBegin = creditLine.PeriodBegin;
+                cda.FinanceLinePeriodEnd = creditLine.PeriodEnd;
+                cda.FinanceLineCurr = creditLine.CreditLineCurrency;
+                cda.FinanceLine = creditLine.CreditLine;
+                this.tbHighestFinance.Text = String.Format("{0:N2}", creditLine.CreditLine);
             }
             else
             {

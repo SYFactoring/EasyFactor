@@ -384,7 +384,14 @@ namespace CMBC.EasyFactor.CaseMgr
             sheet.Cells[1, 1] = "中国民生银行保理额度通知书 ";
 
             sheet.Cells[3, 1] = String.Format("贵公司（{0}公司）前洽本行办理保理业务并签立保理服务合同", selectedCDA.SellerName);
-            sheet.Cells[4, 1] = String.Format("(合同编号:第[ {0} ]号 ), 经本行评估后,核定额度如下:", selectedCDA.Case.SellerClient.Contract.ContractCode);
+            if (selectedCDA.Case.SellerClient.Contract != null)
+            {
+                sheet.Cells[4, 1] = String.Format("(合同编号:第[ {0} ]号 ), 经本行评估后,核定额度如下:", selectedCDA.Case.SellerClient.Contract.ContractCode);
+            }
+            else
+            {
+                sheet.Cells[4, 1] = String.Format("(合同编号:第[  ]号 ), 经本行评估后,核定额度如下:");
+            }
 
             int row = 6;
             sheet.Cells[row, 1] = "买方名称";

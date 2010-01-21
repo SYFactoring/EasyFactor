@@ -207,6 +207,26 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public ClientCreditLine FinanceCreditLine
+        {
+            get
+            {
+                Client client;
+                if (Case.TransactionType == "国内买方保理" || Case.TransactionType == "进口保理")
+                {
+                    client = Case.BuyerClient;
+                }
+                else
+                {
+                    client = Case.SellerClient;
+                }
+                return client.FinanceCreditLine;
+            }
+        }
+
         #endregion Properties
 
         #region Methods (3)
