@@ -95,16 +95,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void dgvPaymentLogs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                 e.RowBounds.Location.Y,
-                     dgvPaymentLogs.RowHeadersWidth - 4,
-                     e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgvPaymentLogs.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgvPaymentLogs.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgvPaymentLogs.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvPaymentLogs.RowHeadersDefaultCellStyle.Font, rectangle, dgvPaymentLogs.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         #endregion Methods

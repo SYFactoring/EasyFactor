@@ -485,6 +485,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.cDACodeTextBox.Name = "cDACodeTextBox";
             this.cDACodeTextBox.Size = new System.Drawing.Size(162, 20);
             this.cDACodeTextBox.TabIndex = 1;
+            this.cDACodeTextBox.DoubleClick += new System.EventHandler(this.DetailCDA);
             // 
             // tabItemBatch
             // 
@@ -550,6 +551,7 @@ namespace CMBC.EasyFactor.ARMgr
             ((System.ComponentModel.ISupportInitialize)(this.assignDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
+
         }
         #endregion
     }

@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor.ARMgr
 {
     using System;
     using System.Windows.Forms;
+    using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
 
@@ -69,9 +70,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Constructors
 
-        #region Methods (4)
+        #region Methods (5)
 
-        // Private Methods (4) 
+        // Private Methods (5) 
 
         /// <summary>
         /// 
@@ -82,6 +83,18 @@ namespace CMBC.EasyFactor.ARMgr
         {
             InvoiceAssignBatch batch = (InvoiceAssignBatch)this.batchBindingSource.DataSource;
             batch.Restore();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailCDA(object sender, EventArgs e)
+        {
+            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
+            CDADetail detail = new CDADetail(batch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
+            detail.Show();
         }
 
         /// <summary>

@@ -17,7 +17,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Controls.ComboBoxEx batchCurrencyComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX cDACodeTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput checkDateDateTimePicker;
-        private DevComponents.DotNetBar.Controls.TextBoxX checkStatusTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX checkUserNameTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         /// <summary>
@@ -93,15 +92,19 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX checkUserNameLabel;
             DevComponents.DotNetBar.LabelX checkDateLabel;
             DevComponents.DotNetBar.LabelX interestTypeLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FinanceBatchDetail));
             this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.panelBatch = new DevComponents.DotNetBar.TabControlPanel();
+            this.checkStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.btnFactorSelect = new DevComponents.DotNetBar.ButtonX();
+            this.btnBatchSave = new DevComponents.DotNetBar.ButtonX();
+            this.btnBatchUpdate = new DevComponents.DotNetBar.ButtonX();
             this.factorTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.interestTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.checkDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.checkUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.rejectReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.checkStatusTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.createUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.costRateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -118,9 +121,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabItemBatch = new DevComponents.DotNetBar.TabItem(this.components);
             this.panelInvoices = new DevComponents.DotNetBar.TabControlPanel();
             this.tabItemInvoices = new DevComponents.DotNetBar.TabItem(this.components);
-            this.btnBatchUpdate = new DevComponents.DotNetBar.ButtonX();
-            this.btnBatchSave = new DevComponents.DotNetBar.ButtonX();
-            this.btnFactorSelect = new DevComponents.DotNetBar.ButtonX();
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             cDACodeLabel = new DevComponents.DotNetBar.LabelX();
             financeBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             financeAmountLabel = new DevComponents.DotNetBar.LabelX();
@@ -145,6 +148,7 @@ namespace CMBC.EasyFactor.ARMgr
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // cDACodeLabel
@@ -323,7 +327,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             checkStatusLabel.BackgroundStyle.Class = "";
-            checkStatusLabel.Location = new System.Drawing.Point(48, 258);
+            checkStatusLabel.Location = new System.Drawing.Point(48, 243);
             checkStatusLabel.Name = "checkStatusLabel";
             checkStatusLabel.Size = new System.Drawing.Size(59, 16);
             checkStatusLabel.TabIndex = 28;
@@ -351,7 +355,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             checkUserNameLabel.BackgroundStyle.Class = "";
-            checkUserNameLabel.Location = new System.Drawing.Point(289, 334);
+            checkUserNameLabel.Location = new System.Drawing.Point(289, 317);
             checkUserNameLabel.Name = "checkUserNameLabel";
             checkUserNameLabel.Size = new System.Drawing.Size(47, 16);
             checkUserNameLabel.TabIndex = 32;
@@ -365,7 +369,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             checkDateLabel.BackgroundStyle.Class = "";
-            checkDateLabel.Location = new System.Drawing.Point(60, 334);
+            checkDateLabel.Location = new System.Drawing.Point(60, 317);
             checkDateLabel.Name = "checkDateLabel";
             checkDateLabel.Size = new System.Drawing.Size(47, 16);
             checkDateLabel.TabIndex = 34;
@@ -400,7 +404,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl.SelectedTabIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(506, 427);
+            this.tabControl.Size = new System.Drawing.Size(486, 405);
             this.tabControl.TabIndex = 0;
             this.tabControl.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl.Tabs.Add(this.tabItemBatch);
@@ -409,6 +413,7 @@ namespace CMBC.EasyFactor.ARMgr
             // panelBatch
             // 
             this.panelBatch.AutoScroll = true;
+            this.panelBatch.Controls.Add(this.checkStatusComboBox);
             this.panelBatch.Controls.Add(this.btnFactorSelect);
             this.panelBatch.Controls.Add(this.btnBatchSave);
             this.panelBatch.Controls.Add(this.btnBatchUpdate);
@@ -422,7 +427,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBatch.Controls.Add(rejectReasonLabel);
             this.panelBatch.Controls.Add(this.rejectReasonTextBox);
             this.panelBatch.Controls.Add(checkStatusLabel);
-            this.panelBatch.Controls.Add(this.checkStatusTextBox);
             this.panelBatch.Controls.Add(createUserNameLabel);
             this.panelBatch.Controls.Add(this.createUserNameTextBox);
             this.panelBatch.Controls.Add(commentLabel);
@@ -452,7 +456,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBatch.Location = new System.Drawing.Point(0, 26);
             this.panelBatch.Name = "panelBatch";
             this.panelBatch.Padding = new System.Windows.Forms.Padding(1);
-            this.panelBatch.Size = new System.Drawing.Size(506, 401);
+            this.panelBatch.Size = new System.Drawing.Size(486, 379);
             this.panelBatch.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.panelBatch.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.panelBatch.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -462,6 +466,57 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBatch.Style.GradientAngle = 90;
             this.panelBatch.TabIndex = 1;
             this.panelBatch.TabItem = this.tabItemBatch;
+            // 
+            // checkStatusComboBox
+            // 
+            this.checkStatusComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CheckStatus", true));
+            this.checkStatusComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.checkStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.checkStatusComboBox.FormattingEnabled = true;
+            this.checkStatusComboBox.Items.AddRange(new object[] {
+            "未复核",
+            "已复核",
+            "复核未通过"});
+            this.checkStatusComboBox.Location = new System.Drawing.Point(114, 241);
+            this.checkStatusComboBox.Name = "checkStatusComboBox";
+            this.checkStatusComboBox.Size = new System.Drawing.Size(121, 21);
+            this.checkStatusComboBox.TabIndex = 41;
+            // 
+            // btnFactorSelect
+            // 
+            this.btnFactorSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnFactorSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnFactorSelect.Location = new System.Drawing.Point(448, 117);
+            this.btnFactorSelect.Name = "btnFactorSelect";
+            this.btnFactorSelect.Size = new System.Drawing.Size(21, 23);
+            this.btnFactorSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnFactorSelect.TabIndex = 40;
+            this.btnFactorSelect.Text = "...";
+            this.btnFactorSelect.Click += new System.EventHandler(this.SelectFactor);
+            // 
+            // btnBatchSave
+            // 
+            this.btnBatchSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnBatchSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnBatchSave.Location = new System.Drawing.Point(257, 345);
+            this.btnBatchSave.Name = "btnBatchSave";
+            this.btnBatchSave.Size = new System.Drawing.Size(75, 23);
+            this.btnBatchSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnBatchSave.TabIndex = 39;
+            this.btnBatchSave.Text = "保存";
+            this.btnBatchSave.Click += new System.EventHandler(this.SaveBatch);
+            // 
+            // btnBatchUpdate
+            // 
+            this.btnBatchUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnBatchUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnBatchUpdate.Location = new System.Drawing.Point(162, 345);
+            this.btnBatchUpdate.Name = "btnBatchUpdate";
+            this.btnBatchUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnBatchUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnBatchUpdate.TabIndex = 38;
+            this.btnBatchUpdate.Text = "编辑";
+            this.btnBatchUpdate.Click += new System.EventHandler(this.UpdateBatch);
             // 
             // factorTextBox
             // 
@@ -481,9 +536,15 @@ namespace CMBC.EasyFactor.ARMgr
             this.interestTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.interestTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.interestTypeComboBox.FormattingEnabled = true;
-            this.interestTypeComboBox.Location = new System.Drawing.Point(115, 119);
+            this.interestTypeComboBox.Items.AddRange(new object[] {
+            "一次性收取",
+            "月结",
+            "季结",
+            "利随本清",
+            "未知"});
+            this.interestTypeComboBox.Location = new System.Drawing.Point(114, 119);
             this.interestTypeComboBox.Name = "interestTypeComboBox";
-            this.interestTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.interestTypeComboBox.Size = new System.Drawing.Size(123, 21);
             this.interestTypeComboBox.TabIndex = 36;
             // 
             // checkDateDateTimePicker
@@ -494,7 +555,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.checkDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.checkDateDateTimePicker.ButtonDropDown.Visible = true;
             this.checkDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "CheckDate", true));
-            this.checkDateDateTimePicker.Location = new System.Drawing.Point(117, 330);
+            this.checkDateDateTimePicker.Location = new System.Drawing.Point(113, 314);
             // 
             // 
             // 
@@ -517,7 +578,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.checkDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.checkDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.checkDateDateTimePicker.Name = "checkDateDateTimePicker";
-            this.checkDateDateTimePicker.Size = new System.Drawing.Size(136, 20);
+            this.checkDateDateTimePicker.Size = new System.Drawing.Size(140, 20);
             this.checkDateDateTimePicker.TabIndex = 35;
             // 
             // checkUserNameTextBox
@@ -527,7 +588,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.checkUserNameTextBox.Border.Class = "TextBoxBorder";
             this.checkUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CheckUserName", true));
-            this.checkUserNameTextBox.Location = new System.Drawing.Point(342, 330);
+            this.checkUserNameTextBox.Location = new System.Drawing.Point(342, 314);
             this.checkUserNameTextBox.Name = "checkUserNameTextBox";
             this.checkUserNameTextBox.Size = new System.Drawing.Size(100, 20);
             this.checkUserNameTextBox.TabIndex = 33;
@@ -539,24 +600,12 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.rejectReasonTextBox.Border.Class = "TextBoxBorder";
             this.rejectReasonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "RejectReason", true));
-            this.rejectReasonTextBox.Location = new System.Drawing.Point(116, 279);
+            this.rejectReasonTextBox.Location = new System.Drawing.Point(114, 265);
             this.rejectReasonTextBox.Multiline = true;
             this.rejectReasonTextBox.Name = "rejectReasonTextBox";
             this.rejectReasonTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.rejectReasonTextBox.Size = new System.Drawing.Size(347, 45);
+            this.rejectReasonTextBox.Size = new System.Drawing.Size(349, 45);
             this.rejectReasonTextBox.TabIndex = 31;
-            // 
-            // checkStatusTextBox
-            // 
-            // 
-            // 
-            // 
-            this.checkStatusTextBox.Border.Class = "TextBoxBorder";
-            this.checkStatusTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CheckStatus", true));
-            this.checkStatusTextBox.Location = new System.Drawing.Point(117, 254);
-            this.checkStatusTextBox.Name = "checkStatusTextBox";
-            this.checkStatusTextBox.Size = new System.Drawing.Size(100, 20);
-            this.checkStatusTextBox.TabIndex = 29;
             // 
             // createUserNameTextBox
             // 
@@ -565,9 +614,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.createUserNameTextBox.Border.Class = "TextBoxBorder";
             this.createUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CreateUserName", true));
-            this.createUserNameTextBox.Location = new System.Drawing.Point(116, 218);
+            this.createUserNameTextBox.Location = new System.Drawing.Point(114, 218);
             this.createUserNameTextBox.Name = "createUserNameTextBox";
-            this.createUserNameTextBox.Size = new System.Drawing.Size(120, 20);
+            this.createUserNameTextBox.Size = new System.Drawing.Size(122, 20);
             this.createUserNameTextBox.TabIndex = 27;
             // 
             // commentTextBox
@@ -577,11 +626,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.commentTextBox.Border.Class = "TextBoxBorder";
             this.commentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "Comment", true));
-            this.commentTextBox.Location = new System.Drawing.Point(117, 168);
+            this.commentTextBox.Location = new System.Drawing.Point(114, 168);
             this.commentTextBox.Multiline = true;
             this.commentTextBox.Name = "commentTextBox";
             this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.commentTextBox.Size = new System.Drawing.Size(346, 46);
+            this.commentTextBox.Size = new System.Drawing.Size(349, 46);
             this.commentTextBox.TabIndex = 25;
             // 
             // costRateTextBox
@@ -590,7 +639,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.costRateTextBox.Border.Class = "TextBoxBorder";
-            this.costRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CostRate", true));
+            this.costRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CostRate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p"));
             this.costRateTextBox.Location = new System.Drawing.Point(342, 95);
             this.costRateTextBox.Name = "costRateTextBox";
             this.costRateTextBox.Size = new System.Drawing.Size(121, 20);
@@ -614,10 +663,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.financeRateTextBox.Border.Class = "TextBoxBorder";
-            this.financeRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "FinanceRate", true));
-            this.financeRateTextBox.Location = new System.Drawing.Point(115, 96);
+            this.financeRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "FinanceRate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p"));
+            this.financeRateTextBox.Location = new System.Drawing.Point(114, 96);
             this.financeRateTextBox.Name = "financeRateTextBox";
-            this.financeRateTextBox.Size = new System.Drawing.Size(120, 20);
+            this.financeRateTextBox.Size = new System.Drawing.Size(123, 20);
             this.financeRateTextBox.TabIndex = 19;
             // 
             // batchCurrencyComboBox
@@ -637,6 +686,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.financeTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.financeTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.financeTypeComboBox.FormattingEnabled = true;
+            this.financeTypeComboBox.Items.AddRange(new object[] {
+            "预付款",
+            "卖方代付",
+            "买方代付",
+            "其他"});
             this.financeTypeComboBox.Location = new System.Drawing.Point(342, 24);
             this.financeTypeComboBox.Name = "financeTypeComboBox";
             this.financeTypeComboBox.Size = new System.Drawing.Size(121, 21);
@@ -648,10 +702,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.otherIncomeTextBox.Border.Class = "TextBoxBorder";
-            this.otherIncomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "OtherIncome", true));
-            this.otherIncomeTextBox.Location = new System.Drawing.Point(116, 144);
+            this.otherIncomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "OtherIncome", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.otherIncomeTextBox.Location = new System.Drawing.Point(114, 144);
             this.otherIncomeTextBox.Name = "otherIncomeTextBox";
-            this.otherIncomeTextBox.Size = new System.Drawing.Size(121, 20);
+            this.otherIncomeTextBox.Size = new System.Drawing.Size(123, 20);
             this.otherIncomeTextBox.TabIndex = 15;
             // 
             // financePeriodEndDateTimePicker
@@ -728,7 +782,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.financeAmountTextBox.Border.Class = "TextBoxBorder";
-            this.financeAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "FinanceAmount", true));
+            this.financeAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "FinanceAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
             this.financeAmountTextBox.Location = new System.Drawing.Point(114, 50);
             this.financeAmountTextBox.Name = "financeAmountTextBox";
             this.financeAmountTextBox.Size = new System.Drawing.Size(121, 20);
@@ -752,10 +806,12 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.cDACodeTextBox.Border.Class = "TextBoxBorder";
+            this.cDACodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CDACode", true));
             this.cDACodeTextBox.Location = new System.Drawing.Point(114, 4);
             this.cDACodeTextBox.Name = "cDACodeTextBox";
             this.cDACodeTextBox.Size = new System.Drawing.Size(121, 20);
             this.cDACodeTextBox.TabIndex = 1;
+            this.cDACodeTextBox.DoubleClick += new System.EventHandler(this.DetailCDA);
             // 
             // tabItemBatch
             // 
@@ -769,7 +825,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelInvoices.Location = new System.Drawing.Point(0, 26);
             this.panelInvoices.Name = "panelInvoices";
             this.panelInvoices.Padding = new System.Windows.Forms.Padding(1);
-            this.panelInvoices.Size = new System.Drawing.Size(506, 401);
+            this.panelInvoices.Size = new System.Drawing.Size(486, 379);
             this.panelInvoices.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.panelInvoices.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.panelInvoices.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -786,49 +842,32 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabItemInvoices.Name = "tabItemInvoices";
             this.tabItemInvoices.Text = "发票";
             // 
-            // btnBatchUpdate
+            // superValidator
             // 
-            this.btnBatchUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnBatchUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnBatchUpdate.Location = new System.Drawing.Point(162, 366);
-            this.btnBatchUpdate.Name = "btnBatchUpdate";
-            this.btnBatchUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnBatchUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnBatchUpdate.TabIndex = 38;
-            this.btnBatchUpdate.Text = "编辑";
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
             // 
-            // btnBatchSave
+            // errorProvider
             // 
-            this.btnBatchSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnBatchSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnBatchSave.Location = new System.Drawing.Point(257, 366);
-            this.btnBatchSave.Name = "btnBatchSave";
-            this.btnBatchSave.Size = new System.Drawing.Size(75, 23);
-            this.btnBatchSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnBatchSave.TabIndex = 39;
-            this.btnBatchSave.Text = "保存";
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
             // 
-            // btnFactorSelect
+            // highlighter
             // 
-            this.btnFactorSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnFactorSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFactorSelect.Location = new System.Drawing.Point(448, 117);
-            this.btnFactorSelect.Name = "btnFactorSelect";
-            this.btnFactorSelect.Size = new System.Drawing.Size(21, 23);
-            this.btnFactorSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFactorSelect.TabIndex = 40;
-            this.btnFactorSelect.Text = "...";
+            this.highlighter.ContainerControl = this;
             // 
             // FinanceBatchDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(506, 427);
+            this.ClientSize = new System.Drawing.Size(486, 405);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.Name = "FinanceBatchDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "转让批次信息";
+            this.Text = "融资批次信息";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BatchDetail_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
@@ -837,6 +876,7 @@ namespace CMBC.EasyFactor.ARMgr
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodEndDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -845,5 +885,9 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.ButtonX btnFactorSelect;
         private DevComponents.DotNetBar.ButtonX btnBatchSave;
         private DevComponents.DotNetBar.ButtonX btnBatchUpdate;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx checkStatusComboBox;
     }
 }

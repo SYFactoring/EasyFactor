@@ -22,10 +22,11 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoiceFinance : UserControl
     {
-        #region Fields (2)
+        #region Fields (3)
 
         private CDA _CDA;
         private ARCaseBasic caseBasic;
+        private double currentBatchFinanceAmount = 0;
 
         #endregion Fields
 
@@ -84,9 +85,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (21)
+        #region Methods (20)
 
-        // Public Methods (2) 
+        // Public Methods (1) 
 
         /// <summary>
         /// 
@@ -132,35 +133,6 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-        }
-
-        private double currentBatchFinanceAmount = 0;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void StatBatch()
-        {
-            IList invoiceList = this.invoiceBindingSource.List;
-            InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
-
-            double totalFinance = 0;
-            double totalInterest = 0;
-            for (int i = 0; i < invoiceList.Count; i++)
-            {
-                if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
-                {
-                    totalFinance += ((Invoice)invoiceList[i]).FinanceAmount.GetValueOrDefault();
-                    totalInterest += ((Invoice)invoiceList[i]).Interest.GetValueOrDefault();
-                }
-            }
-            currentBatchFinanceAmount = totalFinance;
-            this.tbFinanceLineBalance.Text = String.Format("{0:N2}", financeBatch.FinanceAmount - totalFinance);
-            this.tbTotalInterest.Text = String.Format("{0:N2}", totalInterest);
-            if (totalFinance > financeBatch.FinanceAmount)
-            {
-                MessageBox.Show("当前融资额超过限定", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
 
         /// <summary>
@@ -563,6 +535,33 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        private void SelectBatch(object sender, EventArgs e)
+        {
+            if (this._CDA == null)
+            {
+                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            FinanceBatchMgr batchMgr = new FinanceBatchMgr(this._CDA);
+            QueryForm queryUI = new QueryForm(batchMgr, "选择融资批次");
+            batchMgr.OwnerForm = queryUI;
+            queryUI.ShowDialog(this);
+            InvoiceFinanceBatch selectedBatch = batchMgr.Selected;
+            if (selectedBatch != null)
+            {
+                this.batchBindingSource.DataSource = selectedBatch;
+                this.invoiceBindingSource.DataSource = selectedBatch.Invoices.ToList();
+                for (int i = 0; i < this.invoiceBindingSource.List.Count; i++)
+                {
+                    DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[i].Cells[0];
+                    cell.Value = 1;
+                    ResetRow(i, true);
+                }
+                this.StatBatch();
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -593,30 +592,30 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        private void SelectBatch(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        private void StatBatch()
         {
-            if (this._CDA == null)
-            {
-                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            IList invoiceList = this.invoiceBindingSource.List;
+            InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
 
-            FinanceBatchMgr batchMgr = new FinanceBatchMgr(this._CDA);
-            QueryForm queryUI = new QueryForm(batchMgr, "选择融资批次");
-            batchMgr.OwnerForm = queryUI;
-            queryUI.ShowDialog(this);
-            InvoiceFinanceBatch selectedBatch = batchMgr.Selected;
-            if (selectedBatch != null)
+            double totalFinance = 0;
+            double totalInterest = 0;
+            for (int i = 0; i < invoiceList.Count; i++)
             {
-                this.batchBindingSource.DataSource = selectedBatch;
-                this.invoiceBindingSource.DataSource = selectedBatch.Invoices.ToList();
-                for (int i = 0; i < this.invoiceBindingSource.List.Count; i++)
+                if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[i].Cells[0];
-                    cell.Value = 1;
-                    ResetRow(i, true);
+                    totalFinance += ((Invoice)invoiceList[i]).FinanceAmount.GetValueOrDefault();
+                    totalInterest += ((Invoice)invoiceList[i]).Interest.GetValueOrDefault();
                 }
-                this.StatBatch();
+            }
+            currentBatchFinanceAmount = totalFinance;
+            this.tbFinanceLineBalance.Text = String.Format("{0:N2}", financeBatch.FinanceAmount - totalFinance);
+            this.tbTotalInterest.Text = String.Format("{0:N2}", totalInterest);
+            if (totalFinance > financeBatch.FinanceAmount)
+            {
+                MessageBox.Show("当前融资额超过限定", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
