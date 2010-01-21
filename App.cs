@@ -13,10 +13,16 @@ namespace CMBC.EasyFactor
     /// </summary>
     public class App
     {
+        #region Fields (1)
+
         /// <summary>
         /// private static class variable
         /// </summary>
         private static App current;
+
+        #endregion Fields
+
+        #region Constructors (1)
 
         /// <summary>
         /// Prevents a default instance of the App class from being created
@@ -25,6 +31,10 @@ namespace CMBC.EasyFactor
         {
             this.DbContext = new DBDataContext();
         }
+
+        #endregion Constructors
+
+        #region Properties (4)
 
         /// <summary>
         /// Gets current class variable
@@ -43,5 +53,16 @@ namespace CMBC.EasyFactor
         /// Gets DbContext
         /// </summary>
         public DBDataContext DbContext { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Main Window
+        /// </summary>
+        public MainWindow MainWindow
+        {
+            get;
+            set;
+        }
+
+        #endregion Properties
     }
 }
