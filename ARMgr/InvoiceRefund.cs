@@ -551,7 +551,6 @@ namespace CMBC.EasyFactor.ARMgr
                     Invoice invoice = log.Invoice;
                     invoice.RefundAmount2 = null;
                 }
-
                 App.Current.DbContext.SubmitChanges();
                 this.caseBasic.CaculateOutstanding(this._CDA);
                 this.NewBatch(null, null);
