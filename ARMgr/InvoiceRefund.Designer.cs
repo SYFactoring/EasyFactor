@@ -2,8 +2,9 @@
 {
     partial class InvoiceRefund
     {
-        #region Fields (73)
+        #region Fields (46)
 
+        private System.Windows.Forms.BindingSource batchBindingSource;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
@@ -13,20 +14,45 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private DevComponents.DotNetBar.ButtonX btnPaymentBatchExport;
+        private DevComponents.DotNetBar.ButtonX btnPaymentBatchImport;
+        private DevComponents.DotNetBar.ButtonX btnPaymentBatchNew;
+        private DevComponents.DotNetBar.ButtonX btnPaymentBatchSave;
+        private DevComponents.DotNetBar.ButtonX btnPaymentBatchSelect;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbRefundType;
+        private System.Windows.Forms.ContextMenuStrip cmuInvoiceRefund;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount2;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.BindingSource batchBindingSource;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoices;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private System.Windows.Forms.BindingNavigator invoiceBindingNavigator;
         private System.Windows.Forms.BindingSource invoiceBindingSource;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoices;
         private DevComponents.DotNetBar.LabelX lblTotalPayment;
+        private DevComponents.DotNetBar.LabelX lblTotalRefund;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
         private DevComponents.DotNetBar.PanelEx panelRefundBatch;
-        private DevComponents.DotNetBar.Controls.TextBoxX refundBatchNoTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput paymentDateDateTimePicker;
+        private DevComponents.DotNetBar.Controls.TextBoxX refundBatchNoTextBox;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
         private DevComponents.DotNetBar.Controls.TextBoxX tbTotalPayment;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalRefund;
 
         #endregion Fields
 
@@ -299,9 +325,9 @@
             this.cbRefundType.FormattingEnabled = true;
             this.cbRefundType.Items.AddRange(new object[] {
             "买方付款",
-            "卖方还款",
+            "间接付款",
             "担保付款",
-            "间接付款"});
+            "卖方还款"});
             this.cbRefundType.Location = new System.Drawing.Point(90, 29);
             this.cbRefundType.Name = "cbRefundType";
             this.cbRefundType.Size = new System.Drawing.Size(100, 21);
@@ -708,32 +734,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.ButtonX btnPaymentBatchSave;
-        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
-        private System.Windows.Forms.ErrorProvider errorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private System.Windows.Forms.ContextMenuStrip cmuInvoiceRefund;
-        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbRefundType;
-        private DevComponents.DotNetBar.ButtonX btnPaymentBatchNew;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
-        private DevComponents.DotNetBar.LabelX lblTotalRefund;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalRefund;
-        private DevComponents.DotNetBar.ButtonX btnPaymentBatchImport;
-        private DevComponents.DotNetBar.ButtonX btnPaymentBatchExport;
-        private DevComponents.DotNetBar.ButtonX btnPaymentBatchSelect;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount2;
     }
 }

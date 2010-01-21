@@ -1,64 +1,90 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using CMBC.EasyFactor.Utils;
-using CMBC.EasyFactor.DB.dbml;
-
+﻿
 namespace CMBC.EasyFactor.ARMgr
 {
-    public partial class RefundBatchDetail : UserControl
-    {
-        #region Fields (1)
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Windows.Forms;
+    using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.CaseMgr;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class RefundBatchDetail : DevComponents.DotNetBar.Office2007Form
+    {
+        #region Fields (2)
+
+        /// <summary>
+        /// 
+        /// </summary>
         private BindingSource bs;
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpBatchType opBatchType;
 
         #endregion Fields
 
+        #region Enums (1)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum OpBatchType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            DETAIL_BATCH,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            UPDATE_BATCH,
+        }
+
+        #endregion Enums
+
         #region Constructors (1)
 
-        public RefundBatchDetail(List<InvoiceRefundLog> logList)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="batch"></param>
+        public RefundBatchDetail(InvoiceRefundBatch batch)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.bs = new BindingSource();
             this.dgvRefundLogs.AutoGenerateColumns = false;
             this.dgvRefundLogs.DataSource = bs;
+            this.opBatchType = OpBatchType.DETAIL_BATCH;
             ControlUtil.SetDoubleBuffered(this.dgvRefundLogs);
 
-            bs.DataSource = logList;
+            this.batchBindingSource.DataSource = batch;
+            this.bs.DataSource = batch.InvoiceRefundLogs;
+
+            batch.Backup();
+            this.UpdateBatchControlStatus();
         }
 
         #endregion Constructors
 
-        #region Properties (2)
+        #region Methods (7)
+
+        // Private Methods (7) 
 
         /// <summary>
-        /// Gets or sets owner form
+        /// 
         /// </summary>
-        public Form OwnerForm
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BatchDetail_FormClosing(object sender, FormClosingEventArgs e)
         {
-            get;
-            set;
+            InvoiceRefundBatch batch = (InvoiceRefundBatch)this.batchBindingSource.DataSource;
+            batch.Restore();
         }
-
-        /// <summary>
-        /// Gets or sets selected AssignBatch
-        /// </summary>
-        public InvoiceRefundLog Selected
-        {
-            get;
-            set;
-        }
-
-        #endregion Properties
-
-        #region Methods (2)
-
-        // Private Methods (2) 
 
         /// <summary>
         /// 
@@ -93,18 +119,89 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void DetailCDA(object sender, EventArgs e)
+        {
+            InvoiceRefundBatch batch = (InvoiceRefundBatch)this.batchBindingSource.DataSource;
+            CDADetail detail = new CDADetail(batch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
+            detail.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvRefundLogs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-            e.RowBounds.Location.Y,
-            dgvRefundLogs.RowHeadersWidth - 4,
-            e.RowBounds.Height);
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgvRefundLogs.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvRefundLogs.RowHeadersDefaultCellStyle.Font, rectangle, dgvRefundLogs.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
 
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgvRefundLogs.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgvRefundLogs.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveBatch(object sender, EventArgs e)
+        {
+            if (!this.superValidator.Validate())
+            {
+                return;
+            }
+
+            InvoiceRefundBatch batch = (InvoiceRefundBatch)this.batchBindingSource.DataSource;
+
+            bool isUpdateOK = true;
+            try
+            {
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e2)
+            {
+                isUpdateOK = false;
+                MessageBox.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (isUpdateOK)
+            {
+                MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                batch.Backup();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateBatch(object sender, EventArgs e)
+        {
+            this.opBatchType = OpBatchType.UPDATE_BATCH;
+            this.UpdateBatchControlStatus();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateBatchControlStatus()
+        {
+            if (this.opBatchType == OpBatchType.DETAIL_BATCH)
+            {
+                foreach (Control comp in this.panelBatch.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+            }
+            else if (this.opBatchType == OpBatchType.UPDATE_BATCH)
+            {
+                foreach (Control comp in this.panelBatch.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+
+                this.cDACodeTextBox.ReadOnly = true;
+                this.refundBatchNoTextBox.ReadOnly = true;
+            }
         }
 
         #endregion Methods

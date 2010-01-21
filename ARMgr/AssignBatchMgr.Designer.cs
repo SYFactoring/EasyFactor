@@ -157,6 +157,7 @@
             // 
             // 
             // 
+            this.lblCount.BackgroundStyle.Class = "";
             this.lblCount.Location = new System.Drawing.Point(534, 14);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
@@ -185,6 +186,7 @@
             // 
             // 
             // 
+            this.lblCheckStatus.BackgroundStyle.Class = "";
             this.lblCheckStatus.Location = new System.Drawing.Point(4, 31);
             this.lblCheckStatus.Name = "lblCheckStatus";
             this.lblCheckStatus.Size = new System.Drawing.Size(59, 16);
@@ -208,6 +210,7 @@
             // 
             // 
             this.dateTo.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dateTo.MonthCalendar.BackgroundStyle.Class = "";
             this.dateTo.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
@@ -218,6 +221,7 @@
             this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
             this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
             this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.dateTo.MonthCalendar.CommandsBackgroundStyle.Class = "";
             this.dateTo.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.dateTo.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.dateTo.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -227,6 +231,7 @@
             this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
             this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.dateTo.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.dateTo.MonthCalendar.TodayButtonVisible = true;
             this.dateTo.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dateTo.Name = "dateTo";
@@ -240,6 +245,7 @@
             // 
             // 
             // 
+            this.lblDatePicker.BackgroundStyle.Class = "";
             this.lblDatePicker.Location = new System.Drawing.Point(176, 9);
             this.lblDatePicker.Name = "lblDatePicker";
             this.lblDatePicker.Size = new System.Drawing.Size(47, 16);
@@ -263,6 +269,7 @@
             // 
             // 
             this.dateFrom.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dateFrom.MonthCalendar.BackgroundStyle.Class = "";
             this.dateFrom.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
@@ -273,6 +280,7 @@
             this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
             this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
             this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.Class = "";
             this.dateFrom.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.dateFrom.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.dateFrom.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -282,6 +290,7 @@
             this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
             this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.dateFrom.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.dateFrom.MonthCalendar.TodayButtonVisible = true;
             this.dateFrom.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dateFrom.Name = "dateFrom";
@@ -318,6 +327,7 @@
             // 
             // 
             // 
+            this.lblAssignBatchNo.BackgroundStyle.Class = "";
             this.lblAssignBatchNo.Location = new System.Drawing.Point(4, 9);
             this.lblAssignBatchNo.Name = "lblAssignBatchNo";
             this.lblAssignBatchNo.Size = new System.Drawing.Size(59, 16);
@@ -484,14 +494,14 @@
             // 
             this.menuItemBatchSelect.Name = "menuItemBatchSelect";
             this.menuItemBatchSelect.Size = new System.Drawing.Size(182, 22);
-            this.menuItemBatchSelect.Text = "&S选择批次";
+            this.menuItemBatchSelect.Text = "选择批次(&S)";
             this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
             // 
             // menuItemBatchDetail
             // 
             this.menuItemBatchDetail.Name = "menuItemBatchDetail";
             this.menuItemBatchDetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemBatchDetail.Text = "&M批次详情";
+            this.menuItemBatchDetail.Text = "批次详情(&M)";
             this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
             // 
             // toolStripSeparator1
@@ -503,14 +513,14 @@
             // 
             this.menuItemCheck.Name = "menuItemCheck";
             this.menuItemCheck.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCheck.Text = "&P复核通过";
+            this.menuItemCheck.Text = "复核通过(&P)";
             this.menuItemCheck.Click += new System.EventHandler(this.Check);
             // 
             // menuItemReject
             // 
             this.menuItemReject.Name = "menuItemReject";
             this.menuItemReject.Size = new System.Drawing.Size(182, 22);
-            this.menuItemReject.Text = "&R复核拒绝";
+            this.menuItemReject.Text = "复核拒绝(&R)";
             this.menuItemReject.Click += new System.EventHandler(this.Reject);
             // 
             // toolStripSeparator2
@@ -522,7 +532,7 @@
             // 
             this.menuItemBatchDelete.Name = "menuItemBatchDelete";
             this.menuItemBatchDelete.Size = new System.Drawing.Size(182, 22);
-            this.menuItemBatchDelete.Text = "&D删除批次";
+            this.menuItemBatchDelete.Text = "删除批次(&D)";
             this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
             // 
             // toolStripSeparator3

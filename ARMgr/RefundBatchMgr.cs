@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class RefundBatchMgr : UserControl
     {
-		#region Fields (3) 
+        #region Fields (3)
 
         /// <summary>
         /// 
@@ -32,9 +32,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -57,11 +57,11 @@ namespace CMBC.EasyFactor.ARMgr
             QUERY
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (2) 
+        #region Constructors (2)
 
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="selectedCDA"></param>
@@ -94,9 +94,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets owner form
@@ -116,11 +116,11 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (8) 
+        #region Methods (8)
 
-		// Private Methods (8) 
+        // Private Methods (8) 
 
         /// <summary>
         /// 
@@ -153,7 +153,7 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
             if (MessageBox.Show("是否打算删除此" + selectedBatch.BatchCount + "条还款记录", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                foreach(InvoiceRefundLog log in selectedBatch.InvoiceRefundLogs)
+                foreach (InvoiceRefundLog log in selectedBatch.InvoiceRefundLogs)
                 {
                     Invoice invoice = log.Invoice;
                     log.Invoice = null;
@@ -170,6 +170,7 @@ namespace CMBC.EasyFactor.ARMgr
                     MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
                 this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
             }
 
@@ -186,11 +187,10 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            RefundBatchDetail logMgr = new RefundBatchDetail(selectedBatch.InvoiceRefundLogs.ToList());
-            QueryForm queryUI = new QueryForm(logMgr, "批次详情");
-            logMgr.OwnerForm = queryUI;
-            queryUI.ShowDialog(this);
+            RefundBatchDetail detail = new RefundBatchDetail(selectedBatch);
+            detail.ShowDialog(this);
         }
 
         /// <summary>
@@ -210,18 +210,15 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                dgvBatches.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgvBatches.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgvBatches.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvBatches.RowHeadersDefaultCellStyle.Font, rectangle, dgvBatches.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -243,7 +240,7 @@ namespace CMBC.EasyFactor.ARMgr
                     && (beginDate != this.dateFrom.MinDate ? i.RefundDate >= beginDate : true)
                     && (endDate != this.dateTo.MinDate ? i.RefundDate <= endDate : true)
                     && (status != string.Empty ? i.CheckStatus == status : true)
-                    && (refundType!=string.Empty?i.RefundType==refundType:true)
+                    && (refundType != string.Empty ? i.RefundType == refundType : true)
                     );
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
@@ -297,6 +294,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

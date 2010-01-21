@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class PaymentBatchMgr : UserControl
     {
-		#region Fields (3) 
+        #region Fields (3)
 
         /// <summary>
         /// 
@@ -32,9 +32,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -54,14 +54,14 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            QUERY
+            QUERY,
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (2) 
+        #region Constructors (2)
 
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="selectedCDA"></param>
@@ -79,11 +79,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="batchType"></param>
         public PaymentBatchMgr(OpBatchType batchType)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             ControlUtil.SetDoubleBuffered(this.dgvBatches);
             this.dgvBatches.AutoGenerateColumns = false;
             this.dgvBatches.DataSource = bs;
             this.opBatchType = batchType;
+
             if (batchType == OpBatchType.CHECK)
             {
                 this.cbCheckStatus.Text = "未复核";
@@ -94,9 +95,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets owner form
@@ -116,11 +117,11 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (9) 
+        #region Methods (9)
 
-		// Private Methods (9) 
+        // Private Methods (9) 
 
         /// <summary>
         /// 
@@ -183,11 +184,10 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            PaymentBatchDetail logMgr = new PaymentBatchDetail(selectedBatch.InvoicePaymentLogs.ToList());
-            QueryForm queryUI = new QueryForm(logMgr, "批次详情");
-            logMgr.OwnerForm = queryUI;
-            queryUI.ShowDialog(this);
+            PaymentBatchDetail detail = new PaymentBatchDetail(selectedBatch);
+            detail.ShowDialog(this);
         }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace CMBC.EasyFactor.ARMgr
                     && (beginDate != this.dateFrom.MinDate ? i.PaymentDate >= beginDate : true)
                     && (endDate != this.dateTo.MinDate ? i.PaymentDate <= endDate : true)
                     && (status != string.Empty ? i.CheckStatus == status : true)
-                    && (paymentType!=string.Empty?i.PaymentType==paymentType:true)
+                    && (paymentType != string.Empty ? i.PaymentType == paymentType : true)
                     );
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
@@ -315,6 +315,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

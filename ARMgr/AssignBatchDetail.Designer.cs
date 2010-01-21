@@ -125,6 +125,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            cDACodeLabel.BackgroundStyle.Class = "";
             cDACodeLabel.Location = new System.Drawing.Point(12, 10);
             cDACodeLabel.Name = "cDACodeLabel";
             cDACodeLabel.Size = new System.Drawing.Size(97, 16);
@@ -138,6 +139,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            assignBatchNoLabel.BackgroundStyle.Class = "";
             assignBatchNoLabel.Location = new System.Drawing.Point(50, 32);
             assignBatchNoLabel.Name = "assignBatchNoLabel";
             assignBatchNoLabel.Size = new System.Drawing.Size(59, 16);
@@ -151,6 +153,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            assignDateLabel.BackgroundStyle.Class = "";
             assignDateLabel.Location = new System.Drawing.Point(62, 58);
             assignDateLabel.Name = "assignDateLabel";
             assignDateLabel.Size = new System.Drawing.Size(47, 16);
@@ -164,6 +167,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            createUserNameLabel.BackgroundStyle.Class = "";
             createUserNameLabel.Location = new System.Drawing.Point(218, 152);
             createUserNameLabel.Name = "createUserNameLabel";
             createUserNameLabel.Size = new System.Drawing.Size(47, 16);
@@ -177,7 +181,8 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            checkStatusLabel.Location = new System.Drawing.Point(50, 186);
+            checkStatusLabel.BackgroundStyle.Class = "";
+            checkStatusLabel.Location = new System.Drawing.Point(50, 183);
             checkStatusLabel.Name = "checkStatusLabel";
             checkStatusLabel.Size = new System.Drawing.Size(59, 16);
             checkStatusLabel.TabIndex = 10;
@@ -190,6 +195,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            rejectReasonLabel.BackgroundStyle.Class = "";
             rejectReasonLabel.Location = new System.Drawing.Point(50, 209);
             rejectReasonLabel.Name = "rejectReasonLabel";
             rejectReasonLabel.Size = new System.Drawing.Size(59, 16);
@@ -203,6 +209,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            checkDateLabel.BackgroundStyle.Class = "";
             checkDateLabel.Location = new System.Drawing.Point(62, 257);
             checkDateLabel.Name = "checkDateLabel";
             checkDateLabel.Size = new System.Drawing.Size(47, 16);
@@ -216,6 +223,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            checkUserNameLabel.BackgroundStyle.Class = "";
             checkUserNameLabel.Location = new System.Drawing.Point(62, 279);
             checkUserNameLabel.Name = "checkUserNameLabel";
             checkUserNameLabel.Size = new System.Drawing.Size(47, 16);
@@ -229,6 +237,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            commentLabel.BackgroundStyle.Class = "";
             commentLabel.Location = new System.Drawing.Point(75, 82);
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(34, 16);
@@ -377,15 +386,18 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.checkDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.checkDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
             // 
             // 
             // 
+            this.checkDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
             this.checkDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.checkDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.checkDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
             // 
             // 
             // 
+            this.checkDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.checkDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.checkDateDateTimePicker.Name = "checkDateDateTimePicker";
             this.checkDateDateTimePicker.Size = new System.Drawing.Size(162, 20);
@@ -424,6 +436,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
+            this.isCreateMsgCheckBox.BackgroundStyle.Class = "";
             this.isCreateMsgCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.batchBindingSource, "IsCreateMsg", true));
             this.isCreateMsgCheckBox.Location = new System.Drawing.Point(50, 153);
             this.isCreateMsgCheckBox.Name = "isCreateMsgCheckBox";
@@ -448,15 +461,18 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.assignDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.assignDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
             // 
             // 
             // 
+            this.assignDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
             this.assignDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.assignDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.assignDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
             // 
             // 
             // 
+            this.assignDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.assignDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.assignDateDateTimePicker.Name = "assignDateDateTimePicker";
             this.assignDateDateTimePicker.Size = new System.Drawing.Size(162, 20);

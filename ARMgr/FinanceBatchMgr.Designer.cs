@@ -97,14 +97,6 @@
             this.tbFinanceBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFinanceBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemInvoiceList = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemBatchDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -122,6 +114,14 @@
             this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemInvoiceList = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemBatchDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -161,6 +161,7 @@
             // 
             // 
             // 
+            this.lblCount.BackgroundStyle.Class = "";
             this.lblCount.Location = new System.Drawing.Point(521, 13);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
@@ -189,6 +190,7 @@
             // 
             // 
             // 
+            this.lblCheckStatus.BackgroundStyle.Class = "";
             this.lblCheckStatus.Location = new System.Drawing.Point(3, 32);
             this.lblCheckStatus.Name = "lblCheckStatus";
             this.lblCheckStatus.Size = new System.Drawing.Size(59, 16);
@@ -212,6 +214,7 @@
             // 
             // 
             this.dateTo.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dateTo.MonthCalendar.BackgroundStyle.Class = "";
             this.dateTo.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
@@ -222,6 +225,7 @@
             this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
             this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
             this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.dateTo.MonthCalendar.CommandsBackgroundStyle.Class = "";
             this.dateTo.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.dateTo.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.dateTo.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -231,6 +235,7 @@
             this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
             this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.dateTo.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.dateTo.MonthCalendar.TodayButtonVisible = true;
             this.dateTo.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dateTo.Name = "dateTo";
@@ -244,6 +249,7 @@
             // 
             // 
             // 
+            this.lblDatePicker.BackgroundStyle.Class = "";
             this.lblDatePicker.Location = new System.Drawing.Point(175, 10);
             this.lblDatePicker.Name = "lblDatePicker";
             this.lblDatePicker.Size = new System.Drawing.Size(47, 16);
@@ -267,6 +273,7 @@
             // 
             // 
             this.dateFrom.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dateFrom.MonthCalendar.BackgroundStyle.Class = "";
             this.dateFrom.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
@@ -277,6 +284,7 @@
             this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
             this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
             this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.Class = "";
             this.dateFrom.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.dateFrom.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.dateFrom.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -286,6 +294,7 @@
             this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
             this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.dateFrom.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.dateFrom.MonthCalendar.TodayButtonVisible = true;
             this.dateFrom.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dateFrom.Name = "dateFrom";
@@ -322,6 +331,7 @@
             // 
             // 
             // 
+            this.lblFinanceBatchNo.BackgroundStyle.Class = "";
             this.lblFinanceBatchNo.Location = new System.Drawing.Point(3, 10);
             this.lblFinanceBatchNo.Name = "lblFinanceBatchNo";
             this.lblFinanceBatchNo.Size = new System.Drawing.Size(56, 16);
@@ -380,64 +390,6 @@
             this.dgvBatches.TabIndex = 1;
             this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBatches_CellDoubleClick);
             this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBatches_RowPostPaint);
-            // 
-            // cmuBatchMgr
-            // 
-            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemBatchSelect,
-            this.menuItemInvoiceList,
-            this.toolStripSeparator1,
-            this.menuItemCheck,
-            this.menuItemReject,
-            this.toolStripSeparator2,
-            this.menuItemBatchDelete});
-            this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(134, 126);
-            // 
-            // menuItemBatchSelect
-            // 
-            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
-            this.menuItemBatchSelect.Size = new System.Drawing.Size(133, 22);
-            this.menuItemBatchSelect.Text = "&S选择批次";
-            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
-            // 
-            // menuItemInvoiceList
-            // 
-            this.menuItemInvoiceList.Name = "menuItemInvoiceList";
-            this.menuItemInvoiceList.Size = new System.Drawing.Size(133, 22);
-            this.menuItemInvoiceList.Text = "&M批次详情";
-            this.menuItemInvoiceList.Click += new System.EventHandler(this.DetailBatch);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(130, 6);
-            // 
-            // menuItemCheck
-            // 
-            this.menuItemCheck.Name = "menuItemCheck";
-            this.menuItemCheck.Size = new System.Drawing.Size(133, 22);
-            this.menuItemCheck.Text = "&P复核通过";
-            this.menuItemCheck.Click += new System.EventHandler(this.Check);
-            // 
-            // menuItemReject
-            // 
-            this.menuItemReject.Name = "menuItemReject";
-            this.menuItemReject.Size = new System.Drawing.Size(133, 22);
-            this.menuItemReject.Text = "&R复核拒绝";
-            this.menuItemReject.Click += new System.EventHandler(this.Reject);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(130, 6);
-            // 
-            // menuItemBatchDelete
-            // 
-            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
-            this.menuItemBatchDelete.Size = new System.Drawing.Size(133, 22);
-            this.menuItemBatchDelete.Text = "&D删除批次";
-            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
             // 
             // colSellerName
             // 
@@ -570,6 +522,64 @@
             this.colBatchCount.HeaderText = "发票笔数";
             this.colBatchCount.Name = "colBatchCount";
             this.colBatchCount.ReadOnly = true;
+            // 
+            // cmuBatchMgr
+            // 
+            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemBatchSelect,
+            this.menuItemInvoiceList,
+            this.toolStripSeparator1,
+            this.menuItemCheck,
+            this.menuItemReject,
+            this.toolStripSeparator2,
+            this.menuItemBatchDelete});
+            this.cmuBatchMgr.Name = "cmuBatchMgr";
+            this.cmuBatchMgr.Size = new System.Drawing.Size(153, 148);
+            // 
+            // menuItemBatchSelect
+            // 
+            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
+            this.menuItemBatchSelect.Size = new System.Drawing.Size(152, 22);
+            this.menuItemBatchSelect.Text = "选择批次(&S)";
+            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
+            // 
+            // menuItemInvoiceList
+            // 
+            this.menuItemInvoiceList.Name = "menuItemInvoiceList";
+            this.menuItemInvoiceList.Size = new System.Drawing.Size(152, 22);
+            this.menuItemInvoiceList.Text = "批次详情(&M)";
+            this.menuItemInvoiceList.Click += new System.EventHandler(this.DetailBatch);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // menuItemCheck
+            // 
+            this.menuItemCheck.Name = "menuItemCheck";
+            this.menuItemCheck.Size = new System.Drawing.Size(152, 22);
+            this.menuItemCheck.Text = "复核通过(&P)";
+            this.menuItemCheck.Click += new System.EventHandler(this.Check);
+            // 
+            // menuItemReject
+            // 
+            this.menuItemReject.Name = "menuItemReject";
+            this.menuItemReject.Size = new System.Drawing.Size(152, 22);
+            this.menuItemReject.Text = "复核拒绝(&R)";
+            this.menuItemReject.Click += new System.EventHandler(this.Reject);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // menuItemBatchDelete
+            // 
+            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
+            this.menuItemBatchDelete.Size = new System.Drawing.Size(152, 22);
+            this.menuItemBatchDelete.Text = "删除批次(&D)";
+            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
             // 
             // FinanceBatchMgr
             // 

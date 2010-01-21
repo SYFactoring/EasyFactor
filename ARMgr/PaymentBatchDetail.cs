@@ -1,77 +1,110 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using CMBC.EasyFactor.Utils;
-using CMBC.EasyFactor.DB.dbml;
-
+﻿
 namespace CMBC.EasyFactor.ARMgr
 {
-    public partial class PaymentBatchDetail : UserControl
-    {
-        #region Fields (1)
+    using System;
+    using System.Drawing;
+    using System.Windows.Forms;
+    using CMBC.EasyFactor.CaseMgr;
+    using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class PaymentBatchDetail : DevComponents.DotNetBar.Office2007Form
+    {
+        #region Fields (2)
+
+        /// <summary>
+        /// 
+        /// </summary>
         private BindingSource bs;
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpBatchType opBatchType;
 
         #endregion Fields
 
+        #region Enums (1)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum OpBatchType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            DETAIL_BATCH,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            UPDATE_BATCH,
+        }
+
+        #endregion Enums
+
         #region Constructors (1)
 
-        public PaymentBatchDetail(List<InvoicePaymentLog> logList)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="batch"></param>
+        public PaymentBatchDetail(InvoicePaymentBatch batch)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.bs = new BindingSource();
             this.dgvPaymentLogs.AutoGenerateColumns = false;
-            this.dgvPaymentLogs.DataSource = bs;
+            this.dgvPaymentLogs.DataSource = this.bs;
+            this.opBatchType = OpBatchType.DETAIL_BATCH;
             ControlUtil.SetDoubleBuffered(this.dgvPaymentLogs);
 
-            bs.DataSource = logList;
-            if (logList[0].CreditNote == null)
+            this.batchBindingSource.DataSource = batch;
+            this.bs.DataSource = batch.InvoicePaymentLogs;
+
+            if (((InvoicePaymentLog)bs.List[0]).CreditNote == null)
             {
                 colCreditNoteDate.Visible = false;
                 colCreditNoteNo.Visible = false;
             }
+
+            batch.Backup();
+            this.UpdateBatchControlStatus();
         }
 
         #endregion Constructors
 
-        #region Properties (2)
+        #region Methods (7)
+
+        // Private Methods (7) 
 
         /// <summary>
-        /// Gets or sets owner form
+        /// 
         /// </summary>
-        public Form OwnerForm
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BatchDetail_FormClosing(object sender, FormClosingEventArgs e)
         {
-            get;
-            set;
+            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.batchBindingSource.DataSource;
+            batch.Restore();
         }
 
         /// <summary>
-        /// Gets or sets selected AssignBatch
+        /// 
         /// </summary>
-        public InvoicePaymentLog Selected
-        {
-            get;
-            set;
-        }
-
-        #endregion Properties
-
-        #region Methods (2)
-
-        // Private Methods (2) 
-
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteLog(object sender, EventArgs e)
         {
             if (this.dgvPaymentLogs.SelectedRows.Count == 0)
             {
                 return;
             }
+
             InvoicePaymentLog log = (InvoicePaymentLog)this.bs.List[this.dgvPaymentLogs.SelectedRows[0].Index];
+
             try
             {
                 Invoice invoice = log.Invoice;
@@ -85,7 +118,20 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            dgvPaymentLogs.Rows.RemoveAt(this.dgvPaymentLogs.SelectedRows[0].Index);
+
+            this.dgvPaymentLogs.Rows.RemoveAt(this.dgvPaymentLogs.SelectedRows[0].Index);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailCDA(object sender, EventArgs e)
+        {
+            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.batchBindingSource.DataSource;
+            CDADetail detail = new CDADetail(batch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
+            detail.Show();
         }
 
         /// <summary>
@@ -97,6 +143,73 @@ namespace CMBC.EasyFactor.ARMgr
         {
             Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgvPaymentLogs.RowHeadersWidth - 4, e.RowBounds.Height);
             TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvPaymentLogs.RowHeadersDefaultCellStyle.Font, rectangle, dgvPaymentLogs.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveBatch(object sender, EventArgs e)
+        {
+            if (!this.superValidator.Validate())
+            {
+                return;
+            }
+
+            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.batchBindingSource.DataSource;
+
+            bool isUpdateOK = true;
+            try
+            {
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e2)
+            {
+                isUpdateOK = false;
+                MessageBox.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (isUpdateOK)
+            {
+                MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                batch.Backup();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateBatch(object sender, EventArgs e)
+        {
+            this.opBatchType = OpBatchType.UPDATE_BATCH;
+            this.UpdateBatchControlStatus();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateBatchControlStatus()
+        {
+            if (this.opBatchType == OpBatchType.DETAIL_BATCH)
+            {
+                foreach (Control comp in this.panelBatch.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+            }
+            else if (this.opBatchType == OpBatchType.UPDATE_BATCH)
+            {
+                foreach (Control comp in this.panelBatch.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+
+                this.cDACodeTextBox.ReadOnly = true;
+                this.paymentBatchNoTextBox.ReadOnly = true;
+            }
         }
 
         #endregion Methods

@@ -118,7 +118,7 @@
       <DependentUpon>FinanceBatchDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="ARMgr\RefundBatchDetail.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="ARMgr\RefundBatchDetail.Designer.cs">
       <DependentUpon>RefundBatchDetail.cs</DependentUpon>
@@ -178,7 +178,7 @@
       <DependentUpon>InvoicePayment.cs</DependentUpon>
     </Compile>
     <Compile Include="ARMgr\PaymentBatchDetail.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="ARMgr\PaymentBatchDetail.Designer.cs">
       <DependentUpon>PaymentBatchDetail.cs</DependentUpon>
