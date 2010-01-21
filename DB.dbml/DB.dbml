@@ -370,7 +370,7 @@
       <Column Name="BatchCurrency" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" />
       <Column Name="FinanceAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="FinancePeriodBegin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="FinnacePeriodEnd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FinancePeriodEnd" Storage="_FinancePeriodEnd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="FinanceRate" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="InterestType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="FactorCode" Type="System.String" DbType="Char(7)" CanBeNull="true" />

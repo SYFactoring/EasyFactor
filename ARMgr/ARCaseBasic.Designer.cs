@@ -1,32 +1,65 @@
-﻿namespace CMBC.EasyFactor.ARMgr
-{
-    partial class ARCaseBasic
-    {
-		#region Fields (41) 
+﻿//-----------------------------------------------------------------------
+// <copyright file="CaseMgr.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
-        private DevComponents.DotNetBar.Controls.TextBoxX commissionTypeTextBox;
+namespace CMBC.EasyFactor.ARMgr
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class ARCaseBasic
+    {
+		#region Fields (44) 
+
         /// <summary> 
         /// Required designer variable.
         /// </summary>
+        private DevComponents.DotNetBar.Controls.TextBoxX assignTypeTextBox;
+        private DevComponents.DotNetBar.ButtonX btnCaseQuery;
+        private DevComponents.DotNetBar.Controls.TextBoxX buyerEDICodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX buyerNameTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX commissionTypeTextBox;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.TextBoxX creditCoverCurrTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX creditCoverTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX eFPriceTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX factorNameTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX financeProportionTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX handFeeCurrTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX handFeeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX iFPriceTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX invoiceCurrencyTextBox;
+        private DevComponents.DotNetBar.Controls.CheckBoxX isRecoarseCheckBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX ownerDepartmentCodeTextBox;
+        private DevComponents.DotNetBar.ExpandablePanel panelBuyer;
+        private DevComponents.DotNetBar.ExpandablePanel panelCase;
         private DevComponents.DotNetBar.ExpandablePanel panelCaseBasic;
+        private DevComponents.DotNetBar.ExpandablePanel panelFee;
+        private DevComponents.DotNetBar.ExpandablePanel panelFinanceCreditLine;
         private DevComponents.DotNetBar.PanelEx panelInvoiceMgr;
         private DevComponents.DotNetBar.Controls.TextBoxX periodEndTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX PMTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX priceTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX RMTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX sellerEDICodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX sellerNameTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX tbAROutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCDACode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreditCoverOutstanding;
         private DevComponents.DotNetBar.Controls.TextBoxX tbDueDate;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceCreditLineOutstanding;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceLine;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceLineCurr;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceOutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbHighestFinance;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbIsNotice;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbNetPaymentTerm;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentTerms;
+        private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
 
 		#endregion Fields 
 
@@ -40,16 +73,15 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
 		#endregion Methods 
-
-
 
         #region Component Designer generated code
 
@@ -1222,34 +1254,7 @@
             this.panelCase.ResumeLayout(false);
             this.panelCase.PerformLayout();
             this.ResumeLayout(false);
-
         }
-
         #endregion
-
-        private DevComponents.DotNetBar.ExpandablePanel panelBuyer;
-        private DevComponents.DotNetBar.ExpandablePanel panelCase;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCDACode;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbIsNotice;
-        private DevComponents.DotNetBar.ButtonX btnCaseQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX ownerDepartmentCodeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX assignTypeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX sellerEDICodeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX RMTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX sellerNameTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX PMTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX buyerEDICodeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX buyerNameTextBox;
-        private DevComponents.DotNetBar.Controls.CheckBoxX isRecoarseCheckBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX invoiceCurrencyTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX factorNameTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
-        private DevComponents.DotNetBar.ExpandablePanel panelFee;
-        private DevComponents.DotNetBar.ExpandablePanel panelFinanceCreditLine;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbHighestFinance;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentTerms;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbNetPaymentTerm;
     }
 }

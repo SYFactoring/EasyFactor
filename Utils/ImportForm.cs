@@ -997,6 +997,10 @@ namespace CMBC.EasyFactor.Utils
                 }
                 catch (Exception e1)
                 {
+                    foreach (Factor factor in factorList)
+                    {
+                        factor.FactorGroup = null;
+                    }
                     throw e1;
                 }
             }
@@ -1252,7 +1256,7 @@ namespace CMBC.EasyFactor.Utils
                                     financeBatch.CostRate = (System.Nullable<double>)valueArray[row, column++];
                                     financeBatch.InterestType = String.Format("{0:G}", valueArray[row, column++]);
                                     financeBatch.FinancePeriodBegin = (DateTime)valueArray[row, column++];
-                                    financeBatch.FinnacePeriodEnd = (DateTime)valueArray[row, column++];
+                                    financeBatch.FinancePeriodEnd = (DateTime)valueArray[row, column++];
                                     financeBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                                     financeBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                                     financeBatch.CheckStatus = "已复核";
@@ -1276,7 +1280,7 @@ namespace CMBC.EasyFactor.Utils
                             financeBatch.FinanceAmount += invoice.FinanceAmount.Value;
                             invoice.InvoiceFinanceBatch = financeBatch;
                             invoice.FinanceDate = financeBatch.FinancePeriodBegin;
-                            invoice.FinanceDueDate = financeBatch.FinnacePeriodEnd;
+                            invoice.FinanceDueDate = financeBatch.FinancePeriodEnd;
                         }
 
                         //付款批次信息

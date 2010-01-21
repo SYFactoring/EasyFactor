@@ -112,7 +112,7 @@ namespace CMBC.EasyFactor.ARMgr
             IList invoiceList = this.invoiceBindingSource.List;
             Invoice invoice = (Invoice)invoiceList[e.RowIndex];
             InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
-            int period = (batch.FinnacePeriodEnd - batch.FinancePeriodBegin).Days;
+            int period = (batch.FinancePeriodEnd - batch.FinancePeriodBegin).Days;
             switch (batch.InterestType)
             {
                 case "一次性收取":
@@ -253,7 +253,7 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.FinanceAmount = financeAmount;
 
                     invoice.FinanceDate = batch.FinancePeriodBegin;
-                    invoice.FinanceDueDate = batch.FinnacePeriodEnd;
+                    invoice.FinanceDueDate = batch.FinancePeriodEnd;
 
                     CaculateCommissionAndInterest(sender, e);
 
@@ -515,7 +515,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            if (!ValidateBatch())
+            if (!this.ValidateBatch())
             {
                 return;
             }
@@ -532,10 +532,12 @@ namespace CMBC.EasyFactor.ARMgr
                     ((Invoice)invoiceList[i]).InvoiceFinanceBatch = batch;
                 }
             }
+
             if (batch.Invoices.Count == 0)
             {
                 return;
             }
+
             try
             {
                 App.Current.DbContext.SubmitChanges();
@@ -553,6 +555,7 @@ namespace CMBC.EasyFactor.ARMgr
                 isSaveOK = false;
                 MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
             if (isSaveOK)
             {
                 MessageBox.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -623,19 +626,25 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         private bool ValidateBatch()
         {
-            foreach (Invoice invoice in this.invoiceBindingSource.List)
+            IList invoiceList = this.invoiceBindingSource.List;
+            for (int i = 0; i < invoiceList.Count; i++)
             {
-                if (invoice.FinanceAmount > invoice.AssignOutstanding)
+                if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    MessageBox.Show("融资金额不能大于转让余额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
-                }
-                if (invoice.FinanceDueDate < invoice.FinanceDate)
-                {
-                    MessageBox.Show("融资到期日不能早于融资日: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
+                    Invoice invoice = (Invoice)invoiceList[i];
+                    if (invoice.FinanceAmount > invoice.AssignOutstanding)
+                    {
+                        MessageBox.Show("融资金额不能大于转让余额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
+                    }
+                    if (invoice.FinanceDueDate < invoice.FinanceDate)
+                    {
+                        MessageBox.Show("融资到期日不能早于融资日: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
+                    }
                 }
             }
+
             return true;
         }
 

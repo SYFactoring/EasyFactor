@@ -25,7 +25,7 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput financePeriodBeginDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX financeRateTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx financeTypeComboBoxEx;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput finnacePeriodEndDateTimePicker;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput financePeriodEndDateTimePicker;
         private DevComponents.DotNetBar.Controls.ComboBoxEx interestTypeComboBoxEx;
         private System.Windows.Forms.BindingNavigator invoiceBindingNavigator;
         private System.Windows.Forms.BindingSource invoiceBindingSource;
@@ -97,7 +97,7 @@
             this.factorCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.interestTypeComboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.financeRateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.finnacePeriodEndDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.financePeriodEndDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.financePeriodBeginDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.financeAmountTextBoxX = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.batchCurrencyComboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -159,7 +159,7 @@
             lblFinanceLineBalance = new DevComponents.DotNetBar.LabelX();
             this.panelFinanceBatch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.finnacePeriodEndDateTimePicker)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.financePeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.cmuInvoiceFinance.SuspendLayout();
@@ -323,7 +323,7 @@
             this.panelFinanceBatch.Controls.Add(this.interestTypeComboBoxEx);
             this.panelFinanceBatch.Controls.Add(financeRateLabel);
             this.panelFinanceBatch.Controls.Add(this.financeRateTextBox);
-            this.panelFinanceBatch.Controls.Add(this.finnacePeriodEndDateTimePicker);
+            this.panelFinanceBatch.Controls.Add(this.financePeriodEndDateTimePicker);
             this.panelFinanceBatch.Controls.Add(financePeriodBeginLabel);
             this.panelFinanceBatch.Controls.Add(this.financePeriodBeginDateTimePicker);
             this.panelFinanceBatch.Controls.Add(financeAmountLabel);
@@ -514,41 +514,41 @@
             this.financeRateTextBox.TabIndex = 8;
             this.superValidator.SetValidator1(this.financeRateTextBox, this.requiredFieldValidator3);
             // 
-            // finnacePeriodEndDateTimePicker
+            // financePeriodEndDateTimePicker
             // 
             // 
             // 
             // 
-            this.finnacePeriodEndDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.finnacePeriodEndDateTimePicker.ButtonDropDown.Visible = true;
-            this.finnacePeriodEndDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "FinnacePeriodEnd", true));
-            this.finnacePeriodEndDateTimePicker.Location = new System.Drawing.Point(572, 3);
+            this.financePeriodEndDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.financePeriodEndDateTimePicker.ButtonDropDown.Visible = true;
+            this.financePeriodEndDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "FinancePeriodEnd", true));
+            this.financePeriodEndDateTimePicker.Location = new System.Drawing.Point(572, 3);
             // 
             // 
             // 
-            this.finnacePeriodEndDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            this.financePeriodEndDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
             // 
             // 
             // 
-            this.finnacePeriodEndDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.finnacePeriodEndDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.financePeriodEndDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.financePeriodEndDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
             // 
             // 
             // 
-            this.finnacePeriodEndDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.finnacePeriodEndDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.finnacePeriodEndDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.finnacePeriodEndDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            this.financePeriodEndDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.financePeriodEndDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.financePeriodEndDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.financePeriodEndDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
             // 
             // 
             // 
-            this.finnacePeriodEndDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.finnacePeriodEndDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.finnacePeriodEndDateTimePicker.Name = "finnacePeriodEndDateTimePicker";
-            this.finnacePeriodEndDateTimePicker.Size = new System.Drawing.Size(122, 20);
-            this.finnacePeriodEndDateTimePicker.TabIndex = 6;
-            this.superValidator.SetValidator1(this.finnacePeriodEndDateTimePicker, this.requiredFieldValidator5);
-            this.superValidator.SetValidator2(this.finnacePeriodEndDateTimePicker, this.compareValidator1);
+            this.financePeriodEndDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.financePeriodEndDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.financePeriodEndDateTimePicker.Name = "financePeriodEndDateTimePicker";
+            this.financePeriodEndDateTimePicker.Size = new System.Drawing.Size(122, 20);
+            this.financePeriodEndDateTimePicker.TabIndex = 6;
+            this.superValidator.SetValidator1(this.financePeriodEndDateTimePicker, this.requiredFieldValidator5);
+            this.superValidator.SetValidator2(this.financePeriodEndDateTimePicker, this.compareValidator1);
             // 
             // financePeriodBeginDateTimePicker
             // 
@@ -996,7 +996,7 @@
             this.panelFinanceBatch.ResumeLayout(false);
             this.panelFinanceBatch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.finnacePeriodEndDateTimePicker)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.financePeriodEndDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).EndInit();
             this.cmuInvoiceFinance.ResumeLayout(false);

@@ -586,7 +586,7 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.CostRate;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.InterestType;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinancePeriodBegin;
-                        datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinnacePeriodEnd;
+                        datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinancePeriodEnd;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.Comment;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.CreateUserName;
                     }

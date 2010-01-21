@@ -1,25 +1,36 @@
-﻿namespace CMBC.EasyFactor.ARMgr
-{
-    partial class InvoiceDetail
-    {
-        #region Fields (75)
+﻿//-----------------------------------------------------------------------
+// <copyright file="InvoiceDetail.Designer.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
+namespace CMBC.EasyFactor.ARMgr
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class InvoiceDetail
+    {
+		#region Fields (76) 
+
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
         private DevComponents.DotNetBar.Controls.TextBoxX assignAmountTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX assignOutstandingTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput assignDateTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX assignOutstandingTextBox;
         private DevComponents.DotNetBar.ButtonX btnDispute;
         private DevComponents.DotNetBar.ButtonX btnDisputeResolve;
+        private DevComponents.DotNetBar.ButtonX btnDisputeSave;
         private DevComponents.DotNetBar.ButtonX btnFlaw;
         private DevComponents.DotNetBar.ButtonX btnFlawResolve;
+        private DevComponents.DotNetBar.ButtonX btnFlawSave;
         private DevComponents.DotNetBar.ButtonX btnInvoiceReset;
         private DevComponents.DotNetBar.ButtonX btnInvoiceSave;
         private DevComponents.DotNetBar.ButtonX btnInvoiceUpdate;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput commissionDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX commissionTextBox;
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.TextBoxX disputeAmountTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput disputeDateDateTimePicker;
@@ -32,9 +43,9 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dueDateTextBox;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Controls.TextBoxX financeAmountTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX financeOutstandingTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput financeDateDateTimePicker;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput financeDueDateDateTimePicker;
+        private DevComponents.DotNetBar.Controls.TextBoxX financeOutstandingTextBox;
         private System.Windows.Forms.CheckedListBox flawReasonCheckedListBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput flawResolveDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX flawResolveUserNameTextBox;
@@ -54,6 +65,8 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput invoiceDateTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX invoiceNoTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX invoiceReferenceNumberTextBox;
+        private DevComponents.DotNetBar.Controls.CheckBoxX isDisputeCheckBox;
+        private DevComponents.DotNetBar.Controls.CheckBoxX isFlawCheckBox;
         private DevComponents.DotNetBar.Controls.TextBoxX netPaymentTermsTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX orderNumberReferenceTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX paymentAmountTextBox;
@@ -80,11 +93,11 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbFlawResolveReason;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput valueDateTextBox;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Methods (1)
+		#region Methods (1) 
 
-        // Protected Methods (1) 
+		// Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -92,16 +105,15 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
-        #endregion Methods
-
-
+		#endregion Methods 
 
         #region Windows Form Designer generated code
 
@@ -2456,14 +2468,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.valueDateTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.CheckBoxX isFlawCheckBox;
-        private DevComponents.DotNetBar.Controls.CheckBoxX isDisputeCheckBox;
-        private DevComponents.DotNetBar.ButtonX btnFlawSave;
-        private DevComponents.DotNetBar.ButtonX btnDisputeSave;
     }
 }

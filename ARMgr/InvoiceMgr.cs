@@ -83,14 +83,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="opInvoiceType"></param>
         public InvoiceMgr(OpInvoiceType opInvoiceType)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.bs = new BindingSource();
             this.dgvInvoices.AutoGenerateColumns = false;
             this.dgvInvoices.DataSource = bs;
             this.opInvoiceType = opInvoiceType;
             ControlUtil.SetDoubleBuffered(this.dgvInvoices);
-
-            this.dgvInvoices.CellFormatting += new DataGridViewCellFormattingEventHandler(dgvInvoices_CellFormatting);
 
             if (opInvoiceType == OpInvoiceType.FLAW_RESOLVE)
             {
@@ -169,6 +167,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             List<Invoice> selectedInvoices = new List<Invoice>();
             List<int> rowIndexes = new List<int>();
             foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
@@ -183,9 +182,14 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (MessageBox.Show("是否打算删除此" + selectedInvoices.Count + "条发票", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                App.Current.DbContext.Invoices.DeleteAllOnSubmit(selectedInvoices);
                 try
                 {
+                    foreach (Invoice invoice in selectedInvoices)
+                    {
+                        App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
+                        App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
+                        App.Current.DbContext.Invoices.DeleteOnSubmit(invoice);
+                    }
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e1)
@@ -199,7 +203,6 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     dgvInvoices.Rows.RemoveAt(rowIndex);
                 }
-
             }
         }
 

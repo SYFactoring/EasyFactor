@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceAssignBatch
     {
-        #region Properties (4)
+        #region Properties (5)
 
         /// <summary>
         /// Gets
@@ -43,6 +43,17 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 return this.Invoices.Count;
+            }
+        }
+
+        /// <summary>
+        /// Gets 
+        /// </summary>
+        public string BatchCurrency
+        {
+            get
+            {
+                return this.CDA.Case.InvoiceCurrency;
             }
         }
 

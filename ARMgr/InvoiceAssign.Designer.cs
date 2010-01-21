@@ -1,12 +1,23 @@
-﻿using CMBC.EasyFactor.Utils;
+﻿//-----------------------------------------------------------------------
+// <copyright file="InvoiceAssign.Designer.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
 namespace CMBC.EasyFactor.ARMgr
 {
-    partial class InvoiceAssign
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class InvoiceAssign
     {
-        #region Fields (77)
-
+		#region Fields (49) 
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
         private DevComponents.DotNetBar.Controls.TextBoxX assignBatchNoTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput assignDateDateTimePicker;
+        private System.Windows.Forms.BindingSource batchBindingSource;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
@@ -18,30 +29,47 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private DevComponents.DotNetBar.ButtonX btnAssignBatchExport;
+        private DevComponents.DotNetBar.ButtonX btnAssignBatchImport;
+        private DevComponents.DotNetBar.ButtonX btnAssignBatchNew;
         private DevComponents.DotNetBar.ButtonX btnAssignBatchSave;
         private DevComponents.DotNetBar.ButtonX btnAssignBatchSelect;
-        private DevComponents.DotNetBar.ButtonX btnAssignBatchNew;
         private System.Windows.Forms.ContextMenuStrip cmuInvoiceAssign;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsFlaw;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoices;
-        private System.Windows.Forms.BindingSource batchBindingSource;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private System.Windows.Forms.BindingNavigator invoiceBindingNavigator;
         private System.Windows.Forms.BindingSource invoiceBindingSource;
         private DevComponents.DotNetBar.Controls.CheckBoxX isCreateMsgCheckBox;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemFlaw;
         private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
         private DevComponents.DotNetBar.PanelEx panelAssignBatch;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbAssignNumber;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalAssign;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalCommission;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalHandfee;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Methods (1)
+		#region Methods (1) 
 
-        // Protected Methods (1) 
+		// Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -49,16 +77,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
-        #endregion Methods
-
-
+		#endregion Methods 
 
         #region Component Designer generated code
 
@@ -767,31 +794,7 @@ namespace CMBC.EasyFactor.ARMgr
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
         #endregion
-
-        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
-        private System.Windows.Forms.ErrorProvider errorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private DevComponents.DotNetBar.ButtonX btnAssignBatchImport;
-        private DevComponents.DotNetBar.ButtonX btnAssignBatchExport;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalHandfee;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalCommission;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbAssignNumber;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalAssign;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsFlaw;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
     }
 }

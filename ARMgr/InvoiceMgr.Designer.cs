@@ -476,6 +476,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.TabIndex = 0;
             this.dgvInvoices.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvInvoices.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvInvoices_RowPostPaint);
+            this.dgvInvoices.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvInvoices_CellFormatting);
             this.dgvInvoices.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvInvoices_DataBindingComplete);
             // 
             // colSellerName
@@ -674,7 +675,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemExportAllInvoices,
             this.menuItemExportSelectedInvoices});
             this.cmuInvoiceMgr.Name = "cmuContractMgr";
-            this.cmuInvoiceMgr.Size = new System.Drawing.Size(183, 214);
+            this.cmuInvoiceMgr.Size = new System.Drawing.Size(183, 192);
             // 
             // menuItemInvoiceDetail
             // 
@@ -740,14 +741,14 @@ namespace CMBC.EasyFactor.ARMgr
             // menuItemAllInvoiceFull
             // 
             this.menuItemAllInvoiceFull.Name = "menuItemAllInvoiceFull";
-            this.menuItemAllInvoiceFull.Size = new System.Drawing.Size(152, 22);
+            this.menuItemAllInvoiceFull.Size = new System.Drawing.Size(146, 22);
             this.menuItemAllInvoiceFull.Text = "完整格式";
             this.menuItemAllInvoiceFull.Click += new System.EventHandler(this.ExportAllInvoicesFull);
             // 
             // menuItemAllInvoiceOverDue
             // 
             this.menuItemAllInvoiceOverDue.Name = "menuItemAllInvoiceOverDue";
-            this.menuItemAllInvoiceOverDue.Size = new System.Drawing.Size(152, 22);
+            this.menuItemAllInvoiceOverDue.Size = new System.Drawing.Size(146, 22);
             this.menuItemAllInvoiceOverDue.Text = "逾期台帐格式";
             this.menuItemAllInvoiceOverDue.Click += new System.EventHandler(this.ExportAllInvoiceOverDue);
             // 
@@ -763,14 +764,14 @@ namespace CMBC.EasyFactor.ARMgr
             // menuItemSelectedInvoiceFull
             // 
             this.menuItemSelectedInvoiceFull.Name = "menuItemSelectedInvoiceFull";
-            this.menuItemSelectedInvoiceFull.Size = new System.Drawing.Size(152, 22);
+            this.menuItemSelectedInvoiceFull.Size = new System.Drawing.Size(146, 22);
             this.menuItemSelectedInvoiceFull.Text = "完整格式";
             this.menuItemSelectedInvoiceFull.Click += new System.EventHandler(this.ExportSelectedInvoicesFull);
             // 
             // menuItemSelectedInvoiceOverDue
             // 
             this.menuItemSelectedInvoiceOverDue.Name = "menuItemSelectedInvoiceOverDue";
-            this.menuItemSelectedInvoiceOverDue.Size = new System.Drawing.Size(152, 22);
+            this.menuItemSelectedInvoiceOverDue.Size = new System.Drawing.Size(146, 22);
             this.menuItemSelectedInvoiceOverDue.Text = "逾期台帐格式";
             this.menuItemSelectedInvoiceOverDue.Click += new System.EventHandler(this.ExportSelectedInvoicesOverDue);
             // 

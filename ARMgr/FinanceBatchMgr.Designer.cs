@@ -1,11 +1,58 @@
 ﻿namespace CMBC.EasyFactor.ARMgr
 {
+    /// <summary>
+    /// 
+    /// </summary>
     partial class FinanceBatchMgr
     {
+		#region Fields (37) 
+
         /// <summary> 
         /// Required designer variable.
         /// </summary>
+        private DevComponents.DotNetBar.ButtonX btnFinanceBatchQuery;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCheckStatus;
+        private System.Windows.Forms.ContextMenuStrip cmuBatchMgr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCostRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFactor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceBatchNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinancePeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinancePeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInterestType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateFrom;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTo;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvBatches;
+        private DevComponents.DotNetBar.LabelX lblCheckStatus;
+        private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.LabelX lblDatePicker;
+        private DevComponents.DotNetBar.LabelX lblFinanceBatchNo;
+        private System.Windows.Forms.ToolStripMenuItem menuItemBatchDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemBatchSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCheck;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceList;
+        private System.Windows.Forms.ToolStripMenuItem menuItemReject;
+        private DevComponents.DotNetBar.PanelEx panelQuery;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceBatchNo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+
+		#endregion Fields 
+
+		#region Methods (1) 
+
+		// Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -13,13 +60,16 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
+		#endregion Methods 
+        
         #region Component Designer generated code
 
         /// <summary> 
@@ -47,23 +97,6 @@
             this.tbFinanceBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFinanceBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBatchCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinancePeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinancePeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinnaceRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInterestType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCostRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemInvoiceList = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,6 +105,23 @@
             this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemBatchDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBatchCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinancePeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinancePeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInterestType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCostRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -312,7 +362,7 @@
             this.colFinanceAmount,
             this.colFinancePeriodBegin,
             this.colFinancePeriodEnd,
-            this.colFinnaceRate,
+            this.colFinanceRate,
             this.colInterestType,
             this.colFactor,
             this.colCostRate,
@@ -340,6 +390,64 @@
             this.dgvBatches.TabIndex = 1;
             this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBatches_CellDoubleClick);
             this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBatches_RowPostPaint);
+            // 
+            // cmuBatchMgr
+            // 
+            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemBatchSelect,
+            this.menuItemInvoiceList,
+            this.toolStripSeparator1,
+            this.menuItemCheck,
+            this.menuItemReject,
+            this.toolStripSeparator2,
+            this.menuItemBatchDelete});
+            this.cmuBatchMgr.Name = "cmuBatchMgr";
+            this.cmuBatchMgr.Size = new System.Drawing.Size(134, 126);
+            // 
+            // menuItemBatchSelect
+            // 
+            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
+            this.menuItemBatchSelect.Size = new System.Drawing.Size(133, 22);
+            this.menuItemBatchSelect.Text = "&S选择批次";
+            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
+            // 
+            // menuItemInvoiceList
+            // 
+            this.menuItemInvoiceList.Name = "menuItemInvoiceList";
+            this.menuItemInvoiceList.Size = new System.Drawing.Size(133, 22);
+            this.menuItemInvoiceList.Text = "&M批次详情";
+            this.menuItemInvoiceList.Click += new System.EventHandler(this.DetailBatch);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(130, 6);
+            // 
+            // menuItemCheck
+            // 
+            this.menuItemCheck.Name = "menuItemCheck";
+            this.menuItemCheck.Size = new System.Drawing.Size(133, 22);
+            this.menuItemCheck.Text = "&P复核通过";
+            this.menuItemCheck.Click += new System.EventHandler(this.Check);
+            // 
+            // menuItemReject
+            // 
+            this.menuItemReject.Name = "menuItemReject";
+            this.menuItemReject.Size = new System.Drawing.Size(133, 22);
+            this.menuItemReject.Text = "&R复核拒绝";
+            this.menuItemReject.Click += new System.EventHandler(this.Reject);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(130, 6);
+            // 
+            // menuItemBatchDelete
+            // 
+            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
+            this.menuItemBatchDelete.Size = new System.Drawing.Size(133, 22);
+            this.menuItemBatchDelete.Text = "&D删除批次";
+            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
             // 
             // colSellerName
             // 
@@ -405,15 +513,15 @@
             this.colFinancePeriodEnd.ReadOnly = true;
             this.colFinancePeriodEnd.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // colFinnaceRate
+            // colFinanceRate
             // 
-            this.colFinnaceRate.DataPropertyName = "FinnaceRate";
+            this.colFinanceRate.DataPropertyName = "FinanceRate";
             dataGridViewCellStyle5.Format = "p";
             dataGridViewCellStyle5.NullValue = null;
-            this.colFinnaceRate.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colFinnaceRate.HeaderText = "融资利率";
-            this.colFinnaceRate.Name = "colFinnaceRate";
-            this.colFinnaceRate.ReadOnly = true;
+            this.colFinanceRate.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colFinanceRate.HeaderText = "融资利率";
+            this.colFinanceRate.Name = "colFinanceRate";
+            this.colFinanceRate.ReadOnly = true;
             // 
             // colInterestType
             // 
@@ -473,64 +581,6 @@
             this.colBatchCount.Name = "colBatchCount";
             this.colBatchCount.ReadOnly = true;
             // 
-            // cmuBatchMgr
-            // 
-            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemBatchSelect,
-            this.menuItemInvoiceList,
-            this.toolStripSeparator1,
-            this.menuItemCheck,
-            this.menuItemReject,
-            this.toolStripSeparator2,
-            this.menuItemBatchDelete});
-            this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(153, 148);
-            // 
-            // menuItemBatchSelect
-            // 
-            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
-            this.menuItemBatchSelect.Size = new System.Drawing.Size(152, 22);
-            this.menuItemBatchSelect.Text = "&S选择批次";
-            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
-            // 
-            // menuItemInvoiceList
-            // 
-            this.menuItemInvoiceList.Name = "menuItemInvoiceList";
-            this.menuItemInvoiceList.Size = new System.Drawing.Size(152, 22);
-            this.menuItemInvoiceList.Text = "&M批次详情";
-            this.menuItemInvoiceList.Click += new System.EventHandler(this.DetailBatch);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // menuItemCheck
-            // 
-            this.menuItemCheck.Name = "menuItemCheck";
-            this.menuItemCheck.Size = new System.Drawing.Size(152, 22);
-            this.menuItemCheck.Text = "&P复核通过";
-            this.menuItemCheck.Click += new System.EventHandler(this.Check);
-            // 
-            // menuItemReject
-            // 
-            this.menuItemReject.Name = "menuItemReject";
-            this.menuItemReject.Size = new System.Drawing.Size(152, 22);
-            this.menuItemReject.Text = "&R复核拒绝";
-            this.menuItemReject.Click += new System.EventHandler(this.Reject);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
-            // 
-            // menuItemBatchDelete
-            // 
-            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
-            this.menuItemBatchDelete.Size = new System.Drawing.Size(152, 22);
-            this.menuItemBatchDelete.Text = "&D删除批次";
-            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
-            // 
             // FinanceBatchMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -551,42 +601,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.PanelEx panelQuery;
-        private DevComponents.DotNetBar.ButtonX btnFinanceBatchQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceBatchNo;
-        private DevComponents.DotNetBar.LabelX lblFinanceBatchNo;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvBatches;
-        private System.Windows.Forms.ContextMenuStrip cmuBatchMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemBatchSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceList;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCheck;
-        private System.Windows.Forms.ToolStripMenuItem menuItemReject;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCheckStatus;
-        private DevComponents.DotNetBar.LabelX lblCheckStatus;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTo;
-        private DevComponents.DotNetBar.LabelX lblDatePicker;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateFrom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceBatchNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinancePeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinancePeriodEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinnaceRate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInterestType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFactor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCostRate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
-        private DevComponents.DotNetBar.LabelX lblCount;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem menuItemBatchDelete;
     }
 }

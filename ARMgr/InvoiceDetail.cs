@@ -7,11 +7,11 @@
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
-    using System.Windows.Forms;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -20,6 +20,9 @@ namespace CMBC.EasyFactor.ARMgr
     {
         #region Fields (1)
 
+        /// <summary>
+        /// 
+        /// </summary>
         private OpInvoiceType opInvoiceType;
 
         #endregion Fields
@@ -85,13 +88,16 @@ namespace CMBC.EasyFactor.ARMgr
                         reasonList.Remove(item);
                     }
                 }
+
                 string otherReason = string.Empty;
                 foreach (string other in reasonList)
                 {
                     otherReason += (other + Environment.NewLine);
                 }
+
                 this.tbFlawReason.Text = otherReason;
             }
+
             if (invoice.DisputeReason != null)
             {
                 List<string> disputeList = new List<string>();
@@ -105,15 +111,18 @@ namespace CMBC.EasyFactor.ARMgr
                         disputeList.Remove(item);
                     }
                 }
+
                 string otherReason = string.Empty;
                 foreach (string other in disputeList)
                 {
                     otherReason += (other + Environment.NewLine);
                 }
+
                 this.tbDisputeReason.Text = otherReason;
             }
+
             invoice.Backup();
-            UpdateInvoiceControlStatus();
+            this.UpdateInvoiceControlStatus();
 
             if (opInvoiceType == OpInvoiceType.FLAW)
             {
@@ -171,6 +180,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 disputeResolveReason += (reason + " 已解除" + Environment.NewLine);
             }
+
             invoice.DisputeResolveReason = disputeResolveReason;
         }
 
@@ -210,7 +220,19 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 flawResolveReason += (reason + " 已解除" + Environment.NewLine);
             }
+
             invoice.FlawResolveReason = flawResolveReason;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InvoiceDetail_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+            invoice.Restore();
         }
 
         /// <summary>
@@ -220,7 +242,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ResetInvoice(object sender, EventArgs e)
         {
-            if (opInvoiceType == OpInvoiceType.UPDATE_INVOICE)
+            if (this.opInvoiceType == OpInvoiceType.UPDATE_INVOICE)
             {
                 Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
                 invoice.Restore();
@@ -238,6 +260,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
 
             string flawReason = string.Empty;
@@ -245,10 +268,12 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 flawReason += (item + ";");
             }
+
             if (this.tbFlawReason.Text != string.Empty)
             {
                 flawReason += this.tbFlawReason.Text;
             }
+
             invoice.FlawReason = flawReason;
 
             string disputeReason = string.Empty;
@@ -256,10 +281,12 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 disputeReason += (item + ";");
             }
+
             if (this.tbDisputeReason.Text != string.Empty)
             {
                 disputeReason += this.tbDisputeReason.Text;
             }
+
             invoice.DisputeReason = disputeReason;
 
             bool isUpdateOK = true;
@@ -278,7 +305,6 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 invoice.Backup();
             }
-
         }
 
         /// <summary>
@@ -297,54 +323,64 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void UpdateInvoiceControlStatus()
         {
-            if (opInvoiceType == OpInvoiceType.DETAIL_INVOICE || opInvoiceType == OpInvoiceType.FLAW || opInvoiceType == OpInvoiceType.DISPUTE)
+            if (this.opInvoiceType == OpInvoiceType.DETAIL_INVOICE || this.opInvoiceType == OpInvoiceType.FLAW || this.opInvoiceType == OpInvoiceType.DISPUTE)
             {
                 foreach (Control comp in this.groupPanelInvoiceBasic.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+
                 foreach (Control comp in this.groupPanelInvoiceProcess.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+
                 foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
             }
-            else if (opInvoiceType == OpInvoiceType.UPDATE_INVOICE)
+            else if (this.opInvoiceType == OpInvoiceType.UPDATE_INVOICE)
             {
                 foreach (Control comp in this.groupPanelInvoiceBasic.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+
                 foreach (Control comp in this.groupPanelInvoiceProcess.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+
                 foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+
                 this.assignOutstandingTextBox.ReadOnly = true;
                 this.financeOutstandingTextBox.ReadOnly = true;
             }
+
             foreach (Control comp in this.groupPanelFlaw.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, false);
             }
+
             foreach (Control comp in this.groupPanelFlawResolve.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, false);
             }
+
             foreach (Control comp in this.groupPanelDispute.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, false);
             }
+
             foreach (Control comp in this.groupPanelDisputeResolve.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, false);
             }
+
             this.invoiceNoTextBox.ReadOnly = true;
             this.btnFlaw.Enabled = true;
             this.btnFlawResolve.Enabled = true;
@@ -353,11 +389,5 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
-
-        private void InvoiceDetail_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
-            invoice.Restore();
-        }
     }
 }

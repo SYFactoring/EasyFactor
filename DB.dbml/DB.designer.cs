@@ -110,51 +110,30 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="connection"></param>
 		public DBDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="connection"></param>
 		public DBDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="mappingSource"></param>
 		public DBDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="mappingSource"></param>
 		public DBDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-        /// <summary>
-        /// Gets
-        /// </summary>
 		public System.Data.Linq.Table<Case> Cases
 		{
 			get
@@ -163,9 +142,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-        /// <summary>
-        /// Gets
-        /// </summary>
 		public System.Data.Linq.Table<User> Users
 		{
 			get
@@ -8524,7 +8500,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.DateTime _FinancePeriodBegin;
 		
-		private System.DateTime _FinnacePeriodEnd;
+		private System.DateTime _FinancePeriodEnd;
 		
 		private System.Nullable<double> _FinanceRate;
 		
@@ -8570,8 +8546,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFinanceAmountChanged();
     partial void OnFinancePeriodBeginChanging(System.DateTime value);
     partial void OnFinancePeriodBeginChanged();
-    partial void OnFinnacePeriodEndChanging(System.DateTime value);
-    partial void OnFinnacePeriodEndChanged();
+    partial void OnFinancePeriodEndChanging(System.DateTime value);
+    partial void OnFinancePeriodEndChanged();
     partial void OnFinanceRateChanging(System.Nullable<double> value);
     partial void OnFinanceRateChanged();
     partial void OnInterestTypeChanging(string value);
@@ -8728,22 +8704,22 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinnacePeriodEnd", DbType="DateTime NOT NULL")]
-		public System.DateTime FinnacePeriodEnd
+		[Column(Storage="_FinancePeriodEnd", DbType="DateTime NOT NULL")]
+		public System.DateTime FinancePeriodEnd
 		{
 			get
 			{
-				return this._FinnacePeriodEnd;
+				return this._FinancePeriodEnd;
 			}
 			set
 			{
-				if ((this._FinnacePeriodEnd != value))
+				if ((this._FinancePeriodEnd != value))
 				{
-					this.OnFinnacePeriodEndChanging(value);
+					this.OnFinancePeriodEndChanging(value);
 					this.SendPropertyChanging();
-					this._FinnacePeriodEnd = value;
-					this.SendPropertyChanged("FinnacePeriodEnd");
-					this.OnFinnacePeriodEndChanged();
+					this._FinancePeriodEnd = value;
+					this.SendPropertyChanged("FinancePeriodEnd");
+					this.OnFinancePeriodEndChanged();
 				}
 			}
 		}
