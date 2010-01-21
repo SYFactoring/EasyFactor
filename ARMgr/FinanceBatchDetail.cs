@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.ARMgr
     using System;
     using CMBC.EasyFactor.Utils;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
+    using CMBC.EasyFactor.CaseMgr;
 
     /// <summary>
     /// 
