@@ -516,15 +516,15 @@ namespace CMBC.EasyFactor.Utils
                             continue;
                         }
 
-                        bool isNew = false;
                         Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
-                        if (client == null)
+                        if (client != null)
                         {
-                            isNew = true;
-                            client = new Client();
-                            client.ClientEDICode = clientEDICode;
-                            clientList.Add(client);
+                            throw new Exception("客户已经存在，不能导入： " + clientEDICode);
                         }
+
+                        client = new Client();
+                        client.ClientEDICode = clientEDICode;
+                        clientList.Add(client);
 
                         int column = 1;
                         client.ClientCoreNo = String.Format("{0:G}", valueArray[row, column++]);
@@ -576,15 +576,11 @@ namespace CMBC.EasyFactor.Utils
                             client.CreateUserName = App.Current.CurUser.Name;
                         }
 
-                        if (isNew)
-                        {
-                            App.Current.DbContext.Clients.InsertOnSubmit(client);
-                        }
-
                         result++;
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
 
+                    App.Current.DbContext.Clients.InsertAllOnSubmit(clientList);
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e1)
@@ -901,6 +897,7 @@ namespace CMBC.EasyFactor.Utils
                     dept.Email_2 = String.Format("{0:G}", valueArray[row, column++]);
                     dept.Phone_2 = String.Format("{0:G}", valueArray[row, column++]);
                     dept.Fax_2 = String.Format("{0:G}", valueArray[row, column++]);
+
                     if (isNew)
                     {
                         App.Current.DbContext.Departments.InsertOnSubmit(dept);
@@ -1237,8 +1234,12 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("发票号重复: " + old.InvoiceNo);
+                                throw new Exception("当前导入文件中发票号重复: " + old.InvoiceNo);
                             }
+                        }
+                        else
+                        {
+                            throw new Exception("发票已经存在，不能导入： " + invoiceNo);
                         }
 
                         invoice.InvoiceAmount = (double)valueArray[row, column++];
@@ -1728,13 +1729,7 @@ namespace CMBC.EasyFactor.Utils
                     Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                     if (invoice == null)
                     {
-                        invoice = new Invoice();
-                        invoice.InvoiceNo = invoiceNo;
-                        Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                        if (old != null)
-                        {
-                            throw new Exception("发票号重复: " + old.InvoiceNo);
-                        }
+                        throw new Exception("发票号错误: " + invoiceNo);
                     }
 
                     column++;
@@ -1792,13 +1787,7 @@ namespace CMBC.EasyFactor.Utils
                     Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                     if (invoice == null)
                     {
-                        invoice = new Invoice();
-                        invoice.InvoiceNo = invoiceNo;
-                        Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                        if (old != null)
-                        {
-                            throw new Exception("发票号重复: " + old.InvoiceNo);
-                        }
+                        throw new Exception("发票号错误: " + invoiceNo);
                     }
 
                     column++;
@@ -1858,14 +1847,9 @@ namespace CMBC.EasyFactor.Utils
                     Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                     if (invoice == null)
                     {
-                        invoice = new Invoice();
-                        invoice.InvoiceNo = invoiceNo;
-                        Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                        if (old != null)
-                        {
-                            throw new Exception("发票号重复: " + old.InvoiceNo);
-                        }
+                        throw new Exception("发票号错误: " + invoiceNo);
                     }
+
                     column++;
                     invoice.RefundAmount2 = (System.Nullable<double>)valueArray[row, column++];
                     invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);

@@ -60,7 +60,7 @@ namespace CMBC.EasyFactor
             }
             catch (Exception e)
             {
-                MessageBox.Show("数据库连接失败: " + e.ToString(), ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("数据库连接失败: " + e.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
