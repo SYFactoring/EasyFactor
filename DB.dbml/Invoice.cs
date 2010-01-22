@@ -320,7 +320,15 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateAssignBatchNo(DateTime date)
         {
-            int batchCount = App.Current.DbContext.InvoiceAssignBatches.Count(batch => batch.AssignDate.Date == date.Date);
+            var queryResult = from batch in App.Current.DbContext.InvoiceAssignBatches
+                              where batch.AssignDate.Date == date.Date
+                              select batch.AssignBatchNo;
+            int batchCount;
+            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+            {
+                batchCount = 0;
+            }
+
             string assignNo = String.Format("ASS{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return assignNo;
         }
@@ -333,7 +341,14 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateAssignBatchNo(DateTime date, List<InvoiceAssignBatch> batchesInMemory)
         {
-            int batchCount = App.Current.DbContext.InvoiceAssignBatches.Count(batch => batch.AssignDate.Date == date.Date);
+            var queryResult = from batch in App.Current.DbContext.InvoiceAssignBatches
+                              where batch.AssignDate.Date == date.Date
+                              select batch.AssignBatchNo;
+            int batchCount;
+            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+            {
+                batchCount = 0;
+            }
             batchCount += batchesInMemory.Count(batch => batch.AssignDate.Date == date.Date);
             string assignNo = String.Format("ASS{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return assignNo;
@@ -346,7 +361,14 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateFinanceBatchNo(DateTime date)
         {
-            int batchCount = App.Current.DbContext.InvoiceFinanceBatches.Count(batch => batch.FinancePeriodBegin.Date == date.Date);
+            var queryResult = from batch in App.Current.DbContext.InvoiceFinanceBatches
+                              where batch.FinancePeriodBegin.Date == date.Date
+                              select batch.FinanceBatchNo;
+            int batchCount;
+            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+            {
+                batchCount = 0;
+            }
             string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return financeNo;
         }
@@ -359,7 +381,14 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateFinanceBatchNo(DateTime date, List<InvoiceFinanceBatch> batchesInMemory)
         {
-            int batchCount = App.Current.DbContext.InvoiceFinanceBatches.Count(batch => batch.FinancePeriodBegin.Date == date.Date);
+            var queryResult = from batch in App.Current.DbContext.InvoiceFinanceBatches
+                              where batch.FinancePeriodBegin.Date == date.Date
+                              select batch.FinanceBatchNo;
+            int batchCount;
+            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+            {
+                batchCount = 0;
+            }
             batchCount += batchesInMemory.Count(batch => batch.FinancePeriodBegin.Date == date.Date);
             string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return financeNo;
@@ -372,7 +401,14 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GeneratePaymentBatchNo(DateTime date)
         {
-            int batchCount = App.Current.DbContext.InvoicePaymentBatches.Count(batch => batch.PaymentDate.Date == date.Date);
+            var queryResult = from batch in App.Current.DbContext.InvoicePaymentBatches
+                              where batch.PaymentDate.Date == date.Date
+                              select batch.PaymentBatchNo;
+            int batchCount;
+            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+            {
+                batchCount = 0;
+            }
             string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return paymentNo;
         }
@@ -385,7 +421,14 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GeneratePaymentBatchNo(DateTime date, List<InvoicePaymentBatch> batchesInMemory)
         {
-            int batchCount = App.Current.DbContext.InvoicePaymentBatches.Count(batch => batch.PaymentDate.Date == date.Date);
+            var queryResult = from batch in App.Current.DbContext.InvoicePaymentBatches
+                              where batch.PaymentDate.Date == date.Date
+                              select batch.PaymentBatchNo;
+            int batchCount;
+            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+            {
+                batchCount = 0;
+            }
             batchCount += batchesInMemory.Count(batch => batch.PaymentDate.Date == date.Date);
             string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return paymentNo;
@@ -398,7 +441,14 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateRefundBatchNo(DateTime date)
         {
-            int batchCount = App.Current.DbContext.InvoiceRefundBatches.Count(batch => batch.RefundDate == date.Date);
+            var queryResult = from batch in App.Current.DbContext.InvoiceRefundBatches
+                              where batch.RefundDate.Date == date.Date
+                              select batch.RefundBatchNo;
+            int batchCount;
+            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+            {
+                batchCount = 0;
+            }
             string refundNo = String.Format("RFD{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return refundNo;
         }
@@ -411,7 +461,14 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateRefundBatchNo(DateTime date, List<InvoiceRefundBatch> batchesInMemory)
         {
-            int batchCount = App.Current.DbContext.InvoiceRefundBatches.Count(batch => batch.RefundDate.Date == date.Date);
+            var queryResult = from batch in App.Current.DbContext.InvoiceRefundBatches
+                              where batch.RefundDate.Date == date.Date
+                              select batch.RefundBatchNo;
+            int batchCount;
+            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+            {
+                batchCount = 0;
+            }
             batchCount += batchesInMemory.Count(batch => batch.RefundDate.Date == date.Date);
             string refundNo = String.Format("RFD{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return refundNo;

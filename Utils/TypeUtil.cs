@@ -12,15 +12,38 @@ namespace CMBC.EasyFactor.Utils
     using System.Text;
     using System.Windows.Forms;
     using System.Text.RegularExpressions;
+
     /// <summary>
     /// 
     /// </summary>
     public class TypeUtil
     {
-		#region Methods (8) 
+        #region Methods (8)
 
-		// Public Methods (8) 
+        // Public Methods (8) 
+        public static string ToPrintCurrencyWord(string currency)
+        {
+            if ("CNY".Equals(currency))
+            {
+                return "人民币";
+            }
+            else
+            {
+                return currency;
+            }
+        }
 
+        public static string ToPrintCurrency(string currency)
+        {
+            if ("CNY".Equals(currency))
+            {
+                return "RMB";
+            }
+            else
+            {
+                return currency;
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -57,7 +80,7 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static string ConverToChineseMoney(double? number)
+        public static string ConvertToChineseMoney(double? number)
         {
             if (number == null)
             {
@@ -65,7 +88,7 @@ namespace CMBC.EasyFactor.Utils
             }
 
             double input = number.Value;
-            string result = input.ToString("#穰'.'#仟#佰#拾#秭'.'#仟#佰#拾#垓'.'#仟#佰#拾#京'.'#仟#佰#拾#兆'.'#仟#佰#拾#億'.'#仟#佰#拾#萬'.'#仟#佰#拾#元.0角0分;负#穰'.'#仟#佰#拾#秭'.'#仟#佰#拾#垓'.'#仟#佰#拾#京'.'#仟#佰#拾#兆'.'#仟#佰#拾#億'.'#仟#佰#拾#萬'.'#仟#佰#拾#元.0角0分;零元");
+            string result = input.ToString("#穰'.'#仟#佰#拾#秭'.'#仟#佰#拾#垓'.'#仟#佰#拾#京'.'#仟#佰#拾#兆'.'#仟#佰#拾#亿'.'#仟#佰#拾#万'.'#仟#佰#拾#元.0角0分;负#穰'.'#仟#佰#拾#秭'.'#仟#佰#拾#垓'.'#仟#佰#拾#京'.'#仟#佰#拾#兆'.'#仟#佰#拾#亿'.'#仟#佰#拾#万'.'#仟#佰#拾#元.0角0分;零元");
             // 从字符串左侧开始替换子字符串，遇到汉字“零”或者阿拉伯数字 0 - 9，替换就结束。
             // 替换内容是捕获组 $1，该捕获组表示 0 个或 1 个在字符串最左侧的汉字“负”
             result = Regex.Replace(result, @"^(负?)[^零\d]*", "$1");
@@ -203,6 +226,6 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

@@ -407,7 +407,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "信用风险额度";
                 if (selectedCDA.CreditCover.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} ({2})", selectedCDA.CreditCoverCurr, selectedCDA.CreditCover, TypeUtil.ConverToChineseMoney(selectedCDA.CreditCover));
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr), selectedCDA.CreditCover, TypeUtil.ToPrintCurrencyWord(selectedCDA.CreditCoverCurr), TypeUtil.ConvertToChineseMoney(selectedCDA.CreditCover));
                 }
                 else
                 {
@@ -415,11 +415,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
 
                 sheet.Cells[row, 1] = "信用风险承担比例";
-                sheet.Cells[row++, 2] = String.Format("{0:P}", selectedCDA.PUGProportion.GetValueOrDefault());
+                sheet.Cells[row++, 2] = String.Format("{0:0%}", selectedCDA.PUGProportion.GetValueOrDefault());
                 sheet.Cells[row, 1] = "信用风险额度有效期限";
                 if (selectedCDA.CreditCoverPeriodBegin.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日 - {1:yyyy}年{1:MM}月{1:dd}日", selectedCDA.CreditCoverPeriodBegin, selectedCDA.CreditCoverPeriodEnd);
+                    sheet.Cells[row++, 2] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日 至 {1:yyyy}年{1:MM}月{1:dd}日", selectedCDA.CreditCoverPeriodBegin, selectedCDA.CreditCoverPeriodEnd);
                 }
                 else
                 {
@@ -428,7 +428,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "保理预付款额度";
                 if (selectedCDA.FinanceLine.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} ({2})", selectedCDA.FinanceLineCurr, selectedCDA.FinanceLine, TypeUtil.ConverToChineseMoney(selectedCDA.FinanceLine));
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(selectedCDA.FinanceLineCurr), selectedCDA.FinanceLine, TypeUtil.ToPrintCurrencyWord(selectedCDA.FinanceLineCurr), TypeUtil.ConvertToChineseMoney(selectedCDA.FinanceLine));
                 }
                 else
                 {
@@ -438,7 +438,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "预付款额度有效期限";
                 if (selectedCDA.FinanceLinePeriodBegin.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日 - {1:yyyy}年{1:MM}月{1:dd}日", selectedCDA.FinanceLinePeriodBegin, selectedCDA.FinanceLinePeriodEnd);
+                    sheet.Cells[row++, 2] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日 至 {1:yyyy}年{1:MM}月{1:dd}日", selectedCDA.FinanceLinePeriodBegin, selectedCDA.FinanceLinePeriodEnd);
                 }
                 else
                 {
@@ -449,17 +449,17 @@ namespace CMBC.EasyFactor.CaseMgr
                 ClientCreditLine creditLine = selectedCDA.Case.SellerClient.FinanceCreditLine;
                 if (creditLine != null)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} ({2})", creditLine.CreditLineCurrency, creditLine.CreditLine, TypeUtil.ConverToChineseMoney(creditLine.CreditLine));
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(creditLine.CreditLineCurrency), creditLine.CreditLine, TypeUtil.ToPrintCurrencyWord(creditLine.CreditLineCurrency), TypeUtil.ConvertToChineseMoney(creditLine.CreditLine));
                 }
 
                 sheet.Cells[row, 1] = "预付比例";
-                sheet.Cells[row++, 2] = String.Format("{0:P}", selectedCDA.FinanceProportion);
+                sheet.Cells[row++, 2] = String.Format("单笔融资不超过发票金额的 {0:0%}", selectedCDA.FinanceProportion);
                 sheet.Cells[row, 1] = "保理费率";
-                sheet.Cells[row++, 2] = String.Format("{0:P}", selectedCDA.Price.GetValueOrDefault());
+                sheet.Cells[row++, 2] = String.Format("{0}的 {1:0.0%}", selectedCDA.CommissionType, selectedCDA.Price.GetValueOrDefault());
                 sheet.Cells[row, 1] = "单据处理费";
                 if (selectedCDA.HandFee.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", selectedCDA.HandFeeCurr, selectedCDA.HandFee);
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} 元 （每张发票）", TypeUtil.ToPrintCurrencyWord(selectedCDA.HandFeeCurr), selectedCDA.HandFee);
                 }
                 else
                 {
@@ -475,7 +475,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "自负额";
                 if (selectedCDA.Deductibles.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", selectedCDA.CreditCoverCurr, selectedCDA.Deductibles);
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr), selectedCDA.Deductibles);
                 }
                 else
                 {
@@ -485,50 +485,61 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "最低损失门槛";
                 if (selectedCDA.LossThreshold.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", selectedCDA.CreditCoverCurr, selectedCDA.LossThreshold);
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr), selectedCDA.LossThreshold);
                 }
                 else
                 {
                     sheet.Cells[row++, 2] = "0";
                 }
 
-                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[20, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignDistributed;
-                sheet.get_Range(sheet.Cells[6, 2], sheet.Cells[20, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[19, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignDistributed;
+                sheet.get_Range(sheet.Cells[6, 2], sheet.Cells[19, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
 
-                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[20, 2]).Borders.LineStyle = 1;
-                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[20, 2]).WrapText = true;
+                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[19, 2]).Borders.LineStyle = 1;
+                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[19, 2]).WrapText = true;
+
+                sheet.Cells[21, 1] = "备注：";
+                sheet.Cells[22, 1] = selectedCDA.Comment;
+                sheet.Cells[24, 1] = "如贵公司于本行发出本通知书后10日内未签回或于本行收到签回通知书后30日内未动用额度时，本行得停止额度之动用。贵公司嗣后如欲动用该额度，须重新提出申请。";
+                sheet.Cells[26, 1] = "为利益考虑，请务必确认上开买方系贵公司预定交易之对象，本保理额度通知书取代先前同一买方之保理额度通知书及先前所有贵公司与本合同相关保理额度通知书中之最高保理预付款额度";
+
+                sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 1]).WrapText = true;
+                sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 1]).WrapText = true;
+                sheet.get_Range(sheet.Cells[26, 1], sheet.Cells[26, 1]).WrapText = true;
 
                 sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 2]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 2]).MergeCells = true;
-                sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 1]).WrapText = true;
-                sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 1]).WrapText = true;
+                sheet.get_Range(sheet.Cells[26, 1], sheet.Cells[26, 2]).MergeCells = true;
 
-                sheet.Cells[22, 1] = String.Format("备注：{0}", selectedCDA.Comment);
-                sheet.Cells[24, 1] = "如贵公司于本行发出本通知书后10日内未签回或于本行收到签回通知书后30日内未动用额度时，本行得停止额度之动用。贵公司嗣后如欲动用该额度，须重新提出申请。";
+                sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 2]).RowHeight = 40;
+                sheet.get_Range(sheet.Cells[26, 1], sheet.Cells[26, 2]).RowHeight = 40;
 
-                sheet.Cells[26, 1] = "";
-                sheet.Cells[26, 2] = "";
-                sheet.Cells[27, 1] = "客户经理";
-                sheet.Cells[27, 2] = "                        保理部门主管";
-                sheet.Cells[28, 1] = "日期： 年   月   日";
-                sheet.Cells[28, 2] = "                        日期： 年   月   日";
+                sheet.Cells[28, 1] = "";
+                sheet.Cells[28, 2] = "";
+                sheet.Cells[29, 1] = "客户经理";
+                sheet.Cells[29, 2] = "                        保理部门主管";
+                sheet.Cells[30, 1] = "日期： 年   月   日";
+                sheet.Cells[30, 2] = "                        日期： 年   月   日";
 
-                sheet.Cells[30, 1] = "同意并签回";
+                sheet.Cells[32, 1] = "同意并签回";
 
-                sheet.Cells[32, 1] = selectedCDA.SellerName;
-                sheet.Cells[33, 1] = "客户";
-                sheet.Cells[33, 2] = "                        日期： 年   月   日";
+                sheet.Cells[35, 1] = String.Format("客户： {0}", selectedCDA.SellerName);
+                sheet.Cells[35, 2] = "                        日期： 年   月   日";
 
                 sheet.UsedRange.Font.Name = "仿宋";
                 sheet.UsedRange.Font.Size = 12;
-                sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).Font.Size = 20;
+
+                sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).Font.Size = 16;
+                sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).Font.Bold = true;
+                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[19, 1]).Font.Bold = true;
 
                 sheet.get_Range("A1", Type.Missing).ColumnWidth = 30;
                 sheet.get_Range("B1", Type.Missing).ColumnWidth = 60;
 
-                foreach (Range range in sheet.UsedRange.Rows)
+                Range contentRange = sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[19, 2]);
+                foreach (Range range in contentRange)
                 {
-                    range.EntireRow.AutoFit();
+                    range.EntireRow.RowHeight = 40;
                 }
 
                 app.Visible = true;

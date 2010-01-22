@@ -373,6 +373,7 @@ namespace CMBC.EasyFactor.Report
                         sheet.Cells[row, 5] = invoice.InvoiceAssignBatch.CDA.HandFee;
                         sheet.Cells[row, 6] = invoice.Commission;
                         totalCommission += invoice.Commission.GetValueOrDefault();
+                        totalCommission += invoice.InvoiceAssignBatch.CDA.HandFee.GetValueOrDefault();
                         row++;
                     }
 
@@ -578,7 +579,12 @@ namespace CMBC.EasyFactor.Report
         /// <param name="e"></param>
         private void GenerateReportAll(object sender, EventArgs e)
         {
-            List<Invoice> invoiceList = (List<Invoice>)this.bs.DataSource;
+            List<Invoice> invoiceList = new List<Invoice>();
+            foreach (Invoice invoice in this.bs.List)
+            {
+                invoiceList.Add(invoice);
+            }
+
             this.GenerateReportImpl(invoiceList);
         }
 

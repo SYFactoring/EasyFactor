@@ -106,7 +106,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.handFeeCurrComboBox.SelectedIndex = -1;
 
             this.assignTypeComboBox.Items.AddRange(new string[] { "全部", "部分" });
-            this.commissionTypeComboBox.Items.AddRange(new string[] { "按转让金额", "按融资金额", "其他" });
+            this.commissionTypeComboBox.Items.AddRange(new string[] { "按发票金额", "按融资金额", "其他" });
             this.cDAStatusComboBox.Items.AddRange(new string[] { ConstStr.CDA.NO_CHECK, ConstStr.CDA.CHECK_NO_DELIVER, ConstStr.CDA.DELIVER_NO_SIGN, ConstStr.CDA.SIGNED, ConstStr.CDA.INVALID });
 
             if (opCDAType == OpCDAType.NEW_CDA)
@@ -582,7 +582,7 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             CDA cda = new CDA();
             cda.CDASignDate = DateTime.Now.Date;
-            cda.CommissionType = "按转让金额";
+            cda.CommissionType = "按发票金额";
             cda.PUGProportion = 1;
             cda.PUGPeriod = 90;
             cda.ReassignGracePeriod = 60;
@@ -608,7 +608,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             CDA cda = this.CDABindingSource.DataSource as CDA;
             cda.CDASignDate = DateTime.Now.Date;
-            cda.CommissionType = "按转让金额";
+            cda.CommissionType = "按发票金额";
             cda.PUGProportion = 1;
             cda.PUGPeriod = 90;
             cda.ReassignGracePeriod = 60;

@@ -18,33 +18,6 @@ namespace CMBC.EasyFactor.DB.dbml
     {
         #region Properties (7)
 
-        ///// <summary>
-        ///// 转让总额
-        ///// </summary>
-        //public System.Nullable<double> AssignTotal
-        //{
-        //    get
-        //    {
-        //        double? total = null;
-        //        foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
-        //        {
-        //            foreach (Invoice invoice in batch.Invoices)
-        //            {
-        //                double? temp = invoice.AssignAmount;
-        //                if (temp.HasValue)
-        //                {
-        //                    if (total == null)
-        //                    {
-        //                        total = 0;
-        //                    }
-        //                    total += temp.Value;
-        //                }
-        //            }
-        //        }
-        //        return total;
-        //    }
-        //}
-
         /// <summary>
         /// Gets
         /// </summary>
@@ -125,33 +98,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 return this.FinanceLine - this.GetFinanceOutstanding(this.FinanceLineCurr);
             }
         }
-
-        ///// <summary>
-        ///// 融资总额
-        ///// </summary>
-        //public System.Nullable<double> FinanceTotal
-        //{
-        //    get
-        //    {
-        //        double? total = null;
-        //        foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
-        //        {
-        //            foreach (Invoice invoice in batch.Invoices)
-        //            {
-        //                double? temp = invoice.FinanceAmount;
-        //                if (temp.HasValue)
-        //                {
-        //                    if (total == null)
-        //                    {
-        //                        total = 0;
-        //                    }
-        //                    total += temp.Value;
-        //                }
-        //            }
-        //        }
-        //        return total;
-        //    }
-        //}
 
         /// <summary>
         /// Gets
