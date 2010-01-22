@@ -157,24 +157,27 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (selectedBatch.Invoices.Count > 0)
+            if (MessageBox.Show("是否打算删除此转让批次", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                MessageBox.Show("不能删除此批次，它包含相关发票信息", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+                if (selectedBatch.Invoices.Count > 0)
+                {
+                    MessageBox.Show("不能删除此批次，它包含相关发票信息", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
 
-            App.Current.DbContext.InvoiceAssignBatches.DeleteOnSubmit(selectedBatch);
-            try
-            {
-                App.Current.DbContext.SubmitChanges();
-            }
-            catch (Exception e1)
-            {
-                MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                App.Current.DbContext.InvoiceAssignBatches.DeleteOnSubmit(selectedBatch);
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
+                this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
+            }
         }
 
         /// <summary>

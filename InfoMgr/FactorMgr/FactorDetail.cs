@@ -17,12 +17,18 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// </summary>
     public partial class FactorDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (2)
+        #region Fields (3)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private BindingSource bsCreditLines;
 
         /// <summary>
         /// 
         /// </summary>
         private OpFactorCreditLineType opFactorCreditLineType;
+
         /// <summary>
         /// 
         /// </summary>
@@ -52,6 +58,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             /// </summary>
             DETAIL_FACTOR
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -87,6 +94,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         {
             this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
+            this.bsCreditLines = new BindingSource();
+            this.dgvFactorCreditLines.DataSource = this.bsCreditLines;
             this.dgvFactorCreditLines.AutoGenerateColumns = false;
 
             this.countryNameComboBox.DataSource = Country.AllCountries();
@@ -109,7 +118,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             else
             {
                 this.factorBindingSource.DataSource = factor;
-                this.dgvFactorCreditLines.DataSource = factor.FactorCreditLines.ToList();
+                this.bsCreditLines.DataSource = factor.FactorCreditLines;
                 factor.Backup();
             }
 
@@ -238,10 +247,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             if (isDeleteOK)
             {
                 MessageBox.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.dgvFactorCreditLines.DataSource = factor.FactorCreditLines.ToList();
+                this.bsCreditLines.DataSource = typeof(FactorCreditLine);
+                this.bsCreditLines.DataSource = factor.FactorCreditLines;
                 this.factorCreditLineBindingSource.DataSource = typeof(FactorCreditLine);
             }
-
         }
 
         /// <summary>
@@ -351,7 +360,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            this.dgvFactorCreditLines.DataSource = factor.FactorCreditLines.ToList();
+            this.bsCreditLines.DataSource = typeof(FactorCreditLine);
+            this.bsCreditLines.DataSource = factor.FactorCreditLines;
         }
 
         /// <summary>
@@ -515,7 +525,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                         }
                         App.Current.DbContext.SubmitChanges();
                     }
-                    this.dgvFactorCreditLines.DataSource = factor.FactorCreditLines.ToList();
+
+                    this.bsCreditLines.DataSource = typeof(FactorCreditLine);
+                    this.bsCreditLines.DataSource = factor.FactorCreditLines;
                     this.NewFactorCreditLine(null, null);
                 }
             }
@@ -546,7 +558,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                         }
                         App.Current.DbContext.SubmitChanges();
                     }
-                    this.dgvFactorCreditLines.Refresh();
+
                     creditLine.Backup();
                 }
             }
@@ -564,19 +576,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            int cid = (int)dgvFactorCreditLines["colCreditLineID", dgvFactorCreditLines.SelectedRows[0].Index].Value;
-            if (cid != 0)
-            {
-                Factor factor = (Factor)this.factorBindingSource.DataSource;
-                FactorCreditLine selectedFactorCreditLine = factor.FactorCreditLines.SingleOrDefault(c => c.CreditLineID == cid);
-                if (selectedFactorCreditLine != null && this.factorCreditLineBindingSource.DataSource != selectedFactorCreditLine)
-                {
-                    this.SetFactorCreditLineEditable(false);
-                    this.factorCreditLineBindingSource.DataSource = selectedFactorCreditLine;
-                    this.btnFactorCreditLineFreeze.Enabled = true;
-                    this.btnFactorCreditLineUnfreeze.Enabled = true;
-                }
-            }
+            FactorCreditLine selectedFactorCreditLine = (FactorCreditLine)this.bsCreditLines.List[this.dgvFactorCreditLines.SelectedRows[0].Index];
+            this.SetFactorCreditLineEditable(false);
+            this.factorCreditLineBindingSource.DataSource = selectedFactorCreditLine;
+            this.btnFactorCreditLineFreeze.Enabled = true;
+            this.btnFactorCreditLineUnfreeze.Enabled = true;
+
         }
 
         /// <summary>
@@ -591,12 +596,17 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             QueryForm queryUI = new QueryForm(factorMgr, "选择集团");
             factorMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
+
             if (factorMgr.Selected != null)
             {
                 factor.FactorGroup = factorMgr.Selected;
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="editable"></param>
         private void SetFactorCreditLineEditable(bool editable)
         {
             foreach (Control comp in this.groupPanelCreditLineDetail.Controls)

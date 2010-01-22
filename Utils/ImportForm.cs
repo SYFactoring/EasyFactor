@@ -1273,9 +1273,11 @@ namespace CMBC.EasyFactor.Utils
                         else
                         {
                             DateTime? financeDate = (System.Nullable<DateTime>)valueArray[row, 22];
+                            DateTime? financeDueDate = (System.Nullable<DateTime>)valueArray[row, 23];
+
                             if (financeDate != null)
                             {
-                                financeBatch = financeBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.FinancePeriodBegin == financeDate);
+                                financeBatch = financeBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.FinancePeriodBegin.Date == financeDate && i.FinancePeriodEnd.Date == financeDueDate);
                                 if (financeBatch == null)
                                 {
                                     financeBatch = new InvoiceFinanceBatch();
