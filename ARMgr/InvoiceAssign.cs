@@ -39,7 +39,7 @@ namespace CMBC.EasyFactor.ARMgr
         #region Constructors (1)
 
         /// <summary>
-        /// Initializes a new instance of the InvioceAssign class
+        /// Initializes a new instance of the InvoiceAssign class
         /// </summary>
         /// <param name="caseBasic"></param>
         public InvoiceAssign(ARCaseBasic caseBasic)

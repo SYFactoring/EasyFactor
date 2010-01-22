@@ -230,6 +230,7 @@
     <Compile Include="DB.dbml\CDA.cs" />
     <Compile Include="DB.dbml\Client.cs" />
     <Compile Include="DB.dbml\ClientCreditLine.cs" />
+    <Compile Include="DB.dbml\ClientReview.cs" />
     <Compile Include="DB.dbml\Contract.cs" />
     <Compile Include="DB.dbml\Exchange.cs" />
     <Compile Include="DB.dbml\InvoicePaymentLog.cs" />
@@ -582,6 +583,7 @@
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Client.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.ClientAccount.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.ClientCreditLine.datasource" />
+    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.ClientReview.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Contract.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Country.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.CreditCoverNegotiation.datasource" />

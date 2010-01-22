@@ -102,6 +102,9 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertExchange(Exchange instance);
     partial void UpdateExchange(Exchange instance);
     partial void DeleteExchange(Exchange instance);
+    partial void InsertClientReview(ClientReview instance);
+    partial void UpdateClientReview(ClientReview instance);
+    partial void DeleteClientReview(ClientReview instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -325,6 +328,14 @@ namespace CMBC.EasyFactor.DB.dbml
 				return this.GetTable<Exchange>();
 			}
 		}
+		
+		public System.Data.Linq.Table<ClientReview> ClientReviews
+		{
+			get
+			{
+				return this.GetTable<ClientReview>();
+			}
+		}
 	}
 	
 	[Table(Name="dbo.[Case]")]
@@ -362,8 +373,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		private string _ManagerName;
 		
 		private System.Nullable<int> _NetPaymentTerm;
-		
-		private string _ReviewNo;
 		
 		private string _Comment;
 		
@@ -417,8 +426,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnManagerNameChanged();
     partial void OnNetPaymentTermChanging(System.Nullable<int> value);
     partial void OnNetPaymentTermChanged();
-    partial void OnReviewNoChanging(string value);
-    partial void OnReviewNoChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
     #endregion
@@ -756,26 +763,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._NetPaymentTerm = value;
 					this.SendPropertyChanged("NetPaymentTerm");
 					this.OnNetPaymentTermChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ReviewNo", DbType="VarChar(50)")]
-		public string ReviewNo
-		{
-			get
-			{
-				return this._ReviewNo;
-			}
-			set
-			{
-				if ((this._ReviewNo != value))
-				{
-					this.OnReviewNoChanging(value);
-					this.SendPropertyChanging();
-					this._ReviewNo = value;
-					this.SendPropertyChanged("ReviewNo");
-					this.OnReviewNoChanged();
 				}
 			}
 		}
@@ -2658,6 +2645,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<Contract> _Contracts;
 		
+		private EntitySet<ClientReview> _ClientReviews;
+		
 		private EntityRef<Department> _Department;
 		
 		private EntityRef<Client> _ClientGroup;
@@ -2740,6 +2729,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			this._ClientAccounts = new EntitySet<ClientAccount>(new Action<ClientAccount>(this.attach_ClientAccounts), new Action<ClientAccount>(this.detach_ClientAccounts));
 			this._ClientCreditLines = new EntitySet<ClientCreditLine>(new Action<ClientCreditLine>(this.attach_ClientCreditLines), new Action<ClientCreditLine>(this.detach_ClientCreditLines));
 			this._Contracts = new EntitySet<Contract>(new Action<Contract>(this.attach_Contracts), new Action<Contract>(this.detach_Contracts));
+			this._ClientReviews = new EntitySet<ClientReview>(new Action<ClientReview>(this.attach_ClientReviews), new Action<ClientReview>(this.detach_ClientReviews));
 			this._Department = default(EntityRef<Department>);
 			this._ClientGroup = default(EntityRef<Client>);
 			OnCreated();
@@ -3471,6 +3461,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Association(Name="Client_ClientReview", Storage="_ClientReviews", OtherKey="ClientEDICode")]
+		public EntitySet<ClientReview> ClientReviews
+		{
+			get
+			{
+				return this._ClientReviews;
+			}
+			set
+			{
+				this._ClientReviews.Assign(value);
+			}
+		}
+		
 		[Association(Name="Department_Client", Storage="_Department", ThisKey="BranchCode", IsForeignKey=true)]
 		public Department Department
 		{
@@ -3626,6 +3629,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_Contracts(Contract entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = null;
+		}
+		
+		private void attach_ClientReviews(ClientReview entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = this;
+		}
+		
+		private void detach_ClientReviews(ClientReview entity)
 		{
 			this.SendPropertyChanging();
 			entity.Client = null;
@@ -11708,6 +11723,229 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._ExchangeRate = value;
 					this.SendPropertyChanged("ExchangeRate");
 					this.OnExchangeRateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.ClientReview")]
+	public partial class ClientReview : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _ReviewNo;
+		
+		private string _ClientEDICode;
+		
+		private string _ReviewStatus;
+		
+		private System.DateTime _ReviewDate;
+		
+		private string _Comment;
+		
+		private string _CreateUserName;
+		
+		private EntityRef<Client> _Client;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnReviewNoChanging(string value);
+    partial void OnReviewNoChanged();
+    partial void OnClientEDICodeChanging(string value);
+    partial void OnClientEDICodeChanged();
+    partial void OnReviewStatusChanging(string value);
+    partial void OnReviewStatusChanged();
+    partial void OnReviewDateChanging(System.DateTime value);
+    partial void OnReviewDateChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
+    #endregion
+		
+		public ClientReview()
+		{
+			this._Client = default(EntityRef<Client>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_ReviewNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ReviewNo
+		{
+			get
+			{
+				return this._ReviewNo;
+			}
+			set
+			{
+				if ((this._ReviewNo != value))
+				{
+					this.OnReviewNoChanging(value);
+					this.SendPropertyChanging();
+					this._ReviewNo = value;
+					this.SendPropertyChanged("ReviewNo");
+					this.OnReviewNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		public string ClientEDICode
+		{
+			get
+			{
+				return this._ClientEDICode;
+			}
+			set
+			{
+				if ((this._ClientEDICode != value))
+				{
+					if (this._Client.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnClientEDICodeChanging(value);
+					this.SendPropertyChanging();
+					this._ClientEDICode = value;
+					this.SendPropertyChanged("ClientEDICode");
+					this.OnClientEDICodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ReviewStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ReviewStatus
+		{
+			get
+			{
+				return this._ReviewStatus;
+			}
+			set
+			{
+				if ((this._ReviewStatus != value))
+				{
+					this.OnReviewStatusChanging(value);
+					this.SendPropertyChanging();
+					this._ReviewStatus = value;
+					this.SendPropertyChanged("ReviewStatus");
+					this.OnReviewStatusChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ReviewDate", DbType="DateTime NOT NULL")]
+		public System.DateTime ReviewDate
+		{
+			get
+			{
+				return this._ReviewDate;
+			}
+			set
+			{
+				if ((this._ReviewDate != value))
+				{
+					this.OnReviewDateChanging(value);
+					this.SendPropertyChanging();
+					this._ReviewDate = value;
+					this.SendPropertyChanged("ReviewDate");
+					this.OnReviewDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Client_ClientReview", Storage="_Client", ThisKey="ClientEDICode", IsForeignKey=true)]
+		public Client Client
+		{
+			get
+			{
+				return this._Client.Entity;
+			}
+			set
+			{
+				Client previousValue = this._Client.Entity;
+				if (((previousValue != value) 
+							|| (this._Client.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Client.Entity = null;
+						previousValue.ClientReviews.Remove(this);
+					}
+					this._Client.Entity = value;
+					if ((value != null))
+					{
+						value.ClientReviews.Add(this);
+						this._ClientEDICode = value.ClientEDICode;
+					}
+					else
+					{
+						this._ClientEDICode = default(string);
+					}
+					this.SendPropertyChanged("Client");
 				}
 			}
 		}

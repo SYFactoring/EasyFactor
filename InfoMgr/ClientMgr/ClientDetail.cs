@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Linq;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
@@ -18,7 +19,22 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (3)
+        #region Fields (7)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private BindingSource bsContracts;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private BindingSource bsCreditLines;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private BindingSource bsReviews;
 
         /// <summary>
         /// 
@@ -35,9 +51,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpContractType opContractType;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpReviewType opReviewType;
+
         #endregion Fields
 
-        #region Enums (3)
+        #region Enums (4)
 
         /// <summary>
         /// 
@@ -102,9 +123,30 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DETAIL_CLIENT
         }
 
+        /// <summary>
+        /// Review Type
+        /// </summary>
+        public enum OpReviewType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            NEW_REVIEW,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            UPDATE_REVIEW,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            DETAIL_REVIEW
+        }
+
         #endregion Enums
 
-        #region Constructors (5)
+        #region Constructors (7)
 
         /// <summary>
         /// Initializes a new instance of the ClientDetail class
@@ -113,12 +155,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="opClientType">client operation type</param>
         /// <param name="opClientCreditLineType">client credit line operation type</param>
         /// <param name="opContractType">client contract opertion type</param>
-        private ClientDetail(Client client, OpClientType opClientType, OpClientCreditLineType opClientCreditLineType, OpContractType opContractType)
+        /// <param name="opReviewType">client review operation type</param>
+        private ClientDetail(Client client, OpClientType opClientType, OpClientCreditLineType opClientCreditLineType, OpContractType opContractType, OpReviewType opReviewType)
         {
             this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
+            this.bsCreditLines = new BindingSource();
+            this.bsContracts = new BindingSource();
+            this.bsReviews = new BindingSource();
             this.dgvClientCreditLines.AutoGenerateColumns = false;
             this.dgvContracts.AutoGenerateColumns = false;
+            this.dgvReviews.AutoGenerateColumns = false;
+            this.dgvClientCreditLines.DataSource = this.bsCreditLines;
+            this.dgvContracts.DataSource = this.bsContracts;
+            this.dgvReviews.DataSource = this.bsReviews;
 
             this.cbCountryCode.DataSource = Country.AllCountries();
             this.cbCountryCode.DisplayMember = "CountryFormatCN";
@@ -138,6 +188,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.opClientType = opClientType;
             this.opClientCreditLineType = opClientCreditLineType;
             this.opContractType = opContractType;
+            this.opReviewType = opReviewType;
 
             if (opClientType == OpClientType.NEW_CLIENT)
             {
@@ -147,8 +198,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             else
             {
                 this.clientBindingSource.DataSource = client;
-                this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
-                this.dgvContracts.DataSource = client.Contracts.ToList();
+                this.bsCreditLines.DataSource = client.ClientCreditLines;
+                this.bsContracts.DataSource = client.Contracts;
+                this.bsReviews.DataSource = client.ClientReviews;
+
                 List<Department> deptsList = (List<Department>)this.cbDepartments.DataSource;
                 this.cbDepartments.SelectedIndex = deptsList.IndexOf(client.Department);
                 if (client.ClientGroup != null)
@@ -160,21 +213,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 client.Backup();
             }
 
-            if (opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
+            if (this.opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
                 this.clientCreditLineBindingSource.DataSource = new ClientCreditLine();
                 this.tabControl.SelectedTab = this.tabItemClientCreditLine;
             }
 
-            if (opContractType == OpContractType.NEW_CONTRACT)
+            if (this.opContractType == OpContractType.NEW_CONTRACT)
             {
                 this.contractBindingSource.DataSource = new Contract();
                 this.tabControl.SelectedTab = this.tabItemContract;
             }
 
+            if (this.opReviewType == OpReviewType.NEW_REVIEW)
+            {
+                this.reviewBindingSource.DataSource = new ClientReview();
+                this.tabControl.SelectedTab = this.tabItemReview;
+            }
+
             this.UpdateClientControlStatus();
             this.UpdateClientCreditLineControlStatus();
             this.UpdateContractControlStatus();
+            this.UpdateReviewControlStatus();
         }
 
         /// <summary>
@@ -183,7 +243,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="client"></param>
         /// <param name="opClientType"></param>
         public ClientDetail(Client client, OpClientType opClientType)
-            : this(client, opClientType, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, OpContractType.DETAIL_CONTRACT)
+            : this(client, opClientType, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, OpContractType.DETAIL_CONTRACT, OpReviewType.DETAIL_REVIEW)
         {
             this.tabControl.SelectedTab = this.tabItemClient;
         }
@@ -194,7 +254,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="client"></param>
         /// <param name="opContractType"></param>
         public ClientDetail(Client client, OpContractType opContractType)
-            : this(client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, opContractType)
+            : this(client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, opContractType, OpReviewType.DETAIL_REVIEW)
         {
         }
 
@@ -204,7 +264,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="client"></param>
         /// <param name="opClientCreditLineType"></param>
         public ClientDetail(Client client, OpClientCreditLineType opClientCreditLineType)
-            : this(client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT)
+            : this(client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT, OpReviewType.DETAIL_REVIEW)
         {
         }
 
@@ -214,10 +274,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="contract"></param>
         /// <param name="opContractType"></param>
         public ClientDetail(Contract contract, OpContractType opContractType)
-            : this(contract.Client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, opContractType)
+            : this(contract.Client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, opContractType, OpReviewType.DETAIL_REVIEW)
         {
             this.tabControl.SelectedTab = this.tabItemContract;
-            if (opContractType == OpContractType.DETAIL_CONTRACT || opContractType == OpContractType.UPDATE_CONTRACT)
+            if (this.opContractType == OpContractType.DETAIL_CONTRACT || this.opContractType == OpContractType.UPDATE_CONTRACT)
             {
                 this.contractBindingSource.DataSource = contract;
             }
@@ -229,20 +289,35 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="creditLine"></param>
         /// <param name="opClientCreditLineType"></param>
         public ClientDetail(ClientCreditLine creditLine, OpClientCreditLineType opClientCreditLineType)
-            : this(creditLine.Client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT)
+            : this(creditLine.Client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT, OpReviewType.DETAIL_REVIEW)
         {
             this.tabControl.SelectedTab = this.tabItemClientCreditLine;
-            if (opClientCreditLineType == OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE || opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
+            if (this.opClientCreditLineType == OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE || this.opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
             {
                 this.clientCreditLineBindingSource.DataSource = creditLine;
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the ClientDetail class
+        /// </summary>
+        /// <param name="review"></param>
+        /// <param name="opReviewType"></param>
+        public ClientDetail(ClientReview review, OpReviewType opReviewType)
+            : this(review.Client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, OpContractType.DETAIL_CONTRACT, opReviewType)
+        {
+            this.tabControl.SelectedTab = this.tabItemReview;
+            if (this.opReviewType == OpReviewType.DETAIL_REVIEW || this.opReviewType == OpReviewType.UPDATE_REVIEW)
+            {
+                this.reviewBindingSource.DataSource = review;
+            }
+        }
+
         #endregion Constructors
 
-        #region Methods (30)
+        #region Methods (38)
 
-        // Private Methods (30) 
+        // Private Methods (38) 
 
         /// <summary>
         /// 
@@ -295,6 +370,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     {
                         contract.Restore();
                     }
+                }
+            }
+
+            if (this.opReviewType == OpReviewType.UPDATE_REVIEW)
+            {
+                if (this.reviewBindingSource.DataSource is ClientReview)
+                {
+                    ClientReview review = (ClientReview)this.reviewBindingSource.DataSource;
+                    review.Restore();
                 }
             }
 
@@ -408,9 +492,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (isDeleteOK)
             {
                 MessageBox.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
                 this.clientCreditLineBindingSource.DataSource = typeof(ClientCreditLine);
                 this.SetClientCreditLineEditable(false);
+                this.bsCreditLines.DataSource = typeof(ClientCreditLine);
+                this.bsCreditLines.DataSource = client.ClientCreditLines;
             }
         }
 
@@ -468,6 +553,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 }
 
                 App.Current.DbContext.CDAs.DeleteAllOnSubmit(CDAList);
+                client.Contracts.Remove(contract);
                 App.Current.DbContext.Contracts.DeleteOnSubmit(contract);
                 App.Current.DbContext.SubmitChanges();
             }
@@ -480,9 +566,63 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (isDeleteOK)
             {
                 MessageBox.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.dgvContracts.DataSource = client.Contracts.ToList();
                 this.contractBindingSource.DataSource = typeof(Contract);
                 this.SetContractEditable(false);
+                this.bsContracts.DataSource = typeof(Contract);
+                this.bsContracts.DataSource = client.Contracts;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteReview(object sender, EventArgs e)
+        {
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBox.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.reviewBindingSource.DataSource is ClientReview))
+            {
+                return;
+            }
+
+            ClientReview review = (ClientReview)this.reviewBindingSource.DataSource;
+            if (review.ReviewNo == null)
+            {
+                return;
+            }
+
+            if (MessageBox.Show("是否打算删除此协查意见信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            bool isDeleteOK = true;
+            try
+            {
+                client.ClientReviews.Remove(review);
+                App.Current.DbContext.ClientReviews.DeleteOnSubmit(review);
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                isDeleteOK = false;
+                MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (isDeleteOK)
+            {
+                MessageBox.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.reviewBindingSource.DataSource = typeof(ClientReview);
+                this.SetReviewEditable(false);
+                this.bsReviews.DataSource = typeof(ClientReview);
+                this.bsReviews.DataSource = client.ClientReviews;
             }
         }
 
@@ -580,6 +720,26 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void NewReview(object sender, EventArgs e)
+        {
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBox.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            this.reviewBindingSource.DataSource = typeof(ClientReview);
+            this.reviewBindingSource.DataSource = new ClientReview();
+            this.opReviewType = OpReviewType.NEW_REVIEW;
+            this.UpdateReviewControlStatus();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void periodBeginDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
             if (this.opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
@@ -604,7 +764,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
+            this.bsCreditLines.DataSource = typeof(ClientCreditLine);
+            this.bsCreditLines.DataSource = client.ClientCreditLines;
         }
 
         /// <summary>
@@ -621,7 +782,26 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            this.dgvContracts.DataSource = client.Contracts.ToList();
+            this.bsContracts.DataSource = typeof(Contract);
+            this.bsContracts.DataSource = client.Contracts;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RefreshReviews(object sender, EventArgs e)
+        {
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBox.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            this.bsReviews.DataSource = typeof(ClientReview);
+            this.bsReviews.DataSource = client.ClientReviews;
         }
 
         /// <summary>
@@ -791,7 +971,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         App.Current.DbContext.SubmitChanges();
                     }
 
-                    this.dgvClientCreditLines.DataSource = client.ClientCreditLines.ToList();
+                    this.bsCreditLines.DataSource = typeof(ClientCreditLine);
+                    this.bsCreditLines.DataSource = client.ClientCreditLines;
                     this.NewClientCreditLine(null, null);
                 }
             }
@@ -824,7 +1005,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         App.Current.DbContext.SubmitChanges();
                     }
 
-                    this.dgvClientCreditLines.Refresh();
                     creditLine.Backup();
                 }
             }
@@ -899,7 +1079,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         App.Current.DbContext.SubmitChanges();
                     }
 
-                    this.dgvContracts.DataSource = client.Contracts.ToList();
+                    this.bsContracts.DataSource = typeof(Contract);
+                    this.bsContracts.DataSource = client.Contracts;
                     this.NewContract(null, null);
                 }
             }
@@ -942,8 +1123,78 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         App.Current.DbContext.SubmitChanges();
                     }
 
-                    this.dgvContracts.Refresh();
                     contract.Backup();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveReview(object sender, EventArgs e)
+        {
+            if (!this.reviewValidator.Validate())
+            {
+                return;
+            }
+
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null)
+            {
+                MessageBox.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.reviewBindingSource.DataSource is ClientReview))
+            {
+                return;
+            }
+
+            ClientReview review = (ClientReview)this.reviewBindingSource.DataSource;
+
+            if (this.opReviewType == OpReviewType.NEW_REVIEW)
+            {
+                bool isAddOK = true;
+                try
+                {
+                    client.ClientReviews.Add(review);
+                    review.CreateUserName = App.Current.CurUser.Name;
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    review.Client = null;
+                    isAddOK = false;
+                    MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (isAddOK)
+                {
+                    MessageBox.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.bsReviews.DataSource = typeof(ClientReview);
+                    this.bsReviews.DataSource = client.ClientReviews;
+                    this.NewReview(null, null);
+                }
+            }
+            else
+            {
+                bool isUpdateOK = true;
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e2)
+                {
+                    isUpdateOK = false;
+                    MessageBox.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (isUpdateOK)
+                {
+                    MessageBox.Show(ConstStr.MESSAGE.DATA_UPDATE_SUCCESS, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    review.Backup();
                 }
             }
         }
@@ -960,7 +1211,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            ClientCreditLine selectedClientCreditLine = ((List<ClientCreditLine>)this.dgvClientCreditLines.DataSource)[this.dgvClientCreditLines.SelectedRows[0].Index];
+            ClientCreditLine selectedClientCreditLine = (ClientCreditLine)this.bsCreditLines.List[this.dgvClientCreditLines.SelectedRows[0].Index];
             this.SetClientCreditLineEditable(false);
             this.clientCreditLineBindingSource.DataSource = selectedClientCreditLine;
             this.btnClientCreditLineFreeze.Enabled = true;
@@ -979,7 +1230,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Contract selectedContract = ((List<Contract>)this.dgvContracts.DataSource)[this.dgvClientCreditLines.SelectedRows[0].Index];
+            Contract selectedContract = (Contract)this.bsContracts.List[this.dgvContracts.SelectedRows[0].Index];
             this.SetContractEditable(false);
             this.contractBindingSource.DataSource = selectedContract;
         }
@@ -1037,6 +1288,23 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectReview(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvReviews.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            ClientReview selectedReview = (ClientReview)this.bsReviews.List[this.dgvReviews.SelectedRows[0].Index];
+            this.SetReviewEditable(false);
+            this.reviewBindingSource.DataSource = selectedReview;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="editable"></param>
         private void SetClientCreditLineEditable(bool editable)
         {
@@ -1053,6 +1321,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void SetContractEditable(bool editable)
         {
             foreach (Control comp in this.groupPanelContract.Controls)
+            {
+                ControlUtil.SetComponetEditable(comp, editable);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="editable"></param>
+        private void SetReviewEditable(bool editable)
+        {
+            foreach (Control comp in this.groupPanelReview.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, editable);
             }
@@ -1303,6 +1583,48 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             this.tbContractStatus.ReadOnly = true;
             this.tbContractCreateUserName.ReadOnly = true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateReivew(object sender, EventArgs e)
+        {
+            this.opReviewType = OpReviewType.UPDATE_REVIEW;
+            this.UpdateReviewControlStatus();
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateReviewControlStatus()
+        {
+            if (this.opReviewType == OpReviewType.DETAIL_REVIEW)
+            {
+                foreach (Control comp in this.groupPanelReview.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+            }
+            else if (this.opReviewType == OpReviewType.NEW_REVIEW)
+            {
+                foreach (Control comp in this.groupPanelReview.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+            }
+            else if (this.opReviewType == OpReviewType.UPDATE_REVIEW)
+            {
+                foreach (Control comp in this.groupPanelReview.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+
+                this.reviewNoTextBox.ReadOnly = true;
+            }
         }
 
         #endregion Methods

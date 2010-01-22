@@ -141,11 +141,9 @@
             DevComponents.DotNetBar.LabelX lblCDACode;
             DevComponents.DotNetBar.LabelX assignTypeLabel;
             DevComponents.DotNetBar.LabelX lblIsNotice;
-            DevComponents.DotNetBar.LabelX lblReviewNo;
             DevComponents.DotNetBar.LabelX lblRemark;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.tbReviewNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -256,7 +254,6 @@
             lblCDACode = new DevComponents.DotNetBar.LabelX();
             assignTypeLabel = new DevComponents.DotNetBar.LabelX();
             lblIsNotice = new DevComponents.DotNetBar.LabelX();
-            lblReviewNo = new DevComponents.DotNetBar.LabelX();
             lblRemark = new DevComponents.DotNetBar.LabelX();
             this.groupPanelCase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
@@ -788,20 +785,6 @@
             lblIsNotice.TabIndex = 4;
             lblIsNotice.Text = "明/暗保理:";
             // 
-            // lblReviewNo
-            // 
-            lblReviewNo.AutoSize = true;
-            lblReviewNo.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblReviewNo.BackgroundStyle.Class = "";
-            lblReviewNo.Location = new System.Drawing.Point(355, 89);
-            lblReviewNo.Name = "lblReviewNo";
-            lblReviewNo.Size = new System.Drawing.Size(97, 16);
-            lblReviewNo.TabIndex = 21;
-            lblReviewNo.Text = "协查意见书编号:";
-            // 
             // lblRemark
             // 
             lblRemark.AutoSize = true;
@@ -820,8 +803,6 @@
             // 
             this.groupPanelCase.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCase.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelCase.Controls.Add(this.tbReviewNo);
-            this.groupPanelCase.Controls.Add(lblReviewNo);
             this.groupPanelCase.Controls.Add(this.invoiceCurrencyTextBox);
             this.groupPanelCase.Controls.Add(this.transactionTypeTextBox);
             this.groupPanelCase.Controls.Add(this.companyNameENTextBox);
@@ -877,18 +858,6 @@
             // 
             this.groupPanelCase.StyleMouseOver.Class = "";
             this.groupPanelCase.TabIndex = 0;
-            // 
-            // tbReviewNo
-            // 
-            // 
-            // 
-            // 
-            this.tbReviewNo.Border.Class = "TextBoxBorder";
-            this.tbReviewNo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.ReviewNo", true));
-            this.tbReviewNo.Location = new System.Drawing.Point(456, 87);
-            this.tbReviewNo.Name = "tbReviewNo";
-            this.tbReviewNo.Size = new System.Drawing.Size(100, 20);
-            this.tbReviewNo.TabIndex = 22;
             // 
             // CDABindingSource
             // 
@@ -1993,7 +1962,6 @@
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsRecoarse;
         private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbIsNotice;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbReviewNo;
         private DevComponents.DotNetBar.Controls.TextBoxX tbRemark;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator2;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator3;

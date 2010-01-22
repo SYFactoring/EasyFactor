@@ -1,9 +1,15 @@
-﻿namespace CMBC.EasyFactor.ARMgr
+﻿//-----------------------------------------------------------------------
+// <copyright file="AssignBatchMgr.Designer.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace CMBC.EasyFactor.ARMgr
 {
     /// <summary>
     /// 
     /// </summary>
-    partial class AssignBatchMgr
+    public partial class AssignBatchMgr
     {
 		#region Fields (36) 
 
@@ -59,10 +65,11 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 

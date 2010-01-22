@@ -373,7 +373,6 @@ namespace CMBC.EasyFactor.Utils
 
                         curCase.OwnerDepartment = ownerDept;
                         curCase.TransactionType = String.Format("{0:G}", valueArray[row, column++]);
-                        curCase.ReviewNo = String.Format("{0:G}", valueArray[row, column++]);
                         curCase.OperationType = String.Format("{0:G}", valueArray[row, column++]);
                         string coDeptName = String.Format("{0:G}", valueArray[row, column++]);
                         curCase.CoDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == coDeptName);

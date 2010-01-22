@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="FinanceBatchDetail.Detail.cs" company="Yiming Liu@Fudan">
+// <copyright file="FinanceBatchDetail.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -9,22 +9,26 @@ namespace CMBC.EasyFactor.ARMgr
     /// <summary>
     /// 
     /// </summary>
-    partial class FinanceBatchDetail
+    public partial class FinanceBatchDetail
     {
-        #region Fields (26)
-
-        private System.Windows.Forms.BindingSource batchBindingSource;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx batchCurrencyComboBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX cDACodeTextBox;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput checkDateDateTimePicker;
-        private DevComponents.DotNetBar.Controls.TextBoxX checkUserNameTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
+		#region Fields (32) 
         /// <summary>
         /// Required designer variable.
         /// </summary>
+        private System.Windows.Forms.BindingSource batchBindingSource;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx batchCurrencyComboBox;
+        private DevComponents.DotNetBar.ButtonX btnBatchSave;
+        private DevComponents.DotNetBar.ButtonX btnBatchUpdate;
+        private DevComponents.DotNetBar.ButtonX btnFactorSelect;
+        private DevComponents.DotNetBar.Controls.TextBoxX cDACodeTextBox;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput checkDateDateTimePicker;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx checkStatusComboBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX checkUserNameTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.TextBoxX costRateTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX createUserNameTextBox;
+        private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX factorTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX financeAmountTextBox;
@@ -33,20 +37,22 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.Editors.DateTimeAdv.DateTimeInput financePeriodEndDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX financeRateTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx financeTypeComboBox;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private DevComponents.DotNetBar.Controls.ComboBoxEx interestTypeComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX otherIncomeTextBox;
         private DevComponents.DotNetBar.TabControlPanel panelBatch;
         private DevComponents.DotNetBar.TabControlPanel panelInvoices;
         private DevComponents.DotNetBar.Controls.TextBoxX rejectReasonTextBox;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
         private DevComponents.DotNetBar.TabControl tabControl;
         private DevComponents.DotNetBar.TabItem tabItemBatch;
         private DevComponents.DotNetBar.TabItem tabItemInvoices;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Methods (1)
+		#region Methods (1) 
 
-        // Protected Methods (1) 
+		// Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -62,9 +68,7 @@ namespace CMBC.EasyFactor.ARMgr
             base.Dispose(disposing);
         }
 
-        #endregion Methods
-
-
+		#endregion Methods 
 
         #region Windows Form Designer generated code
 
@@ -881,13 +885,5 @@ namespace CMBC.EasyFactor.ARMgr
 
         }
         #endregion
-
-        private DevComponents.DotNetBar.ButtonX btnFactorSelect;
-        private DevComponents.DotNetBar.ButtonX btnBatchSave;
-        private DevComponents.DotNetBar.ButtonX btnBatchUpdate;
-        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
-        private System.Windows.Forms.ErrorProvider errorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx checkStatusComboBox;
     }
 }

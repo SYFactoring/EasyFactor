@@ -1,9 +1,15 @@
-﻿namespace CMBC.EasyFactor.ARMgr
+﻿//-----------------------------------------------------------------------
+// <copyright file="FinanceBatchMgr.Designer.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace CMBC.EasyFactor.ARMgr
 {
     /// <summary>
     /// 
     /// </summary>
-    partial class FinanceBatchMgr
+    public partial class FinanceBatchMgr
     {
 		#region Fields (37) 
 

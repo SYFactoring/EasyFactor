@@ -145,7 +145,6 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentTerm;
         private DevComponents.DotNetBar.Controls.TextBoxX tbReplyAmount;
         private DevComponents.DotNetBar.Controls.TextBoxX tbRequestAmount;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbReviewNo;
 
 		#endregion Fields 
 
@@ -199,12 +198,11 @@ namespace CMBC.EasyFactor.CaseMgr
             DevComponents.DotNetBar.LabelX lblCaseFactor;
             DevComponents.DotNetBar.LabelX lblManagerName;
             DevComponents.DotNetBar.LabelX lblPaymentTerm;
-            DevComponents.DotNetBar.LabelX lblReviewNo;
             DevComponents.DotNetBar.LabelX lblComment;
             DevComponents.DotNetBar.LabelX lblCaseCode;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaseDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelCase = new DevComponents.DotNetBar.TabControlPanel();
@@ -216,7 +214,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.caseBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cbCaseMark = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tbComment = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbReviewNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbPaymentTerm = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbManagerName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cbCaseTransactionType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -354,7 +351,6 @@ namespace CMBC.EasyFactor.CaseMgr
             lblCaseFactor = new DevComponents.DotNetBar.LabelX();
             lblManagerName = new DevComponents.DotNetBar.LabelX();
             lblPaymentTerm = new DevComponents.DotNetBar.LabelX();
-            lblReviewNo = new DevComponents.DotNetBar.LabelX();
             lblComment = new DevComponents.DotNetBar.LabelX();
             lblCaseCode = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
@@ -693,22 +689,6 @@ namespace CMBC.EasyFactor.CaseMgr
             lblPaymentTerm.TabIndex = 27;
             lblPaymentTerm.Text = "付款条件:";
             // 
-            // lblReviewNo
-            // 
-            lblReviewNo.AutoSize = true;
-            lblReviewNo.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblReviewNo.BackgroundStyle.Class = "";
-            lblReviewNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            lblReviewNo.Location = new System.Drawing.Point(230, 222);
-            lblReviewNo.Name = "lblReviewNo";
-            lblReviewNo.Size = new System.Drawing.Size(97, 16);
-            lblReviewNo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            lblReviewNo.TabIndex = 19;
-            lblReviewNo.Text = "协查意见书编号:";
-            // 
             // lblComment
             // 
             lblComment.AutoSize = true;
@@ -828,8 +808,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.groupPanelCase.Controls.Add(this.cbCaseMark);
             this.groupPanelCase.Controls.Add(this.tbComment);
             this.groupPanelCase.Controls.Add(lblComment);
-            this.groupPanelCase.Controls.Add(this.tbReviewNo);
-            this.groupPanelCase.Controls.Add(lblReviewNo);
             this.groupPanelCase.Controls.Add(this.tbPaymentTerm);
             this.groupPanelCase.Controls.Add(lblPaymentTerm);
             this.groupPanelCase.Controls.Add(this.tbManagerName);
@@ -948,20 +926,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbComment.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbComment.Size = new System.Drawing.Size(375, 59);
             this.tbComment.TabIndex = 38;
-            // 
-            // tbReviewNo
-            // 
-            // 
-            // 
-            // 
-            this.tbReviewNo.Border.Class = "TextBoxBorder";
-            this.tbReviewNo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "ReviewNo", true));
-            this.tbReviewNo.Location = new System.Drawing.Point(336, 222);
-            this.tbReviewNo.MaxLength = 20;
-            this.tbReviewNo.Name = "tbReviewNo";
-            this.tbReviewNo.Size = new System.Drawing.Size(137, 20);
-            this.tbReviewNo.TabIndex = 20;
-            this.caseValidator.SetValidator1(this.tbReviewNo, this.regularExpressionValidator1);
             // 
             // tbPaymentTerm
             // 
@@ -1335,14 +1299,14 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colIFPrice,
             this.colComment,
             this.colCreateUserName});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCreditCoverNegs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCreditCoverNegs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCreditCoverNegs.Location = new System.Drawing.Point(1, 166);
@@ -1726,14 +1690,14 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCDAs.AllowUserToAddRows = false;
             this.dgvCDAs.AllowUserToDeleteRows = false;
             this.dgvCDAs.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCDAs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCDAs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCDACode,
@@ -1776,14 +1740,14 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colFax,
             this.colCDAComment,
             this.colCDACreateUserName});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCDAs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCDAs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCDAs.Location = new System.Drawing.Point(1, 39);
@@ -2310,6 +2274,7 @@ namespace CMBC.EasyFactor.CaseMgr
             ((System.ComponentModel.ISupportInitialize)(this.caseErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.creditCoverErrorProvider)).EndInit();
             this.ResumeLayout(false);
+
         }
         #endregion
     }

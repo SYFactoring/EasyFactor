@@ -7,14 +7,13 @@
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Drawing;
-    using Microsoft.Office.Interop.Excel;
-    using System.IO;
     using Microsoft.Office.Core;
+    using Microsoft.Office.Interop.Excel;
 
     /// <summary>
     /// 
@@ -26,11 +25,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private BindingSource bs = new BindingSource();
+        private BindingSource bs;
+
         /// <summary>
         /// 
         /// </summary>
         private CDA cda;
+
         /// <summary>
         /// 
         /// </summary>
@@ -66,7 +67,7 @@ namespace CMBC.EasyFactor.ARMgr
         #region Constructors (2)
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the AssignBatchMgr class
         /// </summary>
         /// <param name="selectedCDA"></param>
         public AssignBatchMgr(CDA selectedCDA)
@@ -74,17 +75,19 @@ namespace CMBC.EasyFactor.ARMgr
         {
             this.cda = selectedCDA;
             this.panelQuery.Visible = false;
-            this.bs.DataSource = cda.InvoiceAssignBatches;
+            this.bs.DataSource = this.cda.InvoiceAssignBatches;
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the AssignBatchMgr class
         /// </summary>
+        /// <param name="batchType"></param>
         public AssignBatchMgr(OpBatchType batchType)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.dgvBatches.AutoGenerateColumns = false;
-            this.dgvBatches.DataSource = bs;
+            this.bs = new BindingSource();
+            this.dgvBatches.DataSource = this.bs;
             this.opBatchType = batchType;
             ControlUtil.SetDoubleBuffered(this.dgvBatches);
 
@@ -152,12 +155,14 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
             if (selectedBatch.Invoices.Count > 0)
             {
                 MessageBox.Show("不能删除此批次，它包含相关发票信息", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
             App.Current.DbContext.InvoiceAssignBatches.DeleteOnSubmit(selectedBatch);
             try
             {
@@ -168,7 +173,8 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
+
+            this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
         }
 
         /// <summary>
@@ -207,9 +213,9 @@ namespace CMBC.EasyFactor.ARMgr
         private void dgvBatches_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewColumn column = this.dgvBatches.Columns[e.ColumnIndex];
-            if (column == colIsCreateMsg)
+            if (column == this.colIsCreateMsg)
             {
-                Object originalData = e.Value;
+                object originalData = e.Value;
                 if (originalData != null)
                 {
                     bool result = (bool)originalData;
@@ -225,18 +231,15 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                dgvBatches.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgvBatches.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvBatches.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvBatches.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvBatches.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -246,7 +249,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
         {
-            if (opBatchType == OpBatchType.QUERY || opBatchType == OpBatchType.CHECK)
+            if (this.opBatchType == OpBatchType.QUERY || this.opBatchType == OpBatchType.CHECK)
             {
                 DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
                 DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
@@ -255,14 +258,13 @@ namespace CMBC.EasyFactor.ARMgr
                     i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text)
                     && (beginDate != this.dateFrom.MinDate ? i.AssignDate >= beginDate : true)
                     && (endDate != this.dateTo.MinDate ? i.AssignDate <= endDate : true)
-                    && (status != string.Empty ? i.CheckStatus == status : true)
-                    );
+                    && (status != string.Empty ? i.CheckStatus == status : true));
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
-            else if (opBatchType == OpBatchType.DETAIL)
+            else if (this.opBatchType == OpBatchType.DETAIL)
             {
-                var queryResult = cda.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
+                var queryResult = this.cda.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }

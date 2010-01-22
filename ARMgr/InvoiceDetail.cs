@@ -60,13 +60,13 @@ namespace CMBC.EasyFactor.ARMgr
         #region Constructors (1)
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the InvoiceDetail class
         /// </summary>
         /// <param name="invoice"></param>
         /// <param name="opInvoiceType"></param>
         public InvoiceDetail(Invoice invoice, OpInvoiceType opInvoiceType)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
             this.opInvoiceType = opInvoiceType;
             this.invoiceBindingSource.DataSource = invoice;

@@ -23,11 +23,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private BindingSource bs = new BindingSource();
+        private BindingSource bs;
+
         /// <summary>
         /// 
         /// </summary>
         private CDA cda;
+
         /// <summary>
         /// 
         /// </summary>
@@ -63,7 +65,7 @@ namespace CMBC.EasyFactor.ARMgr
         #region Constructors (2)
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the FinanceBatchMgr class
         /// </summary>
         /// <param name="selectedCDA"></param>
         public FinanceBatchMgr(CDA selectedCDA)
@@ -71,18 +73,20 @@ namespace CMBC.EasyFactor.ARMgr
         {
             this.cda = selectedCDA;
             this.panelQuery.Visible = false;
-            this.bs.DataSource = cda.InvoiceFinanceBatches;
+            this.bs.DataSource = this.cda.InvoiceFinanceBatches;
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the FinanceBatchMgr class
         /// </summary>
+        /// <param name="batchType"></param>
         public FinanceBatchMgr(OpBatchType batchType)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             ControlUtil.SetDoubleBuffered(this.dgvBatches);
             this.dgvBatches.AutoGenerateColumns = false;
-            this.dgvBatches.DataSource = bs;
+            this.bs = new BindingSource();
+            this.dgvBatches.DataSource = this.bs;
             this.opBatchType = batchType;
 
             if (batchType == OpBatchType.CHECK)
@@ -170,7 +174,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
+            this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
         }
 
         /// <summary>
@@ -225,7 +229,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
         {
-            if (opBatchType == OpBatchType.QUERY || opBatchType == OpBatchType.CHECK)
+            if (this.opBatchType == OpBatchType.QUERY || this.opBatchType == OpBatchType.CHECK)
             {
                 DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
                 DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
@@ -235,15 +239,14 @@ namespace CMBC.EasyFactor.ARMgr
                     i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
                     && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
                     && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
-                    && (status != string.Empty ? i.CheckStatus == status : true)
-                    );
+                    && (status != string.Empty ? i.CheckStatus == status : true));
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
 
             }
-            else if (opBatchType == OpBatchType.DETAIL)
+            else if (this.opBatchType == OpBatchType.DETAIL)
             {
-                var queryResult = cda.InvoiceFinanceBatches.Where(i => i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)); ;
+                var queryResult = this.cda.InvoiceFinanceBatches.Where(i => i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text));
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }

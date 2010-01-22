@@ -6,12 +6,12 @@
 
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
     using System;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.InfoMgr.FactorMgr;
+    using System.Windows.Forms;
     using CMBC.EasyFactor.CaseMgr;
+    using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.InfoMgr.FactorMgr;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// 
@@ -50,8 +50,9 @@ namespace CMBC.EasyFactor.ARMgr
         #region Constructors (1)
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the FinanceBatchDetail class
         /// </summary>
+        /// <param name="batch"></param>
         public FinanceBatchDetail(InvoiceFinanceBatch batch)
         {
             this.InitializeComponent();

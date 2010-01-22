@@ -33,12 +33,12 @@ namespace CMBC.EasyFactor.ARMgr
         #region Constructors (1)
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the InvoiceFinance class
         /// </summary>
         /// <param name="caseBasic"></param>
         public InvoiceFinance(ARCaseBasic caseBasic)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.caseBasic = caseBasic;
             this.dgvInvoices.AutoGenerateColumns = false;
             this.superValidator.Enabled = false;
@@ -72,7 +72,7 @@ namespace CMBC.EasyFactor.ARMgr
         #region Properties (1)
 
         /// <summary>
-        /// 
+        /// Sets
         /// </summary>
         public CDA CDA
         {
@@ -214,7 +214,6 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (this.dgvInvoices.Columns[e.ColumnIndex] == colCheckBox)
             {
-
                 DataGridViewCheckBoxCell checkBoxCell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[e.RowIndex].Cells[0];
                 if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
                 {

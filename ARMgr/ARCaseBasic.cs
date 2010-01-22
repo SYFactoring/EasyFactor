@@ -27,22 +27,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        public Case Case
-        {
-            get
-            {
-                return _case;
-            }
-            set
-            {
-                _case = value;
-                FillCaseBasic();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         private OpARType opARType;
 
         #endregion Fields
@@ -138,13 +122,29 @@ namespace CMBC.EasyFactor.ARMgr
                     break;
             }
 
-            InvoiceControl.Dock = DockStyle.Fill;
-            this.panelInvoiceMgr.Controls.Add(InvoiceControl);
+            this.InvoiceControl.Dock = DockStyle.Fill;
+            this.panelInvoiceMgr.Controls.Add(this.InvoiceControl);
         }
 
         #endregion Constructors
 
-        #region Properties (1)
+        #region Properties (2)
+
+        /// <summary>
+        /// Gets or sets
+        /// </summary>
+        public Case Case
+        {
+            get
+            {
+                return this._case;
+            }
+            set
+            {
+                this._case = value;
+                this.FillCaseBasic();
+            }
+        }
 
         /// <summary>
         /// Gets or sets

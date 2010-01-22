@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=10.171.5.99\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=YIMING\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring;Network Library=dbmssocn" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[Case]" Member="Cases">
     <Type Name="Case">
       <Column Name="CaseCode" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -18,7 +18,6 @@
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ManagerName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="NetPaymentTerm" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ReviewNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="Case_CDA" Member="CDAs" OtherKey="CaseCode" Type="CDA" />
       <Association Name="Case_CreditCoverNegotiation" Member="CreditCoverNegotiations" OtherKey="CaseCode" Type="CreditCoverNegotiation" />
@@ -136,6 +135,7 @@
       <Association Name="Client_ClientAccount" Member="ClientAccounts" OtherKey="ClientEDICode" Type="ClientAccount" />
       <Association Name="Client_ClientCreditLine" Member="ClientCreditLines" OtherKey="ClientEDICode" Type="ClientCreditLine" />
       <Association Name="Client_Contract" Member="Contracts" OtherKey="ClientEDICode" Type="Contract" />
+      <Association Name="Client_ClientReview" Member="ClientReviews" OtherKey="ClientEDICode" Type="ClientReview" />
       <Association Name="Department_Client" Member="Department" ThisKey="BranchCode" Type="Department" IsForeignKey="true" />
       <Association Name="Client_Client" Member="ClientGroup" ThisKey="GroupEDICode" Type="Client" IsForeignKey="true" />
     </Type>
@@ -370,7 +370,7 @@
       <Column Name="BatchCurrency" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" />
       <Column Name="FinanceAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="FinancePeriodBegin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="FinancePeriodEnd" Storage="_FinancePeriodEnd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FinancePeriodEnd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="FinanceRate" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="InterestType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="FactorCode" Type="System.String" DbType="Char(7)" CanBeNull="true" />
@@ -506,6 +506,17 @@
       <Column Name="FromCurr" Type="System.String" DbType="Char(3) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ToCurr" Type="System.String" DbType="Char(3) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ExchangeRate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ClientReview" Member="ClientReviews">
+    <Type Name="ClientReview">
+      <Column Name="ReviewNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="ReviewStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ReviewDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Client_ClientReview" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
