@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Invoice : BaseObject
     {
-        #region Properties (19)
+        #region Properties (21)
 
         /// <summary>
         /// Gets
@@ -186,6 +186,32 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public string PaymentBatchNos
+        {
+            get
+            {
+                List<string> batches = new List<string>();
+                foreach (InvoicePaymentLog log in this.InvoicePaymentLogs)
+                {
+                    if (!batches.Contains(log.PaymentBatchNo))
+                    {
+                        batches.Add(log.PaymentBatchNo);
+                    }
+                }
+                if (batches.Count > 0)
+                {
+                    return String.Join(";", batches.ToArray());
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets or sets
         /// </summary>
         public DateTime? PaymentDate2
@@ -210,6 +236,32 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string RefundBatchNos
+        {
+            get
+            {
+                List<string> batches = new List<string>();
+                foreach (InvoiceRefundLog log in this.InvoiceRefundLogs)
+                {
+                    if (!batches.Contains(log.RefundBatchNo))
+                    {
+                        batches.Add(log.RefundBatchNo);
+                    }
+                }
+                if (batches.Count > 0)
+                {
+                    return String.Join(";", batches.ToArray());
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
         }
 
         /// <summary>

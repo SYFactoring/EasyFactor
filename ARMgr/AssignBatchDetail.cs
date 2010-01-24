@@ -92,7 +92,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailCDA(object sender, EventArgs e)
         {
-            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
+            InvoiceAssignBatch batch = (InvoiceAssignBatch)this.batchBindingSource.DataSource;
             CDADetail detail = new CDADetail(batch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
             detail.Show();
         }

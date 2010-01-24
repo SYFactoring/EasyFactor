@@ -495,7 +495,7 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray2 = this.GetValueArray(fileName, 2);
             int result = 0;
             List<Client> clientList = new List<Client>();
-
+            List<ClientReview> reviewList = new List<ClientReview>();
             try
             {
                 if (valueArray != null)
@@ -590,7 +590,25 @@ namespace CMBC.EasyFactor.Utils
                             return -1;
                         }
 
+                        string clientEDICode = String.Format("{0:G}", valueArray[row, 2]);
+                        if (String.Empty.Equals(clientEDICode))
+                        {
+                            continue;
+                        }
 
+                        Client client = clientList.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                        if (client == null)
+                        {
+                            throw new Exception("客户不存在，不能导入协查意见书： " + clientEDICode);
+                        }
+                        int column = 2;
+                        ClientReview review = new ClientReview();
+                        review.ReviewNo = String.Format("{0:G}", valueArray2[row, column++]);
+                        review.ReviewStatus = String.Format("{0:G}", valueArray2[row, column++]);
+                        review.ReviewDate = (DateTime)valueArray2[row, column++];
+                        review.CreateUserName = String.Format("{0:G}", valueArray2[row, column++]);
+                        review.Comment = String.Format("{0:G}", valueArray2[row, column++]);
+                        review.Client = client;
                     }
                 }
 
@@ -603,6 +621,10 @@ namespace CMBC.EasyFactor.Utils
                 {
                     client.ClientGroup = null;
                     client.Department = null;
+                }
+                foreach (ClientReview review in reviewList)
+                {
+                    review.Client = null;
                 }
                 throw e1;
             }

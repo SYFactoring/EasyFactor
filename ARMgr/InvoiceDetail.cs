@@ -136,9 +136,79 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Constructors
 
-        #region Methods (9)
+        #region Methods (13)
 
-        // Private Methods (9) 
+        // Private Methods (13) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailAssignBatch(object sender, EventArgs e)
+        {
+            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+            if (invoice.InvoiceAssignBatch != null)
+            {
+                AssignBatchDetail detail = new AssignBatchDetail(invoice.InvoiceAssignBatch);
+                detail.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailFinanceBatch(object sender, EventArgs e)
+        {
+            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+            if (invoice.InvoiceFinanceBatch != null)
+            {
+                FinanceBatchDetail detail = new FinanceBatchDetail(invoice.InvoiceFinanceBatch);
+                detail.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailPaymentBatch(object sender, EventArgs e)
+        {
+            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+            string[] batchNoes = invoice.PaymentBatchNos.Split(new char[] { ';' });
+            foreach (string batchNo in batchNoes)
+            {
+                InvoicePaymentBatch batch = App.Current.DbContext.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == batchNo);
+                if (batch != null)
+                {
+                    PaymentBatchDetail detail = new PaymentBatchDetail(batch);
+                    detail.Show();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailRefundBatch(object sender, EventArgs e)
+        {
+            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+            string[] batchNoes = invoice.RefundBatchNos.Split(new char[] { ';' });
+            foreach (string batchNo in batchNoes)
+            {
+                InvoiceRefundBatch batch = App.Current.DbContext.InvoiceRefundBatches.SingleOrDefault(i => i.RefundBatchNo == batchNo);
+                if (batch != null)
+                {
+                    RefundBatchDetail detail = new RefundBatchDetail(batch);
+                    detail.Show();
+                }
+            }
+        }
 
         /// <summary>
         /// 

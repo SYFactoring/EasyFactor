@@ -79,7 +79,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="batchType"></param>
         public RefundBatchMgr(OpBatchType batchType)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             ControlUtil.SetDoubleBuffered(this.dgvBatches);
             this.dgvBatches.AutoGenerateColumns = false;
             this.bs = new BindingSource();
