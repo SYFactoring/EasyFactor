@@ -22,7 +22,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private BindingSource bs = new BindingSource();
+        private BindingSource bs;
         /// <summary>
         /// 
         /// </summary>
@@ -82,6 +82,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.InitializeComponent();
             ControlUtil.SetDoubleBuffered(this.dgvBatches);
             this.dgvBatches.AutoGenerateColumns = false;
+            this.bs = new BindingSource();
             this.dgvBatches.DataSource = bs;
             this.opBatchType = batchType;
 
@@ -93,6 +94,7 @@ namespace CMBC.EasyFactor.ARMgr
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
 
+            this.UpdateContextMenu();
         }
 
         #endregion Constructors
@@ -119,9 +121,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (9)
+        #region Methods (10)
 
-        // Private Methods (9) 
+        // Private Methods (10) 
 
         /// <summary>
         /// 
@@ -312,6 +314,25 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 this.OwnerForm.DialogResult = DialogResult.Yes;
                 this.OwnerForm.Close();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateContextMenu()
+        {
+            if (App.Current.CurUser.Role == "审核员")
+            {
+                this.menuItemCheck.Visible = true;
+                this.menuItemReject.Visible = true;
+                this.toolStripSeparator2.Visible = true;
+            }
+            else
+            {
+                this.menuItemCheck.Visible = false;
+                this.menuItemReject.Visible = false;
+                this.toolStripSeparator2.Visible = false;
             }
         }
 

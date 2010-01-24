@@ -78,24 +78,23 @@ namespace CMBC.EasyFactor.Report
             this.dgvInvoices.DataSource = this.bs;
             ControlUtil.SetDoubleBuffered(this.dgvInvoices);
 
-            if (this.opReportType == OpReportType.REPORT_ASSIGN)
-            {
-                this.diAssignDateBegin.Value = DateTime.Now.Date;
-                this.diAssignDateEnd.Value = DateTime.Now.Date;
-                this.QueryInvoices(null, null);
-            }
-            else if (this.opReportType == OpReportType.REPORT_FINANCE)
+            //if (this.opReportType == OpReportType.REPORT_ASSIGN)
+            //{
+            //    this.diAssignDateBegin.Value = DateTime.Now.Date;
+            //    this.diAssignDateEnd.Value = DateTime.Now.Date;
+            //    this.QueryInvoices(null, null);
+            //}
+            if (this.opReportType == OpReportType.REPORT_FINANCE)
             {
                 this.cbIsFlaw.Checked = false;
                 this.cbIsFlaw.Enabled = false;
                 this.diAssignDateEnd.Value = DateTime.Now.Date;
-                this.QueryInvoices(null, null);
             }
-            else if (this.opReportType == OpReportType.REPORT_FEE)
-            {
-                this.diAssignDateBegin.Value = DateTime.Now.Date;
-                this.diAssignDateEnd.Value = DateTime.Now.Date;
-            }
+            //else if (this.opReportType == OpReportType.REPORT_FEE)
+            //{
+            //    this.diAssignDateBegin.Value = DateTime.Now.Date;
+            //    this.diAssignDateEnd.Value = DateTime.Now.Date;
+            //}
         }
 
         #endregion Constructors
@@ -432,48 +431,15 @@ namespace CMBC.EasyFactor.Report
 
                 Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-                string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSLOGO.png");
+                string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 40);
 
                 sheet.Cells[3, 2] = "可融资账款明细表";
-                sheet.get_Range(sheet.Cells[3, 2], sheet.Cells[3, 2]).Font.Size = 24;
                 sheet.get_Range(sheet.Cells[2, 1], sheet.Cells[2, 5]).RowHeight = 30;
-
-                sheet.Cells[5, 1] = "卖方：";
-                sheet.Cells[5, 2] = seller.ToString();
-                sheet.Cells[6, 1] = "最高预付款额度：";
-                ClientCreditLine creditLine = seller.FinanceCreditLine;
-                if (creditLine != null)
-                {
-                    sheet.Cells[6, 2] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, creditLine.CreditLine);
-                }
-
-                sheet.Cells[7, 1] = "总融资余额";
-                double? financeOutstanding = seller.GetFinanceOutstanding(creditLine.CreditLineCurrency);
-                sheet.Cells[7, 2] = String.Format("{0} {1:N2}", financeOutstanding == null ? "" : creditLine.CreditLineCurrency, financeOutstanding);
-                sheet.Cells[8, 1] = "总剩余额度";
-                if (creditLine != null)
-                {
-                    sheet.Cells[8, 2] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, creditLine.CreditLine - financeOutstanding.GetValueOrDefault());
-                }
-                //if (creditLine.GroupCreditLine == null)
-                //{
-                //    sheet.Cells[8, 2] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, creditLine.CreditLine - financeOutstanding.GetValueOrDefault());
-                //}
-                //else
-                //{
-                //    double groupFinanceLineOutstanding = creditLine.GroupCreditLine.FinanceCreditLineOutstanding;
-                //    if (creditLine.GroupCreditLine.CreditLineCurrency != creditLine.CreditLineCurrency)
-                //    {
-                //        double exchange = Exchange.GetExchangeRate(creditLine.GroupCreditLine.CreditLineCurrency, creditLine.CreditLineCurrency);
-                //        groupFinanceLineOutstanding *= exchange;
-                //    }
-                //    sheet.Cells[8, 2] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, Math.Min(groupFinanceLineOutstanding, creditLine.CreditLine - financeOutstanding.GetValueOrDefault()));
-                //}
 
                 IEnumerable<IGrouping<Client, Invoice>> groupsByBuyer = sellerGroup.GroupBy(i => i.InvoiceAssignBatch.CDA.Case.BuyerClient);
 
-                int row = 10;
+                int row = 6;
                 foreach (IGrouping<Client, Invoice> buyerGroup in groupsByBuyer)
                 {
                     Client buyer = buyerGroup.Key;
@@ -496,7 +462,11 @@ namespace CMBC.EasyFactor.Report
                             break;
                     }
 
+                    sheet.Cells[row, 1] = "卖方：";
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
+                    sheet.Cells[row++, 2] = seller.ToString();
                     sheet.Cells[row, 1] = "买方:";
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
                     sheet.Cells[row++, 2] = String.Format("{0}（应收账款债务人）", buyer.ToString());
                     if (factor != null)
                     {
@@ -504,23 +474,54 @@ namespace CMBC.EasyFactor.Report
                         sheet.Cells[row++, 2] = factor.ToString();
                     }
 
+                    row++;
+
                     sheet.Cells[row, 1] = "信用风险额度：";
                     double? creditCoverOutstanding = cda.CreditCoverOutstanding;
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", creditCoverOutstanding == null ? "" : cda.CreditCoverCurr, creditCoverOutstanding);
+                    sheet.Cells[row, 2] = String.Format("{0} {1:C2}", creditCoverOutstanding == null ? "" : cda.CreditCoverCurr, creditCoverOutstanding);
+                    sheet.Cells[row, 4] = "最高预付款额度：";
+                    ClientCreditLine creditLine = seller.FinanceCreditLine;
+                    if (creditLine != null)
+                    {
+                        sheet.Cells[row, 5] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, creditLine.CreditLine);
+                    }
+                    row++;
+
                     sheet.Cells[row, 1] = "应收账款余额：";
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", cda.Case.InvoiceCurrency, cda.Case.AssignOutstanding);
+                    sheet.Cells[row, 2] = String.Format("{0} {1:N2}", cda.Case.InvoiceCurrency, cda.Case.AssignOutstanding);
+                    sheet.Cells[row, 4] = "总融资余额：";
+                    double? financeOutstanding = seller.GetFinanceOutstanding(creditLine.CreditLineCurrency);
+                    sheet.Cells[row++, 5] = String.Format("{0} {1:N2}", financeOutstanding == null ? "" : creditLine.CreditLineCurrency, financeOutstanding);
+
+
                     sheet.Cells[row, 1] = "预付款额度：";
                     double? financeLineOustanding = cda.FinanceLineOutstanding;
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", financeLineOustanding == null ? "" : cda.FinanceLineCurr, financeLineOustanding);
+                    sheet.Cells[row, 2] = String.Format("{0} {1:N2}", financeLineOustanding == null ? "" : cda.FinanceLineCurr, financeLineOustanding);
+                    sheet.Cells[row, 4] = "总剩余额度：";
+                    if (creditLine != null)
+                    {
+                        sheet.Cells[row, 5] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, creditLine.CreditLine - financeOutstanding.GetValueOrDefault());
+                    }
+                    row++;
+
                     sheet.Cells[row, 1] = "融资余额：";
                     financeOutstanding = cda.Case.FinanceOutstanding;
                     sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", financeOutstanding == null ? "" : cda.FinanceLineCurr, financeOutstanding);
-                    sheet.Cells[row, 1] = "剩余额度：";
-                    if ((financeLineOustanding - financeOutstanding) != null)
-                    {
-                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", cda.FinanceLineCurr, cda.FinanceLineOutstanding - cda.GetFinanceOutstanding(cda.FinanceLineCurr));
-                    }
-                    //sheet.Cells[row++, 2] = String.Format("{0:N2}", Math.Min(Math.Min((cda.AssignTotal - cda.FinanceTotal).GetValueOrDefault(), cda.FinanceLineOutstanding.GetValueOrDefault()), seller.GetFinanceLineOutstanding("CNY").GetValueOrDefault()));
+
+                    //if (creditLine.GroupCreditLine == null)
+                    //{
+                    //    sheet.Cells[8, 2] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, creditLine.CreditLine - financeOutstanding.GetValueOrDefault());
+                    //}
+                    //else
+                    //{
+                    //    double groupFinanceLineOutstanding = creditLine.GroupCreditLine.FinanceCreditLineOutstanding;
+                    //    if (creditLine.GroupCreditLine.CreditLineCurrency != creditLine.CreditLineCurrency)
+                    //    {
+                    //        double exchange = Exchange.GetExchangeRate(creditLine.GroupCreditLine.CreditLineCurrency, creditLine.CreditLineCurrency);
+                    //        groupFinanceLineOutstanding *= exchange;
+                    //    }
+                    //    sheet.Cells[8, 2] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, Math.Min(groupFinanceLineOutstanding, creditLine.CreditLine - financeOutstanding.GetValueOrDefault()));
+                    //}
 
                     row++;
                     sheet.Cells[row, 1] = "发票号";
@@ -531,6 +532,7 @@ namespace CMBC.EasyFactor.Report
 
                     row++;
                     int invoiceStart = row;
+                    double total = 0;
                     foreach (Invoice invoice in buyerGroup)
                     {
                         sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
@@ -538,36 +540,41 @@ namespace CMBC.EasyFactor.Report
                         sheet.Cells[row, 3] = invoice.InvoiceDate;
                         sheet.Cells[row, 4] = invoice.DueDate;
                         sheet.Cells[row, 5] = invoice.Comment;
+                        total += invoice.AssignAmount;
                         row++;
                     }
+                    sheet.Cells[row, 1] = "小计";
+                    sheet.Cells[row, 2] = String.Format("{0:N2}", total);
 
-                    int invoiceEnd = row - 1;
-                    row++;
-                    row++;
+                    int invoiceEnd = row;
                     sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
-                    sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                    sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = "0.00";
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = "¥#,##0.00";
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 2], sheet.Cells[invoiceEnd, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                     sheet.get_Range(sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]).NumberFormatLocal = "yyyy/MM/dd";
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 3], sheet.Cells[invoiceEnd, 3]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                     sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "yyyy/MM/dd";
-                    sheet.get_Range(sheet.Cells[invoiceStart, 5], sheet.Cells[invoiceEnd, 5]).NumberFormatLocal = "0.00";
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 4], sheet.Cells[invoiceEnd, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 5], sheet.Cells[invoiceEnd, 5]).NumberFormatLocal = "¥#,##0.00";
+                    sheet.get_Range(sheet.Cells[invoiceStart, 5], sheet.Cells[invoiceEnd, 5]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                     sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
                 }
 
                 row++;
-                row++;
 
-                sheet.Cells[row, 1] = "本行已完成上述发票/贷项发票转让，特此通知";
-                sheet.Cells[row + 2, 3] = "中国民生银行       （业务章）";
-                sheet.Cells[row + 3, 3] = "签字：";
-                sheet.Cells[row + 4, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+                sheet.Cells[row + 1, 3] = "中国民生银行 贸易金融部保理业务部 （业务章）";
+                sheet.Cells[row + 2, 4] = "签字：";
+                sheet.Cells[row + 3, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
-                sheet.UsedRange.Font.Name = "楷体";
+                sheet.UsedRange.Font.Name = "仿宋";
+                sheet.UsedRange.Font.Size = 12;
+                sheet.get_Range(sheet.Cells[3, 2], sheet.Cells[3, 2]).Font.Size = 24;
 
-                sheet.get_Range("A1", Type.Missing).ColumnWidth = 15;
-                sheet.get_Range("B1", Type.Missing).ColumnWidth = 15;
-                sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
-                sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
-                sheet.get_Range("E1", Type.Missing).ColumnWidth = 15;
+                sheet.get_Range("A1", Type.Missing).ColumnWidth = 17;
+                sheet.get_Range("B1", Type.Missing).ColumnWidth = 17;
+                sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
+                sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
+                sheet.get_Range("E1", Type.Missing).ColumnWidth = 17;
                 app.Visible = true;
             }
         }
@@ -642,6 +649,11 @@ namespace CMBC.EasyFactor.Report
         /// <param name="e"></param>
         private void QueryInvoices(object sender, EventArgs e)
         {
+            if (!this.superValidator.Validate())
+            {
+                return;
+            }
+
             string sellerName = this.tbSeller.Text;
             string buyerName = this.tbBuyer.Text;
             string factorName = this.tbFactor.Text;

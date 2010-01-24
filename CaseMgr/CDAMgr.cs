@@ -27,7 +27,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// 
         /// </summary>
         private BindingSource bs;
-
         /// <summary>
         /// 
         /// </summary>
@@ -90,6 +89,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
+
+            this.UpdateContextMenu();
         }
 
         #endregion Constructors
@@ -116,9 +117,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Properties
 
-        #region Methods (13)
+        #region Methods (14)
 
-        // Private Methods (13) 
+        // Private Methods (14) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -603,6 +604,25 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 CDADetail cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.UPDATE_CDA);
                 cdaDetail.ShowDialog(this);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateContextMenu()
+        {
+            if (App.Current.CurUser.Role == "审核员")
+            {
+                this.menuItemCheck.Visible = true;
+                this.menuItemReject.Visible = true;
+                this.toolStripSeparator2.Visible = true;
+            }
+            else
+            {
+                this.menuItemCheck.Visible = false;
+                this.menuItemReject.Visible = false;
+                this.toolStripSeparator2.Visible = false;
             }
         }
 

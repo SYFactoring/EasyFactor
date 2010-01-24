@@ -108,6 +108,27 @@ namespace CMBC.EasyFactor.ARMgr
                 this.dateTo.Value = DateTime.Now.Date;
                 this.QueryBatch(null, null);
             }
+
+            this.UpdateContextMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateContextMenu()
+        {
+            if (App.Current.CurUser.Role == "审核员")
+            {
+                this.menuItemCheck.Visible = true;
+                this.menuItemReject.Visible = true;
+                this.toolStripSeparator2.Visible = true;
+            }
+            else
+            {
+                this.menuItemCheck.Visible = false;
+                this.menuItemReject.Visible = false;
+                this.toolStripSeparator2.Visible = false;
+            }
         }
 
         #endregion Constructors
@@ -359,10 +380,9 @@ namespace CMBC.EasyFactor.ARMgr
             Client seller = selectedBatch.CDA.Case.SellerClient;
             Client buyer = selectedBatch.CDA.Case.BuyerClient;
             sheet.Cells[2, 1] = String.Format("致： {0}", seller.ToString());
-            sheet.Cells[3, 2] = "应收账款转让明细表";
-            sheet.get_Range("A1", "A2").RowHeight = 20;
-            sheet.get_Range("B3", "B3").Font.Size = 24;
-            sheet.get_Range("A3", "A3").RowHeight = 30;
+            sheet.Cells[4, 2] = "应收账款转让明细表";
+            sheet.get_Range("A1", "A3").RowHeight = 20;
+            sheet.get_Range("A4", "A4").RowHeight = 30;
 
             Factor factor = null;
             switch (selectedBatch.CDA.Case.TransactionType)
@@ -382,10 +402,10 @@ namespace CMBC.EasyFactor.ARMgr
                     break;
             }
 
-            int row = 5;
+            int row = 6;
             sheet.Cells[row, 1] = "买方：";
             sheet.Cells[row++, 2] = String.Format("{0}（应收账款债务人）", buyer.ToString());
-            sheet.get_Range("B5", "B5").Font.Underline = true;
+            sheet.get_Range("B6", "B6").Font.Underline = true;
             if (factor != null)
             {
                 sheet.Cells[row, 1] = "进口保理商：";
@@ -430,8 +450,8 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range(sheet.Cells[invoiceStart, 5], sheet.Cells[invoiceEnd, 5]).NumberFormatLocal = "¥#,##0.00";
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 5], sheet.Cells[invoiceEnd, 5]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
-            sheet.get_Range("B6", "B6").NumberFormatLocal = "¥#,##0.00";
             sheet.get_Range("B7", "B7").NumberFormatLocal = "¥#,##0.00";
+            sheet.get_Range("B8", "B8").NumberFormatLocal = "¥#,##0.00";
 
             row++;
             row++;
@@ -439,15 +459,17 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Cells[row, 1] = "本行已完成上述发票/贷项发票转让，特此通知";
             sheet.Cells[row + 2, 3] = "中国民生银行 贸易金融事业部保理业务部 （业务章）";
             sheet.Cells[row + 4, 4] = "签字：";
-            sheet.Cells[row + 5, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+            sheet.Cells[row + 5, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
             sheet.UsedRange.Font.Name = "仿宋";
+            sheet.UsedRange.Font.Size = 12;
+            sheet.get_Range("B4", "B4").Font.Size = 24;
 
-            sheet.get_Range("A1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("B1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("E1", Type.Missing).ColumnWidth = 15;
+            sheet.get_Range("A1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("B1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("E1", Type.Missing).ColumnWidth = 17;
             app.Visible = true;
         }
 
@@ -473,7 +495,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-            string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSExport.png");
+            string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 30);
 
             Client seller = selectedBatch.CDA.Case.SellerClient;

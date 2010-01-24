@@ -97,6 +97,7 @@ namespace CMBC.EasyFactor.ARMgr
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
 
+            this.UpdateContextMenu();
         }
 
         #endregion Constructors
@@ -296,6 +297,24 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateContextMenu()
+        {
+            if (App.Current.CurUser.Role == "审核员")
+            {
+                this.menuItemCheck.Visible = true;
+                this.menuItemReject.Visible = true;
+                this.toolStripSeparator2.Visible = true;
+            }
+            else
+            {
+                this.menuItemCheck.Visible = false;
+                this.menuItemReject.Visible = false;
+                this.toolStripSeparator2.Visible = false;
+            }
+        }
         #endregion Methods
     }
 }

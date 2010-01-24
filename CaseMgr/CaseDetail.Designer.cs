@@ -33,8 +33,8 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.ButtonX btnCreditCoverNegSave;
         private DevComponents.DotNetBar.ButtonX btnCreditCoverNegUpdate;
         private System.Windows.Forms.BindingSource caseBindingSource;
-        private System.Windows.Forms.ErrorProvider caseErrorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter caseHighlighter;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private DevComponents.DotNetBar.Validator.SuperValidator caseValidator;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseCoDepts;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseInvoiceCurrency;
@@ -94,8 +94,6 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequestDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequestType;
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.ErrorProvider creditCoverErrorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter creditCoverHighlighter;
         private System.Windows.Forms.BindingSource creditCoverNegBindingSource;
         private DevComponents.DotNetBar.Validator.SuperValidator creditCoverValidator;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvCDAs;
@@ -320,16 +318,14 @@ namespace CMBC.EasyFactor.CaseMgr
             this.requiredFieldValidator13 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator7 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.caseErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.caseHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.requiredFieldValidator11 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.creditCoverValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.requiredFieldValidator8 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator6 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.creditCoverErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.creditCoverHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             requestAmountLabel = new DevComponents.DotNetBar.LabelX();
             replyAmountLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
@@ -369,8 +365,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tabPanelCDA.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCDAs)).BeginInit();
             this.groupPanelCDA.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.caseErrorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.creditCoverErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // requestAmountLabel
@@ -2175,8 +2170,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // caseValidator
             // 
             this.caseValidator.ContainerControl = this;
-            this.caseValidator.ErrorProvider = this.caseErrorProvider;
-            this.caseValidator.Highlighter = this.caseHighlighter;
+            this.caseValidator.ErrorProvider = this.errorProvider;
+            this.caseValidator.Highlighter = this.highlighter;
             // 
             // requiredFieldValidator3
             // 
@@ -2213,15 +2208,15 @@ namespace CMBC.EasyFactor.CaseMgr
             this.requiredFieldValidator7.ErrorMessage = "必填";
             this.requiredFieldValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // caseErrorProvider
+            // errorProvider
             // 
-            this.caseErrorProvider.ContainerControl = this;
-            this.caseErrorProvider.DataSource = this.caseBindingSource;
-            this.caseErrorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("caseErrorProvider.Icon")));
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.DataSource = this.caseBindingSource;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
             // 
-            // caseHighlighter
+            // highlighter
             // 
-            this.caseHighlighter.ContainerControl = this;
+            this.highlighter.ContainerControl = this;
             // 
             // regularExpressionValidator1
             // 
@@ -2238,8 +2233,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // creditCoverValidator
             // 
             this.creditCoverValidator.ContainerControl = this;
-            this.creditCoverValidator.ErrorProvider = this.creditCoverErrorProvider;
-            this.creditCoverValidator.Highlighter = this.creditCoverHighlighter;
+            this.creditCoverValidator.ErrorProvider = this.errorProvider;
+            this.creditCoverValidator.Highlighter = this.highlighter;
             // 
             // requiredFieldValidator8
             // 
@@ -2255,15 +2250,6 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.requiredFieldValidator5.ErrorMessage = "必填";
             this.requiredFieldValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // creditCoverErrorProvider
-            // 
-            this.creditCoverErrorProvider.ContainerControl = this;
-            this.creditCoverErrorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("creditCoverErrorProvider.Icon")));
-            // 
-            // creditCoverHighlighter
-            // 
-            this.creditCoverHighlighter.ContainerControl = this;
             // 
             // CaseDetail
             // 
@@ -2294,8 +2280,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tabPanelCDA.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCDAs)).EndInit();
             this.groupPanelCDA.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.caseErrorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.creditCoverErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
