@@ -7,6 +7,7 @@
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
@@ -59,7 +60,12 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            QUERY
+            QUERY,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            REPORT
         }
 
         #endregion Enums
@@ -91,12 +97,16 @@ namespace CMBC.EasyFactor.ARMgr
             this.opBatchType = batchType;
             ControlUtil.SetDoubleBuffered(this.dgvBatches);
 
-            if (batchType == OpBatchType.CHECK)
+            if (this.opBatchType == OpBatchType.CHECK)
             {
                 this.cbCheckStatus.Text = "未复核";
-                var queryResult = App.Current.DbContext.InvoiceAssignBatches.Where(i => i.CheckStatus == "未复核");
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                this.QueryBatch(null, null);
+            }
+            else if (this.opBatchType == OpBatchType.REPORT)
+            {
+                this.dateFrom.Value = DateTime.Now.Date;
+                this.dateTo.Value = DateTime.Now.Date;
+                this.QueryBatch(null, null);
             }
         }
 
@@ -252,25 +262,30 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
         {
-            if (this.opBatchType == OpBatchType.QUERY || this.opBatchType == OpBatchType.CHECK)
+            DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
+            DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
+            string status = this.cbCheckStatus.Text;
+
+            IEnumerable<InvoiceAssignBatch> queryResult = null;
+            if (this.opBatchType == OpBatchType.CHECK || this.opBatchType == OpBatchType.QUERY || this.opBatchType == OpBatchType.REPORT)
             {
-                DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
-                DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
-                string status = this.cbCheckStatus.Text;
-                var queryResult = App.Current.DbContext.InvoiceAssignBatches.Where(i =>
+                queryResult = App.Current.DbContext.InvoiceAssignBatches.Where(i =>
                     i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text)
                     && (beginDate != this.dateFrom.MinDate ? i.AssignDate >= beginDate : true)
                     && (endDate != this.dateTo.MinDate ? i.AssignDate <= endDate : true)
                     && (status != string.Empty ? i.CheckStatus == status : true));
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
             else if (this.opBatchType == OpBatchType.DETAIL)
             {
-                var queryResult = this.cda.InvoiceAssignBatches.Where(i => i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text));
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                queryResult = this.cda.InvoiceAssignBatches.Where(i =>
+                    i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text)
+                    && (beginDate != this.dateFrom.MinDate ? i.AssignDate >= beginDate : true)
+                    && (endDate != this.dateTo.MinDate ? i.AssignDate <= endDate : true)
+                    && (status != string.Empty ? i.CheckStatus == status : true));
             }
+            this.bs.DataSource = queryResult;
+            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+
         }
 
         /// <summary>
@@ -338,15 +353,16 @@ namespace CMBC.EasyFactor.ARMgr
             }
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-            string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSLOGO.png");
-            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 30);
+            string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
+            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
 
             Client seller = selectedBatch.CDA.Case.SellerClient;
             Client buyer = selectedBatch.CDA.Case.BuyerClient;
-            sheet.Cells[1, 1] = String.Format("致{0}", seller.ToString());
+            sheet.Cells[2, 1] = String.Format("致： {0}", seller.ToString());
             sheet.Cells[3, 2] = "应收账款转让明细表";
-            sheet.get_Range(sheet.Cells[3, 2], sheet.Cells[3, 2]).Font.Size = 24;
-            sheet.get_Range(sheet.Cells[3, 1], sheet.Cells[3, 5]).RowHeight = 30;
+            sheet.get_Range("A1", "A2").RowHeight = 20;
+            sheet.get_Range("B3", "B3").Font.Size = 24;
+            sheet.get_Range("A3", "A3").RowHeight = 30;
 
             Factor factor = null;
             switch (selectedBatch.CDA.Case.TransactionType)
@@ -369,15 +385,18 @@ namespace CMBC.EasyFactor.ARMgr
             int row = 5;
             sheet.Cells[row, 1] = "买方：";
             sheet.Cells[row++, 2] = String.Format("{0}（应收账款债务人）", buyer.ToString());
+            sheet.get_Range("B5", "B5").Font.Underline = true;
             if (factor != null)
             {
                 sheet.Cells[row, 1] = "进口保理商：";
                 sheet.Cells[row++, 2] = factor.ToString();
             }
             sheet.Cells[row, 1] = "信用风险额度：";
-            sheet.Cells[row++, 2] = String.Format("{0:N2} {1}", selectedBatch.CDA.CreditCover, TypeUtil.ToPrintCurrencyWord(selectedBatch.CDA.CreditCoverCurr));
+            sheet.Cells[row, 2] = String.Format("{0:N2}", selectedBatch.CDA.CreditCover);
+            sheet.Cells[row++, 3] = TypeUtil.ToPrintCurrencyWord(selectedBatch.CDA.CreditCoverCurr);
             sheet.Cells[row, 1] = "应收账款余额：";
-            sheet.Cells[row++, 2] = String.Format("{0:N2} {1}", selectedBatch.CDA.GetAssignOutstanding(selectedBatch.CDA.Case.InvoiceCurrency), TypeUtil.ToPrintCurrencyWord(selectedBatch.CDA.Case.InvoiceCurrency));
+            sheet.Cells[row, 2] = String.Format("{0:N2}", selectedBatch.CDA.GetAssignOutstanding(selectedBatch.CDA.Case.InvoiceCurrency));
+            sheet.Cells[row++, 3] = TypeUtil.ToPrintCurrencyWord(selectedBatch.CDA.Case.InvoiceCurrency);
 
             row++;
             sheet.Cells[row, 1] = "发票号";
@@ -402,25 +421,25 @@ namespace CMBC.EasyFactor.ARMgr
             row++;
             sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-            sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
+            sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = "¥#,##0.00";
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 2], sheet.Cells[invoiceEnd, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]).NumberFormatLocal = "yyyy/MM/dd";
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 3], sheet.Cells[invoiceEnd, 3]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "yyyy/MM/dd";
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 4], sheet.Cells[invoiceEnd, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-            sheet.get_Range(sheet.Cells[invoiceStart, 5], sheet.Cells[invoiceEnd, 5]).NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
+            sheet.get_Range(sheet.Cells[invoiceStart, 5], sheet.Cells[invoiceEnd, 5]).NumberFormatLocal = "¥#,##0.00";
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 5], sheet.Cells[invoiceEnd, 5]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
-            sheet.get_Range("B5", "B5").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
             sheet.get_Range("B6", "B6").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
+            sheet.get_Range("B7", "B7").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
 
             row++;
             row++;
 
             sheet.Cells[row, 1] = "本行已完成上述发票/贷项发票转让，特此通知";
-            sheet.Cells[row + 2, 3] = "中国民生银行       （业务章）";
-            sheet.Cells[row + 3, 3] = "签字：";
-            sheet.Cells[row + 4, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+            sheet.Cells[row + 2, 3] = "中国民生银行 贸易金融事业部保理业务部 （业务章）";
+            sheet.Cells[row + 4, 4] = "签字：";
+            sheet.Cells[row + 5, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
             sheet.UsedRange.Font.Name = "仿宋";
 
@@ -454,7 +473,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-            string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSLOGO.png");
+            string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 30);
 
             Client seller = selectedBatch.CDA.Case.SellerClient;
@@ -506,7 +525,7 @@ namespace CMBC.EasyFactor.ARMgr
             row++;
             sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-            sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
+            sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = "¥#,##0.00";
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 2], sheet.Cells[invoiceEnd, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]).NumberFormatLocal = "yyyy/MM/dd";
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 3], sheet.Cells[invoiceEnd, 3]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
@@ -556,8 +575,8 @@ namespace CMBC.EasyFactor.ARMgr
 
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-            string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSLOGO.png");
-            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 30);
+            string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
+            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
 
             Client seller = selectedBatch.CDA.Case.SellerClient;
             Client buyer = selectedBatch.CDA.Case.BuyerClient;
@@ -579,8 +598,8 @@ namespace CMBC.EasyFactor.ARMgr
                     break;
             }
 
-            sheet.Cells[1, 1] = String.Format("卖方：{0}", seller.ToString());
-            sheet.Cells[3, 3] = "保理费用明细表";
+            sheet.Cells[2, 1] = String.Format("卖方：{0}", seller.ToString());
+            sheet.Cells[3, 2] = "保理费用明细表";
 
             sheet.Cells[5, 1] = "买方";
             sheet.get_Range(sheet.Cells[5, 2], sheet.Cells[5, 5]).MergeCells = true;
@@ -627,13 +646,13 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.UsedRange.Font.Size = 12;
             sheet.UsedRange.Rows.RowHeight = 20;
 
-            sheet.get_Range(sheet.Cells[3, 3], sheet.Cells[3, 3]).Font.Size = 22;
-            sheet.get_Range(sheet.Cells[3, 1], sheet.Cells[3, 5]).RowHeight = 30;
+            sheet.get_Range("B3", "B3").Font.Size = 22;
+            sheet.get_Range("A3", "A3").RowHeight = 30;
 
-            sheet.get_Range("A8", "A8").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
-            sheet.get_Range("E8", "E8").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
-            sheet.get_Range("D9", "E9").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
-            sheet.get_Range("E11", "E11").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
+            sheet.get_Range("A8", "A8").NumberFormatLocal = "¥#,##0.00";
+            sheet.get_Range("E8", "E8").NumberFormatLocal = "¥#,##0.00";
+            sheet.get_Range("D9", "E9").NumberFormatLocal = "¥#,##0.00";
+            sheet.get_Range("E11", "E11").NumberFormatLocal = "¥#,##0.00";
 
             app.Visible = true;
         }

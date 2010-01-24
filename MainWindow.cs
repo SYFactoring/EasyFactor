@@ -727,8 +727,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ReportARPayment(object sender, EventArgs e)
         {
-            AssignReportMgr assignMgr = new AssignReportMgr(AssignReportMgr.OpReportType.REPORT_ASSIGN);
-            this.SetDetailPanel(assignMgr);
+            AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
+            this.SetDetailPanel(mgr);
         }
 
         /// <summary>
@@ -749,8 +749,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ReportFee(object sender, EventArgs e)
         {
-            AssignReportMgr reportMgr = new AssignReportMgr(AssignReportMgr.OpReportType.REPORT_FEE);
-            this.SetDetailPanel(reportMgr);
+            AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
+            this.SetDetailPanel(mgr);
         }
 
         /// <summary>

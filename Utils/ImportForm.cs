@@ -492,15 +492,15 @@ namespace CMBC.EasyFactor.Utils
         private int ImportClients(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
-
+            object[,] valueArray2 = this.GetValueArray(fileName, 2);
             int result = 0;
+            List<Client> clientList = new List<Client>();
 
-            if (valueArray != null)
+            try
             {
-                int size = valueArray.GetUpperBound(0);
-                List<Client> clientList = new List<Client>();
-                try
+                if (valueArray != null)
                 {
+                    int size = valueArray.GetUpperBound(0);
                     for (int row = 2; row <= size; row++)
                     {
                         if (worker.CancellationPending)
@@ -578,21 +578,34 @@ namespace CMBC.EasyFactor.Utils
                         result++;
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
-
-                    App.Current.DbContext.Clients.InsertAllOnSubmit(clientList);
-                    App.Current.DbContext.SubmitChanges();
                 }
-                catch (Exception e1)
+                if (valueArray2 != null)
                 {
-                    foreach (Client client in clientList)
+                    int size = valueArray.GetUpperBound(0);
+                    for (int row = 2; row <= size; row++)
                     {
-                        client.ClientGroup = null;
-                        client.Department = null;
-                    }
-                    throw e1;
-                }
-            }
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
 
+
+                    }
+                }
+
+                App.Current.DbContext.Clients.InsertAllOnSubmit(clientList);
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                foreach (Client client in clientList)
+                {
+                    client.ClientGroup = null;
+                    client.Department = null;
+                }
+                throw e1;
+            }
             worker.ReportProgress(100);
             this.workbook.Close(false, fileName, null);
             this.ReleaseResource();

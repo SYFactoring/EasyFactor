@@ -111,7 +111,6 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator11;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator12;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator13;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
@@ -200,6 +199,7 @@ namespace CMBC.EasyFactor.CaseMgr
             DevComponents.DotNetBar.LabelX lblPaymentTerm;
             DevComponents.DotNetBar.LabelX lblComment;
             DevComponents.DotNetBar.LabelX lblCaseCode;
+            DevComponents.DotNetBar.LabelX lblReview;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -210,6 +210,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.btnCaseReset = new DevComponents.DotNetBar.ButtonX();
             this.btnCaseSave = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.cbReviews = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tbCaseCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.caseBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cbCaseMark = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -313,16 +314,15 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tabItemCDA = new DevComponents.DotNetBar.TabItem(this.components);
             this.caseValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator12 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator13 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator7 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.caseErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.caseHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.requiredFieldValidator11 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.creditCoverValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.requiredFieldValidator8 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
@@ -353,6 +353,7 @@ namespace CMBC.EasyFactor.CaseMgr
             lblPaymentTerm = new DevComponents.DotNetBar.LabelX();
             lblComment = new DevComponents.DotNetBar.LabelX();
             lblCaseCode = new DevComponents.DotNetBar.LabelX();
+            lblReview = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPanelCase.SuspendLayout();
@@ -721,6 +722,21 @@ namespace CMBC.EasyFactor.CaseMgr
             lblCaseCode.TabIndex = 40;
             lblCaseCode.Text = "案件编号:";
             // 
+            // lblReview
+            // 
+            lblReview.AutoSize = true;
+            lblReview.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblReview.BackgroundStyle.Class = "";
+            lblReview.Location = new System.Drawing.Point(268, 224);
+            lblReview.Name = "lblReview";
+            lblReview.Size = new System.Drawing.Size(59, 16);
+            lblReview.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            lblReview.TabIndex = 43;
+            lblReview.Text = "协查意见:";
+            // 
             // tabControl
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
@@ -803,6 +819,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.groupPanelCase.AutoScroll = true;
             this.groupPanelCase.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCase.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelCase.Controls.Add(lblReview);
+            this.groupPanelCase.Controls.Add(this.cbReviews);
             this.groupPanelCase.Controls.Add(this.tbCaseCode);
             this.groupPanelCase.Controls.Add(lblCaseCode);
             this.groupPanelCase.Controls.Add(this.cbCaseMark);
@@ -876,6 +894,17 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.groupPanelCase.StyleMouseOver.Class = "";
             this.groupPanelCase.TabIndex = 0;
+            // 
+            // cbReviews
+            // 
+            this.cbReviews.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbReviews.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbReviews.ItemHeight = 14;
+            this.cbReviews.Location = new System.Drawing.Point(336, 222);
+            this.cbReviews.Name = "cbReviews";
+            this.cbReviews.Size = new System.Drawing.Size(137, 20);
+            this.cbReviews.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbReviews.TabIndex = 42;
             // 
             // tbCaseCode
             // 
@@ -1130,7 +1159,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCaseInvoiceCurrency.Size = new System.Drawing.Size(100, 20);
             this.cbCaseInvoiceCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbCaseInvoiceCurrency.TabIndex = 18;
-            this.caseValidator.SetValidator1(this.cbCaseInvoiceCurrency, this.requiredFieldValidator2);
             // 
             // btnCaseBuyerSelect
             // 
@@ -2155,13 +2183,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.requiredFieldValidator3.ErrorMessage = "必填";
             this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // regularExpressionValidator1
-            // 
-            this.regularExpressionValidator1.EmptyValueIsValid = true;
-            this.regularExpressionValidator1.ErrorMessage = "正确格式如下：FC20100001-0010SH-NY";
-            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.regularExpressionValidator1.ValidationExpression = "^[A-Z]{2}\\d{8}-\\d{4}[A-Z]{2,3}-[A-Z]{2}$";
-            // 
             // requiredFieldValidator1
             // 
             this.requiredFieldValidator1.ErrorMessage = "必填";
@@ -2182,11 +2203,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.requiredFieldValidator13.ErrorMessage = "必填";
             this.requiredFieldValidator13.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // requiredFieldValidator2
-            // 
-            this.requiredFieldValidator2.ErrorMessage = "必填";
-            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
             // requiredFieldValidator9
             // 
             this.requiredFieldValidator9.ErrorMessage = "必填";
@@ -2206,6 +2222,13 @@ namespace CMBC.EasyFactor.CaseMgr
             // caseHighlighter
             // 
             this.caseHighlighter.ContainerControl = this;
+            // 
+            // regularExpressionValidator1
+            // 
+            this.regularExpressionValidator1.EmptyValueIsValid = true;
+            this.regularExpressionValidator1.ErrorMessage = "正确格式如下：FC20100001-0010SH-NY";
+            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator1.ValidationExpression = "^[A-Z]{2}\\d{8}-\\d{4}[A-Z]{2,3}-[A-Z]{2}$";
             // 
             // requiredFieldValidator11
             // 
@@ -2277,5 +2300,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
         }
         #endregion
+
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbReviews;
     }
 }
