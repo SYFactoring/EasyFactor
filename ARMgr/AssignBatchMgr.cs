@@ -430,8 +430,8 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range(sheet.Cells[invoiceStart, 5], sheet.Cells[invoiceEnd, 5]).NumberFormatLocal = "¥#,##0.00";
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 5], sheet.Cells[invoiceEnd, 5]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
-            sheet.get_Range("B6", "B6").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
-            sheet.get_Range("B7", "B7").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
+            sheet.get_Range("B6", "B6").NumberFormatLocal = "¥#,##0.00";
+            sheet.get_Range("B7", "B7").NumberFormatLocal = "¥#,##0.00";
 
             row++;
             row++;

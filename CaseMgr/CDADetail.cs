@@ -186,14 +186,6 @@ namespace CMBC.EasyFactor.CaseMgr
                     this.cbIsCreditCoverRevolving.Enabled = true;
                 }
             }
-            //else if ("CreditCoverCurr".Equals(e.PropertyName))
-            //{
-            //    FillCreditCover(cda.CreditCoverCurr);
-            //}
-            //else if ("FinanceLineCurr".Equals(e.PropertyName))
-            //{
-            //    FillFinanceLine(cda.FinanceLineCurr);
-            //}
         }
 
         private void CDADetail_FormClosing(object sender, FormClosingEventArgs e)
