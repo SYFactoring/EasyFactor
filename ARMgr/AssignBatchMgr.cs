@@ -557,7 +557,7 @@ namespace CMBC.EasyFactor.ARMgr
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             string logoPath = Path.Combine(Environment.CurrentDirectory, "FOMSLOGO.png");
-            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 220, 3, 180, 30);
+            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 30);
 
             Client seller = selectedBatch.CDA.Case.SellerClient;
             Client buyer = selectedBatch.CDA.Case.BuyerClient;
@@ -586,52 +586,42 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range(sheet.Cells[5, 2], sheet.Cells[5, 5]).MergeCells = true;
             sheet.Cells[5, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
             sheet.Cells[6, 1] = "保理商";
-            sheet.get_Range(sheet.Cells[5, 2], sheet.Cells[5, 4]).MergeCells = true;
+            sheet.get_Range(sheet.Cells[5, 2], sheet.Cells[5, 3]).MergeCells = true;
             sheet.Cells[6, 2] = factor.ToString();
-            sheet.Cells[6, 5] = "币别";
-            sheet.Cells[6, 6] = selectedBatch.BatchCurrency;
-            sheet.Cells[7, 1] = "发票号码";
-            sheet.Cells[7, 2] = "发票金额";
+            sheet.Cells[6, 4] = "币别";
+            sheet.Cells[6, 5] = selectedBatch.BatchCurrency;
+            sheet.Cells[7, 1] = "本次转让金额";
+            sheet.Cells[7, 2] = "本次转让笔数";
             sheet.Cells[7, 3] = "转让日";
             sheet.Cells[7, 4] = "保理费率";
             sheet.Cells[7, 5] = "单据处理费";
-            sheet.Cells[7, 6] = "每笔费用";
+            sheet.Cells[8, 1] = selectedBatch.AssignAmount;
+            sheet.Cells[8, 2] = selectedBatch.Invoices.Count;
             sheet.Cells[8, 3] = selectedBatch.AssignDate;
             sheet.Cells[8, 4] = String.Format("{0:0.00%}", selectedBatch.CDA.Price);
             sheet.Cells[8, 5] = selectedBatch.CDA.HandFee;
             sheet.Cells[9, 1] = "小计";
 
-            double assignTotal = 0;
-            double commissionTotal = 0;
-            double handfeeTotal = selectedBatch.CDA.HandFee.GetValueOrDefault() * selectedBatch.Invoices.Count;
-            foreach (Invoice invoice in selectedBatch.Invoices)
-            {
-                assignTotal += invoice.AssignAmount;
-                commissionTotal += invoice.Commission.GetValueOrDefault();
-            }
+            sheet.Cells[9, 4] = selectedBatch.CommissionAmount;
+            sheet.Cells[9, 5] = selectedBatch.HandfeeAmount;
 
-            sheet.Cells[9, 2] = assignTotal;
-            sheet.Cells[9, 5] = handfeeTotal;
-            sheet.Cells[9, 6] = commissionTotal;
+            sheet.Cells[11, 4] = "费用总计";
+            sheet.Cells[11, 5] = selectedBatch.CommissionAmount + selectedBatch.HandfeeAmount;
 
-            sheet.Cells[11, 5] = "费用总计";
-            sheet.Cells[11, 6] = handfeeTotal + commissionTotal;
-
-            sheet.Cells[13, 1] = "制表：";
-            sheet.Cells[13, 3] = "复核：";
+            sheet.Cells[13, 1] = String.Format("制表：{0}", selectedBatch.CreateUserName);
+            sheet.Cells[13, 3] = String.Format("复核：{0}", selectedBatch.CheckUserName);
             sheet.Cells[13, 5] = "主管：";
-            sheet.Cells[15, 3] = "中国民生银行 贸易金融部保理业务部  （业务章）";
-            sheet.Cells[16, 5] = "签字";
-            sheet.Cells[17, 6] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+            sheet.Cells[15, 2] = "中国民生银行 贸易金融部保理业务部  （业务章）";
+            sheet.Cells[16, 4] = "签字";
+            sheet.Cells[17, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
-            sheet.get_Range("A1", Type.Missing).ColumnWidth = 10;
+            sheet.get_Range("A1", Type.Missing).ColumnWidth = 15;
             sheet.get_Range("B1", Type.Missing).ColumnWidth = 15;
             sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("D1", Type.Missing).ColumnWidth = 10;
+            sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
             sheet.get_Range("E1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("F1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("A5", "F9").Borders.LineStyle = 1;
-            sheet.get_Range("E11", "F11").Borders.LineStyle = 1;
+            sheet.get_Range("A5", "E9").Borders.LineStyle = 1;
+            sheet.get_Range("D11", "E11").Borders.LineStyle = 1;
 
             sheet.UsedRange.Font.Name = "仿宋";
             sheet.UsedRange.Font.Size = 12;
@@ -640,9 +630,10 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range(sheet.Cells[3, 3], sheet.Cells[3, 3]).Font.Size = 22;
             sheet.get_Range(sheet.Cells[3, 1], sheet.Cells[3, 5]).RowHeight = 30;
 
+            sheet.get_Range("A8", "A8").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
             sheet.get_Range("E8", "E8").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
-            sheet.get_Range("B9", "F9").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
-            sheet.get_Range("F11", "F11").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
+            sheet.get_Range("D9", "E9").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
+            sheet.get_Range("E11", "E11").NumberFormatLocal = "¥#,##0.00;¥-#,##0.00";
 
             app.Visible = true;
         }

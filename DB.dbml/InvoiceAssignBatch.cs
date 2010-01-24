@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceAssignBatch : BaseObject
     {
-        #region Properties (5)
+		#region Properties (7) 
 
         /// <summary>
         /// Gets
@@ -71,6 +71,40 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
+        public double? CommissionAmount
+        {
+            get
+            {
+                double? result = null;
+                foreach (Invoice invoice in this.Invoices)
+                {
+                    if (invoice.Commission.HasValue)
+                    {
+                        if (result.HasValue == false)
+                        {
+                            result = 0;
+                        }
+                        result += invoice.Commission;
+                    }
+                }
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public double? HandfeeAmount
+        {
+            get
+            {
+                return this.Invoices.Count * this.CDA.HandFee;
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
         public string SellerName
         {
             get
@@ -79,6 +113,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Properties
+		#endregion Properties 
     }
 }
