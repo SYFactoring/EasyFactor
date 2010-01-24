@@ -61,7 +61,7 @@
          <PropertyUISetting Name="DisputeType">
             <ControlSettings>
                <ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form">
-                  <BindableControlInfo Name="ComboBoxEx" Type="DevComponents.DotNetBar.Controls.ComboBoxEx" AssemblyName="DevComponents.DotNetBar2, Version=8.2.0.2, Culture=neutral, PublicKeyToken=5fd520d36328f741" AssemblyCodeBase="file:///D:/CMBC/FOMS/bin/Debug/DevComponents.DotNetBar2.dll" />
+                  <BindableControlInfo Name="ComboBoxEx" Type="DevComponents.DotNetBar.Controls.ComboBoxEx" AssemblyName="DevComponents.DotNetBar2, Version=8.2.0.2, Culture=neutral, PublicKeyToken=5fd520d36328f741" />
                </ControlSetting>
             </ControlSettings>
          </PropertyUISetting>

@@ -620,62 +620,175 @@ namespace CMBC.EasyFactor.ARMgr
                     break;
             }
 
-            sheet.Cells[2, 1] = String.Format("卖方：{0}", seller.ToString());
-            sheet.Cells[3, 2] = "保理费用明细表";
+            sheet.Cells[3, 1] = String.Format("卖方：{0}", seller.ToString());
+            sheet.get_Range("A5", "E5").MergeCells = true;
+            sheet.get_Range("A5", "A5").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            sheet.Cells[5, 1] = "保理费用明细表";
 
-            sheet.Cells[5, 1] = "买方";
-            sheet.get_Range(sheet.Cells[5, 2], sheet.Cells[5, 5]).MergeCells = true;
-            sheet.Cells[5, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
-            sheet.Cells[6, 1] = "保理商";
-            sheet.get_Range(sheet.Cells[5, 2], sheet.Cells[5, 3]).MergeCells = true;
-            sheet.Cells[6, 2] = factor.ToString();
-            sheet.Cells[6, 4] = "币别";
-            sheet.Cells[6, 5] = selectedBatch.BatchCurrency;
-            sheet.Cells[7, 1] = "本次转让金额";
-            sheet.Cells[7, 2] = "本次转让笔数";
-            sheet.Cells[7, 3] = "转让日";
-            sheet.Cells[7, 4] = "保理费率";
-            sheet.Cells[7, 5] = "单据处理费";
-            sheet.Cells[8, 1] = selectedBatch.AssignAmount;
-            sheet.Cells[8, 2] = selectedBatch.Invoices.Count;
-            sheet.Cells[8, 3] = selectedBatch.AssignDate;
-            sheet.Cells[8, 4] = String.Format("{0:0.00%}", selectedBatch.CDA.Price);
-            sheet.Cells[8, 5] = selectedBatch.CDA.HandFee;
-            sheet.Cells[9, 1] = "小计";
+            sheet.Cells[7, 1] = "买方";
+            sheet.get_Range(sheet.Cells[7, 2], sheet.Cells[7, 5]).MergeCells = true;
+            sheet.Cells[7, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
+            sheet.Cells[8, 1] = "保理商";
+            sheet.get_Range(sheet.Cells[8, 2], sheet.Cells[8, 3]).MergeCells = true;
+            sheet.Cells[8, 2] = factor.ToString();
+            sheet.Cells[8, 4] = "币别";
+            sheet.Cells[8, 5] = selectedBatch.BatchCurrency;
+            sheet.Cells[9, 1] = "本次转让金额";
+            sheet.Cells[9, 2] = "本次转让笔数";
+            sheet.Cells[9, 3] = "转让日";
+            sheet.Cells[9, 4] = "保理费率";
+            sheet.Cells[9, 5] = "单据处理费";
+            sheet.Cells[10, 1] = selectedBatch.AssignAmount;
+            sheet.Cells[10, 2] = selectedBatch.Invoices.Count;
+            sheet.Cells[10, 3] = selectedBatch.AssignDate;
+            sheet.Cells[10, 4] = String.Format("{0:0.00%}", selectedBatch.CDA.Price);
+            sheet.Cells[10, 5] = selectedBatch.CDA.HandFee;
+            sheet.Cells[11, 1] = "小计";
+            sheet.get_Range("A11", "A11").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
 
-            sheet.Cells[9, 4] = selectedBatch.CommissionAmount;
-            sheet.Cells[9, 5] = selectedBatch.HandfeeAmount;
+            sheet.Cells[11, 4] = selectedBatch.CommissionAmount;
+            sheet.Cells[11, 5] = selectedBatch.HandfeeAmount;
 
-            sheet.Cells[11, 4] = "费用总计";
-            sheet.Cells[11, 5] = selectedBatch.CommissionAmount + selectedBatch.HandfeeAmount;
+            sheet.Cells[13, 4] = "费用总计";
+            sheet.Cells[13, 5] = selectedBatch.CommissionAmount.GetValueOrDefault() + selectedBatch.HandfeeAmount.GetValueOrDefault();
 
-            sheet.Cells[13, 1] = String.Format("制表：{0}", selectedBatch.CreateUserName);
-            sheet.Cells[13, 3] = String.Format("复核：{0}", selectedBatch.CheckUserName);
-            sheet.Cells[13, 5] = "主管：";
-            sheet.Cells[15, 2] = "中国民生银行 贸易金融部保理业务部  （业务章）";
-            sheet.Cells[16, 4] = "签字";
-            sheet.Cells[17, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+            sheet.Cells[15, 1] = String.Format("制表：{0}", selectedBatch.CreateUserName);
+            sheet.Cells[15, 3] = String.Format("复核：{0}", selectedBatch.CheckUserName);
+            sheet.Cells[15, 5] = "主管：";
+            sheet.Cells[17, 3] = "中国民生银行 贸易金融部保理业务部  （业务章）";
+            sheet.Cells[18, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
-            sheet.get_Range("A1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("B1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("E1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("A5", "E9").Borders.LineStyle = 1;
-            sheet.get_Range("D11", "E11").Borders.LineStyle = 1;
+            sheet.get_Range("A1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("B1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("E1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("A7", "E11").Borders.LineStyle = 1;
+            sheet.get_Range("D13", "E13").Borders.LineStyle = 1;
 
             sheet.UsedRange.Font.Name = "仿宋";
             sheet.UsedRange.Font.Size = 12;
             sheet.UsedRange.Rows.RowHeight = 20;
 
-            sheet.get_Range("B3", "B3").Font.Size = 22;
+            sheet.get_Range("A5", "A5").Font.Size = 22;
+            sheet.get_Range("A1", "A4").RowHeight = 20;
+            sheet.get_Range("A5", "A5").RowHeight = 30;
+
+            sheet.get_Range("A10", "A10").NumberFormatLocal = "¥#,##0.00";
+            sheet.get_Range("E10", "E10").NumberFormatLocal = "¥#,##0.00";
+            sheet.get_Range("D11", "E11").NumberFormatLocal = "¥#,##0.00";
+            sheet.get_Range("E13", "E13").NumberFormatLocal = "¥#,##0.00";
+
+            app.Visible = true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReportFlaw(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+            if (app == null)
+            {
+                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
+            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
+
+            Client seller = selectedBatch.CDA.Case.SellerClient;
+            Client buyer = selectedBatch.CDA.Case.BuyerClient;
+            Factor factor = null;
+            switch (selectedBatch.CDA.Case.TransactionType)
+            {
+                case "国内卖方保理":
+                case "国内信保保理":
+                case "国内买方保理":
+                case "租赁保理":
+                    factor = selectedBatch.CDA.Case.SellerFactor;
+                    break;
+                case "国际信保保理":
+                case "出口保理":
+                case "进口保理":
+                    factor = selectedBatch.CDA.Case.BuyerFactor;
+                    break;
+                default:
+                    break;
+            }
+
+            sheet.get_Range("A3", "G3").MergeCells = true;
+            sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            sheet.Cells[3, 1] = "文件瑕疵通知书";
+
+            sheet.get_Range(sheet.Cells[5, 1], sheet.Cells[5, 4]).MergeCells = true;
+            sheet.Cells[5, 1] = "卖方（出口商)";
+            sheet.get_Range(sheet.Cells[5, 5], sheet.Cells[5, 7]).MergeCells = true;
+            sheet.Cells[5, 5] = "买方(应收账款债务人)";
+            sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[6, 4]).MergeCells = true;
+            sheet.Cells[6, 1] = seller.ToString();
+            sheet.get_Range(sheet.Cells[6, 5], sheet.Cells[6, 7]).MergeCells = true;
+            sheet.Cells[6, 5] = buyer.ToString();
+            sheet.Cells[7, 1] = "保理部作业组";
+
+            int row = 9;
+            sheet.Cells[row, 1] = "";
+            sheet.Cells[row, 2] = "发票号码";
+            sheet.Cells[row, 3] = "发票金额";
+            sheet.Cells[row, 4] = "发票日期";
+            sheet.Cells[row, 5] = "到期日";
+            sheet.Cells[row, 6] = "瑕疵金额";
+            sheet.Cells[row, 7] = "原因";
+            row++;
+            for (int i = 1; i <= selectedBatch.Invoices.Count; i++)
+            {
+                Invoice invoice = selectedBatch.Invoices[i - 1];
+                sheet.Cells[row, 1] = i;
+                sheet.Cells[row, 2] = "'" + invoice.InvoiceNo;
+                sheet.Cells[row, 3] = invoice.AssignAmount;
+                sheet.Cells[row, 4] = invoice.InvoiceDate;
+                sheet.Cells[row, 5] = invoice.DueDate;
+                sheet.Cells[row, 6] = invoice.InvoiceAmount;
+                sheet.Cells[row, 7] = invoice.FlawReason;
+                row++;
+            }
+
+            sheet.get_Range(sheet.Cells[9, 1], sheet.Cells[row - 1, 7]).Borders.LineStyle = 1;
+            sheet.get_Range(sheet.Cells[9, 1], sheet.Cells[row - 1, 6]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            sheet.get_Range(sheet.Cells[10, 3], sheet.Cells[row - 1, 3]).NumberFormatLocal = "¥#,##0.00";
+            sheet.get_Range(sheet.Cells[10, 6], sheet.Cells[row - 1, 6]).NumberFormatLocal = "¥#,##0.00";
+
+            sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
+            sheet.Cells[row, 1] = "原因：";
+            row++;
+            sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
+            sheet.Cells[row, 1] = "8个原因";
+            row++;
+
+            sheet.UsedRange.Font.Name = "仿宋";
+            sheet.UsedRange.Font.Size = 12;
+            sheet.get_Range("A1", "A2").RowHeight = 20;
             sheet.get_Range("A3", "A3").RowHeight = 30;
 
-            sheet.get_Range("A8", "A8").NumberFormatLocal = "¥#,##0.00";
-            sheet.get_Range("E8", "E8").NumberFormatLocal = "¥#,##0.00";
-            sheet.get_Range("D9", "E9").NumberFormatLocal = "¥#,##0.00";
-            sheet.get_Range("E11", "E11").NumberFormatLocal = "¥#,##0.00";
-
+            sheet.get_Range("A5", "G6").Borders.LineStyle = 1;
+            sheet.get_Range("A1", Type.Missing).ColumnWidth = 2;
+            sheet.get_Range("B1", Type.Missing).ColumnWidth = 15;
+            sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
+            sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
+            sheet.get_Range("E1", Type.Missing).ColumnWidth = 15;
+            sheet.get_Range("F1", Type.Missing).ColumnWidth = 15;
+            sheet.get_Range("G1", Type.Missing).ColumnWidth = 17;
             app.Visible = true;
         }
     }

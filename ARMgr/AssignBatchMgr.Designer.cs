@@ -125,6 +125,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemAssignReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemFinanceReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCommissionReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFlawReport = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -493,9 +494,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.toolStripSeparator3,
             this.menuItemAssignReport,
             this.menuItemFinanceReport,
-            this.menuItemCommissionReport});
+            this.menuItemCommissionReport,
+            this.menuItemFlawReport});
             this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(183, 220);
+            this.cmuBatchMgr.Size = new System.Drawing.Size(183, 242);
             // 
             // menuItemBatchSelect
             // 
@@ -559,6 +561,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemFinanceReport.Name = "menuItemFinanceReport";
             this.menuItemFinanceReport.Size = new System.Drawing.Size(182, 22);
             this.menuItemFinanceReport.Text = "可融资账款明细表";
+            this.menuItemFinanceReport.Visible = false;
             this.menuItemFinanceReport.Click += new System.EventHandler(this.ReportFinance);
             // 
             // menuItemCommissionReport
@@ -567,6 +570,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemCommissionReport.Size = new System.Drawing.Size(182, 22);
             this.menuItemCommissionReport.Text = "保理费用明细表";
             this.menuItemCommissionReport.Click += new System.EventHandler(this.ReportCommission);
+            // 
+            // menuItemFlawReport
+            // 
+            this.menuItemFlawReport.Name = "menuItemFlawReport";
+            this.menuItemFlawReport.Size = new System.Drawing.Size(182, 22);
+            this.menuItemFlawReport.Text = "瑕疵通知书";
+            this.menuItemFlawReport.Click += new System.EventHandler(this.ReportFlaw);
             // 
             // AssignBatchMgr
             // 
@@ -588,5 +598,7 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion
+
+        private System.Windows.Forms.ToolStripMenuItem menuItemFlawReport;
     }
 }

@@ -7,9 +7,11 @@
 namespace CMBC.EasyFactor
 {
     using System;
+    using System.Collections.Generic;
     using System.Windows.Forms;
     using CMBC.EasyFactor.ARMgr;
     using CMBC.EasyFactor.CaseMgr;
+    using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Help.About;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.DepartmentMgr;
@@ -18,8 +20,7 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.Report;
     using CMBC.EasyFactor.Utils;
-    using System.Collections.Generic;
-    using CMBC.EasyFactor.DB.dbml;
+    using System.Reflection;
 
     /// <summary>
     /// Main Window Form
@@ -36,6 +37,7 @@ namespace CMBC.EasyFactor
             this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
 
+            this.Text = "中国民生银行保理运营系统(发布版)  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
             this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
@@ -771,7 +773,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ReportInvoiceFlaw(object sender, EventArgs e)
         {
-            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE);
+            AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
             this.SetDetailPanel(mgr);
         }
 

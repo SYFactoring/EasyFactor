@@ -301,8 +301,6 @@ namespace CMBC.EasyFactor.Utils
         private object[,] GetValueArray(string fileName, int sheetIndex)
         {
             this.ReleaseResource();
-
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             this.app = new ApplicationClass() { Visible = false };
             if (this.app == null)
             {

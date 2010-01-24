@@ -203,7 +203,6 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportAssignByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -321,7 +320,6 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportCreditNotes(IList creditNoteList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -450,7 +448,6 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportFinanceByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -566,7 +563,6 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportInvoicesFull(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -800,7 +796,6 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportInvoicesOverDue(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -926,7 +921,6 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportPaymentByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -1038,7 +1032,6 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportRefundByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
