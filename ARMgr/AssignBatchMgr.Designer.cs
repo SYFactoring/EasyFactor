@@ -561,7 +561,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemFinanceReport.Name = "menuItemFinanceReport";
             this.menuItemFinanceReport.Size = new System.Drawing.Size(182, 22);
             this.menuItemFinanceReport.Text = "可融资账款明细表";
-            this.menuItemFinanceReport.Visible = false;
             this.menuItemFinanceReport.Click += new System.EventHandler(this.ReportFinance);
             // 
             // menuItemCommissionReport

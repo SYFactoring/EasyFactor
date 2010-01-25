@@ -365,6 +365,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            if (selectedBatch.CheckStatus != "已审核")
+            {
+                MessageBox.Show("该批次状态不属于已审核，不能生成报表", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -486,6 +491,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            if (selectedBatch.CheckStatus != "已审核")
+            {
+                MessageBox.Show("该批次状态不属于已审核，不能生成报表", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -587,6 +597,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            if (selectedBatch.CheckStatus != "已审核")
+            {
+                MessageBox.Show("该批次状态不属于已审核，不能生成报表", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -695,6 +710,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            if (selectedBatch.CheckStatus != "已审核")
+            {
+                MessageBox.Show("该批次状态不属于已审核，不能生成报表", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)

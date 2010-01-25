@@ -590,13 +590,6 @@ namespace CMBC.EasyFactor.ARMgr
             if (isSaveOK)
             {
                 MessageBox.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                foreach (InvoicePaymentLog log in logList)
-                {
-                    Invoice invoice = log.Invoice;
-                    invoice.PaymentAmount2 = null;
-                }
-
-                App.Current.DbContext.SubmitChanges();
                 this.caseBasic.CaculateOutstanding(this._CDA);
                 if (refundList.Count > 0)
                 {
@@ -671,6 +664,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         private bool ValidateBatch()
         {
+            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.batchBindingSource.DataSource;
             IList invoiceList = this.invoiceBindingSource.List;
 
             for (int i = 0; i < invoiceList.Count; i++)
@@ -684,7 +678,20 @@ namespace CMBC.EasyFactor.ARMgr
                         return false;
                     }
 
-                }
+                    if (TypeUtil.GreaterZero(invoice.PaymentAmount2 - invoice.FinanceOutstanding))
+                    {
+                        if (batch.PaymentType == "贷项通知")
+                        {
+                            MessageBox.Show("账款调整金额大于融资余额，需要求客户偿还融资款差额后，才可调整: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return false;
+                        }
+                        if (batch.PaymentType == "卖方回购")
+                        {
+                            MessageBox.Show("回购金额大于融资余额，需要求客户偿还融资款差额后，才可调整: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return false;
+                        }
+                    }
+                 }
             }
             return true;
         }
