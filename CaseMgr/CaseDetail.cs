@@ -22,21 +22,20 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CaseDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (2)
+		#region Fields (2) 
 
         /// <summary>
         /// Operation type of Case
         /// </summary>
         private OpCaseType opCaseType;
-
         /// <summary>
         /// Operation type of Credit Cover Negotiation
         /// </summary>
         private OpCreditCoverNegType opCreditCoverNegType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (2)
+		#region Enums (2) 
 
         /// <summary>
         /// Operation types of Credit Cover Negotiation
@@ -58,8 +57,7 @@ namespace CMBC.EasyFactor.CaseMgr
             /// </summary>
             DETAIL_CREDIT_COVER_NEG
         }
-
-        /// <summary>
+/// <summary>
         /// Operation types of Case
         /// </summary>
         public enum OpCaseType
@@ -80,11 +78,11 @@ namespace CMBC.EasyFactor.CaseMgr
             DETAIL_CASE,
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (4)
+		#region Constructors (4) 
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the CaseDetail class
         /// </summary>
         /// <param name="curCase">Selected case</param>
@@ -100,8 +98,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCaseInvoiceCurrency.DataSource = Currency.AllCurrencies().ToList();
             this.cbCaseInvoiceCurrency.DisplayMember = "CurrencyFormat";
             this.cbCaseInvoiceCurrency.ValueMember = "CurrencyCode";
-
-            this.cbCaseTransactionType.DataSource = Case.ConstantTransTypes();
 
             this.cbCaseCoDepts.DataSource = Department.AllDepartments("贸易金融事业部").ToList();
             this.cbCaseCoDepts.ValueMember = "DepartmentCode";
@@ -122,6 +118,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 curCase = new Case();
                 curCase.CreateUserName = App.Current.CurUser.Name;
                 curCase.CaseAppDate = DateTime.Now.Date;
+                curCase.OperationType = "自营";
+                curCase.CaseMark = "申请案";
                 this.caseBindingSource.DataSource = curCase;
             }
             else
@@ -157,7 +155,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 curCase.Backup();
             }
 
-            curCase.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(this.curCase_PropertyChanged);
             this.UpdateCaseControlStatus();
             this.UpdateCreditCoverNegControlStatus();
 
@@ -204,11 +201,11 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (26)
+		#region Methods (26) 
 
-        // Private Methods (26) 
+		// Private Methods (26) 
 
         /// <summary>
         /// 
@@ -293,56 +290,56 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void curCase_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void CaseTransactionTypeChanged(object sender, EventArgs e)
         {
-            if ("TransactionType".Equals(e.PropertyName))
-            {
-                Case curCase = sender as Case;
-                Factor cmbc = Factor.FindFactorByCode(Factor.CMBC_CODE);
-                switch (curCase.TransactionType)
-                {
-                    case "国内卖方保理":
-                    case "国内买方保理":
-                    case "租赁保理":
-                        this.btnCaseFactorSelect.Enabled = false;
-                        curCase.SellerFactor = cmbc;
-                        curCase.BuyerFactor = cmbc;
-                        curCase.InvoiceCurrency = "CNY";
-                        this.cbCaseInvoiceCurrency.Enabled = false;
-                        break;
-                    case "出口保理":
-                        this.btnCaseFactorSelect.Enabled = true;
-                        curCase.SellerFactor = cmbc;
-                        curCase.InvoiceCurrency = "USD";
-                        this.cbCaseInvoiceCurrency.Enabled = true;
-                        break;
-                    case "进口保理":
-                        this.btnCaseFactorSelect.Enabled = true;
-                        curCase.BuyerFactor = cmbc;
-                        curCase.InvoiceCurrency = "USD";
-                        this.cbCaseInvoiceCurrency.Enabled = true;
-                        break;
-                    case "国际信保保理":
-                        this.btnCaseFactorSelect.Enabled = true;
-                        curCase.SellerFactor = cmbc;
-                        curCase.InvoiceCurrency = "USD";
-                        this.cbCaseInvoiceCurrency.Enabled = true;
-                        break;
-                    case "国内信保保理":
-                        this.btnCaseFactorSelect.Enabled = true;
-                        curCase.SellerFactor = cmbc;
-                        curCase.InvoiceCurrency = "CNY";
-                        this.cbCaseInvoiceCurrency.Enabled = false;
-                        break;
-                    default: break;
-                }
+            string transactionType = this.cbCaseTransactionType.Text;
 
-                if (!"进口保理".Equals(curCase.TransactionType) && curCase.SellerClient != null)
+            Case curCase = (Case)this.caseBindingSource.DataSource;
+
+            Factor cmbc = Factor.FindFactorByCode(Factor.CMBC_CODE);
+            switch (transactionType)
+            {
+                case "国内卖方保理":
+                case "国内买方保理":
+                case "租赁保理":
+                    this.btnCaseFactorSelect.Enabled = false;
+                    curCase.SellerFactor = cmbc;
+                    curCase.BuyerFactor = cmbc;
+                    curCase.InvoiceCurrency = "CNY";
+                    this.cbCaseInvoiceCurrency.Enabled = false;
+                    break;
+                case "出口保理":
+                    this.btnCaseFactorSelect.Enabled = true;
+                    curCase.SellerFactor = cmbc;
+                    curCase.InvoiceCurrency = "USD";
+                    this.cbCaseInvoiceCurrency.Enabled = true;
+                    break;
+                case "进口保理":
+                    this.btnCaseFactorSelect.Enabled = true;
+                    curCase.BuyerFactor = cmbc;
+                    curCase.InvoiceCurrency = "USD";
+                    this.cbCaseInvoiceCurrency.Enabled = true;
+                    break;
+                case "国际信保保理":
+                    this.btnCaseFactorSelect.Enabled = true;
+                    curCase.SellerFactor = cmbc;
+                    curCase.InvoiceCurrency = "USD";
+                    this.cbCaseInvoiceCurrency.Enabled = true;
+                    break;
+                case "国内信保保理":
+                    this.btnCaseFactorSelect.Enabled = true;
+                    curCase.SellerFactor = cmbc;
+                    curCase.InvoiceCurrency = "CNY";
+                    this.cbCaseInvoiceCurrency.Enabled = false;
+                    break;
+                default: break;
+            }
+
+            if (!"进口保理".Equals(curCase.TransactionType) && curCase.SellerClient != null)
+            {
+                if (curCase.SellerClient.Contract == null)
                 {
-                    if (curCase.SellerClient.Contract == null)
-                    {
-                        curCase.SellerClient = null;
-                    }
+                    curCase.SellerClient = null;
                 }
             }
         }
@@ -1034,7 +1031,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbCaseBuyerNo.ReadOnly = true;
             this.tbCaseBuyerNameCN.ReadOnly = true;
             this.tbCaseBuyerNameEN.ReadOnly = true;
-            this.tbCaseCode.ReadOnly = true;
+            this.tbCaseFactorCode.ReadOnly = true;
             this.tbCaseFactorNameCN.ReadOnly = true;
             this.tbCaseFactorNameEN.ReadOnly = true;
         }
@@ -1092,7 +1089,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbCreateUserName.ReadOnly = true;
         }
 
-        #endregion Methods
-
+		#endregion Methods 
     }
 }

@@ -106,6 +106,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 this.dateFrom.Value = DateTime.Now.Date;
                 this.dateTo.Value = DateTime.Now.Date;
+                this.cbCheckStatus.Text = "已复核";
                 this.QueryBatch(null, null);
             }
 

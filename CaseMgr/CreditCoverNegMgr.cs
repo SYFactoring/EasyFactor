@@ -42,9 +42,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCreditCoverNegs.DataSource = this.bs;
             ControlUtil.SetDoubleBuffered(this.dgvCreditCoverNegs);
 
-            List<string> transTypes = Case.ConstantTransTypes().ToList();
-            transTypes.Insert(0, "全部");
-            this.cbTransactionType.DataSource = transTypes;
+            this.cbTransactionType.Items.Insert(0, "全部");
+            this.cbTransactionType.Text = "全部";
 
             List<Department> deptsList = Department.AllDepartments().ToList();
             deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });

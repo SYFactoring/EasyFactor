@@ -25,32 +25,26 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// 
         /// </summary>
         private BindingSource bsContracts;
-
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bsCreditLines;
-
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bsReviews;
-
         /// <summary>
         /// 
         /// </summary>
         private OpClientCreditLineType opClientCreditLineType;
-
         /// <summary>
         /// 
         /// </summary>
         private OpClientType opClientType;
-
         /// <summary>
         /// 
         /// </summary>
         private OpContractType opContractType;
-
         /// <summary>
         /// 
         /// </summary>
@@ -80,7 +74,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT_CREDIT_LINE
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -101,7 +94,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CONTRACT
         }
-
         /// <summary>
         /// Operation Type 
         /// </summary>
@@ -122,7 +114,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT
         }
-
         /// <summary>
         /// Review Type
         /// </summary>
@@ -316,9 +307,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Constructors
 
-        #region Methods (38)
+        #region Methods (39)
 
-        // Private Methods (38) 
+        // Private Methods (39) 
 
         /// <summary>
         /// 
@@ -396,6 +387,24 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         client.ClientGroup = null;
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
+            if (!TypeUtil.GreaterZero(creditLine.CreditLine))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
             }
         }
 
@@ -638,7 +647,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 Contract contract = this.contractBindingSource.DataSource as Contract;
                 contract.ContractValueDate = this.diContractValueDate.Value.Date;
-                contract.ContractDueDate = this.diContractValueDate.Value.Date.AddYears(1);
+                contract.ContractDueDate = this.diContractValueDate.Value.Date.AddYears(2);
             }
         }
 

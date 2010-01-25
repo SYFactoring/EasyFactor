@@ -93,6 +93,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientMgr(bool isContract):this()
         {
             this.cbIsContractSigned.Checked = true;
+            this.cbIsContractSigned.Enabled = false;
             this.QueryClients(null, null);
         }
 

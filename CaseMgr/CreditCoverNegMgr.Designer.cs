@@ -299,6 +299,13 @@
             this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
             this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbTransactionType.TabIndex = 27;
+            this.cbTransactionType.Items.AddRange(new string[]{"国内卖方保理",
+            "国内买方保理",
+            "出口保理",
+            "进口保理",
+            "国内信保保理",
+            "国际信保保理",
+            "租赁保理"});
             // 
             // lblTransactionType
             // 
