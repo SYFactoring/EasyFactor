@@ -189,7 +189,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
                 {
-                    invoice.RefundAmount2 = Math.Min(invoice.FinanceOutstanding, invoice.PaymentAmount2);
+                    invoice.RefundAmount2 = Math.Min(invoice.FinanceOutstanding.GetValueOrDefault(), invoice.PaymentAmount2.GetValueOrDefault());
                     this.ResetRow(e.RowIndex, true);
                 }
                 else
