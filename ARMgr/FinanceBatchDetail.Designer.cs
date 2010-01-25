@@ -558,7 +558,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.checkDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.checkDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.checkDateDateTimePicker.ButtonFreeText.Checked = true;
             this.checkDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "CheckDate", true));
+            this.checkDateDateTimePicker.FreeTextEntryMode = true;
             this.checkDateDateTimePicker.Location = new System.Drawing.Point(113, 314);
             // 
             // 
@@ -719,7 +721,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.financePeriodEndDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.financePeriodEndDateTimePicker.ButtonDropDown.Visible = true;
+            this.financePeriodEndDateTimePicker.ButtonFreeText.Checked = true;
             this.financePeriodEndDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "FinancePeriodEnd", true));
+            this.financePeriodEndDateTimePicker.FreeTextEntryMode = true;
             this.financePeriodEndDateTimePicker.Location = new System.Drawing.Point(277, 74);
             // 
             // 
@@ -753,7 +757,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.financePeriodBeginDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.financePeriodBeginDateTimePicker.ButtonDropDown.Visible = true;
+            this.financePeriodBeginDateTimePicker.ButtonFreeText.Checked = true;
             this.financePeriodBeginDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "FinancePeriodBegin", true));
+            this.financePeriodBeginDateTimePicker.FreeTextEntryMode = true;
             this.financePeriodBeginDateTimePicker.Location = new System.Drawing.Point(114, 74);
             // 
             // 

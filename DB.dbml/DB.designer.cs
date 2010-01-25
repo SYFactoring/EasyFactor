@@ -11650,6 +11650,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private double _ExchangeRate;
 		
+		private System.DateTime _LastModifiedDate;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -11660,6 +11662,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnToCurrChanged();
     partial void OnExchangeRateChanging(double value);
     partial void OnExchangeRateChanged();
+    partial void OnLastModifiedDateChanging(System.DateTime value);
+    partial void OnLastModifiedDateChanged();
     #endregion
 		
 		public Exchange()
@@ -11723,6 +11727,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._ExchangeRate = value;
 					this.SendPropertyChanged("ExchangeRate");
 					this.OnExchangeRateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_LastModifiedDate", DbType="DateTime")]
+		public System.DateTime LastModifiedDate
+		{
+			get
+			{
+				return this._LastModifiedDate;
+			}
+			set
+			{
+				if ((this._LastModifiedDate != value))
+				{
+					this.OnLastModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastModifiedDate = value;
+					this.SendPropertyChanged("LastModifiedDate");
+					this.OnLastModifiedDateChanged();
 				}
 			}
 		}

@@ -442,7 +442,9 @@
             // 
             this.checkDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.checkDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.checkDateDateTimePicker.ButtonFreeText.Checked = true;
             this.checkDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "CheckDate", true));
+            this.checkDateDateTimePicker.FreeTextEntryMode = true;
             this.checkDateDateTimePicker.Location = new System.Drawing.Point(116, 275);
             // 
             // 
@@ -517,7 +519,9 @@
             // 
             this.paymentDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.paymentDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.paymentDateDateTimePicker.ButtonFreeText.Checked = true;
             this.paymentDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "PaymentDate", true));
+            this.paymentDateDateTimePicker.FreeTextEntryMode = true;
             this.paymentDateDateTimePicker.Location = new System.Drawing.Point(116, 78);
             // 
             // 

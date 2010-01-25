@@ -208,6 +208,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     this.tbGroupNameCN.Text = client.ClientGroup.ClientNameCN;
                     this.tbGroupNameEN.Text = client.ClientGroup.ClientNameEN;
+                    this.btnGroupCreditLineSelect.Enabled = true;
                 }
 
                 client.Backup();
@@ -745,7 +746,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (this.opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
                 ClientCreditLine creditLine = this.clientCreditLineBindingSource.DataSource as ClientCreditLine;
-                creditLine.PeriodBegin = this.periodBeginDateTimePicker.Value;
+                creditLine.PeriodBegin = this.periodBeginDateTimePicker.Value.Date;
                 creditLine.PeriodEnd = this.periodBeginDateTimePicker.Value.AddYears(1);
             }
         }
@@ -1261,6 +1262,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void SelectGroupCreditLine(object sender, EventArgs e)
         {
             Client client = (Client)this.clientBindingSource.DataSource;
+            if (client.ClientGroup == null)
+            {
+                return;
+            }
+
             ClientCreditLineMgr mgr = new ClientCreditLineMgr(client.ClientGroup);
             QueryForm queryFrom = new QueryForm(mgr, "选择集团额度");
             mgr.OwnerForm = queryFrom;
@@ -1504,8 +1510,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
-
-                this.btnGroupCreditLineSelect.Visible = false;
             }
             else if (this.opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
@@ -1521,7 +1525,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.unfreezeReasonTextBox.ReadOnly = true;
                 this.unfreezerTextBox.ReadOnly = true;
                 this.unfreezeDateDateTimePicker.Enabled = false;
-                this.btnGroupCreditLineSelect.Visible = true;
             }
             else if (this.opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
             {
@@ -1537,8 +1540,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.unfreezeReasonTextBox.ReadOnly = true;
                 this.unfreezerTextBox.ReadOnly = true;
                 this.unfreezeDateDateTimePicker.Enabled = false;
-                this.btnGroupCreditLineSelect.Visible = true;
             }
+            this.tbGroupCreditLine.ReadOnly = true;
+            this.tbGroupCreditLineCurr.ReadOnly = true;
         }
 
         /// <summary>

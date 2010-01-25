@@ -13,12 +13,6 @@ namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
     {
         #region Fields (5)
 
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private System.Windows.Forms.DataGridViewTextBoxColumn colExchangeRate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFromCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colToCurr;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvExchange;
 
@@ -52,11 +46,13 @@ namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvExchange = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colFromCurr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colToCurr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExchangeRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLastModifiedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExchange)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,15 +65,16 @@ namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
             this.dgvExchange.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colFromCurr,
             this.colToCurr,
-            this.colExchangeRate});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvExchange.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colExchangeRate,
+            this.colLastModifiedDate});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvExchange.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvExchange.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvExchange.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvExchange.Location = new System.Drawing.Point(0, 0);
@@ -103,9 +100,19 @@ namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
             // colExchangeRate
             // 
             this.colExchangeRate.DataPropertyName = "ExchangeRate";
-            this.colExchangeRate.HeaderText = "换算率";
+            this.colExchangeRate.HeaderText = "汇率";
             this.colExchangeRate.Name = "colExchangeRate";
             this.colExchangeRate.ReadOnly = true;
+            // 
+            // colLastModifiedDate
+            // 
+            this.colLastModifiedDate.DataPropertyName = "LastModifiedDate";
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colLastModifiedDate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colLastModifiedDate.HeaderText = "更新日期";
+            this.colLastModifiedDate.Name = "colLastModifiedDate";
+            this.colLastModifiedDate.ReadOnly = true;
             // 
             // ExchangeMgr
             // 
@@ -120,5 +127,10 @@ namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFromCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colToCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colExchangeRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLastModifiedDate;
     }
 }

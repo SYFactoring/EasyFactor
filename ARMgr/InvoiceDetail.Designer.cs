@@ -974,10 +974,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelInvoice);
-            this.tabControl.Controls.Add(this.tabPanelFlaw);
-            this.tabControl.Controls.Add(this.tabControlPanelDispute);
             this.tabControl.Controls.Add(this.tabPanelEDI);
+            this.tabControl.Controls.Add(this.tabControlPanelDispute);
+            this.tabControl.Controls.Add(this.tabPanelFlaw);
+            this.tabControl.Controls.Add(this.tabPanelInvoice);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -1179,7 +1179,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.interestDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.interestDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.interestDateDateTimePicker.ButtonFreeText.Checked = true;
             this.interestDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "InterestDate", true));
+            this.interestDateDateTimePicker.FreeTextEntryMode = true;
             this.interestDateDateTimePicker.Location = new System.Drawing.Point(232, 128);
             // 
             // 
@@ -1225,7 +1227,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.commissionDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.commissionDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.commissionDateDateTimePicker.ButtonFreeText.Checked = true;
             this.commissionDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "CommissionDate", true));
+            this.commissionDateDateTimePicker.FreeTextEntryMode = true;
             this.commissionDateDateTimePicker.Location = new System.Drawing.Point(232, 107);
             // 
             // 
@@ -1271,7 +1275,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.refundDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.refundDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.refundDateDateTimePicker.ButtonFreeText.Checked = true;
             this.refundDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "RefundDate", true));
+            this.refundDateDateTimePicker.FreeTextEntryMode = true;
             this.refundDateDateTimePicker.Location = new System.Drawing.Point(232, 86);
             // 
             // 
@@ -1317,7 +1323,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.paymentDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.paymentDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.paymentDateDateTimePicker.ButtonFreeText.Checked = true;
             this.paymentDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "PaymentDate", true));
+            this.paymentDateDateTimePicker.FreeTextEntryMode = true;
             this.paymentDateDateTimePicker.Location = new System.Drawing.Point(232, 64);
             // 
             // 
@@ -1363,7 +1371,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.financeDueDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.financeDueDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.financeDueDateDateTimePicker.ButtonFreeText.Checked = true;
             this.financeDueDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "FinanceDueDate", true));
+            this.financeDueDateDateTimePicker.FreeTextEntryMode = true;
             this.financeDueDateDateTimePicker.Location = new System.Drawing.Point(232, 43);
             // 
             // 
@@ -1397,7 +1407,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.financeDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.financeDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.financeDateDateTimePicker.ButtonFreeText.Checked = true;
             this.financeDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "FinanceDate", true));
+            this.financeDateDateTimePicker.FreeTextEntryMode = true;
             this.financeDateDateTimePicker.Location = new System.Drawing.Point(231, 21);
             // 
             // 
@@ -1455,7 +1467,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.assignDateTextBox.BackgroundStyle.Class = "DateTimeInputBackground";
             this.assignDateTextBox.ButtonDropDown.Visible = true;
+            this.assignDateTextBox.ButtonFreeText.Checked = true;
             this.assignDateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "InvoiceAssignBatch.AssignDate", true));
+            this.assignDateTextBox.FreeTextEntryMode = true;
             this.assignDateTextBox.Location = new System.Drawing.Point(232, 0);
             // 
             // 
@@ -1566,7 +1580,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.dueDateTextBox.BackgroundStyle.Class = "DateTimeInputBackground";
             this.dueDateTextBox.ButtonDropDown.Visible = true;
+            this.dueDateTextBox.ButtonFreeText.Checked = true;
             this.dueDateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "DueDate", true));
+            this.dueDateTextBox.FreeTextEntryMode = true;
             this.dueDateTextBox.Location = new System.Drawing.Point(432, 27);
             // 
             // 
@@ -1612,7 +1628,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.invoiceDateTextBox.BackgroundStyle.Class = "DateTimeInputBackground";
             this.invoiceDateTextBox.ButtonDropDown.Visible = true;
+            this.invoiceDateTextBox.ButtonFreeText.Checked = true;
             this.invoiceDateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "InvoiceDate", true));
+            this.invoiceDateTextBox.FreeTextEntryMode = true;
             this.invoiceDateTextBox.Location = new System.Drawing.Point(232, 27);
             // 
             // 
@@ -1805,7 +1823,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.flawResolveDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.flawResolveDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.flawResolveDateDateTimePicker.ButtonFreeText.Checked = true;
             this.flawResolveDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "FlawResolveDate", true));
+            this.flawResolveDateDateTimePicker.FreeTextEntryMode = true;
             this.flawResolveDateDateTimePicker.Location = new System.Drawing.Point(156, 94);
             // 
             // 
@@ -2050,7 +2070,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.disputeResolveDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.disputeResolveDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.disputeResolveDateDateTimePicker.ButtonFreeText.Checked = true;
             this.disputeResolveDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "DisputeResolveDate", true));
+            this.disputeResolveDateDateTimePicker.FreeTextEntryMode = true;
             this.disputeResolveDateDateTimePicker.Location = new System.Drawing.Point(172, 69);
             // 
             // 
@@ -2268,7 +2290,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.disputeDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.disputeDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.disputeDateDateTimePicker.ButtonFreeText.Checked = true;
             this.disputeDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoiceBindingSource, "DisputeDate", true));
+            this.disputeDateDateTimePicker.FreeTextEntryMode = true;
             this.disputeDateDateTimePicker.Location = new System.Drawing.Point(370, 111);
             // 
             // 
@@ -2438,7 +2462,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.valueDateTextBox.BackgroundStyle.Class = "DateTimeInputBackground";
             this.valueDateTextBox.ButtonDropDown.Visible = true;
+            this.valueDateTextBox.ButtonFreeText.Checked = true;
             this.valueDateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "ValueDate", true));
+            this.valueDateTextBox.FreeTextEntryMode = true;
             this.valueDateTextBox.Location = new System.Drawing.Point(423, 109);
             // 
             // 

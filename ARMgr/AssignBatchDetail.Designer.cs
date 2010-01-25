@@ -376,7 +376,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.checkDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.checkDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.checkDateDateTimePicker.ButtonFreeText.Checked = true;
             this.checkDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "CheckDate", true));
+            this.checkDateDateTimePicker.FreeTextEntryMode = true;
             this.checkDateDateTimePicker.Location = new System.Drawing.Point(115, 253);
             // 
             // 
@@ -451,7 +453,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.assignDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.assignDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.assignDateDateTimePicker.ButtonFreeText.Checked = true;
             this.assignDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "AssignDate", true));
+            this.assignDateDateTimePicker.FreeTextEntryMode = true;
             this.assignDateDateTimePicker.Location = new System.Drawing.Point(115, 56);
             // 
             // 

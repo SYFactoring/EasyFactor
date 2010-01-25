@@ -235,8 +235,8 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this.opBatchType == OpBatchType.QUERY || this.opBatchType == OpBatchType.CHECK)
             {
-                DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
-                DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
+                DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value.Date : this.dateFrom.MinDate;
+                DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value.Date : this.dateTo.MinDate;
                 string status = this.cbCheckStatus.Text;
 
                 var queryResult = App.Current.DbContext.InvoiceFinanceBatches.Where(i =>

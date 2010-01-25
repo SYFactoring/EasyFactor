@@ -144,8 +144,8 @@
             DevComponents.DotNetBar.LabelX lblRemark;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.companyNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.contractCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -859,10 +859,6 @@
             this.groupPanelCase.StyleMouseOver.Class = "";
             this.groupPanelCase.TabIndex = 0;
             // 
-            // CDABindingSource
-            // 
-            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
-            // 
             // invoiceCurrencyTextBox
             // 
             // 
@@ -874,6 +870,10 @@
             this.invoiceCurrencyTextBox.Name = "invoiceCurrencyTextBox";
             this.invoiceCurrencyTextBox.Size = new System.Drawing.Size(85, 20);
             this.invoiceCurrencyTextBox.TabIndex = 5;
+            // 
+            // CDABindingSource
+            // 
+            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
             // 
             // transactionTypeTextBox
             // 
@@ -1369,7 +1369,9 @@
             // 
             this.financeLinePeriodEndDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.financeLinePeriodEndDateTimePicker.ButtonDropDown.Visible = true;
+            this.financeLinePeriodEndDateTimePicker.ButtonFreeText.Checked = true;
             this.financeLinePeriodEndDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "FinanceLinePeriodEnd", true));
+            this.financeLinePeriodEndDateTimePicker.FreeTextEntryMode = true;
             this.financeLinePeriodEndDateTimePicker.Location = new System.Drawing.Point(468, 68);
             // 
             // 
@@ -1405,7 +1407,9 @@
             // 
             this.financeLinePeriodBeginDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.financeLinePeriodBeginDateTimePicker.ButtonDropDown.Visible = true;
+            this.financeLinePeriodBeginDateTimePicker.ButtonFreeText.Checked = true;
             this.financeLinePeriodBeginDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "FinanceLinePeriodBegin", true));
+            this.financeLinePeriodBeginDateTimePicker.FreeTextEntryMode = true;
             this.financeLinePeriodBeginDateTimePicker.Location = new System.Drawing.Point(355, 68);
             // 
             // 
@@ -1490,7 +1494,9 @@
             // 
             this.creditCoverPeriodEndDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.creditCoverPeriodEndDateTimePicker.ButtonDropDown.Visible = true;
+            this.creditCoverPeriodEndDateTimePicker.ButtonFreeText.Checked = true;
             this.creditCoverPeriodEndDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "CreditCoverPeriodEnd", true));
+            this.creditCoverPeriodEndDateTimePicker.FreeTextEntryMode = true;
             this.creditCoverPeriodEndDateTimePicker.Location = new System.Drawing.Point(469, 25);
             // 
             // 
@@ -1526,7 +1532,9 @@
             // 
             this.creditCoverPeriodBeginDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.creditCoverPeriodBeginDateTimePicker.ButtonDropDown.Visible = true;
+            this.creditCoverPeriodBeginDateTimePicker.ButtonFreeText.Checked = true;
             this.creditCoverPeriodBeginDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "CreditCoverPeriodBegin", true));
+            this.creditCoverPeriodBeginDateTimePicker.FreeTextEntryMode = true;
             this.creditCoverPeriodBeginDateTimePicker.Location = new System.Drawing.Point(356, 25);
             // 
             // 
@@ -1711,7 +1719,9 @@
             // 
             this.cDASignDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.cDASignDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.cDASignDateDateTimePicker.ButtonFreeText.Checked = true;
             this.cDASignDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "CDASignDate", true));
+            this.cDASignDateDateTimePicker.FreeTextEntryMode = true;
             this.cDASignDateDateTimePicker.Location = new System.Drawing.Point(105, 1);
             // 
             // 

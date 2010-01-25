@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevComponents.DotNetBar.LabelX refundTypeLabel;
             DevComponents.DotNetBar.LabelX commentLabel;
             DevComponents.DotNetBar.LabelX checkUserNameLabel;
             DevComponents.DotNetBar.LabelX checkDateLabel;
@@ -43,11 +42,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RefundBatchDetail));
+            this.refundTypeLabel = new DevComponents.DotNetBar.LabelX();
             this.cmuLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemLogDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
             this.panelBatch = new DevComponents.DotNetBar.TabControlPanel();
             this.refundTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.checkStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.btnUpdate = new DevComponents.DotNetBar.ButtonX();
@@ -69,8 +70,6 @@
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            refundTypeLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
             checkUserNameLabel = new DevComponents.DotNetBar.LabelX();
             checkDateLabel = new DevComponents.DotNetBar.LabelX();
@@ -84,27 +83,27 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.panelBatch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.refundDateDateTimePicker)).BeginInit();
             this.panelInvoices.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRefundLogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // paymentTypeLabel
+            // refundTypeLabel
             // 
-            refundTypeLabel.AutoSize = true;
-            refundTypeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.refundTypeLabel.AutoSize = true;
+            this.refundTypeLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            refundTypeLabel.BackgroundStyle.Class = "";
-            refundTypeLabel.Location = new System.Drawing.Point(50, 51);
-            refundTypeLabel.Name = "paymentTypeLabel";
-            refundTypeLabel.Size = new System.Drawing.Size(59, 16);
-            refundTypeLabel.TabIndex = 27;
-            refundTypeLabel.Text = "还款类型:";
+            this.refundTypeLabel.BackgroundStyle.Class = "";
+            this.refundTypeLabel.Location = new System.Drawing.Point(50, 51);
+            this.refundTypeLabel.Name = "refundTypeLabel";
+            this.refundTypeLabel.Size = new System.Drawing.Size(59, 16);
+            this.refundTypeLabel.TabIndex = 27;
+            this.refundTypeLabel.Text = "还款类型:";
             // 
             // commentLabel
             // 
@@ -266,7 +265,7 @@
             // 
             // panelBatch
             // 
-            this.panelBatch.Controls.Add(refundTypeLabel);
+            this.panelBatch.Controls.Add(this.refundTypeLabel);
             this.panelBatch.Controls.Add(this.refundTypeComboBox);
             this.panelBatch.Controls.Add(this.checkStatusComboBox);
             this.panelBatch.Controls.Add(this.btnSave);
@@ -318,6 +317,10 @@
             this.refundTypeComboBox.Name = "refundTypeComboBox";
             this.refundTypeComboBox.Size = new System.Drawing.Size(162, 21);
             this.refundTypeComboBox.TabIndex = 28;
+            // 
+            // batchBindingSource
+            // 
+            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceRefundBatch);
             // 
             // checkStatusComboBox
             // 
@@ -391,7 +394,9 @@
             // 
             this.checkDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.checkDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.checkDateDateTimePicker.ButtonFreeText.Checked = true;
             this.checkDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "CheckDate", true));
+            this.checkDateDateTimePicker.FreeTextEntryMode = true;
             this.checkDateDateTimePicker.Location = new System.Drawing.Point(115, 270);
             // 
             // 
@@ -451,7 +456,9 @@
             // 
             this.refundDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.refundDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.refundDateDateTimePicker.ButtonFreeText.Checked = true;
             this.refundDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "RefundDate", true));
+            this.refundDateDateTimePicker.FreeTextEntryMode = true;
             this.refundDateDateTimePicker.Location = new System.Drawing.Point(115, 73);
             // 
             // 
@@ -602,10 +609,6 @@
             this.superValidator.ErrorProvider = this.errorProvider;
             this.superValidator.Highlighter = this.highlighter;
             // 
-            // batchBindingSource
-            // 
-            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceRefundBatch);
-            // 
             // RefundBatchDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -622,12 +625,12 @@
             this.tabControl1.ResumeLayout(false);
             this.panelBatch.ResumeLayout(false);
             this.panelBatch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.refundDateDateTimePicker)).EndInit();
             this.panelInvoices.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRefundLogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -661,5 +664,6 @@
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
         private System.Windows.Forms.BindingSource batchBindingSource;
+        private DevComponents.DotNetBar.LabelX refundTypeLabel;
     }
 }
