@@ -116,7 +116,7 @@ namespace CMBC.EasyFactor.ARMgr
                 switch (batch.InterestType)
                 {
                     case "一次性收取":
-                        invoice.Interest = invoice.FinanceAmount * (batch.FinanceRate - batch.CostRate) / 360 * period;
+                        invoice.Interest = invoice.FinanceAmount * (batch.FinanceRate.GetValueOrDefault() - batch.CostRate.GetValueOrDefault()) / 360 * period;
                         invoice.InterestDate = invoice.FinanceDate;
                         break;
                     default:
@@ -187,7 +187,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     Invoice invoice = (Invoice)invoiceList[i];
-                    if (dueDate > invoice.DueDate)
+                    if (dueDate < invoice.DueDate)
                     {
                         dueDate = invoice.DueDate;
                     }
@@ -640,6 +640,7 @@ namespace CMBC.EasyFactor.ARMgr
                         ((Invoice)invoiceList[i]).InvoiceFinanceBatch = null;
                     }
                 }
+
                 batch.CDA = null;
                 isSaveOK = false;
                 MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);

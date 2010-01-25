@@ -73,7 +73,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator6;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator7;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator8;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator9;
@@ -123,13 +122,13 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX financeTypeLabel;
             DevComponents.DotNetBar.LabelX lblTotalInterest;
             DevComponents.DotNetBar.LabelX lblFinanceLineBalance;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceFinance));
             this.panelFinanceBatch = new DevComponents.DotNetBar.PanelEx();
             this.btnFinanceBatchImport = new DevComponents.DotNetBar.ButtonX();
@@ -183,19 +182,18 @@ namespace CMBC.EasyFactor.ARMgr
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.requiredFieldValidator6 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator7 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
+            this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator8 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
             financeBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             financeAmountLabel = new DevComponents.DotNetBar.LabelX();
             financePeriodBeginLabel = new DevComponents.DotNetBar.LabelX();
@@ -521,7 +519,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.costRateTextBoxX.Name = "costRateTextBoxX";
             this.costRateTextBoxX.Size = new System.Drawing.Size(100, 20);
             this.costRateTextBoxX.TabIndex = 10;
-            this.superValidator.SetValidator1(this.costRateTextBoxX, this.requiredFieldValidator6);
             // 
             // factorCodeTextBox
             // 
@@ -716,14 +713,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.colComment});
             this.dgvInvoices.ContextMenuStrip = this.cmuInvoiceFinance;
             this.dgvInvoices.DataSource = this.invoiceBindingSource;
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle38.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle38.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle38.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
@@ -757,8 +754,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colAssignAmount
             // 
             this.colAssignAmount.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle26.Format = "N2";
-            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle1.Format = "N2";
+            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle1;
             this.colAssignAmount.HeaderText = "转让金额";
             this.colAssignAmount.Name = "colAssignAmount";
             this.colAssignAmount.ReadOnly = true;
@@ -766,8 +763,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colAssignOutstanding
             // 
             this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
-            dataGridViewCellStyle33.Format = "N2";
-            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle2.Format = "N2";
+            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle2;
             this.colAssignOutstanding.HeaderText = "转让余额";
             this.colAssignOutstanding.Name = "colAssignOutstanding";
             this.colAssignOutstanding.ReadOnly = true;
@@ -794,8 +791,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colFinanceAmount
             // 
             this.colFinanceAmount.DataPropertyName = "FinanceAmount";
-            dataGridViewCellStyle34.Format = "N2";
-            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle3.Format = "N2";
+            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle3;
             this.colFinanceAmount.HeaderText = "融资金额";
             this.colFinanceAmount.Name = "colFinanceAmount";
             this.colFinanceAmount.ReadOnly = true;
@@ -803,8 +800,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colFinanceOutstanding
             // 
             this.colFinanceOutstanding.DataPropertyName = "FinanceOutstanding";
-            dataGridViewCellStyle35.Format = "N2";
-            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle4.Format = "N2";
+            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle4;
             this.colFinanceOutstanding.HeaderText = "融资余额";
             this.colFinanceOutstanding.Name = "colFinanceOutstanding";
             this.colFinanceOutstanding.ReadOnly = true;
@@ -812,8 +809,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colInterest
             // 
             this.colInterest.DataPropertyName = "Interest";
-            dataGridViewCellStyle36.Format = "N2";
-            this.colInterest.DefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle5.Format = "N2";
+            this.colInterest.DefaultCellStyle = dataGridViewCellStyle5;
             this.colInterest.HeaderText = "利息";
             this.colInterest.Name = "colInterest";
             // 
@@ -826,8 +823,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colCommission
             // 
             this.colCommission.DataPropertyName = "Commission";
-            dataGridViewCellStyle37.Format = "N2";
-            this.colCommission.DefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle6.Format = "N2";
+            this.colCommission.DefaultCellStyle = dataGridViewCellStyle6;
             this.colCommission.HeaderText = "手续费";
             this.colCommission.Name = "colCommission";
             // 
@@ -983,11 +980,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.requiredFieldValidator1.ErrorMessage = "必填";
             this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // requiredFieldValidator6
-            // 
-            this.requiredFieldValidator6.ErrorMessage = "必填";
-            this.requiredFieldValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
             // requiredFieldValidator7
             // 
             this.requiredFieldValidator7.ErrorMessage = "必填";
@@ -1010,10 +1002,22 @@ namespace CMBC.EasyFactor.ARMgr
             this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             // 
+            // customValidator2
+            // 
+            this.customValidator2.ErrorMessage = "融资期限不能晚于发票到期日";
+            this.customValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator2.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator2_ValidateValue);
+            // 
             // requiredFieldValidator4
             // 
             this.requiredFieldValidator4.ErrorMessage = "必填";
             this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // customValidator1
+            // 
+            this.customValidator1.ErrorMessage = "融资期限不能早于转让日";
+            this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
             // 
             // requiredFieldValidator9
             // 
@@ -1038,18 +1042,6 @@ namespace CMBC.EasyFactor.ARMgr
             // highlighter
             // 
             this.highlighter.ContainerControl = this;
-            // 
-            // customValidator1
-            // 
-            this.customValidator1.ErrorMessage = "融资期限不能早于转让日";
-            this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
-            // 
-            // customValidator2
-            // 
-            this.customValidator2.ErrorMessage = "融资期限不能晚于发票到期日";
-            this.customValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator2.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator2_ValidateValue);
             // 
             // InvoiceFinance
             // 
