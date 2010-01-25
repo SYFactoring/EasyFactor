@@ -477,8 +477,8 @@ namespace CMBC.EasyFactor.Report
                     row++;
 
                     sheet.Cells[row, 1] = "信用风险额度：";
-                    double? creditCoverOutstanding = cda.CreditCoverOutstanding;
-                    sheet.Cells[row, 2] = String.Format("{0} {1:C2}", creditCoverOutstanding == null ? "" : cda.CreditCoverCurr, creditCoverOutstanding);
+                    double? creditCoverOutstanding = cda.CreditCover;
+                    sheet.Cells[row, 2] = String.Format("{0} {1:N2}", creditCoverOutstanding == null ? "" : cda.CreditCoverCurr, creditCoverOutstanding);
                     sheet.Cells[row, 4] = "最高预付款额度：";
                     ClientCreditLine creditLine = seller.FinanceCreditLine;
                     if (creditLine != null)
@@ -490,13 +490,16 @@ namespace CMBC.EasyFactor.Report
                     sheet.Cells[row, 1] = "应收账款余额：";
                     sheet.Cells[row, 2] = String.Format("{0} {1:N2}", cda.Case.InvoiceCurrency, cda.Case.AssignOutstanding);
                     sheet.Cells[row, 4] = "总融资余额：";
-                    double? financeOutstanding = seller.GetFinanceOutstanding(creditLine.CreditLineCurrency);
-                    sheet.Cells[row++, 5] = String.Format("{0} {1:N2}", financeOutstanding == null ? "" : creditLine.CreditLineCurrency, financeOutstanding);
-
+                    double? financeOutstanding = null;
+                    if (creditLine != null)
+                    {
+                        financeOutstanding = seller.GetFinanceOutstanding(creditLine.CreditLineCurrency);
+                        sheet.Cells[row++, 5] = String.Format("{0} {1:N2}", financeOutstanding == null ? "" : creditLine.CreditLineCurrency, financeOutstanding);
+                    }
 
                     sheet.Cells[row, 1] = "预付款额度：";
-                    double? financeLineOustanding = cda.FinanceLineOutstanding;
-                    sheet.Cells[row, 2] = String.Format("{0} {1:N2}", financeLineOustanding == null ? "" : cda.FinanceLineCurr, financeLineOustanding);
+                    double? financeLine = cda.FinanceLine;
+                    sheet.Cells[row, 2] = String.Format("{0} {1:N2}", financeLine == null ? "" : cda.FinanceLineCurr, financeLine);
                     sheet.Cells[row, 4] = "总剩余额度：";
                     if (creditLine != null)
                     {

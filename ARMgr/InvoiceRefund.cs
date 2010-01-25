@@ -398,7 +398,7 @@ namespace CMBC.EasyFactor.ARMgr
                 DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[i].Cells[0];
                 cell.Value = 1;
                 Invoice invoice = (Invoice)invoiceBindingSource.List[i];
-                invoice.RefundAmount2 = invoice.FinanceOutstanding;
+                invoice.RefundAmount2 = Math.Min(invoice.FinanceOutstanding.GetValueOrDefault(), invoice.PaymentAmount2.GetValueOrDefault());
             }
 
             this.StatBatch();

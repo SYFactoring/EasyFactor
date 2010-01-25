@@ -17,6 +17,13 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Invoice : BaseObject
     {
+        #region Fields (2)
+
+        private double? _paymentAmount2;
+        private double? _refundAmount2;
+
+        #endregion Fields
+
         #region Properties (21)
 
         /// <summary>
@@ -181,8 +188,19 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public double? PaymentAmount2
         {
-            get;
-            set;
+            get
+            {
+                return _paymentAmount2;
+            }
+            set
+            {
+                if (_paymentAmount2 != value)
+                {
+                    this.SendPropertyChanging();
+                    this._paymentAmount2 = value;
+                    this.SendPropertyChanged("PaymentAmount2");
+                }
+            }
         }
 
         /// <summary>
@@ -234,8 +252,19 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public double? RefundAmount2
         {
-            get;
-            set;
+            get
+            {
+                return _refundAmount2;
+            }
+            set
+            {
+                if (this._refundAmount2 != value)
+                {
+                    this.SendPropertyChanging();
+                    this._refundAmount2 = value;
+                    this.SendPropertyChanged("RefundAmount2");
+                }
+            }
         }
 
         /// <summary>

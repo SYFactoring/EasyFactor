@@ -366,7 +366,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (selectedBatch.CheckStatus != "已审核")
+            if (selectedBatch.CheckStatus != "已复核")
             {
                 MessageBox.Show("该批次状态不属于已审核，不能生成报表", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -386,7 +386,9 @@ namespace CMBC.EasyFactor.ARMgr
             Client seller = selectedBatch.CDA.Case.SellerClient;
             Client buyer = selectedBatch.CDA.Case.BuyerClient;
             sheet.Cells[2, 1] = String.Format("致： {0}", seller.ToString());
-            sheet.Cells[4, 2] = "应收账款转让明细表";
+            sheet.get_Range("A4", "E4").MergeCells = true;
+            sheet.get_Range("A4", "A4").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            sheet.Cells[4, 1] = "应收账款转让明细表";
             sheet.get_Range("A1", "A3").RowHeight = 20;
             sheet.get_Range("A4", "A4").RowHeight = 30;
 
@@ -418,11 +420,9 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Cells[row++, 2] = factor.ToString();
             }
             sheet.Cells[row, 1] = "信用风险额度：";
-            sheet.Cells[row, 2] = String.Format("{0:N2}", selectedBatch.CDA.CreditCover);
-            sheet.Cells[row++, 3] = TypeUtil.ToPrintCurrencyWord(selectedBatch.CDA.CreditCoverCurr);
+            sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", selectedBatch.CDA.CreditCoverCurr, selectedBatch.CDA.CreditCover.GetValueOrDefault());
             sheet.Cells[row, 1] = "应收账款余额：";
-            sheet.Cells[row, 2] = String.Format("{0:N2}", selectedBatch.CDA.GetAssignOutstanding(selectedBatch.CDA.Case.InvoiceCurrency));
-            sheet.Cells[row++, 3] = TypeUtil.ToPrintCurrencyWord(selectedBatch.CDA.Case.InvoiceCurrency);
+            sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", selectedBatch.CDA.Case.InvoiceCurrency, selectedBatch.CDA.GetAssignOutstanding(selectedBatch.CDA.Case.InvoiceCurrency));
 
             row++;
             sheet.Cells[row, 1] = "发票号";
@@ -456,11 +456,6 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range(sheet.Cells[invoiceStart, 5], sheet.Cells[invoiceEnd, 5]).NumberFormatLocal = "¥#,##0.00";
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 5], sheet.Cells[invoiceEnd, 5]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
-            sheet.get_Range("B7", "B7").NumberFormatLocal = "¥#,##0.00";
-            sheet.get_Range("B8", "B8").NumberFormatLocal = "¥#,##0.00";
-
-            row++;
-            row++;
 
             sheet.Cells[row, 1] = "本行已完成上述发票/贷项发票转让，特此通知";
             sheet.Cells[row + 2, 3] = "中国民生银行 贸易金融事业部保理业务部 （业务章）";
@@ -469,7 +464,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             sheet.UsedRange.Font.Name = "仿宋";
             sheet.UsedRange.Font.Size = 12;
-            sheet.get_Range("B4", "B4").Font.Size = 24;
+            sheet.get_Range("A4", "A4").Font.Size = 24;
 
             sheet.get_Range("A1", Type.Missing).ColumnWidth = 17;
             sheet.get_Range("B1", Type.Missing).ColumnWidth = 17;
@@ -492,7 +487,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (selectedBatch.CheckStatus != "已审核")
+            if (selectedBatch.CheckStatus != "已复核")
             {
                 MessageBox.Show("该批次状态不属于已审核，不能生成报表", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -507,32 +502,60 @@ namespace CMBC.EasyFactor.ARMgr
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
-            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 30);
+            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 200, 3, 180, 30);
 
             Client seller = selectedBatch.CDA.Case.SellerClient;
             Client buyer = selectedBatch.CDA.Case.BuyerClient;
-            sheet.Cells[3, 2] = "可融资账款明细表";
-            sheet.get_Range(sheet.Cells[3, 2], sheet.Cells[3, 2]).Font.Size = 24;
-            sheet.get_Range(sheet.Cells[3, 1], sheet.Cells[3, 5]).RowHeight = 30;
+            CDA cda = selectedBatch.CDA;
+
+            sheet.get_Range("A3", "E3").MergeCells = true;
+            sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            sheet.Cells[3, 1] = "可融资账款明细表";
 
             int row = 5;
             sheet.Cells[row, 1] = "卖方：";
+            sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
             sheet.Cells[row++, 2] = String.Format("{0}", seller.ToString());
             sheet.Cells[row, 1] = "买方：";
+            sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
             sheet.Cells[row++, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
+            row++;
+
+
             sheet.Cells[row, 1] = "信用风险额度：";
-            sheet.Cells[row++, 2] = String.Format("{0:N2} {1}", selectedBatch.CDA.CreditCoverOutstanding.GetValueOrDefault(), TypeUtil.ToPrintCurrencyWord(selectedBatch.CDA.CreditCoverCurr));
-            sheet.Cells[row, 1] = "总应收账款余额：";
-            sheet.Cells[row++, 2] = String.Format("{0:N2} {1}", selectedBatch.CDA.Case.AssignOutstanding, TypeUtil.ToPrintCurrencyWord(selectedBatch.CDA.Case.InvoiceCurrency));
-            sheet.Cells[row, 1] = "总预付款额度：";
+            double? creditCover = cda.CreditCover;
+            sheet.Cells[row, 2] = String.Format("{0} {1:N2}", cda.CreditCoverCurr, cda.CreditCover.GetValueOrDefault());
+            sheet.Cells[row, 4] = "最高预付款额度：";
             ClientCreditLine creditLine = seller.FinanceCreditLine;
             if (creditLine != null)
             {
-                sheet.Cells[row, 2] = String.Format("{0:N2} {1}", creditLine.CreditLine, TypeUtil.ToPrintCurrencyWord(creditLine.CreditLineCurrency));
+                sheet.Cells[row, 5] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, creditLine.CreditLine);
             }
             row++;
-            sheet.Cells[row, 1] = "总融资余额：";
-            sheet.Cells[row++, 2] = String.Format("{0:N2} {1}", seller.GetFinanceOutstanding(selectedBatch.CDA.Case.InvoiceCurrency).GetValueOrDefault(), TypeUtil.ToPrintCurrencyWord(selectedBatch.CDA.FinanceLineCurr));
+
+            sheet.Cells[row, 1] = "应收账款余额：";
+            sheet.Cells[row, 2] = String.Format("{0} {1:N2}", cda.Case.InvoiceCurrency, cda.Case.AssignOutstanding);
+            sheet.Cells[row, 4] = "总融资余额：";
+            double? financeOutstanding = null;
+            if (creditLine != null)
+            {
+                financeOutstanding = seller.GetFinanceOutstanding(creditLine.CreditLineCurrency);
+                sheet.Cells[row++, 5] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, financeOutstanding.GetValueOrDefault());
+            }
+
+            sheet.Cells[row, 1] = "预付款额度：";
+            double? financeLine = cda.FinanceLine;
+            sheet.Cells[row, 2] = String.Format("{0} {1:N2}", cda.FinanceLineCurr, financeLine.GetValueOrDefault());
+            sheet.Cells[row, 4] = "总剩余额度：";
+            if (creditLine != null)
+            {
+                sheet.Cells[row, 5] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, creditLine.CreditLine - financeOutstanding.GetValueOrDefault());
+            }
+            row++;
+
+            sheet.Cells[row, 1] = "融资余额：";
+            financeOutstanding = cda.Case.FinanceOutstanding;
+            sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", cda.FinanceLineCurr, financeOutstanding.GetValueOrDefault());
 
             row++;
             sheet.Cells[row, 1] = "发票号";
@@ -566,21 +589,20 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 4], sheet.Cells[invoiceEnd, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
 
-            row++;
-            row++;
-
-            sheet.Cells[row, 1] = "本行已完成上述发票/贷项发票转让，特此通知";
-            sheet.Cells[row + 2, 3] = "中国民生银行       （业务章）";
-            sheet.Cells[row + 3, 3] = "签字：";
-            sheet.Cells[row + 4, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+            sheet.Cells[row + 1, 3] = "中国民生银行 贸易金融部保理业务部 （业务章）";
+            sheet.Cells[row + 2, 4] = "签字：";
+            sheet.Cells[row + 3, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
             sheet.UsedRange.Font.Name = "仿宋";
+            sheet.UsedRange.Font.Size = 12;
+            sheet.get_Range(sheet.Cells[3, 1], sheet.Cells[3, 1]).Font.Size = 24;
+            sheet.get_Range(sheet.Cells[3, 1], sheet.Cells[3, 5]).RowHeight = 30;
 
-            sheet.get_Range("A1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("B1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("E1", Type.Missing).ColumnWidth = 15;
+            sheet.get_Range("A1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("B1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("E1", Type.Missing).ColumnWidth = 20;
             app.Visible = true;
 
         }
@@ -598,7 +620,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (selectedBatch.CheckStatus != "已审核")
+            if (selectedBatch.CheckStatus != "已复核")
             {
                 MessageBox.Show("该批次状态不属于已审核，不能生成报表", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -711,7 +733,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (selectedBatch.CheckStatus != "已审核")
+            if (selectedBatch.CheckStatus != "已复核")
             {
                 MessageBox.Show("该批次状态不属于已审核，不能生成报表", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
