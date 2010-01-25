@@ -643,10 +643,10 @@ namespace CMBC.EasyFactor.ARMgr
                         return false;
                     }
 
-                    if (TypeUtil.GreaterZero(invoice.RefundAmount2 - Math.Min(invoice.FinanceOutstanding, invoice.PaymentAmount)))
+                    if (TypeUtil.GreaterZero(invoice.RefundAmount2 - Math.Min(invoice.FinanceOutstanding.GetValueOrDefault(), invoice.PaymentAmount.GetValueOrDefault())))
                     {
                         MessageBox.Show("还款金额不能大于付款金额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
+                        return false;
                     }
                 }
             } 
