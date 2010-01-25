@@ -48,8 +48,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchCurrencyComboBoxEx.DisplayMember = "CurrencyCode";
             this.batchCurrencyComboBoxEx.ValueMember = "CurrencyCode";
 
-            this.interestTypeComboBoxEx.Items.AddRange(new string[] { "一次性收取", "月结", "季结", "利随本清", "未知" });
-
             this.dgvInvoices.CellFormatting += new DataGridViewCellFormattingEventHandler(dgvInvoices_CellFormatting);
             this.dgvInvoices.CellParsing += new DataGridViewCellParsingEventHandler(dgvInvoices_CellParsing);
 
@@ -63,8 +61,8 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 column.ReadOnly = true;
             }
-            colCheckBox.ReadOnly = false;
 
+            colCheckBox.ReadOnly = false;
         }
 
         #endregion Constructors
@@ -79,13 +77,13 @@ namespace CMBC.EasyFactor.ARMgr
             set
             {
                 this._CDA = value;
-                this.NewFinanceBatch(null, null);
+                this.NewBatch(null, null);
             }
         }
 
         #endregion Properties
 
-        #region Methods (20)
+        #region Methods (22)
 
         // Public Methods (1) 
 
@@ -102,7 +100,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = typeof(InvoiceFinanceBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
-        // Private Methods (19) 
+        // Private Methods (21) 
 
         /// <summary>
         /// 
@@ -136,6 +134,73 @@ namespace CMBC.EasyFactor.ARMgr
                         invoice.CommissionDate = invoice.FinanceDate;
                     }
                 }
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
+            IList invoiceList = this.invoiceBindingSource.List;
+
+            DateTime assignDate = default(DateTime);
+            for (int i = 0; i < invoiceList.Count; i++)
+            {
+                if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+                {
+                    Invoice invoice = (Invoice)invoiceList[i];
+                    if (assignDate < invoice.InvoiceAssignBatch.AssignDate)
+                    {
+                        assignDate = invoice.InvoiceAssignBatch.AssignDate;
+                    }
+                }
+            }
+
+            if (batch.FinancePeriodBegin < assignDate)
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void customValidator2_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
+            IList invoiceList = this.invoiceBindingSource.List;
+
+            DateTime dueDate = default(DateTime);
+            for (int i = 0; i < invoiceList.Count; i++)
+            {
+                if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+                {
+                    Invoice invoice = (Invoice)invoiceList[i];
+                    if (dueDate > invoice.DueDate)
+                    {
+                        dueDate = invoice.DueDate;
+                    }
+                }
+            }
+
+            if (batch.FinancePeriodEnd < dueDate)
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
             }
 
         }
@@ -247,6 +312,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     this.ResetRow(e.RowIndex, false);
                 }
+
                 this.StatBatch();
             }
 
@@ -447,7 +513,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void NewFinanceBatch(object sender, EventArgs e)
+        private void NewBatch(object sender, EventArgs e)
         {
             if (this._CDA == null)
             {
@@ -460,7 +526,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeBatch.CreateUserName = App.Current.CurUser.Name;
             financeBatch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = financeBatch;
-            this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.AssignAmount - i.PaymentAmount.GetValueOrDefault() > 0.00000001 && (i.FinanceAmount.HasValue == false || i.FinanceAmount < 0.0000001)).ToList();
+            this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.IsFlaw == false && i.InvoiceAssignBatch.CheckStatus == "已复核" && i.AssignAmount - i.PaymentAmount.GetValueOrDefault() > 0.00000001 && (i.FinanceAmount.HasValue == false || i.FinanceAmount < 0.0000001)).ToList();
             this.StatBatch();
         }
 
@@ -518,16 +584,33 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             if (!this.ValidateBatch())
             {
                 return;
             }
+            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
+            IList invoiceList = this.invoiceBindingSource.List;
+
+            double totalFinance = 0;
+            for (int i = 0; i < invoiceList.Count; i++)
+            {
+                if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+                {
+                    Invoice invoice = (Invoice)invoiceList[i];
+                    totalFinance += invoice.FinanceAmount.GetValueOrDefault();
+                }
+            }
+
+            if (!TypeUtil.EqualsZero(batch.FinanceAmount - totalFinance))
+            {
+                MessageBox.Show("融资额未分配结束，不能保存", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             bool isSaveOK = true;
-            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
-            batch.CDA = this._CDA;
 
-            IList invoiceList = this.invoiceBindingSource.List;
+            batch.CDA = this._CDA;
             for (int i = 0; i < invoiceList.Count; i++)
             {
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))

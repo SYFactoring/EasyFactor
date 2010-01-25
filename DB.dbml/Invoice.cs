@@ -37,7 +37,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.AssignAmount - this.PaymentAmount.GetValueOrDefault() - this.PaymentAmount2.GetValueOrDefault();
+                return this.AssignAmount - this.PaymentAmount.GetValueOrDefault();
             }
         }
 
@@ -142,7 +142,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     return null;
                 }
 
-                return this.FinanceAmount.Value - this.RefundAmount.GetValueOrDefault() - this.RefundAmount2.GetValueOrDefault();
+                return this.FinanceAmount.Value - this.RefundAmount.GetValueOrDefault();
             }
         }
 

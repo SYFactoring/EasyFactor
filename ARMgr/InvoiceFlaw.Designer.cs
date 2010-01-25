@@ -1,11 +1,39 @@
 ﻿namespace CMBC.EasyFactor.ARMgr
 {
-    partial class InvoiceFlaw
+    /// <summary>
+    /// 
+    /// </summary>
+    public partial class InvoiceFlaw
     {
+		#region Fields (18) 
+
+        private DevComponents.DotNetBar.ButtonX btnFlaw;
+        private DevComponents.DotNetBar.ButtonX btnFlawClose;
+        private DevComponents.DotNetBar.ButtonX btnFlawResolve;
+        private DevComponents.DotNetBar.ButtonX btnFlawSave;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoices;
+        private System.Windows.Forms.CheckedListBox flawReasonCheckedListBox;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput flawResolveDateDateTimePicker;
+        private DevComponents.DotNetBar.Controls.TextBoxX flawResolveUserNameTextBox;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelFlaw;
+        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelFlawResolve;
+        private DevComponents.DotNetBar.Controls.CheckBoxX isFlawCheckBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFlawReason;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFlawResolveReason;
+
+		#endregion Fields 
+
+		#region Methods (1) 
+
+		// Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -19,6 +47,10 @@
             }
             base.Dispose(disposing);
         }
+
+		#endregion Methods 
+
+
 
         #region Windows Form Designer generated code
 
@@ -357,7 +389,8 @@
             "单据内容不符",
             "额度通知书过期或未签回",
             "保理合同过期或未签回",
-            "交货凭证内容不完整"});
+            "交货凭证内容不完整",
+            "逾期转让"});
             this.flawReasonCheckedListBox.Location = new System.Drawing.Point(105, 2);
             this.flawReasonCheckedListBox.Name = "flawReasonCheckedListBox";
             this.flawReasonCheckedListBox.Size = new System.Drawing.Size(233, 124);
@@ -446,23 +479,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelFlawResolve;
-        private DevComponents.DotNetBar.ButtonX btnFlawResolve;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFlawResolveReason;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput flawResolveDateDateTimePicker;
-        private DevComponents.DotNetBar.Controls.TextBoxX flawResolveUserNameTextBox;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelFlaw;
-        private DevComponents.DotNetBar.ButtonX btnFlaw;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFlawReason;
-        private System.Windows.Forms.CheckedListBox flawReasonCheckedListBox;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoices;
-        private DevComponents.DotNetBar.ButtonX btnFlawSave;
-        private DevComponents.DotNetBar.ButtonX btnFlawClose;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceAmount;
-        private DevComponents.DotNetBar.Controls.CheckBoxX isFlawCheckBox;
     }
 }

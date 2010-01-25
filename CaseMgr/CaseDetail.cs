@@ -861,7 +861,16 @@ namespace CMBC.EasyFactor.CaseMgr
         private void SelectCaseSeller(object sender, EventArgs e)
         {
             Case curCase = (Case)this.caseBindingSource.DataSource;
-            ClientMgr clientMgr = new ClientMgr();
+
+            ClientMgr clientMgr = null;
+            if (curCase.TransactionType == "进口保理")
+            {
+                clientMgr = new ClientMgr();
+            }
+            else
+            {
+                clientMgr = new ClientMgr(true);
+            }
             QueryForm queryUI = new QueryForm(clientMgr, "选择卖方");
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);

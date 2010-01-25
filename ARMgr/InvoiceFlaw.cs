@@ -60,11 +60,17 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 flawReason += (item + ";");
             }
+
             if (!this.tbFlawReason.Text.Equals(string.Empty))
             {
                 flawReason += this.tbFlawReason.Text;
             }
 
+            if (this.isFlawCheckBox.Checked && flawReason == string.Empty)
+            {
+                MessageBox.Show("请选择瑕疵原因", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             foreach (Invoice invoice in this.bs.List)
             {
@@ -77,6 +83,7 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.FlawResolveUserName = this.flawResolveUserNameTextBox.Text;
                 }
             }
+
             bool isUpdateOK = true;
 
             try

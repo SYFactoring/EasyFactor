@@ -330,7 +330,7 @@ namespace CMBC.EasyFactor.ARMgr
             else if (col == this.colInvoiceNo)
             {
                 string str = (string)e.FormattedValue;
-                Regex regex = new Regex(@"^[a-zA-Z0-9-<>\.]+$");
+                Regex regex = new Regex(@"^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>]+$");
                 bool ok = regex.IsMatch(str);
                 if (!ok)
                 {
@@ -727,6 +727,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (invoice.DueDate < assignDate)
                 {
                     invoice.IsFlaw = true;
+                    invoice.FlawReason = "逾期转让";
                 }
             }
             return true;

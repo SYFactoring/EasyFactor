@@ -44,11 +44,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// <summary>
             /// 
             /// </summary>
-            NEED_CONTRACT,
-
-            /// <summary>
-            /// 
-            /// </summary>
             EXPORT_CLIENT,
 
             /// <summary>

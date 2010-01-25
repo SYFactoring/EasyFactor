@@ -436,7 +436,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.assignDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
             this.assignDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.assignDateDateTimePicker.ButtonFreeText.Checked = true;
             this.assignDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "AssignDate", true));
+            this.assignDateDateTimePicker.FreeTextEntryMode = true;
             this.assignDateDateTimePicker.Location = new System.Drawing.Point(274, 6);
             // 
             // 

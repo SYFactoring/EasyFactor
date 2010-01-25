@@ -601,7 +601,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (refundList.Count > 0)
                 {
                     MainWindow mainWindow = App.Current.MainWindow;
-                    mainWindow.InvoiceRefund(refundList,batch.PaymentType);
+                    mainWindow.InvoiceRefund(refundList, batch.PaymentType);
                 }
                 else
                 {
@@ -671,12 +671,19 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         private bool ValidateBatch()
         {
-            foreach (Invoice invoice in this.invoiceBindingSource.List)
+            IList invoiceList = this.invoiceBindingSource.List;
+
+            for (int i = 0; i < invoiceList.Count; i++)
             {
-                if (TypeUtil.LessZero(invoice.AssignOutstanding))
+                if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    MessageBox.Show("付款金额不能大于转让金额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
+                    Invoice invoice = (Invoice)invoiceList[i];
+                    if (TypeUtil.LessZero(invoice.AssignOutstanding))
+                    {
+                        MessageBox.Show("付款金额不能大于转让金额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
+                    }
+
                 }
             }
             return true;
