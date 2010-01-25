@@ -368,6 +368,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 selectedInvoice.AssignAmount = selectedInvoice.InvoiceAmount;
                 this.CaculateCommisssion(selectedInvoice);
+                this.StatBatch();
             }
             else if (this.dgvInvoices.Columns[e.ColumnIndex] == this.colAssignAmount)
             {
@@ -528,8 +529,25 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             double totalAssign = 0;
+            List<string> invoiceNoList = new List<string>();
             foreach (Invoice invoice in invoiceList)
             {
+                if (!invoiceNoList.Contains(invoice.InvoiceNo))
+                {
+                    invoiceNoList.Add(invoice.InvoiceNo);
+                }
+                else
+                {
+                    MessageBox.Show("发票号重复: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                if (App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo) != null)
+                {
+                    MessageBox.Show("发票号已存在: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
                 totalAssign += invoice.AssignAmount;
             }
 
@@ -609,6 +627,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 MessageBox.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.caseBasic.CaculateOutstanding(this._CDA);
+                this.StatBatch();
 
                 if (flawList.Count > 0)
                 {
