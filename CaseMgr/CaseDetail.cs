@@ -826,7 +826,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private void SelectCaseBuyer(object sender, EventArgs e)
         {
             Case curCase = (Case)this.caseBindingSource.DataSource;
-            ClientMgr clientMgr = new ClientMgr(false);
+            ClientMgr clientMgr = new ClientMgr();
             QueryForm queryUI = new QueryForm(clientMgr, "选择买方");
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
@@ -861,7 +861,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private void SelectCaseSeller(object sender, EventArgs e)
         {
             Case curCase = (Case)this.caseBindingSource.DataSource;
-            ClientMgr clientMgr = new ClientMgr(false);
+            ClientMgr clientMgr = new ClientMgr();
             QueryForm queryUI = new QueryForm(clientMgr, "选择卖方");
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
@@ -1019,6 +1019,15 @@ namespace CMBC.EasyFactor.CaseMgr
 
             this.tbCaseCreateUser.ReadOnly = true;
             this.tbCaseCode.ReadOnly = true;
+            this.tbCaseSellerNo.ReadOnly = true;
+            this.tbCaseSellerNameCN.ReadOnly = true;
+            this.tbCaseSellerNameEN.ReadOnly = true;
+            this.tbCaseBuyerNo.ReadOnly = true;
+            this.tbCaseBuyerNameCN.ReadOnly = true;
+            this.tbCaseBuyerNameEN.ReadOnly = true;
+            this.tbCaseCode.ReadOnly = true;
+            this.tbCaseFactorNameCN.ReadOnly = true;
+            this.tbCaseFactorNameEN.ReadOnly = true;
         }
 
         /// <summary>

@@ -142,10 +142,12 @@
             DevComponents.DotNetBar.LabelX assignTypeLabel;
             DevComponents.DotNetBar.LabelX lblIsNotice;
             DevComponents.DotNetBar.LabelX lblRemark;
+            DevComponents.DotNetBar.LabelX lblCasePaymentTerm;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbCasePaymentTerm = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.companyNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.contractCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -217,6 +219,8 @@
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.customValidator7 = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.customValidator8 = new DevComponents.DotNetBar.Validator.CustomValidator();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -255,6 +259,7 @@
             assignTypeLabel = new DevComponents.DotNetBar.LabelX();
             lblIsNotice = new DevComponents.DotNetBar.LabelX();
             lblRemark = new DevComponents.DotNetBar.LabelX();
+            lblCasePaymentTerm = new DevComponents.DotNetBar.LabelX();
             this.groupPanelCase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.groupPanelCreditCover.SuspendLayout();
@@ -527,7 +532,7 @@
             // 
             // 
             deductiblesLabel.BackgroundStyle.Class = "";
-            deductiblesLabel.Location = new System.Drawing.Point(295, 162);
+            deductiblesLabel.Location = new System.Drawing.Point(42, 182);
             deductiblesLabel.Name = "deductiblesLabel";
             deductiblesLabel.Size = new System.Drawing.Size(47, 16);
             deductiblesLabel.TabIndex = 36;
@@ -541,7 +546,7 @@
             // 
             // 
             lossThresholdLabel.BackgroundStyle.Class = "";
-            lossThresholdLabel.Location = new System.Drawing.Point(502, 159);
+            lossThresholdLabel.Location = new System.Drawing.Point(261, 181);
             lossThresholdLabel.Name = "lossThresholdLabel";
             lossThresholdLabel.Size = new System.Drawing.Size(84, 16);
             lossThresholdLabel.TabIndex = 38;
@@ -555,7 +560,7 @@
             // 
             // 
             priceLabel.BackgroundStyle.Class = "";
-            priceLabel.Location = new System.Drawing.Point(15, 183);
+            priceLabel.Location = new System.Drawing.Point(15, 209);
             priceLabel.Name = "priceLabel";
             priceLabel.Size = new System.Drawing.Size(72, 16);
             priceLabel.TabIndex = 40;
@@ -569,7 +574,7 @@
             // 
             // 
             iFPriceLabel.BackgroundStyle.Class = "";
-            iFPriceLabel.Location = new System.Drawing.Point(272, 181);
+            iFPriceLabel.Location = new System.Drawing.Point(272, 207);
             iFPriceLabel.Name = "iFPriceLabel";
             iFPriceLabel.Size = new System.Drawing.Size(69, 16);
             iFPriceLabel.TabIndex = 42;
@@ -583,7 +588,7 @@
             // 
             // 
             commissonTypeLabel.BackgroundStyle.Class = "";
-            commissonTypeLabel.Location = new System.Drawing.Point(28, 202);
+            commissonTypeLabel.Location = new System.Drawing.Point(28, 228);
             commissonTypeLabel.Name = "commissonTypeLabel";
             commissonTypeLabel.Size = new System.Drawing.Size(59, 16);
             commissonTypeLabel.TabIndex = 49;
@@ -597,7 +602,7 @@
             // 
             // 
             commissionTypeCommentLabel.BackgroundStyle.Class = "";
-            commissionTypeCommentLabel.Location = new System.Drawing.Point(242, 203);
+            commissionTypeCommentLabel.Location = new System.Drawing.Point(242, 229);
             commissionTypeCommentLabel.Name = "commissionTypeCommentLabel";
             commissionTypeCommentLabel.Size = new System.Drawing.Size(34, 16);
             commissionTypeCommentLabel.TabIndex = 51;
@@ -611,7 +616,7 @@
             // 
             // 
             handFeeLabel.BackgroundStyle.Class = "";
-            handFeeLabel.Location = new System.Drawing.Point(482, 180);
+            handFeeLabel.Location = new System.Drawing.Point(482, 206);
             handFeeLabel.Name = "handFeeLabel";
             handFeeLabel.Size = new System.Drawing.Size(72, 16);
             handFeeLabel.TabIndex = 46;
@@ -737,7 +742,7 @@
             // 
             // 
             contractCodeLabel.BackgroundStyle.Class = "";
-            contractCodeLabel.Location = new System.Drawing.Point(367, 66);
+            contractCodeLabel.Location = new System.Drawing.Point(367, 67);
             contractCodeLabel.Name = "contractCodeLabel";
             contractCodeLabel.Size = new System.Drawing.Size(84, 16);
             contractCodeLabel.TabIndex = 6;
@@ -799,10 +804,26 @@
             lblRemark.TabIndex = 17;
             lblRemark.Text = "内部提示信息:";
             // 
+            // lblCasePaymentTerm
+            // 
+            lblCasePaymentTerm.AutoSize = true;
+            lblCasePaymentTerm.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblCasePaymentTerm.BackgroundStyle.Class = "";
+            lblCasePaymentTerm.Location = new System.Drawing.Point(367, 87);
+            lblCasePaymentTerm.Name = "lblCasePaymentTerm";
+            lblCasePaymentTerm.Size = new System.Drawing.Size(84, 16);
+            lblCasePaymentTerm.TabIndex = 21;
+            lblCasePaymentTerm.Text = "最长付款期限:";
+            // 
             // groupPanelCase
             // 
             this.groupPanelCase.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCase.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelCase.Controls.Add(lblCasePaymentTerm);
+            this.groupPanelCase.Controls.Add(this.tbCasePaymentTerm);
             this.groupPanelCase.Controls.Add(this.invoiceCurrencyTextBox);
             this.groupPanelCase.Controls.Add(this.transactionTypeTextBox);
             this.groupPanelCase.Controls.Add(this.companyNameENTextBox);
@@ -859,6 +880,22 @@
             this.groupPanelCase.StyleMouseOver.Class = "";
             this.groupPanelCase.TabIndex = 0;
             // 
+            // tbCasePaymentTerm
+            // 
+            // 
+            // 
+            // 
+            this.tbCasePaymentTerm.Border.Class = "TextBoxBorder";
+            this.tbCasePaymentTerm.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.NetPaymentTerm", true));
+            this.tbCasePaymentTerm.Location = new System.Drawing.Point(456, 86);
+            this.tbCasePaymentTerm.Name = "tbCasePaymentTerm";
+            this.tbCasePaymentTerm.Size = new System.Drawing.Size(100, 20);
+            this.tbCasePaymentTerm.TabIndex = 22;
+            // 
+            // CDABindingSource
+            // 
+            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
+            // 
             // invoiceCurrencyTextBox
             // 
             // 
@@ -870,10 +907,6 @@
             this.invoiceCurrencyTextBox.Name = "invoiceCurrencyTextBox";
             this.invoiceCurrencyTextBox.Size = new System.Drawing.Size(85, 20);
             this.invoiceCurrencyTextBox.TabIndex = 5;
-            // 
-            // CDABindingSource
-            // 
-            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
             // 
             // transactionTypeTextBox
             // 
@@ -906,7 +939,7 @@
             // 
             // 
             this.contractCodeTextBox.Border.Class = "TextBoxBorder";
-            this.contractCodeTextBox.Location = new System.Drawing.Point(456, 65);
+            this.contractCodeTextBox.Location = new System.Drawing.Point(456, 66);
             this.contractCodeTextBox.Name = "contractCodeTextBox";
             this.contractCodeTextBox.Size = new System.Drawing.Size(100, 20);
             this.contractCodeTextBox.TabIndex = 7;
@@ -1102,7 +1135,7 @@
             this.groupPanelCreditCover.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelCreditCover.Location = new System.Drawing.Point(0, 115);
             this.groupPanelCreditCover.Name = "groupPanelCreditCover";
-            this.groupPanelCreditCover.Size = new System.Drawing.Size(745, 230);
+            this.groupPanelCreditCover.Size = new System.Drawing.Size(745, 257);
             // 
             // 
             // 
@@ -1162,6 +1195,7 @@
             this.cbIsRecoarse.Size = new System.Drawing.Size(101, 16);
             this.cbIsRecoarse.TabIndex = 6;
             this.cbIsRecoarse.Text = "是否有追索权";
+            this.cbIsRecoarse.CheckedChanged += new System.EventHandler(this.cbIsRecoarse_CheckedChanged);
             // 
             // assignTypeComboBox
             // 
@@ -1200,11 +1234,13 @@
             // 
             // handFeeCurrComboBox
             // 
+            this.handFeeCurrComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.handFeeCurrComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.handFeeCurrComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HandFeeCurr", true));
             this.handFeeCurrComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.handFeeCurrComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.handFeeCurrComboBox.FormattingEnabled = true;
-            this.handFeeCurrComboBox.Location = new System.Drawing.Point(560, 180);
+            this.handFeeCurrComboBox.Location = new System.Drawing.Point(560, 206);
             this.handFeeCurrComboBox.Name = "handFeeCurrComboBox";
             this.handFeeCurrComboBox.Size = new System.Drawing.Size(53, 21);
             this.handFeeCurrComboBox.TabIndex = 47;
@@ -1233,7 +1269,7 @@
             // 
             this.handFeeTextBox.Border.Class = "TextBoxBorder";
             this.handFeeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HandFee", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.handFeeTextBox.Location = new System.Drawing.Point(618, 180);
+            this.handFeeTextBox.Location = new System.Drawing.Point(618, 206);
             this.handFeeTextBox.Name = "handFeeTextBox";
             this.handFeeTextBox.Size = new System.Drawing.Size(81, 20);
             this.handFeeTextBox.TabIndex = 48;
@@ -1245,10 +1281,11 @@
             // 
             this.lossThresholdTextBox.Border.Class = "TextBoxBorder";
             this.lossThresholdTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "LossThreshold", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.lossThresholdTextBox.Location = new System.Drawing.Point(599, 158);
+            this.lossThresholdTextBox.Location = new System.Drawing.Point(356, 180);
             this.lossThresholdTextBox.Name = "lossThresholdTextBox";
             this.lossThresholdTextBox.Size = new System.Drawing.Size(100, 20);
             this.lossThresholdTextBox.TabIndex = 39;
+            this.superValidator.SetValidator1(this.lossThresholdTextBox, this.customValidator8);
             // 
             // commissionTypeCommentTextBox
             // 
@@ -1257,7 +1294,7 @@
             // 
             this.commissionTypeCommentTextBox.Border.Class = "TextBoxBorder";
             this.commissionTypeCommentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CommissionTypeComment", true));
-            this.commissionTypeCommentTextBox.Location = new System.Drawing.Point(284, 201);
+            this.commissionTypeCommentTextBox.Location = new System.Drawing.Point(284, 227);
             this.commissionTypeCommentTextBox.Name = "commissionTypeCommentTextBox";
             this.commissionTypeCommentTextBox.Size = new System.Drawing.Size(415, 20);
             this.commissionTypeCommentTextBox.TabIndex = 52;
@@ -1270,10 +1307,11 @@
             // 
             this.deductiblesTextBox.Border.Class = "TextBoxBorder";
             this.deductiblesTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Deductibles", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.deductiblesTextBox.Location = new System.Drawing.Point(355, 158);
+            this.deductiblesTextBox.Location = new System.Drawing.Point(105, 180);
             this.deductiblesTextBox.Name = "deductiblesTextBox";
             this.deductiblesTextBox.Size = new System.Drawing.Size(100, 20);
             this.deductiblesTextBox.TabIndex = 37;
+            this.superValidator.SetValidator1(this.deductiblesTextBox, this.customValidator7);
             // 
             // commissionTypeComboBox
             // 
@@ -1281,7 +1319,7 @@
             this.commissionTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.commissionTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.commissionTypeComboBox.FormattingEnabled = true;
-            this.commissionTypeComboBox.Location = new System.Drawing.Point(105, 201);
+            this.commissionTypeComboBox.Location = new System.Drawing.Point(105, 227);
             this.commissionTypeComboBox.Name = "commissionTypeComboBox";
             this.commissionTypeComboBox.Size = new System.Drawing.Size(109, 21);
             this.commissionTypeComboBox.TabIndex = 50;
@@ -1321,7 +1359,7 @@
             // 
             this.iFPriceTextBox.Border.Class = "TextBoxBorder";
             this.iFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "IFPrice", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p2"));
-            this.iFPriceTextBox.Location = new System.Drawing.Point(355, 180);
+            this.iFPriceTextBox.Location = new System.Drawing.Point(355, 206);
             this.iFPriceTextBox.Name = "iFPriceTextBox";
             this.iFPriceTextBox.Size = new System.Drawing.Size(100, 20);
             this.iFPriceTextBox.TabIndex = 43;
@@ -1345,7 +1383,7 @@
             // 
             this.priceTextBox.Border.Class = "TextBoxBorder";
             this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Price", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p2"));
-            this.priceTextBox.Location = new System.Drawing.Point(105, 180);
+            this.priceTextBox.Location = new System.Drawing.Point(105, 205);
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(100, 20);
             this.priceTextBox.TabIndex = 41;
@@ -1623,7 +1661,7 @@
             this.groupPanelOther.Controls.Add(noticePersonLabel);
             this.groupPanelOther.Controls.Add(this.noticePersonTextBox);
             this.groupPanelOther.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelOther.Location = new System.Drawing.Point(0, 345);
+            this.groupPanelOther.Location = new System.Drawing.Point(0, 372);
             this.groupPanelOther.Name = "groupPanelOther";
             this.groupPanelOther.Size = new System.Drawing.Size(745, 131);
             // 
@@ -1815,7 +1853,7 @@
             // 
             this.btnCDAUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCDAUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCDAUpdate.Location = new System.Drawing.Point(218, 480);
+            this.btnCDAUpdate.Location = new System.Drawing.Point(230, 510);
             this.btnCDAUpdate.Name = "btnCDAUpdate";
             this.btnCDAUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnCDAUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1827,7 +1865,7 @@
             // 
             this.btnCDASave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCDASave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCDASave.Location = new System.Drawing.Point(299, 480);
+            this.btnCDASave.Location = new System.Drawing.Point(311, 510);
             this.btnCDASave.Name = "btnCDASave";
             this.btnCDASave.Size = new System.Drawing.Size(75, 23);
             this.btnCDASave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1839,7 +1877,7 @@
             // 
             this.btnCDAReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCDAReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCDAReset.Location = new System.Drawing.Point(383, 480);
+            this.btnCDAReset.Location = new System.Drawing.Point(395, 510);
             this.btnCDAReset.Name = "btnCDAReset";
             this.btnCDAReset.Size = new System.Drawing.Size(75, 23);
             this.btnCDAReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1930,12 +1968,24 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
+            // customValidator7
+            // 
+            this.customValidator7.ErrorMessage = "自负额不能大于买方信用风险额度";
+            this.customValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator7.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator7_ValidateValue);
+            // 
+            // customValidator8
+            // 
+            this.customValidator8.ErrorMessage = "最低损失门槛不能大于买方信用风险额度";
+            this.customValidator8.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator8.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator8_ValidateValue);
+            // 
             // CDADetail
             // 
             this.AcceptButton = this.btnCDASave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(745, 509);
+            this.ClientSize = new System.Drawing.Size(745, 535);
             this.Controls.Add(this.btnCDAReset);
             this.Controls.Add(this.btnCDASave);
             this.Controls.Add(this.btnCDAUpdate);
@@ -1978,5 +2028,8 @@
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator4;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator5;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator6;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCasePaymentTerm;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator8;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator7;
     }
 }

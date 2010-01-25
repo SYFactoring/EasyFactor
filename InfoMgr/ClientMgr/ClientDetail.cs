@@ -1244,7 +1244,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void SelectGroup(object sender, EventArgs e)
         {
             Client client = (Client)this.clientBindingSource.DataSource;
-            ClientMgr clientMgr = new ClientMgr(false);
+            ClientMgr clientMgr = new ClientMgr();
             QueryForm queryUI = new QueryForm(clientMgr, "选择集团");
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);

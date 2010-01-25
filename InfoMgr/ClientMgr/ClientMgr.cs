@@ -28,11 +28,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private BindingSource bs;
 
         /// <summary>
-        /// flag indicates if editable
-        /// </summary>
-        private bool isEditable;
-
-        /// <summary>
         /// 
         /// </summary>
         private OpClientMgrType opClientMgrType;
@@ -97,17 +92,24 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="isContract"></param>
+        public ClientMgr(bool isContract):this()
+        {
+            this.cbIsContractSigned.Checked = true;
+            this.QueryClients(null, null);
+        }
+
+        /// <summary>
         /// Initializes a new instance of the ClientMgr class
         /// </summary>
-        /// <param name="isEditable">true if editable</param>
-        public ClientMgr(bool isEditable)
+        public ClientMgr()
         {
             this.InitializeComponent();
             this.bs = new BindingSource();
             this.dgvClients.AutoGenerateColumns = false;
             this.dgvClients.DataSource = this.bs;
-            this.isEditable = isEditable;
-            this.UpdateEditableStatus();
             ControlUtil.SetDoubleBuffered(this.dgvClients);
 
             List<Department> deptsList = Department.AllDepartments().ToList();
@@ -394,31 +396,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client selectedClient = (Client)this.bs.List[this.dgvClients.SelectedRows[0].Index];
             ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.UPDATE_CLIENT);
             clientDetail.ShowDialog(this);
-        }
-
-        /// <summary>
-        /// Update editable status
-        /// </summary>
-        private void UpdateEditableStatus()
-        {
-            if (this.isEditable)
-            {
-                this.menuItemClientNew.Enabled = true;
-                this.menuItemClientCreditLineNew.Enabled = true;
-                this.menuItemContractNew.Enabled = true;
-                this.menuItemClientUpdate.Enabled = true;
-                this.menuItemClientDelete.Enabled = true;
-                this.menuItemClientImport.Enabled = true;
-            }
-            else
-            {
-                this.menuItemClientNew.Enabled = false;
-                this.menuItemClientCreditLineNew.Enabled = false;
-                this.menuItemContractNew.Enabled = false;
-                this.menuItemClientUpdate.Enabled = false;
-                this.menuItemClientDelete.Enabled = false;
-                this.menuItemClientImport.Enabled = false;
-            }
         }
 
         #endregion Methods

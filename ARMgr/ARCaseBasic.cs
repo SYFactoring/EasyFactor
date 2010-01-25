@@ -383,7 +383,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectCase(object sender, EventArgs e)
         {
-            CaseMgr caseMgr = new CaseMgr(false);
+            CaseMgr caseMgr = new CaseMgr(true);
             QueryForm queryForm = new QueryForm(caseMgr, "选择案件");
             caseMgr.OwnerForm = queryForm;
             queryForm.ShowDialog(this);

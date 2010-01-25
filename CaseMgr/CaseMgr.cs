@@ -35,9 +35,20 @@ namespace CMBC.EasyFactor.CaseMgr
         #region Constructors (1)
 
         /// <summary>
-        /// Initializes a new instance of the CaseQuery class.
+        /// Initializes a new instance of the CaseMgr class
         /// </summary>
-        public CaseMgr(bool isEditable)
+        /// <param name="isContract"></param>
+        public CaseMgr(bool isContract)
+            : this()
+        {
+            this.cbIsContractSigned.Checked = isContract;
+            this.QueryCase(null, null);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the CaseMgr class
+        /// </summary>
+        public CaseMgr()
         {
             this.InitializeComponent();
             this.dgvCases.AutoGenerateColumns = false;
@@ -61,6 +72,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCurrency.DataSource = currencyList;
             this.cbCurrency.DisplayMember = "CurrencyFormat";
             this.cbCurrency.ValueMember = "CurrencyCode";
+
+            this.cbCaseMark.Text = "启动案";
         }
 
         #endregion Constructors
@@ -217,6 +230,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                 && (beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
                                 && (endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
+                                && (c.CaseMark == this.cbCaseMark.Text)
                                 && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == "已签回"))
                                 && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY))
                                 && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN.Contains(this.tbClientName.Text)

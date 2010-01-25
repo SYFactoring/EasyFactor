@@ -472,7 +472,7 @@ namespace CMBC.EasyFactor
         /// <param name="e">event args</param>
         private void MgrClients(object sender, EventArgs e)
         {
-            ClientMgr clientMgrUI = new ClientMgr(true);
+            ClientMgr clientMgrUI = new ClientMgr();
             this.SetDetailPanel(clientMgrUI);
         }
 
@@ -564,7 +564,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryCase(object sender, EventArgs e)
         {
-            CaseMgr.CaseMgr caseQuery = new CaseMgr.CaseMgr(true);
+            CaseMgr.CaseMgr caseQuery = new CaseMgr.CaseMgr();
             this.SetDetailPanel(caseQuery);
         }
 
@@ -641,7 +641,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryClients(object sender, EventArgs e)
         {
-            ClientMgr query = new ClientMgr(false);
+            ClientMgr query = new ClientMgr();
             this.SetDetailPanel(query);
         }
 
@@ -784,7 +784,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ReportLeger(object sender, EventArgs e)
         {
-            CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr(false);
+            CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr();
             this.SetDetailPanel(mgr);
         }
 

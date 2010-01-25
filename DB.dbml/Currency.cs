@@ -33,21 +33,15 @@ namespace CMBC.EasyFactor.DB.dbml
         static Currency()
         {
             _currencyList = App.Current.DbContext.Currencies.ToList();
-            CNY = _currencyList.SingleOrDefault(c => c.CurrencyCode == "CNY");
+            Currency CNY = _currencyList.SingleOrDefault(c => c.CurrencyCode == "CNY");
+            Currency USD = _currencyList.SingleOrDefault(c => c.CurrencyCode == "USD");
+            _currencyList.Insert(0, CNY);
+            _currencyList.Insert(1, USD);
         }
 
         #endregion Constructors
 
         #region Properties (2)
-
-        /// <summary>
-        /// Gets
-        /// </summary>
-        public static Currency CNY
-        {
-            get;
-            private set;
-        }
 
         /// <summary>
         /// Gets
