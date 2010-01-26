@@ -55,6 +55,11 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
+            IMPORT_CLIENTS_REVIEW,
+
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_FACTORS,
 
             /// <summary>
@@ -125,6 +130,9 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ImportType.IMPORT_CLIENTS_CREDITLINE:
                     this.Text = "客户额度信息导入";
+                    break;
+                case ImportType.IMPORT_CLIENTS_REVIEW:
+                    this.Text = "客户协查意见导入";
                     break;
                 case ImportType.IMPORT_FACTORS:
                     this.Text = "合作机构信息导入";
@@ -198,6 +206,9 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ImportType.IMPORT_CLIENTS_CREDITLINE:
                     e.Result = this.ImportClientsCreditLine((string)e.Argument, worker, e);
+                    break;
+                case ImportType.IMPORT_CLIENTS_REVIEW:
+                    e.Result = this.ImportClientsReivew((string)e.Argument, worker, e);
                     break;
                 case ImportType.IMPORT_FACTORS:
                     e.Result = this.ImportFactors((string)e.Argument, worker, e);
@@ -490,10 +501,8 @@ namespace CMBC.EasyFactor.Utils
         private int ImportClients(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
-            object[,] valueArray2 = this.GetValueArray(fileName, 2);
             int result = 0;
             List<Client> clientList = new List<Client>();
-            List<ClientReview> reviewList = new List<ClientReview>();
             try
             {
                 if (valueArray != null)
@@ -577,38 +586,6 @@ namespace CMBC.EasyFactor.Utils
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
                 }
-                if (valueArray2 != null)
-                {
-                    int size = valueArray2.GetUpperBound(0);
-                    for (int row = 2; row <= size; row++)
-                    {
-                        if (worker.CancellationPending)
-                        {
-                            e.Cancel = true;
-                            return -1;
-                        }
-
-                        string clientEDICode = String.Format("{0:G}", valueArray[row, 2]);
-                        if (String.Empty.Equals(clientEDICode))
-                        {
-                            continue;
-                        }
-
-                        Client client = clientList.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
-                        if (client == null)
-                        {
-                            throw new Exception("客户不存在，不能导入协查意见书： " + clientEDICode);
-                        }
-                        int column = 3;
-                        ClientReview review = new ClientReview();
-                        review.ReviewNo = String.Format("{0:G}", valueArray2[row, column++]);
-                        review.ReviewStatus = String.Format("{0:G}", valueArray2[row, column++]);
-                        review.ReviewDate = (DateTime)valueArray2[row, column++];
-                        review.CreateUserName = String.Format("{0:G}", valueArray2[row, column++]);
-                        review.Comment = String.Format("{0:G}", valueArray2[row, column++]);
-                        review.Client = client;
-                    }
-                }
 
                 App.Current.DbContext.Clients.InsertAllOnSubmit(clientList);
                 App.Current.DbContext.SubmitChanges();
@@ -619,10 +596,6 @@ namespace CMBC.EasyFactor.Utils
                 {
                     client.ClientGroup = null;
                     client.Department = null;
-                }
-                foreach (ClientReview review in reviewList)
-                {
-                    review.Client = null;
                 }
                 throw e1;
             }
@@ -639,7 +612,72 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private object ImportClientsCreditLine(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportClientsReivew(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            object[,] valueArray = this.GetValueArray(fileName, 1);
+            int result = 0;
+            List<ClientReview> reviewList = new List<ClientReview>();
+            try
+            {
+                if (valueArray != null)
+                {
+                    int size = valueArray.GetUpperBound(0);
+                    for (int row = 2; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+
+                        string clientEDICode = String.Format("{0:G}", valueArray[row, 2]);
+                        if (String.Empty.Equals(clientEDICode))
+                        {
+                            continue;
+                        }
+
+                        Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                        if (client == null)
+                        {
+                            throw new Exception("客户不存在，不能导入协查意见书： " + clientEDICode);
+                        }
+                        int column = 3;
+                        ClientReview review = new ClientReview();
+                        review.ReviewNo = String.Format("{0:G}", valueArray[row, column++]);
+                        review.ReviewStatus = String.Format("{0:G}", valueArray[row, column++]);
+                        review.ReviewDate = (DateTime)valueArray[row, column++];
+                        review.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                        review.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                        review.Client = client;
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                foreach (ClientReview review in reviewList)
+                {
+                    review.Client = null;
+                }
+                throw e1;
+            }
+
+            worker.ReportProgress(100);
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int ImportClientsCreditLine(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;

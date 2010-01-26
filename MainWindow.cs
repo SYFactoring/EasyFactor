@@ -71,7 +71,7 @@ namespace CMBC.EasyFactor
 
         #endregion Properties
 
-        #region Methods (62)
+        #region Methods (63)
 
         // Public Methods (2) 
 
@@ -97,7 +97,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-        // Private Methods (60) 
+        // Private Methods (61) 
 
         /// <summary>
         /// 
@@ -288,6 +288,20 @@ namespace CMBC.EasyFactor
             if (this.ValidateRole())
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS);
+                importForm.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportClientsReview(object sender, EventArgs e)
+        {
+            if (this.ValidateRole())
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_REVIEW);
                 importForm.Show();
             }
         }

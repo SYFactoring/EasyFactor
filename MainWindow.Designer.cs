@@ -310,6 +310,7 @@ namespace CMBC.EasyFactor
             this.lblCurrentUser = new DevComponents.DotNetBar.LabelItem();
             this.ribbonDetailPanel = new DevComponents.DotNetBar.Ribbon.RibbonClientPanel();
             this.logoLabel = new DevComponents.DotNetBar.Controls.ReflectionLabel();
+            this.btnClientReviewImport = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonControl.SuspendLayout();
             this.ribbonPanelHelp.SuspendLayout();
             this.ribbonPanelReport.SuspendLayout();
@@ -331,12 +332,12 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
-            this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
-            this.ribbonControl.Controls.Add(this.ribbonPanelReport);
             this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
-            this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
             this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanel3);
+            this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
+            this.ribbonControl.Controls.Add(this.ribbonPanelReport);
+            this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
             this.ribbonControl.Controls.Add(this.ribbonPanel1);
             this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanel2);
@@ -395,6 +396,7 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelHelp.StyleMouseOver.Class = "";
             this.ribbonPanelHelp.TabIndex = 6;
+            this.ribbonPanelHelp.Visible = false;
             // 
             // ribbonBarHelp
             // 
@@ -610,7 +612,6 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelInfoMgr.StyleMouseOver.Class = "";
             this.ribbonPanelInfoMgr.TabIndex = 2;
-            this.ribbonPanelInfoMgr.Visible = false;
             // 
             // ribbonBarExchange
             // 
@@ -1060,7 +1061,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarInvoiceImport.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarInvoiceImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnInvoicesImport});
-            this.ribbonBarInvoiceImport.Location = new System.Drawing.Point(733, 0);
+            this.ribbonBarInvoiceImport.Location = new System.Drawing.Point(805, 0);
             this.ribbonBarInvoiceImport.Name = "ribbonBarInvoiceImport";
             this.ribbonBarInvoiceImport.Size = new System.Drawing.Size(72, 93);
             this.ribbonBarInvoiceImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1099,7 +1100,7 @@ namespace CMBC.EasyFactor
             this.btnClientCreditLineImport,
             this.btnFactorCreditLineImport,
             this.btnContractAndCDAImport});
-            this.ribbonBarCreditLineImport.Location = new System.Drawing.Point(410, 0);
+            this.ribbonBarCreditLineImport.Location = new System.Drawing.Point(482, 0);
             this.ribbonBarCreditLineImport.Name = "ribbonBarCreditLineImport";
             this.ribbonBarCreditLineImport.Size = new System.Drawing.Size(323, 93);
             this.ribbonBarCreditLineImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1151,7 +1152,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarCaseImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnLocalCaseImport,
             this.buttonItemInterCaseImport});
-            this.ribbonBarCaseImport.Location = new System.Drawing.Point(207, 0);
+            this.ribbonBarCaseImport.Location = new System.Drawing.Point(279, 0);
             this.ribbonBarCaseImport.Name = "ribbonBarCaseImport";
             this.ribbonBarCaseImport.Size = new System.Drawing.Size(203, 93);
             this.ribbonBarCaseImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1195,10 +1196,11 @@ namespace CMBC.EasyFactor
             this.ribbonBarBasicInfoImport.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarBasicInfoImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnClientImport,
+            this.btnClientReviewImport,
             this.btnFactorImport2});
             this.ribbonBarBasicInfoImport.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarBasicInfoImport.Name = "ribbonBarBasicInfoImport";
-            this.ribbonBarBasicInfoImport.Size = new System.Drawing.Size(204, 93);
+            this.ribbonBarBasicInfoImport.Size = new System.Drawing.Size(276, 93);
             this.ribbonBarBasicInfoImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarBasicInfoImport.TabIndex = 2;
             this.ribbonBarBasicInfoImport.Text = "基础信息导入";
@@ -1789,6 +1791,7 @@ namespace CMBC.EasyFactor
             // 
             // itemInfoMgr
             // 
+            this.itemInfoMgr.Checked = true;
             this.itemInfoMgr.Name = "itemInfoMgr";
             this.itemInfoMgr.Panel = this.ribbonPanelInfoMgr;
             this.itemInfoMgr.Text = "信息管理";
@@ -1837,7 +1840,6 @@ namespace CMBC.EasyFactor
             // 
             // itemHelp
             // 
-            this.itemHelp.Checked = true;
             this.itemHelp.Name = "itemHelp";
             this.itemHelp.Panel = this.ribbonPanelHelp;
             this.itemHelp.Text = "帮助";
@@ -2097,6 +2099,13 @@ namespace CMBC.EasyFactor
             this.logoLabel.TabIndex = 0;
             this.logoLabel.Text = "<b><font size=\"+60\"><i>Easy</i><font color=\"#B02B2C\">Factoring</font></font></b>";
             // 
+            // btnClientReviewImport
+            // 
+            this.btnClientReviewImport.Name = "btnClientReviewImport";
+            this.btnClientReviewImport.SubItemsExpandWidth = 14;
+            this.btnClientReviewImport.Text = "导入协查意见";
+            this.btnClientReviewImport.Click += new System.EventHandler(this.ImportClientsReview);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2128,5 +2137,6 @@ namespace CMBC.EasyFactor
 
         private DevComponents.DotNetBar.ButtonItem btnLeger;
         private DevComponents.DotNetBar.ButtonItem btnSVNStat;
+        private DevComponents.DotNetBar.ButtonItem btnClientReviewImport;
     }
 }
