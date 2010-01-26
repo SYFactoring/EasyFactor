@@ -810,16 +810,19 @@ namespace CMBC.EasyFactor.ARMgr
             for (int i = 1; i <= selectedBatch.Invoices.Count; i++)
             {
                 Invoice invoice = selectedBatch.Invoices[i - 1];
-                sheet.Cells[row, 1] = i;
-                sheet.Cells[row, 2] = "'" + invoice.InvoiceNo;
-                sheet.Cells[row, 3] = invoice.AssignAmount;
-                sheet.Cells[row, 4] = invoice.InvoiceDate;
-                sheet.Cells[row, 5] = invoice.DueDate;
-                sheet.Cells[row, 6] = invoice.InvoiceAmount;
-                sheet.Cells[row, 7] = invoice.FlawReason;
-                if (invoice.FlawOtherReason != string.Empty && flawOtherReason == string.Empty)
+                if (invoice.IsFlaw)
                 {
-                    flawOtherReason = invoice.FlawOtherReason;
+                    sheet.Cells[row, 1] = i;
+                    sheet.Cells[row, 2] = "'" + invoice.InvoiceNo;
+                    sheet.Cells[row, 3] = invoice.AssignAmount;
+                    sheet.Cells[row, 4] = invoice.InvoiceDate;
+                    sheet.Cells[row, 5] = invoice.DueDate;
+                    sheet.Cells[row, 6] = invoice.InvoiceAmount;
+                    sheet.Cells[row, 7] = invoice.FlawReason;
+                    if (invoice.FlawOtherReason != string.Empty && flawOtherReason == string.Empty)
+                    {
+                        flawOtherReason = invoice.FlawOtherReason;
+                    }
                 }
                 row++;
             }
