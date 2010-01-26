@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
+    using System.Data.Linq;
 
     /// <summary>
     /// 
@@ -780,6 +781,17 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 try
                 {
+                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                }
+                catch (ChangeConflictException)
+                {
+                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    {
+                        foreach (MemberChangeConflict mc in cc.MemberConflicts)
+                        {
+                            mc.Resolve(RefreshMode.KeepChanges);
+                        }
+                    }
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e2)

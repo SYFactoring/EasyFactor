@@ -878,6 +878,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 try
                 {
+                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                }
+                catch (ChangeConflictException)
+                {
+                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    {
+                        foreach (MemberChangeConflict mc in cc.MemberConflicts)
+                        {
+                            mc.Resolve(RefreshMode.KeepChanges);
+                        }
+                    }
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e2)
@@ -989,8 +1000,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             else
             {
                 bool isUpdateOK = true;
+
                 try
                 {
+                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                }
+                catch (ChangeConflictException)
+                {
+                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    {
+                        foreach (MemberChangeConflict mc in cc.MemberConflicts)
+                        {
+                            mc.Resolve(RefreshMode.KeepChanges);
+                        }
+                    }
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e2)
@@ -1109,6 +1132,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 try
                 {
+                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                }
+                catch (ChangeConflictException)
+                {
+                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    {
+                        foreach (MemberChangeConflict mc in cc.MemberConflicts)
+                        {
+                            mc.Resolve(RefreshMode.KeepChanges);
+                        }
+                    }
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e2)
@@ -1193,6 +1227,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 bool isUpdateOK = true;
                 try
                 {
+                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                }
+                catch (ChangeConflictException)
+                {
+                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    {
+                        foreach (MemberChangeConflict mc in cc.MemberConflicts)
+                        {
+                            mc.Resolve(RefreshMode.KeepChanges);
+                        }
+                    }
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e2)

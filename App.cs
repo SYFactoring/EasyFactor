@@ -7,6 +7,8 @@
 namespace CMBC.EasyFactor
 {
     using CMBC.EasyFactor.DB.dbml;
+    using System.IO;
+    using System;
 
     /// <summary>
     /// Globle variable
@@ -30,6 +32,8 @@ namespace CMBC.EasyFactor
         private App()
         {
             this.DbContext = new DBDataContext();
+            this.DbContext.Log = File.CreateText(Path.Combine(Environment.CurrentDirectory, String.Format("{0:yyyy-MM-dd-HH-mm}.txt", DateTime.Now)));
+
         }
 
         #endregion Constructors

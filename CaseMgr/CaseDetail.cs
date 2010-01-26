@@ -16,6 +16,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
     using DevComponents.Editors;
+    using System.Data.Linq;
 
     /// <summary>
     /// Case Detail
@@ -113,6 +114,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.opCaseType = opCaseType;
             this.opCreditCoverNegType = opCreditCoverNegType;
 
+            this.cbReviews.DisplayMember = "ReviewNo";
+            this.cbReviews.ValueMember = "ReviewNo";
+
             this.tbIFPrice.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
             this.tbIFPrice.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
 
@@ -157,10 +161,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
                 curCase.Backup();
             }
-
-            this.cbReviews.DisplayMember = "ReviewNo";
-            this.cbReviews.ValueMember = "ReviewNo";
-
 
             this.UpdateCaseControlStatus();
             this.UpdateCreditCoverNegControlStatus();
@@ -725,6 +725,17 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 try
                 {
+                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                }
+                catch (ChangeConflictException)
+                {
+                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    {
+                        foreach (MemberChangeConflict mc in cc.MemberConflicts)
+                        {
+                            mc.Resolve(RefreshMode.KeepChanges);
+                        }
+                    }
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e2)
@@ -805,6 +816,17 @@ namespace CMBC.EasyFactor.CaseMgr
                 bool isUpdateOK = true;
                 try
                 {
+                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                }
+                catch (ChangeConflictException)
+                {
+                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    {
+                        foreach (MemberChangeConflict mc in cc.MemberConflicts)
+                        {
+                            mc.Resolve(RefreshMode.KeepChanges);
+                        }
+                    }
                     App.Current.DbContext.SubmitChanges();
                 }
                 catch (Exception e2)

@@ -571,6 +571,15 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        partial void OnValidate(System.Data.Linq.ChangeAction action)
+        {
+            
+        }
+
         #endregion Methods
     }
 }

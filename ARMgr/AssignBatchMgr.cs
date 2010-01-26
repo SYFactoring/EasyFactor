@@ -372,8 +372,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -479,7 +479,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
             sheet.get_Range("E1", Type.Missing).ColumnWidth = 17;
             app.Visible = true;
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
         }
 
         /// <summary>
@@ -501,8 +501,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -626,7 +626,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range("E1", Type.Missing).ColumnWidth = 20;
             app.Visible = true;
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
         }
 
@@ -649,8 +649,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -744,7 +744,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             app.Visible = true;
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
         }
 
@@ -767,8 +767,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -864,7 +864,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range("G1", Type.Missing).ColumnWidth = 17;
             app.Visible = true;
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
         }
     }
 }

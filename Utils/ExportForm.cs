@@ -203,8 +203,8 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportAssignByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -310,7 +310,7 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
             return invoiceList.Count;
         }
 
@@ -323,8 +323,8 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportCreditNotes(IList creditNoteList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -441,7 +441,7 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
             return creditNoteList.Count;
         }
 
@@ -454,8 +454,8 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportFinanceByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -559,7 +559,7 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
             return invoiceList.Count;
         }
 
@@ -572,8 +572,8 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportInvoicesFull(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -795,7 +795,7 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             return invoiceList.Count;
         }
@@ -809,8 +809,8 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportInvoicesOverDue(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -924,7 +924,7 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             return invoiceList.Count;
         }
@@ -938,8 +938,8 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportPaymentByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -1039,7 +1039,7 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             return invoiceList.Count;
         }
@@ -1053,8 +1053,8 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportRefundByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -1150,7 +1150,7 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
             return invoiceList.Count;
         }
 

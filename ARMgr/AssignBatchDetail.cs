@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Data.Linq;
 
     /// <summary>
     /// 
@@ -114,6 +115,17 @@ namespace CMBC.EasyFactor.ARMgr
             bool isUpdateOK = true;
             try
             {
+                App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+            }
+            catch (ChangeConflictException)
+            {
+                foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                {
+                    foreach (MemberChangeConflict mc in cc.MemberConflicts)
+                    {
+                        mc.Resolve(RefreshMode.KeepChanges);
+                    }
+                }
                 App.Current.DbContext.SubmitChanges();
             }
             catch (Exception e2)
