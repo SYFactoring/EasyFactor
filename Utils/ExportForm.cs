@@ -203,14 +203,18 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportAssignByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
+            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
                 MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
-
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             if (datasheet == null)
             {
@@ -320,14 +324,18 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportCreditNotes(IList creditNoteList, BackgroundWorker worker, DoWorkEventArgs e)
         {
+            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
                 MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
+            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[2];
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             if (datasheet == null)
             {
@@ -448,14 +456,18 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportFinanceByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
+            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
                 MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
-
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             if (datasheet == null)
             {
@@ -563,14 +575,18 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportInvoicesFull(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
+            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
                 MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
-
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             if (datasheet == null)
             {
@@ -796,14 +812,18 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportInvoicesOverDue(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
+            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
                 MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
-
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             if (datasheet == null)
             {
@@ -921,14 +941,18 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportPaymentByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
+            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
                 MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
-
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             if (datasheet == null)
             {
@@ -1032,14 +1056,18 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportRefundByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
+            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
                 MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
-
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             if (datasheet == null)
             {

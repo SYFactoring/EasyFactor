@@ -372,6 +372,9 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -379,6 +382,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
@@ -493,6 +498,9 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -500,6 +508,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 200, 3, 180, 30);
@@ -626,14 +636,18 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
                 MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
@@ -739,14 +753,18 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
                 MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
