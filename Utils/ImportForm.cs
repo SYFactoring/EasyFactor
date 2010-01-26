@@ -579,7 +579,7 @@ namespace CMBC.EasyFactor.Utils
                 }
                 if (valueArray2 != null)
                 {
-                    int size = valueArray.GetUpperBound(0);
+                    int size = valueArray2.GetUpperBound(0);
                     for (int row = 2; row <= size; row++)
                     {
                         if (worker.CancellationPending)
@@ -599,7 +599,7 @@ namespace CMBC.EasyFactor.Utils
                         {
                             throw new Exception("客户不存在，不能导入协查意见书： " + clientEDICode);
                         }
-                        int column = 2;
+                        int column = 3;
                         ClientReview review = new ClientReview();
                         review.ReviewNo = String.Format("{0:G}", valueArray2[row, column++]);
                         review.ReviewStatus = String.Format("{0:G}", valueArray2[row, column++]);
