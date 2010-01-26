@@ -73,7 +73,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCurrency.DisplayMember = "CurrencyFormat";
             this.cbCurrency.ValueMember = "CurrencyCode";
 
-            this.cbCaseMark.Text = "启动案";
+            this.cbCaseMark.Text = "申请案";
         }
 
         #endregion Constructors

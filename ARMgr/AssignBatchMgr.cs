@@ -383,8 +383,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
-
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
 
@@ -447,9 +445,11 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Cells[row, 5] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
                 row++;
             }
-            int invoiceEnd = row - 1;
-            row++;
-            row++;
+
+            sheet.Cells[row, 1] = "小计";
+            sheet.Cells[row, 2] = selectedBatch.AssignAmount;
+
+            int invoiceEnd = row;
             sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = "¥#,##0.00";
@@ -462,12 +462,14 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 5], sheet.Cells[invoiceEnd, 5]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
 
+            row++;
+
             sheet.Cells[row, 1] = "本行已完成上述发票/贷项发票转让，特此通知";
             sheet.Cells[row + 2, 3] = "中国民生银行 贸易金融事业部保理业务部 （业务章）";
             sheet.Cells[row + 4, 4] = "签字：";
             sheet.Cells[row + 5, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
-            sheet.UsedRange.Font.Name = "仿宋";
+            sheet.UsedRange.Font.Name = "仿宋_GB2312";
             sheet.UsedRange.Font.Size = 12;
             sheet.get_Range("A4", "A4").Font.Size = 24;
 
@@ -477,6 +479,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
             sheet.get_Range("E1", Type.Missing).ColumnWidth = 17;
             app.Visible = true;
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
         }
 
         /// <summary>
@@ -509,8 +512,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
-
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 200, 3, 180, 30);
 
@@ -536,11 +537,12 @@ namespace CMBC.EasyFactor.ARMgr
             double? creditCover = cda.CreditCover;
             sheet.Cells[row, 2] = String.Format("{0} {1:N2}", cda.CreditCoverCurr, cda.CreditCover.GetValueOrDefault());
             sheet.Cells[row, 4] = "最高预付款额度：";
-            ClientCreditLine creditLine = seller.FinanceCreditLine;
+            ClientCreditLine creditLine = cda.FinanceCreditLine;
             if (creditLine != null)
             {
                 sheet.Cells[row, 5] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, creditLine.CreditLine);
             }
+
             row++;
 
             sheet.Cells[row, 1] = "应收账款余额：";
@@ -550,8 +552,10 @@ namespace CMBC.EasyFactor.ARMgr
             if (creditLine != null)
             {
                 financeOutstanding = seller.GetFinanceOutstanding(creditLine.CreditLineCurrency);
-                sheet.Cells[row++, 5] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, financeOutstanding.GetValueOrDefault());
+                sheet.Cells[row, 5] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, financeOutstanding.GetValueOrDefault());
             }
+
+            row++;
 
             sheet.Cells[row, 1] = "预付款额度：";
             double? financeLine = cda.FinanceLine;
@@ -561,6 +565,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 sheet.Cells[row, 5] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, creditLine.CreditLine - financeOutstanding.GetValueOrDefault());
             }
+
             row++;
 
             sheet.Cells[row, 1] = "融资余额：";
@@ -586,9 +591,12 @@ namespace CMBC.EasyFactor.ARMgr
                 row++;
             }
 
-            int invoiceEnd = row - 1;
-            row++;
-            row++;
+            sheet.Cells[row, 1] = "小计";
+            sheet.Cells[row, 2] = selectedBatch.AssignAmount;
+
+            int invoiceEnd = row;
+
+
             sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = "¥#,##0.00";
@@ -599,11 +607,14 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 4], sheet.Cells[invoiceEnd, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
 
+            row++;
+            row++;
+
             sheet.Cells[row + 1, 3] = "中国民生银行 贸易金融部保理业务部 （业务章）";
             sheet.Cells[row + 2, 4] = "签字：";
             sheet.Cells[row + 3, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
-            sheet.UsedRange.Font.Name = "仿宋";
+            sheet.UsedRange.Font.Name = "仿宋_GB2312";
             sheet.UsedRange.Font.Size = 12;
             sheet.get_Range(sheet.Cells[3, 1], sheet.Cells[3, 1]).Font.Size = 24;
             sheet.get_Range(sheet.Cells[3, 1], sheet.Cells[3, 5]).RowHeight = 30;
@@ -614,6 +625,8 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
             sheet.get_Range("E1", Type.Missing).ColumnWidth = 20;
             app.Visible = true;
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
         }
 
@@ -646,8 +659,6 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
-
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
@@ -718,7 +729,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range("A7", "E11").Borders.LineStyle = 1;
             sheet.get_Range("D13", "E13").Borders.LineStyle = 1;
 
-            sheet.UsedRange.Font.Name = "仿宋";
+            sheet.UsedRange.Font.Name = "仿宋_GB2312";
             sheet.UsedRange.Font.Size = 12;
             sheet.UsedRange.Rows.RowHeight = 20;
 
@@ -732,6 +743,9 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range("E13", "E13").NumberFormatLocal = "¥#,##0.00";
 
             app.Visible = true;
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+
         }
 
         /// <summary>
@@ -763,8 +777,6 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
-
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
@@ -837,7 +849,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Cells[row, 1] = "8个原因";
             row++;
 
-            sheet.UsedRange.Font.Name = "仿宋";
+            sheet.UsedRange.Font.Name = "仿宋_GB2312";
             sheet.UsedRange.Font.Size = 12;
             sheet.get_Range("A1", "A2").RowHeight = 20;
             sheet.get_Range("A3", "A3").RowHeight = 30;
@@ -851,6 +863,8 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range("F1", Type.Missing).ColumnWidth = 15;
             sheet.get_Range("G1", Type.Missing).ColumnWidth = 17;
             app.Visible = true;
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
         }
     }
 }

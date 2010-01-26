@@ -22,7 +22,7 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CaseDetail : DevComponents.DotNetBar.Office2007Form
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         /// <summary>
         /// Operation type of Case
@@ -33,9 +33,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCreditCoverNegType opCreditCoverNegType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (2) 
+        #region Enums (2)
 
         /// <summary>
         /// Operation types of Credit Cover Negotiation
@@ -57,7 +57,7 @@ namespace CMBC.EasyFactor.CaseMgr
             /// </summary>
             DETAIL_CREDIT_COVER_NEG
         }
-/// <summary>
+        /// <summary>
         /// Operation types of Case
         /// </summary>
         public enum OpCaseType
@@ -78,11 +78,11 @@ namespace CMBC.EasyFactor.CaseMgr
             DETAIL_CASE,
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (4) 
+        #region Constructors (4)
 
-/// <summary>
+        /// <summary>
         /// Initializes a new instance of the CaseDetail class
         /// </summary>
         /// <param name="curCase">Selected case</param>
@@ -113,6 +113,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.opCaseType = opCaseType;
             this.opCreditCoverNegType = opCreditCoverNegType;
 
+            this.tbIFPrice.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
+            this.tbIFPrice.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+
             if (opCaseType == OpCaseType.NEW_CASE)
             {
                 curCase = new Case();
@@ -135,16 +138,16 @@ namespace CMBC.EasyFactor.CaseMgr
                     case "国内信保保理":
                     case "国际信保保理":
                     case "租赁保理":
-                        this.tbCaseFactorCode.Text = curCase.SellerFactor.FactorCode;
-                        this.tbCaseFactorNameCN.Text = curCase.SellerFactor.CompanyNameCN;
-                        this.tbCaseFactorNameEN.Text = curCase.SellerFactor.CompanyNameEN;
+                        this.tbCaseFactorCode.Text = curCase.BuyerFactor.FactorCode;
+                        this.tbCaseFactorNameCN.Text = curCase.BuyerFactor.CompanyNameCN;
+                        this.tbCaseFactorNameEN.Text = curCase.BuyerFactor.CompanyNameEN;
                         this.cbReviews.DataSource = curCase.SellerClient.ClientReviews.Where(review => review.ReviewStatus == "已生效").ToList();
                         break;
                     case "国内买方保理":
                     case "进口保理":
-                        this.tbCaseFactorCode.Text = curCase.BuyerFactor.FactorCode;
-                        this.tbCaseFactorNameCN.Text = curCase.BuyerFactor.CompanyNameCN;
-                        this.tbCaseFactorNameEN.Text = curCase.BuyerFactor.CompanyNameEN;
+                        this.tbCaseFactorCode.Text = curCase.SellerFactor.FactorCode;
+                        this.tbCaseFactorNameCN.Text = curCase.SellerFactor.CompanyNameCN;
+                        this.tbCaseFactorNameEN.Text = curCase.SellerFactor.CompanyNameEN;
                         this.cbReviews.DataSource = curCase.BuyerClient.ClientReviews.Where(review => review.ReviewStatus == "已生效").ToList();
                         break;
                     default: break;
@@ -154,6 +157,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
                 curCase.Backup();
             }
+
+            this.cbReviews.DisplayMember = "ReviewNo";
+            this.cbReviews.ValueMember = "ReviewNo";
+
 
             this.UpdateCaseControlStatus();
             this.UpdateCreditCoverNegControlStatus();
@@ -201,11 +208,11 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (26) 
+        #region Methods (26)
 
-		// Private Methods (26) 
+        // Private Methods (26) 
 
         /// <summary>
         /// 
@@ -503,11 +510,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 case "国内信保保理":
                 case "国际信保保理":
                 case "租赁保理":
-                    factor = curCase.SellerFactor;
+                    factor = curCase.BuyerFactor;
                     break;
                 case "国内买方保理":
                 case "进口保理":
-                    factor = curCase.BuyerFactor;
+                    factor = curCase.SellerFactor;
                     break;
                 default: break;
             }
@@ -1089,6 +1096,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbCreateUserName.ReadOnly = true;
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

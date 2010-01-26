@@ -480,7 +480,7 @@ namespace CMBC.EasyFactor.Report
                     double? creditCoverOutstanding = cda.CreditCover;
                     sheet.Cells[row, 2] = String.Format("{0} {1:N2}", creditCoverOutstanding == null ? "" : cda.CreditCoverCurr, creditCoverOutstanding);
                     sheet.Cells[row, 4] = "最高预付款额度：";
-                    ClientCreditLine creditLine = seller.FinanceCreditLine;
+                    ClientCreditLine creditLine = cda.FinanceCreditLine;
                     if (creditLine != null)
                     {
                         sheet.Cells[row, 5] = String.Format("{0} {1:N2}", creditLine.CreditLineCurrency, creditLine.CreditLine);

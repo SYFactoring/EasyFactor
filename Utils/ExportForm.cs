@@ -214,8 +214,6 @@ namespace CMBC.EasyFactor.Utils
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
-
             if (datasheet == null)
             {
                 return -1;
@@ -312,6 +310,7 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
             return invoiceList.Count;
         }
 
@@ -334,8 +333,6 @@ namespace CMBC.EasyFactor.Utils
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
-
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             if (datasheet == null)
             {
@@ -444,6 +441,7 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
             return creditNoteList.Count;
         }
 
@@ -466,8 +464,6 @@ namespace CMBC.EasyFactor.Utils
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
-
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             if (datasheet == null)
             {
@@ -563,6 +559,7 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
             return invoiceList.Count;
         }
 
@@ -585,8 +582,6 @@ namespace CMBC.EasyFactor.Utils
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
-
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             if (datasheet == null)
             {
@@ -800,6 +795,8 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+
             return invoiceList.Count;
         }
 
@@ -822,8 +819,6 @@ namespace CMBC.EasyFactor.Utils
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
-
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             if (datasheet == null)
             {
@@ -929,6 +924,8 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+
             return invoiceList.Count;
         }
 
@@ -951,8 +948,6 @@ namespace CMBC.EasyFactor.Utils
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
-
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
 
             if (datasheet == null)
             {
@@ -1044,6 +1039,8 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+
             return invoiceList.Count;
         }
 
@@ -1067,9 +1064,7 @@ namespace CMBC.EasyFactor.Utils
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
-
-            if (datasheet == null)
+             if (datasheet == null)
             {
                 return -1;
             }
@@ -1155,6 +1150,7 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
             return invoiceList.Count;
         }
 
