@@ -272,27 +272,27 @@ namespace CMBC.EasyFactor.ARMgr
             this.buyerEDICodeTextBox.Text = this.Case.BuyerCode;
             this.tbNetPaymentTerm.Text = String.Format("{0:G}", this.Case.NetPaymentTerm);
             this.buyerNameTextBox.Text = this.Case.BuyerClient == null ? string.Empty : this.Case.BuyerClient.ToString();
-            if ("国内卖方保理".Equals(this.Case.TransactionType) || "出口保理".Equals(this.Case.TransactionType) || "国际信保保理".Equals(this.Case.TransactionType) || "国内信保保理".Equals(this.Case.TransactionType))
-            {
-                if (this.Case.SellerFactor != null)
-                {
-                    this.factorCodeTextBox.Text = this.Case.SellerFactor.FactorCode;
-                    this.factorNameTextBox.Text = this.Case.SellerFactor.ToString();
-                }
 
-                this.PMTextBox.Text = this.Case.SellerClient.PMName;
-                this.RMTextBox.Text = this.Case.SellerClient.RMName;
-            }
-            else
+            switch (this.Case.TransactionType)
             {
-                if (this.Case.BuyerFactor != null)
-                {
+                case "国内卖方保理":
+                case "出口保理":
+                case "国内信保保理":
+                case "国际信保保理":
+                case "租赁保理":
                     this.factorCodeTextBox.Text = this.Case.BuyerFactor.FactorCode;
                     this.factorNameTextBox.Text = this.Case.BuyerFactor.ToString();
-                }
-
-                this.PMTextBox.Text = this.Case.BuyerClient.PMName;
-                this.RMTextBox.Text = this.Case.BuyerClient.RMName;
+                    this.PMTextBox.Text = this.Case.SellerClient.PMName;
+                    this.RMTextBox.Text = this.Case.SellerClient.RMName;
+                    break;
+                case "国内买方保理":
+                case "进口保理":
+                    this.factorCodeTextBox.Text = this.Case.SellerFactor.FactorCode;
+                    this.factorNameTextBox.Text = this.Case.SellerFactor.ToString();
+                    this.PMTextBox.Text = this.Case.BuyerClient.PMName;
+                    this.RMTextBox.Text = this.Case.BuyerClient.RMName;
+                    break;
+                default: break;
             }
 
             CDA cda = this.Case.CDAs.SingleOrDefault(c => c.CDAStatus == ConstStr.CDA.SIGNED);

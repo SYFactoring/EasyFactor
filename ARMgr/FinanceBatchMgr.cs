@@ -302,7 +302,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (App.Current.CurUser.Role == "审核员")
+            if (App.Current.CurUser.Role == "复核员")
             {
                 this.menuItemCheck.Visible = true;
                 this.menuItemReject.Visible = true;

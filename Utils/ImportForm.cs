@@ -1220,6 +1220,7 @@ namespace CMBC.EasyFactor.Utils
             List<InvoicePaymentBatch> paymentBatches = new List<InvoicePaymentBatch>();
             List<InvoiceRefundBatch> refundBatches = new List<InvoiceRefundBatch>();
             List<Invoice> invoiceList = new List<Invoice>();
+            List<CreditNote> creditNoteList = new List<CreditNote>();
             try
             {
                 if (valueArray != null)
@@ -1618,9 +1619,14 @@ namespace CMBC.EasyFactor.Utils
                         CreditNote creditNote = App.Current.DbContext.CreditNotes.SingleOrDefault(c => c.CreditNoteNo == creditNoteNo);
                         if (creditNote == null)
                         {
-                            creditNote = new CreditNote();
-                            creditNote.CreditNoteNo = creditNoteNo;
-                            creditNote.CreditNoteDate = (DateTime)valueArray2[row, 11];
+                            creditNote = creditNoteList.SingleOrDefault(c => c.CreditNoteNo == creditNoteNo);
+                            if (creditNote == null)
+                            {
+                                creditNote = new CreditNote();
+                                creditNote.CreditNoteNo = creditNoteNo;
+                                creditNote.CreditNoteDate = (DateTime)valueArray2[row, 11];
+                                creditNoteList.Add(creditNote);
+                            }
                         }
 
                         InvoicePaymentLog log = new InvoicePaymentLog();

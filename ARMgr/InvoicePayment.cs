@@ -509,7 +509,7 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.CDA = this._CDA;
                 if (batch.PaymentBatchNo == null)
                 {
-                    batch.PaymentBatchNo = Invoice.GeneratePaymentBatchNo(DateTime.Now.Date);
+                    batch.PaymentBatchNo = Invoice.GeneratePaymentBatchNo(batch.PaymentDate);
                 }
 
                 for (int i = 0; i < invoiceList.Count; i++)

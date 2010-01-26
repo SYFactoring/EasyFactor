@@ -503,7 +503,7 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.CDA = this._CDA;
                 if (batch.RefundBatchNo == null)
                 {
-                    batch.RefundBatchNo = Invoice.GenerateRefundBatchNo(DateTime.Now.Date);
+                    batch.RefundBatchNo = Invoice.GenerateRefundBatchNo(batch.RefundDate);
                 }
                 for (int i = 0; i < invoiceList.Count; i++)
                 {

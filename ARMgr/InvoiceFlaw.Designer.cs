@@ -381,16 +381,6 @@
             this.flawReasonCheckedListBox.CheckOnClick = true;
             this.flawReasonCheckedListBox.Enabled = false;
             this.flawReasonCheckedListBox.FormattingEnabled = true;
-            this.flawReasonCheckedListBox.Items.AddRange(new object[] {
-            "卖方/买方基本资料不符",
-            "发票为存根联或副联复印件",
-            "发票无转让字据记载或贴错",
-            "账款到期日不符",
-            "单据内容不符",
-            "额度通知书过期或未签回",
-            "保理合同过期或未签回",
-            "交货凭证内容不完整",
-            "逾期转让"});
             this.flawReasonCheckedListBox.Location = new System.Drawing.Point(105, 2);
             this.flawReasonCheckedListBox.Name = "flawReasonCheckedListBox";
             this.flawReasonCheckedListBox.Size = new System.Drawing.Size(233, 124);

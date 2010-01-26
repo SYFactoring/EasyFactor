@@ -490,7 +490,7 @@ namespace CMBC.EasyFactor.ARMgr
             batch.IsCreateMsg = false;
             batch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = batch;
-            this.invoiceBindingSource.DataSource = batch.Invoices.ToList();
+            this.invoiceBindingSource.DataSource = batch.Invoices;
             this.dgvInvoices.ReadOnly = false;
         }
 
@@ -596,7 +596,7 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.CDA = this._CDA;
                 if (batch.AssignBatchNo == null)
                 {
-                    batch.AssignBatchNo = Invoice.GenerateAssignBatchNo(DateTime.Now.Date);
+                    batch.AssignBatchNo = Invoice.GenerateAssignBatchNo(batch.AssignDate);
                 }
 
                 foreach (Invoice invoice in invoiceList)
@@ -746,7 +746,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (invoice.DueDate < assignDate)
                 {
                     invoice.IsFlaw = true;
-                    invoice.FlawReason = "逾期转让";
+                    invoice.FlawReason = "09";
                 }
             }
             return true;

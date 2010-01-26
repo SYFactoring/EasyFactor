@@ -118,7 +118,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (App.Current.CurUser.Role == "审核员")
+            if (App.Current.CurUser.Role == "复核员")
             {
                 this.menuItemCheck.Visible = true;
                 this.menuItemReject.Visible = true;
@@ -402,12 +402,11 @@ namespace CMBC.EasyFactor.ARMgr
                 case "国内信保保理":
                 case "国内买方保理":
                 case "租赁保理":
-                    factor = selectedBatch.CDA.Case.SellerFactor;
-                    break;
-                case "国际信保保理":
-                case "出口保理":
                 case "进口保理":
-                    factor = selectedBatch.CDA.Case.BuyerFactor;
+                    break;
+                case "出口保理":
+                case "国际信保保理":
+                    factor = selectedBatch.CDA.Case.SellerFactor;
                     break;
                 default:
                     break;
@@ -670,14 +669,14 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 case "国内卖方保理":
                 case "国内信保保理":
-                case "国内买方保理":
-                case "租赁保理":
-                    factor = selectedBatch.CDA.Case.SellerFactor;
-                    break;
-                case "国际信保保理":
                 case "出口保理":
-                case "进口保理":
+                case "国际信保保理":
+                case "租赁保理":
                     factor = selectedBatch.CDA.Case.BuyerFactor;
+                    break;
+                case "国内买方保理":
+                case "进口保理":
+                    factor = selectedBatch.CDA.Case.SellerFactor;
                     break;
                 default:
                     break;
@@ -779,27 +778,10 @@ namespace CMBC.EasyFactor.ARMgr
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
-            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
+            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 220, 3, 170, 30);
 
             Client seller = selectedBatch.CDA.Case.SellerClient;
             Client buyer = selectedBatch.CDA.Case.BuyerClient;
-            Factor factor = null;
-            switch (selectedBatch.CDA.Case.TransactionType)
-            {
-                case "国内卖方保理":
-                case "国内信保保理":
-                case "国内买方保理":
-                case "租赁保理":
-                    factor = selectedBatch.CDA.Case.SellerFactor;
-                    break;
-                case "国际信保保理":
-                case "出口保理":
-                case "进口保理":
-                    factor = selectedBatch.CDA.Case.BuyerFactor;
-                    break;
-                default:
-                    break;
-            }
 
             sheet.get_Range("A3", "G3").MergeCells = true;
             sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
@@ -815,7 +797,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Cells[6, 5] = buyer.ToString();
             sheet.Cells[7, 1] = "保理部作业组";
 
-            int row = 9;
+            int row = 8;
             sheet.Cells[row, 1] = "";
             sheet.Cells[row, 2] = "发票号码";
             sheet.Cells[row, 3] = "发票金额";
@@ -824,6 +806,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Cells[row, 6] = "瑕疵金额";
             sheet.Cells[row, 7] = "原因";
             row++;
+            string flawOtherReason = string.Empty;
             for (int i = 1; i <= selectedBatch.Invoices.Count; i++)
             {
                 Invoice invoice = selectedBatch.Invoices[i - 1];
@@ -834,10 +817,13 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Cells[row, 5] = invoice.DueDate;
                 sheet.Cells[row, 6] = invoice.InvoiceAmount;
                 sheet.Cells[row, 7] = invoice.FlawReason;
+                if (invoice.FlawOtherReason != string.Empty && flawOtherReason == string.Empty)
+                {
+                    flawOtherReason = invoice.FlawOtherReason;
+                }
                 row++;
             }
 
-            sheet.get_Range(sheet.Cells[9, 1], sheet.Cells[row - 1, 7]).Borders.LineStyle = 1;
             sheet.get_Range(sheet.Cells[9, 1], sheet.Cells[row - 1, 6]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             sheet.get_Range(sheet.Cells[10, 3], sheet.Cells[row - 1, 3]).NumberFormatLocal = "¥#,##0.00";
             sheet.get_Range(sheet.Cells[10, 6], sheet.Cells[row - 1, 6]).NumberFormatLocal = "¥#,##0.00";
@@ -846,22 +832,71 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Cells[row, 1] = "原因：";
             row++;
             sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
-            sheet.Cells[row, 1] = "8个原因";
+            sheet.Cells[row, 1] =
+                  "01-卖方/买方基本资料不符; 02-发票为存根联或副联复印件; 03-发票无转让字据记载或贴错; \n"
+                + "04-账款到期日不符;        05-单据内容不符;             06-额度通知书过期或未签回; \n"
+                + "07-保理合同过期或未签回;  08-交货凭证内容不完整;       09-逾期转让;      10-其他;";
+            sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 60;
             row++;
+            sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
+            sheet.Cells[row++, 1] = flawOtherReason;
+            sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 3]).MergeCells = true;
+            sheet.Cells[row, 1] = String.Format("日期： {0:yyyy-MM-dd}", DateTime.Now.Date);
+            sheet.get_Range(sheet.Cells[row, 4], sheet.Cells[row, 5]).MergeCells = true;
+            sheet.Cells[row, 4] = "复核：";
+            sheet.get_Range(sheet.Cells[row, 6], sheet.Cells[row, 7]).MergeCells = true;
+            sheet.Cells[row, 6] = "经办：";
+            sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[row, 7]).Borders.LineStyle = 1;
+            row++;
+
+            row++;
+            row++;
+            sheet.Cells[row++, 1] = "瑕疵解除说明：";
+            int table2Begin = row;
+            sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 2]).MergeCells = true;
+            sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).MergeCells = true;
+            sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 120;
+            sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignBottom;
+            sheet.Cells[row, 1] = "卖方意见";
+            sheet.Cells[row, 3] = "                                                               签章：                    日期：";
+            row++;
+
+            sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row + 1, 2]).MergeCells = true;
+            sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).MergeCells = true;
+            sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 120;
+            sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignBottom;
+            sheet.Cells[row, 1] = "分部意见";
+            sheet.Cells[row, 3] = "                                                               经办人签名：              日期：";
+            row++;
+
+            sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).MergeCells = true;
+            sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 120;
+            sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignBottom;
+            sheet.Cells[row, 3] = "                                                               有权签字人签名：          日期：";
+            row++;
+
+            sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 2]).MergeCells = true;
+            sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).MergeCells = true;
+            sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 120;
+            sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignBottom;
+            sheet.Cells[row, 1] = "保理部意见";
+            sheet.Cells[row, 3] = "                                                               有权签字人签名：          日期：";
+            sheet.get_Range(sheet.Cells[table2Begin, 1], sheet.Cells[row, 7]).Borders.LineStyle = 1;
 
             sheet.UsedRange.Font.Name = "仿宋_GB2312";
             sheet.UsedRange.Font.Size = 12;
             sheet.get_Range("A1", "A2").RowHeight = 20;
             sheet.get_Range("A3", "A3").RowHeight = 30;
+            sheet.get_Range("A3", "A3").Font.Size = 22;
 
             sheet.get_Range("A5", "G6").Borders.LineStyle = 1;
-            sheet.get_Range("A1", Type.Missing).ColumnWidth = 2;
-            sheet.get_Range("B1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("E1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("F1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("G1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("A1", Type.Missing).ColumnWidth = 3;
+            sheet.get_Range("B1", Type.Missing).ColumnWidth = 10;
+            sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("D1", Type.Missing).ColumnWidth = 13;
+            sheet.get_Range("E1", Type.Missing).ColumnWidth = 13;
+            sheet.get_Range("F1", Type.Missing).ColumnWidth = 17;
+            sheet.get_Range("G1", Type.Missing).ColumnWidth = 12;
             app.Visible = true;
 
             //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;

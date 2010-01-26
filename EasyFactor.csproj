@@ -233,6 +233,7 @@
     <Compile Include="DB.dbml\ClientReview.cs" />
     <Compile Include="DB.dbml\Contract.cs" />
     <Compile Include="DB.dbml\Exchange.cs" />
+    <Compile Include="DB.dbml\FlawReason.cs" />
     <Compile Include="DB.dbml\InvoicePaymentLog.cs" />
     <Compile Include="DB.dbml\InvoiceRefundBatch.cs" />
     <Compile Include="DB.dbml\InvoiceRefundLog.cs" />

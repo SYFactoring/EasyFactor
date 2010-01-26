@@ -443,7 +443,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CaseCode
 		{
 			get
@@ -463,7 +463,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_SellerCode", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_SellerCode", DbType="VarChar(35) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string SellerCode
 		{
 			get
@@ -487,7 +487,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_SellerFactorCode", DbType="Char(7) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_SellerFactorCode", DbType="Char(7) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string SellerFactorCode
 		{
 			get
@@ -511,7 +511,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_BuyerCode", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_BuyerCode", DbType="VarChar(35) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string BuyerCode
 		{
 			get
@@ -535,7 +535,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_BuyerFactorCode", DbType="Char(7) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_BuyerFactorCode", DbType="Char(7) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string BuyerFactorCode
 		{
 			get
@@ -559,7 +559,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_InvoiceCurrency", DbType="Char(3) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_InvoiceCurrency", DbType="Char(3) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string InvoiceCurrency
 		{
 			get
@@ -579,7 +579,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_TransactionType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_TransactionType", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string TransactionType
 		{
 			get
@@ -599,7 +599,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_OperationType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_OperationType", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string OperationType
 		{
 			get
@@ -619,7 +619,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_OwnerDepartmentCode", DbType="VarChar(14) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_OwnerDepartmentCode", DbType="VarChar(14) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string OwnerDepartmentCode
 		{
 			get
@@ -643,7 +643,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CoDepartmentCode", DbType="VarChar(14)")]
+		[Column(Storage="_CoDepartmentCode", DbType="VarChar(14)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CoDepartmentCode
 		{
 			get
@@ -667,7 +667,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CaseAppDate", DbType="DateTime NOT NULL")]
+		[Column(Storage="_CaseAppDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime CaseAppDate
 		{
 			get
@@ -687,7 +687,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CaseMark", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CaseMark", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CaseMark
 		{
 			get
@@ -707,7 +707,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreateUserName
 		{
 			get
@@ -727,7 +727,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ManagerName", DbType="NVarChar(50)")]
+		[Column(Storage="_ManagerName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ManagerName
 		{
 			get
@@ -747,7 +747,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_NetPaymentTerm", DbType="Int")]
+		[Column(Storage="_NetPaymentTerm", DbType="Int", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<int> NetPaymentTerm
 		{
 			get
@@ -767,7 +767,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -1119,7 +1119,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_UserID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_UserID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string UserID
 		{
 			get
@@ -1139,7 +1139,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Name", DbType="NVarChar(50)", CanBeNull=false)]
+		[Column(Storage="_Name", DbType="NVarChar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string Name
 		{
 			get
@@ -1159,7 +1159,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Password", DbType="VarChar(50)", CanBeNull=false)]
+		[Column(Storage="_Password", DbType="VarChar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string Password
 		{
 			get
@@ -1179,7 +1179,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_EDIAccount", DbType="VarChar(35)")]
+		[Column(Storage="_EDIAccount", DbType="VarChar(35)", UpdateCheck=UpdateCheck.Never)]
 		public string EDIAccount
 		{
 			get
@@ -1199,7 +1199,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Role", DbType="NVarChar(50)")]
+		[Column(Storage="_Role", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string Role
 		{
 			get
@@ -1219,7 +1219,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Phone", DbType="VarChar(50)")]
+		[Column(Storage="_Phone", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string Phone
 		{
 			get
@@ -1239,7 +1239,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Telphone", DbType="VarChar(50)")]
+		[Column(Storage="_Telphone", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string Telphone
 		{
 			get
@@ -1259,7 +1259,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Email", DbType="VarChar(50)")]
+		[Column(Storage="_Email", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string Email
 		{
 			get
@@ -1279,7 +1279,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_MSN", DbType="VarChar(50)")]
+		[Column(Storage="_MSN", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string MSN
 		{
 			get
@@ -1299,7 +1299,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_LoginDate", DbType="DateTime")]
+		[Column(Storage="_LoginDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> LoginDate
 		{
 			get
@@ -1544,7 +1544,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CDACode
 		{
 			get
@@ -1564,7 +1564,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CaseCode
 		{
 			get
@@ -1588,7 +1588,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsRecoarse", DbType="Bit")]
+		[Column(Storage="_IsRecoarse", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<bool> IsRecoarse
 		{
 			get
@@ -1608,7 +1608,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsNotice", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_IsNotice", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string IsNotice
 		{
 			get
@@ -1628,7 +1628,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AssignType", DbType="NVarChar(50)")]
+		[Column(Storage="_AssignType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AssignType
 		{
 			get
@@ -1648,7 +1648,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditCoverCurr", DbType="Char(3)")]
+		[Column(Storage="_CreditCoverCurr", DbType="Char(3)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreditCoverCurr
 		{
 			get
@@ -1668,7 +1668,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditCover", DbType="Float")]
+		[Column(Storage="_CreditCover", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> CreditCover
 		{
 			get
@@ -1688,7 +1688,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsCreditCoverRevolving", DbType="Bit")]
+		[Column(Storage="_IsCreditCoverRevolving", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<bool> IsCreditCoverRevolving
 		{
 			get
@@ -1708,7 +1708,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PUGProportion", DbType="Float")]
+		[Column(Storage="_PUGProportion", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> PUGProportion
 		{
 			get
@@ -1728,7 +1728,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditCoverPeriodBegin", DbType="DateTime")]
+		[Column(Storage="_CreditCoverPeriodBegin", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> CreditCoverPeriodBegin
 		{
 			get
@@ -1748,7 +1748,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditCoverPeriodEnd", DbType="DateTime")]
+		[Column(Storage="_CreditCoverPeriodEnd", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> CreditCoverPeriodEnd
 		{
 			get
@@ -1768,7 +1768,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PUGPeriod", DbType="Int")]
+		[Column(Storage="_PUGPeriod", DbType="Int", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<int> PUGPeriod
 		{
 			get
@@ -1788,7 +1788,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ReassignGracePeriod", DbType="Int")]
+		[Column(Storage="_ReassignGracePeriod", DbType="Int", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<int> ReassignGracePeriod
 		{
 			get
@@ -1808,7 +1808,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceLineCurr", DbType="Char(3)")]
+		[Column(Storage="_FinanceLineCurr", DbType="Char(3)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FinanceLineCurr
 		{
 			get
@@ -1828,7 +1828,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceLine", DbType="Float")]
+		[Column(Storage="_FinanceLine", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> FinanceLine
 		{
 			get
@@ -1848,7 +1848,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceLinePeriodBegin", DbType="DateTime")]
+		[Column(Storage="_FinanceLinePeriodBegin", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> FinanceLinePeriodBegin
 		{
 			get
@@ -1868,7 +1868,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceLinePeriodEnd", DbType="DateTime")]
+		[Column(Storage="_FinanceLinePeriodEnd", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> FinanceLinePeriodEnd
 		{
 			get
@@ -1888,7 +1888,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceProportion", DbType="Float")]
+		[Column(Storage="_FinanceProportion", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> FinanceProportion
 		{
 			get
@@ -1908,7 +1908,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_OrderNumber", DbType="VarChar(35)")]
+		[Column(Storage="_OrderNumber", DbType="VarChar(35)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string OrderNumber
 		{
 			get
@@ -1928,7 +1928,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PaymentTerms", DbType="NVarChar(500)")]
+		[Column(Storage="_PaymentTerms", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string PaymentTerms
 		{
 			get
@@ -1948,7 +1948,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceGracePeriod", DbType="Int")]
+		[Column(Storage="_FinanceGracePeriod", DbType="Int", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<int> FinanceGracePeriod
 		{
 			get
@@ -1968,7 +1968,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Deductibles", DbType="Float")]
+		[Column(Storage="_Deductibles", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> Deductibles
 		{
 			get
@@ -1988,7 +1988,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_LossThreshold", DbType="Float")]
+		[Column(Storage="_LossThreshold", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> LossThreshold
 		{
 			get
@@ -2008,7 +2008,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Price", DbType="Float")]
+		[Column(Storage="_Price", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> Price
 		{
 			get
@@ -2028,7 +2028,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_EFPrice", DbType="Float")]
+		[Column(Storage="_EFPrice", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> EFPrice
 		{
 			get
@@ -2048,7 +2048,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IFPrice", DbType="Float")]
+		[Column(Storage="_IFPrice", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> IFPrice
 		{
 			get
@@ -2068,7 +2068,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CommissionType", DbType="NVarChar(50)")]
+		[Column(Storage="_CommissionType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CommissionType
 		{
 			get
@@ -2088,7 +2088,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CommissionTypeComment", DbType="NVarChar(500)")]
+		[Column(Storage="_CommissionTypeComment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CommissionTypeComment
 		{
 			get
@@ -2108,7 +2108,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_HandFeeCurr", DbType="Char(10)")]
+		[Column(Storage="_HandFeeCurr", DbType="Char(10)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string HandFeeCurr
 		{
 			get
@@ -2128,7 +2128,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_HandFee", DbType="Float")]
+		[Column(Storage="_HandFee", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> HandFee
 		{
 			get
@@ -2148,7 +2148,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDASignDate", DbType="DateTime")]
+		[Column(Storage="_CDASignDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> CDASignDate
 		{
 			get
@@ -2168,7 +2168,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDAStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CDAStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CDAStatus
 		{
 			get
@@ -2188,7 +2188,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_NoticeMethod", DbType="NVarChar(50)")]
+		[Column(Storage="_NoticeMethod", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string NoticeMethod
 		{
 			get
@@ -2208,7 +2208,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_NoticePerson", DbType="NVarChar(50)")]
+		[Column(Storage="_NoticePerson", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string NoticePerson
 		{
 			get
@@ -2228,7 +2228,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Email", DbType="VarChar(70)")]
+		[Column(Storage="_Email", DbType="VarChar(70)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Email
 		{
 			get
@@ -2248,7 +2248,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Fax", DbType="VarChar(25)")]
+		[Column(Storage="_Fax", DbType="VarChar(25)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Fax
 		{
 			get
@@ -2268,7 +2268,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -2288,7 +2288,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreateUserName
 		{
 			get
@@ -2308,7 +2308,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Remark", DbType="NVarChar(500)")]
+		[Column(Storage="_Remark", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Remark
 		{
 			get
@@ -2328,7 +2328,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CheckStatus
 		{
 			get
@@ -2348,7 +2348,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RejectReason", DbType="NVarChar(500)")]
+		[Column(Storage="_RejectReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string RejectReason
 		{
 			get
@@ -2368,7 +2368,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckUserName", DbType="NVarChar(50)")]
+		[Column(Storage="_CheckUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CheckUserName
 		{
 			get
@@ -2388,7 +2388,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckDate", DbType="DateTime")]
+		[Column(Storage="_CheckDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> CheckDate
 		{
 			get
@@ -2735,7 +2735,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ClientEDICode
 		{
 			get
@@ -2755,7 +2755,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientCoreNo", DbType="NVarChar(50)")]
+		[Column(Storage="_ClientCoreNo", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ClientCoreNo
 		{
 			get
@@ -2775,7 +2775,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientNameCN", DbType="NVarChar(500)")]
+		[Column(Storage="_ClientNameCN", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ClientNameCN
 		{
 			get
@@ -2795,7 +2795,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientNameEN", DbType="NVarChar(500)")]
+		[Column(Storage="_ClientNameEN", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ClientNameEN
 		{
 			get
@@ -2815,7 +2815,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AddressCN", DbType="NVarChar(200)")]
+		[Column(Storage="_AddressCN", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AddressCN
 		{
 			get
@@ -2835,7 +2835,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AddressEN", DbType="NVarChar(500)")]
+		[Column(Storage="_AddressEN", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AddressEN
 		{
 			get
@@ -2855,7 +2855,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CityCN", DbType="NVarChar(50)")]
+		[Column(Storage="_CityCN", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CityCN
 		{
 			get
@@ -2875,7 +2875,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CityEN", DbType="NVarChar(35)")]
+		[Column(Storage="_CityEN", DbType="NVarChar(35)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CityEN
 		{
 			get
@@ -2895,7 +2895,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ProvinceCN", DbType="NVarChar(50)")]
+		[Column(Storage="_ProvinceCN", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ProvinceCN
 		{
 			get
@@ -2915,7 +2915,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ProvinceEN", DbType="NVarChar(9)")]
+		[Column(Storage="_ProvinceEN", DbType="NVarChar(9)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ProvinceEN
 		{
 			get
@@ -2935,7 +2935,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PostCode", DbType="NVarChar(9)")]
+		[Column(Storage="_PostCode", DbType="NVarChar(9)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string PostCode
 		{
 			get
@@ -2955,7 +2955,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CountryCode", DbType="Char(2)")]
+		[Column(Storage="_CountryCode", DbType="Char(2)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CountryCode
 		{
 			get
@@ -2975,7 +2975,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Representative", DbType="NVarChar(50)")]
+		[Column(Storage="_Representative", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Representative
 		{
 			get
@@ -2995,7 +2995,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Website", DbType="VarChar(200)")]
+		[Column(Storage="_Website", DbType="VarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Website
 		{
 			get
@@ -3015,7 +3015,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Contact", DbType="NVarChar(50)")]
+		[Column(Storage="_Contact", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Contact
 		{
 			get
@@ -3035,7 +3035,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Telephone", DbType="VarChar(25)")]
+		[Column(Storage="_Telephone", DbType="VarChar(25)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Telephone
 		{
 			get
@@ -3055,7 +3055,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Email", DbType="VarChar(70)")]
+		[Column(Storage="_Email", DbType="VarChar(70)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Email
 		{
 			get
@@ -3075,7 +3075,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FaxNumber", DbType="VarChar(25)")]
+		[Column(Storage="_FaxNumber", DbType="VarChar(25)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FaxNumber
 		{
 			get
@@ -3095,7 +3095,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CellPhone", DbType="VarChar(50)")]
+		[Column(Storage="_CellPhone", DbType="VarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CellPhone
 		{
 			get
@@ -3115,7 +3115,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientType", DbType="NVarChar(50)")]
+		[Column(Storage="_ClientType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ClientType
 		{
 			get
@@ -3135,7 +3135,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Industry", DbType="NVarChar(50)")]
+		[Column(Storage="_Industry", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Industry
 		{
 			get
@@ -3155,7 +3155,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ProductCN", DbType="NVarChar(500)")]
+		[Column(Storage="_ProductCN", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ProductCN
 		{
 			get
@@ -3175,7 +3175,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ProductEN", DbType="VarChar(70)")]
+		[Column(Storage="_ProductEN", DbType="VarChar(70)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ProductEN
 		{
 			get
@@ -3195,7 +3195,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientLevel", DbType="NVarChar(50)")]
+		[Column(Storage="_ClientLevel", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ClientLevel
 		{
 			get
@@ -3215,7 +3215,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_GroupNo", DbType="VarChar(35)")]
+		[Column(Storage="_GroupNo", DbType="VarChar(35)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string GroupEDICode
 		{
 			get
@@ -3239,7 +3239,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RegistrationNumber", DbType="VarChar(35)")]
+		[Column(Storage="_RegistrationNumber", DbType="VarChar(35)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string RegistrationNumber
 		{
 			get
@@ -3259,7 +3259,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CompanyCode", DbType="VarChar(50)")]
+		[Column(Storage="_CompanyCode", DbType="VarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CompanyCode
 		{
 			get
@@ -3279,7 +3279,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_BranchCode", DbType="VarChar(14)")]
+		[Column(Storage="_BranchCode", DbType="VarChar(14)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string BranchCode
 		{
 			get
@@ -3303,7 +3303,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PMName", DbType="NVarChar(200)")]
+		[Column(Storage="_PMName", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string PMName
 		{
 			get
@@ -3323,7 +3323,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RMName", DbType="NVarChar(200)")]
+		[Column(Storage="_RMName", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string RMName
 		{
 			get
@@ -3343,7 +3343,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -3363,7 +3363,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50)", CanBeNull=false)]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreateUserName
 		{
 			get
@@ -3703,7 +3703,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_AccountID", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_AccountID", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountID
 		{
 			get
@@ -3723,7 +3723,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientEDICode", DbType="VarChar(35)")]
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ClientEDICode
 		{
 			get
@@ -3747,7 +3747,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AccountNumber", DbType="VarChar(200)")]
+		[Column(Storage="_AccountNumber", DbType="VarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountNumber
 		{
 			get
@@ -3767,7 +3767,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AccountCurrency", DbType="NChar(3)")]
+		[Column(Storage="_AccountCurrency", DbType="NChar(3)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountCurrency
 		{
 			get
@@ -3787,7 +3787,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AccountType", DbType="NVarChar(50)")]
+		[Column(Storage="_AccountType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountType
 		{
 			get
@@ -3807,7 +3807,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CorrespondentBank", DbType="VarChar(200)")]
+		[Column(Storage="_CorrespondentBank", DbType="VarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CorrespondentBank
 		{
 			get
@@ -3827,7 +3827,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Branch", DbType="VarChar(200)")]
+		[Column(Storage="_Branch", DbType="VarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Branch
 		{
 			get
@@ -3847,7 +3847,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsDefault", DbType="Bit")]
+		[Column(Storage="_IsDefault", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<bool> IsDefault
 		{
 			get
@@ -3867,7 +3867,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(200)")]
+		[Column(Storage="_Comment", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -4044,7 +4044,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_CreditLineID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[Column(Storage="_CreditLineID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public int CreditLineID
 		{
 			get
@@ -4064,7 +4064,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ClientEDICode
 		{
 			get
@@ -4088,7 +4088,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditLineType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreditLineType", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreditLineType
 		{
 			get
@@ -4108,7 +4108,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditLineCurrency", DbType="Char(3) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreditLineCurrency", DbType="Char(3) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreditLineCurrency
 		{
 			get
@@ -4128,7 +4128,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditLine", DbType="Float NOT NULL")]
+		[Column(Storage="_CreditLine", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public double CreditLine
 		{
 			get
@@ -4148,7 +4148,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PeriodBegin", DbType="DateTime NOT NULL")]
+		[Column(Storage="_PeriodBegin", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime PeriodBegin
 		{
 			get
@@ -4168,7 +4168,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PeriodEnd", DbType="DateTime NOT NULL")]
+		[Column(Storage="_PeriodEnd", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime PeriodEnd
 		{
 			get
@@ -4188,7 +4188,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ApproveNo", DbType="NVarChar(50)")]
+		[Column(Storage="_ApproveNo", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ApproveNo
 		{
 			get
@@ -4208,7 +4208,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ApproveType", DbType="NVarChar(50)")]
+		[Column(Storage="_ApproveType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ApproveType
 		{
 			get
@@ -4228,7 +4228,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditLineStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreditLineStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreditLineStatus
 		{
 			get
@@ -4248,7 +4248,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FreezeReason", DbType="NVarChar(50)")]
+		[Column(Storage="_FreezeReason", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FreezeReason
 		{
 			get
@@ -4268,7 +4268,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Freezer", DbType="NVarChar(50)")]
+		[Column(Storage="_Freezer", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Freezer
 		{
 			get
@@ -4288,7 +4288,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FreezeDate", DbType="DateTime")]
+		[Column(Storage="_FreezeDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> FreezeDate
 		{
 			get
@@ -4308,7 +4308,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_UnfreezeReason", DbType="NVarChar(50)")]
+		[Column(Storage="_UnfreezeReason", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string UnfreezeReason
 		{
 			get
@@ -4328,7 +4328,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Unfreezer", DbType="NVarChar(50)")]
+		[Column(Storage="_Unfreezer", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Unfreezer
 		{
 			get
@@ -4348,7 +4348,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_UnfreezeDate", DbType="DateTime")]
+		[Column(Storage="_UnfreezeDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> UnfreezeDate
 		{
 			get
@@ -4368,7 +4368,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -4388,7 +4388,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50)", CanBeNull=false)]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreateUserName
 		{
 			get
@@ -4408,7 +4408,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_GroupCreditLineID", DbType="INT")]
+		[Column(Storage="_GroupCreditLineID", DbType="INT", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<int> GroupCreditLineID
 		{
 			get
@@ -4594,7 +4594,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_ContractCode", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_ContractCode", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ContractCode
 		{
 			get
@@ -4614,7 +4614,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ContractType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_ContractType", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ContractType
 		{
 			get
@@ -4634,7 +4634,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ClientEDICode
 		{
 			get
@@ -4658,7 +4658,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ContractValueDate", DbType="DateTime NOT NULL")]
+		[Column(Storage="_ContractValueDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime ContractValueDate
 		{
 			get
@@ -4678,7 +4678,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ContractDueDate", DbType="DateTime NOT NULL")]
+		[Column(Storage="_ContractDueDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime ContractDueDate
 		{
 			get
@@ -4698,7 +4698,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ContractStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_ContractStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ContractStatus
 		{
 			get
@@ -4718,7 +4718,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreateUserName
 		{
 			get
@@ -4822,7 +4822,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_CountryCode", DbType="Char(2) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_CountryCode", DbType="Char(2) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string CountryCode
 		{
 			get
@@ -4842,7 +4842,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CountryNameEN", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CountryNameEN", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string CountryNameEN
 		{
 			get
@@ -4862,7 +4862,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CountryNameCN", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CountryNameCN", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string CountryNameCN
 		{
 			get
@@ -4963,7 +4963,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_NegoID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[Column(Storage="_NegoID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public int NegoID
 		{
 			get
@@ -4983,7 +4983,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CaseCode
 		{
 			get
@@ -5007,7 +5007,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RequestType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_RequestType", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string RequestType
 		{
 			get
@@ -5027,7 +5027,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RequestAmount", DbType="Float NOT NULL")]
+		[Column(Storage="_RequestAmount", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public double RequestAmount
 		{
 			get
@@ -5047,7 +5047,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RequestDate", DbType="DateTime NOT NULL")]
+		[Column(Storage="_RequestDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime RequestDate
 		{
 			get
@@ -5067,7 +5067,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ReplyAmount", DbType="Float")]
+		[Column(Storage="_ReplyAmount", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> ReplyAmount
 		{
 			get
@@ -5087,7 +5087,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ReplyDate", DbType="DateTime")]
+		[Column(Storage="_ReplyDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> ReplyDate
 		{
 			get
@@ -5107,7 +5107,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IFPrice", DbType="Float")]
+		[Column(Storage="_IFPrice", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> IFPrice
 		{
 			get
@@ -5127,7 +5127,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(1400)")]
+		[Column(Storage="_Comment", DbType="NVarChar(1400)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -5147,7 +5147,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreateUserName
 		{
 			get
@@ -5247,7 +5247,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_CurrencyCode", DbType="Char(3) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_CurrencyCode", DbType="Char(3) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string CurrencyCode
 		{
 			get
@@ -5267,7 +5267,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CurrencyName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CurrencyName", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string CurrencyName
 		{
 			get
@@ -5401,7 +5401,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_DepartmentCode", DbType="VarChar(14) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_DepartmentCode", DbType="VarChar(14) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string DepartmentCode
 		{
 			get
@@ -5421,7 +5421,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_DepartmentName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_DepartmentName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string DepartmentName
 		{
 			get
@@ -5441,7 +5441,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Location", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_Location", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string Location
 		{
 			get
@@ -5461,7 +5461,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Domain", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_Domain", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string Domain
 		{
 			get
@@ -5481,7 +5481,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AddressCN", DbType="NVarChar(200)")]
+		[Column(Storage="_AddressCN", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
 		public string AddressCN
 		{
 			get
@@ -5501,7 +5501,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AddressEN", DbType="NVarChar(200)")]
+		[Column(Storage="_AddressEN", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
 		public string AddressEN
 		{
 			get
@@ -5521,7 +5521,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PostCode", DbType="NVarChar(50)")]
+		[Column(Storage="_PostCode", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string PostCode
 		{
 			get
@@ -5541,7 +5541,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Manager", DbType="NVarChar(50)")]
+		[Column(Storage="_Manager", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string Manager
 		{
 			get
@@ -5561,7 +5561,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Contact_1", DbType="NVarChar(50)")]
+		[Column(Storage="_Contact_1", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string Contact_1
 		{
 			get
@@ -5581,7 +5581,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Email_1", DbType="NVarChar(50)")]
+		[Column(Storage="_Email_1", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string Email_1
 		{
 			get
@@ -5601,7 +5601,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Phone_1", DbType="NVarChar(50)")]
+		[Column(Storage="_Phone_1", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string Phone_1
 		{
 			get
@@ -5621,7 +5621,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Fax_1", DbType="NVarChar(50)")]
+		[Column(Storage="_Fax_1", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string Fax_1
 		{
 			get
@@ -5641,7 +5641,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Contact_2", DbType="NVarChar(50)")]
+		[Column(Storage="_Contact_2", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string Contact_2
 		{
 			get
@@ -5661,7 +5661,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Email_2", DbType="NVarChar(50)")]
+		[Column(Storage="_Email_2", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string Email_2
 		{
 			get
@@ -5681,7 +5681,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Phone_2", DbType="NVarChar(50)")]
+		[Column(Storage="_Phone_2", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string Phone_2
 		{
 			get
@@ -5701,7 +5701,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Fax_2", DbType="NVarChar(50)")]
+		[Column(Storage="_Fax_2", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string Fax_2
 		{
 			get
@@ -5886,7 +5886,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_AccountID", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_AccountID", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountID
 		{
 			get
@@ -5906,7 +5906,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_DepartmentCode", DbType="VarChar(14)")]
+		[Column(Storage="_DepartmentCode", DbType="VarChar(14)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string DepartmentCode
 		{
 			get
@@ -5930,7 +5930,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AccountNo", DbType="NVarChar(50)")]
+		[Column(Storage="_AccountNo", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountNo
 		{
 			get
@@ -5950,7 +5950,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AccountCurrency", DbType="NChar(3)")]
+		[Column(Storage="_AccountCurrency", DbType="NChar(3)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountCurrency
 		{
 			get
@@ -5970,7 +5970,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AccountType", DbType="NVarChar(50)")]
+		[Column(Storage="_AccountType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountType
 		{
 			get
@@ -5990,7 +5990,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -6267,7 +6267,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_FactorCode", DbType="Char(7) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_FactorCode", DbType="Char(7) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FactorCode
 		{
 			get
@@ -6287,7 +6287,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FactorType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_FactorType", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FactorType
 		{
 			get
@@ -6307,7 +6307,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CompanyNameCN", DbType="NVarChar(200)")]
+		[Column(Storage="_CompanyNameCN", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CompanyNameCN
 		{
 			get
@@ -6327,7 +6327,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CompanyNameEN", DbType="VarChar(200)")]
+		[Column(Storage="_CompanyNameEN", DbType="VarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CompanyNameEN
 		{
 			get
@@ -6347,7 +6347,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ShortName", DbType="VarChar(200)")]
+		[Column(Storage="_ShortName", DbType="VarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ShortName
 		{
 			get
@@ -6367,7 +6367,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CountryName", DbType="NVarChar(50)")]
+		[Column(Storage="_CountryName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CountryName
 		{
 			get
@@ -6387,7 +6387,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Department", DbType="NVarChar(200)")]
+		[Column(Storage="_Department", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Department
 		{
 			get
@@ -6407,7 +6407,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PostalAddress_1", DbType="NVarChar(200)")]
+		[Column(Storage="_PostalAddress_1", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string PostalAddress_1
 		{
 			get
@@ -6427,7 +6427,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PostalAddress_2", DbType="NVarChar(200)")]
+		[Column(Storage="_PostalAddress_2", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string PostalAddress_2
 		{
 			get
@@ -6447,7 +6447,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PostalCodePost", DbType="NVarChar(200)")]
+		[Column(Storage="_PostalCodePost", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string PostalCodePost
 		{
 			get
@@ -6467,7 +6467,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CityPost", DbType="NVarChar(200)")]
+		[Column(Storage="_CityPost", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CityPost
 		{
 			get
@@ -6487,7 +6487,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_VisitingAddress_1", DbType="NVarChar(200)")]
+		[Column(Storage="_VisitingAddress_1", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string VisitingAddress_1
 		{
 			get
@@ -6507,7 +6507,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_VisitingAddress_2", DbType="NVarChar(200)")]
+		[Column(Storage="_VisitingAddress_2", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string VisitingAddress_2
 		{
 			get
@@ -6527,7 +6527,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PostalCodeVisiting", DbType="NVarChar(200)")]
+		[Column(Storage="_PostalCodeVisiting", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string PostalCodeVisiting
 		{
 			get
@@ -6547,7 +6547,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CityVisiting", DbType="NVarChar(200)")]
+		[Column(Storage="_CityVisiting", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CityVisiting
 		{
 			get
@@ -6567,7 +6567,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Email", DbType="VarChar(200)")]
+		[Column(Storage="_Email", DbType="VarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Email
 		{
 			get
@@ -6587,7 +6587,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_WebSite", DbType="VarChar(200)")]
+		[Column(Storage="_WebSite", DbType="VarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string WebSite
 		{
 			get
@@ -6607,7 +6607,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Telephone_1", DbType="VarChar(50)")]
+		[Column(Storage="_Telephone_1", DbType="VarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Telephone_1
 		{
 			get
@@ -6627,7 +6627,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Telephone_2", DbType="VarChar(50)")]
+		[Column(Storage="_Telephone_2", DbType="VarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Telephone_2
 		{
 			get
@@ -6647,7 +6647,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Telefax_1", DbType="VarChar(50)")]
+		[Column(Storage="_Telefax_1", DbType="VarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Telefax_1
 		{
 			get
@@ -6667,7 +6667,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Telefax_2", DbType="VarChar(50)")]
+		[Column(Storage="_Telefax_2", DbType="VarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Telefax_2
 		{
 			get
@@ -6687,7 +6687,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_WorkingHours", DbType="VarChar(100)")]
+		[Column(Storage="_WorkingHours", DbType="VarChar(100)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string WorkingHours
 		{
 			get
@@ -6707,7 +6707,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_GeneralCorrespondence_1", DbType="NVarChar(200)")]
+		[Column(Storage="_GeneralCorrespondence_1", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string GeneralCorrespondence_1
 		{
 			get
@@ -6727,7 +6727,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_GeneralCorrespondence_2", DbType="NVarChar(200)")]
+		[Column(Storage="_GeneralCorrespondence_2", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string GeneralCorrespondence_2
 		{
 			get
@@ -6747,7 +6747,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Contacts_1", DbType="NVarChar(500)")]
+		[Column(Storage="_Contacts_1", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Contacts_1
 		{
 			get
@@ -6767,7 +6767,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Contacts_2", DbType="NVarChar(500)")]
+		[Column(Storage="_Contacts_2", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Contacts_2
 		{
 			get
@@ -6787,7 +6787,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Contacts_3", DbType="NVarChar(500)")]
+		[Column(Storage="_Contacts_3", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Contacts_3
 		{
 			get
@@ -6807,7 +6807,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Contacts_4", DbType="NVarChar(500)")]
+		[Column(Storage="_Contacts_4", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Contacts_4
 		{
 			get
@@ -6827,7 +6827,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Management_1", DbType="NVarChar(200)")]
+		[Column(Storage="_Management_1", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Management_1
 		{
 			get
@@ -6847,7 +6847,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Management_2", DbType="NVarChar(200)")]
+		[Column(Storage="_Management_2", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Management_2
 		{
 			get
@@ -6867,7 +6867,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Shareholders", DbType="NVarChar(500)")]
+		[Column(Storage="_Shareholders", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Shareholders
 		{
 			get
@@ -6887,7 +6887,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IFISAvailableOnPrivateForum", DbType="VarChar(5)")]
+		[Column(Storage="_IFISAvailableOnPrivateForum", DbType="VarChar(5)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string IFISAvailableOnPrivateForum
 		{
 			get
@@ -6907,7 +6907,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_MembershipStatus", DbType="VarChar(50)")]
+		[Column(Storage="_MembershipStatus", DbType="VarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string MembershipStatus
 		{
 			get
@@ -6927,7 +6927,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_MembershipDate", DbType="VarChar(50)")]
+		[Column(Storage="_MembershipDate", DbType="VarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string MembershipDate
 		{
 			get
@@ -6947,7 +6947,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_DateOfLatestRevision", DbType="VarChar(50)")]
+		[Column(Storage="_DateOfLatestRevision", DbType="VarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string DateOfLatestRevision
 		{
 			get
@@ -6967,7 +6967,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_GroupNo", DbType="Char(7)")]
+		[Column(Storage="_GroupNo", DbType="Char(7)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string GroupFactorCode
 		{
 			get
@@ -6991,7 +6991,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsCorrespondentBank", DbType="Bit")]
+		[Column(Storage="_IsCorrespondentBank", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<bool> IsCorrespondentBank
 		{
 			get
@@ -7011,7 +7011,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsAgreementSigned", DbType="Bit")]
+		[Column(Storage="_IsAgreementSigned", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<bool> IsAgreementSigned
 		{
 			get
@@ -7031,7 +7031,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -7051,7 +7051,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_LastModifiedDate", DbType="DateTime")]
+		[Column(Storage="_LastModifiedDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> LastModifiedDate
 		{
 			get
@@ -7071,7 +7071,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50)", CanBeNull=false)]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreateUserName
 		{
 			get
@@ -7360,7 +7360,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_AccountID", DbType="NVarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_AccountID", DbType="NVarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountID
 		{
 			get
@@ -7380,7 +7380,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FactorCode", DbType="Char(7)")]
+		[Column(Storage="_FactorCode", DbType="Char(7)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FactorCode
 		{
 			get
@@ -7404,7 +7404,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AccountNo", DbType="VarChar(200)")]
+		[Column(Storage="_AccountNo", DbType="VarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountNo
 		{
 			get
@@ -7424,7 +7424,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AccountCurrency", DbType="NChar(3)")]
+		[Column(Storage="_AccountCurrency", DbType="NChar(3)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountCurrency
 		{
 			get
@@ -7444,7 +7444,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AccountType", DbType="NVarChar(50)")]
+		[Column(Storage="_AccountType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountType
 		{
 			get
@@ -7464,7 +7464,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AccountSWIFT", DbType="NVarChar(50)")]
+		[Column(Storage="_AccountSWIFT", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountSWIFT
 		{
 			get
@@ -7484,7 +7484,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_HaveInterAccount", DbType="NVarChar(50)")]
+		[Column(Storage="_HaveInterAccount", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string HaveInterAccount
 		{
 			get
@@ -7504,7 +7504,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IntermediaryBank", DbType="NVarChar(50)")]
+		[Column(Storage="_IntermediaryBank", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string IntermediaryBank
 		{
 			get
@@ -7524,7 +7524,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_InterBankSWIFT", DbType="NVarChar(50)")]
+		[Column(Storage="_InterBankSWIFT", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string InterBankSWIFT
 		{
 			get
@@ -7544,7 +7544,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsDefault", DbType="Bit")]
+		[Column(Storage="_IsDefault", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<bool> IsDefault
 		{
 			get
@@ -7564,7 +7564,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Commment", DbType="NVarChar(200)")]
+		[Column(Storage="_Commment", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Commment
 		{
 			get
@@ -7731,7 +7731,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_CreditLineID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[Column(Storage="_CreditLineID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public int CreditLineID
 		{
 			get
@@ -7751,7 +7751,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FactorCode", DbType="Char(7) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_FactorCode", DbType="Char(7) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FactorCode
 		{
 			get
@@ -7775,7 +7775,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditLineType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreditLineType", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreditLineType
 		{
 			get
@@ -7795,7 +7795,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditLineCurrency", DbType="Char(3) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreditLineCurrency", DbType="Char(3) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreditLineCurrency
 		{
 			get
@@ -7815,7 +7815,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditLine", DbType="Float NOT NULL")]
+		[Column(Storage="_CreditLine", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public double CreditLine
 		{
 			get
@@ -7835,7 +7835,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PeriodBegin", DbType="DateTime NOT NULL")]
+		[Column(Storage="_PeriodBegin", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime PeriodBegin
 		{
 			get
@@ -7855,7 +7855,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PeriodEnd", DbType="DateTime NOT NULL")]
+		[Column(Storage="_PeriodEnd", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime PeriodEnd
 		{
 			get
@@ -7875,7 +7875,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ApproveNo", DbType="NVarChar(50)")]
+		[Column(Storage="_ApproveNo", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ApproveNo
 		{
 			get
@@ -7895,7 +7895,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ApproveType", DbType="NVarChar(50)")]
+		[Column(Storage="_ApproveType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ApproveType
 		{
 			get
@@ -7915,7 +7915,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditLineStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreditLineStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreditLineStatus
 		{
 			get
@@ -7935,7 +7935,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FreezeReason", DbType="NVarChar(50)")]
+		[Column(Storage="_FreezeReason", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FreezeReason
 		{
 			get
@@ -7955,7 +7955,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Freezer", DbType="NVarChar(50)")]
+		[Column(Storage="_Freezer", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Freezer
 		{
 			get
@@ -7975,7 +7975,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FreezeDate", DbType="DateTime")]
+		[Column(Storage="_FreezeDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> FreezeDate
 		{
 			get
@@ -7995,7 +7995,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_UnfreezeReason", DbType="NVarChar(50)")]
+		[Column(Storage="_UnfreezeReason", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string UnfreezeReason
 		{
 			get
@@ -8015,7 +8015,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Unfreezer", DbType="NVarChar(50)")]
+		[Column(Storage="_Unfreezer", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Unfreezer
 		{
 			get
@@ -8035,7 +8035,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_UnfreezeDate", DbType="DateTime")]
+		[Column(Storage="_UnfreezeDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> UnfreezeDate
 		{
 			get
@@ -8055,7 +8055,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -8075,7 +8075,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50)")]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreateUserName
 		{
 			get
@@ -8213,7 +8213,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_AssignBatchNo", DbType="VarChar(35) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_AssignBatchNo", DbType="VarChar(35) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AssignBatchNo
 		{
 			get
@@ -8233,7 +8233,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CDACode
 		{
 			get
@@ -8257,7 +8257,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AssignDate", DbType="DateTime NOT NULL")]
+		[Column(Storage="_AssignDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime AssignDate
 		{
 			get
@@ -8277,7 +8277,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CheckStatus
 		{
 			get
@@ -8297,7 +8297,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RejectReason", DbType="NVarChar(500)")]
+		[Column(Storage="_RejectReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string RejectReason
 		{
 			get
@@ -8317,7 +8317,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckUserName", DbType="NVarChar(50)")]
+		[Column(Storage="_CheckUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CheckUserName
 		{
 			get
@@ -8337,7 +8337,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckDate", DbType="DateTime")]
+		[Column(Storage="_CheckDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> CheckDate
 		{
 			get
@@ -8357,7 +8357,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsCreateMsg", DbType="Bit")]
+		[Column(Storage="_IsCreateMsg", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<bool> IsCreateMsg
 		{
 			get
@@ -8377,7 +8377,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -8397,7 +8397,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreateUserName
 		{
 			get
@@ -8595,7 +8595,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_FinanceBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_FinanceBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FinanceBatchNo
 		{
 			get
@@ -8615,7 +8615,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CDACode
 		{
 			get
@@ -8639,7 +8639,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_FinanceType", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FinanceType
 		{
 			get
@@ -8659,7 +8659,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_BatchCurrency", DbType="Char(3) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_BatchCurrency", DbType="Char(3) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string BatchCurrency
 		{
 			get
@@ -8679,7 +8679,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceAmount", DbType="Float NOT NULL")]
+		[Column(Storage="_FinanceAmount", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public double FinanceAmount
 		{
 			get
@@ -8699,7 +8699,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinancePeriodBegin", DbType="DateTime NOT NULL")]
+		[Column(Storage="_FinancePeriodBegin", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime FinancePeriodBegin
 		{
 			get
@@ -8719,7 +8719,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinancePeriodEnd", DbType="DateTime NOT NULL")]
+		[Column(Storage="_FinancePeriodEnd", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime FinancePeriodEnd
 		{
 			get
@@ -8739,7 +8739,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceRate", DbType="Float")]
+		[Column(Storage="_FinanceRate", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> FinanceRate
 		{
 			get
@@ -8759,7 +8759,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_InterestType", DbType="NVarChar(50)")]
+		[Column(Storage="_InterestType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string InterestType
 		{
 			get
@@ -8779,7 +8779,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FactorCode", DbType="Char(7)")]
+		[Column(Storage="_FactorCode", DbType="Char(7)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FactorCode
 		{
 			get
@@ -8803,7 +8803,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CostRate", DbType="Float")]
+		[Column(Storage="_CostRate", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> CostRate
 		{
 			get
@@ -8823,7 +8823,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -8843,7 +8843,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreateUserName
 		{
 			get
@@ -8863,7 +8863,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckDate", DbType="DateTime")]
+		[Column(Storage="_CheckDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> CheckDate
 		{
 			get
@@ -8883,7 +8883,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CheckStatus
 		{
 			get
@@ -8903,7 +8903,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RejectReason", DbType="NVarChar(500)")]
+		[Column(Storage="_RejectReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string RejectReason
 		{
 			get
@@ -8923,7 +8923,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckUserName", DbType="NVarChar(50)")]
+		[Column(Storage="_CheckUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CheckUserName
 		{
 			get
@@ -8943,7 +8943,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_OtherIncome", DbType="float")]
+		[Column(Storage="_OtherIncome", DbType="float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> OtherIncome
 		{
 			get
@@ -9144,7 +9144,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_PaymentBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_PaymentBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string PaymentBatchNo
 		{
 			get
@@ -9164,7 +9164,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CDACode
 		{
 			get
@@ -9188,7 +9188,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PaymentType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_PaymentType", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string PaymentType
 		{
 			get
@@ -9208,7 +9208,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PaymentDate", DbType="DateTime NOT NULL")]
+		[Column(Storage="_PaymentDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime PaymentDate
 		{
 			get
@@ -9228,7 +9228,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsCreateMsg", DbType="Bit")]
+		[Column(Storage="_IsCreateMsg", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<bool> IsCreateMsg
 		{
 			get
@@ -9248,7 +9248,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -9268,7 +9268,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreateUserName
 		{
 			get
@@ -9288,7 +9288,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CheckStatus
 		{
 			get
@@ -9308,7 +9308,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RejectReason", DbType="NVarChar(500)")]
+		[Column(Storage="_RejectReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string RejectReason
 		{
 			get
@@ -9328,7 +9328,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckUserName", DbType="NVarChar(50)")]
+		[Column(Storage="_CheckUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CheckUserName
 		{
 			get
@@ -9348,7 +9348,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckDate", DbType="DateTime")]
+		[Column(Storage="_CheckDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> CheckDate
 		{
 			get
@@ -9476,7 +9476,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_CreditNoteNo", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_CreditNoteNo", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreditNoteNo
 		{
 			get
@@ -9496,7 +9496,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditNoteDate", DbType="DateTime NOT NULL")]
+		[Column(Storage="_CreditNoteDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime CreditNoteDate
 		{
 			get
@@ -9612,7 +9612,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_InvoiceDeductionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[Column(Storage="_InvoiceDeductionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public int PaymentLogID
 		{
 			get
@@ -9632,7 +9632,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PaymentBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_PaymentBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string PaymentBatchNo
 		{
 			get
@@ -9656,7 +9656,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_InvoiceNo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_InvoiceNo", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string InvoiceNo
 		{
 			get
@@ -9680,7 +9680,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PaymentAmount", DbType="Float NOT NULL")]
+		[Column(Storage="_PaymentAmount", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public double PaymentAmount
 		{
 			get
@@ -9700,7 +9700,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreditNoteNo", DbType="VarChar(50)")]
+		[Column(Storage="_CreditNoteNo", DbType="VarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreditNoteNo
 		{
 			get
@@ -9724,7 +9724,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -9910,7 +9910,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_RefundLogID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[Column(Storage="_RefundLogID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public int RefundLogID
 		{
 			get
@@ -9930,7 +9930,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RefundBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_RefundBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string RefundBatchNo
 		{
 			get
@@ -9954,7 +9954,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_InvoiceNo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_InvoiceNo", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string InvoiceNo
 		{
 			get
@@ -9978,7 +9978,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RefundAmount", DbType="Float NOT NULL")]
+		[Column(Storage="_RefundAmount", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public double RefundAmount
 		{
 			get
@@ -9998,7 +9998,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -10170,7 +10170,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_RefundBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_RefundBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string RefundBatchNo
 		{
 			get
@@ -10190,7 +10190,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CDACode
 		{
 			get
@@ -10214,7 +10214,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RefundType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_RefundType", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string RefundType
 		{
 			get
@@ -10234,7 +10234,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RefundDate", DbType="DateTime NOT NULL")]
+		[Column(Storage="_RefundDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime RefundDate
 		{
 			get
@@ -10254,7 +10254,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -10274,7 +10274,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreateUserName
 		{
 			get
@@ -10294,7 +10294,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CheckStatus
 		{
 			get
@@ -10314,7 +10314,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RejectReason", DbType="NVarChar(500)")]
+		[Column(Storage="_RejectReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string RejectReason
 		{
 			get
@@ -10334,7 +10334,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckUserName", DbType="NVarChar(50)")]
+		[Column(Storage="_CheckUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CheckUserName
 		{
 			get
@@ -10354,7 +10354,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CheckDate", DbType="DateTime")]
+		[Column(Storage="_CheckDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> CheckDate
 		{
 			get
@@ -10544,6 +10544,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
+		private string _FlawOtherReason;
+		
 		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
 		
 		private EntitySet<InvoiceRefundLog> _InvoiceRefundLogs;
@@ -10640,6 +10642,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnDisputeResolveUserNameChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnFlawOtherReasonChanging(string value);
+    partial void OnFlawOtherReasonChanged();
     #endregion
 		
 		public Invoice()
@@ -10651,7 +10655,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_InvoiceNo", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_InvoiceNo", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string InvoiceNo
 		{
 			get
@@ -10671,7 +10675,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_InvoiceDate", DbType="DateTime NOT NULL")]
+		[Column(Storage="_InvoiceDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime InvoiceDate
 		{
 			get
@@ -10691,7 +10695,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_InvoiceAmount", DbType="Float NOT NULL")]
+		[Column(Storage="_InvoiceAmount", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public double InvoiceAmount
 		{
 			get
@@ -10711,7 +10715,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AssignBatchNo", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_AssignBatchNo", DbType="VarChar(35) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AssignBatchNo
 		{
 			get
@@ -10735,7 +10739,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_AssignAmount", DbType="Float NOT NULL")]
+		[Column(Storage="_AssignAmount", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public double AssignAmount
 		{
 			get
@@ -10755,7 +10759,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_DueDate", DbType="DateTime NOT NULL")]
+		[Column(Storage="_DueDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime DueDate
 		{
 			get
@@ -10775,7 +10779,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ValueDate", DbType="DateTime")]
+		[Column(Storage="_ValueDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> ValueDate
 		{
 			get
@@ -10795,7 +10799,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_NetPaymentTerms", DbType="Int")]
+		[Column(Storage="_NetPaymentTerms", DbType="Int", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<int> NetPaymentTerms
 		{
 			get
@@ -10815,7 +10819,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PrimaryDiscountDays", DbType="Int")]
+		[Column(Storage="_PrimaryDiscountDays", DbType="Int", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<int> PrimaryDiscountDays
 		{
 			get
@@ -10835,7 +10839,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PrimaryDiscountRate", DbType="Int")]
+		[Column(Storage="_PrimaryDiscountRate", DbType="Int", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<int> PrimaryDiscountRate
 		{
 			get
@@ -10855,7 +10859,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_SecondaryDiscountDays", DbType="Int")]
+		[Column(Storage="_SecondaryDiscountDays", DbType="Int", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<int> SecondaryDiscountDays
 		{
 			get
@@ -10875,7 +10879,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_SecondaryDiscountRate", DbType="Int")]
+		[Column(Storage="_SecondaryDiscountRate", DbType="Int", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<int> SecondaryDiscountRate
 		{
 			get
@@ -10895,7 +10899,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PaymentConditions", DbType="VarChar(50)")]
+		[Column(Storage="_PaymentConditions", DbType="VarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string PaymentConditions
 		{
 			get
@@ -10915,7 +10919,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_OrderNumberReference", DbType="VarChar(35)")]
+		[Column(Storage="_OrderNumberReference", DbType="VarChar(35)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string OrderNumberReference
 		{
 			get
@@ -10935,7 +10939,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_InvoiceReferenceNumber", DbType="VarChar(35)")]
+		[Column(Storage="_InvoiceReferenceNumber", DbType="VarChar(35)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string InvoiceReferenceNumber
 		{
 			get
@@ -10955,7 +10959,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsFlaw", DbType="Bit NOT NULL")]
+		[Column(Storage="_IsFlaw", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public bool IsFlaw
 		{
 			get
@@ -10975,7 +10979,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FlawReason", DbType="NVarChar(500)")]
+		[Column(Storage="_FlawReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FlawReason
 		{
 			get
@@ -10995,7 +10999,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FlawResolveReason", DbType="NVarChar(500)")]
+		[Column(Storage="_FlawResolveReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FlawResolveReason
 		{
 			get
@@ -11015,7 +11019,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FlawResolveDate", DbType="DateTime")]
+		[Column(Storage="_FlawResolveDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> FlawResolveDate
 		{
 			get
@@ -11035,7 +11039,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FlawResolveUserName", DbType="NVarChar(50)")]
+		[Column(Storage="_FlawResolveUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FlawResolveUserName
 		{
 			get
@@ -11055,7 +11059,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceBatchNo", DbType="NVarChar(50)")]
+		[Column(Storage="_FinanceBatchNo", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string FinanceBatchNo
 		{
 			get
@@ -11079,7 +11083,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceAmount", DbType="Float")]
+		[Column(Storage="_FinanceAmount", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> FinanceAmount
 		{
 			get
@@ -11099,7 +11103,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceDate", DbType="DateTime")]
+		[Column(Storage="_FinanceDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> FinanceDate
 		{
 			get
@@ -11119,7 +11123,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_FinanceDueDate", DbType="DateTime")]
+		[Column(Storage="_FinanceDueDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> FinanceDueDate
 		{
 			get
@@ -11139,7 +11143,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PaymentAmount", DbType="Float")]
+		[Column(Storage="_PaymentAmount", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> PaymentAmount
 		{
 			get
@@ -11159,7 +11163,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_PaymentDate", DbType="DateTime")]
+		[Column(Storage="_PaymentDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> PaymentDate
 		{
 			get
@@ -11179,7 +11183,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RefundAmount", DbType="Float")]
+		[Column(Storage="_RefundAmount", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> RefundAmount
 		{
 			get
@@ -11199,7 +11203,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RefundDate", DbType="DateTime")]
+		[Column(Storage="_RefundDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> RefundDate
 		{
 			get
@@ -11219,7 +11223,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Commission", DbType="Float")]
+		[Column(Storage="_Commission", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> Commission
 		{
 			get
@@ -11239,7 +11243,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CommissionDate", DbType="DateTime")]
+		[Column(Storage="_CommissionDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> CommissionDate
 		{
 			get
@@ -11259,7 +11263,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Interest", DbType="Float")]
+		[Column(Storage="_Interest", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> Interest
 		{
 			get
@@ -11279,7 +11283,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_InterestDate", DbType="DateTime")]
+		[Column(Storage="_InterestDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> InterestDate
 		{
 			get
@@ -11299,7 +11303,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsDispute", DbType="Bit")]
+		[Column(Storage="_IsDispute", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<bool> IsDispute
 		{
 			get
@@ -11319,7 +11323,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_DisputeType", DbType="NVarChar(50)")]
+		[Column(Storage="_DisputeType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string DisputeType
 		{
 			get
@@ -11339,7 +11343,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_DisputeAmount", DbType="Float")]
+		[Column(Storage="_DisputeAmount", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<double> DisputeAmount
 		{
 			get
@@ -11359,7 +11363,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_DisputeReason", DbType="NVarChar(500)")]
+		[Column(Storage="_DisputeReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string DisputeReason
 		{
 			get
@@ -11379,7 +11383,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_DisputeDate", DbType="DateTime")]
+		[Column(Storage="_DisputeDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> DisputeDate
 		{
 			get
@@ -11399,7 +11403,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_DisputeUserName", DbType="NVarChar(50)")]
+		[Column(Storage="_DisputeUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string DisputeUserName
 		{
 			get
@@ -11419,7 +11423,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_DisputeResolveReason", DbType="NVarChar(500)")]
+		[Column(Storage="_DisputeResolveReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string DisputeResolveReason
 		{
 			get
@@ -11439,7 +11443,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_DisputeResolveDate", DbType="DateTime")]
+		[Column(Storage="_DisputeResolveDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.Nullable<System.DateTime> DisputeResolveDate
 		{
 			get
@@ -11459,7 +11463,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_DisputeResolveUserName", DbType="NVarChar(50)")]
+		[Column(Storage="_DisputeResolveUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string DisputeResolveUserName
 		{
 			get
@@ -11479,7 +11483,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -11495,6 +11499,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Comment = value;
 					this.SendPropertyChanged("Comment");
 					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FlawOtherReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string FlawOtherReason
+		{
+			get
+			{
+				return this._FlawOtherReason;
+			}
+			set
+			{
+				if ((this._FlawOtherReason != value))
+				{
+					this.OnFlawOtherReasonChanging(value);
+					this.SendPropertyChanging();
+					this._FlawOtherReason = value;
+					this.SendPropertyChanged("FlawOtherReason");
+					this.OnFlawOtherReasonChanged();
 				}
 			}
 		}
@@ -11671,7 +11695,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_FromCurr", DbType="Char(3) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_FromCurr", DbType="Char(3) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string FromCurr
 		{
 			get
@@ -11691,7 +11715,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ToCurr", DbType="Char(3) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_ToCurr", DbType="Char(3) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string ToCurr
 		{
 			get
@@ -11711,7 +11735,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ExchangeRate", DbType="Float NOT NULL")]
+		[Column(Storage="_ExchangeRate", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.Never)]
 		public double ExchangeRate
 		{
 			get
@@ -11731,7 +11755,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_LastModifiedDate", DbType="DateTime")]
+		[Column(Storage="_LastModifiedDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.DateTime LastModifiedDate
 		{
 			get
@@ -11816,7 +11840,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_ReviewNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_ReviewNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ReviewNo
 		{
 			get
@@ -11836,7 +11860,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ClientEDICode
 		{
 			get
@@ -11860,7 +11884,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ReviewStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_ReviewStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ReviewStatus
 		{
 			get
@@ -11880,7 +11904,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ReviewDate", DbType="DateTime NOT NULL")]
+		[Column(Storage="_ReviewDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public System.DateTime ReviewDate
 		{
 			get
@@ -11900,7 +11924,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get
@@ -11920,7 +11944,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CreateUserName
 		{
 			get

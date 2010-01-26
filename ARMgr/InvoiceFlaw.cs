@@ -26,12 +26,15 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.AutoGenerateColumns = false;
             this.dgvInvoices.DataSource = bs;
 
+            this.flawReasonCheckedListBox.DataSource = FlawReason.GetAllFlawReasons();
+            this.flawReasonCheckedListBox.DisplayMember = "Reason";
+            this.flawReasonCheckedListBox.ValueMember = "Index";
+
             bs.DataSource = invoiceList;
             foreach (Invoice invoice in invoiceList)
             {
                 invoice.Backup();
             }
-
         }
 
         /// <summary>
@@ -45,6 +48,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 invoice.Restore();
             }
+
             this.Close();
         }
 
@@ -56,14 +60,9 @@ namespace CMBC.EasyFactor.ARMgr
         private void SaveFlaw(object sender, EventArgs e)
         {
             string flawReason = string.Empty;
-            foreach (string item in this.flawReasonCheckedListBox.CheckedItems)
+            foreach (FlawReason item in this.flawReasonCheckedListBox.CheckedItems)
             {
-                flawReason += (item + ";");
-            }
-
-            if (!this.tbFlawReason.Text.Equals(string.Empty))
-            {
-                flawReason += this.tbFlawReason.Text;
+                flawReason += (item.Index + ";");
             }
 
             if (this.isFlawCheckBox.Checked && flawReason == string.Empty)

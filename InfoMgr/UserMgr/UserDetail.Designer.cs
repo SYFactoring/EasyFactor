@@ -100,6 +100,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.userErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.userHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.password2TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
             emailLabel = new DevComponents.DotNetBar.LabelX();
             loginDateLabel = new DevComponents.DotNetBar.LabelX();
             mSNLabel = new DevComponents.DotNetBar.LabelX();
@@ -165,7 +167,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             // 
             passwordLabel.BackgroundStyle.Class = "";
-            passwordLabel.Location = new System.Drawing.Point(48, 97);
+            passwordLabel.Location = new System.Drawing.Point(48, 76);
             passwordLabel.Name = "passwordLabel";
             passwordLabel.Size = new System.Drawing.Size(31, 16);
             passwordLabel.TabIndex = 6;
@@ -235,7 +237,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             // 
             eDIAccountLabel.BackgroundStyle.Class = "";
-            eDIAccountLabel.Location = new System.Drawing.Point(29, 63);
+            eDIAccountLabel.Location = new System.Drawing.Point(29, 55);
             eDIAccountLabel.Name = "eDIAccountLabel";
             eDIAccountLabel.Size = new System.Drawing.Size(50, 16);
             eDIAccountLabel.TabIndex = 4;
@@ -303,7 +305,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.passwordTextBox.Border.Class = "TextBoxBorder";
             this.passwordTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Password", true));
-            this.passwordTextBox.Location = new System.Drawing.Point(92, 96);
+            this.passwordTextBox.Location = new System.Drawing.Point(92, 75);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(154, 20);
@@ -354,7 +356,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.nameTextBox.Border.Class = "TextBoxBorder";
             this.nameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Name", true));
             this.nameTextBox.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.nameTextBox.Location = new System.Drawing.Point(92, 31);
+            this.nameTextBox.Location = new System.Drawing.Point(92, 29);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(154, 20);
             this.nameTextBox.TabIndex = 3;
@@ -391,7 +393,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.eDIAccountTextBox.Border.Class = "TextBoxBorder";
             this.eDIAccountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "EDIAccount", true));
-            this.eDIAccountTextBox.Location = new System.Drawing.Point(92, 62);
+            this.eDIAccountTextBox.Location = new System.Drawing.Point(92, 53);
             this.eDIAccountTextBox.Name = "eDIAccountTextBox";
             this.eDIAccountTextBox.Size = new System.Drawing.Size(154, 20);
             this.eDIAccountTextBox.TabIndex = 5;
@@ -404,6 +406,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.roleComboBox.FormattingEnabled = true;
             this.roleComboBox.Items.AddRange(new object[] {
             "操作员",
+            "复核员",
             "审核员",
             "管理员"});
             this.roleComboBox.Location = new System.Drawing.Point(92, 122);
@@ -415,6 +418,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.groupPanelUser.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelUser.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelUser.Controls.Add(this.password2TextBox);
             this.groupPanelUser.Controls.Add(userIDLabel);
             this.groupPanelUser.Controls.Add(roleLabel);
             this.groupPanelUser.Controls.Add(this.nameTextBox);
@@ -507,6 +511,25 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.userHighlighter.ContainerControl = this;
             // 
+            // password2TextBox
+            // 
+            // 
+            // 
+            // 
+            this.password2TextBox.Border.Class = "TextBoxBorder";
+            this.password2TextBox.Location = new System.Drawing.Point(92, 97);
+            this.password2TextBox.Name = "password2TextBox";
+            this.password2TextBox.PasswordChar = '*';
+            this.password2TextBox.Size = new System.Drawing.Size(154, 20);
+            this.password2TextBox.TabIndex = 20;
+            this.userValidator.SetValidator1(this.password2TextBox, this.compareValidator1);
+            // 
+            // compareValidator1
+            // 
+            this.compareValidator1.ControlToCompare = this.passwordTextBox;
+            this.compareValidator1.ErrorMessage = "两次密码输入必须相同";
+            this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // UserDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -535,5 +558,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Controls.TextBoxX password2TextBox;
+        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
     }
 }

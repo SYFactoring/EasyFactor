@@ -62,15 +62,18 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
             this.opUserType = opType;
+
             if (opType == OpUserType.NEW_USER)
             {
                 userBindingSource.DataSource = new User();
             }
             else
             {
+                this.password2TextBox.Text = user.Password;
                 userBindingSource.DataSource = user;
                 user.Backup();
             }
+
             this.UpdateUserControlStatus();
         }
 
@@ -190,8 +193,10 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                     ControlUtil.SetComponetEditable(comp, true);
                 }
                 userIDTextBox.ReadOnly = true;
+                roleComboBox.Enabled = false;
             }
-            this.loginDate.ReadOnly = true;
+
+            this.loginDate.ReadOnly = true;        
         }
 
         /// <summary>

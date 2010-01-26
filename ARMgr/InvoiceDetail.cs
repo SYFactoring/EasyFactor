@@ -76,27 +76,22 @@ namespace CMBC.EasyFactor.ARMgr
             this.invoiceCurrencyComboBox.DisplayMember = "CurrencyCode";
             this.invoiceCurrencyComboBox.ValueMember = "CurrencyCode";
 
+            this.flawReasonCheckedListBox.DataSource = FlawReason.GetAllFlawReasons();
+            this.flawReasonCheckedListBox.DisplayMember = "Reason";
+            this.flawReasonCheckedListBox.ValueMember = "Index";
+
             if (invoice.FlawReason != null)
             {
                 List<string> reasonList = new List<string>();
                 reasonList.AddRange(invoice.FlawReason.Split(';'));
                 for (int i = 0; i < this.flawReasonCheckedListBox.Items.Count; i++)
                 {
-                    string item = (string)this.flawReasonCheckedListBox.Items[i];
+                    string item = ((FlawReason)this.flawReasonCheckedListBox.Items[i]).Index;
                     if (reasonList.Contains(item))
                     {
                         this.flawReasonCheckedListBox.SetItemChecked(i, true);
-                        reasonList.Remove(item);
                     }
                 }
-
-                string otherReason = string.Empty;
-                foreach (string other in reasonList)
-                {
-                    otherReason += (other + Environment.NewLine);
-                }
-
-                this.tbFlawReason.Text = otherReason;
             }
 
             if (invoice.DisputeReason != null)
@@ -335,14 +330,9 @@ namespace CMBC.EasyFactor.ARMgr
             Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
 
             string flawReason = string.Empty;
-            foreach (string item in this.flawReasonCheckedListBox.CheckedItems)
+            foreach (FlawReason item in this.flawReasonCheckedListBox.CheckedItems)
             {
-                flawReason += (item + ";");
-            }
-
-            if (this.tbFlawReason.Text != string.Empty)
-            {
-                flawReason += this.tbFlawReason.Text;
+                flawReason += (item.Index + ";");
             }
 
             invoice.FlawReason = flawReason;

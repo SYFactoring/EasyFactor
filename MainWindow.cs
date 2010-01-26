@@ -27,7 +27,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-        #region Constructors (1)
+		#region Constructors (1) 
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -43,9 +43,9 @@ namespace CMBC.EasyFactor
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Sets command status
@@ -69,11 +69,11 @@ namespace CMBC.EasyFactor
             }
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (63)
+		#region Methods (64) 
 
-        // Public Methods (2) 
+		// Public Methods (2) 
 
         /// <summary>
         /// 
@@ -97,7 +97,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-        // Private Methods (61) 
+		// Private Methods (62) 
 
         /// <summary>
         /// 
@@ -830,6 +830,18 @@ namespace CMBC.EasyFactor
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateCurrentUser(object sender, EventArgs e)
+        {
+            User user = App.Current.CurUser;
+            UserDetail detail = new UserDetail(user, UserDetail.OpUserType.DETAIL_USER);
+            detail.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         private bool ValidateRole()
         {
@@ -844,6 +856,6 @@ namespace CMBC.EasyFactor
             }
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }
