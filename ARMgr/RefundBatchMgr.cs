@@ -231,12 +231,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
         {
-            if (opBatchType == OpBatchType.QUERY || opBatchType == OpBatchType.CHECK)
-            {
+            //if (opBatchType == OpBatchType.QUERY || opBatchType == OpBatchType.CHECK)
+            //{
                 DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
                 DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
                 string status = this.cbCheckStatus.Text;
                 string refundType = this.cbRefundType.Text;
+                string createUserName = this.tbCreateUserName.Text;
 
                 var queryResult = App.Current.DbContext.InvoiceRefundBatches.Where(i =>
                     i.RefundBatchNo.Contains(this.tbRefundBatchNo.Text)
@@ -244,16 +245,17 @@ namespace CMBC.EasyFactor.ARMgr
                     && (endDate != this.dateTo.MinDate ? i.RefundDate <= endDate : true)
                     && (status != string.Empty ? i.CheckStatus == status : true)
                     && (refundType != string.Empty ? i.RefundType == refundType : true)
+                    && (i.CreateUserName.Contains(createUserName))
                     );
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-            }
-            else if (opBatchType == OpBatchType.DETAIL)
-            {
-                var queryResult = this._case.InvoiceRefundBatches.Where(i => i.RefundBatchNo.Contains(this.tbRefundBatchNo.Text));
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-            }
+            //}
+            //else if (opBatchType == OpBatchType.DETAIL)
+            //{
+            //    var queryResult = this._case.InvoiceRefundBatches.Where(i => i.RefundBatchNo.Contains(this.tbRefundBatchNo.Text));
+            //    this.bs.DataSource = queryResult;
+            //    this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            //}
         }
 
         /// <summary>

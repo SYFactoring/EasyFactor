@@ -1536,8 +1536,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Remark;
 		
-		private string _CheckStatus;
-		
 		private string _RejectReason;
 		
 		private string _CheckUserName;
@@ -1628,8 +1626,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreateUserNameChanged();
     partial void OnRemarkChanging(string value);
     partial void OnRemarkChanged();
-    partial void OnCheckStatusChanging(string value);
-    partial void OnCheckStatusChanged();
     partial void OnRejectReasonChanging(string value);
     partial void OnRejectReasonChanged();
     partial void OnCheckUserNameChanging(string value);
@@ -2424,26 +2420,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Remark = value;
 					this.SendPropertyChanged("Remark");
 					this.OnRemarkChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CheckStatus
-		{
-			get
-			{
-				return this._CheckStatus;
-			}
-			set
-			{
-				if ((this._CheckStatus != value))
-				{
-					this.OnCheckStatusChanging(value);
-					this.SendPropertyChanging();
-					this._CheckStatus = value;
-					this.SendPropertyChanged("CheckStatus");
-					this.OnCheckStatusChanged();
 				}
 			}
 		}
@@ -8158,7 +8134,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _AssignBatchNo;
 		
-		private string _CaseCode;
+		private string _CDACode;
 		
 		private System.DateTime _AssignDate;
 		
@@ -8233,16 +8209,16 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_CDACode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CaseCode
 		{
 			get
 			{
-				return this._CaseCode;
+				return this._CDACode;
 			}
 			set
 			{
-				if ((this._CaseCode != value))
+				if ((this._CDACode != value))
 				{
 					if (this._Case.HasLoadedOrAssignedValue)
 					{
@@ -8250,7 +8226,7 @@ namespace CMBC.EasyFactor.DB.dbml
 					}
 					this.OnCaseCodeChanging(value);
 					this.SendPropertyChanging();
-					this._CaseCode = value;
+					this._CDACode = value;
 					this.SendPropertyChanged("CaseCode");
 					this.OnCaseCodeChanged();
 				}
@@ -8453,11 +8429,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((value != null))
 					{
 						value.InvoiceAssignBatches.Add(this);
-						this._CaseCode = value.CaseCode;
+						this._CDACode = value.CaseCode;
 					}
 					else
 					{
-						this._CaseCode = default(string);
+						this._CDACode = default(string);
 					}
 					this.SendPropertyChanged("Case");
 				}
@@ -8505,7 +8481,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _FinanceBatchNo;
 		
-		private string _CaseCode;
+		private string _CDACode;
 		
 		private string _FinanceType;
 		
@@ -8615,16 +8591,16 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_CDACode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CaseCode
 		{
 			get
 			{
-				return this._CaseCode;
+				return this._CDACode;
 			}
 			set
 			{
-				if ((this._CaseCode != value))
+				if ((this._CDACode != value))
 				{
 					if (this._Case.HasLoadedOrAssignedValue)
 					{
@@ -8632,7 +8608,7 @@ namespace CMBC.EasyFactor.DB.dbml
 					}
 					this.OnCaseCodeChanging(value);
 					this.SendPropertyChanging();
-					this._CaseCode = value;
+					this._CDACode = value;
 					this.SendPropertyChanged("CaseCode");
 					this.OnCaseCodeChanged();
 				}
@@ -9033,11 +9009,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((value != null))
 					{
 						value.InvoiceFinanceBatches.Add(this);
-						this._CaseCode = value.CaseCode;
+						this._CDACode = value.CaseCode;
 					}
 					else
 					{
-						this._CaseCode = default(string);
+						this._CDACode = default(string);
 					}
 					this.SendPropertyChanged("Case");
 				}
@@ -9085,7 +9061,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _PaymentBatchNo;
 		
-		private string _CaseCode;
+		private string _CDACode;
 		
 		private string _PaymentType;
 		
@@ -9164,16 +9140,16 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_CDACode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CaseCode
 		{
 			get
 			{
-				return this._CaseCode;
+				return this._CDACode;
 			}
 			set
 			{
-				if ((this._CaseCode != value))
+				if ((this._CDACode != value))
 				{
 					if (this._Case.HasLoadedOrAssignedValue)
 					{
@@ -9181,7 +9157,7 @@ namespace CMBC.EasyFactor.DB.dbml
 					}
 					this.OnCaseCodeChanging(value);
 					this.SendPropertyChanging();
-					this._CaseCode = value;
+					this._CDACode = value;
 					this.SendPropertyChanged("CaseCode");
 					this.OnCaseCodeChanged();
 				}
@@ -9404,11 +9380,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((value != null))
 					{
 						value.InvoicePaymentBatches.Add(this);
-						this._CaseCode = value.CaseCode;
+						this._CDACode = value.CaseCode;
 					}
 					else
 					{
-						this._CaseCode = default(string);
+						this._CDACode = default(string);
 					}
 					this.SendPropertyChanged("Case");
 				}
@@ -10115,7 +10091,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _RefundBatchNo;
 		
-		private string _CaseCode;
+		private string _CDACode;
 		
 		private string _RefundType;
 		
@@ -10190,16 +10166,16 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_CDACode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CaseCode
 		{
 			get
 			{
-				return this._CaseCode;
+				return this._CDACode;
 			}
 			set
 			{
-				if ((this._CaseCode != value))
+				if ((this._CDACode != value))
 				{
 					if (this._Case.HasLoadedOrAssignedValue)
 					{
@@ -10207,7 +10183,7 @@ namespace CMBC.EasyFactor.DB.dbml
 					}
 					this.OnCaseCodeChanging(value);
 					this.SendPropertyChanging();
-					this._CaseCode = value;
+					this._CDACode = value;
 					this.SendPropertyChanged("CaseCode");
 					this.OnCaseCodeChanged();
 				}
@@ -10410,11 +10386,11 @@ namespace CMBC.EasyFactor.DB.dbml
 					if ((value != null))
 					{
 						value.InvoiceRefundBatches.Add(this);
-						this._CaseCode = value.CaseCode;
+						this._CDACode = value.CaseCode;
 					}
 					else
 					{
-						this._CaseCode = default(string);
+						this._CDACode = default(string);
 					}
 					this.SendPropertyChanged("Case");
 				}

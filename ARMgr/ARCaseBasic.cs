@@ -374,6 +374,11 @@ namespace CMBC.EasyFactor.ARMgr
             Case curCase = caseMgr.Selected;
             if (curCase != null)
             {
+                if (curCase.ActiveCDA == null)
+                {
+                    MessageBox.Show("没有有效的额度通知书，不能进行应收账款管理", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 this.Case = curCase;
             }
         }

@@ -836,7 +836,7 @@ namespace CMBC.EasyFactor.Utils
                             {
                                 cda = new CDA();
                                 cda.CDACode = cdaCode;
-                                cda.CheckStatus = "已复核";
+                                cda.CDAStatus = ConstStr.CDA.CHECKED;
                                 cdaList.Add(cda);
                             }
 

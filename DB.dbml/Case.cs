@@ -7,6 +7,7 @@
 namespace CMBC.EasyFactor.DB.dbml
 {
     using System.Linq;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// 
@@ -22,7 +23,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.CDAs.SingleOrDefault(c => c.CDAStatus == "已签回");
+                return this.CDAs.SingleOrDefault(c => c.CDAStatus == ConstStr.CDA.SIGNED);
             }
         }
 

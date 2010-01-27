@@ -288,27 +288,32 @@ namespace CMBC.EasyFactor.ARMgr
             DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value.Date : this.dateFrom.MinDate;
             DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value.Date : this.dateTo.MinDate;
             string status = this.cbCheckStatus.Text;
+            string createUserName = this.tbCreateUserName.Text;
 
             IEnumerable<InvoiceAssignBatch> queryResult = null;
-            if (this.opBatchType == OpBatchType.CHECK || this.opBatchType == OpBatchType.QUERY || this.opBatchType == OpBatchType.REPORT)
-            {
+            //if (this.opBatchType == OpBatchType.CHECK || this.opBatchType == OpBatchType.QUERY || this.opBatchType == OpBatchType.REPORT)
+            //{
                 queryResult = App.Current.DbContext.InvoiceAssignBatches.Where(i =>
                     i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text)
                     && (beginDate != this.dateFrom.MinDate ? i.AssignDate >= beginDate : true)
                     && (endDate != this.dateTo.MinDate ? i.AssignDate <= endDate : true)
-                    && (status != string.Empty ? i.CheckStatus == status : true));
-            }
-            else if (this.opBatchType == OpBatchType.DETAIL)
-            {
-                queryResult = this._case.InvoiceAssignBatches.Where(i =>
-                    i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text)
-                    && (beginDate != this.dateFrom.MinDate ? i.AssignDate >= beginDate : true)
-                    && (endDate != this.dateTo.MinDate ? i.AssignDate <= endDate : true)
-                    && (status != string.Empty ? i.CheckStatus == status : true));
-            }
+                    && (status != string.Empty ? i.CheckStatus == status : true)
+                    && (i.CreateUserName.Contains(createUserName))
+                    );
+            //}
+            //else if (this.opBatchType == OpBatchType.DETAIL)
+            //{
+            //    queryResult = this._case.InvoiceAssignBatches.Where(i =>
+            //        i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text)
+            //        && (beginDate != this.dateFrom.MinDate ? i.AssignDate >= beginDate : true)
+            //        && (endDate != this.dateTo.MinDate ? i.AssignDate <= endDate : true)
+            //        && (status != string.Empty ? i.CheckStatus == status : true)
+            //        && (i.CreateUserName.Contains(createUserName))
+            //        );
+            //}
+
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-
         }
 
         /// <summary>

@@ -152,10 +152,9 @@ namespace CMBC.EasyFactor.CaseMgr
             foreach (DataGridViewRow row in this.dgvCDAs.SelectedRows)
             {
                 CDA cda = (CDA)this.bs.List[row.Index];
-                cda.CheckStatus = "已复核";
+                cda.CDAStatus = ConstStr.CDA.CHECKED;
                 cda.CheckUserName = App.Current.CurUser.Name;
                 cda.CheckDate = DateTime.Now.Date;
-                cda.CDAStatus = "已审核未下发";
             }
             App.Current.DbContext.SubmitChanges();
         }
@@ -294,6 +293,7 @@ namespace CMBC.EasyFactor.CaseMgr
             string factorName = tbFactorName.Text;
             string contractCode = tbContractCode.Text;
             string status = this.cbCheckStatus.Text;
+            string createUserName = this.tbCreateUserName.Text;
 
             var queryResult =
                 from cda in App.Current.DbContext.CDAs
@@ -308,7 +308,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 let buyerfactor = cda.Case.BuyerFactor
                 where buyerfactor.CompanyNameCN.Contains(factorName) || buyerfactor.CompanyNameEN.Contains(factorName)
                 where
-                 (status != string.Empty ? cda.CheckStatus == status : true)
+                 (status != string.Empty ? cda.CDAStatus == status : true)
+                 && cda.CreateUserName.Contains(createUserName)
                 select cda;
 
             this.bs.DataSource = queryResult;
@@ -329,7 +330,7 @@ namespace CMBC.EasyFactor.CaseMgr
             foreach (DataGridViewRow row in this.dgvCDAs.SelectedRows)
             {
                 CDA cda = (CDA)this.bs.List[row.Index];
-                cda.CheckStatus = "复核未通过";
+                cda.CDAStatus = ConstStr.CDA.REJECT;
                 cda.CheckUserName = App.Current.CurUser.Name;
                 cda.CheckDate = DateTime.Now.Date;
             }

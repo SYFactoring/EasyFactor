@@ -8,15 +8,12 @@ namespace CMBC.EasyFactor.CaseMgr
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.SqlClient;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar.Controls;
-    using System.Drawing;
     using Microsoft.Office.Interop.Excel;
-    using System.Runtime.InteropServices;
 
     /// <summary>
     /// 
@@ -41,8 +38,7 @@ namespace CMBC.EasyFactor.CaseMgr
         public CaseMgr(bool isContract)
             : this()
         {
-            this.cbIsContractSigned.Checked = isContract;
-            this.cbIsContractSigned.Enabled = false;
+            this.cbCaseMark.Text = "启动案";
             this.QueryCase(null, null);
         }
 
@@ -72,8 +68,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCurrency.DataSource = currencyList;
             this.cbCurrency.DisplayMember = "CurrencyFormat";
             this.cbCurrency.ValueMember = "CurrencyCode";
-
-            this.cbCaseMark.Text = "申请案";
         }
 
         #endregion Constructors
@@ -221,6 +215,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
             DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
+            string createUserName = this.tbCreateUserName.Text;
 
             var queryResult = App.Current.DbContext.Cases.Where(c =>
                                    ((string)this.cbOwnerDepts.SelectedValue == "CN01300" ? true : c.OwnerDepartmentCode.Equals((string)this.cbOwnerDepts.SelectedValue))
@@ -230,7 +225,8 @@ namespace CMBC.EasyFactor.CaseMgr
                                 && (endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
                                 && (c.CaseMark == this.cbCaseMark.Text)
-                                && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == "已签回"))
+                                && c.CreateUserName.Contains(createUserName)
+                                && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == ConstStr.CDA.SIGNED))
                                 && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY))
                                 && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN.Contains(this.tbClientName.Text)
                                  || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN.Contains(this.tbClientName.Text))
@@ -453,6 +449,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.diEnd.Value = default(DateTime);
             this.cbIsContractSigned.Checked = true;
             this.cbIsCDA.Checked = true;
+            this.tbCreateUserName.Text = string.Empty;
         }
 
         /// <summary>

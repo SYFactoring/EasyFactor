@@ -631,7 +631,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (flawList.Count > 0)
                 {
-                    InvoiceFlaw flawMgr = new InvoiceFlaw(flawList);
+                    InvoiceFlaw flawMgr = new InvoiceFlaw(flawList, "09");
                     flawMgr.ShowDialog(this);
                 }
             }

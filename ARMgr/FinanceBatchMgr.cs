@@ -233,8 +233,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
         {
-            if (this.opBatchType == OpBatchType.QUERY || this.opBatchType == OpBatchType.CHECK)
-            {
+            //if (this.opBatchType == OpBatchType.QUERY || this.opBatchType == OpBatchType.CHECK)
+            //{
                 DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value.Date : this.dateFrom.MinDate;
                 DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value.Date : this.dateTo.MinDate;
                 string status = this.cbCheckStatus.Text;
@@ -247,13 +247,13 @@ namespace CMBC.EasyFactor.ARMgr
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
 
-            }
-            else if (this.opBatchType == OpBatchType.DETAIL)
-            {
-                var queryResult = this._case.InvoiceFinanceBatches.Where(i => i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text));
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-            }
+            //}
+            //else if (this.opBatchType == OpBatchType.DETAIL)
+            //{
+            //    var queryResult = this._case.InvoiceFinanceBatches.Where(i => i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text));
+            //    this.bs.DataSource = queryResult;
+            //    this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            //}
         }
 
         /// <summary>

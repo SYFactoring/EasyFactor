@@ -142,6 +142,8 @@
             this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemLegerReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
             this.panelCaseQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -153,6 +155,8 @@
             // 
             this.panelCaseQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelCaseQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelCaseQuery.Controls.Add(this.tbCreateUserName);
+            this.panelCaseQuery.Controls.Add(this.lblCreateUserName);
             this.panelCaseQuery.Controls.Add(this.cbCaseMark);
             this.panelCaseQuery.Controls.Add(this.lblCaseMark);
             this.panelCaseQuery.Controls.Add(this.cbIsContractSigned);
@@ -197,11 +201,11 @@
             "申请案",
             "启动案",
             "已结案"});
-            this.cbCaseMark.Location = new System.Drawing.Point(460, 7);
+            this.cbCaseMark.Location = new System.Drawing.Point(254, 32);
             this.cbCaseMark.Name = "cbCaseMark";
             this.cbCaseMark.Size = new System.Drawing.Size(100, 20);
             this.cbCaseMark.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCaseMark.TabIndex = 19;
+            this.cbCaseMark.TabIndex = 9;
             // 
             // lblCaseMark
             // 
@@ -210,10 +214,10 @@
             // 
             // 
             this.lblCaseMark.BackgroundStyle.Class = "";
-            this.lblCaseMark.Location = new System.Drawing.Point(404, 10);
+            this.lblCaseMark.Location = new System.Drawing.Point(198, 34);
             this.lblCaseMark.Name = "lblCaseMark";
             this.lblCaseMark.Size = new System.Drawing.Size(56, 16);
-            this.lblCaseMark.TabIndex = 18;
+            this.lblCaseMark.TabIndex = 8;
             this.lblCaseMark.Text = "案件状态";
             // 
             // cbIsContractSigned
@@ -227,7 +231,7 @@
             this.cbIsContractSigned.Name = "cbIsContractSigned";
             this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);
             this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsContractSigned.TabIndex = 13;
+            this.cbIsContractSigned.TabIndex = 10;
             this.cbIsContractSigned.Text = "是否签订保理合同";
             // 
             // btnQueryReset
@@ -238,7 +242,7 @@
             this.btnQueryReset.Name = "btnQueryReset";
             this.btnQueryReset.Size = new System.Drawing.Size(48, 21);
             this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQueryReset.TabIndex = 16;
+            this.btnQueryReset.TabIndex = 20;
             this.btnQueryReset.Text = "重置";
             this.btnQueryReset.Click += new System.EventHandler(this.Reset);
             // 
@@ -253,7 +257,7 @@
             this.cbIsCDA.Name = "cbIsCDA";
             this.cbIsCDA.Size = new System.Drawing.Size(100, 16);
             this.cbIsCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsCDA.TabIndex = 14;
+            this.cbIsCDA.TabIndex = 11;
             this.cbIsCDA.Text = "CDA是否签回";
             // 
             // tbClientName
@@ -312,8 +316,8 @@
             this.lblCount.BackgroundStyle.Class = "";
             this.lblCount.Location = new System.Drawing.Point(614, 62);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(44, 16);
-            this.lblCount.TabIndex = 17;
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.TabIndex = 21;
             // 
             // lblDate
             // 
@@ -325,7 +329,7 @@
             this.lblDate.Location = new System.Drawing.Point(198, 58);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(56, 16);
-            this.lblDate.TabIndex = 10;
+            this.lblDate.TabIndex = 14;
             this.lblDate.Text = "申请期限";
             // 
             // btnQuery
@@ -336,7 +340,7 @@
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(48, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 15;
+            this.btnQuery.TabIndex = 19;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.QueryCase);
             // 
@@ -347,11 +351,11 @@
             this.cbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCurrency.FormattingEnabled = true;
             this.cbCurrency.ItemHeight = 14;
-            this.cbCurrency.Location = new System.Drawing.Point(254, 31);
+            this.cbCurrency.Location = new System.Drawing.Point(528, 56);
             this.cbCurrency.Name = "cbCurrency";
-            this.cbCurrency.Size = new System.Drawing.Size(100, 20);
+            this.cbCurrency.Size = new System.Drawing.Size(80, 20);
             this.cbCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCurrency.TabIndex = 7;
+            this.cbCurrency.TabIndex = 18;
             // 
             // lblCurrency
             // 
@@ -360,10 +364,10 @@
             // 
             // 
             this.lblCurrency.BackgroundStyle.Class = "";
-            this.lblCurrency.Location = new System.Drawing.Point(198, 34);
+            this.lblCurrency.Location = new System.Drawing.Point(466, 58);
             this.lblCurrency.Name = "lblCurrency";
             this.lblCurrency.Size = new System.Drawing.Size(56, 16);
-            this.lblCurrency.TabIndex = 6;
+            this.lblCurrency.TabIndex = 17;
             this.lblCurrency.Text = "发票币别";
             // 
             // cbTransactionType
@@ -372,11 +376,6 @@
             this.cbTransactionType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbTransactionType.FormattingEnabled = true;
             this.cbTransactionType.ItemHeight = 14;
-            this.cbTransactionType.Location = new System.Drawing.Point(59, 57);
-            this.cbTransactionType.Name = "cbTransactionType";
-            this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
-            this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbTransactionType.TabIndex = 9;
             this.cbTransactionType.Items.AddRange(new object[] {
             "国内卖方保理",
             "国内买方保理",
@@ -385,6 +384,11 @@
             "国际信保保理",
             "国内信保保理",
             "租赁保理"});
+            this.cbTransactionType.Location = new System.Drawing.Point(59, 57);
+            this.cbTransactionType.Name = "cbTransactionType";
+            this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
+            this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbTransactionType.TabIndex = 13;
             // 
             // lblTransactionType
             // 
@@ -395,7 +399,7 @@
             this.lblTransactionType.Location = new System.Drawing.Point(3, 54);
             this.lblTransactionType.Name = "lblTransactionType";
             this.lblTransactionType.Size = new System.Drawing.Size(59, 23);
-            this.lblTransactionType.TabIndex = 8;
+            this.lblTransactionType.TabIndex = 12;
             this.lblTransactionType.Text = "业务类别";
             // 
             // diEnd
@@ -408,7 +412,7 @@
             this.diEnd.ButtonDropDown.Visible = true;
             this.diEnd.ButtonFreeText.Checked = true;
             this.diEnd.FreeTextEntryMode = true;
-            this.diEnd.Location = new System.Drawing.Point(360, 58);
+            this.diEnd.Location = new System.Drawing.Point(360, 57);
             // 
             // 
             // 
@@ -444,7 +448,7 @@
             this.diEnd.Name = "diEnd";
             this.diEnd.Size = new System.Drawing.Size(100, 20);
             this.diEnd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.diEnd.TabIndex = 12;
+            this.diEnd.TabIndex = 16;
             // 
             // diBegin
             // 
@@ -492,7 +496,7 @@
             this.diBegin.Name = "diBegin";
             this.diBegin.Size = new System.Drawing.Size(100, 20);
             this.diBegin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.diBegin.TabIndex = 11;
+            this.diBegin.TabIndex = 15;
             // 
             // cbOwnerDepts
             // 
@@ -506,7 +510,7 @@
             this.cbOwnerDepts.Name = "cbOwnerDepts";
             this.cbOwnerDepts.Size = new System.Drawing.Size(133, 23);
             this.cbOwnerDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbOwnerDepts.TabIndex = 5;
+            this.cbOwnerDepts.TabIndex = 7;
             // 
             // lblOnwerDept
             // 
@@ -517,7 +521,7 @@
             this.lblOnwerDept.Location = new System.Drawing.Point(3, 31);
             this.lblOnwerDept.Name = "lblOnwerDept";
             this.lblOnwerDept.Size = new System.Drawing.Size(59, 23);
-            this.lblOnwerDept.TabIndex = 4;
+            this.lblOnwerDept.TabIndex = 6;
             this.lblOnwerDept.Text = "业务归属";
             // 
             // dgvCases
@@ -784,6 +788,30 @@
             this.menuItemLegerReport.Text = "导出台帐";
             this.menuItemLegerReport.Click += new System.EventHandler(this.ReportLeger);
             // 
+            // tbCreateUserName
+            // 
+            // 
+            // 
+            // 
+            this.tbCreateUserName.Border.Class = "TextBoxBorder";
+            this.tbCreateUserName.Location = new System.Drawing.Point(460, 6);
+            this.tbCreateUserName.Name = "tbCreateUserName";
+            this.tbCreateUserName.Size = new System.Drawing.Size(133, 20);
+            this.tbCreateUserName.TabIndex = 5;
+            // 
+            // lblCreateUserName
+            // 
+            this.lblCreateUserName.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCreateUserName.BackgroundStyle.Class = "";
+            this.lblCreateUserName.Location = new System.Drawing.Point(404, 9);
+            this.lblCreateUserName.Name = "lblCreateUserName";
+            this.lblCreateUserName.Size = new System.Drawing.Size(44, 16);
+            this.lblCreateUserName.TabIndex = 4;
+            this.lblCreateUserName.Text = "经办人";
+            // 
             // CaseMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -804,5 +832,8 @@
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
+        private DevComponents.DotNetBar.LabelX lblCreateUserName;
     }
 }

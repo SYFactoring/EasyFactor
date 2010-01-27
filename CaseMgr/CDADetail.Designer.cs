@@ -2,8 +2,9 @@
 {
     partial class CDADetail
     {
-        #region Fields (72)
+		#region Fields (78) 
 
+        private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
         private DevComponents.DotNetBar.ButtonX btnCaseSelect;
         private DevComponents.DotNetBar.ButtonX btnCDAReset;
         private DevComponents.DotNetBar.ButtonX btnCDASave;
@@ -13,6 +14,8 @@
         private DevComponents.DotNetBar.Controls.TextBoxX buyerClientNameENTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX caseCodeTextBox;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCreditCoverRevolving;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbIsNotice;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsRecoarse;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbNoticeMethodEmail;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbNoticeMethodFax;
         private System.Windows.Forms.BindingSource CDABindingSource;
@@ -35,6 +38,14 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput creditCoverPeriodBeginDateTimePicker;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput creditCoverPeriodEndDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX creditCoverTextBox;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator1;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator2;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator3;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator4;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator5;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator6;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator7;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator8;
         private DevComponents.DotNetBar.Controls.TextBoxX deductiblesTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
         private System.Windows.Forms.ErrorProvider errorProvider;
@@ -69,14 +80,17 @@
         private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameCNTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerClientNameENTextBox;
         private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCasePaymentTerm;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCDACode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbHighestFinance;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbRemark;
         private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Methods (1)
+		#region Methods (1) 
 
-        // Protected Methods (1) 
+		// Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -91,7 +105,7 @@
             base.Dispose(disposing);
         }
 
-        #endregion Methods
+		#endregion Methods 
 
 
 
@@ -2016,20 +2030,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidator1;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCDACode;
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsRecoarse;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbIsNotice;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbRemark;
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidator2;
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidator3;
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidator4;
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidator5;
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidator6;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCasePaymentTerm;
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidator8;
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidator7;
     }
 }

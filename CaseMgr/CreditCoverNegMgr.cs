@@ -186,6 +186,7 @@ namespace CMBC.EasyFactor.CaseMgr
             DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
             string sellerFactorCode = this.tbSellerFactorCode.Text;
             string buyerFactorCode = this.tbBuyerFactorCode.Text;
+            string createUserName = this.tbCreateUserName.Text;
 
             var queryResult = from neg in App.Current.DbContext.CreditCoverNegotiations
                               let c = neg.Case
@@ -196,11 +197,12 @@ namespace CMBC.EasyFactor.CaseMgr
                                && (beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
                                && (endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
                                && c.CaseCode.Contains(this.tbCaseCode.Text)
-                               && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == "已签回"))
+                               && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == ConstStr.CDA.SIGNED))
                                && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == ConstStr.CONTRACT.AVAILABILITY))
                                && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN.Contains(this.tbClientName.Text)
                                 || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN.Contains(this.tbClientName.Text)
                                && neg.Case.SellerFactorCode.Contains(sellerFactorCode) && neg.Case.BuyerFactorCode.Contains(buyerFactorCode))
+                               && neg.CreateUserName.Contains(createUserName)
                               select neg;
 
             this.bs.DataSource = queryResult;
@@ -225,6 +227,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbIsCDA.Checked = true;
             this.tbBuyerFactorCode.Text = string.Empty;
             this.tbSellerFactorCode.Text = string.Empty;
+            this.tbCreateUserName.Text = string.Empty;
         }
 
         /// <summary>

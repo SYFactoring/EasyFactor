@@ -15,6 +15,22 @@ namespace CMBC.EasyFactor.ARMgr
     {
         private BindingSource bs = new BindingSource();
 
+        public InvoiceFlaw(List<Invoice> invoiceList, string index)
+            : this(invoiceList)
+        {
+            this.isFlawCheckBox.Checked = true;
+
+            for (int i = 0; i < this.flawReasonCheckedListBox.Items.Count; i++)
+            {
+                string item = ((FlawReason)this.flawReasonCheckedListBox.Items[i]).Index;
+                if (item == index)
+                {
+                    this.flawReasonCheckedListBox.SetItemChecked(i, true);
+                    break;
+                }
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>

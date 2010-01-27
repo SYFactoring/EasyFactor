@@ -108,7 +108,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             this.assignTypeComboBox.Items.AddRange(new string[] { "全部", "部分" });
             this.commissionTypeComboBox.Items.AddRange(new string[] { "按发票金额", "按融资金额", "其他" });
-            this.cDAStatusComboBox.Items.AddRange(new string[] { ConstStr.CDA.NO_CHECK, ConstStr.CDA.CHECK_NO_DELIVER, ConstStr.CDA.DELIVER_NO_SIGN, ConstStr.CDA.SIGNED, ConstStr.CDA.INVALID });
+            this.cDAStatusComboBox.Items.AddRange(new string[] { ConstStr.CDA.NO_CHECK, ConstStr.CDA.CHECKED, ConstStr.CDA.REJECT, ConstStr.CDA.SIGNED, ConstStr.CDA.INVALID });
 
             if (opCDAType == OpCDAType.NEW_CDA)
             {
@@ -736,7 +736,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 cda.CDACode = cdaCode;
                 cda.CreateUserName = App.Current.CurUser.Name;
-                cda.CheckStatus = "未复核";
                 try
                 {
                     App.Current.DbContext.SubmitChanges();

@@ -202,12 +202,14 @@ namespace CMBC.EasyFactor.CaseMgr
             string contractCode = this.tbContractCode.Text;
             string clientName = this.tbClientName.Text;
             string contractStatus = this.cbContractStatus.Text;
+            string createUserName = this.tbCreateUserName.Text;
 
             var queryResult = from contract in App.Current.DbContext.Contracts
                               let client = contract.Client
                               where client.ClientNameCN.Contains(clientName) || client.ClientNameEN.Contains(clientName) 
                               where contract.ContractCode.Contains(contractCode)
                               && contractStatus == string.Empty ? true : contract.ContractStatus == contractStatus
+                              && contract.CreateUserName.Contains(createUserName)
                               select contract;
 
             this.bs.DataSource = queryResult;
