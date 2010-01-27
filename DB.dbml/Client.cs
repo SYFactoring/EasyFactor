@@ -12,6 +12,8 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Text;
     using CMBC.EasyFactor.ARMgr;
     using CMBC.EasyFactor.Utils;
+    using System.Data.Linq;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// 
@@ -194,6 +196,22 @@ namespace CMBC.EasyFactor.DB.dbml
             else
             {
                 return _ClientNameEN;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        partial void OnValidate(System.Data.Linq.ChangeAction action)
+        {
+            if (action == ChangeAction.Insert)
+            {
+                Regex regex = new Regex(@"^[a-zA-Z0-9\\-]{3}[a-zA-Z0-9]{4}\d{2}$");
+                if (!regex.IsMatch(this.ClientEDICode))
+                {
+                    throw new ArgumentException("不符合保理代码规则");
+                }
             }
         }
         #endregion Methods

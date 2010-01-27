@@ -9,7 +9,21 @@
    <TypeInfo>CMBC.EasyFactor.DB.dbml.ClientReview, DB.dbml.DB.designer.cs, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
    <TypeUISetting>
       <PropertyUISettings>
-         <PropertyUISetting Name="ReviewStatus">
+         <PropertyUISetting Name="RequestCurrency">
+            <ControlSettings>
+               <ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form">
+                  <BindableControlInfo Name="ComboBox" Type="System.Windows.Forms.ComboBox" AssemblyName="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+               </ControlSetting>
+            </ControlSettings>
+         </PropertyUISetting>
+         <PropertyUISetting Name="RequestFinanceType">
+            <ControlSettings>
+               <ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form">
+                  <BindableControlInfo Name="CheckedListBox" Type="System.Windows.Forms.CheckedListBox" AssemblyName="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+               </ControlSetting>
+            </ControlSettings>
+         </PropertyUISetting>
+         <PropertyUISetting Name="RequestFinanceType2">
             <ControlSettings>
                <ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form">
                   <BindableControlInfo Name="ComboBox" Type="System.Windows.Forms.ComboBox" AssemblyName="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

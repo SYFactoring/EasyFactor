@@ -10,6 +10,8 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Data.Linq;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// 
@@ -94,6 +96,20 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        partial void OnValidate(System.Data.Linq.ChangeAction action)
+        {
+            if (action == ChangeAction.Insert)
+            {
+                if (this.ApproveNo != string.Empty)
+                {
+                    Regex regex = new Regex(@"^[a-zA-Z0-9]+$");
+                    if (!regex.IsMatch(this.ApproveNo))
+                    {
+                        throw new ArgumentException("不符合授信编号规则");
+                    }
+                }
+            }
+        }
         #endregion Properties
     }
 }

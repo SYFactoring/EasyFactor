@@ -11786,9 +11786,21 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.DateTime _ReviewDate;
 		
-		private string _Comment;
+		private string _RequestCurrency;
+		
+		private System.Nullable<double> _RequestAmount;
+		
+		private string _RequestFinanceType;
+		
+		private string _RequestFinanceType2;
+		
+		private System.Nullable<double> _RequestCommissionRate;
+		
+		private System.Nullable<int> _RequestFinancePeriod;
 		
 		private string _CreateUserName;
+		
+		private string _Comment;
 		
 		private EntityRef<Client> _Client;
 		
@@ -11804,10 +11816,22 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnReviewStatusChanged();
     partial void OnReviewDateChanging(System.DateTime value);
     partial void OnReviewDateChanged();
-    partial void OnCommentChanging(string value);
-    partial void OnCommentChanged();
+    partial void OnRequestCurrencyChanging(string value);
+    partial void OnRequestCurrencyChanged();
+    partial void OnRequestAmountChanging(System.Nullable<double> value);
+    partial void OnRequestAmountChanged();
+    partial void OnRequestFinanceTypeChanging(string value);
+    partial void OnRequestFinanceTypeChanged();
+    partial void OnRequestFinanceType2Changing(string value);
+    partial void OnRequestFinanceType2Changed();
+    partial void OnRequestCommissionRateChanging(System.Nullable<double> value);
+    partial void OnRequestCommissionRateChanged();
+    partial void OnRequestFinancePeriodChanging(System.Nullable<int> value);
+    partial void OnRequestFinancePeriodChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
     #endregion
 		
 		public ClientReview()
@@ -11900,22 +11924,122 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string Comment
+		[Column(Storage="_RequestCurrency", DbType="Char(3)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string RequestCurrency
 		{
 			get
 			{
-				return this._Comment;
+				return this._RequestCurrency;
 			}
 			set
 			{
-				if ((this._Comment != value))
+				if ((this._RequestCurrency != value))
 				{
-					this.OnCommentChanging(value);
+					this.OnRequestCurrencyChanging(value);
 					this.SendPropertyChanging();
-					this._Comment = value;
-					this.SendPropertyChanged("Comment");
-					this.OnCommentChanged();
+					this._RequestCurrency = value;
+					this.SendPropertyChanged("RequestCurrency");
+					this.OnRequestCurrencyChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RequestAmount", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<double> RequestAmount
+		{
+			get
+			{
+				return this._RequestAmount;
+			}
+			set
+			{
+				if ((this._RequestAmount != value))
+				{
+					this.OnRequestAmountChanging(value);
+					this.SendPropertyChanging();
+					this._RequestAmount = value;
+					this.SendPropertyChanged("RequestAmount");
+					this.OnRequestAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RequestFinanceType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string RequestFinanceType
+		{
+			get
+			{
+				return this._RequestFinanceType;
+			}
+			set
+			{
+				if ((this._RequestFinanceType != value))
+				{
+					this.OnRequestFinanceTypeChanging(value);
+					this.SendPropertyChanging();
+					this._RequestFinanceType = value;
+					this.SendPropertyChanged("RequestFinanceType");
+					this.OnRequestFinanceTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RequestFinanceType2", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string RequestFinanceType2
+		{
+			get
+			{
+				return this._RequestFinanceType2;
+			}
+			set
+			{
+				if ((this._RequestFinanceType2 != value))
+				{
+					this.OnRequestFinanceType2Changing(value);
+					this.SendPropertyChanging();
+					this._RequestFinanceType2 = value;
+					this.SendPropertyChanged("RequestFinanceType2");
+					this.OnRequestFinanceType2Changed();
+				}
+			}
+		}
+		
+		[Column(Storage="_RequestCommissionRate", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<double> RequestCommissionRate
+		{
+			get
+			{
+				return this._RequestCommissionRate;
+			}
+			set
+			{
+				if ((this._RequestCommissionRate != value))
+				{
+					this.OnRequestCommissionRateChanging(value);
+					this.SendPropertyChanging();
+					this._RequestCommissionRate = value;
+					this.SendPropertyChanged("RequestCommissionRate");
+					this.OnRequestCommissionRateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RequestFinancePeriod", DbType="Int", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<int> RequestFinancePeriod
+		{
+			get
+			{
+				return this._RequestFinancePeriod;
+			}
+			set
+			{
+				if ((this._RequestFinancePeriod != value))
+				{
+					this.OnRequestFinancePeriodChanging(value);
+					this.SendPropertyChanging();
+					this._RequestFinancePeriod = value;
+					this.SendPropertyChanged("RequestFinancePeriod");
+					this.OnRequestFinancePeriodChanged();
 				}
 			}
 		}
@@ -11936,6 +12060,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CreateUserName = value;
 					this.SendPropertyChanged("CreateUserName");
 					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
 				}
 			}
 		}
