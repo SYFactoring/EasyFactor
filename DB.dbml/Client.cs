@@ -199,6 +199,8 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        private static Regex ClientEDICodeRegex = new Regex(@"^[a-zA-Z0-9\\-]{3}[a-zA-Z0-9]{4}\d{2}$");
+
         /// <summary>
         /// 
         /// </summary>
@@ -207,8 +209,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             if (action == ChangeAction.Insert)
             {
-                Regex regex = new Regex(@"^[a-zA-Z0-9\\-]{3}[a-zA-Z0-9]{4}\d{2}$");
-                if (!regex.IsMatch(this.ClientEDICode))
+                if (!ClientEDICodeRegex.IsMatch(this.ClientEDICode))
                 {
                     throw new ArgumentException("不符合保理代码规则");
                 }

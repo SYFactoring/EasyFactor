@@ -313,7 +313,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportContract(object sender, EventArgs e)
         {
-
+            if (this.ValidateRole())
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CONTRACT);
+                importForm.Show();
+            }
         }
 
         /// <summary>

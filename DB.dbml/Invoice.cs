@@ -558,6 +558,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        private static Regex InvoiceNoRegex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>]+$"); 
         /// <summary>
         /// 
         /// </summary>
@@ -566,8 +567,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             if (action == ChangeAction.Insert)
             {
-                Regex regex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>]+$");
-                if (!regex.IsMatch(this.InvoiceNo))
+                if (!InvoiceNoRegex.IsMatch(this.InvoiceNo))
                 {
                     throw new ArgumentException("不符合发票编码规则");
                 }

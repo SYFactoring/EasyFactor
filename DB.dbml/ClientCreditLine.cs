@@ -96,14 +96,15 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        private static Regex ApproveNoRegex = new Regex(@"^[a-zA-Z0-9]+$");
+
         partial void OnValidate(System.Data.Linq.ChangeAction action)
         {
             if (action == ChangeAction.Insert)
             {
                 if (this.ApproveNo != string.Empty)
                 {
-                    Regex regex = new Regex(@"^[a-zA-Z0-9]+$");
-                    if (!regex.IsMatch(this.ApproveNo))
+                    if (!ApproveNoRegex.IsMatch(this.ApproveNo))
                     {
                         throw new ArgumentException("不符合授信编号规则");
                     }
