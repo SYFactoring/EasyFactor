@@ -123,22 +123,21 @@ namespace CMBC.EasyFactor.CaseMgr
             if (MessageBox.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 bool isDeleteOK = true;
-                foreach (CDA cda in selectedCase.CDAs)
+                foreach (InvoiceAssignBatch assignBatch in selectedCase.InvoiceAssignBatches)
                 {
-                    foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
+                    foreach (Invoice invoice in assignBatch.Invoices)
                     {
-                        foreach (Invoice invoice in assignBatch.Invoices)
-                        {
-                            App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
-                            App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
-                        }
-                        App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
+                        App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
+                        App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
                     }
-                    App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
-                    App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
-                    App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
-                    App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(cda.InvoiceRefundBatches);
+                    App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
                 }
+
+                App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(selectedCase.InvoiceAssignBatches);
+                App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(selectedCase.InvoiceFinanceBatches);
+                App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(selectedCase.InvoicePaymentBatches);
+                App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(selectedCase.InvoiceRefundBatches);
+
                 App.Current.DbContext.CDAs.DeleteAllOnSubmit(selectedCase.CDAs);
                 App.Current.DbContext.Cases.DeleteOnSubmit(selectedCase);
                 try
@@ -199,8 +198,8 @@ namespace CMBC.EasyFactor.CaseMgr
                                && c.CaseCode.Contains(this.tbCaseCode.Text)
                                && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == "已签回"))
                                && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == ConstStr.CONTRACT.AVAILABILITY))
-                               && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN.Contains(this.tbClientName.Text) 
-                                || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN.Contains(this.tbClientName.Text) 
+                               && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN.Contains(this.tbClientName.Text)
+                                || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN.Contains(this.tbClientName.Text)
                                && neg.Case.SellerFactorCode.Contains(sellerFactorCode) && neg.Case.BuyerFactorCode.Contains(buyerFactorCode))
                               select neg;
 

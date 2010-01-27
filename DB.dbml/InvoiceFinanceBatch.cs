@@ -36,7 +36,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.CDA.Case.BuyerClient.ToString();
+                return this.Case.BuyerClient.ToString();
             }
         }
 
@@ -47,7 +47,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.CDA.Case.SellerClient.ToString();
+                return this.Case.SellerClient.ToString();
             }
         }
 

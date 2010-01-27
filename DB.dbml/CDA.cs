@@ -48,7 +48,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     return null;
                 }
 
-                return this.CreditCover - this.GetAssignOutstanding(this.CreditCoverCurr);
+                return this.CreditCover - this.Case.AssignOutstanding;
             }
         }
 
@@ -95,7 +95,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     return null;
                 }
 
-                return this.FinanceLine - this.GetFinanceOutstanding(this.FinanceLineCurr);
+                return this.FinanceLine - this.Case.FinanceOutstanding;
             }
         }
 
@@ -220,65 +220,6 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 return string.Empty;
             }
-        }
-
-        /// <summary>
-        /// 转让余额
-        /// </summary>
-        /// <param name="currency"></param>
-        /// <returns></returns>
-        public double GetAssignOutstanding(string currency)
-        {
-            double total = 0;
-            foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
-            {
-                foreach (Invoice invoice in assignBatch.Invoices)
-                {
-                    total += invoice.AssignOutstanding;
-                }
-            }
-
-            if (this.Case.InvoiceCurrency != currency)
-            {
-                double exchange = Exchange.GetExchangeRate(this.Case.InvoiceCurrency, currency);
-                total *= exchange;
-            }
-
-            return total;
-        }
-
-        /// <summary>
-        /// 融资余额
-        /// </summary>
-        /// <param name="currency"></param>
-        /// <returns></returns>
-        public System.Nullable<double> GetFinanceOutstanding(string currency)
-        {
-            double? total = null;
-            foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
-            {
-                foreach (Invoice invoice in assignBatch.Invoices)
-                {
-                    if (invoice.FinanceOutstanding.HasValue)
-                    {
-                        if (total == null)
-                        {
-                            total = 0;
-                        }
-
-                        double financeOutstanding = invoice.FinanceOutstanding.Value;
-                        if (invoice.InvoiceFinanceBatch.BatchCurrency != currency)
-                        {
-                            double exchange = Exchange.GetExchangeRate(invoice.InvoiceFinanceBatch.BatchCurrency, currency);
-                            financeOutstanding *= exchange;
-                        }
-
-                        total += financeOutstanding;
-                    }
-                }
-            }
-
-            return total;
         }
 
         #endregion Methods

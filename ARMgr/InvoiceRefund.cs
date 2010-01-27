@@ -23,7 +23,7 @@ namespace CMBC.EasyFactor.ARMgr
     {
         #region Fields (3)
 
-        private CDA _CDA;
+        private Case _case;
         private ARCaseBasic caseBasic;
         private OpRefundType refundType;
 
@@ -87,11 +87,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        public CDA CDA
+        public Case Case
         {
             set
             {
-                this._CDA = value;
+                this._case = value;
                 NewBatch(null, null);
             }
         }
@@ -129,7 +129,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
-            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.CDA.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.ShowDialog(this);
         }
 
@@ -146,7 +146,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
-            CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
+            CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.Case.ActiveCDA, CDADetail.OpCDAType.DETAIL_CDA);
             cdaDetail.ShowDialog(this);
         }
 
@@ -310,9 +310,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ExportBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
-                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -337,9 +337,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ImportBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
-                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -382,8 +382,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            this.caseBasic.Case = refundList[0].InvoiceAssignBatch.CDA.Case;
-            this._CDA = refundList[0].InvoiceAssignBatch.CDA;
+            this.caseBasic.Case = refundList[0].InvoiceAssignBatch.Case;
+            this._case = refundList[0].InvoiceAssignBatch.Case;
             this.tbTotalRefund.Text = string.Empty;
             InvoiceRefundBatch batch = new InvoiceRefundBatch();
             batch.RefundType = refundType;
@@ -411,9 +411,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void NewBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
-                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -443,7 +443,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
-                              where invoice.InvoiceAssignBatch.CDACode == this._CDA.CDACode && (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.00000001)
+                              where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.00000001)
                               select invoice;
             this.invoiceBindingSource.DataSource = queryResult;
             this.StatBatch();
@@ -473,9 +473,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SaveBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
-                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -500,7 +500,7 @@ namespace CMBC.EasyFactor.ARMgr
             List<InvoiceRefundLog> logList = new List<InvoiceRefundLog>();
             try
             {
-                batch.CDA = this._CDA;
+                batch.Case = this._case;
                 if (batch.RefundBatchNo == null)
                 {
                     batch.RefundBatchNo = Invoice.GenerateRefundBatchNo(batch.RefundDate);
@@ -548,7 +548,7 @@ namespace CMBC.EasyFactor.ARMgr
                     log.InvoiceRefundBatch = null;
                 }
 
-                batch.CDA = null;
+                batch.Case = null;
                 isSaveOK = false;
                 MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -562,7 +562,7 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.RefundAmount2 = null;
                 }
                 App.Current.DbContext.SubmitChanges();
-                this.caseBasic.CaculateOutstanding(this._CDA);
+                this.caseBasic.CaculateOutstanding(this._case);
             }
         }
 
@@ -573,13 +573,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
-                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            RefundBatchMgr batchMgr = new RefundBatchMgr(this._CDA);
+            RefundBatchMgr batchMgr = new RefundBatchMgr(this._case);
             QueryForm queryUI = new QueryForm(batchMgr, "选择付款批次");
             batchMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);

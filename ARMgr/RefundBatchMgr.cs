@@ -26,7 +26,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private CDA cda;
+        private Case _case;
         /// <summary>
         /// 
         /// </summary>
@@ -65,12 +65,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="selectedCDA"></param>
-        public RefundBatchMgr(CDA selectedCDA)
+        public RefundBatchMgr(Case selectedCase)
             : this(OpBatchType.DETAIL)
         {
-            this.cda = selectedCDA;
+            this._case = selectedCase;
             this.panelQuery.Visible = false;
-            this.bs.DataSource = cda.InvoiceRefundBatches;
+            this.bs.DataSource = selectedCase.InvoiceRefundBatches;
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             else if (opBatchType == OpBatchType.DETAIL)
             {
-                var queryResult = cda.InvoiceRefundBatches.Where(i => i.RefundBatchNo.Contains(this.tbRefundBatchNo.Text));
+                var queryResult = this._case.InvoiceRefundBatches.Where(i => i.RefundBatchNo.Contains(this.tbRefundBatchNo.Text));
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }

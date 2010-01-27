@@ -24,7 +24,7 @@ namespace CMBC.EasyFactor.ARMgr
     {
         #region Fields (3)
 
-        private CDA _CDA;
+        private Case _case;
         private ARCaseBasic caseBasic;
         private double currentBatchFinanceAmount = 0;
 
@@ -72,11 +72,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// Sets
         /// </summary>
-        public CDA CDA
+        public Case Case
         {
             set
             {
-                this._CDA = value;
+                this._case = value;
                 this.NewBatch(null, null);
             }
         }
@@ -126,9 +126,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (invoice.Commission.HasValue == false)
             {
-                if (this._CDA.CommissionType == "按融资金额")
+                if (this._case.ActiveCDA.CommissionType == "按融资金额")
                 {
-                    invoice.Commission = invoice.FinanceAmount * this._CDA.Price ?? 0;
+                    invoice.Commission = invoice.FinanceAmount * this._case.ActiveCDA.Price ?? 0;
                     if (invoice.Commission.GetValueOrDefault() > 0)
                     {
                         invoice.CommissionDate = invoice.FinanceDate;
@@ -218,7 +218,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
-            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.CDA.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.ShowDialog(this);
         }
 
@@ -235,7 +235,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
-            CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
+            CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.Case.ActiveCDA, CDADetail.OpCDAType.DETAIL_CDA);
             cdaDetail.ShowDialog(this);
         }
 
@@ -286,13 +286,13 @@ namespace CMBC.EasyFactor.ARMgr
 
                     InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
                     double financeAmount = 0;
-                    if (invoice.AssignOutstanding * this._CDA.FinanceProportion.Value + currentFinanceAmount > batch.FinanceAmount)
+                    if (invoice.AssignOutstanding * this._case.ActiveCDA.FinanceProportion.Value + currentFinanceAmount > batch.FinanceAmount)
                     {
                         financeAmount = batch.FinanceAmount - currentFinanceAmount;
                     }
                     else
                     {
-                        financeAmount = invoice.AssignOutstanding * this._CDA.FinanceProportion.Value;
+                        financeAmount = invoice.AssignOutstanding * this._case.ActiveCDA.FinanceProportion.Value;
                     }
 
                     if (TypeUtil.EqualsZero(financeAmount))
@@ -443,9 +443,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ExportFinanceBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
-                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -470,9 +470,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ImportFinanceBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
-                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -515,18 +515,18 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void NewBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
-                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
-            financeBatch.BatchCurrency = this._CDA.Case.InvoiceCurrency;
+            financeBatch.BatchCurrency = this._case.InvoiceCurrency;
             financeBatch.CreateUserName = App.Current.CurUser.Name;
             financeBatch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = financeBatch;
-            this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CDACode == this._CDA.CDACode && i.IsFlaw == false && i.InvoiceAssignBatch.CheckStatus == "已复核" && i.AssignAmount - i.PaymentAmount.GetValueOrDefault() > 0.00000001 && (i.FinanceAmount.HasValue == false || i.FinanceAmount < 0.0000001)).ToList();
+            this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CaseCode == this._case.CaseCode && i.IsFlaw == false && i.InvoiceAssignBatch.CheckStatus == "已复核" && i.AssignAmount - i.PaymentAmount.GetValueOrDefault() > 0.00000001 && (i.FinanceAmount.HasValue == false || i.FinanceAmount < 0.0000001)).ToList();
             this.StatBatch();
         }
 
@@ -541,7 +541,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.Rows[rowIndex].Cells["colComment"].ReadOnly = !editable;
             this.dgvInvoices.Rows[rowIndex].Cells["colInterest"].ReadOnly = !editable;
             this.dgvInvoices.Rows[rowIndex].Cells["colInterestDate"].ReadOnly = !editable;
-            if (this._CDA.CommissionType == "按融资金额")
+            if (this._case.ActiveCDA.CommissionType == "按融资金额")
             {
                 this.dgvInvoices.Rows[rowIndex].Cells["colCommission"].ReadOnly = !editable;
                 this.dgvInvoices.Rows[rowIndex].Cells["colCommissionDate"].ReadOnly = !editable;
@@ -554,7 +554,7 @@ namespace CMBC.EasyFactor.ARMgr
                 invoice.FinanceAmount = null;
                 invoice.Interest = null;
                 invoice.InterestDate = null;
-                if (this._CDA.CommissionType == "按融资金额")
+                if (this._case.ActiveCDA.CommissionType == "按融资金额")
                 {
                     invoice.Commission = null;
                     invoice.CommissionDate = null;
@@ -569,9 +569,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SaveBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
-                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -610,7 +610,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             bool isSaveOK = true;
 
-            batch.CDA = this._CDA;
+            batch.Case = this._case;
             for (int i = 0; i < invoiceList.Count; i++)
             {
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
@@ -641,7 +641,7 @@ namespace CMBC.EasyFactor.ARMgr
                     }
                 }
 
-                batch.CDA = null;
+                batch.Case = null;
                 isSaveOK = false;
                 MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -649,7 +649,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (isSaveOK)
             {
                 MessageBox.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.caseBasic.CaculateOutstanding(this._CDA);
+                this.caseBasic.CaculateOutstanding(this._case);
             }
         }
 
@@ -660,13 +660,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
-                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            FinanceBatchMgr batchMgr = new FinanceBatchMgr(this._CDA);
+            FinanceBatchMgr batchMgr = new FinanceBatchMgr(this._case);
             QueryForm queryUI = new QueryForm(batchMgr, "选择融资批次");
             batchMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
@@ -692,9 +692,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectFactor(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
-                MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

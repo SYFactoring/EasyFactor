@@ -53,7 +53,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.CDA.Case.InvoiceCurrency;
+                return this.Case.InvoiceCurrency;
             }
         }
 
@@ -64,7 +64,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.CDA.Case.BuyerClient.ToString();
+                return this.Case.BuyerClient.ToString();
             }
         }
 
@@ -98,7 +98,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.Invoices.Count * this.CDA.HandFee;
+                return this.Invoices.Count * this.Case.ActiveCDA.HandFee;
             }
         }
 
@@ -109,7 +109,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.CDA.Case.SellerClient.ToString();
+                return this.Case.SellerClient.ToString();
             }
         }
 

@@ -203,9 +203,6 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportAssignByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -310,7 +307,6 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
             return invoiceList.Count;
         }
 
@@ -323,9 +319,6 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportCreditNotes(IList creditNoteList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -342,8 +335,8 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                //CDA
-                datasheet.Cells[1, column++] = "CDA编号";
+                //Case
+                datasheet.Cells[1, column++] = "案件编号";
                 datasheet.Cells[1, column++] = "买方名称";
                 //付款批次
                 datasheet.Cells[1, column++] = "付款批次号";
@@ -389,8 +382,8 @@ namespace CMBC.EasyFactor.Utils
 
                     column = 1;
                     CreditNote creditNote = (CreditNote)creditNoteList[row];
-                    datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.CDA.CDACode;
-                    datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.CDA.Case.BuyerClient.ToString();
+                    datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.Case.CaseCode;
+                    datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.Case.BuyerClient.ToString();
                     datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.PaymentBatchNo;
                     datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.PaymentType;
                     datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.PaymentDate;
@@ -591,8 +584,8 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                //CDA
-                datasheet.Cells[1, column++] = "CDA编号";
+                //Case
+                datasheet.Cells[1, column++] = "案件编号";
                 datasheet.Cells[1, column++] = "卖方名称";
                 datasheet.Cells[1, column++] = "买方名称";
                 //转让批次
@@ -679,9 +672,9 @@ namespace CMBC.EasyFactor.Utils
                     column = 1;
                     Invoice invoice = (Invoice)invoiceList[row];
                     //CDA
-                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CDA.CDACode;
-                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CDA.Case.SellerClient.ToString();
-                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CDA.Case.BuyerClient.ToString();
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.CaseCode;
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.SellerClient.ToString();
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.BuyerClient.ToString();
                     //转让批次
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.AssignBatchNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.AssignDate;
@@ -809,9 +802,6 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportInvoicesOverDue(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -872,8 +862,8 @@ namespace CMBC.EasyFactor.Utils
 
                     column = 1;
                     Invoice invoice = (Invoice)invoiceList[row];
-                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CDA.Case.SellerClient.ToString();
-                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CDA.Case.BuyerClient.ToString();
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.SellerClient.ToString();
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.BuyerClient.ToString();
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = invoice.AssignAmount;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceDate;
@@ -924,8 +914,6 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
-
             return invoiceList.Count;
         }
 
@@ -938,9 +926,6 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportPaymentByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -1039,8 +1024,6 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
-
             return invoiceList.Count;
         }
 
@@ -1053,9 +1036,6 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportRefundByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -1150,7 +1130,6 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
             return invoiceList.Count;
         }
 

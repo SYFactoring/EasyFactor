@@ -28,7 +28,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private CDA cda;
+        private Case _case;
 
         /// <summary>
         /// 
@@ -68,12 +68,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// Initializes a new instance of the FinanceBatchMgr class
         /// </summary>
         /// <param name="selectedCDA"></param>
-        public FinanceBatchMgr(CDA selectedCDA)
+        public FinanceBatchMgr(Case selectedCase)
             : this(OpBatchType.DETAIL)
         {
-            this.cda = selectedCDA;
+            this._case = selectedCase;
             this.panelQuery.Visible = false;
-            this.bs.DataSource = this.cda.InvoiceFinanceBatches;
+            this.bs.DataSource = this._case.InvoiceFinanceBatches;
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             else if (this.opBatchType == OpBatchType.DETAIL)
             {
-                var queryResult = this.cda.InvoiceFinanceBatches.Where(i => i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text));
+                var queryResult = this._case.InvoiceFinanceBatches.Where(i => i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text));
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }

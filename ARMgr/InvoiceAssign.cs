@@ -27,7 +27,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private CDA _CDA;
+        private Case _case;
 
         /// <summary>
         /// 
@@ -59,11 +59,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// Sets
         /// </summary>
-        public CDA CDA
+        public Case Case
         {
             set
             {
-                this._CDA = value;
+                this._case = value;
                 this.NewBatch(null, null);
             }
         }
@@ -97,9 +97,9 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (selectedInvoice.Commission.HasValue == false)
             {
-                if (this._CDA.CommissionType == "按发票金额")
+                if (this._case.ActiveCDA.CommissionType == "按发票金额")
                 {
-                    selectedInvoice.Commission = selectedInvoice.AssignAmount * this._CDA.Price ?? 0;
+                    selectedInvoice.Commission = selectedInvoice.AssignAmount * this._case.ActiveCDA.Price ?? 0;
                     if (selectedInvoice.Commission.GetValueOrDefault() > 0)
                     {
                         if (selectedInvoice.InvoiceAssignBatch != null)
@@ -128,7 +128,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
-            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.CDA.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.ShowDialog(this);
         }
 
@@ -145,7 +145,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
-            CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
+            CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.Case.ActiveCDA, CDADetail.OpCDAType.DETAIL_CDA);
             cdaDetail.ShowDialog(this);
         }
 
@@ -394,7 +394,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ExportAssignBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -433,7 +433,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ImportAssignBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -478,7 +478,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void NewBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -501,7 +501,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SaveAssignBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -551,7 +551,7 @@ namespace CMBC.EasyFactor.ARMgr
                 totalAssign += invoice.AssignAmount;
             }
 
-            if (this._CDA.CreditCoverOutstanding.HasValue && totalAssign > this._CDA.CreditCoverOutstanding.Value)
+            if (this._case.ActiveCDA.CreditCoverOutstanding.HasValue && totalAssign > this._case.ActiveCDA.CreditCoverOutstanding.Value)
             {
                 DialogResult dr = MessageBox.Show("买卖方关联额度中的买方信用风险担保额度已占满，超额度转让部分不再进行担保，是否确认转让？", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
@@ -560,7 +560,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-            if (this._CDA.Case.BuyerClient.AssignCreditLineOutstanding.HasValue && totalAssign > this._CDA.Case.BuyerClient.AssignCreditLineOutstanding.Value)
+            if (this._case.BuyerClient.AssignCreditLineOutstanding.HasValue && totalAssign > this._case.BuyerClient.AssignCreditLineOutstanding.Value)
             {
                 DialogResult dr = MessageBox.Show("客户额度已占满，超额度转让部分不再进行担保，是否确认转让？", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
@@ -569,12 +569,12 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-            if (this._CDA.Case.BuyerClient.GroupAssignCreditLine != null)
+            if (this._case.BuyerClient.GroupAssignCreditLine != null)
             {
-                double assignCreditLineOutstanding = this._CDA.Case.BuyerClient.GroupAssignCreditLine.AssignCreditLineOutstanding;
-                if (this._CDA.Case.BuyerClient.GroupAssignCreditLine.CreditLineCurrency != this._CDA.Case.BuyerClient.AssignCreditLine.CreditLineCurrency)
+                double assignCreditLineOutstanding = this._case.BuyerClient.GroupAssignCreditLine.AssignCreditLineOutstanding;
+                if (this._case.BuyerClient.GroupAssignCreditLine.CreditLineCurrency != this._case.BuyerClient.AssignCreditLine.CreditLineCurrency)
                 {
-                    double exchange = Exchange.GetExchangeRate(this._CDA.Case.BuyerClient.GroupAssignCreditLine.CreditLineCurrency, this._CDA.Case.BuyerClient.AssignCreditLine.CreditLineCurrency);
+                    double exchange = Exchange.GetExchangeRate(this._case.BuyerClient.GroupAssignCreditLine.CreditLineCurrency, this._case.BuyerClient.AssignCreditLine.CreditLineCurrency);
                     assignCreditLineOutstanding *= exchange;
                 }
 
@@ -593,7 +593,7 @@ namespace CMBC.EasyFactor.ARMgr
             List<Invoice> flawList = new List<Invoice>();
             try
             {
-                batch.CDA = this._CDA;
+                batch.Case = this._case;
                 if (batch.AssignBatchNo == null)
                 {
                     batch.AssignBatchNo = Invoice.GenerateAssignBatchNo(batch.AssignDate);
@@ -617,7 +617,7 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.InvoiceAssignBatch = null;
                 }
 
-                batch.CDA = null;
+                batch.Case = null;
                 batch.AssignBatchNo = null;
                 isSaveOK = false;
                 MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -626,7 +626,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (isSaveOK)
             {
                 MessageBox.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.caseBasic.CaculateOutstanding(this._CDA);
+                this.caseBasic.CaculateOutstanding(this._case);
                 this.StatBatch();
 
                 if (flawList.Count > 0)
@@ -644,13 +644,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectBatch(object sender, EventArgs e)
         {
-            if (this._CDA == null)
+            if (this._case == null)
             {
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            AssignBatchMgr batchMgr = new AssignBatchMgr(this._CDA);
+            AssignBatchMgr batchMgr = new AssignBatchMgr(this._case);
             QueryForm queryUI = new QueryForm(batchMgr, "选择转让批次");
             batchMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
@@ -680,7 +680,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbTotalAssign.Text = String.Format("{0:N2}", totalAssign);
             this.tbAssignNumber.Text = String.Format("{0}", invoiceList.Count);
             this.tbTotalCommission.Text = String.Format("{0:N2}", totalCommmission);
-            this.tbTotalHandfee.Text = String.Format("{0:N2}", invoiceList.Count * this._CDA.HandFee.GetValueOrDefault());
+            this.tbTotalHandfee.Text = String.Format("{0:N2}", invoiceList.Count * this._case.ActiveCDA.HandFee.GetValueOrDefault());
         }
 
         /// <summary>
@@ -734,9 +734,9 @@ namespace CMBC.EasyFactor.ARMgr
                     return false;
                 }
 
-                if (this._CDA.Case.NetPaymentTerm.HasValue)
+                if (this._case.NetPaymentTerm.HasValue)
                 {
-                    if (assignDate > invoice.InvoiceDate.AddDays(this._CDA.Case.NetPaymentTerm.Value))
+                    if (assignDate > invoice.InvoiceDate.AddDays(this._case.NetPaymentTerm.Value))
                     {
                         MessageBox.Show("转让日不能晚于发票日+付款期限: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;

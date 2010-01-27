@@ -37,7 +37,7 @@
             DevComponents.DotNetBar.LabelX createUserNameLabel;
             DevComponents.DotNetBar.LabelX refundDateLabel;
             DevComponents.DotNetBar.LabelX refundBatchNoLabel;
-            DevComponents.DotNetBar.LabelX cDACodeLabel;
+            DevComponents.DotNetBar.LabelX CaseLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -59,7 +59,7 @@
             this.createUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.refundDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.refundBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.cDACodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.CaseCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabItemBatch = new DevComponents.DotNetBar.TabItem(this.components);
             this.panelInvoices = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvRefundLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -78,7 +78,7 @@
             createUserNameLabel = new DevComponents.DotNetBar.LabelX();
             refundDateLabel = new DevComponents.DotNetBar.LabelX();
             refundBatchNoLabel = new DevComponents.DotNetBar.LabelX();
-            cDACodeLabel = new DevComponents.DotNetBar.LabelX();
+            CaseLabel = new DevComponents.DotNetBar.LabelX();
             this.cmuLogMgr.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -90,20 +90,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvRefundLogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
-            // 
-            // refundTypeLabel
-            // 
-            this.refundTypeLabel.AutoSize = true;
-            this.refundTypeLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.refundTypeLabel.BackgroundStyle.Class = "";
-            this.refundTypeLabel.Location = new System.Drawing.Point(50, 51);
-            this.refundTypeLabel.Name = "refundTypeLabel";
-            this.refundTypeLabel.Size = new System.Drawing.Size(59, 16);
-            this.refundTypeLabel.TabIndex = 27;
-            this.refundTypeLabel.Text = "还款类型:";
             // 
             // commentLabel
             // 
@@ -217,19 +203,33 @@
             refundBatchNoLabel.TabIndex = 25;
             refundBatchNoLabel.Text = "还款批号:";
             // 
-            // cDACodeLabel
+            // CaseLabel
             // 
-            cDACodeLabel.AutoSize = true;
-            cDACodeLabel.BackColor = System.Drawing.Color.Transparent;
+            CaseLabel.AutoSize = true;
+            CaseLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            cDACodeLabel.BackgroundStyle.Class = "";
-            cDACodeLabel.Location = new System.Drawing.Point(12, 4);
-            cDACodeLabel.Name = "cDACodeLabel";
-            cDACodeLabel.Size = new System.Drawing.Size(97, 16);
-            cDACodeLabel.TabIndex = 23;
-            cDACodeLabel.Text = "额度通知书编号:";
+            CaseLabel.BackgroundStyle.Class = "";
+            CaseLabel.Location = new System.Drawing.Point(50, 1);
+            CaseLabel.Name = "CaseLabel";
+            CaseLabel.Size = new System.Drawing.Size(59, 16);
+            CaseLabel.TabIndex = 23;
+            CaseLabel.Text = "案件编号:";
+            // 
+            // refundTypeLabel
+            // 
+            this.refundTypeLabel.AutoSize = true;
+            this.refundTypeLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.refundTypeLabel.BackgroundStyle.Class = "";
+            this.refundTypeLabel.Location = new System.Drawing.Point(50, 51);
+            this.refundTypeLabel.Name = "refundTypeLabel";
+            this.refundTypeLabel.Size = new System.Drawing.Size(59, 16);
+            this.refundTypeLabel.TabIndex = 27;
+            this.refundTypeLabel.Text = "还款类型:";
             // 
             // cmuLogMgr
             // 
@@ -285,8 +285,8 @@
             this.panelBatch.Controls.Add(this.refundDateDateTimePicker);
             this.panelBatch.Controls.Add(refundBatchNoLabel);
             this.panelBatch.Controls.Add(this.refundBatchNoTextBox);
-            this.panelBatch.Controls.Add(cDACodeLabel);
-            this.panelBatch.Controls.Add(this.cDACodeTextBox);
+            this.panelBatch.Controls.Add(CaseLabel);
+            this.panelBatch.Controls.Add(this.CaseCodeTextBox);
             this.panelBatch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBatch.Location = new System.Drawing.Point(0, 26);
             this.panelBatch.Name = "panelBatch";
@@ -497,17 +497,18 @@
             this.refundBatchNoTextBox.Size = new System.Drawing.Size(162, 20);
             this.refundBatchNoTextBox.TabIndex = 26;
             // 
-            // cDACodeTextBox
+            // CaseCodeTextBox
             // 
             // 
             // 
             // 
-            this.cDACodeTextBox.Border.Class = "TextBoxBorder";
-            this.cDACodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CDACode", true));
-            this.cDACodeTextBox.Location = new System.Drawing.Point(115, 0);
-            this.cDACodeTextBox.Name = "cDACodeTextBox";
-            this.cDACodeTextBox.Size = new System.Drawing.Size(162, 20);
-            this.cDACodeTextBox.TabIndex = 24;
+            this.CaseCodeTextBox.Border.Class = "TextBoxBorder";
+            this.CaseCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CaseCode", true));
+            this.CaseCodeTextBox.Location = new System.Drawing.Point(115, 0);
+            this.CaseCodeTextBox.Name = "CaseCodeTextBox";
+            this.CaseCodeTextBox.Size = new System.Drawing.Size(162, 20);
+            this.CaseCodeTextBox.TabIndex = 24;
+            this.CaseCodeTextBox.DoubleClick += new System.EventHandler(this.DetailCase);
             // 
             // tabItemBatch
             // 
@@ -659,7 +660,7 @@
         private DevComponents.DotNetBar.Controls.TextBoxX createUserNameTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput refundDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX refundBatchNoTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX cDACodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX CaseCodeTextBox;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Validator.SuperValidator superValidator;

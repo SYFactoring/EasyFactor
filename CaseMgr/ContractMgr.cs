@@ -112,21 +112,10 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
+
             bool isDeleteOK = true;
             try
             {
-                var CDAList = App.Current.DbContext.CDAs.Where(c => c.CDACode.StartsWith(selectedContract.ContractCode));
-                foreach (CDA cda in CDAList)
-                {
-                    foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
-                    {
-                        App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
-                    }
-                    App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
-                    App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
-                    App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
-                }
-                App.Current.DbContext.CDAs.DeleteAllOnSubmit(CDAList);
                 App.Current.DbContext.Contracts.DeleteOnSubmit(selectedContract);
                 App.Current.DbContext.SubmitChanges();
             }

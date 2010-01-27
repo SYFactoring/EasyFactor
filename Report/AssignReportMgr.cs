@@ -116,25 +116,8 @@ namespace CMBC.EasyFactor.Report
             }
 
             Invoice selectedInvoice = (Invoice)this.bs.List[this.dgvInvoices.CurrentCell.RowIndex];
-            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.CDA.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.ShowDialog(this);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DetailCDA(object sender, EventArgs e)
-        {
-            if (this.dgvInvoices.CurrentCell.RowIndex == -1)
-            {
-                return;
-            }
-
-            Invoice selectedInvoice = (Invoice)this.bs.List[this.dgvInvoices.CurrentCell.RowIndex];
-            CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
-            cdaDetail.ShowDialog(this);
         }
 
         /// <summary>
@@ -418,7 +401,7 @@ namespace CMBC.EasyFactor.Report
         /// <param name="invoiceList"></param>
         private void GenerateFinanceReport(List<Invoice> invoiceList)
         {
-            IEnumerable<IGrouping<Client, Invoice>> groupsBySeller = invoiceList.GroupBy(i => i.InvoiceAssignBatch.CDA.Case.SellerClient);
+            IEnumerable<IGrouping<Client, Invoice>> groupsBySeller = invoiceList.GroupBy(i => i.InvoiceAssignBatch.Case.SellerClient);
             foreach (IGrouping<Client, Invoice> sellerGroup in groupsBySeller)
             {
                 Client seller = sellerGroup.Key;
@@ -437,30 +420,14 @@ namespace CMBC.EasyFactor.Report
                 sheet.Cells[3, 2] = "可融资账款明细表";
                 sheet.get_Range(sheet.Cells[2, 1], sheet.Cells[2, 5]).RowHeight = 30;
 
-                IEnumerable<IGrouping<Client, Invoice>> groupsByBuyer = sellerGroup.GroupBy(i => i.InvoiceAssignBatch.CDA.Case.BuyerClient);
+                IEnumerable<IGrouping<Client, Invoice>> groupsByBuyer = sellerGroup.GroupBy(i => i.InvoiceAssignBatch.Case.BuyerClient);
 
                 int row = 6;
                 foreach (IGrouping<Client, Invoice> buyerGroup in groupsByBuyer)
                 {
                     Client buyer = buyerGroup.Key;
-                    CDA cda = buyerGroup.First().InvoiceAssignBatch.CDA;
-                    Case curCase = cda.Case;
-                    Factor factor = null;
-                    switch (curCase.TransactionType)
-                    {
-                        case "国内卖方保理":
-                        case "国内信保保理":
-                        case "国内买方保理":
-                        case "租赁保理":
-                            break;
-                        case "国际信保保理":
-                        case "出口保理":
-                        case "进口保理":
-                            factor = curCase.BuyerFactor;
-                            break;
-                        default:
-                            break;
-                    }
+                    Case curCase = buyerGroup.First().InvoiceAssignBatch.Case;
+                    CDA cda = curCase.ActiveCDA;
 
                     sheet.Cells[row, 1] = "卖方：";
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
@@ -468,11 +435,6 @@ namespace CMBC.EasyFactor.Report
                     sheet.Cells[row, 1] = "买方:";
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
                     sheet.Cells[row++, 2] = String.Format("{0}（应收账款债务人）", buyer.ToString());
-                    if (factor != null)
-                    {
-                        sheet.Cells[row, 1] = "进口保理商：";
-                        sheet.Cells[row++, 2] = factor.ToString();
-                    }
 
                     row++;
 
@@ -666,18 +628,16 @@ namespace CMBC.EasyFactor.Report
             DateTime endDate = this.diAssignDateEnd.Text != string.Empty ? this.diAssignDateEnd.Value : this.diAssignDateEnd.MinDate;
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
-                              let seller = invoice.InvoiceAssignBatch.CDA.Case.SellerClient
+                              let seller = invoice.InvoiceAssignBatch.Case.SellerClient
                               where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN.Contains(sellerName)
-                              let buyer = invoice.InvoiceAssignBatch.CDA.Case.BuyerClient
+                              let buyer = invoice.InvoiceAssignBatch.Case.BuyerClient
                               where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN.Contains(buyerName)
-                              let sellerFactor = invoice.InvoiceAssignBatch.CDA.Case.SellerFactor
+                              let sellerFactor = invoice.InvoiceAssignBatch.Case.SellerFactor
                               where sellerFactor.CompanyNameCN.Contains(factorName) || sellerFactor.CompanyNameEN.Contains(factorName)
-                              let buyerFactor = invoice.InvoiceAssignBatch.CDA.Case.BuyerFactor
+                              let buyerFactor = invoice.InvoiceAssignBatch.Case.BuyerFactor
                               where buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
-                              let curCase = invoice.InvoiceAssignBatch.CDA.Case
+                              let curCase = invoice.InvoiceAssignBatch.Case
                               where curCase.CaseMark == ConstStr.CASE.ENABLE
-                              let cda = invoice.InvoiceAssignBatch.CDA
-                              where cda.CDAStatus == ConstStr.CDA.SIGNED
                               where
                                     (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
                                  && (beginDate != this.diAssignDateBegin.MinDate ? invoice.InvoiceAssignBatch.AssignDate >= beginDate : true)

@@ -165,12 +165,23 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="cda"></param>
-        public void CaculateOutstanding(CDA cda)
+        public void CaculateOutstanding(Case selectedCase)
         {
-            this.tbCreditCoverOutstanding.Text = String.Format("{0:N2}", cda.CreditCoverOutstanding);
-            this.tbAROutstanding.Text = String.Format("{0:N2}", cda.Case.AssignOutstanding);
-            this.tbFinanceCreditLineOutstanding.Text = String.Format("{0:N2}", cda.FinanceLineOutstanding);
-            this.tbFinanceOutstanding.Text = String.Format("{0:N2}", cda.Case.FinanceOutstanding);
+            CDA cda = selectedCase.ActiveCDA;
+            if (cda != null)
+            {
+                this.tbCreditCoverOutstanding.Text = String.Format("{0:N2}", cda.CreditCoverOutstanding);
+                this.tbAROutstanding.Text = String.Format("{0:N2}", cda.Case.AssignOutstanding);
+                this.tbFinanceCreditLineOutstanding.Text = String.Format("{0:N2}", cda.FinanceLineOutstanding);
+                this.tbFinanceOutstanding.Text = String.Format("{0:N2}", cda.Case.FinanceOutstanding);
+            }
+            else
+            {
+                this.tbCreditCoverOutstanding.Text = String.Empty;
+                this.tbAROutstanding.Text = String.Empty;
+                this.tbFinanceCreditLineOutstanding.Text = String.Empty;
+                this.tbFinanceOutstanding.Text = String.Empty;
+            }
         }
         // Private Methods (7) 
 
@@ -211,7 +222,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this.Case != null)
             {
-                CDA cda = this.Case.CDAs.SingleOrDefault(c => c.CDAStatus == "已签回");
+                CDA cda = this.Case.ActiveCDA;
                 if (cda != null)
                 {
                     CDADetail cdaDetail = new CDADetail(cda, CDADetail.OpCDAType.DETAIL_CDA);
@@ -229,17 +240,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this.Case != null)
             {
-                Factor factor = null;
-                if ("国内卖方保理".Equals(this.Case.TransactionType) || "出口保理".Equals(this.Case.TransactionType) || "国际信保保理".Equals(this.Case.TransactionType) || "国内信保保理".Equals(this.Case.TransactionType))
-                {
-                    factor = this.Case.SellerFactor;
-                }
-                else
-                {
-                    factor = this.Case.BuyerFactor;
-                }
-
-                FactorDetail factorDetail = new FactorDetail(factor, FactorDetail.OpFactorType.DETAIL_FACTOR);
+                FactorDetail factorDetail = new FactorDetail(this.Case.Factor, FactorDetail.OpFactorType.DETAIL_FACTOR);
                 factorDetail.Show();
             }
         }
@@ -295,7 +296,7 @@ namespace CMBC.EasyFactor.ARMgr
                 default: break;
             }
 
-            CDA cda = this.Case.CDAs.SingleOrDefault(c => c.CDAStatus == ConstStr.CDA.SIGNED);
+            CDA cda = this.Case.ActiveCDA;
             if (cda != null)
             {
                 this.tbCDACode.Text = cda.CDACode;
@@ -326,53 +327,36 @@ namespace CMBC.EasyFactor.ARMgr
                     this.tbHighestFinance.Text = String.Format("{0:N2}", creditLine.CreditLine);
                 }
 
-                this.CaculateOutstanding(cda);
+                this.CaculateOutstanding(this.Case);
 
                 if (!cda.FinanceLine.HasValue && this.opARType == OpARType.FINANCE)
                 {
                     MessageBox.Show("本案无预付款额度，不能融资。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-
-                Control control = this.panelInvoiceMgr.Controls[0];
-                if (control is InvoiceAssign)
-                {
-                    (control as InvoiceAssign).CDA = cda;
-                }
-                else if (control is InvoiceFinance)
-                {
-                    (control as InvoiceFinance).CDA = cda;
-                }
-                else if (control is InvoicePayment)
-                {
-                    (control as InvoicePayment).CDA = cda;
-                }
-                else if (control is InvoiceRefund)
-                {
-                    (control as InvoiceRefund).CDA = cda;
-                }
             }
             else
             {
                 this.isRecoarseCheckBox.Checked = false;
                 this.assignTypeTextBox.Text = string.Empty;
-                Control control = this.panelInvoiceMgr.Controls[0];
-                if (control is InvoiceAssign)
-                {
-                    (control as InvoiceAssign).ResetControlsStatus();
-                }
-                else if (control is InvoiceFinance)
-                {
-                    (control as InvoiceFinance).ResetControlsStatus();
-                }
-                else if (control is InvoicePayment)
-                {
-                    (control as InvoicePayment).ResetControlsStatus();
-                }
-                else if (control is InvoiceRefund)
-                {
-                    (control as InvoiceRefund).ResetControlsStatus();
-                }
+            }
+
+            Control control = this.panelInvoiceMgr.Controls[0];
+            if (control is InvoiceAssign)
+            {
+                (control as InvoiceAssign).Case = this.Case;
+            }
+            else if (control is InvoiceFinance)
+            {
+                (control as InvoiceFinance).Case = this.Case;
+            }
+            else if (control is InvoicePayment)
+            {
+                (control as InvoicePayment).Case = this.Case;
+            }
+            else if (control is InvoiceRefund)
+            {
+                (control as InvoiceRefund).Case = this.Case;
             }
         }
 

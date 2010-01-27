@@ -1214,7 +1214,7 @@ namespace CMBC.EasyFactor.Utils
             }
 
             int result = 0;
-            CDA cda = null;
+            Case curCase = null;
             List<InvoiceAssignBatch> assignBatches = new List<InvoiceAssignBatch>();
             List<InvoiceFinanceBatch> financeBatches = new List<InvoiceFinanceBatch>();
             List<InvoicePaymentBatch> paymentBatches = new List<InvoicePaymentBatch>();
@@ -1235,19 +1235,19 @@ namespace CMBC.EasyFactor.Utils
                             return -1;
                         }
 
-                        //CDA
-                        string cdaCode = String.Format("{0:G}", valueArray[row, 1]);
-                        if (string.Empty.Equals(cdaCode))
+                        //Case
+                        string caseCode = String.Format("{0:G}", valueArray[row, 1]);
+                        if (string.Empty.Equals(caseCode))
                         {
                             continue;
                         }
 
-                        if (cda == null || cda.CDACode != cdaCode)
+                        if (curCase == null || curCase.CaseCode != caseCode)
                         {
-                            cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
-                            if (cda == null)
+                            curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+                            if (curCase == null)
                             {
-                                throw new Exception("额度通知书编号错误: " + cdaCode);
+                                throw new Exception("案件编号错误: " + caseCode);
                             }
                         }
 
@@ -1270,7 +1270,7 @@ namespace CMBC.EasyFactor.Utils
                         else
                         {
                             DateTime assignDate = (DateTime)valueArray[row, column++];
-                            assignBatch = assignBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.AssignDate == assignDate);
+                            assignBatch = assignBatches.SingleOrDefault(i => i.Case.CaseCode == caseCode && i.AssignDate == assignDate);
                             if (assignBatch == null)
                             {
                                 assignBatch = new InvoiceAssignBatch();
@@ -1280,7 +1280,7 @@ namespace CMBC.EasyFactor.Utils
                                 assignBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                                 assignBatch.CheckStatus = "已复核";
                                 assignBatch.AssignBatchNo = Invoice.GenerateAssignBatchNo(assignBatch.AssignDate, assignBatches);
-                                assignBatch.CDA = cda;
+                                assignBatch.Case = curCase;
                                 assignBatches.Add(assignBatch);
                             }
                         }
@@ -1349,7 +1349,7 @@ namespace CMBC.EasyFactor.Utils
 
                             if (financeDate != null)
                             {
-                                financeBatch = financeBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.FinancePeriodBegin.Date == financeDate && i.FinancePeriodEnd.Date == financeDueDate);
+                                financeBatch = financeBatches.SingleOrDefault(i => i.Case.CaseCode == caseCode && i.FinancePeriodBegin.Date == financeDate && i.FinancePeriodEnd.Date == financeDueDate);
                                 if (financeBatch == null)
                                 {
                                     financeBatch = new InvoiceFinanceBatch();
@@ -1368,7 +1368,7 @@ namespace CMBC.EasyFactor.Utils
                                     financeBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                                     financeBatch.CheckStatus = "已复核";
                                     financeBatch.FinanceBatchNo = Invoice.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin, financeBatches);
-                                    financeBatch.CDA = cda;
+                                    financeBatch.Case = curCase;
                                     financeBatches.Add(financeBatch);
                                 }
                             }
@@ -1412,7 +1412,7 @@ namespace CMBC.EasyFactor.Utils
                             DateTime? paymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
                             if (paymentDate != null)
                             {
-                                paymentBatch = paymentBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.PaymentDate == paymentDate && i.PaymentType == paymentType);
+                                paymentBatch = paymentBatches.SingleOrDefault(i => i.Case.CaseCode == caseCode && i.PaymentDate == paymentDate && i.PaymentType == paymentType);
                                 if (paymentBatch == null)
                                 {
                                     paymentBatch = new InvoicePaymentBatch();
@@ -1424,7 +1424,7 @@ namespace CMBC.EasyFactor.Utils
                                     paymentBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                                     paymentBatch.CheckStatus = "已复核";
                                     paymentBatch.PaymentBatchNo = Invoice.GeneratePaymentBatchNo(paymentBatch.PaymentDate, paymentBatches);
-                                    paymentBatch.CDA = cda;
+                                    paymentBatch.Case = curCase;
                                     paymentBatches.Add(paymentBatch);
                                 }
                             }
@@ -1469,7 +1469,7 @@ namespace CMBC.EasyFactor.Utils
                             DateTime? refundDate = (System.Nullable<DateTime>)valueArray[row, column++];
                             if (refundDate != null)
                             {
-                                refundBatch = refundBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.RefundDate == refundDate && i.RefundType == refundType);
+                                refundBatch = refundBatches.SingleOrDefault(i => i.Case.CaseCode == caseCode && i.RefundDate == refundDate && i.RefundType == refundType);
                                 if (refundBatch == null)
                                 {
                                     refundBatch = new InvoiceRefundBatch();
@@ -1480,7 +1480,7 @@ namespace CMBC.EasyFactor.Utils
                                     refundBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                                     refundBatch.CheckStatus = "已复核";
                                     refundBatch.RefundBatchNo = Invoice.GenerateRefundBatchNo(refundBatch.RefundDate, refundBatches);
-                                    refundBatch.CDA = cda;
+                                    refundBatch.Case = curCase;
                                     refundBatches.Add(refundBatch);
                                 }
                             }
@@ -1509,10 +1509,10 @@ namespace CMBC.EasyFactor.Utils
                         invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
                         if (!invoice.Commission.HasValue)
                         {
-                            switch (cda.CommissionType)
+                            switch (curCase.ActiveCDA.CommissionType)
                             {
                                 case "按融资金额":
-                                    invoice.Commission = invoice.FinanceAmount * cda.Price;
+                                    invoice.Commission = invoice.FinanceAmount * curCase.ActiveCDA.Price;
                                     if (invoice.Commission.HasValue)
                                     {
                                         invoice.CommissionDate = invoice.FinanceDate;
@@ -1520,7 +1520,7 @@ namespace CMBC.EasyFactor.Utils
 
                                     break;
                                 case "按发票金额":
-                                    invoice.Commission = invoice.AssignAmount * cda.Price;
+                                    invoice.Commission = invoice.AssignAmount * curCase.ActiveCDA.Price;
                                     if (invoice.Commission.HasValue)
                                     {
                                         invoice.CommissionDate = invoice.InvoiceAssignBatch.AssignDate;
@@ -1557,18 +1557,18 @@ namespace CMBC.EasyFactor.Utils
                             return -1;
                         }
 
-                        string cdaCode = String.Format("{0:G}", valueArray2[row, 1]);
-                        if (string.Empty.Equals(cdaCode))
+                        string caseCode = String.Format("{0:G}", valueArray2[row, 1]);
+                        if (string.Empty.Equals(caseCode))
                         {
                             continue;
                         }
 
-                        if (cda == null || cda.CDACode != cdaCode)
+                        if (curCase == null || curCase.CaseCode != caseCode)
                         {
-                            cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
-                            if (cda == null)
+                            curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+                            if (curCase == null)
                             {
-                                throw new Exception("额度通知书编号错误: " + cdaCode);
+                                throw new Exception("案件编号错误: " + caseCode);
                             }
                         }
 
@@ -1592,7 +1592,7 @@ namespace CMBC.EasyFactor.Utils
                             DateTime? paymentDate = (System.Nullable<DateTime>)valueArray2[row, 5];
                             if (paymentDate != null)
                             {
-                                paymentBatch = paymentBatches.SingleOrDefault(i => i.CDA.CDACode == cdaCode && i.PaymentDate == paymentDate && i.PaymentType == paymentType);
+                                paymentBatch = paymentBatches.SingleOrDefault(i => i.Case.CaseCode == caseCode && i.PaymentDate == paymentDate && i.PaymentType == paymentType);
                                 if (paymentBatch == null)
                                 {
                                     paymentBatch = new InvoicePaymentBatch();
@@ -1604,7 +1604,7 @@ namespace CMBC.EasyFactor.Utils
                                     paymentBatch.CreateUserName = String.Format("{0:G}", valueArray2[row, column++]);
                                     paymentBatch.PaymentBatchNo = Invoice.GeneratePaymentBatchNo(paymentBatch.PaymentDate, paymentBatches);
                                     paymentBatch.CheckStatus = "已复核";
-                                    paymentBatch.CDA = cda;
+                                    paymentBatch.Case = curCase;
                                     paymentBatches.Add(paymentBatch);
                                 }
                             }
@@ -1670,12 +1670,12 @@ namespace CMBC.EasyFactor.Utils
             {
                 foreach (InvoiceAssignBatch batch in assignBatches)
                 {
-                    batch.CDA = null;
+                    batch.Case = null;
                 }
 
                 foreach (InvoiceFinanceBatch batch in financeBatches)
                 {
-                    batch.CDA = null;
+                    batch.Case = null;
                 }
 
                 foreach (InvoicePaymentBatch batch in paymentBatches)
@@ -1686,7 +1686,7 @@ namespace CMBC.EasyFactor.Utils
                         log.CreditNote = null;
                     }
 
-                    batch.CDA = null;
+                    batch.Case = null;
                 }
 
                 foreach (InvoiceRefundBatch batch in refundBatches)
@@ -1696,7 +1696,7 @@ namespace CMBC.EasyFactor.Utils
                         log.Invoice = null;
                     }
 
-                    batch.CDA = null;
+                    batch.Case = null;
                 }
 
                 throw e1;

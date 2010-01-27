@@ -20,7 +20,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.BindingSource batchBindingSource;
         private DevComponents.DotNetBar.ButtonX btnSave;
         private DevComponents.DotNetBar.ButtonX btnUpdate;
-        private DevComponents.DotNetBar.Controls.TextBoxX cDACodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX caseCodeTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput checkDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.ComboBoxEx checkStatusComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX checkUserNameTextBox;
@@ -69,7 +69,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevComponents.DotNetBar.LabelX cDACodeLabel;
+            DevComponents.DotNetBar.LabelX caseCodeLabel;
             DevComponents.DotNetBar.LabelX assignBatchNoLabel;
             DevComponents.DotNetBar.LabelX assignDateLabel;
             DevComponents.DotNetBar.LabelX createUserNameLabel;
@@ -93,14 +93,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.isCreateMsgCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.assignDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.assignBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.cDACodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.caseCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabItemBatch = new DevComponents.DotNetBar.TabItem(this.components);
             this.panelInvoices = new DevComponents.DotNetBar.TabControlPanel();
             this.tabItemInvoices = new DevComponents.DotNetBar.TabItem(this.components);
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            cDACodeLabel = new DevComponents.DotNetBar.LabelX();
+            caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             assignDateLabel = new DevComponents.DotNetBar.LabelX();
             createUserNameLabel = new DevComponents.DotNetBar.LabelX();
@@ -118,19 +118,19 @@ namespace CMBC.EasyFactor.ARMgr
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
-            // cDACodeLabel
+            // caseCodeLabel
             // 
-            cDACodeLabel.AutoSize = true;
-            cDACodeLabel.BackColor = System.Drawing.Color.Transparent;
+            caseCodeLabel.AutoSize = true;
+            caseCodeLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            cDACodeLabel.BackgroundStyle.Class = "";
-            cDACodeLabel.Location = new System.Drawing.Point(12, 10);
-            cDACodeLabel.Name = "cDACodeLabel";
-            cDACodeLabel.Size = new System.Drawing.Size(97, 16);
-            cDACodeLabel.TabIndex = 0;
-            cDACodeLabel.Text = "额度通知书编号:";
+            caseCodeLabel.BackgroundStyle.Class = "";
+            caseCodeLabel.Location = new System.Drawing.Point(50, 7);
+            caseCodeLabel.Name = "caseCodeLabel";
+            caseCodeLabel.Size = new System.Drawing.Size(59, 16);
+            caseCodeLabel.TabIndex = 0;
+            caseCodeLabel.Text = "案件编号:";
             // 
             // assignBatchNoLabel
             // 
@@ -283,8 +283,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBatch.Controls.Add(this.assignDateDateTimePicker);
             this.panelBatch.Controls.Add(assignBatchNoLabel);
             this.panelBatch.Controls.Add(this.assignBatchNoTextBox);
-            this.panelBatch.Controls.Add(cDACodeLabel);
-            this.panelBatch.Controls.Add(this.cDACodeTextBox);
+            this.panelBatch.Controls.Add(caseCodeLabel);
+            this.panelBatch.Controls.Add(this.caseCodeTextBox);
             this.panelBatch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBatch.Location = new System.Drawing.Point(0, 26);
             this.panelBatch.Name = "panelBatch";
@@ -494,18 +494,18 @@ namespace CMBC.EasyFactor.ARMgr
             this.assignBatchNoTextBox.Size = new System.Drawing.Size(162, 20);
             this.assignBatchNoTextBox.TabIndex = 3;
             // 
-            // cDACodeTextBox
+            // caseCodeTextBox
             // 
             // 
             // 
             // 
-            this.cDACodeTextBox.Border.Class = "TextBoxBorder";
-            this.cDACodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CDACode", true));
-            this.cDACodeTextBox.Location = new System.Drawing.Point(115, 6);
-            this.cDACodeTextBox.Name = "cDACodeTextBox";
-            this.cDACodeTextBox.Size = new System.Drawing.Size(162, 20);
-            this.cDACodeTextBox.TabIndex = 1;
-            this.cDACodeTextBox.DoubleClick += new System.EventHandler(this.DetailCDA);
+            this.caseCodeTextBox.Border.Class = "TextBoxBorder";
+            this.caseCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CaseCode", true));
+            this.caseCodeTextBox.Location = new System.Drawing.Point(115, 6);
+            this.caseCodeTextBox.Name = "caseCodeTextBox";
+            this.caseCodeTextBox.Size = new System.Drawing.Size(162, 20);
+            this.caseCodeTextBox.TabIndex = 1;
+            this.caseCodeTextBox.DoubleClick += new System.EventHandler(this.DetailCase);
             // 
             // tabItemBatch
             // 

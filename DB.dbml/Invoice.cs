@@ -71,7 +71,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.InvoiceAssignBatch.CDA.Case.BuyerClient.ToString();
+                return this.InvoiceAssignBatch.Case.BuyerClient.ToString();
             }
         }
 
@@ -100,22 +100,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                string transactionType = this.InvoiceAssignBatch.CDA.Case.TransactionType;
-                switch (transactionType)
-                {
-                    case "国内卖方保理":
-                    case "国内买方保理":
-                    case "租赁保理":
-                        return string.Empty;
-                    case "国内信保保理":
-                    case "国际信保保理":
-                    case "出口保理":
-                        return this.InvoiceAssignBatch.CDA.Case.BuyerFactor.ToString();
-                    case "进口保理":
-                        return this.InvoiceAssignBatch.CDA.Case.SellerFactor.ToString();
-                    default:
-                        return string.Empty;
-                }
+                return this.InvoiceAssignBatch.Case.Factor.ToString();
             }
         }
 
@@ -179,7 +164,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.InvoiceAssignBatch.CDA.Case.InvoiceCurrency;
+                return this.InvoiceAssignBatch.Case.InvoiceCurrency;
             }
         }
 
@@ -318,7 +303,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.InvoiceAssignBatch.CDA.Case.SellerClient.ToString();
+                return this.InvoiceAssignBatch.Case.SellerClient.ToString();
             }
         }
 
@@ -329,7 +314,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.InvoiceAssignBatch.CDA.Case.TransactionType;
+                return this.InvoiceAssignBatch.Case.TransactionType;
             }
         }
 

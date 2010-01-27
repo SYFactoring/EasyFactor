@@ -137,22 +137,21 @@ namespace CMBC.EasyFactor.CaseMgr
             if (MessageBox.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 bool isDeleteOK = true;
-                foreach (CDA cda in selectedCase.CDAs)
+                foreach (InvoiceAssignBatch assignBatch in selectedCase.InvoiceAssignBatches)
                 {
-                    foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
+                    foreach (Invoice invoice in assignBatch.Invoices)
                     {
-                        foreach (Invoice invoice in assignBatch.Invoices)
-                        {
-                            App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
-                            App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
-                        }
-                        App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
+                        App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
+                        App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
                     }
-                    App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
-                    App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
-                    App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
-                    App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(cda.InvoiceRefundBatches);
+                    App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
                 }
+
+                App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(selectedCase.InvoiceAssignBatches);
+                App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(selectedCase.InvoiceFinanceBatches);
+                App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(selectedCase.InvoicePaymentBatches);
+                App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(selectedCase.InvoiceRefundBatches);
+
                 App.Current.DbContext.CDAs.DeleteAllOnSubmit(selectedCase.CDAs);
                 App.Current.DbContext.Cases.DeleteOnSubmit(selectedCase);
                 try
@@ -372,32 +371,29 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[9, "R"] = "备注";
 
                 int row = 10;
-                foreach (CDA c in selectedCase.CDAs)
+                foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
                 {
-                    foreach (InvoiceAssignBatch batch in c.InvoiceAssignBatches)
+                    foreach (Invoice invoice in batch.Invoices)
                     {
-                        foreach (Invoice invoice in batch.Invoices)
-                        {
-                            sheet.Cells[row, "A"] = "'" + invoice.InvoiceNo;
-                            sheet.Cells[row, "B"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.AssignAmount);
-                            sheet.Cells[row, "C"] = String.Format("{0:yyyy/MM/dd}", invoice.InvoiceDate);
-                            sheet.Cells[row, "D"] = String.Format("{0:yyyy/MM/dd}", invoice.DueDate);
-                            sheet.Cells[row, "E"] = String.Format("{0:yyyy/MM/dd}", batch.AssignDate);
-                            sheet.Cells[row, "F"] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
-                            sheet.Cells[row, "G"] = String.Format("{0} {1:N2}", invoice.FinanceCurrency, invoice.FinanceAmount);
-                            sheet.Cells[row, "H"] = String.Format("{0:yyyy/MM/dd}", invoice.FinanceDate);
-                            sheet.Cells[row, "I"] = String.Format("{0:yyyy/MM/dd}", invoice.FinanceDueDate);
-                            sheet.Cells[row, "J"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.PaymentAmount);
-                            sheet.Cells[row, "K"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.AssignOutstanding);
-                            sheet.Cells[row, "L"] = String.Format("{0:yyyy/MM/dd}", invoice.PaymentDate);
-                            sheet.Cells[row, "M"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.RefundAmount);
-                            sheet.Cells[row, "N"] = String.Format("{0:yyyy/MM/dd}", invoice.RefundDate);
-                            sheet.Cells[row, "O"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.Commission);
-                            sheet.Cells[row, "P"] = String.Format("{0:yyyy/MM/dd}", invoice.CommissionDate);
-                            sheet.Cells[row, "Q"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.Interest);
-                            sheet.Cells[row, "R"] = invoice.Comment;
-                            row++;
-                        }
+                        sheet.Cells[row, "A"] = "'" + invoice.InvoiceNo;
+                        sheet.Cells[row, "B"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.AssignAmount);
+                        sheet.Cells[row, "C"] = String.Format("{0:yyyy/MM/dd}", invoice.InvoiceDate);
+                        sheet.Cells[row, "D"] = String.Format("{0:yyyy/MM/dd}", invoice.DueDate);
+                        sheet.Cells[row, "E"] = String.Format("{0:yyyy/MM/dd}", batch.AssignDate);
+                        sheet.Cells[row, "F"] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
+                        sheet.Cells[row, "G"] = String.Format("{0} {1:N2}", invoice.FinanceCurrency, invoice.FinanceAmount);
+                        sheet.Cells[row, "H"] = String.Format("{0:yyyy/MM/dd}", invoice.FinanceDate);
+                        sheet.Cells[row, "I"] = String.Format("{0:yyyy/MM/dd}", invoice.FinanceDueDate);
+                        sheet.Cells[row, "J"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.PaymentAmount);
+                        sheet.Cells[row, "K"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.AssignOutstanding);
+                        sheet.Cells[row, "L"] = String.Format("{0:yyyy/MM/dd}", invoice.PaymentDate);
+                        sheet.Cells[row, "M"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.RefundAmount);
+                        sheet.Cells[row, "N"] = String.Format("{0:yyyy/MM/dd}", invoice.RefundDate);
+                        sheet.Cells[row, "O"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.Commission);
+                        sheet.Cells[row, "P"] = String.Format("{0:yyyy/MM/dd}", invoice.CommissionDate);
+                        sheet.Cells[row, "Q"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.Interest);
+                        sheet.Cells[row, "R"] = invoice.Comment;
+                        row++;
                     }
                 }
 

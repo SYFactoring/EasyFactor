@@ -380,6 +380,14 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<CreditCoverNegotiation> _CreditCoverNegotiations;
 		
+		private EntitySet<InvoiceAssignBatch> _InvoiceAssignBatches;
+		
+		private EntitySet<InvoiceFinanceBatch> _InvoiceFinanceBatches;
+		
+		private EntitySet<InvoicePaymentBatch> _InvoicePaymentBatches;
+		
+		private EntitySet<InvoiceRefundBatch> _InvoiceRefundBatches;
+		
 		private EntityRef<Client> _BuyerClient;
 		
 		private EntityRef<Client> _SellerClient;
@@ -434,6 +442,10 @@ namespace CMBC.EasyFactor.DB.dbml
 		{
 			this._CDAs = new EntitySet<CDA>(new Action<CDA>(this.attach_CDAs), new Action<CDA>(this.detach_CDAs));
 			this._CreditCoverNegotiations = new EntitySet<CreditCoverNegotiation>(new Action<CreditCoverNegotiation>(this.attach_CreditCoverNegotiations), new Action<CreditCoverNegotiation>(this.detach_CreditCoverNegotiations));
+			this._InvoiceAssignBatches = new EntitySet<InvoiceAssignBatch>(new Action<InvoiceAssignBatch>(this.attach_InvoiceAssignBatches), new Action<InvoiceAssignBatch>(this.detach_InvoiceAssignBatches));
+			this._InvoiceFinanceBatches = new EntitySet<InvoiceFinanceBatch>(new Action<InvoiceFinanceBatch>(this.attach_InvoiceFinanceBatches), new Action<InvoiceFinanceBatch>(this.detach_InvoiceFinanceBatches));
+			this._InvoicePaymentBatches = new EntitySet<InvoicePaymentBatch>(new Action<InvoicePaymentBatch>(this.attach_InvoicePaymentBatches), new Action<InvoicePaymentBatch>(this.detach_InvoicePaymentBatches));
+			this._InvoiceRefundBatches = new EntitySet<InvoiceRefundBatch>(new Action<InvoiceRefundBatch>(this.attach_InvoiceRefundBatches), new Action<InvoiceRefundBatch>(this.detach_InvoiceRefundBatches));
 			this._BuyerClient = default(EntityRef<Client>);
 			this._SellerClient = default(EntityRef<Client>);
 			this._CoDepartment = default(EntityRef<Department>);
@@ -813,6 +825,58 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Association(Name="Case_InvoiceAssignBatch", Storage="_InvoiceAssignBatches", OtherKey="CaseCode")]
+		public EntitySet<InvoiceAssignBatch> InvoiceAssignBatches
+		{
+			get
+			{
+				return this._InvoiceAssignBatches;
+			}
+			set
+			{
+				this._InvoiceAssignBatches.Assign(value);
+			}
+		}
+		
+		[Association(Name="Case_InvoiceFinanceBatch", Storage="_InvoiceFinanceBatches", OtherKey="CaseCode")]
+		public EntitySet<InvoiceFinanceBatch> InvoiceFinanceBatches
+		{
+			get
+			{
+				return this._InvoiceFinanceBatches;
+			}
+			set
+			{
+				this._InvoiceFinanceBatches.Assign(value);
+			}
+		}
+		
+		[Association(Name="Case_InvoicePaymentBatch", Storage="_InvoicePaymentBatches", OtherKey="CaseCode")]
+		public EntitySet<InvoicePaymentBatch> InvoicePaymentBatches
+		{
+			get
+			{
+				return this._InvoicePaymentBatches;
+			}
+			set
+			{
+				this._InvoicePaymentBatches.Assign(value);
+			}
+		}
+		
+		[Association(Name="Case_InvoiceRefundBatch", Storage="_InvoiceRefundBatches", OtherKey="CaseCode")]
+		public EntitySet<InvoiceRefundBatch> InvoiceRefundBatches
+		{
+			get
+			{
+				return this._InvoiceRefundBatches;
+			}
+			set
+			{
+				this._InvoiceRefundBatches.Assign(value);
+			}
+		}
+		
 		[Association(Name="Client_Case", Storage="_BuyerClient", ThisKey="BuyerCode", IsForeignKey=true)]
 		public Client BuyerClient
 		{
@@ -1056,6 +1120,54 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_CreditCoverNegotiations(CreditCoverNegotiation entity)
+		{
+			this.SendPropertyChanging();
+			entity.Case = null;
+		}
+		
+		private void attach_InvoiceAssignBatches(InvoiceAssignBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Case = this;
+		}
+		
+		private void detach_InvoiceAssignBatches(InvoiceAssignBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Case = null;
+		}
+		
+		private void attach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Case = this;
+		}
+		
+		private void detach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Case = null;
+		}
+		
+		private void attach_InvoicePaymentBatches(InvoicePaymentBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Case = this;
+		}
+		
+		private void detach_InvoicePaymentBatches(InvoicePaymentBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Case = null;
+		}
+		
+		private void attach_InvoiceRefundBatches(InvoiceRefundBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Case = this;
+		}
+		
+		private void detach_InvoiceRefundBatches(InvoiceRefundBatch entity)
 		{
 			this.SendPropertyChanging();
 			entity.Case = null;
@@ -1432,14 +1544,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _CheckDate;
 		
-		private EntitySet<InvoiceAssignBatch> _InvoiceAssignBatches;
-		
-		private EntitySet<InvoiceFinanceBatch> _InvoiceFinanceBatches;
-		
-		private EntitySet<InvoicePaymentBatch> _InvoicePaymentBatches;
-		
-		private EntitySet<InvoiceRefundBatch> _InvoiceRefundBatches;
-		
 		private EntityRef<Case> _Case;
 		
     #region Extensibility Method Definitions
@@ -1536,10 +1640,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		public CDA()
 		{
-			this._InvoiceAssignBatches = new EntitySet<InvoiceAssignBatch>(new Action<InvoiceAssignBatch>(this.attach_InvoiceAssignBatches), new Action<InvoiceAssignBatch>(this.detach_InvoiceAssignBatches));
-			this._InvoiceFinanceBatches = new EntitySet<InvoiceFinanceBatch>(new Action<InvoiceFinanceBatch>(this.attach_InvoiceFinanceBatches), new Action<InvoiceFinanceBatch>(this.detach_InvoiceFinanceBatches));
-			this._InvoicePaymentBatches = new EntitySet<InvoicePaymentBatch>(new Action<InvoicePaymentBatch>(this.attach_InvoicePaymentBatches), new Action<InvoicePaymentBatch>(this.detach_InvoicePaymentBatches));
-			this._InvoiceRefundBatches = new EntitySet<InvoiceRefundBatch>(new Action<InvoiceRefundBatch>(this.attach_InvoiceRefundBatches), new Action<InvoiceRefundBatch>(this.detach_InvoiceRefundBatches));
 			this._Case = default(EntityRef<Case>);
 			OnCreated();
 		}
@@ -2408,58 +2508,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="CDA_InvoiceAssignBatch", Storage="_InvoiceAssignBatches", OtherKey="CDACode")]
-		public EntitySet<InvoiceAssignBatch> InvoiceAssignBatches
-		{
-			get
-			{
-				return this._InvoiceAssignBatches;
-			}
-			set
-			{
-				this._InvoiceAssignBatches.Assign(value);
-			}
-		}
-		
-		[Association(Name="CDA_InvoiceFinanceBatch", Storage="_InvoiceFinanceBatches", OtherKey="CDACode")]
-		public EntitySet<InvoiceFinanceBatch> InvoiceFinanceBatches
-		{
-			get
-			{
-				return this._InvoiceFinanceBatches;
-			}
-			set
-			{
-				this._InvoiceFinanceBatches.Assign(value);
-			}
-		}
-		
-		[Association(Name="CDA_InvoicePaymentBatch", Storage="_InvoicePaymentBatches", OtherKey="CDACode")]
-		public EntitySet<InvoicePaymentBatch> InvoicePaymentBatches
-		{
-			get
-			{
-				return this._InvoicePaymentBatches;
-			}
-			set
-			{
-				this._InvoicePaymentBatches.Assign(value);
-			}
-		}
-		
-		[Association(Name="CDA_InvoiceRefundBatch", Storage="_InvoiceRefundBatches", OtherKey="CDACode")]
-		public EntitySet<InvoiceRefundBatch> InvoiceRefundBatches
-		{
-			get
-			{
-				return this._InvoiceRefundBatches;
-			}
-			set
-			{
-				this._InvoiceRefundBatches.Assign(value);
-			}
-		}
-		
 		[Association(Name="Case_CDA", Storage="_Case", ThisKey="CaseCode", IsForeignKey=true)]
 		public Case Case
 		{
@@ -2512,54 +2560,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_InvoiceAssignBatches(InvoiceAssignBatch entity)
-		{
-			this.SendPropertyChanging();
-			entity.CDA = this;
-		}
-		
-		private void detach_InvoiceAssignBatches(InvoiceAssignBatch entity)
-		{
-			this.SendPropertyChanging();
-			entity.CDA = null;
-		}
-		
-		private void attach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
-		{
-			this.SendPropertyChanging();
-			entity.CDA = this;
-		}
-		
-		private void detach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
-		{
-			this.SendPropertyChanging();
-			entity.CDA = null;
-		}
-		
-		private void attach_InvoicePaymentBatches(InvoicePaymentBatch entity)
-		{
-			this.SendPropertyChanging();
-			entity.CDA = this;
-		}
-		
-		private void detach_InvoicePaymentBatches(InvoicePaymentBatch entity)
-		{
-			this.SendPropertyChanging();
-			entity.CDA = null;
-		}
-		
-		private void attach_InvoiceRefundBatches(InvoiceRefundBatch entity)
-		{
-			this.SendPropertyChanging();
-			entity.CDA = this;
-		}
-		
-		private void detach_InvoiceRefundBatches(InvoiceRefundBatch entity)
-		{
-			this.SendPropertyChanging();
-			entity.CDA = null;
 		}
 	}
 	
@@ -8158,7 +8158,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _AssignBatchNo;
 		
-		private string _CDACode;
+		private string _CaseCode;
 		
 		private System.DateTime _AssignDate;
 		
@@ -8178,7 +8178,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<Invoice> _Invoices;
 		
-		private EntityRef<CDA> _CDA;
+		private EntityRef<Case> _Case;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -8186,8 +8186,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnAssignBatchNoChanging(string value);
     partial void OnAssignBatchNoChanged();
-    partial void OnCDACodeChanging(string value);
-    partial void OnCDACodeChanged();
+    partial void OnCaseCodeChanging(string value);
+    partial void OnCaseCodeChanged();
     partial void OnAssignDateChanging(System.DateTime value);
     partial void OnAssignDateChanged();
     partial void OnCheckStatusChanging(string value);
@@ -8209,7 +8209,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		public InvoiceAssignBatch()
 		{
 			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
-			this._CDA = default(EntityRef<CDA>);
+			this._Case = default(EntityRef<Case>);
 			OnCreated();
 		}
 		
@@ -8233,26 +8233,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CDACode
+		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CaseCode
 		{
 			get
 			{
-				return this._CDACode;
+				return this._CaseCode;
 			}
 			set
 			{
-				if ((this._CDACode != value))
+				if ((this._CaseCode != value))
 				{
-					if (this._CDA.HasLoadedOrAssignedValue)
+					if (this._Case.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnCDACodeChanging(value);
+					this.OnCaseCodeChanging(value);
 					this.SendPropertyChanging();
-					this._CDACode = value;
-					this.SendPropertyChanged("CDACode");
-					this.OnCDACodeChanged();
+					this._CaseCode = value;
+					this.SendPropertyChanged("CaseCode");
+					this.OnCaseCodeChanged();
 				}
 			}
 		}
@@ -8430,36 +8430,36 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="CDA_InvoiceAssignBatch", Storage="_CDA", ThisKey="CDACode", IsForeignKey=true)]
-		public CDA CDA
+		[Association(Name="Case_InvoiceAssignBatch", Storage="_Case", ThisKey="CaseCode", IsForeignKey=true)]
+		public Case Case
 		{
 			get
 			{
-				return this._CDA.Entity;
+				return this._Case.Entity;
 			}
 			set
 			{
-				CDA previousValue = this._CDA.Entity;
+				Case previousValue = this._Case.Entity;
 				if (((previousValue != value) 
-							|| (this._CDA.HasLoadedOrAssignedValue == false)))
+							|| (this._Case.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._CDA.Entity = null;
+						this._Case.Entity = null;
 						previousValue.InvoiceAssignBatches.Remove(this);
 					}
-					this._CDA.Entity = value;
+					this._Case.Entity = value;
 					if ((value != null))
 					{
 						value.InvoiceAssignBatches.Add(this);
-						this._CDACode = value.CDACode;
+						this._CaseCode = value.CaseCode;
 					}
 					else
 					{
-						this._CDACode = default(string);
+						this._CaseCode = default(string);
 					}
-					this.SendPropertyChanged("CDA");
+					this.SendPropertyChanged("Case");
 				}
 			}
 		}
@@ -8505,7 +8505,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _FinanceBatchNo;
 		
-		private string _CDACode;
+		private string _CaseCode;
 		
 		private string _FinanceType;
 		
@@ -8541,9 +8541,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<Invoice> _Invoices;
 		
-		private EntityRef<CDA> _CDA;
-		
 		private EntityRef<Factor> _Factor;
+		
+		private EntityRef<Case> _Case;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -8551,8 +8551,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnFinanceBatchNoChanging(string value);
     partial void OnFinanceBatchNoChanged();
-    partial void OnCDACodeChanging(string value);
-    partial void OnCDACodeChanged();
+    partial void OnCaseCodeChanging(string value);
+    partial void OnCaseCodeChanged();
     partial void OnFinanceTypeChanging(string value);
     partial void OnFinanceTypeChanged();
     partial void OnBatchCurrencyChanging(string value);
@@ -8590,8 +8590,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		public InvoiceFinanceBatch()
 		{
 			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
-			this._CDA = default(EntityRef<CDA>);
 			this._Factor = default(EntityRef<Factor>);
+			this._Case = default(EntityRef<Case>);
 			OnCreated();
 		}
 		
@@ -8615,26 +8615,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CDACode
+		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CaseCode
 		{
 			get
 			{
-				return this._CDACode;
+				return this._CaseCode;
 			}
 			set
 			{
-				if ((this._CDACode != value))
+				if ((this._CaseCode != value))
 				{
-					if (this._CDA.HasLoadedOrAssignedValue)
+					if (this._Case.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnCDACodeChanging(value);
+					this.OnCaseCodeChanging(value);
 					this.SendPropertyChanging();
-					this._CDACode = value;
-					this.SendPropertyChanged("CDACode");
-					this.OnCDACodeChanged();
+					this._CaseCode = value;
+					this.SendPropertyChanged("CaseCode");
+					this.OnCaseCodeChanged();
 				}
 			}
 		}
@@ -8976,40 +8976,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="CDA_InvoiceFinanceBatch", Storage="_CDA", ThisKey="CDACode", IsForeignKey=true)]
-		public CDA CDA
-		{
-			get
-			{
-				return this._CDA.Entity;
-			}
-			set
-			{
-				CDA previousValue = this._CDA.Entity;
-				if (((previousValue != value) 
-							|| (this._CDA.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CDA.Entity = null;
-						previousValue.InvoiceFinanceBatches.Remove(this);
-					}
-					this._CDA.Entity = value;
-					if ((value != null))
-					{
-						value.InvoiceFinanceBatches.Add(this);
-						this._CDACode = value.CDACode;
-					}
-					else
-					{
-						this._CDACode = default(string);
-					}
-					this.SendPropertyChanged("CDA");
-				}
-			}
-		}
-		
 		[Association(Name="Factor_InvoiceFinanceBatch", Storage="_Factor", ThisKey="FactorCode", IsForeignKey=true)]
 		public Factor Factor
 		{
@@ -9040,6 +9006,40 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._FactorCode = default(string);
 					}
 					this.SendPropertyChanged("Factor");
+				}
+			}
+		}
+		
+		[Association(Name="Case_InvoiceFinanceBatch", Storage="_Case", ThisKey="CaseCode", IsForeignKey=true)]
+		public Case Case
+		{
+			get
+			{
+				return this._Case.Entity;
+			}
+			set
+			{
+				Case previousValue = this._Case.Entity;
+				if (((previousValue != value) 
+							|| (this._Case.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Case.Entity = null;
+						previousValue.InvoiceFinanceBatches.Remove(this);
+					}
+					this._Case.Entity = value;
+					if ((value != null))
+					{
+						value.InvoiceFinanceBatches.Add(this);
+						this._CaseCode = value.CaseCode;
+					}
+					else
+					{
+						this._CaseCode = default(string);
+					}
+					this.SendPropertyChanged("Case");
 				}
 			}
 		}
@@ -9085,7 +9085,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _PaymentBatchNo;
 		
-		private string _CDACode;
+		private string _CaseCode;
 		
 		private string _PaymentType;
 		
@@ -9107,7 +9107,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
 		
-		private EntityRef<CDA> _CDA;
+		private EntityRef<Case> _Case;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -9115,8 +9115,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnPaymentBatchNoChanging(string value);
     partial void OnPaymentBatchNoChanged();
-    partial void OnCDACodeChanging(string value);
-    partial void OnCDACodeChanged();
+    partial void OnCaseCodeChanging(string value);
+    partial void OnCaseCodeChanged();
     partial void OnPaymentTypeChanging(string value);
     partial void OnPaymentTypeChanged();
     partial void OnPaymentDateChanging(System.DateTime value);
@@ -9140,7 +9140,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		public InvoicePaymentBatch()
 		{
 			this._InvoicePaymentLogs = new EntitySet<InvoicePaymentLog>(new Action<InvoicePaymentLog>(this.attach_InvoicePaymentLogs), new Action<InvoicePaymentLog>(this.detach_InvoicePaymentLogs));
-			this._CDA = default(EntityRef<CDA>);
+			this._Case = default(EntityRef<Case>);
 			OnCreated();
 		}
 		
@@ -9164,26 +9164,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CDACode
+		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CaseCode
 		{
 			get
 			{
-				return this._CDACode;
+				return this._CaseCode;
 			}
 			set
 			{
-				if ((this._CDACode != value))
+				if ((this._CaseCode != value))
 				{
-					if (this._CDA.HasLoadedOrAssignedValue)
+					if (this._Case.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnCDACodeChanging(value);
+					this.OnCaseCodeChanging(value);
 					this.SendPropertyChanging();
-					this._CDACode = value;
-					this.SendPropertyChanged("CDACode");
-					this.OnCDACodeChanged();
+					this._CaseCode = value;
+					this.SendPropertyChanged("CaseCode");
+					this.OnCaseCodeChanged();
 				}
 			}
 		}
@@ -9381,36 +9381,36 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="CDA_InvoicePaymentBatch", Storage="_CDA", ThisKey="CDACode", IsForeignKey=true)]
-		public CDA CDA
+		[Association(Name="Case_InvoicePaymentBatch", Storage="_Case", ThisKey="CaseCode", IsForeignKey=true)]
+		public Case Case
 		{
 			get
 			{
-				return this._CDA.Entity;
+				return this._Case.Entity;
 			}
 			set
 			{
-				CDA previousValue = this._CDA.Entity;
+				Case previousValue = this._Case.Entity;
 				if (((previousValue != value) 
-							|| (this._CDA.HasLoadedOrAssignedValue == false)))
+							|| (this._Case.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._CDA.Entity = null;
+						this._Case.Entity = null;
 						previousValue.InvoicePaymentBatches.Remove(this);
 					}
-					this._CDA.Entity = value;
+					this._Case.Entity = value;
 					if ((value != null))
 					{
 						value.InvoicePaymentBatches.Add(this);
-						this._CDACode = value.CDACode;
+						this._CaseCode = value.CaseCode;
 					}
 					else
 					{
-						this._CDACode = default(string);
+						this._CaseCode = default(string);
 					}
-					this.SendPropertyChanged("CDA");
+					this.SendPropertyChanged("Case");
 				}
 			}
 		}
@@ -10115,7 +10115,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _RefundBatchNo;
 		
-		private string _CDACode;
+		private string _CaseCode;
 		
 		private string _RefundType;
 		
@@ -10135,7 +10135,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<InvoiceRefundLog> _InvoiceRefundLogs;
 		
-		private EntityRef<CDA> _CDA;
+		private EntityRef<Case> _Case;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -10143,8 +10143,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnRefundBatchNoChanging(string value);
     partial void OnRefundBatchNoChanged();
-    partial void OnCDACodeChanging(string value);
-    partial void OnCDACodeChanged();
+    partial void OnCaseCodeChanging(string value);
+    partial void OnCaseCodeChanged();
     partial void OnRefundTypeChanging(string value);
     partial void OnRefundTypeChanged();
     partial void OnRefundDateChanging(System.DateTime value);
@@ -10166,7 +10166,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		public InvoiceRefundBatch()
 		{
 			this._InvoiceRefundLogs = new EntitySet<InvoiceRefundLog>(new Action<InvoiceRefundLog>(this.attach_InvoiceRefundLogs), new Action<InvoiceRefundLog>(this.detach_InvoiceRefundLogs));
-			this._CDA = default(EntityRef<CDA>);
+			this._Case = default(EntityRef<Case>);
 			OnCreated();
 		}
 		
@@ -10190,26 +10190,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDACode", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CDACode
+		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CaseCode
 		{
 			get
 			{
-				return this._CDACode;
+				return this._CaseCode;
 			}
 			set
 			{
-				if ((this._CDACode != value))
+				if ((this._CaseCode != value))
 				{
-					if (this._CDA.HasLoadedOrAssignedValue)
+					if (this._Case.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnCDACodeChanging(value);
+					this.OnCaseCodeChanging(value);
 					this.SendPropertyChanging();
-					this._CDACode = value;
-					this.SendPropertyChanged("CDACode");
-					this.OnCDACodeChanged();
+					this._CaseCode = value;
+					this.SendPropertyChanged("CaseCode");
+					this.OnCaseCodeChanged();
 				}
 			}
 		}
@@ -10387,36 +10387,36 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="CDA_InvoiceRefundBatch", Storage="_CDA", ThisKey="CDACode", IsForeignKey=true)]
-		public CDA CDA
+		[Association(Name="Case_InvoiceRefundBatch", Storage="_Case", ThisKey="CaseCode", IsForeignKey=true)]
+		public Case Case
 		{
 			get
 			{
-				return this._CDA.Entity;
+				return this._Case.Entity;
 			}
 			set
 			{
-				CDA previousValue = this._CDA.Entity;
+				Case previousValue = this._Case.Entity;
 				if (((previousValue != value) 
-							|| (this._CDA.HasLoadedOrAssignedValue == false)))
+							|| (this._Case.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._CDA.Entity = null;
+						this._Case.Entity = null;
 						previousValue.InvoiceRefundBatches.Remove(this);
 					}
-					this._CDA.Entity = value;
+					this._Case.Entity = value;
 					if ((value != null))
 					{
 						value.InvoiceRefundBatches.Add(this);
-						this._CDACode = value.CDACode;
+						this._CaseCode = value.CaseCode;
 					}
 					else
 					{
-						this._CDACode = default(string);
+						this._CaseCode = default(string);
 					}
-					this.SendPropertyChanged("CDA");
+					this.SendPropertyChanged("Case");
 				}
 			}
 		}

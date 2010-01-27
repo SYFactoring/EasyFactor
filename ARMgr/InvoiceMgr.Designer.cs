@@ -42,9 +42,7 @@ namespace CMBC.EasyFactor.ARMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
-            this.lblCDAStatus = new DevComponents.DotNetBar.LabelX();
             this.lblCaseMark = new DevComponents.DotNetBar.LabelX();
-            this.cbCDAStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cbCaseMark = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tbFinanceOverDueDays = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFinanceOverDueDays = new DevComponents.DotNetBar.LabelX();
@@ -88,7 +86,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceOverDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuInvoiceMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCDADetail = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemInvoiceFlaw = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,9 +107,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelQuery.Controls.Add(this.lblCDAStatus);
             this.panelQuery.Controls.Add(this.lblCaseMark);
-            this.panelQuery.Controls.Add(this.cbCDAStatus);
             this.panelQuery.Controls.Add(this.cbCaseMark);
             this.panelQuery.Controls.Add(this.tbFinanceOverDueDays);
             this.panelQuery.Controls.Add(this.lblFinanceOverDueDays);
@@ -144,19 +139,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 1;
             // 
-            // lblCDAStatus
-            // 
-            this.lblCDAStatus.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblCDAStatus.BackgroundStyle.Class = "";
-            this.lblCDAStatus.Location = new System.Drawing.Point(185, 56);
-            this.lblCDAStatus.Name = "lblCDAStatus";
-            this.lblCDAStatus.Size = new System.Drawing.Size(55, 16);
-            this.lblCDAStatus.TabIndex = 20;
-            this.lblCDAStatus.Text = "CDA状态";
-            // 
             // lblCaseMark
             // 
             this.lblCaseMark.AutoSize = true;
@@ -169,24 +151,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblCaseMark.Size = new System.Drawing.Size(56, 16);
             this.lblCaseMark.TabIndex = 19;
             this.lblCaseMark.Text = "案件状态";
-            // 
-            // cbCDAStatus
-            // 
-            this.cbCDAStatus.DisplayMember = "Text";
-            this.cbCDAStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbCDAStatus.FormattingEnabled = true;
-            this.cbCDAStatus.ItemHeight = 14;
-            this.cbCDAStatus.Items.AddRange(new object[] {
-            "已失效",
-            "未审核",
-            "已审核未下发",
-            "已下发未签回",
-            "已签回"});
-            this.cbCDAStatus.Location = new System.Drawing.Point(246, 53);
-            this.cbCDAStatus.Name = "cbCDAStatus";
-            this.cbCDAStatus.Size = new System.Drawing.Size(100, 20);
-            this.cbCDAStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCDAStatus.TabIndex = 18;
             // 
             // cbCaseMark
             // 
@@ -665,7 +629,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.cmuInvoiceMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemInvoiceDetail,
-            this.menuItemCDADetail,
             this.menuItemCaseDetail,
             this.toolStripSeparator,
             this.menuItemInvoiceFlaw,
@@ -675,59 +638,52 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemExportAllInvoices,
             this.menuItemExportSelectedInvoices});
             this.cmuInvoiceMgr.Name = "cmuContractMgr";
-            this.cmuInvoiceMgr.Size = new System.Drawing.Size(183, 192);
+            this.cmuInvoiceMgr.Size = new System.Drawing.Size(147, 170);
             // 
             // menuItemInvoiceDetail
             // 
             this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
-            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(182, 22);
+            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(146, 22);
             this.menuItemInvoiceDetail.Text = "详细信息";
             this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
-            // 
-            // menuItemCDADetail
-            // 
-            this.menuItemCDADetail.Name = "menuItemCDADetail";
-            this.menuItemCDADetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDADetail.Text = "额度通知书详细信息";
-            this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
             // 
             // menuItemCaseDetail
             // 
             this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
             this.menuItemCaseDetail.Text = "案子详细信息";
             this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(179, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
             // 
             // menuItemInvoiceFlaw
             // 
             this.menuItemInvoiceFlaw.Name = "menuItemInvoiceFlaw";
-            this.menuItemInvoiceFlaw.Size = new System.Drawing.Size(182, 22);
+            this.menuItemInvoiceFlaw.Size = new System.Drawing.Size(146, 22);
             this.menuItemInvoiceFlaw.Text = "瑕疵处理";
             this.menuItemInvoiceFlaw.Click += new System.EventHandler(this.InvoiceFlaw);
             // 
             // menuItemInvoiceDispute
             // 
             this.menuItemInvoiceDispute.Name = "menuItemInvoiceDispute";
-            this.menuItemInvoiceDispute.Size = new System.Drawing.Size(182, 22);
+            this.menuItemInvoiceDispute.Size = new System.Drawing.Size(146, 22);
             this.menuItemInvoiceDispute.Text = "商纠处理";
             this.menuItemInvoiceDispute.Click += new System.EventHandler(this.InvoiceDispute);
             // 
             // menuItemInvoiceDelete
             // 
             this.menuItemInvoiceDelete.Name = "menuItemInvoiceDelete";
-            this.menuItemInvoiceDelete.Size = new System.Drawing.Size(182, 22);
+            this.menuItemInvoiceDelete.Size = new System.Drawing.Size(146, 22);
             this.menuItemInvoiceDelete.Text = "删除发票";
             this.menuItemInvoiceDelete.Click += new System.EventHandler(this.DeleteInvoice);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
             // 
             // menuItemExportAllInvoices
             // 
@@ -735,7 +691,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemAllInvoiceFull,
             this.menuItemAllInvoiceOverDue});
             this.menuItemExportAllInvoices.Name = "menuItemExportAllInvoices";
-            this.menuItemExportAllInvoices.Size = new System.Drawing.Size(182, 22);
+            this.menuItemExportAllInvoices.Size = new System.Drawing.Size(146, 22);
             this.menuItemExportAllInvoices.Text = "导出全部发票";
             // 
             // menuItemAllInvoiceFull
@@ -758,7 +714,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemSelectedInvoiceFull,
             this.menuItemSelectedInvoiceOverDue});
             this.menuItemExportSelectedInvoices.Name = "menuItemExportSelectedInvoices";
-            this.menuItemExportSelectedInvoices.Size = new System.Drawing.Size(182, 22);
+            this.menuItemExportSelectedInvoices.Size = new System.Drawing.Size(146, 22);
             this.menuItemExportSelectedInvoices.Text = "导出所选发票";
             // 
             // menuItemSelectedInvoiceFull
@@ -817,7 +773,6 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemExportAllInvoices;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsDispute;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceOverDueDays;
         private DevComponents.DotNetBar.LabelX lblFinanceOverDueDays;
         private DevComponents.DotNetBar.Controls.TextBoxX tbAssignOverDueDays;
@@ -846,9 +801,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsDispute;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOverDueDays;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOverDueDays;
-        private DevComponents.DotNetBar.LabelX lblCDAStatus;
         private DevComponents.DotNetBar.LabelX lblCaseMark;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCDAStatus;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseMark;
         private System.Windows.Forms.ToolStripMenuItem menuItemAllInvoiceFull;
         private System.Windows.Forms.ToolStripMenuItem menuItemAllInvoiceOverDue;

@@ -31,7 +31,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private CDA cda;
+        private Case _case;
 
         /// <summary>
         /// 
@@ -76,12 +76,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// Initializes a new instance of the AssignBatchMgr class
         /// </summary>
         /// <param name="selectedCDA"></param>
-        public AssignBatchMgr(CDA selectedCDA)
+        public AssignBatchMgr(Case selectedCase)
             : this(OpBatchType.DETAIL)
         {
-            this.cda = selectedCDA;
+            this._case = selectedCase;
             this.panelQuery.Visible = false;
-            this.bs.DataSource = this.cda.InvoiceAssignBatches;
+            this.bs.DataSource = this._case.InvoiceAssignBatches;
         }
 
         /// <summary>
@@ -223,6 +223,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
             AssignBatchDetail detail = new AssignBatchDetail(selectedBatch);
             detail.ShowDialog(this);
@@ -299,7 +300,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             else if (this.opBatchType == OpBatchType.DETAIL)
             {
-                queryResult = this.cda.InvoiceAssignBatches.Where(i =>
+                queryResult = this._case.InvoiceAssignBatches.Where(i =>
                     i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text)
                     && (beginDate != this.dateFrom.MinDate ? i.AssignDate >= beginDate : true)
                     && (endDate != this.dateTo.MinDate ? i.AssignDate <= endDate : true)
@@ -372,9 +373,6 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -386,8 +384,8 @@ namespace CMBC.EasyFactor.ARMgr
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
 
-            Client seller = selectedBatch.CDA.Case.SellerClient;
-            Client buyer = selectedBatch.CDA.Case.BuyerClient;
+            Client seller = selectedBatch.Case.SellerClient;
+            Client buyer = selectedBatch.Case.BuyerClient;
             sheet.Cells[2, 1] = String.Format("致： {0}", seller.ToString());
             sheet.get_Range("A4", "E4").MergeCells = true;
             sheet.get_Range("A4", "A4").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
@@ -396,7 +394,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range("A4", "A4").RowHeight = 30;
 
             Factor factor = null;
-            switch (selectedBatch.CDA.Case.TransactionType)
+            switch (selectedBatch.Case.TransactionType)
             {
                 case "国内卖方保理":
                 case "国内信保保理":
@@ -406,7 +404,7 @@ namespace CMBC.EasyFactor.ARMgr
                     break;
                 case "出口保理":
                 case "国际信保保理":
-                    factor = selectedBatch.CDA.Case.SellerFactor;
+                    factor = selectedBatch.Case.SellerFactor;
                     break;
                 default:
                     break;
@@ -422,9 +420,9 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Cells[row++, 2] = factor.ToString();
             }
             sheet.Cells[row, 1] = "信用风险额度：";
-            sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", selectedBatch.CDA.CreditCoverCurr, selectedBatch.CDA.CreditCover.GetValueOrDefault());
+            sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", selectedBatch.Case.ActiveCDA.CreditCoverCurr, selectedBatch.Case.ActiveCDA.CreditCover.GetValueOrDefault());
             sheet.Cells[row, 1] = "应收账款余额：";
-            sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", selectedBatch.CDA.Case.InvoiceCurrency, selectedBatch.CDA.GetAssignOutstanding(selectedBatch.CDA.Case.InvoiceCurrency));
+            sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", selectedBatch.Case.ActiveCDA.Case.InvoiceCurrency, selectedBatch.Case.AssignOutstanding);
 
             row++;
             sheet.Cells[row, 1] = "发票号";
@@ -478,7 +476,6 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
             sheet.get_Range("E1", Type.Missing).ColumnWidth = 17;
             app.Visible = true;
-            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
         }
 
         /// <summary>
@@ -500,9 +497,6 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -514,9 +508,9 @@ namespace CMBC.EasyFactor.ARMgr
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 200, 3, 180, 30);
 
-            Client seller = selectedBatch.CDA.Case.SellerClient;
-            Client buyer = selectedBatch.CDA.Case.BuyerClient;
-            CDA cda = selectedBatch.CDA;
+            Client seller = selectedBatch.Case.SellerClient;
+            Client buyer = selectedBatch.Case.BuyerClient;
+            CDA cda = selectedBatch.Case.ActiveCDA;
 
             sheet.get_Range("A3", "E3").MergeCells = true;
             sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
@@ -530,7 +524,6 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
             sheet.Cells[row++, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
             row++;
-
 
             sheet.Cells[row, 1] = "信用风险额度：";
             double? creditCover = cda.CreditCover;
@@ -624,9 +617,6 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
             sheet.get_Range("E1", Type.Missing).ColumnWidth = 20;
             app.Visible = true;
-
-            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
-
         }
 
         /// <summary>
@@ -648,9 +638,6 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -662,21 +649,21 @@ namespace CMBC.EasyFactor.ARMgr
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
 
-            Client seller = selectedBatch.CDA.Case.SellerClient;
-            Client buyer = selectedBatch.CDA.Case.BuyerClient;
+            Client seller = selectedBatch.Case.SellerClient;
+            Client buyer = selectedBatch.Case.BuyerClient;
             Factor factor = null;
-            switch (selectedBatch.CDA.Case.TransactionType)
+            switch (selectedBatch.Case.TransactionType)
             {
                 case "国内卖方保理":
                 case "国内信保保理":
                 case "出口保理":
                 case "国际信保保理":
                 case "租赁保理":
-                    factor = selectedBatch.CDA.Case.BuyerFactor;
+                    factor = selectedBatch.Case.BuyerFactor;
                     break;
                 case "国内买方保理":
                 case "进口保理":
-                    factor = selectedBatch.CDA.Case.SellerFactor;
+                    factor = selectedBatch.Case.SellerFactor;
                     break;
                 default:
                     break;
@@ -703,8 +690,8 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Cells[10, 1] = selectedBatch.AssignAmount;
             sheet.Cells[10, 2] = selectedBatch.Invoices.Count;
             sheet.Cells[10, 3] = selectedBatch.AssignDate;
-            sheet.Cells[10, 4] = String.Format("{0:0.00%}", selectedBatch.CDA.Price);
-            sheet.Cells[10, 5] = selectedBatch.CDA.HandFee;
+            sheet.Cells[10, 4] = String.Format("{0:0.00%}", selectedBatch.Case.ActiveCDA.Price);
+            sheet.Cells[10, 5] = selectedBatch.Case.ActiveCDA.HandFee;
             sheet.Cells[11, 1] = "小计";
             sheet.get_Range("A11", "A11").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
 
@@ -742,9 +729,6 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range("E13", "E13").NumberFormatLocal = "¥#,##0.00";
 
             app.Visible = true;
-
-            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
-
         }
 
         /// <summary>
@@ -766,9 +750,6 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -780,8 +761,8 @@ namespace CMBC.EasyFactor.ARMgr
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 220, 3, 170, 30);
 
-            Client seller = selectedBatch.CDA.Case.SellerClient;
-            Client buyer = selectedBatch.CDA.Case.BuyerClient;
+            Client seller = selectedBatch.Case.SellerClient;
+            Client buyer = selectedBatch.Case.BuyerClient;
 
             sheet.get_Range("A3", "G3").MergeCells = true;
             sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
@@ -901,8 +882,6 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range("F1", Type.Missing).ColumnWidth = 17;
             sheet.get_Range("G1", Type.Missing).ColumnWidth = 12;
             app.Visible = true;
-
-            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
         }
     }
 }

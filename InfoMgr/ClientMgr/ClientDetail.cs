@@ -542,28 +542,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             bool isDeleteOK = true;
             try
             {
-                var CDAList = App.Current.DbContext.CDAs.Where(c => c.CDACode.StartsWith(contract.ContractCode));
-                foreach (CDA cda in CDAList)
-                {
-                    foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
-                    {
-                        foreach (Invoice invoice in assignBatch.Invoices)
-                        {
-                            App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
-                            App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
-                        }
-
-                        App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
-                    }
-
-                    App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
-                    App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
-                    App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
-                    App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(cda.InvoiceRefundBatches);
-                }
-
-                App.Current.DbContext.CDAs.DeleteAllOnSubmit(CDAList);
-                client.Contracts.Remove(contract);
                 App.Current.DbContext.Contracts.DeleteOnSubmit(contract);
                 App.Current.DbContext.SubmitChanges();
             }

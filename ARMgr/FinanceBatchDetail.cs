@@ -96,10 +96,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DetailCDA(object sender, EventArgs e)
+        private void DetailCase(object sender, EventArgs e)
         {
             InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
-            CDADetail detail = new CDADetail(batch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
+            CaseDetail detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
             detail.Show();
         }
 
@@ -199,7 +199,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
 
                 this.btnFactorSelect.Visible = true;
-                this.cDACodeTextBox.ReadOnly = true;
+                this.caseCodeTextBox.ReadOnly = true;
                 this.financeBatchNoTextBox.ReadOnly = true;
                 this.factorCodeTextBox.ReadOnly = true;
                 this.factorTextBox.ReadOnly = true;

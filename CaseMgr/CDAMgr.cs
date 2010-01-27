@@ -179,29 +179,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
             bool isDeleteOK = true;
-            foreach (InvoiceAssignBatch assignBatch in cda.InvoiceAssignBatches)
-            {
-                App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
-            }
-            App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(cda.InvoiceAssignBatches);
-            App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(cda.InvoiceFinanceBatches);
-            foreach (InvoicePaymentBatch paymentBatch in cda.InvoicePaymentBatches)
-            {
-                foreach (InvoicePaymentLog paymentLog in paymentBatch.InvoicePaymentLogs)
-                {
-                    if (paymentLog.CreditNote != null)
-                    {
-                        App.Current.DbContext.CreditNotes.DeleteOnSubmit(paymentLog.CreditNote);
-                    }
-                }
-                App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(paymentBatch.InvoicePaymentLogs);
-            }
-            App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(cda.InvoicePaymentBatches);
-            foreach (InvoiceRefundBatch refundBatch in cda.InvoiceRefundBatches)
-            {
-                App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(refundBatch.InvoiceRefundLogs);
-            }
-            App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(cda.InvoiceRefundBatches);
             App.Current.DbContext.CDAs.DeleteOnSubmit(cda);
             try
             {

@@ -91,10 +91,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DetailCDA(object sender, EventArgs e)
+        private void DetailCase(object sender, EventArgs e)
         {
             InvoiceAssignBatch batch = (InvoiceAssignBatch)this.batchBindingSource.DataSource;
-            CDADetail detail = new CDADetail(batch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
+            CaseDetail detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
             detail.Show();
         }
 
@@ -171,7 +171,7 @@ namespace CMBC.EasyFactor.ARMgr
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                this.cDACodeTextBox.ReadOnly = true;
+                this.caseCodeTextBox.ReadOnly = true;
                 this.assignBatchNoTextBox.ReadOnly = true;
             }
         }

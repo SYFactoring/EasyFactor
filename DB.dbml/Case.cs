@@ -13,7 +13,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Case : BaseObject
     {
-		#region Properties (3) 
+        #region Properties (4)
 
         /// <summary>
         /// Gets 
@@ -27,45 +27,77 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets
+        /// Gets 转让余额
         /// </summary>
         public double AssignOutstanding
         {
             get
             {
-                double result = 0;
-                foreach (CDA cda in this.CDAs)
+                double total = 0;
+                foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
                 {
-                    result += cda.GetAssignOutstanding(this.InvoiceCurrency);
+                    foreach (Invoice invoice in assignBatch.Invoices)
+                    {
+                        total += invoice.AssignOutstanding;
+                    }
                 }
-                return result;
+                return total;
             }
         }
 
         /// <summary>
-        /// Gets
+        /// Gets Factor
+        /// </summary>
+        public Factor Factor
+        {
+            get
+            {
+                if ("国内卖方保理".Equals(this.TransactionType) || "出口保理".Equals(this.TransactionType) || "国际信保保理".Equals(this.TransactionType) || "国内信保保理".Equals(this.TransactionType) || "租赁保理".Equals(this.TransactionType))
+                {
+                    return this.BuyerFactor;
+                }
+                else
+                {
+                    return this.SellerFactor;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets 融资余额
         /// </summary>
         public double? FinanceOutstanding
         {
             get
             {
-                double? result = null;
-                foreach (CDA cda in this.CDAs)
+                double? total = null;
+                foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
                 {
-                    double? temp = cda.GetFinanceOutstanding(this.InvoiceCurrency).GetValueOrDefault();
-                    if (temp.HasValue)
+                    foreach (Invoice invoice in assignBatch.Invoices)
                     {
-                        if (result == null)
+                        if (invoice.FinanceOutstanding.HasValue)
                         {
-                            result = 0;
+                            if (total == null)
+                            {
+                                total = 0;
+                            }
+
+                            double financeOutstanding = invoice.FinanceOutstanding.Value;
+                            if (invoice.InvoiceFinanceBatch.BatchCurrency != this.InvoiceCurrency)
+                            {
+                                double exchange = Exchange.GetExchangeRate(invoice.InvoiceFinanceBatch.BatchCurrency, this.InvoiceCurrency);
+                                financeOutstanding *= exchange;
+                            }
+
+                            total += financeOutstanding;
                         }
-                        result += temp.Value;
                     }
                 }
-                return result;
+
+                return total;
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
     }
 }

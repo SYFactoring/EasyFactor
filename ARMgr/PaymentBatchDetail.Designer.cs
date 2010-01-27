@@ -7,7 +7,7 @@
         private System.Windows.Forms.BindingSource batchBindingSource;
         private DevComponents.DotNetBar.ButtonX btnSave;
         private DevComponents.DotNetBar.ButtonX btnUpdate;
-        private DevComponents.DotNetBar.Controls.TextBoxX cDACodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX caseCodeTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput checkDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.ComboBoxEx checkStatusComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX checkUserNameTextBox;
@@ -80,7 +80,7 @@
             DevComponents.DotNetBar.LabelX createUserNameLabel;
             DevComponents.DotNetBar.LabelX paymentDateLabel;
             DevComponents.DotNetBar.LabelX paymentBatchNoLabel;
-            DevComponents.DotNetBar.LabelX cDACodeLabel;
+            DevComponents.DotNetBar.LabelX CaseLabel;
             DevComponents.DotNetBar.LabelX paymentTypeLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -103,7 +103,7 @@
             this.isCreateMsgCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.paymentDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.paymentBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.cDACodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.caseCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabItemBatch = new DevComponents.DotNetBar.TabItem(this.components);
             this.panelInvoices = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvPaymentLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -124,7 +124,7 @@
             createUserNameLabel = new DevComponents.DotNetBar.LabelX();
             paymentDateLabel = new DevComponents.DotNetBar.LabelX();
             paymentBatchNoLabel = new DevComponents.DotNetBar.LabelX();
-            cDACodeLabel = new DevComponents.DotNetBar.LabelX();
+            CaseLabel = new DevComponents.DotNetBar.LabelX();
             paymentTypeLabel = new DevComponents.DotNetBar.LabelX();
             this.cmuLogMgr.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
@@ -250,19 +250,19 @@
             paymentBatchNoLabel.TabIndex = 2;
             paymentBatchNoLabel.Text = "付款批号:";
             // 
-            // cDACodeLabel
+            // CaseLabel
             // 
-            cDACodeLabel.AutoSize = true;
-            cDACodeLabel.BackColor = System.Drawing.Color.Transparent;
+            CaseLabel.AutoSize = true;
+            CaseLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            cDACodeLabel.BackgroundStyle.Class = "";
-            cDACodeLabel.Location = new System.Drawing.Point(13, 9);
-            cDACodeLabel.Name = "cDACodeLabel";
-            cDACodeLabel.Size = new System.Drawing.Size(97, 16);
-            cDACodeLabel.TabIndex = 0;
-            cDACodeLabel.Text = "额度通知书编号:";
+            CaseLabel.BackgroundStyle.Class = "";
+            CaseLabel.Location = new System.Drawing.Point(51, 6);
+            CaseLabel.Name = "CaseLabel";
+            CaseLabel.Size = new System.Drawing.Size(59, 16);
+            CaseLabel.TabIndex = 0;
+            CaseLabel.Text = "案件编号:";
             // 
             // paymentTypeLabel
             // 
@@ -332,8 +332,8 @@
             this.panelBatch.Controls.Add(this.paymentDateDateTimePicker);
             this.panelBatch.Controls.Add(paymentBatchNoLabel);
             this.panelBatch.Controls.Add(this.paymentBatchNoTextBox);
-            this.panelBatch.Controls.Add(cDACodeLabel);
-            this.panelBatch.Controls.Add(this.cDACodeTextBox);
+            this.panelBatch.Controls.Add(CaseLabel);
+            this.panelBatch.Controls.Add(this.caseCodeTextBox);
             this.panelBatch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBatch.Location = new System.Drawing.Point(0, 26);
             this.panelBatch.Name = "panelBatch";
@@ -560,18 +560,18 @@
             this.paymentBatchNoTextBox.Size = new System.Drawing.Size(162, 20);
             this.paymentBatchNoTextBox.TabIndex = 3;
             // 
-            // cDACodeTextBox
+            // caseCodeTextBox
             // 
             // 
             // 
             // 
-            this.cDACodeTextBox.Border.Class = "TextBoxBorder";
-            this.cDACodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CDACode", true));
-            this.cDACodeTextBox.Location = new System.Drawing.Point(116, 5);
-            this.cDACodeTextBox.Name = "cDACodeTextBox";
-            this.cDACodeTextBox.Size = new System.Drawing.Size(162, 20);
-            this.cDACodeTextBox.TabIndex = 1;
-            this.cDACodeTextBox.DoubleClick += new System.EventHandler(this.DetailCDA);
+            this.caseCodeTextBox.Border.Class = "TextBoxBorder";
+            this.caseCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CaseCode", true));
+            this.caseCodeTextBox.Location = new System.Drawing.Point(116, 5);
+            this.caseCodeTextBox.Name = "caseCodeTextBox";
+            this.caseCodeTextBox.Size = new System.Drawing.Size(162, 20);
+            this.caseCodeTextBox.TabIndex = 1;
+            this.caseCodeTextBox.DoubleClick += new System.EventHandler(this.DetailCase);
             // 
             // tabItemBatch
             // 

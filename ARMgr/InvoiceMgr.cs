@@ -115,8 +115,8 @@ namespace CMBC.EasyFactor.ARMgr
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
+
             this.cbCaseMark.SelectedIndex = 1;
-            this.cbCDAStatus.SelectedIndex = 4;
         }
 
         #endregion Constructors
@@ -220,25 +220,8 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             Invoice selectedInvoice = (Invoice)this.bs.List[this.dgvInvoices.CurrentCell.RowIndex];
-            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.CDA.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.ShowDialog(this);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DetailCDA(object sender, EventArgs e)
-        {
-            if (this.dgvInvoices.CurrentCell == null)
-            {
-                return;
-            }
-
-            Invoice selectedInvoice = (Invoice)this.bs.List[this.dgvInvoices.CurrentCell.RowIndex];
-            CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.CDA, CDADetail.OpCDAType.DETAIL_CDA);
-            cdaDetail.ShowDialog(this);
         }
 
         /// <summary>
@@ -468,7 +451,6 @@ namespace CMBC.EasyFactor.ARMgr
             string isFlaw = this.cbIsFlaw.CheckValue as string;
             string isDispute = this.cbIsDispute.CheckValue as string;
             string caseMark = this.cbCaseMark.Text;
-            string cdaStatus = this.cbCDAStatus.Text;
 
             int assignOverDueDays = 0;
             DateTime assignOverDueDate = default(DateTime);
@@ -487,10 +469,8 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             var queryResult = from invoice in App.Current.DbContext.Invoices
-                              let curCase = invoice.InvoiceAssignBatch.CDA.Case
+                              let curCase = invoice.InvoiceAssignBatch.Case
                               where curCase.CaseMark == caseMark
-                              let cda = invoice.InvoiceAssignBatch.CDA
-                              where cda.CDAStatus == cdaStatus
                               let seller = curCase.SellerClient
                               where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN.Contains(sellerName)
                               let buyer = curCase.BuyerClient

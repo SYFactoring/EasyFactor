@@ -375,17 +375,10 @@ namespace CMBC.EasyFactor.CaseMgr
                     }
 
                     bool isDeleteOK = true;
-                    foreach (InvoiceAssignBatch assignBatch in selectedCDA.InvoiceAssignBatches)
-                    {
-                        App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
-                    }
 
-                    App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(selectedCDA.InvoiceAssignBatches);
-                    App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(selectedCDA.InvoiceFinanceBatches);
-                    App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(selectedCDA.InvoicePaymentBatches);
-                    App.Current.DbContext.CDAs.DeleteOnSubmit(selectedCDA);
                     try
                     {
+                        App.Current.DbContext.CDAs.DeleteOnSubmit(selectedCDA);
                         App.Current.DbContext.SubmitChanges();
                     }
                     catch (Exception e1)

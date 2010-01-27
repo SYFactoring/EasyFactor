@@ -48,30 +48,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        //public System.Nullable<double> AssignTotal
-        //{
-        //    get
-        //    {
-        //        double? total = null;
-        //        foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
-        //        {
-        //            foreach (CDA cda in curCase.CDAs)
-        //            {
-        //                double? temp = cda.AssignTotal;
-        //                if (temp.HasValue)
-        //                {
-        //                    if (total == null)
-        //                    {
-        //                        total = 0;
-        //                    }
-        //                    total += temp.Value;
-        //                }
-        //            }
-        //        }
-        //        return total;
-        //    }
-        //}
-
         /// <summary>
         /// Gets 主合同
         /// </summary>
@@ -161,11 +137,14 @@ namespace CMBC.EasyFactor.DB.dbml
             double result = 0;
             foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
             {
-                foreach (CDA cda in curCase.CDAs.Where(c => c.CDAStatus == ConstStr.CDA.SIGNED))
+                double assignOutstanding = curCase.AssignOutstanding;
+                if (curCase.InvoiceCurrency != currency)
                 {
-                    double cdaAssignOutstanding = cda.GetAssignOutstanding(currency);
-                    result += cdaAssignOutstanding;
+                    double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
+                    assignOutstanding *= exchange;
                 }
+
+                result += assignOutstanding;
             }
 
             return result;
@@ -181,50 +160,26 @@ namespace CMBC.EasyFactor.DB.dbml
             double? total = null;
             foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
             {
-                foreach (CDA cda in curCase.CDAs.Where(c => c.CDAStatus == ConstStr.CDA.SIGNED))
+                double? financeOutstanding = curCase.FinanceOutstanding;
+                if (financeOutstanding.HasValue)
                 {
-                    double? financeOutstanding = cda.GetFinanceOutstanding(currency);
-                    if (financeOutstanding.HasValue)
+                    if (total == null)
                     {
-                        if (total == null)
-                        {
-                            total = 0;
-                        }
-
-                        total += financeOutstanding.Value;
+                        total = 0;
                     }
+
+                    if (curCase.InvoiceCurrency != currency)
+                    {
+                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
+                        financeOutstanding *= exchange;
+                    }
+
+                    total += financeOutstanding.Value;
                 }
             }
 
             return total;
         }
-
-        ///// <summary>
-        ///// 总融资金额
-        ///// </summary>
-        //public System.Nullable<double> FinanceTotal
-        //{
-        //    get
-        //    {
-        //        double? total = null;
-        //        foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
-        //        {
-        //            foreach (CDA cda in curCase.CDAs)
-        //            {
-        //                double? temp = cda.FinanceTotal;
-        //                if (temp.HasValue)
-        //                {
-        //                    if (total == null)
-        //                    {
-        //                        total = 0;
-        //                    }
-        //                    total += temp.Value;
-        //                }
-        //            }
-        //        }
-        //        return total;
-        //    }
-        //}
 
         /// <summary>
         /// 
