@@ -80,7 +80,12 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_CONTRACT_CDA,
+            IMPORT_CONTRACT,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            IMPORT_CDA,
 
             /// <summary>
             /// 
@@ -146,8 +151,11 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_CASES:
                     this.Text = "案件信息导入";
                     break;
-                case ImportType.IMPORT_CONTRACT_CDA:
-                    this.Text = "保理合同及额度通知书导入";
+                case ImportType.IMPORT_CONTRACT:
+                    this.Text = "保理合同导入";
+                    break;
+                case ImportType.IMPORT_CDA:
+                    this.Text = "额度通知书导入";
                     break;
                 case ImportType.IMPORT_ASSIGN_BY_BATCH:
                     this.Text = "当前转让批次导入";
@@ -222,8 +230,11 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_CASES:
                     e.Result = this.ImportCases((string)e.Argument, worker, e);
                     break;
-                case ImportType.IMPORT_CONTRACT_CDA:
-                    e.Result = this.ImportContractAndCDA((string)e.Argument, worker, e);
+                case ImportType.IMPORT_CONTRACT:
+                    e.Result = this.ImportContract((string)e.Argument, worker, e);
+                    break;
+                case ImportType.IMPORT_CDA:
+                    e.Result = this.ImportCDA((string)e.Argument, worker, e);
                     break;
                 case ImportType.IMPORT_ASSIGN_BY_BATCH:
                     e.Result = this.ImportAssignByBatch((string)e.Argument, worker, e);
@@ -758,7 +769,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ImportContractAndCDA(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportCDA(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
 
@@ -767,7 +778,6 @@ namespace CMBC.EasyFactor.Utils
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
-                List<Contract> contractList = new List<Contract>();
                 List<CDA> cdaList = new List<CDA>();
                 try
                 {
@@ -793,55 +803,30 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("案件编号错误: " + caseCode);
                         }
 
-                        string contractCode = String.Format("{0:G}", valueArray[row, column++]);
-                        Contract contract = null;
-                        if (String.Empty.Equals(contractCode) && curCase.TransactionType != "进口保理")
-                        {
-                            throw new Exception("保理合同号不能为空");
-                        }
-
-                        if (!String.Empty.Equals(contractCode))
-                        {
-                            contract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == contractCode);
-                            if (contract == null)
-                            {
-                                contract = contractList.SingleOrDefault(c => c.ContractCode == contractCode);
-                                if (contract == null)
-                                {
-                                    contract = new Contract();
-                                    contract.ContractCode = contractCode;
-                                    contract.Client = curCase.SellerClient;
-                                    contractList.Add(contract);
-                                }
-                            }
-
-                            contract.ContractType = String.Format("{0:G}", valueArray[row, column++]);
-                            contract.ContractValueDate = (DateTime)valueArray[row, column++];
-                            contract.ContractDueDate = (DateTime)valueArray[row, column++];
-                            contract.ContractStatus = String.Format("{0:G}", valueArray[row, column++]);
-                            contract.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                        }
-
-                        column = 8;
                         string cdaCode = String.Format("{0:G}", valueArray[row, column++]);
                         CDA cda = null;
                         if (String.Empty.Equals(cdaCode))
                         {
                             throw new Exception("CDA编号不能为空");
                         }
-                        else
-                        {
-                            cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
-                            if (cda == null)
-                            {
-                                cda = new CDA();
-                                cda.CDACode = cdaCode;
-                                cda.CDAStatus = ConstStr.CDA.CHECKED;
-                                cdaList.Add(cda);
-                            }
 
-                            cda.Case = curCase;
+                        cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
+                        if (cda != null)
+                        {
+                            throw new Exception("CDA已存在，不能导入: " + cdaCode);
                         }
+
+                        cda = cdaList.SingleOrDefault(c => c.CDACode == cdaCode);
+                        if (cda != null)
+                        {
+                            throw new Exception("CDA编号重复，不能导入: " + cdaCode);
+                        }
+
+                        cda = new CDA();
+                        cda.CDACode = cdaCode;
+                        cda.CDAStatus = ConstStr.CDA.CHECKED;
+                        cdaList.Add(cda);
+                        cda.Case = curCase;
 
                         column++;//卖方
                         column++;//买方
@@ -893,14 +878,104 @@ namespace CMBC.EasyFactor.Utils
                 }
                 catch (Exception e1)
                 {
-                    foreach (Contract contract in contractList)
-                    {
-                        contract.Client = null;
-                    }
-
                     foreach (CDA cda in cdaList)
                     {
                         cda.Case = null;
+                    }
+
+                    throw e1;
+                }
+            }
+
+            worker.ReportProgress(100);
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int ImportContract(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            object[,] valueArray = this.GetValueArray(fileName, 1);
+
+            int result = 0;
+
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+                List<Contract> contractList = new List<Contract>();
+                try
+                {
+                    for (int row = 2; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+
+                        int column = 1;
+                        string clientEDICode = String.Format("{0:G}", valueArray[row, column++]);
+                        if (string.Empty.Equals(clientEDICode))
+                        {
+                            continue;
+                        }
+
+                        column++;
+
+                        Client client = null;
+                        client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                        if (client == null)
+                        {
+                            throw new Exception("客户编号错误: " + clientEDICode);
+                        }
+
+                        string contractCode = String.Format("{0:G}", valueArray[row, column++]);
+                        Contract contract = null;
+                        if (String.Empty.Equals(contractCode))
+                        {
+                            throw new Exception("保理合同号不能为空");
+                        }
+
+                        contract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == contractCode);
+                        if (contract != null)
+                        {
+                            throw new Exception("保理合同已存在，不能导入: " + contractCode);
+                        }
+
+                        contract = contractList.SingleOrDefault(c => c.ContractCode == contractCode);
+                        if (contract != null)
+                        {
+                            throw new Exception("保理合同重复，不能导入: " + contractCode);
+                        }
+
+                        contract = new Contract();
+                        contract.ContractCode = contractCode;
+                        contract.Client = client;
+                        contractList.Add(contract);
+                        contract.ContractType = String.Format("{0:G}", valueArray[row, column++]);
+                        contract.ContractValueDate = (DateTime)valueArray[row, column++];
+                        contract.ContractDueDate = (DateTime)valueArray[row, column++];
+                        contract.ContractStatus = String.Format("{0:G}", valueArray[row, column++]);
+                        contract.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    }
+
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    foreach (Contract contract in contractList)
+                    {
+                        contract.Client = null;
                     }
 
                     throw e1;

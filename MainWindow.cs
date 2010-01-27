@@ -311,15 +311,24 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ImportContractAndCDA(object sender, EventArgs e)
+        private void ImportContract(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportCDA(object sender, EventArgs e)
         {
             if (this.ValidateRole())
             {
-                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CONTRACT_CDA);
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CDA);
                 importForm.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
