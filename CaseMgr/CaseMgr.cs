@@ -34,6 +34,16 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <summary>
         /// Initializes a new instance of the CaseMgr class
         /// </summary>
+        /// <param name="caseMark"></param>
+        public CaseMgr(string caseMark):this()
+        {
+            this.cbCaseMark.Text = caseMark;
+            this.QueryCase(null, null);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the CaseMgr class
+        /// </summary>
         /// <param name="isContract"></param>
         public CaseMgr(bool isContract)
             : this()
@@ -224,7 +234,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                 && (beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
                                 && (endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
-                                && (c.CaseMark == this.cbCaseMark.Text)
+                                && (c.CaseMark.Contains(this.cbCaseMark.Text))
                                 && c.CreateUserName.Contains(createUserName)
                                 && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == ConstStr.CDA.SIGNED))
                                 && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY))

@@ -27,7 +27,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-        #region Constructors (1)
+		#region Constructors (1) 
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -43,9 +43,9 @@ namespace CMBC.EasyFactor
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Sets command status
@@ -69,11 +69,11 @@ namespace CMBC.EasyFactor
             }
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (64)
+		#region Methods (65) 
 
-        // Public Methods (2) 
+		// Public Methods (2) 
 
         /// <summary>
         /// 
@@ -97,7 +97,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-        // Private Methods (62) 
+		// Private Methods (63) 
 
         /// <summary>
         /// 
@@ -269,6 +269,20 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ImportCDA(object sender, EventArgs e)
+        {
+            if (this.ValidateRole())
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CDA);
+                importForm.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportClientCreditLine(object sender, EventArgs e)
         {
             if (this.ValidateRole())
@@ -320,19 +334,6 @@ namespace CMBC.EasyFactor
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ImportCDA(object sender, EventArgs e)
-        {
-            if (this.ValidateRole())
-            {
-                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CDA);
-                importForm.Show();
-            }
-        }
         /// <summary>
         /// 
         /// </summary>
@@ -582,6 +583,17 @@ namespace CMBC.EasyFactor
         {
             FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
             factorDetail.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryApplicationCase(object sender, EventArgs e)
+        {
+            CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr("申请案");
+            this.SetDetailPanel(mgr);
         }
 
         /// <summary>
@@ -844,6 +856,6 @@ namespace CMBC.EasyFactor
             }
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

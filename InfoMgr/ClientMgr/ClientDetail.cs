@@ -176,6 +176,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
             this.creditLineCurrencyComboBox.SelectedIndex = -1;
 
+            this.requestCurrencyComboBox.DataSource = Currency.AllCurrencies();
+            this.requestCurrencyComboBox.DisplayMember = "CurrencyCode";
+            this.requestCurrencyComboBox.ValueMember = "CurrencyCode";
+            this.requestCurrencyComboBox.SelectedIndex = -1;
+
             this.opClientType = opClientType;
             this.opClientCreditLineType = opClientCreditLineType;
             this.opContractType = opContractType;
@@ -302,6 +307,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (this.opReviewType == OpReviewType.DETAIL_REVIEW || this.opReviewType == OpReviewType.UPDATE_REVIEW)
             {
                 this.reviewBindingSource.DataSource = review;
+                if (review.RequestFinanceType != null)
+                {
+                    List<string> financeList = new List<string>();
+                    financeList.AddRange(review.RequestFinanceType.Split(';'));
+                    for (int i = 0; i < this.requestFinanceTypeCheckedListBox.Items.Count; i++)
+                    {
+                        string item = this.requestFinanceTypeCheckedListBox.Items[i] as string;
+                        if (financeList.Contains(item))
+                        {
+                            this.requestFinanceTypeCheckedListBox.SetItemChecked(i, true);
+                        }
+                    }
+                }
             }
         }
 
@@ -1176,6 +1194,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             ClientReview review = (ClientReview)this.reviewBindingSource.DataSource;
 
+            string financeType = string.Empty;
+            foreach (string item in this.requestFinanceTypeCheckedListBox.CheckedItems)
+            {
+                financeType += (item + ";");
+            }
+
+            review.RequestFinanceType = financeType;
+
             if (this.opReviewType == OpReviewType.NEW_REVIEW)
             {
                 bool isAddOK = true;
@@ -1338,6 +1364,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             ClientReview selectedReview = (ClientReview)this.bsReviews.List[this.dgvReviews.SelectedRows[0].Index];
             this.SetReviewEditable(false);
             this.reviewBindingSource.DataSource = selectedReview;
+            if (selectedReview.RequestFinanceType != null)
+            {
+                List<string> financeList = new List<string>();
+                financeList.AddRange(selectedReview.RequestFinanceType.Split(';'));
+                for (int i = 0; i < this.requestFinanceTypeCheckedListBox.Items.Count; i++)
+                {
+                    string item = this.requestFinanceTypeCheckedListBox.Items[i] as string;
+                    if (financeList.Contains(item))
+                    {
+                        this.requestFinanceTypeCheckedListBox.SetItemChecked(i, true);
+                    }
+                }
+            }
         }
 
         /// <summary>
