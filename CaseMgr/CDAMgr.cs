@@ -524,7 +524,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.get_Range(sheet.Cells[35, 1], sheet.Cells[35, 2]).MergeCells = true;
                 sheet.Cells[35, 1] = String.Format("客户： {0,-20}  {1}", selectedCDA.SellerName, "日期： 年   月   日");
 
-                sheet.UsedRange.Font.Name = "仿宋";
+                sheet.UsedRange.Font.Name = "仿宋_GB2312";
                 sheet.UsedRange.Font.Size = 12;
 
                 sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).Font.Size = 16;
