@@ -27,7 +27,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -37,15 +37,15 @@ namespace CMBC.EasyFactor
             this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
 
-            this.Text = "中国民生银行保理运营系统(发布版)  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            this.Text = ((AssemblyTitleAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title + "  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
             this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Sets command status
@@ -69,11 +69,11 @@ namespace CMBC.EasyFactor
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (64) 
+        #region Methods (64)
 
-		// Public Methods (2) 
+        // Public Methods (2) 
 
         /// <summary>
         /// 
@@ -97,7 +97,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-		// Private Methods (62) 
+        // Private Methods (62) 
 
         /// <summary>
         /// 
@@ -807,31 +807,6 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SVNStat(object sender, EventArgs e)
-        {
-            string target = "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/";
-            try
-            {
-                System.Diagnostics.Process.Start(target);
-            }
-            catch (System.ComponentModel.Win32Exception noBrowser)
-            {
-                if (noBrowser.ErrorCode == -2147467259)
-                {
-                    MessageBox.Show(noBrowser.Message);
-                }
-            }
-            catch (Exception other)
-            {
-                MessageBox.Show(other.Message);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void UpdateCurrentUser(object sender, EventArgs e)
         {
             User user = App.Current.CurUser;
@@ -856,6 +831,6 @@ namespace CMBC.EasyFactor
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

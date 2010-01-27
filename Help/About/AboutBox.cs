@@ -137,9 +137,9 @@ namespace CMBC.EasyFactor.Help.About
 
         #endregion Properties
 
-        #region Methods (1)
+        #region Methods (2)
 
-        // Private Methods (1) 
+        // Private Methods (2) 
 
         /// <summary>
         /// Close the dialog
@@ -151,7 +151,31 @@ namespace CMBC.EasyFactor.Help.About
             this.Close();
         }
 
-        #endregion Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CodeStat(object sender, EventArgs e)
+        {
+            string target = "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/";
+            try
+            {
+                System.Diagnostics.Process.Start(target);
+            }
+            catch (System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                {
+                    MessageBox.Show(noBrowser.Message);
+                }
+            }
+            catch (Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
+        }
 
+        #endregion Methods
     }
 }

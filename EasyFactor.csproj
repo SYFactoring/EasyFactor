@@ -553,27 +553,6 @@
     <Compile Include="Utils\TypeUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Resources\Images\Menu-Down-icon-32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Resources\Images\Menu-Up-icon-32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Resources\Images\UserMgr-icon-32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Resources\Images\Menu-Title.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Resources\Images\FOMSLOGO.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Resources\Images\User-Add-32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Resources\Images\User-Edit-32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="DB.dbml\DB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
@@ -605,7 +584,6 @@
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoiceRefundBatch.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoiceRefundLog.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.User.datasource" />
-    <None Include="Properties\Resources\Images\User-Remove-32x32.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -613,43 +591,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="EasyFactoring.ico" />
-    <Content Include="Properties\Resources\Images\army-officer-icon-48.png" />
-    <Content Include="Properties\Resources\Images\banknote-icon-48.png" />
-    <Content Include="Properties\Resources\Images\bar-chart-icon-48.png" />
-    <Content Include="Properties\Resources\Images\boss-icon-48.png" />
-    <Content Include="Properties\Resources\Images\Briefcase-icon-48.png" />
-    <Content Include="Properties\Resources\Images\calculator-icon-48.png" />
-    <Content Include="Properties\Resources\Images\cash-register-icon-48.png" />
-    <Content Include="Properties\Resources\Images\check-user-icon-48.png" />
-    <Content Include="Properties\Resources\Images\coins-icon-48.png" />
-    <Content Include="Properties\Resources\Images\Column-Chart-icon-48.png" />
-    <Content Include="Properties\Resources\Images\credit-card-icon-48.png" />
-    <Content Include="Properties\Resources\Images\Disk-icon-48.png" />
-    <Content Include="Properties\Resources\Images\engineer-icon-48.png" />
-    <Content Include="Properties\Resources\Images\footballer-icon-48.png" />
-    <Content Include="Properties\Resources\Images\gold-bullion-icon-48.png" />
-    <Content Include="Properties\Resources\Images\green-dollar-icon-48.png" />
-    <Content Include="Properties\Resources\Images\invoice-icon-48.png" />
-    <Content Include="Properties\Resources\Images\line-chart-icon-48.png" />
-    <Content Include="Properties\Resources\Images\Man-Black-icon-48.png" />
-    <Content Include="Properties\Resources\Images\Man-Brown-icon-48.png" />
-    <Content Include="Properties\Resources\Images\Man-DBrown-icon-48.png" />
-    <Content Include="Properties\Resources\Images\Man-Grey-icon-48.png" />
-    <Content Include="Properties\Resources\Images\Man-Red-icon-48.png" />
-    <Content Include="Properties\Resources\Images\payment-icon-48.png" />
-    <Content Include="Properties\Resources\Images\people-icon-48.png" />
-    <Content Include="Properties\Resources\Images\pie-chart-icon-48.png" />
-    <Content Include="Properties\Resources\Images\Printer-icon-48.png" />
-    <Content Include="Properties\Resources\Images\safe-icon-48.png" />
-    <Content Include="Properties\Resources\Images\shopping-cart-icon-48.png" />
-    <Content Include="Properties\Resources\Images\Toolbox-icon-48.png" />
-    <Content Include="Properties\Resources\Images\user-group-icon-48.png" />
-    <Content Include="Properties\Resources\Images\User-icon-48.png" />
-    <Content Include="Properties\Resources\Images\user-info-icon-48.png" />
-    <Content Include="Properties\Resources\Images\users-icon-48.png" />
-    <Content Include="Properties\Resources\Images\yen-coin-icon-48.png" />
-    <Content Include="Properties\Resources\Images\yen-coins-icon-48.png" />
-    <Content Include="Properties\Resources\Images\yen-icon-48.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
