@@ -32,7 +32,21 @@ namespace CMBC.EasyFactor
         private App()
         {
             this.DbContext = new DBDataContext();
-            //this.DbContext.Log = File.CreateText(Path.Combine(Environment.CurrentDirectory, String.Format("{0:yyyy-MM-dd-HH-mm}.txt", DateTime.Now)));
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\CMBC";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            foreach (string file in Directory.GetFiles(path))
+            {
+                if (File.GetCreationTime(file) < DateTime.Now.AddDays(-7))
+                {
+                    File.Delete(file);
+                }
+            }
+
+            this.DbContext.Log = File.CreateText(Path.Combine(path, String.Format("{0:yyyy-MM-dd-HH-mm}.log", DateTime.Now)));
         }
 
         #endregion Constructors
