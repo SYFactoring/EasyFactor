@@ -284,14 +284,15 @@ namespace CMBC.EasyFactor.ARMgr
             DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value.Date : this.dateTo.MinDate;
             string status = this.cbCheckStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
+            string clientName = this.tbClientName.Text;
 
             IEnumerable<InvoiceAssignBatch> queryResult = App.Current.DbContext.InvoiceAssignBatches.Where(i =>
-                i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text)
+                    (i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text))
                 && (beginDate != this.dateFrom.MinDate ? i.AssignDate >= beginDate : true)
                 && (endDate != this.dateTo.MinDate ? i.AssignDate <= endDate : true)
                 && (status != string.Empty ? i.CheckStatus == status : true)
                 && (i.CreateUserName.Contains(createUserName))
-                );
+                && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
 
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());

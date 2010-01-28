@@ -15,9 +15,9 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public class TypeUtil
     {
-		#region Methods (11) 
+        #region Methods (12)
 
-		// Public Methods (11) 
+        // Public Methods (12) 
 
         /// <summary>
         /// 
@@ -158,14 +158,16 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public static string GetExcelCurrency(string currency)
+        public static string GetExcelCurr(string currency)
         {
             switch (currency)
             {
                 case "CNY":
-                    return "[$CNY] #,##0.00";
+                    return "¥#,##0.00";
                 case "USD":
-                    return "[$USD] #,##0.00";
+                    return "$#,##0.00";
+                case "EUR":
+                    return "€#,##0.00";
                 default:
                     return "#,##0.00";
             }
@@ -176,14 +178,16 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public static string GetExcelCurr(string currency)
+        public static string GetExcelCurrency(string currency)
         {
             switch (currency)
             {
                 case "CNY":
-                    return "¥#,##0.00";
+                    return "[$CNY] #,##0.00";
                 case "USD":
-                    return "$#,##0.00";
+                    return "[$USD] #,##0.00";
+                case "EUR":
+                    return "[$EUR] #,##0.00";
                 default:
                     return "#,##0.00";
             }
@@ -271,6 +275,6 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

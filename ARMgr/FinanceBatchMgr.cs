@@ -232,7 +232,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvBatches.RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvBatches.RowHeadersDefaultCellStyle.Font, rectangle, dgvBatches.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvBatches.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvBatches.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -245,12 +245,16 @@ namespace CMBC.EasyFactor.ARMgr
             DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value.Date : this.dateFrom.MinDate;
             DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value.Date : this.dateTo.MinDate;
             string status = this.cbCheckStatus.Text;
+            string createUserName = this.tbCreateUserName.Text;
+            string clientName = this.tbClientName.Text;
 
             var queryResult = App.Current.DbContext.InvoiceFinanceBatches.Where(i =>
                 i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
                 && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
                 && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
-                && (status != string.Empty ? i.CheckStatus == status : true));
+                && (status != string.Empty ? i.CheckStatus == status : true)
+                && (i.CreateUserName.Contains(createUserName))
+                && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }

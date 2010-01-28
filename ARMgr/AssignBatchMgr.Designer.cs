@@ -128,6 +128,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemFinanceReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCommissionReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemFlawReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblClientName = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -139,6 +141,8 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.tbClientName);
+            this.panelQuery.Controls.Add(this.lblClientName);
             this.panelQuery.Controls.Add(this.tbCreateUserName);
             this.panelQuery.Controls.Add(this.lblCreateUserName);
             this.panelQuery.Controls.Add(this.lblCount);
@@ -169,10 +173,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbCreateUserName.Border.Class = "TextBoxBorder";
-            this.tbCreateUserName.Location = new System.Drawing.Point(229, 30);
+            this.tbCreateUserName.Location = new System.Drawing.Point(383, 30);
             this.tbCreateUserName.Name = "tbCreateUserName";
             this.tbCreateUserName.Size = new System.Drawing.Size(100, 20);
-            this.tbCreateUserName.TabIndex = 8;
+            this.tbCreateUserName.TabIndex = 10;
             // 
             // lblCreateUserName
             // 
@@ -181,10 +185,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblCreateUserName.BackgroundStyle.Class = "";
-            this.lblCreateUserName.Location = new System.Drawing.Point(176, 31);
+            this.lblCreateUserName.Location = new System.Drawing.Point(340, 31);
             this.lblCreateUserName.Name = "lblCreateUserName";
             this.lblCreateUserName.Size = new System.Drawing.Size(44, 16);
-            this.lblCreateUserName.TabIndex = 7;
+            this.lblCreateUserName.TabIndex = 9;
             this.lblCreateUserName.Text = "经办人";
             // 
             // lblCount
@@ -197,7 +201,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblCount.Location = new System.Drawing.Point(534, 14);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
-            this.lblCount.TabIndex = 10;
+            this.lblCount.TabIndex = 12;
             // 
             // cbCheckStatus
             // 
@@ -210,11 +214,11 @@ namespace CMBC.EasyFactor.ARMgr
             "未复核",
             "已复核",
             "复核未通过"});
-            this.cbCheckStatus.Location = new System.Drawing.Point(69, 30);
+            this.cbCheckStatus.Location = new System.Drawing.Point(230, 30);
             this.cbCheckStatus.Name = "cbCheckStatus";
             this.cbCheckStatus.Size = new System.Drawing.Size(101, 20);
             this.cbCheckStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCheckStatus.TabIndex = 6;
+            this.cbCheckStatus.TabIndex = 8;
             // 
             // lblCheckStatus
             // 
@@ -223,10 +227,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblCheckStatus.BackgroundStyle.Class = "";
-            this.lblCheckStatus.Location = new System.Drawing.Point(4, 31);
+            this.lblCheckStatus.Location = new System.Drawing.Point(176, 31);
             this.lblCheckStatus.Name = "lblCheckStatus";
             this.lblCheckStatus.Size = new System.Drawing.Size(56, 16);
-            this.lblCheckStatus.TabIndex = 5;
+            this.lblCheckStatus.TabIndex = 7;
             this.lblCheckStatus.Text = "复核结果";
             // 
             // dateTo
@@ -338,11 +342,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.btnAssignBatchQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnAssignBatchQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAssignBatchQuery.Location = new System.Drawing.Point(441, 7);
+            this.btnAssignBatchQuery.Location = new System.Drawing.Point(441, 4);
             this.btnAssignBatchQuery.Name = "btnAssignBatchQuery";
             this.btnAssignBatchQuery.Size = new System.Drawing.Size(75, 23);
             this.btnAssignBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAssignBatchQuery.TabIndex = 9;
+            this.btnAssignBatchQuery.TabIndex = 11;
             this.btnAssignBatchQuery.Text = "查询";
             this.btnAssignBatchQuery.Click += new System.EventHandler(this.QueryBatch);
             // 
@@ -364,7 +368,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblAssignBatchNo.BackgroundStyle.Class = "";
-            this.lblAssignBatchNo.Location = new System.Drawing.Point(4, 9);
+            this.lblAssignBatchNo.Location = new System.Drawing.Point(8, 9);
             this.lblAssignBatchNo.Name = "lblAssignBatchNo";
             this.lblAssignBatchNo.Size = new System.Drawing.Size(56, 16);
             this.lblAssignBatchNo.TabIndex = 0;
@@ -606,6 +610,30 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemFlawReport.Text = "瑕疵通知书";
             this.menuItemFlawReport.Click += new System.EventHandler(this.ReportFlaw);
             // 
+            // tbClientName
+            // 
+            // 
+            // 
+            // 
+            this.tbClientName.Border.Class = "TextBoxBorder";
+            this.tbClientName.Location = new System.Drawing.Point(70, 29);
+            this.tbClientName.Name = "tbClientName";
+            this.tbClientName.Size = new System.Drawing.Size(100, 20);
+            this.tbClientName.TabIndex = 6;
+            // 
+            // lblClientName
+            // 
+            this.lblClientName.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblClientName.BackgroundStyle.Class = "";
+            this.lblClientName.Location = new System.Drawing.Point(8, 31);
+            this.lblClientName.Name = "lblClientName";
+            this.lblClientName.Size = new System.Drawing.Size(56, 16);
+            this.lblClientName.TabIndex = 5;
+            this.lblClientName.Text = "客户名称";
+            // 
             // AssignBatchMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -630,5 +658,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemFlawReport;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
         private DevComponents.DotNetBar.LabelX lblCreateUserName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
+        private DevComponents.DotNetBar.LabelX lblClientName;
     }
 }

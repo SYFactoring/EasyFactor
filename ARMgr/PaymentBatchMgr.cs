@@ -274,6 +274,7 @@ namespace CMBC.EasyFactor.ARMgr
             string status = this.cbCheckStatus.Text;
             string paymentType = this.cbPaymentType.Text;
             string createUserName = this.tbCreateUserName.Text;
+            string clientName = this.tbClientName.Text;
 
             var queryResult = App.Current.DbContext.InvoicePaymentBatches.Where(i =>
                 i.PaymentBatchNo.Contains(this.tbPaymentBatchNo.Text)
@@ -282,7 +283,9 @@ namespace CMBC.EasyFactor.ARMgr
                 && (status != string.Empty ? i.CheckStatus == status : true)
                 && (paymentType != string.Empty ? i.PaymentType == paymentType : true)
                 && (i.CreateUserName.Contains(createUserName))
-                );
+                && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName))
+               );
+
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
