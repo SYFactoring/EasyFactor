@@ -375,12 +375,20 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         Case curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
-                        if (curCase == null)
+                        if (curCase != null)
                         {
-                            curCase = new Case();
-                            curCase.CaseCode = caseCode;
-                            caseList.Add(curCase);
+                            throw new Exception("案件已存在，不能导入： " + caseCode);
                         }
+
+                        curCase = caseList.SingleOrDefault(c => c.CaseCode == caseCode);
+                        if (curCase != null)
+                        {
+                            throw new Exception("案件编号重复，不能导入： " + caseCode);
+                        }
+
+                        curCase = new Case();
+                        curCase.CaseCode = caseCode;
+                        caseList.Add(curCase);
 
                         int column = 2;
                         curCase.ManagerName = String.Format("{0:G}", valueArray[row, column++]);
@@ -388,7 +396,7 @@ namespace CMBC.EasyFactor.Utils
                         Department ownerDept = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == ownerDeptName);
                         if (ownerDept == null)
                         {
-                            throw new Exception("所属分部名称错误: " + ownerDeptName);
+                            throw new Exception("所属分部名称错误： " + ownerDeptName);
                         }
 
                         curCase.OwnerDepartment = ownerDept;
@@ -401,7 +409,7 @@ namespace CMBC.EasyFactor.Utils
                         Client sellerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == sellerEDICode);
                         if (sellerClient == null)
                         {
-                            throw new Exception("卖方保理代码错误: " + sellerEDICode);
+                            throw new Exception("卖方保理代码错误： " + sellerEDICode);
                         }
 
                         curCase.SellerClient = sellerClient;
@@ -411,7 +419,7 @@ namespace CMBC.EasyFactor.Utils
                         Client buyerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == buyerEDICode);
                         if (buyerClient == null)
                         {
-                            throw new Exception("买方保理代码错误: " + buyerEDICode);
+                            throw new Exception("买方保理代码错误： " + buyerEDICode);
                         }
 
                         curCase.BuyerClient = buyerClient;
@@ -421,7 +429,7 @@ namespace CMBC.EasyFactor.Utils
                         Factor sellerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == EFCode);
                         if (sellerFactor == null)
                         {
-                            throw new Exception("卖方保理商代码错误: " + EFCode);
+                            throw new Exception("卖方保理商代码错误： " + EFCode);
                         }
 
                         curCase.SellerFactor = sellerFactor;
@@ -429,7 +437,7 @@ namespace CMBC.EasyFactor.Utils
                         Factor buyerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == IFCode);
                         if (buyerFactor == null)
                         {
-                            throw new Exception("买方保理商代码错误: " + IFCode);
+                            throw new Exception("买方保理商代码错误： " + IFCode);
                         }
 
                         curCase.BuyerFactor = buyerFactor;
@@ -539,6 +547,12 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("客户已经存在，不能导入： " + clientEDICode);
                         }
 
+                        client = clientList.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                        if (client != null)
+                        {
+                            throw new Exception("客户编号重复，不能导入： " + clientEDICode);
+                        }
+
                         client = new Client();
                         client.ClientEDICode = clientEDICode;
                         clientList.Add(client);
@@ -574,7 +588,7 @@ namespace CMBC.EasyFactor.Utils
                             Client clientGroup = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == groupNo);
                             if (clientGroup == null)
                             {
-                                throw new Exception("集团客户号错误: " + groupNo);
+                                throw new Exception("集团客户号错误： " + groupNo);
                             }
                         }
 
@@ -650,11 +664,30 @@ namespace CMBC.EasyFactor.Utils
                         Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client == null)
                         {
-                            throw new Exception("客户不存在，不能导入协查意见书： " + clientEDICode);
+                            throw new Exception("客户保理代码错误，不能导入协查意见书： " + clientEDICode);
                         }
+
                         int column = 3;
-                        ClientReview review = new ClientReview();
-                        review.ReviewNo = String.Format("{0:G}", valueArray[row, column++]);
+                        string reviewNo = String.Format("{0:G}", valueArray[row, column++]);
+                        if (reviewNo == string.Empty)
+                        {
+                            throw new Exception("协查意见编号不能为空");
+                        }
+
+                        ClientReview review = App.Current.DbContext.ClientReviews.SingleOrDefault(c => c.ReviewNo == reviewNo);
+                        if (review != null)
+                        {
+                            throw new Exception("协查意见已存在，不能导入： " + reviewNo);
+                        }
+
+                        review = reviewList.SingleOrDefault(c => c.ReviewNo == reviewNo);
+                        if (review != null)
+                        {
+                            throw new Exception("协查意见编号重复，不能导入： " + reviewNo);
+                        }
+
+                        review = new ClientReview();
+                        review.ReviewNo = reviewNo;
                         review.RequestCurrency = String.Format("{0:G}", valueArray[row, column++]);
                         review.RequestAmount = (System.Nullable<double>)valueArray[row, column++];
                         review.RequestFinanceType = String.Format("{0:G}", valueArray[row, column++]);
@@ -819,13 +852,13 @@ namespace CMBC.EasyFactor.Utils
                         cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                         if (cda != null)
                         {
-                            throw new Exception("CDA已存在，不能导入: " + cdaCode);
+                            throw new Exception("CDA已存在，不能导入： " + cdaCode);
                         }
 
                         cda = cdaList.SingleOrDefault(c => c.CDACode == cdaCode);
                         if (cda != null)
                         {
-                            throw new Exception("CDA编号重复，不能导入: " + cdaCode);
+                            throw new Exception("CDA编号重复，不能导入： " + cdaCode);
                         }
 
                         cda = new CDA();

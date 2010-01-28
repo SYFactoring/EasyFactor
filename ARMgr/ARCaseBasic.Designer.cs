@@ -41,9 +41,7 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.ExpandablePanel panelFinanceCreditLine;
         private DevComponents.DotNetBar.PanelEx panelInvoiceMgr;
         private DevComponents.DotNetBar.Controls.TextBoxX periodEndTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX PMTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX priceTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX RMTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerEDICodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX sellerNameTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX tbAROutstanding;
@@ -111,14 +109,14 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX ownerDepartmentCodeLabel;
             DevComponents.DotNetBar.LabelX assignTypeLabel;
             DevComponents.DotNetBar.LabelX sellerEDICodeLabel;
-            DevComponents.DotNetBar.LabelX RMLabel;
-            DevComponents.DotNetBar.LabelX PMLabel;
             DevComponents.DotNetBar.LabelX buyerEDICodeLabel;
             DevComponents.DotNetBar.LabelX invoiceCurrencyLabel;
             DevComponents.DotNetBar.LabelX factorCodeLabel;
             DevComponents.DotNetBar.LabelX transactionTypeLabel;
             DevComponents.DotNetBar.LabelX lblHighestFinance;
             DevComponents.DotNetBar.LabelX lblPaymentTerms;
+            DevComponents.DotNetBar.LabelX lblSellerAssignOutstanding;
+            DevComponents.DotNetBar.LabelX lblTotalFinanceOutstanding;
             this.panelCaseBasic = new DevComponents.DotNetBar.ExpandablePanel();
             this.panelFinanceCreditLine = new DevComponents.DotNetBar.ExpandablePanel();
             this.tbHighestFinance = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -151,9 +149,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.ownerDepartmentCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.assignTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.sellerEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.RMTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.sellerNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.PMTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.buyerEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.buyerNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.isRecoarseCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -162,6 +158,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.factorNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelInvoiceMgr = new DevComponents.DotNetBar.PanelEx();
+            this.tbSellerAssignOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbTotalFinanceOustanding = new DevComponents.DotNetBar.Controls.TextBoxX();
             priceLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
             handFeeCurrLabel = new DevComponents.DotNetBar.LabelX();
@@ -182,14 +180,14 @@ namespace CMBC.EasyFactor.ARMgr
             ownerDepartmentCodeLabel = new DevComponents.DotNetBar.LabelX();
             assignTypeLabel = new DevComponents.DotNetBar.LabelX();
             sellerEDICodeLabel = new DevComponents.DotNetBar.LabelX();
-            RMLabel = new DevComponents.DotNetBar.LabelX();
-            PMLabel = new DevComponents.DotNetBar.LabelX();
             buyerEDICodeLabel = new DevComponents.DotNetBar.LabelX();
             invoiceCurrencyLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
             transactionTypeLabel = new DevComponents.DotNetBar.LabelX();
             lblHighestFinance = new DevComponents.DotNetBar.LabelX();
             lblPaymentTerms = new DevComponents.DotNetBar.LabelX();
+            lblSellerAssignOutstanding = new DevComponents.DotNetBar.LabelX();
+            lblTotalFinanceOutstanding = new DevComponents.DotNetBar.LabelX();
             this.panelCaseBasic.SuspendLayout();
             this.panelFinanceCreditLine.SuspendLayout();
             this.panelBuyer.SuspendLayout();
@@ -204,11 +202,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             priceLabel.BackgroundStyle.Class = "";
-            priceLabel.Location = new System.Drawing.Point(6, 30);
+            priceLabel.Location = new System.Drawing.Point(6, 28);
             priceLabel.Name = "priceLabel";
-            priceLabel.Size = new System.Drawing.Size(72, 16);
+            priceLabel.Size = new System.Drawing.Size(68, 16);
             priceLabel.TabIndex = 0;
-            priceLabel.Text = "总手续费率:";
+            priceLabel.Text = "总手续费率";
             // 
             // iFPriceLabel
             // 
@@ -219,9 +217,9 @@ namespace CMBC.EasyFactor.ARMgr
             iFPriceLabel.BackgroundStyle.Class = "";
             iFPriceLabel.Location = new System.Drawing.Point(7, 71);
             iFPriceLabel.Name = "iFPriceLabel";
-            iFPriceLabel.Size = new System.Drawing.Size(69, 16);
+            iFPriceLabel.Size = new System.Drawing.Size(66, 16);
             iFPriceLabel.TabIndex = 2;
-            iFPriceLabel.Text = "IF手续费率:";
+            iFPriceLabel.Text = "IF手续费率";
             // 
             // handFeeCurrLabel
             // 
@@ -232,9 +230,9 @@ namespace CMBC.EasyFactor.ARMgr
             handFeeCurrLabel.BackgroundStyle.Class = "";
             handFeeCurrLabel.Location = new System.Drawing.Point(6, 93);
             handFeeCurrLabel.Name = "handFeeCurrLabel";
-            handFeeCurrLabel.Size = new System.Drawing.Size(72, 16);
+            handFeeCurrLabel.Size = new System.Drawing.Size(68, 16);
             handFeeCurrLabel.TabIndex = 4;
-            handFeeCurrLabel.Text = "单据处理费:";
+            handFeeCurrLabel.Text = "单据处理费";
             // 
             // financeProportionLabel
             // 
@@ -243,11 +241,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             financeProportionLabel.BackgroundStyle.Class = "";
-            financeProportionLabel.Location = new System.Drawing.Point(17, 27);
+            financeProportionLabel.Location = new System.Drawing.Point(16, 136);
             financeProportionLabel.Name = "financeProportionLabel";
-            financeProportionLabel.Size = new System.Drawing.Size(59, 16);
+            financeProportionLabel.Size = new System.Drawing.Size(56, 16);
             financeProportionLabel.TabIndex = 0;
-            financeProportionLabel.Text = "预付比例:";
+            financeProportionLabel.Text = "预付比例";
             // 
             // creditCoverCurrLabel
             // 
@@ -256,11 +254,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             creditCoverCurrLabel.BackgroundStyle.Class = "";
-            creditCoverCurrLabel.Location = new System.Drawing.Point(6, 30);
+            creditCoverCurrLabel.Location = new System.Drawing.Point(6, 27);
             creditCoverCurrLabel.Name = "creditCoverCurrLabel";
-            creditCoverCurrLabel.Size = new System.Drawing.Size(84, 16);
+            creditCoverCurrLabel.Size = new System.Drawing.Size(81, 16);
             creditCoverCurrLabel.TabIndex = 0;
-            creditCoverCurrLabel.Text = "信用风险额度:";
+            creditCoverCurrLabel.Text = "信用风险额度";
             // 
             // periodEndLabel
             // 
@@ -269,11 +267,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             periodEndLabel.BackgroundStyle.Class = "";
-            periodEndLabel.Location = new System.Drawing.Point(42, 54);
+            periodEndLabel.Location = new System.Drawing.Point(42, 46);
             periodEndLabel.Name = "periodEndLabel";
-            periodEndLabel.Size = new System.Drawing.Size(47, 16);
+            periodEndLabel.Size = new System.Drawing.Size(44, 16);
             periodEndLabel.TabIndex = 3;
-            periodEndLabel.Text = "到期日:";
+            periodEndLabel.Text = "到期日";
             // 
             // lblBuyerCreditCoverBalance
             // 
@@ -282,11 +280,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblBuyerCreditCoverBalance.BackgroundStyle.Class = "";
-            lblBuyerCreditCoverBalance.Location = new System.Drawing.Point(30, 79);
+            lblBuyerCreditCoverBalance.Location = new System.Drawing.Point(30, 69);
             lblBuyerCreditCoverBalance.Name = "lblBuyerCreditCoverBalance";
-            lblBuyerCreditCoverBalance.Size = new System.Drawing.Size(59, 16);
+            lblBuyerCreditCoverBalance.Size = new System.Drawing.Size(56, 16);
             lblBuyerCreditCoverBalance.TabIndex = 5;
-            lblBuyerCreditCoverBalance.Text = "剩余额度:";
+            lblBuyerCreditCoverBalance.Text = "剩余额度";
             // 
             // lblBuyerARBalance
             // 
@@ -295,11 +293,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblBuyerARBalance.BackgroundStyle.Class = "";
-            lblBuyerARBalance.Location = new System.Drawing.Point(6, 99);
+            lblBuyerARBalance.Location = new System.Drawing.Point(6, 92);
             lblBuyerARBalance.Name = "lblBuyerARBalance";
-            lblBuyerARBalance.Size = new System.Drawing.Size(84, 16);
+            lblBuyerARBalance.Size = new System.Drawing.Size(81, 16);
             lblBuyerARBalance.TabIndex = 7;
-            lblBuyerARBalance.Text = "应收帐款余额:";
+            lblBuyerARBalance.Text = "应收帐款余额";
             // 
             // lblFinanceARBalance
             // 
@@ -308,11 +306,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblFinanceARBalance.BackgroundStyle.Class = "";
-            lblFinanceARBalance.Location = new System.Drawing.Point(15, 113);
+            lblFinanceARBalance.Location = new System.Drawing.Point(30, 94);
             lblFinanceARBalance.Name = "lblFinanceARBalance";
-            lblFinanceARBalance.Size = new System.Drawing.Size(59, 16);
+            lblFinanceARBalance.Size = new System.Drawing.Size(56, 16);
             lblFinanceARBalance.TabIndex = 9;
-            lblFinanceARBalance.Text = "融资余额:";
+            lblFinanceARBalance.Text = "融资余额";
             // 
             // lblFinanceCreditCoverBalance
             // 
@@ -321,11 +319,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblFinanceCreditCoverBalance.BackgroundStyle.Class = "";
-            lblFinanceCreditCoverBalance.Location = new System.Drawing.Point(16, 93);
+            lblFinanceCreditCoverBalance.Location = new System.Drawing.Point(30, 73);
             lblFinanceCreditCoverBalance.Name = "lblFinanceCreditCoverBalance";
-            lblFinanceCreditCoverBalance.Size = new System.Drawing.Size(59, 16);
+            lblFinanceCreditCoverBalance.Size = new System.Drawing.Size(56, 16);
             lblFinanceCreditCoverBalance.TabIndex = 7;
-            lblFinanceCreditCoverBalance.Text = "剩余额度:";
+            lblFinanceCreditCoverBalance.Text = "剩余额度";
             // 
             // lblDueDate
             // 
@@ -334,11 +332,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblDueDate.BackgroundStyle.Class = "";
-            lblDueDate.Location = new System.Drawing.Point(29, 73);
+            lblDueDate.Location = new System.Drawing.Point(42, 50);
             lblDueDate.Name = "lblDueDate";
-            lblDueDate.Size = new System.Drawing.Size(47, 16);
+            lblDueDate.Size = new System.Drawing.Size(44, 16);
             lblDueDate.TabIndex = 5;
-            lblDueDate.Text = "到期日:";
+            lblDueDate.Text = "到期日";
             // 
             // lblCreditLine
             // 
@@ -347,11 +345,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblCreditLine.BackgroundStyle.Class = "";
-            lblCreditLine.Location = new System.Drawing.Point(5, 51);
+            lblCreditLine.Location = new System.Drawing.Point(18, 25);
             lblCreditLine.Name = "lblCreditLine";
-            lblCreditLine.Size = new System.Drawing.Size(72, 16);
+            lblCreditLine.Size = new System.Drawing.Size(68, 16);
             lblCreditLine.TabIndex = 2;
-            lblCreditLine.Text = "预付款额度:";
+            lblCreditLine.Text = "预付款额度";
             // 
             // efPriceLbl
             // 
@@ -362,9 +360,9 @@ namespace CMBC.EasyFactor.ARMgr
             efPriceLbl.BackgroundStyle.Class = "";
             efPriceLbl.Location = new System.Drawing.Point(6, 50);
             efPriceLbl.Name = "efPriceLbl";
-            efPriceLbl.Size = new System.Drawing.Size(74, 16);
+            efPriceLbl.Size = new System.Drawing.Size(70, 16);
             efPriceLbl.TabIndex = 7;
-            efPriceLbl.Text = "EF手续费率:";
+            efPriceLbl.Text = "EF手续费率";
             // 
             // lblCommissionType
             // 
@@ -375,9 +373,9 @@ namespace CMBC.EasyFactor.ARMgr
             lblCommissionType.BackgroundStyle.Class = "";
             lblCommissionType.Location = new System.Drawing.Point(16, 113);
             lblCommissionType.Name = "lblCommissionType";
-            lblCommissionType.Size = new System.Drawing.Size(59, 16);
+            lblCommissionType.Size = new System.Drawing.Size(56, 16);
             lblCommissionType.TabIndex = 9;
-            lblCommissionType.Text = "计费方式:";
+            lblCommissionType.Text = "计费方式";
             // 
             // lblCaseCode
             // 
@@ -386,11 +384,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblCaseCode.BackgroundStyle.Class = "";
-            lblCaseCode.Location = new System.Drawing.Point(307, 48);
+            lblCaseCode.Location = new System.Drawing.Point(310, 50);
             lblCaseCode.Name = "lblCaseCode";
-            lblCaseCode.Size = new System.Drawing.Size(59, 16);
+            lblCaseCode.Size = new System.Drawing.Size(56, 16);
             lblCaseCode.TabIndex = 56;
-            lblCaseCode.Text = "案件编号:";
+            lblCaseCode.Text = "案件编号";
             // 
             // lblCDACode
             // 
@@ -399,11 +397,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblCDACode.BackgroundStyle.Class = "";
-            lblCDACode.Location = new System.Drawing.Point(272, 27);
+            lblCDACode.Location = new System.Drawing.Point(311, 28);
             lblCDACode.Name = "lblCDACode";
-            lblCDACode.Size = new System.Drawing.Size(97, 16);
+            lblCDACode.Size = new System.Drawing.Size(55, 16);
             lblCDACode.TabIndex = 54;
-            lblCDACode.Text = "额度通知书编号:";
+            lblCDACode.Text = "CDA编号";
             // 
             // lblIsNotice
             // 
@@ -412,11 +410,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblIsNotice.BackgroundStyle.Class = "";
-            lblIsNotice.Location = new System.Drawing.Point(307, 135);
+            lblIsNotice.Location = new System.Drawing.Point(307, 91);
             lblIsNotice.Name = "lblIsNotice";
-            lblIsNotice.Size = new System.Drawing.Size(62, 16);
+            lblIsNotice.Size = new System.Drawing.Size(59, 16);
             lblIsNotice.TabIndex = 51;
-            lblIsNotice.Text = "明/暗保理:";
+            lblIsNotice.Text = "明/暗保理";
             // 
             // ownerDepartmentCodeLabel
             // 
@@ -425,11 +423,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             ownerDepartmentCodeLabel.BackgroundStyle.Class = "";
-            ownerDepartmentCodeLabel.Location = new System.Drawing.Point(6, 30);
+            ownerDepartmentCodeLabel.Location = new System.Drawing.Point(6, 26);
             ownerDepartmentCodeLabel.Name = "ownerDepartmentCodeLabel";
-            ownerDepartmentCodeLabel.Size = new System.Drawing.Size(87, 16);
+            ownerDepartmentCodeLabel.Size = new System.Drawing.Size(84, 16);
             ownerDepartmentCodeLabel.TabIndex = 30;
-            ownerDepartmentCodeLabel.Text = " 业务归属机构:";
+            ownerDepartmentCodeLabel.Text = " 业务归属机构";
             // 
             // assignTypeLabel
             // 
@@ -438,11 +436,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             assignTypeLabel.BackgroundStyle.Class = "";
-            assignTypeLabel.Location = new System.Drawing.Point(309, 112);
+            assignTypeLabel.Location = new System.Drawing.Point(309, 69);
             assignTypeLabel.Name = "assignTypeLabel";
-            assignTypeLabel.Size = new System.Drawing.Size(59, 16);
+            assignTypeLabel.Size = new System.Drawing.Size(56, 16);
             assignTypeLabel.TabIndex = 49;
-            assignTypeLabel.Text = "转让方式:";
+            assignTypeLabel.Text = "转让方式";
             // 
             // sellerEDICodeLabel
             // 
@@ -453,35 +451,9 @@ namespace CMBC.EasyFactor.ARMgr
             sellerEDICodeLabel.BackgroundStyle.Class = "";
             sellerEDICodeLabel.Location = new System.Drawing.Point(56, 49);
             sellerEDICodeLabel.Name = "sellerEDICodeLabel";
-            sellerEDICodeLabel.Size = new System.Drawing.Size(34, 16);
+            sellerEDICodeLabel.Size = new System.Drawing.Size(31, 16);
             sellerEDICodeLabel.TabIndex = 32;
-            sellerEDICodeLabel.Text = "卖方:";
-            // 
-            // RMLabel
-            // 
-            RMLabel.AutoSize = true;
-            // 
-            // 
-            // 
-            RMLabel.BackgroundStyle.Class = "";
-            RMLabel.Location = new System.Drawing.Point(309, 93);
-            RMLabel.Name = "RMLabel";
-            RMLabel.Size = new System.Drawing.Size(59, 16);
-            RMLabel.TabIndex = 47;
-            RMLabel.Text = "客户经理:";
-            // 
-            // PMLabel
-            // 
-            PMLabel.AutoSize = true;
-            // 
-            // 
-            // 
-            PMLabel.BackgroundStyle.Class = "";
-            PMLabel.Location = new System.Drawing.Point(309, 70);
-            PMLabel.Name = "PMLabel";
-            PMLabel.Size = new System.Drawing.Size(59, 16);
-            PMLabel.TabIndex = 45;
-            PMLabel.Text = "产品经理:";
+            sellerEDICodeLabel.Text = "卖方";
             // 
             // buyerEDICodeLabel
             // 
@@ -492,9 +464,9 @@ namespace CMBC.EasyFactor.ARMgr
             buyerEDICodeLabel.BackgroundStyle.Class = "";
             buyerEDICodeLabel.Location = new System.Drawing.Point(55, 71);
             buyerEDICodeLabel.Name = "buyerEDICodeLabel";
-            buyerEDICodeLabel.Size = new System.Drawing.Size(34, 16);
+            buyerEDICodeLabel.Size = new System.Drawing.Size(31, 16);
             buyerEDICodeLabel.TabIndex = 35;
-            buyerEDICodeLabel.Text = "买方:";
+            buyerEDICodeLabel.Text = "买方";
             // 
             // invoiceCurrencyLabel
             // 
@@ -503,11 +475,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             invoiceCurrencyLabel.BackgroundStyle.Class = "";
-            invoiceCurrencyLabel.Location = new System.Drawing.Point(31, 135);
+            invoiceCurrencyLabel.Location = new System.Drawing.Point(203, 27);
             invoiceCurrencyLabel.Name = "invoiceCurrencyLabel";
-            invoiceCurrencyLabel.Size = new System.Drawing.Size(59, 16);
+            invoiceCurrencyLabel.Size = new System.Drawing.Size(31, 16);
             invoiceCurrencyLabel.TabIndex = 43;
-            invoiceCurrencyLabel.Text = "发票币别:";
+            invoiceCurrencyLabel.Text = "币别";
             // 
             // factorCodeLabel
             // 
@@ -518,9 +490,9 @@ namespace CMBC.EasyFactor.ARMgr
             factorCodeLabel.BackgroundStyle.Class = "";
             factorCodeLabel.Location = new System.Drawing.Point(43, 91);
             factorCodeLabel.Name = "factorCodeLabel";
-            factorCodeLabel.Size = new System.Drawing.Size(47, 16);
+            factorCodeLabel.Size = new System.Drawing.Size(44, 16);
             factorCodeLabel.TabIndex = 38;
-            factorCodeLabel.Text = "保理商:";
+            factorCodeLabel.Text = "保理商";
             // 
             // transactionTypeLabel
             // 
@@ -531,9 +503,9 @@ namespace CMBC.EasyFactor.ARMgr
             transactionTypeLabel.BackgroundStyle.Class = "";
             transactionTypeLabel.Location = new System.Drawing.Point(31, 114);
             transactionTypeLabel.Name = "transactionTypeLabel";
-            transactionTypeLabel.Size = new System.Drawing.Size(59, 16);
+            transactionTypeLabel.Size = new System.Drawing.Size(56, 16);
             transactionTypeLabel.TabIndex = 41;
-            transactionTypeLabel.Text = "业务类别:";
+            transactionTypeLabel.Text = "业务类别";
             // 
             // lblHighestFinance
             // 
@@ -542,11 +514,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblHighestFinance.BackgroundStyle.Class = "";
-            lblHighestFinance.Location = new System.Drawing.Point(5, 134);
+            lblHighestFinance.Location = new System.Drawing.Point(0, 115);
             lblHighestFinance.Name = "lblHighestFinance";
-            lblHighestFinance.Size = new System.Drawing.Size(121, 16);
+            lblHighestFinance.Size = new System.Drawing.Size(93, 16);
             lblHighestFinance.TabIndex = 11;
-            lblHighestFinance.Text = "最高保理预付款额度:";
+            lblHighestFinance.Text = "最高预付款额度";
             // 
             // lblPaymentTerms
             // 
@@ -555,11 +527,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblPaymentTerms.BackgroundStyle.Class = "";
-            lblPaymentTerms.Location = new System.Drawing.Point(27, 155);
+            lblPaymentTerms.Location = new System.Drawing.Point(30, 134);
             lblPaymentTerms.Name = "lblPaymentTerms";
-            lblPaymentTerms.Size = new System.Drawing.Size(59, 16);
+            lblPaymentTerms.Size = new System.Drawing.Size(56, 16);
             lblPaymentTerms.TabIndex = 58;
-            lblPaymentTerms.Text = "付款条件:";
+            lblPaymentTerms.Text = "付款条件";
             // 
             // panelCaseBasic
             // 
@@ -575,7 +547,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelCaseBasic.Location = new System.Drawing.Point(0, 0);
             this.panelCaseBasic.Margin = new System.Windows.Forms.Padding(0);
             this.panelCaseBasic.Name = "panelCaseBasic";
-            this.panelCaseBasic.Size = new System.Drawing.Size(1254, 204);
+            this.panelCaseBasic.Size = new System.Drawing.Size(1254, 175);
             this.panelCaseBasic.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelCaseBasic.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelCaseBasic.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -592,12 +564,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelFinanceCreditLine.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelFinanceCreditLine.CollapseDirection = DevComponents.DotNetBar.eCollapseDirection.RightToLeft;
             this.panelFinanceCreditLine.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelFinanceCreditLine.Controls.Add(this.tbTotalFinanceOustanding);
+            this.panelFinanceCreditLine.Controls.Add(lblTotalFinanceOutstanding);
             this.panelFinanceCreditLine.Controls.Add(this.tbHighestFinance);
             this.panelFinanceCreditLine.Controls.Add(lblHighestFinance);
             this.panelFinanceCreditLine.Controls.Add(this.tbFinanceOutstanding);
-            this.panelFinanceCreditLine.Controls.Add(financeProportionLabel);
             this.panelFinanceCreditLine.Controls.Add(lblFinanceARBalance);
-            this.panelFinanceCreditLine.Controls.Add(this.financeProportionTextBox);
             this.panelFinanceCreditLine.Controls.Add(this.tbFinanceCreditLineOutstanding);
             this.panelFinanceCreditLine.Controls.Add(this.tbFinanceLineCurr);
             this.panelFinanceCreditLine.Controls.Add(lblFinanceCreditCoverBalance);
@@ -607,9 +579,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelFinanceCreditLine.Controls.Add(this.tbDueDate);
             this.panelFinanceCreditLine.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelFinanceCreditLine.ExpandOnTitleClick = true;
-            this.panelFinanceCreditLine.Location = new System.Drawing.Point(861, 15);
+            this.panelFinanceCreditLine.Location = new System.Drawing.Point(867, 15);
             this.panelFinanceCreditLine.Name = "panelFinanceCreditLine";
-            this.panelFinanceCreditLine.Size = new System.Drawing.Size(188, 189);
+            this.panelFinanceCreditLine.Size = new System.Drawing.Size(209, 160);
             this.panelFinanceCreditLine.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelFinanceCreditLine.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelFinanceCreditLine.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -634,7 +606,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbHighestFinance.Border.Class = "TextBoxBorder";
-            this.tbHighestFinance.Location = new System.Drawing.Point(82, 151);
+            this.tbHighestFinance.Location = new System.Drawing.Point(92, 114);
             this.tbHighestFinance.Name = "tbHighestFinance";
             this.tbHighestFinance.ReadOnly = true;
             this.tbHighestFinance.Size = new System.Drawing.Size(100, 20);
@@ -646,7 +618,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbFinanceOutstanding.Border.Class = "TextBoxBorder";
-            this.tbFinanceOutstanding.Location = new System.Drawing.Point(82, 111);
+            this.tbFinanceOutstanding.Location = new System.Drawing.Point(92, 91);
             this.tbFinanceOutstanding.Name = "tbFinanceOutstanding";
             this.tbFinanceOutstanding.ReadOnly = true;
             this.tbFinanceOutstanding.Size = new System.Drawing.Size(100, 20);
@@ -658,7 +630,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.financeProportionTextBox.Border.Class = "TextBoxBorder";
-            this.financeProportionTextBox.Location = new System.Drawing.Point(82, 25);
+            this.financeProportionTextBox.Location = new System.Drawing.Point(77, 134);
             this.financeProportionTextBox.Name = "financeProportionTextBox";
             this.financeProportionTextBox.ReadOnly = true;
             this.financeProportionTextBox.Size = new System.Drawing.Size(100, 20);
@@ -670,7 +642,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbFinanceCreditLineOutstanding.Border.Class = "TextBoxBorder";
-            this.tbFinanceCreditLineOutstanding.Location = new System.Drawing.Point(82, 90);
+            this.tbFinanceCreditLineOutstanding.Location = new System.Drawing.Point(92, 69);
             this.tbFinanceCreditLineOutstanding.Name = "tbFinanceCreditLineOutstanding";
             this.tbFinanceCreditLineOutstanding.ReadOnly = true;
             this.tbFinanceCreditLineOutstanding.Size = new System.Drawing.Size(100, 20);
@@ -682,7 +654,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbFinanceLineCurr.Border.Class = "TextBoxBorder";
-            this.tbFinanceLineCurr.Location = new System.Drawing.Point(82, 47);
+            this.tbFinanceLineCurr.Location = new System.Drawing.Point(92, 24);
             this.tbFinanceLineCurr.Name = "tbFinanceLineCurr";
             this.tbFinanceLineCurr.ReadOnly = true;
             this.tbFinanceLineCurr.Size = new System.Drawing.Size(28, 20);
@@ -694,10 +666,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbFinanceLine.Border.Class = "TextBoxBorder";
-            this.tbFinanceLine.Location = new System.Drawing.Point(117, 47);
+            this.tbFinanceLine.Location = new System.Drawing.Point(126, 24);
             this.tbFinanceLine.Name = "tbFinanceLine";
             this.tbFinanceLine.ReadOnly = true;
-            this.tbFinanceLine.Size = new System.Drawing.Size(65, 20);
+            this.tbFinanceLine.Size = new System.Drawing.Size(66, 20);
             this.tbFinanceLine.TabIndex = 4;
             // 
             // tbDueDate
@@ -706,7 +678,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbDueDate.Border.Class = "TextBoxBorder";
-            this.tbDueDate.Location = new System.Drawing.Point(82, 69);
+            this.tbDueDate.Location = new System.Drawing.Point(92, 47);
             this.tbDueDate.Name = "tbDueDate";
             this.tbDueDate.ReadOnly = true;
             this.tbDueDate.Size = new System.Drawing.Size(100, 20);
@@ -717,6 +689,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBuyer.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelBuyer.CollapseDirection = DevComponents.DotNetBar.eCollapseDirection.RightToLeft;
             this.panelBuyer.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelBuyer.Controls.Add(this.tbSellerAssignOutstanding);
+            this.panelBuyer.Controls.Add(lblSellerAssignOutstanding);
             this.panelBuyer.Controls.Add(this.tbAROutstanding);
             this.panelBuyer.Controls.Add(creditCoverCurrLabel);
             this.panelBuyer.Controls.Add(lblBuyerARBalance);
@@ -728,9 +702,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBuyer.Controls.Add(periodEndLabel);
             this.panelBuyer.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelBuyer.ExpandOnTitleClick = true;
-            this.panelBuyer.Location = new System.Drawing.Point(652, 15);
+            this.panelBuyer.Location = new System.Drawing.Point(664, 15);
             this.panelBuyer.Name = "panelBuyer";
-            this.panelBuyer.Size = new System.Drawing.Size(209, 189);
+            this.panelBuyer.Size = new System.Drawing.Size(203, 160);
             this.panelBuyer.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelBuyer.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelBuyer.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -755,10 +729,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbAROutstanding.Border.Class = "TextBoxBorder";
-            this.tbAROutstanding.Location = new System.Drawing.Point(92, 97);
+            this.tbAROutstanding.Location = new System.Drawing.Point(92, 90);
             this.tbAROutstanding.Name = "tbAROutstanding";
             this.tbAROutstanding.ReadOnly = true;
-            this.tbAROutstanding.Size = new System.Drawing.Size(108, 20);
+            this.tbAROutstanding.Size = new System.Drawing.Size(100, 20);
             this.tbAROutstanding.TabIndex = 8;
             // 
             // creditCoverCurrTextBox
@@ -767,10 +741,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.creditCoverCurrTextBox.Border.Class = "TextBoxBorder";
-            this.creditCoverCurrTextBox.Location = new System.Drawing.Point(94, 26);
+            this.creditCoverCurrTextBox.Location = new System.Drawing.Point(92, 23);
             this.creditCoverCurrTextBox.Name = "creditCoverCurrTextBox";
             this.creditCoverCurrTextBox.ReadOnly = true;
-            this.creditCoverCurrTextBox.Size = new System.Drawing.Size(28, 20);
+            this.creditCoverCurrTextBox.Size = new System.Drawing.Size(30, 20);
             this.creditCoverCurrTextBox.TabIndex = 1;
             // 
             // tbCreditCoverOutstanding
@@ -779,10 +753,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbCreditCoverOutstanding.Border.Class = "TextBoxBorder";
-            this.tbCreditCoverOutstanding.Location = new System.Drawing.Point(92, 73);
+            this.tbCreditCoverOutstanding.Location = new System.Drawing.Point(92, 68);
             this.tbCreditCoverOutstanding.Name = "tbCreditCoverOutstanding";
             this.tbCreditCoverOutstanding.ReadOnly = true;
-            this.tbCreditCoverOutstanding.Size = new System.Drawing.Size(108, 20);
+            this.tbCreditCoverOutstanding.Size = new System.Drawing.Size(100, 20);
             this.tbCreditCoverOutstanding.TabIndex = 6;
             // 
             // creditCoverTextBox
@@ -791,10 +765,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.creditCoverTextBox.Border.Class = "TextBoxBorder";
-            this.creditCoverTextBox.Location = new System.Drawing.Point(127, 26);
+            this.creditCoverTextBox.Location = new System.Drawing.Point(127, 23);
             this.creditCoverTextBox.Name = "creditCoverTextBox";
             this.creditCoverTextBox.ReadOnly = true;
-            this.creditCoverTextBox.Size = new System.Drawing.Size(73, 20);
+            this.creditCoverTextBox.Size = new System.Drawing.Size(65, 20);
             this.creditCoverTextBox.TabIndex = 2;
             // 
             // periodEndTextBox
@@ -803,10 +777,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.periodEndTextBox.Border.Class = "TextBoxBorder";
-            this.periodEndTextBox.Location = new System.Drawing.Point(92, 50);
+            this.periodEndTextBox.Location = new System.Drawing.Point(92, 46);
             this.periodEndTextBox.Name = "periodEndTextBox";
             this.periodEndTextBox.ReadOnly = true;
-            this.periodEndTextBox.Size = new System.Drawing.Size(108, 20);
+            this.periodEndTextBox.Size = new System.Drawing.Size(100, 20);
             this.periodEndTextBox.TabIndex = 4;
             // 
             // panelFee
@@ -817,7 +791,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelFee.Controls.Add(this.commissionTypeTextBox);
             this.panelFee.Controls.Add(priceLabel);
             this.panelFee.Controls.Add(lblCommissionType);
+            this.panelFee.Controls.Add(financeProportionLabel);
             this.panelFee.Controls.Add(this.priceTextBox);
+            this.panelFee.Controls.Add(this.financeProportionTextBox);
             this.panelFee.Controls.Add(efPriceLbl);
             this.panelFee.Controls.Add(this.iFPriceTextBox);
             this.panelFee.Controls.Add(this.eFPriceTextBox);
@@ -829,7 +805,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelFee.ExpandOnTitleClick = true;
             this.panelFee.Location = new System.Drawing.Point(480, 15);
             this.panelFee.Name = "panelFee";
-            this.panelFee.Size = new System.Drawing.Size(172, 189);
+            this.panelFee.Size = new System.Drawing.Size(184, 160);
             this.panelFee.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelFee.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelFee.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -846,7 +822,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelFee.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelFee.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelFee.TitleStyle.GradientAngle = 90;
-            this.panelFee.TitleText = "费率/利率信息";
+            this.panelFee.TitleText = "费率/其他信息";
             // 
             // commissionTypeTextBox
             // 
@@ -854,10 +830,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.commissionTypeTextBox.Border.Class = "TextBoxBorder";
-            this.commissionTypeTextBox.Location = new System.Drawing.Point(81, 112);
+            this.commissionTypeTextBox.Location = new System.Drawing.Point(77, 112);
             this.commissionTypeTextBox.Name = "commissionTypeTextBox";
             this.commissionTypeTextBox.ReadOnly = true;
-            this.commissionTypeTextBox.Size = new System.Drawing.Size(84, 20);
+            this.commissionTypeTextBox.Size = new System.Drawing.Size(100, 20);
             this.commissionTypeTextBox.TabIndex = 10;
             // 
             // priceTextBox
@@ -866,10 +842,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.priceTextBox.Border.Class = "TextBoxBorder";
-            this.priceTextBox.Location = new System.Drawing.Point(81, 27);
+            this.priceTextBox.Location = new System.Drawing.Point(77, 24);
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.ReadOnly = true;
-            this.priceTextBox.Size = new System.Drawing.Size(84, 20);
+            this.priceTextBox.Size = new System.Drawing.Size(100, 20);
             this.priceTextBox.TabIndex = 1;
             // 
             // iFPriceTextBox
@@ -878,10 +854,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.iFPriceTextBox.Border.Class = "TextBoxBorder";
-            this.iFPriceTextBox.Location = new System.Drawing.Point(82, 69);
+            this.iFPriceTextBox.Location = new System.Drawing.Point(77, 69);
             this.iFPriceTextBox.Name = "iFPriceTextBox";
             this.iFPriceTextBox.ReadOnly = true;
-            this.iFPriceTextBox.Size = new System.Drawing.Size(83, 20);
+            this.iFPriceTextBox.Size = new System.Drawing.Size(100, 20);
             this.iFPriceTextBox.TabIndex = 3;
             // 
             // eFPriceTextBox
@@ -890,10 +866,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.eFPriceTextBox.Border.Class = "TextBoxBorder";
-            this.eFPriceTextBox.Location = new System.Drawing.Point(81, 48);
+            this.eFPriceTextBox.Location = new System.Drawing.Point(77, 47);
             this.eFPriceTextBox.Name = "eFPriceTextBox";
             this.eFPriceTextBox.ReadOnly = true;
-            this.eFPriceTextBox.Size = new System.Drawing.Size(84, 20);
+            this.eFPriceTextBox.Size = new System.Drawing.Size(100, 20);
             this.eFPriceTextBox.TabIndex = 8;
             // 
             // handFeeTextBox
@@ -905,7 +881,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.handFeeTextBox.Location = new System.Drawing.Point(116, 91);
             this.handFeeTextBox.Name = "handFeeTextBox";
             this.handFeeTextBox.ReadOnly = true;
-            this.handFeeTextBox.Size = new System.Drawing.Size(49, 20);
+            this.handFeeTextBox.Size = new System.Drawing.Size(61, 20);
             this.handFeeTextBox.TabIndex = 6;
             // 
             // handFeeCurrTextBox
@@ -914,10 +890,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.handFeeCurrTextBox.Border.Class = "TextBoxBorder";
-            this.handFeeCurrTextBox.Location = new System.Drawing.Point(82, 91);
+            this.handFeeCurrTextBox.Location = new System.Drawing.Point(77, 91);
             this.handFeeCurrTextBox.Name = "handFeeCurrTextBox";
             this.handFeeCurrTextBox.ReadOnly = true;
-            this.handFeeCurrTextBox.Size = new System.Drawing.Size(28, 20);
+            this.handFeeCurrTextBox.Size = new System.Drawing.Size(33, 20);
             this.handFeeCurrTextBox.TabIndex = 5;
             // 
             // panelCase
@@ -940,13 +916,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelCase.Controls.Add(this.ownerDepartmentCodeTextBox);
             this.panelCase.Controls.Add(this.assignTypeTextBox);
             this.panelCase.Controls.Add(this.sellerEDICodeTextBox);
-            this.panelCase.Controls.Add(this.RMTextBox);
             this.panelCase.Controls.Add(sellerEDICodeLabel);
-            this.panelCase.Controls.Add(RMLabel);
             this.panelCase.Controls.Add(this.sellerNameTextBox);
-            this.panelCase.Controls.Add(this.PMTextBox);
             this.panelCase.Controls.Add(this.buyerEDICodeTextBox);
-            this.panelCase.Controls.Add(PMLabel);
             this.panelCase.Controls.Add(buyerEDICodeLabel);
             this.panelCase.Controls.Add(this.buyerNameTextBox);
             this.panelCase.Controls.Add(this.isRecoarseCheckBox);
@@ -961,7 +933,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelCase.ExpandOnTitleClick = true;
             this.panelCase.Location = new System.Drawing.Point(0, 15);
             this.panelCase.Name = "panelCase";
-            this.panelCase.Size = new System.Drawing.Size(480, 189);
+            this.panelCase.Size = new System.Drawing.Size(480, 160);
             this.panelCase.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelCase.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelCase.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -986,7 +958,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbNetPaymentTerm.Border.Class = "TextBoxBorder";
-            this.tbNetPaymentTerm.Location = new System.Drawing.Point(97, 157);
+            this.tbNetPaymentTerm.Location = new System.Drawing.Point(97, 134);
             this.tbNetPaymentTerm.Name = "tbNetPaymentTerm";
             this.tbNetPaymentTerm.ReadOnly = true;
             this.tbNetPaymentTerm.Size = new System.Drawing.Size(64, 20);
@@ -998,7 +970,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbPaymentTerms.Border.Class = "TextBoxBorder";
-            this.tbPaymentTerms.Location = new System.Drawing.Point(167, 158);
+            this.tbPaymentTerms.Location = new System.Drawing.Point(167, 135);
             this.tbPaymentTerms.Name = "tbPaymentTerms";
             this.tbPaymentTerms.ReadOnly = true;
             this.tbPaymentTerms.Size = new System.Drawing.Size(306, 20);
@@ -1010,7 +982,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbCaseCode.Border.Class = "TextBoxBorder";
-            this.tbCaseCode.Location = new System.Drawing.Point(373, 47);
+            this.tbCaseCode.Location = new System.Drawing.Point(372, 47);
             this.tbCaseCode.Name = "tbCaseCode";
             this.tbCaseCode.ReadOnly = true;
             this.tbCaseCode.Size = new System.Drawing.Size(100, 20);
@@ -1023,7 +995,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbCDACode.Border.Class = "TextBoxBorder";
-            this.tbCDACode.Location = new System.Drawing.Point(373, 26);
+            this.tbCDACode.Location = new System.Drawing.Point(372, 26);
             this.tbCDACode.Name = "tbCDACode";
             this.tbCDACode.ReadOnly = true;
             this.tbCDACode.Size = new System.Drawing.Size(100, 20);
@@ -1036,7 +1008,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbIsNotice.Border.Class = "TextBoxBorder";
-            this.tbIsNotice.Location = new System.Drawing.Point(373, 135);
+            this.tbIsNotice.Location = new System.Drawing.Point(373, 91);
             this.tbIsNotice.Name = "tbIsNotice";
             this.tbIsNotice.ReadOnly = true;
             this.tbIsNotice.Size = new System.Drawing.Size(100, 20);
@@ -1060,7 +1032,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.ownerDepartmentCodeTextBox.Border.Class = "TextBoxBorder";
-            this.ownerDepartmentCodeTextBox.Location = new System.Drawing.Point(97, 27);
+            this.ownerDepartmentCodeTextBox.Location = new System.Drawing.Point(97, 24);
             this.ownerDepartmentCodeTextBox.Name = "ownerDepartmentCodeTextBox";
             this.ownerDepartmentCodeTextBox.ReadOnly = true;
             this.ownerDepartmentCodeTextBox.Size = new System.Drawing.Size(100, 20);
@@ -1072,7 +1044,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.assignTypeTextBox.Border.Class = "TextBoxBorder";
-            this.assignTypeTextBox.Location = new System.Drawing.Point(373, 113);
+            this.assignTypeTextBox.Location = new System.Drawing.Point(373, 69);
             this.assignTypeTextBox.Name = "assignTypeTextBox";
             this.assignTypeTextBox.ReadOnly = true;
             this.assignTypeTextBox.Size = new System.Drawing.Size(100, 20);
@@ -1091,18 +1063,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.sellerEDICodeTextBox.TabIndex = 33;
             this.sellerEDICodeTextBox.DoubleClick += new System.EventHandler(this.DetailSeller);
             // 
-            // RMTextBox
-            // 
-            // 
-            // 
-            // 
-            this.RMTextBox.Border.Class = "TextBoxBorder";
-            this.RMTextBox.Location = new System.Drawing.Point(373, 91);
-            this.RMTextBox.Name = "RMTextBox";
-            this.RMTextBox.ReadOnly = true;
-            this.RMTextBox.Size = new System.Drawing.Size(100, 20);
-            this.RMTextBox.TabIndex = 48;
-            // 
             // sellerNameTextBox
             // 
             // 
@@ -1115,18 +1075,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.sellerNameTextBox.Size = new System.Drawing.Size(136, 20);
             this.sellerNameTextBox.TabIndex = 34;
             this.sellerNameTextBox.DoubleClick += new System.EventHandler(this.DetailSeller);
-            // 
-            // PMTextBox
-            // 
-            // 
-            // 
-            // 
-            this.PMTextBox.Border.Class = "TextBoxBorder";
-            this.PMTextBox.Location = new System.Drawing.Point(373, 69);
-            this.PMTextBox.Name = "PMTextBox";
-            this.PMTextBox.ReadOnly = true;
-            this.PMTextBox.Size = new System.Drawing.Size(100, 20);
-            this.PMTextBox.TabIndex = 46;
             // 
             // buyerEDICodeTextBox
             // 
@@ -1162,7 +1110,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.isRecoarseCheckBox.BackgroundStyle.Class = "";
             this.isRecoarseCheckBox.Enabled = false;
-            this.isRecoarseCheckBox.Location = new System.Drawing.Point(198, 138);
+            this.isRecoarseCheckBox.Location = new System.Drawing.Point(371, 114);
             this.isRecoarseCheckBox.Name = "isRecoarseCheckBox";
             this.isRecoarseCheckBox.Size = new System.Drawing.Size(101, 16);
             this.isRecoarseCheckBox.TabIndex = 53;
@@ -1187,7 +1135,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.invoiceCurrencyTextBox.Border.Class = "TextBoxBorder";
-            this.invoiceCurrencyTextBox.Location = new System.Drawing.Point(97, 134);
+            this.invoiceCurrencyTextBox.Location = new System.Drawing.Point(240, 26);
             this.invoiceCurrencyTextBox.Name = "invoiceCurrencyTextBox";
             this.invoiceCurrencyTextBox.ReadOnly = true;
             this.invoiceCurrencyTextBox.Size = new System.Drawing.Size(64, 20);
@@ -1223,9 +1171,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelInvoiceMgr.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelInvoiceMgr.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.panelInvoiceMgr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelInvoiceMgr.Location = new System.Drawing.Point(0, 204);
+            this.panelInvoiceMgr.Location = new System.Drawing.Point(0, 175);
             this.panelInvoiceMgr.Name = "panelInvoiceMgr";
-            this.panelInvoiceMgr.Size = new System.Drawing.Size(1254, 72);
+            this.panelInvoiceMgr.Size = new System.Drawing.Size(1254, 101);
             this.panelInvoiceMgr.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelInvoiceMgr.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelInvoiceMgr.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -1234,6 +1182,56 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelInvoiceMgr.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelInvoiceMgr.Style.GradientAngle = 90;
             this.panelInvoiceMgr.TabIndex = 0;
+            // 
+            // tbSellerAssignOutstanding
+            // 
+            // 
+            // 
+            // 
+            this.tbSellerAssignOutstanding.Border.Class = "TextBoxBorder";
+            this.tbSellerAssignOutstanding.Location = new System.Drawing.Point(92, 113);
+            this.tbSellerAssignOutstanding.Name = "tbSellerAssignOutstanding";
+            this.tbSellerAssignOutstanding.ReadOnly = true;
+            this.tbSellerAssignOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbSellerAssignOutstanding.TabIndex = 10;
+            // 
+            // lblSellerAssignOutstanding
+            // 
+            lblSellerAssignOutstanding.AutoSize = true;
+            // 
+            // 
+            // 
+            lblSellerAssignOutstanding.BackgroundStyle.Class = "";
+            lblSellerAssignOutstanding.Location = new System.Drawing.Point(18, 114);
+            lblSellerAssignOutstanding.Name = "lblSellerAssignOutstanding";
+            lblSellerAssignOutstanding.Size = new System.Drawing.Size(68, 16);
+            lblSellerAssignOutstanding.TabIndex = 9;
+            lblSellerAssignOutstanding.Text = "总账款余额";
+            // 
+            // tbTotalFinanceOustanding
+            // 
+            // 
+            // 
+            // 
+            this.tbTotalFinanceOustanding.Border.Class = "TextBoxBorder";
+            this.tbTotalFinanceOustanding.Location = new System.Drawing.Point(92, 136);
+            this.tbTotalFinanceOustanding.Name = "tbTotalFinanceOustanding";
+            this.tbTotalFinanceOustanding.ReadOnly = true;
+            this.tbTotalFinanceOustanding.Size = new System.Drawing.Size(100, 20);
+            this.tbTotalFinanceOustanding.TabIndex = 14;
+            // 
+            // lblTotalFinanceOutstanding
+            // 
+            lblTotalFinanceOutstanding.AutoSize = true;
+            // 
+            // 
+            // 
+            lblTotalFinanceOutstanding.BackgroundStyle.Class = "";
+            lblTotalFinanceOutstanding.Location = new System.Drawing.Point(18, 138);
+            lblTotalFinanceOutstanding.Name = "lblTotalFinanceOutstanding";
+            lblTotalFinanceOutstanding.Size = new System.Drawing.Size(68, 16);
+            lblTotalFinanceOutstanding.TabIndex = 13;
+            lblTotalFinanceOutstanding.Text = "总融资余额";
             // 
             // ARCaseBasic
             // 
@@ -1257,5 +1255,8 @@ namespace CMBC.EasyFactor.ARMgr
 
         }
         #endregion
+
+        private DevComponents.DotNetBar.Controls.TextBoxX tbSellerAssignOutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalFinanceOustanding;
     }
 }

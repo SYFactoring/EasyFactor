@@ -66,6 +66,28 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        public List<ClientReview> ClientReviews
+        {
+            get
+            {
+                switch (TransactionType)
+                {
+                    case "国内卖方保理":
+                    case "出口保理":
+                    case "国内信保保理":
+                    case "国际信保保理":
+                    case "租赁保理":
+                        return SellerClient.ClientReviews.Where(review => review.ReviewStatus == "已生效").ToList();
+                    case "国内买方保理":
+                    case "进口保理":
+                        return BuyerClient.ClientReviews.Where(review => review.ReviewStatus == "已生效").ToList();
+                    default: 
+                        return null;
+                }
+
+            }
+        }
+
         /// <summary>
         /// Gets 融资余额
         /// </summary>

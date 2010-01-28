@@ -16,6 +16,10 @@ namespace CMBC.EasyFactor.DB.dbml
     {
         private static Regex ReviewNoRegex = new Regex(@"^[A-Z]{2}\d{8}-\d{4}[A-Z]{2,3}-[A-Z]{2}$");
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
         partial void OnValidate(System.Data.Linq.ChangeAction action)
         {
             if (action == ChangeAction.Insert)
@@ -26,5 +30,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
+
     }
 }

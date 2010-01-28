@@ -145,17 +145,17 @@ namespace CMBC.EasyFactor.CaseMgr
                         this.tbCaseFactorCode.Text = curCase.BuyerFactor.FactorCode;
                         this.tbCaseFactorNameCN.Text = curCase.BuyerFactor.CompanyNameCN;
                         this.tbCaseFactorNameEN.Text = curCase.BuyerFactor.CompanyNameEN;
-                        this.cbReviews.DataSource = curCase.SellerClient.ClientReviews.Where(review => review.ReviewStatus == "已生效").ToList();
                         break;
                     case "国内买方保理":
                     case "进口保理":
                         this.tbCaseFactorCode.Text = curCase.SellerFactor.FactorCode;
                         this.tbCaseFactorNameCN.Text = curCase.SellerFactor.CompanyNameCN;
                         this.tbCaseFactorNameEN.Text = curCase.SellerFactor.CompanyNameEN;
-                        this.cbReviews.DataSource = curCase.BuyerClient.ClientReviews.Where(review => review.ReviewStatus == "已生效").ToList();
                         break;
                     default: break;
                 }
+
+                this.cbReviews.DataSource = curCase.ClientReviews;
 
                 List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
                 this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
@@ -828,7 +828,7 @@ namespace CMBC.EasyFactor.CaseMgr
                         curCase.OwnerDepartment = curCase.BuyerClient.Department;
                         List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
                         this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
-                        this.cbReviews.DataSource = curCase.BuyerClient.ClientReviews.Where(review => review.ReviewStatus == "已生效").ToList();
+                        this.cbReviews.DataSource = curCase.ClientReviews;
                         break;
                     default: break;
                 }
@@ -860,7 +860,7 @@ namespace CMBC.EasyFactor.CaseMgr
                         curCase.OwnerDepartment = curCase.SellerClient.Department;
                         List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
                         this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
-                        this.cbReviews.DataSource = curCase.SellerClient.ClientReviews.Where(review => review.ReviewStatus == "已生效").ToList();
+                        this.cbReviews.DataSource = curCase.ClientReviews;
                         break;
                     case "国内买方保理":
                     case "进口保理":

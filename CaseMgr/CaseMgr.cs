@@ -35,7 +35,8 @@ namespace CMBC.EasyFactor.CaseMgr
         /// Initializes a new instance of the CaseMgr class
         /// </summary>
         /// <param name="caseMark"></param>
-        public CaseMgr(string caseMark):this()
+        public CaseMgr(string caseMark)
+            : this()
         {
             this.cbCaseMark.Text = caseMark;
             this.QueryCase(null, null);
@@ -269,22 +270,21 @@ namespace CMBC.EasyFactor.CaseMgr
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
             try
             {
-
-                sheet.get_Range(sheet.Cells[1, "A"], sheet.Cells[1, "R"]).MergeCells = true;
-                sheet.get_Range(sheet.Cells[1, "A"], sheet.Cells[1, "A"]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                sheet.get_Range("A1", "R1").MergeCells = true;
+                sheet.get_Range("A1", "A1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 sheet.Cells[1, "A"] = "销售分户账台账";
                 sheet.Cells[2, "Q"] = String.Format("单位：{0}", selectedCase.InvoiceCurrency);
                 sheet.Cells[3, "A"] = "分行/分部";
                 sheet.Cells[3, "B"] = selectedCase.OwnerDepartment.DepartmentName;
 
                 sheet.Cells[4, "A"] = "Seller Name";
-                sheet.get_Range(sheet.Cells[4, "B"], sheet.Cells[4, "F"]).MergeCells = true;
+                sheet.get_Range("B4", "F4").MergeCells = true;
                 sheet.Cells[4, "B"] = selectedCase.SellerClient.ToString();
                 sheet.Cells[5, "A"] = "Buyer Name";
-                sheet.get_Range(sheet.Cells[5, "B"], sheet.Cells[5, "F"]).MergeCells = true;
+                sheet.get_Range("B5", "F5").MergeCells = true;
                 sheet.Cells[5, "B"] = selectedCase.BuyerClient.ToString();
 
-                sheet.get_Range(sheet.Cells[6, "B"], sheet.Cells[6, "F"]).MergeCells = true;
+                sheet.get_Range("B6", "F6").MergeCells = true;
                 if (selectedCase.TransactionType == "进口保理")
                 {
                     sheet.Cells[6, "A"] = "Export Factor";
@@ -296,6 +296,19 @@ namespace CMBC.EasyFactor.CaseMgr
                     sheet.Cells[6, "B"] = selectedCase.BuyerFactor.ToString();
                 }
 
+                sheet.get_Range("B7", "F7").MergeCells = true;
+                sheet.Cells[7, "A"] = "协查意见书编号";
+                List<ClientReview> reviewList = selectedCase.ClientReviews;
+                if (reviewList != null)
+                {
+                    String reviews = string.Empty;
+                    foreach (ClientReview review in reviewList)
+                    {
+                        reviews += review.ReviewNo + ";";
+                    }
+
+                    sheet.Cells[7, "B"] = reviews;
+                }
 
                 sheet.Cells[4, "G"] = "总手续费率";
                 sheet.get_Range(sheet.Cells[4, "H"], sheet.Cells[4, "I"]).MergeCells = true;
@@ -376,34 +389,46 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[9, "Q"] = "利息";
                 sheet.Cells[9, "R"] = "备注";
 
+                sheet.get_Range("A4", "I7").Borders.LineStyle = 1;
+                sheet.get_Range("M4", "N8").Borders.LineStyle = 1;
+                sheet.get_Range("P4", "Q8").Borders.LineStyle = 1;
+
                 int row = 10;
                 foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
                 {
                     foreach (Invoice invoice in batch.Invoices)
                     {
                         sheet.Cells[row, "A"] = "'" + invoice.InvoiceNo;
-                        sheet.Cells[row, "B"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.AssignAmount);
-                        sheet.Cells[row, "C"] = String.Format("{0:yyyy/MM/dd}", invoice.InvoiceDate);
-                        sheet.Cells[row, "D"] = String.Format("{0:yyyy/MM/dd}", invoice.DueDate);
-                        sheet.Cells[row, "E"] = String.Format("{0:yyyy/MM/dd}", batch.AssignDate);
+                        sheet.Cells[row, "B"] = invoice.AssignAmount;
+                        sheet.Cells[row, "C"] = invoice.InvoiceDate;
+                        sheet.Cells[row, "D"] = invoice.DueDate;
+                        sheet.Cells[row, "E"] = batch.AssignDate;
                         sheet.Cells[row, "F"] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
-                        sheet.Cells[row, "G"] = String.Format("{0} {1:N2}", invoice.FinanceCurrency, invoice.FinanceAmount);
-                        sheet.Cells[row, "H"] = String.Format("{0:yyyy/MM/dd}", invoice.FinanceDate);
-                        sheet.Cells[row, "I"] = String.Format("{0:yyyy/MM/dd}", invoice.FinanceDueDate);
-                        sheet.Cells[row, "J"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.PaymentAmount);
-                        sheet.Cells[row, "K"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.AssignOutstanding);
-                        sheet.Cells[row, "L"] = String.Format("{0:yyyy/MM/dd}", invoice.PaymentDate);
-                        sheet.Cells[row, "M"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.RefundAmount);
-                        sheet.Cells[row, "N"] = String.Format("{0:yyyy/MM/dd}", invoice.RefundDate);
-                        sheet.Cells[row, "O"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.Commission);
-                        sheet.Cells[row, "P"] = String.Format("{0:yyyy/MM/dd}", invoice.CommissionDate);
-                        sheet.Cells[row, "Q"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, invoice.Interest);
+                        sheet.Cells[row, "G"] = invoice.FinanceAmount;
+                        sheet.Cells[row, "H"] = invoice.FinanceDate;
+                        sheet.Cells[row, "I"] = invoice.FinanceDueDate;
+                        sheet.Cells[row, "J"] = invoice.PaymentAmount;
+                        sheet.Cells[row, "K"] = invoice.AssignOutstanding;
+                        sheet.Cells[row, "L"] = invoice.PaymentDate;
+                        sheet.Cells[row, "M"] = invoice.RefundAmount;
+                        sheet.Cells[row, "N"] = invoice.RefundDate;
+                        sheet.Cells[row, "O"] = invoice.Commission;
+                        sheet.Cells[row, "P"] = invoice.CommissionDate;
+                        sheet.Cells[row, "Q"] = invoice.Interest;
                         sheet.Cells[row, "R"] = invoice.Comment;
+                        sheet.get_Range(sheet.Cells[row, "G"], sheet.Cells[row, "G"]).NumberFormatLocal = TypeUtil.GetExcelCurrency(invoice.InvoiceFinanceBatch.BatchCurrency);
+                        sheet.get_Range(sheet.Cells[row, "M"], sheet.Cells[row, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurrency(invoice.InvoiceFinanceBatch.BatchCurrency);
                         row++;
                     }
                 }
 
+                string currencyFormat = TypeUtil.GetExcelCurrency(selectedCase.InvoiceCurrency);
                 sheet.get_Range(sheet.Cells[9, "A"], sheet.Cells[row - 1, "R"]).Borders.LineStyle = 1;
+                sheet.get_Range(sheet.Cells[10, "B"], sheet.Cells[row - 1, "B"]).NumberFormatLocal = currencyFormat;
+                sheet.get_Range(sheet.Cells[10, "J"], sheet.Cells[row - 1, "J"]).NumberFormatLocal = currencyFormat;
+                sheet.get_Range(sheet.Cells[10, "K"], sheet.Cells[row - 1, "K"]).NumberFormatLocal = currencyFormat;
+                sheet.get_Range(sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]).NumberFormatLocal = currencyFormat;
+                sheet.get_Range(sheet.Cells[10, "Q"], sheet.Cells[row - 1, "Q"]).NumberFormatLocal = currencyFormat;
 
                 foreach (Range range in sheet.UsedRange.Rows)
                 {

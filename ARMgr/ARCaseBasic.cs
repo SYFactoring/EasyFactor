@@ -273,6 +273,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.buyerEDICodeTextBox.Text = this.Case.BuyerCode;
             this.tbNetPaymentTerm.Text = String.Format("{0:G}", this.Case.NetPaymentTerm);
             this.buyerNameTextBox.Text = this.Case.BuyerClient == null ? string.Empty : this.Case.BuyerClient.ToString();
+            this.tbSellerAssignOutstanding.Text = String.Format("{0:N2}", this.Case.SellerClient.GetAssignOutstanding(this.Case.InvoiceCurrency));
 
             switch (this.Case.TransactionType)
             {
@@ -285,6 +286,7 @@ namespace CMBC.EasyFactor.ARMgr
                     this.factorNameTextBox.Text = this.Case.BuyerFactor.ToString();
                     this.PMTextBox.Text = this.Case.SellerClient.PMName;
                     this.RMTextBox.Text = this.Case.SellerClient.RMName;
+                    this.tbTotalFinanceOustanding.Text = this.Case.SellerClient.GetFinanceOutstanding(this.Case.InvoiceCurrency);
                     break;
                 case "国内买方保理":
                 case "进口保理":
@@ -292,6 +294,7 @@ namespace CMBC.EasyFactor.ARMgr
                     this.factorNameTextBox.Text = this.Case.SellerFactor.ToString();
                     this.PMTextBox.Text = this.Case.BuyerClient.PMName;
                     this.RMTextBox.Text = this.Case.BuyerClient.RMName;
+                    this.tbTotalFinanceOustanding.Text = this.Case.BuyerClient.GetFinanceOutstanding(this.Case.InvoiceCurrency);
                     break;
                 default: break;
             }

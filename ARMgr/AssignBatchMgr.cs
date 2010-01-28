@@ -764,7 +764,7 @@ namespace CMBC.EasyFactor.ARMgr
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
-            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 220, 3, 170, 30);
+            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 240, 3, 170, 30);
 
             Client seller = selectedBatch.Case.SellerClient;
             Client buyer = selectedBatch.Case.BuyerClient;
@@ -809,13 +809,14 @@ namespace CMBC.EasyFactor.ARMgr
                     {
                         flawOtherReason = invoice.FlawOtherReason;
                     }
+
+                    row++;
                 }
-                row++;
             }
 
-            sheet.get_Range(sheet.Cells[9, 1], sheet.Cells[row - 1, 6]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-            sheet.get_Range(sheet.Cells[10, 3], sheet.Cells[row - 1, 3]).NumberFormatLocal = "¥#,##0.00";
-            sheet.get_Range(sheet.Cells[10, 6], sheet.Cells[row - 1, 6]).NumberFormatLocal = "¥#,##0.00";
+            sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[row - 1, 6]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            sheet.get_Range(sheet.Cells[9, 3], sheet.Cells[row - 1, 3]).NumberFormatLocal = "¥#,##0.00";
+            sheet.get_Range(sheet.Cells[9, 6], sheet.Cells[row - 1, 6]).NumberFormatLocal = "¥#,##0.00";
 
             sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
             sheet.Cells[row, 1] = "原因：";

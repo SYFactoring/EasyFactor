@@ -7,43 +7,18 @@
 namespace CMBC.EasyFactor.Utils
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Windows.Forms;
     using System.Text.RegularExpressions;
+    using System.Windows.Forms;
 
     /// <summary>
     /// 
     /// </summary>
     public class TypeUtil
     {
-        #region Methods (8)
+		#region Methods (11) 
 
-        // Public Methods (8) 
-        public static string ToPrintCurrencyWord(string currency)
-        {
-            if ("CNY".Equals(currency))
-            {
-                return "人民币";
-            }
-            else
-            {
-                return currency;
-            }
-        }
+		// Public Methods (11) 
 
-        public static string ToPrintCurrency(string currency)
-        {
-            if ("CNY".Equals(currency))
-            {
-                return "RMB";
-            }
-            else
-            {
-                return currency;
-            }
-        }
         /// <summary>
         /// 
         /// </summary>
@@ -72,6 +47,38 @@ namespace CMBC.EasyFactor.Utils
             else
             {
                 return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool ConvertStrToBool(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            string str = String.Format("{0:G}", obj);
+            if (string.Empty.Equals(str))
+            {
+                return false;
+            }
+
+            if ("Y".Equals(str))
+            {
+                return true;
+            }
+            else if ("N".Equals(str))
+            {
+                return false;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -116,38 +123,6 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public static bool ConvertStrToBool(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            string str = String.Format("{0:G}", obj);
-            if (string.Empty.Equals(str))
-            {
-                return false;
-            }
-
-            if ("Y".Equals(str))
-            {
-                return true;
-            }
-            else if ("N".Equals(str))
-            {
-                return false;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="double1"></param>
         /// <returns></returns>
         public static bool EqualsZero(double? double1)
@@ -175,6 +150,24 @@ namespace CMBC.EasyFactor.Utils
                 {
                     e.Value = (result * 100) + "%";
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public static string GetExcelCurrency(string currency)
+        {
+            switch (currency)
+            {
+                case "CNY":
+                    return "¥#,##0.00";
+                case "USD":
+                    return "$#,##0.00";
+                default:
+                    return "#,##0.00";
             }
         }
 
@@ -226,6 +219,40 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
-        #endregion Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public static string ToPrintCurrency(string currency)
+        {
+            if ("CNY".Equals(currency))
+            {
+                return "RMB";
+            }
+            else
+            {
+                return currency;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public static string ToPrintCurrencyWord(string currency)
+        {
+            if ("CNY".Equals(currency))
+            {
+                return "人民币";
+            }
+            else
+            {
+                return currency;
+            }
+        }
+
+		#endregion Methods 
     }
 }

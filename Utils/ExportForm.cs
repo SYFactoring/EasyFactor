@@ -740,7 +740,7 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.CreateUserName;
                     }
                     //还款
-                    column = 39;
+                    column = 40;
                     datasheet.Cells[row + 2, column++] = invoice.RefundAmount;
                     //手续费
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
