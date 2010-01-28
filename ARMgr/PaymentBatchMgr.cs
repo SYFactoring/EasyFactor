@@ -22,11 +22,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private BindingSource bs;
+        private Case _case;
         /// <summary>
         /// 
         /// </summary>
-        private Case _case;
+        private BindingSource bs;
         /// <summary>
         /// 
         /// </summary>
@@ -136,43 +136,59 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            foreach (DataGridViewRow row in this.dgvBatches.SelectedRows)
+
+            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            if (MessageBox.Show("是否确认复核通过该批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
-                InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[row.Index];
-                batch.CheckStatus = "已复核";
-                batch.CheckUserName = App.Current.CurUser.Name;
-                batch.CheckDate = DateTime.Now.Date;
+                return;
             }
+
+            batch.CheckStatus = "已复核";
+            batch.CheckUserName = App.Current.CurUser.Name;
+            batch.CheckDate = DateTime.Now.Date;
+
             App.Current.DbContext.SubmitChanges();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteBatch(object sender, EventArgs e)
         {
             if (this.dgvBatches.SelectedRows.Count == 0)
             {
                 return;
             }
+
             InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (MessageBox.Show("是否打算删除此" + selectedBatch.BatchCount + "条付款记录", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            if (MessageBox.Show("是否打算删除此" + selectedBatch.BatchCount + "条付款记录", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
-                foreach (InvoicePaymentLog log in selectedBatch.InvoicePaymentLogs)
-                {
-                    Invoice invoice = log.Invoice;
-                    log.Invoice = null;
-                    invoice.CaculatePayment();
-                    App.Current.DbContext.InvoicePaymentLogs.DeleteOnSubmit(log);
-                } App.Current.DbContext.InvoicePaymentBatches.DeleteOnSubmit(selectedBatch);
-                try
-                {
-                    App.Current.DbContext.SubmitChanges();
-                }
-                catch (Exception e1)
-                {
-                    MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
+                return;
             }
+
+            foreach (InvoicePaymentLog log in selectedBatch.InvoicePaymentLogs)
+            {
+                Invoice invoice = log.Invoice;
+                log.Invoice = null;
+                invoice.CaculatePayment();
+                App.Current.DbContext.InvoicePaymentLogs.DeleteOnSubmit(log);
+            }
+
+            App.Current.DbContext.InvoicePaymentBatches.DeleteOnSubmit(selectedBatch);
+            try
+            {
+                App.Current.DbContext.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
+
         }
 
         /// <summary>
@@ -209,6 +225,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvBatches_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewColumn column = this.dgvBatches.Columns[e.ColumnIndex];
@@ -230,18 +251,15 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                dgvBatches.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgvBatches.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgvBatches.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvBatches.RowHeadersDefaultCellStyle.Font, rectangle, dgvBatches.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -251,31 +269,22 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
         {
-            //if (opBatchType == OpBatchType.QUERY || opBatchType == OpBatchType.CHECK)
-            //{
-                DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
-                DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
-                string status = this.cbCheckStatus.Text;
-                string paymentType = this.cbPaymentType.Text;
-                string createUserName = this.tbCreateUserName.Text;
+            DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
+            DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
+            string status = this.cbCheckStatus.Text;
+            string paymentType = this.cbPaymentType.Text;
+            string createUserName = this.tbCreateUserName.Text;
 
-                var queryResult = App.Current.DbContext.InvoicePaymentBatches.Where(i =>
-                    i.PaymentBatchNo.Contains(this.tbPaymentBatchNo.Text)
-                    && (beginDate != this.dateFrom.MinDate ? i.PaymentDate >= beginDate : true)
-                    && (endDate != this.dateTo.MinDate ? i.PaymentDate <= endDate : true)
-                    && (status != string.Empty ? i.CheckStatus == status : true)
-                    && (paymentType != string.Empty ? i.PaymentType == paymentType : true)
-                    && (i.CreateUserName.Contains(createUserName))
-                    );
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-            //}
-            //else if (opBatchType == OpBatchType.DETAIL)
-            //{
-            //    var queryResult = this._case.InvoicePaymentBatches.Where(i => i.PaymentBatchNo.Contains(this.tbPaymentBatchNo.Text));
-            //    this.bs.DataSource = queryResult;
-            //    this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-            //}
+            var queryResult = App.Current.DbContext.InvoicePaymentBatches.Where(i =>
+                i.PaymentBatchNo.Contains(this.tbPaymentBatchNo.Text)
+                && (beginDate != this.dateFrom.MinDate ? i.PaymentDate >= beginDate : true)
+                && (endDate != this.dateTo.MinDate ? i.PaymentDate <= endDate : true)
+                && (status != string.Empty ? i.CheckStatus == status : true)
+                && (paymentType != string.Empty ? i.PaymentType == paymentType : true)
+                && (i.CreateUserName.Contains(createUserName))
+                );
+            this.bs.DataSource = queryResult;
+            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
         /// <summary>
@@ -289,13 +298,18 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            foreach (DataGridViewRow row in this.dgvBatches.SelectedRows)
+
+
+            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            if (MessageBox.Show("是否确认复核退回该批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
-                InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[row.Index];
-                batch.CheckStatus = "复核未通过";
-                batch.CheckUserName = App.Current.CurUser.Name;
-                batch.CheckDate = DateTime.Now.Date;
+                return;
             }
+
+            batch.CheckStatus = "复核未通过";
+            batch.CheckUserName = App.Current.CurUser.Name;
+            batch.CheckDate = DateTime.Now.Date;
+
             App.Current.DbContext.SubmitChanges();
         }
 
@@ -310,6 +324,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
             this.Selected = selectedBatch;
             if (this.OwnerForm != null)

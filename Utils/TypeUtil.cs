@@ -163,6 +163,24 @@ namespace CMBC.EasyFactor.Utils
             switch (currency)
             {
                 case "CNY":
+                    return "[$CNY] #,##0.00";
+                case "USD":
+                    return "[$USD] #,##0.00";
+                default:
+                    return "#,##0.00";
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public static string GetExcelCurr(string currency)
+        {
+            switch (currency)
+            {
+                case "CNY":
                     return "¥#,##0.00";
                 case "USD":
                     return "$#,##0.00";

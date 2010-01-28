@@ -416,13 +416,13 @@ namespace CMBC.EasyFactor.CaseMgr
                         sheet.Cells[row, "P"] = invoice.CommissionDate;
                         sheet.Cells[row, "Q"] = invoice.Interest;
                         sheet.Cells[row, "R"] = invoice.Comment;
-                        sheet.get_Range(sheet.Cells[row, "G"], sheet.Cells[row, "G"]).NumberFormatLocal = TypeUtil.GetExcelCurrency(invoice.InvoiceFinanceBatch.BatchCurrency);
-                        sheet.get_Range(sheet.Cells[row, "M"], sheet.Cells[row, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurrency(invoice.InvoiceFinanceBatch.BatchCurrency);
+                        sheet.get_Range(sheet.Cells[row, "G"], sheet.Cells[row, "G"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoice.InvoiceFinanceBatch.BatchCurrency);
+                        sheet.get_Range(sheet.Cells[row, "M"], sheet.Cells[row, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoice.InvoiceFinanceBatch.BatchCurrency);
                         row++;
                     }
                 }
 
-                string currencyFormat = TypeUtil.GetExcelCurrency(selectedCase.InvoiceCurrency);
+                string currencyFormat = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
                 sheet.get_Range(sheet.Cells[9, "A"], sheet.Cells[row - 1, "R"]).Borders.LineStyle = 1;
                 sheet.get_Range(sheet.Cells[10, "B"], sheet.Cells[row - 1, "B"]).NumberFormatLocal = currencyFormat;
                 sheet.get_Range(sheet.Cells[10, "J"], sheet.Cells[row - 1, "J"]).NumberFormatLocal = currencyFormat;
