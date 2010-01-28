@@ -1590,26 +1590,30 @@ namespace CMBC.EasyFactor.Utils
                         invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
                         if (!invoice.Commission.HasValue)
                         {
-                            switch (curCase.ActiveCDA.CommissionType)
+                            CDA cda = curCase.ActiveCDA;
+                            if (cda != null)
                             {
-                                case "按融资金额":
-                                    invoice.Commission = invoice.FinanceAmount * curCase.ActiveCDA.Price;
-                                    if (invoice.Commission.HasValue)
-                                    {
-                                        invoice.CommissionDate = invoice.FinanceDate;
-                                    }
+                                switch (cda.CommissionType)
+                                {
+                                    case "按融资金额":
+                                        invoice.Commission = invoice.FinanceAmount * cda.Price;
+                                        if (invoice.Commission.HasValue)
+                                        {
+                                            invoice.CommissionDate = invoice.FinanceDate;
+                                        }
 
-                                    break;
-                                case "按发票金额":
-                                    invoice.Commission = invoice.AssignAmount * curCase.ActiveCDA.Price;
-                                    if (invoice.Commission.HasValue)
-                                    {
-                                        invoice.CommissionDate = invoice.InvoiceAssignBatch.AssignDate;
-                                    }
+                                        break;
+                                    case "按发票金额":
+                                        invoice.Commission = invoice.AssignAmount * cda.Price;
+                                        if (invoice.Commission.HasValue)
+                                        {
+                                            invoice.CommissionDate = invoice.InvoiceAssignBatch.AssignDate;
+                                        }
 
-                                    break;
-                                default:
-                                    break;
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
                         }
 
