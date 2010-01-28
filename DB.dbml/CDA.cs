@@ -196,16 +196,16 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (contract.ContractType == "新合同")
                 {
-                    CDA formerCDA = App.Current.DbContext.CDAs.OrderByDescending(c => c.CDACode).FirstOrDefault(c => c.CDACode.StartsWith(contract.ContractCode));
-                    if (formerCDA == null)
+                    var queryResult = from cda in App.Current.DbContext.CDAs
+                                      where cda.CDACode.StartsWith(contract.ContractCode)
+                                      select cda.CDACode;
+                    int count =0 ;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(no.LastIndexOf("-")+1)), out count))
                     {
-                        return string.Format("{0}-{1:000}", contract.ContractCode, 1);
+                        count = 0;
                     }
-                    else
-                    {
-                        int index = Int32.Parse(formerCDA.CDACode.Substring(formerCDA.CDACode.LastIndexOf("-") + 1));
-                        return String.Format("{0}-{1:000}", contract.ContractCode, index + 1);
-                    }
+                    
+                    return String.Format("{0}-{1:000}", contract.ContractCode, count + 1);
                 }
                 else
                 {
@@ -214,7 +214,16 @@ namespace CMBC.EasyFactor.DB.dbml
             }
             else if (selectedCase.TransactionType == "进口保理")
             {
-                return String.Format("{0}XXX-{1:000}", selectedCase.CaseCode, selectedCase.CDAs.Count + 1);
+                var queryResult = from cda in App.Current.DbContext.CDAs
+                                  where cda.CDACode.StartsWith(selectedCase.CaseCode)
+                                  select cda.CDACode;
+                int count = 0;
+                if (!Int32.TryParse(queryResult.Max(no => no.Substring(no.LastIndexOf("-") + 1)), out count))
+                {
+                    count = 0;
+                }
+
+                return String.Format("{0}XXX-{1:000}", selectedCase.CaseCode, count + 1);
             }
             else
             {

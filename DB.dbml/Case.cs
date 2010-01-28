@@ -8,6 +8,8 @@ namespace CMBC.EasyFactor.DB.dbml
 {
     using System.Linq;
     using CMBC.EasyFactor.Utils;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -100,5 +102,92 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         #endregion Properties
+
+        #region Methods (1)
+
+        // Public Methods (1) 
+
+        /// <summary>
+        /// Generate Case code
+        /// </summary>
+        /// <returns></returns>
+        public string GenerateCaseCode()
+        {
+            string caseCode = null;
+            string yearMonth = String.Format("{0:yyyy}{0:MM}", DateTime.Today);
+            string prefix = null;
+            int count = 0;
+            IEnumerable<string> queryResult;
+
+            switch (TransactionType)
+            {
+                case "国内卖方保理":
+
+                case "国内买方保理":
+                    prefix = "LF" + yearMonth;
+                    queryResult = from c in App.Current.DbContext.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(8)), out count))
+                    {
+                        count = 0;
+                    }
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                case "出口保理":
+                    prefix = "EF" + yearMonth;
+                    queryResult = from c in App.Current.DbContext.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(8)), out count))
+                    {
+                        count = 0;
+                    }
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                case "进口保理":
+                    prefix = "IF" + yearMonth;
+                    queryResult = from c in App.Current.DbContext.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(8)), out count))
+                    {
+                        count = 0;
+                    }
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                case "国际信保保理":
+
+                case "国内信保保理":
+                    prefix = "SF" + yearMonth;
+                    queryResult = from c in App.Current.DbContext.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(8)), out count))
+                    {
+                        count = 0;
+                    }
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                case "租赁保理":
+                    prefix = "LF" + yearMonth;
+                    queryResult = from c in App.Current.DbContext.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(8)), out count))
+                    {
+                        count = 0;
+                    }
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                default:
+                    caseCode = string.Empty;
+                    break;
+            }
+
+            return caseCode;
+        }
+
+        #endregion Methods
     }
 }

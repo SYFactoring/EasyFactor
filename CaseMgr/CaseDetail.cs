@@ -537,43 +537,6 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// Generate Case code
-        /// </summary>
-        /// <returns></returns>
-        private string GenerateCaseCode(Case curCase)
-        {
-            string caseCode = null;
-            string yearMonth = String.Format("{0:yyyy}{0:MM}", DateTime.Today);
-            switch (curCase.TransactionType)
-            {
-                case "国内卖方保理":
-
-                case "国内买方保理":
-                    caseCode = "LF" + yearMonth + "-" + String.Format("{0:D3}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("LF" + yearMonth)) + 1);
-                    break;
-                case "出口保理":
-                    caseCode = "EF" + yearMonth + "-" + String.Format("{0:D3}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("LF" + yearMonth)) + 1);
-                    break;
-                case "进口保理":
-                    caseCode = "IF" + yearMonth + "-" + String.Format("{0:D3}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("IF" + yearMonth)) + 1);
-                    break;
-                case "国际信保保理":
-
-                case "国内信保保理":
-                    caseCode = "SF" + yearMonth + "-" + String.Format("{0:D3}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("SF" + yearMonth)) + 1);
-                    break;
-                case "租赁保理":
-                    caseCode = "LF" + yearMonth + "-" + String.Format("{0:D3}", App.Current.DbContext.Cases.Count(c => c.CaseCode.StartsWith("LF" + yearMonth)) + 1);
-                    break;
-                default:
-                    caseCode = string.Empty;
-                    break;
-            }
-
-            return caseCode;
-        }
-
-        /// <summary>
         /// Create new CDA
         /// </summary>
         /// <param name="sender"></param>
@@ -690,7 +653,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 bool isAddOK = true;
                 try
                 {
-                    curCase.CaseCode = this.GenerateCaseCode(curCase);
+                    curCase.CaseCode = curCase.GenerateCaseCode();
                     App.Current.DbContext.Cases.InsertOnSubmit(curCase);
                     App.Current.DbContext.SubmitChanges();
                 }
