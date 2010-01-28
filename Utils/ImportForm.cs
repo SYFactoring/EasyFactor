@@ -655,6 +655,12 @@ namespace CMBC.EasyFactor.Utils
                         int column = 3;
                         ClientReview review = new ClientReview();
                         review.ReviewNo = String.Format("{0:G}", valueArray[row, column++]);
+                        review.RequestCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                        review.RequestAmount = (System.Nullable<double>)valueArray[row, column++];
+                        review.RequestFinanceType = String.Format("{0:G}", valueArray[row, column++]);
+                        review.RequestFinanceType2 = String.Format("{0:G}", valueArray[row, column++]);
+                        review.RequestFinancePeriod = (System.Nullable<int>)valueArray[row, column++];
+                        review.RequestCommissionRate = (System.Nullable<double>)valueArray[row, column++];
                         review.ReviewStatus = String.Format("{0:G}", valueArray[row, column++]);
                         review.ReviewDate = (DateTime)valueArray[row, column++];
                         review.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
