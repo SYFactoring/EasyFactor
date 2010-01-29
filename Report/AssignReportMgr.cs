@@ -500,13 +500,16 @@ namespace CMBC.EasyFactor.Report
                     double total = 0;
                     foreach (Invoice invoice in buyerGroup)
                     {
-                        sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
-                        sheet.Cells[row, 2] = invoice.AssignAmount;
-                        sheet.Cells[row, 3] = invoice.InvoiceDate;
-                        sheet.Cells[row, 4] = invoice.DueDate;
-                        sheet.Cells[row, 5] = invoice.Comment;
-                        total += invoice.AssignAmount;
-                        row++;
+                        if (invoice.IsFlaw == false)
+                        {
+                            sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
+                            sheet.Cells[row, 2] = invoice.AssignAmount;
+                            sheet.Cells[row, 3] = invoice.InvoiceDate;
+                            sheet.Cells[row, 4] = invoice.DueDate;
+                            sheet.Cells[row, 5] = invoice.Comment;
+                            total += invoice.AssignAmount;
+                            row++;
+                        }
                     }
                     sheet.Cells[row, 1] = "小计";
                     sheet.Cells[row, 2] = String.Format("{0:N2}", total);
