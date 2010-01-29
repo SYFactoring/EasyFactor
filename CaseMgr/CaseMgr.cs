@@ -422,9 +422,19 @@ namespace CMBC.EasyFactor.CaseMgr
                 string currencyFormat = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
                 sheet.get_Range(sheet.Cells[9, "A"], sheet.Cells[row - 1, "R"]).Borders.LineStyle = 1;
                 sheet.get_Range(sheet.Cells[10, "B"], sheet.Cells[row - 1, "B"]).NumberFormatLocal = currencyFormat;
+                sheet.get_Range(sheet.Cells[10, "C"], sheet.Cells[row - 1, "C"]).NumberFormatLocal = "yyyy-MM-dd";
+                sheet.get_Range(sheet.Cells[10, "D"], sheet.Cells[row - 1, "D"]).NumberFormatLocal = "yyyy-MM-dd";
+                sheet.get_Range(sheet.Cells[10, "E"], sheet.Cells[row - 1, "E"]).NumberFormatLocal = "yyyy-MM-dd";
+                sheet.get_Range(sheet.Cells[10, "G"], sheet.Cells[row - 1, "G"]).NumberFormatLocal = currencyFormat;
+                sheet.get_Range(sheet.Cells[10, "H"], sheet.Cells[row - 1, "H"]).NumberFormatLocal = "yyyy-MM-dd";
+                sheet.get_Range(sheet.Cells[10, "I"], sheet.Cells[row - 1, "I"]).NumberFormatLocal = "yyyy-MM-dd";
                 sheet.get_Range(sheet.Cells[10, "J"], sheet.Cells[row - 1, "J"]).NumberFormatLocal = currencyFormat;
                 sheet.get_Range(sheet.Cells[10, "K"], sheet.Cells[row - 1, "K"]).NumberFormatLocal = currencyFormat;
+                sheet.get_Range(sheet.Cells[10, "L"], sheet.Cells[row - 1, "L"]).NumberFormatLocal = "yyyy-MM-dd";
+                sheet.get_Range(sheet.Cells[10, "M"], sheet.Cells[row - 1, "M"]).NumberFormatLocal = currencyFormat;
+                sheet.get_Range(sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]).NumberFormatLocal = "yyyy-MM-dd";
                 sheet.get_Range(sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]).NumberFormatLocal = currencyFormat;
+                sheet.get_Range(sheet.Cells[10, "P"], sheet.Cells[row - 1, "P"]).NumberFormatLocal = "yyyy-MM-dd";
                 sheet.get_Range(sheet.Cells[10, "Q"], sheet.Cells[row - 1, "Q"]).NumberFormatLocal = currencyFormat;
 
                 foreach (Range range in sheet.UsedRange.Rows)

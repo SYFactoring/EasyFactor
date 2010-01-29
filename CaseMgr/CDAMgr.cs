@@ -503,14 +503,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.get_Range(sheet.Cells[26, 1], sheet.Cells[26, 2]).RowHeight = 40;
 
                 sheet.get_Range(sheet.Cells[29, 1], sheet.Cells[29, 2]).MergeCells = true;
-                sheet.Cells[29, 1] = "客户经理                                   保理部门主管";
+                sheet.Cells[29, 1] = "客户经理                                                保理部门主管";
                 sheet.get_Range(sheet.Cells[30, 1], sheet.Cells[30, 2]).MergeCells = true;
-                sheet.Cells[30, 1] = "日期： 年   月   日                        日期： 年   月   日";
+                sheet.Cells[30, 1] = "日期：     年   月   日                             日期：     年   月   日";
 
                 sheet.Cells[32, 1] = "同意并签回";
 
                 sheet.get_Range(sheet.Cells[35, 1], sheet.Cells[35, 2]).MergeCells = true;
-                sheet.Cells[35, 1] = String.Format("客户： {0,-20}  {1}", selectedCDA.SellerName, "日期： 年   月   日");
+                sheet.Cells[35, 1] = String.Format("客户： {0,-20}   {1}", selectedCDA.SellerName, "日期：      年   月   日");
 
                 sheet.UsedRange.Font.Name = "仿宋_GB2312";
                 sheet.UsedRange.Font.Size = 12;
