@@ -661,18 +661,23 @@ namespace CMBC.EasyFactor.ARMgr
 
             row++;
             int invoiceStart = row;
+            double assignAmount = 0;
             foreach (Invoice invoice in selectedBatch.Invoices)
             {
-                sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
-                sheet.Cells[row, 2] = invoice.AssignAmount;
-                sheet.Cells[row, 3] = invoice.InvoiceDate;
-                sheet.Cells[row, 4] = invoice.DueDate;
-                sheet.Cells[row, 5] = invoice.Comment;
-                row++;
+                if (invoice.IsFlaw == false)
+                {
+                    sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
+                    sheet.Cells[row, 2] = invoice.AssignAmount;
+                    sheet.Cells[row, 3] = invoice.InvoiceDate;
+                    sheet.Cells[row, 4] = invoice.DueDate;
+                    sheet.Cells[row, 5] = invoice.Comment;
+                    assignAmount += invoice.AssignAmount;
+                    row++;
+                }
             }
 
             sheet.Cells[row, 1] = "小计";
-            sheet.Cells[row, 2] = selectedBatch.AssignAmount;
+            sheet.Cells[row, 2] = assignAmount;
 
             int invoiceEnd = row;
 
