@@ -511,7 +511,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void MgrDepartments(object sender, EventArgs e)
         {
-            DepartmentMgr departmentMgrUI = new DepartmentMgr(true);
+            DepartmentMgr departmentMgrUI = new DepartmentMgr();
             this.SetDetailPanel(departmentMgrUI);
         }
 

@@ -26,7 +26,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// Initializes a new instance of the DepartmentMgr class
         /// </summary>
         /// <param name="isEditable"></param>
-        public DepartmentMgr(bool isEditable)
+        public DepartmentMgr()
         {
             this.InitializeComponent();
             this.bs = new BindingSource();
@@ -130,7 +130,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                              (d.DepartmentCode == null ? string.Empty : d.DepartmentCode).Contains(this.tbDepartmentCode.Text)
                           && (d.DepartmentName == null ? string.Empty : d.DepartmentName).Contains(this.tbDepartmentName.Text));
 
-            this.dgvDepts.DataSource = queryResult;
+            this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
