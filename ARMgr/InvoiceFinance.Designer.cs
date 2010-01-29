@@ -496,7 +496,12 @@ namespace CMBC.EasyFactor.ARMgr
             "预付款",
             "卖方代付",
             "买方代付",
-            "其他"});
+            "银票",
+            "商票",
+            "国内信用证",
+            "国际信用证",
+            "其他",
+            "未知"});
             this.financeTypeComboBoxEx.Location = new System.Drawing.Point(80, 3);
             this.financeTypeComboBoxEx.Name = "financeTypeComboBoxEx";
             this.financeTypeComboBoxEx.Size = new System.Drawing.Size(100, 20);
