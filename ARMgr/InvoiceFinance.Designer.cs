@@ -318,7 +318,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeTypeLabel.Name = "financeTypeLabel";
             financeTypeLabel.Size = new System.Drawing.Size(59, 16);
             financeTypeLabel.TabIndex = 0;
-            financeTypeLabel.Text = "融资类型:";
+            financeTypeLabel.Text = "出账方式:";
             // 
             // lblTotalInterest
             // 

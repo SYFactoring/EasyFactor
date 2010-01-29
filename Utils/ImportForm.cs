@@ -75,6 +75,11 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
+            IMPORT_RATES,
+
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_CASES,
 
             /// <summary>
@@ -147,6 +152,9 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ImportType.IMPORT_DEPARTMENTS:
                     this.Text = "部门信息导入";
+                    break;
+                case ImportType.IMPORT_RATES:
+                    this.Text = "汇率信息导入";
                     break;
                 case ImportType.IMPORT_CASES:
                     this.Text = "案件信息导入";
@@ -226,6 +234,9 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ImportType.IMPORT_DEPARTMENTS:
                     e.Result = this.ImportDepartments((string)e.Argument, worker, e);
+                    break;
+                case ImportType.IMPORT_RATES:
+                    e.Result = this.ImportRates((string)e.Argument, worker, e);
                     break;
                 case ImportType.IMPORT_CASES:
                     e.Result = this.ImportCases((string)e.Argument, worker, e);
@@ -637,6 +648,59 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
+        private int ImportRates(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            object[,] valueArray = this.GetValueArray(fileName, 1);
+            int result = 0;
+            try
+            {
+                if (valueArray != null)
+                {
+                    int size = valueArray.GetUpperBound(0);
+                    for (int row = 2; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+
+                        string from = String.Format("{0:G}", valueArray[row, 1]);
+                        string to = String.Format("{0:G}", valueArray[row, 2]);
+                        Exchange exchange = App.Current.DbContext.Exchanges.SingleOrDefault(ex => ex.FromCurr == from && ex.ToCurr == to);
+                        if (exchange == null)
+                        {
+                            exchange = new Exchange();
+                            App.Current.DbContext.Exchanges.InsertOnSubmit(exchange);
+                        }
+                        exchange.ExchangeRate = (double)valueArray[row, 3];
+                        exchange.LastModifiedDate = DateTime.Now;
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    }
+
+                    App.Current.DbContext.SubmitChanges();
+                }
+            }
+            catch (Exception e1)
+            {
+                throw e1;
+            }
+
+            worker.ReportProgress(100);
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         private int ImportClientsReivew(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
@@ -655,7 +719,7 @@ namespace CMBC.EasyFactor.Utils
                             return -1;
                         }
 
-                        string clientEDICode = String.Format("{0:G}", valueArray[row, 2]);
+                        string clientEDICode = String.Format("{0:G}", valueArray[row, 1]);
                         if (String.Empty.Equals(clientEDICode))
                         {
                             continue;
