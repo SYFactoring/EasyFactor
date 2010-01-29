@@ -98,15 +98,23 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemExportSelectedInvoices = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSelectedInvoiceFull = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSelectedInvoiceOverDue = new System.Windows.Forms.ToolStripMenuItem();
+            this.dateTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.lblDatePicker = new DevComponents.DotNetBar.LabelX();
+            this.dateFrom = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.cmuInvoiceMgr.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
             this.SuspendLayout();
             // 
             // panelQuery
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.dateTo);
+            this.panelQuery.Controls.Add(this.lblDatePicker);
+            this.panelQuery.Controls.Add(this.dateFrom);
             this.panelQuery.Controls.Add(this.lblCaseMark);
             this.panelQuery.Controls.Add(this.cbCaseMark);
             this.panelQuery.Controls.Add(this.tbFinanceOverDueDays);
@@ -731,6 +739,111 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemSelectedInvoiceOverDue.Text = "逾期台帐格式";
             this.menuItemSelectedInvoiceOverDue.Click += new System.EventHandler(this.ExportSelectedInvoicesOverDue);
             // 
+            // dateTo
+            // 
+            // 
+            // 
+            // 
+            this.dateTo.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.dateTo.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.dateTo.ButtonDropDown.Visible = true;
+            this.dateTo.Location = new System.Drawing.Point(353, 54);
+            // 
+            // 
+            // 
+            this.dateTo.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.dateTo.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dateTo.MonthCalendar.BackgroundStyle.Class = "";
+            this.dateTo.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.dateTo.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.dateTo.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.dateTo.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.dateTo.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.dateTo.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.dateTo.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.dateTo.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.dateTo.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.dateTo.MonthCalendar.TodayButtonVisible = true;
+            this.dateTo.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.dateTo.Name = "dateTo";
+            this.dateTo.Size = new System.Drawing.Size(100, 20);
+            this.dateTo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.dateTo.TabIndex = 22;
+            // 
+            // lblDatePicker
+            // 
+            this.lblDatePicker.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblDatePicker.BackgroundStyle.Class = "";
+            this.lblDatePicker.Location = new System.Drawing.Point(194, 56);
+            this.lblDatePicker.Name = "lblDatePicker";
+            this.lblDatePicker.Size = new System.Drawing.Size(44, 16);
+            this.lblDatePicker.TabIndex = 20;
+            this.lblDatePicker.Text = "转让日";
+            // 
+            // dateFrom
+            // 
+            // 
+            // 
+            // 
+            this.dateFrom.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.dateFrom.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.dateFrom.ButtonDropDown.Visible = true;
+            this.dateFrom.Location = new System.Drawing.Point(247, 54);
+            // 
+            // 
+            // 
+            this.dateFrom.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.dateFrom.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dateFrom.MonthCalendar.BackgroundStyle.Class = "";
+            this.dateFrom.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.dateFrom.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.dateFrom.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.dateFrom.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.dateFrom.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.dateFrom.MonthCalendar.TodayButtonVisible = true;
+            this.dateFrom.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.dateFrom.Name = "dateFrom";
+            this.dateFrom.Size = new System.Drawing.Size(100, 20);
+            this.dateFrom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.dateFrom.TabIndex = 21;
+            // 
             // InvoiceMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -744,6 +857,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).EndInit();
             this.cmuInvoiceMgr.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dateTo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -807,5 +922,8 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemAllInvoiceOverDue;
         private System.Windows.Forms.ToolStripMenuItem menuItemSelectedInvoiceFull;
         private System.Windows.Forms.ToolStripMenuItem menuItemSelectedInvoiceOverDue;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTo;
+        private DevComponents.DotNetBar.LabelX lblDatePicker;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateFrom;
     }
 }

@@ -296,16 +296,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void dgvInvoices_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                dgvInvoices.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgvInvoices.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgvInvoices.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,                e.RowBounds.Location.Y,                dgvInvoices.RowHeadersWidth - 4,                e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),                dgvInvoices.RowHeadersDefaultCellStyle.Font,                rectangle,                dgvInvoices.RowHeadersDefaultCellStyle.ForeColor,                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -319,6 +311,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_OVERDUE);
             exportForm.StartExport(this.bs.List);
         }
@@ -334,6 +327,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_FULL);
             exportForm.StartExport(this.bs.List);
         }
@@ -365,6 +359,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_OVERDUE);
             exportForm.StartExport(GetSelectedInvoices());
         }
@@ -384,6 +379,7 @@ namespace CMBC.EasyFactor.ARMgr
                     selectedInvoices.Add(invoice);
                 }
             }
+
             return selectedInvoices;
         }
 
@@ -425,6 +421,7 @@ namespace CMBC.EasyFactor.ARMgr
                     selectedInvoices.Add(invoice);
                 }
             }
+
             if (selectedInvoices.Count == 1)
             {
                 InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoices[0], InvoiceDetail.OpInvoiceType.FLAW);
@@ -451,6 +448,8 @@ namespace CMBC.EasyFactor.ARMgr
             string isFlaw = this.cbIsFlaw.CheckValue as string;
             string isDispute = this.cbIsDispute.CheckValue as string;
             string caseMark = this.cbCaseMark.Text;
+            DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value.Date : this.dateFrom.MinDate;
+            DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value.Date : this.dateTo.MinDate;
 
             int assignOverDueDays = 0;
             DateTime assignOverDueDate = default(DateTime);
@@ -484,6 +483,8 @@ namespace CMBC.EasyFactor.ARMgr
                                 && (isDispute == "A" ? true : invoice.IsDispute == (isDispute == "Y" ? true : false))
                                 && (assignOverDueDays == 0 ? true : (invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount && invoice.DueDate <= assignOverDueDate))
                                 && (financeOverDueDays == 0 ? true : (invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() && invoice.FinanceDueDate <= financeOverDueDate))
+                                && (beginDate != this.dateFrom.MinDate ? invoice.InvoiceAssignBatch.AssignDate >= beginDate : true)
+                                && (endDate != this.dateTo.MinDate ? invoice.InvoiceAssignBatch.AssignDate <= endDate : true)
                               select invoice;
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());

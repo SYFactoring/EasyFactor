@@ -16,29 +16,25 @@ namespace CMBC.EasyFactor.CaseMgr
 
     public partial class CreditCoverNegMgr : UserControl
     {
-        #region Fields (2)
+		#region Fields (1) 
 
         /// <summary>
         /// 
         /// </summary>
-        private BindingSource bs = new BindingSource();
-        /// <summary>
-        /// flag indicates if editable
-        /// </summary>
-        private bool isEditable;
+        private BindingSource bs;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Constructors (1)
+		#region Constructors (1) 
 
         /// <summary>
         /// 
         /// </summary>
-        public CreditCoverNegMgr(bool isEditable)
+        public CreditCoverNegMgr()
         {
             InitializeComponent();
-            this.isEditable = isEditable;
             this.dgvCreditCoverNegs.AutoGenerateColumns = false;
+            this.bs = new BindingSource();
             this.dgvCreditCoverNegs.DataSource = this.bs;
             ControlUtil.SetDoubleBuffered(this.dgvCreditCoverNegs);
 
@@ -60,9 +56,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Gets or sets owner form
@@ -82,11 +78,11 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (8)
+		#region Methods (7) 
 
-        // Private Methods (8) 
+		// Private Methods (7) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -180,6 +176,17 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void dgvCreditCoverNegs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvCreditCoverNegs.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvCreditCoverNegs.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvCreditCoverNegs.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Query(object sender, EventArgs e)
         {
             DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
@@ -252,20 +259,6 @@ namespace CMBC.EasyFactor.CaseMgr
 
         }
 
-        #endregion Methods
-
-        private void dgvCreditCoverNegs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                this.dgvCreditCoverNegs.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                this.dgvCreditCoverNegs.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                this.dgvCreditCoverNegs.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
-        }
+		#endregion Methods 
     }
 }

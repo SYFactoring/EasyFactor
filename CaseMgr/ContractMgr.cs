@@ -27,10 +27,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// 
         /// </summary>
         private BindingSource bs;
-        /// <summary>
-        /// flag indicates if editable
-        /// </summary>
-        private bool isEditable;
 
         #endregion Fields
 
@@ -39,15 +35,15 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <summary>
         /// 
         /// </summary>
-        public ContractMgr(bool isEditable)
+        public ContractMgr()
         {
             this.InitializeComponent();
-            this.isEditable = isEditable;
             this.dgvContracts.AutoGenerateColumns = false;
-            this.UpdateEditableStatus();
-            bs = new BindingSource();
+            this.bs = new BindingSource();
             this.dgvContracts.DataSource = bs;
             ControlUtil.SetDoubleBuffered(this.dgvContracts);
+
+            this.UpdateContextMenu();
         }
 
         #endregion Constructors
@@ -74,9 +70,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Properties
 
-        #region Methods (10)
+        #region Methods (11)
 
-        // Private Methods (10) 
+        // Private Methods (11) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -154,6 +150,17 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void dgvContracts_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvContracts.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvContracts.RowHeadersDefaultCellStyle.Font, rectangle, dgvContracts.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportContracts(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -206,10 +213,10 @@ namespace CMBC.EasyFactor.CaseMgr
 
             var queryResult = from contract in App.Current.DbContext.Contracts
                               let client = contract.Client
-                              where client.ClientNameCN.Contains(clientName) || client.ClientNameEN.Contains(clientName) 
-                              where contract.ContractCode.Contains(contractCode)
-                              && contractStatus == string.Empty ? true : contract.ContractStatus == contractStatus
-                              && contract.CreateUserName.Contains(createUserName)
+                              where client.ClientNameCN.Contains(clientName) || client.ClientNameEN.Contains(clientName)
+                              where (contract.ContractCode.Contains(contractCode))
+                              && (contractStatus == string.Empty ? true : contract.ContractStatus == contractStatus)
+                              && (contract.CreateUserName.Contains(createUserName))
                               select contract;
 
             this.bs.DataSource = queryResult;
@@ -257,38 +264,14 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <summary>
         /// Update editable status
         /// </summary>
-        private void UpdateEditableStatus()
+        private void UpdateContextMenu()
         {
-            if (this.isEditable)
-            {
-                this.menuItemContractNew.Enabled = true;
-                this.menuItemContractUpdate.Enabled = true;
-                this.menuItemContractDelete.Enabled = true;
-                this.menuItemContractImport.Enabled = true;
-            }
-            else
-            {
-                this.menuItemContractNew.Enabled = false;
-                this.menuItemContractUpdate.Enabled = false;
-                this.menuItemContractDelete.Enabled = false;
-                this.menuItemContractImport.Enabled = false;
-            }
+            this.menuItemContractNew.Enabled = true;
+            this.menuItemContractUpdate.Enabled = true;
+            this.menuItemContractDelete.Enabled = true;
+            this.menuItemContractImport.Enabled = true;
         }
 
         #endregion Methods
-
-        private void dgvContracts_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                this.dgvContracts.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgvContracts.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgvContracts.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
-        }
     }
 }

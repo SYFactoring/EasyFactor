@@ -901,7 +901,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private void SelectFactor(object sender, EventArgs e)
         {
             Case curCase = (Case)this.caseBindingSource.DataSource;
-            FactorMgr factorMgr = new FactorMgr(false);
+            FactorMgr factorMgr = new FactorMgr();
             QueryForm queryUI = new QueryForm(factorMgr, "选择保理商");
             factorMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);

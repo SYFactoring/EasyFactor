@@ -522,7 +522,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void MgrFactors(object sender, EventArgs e)
         {
-            FactorMgr factorMgrUI = new FactorMgr(true);
+            FactorMgr factorMgrUI = new FactorMgr();
             this.SetDetailPanel(factorMgrUI);
         }
 
@@ -691,7 +691,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryContract(object sender, EventArgs e)
         {
-            ContractMgr contractMgr = new ContractMgr(true);
+            ContractMgr contractMgr = new ContractMgr();
             this.SetDetailPanel(contractMgr);
         }
 
@@ -702,7 +702,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryCreditCoverNegs(object sender, EventArgs e)
         {
-            CreditCoverNegMgr creditCoverNegMgr = new CreditCoverNegMgr(true);
+            CreditCoverNegMgr creditCoverNegMgr = new CreditCoverNegMgr();
             this.SetDetailPanel(creditCoverNegMgr);
         }
 
@@ -735,7 +735,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryFactors(object sender, EventArgs e)
         {
-            FactorMgr fatcorQuery = new FactorMgr(false);
+            FactorMgr fatcorQuery = new FactorMgr();
             this.SetDetailPanel(fatcorQuery);
         }
 

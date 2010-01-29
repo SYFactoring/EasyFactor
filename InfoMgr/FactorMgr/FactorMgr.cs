@@ -20,31 +20,27 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// </summary>
     public partial class FactorMgr : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         /// <summary>
         /// 
         /// </summary>
-        private BindingSource bs = new BindingSource();
-        /// <summary>
-        /// flag indicates if is editable
-        /// </summary>
-        private readonly bool isEditable;
+        private BindingSource bs;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the FactorMgrUI class
         /// </summary>
         /// <param name="isEditable">true if editable</param>
-        public FactorMgr(bool isEditable)
+        public FactorMgr()
         {
             this.InitializeComponent();
+            this.bs = new BindingSource();
+            this.dgvFactors.DataSource = this.bs;
             this.dgvFactors.AutoGenerateColumns = false;
-            this.isEditable = isEditable;
-            this.UpdateEditableStatus();
             ControlUtil.SetDoubleBuffered(this.dgvFactors);
 
             List<Country> countryList = Country.AllCountries().ToList();
@@ -52,11 +48,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.cbCountry.DataSource = countryList;
             this.cbCountry.DisplayMember = "CountryFormatEN";
             this.cbCountry.ValueMember = "CountryNameEN";
+
+            this.UpdateContextMenu();
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets onwer form
@@ -76,11 +74,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (12) 
+        #region Methods (12)
 
-		// Private Methods (12) 
+        // Private Methods (12) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -186,16 +184,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void dgvFactors_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                this.dgvFactors.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                this.dgvFactors.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                this.dgvFactors.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,                e.RowBounds.Location.Y,                this.dgvFactors.RowHeadersWidth - 4,                e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),                this.dgvFactors.RowHeadersDefaultCellStyle.Font,                rectangle,                this.dgvFactors.RowHeadersDefaultCellStyle.ForeColor,                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -276,10 +266,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                                                 && ((f.CountryName == null ? string.Empty : f.CountryName).Contains(country)));
 
             bs.DataSource = queryResult;
-            dgvFactors.DataSource = bs;
-            lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Reset(object sender, EventArgs e)
         {
             this.tbFactorCode.Text = string.Empty;
@@ -319,24 +313,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <summary>
         /// update editable status
         /// </summary>
-        private void UpdateEditableStatus()
+        private void UpdateContextMenu()
         {
-            if (isEditable)
-            {
-                this.menuItemFactorNew.Enabled = true;
-                this.menuItemFactorCreditLineNew.Enabled = true;
-                this.menuItemFactorUpdate.Enabled = true;
-                this.menuItemFactorDelete.Enabled = true;
-                this.menuItemFactorImport.Enabled = true;
-            }
-            else
-            {
-                this.menuItemFactorNew.Enabled = false;
-                this.menuItemFactorCreditLineNew.Enabled = false;
-                this.menuItemFactorUpdate.Enabled = false;
-                this.menuItemFactorDelete.Enabled = false;
-                this.menuItemFactorImport.Enabled = false;
-            }
+            this.menuItemFactorNew.Enabled = true;
+            this.menuItemFactorCreditLineNew.Enabled = true;
+            this.menuItemFactorUpdate.Enabled = true;
+            this.menuItemFactorDelete.Enabled = true;
+            this.menuItemFactorImport.Enabled = true;
         }
 
         /// <summary>
@@ -363,6 +346,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

@@ -615,7 +615,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private void SelectGroup(object sender, EventArgs e)
         {
             Factor factor = (Factor)this.factorBindingSource.DataSource;
-            FactorMgr factorMgr = new FactorMgr(false);
+            FactorMgr factorMgr = new FactorMgr();
             QueryForm queryUI = new QueryForm(factorMgr, "选择集团");
             factorMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);

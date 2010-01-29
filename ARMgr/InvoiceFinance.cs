@@ -704,7 +704,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
-            FactorMgr factorMgr = new FactorMgr(false);
+            FactorMgr factorMgr = new FactorMgr();
             QueryForm queryForm = new QueryForm(factorMgr, "选择代付行");
             factorMgr.OwnerForm = queryForm;
             queryForm.ShowDialog(this);
