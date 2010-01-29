@@ -71,6 +71,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.ImeMode = ImeMode.OnHalf;
             this.opInvoiceType = opInvoiceType;
             this.invoiceBindingSource.DataSource = invoice;
+            this.dgvPaymentLogs.AutoGenerateColumns = false;
+            this.dgvRefundLogs.AutoGenerateColumns = false;
 
             this.invoiceCurrencyComboBox.DataSource = Currency.AllCurrencies().ToList();
             this.invoiceCurrencyComboBox.DisplayMember = "CurrencyCode";
@@ -79,6 +81,17 @@ namespace CMBC.EasyFactor.ARMgr
             this.flawReasonCheckedListBox.DataSource = FlawReason.GetAllFlawReasons();
             this.flawReasonCheckedListBox.DisplayMember = "Reason";
             this.flawReasonCheckedListBox.ValueMember = "Index";
+
+            this.dgvPaymentLogs.DataSource = invoice.InvoicePaymentLogs;
+            this.dgvRefundLogs.DataSource = invoice.InvoiceRefundLogs;
+            if (invoice.InvoicePaymentLogs.Count > 0)
+            {
+                if (((InvoicePaymentLog)invoice.InvoicePaymentLogs[0]).CreditNote != null)
+                {
+                    colCreditNoteDate.Visible = true;
+                    colCreditNoteNo.Visible = true;
+                }
+            }
 
             if (invoice.FlawReason != null)
             {
