@@ -149,13 +149,17 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
-            foreach (DataGridViewRow row in this.dgvCDAs.SelectedRows)
+
+            CDA cda = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
+            if (MessageBox.Show("是否确认复核通过该额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
-                CDA cda = (CDA)this.bs.List[row.Index];
-                cda.CDAStatus = ConstStr.CDA.CHECKED;
-                cda.CheckUserName = App.Current.CurUser.Name;
-                cda.CheckDate = DateTime.Now.Date;
+                return;
             }
+
+            cda.CDAStatus = ConstStr.CDA.CHECKED;
+            cda.CheckUserName = App.Current.CurUser.Name;
+            cda.CheckDate = DateTime.Now.Date;
+
             App.Current.DbContext.SubmitChanges();
         }
 
@@ -177,6 +181,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
+
             bool isDeleteOK = true;
             App.Current.DbContext.CDAs.DeleteOnSubmit(cda);
             try
@@ -188,6 +193,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 isDeleteOK = false;
                 MessageBox.Show("不能删除此额度通知书: " + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
             if (isDeleteOK)
             {
                 MessageBox.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -327,13 +333,17 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
-            foreach (DataGridViewRow row in this.dgvCDAs.SelectedRows)
+
+            CDA cda = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
+            if (MessageBox.Show("是否确认复核退回该额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
-                CDA cda = (CDA)this.bs.List[row.Index];
-                cda.CDAStatus = ConstStr.CDA.REJECT;
-                cda.CheckUserName = App.Current.CurUser.Name;
-                cda.CheckDate = DateTime.Now.Date;
+                return;
             }
+
+            cda.CDAStatus = ConstStr.CDA.REJECT;
+            cda.CheckUserName = App.Current.CurUser.Name;
+            cda.CheckDate = DateTime.Now.Date;
+
             App.Current.DbContext.SubmitChanges();
         }
 

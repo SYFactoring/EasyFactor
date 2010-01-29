@@ -347,10 +347,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[5, "M"] = "核准额度";
                 sheet.Cells[5, "N"] = String.Format("{0} {1:N2}", cda.CreditCoverCurr, cda.CreditCover);
                 sheet.Cells[6, "M"] = "到期日";
-                if (cda.CreditCoverPeriodEnd != null)
-                {
-                    sheet.Cells[6, "N"] = String.Format("{0:yyyy/MM/dd}", cda.CreditCoverPeriodEnd);
-                }
+                sheet.Cells[6, "N"] = String.Format("{0:yyyy-MM-dd}", cda.CreditCoverPeriodEnd);
                 sheet.Cells[7, "M"] = "剩余额度";
                 sheet.Cells[7, "N"] = String.Format("{0} {1:N2}", cda.CreditCoverCurr, cda.CreditCoverOutstanding);
                 sheet.Cells[8, "M"] = "应收帐款余额";
@@ -361,10 +358,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[5, "P"] = "核准额度";
                 sheet.Cells[5, "Q"] = String.Format("{0} {1:N2}", cda.FinanceLineCurr, cda.FinanceLine);
                 sheet.Cells[6, "P"] = "到期日";
-                if (cda.FinanceLinePeriodEnd != null)
-                {
-                    sheet.Cells[6, "Q"] = String.Format("{0:yyyy/MM/dd}", cda.FinanceLinePeriodEnd);
-                }
+                sheet.Cells[6, "Q"] = String.Format("{0:yyyy-MM-dd}", cda.FinanceLinePeriodEnd);
                 sheet.Cells[7, "P"] = "剩余额度";
                 sheet.Cells[7, "Q"] = String.Format("{0} {1:N2}", cda.FinanceLineCurr, cda.FinanceLineOutstanding);
                 sheet.Cells[8, "P"] = "融资余额";
@@ -416,8 +410,11 @@ namespace CMBC.EasyFactor.CaseMgr
                         sheet.Cells[row, "P"] = invoice.CommissionDate;
                         sheet.Cells[row, "Q"] = invoice.Interest;
                         sheet.Cells[row, "R"] = invoice.Comment;
-                        sheet.get_Range(sheet.Cells[row, "G"], sheet.Cells[row, "G"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoice.InvoiceFinanceBatch.BatchCurrency);
-                        sheet.get_Range(sheet.Cells[row, "M"], sheet.Cells[row, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoice.InvoiceFinanceBatch.BatchCurrency);
+                        if (invoice.InvoiceFinanceBatch != null)
+                        {
+                            sheet.get_Range(sheet.Cells[row, "G"], sheet.Cells[row, "G"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoice.InvoiceFinanceBatch.BatchCurrency);
+                            sheet.get_Range(sheet.Cells[row, "M"], sheet.Cells[row, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoice.InvoiceFinanceBatch.BatchCurrency);
+                        }
                         row++;
                     }
                 }
@@ -464,7 +461,8 @@ namespace CMBC.EasyFactor.CaseMgr
                     Marshal.ReleaseComObject(app);
                     app = null;
                 }
-                throw e1;
+
+                MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
