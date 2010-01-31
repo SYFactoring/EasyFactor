@@ -110,6 +110,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SaveBatch(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             if (!this.superValidator.Validate())
             {
                 return;
@@ -153,6 +158,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectFactor(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
             FactorMgr factorMgr = new FactorMgr();
             QueryForm queryForm = new QueryForm(factorMgr, "选择代付行");
@@ -173,6 +183,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void UpdateBatch(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             this.opBatchType = OpBatchType.UPDATE_BATCH;
             this.UpdateBatchControlStatus();
         }

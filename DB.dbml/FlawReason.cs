@@ -1,22 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace CMBC.EasyFactor.DB.dbml
 {
+    using System.Collections.Generic;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class FlawReason
     {
         private string index;
 
         private string reason;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="reason"></param>
         public FlawReason(string index, string reason)
         {
             this.index = index;
             this.reason = reason;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Index
         {
             get
@@ -25,6 +34,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Reason
         {
             get
@@ -33,6 +45,10 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static List<FlawReason> GetAllFlawReasons()
         {
             List<FlawReason> reasonList = new List<FlawReason>();

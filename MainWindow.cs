@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor
 {
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
     using System.Windows.Forms;
     using CMBC.EasyFactor.ARMgr;
     using CMBC.EasyFactor.CaseMgr;
@@ -20,7 +21,6 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.Report;
     using CMBC.EasyFactor.Utils;
-    using System.Reflection;
 
     /// <summary>
     /// Main Window Form
@@ -71,7 +71,7 @@ namespace CMBC.EasyFactor
 
         #endregion Properties
 
-        #region Methods (66)
+        #region Methods (62)
 
         // Public Methods (2) 
 
@@ -81,10 +81,13 @@ namespace CMBC.EasyFactor
         /// <param name="refundList"></param>
         public void InvoiceRefund(List<Invoice> refundList, string paymentType)
         {
-            ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REFUND);
-            this.SetDetailPanel(invoiceRefund);
-            InvoiceRefund uc = (InvoiceRefund)invoiceRefund.InvoiceControl;
-            uc.NewBatch(refundList, paymentType);
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REFUND);
+                this.SetDetailPanel(invoiceRefund);
+                InvoiceRefund uc = (InvoiceRefund)invoiceRefund.InvoiceControl;
+                uc.NewBatch(refundList, paymentType);
+            }
         }
 
         /// <summary>
@@ -97,7 +100,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-        // Private Methods (64) 
+        // Private Methods (60) 
 
         /// <summary>
         /// 
@@ -151,8 +154,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckAssignBatch(object sender, EventArgs e)
         {
-            AssignBatchMgr batchMgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.CHECK);
-            this.SetDetailPanel(batchMgr);
+            if (PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            {
+                AssignBatchMgr batchMgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.CHECK);
+                this.SetDetailPanel(batchMgr);
+            }
         }
 
         /// <summary>
@@ -162,8 +168,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckCDA(object sender, EventArgs e)
         {
-            CDAMgr cdaMgr = new CDAMgr(CDAMgr.OpCDAType.CHECK);
-            this.SetDetailPanel(cdaMgr);
+            if (PermUtil.CheckPermission(Permission.CDA_APPROVE))
+            {
+                CDAMgr cdaMgr = new CDAMgr(CDAMgr.OpCDAType.CHECK);
+                this.SetDetailPanel(cdaMgr);
+            }
         }
 
         /// <summary>
@@ -173,8 +182,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckFinanceBatch(object sender, EventArgs e)
         {
-            FinanceBatchMgr batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.CHECK);
-            this.SetDetailPanel(batchMgr);
+            if (PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            {
+                FinanceBatchMgr batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.CHECK);
+                this.SetDetailPanel(batchMgr);
+            }
         }
 
         /// <summary>
@@ -184,8 +196,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckPaymentBatch(object sender, EventArgs e)
         {
-            PaymentBatchMgr batchMgr = new PaymentBatchMgr(PaymentBatchMgr.OpBatchType.CHECK);
-            this.SetDetailPanel(batchMgr);
+            if (PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            {
+                PaymentBatchMgr batchMgr = new PaymentBatchMgr(PaymentBatchMgr.OpBatchType.CHECK);
+                this.SetDetailPanel(batchMgr);
+            }
         }
 
         /// <summary>
@@ -195,16 +210,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckRefundBatch(object sender, EventArgs e)
         {
-            RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.CHECK);
-            this.SetDetailPanel(batchMgr);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void ClearDetailPanel()
-        {
-            this.ribbonDetailPanel.Controls.Clear();
+            if (PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            {
+                RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.CHECK);
+                this.SetDetailPanel(batchMgr);
+            }
         }
 
         /// <summary>
@@ -214,8 +224,23 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CreditNotePayment(object sender, EventArgs e)
         {
-            ARCaseBasic creditNotePayment = new ARCaseBasic(ARCaseBasic.OpARType.CREDIT_NOTE);
-            this.SetDetailPanel(creditNotePayment);
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                ARCaseBasic creditNotePayment = new ARCaseBasic(ARCaseBasic.OpARType.CREDIT_NOTE);
+                this.SetDetailPanel(creditNotePayment);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailUser(object sender, EventArgs e)
+        {
+            User user = App.Current.CurUser;
+            UserDetail detail = new UserDetail(user, UserDetail.OpUserType.DETAIL_USER);
+            detail.ShowDialog(this);
         }
 
         /// <summary>
@@ -225,8 +250,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void DisputeResolve(object sender, EventArgs e)
         {
-            InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.DISPUTE_RESOLVE);
-            this.SetDetailPanel(invoiceMgr);
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.DISPUTE_RESOLVE);
+                this.SetDetailPanel(invoiceMgr);
+            }
         }
 
         /// <summary>
@@ -246,8 +274,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void FlawResolve(object sender, EventArgs e)
         {
-            InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE);
-            this.SetDetailPanel(invoiceMgr);
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE);
+                this.SetDetailPanel(invoiceMgr);
+            }
         }
 
         /// <summary>
@@ -257,7 +288,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportCases(object sender, EventArgs e)
         {
-            if (this.ValidateRole())
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CASES);
                 importForm.Show();
@@ -271,7 +302,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportCDA(object sender, EventArgs e)
         {
-            if (this.ValidateRole())
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CDA);
                 importForm.Show();
@@ -285,7 +316,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportClientCreditLine(object sender, EventArgs e)
         {
-            if (this.ValidateRole())
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_CREDITLINE);
                 importForm.Show();
@@ -299,7 +330,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportClients(object sender, EventArgs e)
         {
-            if (this.ValidateRole())
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS);
                 importForm.Show();
@@ -313,7 +344,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportClientsReview(object sender, EventArgs e)
         {
-            if (this.ValidateRole())
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_REVIEW);
                 importForm.Show();
@@ -327,7 +358,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportContract(object sender, EventArgs e)
         {
-            if (this.ValidateRole())
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CONTRACT);
                 importForm.Show();
@@ -341,7 +372,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportDepartments(object sender, EventArgs e)
         {
-            if (this.ValidateRole())
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_DEPARTMENTS);
                 importForm.Show();
@@ -355,7 +386,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportExchangeRate(object sender, EventArgs e)
         {
-            if (this.ValidateRole())
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_RATES);
                 importForm.Show();
@@ -369,7 +400,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportFactorCreditLine(object sender, EventArgs e)
         {
-            if (this.ValidateRole())
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS_CREDITLINE);
                 importForm.Show();
@@ -383,7 +414,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportFactors(object sender, EventArgs e)
         {
-            if (this.ValidateRole())
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS);
                 importForm.Show();
@@ -397,7 +428,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportInvoices(object sender, EventArgs e)
         {
-            if (this.ValidateRole())
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES);
                 importForm.Show();
@@ -411,7 +442,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportUsers(object sender, EventArgs e)
         {
-            if (this.ValidateRole())
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_USERS);
                 importForm.Show();
@@ -425,8 +456,11 @@ namespace CMBC.EasyFactor
         /// <param name="e">event args</param>
         private void InvoiceAssign(object sender, EventArgs e)
         {
-            ARCaseBasic invoiceAssign = new ARCaseBasic(ARCaseBasic.OpARType.ASSIGN);
-            this.SetDetailPanel(invoiceAssign);
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                ARCaseBasic invoiceAssign = new ARCaseBasic(ARCaseBasic.OpARType.ASSIGN);
+                this.SetDetailPanel(invoiceAssign);
+            }
         }
 
         /// <summary>
@@ -436,8 +470,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceBuyerPayment(object sender, EventArgs e)
         {
-            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.BUYER_PAYMENT);
-            this.SetDetailPanel(invoicePayment);
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.BUYER_PAYMENT);
+                this.SetDetailPanel(invoicePayment);
+            }
         }
 
         /// <summary>
@@ -447,8 +484,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceFinance(object sender, EventArgs e)
         {
-            ARCaseBasic invoiceFinance = new ARCaseBasic(ARCaseBasic.OpARType.FINANCE);
-            this.SetDetailPanel(invoiceFinance);
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                ARCaseBasic invoiceFinance = new ARCaseBasic(ARCaseBasic.OpARType.FINANCE);
+                this.SetDetailPanel(invoiceFinance);
+            }
         }
 
         /// <summary>
@@ -458,8 +498,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceGuaranteePayment(object sender, EventArgs e)
         {
-            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.GUARANTEE_PAYMENT);
-            this.SetDetailPanel(invoicePayment);
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.GUARANTEE_PAYMENT);
+                this.SetDetailPanel(invoicePayment);
+            }
         }
 
         /// <summary>
@@ -469,8 +512,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceIndirectPayment(object sender, EventArgs e)
         {
-            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.INDIRECT_PAYMENT);
-            this.SetDetailPanel(invoicePayment);
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.INDIRECT_PAYMENT);
+                this.SetDetailPanel(invoicePayment);
+            }
         }
 
         /// <summary>
@@ -480,8 +526,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceSellerReassign(object sender, EventArgs e)
         {
-            ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REASSIGN);
-            this.SetDetailPanel(invoicePayment);
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REASSIGN);
+                this.SetDetailPanel(invoicePayment);
+            }
         }
 
         /// <summary>
@@ -491,8 +540,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceSellerRefund(object sender, EventArgs e)
         {
-            ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REFUND);
-            this.SetDetailPanel(invoiceRefund);
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REFUND);
+                this.SetDetailPanel(invoiceRefund);
+            }
         }
 
         /// <summary>
@@ -502,56 +554,9 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void MainPage(object sender, EventArgs e)
         {
-            this.ClearDetailPanel();
+            this.ribbonDetailPanel.Controls.Clear();
             this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
             this.ribbonDetailPanel.Controls.Add(this.logoLabel);
-        }
-
-        /// <summary>
-        /// Client Management
-        /// </summary>
-        /// <param name="sender">event sender</param>
-        /// <param name="e">event args</param>
-        private void MgrClients(object sender, EventArgs e)
-        {
-            ClientMgr clientMgrUI = new ClientMgr();
-            this.SetDetailPanel(clientMgrUI);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MgrDepartments(object sender, EventArgs e)
-        {
-            DepartmentMgr departmentMgrUI = new DepartmentMgr();
-            this.SetDetailPanel(departmentMgrUI);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MgrFactors(object sender, EventArgs e)
-        {
-            FactorMgr factorMgrUI = new FactorMgr();
-            this.SetDetailPanel(factorMgrUI);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MgrUsers(object sender, EventArgs e)
-        {
-            if (this.ValidateRole())
-            {
-                UserMgr userMgrUI = new UserMgr(true);
-                this.SetDetailPanel(userMgrUI);
-            }
         }
 
         /// <summary>
@@ -561,9 +566,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void NewCase(object sender, EventArgs e)
         {
-            this.ClearDetailPanel();
-            CaseDetail caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.NEW_CASE);
-            caseDetail.ShowDialog(this);
+            if (PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            {
+                CaseDetail caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.NEW_CASE);
+                caseDetail.ShowDialog(this);
+            }
         }
 
         /// <summary>
@@ -573,8 +580,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void NewCDA(object sender, EventArgs e)
         {
-            CDADetail cdaDetail = new CDADetail(CDADetail.OpCDAType.NEW_CDA);
-            cdaDetail.ShowDialog(this);
+            if (PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            {
+                CDADetail cdaDetail = new CDADetail(CDADetail.OpCDAType.NEW_CDA);
+                cdaDetail.ShowDialog(this);
+            }
         }
 
         /// <summary>
@@ -584,8 +594,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void NewClient(object sender, EventArgs e)
         {
-            ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT);
-            clientDetail.ShowDialog(this);
+            if (PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT);
+                clientDetail.ShowDialog(this);
+            }
         }
 
         /// <summary>
@@ -595,8 +608,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void NewFactor(object sender, EventArgs e)
         {
-            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
-            factorDetail.ShowDialog(this);
+            if (PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
+                factorDetail.ShowDialog(this);
+            }
         }
 
         /// <summary>
@@ -725,7 +741,18 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void QueryExchange(object sender, EventArgs e)
+        private void QueryDepartments(object sender, EventArgs e)
+        {
+            DepartmentMgr departmentMgrUI = new DepartmentMgr();
+            this.SetDetailPanel(departmentMgrUI);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryExchanges(object sender, EventArgs e)
         {
             ExchangeMgr mgr = new ExchangeMgr();
             this.SetDetailPanel(mgr);
@@ -773,6 +800,17 @@ namespace CMBC.EasyFactor
         {
             InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.OVER_DUE);
             this.SetDetailPanel(mgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryUsers(object sender, EventArgs e)
+        {
+            UserMgr userMgrUI = new UserMgr();
+            this.SetDetailPanel(userMgrUI);
         }
 
         /// <summary>
@@ -839,35 +877,6 @@ namespace CMBC.EasyFactor
         {
             CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr();
             this.SetDetailPanel(mgr);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UpdateCurrentUser(object sender, EventArgs e)
-        {
-            User user = App.Current.CurUser;
-            UserDetail detail = new UserDetail(user, UserDetail.OpUserType.DETAIL_USER);
-            detail.ShowDialog(this);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        private bool ValidateRole()
-        {
-            if (App.Current.CurUser.Role == "管理员")
-            {
-                return true;
-            }
-            else
-            {
-                MessageBox.Show("只有管理员可以执行此操作", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
-            }
         }
 
         #endregion Methods

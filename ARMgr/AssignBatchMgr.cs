@@ -146,6 +146,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void Check(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permission.INVOICE_CHECK))
+            {
+                return;
+            }
+
             if (this.dgvBatches.SelectedRows.Count == 0)
             {
                 return;
@@ -171,6 +176,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DeleteBatch(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvBatches.SelectedRows.Count == 0)
             {
                 return;
@@ -305,6 +315,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void Reject(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permission.INVOICE_CHECK))
+            {
+                return;
+            }
+
             if (this.dgvBatches.SelectedRows.Count == 0)
             {
                 return;
@@ -892,17 +907,24 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (App.Current.CurUser.Role == "复核员")
+            if (PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_UPDATE))
             {
-                this.menuItemCheck.Visible = true;
-                this.menuItemReject.Visible = true;
-                this.toolStripSeparator2.Visible = true;
+                this.menuItemBatchDelete.Enabled = true;
             }
             else
             {
-                this.menuItemCheck.Visible = false;
-                this.menuItemReject.Visible = false;
-                this.toolStripSeparator2.Visible = false;
+                this.menuItemBatchDelete.Enabled = false;
+            }
+
+            if (PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_CHECK))
+            {
+                this.menuItemCheck.Enabled = true;
+                this.menuItemReject.Enabled = true;
+            }
+            else
+            {
+                this.menuItemCheck.Enabled = false;
+                this.menuItemReject.Enabled = false;
             }
         }
 

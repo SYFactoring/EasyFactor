@@ -1200,6 +1200,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _LoginDate;
 		
+		private int _Permission;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1224,6 +1226,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnMSNChanged();
     partial void OnLoginDateChanging(System.Nullable<System.DateTime> value);
     partial void OnLoginDateChanged();
+    partial void OnPermissionChanging(int value);
+    partial void OnPermissionChanged();
     #endregion
 		
 		public User()
@@ -1427,6 +1431,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._LoginDate = value;
 					this.SendPropertyChanged("LoginDate");
 					this.OnLoginDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Permission", DbType="Int", UpdateCheck=UpdateCheck.WhenChanged)]
+		public int Permission
+		{
+			get
+			{
+				return this._Permission;
+			}
+			set
+			{
+				if ((this._Permission != value))
+				{
+					this.OnPermissionChanging(value);
+					this.SendPropertyChanging();
+					this._Permission = value;
+					this.SendPropertyChanged("Permission");
+					this.OnPermissionChanged();
 				}
 			}
 		}
@@ -10522,6 +10546,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _FlawOtherReason;
 		
+		private string _DisputeOtherReason;
+		
 		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
 		
 		private EntitySet<InvoiceRefundLog> _InvoiceRefundLogs;
@@ -10620,6 +10646,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnFlawOtherReasonChanging(string value);
     partial void OnFlawOtherReasonChanged();
+    partial void OnDisputeOtherReasonChanging(string value);
+    partial void OnDisputeOtherReasonChanged();
     #endregion
 		
 		public Invoice()
@@ -11495,6 +11523,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._FlawOtherReason = value;
 					this.SendPropertyChanged("FlawOtherReason");
 					this.OnFlawOtherReasonChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DisputeOtherReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string DisputeOtherReason
+		{
+			get
+			{
+				return this._DisputeOtherReason;
+			}
+			set
+			{
+				if ((this._DisputeOtherReason != value))
+				{
+					this.OnDisputeOtherReasonChanging(value);
+					this.SendPropertyChanging();
+					this._DisputeOtherReason = value;
+					this.SendPropertyChanged("DisputeOtherReason");
+					this.OnDisputeOtherReasonChanged();
 				}
 			}
 		}

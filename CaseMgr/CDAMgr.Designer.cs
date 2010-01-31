@@ -20,7 +20,6 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemCDANew;
         private System.Windows.Forms.ToolStripMenuItem menuItemCDASelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCDAUpdate;
         private DevComponents.DotNetBar.PanelEx panelCDAQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbBuyerName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbContractCode;
@@ -118,7 +117,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.menuItemCDADetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemCDANew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCDAUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCDADelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
@@ -655,7 +653,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.menuItemCDADetail,
             this.toolStripSeparator,
             this.menuItemCDANew,
-            this.menuItemCDAUpdate,
             this.menuItemCDADelete,
             this.toolStripSeparator1,
             this.menuItemCheck,
@@ -691,13 +688,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.menuItemCDANew.Text = "新建CDA";
             this.menuItemCDANew.Click += new System.EventHandler(this.NewCDA);
             // 
-            // menuItemCDAUpdate
-            // 
-            this.menuItemCDAUpdate.Name = "menuItemCDAUpdate";
-            this.menuItemCDAUpdate.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDAUpdate.Text = "更新CDA";
-            this.menuItemCDAUpdate.Click += new System.EventHandler(this.UpdateCDA);
-            // 
             // menuItemCDADelete
             // 
             this.menuItemCDADelete.Name = "menuItemCDADelete";
@@ -714,14 +704,14 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.menuItemCheck.Name = "menuItemCheck";
             this.menuItemCheck.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCheck.Text = "复核通过";
+            this.menuItemCheck.Text = "审核通过";
             this.menuItemCheck.Click += new System.EventHandler(this.Check);
             // 
             // menuItemReject
             // 
             this.menuItemReject.Name = "menuItemReject";
             this.menuItemReject.Size = new System.Drawing.Size(182, 22);
-            this.menuItemReject.Text = "复核拒绝";
+            this.menuItemReject.Text = "审核拒绝";
             this.menuItemReject.Click += new System.EventHandler(this.Reject);
             // 
             // toolStripSeparator2

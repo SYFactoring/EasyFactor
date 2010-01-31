@@ -24,10 +24,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private DevComponents.DotNetBar.LabelX lblUserID;
         private System.Windows.Forms.ToolStripMenuItem menuItemDeleteUser;
         private System.Windows.Forms.ToolStripMenuItem menuItemDetailUser;
-        private System.Windows.Forms.ToolStripMenuItem menuItemImportUsers;
         private System.Windows.Forms.ToolStripMenuItem menuItemNewUser;
         private System.Windows.Forms.ToolStripMenuItem menuItemSelectUser;
-        private System.Windows.Forms.ToolStripMenuItem menuItemUpdateUser;
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbUserID;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
@@ -72,9 +70,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.menuItemDetailUser = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemNewUser = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemUpdateUser = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDeleteUser = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemImportUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
@@ -101,58 +97,42 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.menuItemDetailUser,
             this.toolStripSeparator,
             this.menuItemNewUser,
-            this.menuItemUpdateUser,
-            this.menuItemDeleteUser,
-            this.menuItemImportUsers});
+            this.menuItemDeleteUser});
             this.cmuUserMgr.Name = "contextMenuUserMgr";
-            this.cmuUserMgr.Size = new System.Drawing.Size(123, 142);
+            this.cmuUserMgr.Size = new System.Drawing.Size(153, 120);
             // 
             // menuItemSelectUser
             // 
             this.menuItemSelectUser.Name = "menuItemSelectUser";
-            this.menuItemSelectUser.Size = new System.Drawing.Size(122, 22);
+            this.menuItemSelectUser.Size = new System.Drawing.Size(152, 22);
             this.menuItemSelectUser.Text = "选定用户";
             this.menuItemSelectUser.Click += new System.EventHandler(this.SelectUser);
             // 
             // menuItemDetailUser
             // 
             this.menuItemDetailUser.Name = "menuItemDetailUser";
-            this.menuItemDetailUser.Size = new System.Drawing.Size(122, 22);
+            this.menuItemDetailUser.Size = new System.Drawing.Size(152, 22);
             this.menuItemDetailUser.Text = "详细信息";
             this.menuItemDetailUser.Click += new System.EventHandler(this.DetailUser);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(119, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
             // menuItemNewUser
             // 
             this.menuItemNewUser.Name = "menuItemNewUser";
-            this.menuItemNewUser.Size = new System.Drawing.Size(122, 22);
+            this.menuItemNewUser.Size = new System.Drawing.Size(152, 22);
             this.menuItemNewUser.Text = "新建用户";
             this.menuItemNewUser.Click += new System.EventHandler(this.NewUser);
-            // 
-            // menuItemUpdateUser
-            // 
-            this.menuItemUpdateUser.Name = "menuItemUpdateUser";
-            this.menuItemUpdateUser.Size = new System.Drawing.Size(122, 22);
-            this.menuItemUpdateUser.Text = "更新用户";
-            this.menuItemUpdateUser.Click += new System.EventHandler(this.UpdateUser);
             // 
             // menuItemDeleteUser
             // 
             this.menuItemDeleteUser.Name = "menuItemDeleteUser";
-            this.menuItemDeleteUser.Size = new System.Drawing.Size(122, 22);
+            this.menuItemDeleteUser.Size = new System.Drawing.Size(152, 22);
             this.menuItemDeleteUser.Text = "删除用户";
             this.menuItemDeleteUser.Click += new System.EventHandler(this.DeleteUser);
-            // 
-            // menuItemImportUsers
-            // 
-            this.menuItemImportUsers.Name = "menuItemImportUsers";
-            this.menuItemImportUsers.Size = new System.Drawing.Size(122, 22);
-            this.menuItemImportUsers.Text = "导入用户";
-            this.menuItemImportUsers.Click += new System.EventHandler(this.ImportUsers);
             // 
             // panelQuery
             // 

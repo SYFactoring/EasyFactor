@@ -501,6 +501,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SaveAssignBatch(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             if (this._case == null)
             {
                 MessageBox.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);

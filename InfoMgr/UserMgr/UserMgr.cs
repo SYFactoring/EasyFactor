@@ -7,24 +7,20 @@
 namespace CMBC.EasyFactor.InfoMgr.UserMgr
 {
     using System;
+    using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Drawing;
 
     /// <summary>
     /// User Management User Interface
     /// </summary>
     public partial class UserMgr : UserControl
     {
-        #region Fields (2)
+        #region Fields (1)
 
-        private BindingSource bs = new BindingSource();
-        /// <summary>
-        /// flag indicates if editable
-        /// </summary>
-        private readonly bool isEditable;
+        private BindingSource bs;
 
         #endregion Fields
 
@@ -34,13 +30,15 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// Initializes a new instance of the UserMgrUI class
         /// </summary>
         /// <param name="isEditable">true if editable</param>
-        public UserMgr(bool isEditable)
+        public UserMgr()
         {
             this.InitializeComponent();
+            this.bs = new BindingSource();
             this.dgvUsers.AutoGenerateColumns = false;
+            this.dgvUsers.DataSource = this.bs;
             ControlUtil.SetDoubleBuffered(this.dgvUsers);
-            this.isEditable = isEditable;
-            this.UpdateEditableStatus();
+
+            this.UpdateContextMenu();
         }
 
         #endregion Constructors
@@ -64,9 +62,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
         #endregion Properties
 
-        #region Methods (9)
+        #region Methods (10)
 
-        // Private Methods (9) 
+        // Private Methods (10) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -92,23 +90,35 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void DeleteUser(object sender, EventArgs e)
         {
-            if (dgvUsers.SelectedRows.Count == 0)
+            if (!PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
             {
                 return;
             }
 
-            string uid = (string)dgvUsers["userIdColumn", dgvUsers.SelectedRows[0].Index].Value;
-            if (uid != null)
+            if (this.dgvUsers.SelectedRows.Count == 0)
             {
-                User selectedUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid);
-                if (selectedUser != null)
+                return;
+            }
+
+            User selectedUser = (User)this.bs.List[this.dgvUsers.SelectedRows[0].Index];
+            if (MessageBox.Show("是否确定删除帐号: " + selectedUser.UserID, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                App.Current.DbContext.Users.DeleteOnSubmit(selectedUser);
+                bool isDeleteOK = true;
+                try
                 {
-                    if (MessageBox.Show("是否确定删除帐号: " + selectedUser.UserID, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-                    {
-                        dgvUsers.Rows.RemoveAt(dgvUsers.SelectedRows[0].Index);
-                        App.Current.DbContext.Users.DeleteOnSubmit(selectedUser);
-                        App.Current.DbContext.SubmitChanges();
-                    }
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    isDeleteOK = false;
+                    MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                if (isDeleteOK)
+                {
+                    this.dgvUsers.Rows.RemoveAt(dgvUsers.SelectedRows[0].Index);
                 }
             }
         }
@@ -125,15 +135,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 return;
             }
 
-            string uid = (string)dgvUsers["userIdColumn", dgvUsers.SelectedRows[0].Index].Value;
-            if (uid != null)
-            {
-                User selectedUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid);
-                if (selectedUser != null)
-                {
-                    new UserDetail(selectedUser, UserDetail.OpUserType.DETAIL_USER).ShowDialog(this);
-                }
-            }
+            User selectedUser = (User)this.bs.List[this.dgvUsers.SelectedRows[0].Index];
+            UserDetail detail = new UserDetail(selectedUser, UserDetail.OpUserType.DETAIL_USER);
+            detail.ShowDialog(this);
         }
 
         /// <summary>
@@ -141,10 +145,10 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ImportUsers(object sender, EventArgs e)
+        private void dgvUsers_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_USERS);
-            importForm.Show();
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvUsers.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvUsers.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvUsers.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -154,7 +158,13 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void NewUser(object sender, EventArgs e)
         {
-            new UserDetail(null, UserDetail.OpUserType.NEW_USER).ShowDialog(this);
+            if (!PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            {
+                return;
+            }
+
+            UserDetail detail = new UserDetail(null, UserDetail.OpUserType.NEW_USER);
+            detail.ShowDialog(this);
         }
 
         /// <summary>
@@ -166,7 +176,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         {
             var queryResult = App.Current.DbContext.Users.Where(u => u.UserID.Contains(tbUserID.Text));
             bs.DataSource = queryResult;
-            dgvUsers.DataSource = bs;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
@@ -182,80 +191,32 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 return;
             }
 
-            string uid = (string)dgvUsers["userIdColumn", dgvUsers.SelectedRows[0].Index].Value;
-            if (uid != null)
+            User selectedUser = (User)this.bs.List[this.dgvUsers.SelectedRows[0].Index];
+            this.Selected = selectedUser;
+            if (this.OwnerForm != null)
             {
-                User selectedUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid);
-                if (selectedUser != null)
-                {
-                    this.Selected = selectedUser;
-                    if (this.OwnerForm != null)
-                    {
-                        this.OwnerForm.DialogResult = DialogResult.Yes;
-                        this.OwnerForm.Close();
-                    }
-                }
+                this.OwnerForm.DialogResult = DialogResult.Yes;
+                this.OwnerForm.Close();
             }
         }
 
         /// <summary>
         /// Update editable status
         /// </summary>
-        private void UpdateEditableStatus()
+        private void UpdateContextMenu()
         {
-            this.menuItemSelectUser.Enabled = true;
-            this.menuItemDetailUser.Enabled = true;
-            if (this.isEditable)
+            if (PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
             {
                 this.menuItemDeleteUser.Enabled = true;
                 this.menuItemNewUser.Enabled = true;
-                this.menuItemUpdateUser.Enabled = true;
             }
             else
             {
                 this.menuItemDeleteUser.Enabled = false;
                 this.menuItemNewUser.Enabled = false;
-                this.menuItemUpdateUser.Enabled = false;
-            }
-        }
-
-        /// <summary>
-        /// Popup UserDetailUI Form and Update current selected User
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void UpdateUser(object sender, EventArgs e)
-        {
-            if (dgvUsers.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            string uid = (string)dgvUsers["userIdColumn", dgvUsers.SelectedRows[0].Index].Value;
-            if (uid != null)
-            {
-                User selectedUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid);
-                if (selectedUser != null)
-                {
-                    new UserDetail(selectedUser, UserDetail.OpUserType.UPDATE_USER).ShowDialog(this);
-                }
             }
         }
 
         #endregion Methods
-
-        private void dgvUsers_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                this.dgvUsers.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                this.dgvUsers.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                this.dgvUsers.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
-        }
     }
 }

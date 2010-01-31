@@ -20,13 +20,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientMgr : UserControl
     {
-        #region Fields (3)
+        #region Fields (2)
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs;
-
         /// <summary>
         /// 
         /// </summary>
@@ -59,7 +58,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Enums
 
-        #region Constructors (2)
+        #region Constructors (3)
 
         /// <summary>
         /// Initializes a new instance of the ClientMgr class
@@ -90,7 +89,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// 
         /// </summary>
         /// <param name="isContract"></param>
-        public ClientMgr(bool isContract):this()
+        public ClientMgr(bool isContract)
+            : this()
         {
             this.cbIsContractSigned.Checked = true;
             this.cbIsContractSigned.Enabled = false;
@@ -115,6 +115,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbDepartment.ValueMember = "DepartmentCode";
             this.cbDepartment.GroupingMembers = "Domain";
             this.cbDepartment.SelectedIndex = -1;
+
+            this.UpdateContextMenu();
         }
 
         #endregion Constructors
@@ -141,9 +143,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Properties
 
-        #region Methods (13)
+        #region Methods (11)
 
-        // Private Methods (13) 
+        // Private Methods (11) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -169,13 +171,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void DeleteClient(object sender, System.EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvClients.SelectedRows.Count == 0)
             {
                 return;
             }
 
             Client selectedClient = (Client)this.bs.List[this.dgvClients.SelectedRows[0].Index];
-            if (MessageBox.Show("是否打算删除客户: " + selectedClient.ClientNameCN, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            if (MessageBox.Show("是否打算删除客户: " + selectedClient.ClientNameCN, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (selectedClient.ClientCreditLines.Count > 0)
                 {
@@ -251,23 +258,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ImportClients(object sender, EventArgs e)
-        {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS);
-            importForm.Show();
-        }
-
-        /// <summary>
         /// Create a new client
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
         private void NewClient(object sender, System.EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT);
             clientDetail.ShowDialog(this);
         }
@@ -279,6 +280,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void NewClientCreditLine(object sender, System.EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvClients.SelectedRows.Count == 0)
             {
                 return;
@@ -296,6 +302,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void NewContract(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvClients.SelectedRows.Count == 0)
             {
                 return;
@@ -378,20 +389,24 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
-        /// Update selected client
+        /// 
         /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void UpdateClient(object sender, System.EventArgs e)
+        private void UpdateContextMenu()
         {
-            if (this.dgvClients.SelectedRows.Count == 0)
+            if (PermUtil.ValidatePermission(Permission.BASICINFO_UPDATE))
             {
-                return;
+                this.menuItemClientNew.Enabled = true;
+                this.menuItemClientDelete.Enabled = true;
+                this.menuItemClientCreditLineNew.Enabled = true;
+                this.menuItemContractNew.Enabled = true;
             }
-
-            Client selectedClient = (Client)this.bs.List[this.dgvClients.SelectedRows[0].Index];
-            ClientDetail clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.UPDATE_CLIENT);
-            clientDetail.ShowDialog(this);
+            else
+            {
+                this.menuItemClientNew.Enabled = false;
+                this.menuItemClientDelete.Enabled = false;
+                this.menuItemClientCreditLineNew.Enabled = false;
+                this.menuItemContractNew.Enabled = false;
+            }
         }
 
         #endregion Methods

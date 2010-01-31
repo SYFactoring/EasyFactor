@@ -117,6 +117,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             this.cbCaseMark.SelectedIndex = 1;
+            this.UpdateContextMenu();
         }
 
         #endregion Constructors
@@ -164,6 +165,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DeleteInvoice(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvInvoices.SelectedCells.Count == 0)
             {
                 return;
@@ -296,8 +302,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void dgvInvoices_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,                e.RowBounds.Location.Y,                dgvInvoices.RowHeadersWidth - 4,                e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),                dgvInvoices.RowHeadersDefaultCellStyle.Font,                rectangle,                dgvInvoices.RowHeadersDefaultCellStyle.ForeColor,                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgvInvoices.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvInvoices.RowHeadersDefaultCellStyle.Font, rectangle, dgvInvoices.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -390,6 +396,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void InvoiceDispute(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvInvoices.CurrentCell == null)
             {
                 return;
@@ -407,6 +418,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void InvoiceFlaw(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvInvoices.CurrentCell == null)
             {
                 return;
@@ -516,6 +532,21 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        private void UpdateContextMenu()
+        {
+            if (PermUtil.ValidatePermission(Permission.INVOICE_UPDATE))
+            {
+                this.menuItemInvoiceDelete.Enabled = true;
+                this.menuItemInvoiceDispute.Enabled = true;
+                this.menuItemInvoiceFlaw.Enabled = true;
+            }
+            else
+            {
+                this.menuItemInvoiceDelete.Enabled = false;
+                this.menuItemInvoiceDispute.Enabled = false;
+                this.menuItemInvoiceFlaw.Enabled = false;
+            }
+        }
         #endregion Methods
     }
 }

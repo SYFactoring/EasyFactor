@@ -2028,7 +2028,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.btnFactorCreditLineUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFactorCreditLineUpdate.TabIndex = 29;
             this.btnFactorCreditLineUpdate.Text = "编辑";
-            this.btnFactorCreditLineUpdate.Click += new System.EventHandler(this.UpdateCreditLine);
+            this.btnFactorCreditLineUpdate.Click += new System.EventHandler(this.UpdateFactorCreditLine);
             // 
             // btnFactorCreditLineRefresh
             // 

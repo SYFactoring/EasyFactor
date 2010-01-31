@@ -7,14 +7,13 @@
 namespace CMBC.EasyFactor.CaseMgr
 {
     using System;
-    using System.Data.SqlClient;
+    using System.Drawing;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Drawing;
     using Microsoft.Office.Interop.Excel;
-    using System.Runtime.InteropServices;
 
     /// <summary>
     /// 
@@ -145,6 +144,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void Check(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CDA_APPROVE))
+            {
+                return;
+            }
+
             if (this.dgvCDAs.SelectedRows.Count == 0)
             {
                 return;
@@ -170,6 +174,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void DeleteCDA(object sender, System.EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvCDAs.SelectedRows.Count == 0)
             {
                 return;
@@ -283,6 +292,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void NewCDA(object sender, System.EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            {
+                return;
+            }
+
             CDADetail cdaDetail = new CDADetail(CDADetail.OpCDAType.NEW_CDA);
             cdaDetail.ShowDialog(this);
         }
@@ -329,6 +343,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void Reject(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CDA_APPROVE))
+            {
+                return;
+            }
+
             if (this.dgvCDAs.SelectedRows.Count == 0)
             {
                 return;
@@ -576,41 +595,30 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// Update selected CDA
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void UpdateCDA(object sender, System.EventArgs e)
-        {
-            if (this.dgvCDAs.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            CDA selectedCDA = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
-            if (selectedCDA != null)
-            {
-                CDADetail cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.UPDATE_CDA);
-                cdaDetail.ShowDialog(this);
-            }
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (App.Current.CurUser.Role == "复核员")
+            if (PermUtil.ValidatePermission(Permission.CDA_UPDATE))
             {
-                this.menuItemCheck.Visible = true;
-                this.menuItemReject.Visible = true;
-                this.toolStripSeparator2.Visible = true;
+                this.menuItemCDANew.Enabled = true;
+                this.menuItemCDADelete.Enabled = true;
             }
             else
             {
-                this.menuItemCheck.Visible = false;
-                this.menuItemReject.Visible = false;
-                this.toolStripSeparator2.Visible = false;
+                this.menuItemCDANew.Enabled = false;
+                this.menuItemCDADelete.Enabled = false;
+            }
+
+            if (PermUtil.ValidatePermission(Permission.CDA_APPROVE))
+            {
+                this.menuItemCheck.Enabled = true;
+                this.menuItemReject.Enabled = true;
+            }
+            else
+            {
+                this.menuItemCheck.Enabled = false;
+                this.menuItemReject.Enabled = false;
             }
         }
 

@@ -8,15 +8,13 @@ namespace CMBC.EasyFactor.CaseMgr
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Linq;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.InfoMgr;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.Editors;
-    using System.Data.Linq;
 
     /// <summary>
     /// Case Detail
@@ -358,6 +356,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void DeleteCDA(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvCDAs.SelectedRows.Count == 0)
             {
                 return;
@@ -403,6 +406,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void DeleteCreditCoverNeg(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            {
+                return;
+            }
+
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
@@ -543,6 +551,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void NewCDA(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            {
+                return;
+            }
+
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
@@ -561,6 +574,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void NewCreditCoverNeg(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            {
+                return;
+            }
+
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
@@ -623,6 +641,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void ResetCase(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            {
+                return;
+            }
+
             if (this.opCaseType == OpCaseType.UPDATE_CASE)
             {
                 Case curCase = this.caseBindingSource.DataSource as Case;
@@ -641,6 +664,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SaveCase(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            {
+                return;
+            }
+
             if (!this.caseValidator.Validate())
             {
                 return;
@@ -725,6 +753,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SaveCreditCoverNeg(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            {
+                return;
+            }
+
             if (!this.creditCoverValidator.Validate())
             {
                 return;
@@ -807,6 +840,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SelectCaseBuyer(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            {
+                return;
+            }
+
             Case curCase = (Case)this.caseBindingSource.DataSource;
             ClientMgr clientMgr = new ClientMgr();
             QueryForm queryUI = new QueryForm(clientMgr, "选择买方");
@@ -842,6 +880,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SelectCaseSeller(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            {
+                return;
+            }
+
             Case curCase = (Case)this.caseBindingSource.DataSource;
             ClientMgr clientMgr = new ClientMgr();
             QueryForm queryUI = new QueryForm(clientMgr, "选择卖方");
@@ -900,6 +943,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SelectFactor(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            {
+                return;
+            }
+
             Case curCase = (Case)this.caseBindingSource.DataSource;
             FactorMgr factorMgr = new FactorMgr();
             QueryForm queryUI = new QueryForm(factorMgr, "选择保理商");
@@ -938,6 +986,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void UpdateCase(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            {
+                return;
+            }
+
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
@@ -1019,6 +1072,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void UpdateCreditCoverNeg(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            {
+                return;
+            }
+
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {

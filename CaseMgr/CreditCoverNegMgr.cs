@@ -16,16 +16,16 @@ namespace CMBC.EasyFactor.CaseMgr
 
     public partial class CreditCoverNegMgr : UserControl
     {
-		#region Fields (1) 
+        #region Fields (1)
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// 
@@ -56,9 +56,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets or sets owner form
@@ -78,11 +78,11 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (7) 
+        #region Methods (7)
 
-		// Private Methods (7) 
+        // Private Methods (7) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -98,59 +98,6 @@ namespace CMBC.EasyFactor.CaseMgr
             else
             {
                 this.SelectCreditCoverNeg(sender, e);
-            }
-        }
-
-        /// <summary>
-        /// Delete selected case
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void DeleteCase(object sender, System.EventArgs e)
-        {
-            if (this.dgvCreditCoverNegs.CurrentCell == null)
-            {
-                return;
-            }
-
-            CreditCoverNegotiation selectedCreditCoverNeg = (CreditCoverNegotiation)this.bs.List[this.dgvCreditCoverNegs.CurrentCell.RowIndex];
-
-            Case selectedCase = selectedCreditCoverNeg.Case;
-            if (MessageBox.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-            {
-                bool isDeleteOK = true;
-                foreach (InvoiceAssignBatch assignBatch in selectedCase.InvoiceAssignBatches)
-                {
-                    foreach (Invoice invoice in assignBatch.Invoices)
-                    {
-                        App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
-                        App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
-                    }
-                    App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
-                }
-
-                App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(selectedCase.InvoiceAssignBatches);
-                App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(selectedCase.InvoiceFinanceBatches);
-                App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(selectedCase.InvoicePaymentBatches);
-                App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(selectedCase.InvoiceRefundBatches);
-
-                App.Current.DbContext.CDAs.DeleteAllOnSubmit(selectedCase.CDAs);
-                App.Current.DbContext.Cases.DeleteOnSubmit(selectedCase);
-                try
-                {
-                    App.Current.DbContext.SubmitChanges();
-                }
-                catch (Exception e1)
-                {
-                    isDeleteOK = false;
-                    MessageBox.Show("不能删除此案件: " + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                if (isDeleteOK)
-                {
-                    MessageBox.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dgvCreditCoverNegs.Rows.RemoveAt(dgvCreditCoverNegs.CurrentCell.RowIndex);
-                }
             }
         }
 
@@ -259,6 +206,6 @@ namespace CMBC.EasyFactor.CaseMgr
 
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

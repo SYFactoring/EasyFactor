@@ -30,10 +30,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemFactorCreditLineNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemFactorDelete;
         private System.Windows.Forms.ToolStripMenuItem menuItemFactorDetail;
-        private System.Windows.Forms.ToolStripMenuItem menuItemFactorImport;
         private System.Windows.Forms.ToolStripMenuItem menuItemFactorNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemFactorSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemFactorUpdate;
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFactorCode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
@@ -80,9 +78,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemFactorNew = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemFactorCreditLineNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFactorUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemFactorDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFactorImport = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.btnReset = new DevComponents.DotNetBar.ButtonX();
             this.cbCountry = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -114,11 +110,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.toolStripSeparator,
             this.menuItemFactorNew,
             this.menuItemFactorCreditLineNew,
-            this.menuItemFactorUpdate,
-            this.menuItemFactorDelete,
-            this.menuItemFactorImport});
+            this.menuItemFactorDelete});
             this.contextMenuFactorMgr.Name = "contextMenuFactorMgr";
-            this.contextMenuFactorMgr.Size = new System.Drawing.Size(147, 164);
+            this.contextMenuFactorMgr.Size = new System.Drawing.Size(147, 120);
             // 
             // menuItemFactorSelect
             // 
@@ -153,26 +147,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.menuItemFactorCreditLineNew.Text = "新建额度信息";
             this.menuItemFactorCreditLineNew.Click += new System.EventHandler(this.NewFactorCreditLine);
             // 
-            // menuItemFactorUpdate
-            // 
-            this.menuItemFactorUpdate.Name = "menuItemFactorUpdate";
-            this.menuItemFactorUpdate.Size = new System.Drawing.Size(146, 22);
-            this.menuItemFactorUpdate.Text = "更新机构";
-            this.menuItemFactorUpdate.Click += new System.EventHandler(this.UpdateFactor);
-            // 
             // menuItemFactorDelete
             // 
             this.menuItemFactorDelete.Name = "menuItemFactorDelete";
             this.menuItemFactorDelete.Size = new System.Drawing.Size(146, 22);
             this.menuItemFactorDelete.Text = "删除机构";
             this.menuItemFactorDelete.Click += new System.EventHandler(this.DeleteFactor);
-            // 
-            // menuItemFactorImport
-            // 
-            this.menuItemFactorImport.Name = "menuItemFactorImport";
-            this.menuItemFactorImport.Size = new System.Drawing.Size(146, 22);
-            this.menuItemFactorImport.Text = "导入机构";
-            this.menuItemFactorImport.Click += new System.EventHandler(this.ImportFactos);
             // 
             // panelQuery
             // 

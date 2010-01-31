@@ -1,3 +1,6 @@
+partial class User
+{
+}
 //-----------------------------------------------------------------------
 // <copyright file="DB.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.

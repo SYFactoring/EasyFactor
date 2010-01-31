@@ -59,8 +59,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemImportDepts = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepts)).BeginInit();
             this.cmuDeptMgr.SuspendLayout();
@@ -269,37 +267,23 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemDetail,
-            this.menuItemSelect,
-            this.toolStripSeparator1,
-            this.menuItemImportDepts});
+            this.menuItemSelect});
             this.cmuDeptMgr.Name = "cmuDeptMgr";
-            this.cmuDeptMgr.Size = new System.Drawing.Size(123, 76);
+            this.cmuDeptMgr.Size = new System.Drawing.Size(153, 70);
             // 
             // menuItemDetail
             // 
             this.menuItemDetail.Name = "menuItemDetail";
-            this.menuItemDetail.Size = new System.Drawing.Size(122, 22);
+            this.menuItemDetail.Size = new System.Drawing.Size(152, 22);
             this.menuItemDetail.Text = "详细信息";
             this.menuItemDetail.Click += new System.EventHandler(this.Detail);
             // 
             // menuItemSelect
             // 
             this.menuItemSelect.Name = "menuItemSelect";
-            this.menuItemSelect.Size = new System.Drawing.Size(122, 22);
+            this.menuItemSelect.Size = new System.Drawing.Size(152, 22);
             this.menuItemSelect.Text = "选定分部";
             this.menuItemSelect.Click += new System.EventHandler(this.Select);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
-            // 
-            // menuItemImportDepts
-            // 
-            this.menuItemImportDepts.Name = "menuItemImportDepts";
-            this.menuItemImportDepts.Size = new System.Drawing.Size(122, 22);
-            this.menuItemImportDepts.Text = "导入分部";
-            this.menuItemImportDepts.Click += new System.EventHandler(this.ImportDepartments);
             // 
             // DepartmentMgr
             // 
@@ -330,10 +314,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         private DevComponents.DotNetBar.LabelX lblCount;
         private System.Windows.Forms.ContextMenuStrip cmuDeptMgr;
         private System.Windows.Forms.ToolStripMenuItem menuItemSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemImportDepts;
         private DevComponents.DotNetBar.ButtonX btnReset;
         private System.Windows.Forms.ToolStripMenuItem menuItemDetail;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn LocationColumn;

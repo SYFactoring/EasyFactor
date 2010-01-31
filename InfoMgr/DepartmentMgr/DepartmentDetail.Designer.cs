@@ -626,6 +626,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.groupPanelDepartment);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "DepartmentDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

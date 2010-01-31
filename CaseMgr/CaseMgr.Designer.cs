@@ -42,7 +42,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseUpdate;
         private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverNegNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemLegerReport;
         private System.Windows.Forms.DataGridViewTextBoxColumn OperationTypeColumn;
@@ -94,6 +93,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCaseQuery = new DevComponents.DotNetBar.PanelEx();
+            this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
             this.cbCaseMark = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblCaseMark = new DevComponents.DotNetBar.LabelX();
             this.cbIsContractSigned = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -137,13 +138,10 @@
             this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemCaseNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemLegerReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
             this.panelCaseQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -189,6 +187,30 @@
             this.panelCaseQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelCaseQuery.Style.GradientAngle = 90;
             this.panelCaseQuery.TabIndex = 0;
+            // 
+            // tbCreateUserName
+            // 
+            // 
+            // 
+            // 
+            this.tbCreateUserName.Border.Class = "TextBoxBorder";
+            this.tbCreateUserName.Location = new System.Drawing.Point(460, 6);
+            this.tbCreateUserName.Name = "tbCreateUserName";
+            this.tbCreateUserName.Size = new System.Drawing.Size(133, 20);
+            this.tbCreateUserName.TabIndex = 5;
+            // 
+            // lblCreateUserName
+            // 
+            this.lblCreateUserName.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCreateUserName.BackgroundStyle.Class = "";
+            this.lblCreateUserName.Location = new System.Drawing.Point(404, 9);
+            this.lblCreateUserName.Name = "lblCreateUserName";
+            this.lblCreateUserName.Size = new System.Drawing.Size(44, 16);
+            this.lblCreateUserName.TabIndex = 4;
+            this.lblCreateUserName.Text = "经办人";
             // 
             // cbCaseMark
             // 
@@ -722,95 +744,64 @@
             this.menuItemCaseDetail,
             this.toolStripSeparator,
             this.menuItemCaseNew,
-            this.menuItemCaseUpdate,
-            this.menuItemCaseDelete,
             this.menuItemCreditCoverNegNew,
+            this.menuItemCaseDelete,
             this.toolStripSeparator1,
             this.menuItemLegerReport});
             this.cmuContractMgr.Name = "cmuContractMgr";
-            this.cmuContractMgr.Size = new System.Drawing.Size(147, 170);
+            this.cmuContractMgr.Size = new System.Drawing.Size(153, 170);
             // 
             // menuItemCaseSelect
             // 
             this.menuItemCaseSelect.Name = "menuItemCaseSelect";
-            this.menuItemCaseSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseSelect.Size = new System.Drawing.Size(152, 22);
             this.menuItemCaseSelect.Text = "选定案件";
             this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
             // 
             // menuItemCaseDetail
             // 
             this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(152, 22);
             this.menuItemCaseDetail.Text = "详细信息";
             this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
             // menuItemCaseNew
             // 
             this.menuItemCaseNew.Name = "menuItemCaseNew";
-            this.menuItemCaseNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseNew.Size = new System.Drawing.Size(152, 22);
             this.menuItemCaseNew.Text = "新建案件";
             this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
-            // 
-            // menuItemCaseUpdate
-            // 
-            this.menuItemCaseUpdate.Name = "menuItemCaseUpdate";
-            this.menuItemCaseUpdate.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseUpdate.Text = "更新案件";
-            this.menuItemCaseUpdate.Click += new System.EventHandler(this.UpdateCase);
             // 
             // menuItemCaseDelete
             // 
             this.menuItemCaseDelete.Name = "menuItemCaseDelete";
-            this.menuItemCaseDelete.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDelete.Size = new System.Drawing.Size(152, 22);
             this.menuItemCaseDelete.Text = "删除案件";
             this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
             // 
             // menuItemCreditCoverNegNew
             // 
             this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
-            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(152, 22);
             this.menuItemCreditCoverNegNew.Text = "新建额度申请";
+            this.menuItemCreditCoverNegNew.Click += new System.EventHandler(this.NewCreditCoverNeg);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // menuItemLegerReport
             // 
             this.menuItemLegerReport.Name = "menuItemLegerReport";
-            this.menuItemLegerReport.Size = new System.Drawing.Size(146, 22);
+            this.menuItemLegerReport.Size = new System.Drawing.Size(152, 22);
             this.menuItemLegerReport.Text = "导出台帐";
             this.menuItemLegerReport.Click += new System.EventHandler(this.ReportLeger);
-            // 
-            // tbCreateUserName
-            // 
-            // 
-            // 
-            // 
-            this.tbCreateUserName.Border.Class = "TextBoxBorder";
-            this.tbCreateUserName.Location = new System.Drawing.Point(460, 6);
-            this.tbCreateUserName.Name = "tbCreateUserName";
-            this.tbCreateUserName.Size = new System.Drawing.Size(133, 20);
-            this.tbCreateUserName.TabIndex = 5;
-            // 
-            // lblCreateUserName
-            // 
-            this.lblCreateUserName.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblCreateUserName.BackgroundStyle.Class = "";
-            this.lblCreateUserName.Location = new System.Drawing.Point(404, 9);
-            this.lblCreateUserName.Name = "lblCreateUserName";
-            this.lblCreateUserName.Size = new System.Drawing.Size(44, 16);
-            this.lblCreateUserName.TabIndex = 4;
-            this.lblCreateUserName.Text = "经办人";
             // 
             // CaseMgr
             // 

@@ -63,17 +63,31 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.ImeMode = ImeMode.OnHalf;
             this.opUserType = opType;
 
+            this.cbPermission.DataSource = User.GetAllPermissions();
+            this.cbPermission.ValueMember = "Permission";
+            this.cbPermission.DisplayMember = "Name";
+
             if (opType == OpUserType.NEW_USER)
             {
                 userBindingSource.DataSource = new User();
             }
             else
             {
-                this.password2TextBox.Text = user.Password;
+                password2TextBox.Text = user.Password;
                 userBindingSource.DataSource = user;
                 user.Backup();
+
+                for (int i = 0; i < this.cbPermission.Items.Count; i++)
+                {
+                    Permission item = ((PermissionItem)this.cbPermission.Items[i]).Permission;
+                    if (PermUtil.ValidatePermission(item))
+                    {
+                        this.cbPermission.SetItemChecked(i, true);
+                    }
+                }
             }
 
+            this.tabControl.SelectedTab = this.tabItemUser;
             this.UpdateUserControlStatus();
         }
 
@@ -114,6 +128,15 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             }
 
             User user = (User)userBindingSource.DataSource;
+
+            int permissionResult = 0;
+            foreach (PermissionItem item in this.cbPermission.CheckedItems)
+            {
+                permissionResult = (permissionResult ^ (int)item.Permission);
+            }
+
+            user.Permission = permissionResult;
+
             if (opUserType == OpUserType.NEW_USER)
             {
                 bool isAddOK = true;
@@ -165,6 +188,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         {
             opUserType = OpUserType.UPDATE_USER;
             UpdateUserControlStatus();
+
         }
 
         /// <summary>
@@ -196,7 +220,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 roleComboBox.Enabled = false;
             }
 
-            this.loginDate.ReadOnly = true;        
+            this.loginDate.ReadOnly = true;
         }
 
         /// <summary>
@@ -214,5 +238,18 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         }
 
         #endregion Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdatePermission(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            {
+                this.cbPermission.Enabled = true;
+            }
+        }
     }
 }

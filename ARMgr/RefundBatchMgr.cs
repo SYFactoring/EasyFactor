@@ -84,6 +84,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.AutoGenerateColumns = false;
             this.bs = new BindingSource();
             this.dgvBatches.DataSource = bs;
+
             this.opBatchType = batchType;
 
             if (batchType == OpBatchType.CHECK)
@@ -132,11 +133,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void Check(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (!PermUtil.CheckPermission(Permission.INVOICE_CHECK))
             {
                 return;
             }
 
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
 
             InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
             if (MessageBox.Show("是否确认复核通过该批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
@@ -158,6 +163,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DeleteBatch(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvBatches.SelectedRows.Count == 0)
             {
                 return;
@@ -269,6 +279,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void Reject(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            {
+                return;
+            }
+
             if (this.dgvBatches.SelectedRows.Count == 0)
             {
                 return;
@@ -313,17 +328,24 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (App.Current.CurUser.Role == "复核员")
+            if (PermUtil.ValidatePermission(Permission.INVOICE_UPDATE))
             {
-                this.menuItemCheck.Visible = true;
-                this.menuItemReject.Visible = true;
-                this.toolStripSeparator2.Visible = true;
+                this.menuItemBatchDelete.Enabled = true;
             }
             else
             {
-                this.menuItemCheck.Visible = false;
-                this.menuItemReject.Visible = false;
-                this.toolStripSeparator2.Visible = false;
+                this.menuItemBatchDelete.Enabled = false;
+            }
+
+            if (PermUtil.ValidatePermission(Permission.INVOICE_CHECK))
+            {
+                this.menuItemCheck.Enabled = true;
+                this.menuItemReject.Enabled = true;
+            }
+            else
+            {
+                this.menuItemCheck.Enabled = false;
+                this.menuItemReject.Enabled = false;
             }
         }
 

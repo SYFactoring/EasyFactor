@@ -113,17 +113,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ImportDepartments(object sender, EventArgs e)
-        {
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_DEPARTMENTS);
-            importForm.Show();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Query(object sender, EventArgs e)
         {
             var queryResult = App.Current.DbContext.Departments.Where(d =>

@@ -114,6 +114,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT
         }
+
         /// <summary>
         /// Review Type
         /// </summary>
@@ -481,6 +482,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void DeleteClientCreditLine(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
@@ -534,6 +540,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void DeleteContract(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
@@ -586,6 +597,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void DeleteReview(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
@@ -654,6 +670,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void FreezeClientCreditLine(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
@@ -688,6 +709,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void NewClientCreditLine(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
@@ -708,6 +734,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void NewContract(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
@@ -728,6 +759,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void NewReview(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
@@ -817,6 +853,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void ResetClient(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             if (this.opClientType == OpClientType.UPDATE_CLIENT)
             {
                 Client client = this.clientBindingSource.DataSource as Client;
@@ -835,6 +876,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void SaveClient(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             if (!this.clientValidator.Validate())
             {
                 return;
@@ -908,6 +954,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SaveClientCreditLine(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             if (!this.creditLineValidator.Validate())
             {
                 return;
@@ -1046,6 +1097,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void SaveContract(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             if (!this.contractValidator.Validate())
             {
                 return;
@@ -1175,6 +1231,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SaveReview(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             if (!this.reviewValidator.Validate())
             {
                 return;
@@ -1301,6 +1362,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SelectGroup(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             ClientMgr clientMgr = new ClientMgr();
             QueryForm queryUI = new QueryForm(clientMgr, "选择集团");
@@ -1319,6 +1385,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SelectGroupCreditLine(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client.ClientGroup == null)
             {
@@ -1422,6 +1493,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UnfreezeClientCreditLine(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
@@ -1456,6 +1532,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UpdateClient(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
@@ -1554,6 +1635,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UpdateClientCreditLine(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
@@ -1623,6 +1709,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UpdateContract(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             this.opContractType = OpContractType.UPDATE_CONTRACT;
             this.UpdateContractControlStatus();
         }
@@ -1667,9 +1758,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UpdateReivew(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             this.opReviewType = OpReviewType.UPDATE_REVIEW;
             this.UpdateReviewControlStatus();
-
         }
 
         /// <summary>

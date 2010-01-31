@@ -7,49 +7,13 @@
 namespace CMBC.EasyFactor.DB.dbml
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoicePaymentLog
     {
-        #region Properties (9)
-
-        /// <summary>
-        /// Gets
-        /// </summary>
-        public double AssignAmount
-        {
-            get
-            {
-                return Invoice.AssignAmount;
-            }
-        }
-
-        /// <summary>
-        /// Gets
-        /// </summary>
-        public DateTime AssignDate
-        {
-            get
-            {
-                return Invoice.AssignDate;
-            }
-        }
-
-        /// <summary>
-        /// Gets
-        /// </summary>
-        public double AssignOutstanding
-        {
-            get
-            {
-                return Invoice.AssignOutstanding;
-            }
-        }
+        #region Properties (2)
 
         /// <summary>
         /// Gets
@@ -65,55 +29,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public DateTime DueDate
+        public DateTime PaymentDate
         {
             get
             {
-                return Invoice.DueDate;
-            }
-        }
-
-        /// <summary>
-        /// Gets
-        /// </summary>
-        public double? FinanceAmount
-        {
-            get
-            {
-                return this.Invoice.FinanceAmount;
-            }
-        }
-
-        /// <summary>
-        /// Gets
-        /// </summary>
-        public DateTime? FinanceDate
-        {
-            get
-            {
-                return this.Invoice.FinanceDate;
-            }
-        }
-
-        /// <summary>
-        /// Gets
-        /// </summary>
-        public DateTime? FinanceDueDate
-        {
-            get
-            {
-                return this.Invoice.FinanceDueDate;
-            }
-        }
-
-        /// <summary>
-        /// Gets
-        /// </summary>
-        public double? FinanceOutstanding
-        {
-            get
-            {
-                return this.Invoice.FinanceOutstanding;
+                return this.InvoicePaymentBatch.PaymentDate;
             }
         }
 

@@ -29,7 +29,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Fields
 
-        #region Constructors (1)
+        #region Constructors (3)
 
         /// <summary>
         /// Initializes a new instance of the CaseMgr class
@@ -79,6 +79,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCurrency.DataSource = currencyList;
             this.cbCurrency.DisplayMember = "CurrencyFormat";
             this.cbCurrency.ValueMember = "CurrencyCode";
+
+            this.UpdateContextMenu();
         }
 
         #endregion Constructors
@@ -105,9 +107,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Properties
 
-        #region Methods (10)
+        #region Methods (11)
 
-        // Private Methods (10) 
+        // Private Methods (11) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -133,13 +135,18 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void DeleteCase(object sender, System.EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvCases.CurrentCell == null)
             {
                 return;
             }
 
             Case selectedCase = (Case)this.bs.List[this.dgvCases.CurrentCell.RowIndex];
-            if (MessageBox.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            if (MessageBox.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bool isDeleteOK = true;
                 foreach (InvoiceAssignBatch assignBatch in selectedCase.InvoiceAssignBatches)
@@ -212,7 +219,34 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void NewCase(object sender, System.EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            {
+                return;
+            }
+
             CaseDetail caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.NEW_CASE);
+            caseDetail.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewCreditCoverNeg(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            {
+                return;
+            }
+
+            if (this.dgvCases.CurrentCell == null)
+            {
+                return;
+            }
+
+            Case selectedCase = (Case)this.bs.List[this.dgvCases.CurrentCell.RowIndex];
+            CaseDetail caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCreditCoverNegType.NEW_CREDIT_COVER_NEG);
             caseDetail.ShowDialog(this);
         }
 
@@ -223,7 +257,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void QueryCase(object sender, EventArgs e)
         {
-
             DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
             DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
             string createUserName = this.tbCreateUserName.Text;
@@ -517,20 +550,22 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// Update selected case
+        /// 
         /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void UpdateCase(object sender, System.EventArgs e)
+        private void UpdateContextMenu()
         {
-            if (this.dgvCases.CurrentCell == null)
+            if (PermUtil.ValidatePermission(Permission.CASE_UPDATE))
             {
-                return;
+                this.menuItemCaseNew.Enabled = true;
+                this.menuItemCaseDelete.Enabled = true;
+                this.menuItemCreditCoverNegNew.Enabled = true;
             }
-
-            Case selectedCase = (Case)this.bs.List[this.dgvCases.CurrentCell.RowIndex];
-            CaseDetail caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.UPDATE_CASE);
-            caseDetail.ShowDialog(this);
+            else
+            {
+                this.menuItemCaseNew.Enabled = false;
+                this.menuItemCaseDelete.Enabled = false;
+                this.menuItemCreditCoverNegNew.Enabled = false;
+            }
         }
 
         #endregion Methods

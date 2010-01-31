@@ -7,13 +7,13 @@
 namespace CMBC.EasyFactor.CaseMgr
 {
     using System;
+    using System.Data.Linq;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
 
     /// <summary>
     /// 
@@ -695,6 +695,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SaveCDA(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            {
+                return;
+            }
+
             CDA cda = (CDA)this.CDABindingSource.DataSource;
 
             if (!superValidator.Validate())
@@ -825,6 +830,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SelectCase(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            {
+                return;
+            }
+
             CaseMgr caseMgr = new CaseMgr(true);
             QueryForm queryForm = new QueryForm(caseMgr, "选择案件");
             caseMgr.OwnerForm = queryForm;
@@ -846,6 +856,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void UpdateCDA(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            {
+                return;
+            }
+
             CDA cda = (CDA)this.CDABindingSource.DataSource;
             if (cda == null)
             {

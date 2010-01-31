@@ -94,6 +94,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DeleteLog(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvRefundLogs.SelectedRows.Count == 0)
             {
                 return;
@@ -145,6 +150,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SaveBatch(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             if (!this.superValidator.Validate())
             {
                 return;
@@ -188,6 +198,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void UpdateBatch(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             this.opBatchType = OpBatchType.UPDATE_BATCH;
             this.UpdateBatchControlStatus();
         }

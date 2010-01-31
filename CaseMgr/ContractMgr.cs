@@ -7,21 +7,20 @@
 namespace CMBC.EasyFactor.CaseMgr
 {
     using System;
-    using System.Data.SqlClient;
+    using System.Drawing;
     using System.Linq;
     using System.Threading;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.Utils;
-    using System.Drawing;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class ContractMgr : UserControl
     {
-        #region Fields (2)
+        #region Fields (1)
 
         /// <summary>
         /// 
@@ -70,9 +69,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Properties
 
-        #region Methods (11)
+        #region Methods (8)
 
-        // Private Methods (11) 
+        // Private Methods (8) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -98,6 +97,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void DeleteContract(object sender, System.EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvContracts.SelectedRows.Count == 0)
             {
                 return;
@@ -157,38 +161,17 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ImportContracts(object sender, EventArgs e)
-        {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string fileName = fileDialog.FileName;
-                Thread t = new Thread(this.ImportContractsImpl);
-                t.Start(fileName);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        private void ImportContractsImpl(object obj)
-        {
-
-        }
-
-        /// <summary>
         /// Create a new Contract
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
         private void NewContract(object sender, System.EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvContracts.SelectedRows.Count == 0)
             {
                 return;
@@ -245,31 +228,20 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// Update selected contract
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void UpdateContract(object sender, System.EventArgs e)
-        {
-            if (this.dgvContracts.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            Contract selectedContract = (Contract)this.bs.List[this.dgvContracts.SelectedRows[0].Index];
-            ClientDetail clientDetail = new ClientDetail(selectedContract, ClientDetail.OpContractType.UPDATE_CONTRACT);
-            clientDetail.ShowDialog(this);
-        }
-
-        /// <summary>
         /// Update editable status
         /// </summary>
         private void UpdateContextMenu()
         {
-            this.menuItemContractNew.Enabled = true;
-            this.menuItemContractUpdate.Enabled = true;
-            this.menuItemContractDelete.Enabled = true;
-            this.menuItemContractImport.Enabled = true;
+            if (PermUtil.ValidatePermission(Permission.BASICINFO_UPDATE))
+            {
+                this.menuItemContractNew.Enabled = true;
+                this.menuItemContractDelete.Enabled = true;
+            }
+            else
+            {
+                this.menuItemContractNew.Enabled = false;
+                this.menuItemContractDelete.Enabled = false;
+            }
         }
 
         #endregion Methods

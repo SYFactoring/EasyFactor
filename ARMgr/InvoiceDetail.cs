@@ -8,11 +8,11 @@ namespace CMBC.EasyFactor.ARMgr
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Linq;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
 
     /// <summary>
     /// 
@@ -82,6 +82,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.flawReasonCheckedListBox.DisplayMember = "Reason";
             this.flawReasonCheckedListBox.ValueMember = "Index";
 
+            this.disputeReasonCheckedListBox.DataSource = DisputeReason.GetAllDisputeReasons();
+            this.disputeReasonCheckedListBox.DisplayMember = "Reason";
+            this.disputeReasonCheckedListBox.ValueMember = "Index";
+
             this.dgvPaymentLogs.DataSource = invoice.InvoicePaymentLogs;
             this.dgvRefundLogs.DataSource = invoice.InvoiceRefundLogs;
             if (invoice.InvoicePaymentLogs.Count > 0)
@@ -113,21 +117,12 @@ namespace CMBC.EasyFactor.ARMgr
                 disputeList.AddRange(invoice.DisputeReason.Split(';'));
                 for (int i = 0; i < this.disputeReasonCheckedListBox.Items.Count; i++)
                 {
-                    string item = (string)this.disputeReasonCheckedListBox.Items[i];
+                    string item = ((DisputeReason)this.disputeReasonCheckedListBox.Items[i]).Index;
                     if (disputeList.Contains(item))
                     {
                         this.disputeReasonCheckedListBox.SetItemChecked(i, true);
-                        disputeList.Remove(item);
                     }
                 }
-
-                string otherReason = string.Empty;
-                foreach (string other in disputeList)
-                {
-                    otherReason += (other + Environment.NewLine);
-                }
-
-                this.tbDisputeReason.Text = otherReason;
             }
 
             invoice.Backup();
@@ -226,6 +221,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void Dispute(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
             invoice.DisputeDate = DateTime.Now.Date;
             invoice.DisputeUserName = App.Current.CurUser.Name;
@@ -243,6 +243,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DisputeResolve(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
             invoice.DisputeResolveDate = DateTime.Now.Date;
             invoice.DisputeResolveUserName = App.Current.CurUser.Name;
@@ -270,6 +275,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void Flaw(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             this.flawReasonCheckedListBox.Enabled = true;
             this.tbFlawReason.ReadOnly = false;
             Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
@@ -283,6 +293,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void FlawResolve(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
             invoice.FlawResolveDate = DateTime.Now.Date;
             invoice.FlawResolveUserName = App.Current.CurUser.Name;
@@ -321,6 +336,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ResetInvoice(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             if (this.opInvoiceType == OpInvoiceType.UPDATE_INVOICE)
             {
                 Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
@@ -335,6 +355,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SaveInvoice(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             if (!this.superValidator.Validate())
             {
                 return;
@@ -354,11 +379,6 @@ namespace CMBC.EasyFactor.ARMgr
             foreach (string item in this.disputeReasonCheckedListBox.CheckedItems)
             {
                 disputeReason += (item + ";");
-            }
-
-            if (this.tbDisputeReason.Text != string.Empty)
-            {
-                disputeReason += this.tbDisputeReason.Text;
             }
 
             invoice.DisputeReason = disputeReason;
@@ -399,6 +419,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void UpdateInvoice(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
             this.opInvoiceType = OpInvoiceType.UPDATE_INVOICE;
             this.UpdateInvoiceControlStatus();
         }

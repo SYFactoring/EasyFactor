@@ -232,6 +232,7 @@
     <Compile Include="DB.dbml\ClientCreditLine.cs" />
     <Compile Include="DB.dbml\ClientReview.cs" />
     <Compile Include="DB.dbml\Contract.cs" />
+    <Compile Include="DB.dbml\DisputeReason.cs" />
     <Compile Include="DB.dbml\Exchange.cs" />
     <Compile Include="DB.dbml\FlawReason.cs" />
     <Compile Include="DB.dbml\InvoicePaymentLog.cs" />
@@ -335,6 +336,7 @@
     <Compile Include="Utils\ImportForm.Designer.cs">
       <DependentUpon>ImportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\PermUtil.cs" />
     <Compile Include="Utils\QueryForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -45,6 +45,7 @@
       <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="MSN" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="LoginDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Permission" Type="System.Int32" DbType="Int" CanBeNull="false" UpdateCheck="WhenChanged" />
     </Type>
   </Table>
   <Table Name="dbo.CDA" Member="CDAs">
@@ -495,6 +496,7 @@
       <Column Name="DisputeResolveUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="FlawOtherReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="DisputeOtherReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Invoice_InvoicePaymentLog" Member="InvoicePaymentLogs" OtherKey="InvoiceNo" Type="InvoicePaymentLog" />
       <Association Name="Invoice_InvoiceRefundLog" Member="InvoiceRefundLogs" OtherKey="InvoiceNo" Type="InvoiceRefundLog" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="InvoiceAssignBatch" ThisKey="AssignBatchNo" Type="InvoiceAssignBatch" IsForeignKey="true" />

@@ -7,11 +7,11 @@
 namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
     using System;
+    using System.Data.Linq;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
 
     /// <summary>
     /// 
@@ -24,12 +24,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// 
         /// </summary>
         private BindingSource bsCreditLines;
-
         /// <summary>
         /// 
         /// </summary>
         private OpFactorCreditLineType opFactorCreditLineType;
-
         /// <summary>
         /// 
         /// </summary>
@@ -59,7 +57,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             /// </summary>
             DETAIL_FACTOR
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -123,14 +120,15 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 factor.Backup();
             }
 
-            this.UpdateFactorControlStatus();
-            this.UpdateFactorCreditLineControlStatus();
-
             if (opFactorCreditLineType == OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE)
             {
                 this.tabControl.SelectedTab = this.tabItemFactorCreditLine;
                 this.factorCreditLineBindingSource.DataSource = new FactorCreditLine();
             }
+
+
+            this.UpdateFactorControlStatus();
+            this.UpdateFactorCreditLineControlStatus();
         }
 
         /// <summary>
@@ -215,6 +213,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void DeleteFactorCreditLine(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
@@ -301,6 +304,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void FreezeFactorCreditLine(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
@@ -335,6 +343,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void NewFactorCreditLine(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
@@ -372,6 +385,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e">Event Args</param>
         private void ResetFactor(object sender, System.EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             if (opFactorType == OpFactorType.UPDATE_FACTOR)
             {
                 Factor factor = this.factorBindingSource.DataSource as Factor;
@@ -390,6 +408,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e">Event Args</param>
         private void SaveFactor(object sender, System.EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             if (!this.factorValidator.Validate())
             {
                 return;
@@ -462,6 +485,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void SaveFactorCreditLine(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             if (!this.creditLineValidator.Validate())
             {
                 return;
@@ -614,6 +642,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void SelectGroup(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             FactorMgr factorMgr = new FactorMgr();
             QueryForm queryUI = new QueryForm(factorMgr, "选择集团");
@@ -645,6 +678,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void UnfreezeFactorCreditLine(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
@@ -677,31 +715,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UpdateCreditLine(object sender, EventArgs e)
-        {
-            Factor factor = (Factor)this.factorBindingSource.DataSource;
-            if (factor == null || factor.FactorCode == null)
-            {
-                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            if (!(this.factorCreditLineBindingSource.DataSource is FactorCreditLine))
-            {
-                return;
-            }
-
-            this.opFactorCreditLineType = OpFactorCreditLineType.UPDATE_FACTOR_CREDIT_LINE;
-            this.UpdateFactorCreditLineControlStatus();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void UpdateFactor(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
@@ -789,6 +809,34 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 }
                 this.btnGroupSelect.Visible = false;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateFactorCreditLine(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
+            Factor factor = (Factor)this.factorBindingSource.DataSource;
+            if (factor == null || factor.FactorCode == null)
+            {
+                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.factorCreditLineBindingSource.DataSource is FactorCreditLine))
+            {
+                return;
+            }
+
+            this.opFactorCreditLineType = OpFactorCreditLineType.UPDATE_FACTOR_CREDIT_LINE;
+            this.UpdateFactorCreditLineControlStatus();
         }
 
         /// <summary>
