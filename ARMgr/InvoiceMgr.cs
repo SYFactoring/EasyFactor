@@ -94,26 +94,21 @@ namespace CMBC.EasyFactor.ARMgr
             if (opInvoiceType == OpInvoiceType.FLAW_RESOLVE)
             {
                 this.cbIsFlaw.CheckValue = "Y";
-                var queryResult = App.Current.DbContext.Invoices.Where(invoice => invoice.IsFlaw == true);
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                this.QueryInvoices(null, null);
             }
             else if (opInvoiceType == OpInvoiceType.DISPUTE_RESOLVE)
             {
                 this.cbIsDispute.CheckValue = "Y";
-                var queryResult = App.Current.DbContext.Invoices.Where(invoice => invoice.IsDispute == true);
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                this.QueryInvoices(null, null);
             }
             else if (opInvoiceType == OpInvoiceType.OVER_DUE)
             {
+                this.colAssignOverDueDays.Visible = true;
+                this.colFinanceOverDueDays.Visible = true;
+
                 DateTime assignOverDueDate = DateTime.Now.Date.AddDays(-1);
                 DateTime financeOverDueDate = DateTime.Now.Date.AddDays(-1);
-                var queryResult = App.Current.DbContext.Invoices.Where(invoice =>
-                     (invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount && invoice.DueDate <= assignOverDueDate)
-                  || (invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() && invoice.FinanceDueDate <= financeOverDueDate));
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                this.QueryInvoices(null, null);
             }
 
             this.cbCaseMark.SelectedIndex = 1;

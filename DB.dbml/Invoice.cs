@@ -320,6 +320,25 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets 保理费收入
+        /// </summary>
+        public double? IncomeAmount
+        {
+            get
+            {
+                CDA cda = this.InvoiceAssignBatch.Case.ActiveCDA;
+                if (cda != null)
+                {
+                    return this.Commission.GetValueOrDefault() + cda.HandFee;
+                }
+                else
+                {
+                    return this.Commission;
+                }
+            }
+        }
+
         #endregion Properties
 
         #region Methods (12)
@@ -558,7 +577,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        private static Regex InvoiceNoRegex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>]+$"); 
+        private static Regex InvoiceNoRegex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>]+$");
         /// <summary>
         /// 
         /// </summary>
