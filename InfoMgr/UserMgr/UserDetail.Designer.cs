@@ -485,10 +485,11 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.roleComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.roleComboBox.FormattingEnabled = true;
             this.roleComboBox.Items.AddRange(new object[] {
-            "操作员",
-            "复核员",
-            "审核员",
-            "管理员"});
+            "营销组",
+            "工作组",
+            "维护组",
+            "主管",
+            "有权人"});
             this.roleComboBox.Location = new System.Drawing.Point(92, 122);
             this.roleComboBox.Name = "roleComboBox";
             this.roleComboBox.Size = new System.Drawing.Size(154, 21);

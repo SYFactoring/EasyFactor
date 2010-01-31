@@ -1539,7 +1539,6 @@ namespace CMBC.EasyFactor.Utils
                                     financeBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, column++]);
                                     financeBatch.FinanceRate = (System.Nullable<double>)valueArray[row, column++];
                                     financeBatch.CostRate = (System.Nullable<double>)valueArray[row, column++];
-                                    financeBatch.InterestType = String.Format("{0:G}", valueArray[row, column++]);
                                     financeBatch.FinancePeriodBegin = (DateTime)valueArray[row, column++];
                                     financeBatch.FinancePeriodEnd = (DateTime)valueArray[row, column++];
                                     financeBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);

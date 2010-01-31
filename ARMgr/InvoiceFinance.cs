@@ -113,15 +113,8 @@ namespace CMBC.EasyFactor.ARMgr
             if (invoice.Interest.HasValue == false)
             {
                 int period = (batch.FinancePeriodEnd - batch.FinancePeriodBegin).Days;
-                switch (batch.InterestType)
-                {
-                    case "一次性收取":
-                        invoice.Interest = invoice.FinanceAmount * (batch.FinanceRate.GetValueOrDefault() - batch.CostRate.GetValueOrDefault()) / 360 * period;
-                        invoice.InterestDate = invoice.FinanceDate;
-                        break;
-                    default:
-                        break;
-                }
+                invoice.Interest = invoice.FinanceAmount * (batch.FinanceRate.GetValueOrDefault() - batch.CostRate.GetValueOrDefault()) / 360 * period;
+                invoice.InterestDate = invoice.FinanceDate;
             }
 
             if (invoice.Commission.HasValue == false)

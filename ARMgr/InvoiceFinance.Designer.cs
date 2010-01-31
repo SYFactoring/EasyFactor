@@ -61,7 +61,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Controls.TextBoxX financeRateTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx financeTypeComboBoxEx;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx interestTypeComboBoxEx;
         private System.Windows.Forms.BindingNavigator invoiceBindingNavigator;
         private System.Windows.Forms.BindingSource invoiceBindingSource;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
@@ -116,7 +115,6 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX financeAmountLabel;
             DevComponents.DotNetBar.LabelX financePeriodBeginLabel;
             DevComponents.DotNetBar.LabelX financeRateLabel;
-            DevComponents.DotNetBar.LabelX interestTypeLabel;
             DevComponents.DotNetBar.LabelX factorCodeLabel;
             DevComponents.DotNetBar.LabelX costRateLabel;
             DevComponents.DotNetBar.LabelX financeTypeLabel;
@@ -143,7 +141,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.costRateTextBoxX = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.factorCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.interestTypeComboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.financeRateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.financePeriodEndDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.financePeriodBeginDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -198,7 +195,6 @@ namespace CMBC.EasyFactor.ARMgr
             financeAmountLabel = new DevComponents.DotNetBar.LabelX();
             financePeriodBeginLabel = new DevComponents.DotNetBar.LabelX();
             financeRateLabel = new DevComponents.DotNetBar.LabelX();
-            interestTypeLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
             costRateLabel = new DevComponents.DotNetBar.LabelX();
             financeTypeLabel = new DevComponents.DotNetBar.LabelX();
@@ -268,19 +264,6 @@ namespace CMBC.EasyFactor.ARMgr
             financeRateLabel.TabIndex = 7;
             financeRateLabel.Text = "融资利率:";
             // 
-            // interestTypeLabel
-            // 
-            interestTypeLabel.AutoSize = true;
-            // 
-            // 
-            // 
-            interestTypeLabel.BackgroundStyle.Class = "";
-            interestTypeLabel.Location = new System.Drawing.Point(376, 27);
-            interestTypeLabel.Name = "interestTypeLabel";
-            interestTypeLabel.Size = new System.Drawing.Size(59, 16);
-            interestTypeLabel.TabIndex = 11;
-            interestTypeLabel.Text = "收息方式:";
-            // 
             // factorCodeLabel
             // 
             factorCodeLabel.AutoSize = true;
@@ -288,7 +271,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             factorCodeLabel.BackgroundStyle.Class = "";
-            factorCodeLabel.Location = new System.Drawing.Point(375, 47);
+            factorCodeLabel.Location = new System.Drawing.Point(375, 27);
             factorCodeLabel.Name = "factorCodeLabel";
             factorCodeLabel.Size = new System.Drawing.Size(47, 16);
             factorCodeLabel.TabIndex = 16;
@@ -366,8 +349,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelFinanceBatch.Controls.Add(this.costRateTextBoxX);
             this.panelFinanceBatch.Controls.Add(factorCodeLabel);
             this.panelFinanceBatch.Controls.Add(this.factorCodeTextBox);
-            this.panelFinanceBatch.Controls.Add(interestTypeLabel);
-            this.panelFinanceBatch.Controls.Add(this.interestTypeComboBoxEx);
             this.panelFinanceBatch.Controls.Add(financeRateLabel);
             this.panelFinanceBatch.Controls.Add(this.financeRateTextBox);
             this.panelFinanceBatch.Controls.Add(this.financePeriodEndDateTimePicker);
@@ -465,7 +446,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.btnFactorSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnFactorSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFactorSelect.Location = new System.Drawing.Point(546, 44);
+            this.btnFactorSelect.Location = new System.Drawing.Point(546, 24);
             this.btnFactorSelect.Name = "btnFactorSelect";
             this.btnFactorSelect.Size = new System.Drawing.Size(28, 23);
             this.btnFactorSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -532,31 +513,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.factorCodeTextBox.Border.Class = "TextBoxBorder";
             this.factorCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "FactorCode", true));
-            this.factorCodeTextBox.Location = new System.Drawing.Point(440, 46);
+            this.factorCodeTextBox.Location = new System.Drawing.Point(440, 26);
             this.factorCodeTextBox.Name = "factorCodeTextBox";
             this.factorCodeTextBox.Size = new System.Drawing.Size(100, 20);
             this.factorCodeTextBox.TabIndex = 17;
-            // 
-            // interestTypeComboBoxEx
-            // 
-            this.interestTypeComboBoxEx.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "InterestType", true));
-            this.interestTypeComboBoxEx.DisplayMember = "Text";
-            this.interestTypeComboBoxEx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.interestTypeComboBoxEx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.interestTypeComboBoxEx.FormattingEnabled = true;
-            this.interestTypeComboBoxEx.ItemHeight = 14;
-            this.interestTypeComboBoxEx.Items.AddRange(new object[] {
-            "一次性收取",
-            "月结",
-            "季结",
-            "利随本清",
-            "未知"});
-            this.interestTypeComboBoxEx.Location = new System.Drawing.Point(441, 24);
-            this.interestTypeComboBoxEx.Name = "interestTypeComboBoxEx";
-            this.interestTypeComboBoxEx.Size = new System.Drawing.Size(121, 20);
-            this.interestTypeComboBoxEx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.interestTypeComboBoxEx.TabIndex = 12;
-            this.superValidator.SetValidator1(this.interestTypeComboBoxEx, this.requiredFieldValidator7);
             // 
             // financeRateTextBox
             // 

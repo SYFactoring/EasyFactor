@@ -434,7 +434,6 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
             return creditNoteList.Count;
         }
 
@@ -447,9 +446,6 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportFinanceByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -704,19 +700,18 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.BatchCurrency;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinanceRate;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.CostRate;
-                        datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.InterestType;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinancePeriodBegin;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinancePeriodEnd;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.Comment;
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.CreateUserName;
                     }
                     //融资
-                    column = 27;
+                    column = 26;
                     datasheet.Cells[row + 2, column++] = invoice.FinanceAmount;
                     //付款批次
                     if (invoice.InvoicePaymentLogs.Count > 0)
                     {
-                        column = 28;
+                        column = 27;
                         InvoicePaymentLog log = invoice.InvoicePaymentLogs[0];
                         datasheet.Cells[row + 2, column++] = log.InvoicePaymentBatch.PaymentBatchNo;
                         datasheet.Cells[row + 2, column++] = log.InvoicePaymentBatch.PaymentType;
@@ -726,12 +721,12 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2, column++] = log.InvoicePaymentBatch.CreateUserName;
                     }
                     //付款
-                    column = 34;
+                    column = 33;
                     datasheet.Cells[row + 2, column++] = invoice.PaymentAmount;
                     //还款批次
                     if (invoice.InvoiceRefundLogs.Count > 0)
                     {
-                        column = 35;
+                        column = 34;
                         InvoiceRefundLog log = invoice.InvoiceRefundLogs[0];
                         datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundBatchNo;
                         datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundType;
@@ -740,7 +735,7 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.CreateUserName;
                     }
                     //还款
-                    column = 40;
+                    column = 39;
                     datasheet.Cells[row + 2, column++] = invoice.RefundAmount;
                     //手续费
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
@@ -756,7 +751,7 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 10 || range.Column == 11 || range.Column == 27 || range.Column == 34 || range.Column == 40 || range.Column == 41 || range.Column == 43)
+                    if (range.Column == 10 || range.Column == 11 || range.Column == 26 || range.Column == 33 || range.Column == 39 || range.Column == 40 || range.Column == 42)
                     {
                         range.NumberFormatLocal = "0.00";
                     }

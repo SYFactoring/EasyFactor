@@ -232,4 +232,74 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Methods
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class City
+    {
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loc"></param>
+        /// <param name="depts"></param>
+        public City(string loc, List<Department> depts)
+        {
+            Location = loc;
+
+            foreach (Department dept in depts)
+            {
+                AssignAmount += dept.AssignAmount;
+                FinanceAmount += dept.FinanceAmount;
+                PaymentAmount += dept.PaymentAmount;
+                IncomeAmount += dept.IncomeAmount;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Location
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double AssignAmount
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double FinanceAmount
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double PaymentAmount
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double IncomeAmount
+        {
+            get;
+            set;
+        }
+    }
 }

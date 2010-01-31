@@ -11,10 +11,33 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     /// </summary>
     public partial class DepartmentMgr
     {
+		#region Fields (26) 
+
+        private DevComponents.DotNetBar.ButtonX btnQuery;
+        private DevComponents.DotNetBar.ButtonX btnReset;
+        private System.Windows.Forms.ContextMenuStrip cmuDeptMgr;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvDepts;
+        private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.LabelX lblDeparmentName;
+        private DevComponents.DotNetBar.LabelX lblDepartmentCode;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDepartmentDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDepartmentNew;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemSelect;
+        private DevComponents.DotNetBar.PanelEx panelQuery;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbDepartmentCode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbDepartmentName;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+
+		#endregion Fields 
+
+		#region Methods (1) 
+
+		// Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -29,6 +52,10 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 
             base.Dispose(disposing);
         }
+
+		#endregion Methods 
+
+
 
         #region Component Designer generated code
 
@@ -54,22 +81,22 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.tbDepartmentCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDepartmentCode = new DevComponents.DotNetBar.LabelX();
             this.dgvDepts = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.DepartmentCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DepartmentNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LocationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DomainColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ManagerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Contact_1Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIncomeAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemDepartmentNew = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDepartmentDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDepartmentCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDepartmentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDomain = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colManager = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colContact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIncomeAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepts)).BeginInit();
             this.cmuDeptMgr.SuspendLayout();
@@ -149,13 +176,14 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // lblDeparmentName
             // 
+            this.lblDeparmentName.AutoSize = true;
             // 
             // 
             // 
             this.lblDeparmentName.BackgroundStyle.Class = "";
-            this.lblDeparmentName.Location = new System.Drawing.Point(167, 3);
+            this.lblDeparmentName.Location = new System.Drawing.Point(167, 7);
             this.lblDeparmentName.Name = "lblDeparmentName";
-            this.lblDeparmentName.Size = new System.Drawing.Size(56, 23);
+            this.lblDeparmentName.Size = new System.Drawing.Size(56, 16);
             this.lblDeparmentName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.lblDeparmentName.TabIndex = 2;
             this.lblDeparmentName.Text = "分部名称";
@@ -173,13 +201,14 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // lblDepartmentCode
             // 
+            this.lblDepartmentCode.AutoSize = true;
             // 
             // 
             // 
             this.lblDepartmentCode.BackgroundStyle.Class = "";
-            this.lblDepartmentCode.Location = new System.Drawing.Point(3, 3);
+            this.lblDepartmentCode.Location = new System.Drawing.Point(3, 7);
             this.lblDepartmentCode.Name = "lblDepartmentCode";
-            this.lblDepartmentCode.Size = new System.Drawing.Size(56, 23);
+            this.lblDepartmentCode.Size = new System.Drawing.Size(56, 16);
             this.lblDepartmentCode.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.lblDepartmentCode.TabIndex = 0;
             this.lblDepartmentCode.Text = "分部编号";
@@ -199,12 +228,12 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.dgvDepts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDepts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDepts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.DepartmentCodeColumn,
-            this.DepartmentNameColumn,
-            this.LocationColumn,
-            this.DomainColumn,
-            this.ManagerColumn,
-            this.Contact_1Column,
+            this.colLocation,
+            this.colDepartmentCode,
+            this.colDepartmentName,
+            this.colDomain,
+            this.colManager,
+            this.colContact,
             this.colAssignAmount,
             this.colFinanceAmount,
             this.colPaymentAmount,
@@ -230,53 +259,96 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.dgvDepts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvDepts.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvDepts_RowPostPaint);
             // 
-            // DepartmentCodeColumn
+            // cmuDeptMgr
             // 
-            this.DepartmentCodeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DepartmentCodeColumn.DataPropertyName = "DepartmentCode";
-            this.DepartmentCodeColumn.HeaderText = "部门代码";
-            this.DepartmentCodeColumn.Name = "DepartmentCodeColumn";
-            this.DepartmentCodeColumn.ReadOnly = true;
+            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemDetail,
+            this.menuItemSelect,
+            this.toolStripSeparator1,
+            this.menuItemDepartmentNew,
+            this.menuItemDepartmentDelete});
+            this.cmuDeptMgr.Name = "cmuDeptMgr";
+            this.cmuDeptMgr.Size = new System.Drawing.Size(123, 98);
             // 
-            // DepartmentNameColumn
+            // menuItemDetail
             // 
-            this.DepartmentNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DepartmentNameColumn.DataPropertyName = "DepartmentName";
-            this.DepartmentNameColumn.HeaderText = "部门名称";
-            this.DepartmentNameColumn.Name = "DepartmentNameColumn";
-            this.DepartmentNameColumn.ReadOnly = true;
+            this.menuItemDetail.Name = "menuItemDetail";
+            this.menuItemDetail.Size = new System.Drawing.Size(122, 22);
+            this.menuItemDetail.Text = "详细信息";
+            this.menuItemDetail.Click += new System.EventHandler(this.Detail);
             // 
-            // LocationColumn
+            // menuItemSelect
             // 
-            this.LocationColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.LocationColumn.DataPropertyName = "Location";
-            this.LocationColumn.HeaderText = "城市";
-            this.LocationColumn.Name = "LocationColumn";
-            this.LocationColumn.ReadOnly = true;
+            this.menuItemSelect.Name = "menuItemSelect";
+            this.menuItemSelect.Size = new System.Drawing.Size(122, 22);
+            this.menuItemSelect.Text = "选定分部";
+            this.menuItemSelect.Click += new System.EventHandler(this.Select);
             // 
-            // DomainColumn
+            // toolStripSeparator1
             // 
-            this.DomainColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DomainColumn.DataPropertyName = "Domain";
-            this.DomainColumn.HeaderText = "事业部";
-            this.DomainColumn.Name = "DomainColumn";
-            this.DomainColumn.ReadOnly = true;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
             // 
-            // ManagerColumn
+            // menuItemDepartmentNew
             // 
-            this.ManagerColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ManagerColumn.DataPropertyName = "Manager";
-            this.ManagerColumn.HeaderText = "负责人";
-            this.ManagerColumn.Name = "ManagerColumn";
-            this.ManagerColumn.ReadOnly = true;
+            this.menuItemDepartmentNew.Name = "menuItemDepartmentNew";
+            this.menuItemDepartmentNew.Size = new System.Drawing.Size(122, 22);
+            this.menuItemDepartmentNew.Text = "新建分部";
+            this.menuItemDepartmentNew.Click += new System.EventHandler(this.NewDepartment);
             // 
-            // Contact_1Column
+            // menuItemDepartmentDelete
             // 
-            this.Contact_1Column.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Contact_1Column.DataPropertyName = "Contact_1";
-            this.Contact_1Column.HeaderText = "联系人";
-            this.Contact_1Column.Name = "Contact_1Column";
-            this.Contact_1Column.ReadOnly = true;
+            this.menuItemDepartmentDelete.Name = "menuItemDepartmentDelete";
+            this.menuItemDepartmentDelete.Size = new System.Drawing.Size(122, 22);
+            this.menuItemDepartmentDelete.Text = "删除分部";
+            this.menuItemDepartmentDelete.Click += new System.EventHandler(this.DeleteDepartment);
+            // 
+            // colLocation
+            // 
+            this.colLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colLocation.DataPropertyName = "Location";
+            this.colLocation.HeaderText = "城市";
+            this.colLocation.Name = "colLocation";
+            this.colLocation.ReadOnly = true;
+            // 
+            // colDepartmentCode
+            // 
+            this.colDepartmentCode.DataPropertyName = "DepartmentCode";
+            this.colDepartmentCode.HeaderText = "部门代码";
+            this.colDepartmentCode.Name = "colDepartmentCode";
+            this.colDepartmentCode.ReadOnly = true;
+            // 
+            // colDepartmentName
+            // 
+            this.colDepartmentName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDepartmentName.DataPropertyName = "DepartmentName";
+            this.colDepartmentName.HeaderText = "部门名称";
+            this.colDepartmentName.Name = "colDepartmentName";
+            this.colDepartmentName.ReadOnly = true;
+            // 
+            // colDomain
+            // 
+            this.colDomain.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDomain.DataPropertyName = "Domain";
+            this.colDomain.HeaderText = "事业部";
+            this.colDomain.Name = "colDomain";
+            this.colDomain.ReadOnly = true;
+            // 
+            // colManager
+            // 
+            this.colManager.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colManager.DataPropertyName = "Manager";
+            this.colManager.HeaderText = "负责人";
+            this.colManager.Name = "colManager";
+            this.colManager.ReadOnly = true;
+            // 
+            // colContact
+            // 
+            this.colContact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colContact.DataPropertyName = "Contact_1";
+            this.colContact.HeaderText = "联系人";
+            this.colContact.Name = "colContact";
+            this.colContact.ReadOnly = true;
             // 
             // colAssignAmount
             // 
@@ -322,50 +394,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colIncomeAmount.ReadOnly = true;
             this.colIncomeAmount.Visible = false;
             // 
-            // cmuDeptMgr
-            // 
-            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemDetail,
-            this.menuItemSelect,
-            this.toolStripSeparator1,
-            this.menuItemDepartmentNew,
-            this.menuItemDepartmentDelete});
-            this.cmuDeptMgr.Name = "cmuDeptMgr";
-            this.cmuDeptMgr.Size = new System.Drawing.Size(153, 120);
-            // 
-            // menuItemDetail
-            // 
-            this.menuItemDetail.Name = "menuItemDetail";
-            this.menuItemDetail.Size = new System.Drawing.Size(152, 22);
-            this.menuItemDetail.Text = "详细信息";
-            this.menuItemDetail.Click += new System.EventHandler(this.Detail);
-            // 
-            // menuItemSelect
-            // 
-            this.menuItemSelect.Name = "menuItemSelect";
-            this.menuItemSelect.Size = new System.Drawing.Size(152, 22);
-            this.menuItemSelect.Text = "选定分部";
-            this.menuItemSelect.Click += new System.EventHandler(this.Select);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // menuItemDepartmentNew
-            // 
-            this.menuItemDepartmentNew.Name = "menuItemDepartmentNew";
-            this.menuItemDepartmentNew.Size = new System.Drawing.Size(152, 22);
-            this.menuItemDepartmentNew.Text = "新建分部";
-            this.menuItemDepartmentNew.Click += new System.EventHandler(this.NewDepartment);
-            // 
-            // menuItemDepartmentDelete
-            // 
-            this.menuItemDepartmentDelete.Name = "menuItemDepartmentDelete";
-            this.menuItemDepartmentDelete.Size = new System.Drawing.Size(152, 22);
-            this.menuItemDepartmentDelete.Text = "删除分部";
-            this.menuItemDepartmentDelete.Click += new System.EventHandler(this.DeleteDepartment);
-            // 
             // DepartmentMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -385,30 +413,17 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 
         #endregion
 
-        private DevComponents.DotNetBar.PanelEx panelQuery;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvDepts;
-        private DevComponents.DotNetBar.ButtonX btnQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbDepartmentName;
-        private DevComponents.DotNetBar.LabelX lblDeparmentName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbDepartmentCode;
-        private DevComponents.DotNetBar.LabelX lblDepartmentCode;
-        private DevComponents.DotNetBar.LabelX lblCount;
-        private System.Windows.Forms.ContextMenuStrip cmuDeptMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemSelect;
-        private DevComponents.DotNetBar.ButtonX btnReset;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDetail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LocationColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DomainColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ManagerColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Contact_1Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDomain;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colManager;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContact;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIncomeAmount;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDepartmentNew;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDepartmentDelete;
+
+
     }
 }

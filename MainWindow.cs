@@ -71,7 +71,7 @@ namespace CMBC.EasyFactor
 
         #endregion Properties
 
-        #region Methods (64)
+        #region Methods (65)
 
         // Public Methods (2) 
 
@@ -100,7 +100,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-        // Private Methods (62) 
+        // Private Methods (63) 
 
         /// <summary>
         /// 
@@ -897,7 +897,18 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void StatDepartment(object sender, EventArgs e)
         {
-            DepartmentMgr mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.STAT);
+            DepartmentMgr mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.DEPARTMENT_STAT);
+            this.SetDetailPanel(mgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StatLocation(object sender, EventArgs e)
+        {
+            DepartmentMgr mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.LOCATION_STAT);
             this.SetDetailPanel(mgr);
         }
 

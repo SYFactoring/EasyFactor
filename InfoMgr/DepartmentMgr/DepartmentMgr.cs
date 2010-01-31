@@ -12,6 +12,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -42,7 +43,12 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             /// <summary>
             /// 
             /// </summary>
-            STAT,
+            DEPARTMENT_STAT,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            LOCATION_STAT,
         }
 
         #endregion Enums
@@ -56,12 +62,38 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         public DepartmentMgr(OpDepartmentType opDepartmentType)
             : this()
         {
-            if (opDepartmentType == OpDepartmentType.STAT)
+            if (opDepartmentType == OpDepartmentType.DEPARTMENT_STAT)
             {
                 this.colAssignAmount.Visible = true;
                 this.colFinanceAmount.Visible = true;
                 this.colPaymentAmount.Visible = true;
                 this.colIncomeAmount.Visible = true;
+                this.Query(null, null);
+            }
+            else if (opDepartmentType == OpDepartmentType.LOCATION_STAT)
+            {
+                this.panelQuery.Visible = false;
+                this.colDepartmentCode.Visible = false;
+                this.colDepartmentName.Visible = false;
+                this.colDomain.Visible = false;
+                this.colManager.Visible = false;
+                this.colContact.Visible = false;
+                this.colAssignAmount.Visible = true;
+                this.colFinanceAmount.Visible = true;
+                this.colPaymentAmount.Visible = true;
+                this.colIncomeAmount.Visible = true;
+
+                var result = from dept in App.Current.DbContext.Departments
+                             group dept by dept.Location into depts
+                             select new { Location = depts.Key, Departments = depts };
+
+                List<City> locations = new List<City>();
+                foreach (var loc in result)
+                {
+                    locations.Add(new City(loc.Location, loc.Departments.ToList()));
+                }
+
+                this.bs.DataSource = locations;
             }
         }
 
