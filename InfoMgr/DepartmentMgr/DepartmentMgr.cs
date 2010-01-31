@@ -7,12 +7,12 @@
 namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 {
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -72,6 +72,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             }
             else if (opDepartmentType == OpDepartmentType.LOCATION_STAT)
             {
+                this.dgvDepts.ContextMenuStrip = null;
                 this.panelQuery.Visible = false;
                 this.colDepartmentCode.Visible = false;
                 this.colDepartmentName.Visible = false;
