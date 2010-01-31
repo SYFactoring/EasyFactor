@@ -62,24 +62,128 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
             this.opDepartmentType = opDepartmentType;
-            this.departmentBindingSource.DataSource = department;
+
+            if (opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)
+            {
+                this.departmentBindingSource.DataSource = new Department();
+            }
+            else
+            {
+                this.departmentBindingSource.DataSource = department;
+                department.Backup();
+            }
+
             this.UpdateDepartmentControlStatus();
         }
 
         #endregion Constructors
 
-        #region Methods (2)
+        #region Methods (6)
 
-        // Private Methods (2) 
+        // Private Methods (6) 
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Close(object sender, EventArgs e)
+        private void DepartmentDetail_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.Close();
+            Department dept = (Department)this.departmentBindingSource.DataSource;
+            if (opDepartmentType == OpDepartmentType.UPDATE_DEPARTMENT)
+            {
+                dept.Restore();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ResetDepartment(object sender, EventArgs e)
+        {
+            if (opDepartmentType == OpDepartmentType.UPDATE_DEPARTMENT)
+            {
+                Department dept = this.departmentBindingSource.DataSource as Department;
+                dept.Restore();
+            }
+            else if (opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)
+            {
+                this.departmentBindingSource.DataSource = new Department();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveDepartment(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            {
+                return;
+            }
+
+            if (!this.superValidator.Validate())
+            {
+                return;
+            }
+
+            Department dept = (Department)this.departmentBindingSource.DataSource;
+
+            if (opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)
+            {
+                bool isAddOK = true;
+                try
+                {
+                    App.Current.DbContext.Departments.InsertOnSubmit(dept);
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    isAddOK = false;
+                    MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (isAddOK)
+                {
+                    MessageBox.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dept.Backup();
+                    opDepartmentType = OpDepartmentType.UPDATE_DEPARTMENT;
+                }
+            }
+            else
+            {
+                bool isUpdateOK = true;
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e2)
+                {
+                    isUpdateOK = false;
+                    MessageBox.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (isUpdateOK)
+                {
+                    MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dept.Backup();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateDepartment(object sender, EventArgs e)
+        {
+            opDepartmentType = OpDepartmentType.UPDATE_DEPARTMENT;
+            UpdateDepartmentControlStatus();
         }
 
         /// <summary>
@@ -93,6 +197,22 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+            }
+            else if (this.opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)
+            {
+                foreach (Control comp in this.groupPanelDepartment.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+            }
+            else if (this.opDepartmentType == OpDepartmentType.UPDATE_DEPARTMENT)
+            {
+                foreach (Control comp in this.groupPanelDepartment.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+
+                this.departmentCodeTextBox.ReadOnly = true;
             }
         }
 

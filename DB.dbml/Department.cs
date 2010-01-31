@@ -13,7 +13,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class Department
+    public partial class Department : BaseObject
     {
         #region Fields (1)
 

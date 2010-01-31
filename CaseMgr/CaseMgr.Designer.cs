@@ -807,6 +807,7 @@
             this.colAssignAmount.HeaderText = "转让量";
             this.colAssignAmount.Name = "colAssignAmount";
             this.colAssignAmount.ReadOnly = true;
+            this.colAssignAmount.Visible = false;
             // 
             // colFinanceAmount
             // 
@@ -817,6 +818,7 @@
             this.colFinanceAmount.HeaderText = "融资量";
             this.colFinanceAmount.Name = "colFinanceAmount";
             this.colFinanceAmount.ReadOnly = true;
+            this.colFinanceAmount.Visible = false;
             // 
             // colPaymentAmount
             // 
@@ -827,6 +829,7 @@
             this.colPaymentAmount.HeaderText = "付款量";
             this.colPaymentAmount.Name = "colPaymentAmount";
             this.colPaymentAmount.ReadOnly = true;
+            this.colPaymentAmount.Visible = false;
             // 
             // colIncomeAmount
             // 
@@ -837,6 +840,7 @@
             this.colIncomeAmount.HeaderText = "收入";
             this.colIncomeAmount.Name = "colIncomeAmount";
             this.colIncomeAmount.ReadOnly = true;
+            this.colIncomeAmount.Visible = false;
             // 
             // CaseMgr
             // 

@@ -103,10 +103,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.userIDTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.tabControl = new DevComponents.DotNetBar.TabControl();
-            this.tabPanelPermission = new DevComponents.DotNetBar.TabControlPanel();
-            this.btnPermissionUpdate = new DevComponents.DotNetBar.ButtonX();
-            this.cbPermission = new System.Windows.Forms.CheckedListBox();
-            this.tabItemPermission = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelUser = new DevComponents.DotNetBar.TabControlPanel();
             this.btnUserUpdate = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelUser = new DevComponents.DotNetBar.Controls.GroupPanel();
@@ -120,6 +116,10 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnUserReset = new DevComponents.DotNetBar.ButtonX();
             this.btnUserSave = new DevComponents.DotNetBar.ButtonX();
             this.tabItemUser = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabPanelPermission = new DevComponents.DotNetBar.TabControlPanel();
+            this.btnPermissionUpdate = new DevComponents.DotNetBar.ButtonX();
+            this.cbPermission = new System.Windows.Forms.CheckedListBox();
+            this.tabItemPermission = new DevComponents.DotNetBar.TabItem(this.components);
             userIDLabel = new DevComponents.DotNetBar.LabelX();
             roleLabel = new DevComponents.DotNetBar.LabelX();
             userNameLabel = new DevComponents.DotNetBar.LabelX();
@@ -134,9 +134,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             ((System.ComponentModel.ISupportInitialize)(this.userErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
-            this.tabPanelPermission.SuspendLayout();
             this.tabPanelUser.SuspendLayout();
             this.groupPanelUser.SuspendLayout();
+            this.tabPanelPermission.SuspendLayout();
             this.SuspendLayout();
             // 
             // userIDLabel
@@ -385,54 +385,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.tabControl.Tabs.Add(this.tabItemPermission);
             this.tabControl.Text = "tabControl";
             // 
-            // tabPanelPermission
-            // 
-            this.tabPanelPermission.Controls.Add(this.btnPermissionUpdate);
-            this.tabPanelPermission.Controls.Add(this.cbPermission);
-            this.tabPanelPermission.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelPermission.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelPermission.Name = "tabPanelPermission";
-            this.tabPanelPermission.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelPermission.Size = new System.Drawing.Size(277, 317);
-            this.tabPanelPermission.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelPermission.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelPermission.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelPermission.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelPermission.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelPermission.Style.GradientAngle = 90;
-            this.tabPanelPermission.TabIndex = 2;
-            this.tabPanelPermission.TabItem = this.tabItemPermission;
-            // 
-            // btnPermissionUpdate
-            // 
-            this.btnPermissionUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnPermissionUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnPermissionUpdate.Location = new System.Drawing.Point(12, 4);
-            this.btnPermissionUpdate.Name = "btnPermissionUpdate";
-            this.btnPermissionUpdate.Size = new System.Drawing.Size(66, 23);
-            this.btnPermissionUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnPermissionUpdate.TabIndex = 2;
-            this.btnPermissionUpdate.Text = "编辑";
-            this.btnPermissionUpdate.Click += new System.EventHandler(this.UpdatePermission);
-            // 
-            // cbPermission
-            // 
-            this.cbPermission.CheckOnClick = true;
-            this.cbPermission.Dock = System.Windows.Forms.DockStyle.Right;
-            this.cbPermission.Enabled = false;
-            this.cbPermission.FormattingEnabled = true;
-            this.cbPermission.Location = new System.Drawing.Point(87, 1);
-            this.cbPermission.Name = "cbPermission";
-            this.cbPermission.Size = new System.Drawing.Size(189, 304);
-            this.cbPermission.TabIndex = 0;
-            // 
-            // tabItemPermission
-            // 
-            this.tabItemPermission.AttachedControl = this.tabPanelPermission;
-            this.tabItemPermission.Name = "tabItemPermission";
-            this.tabItemPermission.Text = "权限";
-            // 
             // tabPanelUser
             // 
             this.tabPanelUser.Controls.Add(this.btnUserUpdate);
@@ -645,6 +597,54 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.tabItemUser.Name = "tabItemUser";
             this.tabItemUser.Text = "基本信息";
             // 
+            // tabPanelPermission
+            // 
+            this.tabPanelPermission.Controls.Add(this.btnPermissionUpdate);
+            this.tabPanelPermission.Controls.Add(this.cbPermission);
+            this.tabPanelPermission.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelPermission.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelPermission.Name = "tabPanelPermission";
+            this.tabPanelPermission.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelPermission.Size = new System.Drawing.Size(277, 317);
+            this.tabPanelPermission.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelPermission.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelPermission.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelPermission.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelPermission.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelPermission.Style.GradientAngle = 90;
+            this.tabPanelPermission.TabIndex = 2;
+            this.tabPanelPermission.TabItem = this.tabItemPermission;
+            // 
+            // btnPermissionUpdate
+            // 
+            this.btnPermissionUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnPermissionUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnPermissionUpdate.Location = new System.Drawing.Point(12, 4);
+            this.btnPermissionUpdate.Name = "btnPermissionUpdate";
+            this.btnPermissionUpdate.Size = new System.Drawing.Size(66, 23);
+            this.btnPermissionUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnPermissionUpdate.TabIndex = 2;
+            this.btnPermissionUpdate.Text = "编辑";
+            this.btnPermissionUpdate.Click += new System.EventHandler(this.UpdatePermission);
+            // 
+            // cbPermission
+            // 
+            this.cbPermission.CheckOnClick = true;
+            this.cbPermission.Dock = System.Windows.Forms.DockStyle.Right;
+            this.cbPermission.Enabled = false;
+            this.cbPermission.FormattingEnabled = true;
+            this.cbPermission.Location = new System.Drawing.Point(87, 1);
+            this.cbPermission.Name = "cbPermission";
+            this.cbPermission.Size = new System.Drawing.Size(189, 304);
+            this.cbPermission.TabIndex = 0;
+            // 
+            // tabItemPermission
+            // 
+            this.tabItemPermission.AttachedControl = this.tabPanelPermission;
+            this.tabItemPermission.Name = "tabItemPermission";
+            this.tabItemPermission.Text = "权限";
+            // 
             // UserDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -663,10 +663,10 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             ((System.ComponentModel.ISupportInitialize)(this.userErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
-            this.tabPanelPermission.ResumeLayout(false);
             this.tabPanelUser.ResumeLayout(false);
             this.groupPanelUser.ResumeLayout(false);
             this.groupPanelUser.PerformLayout();
+            this.tabPanelPermission.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

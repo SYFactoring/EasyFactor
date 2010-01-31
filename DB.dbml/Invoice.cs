@@ -330,7 +330,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 CDA cda = this.InvoiceAssignBatch.Case.ActiveCDA;
                 if (cda != null)
                 {
-                    return this.Commission.GetValueOrDefault() + cda.HandFee;
+                    return this.Commission.GetValueOrDefault() + cda.HandFee.GetValueOrDefault();
                 }
                 else
                 {

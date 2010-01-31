@@ -27,6 +27,32 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private BindingSource bs;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum OpCaseType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            QUERY,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            ENABLE_CASE,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            APPLICATION_CASE,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            STAT,
+        }
+
         #endregion Fields
 
         #region Constructors (3)
@@ -34,23 +60,27 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <summary>
         /// Initializes a new instance of the CaseMgr class
         /// </summary>
-        /// <param name="caseMark"></param>
-        public CaseMgr(string caseMark)
-            : this()
-        {
-            this.cbCaseMark.Text = caseMark;
-            this.QueryCase(null, null);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the CaseMgr class
-        /// </summary>
         /// <param name="isContract"></param>
-        public CaseMgr(bool isContract)
+        public CaseMgr(OpCaseType opCaseType)
             : this()
         {
-            this.cbCaseMark.Text = "启动案";
-            this.QueryCase(null, null);
+            if (opCaseType == OpCaseType.ENABLE_CASE)
+            {
+                this.cbCaseMark.Text = "启动案";
+                this.QueryCase(null, null);
+            }
+            else if (opCaseType == OpCaseType.APPLICATION_CASE)
+            {
+                this.cbCaseMark.Text = "申请案";
+                this.QueryCase(null, null);
+            }
+            else if (opCaseType == OpCaseType.STAT)
+            {
+                this.colAssignAmount.Visible = true;
+                this.colFinanceAmount.Visible = true;
+                this.colPaymentAmount.Visible = true;
+                this.colIncomeAmount.Visible = true;
+            }
         }
 
         /// <summary>

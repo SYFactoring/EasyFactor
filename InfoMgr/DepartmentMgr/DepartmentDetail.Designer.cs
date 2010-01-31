@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// </summary>
         private DevComponents.DotNetBar.Controls.TextBoxX addressCNTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX addressENTextBox;
-        private DevComponents.DotNetBar.ButtonX btnClose;
+        private DevComponents.DotNetBar.ButtonX btnReset;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.TextBoxX contact_1TextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX contact_2TextBox;
@@ -82,6 +82,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             DevComponents.DotNetBar.LabelX fax_2Label;
             DevComponents.DotNetBar.LabelX postCodeLabel;
             DevComponents.DotNetBar.LabelX managerLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DepartmentDetail));
             this.groupPanelDepartment = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.managerTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.departmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -100,7 +101,15 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.domainComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.departmentNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.departmentCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btnClose = new DevComponents.DotNetBar.ButtonX();
+            this.btnReset = new DevComponents.DotNetBar.ButtonX();
+            this.btnSave = new DevComponents.DotNetBar.ButtonX();
+            this.btnUpdate = new DevComponents.DotNetBar.ButtonX();
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必选");
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             departmentCodeLabel = new DevComponents.DotNetBar.LabelX();
             departmentNameLabel = new DevComponents.DotNetBar.LabelX();
             domainLabel = new DevComponents.DotNetBar.LabelX();
@@ -118,6 +127,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             managerLabel = new DevComponents.DotNetBar.LabelX();
             this.groupPanelDepartment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.departmentBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // departmentCodeLabel
@@ -561,6 +571,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.locationTextBox.Name = "locationTextBox";
             this.locationTextBox.Size = new System.Drawing.Size(100, 20);
             this.locationTextBox.TabIndex = 7;
+            this.superValidator.SetValidator1(this.locationTextBox, this.requiredFieldValidator1);
             // 
             // domainComboBox
             // 
@@ -581,6 +592,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.domainComboBox.Name = "domainComboBox";
             this.domainComboBox.Size = new System.Drawing.Size(121, 21);
             this.domainComboBox.TabIndex = 9;
+            this.superValidator.SetValidator1(this.domainComboBox, this.requiredFieldValidator2);
             // 
             // departmentNameTextBox
             // 
@@ -605,25 +617,82 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.departmentCodeTextBox.Name = "departmentCodeTextBox";
             this.departmentCodeTextBox.Size = new System.Drawing.Size(100, 20);
             this.departmentCodeTextBox.TabIndex = 1;
+            this.superValidator.SetValidator1(this.departmentCodeTextBox, this.requiredFieldValidator3);
             // 
-            // btnClose
+            // btnReset
             // 
-            this.btnClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClose.Location = new System.Drawing.Point(249, 239);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClose.TabIndex = 1;
-            this.btnClose.Text = "关闭";
-            this.btnClose.Click += new System.EventHandler(this.Close);
+            this.btnReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnReset.Location = new System.Drawing.Point(272, 244);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnReset.TabIndex = 1;
+            this.btnReset.Text = "重置";
+            this.btnReset.Click += new System.EventHandler(this.ResetDepartment);
+            // 
+            // btnSave
+            // 
+            this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnSave.Location = new System.Drawing.Point(191, 244);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "保存";
+            this.btnSave.Click += new System.EventHandler(this.SaveDepartment);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnUpdate.Location = new System.Drawing.Point(110, 244);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnUpdate.TabIndex = 3;
+            this.btnUpdate.Text = "编辑";
+            this.btnUpdate.Click += new System.EventHandler(this.UpdateDepartment);
+            // 
+            // superValidator
+            // 
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "必填";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "必选";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator3
+            // 
+            this.requiredFieldValidator3.ErrorMessage = "必填";
+            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // DepartmentDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(458, 290);
-            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.groupPanelDepartment);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -631,13 +700,24 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.Name = "DepartmentDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "部门信息";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DepartmentDetail_FormClosing);
             this.groupPanelDepartment.ResumeLayout(false);
             this.groupPanelDepartment.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.departmentBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.ButtonX btnSave;
+        private DevComponents.DotNetBar.ButtonX btnUpdate;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
     }
 }

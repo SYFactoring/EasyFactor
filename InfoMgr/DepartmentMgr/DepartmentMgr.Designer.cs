@@ -54,9 +54,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.tbDepartmentCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDepartmentCode = new DevComponents.DotNetBar.LabelX();
             this.dgvDepts = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.DepartmentCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DepartmentNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LocationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,6 +64,12 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIncomeAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemDepartmentNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDepartmentDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepts)).BeginInit();
             this.cmuDeptMgr.SuspendLayout();
@@ -227,28 +230,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.dgvDepts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvDepts.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvDepts_RowPostPaint);
             // 
-            // cmuDeptMgr
-            // 
-            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemDetail,
-            this.menuItemSelect});
-            this.cmuDeptMgr.Name = "cmuDeptMgr";
-            this.cmuDeptMgr.Size = new System.Drawing.Size(123, 48);
-            // 
-            // menuItemDetail
-            // 
-            this.menuItemDetail.Name = "menuItemDetail";
-            this.menuItemDetail.Size = new System.Drawing.Size(122, 22);
-            this.menuItemDetail.Text = "详细信息";
-            this.menuItemDetail.Click += new System.EventHandler(this.Detail);
-            // 
-            // menuItemSelect
-            // 
-            this.menuItemSelect.Name = "menuItemSelect";
-            this.menuItemSelect.Size = new System.Drawing.Size(122, 22);
-            this.menuItemSelect.Text = "选定分部";
-            this.menuItemSelect.Click += new System.EventHandler(this.Select);
-            // 
             // DepartmentCodeColumn
             // 
             this.DepartmentCodeColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -306,6 +287,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colAssignAmount.HeaderText = "转让量";
             this.colAssignAmount.Name = "colAssignAmount";
             this.colAssignAmount.ReadOnly = true;
+            this.colAssignAmount.Visible = false;
             // 
             // colFinanceAmount
             // 
@@ -316,6 +298,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colFinanceAmount.HeaderText = "融资量";
             this.colFinanceAmount.Name = "colFinanceAmount";
             this.colFinanceAmount.ReadOnly = true;
+            this.colFinanceAmount.Visible = false;
             // 
             // colPaymentAmount
             // 
@@ -326,6 +309,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colPaymentAmount.HeaderText = "付款量";
             this.colPaymentAmount.Name = "colPaymentAmount";
             this.colPaymentAmount.ReadOnly = true;
+            this.colPaymentAmount.Visible = false;
             // 
             // colIncomeAmount
             // 
@@ -336,6 +320,51 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colIncomeAmount.HeaderText = "收入";
             this.colIncomeAmount.Name = "colIncomeAmount";
             this.colIncomeAmount.ReadOnly = true;
+            this.colIncomeAmount.Visible = false;
+            // 
+            // cmuDeptMgr
+            // 
+            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemDetail,
+            this.menuItemSelect,
+            this.toolStripSeparator1,
+            this.menuItemDepartmentNew,
+            this.menuItemDepartmentDelete});
+            this.cmuDeptMgr.Name = "cmuDeptMgr";
+            this.cmuDeptMgr.Size = new System.Drawing.Size(153, 120);
+            // 
+            // menuItemDetail
+            // 
+            this.menuItemDetail.Name = "menuItemDetail";
+            this.menuItemDetail.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDetail.Text = "详细信息";
+            this.menuItemDetail.Click += new System.EventHandler(this.Detail);
+            // 
+            // menuItemSelect
+            // 
+            this.menuItemSelect.Name = "menuItemSelect";
+            this.menuItemSelect.Size = new System.Drawing.Size(152, 22);
+            this.menuItemSelect.Text = "选定分部";
+            this.menuItemSelect.Click += new System.EventHandler(this.Select);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // menuItemDepartmentNew
+            // 
+            this.menuItemDepartmentNew.Name = "menuItemDepartmentNew";
+            this.menuItemDepartmentNew.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDepartmentNew.Text = "新建分部";
+            this.menuItemDepartmentNew.Click += new System.EventHandler(this.NewDepartment);
+            // 
+            // menuItemDepartmentDelete
+            // 
+            this.menuItemDepartmentDelete.Name = "menuItemDepartmentDelete";
+            this.menuItemDepartmentDelete.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDepartmentDelete.Text = "删除分部";
+            this.menuItemDepartmentDelete.Click += new System.EventHandler(this.DeleteDepartment);
             // 
             // DepartmentMgr
             // 
@@ -378,5 +407,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIncomeAmount;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDepartmentNew;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDepartmentDelete;
     }
 }

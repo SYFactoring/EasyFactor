@@ -71,7 +71,7 @@ namespace CMBC.EasyFactor
 
         #endregion Properties
 
-        #region Methods (62)
+        #region Methods (64)
 
         // Public Methods (2) 
 
@@ -100,7 +100,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-        // Private Methods (60) 
+        // Private Methods (62) 
 
         /// <summary>
         /// 
@@ -622,7 +622,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryApplicationCase(object sender, EventArgs e)
         {
-            CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr("申请案");
+            CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr(CaseMgr.CaseMgr.OpCaseType.APPLICATION_CASE);
             this.SetDetailPanel(mgr);
         }
 
@@ -876,6 +876,28 @@ namespace CMBC.EasyFactor
         private void ReportLeger(object sender, EventArgs e)
         {
             CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr();
+            this.SetDetailPanel(mgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StatCase(object sender, EventArgs e)
+        {
+            CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr(CaseMgr.CaseMgr.OpCaseType.STAT);
+            this.SetDetailPanel(mgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StatDepartment(object sender, EventArgs e)
+        {
+            DepartmentMgr mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.STAT);
             this.SetDetailPanel(mgr);
         }
 

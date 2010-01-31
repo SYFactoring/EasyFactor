@@ -18,9 +18,52 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     /// </summary>
     public partial class DepartmentMgr : UserControl
     {
-        #region Constructors (1)
+        #region Fields (1)
 
+        /// <summary>
+        /// 
+        /// </summary>
         private BindingSource bs;
+
+        #endregion Fields
+
+        #region Enums (1)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum OpDepartmentType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            QUERY,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            STAT,
+        }
+
+        #endregion Enums
+
+        #region Constructors (2)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="opDepartmentType"></param>
+        public DepartmentMgr(OpDepartmentType opDepartmentType)
+            : this()
+        {
+            if (opDepartmentType == OpDepartmentType.STAT)
+            {
+                this.colAssignAmount.Visible = true;
+                this.colFinanceAmount.Visible = true;
+                this.colPaymentAmount.Visible = true;
+                this.colIncomeAmount.Visible = true;
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the DepartmentMgr class
@@ -33,6 +76,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.dgvDepts.DataSource = this.bs;
             this.dgvDepts.AutoGenerateColumns = false;
             ControlUtil.SetDoubleBuffered(this.dgvDepts);
+
+            this.UpdateContextMenu();
         }
 
         #endregion Constructors
@@ -59,9 +104,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 
         #endregion Properties
 
-        #region Methods (7)
+        #region Methods (9)
 
-        // Private Methods (7) 
+        // Private Methods (9) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -77,6 +122,46 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             else
             {
                 this.Select(sender, e);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteDepartment(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            {
+                return;
+            }
+
+            if (this.dgvDepts.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            Department selectedDepartment = (Department)this.bs.List[this.dgvDepts.SelectedRows[0].Index];
+            if (MessageBox.Show("是否确定删除分部: " + selectedDepartment.DepartmentName, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                App.Current.DbContext.Departments.DeleteOnSubmit(selectedDepartment);
+                bool isDeleteOK = true;
+                try
+                {
+                    App.Current.DbContext.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    isDeleteOK = false;
+                    MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                if (isDeleteOK)
+                {
+                    this.dgvDepts.Rows.RemoveAt(this.dgvDepts.SelectedRows[0].Index);
+                }
             }
         }
 
@@ -106,6 +191,22 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         {
             Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvDepts.RowHeadersWidth - 4, e.RowBounds.Height);
             TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvDepts.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvDepts.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewDepartment(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            {
+                return;
+            }
+
+            DepartmentDetail detail = new DepartmentDetail(null, DepartmentDetail.OpDepartmentType.NEW_DEPARTMENT);
+            detail.ShowDialog(this);
         }
 
         /// <summary>
@@ -152,6 +253,23 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             {
                 this.OwnerForm.DialogResult = DialogResult.Yes;
                 this.OwnerForm.Close();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateContextMenu()
+        {
+            if (PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
+            {
+                this.menuItemDepartmentNew.Enabled = true;
+                this.menuItemDepartmentDelete.Enabled = true;
+            }
+            else
+            {
+                this.menuItemDepartmentNew.Enabled = false;
+                this.menuItemDepartmentDelete.Enabled = false;
             }
         }
 
