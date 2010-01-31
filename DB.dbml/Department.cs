@@ -6,26 +6,25 @@
 
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class Department
     {
-		#region Fields (1) 
+        #region Fields (1)
 
         /// <summary>
         /// 
         /// </summary>
         private static readonly List<Department> _allDepartment;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes static members of the Department class
@@ -38,11 +37,170 @@ namespace CMBC.EasyFactor.DB.dbml
             _allDepartment.AddRange(App.Current.DbContext.Departments.Where(d => d.Domain != "贸易金融事业部" && d.Domain != "分行事业部"));
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (3) 
+        #region Properties (6)
 
-		// Public Methods (3) 
+        /// <summary>
+        /// 
+        /// </summary>
+        public double AssignAmount
+        {
+            get
+            {
+                double result = 0;
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
+                {
+                    foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
+                    {
+                        double assign = batch.AssignAmount;
+                        if (selectedCase.InvoiceCurrency != "CNY")
+                        {
+                            double rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
+                            assign *= rate;
+                        }
+                        result += assign;
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double CommissionAmount
+        {
+            get
+            {
+                double result = 0;
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
+                {
+                    foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
+                    {
+                        foreach (Invoice invoice in batch.Invoices)
+                        {
+                            double commission = invoice.Commission.GetValueOrDefault();
+                            if (selectedCase.InvoiceCurrency != "CNY")
+                            {
+                                double rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
+                                commission *= rate;
+                            }
+
+                            result += commission;
+                        }
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double FinanceAmount
+        {
+            get
+            {
+                double result = 0;
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
+                {
+                    foreach (InvoiceFinanceBatch batch in selectedCase.InvoiceFinanceBatches)
+                    {
+                        double finance = batch.FinanceAmount;
+                        if (batch.BatchCurrency != "CNY")
+                        {
+                            double rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
+                            finance *= rate;
+                        }
+
+                        result += finance;
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double HandFeeAmount
+        {
+            get
+            {
+                double result = 0;
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
+                {
+                    int count = 0;
+                    foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
+                    {
+                        count += batch.BatchCount;
+                    }
+
+                    CDA cda = selectedCase.ActiveCDA;
+                    if (cda != null)
+                    {
+                        double handfee = count * cda.HandFee.GetValueOrDefault();
+                        if (cda.HandFeeCurr != "CNY")
+                        {
+                            double rate = Exchange.GetExchangeRate(cda.HandFeeCurr, "CNY");
+                            handfee *= rate;
+                        }
+
+                        result += handfee;
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double IncomeAmount
+        {
+            get
+            {
+                return CommissionAmount + HandFeeAmount;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double PaymentAmount
+        {
+            get
+            {
+                double result = 0;
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
+                {
+                    foreach (InvoicePaymentBatch batch in selectedCase.InvoicePaymentBatches)
+                    {
+                        double payment = batch.PaymentAmount;
+                        if (selectedCase.InvoiceCurrency != "CNY")
+                        {
+                            double rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
+                            payment *= rate;
+                        }
+
+                        result += payment;
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        #endregion Properties
+
+        #region Methods (3)
+
+        // Public Methods (3) 
 
         /// <summary>
         /// 
@@ -72,6 +230,6 @@ namespace CMBC.EasyFactor.DB.dbml
             return this._DepartmentName;
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceAssignBatch : BaseObject
     {
-		#region Properties (7) 
+        #region Properties (7)
 
         /// <summary>
         /// Gets
@@ -25,13 +25,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double result = 0;
-                foreach (Invoice invoice in this.Invoices)
-                {
-                    result += invoice.AssignAmount;
-                }
-
-                return result;
+                return this.Invoices.Sum(i => i.AssignAmount);
             }
         }
 
@@ -113,6 +107,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
     }
 }

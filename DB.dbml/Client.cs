@@ -7,13 +7,10 @@
 namespace CMBC.EasyFactor.DB.dbml
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using CMBC.EasyFactor.ARMgr;
-    using CMBC.EasyFactor.Utils;
     using System.Data.Linq;
+    using System.Linq;
     using System.Text.RegularExpressions;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// 

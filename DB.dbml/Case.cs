@@ -6,17 +6,17 @@
 
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System.Linq;
-    using CMBC.EasyFactor.Utils;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class Case : BaseObject
     {
-        #region Properties (4)
+		#region Properties (11) 
 
         /// <summary>
         /// Gets 
@@ -26,6 +26,23 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 return this.CDAs.SingleOrDefault(c => c.CDAStatus == ConstStr.CDA.SIGNED);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double AssignAmount
+        {
+            get
+            {
+                double result = 0;
+                foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
+                {
+                    result += batch.AssignAmount;
+                }
+
+                return result;
             }
         }
 
@@ -49,6 +66,51 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public List<ClientReview> ClientReviews
+        {
+            get
+            {
+                switch (TransactionType)
+                {
+                    case "国内卖方保理":
+                    case "出口保理":
+                    case "国内信保保理":
+                    case "国际信保保理":
+                    case "租赁保理":
+                        return SellerClient.ClientReviews.Where(review => review.ReviewStatus == "已生效").ToList();
+                    case "国内买方保理":
+                    case "进口保理":
+                        return BuyerClient.ClientReviews.Where(review => review.ReviewStatus == "已生效").ToList();
+                    default:
+                        return null;
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double CommissionAmount
+        {
+            get
+            {
+                double result = 0;
+                foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
+                {
+                    foreach (Invoice invoice in batch.Invoices)
+                    {
+                        result += invoice.Commission.GetValueOrDefault();
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
         /// Gets Factor
         /// </summary>
         public Factor Factor
@@ -66,25 +128,26 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public List<ClientReview> ClientReviews
+        /// <summary>
+        /// 
+        /// </summary>
+        public double FinanceAmount
         {
             get
             {
-                switch (TransactionType)
+                double result = 0;
+                foreach (InvoiceFinanceBatch batch in this.InvoiceFinanceBatches)
                 {
-                    case "国内卖方保理":
-                    case "出口保理":
-                    case "国内信保保理":
-                    case "国际信保保理":
-                    case "租赁保理":
-                        return SellerClient.ClientReviews.Where(review => review.ReviewStatus == "已生效").ToList();
-                    case "国内买方保理":
-                    case "进口保理":
-                        return BuyerClient.ClientReviews.Where(review => review.ReviewStatus == "已生效").ToList();
-                    default: 
-                        return null;
+                    double finance = batch.FinanceAmount;
+                    if (batch.BatchCurrency != this.InvoiceCurrency)
+                    {
+                        double rate = Exchange.GetExchangeRate(batch.BatchCurrency, this.InvoiceCurrency);
+                        finance *= rate;
+                    }
+                    result += finance;
                 }
 
+                return result;
             }
         }
 
@@ -123,11 +186,64 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Properties
+        /// <summary>
+        /// 
+        /// </summary>
+        public double HandFeeAmount
+        {
+            get
+            {
+                int count = 0;
+                foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
+                {
+                    count += batch.BatchCount;
+                }
 
-        #region Methods (1)
+                CDA cda = this.ActiveCDA;
+                if (cda != null)
+                {
+                    return count * cda.HandFee.GetValueOrDefault();
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
 
-        // Public Methods (1) 
+        /// <summary>
+        /// 
+        /// </summary>
+        public double IncomeAmount
+        {
+            get
+            {
+                return CommissionAmount + HandFeeAmount;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double PaymentAmount
+        {
+            get
+            {
+                double result = 0;
+                foreach (InvoicePaymentBatch batch in this.InvoicePaymentBatches)
+                {
+                    result += batch.PaymentAmount;
+                }
+
+                return result;
+            }
+        }
+
+		#endregion Properties 
+
+		#region Methods (1) 
+
+		// Public Methods (1) 
 
         /// <summary>
         /// Generate Case code
@@ -210,6 +326,6 @@ namespace CMBC.EasyFactor.DB.dbml
             return caseCode;
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }
