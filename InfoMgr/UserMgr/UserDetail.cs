@@ -80,7 +80,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 for (int i = 0; i < this.cbPermission.Items.Count; i++)
                 {
                     Permission item = ((PermissionItem)this.cbPermission.Items[i]).Permission;
-                    if (PermUtil.ValidatePermission(item))
+                    if (PermUtil.ValidatePermission(user,item))
                     {
                         this.cbPermission.SetItemChecked(i, true);
                     }

@@ -65,6 +65,9 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public class PermUtil
     {
+        #region Methods (3)
+
+        // Public Methods (2) 
 
         /// <summary>
         /// 
@@ -91,7 +94,13 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         public static bool ValidatePermission(Permission perm)
         {
-            if ((App.Current.CurUser.Permission & (int)perm) == (int)perm)
+            return ValidatePermission(App.Current.CurUser, perm);
+        }
+        // Internal Methods (1) 
+
+        internal static bool ValidatePermission(CMBC.EasyFactor.DB.dbml.User user, Permission perm)
+        {
+            if ((user.Permission & (int)perm) == (int)perm)
             {
                 return true;
             }
@@ -100,5 +109,7 @@ namespace CMBC.EasyFactor.Utils
                 return false;
             }
         }
+
+        #endregion Methods
     }
 }
