@@ -17,7 +17,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// </summary>
         private DevComponents.DotNetBar.Controls.TextBoxX addressCNTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX addressENTextBox;
-        private DevComponents.DotNetBar.ButtonX btnReset;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.TextBoxX contact_1TextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX contact_2TextBox;
@@ -101,7 +100,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.domainComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.departmentNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.departmentCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btnReset = new DevComponents.DotNetBar.ButtonX();
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.btnUpdate = new DevComponents.DotNetBar.ButtonX();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
@@ -619,23 +617,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.departmentCodeTextBox.TabIndex = 1;
             this.superValidator.SetValidator1(this.departmentCodeTextBox, this.requiredFieldValidator3);
             // 
-            // btnReset
-            // 
-            this.btnReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnReset.Location = new System.Drawing.Point(272, 244);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(75, 23);
-            this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnReset.TabIndex = 1;
-            this.btnReset.Text = "重置";
-            this.btnReset.Click += new System.EventHandler(this.ResetDepartment);
-            // 
             // btnSave
             // 
             this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSave.Location = new System.Drawing.Point(191, 244);
+            this.btnSave.Location = new System.Drawing.Point(228, 239);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -647,7 +633,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.btnUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUpdate.Location = new System.Drawing.Point(110, 244);
+            this.btnUpdate.Location = new System.Drawing.Point(147, 239);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -689,10 +675,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(458, 290);
+            this.ClientSize = new System.Drawing.Size(458, 276);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.groupPanelDepartment);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;

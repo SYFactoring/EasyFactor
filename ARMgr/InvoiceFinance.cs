@@ -28,12 +28,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         private Case _case;
-        
+
         /// <summary>
         /// 
         /// </summary>
         private ARCaseBasic caseBasic;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -91,8 +91,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             set
             {
-                this._case = value;
-                this.context.Cases.Attach(this._case);
+                this._case = this.context.Cases.SingleOrDefault(c => c.CaseCode == value.CaseCode);
                 this.NewBatch(null, null);
             }
         }
@@ -170,6 +169,12 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
+            if (assignDate == default(DateTime))
+            {
+                e.IsValid = true;
+                return;
+            }
+
             if (batch.FinancePeriodBegin < assignDate)
             {
                 e.IsValid = false;
@@ -203,13 +208,19 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
+            if (dueDate == default(DateTime))
+            {
+                e.IsValid = true;
+                return;
+            }
+
             if (batch.FinancePeriodEnd < dueDate)
             {
-                e.IsValid = false;
+                e.IsValid = true;
             }
             else
             {
-                e.IsValid = true;
+                e.IsValid = false;
             }
 
         }
@@ -688,8 +699,9 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceFinanceBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
-                this.batchBindingSource.DataSource = selectedBatch;
-                this.invoiceBindingSource.DataSource = selectedBatch.Invoices.ToList();
+                InvoiceFinanceBatch batch = context.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == selectedBatch.FinanceBatchNo);
+                this.batchBindingSource.DataSource = batch;
+                this.invoiceBindingSource.DataSource = batch.Invoices.ToList();
                 for (int i = 0; i < this.invoiceBindingSource.List.Count; i++)
                 {
                     DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[i].Cells[0];
@@ -728,7 +740,7 @@ namespace CMBC.EasyFactor.ARMgr
             Factor factor = factorMgr.Selected;
             if (factor != null)
             {
-                financeBatch.Factor = factor;
+                financeBatch.Factor = this.context.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
             }
         }
 

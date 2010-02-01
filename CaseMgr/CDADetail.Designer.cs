@@ -6,7 +6,6 @@
 
         private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
         private DevComponents.DotNetBar.ButtonX btnCaseSelect;
-        private DevComponents.DotNetBar.ButtonX btnCDAReset;
         private DevComponents.DotNetBar.ButtonX btnCDASave;
         private DevComponents.DotNetBar.ButtonX btnCDAUpdate;
         private DevComponents.DotNetBar.Controls.TextBoxX buyerClientEDICodeTextBox;
@@ -218,7 +217,6 @@
             this.noticePersonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnCDAUpdate = new DevComponents.DotNetBar.ButtonX();
             this.btnCDASave = new DevComponents.DotNetBar.ButtonX();
-            this.btnCDAReset = new DevComponents.DotNetBar.ButtonX();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.customValidator8 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
@@ -1867,7 +1865,7 @@
             // 
             this.btnCDAUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCDAUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCDAUpdate.Location = new System.Drawing.Point(230, 510);
+            this.btnCDAUpdate.Location = new System.Drawing.Point(264, 509);
             this.btnCDAUpdate.Name = "btnCDAUpdate";
             this.btnCDAUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnCDAUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1879,25 +1877,13 @@
             // 
             this.btnCDASave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCDASave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCDASave.Location = new System.Drawing.Point(311, 510);
+            this.btnCDASave.Location = new System.Drawing.Point(345, 509);
             this.btnCDASave.Name = "btnCDASave";
             this.btnCDASave.Size = new System.Drawing.Size(75, 23);
             this.btnCDASave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCDASave.TabIndex = 4;
             this.btnCDASave.Text = "保存";
             this.btnCDASave.Click += new System.EventHandler(this.SaveCDA);
-            // 
-            // btnCDAReset
-            // 
-            this.btnCDAReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCDAReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCDAReset.Location = new System.Drawing.Point(395, 510);
-            this.btnCDAReset.Name = "btnCDAReset";
-            this.btnCDAReset.Size = new System.Drawing.Size(75, 23);
-            this.btnCDAReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCDAReset.TabIndex = 5;
-            this.btnCDAReset.Text = "重置";
-            this.btnCDAReset.Click += new System.EventHandler(this.ResetCDA);
             // 
             // superValidator
             // 
@@ -2000,7 +1986,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(745, 535);
-            this.Controls.Add(this.btnCDAReset);
             this.Controls.Add(this.btnCDASave);
             this.Controls.Add(this.btnCDAUpdate);
             this.Controls.Add(this.groupPanelOther);

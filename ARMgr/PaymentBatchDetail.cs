@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using System.Data.Linq;
+    using System.Linq;
 
     /// <summary>
     /// 
@@ -61,12 +62,14 @@ namespace CMBC.EasyFactor.ARMgr
         public PaymentBatchDetail(InvoicePaymentBatch batch)
         {
             this.InitializeComponent();
+            this.context = new DBDataContext();
             this.bs = new BindingSource();
             this.dgvPaymentLogs.AutoGenerateColumns = false;
             this.dgvPaymentLogs.DataSource = this.bs;
             this.opBatchType = OpBatchType.DETAIL_BATCH;
             ControlUtil.SetDoubleBuffered(this.dgvPaymentLogs);
 
+            batch = context.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == batch.PaymentBatchNo);
             this.batchBindingSource.DataSource = batch;
             this.bs.DataSource = batch.InvoicePaymentLogs;
 
@@ -77,8 +80,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             this.UpdateBatchControlStatus();
-            this.context = new DBDataContext();
-            this.context.InvoicePaymentBatches.Attach(batch);
         }
 
         #endregion Constructors

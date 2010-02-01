@@ -327,7 +327,6 @@
     <Type Name="FactorCreditLine">
       <Column Name="CreditLineID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="FactorCode" Type="System.String" DbType="Char(7) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="CreditLineType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CreditLineCurrency" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CreditLine" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="PeriodBegin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />

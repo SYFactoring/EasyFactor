@@ -31,8 +31,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpClientMgrType opClientMgrType;
 
-        private DBDataContext context;
-
         #endregion Fields
 
         #region Enums (1)
@@ -110,7 +108,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.DataSource = this.bs;
             ControlUtil.SetDoubleBuffered(this.dgvClients);
 
-            List<Department> deptsList = Department.AllDepartments().ToList();
+            List<Department> deptsList = Department.AllDepartments(new DBDataContext());
             deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
             this.cbDepartment.DataSource = deptsList;
             this.cbDepartment.DisplayMembers = "DepartmentName";
@@ -119,13 +117,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbDepartment.SelectedIndex = -1;
 
             this.UpdateContextMenu();
-
-            this.context = new DBDataContext();
         }
 
         #endregion Constructors
 
-        #region Properties (2)
+        #region Properties (3)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Gets or sets owner form
@@ -341,6 +346,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             string caseType = this.cbCaseType.Text;
+
+            context = new DBDataContext();
 
             var queryResult = context.Clients.Where(c =>
                      ((c.BranchCode == null ? string.Empty : c.Department.DepartmentName).Contains(department))

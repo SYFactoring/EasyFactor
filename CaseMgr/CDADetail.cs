@@ -84,6 +84,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
             this.opCDAType = opCDAType;
+            this.context = new DBDataContext();
 
             this.pUGProportionTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
             this.pUGProportionTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
@@ -123,6 +124,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             else
             {
+                cda = context.CDAs.SingleOrDefault(c => c.CDACode == cda.CDACode);
                 this.CDABindingSource.DataSource = cda;
                 FillCase();
                 if (cda.NoticeMethod != null)
@@ -143,8 +145,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             this.UpdateCDAControlStatus();
-            this.context = new DBDataContext();
-            this.context.CDAs.Attach(cda);
         }
 
         /// <summary>
@@ -695,37 +695,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ResetCDA(object sender, EventArgs e)
-        {
-            foreach (Control comp in this.groupPanelCreditCover.Controls)
-            {
-                ControlUtil.SetComponetDefault(comp);
-            }
-
-            foreach (Control comp in this.groupPanelOther.Controls)
-            {
-                ControlUtil.SetComponetDefault(comp);
-            }
-
-            CDA cda = this.CDABindingSource.DataSource as CDA;
-            cda.CDASignDate = DateTime.Now.Date;
-            cda.CommissionType = "按转让金额";
-            cda.PUGProportion = 1;
-            cda.PUGPeriod = 90;
-            cda.ReassignGracePeriod = 60;
-            cda.FinanceProportion = 0.8;
-            cda.IsNotice = "明保理";
-            cda.IsRecoarse = false;
-            cda.CDAStatus = "未审核";
-            cda.IsCreditCoverRevolving = true;
-            cda.AssignType = "全部";
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void SaveCDA(object sender, EventArgs e)
         {
             if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
@@ -879,7 +848,7 @@ namespace CMBC.EasyFactor.CaseMgr
             if (curCase != null)
             {
                 CDA cda = GenerateDefaultCDA(curCase);
-                cda.Case = curCase;
+                cda.Case = context.Cases.SingleOrDefault(c => c.CaseCode == curCase.CaseCode);
                 this.CDABindingSource.DataSource = cda;
                 FillCase();
             }

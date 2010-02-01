@@ -34,6 +34,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private ARCaseBasic caseBasic;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private DBDataContext context;
 
         #endregion Fields
@@ -67,8 +70,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             set
             {
-                this._case = value;
-                this.context.Cases.Attach(this._case);
+                this._case = this.context.Cases.SingleOrDefault(c => c.CaseCode == value.CaseCode);
                 this.NewBatch(null, null);
             }
         }
@@ -667,8 +669,9 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceAssignBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
-                this.batchBindingSource.DataSource = selectedBatch;
-                this.invoiceBindingSource.DataSource = selectedBatch.Invoices.ToList();
+                InvoiceAssignBatch batch = this.context.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == selectedBatch.AssignBatchNo);
+                this.batchBindingSource.DataSource = batch;
+                this.invoiceBindingSource.DataSource = batch.Invoices.ToList();
                 this.StatBatch();
             }
         }

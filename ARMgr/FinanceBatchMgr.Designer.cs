@@ -85,14 +85,16 @@ namespace CMBC.EasyFactor.ARMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblClientName = new DevComponents.DotNetBar.LabelX();
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
@@ -130,8 +132,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemBatchDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblClientName = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -169,6 +169,30 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
             // 
+            // tbClientName
+            // 
+            // 
+            // 
+            // 
+            this.tbClientName.Border.Class = "TextBoxBorder";
+            this.tbClientName.Location = new System.Drawing.Point(65, 28);
+            this.tbClientName.Name = "tbClientName";
+            this.tbClientName.Size = new System.Drawing.Size(100, 20);
+            this.tbClientName.TabIndex = 6;
+            // 
+            // lblClientName
+            // 
+            this.lblClientName.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblClientName.BackgroundStyle.Class = "";
+            this.lblClientName.Location = new System.Drawing.Point(3, 30);
+            this.lblClientName.Name = "lblClientName";
+            this.lblClientName.Size = new System.Drawing.Size(56, 16);
+            this.lblClientName.TabIndex = 5;
+            this.lblClientName.Text = "客户名称";
+            // 
             // tbCreateUserName
             // 
             // 
@@ -200,9 +224,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(521, 13);
+            this.lblCount.Location = new System.Drawing.Point(546, 30);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.Size = new System.Drawing.Size(12, 16);
             this.lblCount.TabIndex = 12;
             // 
             // cbCheckStatus
@@ -344,7 +368,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.btnFinanceBatchQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnFinanceBatchQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFinanceBatchQuery.Location = new System.Drawing.Point(440, 4);
+            this.btnFinanceBatchQuery.Location = new System.Drawing.Point(505, 3);
             this.btnFinanceBatchQuery.Name = "btnFinanceBatchQuery";
             this.btnFinanceBatchQuery.Size = new System.Drawing.Size(75, 23);
             this.btnFinanceBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -382,14 +406,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.AllowUserToDeleteRows = false;
             this.dgvBatches.AllowUserToOrderColumns = true;
             this.dgvBatches.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBatches.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBatches.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvBatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBatches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSellerName,
@@ -410,14 +434,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCheckDate,
             this.colBatchCount});
             this.dgvBatches.ContextMenuStrip = this.cmuBatchMgr;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvBatches.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBatches.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvBatches.Location = new System.Drawing.Point(0, 54);
@@ -468,8 +492,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colFinanceAmount
             // 
             this.colFinanceAmount.DataPropertyName = "FinanceAmount";
-            dataGridViewCellStyle7.Format = "N2";
-            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle9.Format = "N2";
+            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle9;
             this.colFinanceAmount.HeaderText = "融资金额";
             this.colFinanceAmount.Name = "colFinanceAmount";
             this.colFinanceAmount.ReadOnly = true;
@@ -477,8 +501,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colFinancePeriodBegin
             // 
             this.colFinancePeriodBegin.DataPropertyName = "FinancePeriodBegin";
-            dataGridViewCellStyle15.Format = "d";
-            this.colFinancePeriodBegin.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle10.Format = "d";
+            this.colFinancePeriodBegin.DefaultCellStyle = dataGridViewCellStyle10;
             this.colFinancePeriodBegin.HeaderText = "融资期限(起)";
             this.colFinancePeriodBegin.Name = "colFinancePeriodBegin";
             this.colFinancePeriodBegin.ReadOnly = true;
@@ -487,8 +511,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colFinancePeriodEnd
             // 
             this.colFinancePeriodEnd.DataPropertyName = "FinancePeriodEnd";
-            dataGridViewCellStyle16.Format = "d";
-            this.colFinancePeriodEnd.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle11.Format = "d";
+            this.colFinancePeriodEnd.DefaultCellStyle = dataGridViewCellStyle11;
             this.colFinancePeriodEnd.HeaderText = "融资期限(终)";
             this.colFinancePeriodEnd.Name = "colFinancePeriodEnd";
             this.colFinancePeriodEnd.ReadOnly = true;
@@ -497,9 +521,9 @@ namespace CMBC.EasyFactor.ARMgr
             // colFinanceRate
             // 
             this.colFinanceRate.DataPropertyName = "FinanceRate";
-            dataGridViewCellStyle17.Format = "p";
-            dataGridViewCellStyle17.NullValue = null;
-            this.colFinanceRate.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle12.Format = "p";
+            dataGridViewCellStyle12.NullValue = null;
+            this.colFinanceRate.DefaultCellStyle = dataGridViewCellStyle12;
             this.colFinanceRate.HeaderText = "融资利率";
             this.colFinanceRate.Name = "colFinanceRate";
             this.colFinanceRate.ReadOnly = true;
@@ -521,8 +545,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colCostRate
             // 
             this.colCostRate.DataPropertyName = "CostRate";
-            dataGridViewCellStyle18.Format = "p";
-            this.colCostRate.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle13.Format = "p";
+            this.colCostRate.DefaultCellStyle = dataGridViewCellStyle13;
             this.colCostRate.HeaderText = "代付费率";
             this.colCostRate.Name = "colCostRate";
             this.colCostRate.ReadOnly = true;
@@ -619,30 +643,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemBatchDelete.Size = new System.Drawing.Size(141, 22);
             this.menuItemBatchDelete.Text = "删除批次(&D)";
             this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
-            // 
-            // tbClientName
-            // 
-            // 
-            // 
-            // 
-            this.tbClientName.Border.Class = "TextBoxBorder";
-            this.tbClientName.Location = new System.Drawing.Point(65, 28);
-            this.tbClientName.Name = "tbClientName";
-            this.tbClientName.Size = new System.Drawing.Size(100, 20);
-            this.tbClientName.TabIndex = 6;
-            // 
-            // lblClientName
-            // 
-            this.lblClientName.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblClientName.BackgroundStyle.Class = "";
-            this.lblClientName.Location = new System.Drawing.Point(3, 30);
-            this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(56, 16);
-            this.lblClientName.TabIndex = 5;
-            this.lblClientName.Text = "客户名称";
             // 
             // FinanceBatchMgr
             // 

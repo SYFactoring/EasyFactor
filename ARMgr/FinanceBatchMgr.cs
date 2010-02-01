@@ -23,19 +23,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private BindingSource bs;
-
+        private Case _case;
         /// <summary>
         /// 
         /// </summary>
-        private Case _case;
-
+        private BindingSource bs;
         /// <summary>
         /// 
         /// </summary>
         private OpBatchType opBatchType;
-
-        private DBDataContext context;
 
         #endregion Fields
 
@@ -89,15 +85,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.AutoGenerateColumns = false;
             this.bs = new BindingSource();
             this.dgvBatches.DataSource = this.bs;
-
             this.opBatchType = batchType;
 
             this.UpdateContextMenu();
-            this.context = new DBDataContext();
 
             if (batchType == OpBatchType.CHECK)
             {
                 this.cbCheckStatus.Text = "未复核";
+                context = new DBDataContext();
                 var queryResult = context.InvoiceFinanceBatches.Where(i => i.CheckStatus == "未复核");
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
@@ -106,7 +101,16 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Constructors
 
-        #region Properties (2)
+        #region Properties (3)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Gets or sets owner form
@@ -128,9 +132,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (8)
+        #region Methods (9)
 
-        // Private Methods (8) 
+        // Private Methods (9) 
 
         /// <summary>
         /// 
@@ -159,7 +163,6 @@ namespace CMBC.EasyFactor.ARMgr
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
-            context.InvoiceFinanceBatches.Attach(batch);
             context.SubmitChanges();
         }
 
@@ -264,6 +267,8 @@ namespace CMBC.EasyFactor.ARMgr
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
 
+            context = new DBDataContext();
+
             var queryResult = context.InvoiceFinanceBatches.Where(i =>
                 i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
                 && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
@@ -303,9 +308,9 @@ namespace CMBC.EasyFactor.ARMgr
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
-            context.InvoiceFinanceBatches.Attach(batch);
             context.SubmitChanges();
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -352,6 +357,7 @@ namespace CMBC.EasyFactor.ARMgr
                 this.menuItemReject.Enabled = false;
             }
         }
+
         #endregion Methods
     }
 }

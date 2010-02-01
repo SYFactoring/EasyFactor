@@ -73,13 +73,15 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoiceDetail(Invoice invoice, OpInvoiceType opInvoiceType)
         {
             this.InitializeComponent();
+            this.context = new DBDataContext();
             this.ImeMode = ImeMode.OnHalf;
             this.opInvoiceType = opInvoiceType;
+            invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo);
             this.invoiceBindingSource.DataSource = invoice;
             this.dgvPaymentLogs.AutoGenerateColumns = false;
             this.dgvRefundLogs.AutoGenerateColumns = false;
 
-            this.invoiceCurrencyComboBox.DataSource = Currency.AllCurrencies().ToList();
+            this.invoiceCurrencyComboBox.DataSource = Currency.AllCurrencies();
             this.invoiceCurrencyComboBox.DisplayMember = "CurrencyCode";
             this.invoiceCurrencyComboBox.ValueMember = "CurrencyCode";
 
@@ -131,8 +133,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             this.UpdateInvoiceControlStatus();
-            this.context = new DBDataContext();
-            this.context.Invoices.Attach(invoice);
 
             if (opInvoiceType == OpInvoiceType.FLAW)
             {
@@ -322,26 +322,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             invoice.FlawResolveReason = flawResolveReason;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ResetInvoice(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
-            {
-                return;
-            }
-
-            if (this.opInvoiceType == OpInvoiceType.UPDATE_INVOICE)
-            {
-                Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
-                DBDataContext context = new DBDataContext();
-                this.invoiceBindingSource.DataSource = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo);
-            }
         }
 
         /// <summary>

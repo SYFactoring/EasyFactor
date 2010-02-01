@@ -41,7 +41,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbTransactionType.Items.Insert(0, "全部");
             this.cbTransactionType.Text = "全部";
 
-            List<Department> deptsList = Department.AllDepartments().ToList();
+            List<Department> deptsList = Department.AllDepartments(new DBDataContext()).ToList();
             deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
             this.cbOwnerDepts.DataSource = deptsList;
             this.cbOwnerDepts.DisplayMembers = "DepartmentName";
@@ -53,7 +53,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCurrency.DataSource = currencyList;
             this.cbCurrency.DisplayMember = "CurrencyFormat";
             this.cbCurrency.ValueMember = "CurrencyCode";
-
         }
 
         #endregion Constructors

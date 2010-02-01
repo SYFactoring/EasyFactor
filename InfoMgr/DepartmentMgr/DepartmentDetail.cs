@@ -65,6 +65,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// <param name="opDepartmentType"></param>
         public DepartmentDetail(Department department, OpDepartmentType opDepartmentType)
         {
+            this.context = new DBDataContext();
             this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
             this.opDepartmentType = opDepartmentType;
@@ -73,13 +74,14 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             {
                 department = new Department();
             }
+            else
+            {
+                department = context.Departments.SingleOrDefault(d => d.DepartmentCode == department.DepartmentCode);
+            }
 
             this.departmentBindingSource.DataSource = department;
 
             this.UpdateDepartmentControlStatus();
-
-            this.context = new DBDataContext();
-            this.context.Departments.Attach(department);
         }
 
         #endregion Constructors
@@ -87,25 +89,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         #region Methods (6)
 
         // Private Methods (6) 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ResetDepartment(object sender, EventArgs e)
-        {
-            if (opDepartmentType == OpDepartmentType.UPDATE_DEPARTMENT)
-            {
-                Department dept = this.departmentBindingSource.DataSource as Department;
-                DBDataContext context = new DBDataContext();
-                this.departmentBindingSource.DataSource = context.Departments.SingleOrDefault(d => d.DepartmentCode == dept.DepartmentCode);
-            }
-            else if (opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)
-            {
-                this.departmentBindingSource.DataSource = new Department();
-            }
-        }
 
         /// <summary>
         /// 

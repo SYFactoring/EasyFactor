@@ -23,6 +23,7 @@ namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
             this.InitializeComponent();
             this.dgvExchange.AutoGenerateColumns = false;
             DBDataContext context = new DBDataContext();
+            context.ObjectTrackingEnabled = false;
             this.dgvExchange.DataSource = context.Exchanges;
             ControlUtil.SetDoubleBuffered(this.dgvExchange);
         }

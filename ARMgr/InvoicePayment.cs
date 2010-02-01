@@ -27,12 +27,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         private Case _case;
-        
+
         /// <summary>
         /// 
         /// </summary>
         private ARCaseBasic caseBasic;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -122,8 +122,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             set
             {
-                this._case = value;
-                this.context.Cases.Attach(this._case);
+                this._case = this.context.Cases.SingleOrDefault(c => c.CaseCode == value.CaseCode);
                 this.NewBatch(null, null);
             }
         }
@@ -647,11 +646,12 @@ namespace CMBC.EasyFactor.ARMgr
             InvoicePaymentBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
-                this.batchBindingSource.DataSource = selectedBatch;
+                InvoicePaymentBatch batch = context.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == selectedBatch.PaymentBatchNo);
+                this.batchBindingSource.DataSource = batch;
                 Func<InvoicePaymentLog, Invoice> makeInvoice =
                 i => new Invoice { InvoiceNo = i.InvoiceNo, PaymentLogID2 = i.PaymentLogID };
 
-                var invoiceList = from log in selectedBatch.InvoicePaymentLogs
+                var invoiceList = from log in batch.InvoicePaymentLogs
                                   select makeInvoice(log);
 
                 this.invoiceBindingSource.DataSource = invoiceList;

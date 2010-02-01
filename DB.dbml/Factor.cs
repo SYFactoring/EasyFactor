@@ -33,46 +33,6 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #region Properties (4)
 
-        //public string CreditLine
-        //{
-        //    get
-        //    {
-        //        StringBuilder sb = new StringBuilder();
-        //        var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY);
-        //        foreach (FactorCreditLine creditLine in creditLines)
-        //        {
-        //            sb.Append(creditLine.CreditLineCurrency).Append(" ").Append(creditLine.CreditLine).Append(Environment.NewLine);
-        //        }
-        //        return sb.ToString();
-        //    }
-        //}
-        //public string DueDate
-        //{
-        //    get
-        //    {
-        //        StringBuilder sb = new StringBuilder();
-        //        var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY);
-        //        foreach (FactorCreditLine creditLine in creditLines)
-        //        {
-        //            sb.Append(creditLine.PeriodEnd).Append(Environment.NewLine);
-        //        }
-        //        return sb.ToString();
-        //    }
-        //}
-        //public string CreditLineOutstanding
-        //{
-        //    get
-        //    {
-        //        StringBuilder sb = new StringBuilder();
-        //        var creditLines = this.FactorCreditLines.Where(creditline => creditline.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY);
-        //        foreach (FactorCreditLine creditLine in creditLines)
-        //        {
-        //            sb.Append(creditLine.PeriodEnd).Append(Environment.NewLine);
-        //        }
-        //        return sb.ToString();
-        //    }
-        //}
-
         /// <summary>
         /// Gets
         /// </summary>
@@ -173,17 +133,6 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 return string.Empty;
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        public static Factor FindFactorByCode(string code)
-        {
-            DBDataContext context = new DBDataContext();
-            return context.Factors.SingleOrDefault(f => f.FactorCode == code);
         }
 
         /// <summary>

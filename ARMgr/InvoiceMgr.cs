@@ -27,7 +27,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpInvoiceType opInvoiceType;
 
-        private DBDataContext context;
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context
+        {
+            get;
+            set;
+        }
 
         #endregion Fields
 
@@ -115,8 +122,6 @@ namespace CMBC.EasyFactor.ARMgr
 
             this.cbCaseMark.SelectedIndex = 1;
             this.UpdateContextMenu();
-
-            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -186,7 +191,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-            if (MessageBox.Show("是否打算删除此" + selectedInvoices.Count + "条发票", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            if (MessageBox.Show("是否打算删除此" + selectedInvoices.Count + "条发票", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
@@ -483,6 +488,8 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 financeOverDueDate = DateTime.Now.Date.AddDays(0 - financeOverDueDays);
             }
+
+            context = new DBDataContext();
 
             var queryResult = from invoice in context.Invoices
                               let curCase = invoice.InvoiceAssignBatch.Case

@@ -33,6 +33,7 @@ namespace CMBC.EasyFactor.DB.dbml
         static Currency()
         {
             DBDataContext context = new DBDataContext();
+            context.ObjectTrackingEnabled = false;
             _currencyList = context.Currencies.ToList();
             Currency CNY = _currencyList.SingleOrDefault(c => c.CurrencyCode == "CNY");
             Currency USD = _currencyList.SingleOrDefault(c => c.CurrencyCode == "USD");

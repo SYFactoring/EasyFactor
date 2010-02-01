@@ -178,7 +178,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void dgvClientCreditLines_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvClientCreditLines.RowHeadersWidth - 4, e.RowBounds.Height);
-
             TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvClientCreditLines.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvClientCreditLines.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
@@ -199,6 +198,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             DBDataContext context = new DBDataContext();
+
             var queryResult = context.ClientCreditLines.Where(c =>
                 c.Client.ClientEDICode.Contains(clientEDICode)
              && (c.Client.ClientNameCN.Contains(clientName) || c.Client.ClientNameEN.Contains(clientName))

@@ -20,9 +20,10 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     {
         #region Fields (1)
 
+        /// <summary>
+        /// 
+        /// </summary>
         private BindingSource bs;
-
-        private DBDataContext context;
 
         #endregion Fields
 
@@ -41,12 +42,20 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             ControlUtil.SetDoubleBuffered(this.dgvUsers);
 
             this.UpdateContextMenu();
-            context = new DBDataContext();
         }
 
         #endregion Constructors
 
-        #region Properties (2)
+        #region Properties (3)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context
+        {
+            get;
+            set;
+        }
 
         public Form OwnerForm
         {
@@ -65,9 +74,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
         #endregion Properties
 
-        #region Methods (10)
+        #region Methods (8)
 
-        // Private Methods (10) 
+        // Private Methods (8) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -104,7 +113,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             }
 
             User selectedUser = (User)this.bs.List[this.dgvUsers.SelectedRows[0].Index];
-            if (MessageBox.Show("是否确定删除帐号: " + selectedUser.UserID, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.OK)
+            if (MessageBox.Show("是否确定删除帐号: " + selectedUser.UserID, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 context.Users.DeleteOnSubmit(selectedUser);
                 bool isDeleteOK = true;
@@ -177,6 +186,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void QueryUsers(object sender, System.EventArgs e)
         {
+            context = new DBDataContext();
             var queryResult = context.Users.Where(u => u.UserID.Contains(tbUserID.Text));
             bs.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());

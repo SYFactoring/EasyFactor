@@ -9,6 +9,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.Utils;
     using CMBC.EasyFactor.CaseMgr;
     using System.Data.Linq;
+    using System.Linq;
 
     /// <summary>
     /// 
@@ -62,19 +63,18 @@ namespace CMBC.EasyFactor.ARMgr
         public RefundBatchDetail(InvoiceRefundBatch batch)
         {
             this.InitializeComponent();
+            this.context = new DBDataContext();
             this.bs = new BindingSource();
             this.dgvRefundLogs.AutoGenerateColumns = false;
             this.dgvRefundLogs.DataSource = bs;
             this.opBatchType = OpBatchType.DETAIL_BATCH;
             ControlUtil.SetDoubleBuffered(this.dgvRefundLogs);
 
+            batch = context.InvoiceRefundBatches.SingleOrDefault(i => i.RefundBatchNo == batch.RefundBatchNo);
             this.batchBindingSource.DataSource = batch;
             this.bs.DataSource = batch.InvoiceRefundLogs;
 
             this.UpdateBatchControlStatus();
-
-            this.context = new DBDataContext();
-            this.context.InvoiceRefundBatches.Attach(batch);
         }
 
         #endregion Constructors

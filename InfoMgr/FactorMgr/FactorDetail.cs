@@ -100,6 +100,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.bsCreditLines = new BindingSource();
             this.dgvFactorCreditLines.DataSource = this.bsCreditLines;
             this.dgvFactorCreditLines.AutoGenerateColumns = false;
+            this.context = new DBDataContext();
 
             this.countryNameComboBox.DataSource = Country.AllCountries();
             this.countryNameComboBox.DisplayMember = "CountryNameEN";
@@ -118,6 +119,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             {
                 factor = new Factor();
             }
+            else
+            {
+                factor = context.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
+            }
 
             this.factorBindingSource.DataSource = factor;
             this.bsCreditLines.DataSource = factor.FactorCreditLines;
@@ -131,9 +136,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             this.UpdateFactorControlStatus();
             this.UpdateFactorCreditLineControlStatus();
-
-            this.context = new DBDataContext();
-            this.context.Factors.Attach(factor);
         }
 
         /// <summary>
@@ -320,7 +322,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            this.factorCreditLineBindingSource.DataSource = new FactorCreditLine();
+            FactorCreditLine creditLine = new FactorCreditLine();
+            creditLine.CreateUserName = App.Current.CurUser.Name;
+            this.factorCreditLineBindingSource.DataSource = creditLine;
             this.opFactorCreditLineType = OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE;
             this.UpdateFactorCreditLineControlStatus();
         }
@@ -341,30 +345,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             this.bsCreditLines.DataSource = typeof(FactorCreditLine);
             this.bsCreditLines.DataSource = factor.FactorCreditLines;
-        }
-
-        /// <summary>
-        /// Cancel current editing
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void ResetFactor(object sender, System.EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
-            {
-                return;
-            }
-
-            if (opFactorType == OpFactorType.UPDATE_FACTOR)
-            {
-                Factor factor = this.factorBindingSource.DataSource as Factor;
-                DBDataContext context = new DBDataContext();
-                this.factorBindingSource.DataSource = context.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
-            }
-            else if (opFactorType == OpFactorType.NEW_FACTOR)
-            {
-                this.factorBindingSource.DataSource = new Factor();
-            }
         }
 
         /// <summary>
@@ -505,7 +485,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 try
                 {
                     creditLine.Factor = factor;
-                    creditLine.CreateUserName = App.Current.CurUser.Name;
                     context.SubmitChanges();
                 }
                 catch (Exception e1)
@@ -522,7 +501,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     {
                         foreach (FactorCreditLine fcl in factor.FactorCreditLines)
                         {
-                            if (fcl != creditLine && fcl.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY && fcl.CreditLineType == creditLine.CreditLineType)
+                            if (fcl != creditLine && fcl.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY)
                             {
                                 fcl.CreditLineStatus = ConstStr.FACTOR_CREDIT_LINE.EXPIRY;
                             }
@@ -568,7 +547,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     {
                         foreach (FactorCreditLine fcl in factor.FactorCreditLines)
                         {
-                            if (fcl != creditLine && fcl.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY && fcl.CreditLineType == creditLine.CreditLineType)
+                            if (fcl != creditLine && fcl.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY)
                             {
                                 fcl.CreditLineStatus = ConstStr.FACTOR_CREDIT_LINE.EXPIRY;
                             }

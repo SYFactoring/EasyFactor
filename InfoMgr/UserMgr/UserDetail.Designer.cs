@@ -14,7 +14,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         #region Fields (30)
 
         private DevComponents.DotNetBar.ButtonX btnPermissionUpdate;
-        private DevComponents.DotNetBar.ButtonX btnUserReset;
         private DevComponents.DotNetBar.ButtonX btnUserSave;
         private DevComponents.DotNetBar.ButtonX btnUserUpdate;
         private System.Windows.Forms.CheckedListBox cbPermission;
@@ -113,7 +112,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.emailTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.loginDate = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.msnTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btnUserReset = new DevComponents.DotNetBar.ButtonX();
             this.btnUserSave = new DevComponents.DotNetBar.ButtonX();
             this.tabItemUser = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelPermission = new DevComponents.DotNetBar.TabControlPanel();
@@ -389,7 +387,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.tabPanelUser.Controls.Add(this.btnUserUpdate);
             this.tabPanelUser.Controls.Add(this.groupPanelUser);
-            this.tabPanelUser.Controls.Add(this.btnUserReset);
             this.tabPanelUser.Controls.Add(this.btnUserSave);
             this.tabPanelUser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPanelUser.Location = new System.Drawing.Point(0, 26);
@@ -410,7 +407,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.btnUserUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnUserUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUserUpdate.Location = new System.Drawing.Point(21, 286);
+            this.btnUserUpdate.Location = new System.Drawing.Point(60, 286);
             this.btnUserUpdate.Name = "btnUserUpdate";
             this.btnUserUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUserUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -568,23 +565,11 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.msnTextBox.Size = new System.Drawing.Size(154, 20);
             this.msnTextBox.TabIndex = 18;
             // 
-            // btnUserReset
-            // 
-            this.btnUserReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnUserReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUserReset.Location = new System.Drawing.Point(184, 286);
-            this.btnUserReset.Name = "btnUserReset";
-            this.btnUserReset.Size = new System.Drawing.Size(75, 23);
-            this.btnUserReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnUserReset.TabIndex = 3;
-            this.btnUserReset.Text = "重置";
-            this.btnUserReset.Click += new System.EventHandler(this.ResetUser);
-            // 
             // btnUserSave
             // 
             this.btnUserSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnUserSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUserSave.Location = new System.Drawing.Point(102, 286);
+            this.btnUserSave.Location = new System.Drawing.Point(141, 286);
             this.btnUserSave.Name = "btnUserSave";
             this.btnUserSave.Size = new System.Drawing.Size(75, 23);
             this.btnUserSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;

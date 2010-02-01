@@ -27,8 +27,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private BindingSource bs;
 
-        private DBDataContext context;
-
         #endregion Fields
 
         #region Constructors (1)
@@ -45,13 +43,20 @@ namespace CMBC.EasyFactor.CaseMgr
             ControlUtil.SetDoubleBuffered(this.dgvContracts);
 
             this.UpdateContextMenu();
-
-            this.context = new DBDataContext();
         }
 
         #endregion Constructors
 
-        #region Properties (2)
+        #region Properties (3)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Gets or sets owner form
@@ -197,6 +202,8 @@ namespace CMBC.EasyFactor.CaseMgr
             string clientName = this.tbClientName.Text;
             string contractStatus = this.cbContractStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
+
+            context = new DBDataContext();
 
             var queryResult = from contract in context.Contracts
                               let client = contract.Client

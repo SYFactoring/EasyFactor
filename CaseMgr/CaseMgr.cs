@@ -27,7 +27,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private BindingSource bs;
 
-        private DBDataContext context;
+        #endregion Fields
+
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -55,9 +57,9 @@ namespace CMBC.EasyFactor.CaseMgr
             STAT,
         }
 
-        #endregion Fields
+        #endregion Enums
 
-        #region Constructors (3)
+        #region Constructors (2)
 
         /// <summary>
         /// Initializes a new instance of the CaseMgr class
@@ -105,26 +107,34 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbTransactionType.Items.Insert(0, "全部");
             this.cbTransactionType.Text = "全部";
 
-            List<Department> deptsList = Department.AllDepartments().ToList();
+            List<Department> deptsList = Department.AllDepartments(new DBDataContext());
             deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
             this.cbOwnerDepts.DataSource = deptsList;
             this.cbOwnerDepts.DisplayMembers = "DepartmentName";
             this.cbOwnerDepts.ValueMember = "DepartmentCode";
             this.cbOwnerDepts.GroupingMembers = "Domain";
 
-            List<Currency> currencyList = Currency.AllCurrencies().ToList();
+            List<Currency> currencyList = Currency.AllCurrencies();
             currencyList.Insert(0, new Currency() { CurrencyCode = "AAA", CurrencyName = "All" });
             this.cbCurrency.DataSource = currencyList;
             this.cbCurrency.DisplayMember = "CurrencyFormat";
             this.cbCurrency.ValueMember = "CurrencyCode";
 
             this.UpdateContextMenu();
-            this.context = new DBDataContext();
         }
 
         #endregion Constructors
 
-        #region Properties (2)
+        #region Properties (3)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Gets or sets owner form
@@ -300,6 +310,8 @@ namespace CMBC.EasyFactor.CaseMgr
             DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
             DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
             string createUserName = this.tbCreateUserName.Text;
+
+            context = new DBDataContext();
 
             var queryResult = context.Cases.Where(c =>
                                    ((string)this.cbOwnerDepts.SelectedValue == "CN01300" ? true : c.OwnerDepartmentCode.Equals((string)this.cbOwnerDepts.SelectedValue))

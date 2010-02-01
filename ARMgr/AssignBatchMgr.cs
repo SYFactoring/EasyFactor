@@ -36,8 +36,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-        private DBDataContext context;
-
         #endregion Fields
 
         #region Enums (1)
@@ -98,7 +96,6 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.SetDoubleBuffered(this.dgvBatches);
 
             this.UpdateContextMenu();
-            this.context = new DBDataContext();
 
             if (this.opBatchType == OpBatchType.CHECK)
             {
@@ -116,7 +113,16 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Constructors
 
-        #region Properties (2)
+        #region Properties (3)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Gets or sets owner form
@@ -138,9 +144,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (14)
+        #region Methods (15)
 
-        // Private Methods (14) 
+        // Private Methods (15) 
 
         /// <summary>
         /// 
@@ -169,7 +175,6 @@ namespace CMBC.EasyFactor.ARMgr
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
-            context.InvoiceAssignBatches.Attach(batch);
             context.SubmitChanges();
         }
 
@@ -292,6 +297,24 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ExportMSG09(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+
+            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG09, selectedBatch.Invoices);
+            form.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
         {
             DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value.Date : this.dateFrom.MinDate;
@@ -299,6 +322,8 @@ namespace CMBC.EasyFactor.ARMgr
             string status = this.cbCheckStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
+
+            context = new DBDataContext();
 
             IEnumerable<InvoiceAssignBatch> queryResult = context.InvoiceAssignBatches.Where(i =>
                     (i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text))
@@ -339,7 +364,6 @@ namespace CMBC.EasyFactor.ARMgr
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
-            context.InvoiceAssignBatches.Attach(batch);
             context.SubmitChanges();
         }
 
@@ -934,23 +958,5 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ExportMSG09(object sender, EventArgs e)
-        {
-            if (this.dgvBatches.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-
-            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG09, selectedBatch.Invoices);
-            form.Show();
-        }
     }
 }

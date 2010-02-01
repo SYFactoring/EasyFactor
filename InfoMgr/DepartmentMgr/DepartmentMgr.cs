@@ -7,13 +7,11 @@
 namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 {
     using System;
-    using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.ComponentModel;
 
     /// <summary>
     /// 
@@ -26,8 +24,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// 
         /// </summary>
         private BindingSource bs;
-
-        private DBDataContext context;
 
         #endregion Fields
 
@@ -87,6 +83,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 this.colPaymentAmount.Visible = true;
                 this.colIncomeAmount.Visible = true;
 
+                context = new DBDataContext();
+
                 var result = from dept in context.Departments
                              group dept by dept.Location into depts
                              select new { Location = depts.Key, Departments = depts };
@@ -115,12 +113,20 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             ControlUtil.SetDoubleBuffered(this.dgvDepts);
 
             this.UpdateContextMenu();
-            this.context = new DBDataContext();
         }
 
         #endregion Constructors
 
-        #region Properties (2)
+        #region Properties (3)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Gets or sets Owner Form
@@ -181,7 +187,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             }
 
             Department selectedDepartment = (Department)this.bs.List[this.dgvDepts.SelectedRows[0].Index];
-            if (MessageBox.Show("是否确定删除分部: " + selectedDepartment.DepartmentName, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.OK)
+            if (MessageBox.Show("是否确定删除分部: " + selectedDepartment.DepartmentName, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 context.Departments.DeleteOnSubmit(selectedDepartment);
                 bool isDeleteOK = true;
@@ -254,6 +260,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// <param name="e"></param>
         private void Query(object sender, EventArgs e)
         {
+            context = new DBDataContext();
+
             var queryResult = context.Departments.Where(d =>
                              (d.DepartmentCode == null ? string.Empty : d.DepartmentCode).Contains(this.tbDepartmentCode.Text)
                           && (d.DepartmentName == null ? string.Empty : d.DepartmentName).Contains(this.tbDepartmentName.Text));

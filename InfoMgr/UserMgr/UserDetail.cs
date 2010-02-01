@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Data.Linq;
 
     /// <summary>
     /// User Detail User Interface
@@ -68,6 +69,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
             this.opUserType = opType;
+            this.context = new DBDataContext();
 
             this.cbPermission.DataSource = User.GetAllPermissions();
             this.cbPermission.ValueMember = "Permission";
@@ -76,6 +78,10 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             if (opType == OpUserType.NEW_USER)
             {
                 user = new User();
+            }
+            else
+            {
+                user = context.Users.SingleOrDefault(u => u.UserID == user.UserID);
             }
 
             password2TextBox.Text = user.Password;
@@ -92,9 +98,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
             this.tabControl.SelectedTab = this.tabItemUser;
             this.UpdateUserControlStatus();
-
-            this.context = new DBDataContext();
-            this.context.Users.Attach(user);
         }
 
         #endregion Constructors
@@ -102,25 +105,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         #region Methods (5)
 
         // Private Methods (5) 
-
-        /// <summary>
-        /// Cancel current editing and close the form
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void ResetUser(object sender, EventArgs e)
-        {
-            if (opUserType == OpUserType.UPDATE_USER)
-            {
-                User user = this.userBindingSource.DataSource as User;
-                DBDataContext context = new DBDataContext();
-                this.userBindingSource.DataSource = context.Users.SingleOrDefault(u => u.UserID == user.UserID);
-            }
-            else if (opUserType == OpUserType.NEW_USER)
-            {
-                this.userBindingSource.DataSource = new User();
-            }
-        }
 
         /// <summary>
         /// Save current user

@@ -1344,7 +1344,6 @@ namespace CMBC.EasyFactor.Utils
 
                         int column = 2;
                         FactorCreditLine creditLine = new FactorCreditLine();
-                        creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
                         creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
                         creditLine.CreditLine = (double)valueArray[row, column++];
                         creditLine.PeriodBegin = (DateTime)valueArray[row, column++];

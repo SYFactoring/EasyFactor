@@ -2,6 +2,7 @@
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
@@ -45,6 +46,7 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoiceFlaw(List<Invoice> invoiceList)
         {
             InitializeComponent();
+            this.context = new DBDataContext();
             this.ImeMode = ImeMode.OnHalf;
             this.dgvInvoices.AutoGenerateColumns = false;
             this.bs = new BindingSource();
@@ -54,10 +56,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.flawReasonCheckedListBox.DisplayMember = "Reason";
             this.flawReasonCheckedListBox.ValueMember = "Index";
 
-            bs.DataSource = invoiceList;
+            List<Invoice> list = new List<Invoice>();
+            foreach (Invoice invoice in invoiceList)
+            {
+                list.Add(context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo));
+            }
 
-            this.context = new DBDataContext();
-            this.context.Invoices.AttachAll(invoiceList);
+            bs.DataSource = list;
         }
 
         /// <summary>

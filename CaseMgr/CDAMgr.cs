@@ -31,8 +31,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCDAType opCDAType;
 
-        private DBDataContext context;
-
         #endregion Fields
 
         #region Enums (1)
@@ -75,7 +73,6 @@ namespace CMBC.EasyFactor.CaseMgr
             ControlUtil.SetDoubleBuffered(this.dgvCDAs);
 
             this.UpdateContextMenu();
-            this.context = new DBDataContext();
 
             if (this.opCDAType == OpCDAType.CHECK)
             {
@@ -84,6 +81,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             else if (this.opCDAType == OpCDAType.REPORT)
             {
+                context = new DBDataContext();
                 var queryResult = from cda in context.CDAs
                                   where
                                       cda.CDAStatus == "已审核未下发"
@@ -97,7 +95,16 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Constructors
 
-        #region Properties (2)
+        #region Properties (3)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Gets or sets owner form
@@ -119,9 +126,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Properties
 
-        #region Methods (14)
+        #region Methods (13)
 
-        // Private Methods (14) 
+        // Private Methods (13) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -167,7 +174,6 @@ namespace CMBC.EasyFactor.CaseMgr
             cda.CheckUserName = App.Current.CurUser.Name;
             cda.CheckDate = DateTime.Now.Date;
 
-            context.CDAs.Attach(cda);
             context.SubmitChanges();
         }
 
@@ -319,6 +325,8 @@ namespace CMBC.EasyFactor.CaseMgr
             string status = this.cbCheckStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
 
+            context = new DBDataContext();
+
             var queryResult =
                 from cda in context.CDAs
                 let contracts = cda.Case.SellerClient.Contracts
@@ -367,7 +375,6 @@ namespace CMBC.EasyFactor.CaseMgr
             cda.CheckUserName = App.Current.CurUser.Name;
             cda.CheckDate = DateTime.Now.Date;
 
-            context.CDAs.Attach(cda);
             context.SubmitChanges();
         }
 

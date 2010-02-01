@@ -20,7 +20,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private DevComponents.DotNetBar.ButtonX btnCaseBuyerSelect;
         private DevComponents.DotNetBar.ButtonX btnCaseFactorSelect;
-        private DevComponents.DotNetBar.ButtonX btnCaseReset;
         private DevComponents.DotNetBar.ButtonX btnCaseSave;
         private DevComponents.DotNetBar.ButtonX btnCaseSellerSelect;
         private DevComponents.DotNetBar.ButtonX btnCaseUpdate;
@@ -209,7 +208,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelCase = new DevComponents.DotNetBar.TabControlPanel();
             this.btnCaseUpdate = new DevComponents.DotNetBar.ButtonX();
-            this.btnCaseReset = new DevComponents.DotNetBar.ButtonX();
             this.btnCaseSave = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.cbReviews = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -760,7 +758,6 @@ namespace CMBC.EasyFactor.CaseMgr
             // tabPanelCase
             // 
             this.tabPanelCase.Controls.Add(this.btnCaseUpdate);
-            this.tabPanelCase.Controls.Add(this.btnCaseReset);
             this.tabPanelCase.Controls.Add(this.btnCaseSave);
             this.tabPanelCase.Controls.Add(this.groupPanelCase);
             this.tabPanelCase.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -782,7 +779,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.btnCaseUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCaseUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseUpdate.Location = new System.Drawing.Point(148, 363);
+            this.btnCaseUpdate.Location = new System.Drawing.Point(181, 363);
             this.btnCaseUpdate.Name = "btnCaseUpdate";
             this.btnCaseUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnCaseUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -790,23 +787,11 @@ namespace CMBC.EasyFactor.CaseMgr
             this.btnCaseUpdate.Text = "编辑";
             this.btnCaseUpdate.Click += new System.EventHandler(this.UpdateCase);
             // 
-            // btnCaseReset
-            // 
-            this.btnCaseReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCaseReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseReset.Location = new System.Drawing.Point(310, 363);
-            this.btnCaseReset.Name = "btnCaseReset";
-            this.btnCaseReset.Size = new System.Drawing.Size(75, 23);
-            this.btnCaseReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCaseReset.TabIndex = 3;
-            this.btnCaseReset.Text = "重置";
-            this.btnCaseReset.Click += new System.EventHandler(this.ResetCase);
-            // 
             // btnCaseSave
             // 
             this.btnCaseSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCaseSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseSave.Location = new System.Drawing.Point(229, 363);
+            this.btnCaseSave.Location = new System.Drawing.Point(262, 363);
             this.btnCaseSave.Name = "btnCaseSave";
             this.btnCaseSave.Size = new System.Drawing.Size(75, 23);
             this.btnCaseSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;

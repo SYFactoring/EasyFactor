@@ -20,14 +20,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// </summary>
     public partial class FactorMgr : UserControl
     {
-        #region Fields (2)
+        #region Fields (1)
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs;
-
-        private DBDataContext context;
 
         #endregion Fields
 
@@ -52,12 +50,20 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.cbCountry.ValueMember = "CountryNameEN";
 
             this.UpdateContextMenu();
-            context = new DBDataContext();
         }
 
         #endregion Constructors
 
-        #region Properties (2)
+        #region Properties (3)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Gets or sets onwer form
@@ -79,9 +85,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
         #endregion Properties
 
-        #region Methods (12)
+        #region Methods (10)
 
-        // Private Methods (12) 
+        // Private Methods (10) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -251,6 +257,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     country = string.Empty;
                 }
             }
+
+            context = new DBDataContext();
 
             var queryResult = context.Factors.Where(f =>
                                                    ((f.FactorCode == null ? string.Empty : f.FactorCode).Contains(tbFactorCode.Text))

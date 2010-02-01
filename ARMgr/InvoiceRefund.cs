@@ -108,8 +108,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             set
             {
-                this._case = value;
-                this.context.Cases.Attach(this._case);
+                this._case = this.context.Cases.SingleOrDefault(c => c.CaseCode == value.CaseCode);
                 this.NewBatch(null, null);
             }
         }
@@ -611,11 +610,12 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceRefundBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
-                this.batchBindingSource.DataSource = selectedBatch;
+                InvoiceRefundBatch batch = context.InvoiceRefundBatches.SingleOrDefault(i => i.RefundBatchNo == selectedBatch.RefundBatchNo);
+                this.batchBindingSource.DataSource = batch;
                 Func<InvoiceRefundLog, Invoice> makeInvoice =
                 i => new Invoice { InvoiceNo = i.InvoiceNo, RefundLogID2 = i.RefundLogID };
 
-                var invoiceList = from log in selectedBatch.InvoiceRefundLogs
+                var invoiceList = from log in batch.InvoiceRefundLogs
                                   select makeInvoice(log);
 
                 this.invoiceBindingSource.DataSource = invoiceList;

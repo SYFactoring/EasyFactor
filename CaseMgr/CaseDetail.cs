@@ -98,17 +98,21 @@ namespace CMBC.EasyFactor.CaseMgr
             this.ImeMode = ImeMode.OnHalf;
             this.dgvCDAs.AutoGenerateColumns = false;
             this.dgvCreditCoverNegs.AutoGenerateColumns = false;
+            this.context = new DBDataContext();
 
-            this.cbCaseInvoiceCurrency.DataSource = Currency.AllCurrencies().ToList();
+            List<Currency> allCurrencies = Currency.AllCurrencies();
+            this.cbCaseInvoiceCurrency.DataSource = allCurrencies;
             this.cbCaseInvoiceCurrency.DisplayMember = "CurrencyFormat";
             this.cbCaseInvoiceCurrency.ValueMember = "CurrencyCode";
 
-            this.cbCaseCoDepts.DataSource = Department.AllDepartments("贸易金融事业部").ToList();
+            List<Department> allMJDepatments = Department.AllDepartments(context, "贸易金融事业部");
+            this.cbCaseCoDepts.DataSource = allMJDepatments;
             this.cbCaseCoDepts.ValueMember = "DepartmentCode";
             this.cbCaseCoDepts.DisplayMember = "DepartmentName";
             this.cbCaseCoDepts.SelectedIndex = -1;
 
-            this.cbCaseOwnerDepts.DataSource = Department.AllDepartments();
+            List<Department> allDepartments = Department.AllDepartments(context);
+            this.cbCaseOwnerDepts.DataSource = allDepartments;
             this.cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
             this.cbCaseOwnerDepts.GroupingMembers = "Domain";
             this.cbCaseOwnerDepts.ValueMember = "DepartmentCode";
@@ -134,6 +138,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             else
             {
+                curCase = context.Cases.SingleOrDefault(c => c.CaseCode == curCase.CaseCode);
                 this.caseBindingSource.DataSource = curCase;
                 this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations;
                 this.dgvCDAs.DataSource = curCase.CDAs;
@@ -171,8 +176,6 @@ namespace CMBC.EasyFactor.CaseMgr
 
             this.UpdateCaseControlStatus();
             this.UpdateCreditCoverNegControlStatus();
-            this.context = new DBDataContext();
-            this.context.Cases.Attach(curCase);
         }
 
         /// <summary>
@@ -208,6 +211,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
             if (opCreditCoverNegType == OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG || opCreditCoverNegType == OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG)
             {
+                neg = context.CreditCoverNegotiations.SingleOrDefault(n => n.NegoID == neg.NegoID);
                 this.creditCoverNegBindingSource.DataSource = neg;
             }
         }
@@ -271,7 +275,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             Case curCase = (Case)this.caseBindingSource.DataSource;
 
-            Factor cmbc = Factor.FindFactorByCode(Factor.CMBC_CODE);
+            Factor cmbc = context.Factors.SingleOrDefault(f => f.FactorCode == Factor.CMBC_CODE);
             switch (transactionType)
             {
                 case "国内卖方保理":
@@ -605,30 +609,6 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         /// <summary>
-        /// Close the case form
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ResetCase(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
-            {
-                return;
-            }
-
-            if (this.opCaseType == OpCaseType.UPDATE_CASE)
-            {
-                Case curCase = this.caseBindingSource.DataSource as Case;
-                DBDataContext context = new DBDataContext();
-                this.caseBindingSource.DataSource = context.Cases.SingleOrDefault(c => c.CaseCode == curCase.CaseCode);
-            }
-            else if (this.opCaseType == OpCaseType.NEW_CASE)
-            {
-                this.caseBindingSource.DataSource = new Case();
-            }
-        }
-
-        /// <summary>
         /// Save current Case
         /// </summary>
         /// <param name="sender"></param>
@@ -775,7 +755,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    context.CreditCoverNegotiations.Attach(creditCoverNeg);
                     context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
@@ -823,7 +802,7 @@ namespace CMBC.EasyFactor.CaseMgr
             queryUI.ShowDialog(this);
             if (clientMgr.Selected != null)
             {
-                curCase.BuyerClient = clientMgr.Selected;
+                curCase.BuyerClient = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
                 switch (this.cbCaseTransactionType.Text)
                 {
                     case "国内卖方保理":
@@ -863,7 +842,7 @@ namespace CMBC.EasyFactor.CaseMgr
             queryUI.ShowDialog(this);
             if (clientMgr.Selected != null)
             {
-                curCase.SellerClient = clientMgr.Selected;
+                curCase.SellerClient = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
                 switch (this.cbCaseTransactionType.Text)
                 {
                     case "国内卖方保理":
@@ -928,6 +907,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Factor factor = factorMgr.Selected;
             if (factor != null)
             {
+                factor = context.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
                 this.tbCaseFactorCode.Text = factor.FactorCode;
                 this.tbCaseFactorNameCN.Text = factor.CompanyNameCN;
                 this.tbCaseFactorNameEN.Text = factor.CompanyNameEN;

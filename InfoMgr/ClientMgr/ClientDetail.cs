@@ -166,12 +166,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientCreditLines.DataSource = this.bsCreditLines;
             this.dgvContracts.DataSource = this.bsContracts;
             this.dgvReviews.DataSource = this.bsReviews;
+            this.context = new DBDataContext();
 
             this.cbCountryCode.DataSource = Country.AllCountries();
             this.cbCountryCode.DisplayMember = "CountryFormatCN";
             this.cbCountryCode.ValueMember = "CountryCode";
 
-            this.cbDepartments.DataSource = Department.AllDepartments();
+            List<Department> allDepartments = Department.AllDepartments(context);
+            this.cbDepartments.DataSource = allDepartments;
             this.cbDepartments.DisplayMembers = "DepartmentName";
             this.cbDepartments.GroupingMembers = "Domain";
             this.cbDepartments.ValueMember = "DepartmentCode";
@@ -196,6 +198,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 client = new Client();
                 this.clientBindingSource.DataSource = client;
+            }
+            else
+            {
+                client = context.Clients.SingleOrDefault(c => c.ClientEDICode == client.ClientEDICode);
             }
 
             this.clientBindingSource.DataSource = client;
@@ -234,9 +240,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UpdateClientCreditLineControlStatus();
             this.UpdateContractControlStatus();
             this.UpdateReviewControlStatus();
-
-            this.context = new DBDataContext();
-            this.context.Clients.Attach(client);
         }
 
         /// <summary>
@@ -281,6 +284,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabControl.SelectedTab = this.tabItemContract;
             if (this.opContractType == OpContractType.DETAIL_CONTRACT || this.opContractType == OpContractType.UPDATE_CONTRACT)
             {
+                contract = context.Contracts.SingleOrDefault(c => c.ContractCode == contract.ContractCode);
                 this.contractBindingSource.DataSource = contract;
             }
         }
@@ -296,6 +300,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabControl.SelectedTab = this.tabItemClientCreditLine;
             if (this.opClientCreditLineType == OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE || this.opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
             {
+                creditLine = context.ClientCreditLines.SingleOrDefault(c => c.CreditLineID == creditLine.CreditLineID);
                 this.clientCreditLineBindingSource.DataSource = creditLine;
             }
         }
@@ -311,6 +316,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabControl.SelectedTab = this.tabItemReview;
             if (this.opReviewType == OpReviewType.DETAIL_REVIEW || this.opReviewType == OpReviewType.UPDATE_REVIEW)
             {
+                review = context.ClientReviews.SingleOrDefault(r => r.ReviewNo == review.ReviewNo);
                 this.reviewBindingSource.DataSource = review;
                 if (review.RequestFinanceType != null)
                 {
@@ -784,30 +790,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             this.bsReviews.DataSource = typeof(ClientReview);
             this.bsReviews.DataSource = client.ClientReviews;
-        }
-
-        /// <summary>
-        /// Reset Client
-        /// </summary>
-        /// <param name="sender">Event Sender</param>
-        /// <param name="e">Event Args</param>
-        private void ResetClient(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
-            {
-                return;
-            }
-
-            if (this.opClientType == OpClientType.UPDATE_CLIENT)
-            {
-                Client client = this.clientBindingSource.DataSource as Client;
-                DBDataContext context = new DBDataContext();
-                this.clientBindingSource.DataSource = context.Clients.SingleOrDefault(c => c.ClientEDICode == client.ClientEDICode);
-            }
-            else if (this.opClientType == OpClientType.NEW_CLIENT)
-            {
-                this.clientBindingSource.DataSource = new Client();
-            }
         }
 
         /// <summary>

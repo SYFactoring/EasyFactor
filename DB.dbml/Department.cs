@@ -13,33 +13,8 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class Department 
+    public partial class Department
     {
-        #region Fields (1)
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private static readonly List<Department> _allDepartment;
-
-        #endregion Fields
-
-        #region Constructors (1)
-
-        /// <summary>
-        /// Initializes static members of the Department class
-        /// </summary>
-        static Department()
-        {
-            DBDataContext context = new DBDataContext();
-            _allDepartment = new List<Department>();
-            _allDepartment.AddRange(context.Departments.Where(d => d.Domain == "贸易金融事业部"));
-            _allDepartment.AddRange(context.Departments.Where(d => d.Domain == "分行营业部"));
-            _allDepartment.AddRange(context.Departments.Where(d => d.Domain != "贸易金融事业部" && d.Domain != "分行事业部"));
-        }
-
-        #endregion Constructors
-
         #region Properties (6)
 
         /// <summary>
@@ -207,8 +182,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// 
         /// </summary>
         /// <returns></returns>
-        public static List<Department> AllDepartments()
+        public static List<Department> AllDepartments(DBDataContext context)
         {
+            List<Department> _allDepartment = new List<Department>();
+            _allDepartment.AddRange(context.Departments.Where(d => d.Domain == "贸易金融事业部"));
+            _allDepartment.AddRange(context.Departments.Where(d => d.Domain == "分行营业部"));
+            _allDepartment.AddRange(context.Departments.Where(d => d.Domain != "贸易金融事业部" && d.Domain != "分行事业部"));
+
             return _allDepartment;
         }
 
@@ -217,8 +197,9 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         /// <param name="domainName"></param>
         /// <returns></returns>
-        public static List<Department> AllDepartments(string domainName)
+        public static List<Department> AllDepartments(DBDataContext context, string domainName)
         {
+            List<Department> _allDepartment = AllDepartments(context);
             return _allDepartment.Where(d => d._Domain == domainName).ToList();
         }
 
@@ -239,7 +220,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public class City
     {
-        
+
         /// <summary>
         /// 
         /// </summary>
