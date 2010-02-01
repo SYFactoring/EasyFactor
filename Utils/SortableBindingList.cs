@@ -73,6 +73,11 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
+        public SortableBindingList() : base() { }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="t"></param>
         public SortableBindingList(IList<T> t) : base(t) { }
 
