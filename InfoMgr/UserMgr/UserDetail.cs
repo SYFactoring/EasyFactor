@@ -216,8 +216,16 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+
                 userIDTextBox.ReadOnly = true;
-                roleComboBox.Enabled = false;
+                if (PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
+                {
+                    roleComboBox.Enabled = true;
+                }
+                else
+                {
+                    roleComboBox.Enabled = false;
+                }
             }
 
             this.loginDate.ReadOnly = true;
