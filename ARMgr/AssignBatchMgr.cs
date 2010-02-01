@@ -929,5 +929,23 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportMSG09(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+
+            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG09, selectedBatch.Invoices);
+            form.Show();
+        }
     }
 }

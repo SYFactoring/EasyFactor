@@ -91,6 +91,8 @@ namespace CMBC.EasyFactor.ARMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblClientName = new DevComponents.DotNetBar.LabelX();
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
@@ -128,8 +130,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemFinanceReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCommissionReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemFlawReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblClientName = new DevComponents.DotNetBar.LabelX();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -166,6 +168,30 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
+            // 
+            // tbClientName
+            // 
+            // 
+            // 
+            // 
+            this.tbClientName.Border.Class = "TextBoxBorder";
+            this.tbClientName.Location = new System.Drawing.Point(70, 29);
+            this.tbClientName.Name = "tbClientName";
+            this.tbClientName.Size = new System.Drawing.Size(100, 20);
+            this.tbClientName.TabIndex = 6;
+            // 
+            // lblClientName
+            // 
+            this.lblClientName.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblClientName.BackgroundStyle.Class = "";
+            this.lblClientName.Location = new System.Drawing.Point(8, 31);
+            this.lblClientName.Name = "lblClientName";
+            this.lblClientName.Size = new System.Drawing.Size(56, 16);
+            this.lblClientName.TabIndex = 5;
+            this.lblClientName.Text = "客户名称";
             // 
             // tbCreateUserName
             // 
@@ -528,9 +554,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemAssignReport,
             this.menuItemFinanceReport,
             this.menuItemCommissionReport,
-            this.menuItemFlawReport});
+            this.menuItemFlawReport,
+            this.toolStripSeparator4,
+            this.menuItemMSG09});
             this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(183, 220);
+            this.cmuBatchMgr.Size = new System.Drawing.Size(183, 270);
             // 
             // menuItemBatchSelect
             // 
@@ -610,29 +638,17 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemFlawReport.Text = "瑕疵通知书";
             this.menuItemFlawReport.Click += new System.EventHandler(this.ReportFlaw);
             // 
-            // tbClientName
+            // toolStripSeparator4
             // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(179, 6);
             // 
+            // menuItemMSG09
             // 
-            // 
-            this.tbClientName.Border.Class = "TextBoxBorder";
-            this.tbClientName.Location = new System.Drawing.Point(70, 29);
-            this.tbClientName.Name = "tbClientName";
-            this.tbClientName.Size = new System.Drawing.Size(100, 20);
-            this.tbClientName.TabIndex = 6;
-            // 
-            // lblClientName
-            // 
-            this.lblClientName.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblClientName.BackgroundStyle.Class = "";
-            this.lblClientName.Location = new System.Drawing.Point(8, 31);
-            this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(56, 16);
-            this.lblClientName.TabIndex = 5;
-            this.lblClientName.Text = "客户名称";
+            this.menuItemMSG09.Name = "menuItemMSG09";
+            this.menuItemMSG09.Size = new System.Drawing.Size(182, 22);
+            this.menuItemMSG09.Text = "生成MSG09";
+            this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
             // 
             // AssignBatchMgr
             // 
@@ -660,5 +676,7 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.LabelX lblCreateUserName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
         private DevComponents.DotNetBar.LabelX lblClientName;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem menuItemMSG09;
     }
 }

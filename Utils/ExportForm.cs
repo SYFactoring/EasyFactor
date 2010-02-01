@@ -13,14 +13,20 @@ namespace CMBC.EasyFactor.Utils
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using Microsoft.Office.Interop.Excel;
+    using System.Text;
+    using System.IO;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class ExportForm : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (1)
+        #region Fields (2)
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private IList exportData;
         /// <summary>
         /// 
         /// </summary>
@@ -69,6 +75,11 @@ namespace CMBC.EasyFactor.Utils
             /// 
             /// </summary>
             EXPORT_REFUND_BY_BATCH,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            EXPORT_MSG09,
         }
 
         #endregion Enums
@@ -79,28 +90,47 @@ namespace CMBC.EasyFactor.Utils
         /// Initializes a new instance of the ExportForm class
         /// </summary>
         /// <param name="exportType"></param>
-        public ExportForm(ExportType exportType)
+        /// <param name="exportData"></param>
+        public ExportForm(ExportType exportType, IList exportData)
         {
             this.InitializeComponent();
             this.exportType = exportType;
+            this.exportData = exportData;
+
+            if (this.exportType == ExportType.EXPORT_MSG09)
+            {
+                this.btnFileSelect.Enabled = true;
+            }
         }
 
         #endregion Constructors
 
-        #region Methods (12)
+        #region Methods (13)
 
         // Public Methods (1) 
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="objArray"></param>
-        public void StartExport(IList objArray)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void StartExport(object sender, EventArgs e)
         {
-            this.Show();
-            this.backgroundWorker.RunWorkerAsync(objArray);
+            string filePath = this.tbFilePath.Text;
+            if (filePath.Trim().Equals(String.Empty))
+            {
+                if (this.exportType == ExportType.EXPORT_MSG09)
+                {
+                    return;
+                }
+            }
+
+            this.btnCancel.Text = "取消";
+            this.backgroundWorker.RunWorkerAsync();
+
+            this.btnStart.Enabled = false;
         }
-        // Private Methods (11) 
+        // Private Methods (12) 
 
         /// <summary>
         /// 
@@ -113,25 +143,28 @@ namespace CMBC.EasyFactor.Utils
             switch (this.exportType)
             {
                 case ExportType.EXPORT_CREDIT_NOTES:
-                    e.Result = this.ExportCreditNotes((IList)e.Argument, worker, e);
+                    e.Result = this.ExportCreditNotes(worker, e);
                     break;
                 case ExportType.EXPORT_ASSIGN_BY_BATCH:
-                    e.Result = this.ExportAssignByBatch((IList)e.Argument, worker, e);
+                    e.Result = this.ExportAssignByBatch(worker, e);
                     break;
                 case ExportType.EXPORT_FINANCE_BY_BATCH:
-                    e.Result = this.ExportFinanceByBatch((IList)e.Argument, worker, e);
+                    e.Result = this.ExportFinanceByBatch(worker, e);
                     break;
                 case ExportType.EXPORT_PAYMENT_BY_BATCH:
-                    e.Result = this.ExportPaymentByBatch((IList)e.Argument, worker, e);
+                    e.Result = this.ExportPaymentByBatch(worker, e);
                     break;
                 case ExportType.EXPORT_REFUND_BY_BATCH:
-                    e.Result = this.ExportRefundByBatch((IList)e.Argument, worker, e);
+                    e.Result = this.ExportRefundByBatch(worker, e);
                     break;
                 case ExportType.EXPORT_INVOICES_FULL:
-                    e.Result = this.ExportInvoicesFull((IList)e.Argument, worker, e);
+                    e.Result = this.ExportInvoicesFull(worker, e);
                     break;
                 case ExportType.EXPORT_INVOICES_OVERDUE:
-                    e.Result = this.ExportInvoicesOverDue((IList)e.Argument, worker, e);
+                    e.Result = this.ExportInvoicesOverDue(worker, e);
+                    break;
+                case ExportType.EXPORT_MSG09:
+                    e.Result = this.ExportMsg09(worker, e);
                     break;
                 default:
                     break;
@@ -197,11 +230,10 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="invoiceList"></param>
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ExportAssignByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ExportAssignByBatch(BackgroundWorker worker, DoWorkEventArgs e)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -229,7 +261,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "手续费收取日";
                 datasheet.Cells[1, column++] = "备注";
 
-                int size = invoiceList.Count;
+                int size = this.exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
@@ -258,7 +290,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    Invoice invoice = (Invoice)invoiceList[row];
+                    Invoice invoice = (Invoice)exportData[row];
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAmount;
                     datasheet.Cells[row + 2, column++] = invoice.AssignAmount;
@@ -307,17 +339,16 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            return invoiceList.Count;
+            return exportData.Count;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="creditNoteList"></param>
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ExportCreditNotes(IList creditNoteList, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ExportCreditNotes(BackgroundWorker worker, DoWorkEventArgs e)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -352,7 +383,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "对应发票号";
                 datasheet.Cells[1, column++] = "备注";
 
-                int size = creditNoteList.Count;
+                int size = exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
@@ -381,7 +412,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    CreditNote creditNote = (CreditNote)creditNoteList[row];
+                    CreditNote creditNote = (CreditNote)exportData[row];
                     datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.Case.CaseCode;
                     datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.Case.BuyerClient.ToString();
                     datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.PaymentBatchNo;
@@ -434,17 +465,16 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            return creditNoteList.Count;
+            return exportData.Count;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="invoiceList"></param>
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ExportFinanceByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ExportFinanceByBatch(BackgroundWorker worker, DoWorkEventArgs e)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -471,7 +501,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "利息收取日";
                 datasheet.Cells[1, column++] = "备注";
 
-                int size = invoiceList.Count;
+                int size = exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
@@ -500,7 +530,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    Invoice invoice = (Invoice)invoiceList[row];
+                    Invoice invoice = (Invoice)exportData[row];
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = invoice.AssignOutstanding;
                     datasheet.Cells[row + 2, column++] = invoice.FinanceAmount;
@@ -548,22 +578,17 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
-            return invoiceList.Count;
+            return exportData.Count;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="invoiceList"></param>
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ExportInvoicesFull(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ExportInvoicesFull(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            //System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -637,7 +662,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "利息收取日";
                 datasheet.Cells[1, column++] = "备注";
 
-                int size = invoiceList.Count;
+                int size = exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
@@ -666,7 +691,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    Invoice invoice = (Invoice)invoiceList[row];
+                    Invoice invoice = (Invoice)exportData[row];
                     //CDA
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.CaseCode;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.SellerClient.ToString();
@@ -783,19 +808,16 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            //System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
-
-            return invoiceList.Count;
+            return exportData.Count;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="invoiceList"></param>
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ExportInvoicesOverDue(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ExportInvoicesOverDue(BackgroundWorker worker, DoWorkEventArgs e)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -827,7 +849,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "应收帐款逾期天数";
                 datasheet.Cells[1, column++] = "预付款逾期天数";
 
-                int size = invoiceList.Count;
+                int size = exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
@@ -856,7 +878,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    Invoice invoice = (Invoice)invoiceList[row];
+                    Invoice invoice = (Invoice)exportData[row];
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.SellerClient.ToString();
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.BuyerClient.ToString();
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
@@ -909,17 +931,124 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            return invoiceList.Count;
+            return exportData.Count;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="invoiceList"></param>
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ExportPaymentByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ExportMsg12(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            string filePath = this.tbFilePath.Text;
+            StreamWriter fileWriter = new StreamWriter(filePath, false, Encoding.ASCII);
+
+            int size = exportData.Count;
+            for (int row = 0; row < size; row++)
+            {
+                if (worker.CancellationPending)
+                {
+                    fileWriter.Close();
+                    e.Cancel = true;
+                    return -1;
+                }
+
+                Invoice invoice = (Invoice)exportData[row];
+                StringBuilder sb = new StringBuilder();
+
+
+                worker.ReportProgress((int)((float)row * 100 / (float)size));
+            }
+
+            fileWriter.Flush();
+            fileWriter.Close();
+            return this.exportData.Count;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int ExportMsg09(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            string filePath = this.tbFilePath.Text;
+            StreamWriter fileWriter = new StreamWriter(filePath, false, Encoding.ASCII);
+
+            int size = exportData.Count;
+            for (int row = 0; row < size; row++)
+            {
+                if (worker.CancellationPending)
+                {
+                    fileWriter.Close();
+                    e.Cancel = true;
+                    return -1;
+                }
+
+                Invoice invoice = (Invoice)exportData[row];
+                StringBuilder sb = new StringBuilder();
+                Case curCase = invoice.InvoiceAssignBatch.Case;
+                sb.Append(((int)row / 1000 + 1)).Append(',');
+                sb.Append("MSG09").Append(',');
+                sb.Append(curCase.SellerFactorCode).Append(',');
+                sb.Append(curCase.BuyerFactorCode).Append(',');
+                sb.Append(User.GetEDIAccount(curCase.CreateUserName)).Append(',');
+                sb.Append(',');
+                sb.Append(',');
+                sb.Append(',');
+                sb.Append(',');
+                sb.Append(',');
+                sb.Append(curCase.SellerFactorCode).Append(',');
+                sb.Append(curCase.SellerFactor.CompanyNameEN).Append(',');
+                sb.Append(curCase.BuyerFactorCode).Append(',');
+                sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
+                sb.Append(invoice.AssignBatchNo).Append(',');
+                sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.InvoiceAssignBatch.AssignDate)).Append(',');
+                sb.Append(invoice.InvoiceAssignBatch.BatchCurrency).Append(',');
+                sb.Append(invoice.InvoiceAssignBatch.AssignAmount).Append(',');
+                sb.Append(',');//CreditNote
+                sb.Append(curCase.SellerCode).Append(',');
+                sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
+                sb.Append(curCase.BuyerCode).Append(',');
+                sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
+                sb.Append(1).Append(',');
+                sb.Append(invoice.InvoiceNo).Append(',');
+                sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.InvoiceDate)).Append(',');
+                sb.Append(invoice.InvoiceAmount).Append(',');
+                sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.DueDate)).Append(',');
+                sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.ValueDate)).Append(',');
+                sb.Append(curCase.NetPaymentTerm).Append(',');
+                sb.Append(invoice.PrimaryDiscountDays).Append(',');
+                sb.Append(invoice.PrimaryDiscountRate).Append(',');
+                sb.Append(invoice.SecondaryDiscountDays).Append(',');
+                sb.Append(invoice.SecondaryDiscountRate).Append(',');
+                sb.Append(invoice.PaymentConditions).Append(',');
+                sb.Append(invoice.OrderNumberReference).Append(',');
+                sb.Append(invoice.InvoiceReferenceNumber).Append(',');
+                sb.Append(invoice.InvoiceAssignBatch.BatchCount).Append(',');
+                sb.Append(0).Append(',');//Total of CreditNote
+                sb.Append(invoice.Comment);
+
+                fileWriter.WriteLine(sb.ToString());
+
+                worker.ReportProgress((int)((float)row * 100 / (float)size));
+            }
+
+            fileWriter.Flush();
+            fileWriter.Close();
+            return this.exportData.Count;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int ExportPaymentByBatch(BackgroundWorker worker, DoWorkEventArgs e)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -944,7 +1073,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "贷项通知号";
                 datasheet.Cells[1, column++] = "贷项通知日";
 
-                int size = invoiceList.Count;
+                int size = exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
@@ -973,7 +1102,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    Invoice invoice = (Invoice)invoiceList[row];
+                    Invoice invoice = (Invoice)exportData[row];
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = invoice.AssignOutstanding;
                     datasheet.Cells[row + 2, column++] = invoice.PaymentAmount2;
@@ -1019,17 +1148,32 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            return invoiceList.Count;
+            return exportData.Count;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="invoiceList"></param>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectFile(object sender, EventArgs e)
+        {
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            fileDialog.Filter = "CSV files (*.csv)|*.csv";
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                this.tbFilePath.Text = fileDialog.FileName;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ExportRefundByBatch(IList invoiceList, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ExportRefundByBatch(BackgroundWorker worker, DoWorkEventArgs e)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -1039,7 +1183,7 @@ namespace CMBC.EasyFactor.Utils
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-             if (datasheet == null)
+            if (datasheet == null)
             {
                 return -1;
             }
@@ -1052,7 +1196,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "还款金额";
                 datasheet.Cells[1, column++] = "备注";
 
-                int size = invoiceList.Count;
+                int size = exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
@@ -1081,7 +1225,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    Invoice invoice = (Invoice)invoiceList[row];
+                    Invoice invoice = (Invoice)exportData[row];
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = invoice.FinanceOutstanding;
                     datasheet.Cells[row + 2, column++] = invoice.RefundAmount2;
@@ -1125,7 +1269,7 @@ namespace CMBC.EasyFactor.Utils
                 throw e1;
             }
 
-            return invoiceList.Count;
+            return exportData.Count;
         }
 
         #endregion Methods

@@ -313,8 +313,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_OVERDUE);
-            exportForm.StartExport(this.bs.List);
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_OVERDUE,this.bs.List);
+            exportForm.Show();
         }
 
         /// <summary>
@@ -329,8 +329,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_FULL);
-            exportForm.StartExport(this.bs.List);
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_FULL,this.bs.List);
+            exportForm.Show();
         }
 
         /// <summary>
@@ -345,8 +345,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_FULL);
-            exportForm.StartExport(GetSelectedInvoices());
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_FULL,GetSelectedInvoices());
+            exportForm.Show();
         }
 
         /// <summary>
@@ -361,8 +361,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_OVERDUE);
-            exportForm.StartExport(GetSelectedInvoices());
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_OVERDUE,GetSelectedInvoices());
+            exportForm.Show();
         }
 
         /// <summary>

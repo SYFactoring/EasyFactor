@@ -206,6 +206,7 @@ namespace CMBC.EasyFactor.Utils
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblFilePath);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "ImportForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "数据导入";

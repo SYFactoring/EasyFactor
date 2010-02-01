@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Case : BaseObject
     {
-		#region Properties (11) 
+        #region Properties (11)
 
         /// <summary>
         /// Gets 
@@ -239,11 +239,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (1) 
+        #region Methods (1)
 
-		// Public Methods (1) 
+        // Public Methods (1) 
 
         /// <summary>
         /// Generate Case code
@@ -252,7 +252,7 @@ namespace CMBC.EasyFactor.DB.dbml
         public string GenerateCaseCode()
         {
             string caseCode = null;
-            string yearMonth = String.Format("{0:yyyy}{0:MM}", DateTime.Today);
+            string yearMonth = String.Format("{0:yyyy}{0:MM}", this.CaseAppDate);
             string prefix = null;
             int count = 0;
             IEnumerable<string> queryResult;
@@ -270,6 +270,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     {
                         count = 0;
                     }
+
                     caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
                     break;
                 case "出口保理":
@@ -281,6 +282,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     {
                         count = 0;
                     }
+
                     caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
                     break;
                 case "进口保理":
@@ -292,6 +294,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     {
                         count = 0;
                     }
+
                     caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
                     break;
                 case "国际信保保理":
@@ -305,6 +308,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     {
                         count = 0;
                     }
+
                     caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
                     break;
                 case "租赁保理":
@@ -316,6 +320,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     {
                         count = 0;
                     }
+
                     caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
                     break;
                 default:
@@ -326,6 +331,6 @@ namespace CMBC.EasyFactor.DB.dbml
             return caseCode;
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

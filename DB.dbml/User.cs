@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor.DB.dbml
 {
     using System.Collections.Generic;
     using CMBC.EasyFactor.Utils;
+    using System.Linq;
 
     /// <summary>
     /// 
@@ -32,6 +33,24 @@ namespace CMBC.EasyFactor.DB.dbml
             reasonList.Add(new PermissionItem(Utils.Permission.SYSTEM_IMPORT, "系统数据导入权限"));
             reasonList.Add(new PermissionItem(Utils.Permission.SYSTEM_UPDATE, "系统数据更新权限"));
             return reasonList;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public static string GetEDIAccount(string userName)
+        {
+            User user = App.Current.DbContext.Users.SingleOrDefault(u => u.Name == userName);
+            if (user != null)
+            {
+                return user.EDIAccount;
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
     }
 

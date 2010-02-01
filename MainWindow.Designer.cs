@@ -340,11 +340,11 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
+            this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanel3);
             this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
             this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanelReport);
-            this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
             this.ribbonControl.Controls.Add(this.ribbonPanel2);
             this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
@@ -564,7 +564,6 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelInfoMgr.StyleMouseOver.Class = "";
             this.ribbonPanelInfoMgr.TabIndex = 2;
-            this.ribbonPanelInfoMgr.Visible = false;
             // 
             // ribbonBarExchange
             // 
@@ -756,6 +755,7 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanel3.StyleMouseOver.Class = "";
             this.ribbonPanel3.TabIndex = 11;
+            this.ribbonPanel3.Visible = false;
             // 
             // ribbonBarUserMgr
             // 
@@ -1843,6 +1843,7 @@ namespace CMBC.EasyFactor
             // 
             // itemInfoMgr
             // 
+            this.itemInfoMgr.Checked = true;
             this.itemInfoMgr.Name = "itemInfoMgr";
             this.itemInfoMgr.Panel = this.ribbonPanelInfoMgr;
             this.itemInfoMgr.Text = "信息管理";
@@ -1885,7 +1886,6 @@ namespace CMBC.EasyFactor
             // 
             // ribbonTabItemSystem
             // 
-            this.ribbonTabItemSystem.Checked = true;
             this.ribbonTabItemSystem.Name = "ribbonTabItemSystem";
             this.ribbonTabItemSystem.Panel = this.ribbonPanel3;
             this.ribbonTabItemSystem.Text = "系统管理";

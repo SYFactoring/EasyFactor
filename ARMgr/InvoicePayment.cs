@@ -358,9 +358,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_PAYMENT_BY_BATCH);
-            exportForm.StartExport(this.invoiceBindingSource.List);
-
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_PAYMENT_BY_BATCH, this.invoiceBindingSource.List);
+            exportForm.Show();
         }
 
         /// <summary>
@@ -696,7 +695,7 @@ namespace CMBC.EasyFactor.ARMgr
                             return false;
                         }
                     }
-                 }
+                }
             }
             return true;
         }
