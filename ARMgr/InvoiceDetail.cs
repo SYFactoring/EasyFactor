@@ -26,6 +26,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpInvoiceType opInvoiceType;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Enums (1)
@@ -125,8 +127,8 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-            invoice.Backup();
             this.UpdateInvoiceControlStatus();
+            this.context = new DBDataContext();
 
             if (opInvoiceType == OpInvoiceType.FLAW)
             {
@@ -185,7 +187,7 @@ namespace CMBC.EasyFactor.ARMgr
             string[] batchNoes = invoice.PaymentBatchNos.Split(new char[] { ';' });
             foreach (string batchNo in batchNoes)
             {
-                InvoicePaymentBatch batch = App.Current.DbContext.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == batchNo);
+                InvoicePaymentBatch batch = context.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == batchNo);
                 if (batch != null)
                 {
                     PaymentBatchDetail detail = new PaymentBatchDetail(batch);
@@ -205,7 +207,7 @@ namespace CMBC.EasyFactor.ARMgr
             string[] batchNoes = invoice.RefundBatchNos.Split(new char[] { ';' });
             foreach (string batchNo in batchNoes)
             {
-                InvoiceRefundBatch batch = App.Current.DbContext.InvoiceRefundBatches.SingleOrDefault(i => i.RefundBatchNo == batchNo);
+                InvoiceRefundBatch batch = context.InvoiceRefundBatches.SingleOrDefault(i => i.RefundBatchNo == batchNo);
                 if (batch != null)
                 {
                     RefundBatchDetail detail = new RefundBatchDetail(batch);
@@ -323,17 +325,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void InvoiceDetail_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
-            invoice.Restore();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ResetInvoice(object sender, EventArgs e)
         {
             if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
@@ -344,7 +335,8 @@ namespace CMBC.EasyFactor.ARMgr
             if (this.opInvoiceType == OpInvoiceType.UPDATE_INVOICE)
             {
                 Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
-                invoice.Restore();
+                DBDataContext context = new DBDataContext();
+                this.invoiceBindingSource.DataSource = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo);
             }
         }
 
@@ -386,18 +378,20 @@ namespace CMBC.EasyFactor.ARMgr
             bool isUpdateOK = true;
             try
             {
-                App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                context.Invoices.Attach(invoice);
+                context.SubmitChanges(ConflictMode.ContinueOnConflict);
             }
             catch (ChangeConflictException)
             {
-                foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                foreach (ObjectChangeConflict cc in context.ChangeConflicts)
                 {
                     foreach (MemberChangeConflict mc in cc.MemberConflicts)
                     {
                         mc.Resolve(RefreshMode.KeepChanges);
                     }
                 }
-                App.Current.DbContext.SubmitChanges();
+
+                context.SubmitChanges();
             }
             catch (Exception e2)
             {
@@ -408,7 +402,6 @@ namespace CMBC.EasyFactor.ARMgr
             if (isUpdateOK)
             {
                 MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                invoice.Backup();
             }
         }
 

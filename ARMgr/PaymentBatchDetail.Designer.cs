@@ -699,7 +699,6 @@
             this.Name = "PaymentBatchDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "付款批次信息";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BatchDetail_FormClosing);
             this.cmuLogMgr.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);

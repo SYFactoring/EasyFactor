@@ -363,6 +363,7 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
+            DBDataContext context = new DBDataContext();
 
             if (valueArray != null)
             {
@@ -385,7 +386,7 @@ namespace CMBC.EasyFactor.Utils
                             continue;
                         }
 
-                        Case curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+                        Case curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
                         if (curCase != null)
                         {
                             throw new Exception("案件已存在，不能导入： " + caseCode);
@@ -404,7 +405,7 @@ namespace CMBC.EasyFactor.Utils
                         int column = 2;
                         curCase.ManagerName = String.Format("{0:G}", valueArray[row, column++]);
                         string ownerDeptName = String.Format("{0:G}", valueArray[row, column++]);
-                        Department ownerDept = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == ownerDeptName);
+                        Department ownerDept = context.Departments.SingleOrDefault(d => d.DepartmentName == ownerDeptName);
                         if (ownerDept == null)
                         {
                             throw new Exception("所属分部名称错误： " + ownerDeptName);
@@ -414,10 +415,10 @@ namespace CMBC.EasyFactor.Utils
                         curCase.TransactionType = String.Format("{0:G}", valueArray[row, column++]);
                         curCase.OperationType = String.Format("{0:G}", valueArray[row, column++]);
                         string coDeptName = String.Format("{0:G}", valueArray[row, column++]);
-                        curCase.CoDepartment = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName == coDeptName);
+                        curCase.CoDepartment = context.Departments.SingleOrDefault(d => d.DepartmentName == coDeptName);
                         curCase.CaseMark = String.Format("{0:G}", valueArray[row, column++]);
                         string sellerEDICode = String.Format("{0:G}", valueArray[row, column++]);
-                        Client sellerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == sellerEDICode);
+                        Client sellerClient = context.Clients.SingleOrDefault(c => c.ClientEDICode == sellerEDICode);
                         if (sellerClient == null)
                         {
                             throw new Exception("卖方保理代码错误： " + sellerEDICode);
@@ -427,7 +428,7 @@ namespace CMBC.EasyFactor.Utils
                         column++;
                         column++;
                         string buyerEDICode = String.Format("{0:G}", valueArray[row, column++]);
-                        Client buyerClient = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == buyerEDICode);
+                        Client buyerClient = context.Clients.SingleOrDefault(c => c.ClientEDICode == buyerEDICode);
                         if (buyerClient == null)
                         {
                             throw new Exception("买方保理代码错误： " + buyerEDICode);
@@ -437,7 +438,7 @@ namespace CMBC.EasyFactor.Utils
                         column++;
                         column++;
                         string EFCode = String.Format("{0:G}", valueArray[row, column++]);
-                        Factor sellerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == EFCode);
+                        Factor sellerFactor = context.Factors.SingleOrDefault(f => f.FactorCode == EFCode);
                         if (sellerFactor == null)
                         {
                             throw new Exception("卖方保理商代码错误： " + EFCode);
@@ -445,7 +446,7 @@ namespace CMBC.EasyFactor.Utils
 
                         curCase.SellerFactor = sellerFactor;
                         string IFCode = String.Format("{0:G}", valueArray[row, column++]);
-                        Factor buyerFactor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == IFCode);
+                        Factor buyerFactor = context.Factors.SingleOrDefault(f => f.FactorCode == IFCode);
                         if (buyerFactor == null)
                         {
                             throw new Exception("买方保理商代码错误： " + IFCode);
@@ -492,7 +493,7 @@ namespace CMBC.EasyFactor.Utils
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
 
-                    App.Current.DbContext.SubmitChanges();
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -533,6 +534,7 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
             List<Client> clientList = new List<Client>();
+            DBDataContext context = new DBDataContext();
             try
             {
                 if (valueArray != null)
@@ -552,7 +554,7 @@ namespace CMBC.EasyFactor.Utils
                             continue;
                         }
 
-                        Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                        Client client = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client != null)
                         {
                             throw new Exception("客户已经存在，不能导入： " + clientEDICode);
@@ -596,7 +598,7 @@ namespace CMBC.EasyFactor.Utils
                         string groupNo = String.Format("{0:G}", valueArray[row, column++]);
                         if (groupNo != string.Empty)
                         {
-                            Client clientGroup = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == groupNo);
+                            Client clientGroup = context.Clients.SingleOrDefault(c => c.ClientEDICode == groupNo);
                             if (clientGroup == null)
                             {
                                 throw new Exception("集团客户号错误： " + groupNo);
@@ -607,7 +609,7 @@ namespace CMBC.EasyFactor.Utils
                         client.RegistrationNumber = String.Format("{0:G}", valueArray[row, column++]);
                         client.CompanyCode = String.Format("{0:G}", valueArray[row, column++]);
                         string departmentName = String.Format("{0:G}", valueArray[row, column++]);
-                        client.Department = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentName.Equals(departmentName));
+                        client.Department = context.Departments.SingleOrDefault(d => d.DepartmentName.Equals(departmentName));
 
                         client.PMName = String.Format("{0:G}", valueArray[row, column++]);
                         client.RMName = String.Format("{0:G}", valueArray[row, column++]);
@@ -623,8 +625,8 @@ namespace CMBC.EasyFactor.Utils
                     }
                 }
 
-                App.Current.DbContext.Clients.InsertAllOnSubmit(clientList);
-                App.Current.DbContext.SubmitChanges();
+                context.Clients.InsertAllOnSubmit(clientList);
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -635,6 +637,7 @@ namespace CMBC.EasyFactor.Utils
                 }
                 throw e1;
             }
+
             worker.ReportProgress(100);
             this.workbook.Close(false, fileName, null);
             this.ReleaseResource();
@@ -652,6 +655,8 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
+            DBDataContext context = new DBDataContext();
+
             try
             {
                 if (valueArray != null)
@@ -667,11 +672,11 @@ namespace CMBC.EasyFactor.Utils
 
                         string from = String.Format("{0:G}", valueArray[row, 1]);
                         string to = String.Format("{0:G}", valueArray[row, 2]);
-                        Exchange exchange = App.Current.DbContext.Exchanges.SingleOrDefault(ex => ex.FromCurr == from && ex.ToCurr == to);
+                        Exchange exchange = context.Exchanges.SingleOrDefault(ex => ex.FromCurr == from && ex.ToCurr == to);
                         if (exchange == null)
                         {
                             exchange = new Exchange();
-                            App.Current.DbContext.Exchanges.InsertOnSubmit(exchange);
+                            context.Exchanges.InsertOnSubmit(exchange);
                         }
                         exchange.ExchangeRate = (double)valueArray[row, 3];
                         exchange.LastModifiedDate = DateTime.Now;
@@ -680,7 +685,7 @@ namespace CMBC.EasyFactor.Utils
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
 
-                    App.Current.DbContext.SubmitChanges();
+                    context.SubmitChanges();
                 }
             }
             catch (Exception e1)
@@ -706,6 +711,8 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
             List<ClientReview> reviewList = new List<ClientReview>();
+            DBDataContext context = new DBDataContext();
+
             try
             {
                 if (valueArray != null)
@@ -725,7 +732,7 @@ namespace CMBC.EasyFactor.Utils
                             continue;
                         }
 
-                        Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                        Client client = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client == null)
                         {
                             throw new Exception("客户保理代码错误，不能导入协查意见书： " + clientEDICode);
@@ -738,7 +745,7 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("协查意见编号不能为空");
                         }
 
-                        ClientReview review = App.Current.DbContext.ClientReviews.SingleOrDefault(c => c.ReviewNo == reviewNo);
+                        ClientReview review = context.ClientReviews.SingleOrDefault(c => c.ReviewNo == reviewNo);
                         if (review != null)
                         {
                             throw new Exception("协查意见已存在，不能导入： " + reviewNo);
@@ -767,6 +774,8 @@ namespace CMBC.EasyFactor.Utils
                         result++;
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
+
+                    context.SubmitChanges();
                 }
             }
             catch (Exception e1)
@@ -795,6 +804,7 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
+            DBDataContext context = new DBDataContext();
 
             if (valueArray != null)
             {
@@ -816,7 +826,7 @@ namespace CMBC.EasyFactor.Utils
                             continue;
                         }
 
-                        Client client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                        Client client = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client == null)
                         {
                             throw new Exception("客户保理代码错误: " + clientEDICode);
@@ -846,7 +856,7 @@ namespace CMBC.EasyFactor.Utils
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
 
-                    App.Current.DbContext.SubmitChanges();
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -877,6 +887,7 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray = this.GetValueArray(fileName, 1);
 
             int result = 0;
+            DBDataContext context = new DBDataContext();
 
             if (valueArray != null)
             {
@@ -900,7 +911,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         Case curCase = null;
-                        curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+                        curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
                         if (curCase == null)
                         {
                             throw new Exception("案件编号错误: " + caseCode);
@@ -913,7 +924,7 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("CDA编号不能为空");
                         }
 
-                        cda = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
+                        cda = context.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                         if (cda != null)
                         {
                             throw new Exception("CDA已存在，不能导入： " + cdaCode);
@@ -977,7 +988,7 @@ namespace CMBC.EasyFactor.Utils
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
 
-                    App.Current.DbContext.SubmitChanges();
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -1006,8 +1017,8 @@ namespace CMBC.EasyFactor.Utils
         private int ImportContract(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
-
             int result = 0;
+            DBDataContext context = new DBDataContext();
 
             if (valueArray != null)
             {
@@ -1033,7 +1044,7 @@ namespace CMBC.EasyFactor.Utils
                         column++;
 
                         Client client = null;
-                        client = App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                        client = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client == null)
                         {
                             throw new Exception("客户编号错误: " + clientEDICode);
@@ -1046,7 +1057,7 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("保理合同号不能为空");
                         }
 
-                        contract = App.Current.DbContext.Contracts.SingleOrDefault(c => c.ContractCode == contractCode);
+                        contract = context.Contracts.SingleOrDefault(c => c.ContractCode == contractCode);
                         if (contract != null)
                         {
                             throw new Exception("保理合同已存在，不能导入: " + contractCode);
@@ -1072,7 +1083,7 @@ namespace CMBC.EasyFactor.Utils
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
 
-                    App.Current.DbContext.SubmitChanges();
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -1102,6 +1113,7 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
+            DBDataContext context = new DBDataContext();
 
             if (valueArray != null)
             {
@@ -1121,7 +1133,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     bool isNew = false;
-                    Department dept = App.Current.DbContext.Departments.SingleOrDefault(d => d.DepartmentCode == departmentCode);
+                    Department dept = context.Departments.SingleOrDefault(d => d.DepartmentCode == departmentCode);
                     if (dept == null)
                     {
                         isNew = true;
@@ -1148,14 +1160,14 @@ namespace CMBC.EasyFactor.Utils
 
                     if (isNew)
                     {
-                        App.Current.DbContext.Departments.InsertOnSubmit(dept);
+                        context.Departments.InsertOnSubmit(dept);
                     }
 
                     result++;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
 
-                App.Current.DbContext.SubmitChanges();
+                context.SubmitChanges();
             }
 
             worker.ReportProgress(100);
@@ -1175,6 +1187,7 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
+            DBDataContext context = new DBDataContext();
 
             if (valueArray != null)
             {
@@ -1197,7 +1210,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         bool isNew = false;
-                        Factor factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                        Factor factor = context.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                         if (factor == null)
                         {
                             isNew = true;
@@ -1257,7 +1270,8 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                factor.Restore();
+                                DBDataContext contextNew = new DBDataContext();
+                                factor = contextNew.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
                             }
                         }
 
@@ -1270,8 +1284,8 @@ namespace CMBC.EasyFactor.Utils
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
 
-                    App.Current.DbContext.Factors.InsertAllOnSubmit(factorList);
-                    App.Current.DbContext.SubmitChanges();
+                    context.Factors.InsertAllOnSubmit(factorList);
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -1298,75 +1312,73 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private object ImportFactorsCreditLine(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
+            object[,] valueArray = this.GetValueArray(fileName, 1);
+            int result = 0;
+            DBDataContext context = new DBDataContext();
+
+            if (valueArray != null)
             {
-                object[,] valueArray = this.GetValueArray(fileName, 1);
-                int result = 0;
-
-                if (valueArray != null)
+                int size = valueArray.GetUpperBound(0);
+                List<FactorCreditLine> creditLineList = new List<FactorCreditLine>();
+                try
                 {
-                    int size = valueArray.GetUpperBound(0);
-                    List<FactorCreditLine> creditLineList = new List<FactorCreditLine>();
-                    try
+                    for (int row = 2; row <= size; row++)
                     {
-                        for (int row = 2; row <= size; row++)
+                        if (worker.CancellationPending)
                         {
-                            if (worker.CancellationPending)
-                            {
-                                e.Cancel = true;
-                                return -1;
-                            }
-
-                            string factorCode = String.Format("{0:G}", valueArray[row, 1]);
-                            if (String.Empty.Equals(factorCode))
-                            {
-                                continue;
-                            }
-
-                            Factor factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
-                            if (factor == null)
-                            {
-                                throw new Exception("合作机构代码错误: " + factorCode);
-                            }
-
-                            int column = 2;
-                            FactorCreditLine creditLine = new FactorCreditLine();
-                            creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
-                            creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                            creditLine.CreditLine = (double)valueArray[row, column++];
-                            creditLine.PeriodBegin = (DateTime)valueArray[row, column++];
-                            creditLine.PeriodEnd = (DateTime)valueArray[row, column++];
-                            creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
-                            creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
-                            creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
-                            creditLine.FreezeReason = String.Format("{0:G}", valueArray[row, column++]);
-                            creditLine.Freezer = String.Format("{0:G}", valueArray[row, column++]);
-                            creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                            creditLine.UnfreezeReason = String.Format("{0:G}", valueArray[row, column++]);
-                            creditLine.Unfreezer = String.Format("{0:G}", valueArray[row, column++]);
-                            creditLine.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                            creditLine.Factor = factor;
-                            creditLineList.Add(creditLine);
+                            e.Cancel = true;
+                            return -1;
                         }
 
-                        App.Current.DbContext.FactorCreditLines.InsertAllOnSubmit(creditLineList);
-                        App.Current.DbContext.SubmitChanges();
-                    }
-                    catch (Exception e1)
-                    {
-                        foreach (FactorCreditLine creditLine in creditLineList)
+                        string factorCode = String.Format("{0:G}", valueArray[row, 1]);
+                        if (String.Empty.Equals(factorCode))
                         {
-                            creditLine.Factor = null;
+                            continue;
                         }
 
-                        throw e1;
+                        Factor factor = context.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                        if (factor == null)
+                        {
+                            throw new Exception("合作机构代码错误: " + factorCode);
+                        }
+
+                        int column = 2;
+                        FactorCreditLine creditLine = new FactorCreditLine();
+                        creditLine.CreditLineType = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.CreditLine = (double)valueArray[row, column++];
+                        creditLine.PeriodBegin = (DateTime)valueArray[row, column++];
+                        creditLine.PeriodEnd = (DateTime)valueArray[row, column++];
+                        creditLine.ApproveNo = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.ApproveType = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.FreezeReason = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Freezer = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.FreezeDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        creditLine.UnfreezeReason = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Unfreezer = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                        creditLine.Factor = factor;
+                        creditLineList.Add(creditLine);
                     }
+
+                    context.SubmitChanges();
                 }
+                catch (Exception e1)
+                {
+                    foreach (FactorCreditLine creditLine in creditLineList)
+                    {
+                        creditLine.Factor = null;
+                    }
 
-                worker.ReportProgress(100);
-                this.workbook.Close(false, fileName, null);
-                this.ReleaseResource();
-                return result;
+                    throw e1;
+                }
             }
+
+            worker.ReportProgress(100);
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
         }
 
         /// <summary>
@@ -1380,6 +1392,8 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             object[,] valueArray2 = this.GetValueArray(fileName, 2);
+            DBDataContext context = new DBDataContext();
+
             int totalSize = 0;
             if (valueArray != null)
             {
@@ -1422,7 +1436,7 @@ namespace CMBC.EasyFactor.Utils
 
                         if (curCase == null || curCase.CaseCode != caseCode)
                         {
-                            curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+                            curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
                             if (curCase == null)
                             {
                                 throw new Exception("案件编号错误: " + caseCode);
@@ -1438,7 +1452,7 @@ namespace CMBC.EasyFactor.Utils
                             assignBatch = assignBatches.SingleOrDefault(i => i.AssignBatchNo == assignBatchNo);
                             if (assignBatch == null)
                             {
-                                assignBatch = App.Current.DbContext.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == assignBatchNo);
+                                assignBatch = context.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == assignBatchNo);
                                 if (assignBatch == null)
                                 {
                                     throw new Exception("转让批号错误: " + assignBatchNo);
@@ -1471,7 +1485,7 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("发票号不能为空");
                         }
 
-                        Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                         if (invoice == null)
                         {
                             invoice = new Invoice();
@@ -1513,7 +1527,7 @@ namespace CMBC.EasyFactor.Utils
                             financeBatch = financeBatches.SingleOrDefault(i => i.FinanceBatchNo == financeBatchNo);
                             if (financeBatch == null)
                             {
-                                financeBatch = App.Current.DbContext.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == financeBatchNo);
+                                financeBatch = context.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == financeBatchNo);
                                 if (financeBatch == null)
                                 {
                                     throw new Exception("融资批号错误: " + financeBatchNo);
@@ -1534,7 +1548,7 @@ namespace CMBC.EasyFactor.Utils
                                     column = 15;
                                     financeBatch.FinanceType = String.Format("{0:G}", valueArray[row, column++]);
                                     string factorCode = String.Format("{0:G}", valueArray[row, column++]);
-                                    financeBatch.Factor = App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                                    financeBatch.Factor = context.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                                     column++;
                                     financeBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, column++]);
                                     financeBatch.FinanceRate = (System.Nullable<double>)valueArray[row, column++];
@@ -1576,7 +1590,7 @@ namespace CMBC.EasyFactor.Utils
                             paymentBatch = paymentBatches.SingleOrDefault(i => i.PaymentBatchNo == paymentBatchNo);
                             if (paymentBatch == null)
                             {
-                                paymentBatch = App.Current.DbContext.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == paymentBatchNo);
+                                paymentBatch = context.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == paymentBatchNo);
                                 if (paymentBatch == null)
                                 {
                                     throw new Exception("付款批号错误: " + paymentBatchNo);
@@ -1634,7 +1648,7 @@ namespace CMBC.EasyFactor.Utils
                             refundBatch = refundBatches.SingleOrDefault(i => i.RefundBatchNo == refundBatchNo);
                             if (refundBatch == null)
                             {
-                                refundBatch = App.Current.DbContext.InvoiceRefundBatches.SingleOrDefault(i => i.RefundBatchNo == refundBatchNo);
+                                refundBatch = context.InvoiceRefundBatches.SingleOrDefault(i => i.RefundBatchNo == refundBatchNo);
                                 if (refundBatch == null)
                                 {
                                     throw new Exception("还款批号错误: " + refundBatchNo);
@@ -1746,7 +1760,7 @@ namespace CMBC.EasyFactor.Utils
 
                         if (curCase == null || curCase.CaseCode != caseCode)
                         {
-                            curCase = App.Current.DbContext.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+                            curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
                             if (curCase == null)
                             {
                                 throw new Exception("案件编号错误: " + caseCode);
@@ -1760,7 +1774,7 @@ namespace CMBC.EasyFactor.Utils
                             paymentBatch = paymentBatches.SingleOrDefault(i => i.PaymentBatchNo == paymentBatchNo);
                             if (paymentBatch == null)
                             {
-                                paymentBatch = App.Current.DbContext.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == paymentBatchNo);
+                                paymentBatch = context.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == paymentBatchNo);
                                 if (paymentBatch == null)
                                 {
                                     throw new Exception("付款批号错误: " + paymentBatchNo);
@@ -1797,7 +1811,7 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("贷项通知编号不能为空");
                         }
 
-                        CreditNote creditNote = App.Current.DbContext.CreditNotes.SingleOrDefault(c => c.CreditNoteNo == creditNoteNo);
+                        CreditNote creditNote = context.CreditNotes.SingleOrDefault(c => c.CreditNoteNo == creditNoteNo);
                         if (creditNote == null)
                         {
                             creditNote = creditNoteList.SingleOrDefault(c => c.CreditNoteNo == creditNoteNo);
@@ -1820,7 +1834,7 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("发票号不能为空");
                         }
 
-                        Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                         if (invoice == null)
                         {
                             invoice = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
@@ -1845,7 +1859,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                 }
 
-                App.Current.DbContext.SubmitChanges();
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -1901,6 +1915,8 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
             List<Invoice> invoiceList = new List<Invoice>();
+            DBDataContext context = new DBDataContext();
+
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
@@ -1920,7 +1936,7 @@ namespace CMBC.EasyFactor.Utils
                         continue;
                     }
 
-                    Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                    Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                     if (invoice == null)
                     {
                         invoice = new Invoice();
@@ -1966,6 +1982,8 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
             List<Invoice> invoiceList = new List<Invoice>();
+            DBDataContext context = new DBDataContext();
+
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
@@ -1985,7 +2003,7 @@ namespace CMBC.EasyFactor.Utils
                         continue;
                     }
 
-                    Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                    Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                     if (invoice == null)
                     {
                         throw new Exception("发票号错误: " + invoiceNo);
@@ -2024,6 +2042,8 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
             List<Invoice> invoiceList = new List<Invoice>();
+            DBDataContext context = new DBDataContext();
+
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
@@ -2043,7 +2063,7 @@ namespace CMBC.EasyFactor.Utils
                         continue;
                     }
 
-                    Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                    Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                     if (invoice == null)
                     {
                         throw new Exception("发票号错误: " + invoiceNo);
@@ -2084,6 +2104,8 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
             List<Invoice> invoiceList = new List<Invoice>();
+            DBDataContext context = new DBDataContext();
+
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
@@ -2103,7 +2125,7 @@ namespace CMBC.EasyFactor.Utils
                         continue;
                     }
 
-                    Invoice invoice = App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                    Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                     if (invoice == null)
                     {
                         throw new Exception("发票号错误: " + invoiceNo);
@@ -2136,6 +2158,8 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
+            DBDataContext context = new DBDataContext();
+
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
@@ -2155,7 +2179,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     bool isNew = false;
-                    User user = App.Current.DbContext.Users.SingleOrDefault(c => c.UserID == userId);
+                    User user = context.Users.SingleOrDefault(c => c.UserID == userId);
                     if (user == null)
                     {
                         isNew = true;
@@ -2184,8 +2208,8 @@ namespace CMBC.EasyFactor.Utils
 
                 try
                 {
-                    App.Current.DbContext.Users.InsertAllOnSubmit(userList);
-                    App.Current.DbContext.SubmitChanges();
+                    context.Users.InsertAllOnSubmit(userList);
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {

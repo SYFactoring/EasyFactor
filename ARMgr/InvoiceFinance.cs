@@ -24,9 +24,22 @@ namespace CMBC.EasyFactor.ARMgr
     {
         #region Fields (3)
 
+        /// <summary>
+        /// 
+        /// </summary>
         private Case _case;
+        
+        /// <summary>
+        /// 
+        /// </summary>
         private ARCaseBasic caseBasic;
+        
+        /// <summary>
+        /// 
+        /// </summary>
         private double currentBatchFinanceAmount = 0;
+
+        private DBDataContext context;
 
         #endregion Fields
 
@@ -63,6 +76,8 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             colCheckBox.ReadOnly = false;
+
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -519,7 +534,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeBatch.CreateUserName = App.Current.CurUser.Name;
             financeBatch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = financeBatch;
-            this.invoiceBindingSource.DataSource = App.Current.DbContext.Invoices.Where(i => i.InvoiceAssignBatch.CaseCode == this._case.CaseCode && i.IsFlaw == false && i.InvoiceAssignBatch.CheckStatus == "已复核" && i.AssignAmount - i.PaymentAmount.GetValueOrDefault() > 0.00000001 && (i.FinanceAmount.HasValue == false || i.FinanceAmount < 0.0000001)).ToList();
+            this.invoiceBindingSource.DataSource = context.Invoices.Where(i => i.InvoiceAssignBatch.CaseCode == this._case.CaseCode && i.IsFlaw == false && i.InvoiceAssignBatch.CheckStatus == "已复核" && i.AssignAmount - i.PaymentAmount.GetValueOrDefault() > 0.00000001 && (i.FinanceAmount.HasValue == false || i.FinanceAmount < 0.0000001)).ToList();
             this.StatBatch();
         }
 
@@ -587,6 +602,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
             IList invoiceList = this.invoiceBindingSource.List;
 
@@ -627,7 +643,8 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
-                App.Current.DbContext.SubmitChanges();
+                context.InvoiceFinanceBatches.Attach(batch);
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -679,6 +696,7 @@ namespace CMBC.EasyFactor.ARMgr
                     cell.Value = 1;
                     ResetRow(i, true);
                 }
+
                 this.StatBatch();
             }
         }

@@ -27,6 +27,8 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private BindingSource bs;
 
+        private DBDataContext context;
+
         /// <summary>
         /// 
         /// </summary>
@@ -117,6 +119,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCurrency.ValueMember = "CurrencyCode";
 
             this.UpdateContextMenu();
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -189,22 +192,23 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     foreach (Invoice invoice in assignBatch.Invoices)
                     {
-                        App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
-                        App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
+                        context.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
+                        context.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
                     }
-                    App.Current.DbContext.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
+
+                    context.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
                 }
 
-                App.Current.DbContext.InvoiceAssignBatches.DeleteAllOnSubmit(selectedCase.InvoiceAssignBatches);
-                App.Current.DbContext.InvoiceFinanceBatches.DeleteAllOnSubmit(selectedCase.InvoiceFinanceBatches);
-                App.Current.DbContext.InvoicePaymentBatches.DeleteAllOnSubmit(selectedCase.InvoicePaymentBatches);
-                App.Current.DbContext.InvoiceRefundBatches.DeleteAllOnSubmit(selectedCase.InvoiceRefundBatches);
+                context.InvoiceAssignBatches.DeleteAllOnSubmit(selectedCase.InvoiceAssignBatches);
+                context.InvoiceFinanceBatches.DeleteAllOnSubmit(selectedCase.InvoiceFinanceBatches);
+                context.InvoicePaymentBatches.DeleteAllOnSubmit(selectedCase.InvoicePaymentBatches);
+                context.InvoiceRefundBatches.DeleteAllOnSubmit(selectedCase.InvoiceRefundBatches);
 
-                App.Current.DbContext.CDAs.DeleteAllOnSubmit(selectedCase.CDAs);
-                App.Current.DbContext.Cases.DeleteOnSubmit(selectedCase);
+                context.CDAs.DeleteAllOnSubmit(selectedCase.CDAs);
+                context.Cases.DeleteOnSubmit(selectedCase);
                 try
                 {
-                    App.Current.DbContext.SubmitChanges();
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -297,7 +301,7 @@ namespace CMBC.EasyFactor.CaseMgr
             DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
             string createUserName = this.tbCreateUserName.Text;
 
-            var queryResult = App.Current.DbContext.Cases.Where(c =>
+            var queryResult = context.Cases.Where(c =>
                                    ((string)this.cbOwnerDepts.SelectedValue == "CN01300" ? true : c.OwnerDepartmentCode.Equals((string)this.cbOwnerDepts.SelectedValue))
                                 && (this.cbTransactionType.Text == "全部" ? true : c.TransactionType.Equals(this.cbTransactionType.Text))
                                 && ((string)this.cbCurrency.SelectedValue == "AAA" ? true : c.InvoiceCurrency.Equals((string)this.cbCurrency.SelectedValue))

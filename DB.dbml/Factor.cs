@@ -15,7 +15,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class Factor : BaseObject
+    public partial class Factor 
     {
         #region Fields (2)
 
@@ -149,7 +149,6 @@ namespace CMBC.EasyFactor.DB.dbml
         public void BeginMonitor()
         {
             this._dict = new Dictionary<string, string>();
-            this.Backup();
             this.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(this.Factor_PropertyChanged);
         }
 
@@ -183,7 +182,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static Factor FindFactorByCode(string code)
         {
-            return App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == code);
+            DBDataContext context = new DBDataContext();
+            return context.Factors.SingleOrDefault(f => f.FactorCode == code);
         }
 
         /// <summary>

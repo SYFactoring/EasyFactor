@@ -3,13 +3,13 @@ namespace CMBC.EasyFactor.ARMgr
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Linq;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
 
     /// <summary>
     /// 
@@ -26,6 +26,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         private OpInvoiceType opInvoiceType;
+
+        private DBDataContext context;
 
         #endregion Fields
 
@@ -113,6 +115,8 @@ namespace CMBC.EasyFactor.ARMgr
 
             this.cbCaseMark.SelectedIndex = 1;
             this.UpdateContextMenu();
+
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -188,22 +192,24 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     foreach (Invoice invoice in selectedInvoices)
                     {
-                        App.Current.DbContext.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
-                        App.Current.DbContext.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
-                        App.Current.DbContext.Invoices.DeleteOnSubmit(invoice);
+                        context.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
+                        context.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
+                        context.Invoices.DeleteOnSubmit(invoice);
                     }
-                    App.Current.DbContext.SubmitChanges();
+
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
                     MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
                 rowIndexes.Sort();
                 rowIndexes.Reverse();
                 foreach (int rowIndex in rowIndexes)
                 {
-                    dgvInvoices.Rows.RemoveAt(rowIndex);
+                    this.dgvInvoices.Rows.RemoveAt(rowIndex);
                 }
             }
         }
@@ -313,7 +319,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_OVERDUE,this.bs.List);
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_OVERDUE, this.bs.List);
             exportForm.Show();
         }
 
@@ -329,7 +335,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_FULL,this.bs.List);
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_FULL, this.bs.List);
             exportForm.Show();
         }
 
@@ -345,7 +351,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_FULL,GetSelectedInvoices());
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_FULL, GetSelectedInvoices());
             exportForm.Show();
         }
 
@@ -361,7 +367,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_OVERDUE,GetSelectedInvoices());
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_INVOICES_OVERDUE, GetSelectedInvoices());
             exportForm.Show();
         }
 
@@ -478,7 +484,7 @@ namespace CMBC.EasyFactor.ARMgr
                 financeOverDueDate = DateTime.Now.Date.AddDays(0 - financeOverDueDays);
             }
 
-            var queryResult = from invoice in App.Current.DbContext.Invoices
+            var queryResult = from invoice in context.Invoices
                               let curCase = invoice.InvoiceAssignBatch.Case
                               where curCase.CaseMark == caseMark
                               let seller = curCase.SellerClient
@@ -497,6 +503,7 @@ namespace CMBC.EasyFactor.ARMgr
                                 && (beginDate != this.dateFrom.MinDate ? invoice.InvoiceAssignBatch.AssignDate >= beginDate : true)
                                 && (endDate != this.dateTo.MinDate ? invoice.InvoiceAssignBatch.AssignDate <= endDate : true)
                               select invoice;
+
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }

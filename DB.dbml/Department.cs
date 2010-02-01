@@ -13,7 +13,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class Department : BaseObject
+    public partial class Department 
     {
         #region Fields (1)
 
@@ -31,10 +31,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         static Department()
         {
+            DBDataContext context = new DBDataContext();
             _allDepartment = new List<Department>();
-            _allDepartment.AddRange(App.Current.DbContext.Departments.Where(d => d.Domain == "贸易金融事业部"));
-            _allDepartment.AddRange(App.Current.DbContext.Departments.Where(d => d.Domain == "分行营业部"));
-            _allDepartment.AddRange(App.Current.DbContext.Departments.Where(d => d.Domain != "贸易金融事业部" && d.Domain != "分行事业部"));
+            _allDepartment.AddRange(context.Departments.Where(d => d.Domain == "贸易金融事业部"));
+            _allDepartment.AddRange(context.Departments.Where(d => d.Domain == "分行营业部"));
+            _allDepartment.AddRange(context.Departments.Where(d => d.Domain != "贸易金融事业部" && d.Domain != "分行事业部"));
         }
 
         #endregion Constructors

@@ -32,6 +32,8 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCreditCoverNegType opCreditCoverNegType;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Enums (2)
@@ -157,11 +159,11 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
                 this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
-                curCase.Backup();
             }
 
             this.UpdateCaseControlStatus();
             this.UpdateCreditCoverNegControlStatus();
+            this.context = new DBDataContext();
 
             if (opCreditCoverNegType == OpCreditCoverNegType.NEW_CREDIT_COVER_NEG)
             {
@@ -211,42 +213,6 @@ namespace CMBC.EasyFactor.CaseMgr
         #region Methods (26)
 
         // Private Methods (26) 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CaseDetail_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            if (this.opCaseType == OpCaseType.UPDATE_CASE)
-            {
-                curCase.Restore();
-            }
-
-            if (this.opCreditCoverNegType == OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG)
-            {
-                if (this.creditCoverNegBindingSource.DataSource is CreditCoverNegotiation)
-                {
-                    CreditCoverNegotiation creditCoverNeg = (CreditCoverNegotiation)this.creditCoverNegBindingSource.DataSource;
-                    if (creditCoverNeg.NegoID != 0)
-                    {
-                        creditCoverNeg.Restore();
-                    }
-
-                }
-            }
-            if (curCase.CaseCode == null)
-            {
-                curCase.BuyerFactor = null;
-                curCase.SellerFactor = null;
-                curCase.BuyerClient = null;
-                curCase.SellerClient = null;
-                curCase.CoDepartment = null;
-                curCase.OwnerDepartment = null;
-            }
-        }
 
         /// <summary>
         /// Case operation type changed event handler
@@ -369,7 +335,7 @@ namespace CMBC.EasyFactor.CaseMgr
             string cdaCode = (string)this.dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
             if (cdaCode != null)
             {
-                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
+                CDA selectedCDA = context.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                 if (selectedCDA != null)
                 {
                     if (MessageBox.Show("是否打算删除额度通知书: " + cdaCode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
@@ -381,8 +347,8 @@ namespace CMBC.EasyFactor.CaseMgr
 
                     try
                     {
-                        App.Current.DbContext.CDAs.DeleteOnSubmit(selectedCDA);
-                        App.Current.DbContext.SubmitChanges();
+                        context.CDAs.DeleteOnSubmit(selectedCDA);
+                        context.SubmitChanges();
                     }
                     catch (Exception e1)
                     {
@@ -432,8 +398,8 @@ namespace CMBC.EasyFactor.CaseMgr
             bool isDeleteOK = true;
             try
             {
-                App.Current.DbContext.CreditCoverNegotiations.DeleteOnSubmit(creditCoverNeg);
-                App.Current.DbContext.SubmitChanges();
+                context.CreditCoverNegotiations.DeleteOnSubmit(creditCoverNeg);
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -481,7 +447,7 @@ namespace CMBC.EasyFactor.CaseMgr
             string cdaCode = (string)this.dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
             if (cdaCode != null)
             {
-                CDA selectedCDA = App.Current.DbContext.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
+                CDA selectedCDA = context.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                 if (selectedCDA != null)
                 {
                     CDADetail cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.DETAIL_CDA);
@@ -649,7 +615,8 @@ namespace CMBC.EasyFactor.CaseMgr
             if (this.opCaseType == OpCaseType.UPDATE_CASE)
             {
                 Case curCase = this.caseBindingSource.DataSource as Case;
-                curCase.Restore();
+                DBDataContext context = new DBDataContext();
+                this.caseBindingSource.DataSource = context.Cases.SingleOrDefault(c => c.CaseCode == curCase.CaseCode);
             }
             else if (this.opCaseType == OpCaseType.NEW_CASE)
             {
@@ -682,8 +649,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 try
                 {
                     curCase.CaseCode = curCase.GenerateCaseCode();
-                    App.Current.DbContext.Cases.InsertOnSubmit(curCase);
-                    App.Current.DbContext.SubmitChanges();
+                    context.Cases.InsertOnSubmit(curCase);
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -695,7 +662,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    curCase.Backup();
                     this.opCaseType = OpCaseType.UPDATE_CASE;
                 }
             }
@@ -709,18 +675,20 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 try
                 {
-                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    context.Cases.Attach(curCase);
+                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
                             mc.Resolve(RefreshMode.KeepChanges);
                         }
                     }
-                    App.Current.DbContext.SubmitChanges();
+
+                    context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -737,11 +705,10 @@ namespace CMBC.EasyFactor.CaseMgr
                             cda.CDAStatus = "已失效";
                         }
 
-                        App.Current.DbContext.SubmitChanges();
+                        context.SubmitChanges();
                     }
 
                     MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    curCase.Backup();
                 }
             }
         }
@@ -783,8 +750,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 try
                 {
                     creditCoverNeg.Case = curCase;
-                    App.Current.DbContext.CreditCoverNegotiations.InsertOnSubmit(creditCoverNeg);
-                    App.Current.DbContext.SubmitChanges();
+                    context.CreditCoverNegotiations.InsertOnSubmit(creditCoverNeg);
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -805,18 +772,20 @@ namespace CMBC.EasyFactor.CaseMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    context.CreditCoverNegotiations.Attach(creditCoverNeg);
+                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
                             mc.Resolve(RefreshMode.KeepChanges);
                         }
                     }
-                    App.Current.DbContext.SubmitChanges();
+
+                    context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -828,7 +797,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.dgvCreditCoverNegs.Refresh();
-                    creditCoverNeg.Backup();
                 }
             }
         }
@@ -928,7 +896,7 @@ namespace CMBC.EasyFactor.CaseMgr
             int cid = (int)this.dgvCreditCoverNegs["colNegoID", dgvCreditCoverNegs.SelectedRows[0].Index].Value;
             if (cid != 0)
             {
-                CreditCoverNegotiation selectedCreditCoverNeg = App.Current.DbContext.CreditCoverNegotiations.SingleOrDefault(c => c.NegoID == cid);
+                CreditCoverNegotiation selectedCreditCoverNeg = context.CreditCoverNegotiations.SingleOrDefault(c => c.NegoID == cid);
                 if (selectedCreditCoverNeg != null)
                 {
                     this.creditCoverNegBindingSource.DataSource = selectedCreditCoverNeg;

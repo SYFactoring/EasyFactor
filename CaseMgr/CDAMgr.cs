@@ -31,6 +31,8 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCDAType opCDAType;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Enums (1)
@@ -72,6 +74,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.opCDAType = opCDAType;
             ControlUtil.SetDoubleBuffered(this.dgvCDAs);
 
+            this.UpdateContextMenu();
+            this.context = new DBDataContext();
+
             if (this.opCDAType == OpCDAType.CHECK)
             {
                 this.cbCheckStatus.Text = "未复核";
@@ -79,7 +84,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             else if (this.opCDAType == OpCDAType.REPORT)
             {
-                var queryResult = from cda in App.Current.DbContext.CDAs
+                var queryResult = from cda in context.CDAs
                                   where
                                       cda.CDAStatus == "已审核未下发"
                                       && (cda.Case.TransactionType == "国内卖方保理" || cda.Case.TransactionType == "国内信保保理" || cda.Case.TransactionType == "出口保理" || cda.Case.TransactionType == "国际信保保理")
@@ -88,8 +93,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
-
-            this.UpdateContextMenu();
         }
 
         #endregion Constructors
@@ -164,7 +167,8 @@ namespace CMBC.EasyFactor.CaseMgr
             cda.CheckUserName = App.Current.CurUser.Name;
             cda.CheckDate = DateTime.Now.Date;
 
-            App.Current.DbContext.SubmitChanges();
+            context.CDAs.Attach(cda);
+            context.SubmitChanges();
         }
 
         /// <summary>
@@ -192,10 +196,10 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             bool isDeleteOK = true;
-            App.Current.DbContext.CDAs.DeleteOnSubmit(cda);
+            context.CDAs.DeleteOnSubmit(cda);
             try
             {
-                App.Current.DbContext.SubmitChanges();
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -316,7 +320,7 @@ namespace CMBC.EasyFactor.CaseMgr
             string createUserName = this.tbCreateUserName.Text;
 
             var queryResult =
-                from cda in App.Current.DbContext.CDAs
+                from cda in context.CDAs
                 let contracts = cda.Case.SellerClient.Contracts
                 where contractCode == string.Empty ? true : contracts.Any(con => con.ContractCode.Contains(contractCode))
                 let seller = cda.Case.SellerClient
@@ -363,7 +367,8 @@ namespace CMBC.EasyFactor.CaseMgr
             cda.CheckUserName = App.Current.CurUser.Name;
             cda.CheckDate = DateTime.Now.Date;
 
-            App.Current.DbContext.SubmitChanges();
+            context.CDAs.Attach(cda);
+            context.SubmitChanges();
         }
 
         /// <summary>

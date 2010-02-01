@@ -14,7 +14,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class CreditCoverNegotiation : BaseObject
+    public partial class CreditCoverNegotiation
     {
         #region Properties (9)
 

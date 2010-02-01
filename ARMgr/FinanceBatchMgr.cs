@@ -35,6 +35,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Enums (1)
@@ -90,15 +92,16 @@ namespace CMBC.EasyFactor.ARMgr
 
             this.opBatchType = batchType;
 
+            this.UpdateContextMenu();
+            this.context = new DBDataContext();
+
             if (batchType == OpBatchType.CHECK)
             {
                 this.cbCheckStatus.Text = "未复核";
-                var queryResult = App.Current.DbContext.InvoiceFinanceBatches.Where(i => i.CheckStatus == "未复核");
+                var queryResult = context.InvoiceFinanceBatches.Where(i => i.CheckStatus == "未复核");
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
-
-            this.UpdateContextMenu();
         }
 
         #endregion Constructors
@@ -156,7 +159,8 @@ namespace CMBC.EasyFactor.ARMgr
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
-            App.Current.DbContext.SubmitChanges();
+            context.InvoiceFinanceBatches.Attach(batch);
+            context.SubmitChanges();
         }
 
         /// <summary>
@@ -188,10 +192,10 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            App.Current.DbContext.InvoiceFinanceBatches.DeleteOnSubmit(selectedBatch);
+            context.InvoiceFinanceBatches.DeleteOnSubmit(selectedBatch);
             try
             {
-                App.Current.DbContext.SubmitChanges();
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -260,13 +264,14 @@ namespace CMBC.EasyFactor.ARMgr
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
 
-            var queryResult = App.Current.DbContext.InvoiceFinanceBatches.Where(i =>
+            var queryResult = context.InvoiceFinanceBatches.Where(i =>
                 i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
                 && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
                 && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
                 && (status != string.Empty ? i.CheckStatus == status : true)
                 && (i.CreateUserName.Contains(createUserName))
                 && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
+
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
@@ -298,7 +303,8 @@ namespace CMBC.EasyFactor.ARMgr
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
-            App.Current.DbContext.SubmitChanges();
+            context.InvoiceFinanceBatches.Attach(batch);
+            context.SubmitChanges();
         }
         /// <summary>
         /// 

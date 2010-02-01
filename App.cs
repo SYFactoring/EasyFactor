@@ -31,22 +31,6 @@ namespace CMBC.EasyFactor
         /// </summary>
         private App()
         {
-            this.DbContext = new DBDataContext();
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\CMBC";
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-
-            foreach (string file in Directory.GetFiles(path))
-            {
-                if (File.GetCreationTime(file) < DateTime.Now.AddDays(-7))
-                {
-                    File.Delete(file);
-                }
-            }
-
-            this.DbContext.Log = File.CreateText(Path.Combine(path, String.Format("{0:yyyy-MM-dd-HH-mm}.log", DateTime.Now)));
         }
 
         #endregion Constructors
@@ -65,11 +49,6 @@ namespace CMBC.EasyFactor
         /// Gets or sets Current User
         /// </summary>
         public User CurUser { get; set; }
-
-        /// <summary>
-        /// Gets DbContext
-        /// </summary>
-        public DBDataContext DbContext { get; private set; }
 
         /// <summary>
         /// Gets or Sets Main Window

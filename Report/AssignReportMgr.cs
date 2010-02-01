@@ -36,6 +36,8 @@ namespace CMBC.EasyFactor.Report
         /// </summary>
         private OpReportType opReportType;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Enums (1)
@@ -95,6 +97,8 @@ namespace CMBC.EasyFactor.Report
             //    this.diAssignDateBegin.Value = DateTime.Now.Date;
             //    this.diAssignDateEnd.Value = DateTime.Now.Date;
             //}
+
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -629,7 +633,7 @@ namespace CMBC.EasyFactor.Report
             DateTime beginDate = this.diAssignDateBegin.Text != string.Empty ? this.diAssignDateBegin.Value : this.diAssignDateBegin.MinDate;
             DateTime endDate = this.diAssignDateEnd.Text != string.Empty ? this.diAssignDateEnd.Value : this.diAssignDateEnd.MinDate;
 
-            var queryResult = from invoice in App.Current.DbContext.Invoices
+            var queryResult = from invoice in context.Invoices
                               let seller = invoice.InvoiceAssignBatch.Case.SellerClient
                               where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN.Contains(sellerName)
                               let buyer = invoice.InvoiceAssignBatch.Case.BuyerClient

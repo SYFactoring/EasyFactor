@@ -7,13 +7,13 @@
 namespace CMBC.EasyFactor.DB.dbml
 {
     using System.Collections.Generic;
-    using CMBC.EasyFactor.Utils;
     using System.Linq;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// 
     /// </summary>
-    public partial class User : BaseObject
+    public partial class User
     {
         /// <summary>
         /// 
@@ -42,7 +42,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GetEDIAccount(string userName)
         {
-            User user = App.Current.DbContext.Users.SingleOrDefault(u => u.Name == userName);
+            DBDataContext context = new DBDataContext();
+            User user = context.Users.SingleOrDefault(u => u.Name == userName);
             if (user != null)
             {
                 return user.EDIAccount;

@@ -884,7 +884,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.Name = "FinanceBatchDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "融资批次信息";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BatchDetail_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);

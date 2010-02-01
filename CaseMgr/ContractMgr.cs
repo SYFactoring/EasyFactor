@@ -27,6 +27,8 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private BindingSource bs;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Constructors (1)
@@ -43,6 +45,8 @@ namespace CMBC.EasyFactor.CaseMgr
             ControlUtil.SetDoubleBuffered(this.dgvContracts);
 
             this.UpdateContextMenu();
+
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -116,8 +120,8 @@ namespace CMBC.EasyFactor.CaseMgr
             bool isDeleteOK = true;
             try
             {
-                App.Current.DbContext.Contracts.DeleteOnSubmit(selectedContract);
-                App.Current.DbContext.SubmitChanges();
+                context.Contracts.DeleteOnSubmit(selectedContract);
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -194,7 +198,7 @@ namespace CMBC.EasyFactor.CaseMgr
             string contractStatus = this.cbContractStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
 
-            var queryResult = from contract in App.Current.DbContext.Contracts
+            var queryResult = from contract in context.Contracts
                               let client = contract.Client
                               where client.ClientNameCN.Contains(clientName) || client.ClientNameEN.Contains(clientName)
                               where (contract.ContractCode.Contains(contractCode))

@@ -27,6 +27,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private BindingSource bs;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Constructors (1)
@@ -50,6 +52,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.cbCountry.ValueMember = "CountryNameEN";
 
             this.UpdateContextMenu();
+            context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -141,10 +144,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     return;
                 }
 
-                App.Current.DbContext.Factors.DeleteOnSubmit(selectedFactor);
+                context.Factors.DeleteOnSubmit(selectedFactor);
                 try
                 {
-                    App.Current.DbContext.SubmitChanges();
+                    context.SubmitChanges();
                 }
                 catch (SqlException e1)
                 {
@@ -152,7 +155,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     return;
                 }
 
-                this.dgvFactors.Rows.RemoveAt(dgvFactors.SelectedRows[0].Index);
+                this.dgvFactors.Rows.RemoveAt(this.dgvFactors.SelectedRows[0].Index);
             }
         }
 
@@ -249,7 +252,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 }
             }
 
-            var queryResult = App.Current.DbContext.Factors.Where(f =>
+            var queryResult = context.Factors.Where(f =>
                                                    ((f.FactorCode == null ? string.Empty : f.FactorCode).Contains(tbFactorCode.Text))
                                                 && ((f.CompanyNameCN == null ? string.Empty : f.CompanyNameCN).Contains(tbFactorName.Text) || (f.CompanyNameEN == null ? string.Empty : f.CompanyNameEN).Contains(tbFactorName.Text))
                                                 && (f.FactorType.Contains(factorType))

@@ -23,9 +23,22 @@ namespace CMBC.EasyFactor.ARMgr
     {
         #region Fields (3)
 
+        /// <summary>
+        /// 
+        /// </summary>
         private Case _case;
+        
+        /// <summary>
+        /// 
+        /// </summary>
         private ARCaseBasic caseBasic;
+        
+        /// <summary>
+        /// 
+        /// </summary>
         private OpPaymentType paymentType;
+
+        private DBDataContext context;
 
         #endregion Fields
 
@@ -92,7 +105,10 @@ namespace CMBC.EasyFactor.ARMgr
                 colCreditNoteDate2.Visible = false;
                 colCreditNoteNo2.Visible = false;
             }
+
             colCheckBox.ReadOnly = false;
+
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -398,6 +414,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                     this.ResetRow(i, 1 == (int)cell.Value ? true : false);
                 }
+
                 this.StatBatch();
             }
         }
@@ -443,9 +460,10 @@ namespace CMBC.EasyFactor.ARMgr
             batch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = batch;
 
-            var queryResult = from invoice in App.Current.DbContext.Invoices
+            var queryResult = from invoice in context.Invoices
                               where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.00000001)
                               select invoice;
+
             this.invoiceBindingSource.DataSource = queryResult;
             this.StatBatch();
         }
@@ -529,7 +547,7 @@ namespace CMBC.EasyFactor.ARMgr
                         }
                         else
                         {
-                            log = App.Current.DbContext.InvoicePaymentLogs.SingleOrDefault(paymentlog => paymentlog.PaymentLogID == invoice.PaymentLogID2);
+                            log = context.InvoicePaymentLogs.SingleOrDefault(paymentlog => paymentlog.PaymentLogID == invoice.PaymentLogID2);
                             if (log == null)
                             {
                                 throw new Exception("还款ID错误");
@@ -542,7 +560,7 @@ namespace CMBC.EasyFactor.ARMgr
                         CreditNote creditNote = null;
                         if (invoice.CreditNoteNo2 != null && invoice.CreditNoteNo2 != string.Empty)
                         {
-                            creditNote = App.Current.DbContext.CreditNotes.SingleOrDefault(c => c.CreditNoteNo == invoice.CreditNoteNo2);
+                            creditNote = context.CreditNotes.SingleOrDefault(c => c.CreditNoteNo == invoice.CreditNoteNo2);
                             if (creditNote == null)
                             {
                                 creditNote = new CreditNote();
@@ -574,7 +592,8 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
 
-                App.Current.DbContext.SubmitChanges();
+                context.InvoicePaymentBatches.Attach(batch);
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -586,6 +605,7 @@ namespace CMBC.EasyFactor.ARMgr
                     log.CreditNote = null;
                     log.InvoicePaymentBatch = null;
                 }
+
                 batch.Case = null;
                 isSaveOK = false;
                 MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -641,6 +661,7 @@ namespace CMBC.EasyFactor.ARMgr
                     cell.Value = 1;
                     ResetRow(i, true);
                 }
+
                 this.StatBatch();
             }
         }
@@ -659,6 +680,7 @@ namespace CMBC.EasyFactor.ARMgr
                     totalPayment += ((Invoice)paymentLogList[i]).PaymentAmount2.GetValueOrDefault();
                 }
             }
+
             this.tbTotalPayment.Text = String.Format("{0:N2}", totalPayment);
         }
 

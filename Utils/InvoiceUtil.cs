@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CMBC.EasyFactor.DB.dbml;
-
+﻿
 namespace CMBC.EasyFactor.Utils
 {
+    using CMBC.EasyFactor.DB.dbml;
+
+    /// <summary>
+    /// 
+    /// </summary>
     class InvoiceUtil
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static void ComputeCommission()
         {
-            foreach (Invoice invoice in App.Current.DbContext.Invoices)
+            DBDataContext context = new DBDataContext();
+            foreach (Invoice invoice in context.Invoices)
             {
                 if (!invoice.Commission.HasValue)
                 {
@@ -41,6 +45,8 @@ namespace CMBC.EasyFactor.Utils
                     }
                 }
             }
+
+            context.SubmitChanges();
         }
     }
 }

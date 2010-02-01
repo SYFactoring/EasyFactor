@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
 {
     using System.Windows.Forms;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.DB.dbml;
 
     /// <summary>
     /// 
@@ -21,7 +22,8 @@ namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
         {
             this.InitializeComponent();
             this.dgvExchange.AutoGenerateColumns = false;
-            this.dgvExchange.DataSource = App.Current.DbContext.Exchanges;
+            DBDataContext context = new DBDataContext();
+            this.dgvExchange.DataSource = context.Exchanges;
             ControlUtil.SetDoubleBuffered(this.dgvExchange);
         }
     }

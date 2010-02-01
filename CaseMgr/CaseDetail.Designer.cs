@@ -2292,7 +2292,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.Name = "CaseDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "案件";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CaseDetail_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabPanelCase.ResumeLayout(false);

@@ -142,7 +142,9 @@ namespace CMBC.EasyFactor.CaseMgr
             string buyerFactorCode = this.tbBuyerFactorCode.Text;
             string createUserName = this.tbCreateUserName.Text;
 
-            var queryResult = from neg in App.Current.DbContext.CreditCoverNegotiations
+            DBDataContext context = new DBDataContext();
+
+            var queryResult = from neg in context.CreditCoverNegotiations
                               let c = neg.Case
                               where
                                ((string)this.cbOwnerDepts.SelectedValue == "CN01300" ? true : c.OwnerDepartmentCode.Equals((string)this.cbOwnerDepts.SelectedValue))

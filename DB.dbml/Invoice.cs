@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class Invoice : BaseObject
+    public partial class Invoice 
     {
         #region Fields (2)
 
@@ -407,7 +407,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateAssignBatchNo(DateTime date)
         {
-            var queryResult = from batch in App.Current.DbContext.InvoiceAssignBatches
+            DBDataContext context = new DBDataContext();
+            var queryResult = from batch in context.InvoiceAssignBatches
                               where batch.AssignDate.Date == date.Date
                               select batch.AssignBatchNo;
             int batchCount;
@@ -428,7 +429,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateAssignBatchNo(DateTime date, List<InvoiceAssignBatch> batchesInMemory)
         {
-            var queryResult = from batch in App.Current.DbContext.InvoiceAssignBatches
+            DBDataContext context = new DBDataContext();
+            var queryResult = from batch in context.InvoiceAssignBatches
                               where batch.AssignDate.Date == date.Date
                               select batch.AssignBatchNo;
             int batchCount;
@@ -448,7 +450,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateFinanceBatchNo(DateTime date)
         {
-            var queryResult = from batch in App.Current.DbContext.InvoiceFinanceBatches
+            DBDataContext context = new DBDataContext();
+            var queryResult = from batch in context.InvoiceFinanceBatches
                               where batch.FinancePeriodBegin.Date == date.Date
                               select batch.FinanceBatchNo;
             int batchCount;
@@ -468,7 +471,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateFinanceBatchNo(DateTime date, List<InvoiceFinanceBatch> batchesInMemory)
         {
-            var queryResult = from batch in App.Current.DbContext.InvoiceFinanceBatches
+            DBDataContext context = new DBDataContext();
+            var queryResult = from batch in context.InvoiceFinanceBatches
                               where batch.FinancePeriodBegin.Date == date.Date
                               select batch.FinanceBatchNo;
             int batchCount;
@@ -488,7 +492,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GeneratePaymentBatchNo(DateTime date)
         {
-            var queryResult = from batch in App.Current.DbContext.InvoicePaymentBatches
+            DBDataContext context = new DBDataContext();
+            var queryResult = from batch in context.InvoicePaymentBatches
                               where batch.PaymentDate.Date == date.Date
                               select batch.PaymentBatchNo;
             int batchCount;
@@ -508,7 +513,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GeneratePaymentBatchNo(DateTime date, List<InvoicePaymentBatch> batchesInMemory)
         {
-            var queryResult = from batch in App.Current.DbContext.InvoicePaymentBatches
+            DBDataContext context = new DBDataContext();
+            var queryResult = from batch in context.InvoicePaymentBatches
                               where batch.PaymentDate.Date == date.Date
                               select batch.PaymentBatchNo;
             int batchCount;
@@ -528,7 +534,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateRefundBatchNo(DateTime date)
         {
-            var queryResult = from batch in App.Current.DbContext.InvoiceRefundBatches
+            DBDataContext context = new DBDataContext();
+            var queryResult = from batch in context.InvoiceRefundBatches
                               where batch.RefundDate.Date == date.Date
                               select batch.RefundBatchNo;
             int batchCount;
@@ -548,7 +555,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateRefundBatchNo(DateTime date, List<InvoiceRefundBatch> batchesInMemory)
         {
-            var queryResult = from batch in App.Current.DbContext.InvoiceRefundBatches
+            DBDataContext context = new DBDataContext();
+            var queryResult = from batch in context.InvoiceRefundBatches
                               where batch.RefundDate.Date == date.Date
                               select batch.RefundBatchNo;
             int batchCount;

@@ -15,7 +15,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class Client : BaseObject
+    public partial class Client 
     {
         #region Properties (7)
 

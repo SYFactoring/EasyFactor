@@ -220,7 +220,9 @@
             this.btnCDASave = new DevComponents.DotNetBar.ButtonX();
             this.btnCDAReset = new DevComponents.DotNetBar.ButtonX();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.customValidator8 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.customValidator7 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.compareValidator2 = new DevComponents.DotNetBar.Validator.CompareValidator();
@@ -233,8 +235,6 @@
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.customValidator7 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.customValidator8 = new DevComponents.DotNetBar.Validator.CustomValidator();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -1905,11 +1905,23 @@
             this.superValidator.ErrorProvider = this.errorProvider;
             this.superValidator.Highlighter = this.highlighter;
             // 
+            // customValidator8
+            // 
+            this.customValidator8.ErrorMessage = "最低损失门槛不能大于买方信用风险额度";
+            this.customValidator8.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator8.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator8_ValidateValue);
+            // 
             // customValidator1
             // 
             this.customValidator1.ErrorMessage = "必填";
             this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
+            // 
+            // customValidator7
+            // 
+            this.customValidator7.ErrorMessage = "自负额不能大于买方信用风险额度";
+            this.customValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator7.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator7_ValidateValue);
             // 
             // requiredFieldValidator2
             // 
@@ -1982,18 +1994,6 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // customValidator7
-            // 
-            this.customValidator7.ErrorMessage = "自负额不能大于买方信用风险额度";
-            this.customValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator7.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator7_ValidateValue);
-            // 
-            // customValidator8
-            // 
-            this.customValidator8.ErrorMessage = "最低损失门槛不能大于买方信用风险额度";
-            this.customValidator8.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator8.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator8_ValidateValue);
-            // 
             // CDADetail
             // 
             this.AcceptButton = this.btnCDASave;
@@ -2011,7 +2011,6 @@
             this.Name = "CDADetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "额度通知书";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CDADetail_FormClosing);
             this.groupPanelCase.ResumeLayout(false);
             this.groupPanelCase.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();

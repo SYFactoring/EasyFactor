@@ -33,6 +33,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private OpFactorType opFactorType;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Enums (2)
@@ -117,7 +119,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             {
                 this.factorBindingSource.DataSource = factor;
                 this.bsCreditLines.DataSource = factor.FactorCreditLines;
-                factor.Backup();
             }
 
             if (opFactorCreditLineType == OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE)
@@ -129,6 +130,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             this.UpdateFactorControlStatus();
             this.UpdateFactorCreditLineControlStatus();
+
+            this.context = new DBDataContext();
         }
 
         /// <summary>
@@ -239,8 +242,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             bool isDeleteOK = true;
             try
             {
-                App.Current.DbContext.FactorCreditLines.DeleteOnSubmit(creditLine);
-                App.Current.DbContext.SubmitChanges();
+                context.FactorCreditLines.DeleteOnSubmit(creditLine);
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -254,46 +257,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 this.bsCreditLines.DataSource = typeof(FactorCreditLine);
                 this.bsCreditLines.DataSource = factor.FactorCreditLines;
                 this.factorCreditLineBindingSource.DataSource = typeof(FactorCreditLine);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FactorDetail_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Factor factor = (Factor)this.factorBindingSource.DataSource;
-            if (opFactorType == OpFactorType.UPDATE_FACTOR)
-            {
-                factor.Restore();
-            }
-
-            if (this.opFactorCreditLineType == OpFactorCreditLineType.UPDATE_FACTOR_CREDIT_LINE)
-            {
-                if (this.factorCreditLineBindingSource.DataSource is FactorCreditLine)
-                {
-                    FactorCreditLine creditLine = (FactorCreditLine)this.factorCreditLineBindingSource.DataSource;
-                    if (creditLine.FactorCode != null)
-                    {
-                        creditLine.Restore();
-                    }
-                }
-            }
-            if (factor.FactorGroup != null)
-            {
-                if (factor.FactorCode == null || factor.FactorCode.Trim() == string.Empty)
-                {
-                    factor.FactorGroup = null;
-                }
-                else
-                {
-                    if (App.Current.DbContext.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode) == null)
-                    {
-                        factor.FactorGroup = null;
-                    }
-                }
             }
         }
 
@@ -393,7 +356,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             if (opFactorType == OpFactorType.UPDATE_FACTOR)
             {
                 Factor factor = this.factorBindingSource.DataSource as Factor;
-                factor.Restore();
+                DBDataContext context = new DBDataContext();
+                this.factorBindingSource.DataSource = context.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
             }
             else if (opFactorType == OpFactorType.NEW_FACTOR)
             {
@@ -425,8 +389,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 {
                     factor.LastModifiedDate = DateTime.Now.Date;
                     factor.CreateUserName = App.Current.CurUser.Name;
-                    App.Current.DbContext.Factors.InsertOnSubmit(factor);
-                    App.Current.DbContext.SubmitChanges();
+                    context.Factors.InsertOnSubmit(factor);
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -437,7 +401,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    factor.Backup();
                     this.opFactorType = OpFactorType.UPDATE_FACTOR;
                 }
             }
@@ -451,18 +414,20 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
                 try
                 {
-                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    context.Factors.Attach(factor);
+                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
                             mc.Resolve(RefreshMode.KeepChanges);
                         }
                     }
-                    App.Current.DbContext.SubmitChanges();
+
+                    context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -473,7 +438,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    factor.Backup();
                 }
             }
         }
@@ -541,8 +505,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 {
                     creditLine.Factor = factor;
                     creditLine.CreateUserName = App.Current.CurUser.Name;
-                    App.Current.DbContext.FactorCreditLines.InsertOnSubmit(creditLine);
-                    App.Current.DbContext.SubmitChanges();
+                    context.FactorCreditLines.InsertOnSubmit(creditLine);
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -563,7 +527,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                                 fcl.CreditLineStatus = ConstStr.FACTOR_CREDIT_LINE.EXPIRY;
                             }
                         }
-                        App.Current.DbContext.SubmitChanges();
+
+                        context.SubmitChanges();
                     }
 
                     this.bsCreditLines.DataSource = typeof(FactorCreditLine);
@@ -576,18 +541,20 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    context.FactorCreditLines.Attach(creditLine);
+                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
                             mc.Resolve(RefreshMode.KeepChanges);
                         }
                     }
-                    App.Current.DbContext.SubmitChanges();
+
+                    context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -607,10 +574,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                                 fcl.CreditLineStatus = ConstStr.FACTOR_CREDIT_LINE.EXPIRY;
                             }
                         }
-                        App.Current.DbContext.SubmitChanges();
-                    }
 
-                    creditLine.Backup();
+                        context.SubmitChanges();
+                    }
                 }
             }
         }

@@ -225,7 +225,6 @@
     <Compile Include="CaseMgr\CreditCoverNegMgr.Designer.cs">
       <DependentUpon>CreditCoverNegMgr.cs</DependentUpon>
     </Compile>
-    <Compile Include="DB.dbml\BaseObject.cs" />
     <Compile Include="DB.dbml\Case.cs" />
     <Compile Include="DB.dbml\CDA.cs" />
     <Compile Include="DB.dbml\Client.cs" />

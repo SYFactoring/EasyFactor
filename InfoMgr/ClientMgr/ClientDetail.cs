@@ -50,6 +50,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpReviewType opReviewType;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Enums (4)
@@ -187,6 +189,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.opContractType = opContractType;
             this.opReviewType = opReviewType;
 
+            this.context = new DBDataContext();
+
             if (opClientType == OpClientType.NEW_CLIENT)
             {
                 client = new Client();
@@ -207,8 +211,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     this.tbGroupNameEN.Text = client.ClientGroup.ClientNameEN;
                     this.btnGroupCreditLineSelect.Enabled = true;
                 }
-
-                client.Backup();
             }
 
             if (this.opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
@@ -352,68 +354,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClientDetail_Closing(object sender, FormClosingEventArgs e)
-        {
-            Client client = (Client)this.clientBindingSource.DataSource;
-            if (this.opClientType == OpClientType.UPDATE_CLIENT)
-            {
-                client.Restore();
-            }
-
-            if (this.opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
-            {
-                if (this.clientCreditLineBindingSource.DataSource is ClientCreditLine)
-                {
-                    ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
-                    if (creditLine.CreditLineID != 0)
-                    {
-                        creditLine.Restore();
-                    }
-                }
-            }
-
-            if (this.opContractType == OpContractType.UPDATE_CONTRACT)
-            {
-                if (this.contractBindingSource.DataSource is Contract)
-                {
-                    Contract contract = (Contract)this.contractBindingSource.DataSource;
-                    if (contract.ContractCode != null)
-                    {
-                        contract.Restore();
-                    }
-                }
-            }
-
-            if (this.opReviewType == OpReviewType.UPDATE_REVIEW)
-            {
-                if (this.reviewBindingSource.DataSource is ClientReview)
-                {
-                    ClientReview review = (ClientReview)this.reviewBindingSource.DataSource;
-                    review.Restore();
-                }
-            }
-
-            if (client.ClientGroup != null)
-            {
-                if (client.ClientEDICode == null || client.ClientEDICode.Trim() == string.Empty)
-                {
-                    client.ClientGroup = null;
-                }
-                else
-                {
-                    if (App.Current.DbContext.Clients.SingleOrDefault(c => c.ClientEDICode == client.ClientEDICode) == null)
-                    {
-                        client.ClientGroup = null;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
@@ -513,9 +453,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             bool isDeleteOK = true;
             try
             {
-                client.ClientCreditLines.Remove(creditLine);
-                App.Current.DbContext.ClientCreditLines.DeleteOnSubmit(creditLine);
-                App.Current.DbContext.SubmitChanges();
+                context.ClientCreditLines.DeleteOnSubmit(creditLine);
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -571,8 +510,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             bool isDeleteOK = true;
             try
             {
-                App.Current.DbContext.Contracts.DeleteOnSubmit(contract);
-                App.Current.DbContext.SubmitChanges();
+                context.Contracts.DeleteOnSubmit(contract);
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -628,9 +567,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             bool isDeleteOK = true;
             try
             {
-                client.ClientReviews.Remove(review);
-                App.Current.DbContext.ClientReviews.DeleteOnSubmit(review);
-                App.Current.DbContext.SubmitChanges();
+                context.ClientReviews.DeleteOnSubmit(review);
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -861,7 +799,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (this.opClientType == OpClientType.UPDATE_CLIENT)
             {
                 Client client = this.clientBindingSource.DataSource as Client;
-                client.Restore();
+                DBDataContext context = new DBDataContext();
+                this.clientBindingSource.DataSource = context.Clients.SingleOrDefault(c => c.ClientEDICode == client.ClientEDICode);
             }
             else if (this.opClientType == OpClientType.NEW_CLIENT)
             {
@@ -894,8 +833,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 bool isAddOK = true;
                 try
                 {
-                    App.Current.DbContext.Clients.InsertOnSubmit(client);
-                    App.Current.DbContext.SubmitChanges();
+                    context.Clients.InsertOnSubmit(client);
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -906,7 +845,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    client.Backup();
                     this.opClientType = OpClientType.UPDATE_CLIENT;
                 }
             }
@@ -920,18 +858,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 try
                 {
-                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    context.Clients.Attach(client);
+                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
                             mc.Resolve(RefreshMode.KeepChanges);
                         }
                     }
-                    App.Current.DbContext.SubmitChanges();
+
+                    context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -942,7 +882,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    client.Backup();
                 }
             }
         }
@@ -1013,8 +952,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     creditLine.Client = client;
                     creditLine.CreateUserName = App.Current.CurUser.Name;
 
-                    App.Current.DbContext.ClientCreditLines.InsertOnSubmit(creditLine);
-                    App.Current.DbContext.SubmitChanges();
+                    context.ClientCreditLines.InsertOnSubmit(creditLine);
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -1036,7 +975,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             }
                         }
 
-                        App.Current.DbContext.SubmitChanges();
+                        context.SubmitChanges();
                     }
 
                     this.bsCreditLines.DataSource = typeof(ClientCreditLine);
@@ -1050,18 +989,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 try
                 {
-                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    context.ClientCreditLines.Attach(creditLine);
+                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
                             mc.Resolve(RefreshMode.KeepChanges);
                         }
                     }
-                    App.Current.DbContext.SubmitChanges();
+
+                    context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -1082,10 +1023,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             }
                         }
 
-                        App.Current.DbContext.SubmitChanges();
+                        context.SubmitChanges();
                     }
-
-                    creditLine.Backup();
                 }
             }
         }
@@ -1138,8 +1077,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         contract.ContractStatus = ConstStr.CONTRACT.AVAILABILITY;
                     }
 
-                    App.Current.DbContext.Contracts.InsertOnSubmit(contract);
-                    App.Current.DbContext.SubmitChanges();
+                    context.Contracts.InsertOnSubmit(contract);
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -1161,7 +1100,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             }
                         }
 
-                        App.Current.DbContext.SubmitChanges();
+                        context.SubmitChanges();
                     }
 
                     this.bsContracts.DataSource = typeof(Contract);
@@ -1184,18 +1123,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 try
                 {
-                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    context.Contracts.Attach(contract);
+                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
                             mc.Resolve(RefreshMode.KeepChanges);
                         }
                     }
-                    App.Current.DbContext.SubmitChanges();
+
+                    context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -1216,10 +1157,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             }
                         }
 
-                        App.Current.DbContext.SubmitChanges();
+                        context.SubmitChanges();
                     }
-
-                    contract.Backup();
                 }
             }
         }
@@ -1270,7 +1209,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     client.ClientReviews.Add(review);
                     review.CreateUserName = App.Current.CurUser.Name;
-                    App.Current.DbContext.SubmitChanges();
+                    context.ClientReviews.InsertOnSubmit(review);
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -1292,18 +1232,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    context.ClientReviews.Attach(review);
+                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
                             mc.Resolve(RefreshMode.KeepChanges);
                         }
                     }
-                    App.Current.DbContext.SubmitChanges();
+
+                    context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -1314,7 +1256,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show(ConstStr.MESSAGE.DATA_UPDATE_SUCCESS, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    review.Backup();
                 }
             }
         }

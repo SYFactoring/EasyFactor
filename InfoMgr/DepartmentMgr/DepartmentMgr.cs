@@ -27,6 +27,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// </summary>
         private BindingSource bs;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Enums (1)
@@ -85,12 +87,12 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 this.colPaymentAmount.Visible = true;
                 this.colIncomeAmount.Visible = true;
 
-                var result = from dept in App.Current.DbContext.Departments
+                var result = from dept in context.Departments
                              group dept by dept.Location into depts
                              select new { Location = depts.Key, Departments = depts };
 
                 SortableBindingList<City> locations = new SortableBindingList<City>();
-                
+
                 foreach (var loc in result)
                 {
                     locations.Add(new City(loc.Location, loc.Departments.ToList()));
@@ -113,6 +115,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             ControlUtil.SetDoubleBuffered(this.dgvDepts);
 
             this.UpdateContextMenu();
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -180,11 +183,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             Department selectedDepartment = (Department)this.bs.List[this.dgvDepts.SelectedRows[0].Index];
             if (MessageBox.Show("是否确定删除分部: " + selectedDepartment.DepartmentName, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                App.Current.DbContext.Departments.DeleteOnSubmit(selectedDepartment);
+                context.Departments.DeleteOnSubmit(selectedDepartment);
                 bool isDeleteOK = true;
                 try
                 {
-                    App.Current.DbContext.SubmitChanges();
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -251,7 +254,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// <param name="e"></param>
         private void Query(object sender, EventArgs e)
         {
-            var queryResult = App.Current.DbContext.Departments.Where(d =>
+            var queryResult = context.Departments.Where(d =>
                              (d.DepartmentCode == null ? string.Empty : d.DepartmentCode).Contains(this.tbDepartmentCode.Text)
                           && (d.DepartmentName == null ? string.Empty : d.DepartmentName).Contains(this.tbDepartmentName.Text));
 

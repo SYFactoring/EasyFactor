@@ -659,7 +659,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.Name = "UserDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "用户详细信息";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserDetail_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();

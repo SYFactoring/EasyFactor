@@ -7,6 +7,7 @@
 namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 {
     using System;
+    using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
@@ -22,6 +23,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// 
         /// </summary>
         private OpDepartmentType opDepartmentType;
+
+        private DBDataContext context;
 
         #endregion Fields
 
@@ -70,10 +73,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             else
             {
                 this.departmentBindingSource.DataSource = department;
-                department.Backup();
             }
 
             this.UpdateDepartmentControlStatus();
+
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -87,26 +91,13 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DepartmentDetail_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Department dept = (Department)this.departmentBindingSource.DataSource;
-            if (opDepartmentType == OpDepartmentType.UPDATE_DEPARTMENT)
-            {
-                dept.Restore();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ResetDepartment(object sender, EventArgs e)
         {
             if (opDepartmentType == OpDepartmentType.UPDATE_DEPARTMENT)
             {
                 Department dept = this.departmentBindingSource.DataSource as Department;
-                dept.Restore();
+                DBDataContext context = new DBDataContext();
+                this.departmentBindingSource.DataSource = context.Departments.SingleOrDefault(d => d.DepartmentCode == dept.DepartmentCode);
             }
             else if (opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)
             {
@@ -138,8 +129,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 bool isAddOK = true;
                 try
                 {
-                    App.Current.DbContext.Departments.InsertOnSubmit(dept);
-                    App.Current.DbContext.SubmitChanges();
+                    context.Departments.InsertOnSubmit(dept);
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -150,7 +141,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dept.Backup();
                     opDepartmentType = OpDepartmentType.UPDATE_DEPARTMENT;
                 }
             }
@@ -159,7 +149,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    App.Current.DbContext.SubmitChanges();
+                    context.Departments.Attach(dept);
+                    context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -170,7 +161,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dept.Backup();
                 }
             }
         }

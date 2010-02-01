@@ -8,13 +8,12 @@ namespace CMBC.EasyFactor.ARMgr
 {
     using System;
     using System.Collections;
-    using System.Globalization;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -23,9 +22,25 @@ namespace CMBC.EasyFactor.ARMgr
     {
         #region Fields (3)
 
+        /// <summary>
+        /// 
+        /// </summary>
         private Case _case;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private ARCaseBasic caseBasic;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private OpRefundType refundType;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context;
 
         #endregion Fields
 
@@ -78,6 +93,8 @@ namespace CMBC.EasyFactor.ARMgr
                 column.ReadOnly = true;
             }
             colCheckBox.ReadOnly = false;
+
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -111,6 +128,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 ControlUtil.SetComponetDefault(comp);
             }
+
             this.batchBindingSource.DataSource = typeof(InvoiceRefundBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
@@ -442,7 +460,7 @@ namespace CMBC.EasyFactor.ARMgr
             batch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = batch;
 
-            var queryResult = from invoice in App.Current.DbContext.Invoices
+            var queryResult = from invoice in context.Invoices
                               where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.00000001)
                               select invoice;
             this.invoiceBindingSource.DataSource = queryResult;
@@ -523,7 +541,7 @@ namespace CMBC.EasyFactor.ARMgr
                         }
                         else
                         {
-                            log = App.Current.DbContext.InvoiceRefundLogs.SingleOrDefault(refundlog => refundlog.RefundLogID == invoice.RefundLogID2);
+                            log = context.InvoiceRefundLogs.SingleOrDefault(refundlog => refundlog.RefundLogID == invoice.RefundLogID2);
                             if (log == null)
                             {
                                 throw new Exception("还款ID错误");
@@ -541,7 +559,8 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
 
-                App.Current.DbContext.SubmitChanges();
+                context.InvoiceRefundBatches.Attach(batch);
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -566,7 +585,8 @@ namespace CMBC.EasyFactor.ARMgr
                     Invoice invoice = log.Invoice;
                     invoice.RefundAmount2 = null;
                 }
-                App.Current.DbContext.SubmitChanges();
+
+                context.SubmitChanges();
                 this.caseBasic.CaculateOutstanding(this._case);
             }
         }
@@ -605,6 +625,7 @@ namespace CMBC.EasyFactor.ARMgr
                     cell.Value = 1;
                     ResetRow(i, true);
                 }
+
                 this.StatBatch();
             }
         }
@@ -625,6 +646,7 @@ namespace CMBC.EasyFactor.ARMgr
                     totalRefund += ((Invoice)refundLogList[i]).RefundAmount2.GetValueOrDefault();
                 }
             }
+
             this.tbTotalPayment.Text = String.Format("{0:N2}", totalPayment);
             this.tbTotalRefund.Text = String.Format("{0:N2}", totalRefund);
         }

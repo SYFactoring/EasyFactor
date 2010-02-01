@@ -198,10 +198,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 isGroup = true;
             }
 
-            var queryResult = App.Current.DbContext.ClientCreditLines.Where(c =>
+            DBDataContext context = new DBDataContext();
+            var queryResult = context.ClientCreditLines.Where(c =>
                 c.Client.ClientEDICode.Contains(clientEDICode)
              && (c.Client.ClientNameCN.Contains(clientName) || c.Client.ClientNameEN.Contains(clientName))
              && (isGroup == true ? c.Client.GroupClients.Count > 0 : true));
+
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }

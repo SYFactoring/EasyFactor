@@ -22,6 +22,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
         private BindingSource bs;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Constructors (1)
@@ -36,6 +38,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactorCreditLines.DataSource = this.bs;
             this.dgvFactorCreditLines.AutoGenerateColumns = false;
             ControlUtil.SetDoubleBuffered(this.dgvFactorCreditLines);
+
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -99,7 +103,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             string factorCode = this.tbFactorCode.Text;
             string factorName = this.tbFactorName.Text;
 
-            var queryResult = App.Current.DbContext.FactorCreditLines.Where(f => f.Factor.FactorCode.Contains(factorCode) && (f.Factor.CompanyNameCN.Contains(factorName) || f.Factor.CompanyNameEN.Contains(factorName)));
+            var queryResult = context.FactorCreditLines.Where(f => f.Factor.FactorCode.Contains(factorCode) && (f.Factor.CompanyNameCN.Contains(factorName) || f.Factor.CompanyNameEN.Contains(factorName)));
             this.bs.DataSource = queryResult;
         }
 

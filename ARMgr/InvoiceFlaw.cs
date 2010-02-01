@@ -1,19 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using CMBC.EasyFactor.DB.dbml;
-using CMBC.EasyFactor.Utils;
-
+﻿
 namespace CMBC.EasyFactor.ARMgr
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Windows.Forms;
+    using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class InvoiceFlaw : DevComponents.DotNetBar.Office2007Form
     {
-        private BindingSource bs = new BindingSource();
+        /// <summary>
+        /// 
+        /// </summary>
+        private BindingSource bs;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context;
 
         public InvoiceFlaw(List<Invoice> invoiceList, string index)
             : this(invoiceList)
@@ -40,6 +47,7 @@ namespace CMBC.EasyFactor.ARMgr
             InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
             this.dgvInvoices.AutoGenerateColumns = false;
+            this.bs = new BindingSource();
             this.dgvInvoices.DataSource = bs;
 
             this.flawReasonCheckedListBox.DataSource = FlawReason.GetAllFlawReasons();
@@ -47,10 +55,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.flawReasonCheckedListBox.ValueMember = "Index";
 
             bs.DataSource = invoiceList;
-            foreach (Invoice invoice in invoiceList)
-            {
-                invoice.Backup();
-            }
+
+            this.context = new DBDataContext();
         }
 
         /// <summary>
@@ -60,11 +66,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void CloseFlaw(object sender, EventArgs e)
         {
-            foreach (Invoice invoice in this.bs.List)
-            {
-                invoice.Restore();
-            }
-
             this.Close();
         }
 
@@ -100,10 +101,10 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             bool isUpdateOK = true;
-
             try
             {
-                App.Current.DbContext.SubmitChanges();
+                context.Invoices.AttachAll((List<Invoice>)this.bs.List);
+                context.SubmitChanges();
             }
             catch (Exception e2)
             {
@@ -114,12 +115,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (isUpdateOK)
             {
                 MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                foreach (Invoice invoice in this.bs.List)
-                {
-                    invoice.Backup();
-                }
             }
-
         }
 
         /// <summary>

@@ -987,7 +987,7 @@ namespace CMBC.EasyFactor.Utils
                     e.Cancel = true;
                     return -1;
                 }
-
+                
                 Invoice invoice = (Invoice)exportData[row];
                 StringBuilder sb = new StringBuilder();
                 Case curCase = invoice.InvoiceAssignBatch.Case;
@@ -995,7 +995,7 @@ namespace CMBC.EasyFactor.Utils
                 sb.Append("MSG09").Append(',');
                 sb.Append(curCase.SellerFactorCode).Append(',');
                 sb.Append(curCase.BuyerFactorCode).Append(',');
-                sb.Append(User.GetEDIAccount(curCase.CreateUserName)).Append(',');
+                sb.Append(User.GetEDIAccount(invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
                 sb.Append(',');
                 sb.Append(',');
                 sb.Append(',');

@@ -14,7 +14,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class FactorCreditLine : BaseObject
+    public partial class FactorCreditLine 
     {
         #region Properties (3)
 

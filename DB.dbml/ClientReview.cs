@@ -12,7 +12,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class ClientReview : BaseObject
+    public partial class ClientReview
     {
         private static Regex ReviewNoRegex = new Regex(@"^[A-Z]{2}\d{8}-\d{4}[A-Z]{2,3}-[A-Z]{2}$");
 

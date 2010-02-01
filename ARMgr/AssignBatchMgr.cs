@@ -36,6 +36,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Enums (1)
@@ -95,6 +97,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.opBatchType = batchType;
             ControlUtil.SetDoubleBuffered(this.dgvBatches);
 
+            this.UpdateContextMenu();
+            this.context = new DBDataContext();
+
             if (this.opBatchType == OpBatchType.CHECK)
             {
                 this.cbCheckStatus.Text = "未复核";
@@ -107,8 +112,6 @@ namespace CMBC.EasyFactor.ARMgr
                 this.cbCheckStatus.Text = "已复核";
                 this.QueryBatch(null, null);
             }
-
-            this.UpdateContextMenu();
         }
 
         #endregion Constructors
@@ -166,7 +169,8 @@ namespace CMBC.EasyFactor.ARMgr
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
-            App.Current.DbContext.SubmitChanges();
+            context.InvoiceAssignBatches.Attach(batch);
+            context.SubmitChanges();
         }
 
         /// <summary>
@@ -198,10 +202,10 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            App.Current.DbContext.InvoiceAssignBatches.DeleteOnSubmit(selectedBatch);
+            context.InvoiceAssignBatches.DeleteOnSubmit(selectedBatch);
             try
             {
-                App.Current.DbContext.SubmitChanges();
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -296,7 +300,7 @@ namespace CMBC.EasyFactor.ARMgr
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
 
-            IEnumerable<InvoiceAssignBatch> queryResult = App.Current.DbContext.InvoiceAssignBatches.Where(i =>
+            IEnumerable<InvoiceAssignBatch> queryResult = context.InvoiceAssignBatches.Where(i =>
                     (i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text))
                 && (beginDate != this.dateFrom.MinDate ? i.AssignDate >= beginDate : true)
                 && (endDate != this.dateTo.MinDate ? i.AssignDate <= endDate : true)
@@ -335,7 +339,8 @@ namespace CMBC.EasyFactor.ARMgr
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
-            App.Current.DbContext.SubmitChanges();
+            context.InvoiceAssignBatches.Attach(batch);
+            context.SubmitChanges();
         }
 
         /// <summary>

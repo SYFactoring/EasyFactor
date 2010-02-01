@@ -14,7 +14,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class InvoiceAssignBatch : BaseObject
+    public partial class InvoiceAssignBatch 
     {
         #region Properties (7)
 

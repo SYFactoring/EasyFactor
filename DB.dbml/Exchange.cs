@@ -32,7 +32,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         static Exchange()
         {
-            _exchangeList = App.Current.DbContext.Exchanges.ToList();
+            DBDataContext context = new DBDataContext();
+            _exchangeList = context.Exchanges.ToList();
         }
 
         #endregion Constructors

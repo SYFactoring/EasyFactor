@@ -34,6 +34,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private ARCaseBasic caseBasic;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Constructors (1)
@@ -50,6 +52,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.superValidator.Enabled = false;
             this.dgvInvoices.ReadOnly = true;
             ControlUtil.SetDoubleBuffered(this.dgvInvoices);
+
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -547,7 +551,7 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
 
-                if (App.Current.DbContext.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo) != null)
+                if (context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo) != null)
                 {
                     MessageBox.Show("发票号已存在: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -612,8 +616,8 @@ namespace CMBC.EasyFactor.ARMgr
                         flawList.Add(invoice);
                     }
                 }
-
-                App.Current.DbContext.SubmitChanges();
+                context.InvoiceAssignBatches.Attach(batch);
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {

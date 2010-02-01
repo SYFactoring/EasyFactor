@@ -14,7 +14,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class CDA : BaseObject
+    public partial class CDA
     {
         #region Properties (7)
 
@@ -191,20 +191,21 @@ namespace CMBC.EasyFactor.DB.dbml
                 return string.Empty;
             }
 
+            DBDataContext context = new DBDataContext();
             Contract contract = selectedCase.SellerClient.Contract;
             if (contract != null)
             {
                 if (contract.ContractType == "新合同")
                 {
-                    var queryResult = from cda in App.Current.DbContext.CDAs
+                    var queryResult = from cda in context.CDAs
                                       where cda.CDACode.StartsWith(contract.ContractCode)
                                       select cda.CDACode;
-                    int count =0 ;
-                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(no.LastIndexOf("-")+1)), out count))
+                    int count = 0;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(no.LastIndexOf("-") + 1)), out count))
                     {
                         count = 0;
                     }
-                    
+
                     return String.Format("{0}-{1:000}", contract.ContractCode, count + 1);
                 }
                 else
@@ -214,7 +215,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
             else if (selectedCase.TransactionType == "进口保理")
             {
-                var queryResult = from cda in App.Current.DbContext.CDAs
+                var queryResult = from cda in context.CDAs
                                   where cda.CDACode.StartsWith(selectedCase.CaseCode)
                                   select cda.CDACode;
                 int count = 0;

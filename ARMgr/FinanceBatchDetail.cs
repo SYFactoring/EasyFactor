@@ -26,6 +26,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Enums (1)
@@ -69,9 +71,9 @@ namespace CMBC.EasyFactor.ARMgr
             invoiceMgr.Dock = DockStyle.Fill;
             this.panelInvoices.Controls.Add(invoiceMgr);
 
-            batch.Backup();
-
             this.UpdateBatchControlStatus();
+
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -79,17 +81,6 @@ namespace CMBC.EasyFactor.ARMgr
         #region Methods (6)
 
         // Private Methods (6) 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BatchDetail_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
-            batch.Restore();
-        }
 
         /// <summary>
         /// 
@@ -125,18 +116,20 @@ namespace CMBC.EasyFactor.ARMgr
             bool isUpdateOK = true;
             try
             {
-                App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                context.InvoiceFinanceBatches.Attach(batch);
+                context.SubmitChanges(ConflictMode.ContinueOnConflict);
             }
             catch (ChangeConflictException)
             {
-                foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                foreach (ObjectChangeConflict cc in context.ChangeConflicts)
                 {
                     foreach (MemberChangeConflict mc in cc.MemberConflicts)
                     {
                         mc.Resolve(RefreshMode.KeepChanges);
                     }
                 }
-                App.Current.DbContext.SubmitChanges();
+
+                context.SubmitChanges();
             }
             catch (Exception e2)
             {
@@ -147,7 +140,6 @@ namespace CMBC.EasyFactor.ARMgr
             if (isUpdateOK)
             {
                 MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                batch.Backup();
             }
         }
 

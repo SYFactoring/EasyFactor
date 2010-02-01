@@ -7,6 +7,7 @@
 namespace CMBC.EasyFactor.InfoMgr.UserMgr
 {
     using System;
+    using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
@@ -22,6 +23,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// 
         /// </summary>
         private OpUserType opUserType;
+
+        private DBDataContext context;
 
         #endregion Fields
 
@@ -75,12 +78,11 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             {
                 password2TextBox.Text = user.Password;
                 userBindingSource.DataSource = user;
-                user.Backup();
 
                 for (int i = 0; i < this.cbPermission.Items.Count; i++)
                 {
                     Permission item = ((PermissionItem)this.cbPermission.Items[i]).Permission;
-                    if (PermUtil.ValidatePermission(user,item))
+                    if (PermUtil.ValidatePermission(user, item))
                     {
                         this.cbPermission.SetItemChecked(i, true);
                     }
@@ -89,6 +91,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
             this.tabControl.SelectedTab = this.tabItemUser;
             this.UpdateUserControlStatus();
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -107,7 +110,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             if (opUserType == OpUserType.UPDATE_USER)
             {
                 User user = this.userBindingSource.DataSource as User;
-                user.Restore();
+                DBDataContext context = new DBDataContext();
+                this.userBindingSource.DataSource = context.Users.SingleOrDefault(u => u.UserID == user.UserID);
             }
             else if (opUserType == OpUserType.NEW_USER)
             {
@@ -142,8 +146,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 bool isAddOK = true;
                 try
                 {
-                    App.Current.DbContext.Users.InsertOnSubmit(user);
-                    App.Current.DbContext.SubmitChanges();
+                    context.Users.InsertOnSubmit(user);
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -154,7 +158,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    user.Backup();
                     opUserType = OpUserType.UPDATE_USER;
                 }
             }
@@ -163,7 +166,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    App.Current.DbContext.SubmitChanges();
+                    context.Users.Attach(user);
+                    context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -174,7 +178,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    user.Backup();
                 }
             }
         }
@@ -188,7 +191,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         {
             opUserType = OpUserType.UPDATE_USER;
             UpdateUserControlStatus();
-
         }
 
         /// <summary>
@@ -229,20 +231,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             }
 
             this.loginDate.ReadOnly = true;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UserDetail_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            User user = (User)this.userBindingSource.DataSource;
-            if (opUserType == OpUserType.UPDATE_USER)
-            {
-                user.Restore();
-            }
         }
 
         #endregion Methods

@@ -16,28 +16,29 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Country
     {
-		#region Fields (1) 
+        #region Fields (1)
 
         /// <summary>
         /// 
         /// </summary>
         private static readonly List<Country> _countryList;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes static members of the Country class
         /// </summary>
         static Country()
         {
-            _countryList = App.Current.DbContext.Countries.ToList();
+            DBDataContext context = new DBDataContext();
+            _countryList = context.Countries.ToList();
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Gets
@@ -61,11 +62,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (1) 
+        #region Methods (1)
 
-		// Public Methods (1) 
+        // Public Methods (1) 
 
         /// <summary>
         /// 
@@ -76,6 +77,6 @@ namespace CMBC.EasyFactor.DB.dbml
             return _countryList;
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

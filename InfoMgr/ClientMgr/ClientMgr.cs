@@ -31,6 +31,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpClientMgrType opClientMgrType;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Enums (1)
@@ -117,6 +119,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbDepartment.SelectedIndex = -1;
 
             this.UpdateContextMenu();
+
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -214,10 +218,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     return;
                 }
 
-                App.Current.DbContext.Clients.DeleteOnSubmit(selectedClient);
+                context.Clients.DeleteOnSubmit(selectedClient);
                 try
                 {
-                    App.Current.DbContext.SubmitChanges();
+                    context.SubmitChanges();
                 }
                 catch (SqlException e1)
                 {
@@ -338,7 +342,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             string caseType = this.cbCaseType.Text;
 
-            var queryResult = App.Current.DbContext.Clients.Where(c =>
+            var queryResult = context.Clients.Where(c =>
                      ((c.BranchCode == null ? string.Empty : c.Department.DepartmentName).Contains(department))
                   && ((c.PMName == null ? string.Empty : c.PMName).Contains(tbPM.Text))
                   && ((c.RMName == null ? string.Empty : c.RMName).Contains(tbRM.Text))

@@ -27,6 +27,8 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCDAType opCDAType;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Enums (1)
@@ -110,6 +112,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.commissionTypeComboBox.Items.AddRange(new string[] { "按转让金额", "按融资金额", "其他" });
             this.cDAStatusComboBox.Items.AddRange(new string[] { ConstStr.CDA.NO_CHECK, ConstStr.CDA.CHECKED, ConstStr.CDA.REJECT, ConstStr.CDA.SIGNED, ConstStr.CDA.INVALID });
 
+            this.context = new DBDataContext();
+
             if (opCDAType == OpCDAType.NEW_CDA)
             {
                 cda = GenerateDefaultCDA(null);
@@ -135,12 +139,15 @@ namespace CMBC.EasyFactor.CaseMgr
                         }
                     }
                 }
-                cda.Backup();
             }
 
             this.UpdateCDAControlStatus();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="opCDAType"></param>
         public CDADetail(OpCDAType opCDAType)
             : this((CDA)null, opCDAType)
         {
@@ -187,19 +194,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        private void CDADetail_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            CDA cda = this.CDABindingSource.DataSource as CDA;
-            if (opCDAType == OpCDAType.UPDATE_CDA)
-            {
-                cda.Restore();
-            }
-            if (cda.CDACode == null)
-            {
-                cda.Case = null;
-            }
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -225,6 +219,11 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void customValidator2_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             CDA cda = this.CDABindingSource.DataSource as CDA;
@@ -257,6 +256,11 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void customValidator3_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             CDA cda = this.CDABindingSource.DataSource as CDA;
@@ -276,6 +280,11 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void customValidator4_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             CDA cda = this.CDABindingSource.DataSource as CDA;
@@ -318,6 +327,11 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void customValidator5_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             CDA cda = this.CDABindingSource.DataSource as CDA;
@@ -336,6 +350,11 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void customValidator6_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             CDA cda = this.CDABindingSource.DataSource as CDA;
@@ -427,6 +446,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
+
             ClientDetail clientDetail = new ClientDetail(cda.Case.BuyerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
             clientDetail.Show();
         }
@@ -443,6 +463,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
+
             CaseDetail caseDetail = new CaseDetail(cda.Case, CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.Show();
         }
@@ -459,6 +480,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
+
             if (cda.Case.SellerClient.Contract != null)
             {
                 ClientDetail clientDetail = new ClientDetail(cda.Case.SellerClient.Contract, ClientDetail.OpContractType.DETAIL_CONTRACT);
@@ -514,6 +536,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
+
             ClientDetail clientDetail = new ClientDetail(cda.Case.SellerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
             clientDetail.Show();
         }
@@ -750,7 +773,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 cda.CreateUserName = App.Current.CurUser.Name;
                 try
                 {
-                    App.Current.DbContext.SubmitChanges();
+                    context.CDAs.InsertOnSubmit(cda);
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -762,12 +786,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 if (isAddOK)
                 {
                     MessageBox.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    cda.Backup();
                     if (cda.Case.CaseMark == ConstStr.CASE.APPLICATION)
                     {
                         cda.Case.CaseMark = ConstStr.CASE.ENABLE;
-                        App.Current.DbContext.SubmitChanges();
+                        context.SubmitChanges();
                     }
+
                     if (cda.CDAStatus == ConstStr.CDA.SIGNED)
                     {
                         foreach (CDA c in cda.Case.CDAs)
@@ -777,7 +801,8 @@ namespace CMBC.EasyFactor.CaseMgr
                                 c.CDAStatus = ConstStr.CDA.INVALID;
                             }
                         }
-                        App.Current.DbContext.SubmitChanges();
+
+                        context.SubmitChanges();
                     }
                     this.opCDAType = OpCDAType.UPDATE_CDA;
                 }
@@ -792,18 +817,20 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 try
                 {
-                    App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    context.CDAs.Attach(cda);
+                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
                             mc.Resolve(RefreshMode.KeepChanges);
                         }
                     }
-                    App.Current.DbContext.SubmitChanges();
+
+                    context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -814,7 +841,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    cda.Backup();
                     if (cda.CDAStatus == ConstStr.CDA.SIGNED)
                     {
                         foreach (CDA c in cda.Case.CDAs)
@@ -824,7 +850,8 @@ namespace CMBC.EasyFactor.CaseMgr
                                 c.CDAStatus = ConstStr.CDA.INVALID;
                             }
                         }
-                        App.Current.DbContext.SubmitChanges();
+
+                        context.SubmitChanges();
                     }
                 }
             }

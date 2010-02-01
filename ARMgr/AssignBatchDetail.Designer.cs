@@ -561,7 +561,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.Name = "AssignBatchDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "转让批次信息";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BatchDetail_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.panelBatch.ResumeLayout(false);

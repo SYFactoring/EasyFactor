@@ -105,11 +105,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.btnUpdate = new DevComponents.DotNetBar.ButtonX();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必选");
             this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             departmentCodeLabel = new DevComponents.DotNetBar.LabelX();
             departmentNameLabel = new DevComponents.DotNetBar.LabelX();
             domainLabel = new DevComponents.DotNetBar.LabelX();
@@ -661,15 +661,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.superValidator.ErrorProvider = this.errorProvider;
             this.superValidator.Highlighter = this.highlighter;
             // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
-            // 
-            // highlighter
-            // 
-            this.highlighter.ContainerControl = this;
-            // 
             // requiredFieldValidator1
             // 
             this.requiredFieldValidator1.ErrorMessage = "必填";
@@ -684,6 +675,15 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.requiredFieldValidator3.ErrorMessage = "必填";
             this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
             // 
             // DepartmentDetail
             // 
@@ -700,7 +700,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.Name = "DepartmentDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "部门信息";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DepartmentDetail_FormClosing);
             this.groupPanelDepartment.ResumeLayout(false);
             this.groupPanelDepartment.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.departmentBindingSource)).EndInit();

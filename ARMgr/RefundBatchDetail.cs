@@ -26,6 +26,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Enums (1)
@@ -66,8 +68,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = batch;
             this.bs.DataSource = batch.InvoiceRefundLogs;
 
-            batch.Backup();
             this.UpdateBatchControlStatus();
+
+            this.context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -75,17 +78,6 @@ namespace CMBC.EasyFactor.ARMgr
         #region Methods (7)
 
         // Private Methods (7) 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BatchDetail_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            InvoiceRefundBatch batch = (InvoiceRefundBatch)this.batchBindingSource.DataSource;
-            batch.Restore();
-        }
 
         /// <summary>
         /// 
@@ -109,15 +101,16 @@ namespace CMBC.EasyFactor.ARMgr
                 Invoice invoice = log.Invoice;
                 log.Invoice = null;
                 invoice.CaculateRefund();
-                App.Current.DbContext.InvoiceRefundLogs.DeleteOnSubmit(log);
-                App.Current.DbContext.SubmitChanges();
+                context.InvoiceRefundLogs.DeleteOnSubmit(log);
+                context.SubmitChanges();
             }
             catch (Exception e1)
             {
                 MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            dgvRefundLogs.Rows.RemoveAt(this.dgvRefundLogs.SelectedRows[0].Index);
+
+            this.dgvRefundLogs.Rows.RemoveAt(this.dgvRefundLogs.SelectedRows[0].Index);
         }
 
         /// <summary>
@@ -165,18 +158,20 @@ namespace CMBC.EasyFactor.ARMgr
             bool isUpdateOK = true;
             try
             {
-                App.Current.DbContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                context.InvoiceRefundBatches.Attach(batch);
+                context.SubmitChanges(ConflictMode.ContinueOnConflict);
             }
             catch (ChangeConflictException)
             {
-                foreach (ObjectChangeConflict cc in App.Current.DbContext.ChangeConflicts)
+                foreach (ObjectChangeConflict cc in context.ChangeConflicts)
                 {
                     foreach (MemberChangeConflict mc in cc.MemberConflicts)
                     {
                         mc.Resolve(RefreshMode.KeepChanges);
                     }
                 }
-                App.Current.DbContext.SubmitChanges();
+
+                context.SubmitChanges();
             }
             catch (Exception e2)
             {
@@ -187,7 +182,6 @@ namespace CMBC.EasyFactor.ARMgr
             if (isUpdateOK)
             {
                 MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                batch.Backup();
             }
         }
 

@@ -48,7 +48,7 @@ namespace CMBC.EasyFactor
         /// <returns></returns>
         public bool PreLogin()
         {
-            DBDataContext context = App.Current.DbContext;
+            DBDataContext context = new DBDataContext();
             try
             {
                 if (context.DatabaseExists())
@@ -93,7 +93,8 @@ namespace CMBC.EasyFactor
 
             string uid = this.tbUserId.Text.Trim();
             string pass = this.tbPassword.Text.Trim();
-            User curUser = App.Current.DbContext.Users.SingleOrDefault(u => u.UserID == uid);
+            DBDataContext context = new DBDataContext();
+            User curUser = context.Users.SingleOrDefault(u => u.UserID == uid);
 
             if (curUser != null)
             {
@@ -104,7 +105,7 @@ namespace CMBC.EasyFactor
                 }
 
                 curUser.LoginDate = DateTime.Now;
-                App.Current.DbContext.SubmitChanges();
+                context.SubmitChanges();
                 App.Current.CurUser = curUser;
                 this.DialogResult = DialogResult.OK;
             }

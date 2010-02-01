@@ -22,6 +22,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
         private BindingSource bs;
 
+        private DBDataContext context;
+
         #endregion Fields
 
         #region Constructors (1)
@@ -39,6 +41,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             ControlUtil.SetDoubleBuffered(this.dgvUsers);
 
             this.UpdateContextMenu();
+            context = new DBDataContext();
         }
 
         #endregion Constructors
@@ -103,11 +106,11 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             User selectedUser = (User)this.bs.List[this.dgvUsers.SelectedRows[0].Index];
             if (MessageBox.Show("是否确定删除帐号: " + selectedUser.UserID, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                App.Current.DbContext.Users.DeleteOnSubmit(selectedUser);
+                context.Users.DeleteOnSubmit(selectedUser);
                 bool isDeleteOK = true;
                 try
                 {
-                    App.Current.DbContext.SubmitChanges();
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -118,7 +121,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
                 if (isDeleteOK)
                 {
-                    this.dgvUsers.Rows.RemoveAt(dgvUsers.SelectedRows[0].Index);
+                    this.dgvUsers.Rows.RemoveAt(this.dgvUsers.SelectedRows[0].Index);
                 }
             }
         }
@@ -174,7 +177,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void QueryUsers(object sender, System.EventArgs e)
         {
-            var queryResult = App.Current.DbContext.Users.Where(u => u.UserID.Contains(tbUserID.Text));
+            var queryResult = context.Users.Where(u => u.UserID.Contains(tbUserID.Text));
             bs.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
@@ -186,7 +189,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void SelectUser(object sender, EventArgs e)
         {
-            if (dgvUsers.SelectedRows.Count == 0)
+            if (this.dgvUsers.SelectedRows.Count == 0)
             {
                 return;
             }
