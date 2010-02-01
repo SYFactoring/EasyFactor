@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.ComponentModel;
 
     /// <summary>
     /// 
@@ -88,7 +89,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                              group dept by dept.Location into depts
                              select new { Location = depts.Key, Departments = depts };
 
-                List<City> locations = new List<City>();
+                SortableBindingList<City> locations = new SortableBindingList<City>();
+                
                 foreach (var loc in result)
                 {
                     locations.Add(new City(loc.Location, loc.Departments.ToList()));
