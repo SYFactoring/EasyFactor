@@ -27,6 +27,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCDAType opCDAType;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private DBDataContext context;
 
         #endregion Fields
@@ -112,8 +115,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.commissionTypeComboBox.Items.AddRange(new string[] { "按转让金额", "按融资金额", "其他" });
             this.cDAStatusComboBox.Items.AddRange(new string[] { ConstStr.CDA.NO_CHECK, ConstStr.CDA.CHECKED, ConstStr.CDA.REJECT, ConstStr.CDA.SIGNED, ConstStr.CDA.INVALID });
 
-            this.context = new DBDataContext();
-
             if (opCDAType == OpCDAType.NEW_CDA)
             {
                 cda = GenerateDefaultCDA(null);
@@ -142,6 +143,8 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             this.UpdateCDAControlStatus();
+            this.context = new DBDataContext();
+            this.context.CDAs.Attach(cda);
         }
 
         /// <summary>
@@ -817,7 +820,6 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 try
                 {
-                    context.CDAs.Attach(cda);
                     context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)

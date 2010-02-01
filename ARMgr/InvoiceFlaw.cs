@@ -57,6 +57,7 @@ namespace CMBC.EasyFactor.ARMgr
             bs.DataSource = invoiceList;
 
             this.context = new DBDataContext();
+            this.context.Invoices.AttachAll(invoiceList);
         }
 
         /// <summary>
@@ -103,7 +104,6 @@ namespace CMBC.EasyFactor.ARMgr
             bool isUpdateOK = true;
             try
             {
-                context.Invoices.AttachAll((List<Invoice>)this.bs.List);
                 context.SubmitChanges();
             }
             catch (Exception e2)

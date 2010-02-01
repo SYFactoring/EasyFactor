@@ -32,6 +32,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCreditCoverNegType opCreditCoverNegType;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private DBDataContext context;
 
         #endregion Fields
@@ -161,14 +164,15 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
             }
 
-            this.UpdateCaseControlStatus();
-            this.UpdateCreditCoverNegControlStatus();
-            this.context = new DBDataContext();
-
             if (opCreditCoverNegType == OpCreditCoverNegType.NEW_CREDIT_COVER_NEG)
             {
                 this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
             }
+
+            this.UpdateCaseControlStatus();
+            this.UpdateCreditCoverNegControlStatus();
+            this.context = new DBDataContext();
+            this.context.Cases.Attach(curCase);
         }
 
         /// <summary>
@@ -675,7 +679,6 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 try
                 {
-                    context.Cases.Attach(curCase);
                     context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)

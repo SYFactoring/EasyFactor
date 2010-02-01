@@ -26,6 +26,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpInvoiceType opInvoiceType;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private DBDataContext context;
 
         #endregion Fields
@@ -129,6 +132,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             this.UpdateInvoiceControlStatus();
             this.context = new DBDataContext();
+            this.context.Invoices.Attach(invoice);
 
             if (opInvoiceType == OpInvoiceType.FLAW)
             {
@@ -378,7 +382,6 @@ namespace CMBC.EasyFactor.ARMgr
             bool isUpdateOK = true;
             try
             {
-                context.Invoices.Attach(invoice);
                 context.SubmitChanges(ConflictMode.ContinueOnConflict);
             }
             catch (ChangeConflictException)

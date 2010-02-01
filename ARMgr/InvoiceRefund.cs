@@ -109,7 +109,8 @@ namespace CMBC.EasyFactor.ARMgr
             set
             {
                 this._case = value;
-                NewBatch(null, null);
+                this.context.Cases.Attach(this._case);
+                this.NewBatch(null, null);
             }
         }
 
@@ -559,7 +560,6 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
 
-                context.InvoiceRefundBatches.Attach(batch);
                 context.SubmitChanges();
             }
             catch (Exception e1)

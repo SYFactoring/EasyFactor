@@ -24,6 +24,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// </summary>
         private OpDepartmentType opDepartmentType;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private DBDataContext context;
 
         #endregion Fields
@@ -68,16 +71,15 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 
             if (opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)
             {
-                this.departmentBindingSource.DataSource = new Department();
+                department = new Department();
             }
-            else
-            {
-                this.departmentBindingSource.DataSource = department;
-            }
+
+            this.departmentBindingSource.DataSource = department;
 
             this.UpdateDepartmentControlStatus();
 
             this.context = new DBDataContext();
+            this.context.Departments.Attach(department);
         }
 
         #endregion Constructors
@@ -149,7 +151,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    context.Departments.Attach(dept);
                     context.SubmitChanges();
                 }
                 catch (Exception e2)

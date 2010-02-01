@@ -50,6 +50,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpReviewType opReviewType;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private DBDataContext context;
 
         #endregion Fields
@@ -189,28 +192,24 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.opContractType = opContractType;
             this.opReviewType = opReviewType;
 
-            this.context = new DBDataContext();
-
             if (opClientType == OpClientType.NEW_CLIENT)
             {
                 client = new Client();
                 this.clientBindingSource.DataSource = client;
             }
-            else
-            {
-                this.clientBindingSource.DataSource = client;
-                this.bsCreditLines.DataSource = client.ClientCreditLines;
-                this.bsContracts.DataSource = client.Contracts;
-                this.bsReviews.DataSource = client.ClientReviews;
 
-                List<Department> deptsList = (List<Department>)this.cbDepartments.DataSource;
-                this.cbDepartments.SelectedIndex = deptsList.IndexOf(client.Department);
-                if (client.ClientGroup != null)
-                {
-                    this.tbGroupNameCN.Text = client.ClientGroup.ClientNameCN;
-                    this.tbGroupNameEN.Text = client.ClientGroup.ClientNameEN;
-                    this.btnGroupCreditLineSelect.Enabled = true;
-                }
+            this.clientBindingSource.DataSource = client;
+            this.bsCreditLines.DataSource = client.ClientCreditLines;
+            this.bsContracts.DataSource = client.Contracts;
+            this.bsReviews.DataSource = client.ClientReviews;
+
+            List<Department> deptsList = (List<Department>)this.cbDepartments.DataSource;
+            this.cbDepartments.SelectedIndex = deptsList.IndexOf(client.Department);
+            if (client.ClientGroup != null)
+            {
+                this.tbGroupNameCN.Text = client.ClientGroup.ClientNameCN;
+                this.tbGroupNameEN.Text = client.ClientGroup.ClientNameEN;
+                this.btnGroupCreditLineSelect.Enabled = true;
             }
 
             if (this.opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
@@ -235,6 +234,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UpdateClientCreditLineControlStatus();
             this.UpdateContractControlStatus();
             this.UpdateReviewControlStatus();
+
+            this.context = new DBDataContext();
+            this.context.Clients.Attach(client);
         }
 
         /// <summary>
@@ -858,7 +860,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 try
                 {
-                    context.Clients.Attach(client);
                     context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
@@ -989,7 +990,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 try
                 {
-                    context.ClientCreditLines.Attach(creditLine);
                     context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
@@ -1123,7 +1123,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 try
                 {
-                    context.Contracts.Attach(contract);
                     context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
@@ -1232,7 +1231,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    context.ClientReviews.Attach(review);
                     context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)

@@ -24,6 +24,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         private OpUserType opUserType;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private DBDataContext context;
 
         #endregion Fields
@@ -72,26 +75,26 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
             if (opType == OpUserType.NEW_USER)
             {
-                userBindingSource.DataSource = new User();
+                user = new User();
             }
-            else
-            {
-                password2TextBox.Text = user.Password;
-                userBindingSource.DataSource = user;
 
-                for (int i = 0; i < this.cbPermission.Items.Count; i++)
+            password2TextBox.Text = user.Password;
+            userBindingSource.DataSource = user;
+
+            for (int i = 0; i < this.cbPermission.Items.Count; i++)
+            {
+                Permission item = ((PermissionItem)this.cbPermission.Items[i]).Permission;
+                if (PermUtil.ValidatePermission(user, item))
                 {
-                    Permission item = ((PermissionItem)this.cbPermission.Items[i]).Permission;
-                    if (PermUtil.ValidatePermission(user, item))
-                    {
-                        this.cbPermission.SetItemChecked(i, true);
-                    }
+                    this.cbPermission.SetItemChecked(i, true);
                 }
             }
 
             this.tabControl.SelectedTab = this.tabItemUser;
             this.UpdateUserControlStatus();
+
             this.context = new DBDataContext();
+            this.context.Users.Attach(user);
         }
 
         #endregion Constructors
@@ -166,7 +169,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    context.Users.Attach(user);
                     context.SubmitChanges();
                 }
                 catch (Exception e2)

@@ -33,6 +33,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private OpFactorType opFactorType;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private DBDataContext context;
 
         #endregion Fields
@@ -113,13 +116,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             if (opFactorType == OpFactorType.NEW_FACTOR)
             {
-                factorBindingSource.DataSource = new Factor();
+                factor = new Factor();
             }
-            else
-            {
-                this.factorBindingSource.DataSource = factor;
-                this.bsCreditLines.DataSource = factor.FactorCreditLines;
-            }
+
+            this.factorBindingSource.DataSource = factor;
+            this.bsCreditLines.DataSource = factor.FactorCreditLines;
 
             if (opFactorCreditLineType == OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE)
             {
@@ -132,6 +133,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.UpdateFactorCreditLineControlStatus();
 
             this.context = new DBDataContext();
+            this.context.Factors.Attach(factor);
         }
 
         /// <summary>
@@ -414,7 +416,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
                 try
                 {
-                    context.Factors.Attach(factor);
                     context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
@@ -505,7 +506,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 {
                     creditLine.Factor = factor;
                     creditLine.CreateUserName = App.Current.CurUser.Name;
-                    context.FactorCreditLines.InsertOnSubmit(creditLine);
                     context.SubmitChanges();
                 }
                 catch (Exception e1)
@@ -541,7 +541,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    context.FactorCreditLines.Attach(creditLine);
                     context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)

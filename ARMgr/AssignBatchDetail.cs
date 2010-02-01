@@ -25,6 +25,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private DBDataContext context;
 
         #endregion Fields
@@ -68,6 +71,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             this.UpdateBatchControlStatus();
             this.context = new DBDataContext();
+            this.context.InvoiceAssignBatches.Attach(batch);
         }
 
         #endregion Constructors
@@ -111,7 +115,6 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
-                context.InvoiceAssignBatches.Attach(batch);
                 context.SubmitChanges(ConflictMode.ContinueOnConflict);
             }
             catch (ChangeConflictException)
