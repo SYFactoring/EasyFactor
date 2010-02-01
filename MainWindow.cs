@@ -914,9 +914,17 @@ namespace CMBC.EasyFactor
 
         #endregion Methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ComputeCommission(object sender, EventArgs e)
         {
-            InvoiceUtil.ComputeCommission();
+            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            {
+                InvoiceUtil.ComputeCommission();
+            }
         }
     }
 }
