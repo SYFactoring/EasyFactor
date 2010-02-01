@@ -336,6 +336,7 @@
     <Compile Include="Utils\ImportForm.Designer.cs">
       <DependentUpon>ImportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\InvoiceUtil.cs" />
     <Compile Include="Utils\PermUtil.cs" />
     <Compile Include="Utils\QueryForm.cs">
       <SubType>Form</SubType>

@@ -107,7 +107,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.handFeeCurrComboBox.SelectedIndex = -1;
 
             this.assignTypeComboBox.Items.AddRange(new string[] { "全部", "部分" });
-            this.commissionTypeComboBox.Items.AddRange(new string[] { "按发票金额", "按融资金额", "其他" });
+            this.commissionTypeComboBox.Items.AddRange(new string[] { "按转让金额", "按融资金额", "其他" });
             this.cDAStatusComboBox.Items.AddRange(new string[] { ConstStr.CDA.NO_CHECK, ConstStr.CDA.CHECKED, ConstStr.CDA.REJECT, ConstStr.CDA.SIGNED, ConstStr.CDA.INVALID });
 
             if (opCDAType == OpCDAType.NEW_CDA)
@@ -650,7 +650,7 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             CDA cda = new CDA();
             cda.CDASignDate = DateTime.Now.Date;
-            cda.CommissionType = "按发票金额";
+            cda.CommissionType = "按转让金额";
             cda.PUGProportion = 1;
             cda.PUGPeriod = 90;
             cda.ReassignGracePeriod = 60;
@@ -664,19 +664,26 @@ namespace CMBC.EasyFactor.CaseMgr
             return cda;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ResetCDA(object sender, EventArgs e)
         {
             foreach (Control comp in this.groupPanelCreditCover.Controls)
             {
                 ControlUtil.SetComponetDefault(comp);
             }
+
             foreach (Control comp in this.groupPanelOther.Controls)
             {
                 ControlUtil.SetComponetDefault(comp);
             }
+
             CDA cda = this.CDABindingSource.DataSource as CDA;
             cda.CDASignDate = DateTime.Now.Date;
-            cda.CommissionType = "按发票金额";
+            cda.CommissionType = "按转让金额";
             cda.PUGProportion = 1;
             cda.PUGPeriod = 90;
             cda.ReassignGracePeriod = 60;

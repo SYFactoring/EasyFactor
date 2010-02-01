@@ -97,7 +97,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (selectedInvoice.Commission.HasValue == false)
             {
-                if (this._case.ActiveCDA.CommissionType == "按发票金额")
+                if (this._case.ActiveCDA.CommissionType == "按转让金额")
                 {
                     selectedInvoice.Commission = selectedInvoice.AssignAmount * this._case.ActiveCDA.Price ?? 0;
                     if (selectedInvoice.Commission.GetValueOrDefault() > 0)

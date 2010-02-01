@@ -1699,7 +1699,7 @@ namespace CMBC.EasyFactor.Utils
                                         }
 
                                         break;
-                                    case "按发票金额":
+                                    case "按转让金额":
                                         invoice.Commission = invoice.AssignAmount * cda.Price;
                                         if (invoice.Commission.HasValue)
                                         {

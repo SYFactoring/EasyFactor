@@ -188,6 +188,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarAnalysisReport = new DevComponents.DotNetBar.RibbonBar();
             this.btnCaseStat = new DevComponents.DotNetBar.ButtonItem();
             this.btnDepartmentStat = new DevComponents.DotNetBar.ButtonItem();
+            this.btnLocationStat = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarTransactionReport = new DevComponents.DotNetBar.RibbonBar();
             this.btnARAssignReport = new DevComponents.DotNetBar.ButtonItem();
             this.btnFinanceReport = new DevComponents.DotNetBar.ButtonItem();
@@ -317,7 +318,7 @@ namespace CMBC.EasyFactor
             this.lblCurrentUser = new DevComponents.DotNetBar.LabelItem();
             this.ribbonDetailPanel = new DevComponents.DotNetBar.Ribbon.RibbonClientPanel();
             this.logoLabel = new DevComponents.DotNetBar.Controls.ReflectionLabel();
-            this.btnLocationStat = new DevComponents.DotNetBar.ButtonItem();
+            this.btnCommissionCompute = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonControl.SuspendLayout();
             this.ribbonPanelReport.SuspendLayout();
             this.ribbonPanelInfoMgr.SuspendLayout();
@@ -339,15 +340,15 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
+            this.ribbonControl.Controls.Add(this.ribbonPanel3);
+            this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
+            this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanelReport);
             this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
-            this.ribbonControl.Controls.Add(this.ribbonPanel3);
-            this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
             this.ribbonControl.Controls.Add(this.ribbonPanel2);
             this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanel1);
-            this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
             this.ribbonControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.ribbonControl.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemInfoMgr,
@@ -404,6 +405,7 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelReport.StyleMouseOver.Class = "";
             this.ribbonPanelReport.TabIndex = 3;
+            this.ribbonPanelReport.Visible = false;
             // 
             // ribbonBarAnalysisReport
             // 
@@ -450,6 +452,13 @@ namespace CMBC.EasyFactor
             this.btnDepartmentStat.SubItemsExpandWidth = 14;
             this.btnDepartmentStat.Text = "分部统计";
             this.btnDepartmentStat.Click += new System.EventHandler(this.StatDepartment);
+            // 
+            // btnLocationStat
+            // 
+            this.btnLocationStat.Name = "btnLocationStat";
+            this.btnLocationStat.SubItemsExpandWidth = 14;
+            this.btnLocationStat.Text = "区域统计";
+            this.btnLocationStat.Click += new System.EventHandler(this.StatLocation);
             // 
             // ribbonBarTransactionReport
             // 
@@ -747,7 +756,6 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanel3.StyleMouseOver.Class = "";
             this.ribbonPanel3.TabIndex = 11;
-            this.ribbonPanel3.Visible = false;
             // 
             // ribbonBarUserMgr
             // 
@@ -764,7 +772,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarUserMgr.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarUserMgr.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnUserMgr});
-            this.ribbonBarUserMgr.Location = new System.Drawing.Point(368, 0);
+            this.ribbonBarUserMgr.Location = new System.Drawing.Point(439, 0);
             this.ribbonBarUserMgr.Name = "ribbonBarUserMgr";
             this.ribbonBarUserMgr.Size = new System.Drawing.Size(74, 93);
             this.ribbonBarUserMgr.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -805,10 +813,11 @@ namespace CMBC.EasyFactor
             this.btnUserImport,
             this.btnDepartmentImport,
             this.btnFactorImport,
-            this.btnExchangeRateImport});
+            this.btnExchangeRateImport,
+            this.btnCommissionCompute});
             this.ribbonBarSystem.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarSystem.Name = "ribbonBarSystem";
-            this.ribbonBarSystem.Size = new System.Drawing.Size(365, 93);
+            this.ribbonBarSystem.Size = new System.Drawing.Size(436, 93);
             this.ribbonBarSystem.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarSystem.TabIndex = 0;
             this.ribbonBarSystem.Text = "管理";
@@ -1864,7 +1873,6 @@ namespace CMBC.EasyFactor
             // 
             // itemReport
             // 
-            this.itemReport.Checked = true;
             this.itemReport.Name = "itemReport";
             this.itemReport.Panel = this.ribbonPanelReport;
             this.itemReport.Text = "报表";
@@ -1877,6 +1885,7 @@ namespace CMBC.EasyFactor
             // 
             // ribbonTabItemSystem
             // 
+            this.ribbonTabItemSystem.Checked = true;
             this.ribbonTabItemSystem.Name = "ribbonTabItemSystem";
             this.ribbonTabItemSystem.Panel = this.ribbonPanel3;
             this.ribbonTabItemSystem.Text = "系统管理";
@@ -2142,12 +2151,12 @@ namespace CMBC.EasyFactor
             this.logoLabel.TabIndex = 0;
             this.logoLabel.Text = "<b><font size=\"+60\"><i>Easy</i><font color=\"#B02B2C\">Factoring</font></font></b>";
             // 
-            // btnLocationStat
+            // btnCommissionCompute
             // 
-            this.btnLocationStat.Name = "btnLocationStat";
-            this.btnLocationStat.SubItemsExpandWidth = 14;
-            this.btnLocationStat.Text = "区域统计";
-            this.btnLocationStat.Click += new System.EventHandler(this.StatLocation);
+            this.btnCommissionCompute.Name = "btnCommissionCompute";
+            this.btnCommissionCompute.SubItemsExpandWidth = 14;
+            this.btnCommissionCompute.Text = "计算手续费";
+            this.btnCommissionCompute.Click += new System.EventHandler(this.ComputeCommission);
             // 
             // MainWindow
             // 
@@ -2181,5 +2190,6 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnCaseStat;
         private DevComponents.DotNetBar.ButtonItem btnDepartmentStat;
         private DevComponents.DotNetBar.ButtonItem btnLocationStat;
+        private DevComponents.DotNetBar.ButtonItem btnCommissionCompute;
     }
 }

@@ -913,5 +913,10 @@ namespace CMBC.EasyFactor
         }
 
         #endregion Methods
+
+        private void ComputeCommission(object sender, EventArgs e)
+        {
+            InvoiceUtil.ComputeCommission();
+        }
     }
 }
