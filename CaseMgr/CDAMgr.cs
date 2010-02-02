@@ -427,7 +427,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "信用风险额度";
                 if (selectedCDA.CreditCover.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr), selectedCDA.CreditCover, TypeUtil.ToPrintCurrencyWord(selectedCDA.CreditCoverCurr), TypeUtil.ConvertToChineseMoney(selectedCDA.CreditCover));
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr), selectedCDA.CreditCover, TypeUtil.ToPrintCurrencyChinese(selectedCDA.CreditCoverCurr), TypeUtil.ConvertToChineseMoney(selectedCDA.CreditCover));
                 }
                 else
                 {
@@ -448,7 +448,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "保理预付款额度";
                 if (selectedCDA.FinanceLine.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(selectedCDA.FinanceLineCurr), selectedCDA.FinanceLine, TypeUtil.ToPrintCurrencyWord(selectedCDA.FinanceLineCurr), TypeUtil.ConvertToChineseMoney(selectedCDA.FinanceLine));
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(selectedCDA.FinanceLineCurr), selectedCDA.FinanceLine, TypeUtil.ToPrintCurrencyChinese(selectedCDA.FinanceLineCurr), TypeUtil.ConvertToChineseMoney(selectedCDA.FinanceLine));
                 }
                 else
                 {
@@ -469,7 +469,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 ClientCreditLine creditLine = selectedCDA.Case.SellerClient.FinanceCreditLine;
                 if (creditLine != null)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(creditLine.CreditLineCurrency), creditLine.CreditLine, TypeUtil.ToPrintCurrencyWord(creditLine.CreditLineCurrency), TypeUtil.ConvertToChineseMoney(creditLine.CreditLine));
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(creditLine.CreditLineCurrency), creditLine.CreditLine, TypeUtil.ToPrintCurrencyChinese(creditLine.CreditLineCurrency), TypeUtil.ConvertToChineseMoney(creditLine.CreditLine));
                 }
 
                 sheet.Cells[row, 1] = "预付比例";
@@ -479,7 +479,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "单据处理费";
                 if (selectedCDA.HandFee.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} 元 （每张发票）", TypeUtil.ToPrintCurrencyWord(selectedCDA.HandFeeCurr), selectedCDA.HandFee);
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} 元 （每张发票）", TypeUtil.ToPrintCurrencyChinese(selectedCDA.HandFeeCurr), selectedCDA.HandFee);
                 }
                 else
                 {

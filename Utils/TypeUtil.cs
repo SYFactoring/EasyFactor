@@ -160,16 +160,13 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         public static string GetExcelCurr(string currency)
         {
-            switch (currency)
+            if ("CNY" == currency)
             {
-                case "CNY":
-                    return "¥#,##0.00";
-                case "USD":
-                    return "$#,##0.00";
-                case "EUR":
-                    return "€#,##0.00";
-                default:
-                    return "#,##0.00";
+                return "¥#,##0.00";
+            }
+            else
+            {
+                return "[$" + currency + "] #,##0.00";
             }
         }
 
@@ -180,17 +177,7 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         public static string GetExcelCurrency(string currency)
         {
-            switch (currency)
-            {
-                case "CNY":
-                    return "[$CNY] #,##0.00";
-                case "USD":
-                    return "[$USD] #,##0.00";
-                case "EUR":
-                    return "[$EUR] #,##0.00";
-                default:
-                    return "#,##0.00";
-            }
+            return "[$" + currency + "] #,##0.00";
         }
 
         /// <summary>
@@ -263,7 +250,7 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public static string ToPrintCurrencyWord(string currency)
+        public static string ToPrintCurrencyChinese(string currency)
         {
             if ("CNY".Equals(currency))
             {
