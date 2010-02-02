@@ -497,7 +497,7 @@ namespace CMBC.EasyFactor.CaseMgr
                         sheet.Cells[row, "N"] = invoice.RefundDate;
                         sheet.Cells[row, "O"] = invoice.Commission;
                         sheet.Cells[row, "P"] = invoice.CommissionDate;
-                        sheet.Cells[row, "Q"] = invoice.Interest;
+                        sheet.Cells[row, "Q"] = invoice.NetInterest;
                         sheet.Cells[row, "R"] = invoice.Comment;
                         if (invoice.InvoiceFinanceBatch != null)
                         {

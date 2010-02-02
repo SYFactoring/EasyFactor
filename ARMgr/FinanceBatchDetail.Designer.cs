@@ -38,7 +38,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Controls.TextBoxX financeRateTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx financeTypeComboBox;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx interestTypeComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX otherIncomeTextBox;
         private DevComponents.DotNetBar.TabControlPanel panelBatch;
         private DevComponents.DotNetBar.TabControlPanel panelInvoices;
@@ -95,7 +94,6 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX rejectReasonLabel;
             DevComponents.DotNetBar.LabelX checkUserNameLabel;
             DevComponents.DotNetBar.LabelX checkDateLabel;
-            DevComponents.DotNetBar.LabelX interestTypeLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FinanceBatchDetail));
             this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl = new DevComponents.DotNetBar.TabControl();
@@ -105,7 +103,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnBatchSave = new DevComponents.DotNetBar.ButtonX();
             this.btnBatchUpdate = new DevComponents.DotNetBar.ButtonX();
             this.factorTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.interestTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.checkDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.checkUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.rejectReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -144,7 +141,6 @@ namespace CMBC.EasyFactor.ARMgr
             rejectReasonLabel = new DevComponents.DotNetBar.LabelX();
             checkUserNameLabel = new DevComponents.DotNetBar.LabelX();
             checkDateLabel = new DevComponents.DotNetBar.LabelX();
-            interestTypeLabel = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -379,20 +375,6 @@ namespace CMBC.EasyFactor.ARMgr
             checkDateLabel.TabIndex = 34;
             checkDateLabel.Text = "复核日:";
             // 
-            // interestTypeLabel
-            // 
-            interestTypeLabel.AutoSize = true;
-            interestTypeLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            interestTypeLabel.BackgroundStyle.Class = "";
-            interestTypeLabel.Location = new System.Drawing.Point(49, 122);
-            interestTypeLabel.Name = "interestTypeLabel";
-            interestTypeLabel.Size = new System.Drawing.Size(59, 16);
-            interestTypeLabel.TabIndex = 35;
-            interestTypeLabel.Text = "收息方式:";
-            // 
             // batchBindingSource
             // 
             this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceFinanceBatch);
@@ -422,8 +404,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBatch.Controls.Add(this.btnBatchSave);
             this.panelBatch.Controls.Add(this.btnBatchUpdate);
             this.panelBatch.Controls.Add(this.factorTextBox);
-            this.panelBatch.Controls.Add(interestTypeLabel);
-            this.panelBatch.Controls.Add(this.interestTypeComboBox);
             this.panelBatch.Controls.Add(checkDateLabel);
             this.panelBatch.Controls.Add(this.checkDateDateTimePicker);
             this.panelBatch.Controls.Add(checkUserNameLabel);
@@ -533,23 +513,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.factorTextBox.Name = "factorTextBox";
             this.factorTextBox.Size = new System.Drawing.Size(121, 20);
             this.factorTextBox.TabIndex = 37;
-            // 
-            // interestTypeComboBox
-            // 
-            this.interestTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "InterestType", true));
-            this.interestTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.interestTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.interestTypeComboBox.FormattingEnabled = true;
-            this.interestTypeComboBox.Items.AddRange(new object[] {
-            "一次性收取",
-            "月结",
-            "季结",
-            "利随本清",
-            "未知"});
-            this.interestTypeComboBox.Location = new System.Drawing.Point(114, 119);
-            this.interestTypeComboBox.Name = "interestTypeComboBox";
-            this.interestTypeComboBox.Size = new System.Drawing.Size(123, 21);
-            this.interestTypeComboBox.TabIndex = 36;
             // 
             // checkDateDateTimePicker
             // 

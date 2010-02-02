@@ -505,8 +505,6 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "融资金额";
                 datasheet.Cells[1, column++] = "手续费";
                 datasheet.Cells[1, column++] = "手续费收取日";
-                datasheet.Cells[1, column++] = "利息";
-                datasheet.Cells[1, column++] = "利息收取日";
                 datasheet.Cells[1, column++] = "备注";
 
                 int size = exportData.Count;
@@ -544,8 +542,6 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.FinanceAmount;
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
                     datasheet.Cells[row + 2, column++] = invoice.CommissionDate;
-                    datasheet.Cells[row + 2, column++] = invoice.Interest;
-                    datasheet.Cells[row + 2, column++] = invoice.InterestDate;
                     datasheet.Cells[row + 2, column++] = invoice.Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
@@ -554,11 +550,11 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 2 || range.Column == 3 || range.Column == 4 || range.Column == 6)
+                    if (range.Column == 2 || range.Column == 3 || range.Column == 4)
                     {
                         range.NumberFormatLocal = "0.00";
                     }
-                    else if (range.Column == 5 || range.Column == 7)
+                    else if (range.Column == 5)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
@@ -778,8 +774,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
                     datasheet.Cells[row + 2, column++] = invoice.CommissionDate;
                     //利息
-                    datasheet.Cells[row + 2, column++] = invoice.Interest;
-                    datasheet.Cells[row + 2, column++] = invoice.InterestDate;
+                    datasheet.Cells[row + 2, column++] = invoice.NetInterest;
                     datasheet.Cells[row + 2, column++] = invoice.Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
@@ -792,7 +787,7 @@ namespace CMBC.EasyFactor.Utils
                     {
                         range.NumberFormatLocal = "0.00";
                     }
-                    else if (range.Column == 5 || range.Column == 12 || range.Column == 13 || range.Column == 23 || range.Column == 24 || range.Column == 30 || range.Column == 37 || range.Column == 42 || range.Column == 44)
+                    else if (range.Column == 5 || range.Column == 12 || range.Column == 13 || range.Column == 23 || range.Column == 24 || range.Column == 30 || range.Column == 37 || range.Column == 42)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }

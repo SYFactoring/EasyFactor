@@ -17,16 +17,17 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class Invoice 
+    public partial class Invoice
     {
-        #region Fields (2)
+        #region Fields (3)
 
         private double? _paymentAmount2;
         private double? _refundAmount2;
+        private static Regex InvoiceNoRegex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>]+$");
 
         #endregion Fields
 
-        #region Properties (21)
+        #region Properties (23)
 
         /// <summary>
         /// Gets
@@ -151,6 +152,95 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     TimeSpan duedays = DateTime.Now.Date - this.FinanceDueDate.Value;
                     return duedays.Days;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets 保理费收入
+        /// </summary>
+        public double? IncomeAmount
+        {
+            get
+            {
+                CDA cda = this.InvoiceAssignBatch.Case.ActiveCDA;
+                if (cda != null)
+                {
+                    return this.Commission.GetValueOrDefault() + cda.HandFee.GetValueOrDefault();
+                }
+                else
+                {
+                    return this.Commission;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? NetInterest
+        {
+            get
+            {
+                if (this.InvoiceFinanceBatch != null)
+                {
+                    double? result = null;
+                    if (this.InvoiceRefundLogs != null)
+                    {
+                        result = 0;
+                        foreach (InvoiceRefundLog log in this.InvoiceRefundLogs)
+                        {
+                            int period = ((log.RefundDate < InvoiceFinanceBatch.FinancePeriodEnd ? log.RefundDate : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                            result += log.RefundAmount * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
+                        }
+                    }
+
+                    if (TypeUtil.GreaterZero(this.FinanceOutstanding))
+                    {
+                        int period = ((DateTime.Today < InvoiceFinanceBatch.FinancePeriodEnd ? DateTime.Today : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                        result += FinanceAmount * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
+                    }
+
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? GrossInterest
+        {
+            get
+            {
+                if (this.InvoiceFinanceBatch != null)
+                {
+                    double? result = null;
+                    if (this.InvoiceRefundLogs != null)
+                    {
+                        result = 0;
+                        foreach (InvoiceRefundLog log in this.InvoiceRefundLogs)
+                        {
+                            int period = ((log.RefundDate < InvoiceFinanceBatch.FinancePeriodEnd ? log.RefundDate : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                            result += log.RefundAmount * (InvoiceFinanceBatch.FinanceRate) / 360 * period;
+                        }
+                    }
+
+                    if (TypeUtil.GreaterZero(this.FinanceOutstanding))
+                    {
+                        int period = ((DateTime.Today < InvoiceFinanceBatch.FinancePeriodEnd ? DateTime.Today : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                        result += FinanceAmount * (InvoiceFinanceBatch.FinanceRate) / 360 * period;
+                    }
+
+                    return result;
                 }
                 else
                 {
@@ -317,25 +407,6 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 return this.InvoiceAssignBatch.Case.TransactionType;
-            }
-        }
-
-        /// <summary>
-        /// Gets 保理费收入
-        /// </summary>
-        public double? IncomeAmount
-        {
-            get
-            {
-                CDA cda = this.InvoiceAssignBatch.Case.ActiveCDA;
-                if (cda != null)
-                {
-                    return this.Commission.GetValueOrDefault() + cda.HandFee.GetValueOrDefault();
-                }
-                else
-                {
-                    return this.Commission;
-                }
             }
         }
 
@@ -585,7 +656,8 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        private static Regex InvoiceNoRegex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>]+$");
+        #endregion Methods
+
         /// <summary>
         /// 
         /// </summary>
@@ -600,7 +672,5 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
-
-        #endregion Methods
     }
 }

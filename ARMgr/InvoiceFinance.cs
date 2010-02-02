@@ -122,22 +122,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CaculateCommissionAndInterest(Invoice invoice)
+        private void CaculateCommission(Invoice invoice)
         {
-            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
-            if (invoice.Interest.HasValue == false)
-            {
-                int period = (batch.FinancePeriodEnd - batch.FinancePeriodBegin).Days;
-                invoice.Interest = invoice.FinanceAmount * (batch.FinanceRate.GetValueOrDefault() - batch.CostRate.GetValueOrDefault()) / 360 * period;
-                invoice.InterestDate = invoice.FinanceDate;
-            }
-
             if (invoice.Commission.HasValue == false)
             {
                 if (this._case.ActiveCDA.CommissionType == "按融资金额")
                 {
-                    invoice.Commission = invoice.FinanceAmount * this._case.ActiveCDA.Price ?? 0;
-                    if (invoice.Commission.GetValueOrDefault() > 0)
+                    invoice.Commission = invoice.FinanceAmount * this._case.ActiveCDA.Price.GetValueOrDefault();
+                    if (TypeUtil.GreaterZero(invoice.Commission))
                     {
                         invoice.CommissionDate = invoice.FinanceDate;
                     }
@@ -325,7 +317,7 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.FinanceDate = batch.FinancePeriodBegin;
                     invoice.FinanceDueDate = batch.FinancePeriodEnd;
 
-                    this.CaculateCommissionAndInterest(invoice);
+                    this.CaculateCommission(invoice);
                     this.ResetRow(e.RowIndex, true);
                 }
                 else
@@ -351,7 +343,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colInterestDate || col == colCommissionDate)
+            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colCommissionDate)
             {
                 DateTime date = (DateTime)e.Value;
                 e.Value = date.ToString("yyyyMMdd");
@@ -379,7 +371,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colInterestDate || col == colCommissionDate)
+            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colCommissionDate)
             {
                 string str = (string)e.Value;
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
@@ -400,7 +392,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colInterestDate || col == colCommissionDate)
+            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colCommissionDate)
             {
                 string str = (string)e.FormattedValue;
                 DateTime result;
@@ -410,7 +402,7 @@ namespace CMBC.EasyFactor.ARMgr
                     e.Cancel = true;
                 }
             }
-            else if (col == colFinanceAmount || col == colInterest || col == colCommission)
+            else if (col == colFinanceAmount || col == colCommission)
             {
                 string str = (string)e.FormattedValue;
                 double result;
@@ -442,7 +434,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (this.dgvInvoices.Columns[e.ColumnIndex] == this.colFinanceAmount)
             {
                 this.StatBatch();
-                this.CaculateCommissionAndInterest((Invoice)this.invoiceBindingSource.List[e.RowIndex]);
+                this.CaculateCommission((Invoice)this.invoiceBindingSource.List[e.RowIndex]);
             }
         }
 
@@ -514,9 +506,9 @@ namespace CMBC.EasyFactor.ARMgr
                     if (invoiceList.Contains(oldInvoice) && oldInvoice.FinanceAmount.HasValue)
                     {
                         cell.Value = 1;
-                        if (oldInvoice.Interest.HasValue == false)
+                        if (oldInvoice.Commission.HasValue == false)
                         {
-                            this.CaculateCommissionAndInterest(oldInvoice);
+                            this.CaculateCommission(oldInvoice);
                         }
                     }
 
@@ -558,8 +550,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             this.dgvInvoices.Rows[rowIndex].Cells["colFinanceAmount"].ReadOnly = !editable;
             this.dgvInvoices.Rows[rowIndex].Cells["colComment"].ReadOnly = !editable;
-            this.dgvInvoices.Rows[rowIndex].Cells["colInterest"].ReadOnly = !editable;
-            this.dgvInvoices.Rows[rowIndex].Cells["colInterestDate"].ReadOnly = !editable;
+
             if (this._case.ActiveCDA.CommissionType == "按融资金额")
             {
                 this.dgvInvoices.Rows[rowIndex].Cells["colCommission"].ReadOnly = !editable;
@@ -571,8 +562,7 @@ namespace CMBC.EasyFactor.ARMgr
                 IList invoiceList = this.invoiceBindingSource.List;
                 Invoice invoice = (Invoice)invoiceList[rowIndex];
                 invoice.FinanceAmount = null;
-                invoice.Interest = null;
-                invoice.InterestDate = null;
+
                 if (this._case.ActiveCDA.CommissionType == "按融资金额")
                 {
                     invoice.Commission = null;
@@ -758,7 +748,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     totalFinance += ((Invoice)invoiceList[i]).FinanceAmount.GetValueOrDefault();
-                    totalInterest += ((Invoice)invoiceList[i]).Interest.GetValueOrDefault();
+                    totalInterest += ((Invoice)invoiceList[i]).NetInterest.GetValueOrDefault();
                 }
             }
 

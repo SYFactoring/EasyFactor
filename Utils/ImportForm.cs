@@ -1759,8 +1759,6 @@ namespace CMBC.EasyFactor.Utils
 
                         //利息
                         column = 42;
-                        invoice.Interest = (System.Nullable<double>)valueArray[row, column++];
-                        invoice.InterestDate = (System.Nullable<DateTime>)valueArray[row, column++];
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
                         result++;
@@ -2041,8 +2039,6 @@ namespace CMBC.EasyFactor.Utils
                     invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
                     invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
                     invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.Interest = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.InterestDate = (System.Nullable<DateTime>)valueArray[row, column++];
                     invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
                     invoiceList.Add(invoice);

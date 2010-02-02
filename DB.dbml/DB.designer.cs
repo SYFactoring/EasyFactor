@@ -10496,10 +10496,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _DisputeOtherReason;
 		
-		private System.Nullable<double> _Interest;
-		
-		private System.Nullable<System.DateTime> _InterestDate;
-		
 		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
 		
 		private EntitySet<InvoiceRefundLog> _InvoiceRefundLogs;
@@ -10596,10 +10592,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFlawOtherReasonChanged();
     partial void OnDisputeOtherReasonChanging(string value);
     partial void OnDisputeOtherReasonChanged();
-    partial void OnInterestChanging(System.Nullable<double> value);
-    partial void OnInterestChanged();
-    partial void OnInterestDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnInterestDateChanged();
     #endregion
 		
 		public Invoice()
@@ -11455,46 +11447,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._DisputeOtherReason = value;
 					this.SendPropertyChanged("DisputeOtherReason");
 					this.OnDisputeOtherReasonChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Interest", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<double> Interest
-		{
-			get
-			{
-				return this._Interest;
-			}
-			set
-			{
-				if ((this._Interest != value))
-				{
-					this.OnInterestChanging(value);
-					this.SendPropertyChanging();
-					this._Interest = value;
-					this.SendPropertyChanged("Interest");
-					this.OnInterestChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_InterestDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<System.DateTime> InterestDate
-		{
-			get
-			{
-				return this._InterestDate;
-			}
-			set
-			{
-				if ((this._InterestDate != value))
-				{
-					this.OnInterestDateChanging(value);
-					this.SendPropertyChanging();
-					this._InterestDate = value;
-					this.SendPropertyChanged("InterestDate");
-					this.OnInterestDateChanged();
 				}
 			}
 		}
