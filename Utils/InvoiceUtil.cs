@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.Utils
             DBDataContext context = new DBDataContext();
             foreach (Invoice invoice in context.Invoices)
             {
-                if (!invoice.Commission.HasValue)
+                if (invoice.Commission.HasValue == false || TypeUtil.EqualsZero(invoice.Commission))
                 {
                     CDA cda = invoice.InvoiceAssignBatch.Case.ActiveCDA;
                     if (cda != null)

@@ -130,9 +130,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemFinanceReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCommissionReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemFlawReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFileCheckList = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFileCheckList = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -225,9 +225,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(577, 31);
+            this.lblCount.Location = new System.Drawing.Point(496, 33);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.Size = new System.Drawing.Size(21, 16);
             this.lblCount.TabIndex = 12;
             // 
             // cbCheckStatus
@@ -560,7 +560,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.toolStripSeparator4,
             this.menuItemMSG09});
             this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(183, 292);
+            this.cmuBatchMgr.Size = new System.Drawing.Size(183, 270);
             // 
             // menuItemBatchSelect
             // 
@@ -640,6 +640,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemFlawReport.Text = "瑕疵通知书";
             this.menuItemFlawReport.Click += new System.EventHandler(this.ReportFlaw);
             // 
+            // menuItemFileCheckList
+            // 
+            this.menuItemFileCheckList.Name = "menuItemFileCheckList";
+            this.menuItemFileCheckList.Size = new System.Drawing.Size(182, 22);
+            this.menuItemFileCheckList.Text = "文件检查单";
+            this.menuItemFileCheckList.Click += new System.EventHandler(this.FileCheckList);
+            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
@@ -651,13 +658,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemMSG09.Size = new System.Drawing.Size(182, 22);
             this.menuItemMSG09.Text = "生成MSG09";
             this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
-            // 
-            // menuItemFileCheckList
-            // 
-            this.menuItemFileCheckList.Name = "menuItemFileCheckList";
-            this.menuItemFileCheckList.Size = new System.Drawing.Size(182, 22);
-            this.menuItemFileCheckList.Text = "文件检查单";
-            this.menuItemFileCheckList.Click += new System.EventHandler(this.FileCheckList);
             // 
             // AssignBatchMgr
             // 
