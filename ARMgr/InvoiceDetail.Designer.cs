@@ -167,6 +167,7 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX lblPaymentBatch;
             DevComponents.DotNetBar.LabelX lblFinanceBatch;
             DevComponents.DotNetBar.LabelX lblAssignBatch;
+            DevComponents.DotNetBar.LabelX grossInterestLbl;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -176,12 +177,12 @@ namespace CMBC.EasyFactor.ARMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceDetail));
-            DevComponents.DotNetBar.LabelX grossInterestLbl;
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelInvoice = new DevComponents.DotNetBar.TabControlPanel();
             this.groupPanelInvoiceProcess = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.tbRefundBatch = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.grossInterestTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tbRefundBatch = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbPaymentBatch = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbFinanceBatch = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbAssignBatch = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -266,7 +267,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.grossInterestTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.refundLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemRefundLogDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.paymentLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemPaymentLogDelete = new System.Windows.Forms.ToolStripMenuItem();
             flawResolveReasonLabel = new DevComponents.DotNetBar.LabelX();
             flawResolveDateLabel = new DevComponents.DotNetBar.LabelX();
             flawResolveUserNameLabel = new DevComponents.DotNetBar.LabelX();
@@ -343,6 +347,8 @@ namespace CMBC.EasyFactor.ARMgr
             ((System.ComponentModel.ISupportInitialize)(this.flawResolveDateDateTimePicker)).BeginInit();
             this.groupPanelFlaw.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.refundLogMgr.SuspendLayout();
+            this.paymentLogMgr.SuspendLayout();
             this.SuspendLayout();
             // 
             // flawResolveReasonLabel
@@ -975,12 +981,26 @@ namespace CMBC.EasyFactor.ARMgr
             lblAssignBatch.TabIndex = 30;
             lblAssignBatch.Text = "转让批次:";
             // 
+            // grossInterestLbl
+            // 
+            grossInterestLbl.AutoSize = true;
+            grossInterestLbl.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            grossInterestLbl.BackgroundStyle.Class = "";
+            grossInterestLbl.Location = new System.Drawing.Point(179, 130);
+            grossInterestLbl.Name = "grossInterestLbl";
+            grossInterestLbl.Size = new System.Drawing.Size(47, 16);
+            grossInterestLbl.TabIndex = 38;
+            grossInterestLbl.Text = "毛利息:";
+            // 
             // tabControl
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelInvoice);
             this.tabControl.Controls.Add(this.tabPanelLog);
+            this.tabControl.Controls.Add(this.tabPanelInvoice);
             this.tabControl.Controls.Add(this.tabPanelEDI);
             this.tabControl.Controls.Add(this.tabControlPanelDispute);
             this.tabControl.Controls.Add(this.tabPanelFlaw);
@@ -1098,6 +1118,22 @@ namespace CMBC.EasyFactor.ARMgr
             this.groupPanelInvoiceProcess.StyleMouseOver.Class = "";
             this.groupPanelInvoiceProcess.TabIndex = 0;
             // 
+            // grossInterestTextBox
+            // 
+            // 
+            // 
+            // 
+            this.grossInterestTextBox.Border.Class = "TextBoxBorder";
+            this.grossInterestTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "GrossInterest", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.grossInterestTextBox.Location = new System.Drawing.Point(231, 128);
+            this.grossInterestTextBox.Name = "grossInterestTextBox";
+            this.grossInterestTextBox.Size = new System.Drawing.Size(119, 20);
+            this.grossInterestTextBox.TabIndex = 39;
+            // 
+            // invoiceBindingSource
+            // 
+            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
+            // 
             // tbRefundBatch
             // 
             // 
@@ -1110,10 +1146,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbRefundBatch.Size = new System.Drawing.Size(100, 20);
             this.tbRefundBatch.TabIndex = 37;
             this.tbRefundBatch.DoubleClick += new System.EventHandler(this.DetailRefundBatch);
-            // 
-            // invoiceBindingSource
-            // 
-            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
             // 
             // tbPaymentBatch
             // 
@@ -1709,6 +1741,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCreditNoteNo,
             this.colCreditNoteDate,
             this.colComment});
+            this.dgvPaymentLogs.ContextMenuStrip = this.paymentLogMgr;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1787,6 +1820,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colRefundAmount,
             this.colRefundDate,
             this.dataGridViewTextBoxColumn2});
+            this.dgvRefundLogs.ContextMenuStrip = this.refundLogMgr;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -2669,31 +2703,33 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // grossInterestLbl
+            // refundLogMgr
             // 
-            grossInterestLbl.AutoSize = true;
-            grossInterestLbl.BackColor = System.Drawing.Color.Transparent;
+            this.refundLogMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemRefundLogDelete});
+            this.refundLogMgr.Name = "cmuContractMgr";
+            this.refundLogMgr.Size = new System.Drawing.Size(153, 48);
             // 
+            // menuItemRefundLogDelete
             // 
+            this.menuItemRefundLogDelete.Name = "menuItemRefundLogDelete";
+            this.menuItemRefundLogDelete.Size = new System.Drawing.Size(152, 22);
+            this.menuItemRefundLogDelete.Text = "&D删除";
+            this.menuItemRefundLogDelete.Click += new System.EventHandler(this.DeleteRefundLog);
             // 
-            grossInterestLbl.BackgroundStyle.Class = "";
-            grossInterestLbl.Location = new System.Drawing.Point(179, 130);
-            grossInterestLbl.Name = "grossInterestLbl";
-            grossInterestLbl.Size = new System.Drawing.Size(47, 16);
-            grossInterestLbl.TabIndex = 38;
-            grossInterestLbl.Text = "毛利息:";
+            // paymentLogMgr
             // 
-            // grossInterestTextBox
+            this.paymentLogMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemPaymentLogDelete});
+            this.paymentLogMgr.Name = "cmuContractMgr";
+            this.paymentLogMgr.Size = new System.Drawing.Size(115, 26);
             // 
+            // menuItemPaymentLogDelete
             // 
-            // 
-            // 
-            this.grossInterestTextBox.Border.Class = "TextBoxBorder";
-            this.grossInterestTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "GrossInterest", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.grossInterestTextBox.Location = new System.Drawing.Point(231, 128);
-            this.grossInterestTextBox.Name = "grossInterestTextBox";
-            this.grossInterestTextBox.Size = new System.Drawing.Size(119, 20);
-            this.grossInterestTextBox.TabIndex = 39;
+            this.menuItemPaymentLogDelete.Name = "menuItemPaymentLogDelete";
+            this.menuItemPaymentLogDelete.Size = new System.Drawing.Size(114, 22);
+            this.menuItemPaymentLogDelete.Text = "删除(&D)";
+            this.menuItemPaymentLogDelete.Click += new System.EventHandler(this.DeletePaymentLog);
             // 
             // InvoiceDetail
             // 
@@ -2743,6 +2779,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.groupPanelFlaw.ResumeLayout(false);
             this.groupPanelFlaw.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            this.refundLogMgr.ResumeLayout(false);
+            this.paymentLogMgr.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2766,5 +2804,9 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colRefundDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DevComponents.DotNetBar.Controls.TextBoxX grossInterestTextBox;
+        private System.Windows.Forms.ContextMenuStrip refundLogMgr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemRefundLogDelete;
+        private System.Windows.Forms.ContextMenuStrip paymentLogMgr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemPaymentLogDelete;
     }
 }

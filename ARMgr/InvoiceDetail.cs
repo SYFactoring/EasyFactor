@@ -19,17 +19,16 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoiceDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (1)
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpInvoiceType opInvoiceType;
+        #region Fields (2)
 
         /// <summary>
         /// 
         /// </summary>
         private DBDataContext context;
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpInvoiceType opInvoiceType;
 
         #endregion Fields
 
@@ -95,6 +94,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             this.dgvPaymentLogs.DataSource = invoice.InvoicePaymentLogs;
             this.dgvRefundLogs.DataSource = invoice.InvoiceRefundLogs;
+
             if (invoice.InvoicePaymentLogs.Count > 0)
             {
                 if (((InvoicePaymentLog)invoice.InvoicePaymentLogs[0]).CreditNote != null)
@@ -142,13 +142,89 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 this.tabControl.SelectedTab = this.tabItemDispute;
             }
+
+            this.UpdateContextMenu();
         }
 
         #endregion Constructors
 
-        #region Methods (13)
+        #region Methods (14)
 
-        // Private Methods (13) 
+        // Private Methods (14) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeletePaymentLog(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
+            if (this.dgvPaymentLogs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            InvoicePaymentLog log = (InvoicePaymentLog)((EntitySet<InvoicePaymentLog>)this.dgvPaymentLogs.DataSource)[this.dgvPaymentLogs.SelectedRows[0].Index];
+
+            try
+            {
+                Invoice invoice = log.Invoice;
+                log.Invoice = null;
+                invoice.CaculatePayment();
+                context.InvoicePaymentLogs.DeleteOnSubmit(log);
+                log.InvoicePaymentBatch.CheckStatus = "未复核";
+                context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.dgvPaymentLogs.Rows.RemoveAt(this.dgvPaymentLogs.SelectedRows[0].Index);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteRefundLog(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
+            if (this.dgvRefundLogs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            InvoiceRefundLog log = (InvoiceRefundLog)((EntitySet<InvoiceRefundLog>)this.dgvRefundLogs.DataSource)[this.dgvRefundLogs.SelectedRows[0].Index];
+
+            try
+            {
+                Invoice invoice = log.Invoice;
+                log.Invoice = null;
+                invoice.CaculateRefund();
+                context.InvoiceRefundLogs.DeleteOnSubmit(log);
+                log.InvoiceRefundBatch.CheckStatus = "未复核";
+                context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.dgvRefundLogs.Rows.RemoveAt(this.dgvRefundLogs.SelectedRows[0].Index);
+        }
 
         /// <summary>
         /// 
@@ -391,6 +467,23 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
+        private void UpdateContextMenu()
+        {
+            if (PermUtil.ValidatePermission(Permission.INVOICE_UPDATE))
+            {
+                this.menuItemPaymentLogDelete.Enabled = true;
+                this.menuItemRefundLogDelete.Enabled = true;
+            }
+            else
+            {
+                this.menuItemPaymentLogDelete.Enabled = false;
+                this.menuItemRefundLogDelete.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void UpdateInvoice(object sender, EventArgs e)
@@ -443,8 +536,6 @@ namespace CMBC.EasyFactor.ARMgr
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                this.assignOutstandingTextBox.ReadOnly = true;
-                this.financeOutstandingTextBox.ReadOnly = true;
             }
 
             foreach (Control comp in this.groupPanelFlaw.Controls)
@@ -468,6 +559,23 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             this.invoiceNoTextBox.ReadOnly = true;
+            this.invoiceCurrencyComboBox.Enabled = false;
+
+            this.assignOutstandingTextBox.ReadOnly = true;
+            this.financeOutstandingTextBox.ReadOnly = true;
+            this.tbAssignBatch.ReadOnly = true;
+            this.tbFinanceBatch.ReadOnly = true;
+            this.tbPaymentBatch.ReadOnly = true;
+            this.tbRefundBatch.ReadOnly = true;
+
+            this.assignDateTextBox.Enabled = false;
+            this.financeDateDateTimePicker.Enabled = false;
+            this.financeDueDateDateTimePicker.Enabled = false;
+            this.paymentDateDateTimePicker.Enabled = false;
+            this.refundDateDateTimePicker.Enabled = false;
+            this.netInterestTextBox.ReadOnly = true;
+            this.grossInterestTextBox.ReadOnly = true;
+
             this.btnFlaw.Enabled = true;
             this.btnFlawResolve.Enabled = true;
             this.isDisputeCheckBox.Enabled = true;

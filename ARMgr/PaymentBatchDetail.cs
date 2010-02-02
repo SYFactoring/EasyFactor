@@ -113,6 +113,7 @@ namespace CMBC.EasyFactor.ARMgr
                 log.Invoice = null;
                 invoice.CaculatePayment();
                 context.InvoicePaymentLogs.DeleteOnSubmit(log);
+                log.InvoicePaymentBatch.CheckStatus = "未复核";
                 context.SubmitChanges();
             }
             catch (Exception e1)
@@ -165,6 +166,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoicePaymentBatch batch = (InvoicePaymentBatch)this.batchBindingSource.DataSource;
+            batch.CheckStatus = "未复核";
 
             bool isUpdateOK = true;
             try

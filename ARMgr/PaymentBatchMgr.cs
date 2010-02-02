@@ -154,6 +154,13 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+
+            if (batch.CheckStatus != "未复核")
+            {
+                MessageBox.Show("此批次已经过复核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             if (MessageBox.Show("是否确认复核通过该批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
@@ -379,6 +386,13 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+
+            if (batch.CheckStatus != "未复核")
+            {
+                MessageBox.Show("此批次已经过复核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             if (MessageBox.Show("是否确认复核退回该批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;

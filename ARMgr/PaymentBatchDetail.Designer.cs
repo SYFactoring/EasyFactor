@@ -283,12 +283,12 @@
             this.cmuLogMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemLogDelete});
             this.cmuLogMgr.Name = "cmuContractMgr";
-            this.cmuLogMgr.Size = new System.Drawing.Size(115, 26);
+            this.cmuLogMgr.Size = new System.Drawing.Size(153, 48);
             // 
             // menuItemLogDelete
             // 
             this.menuItemLogDelete.Name = "menuItemLogDelete";
-            this.menuItemLogDelete.Size = new System.Drawing.Size(114, 22);
+            this.menuItemLogDelete.Size = new System.Drawing.Size(152, 22);
             this.menuItemLogDelete.Text = "删除(&D)";
             this.menuItemLogDelete.Click += new System.EventHandler(this.DeleteLog);
             // 
@@ -296,8 +296,8 @@
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.panelBatch);
             this.tabControl.Controls.Add(this.panelInvoices);
+            this.tabControl.Controls.Add(this.panelBatch);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";

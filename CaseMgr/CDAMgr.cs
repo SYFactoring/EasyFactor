@@ -166,6 +166,12 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             CDA cda = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
+            if (cda.CDAStatus != ConstStr.CDA.NO_CHECK)
+            {
+                MessageBox.Show("此额度通知书已经过审核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             if (MessageBox.Show("是否确认复核通过该额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
@@ -367,6 +373,13 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             CDA cda = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
+
+            if (cda.CDAStatus != ConstStr.CDA.NO_CHECK)
+            {
+                MessageBox.Show("此额度通知书已经过审核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             if (MessageBox.Show("是否确认复核退回该额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;

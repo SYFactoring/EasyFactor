@@ -99,13 +99,16 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
+
             InvoiceRefundLog log = (InvoiceRefundLog)this.bs.List[this.dgvRefundLogs.SelectedRows[0].Index];
+            
             try
             {
                 Invoice invoice = log.Invoice;
                 log.Invoice = null;
                 invoice.CaculateRefund();
                 context.InvoiceRefundLogs.DeleteOnSubmit(log);
+                log.InvoiceRefundBatch.CheckStatus = "未复核";
                 context.SubmitChanges();
             }
             catch (Exception e1)
@@ -158,6 +161,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceRefundBatch batch = (InvoiceRefundBatch)this.batchBindingSource.DataSource;
+            batch.CheckStatus = "未复核";
 
             bool isUpdateOK = true;
             try
