@@ -313,7 +313,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                     else if (range.Column == 4 || range.Column == 5 || range.Column == 8)
                     {
-                        range.NumberFormatLocal = "yyyy/MM/dd";
+                        range.NumberFormatLocal = "yyyy-MM-dd";
                     }
                 }
 
@@ -443,7 +443,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                     else if (range.Column == 4 || range.Column == 11)
                     {
-                        range.NumberFormatLocal = "yyyy/MM/dd";
+                        range.NumberFormatLocal = "yyyy-MM-dd";
                     }
                 }
 
@@ -560,7 +560,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                     else if (range.Column == 5 || range.Column == 7)
                     {
-                        range.NumberFormatLocal = "yyyy/MM/dd";
+                        range.NumberFormatLocal = "yyyy-MM-dd";
                     }
                 }
 
@@ -794,7 +794,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                     else if (range.Column == 5 || range.Column == 12 || range.Column == 13 || range.Column == 23 || range.Column == 24 || range.Column == 30 || range.Column == 37 || range.Column == 42 || range.Column == 44)
                     {
-                        range.NumberFormatLocal = "yyyy/MM/dd";
+                        range.NumberFormatLocal = "yyyy-MM-dd";
                     }
                 }
 
@@ -921,7 +921,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                     else if (range.Column == 5 || range.Column == 6 || range.Column == 9 || range.Column == 10)
                     {
-                        range.NumberFormatLocal = "yyyy/MM/dd";
+                        range.NumberFormatLocal = "yyyy-MM-dd";
                     }
                 }
 
@@ -1142,7 +1142,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                     else if (range.Column == 6)
                     {
-                        range.NumberFormatLocal = "yyyy/MM/dd";
+                        range.NumberFormatLocal = "yyyy-MM-dd";
                     }
                 }
 

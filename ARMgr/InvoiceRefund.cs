@@ -376,7 +376,6 @@ namespace CMBC.EasyFactor.ARMgr
                     DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[i].Cells[0];
                     cell.Value = 0;
                     Invoice oldInvoice = (Invoice)this.invoiceBindingSource.List[i];
-                    int index = invoiceList.IndexOf(oldInvoice);
                     if (invoiceList.Contains(oldInvoice) && oldInvoice.RefundAmount2 > 0)
                     {
                         cell.Value = 1;
