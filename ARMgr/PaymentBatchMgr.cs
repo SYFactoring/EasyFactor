@@ -132,9 +132,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (10)
+        #region Methods (12)
 
-        // Private Methods (10) 
+        // Private Methods (12) 
 
         /// <summary>
         /// 
@@ -281,6 +281,54 @@ namespace CMBC.EasyFactor.ARMgr
         {
             Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgvBatches.RowHeadersWidth - 4, e.RowBounds.Height);
             TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvBatches.RowHeadersDefaultCellStyle.Font, rectangle, dgvBatches.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportMSG11(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+
+            if (selectedBatch.PaymentType != "买方付款")
+            {
+                MessageBox.Show("只有间接付款可以生成MSG12", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG11, selectedBatch.InvoicePaymentLogs);
+            form.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportMSG12(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+
+            if (selectedBatch.PaymentType != "间接付款")
+            {
+                MessageBox.Show("只有间接付款可以生成MSG12", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG12, selectedBatch.InvoicePaymentLogs);
+            form.Show();
         }
 
         /// <summary>

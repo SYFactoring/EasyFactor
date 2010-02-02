@@ -15,7 +15,6 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.Utils;
     using Microsoft.Office.Core;
     using Microsoft.Office.Interop.Excel;
-    using System.Data.Linq;
 
     /// <summary>
     /// 
