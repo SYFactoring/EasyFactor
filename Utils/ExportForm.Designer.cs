@@ -205,6 +205,7 @@ namespace CMBC.EasyFactor.Utils
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "ExportForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "数据导出";
             this.ResumeLayout(false);
             this.PerformLayout();

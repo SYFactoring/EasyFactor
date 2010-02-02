@@ -501,7 +501,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE_BY_BATCH);
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE_BY_BATCH, context);
             importForm.ShowDialog(this);
             IList invoiceList = importForm.ImportedList;
             if (invoiceList != null)
@@ -511,7 +511,6 @@ namespace CMBC.EasyFactor.ARMgr
                     DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[i].Cells[0];
                     cell.Value = 0;
                     Invoice oldInvoice = (Invoice)this.invoiceBindingSource.List[i];
-                    int index = invoiceList.IndexOf(oldInvoice);
                     if (invoiceList.Contains(oldInvoice) && oldInvoice.FinanceAmount.HasValue)
                     {
                         cell.Value = 1;

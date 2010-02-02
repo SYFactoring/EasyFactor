@@ -23,10 +23,30 @@ namespace CMBC.EasyFactor.Utils
     {
         #region Fields (5)
 
+        /// <summary>
+        /// 
+        /// </summary>
         private ApplicationClass app;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private Worksheet datasheet;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private ImportType importType;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private Workbook workbook;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context;
 
         #endregion Fields
 
@@ -121,6 +141,17 @@ namespace CMBC.EasyFactor.Utils
         #endregion Enums
 
         #region Constructors (1)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="importType"></param>
+        /// <param name="context"></param>
+        public ImportForm(ImportType importType, DBDataContext context)
+            : this(importType)
+        {
+            this.context = context;
+        }
 
         /// <summary>
         /// Initializes a new instance of the ImportForm class.
@@ -1914,7 +1945,6 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
             List<Invoice> invoiceList = new List<Invoice>();
-            DBDataContext context = new DBDataContext();
 
             if (valueArray != null)
             {
@@ -1981,7 +2011,6 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
             List<Invoice> invoiceList = new List<Invoice>();
-            DBDataContext context = new DBDataContext();
 
             if (valueArray != null)
             {
@@ -2041,8 +2070,7 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
             List<Invoice> invoiceList = new List<Invoice>();
-            DBDataContext context = new DBDataContext();
-
+ 
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
@@ -2103,7 +2131,6 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
             List<Invoice> invoiceList = new List<Invoice>();
-            DBDataContext context = new DBDataContext();
 
             if (valueArray != null)
             {

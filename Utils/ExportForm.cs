@@ -311,6 +311,10 @@ namespace CMBC.EasyFactor.Utils
                     {
                         range.NumberFormatLocal = "0.00";
                     }
+                    else if (range.Column == 4 || range.Column == 5 || range.Column == 8)
+                    {
+                        range.NumberFormatLocal = "yyyy/MM/dd";
+                    }
                 }
 
                 app.Visible = true;
@@ -437,6 +441,10 @@ namespace CMBC.EasyFactor.Utils
                     {
                         range.NumberFormatLocal = "0.00";
                     }
+                    else if (range.Column == 4 || range.Column == 11)
+                    {
+                        range.NumberFormatLocal = "yyyy/MM/dd";
+                    }
                 }
 
                 app.Visible = true;
@@ -549,6 +557,10 @@ namespace CMBC.EasyFactor.Utils
                     if (range.Column == 2 || range.Column == 3 || range.Column == 4 || range.Column == 6)
                     {
                         range.NumberFormatLocal = "0.00";
+                    }
+                    else if (range.Column == 5 || range.Column == 7)
+                    {
+                        range.NumberFormatLocal = "yyyy/MM/dd";
                     }
                 }
 
@@ -731,12 +743,12 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.CreateUserName;
                     }
                     //融资
-                    column = 26;
+                    column = 27;
                     datasheet.Cells[row + 2, column++] = invoice.FinanceAmount;
                     //付款批次
                     if (invoice.InvoicePaymentLogs.Count > 0)
                     {
-                        column = 27;
+                        column = 28;
                         InvoicePaymentLog log = invoice.InvoicePaymentLogs[0];
                         datasheet.Cells[row + 2, column++] = log.InvoicePaymentBatch.PaymentBatchNo;
                         datasheet.Cells[row + 2, column++] = log.InvoicePaymentBatch.PaymentType;
@@ -746,12 +758,12 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2, column++] = log.InvoicePaymentBatch.CreateUserName;
                     }
                     //付款
-                    column = 33;
+                    column = 34;
                     datasheet.Cells[row + 2, column++] = invoice.PaymentAmount;
                     //还款批次
                     if (invoice.InvoiceRefundLogs.Count > 0)
                     {
-                        column = 34;
+                        column = 35;
                         InvoiceRefundLog log = invoice.InvoiceRefundLogs[0];
                         datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundBatchNo;
                         datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundType;
@@ -760,7 +772,7 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.CreateUserName;
                     }
                     //还款
-                    column = 39;
+                    column = 40;
                     datasheet.Cells[row + 2, column++] = invoice.RefundAmount;
                     //手续费
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
@@ -776,9 +788,13 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 10 || range.Column == 11 || range.Column == 26 || range.Column == 33 || range.Column == 39 || range.Column == 40 || range.Column == 42)
+                    if (range.Column == 10 || range.Column == 11 || range.Column == 27 || range.Column == 34 || range.Column == 40 || range.Column == 41 || range.Column == 43)
                     {
                         range.NumberFormatLocal = "0.00";
+                    }
+                    else if (range.Column == 5 || range.Column == 12 || range.Column == 13 || range.Column == 23 || range.Column == 24 || range.Column == 30 || range.Column == 37 || range.Column == 42 || range.Column == 44)
+                    {
+                        range.NumberFormatLocal = "yyyy/MM/dd";
                     }
                 }
 
@@ -903,6 +919,10 @@ namespace CMBC.EasyFactor.Utils
                     {
                         range.NumberFormatLocal = "0.00";
                     }
+                    else if (range.Column == 5 || range.Column == 6 || range.Column == 9 || range.Column == 10)
+                    {
+                        range.NumberFormatLocal = "yyyy/MM/dd";
+                    }
                 }
 
                 app.Visible = true;
@@ -987,7 +1007,7 @@ namespace CMBC.EasyFactor.Utils
                     e.Cancel = true;
                     return -1;
                 }
-                
+
                 Invoice invoice = (Invoice)exportData[row];
                 StringBuilder sb = new StringBuilder();
                 Case curCase = invoice.InvoiceAssignBatch.Case;
@@ -1119,6 +1139,10 @@ namespace CMBC.EasyFactor.Utils
                     if (range.Column == 2 || range.Column == 3)
                     {
                         range.NumberFormatLocal = "0.00";
+                    }
+                    else if (range.Column == 6)
+                    {
+                        range.NumberFormatLocal = "yyyy/MM/dd";
                     }
                 }
 

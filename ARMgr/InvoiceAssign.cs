@@ -451,7 +451,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN_BY_BATCH);
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN_BY_BATCH, context);
             importForm.ShowDialog(this);
 
             if (importForm.ImportedList != null)
@@ -530,6 +530,8 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             IList invoiceList = this.invoiceBindingSource.List;
+            InvoiceAssignBatch batch = (InvoiceAssignBatch)this.batchBindingSource.DataSource;
+
             if (invoiceList.Count == 0)
             {
                 return;
@@ -554,7 +556,7 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
 
-                if (context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo) != null)
+                if (batch.AssignBatchNo == null && context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo) != null)
                 {
                     MessageBox.Show("发票号已存在: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -601,7 +603,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             bool isSaveOK = true;
-            InvoiceAssignBatch batch = (InvoiceAssignBatch)this.batchBindingSource.DataSource;
+
             List<Invoice> flawList = new List<Invoice>();
             try
             {
