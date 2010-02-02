@@ -12,6 +12,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Data.Linq;
 
     /// <summary>
     /// 
@@ -103,6 +104,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             string factorName = this.tbFactorName.Text;
 
             DBDataContext context = new DBDataContext();
+
             var queryResult = context.FactorCreditLines.Where(f => f.Factor.FactorCode.Contains(factorCode) && (f.Factor.CompanyNameCN.Contains(factorName) || f.Factor.CompanyNameEN.Contains(factorName)));
             this.bs.DataSource = queryResult;
         }

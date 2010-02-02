@@ -204,6 +204,10 @@ namespace CMBC.EasyFactor.CaseMgr
             string createUserName = this.tbCreateUserName.Text;
 
             context = new DBDataContext();
+            if (!PermUtil.ValidatePermission(Permission.BASICINFO_UPDATE))
+            {
+                context.ObjectTrackingEnabled = false;
+            }
 
             var queryResult = from contract in context.Contracts
                               let client = contract.Client

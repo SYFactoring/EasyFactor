@@ -184,18 +184,6 @@ namespace CMBC.EasyFactor
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
-            this.ribbonPanelReport = new DevComponents.DotNetBar.RibbonPanel();
-            this.ribbonBarAnalysisReport = new DevComponents.DotNetBar.RibbonBar();
-            this.btnCaseStat = new DevComponents.DotNetBar.ButtonItem();
-            this.btnDepartmentStat = new DevComponents.DotNetBar.ButtonItem();
-            this.btnLocationStat = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonBarTransactionReport = new DevComponents.DotNetBar.RibbonBar();
-            this.btnARAssignReport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnFinanceReport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnFeeReport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnFlawReport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnCDAReport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnLeger = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanelInfoMgr = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarExchange = new DevComponents.DotNetBar.RibbonBar();
             this.btnExchangeQuery = new DevComponents.DotNetBar.ButtonItem();
@@ -215,6 +203,11 @@ namespace CMBC.EasyFactor
             this.btnDepartmentImport = new DevComponents.DotNetBar.ButtonItem();
             this.btnFactorImport = new DevComponents.DotNetBar.ButtonItem();
             this.btnExchangeRateImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnCommissionCompute = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonPanelHelp = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBarHelp = new DevComponents.DotNetBar.RibbonBar();
+            this.btnHelp = new DevComponents.DotNetBar.ButtonItem();
+            this.btnUserUpdate = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanelMigration = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarInvoiceImport = new DevComponents.DotNetBar.RibbonBar();
             this.btnInvoicesImport = new DevComponents.DotNetBar.ButtonItem();
@@ -230,6 +223,18 @@ namespace CMBC.EasyFactor
             this.btnClientImport = new DevComponents.DotNetBar.ButtonItem();
             this.btnClientReviewImport = new DevComponents.DotNetBar.ButtonItem();
             this.btnFactorImport2 = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonPanelReport = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBarAnalysisReport = new DevComponents.DotNetBar.RibbonBar();
+            this.btnCaseStat = new DevComponents.DotNetBar.ButtonItem();
+            this.btnDepartmentStat = new DevComponents.DotNetBar.ButtonItem();
+            this.btnLocationStat = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarTransactionReport = new DevComponents.DotNetBar.RibbonBar();
+            this.btnARAssignReport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnFinanceReport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnFeeReport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnFlawReport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnCDAReport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnLeger = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanelQuery = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarCaseQuery = new DevComponents.DotNetBar.RibbonBar();
             this.btnContractQuery = new DevComponents.DotNetBar.ButtonItem();
@@ -280,10 +285,6 @@ namespace CMBC.EasyFactor
             this.btnCaseNew = new DevComponents.DotNetBar.ButtonItem();
             this.btnApplicationCaseQuery = new DevComponents.DotNetBar.ButtonItem();
             this.btnCreditCoverNegQuery = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonPanelHelp = new DevComponents.DotNetBar.RibbonPanel();
-            this.ribbonBarHelp = new DevComponents.DotNetBar.RibbonBar();
-            this.btnHelp = new DevComponents.DotNetBar.ButtonItem();
-            this.btnUserUpdate = new DevComponents.DotNetBar.ButtonItem();
             this.itemInfoMgr = new DevComponents.DotNetBar.RibbonTabItem();
             this.ribbonTabItemCaseMgr = new DevComponents.DotNetBar.RibbonTabItem();
             this.itemAccountsReceivableMgr = new DevComponents.DotNetBar.RibbonTabItem();
@@ -318,17 +319,21 @@ namespace CMBC.EasyFactor
             this.lblCurrentUser = new DevComponents.DotNetBar.LabelItem();
             this.ribbonDetailPanel = new DevComponents.DotNetBar.Ribbon.RibbonClientPanel();
             this.logoLabel = new DevComponents.DotNetBar.Controls.ReflectionLabel();
-            this.btnCommissionCompute = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarBatchQuery = new DevComponents.DotNetBar.RibbonBar();
+            this.btnAssignBatchQuery = new DevComponents.DotNetBar.ButtonItem();
+            this.btnFinanceBatchQuery = new DevComponents.DotNetBar.ButtonItem();
+            this.btnPaymentBatchQuery = new DevComponents.DotNetBar.ButtonItem();
+            this.btnRefundBatchQuery = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonControl.SuspendLayout();
-            this.ribbonPanelReport.SuspendLayout();
             this.ribbonPanelInfoMgr.SuspendLayout();
             this.ribbonPanel3.SuspendLayout();
+            this.ribbonPanelHelp.SuspendLayout();
             this.ribbonPanelMigration.SuspendLayout();
+            this.ribbonPanelReport.SuspendLayout();
             this.ribbonPanelQuery.SuspendLayout();
             this.ribbonPanel2.SuspendLayout();
             this.ribbonPanelInvoiceMgr.SuspendLayout();
             this.ribbonPanel1.SuspendLayout();
-            this.ribbonPanelHelp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusbar)).BeginInit();
             this.ribbonDetailPanel.SuspendLayout();
             this.SuspendLayout();
@@ -341,14 +346,14 @@ namespace CMBC.EasyFactor
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
             this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
+            this.ribbonControl.Controls.Add(this.ribbonPanel1);
+            this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
+            this.ribbonControl.Controls.Add(this.ribbonPanel2);
+            this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
+            this.ribbonControl.Controls.Add(this.ribbonPanelReport);
+            this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanel3);
             this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
-            this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
-            this.ribbonControl.Controls.Add(this.ribbonPanelReport);
-            this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
-            this.ribbonControl.Controls.Add(this.ribbonPanel2);
-            this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
-            this.ribbonControl.Controls.Add(this.ribbonPanel1);
             this.ribbonControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.ribbonControl.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemInfoMgr,
@@ -381,163 +386,6 @@ namespace CMBC.EasyFactor
             this.ribbonControl.SystemText.QatPlaceBelowRibbonText = "将快捷工具栏置于菜单之下";
             this.ribbonControl.TabGroupHeight = 14;
             this.ribbonControl.TabIndex = 0;
-            // 
-            // ribbonPanelReport
-            // 
-            this.ribbonPanelReport.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanelReport.Controls.Add(this.ribbonBarAnalysisReport);
-            this.ribbonPanelReport.Controls.Add(this.ribbonBarTransactionReport);
-            this.ribbonPanelReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanelReport.Location = new System.Drawing.Point(0, 56);
-            this.ribbonPanelReport.Name = "ribbonPanelReport";
-            this.ribbonPanelReport.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanelReport.Size = new System.Drawing.Size(1000, 96);
-            // 
-            // 
-            // 
-            this.ribbonPanelReport.Style.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonPanelReport.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonPanelReport.StyleMouseOver.Class = "";
-            this.ribbonPanelReport.TabIndex = 3;
-            this.ribbonPanelReport.Visible = false;
-            // 
-            // ribbonBarAnalysisReport
-            // 
-            this.ribbonBarAnalysisReport.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarAnalysisReport.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarAnalysisReport.BackgroundStyle.Class = "";
-            this.ribbonBarAnalysisReport.ContainerControlProcessDialogKey = true;
-            this.ribbonBarAnalysisReport.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarAnalysisReport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnCaseStat,
-            this.btnDepartmentStat,
-            this.btnLocationStat});
-            this.ribbonBarAnalysisReport.Location = new System.Drawing.Point(560, 0);
-            this.ribbonBarAnalysisReport.Name = "ribbonBarAnalysisReport";
-            this.ribbonBarAnalysisReport.Size = new System.Drawing.Size(198, 93);
-            this.ribbonBarAnalysisReport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarAnalysisReport.TabIndex = 1;
-            this.ribbonBarAnalysisReport.Text = "统计分析";
-            // 
-            // 
-            // 
-            this.ribbonBarAnalysisReport.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarAnalysisReport.TitleStyleMouseOver.Class = "";
-            // 
-            // btnCaseStat
-            // 
-            this.btnCaseStat.Name = "btnCaseStat";
-            this.btnCaseStat.SubItemsExpandWidth = 14;
-            this.btnCaseStat.Text = "案件统计";
-            this.btnCaseStat.Click += new System.EventHandler(this.StatCase);
-            // 
-            // btnDepartmentStat
-            // 
-            this.btnDepartmentStat.Name = "btnDepartmentStat";
-            this.btnDepartmentStat.SubItemsExpandWidth = 14;
-            this.btnDepartmentStat.Text = "分部统计";
-            this.btnDepartmentStat.Click += new System.EventHandler(this.StatDepartment);
-            // 
-            // btnLocationStat
-            // 
-            this.btnLocationStat.Name = "btnLocationStat";
-            this.btnLocationStat.SubItemsExpandWidth = 14;
-            this.btnLocationStat.Text = "区域统计";
-            this.btnLocationStat.Click += new System.EventHandler(this.StatLocation);
-            // 
-            // ribbonBarTransactionReport
-            // 
-            this.ribbonBarTransactionReport.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarTransactionReport.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarTransactionReport.BackgroundStyle.Class = "";
-            this.ribbonBarTransactionReport.ContainerControlProcessDialogKey = true;
-            this.ribbonBarTransactionReport.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarTransactionReport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnARAssignReport,
-            this.btnFinanceReport,
-            this.btnFeeReport,
-            this.btnFlawReport,
-            this.btnCDAReport,
-            this.btnLeger});
-            this.ribbonBarTransactionReport.Location = new System.Drawing.Point(3, 0);
-            this.ribbonBarTransactionReport.Name = "ribbonBarTransactionReport";
-            this.ribbonBarTransactionReport.Size = new System.Drawing.Size(557, 93);
-            this.ribbonBarTransactionReport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarTransactionReport.TabIndex = 0;
-            this.ribbonBarTransactionReport.Text = "业务报表";
-            // 
-            // 
-            // 
-            this.ribbonBarTransactionReport.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarTransactionReport.TitleStyleMouseOver.Class = "";
-            // 
-            // btnARAssignReport
-            // 
-            this.btnARAssignReport.Image = ((System.Drawing.Image)(resources.GetObject("btnARAssignReport.Image")));
-            this.btnARAssignReport.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnARAssignReport.Name = "btnARAssignReport";
-            this.btnARAssignReport.SubItemsExpandWidth = 14;
-            this.btnARAssignReport.Text = "应收账款转让明细表";
-            this.btnARAssignReport.Click += new System.EventHandler(this.ReportARPayment);
-            // 
-            // btnFinanceReport
-            // 
-            this.btnFinanceReport.Name = "btnFinanceReport";
-            this.btnFinanceReport.SubItemsExpandWidth = 14;
-            this.btnFinanceReport.Text = "可融资账款明细表";
-            this.btnFinanceReport.Click += new System.EventHandler(this.ReportFinance);
-            // 
-            // btnFeeReport
-            // 
-            this.btnFeeReport.Name = "btnFeeReport";
-            this.btnFeeReport.SubItemsExpandWidth = 14;
-            this.btnFeeReport.Text = "保理费用明细表";
-            this.btnFeeReport.Click += new System.EventHandler(this.ReportFee);
-            // 
-            // btnFlawReport
-            // 
-            this.btnFlawReport.Name = "btnFlawReport";
-            this.btnFlawReport.SubItemsExpandWidth = 14;
-            this.btnFlawReport.Text = "瑕疵通知书";
-            this.btnFlawReport.Click += new System.EventHandler(this.ReportInvoiceFlaw);
-            // 
-            // btnCDAReport
-            // 
-            this.btnCDAReport.Name = "btnCDAReport";
-            this.btnCDAReport.SubItemsExpandWidth = 14;
-            this.btnCDAReport.Text = "额度通知书";
-            this.btnCDAReport.Click += new System.EventHandler(this.ReportCDA);
-            // 
-            // btnLeger
-            // 
-            this.btnLeger.Name = "btnLeger";
-            this.btnLeger.SubItemsExpandWidth = 14;
-            this.btnLeger.Text = "台帐";
-            this.btnLeger.Click += new System.EventHandler(this.ReportLeger);
             // 
             // ribbonPanelInfoMgr
             // 
@@ -580,11 +428,11 @@ namespace CMBC.EasyFactor
             this.ribbonBarExchange.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarExchange.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnExchangeQuery});
-            this.ribbonBarExchange.Location = new System.Drawing.Point(369, 0);
+            this.ribbonBarExchange.Location = new System.Drawing.Point(359, 0);
             this.ribbonBarExchange.Name = "ribbonBarExchange";
-            this.ribbonBarExchange.Size = new System.Drawing.Size(100, 93);
+            this.ribbonBarExchange.Size = new System.Drawing.Size(71, 93);
             this.ribbonBarExchange.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarExchange.TabIndex = 3;
+            this.ribbonBarExchange.TabIndex = 0;
             this.ribbonBarExchange.Text = "汇率";
             // 
             // 
@@ -619,9 +467,9 @@ namespace CMBC.EasyFactor
             this.ribbonBarDepartment.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarDepartment.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnDepartMgr});
-            this.ribbonBarDepartment.Location = new System.Drawing.Point(297, 0);
+            this.ribbonBarDepartment.Location = new System.Drawing.Point(290, 0);
             this.ribbonBarDepartment.Name = "ribbonBarDepartment";
-            this.ribbonBarDepartment.Size = new System.Drawing.Size(72, 93);
+            this.ribbonBarDepartment.Size = new System.Drawing.Size(69, 93);
             this.ribbonBarDepartment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarDepartment.TabIndex = 2;
             this.ribbonBarDepartment.Text = "部门";
@@ -657,9 +505,9 @@ namespace CMBC.EasyFactor
             this.ribbonBarFactor.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnFactorMgr,
             this.btnFactorNew});
-            this.ribbonBarFactor.Location = new System.Drawing.Point(138, 0);
+            this.ribbonBarFactor.Location = new System.Drawing.Point(135, 0);
             this.ribbonBarFactor.Name = "ribbonBarFactor";
-            this.ribbonBarFactor.Size = new System.Drawing.Size(159, 93);
+            this.ribbonBarFactor.Size = new System.Drawing.Size(155, 93);
             this.ribbonBarFactor.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarFactor.TabIndex = 1;
             this.ribbonBarFactor.Text = "合作机构";
@@ -704,7 +552,7 @@ namespace CMBC.EasyFactor
             this.btnClientNew});
             this.ribbonBarClient.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarClient.Name = "ribbonBarClient";
-            this.ribbonBarClient.Size = new System.Drawing.Size(135, 93);
+            this.ribbonBarClient.Size = new System.Drawing.Size(132, 93);
             this.ribbonBarClient.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarClient.TabIndex = 0;
             this.ribbonBarClient.Text = "客户";
@@ -772,9 +620,9 @@ namespace CMBC.EasyFactor
             this.ribbonBarUserMgr.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarUserMgr.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnUserMgr});
-            this.ribbonBarUserMgr.Location = new System.Drawing.Point(439, 0);
+            this.ribbonBarUserMgr.Location = new System.Drawing.Point(440, 0);
             this.ribbonBarUserMgr.Name = "ribbonBarUserMgr";
-            this.ribbonBarUserMgr.Size = new System.Drawing.Size(74, 93);
+            this.ribbonBarUserMgr.Size = new System.Drawing.Size(71, 93);
             this.ribbonBarUserMgr.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarUserMgr.TabIndex = 4;
             this.ribbonBarUserMgr.Text = "用户";
@@ -817,7 +665,7 @@ namespace CMBC.EasyFactor
             this.btnCommissionCompute});
             this.ribbonBarSystem.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarSystem.Name = "ribbonBarSystem";
-            this.ribbonBarSystem.Size = new System.Drawing.Size(436, 93);
+            this.ribbonBarSystem.Size = new System.Drawing.Size(437, 93);
             this.ribbonBarSystem.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarSystem.TabIndex = 0;
             this.ribbonBarSystem.Text = "管理";
@@ -857,6 +705,85 @@ namespace CMBC.EasyFactor
             this.btnExchangeRateImport.SubItemsExpandWidth = 14;
             this.btnExchangeRateImport.Text = "导入汇率信息";
             this.btnExchangeRateImport.Click += new System.EventHandler(this.ImportExchangeRate);
+            // 
+            // btnCommissionCompute
+            // 
+            this.btnCommissionCompute.Name = "btnCommissionCompute";
+            this.btnCommissionCompute.SubItemsExpandWidth = 14;
+            this.btnCommissionCompute.Text = "计算手续费";
+            this.btnCommissionCompute.Click += new System.EventHandler(this.ComputeCommission);
+            // 
+            // ribbonPanelHelp
+            // 
+            this.ribbonPanelHelp.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanelHelp.Controls.Add(this.ribbonBarHelp);
+            this.ribbonPanelHelp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ribbonPanelHelp.Location = new System.Drawing.Point(0, 56);
+            this.ribbonPanelHelp.Name = "ribbonPanelHelp";
+            this.ribbonPanelHelp.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.ribbonPanelHelp.Size = new System.Drawing.Size(1000, 96);
+            // 
+            // 
+            // 
+            this.ribbonPanelHelp.Style.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonPanelHelp.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonPanelHelp.StyleMouseOver.Class = "";
+            this.ribbonPanelHelp.TabIndex = 6;
+            this.ribbonPanelHelp.Visible = false;
+            // 
+            // ribbonBarHelp
+            // 
+            this.ribbonBarHelp.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarHelp.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarHelp.BackgroundStyle.Class = "";
+            this.ribbonBarHelp.ContainerControlProcessDialogKey = true;
+            this.ribbonBarHelp.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarHelp.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnUserUpdate,
+            this.btnHelp});
+            this.ribbonBarHelp.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarHelp.Name = "ribbonBarHelp";
+            this.ribbonBarHelp.Size = new System.Drawing.Size(112, 93);
+            this.ribbonBarHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarHelp.TabIndex = 0;
+            this.ribbonBarHelp.Text = "帮助";
+            // 
+            // 
+            // 
+            this.ribbonBarHelp.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarHelp.TitleStyleMouseOver.Class = "";
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.SubItemsExpandWidth = 14;
+            this.btnHelp.Text = "关于";
+            this.btnHelp.Click += new System.EventHandler(this.About);
+            // 
+            // btnUserUpdate
+            // 
+            this.btnUserUpdate.Image = ((System.Drawing.Image)(resources.GetObject("btnUserUpdate.Image")));
+            this.btnUserUpdate.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnUserUpdate.Name = "btnUserUpdate";
+            this.btnUserUpdate.SubItemsExpandWidth = 14;
+            this.btnUserUpdate.Text = "个人信息";
+            this.btnUserUpdate.Click += new System.EventHandler(this.DetailUser);
             // 
             // ribbonPanelMigration
             // 
@@ -900,9 +827,9 @@ namespace CMBC.EasyFactor
             this.ribbonBarInvoiceImport.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarInvoiceImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnInvoicesImport});
-            this.ribbonBarInvoiceImport.Location = new System.Drawing.Point(1002, 0);
+            this.ribbonBarInvoiceImport.Location = new System.Drawing.Point(712, 0);
             this.ribbonBarInvoiceImport.Name = "ribbonBarInvoiceImport";
-            this.ribbonBarInvoiceImport.Size = new System.Drawing.Size(72, 93);
+            this.ribbonBarInvoiceImport.Size = new System.Drawing.Size(44, 93);
             this.ribbonBarInvoiceImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarInvoiceImport.TabIndex = 3;
             this.ribbonBarInvoiceImport.Text = "台帐导入";
@@ -919,7 +846,7 @@ namespace CMBC.EasyFactor
             // 
             this.btnInvoicesImport.Name = "btnInvoicesImport";
             this.btnInvoicesImport.SubItemsExpandWidth = 14;
-            this.btnInvoicesImport.Text = "导入台帐";
+            this.btnInvoicesImport.Text = "台帐";
             this.btnInvoicesImport.Click += new System.EventHandler(this.ImportInvoices);
             // 
             // ribbonBarCreditLineImport
@@ -939,9 +866,9 @@ namespace CMBC.EasyFactor
             this.btnClientCreditLineImport,
             this.btnFactorCreditLineImport,
             this.btnCDAImport});
-            this.ribbonBarCreditLineImport.Location = new System.Drawing.Point(566, 0);
+            this.ribbonBarCreditLineImport.Location = new System.Drawing.Point(434, 0);
             this.ribbonBarCreditLineImport.Name = "ribbonBarCreditLineImport";
-            this.ribbonBarCreditLineImport.Size = new System.Drawing.Size(436, 93);
+            this.ribbonBarCreditLineImport.Size = new System.Drawing.Size(278, 93);
             this.ribbonBarCreditLineImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarCreditLineImport.TabIndex = 4;
             this.ribbonBarCreditLineImport.Text = "额度信息导入";
@@ -958,21 +885,21 @@ namespace CMBC.EasyFactor
             // 
             this.btnClientCreditLineImport.Name = "btnClientCreditLineImport";
             this.btnClientCreditLineImport.SubItemsExpandWidth = 14;
-            this.btnClientCreditLineImport.Text = "导入客户额度信息";
+            this.btnClientCreditLineImport.Text = "客户额度信息";
             this.btnClientCreditLineImport.Click += new System.EventHandler(this.ImportClientCreditLine);
             // 
             // btnFactorCreditLineImport
             // 
             this.btnFactorCreditLineImport.Name = "btnFactorCreditLineImport";
             this.btnFactorCreditLineImport.SubItemsExpandWidth = 14;
-            this.btnFactorCreditLineImport.Text = "导入合作机构额度信息";
+            this.btnFactorCreditLineImport.Text = "合作机构额度信息";
             this.btnFactorCreditLineImport.Click += new System.EventHandler(this.ImportFactorCreditLine);
             // 
             // btnCDAImport
             // 
             this.btnCDAImport.Name = "btnCDAImport";
             this.btnCDAImport.SubItemsExpandWidth = 14;
-            this.btnCDAImport.Text = "导入额度通知书";
+            this.btnCDAImport.Text = "额度通知书";
             this.btnCDAImport.Click += new System.EventHandler(this.ImportCDA);
             // 
             // ribbonBarCaseImport
@@ -992,9 +919,9 @@ namespace CMBC.EasyFactor
             this.btnLocalCaseImport,
             this.buttonItemInterCaseImport,
             this.btnContractImport});
-            this.ribbonBarCaseImport.Location = new System.Drawing.Point(279, 0);
+            this.ribbonBarCaseImport.Location = new System.Drawing.Point(219, 0);
             this.ribbonBarCaseImport.Name = "ribbonBarCaseImport";
-            this.ribbonBarCaseImport.Size = new System.Drawing.Size(287, 93);
+            this.ribbonBarCaseImport.Size = new System.Drawing.Size(215, 93);
             this.ribbonBarCaseImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarCaseImport.TabIndex = 5;
             this.ribbonBarCaseImport.Text = "案件导入";
@@ -1011,21 +938,21 @@ namespace CMBC.EasyFactor
             // 
             this.btnLocalCaseImport.Name = "btnLocalCaseImport";
             this.btnLocalCaseImport.SubItemsExpandWidth = 14;
-            this.btnLocalCaseImport.Text = "导入国内保理案";
+            this.btnLocalCaseImport.Text = "国内保理案";
             this.btnLocalCaseImport.Click += new System.EventHandler(this.ImportCases);
             // 
             // buttonItemInterCaseImport
             // 
             this.buttonItemInterCaseImport.Name = "buttonItemInterCaseImport";
             this.buttonItemInterCaseImport.SubItemsExpandWidth = 14;
-            this.buttonItemInterCaseImport.Text = "导入国际保理案";
+            this.buttonItemInterCaseImport.Text = "国际保理案";
             this.buttonItemInterCaseImport.Click += new System.EventHandler(this.ImportCases);
             // 
             // btnContractImport
             // 
             this.btnContractImport.Name = "btnContractImport";
             this.btnContractImport.SubItemsExpandWidth = 14;
-            this.btnContractImport.Text = "导入保理合同";
+            this.btnContractImport.Text = "保理合同";
             this.btnContractImport.Click += new System.EventHandler(this.ImportContract);
             // 
             // ribbonBarBasicInfoImport
@@ -1047,7 +974,7 @@ namespace CMBC.EasyFactor
             this.btnFactorImport2});
             this.ribbonBarBasicInfoImport.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarBasicInfoImport.Name = "ribbonBarBasicInfoImport";
-            this.ribbonBarBasicInfoImport.Size = new System.Drawing.Size(276, 93);
+            this.ribbonBarBasicInfoImport.Size = new System.Drawing.Size(216, 93);
             this.ribbonBarBasicInfoImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarBasicInfoImport.TabIndex = 2;
             this.ribbonBarBasicInfoImport.Text = "基础信息导入";
@@ -1064,26 +991,184 @@ namespace CMBC.EasyFactor
             // 
             this.btnClientImport.Name = "btnClientImport";
             this.btnClientImport.SubItemsExpandWidth = 14;
-            this.btnClientImport.Text = "导入客户信息";
+            this.btnClientImport.Text = "客户信息";
             this.btnClientImport.Click += new System.EventHandler(this.ImportClients);
             // 
             // btnClientReviewImport
             // 
             this.btnClientReviewImport.Name = "btnClientReviewImport";
             this.btnClientReviewImport.SubItemsExpandWidth = 14;
-            this.btnClientReviewImport.Text = "导入协查意见";
+            this.btnClientReviewImport.Text = "协查意见";
             this.btnClientReviewImport.Click += new System.EventHandler(this.ImportClientsReview);
             // 
             // btnFactorImport2
             // 
             this.btnFactorImport2.Name = "btnFactorImport2";
             this.btnFactorImport2.SubItemsExpandWidth = 14;
-            this.btnFactorImport2.Text = "导入合作机构信息";
+            this.btnFactorImport2.Text = "合作机构信息";
             this.btnFactorImport2.Click += new System.EventHandler(this.ImportFactors);
+            // 
+            // ribbonPanelReport
+            // 
+            this.ribbonPanelReport.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanelReport.Controls.Add(this.ribbonBarAnalysisReport);
+            this.ribbonPanelReport.Controls.Add(this.ribbonBarTransactionReport);
+            this.ribbonPanelReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ribbonPanelReport.Location = new System.Drawing.Point(0, 56);
+            this.ribbonPanelReport.Name = "ribbonPanelReport";
+            this.ribbonPanelReport.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.ribbonPanelReport.Size = new System.Drawing.Size(1000, 96);
+            // 
+            // 
+            // 
+            this.ribbonPanelReport.Style.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonPanelReport.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonPanelReport.StyleMouseOver.Class = "";
+            this.ribbonPanelReport.TabIndex = 3;
+            this.ribbonPanelReport.Visible = false;
+            // 
+            // ribbonBarAnalysisReport
+            // 
+            this.ribbonBarAnalysisReport.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarAnalysisReport.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarAnalysisReport.BackgroundStyle.Class = "";
+            this.ribbonBarAnalysisReport.ContainerControlProcessDialogKey = true;
+            this.ribbonBarAnalysisReport.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarAnalysisReport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnCaseStat,
+            this.btnDepartmentStat,
+            this.btnLocationStat});
+            this.ribbonBarAnalysisReport.Location = new System.Drawing.Point(527, 0);
+            this.ribbonBarAnalysisReport.Name = "ribbonBarAnalysisReport";
+            this.ribbonBarAnalysisReport.Size = new System.Drawing.Size(191, 93);
+            this.ribbonBarAnalysisReport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarAnalysisReport.TabIndex = 1;
+            this.ribbonBarAnalysisReport.Text = "统计分析";
+            // 
+            // 
+            // 
+            this.ribbonBarAnalysisReport.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarAnalysisReport.TitleStyleMouseOver.Class = "";
+            // 
+            // btnCaseStat
+            // 
+            this.btnCaseStat.Name = "btnCaseStat";
+            this.btnCaseStat.SubItemsExpandWidth = 14;
+            this.btnCaseStat.Text = "案件统计";
+            this.btnCaseStat.Click += new System.EventHandler(this.StatCase);
+            // 
+            // btnDepartmentStat
+            // 
+            this.btnDepartmentStat.Name = "btnDepartmentStat";
+            this.btnDepartmentStat.SubItemsExpandWidth = 14;
+            this.btnDepartmentStat.Text = "分部统计";
+            this.btnDepartmentStat.Click += new System.EventHandler(this.StatDepartment);
+            // 
+            // btnLocationStat
+            // 
+            this.btnLocationStat.Name = "btnLocationStat";
+            this.btnLocationStat.SubItemsExpandWidth = 14;
+            this.btnLocationStat.Text = "区域统计";
+            this.btnLocationStat.Click += new System.EventHandler(this.StatLocation);
+            // 
+            // ribbonBarTransactionReport
+            // 
+            this.ribbonBarTransactionReport.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarTransactionReport.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarTransactionReport.BackgroundStyle.Class = "";
+            this.ribbonBarTransactionReport.ContainerControlProcessDialogKey = true;
+            this.ribbonBarTransactionReport.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarTransactionReport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnARAssignReport,
+            this.btnFinanceReport,
+            this.btnFeeReport,
+            this.btnFlawReport,
+            this.btnCDAReport,
+            this.btnLeger});
+            this.ribbonBarTransactionReport.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarTransactionReport.Name = "ribbonBarTransactionReport";
+            this.ribbonBarTransactionReport.Size = new System.Drawing.Size(524, 93);
+            this.ribbonBarTransactionReport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarTransactionReport.TabIndex = 0;
+            this.ribbonBarTransactionReport.Text = "业务报表";
+            // 
+            // 
+            // 
+            this.ribbonBarTransactionReport.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarTransactionReport.TitleStyleMouseOver.Class = "";
+            // 
+            // btnARAssignReport
+            // 
+            this.btnARAssignReport.Image = ((System.Drawing.Image)(resources.GetObject("btnARAssignReport.Image")));
+            this.btnARAssignReport.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnARAssignReport.Name = "btnARAssignReport";
+            this.btnARAssignReport.SubItemsExpandWidth = 14;
+            this.btnARAssignReport.Text = "应收账款转让明细表";
+            this.btnARAssignReport.Click += new System.EventHandler(this.ReportARPayment);
+            // 
+            // btnFinanceReport
+            // 
+            this.btnFinanceReport.Name = "btnFinanceReport";
+            this.btnFinanceReport.SubItemsExpandWidth = 14;
+            this.btnFinanceReport.Text = "可融资账款明细表";
+            this.btnFinanceReport.Click += new System.EventHandler(this.ReportFinance);
+            // 
+            // btnFeeReport
+            // 
+            this.btnFeeReport.Name = "btnFeeReport";
+            this.btnFeeReport.SubItemsExpandWidth = 14;
+            this.btnFeeReport.Text = "保理费用明细表";
+            this.btnFeeReport.Click += new System.EventHandler(this.ReportFee);
+            // 
+            // btnFlawReport
+            // 
+            this.btnFlawReport.Name = "btnFlawReport";
+            this.btnFlawReport.SubItemsExpandWidth = 14;
+            this.btnFlawReport.Text = "瑕疵通知书";
+            this.btnFlawReport.Click += new System.EventHandler(this.ReportInvoiceFlaw);
+            // 
+            // btnCDAReport
+            // 
+            this.btnCDAReport.Name = "btnCDAReport";
+            this.btnCDAReport.SubItemsExpandWidth = 14;
+            this.btnCDAReport.Text = "额度通知书";
+            this.btnCDAReport.Click += new System.EventHandler(this.ReportCDA);
+            // 
+            // btnLeger
+            // 
+            this.btnLeger.Name = "btnLeger";
+            this.btnLeger.SubItemsExpandWidth = 14;
+            this.btnLeger.Text = "台帐";
+            this.btnLeger.Click += new System.EventHandler(this.ReportLeger);
             // 
             // ribbonPanelQuery
             // 
             this.ribbonPanelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanelQuery.Controls.Add(this.ribbonBarBatchQuery);
             this.ribbonPanelQuery.Controls.Add(this.ribbonBarCaseQuery);
             this.ribbonPanelQuery.Controls.Add(this.ribbonBarCreditLineQuery);
             this.ribbonPanelQuery.Controls.Add(this.ribbonBarClientQuery);
@@ -1126,12 +1211,12 @@ namespace CMBC.EasyFactor
             this.btnCreditCoverNegQuery2,
             this.btnInvoiceQuery,
             this.btnOverDueQuery});
-            this.ribbonBarCaseQuery.Location = new System.Drawing.Point(677, 0);
+            this.ribbonBarCaseQuery.Location = new System.Drawing.Point(494, 0);
             this.ribbonBarCaseQuery.Name = "ribbonBarCaseQuery";
-            this.ribbonBarCaseQuery.Size = new System.Drawing.Size(411, 93);
+            this.ribbonBarCaseQuery.Size = new System.Drawing.Size(238, 93);
             this.ribbonBarCaseQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarCaseQuery.TabIndex = 0;
-            this.ribbonBarCaseQuery.Text = "查询";
+            this.ribbonBarCaseQuery.TabIndex = 2;
+            this.ribbonBarCaseQuery.Text = "案子查询";
             // 
             // 
             // 
@@ -1145,35 +1230,35 @@ namespace CMBC.EasyFactor
             // 
             this.btnContractQuery.Name = "btnContractQuery";
             this.btnContractQuery.SubItemsExpandWidth = 14;
-            this.btnContractQuery.Text = "保理合同查询";
+            this.btnContractQuery.Text = "保理合同";
             this.btnContractQuery.Click += new System.EventHandler(this.QueryContract);
             // 
             // btnCaseQuery
             // 
             this.btnCaseQuery.Name = "btnCaseQuery";
             this.btnCaseQuery.SubItemsExpandWidth = 14;
-            this.btnCaseQuery.Text = "案件查询";
+            this.btnCaseQuery.Text = "案件";
             this.btnCaseQuery.Click += new System.EventHandler(this.QueryCase);
             // 
             // btnCreditCoverNegQuery2
             // 
             this.btnCreditCoverNegQuery2.Name = "btnCreditCoverNegQuery2";
             this.btnCreditCoverNegQuery2.SubItemsExpandWidth = 14;
-            this.btnCreditCoverNegQuery2.Text = "额度申请查询";
+            this.btnCreditCoverNegQuery2.Text = "额度申请";
             this.btnCreditCoverNegQuery2.Click += new System.EventHandler(this.QueryCreditCoverNegs);
             // 
             // btnInvoiceQuery
             // 
             this.btnInvoiceQuery.Name = "btnInvoiceQuery";
             this.btnInvoiceQuery.SubItemsExpandWidth = 14;
-            this.btnInvoiceQuery.Text = "发票查询";
+            this.btnInvoiceQuery.Text = "发票";
             this.btnInvoiceQuery.Click += new System.EventHandler(this.QueryInvoice);
             // 
             // btnOverDueQuery
             // 
             this.btnOverDueQuery.Name = "btnOverDueQuery";
             this.btnOverDueQuery.SubItemsExpandWidth = 14;
-            this.btnOverDueQuery.Text = "逾期查询";
+            this.btnOverDueQuery.Text = "逾期";
             this.btnOverDueQuery.Click += new System.EventHandler(this.QueryOverDue);
             // 
             // ribbonBarCreditLineQuery
@@ -1194,11 +1279,11 @@ namespace CMBC.EasyFactor
             this.btnGroupCreditLineQuery,
             this.btnFactorCreditLine,
             this.btnCDAQuery});
-            this.ribbonBarCreditLineQuery.Location = new System.Drawing.Point(287, 0);
+            this.ribbonBarCreditLineQuery.Location = new System.Drawing.Point(205, 0);
             this.ribbonBarCreditLineQuery.Name = "ribbonBarCreditLineQuery";
-            this.ribbonBarCreditLineQuery.Size = new System.Drawing.Size(390, 93);
+            this.ribbonBarCreditLineQuery.Size = new System.Drawing.Size(289, 93);
             this.ribbonBarCreditLineQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarCreditLineQuery.TabIndex = 2;
+            this.ribbonBarCreditLineQuery.TabIndex = 1;
             this.ribbonBarCreditLineQuery.Text = "额度查询";
             // 
             // 
@@ -1213,28 +1298,28 @@ namespace CMBC.EasyFactor
             // 
             this.btnClinetCreditLineQuery.Name = "btnClinetCreditLineQuery";
             this.btnClinetCreditLineQuery.SubItemsExpandWidth = 14;
-            this.btnClinetCreditLineQuery.Text = "客户额度查询";
+            this.btnClinetCreditLineQuery.Text = "客户额度";
             this.btnClinetCreditLineQuery.Click += new System.EventHandler(this.QueryClientCreditLine);
             // 
             // btnGroupCreditLineQuery
             // 
             this.btnGroupCreditLineQuery.Name = "btnGroupCreditLineQuery";
             this.btnGroupCreditLineQuery.SubItemsExpandWidth = 14;
-            this.btnGroupCreditLineQuery.Text = "集团额度查询";
+            this.btnGroupCreditLineQuery.Text = "集团额度";
             this.btnGroupCreditLineQuery.Click += new System.EventHandler(this.QueryClientGroupCreditLine);
             // 
             // btnFactorCreditLine
             // 
             this.btnFactorCreditLine.Name = "btnFactorCreditLine";
             this.btnFactorCreditLine.SubItemsExpandWidth = 14;
-            this.btnFactorCreditLine.Text = "合作机构额度查询";
+            this.btnFactorCreditLine.Text = "合作机构额度";
             this.btnFactorCreditLine.Click += new System.EventHandler(this.QueryFactorCreditLine);
             // 
             // btnCDAQuery
             // 
             this.btnCDAQuery.Name = "btnCDAQuery";
             this.btnCDAQuery.SubItemsExpandWidth = 14;
-            this.btnCDAQuery.Text = "额度通知书查询";
+            this.btnCDAQuery.Text = "额度通知书";
             this.btnCDAQuery.Click += new System.EventHandler(this.QueryCDA);
             // 
             // ribbonBarClientQuery
@@ -1257,9 +1342,9 @@ namespace CMBC.EasyFactor
             this.btnDeptQuery});
             this.ribbonBarClientQuery.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarClientQuery.Name = "ribbonBarClientQuery";
-            this.ribbonBarClientQuery.Size = new System.Drawing.Size(284, 93);
+            this.ribbonBarClientQuery.Size = new System.Drawing.Size(202, 93);
             this.ribbonBarClientQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarClientQuery.TabIndex = 1;
+            this.ribbonBarClientQuery.TabIndex = 0;
             this.ribbonBarClientQuery.Text = "客户查询";
             // 
             // 
@@ -1274,7 +1359,7 @@ namespace CMBC.EasyFactor
             // 
             this.btnClientQuery.Name = "btnClientQuery";
             this.btnClientQuery.SubItemsExpandWidth = 14;
-            this.btnClientQuery.Text = "客户查询";
+            this.btnClientQuery.Text = "客户";
             this.btnClientQuery.Click += new System.EventHandler(this.QueryClients);
             // 
             // itemContainerClientQuery
@@ -1312,14 +1397,14 @@ namespace CMBC.EasyFactor
             // 
             this.btnFactorsQuery.Name = "btnFactorsQuery";
             this.btnFactorsQuery.SubItemsExpandWidth = 14;
-            this.btnFactorsQuery.Text = "合作机构查询";
+            this.btnFactorsQuery.Text = "合作机构";
             this.btnFactorsQuery.Click += new System.EventHandler(this.QueryFactors);
             // 
             // btnDeptQuery
             // 
             this.btnDeptQuery.Name = "btnDeptQuery";
             this.btnDeptQuery.SubItemsExpandWidth = 14;
-            this.btnDeptQuery.Text = "部门查询";
+            this.btnDeptQuery.Text = "部门";
             this.btnDeptQuery.Click += new System.EventHandler(this.QueryDepartments);
             // 
             // ribbonPanel2
@@ -1367,7 +1452,7 @@ namespace CMBC.EasyFactor
             this.btnRefundCheck});
             this.ribbonBarInvoiceCheck.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarInvoiceCheck.Name = "ribbonBarInvoiceCheck";
-            this.ribbonBarInvoiceCheck.Size = new System.Drawing.Size(366, 93);
+            this.ribbonBarInvoiceCheck.Size = new System.Drawing.Size(350, 93);
             this.ribbonBarInvoiceCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarInvoiceCheck.TabIndex = 4;
             this.ribbonBarInvoiceCheck.Text = "复核";
@@ -1457,7 +1542,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarDispute.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarDispute.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnDispute});
-            this.ribbonBarDispute.Location = new System.Drawing.Point(599, 0);
+            this.ribbonBarDispute.Location = new System.Drawing.Point(596, 0);
             this.ribbonBarDispute.Name = "ribbonBarDispute";
             this.ribbonBarDispute.Size = new System.Drawing.Size(69, 93);
             this.ribbonBarDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1499,9 +1584,9 @@ namespace CMBC.EasyFactor
             this.btnReassignment,
             this.btnCreditNotePayment,
             this.btnSellerRefund});
-            this.ribbonBarPayment.Location = new System.Drawing.Point(217, 0);
+            this.ribbonBarPayment.Location = new System.Drawing.Point(218, 0);
             this.ribbonBarPayment.Name = "ribbonBarPayment";
-            this.ribbonBarPayment.Size = new System.Drawing.Size(382, 93);
+            this.ribbonBarPayment.Size = new System.Drawing.Size(378, 93);
             this.ribbonBarPayment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarPayment.TabIndex = 0;
             this.ribbonBarPayment.Text = "销帐";
@@ -1577,7 +1662,7 @@ namespace CMBC.EasyFactor
             this.btnInvoiceFinance});
             this.ribbonBarFinance.Location = new System.Drawing.Point(135, 0);
             this.ribbonBarFinance.Name = "ribbonBarFinance";
-            this.ribbonBarFinance.Size = new System.Drawing.Size(82, 93);
+            this.ribbonBarFinance.Size = new System.Drawing.Size(83, 93);
             this.ribbonBarFinance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarFinance.TabIndex = 5;
             this.ribbonBarFinance.Text = "融资";
@@ -1687,9 +1772,9 @@ namespace CMBC.EasyFactor
             this.ribbonBarCDA.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnCDANew,
             this.btnCDAQuery1});
-            this.ribbonBarCDA.Location = new System.Drawing.Point(259, 0);
+            this.ribbonBarCDA.Location = new System.Drawing.Point(243, 0);
             this.ribbonBarCDA.Name = "ribbonBarCDA";
-            this.ribbonBarCDA.Size = new System.Drawing.Size(205, 93);
+            this.ribbonBarCDA.Size = new System.Drawing.Size(204, 93);
             this.ribbonBarCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarCDA.TabIndex = 7;
             this.ribbonBarCDA.Text = "额度通知书";
@@ -1735,7 +1820,7 @@ namespace CMBC.EasyFactor
             this.btnCreditCoverNegQuery});
             this.ribbonBarCase.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarCase.Name = "ribbonBarCase";
-            this.ribbonBarCase.Size = new System.Drawing.Size(256, 93);
+            this.ribbonBarCase.Size = new System.Drawing.Size(240, 93);
             this.ribbonBarCase.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarCase.TabIndex = 6;
             this.ribbonBarCase.Text = "案件申请";
@@ -1768,78 +1853,6 @@ namespace CMBC.EasyFactor
             this.btnCreditCoverNegQuery.SubItemsExpandWidth = 14;
             this.btnCreditCoverNegQuery.Text = "额度申请查询";
             this.btnCreditCoverNegQuery.Click += new System.EventHandler(this.QueryCreditCoverNegs);
-            // 
-            // ribbonPanelHelp
-            // 
-            this.ribbonPanelHelp.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanelHelp.Controls.Add(this.ribbonBarHelp);
-            this.ribbonPanelHelp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanelHelp.Location = new System.Drawing.Point(0, 56);
-            this.ribbonPanelHelp.Name = "ribbonPanelHelp";
-            this.ribbonPanelHelp.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanelHelp.Size = new System.Drawing.Size(1000, 96);
-            // 
-            // 
-            // 
-            this.ribbonPanelHelp.Style.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonPanelHelp.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonPanelHelp.StyleMouseOver.Class = "";
-            this.ribbonPanelHelp.TabIndex = 6;
-            this.ribbonPanelHelp.Visible = false;
-            // 
-            // ribbonBarHelp
-            // 
-            this.ribbonBarHelp.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarHelp.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarHelp.BackgroundStyle.Class = "";
-            this.ribbonBarHelp.ContainerControlProcessDialogKey = true;
-            this.ribbonBarHelp.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarHelp.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnHelp,
-            this.btnUserUpdate});
-            this.ribbonBarHelp.Location = new System.Drawing.Point(3, 0);
-            this.ribbonBarHelp.Name = "ribbonBarHelp";
-            this.ribbonBarHelp.Size = new System.Drawing.Size(165, 93);
-            this.ribbonBarHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarHelp.TabIndex = 0;
-            this.ribbonBarHelp.Text = "帮助";
-            // 
-            // 
-            // 
-            this.ribbonBarHelp.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarHelp.TitleStyleMouseOver.Class = "";
-            // 
-            // btnHelp
-            // 
-            this.btnHelp.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.SubItemsExpandWidth = 14;
-            this.btnHelp.Text = "关于";
-            this.btnHelp.Click += new System.EventHandler(this.About);
-            // 
-            // btnUserUpdate
-            // 
-            this.btnUserUpdate.Image = ((System.Drawing.Image)(resources.GetObject("btnUserUpdate.Image")));
-            this.btnUserUpdate.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnUserUpdate.Name = "btnUserUpdate";
-            this.btnUserUpdate.SubItemsExpandWidth = 14;
-            this.btnUserUpdate.Text = "个人信息";
-            this.btnUserUpdate.Click += new System.EventHandler(this.DetailUser);
             // 
             // itemInfoMgr
             // 
@@ -2151,12 +2164,66 @@ namespace CMBC.EasyFactor
             this.logoLabel.TabIndex = 0;
             this.logoLabel.Text = "<b><font size=\"+60\"><i>Easy</i><font color=\"#B02B2C\">Factoring</font></font></b>";
             // 
-            // btnCommissionCompute
+            // ribbonBarBatchQuery
             // 
-            this.btnCommissionCompute.Name = "btnCommissionCompute";
-            this.btnCommissionCompute.SubItemsExpandWidth = 14;
-            this.btnCommissionCompute.Text = "计算手续费";
-            this.btnCommissionCompute.Click += new System.EventHandler(this.ComputeCommission);
+            this.ribbonBarBatchQuery.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarBatchQuery.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarBatchQuery.BackgroundStyle.Class = "";
+            this.ribbonBarBatchQuery.ContainerControlProcessDialogKey = true;
+            this.ribbonBarBatchQuery.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarBatchQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnAssignBatchQuery,
+            this.btnFinanceBatchQuery,
+            this.btnPaymentBatchQuery,
+            this.btnRefundBatchQuery});
+            this.ribbonBarBatchQuery.Location = new System.Drawing.Point(732, 0);
+            this.ribbonBarBatchQuery.Name = "ribbonBarBatchQuery";
+            this.ribbonBarBatchQuery.Size = new System.Drawing.Size(152, 93);
+            this.ribbonBarBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarBatchQuery.TabIndex = 3;
+            this.ribbonBarBatchQuery.Text = "批次查询";
+            // 
+            // 
+            // 
+            this.ribbonBarBatchQuery.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarBatchQuery.TitleStyleMouseOver.Class = "";
+            // 
+            // btnAssignBatchQuery
+            // 
+            this.btnAssignBatchQuery.Name = "btnAssignBatchQuery";
+            this.btnAssignBatchQuery.SubItemsExpandWidth = 14;
+            this.btnAssignBatchQuery.Text = "转让";
+            this.btnAssignBatchQuery.Click += new System.EventHandler(this.QueryAssignBatch);
+            // 
+            // btnFinanceBatchQuery
+            // 
+            this.btnFinanceBatchQuery.Name = "btnFinanceBatchQuery";
+            this.btnFinanceBatchQuery.SubItemsExpandWidth = 14;
+            this.btnFinanceBatchQuery.Text = "融资";
+            this.btnFinanceBatchQuery.Click += new System.EventHandler(this.QueryFinanceBatch);
+            // 
+            // btnPaymentBatchQuery
+            // 
+            this.btnPaymentBatchQuery.Name = "btnPaymentBatchQuery";
+            this.btnPaymentBatchQuery.SubItemsExpandWidth = 14;
+            this.btnPaymentBatchQuery.Text = "付款";
+            this.btnPaymentBatchQuery.Click += new System.EventHandler(this.QueryPaymentBatch);
+            // 
+            // btnRefundBatchQuery
+            // 
+            this.btnRefundBatchQuery.Name = "btnRefundBatchQuery";
+            this.btnRefundBatchQuery.SubItemsExpandWidth = 14;
+            this.btnRefundBatchQuery.Text = "还款";
+            this.btnRefundBatchQuery.Click += new System.EventHandler(this.QueryRefundBatch);
             // 
             // MainWindow
             // 
@@ -2170,15 +2237,15 @@ namespace CMBC.EasyFactor
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ribbonControl.ResumeLayout(false);
             this.ribbonControl.PerformLayout();
-            this.ribbonPanelReport.ResumeLayout(false);
             this.ribbonPanelInfoMgr.ResumeLayout(false);
             this.ribbonPanel3.ResumeLayout(false);
+            this.ribbonPanelHelp.ResumeLayout(false);
             this.ribbonPanelMigration.ResumeLayout(false);
+            this.ribbonPanelReport.ResumeLayout(false);
             this.ribbonPanelQuery.ResumeLayout(false);
             this.ribbonPanel2.ResumeLayout(false);
             this.ribbonPanelInvoiceMgr.ResumeLayout(false);
             this.ribbonPanel1.ResumeLayout(false);
-            this.ribbonPanelHelp.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.statusbar)).EndInit();
             this.ribbonDetailPanel.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -2191,5 +2258,10 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnDepartmentStat;
         private DevComponents.DotNetBar.ButtonItem btnLocationStat;
         private DevComponents.DotNetBar.ButtonItem btnCommissionCompute;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarBatchQuery;
+        private DevComponents.DotNetBar.ButtonItem btnAssignBatchQuery;
+        private DevComponents.DotNetBar.ButtonItem btnFinanceBatchQuery;
+        private DevComponents.DotNetBar.ButtonItem btnPaymentBatchQuery;
+        private DevComponents.DotNetBar.ButtonItem btnRefundBatchQuery;
     }
 }

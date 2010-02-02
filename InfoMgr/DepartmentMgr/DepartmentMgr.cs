@@ -12,6 +12,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Data.Linq;
 
     /// <summary>
     /// 
@@ -20,6 +21,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     {
         #region Fields (1)
 
+        private OpDepartmentType opDepatmentType;
         /// <summary>
         /// 
         /// </summary>
@@ -61,6 +63,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         public DepartmentMgr(OpDepartmentType opDepartmentType)
             : this()
         {
+            this.opDepatmentType = opDepartmentType;
             if (opDepartmentType == OpDepartmentType.DEPARTMENT_STAT)
             {
                 this.colAssignAmount.Visible = true;

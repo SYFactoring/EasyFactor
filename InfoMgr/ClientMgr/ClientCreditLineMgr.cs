@@ -12,6 +12,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Data.Linq;
 
     /// <summary>
     /// 

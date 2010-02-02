@@ -187,6 +187,11 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private void QueryUsers(object sender, System.EventArgs e)
         {
             context = new DBDataContext();
+            if (!PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
+            {
+                context.ObjectTrackingEnabled = false;
+            }
+
             var queryResult = context.Users.Where(u => u.UserID.Contains(tbUserID.Text));
             bs.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());

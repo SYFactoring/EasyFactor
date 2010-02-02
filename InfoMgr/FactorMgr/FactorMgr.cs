@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Data.Linq;
 
     /// <summary>
     /// Factor Management User Interface 
@@ -259,6 +260,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
 
             context = new DBDataContext();
+            if (!PermUtil.ValidatePermission(Permission.BASICINFO_UPDATE))
+            {
+                context.ObjectTrackingEnabled = false;
+            }
 
             var queryResult = context.Factors.Where(f =>
                                                    ((f.FactorCode == null ? string.Empty : f.FactorCode).Contains(tbFactorCode.Text))

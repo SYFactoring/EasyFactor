@@ -27,7 +27,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-        #region Constructors (1)
+		#region Constructors (1) 
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -43,9 +43,9 @@ namespace CMBC.EasyFactor
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Sets command status
@@ -69,11 +69,11 @@ namespace CMBC.EasyFactor
             }
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (65)
+		#region Methods (70) 
 
-        // Public Methods (2) 
+		// Public Methods (2) 
 
         /// <summary>
         /// 
@@ -100,7 +100,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-        // Private Methods (63) 
+		// Private Methods (68) 
 
         /// <summary>
         /// 
@@ -214,6 +214,19 @@ namespace CMBC.EasyFactor
             {
                 RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.CHECK);
                 this.SetDetailPanel(batchMgr);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComputeCommission(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            {
+                InvoiceUtil.ComputeCommission();
             }
         }
 
@@ -631,6 +644,17 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void QueryAssignBatch(object sender, EventArgs e)
+        {
+            AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.QUERY);
+            this.SetDetailPanel(mgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QueryCase(object sender, EventArgs e)
         {
             CaseMgr.CaseMgr caseQuery = new CaseMgr.CaseMgr();
@@ -785,6 +809,17 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void QueryFinanceBatch(object sender, EventArgs e)
+        {
+            FinanceBatchMgr mgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.QUERY);
+            this.SetDetailPanel(mgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QueryInvoice(object sender, EventArgs e)
         {
             InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.INVOICE_QUERY);
@@ -799,6 +834,28 @@ namespace CMBC.EasyFactor
         private void QueryOverDue(object sender, EventArgs e)
         {
             InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.OVER_DUE);
+            this.SetDetailPanel(mgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryPaymentBatch(object sender, EventArgs e)
+        {
+            PaymentBatchMgr mgr = new PaymentBatchMgr(PaymentBatchMgr.OpBatchType.QUERY);
+            this.SetDetailPanel(mgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryRefundBatch(object sender, EventArgs e)
+        {
+            RefundBatchMgr mgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.QUERY);
             this.SetDetailPanel(mgr);
         }
 
@@ -912,19 +969,6 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(mgr);
         }
 
-        #endregion Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ComputeCommission(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
-            {
-                InvoiceUtil.ComputeCommission();
-            }
-        }
+		#endregion Methods 
     }
 }

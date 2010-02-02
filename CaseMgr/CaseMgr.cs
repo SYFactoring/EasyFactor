@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using Microsoft.Office.Interop.Excel;
+    using System.Data.Linq;
 
     /// <summary>
     /// 
@@ -26,6 +27,8 @@ namespace CMBC.EasyFactor.CaseMgr
         /// 
         /// </summary>
         private BindingSource bs;
+
+        private OpCaseType opCaseType;
 
         #endregion Fields
 
@@ -68,6 +71,7 @@ namespace CMBC.EasyFactor.CaseMgr
         public CaseMgr(OpCaseType opCaseType)
             : this()
         {
+            this.opCaseType = opCaseType;
             if (opCaseType == OpCaseType.ENABLE_CASE)
             {
                 this.cbCaseMark.Text = "启动案";

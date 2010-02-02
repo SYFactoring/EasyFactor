@@ -2,6 +2,7 @@
 namespace CMBC.EasyFactor.Utils
 {
     using System.Windows.Forms;
+    using CMBC.EasyFactor.DB.dbml;
 
     /// <summary>
     /// 
@@ -98,7 +99,7 @@ namespace CMBC.EasyFactor.Utils
         }
         // Internal Methods (1) 
 
-        internal static bool ValidatePermission(CMBC.EasyFactor.DB.dbml.User user, Permission perm)
+        internal static bool ValidatePermission(User user, Permission perm)
         {
             if ((user.Permission & (int)perm) == (int)perm)
             {

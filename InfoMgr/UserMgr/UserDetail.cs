@@ -113,12 +113,17 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void SaveUser(object sender, EventArgs e)
         {
+            User user = (User)userBindingSource.DataSource;
+            if (user != App.Current.CurUser && !PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
+            {
+                MessageBox.Show("对不起，您没有执行该操作的权限。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             if (!this.userValidator.Validate())
             {
                 return;
             }
-
-            User user = (User)userBindingSource.DataSource;
 
             int permissionResult = 0;
             foreach (PermissionItem item in this.cbPermission.CheckedItems)
@@ -175,6 +180,13 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e"></param>
         private void UpdateUser(object sender, EventArgs e)
         {
+            User user = (User)userBindingSource.DataSource;
+            if (user != App.Current.CurUser && !PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
+            {
+                MessageBox.Show("对不起，您没有执行该操作的权限。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             opUserType = OpUserType.UPDATE_USER;
             UpdateUserControlStatus();
         }

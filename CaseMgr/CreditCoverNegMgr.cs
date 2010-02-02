@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.Utils;
     using System.Collections.Generic;
     using System.Drawing;
+    using System.Data.Linq;
 
     public partial class CreditCoverNegMgr : UserControl
     {
