@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using System.Collections;
 
     /// <summary>
     /// 
@@ -523,13 +524,23 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 foreach (Control comp in this.groupPanelInvoiceBasic.Controls)
                 {
-                    ControlUtil.SetComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, false);
                 }
 
                 foreach (Control comp in this.groupPanelInvoiceProcess.Controls)
                 {
-                    ControlUtil.SetComponetEditable(comp, true);
+                    ControlUtil.SetComponetEditable(comp, false);
                 }
+
+                this.invoiceAmountTextBox.ReadOnly = false;
+                this.invoiceDateTextBox.Enabled = true;
+                this.dueDateTextBox.Enabled = true;
+                this.commentTextBox.ReadOnly = false;
+
+                this.assignAmountTextBox.ReadOnly = false;
+                this.financeAmountTextBox.ReadOnly = false;
+                this.commissionTextBox.ReadOnly = false;
+                this.commissionDateDateTimePicker.Enabled = true;
 
                 foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
                 {
@@ -557,24 +568,6 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 ControlUtil.SetComponetEditable(comp, false);
             }
-
-            this.invoiceNoTextBox.ReadOnly = true;
-            this.invoiceCurrencyComboBox.Enabled = false;
-
-            this.assignOutstandingTextBox.ReadOnly = true;
-            this.financeOutstandingTextBox.ReadOnly = true;
-            this.tbAssignBatch.ReadOnly = true;
-            this.tbFinanceBatch.ReadOnly = true;
-            this.tbPaymentBatch.ReadOnly = true;
-            this.tbRefundBatch.ReadOnly = true;
-
-            this.assignDateTextBox.Enabled = false;
-            this.financeDateDateTimePicker.Enabled = false;
-            this.financeDueDateDateTimePicker.Enabled = false;
-            this.paymentDateDateTimePicker.Enabled = false;
-            this.refundDateDateTimePicker.Enabled = false;
-            this.netInterestTextBox.ReadOnly = true;
-            this.grossInterestTextBox.ReadOnly = true;
 
             this.btnFlaw.Enabled = true;
             this.btnFlawResolve.Enabled = true;
