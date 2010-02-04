@@ -149,9 +149,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Constructors
 
-        #region Methods (14)
+        #region Methods (15)
 
-        // Private Methods (14) 
+        // Private Methods (15) 
 
         /// <summary>
         /// 
@@ -406,6 +406,71 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void SaveEDI(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
+            if (!this.superValidator.Validate())
+            {
+                return;
+            }
+
+            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+
+            string flawReason = string.Empty;
+            foreach (FlawReason item in this.flawReasonCheckedListBox.CheckedItems)
+            {
+                flawReason += (item.Index + ";");
+            }
+
+            invoice.FlawReason = flawReason;
+
+            string disputeReason = string.Empty;
+            foreach (string item in this.disputeReasonCheckedListBox.CheckedItems)
+            {
+                disputeReason += (item + ";");
+            }
+
+            invoice.DisputeReason = disputeReason;
+
+            bool isUpdateOK = true;
+
+            try
+            {
+                context.SubmitChanges(ConflictMode.ContinueOnConflict);
+            }
+            catch (ChangeConflictException)
+            {
+                foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                {
+                    foreach (MemberChangeConflict mc in cc.MemberConflicts)
+                    {
+                        mc.Resolve(RefreshMode.KeepChanges);
+                    }
+                }
+
+                context.SubmitChanges();
+            }
+            catch (Exception e2)
+            {
+                isUpdateOK = false;
+                MessageBox.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (isUpdateOK)
+            {
+                MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveInvoice(object sender, EventArgs e)
         {
             if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
@@ -437,6 +502,15 @@ namespace CMBC.EasyFactor.ARMgr
             invoice.DisputeReason = disputeReason;
 
             bool isUpdateOK = true;
+            if (invoice.InvoiceFinanceBatch != null && invoice.InvoiceFinanceBatch.CheckStatus != "已复核")
+            {
+                invoice.InvoiceFinanceBatch.CheckStatus = "未复核";
+            }
+            else if (invoice.InvoiceAssignBatch.CheckStatus != "已复核")
+            {
+                invoice.InvoiceAssignBatch.CheckStatus = "未复核";
+            }
+
             try
             {
                 context.SubmitChanges(ConflictMode.ContinueOnConflict);
@@ -532,15 +606,33 @@ namespace CMBC.EasyFactor.ARMgr
                     ControlUtil.SetComponetEditable(comp, false);
                 }
 
-                this.invoiceAmountTextBox.ReadOnly = false;
-                this.invoiceDateTextBox.Enabled = true;
-                this.dueDateTextBox.Enabled = true;
-                this.commentTextBox.ReadOnly = false;
+                Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
 
-                this.assignAmountTextBox.ReadOnly = false;
-                this.financeAmountTextBox.ReadOnly = false;
-                this.commissionTextBox.ReadOnly = false;
-                this.commissionDateDateTimePicker.Enabled = true;
+                if (invoice.InvoiceAssignBatch.CheckStatus == "已复核")
+                {
+                    this.invoiceAmountTextBox.ReadOnly = true;
+                    this.invoiceDateTextBox.Enabled = false;
+                    this.dueDateTextBox.Enabled = false;
+                    this.commentTextBox.ReadOnly = true;
+                    this.assignAmountTextBox.ReadOnly = true;
+                }
+                else
+                {
+                    this.invoiceAmountTextBox.ReadOnly = false;
+                    this.invoiceDateTextBox.Enabled = true;
+                    this.dueDateTextBox.Enabled = true;
+                    this.commentTextBox.ReadOnly = false;
+                    this.assignAmountTextBox.ReadOnly = false;
+                }
+
+                if (invoice.InvoiceFinanceBatch == null || invoice.InvoiceFinanceBatch.CheckStatus == "已复核")
+                {
+                    this.financeAmountTextBox.ReadOnly = true;
+                }
+                else
+                {
+                    this.financeAmountTextBox.ReadOnly = false;
+                }
 
                 foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
                 {

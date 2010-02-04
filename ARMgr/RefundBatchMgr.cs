@@ -156,7 +156,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
 
-            if (batch.CheckStatus != "未复核")
+            if (batch.CheckStatus != "未复核" && !PermUtil.ValidatePermission(Permission.INVOICE_APPROVE))
             {
                 MessageBox.Show("此批次已经过复核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -312,7 +312,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
 
-            if (batch.CheckStatus != "未复核")
+            if (batch.CheckStatus != "未复核" && !PermUtil.ValidatePermission(Permission.INVOICE_APPROVE))
             {
                 MessageBox.Show("此批次已经过复核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
