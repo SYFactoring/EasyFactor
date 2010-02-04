@@ -1566,8 +1566,8 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            DateTime? financeDate = (System.Nullable<DateTime>)valueArray[row, 22];
-                            DateTime? financeDueDate = (System.Nullable<DateTime>)valueArray[row, 23];
+                            DateTime? financeDate = (System.Nullable<DateTime>)valueArray[row, 21];
+                            DateTime? financeDueDate = (System.Nullable<DateTime>)valueArray[row, 22];
 
                             if (financeDate != null)
                             {
@@ -1596,7 +1596,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         //融资信息
-                        column = 26;
+                        column = 25;
                         invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
                         if (invoice.FinanceAmount.HasValue)
                         {
@@ -1612,7 +1612,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         //付款批次信息
-                        column = 27;
+                        column = 26;
                         string paymentBatchNo = String.Format("{0:G}", valueArray[row, column++]);
                         InvoicePaymentBatch paymentBatch = null;
                         if (paymentBatchNo != string.Empty)
@@ -1639,7 +1639,7 @@ namespace CMBC.EasyFactor.Utils
                                     paymentBatch = new InvoicePaymentBatch();
                                     paymentBatch.PaymentType = paymentType;
                                     paymentBatch.PaymentDate = paymentDate.Value;
-                                    column = 30;
+                                    column = 29;
                                     paymentBatch.IsCreateMsg = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                                     paymentBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                                     paymentBatch.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
@@ -1652,7 +1652,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         //付款信息
-                        column = 33;
+                        column = 32;
                         double? paymentAmount = (System.Nullable<double>)valueArray[row, column++];
                         if (paymentAmount.HasValue)
                         {
@@ -1669,7 +1669,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         //还款批次信息
-                        column = 34;
+                        column = 33;
                         string refundBatchNo = String.Format("{0:G}", valueArray[row, column++]);
                         string refundType = String.Format("{0:G}", valueArray[row, column++]);
                         InvoiceRefundBatch refundBatch = null;
@@ -1708,7 +1708,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         //还款信息
-                        column = 39;
+                        column = 38;
                         double? refundAmount = (System.Nullable<double>)valueArray[row, column++];
                         if (refundAmount.HasValue)
                         {
@@ -1725,7 +1725,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         //手续费
-                        column = 40;
+                        column = 39;
                         invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
                         invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
                         if (!invoice.Commission.HasValue)
@@ -1757,8 +1757,7 @@ namespace CMBC.EasyFactor.Utils
                             }
                         }
 
-                        //利息
-                        column = 42;
+                        column = 41;
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
                         result++;
