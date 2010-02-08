@@ -25,7 +25,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.CDAs.SingleOrDefault(c => c.CDAStatus == ConstStr.CDA.SIGNED);
+                return this.CDAs.SingleOrDefault(c => c.CDAStatus == ConstStr.CDA.VALID);
             }
         }
 

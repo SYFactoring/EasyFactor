@@ -1542,7 +1542,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<double> _HandFee;
 		
-		private System.Nullable<System.DateTime> _CDASignDate;
+		private System.DateTime _CDASignDate;
 		
 		private string _CDAStatus;
 		
@@ -1565,6 +1565,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		private string _CheckUserName;
 		
 		private System.Nullable<System.DateTime> _CheckDate;
+		
+		private bool _IsSigned;
 		
 		private EntityRef<Case> _Case;
 		
@@ -1632,7 +1634,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnHandFeeCurrChanged();
     partial void OnHandFeeChanging(System.Nullable<double> value);
     partial void OnHandFeeChanged();
-    partial void OnCDASignDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCDASignDateChanging(System.DateTime value);
     partial void OnCDASignDateChanged();
     partial void OnCDAStatusChanging(string value);
     partial void OnCDAStatusChanged();
@@ -1656,6 +1658,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckUserNameChanged();
     partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCheckDateChanged();
+    partial void OnIsSignedChanging(bool value);
+    partial void OnIsSignedChanged();
     #endregion
 		
 		public CDA()
@@ -2269,7 +2273,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_CDASignDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<System.DateTime> CDASignDate
+		public System.DateTime CDASignDate
 		{
 			get
 			{
@@ -2504,6 +2508,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CheckDate = value;
 					this.SendPropertyChanged("CheckDate");
 					this.OnCheckDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsSigned", DbType="bit", UpdateCheck=UpdateCheck.WhenChanged)]
+		public bool IsSigned
+		{
+			get
+			{
+				return this._IsSigned;
+			}
+			set
+			{
+				if ((this._IsSigned != value))
+				{
+					this.OnIsSignedChanging(value);
+					this.SendPropertyChanging();
+					this._IsSigned = value;
+					this.SendPropertyChanged("IsSigned");
+					this.OnIsSignedChanged();
 				}
 			}
 		}
@@ -4566,6 +4590,10 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
+		private string _Comment;
+		
+		private bool _IsSigned;
+		
 		private EntityRef<Client> _Client;
 		
     #region Extensibility Method Definitions
@@ -4586,6 +4614,10 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnContractStatusChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    partial void OnIsSignedChanging(bool value);
+    partial void OnIsSignedChanged();
     #endregion
 		
 		public Contract()
@@ -4734,6 +4766,46 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CreateUserName = value;
 					this.SendPropertyChanged("CreateUserName");
 					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsSigned", DbType="bit", UpdateCheck=UpdateCheck.WhenChanged)]
+		public bool IsSigned
+		{
+			get
+			{
+				return this._IsSigned;
+			}
+			set
+			{
+				if ((this._IsSigned != value))
+				{
+					this.OnIsSignedChanging(value);
+					this.SendPropertyChanging();
+					this._IsSigned = value;
+					this.SendPropertyChanged("IsSigned");
+					this.OnIsSignedChanged();
 				}
 			}
 		}

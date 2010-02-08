@@ -196,7 +196,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        private static Regex ClientEDICodeRegex = new Regex(@"^[a-zA-Z0-9\\-]{3}[a-zA-Z0-9]{4}\d{2}$");
+        private static Regex ClientEDICodeRegex = new Regex(@"^[a-zA-Z0-9]{2}[a-zA-Z0-9\\-]{1}[a-zA-Z0-9]{4}\d{2}$");
 
         /// <summary>
         /// 

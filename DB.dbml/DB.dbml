@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=10.171.5.99\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=192.168.1.100;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[Case]" Member="Cases">
     <Type Name="Case">
       <Column Name="CaseCode" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
@@ -80,7 +80,7 @@
       <Column Name="CommissionTypeComment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="HandFeeCurr" Type="System.String" DbType="Char(10)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="HandFee" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="CDASignDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="CDASignDate" Type="System.DateTime" DbType="DateTime" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CDAStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="NoticeMethod" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="NoticePerson" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
@@ -92,6 +92,7 @@
       <Column Name="RejectReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="IsSigned" Type="System.Boolean" DbType="bit" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Association Name="Case_CDA" Member="Case" ThisKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
   </Table>
@@ -189,6 +190,8 @@
       <Column Name="ContractDueDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="ContractStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="IsSigned" Type="System.Boolean" DbType="bit" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Association Name="Client_Contract" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>
