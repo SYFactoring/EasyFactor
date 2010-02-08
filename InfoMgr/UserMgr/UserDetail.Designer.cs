@@ -118,6 +118,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnPermissionUpdate = new DevComponents.DotNetBar.ButtonX();
             this.cbPermission = new System.Windows.Forms.CheckedListBox();
             this.tabItemPermission = new DevComponents.DotNetBar.TabItem(this.components);
+            this.btnSavePermission = new DevComponents.DotNetBar.ButtonX();
             userIDLabel = new DevComponents.DotNetBar.LabelX();
             roleLabel = new DevComponents.DotNetBar.LabelX();
             userNameLabel = new DevComponents.DotNetBar.LabelX();
@@ -369,8 +370,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelUser);
             this.tabControl.Controls.Add(this.tabPanelPermission);
+            this.tabControl.Controls.Add(this.tabPanelUser);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -585,6 +586,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             // tabPanelPermission
             // 
+            this.tabPanelPermission.Controls.Add(this.btnSavePermission);
             this.tabPanelPermission.Controls.Add(this.btnPermissionUpdate);
             this.tabPanelPermission.Controls.Add(this.cbPermission);
             this.tabPanelPermission.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -631,6 +633,19 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.tabItemPermission.Name = "tabItemPermission";
             this.tabItemPermission.Text = "权限";
             // 
+            // btnSavePermission
+            // 
+            this.btnSavePermission.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSavePermission.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnSavePermission.Enabled = false;
+            this.btnSavePermission.Location = new System.Drawing.Point(12, 33);
+            this.btnSavePermission.Name = "btnSavePermission";
+            this.btnSavePermission.Size = new System.Drawing.Size(66, 23);
+            this.btnSavePermission.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSavePermission.TabIndex = 3;
+            this.btnSavePermission.Text = "保存";
+            this.btnSavePermission.Click += new System.EventHandler(this.SavePermission);
+            // 
             // UserDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -657,5 +672,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.ButtonX btnSavePermission;
     }
 }

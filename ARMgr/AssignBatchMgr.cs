@@ -178,6 +178,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            if (App.Current.CurUser.Name == batch.CreateUserName)
+            {
+                MessageBox.Show("经办人和复核人相同，不可进行复核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             batch.CheckStatus = "已复核";
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
@@ -471,6 +477,12 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (MessageBox.Show("是否确认复核退回该批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
+                return;
+            }
+
+            if (App.Current.CurUser.Name == batch.CreateUserName)
+            {
+                MessageBox.Show("经办人和复核人相同，不可进行复核退回", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

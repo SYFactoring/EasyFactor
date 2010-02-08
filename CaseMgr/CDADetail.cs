@@ -20,17 +20,16 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CDADetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (1)
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpCDAType opCDAType;
+        #region Fields (2)
 
         /// <summary>
         /// 
         /// </summary>
         private DBDataContext context;
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpCDAType opCDAType;
 
         #endregion Fields
 
@@ -114,7 +113,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             this.assignTypeComboBox.Items.AddRange(new string[] { "全部", "部分" });
             this.commissionTypeComboBox.Items.AddRange(new string[] { "按转让金额", "按融资金额", "其他" });
-            this.cDAStatusComboBox.Items.AddRange(new string[] { ConstStr.CDA.NO_CHECK, ConstStr.CDA.CHECKED, ConstStr.CDA.REJECT, ConstStr.CDA.SIGNED, ConstStr.CDA.INVALID });
+            this.cDAStatusComboBox.Items.AddRange(new string[] { ConstStr.CDA.NO_CHECK, ConstStr.CDA.CHECKED, ConstStr.CDA.REJECT, ConstStr.CDA.VALID, ConstStr.CDA.INVALID });
 
             if (opCDAType == OpCDAType.NEW_CDA)
             {
@@ -159,9 +158,21 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Constructors
 
-        #region Methods (24)
+        #region Methods (23)
 
-        // Private Methods (24) 
+        // Private Methods (23) 
+
+        private void cbIsCreditCoverRevolving_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.cbIsCreditCoverRevolving.Checked)
+            {
+                this.orderNumberTextBox.Enabled = false;
+            }
+            else
+            {
+                this.orderNumberTextBox.Enabled = true;
+            }
+        }
 
         /// <summary>
         /// 
@@ -741,6 +752,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     MessageBox.Show("CDA编号生成失败", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
+
                 cda.CDACode = cdaCode;
                 cda.CreateUserName = App.Current.CurUser.Name;
                 try
@@ -764,11 +776,11 @@ namespace CMBC.EasyFactor.CaseMgr
                         context.SubmitChanges();
                     }
 
-                    if (cda.CDAStatus == ConstStr.CDA.SIGNED)
+                    if (cda.CDAStatus == ConstStr.CDA.VALID)
                     {
                         foreach (CDA c in cda.Case.CDAs)
                         {
-                            if (c != cda && c.CDAStatus == ConstStr.CDA.SIGNED)
+                            if (c != cda && c.CDAStatus == ConstStr.CDA.VALID)
                             {
                                 c.CDAStatus = ConstStr.CDA.INVALID;
                             }
@@ -812,11 +824,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (cda.CDAStatus == ConstStr.CDA.SIGNED)
+                    if (cda.CDAStatus == ConstStr.CDA.VALID)
                     {
                         foreach (CDA c in cda.Case.CDAs)
                         {
-                            if (c != cda && c.CDAStatus == ConstStr.CDA.SIGNED)
+                            if (c != cda && c.CDAStatus == ConstStr.CDA.VALID)
                             {
                                 c.CDAStatus = ConstStr.CDA.INVALID;
                             }
@@ -944,6 +956,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     this.creditCoverPeriodEndDateTimePicker.Value = default(DateTime);
                     this.creditCoverTextBox.Enabled = false;
                 }
+
                 ClientCreditLine sellerFinanceLine = cda.Case.SellerClient.FinanceCreditLine;
                 if (sellerFinanceLine == null)
                 {

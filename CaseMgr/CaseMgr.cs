@@ -329,7 +329,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
                                 && (c.CaseMark.Contains(this.cbCaseMark.Text))
                                 && c.CreateUserName.Contains(createUserName)
-                                && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == ConstStr.CDA.SIGNED))
+                                && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == ConstStr.CDA.VALID))
                                 && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY))
                                 && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN.Contains(this.tbClientName.Text)
                                  || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN.Contains(this.tbClientName.Text))

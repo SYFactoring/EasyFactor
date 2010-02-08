@@ -18,17 +18,16 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     /// </summary>
     public partial class UserDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (1)
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpUserType opUserType;
+        #region Fields (2)
 
         /// <summary>
         /// 
         /// </summary>
         private DBDataContext context;
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpUserType opUserType;
 
         #endregion Fields
 
@@ -107,6 +106,50 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         // Private Methods (5) 
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SavePermission(object sender, EventArgs e)
+        {
+            User user = (User)userBindingSource.DataSource;
+            if (user != App.Current.CurUser && !PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
+            {
+                MessageBox.Show("对不起，您没有执行该操作的权限。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (DialogResult.No == MessageBox.Show("是否保存权限设定", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            {
+                return;
+            }
+
+            int permissionResult = 0;
+            foreach (PermissionItem item in this.cbPermission.CheckedItems)
+            {
+                permissionResult = (permissionResult ^ (int)item.Permission);
+            }
+
+            user.Permission = permissionResult;
+
+            bool isUpdateOK = true;
+            try
+            {
+                context.SubmitChanges();
+            }
+            catch (Exception e2)
+            {
+                isUpdateOK = false;
+                MessageBox.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (isUpdateOK)
+            {
+                MessageBox.Show("更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        /// <summary>
         /// Save current user
         /// </summary>
         /// <param name="sender">Event Sender</param>
@@ -178,6 +221,20 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void UpdatePermission(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            {
+                this.cbPermission.Enabled = true;
+                this.btnSavePermission.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateUser(object sender, EventArgs e)
         {
             User user = (User)userBindingSource.DataSource;
@@ -232,18 +289,5 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         }
 
         #endregion Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UpdatePermission(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
-            {
-                this.cbPermission.Enabled = true;
-            }
-        }
     }
 }

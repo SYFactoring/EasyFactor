@@ -22,24 +22,21 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoiceFinance : UserControl
     {
-        #region Fields (3)
+        #region Fields (4)
 
         /// <summary>
         /// 
         /// </summary>
         private Case _case;
-
         /// <summary>
         /// 
         /// </summary>
         private ARCaseBasic caseBasic;
-
+        private DBDataContext context;
         /// <summary>
         /// 
         /// </summary>
         private double currentBatchFinanceAmount = 0;
-
-        private DBDataContext context;
 
         #endregion Fields
 
@@ -98,7 +95,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (22)
+        #region Methods (24)
 
         // Public Methods (1) 
 
@@ -115,7 +112,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = typeof(InvoiceFinanceBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
-        // Private Methods (21) 
+        // Private Methods (23) 
 
         /// <summary>
         /// 
@@ -215,6 +212,49 @@ namespace CMBC.EasyFactor.ARMgr
                 e.IsValid = false;
             }
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void customValidator3_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
+            if (TypeUtil.LessZero(batch.FinanceRate))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void customValidator4_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
+            if (batch.CostRate.HasValue)
+            {
+                if (TypeUtil.LessZero(batch.CostRate))
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
         }
 
         /// <summary>

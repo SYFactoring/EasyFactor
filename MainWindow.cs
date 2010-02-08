@@ -27,7 +27,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -43,9 +43,9 @@ namespace CMBC.EasyFactor
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Sets command status
@@ -69,11 +69,11 @@ namespace CMBC.EasyFactor
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (70) 
+        #region Methods (71)
 
-		// Public Methods (2) 
+        // Public Methods (2) 
 
         /// <summary>
         /// 
@@ -100,7 +100,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-		// Private Methods (68) 
+        // Private Methods (69) 
 
         /// <summary>
         /// 
@@ -274,10 +274,37 @@ namespace CMBC.EasyFactor
         /// 
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Exit(object sender, EventArgs e)
+        /// <param name="args"></param>
+        private void Exit(object sender, EventArgs args)
         {
-            Application.Exit();
+            DialogResult dr = MessageBox.Show("点击“Yes”退出系统，点击“No”更换用户", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                Application.ExitThread();
+            }
+            else if (dr == DialogResult.No)
+            {
+                App.Current.CurUser = null;
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.ShowDialog(this);
+
+                if (App.Current.CurUser == null)
+                {
+                    Application.ExitThread();
+                }
+                else
+                {
+                    this.Text = ((AssemblyTitleAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title + "  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                    this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
+                    this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
+                    this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
+                    this.MainPage(null, null);
+                }
+            }
+            else if (dr == DialogResult.Cancel)
+            {
+                return;
+            }
         }
 
         /// <summary>
@@ -570,6 +597,45 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
             this.ribbonDetailPanel.Controls.Add(this.logoLabel);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("点击“Yes”退出系统，点击“No”更换用户", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else if (dr == DialogResult.No)
+            {
+                App.Current.CurUser = null;
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.ShowDialog(this);
+
+                if (App.Current.CurUser == null)
+                {
+                    e.Cancel = false;
+                }
+                else
+                {
+                    e.Cancel = true;
+                    this.Text = ((AssemblyTitleAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title + "  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                    this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
+                    this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
+                    this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
+                    this.MainPage(null, null);
+                }
+            }
+            else if (dr == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+                return;
+            }
         }
 
         /// <summary>
@@ -969,6 +1035,6 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(mgr);
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

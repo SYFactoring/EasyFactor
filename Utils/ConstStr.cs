@@ -137,9 +137,9 @@ namespace CMBC.EasyFactor.Utils
             public static string REJECT = "复核未通过";
 
             /// <summary>
-            /// 已签回
+            /// 已生效
             /// </summary>
-            public static string SIGNED = "已签回";
+            public static string VALID = "已生效";
 
             /// <summary>
             /// 已失效

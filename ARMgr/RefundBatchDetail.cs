@@ -161,7 +161,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceRefundBatch batch = (InvoiceRefundBatch)this.batchBindingSource.DataSource;
-            batch.CheckStatus = "未复核";
 
             bool isUpdateOK = true;
             try

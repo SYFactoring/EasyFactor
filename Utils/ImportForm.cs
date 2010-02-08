@@ -1006,8 +1006,9 @@ namespace CMBC.EasyFactor.Utils
                         cda.HandFee = (System.Nullable<double>)valueArray[row, column++];
                         cda.CommissionType = String.Format("{0:G}", valueArray[row, column++]);
                         cda.CommissionTypeComment = String.Format("{0:G}", valueArray[row, column++]);
-                        cda.CDASignDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        cda.CDASignDate = (DateTime)valueArray[row, column++];
                         cda.CDAStatus = String.Format("{0:G}", valueArray[row, column++]);
+                        cda.IsSigned = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                         cda.NoticeMethod = String.Format("{0:G}", valueArray[row, column++]);
                         cda.NoticePerson = String.Format("{0:G}", valueArray[row, column++]);
                         cda.Email = String.Format("{0:G}", valueArray[row, column++]);
@@ -2065,7 +2066,7 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
             List<Invoice> invoiceList = new List<Invoice>();
- 
+
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);

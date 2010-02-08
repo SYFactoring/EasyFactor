@@ -3,6 +3,51 @@ namespace CMBC.EasyFactor.CaseMgr
 {
     partial class CDAMgr
     {
+        #region Fields (38)
+
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCheckStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCover;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFeeCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsNotice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsRecoarse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentTerms;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
+        private DevComponents.DotNetBar.LabelX lblCheckStatus;
+        private DevComponents.DotNetBar.LabelX lblCreateUserName;
+        private DevComponents.DotNetBar.LabelX lblFactorName;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDAReport;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCheck;
+        private System.Windows.Forms.ToolStripMenuItem menuItemReject;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+
+        #endregion Fields
+
+
+
         #region Fields (59)
 
         private DevComponents.DotNetBar.ButtonX btnCDAQuery;
@@ -28,6 +73,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Fields
 
+
         #region Methods (1)
 
         // Protected Methods (1)
@@ -46,7 +92,6 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion Methods
-
 
 
         #region Component Designer generated code
@@ -191,9 +236,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCheckStatus.ItemHeight = 14;
             this.cbCheckStatus.Items.AddRange(new object[] {
             "",
-            "未复核",
-            "已复核",
-            "复核未通过",
+            "未审核",
+            "已审核",
+            "审核未通过",
             "已签回",
             "已失效"});
             this.cbCheckStatus.Location = new System.Drawing.Point(400, 3);
@@ -744,44 +789,5 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
-        private DevComponents.DotNetBar.LabelX lblFactorName;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCheckStatus;
-        private DevComponents.DotNetBar.LabelX lblCheckStatus;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem menuItemReject;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCheck;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCDAReport;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
-        private DevComponents.DotNetBar.LabelX lblCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsRecoarse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsNotice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCover;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentTerms;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFeeCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
     }
 }
