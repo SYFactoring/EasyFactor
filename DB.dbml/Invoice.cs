@@ -161,25 +161,6 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets 保理费收入
-        /// </summary>
-        public double? IncomeAmount
-        {
-            get
-            {
-                CDA cda = this.InvoiceAssignBatch.Case.ActiveCDA;
-                if (cda != null)
-                {
-                    return this.Commission.GetValueOrDefault() + cda.HandFee.GetValueOrDefault();
-                }
-                else
-                {
-                    return this.Commission;
-                }
-            }
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         public double? NetInterest

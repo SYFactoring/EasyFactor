@@ -73,12 +73,15 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCaseQuery = new DevComponents.DotNetBar.PanelEx();
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
@@ -132,7 +135,10 @@
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIncomeAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCommissionIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNetInterestIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMarginIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelCaseQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -572,16 +578,19 @@
             this.colAssignAmount,
             this.colFinanceAmount,
             this.colPaymentAmount,
-            this.colIncomeAmount});
+            this.colCommissionIncome,
+            this.colNetInterestIncome,
+            this.colMarginIncome,
+            this.colTotalIncome});
             this.dgvCases.ContextMenuStrip = this.cmuContractMgr;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCases.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCases.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvCases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCases.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCases.Location = new System.Drawing.Point(0, 85);
@@ -831,16 +840,46 @@
             this.colPaymentAmount.ReadOnly = true;
             this.colPaymentAmount.Visible = false;
             // 
-            // colIncomeAmount
+            // colCommissionIncome
             // 
-            this.colIncomeAmount.DataPropertyName = "IncomeAmount";
+            this.colCommissionIncome.DataPropertyName = "CommissionIncome";
             dataGridViewCellStyle6.Format = "N2";
             dataGridViewCellStyle6.NullValue = null;
-            this.colIncomeAmount.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colIncomeAmount.HeaderText = "收入";
-            this.colIncomeAmount.Name = "colIncomeAmount";
-            this.colIncomeAmount.ReadOnly = true;
-            this.colIncomeAmount.Visible = false;
+            this.colCommissionIncome.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colCommissionIncome.HeaderText = "保理费收入";
+            this.colCommissionIncome.Name = "colCommissionIncome";
+            this.colCommissionIncome.ReadOnly = true;
+            this.colCommissionIncome.Visible = false;
+            // 
+            // colNetInterestIncome
+            // 
+            this.colNetInterestIncome.DataPropertyName = "NetInterestIncome";
+            dataGridViewCellStyle7.Format = "N2";
+            this.colNetInterestIncome.DefaultCellStyle = dataGridViewCellStyle7;
+            this.colNetInterestIncome.HeaderText = "净利息收入";
+            this.colNetInterestIncome.Name = "colNetInterestIncome";
+            this.colNetInterestIncome.ReadOnly = true;
+            this.colNetInterestIncome.Visible = false;
+            // 
+            // colMarginIncome
+            // 
+            this.colMarginIncome.DataPropertyName = "MarginIncome";
+            dataGridViewCellStyle8.Format = "N2";
+            this.colMarginIncome.DefaultCellStyle = dataGridViewCellStyle8;
+            this.colMarginIncome.HeaderText = "代付利差收入";
+            this.colMarginIncome.Name = "colMarginIncome";
+            this.colMarginIncome.ReadOnly = true;
+            this.colMarginIncome.Visible = false;
+            // 
+            // colTotalIncome
+            // 
+            this.colTotalIncome.DataPropertyName = "TotalIncome";
+            dataGridViewCellStyle9.Format = "N2";
+            this.colTotalIncome.DefaultCellStyle = dataGridViewCellStyle9;
+            this.colTotalIncome.HeaderText = "总收入";
+            this.colTotalIncome.Name = "colTotalIncome";
+            this.colTotalIncome.ReadOnly = true;
+            this.colTotalIncome.Visible = false;
             // 
             // CaseMgr
             // 
@@ -885,6 +924,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIncomeAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
     }
 }

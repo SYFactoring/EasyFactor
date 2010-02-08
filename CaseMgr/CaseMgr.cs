@@ -93,7 +93,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.colAssignAmount.Visible = true;
                 this.colFinanceAmount.Visible = true;
                 this.colPaymentAmount.Visible = true;
-                this.colIncomeAmount.Visible = true;
+                this.colCommissionIncome.Visible = true;
+                this.colNetInterestIncome.Visible = true;
+                this.colMarginIncome.Visible = true;
+                this.colTotalIncome.Visible = true;
             }
         }
 

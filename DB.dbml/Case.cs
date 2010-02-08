@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Case
     {
-        #region Properties (11)
+        #region Properties (12)
 
         /// <summary>
         /// Gets 
@@ -91,22 +91,31 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 
+        /// 手续费
         /// </summary>
-        public double CommissionAmount
+        public double CommissionIncome
         {
             get
             {
                 double result = 0;
+                int count = 0;
                 foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
                 {
+                    count += batch.BatchCount;
                     foreach (Invoice invoice in batch.Invoices)
                     {
                         result += invoice.Commission.GetValueOrDefault();
                     }
                 }
 
-                return result;
+                CDA cda = this.ActiveCDA;
+                double handFreeIncome = 0;
+                if (cda != null)
+                {
+                    handFreeIncome = count * cda.HandFee.GetValueOrDefault();
+                }
+
+                return result + handFreeIncome;
             }
         }
 
@@ -189,36 +198,50 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double HandFeeAmount
+        public double? MarginIncome
         {
             get
             {
-                int count = 0;
-                foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
+                double? result = null;
+                foreach (InvoiceFinanceBatch batch in this.InvoiceFinanceBatches)
                 {
-                    count += batch.BatchCount;
+                    if (batch.FinanceType == "卖方代付" || batch.FinanceType == "买方代付")
+                    {
+                        if (result == null)
+                        {
+                            result = 0;
+                        }
+
+                        result += batch.NetInterestIncome;
+                    }
                 }
 
-                CDA cda = this.ActiveCDA;
-                if (cda != null)
-                {
-                    return count * cda.HandFee.GetValueOrDefault();
-                }
-                else
-                {
-                    return 0;
-                }
+                return result;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public double IncomeAmount
+        public double? NetInterestIncome
         {
             get
             {
-                return CommissionAmount + HandFeeAmount;
+                double? result = null;
+                foreach (InvoiceFinanceBatch batch in this.InvoiceFinanceBatches)
+                {
+                    if (batch.FinanceType != "卖方代付" && batch.FinanceType != "买方代付")
+                    {
+                        if (result == null)
+                        {
+                            result = 0;
+                        }
+
+                        result += batch.NetInterestIncome;
+                    }
+                }
+
+                return result;
             }
         }
 
@@ -236,6 +259,17 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return result;
+            }
+        }
+
+        /// <summary>
+        /// 总收入
+        /// </summary>
+        public double? TotalIncome
+        {
+            get
+            {
+                return this.CommissionIncome + this.NetInterestIncome.GetValueOrDefault() + this.MarginIncome.GetValueOrDefault();
             }
         }
 
