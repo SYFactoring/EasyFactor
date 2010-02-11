@@ -15,6 +15,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.Utils;
     using Microsoft.Office.Interop.Excel;
     using System.Data.Linq;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
@@ -202,7 +203,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             Case selectedCase = (Case)this.bs.List[this.dgvCases.CurrentCell.RowIndex];
-            if (MessageBox.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bool isDeleteOK = true;
                 foreach (InvoiceAssignBatch assignBatch in selectedCase.InvoiceAssignBatches)
@@ -230,12 +231,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 catch (Exception e1)
                 {
                     isDeleteOK = false;
-                    MessageBox.Show("不能删除此案件: " + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此案件: " + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 if (isDeleteOK)
                 {
-                    MessageBox.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dgvCases.Rows.RemoveAt(dgvCases.CurrentCell.RowIndex);
                 }
             }
@@ -356,7 +357,7 @@ namespace CMBC.EasyFactor.CaseMgr
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -564,7 +565,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     app = null;
                 }
 
-                MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

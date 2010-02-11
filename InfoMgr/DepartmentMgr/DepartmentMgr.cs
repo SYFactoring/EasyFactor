@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using System.Data.Linq;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
@@ -190,7 +191,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             }
 
             Department selectedDepartment = (Department)this.bs.List[this.dgvDepts.SelectedRows[0].Index];
-            if (MessageBox.Show("是否确定删除分部: " + selectedDepartment.DepartmentName, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show("是否确定删除分部: " + selectedDepartment.DepartmentName, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 context.Departments.DeleteOnSubmit(selectedDepartment);
                 bool isDeleteOK = true;
@@ -201,7 +202,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 catch (Exception e1)
                 {
                     isDeleteOK = false;
-                    MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 

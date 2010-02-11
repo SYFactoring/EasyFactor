@@ -15,6 +15,7 @@ namespace CMBC.EasyFactor.Utils
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using Microsoft.Office.Interop.Excel;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
@@ -368,7 +369,7 @@ namespace CMBC.EasyFactor.Utils
             this.app = new ApplicationClass() { Visible = false };
             if (this.app == null)
             {
-                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return null;
             }
 
@@ -1295,7 +1296,7 @@ namespace CMBC.EasyFactor.Utils
                         string monitorResult = factor.EndMonitor();
                         if (!String.Empty.Equals(monitorResult))
                         {
-                            DialogResult dr = MessageBox.Show(monitorResult, "是否更新", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                            DialogResult dr = MessageBoxEx.Show(monitorResult, "是否更新", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                             if (dr == DialogResult.Yes)
                             {
                                 factor.LastModifiedDate = DateTime.Now;

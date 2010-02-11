@@ -15,6 +15,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using System.Data.Linq;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// Client Management User Interface
@@ -192,35 +193,35 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             Client selectedClient = (Client)this.bs.List[this.dgvClients.SelectedRows[0].Index];
-            if (MessageBox.Show("是否打算删除客户: " + selectedClient.ClientNameCN, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show("是否打算删除客户: " + selectedClient.ClientNameCN, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (selectedClient.ClientCreditLines.Count > 0)
                 {
-                    MessageBox.Show("不能删除此客户,已存在相关额度", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此客户,已存在相关额度", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedClient.Contracts.Count > 0)
                 {
-                    MessageBox.Show("不能删除此客户,已存在相关保理合同", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此客户,已存在相关保理合同", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedClient.SellerCases.Count > 0 || selectedClient.BuyerCases.Count > 0)
                 {
-                    MessageBox.Show("不能删除此客户,已存在相关案件信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此客户,已存在相关案件信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedClient.GroupClients.Count > 0)
                 {
-                    MessageBox.Show("不能删除此客户,已存在相关子公司信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此客户,已存在相关子公司信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedClient.ClientAccounts.Count > 0)
                 {
-                    MessageBox.Show("不能删除此客户,已存在相关账户信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此客户,已存在相关账户信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -231,7 +232,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 }
                 catch (SqlException e1)
                 {
-                    MessageBox.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 

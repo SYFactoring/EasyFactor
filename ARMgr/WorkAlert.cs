@@ -6,6 +6,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
@@ -16,7 +17,17 @@ namespace CMBC.EasyFactor.ARMgr
 
         public WorkAlert()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.AddSuperToolTip();
+        }
+
+        private void AddSuperToolTip()
+        {
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckCDA, new SuperTooltipInfo("需要放行的额度通知书", "", "", null, null, eTooltipColor.Apple));
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckAssign, new SuperTooltipInfo("需要放行的转让批次", "", "", null, null, eTooltipColor.Apple));
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckFinance, new SuperTooltipInfo("需要放行的融资批次", "", "", null, null, eTooltipColor.Apple));
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckPayment, new SuperTooltipInfo("需要放行的付款批次", "", "", null, null, eTooltipColor.Apple));
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckRefund, new SuperTooltipInfo("需要放行的还款批次", "", "", null, null, eTooltipColor.Apple));
         }
 
         #endregion Constructors

@@ -74,6 +74,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelLeft = new DevComponents.DotNetBar.PanelEx();
             this.panelRejectCheck = new DevComponents.DotNetBar.ExpandablePanel();
             this.btnRejectCheckRefund = new DevComponents.DotNetBar.ButtonX();
@@ -108,6 +109,8 @@
             this.btnDueAssign = new DevComponents.DotNetBar.ButtonX();
             this.btnDueAssign0 = new DevComponents.DotNetBar.ButtonX();
             this.btnDueAssign7 = new DevComponents.DotNetBar.ButtonX();
+            this.bubbleBarTab1 = new DevComponents.DotNetBar.BubbleBarTab(this.components);
+            this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
             this.panelLeft.SuspendLayout();
             this.panelRejectCheck.SuspendLayout();
             this.panelWaitCheck.SuspendLayout();
@@ -485,7 +488,7 @@
             this.btnDueFactorCreditLine.Name = "btnDueFactorCreditLine";
             this.btnDueFactorCreditLine.Size = new System.Drawing.Size(106, 23);
             this.btnDueFactorCreditLine.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnDueFactorCreditLine.TabIndex = 4;
+            this.btnDueFactorCreditLine.TabIndex = 1;
             this.btnDueFactorCreditLine.Text = "b) 保理商额度到期";
             this.btnDueFactorCreditLine.Click += new System.EventHandler(this.QueryFactorCreditLineDue);
             // 
@@ -498,7 +501,7 @@
             this.btnDueContract.Name = "btnDueContract";
             this.btnDueContract.Size = new System.Drawing.Size(106, 23);
             this.btnDueContract.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnDueContract.TabIndex = 2;
+            this.btnDueContract.TabIndex = 3;
             this.btnDueContract.Text = "d) 保理合同到期";
             this.btnDueContract.Click += new System.EventHandler(this.QueryContractDue);
             // 
@@ -511,7 +514,7 @@
             this.btnDueCDA.Name = "btnDueCDA";
             this.btnDueCDA.Size = new System.Drawing.Size(106, 23);
             this.btnDueCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnDueCDA.TabIndex = 1;
+            this.btnDueCDA.TabIndex = 2;
             this.btnDueCDA.Text = "c) 额度通知书到期";
             this.btnDueCDA.Click += new System.EventHandler(this.QueryCDADue);
             // 
@@ -678,6 +681,11 @@
             this.btnDueAssign7.Text = "a) 7日内到期";
             this.btnDueAssign7.Click += new System.EventHandler(this.QueryInvoiceAssignDueBy7);
             // 
+            // bubbleBarTab1
+            // 
+            this.bubbleBarTab1.Name = "bubbleBarTab1";
+            this.bubbleBarTab1.Text = "";
+            // 
             // WorkAlert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -699,5 +707,8 @@
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.BubbleBarTab bubbleBarTab1;
+        private DevComponents.DotNetBar.SuperTooltip superTooltip;
     }
 }

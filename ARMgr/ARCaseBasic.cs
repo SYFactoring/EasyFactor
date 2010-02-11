@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
@@ -330,7 +331,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (!cda.FinanceLine.HasValue && this.opARType == OpARType.FINANCE)
                 {
-                    MessageBox.Show("本案无预付款额度，不能融资。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("本案无预付款额度，不能融资。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
             }
@@ -375,7 +376,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (curCase.ActiveCDA == null)
                 {
-                    MessageBox.Show("没有有效的额度通知书，不能进行应收账款管理", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("没有有效的额度通知书，不能进行应收账款管理", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 this.Case = curCase;

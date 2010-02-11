@@ -3,6 +3,7 @@ namespace CMBC.EasyFactor.Utils
 {
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
@@ -83,7 +84,7 @@ namespace CMBC.EasyFactor.Utils
             }
             else
             {
-                MessageBox.Show("对不起，您没有执行该操作的权限。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("对不起，您没有执行该操作的权限。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
         }

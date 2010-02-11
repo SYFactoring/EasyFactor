@@ -9,6 +9,7 @@ namespace CMBC.EasyFactor.Help.About
     using System;
     using System.Reflection;
     using System.Windows.Forms;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// About Box Dialog
@@ -167,12 +168,12 @@ namespace CMBC.EasyFactor.Help.About
             {
                 if (noBrowser.ErrorCode == -2147467259)
                 {
-                    MessageBox.Show(noBrowser.Message);
+                    MessageBoxEx.Show(noBrowser.Message);
                 }
             }
             catch (Exception other)
             {
-                MessageBox.Show(other.Message);
+                MessageBoxEx.Show(other.Message);
             }
         }
 

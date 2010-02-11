@@ -12,6 +12,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
@@ -228,7 +229,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -252,12 +253,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             catch (Exception e1)
             {
                 isDeleteOK = false;
-                MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isDeleteOK)
             {
-                MessageBox.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.bsCreditLines.DataSource = typeof(FactorCreditLine);
                 this.bsCreditLines.DataSource = factor.FactorCreditLines;
                 this.factorCreditLineBindingSource.DataSource = typeof(FactorCreditLine);
@@ -279,7 +280,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -318,7 +319,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -339,7 +340,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -377,12 +378,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 catch (Exception e1)
                 {
                     isAddOK = false;
-                    MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
                 {
-                    MessageBox.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.opFactorType = OpFactorType.UPDATE_FACTOR;
                 }
             }
@@ -413,12 +414,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBox.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)
                 {
-                    MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -442,7 +443,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null)
             {
-                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -491,12 +492,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 {
                     isAddOK = false;
                     creditLine.Factor = null;
-                    MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
                 {
-                    MessageBox.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (creditLine.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY)
                     {
                         foreach (FactorCreditLine fcl in factor.FactorCreditLines)
@@ -537,12 +538,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBox.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)
                 {
-                    MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (creditLine.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY)
                     {
                         foreach (FactorCreditLine fcl in factor.FactorCreditLines)
@@ -630,7 +631,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -669,7 +670,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -770,7 +771,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBox.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

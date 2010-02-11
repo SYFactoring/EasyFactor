@@ -15,6 +15,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using System.Data.Linq;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// Factor Management User Interface 
@@ -125,29 +126,29 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
 
             Factor selectedFactor = (Factor)this.bs.List[this.dgvFactors.SelectedRows[0].Index];
-            if (MessageBox.Show("是否确定删除保理商: " + selectedFactor.FactorCode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show("是否确定删除保理商: " + selectedFactor.FactorCode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (selectedFactor.FactorCreditLines.Count > 0)
                 {
-                    MessageBox.Show("不能删除此机构,已存在相关额度.", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此机构,已存在相关额度.", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedFactor.SellerCases.Count > 0 || selectedFactor.BuyerCases.Count > 0)
                 {
-                    MessageBox.Show("不能删除此机构,已存在相关案件信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此机构,已存在相关案件信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedFactor.FactorAccounts.Count > 0)
                 {
-                    MessageBox.Show("不能删除此机构,已存在相关账户信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此机构,已存在相关账户信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedFactor.GroupFactors.Count > 0)
                 {
-                    MessageBox.Show("不能删除此机构,已存在相关子机构信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此机构,已存在相关子机构信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -158,7 +159,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 }
                 catch (SqlException e1)
                 {
-                    MessageBox.Show("删除失败:" + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("删除失败:" + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 

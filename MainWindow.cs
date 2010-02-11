@@ -21,6 +21,7 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.Report;
     using CMBC.EasyFactor.Utils;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// Main Window Form
@@ -277,7 +278,8 @@ namespace CMBC.EasyFactor
         /// <param name="args"></param>
         private void Exit(object sender, EventArgs args)
         {
-            DialogResult dr = MessageBox.Show("点击“Yes”退出系统，点击“Cancel”更换用户", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult dr = MessageBoxEx.Show("点击“Yes”退出系统，点击“Cancel”更换用户", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
             if (dr == DialogResult.Yes)
             {
                 Application.ExitThread();
@@ -605,7 +607,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult dr = MessageBox.Show("点击“Yes”退出系统，点击“Cancel”更换用户", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult dr = MessageBoxEx.Show("点击“Yes”退出系统，点击“Cancel”更换用户", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
                 e.Cancel = false;

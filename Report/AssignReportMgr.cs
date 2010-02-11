@@ -18,6 +18,7 @@ namespace CMBC.EasyFactor.Report
     using CMBC.EasyFactor.Utils;
     using Microsoft.Office.Core;
     using Microsoft.Office.Interop.Excel;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
@@ -180,7 +181,7 @@ namespace CMBC.EasyFactor.Report
         //        ApplicationClass app = new ApplicationClass() { Visible = false };
         //        if (app == null)
         //        {
-        //            MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //            MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
         //            return;
         //        }
 
@@ -295,7 +296,7 @@ namespace CMBC.EasyFactor.Report
         //        ApplicationClass app = new ApplicationClass() { Visible = false };
         //        if (app == null)
         //        {
-        //            MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //            MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
         //            return;
         //        }
         //        Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -412,7 +413,7 @@ namespace CMBC.EasyFactor.Report
                 ApplicationClass app = new ApplicationClass() { Visible = false };
                 if (app == null)
                 {
-                    MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 

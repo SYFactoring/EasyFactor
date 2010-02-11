@@ -15,6 +15,7 @@ namespace CMBC.EasyFactor.Utils
     using Microsoft.Office.Interop.Excel;
     using System.Text;
     using System.IO;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
@@ -254,7 +255,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -373,7 +374,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -503,7 +504,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -616,7 +617,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -849,7 +850,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -1213,7 +1214,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -1326,7 +1327,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBox.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];

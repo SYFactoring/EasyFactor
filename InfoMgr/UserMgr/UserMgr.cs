@@ -12,6 +12,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// User Management User Interface
@@ -113,7 +114,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             }
 
             User selectedUser = (User)this.bs.List[this.dgvUsers.SelectedRows[0].Index];
-            if (MessageBox.Show("是否确定删除帐号: " + selectedUser.UserID, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show("是否确定删除帐号: " + selectedUser.UserID, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 context.Users.DeleteOnSubmit(selectedUser);
                 bool isDeleteOK = true;
@@ -124,7 +125,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 catch (Exception e1)
                 {
                     isDeleteOK = false;
-                    MessageBox.Show(e1.Message, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
