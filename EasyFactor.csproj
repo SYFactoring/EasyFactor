@@ -189,6 +189,12 @@
     <Compile Include="ARMgr\PaymentBatchMgr.Designer.cs">
       <DependentUpon>PaymentBatchMgr.cs</DependentUpon>
     </Compile>
+    <Compile Include="ARMgr\WorkAlert.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ARMgr\WorkAlert.Designer.cs">
+      <DependentUpon>WorkAlert.cs</DependentUpon>
+    </Compile>
     <Compile Include="CaseMgr\CaseDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -434,6 +440,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\PaymentBatchMgr.resx">
       <DependentUpon>PaymentBatchMgr.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\WorkAlert.resx">
+      <DependentUpon>WorkAlert.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CaseMgr\CaseDetail.resx">

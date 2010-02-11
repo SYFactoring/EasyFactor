@@ -45,7 +45,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="invoiceList"></param>
         public InvoiceFlaw(List<Invoice> invoiceList)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.context = new DBDataContext();
             this.ImeMode = ImeMode.OnHalf;
             this.dgvInvoices.AutoGenerateColumns = false;
@@ -121,18 +121,6 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Flaw(object sender, EventArgs e)
-        {
-            this.flawReasonCheckedListBox.Enabled = true;
-            this.tbFlawReason.Enabled = true;
-            this.isFlawCheckBox.Checked = true;
         }
 
         /// <summary>

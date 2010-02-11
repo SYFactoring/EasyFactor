@@ -113,7 +113,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             this.assignTypeComboBox.Items.AddRange(new string[] { "全部", "部分" });
             this.commissionTypeComboBox.Items.AddRange(new string[] { "按转让金额", "按融资金额", "其他" });
-            this.cDAStatusComboBox.Items.AddRange(new string[] { ConstStr.CDA.NO_CHECK, ConstStr.CDA.CHECKED, ConstStr.CDA.REJECT, ConstStr.CDA.VALID, ConstStr.CDA.INVALID });
+            this.cDAStatusComboBox.Items.AddRange(new string[] { ConstStr.CDA.NO_CHECK, ConstStr.CDA.CHECKED, ConstStr.CDA.REJECT, ConstStr.CDA.INVALID });
 
             if (opCDAType == OpCDAType.NEW_CDA)
             {
@@ -776,11 +776,11 @@ namespace CMBC.EasyFactor.CaseMgr
                         context.SubmitChanges();
                     }
 
-                    if (cda.CDAStatus == ConstStr.CDA.VALID)
+                    if (cda.CDAStatus == ConstStr.CDA.CHECKED)
                     {
                         foreach (CDA c in cda.Case.CDAs)
                         {
-                            if (c != cda && c.CDAStatus == ConstStr.CDA.VALID)
+                            if (c != cda && c.CDAStatus == ConstStr.CDA.CHECKED)
                             {
                                 c.CDAStatus = ConstStr.CDA.INVALID;
                             }
@@ -824,11 +824,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 if (isUpdateOK)
                 {
                     MessageBox.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (cda.CDAStatus == ConstStr.CDA.VALID)
+                    if (cda.CDAStatus == ConstStr.CDA.CHECKED)
                     {
                         foreach (CDA c in cda.Case.CDAs)
                         {
-                            if (c != cda && c.CDAStatus == ConstStr.CDA.VALID)
+                            if (c != cda && c.CDAStatus == ConstStr.CDA.CHECKED)
                             {
                                 c.CDAStatus = ConstStr.CDA.INVALID;
                             }

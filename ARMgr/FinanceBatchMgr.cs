@@ -78,6 +78,19 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// Initializes a new instance of the FinanceBatchMgr class
         /// </summary>
+        /// <param name="createUserName"></param>
+        /// <param name="batchStatus"></param>
+        public FinanceBatchMgr(string createUserName, string batchStatus)
+            : this(OpBatchType.QUERY)
+        {
+            this.tbCreateUserName.Text = createUserName;
+            this.cbCheckStatus.Text = batchStatus;
+            this.QueryBatch(null, null);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the FinanceBatchMgr class
+        /// </summary>
         /// <param name="batchType"></param>
         public FinanceBatchMgr(OpBatchType batchType)
         {
@@ -166,7 +179,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-            
+
             if (App.Current.CurUser.Name == batch.CreateUserName)
             {
                 MessageBox.Show("经办人和复核人相同，不可进行复核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);

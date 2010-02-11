@@ -68,7 +68,20 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Enums
 
-        #region Constructors (2)
+        #region Constructors (3)
+
+        /// <summary>
+        /// Initializes a new instance of the AssignBatchMgr class
+        /// </summary>
+        /// <param name="createUserName"></param>
+        /// <param name="batchStatus"></param>
+        public AssignBatchMgr(string createUserName, string batchStatus)
+            : this(OpBatchType.QUERY)
+        {
+            this.tbCreateUserName.Text = createUserName;
+            this.cbCheckStatus.Text = batchStatus;
+            this.QueryBatch(null, null);
+        }
 
         /// <summary>
         /// Initializes a new instance of the AssignBatchMgr class

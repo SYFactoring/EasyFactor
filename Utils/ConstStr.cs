@@ -124,22 +124,17 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 未审核
             /// </summary>
-            public static string NO_CHECK = "未复核";
+            public static string NO_CHECK = "未审核";
 
             /// <summary>
             /// 已复核
             /// </summary>
-            public static string CHECKED = "已复核";
+            public static string CHECKED = "已审核";
 
             /// <summary>
             /// 复核未通过
             /// </summary>
-            public static string REJECT = "复核未通过";
-
-            /// <summary>
-            /// 已生效
-            /// </summary>
-            public static string VALID = "已生效";
+            public static string REJECT = "审核未通过";
 
             /// <summary>
             /// 已失效

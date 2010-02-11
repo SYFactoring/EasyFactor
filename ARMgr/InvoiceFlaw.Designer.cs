@@ -7,7 +7,6 @@
     {
 		#region Fields (18) 
 
-        private DevComponents.DotNetBar.ButtonX btnFlaw;
         private DevComponents.DotNetBar.ButtonX btnFlawClose;
         private DevComponents.DotNetBar.ButtonX btnFlawResolve;
         private DevComponents.DotNetBar.ButtonX btnFlawSave;
@@ -26,7 +25,7 @@
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelFlaw;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelFlawResolve;
         private DevComponents.DotNetBar.Controls.CheckBoxX isFlawCheckBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFlawReason;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbOtherFlawReason;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFlawResolveReason;
 
 		#endregion Fields 
@@ -75,8 +74,7 @@
             this.flawResolveUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelFlaw = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.isFlawCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.btnFlaw = new DevComponents.DotNetBar.ButtonX();
-            this.tbFlawReason = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbOtherFlawReason = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.flawReasonCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -143,7 +141,7 @@
             // 
             // 
             flawReasonLabel.BackgroundStyle.Class = "";
-            flawReasonLabel.Location = new System.Drawing.Point(23, 59);
+            flawReasonLabel.Location = new System.Drawing.Point(23, 31);
             flawReasonLabel.Name = "flawReasonLabel";
             flawReasonLabel.Size = new System.Drawing.Size(59, 16);
             flawReasonLabel.TabIndex = 1;
@@ -297,8 +295,7 @@
             this.groupPanelFlaw.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelFlaw.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.groupPanelFlaw.Controls.Add(this.isFlawCheckBox);
-            this.groupPanelFlaw.Controls.Add(this.btnFlaw);
-            this.groupPanelFlaw.Controls.Add(this.tbFlawReason);
+            this.groupPanelFlaw.Controls.Add(this.tbOtherFlawReason);
             this.groupPanelFlaw.Controls.Add(flawReasonLabel);
             this.groupPanelFlaw.Controls.Add(this.flawReasonCheckedListBox);
             this.groupPanelFlaw.Dock = System.Windows.Forms.DockStyle.Top;
@@ -344,42 +341,29 @@
             // 
             // 
             this.isFlawCheckBox.BackgroundStyle.Class = "";
-            this.isFlawCheckBox.Location = new System.Drawing.Point(15, 7);
+            this.isFlawCheckBox.Location = new System.Drawing.Point(15, 9);
             this.isFlawCheckBox.Name = "isFlawCheckBox";
             this.isFlawCheckBox.Size = new System.Drawing.Size(76, 16);
             this.isFlawCheckBox.TabIndex = 6;
             this.isFlawCheckBox.Text = "是否瑕疵";
             // 
-            // btnFlaw
-            // 
-            this.btnFlaw.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnFlaw.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFlaw.Location = new System.Drawing.Point(15, 29);
-            this.btnFlaw.Name = "btnFlaw";
-            this.btnFlaw.Size = new System.Drawing.Size(75, 23);
-            this.btnFlaw.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFlaw.TabIndex = 0;
-            this.btnFlaw.Text = "瑕疵设定";
-            this.btnFlaw.Click += new System.EventHandler(this.Flaw);
-            // 
-            // tbFlawReason
+            // tbOtherFlawReason
             // 
             // 
             // 
             // 
-            this.tbFlawReason.Border.Class = "TextBoxBorder";
-            this.tbFlawReason.Enabled = false;
-            this.tbFlawReason.Location = new System.Drawing.Point(344, 3);
-            this.tbFlawReason.Multiline = true;
-            this.tbFlawReason.Name = "tbFlawReason";
-            this.tbFlawReason.Size = new System.Drawing.Size(195, 123);
-            this.tbFlawReason.TabIndex = 3;
-            this.tbFlawReason.WatermarkText = "其他原因";
+            this.tbOtherFlawReason.Border.Class = "TextBoxBorder";
+            this.tbOtherFlawReason.Location = new System.Drawing.Point(344, 3);
+            this.tbOtherFlawReason.Multiline = true;
+            this.tbOtherFlawReason.Name = "tbOtherFlawReason";
+            this.tbOtherFlawReason.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbOtherFlawReason.Size = new System.Drawing.Size(195, 123);
+            this.tbOtherFlawReason.TabIndex = 3;
+            this.tbOtherFlawReason.WatermarkText = "其他原因";
             // 
             // flawReasonCheckedListBox
             // 
             this.flawReasonCheckedListBox.CheckOnClick = true;
-            this.flawReasonCheckedListBox.Enabled = false;
             this.flawReasonCheckedListBox.FormattingEnabled = true;
             this.flawReasonCheckedListBox.Location = new System.Drawing.Point(105, 2);
             this.flawReasonCheckedListBox.Name = "flawReasonCheckedListBox";

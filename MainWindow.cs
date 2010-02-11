@@ -277,12 +277,12 @@ namespace CMBC.EasyFactor
         /// <param name="args"></param>
         private void Exit(object sender, EventArgs args)
         {
-            DialogResult dr = MessageBox.Show("点击“Yes”退出系统，点击“No”更换用户", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult dr = MessageBox.Show("点击“Yes”退出系统，点击“Cancel”更换用户", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
                 Application.ExitThread();
             }
-            else if (dr == DialogResult.No)
+            else if (dr == DialogResult.Cancel)
             {
                 App.Current.CurUser = null;
                 LoginWindow loginWindow = new LoginWindow();
@@ -301,7 +301,7 @@ namespace CMBC.EasyFactor
                     this.MainPage(null, null);
                 }
             }
-            else if (dr == DialogResult.Cancel)
+            else if (dr == DialogResult.No)
             {
                 return;
             }
@@ -594,9 +594,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void MainPage(object sender, EventArgs e)
         {
-            this.ribbonDetailPanel.Controls.Clear();
-            this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
-            this.ribbonDetailPanel.Controls.Add(this.logoLabel);
+            WorkAlert alert = new WorkAlert();
+            this.SetDetailPanel(alert);
         }
 
         /// <summary>
@@ -606,12 +605,12 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult dr = MessageBox.Show("点击“Yes”退出系统，点击“No”更换用户", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult dr = MessageBox.Show("点击“Yes”退出系统，点击“Cancel”更换用户", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
                 e.Cancel = false;
             }
-            else if (dr == DialogResult.No)
+            else if (dr == DialogResult.Cancel)
             {
                 App.Current.CurUser = null;
                 LoginWindow loginWindow = new LoginWindow();
@@ -631,7 +630,7 @@ namespace CMBC.EasyFactor
                     this.MainPage(null, null);
                 }
             }
-            else if (dr == DialogResult.Cancel)
+            else if (dr == DialogResult.No)
             {
                 e.Cancel = true;
                 return;

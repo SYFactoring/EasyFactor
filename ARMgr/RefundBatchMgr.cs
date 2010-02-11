@@ -12,7 +12,6 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
     /// <summary>
     /// 
     /// </summary>
@@ -61,6 +60,19 @@ namespace CMBC.EasyFactor.ARMgr
         #endregion Enums
 
         #region Constructors (2)
+
+        /// <summary>
+        /// Initializes a new instance of the RefundBatchMgr class
+        /// </summary>
+        /// <param name="createUserName"></param>
+        /// <param name="batchStatus"></param>
+        public RefundBatchMgr(string createUserName, string batchStatus)
+            : this(OpBatchType.QUERY)
+        {
+            this.tbCreateUserName.Text = createUserName;
+            this.cbCheckStatus.Text = batchStatus;
+            this.QueryBatch(null, null);
+        }
 
         /// <summary>
         /// 

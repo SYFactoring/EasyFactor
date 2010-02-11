@@ -456,6 +456,18 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     e.Cancel = true;
                 }
+
+                if (e.Cancel == false && col == colFinanceAmount)
+                {
+                    Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[e.RowIndex];
+                    if (result > selectedInvoice.AssignOutstanding * this._case.ActiveCDA.FinanceProportion)
+                    {
+                        if (DialogResult.No == MessageBox.Show("您输入的融资金额超出融资比例的范围，确认录入吗？", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information))
+                        {
+                            e.Cancel = true;
+                        }
+                    }
+                }
             }
         }
 

@@ -55,11 +55,29 @@ namespace CMBC.EasyFactor.CaseMgr
             /// 
             /// </summary>
             REPORT,
+
+            /// <summary>
+            /// 额度通知书到期
+            /// </summary>
+            DUE,
         }
 
         #endregion Enums
 
         #region Constructors (1)
+
+        /// <summary>
+        /// Initializes a new instance of the CDAMgr class.
+        /// </summary>
+        /// <param name="createUseraName"></param>
+        /// <param name="CDAStatus"></param>
+        public CDAMgr(string createUseraName, string CDAStatus)
+            : this(OpCDAType.QUERY)
+        {
+            this.tbCreateUserName.Text = createUseraName;
+            this.cbCheckStatus.Text = CDAStatus;
+            this.QueryCDAs(null, null);
+        }
 
         /// <summary>
         /// Initializes a new instance of the CDAMgr class.
@@ -87,6 +105,18 @@ namespace CMBC.EasyFactor.CaseMgr
                                   where
                                       cda.CDAStatus == "已审核未下发"
                                       && (cda.Case.TransactionType == "国内卖方保理" || cda.Case.TransactionType == "国内信保保理" || cda.Case.TransactionType == "出口保理" || cda.Case.TransactionType == "国际信保保理")
+                                  select cda;
+
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            }
+            else if (this.opCDAType == OpCDAType.DUE)
+            {
+                context = new DBDataContext();
+                var queryResult = from cda in context.CDAs
+                                  where
+                                      cda.CDAStatus == ConstStr.CDA.CHECKED
+                                      && (cda.CreditCoverPeriodEnd < DateTime.Now.Date || cda.FinanceLinePeriodEnd < DateTime.Now.Date)
                                   select cda;
 
                 this.bs.DataSource = queryResult;
@@ -252,7 +282,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private void dgvCDAs_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewColumn column = this.dgvCDAs.Columns[e.ColumnIndex];
-            if (column == colIsRecoarse)
+            if (column == colIsRecoarse || column == colIsSign)
             {
                 Object originalData = e.Value;
                 if (originalData != null)
@@ -331,6 +361,7 @@ namespace CMBC.EasyFactor.CaseMgr
             string contractCode = tbContractCode.Text;
             string status = this.cbCheckStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
+            bool isCDAChecked = this.cbIsCDA.CheckState == System.Windows.Forms.CheckState.Checked;
 
             context = new DBDataContext();
 
@@ -349,6 +380,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 where
                  (status != string.Empty ? cda.CDAStatus == status : true)
                  && cda.CreateUserName.Contains(createUserName)
+                 && (isCDAChecked == true ? cda.IsSigned == isCDAChecked : true)
                 select cda;
 
             this.bs.DataSource = queryResult;

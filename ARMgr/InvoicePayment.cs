@@ -460,7 +460,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from invoice in context.Invoices
-                              where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.00000001)
+                              where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.InvoiceAssignBatch.CheckStatus == "已复核" && (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.00000001)
                               select invoice;
 
             this.invoiceBindingSource.DataSource = queryResult;

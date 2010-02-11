@@ -27,9 +27,48 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private BindingSource bs;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpContractType opType;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum OpContractType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            QUERY,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            DUE,
+        }
+
         #endregion Fields
 
         #region Constructors (1)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="opType"></param>
+        public ContractMgr(OpContractType opType)
+            : this()
+        {
+            this.opType = opType;
+            if (opType == OpContractType.DUE)
+            {
+                context = new DBDataContext();
+                var queryResult = context.Contracts.Where(c => c.ContractStatus == ConstStr.CONTRACT.AVAILABILITY && c.ContractDueDate < DateTime.Now.Date);
+
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            }
+        }
 
         /// <summary>
         /// 

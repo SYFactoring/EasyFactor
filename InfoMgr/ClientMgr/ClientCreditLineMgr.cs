@@ -49,6 +49,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// 
             /// </summary>
             QUERY_GROUP,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            DUE,
         }
 
         #endregion Enums
@@ -86,9 +91,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.colClientNameEN.HeaderText = "集团客户名称（英）";
                 this.cbClientGroupType.Text = "集团";
             }
-            else
+            else if (opType == OpClientCreditMgrType.QUERY_CLINET)
             {
                 this.cbClientGroupType.Text = "客户";
+            }
+            else if (opType == OpClientCreditMgrType.DUE)
+            {
+                DBDataContext context = new DBDataContext();
+
+                DateTime overDueDate = DateTime.Now.Date;
+
+                var queryResult = context.ClientCreditLines.Where(c => c.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && c.PeriodEnd < overDueDate);
+
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
         }
 

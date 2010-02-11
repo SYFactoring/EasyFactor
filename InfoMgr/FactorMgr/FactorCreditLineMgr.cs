@@ -26,9 +26,47 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private BindingSource bs;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpFactorCreditMgrType opType;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum OpFactorCreditMgrType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            QUERY,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            DUE,
+        }
+
         #endregion Fields
 
         #region Constructors (1)
+
+        public FactorCreditLineMgr(OpFactorCreditMgrType opType)
+            : this()
+        {
+            this.opType = opType;
+            if (opType == OpFactorCreditMgrType.DUE)
+            {
+                DBDataContext context = new DBDataContext();
+
+                DateTime overDueDate = DateTime.Now.Date;
+
+                var queryResult = context.FactorCreditLines.Where(f => f.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY && f.PeriodEnd < overDueDate);
+
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the FactorCreditLineMgr class
@@ -107,6 +145,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             var queryResult = context.FactorCreditLines.Where(f => f.Factor.FactorCode.Contains(factorCode) && (f.Factor.CompanyNameCN.Contains(factorName) || f.Factor.CompanyNameEN.Contains(factorName)));
             this.bs.DataSource = queryResult;
+            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
         #endregion Methods
