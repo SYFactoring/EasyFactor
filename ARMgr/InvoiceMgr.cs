@@ -80,6 +80,16 @@ namespace CMBC.EasyFactor.ARMgr
             /// 
             /// </summary>
             FINANCE_DUE,
+            
+            /// <summary>
+            /// 
+            /// </summary>
+            ASSIGN_DUE_BYDAY,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            FINANCE_DUE_BYDAY,
         }
 
         #endregion Enums
@@ -92,40 +102,21 @@ namespace CMBC.EasyFactor.ARMgr
             this.colAssignOverDueDays.Visible = true;
             this.colFinanceOverDueDays.Visible = true;
 
-            if (opInvoiceType == OpInvoiceType.ASSIGN_DUE)
+            if (opInvoiceType == OpInvoiceType.ASSIGN_DUE_BYDAY)
             {
                 this.tbAssignOverDueDays.Text = days.ToString();
             }
-            else if (opInvoiceType == OpInvoiceType.FINANCE_DUE)
+            else if (opInvoiceType == OpInvoiceType.FINANCE_DUE_BYDAY)
             {
                 this.tbFinanceOverDueDays.Text = days.ToString();
             }
 
             context = new DBDataContext();
-            int assignOverDueDays = 0;
-            DateTime assignOverDueDate = DateTime.Now.Date;
-            if (Int32.TryParse(this.tbAssignOverDueDays.Text, out assignOverDueDays))
-            {
-                if (assignOverDueDays != 0)
-                {
-                    assignOverDueDate = DateTime.Now.Date.AddDays(0 - assignOverDueDays);
-                }
-            }
-
-            int financeOverDueDays = 0;
-            DateTime financeOverDueDate = DateTime.Now.Date;
-            if (Int32.TryParse(this.tbFinanceOverDueDays.Text, out financeOverDueDays))
-            {
-                if (financeOverDueDays != 0)
-                {
-                    financeOverDueDate = DateTime.Now.Date.AddDays(0 - financeOverDueDays);
-                }
-            }
 
             var queryResult = from invoice in context.Invoices
                               where
-                                 (tbAssignOverDueDays.Text == string.Empty ? true : (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.0000001 && invoice.DueDate <= assignOverDueDate && invoice.DueDate >= DateTime.Now.Date))
-                                && (tbFinanceOverDueDays.Text == string.Empty ? true : (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0000001 && invoice.FinanceDueDate <= financeOverDueDate && invoice.FinanceDueDate >= DateTime.Now.Date))
+                                 (tbAssignOverDueDays.Text == string.Empty ? true : (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.0000001 && invoice.DueDate <= DateTime.Now.Date.AddDays(0 - days) && invoice.DueDate >= DateTime.Now.Date))
+                                && (tbFinanceOverDueDays.Text == string.Empty ? true : (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0000001 && invoice.FinanceDueDate <= DateTime.Now.Date.AddDays(0 - days) && invoice.FinanceDueDate >= DateTime.Now.Date))
                               select invoice;
 
             this.bs.DataSource = queryResult;
@@ -175,8 +166,24 @@ namespace CMBC.EasyFactor.ARMgr
                 this.colAssignOverDueDays.Visible = true;
                 this.colFinanceOverDueDays.Visible = true;
 
-                this.tbAssignOverDueDays.Text = "0";
-                this.tbFinanceOverDueDays.Text = "0";
+                this.tbAssignOverDueDays.Text = "1";
+                this.tbFinanceOverDueDays.Text = "1";
+                this.QueryInvoices(null, null);
+            }
+            else if (opInvoiceType == OpInvoiceType.ASSIGN_DUE)
+            {
+                this.colAssignOverDueDays.Visible = true;
+                this.colFinanceOverDueDays.Visible = true;
+
+                this.tbAssignOverDueDays.Text = "1";
+                this.QueryInvoices(null, null);
+            }
+            else if (opInvoiceType == OpInvoiceType.FINANCE_DUE)
+            {
+                this.colAssignOverDueDays.Visible = true;
+                this.colFinanceOverDueDays.Visible = true;
+
+                this.tbFinanceOverDueDays.Text = "1";
                 this.QueryInvoices(null, null);
             }
 

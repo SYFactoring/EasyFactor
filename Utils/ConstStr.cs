@@ -124,7 +124,7 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 未审核
             /// </summary>
-            public static string NO_CHECK = "未审核";
+            public static string UNCHECK = "未审核";
 
             /// <summary>
             /// 已复核
@@ -140,6 +140,27 @@ namespace CMBC.EasyFactor.Utils
             /// 已失效
             /// </summary>
             public static string INVALID = "已失效";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public class BATCH
+        {
+            /// <summary>
+            /// 未复核
+            /// </summary>
+            public static string UNCHECK = "未复核";
+
+            /// <summary>
+            /// 已复核
+            /// </summary>
+            public static string CHECK = "已复核";
+
+            /// <summary>
+            /// 复核未通过
+            /// </summary>
+            public static string REJECT = "复核未通过";
         }
     }
 }

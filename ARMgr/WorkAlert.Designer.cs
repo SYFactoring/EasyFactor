@@ -111,6 +111,7 @@
             this.btnDueAssign7 = new DevComponents.DotNetBar.ButtonX();
             this.bubbleBarTab1 = new DevComponents.DotNetBar.BubbleBarTab(this.components);
             this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.panelLeft.SuspendLayout();
             this.panelRejectCheck.SuspendLayout();
             this.panelWaitCheck.SuspendLayout();
@@ -686,6 +687,13 @@
             this.bubbleBarTab1.Name = "bubbleBarTab1";
             this.bubbleBarTab1.Text = "";
             // 
+            // backgroundWorker
+            // 
+            this.backgroundWorker.WorkerReportsProgress = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            // 
             // WorkAlert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -710,5 +718,6 @@
 
         private DevComponents.DotNetBar.BubbleBarTab bubbleBarTab1;
         private DevComponents.DotNetBar.SuperTooltip superTooltip;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }

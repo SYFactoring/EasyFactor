@@ -96,7 +96,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             if (this.opCDAType == OpCDAType.CHECK)
             {
-                this.cbCheckStatus.Text = "未复核";
+                this.cbCheckStatus.Text = "未审核";
                 this.QueryCDAs(null, null);
             }
             else if (this.opCDAType == OpCDAType.REPORT)
@@ -104,7 +104,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 context = new DBDataContext();
                 var queryResult = from cda in context.CDAs
                                   where
-                                      cda.CDAStatus == "已审核未下发"
+                                      cda.CDAStatus == "已审核"
                                       && (cda.Case.TransactionType == "国内卖方保理" || cda.Case.TransactionType == "国内信保保理" || cda.Case.TransactionType == "出口保理" || cda.Case.TransactionType == "国际信保保理")
                                   select cda;
 
@@ -197,7 +197,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             CDA cda = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
-            if (cda.CDAStatus != ConstStr.CDA.NO_CHECK)
+            if (cda.CDAStatus != ConstStr.CDA.UNCHECK)
             {
                 MessageBoxEx.Show("此额度通知书已经过审核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -407,7 +407,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             CDA cda = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
 
-            if (cda.CDAStatus != ConstStr.CDA.NO_CHECK)
+            if (cda.CDAStatus != ConstStr.CDA.UNCHECK)
             {
                 MessageBoxEx.Show("此额度通知书已经过审核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;

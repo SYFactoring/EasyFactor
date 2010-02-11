@@ -2,10 +2,14 @@
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
+    using System.ComponentModel;
+    using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.CaseMgr;
+    using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
+    using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
 
     /// <summary>
@@ -13,28 +17,212 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class WorkAlert : UserControl
     {
-        #region Constructors (1)
+		#region Constructors (1) 
 
+        /// <summary>
+        /// 
+        /// </summary>
         public WorkAlert()
         {
             this.InitializeComponent();
             this.AddSuperToolTip();
+            this.CheckUpdates();
         }
 
+		#endregion Constructors 
+
+		#region Methods (31) 
+
+		// Public Methods (1) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CheckUpdates()
+        {
+            this.backgroundWorker.RunWorkerAsync();
+        }
+		// Private Methods (30) 
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void AddSuperToolTip()
         {
-            this.superTooltip.SetSuperTooltip(this.btnNeedCheckCDA, new SuperTooltipInfo("需要放行的额度通知书", "", "", null, null, eTooltipColor.Apple));
-            this.superTooltip.SetSuperTooltip(this.btnNeedCheckAssign, new SuperTooltipInfo("需要放行的转让批次", "", "", null, null, eTooltipColor.Apple));
-            this.superTooltip.SetSuperTooltip(this.btnNeedCheckFinance, new SuperTooltipInfo("需要放行的融资批次", "", "", null, null, eTooltipColor.Apple));
-            this.superTooltip.SetSuperTooltip(this.btnNeedCheckPayment, new SuperTooltipInfo("需要放行的付款批次", "", "", null, null, eTooltipColor.Apple));
-            this.superTooltip.SetSuperTooltip(this.btnNeedCheckRefund, new SuperTooltipInfo("需要放行的还款批次", "", "", null, null, eTooltipColor.Apple));
+            eTooltipColor color = eTooltipColor.Apple;
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckCDA, new SuperTooltipInfo("需要放行的额度通知书", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckAssign, new SuperTooltipInfo("需要放行的转让批次", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckFinance, new SuperTooltipInfo("需要放行的融资批次", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckPayment, new SuperTooltipInfo("需要放行的付款批次", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckRefund, new SuperTooltipInfo("需要放行的还款批次", "", "", null, null, color));
+
+            this.superTooltip.SetSuperTooltip(this.btnWaitCheckCDA, new SuperTooltipInfo("等待放行的额度通知书", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnWaitCheckAssign, new SuperTooltipInfo("等待放行的转让批次", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnWaitCheckFinance, new SuperTooltipInfo("等待放行的融资批次", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnWaitCheckPayment, new SuperTooltipInfo("等待放行的付款批次", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnWaitCheckRefund, new SuperTooltipInfo("等待放行的还款批次", "", "", null, null, color));
+
+            this.superTooltip.SetSuperTooltip(this.btnRejectCheckCDA, new SuperTooltipInfo("拒绝放行的额度通知书", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnRejectCheckAssign, new SuperTooltipInfo("拒绝放行的转让批次", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnRejectCheckFinance, new SuperTooltipInfo("拒绝放行的融资批次", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnRejectCheckPayment, new SuperTooltipInfo("拒绝放行的付款批次", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnRejectCheckRefund, new SuperTooltipInfo("拒绝放行的还款批次", "", "", null, null, color));
+
+            this.superTooltip.SetSuperTooltip(this.btnDueAssign7, new SuperTooltipInfo("7日内到期的应收账款", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueAssign0, new SuperTooltipInfo("今日到期的应收账款", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueAssign, new SuperTooltipInfo("已经逾期的应收账款", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnInvoiceDispute, new SuperTooltipInfo("商纠账款", "", "", null, null, color));
+
+            this.superTooltip.SetSuperTooltip(this.btnDueFinance7, new SuperTooltipInfo("7日内到期的应收账款", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueFinance0, new SuperTooltipInfo("今日到期的应收账款", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueFinance, new SuperTooltipInfo("已经逾期的应收账款", "", "", null, null, color));
+
+            this.superTooltip.SetSuperTooltip(this.btnDueClientCreditLine, new SuperTooltipInfo("客户额度到期", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueFactorCreditLine, new SuperTooltipInfo("保理商额度到期", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueCDA, new SuperTooltipInfo("额度通知书到期", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueContract, new SuperTooltipInfo("保理合同到期", "", "", null, null, color));
         }
 
-        #endregion Constructors
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
 
-        #region Methods (26)
+            DBDataContext context = new DBDataContext();
+            int result = 0;
 
-        // Private Methods (26) 
+            //QueryNeedCheckCDA
+            result = context.CDAs.Count(c => c.CDAStatus == ConstStr.CDA.UNCHECK);
+            worker.ReportProgress(result, this.btnNeedCheckCDA);
+
+            //QueryNeedCheckAssign
+            result = context.InvoiceAssignBatches.Count(i => i.CheckStatus == ConstStr.BATCH.UNCHECK);
+            worker.ReportProgress(result, this.btnNeedCheckAssign);
+
+            //QueryNeedCheckFinance
+            result = context.InvoiceFinanceBatches.Count(i => i.CheckStatus == ConstStr.BATCH.UNCHECK);
+            worker.ReportProgress(result, this.btnNeedCheckFinance);
+
+            //QueryNeedCheckPayment
+            result = context.InvoicePaymentBatches.Count(i => i.CheckStatus == ConstStr.BATCH.UNCHECK);
+            worker.ReportProgress(result, this.btnNeedCheckPayment);
+
+            //QueryNeedCheckRefund
+            result = context.InvoiceRefundBatches.Count(i => i.CheckStatus == ConstStr.BATCH.UNCHECK);
+            worker.ReportProgress(result, this.btnNeedCheckRefund);
+
+            //QueryWaitCheckCDA
+            result = context.CDAs.Count(c => c.CDAStatus == ConstStr.CDA.UNCHECK && c.CreateUserName == App.Current.CurUser.Name);
+            worker.ReportProgress(result, this.btnWaitCheckCDA);
+
+            //QueryWaitCheckAssign
+            result = context.InvoiceAssignBatches.Count(i => i.CheckStatus == ConstStr.BATCH.UNCHECK && i.CheckUserName == App.Current.CurUser.Name);
+            worker.ReportProgress(result, this.btnWaitCheckAssign);
+
+            //QueryWaitCheckFinance
+            result = context.InvoiceFinanceBatches.Count(i => i.CheckStatus == ConstStr.BATCH.UNCHECK && i.CheckUserName == App.Current.CurUser.Name);
+            worker.ReportProgress(result, this.btnWaitCheckFinance);
+
+            //QueryWaitCheckPayment
+            result = context.InvoicePaymentBatches.Count(i => i.CheckStatus == ConstStr.BATCH.UNCHECK && i.CheckUserName == App.Current.CurUser.Name);
+            worker.ReportProgress(result, this.btnWaitCheckPayment);
+
+            //QueryWaitCheckRefund
+            result = context.InvoiceRefundBatches.Count(i => i.CheckStatus == ConstStr.BATCH.UNCHECK && i.CheckUserName == App.Current.CurUser.Name);
+            worker.ReportProgress(result, this.btnWaitCheckRefund);
+
+            //QueryRejectCheckCDA
+            result = context.CDAs.Count(c => c.CDAStatus == ConstStr.CDA.REJECT && c.CreateUserName == App.Current.CurUser.Name);
+            worker.ReportProgress(result, this.btnRejectCheckCDA);
+
+            //QueryRejectCheckAssign
+            result = context.InvoiceAssignBatches.Count(i => i.CheckStatus == ConstStr.BATCH.REJECT && i.CheckUserName == App.Current.CurUser.Name);
+            worker.ReportProgress(result, this.btnRejectCheckAssign);
+
+            //QueryRejectCheckFinance
+            result = context.InvoiceFinanceBatches.Count(i => i.CheckStatus == ConstStr.BATCH.REJECT && i.CheckUserName == App.Current.CurUser.Name);
+            worker.ReportProgress(result, this.btnRejectCheckFinance);
+
+            //QueryRejectCheckPayment
+            result = context.InvoicePaymentBatches.Count(i => i.CheckStatus == ConstStr.BATCH.REJECT && i.CheckUserName == App.Current.CurUser.Name);
+            worker.ReportProgress(result, this.btnRejectCheckPayment);
+
+            //QueryRejectCheckRefund
+            result = context.InvoiceRefundBatches.Count(i => i.CheckStatus == ConstStr.BATCH.REJECT && i.CheckUserName == App.Current.CurUser.Name);
+            worker.ReportProgress(result, this.btnRejectCheckRefund);
+
+            //DueAssign7
+            result = context.Invoices.Count(invoice => invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.0000001 && invoice.DueDate <= DateTime.Now.Date.AddDays(7) && invoice.DueDate >= DateTime.Now.Date);
+            worker.ReportProgress(result, this.btnDueAssign7);
+
+            //DueAssign0
+            result = context.Invoices.Count(invoice => invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.0000001 && invoice.DueDate == DateTime.Now.Date);
+            worker.ReportProgress(result, this.btnDueAssign0);
+
+            //DueAssign
+            result = context.Invoices.Count(invoice => invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.0000001 && invoice.DueDate < DateTime.Now.Date);
+            worker.ReportProgress(result, this.btnDueAssign);
+
+            //InvoiceDispute
+            result = context.Invoices.Count(invoice => invoice.IsDispute == true);
+            worker.ReportProgress(result, this.btnInvoiceDispute);
+
+            //DueFinance7
+            result = context.Invoices.Count(invoice => invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0000001 && invoice.FinanceDueDate <= DateTime.Now.Date.AddDays(7) && invoice.FinanceDueDate >= DateTime.Now.Date);
+            worker.ReportProgress(result, this.btnDueFinance7);
+
+            //DueFinance0
+            result = context.Invoices.Count(invoice => invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0000001 && invoice.FinanceDueDate == DateTime.Now.Date);
+            worker.ReportProgress(result, this.btnDueFinance0);
+
+            //DueFinance
+            result = context.Invoices.Count(invoice => invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0000001 && invoice.FinanceDueDate < DateTime.Now.Date);
+            worker.ReportProgress(result, this.btnDueFinance);
+
+            //DueClientCreditLine
+            result = context.ClientCreditLines.Count(c => c.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && c.PeriodEnd < DateTime.Now.Date);
+            worker.ReportProgress(result, this.btnDueClientCreditLine);
+
+            //DueFactorCreditLine
+            result = context.FactorCreditLines.Count(f => f.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY && f.PeriodEnd < DateTime.Now.Date);
+            worker.ReportProgress(result, this.btnDueFactorCreditLine);
+
+            //DueCDA
+            result = context.CDAs.Count(cda => cda.CDAStatus == ConstStr.CDA.CHECKED
+                                       && (cda.CreditCoverPeriodEnd < DateTime.Now.Date || cda.FinanceLinePeriodEnd < DateTime.Now.Date));
+            worker.ReportProgress(result, this.btnDueCDA);
+
+            //DueContract
+            result = context.Contracts.Count(c => c.ContractStatus == ConstStr.CONTRACT.AVAILABILITY && c.ContractDueDate < DateTime.Now.Date);
+            worker.ReportProgress(result, this.btnDueContract);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            ButtonX button = (ButtonX)e.UserState;
+            SuperTooltipInfo tipInfo = this.superTooltip.GetSuperTooltip(button);
+            tipInfo.BodyText = String.Format("有{0}条记录需要处理", e.ProgressPercentage);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+        }
 
         /// <summary>
         /// 
@@ -87,7 +275,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryInvoiceAssignDue(object sender, EventArgs e)
         {
-            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.OVER_DUE);
+            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.ASSIGN_DUE);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -98,7 +286,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryInvoiceAssignDueBy0(object sender, EventArgs e)
         {
-            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.ASSIGN_DUE, 0);
+            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.ASSIGN_DUE_BYDAY, 0);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -109,7 +297,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryInvoiceAssignDueBy7(object sender, EventArgs e)
         {
-            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.ASSIGN_DUE, -7);
+            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.ASSIGN_DUE_BYDAY, -7);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -131,7 +319,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryInvoiceFinanceDue(object sender, EventArgs e)
         {
-            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.OVER_DUE);
+            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FINANCE_DUE);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -142,7 +330,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryInvoiceFinanceDueBy0(object sender, EventArgs e)
         {
-            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FINANCE_DUE, 0);
+            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FINANCE_DUE_BYDAY, 0);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -153,7 +341,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryInvoiceFinanceDueBy7(object sender, EventArgs e)
         {
-            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FINANCE_DUE, -7);
+            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FINANCE_DUE_BYDAY, -7);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -219,7 +407,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryRejectCheckAssigns(object sender, EventArgs e)
         {
-            AssignBatchMgr mgr = new AssignBatchMgr(App.Current.CurUser.Name, "复核未通过");
+            AssignBatchMgr mgr = new AssignBatchMgr(App.Current.CurUser.Name, ConstStr.BATCH.REJECT);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -230,7 +418,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryRejectCheckCDAs(object sender, EventArgs e)
         {
-            CDAMgr mgr = new CDAMgr(App.Current.CurUser.Name, "审核未通过");
+            CDAMgr mgr = new CDAMgr(App.Current.CurUser.Name, ConstStr.CDA.REJECT);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -241,7 +429,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryRejectCheckFinances(object sender, EventArgs e)
         {
-            FinanceBatchMgr mgr = new FinanceBatchMgr(App.Current.CurUser.Name, "复核未通过");
+            FinanceBatchMgr mgr = new FinanceBatchMgr(App.Current.CurUser.Name, ConstStr.BATCH.REJECT);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -252,7 +440,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryRejectCheckPayments(object sender, EventArgs e)
         {
-            PaymentBatchMgr mgr = new PaymentBatchMgr(App.Current.CurUser.Name, "复核未通过");
+            PaymentBatchMgr mgr = new PaymentBatchMgr(App.Current.CurUser.Name, ConstStr.BATCH.REJECT);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -263,7 +451,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryRejectCheckRefunds(object sender, EventArgs e)
         {
-            RefundBatchMgr mgr = new RefundBatchMgr(App.Current.CurUser.Name, "复核未通过");
+            RefundBatchMgr mgr = new RefundBatchMgr(App.Current.CurUser.Name, ConstStr.BATCH.REJECT);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -274,7 +462,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryWaitCheckAssigns(object sender, EventArgs e)
         {
-            AssignBatchMgr mgr = new AssignBatchMgr(App.Current.CurUser.Name, "未复核");
+            AssignBatchMgr mgr = new AssignBatchMgr(App.Current.CurUser.Name, ConstStr.BATCH.UNCHECK);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -285,7 +473,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryWaitCheckCDAs(object sender, EventArgs e)
         {
-            CDAMgr mgr = new CDAMgr(App.Current.CurUser.Name, "未审核");
+            CDAMgr mgr = new CDAMgr(App.Current.CurUser.Name, ConstStr.CDA.UNCHECK);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -296,7 +484,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryWaitCheckFinances(object sender, EventArgs e)
         {
-            FinanceBatchMgr mgr = new FinanceBatchMgr(App.Current.CurUser.Name, "未复核");
+            FinanceBatchMgr mgr = new FinanceBatchMgr(App.Current.CurUser.Name, ConstStr.BATCH.UNCHECK);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -307,7 +495,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryWaitCheckPayments(object sender, EventArgs e)
         {
-            PaymentBatchMgr mgr = new PaymentBatchMgr(App.Current.CurUser.Name, "未复核");
+            PaymentBatchMgr mgr = new PaymentBatchMgr(App.Current.CurUser.Name, ConstStr.BATCH.UNCHECK);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
@@ -318,10 +506,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryWaitCheckRefunds(object sender, EventArgs e)
         {
-            RefundBatchMgr mgr = new RefundBatchMgr(App.Current.CurUser.Name, "未复核");
+            RefundBatchMgr mgr = new RefundBatchMgr(App.Current.CurUser.Name, ConstStr.BATCH.UNCHECK);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

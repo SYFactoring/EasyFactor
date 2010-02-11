@@ -114,7 +114,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             this.assignTypeComboBox.Items.AddRange(new string[] { "全部", "部分" });
             this.commissionTypeComboBox.Items.AddRange(new string[] { "按转让金额", "按融资金额", "其他" });
-            this.cDAStatusComboBox.Items.AddRange(new string[] { ConstStr.CDA.NO_CHECK, ConstStr.CDA.CHECKED, ConstStr.CDA.REJECT, ConstStr.CDA.INVALID });
+            this.cDAStatusComboBox.Items.AddRange(new string[] { ConstStr.CDA.UNCHECK, ConstStr.CDA.CHECKED, ConstStr.CDA.REJECT, ConstStr.CDA.INVALID });
 
             if (opCDAType == OpCDAType.NEW_CDA)
             {
