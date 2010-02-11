@@ -1037,5 +1037,35 @@ namespace CMBC.EasyFactor
         }
 
         #endregion Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowFromTray(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+            this.ShowInTaskbar = true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HideInTray(object sender, EventArgs e)
+        {
+            this.ShowInTaskbar = false;
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void MainWindow_Deactivate(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.ShowInTaskbar = false;
+            }
+        }
     }
 }

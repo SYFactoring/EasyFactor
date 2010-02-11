@@ -9,13 +9,6 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.ButtonX btnContractQuery;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbContractStatus;
         private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContractCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContractDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContractStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContractValueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -80,19 +73,20 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbContractCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblContractCode = new DevComponents.DotNetBar.LabelX();
             this.dgvContracts = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colContractCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClientEDICode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colContractValueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colContractDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colContractStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuContractMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemContractSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemContractDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemContractNew = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemContractDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.colContractCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClientEDICode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colContractValueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colContractDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colContractStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsSigned = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelContractQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContracts)).BeginInit();
             this.cmuContractMgr.SuspendLayout();
@@ -271,6 +265,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colContractValueDate,
             this.colContractDueDate,
             this.colContractStatus,
+            this.colIsSigned,
             this.colCreateUserName});
             this.dgvContracts.ContextMenuStrip = this.cmuContractMgr;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -291,6 +286,51 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvContracts.TabIndex = 0;
             this.dgvContracts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvContracts.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvContracts_RowPostPaint);
+            this.dgvContracts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvContracts_CellFormatting);
+            // 
+            // cmuContractMgr
+            // 
+            this.cmuContractMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemContractSelect,
+            this.menuItemContractDetail,
+            this.toolStripSeparator,
+            this.menuItemContractNew,
+            this.menuItemContractDelete});
+            this.cmuContractMgr.Name = "cmuContractMgr";
+            this.cmuContractMgr.Size = new System.Drawing.Size(123, 98);
+            // 
+            // menuItemContractSelect
+            // 
+            this.menuItemContractSelect.Name = "menuItemContractSelect";
+            this.menuItemContractSelect.Size = new System.Drawing.Size(122, 22);
+            this.menuItemContractSelect.Text = "选定合同";
+            this.menuItemContractSelect.Click += new System.EventHandler(this.SelectContract);
+            // 
+            // menuItemContractDetail
+            // 
+            this.menuItemContractDetail.Name = "menuItemContractDetail";
+            this.menuItemContractDetail.Size = new System.Drawing.Size(122, 22);
+            this.menuItemContractDetail.Text = "详细信息";
+            this.menuItemContractDetail.Click += new System.EventHandler(this.DetailContract);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(119, 6);
+            // 
+            // menuItemContractNew
+            // 
+            this.menuItemContractNew.Name = "menuItemContractNew";
+            this.menuItemContractNew.Size = new System.Drawing.Size(122, 22);
+            this.menuItemContractNew.Text = "新建合同";
+            this.menuItemContractNew.Click += new System.EventHandler(this.NewContract);
+            // 
+            // menuItemContractDelete
+            // 
+            this.menuItemContractDelete.Name = "menuItemContractDelete";
+            this.menuItemContractDelete.Size = new System.Drawing.Size(122, 22);
+            this.menuItemContractDelete.Text = "删除合同";
+            this.menuItemContractDelete.Click += new System.EventHandler(this.DeleteContract);
             // 
             // colContractCode
             // 
@@ -336,56 +376,19 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colContractStatus.Name = "colContractStatus";
             this.colContractStatus.ReadOnly = true;
             // 
+            // colIsSigned
+            // 
+            this.colIsSigned.DataPropertyName = "IsSigned";
+            this.colIsSigned.HeaderText = "是否签回";
+            this.colIsSigned.Name = "colIsSigned";
+            this.colIsSigned.ReadOnly = true;
+            // 
             // colCreateUserName
             // 
             this.colCreateUserName.DataPropertyName = "CreateUserName";
             this.colCreateUserName.HeaderText = "经办人";
             this.colCreateUserName.Name = "colCreateUserName";
             this.colCreateUserName.ReadOnly = true;
-            // 
-            // cmuContractMgr
-            // 
-            this.cmuContractMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemContractSelect,
-            this.menuItemContractDetail,
-            this.toolStripSeparator,
-            this.menuItemContractNew,
-            this.menuItemContractDelete});
-            this.cmuContractMgr.Name = "cmuContractMgr";
-            this.cmuContractMgr.Size = new System.Drawing.Size(153, 120);
-            // 
-            // menuItemContractSelect
-            // 
-            this.menuItemContractSelect.Name = "menuItemContractSelect";
-            this.menuItemContractSelect.Size = new System.Drawing.Size(152, 22);
-            this.menuItemContractSelect.Text = "选定合同";
-            this.menuItemContractSelect.Click += new System.EventHandler(this.SelectContract);
-            // 
-            // menuItemContractDetail
-            // 
-            this.menuItemContractDetail.Name = "menuItemContractDetail";
-            this.menuItemContractDetail.Size = new System.Drawing.Size(152, 22);
-            this.menuItemContractDetail.Text = "详细信息";
-            this.menuItemContractDetail.Click += new System.EventHandler(this.DetailContract);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
-            // 
-            // menuItemContractNew
-            // 
-            this.menuItemContractNew.Name = "menuItemContractNew";
-            this.menuItemContractNew.Size = new System.Drawing.Size(152, 22);
-            this.menuItemContractNew.Text = "新建合同";
-            this.menuItemContractNew.Click += new System.EventHandler(this.NewContract);
-            // 
-            // menuItemContractDelete
-            // 
-            this.menuItemContractDelete.Name = "menuItemContractDelete";
-            this.menuItemContractDelete.Size = new System.Drawing.Size(152, 22);
-            this.menuItemContractDelete.Text = "删除合同";
-            this.menuItemContractDelete.Click += new System.EventHandler(this.DeleteContract);
             // 
             // ContractMgr
             // 
@@ -408,5 +411,13 @@ namespace CMBC.EasyFactor.CaseMgr
 
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
         private DevComponents.DotNetBar.LabelX lblCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractValueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsSigned;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
     }
 }

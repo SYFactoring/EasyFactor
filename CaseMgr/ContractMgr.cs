@@ -21,17 +21,20 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class ContractMgr : UserControl
     {
-        #region Fields (1)
+        #region Fields (2)
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs;
-
         /// <summary>
         /// 
         /// </summary>
         private OpContractType opType;
+
+        #endregion Fields
+
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -49,9 +52,9 @@ namespace CMBC.EasyFactor.CaseMgr
             DUE,
         }
 
-        #endregion Fields
+        #endregion Enums
 
-        #region Constructors (1)
+        #region Constructors (2)
 
         /// <summary>
         /// 
@@ -118,9 +121,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Properties
 
-        #region Methods (8)
+        #region Methods (9)
 
-        // Private Methods (8) 
+        // Private Methods (9) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -196,6 +199,32 @@ namespace CMBC.EasyFactor.CaseMgr
             Contract selectedContract = (Contract)this.bs.List[this.dgvContracts.SelectedRows[0].Index];
             ClientDetail clientDetail = new ClientDetail(selectedContract, ClientDetail.OpContractType.DETAIL_CONTRACT);
             clientDetail.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvContracts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewColumn column = this.dgvContracts.Columns[e.ColumnIndex];
+            if (column == colIsSigned)
+            {
+                Object originalData = e.Value;
+                if (originalData != null)
+                {
+                    bool result = (bool)originalData;
+                    if (result)
+                    {
+                        e.Value = "Y";
+                    }
+                    else
+                    {
+                        e.Value = "N";
+                    }
+                }
+            }
         }
 
         /// <summary>

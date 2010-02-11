@@ -331,6 +331,13 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel = new DevComponents.DotNetBar.Ribbon.RibbonClientPanel();
             this.logoLabel = new DevComponents.DotNetBar.Controls.ReflectionLabel();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notifyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemHide = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCheckAlert = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ribbonControl.SuspendLayout();
             this.ribbonPanelInfoMgr.SuspendLayout();
             this.ribbonPanelInvoiceMgr.SuspendLayout();
@@ -344,6 +351,7 @@ namespace CMBC.EasyFactor
             this.ribbonPanelHelp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusbar)).BeginInit();
             this.ribbonDetailPanel.SuspendLayout();
+            this.notifyMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // ribbonControl
@@ -2311,8 +2319,62 @@ namespace CMBC.EasyFactor
             // notifyIcon
             // 
             this.notifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.notifyIcon.Text = "notifyIcon";
+            this.notifyIcon.BalloonTipText = "Text";
+            this.notifyIcon.BalloonTipTitle = "Title";
+            this.notifyIcon.ContextMenuStrip = this.notifyMenu;
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "EasyFactoring";
             this.notifyIcon.Visible = true;
+            this.notifyIcon.DoubleClick += new System.EventHandler(this.ShowFromTray);
+            // 
+            // notifyMenu
+            // 
+            this.notifyMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemOpen,
+            this.menuItemHide,
+            this.toolStripSeparator1,
+            this.menuItemCheckAlert,
+            this.toolStripSeparator2,
+            this.menuItemExit});
+            this.notifyMenu.Name = "notifyMenu";
+            this.notifyMenu.Size = new System.Drawing.Size(153, 126);
+            // 
+            // menuItemOpen
+            // 
+            this.menuItemOpen.Name = "menuItemOpen";
+            this.menuItemOpen.Size = new System.Drawing.Size(152, 22);
+            this.menuItemOpen.Text = "恢复窗口(&O)";
+            this.menuItemOpen.Click += new System.EventHandler(this.ShowFromTray);
+            // 
+            // menuItemHide
+            // 
+            this.menuItemHide.Name = "menuItemHide";
+            this.menuItemHide.Size = new System.Drawing.Size(152, 22);
+            this.menuItemHide.Text = "隐藏窗口(&H)";
+            this.menuItemHide.Click += new System.EventHandler(this.HideInTray);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // menuItemExit
+            // 
+            this.menuItemExit.Name = "menuItemExit";
+            this.menuItemExit.Size = new System.Drawing.Size(152, 22);
+            this.menuItemExit.Text = "退出系统(&E)";
+            this.menuItemExit.Click += new System.EventHandler(this.Exit);
+            // 
+            // menuItemCheckAlert
+            // 
+            this.menuItemCheckAlert.Name = "menuItemCheckAlert";
+            this.menuItemCheckAlert.Size = new System.Drawing.Size(152, 22);
+            this.menuItemCheckAlert.Text = "检查提醒(&C)";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // MainWindow
             // 
@@ -2324,6 +2386,7 @@ namespace CMBC.EasyFactor
             this.Controls.Add(this.ribbonControl);
             this.Name = "MainWindow";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Deactivate += new System.EventHandler(this.MainWindow_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
             this.ribbonControl.ResumeLayout(false);
             this.ribbonControl.PerformLayout();
@@ -2339,6 +2402,7 @@ namespace CMBC.EasyFactor
             this.ribbonPanelHelp.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.statusbar)).EndInit();
             this.ribbonDetailPanel.ResumeLayout(false);
+            this.notifyMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2360,5 +2424,12 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnPoolFinance;
         private DevComponents.DotNetBar.ButtonItem btnPoolRefund;
         private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.ContextMenuStrip notifyMenu;
+        private System.Windows.Forms.ToolStripMenuItem menuItemOpen;
+        private System.Windows.Forms.ToolStripMenuItem menuItemHide;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemExit;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCheckAlert;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
