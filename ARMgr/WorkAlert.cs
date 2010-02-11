@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class WorkAlert : UserControl
     {
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// 
@@ -29,20 +29,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.CheckUpdates();
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (31) 
+        #region Methods (31)
 
-		// Public Methods (1) 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void CheckUpdates()
-        {
-            this.backgroundWorker.RunWorkerAsync();
-        }
-		// Private Methods (30) 
+        // Private Methods (31) 
 
         /// <summary>
         /// 
@@ -212,6 +203,7 @@ namespace CMBC.EasyFactor.ARMgr
             ButtonX button = (ButtonX)e.UserState;
             SuperTooltipInfo tipInfo = this.superTooltip.GetSuperTooltip(button);
             tipInfo.BodyText = String.Format("有{0}条记录需要处理", e.ProgressPercentage);
+            button.Text = String.Format("{0} ({1})", button.Text, e.ProgressPercentage);
         }
 
         /// <summary>
@@ -222,6 +214,14 @@ namespace CMBC.EasyFactor.ARMgr
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void CheckUpdates()
+        {
+            this.backgroundWorker.RunWorkerAsync();
         }
 
         /// <summary>
@@ -510,6 +510,6 @@ namespace CMBC.EasyFactor.ARMgr
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

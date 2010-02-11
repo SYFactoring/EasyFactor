@@ -112,6 +112,7 @@
             this.bubbleBarTab1 = new DevComponents.DotNetBar.BubbleBarTab(this.components);
             this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.panelLeft.SuspendLayout();
             this.panelRejectCheck.SuspendLayout();
             this.panelWaitCheck.SuspendLayout();
@@ -487,7 +488,7 @@
             this.btnDueFactorCreditLine.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnDueFactorCreditLine.Location = new System.Drawing.Point(15, 64);
             this.btnDueFactorCreditLine.Name = "btnDueFactorCreditLine";
-            this.btnDueFactorCreditLine.Size = new System.Drawing.Size(106, 23);
+            this.btnDueFactorCreditLine.Size = new System.Drawing.Size(152, 23);
             this.btnDueFactorCreditLine.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDueFactorCreditLine.TabIndex = 1;
             this.btnDueFactorCreditLine.Text = "b) 保理商额度到期";
@@ -500,7 +501,7 @@
             this.btnDueContract.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnDueContract.Location = new System.Drawing.Point(15, 121);
             this.btnDueContract.Name = "btnDueContract";
-            this.btnDueContract.Size = new System.Drawing.Size(106, 23);
+            this.btnDueContract.Size = new System.Drawing.Size(152, 23);
             this.btnDueContract.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDueContract.TabIndex = 3;
             this.btnDueContract.Text = "d) 保理合同到期";
@@ -513,7 +514,7 @@
             this.btnDueCDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnDueCDA.Location = new System.Drawing.Point(15, 93);
             this.btnDueCDA.Name = "btnDueCDA";
-            this.btnDueCDA.Size = new System.Drawing.Size(106, 23);
+            this.btnDueCDA.Size = new System.Drawing.Size(152, 23);
             this.btnDueCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDueCDA.TabIndex = 2;
             this.btnDueCDA.Text = "c) 额度通知书到期";
@@ -526,7 +527,7 @@
             this.btnDueClientCreditLine.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnDueClientCreditLine.Location = new System.Drawing.Point(15, 35);
             this.btnDueClientCreditLine.Name = "btnDueClientCreditLine";
-            this.btnDueClientCreditLine.Size = new System.Drawing.Size(106, 23);
+            this.btnDueClientCreditLine.Size = new System.Drawing.Size(152, 23);
             this.btnDueClientCreditLine.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDueClientCreditLine.TabIndex = 0;
             this.btnDueClientCreditLine.Text = "a) 客户额度到期";
@@ -694,6 +695,10 @@
             this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
             // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
+            // 
             // WorkAlert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -719,5 +724,6 @@
         private DevComponents.DotNetBar.BubbleBarTab bubbleBarTab1;
         private DevComponents.DotNetBar.SuperTooltip superTooltip;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
     }
 }
