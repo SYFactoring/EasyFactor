@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class ClientCreditLine 
+    public partial class ClientCreditLine
     {
         #region Properties (4)
 
@@ -106,7 +106,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     if (!ApproveNoRegex.IsMatch(this.ApproveNo))
                     {
-                        throw new ArgumentException("不符合授信编号规则");
+                        throw new ArgumentException("不符合授信编号规则: " + this.ApproveNo);
                     }
                 }
             }

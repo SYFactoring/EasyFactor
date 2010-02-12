@@ -14,7 +14,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class ClientReview
     {
-        private static Regex ReviewNoRegex = new Regex(@"^[A-Z]{2}\d{8}-\d{4}[A-Z]{2,3}-[A-Z]{2}$");
+        private static Regex ReviewNoRegex = new Regex(@"^[A-Z]{2}\d{8}-\d{4}[A-Z]{2,3}(-[A-Z]{2})?$");
 
         /// <summary>
         /// 
@@ -26,7 +26,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (!ReviewNoRegex.IsMatch(this.ReviewNo))
                 {
-                    throw new ArgumentException("不符合协查意见编码规则");
+                    throw new ArgumentException("不符合协查意见编码规则: " + this.ReviewNo);
                 }
             }
         }

@@ -15,7 +15,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class Client 
+    public partial class Client
     {
         #region Properties (7)
 
@@ -208,7 +208,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (!ClientEDICodeRegex.IsMatch(this.ClientEDICode))
                 {
-                    throw new ArgumentException("不符合保理代码规则");
+                    throw new ArgumentException("不符合保理代码规则: " + this.ClientEDICode);
                 }
             }
         }

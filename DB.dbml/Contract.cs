@@ -12,7 +12,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class Contract 
+    public partial class Contract
     {
         private static Regex ContractCodeRegex = new Regex(@"^[^~!@#$%\\^&\\*\\+=\\?]+$");
 
@@ -22,7 +22,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (!ContractCodeRegex.IsMatch(this.ContractCode))
                 {
-                    throw new ArgumentException("不符合保理合同编码规则");
+                    throw new ArgumentException("不符合保理合同编码规则: " + this.ContractCode);
                 }
             }
         }

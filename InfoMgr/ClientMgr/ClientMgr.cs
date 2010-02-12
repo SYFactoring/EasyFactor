@@ -225,6 +225,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     return;
                 }
 
+                if (selectedClient.ClientReviews.Count > 0)
+                {
+                    MessageBoxEx.Show("不能删除此客户,已存在相关协查意见", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 context.Clients.DeleteOnSubmit(selectedClient);
                 try
                 {

@@ -649,7 +649,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (!InvoiceNoRegex.IsMatch(this.InvoiceNo))
                 {
-                    throw new ArgumentException("不符合发票编码规则");
+                    throw new ArgumentException("不符合发票编码规则: " + this.InvoiceNo);
                 }
             }
         }

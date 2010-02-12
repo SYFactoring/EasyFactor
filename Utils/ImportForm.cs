@@ -795,13 +795,14 @@ namespace CMBC.EasyFactor.Utils
                         review.RequestAmount = (System.Nullable<double>)valueArray[row, column++];
                         review.RequestFinanceType = String.Format("{0:G}", valueArray[row, column++]);
                         review.RequestFinanceType2 = String.Format("{0:G}", valueArray[row, column++]);
-                        review.RequestFinancePeriod = (System.Nullable<int>)valueArray[row, column++];
+                        review.RequestFinancePeriod = Convert.ToInt32((System.Nullable<double>)valueArray[row, column++]);
                         review.RequestCommissionRate = (System.Nullable<double>)valueArray[row, column++];
                         review.ReviewStatus = String.Format("{0:G}", valueArray[row, column++]);
                         review.ReviewDate = (DateTime)valueArray[row, column++];
                         review.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                         review.Comment = String.Format("{0:G}", valueArray[row, column++]);
                         review.Client = client;
+                        reviewList.Add(review);
 
                         result++;
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
