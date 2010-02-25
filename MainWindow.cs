@@ -72,7 +72,7 @@ namespace CMBC.EasyFactor
 
         #endregion Properties
 
-        #region Methods (71)
+        #region Methods (75)
 
         // Public Methods (2) 
 
@@ -101,7 +101,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-        // Private Methods (69) 
+        // Private Methods (73) 
 
         /// <summary>
         /// 
@@ -321,6 +321,17 @@ namespace CMBC.EasyFactor
                 InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE);
                 this.SetDetailPanel(invoiceMgr);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HideInTray(object sender, EventArgs e)
+        {
+            this.ShowInTaskbar = false;
+            this.WindowState = FormWindowState.Minimized;
         }
 
         /// <summary>
@@ -600,6 +611,14 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(alert);
         }
 
+        private void MainWindow_Deactivate(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.ShowInTaskbar = false;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -791,6 +810,17 @@ namespace CMBC.EasyFactor
         private void QueryClientImport(object sender, EventArgs e)
         {
             ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.IMPORT_CLIENT);
+            this.SetDetailPanel(query);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryClientReviews(object sender, EventArgs e)
+        {
+            ClientReviewMgr query = new ClientReviewMgr(ClientReviewMgr.OpClientReviewMgrType.QUERY);
             this.SetDetailPanel(query);
         }
 
@@ -1008,6 +1038,17 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ShowFromTray(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+            this.ShowInTaskbar = true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StatCase(object sender, EventArgs e)
         {
             CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr(CaseMgr.CaseMgr.OpCaseType.STAT);
@@ -1037,35 +1078,5 @@ namespace CMBC.EasyFactor
         }
 
         #endregion Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ShowFromTray(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Maximized;
-            this.ShowInTaskbar = true;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void HideInTray(object sender, EventArgs e)
-        {
-            this.ShowInTaskbar = false;
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void MainWindow_Deactivate(object sender, EventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Minimized)
-            {
-                this.ShowInTaskbar = false;
-            }
-        }
     }
 }

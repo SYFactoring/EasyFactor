@@ -335,9 +335,10 @@ namespace CMBC.EasyFactor
             this.menuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemHide = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCheckAlert = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnClientReviewQuery = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonControl.SuspendLayout();
             this.ribbonPanelInfoMgr.SuspendLayout();
             this.ribbonPanelInvoiceMgr.SuspendLayout();
@@ -361,12 +362,12 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
-            this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
-            this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
-            this.ribbonControl.Controls.Add(this.ribbonPanel4);
-            this.ribbonControl.Controls.Add(this.ribbonPanel1);
-            this.ribbonControl.Controls.Add(this.ribbonPanel2);
             this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
+            this.ribbonControl.Controls.Add(this.ribbonPanel2);
+            this.ribbonControl.Controls.Add(this.ribbonPanel4);
+            this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
+            this.ribbonControl.Controls.Add(this.ribbonPanel1);
+            this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanelReport);
             this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanel3);
@@ -430,6 +431,7 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelInfoMgr.StyleMouseOver.Class = "";
             this.ribbonPanelInfoMgr.TabIndex = 2;
+            this.ribbonPanelInfoMgr.Visible = false;
             // 
             // ribbonBarExchange
             // 
@@ -1137,7 +1139,6 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelQuery.StyleMouseOver.Class = "";
             this.ribbonPanelQuery.TabIndex = 7;
-            this.ribbonPanelQuery.Visible = false;
             // 
             // ribbonBarBatchQuery
             // 
@@ -1157,7 +1158,7 @@ namespace CMBC.EasyFactor
             this.btnFinanceBatchQuery,
             this.btnPaymentBatchQuery,
             this.btnRefundBatchQuery});
-            this.ribbonBarBatchQuery.Location = new System.Drawing.Point(732, 0);
+            this.ribbonBarBatchQuery.Location = new System.Drawing.Point(793, 0);
             this.ribbonBarBatchQuery.Name = "ribbonBarBatchQuery";
             this.ribbonBarBatchQuery.Size = new System.Drawing.Size(152, 93);
             this.ribbonBarBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1219,7 +1220,7 @@ namespace CMBC.EasyFactor
             this.btnCreditCoverNegQuery2,
             this.btnInvoiceQuery,
             this.btnOverDueQuery});
-            this.ribbonBarCaseQuery.Location = new System.Drawing.Point(494, 0);
+            this.ribbonBarCaseQuery.Location = new System.Drawing.Point(555, 0);
             this.ribbonBarCaseQuery.Name = "ribbonBarCaseQuery";
             this.ribbonBarCaseQuery.Size = new System.Drawing.Size(238, 93);
             this.ribbonBarCaseQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1287,7 +1288,7 @@ namespace CMBC.EasyFactor
             this.btnGroupCreditLineQuery,
             this.btnFactorCreditLine,
             this.btnCDAQuery});
-            this.ribbonBarCreditLineQuery.Location = new System.Drawing.Point(205, 0);
+            this.ribbonBarCreditLineQuery.Location = new System.Drawing.Point(266, 0);
             this.ribbonBarCreditLineQuery.Name = "ribbonBarCreditLineQuery";
             this.ribbonBarCreditLineQuery.Size = new System.Drawing.Size(289, 93);
             this.ribbonBarCreditLineQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1347,10 +1348,11 @@ namespace CMBC.EasyFactor
             this.btnClientQuery,
             this.itemContainerClientQuery,
             this.btnFactorsQuery,
-            this.btnDeptQuery});
+            this.btnDeptQuery,
+            this.btnClientReviewQuery});
             this.ribbonBarClientQuery.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarClientQuery.Name = "ribbonBarClientQuery";
-            this.ribbonBarClientQuery.Size = new System.Drawing.Size(202, 93);
+            this.ribbonBarClientQuery.Size = new System.Drawing.Size(263, 93);
             this.ribbonBarClientQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarClientQuery.TabIndex = 0;
             this.ribbonBarClientQuery.Text = "客户查询";
@@ -2002,7 +2004,6 @@ namespace CMBC.EasyFactor
             // 
             // itemInfoMgr
             // 
-            this.itemInfoMgr.Checked = true;
             this.itemInfoMgr.Name = "itemInfoMgr";
             this.itemInfoMgr.Panel = this.ribbonPanelInfoMgr;
             this.itemInfoMgr.Text = "信息管理";
@@ -2033,6 +2034,7 @@ namespace CMBC.EasyFactor
             // 
             // itemQuery
             // 
+            this.itemQuery.Checked = true;
             this.itemQuery.Name = "itemQuery";
             this.itemQuery.Panel = this.ribbonPanelQuery;
             this.itemQuery.Text = "查询";
@@ -2337,44 +2339,51 @@ namespace CMBC.EasyFactor
             this.toolStripSeparator2,
             this.menuItemExit});
             this.notifyMenu.Name = "notifyMenu";
-            this.notifyMenu.Size = new System.Drawing.Size(153, 126);
+            this.notifyMenu.Size = new System.Drawing.Size(140, 104);
             // 
             // menuItemOpen
             // 
             this.menuItemOpen.Name = "menuItemOpen";
-            this.menuItemOpen.Size = new System.Drawing.Size(152, 22);
+            this.menuItemOpen.Size = new System.Drawing.Size(139, 22);
             this.menuItemOpen.Text = "恢复窗口(&O)";
             this.menuItemOpen.Click += new System.EventHandler(this.ShowFromTray);
             // 
             // menuItemHide
             // 
             this.menuItemHide.Name = "menuItemHide";
-            this.menuItemHide.Size = new System.Drawing.Size(152, 22);
+            this.menuItemHide.Size = new System.Drawing.Size(139, 22);
             this.menuItemHide.Text = "隐藏窗口(&H)";
             this.menuItemHide.Click += new System.EventHandler(this.HideInTray);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // menuItemExit
-            // 
-            this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(152, 22);
-            this.menuItemExit.Text = "退出系统(&E)";
-            this.menuItemExit.Click += new System.EventHandler(this.Exit);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(136, 6);
             // 
             // menuItemCheckAlert
             // 
             this.menuItemCheckAlert.Name = "menuItemCheckAlert";
-            this.menuItemCheckAlert.Size = new System.Drawing.Size(152, 22);
+            this.menuItemCheckAlert.Size = new System.Drawing.Size(139, 22);
             this.menuItemCheckAlert.Text = "检查提醒(&C)";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(136, 6);
+            // 
+            // menuItemExit
+            // 
+            this.menuItemExit.Name = "menuItemExit";
+            this.menuItemExit.Size = new System.Drawing.Size(139, 22);
+            this.menuItemExit.Text = "退出系统(&E)";
+            this.menuItemExit.Click += new System.EventHandler(this.Exit);
+            // 
+            // btnClientReviewQuery
+            // 
+            this.btnClientReviewQuery.Name = "btnClientReviewQuery";
+            this.btnClientReviewQuery.SubItemsExpandWidth = 14;
+            this.btnClientReviewQuery.Text = "协查意见";
+            this.btnClientReviewQuery.Click += new System.EventHandler(this.QueryClientReviews);
             // 
             // MainWindow
             // 
@@ -2431,5 +2440,6 @@ namespace CMBC.EasyFactor
         private System.Windows.Forms.ToolStripMenuItem menuItemExit;
         private System.Windows.Forms.ToolStripMenuItem menuItemCheckAlert;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private DevComponents.DotNetBar.ButtonItem btnClientReviewQuery;
     }
 }
