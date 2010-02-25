@@ -2286,6 +2286,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             "医药",
             "教育",
             "商贸",
+            "工程",
             "其他"});
             this.cbIndustry.Location = new System.Drawing.Point(471, 7);
             this.cbIndustry.Name = "cbIndustry";

@@ -256,6 +256,18 @@
     <Compile Include="InfoMgr\ExchangeMgr\ExchangeMgr.Designer.cs">
       <DependentUpon>ExchangeMgr.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\DepartmentReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepartmentReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\DepartmentStat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Report\DepartmentStat.Designer.cs">
+      <DependentUpon>DepartmentStat.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ConstStr.cs" />
     <Compile Include="DB.dbml\Country.cs" />
     <Compile Include="DB.dbml\CreditCoverNegotiation.cs" />
@@ -523,6 +535,13 @@
     <EmbeddedResource Include="Report\AssignReportMgr.resx">
       <DependentUpon>AssignReportMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\DepartmentReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DepartmentReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\DepartmentStat.resx">
+      <DependentUpon>DepartmentStat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Utils\ExportForm.resx">
       <DependentUpon>ExportForm.cs</DependentUpon>
