@@ -13,9 +13,9 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using DevComponents.DotNetBar;
     using Microsoft.Office.Core;
     using Microsoft.Office.Interop.Excel;
-    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
@@ -108,6 +108,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.DataSource = this.bs;
             this.opBatchType = batchType;
             ControlUtil.SetDoubleBuffered(this.dgvBatches);
+            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             this.UpdateContextMenu();
 

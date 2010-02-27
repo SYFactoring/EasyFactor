@@ -115,6 +115,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.dgvDepts.DataSource = this.bs;
             this.dgvDepts.AutoGenerateColumns = false;
             ControlUtil.SetDoubleBuffered(this.dgvDepts);
+            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             this.UpdateContextMenu();
         }

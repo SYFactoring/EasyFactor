@@ -60,7 +60,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblInvoiceNo = new DevComponents.DotNetBar.LabelX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQueryReset = new DevComponents.DotNetBar.ButtonX();
-            this.btnBatchQuery = new DevComponents.DotNetBar.ButtonX();
+            this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbFactor = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFactor = new DevComponents.DotNetBar.LabelX();
             this.tbBuyer = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -133,7 +133,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Controls.Add(this.lblInvoiceNo);
             this.panelQuery.Controls.Add(this.lblCount);
             this.panelQuery.Controls.Add(this.btnQueryReset);
-            this.panelQuery.Controls.Add(this.btnBatchQuery);
+            this.panelQuery.Controls.Add(this.btnQuery);
             this.panelQuery.Controls.Add(this.tbFactor);
             this.panelQuery.Controls.Add(this.lblFactor);
             this.panelQuery.Controls.Add(this.tbBuyer);
@@ -423,15 +423,15 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // btnBatchQuery
             // 
-            this.btnBatchQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnBatchQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnBatchQuery.Location = new System.Drawing.Point(650, 8);
-            this.btnBatchQuery.Name = "btnBatchQuery";
-            this.btnBatchQuery.Size = new System.Drawing.Size(46, 22);
-            this.btnBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnBatchQuery.TabIndex = 10;
-            this.btnBatchQuery.Text = "查询";
-            this.btnBatchQuery.Click += new System.EventHandler(this.QueryInvoices);
+            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQuery.Location = new System.Drawing.Point(650, 8);
+            this.btnQuery.Name = "btnBatchQuery";
+            this.btnQuery.Size = new System.Drawing.Size(46, 22);
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.TabIndex = 10;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.Click += new System.EventHandler(this.QueryInvoices);
             // 
             // tbFactor
             // 
@@ -906,7 +906,7 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.LabelX lblCount;
         private DevComponents.DotNetBar.ButtonX btnQueryReset;
-        private DevComponents.DotNetBar.ButtonX btnBatchQuery;
+        private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFactor;
         private DevComponents.DotNetBar.LabelX lblFactor;
         private DevComponents.DotNetBar.Controls.TextBoxX tbBuyer;

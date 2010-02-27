@@ -91,6 +91,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCDAs.DataSource = this.bs;
             this.opCDAType = opCDAType;
             ControlUtil.SetDoubleBuffered(this.dgvCDAs);
+            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             this.UpdateContextMenu();
 

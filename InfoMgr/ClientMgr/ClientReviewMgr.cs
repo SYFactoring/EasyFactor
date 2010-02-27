@@ -62,6 +62,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientReviews.DataSource = this.bs;
             this.dgvClientReviews.AutoGenerateColumns = false;
             ControlUtil.SetDoubleBuffered(this.dgvClientReviews);
+            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
         }
 
         #endregion Constructors

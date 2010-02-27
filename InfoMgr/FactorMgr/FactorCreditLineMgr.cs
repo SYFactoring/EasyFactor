@@ -78,6 +78,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactorCreditLines.DataSource = this.bs;
             this.dgvFactorCreditLines.AutoGenerateColumns = false;
             ControlUtil.SetDoubleBuffered(this.dgvFactorCreditLines);
+            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
         }
 
         #endregion Constructors

@@ -84,6 +84,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.bs = new BindingSource();
             this.dgvContracts.DataSource = bs;
             ControlUtil.SetDoubleBuffered(this.dgvContracts);
+            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             this.UpdateContextMenu();
         }

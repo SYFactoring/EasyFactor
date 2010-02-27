@@ -15,7 +15,7 @@
         private DevComponents.DotNetBar.LabelX lblSellerFactorCode;
         private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverDetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverSelect;
-        private DevComponents.DotNetBar.PanelEx panelCreditCoverQuery;
+        private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbBuyerFactorCode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbSellerFactorCode;
 
@@ -57,7 +57,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panelCreditCoverQuery = new DevComponents.DotNetBar.PanelEx();
+            this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbIsContractSigned = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.btnQueryReset = new DevComponents.DotNetBar.ButtonX();
             this.cbIsCDA = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -104,7 +104,7 @@
             this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
-            this.panelCreditCoverQuery.SuspendLayout();
+            this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCreditCoverNegs)).BeginInit();
@@ -113,44 +113,44 @@
             // 
             // panelCreditCoverQuery
             // 
-            this.panelCreditCoverQuery.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelCreditCoverQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelCreditCoverQuery.Controls.Add(this.tbCreateUserName);
-            this.panelCreditCoverQuery.Controls.Add(this.lblCreateUserName);
-            this.panelCreditCoverQuery.Controls.Add(this.cbIsContractSigned);
-            this.panelCreditCoverQuery.Controls.Add(this.btnQueryReset);
-            this.panelCreditCoverQuery.Controls.Add(this.cbIsCDA);
-            this.panelCreditCoverQuery.Controls.Add(this.tbClientName);
-            this.panelCreditCoverQuery.Controls.Add(this.lblClientName);
-            this.panelCreditCoverQuery.Controls.Add(this.tbCaseCode);
-            this.panelCreditCoverQuery.Controls.Add(this.lblCaseCode);
-            this.panelCreditCoverQuery.Controls.Add(this.lblDate);
-            this.panelCreditCoverQuery.Controls.Add(this.btnQuery);
-            this.panelCreditCoverQuery.Controls.Add(this.cbCurrency);
-            this.panelCreditCoverQuery.Controls.Add(this.lblCurrency);
-            this.panelCreditCoverQuery.Controls.Add(this.cbTransactionType);
-            this.panelCreditCoverQuery.Controls.Add(this.lblTransactionType);
-            this.panelCreditCoverQuery.Controls.Add(this.diEnd);
-            this.panelCreditCoverQuery.Controls.Add(this.diBegin);
-            this.panelCreditCoverQuery.Controls.Add(this.cbOwnerDepts);
-            this.panelCreditCoverQuery.Controls.Add(this.lblOnwerDept);
-            this.panelCreditCoverQuery.Controls.Add(this.lblCount);
-            this.panelCreditCoverQuery.Controls.Add(this.tbBuyerFactorCode);
-            this.panelCreditCoverQuery.Controls.Add(this.lblBuyerFactorCode);
-            this.panelCreditCoverQuery.Controls.Add(this.tbSellerFactorCode);
-            this.panelCreditCoverQuery.Controls.Add(this.lblSellerFactorCode);
-            this.panelCreditCoverQuery.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelCreditCoverQuery.Location = new System.Drawing.Point(0, 0);
-            this.panelCreditCoverQuery.Name = "panelCreditCoverQuery";
-            this.panelCreditCoverQuery.Size = new System.Drawing.Size(753, 75);
-            this.panelCreditCoverQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelCreditCoverQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelCreditCoverQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelCreditCoverQuery.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelCreditCoverQuery.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.panelCreditCoverQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelCreditCoverQuery.Style.GradientAngle = 90;
-            this.panelCreditCoverQuery.TabIndex = 0;
+            this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.tbCreateUserName);
+            this.panelQuery.Controls.Add(this.lblCreateUserName);
+            this.panelQuery.Controls.Add(this.cbIsContractSigned);
+            this.panelQuery.Controls.Add(this.btnQueryReset);
+            this.panelQuery.Controls.Add(this.cbIsCDA);
+            this.panelQuery.Controls.Add(this.tbClientName);
+            this.panelQuery.Controls.Add(this.lblClientName);
+            this.panelQuery.Controls.Add(this.tbCaseCode);
+            this.panelQuery.Controls.Add(this.lblCaseCode);
+            this.panelQuery.Controls.Add(this.lblDate);
+            this.panelQuery.Controls.Add(this.btnQuery);
+            this.panelQuery.Controls.Add(this.cbCurrency);
+            this.panelQuery.Controls.Add(this.lblCurrency);
+            this.panelQuery.Controls.Add(this.cbTransactionType);
+            this.panelQuery.Controls.Add(this.lblTransactionType);
+            this.panelQuery.Controls.Add(this.diEnd);
+            this.panelQuery.Controls.Add(this.diBegin);
+            this.panelQuery.Controls.Add(this.cbOwnerDepts);
+            this.panelQuery.Controls.Add(this.lblOnwerDept);
+            this.panelQuery.Controls.Add(this.lblCount);
+            this.panelQuery.Controls.Add(this.tbBuyerFactorCode);
+            this.panelQuery.Controls.Add(this.lblBuyerFactorCode);
+            this.panelQuery.Controls.Add(this.tbSellerFactorCode);
+            this.panelQuery.Controls.Add(this.lblSellerFactorCode);
+            this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelQuery.Location = new System.Drawing.Point(0, 0);
+            this.panelQuery.Name = "panelCreditCoverQuery";
+            this.panelQuery.Size = new System.Drawing.Size(753, 75);
+            this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelQuery.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelQuery.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelQuery.Style.GradientAngle = 90;
+            this.panelQuery.TabIndex = 0;
             // 
             // cbIsContractSigned
             // 
@@ -749,12 +749,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvCreditCoverNegs);
-            this.Controls.Add(this.panelCreditCoverQuery);
+            this.Controls.Add(this.panelQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "CreditCoverNegMgr";
             this.Size = new System.Drawing.Size(753, 345);
-            this.panelCreditCoverQuery.ResumeLayout(false);
-            this.panelCreditCoverQuery.PerformLayout();
+            this.panelQuery.ResumeLayout(false);
+            this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCreditCoverNegs)).EndInit();

@@ -17,6 +17,32 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public class ControlUtil
     {
+        #region Methods (4)
+
+        // Public Methods (4) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="controls"></param>
+        /// <param name="btn"></param>
+        public static void AddEnterListenersForQuery(Control.ControlCollection controls, IButtonControl btn)
+        {
+            foreach (Control control in controls)
+            {
+                if (control is TextBox || control is TextBoxX)
+                {
+                    control.KeyDown += new KeyEventHandler(delegate(object sender, KeyEventArgs e)
+                    {
+                        if (e.KeyCode == Keys.Enter)
+                        {
+                            btn.PerformClick();
+                        }
+                    });
+                }
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -114,5 +140,8 @@ namespace CMBC.EasyFactor.Utils
         {
             typeof(Control).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, control, new object[] { true });
         }
+
+        #endregion Methods
+
     }
 }

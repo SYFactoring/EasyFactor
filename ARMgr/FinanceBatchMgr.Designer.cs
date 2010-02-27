@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private DevComponents.DotNetBar.ButtonX btnFinanceBatchQuery;
+        private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCheckStatus;
         private System.Windows.Forms.ContextMenuStrip cmuBatchMgr;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
@@ -103,7 +103,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblDatePicker = new DevComponents.DotNetBar.LabelX();
             this.dateFrom = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.btnFinanceBatchQuery = new DevComponents.DotNetBar.ButtonX();
+            this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbFinanceBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFinanceBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -153,7 +153,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Controls.Add(this.dateTo);
             this.panelQuery.Controls.Add(this.lblDatePicker);
             this.panelQuery.Controls.Add(this.dateFrom);
-            this.panelQuery.Controls.Add(this.btnFinanceBatchQuery);
+            this.panelQuery.Controls.Add(this.btnQuery);
             this.panelQuery.Controls.Add(this.tbFinanceBatchNo);
             this.panelQuery.Controls.Add(this.lblFinanceBatchNo);
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
@@ -366,15 +366,15 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // btnFinanceBatchQuery
             // 
-            this.btnFinanceBatchQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnFinanceBatchQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFinanceBatchQuery.Location = new System.Drawing.Point(505, 3);
-            this.btnFinanceBatchQuery.Name = "btnFinanceBatchQuery";
-            this.btnFinanceBatchQuery.Size = new System.Drawing.Size(75, 23);
-            this.btnFinanceBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFinanceBatchQuery.TabIndex = 11;
-            this.btnFinanceBatchQuery.Text = "查询";
-            this.btnFinanceBatchQuery.Click += new System.EventHandler(this.QueryBatch);
+            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQuery.Location = new System.Drawing.Point(505, 3);
+            this.btnQuery.Name = "btnFinanceBatchQuery";
+            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.TabIndex = 11;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.Click += new System.EventHandler(this.QueryBatch);
             // 
             // tbFinanceBatchNo
             // 

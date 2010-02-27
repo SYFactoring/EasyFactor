@@ -23,7 +23,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #region Fields (59)
 
-        private DevComponents.DotNetBar.ButtonX btnCDAQuery;
+        private DevComponents.DotNetBar.ButtonX btnQuery;
         private System.Windows.Forms.ContextMenuStrip cmuCDAMgr;
         /// <summary>
         /// Required designer variable.
@@ -38,7 +38,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemCDANew;
         private System.Windows.Forms.ToolStripMenuItem menuItemCDASelect;
-        private DevComponents.DotNetBar.PanelEx panelCDAQuery;
+        private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbBuyerName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbContractCode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbSellerName;
@@ -87,7 +87,7 @@ namespace CMBC.EasyFactor.CaseMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panelCDAQuery = new DevComponents.DotNetBar.PanelEx();
+            this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbIsCDA = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
@@ -100,7 +100,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblBuyerName = new DevComponents.DotNetBar.LabelX();
             this.lblSellerName = new DevComponents.DotNetBar.LabelX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
-            this.btnCDAQuery = new DevComponents.DotNetBar.ButtonX();
+            this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbContractCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblContractCode = new DevComponents.DotNetBar.LabelX();
             this.dgvCDAs = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -143,42 +143,42 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelCDAQuery.SuspendLayout();
+            this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCDAs)).BeginInit();
             this.cmuCDAMgr.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelCDAQuery
             // 
-            this.panelCDAQuery.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelCDAQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelCDAQuery.Controls.Add(this.cbIsCDA);
-            this.panelCDAQuery.Controls.Add(this.tbCreateUserName);
-            this.panelCDAQuery.Controls.Add(this.lblCreateUserName);
-            this.panelCDAQuery.Controls.Add(this.cbCheckStatus);
-            this.panelCDAQuery.Controls.Add(this.lblCheckStatus);
-            this.panelCDAQuery.Controls.Add(this.tbFactorName);
-            this.panelCDAQuery.Controls.Add(this.lblFactorName);
-            this.panelCDAQuery.Controls.Add(this.tbBuyerName);
-            this.panelCDAQuery.Controls.Add(this.tbSellerName);
-            this.panelCDAQuery.Controls.Add(this.lblBuyerName);
-            this.panelCDAQuery.Controls.Add(this.lblSellerName);
-            this.panelCDAQuery.Controls.Add(this.lblCount);
-            this.panelCDAQuery.Controls.Add(this.btnCDAQuery);
-            this.panelCDAQuery.Controls.Add(this.tbContractCode);
-            this.panelCDAQuery.Controls.Add(this.lblContractCode);
-            this.panelCDAQuery.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelCDAQuery.Location = new System.Drawing.Point(0, 0);
-            this.panelCDAQuery.Name = "panelCDAQuery";
-            this.panelCDAQuery.Size = new System.Drawing.Size(773, 54);
-            this.panelCDAQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelCDAQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelCDAQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelCDAQuery.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelCDAQuery.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.panelCDAQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelCDAQuery.Style.GradientAngle = 90;
-            this.panelCDAQuery.TabIndex = 0;
+            this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.cbIsCDA);
+            this.panelQuery.Controls.Add(this.tbCreateUserName);
+            this.panelQuery.Controls.Add(this.lblCreateUserName);
+            this.panelQuery.Controls.Add(this.cbCheckStatus);
+            this.panelQuery.Controls.Add(this.lblCheckStatus);
+            this.panelQuery.Controls.Add(this.tbFactorName);
+            this.panelQuery.Controls.Add(this.lblFactorName);
+            this.panelQuery.Controls.Add(this.tbBuyerName);
+            this.panelQuery.Controls.Add(this.tbSellerName);
+            this.panelQuery.Controls.Add(this.lblBuyerName);
+            this.panelQuery.Controls.Add(this.lblSellerName);
+            this.panelQuery.Controls.Add(this.lblCount);
+            this.panelQuery.Controls.Add(this.btnQuery);
+            this.panelQuery.Controls.Add(this.tbContractCode);
+            this.panelQuery.Controls.Add(this.lblContractCode);
+            this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelQuery.Location = new System.Drawing.Point(0, 0);
+            this.panelQuery.Name = "panelCDAQuery";
+            this.panelQuery.Size = new System.Drawing.Size(773, 54);
+            this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelQuery.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelQuery.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelQuery.Style.GradientAngle = 90;
+            this.panelQuery.TabIndex = 0;
             // 
             // cbIsCDA
             // 
@@ -339,15 +339,15 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // btnCDAQuery
             // 
-            this.btnCDAQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCDAQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCDAQuery.Location = new System.Drawing.Point(638, 3);
-            this.btnCDAQuery.Name = "btnCDAQuery";
-            this.btnCDAQuery.Size = new System.Drawing.Size(47, 23);
-            this.btnCDAQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCDAQuery.TabIndex = 13;
-            this.btnCDAQuery.Text = "查询";
-            this.btnCDAQuery.Click += new System.EventHandler(this.QueryCDAs);
+            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQuery.Location = new System.Drawing.Point(638, 3);
+            this.btnQuery.Name = "btnCDAQuery";
+            this.btnQuery.Size = new System.Drawing.Size(47, 23);
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.TabIndex = 13;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.Click += new System.EventHandler(this.QueryCDAs);
             // 
             // tbContractCode
             // 
@@ -777,12 +777,12 @@ namespace CMBC.EasyFactor.CaseMgr
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvCDAs);
-            this.Controls.Add(this.panelCDAQuery);
+            this.Controls.Add(this.panelQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "CDAMgr";
             this.Size = new System.Drawing.Size(773, 402);
-            this.panelCDAQuery.ResumeLayout(false);
-            this.panelCDAQuery.PerformLayout();
+            this.panelQuery.ResumeLayout(false);
+            this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCDAs)).EndInit();
             this.cmuCDAMgr.ResumeLayout(false);
             this.ResumeLayout(false);

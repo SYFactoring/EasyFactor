@@ -37,6 +37,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.bs = new BindingSource();
             this.dgvCreditCoverNegs.DataSource = this.bs;
             ControlUtil.SetDoubleBuffered(this.dgvCreditCoverNegs);
+            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             this.cbTransactionType.Items.Insert(0, "全部");
             this.cbTransactionType.Text = "全部";

@@ -94,11 +94,12 @@ namespace CMBC.EasyFactor.ARMgr
         public PaymentBatchMgr(OpBatchType batchType)
         {
             this.InitializeComponent();
-            ControlUtil.SetDoubleBuffered(this.dgvBatches);
             this.dgvBatches.AutoGenerateColumns = false;
             this.bs = new BindingSource();
             this.dgvBatches.DataSource = bs;
             this.opBatchType = batchType;
+            ControlUtil.SetDoubleBuffered(this.dgvBatches);
+            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             this.UpdateContextMenu();
 

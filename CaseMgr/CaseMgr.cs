@@ -111,6 +111,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.bs = new BindingSource();
             this.dgvCases.DataSource = this.bs;
             ControlUtil.SetDoubleBuffered(this.dgvCases);
+            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             this.cbTransactionType.Items.Insert(0, "全部");
             this.cbTransactionType.Text = "全部";

@@ -28,7 +28,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-        #region Constructors (1)
+		#region Constructors (1) 
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -44,9 +44,9 @@ namespace CMBC.EasyFactor
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Sets command status
@@ -70,11 +70,11 @@ namespace CMBC.EasyFactor
             }
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (75)
+		#region Methods (76) 
 
-        // Public Methods (2) 
+		// Public Methods (2) 
 
         /// <summary>
         /// 
@@ -101,7 +101,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-        // Private Methods (73) 
+		// Private Methods (74) 
 
         /// <summary>
         /// 
@@ -470,6 +470,20 @@ namespace CMBC.EasyFactor
             if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS);
+                importForm.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportInvoiceNew(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES_NEW);
                 importForm.Show();
             }
         }
@@ -1078,6 +1092,6 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(mgr);
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

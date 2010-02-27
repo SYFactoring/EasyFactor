@@ -14,7 +14,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
     using DevComponents.DotNetBar;
 
     /// <summary>
@@ -109,6 +108,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.AutoGenerateColumns = false;
             this.dgvClients.DataSource = this.bs;
             ControlUtil.SetDoubleBuffered(this.dgvClients);
+            ControlUtil.AddEnterListenersForQuery(this.pnlQuery.Controls, btnQuery);
 
             List<Department> deptsList = Department.AllDepartments(new DBDataContext());
             deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
@@ -119,6 +119,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbDepartment.SelectedIndex = -1;
 
             this.UpdateContextMenu();
+
         }
 
         #endregion Constructors

@@ -147,6 +147,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.DataSource = bs;
             this.opInvoiceType = opInvoiceType;
             ControlUtil.SetDoubleBuffered(this.dgvInvoices);
+            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             this.cbCaseMark.SelectedIndex = 1;
             this.UpdateContextMenu();

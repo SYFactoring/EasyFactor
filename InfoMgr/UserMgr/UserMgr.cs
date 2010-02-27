@@ -41,6 +41,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.dgvUsers.AutoGenerateColumns = false;
             this.dgvUsers.DataSource = this.bs;
             ControlUtil.SetDoubleBuffered(this.dgvUsers);
+            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             this.UpdateContextMenu();
         }

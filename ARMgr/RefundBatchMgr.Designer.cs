@@ -43,7 +43,7 @@
             this.dateTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblDatePicker = new DevComponents.DotNetBar.LabelX();
             this.dateFrom = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.btnBatchQuery = new DevComponents.DotNetBar.ButtonX();
+            this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbRefundBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblRefundBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -91,7 +91,7 @@
             this.panelQuery.Controls.Add(this.dateTo);
             this.panelQuery.Controls.Add(this.lblDatePicker);
             this.panelQuery.Controls.Add(this.dateFrom);
-            this.panelQuery.Controls.Add(this.btnBatchQuery);
+            this.panelQuery.Controls.Add(this.btnQuery);
             this.panelQuery.Controls.Add(this.tbRefundBatchNo);
             this.panelQuery.Controls.Add(this.lblRefundBatchNo);
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
@@ -311,15 +311,15 @@
             // 
             // btnBatchQuery
             // 
-            this.btnBatchQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnBatchQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnBatchQuery.Location = new System.Drawing.Point(613, 6);
-            this.btnBatchQuery.Name = "btnBatchQuery";
-            this.btnBatchQuery.Size = new System.Drawing.Size(75, 23);
-            this.btnBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnBatchQuery.TabIndex = 12;
-            this.btnBatchQuery.Text = "查询";
-            this.btnBatchQuery.Click += new System.EventHandler(this.QueryBatch);
+            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQuery.Location = new System.Drawing.Point(613, 6);
+            this.btnQuery.Name = "btnBatchQuery";
+            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.TabIndex = 12;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.Click += new System.EventHandler(this.QueryBatch);
             // 
             // tbRefundBatchNo
             // 
@@ -576,7 +576,7 @@
         #endregion
 
         private DevComponents.DotNetBar.PanelEx panelQuery;
-        private DevComponents.DotNetBar.ButtonX btnBatchQuery;
+        private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbRefundBatchNo;
         private DevComponents.DotNetBar.LabelX lblRefundBatchNo;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvBatches;

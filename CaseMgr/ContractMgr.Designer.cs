@@ -6,7 +6,7 @@ namespace CMBC.EasyFactor.CaseMgr
     {
 		#region Fields (26) 
 
-        private DevComponents.DotNetBar.ButtonX btnContractQuery;
+        private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbContractStatus;
         private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
         /// <summary> 
@@ -22,7 +22,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemContractDetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemContractNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemContractSelect;
-        private DevComponents.DotNetBar.PanelEx panelContractQuery;
+        private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbContractCode;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
@@ -61,7 +61,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panelContractQuery = new DevComponents.DotNetBar.PanelEx();
+            this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
             this.cbContractStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -69,7 +69,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblClientName = new DevComponents.DotNetBar.LabelX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
-            this.btnContractQuery = new DevComponents.DotNetBar.ButtonX();
+            this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbContractCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblContractCode = new DevComponents.DotNetBar.LabelX();
             this.dgvContracts = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -87,37 +87,37 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colContractStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsSigned = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelContractQuery.SuspendLayout();
+            this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContracts)).BeginInit();
             this.cmuContractMgr.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelContractQuery
             // 
-            this.panelContractQuery.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelContractQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelContractQuery.Controls.Add(this.tbCreateUserName);
-            this.panelContractQuery.Controls.Add(this.lblCreateUserName);
-            this.panelContractQuery.Controls.Add(this.cbContractStatus);
-            this.panelContractQuery.Controls.Add(this.lblContractStatus);
-            this.panelContractQuery.Controls.Add(this.tbClientName);
-            this.panelContractQuery.Controls.Add(this.lblClientName);
-            this.panelContractQuery.Controls.Add(this.lblCount);
-            this.panelContractQuery.Controls.Add(this.btnContractQuery);
-            this.panelContractQuery.Controls.Add(this.tbContractCode);
-            this.panelContractQuery.Controls.Add(this.lblContractCode);
-            this.panelContractQuery.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelContractQuery.Location = new System.Drawing.Point(0, 0);
-            this.panelContractQuery.Name = "panelContractQuery";
-            this.panelContractQuery.Size = new System.Drawing.Size(768, 32);
-            this.panelContractQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelContractQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelContractQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelContractQuery.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelContractQuery.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.panelContractQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelContractQuery.Style.GradientAngle = 90;
-            this.panelContractQuery.TabIndex = 0;
+            this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.tbCreateUserName);
+            this.panelQuery.Controls.Add(this.lblCreateUserName);
+            this.panelQuery.Controls.Add(this.cbContractStatus);
+            this.panelQuery.Controls.Add(this.lblContractStatus);
+            this.panelQuery.Controls.Add(this.tbClientName);
+            this.panelQuery.Controls.Add(this.lblClientName);
+            this.panelQuery.Controls.Add(this.lblCount);
+            this.panelQuery.Controls.Add(this.btnQuery);
+            this.panelQuery.Controls.Add(this.tbContractCode);
+            this.panelQuery.Controls.Add(this.lblContractCode);
+            this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelQuery.Location = new System.Drawing.Point(0, 0);
+            this.panelQuery.Name = "panelContractQuery";
+            this.panelQuery.Size = new System.Drawing.Size(768, 32);
+            this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelQuery.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelQuery.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelQuery.Style.GradientAngle = 90;
+            this.panelQuery.TabIndex = 0;
             // 
             // tbCreateUserName
             // 
@@ -209,15 +209,15 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // btnContractQuery
             // 
-            this.btnContractQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnContractQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnContractQuery.Location = new System.Drawing.Point(640, 5);
-            this.btnContractQuery.Name = "btnContractQuery";
-            this.btnContractQuery.Size = new System.Drawing.Size(75, 23);
-            this.btnContractQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnContractQuery.TabIndex = 8;
-            this.btnContractQuery.Text = "查询";
-            this.btnContractQuery.Click += new System.EventHandler(this.QueryContracts);
+            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQuery.Location = new System.Drawing.Point(640, 5);
+            this.btnQuery.Name = "btnContractQuery";
+            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.TabIndex = 8;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.Click += new System.EventHandler(this.QueryContracts);
             // 
             // tbContractCode
             // 
@@ -395,12 +395,12 @@ namespace CMBC.EasyFactor.CaseMgr
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvContracts);
-            this.Controls.Add(this.panelContractQuery);
+            this.Controls.Add(this.panelQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "ContractMgr";
             this.Size = new System.Drawing.Size(768, 390);
-            this.panelContractQuery.ResumeLayout(false);
-            this.panelContractQuery.PerformLayout();
+            this.panelQuery.ResumeLayout(false);
+            this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContracts)).EndInit();
             this.cmuContractMgr.ResumeLayout(false);
             this.ResumeLayout(false);

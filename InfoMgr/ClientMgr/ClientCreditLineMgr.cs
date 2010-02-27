@@ -83,6 +83,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientCreditLines.DataSource = this.bs;
             this.dgvClientCreditLines.AutoGenerateColumns = false;
             ControlUtil.SetDoubleBuffered(this.dgvClientCreditLines);
+            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             if (opType == OpClientCreditMgrType.QUERY_GROUP)
             {
@@ -106,6 +107,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
+
         }
 
         #endregion Constructors

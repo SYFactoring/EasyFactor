@@ -13,7 +13,7 @@ namespace CMBC.EasyFactor.ARMgr
     {
 		#region Fields (36) 
 
-        private DevComponents.DotNetBar.ButtonX btnAssignBatchQuery;
+        private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCheckStatus;
         private System.Windows.Forms.ContextMenuStrip cmuBatchMgr;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
@@ -101,7 +101,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblDatePicker = new DevComponents.DotNetBar.LabelX();
             this.dateFrom = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.btnAssignBatchQuery = new DevComponents.DotNetBar.ButtonX();
+            this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbAssignBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblAssignBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -154,7 +154,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Controls.Add(this.dateTo);
             this.panelQuery.Controls.Add(this.lblDatePicker);
             this.panelQuery.Controls.Add(this.dateFrom);
-            this.panelQuery.Controls.Add(this.btnAssignBatchQuery);
+            this.panelQuery.Controls.Add(this.btnQuery);
             this.panelQuery.Controls.Add(this.tbAssignBatchNo);
             this.panelQuery.Controls.Add(this.lblAssignBatchNo);
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
@@ -367,15 +367,15 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // btnAssignBatchQuery
             // 
-            this.btnAssignBatchQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnAssignBatchQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAssignBatchQuery.Location = new System.Drawing.Point(495, 4);
-            this.btnAssignBatchQuery.Name = "btnAssignBatchQuery";
-            this.btnAssignBatchQuery.Size = new System.Drawing.Size(75, 23);
-            this.btnAssignBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAssignBatchQuery.TabIndex = 11;
-            this.btnAssignBatchQuery.Text = "查询";
-            this.btnAssignBatchQuery.Click += new System.EventHandler(this.QueryBatch);
+            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQuery.Location = new System.Drawing.Point(495, 4);
+            this.btnQuery.Name = "btnAssignBatchQuery";
+            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.TabIndex = 11;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.Click += new System.EventHandler(this.QueryBatch);
             // 
             // tbAssignBatchNo
             // 
