@@ -100,7 +100,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colPaymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRefundDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIncomeAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInterest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGrossInterest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsFlaw = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -421,12 +421,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnQueryReset.Text = "重置";
             this.btnQueryReset.Click += new System.EventHandler(this.Reset);
             // 
-            // btnBatchQuery
+            // btnQuery
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnQuery.Location = new System.Drawing.Point(650, 8);
-            this.btnQuery.Name = "btnBatchQuery";
+            this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(46, 22);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 10;
@@ -537,7 +537,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colPaymentDate,
             this.colRefundAmount,
             this.colRefundDate,
-            this.colIncomeAmount,
+            this.colCommission,
             this.colInterest,
             this.colGrossInterest,
             this.colIsFlaw,
@@ -823,14 +823,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.colRefundDate.Name = "colRefundDate";
             this.colRefundDate.Width = 68;
             // 
-            // colIncomeAmount
+            // colCommission
             // 
-            this.colIncomeAmount.DataPropertyName = "IncomeAmount";
+            this.colCommission.DataPropertyName = "Commission";
             dataGridViewCellStyle11.Format = "N2";
             dataGridViewCellStyle11.NullValue = null;
-            this.colIncomeAmount.DefaultCellStyle = dataGridViewCellStyle11;
-            this.colIncomeAmount.HeaderText = "保理费收入";
-            this.colIncomeAmount.Name = "colIncomeAmount";
+            this.colCommission.DefaultCellStyle = dataGridViewCellStyle11;
+            this.colCommission.HeaderText = "手续费收入";
+            this.colCommission.Name = "colCommission";
             // 
             // colInterest
             // 
@@ -959,7 +959,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRefundDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIncomeAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInterest;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGrossInterest;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsFlaw;

@@ -608,7 +608,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.costRateTextBox.Border.Class = "TextBoxBorder";
-            this.costRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CostRate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p"));
+            this.costRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CostRate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p3"));
             this.costRateTextBox.Location = new System.Drawing.Point(342, 95);
             this.costRateTextBox.Name = "costRateTextBox";
             this.costRateTextBox.Size = new System.Drawing.Size(121, 20);
@@ -632,7 +632,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.financeRateTextBox.Border.Class = "TextBoxBorder";
-            this.financeRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "FinanceRate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p"));
+            this.financeRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "FinanceRate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p3"));
             this.financeRateTextBox.Location = new System.Drawing.Point(114, 96);
             this.financeRateTextBox.Name = "financeRateTextBox";
             this.financeRateTextBox.Size = new System.Drawing.Size(123, 20);

@@ -241,6 +241,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UpdateClientCreditLineControlStatus();
             this.UpdateContractControlStatus();
             this.UpdateReviewControlStatus();
+
+            this.requestCommissionRateTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
+            this.requestCommissionRateTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+
         }
 
         /// <summary>
