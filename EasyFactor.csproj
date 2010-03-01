@@ -652,6 +652,13 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dll\CrystalDecisions.CrystalReports.Engine.dll" />
+    <Content Include="Dll\CrystalDecisions.Enterprise.Framework.dll" />
+    <Content Include="Dll\CrystalDecisions.Enterprise.InfoStore.dll" />
+    <Content Include="Dll\CrystalDecisions.ReportSource.dll" />
+    <Content Include="Dll\CrystalDecisions.Shared.dll" />
+    <Content Include="Dll\CrystalDecisions.Windows.Forms.dll" />
+    <Content Include="Dll\DevComponents.DotNetBar2.dll" />
     <Content Include="EasyFactoring.ico" />
   </ItemGroup>
   <ItemGroup>
