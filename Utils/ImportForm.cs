@@ -2072,7 +2072,7 @@ namespace CMBC.EasyFactor.Utils
                                     financeBatch = new InvoiceFinanceBatch();
                                     financeBatch.FinanceType = financeType;
                                     financeBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, 14]);
-                                    financeBatch.FinanceRate = (System.Nullable<double>)valueArray[row, 24];
+                                    financeBatch.FinanceRate = (System.Nullable<double>)valueArray[row, 25];
                                     financeBatch.FinancePeriodBegin = financeDate.Value;
                                     financeBatch.FinancePeriodEnd = financeDueDate.Value;
                                     financeBatch.CreateUserName = createUserName;
