@@ -136,11 +136,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             departmentCodeLabel.BackgroundStyle.Class = "";
-            departmentCodeLabel.Location = new System.Drawing.Point(9, 9);
+            departmentCodeLabel.Location = new System.Drawing.Point(6, 7);
             departmentCodeLabel.Name = "departmentCodeLabel";
-            departmentCodeLabel.Size = new System.Drawing.Size(59, 16);
+            departmentCodeLabel.Size = new System.Drawing.Size(57, 15);
             departmentCodeLabel.TabIndex = 0;
-            departmentCodeLabel.Text = "部门编码:";
+            departmentCodeLabel.Text = "<font color=\'red\'>*</font>部门编码:";
             // 
             // departmentNameLabel
             // 
@@ -150,11 +150,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             departmentNameLabel.BackgroundStyle.Class = "";
-            departmentNameLabel.Location = new System.Drawing.Point(21, 28);
+            departmentNameLabel.Location = new System.Drawing.Point(18, 29);
             departmentNameLabel.Name = "departmentNameLabel";
-            departmentNameLabel.Size = new System.Drawing.Size(47, 16);
+            departmentNameLabel.Size = new System.Drawing.Size(45, 15);
             departmentNameLabel.TabIndex = 2;
-            departmentNameLabel.Text = "部门名:";
+            departmentNameLabel.Text = "<font color=\'red\'>*</font>部门名:";
             // 
             // domainLabel
             // 
@@ -166,9 +166,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             domainLabel.BackgroundStyle.Class = "";
             domainLabel.Location = new System.Drawing.Point(234, 50);
             domainLabel.Name = "domainLabel";
-            domainLabel.Size = new System.Drawing.Size(47, 16);
+            domainLabel.Size = new System.Drawing.Size(45, 15);
             domainLabel.TabIndex = 8;
-            domainLabel.Text = "事业部:";
+            domainLabel.Text = "<font color=\'red\'>*</font>事业部:";
             // 
             // locationLabel
             // 
@@ -178,11 +178,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             locationLabel.BackgroundStyle.Class = "";
-            locationLabel.Location = new System.Drawing.Point(33, 50);
+            locationLabel.Location = new System.Drawing.Point(29, 50);
             locationLabel.Name = "locationLabel";
-            locationLabel.Size = new System.Drawing.Size(34, 16);
+            locationLabel.Size = new System.Drawing.Size(33, 15);
             locationLabel.TabIndex = 6;
-            locationLabel.Text = "城市:";
+            locationLabel.Text = "<font color=\'red\'>*</font>城市:";
             // 
             // addressCNLabel
             // 

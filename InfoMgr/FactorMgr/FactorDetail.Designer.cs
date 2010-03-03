@@ -197,18 +197,19 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             DevComponents.DotNetBar.LabelX lblFactorGroupCode;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FactorDetail));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FactorDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelFactor = new DevComponents.DotNetBar.TabControlPanel();
             this.btnFactorUpdate = new DevComponents.DotNetBar.ButtonX();
             this.btnFactorSave = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelMembership = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.dateOfLatestRevisionTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.factorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.membershipDateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.membershipStatusTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.iFISAvailableOnPrivateForumTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -251,6 +252,22 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.tabItemFactor = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelCreditLine = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvFactorCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colCreditLineID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditLineCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApproveNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApproveType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditLineStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFreezeReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFreezer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFreezeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnfreezeReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnfreezer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnfreezeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.factorCreditLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupPanelCreditLineDetail = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.tbCreditLineCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnFactorCreditLineUpdate = new DevComponents.DotNetBar.ButtonX();
@@ -291,23 +308,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.clientLineErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.clientLineHighlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.colCreditLineID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditLineCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colApproveNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colApproveType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditLineStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFreezeReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFreezer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFreezeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnfreezeReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnfreezer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnfreezeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.factorCreditLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.factorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             factorTypeLabel = new DevComponents.DotNetBar.LabelX();
             countryNameLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -352,10 +352,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.tabControl.SuspendLayout();
             this.tabPanelFactor.SuspendLayout();
             this.groupPanelMembership.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.factorBindingSource)).BeginInit();
             this.groupPanelContacts.SuspendLayout();
             this.groupPanelBasic.SuspendLayout();
             this.tabPanelCreditLine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactorCreditLines)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.factorCreditLineBindingSource)).BeginInit();
             this.groupPanelCreditLineDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.unfreezeDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.freezeDateDateTimePicker)).BeginInit();
@@ -363,8 +365,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             ((System.ComponentModel.ISupportInitialize)(this.periodBeginDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.factorErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientLineErrorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.factorCreditLineBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.factorBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // factorTypeLabel
@@ -376,12 +376,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             factorTypeLabel.BackgroundStyle.Class = "";
             factorTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            factorTypeLabel.Location = new System.Drawing.Point(17, 9);
+            factorTypeLabel.Location = new System.Drawing.Point(17, 8);
             factorTypeLabel.Name = "factorTypeLabel";
-            factorTypeLabel.Size = new System.Drawing.Size(59, 16);
+            factorTypeLabel.Size = new System.Drawing.Size(57, 15);
             factorTypeLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             factorTypeLabel.TabIndex = 0;
-            factorTypeLabel.Text = "机构类型:";
+            factorTypeLabel.Text = "<font color=\'red\'>*</font>机构类型:";
             // 
             // countryNameLabel
             // 
@@ -392,12 +392,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             countryNameLabel.BackgroundStyle.Class = "";
             countryNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            countryNameLabel.Location = new System.Drawing.Point(397, 7);
+            countryNameLabel.Location = new System.Drawing.Point(393, 9);
             countryNameLabel.Name = "countryNameLabel";
-            countryNameLabel.Size = new System.Drawing.Size(47, 16);
+            countryNameLabel.Size = new System.Drawing.Size(45, 15);
             countryNameLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             countryNameLabel.TabIndex = 4;
-            countryNameLabel.Text = "所在国:";
+            countryNameLabel.Text = "<font color=\'red\'>*</font>所在国:";
             // 
             // factorCodeLabel
             // 
@@ -410,10 +410,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             factorCodeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             factorCodeLabel.Location = new System.Drawing.Point(220, 8);
             factorCodeLabel.Name = "factorCodeLabel";
-            factorCodeLabel.Size = new System.Drawing.Size(59, 16);
+            factorCodeLabel.Size = new System.Drawing.Size(57, 15);
             factorCodeLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             factorCodeLabel.TabIndex = 2;
-            factorCodeLabel.Text = "机构代码:";
+            factorCodeLabel.Text = "<font color=\'red\'>*</font>机构代码:";
             // 
             // companyNameLabel
             // 
@@ -424,12 +424,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             companyNameLabel.BackgroundStyle.Class = "";
             companyNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            companyNameLabel.Location = new System.Drawing.Point(29, 31);
+            companyNameLabel.Location = new System.Drawing.Point(29, 32);
             companyNameLabel.Name = "companyNameLabel";
-            companyNameLabel.Size = new System.Drawing.Size(47, 16);
+            companyNameLabel.Size = new System.Drawing.Size(45, 15);
             companyNameLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             companyNameLabel.TabIndex = 6;
-            companyNameLabel.Text = "公司名:";
+            companyNameLabel.Text = "<font color=\'red\'>*</font>公司名:";
             // 
             // departmentLabel
             // 
@@ -731,12 +731,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             creditLineCurrencyLabel.BackgroundStyle.Class = "";
             creditLineCurrencyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            creditLineCurrencyLabel.Location = new System.Drawing.Point(25, 12);
+            creditLineCurrencyLabel.Location = new System.Drawing.Point(25, 11);
             creditLineCurrencyLabel.Name = "creditLineCurrencyLabel";
-            creditLineCurrencyLabel.Size = new System.Drawing.Size(59, 16);
+            creditLineCurrencyLabel.Size = new System.Drawing.Size(57, 15);
             creditLineCurrencyLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             creditLineCurrencyLabel.TabIndex = 0;
-            creditLineCurrencyLabel.Text = "额度币别:";
+            creditLineCurrencyLabel.Text = "<font color=\'red\'>*</font>额度币别:";
             // 
             // creditLineLabel
             // 
@@ -747,12 +747,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             creditLineLabel.BackgroundStyle.Class = "";
             creditLineLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            creditLineLabel.Location = new System.Drawing.Point(25, 33);
+            creditLineLabel.Location = new System.Drawing.Point(24, 33);
             creditLineLabel.Name = "creditLineLabel";
-            creditLineLabel.Size = new System.Drawing.Size(59, 16);
+            creditLineLabel.Size = new System.Drawing.Size(57, 15);
             creditLineLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             creditLineLabel.TabIndex = 5;
-            creditLineLabel.Text = "额度上限:";
+            creditLineLabel.Text = "<font color=\'red\'>*</font>额度上限:";
             // 
             // periodBeginLabel
             // 
@@ -763,12 +763,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             periodBeginLabel.BackgroundStyle.Class = "";
             periodBeginLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            periodBeginLabel.Location = new System.Drawing.Point(232, 12);
+            periodBeginLabel.Location = new System.Drawing.Point(232, 11);
             periodBeginLabel.Name = "periodBeginLabel";
-            periodBeginLabel.Size = new System.Drawing.Size(59, 16);
+            periodBeginLabel.Size = new System.Drawing.Size(57, 15);
             periodBeginLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             periodBeginLabel.TabIndex = 2;
-            periodBeginLabel.Text = "有效期限:";
+            periodBeginLabel.Text = "<font color=\'red\'>*</font>有效期限:";
             // 
             // creditLineStatusLabel
             // 
@@ -971,8 +971,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelFactor);
             this.tabControl.Controls.Add(this.tabPanelCreditLine);
+            this.tabControl.Controls.Add(this.tabPanelFactor);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -1090,6 +1090,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dateOfLatestRevisionTextBox.Name = "dateOfLatestRevisionTextBox";
             this.dateOfLatestRevisionTextBox.Size = new System.Drawing.Size(100, 20);
             this.dateOfLatestRevisionTextBox.TabIndex = 7;
+            // 
+            // factorBindingSource
+            // 
+            this.factorBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Factor);
             // 
             // membershipDateTextBox
             // 
@@ -1693,7 +1697,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             "保险公司",
             "监管机构",
             "代付行"});
-            this.factorTypeComboBox.Location = new System.Drawing.Point(82, 7);
+            this.factorTypeComboBox.Location = new System.Drawing.Point(82, 5);
             this.factorTypeComboBox.MaxDropDownItems = 4;
             this.factorTypeComboBox.Name = "factorTypeComboBox";
             this.factorTypeComboBox.Size = new System.Drawing.Size(121, 21);
@@ -1775,6 +1779,140 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactorCreditLines.Size = new System.Drawing.Size(600, 285);
             this.dgvFactorCreditLines.TabIndex = 0;
             this.dgvFactorCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectFactorCreditLine);
+            // 
+            // colCreditLineID
+            // 
+            this.colCreditLineID.DataPropertyName = "CreditLineID";
+            this.colCreditLineID.HeaderText = "CreditLineID";
+            this.colCreditLineID.Name = "colCreditLineID";
+            this.colCreditLineID.ReadOnly = true;
+            this.colCreditLineID.Visible = false;
+            // 
+            // colCreditLineCurrency
+            // 
+            this.colCreditLineCurrency.DataPropertyName = "CreditLineCurrency";
+            this.colCreditLineCurrency.HeaderText = "额度币种";
+            this.colCreditLineCurrency.Name = "colCreditLineCurrency";
+            this.colCreditLineCurrency.ReadOnly = true;
+            this.colCreditLineCurrency.Width = 80;
+            // 
+            // colCreditLine
+            // 
+            this.colCreditLine.DataPropertyName = "CreditLine";
+            dataGridViewCellStyle2.Format = "N2";
+            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colCreditLine.HeaderText = "额度上限";
+            this.colCreditLine.Name = "colCreditLine";
+            this.colCreditLine.ReadOnly = true;
+            this.colCreditLine.Width = 80;
+            // 
+            // colPeriodBegin
+            // 
+            this.colPeriodBegin.DataPropertyName = "PeriodBegin";
+            dataGridViewCellStyle3.Format = "d";
+            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colPeriodBegin.HeaderText = "有效期(始)";
+            this.colPeriodBegin.Name = "colPeriodBegin";
+            this.colPeriodBegin.ReadOnly = true;
+            this.colPeriodBegin.Width = 86;
+            // 
+            // colPeriodEnd
+            // 
+            this.colPeriodEnd.DataPropertyName = "PeriodEnd";
+            dataGridViewCellStyle4.Format = "d";
+            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colPeriodEnd.HeaderText = "有效期(终)";
+            this.colPeriodEnd.Name = "colPeriodEnd";
+            this.colPeriodEnd.ReadOnly = true;
+            this.colPeriodEnd.Width = 86;
+            // 
+            // colApproveNo
+            // 
+            this.colApproveNo.DataPropertyName = "ApproveNo";
+            this.colApproveNo.HeaderText = "授信编号";
+            this.colApproveNo.Name = "colApproveNo";
+            this.colApproveNo.ReadOnly = true;
+            this.colApproveNo.Width = 80;
+            // 
+            // colApproveType
+            // 
+            this.colApproveType.DataPropertyName = "ApproveType";
+            this.colApproveType.HeaderText = "授信类别";
+            this.colApproveType.Name = "colApproveType";
+            this.colApproveType.ReadOnly = true;
+            this.colApproveType.Width = 80;
+            // 
+            // colCreditLineStatus
+            // 
+            this.colCreditLineStatus.DataPropertyName = "CreditLineStatus";
+            this.colCreditLineStatus.HeaderText = "额度状态";
+            this.colCreditLineStatus.Name = "colCreditLineStatus";
+            this.colCreditLineStatus.ReadOnly = true;
+            this.colCreditLineStatus.Width = 80;
+            // 
+            // colFreezeReason
+            // 
+            this.colFreezeReason.DataPropertyName = "FreezeReason";
+            this.colFreezeReason.HeaderText = "冻结原因";
+            this.colFreezeReason.Name = "colFreezeReason";
+            this.colFreezeReason.ReadOnly = true;
+            this.colFreezeReason.Width = 80;
+            // 
+            // colFreezer
+            // 
+            this.colFreezer.DataPropertyName = "Freezer";
+            this.colFreezer.HeaderText = "冻结人";
+            this.colFreezer.Name = "colFreezer";
+            this.colFreezer.ReadOnly = true;
+            this.colFreezer.Width = 68;
+            // 
+            // colFreezeDate
+            // 
+            this.colFreezeDate.DataPropertyName = "FreezeDate";
+            dataGridViewCellStyle5.Format = "d";
+            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colFreezeDate.HeaderText = "冻结日期";
+            this.colFreezeDate.Name = "colFreezeDate";
+            this.colFreezeDate.ReadOnly = true;
+            this.colFreezeDate.Width = 80;
+            // 
+            // colUnfreezeReason
+            // 
+            this.colUnfreezeReason.DataPropertyName = "UnfreezeReason";
+            this.colUnfreezeReason.HeaderText = "解冻原因";
+            this.colUnfreezeReason.Name = "colUnfreezeReason";
+            this.colUnfreezeReason.ReadOnly = true;
+            this.colUnfreezeReason.Width = 80;
+            // 
+            // colUnfreezer
+            // 
+            this.colUnfreezer.DataPropertyName = "Unfreezer";
+            this.colUnfreezer.HeaderText = "解冻人";
+            this.colUnfreezer.Name = "colUnfreezer";
+            this.colUnfreezer.ReadOnly = true;
+            this.colUnfreezer.Width = 68;
+            // 
+            // colUnfreezeDate
+            // 
+            this.colUnfreezeDate.DataPropertyName = "UnfreezeDate";
+            dataGridViewCellStyle6.Format = "d";
+            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colUnfreezeDate.HeaderText = "解冻日期";
+            this.colUnfreezeDate.Name = "colUnfreezeDate";
+            this.colUnfreezeDate.ReadOnly = true;
+            this.colUnfreezeDate.Width = 80;
+            // 
+            // colComment
+            // 
+            this.colComment.DataPropertyName = "Comment";
+            this.colComment.HeaderText = "备注";
+            this.colComment.Name = "colComment";
+            this.colComment.ReadOnly = true;
+            this.colComment.Width = 56;
+            // 
+            // factorCreditLineBindingSource
+            // 
+            this.factorCreditLineBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.FactorCreditLine);
             // 
             // groupPanelCreditLineDetail
             // 
@@ -2325,144 +2463,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.clientLineHighlighter.ContainerControl = this;
             // 
-            // colCreditLineID
-            // 
-            this.colCreditLineID.DataPropertyName = "CreditLineID";
-            this.colCreditLineID.HeaderText = "CreditLineID";
-            this.colCreditLineID.Name = "colCreditLineID";
-            this.colCreditLineID.ReadOnly = true;
-            this.colCreditLineID.Visible = false;
-            // 
-            // colCreditLineCurrency
-            // 
-            this.colCreditLineCurrency.DataPropertyName = "CreditLineCurrency";
-            this.colCreditLineCurrency.HeaderText = "额度币种";
-            this.colCreditLineCurrency.Name = "colCreditLineCurrency";
-            this.colCreditLineCurrency.ReadOnly = true;
-            this.colCreditLineCurrency.Width = 80;
-            // 
-            // colCreditLine
-            // 
-            this.colCreditLine.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle2.Format = "N2";
-            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colCreditLine.HeaderText = "额度上限";
-            this.colCreditLine.Name = "colCreditLine";
-            this.colCreditLine.ReadOnly = true;
-            this.colCreditLine.Width = 80;
-            // 
-            // colPeriodBegin
-            // 
-            this.colPeriodBegin.DataPropertyName = "PeriodBegin";
-            dataGridViewCellStyle3.Format = "d";
-            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colPeriodBegin.HeaderText = "有效期(始)";
-            this.colPeriodBegin.Name = "colPeriodBegin";
-            this.colPeriodBegin.ReadOnly = true;
-            this.colPeriodBegin.Width = 86;
-            // 
-            // colPeriodEnd
-            // 
-            this.colPeriodEnd.DataPropertyName = "PeriodEnd";
-            dataGridViewCellStyle4.Format = "d";
-            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colPeriodEnd.HeaderText = "有效期(终)";
-            this.colPeriodEnd.Name = "colPeriodEnd";
-            this.colPeriodEnd.ReadOnly = true;
-            this.colPeriodEnd.Width = 86;
-            // 
-            // colApproveNo
-            // 
-            this.colApproveNo.DataPropertyName = "ApproveNo";
-            this.colApproveNo.HeaderText = "授信编号";
-            this.colApproveNo.Name = "colApproveNo";
-            this.colApproveNo.ReadOnly = true;
-            this.colApproveNo.Width = 80;
-            // 
-            // colApproveType
-            // 
-            this.colApproveType.DataPropertyName = "ApproveType";
-            this.colApproveType.HeaderText = "授信类别";
-            this.colApproveType.Name = "colApproveType";
-            this.colApproveType.ReadOnly = true;
-            this.colApproveType.Width = 80;
-            // 
-            // colCreditLineStatus
-            // 
-            this.colCreditLineStatus.DataPropertyName = "CreditLineStatus";
-            this.colCreditLineStatus.HeaderText = "额度状态";
-            this.colCreditLineStatus.Name = "colCreditLineStatus";
-            this.colCreditLineStatus.ReadOnly = true;
-            this.colCreditLineStatus.Width = 80;
-            // 
-            // colFreezeReason
-            // 
-            this.colFreezeReason.DataPropertyName = "FreezeReason";
-            this.colFreezeReason.HeaderText = "冻结原因";
-            this.colFreezeReason.Name = "colFreezeReason";
-            this.colFreezeReason.ReadOnly = true;
-            this.colFreezeReason.Width = 80;
-            // 
-            // colFreezer
-            // 
-            this.colFreezer.DataPropertyName = "Freezer";
-            this.colFreezer.HeaderText = "冻结人";
-            this.colFreezer.Name = "colFreezer";
-            this.colFreezer.ReadOnly = true;
-            this.colFreezer.Width = 68;
-            // 
-            // colFreezeDate
-            // 
-            this.colFreezeDate.DataPropertyName = "FreezeDate";
-            dataGridViewCellStyle5.Format = "d";
-            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colFreezeDate.HeaderText = "冻结日期";
-            this.colFreezeDate.Name = "colFreezeDate";
-            this.colFreezeDate.ReadOnly = true;
-            this.colFreezeDate.Width = 80;
-            // 
-            // colUnfreezeReason
-            // 
-            this.colUnfreezeReason.DataPropertyName = "UnfreezeReason";
-            this.colUnfreezeReason.HeaderText = "解冻原因";
-            this.colUnfreezeReason.Name = "colUnfreezeReason";
-            this.colUnfreezeReason.ReadOnly = true;
-            this.colUnfreezeReason.Width = 80;
-            // 
-            // colUnfreezer
-            // 
-            this.colUnfreezer.DataPropertyName = "Unfreezer";
-            this.colUnfreezer.HeaderText = "解冻人";
-            this.colUnfreezer.Name = "colUnfreezer";
-            this.colUnfreezer.ReadOnly = true;
-            this.colUnfreezer.Width = 68;
-            // 
-            // colUnfreezeDate
-            // 
-            this.colUnfreezeDate.DataPropertyName = "UnfreezeDate";
-            dataGridViewCellStyle6.Format = "d";
-            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colUnfreezeDate.HeaderText = "解冻日期";
-            this.colUnfreezeDate.Name = "colUnfreezeDate";
-            this.colUnfreezeDate.ReadOnly = true;
-            this.colUnfreezeDate.Width = 80;
-            // 
-            // colComment
-            // 
-            this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "备注";
-            this.colComment.Name = "colComment";
-            this.colComment.ReadOnly = true;
-            this.colComment.Width = 56;
-            // 
-            // factorCreditLineBindingSource
-            // 
-            this.factorCreditLineBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.FactorCreditLine);
-            // 
-            // factorBindingSource
-            // 
-            this.factorBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Factor);
-            // 
             // FactorDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2479,12 +2479,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.tabPanelFactor.ResumeLayout(false);
             this.groupPanelMembership.ResumeLayout(false);
             this.groupPanelMembership.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.factorBindingSource)).EndInit();
             this.groupPanelContacts.ResumeLayout(false);
             this.groupPanelContacts.PerformLayout();
             this.groupPanelBasic.ResumeLayout(false);
             this.groupPanelBasic.PerformLayout();
             this.tabPanelCreditLine.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactorCreditLines)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.factorCreditLineBindingSource)).EndInit();
             this.groupPanelCreditLineDetail.ResumeLayout(false);
             this.groupPanelCreditLineDetail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.unfreezeDateDateTimePicker)).EndInit();
@@ -2493,8 +2495,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             ((System.ComponentModel.ISupportInitialize)(this.periodBeginDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.factorErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientLineErrorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.factorCreditLineBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.factorBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -239,7 +239,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (invoice.InvoiceAssignBatch != null)
             {
                 AssignBatchDetail detail = new AssignBatchDetail(invoice.InvoiceAssignBatch);
-                detail.Show();
+                detail.ShowDialog(this);
             }
         }
 
@@ -254,7 +254,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (invoice.InvoiceFinanceBatch != null)
             {
                 FinanceBatchDetail detail = new FinanceBatchDetail(invoice.InvoiceFinanceBatch);
-                detail.Show();
+                detail.ShowDialog(this);
             }
         }
 
@@ -273,7 +273,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (batch != null)
                 {
                     PaymentBatchDetail detail = new PaymentBatchDetail(batch);
-                    detail.Show();
+                    detail.ShowDialog(this);
                 }
             }
         }
@@ -293,7 +293,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (batch != null)
                 {
                     RefundBatchDetail detail = new RefundBatchDetail(batch);
-                    detail.Show();
+                    detail.ShowDialog(this);
                 }
             }
         }
@@ -669,5 +669,6 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
+
     }
 }

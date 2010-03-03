@@ -201,9 +201,9 @@ namespace CMBC.EasyFactor.CaseMgr
             DevComponents.DotNetBar.LabelX lblComment;
             DevComponents.DotNetBar.LabelX lblCaseCode;
             DevComponents.DotNetBar.LabelX lblReview;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaseDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelCase = new DevComponents.DotNetBar.TabControlPanel();
@@ -382,9 +382,9 @@ namespace CMBC.EasyFactor.CaseMgr
             requestAmountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             requestAmountLabel.Location = new System.Drawing.Point(8, 12);
             requestAmountLabel.Name = "requestAmountLabel";
-            requestAmountLabel.Size = new System.Drawing.Size(59, 16);
+            requestAmountLabel.Size = new System.Drawing.Size(57, 15);
             requestAmountLabel.TabIndex = 0;
-            requestAmountLabel.Text = "申请额度:";
+            requestAmountLabel.Text = "<font color=\'red\'>*</font>申请额度:";
             // 
             // replyAmountLabel
             // 
@@ -394,7 +394,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             replyAmountLabel.BackgroundStyle.Class = "";
-            replyAmountLabel.Location = new System.Drawing.Point(8, 36);
+            replyAmountLabel.Location = new System.Drawing.Point(9, 36);
             replyAmountLabel.Name = "replyAmountLabel";
             replyAmountLabel.Size = new System.Drawing.Size(59, 16);
             replyAmountLabel.TabIndex = 6;
@@ -408,7 +408,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             iFPriceLabel.BackgroundStyle.Class = "";
-            iFPriceLabel.Location = new System.Drawing.Point(180, 36);
+            iFPriceLabel.Location = new System.Drawing.Point(182, 36);
             iFPriceLabel.Name = "iFPriceLabel";
             iFPriceLabel.Size = new System.Drawing.Size(44, 16);
             iFPriceLabel.TabIndex = 8;
@@ -422,7 +422,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             replyDateLabel.BackgroundStyle.Class = "";
-            replyDateLabel.Location = new System.Drawing.Point(336, 36);
+            replyDateLabel.Location = new System.Drawing.Point(338, 36);
             replyDateLabel.Name = "replyDateLabel";
             replyDateLabel.Size = new System.Drawing.Size(59, 16);
             replyDateLabel.TabIndex = 10;
@@ -439,9 +439,9 @@ namespace CMBC.EasyFactor.CaseMgr
             requestDateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             requestDateLabel.Location = new System.Drawing.Point(336, 11);
             requestDateLabel.Name = "requestDateLabel";
-            requestDateLabel.Size = new System.Drawing.Size(59, 16);
+            requestDateLabel.Size = new System.Drawing.Size(57, 15);
             requestDateLabel.TabIndex = 4;
-            requestDateLabel.Text = "申请日期:";
+            requestDateLabel.Text = "<font color=\'red\'>*</font>申请日期:";
             // 
             // requestTypeLabel
             // 
@@ -454,9 +454,9 @@ namespace CMBC.EasyFactor.CaseMgr
             requestTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             requestTypeLabel.Location = new System.Drawing.Point(177, 11);
             requestTypeLabel.Name = "requestTypeLabel";
-            requestTypeLabel.Size = new System.Drawing.Size(53, 16);
+            requestTypeLabel.Size = new System.Drawing.Size(51, 15);
             requestTypeLabel.TabIndex = 2;
-            requestTypeLabel.Text = "P/C标识:";
+            requestTypeLabel.Text = "<font color=\'red\'>*</font>P/C标识:";
             // 
             // commentLabel
             // 
@@ -510,12 +510,12 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             lblCaseOwnerDept.BackgroundStyle.Class = "";
             lblCaseOwnerDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            lblCaseOwnerDept.Location = new System.Drawing.Point(7, 200);
+            lblCaseOwnerDept.Location = new System.Drawing.Point(5, 200);
             lblCaseOwnerDept.Name = "lblCaseOwnerDept";
-            lblCaseOwnerDept.Size = new System.Drawing.Size(84, 16);
+            lblCaseOwnerDept.Size = new System.Drawing.Size(81, 15);
             lblCaseOwnerDept.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             lblCaseOwnerDept.TabIndex = 25;
-            lblCaseOwnerDept.Text = "业务归属机构:";
+            lblCaseOwnerDept.Text = "<font color=\'red\'>*</font>业务归属机构:";
             // 
             // lblCaseOpType
             // 
@@ -526,12 +526,12 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             lblCaseOpType.BackgroundStyle.Class = "";
             lblCaseOpType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            lblCaseOpType.Location = new System.Drawing.Point(33, 177);
+            lblCaseOpType.Location = new System.Drawing.Point(31, 177);
             lblCaseOpType.Name = "lblCaseOpType";
-            lblCaseOpType.Size = new System.Drawing.Size(59, 16);
+            lblCaseOpType.Size = new System.Drawing.Size(57, 15);
             lblCaseOpType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             lblCaseOpType.TabIndex = 21;
-            lblCaseOpType.Text = "操作类型:";
+            lblCaseOpType.Text = "<font color=\'red\'>*</font>操作类型:";
             // 
             // lblCaseCreateUser
             // 
@@ -556,12 +556,12 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             lblCaseMark.BackgroundStyle.Class = "";
-            lblCaseMark.Location = new System.Drawing.Point(268, 245);
+            lblCaseMark.Location = new System.Drawing.Point(267, 245);
             lblCaseMark.Name = "lblCaseMark";
-            lblCaseMark.Size = new System.Drawing.Size(59, 16);
+            lblCaseMark.Size = new System.Drawing.Size(57, 15);
             lblCaseMark.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             lblCaseMark.TabIndex = 31;
-            lblCaseMark.Text = "案件状态:";
+            lblCaseMark.Text = "<font color=\'red\'>*</font>案件状态:";
             // 
             // lblCaseAppDate
             // 
@@ -571,12 +571,12 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             lblCaseAppDate.BackgroundStyle.Class = "";
-            lblCaseAppDate.Location = new System.Drawing.Point(30, 245);
+            lblCaseAppDate.Location = new System.Drawing.Point(28, 245);
             lblCaseAppDate.Name = "lblCaseAppDate";
-            lblCaseAppDate.Size = new System.Drawing.Size(59, 16);
+            lblCaseAppDate.Size = new System.Drawing.Size(57, 15);
             lblCaseAppDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             lblCaseAppDate.TabIndex = 29;
-            lblCaseAppDate.Text = "申请日期:";
+            lblCaseAppDate.Text = "<font color=\'red\'>*</font>申请日期:";
             // 
             // lblCaseTransactionType
             // 
@@ -587,12 +587,12 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             lblCaseTransactionType.BackgroundStyle.Class = "";
             lblCaseTransactionType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            lblCaseTransactionType.Location = new System.Drawing.Point(33, 3);
+            lblCaseTransactionType.Location = new System.Drawing.Point(30, 3);
             lblCaseTransactionType.Name = "lblCaseTransactionType";
-            lblCaseTransactionType.Size = new System.Drawing.Size(59, 16);
+            lblCaseTransactionType.Size = new System.Drawing.Size(57, 15);
             lblCaseTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             lblCaseTransactionType.TabIndex = 0;
-            lblCaseTransactionType.Text = "业务类别:";
+            lblCaseTransactionType.Text = "<font color=\'red\'>*</font>业务类别:";
             // 
             // lblCaseInvoiceCurrency
             // 
@@ -603,12 +603,12 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             lblCaseInvoiceCurrency.BackgroundStyle.Class = "";
             lblCaseInvoiceCurrency.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            lblCaseInvoiceCurrency.Location = new System.Drawing.Point(33, 155);
+            lblCaseInvoiceCurrency.Location = new System.Drawing.Point(31, 155);
             lblCaseInvoiceCurrency.Name = "lblCaseInvoiceCurrency";
-            lblCaseInvoiceCurrency.Size = new System.Drawing.Size(59, 16);
+            lblCaseInvoiceCurrency.Size = new System.Drawing.Size(57, 15);
             lblCaseInvoiceCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             lblCaseInvoiceCurrency.TabIndex = 17;
-            lblCaseInvoiceCurrency.Text = "发票币别:";
+            lblCaseInvoiceCurrency.Text = "<font color=\'red\'>*</font>发票币别:";
             // 
             // lblCaseBuyerNo
             // 
@@ -619,12 +619,12 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             lblCaseBuyerNo.BackgroundStyle.Class = "";
             lblCaseBuyerNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            lblCaseBuyerNo.Location = new System.Drawing.Point(55, 68);
+            lblCaseBuyerNo.Location = new System.Drawing.Point(53, 68);
             lblCaseBuyerNo.Name = "lblCaseBuyerNo";
-            lblCaseBuyerNo.Size = new System.Drawing.Size(34, 16);
+            lblCaseBuyerNo.Size = new System.Drawing.Size(33, 15);
             lblCaseBuyerNo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             lblCaseBuyerNo.TabIndex = 7;
-            lblCaseBuyerNo.Text = "买方:";
+            lblCaseBuyerNo.Text = "<font color=\'red\'>*</font>买方:";
             // 
             // lblCaseSellerNo
             // 
@@ -635,12 +635,12 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             lblCaseSellerNo.BackgroundStyle.Class = "";
             lblCaseSellerNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            lblCaseSellerNo.Location = new System.Drawing.Point(57, 22);
+            lblCaseSellerNo.Location = new System.Drawing.Point(54, 26);
             lblCaseSellerNo.Name = "lblCaseSellerNo";
-            lblCaseSellerNo.Size = new System.Drawing.Size(34, 16);
+            lblCaseSellerNo.Size = new System.Drawing.Size(33, 15);
             lblCaseSellerNo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             lblCaseSellerNo.TabIndex = 2;
-            lblCaseSellerNo.Text = "卖方:";
+            lblCaseSellerNo.Text = "<font color=\'red\'>*</font>卖方:";
             // 
             // lblCaseFactor
             // 
@@ -650,7 +650,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             lblCaseFactor.BackgroundStyle.Class = "";
-            lblCaseFactor.Location = new System.Drawing.Point(44, 113);
+            lblCaseFactor.Location = new System.Drawing.Point(44, 110);
             lblCaseFactor.Name = "lblCaseFactor";
             lblCaseFactor.Size = new System.Drawing.Size(47, 16);
             lblCaseFactor.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -667,10 +667,10 @@ namespace CMBC.EasyFactor.CaseMgr
             lblManagerName.BackgroundStyle.Class = "";
             lblManagerName.Location = new System.Drawing.Point(2, 266);
             lblManagerName.Name = "lblManagerName";
-            lblManagerName.Size = new System.Drawing.Size(87, 16);
+            lblManagerName.Size = new System.Drawing.Size(84, 15);
             lblManagerName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             lblManagerName.TabIndex = 33;
-            lblManagerName.Text = "营销/维护经理:";
+            lblManagerName.Text = "<font color=\'red\'>*</font>营销/维护经理:";
             // 
             // lblPaymentTerm
             // 
@@ -739,9 +739,9 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelCase);
-            this.tabControl.Controls.Add(this.tabPanelCDA);
             this.tabControl.Controls.Add(this.tabPanelCreditCoverNeg);
+            this.tabControl.Controls.Add(this.tabPanelCDA);
+            this.tabControl.Controls.Add(this.tabPanelCase);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -1314,14 +1314,14 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCDAs.AllowUserToAddRows = false;
             this.dgvCDAs.AllowUserToDeleteRows = false;
             this.dgvCDAs.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCDAs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCDAs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCDACode,
@@ -1364,14 +1364,14 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colFax,
             this.colCDAComment,
             this.colCDACreateUserName});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCDAs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCDAs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCDAs.Location = new System.Drawing.Point(1, 39);
@@ -1804,14 +1804,14 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colIFPrice,
             this.colComment,
             this.colCreateUserName});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCreditCoverNegs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCreditCoverNegs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCreditCoverNegs.Location = new System.Drawing.Point(1, 166);

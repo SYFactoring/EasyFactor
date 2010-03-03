@@ -148,7 +148,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cmuCDAMgr.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelCDAQuery
+            // panelQuery
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -169,7 +169,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.panelQuery.Controls.Add(this.lblContractCode);
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
-            this.panelQuery.Name = "panelCDAQuery";
+            this.panelQuery.Name = "panelQuery";
             this.panelQuery.Size = new System.Drawing.Size(773, 54);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
@@ -337,12 +337,12 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 14;
             // 
-            // btnCDAQuery
+            // btnQuery
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnQuery.Location = new System.Drawing.Point(638, 3);
-            this.btnQuery.Name = "btnCDAQuery";
+            this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(47, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 13;
@@ -703,7 +703,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colPrice.DataPropertyName = "Price";
-            dataGridViewCellStyle8.Format = "p";
+            dataGridViewCellStyle8.Format = "p3";
             this.colPrice.DefaultCellStyle = dataGridViewCellStyle8;
             this.colPrice.HeaderText = "总手续费率";
             this.colPrice.Name = "colPrice";
@@ -714,7 +714,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colIFPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colIFPrice.DataPropertyName = "IFPrice";
-            dataGridViewCellStyle9.Format = "p";
+            dataGridViewCellStyle9.Format = "p3";
             this.colIFPrice.DefaultCellStyle = dataGridViewCellStyle9;
             this.colIFPrice.HeaderText = "IF手续费率";
             this.colIFPrice.Name = "colIFPrice";

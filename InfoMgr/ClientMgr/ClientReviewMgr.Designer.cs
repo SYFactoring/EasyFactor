@@ -17,26 +17,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// Required designer variable.
         /// </summary>
         private DevComponents.DotNetBar.ButtonX btnQuery;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestCommissionRate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinancePeriod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinanceType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinanceType2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewStatus;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvClientReviews;
-        private DevComponents.DotNetBar.LabelX lblClientEDICode;
         private DevComponents.DotNetBar.LabelX lblClientName;
         private DevComponents.DotNetBar.LabelX lblCount;
         private DevComponents.DotNetBar.PanelEx panelQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientReviewNo;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
 
         #endregion Fields
@@ -81,8 +67,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblClientName = new DevComponents.DotNetBar.LabelX();
-            this.tbClientEDICode = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblClientEDICode = new DevComponents.DotNetBar.LabelX();
+            this.tbClientReviewNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.dgvClientReviews = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colClientEDICode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,6 +82,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colReviewDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblClientReviewNo = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientReviews)).BeginInit();
             this.SuspendLayout();
@@ -109,8 +95,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.panelQuery.Controls.Add(this.btnQuery);
             this.panelQuery.Controls.Add(this.tbClientName);
             this.panelQuery.Controls.Add(this.lblClientName);
-            this.panelQuery.Controls.Add(this.tbClientEDICode);
-            this.panelQuery.Controls.Add(this.lblClientEDICode);
+            this.panelQuery.Controls.Add(this.tbClientReviewNo);
+            this.panelQuery.Controls.Add(this.lblClientReviewNo);
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
@@ -154,9 +140,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.tbClientName.Border.Class = "TextBoxBorder";
-            this.tbClientName.Location = new System.Drawing.Point(236, 3);
+            this.tbClientName.Location = new System.Drawing.Point(264, 3);
             this.tbClientName.Name = "tbClientName";
-            this.tbClientName.Size = new System.Drawing.Size(100, 20);
+            this.tbClientName.Size = new System.Drawing.Size(152, 20);
             this.tbClientName.TabIndex = 3;
             // 
             // lblClientName
@@ -166,35 +152,22 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.lblClientName.BackgroundStyle.Class = "";
-            this.lblClientName.Location = new System.Drawing.Point(174, 5);
+            this.lblClientName.Location = new System.Drawing.Point(202, 5);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(56, 16);
             this.lblClientName.TabIndex = 2;
             this.lblClientName.Text = "客户名称";
             // 
-            // tbClientEDICode
+            // tbClientReviewNo
             // 
             // 
             // 
             // 
-            this.tbClientEDICode.Border.Class = "TextBoxBorder";
-            this.tbClientEDICode.Location = new System.Drawing.Point(68, 3);
-            this.tbClientEDICode.Name = "tbClientEDICode";
-            this.tbClientEDICode.Size = new System.Drawing.Size(100, 20);
-            this.tbClientEDICode.TabIndex = 1;
-            // 
-            // lblClientEDICode
-            // 
-            this.lblClientEDICode.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblClientEDICode.BackgroundStyle.Class = "";
-            this.lblClientEDICode.Location = new System.Drawing.Point(6, 5);
-            this.lblClientEDICode.Name = "lblClientEDICode";
-            this.lblClientEDICode.Size = new System.Drawing.Size(56, 16);
-            this.lblClientEDICode.TabIndex = 0;
-            this.lblClientEDICode.Text = "保理代码";
+            this.tbClientReviewNo.Border.Class = "TextBoxBorder";
+            this.tbClientReviewNo.Location = new System.Drawing.Point(96, 3);
+            this.tbClientReviewNo.Name = "tbClientReviewNo";
+            this.tbClientReviewNo.Size = new System.Drawing.Size(100, 20);
+            this.tbClientReviewNo.TabIndex = 1;
             // 
             // dgvClientReviews
             // 
@@ -307,7 +280,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colRequestCommissionRate
             // 
             this.colRequestCommissionRate.DataPropertyName = "RequestCommissionRate";
-            dataGridViewCellStyle3.Format = "p";
+            dataGridViewCellStyle3.Format = "p3";
             this.colRequestCommissionRate.DefaultCellStyle = dataGridViewCellStyle3;
             this.colRequestCommissionRate.HeaderText = "手续费率";
             this.colRequestCommissionRate.Name = "colRequestCommissionRate";
@@ -344,6 +317,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colComment.Name = "colComment";
             this.colComment.ReadOnly = true;
             // 
+            // lblClientReviewNo
+            // 
+            this.lblClientReviewNo.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblClientReviewNo.BackgroundStyle.Class = "";
+            this.lblClientReviewNo.Location = new System.Drawing.Point(6, 5);
+            this.lblClientReviewNo.Name = "lblClientReviewNo";
+            this.lblClientReviewNo.Size = new System.Drawing.Size(93, 16);
+            this.lblClientReviewNo.TabIndex = 0;
+            this.lblClientReviewNo.Text = "协查意见书编号";
+            // 
             // ClientReviewMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -360,5 +346,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.LabelX lblClientReviewNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinanceType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinanceType2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinancePeriod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestCommissionRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
     }
 }

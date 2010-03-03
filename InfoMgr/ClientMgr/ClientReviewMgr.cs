@@ -145,13 +145,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void Query(object sender, EventArgs e)
         {
-            string clientEDICode = this.tbClientEDICode.Text;
+            string clientReviewNo = this.tbClientReviewNo.Text;
             string clientName = this.tbClientName.Text;
 
             DBDataContext context = new DBDataContext();
 
             var queryResult = context.ClientReviews.Where(c =>
-                c.Client.ClientEDICode.Contains(clientEDICode)
+                c.ReviewNo.Contains(clientReviewNo)
              && (c.Client.ClientNameCN.Contains(clientName) || c.Client.ClientNameEN.Contains(clientName)));
 
             this.bs.DataSource = queryResult;

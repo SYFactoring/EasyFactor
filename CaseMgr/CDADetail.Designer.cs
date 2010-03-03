@@ -394,7 +394,7 @@
             // 
             // 
             pUGProportionLabel.BackgroundStyle.Class = "";
-            pUGProportionLabel.Location = new System.Drawing.Point(34, 48);
+            pUGProportionLabel.Location = new System.Drawing.Point(32, 48);
             pUGProportionLabel.Name = "pUGProportionLabel";
             pUGProportionLabel.Size = new System.Drawing.Size(59, 16);
             pUGProportionLabel.TabIndex = 14;
@@ -522,9 +522,9 @@
             paymentTermsLabel.BackgroundStyle.Class = "";
             paymentTermsLabel.Location = new System.Drawing.Point(28, 117);
             paymentTermsLabel.Name = "paymentTermsLabel";
-            paymentTermsLabel.Size = new System.Drawing.Size(59, 16);
+            paymentTermsLabel.Size = new System.Drawing.Size(57, 15);
             paymentTermsLabel.TabIndex = 32;
-            paymentTermsLabel.Text = "付款条件:";
+            paymentTermsLabel.Text = "<font color=\'red\'>*</font>付款条件:";
             // 
             // financeGracePeriodLabel
             // 
@@ -576,11 +576,11 @@
             // 
             // 
             priceLabel.BackgroundStyle.Class = "";
-            priceLabel.Location = new System.Drawing.Point(15, 207);
+            priceLabel.Location = new System.Drawing.Point(15, 205);
             priceLabel.Name = "priceLabel";
-            priceLabel.Size = new System.Drawing.Size(72, 16);
+            priceLabel.Size = new System.Drawing.Size(69, 15);
             priceLabel.TabIndex = 40;
-            priceLabel.Text = "总手续费率:";
+            priceLabel.Text = "<font color=\'red\'>*</font>总手续费率:";
             // 
             // iFPriceLabel
             // 
@@ -604,11 +604,11 @@
             // 
             // 
             commissonTypeLabel.BackgroundStyle.Class = "";
-            commissonTypeLabel.Location = new System.Drawing.Point(28, 228);
+            commissonTypeLabel.Location = new System.Drawing.Point(26, 228);
             commissonTypeLabel.Name = "commissonTypeLabel";
-            commissonTypeLabel.Size = new System.Drawing.Size(59, 16);
+            commissonTypeLabel.Size = new System.Drawing.Size(57, 15);
             commissonTypeLabel.TabIndex = 49;
-            commissonTypeLabel.Text = "计费方式:";
+            commissonTypeLabel.Text = "<font color=\'red\'>*</font>计费方式:";
             // 
             // commissionTypeCommentLabel
             // 
@@ -632,7 +632,7 @@
             // 
             // 
             handFeeLabel.BackgroundStyle.Class = "";
-            handFeeLabel.Location = new System.Drawing.Point(455, 209);
+            handFeeLabel.Location = new System.Drawing.Point(455, 208);
             handFeeLabel.Name = "handFeeLabel";
             handFeeLabel.Size = new System.Drawing.Size(104, 16);
             handFeeLabel.TabIndex = 46;
@@ -718,9 +718,9 @@
             cDAStatusLabel.BackgroundStyle.Class = "";
             cDAStatusLabel.Location = new System.Drawing.Point(25, 3);
             cDAStatusLabel.Name = "cDAStatusLabel";
-            cDAStatusLabel.Size = new System.Drawing.Size(59, 16);
+            cDAStatusLabel.Size = new System.Drawing.Size(56, 15);
             cDAStatusLabel.TabIndex = 2;
-            cDAStatusLabel.Text = "合同状态:";
+            cDAStatusLabel.Text = "<font color=\'red\'>*</font>CDA状态:";
             // 
             // noticeMethodLabel
             // 
@@ -772,11 +772,11 @@
             // 
             // 
             assignTypeLabel.BackgroundStyle.Class = "";
-            assignTypeLabel.Location = new System.Drawing.Point(565, 3);
+            assignTypeLabel.Location = new System.Drawing.Point(565, 4);
             assignTypeLabel.Name = "assignTypeLabel";
-            assignTypeLabel.Size = new System.Drawing.Size(59, 16);
+            assignTypeLabel.Size = new System.Drawing.Size(57, 15);
             assignTypeLabel.TabIndex = 2;
-            assignTypeLabel.Text = "转让方式:";
+            assignTypeLabel.Text = "<font color=\'red\'>*</font>转让方式:";
             // 
             // lblIsNotice
             // 
@@ -786,11 +786,11 @@
             // 
             // 
             lblIsNotice.BackgroundStyle.Class = "";
-            lblIsNotice.Location = new System.Drawing.Point(286, 3);
+            lblIsNotice.Location = new System.Drawing.Point(283, 3);
             lblIsNotice.Name = "lblIsNotice";
-            lblIsNotice.Size = new System.Drawing.Size(62, 16);
+            lblIsNotice.Size = new System.Drawing.Size(60, 15);
             lblIsNotice.TabIndex = 4;
-            lblIsNotice.Text = "明/暗保理:";
+            lblIsNotice.Text = "<font color=\'red\'>*</font>明/暗保理:";
             // 
             // lblRemark
             // 
@@ -830,9 +830,9 @@
             lblCDASignDate.BackgroundStyle.Class = "";
             lblCDASignDate.Location = new System.Drawing.Point(242, 2);
             lblCDASignDate.Name = "lblCDASignDate";
-            lblCDASignDate.Size = new System.Drawing.Size(59, 16);
+            lblCDASignDate.Size = new System.Drawing.Size(57, 15);
             lblCDASignDate.TabIndex = 35;
-            lblCDASignDate.Text = "签发日期:";
+            lblCDASignDate.Text = "<font color=\'red\'>*</font>签发日期:";
             // 
             // groupPanelCase
             // 
