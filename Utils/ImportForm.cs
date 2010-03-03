@@ -2186,9 +2186,10 @@ namespace CMBC.EasyFactor.Utils
 
                             //手续费
                             column = 22;
+                            invoice.Commission = (System.Nullable<double>)valueArray[row, 22];
                             invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, 23];
 
-                            if (activeCDA != null)
+                            if (activeCDA != null && invoice.Commission == null)
                             {
                                 switch (activeCDA.CommissionType)
                                 {
