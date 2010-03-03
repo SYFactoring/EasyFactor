@@ -1996,6 +1996,12 @@ namespace CMBC.EasyFactor.Utils
                             }
                         }
 
+                        CDA activeCDA = curCase.ActiveCDA;
+                        if (activeCDA == null)
+                        {
+                            throw new Exception("没有有效的额度通知书: " + caseCode);
+                        }
+
                         string type = String.Format("{0:G}", valueArray[row, 4]);
                         if (type == null || string.Empty.Equals(type))
                         {
@@ -2182,13 +2188,12 @@ namespace CMBC.EasyFactor.Utils
                             column = 22;
                             invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, 23];
 
-                            CDA cda = curCase.ActiveCDA;
-                            if (cda != null)
+                            if (activeCDA != null)
                             {
-                                switch (cda.CommissionType)
+                                switch (activeCDA.CommissionType)
                                 {
                                     case "按融资金额":
-                                        invoice.Commission = invoice.FinanceAmount * cda.Price;
+                                        invoice.Commission = invoice.FinanceAmount * activeCDA.Price;
                                         if (invoice.Commission.HasValue && !invoice.CommissionDate.HasValue)
                                         {
                                             invoice.CommissionDate = invoice.FinanceDate;
@@ -2196,7 +2201,7 @@ namespace CMBC.EasyFactor.Utils
 
                                         break;
                                     case "按转让金额":
-                                        invoice.Commission = invoice.AssignAmount * cda.Price;
+                                        invoice.Commission = invoice.AssignAmount * activeCDA.Price;
                                         if (invoice.Commission.HasValue && !invoice.CommissionDate.HasValue)
                                         {
                                             invoice.CommissionDate = invoice.InvoiceAssignBatch.AssignDate;
