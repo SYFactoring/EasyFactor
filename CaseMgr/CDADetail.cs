@@ -70,7 +70,7 @@ namespace CMBC.EasyFactor.CaseMgr
             : this((CDA)null, opCDAType)
         {
             CDA cda = (CDA)this.CDABindingSource.DataSource;
-            cda.Case = selectedCase;
+            cda.Case = context.Cases.SingleOrDefault(c => c.CaseCode == selectedCase.CaseCode);
             FillCase();
         }
 
