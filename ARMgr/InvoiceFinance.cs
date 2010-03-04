@@ -590,7 +590,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeBatch.CreateUserName = App.Current.CurUser.Name;
             financeBatch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = financeBatch;
-            this.invoiceBindingSource.DataSource = context.Invoices.Where(i => i.InvoiceAssignBatch.CaseCode == this._case.CaseCode && i.IsFlaw == false && i.InvoiceAssignBatch.CheckStatus == "已复核" && i.AssignAmount - i.PaymentAmount.GetValueOrDefault() > 0.00000001 && (i.FinanceAmount.HasValue == false || i.FinanceAmount < 0.0000001)).ToList();
+            this.invoiceBindingSource.DataSource = context.Invoices.Where(i => i.InvoiceAssignBatch.CaseCode == this._case.CaseCode && i.IsFlaw == false && i.InvoiceAssignBatch.CheckStatus == "已复核" && i.AssignAmount - i.PaymentAmount.GetValueOrDefault() > 0.0001 && (i.FinanceAmount.HasValue == false || i.FinanceAmount < 0.0001)).ToList();
             this.StatBatch();
         }
 

@@ -650,7 +650,7 @@ namespace CMBC.EasyFactor.Report
                                  && (beginDate != this.diAssignDateBegin.MinDate ? invoice.InvoiceAssignBatch.AssignDate >= beginDate : true)
                                  && (endDate != this.diAssignDateEnd.MinDate ? invoice.InvoiceAssignBatch.AssignDate <= endDate : true)
                                  && (this.opReportType == OpReportType.REPORT_ASSIGN ? invoice.AssignAmount > invoice.PaymentAmount.GetValueOrDefault() : true)
-                                 && (this.opReportType == OpReportType.REPORT_FINANCE ? invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() < 0.00000001 : true)
+                                 && (this.opReportType == OpReportType.REPORT_FINANCE ? invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() < 0.0001 : true)
                               select invoice;
 
             this.bs.DataSource = queryResult;

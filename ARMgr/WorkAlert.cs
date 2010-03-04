@@ -147,15 +147,15 @@ namespace CMBC.EasyFactor.ARMgr
             worker.ReportProgress(result, this.btnRejectCheckRefund);
 
             //DueAssign7
-            result = context.Invoices.Count(invoice => invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.0000001 && invoice.DueDate <= DateTime.Now.Date.AddDays(7) && invoice.DueDate >= DateTime.Now.Date);
+            result = context.Invoices.Count(invoice => invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.0001 && invoice.DueDate <= DateTime.Now.Date.AddDays(7) && invoice.DueDate >= DateTime.Now.Date);
             worker.ReportProgress(result, this.btnDueAssign7);
 
             //DueAssign0
-            result = context.Invoices.Count(invoice => invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.0000001 && invoice.DueDate == DateTime.Now.Date);
+            result = context.Invoices.Count(invoice => invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.0001 && invoice.DueDate == DateTime.Now.Date);
             worker.ReportProgress(result, this.btnDueAssign0);
 
             //DueAssign
-            result = context.Invoices.Count(invoice => invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.0000001 && invoice.DueDate < DateTime.Now.Date);
+            result = context.Invoices.Count(invoice => invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.0001 && invoice.DueDate < DateTime.Now.Date);
             worker.ReportProgress(result, this.btnDueAssign);
 
             //InvoiceDispute
@@ -163,15 +163,15 @@ namespace CMBC.EasyFactor.ARMgr
             worker.ReportProgress(result, this.btnInvoiceDispute);
 
             //DueFinance7
-            result = context.Invoices.Count(invoice => invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0000001 && invoice.FinanceDueDate <= DateTime.Now.Date.AddDays(7) && invoice.FinanceDueDate >= DateTime.Now.Date);
+            result = context.Invoices.Count(invoice => invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0001 && invoice.FinanceDueDate <= DateTime.Now.Date.AddDays(7) && invoice.FinanceDueDate >= DateTime.Now.Date);
             worker.ReportProgress(result, this.btnDueFinance7);
 
             //DueFinance0
-            result = context.Invoices.Count(invoice => invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0000001 && invoice.FinanceDueDate == DateTime.Now.Date);
+            result = context.Invoices.Count(invoice => invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0001 && invoice.FinanceDueDate == DateTime.Now.Date);
             worker.ReportProgress(result, this.btnDueFinance0);
 
             //DueFinance
-            result = context.Invoices.Count(invoice => invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0000001 && invoice.FinanceDueDate < DateTime.Now.Date);
+            result = context.Invoices.Count(invoice => invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0001 && invoice.FinanceDueDate < DateTime.Now.Date);
             worker.ReportProgress(result, this.btnDueFinance);
 
             //DueClientCreditLine

@@ -361,7 +361,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
             try
             {
                 sheet.get_Range("A1", "R1").MergeCells = true;
