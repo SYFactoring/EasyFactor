@@ -133,6 +133,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.bs.DataSource = invoiceList;
             this.lblCount.Text = String.Format("获得{0}条记录", invoiceList.Count());
             this.panelQuery.Visible = false;
+
+            context = new DBDataContext();
         }
 
         /// <summary>
