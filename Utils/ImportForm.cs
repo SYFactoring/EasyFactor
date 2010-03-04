@@ -423,7 +423,7 @@ namespace CMBC.EasyFactor.Utils
                             return -1;
                         }
 
-                        string caseCode = String.Format("{0:G}", valueArray[row, 1]);
+                        string caseCode = String.Format("{0:G}", valueArray[row, 1]).Trim();
                         if (String.Empty.Equals(caseCode))
                         {
                             continue;
@@ -460,7 +460,7 @@ namespace CMBC.EasyFactor.Utils
                         string coDeptName = String.Format("{0:G}", valueArray[row, column++]);
                         curCase.CoDepartment = context.Departments.SingleOrDefault(d => d.DepartmentName == coDeptName);
                         curCase.CaseMark = String.Format("{0:G}", valueArray[row, column++]);
-                        string sellerEDICode = String.Format("{0:G}", valueArray[row, column++]);
+                        string sellerEDICode = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         Client sellerClient = context.Clients.SingleOrDefault(c => c.ClientEDICode == sellerEDICode);
                         if (sellerClient == null)
                         {
@@ -470,7 +470,7 @@ namespace CMBC.EasyFactor.Utils
                         curCase.SellerClient = sellerClient;
                         column++;
                         column++;
-                        string buyerEDICode = String.Format("{0:G}", valueArray[row, column++]);
+                        string buyerEDICode = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         Client buyerClient = context.Clients.SingleOrDefault(c => c.ClientEDICode == buyerEDICode);
                         if (buyerClient == null)
                         {
@@ -480,7 +480,7 @@ namespace CMBC.EasyFactor.Utils
                         curCase.BuyerClient = buyerClient;
                         column++;
                         column++;
-                        string EFCode = String.Format("{0:G}", valueArray[row, column++]);
+                        string EFCode = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         Factor sellerFactor = context.Factors.SingleOrDefault(f => f.FactorCode == EFCode);
                         if (sellerFactor == null)
                         {
@@ -488,7 +488,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         curCase.SellerFactor = sellerFactor;
-                        string IFCode = String.Format("{0:G}", valueArray[row, column++]);
+                        string IFCode = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         Factor buyerFactor = context.Factors.SingleOrDefault(f => f.FactorCode == IFCode);
                         if (buyerFactor == null)
                         {
@@ -591,7 +591,7 @@ namespace CMBC.EasyFactor.Utils
                             return -1;
                         }
 
-                        string clientEDICode = String.Format("{0:G}", valueArray[row, 2]);
+                        string clientEDICode = String.Format("{0:G}", valueArray[row, 2]).Trim();
                         if (String.Empty.Equals(clientEDICode))
                         {
                             continue;
@@ -769,7 +769,7 @@ namespace CMBC.EasyFactor.Utils
                             return -1;
                         }
 
-                        string clientEDICode = String.Format("{0:G}", valueArray[row, 1]);
+                        string clientEDICode = String.Format("{0:G}", valueArray[row, 1]).Trim();
                         if (String.Empty.Equals(clientEDICode))
                         {
                             continue;
@@ -782,7 +782,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         int column = 3;
-                        string reviewNo = String.Format("{0:G}", valueArray[row, column++]);
+                        string reviewNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         if (reviewNo == string.Empty)
                         {
                             throw new Exception("协查意见编号不能为空");
@@ -864,7 +864,7 @@ namespace CMBC.EasyFactor.Utils
                             return -1;
                         }
 
-                        string clientEDICode = String.Format("{0:G}", valueArray[row, 1]);
+                        string clientEDICode = String.Format("{0:G}", valueArray[row, 1]).Trim();
                         if (String.Empty.Equals(clientEDICode))
                         {
                             continue;
@@ -948,7 +948,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         int column = 1;
-                        string caseCode = String.Format("{0:G}", valueArray[row, column++]);
+                        string caseCode = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         if (string.Empty.Equals(caseCode))
                         {
                             continue;
@@ -961,7 +961,7 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("案件编号错误: " + caseCode);
                         }
 
-                        string cdaCode = String.Format("{0:G}", valueArray[row, column++]);
+                        string cdaCode = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         CDA cda = null;
                         if (String.Empty.Equals(cdaCode))
                         {
@@ -1080,7 +1080,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         int column = 1;
-                        string clientEDICode = String.Format("{0:G}", valueArray[row, column++]);
+                        string clientEDICode = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         if (string.Empty.Equals(clientEDICode))
                         {
                             continue;
@@ -1095,7 +1095,7 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("客户编号错误: " + clientEDICode);
                         }
 
-                        string contractCode = String.Format("{0:G}", valueArray[row, column++]);
+                        string contractCode = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         Contract contract = null;
                         if (String.Empty.Equals(contractCode))
                         {
@@ -1171,7 +1171,7 @@ namespace CMBC.EasyFactor.Utils
                         return -1;
                     }
 
-                    string departmentCode = String.Format("{0:G}", valueArray[row, 1]);
+                    string departmentCode = String.Format("{0:G}", valueArray[row, 1]).Trim();
                     if (String.Empty.Equals(departmentCode))
                     {
                         continue;
@@ -1248,7 +1248,7 @@ namespace CMBC.EasyFactor.Utils
                             return -1;
                         }
 
-                        string factorCode = String.Format("{0:G}", valueArray[row, 2]);
+                        string factorCode = String.Format("{0:G}", valueArray[row, 2]).Trim();
                         if (String.Empty.Equals(factorCode))
                         {
                             continue;
@@ -1375,7 +1375,7 @@ namespace CMBC.EasyFactor.Utils
                             return -1;
                         }
 
-                        string factorCode = String.Format("{0:G}", valueArray[row, 1]);
+                        string factorCode = String.Format("{0:G}", valueArray[row, 1]).Trim();
                         if (String.Empty.Equals(factorCode))
                         {
                             continue;
@@ -1472,7 +1472,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         //Case
-                        string caseCode = String.Format("{0:G}", valueArray[row, 1]);
+                        string caseCode = String.Format("{0:G}", valueArray[row, 1]).Trim();
                         if (string.Empty.Equals(caseCode))
                         {
                             continue;
@@ -1489,7 +1489,7 @@ namespace CMBC.EasyFactor.Utils
 
                         //转让批次信息
                         column = 3;
-                        string assignBatchNo = String.Format("{0:G}", valueArray[row, column++]);
+                        string assignBatchNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         InvoiceAssignBatch assignBatch = null;
                         if (assignBatchNo != string.Empty)
                         {
@@ -1523,7 +1523,7 @@ namespace CMBC.EasyFactor.Utils
 
                         //发票信息
                         column = 8;
-                        string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                        string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         if (invoiceNo == string.Empty)
                         {
                             throw new Exception("发票号不能为空");
@@ -1564,7 +1564,7 @@ namespace CMBC.EasyFactor.Utils
 
                         //融资批次信息
                         column = 14;
-                        string financeBatchNo = String.Format("{0:G}", valueArray[row, column++]);
+                        string financeBatchNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         InvoiceFinanceBatch financeBatch = null;
                         if (financeBatchNo != string.Empty)
                         {
@@ -1627,7 +1627,7 @@ namespace CMBC.EasyFactor.Utils
 
                         //付款批次信息
                         column = 26;
-                        string paymentBatchNo = String.Format("{0:G}", valueArray[row, column++]);
+                        string paymentBatchNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         InvoicePaymentBatch paymentBatch = null;
                         if (paymentBatchNo != string.Empty)
                         {
@@ -1684,7 +1684,7 @@ namespace CMBC.EasyFactor.Utils
 
                         //还款批次信息
                         column = 33;
-                        string refundBatchNo = String.Format("{0:G}", valueArray[row, column++]);
+                        string refundBatchNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         string refundType = String.Format("{0:G}", valueArray[row, column++]);
                         InvoiceRefundBatch refundBatch = null;
                         if (refundBatchNo != string.Empty)
@@ -1981,7 +1981,7 @@ namespace CMBC.EasyFactor.Utils
                         string createUserName = String.Format("{0:G}", valueArray[row, 1]);
 
                         //Case
-                        string caseCode = String.Format("{0:G}", valueArray[row, 2]);
+                        string caseCode = String.Format("{0:G}", valueArray[row, 2]).Trim();
                         if (string.Empty.Equals(caseCode))
                         {
                             continue;
@@ -2012,7 +2012,7 @@ namespace CMBC.EasyFactor.Utils
                         {
                             //发票信息
                             column = 5;
-                            string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                            string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                             if (invoiceNo == string.Empty)
                             {
                                 throw new Exception("发票号不能为空");
@@ -2362,7 +2362,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                     //int column = 12;
                     int column = 1;
-                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                     if (invoiceNo.Equals(string.Empty))
                     {
                         continue;
@@ -2428,7 +2428,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                     //int column = 12;
                     int column = 1;
-                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                     if (invoiceNo.Equals(string.Empty))
                     {
                         continue;
@@ -2485,7 +2485,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                     //int column = 12;
                     int column = 1;
-                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                     if (invoiceNo.Equals(string.Empty))
                     {
                         continue;
@@ -2546,7 +2546,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                     //int column = 12;
                     int column = 1;
-                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                     if (invoiceNo.Equals(string.Empty))
                     {
                         continue;
@@ -2599,7 +2599,7 @@ namespace CMBC.EasyFactor.Utils
                         return -1;
                     }
 
-                    string userId = String.Format("{0:G}", valueArray[row, 1]);
+                    string userId = String.Format("{0:G}", valueArray[row, 1]).Trim();
                     if (String.Empty.Equals(userId))
                     {
                         continue;
