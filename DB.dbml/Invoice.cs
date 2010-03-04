@@ -652,30 +652,32 @@ namespace CMBC.EasyFactor.DB.dbml
                     throw new Exception("不符合发票编码规则: " + this.InvoiceNo);
                 }
             }
-
-            if (TypeUtil.GreaterZero(this.FinanceAmount.GetValueOrDefault() - this.AssignAmount))
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-                throw new Exception("融资金额不能大于转让金额: " + this.InvoiceNo);
-            }
+                if (TypeUtil.GreaterZero(this.FinanceAmount.GetValueOrDefault() - this.AssignAmount))
+                {
+                    throw new Exception("融资金额不能大于转让金额: " + this.InvoiceNo);
+                }
 
-            if (TypeUtil.GreaterZero(this.PaymentAmount.GetValueOrDefault() - this.AssignAmount))
-            {
-                throw new Exception("付款金额不能大于转让金额: " + this.InvoiceNo);
-            }
+                if (TypeUtil.GreaterZero(this.PaymentAmount.GetValueOrDefault() - this.AssignAmount))
+                {
+                    throw new Exception("付款金额不能大于转让金额: " + this.InvoiceNo);
+                }
 
-            if (TypeUtil.GreaterZero(this.RefundAmount.GetValueOrDefault() - this.FinanceAmount.GetValueOrDefault()))
-            {
-                throw new Exception("还款金额不能大于融资金额: " + this.InvoiceNo);
-            }
+                if (TypeUtil.GreaterZero(this.RefundAmount.GetValueOrDefault() - this.FinanceAmount.GetValueOrDefault()))
+                {
+                    throw new Exception("还款金额不能大于融资金额: " + this.InvoiceNo);
+                }
 
-            if (this.DueDate < this.InvoiceDate)
-            {
-                throw new Exception("发票到期日不能早于发票日: " + this.InvoiceNo);
-            }
+                if (this.DueDate < this.InvoiceDate)
+                {
+                    throw new Exception("发票到期日不能早于发票日: " + this.InvoiceNo);
+                }
 
-            if (this.FinanceDueDate.GetValueOrDefault() < this.FinanceDate.GetValueOrDefault())
-            {
-                throw new Exception("融资到期日不能早于融资日: " + this.InvoiceNo);
+                if (this.FinanceDueDate.GetValueOrDefault() < this.FinanceDate.GetValueOrDefault())
+                {
+                    throw new Exception("融资到期日不能早于融资日: " + this.InvoiceNo);
+                }
             }
         }
     }
