@@ -424,9 +424,17 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         string caseCode = String.Format("{0:G}", valueArray[row, 1]).Trim();
-                        if (String.Empty.Equals(caseCode))
+                        string transactionType = String.Format("{0:G}", valueArray[row, 4]);
+                        DateTime appDate = (DateTime)valueArray[row, 19];
+
+                        if (String.Empty == caseCode && transactionType == String.Empty)
                         {
                             continue;
+                        }
+
+                        if (String.Empty == caseCode && transactionType != String.Empty)
+                        {
+                            caseCode = Case.GenerateCaseCode(transactionType, appDate);
                         }
 
                         Case curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);

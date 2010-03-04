@@ -279,20 +279,16 @@ namespace CMBC.EasyFactor.DB.dbml
 
         // Public Methods (1) 
 
-        /// <summary>
-        /// Generate Case code
-        /// </summary>
-        /// <returns></returns>
-        public string GenerateCaseCode()
+        public static string GenerateCaseCode(String transactionType, DateTime appDate)
         {
             string caseCode = null;
-            string yearMonth = String.Format("{0:yyyy}{0:MM}", this.CaseAppDate);
+            string yearMonth = String.Format("{0:yyyy}{0:MM}", appDate);
             string prefix = null;
             int count = 0;
             IEnumerable<string> queryResult;
             DBDataContext context = new DBDataContext();
 
-            switch (TransactionType)
+            switch (transactionType)
             {
                 case "国内卖方保理":
 
@@ -364,6 +360,15 @@ namespace CMBC.EasyFactor.DB.dbml
             }
 
             return caseCode;
+        }
+
+        /// <summary>
+        /// Generate Case code
+        /// </summary>
+        /// <returns></returns>
+        public string GenerateCaseCode()
+        {
+            return Case.GenerateCaseCode(this.TransactionType, this.CaseAppDate);
         }
 
         #endregion Methods
