@@ -301,7 +301,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     queryResult = from c in context.Cases
                                   where c.CaseCode.StartsWith(prefix)
                                   select c.CaseCode;
-                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(8)), out count))
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
                     {
                         count = 0;
                     }
@@ -313,7 +313,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     queryResult = from c in context.Cases
                                   where c.CaseCode.StartsWith(prefix)
                                   select c.CaseCode;
-                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(8)), out count))
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
                     {
                         count = 0;
                     }
@@ -325,7 +325,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     queryResult = from c in context.Cases
                                   where c.CaseCode.StartsWith(prefix)
                                   select c.CaseCode;
-                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(8)), out count))
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
                     {
                         count = 0;
                     }
@@ -339,7 +339,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     queryResult = from c in context.Cases
                                   where c.CaseCode.StartsWith(prefix)
                                   select c.CaseCode;
-                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(8)), out count))
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
                     {
                         count = 0;
                     }
@@ -351,7 +351,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     queryResult = from c in context.Cases
                                   where c.CaseCode.StartsWith(prefix)
                                   select c.CaseCode;
-                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(8)), out count))
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
                     {
                         count = 0;
                     }

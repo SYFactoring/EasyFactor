@@ -644,6 +644,7 @@ namespace CMBC.EasyFactor
             if (dr == DialogResult.Yes)
             {
                 e.Cancel = false;
+                this.notifyIcon.Dispose();
             }
             else if (dr == DialogResult.Cancel)
             {
