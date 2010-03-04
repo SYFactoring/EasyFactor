@@ -102,7 +102,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             if (action == ChangeAction.Insert)
             {
-                if (this.ApproveNo != string.Empty)
+                if (this.ApproveNo != null & this.ApproveNo != string.Empty)
                 {
                     if (!ApproveNoRegex.IsMatch(this.ApproveNo))
                     {
@@ -111,6 +111,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
+
         #endregion Properties
     }
 }

@@ -940,7 +940,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     creditLine.Client = client;
                     creditLine.CreateUserName = App.Current.CurUser.Name;
 
-                    context.ClientCreditLines.InsertOnSubmit(creditLine);
                     context.SubmitChanges();
                 }
                 catch (Exception e1)
