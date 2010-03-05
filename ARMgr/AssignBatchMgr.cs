@@ -364,7 +364,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
-                string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
+                string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
                 Client seller = selectedBatch.Case.SellerClient;
@@ -566,7 +566,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
-                string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
+                string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
 
                 Client seller = selectedBatch.Case.SellerClient;
@@ -723,7 +723,7 @@ namespace CMBC.EasyFactor.ARMgr
             try
             {
 
-                string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
+                string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
 
                 Client seller = selectedBatch.Case.SellerClient;
@@ -862,7 +862,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
-                string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
+                string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 200, 3, 180, 30);
 
                 Client seller = selectedBatch.Case.SellerClient;
@@ -1036,7 +1036,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
-                string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
+                string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 240, 3, 170, 30);
 
                 Client seller = selectedBatch.Case.SellerClient;

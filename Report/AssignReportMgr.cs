@@ -187,7 +187,7 @@ namespace CMBC.EasyFactor.Report
 
         //        Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-        //        string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
+        //        string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
         //        sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 40);
 
         //        sheet.Cells[1, 1] = String.Format("致{0}", seller.ToString());
@@ -301,7 +301,7 @@ namespace CMBC.EasyFactor.Report
         //        }
         //        Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-        //        string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
+        //        string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
         //        sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 40);
 
         //        sheet.Cells[1, 1] = String.Format("卖方：{0}", seller.ToString());
@@ -419,7 +419,7 @@ namespace CMBC.EasyFactor.Report
 
                 Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
-                string logoPath = Path.Combine(Environment.CurrentDirectory, "CMBCExport.png");
+                string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 180, 40);
 
                 sheet.Cells[3, 2] = "可融资账款明细表";
