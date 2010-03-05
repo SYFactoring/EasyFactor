@@ -204,7 +204,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (batch.FinancePeriodEnd > dueDate)
+            if (batch.FinancePeriodEnd >= dueDate)
             {
                 e.IsValid = true;
             }

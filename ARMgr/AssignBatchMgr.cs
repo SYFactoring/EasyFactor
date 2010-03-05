@@ -461,7 +461,8 @@ namespace CMBC.EasyFactor.ARMgr
                     Marshal.ReleaseComObject(app);
                     app = null;
                 }
-                throw e1;
+
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -687,7 +688,8 @@ namespace CMBC.EasyFactor.ARMgr
                     Marshal.ReleaseComObject(app);
                     app = null;
                 }
-                throw e1;
+
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -825,7 +827,8 @@ namespace CMBC.EasyFactor.ARMgr
                     Marshal.ReleaseComObject(app);
                     app = null;
                 }
-                throw e1;
+
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -998,7 +1001,8 @@ namespace CMBC.EasyFactor.ARMgr
                     Marshal.ReleaseComObject(app);
                     app = null;
                 }
-                throw e1;
+
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -1178,7 +1182,8 @@ namespace CMBC.EasyFactor.ARMgr
                     Marshal.ReleaseComObject(app);
                     app = null;
                 }
-                throw e1;
+
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
