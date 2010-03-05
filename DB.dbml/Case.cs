@@ -279,7 +279,108 @@ namespace CMBC.EasyFactor.DB.dbml
 
         // Public Methods (1) 
 
-        public static string GenerateCaseCode(String transactionType, DateTime appDate)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="transactionType"></param>
+        /// <param name="appDate"></param>
+        /// <param name="casesInMemory"></param>
+        /// <returns></returns>
+        public static string GenerateCaseCode(string transactionType, DateTime appDate, List<Case> casesInMemory)
+        {
+            string caseCode = null;
+            string yearMonth = String.Format("{0:yyyy}{0:MM}", appDate);
+            string prefix = null;
+            int count = 0;
+            IEnumerable<string> queryResult;
+            DBDataContext context = new DBDataContext();
+
+            switch (transactionType)
+            {
+                case "国内卖方保理":
+
+                case "国内买方保理":
+                    prefix = "LF" + yearMonth;
+                    queryResult = from c in context.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
+                    {
+                        count = 0;
+                    }
+
+                    count += casesInMemory.Count(c => c.CaseCode.StartsWith(prefix));
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                case "出口保理":
+                    prefix = "EF" + yearMonth;
+                    queryResult = from c in context.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
+                    {
+                        count = 0;
+                    }
+
+                    count += casesInMemory.Count(c => c.CaseCode.StartsWith(prefix));
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                case "进口保理":
+                    prefix = "IF" + yearMonth;
+                    queryResult = from c in context.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
+                    {
+                        count = 0;
+                    }
+
+                    count += casesInMemory.Count(c => c.CaseCode.StartsWith(prefix));
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                case "国际信保保理":
+
+                case "国内信保保理":
+                    prefix = "SF" + yearMonth;
+                    queryResult = from c in context.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
+                    {
+                        count = 0;
+                    }
+
+                    count += casesInMemory.Count(c => c.CaseCode.StartsWith(prefix));
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                case "租赁保理":
+                    prefix = "LF" + yearMonth;
+                    queryResult = from c in context.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
+                    {
+                        count = 0;
+                    }
+
+                    count += casesInMemory.Count(c => c.CaseCode.StartsWith(prefix));
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                default:
+                    caseCode = string.Empty;
+                    break;
+            }
+
+            return caseCode;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="transactionType"></param>
+        /// <param name="appDate"></param>
+        /// <returns></returns>
+        public static string GenerateCaseCode(string transactionType, DateTime appDate)
         {
             string caseCode = null;
             string yearMonth = String.Format("{0:yyyy}{0:MM}", appDate);
@@ -360,15 +461,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
 
             return caseCode;
-        }
-
-        /// <summary>
-        /// Generate Case code
-        /// </summary>
-        /// <returns></returns>
-        public string GenerateCaseCode()
-        {
-            return Case.GenerateCaseCode(this.TransactionType, this.CaseAppDate);
         }
 
         #endregion Methods

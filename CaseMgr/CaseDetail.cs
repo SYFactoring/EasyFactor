@@ -633,7 +633,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 bool isAddOK = true;
                 try
                 {
-                    curCase.CaseCode = curCase.GenerateCaseCode();
+                    curCase.CaseCode = Case.GenerateCaseCode(curCase.TransactionType, curCase.CaseAppDate);
                     context.Cases.InsertOnSubmit(curCase);
                     context.SubmitChanges();
                 }

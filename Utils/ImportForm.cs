@@ -434,7 +434,7 @@ namespace CMBC.EasyFactor.Utils
 
                         if (String.Empty == caseCode && transactionType != String.Empty)
                         {
-                            caseCode = Case.GenerateCaseCode(transactionType, appDate);
+                            caseCode = Case.GenerateCaseCode(transactionType, appDate, caseList);
                         }
 
                         Case curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
