@@ -10486,7 +10486,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _InvoiceNo;
 		
-		private System.DateTime _InvoiceDate;
+		private System.Nullable<System.DateTime> _InvoiceDate;
 		
 		private double _InvoiceAmount;
 		
@@ -10494,7 +10494,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private double _AssignAmount;
 		
-		private System.DateTime _DueDate;
+		private System.Nullable<System.DateTime> _DueDate;
 		
 		private System.Nullable<System.DateTime> _ValueDate;
 		
@@ -10582,7 +10582,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreated();
     partial void OnInvoiceNoChanging(string value);
     partial void OnInvoiceNoChanged();
-    partial void OnInvoiceDateChanging(System.DateTime value);
+    partial void OnInvoiceDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInvoiceDateChanged();
     partial void OnInvoiceAmountChanging(double value);
     partial void OnInvoiceAmountChanged();
@@ -10590,7 +10590,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnAssignBatchNoChanged();
     partial void OnAssignAmountChanging(double value);
     partial void OnAssignAmountChanged();
-    partial void OnDueDateChanging(System.DateTime value);
+    partial void OnDueDateChanging(System.Nullable<System.DateTime> value);
     partial void OnDueDateChanged();
     partial void OnValueDateChanging(System.Nullable<System.DateTime> value);
     partial void OnValueDateChanged();
@@ -10695,8 +10695,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_InvoiceDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.DateTime InvoiceDate
+		[Column(Storage="_InvoiceDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<System.DateTime> InvoiceDate
 		{
 			get
 			{
@@ -10779,8 +10779,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_DueDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.DateTime DueDate
+		[Column(Storage="_DueDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<System.DateTime> DueDate
 		{
 			get
 			{

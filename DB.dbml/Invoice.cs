@@ -58,9 +58,9 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (TypeUtil.GreaterZero(this.AssignOutstanding))
+                if (this.DueDate != null && TypeUtil.GreaterZero(this.AssignOutstanding))
                 {
-                    return (DateTime.Now.Date - this.DueDate).Days;
+                    return (DateTime.Now.Date - this.DueDate.Value).Days;
                 }
 
                 return null;

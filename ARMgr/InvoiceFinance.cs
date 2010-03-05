@@ -191,9 +191,9 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     Invoice invoice = (Invoice)invoiceList[i];
-                    if (dueDate < invoice.DueDate)
+                    if (invoice.DueDate != null && dueDate < invoice.DueDate.Value)
                     {
-                        dueDate = invoice.DueDate;
+                        dueDate = invoice.DueDate.Value;
                     }
                 }
             }

@@ -392,9 +392,9 @@ namespace CMBC.EasyFactor.ARMgr
                     }
                     Invoice invoice = selectedBatch.Invoices[i];
                     sheet.Cells[row, i % 4 + 1] = "'" + invoice.InvoiceNo;
-                    if (invoice.DueDate < dueDate)
+                    if (invoice.DueDate != null && invoice.DueDate < dueDate)
                     {
-                        dueDate = invoice.DueDate;
+                        dueDate = invoice.DueDate.Value;
                     }
                 }
 

@@ -719,17 +719,17 @@ namespace CMBC.EasyFactor.ARMgr
                     return false;
                 }
 
-                if (invoice.InvoiceDate == default(DateTime))
-                {
-                    MessageBoxEx.Show("发票日必填", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
-                }
+                //if (invoice.InvoiceDate == default(DateTime))
+                //{
+                //    MessageBoxEx.Show("发票日必填", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    return false;
+                //}
 
-                if (invoice.DueDate == default(DateTime))
-                {
-                    MessageBoxEx.Show("到期日必填", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
-                }
+                //if (invoice.DueDate == default(DateTime))
+                //{
+                //    MessageBoxEx.Show("到期日必填", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    return false;
+                //}
 
                 if (invoice.AssignAmount > invoice.InvoiceAmount)
                 {
@@ -737,14 +737,14 @@ namespace CMBC.EasyFactor.ARMgr
                     return false;
                 }
 
-                if (invoice.DueDate < invoice.InvoiceDate)
+                if (invoice.DueDate != null && invoice.InvoiceDate != null && invoice.DueDate < invoice.InvoiceDate)
                 {
                     MessageBoxEx.Show("到期日不可早于发票日: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
 
                 DateTime assignDate = this.assignDateDateTimePicker.Value.Date;
-                if (invoice.InvoiceDate > assignDate)
+                if (invoice.InvoiceDate != null && invoice.InvoiceDate > assignDate)
                 {
                     MessageBoxEx.Show("转让日不能早于发票日: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
@@ -752,14 +752,14 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (this._case.NetPaymentTerm.HasValue)
                 {
-                    if (assignDate > invoice.InvoiceDate.AddDays(this._case.NetPaymentTerm.Value))
+                    if (invoice.InvoiceDate != null && assignDate > invoice.InvoiceDate.Value.AddDays(this._case.NetPaymentTerm.Value))
                     {
                         MessageBoxEx.Show("转让日不能晚于发票日+付款期限: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
                 }
 
-                if (invoice.DueDate < assignDate)
+                if (invoice.DueDate != null && invoice.DueDate < assignDate)
                 {
                     invoice.IsFlaw = true;
                     invoice.FlawReason = "09";
