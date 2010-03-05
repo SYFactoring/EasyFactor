@@ -615,10 +615,25 @@ namespace CMBC.EasyFactor.ARMgr
                 Func<InvoiceRefundLog, Invoice> makeInvoice =
                 i => new Invoice { InvoiceNo = i.InvoiceNo, RefundLogID2 = i.RefundLogID };
 
-                var invoiceList = from log in batch.InvoiceRefundLogs
-                                  select makeInvoice(log);
+                var invoiceList = (from log in batch.InvoiceRefundLogs
+                                  select makeInvoice(log)).ToList();
 
+                foreach (Invoice invoice in invoiceList)
+                {
+                    Invoice oldInvoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo);
+                    invoice.AssignAmount = oldInvoice.AssignAmount;
+                    invoice.InvoiceAssignBatch = oldInvoice.InvoiceAssignBatch;
+                    invoice.DueDate = oldInvoice.DueDate;
+                    invoice.InvoiceFinanceBatch = oldInvoice.InvoiceFinanceBatch;
+                    invoice.FinanceAmount = oldInvoice.FinanceAmount;
+                    invoice.FinanceDate = oldInvoice.FinanceDate;
+                    invoice.FinanceDueDate = oldInvoice.FinanceDueDate;
+
+                    invoice.PaymentAmount = oldInvoice.PaymentAmount;
+                }
+                
                 this.invoiceBindingSource.DataSource = invoiceList;
+
                 for (int i = 0; i < this.invoiceBindingSource.List.Count; i++)
                 {
                     DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[i].Cells[0];
