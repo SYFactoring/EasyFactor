@@ -400,8 +400,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            this.caseBasic.Case = refundList[0].InvoiceAssignBatch.Case;
-            this._case = refundList[0].InvoiceAssignBatch.Case;
+            this._case = context.Cases.SingleOrDefault(c => c.CaseCode == refundList[0].InvoiceAssignBatch.Case.CaseCode);
+            this.caseBasic.Case = this._case;
             this.tbTotalRefund.Text = string.Empty;
             InvoiceRefundBatch batch = new InvoiceRefundBatch();
             batch.RefundType = refundType;
