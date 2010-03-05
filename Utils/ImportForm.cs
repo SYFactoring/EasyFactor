@@ -331,7 +331,7 @@ namespace CMBC.EasyFactor.Utils
             this.ReleaseResource();
             if (e.Error != null)
             {
-                this.tbStatus.Text = "发生异常: " + e.Error.Message;
+                this.tbStatus.Text = String.Format("第{0}条记录发生异常: {1}", e.Error.Data["row"], e.Error.Message);
             }
             else if (e.Cancelled)
             {
@@ -563,6 +563,7 @@ namespace CMBC.EasyFactor.Utils
                         neg.Case = null;
                     }
 
+                    e1.Data["row"] = result;
                     throw e1;
                 }
             }
@@ -686,6 +687,8 @@ namespace CMBC.EasyFactor.Utils
                     client.ClientGroup = null;
                     client.Department = null;
                 }
+
+                e1.Data["row"] = result;
                 throw e1;
             }
 
@@ -741,6 +744,7 @@ namespace CMBC.EasyFactor.Utils
             }
             catch (Exception e1)
             {
+                e1.Data["row"] = result;
                 throw e1;
             }
 
@@ -836,6 +840,8 @@ namespace CMBC.EasyFactor.Utils
                 {
                     review.Client = null;
                 }
+
+                e1.Data["row"] = result;
                 throw e1;
             }
 
@@ -917,6 +923,7 @@ namespace CMBC.EasyFactor.Utils
                         creditLine.Client = null;
                     }
 
+                    e1.Data["row"] = result;
                     throw e1;
                 }
             }
@@ -1050,6 +1057,7 @@ namespace CMBC.EasyFactor.Utils
                         cda.Case = null;
                     }
 
+                    e1.Data["row"] = result;
                     throw e1;
                 }
             }
@@ -1145,6 +1153,7 @@ namespace CMBC.EasyFactor.Utils
                         contract.Client = null;
                     }
 
+                    e1.Data["row"] = result;
                     throw e1;
                 }
             }
@@ -1170,58 +1179,68 @@ namespace CMBC.EasyFactor.Utils
 
             if (valueArray != null)
             {
-                int size = valueArray.GetUpperBound(0);
-                for (int row = 2; row <= size; row++)
+                try
                 {
-                    if (worker.CancellationPending)
+                    int size = valueArray.GetUpperBound(0);
+                    for (int row = 2; row <= size; row++)
                     {
-                        e.Cancel = true;
-                        return -1;
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+
+                        string departmentCode = String.Format("{0:G}", valueArray[row, 1]).Trim();
+                        if (String.Empty.Equals(departmentCode))
+                        {
+                            continue;
+                        }
+
+                        bool isNew = false;
+                        Department dept = context.Departments.SingleOrDefault(d => d.DepartmentCode == departmentCode);
+                        if (dept == null)
+                        {
+                            isNew = true;
+                            dept = new Department();
+                            dept.DepartmentCode = departmentCode;
+                        }
+
+                        int column = 2;
+                        dept.DepartmentName = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.Location = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.Domain = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.AddressCN = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.AddressEN = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.PostCode = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.Manager = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.Contact_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.Email_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.Phone_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.Fax_1 = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.Contact_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.Email_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.Phone_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.Fax_2 = String.Format("{0:G}", valueArray[row, column++]);
+
+                        if (isNew)
+                        {
+                            context.Departments.InsertOnSubmit(dept);
+                        }
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
 
-                    string departmentCode = String.Format("{0:G}", valueArray[row, 1]).Trim();
-                    if (String.Empty.Equals(departmentCode))
-                    {
-                        continue;
-                    }
-
-                    bool isNew = false;
-                    Department dept = context.Departments.SingleOrDefault(d => d.DepartmentCode == departmentCode);
-                    if (dept == null)
-                    {
-                        isNew = true;
-                        dept = new Department();
-                        dept.DepartmentCode = departmentCode;
-                    }
-
-                    int column = 2;
-                    dept.DepartmentName = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Location = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Domain = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.AddressCN = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.AddressEN = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.PostCode = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Manager = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Contact_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Email_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Phone_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Fax_1 = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Contact_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Email_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Phone_2 = String.Format("{0:G}", valueArray[row, column++]);
-                    dept.Fax_2 = String.Format("{0:G}", valueArray[row, column++]);
-
-                    if (isNew)
-                    {
-                        context.Departments.InsertOnSubmit(dept);
-                    }
-
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    context.SubmitChanges();
                 }
 
-                context.SubmitChanges();
+                catch (Exception e1)
+                {
+                    e1.Data["row"] = result;
+                    throw e1;
+                }
             }
+
 
             worker.ReportProgress(100);
             this.workbook.Close(false, fileName, null);
@@ -1346,6 +1365,8 @@ namespace CMBC.EasyFactor.Utils
                     {
                         factor.FactorGroup = null;
                     }
+
+                    e1.Data["row"] = result;
                     throw e1;
                 }
             }
@@ -1423,6 +1444,7 @@ namespace CMBC.EasyFactor.Utils
                         creditLine.Factor = null;
                     }
 
+                    e1.Data["row"] = result;
                     throw e1;
                 }
             }
@@ -1943,6 +1965,7 @@ namespace CMBC.EasyFactor.Utils
                     batch.Case = null;
                 }
 
+                e1.Data["row"] = result;
                 throw e1;
             }
 
@@ -2335,6 +2358,7 @@ namespace CMBC.EasyFactor.Utils
                     batch.Case = null;
                 }
 
+                e1.Data["row"] = result;
                 throw e1;
             }
 
@@ -2361,45 +2385,53 @@ namespace CMBC.EasyFactor.Utils
             {
                 int size = valueArray.GetUpperBound(0);
 
-                for (int row = 2; row <= size; row++)
+                try
                 {
-                    if (worker.CancellationPending)
+                    for (int row = 2; row <= size; row++)
                     {
-                        e.Cancel = true;
-                        return -1;
-                    }
-                    //int column = 12;
-                    int column = 1;
-                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
-                    if (invoiceNo.Equals(string.Empty))
-                    {
-                        continue;
-                    }
-
-                    Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                    if (invoice == null)
-                    {
-                        invoice = new Invoice();
-                        invoice.InvoiceNo = invoiceNo;
-                        Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                        if (old != null)
+                        if (worker.CancellationPending)
                         {
-                            throw new Exception("发票号重复: " + old.InvoiceNo);
+                            e.Cancel = true;
+                            return -1;
                         }
+                        //int column = 12;
+                        int column = 1;
+                        string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
+                        if (invoiceNo.Equals(string.Empty))
+                        {
+                            continue;
+                        }
+
+                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        if (invoice == null)
+                        {
+                            invoice = new Invoice();
+                            invoice.InvoiceNo = invoiceNo;
+                            Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                            if (old != null)
+                            {
+                                throw new Exception("发票号重复: " + old.InvoiceNo);
+                            }
+                        }
+
+                        invoice.InvoiceAmount = (double)valueArray[row, column++];
+                        invoice.AssignAmount = (double)valueArray[row, column++];
+                        invoice.InvoiceDate = (DateTime)valueArray[row, column++];
+                        invoice.DueDate = (DateTime)valueArray[row, column++];
+                        invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
+                        invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
+                        invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                        invoiceList.Add(invoice);
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
-
-                    invoice.InvoiceAmount = (double)valueArray[row, column++];
-                    invoice.AssignAmount = (double)valueArray[row, column++];
-                    invoice.InvoiceDate = (DateTime)valueArray[row, column++];
-                    invoice.DueDate = (DateTime)valueArray[row, column++];
-                    invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
-                    invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
-
-                    invoiceList.Add(invoice);
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+                catch (Exception e1)
+                {
+                    e1.Data["row"] = result;
+                    throw e1;
                 }
             }
 
@@ -2427,36 +2459,44 @@ namespace CMBC.EasyFactor.Utils
             {
                 int size = valueArray.GetUpperBound(0);
 
-                for (int row = 2; row <= size; row++)
+                try
                 {
-                    if (worker.CancellationPending)
+                    for (int row = 2; row <= size; row++)
                     {
-                        e.Cancel = true;
-                        return -1;
-                    }
-                    //int column = 12;
-                    int column = 1;
-                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
-                    if (invoiceNo.Equals(string.Empty))
-                    {
-                        continue;
-                    }
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+                        //int column = 12;
+                        int column = 1;
+                        string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
+                        if (invoiceNo.Equals(string.Empty))
+                        {
+                            continue;
+                        }
 
-                    Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                    if (invoice == null)
-                    {
-                        throw new Exception("发票号错误: " + invoiceNo);
+                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        if (invoice == null)
+                        {
+                            throw new Exception("发票号错误: " + invoiceNo);
+                        }
+
+                        column++;
+                        invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
+                        invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
+                        invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                        invoiceList.Add(invoice);
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
-
-                    column++;
-                    invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                    invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
-
-                    invoiceList.Add(invoice);
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+                catch (Exception e1)
+                {
+                    e1.Data["row"] = result;
+                    throw e1;
                 }
             }
 
@@ -2484,40 +2524,48 @@ namespace CMBC.EasyFactor.Utils
             {
                 int size = valueArray.GetUpperBound(0);
 
-                for (int row = 2; row <= size; row++)
+                try
                 {
-                    if (worker.CancellationPending)
+                    for (int row = 2; row <= size; row++)
                     {
-                        e.Cancel = true;
-                        return -1;
-                    }
-                    //int column = 12;
-                    int column = 1;
-                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
-                    if (invoiceNo.Equals(string.Empty))
-                    {
-                        continue;
-                    }
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+                        //int column = 12;
+                        int column = 1;
+                        string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
+                        if (invoiceNo.Equals(string.Empty))
+                        {
+                            continue;
+                        }
 
-                    Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                    if (invoice == null)
-                    {
-                        throw new Exception("发票号错误: " + invoiceNo);
+                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        if (invoice == null)
+                        {
+                            throw new Exception("发票号错误: " + invoiceNo);
+                        }
+
+                        column++;
+                        invoice.PaymentAmount2 = (System.Nullable<double>)valueArray[row, column++];
+                        invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                        if (valueArray.GetUpperBound(1) > 4)
+                        {
+                            invoice.CreditNoteNo2 = String.Format("{0:G}", valueArray[row, column++]);
+                            invoice.CreditNoteDate2 = (System.Nullable<DateTime>)valueArray[row, column++];
+                        }
+
+                        invoiceList.Add(invoice);
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
-
-                    column++;
-                    invoice.PaymentAmount2 = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
-
-                    if (valueArray.GetUpperBound(1) > 4)
-                    {
-                        invoice.CreditNoteNo2 = String.Format("{0:G}", valueArray[row, column++]);
-                        invoice.CreditNoteDate2 = (System.Nullable<DateTime>)valueArray[row, column++];
-                    }
-
-                    invoiceList.Add(invoice);
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+                catch (Exception e1)
+                {
+                    e1.Data["row"] = result;
+                    throw e1;
                 }
             }
 
@@ -2545,34 +2593,42 @@ namespace CMBC.EasyFactor.Utils
             {
                 int size = valueArray.GetUpperBound(0);
 
-                for (int row = 2; row <= size; row++)
+                try
                 {
-                    if (worker.CancellationPending)
+                    for (int row = 2; row <= size; row++)
                     {
-                        e.Cancel = true;
-                        return -1;
-                    }
-                    //int column = 12;
-                    int column = 1;
-                    string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
-                    if (invoiceNo.Equals(string.Empty))
-                    {
-                        continue;
-                    }
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+                        //int column = 12;
+                        int column = 1;
+                        string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
+                        if (invoiceNo.Equals(string.Empty))
+                        {
+                            continue;
+                        }
 
-                    Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                    if (invoice == null)
-                    {
-                        throw new Exception("发票号错误: " + invoiceNo);
+                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        if (invoice == null)
+                        {
+                            throw new Exception("发票号错误: " + invoiceNo);
+                        }
+
+                        column++;
+                        invoice.RefundAmount2 = (System.Nullable<double>)valueArray[row, column++];
+                        invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                        invoiceList.Add(invoice);
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
-
-                    column++;
-                    invoice.RefundAmount2 = (System.Nullable<double>)valueArray[row, column++];
-                    invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
-
-                    invoiceList.Add(invoice);
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+                catch (Exception e1)
+                {
+                    e1.Data["row"] = result;
+                    throw e1;
                 }
             }
 
@@ -2599,55 +2655,58 @@ namespace CMBC.EasyFactor.Utils
             {
                 int size = valueArray.GetUpperBound(0);
                 List<User> userList = new List<User>();
-                for (int row = 2; row <= size; row++)
-                {
-                    if (worker.CancellationPending)
-                    {
-                        e.Cancel = true;
-                        return -1;
-                    }
-
-                    string userId = String.Format("{0:G}", valueArray[row, 1]).Trim();
-                    if (String.Empty.Equals(userId))
-                    {
-                        continue;
-                    }
-
-                    bool isNew = false;
-                    User user = context.Users.SingleOrDefault(c => c.UserID == userId);
-                    if (user == null)
-                    {
-                        isNew = true;
-                        user = new User();
-                        user.UserID = userId;
-                    }
-
-                    int column = 2;
-                    user.EDIAccount = String.Format("{0:G}", valueArray[row, column++]);
-                    user.Password = String.Format("{0:G}", valueArray[row, column++]);
-                    user.Role = String.Format("{0:G}", valueArray[row, column++]);
-                    user.Name = String.Format("{0:G}", valueArray[row, column++]);
-                    user.Phone = String.Format("{0:G}", valueArray[row, column++]);
-                    user.Telphone = String.Format("{0:G}", valueArray[row, column++]);
-                    user.Email = String.Format("{0:G}", valueArray[row, column++]);
-                    user.MSN = String.Format("{0:G}", valueArray[row, column++]);
-
-                    if (isNew)
-                    {
-                        userList.Add(user);
-                    }
-
-                    result++;
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
-                }
 
                 try
                 {
+                    for (int row = 2; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+
+                        string userId = String.Format("{0:G}", valueArray[row, 1]).Trim();
+                        if (String.Empty.Equals(userId))
+                        {
+                            continue;
+                        }
+
+                        bool isNew = false;
+                        User user = context.Users.SingleOrDefault(c => c.UserID == userId);
+                        if (user == null)
+                        {
+                            isNew = true;
+                            user = new User();
+                            user.UserID = userId;
+                        }
+
+                        int column = 2;
+                        user.EDIAccount = String.Format("{0:G}", valueArray[row, column++]);
+                        user.Password = String.Format("{0:G}", valueArray[row, column++]);
+                        user.Role = String.Format("{0:G}", valueArray[row, column++]);
+                        user.Name = String.Format("{0:G}", valueArray[row, column++]);
+                        user.Phone = String.Format("{0:G}", valueArray[row, column++]);
+                        user.Telphone = String.Format("{0:G}", valueArray[row, column++]);
+                        user.Email = String.Format("{0:G}", valueArray[row, column++]);
+                        user.MSN = String.Format("{0:G}", valueArray[row, column++]);
+
+                        if (isNew)
+                        {
+                            userList.Add(user);
+                        }
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    }
+
                     context.Users.InsertAllOnSubmit(userList);
                     context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
+
+                    e1.Data["row"] = result;
                     throw e1;
                 }
             }
