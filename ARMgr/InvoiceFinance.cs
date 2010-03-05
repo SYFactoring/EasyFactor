@@ -676,6 +676,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            if (context.InvoiceFinanceBatches.SingleOrDefault(f => f.FinanceBatchNo == batch.FinanceBatchNo) != null)
+            {
+                MessageBoxEx.Show("放款编号已存在，请确认并输入新的放款编号", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             bool isSaveOK = true;
 
             batch.Case = this._case;
