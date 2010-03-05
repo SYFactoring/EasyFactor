@@ -2072,8 +2072,8 @@ namespace CMBC.EasyFactor.Utils
                             column = 8;
                             invoice.InvoiceAmount = (double)valueArray[row, column++];
                             invoice.AssignAmount = invoice.InvoiceAmount;
-                            invoice.InvoiceDate = (DateTime)valueArray[row, column++];
-                            invoice.DueDate = (DateTime)valueArray[row, column++];
+                            invoice.InvoiceDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                            invoice.DueDate = (System.Nullable<DateTime>)valueArray[row, column++];
                             DateTime assignDate = (DateTime)valueArray[row, column++];
                             invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
 
@@ -2319,6 +2319,10 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         result++;
+                        if (result ==705)
+                        {
+                            result = result;
+                        }
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
                 }
