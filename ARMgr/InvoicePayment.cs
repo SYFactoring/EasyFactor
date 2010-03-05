@@ -617,7 +617,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (refundList.Count > 0)
                 {
                     MainWindow mainWindow = App.Current.MainWindow;
-                    mainWindow.InvoiceRefund(refundList, batch.PaymentType);
+                    mainWindow.InvoiceRefund(refundList, batch.PaymentType, batch.PaymentDate);
                 }
                 else
                 {
@@ -652,11 +652,11 @@ namespace CMBC.EasyFactor.ARMgr
                 i => new Invoice { InvoiceNo = i.InvoiceNo, PaymentLogID2 = i.PaymentLogID };
 
                 var invoiceList = (from log in batch.InvoicePaymentLogs
-                                  select makeInvoice(log)).ToList();
+                                   select makeInvoice(log)).ToList();
 
                 foreach (Invoice invoice in invoiceList)
                 {
-                    Invoice oldInvoice =  context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo);
+                    Invoice oldInvoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo);
                     invoice.AssignAmount = oldInvoice.AssignAmount;
                     invoice.InvoiceAssignBatch = oldInvoice.InvoiceAssignBatch;
                     invoice.DueDate = oldInvoice.DueDate;
@@ -664,7 +664,7 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.FinanceAmount = oldInvoice.FinanceAmount;
                     invoice.FinanceDate = oldInvoice.FinanceDate;
                     invoice.FinanceDueDate = oldInvoice.FinanceDueDate;
-                    
+
                     invoice.PaymentAmount = oldInvoice.PaymentAmount;
                 }
 

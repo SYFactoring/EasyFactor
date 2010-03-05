@@ -208,7 +208,14 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
                 {
-                    invoice.RefundAmount2 = Math.Min(invoice.FinanceOutstanding.GetValueOrDefault(), invoice.PaymentAmount2.GetValueOrDefault());
+                    if (invoice.PaymentAmount2.HasValue)
+                    {
+                        invoice.RefundAmount2 = Math.Min(invoice.FinanceOutstanding.GetValueOrDefault(), invoice.PaymentAmount2.GetValueOrDefault());
+                    }
+                    else
+                    {
+                        invoice.RefundAmount2 = invoice.FinanceOutstanding.GetValueOrDefault();
+                    }
                     this.ResetRow(e.RowIndex, true);
                 }
                 else
@@ -393,19 +400,29 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="refundList"></param>
-        public void NewBatch(List<Invoice> refundList, String refundType)
+        public void NewBatchFromPayment(List<Invoice> paymentList, String refundType, DateTime date)
         {
-            if (refundList == null || refundList.Count == 0)
+            if (paymentList == null || paymentList.Count == 0)
             {
                 return;
             }
 
-            this._case = context.Cases.SingleOrDefault(c => c.CaseCode == refundList[0].InvoiceAssignBatch.Case.CaseCode);
+            this._case = context.Cases.SingleOrDefault(c => c.CaseCode == paymentList[0].InvoiceAssignBatch.Case.CaseCode);
             this.caseBasic.Case = this._case;
+
+            List<Invoice> refundList = new List<Invoice>();
+            foreach (Invoice invoice in paymentList)
+            {
+                Invoice newInvoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo);
+                newInvoice.PaymentAmount2 = invoice.PaymentAmount2;
+                refundList.Add(newInvoice);
+            }
+
+
             this.tbTotalRefund.Text = string.Empty;
             InvoiceRefundBatch batch = new InvoiceRefundBatch();
             batch.RefundType = refundType;
-            batch.RefundDate = DateTime.Now.Date;
+            batch.RefundDate = date;
             batch.CreateUserName = App.Current.CurUser.Name;
             batch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = batch;
@@ -616,7 +633,7 @@ namespace CMBC.EasyFactor.ARMgr
                 i => new Invoice { InvoiceNo = i.InvoiceNo, RefundLogID2 = i.RefundLogID };
 
                 var invoiceList = (from log in batch.InvoiceRefundLogs
-                                  select makeInvoice(log)).ToList();
+                                   select makeInvoice(log)).ToList();
 
                 foreach (Invoice invoice in invoiceList)
                 {
@@ -631,7 +648,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                     invoice.PaymentAmount = oldInvoice.PaymentAmount;
                 }
-                
+
                 this.invoiceBindingSource.DataSource = invoiceList;
 
                 for (int i = 0; i < this.invoiceBindingSource.List.Count; i++)

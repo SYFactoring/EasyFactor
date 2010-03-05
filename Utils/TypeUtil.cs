@@ -68,11 +68,11 @@ namespace CMBC.EasyFactor.Utils
                 return false;
             }
 
-            if ("Y".Equals(str))
+            if ("Y".Equals(str, StringComparison.OrdinalIgnoreCase) || "Yes".Equals(str, StringComparison.OrdinalIgnoreCase) || "True".Equals(str, StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }
-            else if ("N".Equals(str))
+            else if ("N".Equals(str, StringComparison.OrdinalIgnoreCase) || "No".Equals(str, StringComparison.OrdinalIgnoreCase) || "False".Equals(str, StringComparison.OrdinalIgnoreCase))
             {
                 return false;
             }

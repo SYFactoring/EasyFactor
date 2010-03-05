@@ -2319,10 +2319,6 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         result++;
-                        if (result ==705)
-                        {
-                            result = result;
-                        }
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
                 }

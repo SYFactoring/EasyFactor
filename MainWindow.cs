@@ -28,7 +28,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -44,9 +44,9 @@ namespace CMBC.EasyFactor
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Sets command status
@@ -70,24 +70,24 @@ namespace CMBC.EasyFactor
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (76) 
+        #region Methods (76)
 
-		// Public Methods (2) 
+        // Public Methods (2) 
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="refundList"></param>
-        public void InvoiceRefund(List<Invoice> refundList, string paymentType)
+        public void InvoiceRefund(List<Invoice> refundList, string paymentType, DateTime date)
         {
             if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
             {
                 ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REFUND);
                 this.SetDetailPanel(invoiceRefund);
                 InvoiceRefund uc = (InvoiceRefund)invoiceRefund.InvoiceControl;
-                uc.NewBatch(refundList, paymentType);
+                uc.NewBatchFromPayment(refundList, paymentType, date);
             }
         }
 
@@ -101,7 +101,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-		// Private Methods (74) 
+        // Private Methods (74) 
 
         /// <summary>
         /// 
@@ -1093,6 +1093,6 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(mgr);
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }
