@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Case
     {
-        #region Properties (12)
+        #region Properties (14)
 
         /// <summary>
         /// Gets 
@@ -52,44 +52,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return result;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? FinanceLineOutstanding
-        {
-            get
-            {
-                CDA cda = this.ActiveCDA;
-                if (cda != null)
-                {
-                    return cda.FinanceLineOutstanding;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? CreditCoverOutstanding
-        {
-            get
-            {
-                CDA cda = this.ActiveCDA;
-                if (cda != null)
-                {
-                    return cda.CreditCoverOutstanding;
-                }
-                else
-                {
-                    return null;
-                }
             }
         }
 
@@ -167,6 +129,25 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public double? CreditCoverOutstanding
+        {
+            get
+            {
+                CDA cda = this.ActiveCDA;
+                if (cda != null)
+                {
+                    return cda.CreditCoverOutstanding;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets Factor
         /// </summary>
         public Factor Factor
@@ -208,6 +189,25 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public double? FinanceLineOutstanding
+        {
+            get
+            {
+                CDA cda = this.ActiveCDA;
+                if (cda != null)
+                {
+                    return cda.FinanceLineOutstanding;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets 融资余额
         /// </summary>
         public double? FinanceOutstanding
@@ -241,8 +241,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 return total;
             }
         }
-
-
 
         /// <summary>
         /// 
@@ -324,9 +322,98 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Properties
 
-        #region Methods (1)
+        #region Methods (2)
 
-        // Public Methods (1) 
+        // Public Methods (2) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="transactionType"></param>
+        /// <param name="appDate"></param>
+        /// <returns></returns>
+        public static string GenerateCaseCode(string transactionType, DateTime appDate)
+        {
+            string caseCode = null;
+            string yearMonth = String.Format("{0:yyyy}{0:MM}", appDate);
+            string prefix = null;
+            int count = 0;
+            IEnumerable<string> queryResult;
+            DBDataContext context = new DBDataContext();
+
+            switch (transactionType)
+            {
+                case "国内卖方保理":
+
+                case "国内买方保理":
+                    prefix = "LF" + yearMonth;
+                    queryResult = from c in context.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
+                    {
+                        count = 0;
+                    }
+
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                case "出口保理":
+                    prefix = "EF" + yearMonth;
+                    queryResult = from c in context.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
+                    {
+                        count = 0;
+                    }
+
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                case "进口保理":
+                    prefix = "IF" + yearMonth;
+                    queryResult = from c in context.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
+                    {
+                        count = 0;
+                    }
+
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                case "国际信保保理":
+
+                case "国内信保保理":
+                    prefix = "SF" + yearMonth;
+                    queryResult = from c in context.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
+                    {
+                        count = 0;
+                    }
+
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                case "租赁保理":
+                    prefix = "LF" + yearMonth;
+                    queryResult = from c in context.Cases
+                                  where c.CaseCode.StartsWith(prefix)
+                                  select c.CaseCode;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
+                    {
+                        count = 0;
+                    }
+
+                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
+                    break;
+                default:
+                    caseCode = string.Empty;
+                    break;
+            }
+
+            return caseCode;
+        }
 
         /// <summary>
         /// 
@@ -413,95 +500,6 @@ namespace CMBC.EasyFactor.DB.dbml
                     }
 
                     count += casesInMemory.Count(c => c.CaseCode.StartsWith(prefix));
-                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
-                    break;
-                default:
-                    caseCode = string.Empty;
-                    break;
-            }
-
-            return caseCode;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="transactionType"></param>
-        /// <param name="appDate"></param>
-        /// <returns></returns>
-        public static string GenerateCaseCode(string transactionType, DateTime appDate)
-        {
-            string caseCode = null;
-            string yearMonth = String.Format("{0:yyyy}{0:MM}", appDate);
-            string prefix = null;
-            int count = 0;
-            IEnumerable<string> queryResult;
-            DBDataContext context = new DBDataContext();
-
-            switch (transactionType)
-            {
-                case "国内卖方保理":
-
-                case "国内买方保理":
-                    prefix = "LF" + yearMonth;
-                    queryResult = from c in context.Cases
-                                  where c.CaseCode.StartsWith(prefix)
-                                  select c.CaseCode;
-                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
-                    {
-                        count = 0;
-                    }
-
-                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
-                    break;
-                case "出口保理":
-                    prefix = "EF" + yearMonth;
-                    queryResult = from c in context.Cases
-                                  where c.CaseCode.StartsWith(prefix)
-                                  select c.CaseCode;
-                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
-                    {
-                        count = 0;
-                    }
-
-                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
-                    break;
-                case "进口保理":
-                    prefix = "IF" + yearMonth;
-                    queryResult = from c in context.Cases
-                                  where c.CaseCode.StartsWith(prefix)
-                                  select c.CaseCode;
-                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
-                    {
-                        count = 0;
-                    }
-
-                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
-                    break;
-                case "国际信保保理":
-
-                case "国内信保保理":
-                    prefix = "SF" + yearMonth;
-                    queryResult = from c in context.Cases
-                                  where c.CaseCode.StartsWith(prefix)
-                                  select c.CaseCode;
-                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
-                    {
-                        count = 0;
-                    }
-
-                    caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
-                    break;
-                case "租赁保理":
-                    prefix = "LF" + yearMonth;
-                    queryResult = from c in context.Cases
-                                  where c.CaseCode.StartsWith(prefix)
-                                  select c.CaseCode;
-                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(9)), out count))
-                    {
-                        count = 0;
-                    }
-
                     caseCode = String.Format("{0}-{1:D3}", prefix, count + 1);
                     break;
                 default:
