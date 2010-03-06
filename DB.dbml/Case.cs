@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Case
     {
-        #region Properties (14)
+        #region Properties (15)
 
         /// <summary>
         /// Gets 
@@ -306,6 +306,30 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? TotalFinanceOutstanding
+        {
+            get
+            {
+                switch (this.TransactionType)
+                {
+                    case "国内卖方保理":
+                    case "出口保理":
+                    case "国内信保保理":
+                    case "国际信保保理":
+                    case "租赁保理":
+                        return this.SellerClient.GetFinanceOutstanding(this.InvoiceCurrency);
+                    case "国内买方保理":
+                    case "进口保理":
+                        return this.BuyerClient.GetFinanceOutstanding(this.InvoiceCurrency);
+                    default:
+                        return null;
+                }
             }
         }
 
