@@ -284,7 +284,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private void dgvCDAs_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewColumn column = this.dgvCDAs.Columns[e.ColumnIndex];
-            if (column == colIsRecoarse || column == colIsSign)
+            if (column == colIsRecoarse || column == colIsSigned)
             {
                 Object originalData = e.Value;
                 if (originalData != null)

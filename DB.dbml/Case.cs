@@ -10,6 +10,7 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Collections.Generic;
     using System.Linq;
     using CMBC.EasyFactor.Utils;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
@@ -25,7 +26,15 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.CDAs.SingleOrDefault(c => c.CDAStatus == ConstStr.CDA.CHECKED);
+                if (this.CDAs.Count(c => c.CDAStatus == ConstStr.CDA.CHECKED) > 1)
+                {
+                    MessageBoxEx.Show("包含多个有效的CDA，案件编号: " + this.CaseCode, ConstStr.MESSAGE.TITLE_WARNING);
+                    return null;
+                }
+                else
+                {
+                    return this.CDAs.SingleOrDefault(c => c.CDAStatus == ConstStr.CDA.CHECKED);
+                }
             }
         }
 
@@ -43,6 +52,44 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? FinanceLineOutstanding
+        {
+            get
+            {
+                CDA cda = this.ActiveCDA;
+                if (cda != null)
+                {
+                    return cda.FinanceLineOutstanding;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? CreditCoverOutstanding
+        {
+            get
+            {
+                CDA cda = this.ActiveCDA;
+                if (cda != null)
+                {
+                    return cda.CreditCoverOutstanding;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -194,6 +241,8 @@ namespace CMBC.EasyFactor.DB.dbml
                 return total;
             }
         }
+
+
 
         /// <summary>
         /// 

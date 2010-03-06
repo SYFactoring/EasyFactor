@@ -73,7 +73,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -82,6 +82,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
@@ -116,13 +119,9 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemLegerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSellerCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSellerFactorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBuyerCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyerClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBuyerFactorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyerFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -139,6 +138,10 @@
             this.colNetInterestIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMarginIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditCoverOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceLineOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -146,7 +149,7 @@
             this.cmuContractMgr.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelCaseQuery
+            // panelQuery
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -174,7 +177,7 @@
             this.panelQuery.Controls.Add(this.lblOnwerDept);
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
-            this.panelQuery.Name = "panelCaseQuery";
+            this.panelQuery.Name = "panelQuery";
             this.panelQuery.Size = new System.Drawing.Size(761, 85);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
@@ -559,13 +562,9 @@
             this.dgvCases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCases.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCaseCode,
-            this.colSellerCode,
             this.colSellerClient,
-            this.colSellerFactorCode,
             this.colSellerFactor,
-            this.colBuyerCode,
             this.colBuyerClient,
-            this.colBuyerFactorCode,
             this.colBuyerFactor,
             this.colInvoiceCurrency,
             this.colTransactionType,
@@ -581,16 +580,20 @@
             this.colCommissionIncome,
             this.colNetInterestIncome,
             this.colMarginIncome,
-            this.colTotalIncome});
+            this.colTotalIncome,
+            this.colAssignOutstanding,
+            this.colFinanceOutstanding,
+            this.colCreditCoverOutstanding,
+            this.colFinanceLineOutstanding});
             this.dgvCases.ContextMenuStrip = this.cmuContractMgr;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCases.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCases.DefaultCellStyle = dataGridViewCellStyle13;
             this.dgvCases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCases.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCases.Location = new System.Drawing.Point(0, 85);
@@ -677,14 +680,6 @@
             this.colCaseCode.ReadOnly = true;
             this.colCaseCode.Width = 80;
             // 
-            // colSellerCode
-            // 
-            this.colSellerCode.DataPropertyName = "SellerCode";
-            this.colSellerCode.HeaderText = "卖方保理代码";
-            this.colSellerCode.Name = "colSellerCode";
-            this.colSellerCode.ReadOnly = true;
-            this.colSellerCode.Width = 104;
-            // 
             // colSellerClient
             // 
             this.colSellerClient.DataPropertyName = "SellerClient";
@@ -692,14 +687,6 @@
             this.colSellerClient.Name = "colSellerClient";
             this.colSellerClient.ReadOnly = true;
             this.colSellerClient.Width = 80;
-            // 
-            // colSellerFactorCode
-            // 
-            this.colSellerFactorCode.DataPropertyName = "SellerFactorCode";
-            this.colSellerFactorCode.HeaderText = "卖方保理商代码";
-            this.colSellerFactorCode.Name = "colSellerFactorCode";
-            this.colSellerFactorCode.ReadOnly = true;
-            this.colSellerFactorCode.Width = 116;
             // 
             // colSellerFactor
             // 
@@ -709,14 +696,6 @@
             this.colSellerFactor.ReadOnly = true;
             this.colSellerFactor.Width = 92;
             // 
-            // colBuyerCode
-            // 
-            this.colBuyerCode.DataPropertyName = "BuyerCode";
-            this.colBuyerCode.HeaderText = "买方保理代码";
-            this.colBuyerCode.Name = "colBuyerCode";
-            this.colBuyerCode.ReadOnly = true;
-            this.colBuyerCode.Width = 104;
-            // 
             // colBuyerClient
             // 
             this.colBuyerClient.DataPropertyName = "BuyerClient";
@@ -724,14 +703,6 @@
             this.colBuyerClient.Name = "colBuyerClient";
             this.colBuyerClient.ReadOnly = true;
             this.colBuyerClient.Width = 80;
-            // 
-            // colBuyerFactorCode
-            // 
-            this.colBuyerFactorCode.DataPropertyName = "BuyerFactorCode";
-            this.colBuyerFactorCode.HeaderText = "买方保理商代码";
-            this.colBuyerFactorCode.Name = "colBuyerFactorCode";
-            this.colBuyerFactorCode.ReadOnly = true;
-            this.colBuyerFactorCode.Width = 116;
             // 
             // colBuyerFactor
             // 
@@ -881,6 +852,41 @@
             this.colTotalIncome.ReadOnly = true;
             this.colTotalIncome.Visible = false;
             // 
+            // colAssignOutstanding
+            // 
+            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
+            this.colAssignOutstanding.HeaderText = "应收帐款余额";
+            this.colAssignOutstanding.Name = "colAssignOutstanding";
+            this.colAssignOutstanding.ReadOnly = true;
+            // 
+            // colFinanceOutstanding
+            // 
+            this.colFinanceOutstanding.DataPropertyName = "FinanceOutstanding";
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle10;
+            this.colFinanceOutstanding.HeaderText = "融资余额";
+            this.colFinanceOutstanding.Name = "colFinanceOutstanding";
+            this.colFinanceOutstanding.ReadOnly = true;
+            // 
+            // colCreditCoverOutstanding
+            // 
+            this.colCreditCoverOutstanding.DataPropertyName = "CreditCoverOutstanding";
+            dataGridViewCellStyle11.Format = "N2";
+            this.colCreditCoverOutstanding.DefaultCellStyle = dataGridViewCellStyle11;
+            this.colCreditCoverOutstanding.HeaderText = "剩余信用风险额度";
+            this.colCreditCoverOutstanding.Name = "colCreditCoverOutstanding";
+            this.colCreditCoverOutstanding.ReadOnly = true;
+            // 
+            // colFinanceLineOutstanding
+            // 
+            this.colFinanceLineOutstanding.DataPropertyName = "FinanceLineOutstanding";
+            dataGridViewCellStyle12.Format = "N2";
+            this.colFinanceLineOutstanding.DefaultCellStyle = dataGridViewCellStyle12;
+            this.colFinanceLineOutstanding.HeaderText = "剩余融资额度";
+            this.colFinanceLineOutstanding.Name = "colFinanceLineOutstanding";
+            this.colFinanceLineOutstanding.ReadOnly = true;
+            // 
             // CaseMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -905,13 +911,9 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
         private DevComponents.DotNetBar.LabelX lblCreateUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactorCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactorCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactor;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
@@ -928,5 +930,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineOutstanding;
     }
 }

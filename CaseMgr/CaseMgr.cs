@@ -85,10 +85,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             else if (opCaseType == OpCaseType.STAT)
             {
-                this.colSellerCode.Visible = false;
-                this.colBuyerCode.Visible = false;
-                this.colSellerFactorCode.Visible = false;
-                this.colBuyerFactorCode.Visible = false;
                 this.colAppDate.Visible = false;
                 this.colCreateUserName.Visible = false;
                 this.colAssignAmount.Visible = true;

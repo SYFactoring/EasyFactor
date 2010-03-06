@@ -139,7 +139,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colHandFeeCurr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHandFee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCDAStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsSign = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsSigned = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -412,7 +412,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colHandFeeCurr,
             this.colHandFee,
             this.colCDAStatus,
-            this.colIsSign,
+            this.colIsSigned,
             this.colCreateUserName,
             this.colCheckUserName,
             this.colCheckDate});
@@ -744,12 +744,12 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colCDAStatus.Name = "colCDAStatus";
             this.colCDAStatus.ReadOnly = true;
             // 
-            // colIsSign
+            // colIsSigned
             // 
-            this.colIsSign.DataPropertyName = "IsSign";
-            this.colIsSign.HeaderText = "是否签回";
-            this.colIsSign.Name = "colIsSign";
-            this.colIsSign.ReadOnly = true;
+            this.colIsSigned.DataPropertyName = "IsSigned";
+            this.colIsSigned.HeaderText = "是否签回";
+            this.colIsSigned.Name = "colIsSigned";
+            this.colIsSigned.ReadOnly = true;
             // 
             // colCreateUserName
             // 
@@ -816,7 +816,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colHandFeeCurr;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHandFee;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCDAStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsSign;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsSigned;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
