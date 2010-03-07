@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace CMBC.EasyFactor.Help.About
+namespace CMBC.EasyFactor.Help
 {
     using System;
     using System.Reflection;
@@ -150,31 +150,6 @@ namespace CMBC.EasyFactor.Help.About
         private void Close(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CodeStat(object sender, EventArgs e)
-        {
-            string target = "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/";
-            try
-            {
-                System.Diagnostics.Process.Start(target);
-            }
-            catch (System.ComponentModel.Win32Exception noBrowser)
-            {
-                if (noBrowser.ErrorCode == -2147467259)
-                {
-                    MessageBoxEx.Show(noBrowser.Message);
-                }
-            }
-            catch (Exception other)
-            {
-                MessageBoxEx.Show(other.Message);
-            }
         }
 
         #endregion Methods

@@ -654,9 +654,17 @@ namespace CMBC.EasyFactor.DB.dbml
             }
             if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-                if (TypeUtil.GreaterZero(this.FinanceAmount.GetValueOrDefault() - this.AssignAmount))
+                if (this.FinanceAmount.HasValue)
                 {
-                    throw new Exception("融资金额不能大于转让金额: " + this.InvoiceNo);
+                    if (this.InvoiceFinanceBatch.BatchCurrency != this.InvoiceAssignBatch.BatchCurrency)
+                    {
+                        double rate = Exchange.GetExchangeRate(this.InvoiceFinanceBatch.BatchCurrency, this.InvoiceAssignBatch.BatchCurrency);
+                        double financeAmount = rate * this.FinanceAmount.Value;
+                        if (TypeUtil.GreaterZero(financeAmount - this.AssignAmount))
+                        {
+                            throw new Exception("融资金额不能大于转让金额: " + this.InvoiceNo);
+                        }
+                    }
                 }
 
                 if (TypeUtil.GreaterZero(this.PaymentAmount.GetValueOrDefault() - this.AssignAmount))

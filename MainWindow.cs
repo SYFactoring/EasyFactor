@@ -13,7 +13,6 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.ARMgr;
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Help.About;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.DepartmentMgr;
     using CMBC.EasyFactor.InfoMgr.ExchangeMgr;
@@ -22,6 +21,7 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.Report;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Help;
 
     /// <summary>
     /// Main Window Form
@@ -1094,5 +1094,16 @@ namespace CMBC.EasyFactor
         }
 
         #endregion Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReportBug(object sender, EventArgs e)
+        {
+            ReportBug form = new ReportBug();
+            form.ShowDialog(this);
+        }
     }
 }

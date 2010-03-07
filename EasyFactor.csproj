@@ -263,6 +263,12 @@
     <Compile Include="DB.dbml\InvoiceRefundBatch.cs" />
     <Compile Include="DB.dbml\InvoiceRefundLog.cs" />
     <Compile Include="DB.dbml\User.cs" />
+    <Compile Include="Help\ReportBug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Help\ReportBug.Designer.cs">
+      <DependentUpon>ReportBug.cs</DependentUpon>
+    </Compile>
     <Compile Include="InfoMgr\ClientMgr\ClientReviewMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -306,10 +312,10 @@
     <Compile Include="DB.dbml\InvoiceAssignBatch.cs" />
     <Compile Include="DB.dbml\InvoiceFinanceBatch.cs" />
     <Compile Include="DB.dbml\InvoicePaymentBatch.cs" />
-    <Compile Include="Help\About\AboutBox.cs">
+    <Compile Include="Help\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Help\About\AboutBox.Designer.cs">
+    <Compile Include="Help\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="InfoMgr\ClientMgr\ClientCreditLineMgr.cs">
@@ -507,8 +513,12 @@
       <DependentUpon>CreditCoverNegMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Help\About\AboutBox.resx">
+    <EmbeddedResource Include="Help\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Help\ReportBug.resx">
+      <DependentUpon>ReportBug.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\ClientMgr\ClientCreditLineMgr.resx">
@@ -700,10 +710,6 @@
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Help\CheckForUpdates\" />
-    <Folder Include="Help\Content\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
