@@ -867,10 +867,12 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "买方名称";
                 datasheet.Cells[1, column++] = "发票号";
                 datasheet.Cells[1, column++] = "转让金额";
+                datasheet.Cells[1, column++] = "装让余额";
                 datasheet.Cells[1, column++] = "发票日";
                 datasheet.Cells[1, column++] = "到期日";
                 datasheet.Cells[1, column++] = "是否瑕疵";
                 datasheet.Cells[1, column++] = "融资金额";
+                datasheet.Cells[1, column++] = "融资余额";
                 datasheet.Cells[1, column++] = "融资日";
                 datasheet.Cells[1, column++] = "融资到期日";
                 datasheet.Cells[1, column++] = "备注";
@@ -911,10 +913,12 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.BuyerClient.ToString();
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = invoice.AssignAmount;
+                    datasheet.Cells[row + 2, column++] = invoice.AssignOutstanding;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceDate;
                     datasheet.Cells[row + 2, column++] = invoice.DueDate;
                     datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
                     datasheet.Cells[row + 2, column++] = invoice.FinanceAmount;
+                    datasheet.Cells[row + 2, column++] = invoice.FinanceOutstanding;
                     datasheet.Cells[row + 2, column++] = invoice.FinanceDate;
                     datasheet.Cells[row + 2, column++] = invoice.FinanceDueDate;
                     datasheet.Cells[row + 2, column++] = invoice.Comment;
@@ -927,11 +931,11 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 4 || range.Column == 8)
+                    if (range.Column == 4 || range.Column == 5 || range.Column == 9 || range.Column == 10)
                     {
                         range.NumberFormatLocal = "0.00";
                     }
-                    else if (range.Column == 5 || range.Column == 6 || range.Column == 9 || range.Column == 10)
+                    else if (range.Column == 6 || range.Column == 7 || range.Column == 11 || range.Column == 12)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
