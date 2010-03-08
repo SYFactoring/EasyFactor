@@ -90,6 +90,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblLocation = new DevComponents.DotNetBar.LabelX();
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
             this.cbCaseMark = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -113,15 +115,6 @@
             this.cbOwnerDepts = new DevComponents.DotNetBar.Controls.ComboTree();
             this.lblOnwerDept = new DevComponents.DotNetBar.LabelX();
             this.dgvCases = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuContractMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCaseSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCaseNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemLegerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -147,6 +140,15 @@
             this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceLineOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuContractMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCaseSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCaseNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemLegerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -158,6 +160,8 @@
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.cbLocation);
+            this.panelQuery.Controls.Add(this.lblLocation);
             this.panelQuery.Controls.Add(this.tbCreateUserName);
             this.panelQuery.Controls.Add(this.lblCreateUserName);
             this.panelQuery.Controls.Add(this.cbCaseMark);
@@ -183,7 +187,7 @@
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(761, 85);
+            this.panelQuery.Size = new System.Drawing.Size(819, 85);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -192,6 +196,62 @@
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
+            // 
+            // cbLocation
+            // 
+            this.cbLocation.DisplayMember = "Text";
+            this.cbLocation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLocation.FormattingEnabled = true;
+            this.cbLocation.ItemHeight = 14;
+            this.cbLocation.Items.AddRange(new object[] {
+                "全部",
+            "北京",
+            "广州",
+            "上海",
+            "深圳",
+            "武汉",
+            "太原",
+            "石家庄",
+            "大连",
+            "杭州",
+            "南京",
+            "重庆",
+            "西安",
+            "福州",
+            "济南",
+            "宁波",
+            "成都",
+            "天津",
+            "苏州",
+            "青岛",
+            "厦门",
+            "郑州",
+            "昆明",
+            "温州",
+            "泉州",
+            "长沙",
+            "长春",
+            "汕头",
+            "南昌",
+            "香港"});
+            this.cbLocation.Location = new System.Drawing.Point(59, 32);
+            this.cbLocation.Name = "cbLocation";
+            this.cbLocation.Size = new System.Drawing.Size(133, 20);
+            this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbLocation.TabIndex = 23;
+            // 
+            // lblLocation
+            // 
+            // 
+            // 
+            // 
+            this.lblLocation.BackgroundStyle.Class = "";
+            this.lblLocation.Location = new System.Drawing.Point(3, 29);
+            this.lblLocation.Name = "lblLocation";
+            this.lblLocation.Size = new System.Drawing.Size(59, 23);
+            this.lblLocation.TabIndex = 22;
+            this.lblLocation.Text = "业务地区";
             // 
             // tbCreateUserName
             // 
@@ -228,7 +288,7 @@
             "申请案",
             "启动案",
             "已结案"});
-            this.cbCaseMark.Location = new System.Drawing.Point(254, 32);
+            this.cbCaseMark.Location = new System.Drawing.Point(449, 32);
             this.cbCaseMark.Name = "cbCaseMark";
             this.cbCaseMark.Size = new System.Drawing.Size(100, 20);
             this.cbCaseMark.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -241,7 +301,7 @@
             // 
             // 
             this.lblCaseMark.BackgroundStyle.Class = "";
-            this.lblCaseMark.Location = new System.Drawing.Point(198, 34);
+            this.lblCaseMark.Location = new System.Drawing.Point(393, 34);
             this.lblCaseMark.Name = "lblCaseMark";
             this.lblCaseMark.Size = new System.Drawing.Size(56, 16);
             this.lblCaseMark.TabIndex = 8;
@@ -254,7 +314,7 @@
             // 
             // 
             this.cbIsContractSigned.BackgroundStyle.Class = "";
-            this.cbIsContractSigned.Location = new System.Drawing.Point(376, 34);
+            this.cbIsContractSigned.Location = new System.Drawing.Point(599, 7);
             this.cbIsContractSigned.Name = "cbIsContractSigned";
             this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);
             this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -265,7 +325,7 @@
             // 
             this.btnQueryReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQueryReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQueryReset.Location = new System.Drawing.Point(614, 29);
+            this.btnQueryReset.Location = new System.Drawing.Point(731, 31);
             this.btnQueryReset.Name = "btnQueryReset";
             this.btnQueryReset.Size = new System.Drawing.Size(48, 21);
             this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -280,7 +340,7 @@
             // 
             // 
             this.cbIsCDA.BackgroundStyle.Class = "";
-            this.cbIsCDA.Location = new System.Drawing.Point(508, 34);
+            this.cbIsCDA.Location = new System.Drawing.Point(599, 29);
             this.cbIsCDA.Name = "cbIsCDA";
             this.cbIsCDA.Size = new System.Drawing.Size(100, 16);
             this.cbIsCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -363,7 +423,7 @@
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(614, 6);
+            this.btnQuery.Location = new System.Drawing.Point(731, 8);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(48, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -533,7 +593,7 @@
             // 
             this.cbOwnerDepts.BackgroundStyle.Class = "TextBoxBorder";
             this.cbOwnerDepts.ButtonDropDown.Visible = true;
-            this.cbOwnerDepts.Location = new System.Drawing.Point(59, 31);
+            this.cbOwnerDepts.Location = new System.Drawing.Point(254, 31);
             this.cbOwnerDepts.Name = "cbOwnerDepts";
             this.cbOwnerDepts.Size = new System.Drawing.Size(133, 23);
             this.cbOwnerDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -545,7 +605,7 @@
             // 
             // 
             this.lblOnwerDept.BackgroundStyle.Class = "";
-            this.lblOnwerDept.Location = new System.Drawing.Point(3, 31);
+            this.lblOnwerDept.Location = new System.Drawing.Point(198, 31);
             this.lblOnwerDept.Name = "lblOnwerDept";
             this.lblOnwerDept.Size = new System.Drawing.Size(59, 23);
             this.lblOnwerDept.TabIndex = 6;
@@ -607,76 +667,10 @@
             this.dgvCases.Name = "dgvCases";
             this.dgvCases.ReadOnly = true;
             this.dgvCases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvCases.Size = new System.Drawing.Size(761, 300);
+            this.dgvCases.Size = new System.Drawing.Size(819, 300);
             this.dgvCases.TabIndex = 1;
             this.dgvCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvCases.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCases_RowPostPaint);
-            // 
-            // cmuContractMgr
-            // 
-            this.cmuContractMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemCaseSelect,
-            this.menuItemCaseDetail,
-            this.toolStripSeparator,
-            this.menuItemCaseNew,
-            this.menuItemCreditCoverNegNew,
-            this.menuItemCaseDelete,
-            this.toolStripSeparator1,
-            this.menuItemLegerReport});
-            this.cmuContractMgr.Name = "cmuContractMgr";
-            this.cmuContractMgr.Size = new System.Drawing.Size(147, 148);
-            // 
-            // menuItemCaseSelect
-            // 
-            this.menuItemCaseSelect.Name = "menuItemCaseSelect";
-            this.menuItemCaseSelect.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseSelect.Text = "选定案件";
-            this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
-            // 
-            // menuItemCaseDetail
-            // 
-            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseDetail.Text = "详细信息";
-            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
-            // 
-            // menuItemCaseNew
-            // 
-            this.menuItemCaseNew.Name = "menuItemCaseNew";
-            this.menuItemCaseNew.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseNew.Text = "新建案件";
-            this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
-            // 
-            // menuItemCreditCoverNegNew
-            // 
-            this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
-            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverNegNew.Text = "新建额度申请";
-            this.menuItemCreditCoverNegNew.Click += new System.EventHandler(this.NewCreditCoverNeg);
-            // 
-            // menuItemCaseDelete
-            // 
-            this.menuItemCaseDelete.Name = "menuItemCaseDelete";
-            this.menuItemCaseDelete.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseDelete.Text = "删除案件";
-            this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
-            // 
-            // menuItemLegerReport
-            // 
-            this.menuItemLegerReport.Name = "menuItemLegerReport";
-            this.menuItemLegerReport.Size = new System.Drawing.Size(146, 22);
-            this.menuItemLegerReport.Text = "导出台帐";
-            this.menuItemLegerReport.Click += new System.EventHandler(this.ReportLeger);
             // 
             // colCaseCode
             // 
@@ -904,6 +898,72 @@
             this.colTotalFinanceOutstanding.Name = "colTotalFinanceOutstanding";
             this.colTotalFinanceOutstanding.ReadOnly = true;
             // 
+            // cmuContractMgr
+            // 
+            this.cmuContractMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCaseSelect,
+            this.menuItemCaseDetail,
+            this.toolStripSeparator,
+            this.menuItemCaseNew,
+            this.menuItemCreditCoverNegNew,
+            this.menuItemCaseDelete,
+            this.toolStripSeparator1,
+            this.menuItemLegerReport});
+            this.cmuContractMgr.Name = "cmuContractMgr";
+            this.cmuContractMgr.Size = new System.Drawing.Size(147, 148);
+            // 
+            // menuItemCaseSelect
+            // 
+            this.menuItemCaseSelect.Name = "menuItemCaseSelect";
+            this.menuItemCaseSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseSelect.Text = "选定案件";
+            this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
+            // 
+            // menuItemCaseDetail
+            // 
+            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDetail.Text = "详细信息";
+            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            // 
+            // menuItemCaseNew
+            // 
+            this.menuItemCaseNew.Name = "menuItemCaseNew";
+            this.menuItemCaseNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseNew.Text = "新建案件";
+            this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
+            // 
+            // menuItemCreditCoverNegNew
+            // 
+            this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
+            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverNegNew.Text = "新建额度申请";
+            this.menuItemCreditCoverNegNew.Click += new System.EventHandler(this.NewCreditCoverNeg);
+            // 
+            // menuItemCaseDelete
+            // 
+            this.menuItemCaseDelete.Name = "menuItemCaseDelete";
+            this.menuItemCaseDelete.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDelete.Text = "删除案件";
+            this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            // 
+            // menuItemLegerReport
+            // 
+            this.menuItemLegerReport.Name = "menuItemLegerReport";
+            this.menuItemLegerReport.Size = new System.Drawing.Size(146, 22);
+            this.menuItemLegerReport.Text = "导出台帐";
+            this.menuItemLegerReport.Click += new System.EventHandler(this.ReportLeger);
+            // 
             // CaseMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -912,7 +972,7 @@
             this.Controls.Add(this.panelQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "CaseMgr";
-            this.Size = new System.Drawing.Size(761, 385);
+            this.Size = new System.Drawing.Size(819, 385);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).EndInit();
@@ -950,5 +1010,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalFinanceOutstanding;
+        private DevComponents.DotNetBar.LabelX lblLocation;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
     }
 }

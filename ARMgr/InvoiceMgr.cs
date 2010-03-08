@@ -80,7 +80,7 @@ namespace CMBC.EasyFactor.ARMgr
             /// 
             /// </summary>
             FINANCE_DUE,
-            
+
             /// <summary>
             /// 
             /// </summary>
@@ -152,6 +152,8 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             this.cbCaseMark.SelectedIndex = 1;
+            this.cbLocation.SelectedIndex = 0;
+
             this.UpdateContextMenu();
 
             if (opInvoiceType == OpInvoiceType.FLAW_RESOLVE)
@@ -540,6 +542,7 @@ namespace CMBC.EasyFactor.ARMgr
             string caseMark = this.cbCaseMark.Text;
             DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value.Date : this.dateFrom.MinDate;
             DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value.Date : this.dateTo.MinDate;
+            string location = this.cbLocation.Text;
 
             int assignOverDueDays = 0;
             DateTime assignOverDueDate = DateTime.Now.Date;
@@ -561,11 +564,19 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
+            double assignOustanding = 0;
+            bool needAssignOutstanding = Double.TryParse(this.tbAssignOutstanding.Text, out assignOustanding);
+
+            double financeOutstanding = 0;
+            bool needFinanceOutstanding = Double.TryParse(this.tbFinanceOutstanding.Text, out financeOutstanding);
+
+
             context = new DBDataContext();
 
             var queryResult = from invoice in context.Invoices
                               let curCase = invoice.InvoiceAssignBatch.Case
                               where curCase.CaseMark == caseMark
+                                    && (location == "全部" ? true : curCase.OwnerDepartment.Location == location)
                               let seller = curCase.SellerClient
                               where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN.Contains(sellerName)
                               let buyer = curCase.BuyerClient
@@ -581,6 +592,8 @@ namespace CMBC.EasyFactor.ARMgr
                                 && (tbFinanceOverDueDays.Text == string.Empty ? true : (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0001 && invoice.FinanceDueDate <= financeOverDueDate))
                                 && (beginDate != this.dateFrom.MinDate ? invoice.InvoiceAssignBatch.AssignDate >= beginDate : true)
                                 && (endDate != this.dateTo.MinDate ? invoice.InvoiceAssignBatch.AssignDate <= endDate : true)
+                                && (needAssignOutstanding ? invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount + assignOustanding < -0.0001 : true)
+                                && (needFinanceOutstanding ? invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() + financeOutstanding < -0.0001 : true)
                               select invoice;
 
             this.bs.DataSource = queryResult;
@@ -629,5 +642,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
         #endregion Methods
+
     }
 }

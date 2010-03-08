@@ -125,6 +125,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCurrency.DisplayMember = "CurrencyFormat";
             this.cbCurrency.ValueMember = "CurrencyCode";
 
+            this.cbLocation.SelectedIndex = 0;
+
             this.UpdateContextMenu();
         }
 
@@ -315,13 +317,15 @@ namespace CMBC.EasyFactor.CaseMgr
             DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
             DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
             string createUserName = this.tbCreateUserName.Text;
+            string location = this.cbLocation.Text;
 
             context = new DBDataContext();
 
             var queryResult = context.Cases.Where(c =>
                                    ((string)this.cbOwnerDepts.SelectedValue == "CN01300" ? true : c.OwnerDepartmentCode.Equals((string)this.cbOwnerDepts.SelectedValue))
-                                && (this.cbTransactionType.Text == "全部" ? true : c.TransactionType.Equals(this.cbTransactionType.Text))
-                                && ((string)this.cbCurrency.SelectedValue == "AAA" ? true : c.InvoiceCurrency.Equals((string)this.cbCurrency.SelectedValue))
+                                && (this.cbTransactionType.Text == "全部" ? true : c.TransactionType == this.cbTransactionType.Text)
+                                && ((string)this.cbCurrency.SelectedValue == "AAA" ? true : c.InvoiceCurrency == (string)this.cbCurrency.SelectedValue)
+                                && (location == "全部" ? true : c.OwnerDepartment.Location == location)
                                 && (beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
                                 && (endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
