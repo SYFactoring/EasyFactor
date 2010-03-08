@@ -91,6 +91,11 @@ namespace CMBC.EasyFactor.Utils
             /// 
             /// </summary>
             EXPORT_MSG12,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            EXPORT_CLIENT_REVIEWS,
         }
 
         #endregion Enums
@@ -116,7 +121,7 @@ namespace CMBC.EasyFactor.Utils
 
         #endregion Constructors
 
-        #region Methods (16)
+        #region Methods (17)
 
         // Public Methods (1) 
 
@@ -141,7 +146,7 @@ namespace CMBC.EasyFactor.Utils
 
             this.btnStart.Enabled = false;
         }
-        // Private Methods (15) 
+        // Private Methods (16) 
 
         /// <summary>
         /// 
@@ -182,6 +187,9 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ExportType.EXPORT_MSG12:
                     e.Result = this.ExportMsg12(worker, e);
+                    break;
+                case ExportType.EXPORT_CLIENT_REVIEWS:
+                    e.Result = this.ExportClientReviews(worker, e);
                     break;
                 default:
                     break;
@@ -329,6 +337,128 @@ namespace CMBC.EasyFactor.Utils
                         range.NumberFormatLocal = "0.00";
                     }
                     else if (range.Column == 4 || range.Column == 5 || range.Column == 8)
+                    {
+                        range.NumberFormatLocal = "yyyy-MM-dd";
+                    }
+                }
+
+                app.Visible = true;
+            }
+            catch (Exception e1)
+            {
+                if (datasheet != null)
+                {
+                    Marshal.ReleaseComObject(datasheet);
+                    datasheet = null;
+                }
+
+                if (app != null)
+                {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+
+                    app.Workbooks.Close();
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                    app = null;
+                }
+
+                throw e1;
+            }
+
+            return exportData.Count;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private object ExportClientReviews(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+            if (app == null)
+            {
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return -1;
+            }
+            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            if (datasheet == null)
+            {
+                return -1;
+            }
+
+            try
+            {
+                datasheet.Cells[1, 1] = "协查意见台帐";
+                datasheet.get_Range("A1", "S1").MergeCells = true;
+                datasheet.get_Range("A1", "S1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+                int column = 1;
+                datasheet.Cells[2, column++] = "回复时间";
+                datasheet.Cells[2, column++] = "协查意见编码";
+                datasheet.Cells[2, column++] = "区域负责人";
+                datasheet.Cells[2, column++] = "所属机构";
+                datasheet.Cells[2, column++] = "产品经理";
+                datasheet.Cells[2, column++] = "客户名称";
+                datasheet.Cells[2, column++] = "所属行业";
+                datasheet.Cells[2, column++] = "授信金额（万）";
+                datasheet.Cells[2, column++] = "其他若干列";
+                datasheet.Cells[2, column++] = "备注";
+
+                int size = this.exportData.Count;
+                for (int row = 0; row < size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        if (datasheet != null)
+                        {
+                            Marshal.ReleaseComObject(datasheet);
+                            datasheet = null;
+                        }
+
+                        if (app != null)
+                        {
+                            foreach (Workbook wb in app.Workbooks)
+                            {
+                                wb.Close(false, Type.Missing, Type.Missing);
+                            }
+
+                            app.Workbooks.Close();
+                            app.Quit();
+                            Marshal.ReleaseComObject(app);
+                            app = null;
+                        }
+
+                        e.Cancel = true;
+                        return -1;
+                    }
+
+                    column = 1;
+                    ClientReview review = (ClientReview)exportData[row];
+                    datasheet.Cells[row + 3, column++] = review.ReviewDate;
+                    datasheet.Cells[row + 3, column++] = review.ReviewNo;
+                    datasheet.Cells[row + 3, column++] = "";
+                    datasheet.Cells[row + 3, column++] = review.Client.Department.DepartmentName;
+                    datasheet.Cells[row + 3, column++] = review.Client.PMName;
+                    datasheet.Cells[row + 3, column++] = review.Client.ToString();
+                    datasheet.Cells[row + 3, column++] = review.Client.Industry;
+                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = TypeUtil.GetExcelCurr(review.RequestCurrency);
+                    datasheet.Cells[row + 3, column++] = review.RequestAmount;
+                    datasheet.Cells[row + 3, column++] = "";
+                    datasheet.Cells[row + 3, column++] = review.Comment;
+
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+
+                foreach (Range range in datasheet.UsedRange.Columns)
+                {
+                    range.EntireColumn.AutoFit();
+                    if (range.Column == 1)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }

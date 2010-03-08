@@ -237,7 +237,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     context.SubmitChanges();
                 }
-                catch (SqlException e1)
+                catch (Exception e1)
                 {
                     MessageBoxEx.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;

@@ -57,6 +57,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -68,6 +69,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblClientName = new DevComponents.DotNetBar.LabelX();
             this.tbClientReviewNo = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblClientReviewNo = new DevComponents.DotNetBar.LabelX();
             this.dgvClientReviews = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colClientEDICode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,9 +84,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colReviewDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblClientReviewNo = new DevComponents.DotNetBar.LabelX();
+            this.cmuClientReviewMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemClientReviewDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemClientReviewDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.导出选定协查意见ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientReviews)).BeginInit();
+            this.cmuClientReviewMgr.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelQuery
@@ -169,6 +177,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbClientReviewNo.Size = new System.Drawing.Size(100, 20);
             this.tbClientReviewNo.TabIndex = 1;
             // 
+            // lblClientReviewNo
+            // 
+            this.lblClientReviewNo.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblClientReviewNo.BackgroundStyle.Class = "";
+            this.lblClientReviewNo.Location = new System.Drawing.Point(6, 5);
+            this.lblClientReviewNo.Name = "lblClientReviewNo";
+            this.lblClientReviewNo.Size = new System.Drawing.Size(93, 16);
+            this.lblClientReviewNo.TabIndex = 0;
+            this.lblClientReviewNo.Text = "协查意见书编号";
+            // 
             // dgvClientReviews
             // 
             this.dgvClientReviews.AllowUserToAddRows = false;
@@ -198,6 +219,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colReviewDate,
             this.colCreateUserName,
             this.colComment});
+            this.dgvClientReviews.ContextMenuStrip = this.cmuClientReviewMgr;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -209,7 +231,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientReviews.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClientReviews.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvClientReviews.Location = new System.Drawing.Point(0, 33);
-            this.dgvClientReviews.MultiSelect = false;
             this.dgvClientReviews.Name = "dgvClientReviews";
             this.dgvClientReviews.ReadOnly = true;
             this.dgvClientReviews.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -317,18 +338,47 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colComment.Name = "colComment";
             this.colComment.ReadOnly = true;
             // 
-            // lblClientReviewNo
+            // cmuClientReviewMgr
             // 
-            this.lblClientReviewNo.AutoSize = true;
+            this.cmuClientReviewMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemClientReviewDetail,
+            this.toolStripSeparator,
+            this.menuItemClientReviewDelete,
+            this.toolStripSeparator1,
+            this.导出选定协查意见ToolStripMenuItem});
+            this.cmuClientReviewMgr.Name = "contextMenuClientMgr";
+            this.cmuClientReviewMgr.Size = new System.Drawing.Size(171, 104);
             // 
+            // menuItemClientReviewDetail
             // 
+            this.menuItemClientReviewDetail.Name = "menuItemClientReviewDetail";
+            this.menuItemClientReviewDetail.Size = new System.Drawing.Size(170, 22);
+            this.menuItemClientReviewDetail.Text = "详细信息(&M)";
+            this.menuItemClientReviewDetail.Click += new System.EventHandler(this.DetailClientReview);
             // 
-            this.lblClientReviewNo.BackgroundStyle.Class = "";
-            this.lblClientReviewNo.Location = new System.Drawing.Point(6, 5);
-            this.lblClientReviewNo.Name = "lblClientReviewNo";
-            this.lblClientReviewNo.Size = new System.Drawing.Size(93, 16);
-            this.lblClientReviewNo.TabIndex = 0;
-            this.lblClientReviewNo.Text = "协查意见书编号";
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(167, 6);
+            // 
+            // menuItemClientReviewDelete
+            // 
+            this.menuItemClientReviewDelete.Name = "menuItemClientReviewDelete";
+            this.menuItemClientReviewDelete.Size = new System.Drawing.Size(170, 22);
+            this.menuItemClientReviewDelete.Text = "删除协查意见(&D)";
+            this.menuItemClientReviewDelete.Click += new System.EventHandler(this.DeleteClientReview);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
+            // 
+            // 导出选定协查意见ToolStripMenuItem
+            // 
+            this.导出选定协查意见ToolStripMenuItem.Name = "导出选定协查意见ToolStripMenuItem";
+            this.导出选定协查意见ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.导出选定协查意见ToolStripMenuItem.Text = "导出选定协查意见";
+            this.导出选定协查意见ToolStripMenuItem.Click += new System.EventHandler(this.ExportClientReviews);
             // 
             // ClientReviewMgr
             // 
@@ -341,6 +391,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientReviews)).EndInit();
+            this.cmuClientReviewMgr.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -361,5 +412,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colReviewDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.ContextMenuStrip cmuClientReviewMgr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientReviewDetail;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientReviewDelete;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem 导出选定协查意见ToolStripMenuItem;
     }
 }

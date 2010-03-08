@@ -12,6 +12,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using DevComponents.DotNetBar;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -24,7 +26,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// 
         /// </summary>
         private BindingSource bs;
-
         /// <summary>
         /// 
         /// </summary>
@@ -48,7 +49,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Enums
 
-        #region Constructors (2)
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the ClientCreditLineMgr class.
@@ -67,7 +68,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Constructors
 
-        #region Properties (2)
+        #region Properties (3)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Gets or sets owner form
@@ -89,9 +99,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Properties
 
-        #region Methods (6)
+        #region Methods (8)
 
-        // Private Methods (6) 
+        // Private Methods (8) 
 
         /// <summary>
         /// 
@@ -107,6 +117,36 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             else
             {
                 this.SelectClientReview(sender, e);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteClientReview(object sender, EventArgs e)
+        {
+            if (this.dgvClientReviews.CurrentCell == null)
+            {
+                return;
+            }
+
+            ClientReview review = (ClientReview)this.bs.List[this.dgvClientReviews.CurrentCell.RowIndex];
+            if (MessageBoxEx.Show("是否打算删除协查意见: " + review.ReviewNo, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                context.ClientReviews.DeleteOnSubmit(review);
+                try
+                {
+                    context.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    MessageBoxEx.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                this.dgvClientReviews.Rows.RemoveAt(dgvClientReviews.CurrentCell.RowIndex);
             }
         }
 
@@ -143,12 +183,47 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ExportClientReviews(object sender, EventArgs e)
+        {
+            if (this.dgvClientReviews.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_CLIENT_REVIEWS, GetSelectedReviews());
+            exportForm.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private List<ClientReview> GetSelectedReviews()
+        {
+            List<ClientReview> selectedReviews = new List<ClientReview>();
+            foreach (DataGridViewCell cell in this.dgvClientReviews.SelectedCells)
+            {
+                ClientReview review = (ClientReview)this.bs.List[cell.RowIndex];
+                if (!selectedReviews.Contains(review))
+                {
+                    selectedReviews.Add(review);
+                }
+            }
+
+            return selectedReviews;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Query(object sender, EventArgs e)
         {
             string clientReviewNo = this.tbClientReviewNo.Text;
             string clientName = this.tbClientName.Text;
 
-            DBDataContext context = new DBDataContext();
+            context = new DBDataContext();
 
             var queryResult = context.ClientReviews.Where(c =>
                 c.ReviewNo.Contains(clientReviewNo)
