@@ -385,6 +385,7 @@
       <DependentUpon>ImportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\InvoiceUtil.cs" />
+    <Compile Include="Utils\MailUtil.cs" />
     <Compile Include="Utils\PermUtil.cs" />
     <Compile Include="Utils\QueryForm.cs">
       <SubType>Form</SubType>
@@ -622,6 +623,7 @@
     </Compile>
     <Compile Include="Utils\ControlUtil.cs" />
     <Compile Include="Utils\SortableBindingList.cs" />
+    <Compile Include="Utils\SystemUtil.cs" />
     <Compile Include="Utils\TypeUtil.cs" />
   </ItemGroup>
   <ItemGroup>

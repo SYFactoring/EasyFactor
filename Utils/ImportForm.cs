@@ -331,7 +331,14 @@ namespace CMBC.EasyFactor.Utils
             this.ReleaseResource();
             if (e.Error != null)
             {
-                this.tbStatus.Text = String.Format("第{0}条记录发生异常: {1}", e.Error.Data["row"], e.Error.Message);
+                if (e.Error.Data.Contains("row"))
+                {
+                    this.tbStatus.Text = String.Format("第{0}条记录发生异常: {1}", e.Error.Data["row"], e.Error.Message);
+                }
+                else
+                {
+                    this.tbStatus.Text = String.Format("发生异常: {0}", e.Error.Message);
+                }
             }
             else if (e.Cancelled)
             {
@@ -688,7 +695,11 @@ namespace CMBC.EasyFactor.Utils
                     client.Department = null;
                 }
 
-                e1.Data["row"] = result;
+                if (result != clientList.Count)
+                {
+                    e1.Data["row"] = result;
+                }
+
                 throw e1;
             }
 
@@ -840,8 +851,12 @@ namespace CMBC.EasyFactor.Utils
                 {
                     review.Client = null;
                 }
+                
+                if (result != reviewList.Count)
+                {
+                    e1.Data["row"] = result;
+                }
 
-                e1.Data["row"] = result;
                 throw e1;
             }
 
@@ -923,7 +938,11 @@ namespace CMBC.EasyFactor.Utils
                         creditLine.Client = null;
                     }
 
-                    e1.Data["row"] = result;
+                    if (result != creditLineList.Count)
+                    {
+                        e1.Data["row"] = result;
+                    }
+
                     throw e1;
                 }
             }
@@ -1057,7 +1076,11 @@ namespace CMBC.EasyFactor.Utils
                         cda.Case = null;
                     }
 
-                    e1.Data["row"] = result;
+                    if (cdaList.Count != result)
+                    {
+                        e1.Data["row"] = result;
+                    }
+                     
                     throw e1;
                 }
             }
@@ -1241,7 +1264,6 @@ namespace CMBC.EasyFactor.Utils
                 }
             }
 
-
             worker.ReportProgress(100);
             this.workbook.Close(false, fileName, null);
             this.ReleaseResource();
@@ -1366,7 +1388,11 @@ namespace CMBC.EasyFactor.Utils
                         factor.FactorGroup = null;
                     }
 
-                    e1.Data["row"] = result;
+                    if (result != factorList.Count)
+                    {
+                        e1.Data["row"] = result;
+                    }
+                     
                     throw e1;
                 }
             }
@@ -1444,7 +1470,11 @@ namespace CMBC.EasyFactor.Utils
                         creditLine.Factor = null;
                     }
 
-                    e1.Data["row"] = result;
+                    if (result != creditLineList.Count)
+                    {
+                        e1.Data["row"] = result;
+                    }
+
                     throw e1;
                 }
             }
@@ -2318,6 +2348,7 @@ namespace CMBC.EasyFactor.Utils
                             invoice.CaculatePayment();
                         }
 
+
                         result++;
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
@@ -2358,7 +2389,11 @@ namespace CMBC.EasyFactor.Utils
                     batch.Case = null;
                 }
 
-                e1.Data["row"] = result;
+                if (invoiceList.Count != result)
+                {
+                    e1.Data["row"] = result;
+                }
+
                 throw e1;
             }
 
@@ -2430,7 +2465,11 @@ namespace CMBC.EasyFactor.Utils
                 }
                 catch (Exception e1)
                 {
-                    e1.Data["row"] = result;
+                    if (result != invoiceList.Count)
+                    {
+                        e1.Data["row"] = result;
+                    }
+                     
                     throw e1;
                 }
             }
@@ -2495,7 +2534,11 @@ namespace CMBC.EasyFactor.Utils
                 }
                 catch (Exception e1)
                 {
-                    e1.Data["row"] = result;
+                    if (result != invoiceList.Count)
+                    {
+                        e1.Data["row"] = result;
+                    }
+                     
                     throw e1;
                 }
             }
@@ -2564,7 +2607,11 @@ namespace CMBC.EasyFactor.Utils
                 }
                 catch (Exception e1)
                 {
-                    e1.Data["row"] = result;
+                    if (result != invoiceList.Count)
+                    {
+                        e1.Data["row"] = result;
+                    }
+                     
                     throw e1;
                 }
             }
@@ -2627,7 +2674,11 @@ namespace CMBC.EasyFactor.Utils
                 }
                 catch (Exception e1)
                 {
-                    e1.Data["row"] = result;
+                    if (result != invoiceList.Count)
+                    {
+                        e1.Data["row"] = result;
+                    }
+                     
                     throw e1;
                 }
             }
@@ -2705,8 +2756,11 @@ namespace CMBC.EasyFactor.Utils
                 }
                 catch (Exception e1)
                 {
+                    if (result != userList.Count)
+                    {
+                        e1.Data["row"] = result;
+                    }
 
-                    e1.Data["row"] = result;
                     throw e1;
                 }
             }
