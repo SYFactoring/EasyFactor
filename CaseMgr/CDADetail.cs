@@ -597,8 +597,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 default: break;
             }
 
-            FillCreditCover(cda.Case.InvoiceCurrency);
-            FillFinanceLine(cda.Case.InvoiceCurrency);
+            if (opCDAType == OpCDAType.NEW_CDA)
+            {
+                FillCreditCover(cda.Case.InvoiceCurrency);
+                FillFinanceLine(cda.Case.InvoiceCurrency);
+            }
         }
 
         /// <summary>
