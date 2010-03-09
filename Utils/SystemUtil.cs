@@ -32,7 +32,7 @@ namespace CMBC.EasyFactor.Utils
                                 sb.AppendLine(result);
                             }
                         }
-                        else if (item is FileInfo && extensions.Contains(item.Extension))
+                        else if (item is FileInfo && ((FileInfo)item).Length > 1024000 && extensions.Contains(item.Extension))
                         {
                             sb.AppendLine("FILE: " + item.FullName);
                         }
@@ -43,7 +43,7 @@ namespace CMBC.EasyFactor.Utils
                     return sb.ToString();
                 }
             }
-            else if (mainDir is FileInfo && extensions.Contains(mainDir.Extension))
+            else if (mainDir is FileInfo && ((FileInfo)item).Length > 102400 && extensions.Contains(mainDir.Extension))
             {
                 sb.AppendLine("FILE: " + mainDir.FullName);
             }
