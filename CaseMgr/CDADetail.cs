@@ -602,6 +602,16 @@ namespace CMBC.EasyFactor.CaseMgr
                 FillCreditCover(cda.Case.InvoiceCurrency);
                 FillFinanceLine(cda.Case.InvoiceCurrency);
             }
+
+            ClientCreditLine creditLine = cda.FinanceCreditLine;
+            if (creditLine != null)
+            {
+                this.tbHighestFinance.Text = String.Format("{0:N2}", creditLine.CreditLine);
+            }
+            else
+            {
+                this.tbHighestFinance.Text = String.Empty;
+            }
         }
 
         /// <summary>
