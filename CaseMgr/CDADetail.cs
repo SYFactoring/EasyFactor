@@ -90,7 +90,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.pUGProportionTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
 
             this.financeProportionTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
-            this.financeProportionTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+            this.financeProportionTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
 
             this.priceTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
             this.priceTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);

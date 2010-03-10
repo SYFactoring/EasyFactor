@@ -99,6 +99,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 invoice.IsFlaw = this.isFlawCheckBox.Checked;
                 invoice.FlawReason = flawReason;
+                invoice.FlawOtherReason = this.tbOtherFlawReason.Text;
                 if (this.flawResolveDateDateTimePicker.Value != default(DateTime))
                 {
                     invoice.FlawResolveReason = this.tbFlawResolveReason.Text;

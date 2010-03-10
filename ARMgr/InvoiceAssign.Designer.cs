@@ -94,11 +94,11 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX lblAssignNumber;
             DevComponents.DotNetBar.LabelX lblTotalCommission;
             DevComponents.DotNetBar.LabelX lblTotalHandfee;
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceAssign));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelAssignBatch = new DevComponents.DotNetBar.PanelEx();
             this.tbTotalHandfee = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbTotalCommission = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -258,6 +258,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // panelAssignBatch
             // 
+            this.panelAssignBatch.AutoScroll = true;
             this.panelAssignBatch.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelAssignBatch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.panelAssignBatch.Controls.Add(this.tbTotalHandfee);
@@ -659,14 +660,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.colComment});
             this.dgvInvoices.ContextMenuStrip = this.cmuInvoiceAssign;
             this.dgvInvoices.DataSource = this.invoiceBindingSource;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
@@ -691,18 +692,18 @@ namespace CMBC.EasyFactor.ARMgr
             // colInvoiceAmount
             // 
             this.colInvoiceAmount.DataPropertyName = "InvoiceAmount";
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colInvoiceAmount.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colInvoiceAmount.DefaultCellStyle = dataGridViewCellStyle5;
             this.colInvoiceAmount.HeaderText = "票面金额";
             this.colInvoiceAmount.Name = "colInvoiceAmount";
             // 
             // colAssignAmount
             // 
             this.colAssignAmount.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle6;
             this.colAssignAmount.HeaderText = "转让金额";
             this.colAssignAmount.Name = "colAssignAmount";
             // 
@@ -723,8 +724,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colCommission
             // 
             this.colCommission.DataPropertyName = "Commission";
-            dataGridViewCellStyle3.Format = "N2";
-            this.colCommission.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Format = "N2";
+            this.colCommission.DefaultCellStyle = dataGridViewCellStyle7;
             this.colCommission.HeaderText = "手续费";
             this.colCommission.Name = "colCommission";
             // 
