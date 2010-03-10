@@ -1081,9 +1081,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void StatDepartment(object sender, EventArgs e)
         {
-            //DepartmentMgr mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.DEPARTMENT_STAT);
-            DepartmentStat stat = new DepartmentStat();
-            this.SetDetailPanel(stat);
+            DepartmentMgr mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.DEPARTMENT_STAT);
+            this.SetDetailPanel(mgr);
         }
 
         /// <summary>
