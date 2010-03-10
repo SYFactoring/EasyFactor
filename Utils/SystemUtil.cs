@@ -38,8 +38,9 @@ namespace CMBC.EasyFactor.Utils
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception e1)
                 {
+                    sb.AppendLine(e1.Message);
                     return sb.ToString();
                 }
             }

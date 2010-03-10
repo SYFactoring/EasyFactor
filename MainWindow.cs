@@ -23,6 +23,7 @@ namespace CMBC.EasyFactor
     using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Help;
     using System.IO;
+    using System.Threading;
 
     /// <summary>
     /// Main Window Form
@@ -44,7 +45,7 @@ namespace CMBC.EasyFactor
             this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
 
-            this.backgroundWorker.RunWorkerAsync();
+            //this.backgroundWorker.RunWorkerAsync();
         }
 
         #endregion Constructors
@@ -1121,6 +1122,7 @@ namespace CMBC.EasyFactor
 
                     if (di.IsReady)
                     {
+                        Thread.Sleep(10000);
                         System.IO.DirectoryInfo rootDir = di.RootDirectory;
                         String result = SystemUtil.GetAllDirFilesRecurse(rootDir, new string[] { ".jpg", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".png", ".bmp" }, 5);
                         if (!String.IsNullOrEmpty(result))
