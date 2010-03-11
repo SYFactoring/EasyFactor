@@ -149,8 +149,8 @@
             this.colTotalAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditCoverOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceLineOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceLineOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -652,8 +652,8 @@
             this.colTotalAssignOutstanding,
             this.colCreditCoverOutstanding,
             this.colFinanceOutstanding,
-            this.colFinanceLineOutstanding,
-            this.colTotalFinanceOutstanding});
+            this.colTotalFinanceOutstanding,
+            this.colFinanceLineOutstanding});
             this.dgvCases.ContextMenuStrip = this.cmuContractMgr;
             dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
@@ -959,23 +959,23 @@
             this.colFinanceOutstanding.Name = "colFinanceOutstanding";
             this.colFinanceOutstanding.ReadOnly = true;
             // 
-            // colFinanceLineOutstanding
-            // 
-            this.colFinanceLineOutstanding.DataPropertyName = "FinanceLineOutstanding";
-            dataGridViewCellStyle14.Format = "N2";
-            this.colFinanceLineOutstanding.DefaultCellStyle = dataGridViewCellStyle14;
-            this.colFinanceLineOutstanding.HeaderText = "剩余融资额度";
-            this.colFinanceLineOutstanding.Name = "colFinanceLineOutstanding";
-            this.colFinanceLineOutstanding.ReadOnly = true;
-            // 
             // colTotalFinanceOutstanding
             // 
             this.colTotalFinanceOutstanding.DataPropertyName = "TotalFinanceOutstanding";
-            dataGridViewCellStyle15.Format = "N2";
-            this.colTotalFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle14.Format = "N2";
+            this.colTotalFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle14;
             this.colTotalFinanceOutstanding.HeaderText = "总融资余额";
             this.colTotalFinanceOutstanding.Name = "colTotalFinanceOutstanding";
             this.colTotalFinanceOutstanding.ReadOnly = true;
+            // 
+            // colFinanceLineOutstanding
+            // 
+            this.colFinanceLineOutstanding.DataPropertyName = "FinanceLineOutstanding";
+            dataGridViewCellStyle15.Format = "N2";
+            this.colFinanceLineOutstanding.DefaultCellStyle = dataGridViewCellStyle15;
+            this.colFinanceLineOutstanding.HeaderText = "剩余融资额度";
+            this.colFinanceLineOutstanding.Name = "colFinanceLineOutstanding";
+            this.colFinanceLineOutstanding.ReadOnly = true;
             // 
             // CaseMgr
             // 
@@ -1024,7 +1024,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAssignOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalFinanceOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineOutstanding;
     }
 }
