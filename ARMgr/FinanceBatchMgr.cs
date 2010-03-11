@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.Utils;
     using System.Data.Linq;
     using DevComponents.DotNetBar;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -219,11 +220,20 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (selectedBatch.Invoices.Count > 0)
+            List<Invoice> invoiceList = selectedBatch.Invoices.ToList();
+            foreach (Invoice invoice in invoiceList)
             {
-                MessageBoxEx.Show("不能删除此批次，它包含相关发票信息", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                invoice.FinanceAmount = null;
+                invoice.FinanceDate = null;
+                invoice.FinanceDueDate = null;
+                invoice.InvoiceFinanceBatch = null;
             }
+
+            //if (selectedBatch.Invoices.Count > 0)
+            //{
+            //    MessageBoxEx.Show("不能删除此批次，它包含相关发票信息", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    return;
+            //}
 
             context.InvoiceFinanceBatches.DeleteOnSubmit(selectedBatch);
             try

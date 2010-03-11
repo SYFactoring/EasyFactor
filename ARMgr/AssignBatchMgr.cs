@@ -230,11 +230,19 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (selectedBatch.Invoices.Count > 0)
-            {
-                MessageBoxEx.Show("不能删除此批次，它包含相关发票信息", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            //if (selectedBatch.Invoices.Count > 0)
+            //{
+            //    MessageBoxEx.Show("不能删除此批次，它包含相关发票信息", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    return;
+            //}
+
+            //foreach (Invoice invoice in selectedBatch.Invoices)
+            //{
+            //    context.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
+            //    context.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
+            //}
+
+            //context.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
 
             context.InvoiceAssignBatches.DeleteOnSubmit(selectedBatch);
             try
@@ -566,6 +574,11 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
+                sheet.PageSetup.Zoom = false;
+                sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
+                sheet.PageSetup.FitToPagesWide = 1;
+                sheet.PageSetup.FitToPagesTall = false;
+
                 string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
 
