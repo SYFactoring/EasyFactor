@@ -372,6 +372,11 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
+                sheet.PageSetup.Zoom = false;
+                sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
+                sheet.PageSetup.FitToPagesWide = 1;
+                sheet.PageSetup.FitToPagesTall = false;
+
                 string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
@@ -735,6 +740,10 @@ namespace CMBC.EasyFactor.ARMgr
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
             try
             {
+                sheet.PageSetup.Zoom = false;
+                sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
+                sheet.PageSetup.FitToPagesWide = 1;
+                sheet.PageSetup.FitToPagesTall = false;
 
                 string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
@@ -875,6 +884,11 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
+                sheet.PageSetup.Zoom = false;
+                sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
+                sheet.PageSetup.FitToPagesWide = 1;
+                sheet.PageSetup.FitToPagesTall = false;
+
                 string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 200, 3, 180, 30);
 
@@ -1049,6 +1063,11 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
+                sheet.PageSetup.Zoom = false;
+                sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
+                sheet.PageSetup.FitToPagesWide = 1;
+                sheet.PageSetup.FitToPagesTall = false;
+
                 string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 240, 3, 170, 30);
 
