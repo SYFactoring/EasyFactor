@@ -158,7 +158,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.factorNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelInvoiceMgr = new DevComponents.DotNetBar.PanelEx();
-            this.tbSellerAssignOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbTotalAssignOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbTotalFinanceOustanding = new DevComponents.DotNetBar.Controls.TextBoxX();
             priceLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
@@ -689,7 +689,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBuyer.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelBuyer.CollapseDirection = DevComponents.DotNetBar.eCollapseDirection.RightToLeft;
             this.panelBuyer.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelBuyer.Controls.Add(this.tbSellerAssignOutstanding);
+            this.panelBuyer.Controls.Add(this.tbTotalAssignOutstanding);
             this.panelBuyer.Controls.Add(lblSellerAssignOutstanding);
             this.panelBuyer.Controls.Add(this.tbAROutstanding);
             this.panelBuyer.Controls.Add(creditCoverCurrLabel);
@@ -1188,12 +1188,12 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            this.tbSellerAssignOutstanding.Border.Class = "TextBoxBorder";
-            this.tbSellerAssignOutstanding.Location = new System.Drawing.Point(92, 113);
-            this.tbSellerAssignOutstanding.Name = "tbSellerAssignOutstanding";
-            this.tbSellerAssignOutstanding.ReadOnly = true;
-            this.tbSellerAssignOutstanding.Size = new System.Drawing.Size(100, 20);
-            this.tbSellerAssignOutstanding.TabIndex = 10;
+            this.tbTotalAssignOutstanding.Border.Class = "TextBoxBorder";
+            this.tbTotalAssignOutstanding.Location = new System.Drawing.Point(92, 113);
+            this.tbTotalAssignOutstanding.Name = "tbSellerAssignOutstanding";
+            this.tbTotalAssignOutstanding.ReadOnly = true;
+            this.tbTotalAssignOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbTotalAssignOutstanding.TabIndex = 10;
             // 
             // lblSellerAssignOutstanding
             // 
@@ -1256,7 +1256,7 @@ namespace CMBC.EasyFactor.ARMgr
         }
         #endregion
 
-        private DevComponents.DotNetBar.Controls.TextBoxX tbSellerAssignOutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalAssignOutstanding;
         private DevComponents.DotNetBar.Controls.TextBoxX tbTotalFinanceOustanding;
     }
 }

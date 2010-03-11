@@ -274,7 +274,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.buyerEDICodeTextBox.Text = this.Case.BuyerCode;
             this.tbNetPaymentTerm.Text = String.Format("{0:G}", this.Case.NetPaymentTerm);
             this.buyerNameTextBox.Text = this.Case.BuyerClient == null ? string.Empty : this.Case.BuyerClient.ToString();
-            this.tbSellerAssignOutstanding.Text = String.Format("{0:N2}", this.Case.SellerClient.GetAssignOutstanding(this.Case.InvoiceCurrency));
+            this.tbTotalAssignOutstanding.Text = String.Format("{0:N2}", this.Case.TotalAssignOutstanding);
+            this.tbTotalFinanceOustanding.Text = String.Format("{0:N2}", this.Case.TotalFinanceOutstanding);
 
             switch (this.Case.TransactionType)
             {
@@ -285,16 +286,15 @@ namespace CMBC.EasyFactor.ARMgr
                 case "租赁保理":
                     this.factorCodeTextBox.Text = this.Case.BuyerFactor.FactorCode;
                     this.factorNameTextBox.Text = this.Case.BuyerFactor.ToString();
-                    this.tbTotalFinanceOustanding.Text = String.Format("{0:N2}", this.Case.SellerClient.GetFinanceOutstanding(this.Case.InvoiceCurrency));
                     break;
                 case "国内买方保理":
                 case "进口保理":
                     this.factorCodeTextBox.Text = this.Case.SellerFactor.FactorCode;
                     this.factorNameTextBox.Text = this.Case.SellerFactor.ToString();
-                    this.tbTotalFinanceOustanding.Text = String.Format("{0:N2}", this.Case.BuyerClient.GetFinanceOutstanding(this.Case.InvoiceCurrency));
                     break;
                 default: break;
             }
+
 
             CDA cda = this.Case.ActiveCDA;
             if (cda != null)

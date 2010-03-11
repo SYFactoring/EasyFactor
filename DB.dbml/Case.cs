@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Case
     {
-        #region Properties (15)
+        #region Properties (16)
 
         /// <summary>
         /// Gets 
@@ -306,6 +306,17 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double TotalAssignOutstanding
+        {
+            get
+            {
+                return this.SellerClient.GetAssignOutstanding(this.InvoiceCurrency);
             }
         }
 

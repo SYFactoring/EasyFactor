@@ -75,7 +75,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -89,6 +89,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblLocation = new DevComponents.DotNetBar.LabelX();
@@ -115,6 +116,15 @@
             this.cbOwnerDepts = new DevComponents.DotNetBar.Controls.ComboTree();
             this.lblOnwerDept = new DevComponents.DotNetBar.LabelX();
             this.dgvCases = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuContractMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCaseSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCaseNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemLegerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -136,19 +146,11 @@
             this.colMarginIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditCoverOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceLineOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuContractMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCaseSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCaseNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemLegerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -205,7 +207,7 @@
             this.cbLocation.FormattingEnabled = true;
             this.cbLocation.ItemHeight = 14;
             this.cbLocation.Items.AddRange(new object[] {
-                "全部",
+            "全部",
             "北京",
             "广州",
             "上海",
@@ -647,19 +649,20 @@
             this.colMarginIncome,
             this.colTotalIncome,
             this.colAssignOutstanding,
+            this.colTotalAssignOutstanding,
             this.colCreditCoverOutstanding,
             this.colFinanceOutstanding,
             this.colFinanceLineOutstanding,
             this.colTotalFinanceOutstanding});
             this.dgvCases.ContextMenuStrip = this.cmuContractMgr;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCases.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCases.DefaultCellStyle = dataGridViewCellStyle16;
             this.dgvCases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCases.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCases.Location = new System.Drawing.Point(0, 85);
@@ -671,6 +674,72 @@
             this.dgvCases.TabIndex = 1;
             this.dgvCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvCases.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCases_RowPostPaint);
+            // 
+            // cmuContractMgr
+            // 
+            this.cmuContractMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCaseSelect,
+            this.menuItemCaseDetail,
+            this.toolStripSeparator,
+            this.menuItemCaseNew,
+            this.menuItemCreditCoverNegNew,
+            this.menuItemCaseDelete,
+            this.toolStripSeparator1,
+            this.menuItemLegerReport});
+            this.cmuContractMgr.Name = "cmuContractMgr";
+            this.cmuContractMgr.Size = new System.Drawing.Size(147, 148);
+            // 
+            // menuItemCaseSelect
+            // 
+            this.menuItemCaseSelect.Name = "menuItemCaseSelect";
+            this.menuItemCaseSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseSelect.Text = "选定案件";
+            this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
+            // 
+            // menuItemCaseDetail
+            // 
+            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDetail.Text = "详细信息";
+            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            // 
+            // menuItemCaseNew
+            // 
+            this.menuItemCaseNew.Name = "menuItemCaseNew";
+            this.menuItemCaseNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseNew.Text = "新建案件";
+            this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
+            // 
+            // menuItemCreditCoverNegNew
+            // 
+            this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
+            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverNegNew.Text = "新建额度申请";
+            this.menuItemCreditCoverNegNew.Click += new System.EventHandler(this.NewCreditCoverNeg);
+            // 
+            // menuItemCaseDelete
+            // 
+            this.menuItemCaseDelete.Name = "menuItemCaseDelete";
+            this.menuItemCaseDelete.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDelete.Text = "删除案件";
+            this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            // 
+            // menuItemLegerReport
+            // 
+            this.menuItemLegerReport.Name = "menuItemLegerReport";
+            this.menuItemLegerReport.Size = new System.Drawing.Size(146, 22);
+            this.menuItemLegerReport.Text = "导出台帐";
+            this.menuItemLegerReport.Click += new System.EventHandler(this.ReportLeger);
             // 
             // colCaseCode
             // 
@@ -861,11 +930,21 @@
             this.colAssignOutstanding.Name = "colAssignOutstanding";
             this.colAssignOutstanding.ReadOnly = true;
             // 
+            // colTotalAssignOutstanding
+            // 
+            this.colTotalAssignOutstanding.DataPropertyName = "TotalAssignOutstanding";
+            dataGridViewCellStyle11.Format = "N2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.colTotalAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle11;
+            this.colTotalAssignOutstanding.HeaderText = "总帐款余额";
+            this.colTotalAssignOutstanding.Name = "colTotalAssignOutstanding";
+            this.colTotalAssignOutstanding.ReadOnly = true;
+            // 
             // colCreditCoverOutstanding
             // 
             this.colCreditCoverOutstanding.DataPropertyName = "CreditCoverOutstanding";
-            dataGridViewCellStyle11.Format = "N2";
-            this.colCreditCoverOutstanding.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle12.Format = "N2";
+            this.colCreditCoverOutstanding.DefaultCellStyle = dataGridViewCellStyle12;
             this.colCreditCoverOutstanding.HeaderText = "剩余信用风险额度";
             this.colCreditCoverOutstanding.Name = "colCreditCoverOutstanding";
             this.colCreditCoverOutstanding.ReadOnly = true;
@@ -873,9 +952,9 @@
             // colFinanceOutstanding
             // 
             this.colFinanceOutstanding.DataPropertyName = "FinanceOutstanding";
-            dataGridViewCellStyle12.Format = "N2";
-            dataGridViewCellStyle12.NullValue = null;
-            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle13.Format = "N2";
+            dataGridViewCellStyle13.NullValue = null;
+            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle13;
             this.colFinanceOutstanding.HeaderText = "融资余额";
             this.colFinanceOutstanding.Name = "colFinanceOutstanding";
             this.colFinanceOutstanding.ReadOnly = true;
@@ -883,8 +962,8 @@
             // colFinanceLineOutstanding
             // 
             this.colFinanceLineOutstanding.DataPropertyName = "FinanceLineOutstanding";
-            dataGridViewCellStyle13.Format = "N2";
-            this.colFinanceLineOutstanding.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle14.Format = "N2";
+            this.colFinanceLineOutstanding.DefaultCellStyle = dataGridViewCellStyle14;
             this.colFinanceLineOutstanding.HeaderText = "剩余融资额度";
             this.colFinanceLineOutstanding.Name = "colFinanceLineOutstanding";
             this.colFinanceLineOutstanding.ReadOnly = true;
@@ -892,77 +971,11 @@
             // colTotalFinanceOutstanding
             // 
             this.colTotalFinanceOutstanding.DataPropertyName = "TotalFinanceOutstanding";
-            dataGridViewCellStyle14.Format = "N2";
-            this.colTotalFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle15.Format = "N2";
+            this.colTotalFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle15;
             this.colTotalFinanceOutstanding.HeaderText = "总融资余额";
             this.colTotalFinanceOutstanding.Name = "colTotalFinanceOutstanding";
             this.colTotalFinanceOutstanding.ReadOnly = true;
-            // 
-            // cmuContractMgr
-            // 
-            this.cmuContractMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemCaseSelect,
-            this.menuItemCaseDetail,
-            this.toolStripSeparator,
-            this.menuItemCaseNew,
-            this.menuItemCreditCoverNegNew,
-            this.menuItemCaseDelete,
-            this.toolStripSeparator1,
-            this.menuItemLegerReport});
-            this.cmuContractMgr.Name = "cmuContractMgr";
-            this.cmuContractMgr.Size = new System.Drawing.Size(147, 148);
-            // 
-            // menuItemCaseSelect
-            // 
-            this.menuItemCaseSelect.Name = "menuItemCaseSelect";
-            this.menuItemCaseSelect.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseSelect.Text = "选定案件";
-            this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
-            // 
-            // menuItemCaseDetail
-            // 
-            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseDetail.Text = "详细信息";
-            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
-            // 
-            // menuItemCaseNew
-            // 
-            this.menuItemCaseNew.Name = "menuItemCaseNew";
-            this.menuItemCaseNew.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseNew.Text = "新建案件";
-            this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
-            // 
-            // menuItemCreditCoverNegNew
-            // 
-            this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
-            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverNegNew.Text = "新建额度申请";
-            this.menuItemCreditCoverNegNew.Click += new System.EventHandler(this.NewCreditCoverNeg);
-            // 
-            // menuItemCaseDelete
-            // 
-            this.menuItemCaseDelete.Name = "menuItemCaseDelete";
-            this.menuItemCaseDelete.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseDelete.Text = "删除案件";
-            this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
-            // 
-            // menuItemLegerReport
-            // 
-            this.menuItemLegerReport.Name = "menuItemLegerReport";
-            this.menuItemLegerReport.Size = new System.Drawing.Size(146, 22);
-            this.menuItemLegerReport.Text = "导出台帐";
-            this.menuItemLegerReport.Click += new System.EventHandler(this.ReportLeger);
             // 
             // CaseMgr
             // 
@@ -985,6 +998,8 @@
 
         #endregion
 
+        private DevComponents.DotNetBar.LabelX lblLocation;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerClient;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactor;
@@ -1006,11 +1021,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAssignOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalFinanceOutstanding;
-        private DevComponents.DotNetBar.LabelX lblLocation;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
     }
 }
