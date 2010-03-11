@@ -316,7 +316,14 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.SellerClient.GetAssignOutstanding(this.InvoiceCurrency);
+                double result = 0;
+                var caseList = this.SellerClient.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.TransactionType == this.TransactionType);
+                foreach (Case c in caseList)
+                {
+                    result += c.AssignOutstanding;
+                }
+
+                return result;
             }
         }
 
