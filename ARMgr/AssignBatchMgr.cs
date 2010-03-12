@@ -994,8 +994,8 @@ namespace CMBC.EasyFactor.ARMgr
 
                 sheet.get_Range("A1", Type.Missing).ColumnWidth = 23;
                 sheet.get_Range("B1", Type.Missing).ColumnWidth = 23;
-                sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
-                sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
+                sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
+                sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("E1", Type.Missing).ColumnWidth = 23;
                 app.Visible = true;
             }
