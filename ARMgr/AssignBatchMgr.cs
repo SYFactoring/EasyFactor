@@ -236,14 +236,6 @@ namespace CMBC.EasyFactor.ARMgr
             //    return;
             //}
 
-            //foreach (Invoice invoice in selectedBatch.Invoices)
-            //{
-            //    context.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
-            //    context.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
-            //}
-
-            //context.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
-
             context.InvoiceAssignBatches.DeleteOnSubmit(selectedBatch);
             try
             {
@@ -680,7 +672,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("A4", "A4").Font.Size = 24;
 
                 sheet.get_Range("A1", Type.Missing).ColumnWidth = 17;
-                sheet.get_Range("B1", Type.Missing).ColumnWidth = 17;
+                sheet.get_Range("B1", Type.Missing).ColumnWidth = 20;
                 sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("E1", Type.Missing).ColumnWidth = 17;
