@@ -739,7 +739,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_OPName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Name="ManagerName", Storage="_OPName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string OPName
 		{
 			get
