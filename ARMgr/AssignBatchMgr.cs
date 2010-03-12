@@ -664,7 +664,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Cells[15, 3] = String.Format("复核：{0}", selectedBatch.CheckUserName);
                 sheet.Cells[15, 5] = "主管：";
                 sheet.Cells[17, 3] = "中国民生银行 贸易金融部保理业务部  （业务章）";
-                sheet.Cells[18, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+                sheet.Cells[18, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
                 sheet.get_Range("A1", Type.Missing).ColumnWidth = 23;
                 sheet.get_Range("B1", Type.Missing).ColumnWidth = 17;
