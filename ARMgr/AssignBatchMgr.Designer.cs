@@ -645,7 +645,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemFileCheckList.Name = "menuItemFileCheckList";
             this.menuItemFileCheckList.Size = new System.Drawing.Size(182, 22);
             this.menuItemFileCheckList.Text = "文件检查单";
-            this.menuItemFileCheckList.Click += new System.EventHandler(this.FileCheckList);
+            this.menuItemFileCheckList.Click += new System.EventHandler(this.ReportFileCheckList);
             // 
             // toolStripSeparator4
             // 

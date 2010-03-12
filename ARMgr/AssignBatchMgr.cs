@@ -23,7 +23,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class AssignBatchMgr : UserControl
     {
-        #region Fields (3)
+		#region Fields (3) 
 
         /// <summary>
         /// 
@@ -38,9 +38,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         /// <summary>
         ///
@@ -68,11 +68,11 @@ namespace CMBC.EasyFactor.ARMgr
             REPORT
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (3)
+		#region Constructors (3) 
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the AssignBatchMgr class
         /// </summary>
         /// <param name="createUserName"></param>
@@ -127,9 +127,9 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (3)
+		#region Properties (3) 
 
         /// <summary>
         /// 
@@ -158,11 +158,11 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (16)
+		#region Methods (16) 
 
-        // Private Methods (16) 
+		// Private Methods (16) 
 
         /// <summary>
         /// 
@@ -337,137 +337,6 @@ namespace CMBC.EasyFactor.ARMgr
 
             ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG09, selectedBatch.Invoices);
             form.Show();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FileCheckList(object sender, EventArgs e)
-        {
-            if (this.dgvBatches.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-
-            ApplicationClass app = new ApplicationClass() { Visible = false };
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
-
-            try
-            {
-                sheet.PageSetup.Zoom = false;
-                sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
-                sheet.PageSetup.FitToPagesWide = 1;
-                sheet.PageSetup.FitToPagesTall = false;
-
-                string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
-                sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
-
-                Client seller = selectedBatch.Case.SellerClient;
-                Client buyer = selectedBatch.Case.BuyerClient;
-
-                sheet.get_Range("A3", "D3").MergeCells = true;
-                sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.Cells[3, 1] = "文件检查单";
-
-                sheet.get_Range(sheet.Cells[5, 1], sheet.Cells[5, 2]).MergeCells = true;
-                sheet.Cells[5, 1] = String.Format("卖方：{0}", seller.ToString());
-                sheet.get_Range(sheet.Cells[5, 3], sheet.Cells[5, 4]).MergeCells = true;
-                sheet.Cells[5, 3] = String.Format("No. of Invoice(s) attached: {0}", selectedBatch.BatchCount);
-
-                sheet.Cells[7, 1] = "Inv. No. List:";
-
-                int row = 8;
-                DateTime dueDate = DateTime.MaxValue;
-                for (int i = 0; i < selectedBatch.Invoices.Count; i++)
-                {
-                    if (i != 0 && i % 4 == 0)
-                    {
-                        row++;
-                    }
-                    Invoice invoice = selectedBatch.Invoices[i];
-                    sheet.Cells[row, i % 4 + 1] = "'" + invoice.InvoiceNo;
-                    if (invoice.DueDate != null && invoice.DueDate < dueDate)
-                    {
-                        dueDate = invoice.DueDate.Value;
-                    }
-                }
-
-                sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[row, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[row, 4]).Borders.LineStyle = 1;
-
-                row++;
-                row++;
-
-                sheet.Cells[row++, 1] = String.Format("买方：{0}", buyer.ToString());
-                sheet.Cells[row++, 1] = String.Format("No. of Credit Note(s) attached: {0}", 0);
-                sheet.Cells[row++, 1] = String.Format("Earliest due date:   {0:yyyy-MM-dd}", dueDate);
-                row++;
-                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row++, 1] = " □  第一次转让：通知函";
-                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row++, 1] = " □  应收帐款转让通知书(须检附正本)";
-                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row++, 1] = " □  发票复印件(第一联)";
-                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row++, 1] = " □  出货单复印件(或签收单复印件)";
-                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).RowHeight = 30;
-                sheet.Cells[row++, 1] = " □  资料一致性：买卖方基本资料，发票上盖转让字句(复印件)，发票号码，发票金额，" + Environment.NewLine +
-                                        "发票日，到期日，批复书其它相关条件。";
-                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row++, 1] = " □  保理额度通知书(Sign Back/ Expiry date)";
-                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row++, 1] = " □  合约书(Sign Back/ Expiry date)";
-                row++;
-                sheet.Cells[row++, 1] = "Discrepancies  □ Yes   □ No";
-
-                row += 10;
-                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row, 1] = String.Format("运营组： 经办 {0}               复核 {1}              主管{2}", selectedBatch.CreateUserName, selectedBatch.CheckUserName, "");
-
-                sheet.get_Range("A1", "A2").RowHeight = 20;
-                sheet.get_Range("A3", "A3").RowHeight = 30;
-                sheet.get_Range("A3", "A3").Font.Size = 22;
-
-                sheet.get_Range("A1", Type.Missing).ColumnWidth = 20;
-                sheet.get_Range("B1", Type.Missing).ColumnWidth = 20;
-                sheet.get_Range("C1", Type.Missing).ColumnWidth = 20;
-                sheet.get_Range("D1", Type.Missing).ColumnWidth = 20;
-                app.Visible = true;
-            }
-            catch (Exception e1)
-            {
-                if (sheet != null)
-                {
-                    Marshal.ReleaseComObject(sheet);
-                    sheet = null;
-                }
-
-                if (app != null)
-                {
-                    foreach (Workbook wb in app.Workbooks)
-                    {
-                        wb.Close(false, Type.Missing, Type.Missing);
-                    }
-
-                    app.Workbooks.Close();
-                    app.Quit();
-                    Marshal.ReleaseComObject(app);
-                    app = null;
-                }
-
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
         }
 
         /// <summary>
@@ -674,7 +543,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("B1", Type.Missing).ColumnWidth = 23;
                 sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
                 sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
-                sheet.get_Range("E1", Type.Missing).ColumnWidth = 15;
+                sheet.get_Range("E1", Type.Missing).ColumnWidth = 17;
                 app.Visible = true;
             }
             catch (Exception e1)
@@ -818,6 +687,137 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("D11", "E11").NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
                 sheet.get_Range("E13", "E13").NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
 
+                app.Visible = true;
+            }
+            catch (Exception e1)
+            {
+                if (sheet != null)
+                {
+                    Marshal.ReleaseComObject(sheet);
+                    sheet = null;
+                }
+
+                if (app != null)
+                {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+
+                    app.Workbooks.Close();
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                    app = null;
+                }
+
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReportFileCheckList(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+            if (app == null)
+            {
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            try
+            {
+                sheet.PageSetup.Zoom = false;
+                sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
+                sheet.PageSetup.FitToPagesWide = 1;
+                sheet.PageSetup.FitToPagesTall = false;
+
+                string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
+                sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
+
+                Client seller = selectedBatch.Case.SellerClient;
+                Client buyer = selectedBatch.Case.BuyerClient;
+
+                sheet.get_Range("A3", "D3").MergeCells = true;
+                sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                sheet.Cells[3, 1] = "文件检查单";
+
+                sheet.get_Range(sheet.Cells[5, 1], sheet.Cells[5, 2]).MergeCells = true;
+                sheet.Cells[5, 1] = String.Format("卖方：{0}", seller.ToString());
+                sheet.get_Range(sheet.Cells[5, 3], sheet.Cells[5, 4]).MergeCells = true;
+                sheet.Cells[5, 3] = String.Format("No. of Invoice(s) attached: {0}", selectedBatch.BatchCount);
+
+                sheet.Cells[7, 1] = "Inv. No. List:";
+
+                int row = 8;
+                DateTime dueDate = DateTime.MaxValue;
+                for (int i = 0; i < selectedBatch.Invoices.Count; i++)
+                {
+                    if (i != 0 && i % 4 == 0)
+                    {
+                        row++;
+                    }
+                    Invoice invoice = selectedBatch.Invoices[i];
+                    sheet.Cells[row, i % 4 + 1] = "'" + invoice.InvoiceNo;
+                    if (invoice.DueDate != null && invoice.DueDate < dueDate)
+                    {
+                        dueDate = invoice.DueDate.Value;
+                    }
+                }
+
+                sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[row, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[row, 4]).Borders.LineStyle = 1;
+
+                row++;
+                row++;
+
+                sheet.Cells[row++, 1] = String.Format("买方：{0}", buyer.ToString());
+                sheet.Cells[row++, 1] = String.Format("No. of Credit Note(s) attached: {0}", 0);
+                sheet.Cells[row++, 1] = String.Format("Earliest due date:   {0:yyyy-MM-dd}", dueDate);
+                row++;
+                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
+                sheet.Cells[row++, 1] = " □  第一次转让：通知函";
+                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
+                sheet.Cells[row++, 1] = " □  应收帐款转让通知书(须检附正本)";
+                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
+                sheet.Cells[row++, 1] = " □  发票复印件(第一联)";
+                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
+                sheet.Cells[row++, 1] = " □  出货单复印件(或签收单复印件)";
+                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
+                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).RowHeight = 30;
+                sheet.Cells[row++, 1] = " □  资料一致性：买卖方基本资料，发票上盖转让字句(复印件)，发票号码，发票金额，" + Environment.NewLine +
+                                        "发票日，到期日，批复书其它相关条件。";
+                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
+                sheet.Cells[row++, 1] = " □  保理额度通知书(Sign Back/ Expiry date)";
+                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
+                sheet.Cells[row++, 1] = " □  合约书(Sign Back/ Expiry date)";
+                row++;
+                sheet.Cells[row++, 1] = "Discrepancies  □ Yes   □ No";
+
+                row += 10;
+                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
+                sheet.Cells[row, 1] = String.Format("运营组： 经办 {0}               复核 {1}              主管{2}", selectedBatch.CreateUserName, selectedBatch.CheckUserName, "");
+
+                sheet.get_Range("A1", "A2").RowHeight = 20;
+                sheet.get_Range("A3", "A3").RowHeight = 30;
+                sheet.get_Range("A3", "A3").Font.Size = 22;
+
+                sheet.get_Range("A1", Type.Missing).ColumnWidth = 20;
+                sheet.get_Range("B1", Type.Missing).ColumnWidth = 20;
+                sheet.get_Range("C1", Type.Missing).ColumnWidth = 20;
+                sheet.get_Range("D1", Type.Missing).ColumnWidth = 20;
                 app.Visible = true;
             }
             catch (Exception e1)
@@ -1257,6 +1257,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }
