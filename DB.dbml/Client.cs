@@ -7,10 +7,12 @@
 namespace CMBC.EasyFactor.DB.dbml
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Linq;
     using System.Linq;
     using System.Text.RegularExpressions;
     using CMBC.EasyFactor.Utils;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
@@ -26,7 +28,20 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "买方信用风险担保额度");
+                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "买方信用风险担保额度").ToList();
+                if (creditLines.Count > 1)
+                {
+                    MessageBoxEx.Show("包含多个有效的买方信用风险担保额度，客户编号: " + this.ClientEDICode, ConstStr.MESSAGE.TITLE_WARNING);
+                    return null;
+                }
+                else if (creditLines.Count == 1)
+                {
+                    return creditLines[0];
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -54,7 +69,20 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.Contracts.SingleOrDefault(c => c.ContractStatus == ConstStr.CONTRACT.AVAILABILITY);
+                IList<Contract> contractList = this.Contracts.Where(c => c.ContractStatus == ConstStr.CONTRACT.AVAILABILITY).ToList();
+                if (contractList.Count > 1)
+                {
+                    MessageBoxEx.Show("包含多个有效的主合同，客户编号: " + this.ClientEDICode, ConstStr.MESSAGE.TITLE_WARNING);
+                    return null;
+                }
+                else if (contractList.Count == 1)
+                {
+                    return contractList[0];
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -63,9 +91,23 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public ClientCreditLine FinanceCreditLine
         {
+
             get
             {
-                return this.ClientCreditLines.SingleOrDefault(c => c.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "保理预付款融资额度");
+                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "保理预付款融资额度").ToList();
+                if (creditLines.Count > 1)
+                {
+                    MessageBoxEx.Show("包含多个有效的保理预付款融资额度，客户编号: " + this.ClientEDICode, ConstStr.MESSAGE.TITLE_WARNING);
+                    return null;
+                }
+                else if (creditLines.Count == 1)
+                {
+                    return creditLines[0];
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 

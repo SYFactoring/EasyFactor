@@ -26,14 +26,19 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (this.CDAs.Count(c => c.CDAStatus == ConstStr.CDA.CHECKED) > 1)
+                IList<CDA> cdaList = this.CDAs.Where(c => c.CDAStatus == ConstStr.CDA.CHECKED).ToList();
+                if (cdaList.Count > 1)
                 {
                     MessageBoxEx.Show("包含多个有效的CDA，案件编号: " + this.CaseCode, ConstStr.MESSAGE.TITLE_WARNING);
                     return null;
                 }
+                else if (cdaList.Count == 1)
+                {
+                    return cdaList[0];
+                }
                 else
                 {
-                    return this.CDAs.SingleOrDefault(c => c.CDAStatus == ConstStr.CDA.CHECKED);
+                    return null;
                 }
             }
         }

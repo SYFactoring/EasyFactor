@@ -23,7 +23,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
         private double? _paymentAmount2;
         private double? _refundAmount2;
-        private static Regex InvoiceNoRegex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>]+$");
+        private static Regex InvoiceNoRegex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>\\.]+$");
 
         #endregion Fields
 
