@@ -98,7 +98,7 @@
             this.colIFPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOwnerDept = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colManagerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOPName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuCreditCoverMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemCreditCoverSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
@@ -534,7 +534,7 @@
             this.colIFPrice,
             this.colOwnerDept,
             this.colCreateUserName,
-            this.colManagerName});
+            this.colOPName});
             this.dgvCreditCoverNegs.ContextMenuStrip = this.cmuCreditCoverMgr;
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
@@ -693,12 +693,12 @@
             this.colCreateUserName.ReadOnly = true;
             this.colCreateUserName.Width = 50;
             // 
-            // colManagerName
+            // colOPName
             // 
-            this.colManagerName.DataPropertyName = "ManagerName";
-            this.colManagerName.HeaderText = "营销/维护经理";
-            this.colManagerName.Name = "colManagerName";
-            this.colManagerName.ReadOnly = true;
+            this.colOPName.DataPropertyName = "OPName";
+            this.colOPName.HeaderText = "OP人员";
+            this.colOPName.Name = "colOPName";
+            this.colOPName.ReadOnly = true;
             // 
             // cmuCreditCoverMgr
             // 
@@ -799,7 +799,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colManagerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOPName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
         private DevComponents.DotNetBar.LabelX lblCreateUserName;
 

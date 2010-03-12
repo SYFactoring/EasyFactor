@@ -24,7 +24,7 @@
         private DevComponents.DotNetBar.LabelX lblCaseMark;
         private DevComponents.DotNetBar.LabelX lblClientName;
         private DevComponents.DotNetBar.LabelX lblCount;
-        private DevComponents.DotNetBar.LabelX lblCreateUserName;
+        private DevComponents.DotNetBar.LabelX lblOPName;
         private DevComponents.DotNetBar.LabelX lblCurrency;
         private DevComponents.DotNetBar.LabelX lblDate;
         private DevComponents.DotNetBar.LabelX lblOnwerDept;
@@ -38,7 +38,7 @@
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbOPName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
@@ -93,8 +93,8 @@
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblLocation = new DevComponents.DotNetBar.LabelX();
-            this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
+            this.tbOPName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblOPName = new DevComponents.DotNetBar.LabelX();
             this.cbCaseMark = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblCaseMark = new DevComponents.DotNetBar.LabelX();
             this.cbIsContractSigned = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -134,10 +134,9 @@
             this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperationType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOwnerDept = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCoDept = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAppDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOPName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -164,8 +163,8 @@
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.panelQuery.Controls.Add(this.cbLocation);
             this.panelQuery.Controls.Add(this.lblLocation);
-            this.panelQuery.Controls.Add(this.tbCreateUserName);
-            this.panelQuery.Controls.Add(this.lblCreateUserName);
+            this.panelQuery.Controls.Add(this.tbOPName);
+            this.panelQuery.Controls.Add(this.lblOPName);
             this.panelQuery.Controls.Add(this.cbCaseMark);
             this.panelQuery.Controls.Add(this.lblCaseMark);
             this.panelQuery.Controls.Add(this.cbIsContractSigned);
@@ -255,29 +254,29 @@
             this.lblLocation.TabIndex = 22;
             this.lblLocation.Text = "业务地区";
             // 
-            // tbCreateUserName
+            // tbOPName
             // 
             // 
             // 
             // 
-            this.tbCreateUserName.Border.Class = "TextBoxBorder";
-            this.tbCreateUserName.Location = new System.Drawing.Point(460, 6);
-            this.tbCreateUserName.Name = "tbCreateUserName";
-            this.tbCreateUserName.Size = new System.Drawing.Size(133, 20);
-            this.tbCreateUserName.TabIndex = 5;
+            this.tbOPName.Border.Class = "TextBoxBorder";
+            this.tbOPName.Location = new System.Drawing.Point(460, 6);
+            this.tbOPName.Name = "tbOPName";
+            this.tbOPName.Size = new System.Drawing.Size(133, 20);
+            this.tbOPName.TabIndex = 5;
             // 
-            // lblCreateUserName
+            // lblOPName
             // 
-            this.lblCreateUserName.AutoSize = true;
+            this.lblOPName.AutoSize = true;
             // 
             // 
             // 
-            this.lblCreateUserName.BackgroundStyle.Class = "";
-            this.lblCreateUserName.Location = new System.Drawing.Point(404, 9);
-            this.lblCreateUserName.Name = "lblCreateUserName";
-            this.lblCreateUserName.Size = new System.Drawing.Size(44, 16);
-            this.lblCreateUserName.TabIndex = 4;
-            this.lblCreateUserName.Text = "经办人";
+            this.lblOPName.BackgroundStyle.Class = "";
+            this.lblOPName.Location = new System.Drawing.Point(404, 9);
+            this.lblOPName.Name = "lblOPName";
+            this.lblOPName.Size = new System.Drawing.Size(47, 16);
+            this.lblOPName.TabIndex = 4;
+            this.lblOPName.Text = "OP人员";
             // 
             // cbCaseMark
             // 
@@ -637,10 +636,9 @@
             this.colTransactionType,
             this.colOperationType,
             this.colOwnerDept,
-            this.colCoDept,
             this.colAppDate,
             this.colCaseMark,
-            this.colCreateUserName,
+            this.colOPName,
             this.colAssignAmount,
             this.colFinanceAmount,
             this.colPaymentAmount,
@@ -813,14 +811,6 @@
             this.colOwnerDept.ReadOnly = true;
             this.colOwnerDept.Width = 104;
             // 
-            // colCoDept
-            // 
-            this.colCoDept.DataPropertyName = "CoDepartment";
-            this.colCoDept.HeaderText = "业务协作机构";
-            this.colCoDept.Name = "colCoDept";
-            this.colCoDept.ReadOnly = true;
-            this.colCoDept.Width = 104;
-            // 
             // colAppDate
             // 
             this.colAppDate.DataPropertyName = "CaseAppDate";
@@ -839,13 +829,13 @@
             this.colCaseMark.ReadOnly = true;
             this.colCaseMark.Width = 80;
             // 
-            // colCreateUserName
+            // colOPName
             // 
-            this.colCreateUserName.DataPropertyName = "CreateUserName";
-            this.colCreateUserName.HeaderText = "经办人";
-            this.colCreateUserName.Name = "colCreateUserName";
-            this.colCreateUserName.ReadOnly = true;
-            this.colCreateUserName.Width = 68;
+            this.colOPName.DataPropertyName = "OPName";
+            this.colOPName.HeaderText = "OP人员";
+            this.colOPName.Name = "colOPName";
+            this.colOPName.ReadOnly = true;
+            this.colOPName.Width = 68;
             // 
             // colAssignAmount
             // 
@@ -1009,10 +999,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperationType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCoDept;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAppDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCaseMark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOPName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;

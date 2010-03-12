@@ -65,11 +65,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public string ManagerName
+        public string OPName
         {
             get
             {
-                return this.Case.ManagerName;
+                return this.Case.OPName;
             }
         }
 

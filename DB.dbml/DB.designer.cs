@@ -370,7 +370,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
-		private string _ManagerName;
+		private string _OPName;
 		
 		private System.Nullable<int> _NetPaymentTerm;
 		
@@ -430,8 +430,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCaseMarkChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
-    partial void OnManagerNameChanging(string value);
-    partial void OnManagerNameChanged();
+    partial void OnOPNameChanging(string value);
+    partial void OnOPNameChanged();
     partial void OnNetPaymentTermChanging(System.Nullable<int> value);
     partial void OnNetPaymentTermChanged();
     partial void OnCommentChanging(string value);
@@ -739,22 +739,22 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ManagerName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string ManagerName
+		[Column(Storage="_OPName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string OPName
 		{
 			get
 			{
-				return this._ManagerName;
+				return this._OPName;
 			}
 			set
 			{
-				if ((this._ManagerName != value))
+				if ((this._OPName != value))
 				{
-					this.OnManagerNameChanging(value);
+					this.OnOPNameChanging(value);
 					this.SendPropertyChanging();
-					this._ManagerName = value;
-					this.SendPropertyChanged("ManagerName");
-					this.OnManagerNameChanged();
+					this._OPName = value;
+					this.SendPropertyChanged("OPName");
+					this.OnOPNameChanged();
 				}
 			}
 		}

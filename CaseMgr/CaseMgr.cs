@@ -86,7 +86,7 @@ namespace CMBC.EasyFactor.CaseMgr
             else if (opCaseType == OpCaseType.STAT)
             {
                 this.colAppDate.Visible = false;
-                this.colCreateUserName.Visible = false;
+                this.colOPName.Visible = false;
                 this.colAssignAmount.Visible = true;
                 this.colFinanceAmount.Visible = true;
                 this.colPaymentAmount.Visible = true;
@@ -316,7 +316,7 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
             DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
-            string createUserName = this.tbCreateUserName.Text;
+            string opName = this.tbOPName.Text;
             string location = this.cbLocation.Text;
 
             context = new DBDataContext();
@@ -330,7 +330,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                 && (endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
                                 && (c.CaseMark.Contains(this.cbCaseMark.Text))
-                                && c.CreateUserName.Contains(createUserName)
+                                && c.OPName.Contains(opName)
                                 && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.IsSigned == true))
                                 && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY))
                                 && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN.Contains(this.tbClientName.Text)
@@ -588,7 +588,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.diEnd.Value = default(DateTime);
             this.cbIsContractSigned.Checked = true;
             this.cbIsCDA.Checked = true;
-            this.tbCreateUserName.Text = string.Empty;
+            this.tbOPName.Text = string.Empty;
         }
 
         /// <summary>

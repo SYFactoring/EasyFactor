@@ -466,7 +466,7 @@ namespace CMBC.EasyFactor.Utils
                         caseList.Add(curCase);
 
                         int column = 2;
-                        curCase.ManagerName = String.Format("{0:G}", valueArray[row, column++]);
+                        curCase.OPName = String.Format("{0:G}", valueArray[row, column++]);
                         string ownerDeptName = String.Format("{0:G}", valueArray[row, column++]);
                         Department ownerDept = context.Departments.SingleOrDefault(d => d.DepartmentName == ownerDeptName);
                         if (ownerDept == null)
