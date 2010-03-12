@@ -375,10 +375,9 @@ namespace CMBC.EasyFactor.ARMgr
                 Client seller = selectedBatch.Case.SellerClient;
                 Client buyer = selectedBatch.Case.BuyerClient;
 
-                sheet.Cells[1, 1] = "文件检查单";
                 sheet.get_Range("A3", "D3").MergeCells = true;
                 sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.Cells[3, 1] = "CHECK LIST-- EF";
+                sheet.Cells[3, 1] = "文件检查单";
 
                 sheet.get_Range(sheet.Cells[5, 1], sheet.Cells[5, 2]).MergeCells = true;
                 sheet.Cells[5, 1] = String.Format("卖方：{0}", seller.ToString());
@@ -671,10 +670,10 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.UsedRange.Font.Size = 12;
                 sheet.get_Range("A4", "A4").Font.Size = 24;
 
-                sheet.get_Range("A1", Type.Missing).ColumnWidth = 17;
+                sheet.get_Range("A1", Type.Missing).ColumnWidth = 23;
                 sheet.get_Range("B1", Type.Missing).ColumnWidth = 23;
-                sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
-                sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
+                sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
+                sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
                 sheet.get_Range("E1", Type.Missing).ColumnWidth = 15;
                 app.Visible = true;
             }
@@ -798,7 +797,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Cells[17, 3] = "中国民生银行 贸易金融部保理业务部  （业务章）";
                 sheet.Cells[18, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
-                sheet.get_Range("A1", Type.Missing).ColumnWidth = 17;
+                sheet.get_Range("A1", Type.Missing).ColumnWidth = 23;
                 sheet.get_Range("B1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
@@ -993,11 +992,11 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range(sheet.Cells[3, 1], sheet.Cells[3, 1]).Font.Size = 24;
                 sheet.get_Range(sheet.Cells[3, 1], sheet.Cells[3, 5]).RowHeight = 30;
 
-                sheet.get_Range("A1", Type.Missing).ColumnWidth = 17;
-                sheet.get_Range("B1", Type.Missing).ColumnWidth = 17;
-                sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
-                sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
-                sheet.get_Range("E1", Type.Missing).ColumnWidth = 20;
+                sheet.get_Range("A1", Type.Missing).ColumnWidth = 23;
+                sheet.get_Range("B1", Type.Missing).ColumnWidth = 23;
+                sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
+                sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
+                sheet.get_Range("E1", Type.Missing).ColumnWidth = 23;
                 app.Visible = true;
             }
             catch (Exception e1)

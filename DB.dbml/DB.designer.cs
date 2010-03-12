@@ -5418,6 +5418,10 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Fax_2;
 		
+		private string _MarketManager;
+		
+		private string _MaintainManager;
+		
 		private EntitySet<Case> _CoCases;
 		
 		private EntitySet<Case> _OwnerCases;
@@ -5462,6 +5466,10 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnPhone_2Changed();
     partial void OnFax_2Changing(string value);
     partial void OnFax_2Changed();
+    partial void OnMarketManagerChanging(string value);
+    partial void OnMarketManagerChanged();
+    partial void OnMaintainManagerChanging(string value);
+    partial void OnMaintainManagerChanged();
     #endregion
 		
 		public Department()
@@ -5789,6 +5797,46 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Fax_2 = value;
 					this.SendPropertyChanged("Fax_2");
 					this.OnFax_2Changed();
+				}
+			}
+		}
+		
+		[Column(Storage="_MarketManager", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string MarketManager
+		{
+			get
+			{
+				return this._MarketManager;
+			}
+			set
+			{
+				if ((this._MarketManager != value))
+				{
+					this.OnMarketManagerChanging(value);
+					this.SendPropertyChanging();
+					this._MarketManager = value;
+					this.SendPropertyChanged("MarketManager");
+					this.OnMarketManagerChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_MaintainManager", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string MaintainManager
+		{
+			get
+			{
+				return this._MaintainManager;
+			}
+			set
+			{
+				if ((this._MaintainManager != value))
+				{
+					this.OnMaintainManagerChanging(value);
+					this.SendPropertyChanging();
+					this._MaintainManager = value;
+					this.SendPropertyChanged("MaintainManager");
+					this.OnMaintainManagerChanged();
 				}
 			}
 		}

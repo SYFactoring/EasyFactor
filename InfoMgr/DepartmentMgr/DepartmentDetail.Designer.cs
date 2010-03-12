@@ -82,6 +82,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             DevComponents.DotNetBar.LabelX postCodeLabel;
             DevComponents.DotNetBar.LabelX managerLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DepartmentDetail));
+            DevComponents.DotNetBar.LabelX lblMaintainManager;
+            DevComponents.DotNetBar.LabelX lblMarketManager;
             this.groupPanelDepartment = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.managerTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.departmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -108,6 +110,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.tbMaintainManager = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbMarketManager = new DevComponents.DotNetBar.Controls.TextBoxX();
             departmentCodeLabel = new DevComponents.DotNetBar.LabelX();
             departmentNameLabel = new DevComponents.DotNetBar.LabelX();
             domainLabel = new DevComponents.DotNetBar.LabelX();
@@ -123,6 +127,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             fax_2Label = new DevComponents.DotNetBar.LabelX();
             postCodeLabel = new DevComponents.DotNetBar.LabelX();
             managerLabel = new DevComponents.DotNetBar.LabelX();
+            lblMaintainManager = new DevComponents.DotNetBar.LabelX();
+            lblMarketManager = new DevComponents.DotNetBar.LabelX();
             this.groupPanelDepartment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.departmentBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -136,7 +142,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             departmentCodeLabel.BackgroundStyle.Class = "";
-            departmentCodeLabel.Location = new System.Drawing.Point(6, 7);
+            departmentCodeLabel.Location = new System.Drawing.Point(31, 7);
             departmentCodeLabel.Name = "departmentCodeLabel";
             departmentCodeLabel.Size = new System.Drawing.Size(57, 15);
             departmentCodeLabel.TabIndex = 0;
@@ -150,7 +156,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             departmentNameLabel.BackgroundStyle.Class = "";
-            departmentNameLabel.Location = new System.Drawing.Point(18, 29);
+            departmentNameLabel.Location = new System.Drawing.Point(43, 29);
             departmentNameLabel.Name = "departmentNameLabel";
             departmentNameLabel.Size = new System.Drawing.Size(45, 15);
             departmentNameLabel.TabIndex = 2;
@@ -164,7 +170,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             domainLabel.BackgroundStyle.Class = "";
-            domainLabel.Location = new System.Drawing.Point(234, 50);
+            domainLabel.Location = new System.Drawing.Point(291, 50);
             domainLabel.Name = "domainLabel";
             domainLabel.Size = new System.Drawing.Size(45, 15);
             domainLabel.TabIndex = 8;
@@ -178,7 +184,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             locationLabel.BackgroundStyle.Class = "";
-            locationLabel.Location = new System.Drawing.Point(29, 50);
+            locationLabel.Location = new System.Drawing.Point(54, 50);
             locationLabel.Name = "locationLabel";
             locationLabel.Size = new System.Drawing.Size(33, 15);
             locationLabel.TabIndex = 6;
@@ -192,7 +198,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             addressCNLabel.BackgroundStyle.Class = "";
-            addressCNLabel.Location = new System.Drawing.Point(33, 72);
+            addressCNLabel.Location = new System.Drawing.Point(58, 72);
             addressCNLabel.Name = "addressCNLabel";
             addressCNLabel.Size = new System.Drawing.Size(34, 16);
             addressCNLabel.TabIndex = 10;
@@ -206,7 +212,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             contact_1Label.BackgroundStyle.Class = "";
-            contact_1Label.Location = new System.Drawing.Point(15, 136);
+            contact_1Label.Location = new System.Drawing.Point(40, 136);
             contact_1Label.Name = "contact_1Label";
             contact_1Label.Size = new System.Drawing.Size(53, 16);
             contact_1Label.TabIndex = 15;
@@ -220,7 +226,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             contact_2Label.BackgroundStyle.Class = "";
-            contact_2Label.Location = new System.Drawing.Point(228, 136);
+            contact_2Label.Location = new System.Drawing.Point(285, 136);
             contact_2Label.Name = "contact_2Label";
             contact_2Label.Size = new System.Drawing.Size(53, 16);
             contact_2Label.TabIndex = 23;
@@ -234,7 +240,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             phone_1Label.BackgroundStyle.Class = "";
-            phone_1Label.Location = new System.Drawing.Point(33, 158);
+            phone_1Label.Location = new System.Drawing.Point(58, 158);
             phone_1Label.Name = "phone_1Label";
             phone_1Label.Size = new System.Drawing.Size(34, 16);
             phone_1Label.TabIndex = 17;
@@ -248,7 +254,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             phone_2Label.BackgroundStyle.Class = "";
-            phone_2Label.Location = new System.Drawing.Point(246, 158);
+            phone_2Label.Location = new System.Drawing.Point(303, 158);
             phone_2Label.Name = "phone_2Label";
             phone_2Label.Size = new System.Drawing.Size(34, 16);
             phone_2Label.TabIndex = 25;
@@ -262,7 +268,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             email_1Label.BackgroundStyle.Class = "";
-            email_1Label.Location = new System.Drawing.Point(29, 180);
+            email_1Label.Location = new System.Drawing.Point(54, 180);
             email_1Label.Name = "email_1Label";
             email_1Label.Size = new System.Drawing.Size(38, 16);
             email_1Label.TabIndex = 19;
@@ -276,7 +282,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             email_2Label.BackgroundStyle.Class = "";
-            email_2Label.Location = new System.Drawing.Point(242, 180);
+            email_2Label.Location = new System.Drawing.Point(299, 180);
             email_2Label.Name = "email_2Label";
             email_2Label.Size = new System.Drawing.Size(38, 16);
             email_2Label.TabIndex = 27;
@@ -290,7 +296,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             fax_1Label.BackgroundStyle.Class = "";
-            fax_1Label.Location = new System.Drawing.Point(38, 202);
+            fax_1Label.Location = new System.Drawing.Point(63, 202);
             fax_1Label.Name = "fax_1Label";
             fax_1Label.Size = new System.Drawing.Size(28, 16);
             fax_1Label.TabIndex = 21;
@@ -304,7 +310,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             fax_2Label.BackgroundStyle.Class = "";
-            fax_2Label.Location = new System.Drawing.Point(252, 202);
+            fax_2Label.Location = new System.Drawing.Point(309, 202);
             fax_2Label.Name = "fax_2Label";
             fax_2Label.Size = new System.Drawing.Size(28, 16);
             fax_2Label.TabIndex = 29;
@@ -318,7 +324,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             postCodeLabel.BackgroundStyle.Class = "";
-            postCodeLabel.Location = new System.Drawing.Point(33, 114);
+            postCodeLabel.Location = new System.Drawing.Point(58, 114);
             postCodeLabel.Name = "postCodeLabel";
             postCodeLabel.Size = new System.Drawing.Size(34, 16);
             postCodeLabel.TabIndex = 13;
@@ -332,7 +338,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             managerLabel.BackgroundStyle.Class = "";
-            managerLabel.Location = new System.Drawing.Point(234, 28);
+            managerLabel.Location = new System.Drawing.Point(291, 28);
             managerLabel.Name = "managerLabel";
             managerLabel.Size = new System.Drawing.Size(47, 16);
             managerLabel.TabIndex = 4;
@@ -342,6 +348,10 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.groupPanelDepartment.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelDepartment.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelDepartment.Controls.Add(lblMaintainManager);
+            this.groupPanelDepartment.Controls.Add(this.tbMaintainManager);
+            this.groupPanelDepartment.Controls.Add(lblMarketManager);
+            this.groupPanelDepartment.Controls.Add(this.tbMarketManager);
             this.groupPanelDepartment.Controls.Add(managerLabel);
             this.groupPanelDepartment.Controls.Add(this.managerTextBox);
             this.groupPanelDepartment.Controls.Add(postCodeLabel);
@@ -376,7 +386,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.groupPanelDepartment.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelDepartment.Location = new System.Drawing.Point(0, 0);
             this.groupPanelDepartment.Name = "groupPanelDepartment";
-            this.groupPanelDepartment.Size = new System.Drawing.Size(458, 233);
+            this.groupPanelDepartment.Size = new System.Drawing.Size(487, 267);
             // 
             // 
             // 
@@ -415,7 +425,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.managerTextBox.Border.Class = "TextBoxBorder";
             this.managerTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "Manager", true));
-            this.managerTextBox.Location = new System.Drawing.Point(287, 27);
+            this.managerTextBox.Location = new System.Drawing.Point(344, 27);
             this.managerTextBox.Name = "managerTextBox";
             this.managerTextBox.Size = new System.Drawing.Size(120, 20);
             this.managerTextBox.TabIndex = 5;
@@ -431,7 +441,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.postCodeTextBox.Border.Class = "TextBoxBorder";
             this.postCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "PostCode", true));
-            this.postCodeTextBox.Location = new System.Drawing.Point(69, 114);
+            this.postCodeTextBox.Location = new System.Drawing.Point(105, 114);
             this.postCodeTextBox.Name = "postCodeTextBox";
             this.postCodeTextBox.Size = new System.Drawing.Size(100, 20);
             this.postCodeTextBox.TabIndex = 14;
@@ -443,7 +453,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.fax_2TextBox.Border.Class = "TextBoxBorder";
             this.fax_2TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "Fax_2", true));
-            this.fax_2TextBox.Location = new System.Drawing.Point(286, 201);
+            this.fax_2TextBox.Location = new System.Drawing.Point(343, 201);
             this.fax_2TextBox.Name = "fax_2TextBox";
             this.fax_2TextBox.Size = new System.Drawing.Size(121, 20);
             this.fax_2TextBox.TabIndex = 30;
@@ -455,7 +465,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.fax_1TextBox.Border.Class = "TextBoxBorder";
             this.fax_1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "Fax_1", true));
-            this.fax_1TextBox.Location = new System.Drawing.Point(69, 201);
+            this.fax_1TextBox.Location = new System.Drawing.Point(105, 201);
             this.fax_1TextBox.Name = "fax_1TextBox";
             this.fax_1TextBox.Size = new System.Drawing.Size(120, 20);
             this.fax_1TextBox.TabIndex = 22;
@@ -467,7 +477,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.email_2TextBox.Border.Class = "TextBoxBorder";
             this.email_2TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "Email_2", true));
-            this.email_2TextBox.Location = new System.Drawing.Point(287, 179);
+            this.email_2TextBox.Location = new System.Drawing.Point(344, 179);
             this.email_2TextBox.Name = "email_2TextBox";
             this.email_2TextBox.Size = new System.Drawing.Size(120, 20);
             this.email_2TextBox.TabIndex = 28;
@@ -479,7 +489,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.email_1TextBox.Border.Class = "TextBoxBorder";
             this.email_1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "Email_1", true));
-            this.email_1TextBox.Location = new System.Drawing.Point(69, 179);
+            this.email_1TextBox.Location = new System.Drawing.Point(105, 179);
             this.email_1TextBox.Name = "email_1TextBox";
             this.email_1TextBox.Size = new System.Drawing.Size(120, 20);
             this.email_1TextBox.TabIndex = 20;
@@ -491,7 +501,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.phone_2TextBox.Border.Class = "TextBoxBorder";
             this.phone_2TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "Phone_2", true));
-            this.phone_2TextBox.Location = new System.Drawing.Point(287, 157);
+            this.phone_2TextBox.Location = new System.Drawing.Point(344, 157);
             this.phone_2TextBox.Name = "phone_2TextBox";
             this.phone_2TextBox.Size = new System.Drawing.Size(120, 20);
             this.phone_2TextBox.TabIndex = 26;
@@ -503,7 +513,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.phone_1TextBox.Border.Class = "TextBoxBorder";
             this.phone_1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "Phone_1", true));
-            this.phone_1TextBox.Location = new System.Drawing.Point(69, 157);
+            this.phone_1TextBox.Location = new System.Drawing.Point(105, 157);
             this.phone_1TextBox.Name = "phone_1TextBox";
             this.phone_1TextBox.Size = new System.Drawing.Size(120, 20);
             this.phone_1TextBox.TabIndex = 18;
@@ -515,7 +525,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.contact_2TextBox.Border.Class = "TextBoxBorder";
             this.contact_2TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "Contact_2", true));
-            this.contact_2TextBox.Location = new System.Drawing.Point(287, 135);
+            this.contact_2TextBox.Location = new System.Drawing.Point(344, 135);
             this.contact_2TextBox.Name = "contact_2TextBox";
             this.contact_2TextBox.Size = new System.Drawing.Size(121, 20);
             this.contact_2TextBox.TabIndex = 24;
@@ -527,7 +537,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.contact_1TextBox.Border.Class = "TextBoxBorder";
             this.contact_1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "Contact_1", true));
-            this.contact_1TextBox.Location = new System.Drawing.Point(69, 136);
+            this.contact_1TextBox.Location = new System.Drawing.Point(105, 136);
             this.contact_1TextBox.Name = "contact_1TextBox";
             this.contact_1TextBox.Size = new System.Drawing.Size(120, 20);
             this.contact_1TextBox.TabIndex = 16;
@@ -539,9 +549,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.addressENTextBox.Border.Class = "TextBoxBorder";
             this.addressENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "AddressEN", true));
-            this.addressENTextBox.Location = new System.Drawing.Point(69, 93);
+            this.addressENTextBox.Location = new System.Drawing.Point(105, 93);
             this.addressENTextBox.Name = "addressENTextBox";
-            this.addressENTextBox.Size = new System.Drawing.Size(339, 20);
+            this.addressENTextBox.Size = new System.Drawing.Size(360, 20);
             this.addressENTextBox.TabIndex = 12;
             this.addressENTextBox.WatermarkText = "英文地址";
             // 
@@ -552,9 +562,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.addressCNTextBox.Border.Class = "TextBoxBorder";
             this.addressCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "AddressCN", true));
-            this.addressCNTextBox.Location = new System.Drawing.Point(69, 71);
+            this.addressCNTextBox.Location = new System.Drawing.Point(105, 71);
             this.addressCNTextBox.Name = "addressCNTextBox";
-            this.addressCNTextBox.Size = new System.Drawing.Size(339, 20);
+            this.addressCNTextBox.Size = new System.Drawing.Size(360, 20);
             this.addressCNTextBox.TabIndex = 11;
             this.addressCNTextBox.WatermarkText = "中文地址";
             // 
@@ -565,7 +575,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.locationTextBox.Border.Class = "TextBoxBorder";
             this.locationTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "Location", true));
-            this.locationTextBox.Location = new System.Drawing.Point(69, 49);
+            this.locationTextBox.Location = new System.Drawing.Point(105, 49);
             this.locationTextBox.Name = "locationTextBox";
             this.locationTextBox.Size = new System.Drawing.Size(100, 20);
             this.locationTextBox.TabIndex = 7;
@@ -586,7 +596,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             "能源金融事业部",
             "冶金金融事业部",
             "中小企业金融事业部"});
-            this.domainComboBox.Location = new System.Drawing.Point(287, 48);
+            this.domainComboBox.Location = new System.Drawing.Point(344, 48);
             this.domainComboBox.Name = "domainComboBox";
             this.domainComboBox.Size = new System.Drawing.Size(121, 21);
             this.domainComboBox.TabIndex = 9;
@@ -599,7 +609,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.departmentNameTextBox.Border.Class = "TextBoxBorder";
             this.departmentNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "DepartmentName", true));
-            this.departmentNameTextBox.Location = new System.Drawing.Point(69, 27);
+            this.departmentNameTextBox.Location = new System.Drawing.Point(105, 27);
             this.departmentNameTextBox.Name = "departmentNameTextBox";
             this.departmentNameTextBox.Size = new System.Drawing.Size(150, 20);
             this.departmentNameTextBox.TabIndex = 3;
@@ -611,7 +621,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.departmentCodeTextBox.Border.Class = "TextBoxBorder";
             this.departmentCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "DepartmentCode", true));
-            this.departmentCodeTextBox.Location = new System.Drawing.Point(69, 5);
+            this.departmentCodeTextBox.Location = new System.Drawing.Point(105, 5);
             this.departmentCodeTextBox.Name = "departmentCodeTextBox";
             this.departmentCodeTextBox.Size = new System.Drawing.Size(100, 20);
             this.departmentCodeTextBox.TabIndex = 1;
@@ -621,7 +631,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSave.Location = new System.Drawing.Point(228, 239);
+            this.btnSave.Location = new System.Drawing.Point(234, 285);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -633,7 +643,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.btnUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUpdate.Location = new System.Drawing.Point(147, 239);
+            this.btnUpdate.Location = new System.Drawing.Point(153, 285);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -671,11 +681,63 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.highlighter.ContainerControl = this;
             // 
+            // lblMaintainManager
+            // 
+            lblMaintainManager.AutoSize = true;
+            lblMaintainManager.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblMaintainManager.BackgroundStyle.Class = "";
+            lblMaintainManager.Location = new System.Drawing.Point(241, 227);
+            lblMaintainManager.Name = "lblMaintainManager";
+            lblMaintainManager.Size = new System.Drawing.Size(97, 16);
+            lblMaintainManager.TabIndex = 33;
+            lblMaintainManager.Text = "维护区域负责人:";
+            // 
+            // tbMaintainManager
+            // 
+            // 
+            // 
+            // 
+            this.tbMaintainManager.Border.Class = "TextBoxBorder";
+            this.tbMaintainManager.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "MaintainManager", true));
+            this.tbMaintainManager.Location = new System.Drawing.Point(343, 226);
+            this.tbMaintainManager.Name = "tbMaintainManager";
+            this.tbMaintainManager.Size = new System.Drawing.Size(121, 20);
+            this.tbMaintainManager.TabIndex = 34;
+            // 
+            // lblMarketManager
+            // 
+            lblMarketManager.AutoSize = true;
+            lblMarketManager.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblMarketManager.BackgroundStyle.Class = "";
+            lblMarketManager.Location = new System.Drawing.Point(3, 227);
+            lblMarketManager.Name = "lblMarketManager";
+            lblMarketManager.Size = new System.Drawing.Size(97, 16);
+            lblMarketManager.TabIndex = 31;
+            lblMarketManager.Text = "营销区域负责人:";
+            // 
+            // tbMarketManager
+            // 
+            // 
+            // 
+            // 
+            this.tbMarketManager.Border.Class = "TextBoxBorder";
+            this.tbMarketManager.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "MarketManager", true));
+            this.tbMarketManager.Location = new System.Drawing.Point(105, 226);
+            this.tbMarketManager.Name = "tbMarketManager";
+            this.tbMarketManager.Size = new System.Drawing.Size(120, 20);
+            this.tbMarketManager.TabIndex = 32;
+            // 
             // DepartmentDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(458, 276);
+            this.ClientSize = new System.Drawing.Size(487, 320);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupPanelDepartment);
@@ -703,5 +765,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbMaintainManager;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbMarketManager;
     }
 }

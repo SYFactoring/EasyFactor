@@ -91,6 +91,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colDepartmentCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDepartmentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDomain = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMarketManager = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaintainManager = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colManager = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colContact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -232,6 +234,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colDepartmentCode,
             this.colDepartmentName,
             this.colDomain,
+            this.colMarketManager,
+            this.colMaintainManager,
             this.colManager,
             this.colContact,
             this.colAssignAmount,
@@ -334,11 +338,25 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colDomain.Name = "colDomain";
             this.colDomain.ReadOnly = true;
             // 
+            // colMarketManager
+            // 
+            this.colMarketManager.DataPropertyName = "MarketManager";
+            this.colMarketManager.HeaderText = "营销区域负责人";
+            this.colMarketManager.Name = "colMarketManager";
+            this.colMarketManager.ReadOnly = true;
+            // 
+            // colMaintainManager
+            // 
+            this.colMaintainManager.DataPropertyName = "MaintainManager";
+            this.colMaintainManager.HeaderText = "维护区域负责人";
+            this.colMaintainManager.Name = "colMaintainManager";
+            this.colMaintainManager.ReadOnly = true;
+            // 
             // colManager
             // 
             this.colManager.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colManager.DataPropertyName = "Manager";
-            this.colManager.HeaderText = "负责人";
+            this.colManager.HeaderText = "分部负责人";
             this.colManager.Name = "colManager";
             this.colManager.ReadOnly = true;
             // 
@@ -346,7 +364,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.colContact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colContact.DataPropertyName = "Contact_1";
-            this.colContact.HeaderText = "联系人";
+            this.colContact.HeaderText = "分部联系人";
             this.colContact.Name = "colContact";
             this.colContact.ReadOnly = true;
             // 
@@ -417,12 +435,15 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDomain;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMarketManager;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaintainManager;
         private System.Windows.Forms.DataGridViewTextBoxColumn colManager;
         private System.Windows.Forms.DataGridViewTextBoxColumn colContact;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIncomeAmount;
+
 
 
     }
