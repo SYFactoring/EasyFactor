@@ -1249,6 +1249,8 @@ namespace CMBC.EasyFactor.Utils
                         dept.Email_2 = String.Format("{0:G}", valueArray[row, column++]);
                         dept.Phone_2 = String.Format("{0:G}", valueArray[row, column++]);
                         dept.Fax_2 = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.MarketManager = String.Format("{0:G}", valueArray[row, column++]);
+                        dept.MaintainManager = String.Format("{0:G}", valueArray[row, column++]);
 
                         if (isNew)
                         {
