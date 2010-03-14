@@ -23,7 +23,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class AssignBatchMgr : UserControl
     {
-		#region Fields (3) 
+        #region Fields (3)
 
         /// <summary>
         /// 
@@ -38,9 +38,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         ///
@@ -68,11 +68,11 @@ namespace CMBC.EasyFactor.ARMgr
             REPORT
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (3) 
+        #region Constructors (3)
 
-/// <summary>
+        /// <summary>
         /// Initializes a new instance of the AssignBatchMgr class
         /// </summary>
         /// <param name="createUserName"></param>
@@ -89,12 +89,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// Initializes a new instance of the AssignBatchMgr class
         /// </summary>
         /// <param name="selectedCDA"></param>
-        public AssignBatchMgr(Case selectedCase)
+        /// <param name="context"></param>
+        public AssignBatchMgr(Case selectedCase, DBDataContext context)
             : this(OpBatchType.DETAIL)
         {
             this._case = selectedCase;
             this.panelQuery.Visible = false;
             this.bs.DataSource = this._case.InvoiceAssignBatches;
+            this.context = context;
         }
 
         /// <summary>
@@ -127,9 +129,9 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (3) 
+        #region Properties (3)
 
         /// <summary>
         /// 
@@ -158,11 +160,23 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (16) 
+        #region Delegates and Events (1)
 
-		// Private Methods (16) 
+        // Delegates (1) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="batchGroup"></param>
+        private delegate void MakeReport(IGrouping<Client, InvoiceAssignBatch> batchGroup);
+
+        #endregion Delegates and Events
+
+        #region Methods (23)
+
+        // Private Methods (23) 
 
         /// <summary>
         /// 
@@ -176,12 +190,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
             if (batch.CheckStatus != "未复核" && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_APPROVE))
             {
@@ -219,22 +233,22 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
             if (MessageBoxEx.Show("是否打算删除此转让批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
-            //if (selectedBatch.Invoices.Count > 0)
-            //{
-            //    MessageBoxEx.Show("不能删除此批次，它包含相关发票信息", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    return;
-            //}
+            if (selectedBatch.Invoices.Count > 0)
+            {
+                MessageBoxEx.Show("不能删除此批次，它包含相关发票信息", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             context.InvoiceAssignBatches.DeleteOnSubmit(selectedBatch);
             try
@@ -247,7 +261,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
+            this.dgvBatches.Rows.RemoveAt(this.dgvBatches.CurrentCell.RowIndex);
         }
 
         /// <summary>
@@ -257,12 +271,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailBatch(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
             AssignBatchDetail detail = new AssignBatchDetail(selectedBatch);
             detail.ShowDialog(this);
         }
@@ -328,15 +342,88 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ExportMSG09(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
             ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG09, selectedBatch.Invoices);
             form.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private List<InvoiceAssignBatch> GetSelectedBatches()
+        {
+            if (this.dgvBatches.CurrentCell == null)
+            {
+                return null;
+            }
+
+            List<InvoiceAssignBatch> selectedBatches = new List<InvoiceAssignBatch>();
+
+            foreach (DataGridViewCell cell in this.dgvBatches.SelectedCells)
+            {
+                InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[cell.RowIndex];
+                if (!selectedBatches.Contains(batch))
+                {
+                    selectedBatches.Add(batch);
+
+                    if (batch.CheckStatus != "已复核")
+                    {
+                        MessageBoxEx.Show("该批次状态不属于已审核，不能生成报表，批次号： " + batch.AssignBatchNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return null;
+                    }
+                }
+            }
+
+            return selectedBatches;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="selectedBatches"></param>
+        /// <param name="makeReport"></param>
+        private void GroupBatches(List<InvoiceAssignBatch> selectedBatches, MakeReport makeReport)
+        {
+            IEnumerable<IGrouping<string, InvoiceAssignBatch>> caseGroups = selectedBatches.GroupBy(c => c.Case.TransactionType);
+
+            foreach (IGrouping<string, InvoiceAssignBatch> caseGroup in caseGroups)
+            {
+                string transactionType = caseGroup.Key;
+                IEnumerable<IGrouping<Client, InvoiceAssignBatch>> groups = null;
+                switch (transactionType)
+                {
+                    case "国内卖方保理":
+                    case "出口保理":
+                    case "国内信保保理":
+                    case "国际信保保理":
+                    case "租赁保理":
+                        groups = caseGroup.GroupBy(c => c.Case.SellerClient);
+                        foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
+                        {
+                            makeReport(group);
+                        }
+
+                        break;
+                    case "国内买方保理":
+                    case "进口保理":
+                        groups = caseGroup.GroupBy(c => c.Case.BuyerClient);
+                        foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
+                        {
+                            makeReport(group);
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         /// <summary>
@@ -378,12 +465,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
             if (batch.CheckStatus != "未复核" && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_APPROVE))
             {
@@ -416,18 +503,22 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ReportAssign(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            List<InvoiceAssignBatch> selectedBatches = this.GetSelectedBatches();
+            if (selectedBatches == null)
             {
                 return;
             }
 
-            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (selectedBatch.CheckStatus != "已复核")
-            {
-                MessageBoxEx.Show("该批次状态不属于已审核，不能生成报表", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            MakeReport makeReport = new MakeReport(ReportAssignImpl);
+            GroupBatches(selectedBatches, makeReport);
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="group"></param>
+        private void ReportAssignImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup)
+        {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -447,8 +538,7 @@ namespace CMBC.EasyFactor.ARMgr
                 string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
 
-                Client seller = selectedBatch.Case.SellerClient;
-                Client buyer = selectedBatch.Case.BuyerClient;
+                Client seller = batchGroup.Key;
                 sheet.Cells[2, 1] = String.Format("致： {0}", seller.ToString());
                 sheet.get_Range("A4", "E4").MergeCells = true;
                 sheet.get_Range("A4", "A4").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
@@ -456,79 +546,86 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("A1", "A3").RowHeight = 20;
                 sheet.get_Range("A4", "A4").RowHeight = 30;
 
-                Factor factor = null;
-                switch (selectedBatch.Case.TransactionType)
-                {
-                    case "国内卖方保理":
-                    case "国内信保保理":
-                    case "国内买方保理":
-                    case "租赁保理":
-                    case "进口保理":
-                        break;
-                    case "出口保理":
-                    case "国际信保保理":
-                        factor = selectedBatch.Case.SellerFactor;
-                        break;
-                    default:
-                        break;
-                }
-
                 int row = 6;
-                sheet.Cells[row, 1] = "买方：";
-                sheet.Cells[row++, 2] = String.Format("{0}（应收账款债务人）", buyer.ToString());
-                sheet.get_Range("B6", "B6").Font.Underline = true;
-                if (factor != null)
+
+                foreach (InvoiceAssignBatch selectedBatch in batchGroup)
                 {
-                    sheet.Cells[row, 1] = "进口保理商：";
-                    sheet.Cells[row++, 2] = factor.ToString();
-                }
+                    Factor factor = null;
+                    Client buyer = selectedBatch.Case.BuyerClient;
 
-                CDA cda = selectedBatch.Case.ActiveCDA;
-                sheet.Cells[row, 1] = "信用风险额度：";
-                sheet.Cells[row, 2] = cda.CreditCover.GetValueOrDefault();
-                sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(cda.CreditCoverCurr);
-                row++;
-                sheet.Cells[row, 1] = "应收账款余额：";
-                sheet.Cells[row, 2] = selectedBatch.Case.AssignOutstanding;
-                sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
+                    switch (selectedBatch.Case.TransactionType)
+                    {
+                        case "国内卖方保理":
+                        case "国内信保保理":
+                        case "国内买方保理":
+                        case "租赁保理":
+                        case "进口保理":
+                            break;
+                        case "出口保理":
+                        case "国际信保保理":
+                            factor = selectedBatch.Case.SellerFactor;
+                            break;
+                        default:
+                            break;
+                    }
 
-                row++;
+                    sheet.Cells[row, 1] = "买方：";
+                    sheet.Cells[row++, 2] = String.Format("{0}（应收账款债务人）", buyer.ToString());
+                    sheet.get_Range("B6", "B6").Font.Underline = true;
+                    if (factor != null)
+                    {
+                        sheet.Cells[row, 1] = "进口保理商：";
+                        sheet.Cells[row++, 2] = factor.ToString();
+                    }
 
-                row++;
-                sheet.Cells[row, 1] = "发票号";
-                sheet.Cells[row, 2] = "转让金额";
-                sheet.Cells[row, 3] = "发票日期";
-                sheet.Cells[row, 4] = "到期日";
-                sheet.Cells[row, 5] = "文件瑕疵";
+                    CDA cda = selectedBatch.Case.ActiveCDA;
+                    sheet.Cells[row, 1] = "信用风险额度：";
+                    sheet.Cells[row, 2] = cda.CreditCover.GetValueOrDefault();
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(cda.CreditCoverCurr);
+                    row++;
+                    sheet.Cells[row, 1] = "应收账款余额：";
+                    sheet.Cells[row, 2] = selectedBatch.Case.AssignOutstanding;
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
 
-                row++;
-                int invoiceStart = row;
-                foreach (Invoice invoice in selectedBatch.Invoices)
-                {
-                    sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
-                    sheet.Cells[row, 2] = invoice.AssignAmount;
-                    sheet.Cells[row, 3] = invoice.InvoiceDate;
-                    sheet.Cells[row, 4] = invoice.DueDate;
-                    sheet.Cells[row, 5] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
+                    row++;
+
+                    row++;
+                    sheet.Cells[row, 1] = "发票号";
+                    sheet.Cells[row, 2] = "转让金额";
+                    sheet.Cells[row, 3] = "发票日期";
+                    sheet.Cells[row, 4] = "到期日";
+                    sheet.Cells[row, 5] = "文件瑕疵";
+
+                    row++;
+                    int invoiceStart = row;
+                    foreach (Invoice invoice in selectedBatch.Invoices)
+                    {
+                        sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
+                        sheet.Cells[row, 2] = invoice.AssignAmount;
+                        sheet.Cells[row, 3] = invoice.InvoiceDate;
+                        sheet.Cells[row, 4] = invoice.DueDate;
+                        sheet.Cells[row, 5] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
+                        row++;
+                    }
+
+                    sheet.Cells[row, 1] = "小计";
+                    sheet.Cells[row, 2] = selectedBatch.AssignAmount;
+
+                    int invoiceEnd = row;
+                    sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.InvoiceCurrency);
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 2], sheet.Cells[invoiceEnd, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 3], sheet.Cells[invoiceEnd, 3]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 4], sheet.Cells[invoiceEnd, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 5], sheet.Cells[invoiceEnd, 5]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
+
+                    row++;
                     row++;
                 }
-
-                sheet.Cells[row, 1] = "小计";
-                sheet.Cells[row, 2] = selectedBatch.AssignAmount;
-
-                int invoiceEnd = row;
-                sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.InvoiceCurrency);
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 2], sheet.Cells[invoiceEnd, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 3], sheet.Cells[invoiceEnd, 3]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 4], sheet.Cells[invoiceEnd, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 5], sheet.Cells[invoiceEnd, 5]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
-
-                row++;
 
                 sheet.Cells[row, 1] = "本行已完成上述发票/贷项发票转让，特此通知";
                 sheet.Cells[row + 2, 3] = "中国民生银行 贸易金融事业部保理业务部 （业务章）";
@@ -578,17 +675,22 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ReportCommission(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            List<InvoiceAssignBatch> selectedBatches = this.GetSelectedBatches();
+            if (selectedBatches == null)
             {
                 return;
             }
 
-            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (selectedBatch.CheckStatus != "已复核")
-            {
-                MessageBoxEx.Show("该批次状态不属于已审核，不能生成报表", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            MakeReport makeReport = new MakeReport(ReportCommissionImpl);
+            GroupBatches(selectedBatches, makeReport);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="batchGroup"></param>
+        private void ReportCommissionImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup)
+        {
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -608,71 +710,88 @@ namespace CMBC.EasyFactor.ARMgr
                 string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
 
-                Client seller = selectedBatch.Case.SellerClient;
-                Client buyer = selectedBatch.Case.BuyerClient;
-                Factor factor = null;
-                switch (selectedBatch.Case.TransactionType)
-                {
-                    case "国内卖方保理":
-                    case "国内信保保理":
-                    case "出口保理":
-                    case "国际信保保理":
-                    case "租赁保理":
-                        factor = selectedBatch.Case.BuyerFactor;
-                        break;
-                    case "国内买方保理":
-                    case "进口保理":
-                        factor = selectedBatch.Case.SellerFactor;
-                        break;
-                    default:
-                        break;
-                }
-
+                Client seller = batchGroup.Key;
                 sheet.Cells[3, 1] = String.Format("卖方：{0}", seller.ToString());
                 sheet.get_Range("A5", "E5").MergeCells = true;
                 sheet.get_Range("A5", "A5").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 sheet.Cells[5, 1] = "保理费用明细表";
 
-                sheet.Cells[7, 1] = "买方";
-                sheet.get_Range(sheet.Cells[7, 2], sheet.Cells[7, 5]).MergeCells = true;
-                sheet.Cells[7, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
-                sheet.Cells[8, 1] = "保理商";
-                sheet.get_Range(sheet.Cells[8, 2], sheet.Cells[8, 3]).MergeCells = true;
-                sheet.Cells[8, 2] = factor.ToString();
-                sheet.Cells[8, 4] = "币别";
-                sheet.Cells[8, 5] = selectedBatch.BatchCurrency;
-                sheet.Cells[9, 1] = "本次转让金额";
-                sheet.Cells[9, 2] = "本次转让笔数";
-                sheet.Cells[9, 3] = "转让日";
-                sheet.Cells[9, 4] = "保理费率";
-                sheet.Cells[9, 5] = "单据处理费";
-                sheet.Cells[10, 1] = selectedBatch.AssignAmount;
-                sheet.Cells[10, 2] = selectedBatch.Invoices.Count;
-                sheet.Cells[10, 3] = selectedBatch.AssignDate;
-                sheet.Cells[10, 4] = String.Format("{0:0.00%}", selectedBatch.Case.ActiveCDA.Price);
-                sheet.Cells[10, 5] = selectedBatch.Case.ActiveCDA.HandFee;
-                sheet.Cells[11, 1] = "小计";
-                sheet.get_Range("A11", "A11").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                int row = 7;
+                double totalCommission = 0;
 
-                sheet.Cells[11, 4] = selectedBatch.CommissionAmount;
-                sheet.Cells[11, 5] = selectedBatch.HandfeeAmount;
+                foreach (InvoiceAssignBatch selectedBatch in batchGroup)
+                {
+                    Client buyer = selectedBatch.Case.BuyerClient;
+                    Factor factor = null;
+                    switch (selectedBatch.Case.TransactionType)
+                    {
+                        case "国内卖方保理":
+                        case "国内信保保理":
+                        case "出口保理":
+                        case "国际信保保理":
+                        case "租赁保理":
+                            factor = selectedBatch.Case.BuyerFactor;
+                            break;
+                        case "国内买方保理":
+                        case "进口保理":
+                            factor = selectedBatch.Case.SellerFactor;
+                            break;
+                        default:
+                            break;
+                    }
 
-                sheet.Cells[13, 4] = "费用总计";
-                sheet.Cells[13, 5] = selectedBatch.CommissionAmount.GetValueOrDefault() + selectedBatch.HandfeeAmount.GetValueOrDefault();
+                    int beginRow = row;
+                    sheet.Cells[row, 1] = "买方";
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 5]).MergeCells = true;
+                    sheet.Cells[row++, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
+                    sheet.Cells[row, 1] = "保理商";
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 3]).MergeCells = true;
+                    sheet.Cells[row, 2] = factor.ToString();
+                    sheet.Cells[row, 4] = "币别";
+                    sheet.Cells[row++, 5] = selectedBatch.BatchCurrency;
+                    sheet.Cells[row, 1] = "本次转让金额";
+                    sheet.Cells[row, 2] = "本次转让笔数";
+                    sheet.Cells[row, 3] = "转让日";
+                    sheet.Cells[row, 4] = "保理费率";
+                    sheet.Cells[row++, 5] = "单据处理费";
+                    sheet.Cells[row, 1] = selectedBatch.AssignAmount;
+                    sheet.get_Range("A" + row, "A" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
+                    sheet.Cells[row, 2] = selectedBatch.Invoices.Count;
+                    sheet.Cells[row, 3] = selectedBatch.AssignDate;
+                    sheet.Cells[row, 4] = String.Format("{0:0.00%}", selectedBatch.Case.ActiveCDA.Price);
+                    sheet.get_Range("E" + row, "E" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.ActiveCDA.HandFeeCurr);
+                    sheet.Cells[row++, 5] = selectedBatch.Case.ActiveCDA.HandFee;
+                    sheet.Cells[row, 1] = "小计";
+                    sheet.Cells[row, 4] = selectedBatch.CommissionAmount;
+                    sheet.Cells[row, 5] = selectedBatch.HandfeeAmount;
+                    sheet.get_Range("D" + row, "E" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
 
-                sheet.Cells[15, 1] = String.Format("制表：{0}", selectedBatch.CreateUserName);
-                sheet.Cells[15, 3] = String.Format("复核：{0}", selectedBatch.CheckUserName);
-                sheet.Cells[15, 5] = "主管：";
-                sheet.Cells[17, 3] = "中国民生银行 贸易金融部保理业务部  （业务章）";
-                sheet.Cells[18, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+                    int endRow = row;
+
+                    totalCommission += selectedBatch.CommissionAmount.GetValueOrDefault() + selectedBatch.HandfeeAmount.GetValueOrDefault();
+                    sheet.get_Range("A" + beginRow, "E" + endRow).Borders.LineStyle = 1;
+
+                    row += 3;
+                }
+
+                sheet.Cells[row, 4] = "费用总计";
+                sheet.Cells[row, 5] = totalCommission;
+                sheet.get_Range("E" + row, "E" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(batchGroup.First().BatchCurrency);
+                sheet.get_Range("D" + row, "E" + row).Borders.LineStyle = 1;
+
+                row += 2;
+
+                sheet.Cells[row, 1] = String.Format("制表：{0}", batchGroup.First().CreateUserName);
+                sheet.Cells[row, 3] = String.Format("复核：{0}", batchGroup.First().CheckUserName);
+                sheet.Cells[row, 5] = "主管：";
+                sheet.Cells[row + 2, 3] = "中国民生银行 贸易金融部保理业务部  （业务章）";
+                sheet.Cells[row + 3, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
                 sheet.get_Range("A1", Type.Missing).ColumnWidth = 23;
                 sheet.get_Range("B1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("E1", Type.Missing).ColumnWidth = 17;
-                sheet.get_Range("A7", "E11").Borders.LineStyle = 1;
-                sheet.get_Range("D13", "E13").Borders.LineStyle = 1;
 
                 sheet.UsedRange.Font.Name = "仿宋_GB2312";
                 sheet.UsedRange.Font.Size = 12;
@@ -681,11 +800,6 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("A5", "A5").Font.Size = 22;
                 sheet.get_Range("A1", "A4").RowHeight = 20;
                 sheet.get_Range("A5", "A5").RowHeight = 30;
-
-                sheet.get_Range("A10", "A10").NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
-                sheet.get_Range("E10", "E10").NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.ActiveCDA.HandFeeCurr);
-                sheet.get_Range("D11", "E11").NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
-                sheet.get_Range("E13", "E13").NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
 
                 app.Visible = true;
             }
@@ -721,13 +835,22 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ReportFileCheckList(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            List<InvoiceAssignBatch> selectedBatches = this.GetSelectedBatches();
+            if (selectedBatches == null)
             {
                 return;
             }
 
-            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            MakeReport makeReport = new MakeReport(ReportFileCheckListImpl);
+            GroupBatches(selectedBatches, makeReport);
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="batchGroup"></param>
+        private void ReportFileCheckListImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup)
+        {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -747,8 +870,7 @@ namespace CMBC.EasyFactor.ARMgr
                 string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
-                Client seller = selectedBatch.Case.SellerClient;
-                Client buyer = selectedBatch.Case.BuyerClient;
+                Client seller = batchGroup.Key;
 
                 sheet.get_Range("A3", "D3").MergeCells = true;
                 sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
@@ -756,37 +878,45 @@ namespace CMBC.EasyFactor.ARMgr
 
                 sheet.get_Range(sheet.Cells[5, 1], sheet.Cells[5, 2]).MergeCells = true;
                 sheet.Cells[5, 1] = String.Format("卖方：{0}", seller.ToString());
-                sheet.get_Range(sheet.Cells[5, 3], sheet.Cells[5, 4]).MergeCells = true;
-                sheet.Cells[5, 3] = String.Format("No. of Invoice(s) attached: {0}", selectedBatch.BatchCount);
 
-                sheet.Cells[7, 1] = "Inv. No. List:";
-
-                int row = 8;
-                DateTime dueDate = DateTime.MaxValue;
-                for (int i = 0; i < selectedBatch.Invoices.Count; i++)
+                int row = 7;
+                foreach (InvoiceAssignBatch selectedBatch in batchGroup)
                 {
-                    if (i != 0 && i % 4 == 0)
+                    Client buyer = selectedBatch.Case.BuyerClient;
+                    sheet.Cells[row++, 1] = String.Format("买方：{0}", buyer.ToString());
+                    sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 2]).MergeCells = true;
+                    sheet.Cells[row++, 1] = String.Format("No. of Invoice(s) attached: {0}", selectedBatch.BatchCount);
+                    int rowDueDate = row;
+
+                    row++;
+                    int rowBegin = row;
+
+                    sheet.Cells[row, 1] = "Inv. No. List:";
+
+                    DateTime dueDate = DateTime.MaxValue;
+                    for (int i = 0; i < selectedBatch.Invoices.Count; i++)
                     {
-                        row++;
+                        if (i != 0 && i % 4 == 0)
+                        {
+                            row++;
+                        }
+                        Invoice invoice = selectedBatch.Invoices[i];
+                        sheet.Cells[row, i % 4 + 1] = "'" + invoice.InvoiceNo;
+                        if (invoice.DueDate != null && invoice.DueDate < dueDate)
+                        {
+                            dueDate = invoice.DueDate.Value;
+                        }
                     }
-                    Invoice invoice = selectedBatch.Invoices[i];
-                    sheet.Cells[row, i % 4 + 1] = "'" + invoice.InvoiceNo;
-                    if (invoice.DueDate != null && invoice.DueDate < dueDate)
-                    {
-                        dueDate = invoice.DueDate.Value;
-                    }
+                    sheet.Cells[rowDueDate, 1] = String.Format("Earliest due date:   {0:yyyy-MM-dd}", dueDate);
+
+                    int rowEnd = row;
+
+                    sheet.get_Range(sheet.Cells[rowBegin, 1], sheet.Cells[rowEnd, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[rowBegin, 1], sheet.Cells[rowEnd, 4]).Borders.LineStyle = 1;
+
+                    row += 3;
                 }
 
-                sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[row, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[row, 4]).Borders.LineStyle = 1;
-
-                row++;
-                row++;
-
-                sheet.Cells[row++, 1] = String.Format("买方：{0}", buyer.ToString());
-                sheet.Cells[row++, 1] = String.Format("No. of Credit Note(s) attached: {0}", 0);
-                sheet.Cells[row++, 1] = String.Format("Earliest due date:   {0:yyyy-MM-dd}", dueDate);
-                row++;
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
                 sheet.Cells[row++, 1] = " □  第一次转让：通知函";
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
@@ -806,9 +936,9 @@ namespace CMBC.EasyFactor.ARMgr
                 row++;
                 sheet.Cells[row++, 1] = "Discrepancies  □ Yes   □ No";
 
-                row += 10;
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row, 1] = String.Format("运营组： 经办 {0}               复核 {1}              主管{2}", selectedBatch.CreateUserName, selectedBatch.CheckUserName, "");
+                sheet.Cells[row, 1] = String.Format("运营组： 经办 {0}               复核 {1}              主管{2}", batchGroup.First().CreateUserName, batchGroup.First().CheckUserName, "");
+                sheet.Cells[row + 1, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
                 sheet.get_Range("A1", "A2").RowHeight = 20;
                 sheet.get_Range("A3", "A3").RowHeight = 30;
@@ -852,18 +982,32 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ReportFinance(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            List<InvoiceAssignBatch> selectedBatches = this.GetSelectedBatches();
+            if (selectedBatches == null)
             {
                 return;
             }
 
-            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (selectedBatch.CheckStatus != "已复核")
+            foreach (InvoiceAssignBatch batch in selectedBatches)
             {
-                MessageBoxEx.Show("该批次状态不属于已审核，不能生成报表", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                if (batch.Case.TransactionType == "国内买方保理" || batch.Case.TransactionType == "进口保理")
+                {
+                    MessageBoxEx.Show(String.Format("该批次为{0}，不能生成报表，批次号： {1}", batch.Case.TransactionType, batch.AssignBatchNo), ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
             }
 
+            MakeReport makeReport = new MakeReport(ReportFinanceImpl);
+            GroupBatches(selectedBatches, makeReport);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="batchGroup"></param>
+        /// <returns></returns>
+        private void ReportFinanceImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup)
+        {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -883,105 +1027,114 @@ namespace CMBC.EasyFactor.ARMgr
                 string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 200, 3, 180, 30);
 
-                Client seller = selectedBatch.Case.SellerClient;
-                Client buyer = selectedBatch.Case.BuyerClient;
-                CDA cda = selectedBatch.Case.ActiveCDA;
-
                 sheet.get_Range("A3", "E3").MergeCells = true;
                 sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 sheet.Cells[3, 1] = "可融资账款明细表";
 
+                Client seller = batchGroup.Key;
                 int row = 5;
                 sheet.Cells[row, 1] = "卖方：";
                 sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
-                sheet.Cells[row++, 2] = String.Format("{0}", seller.ToString());
-                sheet.Cells[row, 1] = "买方：";
-                sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
-                sheet.Cells[row++, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
-                row++;
+                sheet.Cells[row, 2] = String.Format("{0}", seller.ToString());
 
-                sheet.Cells[row, 1] = "信用风险额度：";
-                sheet.Cells[row, 2] = cda.CreditCover.GetValueOrDefault();
-                sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(cda.CreditCoverCurr);
-                sheet.Cells[row, 4] = "最高预付款额度：";
-                ClientCreditLine creditLine = cda.FinanceCreditLine;
+                row++;
+                sheet.Cells[row, 1] = "最高预付款额度：";
+                ClientCreditLine creditLine = batchGroup.First().Case.ActiveCDA.FinanceCreditLine;
                 if (creditLine != null)
                 {
-                    sheet.Cells[row, 5] = creditLine.CreditLine;
-                    sheet.get_Range(sheet.Cells[row, 5], sheet.Cells[row, 5]).NumberFormatLocal = TypeUtil.GetExcelCurrency(creditLine.CreditLineCurrency);
+                    sheet.Cells[row, 2] = creditLine.CreditLine;
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(creditLine.CreditLineCurrency);
                 }
 
                 row++;
-                sheet.Cells[row, 1] = "应收账款余额：";
-                sheet.Cells[row, 2] = selectedBatch.Case.AssignOutstanding;
-                sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
-                sheet.Cells[row, 4] = "总融资余额：";
+                sheet.Cells[row, 1] = "总融资余额：";
                 if (creditLine != null)
                 {
-                    sheet.Cells[row, 5] = seller.GetFinanceOutstanding(creditLine.CreditLineCurrency).GetValueOrDefault();
-                    sheet.get_Range(sheet.Cells[row, 5], sheet.Cells[row, 5]).NumberFormatLocal = TypeUtil.GetExcelCurrency(creditLine.CreditLineCurrency);
+                    sheet.Cells[row, 2] = seller.GetFinanceOutstanding(creditLine.CreditLineCurrency).GetValueOrDefault();
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(creditLine.CreditLineCurrency);
                 }
 
                 row++;
-                sheet.Cells[row, 1] = "预付款额度：";
-                sheet.Cells[row, 2] = cda.FinanceLine.GetValueOrDefault();
-                sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(cda.FinanceLineCurr);
-                sheet.Cells[row, 4] = "总剩余额度：";
+                sheet.Cells[row, 1] = "总剩余额度：";
                 if (creditLine != null)
                 {
-                    sheet.Cells[row, 5] = creditLine.CreditLine - seller.GetFinanceOutstanding(creditLine.CreditLineCurrency).GetValueOrDefault();
-                    sheet.get_Range(sheet.Cells[row, 5], sheet.Cells[row, 5]).NumberFormatLocal = TypeUtil.GetExcelCurrency(creditLine.CreditLineCurrency);
+                    sheet.Cells[row, 2] = creditLine.CreditLine - seller.GetFinanceOutstanding(creditLine.CreditLineCurrency).GetValueOrDefault();
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(creditLine.CreditLineCurrency);
                 }
 
-                row++;
-                sheet.Cells[row, 1] = "融资余额：";
-                sheet.Cells[row, 2] = selectedBatch.Case.FinanceOutstanding.GetValueOrDefault();
-                sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
+                row += 3;
 
-                row++;
-
-                row++;
-                sheet.Cells[row, 1] = "发票号";
-                sheet.Cells[row, 2] = "转让金额";
-                sheet.Cells[row, 3] = "发票日期";
-                sheet.Cells[row, 4] = "到期日";
-                sheet.Cells[row, 5] = "备注";
-
-                row++;
-                int invoiceStart = row;
-                double assignAmount = 0;
-                foreach (Invoice invoice in selectedBatch.Invoices)
+                foreach (InvoiceAssignBatch selectedBatch in batchGroup)
                 {
-                    if (invoice.IsFlaw == false)
+                    Client buyer = selectedBatch.Case.BuyerClient;
+                    CDA cda = selectedBatch.Case.ActiveCDA;
+
+                    sheet.Cells[row, 1] = "买方：";
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
+                    sheet.Cells[row++, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
+                    row++;
+
+                    sheet.Cells[row, 1] = "信用风险额度：";
+                    sheet.Cells[row, 2] = cda.CreditCover.GetValueOrDefault();
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(cda.CreditCoverCurr);
+
+                    row++;
+                    sheet.Cells[row, 1] = "应收账款余额：";
+                    sheet.Cells[row, 2] = selectedBatch.Case.AssignOutstanding;
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
+
+                    row++;
+                    sheet.Cells[row, 1] = "预付款额度：";
+                    sheet.Cells[row, 2] = cda.FinanceLine.GetValueOrDefault();
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(cda.FinanceLineCurr);
+
+                    row++;
+                    sheet.Cells[row, 1] = "融资余额：";
+                    sheet.Cells[row, 2] = selectedBatch.Case.FinanceOutstanding.GetValueOrDefault();
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
+
+                    row++;
+                    row++;
+                    sheet.Cells[row, 1] = "发票号";
+                    sheet.Cells[row, 2] = "转让金额";
+                    sheet.Cells[row, 3] = "发票日期";
+                    sheet.Cells[row, 4] = "到期日";
+                    sheet.Cells[row, 5] = "备注";
+
+                    row++;
+                    int invoiceStart = row;
+                    double assignAmount = 0;
+                    foreach (Invoice invoice in selectedBatch.Invoices)
                     {
-                        sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
-                        sheet.Cells[row, 2] = invoice.AssignAmount;
-                        sheet.Cells[row, 3] = invoice.InvoiceDate;
-                        sheet.Cells[row, 4] = invoice.DueDate;
-                        sheet.Cells[row, 5] = invoice.Comment;
-                        assignAmount += invoice.AssignAmount;
-                        row++;
+                        if (invoice.IsFlaw == false)
+                        {
+                            sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
+                            sheet.Cells[row, 2] = invoice.AssignAmount;
+                            sheet.Cells[row, 3] = invoice.InvoiceDate;
+                            sheet.Cells[row, 4] = invoice.DueDate;
+                            sheet.Cells[row, 5] = invoice.Comment;
+                            assignAmount += invoice.AssignAmount;
+                            row++;
+                        }
                     }
+
+                    sheet.Cells[row, 1] = "小计";
+                    sheet.Cells[row, 2] = assignAmount;
+
+                    int invoiceEnd = row;
+
+                    sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 2], sheet.Cells[invoiceEnd, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 3], sheet.Cells[invoiceEnd, 3]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 4], sheet.Cells[invoiceEnd, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
+
+                    row += 3;
                 }
-
-                sheet.Cells[row, 1] = "小计";
-                sheet.Cells[row, 2] = assignAmount;
-
-                int invoiceEnd = row;
-
-
-                sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 2], sheet.Cells[invoiceEnd, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 3], sheet.Cells[invoiceEnd, 3]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 4], sheet.Cells[invoiceEnd, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
-
-                row++;
-                row++;
 
                 sheet.Cells[row + 1, 3] = "中国民生银行 贸易金融部保理业务部 （业务章）";
                 sheet.Cells[row + 2, 4] = "签字：";
@@ -1031,18 +1184,22 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ReportFlaw(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            List<InvoiceAssignBatch> selectedBatches = GetSelectedBatches();
+            if (selectedBatches == null)
             {
                 return;
             }
 
-            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (selectedBatch.CheckStatus != "已复核")
-            {
-                MessageBoxEx.Show("该批次状态不属于已审核，不能生成报表", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            MakeReport makeReport = new MakeReport(ReportFlawImpl);
+            GroupBatches(selectedBatches, makeReport);
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="batchGroup"></param>
+        private void ReportFlawImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup)
+        {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -1062,78 +1219,84 @@ namespace CMBC.EasyFactor.ARMgr
                 string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 240, 3, 170, 30);
 
-                Client seller = selectedBatch.Case.SellerClient;
-                Client buyer = selectedBatch.Case.BuyerClient;
-
+                Client seller = batchGroup.Key;
                 sheet.get_Range("A3", "G3").MergeCells = true;
                 sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 sheet.Cells[3, 1] = "文件瑕疵通知书";
 
-                sheet.get_Range(sheet.Cells[5, 1], sheet.Cells[5, 4]).MergeCells = true;
-                sheet.Cells[5, 1] = "卖方（出口商)";
-                sheet.get_Range(sheet.Cells[5, 5], sheet.Cells[5, 7]).MergeCells = true;
-                sheet.Cells[5, 5] = "买方(应收账款债务人)";
-                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[6, 4]).MergeCells = true;
-                sheet.Cells[6, 1] = seller.ToString();
-                sheet.get_Range(sheet.Cells[6, 5], sheet.Cells[6, 7]).MergeCells = true;
-                sheet.Cells[6, 5] = buyer.ToString();
-                sheet.Cells[7, 1] = "保理部作业组";
+                sheet.get_Range(sheet.Cells[5, 1], sheet.Cells[5, 7]).MergeCells = true;
+                sheet.Cells[5, 1] = String.Format("卖方（出口商) : {0}",seller.ToString());
 
-                int row = 8;
-                sheet.Cells[row, 1] = "";
-                sheet.Cells[row, 2] = "发票号码";
-                sheet.Cells[row, 3] = "发票金额";
-                sheet.Cells[row, 4] = "发票日期";
-                sheet.Cells[row, 5] = "到期日";
-                sheet.Cells[row, 6] = "瑕疵金额";
-                sheet.Cells[row, 7] = "原因";
-                row++;
-                string flawOtherReason = string.Empty;
-                for (int i = 1; i <= selectedBatch.Invoices.Count; i++)
+                int row = 7;
+                foreach (InvoiceAssignBatch selectedBatch in batchGroup)
                 {
-                    Invoice invoice = selectedBatch.Invoices[i - 1];
-                    if (invoice.IsFlaw)
-                    {
-                        sheet.Cells[row, 1] = i;
-                        sheet.Cells[row, 2] = "'" + invoice.InvoiceNo;
-                        sheet.Cells[row, 3] = invoice.AssignAmount;
-                        sheet.Cells[row, 4] = invoice.InvoiceDate;
-                        sheet.Cells[row, 5] = invoice.DueDate;
-                        sheet.Cells[row, 6] = invoice.InvoiceAmount;
-                        sheet.Cells[row, 7] = invoice.FlawReason;
-                        if (invoice.FlawOtherReason != string.Empty && flawOtherReason == string.Empty)
-                        {
-                            flawOtherReason = invoice.FlawOtherReason;
-                        }
+                    Client buyer = selectedBatch.Case.BuyerClient;
+                    sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
+                    sheet.Cells[row, 1] = String.Format("买方(应收账款债务人) : {0}", buyer.ToString());
+                    row++;
+                    row++;
+                    int rowBegin = row;
 
-                        row++;
+                    sheet.Cells[row, 1] = "";
+                    sheet.Cells[row, 2] = "发票号码";
+                    sheet.Cells[row, 3] = "发票金额";
+                    sheet.Cells[row, 4] = "发票日期";
+                    sheet.Cells[row, 5] = "到期日";
+                    sheet.Cells[row, 6] = "瑕疵金额";
+                    sheet.Cells[row, 7] = "原因";
+
+                    row++;
+
+                    string flawOtherReason = string.Empty;
+                    for (int i = 1; i <= selectedBatch.Invoices.Count; i++)
+                    {
+                        Invoice invoice = selectedBatch.Invoices[i - 1];
+                        if (invoice.IsFlaw)
+                        {
+                            sheet.Cells[row, 1] = i;
+                            sheet.Cells[row, 2] = "'" + invoice.InvoiceNo;
+                            sheet.Cells[row, 3] = invoice.AssignAmount;
+                            sheet.Cells[row, 4] = invoice.InvoiceDate;
+                            sheet.Cells[row, 5] = invoice.DueDate;
+                            sheet.Cells[row, 6] = invoice.InvoiceAmount;
+                            sheet.Cells[row, 7] = invoice.FlawReason;
+                            if (invoice.FlawOtherReason != string.Empty && flawOtherReason == string.Empty)
+                            {
+                                flawOtherReason = invoice.FlawOtherReason;
+                            }
+
+                            row++;
+                        }
                     }
+
+                    sheet.get_Range(sheet.Cells[rowBegin, 1], sheet.Cells[row - 1, 6]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[rowBegin + 1, 3], sheet.Cells[row - 1, 3]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
+                    sheet.get_Range(sheet.Cells[rowBegin + 1, 6], sheet.Cells[row - 1, 6]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
+
+                    sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
+                    sheet.Cells[row, 1] = "原因：";
+                    row++;
+                    sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
+                    sheet.Cells[row, 1] =
+                          "01-卖方/买方基本资料不符; 02-发票为存根联或副联复印件; 03-发票无转让字据记载或贴错; \n"
+                        + "04-账款到期日不符;        05-单据内容不符;             06-额度通知书过期或未签回; \n"
+                        + "07-保理合同过期或未签回;  08-交货凭证内容不完整;       09-逾期转让;      10-其他;";
+                    sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 60;
+                    row++;
+                    sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
+                    int rowEnd = row;
+                    sheet.Cells[row++, 1] = flawOtherReason;
+
+                    sheet.get_Range(sheet.Cells[rowBegin, 1], sheet.Cells[rowEnd, 7]).Borders.LineStyle = 1;
+                    row++;
                 }
 
-                sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[row - 1, 6]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[9, 3], sheet.Cells[row - 1, 3]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
-                sheet.get_Range(sheet.Cells[9, 6], sheet.Cells[row - 1, 6]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
-
-                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
-                sheet.Cells[row, 1] = "原因：";
-                row++;
-                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
-                sheet.Cells[row, 1] =
-                      "01-卖方/买方基本资料不符; 02-发票为存根联或副联复印件; 03-发票无转让字据记载或贴错; \n"
-                    + "04-账款到期日不符;        05-单据内容不符;             06-额度通知书过期或未签回; \n"
-                    + "07-保理合同过期或未签回;  08-交货凭证内容不完整;       09-逾期转让;      10-其他;";
-                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 60;
-                row++;
-                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
-                sheet.Cells[row++, 1] = flawOtherReason;
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 3]).MergeCells = true;
                 sheet.Cells[row, 1] = String.Format("日期： {0:yyyy-MM-dd}", DateTime.Today);
                 sheet.get_Range(sheet.Cells[row, 4], sheet.Cells[row, 5]).MergeCells = true;
                 sheet.Cells[row, 4] = "复核：";
                 sheet.get_Range(sheet.Cells[row, 6], sheet.Cells[row, 7]).MergeCells = true;
                 sheet.Cells[row, 6] = "经办：";
-                sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[row, 7]).Borders.LineStyle = 1;
-                row++;
 
                 row++;
                 row++;
@@ -1175,7 +1338,6 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("A3", "A3").RowHeight = 30;
                 sheet.get_Range("A3", "A3").Font.Size = 22;
 
-                sheet.get_Range("A5", "G6").Borders.LineStyle = 1;
                 sheet.get_Range("A1", Type.Missing).ColumnWidth = 3;
                 sheet.get_Range("B1", Type.Missing).ColumnWidth = 10;
                 sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
@@ -1217,12 +1379,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectBatch(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
             this.Selected = selectedBatch;
             if (this.OwnerForm != null)
             {
@@ -1257,6 +1419,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

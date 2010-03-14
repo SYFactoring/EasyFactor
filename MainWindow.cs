@@ -1027,8 +1027,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ReportFinance(object sender, EventArgs e)
         {
-            AssignReportMgr assignMgr = new AssignReportMgr(AssignReportMgr.OpReportType.REPORT_FINANCE);
-            this.SetDetailPanel(assignMgr);
+            AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
+            this.SetDetailPanel(mgr);
         }
 
         /// <summary>

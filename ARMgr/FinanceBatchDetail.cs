@@ -74,7 +74,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchCurrencyComboBox.DisplayMember = "CurrencyCode";
             this.batchCurrencyComboBox.ValueMember = "CurrencyCode";
 
-            InvoiceMgr invoiceMgr = new InvoiceMgr(batch.Invoices);
+            InvoiceMgr invoiceMgr = new InvoiceMgr(batch.Invoices, context);
             invoiceMgr.Dock = DockStyle.Fill;
             this.panelInvoices.Controls.Add(invoiceMgr);
 

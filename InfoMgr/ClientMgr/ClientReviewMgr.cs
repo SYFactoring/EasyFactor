@@ -99,9 +99,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Properties
 
-        #region Methods (8)
+        #region Methods (9)
 
-        // Private Methods (8) 
+        // Private Methods (9) 
 
         /// <summary>
         /// 
@@ -176,6 +176,32 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
             Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvClientReviews.RowHeadersWidth - 4, e.RowBounds.Height);
             TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvClientReviews.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvClientReviews.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvClientReviews_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewColumn column = this.dgvClientReviews.Columns[e.ColumnIndex];
+            if (column == colIsRecoarse)
+            {
+                Object originalData = e.Value;
+                if (originalData != null)
+                {
+                    bool result = (bool)originalData;
+                    if (result)
+                    {
+                        e.Value = "Y";
+                    }
+                    else
+                    {
+                        e.Value = "N";
+                    }
+                }
+            }
         }
 
         /// <summary>

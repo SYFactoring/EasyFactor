@@ -665,7 +665,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            AssignBatchMgr batchMgr = new AssignBatchMgr(this._case);
+            AssignBatchMgr batchMgr = new AssignBatchMgr(this._case, this.context);
             QueryForm queryUI = new QueryForm(batchMgr, "选择转让批次");
             batchMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);

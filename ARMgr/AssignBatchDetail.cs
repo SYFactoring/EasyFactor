@@ -69,7 +69,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.opBatchType = OpBatchType.DETAIL_BATCH;
             this.ImeMode = ImeMode.OnHalf;
 
-            InvoiceMgr invoiceMgr = new InvoiceMgr(batch.Invoices);
+            InvoiceMgr invoiceMgr = new InvoiceMgr(batch.Invoices, context);
             invoiceMgr.Dock = DockStyle.Fill;
             this.panelInvoices.Controls.Add(invoiceMgr);
 

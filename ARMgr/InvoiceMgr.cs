@@ -127,14 +127,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="invoiceList"></param>
-        public InvoiceMgr(EntitySet<Invoice> invoiceList)
+        public InvoiceMgr(EntitySet<Invoice> invoiceList, DBDataContext context)
             : this(OpInvoiceType.BATCH_DETAIL)
         {
             this.bs.DataSource = invoiceList;
             this.lblCount.Text = String.Format("获得{0}条记录", invoiceList.Count());
             this.panelQuery.Visible = false;
 
-            context = new DBDataContext();
+            this.context = context;
         }
 
         /// <summary>

@@ -526,6 +526,9 @@
       <Column Name="RequestFinancePeriod" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="TransactionType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="IsRecoarse" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="IsNotice" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Client_ClientReview" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>

@@ -438,7 +438,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             ClientDetail clientDetail = new ClientDetail(curCase.BuyerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
-            clientDetail.Show();
+            clientDetail.ShowDialog(this);
         }
 
         /// <summary>
@@ -498,7 +498,7 @@ namespace CMBC.EasyFactor.CaseMgr
             if (factor != null)
             {
                 FactorDetail factorDetail = new FactorDetail(factor, FactorDetail.OpFactorType.DETAIL_FACTOR);
-                factorDetail.Show();
+                factorDetail.ShowDialog(this);
             }
         }
 
@@ -516,7 +516,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             ClientDetail clientDetail = new ClientDetail(curCase.SellerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
-            clientDetail.Show();
+            clientDetail.ShowDialog(this);
         }
 
         /// <summary>

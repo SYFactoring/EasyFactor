@@ -11874,6 +11874,12 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
+		private string _TransactionType;
+		
+		private System.Nullable<bool> _IsRecoarse;
+		
+		private string _IsNotice;
+		
 		private EntityRef<Client> _Client;
 		
     #region Extensibility Method Definitions
@@ -11904,6 +11910,12 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreateUserNameChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnTransactionTypeChanging(string value);
+    partial void OnTransactionTypeChanged();
+    partial void OnIsRecoarseChanging(System.Nullable<bool> value);
+    partial void OnIsRecoarseChanged();
+    partial void OnIsNoticeChanging(string value);
+    partial void OnIsNoticeChanged();
     #endregion
 		
 		public ClientReview()
@@ -12152,6 +12164,66 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Comment = value;
 					this.SendPropertyChanged("Comment");
 					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_TransactionType", DbType="NVarChar(50) NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string TransactionType
+		{
+			get
+			{
+				return this._TransactionType;
+			}
+			set
+			{
+				if ((this._TransactionType != value))
+				{
+					this.OnTransactionTypeChanging(value);
+					this.SendPropertyChanging();
+					this._TransactionType = value;
+					this.SendPropertyChanged("TransactionType");
+					this.OnTransactionTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsRecoarse", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<bool> IsRecoarse
+		{
+			get
+			{
+				return this._IsRecoarse;
+			}
+			set
+			{
+				if ((this._IsRecoarse != value))
+				{
+					this.OnIsRecoarseChanging(value);
+					this.SendPropertyChanging();
+					this._IsRecoarse = value;
+					this.SendPropertyChanged("IsRecoarse");
+					this.OnIsRecoarseChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsNotice", DbType="NVarChar(50) NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string IsNotice
+		{
+			get
+			{
+				return this._IsNotice;
+			}
+			set
+			{
+				if ((this._IsNotice != value))
+				{
+					this.OnIsNoticeChanging(value);
+					this.SendPropertyChanging();
+					this._IsNotice = value;
+					this.SendPropertyChanged("IsNotice");
+					this.OnIsNoticeChanged();
 				}
 			}
 		}
