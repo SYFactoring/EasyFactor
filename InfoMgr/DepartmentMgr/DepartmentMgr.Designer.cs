@@ -11,19 +11,36 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     /// </summary>
     public partial class DepartmentMgr
     {
-		#region Fields (26) 
+        #region Fields (33)
 
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.ButtonX btnReset;
         private System.Windows.Forms.ContextMenuStrip cmuDeptMgr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDomain;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaintainManager;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colManager;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMarketManager;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvDepts;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
         private DevComponents.DotNetBar.LabelX lblCount;
-        private DevComponents.DotNetBar.LabelX lblDeparmentName;
+        private DevComponents.DotNetBar.LabelX lblDate;
         private DevComponents.DotNetBar.LabelX lblDepartmentCode;
+        private DevComponents.DotNetBar.LabelX lblDepartmentName;
         private System.Windows.Forms.ToolStripMenuItem menuItemDepartmentDelete;
         private System.Windows.Forms.ToolStripMenuItem menuItemDepartmentNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemDetail;
@@ -33,11 +50,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         private DevComponents.DotNetBar.Controls.TextBoxX tbDepartmentName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Methods (1) 
+        #region Methods (1)
 
-		// Protected Methods (1) 
+        // Protected Methods (1) 
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -53,7 +70,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             base.Dispose(disposing);
         }
 
-		#endregion Methods 
+        #endregion Methods
 
 
 
@@ -67,17 +84,22 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.lblDate = new DevComponents.DotNetBar.LabelX();
+            this.diEnd = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.diBegin = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.btnReset = new DevComponents.DotNetBar.ButtonX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbDepartmentName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblDeparmentName = new DevComponents.DotNetBar.LabelX();
+            this.lblDepartmentName = new DevComponents.DotNetBar.LabelX();
             this.tbDepartmentCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDepartmentCode = new DevComponents.DotNetBar.LabelX();
             this.dgvDepts = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -97,9 +119,13 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colContact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIncomeAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCommissionIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNetInterestIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMarginIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepts)).BeginInit();
             this.cmuDeptMgr.SuspendLayout();
             this.SuspendLayout();
@@ -108,17 +134,20 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.lblDate);
+            this.panelQuery.Controls.Add(this.diEnd);
+            this.panelQuery.Controls.Add(this.diBegin);
             this.panelQuery.Controls.Add(this.btnReset);
             this.panelQuery.Controls.Add(this.lblCount);
             this.panelQuery.Controls.Add(this.btnQuery);
             this.panelQuery.Controls.Add(this.tbDepartmentName);
-            this.panelQuery.Controls.Add(this.lblDeparmentName);
+            this.panelQuery.Controls.Add(this.lblDepartmentName);
             this.panelQuery.Controls.Add(this.tbDepartmentCode);
             this.panelQuery.Controls.Add(this.lblDepartmentCode);
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(605, 31);
+            this.panelQuery.Size = new System.Drawing.Size(605, 54);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -127,6 +156,115 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblDate.BackgroundStyle.Class = "";
+            this.lblDate.Location = new System.Drawing.Point(3, 32);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(56, 16);
+            this.lblDate.TabIndex = 17;
+            this.lblDate.Text = "查询期限";
+            // 
+            // diEnd
+            // 
+            // 
+            // 
+            // 
+            this.diEnd.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diEnd.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.diEnd.ButtonDropDown.Visible = true;
+            this.diEnd.ButtonFreeText.Checked = true;
+            this.diEnd.FreeTextEntryMode = true;
+            this.diEnd.Location = new System.Drawing.Point(165, 29);
+            // 
+            // 
+            // 
+            this.diEnd.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diEnd.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diEnd.MonthCalendar.BackgroundStyle.Class = "";
+            this.diEnd.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diEnd.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.diEnd.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diEnd.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.diEnd.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diEnd.MonthCalendar.TodayButtonVisible = true;
+            this.diEnd.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diEnd.Name = "diEnd";
+            this.diEnd.Size = new System.Drawing.Size(100, 20);
+            this.diEnd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.diEnd.TabIndex = 19;
+            // 
+            // diBegin
+            // 
+            // 
+            // 
+            // 
+            this.diBegin.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diBegin.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.diBegin.ButtonDropDown.Visible = true;
+            this.diBegin.ButtonFreeText.Checked = true;
+            this.diBegin.FreeTextEntryMode = true;
+            this.diBegin.Location = new System.Drawing.Point(59, 29);
+            // 
+            // 
+            // 
+            this.diBegin.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diBegin.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diBegin.MonthCalendar.BackgroundStyle.Class = "";
+            this.diBegin.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diBegin.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.diBegin.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diBegin.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.diBegin.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diBegin.MonthCalendar.TodayButtonVisible = true;
+            this.diBegin.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diBegin.Name = "diBegin";
+            this.diBegin.Size = new System.Drawing.Size(100, 20);
+            this.diBegin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.diBegin.TabIndex = 18;
             // 
             // btnReset
             // 
@@ -176,19 +314,19 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.tbDepartmentName.Size = new System.Drawing.Size(100, 20);
             this.tbDepartmentName.TabIndex = 3;
             // 
-            // lblDeparmentName
+            // lblDepartmentName
             // 
-            this.lblDeparmentName.AutoSize = true;
+            this.lblDepartmentName.AutoSize = true;
             // 
             // 
             // 
-            this.lblDeparmentName.BackgroundStyle.Class = "";
-            this.lblDeparmentName.Location = new System.Drawing.Point(167, 7);
-            this.lblDeparmentName.Name = "lblDeparmentName";
-            this.lblDeparmentName.Size = new System.Drawing.Size(56, 16);
-            this.lblDeparmentName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.lblDeparmentName.TabIndex = 2;
-            this.lblDeparmentName.Text = "分部名称";
+            this.lblDepartmentName.BackgroundStyle.Class = "";
+            this.lblDepartmentName.Location = new System.Drawing.Point(167, 7);
+            this.lblDepartmentName.Name = "lblDepartmentName";
+            this.lblDepartmentName.Size = new System.Drawing.Size(56, 16);
+            this.lblDepartmentName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.lblDepartmentName.TabIndex = 2;
+            this.lblDepartmentName.Text = "分部名称";
             // 
             // tbDepartmentCode
             // 
@@ -240,25 +378,27 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colContact,
             this.colAssignAmount,
             this.colFinanceAmount,
-            this.colPaymentAmount,
-            this.colIncomeAmount});
+            this.colCommissionIncome,
+            this.colNetInterestIncome,
+            this.colMarginIncome,
+            this.colTotalIncome});
             this.dgvDepts.ContextMenuStrip = this.cmuDeptMgr;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDepts.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDepts.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvDepts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDepts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvDepts.Location = new System.Drawing.Point(0, 31);
+            this.dgvDepts.Location = new System.Drawing.Point(0, 54);
             this.dgvDepts.MultiSelect = false;
             this.dgvDepts.Name = "dgvDepts";
             this.dgvDepts.ReadOnly = true;
             this.dgvDepts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDepts.Size = new System.Drawing.Size(605, 429);
+            this.dgvDepts.Size = new System.Drawing.Size(605, 406);
             this.dgvDepts.TabIndex = 0;
             this.dgvDepts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvDepts.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvDepts_RowPostPaint);
@@ -370,7 +510,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // colAssignAmount
             // 
-            this.colAssignAmount.DataPropertyName = "AssignAmount";
+            this.colAssignAmount.DataPropertyName = "AssignAmountByDate";
             dataGridViewCellStyle2.Format = "N2";
             dataGridViewCellStyle2.NullValue = null;
             this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle2;
@@ -381,7 +521,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // colFinanceAmount
             // 
-            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
+            this.colFinanceAmount.DataPropertyName = "FinanceAmountByDate";
             dataGridViewCellStyle3.Format = "N2";
             dataGridViewCellStyle3.NullValue = null;
             this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle3;
@@ -390,27 +530,41 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colFinanceAmount.ReadOnly = true;
             this.colFinanceAmount.Visible = false;
             // 
-            // colPaymentAmount
+            // colCommissionIncome
             // 
-            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
+            this.colCommissionIncome.DataPropertyName = "CommissionIncomeByDate";
             dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colPaymentAmount.HeaderText = "付款量";
-            this.colPaymentAmount.Name = "colPaymentAmount";
-            this.colPaymentAmount.ReadOnly = true;
-            this.colPaymentAmount.Visible = false;
+            this.colCommissionIncome.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colCommissionIncome.HeaderText = "保理费收入";
+            this.colCommissionIncome.Name = "colCommissionIncome";
+            this.colCommissionIncome.ReadOnly = true;
             // 
-            // colIncomeAmount
+            // colNetInterestIncome
             // 
-            this.colIncomeAmount.DataPropertyName = "IncomeAmount";
+            this.colNetInterestIncome.DataPropertyName = "NetInterestIncomeByDate";
             dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colIncomeAmount.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colIncomeAmount.HeaderText = "收入";
-            this.colIncomeAmount.Name = "colIncomeAmount";
-            this.colIncomeAmount.ReadOnly = true;
-            this.colIncomeAmount.Visible = false;
+            this.colNetInterestIncome.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colNetInterestIncome.HeaderText = "净利息收入";
+            this.colNetInterestIncome.Name = "colNetInterestIncome";
+            this.colNetInterestIncome.ReadOnly = true;
+            // 
+            // colMarginIncome
+            // 
+            this.colMarginIncome.DataPropertyName = "MarginIncomeByDate";
+            dataGridViewCellStyle6.Format = "N2";
+            this.colMarginIncome.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colMarginIncome.HeaderText = "代付利差收入";
+            this.colMarginIncome.Name = "colMarginIncome";
+            this.colMarginIncome.ReadOnly = true;
+            // 
+            // colTotalIncome
+            // 
+            this.colTotalIncome.DataPropertyName = "TotalIncomeByDate";
+            dataGridViewCellStyle7.Format = "N2";
+            this.colTotalIncome.DefaultCellStyle = dataGridViewCellStyle7;
+            this.colTotalIncome.HeaderText = "总收入";
+            this.colTotalIncome.Name = "colTotalIncome";
+            this.colTotalIncome.ReadOnly = true;
             // 
             // DepartmentMgr
             // 
@@ -423,6 +577,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.Size = new System.Drawing.Size(605, 460);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diEnd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diBegin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepts)).EndInit();
             this.cmuDeptMgr.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -430,21 +586,5 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDomain;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMarketManager;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaintainManager;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colManager;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContact;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIncomeAmount;
-
-
-
     }
 }

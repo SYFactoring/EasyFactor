@@ -52,6 +52,17 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 代付利差收入
+        /// </summary>
+        public double? MarginIncome
+        {
+            get
+            {
+                return this.FinanceAmount * (this.FinanceRate - this.CostRate) / 360 * ((this.FinancePeriodEnd - this.FinancePeriodBegin).Days);
+            }
+        }
+
+        /// <summary>
         /// 净利息收入
         /// </summary>
         public double? NetInterestIncome

@@ -13,9 +13,8 @@ namespace CMBC.EasyFactor.CaseMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using Microsoft.Office.Interop.Excel;
-    using System.Data.Linq;
     using DevComponents.DotNetBar;
+    using Microsoft.Office.Interop.Excel;
 
     /// <summary>
     /// 
@@ -89,7 +88,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.colOPName.Visible = false;
                 this.colAssignAmount.Visible = true;
                 this.colFinanceAmount.Visible = true;
-                this.colPaymentAmount.Visible = true;
                 this.colCommissionIncome.Visible = true;
                 this.colNetInterestIncome.Visible = true;
                 this.colMarginIncome.Visible = true;
@@ -326,16 +324,25 @@ namespace CMBC.EasyFactor.CaseMgr
                                 && (this.cbTransactionType.Text == "全部" ? true : c.TransactionType == this.cbTransactionType.Text)
                                 && ((string)this.cbCurrency.SelectedValue == "AAA" ? true : c.InvoiceCurrency == (string)this.cbCurrency.SelectedValue)
                                 && (location == "全部" ? true : c.OwnerDepartment.Location == location)
-                                && (beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
-                                && (endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
                                 && (c.CaseMark.Contains(this.cbCaseMark.Text))
                                 && c.OPName.Contains(opName)
+                                && (opCaseType != OpCaseType.STAT && beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
+                                && (opCaseType != OpCaseType.STAT && endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
                                 && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.IsSigned == true))
                                 && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY))
                                 && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN.Contains(this.tbClientName.Text)
                                  || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN.Contains(this.tbClientName.Text))
                                     );
+
+            if (opCaseType == OpCaseType.STAT)
+            {
+                foreach (Case c in queryResult)
+                {
+                    c.QueryDateFrom = beginDate;
+                    c.QueryDateTo = endDate;
+                }
+            }
 
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());

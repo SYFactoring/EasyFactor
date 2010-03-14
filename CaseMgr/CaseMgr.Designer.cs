@@ -75,7 +75,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -89,7 +89,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblLocation = new DevComponents.DotNetBar.LabelX();
@@ -139,7 +138,6 @@
             this.colOPName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCommissionIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNetInterestIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMarginIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -414,11 +412,11 @@
             // 
             // 
             this.lblDate.BackgroundStyle.Class = "";
-            this.lblDate.Location = new System.Drawing.Point(198, 58);
+            this.lblDate.Location = new System.Drawing.Point(198, 60);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(56, 16);
             this.lblDate.TabIndex = 14;
-            this.lblDate.Text = "申请期限";
+            this.lblDate.Text = "查询期限";
             // 
             // btnQuery
             // 
@@ -641,7 +639,6 @@
             this.colOPName,
             this.colAssignAmount,
             this.colFinanceAmount,
-            this.colPaymentAmount,
             this.colCommissionIncome,
             this.colNetInterestIncome,
             this.colMarginIncome,
@@ -653,14 +650,14 @@
             this.colTotalFinanceOutstanding,
             this.colFinanceLineOutstanding});
             this.dgvCases.ContextMenuStrip = this.cmuContractMgr;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCases.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCases.DefaultCellStyle = dataGridViewCellStyle15;
             this.dgvCases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCases.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCases.Location = new System.Drawing.Point(0, 85);
@@ -839,7 +836,7 @@
             // 
             // colAssignAmount
             // 
-            this.colAssignAmount.DataPropertyName = "AssignAmount";
+            this.colAssignAmount.DataPropertyName = "AssignAmountByDate";
             dataGridViewCellStyle3.Format = "N2";
             dataGridViewCellStyle3.NullValue = null;
             this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle3;
@@ -850,7 +847,7 @@
             // 
             // colFinanceAmount
             // 
-            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
+            this.colFinanceAmount.DataPropertyName = "FinanceAmountByDate";
             dataGridViewCellStyle4.Format = "N2";
             dataGridViewCellStyle4.NullValue = null;
             this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle4;
@@ -859,23 +856,12 @@
             this.colFinanceAmount.ReadOnly = true;
             this.colFinanceAmount.Visible = false;
             // 
-            // colPaymentAmount
-            // 
-            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colPaymentAmount.HeaderText = "付款量";
-            this.colPaymentAmount.Name = "colPaymentAmount";
-            this.colPaymentAmount.ReadOnly = true;
-            this.colPaymentAmount.Visible = false;
-            // 
             // colCommissionIncome
             // 
-            this.colCommissionIncome.DataPropertyName = "CommissionIncome";
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.colCommissionIncome.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colCommissionIncome.DataPropertyName = "CommissionIncomeByDate";
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colCommissionIncome.DefaultCellStyle = dataGridViewCellStyle5;
             this.colCommissionIncome.HeaderText = "保理费收入";
             this.colCommissionIncome.Name = "colCommissionIncome";
             this.colCommissionIncome.ReadOnly = true;
@@ -883,9 +869,9 @@
             // 
             // colNetInterestIncome
             // 
-            this.colNetInterestIncome.DataPropertyName = "NetInterestIncome";
-            dataGridViewCellStyle7.Format = "N2";
-            this.colNetInterestIncome.DefaultCellStyle = dataGridViewCellStyle7;
+            this.colNetInterestIncome.DataPropertyName = "NetInterestIncomeByDate";
+            dataGridViewCellStyle6.Format = "N2";
+            this.colNetInterestIncome.DefaultCellStyle = dataGridViewCellStyle6;
             this.colNetInterestIncome.HeaderText = "净利息收入";
             this.colNetInterestIncome.Name = "colNetInterestIncome";
             this.colNetInterestIncome.ReadOnly = true;
@@ -893,9 +879,9 @@
             // 
             // colMarginIncome
             // 
-            this.colMarginIncome.DataPropertyName = "MarginIncome";
-            dataGridViewCellStyle8.Format = "N2";
-            this.colMarginIncome.DefaultCellStyle = dataGridViewCellStyle8;
+            this.colMarginIncome.DataPropertyName = "MarginIncomeByDate";
+            dataGridViewCellStyle7.Format = "N2";
+            this.colMarginIncome.DefaultCellStyle = dataGridViewCellStyle7;
             this.colMarginIncome.HeaderText = "代付利差收入";
             this.colMarginIncome.Name = "colMarginIncome";
             this.colMarginIncome.ReadOnly = true;
@@ -903,9 +889,9 @@
             // 
             // colTotalIncome
             // 
-            this.colTotalIncome.DataPropertyName = "TotalIncome";
-            dataGridViewCellStyle9.Format = "N2";
-            this.colTotalIncome.DefaultCellStyle = dataGridViewCellStyle9;
+            this.colTotalIncome.DataPropertyName = "TotalIncomeByDate";
+            dataGridViewCellStyle8.Format = "N2";
+            this.colTotalIncome.DefaultCellStyle = dataGridViewCellStyle8;
             this.colTotalIncome.HeaderText = "总收入";
             this.colTotalIncome.Name = "colTotalIncome";
             this.colTotalIncome.ReadOnly = true;
@@ -914,8 +900,8 @@
             // colAssignOutstanding
             // 
             this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
-            dataGridViewCellStyle10.Format = "N2";
-            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle9.Format = "N2";
+            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle9;
             this.colAssignOutstanding.HeaderText = "应收帐款余额";
             this.colAssignOutstanding.Name = "colAssignOutstanding";
             this.colAssignOutstanding.ReadOnly = true;
@@ -923,9 +909,9 @@
             // colTotalAssignOutstanding
             // 
             this.colTotalAssignOutstanding.DataPropertyName = "TotalAssignOutstanding";
-            dataGridViewCellStyle11.Format = "N2";
-            dataGridViewCellStyle11.NullValue = null;
-            this.colTotalAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.colTotalAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle10;
             this.colTotalAssignOutstanding.HeaderText = "总帐款余额";
             this.colTotalAssignOutstanding.Name = "colTotalAssignOutstanding";
             this.colTotalAssignOutstanding.ReadOnly = true;
@@ -933,8 +919,8 @@
             // colCreditCoverOutstanding
             // 
             this.colCreditCoverOutstanding.DataPropertyName = "CreditCoverOutstanding";
-            dataGridViewCellStyle12.Format = "N2";
-            this.colCreditCoverOutstanding.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle11.Format = "N2";
+            this.colCreditCoverOutstanding.DefaultCellStyle = dataGridViewCellStyle11;
             this.colCreditCoverOutstanding.HeaderText = "剩余信用风险额度";
             this.colCreditCoverOutstanding.Name = "colCreditCoverOutstanding";
             this.colCreditCoverOutstanding.ReadOnly = true;
@@ -942,9 +928,9 @@
             // colFinanceOutstanding
             // 
             this.colFinanceOutstanding.DataPropertyName = "FinanceOutstanding";
-            dataGridViewCellStyle13.Format = "N2";
-            dataGridViewCellStyle13.NullValue = null;
-            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle12;
             this.colFinanceOutstanding.HeaderText = "融资余额";
             this.colFinanceOutstanding.Name = "colFinanceOutstanding";
             this.colFinanceOutstanding.ReadOnly = true;
@@ -952,8 +938,8 @@
             // colTotalFinanceOutstanding
             // 
             this.colTotalFinanceOutstanding.DataPropertyName = "TotalFinanceOutstanding";
-            dataGridViewCellStyle14.Format = "N2";
-            this.colTotalFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle13.Format = "N2";
+            this.colTotalFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle13;
             this.colTotalFinanceOutstanding.HeaderText = "总融资余额";
             this.colTotalFinanceOutstanding.Name = "colTotalFinanceOutstanding";
             this.colTotalFinanceOutstanding.ReadOnly = true;
@@ -961,8 +947,8 @@
             // colFinanceLineOutstanding
             // 
             this.colFinanceLineOutstanding.DataPropertyName = "FinanceLineOutstanding";
-            dataGridViewCellStyle15.Format = "N2";
-            this.colFinanceLineOutstanding.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle14.Format = "N2";
+            this.colFinanceLineOutstanding.DefaultCellStyle = dataGridViewCellStyle14;
             this.colFinanceLineOutstanding.HeaderText = "剩余融资额度";
             this.colFinanceLineOutstanding.Name = "colFinanceLineOutstanding";
             this.colFinanceLineOutstanding.ReadOnly = true;
@@ -1004,7 +990,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOPName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionIncome;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;

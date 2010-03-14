@@ -9,6 +9,7 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Collections.Generic;
     using System.Linq;
     using CMBC.EasyFactor.Utils;
+    using System;
 
     /// <summary>
     /// 
@@ -16,6 +17,52 @@ namespace CMBC.EasyFactor.DB.dbml
     public partial class Department
     {
         #region Properties (6)
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime QueryDateFrom
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime QueryDateTo
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double AssignAmountByDate
+        {
+            get
+            {
+                double result = 0;
+                DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+                DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
+                {
+                    IEnumerable<InvoiceAssignBatch> batches = selectedCase.InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate);
+                    foreach (InvoiceAssignBatch batch in batches)
+                    {
+                        double assign = batch.AssignAmount;
+                        if (selectedCase.InvoiceCurrency != "CNY")
+                        {
+                            double rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
+                            assign *= rate;
+                        }
+                        result += assign;
+                    }
+                }
+
+                return result;
+            }
+        }
 
         /// <summary>
         /// 
@@ -46,32 +93,138 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double CommissionAmount
+        public double CommissionIncomeByDate
         {
             get
             {
                 double result = 0;
+                DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+                DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
                 foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
                 {
-                    foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
+                    selectedCase.QueryDateFrom = fromDate;
+                    selectedCase.QueryDateTo = toDate;
+                    double commission = selectedCase.CommissionIncomeByDate;
+                    if (selectedCase.InvoiceCurrency != "CNY" && TypeUtil.GreaterZero(commission))
                     {
-                        foreach (Invoice invoice in batch.Invoices)
-                        {
-                            double commission = invoice.Commission.GetValueOrDefault();
-                            if (selectedCase.InvoiceCurrency != "CNY")
-                            {
-                                double rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
-                                commission *= rate;
-                            }
+                        double rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
+                        commission *= rate;
+                    }
 
-                            result += commission;
+                    result += commission;
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? NetInterestIncomeByDate
+        {
+            get
+            {
+                double? result = null;
+                DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+                DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
+                {
+                    selectedCase.QueryDateFrom = fromDate;
+                    selectedCase.QueryDateTo = toDate;
+                    double? netInterest = selectedCase.NetInterestIncomeByDate;
+                    if (selectedCase.InvoiceCurrency != "CNY" && TypeUtil.GreaterZero(netInterest))
+                    {
+                        double rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
+                        netInterest *= rate;
+                    }
+
+                    if (netInterest.HasValue && result == null)
+                    {
+                        result = 0;
+                    }
+
+                    result += netInterest.GetValueOrDefault();
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? MarginIncomeByDate
+        {
+            get
+            {
+                double? result = null;
+                DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+                DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
+                {
+                    selectedCase.QueryDateFrom = fromDate;
+                    selectedCase.QueryDateTo = toDate;
+                    double? marginIncome = selectedCase.MarginIncomeByDate;
+                    if (selectedCase.InvoiceCurrency != "CNY" && TypeUtil.GreaterZero(marginIncome))
+                    {
+                        double rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
+                        marginIncome *= rate;
+                    }
+
+                    if (marginIncome.HasValue && result == null)
+                    {
+                        result = 0;
+                    }
+
+                    result += marginIncome.GetValueOrDefault();
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double TotalIncomeByDate
+        {
+            get
+            {
+                return this.CommissionIncomeByDate + this.NetInterestIncomeByDate.GetValueOrDefault() + this.MarginIncomeByDate.GetValueOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double FinanceAmountByDate
+        {
+            get
+            {
+                double result = 0;
+                DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+                DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
+                {
+                    IEnumerable<InvoiceFinanceBatch> batches = selectedCase.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
+                    foreach (InvoiceFinanceBatch batch in batches)
+                    {
+                        double finance = batch.FinanceAmount;
+                        if (batch.BatchCurrency != "CNY")
+                        {
+                            double rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
+                            finance *= rate;
                         }
+
+                        result += finance;
                     }
                 }
 
                 return result;
             }
         }
+
 
         /// <summary>
         /// 
@@ -103,45 +256,31 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double HandFeeAmount
+        public double PaymentAmountByDate
         {
             get
             {
                 double result = 0;
+                DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+                DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+
                 foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
                 {
-                    int count = 0;
-                    foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
+                    IEnumerable<InvoicePaymentBatch> batches = selectedCase.InvoicePaymentBatches.Where(i => i.PaymentDate >= fromDate && i.PaymentDate <= toDate);
+                    foreach (InvoicePaymentBatch batch in batches)
                     {
-                        count += batch.BatchCount;
-                    }
-
-                    CDA cda = selectedCase.ActiveCDA;
-                    if (cda != null)
-                    {
-                        double handfee = count * cda.HandFee.GetValueOrDefault();
-                        if (cda.HandFeeCurr != "CNY")
+                        double payment = batch.PaymentAmount;
+                        if (selectedCase.InvoiceCurrency != "CNY")
                         {
-                            double rate = Exchange.GetExchangeRate(cda.HandFeeCurr, "CNY");
-                            handfee *= rate;
+                            double rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
+                            payment *= rate;
                         }
 
-                        result += handfee;
+                        result += payment;
                     }
                 }
 
                 return result;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double IncomeAmount
-        {
-            get
-            {
-                return CommissionAmount + HandFeeAmount;
             }
         }
 
@@ -226,16 +365,23 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         /// <param name="loc"></param>
         /// <param name="depts"></param>
-        public City(string loc, List<Department> depts)
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        public City(string loc, List<Department> depts, DateTime from, DateTime to)
         {
             Location = loc;
 
             foreach (Department dept in depts)
             {
-                AssignAmount += dept.AssignAmount;
-                FinanceAmount += dept.FinanceAmount;
-                PaymentAmount += dept.PaymentAmount;
-                IncomeAmount += dept.IncomeAmount;
+                dept.QueryDateFrom = from;
+                dept.QueryDateTo = to;
+                AssignAmountByDate += dept.AssignAmountByDate;
+                FinanceAmountByDate += dept.FinanceAmountByDate;
+                PaymentAmountByDate += dept.PaymentAmountByDate;
+                CommissionIncomeByDate += dept.CommissionIncomeByDate;
+                NetInterestIncomeByDate += dept.NetInterestIncomeByDate;
+                MarginIncomeByDate += dept.MarginIncomeByDate;
+                TotalIncomeByDate += dept.TotalIncomeByDate;
             }
         }
 
@@ -251,7 +397,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double AssignAmount
+        public double AssignAmountByDate
         {
             get;
             set;
@@ -260,7 +406,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double FinanceAmount
+        public double FinanceAmountByDate
         {
             get;
             set;
@@ -269,7 +415,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double PaymentAmount
+        public double PaymentAmountByDate
         {
             get;
             set;
@@ -278,7 +424,34 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double IncomeAmount
+        public double CommissionIncomeByDate
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? NetInterestIncomeByDate
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? MarginIncomeByDate
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double TotalIncomeByDate
         {
             get;
             set;

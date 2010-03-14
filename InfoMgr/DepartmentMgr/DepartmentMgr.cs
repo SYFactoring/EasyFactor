@@ -69,14 +69,14 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             {
                 this.colAssignAmount.Visible = true;
                 this.colFinanceAmount.Visible = true;
-                this.colPaymentAmount.Visible = true;
-                this.colIncomeAmount.Visible = true;
-                this.Query(null, null);
+                this.colCommissionIncome.Visible = true;
+                this.colNetInterestIncome.Visible = true;
+                this.colMarginIncome.Visible = true;
+                this.colTotalIncome.Visible = true;
             }
             else if (opDepartmentType == OpDepartmentType.LOCATION_STAT)
             {
                 this.dgvDepts.ContextMenuStrip = null;
-                this.panelQuery.Visible = false;
                 this.colDepartmentCode.Visible = false;
                 this.colDepartmentName.Visible = false;
                 this.colDomain.Visible = false;
@@ -84,23 +84,20 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 this.colContact.Visible = false;
                 this.colAssignAmount.Visible = true;
                 this.colFinanceAmount.Visible = true;
-                this.colPaymentAmount.Visible = true;
-                this.colIncomeAmount.Visible = true;
-
-                context = new DBDataContext();
-
-                var result = from dept in context.Departments
-                             group dept by dept.Location into depts
-                             select new { Location = depts.Key, Departments = depts };
-
-                SortableBindingList<City> locations = new SortableBindingList<City>();
-
-                foreach (var loc in result)
-                {
-                    locations.Add(new City(loc.Location, loc.Departments.ToList()));
-                }
-
-                this.bs.DataSource = locations;
+                this.colCommissionIncome.Visible = true;
+                this.colNetInterestIncome.Visible = true;
+                this.colMarginIncome.Visible = true;
+                this.colTotalIncome.Visible = true;
+                this.lblDepartmentCode.Visible = false;
+                this.lblDepartmentName.Visible = false;
+                this.tbDepartmentCode.Visible = false;
+                this.tbDepartmentName.Visible = false;
+            }
+            else
+            {
+                this.lblDate.Visible = false;
+                this.diBegin.Visible = false;
+                this.diEnd.Visible = false;
             }
         }
 
@@ -267,12 +264,42 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         {
             context = new DBDataContext();
 
-            var queryResult = context.Departments.Where(d =>
-                             (d.DepartmentCode == null ? string.Empty : d.DepartmentCode).Contains(this.tbDepartmentCode.Text)
-                          && (d.DepartmentName == null ? string.Empty : d.DepartmentName).Contains(this.tbDepartmentName.Text));
+            DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
+            DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
 
-            this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            if (opDepatmentType == OpDepartmentType.QUERY || opDepatmentType == OpDepartmentType.DEPARTMENT_STAT)
+            {
+                var queryResult = context.Departments.Where(d =>
+                                 (d.DepartmentCode == null ? string.Empty : d.DepartmentCode).Contains(this.tbDepartmentCode.Text)
+                              && (d.DepartmentName == null ? string.Empty : d.DepartmentName).Contains(this.tbDepartmentName.Text));
+
+                if (opDepatmentType == OpDepartmentType.DEPARTMENT_STAT)
+                {
+                    foreach (var c in queryResult)
+                    {
+                        c.QueryDateFrom = beginDate;
+                        c.QueryDateTo = endDate;
+                    }
+                }
+
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            }
+            else if (opDepatmentType == OpDepartmentType.LOCATION_STAT)
+            {
+                var result = from dept in context.Departments
+                             group dept by dept.Location into depts
+                             select new { Location = depts.Key, Departments = depts };
+
+                SortableBindingList<City> locations = new SortableBindingList<City>();
+
+                foreach (var loc in result)
+                {
+                    locations.Add(new City(loc.Location, loc.Departments.ToList(), beginDate, endDate));
+                }
+
+                this.bs.DataSource = locations;
+            }
         }
 
         /// <summary>

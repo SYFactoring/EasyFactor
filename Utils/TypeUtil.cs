@@ -19,6 +19,8 @@ namespace CMBC.EasyFactor.Utils
 
         // Public Methods (12) 
 
+        public static DateTime MIN_DATE = new DateTime(1753, 1, 1);
+
         /// <summary>
         /// 
         /// </summary>
