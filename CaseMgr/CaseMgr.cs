@@ -326,7 +326,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                 && (location == "全部" ? true : c.OwnerDepartment.Location == location)
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
                                 && (c.CaseMark.Contains(this.cbCaseMark.Text))
-                                && c.OPName.Contains(opName)
+                                && (c.OPName == null ? true : c.OPName.Contains(opName))
                                 && (opCaseType != OpCaseType.STAT && beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
                                 && (opCaseType != OpCaseType.STAT && endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
                                 && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.IsSigned == true))
