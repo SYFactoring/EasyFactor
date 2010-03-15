@@ -18,7 +18,6 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.ExchangeMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.InfoMgr.UserMgr;
-    using CMBC.EasyFactor.Report;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Help;
@@ -44,6 +43,8 @@ namespace CMBC.EasyFactor
             this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
             this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
             this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
+
+            this.notifyIcon.Visible = false;
 
             //this.backgroundWorker.RunWorkerAsync();
         }
@@ -335,6 +336,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void HideInTray(object sender, EventArgs e)
         {
+            this.notifyIcon.Visible = true;
             this.ShowInTaskbar = false;
             this.WindowState = FormWindowState.Minimized;
         }
@@ -645,6 +647,12 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Environment.ExitCode == 2)
+            {
+                e.Cancel = false;
+                return;
+            }
+
             DialogResult dr = MessageBoxEx.Show("点击“Yes”退出系统，点击“Cancel”更换用户", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
@@ -1141,6 +1149,18 @@ namespace CMBC.EasyFactor
         private void backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckUpdate(object sender, EventArgs e)
+        {
+            this.autoUpdater.DownloadForm = new DownloadForm();
+            this.autoUpdater.RestartForm = new ConfirmForm(this.autoUpdater);
+            this.autoUpdater.TryUpdate();
         }
     }
 }

@@ -59,6 +59,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CSharpZipLib, Version=0.5.0.0, Culture=neutral" />
     <Reference Include="DevComponents.DotNetBar2, Version=8.2.0.2, Culture=neutral, PublicKeyToken=5fd520d36328f741, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dll\DevComponents.DotNetBar2.dll</HintPath>
@@ -239,6 +240,16 @@
     <Compile Include="DB.dbml\InvoiceRefundBatch.cs" />
     <Compile Include="DB.dbml\InvoiceRefundLog.cs" />
     <Compile Include="DB.dbml\User.cs" />
+    <Compile Include="Help\AutoUpdateConfig.cs" />
+    <Compile Include="Help\AutoUpdater.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Help\ConfirmForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Help\DownloadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Help\ReportBug.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -329,12 +340,6 @@
     </Compile>
     <Compile Include="InfoMgr\FactorMgr\FactorMgr.Designer.cs">
       <DependentUpon>FactorMgr.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Report\AssignReportMgr.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Report\AssignReportMgr.Designer.cs">
-      <DependentUpon>AssignReportMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ExportForm.cs">
       <SubType>Form</SubType>
@@ -482,6 +487,18 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Help\AutoUpdater.resx">
+      <DependentUpon>AutoUpdater.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Help\ConfirmForm.resx">
+      <DependentUpon>ConfirmForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Help\DownloadForm.resx">
+      <DependentUpon>DownloadForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Help\ReportBug.resx">
       <DependentUpon>ReportBug.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -524,10 +541,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\FactorMgr\FactorMgr.resx">
       <DependentUpon>FactorMgr.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\AssignReportMgr.resx">
-      <DependentUpon>AssignReportMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Utils\ExportForm.resx">
@@ -626,8 +639,11 @@
     <Content Include="Dll\CrystalDecisions.ReportSource.dll" />
     <Content Include="Dll\CrystalDecisions.Shared.dll" />
     <Content Include="Dll\CrystalDecisions.Windows.Forms.dll" />
+    <Content Include="Dll\CSharpZipLib.dll" />
     <Content Include="Dll\DevComponents.DotNetBar2.dll" />
     <Content Include="EasyFactoring.ico" />
+    <Content Include="Help\change_log.htm" />
+    <Content Include="Help\UpdateVersion.xml" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
