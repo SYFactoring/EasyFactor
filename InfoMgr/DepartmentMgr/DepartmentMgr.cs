@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     using CMBC.EasyFactor.Utils;
     using System.Data.Linq;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Controls;
 
     /// <summary>
     /// 

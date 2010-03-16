@@ -227,6 +227,7 @@
     <Compile Include="CaseMgr\CreditCoverNegMgr.Designer.cs">
       <DependentUpon>CreditCoverNegMgr.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DataGridViewCheckboxHeaderCell.cs" />
     <Compile Include="DB.dbml\Case.cs" />
     <Compile Include="DB.dbml\CDA.cs" />
     <Compile Include="DB.dbml\Client.cs" />
@@ -245,9 +246,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Help\ConfirmForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Help\DownloadForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Help\ReportBug.cs">
@@ -495,10 +493,6 @@
       <DependentUpon>ConfirmForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Help\DownloadForm.resx">
-      <DependentUpon>DownloadForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Help\ReportBug.resx">
       <DependentUpon>ReportBug.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -591,7 +585,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Utils\ControlUtil.cs" />
-    <Compile Include="Utils\SortableBindingList.cs" />
+    <Compile Include="Controls\SortableBindingList.cs" />
     <Compile Include="Utils\SystemUtil.cs" />
     <Compile Include="Utils\TypeUtil.cs" />
   </ItemGroup>

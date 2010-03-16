@@ -1,5 +1,5 @@
 ﻿
-namespace CMBC.EasyFactor.Utils
+namespace CMBC.EasyFactor.Controls
 {
     using System;
     using System.Collections.Generic;

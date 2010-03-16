@@ -2422,7 +2422,6 @@ namespace CMBC.EasyFactor
             // autoUpdater
             // 
             this.autoUpdater.ConfigURL = "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml";
-            this.autoUpdater.DownloadForm = null;
             this.autoUpdater.LoginUserName = null;
             this.autoUpdater.LoginUserPass = null;
             this.autoUpdater.ProxyURL = null;

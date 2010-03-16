@@ -17,6 +17,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.Utils;
     using System.Collections.Generic;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Controls;
 
     /// <summary>
     /// 
@@ -50,6 +51,13 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoiceFinance(ARCaseBasic caseBasic)
         {
             this.InitializeComponent();
+
+            DataGridViewCheckboxHeaderCell checkBoxCell = new DataGridViewCheckboxHeaderCell();
+            checkBoxCell.OnCheckBoxClicked += new DataGridViewCheckboxHeaderEventHander(OnCheckBoxClicked);
+            DataGridViewCheckBoxColumn checkBoxCol = this.dgvInvoices.Columns[0] as DataGridViewCheckBoxColumn;
+            checkBoxCol.HeaderCell = checkBoxCell;
+            checkBoxCol.HeaderCell.Value = string.Empty;
+
             this.caseBasic = caseBasic;
             this.dgvInvoices.AutoGenerateColumns = false;
             this.superValidator.Enabled = false;
@@ -96,7 +104,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (24)
+        #region Methods (26)
 
         // Public Methods (1) 
 
@@ -113,7 +121,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = typeof(InvoiceFinanceBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
-        // Private Methods (23) 
+        // Private Methods (25) 
 
         /// <summary>
         /// 
@@ -134,6 +142,38 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="invoice"></param>
+        private void ClickInvoice(Invoice invoice, DataGridViewCheckBoxCell checkBoxCell)
+        {
+            double currentFinanceAmount = currentBatchFinanceAmount;
+
+            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
+            double financeAmount = 0;
+            if (invoice.AssignOutstanding * this._case.ActiveCDA.FinanceProportion.Value + currentFinanceAmount > batch.FinanceAmount)
+            {
+                financeAmount = batch.FinanceAmount - currentFinanceAmount;
+            }
+            else
+            {
+                financeAmount = invoice.AssignOutstanding * this._case.ActiveCDA.FinanceProportion.Value;
+            }
+
+            if (TypeUtil.EqualsZero(financeAmount))
+            {
+                checkBoxCell.Value = 0;
+                return;
+            }
+
+            invoice.FinanceAmount = financeAmount;
+            invoice.FinanceDate = batch.FinancePeriodBegin;
+            invoice.FinanceDueDate = batch.FinancePeriodEnd;
+
+            this.CaculateCommission(invoice);
         }
 
         /// <summary>
@@ -335,30 +375,7 @@ namespace CMBC.EasyFactor.ARMgr
                 DataGridViewCheckBoxCell checkBoxCell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[e.RowIndex].Cells[0];
                 if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
                 {
-                    double currentFinanceAmount = currentBatchFinanceAmount;
-
-                    InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
-                    double financeAmount = 0;
-                    if (invoice.AssignOutstanding * this._case.ActiveCDA.FinanceProportion.Value + currentFinanceAmount > batch.FinanceAmount)
-                    {
-                        financeAmount = batch.FinanceAmount - currentFinanceAmount;
-                    }
-                    else
-                    {
-                        financeAmount = invoice.AssignOutstanding * this._case.ActiveCDA.FinanceProportion.Value;
-                    }
-
-                    if (TypeUtil.EqualsZero(financeAmount))
-                    {
-                        checkBoxCell.Value = 0;
-                        return;
-                    }
-
-                    invoice.FinanceAmount = financeAmount;
-                    invoice.FinanceDate = batch.FinancePeriodBegin;
-                    invoice.FinanceDueDate = batch.FinancePeriodEnd;
-
-                    this.CaculateCommission(invoice);
+                    ClickInvoice(invoice, checkBoxCell);
                     this.ResetRow(e.RowIndex, true);
                 }
                 else
@@ -592,6 +609,29 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = financeBatch;
             this.invoiceBindingSource.DataSource = context.Invoices.Where(i => i.InvoiceAssignBatch.CaseCode == this._case.CaseCode && i.IsFlaw == false && i.InvoiceAssignBatch.CheckStatus == "已复核" && i.AssignAmount - i.PaymentAmount.GetValueOrDefault() > 0.0001 && (i.FinanceAmount.HasValue == false || i.FinanceAmount < 0.0001)).ToList();
             this.StatBatch();
+        }
+
+        private void OnCheckBoxClicked(object sender, DataGridViewCheckboxHeaderEventArgs e)
+        {
+            this.dgvInvoices.EndEdit();
+            IList invoiceRefundList = this.invoiceBindingSource.List;
+            foreach (DataGridViewRow dgvRow in this.dgvInvoices.Rows)
+            {
+                Invoice invoice = (Invoice)invoiceRefundList[dgvRow.Index];
+                if (e.CheckedState)
+                {
+                    dgvRow.Cells[0].Value = true;
+                    DataGridViewCheckBoxCell checkBoxCell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[dgvRow.Index].Cells[0];
+                    ClickInvoice(invoice, checkBoxCell);
+                    this.ResetRow(dgvRow.Index, true);
+                }
+                else
+                {
+                    dgvRow.Cells[0].Value = false;
+                    this.ResetRow(dgvRow.Index, false);
+                }
+                this.StatBatch();
+            }
         }
 
         /// <summary>

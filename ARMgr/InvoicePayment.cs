@@ -16,30 +16,28 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Controls;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoicePayment : UserControl
     {
-        #region Fields (3)
+        #region Fields (4)
 
         /// <summary>
         /// 
         /// </summary>
         private Case _case;
-
         /// <summary>
         /// 
         /// </summary>
         private ARCaseBasic caseBasic;
-
+        private DBDataContext context;
         /// <summary>
         /// 
         /// </summary>
         private OpPaymentType paymentType;
-
-        private DBDataContext context;
 
         #endregion Fields
 
@@ -86,6 +84,13 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoicePayment(ARCaseBasic caseBasic, OpPaymentType paymentType)
         {
             InitializeComponent();
+
+            DataGridViewCheckboxHeaderCell checkBoxCell = new DataGridViewCheckboxHeaderCell();
+            checkBoxCell.OnCheckBoxClicked += new DataGridViewCheckboxHeaderEventHander(OnCheckBoxClicked);
+            DataGridViewCheckBoxColumn checkBoxCol = this.dgvInvoices.Columns[0] as DataGridViewCheckBoxColumn;
+            checkBoxCol.HeaderCell = checkBoxCell;
+            checkBoxCol.HeaderCell.Value = string.Empty;
+
             this.caseBasic = caseBasic;
             this.paymentType = paymentType;
             this.dgvInvoices.AutoGenerateColumns = false;
@@ -130,9 +135,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (19)
+        #region Methods (20)
 
-        // Public Methods (2) 
+        // Public Methods (1) 
 
         /// <summary>
         /// 
@@ -147,7 +152,16 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = typeof(InvoicePaymentBatch);
             this.invoiceBindingSource.DataSource = typeof(Invoice);
         }
-        // Private Methods (17) 
+        // Private Methods (19) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="invoice"></param>
+        private void ClickInvoice(Invoice invoice)
+        {
+            invoice.PaymentAmount2 = invoice.AssignOutstanding;
+        }
 
         /// <summary>
         /// 
@@ -223,7 +237,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
                 {
-                    invoice.PaymentAmount2 = invoice.AssignOutstanding;
+                    ClickInvoice(invoice);
                     this.ResetRow(e.RowIndex, true);
                 }
                 else
@@ -465,6 +479,34 @@ namespace CMBC.EasyFactor.ARMgr
                               select invoice;
 
             this.invoiceBindingSource.DataSource = queryResult;
+            this.StatBatch();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnCheckBoxClicked(object sender, DataGridViewCheckboxHeaderEventArgs e)
+        {
+            this.dgvInvoices.EndEdit();
+            IList invoiceRefundList = this.invoiceBindingSource.List;
+            foreach (DataGridViewRow dgvRow in this.dgvInvoices.Rows)
+            {
+                Invoice invoice = (Invoice)invoiceRefundList[dgvRow.Index];
+                if (e.CheckedState)
+                {
+                    dgvRow.Cells[0].Value = true;
+                    ClickInvoice(invoice);
+                    this.ResetRow(dgvRow.Index, true);
+                }
+                else
+                {
+                    dgvRow.Cells[0].Value = false;
+                    this.ResetRow(dgvRow.Index, false);
+                }
+            }
+
             this.StatBatch();
         }
 

@@ -1158,7 +1158,6 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckUpdate(object sender, EventArgs e)
         {
-            this.autoUpdater.DownloadForm = new DownloadForm();
             this.autoUpdater.RestartForm = new ConfirmForm(this.autoUpdater);
             this.autoUpdater.TryUpdate();
         }
