@@ -1307,7 +1307,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 120;
                 sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignBottom;
                 sheet.Cells[row, 1] = "卖方意见";
-                sheet.Cells[row, 3] = "                                                               签章：                    日期：";
+                sheet.Cells[row, 3] = "                                               签章：                    日期：";
                 row++;
 
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row + 1, 2]).MergeCells = true;
@@ -1315,13 +1315,13 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 120;
                 sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignBottom;
                 sheet.Cells[row, 1] = "分部意见";
-                sheet.Cells[row, 3] = "                                                               经办人签名：              日期：";
+                sheet.Cells[row, 3] = "                                               经办人签名：              日期：";
                 row++;
 
                 sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 120;
                 sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignBottom;
-                sheet.Cells[row, 3] = "                                                               有权签字人签名：          日期：";
+                sheet.Cells[row, 3] = "                                               有权签字人签名：          日期：";
                 row++;
 
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 2]).MergeCells = true;
@@ -1329,7 +1329,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 120;
                 sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignBottom;
                 sheet.Cells[row, 1] = "保理部意见";
-                sheet.Cells[row, 3] = "                                                               有权签字人签名：          日期：";
+                sheet.Cells[row, 3] = "                                               有权签字人签名：          日期：";
                 sheet.get_Range(sheet.Cells[table2Begin, 1], sheet.Cells[row, 7]).Borders.LineStyle = 1;
 
                 sheet.UsedRange.Font.Name = "仿宋_GB2312";
