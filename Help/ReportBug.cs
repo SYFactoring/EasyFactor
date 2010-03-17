@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using CMBC.EasyFactor.Utils;
 using DevComponents.DotNetBar;
+using System.Reflection;
 
 namespace CMBC.EasyFactor.Help
 {
@@ -28,9 +29,11 @@ namespace CMBC.EasyFactor.Help
             string type = this.cbBugType.Text;
             string path = this.tbAttachment.Text;
 
-            string systemInfo = SystemUtil.GetSystemInformation();
+            //string systemInfo = SystemUtil.GetSystemInformation();
 
-            bug = bug + "\n----------------------------------------------\n" + systemInfo;
+            //bug = bug + "\n----------------------------------------------\n" + systemInfo;
+
+            bug = bug + "\n----------------------------------------------\n" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             bool isOK = true;
             try

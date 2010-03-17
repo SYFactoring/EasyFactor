@@ -74,6 +74,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchCurrencyComboBox.DisplayMember = "CurrencyCode";
             this.batchCurrencyComboBox.ValueMember = "CurrencyCode";
 
+            this.financeRateTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
+            this.financeRateTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+
+            this.costRateTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
+            this.costRateTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+
             InvoiceMgr invoiceMgr = new InvoiceMgr(batch.Invoices, context);
             invoiceMgr.Dock = DockStyle.Fill;
             this.panelInvoices.Controls.Add(invoiceMgr);

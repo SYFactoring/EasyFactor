@@ -590,10 +590,8 @@
     <Compile Include="Utils\TypeUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.cmbc.config">
-      <SubType>Form</SubType>
-    </None>
     <None Include="app.config" />
+    <None Include="cmbc.config" />
     <None Include="DB.dbml\DB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>DB.designer.cs</LastGenOutput>
