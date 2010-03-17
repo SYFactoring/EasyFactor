@@ -84,6 +84,8 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoicePayment(ARCaseBasic caseBasic, OpPaymentType paymentType)
         {
             InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
+            this.dgvInvoices.ImeMode = ImeMode.OnHalf;
 
             DataGridViewCheckboxHeaderCell checkBoxCell = new DataGridViewCheckboxHeaderCell();
             checkBoxCell.OnCheckBoxClicked += new DataGridViewCheckboxHeaderEventHander(OnCheckBoxClicked);

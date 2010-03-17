@@ -988,15 +988,6 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            foreach (InvoiceAssignBatch batch in selectedBatches)
-            {
-                if (batch.Case.TransactionType == "国内买方保理" || batch.Case.TransactionType == "进口保理")
-                {
-                    MessageBoxEx.Show(String.Format("该批次为{0}，不能生成报表，批次号： {1}", batch.Case.TransactionType, batch.AssignBatchNo), ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-            }
-
             MakeReport makeReport = new MakeReport(ReportFinanceImpl);
             GroupBatches(selectedBatches, makeReport);
         }

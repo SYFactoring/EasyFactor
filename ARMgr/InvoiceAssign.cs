@@ -51,6 +51,8 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoiceAssign(ARCaseBasic caseBasic)
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
+            this.dgvInvoices.ImeMode = ImeMode.OnHalf;
             this.caseBasic = caseBasic;
             this.dgvInvoices.AutoGenerateColumns = false;
             this.superValidator.Enabled = false;

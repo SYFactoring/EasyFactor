@@ -91,6 +91,7 @@ namespace CMBC.EasyFactor.ARMgr
         public ARCaseBasic(OpARType opARType)
         {
             this.InitializeComponent();
+
             this.opARType = opARType;
             switch (opARType)
             {

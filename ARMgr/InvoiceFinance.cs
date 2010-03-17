@@ -51,6 +51,8 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoiceFinance(ARCaseBasic caseBasic)
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
+            this.dgvInvoices.ImeMode = ImeMode.OnHalf;
 
             DataGridViewCheckboxHeaderCell checkBoxCell = new DataGridViewCheckboxHeaderCell();
             checkBoxCell.OnCheckBoxClicked += new DataGridViewCheckboxHeaderEventHander(OnCheckBoxClicked);
