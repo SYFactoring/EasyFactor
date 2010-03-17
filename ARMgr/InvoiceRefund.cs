@@ -665,19 +665,19 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            RefundBatchMgr batchMgr = new RefundBatchMgr(this._case);
+            RefundBatchMgr batchMgr = new RefundBatchMgr(this._case, this.context);
             QueryForm queryUI = new QueryForm(batchMgr, "选择付款批次");
             batchMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             InvoiceRefundBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
-                InvoiceRefundBatch batch = context.InvoiceRefundBatches.SingleOrDefault(i => i.RefundBatchNo == selectedBatch.RefundBatchNo);
-                this.batchBindingSource.DataSource = batch;
+       //         InvoiceRefundBatch batch = context.InvoiceRefundBatches.SingleOrDefault(i => i.RefundBatchNo == selectedBatch.RefundBatchNo);
+                this.batchBindingSource.DataSource = selectedBatch;
                 Func<InvoiceRefundLog, Invoice> makeInvoice =
                 i => new Invoice { InvoiceNo = i.InvoiceNo, RefundLogID2 = i.RefundLogID };
 
-                var invoiceList = (from log in batch.InvoiceRefundLogs
+                var invoiceList = (from log in selectedBatch.InvoiceRefundLogs
                                    select makeInvoice(log)).ToList();
 
                 foreach (Invoice invoice in invoiceList)
@@ -686,7 +686,6 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.AssignAmount = oldInvoice.AssignAmount;
                     invoice.InvoiceAssignBatch = oldInvoice.InvoiceAssignBatch;
                     invoice.DueDate = oldInvoice.DueDate;
-                    invoice.InvoiceFinanceBatch = oldInvoice.InvoiceFinanceBatch;
                     invoice.FinanceAmount = oldInvoice.FinanceAmount;
                     invoice.FinanceDate = oldInvoice.FinanceDate;
                     invoice.FinanceDueDate = oldInvoice.FinanceDueDate;

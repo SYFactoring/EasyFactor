@@ -69,12 +69,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// Initializes a new instance of the FinanceBatchMgr class
         /// </summary>
         /// <param name="selectedCDA"></param>
-        public FinanceBatchMgr(Case selectedCase)
+        /// <param name="context"></param>
+        public FinanceBatchMgr(Case selectedCase, DBDataContext context)
             : this(OpBatchType.DETAIL)
         {
             this._case = selectedCase;
             this.panelQuery.Visible = false;
             this.bs.DataSource = this._case.InvoiceFinanceBatches;
+            this.context = context;
         }
 
         /// <summary>

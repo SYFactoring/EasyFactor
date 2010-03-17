@@ -93,6 +93,7 @@
       <Column Name="CheckUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="IsSigned" Type="System.Boolean" DbType="bit" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="HighestFinanceLine" Type="System.Double" DbType="float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Case_CDA" Member="Case" ThisKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
   </Table>
@@ -385,7 +386,8 @@
       <Column Name="RejectReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="OtherIncome" Type="System.Double" DbType="float" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Association Name="InvoiceFinanceBatch_Invoice" Member="Invoices" OtherKey="FinanceBatchNo" Type="Invoice" />
+      <Column Name="LoadNo" Type="System.String" DbType="Nvarchar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Association Name="InvoiceFinanceBatch_InvoiceFinanceLog" Member="InvoiceFinanceLogs" OtherKey="FinanceBatchNo" Type="InvoiceFinanceLog" />
       <Association Name="Factor_InvoiceFinanceBatch" Member="Factor" ThisKey="FactorCode" Type="Factor" IsForeignKey="true" />
       <Association Name="Case_InvoiceFinanceBatch" Member="Case" ThisKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
@@ -476,7 +478,6 @@
       <Column Name="FlawResolveReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="FlawResolveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="FlawResolveUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="FinanceBatchNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="FinanceAmount" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="FinanceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="FinanceDueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
@@ -500,8 +501,8 @@
       <Column Name="DisputeOtherReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Invoice_InvoicePaymentLog" Member="InvoicePaymentLogs" OtherKey="InvoiceNo" Type="InvoicePaymentLog" />
       <Association Name="Invoice_InvoiceRefundLog" Member="InvoiceRefundLogs" OtherKey="InvoiceNo" Type="InvoiceRefundLog" />
+      <Association Name="Invoice_InvoiceFinanceLog" Member="InvoiceFinanceLogs" OtherKey="InvoiceNo" Type="InvoiceFinanceLog" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="InvoiceAssignBatch" ThisKey="AssignBatchNo" Type="InvoiceAssignBatch" IsForeignKey="true" />
-      <Association Name="InvoiceFinanceBatch_Invoice" Member="InvoiceFinanceBatch" ThisKey="FinanceBatchNo" Type="InvoiceFinanceBatch" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Exchange" Member="Exchanges">
@@ -514,22 +515,37 @@
   </Table>
   <Table Name="dbo.ClientReview" Member="ClientReviews">
     <Type Name="ClientReview">
-      <Column Name="ReviewNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="ReviewStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="ReviewDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="RequestCurrency" Type="System.String" DbType="Char(3)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="RequestAmount" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="RequestFinanceType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="RequestFinanceType2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="RequestCommissionRate" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="RequestFinancePeriod" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="TransactionType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="IsRecoarse" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="IsNotice" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="ReviewNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="ReviewStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ReviewDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="RequestCurrency" Type="System.String" DbType="Char(3)" CanBeNull="true" />
+      <Column Name="RequestAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="RequestFinanceType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="RequestFinanceType2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="RequestCommissionRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="RequestFinancePeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IsLocal" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsInternational" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsSeller" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsBuyer" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsRecoarse" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsNonRecoarse" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsNotice" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Client_ClientReview" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoiceFinanceLog" Member="InvoiceFinanceLogs">
+    <Type Name="InvoiceFinanceLog">
+      <Column Name="FinanceLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FinanceBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceNo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FinanceAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="Invoice_InvoiceFinanceLog" Member="Invoice" ThisKey="InvoiceNo" Type="Invoice" IsForeignKey="true" />
+      <Association Name="InvoiceFinanceBatch_InvoiceFinanceLog" Member="InvoiceFinanceBatch" ThisKey="FinanceBatchNo" Type="InvoiceFinanceBatch" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

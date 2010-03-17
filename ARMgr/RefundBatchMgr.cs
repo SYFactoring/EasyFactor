@@ -79,12 +79,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="selectedCDA"></param>
-        public RefundBatchMgr(Case selectedCase)
+        /// <param name="context"></param>
+        public RefundBatchMgr(Case selectedCase, DBDataContext context)
             : this(OpBatchType.DETAIL)
         {
             this._case = selectedCase;
             this.panelQuery.Visible = false;
             this.bs.DataSource = selectedCase.InvoiceRefundBatches;
+            this.context = context;
         }
 
         /// <summary>

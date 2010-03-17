@@ -171,7 +171,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            invoice.FinanceAmount = financeAmount;
+            invoice.FinanceAmount2 = financeAmount;
             invoice.FinanceDate = batch.FinancePeriodBegin;
             invoice.FinanceDueDate = batch.FinancePeriodEnd;
 
@@ -462,7 +462,7 @@ namespace CMBC.EasyFactor.ARMgr
                     e.Cancel = true;
                 }
             }
-            else if (col == colFinanceAmount || col == colCommission)
+            else if (col == colFinanceAmount2 || col == colCommission)
             {
                 string str = (string)e.FormattedValue;
                 double result;
@@ -503,7 +503,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvInvoices.Columns[e.ColumnIndex] == this.colFinanceAmount)
+            if (this.dgvInvoices.Columns[e.ColumnIndex] == this.colFinanceAmount2)
             {
                 this.StatBatch();
                 this.CaculateCommission((Invoice)this.invoiceBindingSource.List[e.RowIndex]);
@@ -575,7 +575,7 @@ namespace CMBC.EasyFactor.ARMgr
                     DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[i].Cells[0];
                     cell.Value = 0;
                     Invoice oldInvoice = (Invoice)this.invoiceBindingSource.List[i];
-                    if (invoiceList.Contains(oldInvoice) && oldInvoice.FinanceAmount.HasValue)
+                    if (invoiceList.Contains(oldInvoice) && oldInvoice.FinanceAmount2.HasValue)
                     {
                         cell.Value = 1;
                         if (oldInvoice.Commission.HasValue == false)
@@ -643,7 +643,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="editable"></param>
         private void ResetRow(int rowIndex, bool editable)
         {
-            this.dgvInvoices.Rows[rowIndex].Cells["colFinanceAmount"].ReadOnly = !editable;
+            this.dgvInvoices.Rows[rowIndex].Cells["colFinanceAmount2"].ReadOnly = !editable;
             this.dgvInvoices.Rows[rowIndex].Cells["colComment"].ReadOnly = !editable;
 
             if (this._case.ActiveCDA.CommissionType == "按融资金额")
@@ -656,7 +656,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 IList invoiceList = this.invoiceBindingSource.List;
                 Invoice invoice = (Invoice)invoiceList[rowIndex];
-                invoice.FinanceAmount = null;
+                invoice.FinanceAmount2 = null;
 
                 if (this._case.ActiveCDA.CommissionType == "按融资金额")
                 {
@@ -701,6 +701,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
             IList invoiceList = this.invoiceBindingSource.List;
+            List<InvoiceFinanceLog> logList = new List<InvoiceFinanceLog>();
 
             double totalFinance = 0;
             for (int i = 0; i < invoiceList.Count; i++)
@@ -718,27 +719,42 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (context.InvoiceFinanceBatches.SingleOrDefault(f => f.FinanceBatchNo == batch.FinanceBatchNo) != null)
-            {
-                MessageBoxEx.Show("放款编号已存在，请确认并输入新的放款编号", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
             bool isSaveOK = true;
 
             batch.Case = this._case;
+            if (batch.FinanceBatchNo == null)
+            {
+                batch.FinanceBatchNo = Invoice.GenerateFinanceBatchNo(batch.FinancePeriodBegin);
+            }
+
             for (int i = 0; i < invoiceList.Count; i++)
             {
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     Invoice invoice = (Invoice)invoiceList[i];
-                    invoice.InvoiceFinanceBatch = batch;
-                    invoice.FinanceDate = batch.FinancePeriodBegin;
-                    invoice.FinanceDueDate = batch.FinancePeriodEnd;
+                    InvoiceFinanceLog log;
+                    if (invoice.FinanceLogID2 == null)
+                    {
+                        log = new InvoiceFinanceLog();
+                        logList.Add(log);
+                    }
+                    else
+                    {
+                        log = context.InvoiceFinanceLogs.SingleOrDefault(financelog => financelog.FinanceLogID == invoice.FinanceLogID2);
+                        if (log == null)
+                        {
+                            throw new Exception("融资ID错误");
+                        }
+                    }
+
+                    log.Invoice = invoice;
+                    log.FinanceAmount = invoice.FinanceAmount.GetValueOrDefault();
+                    log.InvoiceFinanceBatch = batch;
+                    invoice.CaculateFinance();
                 }
             }
 
-            if (batch.Invoices.Count == 0)
+            if (batch.InvoiceFinanceLogs.Count == 0)
             {
                 return;
             }
@@ -749,12 +765,12 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
-                for (int i = 0; i < invoiceList.Count; i++)
+                foreach (InvoiceFinanceLog log in logList)
                 {
-                    if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
-                    {
-                        ((Invoice)invoiceList[i]).InvoiceFinanceBatch = null;
-                    }
+                    Invoice invoice = log.Invoice;
+                    invoice.InvoiceFinanceLogs.Remove(log);
+                    invoice.CaculateFinance();
+                    log.InvoiceFinanceBatch = null;
                 }
 
                 batch.Case = null;
@@ -765,6 +781,13 @@ namespace CMBC.EasyFactor.ARMgr
             if (isSaveOK)
             {
                 MessageBoxEx.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                foreach (InvoiceFinanceLog log in logList)
+                {
+                    Invoice invoice = log.Invoice;
+                    invoice.FinanceAmount2 = null;
+                }
+
+                context.SubmitChanges();
                 this.caseBasic.CaculateOutstanding(this._case);
             }
         }
@@ -782,16 +805,38 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            FinanceBatchMgr batchMgr = new FinanceBatchMgr(this._case);
+            FinanceBatchMgr batchMgr = new FinanceBatchMgr(this._case, this.context);
             QueryForm queryUI = new QueryForm(batchMgr, "选择融资批次");
             batchMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             InvoiceFinanceBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
-                InvoiceFinanceBatch batch = context.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == selectedBatch.FinanceBatchNo);
-                this.batchBindingSource.DataSource = batch;
-                this.invoiceBindingSource.DataSource = batch.Invoices.ToList();
+                //InvoiceFinanceBatch batch = context.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == selectedBatch.FinanceBatchNo);
+                this.batchBindingSource.DataSource = selectedBatch;
+
+                Func<InvoiceFinanceLog, Invoice> makeInvoice =
+                i => new Invoice { InvoiceNo = i.InvoiceNo, FinanceLogID2 = i.FinanceLogID };
+
+                var invoiceList = (from log in selectedBatch.InvoiceFinanceLogs
+                                   select makeInvoice(log)).ToList();
+
+                foreach (Invoice invoice in invoiceList)
+                {
+                    Invoice oldInvoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo);
+                    invoice.AssignAmount = oldInvoice.AssignAmount;
+                    invoice.InvoiceAssignBatch = oldInvoice.InvoiceAssignBatch;
+                    invoice.DueDate = oldInvoice.DueDate;
+                    invoice.FinanceAmount = oldInvoice.FinanceAmount;
+                    invoice.FinanceDate = oldInvoice.FinanceDate;
+                    invoice.FinanceDueDate = oldInvoice.FinanceDueDate;
+                    invoice.Commission = oldInvoice.Commission;
+                    invoice.CommissionDate = oldInvoice.CommissionDate;
+                    invoice.Comment = oldInvoice.Comment;
+                }
+
+                this.invoiceBindingSource.DataSource = invoiceList;
+
                 for (int i = 0; i < this.invoiceBindingSource.List.Count; i++)
                 {
                     DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvInvoices.Rows[i].Cells[0];
@@ -848,7 +893,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    totalFinance += ((Invoice)invoiceList[i]).FinanceAmount.GetValueOrDefault();
+                    totalFinance += ((Invoice)invoiceList[i]).FinanceAmount2.GetValueOrDefault();
                     totalInterest += ((Invoice)invoiceList[i]).NetInterest.GetValueOrDefault();
                 }
             }
@@ -874,13 +919,13 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(this.dgvInvoices.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     Invoice invoice = (Invoice)invoiceList[i];
-                    if (invoice.FinanceAmount.HasValue == false)
+                    if (invoice.FinanceAmount2.HasValue == false)
                     {
                         MessageBoxEx.Show("融资金额不能为空: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
 
-                    if (invoice.FinanceAmount > invoice.AssignOutstanding)
+                    if (invoice.FinanceAmount2 > invoice.AssignOutstanding)
                     {
                         MessageBoxEx.Show("融资金额不能大于转让余额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;

@@ -105,6 +105,9 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertClientReview(ClientReview instance);
     partial void UpdateClientReview(ClientReview instance);
     partial void DeleteClientReview(ClientReview instance);
+    partial void InsertInvoiceFinanceLog(InvoiceFinanceLog instance);
+    partial void UpdateInvoiceFinanceLog(InvoiceFinanceLog instance);
+    partial void DeleteInvoiceFinanceLog(InvoiceFinanceLog instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -334,6 +337,14 @@ namespace CMBC.EasyFactor.DB.dbml
 			get
 			{
 				return this.GetTable<ClientReview>();
+			}
+		}
+		
+		public System.Data.Linq.Table<InvoiceFinanceLog> InvoiceFinanceLogs
+		{
+			get
+			{
+				return this.GetTable<InvoiceFinanceLog>();
 			}
 		}
 	}
@@ -1568,6 +1579,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private bool _IsSigned;
 		
+		private System.Nullable<double> _HighestFinanceLine;
+		
 		private EntityRef<Case> _Case;
 		
     #region Extensibility Method Definitions
@@ -1660,6 +1673,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckDateChanged();
     partial void OnIsSignedChanging(bool value);
     partial void OnIsSignedChanged();
+    partial void OnHighestFinanceLineChanging(System.Nullable<double> value);
+    partial void OnHighestFinanceLineChanged();
     #endregion
 		
 		public CDA()
@@ -2528,6 +2543,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._IsSigned = value;
 					this.SendPropertyChanged("IsSigned");
 					this.OnIsSignedChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_HighestFinanceLine", DbType="float", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<double> HighestFinanceLine
+		{
+			get
+			{
+				return this._HighestFinanceLine;
+			}
+			set
+			{
+				if ((this._HighestFinanceLine != value))
+				{
+					this.OnHighestFinanceLineChanging(value);
+					this.SendPropertyChanging();
+					this._HighestFinanceLine = value;
+					this.SendPropertyChanged("HighestFinanceLine");
+					this.OnHighestFinanceLineChanged();
 				}
 			}
 		}
@@ -8633,7 +8668,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<double> _OtherIncome;
 		
-		private EntitySet<Invoice> _Invoices;
+		private string _LoadNo;
+		
+		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
 		
 		private EntityRef<Factor> _Factor;
 		
@@ -8677,11 +8714,13 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckUserNameChanged();
     partial void OnOtherIncomeChanging(System.Nullable<double> value);
     partial void OnOtherIncomeChanged();
+    partial void OnLoadNoChanging(string value);
+    partial void OnLoadNoChanged();
     #endregion
 		
 		public InvoiceFinanceBatch()
 		{
-			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
+			this._InvoiceFinanceLogs = new EntitySet<InvoiceFinanceLog>(new Action<InvoiceFinanceLog>(this.attach_InvoiceFinanceLogs), new Action<InvoiceFinanceLog>(this.detach_InvoiceFinanceLogs));
 			this._Factor = default(EntityRef<Factor>);
 			this._Case = default(EntityRef<Case>);
 			OnCreated();
@@ -9035,16 +9074,36 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="InvoiceFinanceBatch_Invoice", Storage="_Invoices", OtherKey="FinanceBatchNo")]
-		public EntitySet<Invoice> Invoices
+		[Column(Storage="_LoadNo", DbType="Nvarchar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string LoadNo
 		{
 			get
 			{
-				return this._Invoices;
+				return this._LoadNo;
 			}
 			set
 			{
-				this._Invoices.Assign(value);
+				if ((this._LoadNo != value))
+				{
+					this.OnLoadNoChanging(value);
+					this.SendPropertyChanging();
+					this._LoadNo = value;
+					this.SendPropertyChanged("LoadNo");
+					this.OnLoadNoChanged();
+				}
+			}
+		}
+		
+		[Association(Name="InvoiceFinanceBatch_InvoiceFinanceLog", Storage="_InvoiceFinanceLogs", OtherKey="FinanceBatchNo")]
+		public EntitySet<InvoiceFinanceLog> InvoiceFinanceLogs
+		{
+			get
+			{
+				return this._InvoiceFinanceLogs;
+			}
+			set
+			{
+				this._InvoiceFinanceLogs.Assign(value);
 			}
 		}
 		
@@ -9136,13 +9195,13 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		private void attach_Invoices(Invoice entity)
+		private void attach_InvoiceFinanceLogs(InvoiceFinanceLog entity)
 		{
 			this.SendPropertyChanging();
 			entity.InvoiceFinanceBatch = this;
 		}
 		
-		private void detach_Invoices(Invoice entity)
+		private void detach_InvoiceFinanceLogs(InvoiceFinanceLog entity)
 		{
 			this.SendPropertyChanging();
 			entity.InvoiceFinanceBatch = null;
@@ -10572,8 +10631,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _FlawResolveUserName;
 		
-		private string _FinanceBatchNo;
-		
 		private System.Nullable<double> _FinanceAmount;
 		
 		private System.Nullable<System.DateTime> _FinanceDate;
@@ -10620,9 +10677,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<InvoiceRefundLog> _InvoiceRefundLogs;
 		
-		private EntityRef<InvoiceAssignBatch> _InvoiceAssignBatch;
+		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
 		
-		private EntityRef<InvoiceFinanceBatch> _InvoiceFinanceBatch;
+		private EntityRef<InvoiceAssignBatch> _InvoiceAssignBatch;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -10668,8 +10725,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFlawResolveDateChanged();
     partial void OnFlawResolveUserNameChanging(string value);
     partial void OnFlawResolveUserNameChanged();
-    partial void OnFinanceBatchNoChanging(string value);
-    partial void OnFinanceBatchNoChanged();
     partial void OnFinanceAmountChanging(System.Nullable<double> value);
     partial void OnFinanceAmountChanged();
     partial void OnFinanceDateChanging(System.Nullable<System.DateTime> value);
@@ -10718,8 +10773,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		{
 			this._InvoicePaymentLogs = new EntitySet<InvoicePaymentLog>(new Action<InvoicePaymentLog>(this.attach_InvoicePaymentLogs), new Action<InvoicePaymentLog>(this.detach_InvoicePaymentLogs));
 			this._InvoiceRefundLogs = new EntitySet<InvoiceRefundLog>(new Action<InvoiceRefundLog>(this.attach_InvoiceRefundLogs), new Action<InvoiceRefundLog>(this.detach_InvoiceRefundLogs));
+			this._InvoiceFinanceLogs = new EntitySet<InvoiceFinanceLog>(new Action<InvoiceFinanceLog>(this.attach_InvoiceFinanceLogs), new Action<InvoiceFinanceLog>(this.detach_InvoiceFinanceLogs));
 			this._InvoiceAssignBatch = default(EntityRef<InvoiceAssignBatch>);
-			this._InvoiceFinanceBatch = default(EntityRef<InvoiceFinanceBatch>);
 			OnCreated();
 		}
 		
@@ -11123,30 +11178,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._FlawResolveUserName = value;
 					this.SendPropertyChanged("FlawResolveUserName");
 					this.OnFlawResolveUserNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FinanceBatchNo", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string FinanceBatchNo
-		{
-			get
-			{
-				return this._FinanceBatchNo;
-			}
-			set
-			{
-				if ((this._FinanceBatchNo != value))
-				{
-					if (this._InvoiceFinanceBatch.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFinanceBatchNoChanging(value);
-					this.SendPropertyChanging();
-					this._FinanceBatchNo = value;
-					this.SendPropertyChanged("FinanceBatchNo");
-					this.OnFinanceBatchNoChanged();
 				}
 			}
 		}
@@ -11597,6 +11628,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Association(Name="Invoice_InvoiceFinanceLog", Storage="_InvoiceFinanceLogs", OtherKey="InvoiceNo")]
+		public EntitySet<InvoiceFinanceLog> InvoiceFinanceLogs
+		{
+			get
+			{
+				return this._InvoiceFinanceLogs;
+			}
+			set
+			{
+				this._InvoiceFinanceLogs.Assign(value);
+			}
+		}
+		
 		[Association(Name="InvoiceAssignBatch_Invoice", Storage="_InvoiceAssignBatch", ThisKey="AssignBatchNo", IsForeignKey=true)]
 		public InvoiceAssignBatch InvoiceAssignBatch
 		{
@@ -11627,40 +11671,6 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._AssignBatchNo = default(string);
 					}
 					this.SendPropertyChanged("InvoiceAssignBatch");
-				}
-			}
-		}
-		
-		[Association(Name="InvoiceFinanceBatch_Invoice", Storage="_InvoiceFinanceBatch", ThisKey="FinanceBatchNo", IsForeignKey=true)]
-		public InvoiceFinanceBatch InvoiceFinanceBatch
-		{
-			get
-			{
-				return this._InvoiceFinanceBatch.Entity;
-			}
-			set
-			{
-				InvoiceFinanceBatch previousValue = this._InvoiceFinanceBatch.Entity;
-				if (((previousValue != value) 
-							|| (this._InvoiceFinanceBatch.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._InvoiceFinanceBatch.Entity = null;
-						previousValue.Invoices.Remove(this);
-					}
-					this._InvoiceFinanceBatch.Entity = value;
-					if ((value != null))
-					{
-						value.Invoices.Add(this);
-						this._FinanceBatchNo = value.FinanceBatchNo;
-					}
-					else
-					{
-						this._FinanceBatchNo = default(string);
-					}
-					this.SendPropertyChanged("InvoiceFinanceBatch");
 				}
 			}
 		}
@@ -11704,6 +11714,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_InvoiceRefundLogs(InvoiceRefundLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Invoice = null;
+		}
+		
+		private void attach_InvoiceFinanceLogs(InvoiceFinanceLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Invoice = this;
+		}
+		
+		private void detach_InvoiceFinanceLogs(InvoiceFinanceLog entity)
 		{
 			this.SendPropertyChanging();
 			entity.Invoice = null;
@@ -11874,9 +11896,17 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
-		private string _TransactionType;
+		private System.Nullable<bool> _IsLocal;
+		
+		private System.Nullable<bool> _IsInternational;
+		
+		private System.Nullable<bool> _IsSeller;
+		
+		private System.Nullable<bool> _IsBuyer;
 		
 		private System.Nullable<bool> _IsRecoarse;
+		
+		private System.Nullable<bool> _IsNonRecoarse;
 		
 		private string _IsNotice;
 		
@@ -11910,10 +11940,18 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreateUserNameChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
-    partial void OnTransactionTypeChanging(string value);
-    partial void OnTransactionTypeChanged();
+    partial void OnIsLocalChanging(System.Nullable<bool> value);
+    partial void OnIsLocalChanged();
+    partial void OnIsInternationalChanging(System.Nullable<bool> value);
+    partial void OnIsInternationalChanged();
+    partial void OnIsSellerChanging(System.Nullable<bool> value);
+    partial void OnIsSellerChanged();
+    partial void OnIsBuyerChanging(System.Nullable<bool> value);
+    partial void OnIsBuyerChanged();
     partial void OnIsRecoarseChanging(System.Nullable<bool> value);
     partial void OnIsRecoarseChanged();
+    partial void OnIsNonRecoarseChanging(System.Nullable<bool> value);
+    partial void OnIsNonRecoarseChanged();
     partial void OnIsNoticeChanging(string value);
     partial void OnIsNoticeChanged();
     #endregion
@@ -11924,7 +11962,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_ReviewNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_ReviewNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string ReviewNo
 		{
 			get
@@ -11944,7 +11982,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
 		public string ClientEDICode
 		{
 			get
@@ -11968,7 +12006,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ReviewStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_ReviewStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string ReviewStatus
 		{
 			get
@@ -11988,7 +12026,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_ReviewDate", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_ReviewDate", DbType="DateTime NOT NULL")]
 		public System.DateTime ReviewDate
 		{
 			get
@@ -12008,7 +12046,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RequestCurrency", DbType="Char(3)", UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_RequestCurrency", DbType="Char(3)")]
 		public string RequestCurrency
 		{
 			get
@@ -12028,7 +12066,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RequestAmount", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_RequestAmount", DbType="Float")]
 		public System.Nullable<double> RequestAmount
 		{
 			get
@@ -12048,7 +12086,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RequestFinanceType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_RequestFinanceType", DbType="NVarChar(50)")]
 		public string RequestFinanceType
 		{
 			get
@@ -12068,7 +12106,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RequestFinanceType2", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_RequestFinanceType2", DbType="NVarChar(50)")]
 		public string RequestFinanceType2
 		{
 			get
@@ -12088,7 +12126,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RequestCommissionRate", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_RequestCommissionRate", DbType="Float")]
 		public System.Nullable<double> RequestCommissionRate
 		{
 			get
@@ -12108,7 +12146,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_RequestFinancePeriod", DbType="Int", UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_RequestFinancePeriod", DbType="Int")]
 		public System.Nullable<int> RequestFinancePeriod
 		{
 			get
@@ -12128,7 +12166,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string CreateUserName
 		{
 			get
@@ -12148,7 +12186,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
 		public string Comment
 		{
 			get
@@ -12168,27 +12206,87 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_TransactionType", DbType="NVarChar(50) NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string TransactionType
+		[Column(Storage="_IsLocal", DbType="Bit")]
+		public System.Nullable<bool> IsLocal
 		{
 			get
 			{
-				return this._TransactionType;
+				return this._IsLocal;
 			}
 			set
 			{
-				if ((this._TransactionType != value))
+				if ((this._IsLocal != value))
 				{
-					this.OnTransactionTypeChanging(value);
+					this.OnIsLocalChanging(value);
 					this.SendPropertyChanging();
-					this._TransactionType = value;
-					this.SendPropertyChanged("TransactionType");
-					this.OnTransactionTypeChanged();
+					this._IsLocal = value;
+					this.SendPropertyChanged("IsLocal");
+					this.OnIsLocalChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_IsRecoarse", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_IsInternational", DbType="Bit")]
+		public System.Nullable<bool> IsInternational
+		{
+			get
+			{
+				return this._IsInternational;
+			}
+			set
+			{
+				if ((this._IsInternational != value))
+				{
+					this.OnIsInternationalChanging(value);
+					this.SendPropertyChanging();
+					this._IsInternational = value;
+					this.SendPropertyChanged("IsInternational");
+					this.OnIsInternationalChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsSeller", DbType="Bit")]
+		public System.Nullable<bool> IsSeller
+		{
+			get
+			{
+				return this._IsSeller;
+			}
+			set
+			{
+				if ((this._IsSeller != value))
+				{
+					this.OnIsSellerChanging(value);
+					this.SendPropertyChanging();
+					this._IsSeller = value;
+					this.SendPropertyChanged("IsSeller");
+					this.OnIsSellerChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsBuyer", DbType="Bit")]
+		public System.Nullable<bool> IsBuyer
+		{
+			get
+			{
+				return this._IsBuyer;
+			}
+			set
+			{
+				if ((this._IsBuyer != value))
+				{
+					this.OnIsBuyerChanging(value);
+					this.SendPropertyChanging();
+					this._IsBuyer = value;
+					this.SendPropertyChanged("IsBuyer");
+					this.OnIsBuyerChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsRecoarse", DbType="Bit")]
 		public System.Nullable<bool> IsRecoarse
 		{
 			get
@@ -12208,7 +12306,27 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_IsNotice", DbType="NVarChar(50) NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_IsNonRecoarse", DbType="Bit")]
+		public System.Nullable<bool> IsNonRecoarse
+		{
+			get
+			{
+				return this._IsNonRecoarse;
+			}
+			set
+			{
+				if ((this._IsNonRecoarse != value))
+				{
+					this.OnIsNonRecoarseChanging(value);
+					this.SendPropertyChanging();
+					this._IsNonRecoarse = value;
+					this.SendPropertyChanged("IsNonRecoarse");
+					this.OnIsNonRecoarseChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsNotice", DbType="NVarChar(50)")]
 		public string IsNotice
 		{
 			get
@@ -12258,6 +12376,246 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._ClientEDICode = default(string);
 					}
 					this.SendPropertyChanged("Client");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.InvoiceFinanceLog")]
+	public partial class InvoiceFinanceLog : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _FinanceLogID;
+		
+		private string _FinanceBatchNo;
+		
+		private string _InvoiceNo;
+		
+		private double _FinanceAmount;
+		
+		private string _Comment;
+		
+		private EntityRef<Invoice> _Invoice;
+		
+		private EntityRef<InvoiceFinanceBatch> _InvoiceFinanceBatch;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnFinanceLogIDChanging(int value);
+    partial void OnFinanceLogIDChanged();
+    partial void OnFinanceBatchNoChanging(string value);
+    partial void OnFinanceBatchNoChanged();
+    partial void OnInvoiceNoChanging(string value);
+    partial void OnInvoiceNoChanged();
+    partial void OnFinanceAmountChanging(double value);
+    partial void OnFinanceAmountChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    #endregion
+		
+		public InvoiceFinanceLog()
+		{
+			this._Invoice = default(EntityRef<Invoice>);
+			this._InvoiceFinanceBatch = default(EntityRef<InvoiceFinanceBatch>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_FinanceLogID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int FinanceLogID
+		{
+			get
+			{
+				return this._FinanceLogID;
+			}
+			set
+			{
+				if ((this._FinanceLogID != value))
+				{
+					this.OnFinanceLogIDChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceLogID = value;
+					this.SendPropertyChanged("FinanceLogID");
+					this.OnFinanceLogIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FinanceBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string FinanceBatchNo
+		{
+			get
+			{
+				return this._FinanceBatchNo;
+			}
+			set
+			{
+				if ((this._FinanceBatchNo != value))
+				{
+					if (this._InvoiceFinanceBatch.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFinanceBatchNoChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceBatchNo = value;
+					this.SendPropertyChanged("FinanceBatchNo");
+					this.OnFinanceBatchNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_InvoiceNo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string InvoiceNo
+		{
+			get
+			{
+				return this._InvoiceNo;
+			}
+			set
+			{
+				if ((this._InvoiceNo != value))
+				{
+					if (this._Invoice.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnInvoiceNoChanging(value);
+					this.SendPropertyChanging();
+					this._InvoiceNo = value;
+					this.SendPropertyChanged("InvoiceNo");
+					this.OnInvoiceNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FinanceAmount", DbType="Float NOT NULL")]
+		public double FinanceAmount
+		{
+			get
+			{
+				return this._FinanceAmount;
+			}
+			set
+			{
+				if ((this._FinanceAmount != value))
+				{
+					this.OnFinanceAmountChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceAmount = value;
+					this.SendPropertyChanged("FinanceAmount");
+					this.OnFinanceAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Invoice_InvoiceFinanceLog", Storage="_Invoice", ThisKey="InvoiceNo", IsForeignKey=true)]
+		public Invoice Invoice
+		{
+			get
+			{
+				return this._Invoice.Entity;
+			}
+			set
+			{
+				Invoice previousValue = this._Invoice.Entity;
+				if (((previousValue != value) 
+							|| (this._Invoice.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Invoice.Entity = null;
+						previousValue.InvoiceFinanceLogs.Remove(this);
+					}
+					this._Invoice.Entity = value;
+					if ((value != null))
+					{
+						value.InvoiceFinanceLogs.Add(this);
+						this._InvoiceNo = value.InvoiceNo;
+					}
+					else
+					{
+						this._InvoiceNo = default(string);
+					}
+					this.SendPropertyChanged("Invoice");
+				}
+			}
+		}
+		
+		[Association(Name="InvoiceFinanceBatch_InvoiceFinanceLog", Storage="_InvoiceFinanceBatch", ThisKey="FinanceBatchNo", IsForeignKey=true)]
+		public InvoiceFinanceBatch InvoiceFinanceBatch
+		{
+			get
+			{
+				return this._InvoiceFinanceBatch.Entity;
+			}
+			set
+			{
+				InvoiceFinanceBatch previousValue = this._InvoiceFinanceBatch.Entity;
+				if (((previousValue != value) 
+							|| (this._InvoiceFinanceBatch.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._InvoiceFinanceBatch.Entity = null;
+						previousValue.InvoiceFinanceLogs.Remove(this);
+					}
+					this._InvoiceFinanceBatch.Entity = value;
+					if ((value != null))
+					{
+						value.InvoiceFinanceLogs.Add(this);
+						this._FinanceBatchNo = value.FinanceBatchNo;
+					}
+					else
+					{
+						this._FinanceBatchNo = default(string);
+					}
+					this.SendPropertyChanged("InvoiceFinanceBatch");
 				}
 			}
 		}

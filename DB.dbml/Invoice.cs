@@ -21,6 +21,7 @@ namespace CMBC.EasyFactor.DB.dbml
     {
         #region Fields (3)
 
+        private double? _financeAmount2;
         private double? _paymentAmount2;
         private double? _refundAmount2;
         private static Regex InvoiceNoRegex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>\\.]+$");
@@ -306,6 +307,26 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public double? FinanceAmount2
+        {
+            get
+            {
+                return _financeAmount2;
+            }
+            set
+            {
+                if (this._financeAmount2 != value)
+                {
+                    this.SendPropertyChanging();
+                    this._financeAmount2 = value;
+                    this.SendPropertyChanged("FinanceAmount2");
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets or sets
         /// </summary>
         public double? RefundAmount2
@@ -321,6 +342,33 @@ namespace CMBC.EasyFactor.DB.dbml
                     this.SendPropertyChanging();
                     this._refundAmount2 = value;
                     this.SendPropertyChanged("RefundAmount2");
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string FinanceBatchNos
+        {
+            get
+            {
+                List<string> batches = new List<string>();
+                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                {
+                    if (!batches.Contains(log.FinanceBatchNo))
+                    {
+                        batches.Add(log.FinanceBatchNo);
+                    }
+                }
+                if (batches.Count > 0)
+                {
+                    return String.Join(";", batches.ToArray());
+                }
+                else
+                {
+                    return string.Empty;
                 }
             }
         }
@@ -352,9 +400,27 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? FinanceDate2
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets
         /// </summary>
         public DateTime? RefundDate2
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int? FinanceLogID2
         {
             get;
             set;
@@ -411,6 +477,25 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 PaymentAmount = null;
                 PaymentDate = null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CaculateFinance()
+        {
+            if (InvoiceFinanceLogs.Count > 0)
+            {
+                FinanceAmount = InvoiceFinanceLogs.Sum(log => log.FinanceAmount);
+                FinanceDate = InvoiceFinanceLogs.Min(log => log.InvoiceFinanceBatch.FinancePeriodBegin);
+                FinanceDueDate = InvoiceFinanceLogs.Min(log => log.InvoiceFinanceBatch.FinancePeriodEnd);
+            }
+            else
+            {
+                FinanceAmount = null;
+                FinanceDate = null;
+                FinanceDueDate = null;
             }
         }
 

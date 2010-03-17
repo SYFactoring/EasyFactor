@@ -1172,5 +1172,6 @@ namespace CMBC.EasyFactor
             this.autoUpdater.RestartForm = new ConfirmForm(this.autoUpdater);
             this.autoUpdater.TryUpdateBackground();
         }
+
     }
 }

@@ -602,16 +602,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 FillCreditCover(cda.Case.InvoiceCurrency);
                 FillFinanceLine(cda.Case.InvoiceCurrency);
             }
-
-            ClientCreditLine creditLine = cda.FinanceCreditLine;
-            if (creditLine != null)
-            {
-                this.tbHighestFinance.Text = String.Format("{0:N2}", creditLine.CreditLine);
-            }
-            else
-            {
-                this.tbHighestFinance.Text = String.Empty;
-            }
         }
 
         /// <summary>
@@ -674,7 +664,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 cda.FinanceLinePeriodEnd = creditLine.PeriodEnd;
                 cda.FinanceLineCurr = creditLine.CreditLineCurrency;
                 cda.FinanceLine = creditLine.CreditLine;
-                this.tbHighestFinance.Text = String.Format("{0:N2}", creditLine.CreditLine);
+                cda.HighestFinanceLine = creditLine.CreditLine;
             }
             else
             {
@@ -682,13 +672,13 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.financeLinePeriodBeginDateTimePicker.Enabled = false;
                 this.financeLinePeriodEndDateTimePicker.Enabled = false;
                 this.financeLineTextBox.ReadOnly = true;
-                this.tbHighestFinance.Text = String.Empty;
                 this.financeLinePeriodBeginDateTimePicker.Value = default(DateTime);
                 this.financeLinePeriodEndDateTimePicker.Value = default(DateTime);
                 cda.FinanceLinePeriodBegin = null;
                 cda.FinanceLinePeriodEnd = null;
                 cda.FinanceLine = null;
                 cda.FinanceLineCurr = string.Empty;
+                cda.HighestFinanceLine = null;
             }
         }
 

@@ -79,12 +79,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="selectedCDA"></param>
-        public PaymentBatchMgr(Case selectedCase)
+        /// <param name="context"></param>
+        public PaymentBatchMgr(Case selectedCase, DBDataContext context)
             : this(OpBatchType.DETAIL)
         {
             this._case = selectedCase;
             this.panelQuery.Visible = false;
             this.bs.DataSource = this._case.InvoicePaymentBatches;
+            this.context = context;
         }
 
         /// <summary>

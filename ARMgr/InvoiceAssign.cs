@@ -674,9 +674,9 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceAssignBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
-                InvoiceAssignBatch batch = this.context.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == selectedBatch.AssignBatchNo);
-                this.batchBindingSource.DataSource = batch;
-                this.invoiceBindingSource.DataSource = batch.Invoices.ToList();
+            //    InvoiceAssignBatch batch = this.context.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == selectedBatch.AssignBatchNo);
+                this.batchBindingSource.DataSource = selectedBatch;
+                this.invoiceBindingSource.DataSource = selectedBatch.Invoices.ToList();
                 this.StatBatch();
             }
         }

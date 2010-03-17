@@ -683,19 +683,19 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            PaymentBatchMgr batchMgr = new PaymentBatchMgr(this._case);
+            PaymentBatchMgr batchMgr = new PaymentBatchMgr(this._case, this.context);
             QueryForm queryUI = new QueryForm(batchMgr, "选择付款批次");
             batchMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             InvoicePaymentBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
-                InvoicePaymentBatch batch = context.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == selectedBatch.PaymentBatchNo);
-                this.batchBindingSource.DataSource = batch;
+    //            InvoicePaymentBatch batch = context.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == selectedBatch.PaymentBatchNo);
+                this.batchBindingSource.DataSource = selectedBatch;
                 Func<InvoicePaymentLog, Invoice> makeInvoice =
                 i => new Invoice { InvoiceNo = i.InvoiceNo, PaymentLogID2 = i.PaymentLogID };
 
-                var invoiceList = (from log in batch.InvoicePaymentLogs
+                var invoiceList = (from log in selectedBatch.InvoicePaymentLogs
                                    select makeInvoice(log)).ToList();
 
                 foreach (Invoice invoice in invoiceList)

@@ -161,7 +161,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.tbCasePaymentTerm = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.companyNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -237,6 +236,7 @@
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -277,7 +277,6 @@
             lblCasePaymentTerm = new DevComponents.DotNetBar.LabelX();
             lblCDASignDate = new DevComponents.DotNetBar.LabelX();
             this.groupPanelCase.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.groupPanelCreditCover.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodBeginDateTimePicker)).BeginInit();
@@ -286,6 +285,7 @@
             this.groupPanelOther.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diCDASignDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // caseCodeLabel
@@ -908,10 +908,6 @@
             this.tbCasePaymentTerm.Size = new System.Drawing.Size(100, 20);
             this.tbCasePaymentTerm.TabIndex = 22;
             // 
-            // CDABindingSource
-            // 
-            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
-            // 
             // invoiceCurrencyTextBox
             // 
             // 
@@ -1243,6 +1239,7 @@
             // 
             // 
             this.tbHighestFinance.Border.Class = "TextBoxBorder";
+            this.tbHighestFinance.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HighestFinanceLine", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
             this.tbHighestFinance.Location = new System.Drawing.Point(131, 91);
             this.tbHighestFinance.Name = "tbHighestFinance";
             this.tbHighestFinance.Size = new System.Drawing.Size(100, 20);
@@ -2009,6 +2006,10 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
+            // CDABindingSource
+            // 
+            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
+            // 
             // CDADetail
             // 
             this.AcceptButton = this.btnCDASave;
@@ -2027,7 +2028,6 @@
             this.Text = "额度通知书";
             this.groupPanelCase.ResumeLayout(false);
             this.groupPanelCase.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();
             this.groupPanelCreditCover.ResumeLayout(false);
             this.groupPanelCreditCover.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodEndDateTimePicker)).EndInit();
@@ -2038,6 +2038,7 @@
             this.groupPanelOther.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diCDASignDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

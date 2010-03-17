@@ -479,77 +479,12 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 3, column++] = review.Client.Industry;
                     datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = TypeUtil.GetExcelCurr(review.RequestCurrency);
                     datasheet.Cells[row + 3, column++] = review.RequestAmount;
-                    switch (review.TransactionType == null ? string.Empty : review.TransactionType)
-                    {
-                        case "国内卖方保理":
-                            datasheet.Cells[row + 3, column++] = "国内";
-                            datasheet.Cells[row + 3, column++] = "---";
-                            datasheet.Cells[row + 3, column++] = "卖方";
-                            datasheet.Cells[row + 3, column++] = "---";
-                            break;
-                        case "出口保理":
-                            datasheet.Cells[row + 3, column++] = "---";
-                            datasheet.Cells[row + 3, column++] = "出口";
-                            datasheet.Cells[row + 3, column++] = "卖方";
-                            datasheet.Cells[row + 3, column++] = "---";
-                            break;
-                        case "国内信保保理":
-                            datasheet.Cells[row + 3, column++] = "信保";
-                            datasheet.Cells[row + 3, column++] = "---";
-                            datasheet.Cells[row + 3, column++] = "卖方";
-                            datasheet.Cells[row + 3, column++] = "---";
-                            break;
-                        case "国际信保保理":
-                            datasheet.Cells[row + 3, column++] = "---";
-                            datasheet.Cells[row + 3, column++] = "信保";
-                            datasheet.Cells[row + 3, column++] = "卖方";
-                            datasheet.Cells[row + 3, column++] = "---";
-                            break;
-                        case "租赁保理":
-                            datasheet.Cells[row + 3, column++] = "租赁";
-                            datasheet.Cells[row + 3, column++] = "---";
-                            datasheet.Cells[row + 3, column++] = "卖方";
-                            datasheet.Cells[row + 3, column++] = "---";
-                            break;
-                        case "国内买方保理":
-                            datasheet.Cells[row + 3, column++] = "国内";
-                            datasheet.Cells[row + 3, column++] = "---";
-                            datasheet.Cells[row + 3, column++] = "---";
-                            datasheet.Cells[row + 3, column++] = "买方";
-                            break;
-                        case "进口保理":
-                            datasheet.Cells[row + 3, column++] = "---";
-                            datasheet.Cells[row + 3, column++] = "进口";
-                            datasheet.Cells[row + 3, column++] = "---";
-                            datasheet.Cells[row + 3, column++] = "买方";
-                            break;
-                        default:
-                            datasheet.Cells[row + 3, column++] = "---";
-                            datasheet.Cells[row + 3, column++] = "---";
-                            datasheet.Cells[row + 3, column++] = "---";
-                            datasheet.Cells[row + 3, column++] = "---";
-                            break;
-                    }
-
-                    if (review.IsRecoarse.HasValue)
-                    {
-                        if (review.IsRecoarse.Value)
-                        {
-                            datasheet.Cells[row + 3, column++] = "有追";
-                            datasheet.Cells[row + 3, column++] = "---";
-                        }
-                        else
-                        {
-                            datasheet.Cells[row + 3, column++] = "---";
-                            datasheet.Cells[row + 3, column++] = "无追";
-                        }
-                    }
-                    else
-                    {
-                        datasheet.Cells[row + 3, column++] = "---";
-                        datasheet.Cells[row + 3, column++] = "---";
-                    }
-
+                    datasheet.Cells[row + 3, column++] = review.IsLocal.GetValueOrDefault() ? "国内" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsInternational.GetValueOrDefault() ? "国际" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsSeller.GetValueOrDefault() ? "卖方" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsBuyer.GetValueOrDefault() ? "买方" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsRecoarse.GetValueOrDefault() ? "有追" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsNonRecoarse.GetValueOrDefault() ? "无追" : "---";
                     datasheet.Cells[row + 3, column++] = review.IsNotice;
                     string[] financeTypes = review.RequestFinanceType.Split(new char[] { ';' });
                     datasheet.Cells[row + 3, column++] = financeTypes.Contains("预付款") ? "预付款" : "---";
