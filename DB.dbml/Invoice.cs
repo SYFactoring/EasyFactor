@@ -101,6 +101,7 @@ namespace CMBC.EasyFactor.DB.dbml
                         batches.Add(log.FinanceBatchNo);
                     }
                 }
+
                 if (batches.Count > 0)
                 {
                     return String.Join(";", batches.ToArray());
@@ -158,27 +159,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
                 foreach (InvoiceFinanceLog financeLog in this.InvoiceFinanceLogs)
                 {
-                    double interest = 0;
-
-                    foreach (InvoiceRefundLog refundLog in financeLog.InvoiceRefundLogs)
-                    {
-                        int period = ((refundLog.RefundDate < financeLog.InvoiceFinanceBatch.FinancePeriodEnd ? refundLog.RefundDate : financeLog.InvoiceFinanceBatch.FinancePeriodEnd) - financeLog.InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest += refundLog.RefundAmount * (financeLog.InvoiceFinanceBatch.FinanceRate) / 360 * period;
-                    }
-
-                    if (TypeUtil.GreaterZero(financeLog.FinanceOutstanding))
-                    {
-                        int period = ((DateTime.Today.Date < financeLog.InvoiceFinanceBatch.FinancePeriodEnd ? DateTime.Today.Date : financeLog.InvoiceFinanceBatch.FinancePeriodEnd) - financeLog.InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest += FinanceAmount * (financeLog.InvoiceFinanceBatch.FinanceRate) / 360 * period;
-                    }
-
-                    if (financeLog.InvoiceFinanceBatch.BatchCurrency != "CNY")
-                    {
-                        double rate = Exchange.GetExchangeRate(financeLog.InvoiceFinanceBatch.BatchCurrency, "CNY");
-                        interest *= rate;
-                    }
-
-                    result += interest;
+                    result += financeLog.GrossInterest;
                 }
 
                 return result;
@@ -207,27 +188,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
                 foreach (InvoiceFinanceLog financeLog in this.InvoiceFinanceLogs)
                 {
-                    double interest = 0;
-
-                    foreach (InvoiceRefundLog refundLog in financeLog.InvoiceRefundLogs)
-                    {
-                        int period = ((refundLog.RefundDate < financeLog.InvoiceFinanceBatch.FinancePeriodEnd ? refundLog.RefundDate : financeLog.InvoiceFinanceBatch.FinancePeriodEnd) - financeLog.InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest += refundLog.RefundAmount * (financeLog.InvoiceFinanceBatch.FinanceRate - financeLog.InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
-                    }
-
-                    if (TypeUtil.GreaterZero(financeLog.FinanceOutstanding))
-                    {
-                        int period = ((DateTime.Today.Date < financeLog.InvoiceFinanceBatch.FinancePeriodEnd ? DateTime.Today.Date : financeLog.InvoiceFinanceBatch.FinancePeriodEnd) - financeLog.InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest += FinanceAmount.GetValueOrDefault() * (financeLog.InvoiceFinanceBatch.FinanceRate - financeLog.InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
-                    }
-
-                    if (financeLog.InvoiceFinanceBatch.BatchCurrency != "CNY")
-                    {
-                        double rate = Exchange.GetExchangeRate(financeLog.InvoiceFinanceBatch.BatchCurrency, "CNY");
-                        interest *= rate;
-                    }
-
-                    result += interest;
+                    result += financeLog.NetInterest;
                 }
 
                 return result;
@@ -249,6 +210,7 @@ namespace CMBC.EasyFactor.DB.dbml
                         batches.Add(log.PaymentBatchNo);
                     }
                 }
+
                 if (batches.Count > 0)
                 {
                     return String.Join(";", batches.ToArray());
@@ -277,6 +239,7 @@ namespace CMBC.EasyFactor.DB.dbml
                             batches.Add(log.RefundBatchNo);
                         }
                     }
+
                     if (batches.Count > 0)
                     {
                         return String.Join(";", batches.ToArray());
@@ -346,6 +309,41 @@ namespace CMBC.EasyFactor.DB.dbml
                 FinanceAmount = null;
                 FinanceDate = null;
                 FinanceDueDate = null;
+                Commission = null;
+                CommissionDate = null;
+            }
+
+            CaculateCommission();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CaculateCommission()
+        {
+            if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按融资金额")
+            {
+                Commission = FinanceAmount * this.InvoiceAssignBatch.Case.ActiveCDA.Price.GetValueOrDefault();
+                if (TypeUtil.GreaterZero(Commission))
+                {
+                    CommissionDate = FinanceDate;
+                }
+                else
+                {
+                    CommissionDate = null;
+                }
+            }
+            else if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按转让金额")
+            {
+                Commission = AssignAmount * this.InvoiceAssignBatch.Case.ActiveCDA.Price.GetValueOrDefault();
+                if (TypeUtil.GreaterZero(Commission) > 0)
+                {
+                    CommissionDate = AssignDate;
+                }
+                else
+                {
+                    CommissionDate = null;
+                }
             }
         }
 
@@ -462,15 +460,11 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (this.FinanceAmount.HasValue)
                 {
-                    if (this.InvoiceFinanceBatch.BatchCurrency != this.InvoiceAssignBatch.BatchCurrency)
+                    if (TypeUtil.GreaterZero(this.FinanceAmount - this.AssignAmount))
                     {
-                        double rate = Exchange.GetExchangeRate(this.InvoiceFinanceBatch.BatchCurrency, this.InvoiceAssignBatch.BatchCurrency);
-                        double financeAmount = rate * this.FinanceAmount.Value;
-                        if (TypeUtil.GreaterZero(financeAmount - this.AssignAmount))
-                        {
-                            throw new Exception("融资金额不能大于转让金额: " + this.InvoiceNo);
-                        }
+                        throw new Exception("融资金额不能大于转让金额: " + this.InvoiceNo);
                     }
+
                 }
 
                 if (TypeUtil.GreaterZero(this.PaymentAmount.GetValueOrDefault() - this.AssignAmount))

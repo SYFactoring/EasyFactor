@@ -13,7 +13,40 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoicePaymentLog
     {
-        #region Properties (2)
+        #region Properties (6)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double AssignAmount
+        {
+            get
+            {
+                return this.Invoice.AssignAmount;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime AssignDate
+        {
+            get
+            {
+                return this.Invoice.AssignDate;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double AssignOutstanding
+        {
+            get
+            {
+                return this.Invoice.AssignOutstanding;
+            }
+        }
 
         /// <summary>
         /// Gets
@@ -27,13 +60,24 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets
+        /// 
         /// </summary>
-        public DateTime PaymentDate
+        public DateTime? DueDate
         {
             get
             {
-                return this.InvoicePaymentBatch.PaymentDate;
+                return this.Invoice.DueDate;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? InvoicePaymentAmount
+        {
+            get
+            {
+                return this.Invoice.PaymentAmount;
             }
         }
 

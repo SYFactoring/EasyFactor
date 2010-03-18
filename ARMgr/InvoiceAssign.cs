@@ -102,32 +102,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="selectedInvoice"></param>
-        private void CaculateCommisssion(Invoice selectedInvoice)
-        {
-            if (selectedInvoice.Commission.HasValue == false)
-            {
-                if (this._case.ActiveCDA.CommissionType == "按转让金额")
-                {
-                    selectedInvoice.Commission = selectedInvoice.AssignAmount * this._case.ActiveCDA.Price ?? 0;
-                    if (selectedInvoice.Commission.GetValueOrDefault() > 0)
-                    {
-                        if (selectedInvoice.InvoiceAssignBatch != null)
-                        {
-                            selectedInvoice.CommissionDate = selectedInvoice.InvoiceAssignBatch.AssignDate;
-                        }
-                    }
-                    else
-                    {
-                        selectedInvoice.CommissionDate = null;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DetailCase(object sender, EventArgs e)
@@ -377,12 +351,10 @@ namespace CMBC.EasyFactor.ARMgr
             if (this.dgvInvoices.Columns[e.ColumnIndex] == this.colInvoiceAmount)
             {
                 selectedInvoice.AssignAmount = selectedInvoice.InvoiceAmount;
-                this.CaculateCommisssion(selectedInvoice);
                 this.StatBatch();
             }
             else if (this.dgvInvoices.Columns[e.ColumnIndex] == this.colAssignAmount)
             {
-                this.CaculateCommisssion(selectedInvoice);
                 this.StatBatch();
             }
         }
@@ -472,7 +444,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     if (invoice.Commission.HasValue == false)
                     {
-                        this.CaculateCommisssion(invoice);
+                        invoice.CaculateCommisssion();
                     }
                 }
 
@@ -619,6 +591,7 @@ namespace CMBC.EasyFactor.ARMgr
                 foreach (Invoice invoice in invoiceList)
                 {
                     invoice.InvoiceAssignBatch = batch;
+                    invoice.CaculateCommission();
                     if (invoice.IsFlaw)
                     {
                         flawList.Add(invoice);

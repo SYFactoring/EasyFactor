@@ -8,12 +8,92 @@ namespace CMBC.EasyFactor.DB.dbml
 {
     using System;
     using System.Linq;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceFinanceLog
     {
+		#region Properties (13) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double AssignAmount
+        {
+            get
+            {
+                return this.Invoice.AssignAmount;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime AssignDate
+        {
+            get
+            {
+                return this.Invoice.AssignDate;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double AssignOutstanding
+        {
+            get
+            {
+                return this.Invoice.AssignOutstanding;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? Commission
+        {
+            get
+            {
+                return this.Invoice.Commission;
+            }
+            set
+            {
+                this.Invoice.Commission = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? CommissionDate
+        {
+            get
+            {
+                return this.Invoice.CommissionDate;
+            }
+            set
+            {
+                this.Invoice.CommissionDate = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? DueDate
+        {
+            get
+            {
+                return this.Invoice.DueDate;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public double? FinanceOutstanding
         {
             get
@@ -22,6 +102,104 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public double GrossInterest
+        {
+            get
+            {
+                double interest = 0;
+
+                foreach (InvoiceRefundLog refundLog in InvoiceRefundLogs)
+                {
+                    int period = ((refundLog.RefundDate < InvoiceFinanceBatch.FinancePeriodEnd ? refundLog.RefundDate : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                    interest += refundLog.RefundAmount * (InvoiceFinanceBatch.FinanceRate) / 360 * period;
+                }
+
+                if (TypeUtil.GreaterZero(FinanceOutstanding))
+                {
+                    int period = ((DateTime.Today.Date < InvoiceFinanceBatch.FinancePeriodEnd ? DateTime.Today.Date : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                    interest += FinanceAmount * (InvoiceFinanceBatch.FinanceRate) / 360 * period;
+                }
+
+                if (InvoiceFinanceBatch.BatchCurrency != "CNY")
+                {
+                    double rate = Exchange.GetExchangeRate(InvoiceFinanceBatch.BatchCurrency, "CNY");
+                    interest *= rate;
+                }
+
+                return interest;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? InvoiceDate
+        {
+            get
+            {
+                return this.Invoice.InvoiceDate;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? InvoiceFinanceAmount
+        {
+            get
+            {
+                return this.Invoice.FinanceAmount;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? InvoiceFinanceOutstanding
+        {
+            get
+            {
+                return this.Invoice.FinanceOutstanding;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double NetInterest
+        {
+            get
+            {
+                double interest = 0;
+
+                foreach (InvoiceRefundLog refundLog in InvoiceRefundLogs)
+                {
+                    int period = ((refundLog.RefundDate < InvoiceFinanceBatch.FinancePeriodEnd ? refundLog.RefundDate : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                    interest += refundLog.RefundAmount * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
+                }
+
+                if (TypeUtil.GreaterZero(FinanceOutstanding))
+                {
+                    int period = ((DateTime.Today.Date < InvoiceFinanceBatch.FinancePeriodEnd ? DateTime.Today.Date : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                    interest += FinanceAmount * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
+                }
+
+                if (InvoiceFinanceBatch.BatchCurrency != "CNY")
+                {
+                    double rate = Exchange.GetExchangeRate(InvoiceFinanceBatch.BatchCurrency, "CNY");
+                    interest *= rate;
+                }
+
+                return interest;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public double? RefundAmount
         {
             get
@@ -29,5 +207,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 this.InvoiceRefundLogs.Sum(log => log.RefundAmount);
             }
         }
+
+		#endregion Properties 
     }
 }
