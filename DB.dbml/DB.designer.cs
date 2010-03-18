@@ -90,9 +90,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertInvoicePaymentLog(InvoicePaymentLog instance);
     partial void UpdateInvoicePaymentLog(InvoicePaymentLog instance);
     partial void DeleteInvoicePaymentLog(InvoicePaymentLog instance);
-    partial void InsertInvoiceRefundLog(InvoiceRefundLog instance);
-    partial void UpdateInvoiceRefundLog(InvoiceRefundLog instance);
-    partial void DeleteInvoiceRefundLog(InvoiceRefundLog instance);
     partial void InsertInvoiceRefundBatch(InvoiceRefundBatch instance);
     partial void UpdateInvoiceRefundBatch(InvoiceRefundBatch instance);
     partial void DeleteInvoiceRefundBatch(InvoiceRefundBatch instance);
@@ -108,6 +105,9 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertInvoiceFinanceLog(InvoiceFinanceLog instance);
     partial void UpdateInvoiceFinanceLog(InvoiceFinanceLog instance);
     partial void DeleteInvoiceFinanceLog(InvoiceFinanceLog instance);
+    partial void InsertInvoiceRefundLog(InvoiceRefundLog instance);
+    partial void UpdateInvoiceRefundLog(InvoiceRefundLog instance);
+    partial void DeleteInvoiceRefundLog(InvoiceRefundLog instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -300,14 +300,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		public System.Data.Linq.Table<InvoiceRefundLog> InvoiceRefundLogs
-		{
-			get
-			{
-				return this.GetTable<InvoiceRefundLog>();
-			}
-		}
-		
 		public System.Data.Linq.Table<InvoiceRefundBatch> InvoiceRefundBatches
 		{
 			get
@@ -345,6 +337,14 @@ namespace CMBC.EasyFactor.DB.dbml
 			get
 			{
 				return this.GetTable<InvoiceFinanceLog>();
+			}
+		}
+		
+		public System.Data.Linq.Table<InvoiceRefundLog> InvoiceRefundLogs
+		{
+			get
+			{
+				return this.GetTable<InvoiceRefundLog>();
 			}
 		}
 	}
@@ -8648,7 +8648,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.DateTime _FinancePeriodEnd;
 		
-		private System.Nullable<double> _FinanceRate;
+		private double _FinanceRate;
 		
 		private string _FactorCode;
 		
@@ -8694,7 +8694,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFinancePeriodBeginChanged();
     partial void OnFinancePeriodEndChanging(System.DateTime value);
     partial void OnFinancePeriodEndChanged();
-    partial void OnFinanceRateChanging(System.Nullable<double> value);
+    partial void OnFinanceRateChanging(double value);
     partial void OnFinanceRateChanged();
     partial void OnFactorCodeChanging(string value);
     partial void OnFactorCodeChanged();
@@ -8871,7 +8871,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_FinanceRate", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<double> FinanceRate
+		public double FinanceRate
 		{
 			get
 			{
@@ -9998,246 +9998,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 	}
 	
-	[Table(Name="dbo.InvoiceRefundLog")]
-	public partial class InvoiceRefundLog : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _RefundLogID;
-		
-		private string _RefundBatchNo;
-		
-		private string _InvoiceNo;
-		
-		private double _RefundAmount;
-		
-		private string _Comment;
-		
-		private EntityRef<InvoiceRefundBatch> _InvoiceRefundBatch;
-		
-		private EntityRef<Invoice> _Invoice;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnRefundLogIDChanging(int value);
-    partial void OnRefundLogIDChanged();
-    partial void OnRefundBatchNoChanging(string value);
-    partial void OnRefundBatchNoChanged();
-    partial void OnInvoiceNoChanging(string value);
-    partial void OnInvoiceNoChanged();
-    partial void OnRefundAmountChanging(double value);
-    partial void OnRefundAmountChanged();
-    partial void OnCommentChanging(string value);
-    partial void OnCommentChanged();
-    #endregion
-		
-		public InvoiceRefundLog()
-		{
-			this._InvoiceRefundBatch = default(EntityRef<InvoiceRefundBatch>);
-			this._Invoice = default(EntityRef<Invoice>);
-			OnCreated();
-		}
-		
-		[Column(Storage="_RefundLogID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.WhenChanged)]
-		public int RefundLogID
-		{
-			get
-			{
-				return this._RefundLogID;
-			}
-			set
-			{
-				if ((this._RefundLogID != value))
-				{
-					this.OnRefundLogIDChanging(value);
-					this.SendPropertyChanging();
-					this._RefundLogID = value;
-					this.SendPropertyChanged("RefundLogID");
-					this.OnRefundLogIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_RefundBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
-		public string RefundBatchNo
-		{
-			get
-			{
-				return this._RefundBatchNo;
-			}
-			set
-			{
-				if ((this._RefundBatchNo != value))
-				{
-					if (this._InvoiceRefundBatch.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnRefundBatchNoChanging(value);
-					this.SendPropertyChanging();
-					this._RefundBatchNo = value;
-					this.SendPropertyChanged("RefundBatchNo");
-					this.OnRefundBatchNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_InvoiceNo", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
-		public string InvoiceNo
-		{
-			get
-			{
-				return this._InvoiceNo;
-			}
-			set
-			{
-				if ((this._InvoiceNo != value))
-				{
-					if (this._Invoice.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnInvoiceNoChanging(value);
-					this.SendPropertyChanging();
-					this._InvoiceNo = value;
-					this.SendPropertyChanged("InvoiceNo");
-					this.OnInvoiceNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_RefundAmount", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
-		public double RefundAmount
-		{
-			get
-			{
-				return this._RefundAmount;
-			}
-			set
-			{
-				if ((this._RefundAmount != value))
-				{
-					this.OnRefundAmountChanging(value);
-					this.SendPropertyChanging();
-					this._RefundAmount = value;
-					this.SendPropertyChanged("RefundAmount");
-					this.OnRefundAmountChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string Comment
-		{
-			get
-			{
-				return this._Comment;
-			}
-			set
-			{
-				if ((this._Comment != value))
-				{
-					this.OnCommentChanging(value);
-					this.SendPropertyChanging();
-					this._Comment = value;
-					this.SendPropertyChanged("Comment");
-					this.OnCommentChanged();
-				}
-			}
-		}
-		
-		[Association(Name="InvoiceRefundBatch_InvoiceRefundLog", Storage="_InvoiceRefundBatch", ThisKey="RefundBatchNo", IsForeignKey=true)]
-		public InvoiceRefundBatch InvoiceRefundBatch
-		{
-			get
-			{
-				return this._InvoiceRefundBatch.Entity;
-			}
-			set
-			{
-				InvoiceRefundBatch previousValue = this._InvoiceRefundBatch.Entity;
-				if (((previousValue != value) 
-							|| (this._InvoiceRefundBatch.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._InvoiceRefundBatch.Entity = null;
-						previousValue.InvoiceRefundLogs.Remove(this);
-					}
-					this._InvoiceRefundBatch.Entity = value;
-					if ((value != null))
-					{
-						value.InvoiceRefundLogs.Add(this);
-						this._RefundBatchNo = value.RefundBatchNo;
-					}
-					else
-					{
-						this._RefundBatchNo = default(string);
-					}
-					this.SendPropertyChanged("InvoiceRefundBatch");
-				}
-			}
-		}
-		
-		[Association(Name="Invoice_InvoiceRefundLog", Storage="_Invoice", ThisKey="InvoiceNo", IsForeignKey=true)]
-		public Invoice Invoice
-		{
-			get
-			{
-				return this._Invoice.Entity;
-			}
-			set
-			{
-				Invoice previousValue = this._Invoice.Entity;
-				if (((previousValue != value) 
-							|| (this._Invoice.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Invoice.Entity = null;
-						previousValue.InvoiceRefundLogs.Remove(this);
-					}
-					this._Invoice.Entity = value;
-					if ((value != null))
-					{
-						value.InvoiceRefundLogs.Add(this);
-						this._InvoiceNo = value.InvoiceNo;
-					}
-					else
-					{
-						this._InvoiceNo = default(string);
-					}
-					this.SendPropertyChanged("Invoice");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[Table(Name="dbo.InvoiceRefundBatch")]
 	public partial class InvoiceRefundBatch : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -10675,8 +10435,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
 		
-		private EntitySet<InvoiceRefundLog> _InvoiceRefundLogs;
-		
 		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
 		
 		private EntityRef<InvoiceAssignBatch> _InvoiceAssignBatch;
@@ -10772,7 +10530,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		public Invoice()
 		{
 			this._InvoicePaymentLogs = new EntitySet<InvoicePaymentLog>(new Action<InvoicePaymentLog>(this.attach_InvoicePaymentLogs), new Action<InvoicePaymentLog>(this.detach_InvoicePaymentLogs));
-			this._InvoiceRefundLogs = new EntitySet<InvoiceRefundLog>(new Action<InvoiceRefundLog>(this.attach_InvoiceRefundLogs), new Action<InvoiceRefundLog>(this.detach_InvoiceRefundLogs));
 			this._InvoiceFinanceLogs = new EntitySet<InvoiceFinanceLog>(new Action<InvoiceFinanceLog>(this.attach_InvoiceFinanceLogs), new Action<InvoiceFinanceLog>(this.detach_InvoiceFinanceLogs));
 			this._InvoiceAssignBatch = default(EntityRef<InvoiceAssignBatch>);
 			OnCreated();
@@ -11615,19 +11372,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Invoice_InvoiceRefundLog", Storage="_InvoiceRefundLogs", OtherKey="InvoiceNo")]
-		public EntitySet<InvoiceRefundLog> InvoiceRefundLogs
-		{
-			get
-			{
-				return this._InvoiceRefundLogs;
-			}
-			set
-			{
-				this._InvoiceRefundLogs.Assign(value);
-			}
-		}
-		
 		[Association(Name="Invoice_InvoiceFinanceLog", Storage="_InvoiceFinanceLogs", OtherKey="InvoiceNo")]
 		public EntitySet<InvoiceFinanceLog> InvoiceFinanceLogs
 		{
@@ -11702,18 +11446,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_InvoicePaymentLogs(InvoicePaymentLog entity)
-		{
-			this.SendPropertyChanging();
-			entity.Invoice = null;
-		}
-		
-		private void attach_InvoiceRefundLogs(InvoiceRefundLog entity)
-		{
-			this.SendPropertyChanging();
-			entity.Invoice = this;
-		}
-		
-		private void detach_InvoiceRefundLogs(InvoiceRefundLog entity)
 		{
 			this.SendPropertyChanging();
 			entity.Invoice = null;
@@ -12417,6 +12149,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
+		private EntitySet<InvoiceRefundLog> _InvoiceRefundLogs;
+		
 		private EntityRef<Invoice> _Invoice;
 		
 		private EntityRef<InvoiceFinanceBatch> _InvoiceFinanceBatch;
@@ -12439,6 +12173,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		public InvoiceFinanceLog()
 		{
+			this._InvoiceRefundLogs = new EntitySet<InvoiceRefundLog>(new Action<InvoiceRefundLog>(this.attach_InvoiceRefundLogs), new Action<InvoiceRefundLog>(this.detach_InvoiceRefundLogs));
 			this._Invoice = default(EntityRef<Invoice>);
 			this._InvoiceFinanceBatch = default(EntityRef<InvoiceFinanceBatch>);
 			OnCreated();
@@ -12552,6 +12287,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Association(Name="InvoiceFinanceLog_InvoiceRefundLog", Storage="_InvoiceRefundLogs", OtherKey="FinanceLogID")]
+		public EntitySet<InvoiceRefundLog> InvoiceRefundLogs
+		{
+			get
+			{
+				return this._InvoiceRefundLogs;
+			}
+			set
+			{
+				this._InvoiceRefundLogs.Assign(value);
+			}
+		}
+		
 		[Association(Name="Invoice_InvoiceFinanceLog", Storage="_Invoice", ThisKey="InvoiceNo", IsForeignKey=true)]
 		public Invoice Invoice
 		{
@@ -12616,6 +12364,258 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._FinanceBatchNo = default(string);
 					}
 					this.SendPropertyChanged("InvoiceFinanceBatch");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_InvoiceRefundLogs(InvoiceRefundLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.InvoiceFinanceLog = this;
+		}
+		
+		private void detach_InvoiceRefundLogs(InvoiceRefundLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.InvoiceFinanceLog = null;
+		}
+	}
+	
+	[Table(Name="dbo.InvoiceRefundLog")]
+	public partial class InvoiceRefundLog : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RefundLogID;
+		
+		private string _RefundBatchNo;
+		
+		private int _FinanceLogID;
+		
+		private double _RefundAmount;
+		
+		private string _Comment;
+		
+		private EntityRef<InvoiceFinanceLog> _InvoiceFinanceLog;
+		
+		private EntityRef<InvoiceRefundBatch> _InvoiceRefundBatch;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRefundLogIDChanging(int value);
+    partial void OnRefundLogIDChanged();
+    partial void OnRefundBatchNoChanging(string value);
+    partial void OnRefundBatchNoChanged();
+    partial void OnFinanceLogIDChanging(int value);
+    partial void OnFinanceLogIDChanged();
+    partial void OnRefundAmountChanging(double value);
+    partial void OnRefundAmountChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    #endregion
+		
+		public InvoiceRefundLog()
+		{
+			this._InvoiceFinanceLog = default(EntityRef<InvoiceFinanceLog>);
+			this._InvoiceRefundBatch = default(EntityRef<InvoiceRefundBatch>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_RefundLogID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int RefundLogID
+		{
+			get
+			{
+				return this._RefundLogID;
+			}
+			set
+			{
+				if ((this._RefundLogID != value))
+				{
+					this.OnRefundLogIDChanging(value);
+					this.SendPropertyChanging();
+					this._RefundLogID = value;
+					this.SendPropertyChanged("RefundLogID");
+					this.OnRefundLogIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RefundBatchNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string RefundBatchNo
+		{
+			get
+			{
+				return this._RefundBatchNo;
+			}
+			set
+			{
+				if ((this._RefundBatchNo != value))
+				{
+					if (this._InvoiceRefundBatch.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRefundBatchNoChanging(value);
+					this.SendPropertyChanging();
+					this._RefundBatchNo = value;
+					this.SendPropertyChanged("RefundBatchNo");
+					this.OnRefundBatchNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FinanceLogID", DbType="Int NOT NULL")]
+		public int FinanceLogID
+		{
+			get
+			{
+				return this._FinanceLogID;
+			}
+			set
+			{
+				if ((this._FinanceLogID != value))
+				{
+					if (this._InvoiceFinanceLog.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFinanceLogIDChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceLogID = value;
+					this.SendPropertyChanged("FinanceLogID");
+					this.OnFinanceLogIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_RefundAmount", DbType="Float NOT NULL")]
+		public double RefundAmount
+		{
+			get
+			{
+				return this._RefundAmount;
+			}
+			set
+			{
+				if ((this._RefundAmount != value))
+				{
+					this.OnRefundAmountChanging(value);
+					this.SendPropertyChanging();
+					this._RefundAmount = value;
+					this.SendPropertyChanged("RefundAmount");
+					this.OnRefundAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Association(Name="InvoiceFinanceLog_InvoiceRefundLog", Storage="_InvoiceFinanceLog", ThisKey="FinanceLogID", IsForeignKey=true)]
+		public InvoiceFinanceLog InvoiceFinanceLog
+		{
+			get
+			{
+				return this._InvoiceFinanceLog.Entity;
+			}
+			set
+			{
+				InvoiceFinanceLog previousValue = this._InvoiceFinanceLog.Entity;
+				if (((previousValue != value) 
+							|| (this._InvoiceFinanceLog.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._InvoiceFinanceLog.Entity = null;
+						previousValue.InvoiceRefundLogs.Remove(this);
+					}
+					this._InvoiceFinanceLog.Entity = value;
+					if ((value != null))
+					{
+						value.InvoiceRefundLogs.Add(this);
+						this._FinanceLogID = value.FinanceLogID;
+					}
+					else
+					{
+						this._FinanceLogID = default(int);
+					}
+					this.SendPropertyChanged("InvoiceFinanceLog");
+				}
+			}
+		}
+		
+		[Association(Name="InvoiceRefundBatch_InvoiceRefundLog", Storage="_InvoiceRefundBatch", ThisKey="RefundBatchNo", IsForeignKey=true)]
+		public InvoiceRefundBatch InvoiceRefundBatch
+		{
+			get
+			{
+				return this._InvoiceRefundBatch.Entity;
+			}
+			set
+			{
+				InvoiceRefundBatch previousValue = this._InvoiceRefundBatch.Entity;
+				if (((previousValue != value) 
+							|| (this._InvoiceRefundBatch.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._InvoiceRefundBatch.Entity = null;
+						previousValue.InvoiceRefundLogs.Remove(this);
+					}
+					this._InvoiceRefundBatch.Entity = value;
+					if ((value != null))
+					{
+						value.InvoiceRefundLogs.Add(this);
+						this._RefundBatchNo = value.RefundBatchNo;
+					}
+					else
+					{
+						this._RefundBatchNo = default(string);
+					}
+					this.SendPropertyChanged("InvoiceRefundBatch");
 				}
 			}
 		}

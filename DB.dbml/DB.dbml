@@ -376,7 +376,7 @@
       <Column Name="FinanceAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="FinancePeriodBegin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="FinancePeriodEnd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="FinanceRate" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="FinanceRate" Type="System.Double" DbType="Float" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="FactorCode" Type="System.String" DbType="Char(7)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CostRate" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
@@ -427,17 +427,6 @@
       <Association Name="CreditNote_InvoicePaymentLog" Member="CreditNote" ThisKey="CreditNoteNo" Type="CreditNote" IsForeignKey="true" />
       <Association Name="InvoicePaymentBatch_InvoicePaymentLog" Member="InvoicePaymentBatch" ThisKey="PaymentBatchNo" Type="InvoicePaymentBatch" IsForeignKey="true" />
       <Association Name="Invoice_InvoicePaymentLog" Member="Invoice" ThisKey="InvoiceNo" Type="Invoice" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.InvoiceRefundLog" Member="InvoiceRefundLogs">
-    <Type Name="InvoiceRefundLog">
-      <Column Name="RefundLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="RefundBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="InvoiceNo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="RefundAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Association Name="InvoiceRefundBatch_InvoiceRefundLog" Member="InvoiceRefundBatch" ThisKey="RefundBatchNo" Type="InvoiceRefundBatch" IsForeignKey="true" />
-      <Association Name="Invoice_InvoiceRefundLog" Member="Invoice" ThisKey="InvoiceNo" Type="Invoice" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.InvoiceRefundBatch" Member="InvoiceRefundBatches">
@@ -500,7 +489,6 @@
       <Column Name="FlawOtherReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="DisputeOtherReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Invoice_InvoicePaymentLog" Member="InvoicePaymentLogs" OtherKey="InvoiceNo" Type="InvoicePaymentLog" />
-      <Association Name="Invoice_InvoiceRefundLog" Member="InvoiceRefundLogs" OtherKey="InvoiceNo" Type="InvoiceRefundLog" />
       <Association Name="Invoice_InvoiceFinanceLog" Member="InvoiceFinanceLogs" OtherKey="InvoiceNo" Type="InvoiceFinanceLog" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="InvoiceAssignBatch" ThisKey="AssignBatchNo" Type="InvoiceAssignBatch" IsForeignKey="true" />
     </Type>
@@ -544,8 +532,20 @@
       <Column Name="InvoiceNo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="FinanceAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="InvoiceFinanceLog_InvoiceRefundLog" Member="InvoiceRefundLogs" OtherKey="FinanceLogID" Type="InvoiceRefundLog" />
       <Association Name="Invoice_InvoiceFinanceLog" Member="Invoice" ThisKey="InvoiceNo" Type="Invoice" IsForeignKey="true" />
       <Association Name="InvoiceFinanceBatch_InvoiceFinanceLog" Member="InvoiceFinanceBatch" ThisKey="FinanceBatchNo" Type="InvoiceFinanceBatch" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoiceRefundLog" Member="InvoiceRefundLogs">
+    <Type Name="InvoiceRefundLog">
+      <Column Name="RefundLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RefundBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FinanceLogID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RefundAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="InvoiceFinanceLog_InvoiceRefundLog" Member="InvoiceFinanceLog" ThisKey="FinanceLogID" Type="InvoiceFinanceLog" IsForeignKey="true" />
+      <Association Name="InvoiceRefundBatch_InvoiceRefundLog" Member="InvoiceRefundBatch" ThisKey="RefundBatchNo" Type="InvoiceRefundBatch" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

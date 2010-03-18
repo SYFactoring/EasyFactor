@@ -495,9 +495,29 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from invoice in context.Invoices
-                              where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.InvoiceFinanceBatch.CheckStatus == "已复核" && (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0001)
+                              where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode
+                              && (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0001)
                               select invoice;
-            this.invoiceBindingSource.DataSource = queryResult;
+
+            List<Invoice> result = new List<Invoice>();
+            foreach (Invoice invoice in queryResult)
+            {
+                bool isOK = true;
+                foreach (InvoiceFinanceLog log in invoice.InvoiceFinanceLogs)
+                {
+                    if (log.InvoiceFinanceBatch.CheckStatus != "已复核")
+                    {
+                        isOK = false;
+                        break;
+                    }
+                }
+                if (isOK)
+                {
+                    result.Add(invoice);
+                }
+            }
+
+            this.invoiceBindingSource.DataSource = result;
             this.StatBatch();
         }
 
@@ -588,7 +608,7 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.Case = this._case;
                 if (batch.RefundBatchNo == null)
                 {
-                    batch.RefundBatchNo = Invoice.GenerateRefundBatchNo(batch.RefundDate);
+                    batch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(batch.RefundDate);
                 }
                 for (int i = 0; i < invoiceList.Count; i++)
                 {
@@ -747,7 +767,7 @@ namespace CMBC.EasyFactor.ARMgr
                     }
 
                     double paymentAmount = invoice.PaymentAmount.GetValueOrDefault();
-                    if (invoice.InvoiceAssignBatch.BatchCurrency != invoice.InvoiceAssignBatch.BatchCurrency)
+                    if (invoice.InvoiceAssignBatch.BatchCurrency != invoice.InvoiceFinanceBatch.BatchCurrency)
                     {
                         double exchangeRate = Exchange.GetExchangeRate(invoice.InvoiceAssignBatch.BatchCurrency, invoice.InvoiceFinanceBatch.BatchCurrency);
                         paymentAmount *= exchangeRate;

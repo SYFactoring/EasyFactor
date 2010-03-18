@@ -8,27 +8,23 @@ namespace CMBC.EasyFactor.DB.dbml
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using CMBC.EasyFactor.Utils;
     using System.Data.Linq;
+    using System.Linq;
     using System.Text.RegularExpressions;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class Invoice
     {
-        #region Fields (3)
+        #region Fields (1)
 
-        private double? _financeAmount2;
-        private double? _paymentAmount2;
-        private double? _refundAmount2;
         private static Regex InvoiceNoRegex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>\\.]+$");
 
         #endregion Fields
 
-        #region Properties (23)
+        #region Properties (15)
 
         /// <summary>
         /// Gets
@@ -80,24 +76,6 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets or sets
-        /// </summary>
-        public DateTime? CreditNoteDate2
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets
-        /// </summary>
-        public string CreditNoteNo2
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Gets
         /// </summary>
         public string FactorName
@@ -109,15 +87,23 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets
+        /// 
         /// </summary>
-        public string FinanceCurrency
+        public string FinanceBatchNos
         {
             get
             {
-                if (this.InvoiceFinanceBatch != null)
+                List<string> batches = new List<string>();
+                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
                 {
-                    return this.InvoiceFinanceBatch.BatchCurrency;
+                    if (!batches.Contains(log.FinanceBatchNo))
+                    {
+                        batches.Add(log.FinanceBatchNo);
+                    }
+                }
+                if (batches.Count > 0)
+                {
+                    return String.Join(";", batches.ToArray());
                 }
                 else
                 {
@@ -164,70 +150,38 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? NetInterest
+        public double GrossInterest
         {
             get
             {
-                if (this.InvoiceFinanceBatch != null)
+                double result = 0;
+
+                foreach (InvoiceFinanceLog financeLog in this.InvoiceFinanceLogs)
                 {
-                    double? result = null;
-                    if (this.InvoiceRefundLogs != null)
+                    double interest = 0;
+
+                    foreach (InvoiceRefundLog refundLog in financeLog.InvoiceRefundLogs)
                     {
-                        result = 0;
-                        foreach (InvoiceRefundLog log in this.InvoiceRefundLogs)
-                        {
-                            int period = ((log.RefundDate < InvoiceFinanceBatch.FinancePeriodEnd ? log.RefundDate : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                            result += log.RefundAmount * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
-                        }
+                        int period = ((refundLog.RefundDate < financeLog.InvoiceFinanceBatch.FinancePeriodEnd ? refundLog.RefundDate : financeLog.InvoiceFinanceBatch.FinancePeriodEnd) - financeLog.InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                        interest += refundLog.RefundAmount * (financeLog.InvoiceFinanceBatch.FinanceRate) / 360 * period;
                     }
 
-                    if (TypeUtil.GreaterZero(this.FinanceOutstanding))
+                    if (TypeUtil.GreaterZero(financeLog.FinanceOutstanding))
                     {
-                        int period = ((DateTime.Today < InvoiceFinanceBatch.FinancePeriodEnd ? DateTime.Today : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        result += FinanceAmount * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
+                        int period = ((DateTime.Today.Date < financeLog.InvoiceFinanceBatch.FinancePeriodEnd ? DateTime.Today.Date : financeLog.InvoiceFinanceBatch.FinancePeriodEnd) - financeLog.InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                        interest += FinanceAmount * (financeLog.InvoiceFinanceBatch.FinanceRate) / 360 * period;
                     }
 
-                    return result;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? GrossInterest
-        {
-            get
-            {
-                if (this.InvoiceFinanceBatch != null)
-                {
-                    double? result = null;
-                    if (this.InvoiceRefundLogs != null)
+                    if (financeLog.InvoiceFinanceBatch.BatchCurrency != "CNY")
                     {
-                        result = 0;
-                        foreach (InvoiceRefundLog log in this.InvoiceRefundLogs)
-                        {
-                            int period = ((log.RefundDate < InvoiceFinanceBatch.FinancePeriodEnd ? log.RefundDate : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                            result += log.RefundAmount * (InvoiceFinanceBatch.FinanceRate) / 360 * period;
-                        }
+                        double rate = Exchange.GetExchangeRate(financeLog.InvoiceFinanceBatch.BatchCurrency, "CNY");
+                        interest *= rate;
                     }
 
-                    if (TypeUtil.GreaterZero(this.FinanceOutstanding))
-                    {
-                        int period = ((DateTime.Today < InvoiceFinanceBatch.FinancePeriodEnd ? DateTime.Today : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        result += FinanceAmount * (InvoiceFinanceBatch.FinanceRate) / 360 * period;
-                    }
+                    result += interest;
+                }
 
-                    return result;
-                }
-                else
-                {
-                    return null;
-                }
+                return result;
             }
         }
 
@@ -243,22 +197,40 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets or sets
+        /// 
         /// </summary>
-        public double? PaymentAmount2
+        public double NetInterest
         {
             get
             {
-                return _paymentAmount2;
-            }
-            set
-            {
-                if (_paymentAmount2 != value)
+                double result = 0;
+
+                foreach (InvoiceFinanceLog financeLog in this.InvoiceFinanceLogs)
                 {
-                    this.SendPropertyChanging();
-                    this._paymentAmount2 = value;
-                    this.SendPropertyChanged("PaymentAmount2");
+                    double interest = 0;
+
+                    foreach (InvoiceRefundLog refundLog in financeLog.InvoiceRefundLogs)
+                    {
+                        int period = ((refundLog.RefundDate < financeLog.InvoiceFinanceBatch.FinancePeriodEnd ? refundLog.RefundDate : financeLog.InvoiceFinanceBatch.FinancePeriodEnd) - financeLog.InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                        interest += refundLog.RefundAmount * (financeLog.InvoiceFinanceBatch.FinanceRate - financeLog.InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
+                    }
+
+                    if (TypeUtil.GreaterZero(financeLog.FinanceOutstanding))
+                    {
+                        int period = ((DateTime.Today.Date < financeLog.InvoiceFinanceBatch.FinancePeriodEnd ? DateTime.Today.Date : financeLog.InvoiceFinanceBatch.FinancePeriodEnd) - financeLog.InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                        interest += FinanceAmount.GetValueOrDefault() * (financeLog.InvoiceFinanceBatch.FinanceRate - financeLog.InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
+                    }
+
+                    if (financeLog.InvoiceFinanceBatch.BatchCurrency != "CNY")
+                    {
+                        double rate = Exchange.GetExchangeRate(financeLog.InvoiceFinanceBatch.BatchCurrency, "CNY");
+                        interest *= rate;
+                    }
+
+                    result += interest;
                 }
+
+                return result;
             }
         }
 
@@ -289,91 +261,6 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets or sets
-        /// </summary>
-        public DateTime? PaymentDate2
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets
-        /// </summary>
-        public int? PaymentLogID2
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? FinanceAmount2
-        {
-            get
-            {
-                return _financeAmount2;
-            }
-            set
-            {
-                if (this._financeAmount2 != value)
-                {
-                    this.SendPropertyChanging();
-                    this._financeAmount2 = value;
-                    this.SendPropertyChanged("FinanceAmount2");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets
-        /// </summary>
-        public double? RefundAmount2
-        {
-            get
-            {
-                return _refundAmount2;
-            }
-            set
-            {
-                if (this._refundAmount2 != value)
-                {
-                    this.SendPropertyChanging();
-                    this._refundAmount2 = value;
-                    this.SendPropertyChanged("RefundAmount2");
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string FinanceBatchNos
-        {
-            get
-            {
-                List<string> batches = new List<string>();
-                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
-                {
-                    if (!batches.Contains(log.FinanceBatchNo))
-                    {
-                        batches.Add(log.FinanceBatchNo);
-                    }
-                }
-                if (batches.Count > 0)
-                {
-                    return String.Join(";", batches.ToArray());
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         public string RefundBatchNos
@@ -381,58 +268,25 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 List<string> batches = new List<string>();
-                foreach (InvoiceRefundLog log in this.InvoiceRefundLogs)
+                foreach (InvoiceFinanceLog financeLog in this.InvoiceFinanceLogs)
                 {
-                    if (!batches.Contains(log.RefundBatchNo))
+                    foreach (InvoiceRefundLog log in financeLog.InvoiceRefundLogs)
                     {
-                        batches.Add(log.RefundBatchNo);
+                        if (!batches.Contains(log.RefundBatchNo))
+                        {
+                            batches.Add(log.RefundBatchNo);
+                        }
+                    }
+                    if (batches.Count > 0)
+                    {
+                        return String.Join(";", batches.ToArray());
+                    }
+                    else
+                    {
+                        return string.Empty;
                     }
                 }
-                if (batches.Count > 0)
-                {
-                    return String.Join(";", batches.ToArray());
-                }
-                else
-                {
-                    return string.Empty;
-                }
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime? FinanceDate2
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets
-        /// </summary>
-        public DateTime? RefundDate2
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int? FinanceLogID2
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets
-        /// </summary>
-        public int? RefundLogID2
-        {
-            get;
-            set;
         }
 
         /// <summary>
@@ -459,9 +313,41 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Properties
 
-        #region Methods (12)
+        #region Methods (5)
 
-        // Public Methods (12) 
+        // Public Methods (5) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CaculateFinance()
+        {
+            if (InvoiceFinanceLogs.Count > 0)
+            {
+                FinanceAmount = 0;
+
+                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                {
+                    double finance = log.FinanceAmount;
+                    if (log.InvoiceFinanceBatch.BatchCurrency != this.InvoiceCurrency)
+                    {
+                        double rate = Exchange.GetExchangeRate(log.InvoiceFinanceBatch.BatchCurrency, this.InvoiceCurrency);
+                        finance *= rate;
+                    }
+
+                    FinanceAmount += finance;
+                }
+
+                FinanceDate = InvoiceFinanceLogs.Min(log => log.InvoiceFinanceBatch.FinancePeriodBegin);
+                FinanceDueDate = InvoiceFinanceLogs.Min(log => log.InvoiceFinanceBatch.FinancePeriodEnd);
+            }
+            else
+            {
+                FinanceAmount = null;
+                FinanceDate = null;
+                FinanceDueDate = null;
+            }
+        }
 
         /// <summary>
         /// 
@@ -483,31 +369,35 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public void CaculateFinance()
+        public void CaculateRefund()
         {
             if (InvoiceFinanceLogs.Count > 0)
             {
-                FinanceAmount = InvoiceFinanceLogs.Sum(log => log.FinanceAmount);
-                FinanceDate = InvoiceFinanceLogs.Min(log => log.InvoiceFinanceBatch.FinancePeriodBegin);
-                FinanceDueDate = InvoiceFinanceLogs.Min(log => log.InvoiceFinanceBatch.FinancePeriodEnd);
-            }
-            else
-            {
-                FinanceAmount = null;
-                FinanceDate = null;
-                FinanceDueDate = null;
-            }
-        }
+                RefundAmount = 0;
+                DateTime maxDate = default(DateTime);
+                foreach (InvoiceFinanceLog financeLog in this.InvoiceFinanceLogs)
+                {
+                    double refund = 0;
+                    foreach (InvoiceRefundLog refundLog in financeLog.InvoiceRefundLogs)
+                    {
+                        refund += refundLog.RefundAmount;
+                    }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public void CaculateRefund()
-        {
-            if (InvoiceRefundLogs.Count > 0)
-            {
-                RefundAmount = InvoiceRefundLogs.Sum(log => log.RefundAmount);
-                RefundDate = InvoiceRefundLogs.Max(log => log.InvoiceRefundBatch.RefundDate);
+                    if (financeLog.InvoiceFinanceBatch.BatchCurrency != this.InvoiceCurrency)
+                    {
+                        double rate = Exchange.GetExchangeRate(financeLog.InvoiceFinanceBatch.BatchCurrency, this.InvoiceCurrency);
+                        refund *= rate;
+                    }
+
+                    RefundAmount += refund;
+                    DateTime maxDate2 = financeLog.InvoiceRefundLogs.Max(log => log.InvoiceRefundBatch.RefundDate);
+                    if (maxDate2 > maxDate)
+                    {
+                        maxDate = maxDate2;
+                    }
+                }
+
+                RefundDate = maxDate;
             }
             else
             {
@@ -535,221 +425,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
 
             return this.GetHashCode() == right.GetHashCode();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public static string GenerateAssignBatchNo(DateTime date)
-        {
-            DBDataContext context = new DBDataContext();
-            //var queryResult = from batch in context.InvoiceAssignBatches
-            //                  where batch.AssignDate.Date == date.Date
-            //                  select batch.AssignBatchNo;
-            string dateStr = String.Format("{0:yyyMMdd}", date);
-            var queryResult = from batch in context.InvoiceAssignBatches
-                              where batch.AssignBatchNo.Contains(dateStr)
-                              select batch.AssignBatchNo;
-
-            int batchCount;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
-            {
-                batchCount = 0;
-            }
-
-            string assignNo = String.Format("ASS{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
-            return assignNo;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="batchesInMemory"></param>
-        /// <returns></returns>
-        public static string GenerateAssignBatchNo(DateTime date, List<InvoiceAssignBatch> batchesInMemory)
-        {
-            DBDataContext context = new DBDataContext();
-            //var queryResult = from batch in context.InvoiceAssignBatches
-            //                  where batch.AssignDate.Date == date.Date
-            //                  select batch.AssignBatchNo;
-            string dateStr = String.Format("{0:yyyMMdd}", date);
-            var queryResult = from batch in context.InvoiceAssignBatches
-                              where batch.AssignBatchNo.Contains(dateStr)
-                              select batch.AssignBatchNo;
-
-            int batchCount;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
-            {
-                batchCount = 0;
-            }
-
-            batchCount += batchesInMemory.Count(batch => batch.AssignBatchNo.Contains(dateStr));
-            string assignNo = String.Format("ASS{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
-            return assignNo;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public static string GenerateFinanceBatchNo(DateTime date)
-        {
-            DBDataContext context = new DBDataContext();
-            //var queryResult = from batch in context.InvoiceFinanceBatches
-            //                  where batch.FinancePeriodBegin.Date == date.Date
-            //                  select batch.FinanceBatchNo;
-            string dateStr = String.Format("{0:yyyMMdd}", date);
-            var queryResult = from batch in context.InvoiceFinanceBatches
-                              where batch.FinanceBatchNo.Contains(dateStr)
-                              select batch.FinanceBatchNo;
-
-            int batchCount;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
-            {
-                batchCount = 0;
-            }
-
-            string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
-            return financeNo;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="batchesInMemory"></param>
-        /// <returns></returns>
-        public static string GenerateFinanceBatchNo(DateTime date, List<InvoiceFinanceBatch> batchesInMemory)
-        {
-            DBDataContext context = new DBDataContext();
-            //var queryResult = from batch in context.InvoiceFinanceBatches
-            //                  where batch.FinancePeriodBegin.Date == date.Date
-            //                  select batch.FinanceBatchNo;
-            string dateStr = String.Format("{0:yyyMMdd}", date);
-            var queryResult = from batch in context.InvoiceFinanceBatches
-                              where batch.FinanceBatchNo.Contains(dateStr)
-                              select batch.FinanceBatchNo;
-
-            int batchCount;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
-            {
-                batchCount = 0;
-            }
-
-            batchCount += batchesInMemory.Count(batch => batch.FinanceBatchNo.Contains(dateStr));
-            string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
-            return financeNo;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public static string GeneratePaymentBatchNo(DateTime date)
-        {
-            DBDataContext context = new DBDataContext();
-            //var queryResult = from batch in context.InvoicePaymentBatches
-            //                  where batch.PaymentDate.Date == date.Date
-            //                  select batch.PaymentBatchNo;
-
-            string dateStr = String.Format("{0:yyyMMdd}", date);
-            var queryResult = from batch in context.InvoicePaymentBatches
-                              where batch.PaymentBatchNo.Contains(dateStr)
-                              select batch.PaymentBatchNo;
-
-            int batchCount;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
-            {
-                batchCount = 0;
-            }
-            string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
-            return paymentNo;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="batchesInMemory"></param>
-        /// <returns></returns>
-        public static string GeneratePaymentBatchNo(DateTime date, List<InvoicePaymentBatch> batchesInMemory)
-        {
-            DBDataContext context = new DBDataContext();
-            //var queryResult = from batch in context.InvoicePaymentBatches
-            //                  where batch.PaymentDate.Date == date.Date
-            //                  select batch.PaymentBatchNo;
-            string dateStr = String.Format("{0:yyyMMdd}", date);
-            var queryResult = from batch in context.InvoicePaymentBatches
-                              where batch.PaymentBatchNo.Contains(dateStr)
-                              select batch.PaymentBatchNo;
-            int batchCount;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
-            {
-                batchCount = 0;
-            }
-
-            batchCount += batchesInMemory.Count(batch => batch.PaymentBatchNo.Contains(dateStr));
-            string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
-            return paymentNo;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public static string GenerateRefundBatchNo(DateTime date)
-        {
-            DBDataContext context = new DBDataContext();
-            //var queryResult = from batch in context.InvoiceRefundBatches
-            //                  where batch.RefundDate.Date == date.Date
-            //                  select batch.RefundBatchNo;
-            string dateStr = String.Format("{0:yyyMMdd}", date);
-            var queryResult = from batch in context.InvoiceRefundBatches
-                              where batch.RefundBatchNo.Contains(dateStr)
-                              select batch.RefundBatchNo;
-
-            int batchCount;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
-            {
-                batchCount = 0;
-            }
-
-            string refundNo = String.Format("RFD{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
-            return refundNo;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="batchesInMemory"></param>
-        /// <returns></returns>
-        public static string GenerateRefundBatchNo(DateTime date, List<InvoiceRefundBatch> batchesInMemory)
-        {
-            DBDataContext context = new DBDataContext();
-            //var queryResult = from batch in context.InvoiceRefundBatches
-            //                  where batch.RefundDate.Date == date.Date
-            //                  select batch.RefundBatchNo;
-            string dateStr = String.Format("{0:yyyMMdd}", date);
-            var queryResult = from batch in context.InvoiceRefundBatches
-                              where batch.RefundBatchNo.Contains(dateStr)
-                              select batch.RefundBatchNo;
-
-            int batchCount;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
-            {
-                batchCount = 0;
-            }
-
-            batchCount += batchesInMemory.Count(batch => batch.RefundBatchNo.Contains(dateStr));
-            string refundNo = String.Format("RFD{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
-            return refundNo;
         }
 
         /// <summary>

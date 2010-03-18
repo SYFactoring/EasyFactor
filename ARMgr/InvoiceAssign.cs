@@ -613,7 +613,7 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.Case = this._case;
                 if (batch.AssignBatchNo == null)
                 {
-                    batch.AssignBatchNo = Invoice.GenerateAssignBatchNo(batch.AssignDate);
+                    batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(batch.AssignDate);
                 }
 
                 foreach (Invoice invoice in invoiceList)
