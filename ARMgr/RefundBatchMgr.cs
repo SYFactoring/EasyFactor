@@ -220,9 +220,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (InvoiceRefundLog log in selectedBatch.InvoiceRefundLogs)
             {
-                Invoice invoice = log.Invoice;
-                log.Invoice = null;
-                invoice.CaculateRefund();
+                InvoiceFinanceLog financeLog = log.InvoiceFinanceLog ;
+                financeLog.InvoiceRefundLogs.Remove(log);
+                financeLog.Invoice.CaculateRefund();
                 context.InvoiceRefundLogs.DeleteOnSubmit(log);
             }
 
@@ -236,6 +236,7 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBoxEx.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
         }
 

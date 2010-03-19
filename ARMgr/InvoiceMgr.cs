@@ -267,8 +267,13 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     foreach (Invoice invoice in selectedInvoices)
                     {
+                        foreach (InvoiceFinanceLog financeLog in invoice.InvoiceFinanceLogs)
+                        {
+                            context.InvoiceRefundLogs.DeleteAllOnSubmit(financeLog.InvoiceRefundLogs);
+                        }
+
                         context.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
-                        context.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
+                        context.InvoiceFinanceLogs.DeleteAllOnSubmit(invoice.InvoiceFinanceLogs);
                         context.Invoices.DeleteOnSubmit(invoice);
                     }
 

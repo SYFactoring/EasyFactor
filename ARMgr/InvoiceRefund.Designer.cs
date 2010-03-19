@@ -26,11 +26,11 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoices;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvLogs;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private System.Windows.Forms.BindingNavigator invoiceBindingNavigator;
-        private System.Windows.Forms.BindingSource invoiceBindingSource;
+        private System.Windows.Forms.BindingSource logsBindingSource;
         private DevComponents.DotNetBar.LabelX lblTotalPayment;
         private DevComponents.DotNetBar.LabelX lblTotalRefund;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
@@ -103,7 +103,7 @@
             this.paymentDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.refundBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.invoiceBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.logsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -113,7 +113,7 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.dgvLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.cmuInvoiceRefund = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCDADetail = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,8 +138,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.paymentDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).BeginInit();
             this.invoiceBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogs)).BeginInit();
             this.cmuInvoiceRefund.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
@@ -425,7 +425,7 @@
             // invoiceBindingNavigator
             // 
             this.invoiceBindingNavigator.AddNewItem = null;
-            this.invoiceBindingNavigator.BindingSource = this.invoiceBindingSource;
+            this.invoiceBindingNavigator.BindingSource = this.logsBindingSource;
             this.invoiceBindingNavigator.CountItem = this.bindingNavigatorCountItem;
             this.invoiceBindingNavigator.DeleteItem = null;
             this.invoiceBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -451,7 +451,7 @@
             // 
             // invoiceBindingSource
             // 
-            this.invoiceBindingSource.DataSource = typeof(System.Data.Linq.EntitySet<CMBC.EasyFactor.DB.dbml.Invoice>);
+            this.logsBindingSource.DataSource = typeof(System.Data.Linq.EntitySet<CMBC.EasyFactor.DB.dbml.Invoice>);
             // 
             // bindingNavigatorCountItem
             // 
@@ -522,9 +522,9 @@
             // 
             // dgvInvoices
             // 
-            this.dgvInvoices.AllowUserToAddRows = false;
-            this.dgvInvoices.AllowUserToDeleteRows = false;
-            this.dgvInvoices.AutoGenerateColumns = false;
+            this.dgvLogs.AllowUserToAddRows = false;
+            this.dgvLogs.AllowUserToDeleteRows = false;
+            this.dgvLogs.AutoGenerateColumns = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -532,9 +532,9 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvInvoices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCheckBox,
             this.colInvoiceNo,
             this.colFinanceAmount,
@@ -543,8 +543,8 @@
             this.colFinanceDueDate,
             this.colLogRefundAmount,
             this.colRefundAmount});
-            this.dgvInvoices.ContextMenuStrip = this.cmuInvoiceRefund;
-            this.dgvInvoices.DataSource = this.invoiceBindingSource;
+            this.dgvLogs.ContextMenuStrip = this.cmuInvoiceRefund;
+            this.dgvLogs.DataSource = this.logsBindingSource;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -552,21 +552,21 @@
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle7;
-            this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvInvoices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvInvoices.Location = new System.Drawing.Point(0, 106);
-            this.dgvInvoices.Name = "dgvInvoices";
-            this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvInvoices.Size = new System.Drawing.Size(1069, 420);
-            this.dgvInvoices.TabIndex = 2;
-            this.dgvInvoices.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellValueChanged);
-            this.dgvInvoices.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.dgvInvoices_CellParsing);
-            this.dgvInvoices.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvInvoices_CellFormatting);
-            this.dgvInvoices.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvInvoices_CellValidating);
-            this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
-            this.dgvInvoices.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellContentClick);
+            this.dgvLogs.DefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvLogs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvLogs.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvLogs.Location = new System.Drawing.Point(0, 106);
+            this.dgvLogs.Name = "dgvInvoices";
+            this.dgvLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgvLogs.Size = new System.Drawing.Size(1069, 420);
+            this.dgvLogs.TabIndex = 2;
+            this.dgvLogs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellValueChanged);
+            this.dgvLogs.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.dgvInvoices_CellParsing);
+            this.dgvLogs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvInvoices_CellFormatting);
+            this.dgvLogs.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvInvoices_CellValidating);
+            this.dgvLogs.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
+            this.dgvLogs.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellContentClick);
             // 
             // cmuInvoiceRefund
             // 
@@ -680,7 +680,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.Controls.Add(this.dgvInvoices);
+            this.Controls.Add(this.dgvLogs);
             this.Controls.Add(this.invoiceBindingNavigator);
             this.Controls.Add(this.panelRefundBatch);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
@@ -693,8 +693,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).EndInit();
             this.invoiceBindingNavigator.ResumeLayout(false);
             this.invoiceBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogs)).EndInit();
             this.cmuInvoiceRefund.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

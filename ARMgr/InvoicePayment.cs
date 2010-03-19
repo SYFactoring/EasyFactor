@@ -530,8 +530,8 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 InvoicePaymentLog log = (InvoicePaymentLog)this.logsBindingSource.List[rowIndex];
                 log.PaymentAmount = 0;
-                log.CreditNoteDate = null;
-                log.CreditNoteNo = null;
+                log.CreditNoteDate2 = null;
+                log.CreditNoteNo2 = null;
             }
         }
 
@@ -571,7 +571,7 @@ namespace CMBC.EasyFactor.ARMgr
             bool isSaveOK = true;
             InvoicePaymentBatch batch = (InvoicePaymentBatch)this.batchBindingSource.DataSource;
             List<InvoicePaymentLog> logList = new List<InvoicePaymentLog>();
-            List<InvoiceRefundLog> refundList = new List<InvoiceRefundLog>();
+            List<Invoice> invoiceList = new List<Invoice>();
             try
             {
                 batch.Case = this._case;
@@ -586,7 +586,6 @@ namespace CMBC.EasyFactor.ARMgr
                     {
                         InvoicePaymentLog log = (InvoicePaymentLog)this.logsBindingSource.List[i];
                         logList.Add(log);
-                        log.Invoice = invoice;
 
                         CreditNote creditNote = null;
                         if (log.CreditNoteNo2 != null && log.CreditNoteNo2 != string.Empty)
@@ -609,11 +608,11 @@ namespace CMBC.EasyFactor.ARMgr
                         }
 
                         log.InvoicePaymentBatch = batch;
-                        invoice.CaculatePayment();
+                        log.Invoice.CaculatePayment();
 
-                        if (invoice.FinanceOutstanding > 0)
+                        if (log.Invoice.FinanceOutstanding > 0 && !invoiceList.Contains(log.Invoice))
                         {
-                            refundList.Add(invoice);
+                            invoiceList.Add(log.Invoice);
                         }
                     }
                 }
@@ -643,10 +642,10 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 MessageBoxEx.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.caseBasic.CaculateOutstanding(this._case);
-                if (refundList.Count > 0)
+                if (invoiceList.Count > 0)
                 {
                     MainWindow mainWindow = App.Current.MainWindow;
-                    mainWindow.InvoiceRefund(refundList, batch.PaymentType, batch.PaymentDate);
+                    mainWindow.InvoiceRefund(invoiceList, batch.PaymentType, batch.PaymentDate);
                 }
                 else
                 {
@@ -701,7 +700,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    totalPayment += ((InvoicePaymentLog)logList[i]).PaymentAmount.GetValueOrDefault();
+                    totalPayment += ((InvoicePaymentLog)logList[i]).PaymentAmount;
                 }
             }
 
@@ -728,7 +727,7 @@ namespace CMBC.EasyFactor.ARMgr
                         return false;
                     }
 
-                    if (TypeUtil.GreaterZero(log.PaymentAmount - log.FinanceOutstanding))
+                    if (TypeUtil.GreaterZero(log.PaymentAmount - log.Invoice.FinanceOutstanding))
                     {
                         if (batch.PaymentType == "贷项通知")
                         {

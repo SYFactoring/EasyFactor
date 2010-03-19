@@ -207,8 +207,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     foreach (Invoice invoice in assignBatch.Invoices)
                     {
+                        foreach (InvoiceFinanceLog financeLog in invoice.InvoiceFinanceLogs)
+                        {
+                            context.InvoiceRefundLogs.DeleteAllOnSubmit(financeLog.InvoiceRefundLogs);
+                        }
+
                         context.InvoicePaymentLogs.DeleteAllOnSubmit(invoice.InvoicePaymentLogs);
-                        context.InvoiceRefundLogs.DeleteAllOnSubmit(invoice.InvoiceRefundLogs);
+                        context.InvoiceFinanceLogs.DeleteAllOnSubmit(invoice.InvoiceFinanceLogs);
+
                     }
 
                     context.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
@@ -513,10 +519,10 @@ namespace CMBC.EasyFactor.CaseMgr
                         sheet.Cells[row, "P"] = invoice.CommissionDate;
                         sheet.Cells[row, "Q"] = invoice.NetInterest;
                         sheet.Cells[row, "R"] = invoice.Comment;
-                        if (invoice.InvoiceFinanceBatch != null)
+                        if (invoice.InvoiceFinanceLogs.Count > 0)
                         {
-                            sheet.get_Range(sheet.Cells[row, "G"], sheet.Cells[row, "G"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoice.InvoiceFinanceBatch.BatchCurrency);
-                            sheet.get_Range(sheet.Cells[row, "M"], sheet.Cells[row, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoice.InvoiceFinanceBatch.BatchCurrency);
+                            sheet.get_Range(sheet.Cells[row, "G"], sheet.Cells[row, "G"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoice.InvoiceCurrency);
+                            sheet.get_Range(sheet.Cells[row, "M"], sheet.Cells[row, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoice.InvoiceCurrency);
                         }
                         row++;
                     }

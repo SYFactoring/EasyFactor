@@ -144,7 +144,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             else
             {
-                financeAmount = invoice.AssignOutstanding * this._case.ActiveCDA.FinanceProportion.Value;
+                financeAmount = log.AssignOutstanding * this._case.ActiveCDA.FinanceProportion.Value;
             }
 
             if (TypeUtil.EqualsZero(financeAmount))

@@ -25,7 +25,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.Invoices.Count;
+                return this.InvoiceFinanceLogs.Count;
             }
         }
 
@@ -65,23 +65,15 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 净利息收入
         /// </summary>
-        public double? NetInterestIncome
+        public double NetInterestIncome
         {
             get
             {
-                double? result = null;
-                foreach (Invoice invoice in this.Invoices)
+                double result = 0;
+                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
                 {
-                    double? value = invoice.NetInterest;
-                    if (value != null)
-                    {
-                        if (result == null)
-                        {
-                            result = 0;
-                        }
-
-                        result += value;
-                    }
+                    double value = log.NetInterest;
+                    result += value;
                 }
 
                 return result;
@@ -91,22 +83,14 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 毛利息收入
         /// </summary>
-        public double? GrossInterestIncome
+        public double GrossInterestIncome
         {
             get
             {
-                double? result = 0;
-                foreach (Invoice invoice in this.Invoices)
+                double result = 0;
+                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
                 {
-                    double? value = invoice.GrossInterest;
-                    if (value != null)
-                    {
-                        if (result == null)
-                        {
-                            result = 0;
-                        }
-                    }
-
+                    double value = log.GrossInterest;
                     result += value;
                 }
 

@@ -239,15 +239,15 @@ namespace CMBC.EasyFactor.DB.dbml
                             batches.Add(log.RefundBatchNo);
                         }
                     }
+                }
 
-                    if (batches.Count > 0)
-                    {
-                        return String.Join(";", batches.ToArray());
-                    }
-                    else
-                    {
-                        return string.Empty;
-                    }
+                if (batches.Count > 0)
+                {
+                    return String.Join(";", batches.ToArray());
+                }
+                else
+                {
+                    return string.Empty;
                 }
             }
         }
@@ -336,7 +336,7 @@ namespace CMBC.EasyFactor.DB.dbml
             else if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按转让金额")
             {
                 Commission = AssignAmount * this.InvoiceAssignBatch.Case.ActiveCDA.Price.GetValueOrDefault();
-                if (TypeUtil.GreaterZero(Commission) > 0)
+                if (TypeUtil.GreaterZero(Commission))
                 {
                     CommissionDate = AssignDate;
                 }

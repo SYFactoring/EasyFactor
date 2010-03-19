@@ -15,7 +15,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceFinanceLog
     {
-		#region Properties (13) 
+        #region Properties (13)
 
         /// <summary>
         /// 
@@ -113,7 +113,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
                 foreach (InvoiceRefundLog refundLog in InvoiceRefundLogs)
                 {
-                    int period = ((refundLog.RefundDate < InvoiceFinanceBatch.FinancePeriodEnd ? refundLog.RefundDate : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                    int period = ((refundLog.InvoiceRefundBatch.RefundDate < InvoiceFinanceBatch.FinancePeriodEnd ? refundLog.InvoiceRefundBatch.RefundDate : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
                     interest += refundLog.RefundAmount * (InvoiceFinanceBatch.FinanceRate) / 360 * period;
                 }
 
@@ -177,7 +177,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
                 foreach (InvoiceRefundLog refundLog in InvoiceRefundLogs)
                 {
-                    int period = ((refundLog.RefundDate < InvoiceFinanceBatch.FinancePeriodEnd ? refundLog.RefundDate : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                    int period = ((refundLog.InvoiceRefundBatch.RefundDate < InvoiceFinanceBatch.FinancePeriodEnd ? refundLog.InvoiceRefundBatch.RefundDate : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
                     interest += refundLog.RefundAmount * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
                 }
 
@@ -204,10 +204,17 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                this.InvoiceRefundLogs.Sum(log => log.RefundAmount);
+                if (this.InvoiceRefundLogs != null)
+                {
+                    return this.InvoiceRefundLogs.Sum(log => log.RefundAmount);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
     }
 }

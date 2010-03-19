@@ -444,7 +444,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     if (invoice.Commission.HasValue == false)
                     {
-                        invoice.CaculateCommisssion();
+                        invoice.CaculateCommission();
                     }
                 }
 

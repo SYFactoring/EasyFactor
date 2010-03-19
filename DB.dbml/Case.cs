@@ -329,12 +329,6 @@ namespace CMBC.EasyFactor.DB.dbml
                             }
 
                             double financeOutstanding = invoice.FinanceOutstanding.Value;
-                            if (invoice.InvoiceFinanceBatch.BatchCurrency != this.InvoiceCurrency)
-                            {
-                                double exchange = Exchange.GetExchangeRate(invoice.InvoiceFinanceBatch.BatchCurrency, this.InvoiceCurrency);
-                                financeOutstanding *= exchange;
-                            }
-
                             total += financeOutstanding;
                         }
                     }

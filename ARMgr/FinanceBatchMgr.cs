@@ -222,13 +222,13 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            List<Invoice> invoiceList = selectedBatch.Invoices.ToList();
-            foreach (Invoice invoice in invoiceList)
+            List<InvoiceFinanceLog> logList = selectedBatch.InvoiceFinanceLogs.ToList();
+            foreach (InvoiceFinanceLog log in logList)
             {
-                invoice.FinanceAmount = null;
-                invoice.FinanceDate = null;
-                invoice.FinanceDueDate = null;
-                invoice.InvoiceFinanceBatch = null;
+                Invoice invoice = log.Invoice;
+                log.Invoice = null;
+                invoice.CaculateFinance();
+                context.InvoiceFinanceLogs.DeleteOnSubmit(log);
             }
 
             //if (selectedBatch.Invoices.Count > 0)

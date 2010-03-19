@@ -95,7 +95,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.disputeReasonCheckedListBox.ValueMember = "Index";
 
             this.dgvPaymentLogs.DataSource = invoice.InvoicePaymentLogs;
-            this.dgvRefundLogs.DataSource = invoice.InvoiceRefundLogs;
+            List<InvoiceRefundLog> refundLogs = new List<InvoiceRefundLog>();
+            foreach (InvoiceFinanceLog financeLog in invoice.InvoiceFinanceLogs)
+            {
+                refundLogs.AddRange(financeLog.InvoiceRefundLogs);
+            }
+
+            this.dgvRefundLogs.DataSource = refundLogs;
 
             if (invoice.InvoicePaymentLogs.Count > 0)
             {
@@ -212,9 +218,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
-                Invoice invoice = log.Invoice;
-                log.Invoice = null;
-                invoice.CaculateRefund();
+                InvoiceFinanceLog financeLog = log.InvoiceFinanceLog;
+                financeLog.InvoiceRefundLogs.Remove(log);
+                financeLog.Invoice.CaculateRefund();
                 context.InvoiceRefundLogs.DeleteOnSubmit(log);
                 log.InvoiceRefundBatch.CheckStatus = "未复核";
                 context.SubmitChanges();
@@ -251,10 +257,15 @@ namespace CMBC.EasyFactor.ARMgr
         private void DetailFinanceBatch(object sender, EventArgs e)
         {
             Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
-            if (invoice.InvoiceFinanceBatch != null)
+            string[] batchNoes = invoice.FinanceBatchNos.Split(new char[] { ';' });
+            foreach (string batchNo in batchNoes)
             {
-                FinanceBatchDetail detail = new FinanceBatchDetail(invoice.InvoiceFinanceBatch);
-                detail.ShowDialog(this);
+                InvoiceFinanceBatch batch = context.InvoiceFinanceBatches.Single(i => i.FinanceBatchNo == batchNo);
+                if (batch != null)
+                {
+                    FinanceBatchDetail detail = new FinanceBatchDetail(batch);
+                    detail.ShowDialog(this);
+                }
             }
         }
 
@@ -503,11 +514,7 @@ namespace CMBC.EasyFactor.ARMgr
             invoice.DisputeReason = disputeReason;
 
             bool isUpdateOK = true;
-            if (invoice.InvoiceFinanceBatch != null && invoice.InvoiceFinanceBatch.CheckStatus != "已复核")
-            {
-                invoice.InvoiceFinanceBatch.CheckStatus = "未复核";
-            }
-            else if (invoice.InvoiceAssignBatch.CheckStatus != "已复核")
+            if (invoice.InvoiceAssignBatch.CheckStatus != "已复核")
             {
                 invoice.InvoiceAssignBatch.CheckStatus = "未复核";
             }
@@ -624,15 +631,6 @@ namespace CMBC.EasyFactor.ARMgr
                     this.dueDateTextBox.Enabled = true;
                     this.commentTextBox.ReadOnly = false;
                     this.assignAmountTextBox.ReadOnly = false;
-                }
-
-                if (invoice.InvoiceFinanceBatch == null || invoice.InvoiceFinanceBatch.CheckStatus == "已复核")
-                {
-                    this.financeAmountTextBox.ReadOnly = true;
-                }
-                else
-                {
-                    this.financeAmountTextBox.ReadOnly = false;
                 }
 
                 foreach (Control comp in this.groupPanelInvoiceAdv.Controls)

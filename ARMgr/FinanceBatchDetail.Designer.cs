@@ -95,6 +95,9 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX checkUserNameLabel;
             DevComponents.DotNetBar.LabelX checkDateLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FinanceBatchDetail));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.panelBatch = new DevComponents.DotNetBar.TabControlPanel();
@@ -125,6 +128,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.dgvFinanceLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             financeBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             financeAmountLabel = new DevComponents.DotNetBar.LabelX();
@@ -148,7 +155,9 @@ namespace CMBC.EasyFactor.ARMgr
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).BeginInit();
+            this.panelInvoices.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFinanceLogs)).BeginInit();
             this.SuspendLayout();
             // 
             // caseCodeLabel
@@ -383,8 +392,8 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.panelBatch);
             this.tabControl.Controls.Add(this.panelInvoices);
+            this.tabControl.Controls.Add(this.panelBatch);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -801,6 +810,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // panelInvoices
             // 
+            this.panelInvoices.Controls.Add(this.dgvFinanceLogs);
             this.panelInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelInvoices.Location = new System.Drawing.Point(0, 26);
             this.panelInvoices.Name = "panelInvoices";
@@ -837,6 +847,64 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.highlighter.ContainerControl = this;
             // 
+            // dgvFinanceLogs
+            // 
+            this.dgvFinanceLogs.AllowUserToAddRows = false;
+            this.dgvFinanceLogs.AllowUserToDeleteRows = false;
+            this.dgvFinanceLogs.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFinanceLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvFinanceLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFinanceLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colInvoiceNo,
+            this.colFinanceAmount,
+            this.colComment});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFinanceLogs.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvFinanceLogs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvFinanceLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvFinanceLogs.Location = new System.Drawing.Point(1, 1);
+            this.dgvFinanceLogs.Name = "dgvFinanceLogs";
+            this.dgvFinanceLogs.ReadOnly = true;
+            this.dgvFinanceLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvFinanceLogs.Size = new System.Drawing.Size(484, 377);
+            this.dgvFinanceLogs.TabIndex = 2;
+            // 
+            // colInvoiceNo
+            // 
+            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
+            this.colInvoiceNo.HeaderText = "发票号";
+            this.colInvoiceNo.Name = "colInvoiceNo";
+            this.colInvoiceNo.ReadOnly = true;
+            // 
+            // colFinanceAmount
+            // 
+            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
+            dataGridViewCellStyle2.Format = "N2";
+            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colFinanceAmount.HeaderText = "融资金额";
+            this.colFinanceAmount.Name = "colFinanceAmount";
+            this.colFinanceAmount.ReadOnly = true;
+            // 
+            // colComment
+            // 
+            this.colComment.DataPropertyName = "Comment";
+            this.colComment.HeaderText = "备注";
+            this.colComment.Name = "colComment";
+            this.colComment.ReadOnly = true;
+            // 
             // FinanceBatchDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -855,10 +923,17 @@ namespace CMBC.EasyFactor.ARMgr
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodEndDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).EndInit();
+            this.panelInvoices.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFinanceLogs)).EndInit();
             this.ResumeLayout(false);
 
         }
         #endregion
+
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvFinanceLogs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
     }
 }

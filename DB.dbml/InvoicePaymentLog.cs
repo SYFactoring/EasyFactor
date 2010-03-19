@@ -51,7 +51,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public DateTime CreditNoteDate
+        public DateTime? CreditNoteDate
         {
             get
             {
@@ -81,6 +81,23 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string CreditNoteNo2
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? CreditNoteDate2
+        {
+            get;
+            set;
+        }
         #endregion Properties
     }
 }

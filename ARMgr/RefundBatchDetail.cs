@@ -105,9 +105,9 @@ namespace CMBC.EasyFactor.ARMgr
             
             try
             {
-                Invoice invoice = log.Invoice;
-                log.Invoice = null;
-                invoice.CaculateRefund();
+                InvoiceFinanceLog financeLog = log.InvoiceFinanceLog;
+                log.InvoiceFinanceLog = null;
+                financeLog.Invoice.CaculateRefund();
                 context.InvoiceRefundLogs.DeleteOnSubmit(log);
                 log.InvoiceRefundBatch.CheckStatus = "未复核";
                 context.SubmitChanges();

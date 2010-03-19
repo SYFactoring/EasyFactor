@@ -84,15 +84,15 @@ namespace CMBC.EasyFactor
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="refundList"></param>
-        public void InvoiceRefund(List<Invoice> refundList, string paymentType, DateTime date)
+        /// <param name="invoiceList"></param>
+        public void InvoiceRefund(List<Invoice> invoiceList, string paymentType, DateTime date)
         {
             if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
             {
                 ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REFUND);
                 this.SetDetailPanel(invoiceRefund);
                 InvoiceRefund uc = (InvoiceRefund)invoiceRefund.InvoiceControl;
-                uc.NewBatchFromPayment(refundList, paymentType, date);
+                uc.NewBatchFromPayment(invoiceList, paymentType, date);
             }
         }
 

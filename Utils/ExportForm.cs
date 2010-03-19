@@ -912,25 +912,26 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.DueDate;
                     datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
                     //融资批次
-                    if (invoice.InvoiceFinanceBatch != null)
+                    if (invoice.InvoiceFinanceLogs.Count >0 )
                     {
                         column = 15;
-                        datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinanceBatchNo;
-                        datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinanceType;
-                        if (invoice.InvoiceFinanceBatch.Factor != null)
+                        InvoiceFinanceLog log = invoice.InvoiceFinanceLogs[0];
+                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.FinanceBatchNo;
+                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.FinanceType;
+                        if (log.InvoiceFinanceBatch.Factor != null)
                         {
-                            datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FactorCode;
-                            datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.Factor.ToString();
+                            datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.FactorCode;
+                            datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.Factor.ToString();
                         }
 
                         column = 19;
-                        datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.BatchCurrency;
-                        datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinanceRate;
-                        datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.CostRate;
-                        datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinancePeriodBegin;
-                        datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.FinancePeriodEnd;
-                        datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.Comment;
-                        datasheet.Cells[row + 2, column++] = invoice.InvoiceFinanceBatch.CreateUserName;
+                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.BatchCurrency;
+                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.FinanceRate;
+                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.CostRate;
+                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.FinancePeriodBegin;
+                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.FinancePeriodEnd;
+                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.Comment;
+                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.CreateUserName;
                     }
                     //融资
                     column = 27;
@@ -951,15 +952,19 @@ namespace CMBC.EasyFactor.Utils
                     column = 34;
                     datasheet.Cells[row + 2, column++] = invoice.PaymentAmount;
                     //还款批次
-                    if (invoice.InvoiceRefundLogs.Count > 0)
+                    if (invoice.InvoiceFinanceLogs.Count > 0)
                     {
-                        column = 35;
-                        InvoiceRefundLog log = invoice.InvoiceRefundLogs[0];
-                        datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundBatchNo;
-                        datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundType;
-                        datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundDate;
-                        datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.Comment;
-                        datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.CreateUserName;
+                        InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[0];
+                        if (financeLog.InvoiceRefundLogs.Count > 0)
+                        {
+                            column = 35;
+                            InvoiceRefundLog log = financeLog.InvoiceRefundLogs[0];
+                            datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundBatchNo;
+                            datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundType;
+                            datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundDate;
+                            datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.Comment;
+                            datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.CreateUserName;
+                        }
                     }
                     //还款
                     column = 40;
@@ -1268,7 +1273,7 @@ namespace CMBC.EasyFactor.Utils
                 sb.Append(curCase.BuyerFactorCode).Append(',');
                 sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
                 sb.Append(log.InvoicePaymentBatch.PaymentBatchNo).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.PaymentDate)).Append(',');
+                sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
                 sb.Append(log.Invoice.InvoiceCurrency).Append(',');
                 sb.Append(curCase.SellerCode).Append(',');
                 sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
@@ -1293,8 +1298,8 @@ namespace CMBC.EasyFactor.Utils
                 {
                     sb.Append(1).Append(',');
                 }
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.PaymentDate)).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.PaymentDate)).Append(',');
+                sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
+                sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
                 sb.Append(log.InvoicePaymentBatch.PaymentAmount).Append(',');
                 sb.Append(0).Append(',');
                 sb.Append(log.InvoicePaymentBatch.PaymentAmount).Append(',');
@@ -1349,7 +1354,7 @@ namespace CMBC.EasyFactor.Utils
                 sb.Append(curCase.BuyerFactorCode).Append(',');
                 sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
                 sb.Append(log.InvoicePaymentBatch.PaymentBatchNo).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.PaymentDate)).Append(',');
+                sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
                 sb.Append(log.Invoice.InvoiceCurrency).Append(',');
                 sb.Append(curCase.SellerCode).Append(',');
                 sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
@@ -1374,8 +1379,8 @@ namespace CMBC.EasyFactor.Utils
                 {
                     sb.Append(1).Append(',');
                 }
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.PaymentDate)).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.PaymentDate)).Append(',');
+                sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
+                sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
                 sb.Append(log.InvoicePaymentBatch.PaymentAmount).Append(',');
                 sb.Append(0).Append(',');
                 sb.Append(log.InvoicePaymentBatch.PaymentAmount).Append(',');
@@ -1451,13 +1456,13 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    Invoice invoice = (Invoice)exportData[row];
-                    datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
-                    datasheet.Cells[row + 2, column++] = invoice.AssignOutstanding;
-                    datasheet.Cells[row + 2, column++] = invoice.PaymentAmount2;
-                    datasheet.Cells[row + 2, column++] = invoice.Comment;
-                    datasheet.Cells[row + 2, column++] = "'" + invoice.CreditNoteNo2;
-                    datasheet.Cells[row + 2, column++] = invoice.CreditNoteDate2;
+                    InvoicePaymentLog log = (InvoicePaymentLog)exportData[row];
+                    datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo;
+                    datasheet.Cells[row + 2, column++] = log.AssignOutstanding;
+                    datasheet.Cells[row + 2, column++] = log.PaymentAmount;
+                    datasheet.Cells[row + 2, column++] = log.Comment;
+                    datasheet.Cells[row + 2, column++] = "'" + log.CreditNoteNo2;
+                    datasheet.Cells[row + 2, column++] = log.CreditNoteDate2;
 
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
@@ -1562,11 +1567,11 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    Invoice invoice = (Invoice)exportData[row];
-                    datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
-                    datasheet.Cells[row + 2, column++] = invoice.FinanceOutstanding;
-                    datasheet.Cells[row + 2, column++] = invoice.RefundAmount2;
-                    datasheet.Cells[row + 2, column++] = invoice.Comment;
+                    InvoiceRefundLog log = (InvoiceRefundLog)exportData[row];
+                    datasheet.Cells[row + 2, column++] = "'" + log.InvoiceFinanceLog.InvoiceNo;
+                    datasheet.Cells[row + 2, column++] = log.FinanceOutstanding;
+                    datasheet.Cells[row + 2, column++] = log.RefundAmount;
+                    datasheet.Cells[row + 2, column++] = log.Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }

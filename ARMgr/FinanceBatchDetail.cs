@@ -26,6 +26,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
+        private BindingSource bs;
+        /// <summary>
+        /// 
+        /// </summary>
         private OpBatchType opBatchType;
 
         /// <summary>
@@ -64,8 +68,11 @@ namespace CMBC.EasyFactor.ARMgr
         public FinanceBatchDetail(InvoiceFinanceBatch batch)
         {
             this.InitializeComponent();
+            this.bs = new BindingSource();
+            this.dgvFinanceLogs.DataSource = this.bs;
             this.context = new DBDataContext();
             batch = context.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == batch.FinanceBatchNo);
+            this.bs.DataSource = batch.InvoiceFinanceLogs;
             this.batchBindingSource.DataSource = batch;
             this.opBatchType = OpBatchType.DETAIL_BATCH;
             this.ImeMode = ImeMode.OnHalf;
@@ -79,10 +86,6 @@ namespace CMBC.EasyFactor.ARMgr
 
             this.costRateTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
             this.costRateTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
-
-            InvoiceMgr invoiceMgr = new InvoiceMgr(batch.Invoices, context);
-            invoiceMgr.Dock = DockStyle.Fill;
-            this.panelInvoices.Controls.Add(invoiceMgr);
 
             this.UpdateBatchControlStatus();
         }
