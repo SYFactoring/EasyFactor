@@ -386,7 +386,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbLoanNo.Border.Class = "TextBoxBorder";
-            this.tbLoanNo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "LoadNo", true));
+            this.tbLoanNo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "LoanNo", true));
             this.tbLoanNo.Location = new System.Drawing.Point(440, 3);
             this.tbLoanNo.Name = "tbLoanNo";
             this.tbLoanNo.Size = new System.Drawing.Size(100, 20);

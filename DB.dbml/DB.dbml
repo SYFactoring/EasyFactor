@@ -386,7 +386,7 @@
       <Column Name="RejectReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="OtherIncome" Type="System.Double" DbType="float" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="LoadNo" Type="System.String" DbType="Nvarchar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="LoanNo" Type="System.String" DbType="Nvarchar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceFinanceBatch_InvoiceFinanceLog" Member="InvoiceFinanceLogs" OtherKey="FinanceBatchNo" Type="InvoiceFinanceLog" />
       <Association Name="Factor_InvoiceFinanceBatch" Member="Factor" ThisKey="FactorCode" Type="Factor" IsForeignKey="true" />
       <Association Name="Case_InvoiceFinanceBatch" Member="Case" ThisKey="CaseCode" Type="Case" IsForeignKey="true" />

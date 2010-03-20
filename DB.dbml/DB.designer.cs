@@ -8668,7 +8668,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<double> _OtherIncome;
 		
-		private string _LoadNo;
+		private string _LoanNo;
 		
 		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
 		
@@ -8714,8 +8714,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckUserNameChanged();
     partial void OnOtherIncomeChanging(System.Nullable<double> value);
     partial void OnOtherIncomeChanged();
-    partial void OnLoadNoChanging(string value);
-    partial void OnLoadNoChanged();
+    partial void OnLoanNoChanging(string value);
+    partial void OnLoanNoChanged();
     #endregion
 		
 		public InvoiceFinanceBatch()
@@ -9074,22 +9074,22 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_LoadNo", DbType="Nvarchar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string LoadNo
+		[Column(Storage="_LoanNo", DbType="Nvarchar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string LoanNo
 		{
 			get
 			{
-				return this._LoadNo;
+				return this._LoanNo;
 			}
 			set
 			{
-				if ((this._LoadNo != value))
+				if ((this._LoanNo != value))
 				{
-					this.OnLoadNoChanging(value);
+					this.OnLoanNoChanging(value);
 					this.SendPropertyChanging();
-					this._LoadNo = value;
-					this.SendPropertyChanged("LoadNo");
-					this.OnLoadNoChanged();
+					this._LoanNo = value;
+					this.SendPropertyChanged("LoanNo");
+					this.OnLoanNoChanged();
 				}
 			}
 		}
