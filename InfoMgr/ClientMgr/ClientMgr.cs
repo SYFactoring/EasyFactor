@@ -66,7 +66,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="clientMgrType"></param>
         public ClientMgr(OpClientMgrType clientMgrType)
-            : this(false)
+            : this()
         {
             this.opClientMgrType = clientMgrType;
             if (this.opClientMgrType == OpClientMgrType.DOMINATE_CLIENT)
@@ -111,16 +111,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             ControlUtil.SetDoubleBuffered(this.dgvClients);
             ControlUtil.AddEnterListenersForQuery(this.pnlQuery.Controls, btnQuery);
 
-            List<Department> deptsList = Department.AllDepartments(new DBDataContext());
-            deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
-            this.cbDepartment.DataSource = deptsList;
-            this.cbDepartment.DisplayMembers = "DepartmentName";
-            this.cbDepartment.ValueMember = "DepartmentCode";
-            this.cbDepartment.GroupingMembers = "Domain";
-            this.cbDepartment.SelectedIndex = -1;
-
             this.UpdateContextMenu();
-
         }
 
         #endregion Constructors
@@ -349,10 +340,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 clientType = string.Empty;
             }
 
-            string department = this.cbDepartment.Text;
-            if (department == "全部")
+            string location = this.cbLocation.Text;
+            if (location == "全部")
             {
-                department = string.Empty;
+                location = string.Empty;
             }
 
             string caseType = this.cbCaseType.Text;
@@ -360,7 +351,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             context = new DBDataContext();
 
             var queryResult = context.Clients.Where(c =>
-                     ((c.BranchCode == null ? string.Empty : c.Department.DepartmentName).Contains(department))
+                     ((c.BranchCode == null ? string.Empty : c.Department.Location)==location)
                   && ((c.PMName == null ? string.Empty : c.PMName).Contains(tbPM.Text))
                   && ((c.RMName == null ? string.Empty : c.RMName).Contains(tbRM.Text))
                   && (((c.ClientNameCN == null ? string.Empty : c.ClientNameCN).Contains(tbClientName.Text)) || ((c.ClientNameEN == null ? string.Empty : c.ClientNameEN).Contains(tbClientName.Text)))

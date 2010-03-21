@@ -20,6 +20,28 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        public DateTime FinanceDate
+        {
+            get
+            {
+                return this.InvoiceFinanceBatch.FinancePeriodBegin;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime FinanceDueDate
+        {
+            get
+            {
+                return this.InvoiceFinanceBatch.FinancePeriodEnd;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public double AssignAmount
         {
             get

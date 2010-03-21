@@ -13,33 +13,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     {
         #region Fields (44)
 
-        /// <summary> 
-        /// 必需的设计器变量。
-        /// </summary>
-        private System.Windows.Forms.DataGridViewTextBoxColumn AddressCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AddressENColumn;
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.ButtonX btnReset;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseType;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientType;
-        private DevComponents.DotNetBar.Controls.ComboTree cbDepartment;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsContractSigned;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CityCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CityENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientCoreNoColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clientEDICodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientTypeColumn;
         private System.Windows.Forms.ContextMenuStrip cmuClientMgr;
         private System.ComponentModel.IContainer components;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ContactColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvClients;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IndustryColumn;
         private DevComponents.DotNetBar.LabelX lblCount;
         private System.Windows.Forms.ToolStripMenuItem menuItemClientCreditLineNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemClientDelete;
@@ -47,12 +28,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemClientNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemClientSelect;
         private System.Windows.Forms.ToolStripMenuItem menuItemContractNew;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PMNameColumn;
         private DevComponents.DotNetBar.PanelEx pnlQuery;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PostCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProvinceCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProvinceENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RMNameColumn;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbPM;
@@ -95,7 +71,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DevComponents.DotNetBar.LabelX lblClientName;
             DevComponents.DotNetBar.LabelX lblRM;
             DevComponents.DotNetBar.LabelX lblPM;
-            DevComponents.DotNetBar.LabelX lblDepartment;
             DevComponents.DotNetBar.LabelX lblCaseType;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -110,10 +85,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemContractNew = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemClientDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlQuery = new DevComponents.DotNetBar.PanelEx();
+            this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblLocation = new DevComponents.DotNetBar.LabelX();
             this.cbCaseType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnReset = new DevComponents.DotNetBar.ButtonX();
             this.cbIsContractSigned = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.cbDepartment = new DevComponents.DotNetBar.Controls.ComboTree();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.cbClientType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -128,26 +104,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ClientNameENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddressCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddressENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CityCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CityENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProvinceCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProvinceENColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CountryNameCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PostCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContactColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GroupNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IndustryColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DepartmentCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DepartmentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PMNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RMNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             lblClientType = new DevComponents.DotNetBar.LabelX();
             lblClientNo = new DevComponents.DotNetBar.LabelX();
             lblClientName = new DevComponents.DotNetBar.LabelX();
             lblRM = new DevComponents.DotNetBar.LabelX();
             lblPM = new DevComponents.DotNetBar.LabelX();
-            lblDepartment = new DevComponents.DotNetBar.LabelX();
             lblCaseType = new DevComponents.DotNetBar.LabelX();
             this.cmuClientMgr.SuspendLayout();
             this.pnlQuery.SuspendLayout();
@@ -225,20 +192,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblPM.Text = "产品经理";
             lblPM.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
-            // lblDepartment
-            // 
-            lblDepartment.AutoSize = true;
-            // 
-            // 
-            // 
-            lblDepartment.BackgroundStyle.Class = "";
-            lblDepartment.Location = new System.Drawing.Point(3, 33);
-            lblDepartment.Name = "lblDepartment";
-            lblDepartment.Size = new System.Drawing.Size(56, 16);
-            lblDepartment.TabIndex = 7;
-            lblDepartment.Text = "所属机构";
-            lblDepartment.TextLineAlignment = System.Drawing.StringAlignment.Far;
-            // 
             // lblCaseType
             // 
             lblCaseType.AutoSize = true;
@@ -264,52 +217,52 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemContractNew,
             this.menuItemClientDelete});
             this.cmuClientMgr.Name = "contextMenuClientMgr";
-            this.cmuClientMgr.Size = new System.Drawing.Size(153, 164);
+            this.cmuClientMgr.Size = new System.Drawing.Size(147, 142);
             // 
             // menuItemClientSelect
             // 
             this.menuItemClientSelect.Name = "menuItemClientSelect";
-            this.menuItemClientSelect.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientSelect.Size = new System.Drawing.Size(146, 22);
             this.menuItemClientSelect.Text = "选定客户";
             this.menuItemClientSelect.Click += new System.EventHandler(this.SelectClient);
             // 
             // menuItemClientDetail
             // 
             this.menuItemClientDetail.Name = "menuItemClientDetail";
-            this.menuItemClientDetail.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientDetail.Size = new System.Drawing.Size(146, 22);
             this.menuItemClientDetail.Text = "详细信息";
             this.menuItemClientDetail.Click += new System.EventHandler(this.DetailClient);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
             // 
             // menuItemClientNew
             // 
             this.menuItemClientNew.Name = "menuItemClientNew";
-            this.menuItemClientNew.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientNew.Size = new System.Drawing.Size(146, 22);
             this.menuItemClientNew.Text = "新建客户";
             this.menuItemClientNew.Click += new System.EventHandler(this.NewClient);
             // 
             // menuItemClientCreditLineNew
             // 
             this.menuItemClientCreditLineNew.Name = "menuItemClientCreditLineNew";
-            this.menuItemClientCreditLineNew.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientCreditLineNew.Size = new System.Drawing.Size(146, 22);
             this.menuItemClientCreditLineNew.Text = "新建额度信息";
             this.menuItemClientCreditLineNew.Click += new System.EventHandler(this.NewClientCreditLine);
             // 
             // menuItemContractNew
             // 
             this.menuItemContractNew.Name = "menuItemContractNew";
-            this.menuItemContractNew.Size = new System.Drawing.Size(152, 22);
+            this.menuItemContractNew.Size = new System.Drawing.Size(146, 22);
             this.menuItemContractNew.Text = "新建保理合同";
             this.menuItemContractNew.Click += new System.EventHandler(this.NewContract);
             // 
             // menuItemClientDelete
             // 
             this.menuItemClientDelete.Name = "menuItemClientDelete";
-            this.menuItemClientDelete.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientDelete.Size = new System.Drawing.Size(146, 22);
             this.menuItemClientDelete.Text = "删除客户";
             this.menuItemClientDelete.Click += new System.EventHandler(this.DeleteClient);
             // 
@@ -317,11 +270,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.pnlQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.pnlQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.pnlQuery.Controls.Add(this.cbLocation);
+            this.pnlQuery.Controls.Add(this.lblLocation);
             this.pnlQuery.Controls.Add(this.cbCaseType);
             this.pnlQuery.Controls.Add(lblCaseType);
             this.pnlQuery.Controls.Add(this.btnReset);
             this.pnlQuery.Controls.Add(this.cbIsContractSigned);
-            this.pnlQuery.Controls.Add(this.cbDepartment);
             this.pnlQuery.Controls.Add(this.lblCount);
             this.pnlQuery.Controls.Add(this.btnQuery);
             this.pnlQuery.Controls.Add(this.cbClientType);
@@ -334,7 +288,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.pnlQuery.Controls.Add(lblRM);
             this.pnlQuery.Controls.Add(this.tbPM);
             this.pnlQuery.Controls.Add(lblPM);
-            this.pnlQuery.Controls.Add(lblDepartment);
             this.pnlQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlQuery.Location = new System.Drawing.Point(0, 0);
             this.pnlQuery.Name = "pnlQuery";
@@ -347,6 +300,62 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.pnlQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.pnlQuery.Style.GradientAngle = 90;
             this.pnlQuery.TabIndex = 1;
+            // 
+            // cbLocation
+            // 
+            this.cbLocation.DisplayMember = "Text";
+            this.cbLocation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLocation.FormattingEnabled = true;
+            this.cbLocation.ItemHeight = 14;
+            this.cbLocation.Items.AddRange(new object[] {
+            "全部",
+            "北京",
+            "广州",
+            "上海",
+            "深圳",
+            "武汉",
+            "太原",
+            "石家庄",
+            "大连",
+            "杭州",
+            "南京",
+            "重庆",
+            "西安",
+            "福州",
+            "济南",
+            "宁波",
+            "成都",
+            "天津",
+            "苏州",
+            "青岛",
+            "厦门",
+            "郑州",
+            "昆明",
+            "温州",
+            "泉州",
+            "长沙",
+            "长春",
+            "汕头",
+            "南昌",
+            "香港"});
+            this.cbLocation.Location = new System.Drawing.Point(59, 34);
+            this.cbLocation.Name = "cbLocation";
+            this.cbLocation.Size = new System.Drawing.Size(101, 20);
+            this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbLocation.TabIndex = 25;
+            // 
+            // lblLocation
+            // 
+            // 
+            // 
+            // 
+            this.lblLocation.BackgroundStyle.Class = "";
+            this.lblLocation.Location = new System.Drawing.Point(3, 31);
+            this.lblLocation.Name = "lblLocation";
+            this.lblLocation.Size = new System.Drawing.Size(59, 23);
+            this.lblLocation.TabIndex = 24;
+            this.lblLocation.Text = "业务地区";
             // 
             // cbCaseType
             // 
@@ -390,22 +399,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbIsContractSigned.TabIndex = 6;
             this.cbIsContractSigned.Text = "是否签订保理合同";
-            // 
-            // cbDepartment
-            // 
-            this.cbDepartment.BackColor = System.Drawing.SystemColors.Window;
-            // 
-            // 
-            // 
-            this.cbDepartment.BackgroundStyle.Class = "TextBoxBorder";
-            this.cbDepartment.ButtonDropDown.Visible = true;
-            this.cbDepartment.ColumnsVisible = false;
-            this.cbDepartment.DropDownWidth = 150;
-            this.cbDepartment.Location = new System.Drawing.Point(60, 33);
-            this.cbDepartment.Name = "cbDepartment";
-            this.cbDepartment.Size = new System.Drawing.Size(100, 22);
-            this.cbDepartment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbDepartment.TabIndex = 8;
             // 
             // lblCount
             // 
@@ -518,20 +511,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ClientNameENColumn,
             this.AddressCNColumn,
             this.AddressENColumn,
-            this.CityCNColumn,
-            this.CityENColumn,
-            this.ProvinceCNColumn,
-            this.ProvinceENColumn,
             this.CountryNameCNColumn,
-            this.PostCodeColumn,
-            this.ContactColumn,
             this.GroupNoColumn,
-            this.ClientTypeColumn,
             this.IndustryColumn,
             this.DepartmentCodeColumn,
             this.DepartmentColumn,
-            this.PMNameColumn,
-            this.RMNameColumn});
+            this.PMNameColumn});
             this.dgvClients.ContextMenuStrip = this.cmuClientMgr;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -613,38 +598,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.AddressENColumn.ReadOnly = true;
             this.AddressENColumn.Width = 74;
             // 
-            // CityCNColumn
-            // 
-            this.CityCNColumn.DataPropertyName = "CityCN";
-            this.CityCNColumn.HeaderText = "城市(中)";
-            this.CityCNColumn.Name = "CityCNColumn";
-            this.CityCNColumn.ReadOnly = true;
-            this.CityCNColumn.Width = 74;
-            // 
-            // CityENColumn
-            // 
-            this.CityENColumn.DataPropertyName = "CityEN";
-            this.CityENColumn.HeaderText = "城市(英)";
-            this.CityENColumn.Name = "CityENColumn";
-            this.CityENColumn.ReadOnly = true;
-            this.CityENColumn.Width = 74;
-            // 
-            // ProvinceCNColumn
-            // 
-            this.ProvinceCNColumn.DataPropertyName = "ProvinceCN";
-            this.ProvinceCNColumn.HeaderText = "省/州(中)";
-            this.ProvinceCNColumn.Name = "ProvinceCNColumn";
-            this.ProvinceCNColumn.ReadOnly = true;
-            this.ProvinceCNColumn.Width = 79;
-            // 
-            // ProvinceENColumn
-            // 
-            this.ProvinceENColumn.DataPropertyName = "ProvinceEN";
-            this.ProvinceENColumn.HeaderText = "省/州(英)";
-            this.ProvinceENColumn.Name = "ProvinceENColumn";
-            this.ProvinceENColumn.ReadOnly = true;
-            this.ProvinceENColumn.Width = 79;
-            // 
             // CountryNameCNColumn
             // 
             this.CountryNameCNColumn.DataPropertyName = "CountryCode";
@@ -653,22 +606,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.CountryNameCNColumn.ReadOnly = true;
             this.CountryNameCNColumn.Width = 56;
             // 
-            // PostCodeColumn
-            // 
-            this.PostCodeColumn.DataPropertyName = "PostCode";
-            this.PostCodeColumn.HeaderText = "邮编";
-            this.PostCodeColumn.Name = "PostCodeColumn";
-            this.PostCodeColumn.ReadOnly = true;
-            this.PostCodeColumn.Width = 56;
-            // 
-            // ContactColumn
-            // 
-            this.ContactColumn.DataPropertyName = "Contact";
-            this.ContactColumn.HeaderText = "联系人";
-            this.ContactColumn.Name = "ContactColumn";
-            this.ContactColumn.ReadOnly = true;
-            this.ContactColumn.Width = 68;
-            // 
             // GroupNoColumn
             // 
             this.GroupNoColumn.DataPropertyName = "GroupEDICode";
@@ -676,14 +613,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.GroupNoColumn.Name = "GroupNoColumn";
             this.GroupNoColumn.ReadOnly = true;
             this.GroupNoColumn.Width = 116;
-            // 
-            // ClientTypeColumn
-            // 
-            this.ClientTypeColumn.DataPropertyName = "ClientType";
-            this.ClientTypeColumn.HeaderText = "客户类别";
-            this.ClientTypeColumn.Name = "ClientTypeColumn";
-            this.ClientTypeColumn.ReadOnly = true;
-            this.ClientTypeColumn.Width = 80;
             // 
             // IndustryColumn
             // 
@@ -718,14 +647,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.PMNameColumn.ReadOnly = true;
             this.PMNameColumn.Width = 80;
             // 
-            // RMNameColumn
-            // 
-            this.RMNameColumn.DataPropertyName = "RMName";
-            this.RMNameColumn.HeaderText = "客户经理";
-            this.RMNameColumn.Name = "RMNameColumn";
-            this.RMNameColumn.ReadOnly = true;
-            this.RMNameColumn.Width = 80;
-            // 
             // ClientMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -745,5 +666,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
+        private DevComponents.DotNetBar.LabelX lblLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clientEDICodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientCoreNoColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressENColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IndustryColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PMNameColumn;
     }
 }

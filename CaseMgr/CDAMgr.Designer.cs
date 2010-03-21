@@ -30,18 +30,16 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvCDAs;
-        private DevComponents.DotNetBar.LabelX lblBuyerName;
         private DevComponents.DotNetBar.LabelX lblContractCode;
         private DevComponents.DotNetBar.LabelX lblCount;
-        private DevComponents.DotNetBar.LabelX lblSellerName;
+        private DevComponents.DotNetBar.LabelX lblClientName;
         private System.Windows.Forms.ToolStripMenuItem menuItemCDADelete;
         private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemCDANew;
         private System.Windows.Forms.ToolStripMenuItem menuItemCDASelect;
         private DevComponents.DotNetBar.PanelEx panelQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbBuyerName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbContractCode;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbSellerName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
 
         #endregion Fields
@@ -77,7 +75,7 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -87,6 +85,7 @@ namespace CMBC.EasyFactor.CaseMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbIsCDA = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -95,10 +94,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblCheckStatus = new DevComponents.DotNetBar.LabelX();
             this.tbFactorName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFactorName = new DevComponents.DotNetBar.LabelX();
-            this.tbBuyerName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbSellerName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblBuyerName = new DevComponents.DotNetBar.LabelX();
-            this.lblSellerName = new DevComponents.DotNetBar.LabelX();
+            this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblClientName = new DevComponents.DotNetBar.LabelX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbContractCode = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -115,6 +112,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemCDAReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblDate = new DevComponents.DotNetBar.LabelX();
+            this.diEnd = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.diBegin = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.colCDACode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -133,6 +133,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colFinanceLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceLinePeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceLinePeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHighestFinanceLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentTerms = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIFPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -140,18 +141,24 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colHandFee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCDAStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsSigned = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCDASignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCDAs)).BeginInit();
             this.cmuCDAMgr.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
             this.SuspendLayout();
             // 
             // panelQuery
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.lblDate);
+            this.panelQuery.Controls.Add(this.diEnd);
+            this.panelQuery.Controls.Add(this.diBegin);
             this.panelQuery.Controls.Add(this.cbIsCDA);
             this.panelQuery.Controls.Add(this.tbCreateUserName);
             this.panelQuery.Controls.Add(this.lblCreateUserName);
@@ -159,10 +166,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.panelQuery.Controls.Add(this.lblCheckStatus);
             this.panelQuery.Controls.Add(this.tbFactorName);
             this.panelQuery.Controls.Add(this.lblFactorName);
-            this.panelQuery.Controls.Add(this.tbBuyerName);
-            this.panelQuery.Controls.Add(this.tbSellerName);
-            this.panelQuery.Controls.Add(this.lblBuyerName);
-            this.panelQuery.Controls.Add(this.lblSellerName);
+            this.panelQuery.Controls.Add(this.tbClientName);
+            this.panelQuery.Controls.Add(this.lblClientName);
             this.panelQuery.Controls.Add(this.lblCount);
             this.panelQuery.Controls.Add(this.btnQuery);
             this.panelQuery.Controls.Add(this.tbContractCode);
@@ -204,7 +209,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.tbCreateUserName.Border.Class = "TextBoxBorder";
-            this.tbCreateUserName.Location = new System.Drawing.Point(425, 25);
+            this.tbCreateUserName.Location = new System.Drawing.Point(245, 26);
             this.tbCreateUserName.Name = "tbCreateUserName";
             this.tbCreateUserName.Size = new System.Drawing.Size(100, 20);
             this.tbCreateUserName.TabIndex = 12;
@@ -216,7 +221,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblCreateUserName.BackgroundStyle.Class = "";
-            this.lblCreateUserName.Location = new System.Drawing.Point(375, 28);
+            this.lblCreateUserName.Location = new System.Drawing.Point(195, 28);
             this.lblCreateUserName.Name = "lblCreateUserName";
             this.lblCreateUserName.Size = new System.Drawing.Size(44, 16);
             this.lblCreateUserName.TabIndex = 11;
@@ -277,53 +282,29 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblFactorName.TabIndex = 2;
             this.lblFactorName.Text = "保理商";
             // 
-            // tbBuyerName
+            // tbClientName
             // 
             // 
             // 
             // 
-            this.tbBuyerName.Border.Class = "TextBoxBorder";
-            this.tbBuyerName.Location = new System.Drawing.Point(245, 25);
-            this.tbBuyerName.Name = "tbBuyerName";
-            this.tbBuyerName.Size = new System.Drawing.Size(100, 20);
-            this.tbBuyerName.TabIndex = 10;
+            this.tbClientName.Border.Class = "TextBoxBorder";
+            this.tbClientName.Location = new System.Drawing.Point(86, 27);
+            this.tbClientName.Name = "tbClientName";
+            this.tbClientName.Size = new System.Drawing.Size(100, 20);
+            this.tbClientName.TabIndex = 8;
             // 
-            // tbSellerName
+            // lblClientName
             // 
-            // 
-            // 
-            // 
-            this.tbSellerName.Border.Class = "TextBoxBorder";
-            this.tbSellerName.Location = new System.Drawing.Point(86, 24);
-            this.tbSellerName.Name = "tbSellerName";
-            this.tbSellerName.Size = new System.Drawing.Size(100, 20);
-            this.tbSellerName.TabIndex = 8;
-            // 
-            // lblBuyerName
-            // 
-            this.lblBuyerName.AutoSize = true;
+            this.lblClientName.AutoSize = true;
             // 
             // 
             // 
-            this.lblBuyerName.BackgroundStyle.Class = "";
-            this.lblBuyerName.Location = new System.Drawing.Point(205, 25);
-            this.lblBuyerName.Name = "lblBuyerName";
-            this.lblBuyerName.Size = new System.Drawing.Size(31, 16);
-            this.lblBuyerName.TabIndex = 9;
-            this.lblBuyerName.Text = "买方";
-            // 
-            // lblSellerName
-            // 
-            this.lblSellerName.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblSellerName.BackgroundStyle.Class = "";
-            this.lblSellerName.Location = new System.Drawing.Point(49, 28);
-            this.lblSellerName.Name = "lblSellerName";
-            this.lblSellerName.Size = new System.Drawing.Size(31, 16);
-            this.lblSellerName.TabIndex = 7;
-            this.lblSellerName.Text = "卖方";
+            this.lblClientName.BackgroundStyle.Class = "";
+            this.lblClientName.Location = new System.Drawing.Point(28, 29);
+            this.lblClientName.Name = "lblClientName";
+            this.lblClientName.Size = new System.Drawing.Size(56, 16);
+            this.lblClientName.TabIndex = 7;
+            this.lblClientName.Text = "客户名称";
             // 
             // lblCount
             // 
@@ -406,6 +387,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colFinanceLine,
             this.colFinanceLinePeriodBegin,
             this.colFinanceLinePeriodEnd,
+            this.colHighestFinanceLine,
             this.colPaymentTerms,
             this.colPrice,
             this.colIFPrice,
@@ -413,18 +395,19 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colHandFee,
             this.colCDAStatus,
             this.colIsSigned,
+            this.colCDASignDate,
             this.colCreateUserName,
             this.colCheckUserName,
             this.colCheckDate});
             this.dgvCDAs.ContextMenuStrip = this.cmuCDAMgr;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvCDAs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCDAs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCDAs.Location = new System.Drawing.Point(0, 54);
@@ -518,6 +501,115 @@ namespace CMBC.EasyFactor.CaseMgr
             this.menuItemCDAReport.Size = new System.Drawing.Size(182, 22);
             this.menuItemCDAReport.Text = "生成保理额度通知书";
             this.menuItemCDAReport.Click += new System.EventHandler(this.ReportCDA);
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblDate.BackgroundStyle.Class = "";
+            this.lblDate.Location = new System.Drawing.Point(363, 28);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(56, 16);
+            this.lblDate.TabIndex = 17;
+            this.lblDate.Text = "查询期限";
+            // 
+            // diEnd
+            // 
+            // 
+            // 
+            // 
+            this.diEnd.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diEnd.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.diEnd.ButtonDropDown.Visible = true;
+            this.diEnd.ButtonFreeText.Checked = true;
+            this.diEnd.FreeTextEntryMode = true;
+            this.diEnd.Location = new System.Drawing.Point(532, 27);
+            // 
+            // 
+            // 
+            this.diEnd.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diEnd.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diEnd.MonthCalendar.BackgroundStyle.Class = "";
+            this.diEnd.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diEnd.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.diEnd.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diEnd.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.diEnd.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diEnd.MonthCalendar.TodayButtonVisible = true;
+            this.diEnd.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diEnd.Name = "diEnd";
+            this.diEnd.Size = new System.Drawing.Size(100, 20);
+            this.diEnd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.diEnd.TabIndex = 19;
+            // 
+            // diBegin
+            // 
+            // 
+            // 
+            // 
+            this.diBegin.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diBegin.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.diBegin.ButtonDropDown.Visible = true;
+            this.diBegin.ButtonFreeText.Checked = true;
+            this.diBegin.FreeTextEntryMode = true;
+            this.diBegin.Location = new System.Drawing.Point(426, 27);
+            // 
+            // 
+            // 
+            this.diBegin.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diBegin.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diBegin.MonthCalendar.BackgroundStyle.Class = "";
+            this.diBegin.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diBegin.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.diBegin.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diBegin.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.diBegin.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diBegin.MonthCalendar.TodayButtonVisible = true;
+            this.diBegin.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diBegin.Name = "diBegin";
+            this.diBegin.Size = new System.Drawing.Size(100, 20);
+            this.diBegin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.diBegin.TabIndex = 18;
             // 
             // colCDACode
             // 
@@ -692,6 +784,15 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colFinanceLinePeriodEnd.ReadOnly = true;
             this.colFinanceLinePeriodEnd.Width = 86;
             // 
+            // colHighestFinanceLine
+            // 
+            this.colHighestFinanceLine.DataPropertyName = "HighestFinanceLine";
+            dataGridViewCellStyle8.Format = "N2";
+            this.colHighestFinanceLine.DefaultCellStyle = dataGridViewCellStyle8;
+            this.colHighestFinanceLine.HeaderText = "最高保理预付款额度";
+            this.colHighestFinanceLine.Name = "colHighestFinanceLine";
+            this.colHighestFinanceLine.ReadOnly = true;
+            // 
             // colPaymentTerms
             // 
             this.colPaymentTerms.DataPropertyName = "PaymentTerms";
@@ -703,8 +804,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colPrice.DataPropertyName = "Price";
-            dataGridViewCellStyle8.Format = "p3";
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle9.Format = "p3";
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle9;
             this.colPrice.HeaderText = "总手续费率";
             this.colPrice.Name = "colPrice";
             this.colPrice.ReadOnly = true;
@@ -714,8 +815,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colIFPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colIFPrice.DataPropertyName = "IFPrice";
-            dataGridViewCellStyle9.Format = "p3";
-            this.colIFPrice.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.Format = "p3";
+            this.colIFPrice.DefaultCellStyle = dataGridViewCellStyle10;
             this.colIFPrice.HeaderText = "IF手续费率";
             this.colIFPrice.Name = "colIFPrice";
             this.colIFPrice.ReadOnly = true;
@@ -731,8 +832,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // colHandFee
             // 
             this.colHandFee.DataPropertyName = "HandFee";
-            dataGridViewCellStyle10.Format = "N2";
-            this.colHandFee.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle11.Format = "N2";
+            this.colHandFee.DefaultCellStyle = dataGridViewCellStyle11;
             this.colHandFee.HeaderText = "单据处理费";
             this.colHandFee.Name = "colHandFee";
             this.colHandFee.ReadOnly = true;
@@ -750,6 +851,13 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colIsSigned.HeaderText = "是否签回";
             this.colIsSigned.Name = "colIsSigned";
             this.colIsSigned.ReadOnly = true;
+            // 
+            // colCDASignDate
+            // 
+            this.colCDASignDate.DataPropertyName = "CDASignDate";
+            this.colCDASignDate.HeaderText = "签发日";
+            this.colCDASignDate.Name = "colCDASignDate";
+            this.colCDASignDate.ReadOnly = true;
             // 
             // colCreateUserName
             // 
@@ -785,6 +893,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCDAs)).EndInit();
             this.cmuCDAMgr.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.diEnd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diBegin)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -792,6 +902,9 @@ namespace CMBC.EasyFactor.CaseMgr
         #endregion
 
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCDA;
+        private DevComponents.DotNetBar.LabelX lblDate;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCDACode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
@@ -810,6 +923,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLine;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodBegin;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHighestFinanceLine;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentTerms;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
@@ -817,6 +931,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colHandFee;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCDAStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsSigned;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDASignDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;

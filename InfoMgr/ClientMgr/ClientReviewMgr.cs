@@ -184,32 +184,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvClientReviews_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            DataGridViewColumn column = this.dgvClientReviews.Columns[e.ColumnIndex];
-            if (column == colIsRecoarse)
-            {
-                Object originalData = e.Value;
-                if (originalData != null)
-                {
-                    bool result = (bool)originalData;
-                    if (result)
-                    {
-                        e.Value = "Y";
-                    }
-                    else
-                    {
-                        e.Value = "N";
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ExportClientReviews(object sender, EventArgs e)
         {
             if (this.dgvClientReviews.SelectedCells.Count == 0)
@@ -249,11 +223,22 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
             string clientReviewNo = this.tbClientReviewNo.Text;
             string clientName = this.tbClientName.Text;
+            string location = this.cbLocation.Text;
+            if (location == "全部")
+            {
+                location = string.Empty;
+            }
+
+            DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
+            DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
 
             context = new DBDataContext();
 
             var queryResult = context.ClientReviews.Where(c =>
                 c.ReviewNo.Contains(clientReviewNo)
+             && (c.Client.BranchCode==null?string.Empty:c.Client.Department.Location).Contains(location)
+             && (beginDate != this.diBegin.MinDate ? c.ReviewDate >= beginDate : true)
+             && (endDate != this.diEnd.MinDate ? c.ReviewDate <= endDate : true)
              && (c.Client.ClientNameCN.Contains(clientName) || c.Client.ClientNameEN.Contains(clientName)));
 
             this.bs.DataSource = queryResult;

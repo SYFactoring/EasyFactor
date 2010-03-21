@@ -70,6 +70,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.InitializeComponent();
             this.bs = new BindingSource();
             this.dgvFinanceLogs.DataSource = this.bs;
+            this.dgvFinanceLogs.AutoGenerateColumns = false;
             this.context = new DBDataContext();
             batch = context.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == batch.FinanceBatchNo);
             this.bs.DataSource = batch.InvoiceFinanceLogs;

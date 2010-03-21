@@ -79,6 +79,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.opInvoiceType = opInvoiceType;
             invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo);
             this.invoiceBindingSource.DataSource = invoice;
+            this.dgvFinanceLogs.AutoGenerateColumns = false;
             this.dgvPaymentLogs.AutoGenerateColumns = false;
             this.dgvRefundLogs.AutoGenerateColumns = false;
 
@@ -94,6 +95,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.disputeReasonCheckedListBox.DisplayMember = "Reason";
             this.disputeReasonCheckedListBox.ValueMember = "Index";
 
+            this.dgvFinanceLogs.DataSource = invoice.InvoiceFinanceLogs;
             this.dgvPaymentLogs.DataSource = invoice.InvoicePaymentLogs;
             List<InvoiceRefundLog> refundLogs = new List<InvoiceRefundLog>();
             foreach (InvoiceFinanceLog financeLog in invoice.InvoiceFinanceLogs)

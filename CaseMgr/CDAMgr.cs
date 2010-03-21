@@ -358,13 +358,14 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void QueryCDAs(object sender, EventArgs e)
         {
-            string buyerName = tbBuyerName.Text;
-            string sellerName = tbSellerName.Text;
+            string clientName = tbClientName.Text;
             string factorName = tbFactorName.Text;
             string contractCode = tbContractCode.Text;
             string status = this.cbCheckStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
             bool isCDAChecked = this.cbIsCDA.CheckState == System.Windows.Forms.CheckState.Checked;
+            DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
+            DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
 
             context = new DBDataContext();
 
@@ -373,9 +374,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 let contracts = cda.Case.SellerClient.Contracts
                 where contractCode == string.Empty ? true : contracts.Any(con => con.ContractCode.Contains(contractCode))
                 let seller = cda.Case.SellerClient
-                where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN.Contains(sellerName)
+                where seller.ClientNameCN.Contains(clientName) || seller.ClientNameEN.Contains(clientName)
                 let buyer = cda.Case.BuyerClient
-                where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN.Contains(buyerName)
+                where buyer.ClientNameCN.Contains(clientName) || buyer.ClientNameEN.Contains(clientName)
                 let sellerfactor = cda.Case.SellerFactor
                 where sellerfactor.CompanyNameCN.Contains(factorName) || sellerfactor.CompanyNameEN.Contains(factorName)
                 let buyerfactor = cda.Case.BuyerFactor
@@ -384,6 +385,9 @@ namespace CMBC.EasyFactor.CaseMgr
                  (status != string.Empty ? cda.CDAStatus == status : true)
                  && cda.CreateUserName.Contains(createUserName)
                  && (isCDAChecked == true ? cda.IsSigned == isCDAChecked : true)
+                 && (beginDate != this.diBegin.MinDate ? cda.CDASignDate >= beginDate : true)
+                 && (endDate != this.diEnd.MinDate ? cda.CDASignDate <= endDate : true)
+
                 select cda;
 
             this.bs.DataSource = queryResult;

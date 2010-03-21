@@ -16,20 +16,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.ButtonX btnReset;
         private System.Windows.Forms.ContextMenuStrip cmuDeptMgr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContact;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDomain;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaintainManager;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colManager;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMarketManager;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -538,6 +524,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colCommissionIncome.HeaderText = "保理费收入";
             this.colCommissionIncome.Name = "colCommissionIncome";
             this.colCommissionIncome.ReadOnly = true;
+            this.colCommissionIncome.Visible = false;
             // 
             // colNetInterestIncome
             // 
@@ -547,6 +534,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colNetInterestIncome.HeaderText = "净利息收入";
             this.colNetInterestIncome.Name = "colNetInterestIncome";
             this.colNetInterestIncome.ReadOnly = true;
+            this.colNetInterestIncome.Visible = false;
             // 
             // colMarginIncome
             // 
@@ -556,6 +544,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colMarginIncome.HeaderText = "代付利差收入";
             this.colMarginIncome.Name = "colMarginIncome";
             this.colMarginIncome.ReadOnly = true;
+            this.colMarginIncome.Visible = false;
             // 
             // colTotalIncome
             // 
@@ -565,6 +554,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colTotalIncome.HeaderText = "总收入";
             this.colTotalIncome.Name = "colTotalIncome";
             this.colTotalIncome.ReadOnly = true;
+            this.colTotalIncome.Visible = false;
             // 
             // DepartmentMgr
             // 
@@ -586,5 +576,20 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDomain;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMarketManager;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaintainManager;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colManager;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
     }
 }
