@@ -636,6 +636,7 @@ namespace CMBC.EasyFactor
         {
             if (this.WindowState == FormWindowState.Minimized)
             {
+                this.notifyIcon.Visible = true;
                 this.ShowInTaskbar = false;
             }
         }
@@ -1070,6 +1071,7 @@ namespace CMBC.EasyFactor
         {
             this.WindowState = FormWindowState.Maximized;
             this.ShowInTaskbar = true;
+            this.notifyIcon.Visible = false;
         }
 
         /// <summary>

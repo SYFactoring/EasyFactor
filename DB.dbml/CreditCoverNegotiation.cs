@@ -65,17 +65,6 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public string OPName
-        {
-            get
-            {
-                return this.Case.OPName;
-            }
-        }
-
-        /// <summary>
-        /// Gets
-        /// </summary>
         public string OwnerDept
         {
             get
