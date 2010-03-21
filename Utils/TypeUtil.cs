@@ -219,7 +219,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="e"></param>
         public static void ParsePercentToFloat(object sender, ConvertEventArgs e)
         {
-            if (e.DesiredType == typeof(System.Nullable<double>) && e.Value != null && e.Value.ToString() != string.Empty)
+            if ((e.DesiredType == typeof(double) || e.DesiredType == typeof(System.Nullable<double>)) && e.Value != null && e.Value.ToString() != string.Empty)
             {
                 double result;
                 bool isOK = Double.TryParse(e.Value.ToString(), out result);

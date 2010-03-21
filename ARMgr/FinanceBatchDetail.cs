@@ -228,5 +228,57 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteLog(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
+            if (this.dgvFinanceLogs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            InvoiceFinanceLog log = (InvoiceFinanceLog)this.bs.List[this.dgvFinanceLogs.SelectedRows[0].Index];
+            if (log.InvoiceRefundLogs.Count > 0)
+            {
+                DialogResult dr = MessageBoxEx.Show("此笔融资已还款，是否确认删除此笔融资以及关联还款记录", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
+            try
+            {
+                Invoice invoice = log.Invoice;
+                log.Invoice = null;
+                foreach (InvoiceRefundLog refundLog in log.InvoiceRefundLogs)
+                {
+                    refundLog.InvoiceFinanceLog = null;
+                }
+
+                context.InvoiceRefundLogs.DeleteAllOnSubmit(log.InvoiceRefundLogs);
+                invoice.CaculateRefund();
+                invoice.CaculateFinance();
+                context.InvoiceFinanceLogs.DeleteOnSubmit(log);
+                log.InvoiceFinanceBatch.CheckStatus = "未复核";
+                context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBoxEx.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.dgvFinanceLogs.Rows.RemoveAt(this.dgvFinanceLogs.SelectedRows[0].Index);
+        }
     }
 }

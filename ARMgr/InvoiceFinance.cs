@@ -592,6 +592,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 InvoiceFinanceLog log = new InvoiceFinanceLog();
                 log.Invoice = invoice;
+                logs.Add(log);
             }
 
             this.logsBindingSource.DataSource = logs;
@@ -717,7 +718,7 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.FinanceBatchNo = InvoiceFinanceBatch.GenerateFinanceBatchNo(batch.FinancePeriodBegin);
             }
 
-            for (int i = 0; i < logList.Count; i++)
+            for (int i = 0; i < this.logsBindingSource.List.Count; i++)
             {
                 if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
@@ -730,6 +731,8 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batch.InvoiceFinanceLogs.Count == 0)
             {
+                this._case.InvoiceFinanceBatches.Remove(batch);
+                batch.FinanceBatchNo = null;
                 return;
             }
 
