@@ -33,6 +33,7 @@ namespace CMBC.EasyFactor.CaseMgr
         public CreditCoverNegMgr()
         {
             InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.dgvCreditCoverNegs.AutoGenerateColumns = false;
             this.bs = new BindingSource();
             this.dgvCreditCoverNegs.DataSource = this.bs;

@@ -86,6 +86,7 @@ namespace CMBC.EasyFactor.CaseMgr
         public CDAMgr(OpCDAType opCDAType)
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.dgvCDAs.AutoGenerateColumns = false;
             this.bs = new BindingSource();
             this.dgvCDAs.DataSource = this.bs;

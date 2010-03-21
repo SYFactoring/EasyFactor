@@ -109,6 +109,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         public DepartmentMgr()
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.bs = new BindingSource();
             this.dgvDepts.DataSource = this.bs;
             this.dgvDepts.AutoGenerateColumns = false;

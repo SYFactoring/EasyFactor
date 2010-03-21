@@ -144,6 +144,7 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoiceMgr(OpInvoiceType opInvoiceType)
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.bs = new BindingSource();
             this.dgvInvoices.AutoGenerateColumns = false;
             this.dgvInvoices.DataSource = bs;

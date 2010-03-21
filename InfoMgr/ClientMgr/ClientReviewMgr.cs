@@ -58,6 +58,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientReviewMgr(OpClientReviewMgrType opType)
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.bs = new BindingSource();
             this.opType = opType;
             this.dgvClientReviews.DataSource = this.bs;

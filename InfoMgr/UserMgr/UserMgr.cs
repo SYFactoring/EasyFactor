@@ -37,6 +37,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         public UserMgr()
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.bs = new BindingSource();
             this.dgvUsers.AutoGenerateColumns = false;
             this.dgvUsers.DataSource = this.bs;

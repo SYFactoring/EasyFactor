@@ -78,6 +78,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientCreditLineMgr(OpClientCreditMgrType opType)
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.bs = new BindingSource();
             this.opType = opType;
             this.dgvClientCreditLines.DataSource = this.bs;

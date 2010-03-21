@@ -21,6 +21,7 @@ namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
         public ExchangeMgr()
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.dgvExchange.AutoGenerateColumns = false;
             DBDataContext context = new DBDataContext();
             context.ObjectTrackingEnabled = false;

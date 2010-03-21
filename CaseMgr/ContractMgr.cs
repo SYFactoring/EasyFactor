@@ -80,6 +80,7 @@ namespace CMBC.EasyFactor.CaseMgr
         public ContractMgr()
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.dgvContracts.AutoGenerateColumns = false;
             this.bs = new BindingSource();
             this.dgvContracts.DataSource = bs;

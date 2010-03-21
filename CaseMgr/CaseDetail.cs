@@ -22,8 +22,12 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CaseDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (2)
+        #region Fields (3)
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context;
         /// <summary>
         /// Operation type of Case
         /// </summary>
@@ -32,11 +36,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// Operation type of Credit Cover Negotiation
         /// </summary>
         private OpCreditCoverNegType opCreditCoverNegType;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context;
 
         #endregion Fields
 
@@ -219,9 +218,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Constructors
 
-        #region Methods (26)
+        #region Methods (24)
 
-        // Private Methods (26) 
+        // Private Methods (24) 
 
         /// <summary>
         /// Case operation type changed event handler
@@ -321,6 +320,32 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     curCase.SellerClient = null;
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            Case curCase = (Case)this.caseBindingSource.DataSource;
+            string[] caseTypes = new string[] { "出口保理", "进口保理", "国际信保保理", "国内信保保理时" };
+            if (caseTypes.Contains(curCase.TransactionType))
+            {
+                if (this.tbCaseFactorCode.Text != string.Empty)
+                {
+                    e.IsValid = true;
+                }
+                else
+                {
+                    e.IsValid = false;
+                }
+            }
+            else
+            {
+                e.IsValid = false;
             }
         }
 

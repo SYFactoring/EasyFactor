@@ -1049,6 +1049,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             if (this.opContractType == OpContractType.NEW_CONTRACT)
             {
                 bool isAddOK = true;
+
+                Contract oldContract = this.context.Contracts.SingleOrDefault(c => c.ContractCode == contract.ContractCode);
+                if (oldContract != null)
+                {
+                    MessageBoxEx.Show("该合同编号已存在，请重新编码", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
                 try
                 {
                     contract.Client = client;

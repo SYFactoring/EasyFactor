@@ -104,6 +104,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientMgr()
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.bs = new BindingSource();
             this.dgvClients.AutoGenerateColumns = false;
             this.dgvClients.DataSource = this.bs;

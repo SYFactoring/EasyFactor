@@ -40,6 +40,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         public FactorMgr()
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.bs = new BindingSource();
             this.dgvFactors.DataSource = this.bs;
             this.dgvFactors.AutoGenerateColumns = false;

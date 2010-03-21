@@ -101,6 +101,7 @@ namespace CMBC.EasyFactor.CaseMgr
         public CaseMgr()
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.dgvCases.AutoGenerateColumns = false;
             this.bs = new BindingSource();
             this.dgvCases.DataSource = this.bs;

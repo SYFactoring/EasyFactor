@@ -106,6 +106,7 @@ namespace CMBC.EasyFactor.ARMgr
         public AssignBatchMgr(OpBatchType batchType)
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.dgvBatches.AutoGenerateColumns = false;
             this.bs = new BindingSource();
             this.dgvBatches.DataSource = this.bs;

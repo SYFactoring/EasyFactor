@@ -74,6 +74,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         public FactorCreditLineMgr()
         {
             this.InitializeComponent();
+            this.ImeMode = ImeMode.OnHalf;
             this.bs = new BindingSource();
             this.dgvFactorCreditLines.DataSource = this.bs;
             this.dgvFactorCreditLines.AutoGenerateColumns = false;
