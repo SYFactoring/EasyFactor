@@ -107,7 +107,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinancePeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinancePeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInterestType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCostRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -408,7 +407,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinancePeriodBegin,
             this.colFinancePeriodEnd,
             this.colFinanceRate,
-            this.colInterestType,
             this.colFactor,
             this.colCostRate,
             this.colCreateUserName,
@@ -569,13 +567,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceRate.Name = "colFinanceRate";
             this.colFinanceRate.ReadOnly = true;
             // 
-            // colInterestType
-            // 
-            this.colInterestType.DataPropertyName = "InterestType";
-            this.colInterestType.HeaderText = "计息方式";
-            this.colInterestType.Name = "colInterestType";
-            this.colInterestType.ReadOnly = true;
-            // 
             // colFactor
             // 
             this.colFactor.DataPropertyName = "Factor";
@@ -588,7 +579,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCostRate.DataPropertyName = "CostRate";
             dataGridViewCellStyle6.Format = "p";
             this.colCostRate.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colCostRate.HeaderText = "代付费率";
+            this.colCostRate.HeaderText = "成本利率";
             this.colCostRate.Name = "colCostRate";
             this.colCostRate.ReadOnly = true;
             // 
@@ -661,7 +652,6 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinancePeriodBegin;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinancePeriodEnd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceRate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInterestType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactor;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCostRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;

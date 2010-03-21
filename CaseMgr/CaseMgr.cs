@@ -75,7 +75,7 @@ namespace CMBC.EasyFactor.CaseMgr
             if (opCaseType == OpCaseType.ENABLE_CASE)
             {
                 this.cbCaseMark.Text = "启动案";
-                this.QueryCase(null, null);
+                //this.QueryCase(null, null);
             }
             else if (opCaseType == OpCaseType.APPLICATION_CASE)
             {

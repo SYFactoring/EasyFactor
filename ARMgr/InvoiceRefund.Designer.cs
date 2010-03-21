@@ -449,7 +449,7 @@
             this.invoiceBindingNavigator.TabIndex = 1;
             this.invoiceBindingNavigator.Text = "bindingNavigator1";
             // 
-            // invoiceBindingSource
+            // logsBindingSource
             // 
             this.logsBindingSource.DataSource = typeof(System.Data.Linq.EntitySet<CMBC.EasyFactor.DB.dbml.Invoice>);
             // 
@@ -520,7 +520,7 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // dgvInvoices
+            // dgvLogs
             // 
             this.dgvLogs.AllowUserToAddRows = false;
             this.dgvLogs.AllowUserToDeleteRows = false;
@@ -557,7 +557,7 @@
             this.dgvLogs.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvLogs.Location = new System.Drawing.Point(0, 106);
-            this.dgvLogs.Name = "dgvInvoices";
+            this.dgvLogs.Name = "dgvLogs";
             this.dgvLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvLogs.Size = new System.Drawing.Size(1069, 420);
             this.dgvLogs.TabIndex = 2;
@@ -615,11 +615,10 @@
             // 
             // colCheckBox
             // 
-            this.colCheckBox.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCheckBox.Frozen = true;
             this.colCheckBox.HeaderText = "";
             this.colCheckBox.Name = "colCheckBox";
-            this.colCheckBox.Width = 5;
+            this.colCheckBox.Width = 20;
             // 
             // colInvoiceNo
             // 
@@ -712,6 +711,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLogRefundAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
+
 
 
     }

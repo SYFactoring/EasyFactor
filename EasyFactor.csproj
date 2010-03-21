@@ -618,6 +618,7 @@
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Invoice.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoiceAssignBatch.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoiceFinanceBatch.datasource" />
+    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoiceFinanceLog.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoicePaymentBatch.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoicePaymentLog.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoiceRefundBatch.datasource" />

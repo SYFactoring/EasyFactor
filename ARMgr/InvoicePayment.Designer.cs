@@ -622,11 +622,10 @@
             // 
             // colCheckBox
             // 
-            this.colCheckBox.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCheckBox.Frozen = true;
             this.colCheckBox.HeaderText = "";
             this.colCheckBox.Name = "colCheckBox";
-            this.colCheckBox.Width = 5;
+            this.colCheckBox.Width = 20;
             // 
             // colInvoiceNo
             // 

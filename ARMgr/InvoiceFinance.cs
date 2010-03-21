@@ -583,12 +583,18 @@ namespace CMBC.EasyFactor.ARMgr
             financeBatch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = financeBatch;
 
-            var logsResult = from log in context.InvoiceFinanceLogs
-                              let i = log.Invoice
-                              where i.InvoiceAssignBatch.CaseCode == this._case.CaseCode && i.IsFlaw == false && i.InvoiceAssignBatch.CheckStatus == "已复核" && (i.AssignAmount - i.PaymentAmount.GetValueOrDefault() > 0.0001) && (i.FinanceAmount.HasValue == false || i.FinanceAmount < 0.0001)
-                              select log;
+            var invoiceResult = from invoice in context.Invoices
+                                where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.IsFlaw == false && invoice.InvoiceAssignBatch.CheckStatus == "已复核" && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > 0.0001) && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount < 0.0001)
+                                select invoice;
 
-            this.logsBindingSource.DataSource = logsResult;
+            List<InvoiceFinanceLog> logs = new List<InvoiceFinanceLog>();
+            foreach (Invoice invoice in invoiceResult)
+            {
+                InvoiceFinanceLog log = new InvoiceFinanceLog();
+                log.Invoice = invoice;
+            }
+
+            this.logsBindingSource.DataSource = logs;
             this.StatBatch();
         }
 

@@ -306,9 +306,9 @@ namespace CMBC.EasyFactor.ARMgr
                 this.assignTypeTextBox.Text = cda.AssignType;
                 this.tbPaymentTerms.Text = cda.PaymentTerms;
 
-                this.priceTextBox.Text = String.Format("{0:P2}", cda.Price);
-                this.eFPriceTextBox.Text = String.Format("{0:P2}", cda.EFPrice);
-                this.iFPriceTextBox.Text = String.Format("{0:P2}", cda.IFPrice);
+                this.priceTextBox.Text = String.Format("{0:P3}", cda.Price);
+                this.eFPriceTextBox.Text = String.Format("{0:P3}", cda.EFPrice);
+                this.iFPriceTextBox.Text = String.Format("{0:P3}", cda.IFPrice);
                 this.handFeeCurrTextBox.Text = cda.HandFeeCurr;
                 this.handFeeTextBox.Text = String.Format("{0:N}", cda.HandFee);
                 this.commissionTypeTextBox.Text = cda.CommissionType;
