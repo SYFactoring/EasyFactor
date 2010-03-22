@@ -108,13 +108,13 @@ namespace CMBC.EasyFactor.ARMgr
             }
             if (paymentType == OpPaymentType.CREDIT_NOTE_PAYMENT)
             {
-                colCreditNoteDate2.Visible = true;
-                colCreditNoteNo2.Visible = true;
+                colCreditNoteDate.Visible = true;
+                colCreditNoteNo.Visible = true;
             }
             else
             {
-                colCreditNoteDate2.Visible = false;
-                colCreditNoteNo2.Visible = false;
+                colCreditNoteDate.Visible = false;
+                colCreditNoteNo.Visible = false;
             }
 
             colCheckBox.ReadOnly = false;
@@ -268,7 +268,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvLogs.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colCreditNoteDate2)
+            if (col == colAssignDate || col == colDueDate || col == colCreditNoteDate)
             {
                 DateTime date = (DateTime)e.Value;
                 e.Value = date.ToString("yyyyMMdd");
@@ -296,7 +296,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvLogs.Columns[e.ColumnIndex];
-            if (col == colCreditNoteDate2)
+            if (col == colCreditNoteDate)
             {
                 string str = (string)e.Value;
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
@@ -317,7 +317,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvLogs.Columns[e.ColumnIndex];
-            if (col == colCreditNoteDate2)
+            if (col == colCreditNoteDate)
             {
                 string str = (string)e.FormattedValue;
                 DateTime result;
@@ -418,15 +418,20 @@ namespace CMBC.EasyFactor.ARMgr
 
             ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_PAYMENT_BY_BATCH, context);
             importForm.ShowDialog(this);
-            IList invoiceList = importForm.ImportedList;
-            if (invoiceList != null)
+            List<InvoicePaymentLog> logList = (List<InvoicePaymentLog>)importForm.ImportedList;
+            if (logList != null)
             {
                 for (int i = 0; i < this.logsBindingSource.List.Count; i++)
                 {
                     DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvLogs.Rows[i].Cells[0];
                     cell.Value = 0;
                     InvoicePaymentLog oldLog = (InvoicePaymentLog)this.logsBindingSource.List[i];
-                    if (invoiceList.Contains(oldLog) && TypeUtil.GreaterZero(oldLog.PaymentAmount))
+
+                    InvoicePaymentLog newLog = logList.SingleOrDefault(log => log.InvoiceNo2 == oldLog.InvoiceNo2);
+                    oldLog.PaymentAmount = newLog.PaymentAmount;
+                    oldLog.Comment = newLog.Comment;
+
+                    if (TypeUtil.GreaterZero(oldLog.PaymentAmount))
                     {
                         cell.Value = 1;
                     }
@@ -479,12 +484,24 @@ namespace CMBC.EasyFactor.ARMgr
             batch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = batch;
 
-            var queryResult = from log in context.InvoicePaymentLogs
-                              let invoice = log.Invoice
-                              where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.InvoiceAssignBatch.CheckStatus == "已复核" && (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.0001)
-                              select log;
+            var queryResult = from invoice in context.Invoices
+                              where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.InvoiceAssignBatch.CheckStatus == "已复核" && (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.01)
+                              select invoice;
 
-            this.logsBindingSource.DataSource = queryResult;
+            List<InvoicePaymentLog> logs = new List<InvoicePaymentLog>();
+            foreach (Invoice invoice in queryResult)
+            {
+                InvoicePaymentLog log = new InvoicePaymentLog(invoice);
+                if (paymentType == OpPaymentType.CREDIT_NOTE_PAYMENT)
+                {
+                    CreditNote note = new CreditNote();
+                    log.CreditNote = note;
+                }
+
+                logs.Add(log);
+            }
+
+            this.logsBindingSource.DataSource = logs;
             this.StatBatch();
         }
 
@@ -530,8 +547,11 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 InvoicePaymentLog log = (InvoicePaymentLog)this.logsBindingSource.List[rowIndex];
                 log.PaymentAmount = 0;
-                log.CreditNoteDate2 = null;
-                log.CreditNoteNo2 = null;
+                if (log.CreditNote != null)
+                {
+                    log.CreditNoteDate = default(DateTime);
+                    log.CreditNoteNo = null;
+                }
             }
         }
 
@@ -572,6 +592,7 @@ namespace CMBC.EasyFactor.ARMgr
             InvoicePaymentBatch batch = (InvoicePaymentBatch)this.batchBindingSource.DataSource;
             List<InvoicePaymentLog> logList = new List<InvoicePaymentLog>();
             List<Invoice> invoiceList = new List<Invoice>();
+
             try
             {
                 batch.Case = this._case;
@@ -585,28 +606,8 @@ namespace CMBC.EasyFactor.ARMgr
                     if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                     {
                         InvoicePaymentLog log = (InvoicePaymentLog)this.logsBindingSource.List[i];
+                        log.Invoice = context.Invoices.SingleOrDefault(invoice => invoice.InvoiceNo == log.InvoiceNo2);
                         logList.Add(log);
-
-                        CreditNote creditNote = null;
-                        if (log.CreditNoteNo2 != null && log.CreditNoteNo2 != string.Empty)
-                        {
-                            creditNote = context.CreditNotes.SingleOrDefault(c => c.CreditNoteNo == log.CreditNoteNo2);
-                            if (creditNote == null)
-                            {
-                                creditNote = new CreditNote();
-                                creditNote.CreditNoteNo = log.CreditNoteNo2;
-                                if (log.CreditNoteDate2.HasValue)
-                                {
-                                    creditNote.CreditNoteDate = log.CreditNoteDate2.Value;
-                                }
-                            }
-                        }
-
-                        if (creditNote != null)
-                        {
-                            log.CreditNote = creditNote;
-                        }
-
                         log.InvoicePaymentBatch = batch;
                         log.Invoice.CaculatePayment();
 
@@ -629,7 +630,8 @@ namespace CMBC.EasyFactor.ARMgr
                 foreach (InvoicePaymentLog log in logList)
                 {
                     Invoice invoice = log.Invoice;
-                    invoice.InvoicePaymentLogs.Remove(log);
+                    log.Invoice = null;
+                    log.InvoicePaymentBatch = null;
                     invoice.CaculatePayment();
                 }
 
@@ -700,7 +702,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    totalPayment += ((InvoicePaymentLog)logList[i]).PaymentAmount;
+                    totalPayment += ((InvoicePaymentLog)logList[i]).PaymentAmount.GetValueOrDefault();
                 }
             }
 
@@ -727,19 +729,19 @@ namespace CMBC.EasyFactor.ARMgr
                         return false;
                     }
 
-                    if (TypeUtil.GreaterZero(log.PaymentAmount - log.Invoice.FinanceOutstanding))
-                    {
-                        if (batch.PaymentType == "贷项通知")
-                        {
-                            MessageBoxEx.Show("账款调整金额大于融资余额，需要求客户偿还融资款差额后，才可调整: " + log.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return false;
-                        }
-                        if (batch.PaymentType == "卖方回购")
-                        {
-                            MessageBoxEx.Show("回购金额大于融资余额，需要求客户偿还融资款差额后，才可调整: " + log.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return false;
-                        }
-                    }
+                    //if (TypeUtil.GreaterZero(log.PaymentAmount - log.FinanceOutstanding))
+                    //{
+                    //    if (batch.PaymentType == "贷项通知")
+                    //    {
+                    //        MessageBoxEx.Show("账款调整金额大于融资余额，需要求客户偿还融资款差额后，才可调整: " + log.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //        return false;
+                    //    }
+                    //    if (batch.PaymentType == "卖方回购")
+                    //    {
+                    //        MessageBoxEx.Show("回购金额大于融资余额，需要求客户偿还融资款差额后，才可调整: " + log.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //        return false;
+                    //    }
+                    //}
                 }
             }
             return true;

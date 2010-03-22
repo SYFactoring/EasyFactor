@@ -380,7 +380,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     double refund = 0;
                     foreach (InvoiceRefundLog refundLog in financeLog.InvoiceRefundLogs)
                     {
-                        refund += refundLog.RefundAmount;
+                        refund += refundLog.RefundAmount.GetValueOrDefault();
                     }
 
                     if (financeLog.InvoiceFinanceBatch.BatchCurrency != this.InvoiceCurrency)

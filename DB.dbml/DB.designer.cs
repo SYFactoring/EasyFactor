@@ -9705,7 +9705,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _InvoiceNo;
 		
-		private double _PaymentAmount;
+		private System.Nullable<double> _PaymentAmount;
 		
 		private string _CreditNoteNo;
 		
@@ -9727,7 +9727,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnPaymentBatchNoChanged();
     partial void OnInvoiceNoChanging(string value);
     partial void OnInvoiceNoChanged();
-    partial void OnPaymentAmountChanging(double value);
+    partial void OnPaymentAmountChanging(System.Nullable<double> value);
     partial void OnPaymentAmountChanged();
     partial void OnCreditNoteNoChanging(string value);
     partial void OnCreditNoteNoChanged();
@@ -9812,7 +9812,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_PaymentAmount", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
-		public double PaymentAmount
+		public System.Nullable<double> PaymentAmount
 		{
 			get
 			{
@@ -12413,7 +12413,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private int _FinanceLogID;
 		
-		private double _RefundAmount;
+		private System.Nullable<double> _RefundAmount;
 		
 		private string _Comment;
 		
@@ -12431,7 +12431,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnRefundBatchNoChanged();
     partial void OnFinanceLogIDChanging(int value);
     partial void OnFinanceLogIDChanged();
-    partial void OnRefundAmountChanging(double value);
+    partial void OnRefundAmountChanging(System.Nullable<double> value);
     partial void OnRefundAmountChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
@@ -12513,7 +12513,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_RefundAmount", DbType="Float NOT NULL")]
-		public double RefundAmount
+		public System.Nullable<double> RefundAmount
 		{
 			get
 			{

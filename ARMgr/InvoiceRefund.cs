@@ -684,7 +684,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     //totalPayment += ((InvoiceRefundLog)refundLogList[i]).PaymentAmount.GetValueOrDefault();
-                    totalRefund += ((InvoiceRefundLog)refundLogList[i]).RefundAmount;
+                    totalRefund += ((InvoiceRefundLog)refundLogList[i]).RefundAmount.GetValueOrDefault();
                 }
             }
 

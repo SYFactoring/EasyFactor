@@ -2554,16 +2554,22 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("发票号错误: " + invoiceNo);
                         }
 
-                        InvoicePaymentLog log = new InvoicePaymentLog();
-                        log.Invoice = invoice;
+                        InvoicePaymentLog log = new InvoicePaymentLog(invoice);
                         column++;
-                        log.PaymentAmount = (double)valueArray[row, column++];
+                        log.PaymentAmount = (double?)valueArray[row, column++];
                         log.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
                         if (valueArray.GetUpperBound(1) > 4)
                         {
-                            log.CreditNoteNo2 = String.Format("{0:G}", valueArray[row, column++]);
-                            log.CreditNoteDate2 = (System.Nullable<DateTime>)valueArray[row, column++];
+                            string creditNoteNo = String.Format("{0:G}", valueArray[row, column++]);
+                            DateTime? creditNoteDate = (DateTime?)valueArray[row, column++];
+                            if (creditNoteDate.HasValue)
+                            {
+                                CreditNote note = new CreditNote();
+                                note.CreditNoteNo = creditNoteNo;
+                                note.CreditNoteDate = creditNoteDate.Value;
+                                log.CreditNote = note;
+                            }
                         }
 
                         logList.Add(log);

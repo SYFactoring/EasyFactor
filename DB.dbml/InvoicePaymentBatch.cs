@@ -50,7 +50,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 double result = 0;
                 foreach (InvoicePaymentLog paymentLog in this.InvoicePaymentLogs)
                 {
-                    result += paymentLog.PaymentAmount;
+                    result += paymentLog.PaymentAmount.GetValueOrDefault();
                 }
 
                 return result;

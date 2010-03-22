@@ -912,7 +912,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.DueDate;
                     datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
                     //融资批次
-                    if (invoice.InvoiceFinanceLogs.Count >0 )
+                    if (invoice.InvoiceFinanceLogs.Count > 0)
                     {
                         column = 15;
                         InvoiceFinanceLog log = invoice.InvoiceFinanceLogs[0];
@@ -1457,12 +1457,15 @@ namespace CMBC.EasyFactor.Utils
 
                     column = 1;
                     InvoicePaymentLog log = (InvoicePaymentLog)exportData[row];
-                    datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo;
+                    datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo2;
                     datasheet.Cells[row + 2, column++] = log.AssignOutstanding;
                     datasheet.Cells[row + 2, column++] = log.PaymentAmount;
                     datasheet.Cells[row + 2, column++] = log.Comment;
-                    datasheet.Cells[row + 2, column++] = "'" + log.CreditNoteNo2;
-                    datasheet.Cells[row + 2, column++] = log.CreditNoteDate2;
+                    if (log.CreditNote != null)
+                    {
+                        datasheet.Cells[row + 2, column++] = "'" + log.CreditNoteNo;
+                        datasheet.Cells[row + 2, column++] = log.CreditNoteDate;
+                    }
 
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }

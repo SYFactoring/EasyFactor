@@ -208,7 +208,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     foreach (InvoiceRefundLog refundLog in InvoiceRefundLogs)
                     {
                         int period = ((refundLog.InvoiceRefundBatch.RefundDate < InvoiceFinanceBatch.FinancePeriodEnd ? refundLog.InvoiceRefundBatch.RefundDate : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest += refundLog.RefundAmount * (InvoiceFinanceBatch.FinanceRate) / 360 * period;
+                        interest += refundLog.RefundAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate) / 360 * period;
                     }
 
                     if (TypeUtil.GreaterZero(FinanceOutstanding))
@@ -313,7 +313,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     foreach (InvoiceRefundLog refundLog in InvoiceRefundLogs)
                     {
                         int period = ((refundLog.InvoiceRefundBatch.RefundDate < InvoiceFinanceBatch.FinancePeriodEnd ? refundLog.InvoiceRefundBatch.RefundDate : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest += refundLog.RefundAmount * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
+                        interest += refundLog.RefundAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
                     }
 
                     if (TypeUtil.GreaterZero(FinanceOutstanding))
