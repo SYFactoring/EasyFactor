@@ -19,6 +19,7 @@ namespace CMBC.EasyFactor.DB.dbml
         #region Properties (13)
 
         public InvoiceFinanceLog(Invoice invoice)
+            : this()
         {
             this.InvoiceNo2 = invoice.InvoiceNo;
             this.AssignAmount2 = invoice.AssignAmount;
@@ -28,8 +29,8 @@ namespace CMBC.EasyFactor.DB.dbml
             this.AssignDate2 = invoice.AssignDate;
             this.InvoiceFinanceAmount2 = invoice.FinanceAmount;
             this.InvoiceFinanceOutstanding2 = invoice.FinanceOutstanding;
-            this.Commission2 = invoice.Commission;
-            this.CommissionDate2 = invoice.CommissionDate;
+            this.Commission = invoice.Commission;
+            this.CommissionDate = invoice.CommissionDate;
         }
 
         public string InvoiceNo2
@@ -41,22 +42,36 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public DateTime FinanceDate
+        public DateTime? FinanceDate
         {
             get
             {
-                return this.InvoiceFinanceBatch.FinancePeriodBegin;
+                if (this.InvoiceFinanceBatch != null)
+                {
+                    return this.InvoiceFinanceBatch.FinancePeriodBegin;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime FinanceDueDate
+        public DateTime? FinanceDueDate
         {
             get
             {
-                return this.InvoiceFinanceBatch.FinancePeriodEnd;
+                if (this.InvoiceFinanceBatch != null)
+                {
+                    return this.InvoiceFinanceBatch.FinancePeriodEnd;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -132,46 +147,16 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public double? Commission2
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public double? Commission
         {
-            get
-            {
-                return this.Invoice.Commission;
-            }
-            set
-            {
-                this.Invoice.Commission = value;
-            }
-        }
-
-        public DateTime? CommissionDate2
-        {
             get;
             set;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public DateTime? CommissionDate
         {
-            get
-            {
-                return this.Invoice.CommissionDate;
-            }
-            set
-            {
-                this.Invoice.CommissionDate = value;
-            }
+            get;
+            set;
         }
 
         public DateTime? DueDate2
@@ -229,7 +214,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     if (TypeUtil.GreaterZero(FinanceOutstanding))
                     {
                         int period = ((DateTime.Today.Date < InvoiceFinanceBatch.FinancePeriodEnd ? DateTime.Today.Date : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest += FinanceAmount * (InvoiceFinanceBatch.FinanceRate) / 360 * period;
+                        interest += FinanceAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate) / 360 * period;
                     }
 
                     if (InvoiceFinanceBatch.BatchCurrency != "CNY")
@@ -334,7 +319,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     if (TypeUtil.GreaterZero(FinanceOutstanding))
                     {
                         int period = ((DateTime.Today.Date < InvoiceFinanceBatch.FinancePeriodEnd ? DateTime.Today.Date : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest += FinanceAmount * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
+                        interest += FinanceAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
                     }
 
                     if (InvoiceFinanceBatch.BatchCurrency != "CNY")
@@ -347,20 +332,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 return interest;
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="action"></param>
-        partial void OnValidate(System.Data.Linq.ChangeAction action)
-        {
-            if (action == ChangeAction.Insert)
-            {
-
-            }
-        }
-
-
 
         /// <summary>
         /// 
@@ -380,6 +351,25 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        partial void OnValidate(System.Data.Linq.ChangeAction action)
+        {
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
+            {
+                if (this.Commission.HasValue)
+                {
+                    this.Invoice.Commission = this.Commission;
+                }
+
+                if (this.CommissionDate.HasValue)
+                {
+                    this.Invoice.CommissionDate = this.CommissionDate;
+                }
+            }
+        }
         #endregion Properties
     }
 }

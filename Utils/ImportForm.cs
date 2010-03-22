@@ -1521,7 +1521,7 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
-            List<Invoice> invoiceList = new List<Invoice>();
+            List<InvoiceFinanceLog> logList = new List<InvoiceFinanceLog>();
 
             if (valueArray != null)
             {
@@ -1551,19 +1551,20 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         column++;
-                        invoice.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
-                        invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
-                        invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                        invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                        InvoiceFinanceLog log = new InvoiceFinanceLog(invoice);
+                        log.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
+                        log.Commission = (System.Nullable<double>)valueArray[row, column++];
+                        log.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        log.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
-                        invoiceList.Add(invoice);
+                        logList.Add(log);
                         result++;
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
                 }
                 catch (Exception e1)
                 {
-                    if (result != invoiceList.Count)
+                    if (result != logList.Count)
                     {
                         e1.Data["row"] = result;
                     }
@@ -1572,7 +1573,7 @@ namespace CMBC.EasyFactor.Utils
                 }
             }
 
-            this.ImportedList = invoiceList;
+            this.ImportedList = logList;
             worker.ReportProgress(100);
             this.workbook.Close(false, fileName, null);
             this.ReleaseResource();

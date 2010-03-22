@@ -18,7 +18,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double FinanceAmount
+        public double? FinanceAmount
         {
             get
             {

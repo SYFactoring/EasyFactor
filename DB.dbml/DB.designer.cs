@@ -12145,7 +12145,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _InvoiceNo;
 		
-		private double _FinanceAmount;
+		private System.Nullable<double> _FinanceAmount;
 		
 		private string _Comment;
 		
@@ -12165,7 +12165,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFinanceBatchNoChanged();
     partial void OnInvoiceNoChanging(string value);
     partial void OnInvoiceNoChanged();
-    partial void OnFinanceAmountChanging(double value);
+    partial void OnFinanceAmountChanging(System.Nullable<double> value);
     partial void OnFinanceAmountChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
@@ -12248,7 +12248,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_FinanceAmount", DbType="Float NOT NULL")]
-		public double FinanceAmount
+		public System.Nullable<double> FinanceAmount
 		{
 			get
 			{

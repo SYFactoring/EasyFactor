@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using System.Data.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.Controls;
@@ -148,7 +149,7 @@ namespace CMBC.EasyFactor.ARMgr
                 financeAmount = log.AssignOutstanding * this._case.ActiveCDA.FinanceProportion.Value;
             }
 
-            if (TypeUtil.EqualsZero(financeAmount))
+            if (!TypeUtil.GreaterZero(financeAmount))
             {
                 checkBoxCell.Value = 0;
                 return;
@@ -545,7 +546,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE_BY_BATCH, context);
             importForm.ShowDialog(this);
-            IList logList = importForm.ImportedList;
+            List<InvoiceFinanceLog> logList = (List<InvoiceFinanceLog>)importForm.ImportedList;
             if (logList != null)
             {
                 for (int i = 0; i < this.logsBindingSource.List.Count; i++)
@@ -553,7 +554,15 @@ namespace CMBC.EasyFactor.ARMgr
                     DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvLogs.Rows[i].Cells[0];
                     cell.Value = 0;
                     InvoiceFinanceLog oldLog = (InvoiceFinanceLog)this.logsBindingSource.List[i];
-                    if (logList.Contains(oldLog) && TypeUtil.GreaterZero(oldLog.FinanceAmount))
+
+                    InvoiceFinanceLog newLog = logList.SingleOrDefault(log => log.InvoiceNo2 == oldLog.InvoiceNo2);
+                    
+                    oldLog.FinanceAmount = newLog.FinanceAmount;
+                    oldLog.Commission = newLog.Commission;
+                    oldLog.CommissionDate = newLog.CommissionDate;
+                    oldLog.Comment = newLog.Comment;
+
+                    if (TypeUtil.GreaterZero(oldLog.FinanceAmount))
                     {
                         cell.Value = 1;
                     }
@@ -578,14 +587,28 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            if (!TypeUtil.GreaterZero(this._case.ActiveCDA.FinanceLineOutstanding))
+            {
+                MessageBoxEx.Show("该案件的预付款融资额度余额不足，不能融资", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!TypeUtil.GreaterZero(this._case.TotalFinanceOutstanding))
+            {
+                MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
             financeBatch.BatchCurrency = this._case.InvoiceCurrency;
             financeBatch.CreateUserName = App.Current.CurUser.Name;
             financeBatch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = financeBatch;
 
+            double financeProp = this._case.ActiveCDA.FinanceProportion.GetValueOrDefault();
+
             var invoiceResult = from invoice in context.Invoices
-                                where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.IsFlaw == false && invoice.InvoiceAssignBatch.CheckStatus == "已复核" && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > 0.0001) && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount < 0.0001)
+                                where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.IsFlaw == false && invoice.InvoiceAssignBatch.CheckStatus == "已复核" && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > 0.01) && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - invoice.AssignAmount * financeProp < -0.01)
                                 select invoice;
 
             List<InvoiceFinanceLog> logs = new List<InvoiceFinanceLog>();
@@ -700,7 +723,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     InvoiceFinanceLog log = (InvoiceFinanceLog)this.logsBindingSource.List[i];
-                    totalFinance += log.FinanceAmount;
+                    totalFinance += log.FinanceAmount.GetValueOrDefault();
                 }
             }
 
@@ -746,7 +769,8 @@ namespace CMBC.EasyFactor.ARMgr
                 foreach (InvoiceFinanceLog log in logList)
                 {
                     Invoice invoice = log.Invoice;
-                    invoice.InvoiceFinanceLogs.Remove(log);
+                    log.Invoice = null;
+                    log.InvoiceFinanceBatch = null;
                     invoice.CaculateFinance();
                 }
 
@@ -843,7 +867,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    totalFinance += ((InvoiceFinanceLog)logList[i]).FinanceAmount;
+                    totalFinance += ((InvoiceFinanceLog)logList[i]).FinanceAmount.GetValueOrDefault();
                     totalInterest += ((InvoiceFinanceLog)logList[i]).NetInterest;
                 }
             }

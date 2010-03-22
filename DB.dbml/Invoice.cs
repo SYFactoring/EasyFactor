@@ -93,18 +93,19 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                List<string> batches = new List<string>();
-                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                if (this.InvoiceFinanceLogs.Count > 0)
                 {
-                    if (!batches.Contains(log.FinanceBatchNo))
+                    List<string> batches = new List<string>();
+                    foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
                     {
-                        batches.Add(log.FinanceBatchNo);
+                        if (!batches.Contains(log.FinanceBatchNo))
+                        {
+                            batches.Add(log.FinanceBatchNo);
+                        }
                     }
-                }
 
-                if (batches.Count > 0)
-                {
                     return String.Join(";", batches.ToArray());
+
                 }
                 else
                 {
@@ -156,7 +157,6 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-
                 foreach (InvoiceFinanceLog financeLog in this.InvoiceFinanceLogs)
                 {
                     result += financeLog.GrossInterest;
@@ -185,7 +185,6 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-
                 foreach (InvoiceFinanceLog financeLog in this.InvoiceFinanceLogs)
                 {
                     result += financeLog.NetInterest;
@@ -291,7 +290,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
                 foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
                 {
-                    double finance = log.FinanceAmount;
+                    double finance = log.FinanceAmount.GetValueOrDefault();
                     if (log.InvoiceFinanceBatch.BatchCurrency != this.InvoiceCurrency)
                     {
                         double rate = Exchange.GetExchangeRate(log.InvoiceFinanceBatch.BatchCurrency, this.InvoiceCurrency);

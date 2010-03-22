@@ -730,13 +730,13 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    Invoice invoice = (Invoice)exportData[row];
-                    datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
-                    datasheet.Cells[row + 2, column++] = invoice.AssignOutstanding;
-                    datasheet.Cells[row + 2, column++] = invoice.FinanceAmount;
-                    datasheet.Cells[row + 2, column++] = invoice.Commission;
-                    datasheet.Cells[row + 2, column++] = invoice.CommissionDate;
-                    datasheet.Cells[row + 2, column++] = invoice.Comment;
+                    InvoiceFinanceLog log = (InvoiceFinanceLog)exportData[row];
+                    datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo2;
+                    datasheet.Cells[row + 2, column++] = log.AssignOutstanding;
+                    datasheet.Cells[row + 2, column++] = log.FinanceAmount;
+                    datasheet.Cells[row + 2, column++] = log.Commission;
+                    datasheet.Cells[row + 2, column++] = log.CommissionDate;
+                    datasheet.Cells[row + 2, column++] = log.Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
