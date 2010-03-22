@@ -345,7 +345,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             else
             {
-                e.IsValid = false;
+                e.IsValid = true;
             }
         }
 

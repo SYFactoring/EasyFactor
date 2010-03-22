@@ -18,6 +18,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using System.Data.Common;
 
     /// <summary>
     /// 
@@ -590,8 +591,7 @@ namespace CMBC.EasyFactor.ARMgr
             List<InvoiceFinanceLog> logs = new List<InvoiceFinanceLog>();
             foreach (Invoice invoice in invoiceResult)
             {
-                InvoiceFinanceLog log = new InvoiceFinanceLog();
-                log.Invoice = invoice;
+                InvoiceFinanceLog log = new InvoiceFinanceLog(invoice);
                 logs.Add(log);
             }
 
@@ -720,9 +720,10 @@ namespace CMBC.EasyFactor.ARMgr
 
             for (int i = 0; i < this.logsBindingSource.List.Count; i++)
             {
+                InvoiceFinanceLog log = (InvoiceFinanceLog)this.logsBindingSource.List[i];
                 if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    InvoiceFinanceLog log = (InvoiceFinanceLog)this.logsBindingSource.List[i];
+                    log.Invoice = context.Invoices.SingleOrDefault(invoice => invoice.InvoiceNo == log.InvoiceNo2);
                     logList.Add(log);
                     log.InvoiceFinanceBatch = batch;
                     log.Invoice.CaculateFinance();
@@ -731,7 +732,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batch.InvoiceFinanceLogs.Count == 0)
             {
-                this._case.InvoiceFinanceBatches.Remove(batch);
+                batch.Case = null;
                 batch.FinanceBatchNo = null;
                 return;
             }
@@ -749,6 +750,7 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.CaculateFinance();
                 }
 
+                batch.FinanceBatchNo = null;
                 batch.Case = null;
                 isSaveOK = false;
                 MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);

@@ -495,6 +495,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.AllowUserToAddRows = false;
             this.dgvClients.AllowUserToDeleteRows = false;
             this.dgvClients.AllowUserToOrderColumns = true;
+            this.dgvClients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -556,7 +557,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientEDICodeColumn.HeaderText = "保理代码";
             this.clientEDICodeColumn.Name = "clientEDICodeColumn";
             this.clientEDICodeColumn.ReadOnly = true;
-            this.clientEDICodeColumn.Width = 80;
             // 
             // ClientCoreNoColumn
             // 
@@ -564,7 +564,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ClientCoreNoColumn.HeaderText = "客户号";
             this.ClientCoreNoColumn.Name = "ClientCoreNoColumn";
             this.ClientCoreNoColumn.ReadOnly = true;
-            this.ClientCoreNoColumn.Width = 68;
             // 
             // ClientNameCNColumn
             // 
@@ -572,7 +571,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ClientNameCNColumn.HeaderText = "客户名称(中)";
             this.ClientNameCNColumn.Name = "ClientNameCNColumn";
             this.ClientNameCNColumn.ReadOnly = true;
-            this.ClientNameCNColumn.Width = 98;
             // 
             // ClientNameENColumn
             // 
@@ -580,7 +578,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ClientNameENColumn.HeaderText = "客户名称(英)";
             this.ClientNameENColumn.Name = "ClientNameENColumn";
             this.ClientNameENColumn.ReadOnly = true;
-            this.ClientNameENColumn.Width = 104;
             // 
             // AddressCNColumn
             // 
@@ -588,7 +585,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.AddressCNColumn.HeaderText = "地址(中)";
             this.AddressCNColumn.Name = "AddressCNColumn";
             this.AddressCNColumn.ReadOnly = true;
-            this.AddressCNColumn.Width = 74;
             // 
             // AddressENColumn
             // 
@@ -596,7 +592,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.AddressENColumn.HeaderText = "地址(英)";
             this.AddressENColumn.Name = "AddressENColumn";
             this.AddressENColumn.ReadOnly = true;
-            this.AddressENColumn.Width = 74;
             // 
             // CountryNameCNColumn
             // 
@@ -604,7 +599,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.CountryNameCNColumn.HeaderText = "国家";
             this.CountryNameCNColumn.Name = "CountryNameCNColumn";
             this.CountryNameCNColumn.ReadOnly = true;
-            this.CountryNameCNColumn.Width = 56;
             // 
             // GroupNoColumn
             // 
@@ -612,7 +606,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.GroupNoColumn.HeaderText = "所属集团客户号";
             this.GroupNoColumn.Name = "GroupNoColumn";
             this.GroupNoColumn.ReadOnly = true;
-            this.GroupNoColumn.Width = 116;
             // 
             // IndustryColumn
             // 
@@ -620,7 +613,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.IndustryColumn.HeaderText = "所属行业";
             this.IndustryColumn.Name = "IndustryColumn";
             this.IndustryColumn.ReadOnly = true;
-            this.IndustryColumn.Width = 80;
             // 
             // DepartmentCodeColumn
             // 
@@ -629,7 +621,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.DepartmentCodeColumn.Name = "DepartmentCodeColumn";
             this.DepartmentCodeColumn.ReadOnly = true;
             this.DepartmentCodeColumn.Visible = false;
-            this.DepartmentCodeColumn.Width = 104;
             // 
             // DepartmentColumn
             // 
@@ -637,7 +628,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.DepartmentColumn.HeaderText = "所属机构";
             this.DepartmentColumn.Name = "DepartmentColumn";
             this.DepartmentColumn.ReadOnly = true;
-            this.DepartmentColumn.Width = 80;
             // 
             // PMNameColumn
             // 
@@ -645,7 +635,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.PMNameColumn.HeaderText = "产品经理";
             this.PMNameColumn.Name = "PMNameColumn";
             this.PMNameColumn.ReadOnly = true;
-            this.PMNameColumn.Width = 80;
             // 
             // ClientMgr
             // 

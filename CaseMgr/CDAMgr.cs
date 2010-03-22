@@ -374,9 +374,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 let contracts = cda.Case.SellerClient.Contracts
                 where contractCode == string.Empty ? true : contracts.Any(con => con.ContractCode.Contains(contractCode))
                 let seller = cda.Case.SellerClient
-                where seller.ClientNameCN.Contains(clientName) || seller.ClientNameEN.Contains(clientName)
                 let buyer = cda.Case.BuyerClient
-                where buyer.ClientNameCN.Contains(clientName) || buyer.ClientNameEN.Contains(clientName)
+                where seller.ClientNameCN.Contains(clientName) || seller.ClientNameEN.Contains(clientName) || buyer.ClientNameCN.Contains(clientName) || buyer.ClientNameEN.Contains(clientName)
                 let sellerfactor = cda.Case.SellerFactor
                 where sellerfactor.CompanyNameCN.Contains(factorName) || sellerfactor.CompanyNameEN.Contains(factorName)
                 let buyerfactor = cda.Case.BuyerFactor

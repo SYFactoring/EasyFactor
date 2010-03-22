@@ -1099,7 +1099,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // colInvoiceNo
             // 
-            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
+            this.colInvoiceNo.DataPropertyName = "InvoiceNo2";
             this.colInvoiceNo.Frozen = true;
             this.colInvoiceNo.HeaderText = "发票号";
             this.colInvoiceNo.Name = "colInvoiceNo";
@@ -1107,7 +1107,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // colAssignAmount
             // 
-            this.colAssignAmount.DataPropertyName = "AssignAmount";
+            this.colAssignAmount.DataPropertyName = "AssignAmount2";
             dataGridViewCellStyle2.Format = "N2";
             this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colAssignAmount.HeaderText = "转让金额";
@@ -1116,7 +1116,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // colAssignOutstanding
             // 
-            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
+            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding2";
             dataGridViewCellStyle3.Format = "N2";
             this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAssignOutstanding.HeaderText = "转让余额";
@@ -1125,26 +1125,26 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // colInvoiceDate
             // 
-            this.colInvoiceDate.DataPropertyName = "InvoiceDate";
+            this.colInvoiceDate.DataPropertyName = "InvoiceDate2";
             this.colInvoiceDate.HeaderText = "发票日";
             this.colInvoiceDate.Name = "colInvoiceDate";
             // 
             // colDueDate
             // 
-            this.colDueDate.DataPropertyName = "DueDate";
+            this.colDueDate.DataPropertyName = "DueDate2";
             this.colDueDate.HeaderText = "发票到期日";
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.ReadOnly = true;
             // 
             // colAssignDate
             // 
-            this.colAssignDate.DataPropertyName = "AssignDate";
+            this.colAssignDate.DataPropertyName = "AssignDate2";
             this.colAssignDate.HeaderText = "转让日";
             this.colAssignDate.Name = "colAssignDate";
             // 
             // colInvoiceFinanceOutstanding
             // 
-            this.colInvoiceFinanceOutstanding.DataPropertyName = "InvoiceFinanceOutstanding";
+            this.colInvoiceFinanceOutstanding.DataPropertyName = "InvoiceFinanceOutstanding2";
             dataGridViewCellStyle4.Format = "N2";
             this.colInvoiceFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle4;
             this.colInvoiceFinanceOutstanding.HeaderText = "融资余额";
@@ -1153,7 +1153,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // colInvoiceFinanceAmount
             // 
-            this.colInvoiceFinanceAmount.DataPropertyName = "InvoiceFinanceAmount";
+            this.colInvoiceFinanceAmount.DataPropertyName = "InvoiceFinanceAmount2";
             this.colInvoiceFinanceAmount.HeaderText = "已融资金额";
             this.colInvoiceFinanceAmount.Name = "colInvoiceFinanceAmount";
             // 
@@ -1167,7 +1167,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // colCommission
             // 
-            this.colCommission.DataPropertyName = "Commission";
+            this.colCommission.DataPropertyName = "Commission2";
             dataGridViewCellStyle6.Format = "N2";
             this.colCommission.DefaultCellStyle = dataGridViewCellStyle6;
             this.colCommission.HeaderText = "手续费";
@@ -1175,7 +1175,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // colCommissionDate
             // 
-            this.colCommissionDate.DataPropertyName = "CommissionDate";
+            this.colCommissionDate.DataPropertyName = "CommissionDate2";
             this.colCommissionDate.HeaderText = "收费日";
             this.colCommissionDate.Name = "colCommissionDate";
             // 

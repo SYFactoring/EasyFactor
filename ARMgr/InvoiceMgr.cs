@@ -539,8 +539,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryInvoices(object sender, EventArgs e)
         {
-            string sellerName = this.tbSeller.Text;
-            string buyerName = this.tbBuyer.Text;
+            string clientName = this.tbClientName.Text;
             string factorName = this.tbFactor.Text;
             string invoiceNo = this.tbInvoiceNo.Text;
             string isFlaw = this.cbIsFlaw.CheckValue as string;
@@ -584,9 +583,8 @@ namespace CMBC.EasyFactor.ARMgr
                               where curCase.CaseMark == caseMark
                                     && (location == "全部" ? true : curCase.OwnerDepartment.Location == location)
                               let seller = curCase.SellerClient
-                              where seller.ClientNameCN.Contains(sellerName) || seller.ClientNameEN.Contains(sellerName)
                               let buyer = curCase.BuyerClient
-                              where buyer.ClientNameCN.Contains(buyerName) || buyer.ClientNameEN.Contains(buyerName)
+                              where seller.ClientNameCN.Contains(clientName) || seller.ClientNameEN.Contains(clientName) || buyer.ClientNameCN.Contains(clientName) || buyer.ClientNameEN.Contains(clientName)
                               let sellerFactor = curCase.SellerFactor
                               where sellerFactor.CompanyNameCN.Contains(factorName) || sellerFactor.CompanyNameEN.Contains(factorName)
                               let buyerFactor = curCase.BuyerFactor
@@ -613,8 +611,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void Reset(object sender, EventArgs e)
         {
-            this.tbBuyer.Text = string.Empty;
-            this.tbSeller.Text = string.Empty;
+            this.tbClientName.Text = string.Empty;
             this.tbFactor.Text = string.Empty;
             this.tbInvoiceNo.Text = string.Empty;
             this.tbAssignOverDueDays.Text = string.Empty;
