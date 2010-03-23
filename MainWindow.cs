@@ -1175,5 +1175,16 @@ namespace CMBC.EasyFactor
             this.autoUpdater.TryUpdateBackground();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportClientsOverwrite(object sender, EventArgs e)
+        {
+            ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_OVERWRITE);
+            form.ShowDialog(this);
+        }
+
     }
 }

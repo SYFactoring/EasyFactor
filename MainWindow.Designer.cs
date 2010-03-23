@@ -344,6 +344,7 @@ namespace CMBC.EasyFactor
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.autoUpdater = new CMBC.EasyFactor.Help.AutoUpdater();
+            this.btnClientOverwriteImport = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonControl.SuspendLayout();
             this.ribbonPanel3.SuspendLayout();
             this.ribbonPanelHelp.SuspendLayout();
@@ -367,11 +368,11 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
+            this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanel3);
             this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
             this.ribbonControl.Controls.Add(this.ribbonPanelReport);
             this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
-            this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanel2);
             this.ribbonControl.Controls.Add(this.ribbonPanel4);
             this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
@@ -434,6 +435,7 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanel3.StyleMouseOver.Class = "";
             this.ribbonPanel3.TabIndex = 11;
+            this.ribbonPanel3.Visible = false;
             // 
             // ribbonBarUserMgr
             // 
@@ -1124,7 +1126,6 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelMigration.StyleMouseOver.Class = "";
             this.ribbonPanelMigration.TabIndex = 8;
-            this.ribbonPanelMigration.Visible = false;
             // 
             // ribbonBarInvoiceImport
             // 
@@ -1142,7 +1143,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarInvoiceImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnInvoicesImport,
             this.btnInvoiceNewImport});
-            this.ribbonBarInvoiceImport.Location = new System.Drawing.Point(712, 0);
+            this.ribbonBarInvoiceImport.Location = new System.Drawing.Point(805, 0);
             this.ribbonBarInvoiceImport.Name = "ribbonBarInvoiceImport";
             this.ribbonBarInvoiceImport.Size = new System.Drawing.Size(100, 93);
             this.ribbonBarInvoiceImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1188,7 +1189,7 @@ namespace CMBC.EasyFactor
             this.btnClientCreditLineImport,
             this.btnFactorCreditLineImport,
             this.btnCDAImport});
-            this.ribbonBarCreditLineImport.Location = new System.Drawing.Point(434, 0);
+            this.ribbonBarCreditLineImport.Location = new System.Drawing.Point(527, 0);
             this.ribbonBarCreditLineImport.Name = "ribbonBarCreditLineImport";
             this.ribbonBarCreditLineImport.Size = new System.Drawing.Size(278, 93);
             this.ribbonBarCreditLineImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1241,7 +1242,7 @@ namespace CMBC.EasyFactor
             this.btnLocalCaseImport,
             this.buttonItemInterCaseImport,
             this.btnContractImport});
-            this.ribbonBarCaseImport.Location = new System.Drawing.Point(219, 0);
+            this.ribbonBarCaseImport.Location = new System.Drawing.Point(312, 0);
             this.ribbonBarCaseImport.Name = "ribbonBarCaseImport";
             this.ribbonBarCaseImport.Size = new System.Drawing.Size(215, 93);
             this.ribbonBarCaseImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1292,11 +1293,12 @@ namespace CMBC.EasyFactor
             this.ribbonBarBasicInfoImport.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarBasicInfoImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnClientImport,
+            this.btnClientOverwriteImport,
             this.btnClientReviewImport,
             this.btnFactorImport2});
             this.ribbonBarBasicInfoImport.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarBasicInfoImport.Name = "ribbonBarBasicInfoImport";
-            this.ribbonBarBasicInfoImport.Size = new System.Drawing.Size(216, 93);
+            this.ribbonBarBasicInfoImport.Size = new System.Drawing.Size(309, 93);
             this.ribbonBarBasicInfoImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarBasicInfoImport.TabIndex = 2;
             this.ribbonBarBasicInfoImport.Text = "基础信息导入";
@@ -2082,13 +2084,13 @@ namespace CMBC.EasyFactor
             // 
             // tabItemMigration
             // 
+            this.tabItemMigration.Checked = true;
             this.tabItemMigration.Name = "tabItemMigration";
             this.tabItemMigration.Panel = this.ribbonPanelMigration;
             this.tabItemMigration.Text = "数据移植";
             // 
             // ribbonTabItemSystem
             // 
-            this.ribbonTabItemSystem.Checked = true;
             this.ribbonTabItemSystem.Name = "ribbonTabItemSystem";
             this.ribbonTabItemSystem.Panel = this.ribbonPanel3;
             this.ribbonTabItemSystem.Text = "系统管理";
@@ -2428,6 +2430,13 @@ namespace CMBC.EasyFactor
             this.autoUpdater.ProxyURL = null;
             this.autoUpdater.RestartForm = null;
             // 
+            // btnClientOverwriteImport
+            // 
+            this.btnClientOverwriteImport.Name = "btnClientOverwriteImport";
+            this.btnClientOverwriteImport.SubItemsExpandWidth = 14;
+            this.btnClientOverwriteImport.Text = "客户信息(覆盖)";
+            this.btnClientOverwriteImport.Click += new System.EventHandler(this.ImportClientsOverwrite);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2489,5 +2498,6 @@ namespace CMBC.EasyFactor
         private System.ComponentModel.BackgroundWorker backgroundWorker;
         private CMBC.EasyFactor.Help.AutoUpdater autoUpdater;
         private DevComponents.DotNetBar.ButtonItem btnCheckUpdate;
+        private DevComponents.DotNetBar.ButtonItem btnClientOverwriteImport;
     }
 }

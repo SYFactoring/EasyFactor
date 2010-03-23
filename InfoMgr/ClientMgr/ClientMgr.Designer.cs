@@ -110,6 +110,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.DepartmentCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DepartmentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PMNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemClientsExport = new System.Windows.Forms.ToolStripMenuItem();
             lblClientType = new DevComponents.DotNetBar.LabelX();
             lblClientNo = new DevComponents.DotNetBar.LabelX();
             lblClientName = new DevComponents.DotNetBar.LabelX();
@@ -215,54 +217,56 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemClientNew,
             this.menuItemClientCreditLineNew,
             this.menuItemContractNew,
-            this.menuItemClientDelete});
+            this.menuItemClientDelete,
+            this.toolStripSeparator1,
+            this.menuItemClientsExport});
             this.cmuClientMgr.Name = "contextMenuClientMgr";
-            this.cmuClientMgr.Size = new System.Drawing.Size(147, 142);
+            this.cmuClientMgr.Size = new System.Drawing.Size(153, 192);
             // 
             // menuItemClientSelect
             // 
             this.menuItemClientSelect.Name = "menuItemClientSelect";
-            this.menuItemClientSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemClientSelect.Size = new System.Drawing.Size(152, 22);
             this.menuItemClientSelect.Text = "选定客户";
             this.menuItemClientSelect.Click += new System.EventHandler(this.SelectClient);
             // 
             // menuItemClientDetail
             // 
             this.menuItemClientDetail.Name = "menuItemClientDetail";
-            this.menuItemClientDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemClientDetail.Size = new System.Drawing.Size(152, 22);
             this.menuItemClientDetail.Text = "详细信息";
             this.menuItemClientDetail.Click += new System.EventHandler(this.DetailClient);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
             // menuItemClientNew
             // 
             this.menuItemClientNew.Name = "menuItemClientNew";
-            this.menuItemClientNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemClientNew.Size = new System.Drawing.Size(152, 22);
             this.menuItemClientNew.Text = "新建客户";
             this.menuItemClientNew.Click += new System.EventHandler(this.NewClient);
             // 
             // menuItemClientCreditLineNew
             // 
             this.menuItemClientCreditLineNew.Name = "menuItemClientCreditLineNew";
-            this.menuItemClientCreditLineNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemClientCreditLineNew.Size = new System.Drawing.Size(152, 22);
             this.menuItemClientCreditLineNew.Text = "新建额度信息";
             this.menuItemClientCreditLineNew.Click += new System.EventHandler(this.NewClientCreditLine);
             // 
             // menuItemContractNew
             // 
             this.menuItemContractNew.Name = "menuItemContractNew";
-            this.menuItemContractNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemContractNew.Size = new System.Drawing.Size(152, 22);
             this.menuItemContractNew.Text = "新建保理合同";
             this.menuItemContractNew.Click += new System.EventHandler(this.NewContract);
             // 
             // menuItemClientDelete
             // 
             this.menuItemClientDelete.Name = "menuItemClientDelete";
-            this.menuItemClientDelete.Size = new System.Drawing.Size(146, 22);
+            this.menuItemClientDelete.Size = new System.Drawing.Size(152, 22);
             this.menuItemClientDelete.Text = "删除客户";
             this.menuItemClientDelete.Click += new System.EventHandler(this.DeleteClient);
             // 
@@ -636,6 +640,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.PMNameColumn.Name = "PMNameColumn";
             this.PMNameColumn.ReadOnly = true;
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // menuItemClientsExport
+            // 
+            this.menuItemClientsExport.Name = "menuItemClientsExport";
+            this.menuItemClientsExport.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientsExport.Text = "导出所有客户";
+            this.menuItemClientsExport.Click += new System.EventHandler(this.ExportClients);
+            // 
             // ClientMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -670,5 +686,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn PMNameColumn;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientsExport;
     }
 }

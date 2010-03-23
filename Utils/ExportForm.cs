@@ -98,6 +98,11 @@ namespace CMBC.EasyFactor.Utils
             /// 
             /// </summary>
             EXPORT_CLIENT_REVIEWS,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            EXPORT_CLIENT,
         }
 
         #endregion Enums
@@ -192,6 +197,9 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ExportType.EXPORT_CLIENT_REVIEWS:
                     e.Result = this.ExportClientReviews(worker, e);
+                    break;
+                case ExportType.EXPORT_CLIENT:
+                    e.Result = this.ExportClients(worker, e);
                     break;
                 default:
                     break;
@@ -379,6 +387,170 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
+        private object ExportClients(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+
+            if (app == null)
+            {
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return -1;
+            }
+            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            if (datasheet == null)
+            {
+                return -1;
+            }
+
+            try
+            {
+                int column = 1;
+                datasheet.Cells[1, column++] = "客户号";
+                datasheet.Cells[1, column++] = "保理代码";
+                datasheet.Cells[1, column++] = "客户名称(中)";
+                datasheet.Cells[1, column++] = "客户名称(英)";
+                datasheet.Cells[1, column++] = "地址(中)";
+                datasheet.Cells[1, column++] = "地址(英)";
+                datasheet.Cells[1, column++] = "所在城市(中)";
+                datasheet.Cells[1, column++] = "所在城市(英)";
+                datasheet.Cells[1, column++] = "所在省/州(中)";
+                datasheet.Cells[1, column++] = "所在省/州(英)";
+                datasheet.Cells[1, column++] = "邮编";
+                datasheet.Cells[1, column++] = "所在国";
+                datasheet.Cells[1, column++] = "公司法人/责任人";
+                datasheet.Cells[1, column++] = "公司网址";
+                datasheet.Cells[1, column++] = "联系人";
+                datasheet.Cells[1, column++] = "联系电话";
+                datasheet.Cells[1, column++] = "E-MAIL";
+                datasheet.Cells[1, column++] = "传真号码";
+                datasheet.Cells[1, column++] = "手机号码";
+                datasheet.Cells[1, column++] = "客户类型";
+                datasheet.Cells[1, column++] = "行业类别";
+                datasheet.Cells[1, column++] = "经营范围(中)";
+                datasheet.Cells[1, column++] = "经营范围(英)";
+                datasheet.Cells[1, column++] = "客户级别";
+                datasheet.Cells[1, column++] = "所属集团客户保理代码";
+                datasheet.Cells[1, column++] = "所属集团客户名称";
+                datasheet.Cells[1, column++] = "营业执照号码";
+                datasheet.Cells[1, column++] = "组织机构代码";
+                datasheet.Cells[1, column++] = "所属机构";
+                datasheet.Cells[1, column++] = "产品经理";
+                datasheet.Cells[1, column++] = "客户经理";
+                datasheet.Cells[1, column++] = "备注";
+                datasheet.Cells[1, column++] = "经办人";
+
+                int size = this.exportData.Count;
+                for (int row = 0; row < size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        if (datasheet != null)
+                        {
+                            Marshal.ReleaseComObject(datasheet);
+                            datasheet = null;
+                        }
+
+                        if (app != null)
+                        {
+                            foreach (Workbook wb in app.Workbooks)
+                            {
+                                wb.Close(false, Type.Missing, Type.Missing);
+                            }
+
+                            app.Workbooks.Close();
+                            app.Quit();
+                            Marshal.ReleaseComObject(app);
+                            app = null;
+                        }
+
+                        e.Cancel = true;
+                        return -1;
+                    }
+
+                    column = 1;
+                    Client client = (Client)exportData[row];
+                    datasheet.Cells[row + 2, column++] = client.ClientCoreNo;
+                    datasheet.Cells[row + 2, column++] = client.ClientEDICode;
+                    datasheet.Cells[row + 2, column++] = client.ClientNameCN;
+                    datasheet.Cells[row + 2, column++] = client.ClientNameEN;
+                    datasheet.Cells[row + 2, column++] = client.AddressCN;
+                    datasheet.Cells[row + 2, column++] = client.AddressEN;
+                    datasheet.Cells[row + 2, column++] = client.CityCN;
+                    datasheet.Cells[row + 2, column++] = client.CityEN;
+                    datasheet.Cells[row + 2, column++] = client.ProvinceCN;
+                    datasheet.Cells[row + 2, column++] = client.ProvinceEN;
+                    datasheet.Cells[row + 2, column++] = client.PostCode;
+                    datasheet.Cells[row + 2, column++] = client.CountryCode;
+                    datasheet.Cells[row + 2, column++] = client.Representative;
+                    datasheet.Cells[row + 2, column++] = client.Website;
+                    datasheet.Cells[row + 2, column++] = client.Contact;
+                    datasheet.Cells[row + 2, column++] = client.Telephone;
+                    datasheet.Cells[row + 2, column++] = client.Email;
+                    datasheet.Cells[row + 2, column++] = client.FaxNumber;
+                    datasheet.Cells[row + 2, column++] = client.CellPhone;
+                    datasheet.Cells[row + 2, column++] = client.ClientType;
+                    datasheet.Cells[row + 2, column++] = client.Industry;
+                    datasheet.Cells[row + 2, column++] = client.ProductCN;
+                    datasheet.Cells[row + 2, column++] = client.ProductEN;
+                    datasheet.Cells[row + 2, column++] = client.ClientLevel;
+                    datasheet.Cells[row + 2, column++] = client.ClientGroup == null ? string.Empty : client.ClientGroup.ClientEDICode;
+                    datasheet.Cells[row + 2, column++] = client.ClientGroup == null ? string.Empty : client.ClientGroup.ClientNameCN;
+                    datasheet.Cells[row + 2, column++] = client.RegistrationNumber;
+                    datasheet.Cells[row + 2, column++] = client.CompanyCode;
+                    datasheet.Cells[row + 2, column++] = client.Department == null ? string.Empty : client.Department.DepartmentName;
+                    datasheet.Cells[row + 2, column++] = client.PMName;
+                    datasheet.Cells[row + 2, column++] = client.RMName;
+                    datasheet.Cells[row + 2, column++] = client.Comment;
+                    datasheet.Cells[row + 2, column++] = client.CreateUserName;
+
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+
+                foreach (Range range in datasheet.UsedRange.Columns)
+                {
+                    range.EntireColumn.AutoFit();
+                    if (range.Column == 1)
+                    {
+                        range.NumberFormatLocal = "yyyy-MM-dd";
+                    }
+                }
+
+                app.Visible = true;
+            }
+            catch (Exception e1)
+            {
+                if (datasheet != null)
+                {
+                    Marshal.ReleaseComObject(datasheet);
+                    datasheet = null;
+                }
+
+                if (app != null)
+                {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+
+                    app.Workbooks.Close();
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                    app = null;
+                }
+
+                throw e1;
+            }
+
+            return exportData.Count;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         private object ExportClientReviews(BackgroundWorker worker, DoWorkEventArgs e)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
@@ -394,7 +566,7 @@ namespace CMBC.EasyFactor.Utils
             {
                 return -1;
             }
-            app.Visible = true;
+
             try
             {
                 datasheet.Cells[1, 1] = "协查意见台帐";
@@ -511,7 +683,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                 }
 
-
+                app.Visible = true;
             }
             catch (Exception e1)
             {

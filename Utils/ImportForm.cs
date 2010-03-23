@@ -67,6 +67,11 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
+            IMPORT_CLIENTS_OVERWRITE,
+
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_CLIENTS_CREDITLINE,
 
             /// <summary>
@@ -171,6 +176,9 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_CLIENTS:
                     this.Text = "客户信息导入";
                     break;
+                case ImportType.IMPORT_CLIENTS_OVERWRITE:
+                    this.Text = "客户信息导入(覆盖模式)";
+                    break;
                 case ImportType.IMPORT_CLIENTS_CREDITLINE:
                     this.Text = "客户额度信息导入";
                     break;
@@ -255,6 +263,9 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ImportType.IMPORT_CLIENTS:
                     e.Result = this.ImportClients((string)e.Argument, worker, e);
+                    break;
+                case ImportType.IMPORT_CLIENTS_OVERWRITE:
+                    e.Result = this.ImportClientsOverwrite((string)e.Argument, worker, e);
                     break;
                 case ImportType.IMPORT_CLIENTS_CREDITLINE:
                     e.Result = this.ImportClientsCreditLine((string)e.Argument, worker, e);
@@ -845,6 +856,133 @@ namespace CMBC.EasyFactor.Utils
                         client = new Client();
                         client.ClientEDICode = clientEDICode;
                         clientList.Add(client);
+
+                        int column = 1;
+                        client.ClientCoreNo = String.Format("{0:G}", valueArray[row, column++]);
+                        column++;
+                        client.ClientNameCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ClientNameEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.AddressCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.AddressEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CityCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CityEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ProvinceCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ProvinceEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.PostCode = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CountryCode = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Representative = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Website = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Contact = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Telephone = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Email = String.Format("{0:G}", valueArray[row, column++]);
+                        client.FaxNumber = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CellPhone = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ClientType = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Industry = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ProductCN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ProductEN = String.Format("{0:G}", valueArray[row, column++]);
+                        client.ClientLevel = String.Format("{0:G}", valueArray[row, column++]);
+                        string groupNo = String.Format("{0:G}", valueArray[row, column++]);
+                        if (groupNo != string.Empty)
+                        {
+                            Client clientGroup = context.Clients.SingleOrDefault(c => c.ClientEDICode == groupNo);
+                            if (clientGroup == null)
+                            {
+                                throw new Exception("集团客户号错误： " + groupNo);
+                            }
+                        }
+
+                        column++;
+                        client.RegistrationNumber = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CompanyCode = String.Format("{0:G}", valueArray[row, column++]);
+                        string departmentName = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Department = context.Departments.SingleOrDefault(d => d.DepartmentName.Equals(departmentName));
+
+                        client.PMName = String.Format("{0:G}", valueArray[row, column++]);
+                        client.RMName = String.Format("{0:G}", valueArray[row, column++]);
+                        client.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                        client.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                        if (client.CreateUserName == string.Empty)
+                        {
+                            client.CreateUserName = App.Current.CurUser.Name;
+                        }
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    }
+                }
+
+                context.Clients.InsertAllOnSubmit(clientList);
+                context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                foreach (Client client in clientList)
+                {
+                    client.ClientGroup = null;
+                    client.Department = null;
+                }
+
+                if (result != clientList.Count)
+                {
+                    e1.Data["row"] = result;
+                }
+
+                throw e1;
+            }
+
+            worker.ReportProgress(100);
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int ImportClientsOverwrite(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            object[,] valueArray = this.GetValueArray(fileName, 1);
+            int result = 0;
+            List<Client> clientList = new List<Client>();
+            DBDataContext context = new DBDataContext();
+            try
+            {
+                if (valueArray != null)
+                {
+                    int size = valueArray.GetUpperBound(0);
+                    for (int row = 2; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+
+                        string clientEDICode = String.Format("{0:G}", valueArray[row, 2]).Trim();
+                        if (String.Empty.Equals(clientEDICode))
+                        {
+                            continue;
+                        }
+
+                        Client client = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                        if (client == null)
+                        {
+                            client = new Client();
+                            client.ClientEDICode = clientEDICode;
+                        }
+
+                        clientList.Add(client);
+
+                        client = clientList.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                        if (client != null)
+                        {
+                            throw new Exception("客户编号重复，不能导入： " + clientEDICode);
+                        }
 
                         int column = 1;
                         client.ClientCoreNo = String.Format("{0:G}", valueArray[row, column++]);
