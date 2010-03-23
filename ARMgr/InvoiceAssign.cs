@@ -466,6 +466,17 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            if (this._case.ActiveCDA.CommissionType == "按转让金额" || this._case.ActiveCDA.CommissionType == "其他")
+            {
+                this.colCommission.Visible = true;
+                this.colCommissionDate.Visible = true;
+            }
+            else
+            {
+                this.colCommission.Visible = false;
+                this.colCommissionDate.Visible = false;
+            }
+
             InvoiceAssignBatch batch = new InvoiceAssignBatch();
             batch.AssignDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
@@ -621,7 +632,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (flawList.Count > 0)
                 {
-                    InvoiceFlaw flawMgr = new InvoiceFlaw(flawList);
+                    InvoiceFlaw flawMgr = new InvoiceFlaw(flawList, true);
                     flawMgr.ShowDialog(this);
                 }
             }
@@ -647,7 +658,7 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceAssignBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
-            //    InvoiceAssignBatch batch = this.context.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == selectedBatch.AssignBatchNo);
+                //    InvoiceAssignBatch batch = this.context.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == selectedBatch.AssignBatchNo);
                 this.batchBindingSource.DataSource = selectedBatch;
                 this.invoiceBindingSource.DataSource = selectedBatch.Invoices.ToList();
                 this.StatBatch();

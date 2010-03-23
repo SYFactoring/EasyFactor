@@ -237,6 +237,8 @@
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.customValidator9 = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.customValidator10 = new DevComponents.DotNetBar.Validator.CustomValidator();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -1381,6 +1383,7 @@
             this.iFPriceTextBox.Name = "iFPriceTextBox";
             this.iFPriceTextBox.Size = new System.Drawing.Size(100, 20);
             this.iFPriceTextBox.TabIndex = 43;
+            this.superValidator.SetValidator1(this.iFPriceTextBox, this.customValidator10);
             // 
             // orderNumberTextBox
             // 
@@ -1406,6 +1409,7 @@
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(109, 20);
             this.priceTextBox.TabIndex = 41;
+            this.superValidator.SetValidator1(this.priceTextBox, this.customValidator9);
             // 
             // financeProportionTextBox
             // 
@@ -2010,6 +2014,18 @@
             // 
             this.highlighter.ContainerControl = this;
             // 
+            // customValidator9
+            // 
+            this.customValidator9.ErrorMessage = "必填";
+            this.customValidator9.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator9.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator9_ValidateValue);
+            // 
+            // customValidator10
+            // 
+            this.customValidator10.ErrorMessage = "必填";
+            this.customValidator10.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator10.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator10_ValidateValue);
+            // 
             // CDADetail
             // 
             this.AcceptButton = this.btnCDASave;
@@ -2044,5 +2060,8 @@
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator9;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator10;
     }
 }

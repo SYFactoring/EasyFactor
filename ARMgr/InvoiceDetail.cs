@@ -266,7 +266,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (batch != null)
                 {
                     FinanceBatchDetail detail = new FinanceBatchDetail(batch);
-                    detail.ShowDialog(this);
+                    detail.Show();
                 }
             }
         }
@@ -286,7 +286,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (batch != null)
                 {
                     PaymentBatchDetail detail = new PaymentBatchDetail(batch);
-                    detail.ShowDialog(this);
+                    detail.Show();
                 }
             }
         }
@@ -306,7 +306,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (batch != null)
                 {
                     RefundBatchDetail detail = new RefundBatchDetail(batch);
-                    detail.ShowDialog(this);
+                    detail.Show();
                 }
             }
         }

@@ -466,7 +466,6 @@ namespace CMBC.EasyFactor.Utils
                         invoice.DueDate = (DateTime)valueArray[row, column++];
                         invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                         invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
-                        invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
                         invoiceList.Add(invoice);
@@ -1692,7 +1691,6 @@ namespace CMBC.EasyFactor.Utils
                         InvoiceFinanceLog log = new InvoiceFinanceLog(invoice);
                         log.FinanceAmount = (System.Nullable<double>)valueArray[row, column++];
                         log.Commission = (System.Nullable<double>)valueArray[row, column++];
-                        log.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
                         log.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
                         logList.Add(log);
@@ -2488,7 +2486,6 @@ namespace CMBC.EasyFactor.Utils
                             //手续费
                             column = 22;
                             invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
-                            invoice.CommissionDate = (System.Nullable<DateTime>)valueArray[row, column++];
 
                             if (activeCDA != null && invoice.Commission == null)
                             {
@@ -2496,18 +2493,10 @@ namespace CMBC.EasyFactor.Utils
                                 {
                                     case "按融资金额":
                                         invoice.Commission = invoice.FinanceAmount * activeCDA.Price;
-                                        if (invoice.Commission.HasValue && !invoice.CommissionDate.HasValue)
-                                        {
-                                            invoice.CommissionDate = invoice.FinanceDate;
-                                        }
 
                                         break;
                                     case "按转让金额":
                                         invoice.Commission = invoice.AssignAmount * activeCDA.Price;
-                                        if (invoice.Commission.HasValue && !invoice.CommissionDate.HasValue)
-                                        {
-                                            invoice.CommissionDate = invoice.InvoiceAssignBatch.AssignDate;
-                                        }
 
                                         break;
                                     default:
@@ -2515,7 +2504,7 @@ namespace CMBC.EasyFactor.Utils
                                 }
                             }
 
-                            column = 26;
+                            column = 25;
                             invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
                         }
                         else if ("贷项通知".Equals(type))

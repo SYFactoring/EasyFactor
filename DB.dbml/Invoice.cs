@@ -309,7 +309,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 FinanceDate = null;
                 FinanceDueDate = null;
                 Commission = null;
-                CommissionDate = null;
             }
 
             CaculateCommission();
@@ -327,26 +326,10 @@ namespace CMBC.EasyFactor.DB.dbml
                     if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按融资金额")
                     {
                         Commission = FinanceAmount * this.InvoiceAssignBatch.Case.ActiveCDA.Price.GetValueOrDefault();
-                        if (TypeUtil.GreaterZero(Commission))
-                        {
-                            CommissionDate = FinanceDate;
-                        }
-                        else
-                        {
-                            CommissionDate = null;
-                        }
                     }
                     else if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按转让金额")
                     {
                         Commission = AssignAmount * this.InvoiceAssignBatch.Case.ActiveCDA.Price.GetValueOrDefault();
-                        if (TypeUtil.GreaterZero(Commission))
-                        {
-                            CommissionDate = AssignDate;
-                        }
-                        else
-                        {
-                            CommissionDate = null;
-                        }
                     }
                 }
             }

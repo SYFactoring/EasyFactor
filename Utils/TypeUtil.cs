@@ -209,7 +209,7 @@ namespace CMBC.EasyFactor.Utils
                 return false;
             }
 
-            return double1 < 0.0001;
+            return double1 < -0.0001;
         }
 
         /// <summary>

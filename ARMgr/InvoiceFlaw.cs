@@ -24,20 +24,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private DBDataContext context;
 
-        public InvoiceFlaw(List<Invoice> invoiceList, string index)
+        public InvoiceFlaw(List<Invoice> invoiceList, bool isFlaw)
             : this(invoiceList)
         {
-            this.isFlawCheckBox.Checked = true;
-
-            for (int i = 0; i < this.flawReasonCheckedListBox.Items.Count; i++)
-            {
-                string item = ((FlawReason)this.flawReasonCheckedListBox.Items[i]).Index;
-                if (item == index)
-                {
-                    this.flawReasonCheckedListBox.SetItemChecked(i, true);
-                    break;
-                }
-            }
+            this.isFlawCheckBox.Checked = isFlaw;
         }
 
         /// <summary>

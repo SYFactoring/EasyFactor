@@ -293,7 +293,6 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "到期日";
                 datasheet.Cells[1, column++] = "是否瑕疵";
                 datasheet.Cells[1, column++] = "手续费";
-                datasheet.Cells[1, column++] = "手续费收取日";
                 datasheet.Cells[1, column++] = "备注";
 
                 int size = this.exportData.Count;
@@ -333,7 +332,6 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.DueDate;
                     datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
-                    datasheet.Cells[row + 2, column++] = invoice.CommissionDate;
                     datasheet.Cells[row + 2, column++] = invoice.Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
@@ -346,7 +344,7 @@ namespace CMBC.EasyFactor.Utils
                     {
                         range.NumberFormatLocal = "0.00";
                     }
-                    else if (range.Column == 4 || range.Column == 5 || range.Column == 8)
+                    else if (range.Column == 4 || range.Column == 5)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
@@ -870,7 +868,6 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "转让余额";
                 datasheet.Cells[1, column++] = "融资金额";
                 datasheet.Cells[1, column++] = "手续费";
-                datasheet.Cells[1, column++] = "手续费收取日";
                 datasheet.Cells[1, column++] = "备注";
 
                 int size = exportData.Count;
@@ -907,7 +904,6 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = log.AssignOutstanding;
                     datasheet.Cells[row + 2, column++] = log.FinanceAmount;
                     datasheet.Cells[row + 2, column++] = log.Commission;
-                    datasheet.Cells[row + 2, column++] = log.CommissionDate;
                     datasheet.Cells[row + 2, column++] = log.Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
@@ -919,10 +915,6 @@ namespace CMBC.EasyFactor.Utils
                     if (range.Column == 2 || range.Column == 3 || range.Column == 4)
                     {
                         range.NumberFormatLocal = "0.00";
-                    }
-                    else if (range.Column == 5)
-                    {
-                        range.NumberFormatLocal = "yyyy-MM-dd";
                     }
                 }
 
@@ -1143,7 +1135,6 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.RefundAmount;
                     //手续费
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
-                    datasheet.Cells[row + 2, column++] = invoice.CommissionDate;
                     //利息
                     datasheet.Cells[row + 2, column++] = invoice.NetInterest;
                     datasheet.Cells[row + 2, column++] = invoice.Comment;
@@ -1158,7 +1149,7 @@ namespace CMBC.EasyFactor.Utils
                     {
                         range.NumberFormatLocal = "0.00";
                     }
-                    else if (range.Column == 5 || range.Column == 12 || range.Column == 13 || range.Column == 23 || range.Column == 24 || range.Column == 30 || range.Column == 37 || range.Column == 42)
+                    else if (range.Column == 5 || range.Column == 12 || range.Column == 13 || range.Column == 23 || range.Column == 24 || range.Column == 30 || range.Column == 37)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }

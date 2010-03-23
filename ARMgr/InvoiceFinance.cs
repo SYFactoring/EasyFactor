@@ -559,7 +559,6 @@ namespace CMBC.EasyFactor.ARMgr
 
                     oldLog.FinanceAmount = newLog.FinanceAmount;
                     oldLog.Commission = newLog.Commission;
-                    oldLog.CommissionDate = newLog.CommissionDate;
                     oldLog.Comment = newLog.Comment;
 
                     if (TypeUtil.GreaterZero(oldLog.FinanceAmount))
@@ -599,6 +598,17 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
+            }
+
+            if (activeCDA.CommissionType == "按融资金额" || activeCDA.CommissionType == "其他")
+            {
+                this.colCommission.Visible = true;
+                this.colCommissionDate.Visible = true;
+            }
+            else
+            {
+                this.colCommission.Visible = false;
+                this.colCommissionDate.Visible = false;
             }
 
             InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
@@ -663,7 +673,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvLogs.Rows[rowIndex].Cells["colFinanceAmount"].ReadOnly = !editable;
             this.dgvLogs.Rows[rowIndex].Cells["colComment"].ReadOnly = !editable;
 
-            if (this._case.ActiveCDA.CommissionType == "按融资金额")
+            if (this._case.ActiveCDA.CommissionType == "按融资金额" || this._case.ActiveCDA.CommissionType == "其他")
             {
                 this.dgvLogs.Rows[rowIndex].Cells["colCommission"].ReadOnly = !editable;
                 this.dgvLogs.Rows[rowIndex].Cells["colCommissionDate"].ReadOnly = !editable;
@@ -675,10 +685,9 @@ namespace CMBC.EasyFactor.ARMgr
                 InvoiceFinanceLog log = (InvoiceFinanceLog)logList[rowIndex];
                 log.FinanceAmount = 0;
 
-                if (this._case.ActiveCDA.CommissionType == "按融资金额")
+                if (this._case.ActiveCDA.CommissionType == "按融资金额" || this._case.ActiveCDA.CommissionType == "其他")
                 {
                     log.Commission = null;
-                    log.CommissionDate = null;
                 }
             }
         }

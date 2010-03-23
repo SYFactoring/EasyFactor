@@ -30,7 +30,6 @@ namespace CMBC.EasyFactor.DB.dbml
             this.InvoiceFinanceAmount2 = invoice.FinanceAmount;
             this.InvoiceFinanceOutstanding2 = invoice.FinanceOutstanding;
             this.Commission = invoice.Commission;
-            this.CommissionDate = invoice.CommissionDate;
         }
 
         public string InvoiceNo2
@@ -153,12 +152,6 @@ namespace CMBC.EasyFactor.DB.dbml
             set;
         }
 
-        public DateTime? CommissionDate
-        {
-            get;
-            set;
-        }
-
         public DateTime? DueDate2
         {
             get;
@@ -205,21 +198,31 @@ namespace CMBC.EasyFactor.DB.dbml
 
                 if (InvoiceFinanceBatch != null)
                 {
-                    foreach (InvoiceRefundLog refundLog in InvoiceRefundLogs)
+                    if (InvoiceFinanceBatch.FinanceType == "卖方代付" || InvoiceFinanceBatch.FinanceType == "买方代付")
                     {
-                        int period = ((refundLog.InvoiceRefundBatch.RefundDate < InvoiceFinanceBatch.FinancePeriodEnd ? refundLog.InvoiceRefundBatch.RefundDate : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest += refundLog.RefundAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate) / 360 * period;
+                        int period = (InvoiceFinanceBatch.FinancePeriodEnd - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                        interest = this.FinanceAmount.GetValueOrDefault() * InvoiceFinanceBatch.FinanceRate / 360 * period;
+                    }
+                    else
+                    {
+                        foreach (InvoiceRefundLog refundLog in InvoiceRefundLogs)
+                        {
+                            int period = (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                            int overduePeriod = refundLog.InvoiceRefundBatch.RefundDate > InvoiceFinanceBatch.FinancePeriodEnd ? (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodEnd).Days : 0;
+                            interest += refundLog.RefundAmount.GetValueOrDefault() * InvoiceFinanceBatch.FinanceRate / 360 * (period + overduePeriod);
+                        }
+
+                        if (TypeUtil.GreaterZero(FinanceOutstanding) && DateTime.Today > InvoiceFinanceBatch.FinancePeriodBegin)
+                        {
+                            int period = (DateTime.Today.Date - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                            int overduePeriod = DateTime.Today.Date > InvoiceFinanceBatch.FinancePeriodEnd ? (DateTime.Today.Date - InvoiceFinanceBatch.FinancePeriodEnd).Days : 0;
+                            interest += FinanceAmount.GetValueOrDefault() * InvoiceFinanceBatch.FinanceRate / 360 * (period + overduePeriod);
+                        }
                     }
 
-                    if (TypeUtil.GreaterZero(FinanceOutstanding))
+                    if (InvoiceFinanceBatch.BatchCurrency != "CNY")
                     {
-                        int period = ((DateTime.Today.Date < InvoiceFinanceBatch.FinancePeriodEnd ? DateTime.Today.Date : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest += FinanceAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate) / 360 * period;
-                    }
-
-                    if (InvoiceFinanceBatch.BatchCurrency != this.Invoice.InvoiceCurrency)
-                    {
-                        double rate = Exchange.GetExchangeRate(InvoiceFinanceBatch.BatchCurrency, this.Invoice.InvoiceCurrency);
+                        double rate = Exchange.GetExchangeRate(InvoiceFinanceBatch.BatchCurrency, "CNY");
                         interest *= rate;
                     }
                 }
@@ -310,21 +313,31 @@ namespace CMBC.EasyFactor.DB.dbml
                 double interest = 0;
                 if (InvoiceFinanceBatch != null)
                 {
-                    foreach (InvoiceRefundLog refundLog in InvoiceRefundLogs)
+                    if (InvoiceFinanceBatch.FinanceType == "卖方代付" || InvoiceFinanceBatch.FinanceType == "买方代付")
                     {
-                        int period = ((refundLog.InvoiceRefundBatch.RefundDate < InvoiceFinanceBatch.FinancePeriodEnd ? refundLog.InvoiceRefundBatch.RefundDate : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest += refundLog.RefundAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
+                        int period = (InvoiceFinanceBatch.FinancePeriodEnd - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                        interest = this.FinanceAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
+                    }
+                    else
+                    {
+                        foreach (InvoiceRefundLog refundLog in InvoiceRefundLogs)
+                        {
+                            int period = (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                            int overduePeriod = refundLog.InvoiceRefundBatch.RefundDate > InvoiceFinanceBatch.FinancePeriodEnd ? (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodEnd).Days : 0;
+                            interest += refundLog.RefundAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * (period + overduePeriod);
+                        }
+
+                        if (TypeUtil.GreaterZero(FinanceOutstanding) && DateTime.Today > InvoiceFinanceBatch.FinancePeriodBegin)
+                        {
+                            int period = (DateTime.Today.Date - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                            int overduePeriod = DateTime.Today.Date > InvoiceFinanceBatch.FinancePeriodEnd ? (DateTime.Today.Date - InvoiceFinanceBatch.FinancePeriodEnd).Days : 0;
+                            interest += FinanceAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * (period + overduePeriod);
+                        }
                     }
 
-                    if (TypeUtil.GreaterZero(FinanceOutstanding))
+                    if (InvoiceFinanceBatch.BatchCurrency != "CNY")
                     {
-                        int period = ((DateTime.Today.Date < InvoiceFinanceBatch.FinancePeriodEnd ? DateTime.Today.Date : InvoiceFinanceBatch.FinancePeriodEnd) - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest += FinanceAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
-                    }
-
-                    if (InvoiceFinanceBatch.BatchCurrency != this.Invoice.InvoiceCurrency)
-                    {
-                        double rate = Exchange.GetExchangeRate(InvoiceFinanceBatch.BatchCurrency, this.Invoice.InvoiceCurrency);
+                        double rate = Exchange.GetExchangeRate(InvoiceFinanceBatch.BatchCurrency, "CNY");
                         interest *= rate;
                     }
                 }
@@ -362,11 +375,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 if (this.Commission.HasValue)
                 {
                     this.Invoice.Commission = this.Commission;
-                }
-
-                if (this.CommissionDate.HasValue)
-                {
-                    this.Invoice.CommissionDate = this.CommissionDate;
                 }
             }
         }

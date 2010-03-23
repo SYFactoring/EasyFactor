@@ -21,7 +21,7 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CaseMgr : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         /// <summary>
         /// 
@@ -29,9 +29,9 @@ namespace CMBC.EasyFactor.CaseMgr
         private BindingSource bs;
         private OpCaseType opCaseType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -59,11 +59,11 @@ namespace CMBC.EasyFactor.CaseMgr
             STAT,
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (2) 
+        #region Constructors (2)
 
-/// <summary>
+        /// <summary>
         /// Initializes a new instance of the CaseMgr class
         /// </summary>
         /// <param name="isContract"></param>
@@ -128,9 +128,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.UpdateContextMenu();
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (3) 
+        #region Properties (3)
 
         /// <summary>
         /// 
@@ -159,11 +159,11 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (11) 
+        #region Methods (11)
 
-		// Private Methods (11) 
+        // Private Methods (11) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -488,13 +488,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[9, "M"] = "还款金额";
                 sheet.Cells[9, "N"] = "还款日";
                 sheet.Cells[9, "O"] = "手续费";
-                sheet.Cells[9, "P"] = "收费日";
-                sheet.Cells[9, "Q"] = "利息";
-                sheet.Cells[9, "R"] = "备注";
+                sheet.Cells[9, "P"] = "利息";
+                sheet.Cells[9, "Q"] = "备注";
 
                 sheet.get_Range("A4", "I7").Borders.LineStyle = 1;
                 sheet.get_Range("M4", "N8").Borders.LineStyle = 1;
-                sheet.get_Range("P4", "Q8").Borders.LineStyle = 1;
+                sheet.get_Range("O4", "P8").Borders.LineStyle = 1;
 
                 int row = 10;
                 foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
@@ -516,9 +515,8 @@ namespace CMBC.EasyFactor.CaseMgr
                         sheet.Cells[row, "M"] = invoice.RefundAmount;
                         sheet.Cells[row, "N"] = invoice.RefundDate;
                         sheet.Cells[row, "O"] = invoice.Commission;
-                        sheet.Cells[row, "P"] = invoice.CommissionDate;
-                        sheet.Cells[row, "Q"] = invoice.NetInterest;
-                        sheet.Cells[row, "R"] = invoice.Comment;
+                        sheet.Cells[row, "P"] = invoice.NetInterest;
+                        sheet.Cells[row, "Q"] = invoice.Comment;
                         if (invoice.InvoiceFinanceLogs.Count > 0)
                         {
                             sheet.get_Range(sheet.Cells[row, "G"], sheet.Cells[row, "G"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoice.InvoiceCurrency);
@@ -543,8 +541,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.get_Range(sheet.Cells[10, "M"], sheet.Cells[row - 1, "M"]).NumberFormatLocal = currencyFormat;
                 sheet.get_Range(sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]).NumberFormatLocal = "yyyy-MM-dd";
                 sheet.get_Range(sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]).NumberFormatLocal = currencyFormat;
-                sheet.get_Range(sheet.Cells[10, "P"], sheet.Cells[row - 1, "P"]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[10, "Q"], sheet.Cells[row - 1, "Q"]).NumberFormatLocal = currencyFormat;
+                sheet.get_Range(sheet.Cells[10, "P"], sheet.Cells[row - 1, "P"]).NumberFormatLocal = currencyFormat;
 
                 foreach (Range range in sheet.UsedRange.Rows)
                 {
@@ -644,6 +641,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

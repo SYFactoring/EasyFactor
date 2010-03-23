@@ -159,9 +159,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Constructors
 
-        #region Methods (23)
+        #region Methods (25)
 
-        // Private Methods (23) 
+        // Private Methods (25) 
 
         private void cbIsCreditCoverRevolving_CheckedChanged(object sender, EventArgs e)
         {
@@ -220,6 +220,36 @@ namespace CMBC.EasyFactor.CaseMgr
             if ("其他".Equals(cda.CommissionType))
             {
                 if (e.ControlToValidate.Text.Equals(string.Empty))
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void customValidator10_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            CDA cda = this.CDABindingSource.DataSource as CDA;
+            if (cda.Case == null)
+            {
+                return;
+            }
+
+            if (cda.Case.TransactionType == "进口保理")
+            {
+                if (this.iFPriceTextBox.Text == string.Empty)
                 {
                     e.IsValid = false;
                 }
@@ -435,6 +465,36 @@ namespace CMBC.EasyFactor.CaseMgr
             if (cda.LossThreshold.HasValue && cda.CreditCover.HasValue)
             {
                 if (TypeUtil.GreaterZero(cda.LossThreshold.Value - cda.CreditCover.Value))
+                {
+                    e.IsValid = false;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void customValidator9_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            CDA cda = this.CDABindingSource.DataSource as CDA;
+            if (cda.Case == null)
+            {
+                return;
+            }
+
+            if (cda.Case.TransactionType != "进口保理")
+            {
+                if (this.priceTextBox.Text == string.Empty)
                 {
                     e.IsValid = false;
                 }

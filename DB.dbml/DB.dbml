@@ -475,7 +475,6 @@
       <Column Name="RefundAmount" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="RefundDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="Commission" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="CommissionDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="IsDispute" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="DisputeType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="DisputeAmount" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />

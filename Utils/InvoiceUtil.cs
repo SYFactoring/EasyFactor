@@ -25,18 +25,10 @@ namespace CMBC.EasyFactor.Utils
                         {
                             case "按融资金额":
                                 invoice.Commission = invoice.FinanceAmount * cda.Price;
-                                if (invoice.Commission.HasValue)
-                                {
-                                    invoice.CommissionDate = invoice.FinanceDate;
-                                }
 
                                 break;
                             case "按转让金额":
                                 invoice.Commission = invoice.AssignAmount * cda.Price;
-                                if (invoice.Commission.HasValue)
-                                {
-                                    invoice.CommissionDate = invoice.InvoiceAssignBatch.AssignDate;
-                                }
 
                                 break;
                             default:

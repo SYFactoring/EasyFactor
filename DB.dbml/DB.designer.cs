@@ -10407,8 +10407,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<double> _Commission;
 		
-		private System.Nullable<System.DateTime> _CommissionDate;
-		
 		private System.Nullable<bool> _IsDispute;
 		
 		private string _DisputeType;
@@ -10499,8 +10497,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnRefundDateChanged();
     partial void OnCommissionChanging(System.Nullable<double> value);
     partial void OnCommissionChanged();
-    partial void OnCommissionDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCommissionDateChanged();
     partial void OnIsDisputeChanging(System.Nullable<bool> value);
     partial void OnIsDisputeChanged();
     partial void OnDisputeTypeChanging(string value);
@@ -11095,26 +11091,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Commission = value;
 					this.SendPropertyChanged("Commission");
 					this.OnCommissionChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CommissionDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<System.DateTime> CommissionDate
-		{
-			get
-			{
-				return this._CommissionDate;
-			}
-			set
-			{
-				if ((this._CommissionDate != value))
-				{
-					this.OnCommissionDateChanging(value);
-					this.SendPropertyChanging();
-					this._CommissionDate = value;
-					this.SendPropertyChanged("CommissionDate");
-					this.OnCommissionDateChanged();
 				}
 			}
 		}
