@@ -397,32 +397,10 @@ namespace CMBC.EasyFactor.ARMgr
             foreach (IGrouping<string, InvoiceAssignBatch> caseGroup in caseGroups)
             {
                 string transactionType = caseGroup.Key;
-                IEnumerable<IGrouping<Client, InvoiceAssignBatch>> groups = null;
-                switch (transactionType)
+                IEnumerable<IGrouping<Client, InvoiceAssignBatch>> groups = caseGroup.GroupBy(c => c.Case.SellerClient);
+                foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
                 {
-                    case "国内卖方保理":
-                    case "出口保理":
-                    case "国内信保保理":
-                    case "国际信保保理":
-                    case "租赁保理":
-                        groups = caseGroup.GroupBy(c => c.Case.SellerClient);
-                        foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
-                        {
-                            makeReport(group);
-                        }
-
-                        break;
-                    case "国内买方保理":
-                    case "进口保理":
-                        groups = caseGroup.GroupBy(c => c.Case.BuyerClient);
-                        foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
-                        {
-                            makeReport(group);
-                        }
-
-                        break;
-                    default:
-                        break;
+                    makeReport(group);
                 }
             }
         }

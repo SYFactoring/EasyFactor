@@ -790,7 +790,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_Comment", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_Comment", DbType="NVarChar(2000)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string Comment
 		{
 			get

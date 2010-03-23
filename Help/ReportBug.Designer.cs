@@ -39,6 +39,9 @@
             this.tbBug = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblBug = new DevComponents.DotNetBar.LabelX();
             this.btnSubmit = new DevComponents.DotNetBar.ButtonX();
+            this.tbTitle = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblTitle = new DevComponents.DotNetBar.LabelX();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.panelBug.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,6 +49,8 @@
             // 
             this.panelBug.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelBug.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.panelBug.Controls.Add(this.tbTitle);
+            this.panelBug.Controls.Add(this.lblTitle);
             this.panelBug.Controls.Add(this.cbBugType);
             this.panelBug.Controls.Add(this.lblBugType);
             this.panelBug.Controls.Add(this.btnFileSelect);
@@ -103,7 +108,7 @@
             this.cbBugType.Name = "cbBugType";
             this.cbBugType.Size = new System.Drawing.Size(101, 20);
             this.cbBugType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbBugType.TabIndex = 8;
+            this.cbBugType.TabIndex = 10;
             // 
             // lblBugType
             // 
@@ -116,7 +121,7 @@
             this.lblBugType.Location = new System.Drawing.Point(166, 204);
             this.lblBugType.Name = "lblBugType";
             this.lblBugType.Size = new System.Drawing.Size(56, 16);
-            this.lblBugType.TabIndex = 7;
+            this.lblBugType.TabIndex = 9;
             this.lblBugType.Text = "反馈类型";
             // 
             // btnFileSelect
@@ -166,7 +171,7 @@
             this.tbSubmitPerson.Location = new System.Drawing.Point(71, 201);
             this.tbSubmitPerson.Name = "tbSubmitPerson";
             this.tbSubmitPerson.Size = new System.Drawing.Size(86, 20);
-            this.tbSubmitPerson.TabIndex = 3;
+            this.tbSubmitPerson.TabIndex = 8;
             // 
             // lblSubmitPerson
             // 
@@ -179,7 +184,7 @@
             this.lblSubmitPerson.Location = new System.Drawing.Point(21, 202);
             this.lblSubmitPerson.Name = "lblSubmitPerson";
             this.lblSubmitPerson.Size = new System.Drawing.Size(44, 16);
-            this.lblSubmitPerson.TabIndex = 2;
+            this.lblSubmitPerson.TabIndex = 7;
             this.lblSubmitPerson.Text = "提交者";
             // 
             // tbBug
@@ -188,12 +193,12 @@
             // 
             // 
             this.tbBug.Border.Class = "TextBoxBorder";
-            this.tbBug.Location = new System.Drawing.Point(71, 2);
+            this.tbBug.Location = new System.Drawing.Point(71, 31);
             this.tbBug.Multiline = true;
             this.tbBug.Name = "tbBug";
             this.tbBug.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbBug.Size = new System.Drawing.Size(255, 172);
-            this.tbBug.TabIndex = 1;
+            this.tbBug.Size = new System.Drawing.Size(255, 143);
+            this.tbBug.TabIndex = 3;
             // 
             // lblBug
             // 
@@ -203,10 +208,10 @@
             // 
             // 
             this.lblBug.BackgroundStyle.Class = "";
-            this.lblBug.Location = new System.Drawing.Point(9, 19);
+            this.lblBug.Location = new System.Drawing.Point(9, 31);
             this.lblBug.Name = "lblBug";
             this.lblBug.Size = new System.Drawing.Size(56, 16);
-            this.lblBug.TabIndex = 0;
+            this.lblBug.TabIndex = 2;
             this.lblBug.Text = "问题描述";
             // 
             // btnSubmit
@@ -220,6 +225,36 @@
             this.btnSubmit.TabIndex = 1;
             this.btnSubmit.Text = "提交";
             this.btnSubmit.Click += new System.EventHandler(this.SubmitBug);
+            // 
+            // tbTitle
+            // 
+            // 
+            // 
+            // 
+            this.tbTitle.Border.Class = "TextBoxBorder";
+            this.tbTitle.Location = new System.Drawing.Point(71, 8);
+            this.tbTitle.Name = "tbTitle";
+            this.tbTitle.Size = new System.Drawing.Size(255, 20);
+            this.tbTitle.TabIndex = 1;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.lblTitle.BackgroundStyle.Class = "";
+            this.lblTitle.Location = new System.Drawing.Point(34, 9);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(31, 16);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "题目";
+            // 
+            // backgroundWorker
+            // 
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
             // ReportBug
             // 
@@ -251,5 +286,8 @@
         private DevComponents.DotNetBar.ButtonX btnSubmit;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbBugType;
         private DevComponents.DotNetBar.LabelX lblBugType;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTitle;
+        private DevComponents.DotNetBar.LabelX lblTitle;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }

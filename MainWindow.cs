@@ -29,7 +29,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -49,9 +49,9 @@ namespace CMBC.EasyFactor
             this.backgroundWorker.RunWorkerAsync();
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Sets command status
@@ -75,11 +75,11 @@ namespace CMBC.EasyFactor
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (82) 
+        #region Methods (82)
 
-		// Public Methods (2) 
+        // Public Methods (2) 
 
         /// <summary>
         /// 
@@ -106,7 +106,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-		// Private Methods (80) 
+        // Private Methods (80) 
 
         /// <summary>
         /// 
@@ -146,7 +146,7 @@ namespace CMBC.EasyFactor
             //    return;
             //}
 
-            
+
         }
 
         private void backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
@@ -265,8 +265,10 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckUpdate(object sender, EventArgs e)
         {
-            this.autoUpdater.RestartForm = new ConfirmForm(this.autoUpdater);
-            this.autoUpdater.TryUpdate();
+            AutoUpdater autoUpdater = new AutoUpdater();
+            autoUpdater.ConfigURL = "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml";
+            autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
+            autoUpdater.TryUpdate();
         }
 
         /// <summary>
@@ -274,8 +276,11 @@ namespace CMBC.EasyFactor
         /// </summary>
         private void CheckUpdateBackground()
         {
-            this.autoUpdater.RestartForm = new ConfirmForm(this.autoUpdater);
-            this.autoUpdater.TryUpdateBackground();
+            AutoUpdater autoUpdater = new AutoUpdater();
+            autoUpdater.ConfigURL = "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml";
+            autoUpdater.AutoDownload = true;
+            autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
+            autoUpdater.TryUpdateBackground();
         }
 
         /// <summary>
@@ -1184,6 +1189,6 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(mgr);
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

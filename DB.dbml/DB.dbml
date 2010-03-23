@@ -18,7 +18,7 @@
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="ManagerName" Member="OPName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="NetPaymentTerm" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Case_CDA" Member="CDAs" OtherKey="CaseCode" Type="CDA" />
       <Association Name="Case_CreditCoverNegotiation" Member="CreditCoverNegotiations" OtherKey="CaseCode" Type="CreditCoverNegotiation" />
       <Association Name="Case_InvoiceAssignBatch" Member="InvoiceAssignBatches" OtherKey="CaseCode" Type="InvoiceAssignBatch" />

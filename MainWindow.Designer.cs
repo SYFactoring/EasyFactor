@@ -343,7 +343,6 @@ namespace CMBC.EasyFactor
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.autoUpdater = new CMBC.EasyFactor.Help.AutoUpdater();
             this.btnClientOverwriteImport = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonControl.SuspendLayout();
             this.ribbonPanel3.SuspendLayout();
@@ -2421,15 +2420,6 @@ namespace CMBC.EasyFactor
             this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
             this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
-            // autoUpdater
-            // 
-            this.autoUpdater.AutoDownload = false;
-            this.autoUpdater.ConfigURL = "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml";
-            this.autoUpdater.LoginUserName = null;
-            this.autoUpdater.LoginUserPass = null;
-            this.autoUpdater.ProxyURL = null;
-            this.autoUpdater.RestartForm = null;
-            // 
             // btnClientOverwriteImport
             // 
             this.btnClientOverwriteImport.Name = "btnClientOverwriteImport";
@@ -2496,7 +2486,6 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnInvoiceNewImport;
         private DevComponents.DotNetBar.ButtonItem btnBugReport;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
-        private CMBC.EasyFactor.Help.AutoUpdater autoUpdater;
         private DevComponents.DotNetBar.ButtonItem btnCheckUpdate;
         private DevComponents.DotNetBar.ButtonItem btnClientOverwriteImport;
     }
