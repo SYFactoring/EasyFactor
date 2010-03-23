@@ -320,30 +320,33 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public void CaculateCommission()
         {
-            if (!TypeUtil.GreaterZero(this.Commission))
+            if (this.InvoiceAssignBatch != null)
             {
-                if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按融资金额")
+                if (!TypeUtil.GreaterZero(this.Commission))
                 {
-                    Commission = FinanceAmount * this.InvoiceAssignBatch.Case.ActiveCDA.Price.GetValueOrDefault();
-                    if (TypeUtil.GreaterZero(Commission))
+                    if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按融资金额")
                     {
-                        CommissionDate = FinanceDate;
+                        Commission = FinanceAmount * this.InvoiceAssignBatch.Case.ActiveCDA.Price.GetValueOrDefault();
+                        if (TypeUtil.GreaterZero(Commission))
+                        {
+                            CommissionDate = FinanceDate;
+                        }
+                        else
+                        {
+                            CommissionDate = null;
+                        }
                     }
-                    else
+                    else if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按转让金额")
                     {
-                        CommissionDate = null;
-                    }
-                }
-                else if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按转让金额")
-                {
-                    Commission = AssignAmount * this.InvoiceAssignBatch.Case.ActiveCDA.Price.GetValueOrDefault();
-                    if (TypeUtil.GreaterZero(Commission))
-                    {
-                        CommissionDate = AssignDate;
-                    }
-                    else
-                    {
-                        CommissionDate = null;
+                        Commission = AssignAmount * this.InvoiceAssignBatch.Case.ActiveCDA.Price.GetValueOrDefault();
+                        if (TypeUtil.GreaterZero(Commission))
+                        {
+                            CommissionDate = AssignDate;
+                        }
+                        else
+                        {
+                            CommissionDate = null;
+                        }
                     }
                 }
             }
