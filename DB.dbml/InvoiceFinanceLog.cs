@@ -217,9 +217,9 @@ namespace CMBC.EasyFactor.DB.dbml
                         interest += FinanceAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate) / 360 * period;
                     }
 
-                    if (InvoiceFinanceBatch.BatchCurrency != "CNY")
+                    if (InvoiceFinanceBatch.BatchCurrency != this.Invoice.InvoiceCurrency)
                     {
-                        double rate = Exchange.GetExchangeRate(InvoiceFinanceBatch.BatchCurrency, "CNY");
+                        double rate = Exchange.GetExchangeRate(InvoiceFinanceBatch.BatchCurrency, this.Invoice.InvoiceCurrency);
                         interest *= rate;
                     }
                 }
@@ -322,9 +322,9 @@ namespace CMBC.EasyFactor.DB.dbml
                         interest += FinanceAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
                     }
 
-                    if (InvoiceFinanceBatch.BatchCurrency != "CNY")
+                    if (InvoiceFinanceBatch.BatchCurrency != this.Invoice.InvoiceCurrency)
                     {
-                        double rate = Exchange.GetExchangeRate(InvoiceFinanceBatch.BatchCurrency, "CNY");
+                        double rate = Exchange.GetExchangeRate(InvoiceFinanceBatch.BatchCurrency, this.Invoice.InvoiceCurrency);
                         interest *= rate;
                     }
                 }

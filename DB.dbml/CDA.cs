@@ -95,7 +95,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     return null;
                 }
 
-                return this.FinanceLine - this.Case.FinanceOutstanding;
+                return this.FinanceLine - this.Case.FinanceOutstanding.GetValueOrDefault();
             }
         }
 
@@ -169,6 +169,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     client = Case.SellerClient;
                 }
+
                 return client.FinanceCreditLine;
             }
         }

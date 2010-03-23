@@ -556,7 +556,7 @@ namespace CMBC.EasyFactor.ARMgr
                     InvoiceFinanceLog oldLog = (InvoiceFinanceLog)this.logsBindingSource.List[i];
 
                     InvoiceFinanceLog newLog = logList.SingleOrDefault(log => log.InvoiceNo2 == oldLog.InvoiceNo2);
-                    
+
                     oldLog.FinanceAmount = newLog.FinanceAmount;
                     oldLog.Commission = newLog.Commission;
                     oldLog.CommissionDate = newLog.CommissionDate;
@@ -587,13 +587,15 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (!TypeUtil.GreaterZero(this._case.ActiveCDA.FinanceLineOutstanding))
+            CDA activeCDA = this._case.ActiveCDA;
+
+            if (!TypeUtil.GreaterZero(activeCDA.FinanceLineOutstanding))
             {
                 MessageBoxEx.Show("该案件的预付款融资额度余额不足，不能融资", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (!TypeUtil.GreaterZero(this._case.TotalFinanceOutstanding))
+            if (!TypeUtil.GreaterZero(activeCDA.FinanceCreditLine.CreditLine - this._case.TotalFinanceOutstanding))
             {
                 MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;

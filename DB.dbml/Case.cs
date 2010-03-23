@@ -499,7 +499,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? TotalFinanceOutstanding
+        public double TotalFinanceOutstanding
         {
             get
             {
@@ -510,12 +510,12 @@ namespace CMBC.EasyFactor.DB.dbml
                     case "国内信保保理":
                     case "国际信保保理":
                     case "租赁保理":
-                        return this.SellerClient.GetFinanceOutstanding(this.InvoiceCurrency);
+                        return this.SellerClient.GetFinanceOutstanding(this.InvoiceCurrency).GetValueOrDefault();
                     case "国内买方保理":
                     case "进口保理":
-                        return this.BuyerClient.GetFinanceOutstanding(this.InvoiceCurrency);
+                        return this.BuyerClient.GetFinanceOutstanding(this.InvoiceCurrency).GetValueOrDefault();
                     default:
-                        return null;
+                        return 0;
                 }
             }
         }
