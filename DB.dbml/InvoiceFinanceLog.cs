@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceFinanceLog
     {
-        #region Properties (13)
+		#region Constructors (1) 
 
         public InvoiceFinanceLog(Invoice invoice)
             : this()
@@ -32,10 +32,121 @@ namespace CMBC.EasyFactor.DB.dbml
             this.Commission = invoice.Commission;
         }
 
-        public string InvoiceNo2
+		#endregion Constructors 
+
+		#region Properties (23) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double AssignAmount
+        {
+            get
+            {
+                if (this.Invoice != null)
+                {
+                    return this.Invoice.AssignAmount;
+                }
+                else
+                {
+                    return this.AssignAmount2;
+                }
+            }
+        }
+
+        public double AssignAmount2
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime AssignDate
+        {
+            get
+            {
+                if (this.Invoice != null)
+                {
+                    return this.Invoice.AssignDate;
+                }
+                else
+                {
+                    return this.AssignDate2;
+                }
+            }
+        }
+
+        public DateTime AssignDate2
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double AssignOutstanding
+        {
+            get
+            {
+                if (this.Invoice != null)
+                {
+                    return this.Invoice.AssignOutstanding;
+                }
+                else
+                {
+                    return this.AssignOutstanding2;
+                }
+            }
+        }
+
+        public double AssignOutstanding2
+        {
+            get;
+            set;
+        }
+
+        public double? Commission
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? DueDate
+        {
+            get
+            {
+                if (this.Invoice != null)
+                {
+                    return this.Invoice.DueDate;
+                }
+                else
+                {
+                    return this.DueDate2;
+                }
+            }
+        }
+
+        public DateTime? DueDate2
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string FinanceCurrency
+        {
+            get
+            {
+                return this.InvoiceFinanceBatch.BatchCurrency;
+            }
         }
 
         /// <summary>
@@ -70,108 +181,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 else
                 {
                     return null;
-                }
-            }
-        }
-
-        public double AssignAmount2
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double AssignAmount
-        {
-            get
-            {
-                if (this.Invoice != null)
-                {
-                    return this.Invoice.AssignAmount;
-                }
-                else
-                {
-                    return this.AssignAmount2;
-                }
-            }
-        }
-
-        public DateTime AssignDate2
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime AssignDate
-        {
-            get
-            {
-                if (this.Invoice != null)
-                {
-                    return this.Invoice.AssignDate;
-                }
-                else
-                {
-                    return this.AssignDate2;
-                }
-            }
-        }
-
-        public double AssignOutstanding2
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double AssignOutstanding
-        {
-            get
-            {
-                if (this.Invoice != null)
-                {
-                    return this.Invoice.AssignOutstanding;
-                }
-                else
-                {
-                    return this.AssignOutstanding2;
-                }
-            }
-        }
-
-        public double? Commission
-        {
-            get;
-            set;
-        }
-
-        public DateTime? DueDate2
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime? DueDate
-        {
-            get
-            {
-                if (this.Invoice != null)
-                {
-                    return this.Invoice.DueDate;
-                }
-                else
-                {
-                    return this.DueDate2;
                 }
             }
         }
@@ -231,12 +240,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public DateTime? InvoiceDate2
-        {
-            get;
-            set;
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -255,7 +258,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public double? InvoiceFinanceAmount2
+        public DateTime? InvoiceDate2
         {
             get;
             set;
@@ -279,7 +282,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public double? InvoiceFinanceOutstanding2
+        public double? InvoiceFinanceAmount2
         {
             get;
             set;
@@ -301,6 +304,18 @@ namespace CMBC.EasyFactor.DB.dbml
                     return this.InvoiceFinanceOutstanding2;
                 }
             }
+        }
+
+        public double? InvoiceFinanceOutstanding2
+        {
+            get;
+            set;
+        }
+
+        public string InvoiceNo2
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -364,6 +379,8 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+		#endregion Properties 
+
         /// <summary>
         /// 
         /// </summary>
@@ -378,6 +395,5 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
-        #endregion Properties
     }
 }

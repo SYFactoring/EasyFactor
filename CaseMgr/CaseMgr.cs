@@ -379,10 +379,10 @@ namespace CMBC.EasyFactor.CaseMgr
 
             try
             {
-                sheet.get_Range("A1", "R1").MergeCells = true;
+                sheet.get_Range("A1", "Q1").MergeCells = true;
                 sheet.get_Range("A1", "A1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 sheet.Cells[1, "A"] = "销售分户账台账";
-                sheet.Cells[2, "Q"] = String.Format("单位：{0}", selectedCase.InvoiceCurrency);
+                sheet.Cells[2, "P"] = String.Format("单位：{0}", selectedCase.InvoiceCurrency);
                 sheet.Cells[3, "A"] = "分行/分部";
                 sheet.Cells[3, "B"] = selectedCase.OwnerDepartment.DepartmentName;
 
@@ -451,27 +451,27 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.get_Range(sheet.Cells[7, "H"], sheet.Cells[7, "I"]).MergeCells = true;
                 sheet.Cells[7, "H"] = String.Format("{0} {1:N2}", cda.HandFeeCurr, cda.HandFee);
 
-                sheet.get_Range(sheet.Cells[4, "M"], sheet.Cells[4, "N"]).MergeCells = true;
-                sheet.Cells[4, "M"] = "信用风险担保";
-                sheet.Cells[5, "M"] = "核准额度";
-                sheet.Cells[5, "N"] = String.Format("{0} {1:N2}", cda.CreditCoverCurr, cda.CreditCover);
-                sheet.Cells[6, "M"] = "到期日";
-                sheet.Cells[6, "N"] = String.Format("{0:yyyy-MM-dd}", cda.CreditCoverPeriodEnd);
-                sheet.Cells[7, "M"] = "剩余额度";
-                sheet.Cells[7, "N"] = String.Format("{0} {1:N2}", cda.CreditCoverCurr, cda.CreditCoverOutstanding);
-                sheet.Cells[8, "M"] = "应收帐款余额";
-                sheet.Cells[8, "N"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, selectedCase.AssignOutstanding);
+                sheet.get_Range(sheet.Cells[4, "L"], sheet.Cells[4, "M"]).MergeCells = true;
+                sheet.Cells[4, "L"] = "信用风险担保";
+                sheet.Cells[5, "L"] = "核准额度";
+                sheet.Cells[5, "M"] = String.Format("{0} {1:N2}", cda.CreditCoverCurr, cda.CreditCover);
+                sheet.Cells[6, "L"] = "到期日";
+                sheet.Cells[6, "M"] = String.Format("{0:yyyy-MM-dd}", cda.CreditCoverPeriodEnd);
+                sheet.Cells[7, "L"] = "剩余额度";
+                sheet.Cells[7, "M"] = String.Format("{0} {1:N2}", cda.CreditCoverCurr, cda.CreditCoverOutstanding);
+                sheet.Cells[8, "L"] = "应收帐款余额";
+                sheet.Cells[8, "M"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, selectedCase.AssignOutstanding);
 
-                sheet.get_Range(sheet.Cells[4, "P"], sheet.Cells[4, "Q"]).MergeCells = true;
-                sheet.Cells[4, "P"] = "融资额度";
-                sheet.Cells[5, "P"] = "核准额度";
-                sheet.Cells[5, "Q"] = String.Format("{0} {1:N2}", cda.FinanceLineCurr, cda.FinanceLine);
-                sheet.Cells[6, "P"] = "到期日";
-                sheet.Cells[6, "Q"] = String.Format("{0:yyyy-MM-dd}", cda.FinanceLinePeriodEnd);
-                sheet.Cells[7, "P"] = "剩余额度";
-                sheet.Cells[7, "Q"] = String.Format("{0} {1:N2}", cda.FinanceLineCurr, cda.FinanceLineOutstanding);
-                sheet.Cells[8, "P"] = "融资余额";
-                sheet.Cells[8, "Q"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, selectedCase.FinanceOutstanding);
+                sheet.get_Range(sheet.Cells[4, "O"], sheet.Cells[4, "P"]).MergeCells = true;
+                sheet.Cells[4, "O"] = "融资额度";
+                sheet.Cells[5, "O"] = "核准额度";
+                sheet.Cells[5, "P"] = String.Format("{0} {1:N2}", cda.FinanceLineCurr, cda.FinanceLine);
+                sheet.Cells[6, "O"] = "到期日";
+                sheet.Cells[6, "P"] = String.Format("{0:yyyy-MM-dd}", cda.FinanceLinePeriodEnd);
+                sheet.Cells[7, "O"] = "剩余额度";
+                sheet.Cells[7, "P"] = String.Format("{0} {1:N2}", cda.FinanceLineCurr, cda.FinanceLineOutstanding);
+                sheet.Cells[8, "O"] = "融资余额";
+                sheet.Cells[8, "P"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, selectedCase.FinanceOutstanding);
 
                 sheet.Cells[9, "A"] = "发票号";
                 sheet.Cells[9, "B"] = "转让金额";
@@ -492,7 +492,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[9, "Q"] = "备注";
 
                 sheet.get_Range("A4", "I7").Borders.LineStyle = 1;
-                sheet.get_Range("M4", "N8").Borders.LineStyle = 1;
+                sheet.get_Range("L4", "M8").Borders.LineStyle = 1;
                 sheet.get_Range("O4", "P8").Borders.LineStyle = 1;
 
                 int row = 10;
@@ -527,7 +527,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
 
                 string currencyFormat = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
-                sheet.get_Range(sheet.Cells[9, "A"], sheet.Cells[row - 1, "R"]).Borders.LineStyle = 1;
+                sheet.get_Range(sheet.Cells[9, "A"], sheet.Cells[row - 1, "Q"]).Borders.LineStyle = 1;
                 sheet.get_Range(sheet.Cells[10, "B"], sheet.Cells[row - 1, "B"]).NumberFormatLocal = currencyFormat;
                 sheet.get_Range(sheet.Cells[10, "C"], sheet.Cells[row - 1, "C"]).NumberFormatLocal = "yyyy-MM-dd";
                 sheet.get_Range(sheet.Cells[10, "D"], sheet.Cells[row - 1, "D"]).NumberFormatLocal = "yyyy-MM-dd";

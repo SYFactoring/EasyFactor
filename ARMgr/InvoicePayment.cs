@@ -649,7 +649,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (invoiceList.Count > 0)
                 {
                     MainWindow mainWindow = App.Current.MainWindow;
-                    mainWindow.InvoiceRefund(invoiceList, batch.PaymentType, batch.PaymentDate);
+                    mainWindow.InvoiceRefund(invoiceList, batch);
                 }
                 else
                 {

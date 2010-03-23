@@ -22,7 +22,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoiceRefund : UserControl
     {
-        #region Fields (4)
+		#region Fields (4) 
 
         /// <summary>
         /// 
@@ -41,9 +41,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpRefundType refundType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         /// <summary>
         /// 
@@ -71,11 +71,11 @@ namespace CMBC.EasyFactor.ARMgr
             GUARANTEE_PAYMENT,
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (1)
+		#region Constructors (1) 
 
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         public InvoiceRefund(ARCaseBasic caseBasic, OpRefundType refundType)
@@ -106,9 +106,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.context = new DBDataContext();
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (1)
+		#region Properties (1) 
 
         /// <summary>
         /// 
@@ -122,19 +122,18 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (21)
+		#region Methods (21) 
 
-        // Public Methods (2) 
+		// Public Methods (2) 
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="invoiceList"></param>
-        /// <param name="refundType"></param>
-        /// <param name="date"></param>
-        public void NewBatchFromPayment(List<Invoice> invoiceList, String refundType, DateTime date)
+        /// <param name="batch"></param>
+        public void NewBatchFromPayment(List<Invoice> invoiceList, InvoicePaymentBatch paymentBatch)
         {
             if (invoiceList == null || invoiceList.Count == 0)
             {
@@ -155,11 +154,11 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-
+            this.tbTotalPayment.Text = String.Format("{0:N2}", paymentBatch.InvoicePaymentLogs.Sum(log => log.PaymentAmount));
             this.tbTotalRefund.Text = string.Empty;
             InvoiceRefundBatch batch = new InvoiceRefundBatch();
-            batch.RefundType = refundType;
-            batch.RefundDate = date;
+            batch.RefundType = paymentBatch.PaymentType;
+            batch.RefundDate = paymentBatch.PaymentDate;
             batch.CreateUserName = App.Current.CurUser.Name;
             batch.CheckStatus = "未复核";
             this.batchBindingSource.DataSource = batch;
@@ -168,7 +167,7 @@ namespace CMBC.EasyFactor.ARMgr
             for (int i = 0; i < this.logsBindingSource.List.Count; i++)
             {
                 DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvLogs.Rows[i].Cells[0];
-                cell.Value = 1;
+                cell.Value = 0;
                 InvoiceRefundLog log = (InvoiceRefundLog)logsBindingSource.List[i];
                 log.RefundAmount = log.FinanceOutstanding.GetValueOrDefault();
             }
@@ -189,7 +188,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = typeof(InvoiceRefundBatch);
             this.logsBindingSource.DataSource = typeof(InvoiceRefundLog);
         }
-        // Private Methods (19) 
+		// Private Methods (19) 
 
         /// <summary>
         /// 
@@ -686,17 +685,22 @@ namespace CMBC.EasyFactor.ARMgr
         {
             IList refundLogList = this.logsBindingSource.List;
             double totalRefund = 0;
-            double totalPayment = 0;
             for (int i = 0; i < refundLogList.Count; i++)
             {
                 if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    //totalPayment += ((InvoiceRefundLog)refundLogList[i]).PaymentAmount.GetValueOrDefault();
-                    totalRefund += ((InvoiceRefundLog)refundLogList[i]).RefundAmount.GetValueOrDefault();
+                    InvoiceRefundLog refundLog = (InvoiceRefundLog)refundLogList[i];
+                    double refundAmount = refundLog.RefundAmount.GetValueOrDefault();
+                    if (refundLog.RefundCurrency != this._case.InvoiceCurrency)
+                    {
+                        double rate = Exchange.GetExchangeRate(refundLog.RefundCurrency, this._case.InvoiceCurrency);
+                        refundAmount *= rate;
+                    }
+
+                    totalRefund += refundAmount;
                 }
             }
 
-            this.tbTotalPayment.Text = String.Format("{0:N2}", totalPayment);
             this.tbTotalRefund.Text = String.Format("{0:N2}", totalRefund);
         }
 
@@ -747,6 +751,6 @@ namespace CMBC.EasyFactor.ARMgr
             return true;
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

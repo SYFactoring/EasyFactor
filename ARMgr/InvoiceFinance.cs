@@ -383,7 +383,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvLogs.Columns[e.ColumnIndex];
-            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colCommissionDate)
+            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate )
             {
                 DateTime date = (DateTime)e.Value;
                 e.Value = date.ToString("yyyyMMdd");
@@ -411,7 +411,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvLogs.Columns[e.ColumnIndex];
-            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colCommissionDate)
+            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate)
             {
                 string str = (string)e.Value;
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
@@ -432,7 +432,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvLogs.Columns[e.ColumnIndex];
-            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate || col == colCommissionDate)
+            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate )
             {
                 string str = (string)e.FormattedValue;
                 DateTime result;
@@ -603,12 +603,10 @@ namespace CMBC.EasyFactor.ARMgr
             if (activeCDA.CommissionType == "按融资金额" || activeCDA.CommissionType == "其他")
             {
                 this.colCommission.Visible = true;
-                this.colCommissionDate.Visible = true;
             }
             else
             {
                 this.colCommission.Visible = false;
-                this.colCommissionDate.Visible = false;
             }
 
             InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
@@ -676,7 +674,6 @@ namespace CMBC.EasyFactor.ARMgr
             if (this._case.ActiveCDA.CommissionType == "按融资金额" || this._case.ActiveCDA.CommissionType == "其他")
             {
                 this.dgvLogs.Rows[rowIndex].Cells["colCommission"].ReadOnly = !editable;
-                this.dgvLogs.Rows[rowIndex].Cells["colCommissionDate"].ReadOnly = !editable;
             }
 
             if (!editable)

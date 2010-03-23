@@ -29,6 +29,7 @@ namespace CMBC.EasyFactor.DB.dbml
             this.FinanceDate2 = financeLog.FinanceDate;
             this.FinanceDueDate2 = financeLog.FinanceDueDate;
             this.InvoiceRefundAmount2 = financeLog.RefundAmount;
+            this.RefundCurrency2 = financeLog.InvoiceFinanceBatch.BatchCurrency;
         }
 
         public string InvoiceNo2
@@ -49,6 +50,27 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get;
             set;
+        }
+
+        public string RefundCurrency2
+        {
+            get;
+            set;
+        }
+
+        public string RefundCurrency
+        {
+            get
+            {
+                if (this.InvoiceFinanceLog != null)
+                {
+                    return this.InvoiceFinanceLog.InvoiceFinanceBatch.BatchCurrency;
+                }
+                else
+                {
+                    return RefundCurrency2;
+                }
+            }
         }
 
         public double? FinanceAmount2

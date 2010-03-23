@@ -85,14 +85,14 @@ namespace CMBC.EasyFactor
         /// 
         /// </summary>
         /// <param name="invoiceList"></param>
-        public void InvoiceRefund(List<Invoice> invoiceList, string paymentType, DateTime date)
+        public void InvoiceRefund(List<Invoice> invoiceList, InvoicePaymentBatch batch)
         {
             if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
             {
                 ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REFUND);
                 this.SetDetailPanel(invoiceRefund);
                 InvoiceRefund uc = (InvoiceRefund)invoiceRefund.InvoiceControl;
-                uc.NewBatchFromPayment(invoiceList, paymentType, date);
+                uc.NewBatchFromPayment(invoiceList, batch);
             }
         }
 
@@ -464,8 +464,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportClientsOverwrite(object sender, EventArgs e)
         {
-            ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_OVERWRITE);
-            form.ShowDialog(this);
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_OVERWRITE);
+                importForm.Show();
+            }
         }
 
         /// <summary>

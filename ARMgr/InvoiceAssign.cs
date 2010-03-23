@@ -187,7 +187,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == this.colDueDate || col == this.colInvoiceDate || col == this.colCommissionDate)
+            if (col == this.colDueDate || col == this.colInvoiceDate)
             {
                 DateTime date = (DateTime)e.Value;
                 if (date == default(DateTime))
@@ -234,7 +234,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == this.colDueDate || col == this.colInvoiceDate || col == this.colCommissionDate)
+            if (col == this.colDueDate || col == this.colInvoiceDate)
             {
                 if (e.Value.Equals(string.Empty))
                 {
@@ -286,7 +286,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == this.colDueDate || col == this.colInvoiceDate || col == this.colCommissionDate)
+            if (col == this.colDueDate || col == this.colInvoiceDate )
             {
                 string str = (string)e.FormattedValue;
                 DateTime result;
@@ -469,12 +469,10 @@ namespace CMBC.EasyFactor.ARMgr
             if (this._case.ActiveCDA.CommissionType == "按转让金额" || this._case.ActiveCDA.CommissionType == "其他")
             {
                 this.colCommission.Visible = true;
-                this.colCommissionDate.Visible = true;
             }
             else
             {
                 this.colCommission.Visible = false;
-                this.colCommissionDate.Visible = false;
             }
 
             InvoiceAssignBatch batch = new InvoiceAssignBatch();
